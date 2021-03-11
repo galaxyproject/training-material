@@ -61,12 +61,12 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 >
 > 1. Create a new history and name it something meaningful (e.g. *Metaproteomics tutorial*)
 >
->    {% snippet snippets/create_new_history.md %}
->    {% snippet snippets/rename_history.md %}
+>    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/rename_history.md %}
 >
 > 2. Import the three MGF MS/MS files and the FASTA sequence file from Zenodo.
 >
->    {% snippet snippets/import_via_link.md %}
+>    {% snippet faqs/import_via_link.md %}
 >
 >    As default, Galaxy takes the link as name.
 >
@@ -76,7 +76,7 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 >
 > 3. Build a **Dataset list** for the three MGF files
 >
->    {% snippet snippets/build_list_collection.md %}
+>    {% snippet faqs/build_list_collection.md %}
 >
 {: .hands_on}
 

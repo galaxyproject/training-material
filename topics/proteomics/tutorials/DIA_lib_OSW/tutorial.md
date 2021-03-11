@@ -57,7 +57,7 @@ The dataset in this training consists of different Spike-in mixtures of stable a
 >
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/create_new_history.md %}
 >
 > 2. Import the fasta and raw files as well as the experimental annotation and the iRTassays file from [Zenodo](https://zenodo.org/record/4293493)
 >    ```
@@ -71,12 +71,12 @@ The dataset in this training consists of different Spike-in mixtures of stable a
 >    https://zenodo.org/record/4293493/files/Sample4.raw
 >    https://zenodo.org/record/4293493/files/Sample5.raw
 >    ```
->    {% snippet snippets/import_via_link.md %}
+>    {% snippet faqs/import_via_link.md %}
 >
 > 3. Once the files are green, rename the experimental design file in 'HEK_Ecoli_exp_design', the iRT transition file in 'iRTassays' and all of the the raw files in 'Sample1.raw', 'Sample2.raw', 'Sample3.raw', 'Sample4.raw' and 'Sample5.raw'
->    {% snippet snippets/rename_dataset.md %}
+>    {% snippet faqs/rename_dataset.md %}
 > 5. Once the files are green, generate a collection for all .raw files (and name it DDA_data) as well as for both .fasta files (and name it FASTA)
->    {% snippet snippets/build_list_collection.md %}
+>    {% snippet faqs/build_list_collection.md %}
 >
 {: .hands_on}
 

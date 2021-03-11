@@ -69,7 +69,7 @@ The first step of any ChIP-Seq data analysis is quality control of the raw seque
 >
 > 1. Create a new history for this tutorial and give it a proper name
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/create_new_history.md %}
 >
 > 2. Import `patient1_input_good_outcome` from [Zenodo](https://zenodo.org/record/892432/files/patient1_input_good_outcome.fastq) or from the data library into the history
 >

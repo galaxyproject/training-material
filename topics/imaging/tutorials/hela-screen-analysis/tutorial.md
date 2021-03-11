@@ -65,7 +65,7 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >
 > 1. If you are logged in, create a new history for this tutorial
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/create_new_history.md %}
 >
 > 2. Import {% icon galaxy-upload %} the following dataset from [Zenodo]( https://zenodo.org/record/3362976) or from the data library (ask your instructor).
 >    - **Important:** Choose the type of data as `zip`.
@@ -74,8 +74,8 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >    https://zenodo.org/record/3362976/files/B2.zip
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/import_from_data_library.md %}
 >
 > 3. **Unzip file** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"input_file"*: `Zipped ` input file
@@ -84,14 +84,14 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >
 > 4. Rename {% icon galaxy-pencil %} the dataset to `testinput.tif`
 >
->    {% snippet snippets/rename_dataset.md %}
+>    {% snippet faqs/rename_dataset.md %}
 >
 > 5. **Unzip file** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"input_file"*: `Zipped ` input file
 >    - *"Extract single file"*: `All files`
 >
 > 6. Rename {% icon galaxy-pencil %} the resulting collection to `control`
->    {% snippet snippets/rename_collection.md %}
+>    {% snippet faqs/rename_collection.md %}
 >
 > 7. Import {% icon galaxy-upload %} the following dataset from [Zenodo]( https://zenodo.org/record/3362976) or from the data library (ask your instructor).
 >    - **Important:** Choose the type of data as `zip`.
@@ -99,8 +99,8 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >    https://zenodo.org/record/3362976/files/B3.zip
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/import_from_data_library.md %}
 >
 > 8. **Unzip** {% icon tool %} to extract the zipped screen:
 >    - {% icon param-file %} *"input_file"*: `Zipped ` input file
@@ -113,11 +113,11 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >    min	500	0.
 >    max	100000	0.5
 >    ```
->    {% snippet snippets/create_new_file.md format="tabular" %}
+>    {% snippet faqs/create_new_file.md format="tabular" %}
 >
 > 9. Rename {% icon galaxy-pencil %} dataset to `rules`
 >
->    {% snippet snippets/rename_dataset.md %}
+>    {% snippet faqs/rename_dataset.md %}
 {: .hands_on}
 
 
@@ -162,7 +162,7 @@ First, we will create and test a workflow which extracts mean DAPI intensity, ar
 > 7. Now we can extract the workflow for batch processing
 >    - Name it "feature_extraction".
 >
->    {% snippet snippets/extract_workflow.md %}
+>    {% snippet faqs/extract_workflow.md %}
 >
 > 8. Edit the workflow you just created
 >    - Name the inputs `input image` and `filter rules`.
@@ -182,7 +182,7 @@ Now we want to apply our extracted workflow to `original data` and merge the res
 >
 > 1. Create a new workflow in the workflow editor.
 >
->    {% snippet snippets/create_new_workflow.md %}
+>    {% snippet faqs/create_new_workflow.md %}
 > 2. Add a **Input dataset collection** node and name it `input images`
 > 3. Add a **Input dataset** node and name it `rules`
 > 4. Add the **feature_extraction** workflow as node.
@@ -205,7 +205,7 @@ The resulting workflow should look something like this:
 >
 > 1. Run the screen analysis workflow {% icon workflow %} on the `control` screen and the `rules` file
 >
->    {% snippet snippets/run_workflow.md %}
+>    {% snippet faqs/run_workflow.md %}
 > 2. Run the screen analysis workflow {% icon workflow %} on the `PLK1` screen and the `rules` file
 >
 {: .hands_on}

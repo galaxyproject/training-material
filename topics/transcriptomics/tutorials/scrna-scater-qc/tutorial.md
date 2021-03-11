@@ -88,8 +88,8 @@ We will use a pre-calculated expression matrix, along with some additional metad
 >    https://zenodo.org/record/3386291/files/mt_controls.txt
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/import_from_data_library.md %}
 >
 {: .hands_on}
 

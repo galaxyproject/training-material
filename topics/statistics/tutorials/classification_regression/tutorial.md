@@ -75,7 +75,7 @@ The datasets to be used for classification contain 9 features. Each feature cont
 >
 > 1. Create a new history for this tutorial.
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/create_new_history.md %}
 >
 > 2. Import the following datasets and choose the type of data as `tabular`.
 >
@@ -85,11 +85,11 @@ The datasets to be used for classification contain 9 features. Each feature cont
 >    https://zenodo.org/record/3248907/files/breast-w_train.tsv
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
+>    {% snippet faqs/import_via_link.md %}
 >
 > 3. Rename datasets to `breast-w_train`, `breast-w_test` and `breast-w_targets`.
 >
->    {% snippet snippets/rename_dataset.md %}
+>    {% snippet faqs/rename_dataset.md %}
 >
 {: .hands_on}
 
@@ -198,11 +198,11 @@ The dataset contains information about human [body density](https://rstudio-pubs
 >    https://zenodo.org/record/3248907/files/body_fat_test.tsv
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
+>    {% snippet faqs/import_via_link.md %}
 >
 > 3. Rename datasets to `body_fat_train`, `body_fat_test_labels` and `body_fat_test`.
 >
->    {% snippet snippets/rename_dataset.md %}
+>    {% snippet faqs/rename_dataset.md %}
 >
 {: .hands_on}
 

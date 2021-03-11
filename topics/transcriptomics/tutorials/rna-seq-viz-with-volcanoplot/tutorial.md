@@ -47,8 +47,8 @@ We will use two files for this analysis:
 >
 > 1. Create a new history for this RNA-seq exercise e.g. `RNA-seq volcano plot`
 >
->    {% snippet snippets/create_new_history.md %}
->    {% snippet snippets/rename_history.md %}
+>    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/rename_history.md %}
 >
 > 2. Import the differentially results table.
 >
@@ -56,8 +56,8 @@ We will use two files for this analysis:
 >    - Option 1: From a shared data library if available (ask your instructor)
 >    - Option 2: From [Zenodo](https://zenodo.org/record/2529117)
 >
->    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/import_from_data_library.md %}
 >
 >    - You can paste the links below into the **Paste/Fetch** box:
 >
@@ -72,7 +72,7 @@ We will use two files for this analysis:
 > 3. Check that the datatype is `tabular`.
 >    If the datatype is not `tabular`, please change the file type to `tabular`.
 >
->    {% snippet snippets/change_datatype.md datatype="tabular" %}
+>    {% snippet faqs/change_datatype.md datatype="tabular" %}
 {: .hands_on}
 
 Click on the {% icon galaxy-eye %} (eye) icon and take a look at the `DE results` file. It should look like below, with 8 columns.

@@ -100,12 +100,12 @@ We require three datasets for the simulation and analysis:
 >    https://zenodo.org/record/3730474/files/hits.sdf
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
+>    {% snippet faqs/import_via_link.md %}
 >
 > 3. Rename the datasets `Candidates SMILES`, `Receptor PDB` and `Hits SDF` respectively.
 > 4. Check that the datatypes (`smi`, `pdb`, and `sdf` respectively) are correct. In particularly, check the `Candidates SMILES` file, as the SMILES datatype is not detected automatically by Galaxy.
 >
->    {% snippet snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/change_datatype.md datatype="datatypes" %}
 {: .hands_on}
 
 # Preparation for docking

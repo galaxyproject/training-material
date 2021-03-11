@@ -223,16 +223,16 @@ cost function via backpropagation.
 >    https://zenodo.org/record/4477881/files/y_test.tsv
 >    https://zenodo.org/record/4477881/files/y_train.tsv
 >    ```
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% include faqs/import_via_link.md %}
+>    {% include faqs/import_from_data_library.md %}
 >
 >    - Rename the datasets as `X_test`, `X_train`, `y_test`, and `y_train` respectively
 >
->    {% include snippets/rename_dataset.md %}
+>    {% include faqs/rename_dataset.md %}
 >
 >    - Check that the datatype of all the four datasets is `tabular`. If not, change the dataset's datatype to tabular. 
 >
->    {% include snippets/change_datatype.md datatype="tabular" %}
+>    {% include faqs/change_datatype.md datatype="tabular" %}
 >
 {: .hands_on}
 

@@ -72,13 +72,13 @@ A high-quality dataset was retrieved from a previously published work {% cite ha
 >    https://zenodo.org/record/4111092/files/non_ACPs.fasta
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/import_from_data_library.md %}
 >
 > 3. Rename the datasets to their basename (ACPs.fasta, non_ACPs.fasta)
 > 4. Check that the datatype is correctly set to fasta
 >
->    {% snippet snippets/change_datatype.md datatype="fasta" %}
+>    {% snippet faqs/change_datatype.md datatype="fasta" %}
 >
 >
 {: .hands_on}

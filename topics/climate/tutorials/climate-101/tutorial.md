@@ -67,7 +67,7 @@ Freiburg). The data format may also have been changed (for instance to tabular) 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial. If you are not inspired, you can name it *climate101*.
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/create_new_history.md %}
 > 2. Import the files from [Zenodo](https://doi.org/10.5281/zenodo.3776500) or from the shared data library
 >
 >    ```
@@ -75,27 +75,27 @@ Freiburg). The data format may also have been changed (for instance to tabular) 
 >    https://zenodo.org/record/3776500/files/ts_cities.csv
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/import_from_data_library.md %}
 >
 > 3. Check that the datatype is **tabular**
 >
->    {% snippet snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/change_datatype.md datatype="datatypes" %}
 >
 >    If it is not `tabular` make sure to convert it using the Galaxy built-in format converters.
 >
->    {% snippet snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
+>    {% snippet faqs/convert_datatype.md conversion="Convert CSV to Tabular" %}
 >
 > 4. Rename Datasets
 >
 >    As "`https://zenodo.org/record/3776500/files/tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv`" is not a beautiful name and can give errors for some tools, it is a good practice to change the dataset name by something more meaningfull.
 >    For example by removing `https://zenodo.org/record/3776500/files/` to obtain `tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv` and `ts_cities.csv`, respectively.
 >
->    {% snippet snippets/rename_dataset.md %}
+>    {% snippet faqs/rename_dataset.md %}
 >
 > 5. Add a tag to the dataset corresponding to `copernicus`
 >
->    {% snippet snippets/add_tag.md %}
+>    {% snippet faqs/add_tag.md %}
 >
 {: .hands_on}
 

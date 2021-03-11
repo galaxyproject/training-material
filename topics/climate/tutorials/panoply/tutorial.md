@@ -70,7 +70,7 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial. If you are not inspired, you can name it *Panoply* for example...
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/create_new_history.md %}
 > 2. Import the file from [Zenodo](https://doi.org/10.5281/zenodo.3697454) or from the shared data library
 >
 >    ```
@@ -78,24 +78,24 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 >    https://zenodo.org/record/3697454/files/ecv_2018.nc
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/import_from_data_library.md %}
 >
 > 3. Check that the datatype is **netcdf**
 >
 >    Files you uploaded are in netcdf format. In Galaxy, Datatypes are, by default, automatically guessed. Here, as necdf is a derivative of the h5 format, Galaxy automatically affect the h5 datatype to netcdf files. To cope with that, one can change the datatype manually, once datasets uploaded (as shown below) OR you can directly specify datatype on the upload tool form so Galaxy will not try to automatically guess it.
 >
->    {% snippet snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/change_datatype.md datatype="datatypes" %}
 >
 > 4. Rename Datasets
 >
 >    As "https://zenodo.org/record/3697454/files/ecv_1979.nc" is not a beautiful name and can give errors for some tools, it is a good practice to change the dataset name by something more meaningfull. For example by removing `https://zenodo.org/record/3697454/files/` to obtain `ecv_1979.nc` and `ecv_2018.nc`, respectively.
 >
->    {% snippet snippets/rename_dataset.md %}
+>    {% snippet faqs/rename_dataset.md %}
 >
 > 5. Add a tag to the dataset corresponding to `copernicus`
 >
->    {% snippet snippets/add_tag.md %}
+>    {% snippet faqs/add_tag.md %}
 >
 {: .hands_on}
 

@@ -50,8 +50,8 @@ The goal of the first step is to upload and prepare the file so that it will be 
 >
 > 1. Create a new history for this tutorial and give it a proper name like `regionalGAM tutorial`
 >
->    {% snippet snippets/create_new_history.md %}
->    {% snippet snippets/rename_history.md %}
+>    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/rename_history.md %}
 >
 > 2. Import the CSV dataset file with only one species from [Zenodo](https://zenodo.org/record/1324204#.W2BmRn7fNE4) or from the data library (ask your instructor)
 >
@@ -59,8 +59,8 @@ The goal of the first step is to upload and prepare the file so that it will be 
 >    https://zenodo.org/record/1324204/files/regional%20GAM%20data.csv
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/import_from_data_library.md %}
 >
 > 2. Check that the file contains a header corresponding to: ```"SPECIES","SITE","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content are between double quotes as "x" and that separators are ","
 >
@@ -99,7 +99,7 @@ Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We wan
 >
 > You may need to use a tool like **Count occurrences of each record** {% icon tool %}. If you want to run the same tool with same parameters to several input files, you can directly specify the {% icon param-files %} **Multiple datasets** option on the tool form for the *"from dataset"* parameter).
 >
->    {% snippet snippets/select_multiple_datasets.md %}
+>    {% snippet faqs/select_multiple_datasets.md %}
 >
 > > ### {% icon solution %} Solution
 > > The dataset contains 280 sites now against 1143 before down-sampling.

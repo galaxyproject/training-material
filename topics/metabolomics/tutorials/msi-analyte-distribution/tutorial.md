@@ -71,7 +71,7 @@ The imzML composite file consists of two files. The first file contains the meta
 >
 > 1. **Create a new history** and give it a name.
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/create_new_history.md %}
 >
 > 2. Upload the data from [Zenodo](https://zenodo.org/record/484496) via the **composite** option
 >

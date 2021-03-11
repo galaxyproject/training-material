@@ -69,15 +69,15 @@ CummeRbund reads your RNA-Seq results from a [SQLite](https://www.sqlite.org/) d
 >
 > 1. Create a new history
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/create_new_history.md %}
 >
 > 2. Import the [`CuffDiff SQLite`](https://zenodo.org/record/1001880/files/CuffDiff_SQLite_database.sqlite) dataset
 >
->    {% snippet snippets/import_via_link.md %}
+>    {% snippet faqs/import_via_link.md %}
 >
 >    Rename the dataset to "RNA-Seq SQLite result data"
 >
->    {% snippet snippets/rename_dataset.md name="RNA-Seq SQLite result data" %}
+>    {% snippet faqs/rename_dataset.md name="RNA-Seq SQLite result data" %}
 >
 > By default, when data is imported via its link, Galaxy names it with its URL.
 {: .hands_on}

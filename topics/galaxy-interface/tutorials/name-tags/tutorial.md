@@ -62,7 +62,7 @@ How would you identify which input sample corresponds with which featureCounts o
 >
 > 1. Create a new history
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/create_new_history.md %}
 >
 > 2. Using the **Upload** {% icon galaxy-upload %} tool select **Paste/Fetch data** and paste some data like "Hello, World"
 >
@@ -75,7 +75,7 @@ How would you identify which input sample corresponds with which featureCounts o
 >    - `#dmel6`
 >    - `#ecoli`
 >
->    {% snippet snippets/add_tag.md type="name" %}
+>    {% snippet faqs/add_tag.md type="name" %}
 >
 {: .hands_on}
 

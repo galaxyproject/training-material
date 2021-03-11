@@ -50,7 +50,7 @@ For this tutorial, we will use 3 datasets: the list of proteins identified by LC
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial and give it a name
->   {% snippet snippets/create_new_history.md %}
+>   {% snippet faqs/create_new_history.md %}
 >
 > 2. Import the files from [Zenodo](https://zenodo.org/record/3405119) or from the shared data library (ask your instructors).
 >
@@ -60,8 +60,8 @@ For this tutorial, we will use 3 datasets: the list of proteins identified by LC
 >    https://zenodo.org/record/3405119/files/Mucilli.txt
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/import_from_data_library.md %}
 >
 {: .hands_on}
 

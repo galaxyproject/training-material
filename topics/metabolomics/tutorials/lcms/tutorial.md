@@ -101,7 +101,7 @@ having to launch jobs manually for each sample. You can start using the dataset 
 >
 > 1. Create a new history for this tutorial
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/create_new_history.md %}
 >
 > 2. Import the 9 `mzXML` files into a collection named `sacurine`
 >    - Option 1: from a shared data library (ask your instructor)
@@ -120,13 +120,13 @@ having to launch jobs manually for each sample. You can start using the dataset 
 >    https://zenodo.org/record/3244991/files/QC1_014.mzML
 >    ```
 >
->    {% snippet snippets/import_via_link.md collection=true format="mzml" collection_name="sacurine" renaming=false %}
->    {% snippet snippets/import_from_data_library.md astype="as a Collection" %}
+>    {% snippet faqs/import_via_link.md collection=true format="mzml" collection_name="sacurine" renaming=false %}
+>    {% snippet faqs/import_from_data_library.md astype="as a Collection" %}
 >
 > 3. Make sure your data is in a **collection**. Make sure it is named `sacurine`
 >    - If you forgot to select the collection option during import, you can create the collection now:
 >
->    {% snippet snippets/build_list_collection.md %}
+>    {% snippet faqs/build_list_collection.md %}
 {: .hands_on}
 
 You should have in your history a green Dataset collection (`sacurine`) with 9 datasets in mzml format.
@@ -144,7 +144,7 @@ This first step is only meant to read your `mzXML` file and generate an object u
 > 1. **MSnbase readMSData** {% icon tool %} with the following parameters:
 >   - *"File(s) from your history containing your chromatograms"*: the `sacurine` dataset collection
 >
->   {% snippet snippets/select_collection.md %}
+>   {% snippet faqs/select_collection.md %}
 >
 >
 >  > ### {% icon question %} Question
@@ -293,13 +293,13 @@ be uploaded into Galaxy.
 >    https://zenodo.org/record/3244991/files/sampleMetadata_completed.tsv
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/import_from_data_library.md %}
 >
 > 2. Check the data type of your imported files.
 >   - The datatype should be `tabular`, if this is not the case, please change the datatype now
 >
->     {% snippet snippets/change_datatype.md %}
+>     {% snippet faqs/change_datatype.md %}
 >
 >     > ### {% icon comment %} Comment
 >     >
@@ -312,7 +312,7 @@ right away if you happen to get one of these obvious issues.
 >
 > 3. Rename your sampleMetadata file with a shorter name 'sampleMetadata_completed.tsv'
 >
->     {% snippet snippets/rename_dataset.md %}
+>     {% snippet faqs/rename_dataset.md %}
 >
 {: .hands_on}
 
@@ -352,7 +352,7 @@ Note that you can also check the chromatograms at any moment during the workflow
 >   - *"RData file"*: `sacurine.raw.RData` (collection)
 >   - *"Sample metadata file"*: `sampleMetadata_completed.tsv` you uploaded previously
 >
->     {% snippet snippets/select_collection.md %}
+>     {% snippet faqs/select_collection.md %}
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -447,7 +447,7 @@ the Merger tool.
 >   - *"RData file"*: `sacurine.raw.xset.RData` (collection)
 >   - *"Sample metadata file"*: `Nothing selected`
 >
->     {% snippet snippets/select_collection.md %}
+>     {% snippet faqs/select_collection.md %}
 >
 {: .hands_on}
 
@@ -754,12 +754,12 @@ long and thus may reduce the names' readability. Hence, we highly recommend you 
 > ### {% icon hands_on %} Hands-on: Copying the 3 tables into a new history and renaming them
 >
 > 1. Create a new history with the 3 tables
->    {% snippet snippets/copy_dataset_in_new_history.md history_name="Sacurine Processing" %}
+>    {% snippet faqs/copy_dataset_in_new_history.md history_name="Sacurine Processing" %}
 > 2. Rename the 3 tables with shorter names:
 >    - `xset.merged.groupChromPeaks.adjustRtime.groupChromPeaks.fillpeaks.dataMatrix.tsv` -> **dataMatrix.tsv**
 >    - `xset.merged.groupChromPeaks.*.fillChromPeaks.annotate.variableMetadata.tsv` -> **variableMetadata.tsv**
 >
->    {% snippet snippets/rename_dataset.md %}
+>    {% snippet faqs/rename_dataset.md %}
 >
 {: .hands_on}
 

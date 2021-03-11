@@ -64,7 +64,7 @@ The first step of the Infinium Human Methylation BeadChip array analysis is raw 
 >
 > Create a new history for this tutorial and give it a proper name
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/create_new_history.md %}
 >
 > Import the following IDAT files from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) or from the data library (ask your instructor)
 >    - `GSM1588704_8795207135_R01C02_Red.idat`
@@ -89,9 +89,9 @@ The first step of the Infinium Human Methylation BeadChip array analysis is raw 
 >    > ```
 >    {: .details}
 >
->    {% snippet snippets/import_via_link.md %}
+>    {% snippet faqs/import_via_link.md %}
 >
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/import_from_data_library.md %}
 >
 > Run **Infinium Human Methylation BeadChip** {% icon tool %} with the following parameters:
 >    - {% icon param-files %} *"red channel files"*: all files ending in `_Red`
@@ -168,7 +168,7 @@ However, for the purpose of this tutorial we would like you to upload phenotype 
 > We will now map the imported datasets against phenotype covariate and reference genome obtained from UCSC.
 > Click on the **Differentially_Methylated_Positions.bed** output in your history to expand it.
 > Set the database build of your dataset to `Human Feb. 2009 (GRCh37/hg19) (hg19)`(if it is not set automatically)
->    {% snippet snippets/change_dbkey.md dbkey="hg19" %}
+>    {% snippet faqs/change_dbkey.md dbkey="hg19" %}
 > Click on `display at UCSC` towards the bottom of the history item.
 > This will launch UCSC Genome Browser with your Custom Track
 {: .hands_on}

@@ -91,8 +91,8 @@ In this matrix, the values represent the number for each feature (i.e. gene; row
 >    {{ page.zenodo_link }}/files/matrix.mtx
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/import_from_data_library.md %}
 >
 > 3. Rename the datasets
 > 4. Inspect the `matrix` file
@@ -448,7 +448,7 @@ To create this table, we need to:
 >    mito
 >    ```
 >
->    {% snippet snippets/create_new_file.md format="tabular" %}
+>    {% snippet faqs/create_new_file.md format="tabular" %}
 >
 > 7. {% tool [Concatenate datasets](cat1) %} with the following parameters:
 >    - {% icon param-file %} *"Datasets to concatenate"*: `Pasted entry` dataset

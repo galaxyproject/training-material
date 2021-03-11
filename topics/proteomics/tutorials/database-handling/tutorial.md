@@ -52,7 +52,7 @@ In this tutorial, we will explore **Protein Database Downloader** {% icon tool %
 >
 > 1. Create a new history for this Database Handling exercise.
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/create_new_history.md %}
 >
 > 2. Open {% tool [Protein Database Downloader](toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.1) %}
 > 3. Select in the drop-down menues  *"Taxonomy"*: `Homo sapiens (Human)` and `reviewed`: "UniprotKB/Swiss-Prot (reviewed only)".

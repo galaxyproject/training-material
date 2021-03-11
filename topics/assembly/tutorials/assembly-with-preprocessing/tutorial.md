@@ -126,8 +126,8 @@ steps are independent of the data source you choose.
 >
 > 1. Create a new history for this tutorial and give it a proper name
 >
->    {% snippet snippets/create_new_history.md %}
->    {% snippet snippets/rename_history.md %}
+>    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/rename_history.md %}
 >
 > 2. Create a new dataset listing the SRA accession numbers of the Illumina paired-end input data for this tutorial:
 >
@@ -139,7 +139,7 @@ steps are independent of the data source you choose.
 >
 >    call it, *e.g.*, `Illumina accessions` and set its datatype to `tabular`.
 >
->    {% snippet snippets/create_new_file.md format="tabular" %}
+>    {% snippet faqs/create_new_file.md format="tabular" %}
 >
 > 3. Create another new dataset listing the SRA accession numbers of the Nanopore input data for this tutorial:
 >
@@ -169,7 +169,7 @@ steps are independent of the data source you choose.
 >    Name tags are meant to help you identify the origin of datasets quickly.
 >    Feel free to either use the suggested names above or choose ones you like.
 >
->    {% snippet snippets/add_tag.md %}
+>    {% snippet faqs/add_tag.md %}
 >
 > 4. Retrieve the Illumina reads data from NCBI:
 >
@@ -219,8 +219,8 @@ steps are independent of the data source you choose.
 >
 > 1. Create a new history for this tutorial and give it a proper name
 >
->    {% snippet snippets/create_new_history.md %}
->    {% snippet snippets/rename_history.md %}
+>    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/rename_history.md %}
 >
 > 2. Import Illumina-sequenced reads data from [Zenodo](https://zenodo.org/record/3732359)
 >
@@ -588,7 +588,7 @@ potential viral origin.
 >    For the outputs of step 1 and step 2 above, reset the database/build
 >    (dbkey) to `unspecified (?)`.
 >
->    {% snippet snippets/change_dbkey.md dbkey="unspecified (?)" %}
+>    {% snippet faqs/change_dbkey.md dbkey="unspecified (?)" %}
 >
 {: .hands_on}
 
