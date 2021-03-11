@@ -22,13 +22,23 @@ contributors:
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
-
-Most biological processes are dynamic and observing them over time can provide valuable insights. Combining fluorescent markers with time-lapse imaging is a common approach to collect data on dynamic cellular processes such as cell division (e.g. {% cite Neumann2010 %}, {% cite Heriche2014%}). However, automated time-lapse imaging can produce large amount of data that can be challenging to process. One of these challenges is the tracking of individual objects as it is often impossible to manually follow a large number of objects over many time points. 
-To demonstrate how automatic tracking can be applied in such situations, this tutorial will track dividing nuclei in a short time lapse recording of one mitosis of a syncytial blastoderm stage Drosophila embryo expressing a GFP-histone gene that labels chromatin.
+Most biological processes are dynamic and observing them over time can provide valuable insights. Combining fluorescent markers with time-lapse imaging is a common approach to collect data on dynamic cellular processes such as cell division (e.g. {% cite Neumann2010 %}, {% cite Heriche2014%}). However, automated time-lapse imaging can produce large amounts of data that can be challenging to process. One of these challenges is the tracking of individual objects as it is often impossible to manually follow a large number of objects over many time points. 
+To demonstrate how automatic tracking can be applied in such situations, this tutorial will track dividing nuclei in a short time-lapse recording of one mitosis of a syncytial blastoderm stage _Drosophila_ embryo expressing a GFP-histone gene that labels chromatin.
 Tracking is done by first segmenting objects then linking objects between consecutive frames. Linking is done by matching objects and several criteria or matching rules are available. Here we will link objects if they significantly overlap between the current and previous frames.
 
 
+> ### {% icon warning %} **Important information: CellProfiler in Galaxy**  
+> The Galaxy {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %} tool takes two inputs: a CellProfiler pipeline and an image collection.  
+> Some pipelines created with stand-alone CellProfiler may not work with the Galaxy CellProfiler tool. Some reasons are:  
+>  * The pipeline was built with a different version of CellProfiler. The Galaxy tool currently uses CellProfiler 3.9.  
+>  * Modules used by the pipeline aren't available in Galaxy.  
+>  * Parameters for some CellProfiler modules are limited/constrained compared to the stand-alone version, most notably:  
+>    - Parameters require manual input from the user whereas, in the stand-alone version, some modules can inherit parameter values from other modules.
+>    - Input and output file locations are set by Galaxy and can't be set by the user.
+>    - Metadata extraction from file names is limited to a set of fixed patterns. 
+>
+> It is recommended to build a CellProfiler pipeline using the Galaxy interface if the pipeline is to be run by Galaxy.
+{: .warning}
 
 > ### Agenda
 >
@@ -39,25 +49,10 @@ Tracking is done by first segmenting objects then linking objects between consec
 >
 {: .agenda}
 
-# CellProfiler in Galaxy
-
-The Galaxy CellProfiler tool takes two inputs: a CellProfiler pipeline and an image collection.  
-
-> ### {% icon warning %} **Important information:**  
-> Some pipelines created with stand-alone CellProfiler may not work with the Galaxy CellProfiler tool. Some reasons are:  
->  * The pipeline was built with a different version of CellProfiler. The Galaxy tool currently uses CellProfiler 3.9.  
->  * Modules used by the pipeline aren't available in Galaxy.  
->  * Parameters for some CellProfiler modules are limited/constrained compared to the stand-alone version, most notably:  
->    - Parameters require manual input from the user whereas in the stand-alone version, some modules can inherit parameter values from other modules.
->    - Input and output file locations are set by Galaxy and can't be set by the user.
->    - Metadata extraction from file names is limited to a set of fixed patterns 
->
-> It is recommended to build a CellProfiler pipeline using the Galaxy interface if the pipeline is to be run by Galaxy.
-{: .warning}
 
 # Get data
 
-This tutorial will use a time-lapse recording of nuclei progressing through mitotic anaphase during early Drosophila embryogenesis. The nuclei are labelled on chromatin with a GFP-histone marker and have been imaged every 7 seconds using a laser scanning confocal microscope with a 40X objective.
+This tutorial will use a time-lapse recording of nuclei progressing through mitotic anaphase during early _Drosophila_ embryogenesis. The nuclei are labelled on chromatin with a GFP-histone marker and have been imaged every 7 seconds using a laser scanning confocal microscope with a 40X objective.
 The images are saved as a zip archive on Zenodo and need to be uploaded to the Galaxy server before they can be used.
 
 > ### {% icon hands_on %} Hands-on: Data upload
@@ -75,7 +70,6 @@ The images are saved as a zip archive on Zenodo and need to be uploaded to the G
 >    ```
 >
 >    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
 >
 > 3. Rename {% icon galaxy-pencil %} the file to drosophila_embryo.zip
 >
@@ -93,18 +87,18 @@ We need to:
   - Perform tracking  
   - Produce some useful output files  
 
-A pipeline is built by chaining together Galaxy tools representing CellProfiler modules and must start with the 'Starting modules'{% icon tool %} tool and end with the 'CellProfiler'{% icon tool %} tool.  
+A pipeline is built by chaining together Galaxy tools representing CellProfiler modules and must start with the {% tool [Starting modules](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9+galaxy1) %} tool and end with the {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %} tool.  
 
 
-![Image of the pipeline](../../images/object-tracking-using-cell-profiler/CP_object_tracking_pipeline.png "The pipeline")
+![Image of the workflow](../../images/object-tracking-using-cell-profiler/CP_object_tracking_pipeline.png "The workflow")
 
 
 > ### {% icon details %} More details about the pipeline steps
 >    - Metadata is needed to tell CellProfiler what a temporal sequence of images is and what the order of images is in the sequence.
->    - CellProfiler is designed to work primarily with grayscale images. Since we don't need the colour information, we convert colour images to grayscale type.  
->    - Segmentation means identifying the nuclei in each image. In CellProfiler this is done by thresholding the intensity level in each image.  
->    - We usually perform tracking because we're interested in quantifying how some properties of the objects evolve over time. Also, sometimes we may want to do tracking by matching objects based on some property of the objects (e.g. a shape measurement). Therefore for each segmented object we compute some features, i.e. numerical descriptors of some properties of the object. 
->    - Tracking will provide the information required to allow downstream data analysis tools to link the features into a multidimensional time series 
+>    - CellProfiler is designed to work primarily with grayscale images. Since we don't need the colour information, we convert colour imagess to grayscale type.  
+>    - Segmentation means identifying the nuclei in each image. In CellProfiler, this is done by thresholding the intensity level in each image.  
+>    - We usually perform tracking because we're interested in quantifying how some properties of the objects evolve over time. Also, sometimes we may want to do tracking by matching objects based on some property of the objects (e.g. a shape measurement). Therefore, for each segmented object, we compute some features, i.e. numerical descriptors of some properties of the object. 
+>    - Tracking will provide the information required to allow downstream data analysis tools to link the features into a multidimensional time series. 
 > 
 >
 {: .details}
@@ -128,9 +122,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .hands_on}
 
-## Build the CellProfiler pipeline
-
-### Get the metadata
+## Get the metadata
 
 > ### {% icon comment %} Comment
 >
@@ -190,21 +182,31 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> ### {% icon question %} Question
 >
-> 1. How are we capturing metadata and what type of metadata are we getting?
-> 2. How will CellProfiler form a temporal sequence?
+> How are we capturing metadata and what type of metadata are we getting?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Metadata is obtained from the filenames by extracting three text fields separated by an underscore. The metadata we get is "DrosophilaEmbryo", "GFPHistone" and numbers with leading zeros. These three fields represent respectively the sample identifier, the marker visualized in the image and the index in the time series.
-> > 2. Images will be grouped based on field1 which here is the sample identifier and ordered alpha-numerically (by default) which will order them by field3 (the time series index) since fields 1 and 2 are constant.
+> > Metadata is obtained from the filenames by extracting three text fields separated by an underscore. The metadata we get is "DrosophilaEmbryo", "GFPHistone" and numbers with leading zeros. These three fields represent respectively the sample identifier, the marker visualized in the image and the index in the time series.
 > >
 > {: .solution}
 >
 {: .question}
 
-### Convert the images to grayscale
+> ### {% icon question %} Question
+>
+> How will CellProfiler form a temporal sequence?
+>
+> > ### {% icon solution %} Solution
+> >
+> > Images will be grouped based on field1 which here is the sample identifier and ordered alpha-numerically (by default) which will order them by field3 (the time series index) since fields 1 and 2 are constant.
+> >
+> {: .solution}
+>
+{: .question}
+
+## Convert the images to grayscale
 
 > ### {% icon hands_on %} Hands-on: Colour to grayscale conversion
 >
@@ -221,8 +223,6 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
 > 1. Question1?
@@ -237,7 +237,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .question}
 
-### Segmentation
+## Segmentation
 
 > ### {% icon hands_on %} Hands-on: Nuclei segmentation
 >
@@ -268,7 +268,6 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
@@ -284,7 +283,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .question}
 
-### Feature extraction
+## Feature extraction
 
 > ### {% icon hands_on %} Hands-on: Shape features
 >
@@ -308,9 +307,6 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >        - {% icon param-repeat %} *"Insert new object"*
 >            - *"Enter the name of the objects to measure"*: `Nuclei`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -319,7 +315,6 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
@@ -335,7 +330,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .question}
 
-### Track nuclei
+## Track nuclei
 
 > ### {% icon hands_on %} Hands-on: Object tracking
 >
@@ -347,10 +342,6 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >        - *"Save color-coded image?"*: `Yes`
 >            - *"Name the output image"*: `TrackedCells`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > ### {% icon comment %} Comment
 >    >
 >    > A comment about the tool or something else. This box can also be in the main text
@@ -358,7 +349,6 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
@@ -374,7 +364,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .question}
 
-## Sub-step with **OverlayOutlines**
+## Overlay detected outlines
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -389,18 +379,12 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >                    - *"Select outline color"*: `#ff0000`
 >    - *"Name the output image"*: `OutlineImage`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > ### {% icon comment %} Comment
 >    >
 >    > A comment about the tool or something else. This box can also be in the main text
 >    {: .comment}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
@@ -416,7 +400,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .question}
 
-## Sub-step with **Tile**
+## Create tile with original and processed images
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -435,9 +419,6 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >            - {% icon param-repeat %} *"Insert Another image"*
 >                - *"Enter the name of an additional image to tile"*: `TrackedCells`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -445,8 +426,6 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >    {: .comment}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
@@ -462,7 +441,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .question}
 
-## Sub-step with **SaveImages**
+## Save the output images
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -475,9 +454,6 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >        - *"Enter single file name"*: `Specimen-FrameNumber`
 >    - *"Overwrite existing files without warning?"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -486,7 +462,6 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
@@ -502,7 +477,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .question}
 
-## Sub-step with **ExportToSpreadsheet**
+## Save the features
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -515,9 +490,6 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >    - *"Create a GenePattern GCT file?"*: `No`
 >    - *"Export all measurement types?"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -525,8 +497,6 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >    {: .comment}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
@@ -542,7 +512,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .question}
 
-## Sub-step with **CellProfiler**
+## Run the CellProfiler pipeline
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -551,10 +521,6 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >    - *"Are the input images packed into a tar archive?"*: `No`
 >        - {% icon param-collection %} *"Images"*: `output` (Input dataset collection)
 >    - *"Detailed logging file?"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
