@@ -1,11 +1,27 @@
 ---
 layout: introduction_slides
 logo: "GTN"
+video: true
 
 title: "ATAC-Seq data analysis"
 type: "introduction"
+questions:
+  - What is ATAC-Seq?
+  - What are the quality parameters to check for each dataset?
+  - How to analyse ATAC-Seq data?
+objectives:
+  - Understand ATAC-Seq
+  - Quality Parameters for ATAC-Seq
+  - Understand Peak calling for ATAC-Seq
+requirements:
+time_estimation: "30min"
+key_points:
+  - Run quality control on every sequencing dataset before any other analyses
+  - Choose QC parameters carefully
+  - Re-run FastQC to check the impact of the quality control
 contributors:
   - heylf
+
 ---
 
 # What is ATAC sequencing?
@@ -20,13 +36,12 @@ contributors:
 [*Buenrostro et al. 2013 Nat Methods*](https://doi.org/10.1002/0471142727.mb2129s109)
 </small>
 
+- Usage of hyperactive Tn5 transposase to insert sequencing adapters into open chromatin regions.
+- After adapter attachment the DNA is sheared by the Transposase itself.
+
 ???
 
-Usage of hyperactive Tn5 transposase to insert sequencing adapters into open chromatin regions.
-
 It requires sequence-specific excision of a locus containing 19 base-pair inverted repeats.
-
-After adapter attachment the DNA is sheared by the Transposase itself.
 
 You have reads without nucleosomes (histones) = open chromatin regions, and reads with these complexes which will be filtered out because of their length.
 
@@ -34,9 +49,9 @@ You have reads without nucleosomes (histones) = open chromatin regions, and read
 
 ### Characteristics of ATAC-Seq
 
-- Typically biological replicates (at least 2).
-- Control = genomic DNA from the sample that, instead of transposase treatment, is fragmented (e.g. by sonication), has adapters ligated, and is sequenced along with the ATAC sample.
-- Paired-end sequencing, because you need both ends to idenfiy a true open chromatin region (both adapters are required).
+- Typically you have at least two biological replicates.
+- You also have a control. The control is the genomic DNA from the sample that is not treated with transposase. It is fragmented, e.g., by sonication. It has adapters ligated. It is sequenced along with the ATAC sample.
+- ATAC-Seq is paired-end sequencing. You need both ends to idenfiy a true open chromatin region. That is why you need both adapters.
 
 ---
 
@@ -48,11 +63,14 @@ You have reads without nucleosomes (histones) = open chromatin regions, and read
 
 ![](../images/atac-seq/Screenshot_sizeDistribution_Good.png)
 
+
+- Typical insert size of 150-200 bp and then a multiple of the number of nucelosomes.
+- The first peak of 50 basepairs correspond to nucleosome-free regions.
+- The second peak that is a bit less than 200 basepairs corresponds to a single nucleosome.
+
 ???
 
-Typical insert size of 150-200 bp and then a multiple of the number of nucelosomes.
-
-The first peak (50bp) corresponds to where the Tn5 transposase inserted into nucleosome-free regions. The second peak (a bit less than 200bp) corresponds to where Tn5 inserted around a single nucleosome. The third one (around 400bp) is where Tn5 inserted around two adjacent nucleosomes and the fourth one (around 600bp) is where Tn5 inserted around three adjacent nucleosomes.
+The third one (around 400bp) is where Tn5 inserted around two adjacent nucleosomes and the fourth one (around 600bp) is where Tn5 inserted around three adjacent nucleosomes.
 
 ---
 
@@ -60,17 +78,19 @@ The first peak (50bp) corresponds to where the Tn5 transposase inserted into nuc
 
 ![](../images/atac-seq/per_base_sequence_content.png)
 
+- Your experiment might have a nucelotide bias because of the transposase treatment.
+
 ???
 
-Your experiment might have a nucelotide bias because of transposase treatment depending on the enzyme ([Brian Green et. al. 2012](https://doi.org/10.1186/1759-8753-3-3))
+([Brian Green et. al. 2012](https://doi.org/10.1186/1759-8753-3-3))
 
 ---
 
 ## Filtering Reads
 
-- Remove reads mapping to mitochondrial DNA
-- Remove PCR duplicates
-- Uniquely mapped reads with end-to-end alignment
+- Remove reads mapping to mitochondrial DNA.
+- Remove PCR duplicates.
+- Filter for uniquely mapped reads with end-to-end alignment.
 
 ???
 
@@ -84,12 +104,12 @@ End-to-End Alignement is important because you are intersted on the exact bindin
 
 ![](../images/atac-seq/schemeWithLegend.jpg)
 
-- You need a peak caller taking into consideration that the adapters are separated by 9bp.
-- Test Genrich and MACS2 both of them might produce different results based on the read coverage.
+- You need a peak caller taking into consideration that the adapters are separated by 9 basepairs. When Tn5 cuts an accessible chromatin locus it inserts adapters separated by 9 basepairs.
+- It is better to test Genrich and MACS2. Both of them might produce different results based on the read coverage.
 
 ???
 
-When Tn5 cuts an accessible chromatin locus it inserts adapters separated by 9bp [Kia et al. 2017](https://doi.org/10.1186/s12896-016-0326-1).
+[Kia et al. 2017](https://doi.org/10.1186/s12896-016-0326-1)
 This means that to have the read start site reflect the centre of where Tn5 bound, the reads on the positive strand should be shifted 4 bp to the right and reads on the negative strands should be shifted 5 bp to the left as in [Buenrostro et al. 2013](https://doi.org/10.1002/0471142727.mb2129s109). Genrich can apply these shifts when ATAC-seq mode is selected.
 
 ---
@@ -97,3 +117,5 @@ This means that to have the read start site reflect the centre of where Tn5 boun
 ## Overview
 
 ![](../images/atac-seq/ATACWF.svg)
+
+- This is an overview of ATAC-Seq data analysis.
