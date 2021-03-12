@@ -55,6 +55,8 @@ Tracking is done by first segmenting objects then linking objects between consec
 This tutorial will use a time-lapse recording of nuclei progressing through mitotic anaphase during early _Drosophila_ embryogenesis. The nuclei are labelled on chromatin with a GFP-histone marker and have been imaged every 7 seconds using a laser scanning confocal microscope with a 40X objective.
 The images are saved as a zip archive on Zenodo and need to be uploaded to the Galaxy server before they can be used.
 
+![Dividing nuclei](../../images/object-tracking-using-cell-profiler/Dividing_nuclei.gif "Time lapse recording of anaphase nuclei in a Drosophila embryo.")
+
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial.  
@@ -223,19 +225,6 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Segmentation
 
@@ -271,20 +260,6 @@ The first step to track nuclei starts with the identification of those objects o
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
 ## Feature extraction
 
 > ### {% icon hands_on %} Hands-on: Shape features
@@ -311,20 +286,6 @@ The first step to track nuclei starts with the identification of those objects o
 >
 {: .hands_on}
 
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Track nuclei
 
@@ -396,31 +357,19 @@ The first step to track nuclei starts with the identification of those objects o
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Save the images and features
 > ### {% icon hands_on %} Hands-on: Save the images
 >
 > 1. {% tool [SaveImages](toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Select the input Ce01_638i100_UVi50_Boosti150mW_x20_2C-A647-CF680_1_sml_3Dvolume_1llProfiler pipeline"*: output of **Tile** {% icon tool %}
+>    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **Tile** {% icon tool %}
 >    - *"Select the type of image to save"*: `Image`
 >        - *"Saved the format to save the image(s)"*: `png`
 >    - *"Enter the name of the image to save"*: `TiledImages`
 >    - *"Select method for constructing file names"*: `From image filename`
->        - *"Enter the image name (from NamesAndTypes) to be used as prefix"*: `OrigColor`
->        - *"Append a suffix to the image file name?"*: `No`
+>        - *"Enter the image file name"*: `OrigColor`
+>        - *"Append a suffix to the image file name"*: `Yes`
+>            - *"Text to append to the image file name"*: `_tile`
 >    - *"Overwrite existing files without warning?"*: `Yes`
 >    - *"When to save"*: `Every cycle`
 >    - *"Record the file and path information to the saved image?"*: `No`
@@ -430,14 +379,12 @@ The first step to track nuclei starts with the identification of those objects o
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> What will be the file names of the output images?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
+> > The files will be named DrosophilaEmbryo_GFPHistone_0000_tile.png, 
+> > DrosophilaEmbryo_GFPHistone_0001_tile.png ...
 > {: .solution}
 >
 {: .question}
@@ -465,21 +412,7 @@ The first step to track nuclei starts with the identification of those objects o
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-### Run the pipeline with **CellProfiler**
+# Run the pipeline with **CellProfiler**
 
 > ### {% icon hands_on %} Hands-on: Running the pipeline with CellProfiler
 >
@@ -489,28 +422,53 @@ The first step to track nuclei starts with the identification of those objects o
 >        - {% icon param-collection %} *"Images"*: output of **Unzip** {% icon tool %}
 >    - *"Detailed logging file?"*: `Yes`
 >
+>    > ### {% icon comment %} Comment
+>    > 
+>    > If the pipeline fails, inspect the CellProfiler log file for clues about errors.
+>    > A common source of errors is not providing the correct information to a module such as pointing a CellProfiler module at a non-existent dataset (e.g. with a typo in the name).
+>    {: .comment}
 >
 {: .hands_on}
 
+![Sample output](../../images/object-tracking-using-cell-profiler/CP_object_tracking_sample_output.png "Sample of images produced by the pipeline.")
+
+
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> How many nuclei have been tracked?
 >
 > > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
+> > Five objects were detected but only four of these were nuclei.
+> > 
 > {: .solution}
 >
 {: .question}
 
 
+> ### {% icon question %} Questions
+>
+> How could we get rid of tracks that don't correspond to nuclei?
+>
+> > ### {% icon solution %} Solution
+> >
+> > Objects that are not nuclei appear to be transient so one solution would be to require the tracks to have a minimal length. This can be done using the *"Filter objects by lifetime"* parameter of the TrackObjects module. 
+> > 
+> {: .solution}
+>
+{: .question}
+> ### {% icon question %} Questions
+>
+> Where is the data needed to plot change in nuclei eccentricity over time?
+>
+> > ### {% icon solution %} Solution
+> > The data is in the csv file called Nuclei in the CellProfiler pipeline output data set.
+> > 
+> {: .solution}
+>
+{: .question}
 
 
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+We've run a CellProfiler pipeline on Galaxy to segment and track dividing nuclei in a Drosophila embryo. We've exported images to visually inspect the outcome and saved tables of computed object features in comma-separated text files for future analysis.
