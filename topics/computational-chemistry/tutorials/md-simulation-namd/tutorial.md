@@ -80,7 +80,7 @@ This tool will:
 >
 > 1. Create a new history for this tutorial.
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the files from the Zenodo link provided.
 >    ```
@@ -88,16 +88,16 @@ This tool will:
 >    https://zenodo.org/record/3234841/files/cbh1test.psf
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
->    {% snippet faqs/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets.
 >
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 4. Check that the datatype is correct. The crd file should have the CRD datatype and the psf file the PSF datatype.
 >
->    {% snippet faqs/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 {: .hands_on}
 

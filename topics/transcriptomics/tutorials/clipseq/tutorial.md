@@ -57,7 +57,7 @@ RBFOX2 is a relevant development and tissue-specific splicing factor with the co
 > ### {% icon hands_on %} Hands-on: Data upload
 > 1. Create and name a new history for this tutorial.
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the following files from [Zenodo](https://zenodo.org/record/2579279).
 >
@@ -70,7 +70,7 @@ RBFOX2 is a relevant development and tissue-specific splicing factor with the co
 >    https://zenodo.org/record/2579279/files/RBFOX2-204-INPUT_S2_R2.fastq
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >    ![upload](../../images/upload_data_page.png "Data can be imported directly with links.")
 >

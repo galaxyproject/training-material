@@ -249,7 +249,7 @@ In this section we will reproduce this Circos plot step by step.
 >
 > 1. Make sure you have an empty analysis history. Give it a name.
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. {% tool [Import Data](upload1) %}
 >    - Import the sample data files to your history, either from a shared data library (if available), or from Zenodo using the following URLs:
@@ -261,9 +261,9 @@ In this section we will reproduce this Circos plot step by step.
 >    https://zenodo.org/record/4494146/files/hg18_karyotype_withbands.txt
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    {% snippet faqs/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
 
@@ -290,7 +290,7 @@ As the first step to this Circos plot, let's configure the ideogram (set of chro
 >
 > 2. **Rename** {% icon galaxy-pencil%} the output `Circos Plot ideogram`
 >
->    {% snippet faqs/rename_dataset.md name="Circos Plot ideogram" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="Circos Plot ideogram" %}
 >
 {: .hands_on}
 
@@ -986,7 +986,7 @@ First, let's get the data we need for this plot:
 >
 > 1. Make sure you have an empty analysis history. Give it a name.
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. **Import Data.**
 >    - Import the sample data files to your history, either from a shared data library (if available), or from Zenodo using the following URLs:
@@ -997,9 +997,9 @@ First, let's get the data we need for this plot:
 >    https://zenodo.org/record/4494146/files/debate_slices.tab
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    {% snippet faqs/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
 
@@ -1039,7 +1039,7 @@ Let's start by creating the ideogram for our plot:
 >
 > 2. **Rename** {% icon galaxy-pencil%} the output `Circos Plot karyotype`
 >
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 
@@ -1197,12 +1197,12 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 >    https://zenodo.org/record/4494146/files/chrom.tab
 >    https://zenodo.org/record/4494146/files/highlights.tab
 >    ```
->    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Rename the datasets
 > 4. Check that the datatype is `tabular` for both files
 >
->    {% snippet faqs/change_datatype.md datatype="tabular" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
 {: .hands_on}
 

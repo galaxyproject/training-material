@@ -67,7 +67,7 @@ We proceed to the analysis by uploading the RNA-seq dataset. The dataset has `13
 >
 > 1. Create a new history for this tutorial
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the files from [Zenodo](https://zenodo.org/record/2545213#.XEWTJ9-YVa0)
 >
@@ -75,15 +75,15 @@ We proceed to the analysis by uploading the RNA-seq dataset. The dataset has `13
 >    https://zenodo.org/record/2545213/files/training_data_normal.tsv
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Rename the dataset to `training_data_normal`.
 >
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 4. Check that the datatype is `tabular`.
 >
->    {% snippet faqs/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 {: .hands_on}
 
@@ -273,15 +273,15 @@ We proceed with the analysis by uploading new datasets. You might want to create
 >    https://zenodo.org/record/2545213/files/test_rows.csv
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Rename the datasets as `train_rows`, `test_rows_labels` and `test_rows` respectively.
 >
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 4. Check that the datatype of all the three datasets is `tabular`.
 >
->    {% snippet faqs/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 {: .hands_on}
 

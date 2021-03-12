@@ -81,11 +81,11 @@ As for any NGS data analysis, ChIP-seq data must be quality controlled before be
 >
 > 1. Create and name a new history for this tutorial.
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the ChIP-seq raw data (\*.fastqsanger) from [Zenodo](https://doi.org/10.5281/zenodo.197100).
 >
->    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Examine the data in a FASTQ file by clicking on the {% icon galaxy-eye %} (eye) icon.
 >
@@ -166,7 +166,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, BWA being on
 >
 > 2. Rename files to reflect the origin and contents.
 >
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 3. Inspect a file produced by BWA.
 >

@@ -362,7 +362,7 @@ This data is available from Zenodo using the following [link](https://doi.org/10
 >https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/858/895/GCF_009858895.2_ASM985889v3/GCF_009858895.2_ASM985889v3_genomic.fna.gz
 >     ```
 >
->    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 {: .hands_on}
 

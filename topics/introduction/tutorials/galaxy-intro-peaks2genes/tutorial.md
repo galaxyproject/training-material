@@ -50,7 +50,7 @@ The closest thing we could find is a file in GEO containing a list of the region
 
 The goal of this exercise is to **turn this list of genomic regions into a list of possible target genes**.
 
-{% snippet faqs/warning_results_may_vary.md %}
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 > ### Agenda
 >
@@ -80,7 +80,7 @@ Let's start with a fresh history.
 >
 > 1. Make sure you have an empty analysis history.
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. **Rename your history** to make it easy to recognize
 >
@@ -118,7 +118,7 @@ Let's start with a fresh history.
 >    ![History section](../../images/intro_01.png)
 >
 >    Directly uploading files is not the only way to get data into Galaxy
->    {% snippet faqs/import_via_link.md format="interval" %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md format="interval" %}
 >
 >    > ### {% icon tip %} Tip: Importing data to Galaxy
 >    > There are [more options]({% link topics/galaxy-interface/tutorials/get-data/slides.html %}) for advanced users.
@@ -158,7 +158,7 @@ Let's start with a fresh history.
 > 4. Search for `mm9` in **Database/Build** attribute and select `Mouse July 2007 (NCBI37/mm9)` (the paper tells us the peaks are from `mm9`)
 > 5. Click on **Save** on the top
 > 6. Add a tag called `#peaks` to the dataset to make it easier to track in the history
->    {% snippet faqs/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 >    The dataset should now look like below in the history
 >
@@ -203,7 +203,7 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 > 7. Wait for the upload to finish
 > 8. Rename our dataset to something more recognizable like `Genes`
 >
->    {% snippet faqs/rename_dataset.md name="Genes" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="Genes" %}
 >
 > 9. Add a tag called `#genes` to the dataset to make it easier to track in the history
 >
@@ -540,7 +540,7 @@ We again need our peak file, but we'd like to work in a clean history. Instead o
 >
 > 1. Create a new history and give it a new name like `Galaxy Introduction Part 2`
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Click on the **View all histories** ({% icon galaxy-columns %} icon) at the top right of your history
 >
@@ -586,7 +586,7 @@ Now we cut out just the chromosome plus the start and end of the summit:
 >
 > 2. Change the format to `interval` (use the {% icon galaxy-pencil %}) since that's what the tool **Intersect** expects.
 >
->    {% snippet faqs/change_datatype.md datatype="interval" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="interval" %}
 >
 >    The output should look like below:
 >
@@ -609,9 +609,9 @@ The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers
 >    https://zenodo.org/record/1025586/files/mm9.RefSeq_genes_from_UCSC.bed
 >    ```
 >
->    {% snippet faqs/import_via_link.md genome="mm9" %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md genome="mm9" %}
 >
->    {% snippet faqs/import_from_data_library.md path='Click on "Training data" and then "Introduction - From peaks to genes"' %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md path='Click on "Training data" and then "Introduction - From peaks to genes"' %}
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >

@@ -69,7 +69,7 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 >
 > 1. Create a new history and name it something meaningful (e.g. *Proteogenomics DB creation*)
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the Uniprot FASTA, FASTQ file and the GTF file from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1489208.svg)](https://doi.org/10.5281/zenodo.1489208)
 >    ```
@@ -78,16 +78,16 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 >    https://zenodo.org/record/1489208/files/Mus_musculus.GRCm38.86.gtf
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Rename the datasets with more descriptive names (strip off the url prefixes)
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 4. Make sure that the datatype of file `FASTQ_ProB_22List.fastqsanger` is set to `fastqsanger`
->    {% snippet faqs/change_datatype.md datatype="fastqsanger" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastqsanger" %}
 >
 > 5. Make sure the Database/Build (dbkey) is set to `Mouse.Dec 2011 (GRCm38/mm10)(mm10)`
->    {% snippet faqs/change_dbkey.md dbkey="Mouse.Dec 2011 (GRCm38/mm10)(mm10)"%}
+>    {% snippet faqs/galaxy/datasets_change_dbkey.md dbkey="Mouse.Dec 2011 (GRCm38/mm10)(mm10)"%}
 > 
 > 6. **Note**: If you are running the workflow taken from the **GTN**, then make sure the tool "**Tabular-to-FASTA**" (tool number 26)
 >    has Title Column labeled as "1" and Sequence Column as "2".
@@ -269,9 +269,9 @@ Its input can include not only the alignments of raw reads used by other transcr
 >      - {% icon param-select %} *"Output coverage file?"*: `No`
 > 2. Inspect {% icon galaxy-eye %} the resulting files.
 > 3. Rename the output to `Stringtie_output.gtf`
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 > 4. Make sure the datatype is `gtf`
->    {% snippet faqs/change_datatype.md %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md %}
 {: .hands_on}
 
 StringTie accepts a BAM (or SAM) file of paired-end RNA-seq reads, which must be sorted by genomic location (coordinate position). This file contains spliced read alignments and can be produced directly by programs such as HISAT2. We recommend using HISAT2 as it is a fast and accurate alignment program. Every spliced read alignment (i.e. an alignment across at least one junction) in the input BAM file must contain the tag XS to indicate the genomic strand that produced the RNA from which the read was sequenced. Alignments produced by HISAT2 (when run with the `--dta` option) already include this tag, but if you use a different read mapper
@@ -469,7 +469,7 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 >   - {% icon param-file %} *"Omit column headers from tabular output"*: `No`
 >
 > 2. Rename output to `genomic_mapping_sqlite`
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 >    The output is further processed so that the results are compatible with the Multiomics Visualization Platform. 
 >    We need to modify the CustomProDB protein accessions the same as was done for the FASTA database. 

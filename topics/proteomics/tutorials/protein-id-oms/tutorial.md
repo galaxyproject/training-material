@@ -86,7 +86,7 @@ If your data were generated on a low resolution mass spectrometer, use **PeakPic
 >
 > 1. Create a new history for this Peptide and Protein ID exercise.
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Load one of the example datasets into your history from Zenodo
 >
@@ -95,7 +95,7 @@ If your data were generated on a low resolution mass spectrometer, use **PeakPic
 >    https://zenodo.org/record/892005/files/qExactive01819_profile.mzml
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Rename the dataset to something meaningful
 >

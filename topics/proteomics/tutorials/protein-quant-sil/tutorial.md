@@ -83,7 +83,7 @@ A common problem in mass spectrometry are misassigned mono-isotopic precursor pe
 >
 > 1. Create a new history for this SILAC Proteome exercise
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the mzml file, containing the measured mass spectra from [Zenodo](https://doi.org/10.5281/zenodo.1051552) or a data library:
 >
@@ -91,8 +91,8 @@ A common problem in mass spectrometry are misassigned mono-isotopic precursor pe
 >    https://zenodo.org/record/1051552/files/HEK_SILAC-K6R6_ST905_part.mzml
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
->    {% snippet faqs/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    > ### {% icon comment %} Comment
 >    > The data have been preprocessed during the conversion from the machine raw file. We used background removal on MS1 and MS2 level, and MS2 deisotoping.
@@ -282,7 +282,7 @@ Using Galaxy Workflows enables us to quickly re-run a full analysis with changed
 >
 > 5. Rename the **FileFilter** output to `Annotated features`
 >
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 6. Run **FileFilter** {% icon tool %} with
 >   - {% icon param-file %} *"Input file"*: **IDConflictResolver** output

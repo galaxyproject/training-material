@@ -64,7 +64,7 @@ Why do we need to correct those?
 >
 > 1. Create a new history for this tutorial
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the 12 `fq.gz` into a `List of Pairs` collection named `fastq_raw`
 >    - Option 1: from a shared data library (ask your instructor)
@@ -87,17 +87,17 @@ Why do we need to correct those?
 >    https://zenodo.org/record/3541678/files/B3_right.fq.gz
 >    ```
 >
->    {% snippet faqs/import_via_link.md collection=true collection_type="List of Pairs" collection_name="fastq_raw" %}
->    {% snippet faqs/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md collection=true collection_type="List of Pairs" collection_name="fastq_raw" %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets
 > 4. Check that the datatype
 >
->    {% snippet faqs/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 > 5. Add to each database a tag corresponding to ...
 >
->    {% snippet faqs/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 
@@ -166,7 +166,7 @@ Why do we need to correct those?
 >    > ```
 >    {: .comment}
 >
->    {% snippet faqs/rename_collection.md %}
+>    {% snippet faqs/galaxy/collections_rename.md %}
 >
 {: .hands_on}
 
@@ -195,7 +195,7 @@ Why do we need to correct those?
 > 2. **Rename** the Trinity output
 >    - `Trinity on data 52, data 51, and others: Assembled Transcripts` -> `transcriptome_raw.fasta`
 >
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 

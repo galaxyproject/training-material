@@ -105,7 +105,7 @@ The datasets used for this tutorial contain gene expression profiles of humans s
 >
 > 1. Create a new history for this tutorial
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the files from [Zenodo](https://zenodo.org/record/3706539#.XmjDYHVKg5k)
 >
@@ -118,12 +118,12 @@ The datasets used for this tutorial contain gene expression profiles of humans s
 >
 > 3. Rename the datasets as `X_test`, `X_train`, `y_test` and `y_train` respectively.
 >
->    {% snippet faqs/rename_dataset.md %}
->    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 4. Check that the datatype is `tabular`.
 >
->    {% snippet faqs/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 {: .hands_on}
 

@@ -36,7 +36,7 @@ contributors:
 
 This practical aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.
 
-{% snippet faqs/warning_results_may_vary.md %}
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 > ### Agenda
 >
@@ -80,7 +80,7 @@ Browse to your favourite [Galaxy instance](https://galaxyproject.org/use/) and l
 >
 > 1. Make sure you start from an empty analysis history.
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. **Rename your history** to be meaningful and easy to find. You can do this by clicking on the title of the history (which by default is *Unnamed history*) and typing **Galaxy 101** as the name. Do  not forget to hit the <kbd>Enter</kbd> key on your keyboard to save it.
 >
@@ -112,7 +112,7 @@ First we need to get some data into our history. You can upload files from your 
 >
 > 4. When they're ready, **rename** {% icon galaxy-pencil %} the datasets to `Exons` and `SNPs`, respectively.
 >
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 
@@ -390,11 +390,11 @@ A good way to learn about these exons is to look at their genomic surrounding. T
 >
 > 1. First, check that the **database** of your latest history dataset is `hg38`. If not, click on the {% icon galaxy-pencil %} pencil icon and modify the **Database/Build:** field to `Human Dec. 2013 (GRCh38/hg38) (hg38)`.
 >
->    {% snippet faqs/change_dbkey.md dbkey="hg38" %}
+>    {% snippet faqs/galaxy/datasets_change_dbkey.md dbkey="hg38" %}
 >
 > 2. Second, check that the **format** of your latest history dataset is `bed`. If not, click on the {% icon galaxy-pencil %} pencil icon and modify the **Datatype** field to `bed`.
 >
->    {% snippet faqs/change_datatype.md datatype="bed" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="bed" %}
 >
 > 3. To **visualize the data in UCSC genome browser**, click on `display at UCSC main` option visible when you expand the history item.
 >
@@ -473,7 +473,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >
 >    When you click on a workflow step, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.
 >
->    {% snippet faqs/workflow_hide_intermediate_steps.md %}
+>    {% snippet faqs/galaxy/workflows_hide_intermediate_steps.md %}
 >
 > 3. Re-arrange the boxes so you can clearly see the data flow. The default automatic layout hides some of the connections due to overlapping and box placement.
 >
@@ -514,7 +514,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 > 1. Create a **new history** and give it a name.
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. We will need the list of exons again. We don't have to get this from UCSC again, we can just **copy** it from our previous history. The easiest way to do this is to go to the {% icon galaxy-columns %} history overview. Here you can just drag and drop datasets from one history to another.
 >
@@ -528,7 +528,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >    https://zenodo.org/record/4104428/files/UCSC-hg38-chr22-Repeats.bed
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >    > ### {% icon tip %} Obtaining the Data from UCSC
 >    >
@@ -559,7 +559,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    ![`Run` option in the workflow menu](../../images/101_37.png)
 >
->     {% snippet faqs/run_workflow.md %}
+>     {% snippet faqs/galaxy/workflows_run.md %}
 >
 >    The central panel will change to allow you to configure and launch the workflow.
 >

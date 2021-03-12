@@ -71,8 +71,8 @@ The first step in this tutorial is to get the data from the Zenodo link provided
 >
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
->    {% snippet faqs/create_new_history.md %}
->    {% snippet faqs/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}): a Functional File and an Intensity file.
 >
@@ -82,11 +82,11 @@ The first step in this tutorial is to get the data from the Zenodo link provided
 >    https://zenodo.org/record/4110725/files/Intensity-File.tabular
 >
 >    ```
->    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >    Alternatively, import the files from the shared data library (`GTN - Material` -> `{{ page.topic_name }}` -> `{{ page.title }}`)
 >
->    {% snippet faqs/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
 >

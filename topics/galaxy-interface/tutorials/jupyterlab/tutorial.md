@@ -48,7 +48,7 @@ We will introduce additional benefits of using JupyterLab as you cover the lesso
 
 ## Opening up JupyterLab
 
-{% snippet faqs/launch_jupyterlab.md %}
+{% snippet faqs/galaxy/interactive_tools_jupyter_launch.md %}
 
 You should now be looking at a page with the JupyterLab interface:
 

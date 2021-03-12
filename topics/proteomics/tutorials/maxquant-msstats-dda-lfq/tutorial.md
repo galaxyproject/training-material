@@ -53,7 +53,7 @@ The raw data is available via the [PRIDE repository](https://www.ebi.ac.uk/pride
 >
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the FASTA database, annotation file and comparison matrix from [Zenodo](https://zenodo.org/record/4544529)
 >
@@ -62,7 +62,7 @@ The raw data is available via the [PRIDE repository](https://www.ebi.ac.uk/pride
 >    https://zenodo.org/record/4544529/files/input_annotation_file.tabular
 >    https://zenodo.org/record/4544529/files/input_comparison_matrix.tabular
 >    ```
->    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Import the raw data from [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD006914)
 >
@@ -89,15 +89,15 @@ The raw data is available via the [PRIDE repository](https://www.ebi.ac.uk/pride
 >
 >    ```
 > 4. Once the files are green, rename the raw datasets into 'metast_cSCC1' etc., the fasta file into 'protein database', the annotation file into 'annotation file' and the comparison matrix file into 'comparison matrix'.
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 5. Control that the data type of the raw files is 'thermo.raw' otherwise change the datatype into 'thermo.raw'
 >
->    {% snippet faqs/change_datatype.md datatype="thermo.raw" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="thermo.raw" %}
 >
 >6. Generate a collection for all raw files and name it 'raw_files', hide the individual raw files
 >
->    {% snippet faqs/build_list_collection.md %}
+>    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 {: .hands_on}
 
@@ -310,7 +310,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
 >    - *"With following condition"*: `c3>0.58`
 >    - *"Number of header lines to skip"*: `1`
 > 4. Add a tag `#metastasized` to the filtered file
->      {% snippet faqs/add_tag.md %}
+>      {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 > 5. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `filtered comparison result` (output of the run before last **Filter** {% icon tool %})

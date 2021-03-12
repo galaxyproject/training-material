@@ -86,8 +86,8 @@ We will use four files for this analysis:
 >
 > 1. Create a new history for this RNA-seq exercise e.g. `RNA-seq AskOmics`
 >
->    {% snippet faqs/create_new_history.md %}
->    {% snippet faqs/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the files.
 >
@@ -95,8 +95,8 @@ We will use four files for this analysis:
 >    - Option 1: From a shared data library if available (ask your instructor)
 >    - Option 2: From [Zenodo](https://zenodo.org/record/3950862)
 >
->    {% snippet faqs/import_via_link.md %}
->    {% snippet faqs/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    - You can paste the links below into the **Paste/Fetch** box:
 >
@@ -127,7 +127,7 @@ We will use four files for this analysis:
 >
 > If the datatypes are wrong, please change it.
 >
-> {% snippet faqs/change_datatype.md %}
+> {% snippet faqs/galaxy/datasets_change_datatype.md %}
 {: .hands_on}
 
 Click on the {% icon galaxy-eye %} (eye) icon and take a look at the uploaded files.

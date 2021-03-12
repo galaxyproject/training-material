@@ -79,7 +79,7 @@ To make computation times feasible for this training, we reduced all datasets to
 >
 > 1. Create a new history and give it a name.
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the files from [Zenodo](https://zenodo.org/record/2628280). Upload all three datasets (one by one) to Galaxy via the **composite** option and rename them to 'control', 'treated1' and 'all_files'.
 >    ```
@@ -106,7 +106,7 @@ To make computation times feasible for this training, we reduced all datasets to
 >
 > 5. Add a tag to each imzML file ('control', 'treated1' and 'all_files') and to the tabular file ('Glycans'):
 >
->    {% snippet faqs/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 

@@ -154,7 +154,7 @@ In this example we will use a downsampled version of *E. coli* C-1 Illumina and 
 >
 > 1. Make sure you have an empty analysis history. Give it a name.
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the following file from [Zenodo](https://zenodo.org/record/940733)
 >
@@ -164,8 +164,8 @@ In this example we will use a downsampled version of *E. coli* C-1 Illumina and 
 >    https://zenodo.org/record/940733/files/minion_2d.fq
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
->    {% snippet faqs/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
 

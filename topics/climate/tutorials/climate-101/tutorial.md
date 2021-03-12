@@ -67,7 +67,7 @@ Freiburg). The data format may also have been changed (for instance to tabular) 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial. If you are not inspired, you can name it *climate101*.
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 > 2. Import the files from [Zenodo](https://doi.org/10.5281/zenodo.3776500) or from the shared data library
 >
 >    ```
@@ -75,27 +75,27 @@ Freiburg). The data format may also have been changed (for instance to tabular) 
 >    https://zenodo.org/record/3776500/files/ts_cities.csv
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
->    {% snippet faqs/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Check that the datatype is **tabular**
 >
->    {% snippet faqs/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 >    If it is not `tabular` make sure to convert it using the Galaxy built-in format converters.
 >
->    {% snippet faqs/convert_datatype.md conversion="Convert CSV to Tabular" %}
+>    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="Convert CSV to Tabular" %}
 >
 > 4. Rename Datasets
 >
 >    As "`https://zenodo.org/record/3776500/files/tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv`" is not a beautiful name and can give errors for some tools, it is a good practice to change the dataset name by something more meaningfull.
 >    For example by removing `https://zenodo.org/record/3776500/files/` to obtain `tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv` and `ts_cities.csv`, respectively.
 >
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 5. Add a tag to the dataset corresponding to `copernicus`
 >
->    {% snippet faqs/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 

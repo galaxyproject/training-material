@@ -144,13 +144,13 @@ At the first step, we should upload the iris dataset and two other datasets whic
 >    https://zenodo.org/record/3813447/files/moon.csv
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
->    {% snippet faqs/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
 > 2. **Rename** {% icon galaxy-pencil %} the datasets to `iris`, `circles` and `moon` respectively.
 >
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 3. Check the **datatype**
 >    - Click on the history item to expand it to get more information.
@@ -159,8 +159,8 @@ At the first step, we should upload the iris dataset and two other datasets whic
 >      - Option 1: Datatypes can be **autodetected**
 >      - Option 2: Datatypes can be **manually set**
 >
->    {% snippet faqs/detect_datatype.md datatype="datatypes" %}
->    {% snippet faqs/change_datatype.md datatype="csv" %}
+>    {% snippet faqs/galaxy/datasets_detect_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="csv" %}
 >
 {: .hands_on}
 
@@ -395,7 +395,7 @@ We can apply the same steps on the other datasets such `moon` and `circles` data
 >
 > 1. **Scatterplot with ggplot2** {% icon tool %} with the following parameters:
 >
->    {% snippet faqs/select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >    - {% icon param-file %} *"Input tabular dataset"*: `circles` and `moon` as **multiple datasets**
 >    - *"Column to plot on x-axis"*: `1`
 >    - *"Column to plot on y-axis"*: `2`
@@ -420,7 +420,7 @@ Now you can find clusters in these datasets using the aforementioned algorithms.
 >
 > 1. **Numeric Clustering** {% icon tool %} with the following clustering parameters:
 >
->    {% snippet faqs/select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >    - *"Select the format of input data"*: `Tabular Format (tabular,txt)`
 >        - {% icon param-file %} *"Data file with numeric values"*: `circles` and `moon` as **multiple datasets**
 >        - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
@@ -441,7 +441,7 @@ Then, you can visualize the clustering results using the following steps:
 >
 > 1. **Scatterplot with ggplot2** {% icon tool %} with the following parameters:
 >
->    {% snippet faqs/select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >    - {% icon param-file %} *"Input tabular dataset"*: `circles hierarchical clustering` and `moon hierarchical clustering` as **multiple datasets**
 >    - *"Column to plot on x-axis"*: `1`
 >    - *"Column to plot on y-axis"*: `2`

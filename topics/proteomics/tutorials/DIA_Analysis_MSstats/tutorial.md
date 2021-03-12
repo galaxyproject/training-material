@@ -52,7 +52,7 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 >
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the DIA analysis results, the sample annotation and the comparison matrix from [Zenodo](https://zenodo.org/record/4302084)
 >    ```
@@ -61,10 +61,10 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 >    https://zenodo.org/record/4302084/files/Comp_matrix_HEK_Ecoli.txt
 >    https://zenodo.org/record/4302084/files/PyProphet_msstats_input.tabular
 >    ```
->    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Once the files are green, rename the sample annotation file in 'Sample_annot_MSstats', the comparison matrix file in 'Comp_matrix_HEK_Ecoli' and the two DIA analysis results files in 'PyProphet_export' and 'PyProphet_msstats_input'
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 

@@ -66,12 +66,12 @@ In this tutorial, we perform proteogenomic database searching using the Mass Spe
 >    https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f9.mgf
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Rename the datasets to something more recognizable (strip the URL prefix)
 > 4. Build a **Dataset list** for the three MGF files, name it as "**Mo_Tai_MGFs**"
 >
->    {% snippet faqs/build_list_collection.md %}
+>    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 {: .hands_on}
 

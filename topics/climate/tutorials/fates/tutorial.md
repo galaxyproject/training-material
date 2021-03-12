@@ -82,7 +82,7 @@ For the purpose of this tutorial, input data for a single point location (ALP1) 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial. If you are not inspired, you can name it *fates*.
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 > 2. Import the [input data](https://doi.org/10.5281/zenodo.4108341) and the [restart dataset from Zenodo](https://doi.org/10.5281/zenodo.4126404)
 >    or from the shared data library. Restart dataset will be used if you want to initialize the model from exisiting experiments rather than running the model from a cold start to shorten spin-up time needed for the model.
 >
@@ -91,12 +91,12 @@ For the purpose of this tutorial, input data for a single point location (ALP1) 
 >    https://zenodo.org/record/4126404/files/CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
->    {% snippet faqs/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Check the datatype (for both files) is **tar**
 >
->    {% snippet faqs/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 > 4. Rename {% icon galaxy-pencil %} datasets
 >      - Dataset names are the full URL, but this is not very nice to work with, and can even give errors for some tools
@@ -105,7 +105,7 @@ For the purpose of this tutorial, input data for a single point location (ALP1) 
 >      - Example: rename `https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar` to `inputdata_version2.0.0_ALP1.tar`
 >      - Do the same for the other dataset
 >
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 
@@ -171,7 +171,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the ve
 >    > To cope with that, one can change the datatype manually, as shown below.
 >    {: .comment}
 >
->    {% snippet faqs/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 > 3. **Rename** {% icon galaxy-pencil %} the output dataset (history file) to `ALP1_exp.nc`
 >
@@ -179,7 +179,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the ve
 >    to rename all netCDF files so that they do not contain any special characters or dots (except for the file extension) or slashes. Some tools, in
 >    particular Panoply, won't be able to recognize your file if not named properly.
 >
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 4. {% tool [NetCDF xarray Metadata Info](toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1) %}  to get metadata information for CLM-FATES netCDF outputs:
 >      - {% icon param-file %} *"Netcdf file"*: `ALP1_exp.nc`
@@ -292,7 +292,7 @@ so that we can reuse it for any simulations.
 >
 > 2. **Rename** {% icon galaxy-pencil %} dataset to `NetCDF xarray Selection on ALP1_exp.nc`
 >
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 3. {% tool [Replace parts of text ](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} to clean date column for plotting:
 >      - {% icon param-file %} *"File to process"*: NetCDF xarray Selection on ALP1_exp.nc
@@ -306,7 +306,7 @@ so that we can reuse it for any simulations.
 >
 > 4. **Rename** {% icon galaxy-pencil %} dataset to `LEAFC_clean.tabular`
 >
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 5. **Scatterplot w ggplot2**  {% icon tool %} to plot the total carbon in live plant leaves (**LEAFC**):
 >      - {% icon param-file %} *"Input in tabular format"*: `LEAFC_clean.tabular`
@@ -357,7 +357,7 @@ We would like to run a CLM-FATES case where the atmospheric Carbon Dioxyde Conce
 >
 > 1. Open the **workflow editor**
 >
->    {% snippet faqs/edit_workflow.md %}
+>    {% snippet faqs/galaxy/workflows_edit.md %}
 >
 > 2. Edit your workflow and customize it to run your new CO2 experiment. For this you would need to:
 >      - In "Advanced customization", change "Atmospheric CO2 molar ratio (by volume) only used when co2_type==constant (umol/mol)" from 367.0 to 1468.0.

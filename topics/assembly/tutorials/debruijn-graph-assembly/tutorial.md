@@ -50,7 +50,7 @@ We will be using the same data that we used in the introductory tutorial, so if 
 >
 > 1. Create and name a new history for this tutorial.
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the sequence read raw data (\*.fastq) from [Zenodo](https://zenodo.org/record/582600)
 >
@@ -59,13 +59,13 @@ We will be using the same data that we used in the introductory tutorial, so if 
 >    https://zenodo.org/record/582600/files/mutant_R2.fastq
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Rename the files {% icon galaxy-pencil %}
 >    - The name of the files are the full URL, let's make the names a little clearer
 >    - Change the names to just the last part, `Mutant_R1.fastq`, `Mutant_R2.fastq`  respectively
 >
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 >    > ### {% icon question %} Questions
 >    >

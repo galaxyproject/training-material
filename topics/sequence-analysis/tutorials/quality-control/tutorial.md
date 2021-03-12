@@ -57,8 +57,8 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >
 > 1. Create a new history for this tutorial and give it a proper name
 >
->    {% snippet faqs/create_new_history.md %}
->    {% snippet faqs/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import `GSM461178_untreat_paired_subset_1.fastq` from [Zenodo](https://zenodo.org/record/61771) or from the data library (ask your instructor)
 >
@@ -66,14 +66,14 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
->    {% snippet faqs/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >
 > 4. Rename the file to `reads_1`
 >
->    {% snippet faqs/rename_dataset.md name="reads_1" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="reads_1" %}
 >
 {: .hands_on}
 
@@ -629,7 +629,7 @@ The data we analyzed in the previous step was not single-end data but the forwar
 >           - *"Type of FastQC output?"*: `Raw data`
 >           - {% icon param-files %} *"FastQC output"*: `Raw data` files (output of both **FastQC** {% icon tool %})
 >
->    {% snippet faqs/select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
 > 5. Inspect the webpage output from MultiQC
 >

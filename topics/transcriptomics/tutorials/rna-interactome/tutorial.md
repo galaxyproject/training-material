@@ -81,17 +81,17 @@ results. `ChiRA` uses `BWA-MEM` or `CLAN` to map the reads. Subsequently, it als
 >    https://zenodo.org/record/3709188/files/whole_transcriptome.gff.gz
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
->    {% snippet faqs/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets
 > 4. Check that the datatype
 >
->    {% snippet faqs/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 > 5. Add to each database a tag corresponding to ...
 >
->    {% snippet faqs/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 
@@ -306,7 +306,7 @@ sqlite database from the `ChiRA` output.
 >
 > 2. Change the datatype to `chira.sqlite`
 >
->    {% snippet faqs/change_datatype.md datatype="chira.sqlite" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="chira.sqlite" %}
 >
 {: .hands_on}
 

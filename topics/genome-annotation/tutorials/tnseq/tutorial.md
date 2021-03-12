@@ -112,8 +112,8 @@ Let's start with uploading the data.
 >
 > 1. Create a new history for this tutorial and give it a proper name
 >
->    {% snippet faqs/create_new_history.md %}
->    {% snippet faqs/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import from [Zenodo](https://zenodo.org/record/2579335) or a data library (ask your instructor):
 >   - FASTQ file with the Tnseq reads: `Tnseq-Tutorial-reads.fastqsanger.gz`
@@ -130,13 +130,13 @@ Let's start with uploading the data.
 >    https://zenodo.org/record/2579335/files/staph_aur.gff3
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
->    {% snippet faqs/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
 > 3. Rename the files
 >
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 
@@ -387,7 +387,7 @@ To identify the location of each TA site to the count them, the first step is to
 >
 > 2. Rename your collection for better clarity
 >
->    {% snippet faqs/rename_collection.md %}
+>    {% snippet faqs/galaxy/collections_rename.md %}
 >
 {: .hands_on}
 
@@ -447,7 +447,7 @@ The only information we need here are the positions of the 5' end of each TA sit
 >
 > 4. Add the `#forward` tag to the output
 >
->    {% snippet faqs/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 > 2. **Cut columns from a table** {% icon tool %} with:
 >    - Cut columns : `c1,c3`
@@ -487,7 +487,7 @@ We have now 2 files containing the coordinates of our TA sites for both strands.
 >
 > 2. Add `#forward` tag to the output collections
 >
->    {% snippet faqs/add_tag_to_collection.md %}
+>    {% snippet faqs/galaxy/collections_add_tag.md %}
 >
 > 3. **Cut columns from a table** {% icon tool %} with:
 >    - Cut columns : `c1,c4`
@@ -624,7 +624,7 @@ In order to use transit, we need to create a an annotation file in the `prot_tab
 > 1. Check that the format of `staph_aur.gff3` file is `gff3` and not `gff`
 > 2. Change the datatype if needed
 >
->    {% snippet faqs/change_datatype.md datatype="gff3" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="gff3" %}
 >
 > 3. **Convert GFF3 to prot_table for TRANSIT** {% icon tool %} with:
 >    - {% icon param-file %} *GenBank GFF file"*: the `staph_aur.gff3` file
@@ -776,9 +776,9 @@ This tutorial focused on simple gene essentiality prediction in individual sampl
 
 Once you get this list of gene, it is interesting to verify manually the genes classified as essentials. In order to do that, you can visualize the read mapped on your genome by displaying the bam files in IGV.
 
->    {% snippet faqs/add_genome_to_IGV.md %}
+>    {% snippet faqs/galaxy/visualizations_igv_add_genome.md %}
 
->    {% snippet faqs/view_mapping_in_IGV.md %}
+>    {% snippet faqs/galaxy/visualizations_igv_view_mapping.md %}
 
 When looking at the read mapping at the location of predicted essential genes, you may encounter several situation: Some gene will have no read at all mapping to them, some will have an empty region, while other will have no clearly defined empty region but a very low count of reads, possibly indicating a growth defect induced by the gene disruption.
 

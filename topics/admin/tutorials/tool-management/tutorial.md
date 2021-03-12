@@ -118,7 +118,7 @@ Now that you have extracted a list of tools, let's install these on your Galaxy 
 - The URL of your Galaxy server
 - The API key for your account, which must be an admin
 
-{% snippet faqs/finding_your_admin_api_key.md %}
+{% snippet faqs/galaxy/preferences_admin_api_key.md %}
 
 There are two ways to install tools, depending on how you specify the tools to install:
 

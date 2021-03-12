@@ -65,7 +65,7 @@ The datasets required for this tutorial contain 9 features of breast cells which
 >
 > 1. Create a new history for this tutorial
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the following datasets and choose the type of data as `tabular`.
 >
@@ -74,11 +74,11 @@ The datasets required for this tutorial contain 9 features of breast cells which
 >    https://zenodo.org/record/1401230/files/breast-w_test.tsv
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Rename datasets to `breast-w_train` and `breast-w_test`.
 >
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 4. The datasets should look like these:
 >

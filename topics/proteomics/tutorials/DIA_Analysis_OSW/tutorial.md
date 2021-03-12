@@ -69,7 +69,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 >
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the fasta and raw files as well as the sample annotation and the iRT Transition file from [Zenodo](https://zenodo.org/record/4301690)
 >    ```
@@ -85,12 +85,12 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 >    https://zenodo.org/record/4301690/files/Sample7.raw
 >    https://zenodo.org/record/4301690/files/Sample8.raw
 >    ```
->    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Once the files are green, rename the sample annotation file in 'Sample_annotation', the spectral library in 'HEK_Ecoli_lib', the iRT transition file in 'iRTassays' and the raw files in 'Sample1.raw', 'Sample2.raw', 'Sample3.raw', 'Sample4.raw', 'Sample5.raw', 'Sample6.raw', 'Sample7.raw' and 'Sample8.raw'
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 > 4. Generate a collection for all .raw files (and name it DIA_data)
->    {% snippet faqs/build_list_collection.md %}
+>    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 {: .hands_on}
 

@@ -91,15 +91,15 @@ Whole blood samples are collected from humans with their ages falling in the ran
 >    https://zenodo.org/record/2545213/files/test_rows.csv
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Rename the datasets as `train_rows`, `test_rows_labels` and `test_rows` respectively.
 >
->    {% snippet faqs/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 4. Check that the datatype of all the three datasets is `tabular`.
 >
->    {% snippet faqs/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 {: .hands_on}
 

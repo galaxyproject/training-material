@@ -1,0 +1,1 @@
+faqs/galaxy/index.md

@@ -50,8 +50,8 @@ Let's start with uploading the data.
 > ### {% icon hands_on %} Hands-on: Import the data
 > 1. Create a new history for this tutorial and give it a proper name
 >
->    {% snippet faqs/create_new_history.md %}
->    {% snippet faqs/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import from [Zenodo](https://zenodo.org/record/3567224) or a data library (ask your instructor):
 >   - FASTQ file with illumina reads: `sweet-potato-chloroplast-illumina-reduced.fastq`
@@ -62,8 +62,8 @@ Let's start with uploading the data.
 >    https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduced.fastq
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
->    {% snippet faqs/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 {: .hands_on}
 
 # Check read quality
@@ -111,7 +111,7 @@ We will assemble the long nanopore reads.
 >
 > 2. Re-name the `consensus` output file to `flye-assembly.fasta`
 >
->    {% snippet faqs/rename_dataset.md name="flye-assembly.fasta" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="flye-assembly.fasta" %}
 >
 > 3. **View output**:
 >    * There are five output files.
@@ -184,7 +184,7 @@ Next, we will compare the short reads to the assembly, and create a polished (co
 >   * What is in the `changes` file?
 >   * Rename the fasta output to `polished-assembly.fasta`
 >
->    {% snippet faqs/rename_dataset.md name="polished-assembly.fasta" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="polished-assembly.fasta" %}
 >
 > 3. {% tool [Fasta Statistics](toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.1) %}
 >    - Find and run the tool called "Fasta statistics" on both the original flye assembly and the polished version.
@@ -255,7 +255,7 @@ Now make a JBrowse file to view the annotations (the GFF3 file - produced from e
 
 Here is an embedded snippet showing JBrowse and the annotations:
 
-{% snippet faqs/jbrowse.html datadir="data2" %}
+{% snippet faqs/galaxy/visualizations_jbrowse.html datadir="data2" %}
 
 # View reads
 
@@ -307,7 +307,7 @@ We will look at the original sequencing reads mapped to the genome assembly. In 
 
 Here is an embedded snippet showing JBrowse and the mapped reads:
 
-{% snippet faqs/jbrowse.html datadir="data" %}
+{% snippet faqs/galaxy/visualizations_jbrowse.html datadir="data" %}
 
 
 > ### {% icon question %} Questions

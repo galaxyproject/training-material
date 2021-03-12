@@ -57,8 +57,8 @@ For this tutorial we have prepared a subset of data previously by our group ({% 
 >
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
->    {% snippet faqs/create_new_history.md %}
->    {% snippet faqs/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 1. Import files from [Zenodo](https://zenodo.org/record/1251112):
 >
@@ -72,7 +72,7 @@ For this tutorial we have prepared a subset of data previously by our group ({% 
 > 1. Check that all newly created datasets in your history are assigned datatype
 >    `fastqsanger`, and fix any missing or wrong datatype assignment
 >
->    {% snippet faqs/change_datatype.md datatype="fastqsanger" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastqsanger" %}
 >
 {: .hands_on}
 
@@ -85,7 +85,7 @@ Before proceeding with the analysis, we need to find out how good the data actua
 > 1. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} on each of the four FASTQ datasets with the following parameters:
 >       - {% icon param-files %} *"Short read data from your current history"*: all 4 FASTQ datasets selected with **Multiple datasets**
 >
->    {% snippet faqs/select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
 {: .hands_on}
 

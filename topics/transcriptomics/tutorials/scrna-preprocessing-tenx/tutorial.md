@@ -149,11 +149,11 @@ The barcodes in the R1 FASTQ data are checked against these known cell barcodes 
 >
 > 1. Create a new history and rename it (e.g. scRNA-seq 10X dataset tutorial)
 >
->    {% snippet faqs/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 1. Import the sub-sampled FASTQ data from [`Zenodo`](https://zenodo.org/record/3457880) or from the data library (ask your instructor)
 >
->    {% snippet faqs/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    ```
 >    https://zenodo.org/record/3457880/files/subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz
@@ -162,7 +162,7 @@ The barcodes in the R1 FASTQ data are checked against these known cell barcodes 
 >    https://zenodo.org/record/3457880/files/subset_pbmc_1k_v3_S1_L002_R2_001.fastq.gz
 >    ```
 >
->    {% snippet faqs/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Import the Gene Annotations and Cell Barcodes from [`Zenodo`](https://zenodo.org/record/3457880) or from the data library (ask your instructor)
 >
