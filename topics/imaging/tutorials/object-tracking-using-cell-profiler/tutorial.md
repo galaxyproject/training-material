@@ -304,20 +304,6 @@ The first step to track nuclei starts with the identification of those objects o
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
 ## Visualize results
 
 > ### {% icon hands_on %} Hands-on: Visualize segmentation outcome
