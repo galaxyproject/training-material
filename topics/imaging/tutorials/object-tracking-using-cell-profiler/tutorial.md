@@ -31,7 +31,7 @@ Tracking is done by first segmenting objects then linking objects between consec
 <br>
 
 > ### {% icon warning %} **Important information: CellProfiler in Galaxy**  
-> The Galaxy {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %} tool takes two inputs: a CellProfiler pipeline and an image collection.  
+> The Galaxy {% tool [CellProfiler](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %}  tool takes two inputs: a CellProfiler pipeline and an image collection.  
 > Some pipelines created with stand-alone CellProfiler may not work with the Galaxy CellProfiler tool. Some reasons are:  
 >  * The pipeline was built with a different version of CellProfiler. The Galaxy tool currently uses CellProfiler 3.9.  
 >  * Modules used by the pipeline aren't available in Galaxy.  
@@ -92,7 +92,8 @@ We need to:
   - Perform tracking  
   - Produce some useful output files  
 
-A pipeline is built by chaining together Galaxy tools representing CellProfiler modules and must start with the {% tool [Starting modules](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9+galaxy1) %} tool and end with the {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %} tool.  
+A pipeline is built by chaining together Galaxy tools representing CellProfiler modules and must start with the {% tool [Starting modules](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9+galaxy1) %} tool and end with the {% tool [CellProfiler](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %}  tool.  
+
 
 
 ![Image of the workflow](../../images/object-tracking-using-cell-profiler/CP_object_tracking_pipeline.png "Overview of the CellProfiler pipeline using Galaxy tools.")
@@ -409,10 +410,10 @@ The tiled images and the features computed in previous steps are now exported to
 
 # Run the pipeline with **CellProfiler**
 
-As mentioned in the introduction, the tool {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %} takes as input the pipeline that we have been assembling over this tutorial and the input data. We are now ready to finally run CellProfiler!
+As mentioned in the introduction, the tool {% tool [CellProfiler](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %}  takes as input the pipeline that we have been assembling over this tutorial and the input data. We are now ready to finally run CellProfiler!
 > ### {% icon hands_on %} Hands-on: Running the pipeline with CellProfiler
 >
-> 1. {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %} with the following parameters:
+> 1. {% tool [CellProfiler](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %}  with the following parameters:
 >    - {% icon param-file %} *"Pipeline file"*: `output of **ExportToSpreadsheet** {% icon tool %}
 >    - *"Are the input images packed into a tar archive?"*: `No`
 >        - {% icon param-collection %} *"Images"*: output of **Unzip** {% icon tool %}
