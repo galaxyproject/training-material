@@ -94,23 +94,30 @@ generated tools run. No explicit instruction about scripting is offered.
 {: .no_toc}
 Tools are the fundamental building blocks for analyses in Galaxy. Thousands are available in the project tool library. Tool execution is tightly constrained in that
 user supplied parameters and data inputs exposed on the tool form are the only things that can be changed before execution. Everything else is fixed. The project supports
-extensive software infrastructure for manually creating new tools including Planemo and the new Galaxy language server. These are complex and powerful.
-New developers need time to come up to speed, but can then use them to generate new tools.
+extensive software infrastructure for manually creating new tools including Planemo and the new Galaxy language server. These are complex and powerful with substantial
+learning curves but can be used to turn almost any command line software package into a tool.
 
-In stark contrast, Galaxy Interactive Environments allow unconstrained scripting in a Galaxy environment. They are popular and useful for skilled researchers
-and developers, because they can write and run code inside Galaxy that is not available in any existing tool. Notebooks can be shared and reused but cannot run in
+In contrast to normal tools, Galaxy Interactive Environments allow unconstrained scripting in a Galaxy environment. They are popular and useful for skilled researchers
+and developers, because they allow code to run inside Galaxy that is not available in any existing tool. Notebooks can be shared and reused but cannot run in
 workflows and lack the formal reproducibility provided by dependency management built-in to real tools.
 
-Working code developed in IE's can be converted into a command line script and tested using suitable small input data sets. Scripts for Galaxy tools can also be developed as
-command line scripts from scratch. Once there is a working script and sample data, it may be possible to use them to create a new Galaxy tool in a few minutes, using a
-special Galaxy tool that generates tools from scripts.
+## A bridge from scripts to tools
 
-##### *The ToolFactory provides a quick route to a real Galaxy tool once a script is working correctly with test data on the command line.*
+Any command line script that run correctly with sample test data input files and parameter settings can potentially be turned into a Galaxy tool.
+These may be derived from notebook scripts that have been consolidated and rewritten to take positional or argparse style parameters and tested
+in a shell using small data input files. Alternatively, skilled users can develop scripts and test them using small input data files on the command line
+without using Galaxy.
+
+No matter how it was created, once there is a working script and sample data, it may be possible to create a new Galaxy tool "wrapping" that script in a few minutes, using a
+special Galaxy tool that generates tools from scripts. This tutorial is designed to introduce that unusual tool.
+
 
 ## The ToolFactory generates new Galaxy tools.
 {: .no_toc}
 
-The ToolFactory is an automated, form driven code generator. It runs in Galaxy as a typical Galaxy tool, except that it will only run for an administrative
+The ToolFactory is an automated, form driven code generator.
+
+It runs in Galaxy as a typical Galaxy tool, except that it will only run for an administrative
 user. This is a minimal security precaution (see warnings below). Any scripting language command line driven interpreter supported by Conda can be used. It was
 developed for informaticians who need to create new "real" Galaxy tools for their users. Any user comfortable with scripting languages on a linux command
 line may find it useful if they ever need a real Galaxy tool that wraps a working script.
@@ -412,6 +419,7 @@ See [the tutorial on installing tools from the toolshed](https://galaxyproject.o
 > > cp $PDIR/planemo_ext/welcome.html $GALDIR/static/welcome.html.sample
 > > sed -i '/-l|-list|--list)/i \t--dev-wheels|-dev-wheels)\n\t\tshift\n\t\t;;\n' $GALDIR/run_tests.sh
 > > # planemo will not run as a tool successfully without this - something fishy with recent changes to run_tests.sh
+> > # https://github.com/galaxyproject/planemo/issues/1148
 > > sed 's/#sanitize_all_html\: true/sanitize_all_html\: false/g' $GALDIR/config/galaxy.yml.sample > $GALDIR/config/galaxy.yml
 > > # need this to see planemo html reports
 > > cp $PDIR/planemo_ext/welcome.html $GALDIR/static/welcome.html
