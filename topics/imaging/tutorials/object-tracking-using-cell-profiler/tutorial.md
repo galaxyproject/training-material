@@ -216,7 +216,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 
 > ### {% icon hands_on %} Hands-on: Colour to grayscale conversion
 >
-> 1. {% tool [ColorToGray](toolshed.g2.bx.psu.edu/repos/bgruening/cp_color_to_gray/cp_color_to_gray/3.1.9+galaxy0) %} with the following parameters:
+> 1. {% tool [ColorToGray](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_color_to_gray/cp_color_to_gray/3.1.9+galaxy0) %} with the following parameters:
 >    - *"Select the input CellProfiler pipeline"*: Connect output of **Starting Modules** {% icon tool %} to input of {% tool ColorToGray %} 
 >    - *"Enter the name of the input image"*: `OrigColor`
 >    - *"Conversion method"*: `Combine`
@@ -236,7 +236,7 @@ The first step to track nuclei starts with the identification of those objects o
 
 > ### {% icon hands_on %} Hands-on: Nuclei segmentation
 >
-> 1. {% tool [IdentifyPrimaryObjects](toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9+galaxy1) %} with the following parameters:
+> 1. {% tool [IdentifyPrimaryObjects](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **ColorToGray** {% icon tool %}
 >    - *"Use advanced settings?"*: `Yes, use advanced settings`
 >        - *"Enter the name of the input image (from NamesAndTypes)"*: `OrigGray`
@@ -270,7 +270,7 @@ Once the objects of interest (nuclei) are identified, the features that will det
 
 > ### {% icon hands_on %} Hands-on: Shape features
 >
-> 1. {% tool [MeasureObjectSizeShape](toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_size_shape/cp_measure_object_size_shape/3.1.9+galaxy0) %} with the following parameters:
+> 1. {% tool [MeasureObjectSizeShape](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_size_shape/cp_measure_object_size_shape/3.1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **IdentifyPrimaryObjects** {% icon tool %}
 >    - In *"new object"*:
 >        - {% icon param-repeat %} *"Insert new object"*
@@ -281,7 +281,7 @@ Once the objects of interest (nuclei) are identified, the features that will det
 
 > ### {% icon hands_on %} Hands-on: Intensity features
 >
-> 1. {% tool [MeasureObjectIntensity](toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_intensity/cp_measure_object_intensity/3.1.9+galaxy0) %} with the following parameters:
+> 1. {% tool [MeasureObjectIntensity](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_intensity/cp_measure_object_intensity/3.1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **MeasureObjectSizeShape** {% icon tool %}
 >    - In *"new image"*:
 >        - {% icon param-repeat %} *"Insert new image"*
@@ -298,7 +298,7 @@ Once the objects of interest (nuclei) are identified, the features that will det
 With the nuclei and the relevant features measured, we are now ready to start the tracking step!
 > ### {% icon hands_on %} Hands-on: Object tracking
 >
-> 1. {% tool [TrackObjects](toolshed.g2.bx.psu.edu/repos/bgruening/cp_track_objects/cp_track_objects/3.1.9+galaxy0) %} with the following parameters:
+> 1. {% tool [TrackObjects](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_track_objects/cp_track_objects/3.1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **MeasureObjectIntensity** {% icon tool %}
 >    - *"Enter the name of the objects to track"*: `Nuclei`
 >    - *"Choose a tracking method"*: `Overlap`
@@ -316,7 +316,7 @@ With the nuclei and the relevant features measured, we are now ready to start th
 To make sure that the tracking has gone as expected, we will have a look at the original images together with the results of the segmentation step. And we will visualize them together (in tiles) for easier comparison.
 > ### {% icon hands_on %} Hands-on: Visualize segmentation outcome
 >
-> 1. {% tool [OverlayOutlines](toolshed.g2.bx.psu.edu/repos/bgruening/cp_overlay_outlines/cp_overlay_outlines/3.1.9+galaxy0) %} with the following parameters:
+> 1. {% tool [OverlayOutlines](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_overlay_outlines/cp_overlay_outlines/3.1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **TrackObjects** {% icon tool %}
 >    - *"Display outlines on a blank image?"*: `No`
 >        - *"Enter the name of image on which to display outlines"*: `OrigGray`
@@ -332,7 +332,7 @@ To make sure that the tracking has gone as expected, we will have a look at the 
 
 > ### {% icon hands_on %} Hands-on: Tiling images
 >
-> 1. {% tool [Tile](toolshed.g2.bx.psu.edu/repos/bgruening/cp_tile/cp_tile/3.1.9+galaxy0) %} with the following parameters:
+> 1. {% tool [Tile](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_tile/cp_tile/3.1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **OverlayOutlines** {% icon tool %}
 >    - *"Enter the name of an input image"*: `OrigColor`
 >    - *"Name the output image"*: `TiledImages`
@@ -357,7 +357,7 @@ To make sure that the tracking has gone as expected, we will have a look at the 
 The tiled images and the features computed in previous steps are now exported to the Galaxy history ready to be analyzed.
 > ### {% icon hands_on %} Hands-on: Save the images
 >
-> 1. {% tool [SaveImages](toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9+galaxy1) %} with the following parameters:
+> 1. {% tool [SaveImages](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **Tile** {% icon tool %}
 >    - *"Select the type of image to save"*: `Image`
 >        - *"Saved the format to save the image(s)"*: `png`
@@ -388,7 +388,7 @@ The tiled images and the features computed in previous steps are now exported to
 
 > ### {% icon hands_on %} Hands-on: Export tabular data to character-delimited text files
 >
-> 1. {% tool [ExportToSpreadsheet](toolshed.g2.bx.psu.edu/repos/bgruening/cp_export_to_spreadsheet/cp_export_to_spreadsheet/3.1.9+galaxy1) %} with the following parameters:
+> 1. {% tool [ExportToSpreadsheet](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_export_to_spreadsheet/cp_export_to_spreadsheet/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **SaveImages** {% icon tool %}
 >    - *"Select the column delimiter"*: `Comma (",")`
 >    - *"Add a prefix to file names?"*: `Do not add prefix to the file name`
