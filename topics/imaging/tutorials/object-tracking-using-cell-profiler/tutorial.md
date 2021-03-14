@@ -23,9 +23,12 @@ contributors:
 {:.no_toc}
 
 Most biological processes are dynamic and observing them over time can provide valuable insights. Combining fluorescent markers with time-lapse imaging is a common approach to collect data on dynamic cellular processes such as cell division (e.g. {% cite Neumann2010 %}, {% cite Heriche2014%}). However, automated time-lapse imaging can produce large amounts of data that can be challenging to process. One of these challenges is the tracking of individual objects as it is often impossible to manually follow a large number of objects over many time points. 
+
 To demonstrate how automatic tracking can be applied in such situations, this tutorial will track dividing nuclei in a short time-lapse recording of one mitosis of a syncytial blastoderm stage _Drosophila_ embryo expressing a GFP-histone gene that labels chromatin.
+
 Tracking is done by first segmenting objects then linking objects between consecutive frames. Linking is done by matching objects and several criteria or matching rules are available. Here we will link objects if they significantly overlap between the current and previous frames.
 
+<br>
 
 > ### {% icon warning %} **Important information: CellProfiler in Galaxy**  
 > The Galaxy {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %} tool takes two inputs: a CellProfiler pipeline and an image collection.  
@@ -262,6 +265,8 @@ The first step to track nuclei starts with the identification of those objects o
 
 ## Feature extraction
 
+Once the objects of interest (nuclei) are identified, the features that will determine the changes of the nuclei over time will need to be measured. In this case, the shape and intensity of the nuclei will help with the identification of matching objects over time.
+
 > ### {% icon hands_on %} Hands-on: Shape features
 >
 > 1. {% tool [MeasureObjectSizeShape](toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_size_shape/cp_measure_object_size_shape/3.1.9+galaxy0) %} with the following parameters:
@@ -289,6 +294,7 @@ The first step to track nuclei starts with the identification of those objects o
 
 ## Track nuclei
 
+With the nuclei and the relevant features measured, we are now ready to start the tracking step!
 > ### {% icon hands_on %} Hands-on: Object tracking
 >
 > 1. {% tool [TrackObjects](toolshed.g2.bx.psu.edu/repos/bgruening/cp_track_objects/cp_track_objects/3.1.9+galaxy0) %} with the following parameters:
@@ -306,6 +312,7 @@ The first step to track nuclei starts with the identification of those objects o
 
 ## Visualize results
 
+To make sure that the tracking has gone as expected, we will have a look at the original images together with the results of the segmentation step. And we will visualize them together (in tiles) for easier comparison.
 > ### {% icon hands_on %} Hands-on: Visualize segmentation outcome
 >
 > 1. {% tool [OverlayOutlines](toolshed.g2.bx.psu.edu/repos/bgruening/cp_overlay_outlines/cp_overlay_outlines/3.1.9+galaxy0) %} with the following parameters:
@@ -345,6 +352,8 @@ The first step to track nuclei starts with the identification of those objects o
 
 
 ## Save the images and features
+
+The tiled images and the features computed in previous steps are now exported to the Galaxy history ready to be analyzed.
 > ### {% icon hands_on %} Hands-on: Save the images
 >
 > 1. {% tool [SaveImages](toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9+galaxy1) %} with the following parameters:
@@ -400,6 +409,7 @@ The first step to track nuclei starts with the identification of those objects o
 
 # Run the pipeline with **CellProfiler**
 
+As mentioned in the introduction, the tool {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %} takes as input the pipeline that we have been assembling over this tutorial and the input data. We are now ready to finally run CellProfiler!
 > ### {% icon hands_on %} Hands-on: Running the pipeline with CellProfiler
 >
 > 1. {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %} with the following parameters:
