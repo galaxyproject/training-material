@@ -6,11 +6,24 @@ layout: faqs
 
 {% assign faqs =  site.pages | where: "layout", "faq"  %}
 {% assign topic_faqs = faqs | where_exp: "item", "item.path contains page.snippets_dir "%}
-{% assign topic_faqs_sorted = topic_faqs | sort: "area" %}
+
+
+{% if page.area_order %}
+  {% for a in page.area_order %}
+    {% assign tmp = topic_faqs | where: "area", a %}
+    {% if forloop.first %}
+      {% assign topic_faqs_sorted = tmp %}
+    {% else %}
+      {% assign topic_faqs_sorted = topic_faqs_sorted | concat: tmp %}
+    {% endif %}
+  {% endfor %}
+{% else %}
+  {% assign topic_faqs_sorted = topic_faqs | sort: "area" %}
+{% endif %}
+
 
 
 {% assign area_prev = '' %}
-
 {% for q in topic_faqs_sorted %}
 {% unless q.area == area_prev %}
 {% unless forloop.first %} <br><br> {% endunless %}
