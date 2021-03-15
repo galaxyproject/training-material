@@ -28,7 +28,6 @@ To demonstrate how automatic tracking can be applied in such situations, this tu
 
 Tracking is done by first segmenting objects then linking objects between consecutive frames. Linking is done by matching objects and several criteria or matching rules are available. Here we will link objects if they significantly overlap between the current and previous frames.
 
-<br>
 
 > ### {% icon warning %} **Important information: CellProfiler in Galaxy**  
 > The Galaxy {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %}  tool takes two inputs: a CellProfiler pipeline and an image collection.  
