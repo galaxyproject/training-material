@@ -8,5 +8,5 @@ layout: faq
 
 - Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes
 - In the central panel, change the **Database/Build** field
-- Select your desired database key from the dropdown list: `{{ include.dbkey }}`
+- Select your desired database key from the dropdown list{% if include.dbkey %}: `{{ include.dbkey }}`{% endif %}
 - Click the **Save** button

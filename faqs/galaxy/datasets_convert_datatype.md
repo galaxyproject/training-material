@@ -7,5 +7,5 @@ layout: faq
 ---
 
 * In the central panel, click on the {% icon galaxy-gear %} **Convert** tab on the top
-* Select `{{ include.conversion }}`
+* Select {% if include.conversion %}`{{ include.conversion }}`{% else %}the appropriate datatype from the list {% endif %}
 * Click the **Convert datatype** button
