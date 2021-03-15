@@ -178,6 +178,12 @@ layout: base
                     <li class="btn btn-default supporting_material">{% include _includes/resource-tours.html material=own_material topic=topic.name label=true %}</li>
                 {% endif %}
 
+                {% assign faqpage = page.dir | append: 'faqs/index.md' | remove_first: '/' %}
+                {% capture hasfaq %}{% file_exists {{faqpage}} %}{% endcapture %}
+                {% if hasfaq == "true" %}
+                   {% include _includes/resource-faqs.html material=own_material topic=topic.name %}
+                {% endif %}
+
                 {% if tuto_has_docker and topic.name != 'admin' %}
                     <li class="btn btn-default supporting_material">{% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=own_material.tutorial_name docker=topic.docker_image label=true %}</li>
                 {% endif %}
