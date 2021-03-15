@@ -3,6 +3,12 @@ layout: tutorial_hands_on
 
 title: Object tracking using CellProfiler
 zenodo_link: http://doi.org/10.5281/zenodo.4567084
+requirements:
+  -
+    type: "internal"
+    topic_name: galaxy-interface
+    tutorials:
+        - workflow-editor
 questions:
 - How to segment and track objects in fluorescence time-lapse microscopy images?
 objectives:
@@ -29,6 +35,10 @@ To demonstrate how automatic tracking can be applied in such situations, this tu
 Tracking is done by first segmenting objects then linking objects between consecutive frames. Linking is done by matching objects and several criteria or matching rules are available. Here we will link objects if they significantly overlap between the current and previous frames.
 
 
+> ### {% icon tip %} Prerequisites
+> It is expected that you are already familiar with the Galaxy interface and the workflow editor. If this is not the case, we recommend you to complete the requirements listed at the start of this tutorial.
+{: .tip}
+
 > ### {% icon warning %} **Important information: CellProfiler in Galaxy**  
 > The Galaxy {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %}  tool takes two inputs: a CellProfiler pipeline and an image collection.  
 > Some pipelines created with stand-alone CellProfiler may not work with the Galaxy CellProfiler tool. Some reasons are:  
@@ -41,6 +51,8 @@ Tracking is done by first segmenting objects then linking objects between consec
 >
 > It is recommended to build a CellProfiler pipeline using the Galaxy interface if the pipeline is to be run by Galaxy.
 {: .warning}
+
+
 
 > ### Agenda
 >
