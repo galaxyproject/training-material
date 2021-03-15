@@ -776,9 +776,9 @@ This tutorial focused on simple gene essentiality prediction in individual sampl
 
 Once you get this list of gene, it is interesting to verify manually the genes classified as essentials. In order to do that, you can visualize the read mapped on your genome by displaying the bam files in IGV.
 
->    {% snippet faqs/galaxy/visualizations_igv_add_genome.md %}
+>    {% snippet topics/visualisation/faqs/visualizations_igv_add_genome.md %}
 
->    {% snippet faqs/galaxy/visualizations_igv_view_mapping.md %}
+>    {% snippet topics/visualisation/faqs/visualizations_igv_view_mapping.md %}
 
 When looking at the read mapping at the location of predicted essential genes, you may encounter several situation: Some gene will have no read at all mapping to them, some will have an empty region, while other will have no clearly defined empty region but a very low count of reads, possibly indicating a growth defect induced by the gene disruption.
 

@@ -1,6 +1,6 @@
 ---
 title: Add Mapped reads track to IGV from Galaxy
-area: visualization
+area: igv
 box_type: tip
 layout: faq
 ---

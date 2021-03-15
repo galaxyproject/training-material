@@ -1051,16 +1051,16 @@ JBrowse is an interactive genome browser, which has been integrated into Galaxy 
 We have embedded a copy of the resulting JBrowse here, if something went wrong during one of the steps you can always just check this output:
 
 
-{% snippet faqs/galaxy/visualizations_jbrowse.html datadir="data" %}
+{% snippet topics/visualisation/faqs/visualizations_jbrowse.html datadir="data" %}
 
 Let's start by looking at the gaps in our alignments. The deletion from our assembly is easy to see. It looks like a gap in alignments because target genomes are longer than our assembly by the amount equal to the length of the deletion. Clicking on the following links to jump to the right locations in the genome browser above:
 
 {% capture jbtracks %}DNA%2C45ccd03761795e5db829b6ab104c6a5a_0%2C0b4cc6e1931ece5bd0f487148c40ba37_0%2C36c31c84288257f526dbf55dc63fac9e_0{% endcapture %}
 
 <ul>
-  <li>{% snippet faqs/galaxy/visualizations_jbrowse_link.html datadir="data" loc="LT906474.1:3238836..3318993" tracks=jbtracks %}</li>
-  <li>{% snippet faqs/galaxy/visualizations_jbrowse_link.html datadir="data" loc="CP020543.1:3246920..3310052" tracks=jbtracks %}</li>
-  <li>{% snippet faqs/galaxy/visualizations_jbrowse_link.html datadir="data" loc="CP024090.1:3221116..3295268" tracks=jbtracks %}</li>
+  <li>{% snippet topics/visualisation/faqs/visualizations_jbrowse_link.html datadir="data" loc="LT906474.1:3238836..3318993" tracks=jbtracks %}</li>
+  <li>{% snippet topics/visualisation/faqs/visualizations_jbrowse_link.html datadir="data" loc="CP020543.1:3246920..3310052" tracks=jbtracks %}</li>
+  <li>{% snippet topics/visualisation/faqs/visualizations_jbrowse_link.html datadir="data" loc="CP024090.1:3221116..3295268" tracks=jbtracks %}</li>
 </ul>
 
 Close ups of deleted region (this region is deleted from our assembly and looks like a gap when our assembly is aligned to genomic sequences shown here). In CP0205543 and LT906474 the continuity of the region is interrupted by a small aligned region that has relatively low identity (~72%). This is a spurious alignment and can be ignored.

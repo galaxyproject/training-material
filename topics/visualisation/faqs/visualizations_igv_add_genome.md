@@ -1,7 +1,7 @@
 ---
 title: Add genome and annotations to IGV from Galaxy
 box_type: tip
-area: visualizations
+area: igv
 layout: faq
 ---
 

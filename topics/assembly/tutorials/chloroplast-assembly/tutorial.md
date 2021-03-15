@@ -255,7 +255,7 @@ Now make a JBrowse file to view the annotations (the GFF3 file - produced from e
 
 Here is an embedded snippet showing JBrowse and the annotations:
 
-{% snippet faqs/galaxy/visualizations_jbrowse.html datadir="data2" %}
+{% snippet topics/visualisation/faqs/visualizations_jbrowse.html datadir="data2" %}
 
 # View reads
 
@@ -307,7 +307,7 @@ We will look at the original sequencing reads mapped to the genome assembly. In 
 
 Here is an embedded snippet showing JBrowse and the mapped reads:
 
-{% snippet faqs/galaxy/visualizations_jbrowse.html datadir="data" %}
+{% snippet topics/visualisation/faqs/visualizations_jbrowse.html datadir="data" %}
 
 
 > ### {% icon question %} Questions
