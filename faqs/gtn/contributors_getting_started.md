@@ -40,7 +40,7 @@ Below is a checklist of things to look out for to help you get started. If you f
   - Enable [workflow testing](https://github.com/usegalaxy-eu/workflow-testing)
 - **Tours**
   - Add a tour if none exists
-  - [Run the existing tour](#how-can-i-test-an-interactive-tour) and check that it is up-to-date with the tutorial contents
+  - Run the existing tour and check that it is up-to-date with the tutorial contents
 - **Datasets**
   - Check that all datasets used in the tutorial are present in Zenodo
   - Add a data-library.yaml file if none exists

@@ -5,11 +5,11 @@ box_type: tip
 layout: faq
 ---
 
-* Click on **Operations on multiple datasets** (check box icon) at the top of the history panel ![Operations on multiple datasets button]({{site.baseurl}}/topics/galaxy-interface/images/historyItemControls.png)
+* Click on **Operations on multiple datasets** (check box icon) at the top of the history panel ![Operations on multiple datasets button]({% link topics/galaxy-interface/images/historyItemControls.png %})
 * Check all the datasets in your history you would like to include
 * Click **For all selected..** and choose **Build dataset list**
 
-   ![build list collection menu item]({{site.baseurl}}/topics/galaxy-interface/images/buildList.png){:width="15%"}
+  ![build list collection menu item]({% link topics/galaxy-interface/images/buildList.png %}){:width="15%"}
 
 * Enter a name for your collection
 * Click **Create List** to build your collection

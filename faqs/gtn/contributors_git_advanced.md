@@ -7,7 +7,7 @@ layout: faq
 
 Most of the content is written in [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/) with some metadata (or variables) found in [YAML](http://yaml.org/) files. Everything is stored on our [GitHub repository]({{ site.github_repository }}). Each training material is related to a topic. All training materials (slides, tutorials, etc) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to transcriptomic analysis). Each topic has the following <a name="structure">structure</a>:
 
-![Structure of the repository](shared/images/repo_organization.png){: width="400px"}
+![Structure of the repository]({% link shared/images/repo_organization.png %}){: width="400px"}
 
 - a metadata file in YAML format
 - a directory with the topic introduction slide deck in Markdown with introductions to the topic
@@ -54,7 +54,7 @@ Globally, the process of development of new content is open and transparent:
 16. Generation of PDF artifacts of the tutorials and slides and upload on the FTP server
 18. Population of [TeSS](https://tess.elixir-europe.org/), the ELIXIR’s Training Portal, via the metadata
 
-![Development process](shared/images/development_process.png)
+![Development process]({% link shared/images/development_process.png %})
 
 To learn how to add new content, check out our [series of tutorials on creating new content]({% link topics/contributing/index.md %}):
 
