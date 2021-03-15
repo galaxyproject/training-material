@@ -68,7 +68,7 @@ module Jekyll
              #puts box_start+y+box_end
           end
 
-          markdownify(box_start+y+box_end).gsub(/\R+/, '')
+          markdownify(box_start+y+box_end).gsub(/\R+/, '').gsub('<h3','<h3 data-toc-skip')
         end
       end
 
