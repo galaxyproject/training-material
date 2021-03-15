@@ -421,6 +421,10 @@ As mentioned in the introduction, the tool {% tool [CellProfiler](toolshed.g2.bx
 >        - {% icon param-collection %} *"Images"*: output of **Unzip** {% icon tool %}
 >    - *"Detailed logging file?"*: `Yes`
 >
+> 2. Run the workflow.
+>
+>    {% snippet snippets/run_workflow.md %}
+>
 >    > ### {% icon comment %} Comment
 >    > 
 >    > If the pipeline fails, inspect the CellProfiler log file for clues about errors.
@@ -428,6 +432,7 @@ As mentioned in the introduction, the tool {% tool [CellProfiler](toolshed.g2.bx
 >    {: .comment}
 >
 {: .hands_on}
+
 
 ![Sample output](../../images/object-tracking-using-cell-profiler/CP_object_tracking_sample_output.png "Sample of images produced by the pipeline.")
 
