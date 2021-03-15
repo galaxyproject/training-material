@@ -27,7 +27,7 @@ layout: faqs
 {% for q in topic_faqs_sorted %}
 {% unless q.area == area_prev %}
 {% unless forloop.first %} <br><br> {% endunless %}
-<h2> <a href="#{{q.area}}"> {{ q.area | capitalize}} </a></h2>
+<h2 id="{{q.area}}"> <a href="#{{q.area}}"> {{ q.area | capitalize}} </a></h2>
 <hr/>
 {% assign area_prev = q.area %}
 {% endunless %}
