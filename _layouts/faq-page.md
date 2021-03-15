@@ -3,9 +3,10 @@ layout: faqs
 ---
 
 
+{% assign snippets_dir = page.dir | remove_first: '/' %}
 
 {% assign faqs =  site.pages | where: "layout", "faq"  %}
-{% assign topic_faqs = faqs | where_exp: "item", "item.path contains page.snippets_dir "%}
+{% assign topic_faqs = faqs | where_exp: "item", "item.path contains snippets_dir "%}
 
 
 {% if page.area_order %}
