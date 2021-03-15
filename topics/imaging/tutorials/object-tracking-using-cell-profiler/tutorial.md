@@ -116,6 +116,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 {: .hands_on }
 
 The next steps will add new tools using the workflow editor.
+Remember to save the workflow when done (or anytime) to not lose your input parameters.
 
 ## Read the images
 
