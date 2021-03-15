@@ -2,8 +2,11 @@
 layout: faqs
 ---
 
-
+{% if page.snippets_dir %}
+{% assign snippets_dir = page.snippets_dir %}
+{% else %}
 {% assign snippets_dir = page.dir | remove_first: '/' %}
+{% endif %}
 
 {% assign faqs =  site.pages | where: "layout", "faq"  %}
 {% assign topic_faqs = faqs | where_exp: "item", "item.path contains snippets_dir "%}

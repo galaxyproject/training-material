@@ -1,1 +1,4 @@
-faqs/galaxy/index.md
+---
+layout: faq-page
+snippets_dir: faqs/
+---
