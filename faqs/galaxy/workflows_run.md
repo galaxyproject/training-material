@@ -1,5 +1,5 @@
 ---
-title: Running a workflos
+title: Running a workflow
 area: workflows
 box_type: tip
 layout: faq
