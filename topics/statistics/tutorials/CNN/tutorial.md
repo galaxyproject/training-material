@@ -141,6 +141,11 @@ instead of a contiguous 3 by 3 subset of the image, every other pixel of a 5 by 
 The preferred activation function used in CNN is ReLU or one its variants like Leaky ReLU ({% cite NwankpaEtAl %}). It introduces no-linearity by 
 leaving pixels with positive values in convolution result as is, and replacing negative values with 0 (or a small number in case of Leaky ReLU).  
 
+Given the input size, filter size, padding, stride and dilation you can calculate the output size of the convolution operation as below. Note that 
+for dilation 1, the dilation term is ignored (replaced by 0). 
+
+$$ \frac{(\text{input size} - \text{filter size + dilation}) + (2*padding)}{stride} + 1 $$
+
 # Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
