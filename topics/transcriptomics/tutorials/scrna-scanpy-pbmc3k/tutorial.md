@@ -49,7 +49,7 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 > ### {% icon comment %} Comment
 >
-> This tutorial is significantly based on ["Clustering 3K PBMCs" tutorial from Scanpy](https://scanpy-tutorials.readthedocs.io/en/latest/pbmc3k.html#Clustering-3K-PBMCs), ["Seurat - Guided Clustering Tutorial"](https://satijalab.org/seurat/v3.1/pbmc3k_tutorial.html) and ["Orchestrating Single-Cell Analysis with Bioconductor"](https://osca.bioconductor.org/) {% cite amezquita2019orchestrating %}
+> This tutorial is significantly based on ["Clustering 3K PBMCs" tutorial from Scanpy](https://scanpy-tutorials.readthedocs.io/en/latest/pbmc3k.html#Clustering-3K-PBMCs), ["Seurat - Guided Clustering Tutorial"](https://satijalab.org/seurat/v3.1/pbmc3k_tutorial.html) and ["Orchestrating Single-Cell Analysis with Bioconductor"](https://osca.bioconductor.org/) {% cite amezquita2019orchestrating %}.
 >
 {: .comment}
 
@@ -1927,3 +1927,7 @@ In this tutorial, we investigated clustering and annotation of single-cell data 
     2. Clustering of the neighborhood graph into 8 clusters of cells
 4. Identification of marker genes for the clusters
 5. Annotation of the clusters with cell types
+
+This tutorial is part of the https://singlecell.usegalaxy.eu portal ({% cite tekman2020single %}).
+
+
