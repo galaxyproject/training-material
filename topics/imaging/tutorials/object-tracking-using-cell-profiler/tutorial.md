@@ -121,6 +121,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 {: .details}
 
 ## Create a new workflow
+> ### {% icon hands_on %} Hands-on: Creating a new workflow
 > 1. Create a new workflow
 >
 >    {% snippet snippets/create_new_workflow.md %}
