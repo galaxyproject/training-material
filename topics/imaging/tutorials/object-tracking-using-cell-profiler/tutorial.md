@@ -338,7 +338,7 @@ To make sure that the tracking has gone as expected, we will have a look at the 
 >            - In *"Outline"*:
 >                - {% icon param-repeat %} *"Insert Outline"*
 >                    - *"Enter the name of the objects to display"*: `Nuclei`
->                    - *"Select outline color"*: `#ff0000`
+>                    - *"Select outline color"*: {% color_picker #ff000 %} (red)
 >    - *"Name the output image"*: `OutlineImage`
 >    - *"How to outline"*: `Inner`
 >
