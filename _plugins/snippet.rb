@@ -37,15 +37,21 @@ module Jekyll
         context.stack do
           context["include"] = parse_params(context) if @params
           x = "#{inclusion.render(context)}"
+          p = context["include"]
+
           box_start=""
           box_end=""
           if x.slice(0, 3) == '---'
             metadata = YAML.load(x)
 
-            #puts metadata
-            box_type = metadata['box_type']
-
+            # allow overriding box type with include parameter ("none" to render without a box)
+            if not p.nil? and p["box_type"]
+                box_type = p["box_type"]
+            else
+                box_type = metadata['box_type']
+            end
             icons = get_config(context)
+
             if box_type == 'tip'
                 icon_text = icons['tip']
                 box_start = '> ### '+get_icon(icon_text)+' Tip: ' + metadata['title']

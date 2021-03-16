@@ -832,6 +832,23 @@ Which will be rendered as:
 
 The advantage of this approach is that when the Galaxy interface updates, we only have to update the snippet, rather than every tutorial. Please try to use snippets whenever you can!
 
+You could also specify the box type you want the snippet to be rendered in:
+
+```
+{% raw %}{% snippet faqs/galaxy/histories_create_new.md box_type="hands_on" %}{% endraw %}
+```
+
+{% snippet faqs/galaxy/histories_create_new.md box_type="hands_on" %}
+
+or without a box altogether:
+
+```
+{% raw %}{% snippet faqs/galaxy/histories_create_new.md box_type="none" %}{% endraw %}
+```
+
+{% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
+
+
 ### Creating new FAQs/snippets
 
 Do you want to include something in your tutorial that you think might be useful in other tutorials as well? Or are you answering a frequently asked question? Consider creating a snippet for it

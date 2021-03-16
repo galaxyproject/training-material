@@ -41,6 +41,10 @@ Here you can write the answer in Markdown
 
 These FAQs can be included as snippets inside tutorials as well: `{% snippet faqs/galaxy/workflows_run.md %}`
 
+If you would like to override the default box type, supply an include variable: `{% snippet faqs/galaxy/workflows_run.md box_type="hands_on" %}`
+or to render without a box: `{% snippet faqs/galaxy/workflows_run.md box_type="none"  %}`
+
+
 ## FAQ page
 
 We automatically generate a page containing all FAQs in that directory (and any possible subdirectories)
