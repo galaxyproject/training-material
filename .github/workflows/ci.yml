@@ -30,7 +30,7 @@ jobs:
 
   lint-frontmatter:
     needs: setup
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     strategy:
       matrix:
         ruby: [2.5]
@@ -55,7 +55,7 @@ jobs:
       - run: make check-frontmatter ACTIVATE_ENV=pwd
 
   lint-workflows:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
         with:
@@ -65,7 +65,7 @@ jobs:
           make check-workflows
 
   lint-tool-links:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
         with:
@@ -75,7 +75,7 @@ jobs:
           make check-tool-links
 
   lint-data-lib-yaml:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
         with:
@@ -86,7 +86,7 @@ jobs:
 
   build-site:
     needs: setup
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     strategy:
       matrix:
         ruby: [2.5]
@@ -113,7 +113,7 @@ jobs:
           bundle exec htmlproofer \
             --assume-extension \
             --http-status-ignore 405,429,503,999 \
-            --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#.*/" \
+            --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#.*/,/#embedded_json/" \
             --url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${GITHUB_REPOSITORY}/tree/${GITHUB_HEAD_REF}" \
             --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
             --allow-hash-href \
