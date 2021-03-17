@@ -105,8 +105,6 @@ We need to:
 
 A pipeline is built by chaining together Galaxy tools representing CellProfiler modules and must start with the {% tool [Starting modules](toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9+galaxy1) %} tool and end with the {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %}  tool.  
 
-
-
 ![Image of the workflow](../../images/object-tracking-using-cell-profiler/CP_object_tracking_pipeline.png "Overview of the CellProfiler pipeline using Galaxy tools.")
 
 
@@ -120,7 +118,9 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .details}
 
+
 ## Create a new workflow
+
 > ### {% icon hands_on %} Hands-on: Creating a new workflow
 > 1. Create a new workflow
 >
@@ -130,6 +130,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 
 The next steps will add new tools using the workflow editor.
 Remember to save the workflow when done (or anytime) to not lose your input parameters.
+
 
 ## Read the images
 
@@ -142,6 +143,7 @@ Remember to save the workflow when done (or anytime) to not lose your input para
 >
 >
 {: .hands_on}
+
 
 ## Get the metadata
 
@@ -226,6 +228,7 @@ Remember to save the workflow when done (or anytime) to not lose your input para
 > {: .solution}
 >
 {: .question}
+
 
 ## Convert the images to grayscale
 
@@ -422,6 +425,7 @@ The tiled images and the features computed in previous steps are now exported to
 >    {: .comment}
 >
 {: .hands_on}
+
 
 # Run the pipeline with **CellProfiler**
 
