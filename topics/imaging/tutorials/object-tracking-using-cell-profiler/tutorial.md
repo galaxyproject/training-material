@@ -284,7 +284,7 @@ The first step to track nuclei starts with the identification of those objects o
 
 ## Feature extraction
 
-Once the objects of interest (nuclei) are identified, the features that will determine the changes of the nuclei over time will need to be measured. In this case, the shape and intensity of the nuclei will help with the identification of matching objects over time.
+Once the objects of interest (nuclei) are identified, we extract features, i.e. numerical descriptors of object properties. We do this because we may be interested in analysing the evolution of these properties over time or want to use them in the tracking procedure to match objects over time.
 
 > ### {% icon hands_on %} Hands-on: Shape features
 >
