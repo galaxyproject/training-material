@@ -37,7 +37,7 @@ With the increasing popularity of social media in the past decade, image and vid
 important. The previous neural network architectures (e.g. feedforward neural networks) could not scale up to handle 
 image and video processing tasks. This gave way to the development of convolutional neural networks that are specifically 
 tailroed to image and video processing tasks. In this tutorial, we explain what convolutional neural networks are, discuss 
-their architecture, and solve an image classification problem using MNIST digit classification dataset using CNN in Galaxy.
+their architecture, and solve an image classification problem using MNIST digit classification dataset using a CNN in Galaxy.
 
 > ### Agenda
 >
@@ -50,36 +50,44 @@ their architecture, and solve an image classification problem using MNIST digit 
 
 # Limitations of feedforward neural networks (FNN) for image processing
 
-In a fully connected, multi-layer FNN (Figure 1), all the nodes in a layer are connected to all the nodes in the next layer. Each 
-connection has a weight $$ w_{i,j} $$ that needs to be learned by the learning algorithm. Lets say our input is a 64 pixel by 64 pixel 
-graysacle image. Such image can be represented by 64 X 64 X 1 = 4,096 values. Usually, each value is between 0 to 255, where 0 represents 
-black, 255 represents white, and the values in between represent various shades of gray. Hence, the input layer of a FNN processing such an 
-image has 4096 nodes. Lets assume the next layer has 500 nodes. Since all the nodes in subsequent layers are connected, we will have 
-4,096 X 500 = 2,048,000 weights between the input and the first hidden layer. For complex problems, we usually need multiple hidden layers 
-in our FNN, as simpler FNN may not be able to learn the model mapping the input to output. Having multiple hidden layers compounds the problem 
-of having many weights in our FNN. Having many weights makes the learning process more difficult, and more time and resource consuming. The 
-problem is further compunded for color images. Unlike grayscale images, each pixel is represented by 3 values, representing Red, Green, and 
-Blue colors (Called RGB color model, where every color can be represented by various combination of primary colors). So, a 64 pixel by 64 pixel 
-color image is represented by 64 X 64 X 3 = 12,288 values. The number of weights between the input layer and the first hidden layer with 500 nodes 
-is now 12,288 X 500 = 6,144,000. It is clear thani FNN cannot scale to handle larger images ({% cite OSheaEtAl %}) and we need a new architecture. 
+In a fully connected FNN (Figure 1), all the nodes in a layer are connected to all the nodes in the next layer. Each connection has a weight 
+$$ w_{i,j} $$ that needs to be learned by the learning algorithm. Lets say our input is a 64 pixel by 64 pixel graysacle image. Each grayscale 
+pixel is represented by 1 value, usually between 0 to 255, where 0 represents black, 255 represents white, and the values in between represent 
+various shades of gray. Since each grayscale pixel can be represnetd by 1 value, we say the *channel* size is 1. Such an image can be represented 
+by 64 X 64 X 1 = 4,096 values (rows X columns X channels). Hence, the input layer of a FNN processing such an image has 4096 nodes. 
+
+Lets assume the next layer has 500 nodes. Since all the nodes in subsequent layers are fully connected, we will have 4,096 X 500 = 2,048,000 weights 
+between the input and the first hidden layer. For complex problems, we usually need multiple hidden layers in our FNN, as a simpler FNN may not be 
+able to learn the model mapping the inputs to outputs in the training data. Having multiple hidden layers compounds the problem of having many weights 
+in our FNN. Having many weights makes the learning process more difficult as the dimension of the search space is increased. It also makes the training 
+more time and resource consuming and increases the likelihood of overfitting. This problem is further compunded for color images. Unlike grayscale 
+images, each pixel in a color image is represented by 3 values, representing red, green, and blue colors (Called RGB color mode), where every color 
+can be represented by various combination of these primary colors. Since each color pixel can be represented by 3 values, we say the **channel** size 
+is 3. Such an image can be represented by 64 X 64 X 3 = 12,288 values (rows X columns X channels). The number of weights between the input layer and 
+the first hidden layer with 500 nodes is now 12,288 X 500 = 6,144,000. It is clear that a FNN cannot scale to handle larger images 
+({% cite OSheaEtAl %}) and that we need a more scalable architecture. 
 
 ![Neurons forming the input, output, and hidden layers of a multi-layer feedforward neural network](../../images/FFNN.png "Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are omitted for clarity")
 
 Another problem with using FNN for image processing is that a 2 dimensional image is represented as a 1 dimensional vector in the input layer, 
-hence, any spatial structure of the data is ignored. CNN, on the other hand, maintain the spatial structure of the data and are better suited to 
-finding spatial patterns in the image data.     
+hence, any spatial relationship in the data is ignored. CNN, on the other hand, maintains the spatial structure of the data, is better suited to 
+finding spatial relationships in the image data.     
 
 ## Inspiration for convolutional neural networks  
 
 In 1959 Hubel and Wiesel conducted an experiment to understand how the visual cortex of the brain processes visual information {% cite HubelWiesel %}. 
 They recorded the activity of the neurons in visual cortex of a cat while moving a bright line in front of the cat. They noticed that some cells fire 
 when the bright line is shown at a particular angle and a particular location (They called these **simple** cells). Other neurons fired when the bright
-line regardless of the angle/location and seemed to detect movement (They called these **complex** cells). It seemed complex cells receive inputs 
-multiple simple cells and have an hierarchical structure. Hubel and Wiesel won the Noble prize for their findings in 1981.
+line was shown regardless of the angle/location and seemed to detect movement (They called these **complex** cells). It seemed complex cells receive 
+inputs multiple simple cells and have an hierarchical structure. Hubel and Wiesel won the Noble prize for their findings in 1981.
 
 In 1980, inspired by hierarchical structure of complex and simple cells, Fukushima proposed Neocognitron ({% cite Fukishima %}), a hierarchical neural 
-network used for handwritten Japanese character recognition.In 1989, LeCun et. al. ({% cite LeCunEtAl %}) proposed a CNN that could be trained by 
-backpropagation algorithm. 
+network used for handwritten Japanese character recognition. Neocognitron was the first CNN, but had its own training algorithm. In 1989, LeCun et. al. 
+({% cite LeCunEtAl %}) proposed a CNN that could be trained by backpropagation algorithm. CNN gained immense popularity when they outperformed other 
+models at ILSVRC (ImageNet Large Scale Visual Recognition Challenge). ILSVRC is a competition in object classification and detection on hundreds of 
+object categories and millions of images. The challenge has been run annually from 2010 to present, attracting participation from more than fifty 
+institutions ({% cite RussakovskyEtAl %}). Notable CNN architectures that won ILSVRC are AlexNet in 2012 ({% cite KrizhevskyEtAl %}), ZFNet in 2013 (
+{% cite ZeilerEtAl %}), GoogLeNet and VGG in 2014 ({% cite SzegedyEtAl %}, {% cite SimonyanEtAl %}), and ResNet in 2015 ({% cite HeEtAl %}).
 
 ## Architecture of CNN
 
@@ -92,9 +100,13 @@ A typical CNN has the following 4 layers ({% cite OSheaEtAl %})
 
 Please note that we will explain a 2 dimensional (2D) CNN here. But the same concepts apply to a 1 (or 3) dimensional CNN as well. 
 
+### Input layer
+
 The input layer is the input to the CNN. An example input, could be a 28 pixel by 28 pixel grayscale image. Unlike FNN, we do not 
 "flatten" the input to a 1D vector, and the input is presented to the network in 2D as a 28 x 28 matrix. This makes capturing 
 spatial relationships easier.  
+
+### Convolution layer
 
 The convolution layer is composed of multiple filters (also called kernels). Filters for a 2D image are also 2D. Suppose we have 
 a 28 pixel by 28 pixel grayscale image. Each pixel is represented by a number between 0 and 255, where 0 represents the color black, 
@@ -130,21 +142,35 @@ values (and adding them), we move the filter to the right and repeat the process
 In figure 2 and 3, the stride of the filter is 1. We move the filter one pixel to the right (or down). But we could use a different stride. Figure 4 
 shows an example of using stride of 2.
 
-![A 3 by 3 filter applied to a 5 by 5 image, with stride of 2, resulting in a 2 by 2 image](../../images/Conv_no_padding_strides.gif "A 3 by 3 filter applied to a 5 by 5 image, with stride of 2, resulting in a 2 by 2 image") 
+![A 3 by 3 filter applied to a 5 by 5 image, with stride of 2, resulting in a 2 by 2 image](../../images/Conv_no_padding_strides.gif "A 3 by 3 filter applied to a 5 by 5 image, with stride of 2, resulting in a 2 by 2 image ({% cite DumoulinVisin %})") 
 
 When we apply a, say 3 by 3, filter to an image, our filter's output is affected by pixels in a 3 by 3 subset of the image. If we like to have a 
-larger *receptive field* (portion of the image that affect our filter's output), we could use *dilation*. If we set the dilation to 2 (Figure 6),
+larger *receptive field* (portion of the image that affect our filter's output), we could use *dilation*. If we set the dilation to 2 (Figure 5),
 instead of a contiguous 3 by 3 subset of the image, every other pixel of a 5 by 5 subset of the image affects the filter's output.
 
-![A 3 by 3 filter applied to a 7 by 7 image, with dilation of 2, resulting in a 3 by 3 image](../../images/Conv_dilation.gif "A 3 by 3 filter applied to a 7 by 7 image, with dilation of 2, resulting in a 3 by 3 image") 
+![A 3 by 3 filter applied to a 7 by 7 image, with dilation of 2, resulting in a 3 by 3 image](../../images/Conv_dilation.gif "A 3 by 3 filter applied to a 7 by 7 image, with dilation of 2, resulting in a 3 by 3 image ({% cite DumoulinVisin %})") 
 
 The preferred activation function used in CNN is ReLU or one its variants like Leaky ReLU ({% cite NwankpaEtAl %}). It introduces no-linearity by 
 leaving pixels with positive values in convolution result as is, and replacing negative values with 0 (or a small number in case of Leaky ReLU).  
 
-Given the input size, filter size, padding, stride and dilation you can calculate the output size of the convolution operation as below. Note that 
-for dilation 1, the dilation term is ignored (replaced by 0). 
+Given the input size, filter size, padding, stride and dilation you can calculate the output size of the convolution operation as below.  
 
-$$ \frac{(\text{input size} - \text{filter size + dilation}) + (2*padding)}{stride} + 1 $$
+$$ \frac{(\text{input size} - \text{(filter size + (filter size -1)*(dilation - 1)})) + (2*padding)}{stride} + 1 $$
+
+### Pooling layer
+
+The pooling layer performs down sampling to reduce the spatial dimensionality of the input. This decreases the number of parameters, which in turn 
+reduces the learning time and computation, and the likelihood of overfitting. The most popular type of pooling is *max pooling*. Its usually a 2 by 2 
+filter with a stride of 2 that returns the maximum value as it slides over the input data (similar to convolution filters).    
+
+![A convolutional neural network with 3 convolution layers followed by 3 pooling layers](../../images/Conv_CNN.png "A convolutional neural network with 3 convolution layers followed by 3 pooling layers ({% cite OSheaEtAl %})") 
+
+As shown in Figure 6, a typical CNN usually has more than one convolution layer followed by a pooling layer. Convolution plus pooling layer is responsible  
+
+### Fully connected layer
+
+The last layer in a CNN is a fully connected layer. We connect all the nodes from the previous layer to this fully connected layer, which is responsible 
+for classification of the image.
 
 # Get data
 
