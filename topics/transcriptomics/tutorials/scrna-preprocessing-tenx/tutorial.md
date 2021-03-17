@@ -249,12 +249,12 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 
 > ### {% icon comment %} Comment
 >
-> {% tool [RNA STARsolo](toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.7a) %} consumes a large amount of memory. During the Smörgåsbord training please use `Human (Homo Sapiens): hg19 chrX` as the reference genome if you follow this tutorial on [usegalaxy.org](https://usegalaxy.org). This performs the mapping only against chromosome X. The full output dataset is available at [zenodo](https://zenodo.org/record/3581213/files/matrix.mtx) and will be the starting point for the next tutorial.
+> {% tool [RNA STARsolo](toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a) %} consumes a large amount of memory. During the Smörgåsbord training please use `Human (Homo Sapiens): hg19 chrX` as the reference genome if you follow this tutorial on [usegalaxy.org](https://usegalaxy.org). This performs the mapping only against chromosome X. The full output dataset is available at [zenodo](https://zenodo.org/record/3581213/files/matrix.mtx) and will be the starting point for the next tutorial.
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on
 >
-> {% tool [RNA STARsolo](toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.7a) %}  with the following parameters:
+> {% tool [RNA STARsolo](toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a) %}  with the following parameters:
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
 >            - *"Select reference genome"*: `Human (Homo Sapiens): hg19 Full` or `Human (Homo Sapiens): hg19 chrX`
@@ -271,7 +271,7 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 >    - Under *"Advanced Settings"*:
 >        - *"Strandedness of Library"*: `Forward`
 >        - *"Collect UMI counts for these genomic features"*: `Gene: Count reads matching the Gene Transcript`
->        - *"Type of UMI filtering"*: `Remove lower-count UMIs that map to more than one gene (introduced in CellRanger 3.x.x)`
+>        - *"Type of UMI filtering"*: `Remove lower-count UMIs that map to more than one gene, matching CellRanger 3.0.0`
 >        - *"Cell filter type and parameters"*: `Do not filter`
 >
 >    > ### {% icon comment %} Comment
@@ -301,7 +301,7 @@ Let us investigate the output log. This type of quality control is essential in 
 
 > ### {% icon hands_on %} Hands-on
 >
-> {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %} with the following parameters:
+> {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1) %} with the following parameters:
 >    - In *"Results"*:
 >      - In *"1:Results"*:
 >        - *"Which tool was used generate logs?"*: `STAR`
