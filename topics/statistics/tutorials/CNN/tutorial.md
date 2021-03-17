@@ -48,12 +48,12 @@ their architecture, and solve an image classification problem using MNIST digit 
 >
 {: .agenda}
 
-# Limitations of feedforward neural networks (FNN) for image processing
+## Limitations of feedforward neural networks (FNN) for image processing
 
 In a fully connected FNN (Figure 1), all the nodes in a layer are connected to all the nodes in the next layer. Each connection has a weight 
-$$ w_{i,j} $$ that needs to be learned by the learning algorithm. Lets say our input is a 64 pixel by 64 pixel graysacle image. Each grayscale 
+$$ w_{i,j} $$ that needs to be learned by the learning algorithm. Lets say our input is a 64 pixel by 64 pixel grayscale image. Each grayscale 
 pixel is represented by 1 value, usually between 0 to 255, where 0 represents black, 255 represents white, and the values in between represent 
-various shades of gray. Since each grayscale pixel can be represnetd by 1 value, we say the *channel* size is 1. Such an image can be represented 
+various shades of gray. Since each grayscale pixel can be represented by 1 value, we say the *channel* size is 1. Such an image can be represented 
 by 64 X 64 X 1 = 4,096 values (rows X columns X channels). Hence, the input layer of a FNN processing such an image has 4096 nodes. 
 
 Lets assume the next layer has 500 nodes. Since all the nodes in subsequent layers are fully connected, we will have 4,096 X 500 = 2,048,000 weights 
@@ -70,19 +70,19 @@ the first hidden layer with 500 nodes is now 12,288 X 500 = 6,144,000. It is cle
 ![Neurons forming the input, output, and hidden layers of a multi-layer feedforward neural network](../../images/FFNN.png "Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are omitted for clarity")
 
 Another problem with using FNN for image processing is that a 2 dimensional image is represented as a 1 dimensional vector in the input layer, 
-hence, any spatial relationship in the data is ignored. CNN, on the other hand, maintains the spatial structure of the data, is better suited to 
-finding spatial relationships in the image data.     
+hence, any spatial relationship in the data is ignored. CNN, on the other hand, maintains the spatial structure of the data, and is better suited 
+for finding spatial relationships in the image data.
 
 ## Inspiration for convolutional neural networks  
 
 In 1959 Hubel and Wiesel conducted an experiment to understand how the visual cortex of the brain processes visual information {% cite HubelWiesel %}. 
-They recorded the activity of the neurons in visual cortex of a cat while moving a bright line in front of the cat. They noticed that some cells fire 
+They recorded the activity of the neurons in the visual cortex of a cat while moving a bright line in front of the cat. They noticed that some cells fire 
 when the bright line is shown at a particular angle and a particular location (They called these **simple** cells). Other neurons fired when the bright
 line was shown regardless of the angle/location and seemed to detect movement (They called these **complex** cells). It seemed complex cells receive 
 inputs multiple simple cells and have an hierarchical structure. Hubel and Wiesel won the Noble prize for their findings in 1981.
 
 In 1980, inspired by hierarchical structure of complex and simple cells, Fukushima proposed Neocognitron ({% cite Fukishima %}), a hierarchical neural 
-network used for handwritten Japanese character recognition. Neocognitron was the first CNN, but had its own training algorithm. In 1989, LeCun et. al. 
+network used for handwritten Japanese character recognition. Neocognitron was the first CNN, and had its own training algorithm. In 1989, LeCun et. al. 
 ({% cite LeCunEtAl %}) proposed a CNN that could be trained by backpropagation algorithm. CNN gained immense popularity when they outperformed other 
 models at ILSVRC (ImageNet Large Scale Visual Recognition Challenge). ILSVRC is a competition in object classification and detection on hundreds of 
 object categories and millions of images. The challenge has been run annually from 2010 to present, attracting participation from more than fifty 
@@ -102,7 +102,7 @@ Please note that we will explain a 2 dimensional (2D) CNN here. But the same con
 
 ### Input layer
 
-The input layer is the input to the CNN. An example input, could be a 28 pixel by 28 pixel grayscale image. Unlike FNN, we do not 
+The input layer represents the input to the CNN. An example input, could be a 28 pixel by 28 pixel grayscale image. Unlike FNN, we do not 
 "flatten" the input to a 1D vector, and the input is presented to the network in 2D as a 28 x 28 matrix. This makes capturing 
 spatial relationships easier.  
 
@@ -114,11 +114,11 @@ a 28 pixel by 28 pixel grayscale image. Each pixel is represented by a number be
 values in total), and the values are randomly set to 0 or 1. Convolution is the process of placing the 3 by 3 filter on the top left 
 corner of the image, multiplying filter values by the pixel values and adding the result, moving the filter to the right one pixel at 
 a time and repeating this process. When we get to the top right corner of the image, we simply move the filter down one pixel and 
-restart from the right. This process ends when we get to the bottom right side of the image.  
+restart from the right. This process ends when we get to the bottom right corner of the image.  
 
 ![A 3 by 3 filter applied to a 4 by 4 image, resulting in a 2 by 2 image](../../images/Conv_no_padding_no_strides.gif "A 3 by 3 filter applied to a 4 by 4 image, resulting in a 2 by 2 image ({% cite DumoulinVisin %})")
 
-Covolution operator has the following parameters
+Covolution operator has the following parameters:
 
 1. Filter size
 2. Padding
@@ -126,14 +126,13 @@ Covolution operator has the following parameters
 4. Dilation
 5. Activation function
 
-Filter size can be 5 by 5, 3 by 3, and so on. Larger filter sizes should be avoided as the learning algorithm needs to learn filter value (weights), 
-and larger filters increase the number of weights to be learned (more compute capacity and more training time). Also, odd sized filters are preferred 
-to even sized filters, due to the geometric property of all the input pixels being around the output pixel.  
+Filter size can be 5 by 5, 3 by 3, and so on. Larger filter sizes should be avoided as the learning algorithm needs to learn filter values (weights), 
+and larger filters increase the number of weights to be learned (more compute capacity, more training time, more chance of overfitting). Also, odd 
+sized filters are preferred to even sized filters, due to the nice geometric property of all the input pixels being around the output pixel.  
 
-If you look at Figure 2 you see that after applying a 3 by 3 filter to a 4 by 4 
-image, we end up with a 2 by 2 image -- the size of the image has gone down. If we want to keep the resultant image size the same, we can use 
-*padding*. We pad the input in every direction with 0's before applying the filter. If the padding is 1 by 1, then we add 1 zero in evey direction.
-If its 2 by 2, then we add 2 zeros in every direction, and so on.   
+If you look at Figure 2 you see that after applying a 3 by 3 filter to a 4 by 4 image, we end up with a 2 by 2 image -- the size of the image has gone 
+down. If we want to keep the resultant image size the same, we can use *padding*. We pad the input in every direction with 0's before applying the 
+filter. If the padding is 1 by 1, then we add 1 zero in evey direction. If its 2 by 2, then we add 2 zeros in every direction, and so on.
 
 ![A 3 by 3 filter applied to a 5 by 5 image, with padding of 1, resulting in a 5 by 5 image](../../images/Conv_same_padding_no_strides.gif "A 3 by 3 filter applied to a 5 by 5 image, with padding of 1, resulting in a 5 by 5 image ({% cite DumoulinVisin %})")
 
@@ -150,8 +149,12 @@ instead of a contiguous 3 by 3 subset of the image, every other pixel of a 5 by 
 
 ![A 3 by 3 filter applied to a 7 by 7 image, with dilation of 2, resulting in a 3 by 3 image](../../images/Conv_dilation.gif "A 3 by 3 filter applied to a 7 by 7 image, with dilation of 2, resulting in a 3 by 3 image ({% cite DumoulinVisin %})") 
 
-The preferred activation function used in CNN is ReLU or one its variants like Leaky ReLU ({% cite NwankpaEtAl %}). It introduces no-linearity by 
-leaving pixels with positive values in convolution result as is, and replacing negative values with 0 (or a small number in case of Leaky ReLU).  
+After the filter scan the whole image, we apply an activation function to filter output to introduce non-linearlity. The preferred activation function 
+used in CNN is ReLU or one its variants like Leaky ReLU ({% cite NwankpaEtAl %}). ReLU leavs pixels with positive values in filter output as is, and 
+replacing negative values with 0 (or a small number in case of Leaky ReLU). Figure 6 shows the results of applying ReLU activation function to a filter
+output. 
+
+![Two matrices representing filter output before and after ReLU activation function is applied](../../images/Conv_ReLU.png "Applying ReLU activation function to filter output")
 
 Given the input size, filter size, padding, stride and dilation you can calculate the output size of the convolution operation as below.  
 
@@ -159,9 +162,9 @@ $$ \frac{(\text{input size} - \text{(filter size + (filter size -1)*(dilation - 
 
 ![One matrix representing an input vector and another matrix representing a filter, along with calculation for single input channel two dimensional convolution operation ](../../images/Conv_single_input_channel.png "Illustration of single input channel two dimensional convolution")
 
-Figure 6 illustrates the calculations for a convolution operation, via a 3 by 3 filter on a single channel 5 by 5 input vector (5 x 5 x 1). Figure 7 
-illusrates the calculations when the input vector has 3 channels (5 x 5 x 3). To show this in 2 dimesions, we are displaying each channel in input 
-vector and filter separately. To view it in 3 dimension, please visit . 
+Figure 7 illustrates the calculations for a convolution operation, via a 3 by 3 filter on a single channel 5 by 5 input vector (5 x 5 x 1). Figure 8 
+illusrates the calculations when the input vector has 3 channels (5 x 5 x 3). To show this in 2 dimensions, we are displaying each channel in input 
+vector and filter separately. Figure 9 shows a sample multi-channel 2D convolution in 3 dimensions. 
 
 ![Three matrices representing an input vector and another three matrices representing a filter, along with calculation for multiple input channel two dimensional convolution operation ](../../images/Conv_multiple_input_channel.png "Illustration of multiple input channel two dimensional convolution")
 
@@ -175,7 +178,11 @@ filter with a stride of 2 that returns the maximum value as it slides over the i
 
 ![A convolutional neural network with 3 convolution layers followed by 3 pooling layers](../../images/Conv_CNN.png "A convolutional neural network with 3 convolution layers followed by 3 pooling layers ({% cite OSheaEtAl %})") 
 
-As shown in Figure 8, a typical CNN usually has more than one convolution layer followed by a pooling layer. Convolution plus pooling layer is responsible  
+As shown in Figure 10, a typical CNN usually has more than one convolution layer plus pooling layer. Each convolution plus pooling layer is responsible
+for feature extraction at a different level of abstraction. For example, the filters in the first layer could detect horizental, vertical, and diagonal 
+edges. The filters in the next layer could detect shapes, and thefilters in the last layer could detect collection of shapes. Filter values are randomly
+initialized and are learned by the learning algorithm. This makes CNN very powerful as they not only do classification, but can also automatically do 
+feature extraction. This distinguishes CNN from other classification techniques (like Support Vector Machines), which cannot do feature extraction.    
 
 ### Fully connected layer
 
