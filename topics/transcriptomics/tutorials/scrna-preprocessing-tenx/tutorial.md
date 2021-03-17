@@ -531,5 +531,6 @@ A full pipeline which produces both an AnnData and tabular file for inspection i
 
 Note that, since version *2.7.7a* of the tool, the entire *Cell Ranger* pipeline including the filtering can be performed natively within **RNA STARsolo**. As this is still a relatively new feature, we do not use it here in this tutorial, but eager users are encouraged to try it out.
 
+This tutorial is part of the https://singlecell.usegalaxy.eu portal ({% cite tekman2020single %}).
 
 <!-- ![Recap of workflow]({% link topics/transcriptomics/images/scrna_workflow.svg %} "A recap of the entire workflow") -->
