@@ -1312,7 +1312,7 @@ Currently, the Louvain graph-clustering method (community detection based on opt
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP`
 >    - *"Method used for plotting"*: `Cluster cells into subgroups, using 'tl.louvain'`
 >       - *"Flavor for the clustering"*: `vtraag (much more powerful)`
->         - *"Resolution"*: `0.5`
+>         - *"Resolution"*: `0.45`
 >
 > 2. Rename the generated output `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering`
 >
