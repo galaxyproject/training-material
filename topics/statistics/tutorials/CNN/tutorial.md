@@ -157,6 +157,16 @@ Given the input size, filter size, padding, stride and dilation you can calculat
 
 $$ \frac{(\text{input size} - \text{(filter size + (filter size -1)*(dilation - 1)})) + (2*padding)}{stride} + 1 $$
 
+![One matrix representing an input vector and another matrix representing a filter, along with calculation for single input channel two dimensional convolution operation ](../../images/Conv_single_input_channel.png "Illustration of single input channel two dimensional convolution")
+
+Figure 6 illustrates the calculations for a convolution operation, via a 3 by 3 filter on a single channel 5 by 5 input vector (5 x 5 x 1). Figure 7 
+illusrates the calculations when the input vector has 3 channels (5 x 5 x 3). To show this in 2 dimesions, we are displaying each channel in input 
+vector and filter separately. To view it in 3 dimension, please visit . 
+
+![Three matrices representing an input vector and another three matrices representing a filter, along with calculation for multiple input channel two dimensional convolution operation ](../../images/Conv_multiple_input_channel.png "Illustration of multiple input channel two dimensional convolution")
+
+![Multiple cubes representing input vector, filter, and output in a 3 channel 2 dimensional convolution operation](../../images/Conv_multiple_channel_3d.gif "Three dimensional illustration of 3 input channel 2D convolution operation (Source: https://thomelane.github.io/convolutions/2DConvRGB.html)")
+
 ### Pooling layer
 
 The pooling layer performs down sampling to reduce the spatial dimensionality of the input. This decreases the number of parameters, which in turn 
@@ -165,7 +175,7 @@ filter with a stride of 2 that returns the maximum value as it slides over the i
 
 ![A convolutional neural network with 3 convolution layers followed by 3 pooling layers](../../images/Conv_CNN.png "A convolutional neural network with 3 convolution layers followed by 3 pooling layers ({% cite OSheaEtAl %})") 
 
-As shown in Figure 6, a typical CNN usually has more than one convolution layer followed by a pooling layer. Convolution plus pooling layer is responsible  
+As shown in Figure 8, a typical CNN usually has more than one convolution layer followed by a pooling layer. Convolution plus pooling layer is responsible  
 
 ### Fully connected layer
 
