@@ -164,9 +164,18 @@ $$ \frac{(\text{input size} - \text{(filter size + (filter size -1)*(dilation - 
 
 Figure 7 illustrates the calculations for a convolution operation, via a 3 by 3 filter on a single channel 5 by 5 input vector (5 x 5 x 1). Figure 8 
 illusrates the calculations when the input vector has 3 channels (5 x 5 x 3). To show this in 2 dimensions, we are displaying each channel in input 
-vector and filter separately. Figure 9 shows a sample multi-channel 2D convolution in 3 dimensions. 
+vector and filter separately. Figure 9 shows a sample multi-channel 2D convolution in 3 dimensions. As Figures 8 and 9 show the output of a multi-channel
+2 dimensional filter is a single channel 2 dimensional image. Applying *multiple* filters to the input image results in a multi-channel 2 dimensional 
+image for the output. For example, if the input image is 28 by 28 by 3 (rows x columns x channels), and we apply a 3 by 3 filter with 1 by 1 padding, 
+we would get a 28 by 28 by 1 image. If we apply 15 filters to the input image, our output would be 28 by 28 by 15. Hence, the number of filters in a 
+convolution layer allows us to increase or decrease the channel size.     
 
 ![Three matrices representing an input vector and another three matrices representing a filter, along with calculation for multiple input channel two dimensional convolution operation ](../../images/Conv_multiple_input_channel.png "Illustration of multiple input channel two dimensional convolution")
+
+As Figures 8 and 9 show the output of a multi-channel 2 dimensional filter is a single channel 2 dimensional image. Applying *multiple* filters to the 
+input image results in a multi-channel 2 dimensional image for the output. For example, if the input image is 28 by 28 by 3 (rows x columns x channels), 
+and we apply a 3 by 3 filter with 1 by 1 padding, we would get a 28 by 28 by 1 image. If we apply 15 filters to the input image, our output would be 28 
+by 28 by 15. Hence, the number of filters in a convolution layer allows us to increase or decrease the channel size.
 
 ![Multiple cubes representing input vector, filter, and output in a 3 channel 2 dimensional convolution operation](../../images/Conv_multiple_channel_3d.gif "Three dimensional illustration of 3 input channel 2D convolution operation (Source: https://thomelane.github.io/convolutions/2DConvRGB.html)")
 
