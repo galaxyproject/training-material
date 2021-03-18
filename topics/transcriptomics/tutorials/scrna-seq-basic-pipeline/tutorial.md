@@ -1,25 +1,35 @@
 ---
 layout: tutorial_hands_on
 
-title: Filtering and Plotting Single-cell RNA-seq Data
+title: Filter, Plot and Explore Single-cell RNA-seq Data
+subtopic: single-cell
+priority: 10
 zenodo_link: ''
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- Is my single cell dataset a quality dataset?
+- How do I generate and annotate cell clusters?
+- How do I pick thresholds and parameters in my analysis? What's a 'reasonable' number, and will the world collapse if I pick the wrong one?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+- Interpret quality control plots to direct parameter decisions
+- Repeat analysis from matrix to clustering
+- Identify decision-making points
+- Appraise data outputs and decisions
+- Explain why single cell analysis is an iterative (i.e. the first plots you generate are not final, but rather you go back and re-analyse your data repeatedly) process
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- Single cell data is huge, and must have its many (# genes) dimensions reduced for analysis
+- Analysis is more subjective than we think, and biological understanding of the samples as well as many iterations of analysis are important to give us our best change of attaining real biological insights
+requirements:
+-
+    type: "internal"
+    topic_name: transcriptomics
+    tutorials:
+        - droplet-quantification-processing
+tags:
+- single-cell
+- 10x
 contributors:
-- contributor1
-- contributor2
+- nomadscientist
 
 ---
 
@@ -29,37 +39,12 @@ contributors:
 
 <!-- This is a comment. -->
 
-There are many packages, which have collection of functions for running this workflow. Such as Seurat, Scanpy, Monocle3, Scater. They offer streamlined workflow and tutorials that can be easily followed.
+You've done all the work to make a single cell matrix, with gene counts and mitochondrial counts and buckets of cell metadata from all your variables of interest (or, if not, please see [this tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html) to do so!) Now it's time to fully process our data, removing low quality cells, reducing the many dimensions of data that make it difficult to work with, and ultimately try to define our clusters and find our biological meaning and insights! There are many packages for analysing single cell data - Seurat, Scanpy, Monocle3, Scater, and so forth. We're working with Scanpy, because currently Galaxy hosts the most Scanpy tools of all of those options.
 
-Note - this tutorial is similar to another fantastic tutorial: [Clustering 3k PBMC](
-https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html). That tutorial will go into much further depth on the analysis, in particular the visualisation and science behind identifying marker genes. Plus, their experimental data is clean and well annotated which illustrates the steps beautifully. Here, we work more as a case study with slightly messier (but real!) data. Furthermore, we have set up the steps in this tutorial to allow for easy access to associated tutorials for plotting trajectories, batch correction, decision-making, and plotting. We highly recommend you work through all the galaxy single cell tutorials to build confidence and expertise!
-
- from the  from . This tutorial will guide you to how to check the quality of these matrix files and analyse them. This includes: checking the quality of the generated matrix files, preprecessing the data for analysis, correcting batch effect and visualising them by clustering. This is most basic workflow that you will run in any single-cell data analysis.
-
-
-Today, we will follow the scanpy workflow. Scanpy is python package based on object called anndata, which is data storage format made easy to store metadata and processed data from each stages.
-
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
-
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
-
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
-
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+> ### {% icon comment %} Tutorials everywhere?
+> This tutorial is similar to another fantastic tutorial: [Clustering 3k PBMC](
+https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html). That tutorial will go into much further depth on the analysis, in particular the visualisation and science behind identifying marker genes. Their experimental data is clean and well annotated, which illustrates the steps beautifully. Here, we work more as a case study with messier data, to help empower you in making choices during the analysis. We highly recommend you work through all the galaxy single cell tutorials to build confidence and expertise! For trainers, note that there are small-group options in this tutorial.
+{: .comment}
 
 > ### Agenda
 >
@@ -70,30 +55,11 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
-
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
-
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
-
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
-
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+We've provided you with some experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %} (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). This is the full dataset generated from [this tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html) if you used the full fastq files rather than the subsampled ones. You can find this dataset in this [input history]() or download from Zenodo below.
+
+> ### {% icon hands_on %} Hands-on: Data upload - FIXME
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from [Zenodo]() or from the shared data library
@@ -108,7 +74,7 @@ have fun!
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. Rename the datasets
+> 3. Rename the datasets `Mito-counted AnnData`
 > 4. Check that the datatype
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
@@ -119,65 +85,13 @@ have fun!
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
-
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
-
-#Filtering
+# Filtering
 
 You have generated an annotated AnnData object from your raw scRNA-seq fastq files. However, you have only completed a 'rough' filter of your dataset - there will still be a number of 'cells' that are actually just background from empty droplets, as well as genes that could be sequencing artifacts or appear so rarely, that they will be difficult to perform any usable statistics on. This background garbage of both cells and genes not only makes it harder to distinguish real biological information from the background, as well as makes it computationally heavy to analyse. These spurious reads take a lot of computational power for each step to analyse! So, first on our agenda is to filter this matrix to give us cleaner data to extract meaningful insight from, and to allow faster analysis.
 
-## Calculating Mitochondrial Content **AnnData Operations**
-
-In our annotated AnnData object, we flagged mitochondrial-associated genes with a 'true' and 'false' column. It's time to do some calculating!
-
-> ### {% icon hands_on %} Hands-on: Counting mitochondrial genes
->
-> 1. **AnnData Operations** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Input dataset` (Input dataset)
->    - *"Gene symbols field in AnnData"*: `NA.`
->    - In *"Flag genes that start with these names"*:
->        - {% icon param-repeat %} *"Insert Flag genes that start with these names"*
->            - *"Starts with"*: `True`
->            - *"Var name"*: `mito`
->    - *"Copy observations (such as clusters)"*: `Yes`
->    - *"Copy embeddings (such as UMAP, tSNE)"*: `Yes`
->    - *"Copy uns"*: `Yes`
->
-> 2. Rename {% icon galaxy-pencil %} output `Mito-counted AnnData`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. What has this tool done? How can you figure that out?
+> 1. What information is stored in your AnnData object? The last tool to generate this object was to count the mitochondrial associated genes in your matrix. Where is that data stored?
 > 2. While you are figuring that out, how many genes and cells are in your object?
 >
 >   > ### {% icon tip %} Hint
@@ -225,6 +139,7 @@ Add the following tools to that workflow, and then run {% icon workflow-run %} t
 >
 > You can simply run these tools instead, as normal, without making a workflow. Long-term, however, please see the **How to make a workflow subsection** [here](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html) - so that you can make your Galaxy life a lot easier in the future!
 {: .comment}
+
 
 > ### {% icon hands_on %} Hands-on: Making QC plots
 >
@@ -359,7 +274,7 @@ Now that we've assessed the differences in our samples, we will look at the libr
 > > 1. Any plot with `log1p_n_genes_by_counts` would do here, actually! Some people prefer scatterplots.
 > > ![Scatter-genesxmito](../../images/wab-scatter-genesxmito.png "Scatterplot - log1p_n_genes_by_counts x pct_counts_mito (Raw)")
 > >
-> > 2. In `Scatter - mito x genes` you can see how cells with `log1p_n_genes_by_counts` up to around, perhaps, `5.5` (around 250 genes) often have high `pct_counts_mito`. You can plot this as just `n_counts` and see this same trend at around 250 genes, but with this data the log format was clearer so that's how we're presenting it. You could also use the violin plots to come up with the threshold, and thus keeping batch into account. It's good to look at that as well, because you don't want to accidentally cut out an entire sample (i.e. N703 and N707). Some bioinformaticians would recommend filtering each sample individually, but this is difficult in larger scale and in this case (you're welcome to give it a go! You'd have to filter separately and then concatenate) won't make a notable difference in the final interpretation.
+> > 2. In `Scatter - mito x genes` you can see how cells with `log1p_n_genes_by_counts` up to around, perhaps, `5.7` (around 300 genes) often have high `pct_counts_mito`. You can plot this as just `n_counts` and see this same trend at around 300 genes, but with this data the log format was clearer so that's how we're presenting it. You could also use the violin plots to come up with the threshold, and thus keeping batch into account. It's good to look at that as well, because you don't want to accidentally cut out an entire sample (i.e. N703 and N707). Some bioinformaticians would recommend filtering each sample individually, but this is difficult in larger scale and in this case (you're welcome to give it a go! You'd have to filter separately and then concatenate) won't make a notable difference in the final interpretation.
 > >
 > {: .solution}
 >
@@ -372,7 +287,7 @@ Now that we've assessed the differences in our samples, we will look at the libr
 > > 1. As before, any plot with `log1p_n_total_counts` will do! Again, we'll use a scatterplot here, but you can use a violin plot if you wish!
 > > ![Scatter-countsxmito](../../images/wab-scatter-countsxmito.png "Scatterplot - log1p_total_counts (Raw)")
 > >
-> > 2. We can see that we will need to set a higher threshold (which makes sense, as you'd expect more unique counts per cell rather than unique genes!). Again, perhaps being a bit aggressive, we might choose `5.8`, for instance (which amounts to around 300 counts/cell). In an ideal world, you'll see a clear population of real cells separated from a clear population of debris. Many samples, like this one, are under-sequenced, and such separation would likely be seen after deeper sequencing!
+> > 2. We can see that we will need to set a higher threshold (which makes sense, as you'd expect more unique counts per cell rather than unique genes!). Again, perhaps being a bit aggressive, we might choose `6.3`, for instance (which amounts to around 500 counts/cell). In an ideal world, you'll see a clear population of real cells separated from a clear population of debris. Many samples, like this one, are under-sequenced, and such separation would likely be seen after deeper sequencing!
 > >
 > {: .solution}
 >
@@ -385,7 +300,7 @@ Now that we've assessed the differences in our samples, we will look at the libr
 > > 1. Any plot with `pct_counts_mito` would do here, however the scatterplots are likely the easiest to interpret. We'll use the same as last time.
 > > ![Scatter-countsxmito](../../images/wab-scatter-countsxmito.png "Scatterplot - log1p_total_counts (Raw)")
 > >
-> > 2. We can see a clear trend wherein cells that have around `5%` mito counts or higher also have far fewer total counts. These cells are low quality, will muddy our data, and are likely stressed or ruptured prior to encapsulation in a droplet. We will use quite a common cut-off of 5% here, however you must adapt all cut-offs to your data - metabolically active cells might have higher mitochondrial RNA in general, and you don't want to lose a cell population because of a cut-off.
+> > 2. We can see a clear trend wherein cells that have around `5%` mito counts or higher also have far fewer total counts. These cells are low quality, will muddy our data, and are likely stressed or ruptured prior to encapsulation in a droplet. While 5% is quite a common cut-off, this is quite messy data, so just for kicks we'll go more aggressive with a `4.5%`. In general, you must adapt all cut-offs to your data - metabolically active cells might have higher mitochondrial RNA in general, and you don't want to lose a cell population because of a cut-off.
 > >
 > {: .solution}
 {: .question}
@@ -397,239 +312,26 @@ It's now time to apply these thresholds to our data! First, a reminder of how ma
 > ### {% icon details %} Working in a group? Decision-time!
 > If you are working in a group, you can now divvy up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
 > - Control
->      - **log1p_n_genes_by_counts** > `5.5`
->      - **log1p_total_counts** > `5.8`
->      - **pct_counts_mito** > `5%`
+>      - **log1p_n_genes_by_counts** > `5.7`
+>      - **log1p_total_counts** > `6.3`
+>      - **pct_counts_mito** < `4.5%`
 > - Everyone else: Choose your own thresholds and compare results!
 {: .details}
 
-> >
-> {: .solution}
->
-{: .question}
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Filter cells by log1p_n_genes_by_counts
 >
 > 1. **Scanpy FilterCells** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **AnnData Operations** {% icon tool %})
->    - In *"Parameters to select cells to keep"*:
->        - {% icon param-repeat %} *"Insert Parameters to select cells to keep"*
->            - *"Name of parameter to filter on"*: `pct_counts_mito`
->            - *"Max value"*: `4.5`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-You could run this entire QC step using `n_counts` and `n_genes` instead! Either way works, so pick whichever one makes it easiest to interpret your data.
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Inspect AnnData**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **AnnData Operations** {% icon tool %})
->    - *"What to inspect?"*: `General information about the object`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-
-## Sub-step with **Inspect AnnData**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **AnnData Operations** {% icon tool %})
->    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Plot**
-
-> ### {% icon hands_on %} Hands-on: Task description
-
-
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Inspect AnnData**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **AnnData Operations** {% icon tool %})
->    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Scanpy FilterCells**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Scanpy FilterCells** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FilterCells** {% icon tool %})
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Mito-counted AnnData`
 >    - In *"Parameters to select cells to keep"*:
 >        - {% icon param-repeat %} *"Insert Parameters to select cells to keep"*
 >            - *"Name of parameter to filter on"*: `log1p_n_genes_by_counts`
 >            - *"Min value"*: `5.7`
 >            - *"Max value"*: `20.0`
 >
->    ***TODO***: *Check parameter descriptions*
+> 2. Rename {% icon galaxy-pencil %} output as `Genes-filtered Object`
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Plot**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Plot** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **Scanpy FilterCells** {% icon tool %})
+> 3. **Plot** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Genes-filtered Object`
 >    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
 >        - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
 >            - *"Keys for accessing variables"*: `log1p_total_counts,log1p_n_genes_by_counts,pct_counts_mito`
@@ -639,78 +341,46 @@ You could run this entire QC step using `n_counts` and `n_genes` instead! Either
 >                - *"Add a jitter to the stripplot"*: `Yes`
 >            - *"Display keys in multiple panels"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
+> 4. Rename {% icon galaxy-pencil %} output `Violin - Filterbygenes`
 >
->    ***TODO***: *Consider adding a comment or tip box*
+> 5. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Genes-filtered Object`
+>    - *"What to inspect?"*: `General information about the object`
 >
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+> 6. Rename {% icon galaxy-pencil %} output `General - Filterbygenes`
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+Note that the {% icon tool %} **Scanpy Filtercells** allows you to put {% icon param-repeat %} multiple parameters at the same time (i.e. filter `log1p_total_counts`, `log1p_n_genes_by_counts`,and `pct_counts_mito`) in the same step. The only reason we aren't doing that here is so you can see what each filter accomplishes. As such, examine your plot and `General - Filterbygenes`.
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Interpret the violin plot
+> 2. How many genes & cells do you have in your object now?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > ![Violinplot-filteronce](../../images/wab-violin-raw-filteredgenes.png "Raw vs 1st filter - genes/cell")
+> > 1. The only part that seems to change is the `log1p_n_genes_by_counts`. You can see a flatter bottom to the violin plot - this is the lower threshold set. Ideally, this would create a beautiful violin plot because there would be a clear population of low-gene number cells. Sadly not the case here, but still a good filter.
+> > 2. In `General - Filterbygenes`, you can see you now have `14,501 cells x 35,724 genes`.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **Scanpy FilterCells**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Filter cells by log1p_total_counts
 >
 > 1. **Scanpy FilterCells** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FilterCells** {% icon tool %})
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Genes-filtered Object`
 >    - In *"Parameters to select cells to keep"*:
 >        - {% icon param-repeat %} *"Insert Parameters to select cells to keep"*
 >            - *"Name of parameter to filter on"*: `log1p_total_counts`
 >            - *"Min value"*: `6.3`
 >            - *"Max value"*: `20.0`
 >
->    ***TODO***: *Check parameter descriptions*
+> 2. Rename {% icon galaxy-pencil %} output as `Counts-filtered Object`
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Plot**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Plot** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **Scanpy FilterCells** {% icon tool %})
+> 3. **Plot** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Counts-filtered Object`
 >    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
 >        - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
 >            - *"Keys for accessing variables"*: `log1p_total_counts,log1p_n_genes_by_counts,pct_counts_mito`
@@ -720,743 +390,299 @@ You could run this entire QC step using `n_counts` and `n_genes` instead! Either
 >                - *"Add a jitter to the stripplot"*: `Yes`
 >            - *"Display keys in multiple panels"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
+> 4. Rename {% icon galaxy-pencil %} output `Violin - Filterbycounts`
 >
->    ***TODO***: *Consider adding a comment or tip box*
+> 5. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Counts-filtered Object`
+>    - *"What to inspect?"*: `General information about the object`
 >
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+> 6. Rename {% icon galaxy-pencil %} output `General - Filterbycounts`
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Interpret the violin plot
+> 2. How many genes & cells do you have in your object now?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > ![Violinplot-filtertwice](../../images/wab-violin-filteredgenesxfilteredcounts.png "1st Filter vs 2nd filter - counts/cell")
+> > 1. We will focus on the `log1p_total_counts`. Similar to above, the bottom of the violin shape has flattered due to the threshold.
+> > 2. In `General - Filterbycounts`, you can see you now have `7,916 cells x 35,724 genes`.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **Scanpy NormaliseData**
+> ### {% icon hands_on %} Hands-on: Filter cells by pct_counts_mito
+>
+> 1. **Scanpy FilterCells** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Counts-filtered Object`
+>    - In *"Parameters to select cells to keep"*:
+>        - {% icon param-repeat %} *"Insert Parameters to select cells to keep"*
+>            - *"Name of parameter to filter on"*: `pct_counts_mito`
+>            - *"Min value"*: `0`
+>            - *"Max value"*: `4.5`
+>
+> 2. Rename {% icon galaxy-pencil %} output as `Mito-filtered Object`
+>
+> 3. **Plot** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Mito-filtered Object`
+>    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
+>        - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
+>            - *"Keys for accessing variables"*: `log1p_total_counts,log1p_n_genes_by_counts,pct_counts_mito`
+>        - *"The key of the observation grouping to consider"*: `genotype`
+>        - In *"Violin plot attributes"*:
+>            - *"Add a stripplot on top of the violin plot"*: `Yes`
+>                - *"Add a jitter to the stripplot"*: `Yes`
+>            - *"Display keys in multiple panels"*: `No`
+>
+> 4. Rename {% icon galaxy-pencil %} output `Violin - Filterbymito`
+>
+> 5. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Mito-filtered Object`
+>    - *"What to inspect?"*: `General information about the object`
+>
+> 6. Rename {% icon galaxy-pencil %} output `General - Filterbymito`
+{: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon question %} Questions
+>
+> 1. Interpret the violin plot
+> 2. How many genes & cells do you have in your object now?
+>
+> > ### {% icon solution %} Solution
+> >
+> > ![Violinplot-filtermito](../../images/wab-violin-mitofilter.png "Violin plots after filtering genes, counts, and mito content/cell")
+> > 1. If we carefully check the axes, we can see that the `pct_counts_mito` has shrunk.
+> > 2. In `General - Filterbymito`, you can see you now have `7,874 × cells x 35,724 genes`.
+> >
+> {: .solution}
+>
+{: .question}
+
+Here's a quick overall summary for easy visualisation if you fancy it.
+![Violinplot-Summary](../../images/wab-violins2gether.png "Filtering summary")
+
+Fantastic work! However, you've now removed a whole heap of cells, and since the captured genes are sporadic, i.e. a small percentage of the overall transcriptome, per cell, this means there are a number of genes in your matrix that are currently not in any of the remaining cells. Genes that do not appear in any cell, or even in only 1 or 2 cells, will make some analytical tools break and overall will not be biologically informative. So let's remove them! Note that `3` is not necessarily the best number, it is a fairly conservative threshold. You could go as high as 10 or more.
+
+> ### {% icon details %} Working in a group? Decision-time!
+> If you are working in a group, you can now divvy up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
+> - Variable: **n_cells**
+> - Control > `3`
+> - Everyone else: Choose your own thresholds and compare results!
+{: .details}
+
+
+> ### {% icon hands_on %} Hands-on: Filter genes
+>
+> 1. **Scanpy FilterGenes** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Mito-filtered Object`
+>    - In *"Parameters to select genes to keep"*:
+>        - {% icon param-repeat %} *"Insert Parameters to select genes to keep"*
+>            - *"Name of parameter to filter on"*: `n_cells`
+>            - *"Min value"*: `3`
+>            - *"Max value"*: `1000000000`
+>
+> 2. Rename {% icon galaxy-pencil %} output as `Filtered Object`
+>
+> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Filtered Object`
+>    - *"What to inspect?"*: `General information about the object`
+>
+> 4. Rename {% icon galaxy-pencil %} output `General - Filtered object`
+{: .hands_on}
+
+In practice, you'll likely choose your thresholds then set up all these filters to run without checking plots in between each one. But it's nice to see how they work!
+
+Using the final `General - Filtered object`, we can summarise the results of our filtering:
+
+|       | Cells | Genes |
+|------ |--------------------|
+| Raw | 25281    | 35734    |
+| Filter genes/cell | 14501    | 35734    |
+| Filter counts/cell | 7916    | 35734    |
+| Filter mito/cell | 7874   | 35734    |
+| Filter cells/gene | 7874    | 14832    |
+
+{% icon congratulations %} Congratulations! You have filtered your object! Now it should be a lot easier to analyse.
+
+# Processing
+
+So currently, you have a matrix that is 7874 cells by 14832 genes. This is still quite big data. We have two issues here - firstly, you already know there are differences in how many transcripts and genes have been counted per cell. This technical variable can obscure biological differences. Secondly, we like to plot things on x/y plots, so for instance *Gapdh* could be on one axis, and *Actin* can be on another, and you plot cells on that 2-dimensional axis based on how many of each transcript they possess. While that would be fine, adding in a 3rd dimension (or, indeed, in this case, 14830 more dimensions), is a bit trickier! So our next steps are to transform our big data object into something that is easy to analyse and easy to visualise.
+
+> ### {% icon hands_on %} Hands-on: Normalisation
 >
 > 1. **Scanpy NormaliseData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FilterCells** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Filtered_object`
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+Normalisation helps reduce the differences between gene and UMI counts by fitting total counts to 10,000 per cell. The inherent log-transform (by log(count+1)) aligns the gene expression level better with a normal distribution. This is fairly standard to prepare for any future dimensionality reduction.
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+Now we need to look at reducing our gene dimensions. We have loads of genes, but not all of them are different from cell to cell. For instance, housekeeping genes are defined as not changing much from cell to cell, so we could remove these from our data to simplify the dataset. We will flag genes that vary across the cells for future analysis.
 
-## Sub-step with **Plot**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Plot** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **Scanpy NormaliseData** {% icon tool %})
->    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
->        - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
->            - *"Keys for accessing variables"*: `log1p_total_counts,log1p_n_genes_by_counts,pct_counts_mito`
->        - *"The key of the observation grouping to consider"*: `genotype`
->        - In *"Violin plot attributes"*:
->            - *"Add a stripplot on top of the violin plot"*: `Yes`
->                - *"Add a jitter to the stripplot"*: `Yes`
->            - *"Display keys in multiple panels"*: `No`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Plot**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Plot** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **Scanpy NormaliseData** {% icon tool %})
->    - *"Method used for plotting"*: `Generic: Scatter plot along observations or variables axes, using 'pl.scatter'`
->        - *"Plotting tool that computed coordinates"*: `Using coordinates`
->            - *"x coordinate"*: `log1p_total_counts`
->            - *"y coordinate"*: `log1p_n_genes_by_counts`
->            - *"Color by"*: `pct_counts_mito`
->            - *"Use the layers attribute?"*: `No`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Plot**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Plot** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **Scanpy NormaliseData** {% icon tool %})
->    - *"Method used for plotting"*: `Generic: Scatter plot along observations or variables axes, using 'pl.scatter'`
->        - *"Plotting tool that computed coordinates"*: `Using coordinates`
->            - *"x coordinate"*: `log1p_n_genes_by_counts`
->            - *"y coordinate"*: `pct_counts_mito`
->            - *"Use the layers attribute?"*: `No`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Plot**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Plot** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **Scanpy NormaliseData** {% icon tool %})
->    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
->        - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
->            - *"Keys for accessing variables"*: `log1p_total_counts,log1p_n_genes_by_counts,pct_counts_mito`
->        - *"The key of the observation grouping to consider"*: `sex`
->        - In *"Violin plot attributes"*:
->            - *"Add a stripplot on top of the violin plot"*: `Yes`
->                - *"Add a jitter to the stripplot"*: `Yes`
->            - *"Display keys in multiple panels"*: `No`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Plot**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Plot** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **Scanpy NormaliseData** {% icon tool %})
->    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
->        - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
->            - *"Keys for accessing variables"*: `log1p_total_counts,log1p_n_genes_by_counts,pct_counts_mito`
->        - *"The key of the observation grouping to consider"*: `batch`
->        - In *"Violin plot attributes"*:
->            - *"Add a stripplot on top of the violin plot"*: `Yes`
->                - *"Add a jitter to the stripplot"*: `Yes`
->            - *"Display keys in multiple panels"*: `No`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Plot**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Plot** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **Scanpy NormaliseData** {% icon tool %})
->    - *"Method used for plotting"*: `Generic: Scatter plot along observations or variables axes, using 'pl.scatter'`
->        - *"Plotting tool that computed coordinates"*: `Using coordinates`
->            - *"x coordinate"*: `log1p_total_counts`
->            - *"y coordinate"*: `pct_counts_mito`
->            - *"Use the layers attribute?"*: `No`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Scanpy FindVariableGenes**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Find variable genes
 >
 > 1. **Scanpy FindVariableGenes** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy NormaliseData** {% icon tool %})
 >    - *"Flavor of computing normalised dispersion"*: `Seurat`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+>    - *"Remove genes not marked as highly variable"*: `Yes`
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+Next up, we're going to Scale our data so that all genes have the same variance and a zero mean. This is important to set up our data for further dimensionality reduction. It also helps negate sequencing depth differences between samples, since the gene levels across the cells become comparable. Note, that the differences from scaling etc. are not the values you have at the end - i.e. if your cell has average GAPDH levels, it will not appear as a '0' when you calculate gene differences between clusters.
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Scanpy ScaleData**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Scaling data
 >
 > 1. **Scanpy ScaleData** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FindVariableGenes** {% icon tool %})
 >    - *"Truncate to this value after scaling"*: `10.0`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+# Preparing coordinates
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+We still have too many dimensions. Transcript changes are not usually singular - which is to say, genes were in pathways and in groups. It would be easier to analyse our data if we could more easily group these changes.
 
-## Sub-step with **Scanpy RunPCA**
+## Principal components
+Principal components are calculated from highly dimensional data to find the most spread in the dataset. So in our, `2262` highly variable gene dimensions, there will be one line (axis) that yields the most spread and variation across the cells. That will be our first principal component. We can calculate the first `x` principal components in our data to drastically reduce the number of dimensions.  
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Calculate Principal Components
 >
 > 1. **Scanpy RunPCA** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy ScaleData** {% icon tool %})
 >    - *"Perform incremental PCA by chunks"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Plot**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Plot** {% icon tool %} with the following parameters:
+> 2.  **Plot** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **Scanpy RunPCA** {% icon tool %})
 >    - *"Method used for plotting"*: `PCA: Scatter plot in PCA coordinates, using 'pl.pca_variance_ratio'`
 >        - *"Number of PCs to show"*: `50`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+> 3. Rename {% icon galaxy-pencil %} plot output `PCA Variance`
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+Why 50 principal components you ask? Well, we're pretty confident 50 is an over-estimate. Examine the `plot output`.
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+![PCA-variance](../../images/wab-pcavariance.png "Variability explained per PC")
 
-## Sub-step with **Scanpy ComputeGraph**
+We can see that there is really not much variation explained past component 19. So we might save ourselves a great deal of time and muddied data by focusing on the top 20 PCs.
 
-> ### {% icon hands_on %} Hands-on: Task description
+## Neighborhood graph
+
+We're still looking at 20 dimensions minimum, at this point. We need to identify how similar a cell is to another cell, across every cell across 20+ dimensions. For this, we will use the kNN, or k-nearest neighbor, graph, to identify which cells are close together and which are not. The kNN graph plots connections between cells if their distance (when plotted in this 20 dimensional space!) is amonst the k-th smallest distances from that cell to other cells. This will be crucial for identifying clusters, and is necessary for plotting a UMAP. [Larger values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default.](https://github.com/lmcinnes/umap).
+
+> ### {% icon details %} Working in a group? Decision-time!
+> If you are working in a group, you can now divvy up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
+> - Control
+>      - **Number of PCs to use** = `20`
+>      - **Maximum number of neighbours used** = `15`
+> - Everyone else: Use the PC variance plot to pick your own PC number, and choose your own **k8* as well!
+{: .details}
+
+> ### {% icon hands_on %} Hands-on: ComputeGraph
 >
 > 1. **Scanpy ComputeGraph** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunPCA** {% icon tool %})
->    - *"Use programme defaults"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+>    - *"Use programme defaults"*: `No`
+>    - *"Number of PCs to use"*: `20`
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Dimensionality reduction for visualisation
 
-> ### {% icon question %} Questions
+Two major visualisations for this data are tSNE and UMAP. We must calculate the coordinates for both prior to visualisation. For tSNE, the parameter **perplexity** can be changed to best represent the data, while for UMAP the main change would be to change the kNN graph itself, by changing the **k**.
+
+> ### {% icon details %} Working in a group? Decision-time!
+> If you are working in a group, you can now divvy up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
+> - Control
+>      - **Number of PCs to use** = `20`
+>      - **Maximum number of neighbours used** = `15`
+> - Everyone else: Use the PC variance plot to pick your own PC number, and choose your own **k8* as well!
+{: .details}
+
+> ### {% icon hands_on %} Hands-on: Calculating tSNE & UMAP
 >
-> 1. Question1?
-> 2. Question2?
+> 1. **Scanpy RunTSNE** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy ComputeGraph** {% icon tool %})
+>    - *"Use programme defaults"*: `No`
+>    - *"The perplexity is related to the number of nearest neighbours, select a value between 5 and 50"*: `30`
+>
+> 2. **Scanpy RunUMAP** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FindTSNE** {% icon tool %})
+>    - *"Use programme defaults"*: `Yes`
+{: .hands_on}
+
+> ### {% icon question %} Question
+>
+> Let's take a step back here. What is it, exactly, that you are trying to get from your data? What do you want to visualise, and what information do you need from your data to gain insight?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > Really we need two things - firstly, we need to make sure our experiment was set up well. This is to say, our biological replicates should overlap and our variables should, ideally, show some difference. Secondly, we want insight - we want to know which cell types are in our data, which genes drive those cell types, and in this case, how they might be affected by our biological variable of growth restriction. How does this affect the developing cells, and what genes drive this? So let's add in information about cell clusters and gene markers!
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **Scanpy FindCluster**
+# Cell Clusters & Gene Markers
 
-> ### {% icon hands_on %} Hands-on: Task description
+Finally, let's identify clusters! Unfortunately, it's not as majestic as biologists often think - the maths doesn't necessarily identify true cell clusters. Every algorithm for identifying cell clusters falls short of a biologist knowing their data, knowing what cells should be there, and proving it in the lab. Sigh. So, we're going to make the best of it as a starting point and see what happens! We will define clusters from the kNN graph, based on how many connections cells have with one another. Roughly, this will depend on a **resolution** parameter for how granular you want to be.
+
+> ### {% icon details %} Working in a group? Decision-time!
+> Oh yes, yet another decision! Single cell analysis is sadly not straight forward.
+> - Control
+>      - **Resolution, high value for more and smaller clusters** = `1`
+>      - **Clustering algorithm** = `Louvain`
+> - Everyone else: Pick your own number. If it helps, this sample should have a lot of very similar cells in it, it contains developing T-cells, so you aren't expecting massive differences between cells, like you would in, say, an entire embryo, with all sorts of unrelated cell types.
+> - Everyone else: Consider the newer **Leiden** clustering method. Note that in future parameters, you will likely need to specify 'leiden' rather than 'louvain', which is the default, if you choose this clustering method.
+{: .details}
+
+> ### {% icon hands_on %} Hands-on: FindClusters
 >
 > 1. **Scanpy FindCluster** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy ComputeGraph** {% icon tool %})
->    - *"Use programme defaults"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+>    - *"Use programme defaults"*: `No`
+>    - *"Resolution, high value for more and smaller clusters"*: `1`
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+Nearly plotting time! But one final piece is to add in SOME gene information. Right now we'll focus on genes driving the clusters, but fear not, we'll add in more information later!
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## FindMarkers
 
-## Sub-step with **Scanpy RunUMAP**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Scanpy RunUMAP** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FindCluster** {% icon tool %})
->    - *"Use programme defaults"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Scanpy RunTSNE**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Scanpy RunTSNE** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunUMAP** {% icon tool %})
->    - *"Use programme defaults"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Scanpy FindMarkers**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: FindMarkers
 >
 > 1. **Scanpy FindMarkers** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunTSNE** {% icon tool %})
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FindClusters** {% icon tool %})
 >    - *"Use programme defaults"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
+> 2. Rename {% icon galaxy-pencil %} output table (not h5ad) `Markers - cluster`
 >
->    ***TODO***: *Consider adding a comment or tip box*
+> 3. Rename  {% icon galaxy-pencil %} output h5ad file `Final object`
 >
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> But we are also interested in differences across genotype, so let's also check that (note that in this case, it's turning it almost into bulk RNA-seq, because you're comparing all cells of a certain genotype against all cells of the other)
 >
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
+> 3. **Scanpy FindMarkers** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final object`
+>    - *"The sample grouping/clustering to use"*: `genotype`
+>    - *"Use programme defaults"*: `Yes`
 >
-> 1. Question1?
-> 2. Question2?
+> 4. Rename {% icon galaxy-pencil %} output table (not h5ad) `Markers - genotype`
 >
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Scanpy PlotEmbed**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Scanpy PlotEmbed** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FindMarkers** {% icon tool %})
->    - *"name of the embedding to plot"*: `pca`
->    - *"color by attributes, comma separated texts"*: `louvain,genotype,batch,sex,Nusap1`
->    - *"Field for gene symbols"*: `Symbol`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 5. Do not rename the output AnnData object - you have the marker tables to enjoy, but we want to keep the cluster comparisons stored in the AnnData object for later.
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+Now, there's a small problem here, which is that if you {% icon galaxy-eye %} inspect the output marker tables, you won't see gene names, you'll see Ensembl IDs. While this is a more bioinformatically accurate way of doing this (not every ID has a gene name!), we might want to look at more well-recognised gene names, so let's pop some of that information in!
 
-> ### {% icon question %} Questions
+> ### {% icon hands_on %} Hands-on: Adding in Gene Names
 >
-> 1. Question1?
-> 2. Question2?
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **Scanpy FindMarkers** {% icon tool %})
+>    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
 >
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
+> This gives us our table of all the possible genes with their names.
 >
-{: .question}
-
-## Sub-step with **Scanpy PlotEmbed**
-
-> ### {% icon hands_on %} Hands-on: Task description
+>> ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Scanpy PlotEmbed** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FindMarkers** {% icon tool %})
->    - *"color by attributes, comma separated texts"*: `louvain,genotype,batch,sex,Nusap1`
->    - *"Field for gene symbols"*: `Symbol`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Scanpy PlotEmbed**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Scanpy PlotEmbed** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FindMarkers** {% icon tool %})
->    - *"name of the embedding to plot"*: `tsne`
->    - *"color by attributes, comma separated texts"*: `louvain,genotype,batch,sex,Nusap1`
->    - *"Field for gene symbols"*: `Symbol`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Join two Datasets**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Join two Datasets** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Join"*: `output_tsv` (output of **Scanpy FindMarkers** {% icon tool %})
+> 2. **Join two Datasets** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Join"*: `Markers - cluster`
 >    - *"using column"*: `cColumn: 4`
 >    - {% icon param-file %} *"with"*: `var` (output of **Inspect AnnData** {% icon tool %})
 >    - *"and column"*: `cColumn: 2`
@@ -1465,78 +691,271 @@ You could run this entire QC step using `n_counts` and `n_genes` instead! Either
 >    - *"Fill empty columns"*: `No`
 >    - *"Keep the header lines"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
+> We have lots of extra information we don't need in our marker gene table, so...
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Cut**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Cut** {% icon tool %} with the following parameters:
+> 3. **Cut** {% icon tool %} with the following parameters:
 >    - *"Cut columns"*: `c1,c2,c3,c4,c11,c5,c6,c7,c8`
 >    - {% icon param-file %} *"From"*: `out_file1` (output of **Join two Datasets** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
+> 4. Rename {% icon galaxy-pencil %} output table `Markers - cluster - named`
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+> Feel free to repeat this process for the `Markers-genotype`!
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+{% icon congratulations %} Well done! It's time for the best bit, the plotting!
 
-> ### {% icon question %} Questions
+# Plotting!
+
+It's time! Let's plot it all!
+But first, let's pick some marker genes from the `Markers-genotype` list that you made as well. I'll be honest, in practice, you'd now be spending a lot of time looking up what each gene does (thank you google!). There are burgeoning automated-annotation tools, however, so long as you have a good reference (well annotated dataset you'll use as the ideal). Watch this space for this!
+
+In the mean time, let's do this the old-fashioned way, and copy a bunch of the markers in the original paper.
+
+> ### {% icon hands_on %} Hands-on: Plot the cells!
 >
-> 1. Question1?
-> 2. Question2?
+> 1. **Scanpy PlotEmbed** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final object`
+>    - *"name of the embedding to plot"*: `pca`
+>    - *"color by attributes, comma separated texts"*: `louvain,genotype,sex,batch,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,Hba-a1,log1p_total_counts`
+>    - *"Field for gene symbols"*: `Symbol`
+>
+> > ### {% icon tip %} Tip: Re-run the same tool again, but
+> >
+> > * Copy the link location
+> > * Open the Galaxy Upload Manager
+> > * Select **Paste/Fetch Data**
+> > * Paste the link into the text field
+> > * Press **Start**
+{: .tip}
+>
+> 2. **Scanpy PlotEmbed** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final object`
+>    - *"name of the embedding to plot"*: `tsne`
+>    - *"color by attributes, comma separated texts"*: `louvain,genotype,sex,batch,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,Hba-a1,log1p_total_counts`
+>    - *"Field for gene symbols"*: `Symbol`
+>
+> 3. **Scanpy PlotEmbed** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final object`
+>    - *"name of the embedding to plot"*: `umap`
+>    - *"color by attributes, comma separated texts"*: `louvain,genotype,sex,batch,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,Hba-a1,log1p_total_counts`
+>    - *"Field for gene symbols"*: `Symbol`
+{: .hands_on}
+
+# Insights into the beyond
+
+Now it's the fun bit! We can see where genes are expressed, and start considering and interpreting the biology of it. At this point, it's really about what information you want to get from your data - the following is only the tip of the iceberg. However, a brief exploration is good, because it may help give you ideas going forward with for your own data. Let us start interrogating our data!
+
+## Biological Interpretation
+
+> ### {% icon question %} Question - Appearance is everything
+>
+> Which visualisation is the most useful for getting an overview of our data, *pca*, *tsne*, or *umap*?
+> ![PCA-tSNE-UMAP](../../images/wab-3visualisations.png "Louvain clustering by dimension reduction")
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > You can see why a PCA is generally not enough to see clusters in samples - keep in mind, you're only seeing components 1 and 2! - and therefore why the tSNE and UMAP visualisation dimensionality reductions are so useful. But there is not necessarily a clear winner between tSNE and UMAP. However, if we investigate further, we can use our biological knowledge. This sample should contain developing T-cells, as red blood cells have been removed.  Red blood cells express hemoglobin, **Hba-a1**).
+> > ![Hba-a1 expression](../../images/wab-hbalocation.png "Red blood cells")
+> > In the tSNE version of this, the red blood cells cluster inside the bulk lot of T-cells. This could be misleading, so all other things being equal, we will proceed with the UMAP where this is not the case!
 > >
 > {: .solution}
 >
 {: .question}
 
+Note that the cluster numbering is based on size alone - clusters 0 and 1 are not necessarily related, they are just the clusters containing the most cells. It would be nice to know what exactly these cells are. This analysis (googling all of the marker genes, both checking where the ones you know are as well as going through the marker tables you generated!) is a fun task for any individual experiment, so we're going to speed past that and nab the assessment from the original paper!
 
-## Re-arrange
+| Clusters | Marker | Cell type |
+|------ |--------------------|
+| 4 | Il2ra    | Double negative (early T-cell)    |
+| 0,1,3,5 | Cd8b1, Cd8a, Cd4    | Double positive (middle T-cell)|
+| 2 | Itm2a    | Mature T-cell
+| 6 | Hba-a1    | Red blood cells |
+| 7 | Aif1    | Macrophages    |
 
-To create the template, each step of the workflow had its own subsection.
+![Marker Gene UMAPs](../../images/wab-markergeneumaps.png "Known marker gene locations")
 
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+The authors weren't interested in further annotation of the DP cells, so neither are we, and sometimes that just happens, the maths tries to call similar (ish) sized clusters, whether it is biologically relevant or not, or the question being asked doesn't really require such granularity.
+
+### Annotating Clusters
+
+> ### {% icon hands_on %} Hands-on: Annotating clusters
+>
+> 1. **Manipulate Anndata** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Final object`
+>    - *"Function to manipulate the object"*: `Rename categories of annotation`
+>    - *"Key for observations or variables annotation"*: `louvain`
+>    - *"Comma-separated list of new categories"*: `DP-1,DP-2,T-mat,DP-3,DN,DP-4,RBC,Macrophages`
+>
+> Hang on here, though. This unfortunately deletes the original cluster numbering. Just in case you might want this back, we can add that annotation back in.
+>
+> 2. **AnnData Operations** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Final object`
+>    - *"Copy observations (such as clusters)"*: {% icon history-share %} *Yes*
+>    - **"Keys from obs to copy"**
+>    - *"Keys from obs to copy"*
+>    - *"Key contains"*: `louvain`
+>    - {% icon param-file %} *"AnnData objects with obs to copy"*: (output of **Manipulate AnnData** {% icon tool %})
+>
+> You've added the new cell annotations in, now titled `louvain_0`. What, that's not good enough? You want to change the title as well? So be it.
+>
+> 3. **AnnData Operations** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: (output of **AnnData Operations** {% icon tool %})
+>    - *"Change field names in AnnData observations"*
+>    - {% icon galaxy-wf-new %} *"Insert Change field names in AnnData observations"
+>    - *"1: Change field names in AnnData observations"*
+>    - *"Original name": `louvain_0`
+>    - *"New name"*: `cell_type`
+>
+> 4. Rename {% icon galaxy-pencil %} output h5ad `Final cell annotated object`
+>
+> Time to re-plot! Feel free to re-run {icon galaxy-refresh %} the plot.embed tool on the new object plotting `cell_type` to speed this up. Otherwise...
+>
+> 5. **Scanpy PlotEmbed** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final cell annotated object`
+>    - *"name of the embedding to plot"*: `umap`
+>    - *"color by attributes, comma separated texts"*: `cell_type,genotype,sex,batch,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,Hba-a1,log1p_total_counts`
+>    - *"Field for gene symbols"*: `Symbol`
+>
+{: .hands_on}
+
+![Annotated cell types](../../images/wab-annotated cells.png "Our annotated UMAP")
+
+Now that we know what we're dealing with, let's examine the effect of our variable, proper science!
+
+> ### {% icon question %} Question - Genotype
+>
+> Are there any differences in genotype? Or in biological terms, is there an impact of growth restriction on T-cell development in the thymus?
+>
+> ![Genotype Images](../../images/wab-genotypedifferences.png "Genotype differences")
+>
+> > ### {% icon solution %} Solution
+> >
+> > We can see that DP-4, which seems to be extending away from the main DP bunch, and the mature T-cells (or particularly the bottom half) are missing the knockout cells. Perhaps there is some sort of inhibition here? INTERESTING! What next? We might look further at the transcripts present in both those populations, and perhaps also look at the genotype marker table... So much to investigate! But before we set you off to explore to your heart's delight, let's also look at this a bit more technically.
+> >
+> {: .solution}
+>
+{: .question}
+
+## Technical Assessment
+
+Is our analysis real? Is it right? Well, we can assess that a little bit.
+
+> ### {% icon question %} Question - Batch effect
+>
+> Is there a batch effect?
+>
+> ![Batch effect](../../images/wab-batcheffect.png "Genotype differences")
+>
+> > ### {% icon solution %} Solution
+> >
+> > While some shifts are expected and nothing to be concerned about, DP-4 looks to be comprised of only two samples - N706 and N705. Now, to be fair, both of those are wildtype, but still, it's not good that only 50% of the wildtype samples are really in that cluster. What's to say that's the reason there are no knockout cells there? There might be a bit of batch effect, so you could consider using batch correction on this dataset. However, if we focus our attention on the other cluster - mature T-cells -  where there is batch mixing, we can still assess this biologically even without batch correction.
+> > Additionally, we will also look at the confounding effect of sex.
+> >
+> > ![Sex effect](../../images/wab-sex-batch.png "Sex differences")
+> >
+> > We note that the one female sample - unfortunately one of the mere three knockout samples - seems to be distributed in the same areas as the knockout samples at large, so luckily, this doesn't seem to be a confounding factor and we can still learn from our data. Ideally, this experiment would be re-run with either more female samples all around or swapping out this female from the male sample.
+> >
+> {: .solution}
+>
+{: .question}
+
+> ### {% icon question %} Question - Depth effect
+>
+> Are there any clusters or differences being driven by sequencing depth, a technical and random factor?
+>
+> ![Sequencing depth](../../images/wab-umap-totalcounts.png "Counts across clusters")
+>
+> > ### {% icon solution %} Solution
+> >
+> > Eureka! This explains the odd DP shift between wildtype and knockout cells - the left side of the DP cells simply have a higher sequencing depth (UMIs/cell) than the ones on the right side. Well, that explains some of the sub-cluster that we're seeing in that splurge. Importantly, we don't see that the DP-4 or (mostly) the mature T-cell clusters are similarly affected. So, whilst again, this variable of sequencing depth might be something to regress out somehow, it doesn't seem to be impacting our dataset. The less you can regress/modify your data, in general, the better - you want to stay as true as you can to the raw data, and only use maths to correct your data when you really need to (and not to create insights where there are none!).
+> >
+> {: .solution}
+>
+{: .question}
+
+> ### {% icon question %} Question - Sample purity
+>
+> Do you think we processed these samples good enough?
+>
+> ![Sequencing depth](../../images/wab-hba.png "Hemoglobin across clusters")
+>
+> > ### {% icon solution %} Solution
+> >
+> > These clusters are not very tight or distinct, so we could consider stronger filtering. For instance, while hemoglobin is high in the red blood cells cluster, it appears throughout the entire sample in low numbers. This suggests some background in the media the cells were in, and we might consider in the wet lab trying to get a purer, happier sample, or in the dry lab, techniques such as SoupX or others to remove this background. Playing with filtering settings (increasing minimum counts/cell, etc.) is often the place to start in these scenarios.
+> >
+> {: .solution}
+>
+{: .question}
+
+> ### {% icon question %} Question - Clustering resolution
+>
+> Do you think the clustering is appropriate? i.e. are there single clusters that you think should be separate, and multiple clusters that could be combined?
+>
+> ![Itm2a Expression](../../images/wab-umap-itm2a.png "Itm2a across clusters")
+>
+> > ### {% icon solution %} Solution
+> >
+> > Important to note, lest all bioinformaticians combine forces to attack the biologists. Just because a cluster doesn't look like a cluster by eye is NOT enough to say it's not a cluster! But looking at the biology here, we struggled to find marker genes to distinguish the DP population, which we know is also affected by depth of sequencing. That's a reasonable argument that DP-1, DP-2, and DP-3 might not be all that different. Maybe we need more depth of sequencing across all the DP cells, or to compare these explicitly to each other (consider variations on FindMarkers!). However, DP-4 is both seemingly leaving the DP cluster and also has fewer knockout cells, so we might go and look at what DP-4 (Cluster 5) is expressing in the marker genes. If we look at T-mat further, we can see that its marker gene - Itm2a - is only expressed in the bottom half of the cluster. You might consider sub-clustering this to investigate further, either through changing the resolution or through analysing this cluster alone.
+> > If we look at the differences between genotypes alone (so the pseudo-bulk), we can see that most of the genes in that list are actually ribosomal. This might be a housekeeping background, this might be cell cycle related, this might be biological, or all three. You might consider investigating the cycling status of the cells, or even regressing this out.
+> {: .solution}
+>
+{: .question}
+
+Ultimately, there are quite a lot ways to analyse the data, both within the confines of this tutorial (the many parameters that could be changed throughout) and outside of it (batch correction, sub-clustering, cell-cycle scoring, trajectories, etc.) Most analyses will still yield the same general output - there are fewer knockout cells in the mature T-cell population.
+
+# Interactive visualisations
+
+Before we leave you to explore the unknown, you might have noticed that the above interpretations are only a few of the possible options. Plus you might have had fun trying to figure out which sample is which genotype is which sex and flicking back and forth between plots repeatedly. Figuring out which plots will be your *final publishable* plots takes a lot of time and testing. Luckily, there are helpful interactive viewer export tools {% cite Moreno2020.04.08.032698 %} that can help you explore without having to produce new plots over and over!
+
+
+<---- This is not working FIXME ----->
+
+> ### {% icon hands_on %} Hands-on: UCSC Cell Browser
+>
+> 1. {% tool [UCSC Cell Browser]() %} with the following parameters:
+>    - *"Choose the format of the expression data"*: `Scanpy AnnData HDF5 serialised object`
+>    - {% icon param-file %} *"Input object in AnnData hdf5 format"*: `Final cell annotated object`
+>    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
+>
+> This gives us our table of all the possible genes with their names.
+>
+>> ### {% icon hands_on %} Hands-on: Task description
+>
+{: .hands_on}
+
+For more information on how to use UCSC cell browser, check out their site, which contains lots of public data and tutorials [UCSC site](https://cells.ucsc.edu).
+
+Another option, within Galaxy, is to produce a live visualisation using cellxgene.
+
+> ### {% icon hands_on %} Hands-on: Cellxgene
+>
+> 1. {% tool [Interactive CellXgene Environment]() %} with the following parameters:
+>    - {% icon param-file %} *"Concatenate dataset"*: `Final cell annotated object`
+>
+> 2. When ready, you will see a message: {% icon details} *There is an InteractiveTool result view available, click here to display* <---- Click there!
+>
+> Sometimes this link can aggravate a firewall or something similar. It should be fine to go to the site. You will be asked to `name your annotation`, so do so to start playing around!
+>
+> 3. You can also access it by going to `User` in the top menu of Galaxy, then selecting `Active Interactive Tools`
+>
+> 4. You will need to `STOP` this active environment in Galaxy by going to `User`, `Interactive Tools`, selecting the environment, and selecting `Stop`. You may also want to delete the dataset in the history, because otherwise it continues appearing as if it's processing.
+{: .hands_on}
+
+Be warned - both visualisation tools are powerful options for exploring your data, but they both take some time to get used to. Consider exploring them as your own tutorials for another day!
 
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+> ### {% icon details %} Working in a group? The finale!
+> Hopefully, no matter which pathway of analysis you took, you found the same general interpretations. If not, this is a good time to discuss and consider with your group why that might be - what decision was 'wrong' or 'ill-advised', and how would you go about ensuring you correctly interpreted your data in the future? Top tip - trial and error is a good idea, believe it or not, and the more ways you find the same insight, the more confident you can be! But nothing beats experimental validation...
+> For those that did not take the 'control' options, please
+> > 1. Rename your history (by clicking on the history title) as **DECISION-Filtering and Plotting Single-cell RNA-seq Data**
+> > 2. Add a history annotation {% icon history-annotate %} that includes which parameters you changed/steps you changed from the *control*
+> > 3. {% include snippets/sharing_history.md %}
+> > 4. Feel free to explore any other similar histories
+{: .details}
+
+In this tutorial, you moved from technical processing to biological exploration. By analysing real data - both the exciting and the messy! - you have, hopefully, experienced what it's like to analyse and question a dataset, potentially without clear cut-offs or clear answers. If you were working in a group, you each analysed the data in different ways, and most likely found similar insights. One of the biggest problems in analysing scRNA-seq is the lack of a clearly defined pathway or parameters. You have to make the best call you can as you move through your analysis, and ultimately, when in doubt, try it multiple ways and see what happens!
+
+To discuss with like-minded scientists, join our Gitter channel for all things Galaxy-single cell!
+[![Gitter](https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg)](https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
