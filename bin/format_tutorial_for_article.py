@@ -7,11 +7,14 @@ import yaml
 from pathlib import Path
 
 
-def check_exists(fp):
+def check_exists(fp, noerror=False):
     '''Check if file in fp exists
     
     :param fp: Path object to file to test
+    :param noerror: Return a boolean instead of raising an error
     '''
+    if noerror:
+        return(fp.exists())
     if not fp.exists():
         raise ValueError("%s does not exist" % fp)
 
@@ -325,10 +328,13 @@ def copy_images(images, images_dp, tuto_dp):
     :param images_dp:
     '''
     for img in images:
-        m = re.search(r'(?P<path>\.\.\/\.\.\/images[a-z0-9\-\_\/\.]+)', img)
+        #m = re.search(r'(?P<path>\.\.\/\.\.\/images[a-z0-9\-\_\/\.]+)', img)
+        m = re.search(r'(\blink\b)?(?P<path>(\.\.\/\.\.|topics/[a-z0-9\-\_\/]+)/images[a-z0-9\-\_\/\.]+)', img)
         if m is not None:
             img_fp = tuto_dp / Path(m.group('path'))
-            check_exists(img_fp)
+            if not check_exists(img_fp, noerror=True):
+                img_fp = Path(m.group('path'))
+                check_exists(img_fp)
             new_imgfp = images_dp / Path(img_fp.name)
             shutil.copy(str(img_fp), str(new_imgfp))
         else:
