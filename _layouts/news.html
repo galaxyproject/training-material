@@ -1,0 +1,27 @@
+---
+layout: page
+---
+
+{% assign contributors = site.data['contributors'] %}
+
+<div class="newsitem">
+{% if page.contributors %}
+<div class="contributors-line">By: {% include _includes/contributor-badge-list.html contributors=page.contributors %}</div>
+{% endif %}
+
+{% for tag in page.tags %}
+<button class="label label-default tutorial_tag" id="{{ tag }}" style="{{ tag | colour_tag }}" title="{{tag}}">{{ tag  }}</button>
+{% endfor %}
+
+<hr/>
+
+{{content}}
+
+{% if page.link %}
+<a href="{{page.link}}" class="btn btn-primary">Full Story</a>
+{% endif %}
+
+{% if page.tutorial %}
+<a href="{{site.baseurl}}/{{page.tutorial}}" class="btn btn-primary">View Tutorial</a>
+{% endif %}
+</div>
