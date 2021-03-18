@@ -198,22 +198,55 @@ feature extraction. This distinguishes CNN from other classification techniques 
 The last layer in a CNN is a fully connected layer. We connect all the nodes from the previous layer to this fully connected layer, which is responsible 
 for classification of the image.
 
-# Get data
+## MNIST dataset
+
+The MNIST database of handwritten digits ({% cite LeCunMnist %}) is composed of a training set of 60,000 images and a test set of 10,000 images. The digits 
+have been size-normalized and centered in a fixed-size image (28 by 28 pixels). Images are grayscale, where each pixel is represented by a number between
+0 and 255 (0 for black, 255 for white, and other values for different shades of gray). MNIST database is a standard image classification dataset and is used 
+to compare various Machine Learning techniques.   
+
+## Get data
+
+Let's start with a fresh history.
+
+> ### {% icon hands_on %} Hands-on: Create history
+>
+> 1. Make sure you have an empty analysis history.
+>
+>    {% snippet snippets/create_new_history.md %}
+>
+> 2. **Rename your history** to make it easy to recognize
+>
+>    > ### {% icon tip %} Rename a history
+>    >
+>    > * Click on the title of the history (by default the title is `Unnamed history`)
+>    >
+>    >   ![Renaming history](../../../../shared/images/rename_history.png)
+>    >
+>    > * Type `Galaxy Introduction` as the name
+>    > * Press <kbd>Enter</kbd>
+>    >
+>    {: .tip}
+>
+{: .hands_on}
+
+### Data upload
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo](https://zenodo.org/record/2545213#.XEWTJ9-YVa0)
+> 2. Import the files from [Zenodo](https://zenodo.org/record/)
 >
 >    ```
->    https://zenodo.org/record/2545213/files/train_rows.csv
->    https://zenodo.org/record/2545213/files/test_rows_labels.csv
->    https://zenodo.org/record/2545213/files/test_rows.csv
+>    https://zenodo.org/record/<>/files/X_train.tsv
+>    https://zenodo.org/record/<>/files/y_train.tsv
+>    https://zenodo.org/record/<>/files/X_test.tsv
+>    https://zenodo.org/record/<>/files/y_test.tsv
 >    ```
 >
 >    {% snippet snippets/import_via_link.md %}
 >
-> 3. Rename the datasets as `train_rows`, `test_rows_labels` and `test_rows` respectively.
+> 3. Rename the datasets as `X_train`, `y_train`, `X_test`, and `y_test` respectively.
 >
 >    {% snippet snippets/rename_dataset.md %}
 >
@@ -223,11 +256,10 @@ for classification of the image.
 >
 {: .hands_on}
 
-# Sentiment Classification of IMDB movie reviews with RNN
+## Classification of MNIST dataset images with CNN
 
-In the section, we define a RNN and train it using IMDB movie reviews training dataset. The goal is to learn a model such that given the 
-words in a review we can predict whether the review was positive or negative. We then evaluate the trained RNN on the test dataset 
-and plot the confusion matrix.
+In this section, we define a CNN and train it using MNIST dataset training data. The goal is to learn a model such that given an image 
+of a digit we can predict whether the digit (0 to 9). We then evaluate the trained CNN on the test dataset and plot the confusion matrix.
 
 ### **Create a deep learning model architecture**
 
