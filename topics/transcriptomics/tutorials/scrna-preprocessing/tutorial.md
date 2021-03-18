@@ -763,3 +763,5 @@ Factoid: We can convert the number of UMIs to the number of molecules using a tr
 In this tutorial we have learned the importance of barcoding; namely how to define, extract, and annotate them from our reads and into the read headers, in order to preserve them during mapping. We have discovered how these barcoded reads are transformed into counts, where the cell barcode and UMI barcode are used to denote individual cells and to correct against reads that are PCR duplicates. Finally, we have learned how to combine separate batch data as well as being able to check and correct against cross-contamination.
 
 ![Recap of workflow]({% link topics/transcriptomics/images/scrna_workflow.svg %} "A recap of the entire workflow")
+
+This tutorial is part of the https://singlecell.usegalaxy.eu portal ({% cite tekman2020single %}).
