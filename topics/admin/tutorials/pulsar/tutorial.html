@@ -907,7 +907,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 25, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 18, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -954,6 +954,7 @@
   </li>
   <li><a href="#configuring-galaxy-to-use-pulsar-as-a-job-destination" id="markdown-toc-configuring-galaxy-to-use-pulsar-as-a-job-destination">Configuring <span class="notranslate">Galaxy</span> to use Pulsar as a job destination</a></li>
   <li><a href="#testing-pulsar" id="markdown-toc-testing-pulsar">Testing Pulsar</a></li>
+  <li><a href="#retries-of-the-staging-actions" id="markdown-toc-retries-of-the-staging-actions">Retries of the staging actions</a></li>
   <li><a href="#pulsar-in-production" id="markdown-toc-pulsar-in-production">Pulsar in Production</a>    <ol>
       <li><a href="#australia" id="markdown-toc-australia">Australia</a></li>
       <li><a href="#europe" id="markdown-toc-europe">Europe</a></li>
@@ -1664,6 +1665,35 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
 
 <p>How awesome is that? Pulsar in another continent with reference data automatically from CVMFS :)</p>
 
+<h1 id="retries-of-the-staging-actions">Retries of the staging actions</h1>
+
+<p>When the staging actions are carried out by the Pulsar server itself (like in the case when driving Pulsar by message queue), there are some parameters that can be tweaked to ensure reliable communication between the <span class="notranslate">Galaxy</span> server and the remote Pulsar server. 
+The aim of these parameters is to control the retrying of staging actions in the event of a failure.</p>
+
+<p>For each action (preprocess/input or postprocess/output), you can specify:</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code> - *_action_max_retries    - the maximum number of retries before giving up
+ - *_action_interval_start - how long start sleeping between retries (in seconds)
+ - *_action_interval_step  - by how much the interval is increased for each retry (in seconds)
+ - *_action_interval_max   - the maximum number of seconds to sleep between retries
+</code></pre></div></div>
+<p>substitute the * with <code class="language-plaintext highlighter-rouge">preprocess</code> or <code class="language-plaintext highlighter-rouge">postprocess</code></p>
+
+<p>In the following box, as an example, we have collected the values adopted in a Pulsar site with an unreliable network connection:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">preprocess_action_max_retries</span><span class="pi">:</span> <span class="m">30</span>
+<span class="na">preprocess_action_interval_start</span><span class="pi">:</span> <span class="m">2</span>
+<span class="na">preprocess_action_interval_step</span><span class="pi">:</span> <span class="m">10</span>
+<span class="na">preprocess_action_interval_max</span><span class="pi">:</span> <span class="m">300</span>
+<span class="na">postprocess_action_max_retries</span><span class="pi">:</span> <span class="m">30</span>
+<span class="na">postprocess_action_interval_start</span><span class="pi">:</span> <span class="m">2</span>
+<span class="na">postprocess_action_interval_step</span><span class="pi">:</span> <span class="m">10</span>
+<span class="na">postprocess_action_interval_max</span><span class="pi">:</span> <span class="m">300</span>
+
+</code></pre></div></div>
+<p>In this case, for both actions, Pulsar will try to carry out the staging action 30 times, sleeping 2 secs after the first retry and adding 10 secs more to each next retries, until a maximum of 300 seconds between retries.</p>
+
+<p>We hope you never have to experience a situation like this one, but if needed just adapt the numbers to your case and add the parameters in the <code class="language-plaintext highlighter-rouge">pulsar_yaml_config</code> section of your <code class="language-plaintext highlighter-rouge">pulsarservers.yml</code> file.</p>
+
 <h1 id="pulsar-in-production">Pulsar in Production</h1>
 
 <p>If you want to make use of Pulsar on a Supercomputer, you only need access to a submit node, and you will need to run Pulsar there. We recommend that if you need to run a setup with Pulsar, that you deploy an AMQP server (e.g. RabbitMQ) alongside your <span class="notranslate">Galaxy</span>. That way, you can run Pulsar on any submit nodes, and it can connect directly to the AMQP and <span class="notranslate">Galaxy</span>. Other Pulsar deployment options require exposing ports wherever Pulsar is running, and this requires significant more coordination effort.</p>
@@ -1778,8 +1808,8 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
     author = "Nate Coraor and Simon Gladman and Marius van den Beek and Helena Rasche",
     title = "Running Jobs on Remote Resources with Pulsar (Galaxy Training Materials)",
     year = "2021",
-    month = "02",
-    day = "25"
+    month = "03",
+    day = "18"
     url = "\url{/training-material/topics/admin/tutorials/pulsar/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
