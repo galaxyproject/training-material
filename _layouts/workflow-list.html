@@ -1,0 +1,49 @@
+---
+layout: base
+---
+
+{% assign topic = site.data[page.topic_name] %}
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ site.baseurl }}/">
+                <img src="{{ site.baseurl }}/{{ site.small_logo }}" height="30" alt="Galaxy Training Network logo">
+                {{ site.title }}
+            </a>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        {% include _includes/material.jsonld material=page topic=topic site=site %}
+    </script>
+    <section class="tutorial">
+		<h1 data-toc-skip>Workflows</h1>
+		<p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Workflow</th>
+			<th>Updated</th>
+		</tr>
+	</thead>
+	<tbody>
+{% directory path: page.dir exclude:md$ %}
+		{% assign name_size = file.name | size %}
+		{% assign maybe_ga = file.name | slice:-3,name_size %}
+		{% assign maybe_gxwf = file.name | slice:-9,name_size %}
+
+		{% if maybe_ga == ".ga" or maybe_gxwf == ".gxwf.yml" %}
+		<tr>
+			<td><a href="{{ site.baseurl }}{{ file.url }}">{{ file.name }}</a></td>
+			<td>{{ file.date | date: "%b %-d, %Y" }}</td>
+		</tr>
+		{% endif %}
+{% enddirectory %}
+	</tbody>
+</table>
+    </section>
+</div>

@@ -31,5 +31,5 @@ The reads have a direction: they are mapped to the forward or reverse strand, re
 >
 >    ![Select genome in IGV](../../images/igv_select_genome.png "Select genome in IGV")
 >
-> A general description of the user interface of the IGV browser is available here: [IGV Browser description]({{site.baseurl}}{% link topics/introduction/tutorials/igv-introduction/tutorial.md %})
+> A general description of the user interface of the IGV browser is available here: [IGV Browser description]({% link topics/introduction/tutorials/igv-introduction/tutorial.md %})
 {: .comment}

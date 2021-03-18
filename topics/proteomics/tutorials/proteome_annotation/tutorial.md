@@ -50,7 +50,7 @@ For this tutorial, we will use 3 datasets: the list of proteins identified by LC
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial and give it a name
->   {% include snippets/create_new_history.md %}
+>   {% snippet snippets/create_new_history.md %}
 >
 > 2. Import the files from [Zenodo](https://zenodo.org/record/3405119) or from the shared data library (ask your instructors).
 >
@@ -60,8 +60,8 @@ For this tutorial, we will use 3 datasets: the list of proteins identified by LC
 >    https://zenodo.org/record/3405119/files/Mucilli.txt
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet snippets/import_via_link.md %}
+>    {% snippet snippets/import_from_data_library.md %}
 >
 {: .hands_on}
 
@@ -73,7 +73,7 @@ A group of 10 proteins were identified in both “technical” control samples w
 > ### {% icon hands_on %} Hands-on: Remove the contaminants
 >
 > 1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input file"*: `Lacombe_et_al_2017_OK.txt`
+>    - {% icon param-file %} *"Input file"*: `Lacombe_2018.txt`
 >    - *"Operation"*: `Discard`
 >    - {% icon param-repeat %} *"Insert Filter by keywords"*
 >      - *"Column number on which to apply the filter"*: `c1`
@@ -82,8 +82,8 @@ A group of 10 proteins were identified in both “technical” control samples w
 >        - *"Copy/paste keywords to find"*: `P04264 P35908 P13645 Q5D862 Q5T749 Q8IW75 P81605 P22531 P59666 P78386`
 >
 >    > ### {% icon comment %} Outputs
->    > - **Filtered_Lacombe_et_al_2017.txt - Discarded_lines**: output list with the ten proteins (contaminants) removed from the original dataset (10 proteins)
->    > - **Filtered_Lacombe_et_al_2017.txt**: output contains the remaining proteins that will be considered for further analysis (151 proteins)
+>    > - **Filtered_Lacombe_2018.txt - Discarded_lines**: output list with the ten proteins (contaminants) removed from the original dataset (10 proteins)
+>    > - **Filtered_Lacombe_2018.txt**: output contains the remaining proteins that will be considered for further analysis (151 proteins)
 >    {: .comment}
 >
 {: .hands_on}
@@ -97,7 +97,7 @@ As EBC samples are obtained from air exhaled through the oral cavity, and even t
 >
 > 1. **ID Converter** {% icon tool %} with the following parameters:
 >    - *"Enter IDs"*: `Input file containing IDs`
->        - {% icon param-file %} *"Select your file"*: `Filtered_Lacombe_et_al_2017.txt` output from **Filter by keywords** {% icon tool %}
+>        - {% icon param-file %} *"Select your file"*: `Filtered_Lacombe_2018.txt` output from **Filter by keywords** {% icon tool %}
 >    - *"Column number of IDs to map"*: `c1`
 >    - *"Species"*: `Human (Homo sapiens)`
 >        - *"Type/source of IDs"*: `Uniprot accession number (e.g. P31946)`

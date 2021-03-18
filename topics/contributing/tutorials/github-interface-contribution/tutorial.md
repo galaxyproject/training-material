@@ -9,6 +9,7 @@ objectives:
   - "Create a pull request"
   - "Update a pull request"
 time_estimation: "20m"
+subtopic: contribute
 key_points:
   - "You can't add or push directly to the `master` branch, so you need to create a pull request"
   - "1 pull request = 1 branch"
@@ -20,7 +21,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-All the training material which you find on [{{ site.url }}{{ site.baseurl }}/]({{ site.baseurl }}/) is stored on a [GitHub](https://github.com) repository ([{{ site.github.repository_url }}]({{ site.github.repository_url }})), a code hosting platform for version control and collaboration. GitHub interface is quite intuitive and simplifies the contributions from anyone.
+All the training material which you find on [{{ site.url }}{{ site.baseurl }}/]({{ site.baseurl }}/) is stored on a [GitHub](https://github.com) repository ([{{ site.github_repository }}]({{ site.github.repository_url }})), a code hosting platform for version control and collaboration. GitHub interface is quite intuitive and simplifies the contributions from anyone.
 
 > ### Agenda
 >
@@ -33,11 +34,11 @@ All the training material which you find on [{{ site.url }}{{ site.baseurl }}/](
 
 # GitHub
 
-The GitHub repository for the training material is: [{{ site.github.repository_url }}]({{ site.github.repository_url }}).
+The GitHub repository for the training material is: [{{ site.github_repository }}]({{ site.github.repository_url }}).
 
 > ### {% icon hands_on %} Hands-on: Familiarization with GitHub
 >
-> 1. Go on the GitHub repository: [{{ site.github.repository_url }}]({{ site.github.repository_url }})
+> 1. Go on the GitHub repository: [{{ site.github_repository }}]({{ site.github.repository_url }})
 >
 >    ![GitHub interface](../../images/github_interface.png "Interface of the GitHub repository of the training material")
 >
@@ -53,7 +54,7 @@ The GitHub repository for the training material is: [{{ site.github.repository_u
 >
 {: .hands_on}
 
-This `CONTRIBUTORS.yaml` file is where we collect the information (name, email, etc) about the different contributors to display them on our [Hall of Fame]({{ site.baseurl }}{% link hall-of-fame.md %}). You will add your information there. But first you need to sign in to GitHub to be able to change this file.
+This `CONTRIBUTORS.yaml` file is where we collect the information (name, email, etc) about the different contributors to display them on our [Hall of Fame]({% link hall-of-fame.md %}). You will add your information there. But first you need to sign in to GitHub to be able to change this file.
 
 > ### {% icon hands_on %} Hands-on: Sign in to GitHub
 >
@@ -115,7 +116,7 @@ Without realizing it, GitHub let you create your first branch (named here `patch
 
 # Open a Pull Request
 
-Then the addition of your information in the `CONTRIBUTORS.yaml` file is currently only on your branch `patch-1`. Not on the `master` branch and so not only on the [Hall of Fame]({{ site.baseurl }}{% link hall-of-fame.md %}). You can't add or push directly to the `master` branch, so you need to create what we call a pull request.
+Then the addition of your information in the `CONTRIBUTORS.yaml` file is currently only on your branch `patch-1`. Not on the `master` branch and so not only on the [Hall of Fame]({% link hall-of-fame.md %}). You can't add or push directly to the `master` branch, so you need to create what we call a pull request.
 
 The GitHub interface guides you through this process: after clicking on **Propose file change**, a new page opens:
 
@@ -123,7 +124,7 @@ The GitHub interface guides you through this process: after clicking on **Propos
 
 > ### {% icon hands_on %} Hands-on: Edit a file
 >
-> 1. Open and read the [CONTRIBUTING.md]({{ site.github.repository_url }}/blob/master/CONTRIBUTING.md) file
+> 1. Open and read the [CONTRIBUTING.md]({{ site.github_repository }}/blob/master/CONTRIBUTING.md) file
 > 1. Come back to the pull request
 > 2. Fill in the pull request description
 >
@@ -150,7 +151,7 @@ You have created your first pull request!
 
 Your pull request will be reviewed. There are two possible outcomes:
 
-1. Your pull request is accepted. Congratulations! Your changes will be merged into the master branch of the original repository. The website will be re-built and you will be in the [Hall of Fame]({{ site.baseurl }}{% link hall-of-fame.md %})
+1. Your pull request is accepted. Congratulations! Your changes will be merged into the master branch of the original repository. The website will be re-built and you will be in the [Hall of Fame]({% link hall-of-fame.md %})
 2. Your pull request needs modifications: the reviewers will ask for some changes, possibly because the automatic tests are failing.
 
 # Update a Pull Request

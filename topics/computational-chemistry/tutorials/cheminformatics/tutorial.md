@@ -65,11 +65,11 @@ For this exercise, we need two datasets: a protein structure and a library of co
 > 3. Rename the dataset to 'Hsp90 structure'
 > 4. Check that the datatype is correct (PDB file).
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet snippets/change_datatype.md datatype="datatypes" %}
 >
 {: .hands_on}
 
-![Hsp90 N-terminus structure]({{ site.baseurl }}{% link topics/computational-chemistry/images/2brc.png %} "Structure of Hsp90 N-terminus, as recorded on the PDB. Visualization produced using VMD  ({% cite Humphrey1996 %}).")
+![Hsp90 N-terminus structure]({% link topics/computational-chemistry/images/2brc.png %} "Structure of Hsp90 N-terminus, as recorded on the PDB. Visualization produced using VMD  ({% cite Humphrey1996 %}).")
 
 # Separating protein and ligand structures
 
@@ -156,12 +156,19 @@ We will generate our compound library by searching ChEMBL for compounds which ha
 >    Optional: experiment with different combinations of options - adding different filters, adjusting the Tanimoto coefficient.
 > 4. Check that the datatype is correct (smi). This step is essential, as Galaxy does not automatically detect the datatype for SMILES files.
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet snippets/change_datatype.md datatype="datatypes" %}
 > 5. Rename dataset **'Compound library'**.
 >
 {: .hands_on}
 
 There are some other tools available, which will not be used in this tutorial, which help to develop a more focused compound library. For example, the 'Natural product likeness calculator' and 'Drug-likeness' tools assign a score to compounds based on how similar they are to typical natural products and drugs respectively, which could then be used to filter the library. If you are interested, you can try testing them out on the library just generated.
+
+> ### {% icon tip %} Tip: Generating a compound library
+> If you try using this tutorial using your own data, you might encounter some issues. Important things to remember:
+> * If you encounter an error, check the SMILES file only has a single column. Additional columns can be removed using the 'Cut' tool.
+> * If the output file is empty, it may be that the ChEMBL database doesn't have any compounds similar to the input. Consider lowering the Tanimoto coefficient to 70 if this is the case and removing filters (including the Lipinski RO5 filter). If this doesn't help, you will have to use another source of chemical data (e.g. PubChem).
+> * Finally, please remember this step is totally optional if you already have a list of compounds for docking (in SMILES or another format). In this case you can upload them to Galaxy and continue with the next step.
+{: .tip}
 
 > ### {% icon details %} What are SMILES and SDF formats?
 >
@@ -248,7 +255,7 @@ It can be useful to visualize the compounds generated. There is a tool available
 
 This produces an SVG image of all the structures generated ordered by molecular weight.
 
-![Hsp90 N-terminus structure]({{ site.baseurl }}{% link topics/computational-chemistry/images/compound_library.png %} "Structures of the compounds from ChEMBL.")
+![Hsp90 N-terminus structure]({% link topics/computational-chemistry/images/compound_library.png %} "Structures of the compounds from ChEMBL.")
 
 ### Calculation of fingerprints and clustering
 
@@ -273,7 +280,7 @@ Before clustering, let's label each compound. To do so add a second column to th
 
 Taylor-Butina clustering  ({% cite Butina1999 %}) provides a classification of the compounds into different groups or clusters, based on their structural similarity. This methods shows us how similar the compounds are to the original ligand, and after docking, we can compare the results to the proposed clusters to observe if there is any correlation.
 
-![Fingerprinting]({{ site.baseurl }}{% link topics/computational-chemistry/images/fingerprints.png %} "A simple fingerprinting system. Each 1 or 0 in the bitstring corresponds to the presence or absence of a particular feature in the molecule. In this case, the presence of phenyl, amine and carboxylic acid groups are encoded.")
+![Fingerprinting]({% link topics/computational-chemistry/images/fingerprints.png %} "A simple fingerprinting system. Each 1 or 0 in the bitstring corresponds to the presence or absence of a particular feature in the molecule. In this case, the presence of phenyl, amine and carboxylic acid groups are encoded.")
 
 > ### {% icon hands_on %} Hands-on: Cluster molecules using molecular fingerprints
 > 1. **Taylor-Butina clustering** {% icon tool %} with the following parameters:
@@ -288,7 +295,7 @@ Taylor-Butina clustering  ({% cite Butina1999 %}) provides a classification of t
 
 The image produced by the NxN clustering shows the clustering in the form of a dendrogram, where individual molecules are represented as vertical lines and merged into clusters. Merges are represented by horizontal lines. The y-axis represents the similarity of data points to each other; thus, the lower a cluster is merged, the more similar the data points are which it contains. Clusters in the dendogram are colored differently. For example, all molecules connected in red are similar enough to be grouped into the same cluster. 
 
-![NxN clustering]({{ site.baseurl }}{% link topics/computational-chemistry/images/nxn.png %} "Dendrogram produced by NxN clustering. The library used to produce this image is generated with a Tanimoto cutoff of 80; here 15 search results are shown, plus the original ligand contained in the PDB file.")
+![NxN clustering]({% link topics/computational-chemistry/images/nxn.png %} "Dendrogram produced by NxN clustering. The library used to produce this image is generated with a Tanimoto cutoff of 80; here 15 search results are shown, plus the original ligand contained in the PDB file.")
 
 > ### {% icon details %} Further investigation (optional)
 >
@@ -315,7 +322,7 @@ From our collection of SD-files, we first extract all stored values into tabular
 >    - {% icon param-file %} *"Keep one header line"*: `Yes` 
 >    - {% icon param-file %} *"Append File name"*: `No` 
 >
->    {% include snippets/select_collection.md datatype="datatypes" %}
+>    {% snippet snippets/select_collection.md datatype="datatypes" %}
 >
 > 3. **Compound conversion** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Molecular input file"*: choose one of the SD-files from the collection generated by the docking step.
@@ -330,7 +337,7 @@ We now have a tabular file available which contains all poses calculated for all
 >
 > There are visualizations available in Galaxy for producing various types of plots - for example, a scatter plot of RMSD (compared to optimal docking pose) against docking score can be calculated very easily:
 > 
-> ![Scatter plot of RMSD against docking score]({{ site.baseurl }}{% link topics/computational-chemistry/images/scatterplot.png %} "Scatter plot of RMSD against docking score.")
+> ![Scatter plot of RMSD against docking score]({% link topics/computational-chemistry/images/scatterplot.png %} "Scatter plot of RMSD against docking score.")
 > 
 > The plot shows a correlation between the two variables, as expected, though only a slight one, given the narrow range of docking scores in the dataset and the structural similarity of the ligands tested.
 > 
@@ -339,4 +346,4 @@ We now have a tabular file available which contains all poses calculated for all
 
 Use the NGLviewer to inspect the protein and various ligand poses generated by docking. This can be done using either the visualization of NGLViewer in Galaxy, or via the [NGL website](http://nglviewer.org/ngl/).
 
-![Two docking poses for a ligand bound to Hsp90]({{ site.baseurl }}{% link topics/computational-chemistry/images/activesite.gif %} "Two docking poses for a ligand bound to the active site of Hsp90. One (docking score -8.4) can be seen to be bound deeper in the active site than the other (docking score -5.7), which is reflected in the difference between the docking scores.")
+![Two docking poses for a ligand bound to Hsp90]({% link topics/computational-chemistry/images/activesite.gif %} "Two docking poses for a ligand bound to the active site of Hsp90. One (docking score -8.4) can be seen to be bound deeper in the active site than the other (docking score -5.7), which is reflected in the difference between the docking scores.")

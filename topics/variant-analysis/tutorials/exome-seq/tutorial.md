@@ -136,8 +136,8 @@ data, the shortened analysis from premapped reads may suit your time frame
 better, and will avoid redundancy if you have previously worked through other
 tutorials demonstrating NGS quality control and read mapping, like the
 dedicated
-[Quality control]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
-and [Mapping]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/mapping/tutorial.md %})
+[Quality control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
+and [Mapping]({% link topics/sequence-analysis/tutorials/mapping/tutorial.md %})
 tutorials.
 
 The following hands-on section will guide you through obtaining the right
@@ -147,8 +147,8 @@ data for either analysis.
 >
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet snippets/create_new_history.md %}
+>    {% snippet snippets/rename_history.md %}
 >
 > 2. Obtain the raw sequencing data
 >
@@ -177,15 +177,15 @@ data for either analysis.
 >    through a shared data library (your instructor may tell you so), in
 >    which case you may prefer to import the data directly from there.
 >
->    {% include snippets/import_via_link.md format="fastqsanger.gz" %}
+>    {% snippet snippets/import_via_link.md format="fastqsanger.gz" %}
 >
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet snippets/import_from_data_library.md %}
 >
 > 3. Check that the newly created datasets in your history have their
 >    datatypes assigned correctly to `fastqsanger.gz`, and fix any missing or
 >    wrong datatype assignment
 >
->    {% include snippets/change_datatype.md datatype="fastqsanger.gz" %}
+>    {% snippet snippets/change_datatype.md datatype="fastqsanger.gz" %}
 >
 >    {% icon trophy %} Congratulations for obtaining the datasets required for
 >    an analysis including reads mapping. You should now
@@ -210,22 +210,22 @@ data for either analysis.
 >    through a shared data library (your instructor may tell you so), in
 >    which case you may prefer to import the data directly from there.
 >
->    {% include snippets/import_via_link.md format="bam" %}
+>    {% snippet snippets/import_via_link.md format="bam" %}
 >
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet snippets/import_from_data_library.md %}
 >
 > 5. Check that the newly created datasets in your history have their
 >    datatypes assigned correctly to `bam`, and fix any missing or wrong
 >    datatype assignment
 >
->    {% include snippets/change_datatype.md datatype="bam" %}
+>    {% snippet snippets/change_datatype.md datatype="bam" %}
 >
 > 6. Specify the genome version that was used for mapping
 >
 >    Change the database/build (dbkey) for each of your bam datasets
 >    to `hg19`.
 >
->    {% include snippets/change_dbkey.md dbkey="Human Feb. 2009 (GRCh37/hg19) (hg19)" %}
+>    {% snippet snippets/change_dbkey.md dbkey="Human Feb. 2009 (GRCh37/hg19) (hg19)" %}
 >
 >    > ### {% icon details %} Why specify genome versions
 >    > When you are starting with sequencing data that has already been mapped
@@ -248,7 +248,7 @@ data for either analysis.
 >    address as the dataset name, which you will likely want to shorten to
 >    just the file names.
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet snippets/rename_dataset.md %}
 >
 > 8. Add #father/#mother/#child tags to the datasets
 >
@@ -264,7 +264,7 @@ data for either analysis.
 >    Tags are supposed to help you identify the origin of datasets quickly,
 >    but you can choose them as you like.
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet snippets/add_tag.md %}
 >
 > 9. Obtain the reference genome
 >
@@ -319,13 +319,13 @@ of time spent on analyzing low-quality data that is not worth the effort.
 Here, we will perform a standard quality check on our input data and only point
 out a few interesting aspects about that data. For a more thorough explanation
 of NGS data quality control, you may want to have a look at the dedicated
-tutorial on [Quality control]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
+tutorial on [Quality control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 
 > ### {% icon hands_on %} Hands-on: Quality control of the input datasets
 > 1. Run **FastQC** {% icon tool %} on each of your six fastq datasets
 >       - {% icon param-files %} *"Short read data from your current history"*: all 6 FASTQ  datasets selected with **Multiple datasets**
 >
->    {% include snippets/select_multiple_datasets.md %}
+>    {% snippet snippets/select_multiple_datasets.md %}
 >
 >    When you start this job, twelve new datasets (one with the calculated raw
 >    data, another one with an html report of the findings for each input
@@ -385,7 +385,7 @@ reference genome.
 We assume here that you are at least vaguely familiar with the concept of read
 mapping and only illustrate the concrete steps necessary  to map our specific
 NGS reads datasets to the human reference genome. We recommend you to follow
-the dedicated [Mapping tutorial]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/mapping/tutorial.md %}), if you need a general introduction to read mapping.
+the dedicated [Mapping tutorial]({% link topics/sequence-analysis/tutorials/mapping/tutorial.md %}), if you need a general introduction to read mapping.
 
 > ### {% icon hands_on %} Hands-on: Read Mapping
 > 1. **Map with BWA-MEM** {% icon tool %} to map the reads from the **father** sample to the reference genome
@@ -457,7 +457,7 @@ the dedicated [Mapping tutorial]({{ site.baseurl }}{% link topics/sequence-analy
 >        - *"Read group identifier (ID)"*: `001`
 >      - *"Auto-assign"*: `No`
 >        - *"Read group sample name (SM)"*: `mother`
-> 
+>
 > 3. **Map with BWA-MEM** {% icon tool %} to map the reads from the **child** sample to the reference genome **using the same parameters as before** except
 >
 >    - *"Single or Paired-end reads"*: `Paired`
@@ -880,7 +880,7 @@ which is rather simple to generate manually.
 >
 >    and set its datatype to `tabular`.
 >
->    {% include snippets/create_new_file.md format="tabular" %}
+>    {% snippet snippets/create_new_file.md format="tabular" %}
 >
 >    > ### {% icon warning %} Remember those sample names
 >    >
@@ -1174,22 +1174,22 @@ you think could plausibly be causative for the child's disease.
 >
 {: .hands_on}
 
-> > ### {% icon question %} Question
-> >
-> > From the GEMINI reports you generated, can you identify the most likely
-> > candidate variant responsible for the child's disease?
-> {: .question}
+> ### {% icon question %} Question
+>
+> From the GEMINI reports you generated, can you identify the most likely
+> candidate variant responsible for the child's disease?
+{: .question}
 
-> > ### {% icon details %} More GEMINI usage examples
-> >
-> > While only demonstrating command line use of GEMINI, the following tutorial
-> > slides may give you additional ideas for variant queries and filters:
-> >
-> > - [Introduction to GEMINI](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf)
-> > - [Identifying *de novo* mutations with GEMINI](https://s3.amazonaws.com/gemini-tutorials/Gemini-DeNovo-Tutorial.pdf)
-> > - [Identifying recessive gene candidates with GEMINI](https://s3.amazonaws.com/gemini-tutorials/Gemini-Recessive-Tutorial.pdf)
-> > - [Identifying dominant gene candidates with GEMINI](https://s3.amazonaws.com/gemini-tutorials/Gemini-Dominant-Tutorial.pdf)
-> {: .details}
+> ### {% icon details %} More GEMINI usage examples
+>
+> While only demonstrating command line use of GEMINI, the following tutorial
+> slides may give you additional ideas for variant queries and filters:
+>
+> - [Introduction to GEMINI](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf)
+> - [Identifying *de novo* mutations with GEMINI](https://s3.amazonaws.com/gemini-tutorials/Gemini-DeNovo-Tutorial.pdf)
+> - [Identifying recessive gene candidates with GEMINI](https://s3.amazonaws.com/gemini-tutorials/Gemini-Recessive-Tutorial.pdf)
+> - [Identifying dominant gene candidates with GEMINI](https://s3.amazonaws.com/gemini-tutorials/Gemini-Dominant-Tutorial.pdf)
+{: .details}
 
 # Conclusion
 {:.no_toc}

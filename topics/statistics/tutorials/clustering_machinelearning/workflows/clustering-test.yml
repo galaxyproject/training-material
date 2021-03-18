@@ -1,0 +1,52 @@
+---
+- doc: Test Clustering workflow
+  job:
+    iris:
+      class: File
+      location: https://zenodo.org/api/files/4cc718d4-8a36-4d05-a211-b954fbc015f7/iris.csv
+      filetype: csv
+    circles:
+      class: File
+      location: https://zenodo.org/api/files/4cc718d4-8a36-4d05-a211-b954fbc015f7/circles.csv
+      filetype: csv
+    moon:
+      class: File
+      location: https://zenodo.org/api/files/4cc718d4-8a36-4d05-a211-b954fbc015f7/moon.csv
+      filetype: csv
+  outputs:
+    heirarchical_clustering_circles:
+      asserts:
+        has_text:
+          text: 'PNG'
+    kmeans_clustering_circles:
+      asserts:
+        has_text:
+          text: 'PNG'
+    dbscan_clustering_circles:
+      asserts:
+        has_text:
+          text: 'PNG'
+    heirarchical_clustering_moon:
+      asserts:
+        has_text:
+          text: 'PNG'
+    kmeans_clustering_moon:
+      asserts:
+        has_text:
+          text: 'PNG'
+    dbscan_clustering_moon:
+      asserts:
+        has_text:
+          text: 'PNG'
+    heirarchical_clustering_iris:
+      asserts:
+        has_text:
+          text: 'PNG'
+    kmeans_clustering_iris:
+      asserts:
+        has_text:
+          text: 'PNG'
+    dbscan_clustering_iris:
+      asserts:
+        has_text:
+          text: 'PNG'

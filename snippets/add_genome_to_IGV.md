@@ -1,4 +1,3 @@
-
 > ### {% icon tip %} Tip: Add genome and annotations to IGV from Galaxy
 >
 > 1. Upload a FASTA file with the reference genome and a GFF3 file with its annotation in the history (if not already there)

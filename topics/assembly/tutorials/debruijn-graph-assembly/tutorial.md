@@ -11,6 +11,7 @@ objectives:
   - "Compare this assembly with those we did in the basic tutorial"
   - "Perform an assembly using the SPAdes assembler."
 time_estimation: "2h"
+level: Introductory
 key_points:
   - "We learned about how the choice of k-mer size will affect assembly outcomes"
   - "We learned about the strategies that assemblers use to make reference genomes"
@@ -18,7 +19,7 @@ key_points:
   - "You should use SPAdes or another more modern assembler than Velvet for actual assemblies now."
 contributors:
   - slugger70
-  - erasche
+  - hexylena
   - shiltemann
 ---
 
@@ -49,7 +50,7 @@ We will be using the same data that we used in the introductory tutorial, so if 
 >
 > 1. Create and name a new history for this tutorial.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 2. Import the sequence read raw data (\*.fastq) from [Zenodo](https://zenodo.org/record/582600)
 >
@@ -58,13 +59,13 @@ We will be using the same data that we used in the introductory tutorial, so if 
 >    https://zenodo.org/record/582600/files/mutant_R2.fastq
 >    ```
 >
->    {% include snippets/import_via_link.md %}
+>    {% snippet snippets/import_via_link.md %}
 >
 > 3. Rename the files {% icon galaxy-pencil %}
 >    - The name of the files are the full URL, let's make the names a little clearer
 >    - Change the names to just the last part, `Mutant_R1.fastq`, `Mutant_R2.fastq`  respectively
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet snippets/rename_dataset.md %}
 >
 >    > ### {% icon question %} Questions
 >    >

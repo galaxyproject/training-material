@@ -1,6 +1,9 @@
 ---
 layout: tutorial_hands_on
 title: "Understanding Barcodes"
+subtopic: single-cell
+priority: 3
+
 zenodo_link: "https://zenodo.org/record/2573177"
 tags:
   - single-cell
@@ -21,18 +24,20 @@ requirements:
     type: "internal"
     topic_name: transcriptomics
     tutorials:
-        - scrna-plates-batches-barcodes
+        - scrna-preprocessing
 
 follow_up_training:
   -
     type: "internal"
     topic_name: transcriptomics
     tutorials:
-        - scrna-preprocessing
+        - scrna-plates-batches-barcodes
 
 
 contributors:
   - mtekman
+
+gitter: Galaxy-Training-Network/galaxy-single-cell
 
 ---
 
@@ -72,17 +77,11 @@ In this case; *Read1* contains the barcoding information followed by the polyT t
 
 # Understanding Barcodes
 
-> ### {% icon comment %} Viewing the pre-requisite topic
->
-> It is highly recommended that the material in the ***Plates, Batches, and Barcodes*** slides [here](../scrna-plates-batches-barcodes/slides.html) are first observed before proceeding with the rest of this tutorial.
->
-{: .comment}
-
 Cell barcodes are designed primarily for delineating one cell from another, such that read transcripts containing different cell barcodes can be trivially said to be derived from different cells.
 
- ![Cell Barcodes](../../images/scrna_pbb_barcodes_add.svg "Two seperate cell barcodes GGG and TCT, added to all read transcripts of two different cells")
+ ![Cell Barcodes](../../images/scrna_pbb_barcodes_add.svg "Two separate cell barcodes GGG and TCT, added to all read transcripts of two different cells")
 
-Transcript barcodes are different. These can be thought of as "random salt" that is sprinkled onto any given cell that helps reduce the number of duplicate transcripts.
+Transcript barcodes, meanwhile, are random sets of nucleotides added to each transcript.
 
  ![Transcript Barcodes](../../images/scrna_umi_add.svg "Random oligonucleotides barcodes added to (cell barcoded) reads")
 
@@ -137,7 +136,7 @@ Consider the above example where two reads from different transcripts are amplif
 
 > |  | Reads in Cell 1 |
 > |--|------------------|
-> | Gene Red | 5 |
+> | Gene Red | 4 |
 > | Gene Blue | 0 |
 {: .matrix}
 
@@ -198,13 +197,13 @@ This then provides us with the true count of the number of true transcripts for 
 > >
 > >   e.g.
 > >
-> >  | BC:Cell | BC:UMI | Maps to Gene |
+> >  | BC:Cell | Maps to Gene | BC:UMI |
 > >  |------|-----|------|
-> >  | AAAT | TCA | Slx1 |
-> >  | AAAT | GTG | Slx2 |
-> >  | AAAT | TCA | Gh13 |
-> >  | TTAA | TCA | Slx1 |
-> >  | TTAA | CCC | Atp3 |
+> >  | AAAT | Slx1 | TCA |
+> >  | AAAT | Slx2 | GTG |
+> >  | AAAT | Gh13 | TCA |
+> >  | TTAA | Slx1 | TCA |
+> >  | TTAA | Atp3 | CCC |
 > >
 > > If UMIs were unique to a gene, then the `TCA` UMI barcode would not have reads that map to both *Slx1* and *Gh13* in the same cell (`AAAT`).
 > >
@@ -225,7 +224,7 @@ We now know the role of UMIs and cell barcodes, but how do we handle them in the
 > https://zenodo.org/record/2573177/files/test_barcodes_celseq2_R2.fastq.gz
 >    ```
 >
->    {% include snippets/import_via_link.md %} <br/>
+>    {% snippet snippets/import_via_link.md %} <br/>
 >
 >    1. Build a *Dataset pair* for the two FASTQ files <!-- cannot force this to count from 3 -->
 >       - Click the *Operations on multiple datasets* check box at the top of the history panel
@@ -251,7 +250,7 @@ At this point we now have a history with two items: our paired FASTQ test data, 
 > ### {% icon hands_on %} Hands-on: Extracting the Reads
 >
 > 1. Extracting our 4 reads
->    * **Filter sequences by ID** {% icon tool %} with the following parameters:
+>    * {% tool [Filter sequences by ID](toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7) %} with the following parameters:
 >      - **Sequence file to be filtered**
 >        - Click the *Dataset Collection* icon
 >        - Select the FastQ collection if not already selected.
@@ -262,7 +261,7 @@ At this point we now have a history with two items: our paired FASTQ test data, 
 >      - **Output positive matches, negative matches, or both?**:`Just positive matches (ID on list), as a single file`
 >
 > 1. Change the datatypes of the output pair to `fastqsanger` if not already set.
->    {% include snippets/change_datatype.md %}
+>    {% snippet snippets/change_datatype.md %}
 >
 > 1. Viewing our 4 reads side-by-side
 >    - Activate the **Scratchbook** by clicking on the **Enable/Disable Scratchbook** icon on the main top toolbar
@@ -341,7 +340,7 @@ Let us examine these four reads of interest which we have just sub-selected usin
 What we observe are the standard four lines of any FASTQ file:
   1. Read name starting with `@`
   2. Sequence of nucleotide bases
-  3. Seperator `+`
+  3. Separator `+`
   4. Quality string of the nucleotide bases in ASCII
 
 The main source of interest for us is in the (2) sequences of these reads, which somewhere within encode for three crucial pieces of information that we will need to perform quantification:
@@ -369,8 +368,8 @@ The encoding of the barcodes on the first read can actually be seen by examining
 
 > ### {% icon hands_on %} Hands-on: Confirming the Barcoding
 >
-> 1. **FastQC** {% icon tool %} with the following parameters:
->    - {% icon param-collection %} *"Short read data from your current history"*: `Paired FastQ` (the original paired set)
+> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
+>    - {% icon param-collection %} *"Short read data from your current history"*: `Paired FastQ` (the original paired set) You will need to choose 'Dataset collection' to allow this as an input.
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -442,7 +441,7 @@ In a sense, we have a disparity in our data: the reverse reads contain the seque
 > >     13763:   GCCACCTAATTTCCGTCATCACACTCCTCTCCGTTTTCAACTTGCACAATGCTGTCTCCGCAGAATCCCT
 > >     35690:                        CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA
 > >
-> > They describe the same transcript but have sequences from different reads, and therefore both reads *should* be counted as seperate reads. Whether or not both these reads are counted as a single read due to their identical barcodes, or counted seperately due to their differing sequences depends entirely on the deduplication utility they are fed into it.
+> > They describe the same transcript but have sequences from different reads, and therefore both reads *should* be counted as separate reads. Whether or not both these reads are counted as a single read due to their identical barcodes, or counted separately due to their differing sequences depends entirely on the deduplication utility they are fed into it.
 > >
 > {: .solution}
 {: .question}
@@ -455,7 +454,7 @@ For this we need to take the barcode information from the Forward reads, and sti
 
 > ### {% icon hands_on %} Hands-on: Barcode Extraction and Annotation of our 4 reads
 >
-> 1. **UMI-tools extract** {% icon tool %} with the following parameters:
+> 1. {% tool [UMI-tools extract](toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_extract/umi_tools_extract/0.5.5.1) %} with the following parameters:
 >    - *"Library type"*: `Paired-end Dataset Collection`
 >        - {% icon param-collection %} *"Reads in FASTQ format"*: `output` (Our paired set of 4 sequences)
 >        - *"Barcode on both reads?"*: `Barcode on first read only`
@@ -556,3 +555,5 @@ We have also now successfully *de*-multiplexed our data, by decoding each pair o
 {:.no_toc}
 
 With this tutorial we have understood the importance of handling FASTQ data from different sources, and extracting the information we need (barcodes (cell and UMI) and sequence) using **UMI-tools** so that we can perform mapping without losing any context of where the reads are derived from.
+
+This tutorial is part of the https://singlecell.usegalaxy.eu portal ({% cite tekman2020single %}).

@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Introduction to Genome Assembly"
+title: "An Introduction to Genome Assembly"
 zenodo_link: "https://doi.org/10.5281/zenodo.582600"
 questions:
   - "How do we perform a very basic genome assembly from short read data?"
@@ -9,6 +9,7 @@ objectives:
   - "assemble some paired end reads using Velvet"
   - "examine the output of the assembly."
 time_estimation: "30m"
+level: Introductory
 key_points:
   - "We assembled some Illumina fastq reads into contigs using a short read assembler called Velvet"
   - "We showed what effect one of the key assembly parameters, the k-mer size, has on the assembly"
@@ -48,12 +49,15 @@ We will now import the data that we will use for the tutorial.
 >
 > 1. Create and name a new history for this tutorial.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 2. Import from [Zenodo](https://doi.org/10.5281/zenodo.582600) or from the data library the files:
->    - [`mutant_R1.fastq`](https://zenodo.org/record/582600/files/mutant_R1.fastq)
->    - [`mutant_R2.fastq`](https://zenodo.org/record/582600/files/mutant_R2.fastq)
->    - [`wildtype.fna`](https://zenodo.org/record/582600/files/wildtype.fna)
+>
+>    ```
+>    https://zenodo.org/record/582600/files/mutant_R1.fastq
+>    https://zenodo.org/record/582600/files/mutant_R2.fastq
+>    https://zenodo.org/record/582600/files/wildtype.fna
+>    ```
 >
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >
@@ -69,7 +73,7 @@ We will now import the data that we will use for the tutorial.
 >
 >    As a default, Galaxy uses the link as the name of the new dataset. It also does not link the dataset to a database or a reference genome.
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet snippets/rename_dataset.md %}
 >
 > 4. Inspect the content of a file.
 >

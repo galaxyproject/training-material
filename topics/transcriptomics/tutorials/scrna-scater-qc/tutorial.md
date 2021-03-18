@@ -1,7 +1,10 @@
 ---
 layout: tutorial_hands_on
 
-title: Single-cell quality control with scater
+title: "Single-cell quality control with scater"
+subtopic: single-cell
+priority: 5
+
 zenodo_link: 'https://zenodo.org/record/3386291'
 tags:
   - single-cell
@@ -17,7 +20,14 @@ requirements:
     type: "internal"
     topic_name: transcriptomics
     tutorials:
-      - scrna-preprocessing
+      - scrna-plates-batches-barcodes
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: transcriptomics
+    tutorials:
+      - scrna-raceid
+
 time_estimation: 1H
 key_points:
 - Single-cell RNA-seq data is often noisy
@@ -25,6 +35,8 @@ key_points:
 contributors:
 - ethering
 - nsoranzo
+
+gitter: Galaxy-Training-Network/galaxy-single-cell
 
 ---
 
@@ -76,8 +88,8 @@ We will use a pre-calculated expression matrix, along with some additional metad
 >    https://zenodo.org/record/3386291/files/mt_controls.txt
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet snippets/import_via_link.md %}
+>    {% snippet snippets/import_from_data_library.md %}
 >
 {: .hands_on}
 
@@ -92,7 +104,7 @@ Take a look at the uploaded data by clicking on the {% icon galaxy-eye %} symbol
 
 > ### {% icon hands_on %} Hands-on: Calculate QC metrics
 >
-> 1. **Scater: Calculate QC metrics** {% icon tool %} with the following parameters:
+> 1. {% tool [Scater: Calculate QC metrics](toolshed.g2.bx.psu.edu/repos/iuc/scater_create_qcmetric_ready_sce/scater_create_qcmetric_ready_sce/1.12.2) %}  with the following parameters:
 >    - {% icon param-file %} *"Expression matrix in tabular format"*: `counts.txt` (Input dataset)
 >    - {% icon param-file %} *"Format dataset describing the features in tabular format"*: `annotation.txt` (Input dataset)
 >    - {% icon param-file %} *"Dataset containing the list of the mitochondrial control genes"*: `mt_controls.txt` (Input dataset)
@@ -108,27 +120,27 @@ Next, lets take a look at the data by plotting various properties to see what ou
 
 > ### {% icon hands_on %} Hands-on: Plot library QC
 >
-> 1. **Scater: plot library QC** {% icon tool %} with the following parameters:
+> 1. {% tool [Scater: plot library QC](toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2) %}  with the following parameters:
 >    - {% icon param-file %} *"Input SingleCellLoomExperiment dataset"*: `output_loom` (output of **Scater: Calculate QC metrics** {% icon tool %})
 >     - {% icon param-check %} *"Plot on log scale"*: `No`
 >
 > 2. If we have a large number of cells (500+), set the 'Plot on log scale' option to 'Yes'. This will make it easier to pick cut-offs when dealing with large numbers. When the tool has finished running, click on the {% icon galaxy-eye %} to view the plots. If it doesn't appear in the browser, you may have to download it and view it externally. You should be presented with plots similar to those below.
-> ![Raw data QC plots](../../images/scrna-scater-qc/raw_data.png "Raw data QC plots")
+>    ![Raw data QC plots](../../images/scrna-scater-qc/raw_data.png "Raw data QC plots")
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > There are four plots, two distribution bar plots and two scatter plots. 
-> > The first distribution plot is the number of reads in each library (from a single cell). 
-> > The second plot is the distribution of *feature counts* per cell. Feature counts in this case refers to the number of genes expressed in each cell. 
-> > The third plot **Scatterplot of reads vs genes** is a combination of the two barplots, in that it plots both the read count and the expressed gene count for each cell. 
-> > The final scatterplot is the **% MT genes**, which plots the number of genes expressed verses the percentage of those genes that are mitochondrial genes.
+>    > There are four plots, two distribution bar plots and two scatter plots.
+>    > The first distribution plot is the number of reads in each library (from a single cell).
+>    > The second plot is the distribution of *feature counts* per cell. Feature counts in this case refers to the number of genes expressed in each cell.
+>    > The third plot **Scatterplot of reads vs genes** is a combination of the two barplots, in that it plots both the read count and the expressed gene count for each cell.
+>    > The final scatterplot is the **% MT genes**, which plots the number of genes expressed verses the percentage of those genes that are mitochondrial genes.
 >    {: .comment}
->    > Let's look at each plot in turn and see what it tells us.
->    > - **Read counts**. You can see that there are a few cells that have less than ~200,000 reads, with other cells having up to one million reads. Although 200,000 reads is still quite a lot and we wouldn't want to get rid of so much data, we might want to think about removing cells that only contain a smaller number of reads (say, 100,000).
->    > - **Feature counts**. Similar to the read counts plot, we see a few cells that have a very low number of expressed genes (<600), then followed by a more even distribution.
->    > - **Scatterplot of reads vs genes**. This takes the information provided in the two distribution plots above and creates a scatterplot from them. The really poor-quality cells are represented by the points near the intersection of the x and y axis, being data with low read count and low gene count. These are the cells we want to remove during filtering.
->    > - **% MT genes**. You can see from the plot that there are a few cells outside the main "cloud" of datapoints. Some of these could be removed by filtering out cells with low feature counts, but others might need to be removed by mitochondrial content, such as the cell around 37.5%
-
+>
+>    Let's look at each plot in turn and see what it tells us.
+>    - **Read counts**. You can see that there are a few cells that have less than ~200,000 reads, with other cells having up to one million reads. Although 200,000 reads is still quite a lot and we wouldn't want to get rid of so much data, we might want to think about removing cells that only contain a smaller number of reads (say, 100,000).
+>    - **Feature counts**. Similar to the read counts plot, we see a few cells that have a very low number of expressed genes (<600), then followed by a more even distribution.
+>    - **Scatterplot of reads vs genes**. This takes the information provided in the two distribution plots above and creates a scatterplot from them. The really poor-quality cells are represented by the points near the intersection of the x and y axis, being data with low read count and low gene count. These are the cells we want to remove during filtering.
+>    - **% MT genes**. You can see from the plot that there are a few cells outside the main "cloud" of datapoints. Some of these could be removed by filtering out cells with low feature counts, but others might need to be removed by mitochondrial content, such as the cell around 37.5%
 >
 {: .hands_on}
 
@@ -141,7 +153,7 @@ Here, we'll use the manual filtering method.
 
 > ### {% icon hands_on %} Hands-on: Filtering with scater
 >
-> 1. **Scater: filter SCE** {% icon tool %} with the following parameters:
+> 1. {% tool [Scater: filter SCE](toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2) %}  with the following parameters:
 >    - {% icon param-file %} *"Input SingleCellLoomExperiment dataset"*: `output_loom` (output of **Scater: Calculate QC metrics** {% icon tool %})
 >    - *"Type of filter"*: `manual`
 >        - *"Number of reads mapped to a gene for it to be counted as expressed"*: `4.0`
@@ -151,12 +163,12 @@ Here, we'll use the manual filtering method.
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > Let's have a look at the parameters and their value:
-    {: .comment}
+>    > Let's have a look at the parameters and their values:
 >    > 1. *"Number of reads mapped to a gene for it to be counted as expressed"*: by default, only one read needs to be mapped to a gene for it to be counted as "expressed". We can be a little bit more stringent here and increase the number of reads that need to be mapped to a gene for it to be categorised as "expressed".
 >    > 2. *"Minimum library size (mapped reads) to filter cells on"*: This value asks how many mapped reads from each cell do you require to be mapped to your genome to be included in downstream analysis. We can see from our plots that we have a few cells that have less than 200,000 reads. 200,000 can still be quite a lot of reads (depending on the experiment), but we can use a smaller number to see what the initial effect of filtering is. Initially, use 100,000 as the value here.
 >    > 3. *"Minimum number of expressed genes"*: You can see that some cells only express a few hundred genes, so we'll remove these cells also.
 >    > 4. *"Maximum % of mitochondrial genes expressed per cell"*. You can see that as well as having one obvious outlier (~37%).
+>    {: .comment}
 >
 >
 {: .hands_on}
@@ -164,7 +176,7 @@ Here, we'll use the manual filtering method.
 
 > ### {% icon hands_on %} Hands-on: Plot library QC after filtering
 >
-> 1. **Scater: plot library QC** {% icon tool %} with the following parameters:
+> 1. {% tool [Scater: plot library QC](toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2) %}  with the following parameters:
 >    - {% icon param-file %} *"Input SingleCellLoomExperiment dataset"*: `output_loom` (output of **Scater: filter SCE** {% icon tool %})
 >
 {: .hands_on}
@@ -173,10 +185,9 @@ Here, we'll use the manual filtering method.
 
 > ### {% icon comment %} Comment
 >
-> > How did the filtering go? Do you think it's done a good job? Have you removed too many cells? Too few cells? About right?
-> >
-> > Often, it's a matter of trial and error, where you would start off by being quite lenient (low parameters) and then increasing the stringency until you're happy with the results. Using the initial Calculate QC metrics file, play around with the filtering parameters and visualise the output to see the effect different paramters have.
-
+> How did the filtering go? Do you think it's done a good job? Have you removed too many cells? Too few cells? About right?
+>
+> Often, it's a matter of trial and error, where you would start off by being quite lenient (low parameters) and then increasing the stringency until you're happy with the results. Using the initial Calculate QC metrics file, play around with the filtering parameters and visualise the output to see the effect different paramters have.
 >
 {: .comment}
 
@@ -187,7 +198,7 @@ Another filtering approach is to identify outliers in the data and remove them. 
 As we are using a rather small test dataset, it's unlikely that PCA filtering will make any difference; for a larger, noisier dataset this is what we would perform instead:
 
 > ### {% icon hands_on %} Hands-on: Task description
-> 1. **Scater: filter SCE** {% icon tool %} with the following parameters:
+> 1. {% tool [Scater: filter SCE](toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2) %}  with the following parameters:
 >    - {% icon param-file %} *"Input SingleCellLoomExperiment dataset"*: `output_loom` (output of **Scater: Calculate QC metrics** {% icon tool %})
 >    - *"Type of filter"*: `automatic`
 >
@@ -209,7 +220,7 @@ As we are using a rather small test dataset, it's unlikely that PCA filtering wi
 As discussed previously, technical artefacts can bias scRNA-seq analyses. Strong batch effects can mask real biological differences in the data, so must be identified and removed from the data. Logging meta-data details such as date of library construction, sequencing batch, sample name, technical replicate, plate number, etc., is essential to identify batch effects in the data. We can use this information to visualise the data to examine it for clustering according to batch, rather than any real biological feature.
 
 > ### {% icon hands_on %} Hands-on: PCA plot
-> 1. **Scater: PCA plot** {% icon tool %} with the following parameters:
+> 1. {% tool [Scater: PCA plot](toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_pca/scater_plot_pca/1.12.2) %}  with the following parameters:
 >    - {% icon param-file %} *"Input SingleCellLoomExperiment dataset"*: `output_loom` (output of **Scater: filter SCE** {% icon tool %})
 >    - *"Feature (from annotation file) to colour PCA plot points by"*: `Mutation_Status`
 >    - *"Feature (from annotation file) to shape PCA plot points by"*: `Cell_Cycle`
@@ -237,3 +248,5 @@ As discussed previously, technical artefacts can bias scRNA-seq analyses. Strong
 {:.no_toc}
 We have gone through the process of filtering low-quality data from an scRNA-seq expression matrix, using the visualise-filter-visualise paradigm, which proves to be a very effective way of quality-controlling scRNA-seq data. Cells that have low read-coverage, low expression values, or high mitochondrial gene expression have been filtered out. We have then examined ways of looking at confounding factors to examine batch effects in our data.
 The workflow available from the "Supporting Materials" of this tutorial can be directly imported and used or adapted to a specific analysis.
+
+This tutorial is part of the https://singlecell.usegalaxy.eu portal ({% cite tekman2020single %} and {% cite etherington2019galaxy %})

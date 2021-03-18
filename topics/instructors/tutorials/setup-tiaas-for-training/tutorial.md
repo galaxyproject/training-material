@@ -13,7 +13,7 @@ key_points:
   - This can be easier than setting up a local Galaxy and may have more resources available
   - But have a backup plan
 contributors:
-  - erasche
+  - hexylena
 ---
 
 # Introduction
@@ -99,7 +99,7 @@ It shows:
 
 1. Run through your planned trainings on the UseGalaxy.eu server to ensure everything is available including data libraries and tools.
 2. If anything is missing, contact the admins via [Gitter](https://gitter.im/usegalaxy-eu/Lobby) or [Email](mailto:contact@usegalaxy.eu) and they will work to resolve the missing training material resources.
-3. Follow the rest of the training material's [guide to preparing a workshop]({{ site.baseurl }}{% link topics/instructors/tutorials/organize-workshop/tutorial.md %})
+3. Follow the rest of the training material's [guide to preparing a workshop]({% link topics/instructors/tutorials/organize-workshop/tutorial.md %})
 
 # During Your Training
 
@@ -108,7 +108,7 @@ It shows:
    - Jobs spending abnormally long in the queue
    - Jobs failing unexpectedly
 2. Remind your participants to submit bug reports if they experience any tool errors
-3. Follow the rest of the training material's [guide to running a workshop]({{ site.baseurl }}{% link topics/instructors/tutorials/running-workshop/tutorial.md %})
+3. Follow the rest of the training material's [guide to running a workshop]({% link topics/instructors/tutorials/running-workshop/tutorial.md %})
 
 # Conclusion
 {:.no_toc}

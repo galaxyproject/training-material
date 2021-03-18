@@ -9,6 +9,7 @@ objectives:
   - "Running the GTN material website locally"
   - "Tracking changes to the content live in the webbrowser"
 time_estimation: "15m"
+subtopic: writing
 key_points:
   - "Checking the generated website can be done locally"
 contributors:
@@ -50,7 +51,9 @@ This step has to be done once.
 >     It will install some needed tools (ruby, nodejs, etc) in a protected environment, without interfering with the existing tools or versions.
 >
 >     1. Install conda (if not already installed): `make install-conda`
->     2. Create the `galaxy_training_material` conda environment: `make create-env`
+>     2. (You may need to exit the terminal and re-open for conda to be recognised. Navigate back to the same place.)
+>     3. Create the `galaxy_training_material` conda environment: `make create-env`
+>     4. Activate the environment: `conda activate galaxy_training_material`
 >
 > 4. Install Jekyll and related modules into the conda environment: `make install`
 {: .hands_on}
@@ -77,6 +80,27 @@ Once Jekyll and its modules are installed in our conda environment, we can check
 {: .hands_on}
 
 With `make serve`, a local Jekyll server will run in background. It will check the changes and regenerate the website accordingly. You may need to reload the page to see the changes (and sometimes to wait 1-2 minutes).
+
+
+> ### {% icon tip %} Tips
+>
+> 1. Running on a VM or remote machine?
+>    If you are not running this on your local machine, but e.g. on a VM, you may need to configure a webserver to serve the website.
+>
+>    Below is an example NGINX configuration (e.g. in `/etc/nginx/sites-enabled/default`)
+>    ```
+>    location /training-material/ {
+>      root /home/ubuntu/training-material/_site/;
+>    }
+>    ```
+>    (Change the `root` path above to wherever you cloned the training material folder)
+>
+> 2. Need to speed up the cloning step? You coud fetch only the latest commit of the master branch:
+>    ```
+>    git clone https://github.com/galaxyproject/training-material.git --depth 1 --branch master
+>    ```
+{: .tip}
+
 
 # Stopping the server
 

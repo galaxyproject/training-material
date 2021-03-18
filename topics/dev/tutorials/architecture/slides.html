@@ -15,8 +15,8 @@ time_estimation: "150m"
 requirements:
 key_points:
   - "Galaxy runs out of the box and fetches all needed dependencies."
-  - "Running Galaxy in production requires work configuration."
-  - "The architecture is designed to be pluggable and extendable."
+  - "Running Galaxy in production requires configuration."
+  - "The architecture is designed to be pluggable and extensible."
   - "Learn more about different Galaxy aspects in our [development section](/topics/dev/)."
 contributors:
   - jmchilton
@@ -46,13 +46,9 @@ We're here to answer your questions about Galaxy architecture!
 
 ---
 
-## Getting involved in Galaxy
-
----
+class: enlarge200
 
 **Gitter:** [galaxyproject/Lobby ](https://gitter.im/galaxyproject/Lobby)
-
-**IRC:** [irc.freenode.net#galaxyproject ](https://webchat.freenode.net/?channels=galaxyproject)
 
 **GitHub:** [github.com/galaxyproject ](https://github.com/galaxyproject)
 
@@ -60,17 +56,52 @@ We're here to answer your questions about Galaxy architecture!
 
 ---
 
-### Contributing
-
-All Galaxy development happens on GitHub
-
-Contribution guidelines: https://bit.ly/gx-CONTRIBUTING-md
-
----
-
 ## The **/galaxyproject** projects
 
+*The architecture of the ecosystem.*
+
+???
+
+Too many to cover all but we'll cover some of the big ones in a few big
+categories. User-facing applications, projects for Galaxy plugin developers,
+and projects for Galaxy administrators.
+
 ---
+
+# Lots of Gitter actually
+
+![galaxyproject gitter landing](../../images/gitter_galaxyproject.png)
+
+https://gitter.im/galaxyproject
+
+---
+
+More links we'll mention as we go through the slides:
+
+- https://gitter.im/galaxyproject/Lobby
+- https://gitter.im/galaxyproject/dev
+- https://gitter.im/galaxyproject/admins
+- https://gitter.im/galaxyproject/FederatedGalaxy
+- https://gitter.im/galaxyproject/bioblend
+- https://gitter.im/galaxyproject/ephemeris
+- https://gitter.im/usegalaxy-eu/Lobby
+- https://gitter.im/galaxy-iuc/iuc
+- https://gitter.im/bgruening/docker-galaxy-stable
+- https://gitter.im/Galaxy-Training-Network/Lobby
+- https://gitter.im/biocontainers/Lobby
+- https://gitter.im/bioconda/Lobby
+
+Working group chats linked at https://galaxyproject.org/community/wg/.
+
+---
+
+class: enlarge200
+
+**User-Facing Applications**
+
+---
+
+class: enlarge150
 
 [galaxyproject/**galaxy** ](https://github.com/galaxyproject/galaxy)
 
@@ -78,18 +109,87 @@ The main Galaxy application.
 
 Web interface, database model, job running, etc...
 
-Also includes other web applications including the **ToolShed** and **Reports**
+Also includes other web applications including the **ToolShed**.
 
 ---
 
-[galaxyproject/**cloudman**](https://github.com/galaxyproject/cloudman)
-
-Galaxy CloudMan - a web application which manages a Galaxy cluster in
-the cloud.
+class: enlarge150
 
 [galaxyproject/**cloudlaunch** ](https://github.com/galaxyproject/cloudlaunch)
 
-CloudLaunch web application to make it easy to launch images on a cloud, drives *https://launch.usegalaxy.org *
+CloudLaunch web application to make it easy to launch images on a cloud, drives *https://launch.usegalaxy.org*
+
+---
+
+class: enlarge150
+
+[galaxyproject/**training-material** ](https://github.com/galaxyproject/training-material)
+
+![logo](/assets/images/GTNLogo1000.png)
+
+Galaxy training material for scientists, developers, and admins. Powers *https://training.galaxyproject.org/*.
+
+---
+
+class: enlarge150
+
+[galaxyproject/**hub** ](https://github.com/galaxyproject/galaxy-hub)
+
+The Galaxy Hub is the community and documentation hub for the Galaxy Project. It is maintained by the community through this GitHub repository. It is a static website built using the metalsmith static site generator.
+
+Powers *https://galaxyproject.org/*.
+
+---
+
+class: enlarge150
+
+[galaxyproject/**bioblend** ](https://github.com/galaxyproject/bioblend)
+
+Official Python client for the Galaxy, ToolShed, and CloudMan APIs.
+
+Best documented path to scripting the Galaxy API.
+
+---
+
+class: enlarge150
+
+- [galaxyproject/**blend4php**](https://github.com/galaxyproject/blend4php)
+- [galaxyproject/**blend4j**](https://github.com/galaxyproject/blend4j)
+- [**chapmanb/clj-blend**](https://github.com/chapmanb/clj-blend)
+
+Galaxy API bindings for other languages, less actively maintained.
+
+---
+
+class: enlarge150
+
+[galaxyproject/**cloudman**](https://github.com/galaxyproject/cloudman)
+
+Galaxy CloudMan - a web application which manages a Galaxy Kubernetes cluster in
+the cloud.
+
+---
+
+class: enlarge150
+
+[**bgruening/docker-galaxy-stable** ](https://github.com/bgruening/docker-galaxy-stable)
+
+High quality Docker containers for stable Galaxy environments.
+
+Releases corresponding to each new version of Galaxy.
+
+Many flavors available.
+
+---
+
+class: white
+![Docker](../../images/docker-chart.png)
+
+---
+
+class: enlarge200
+
+**For Plugin Developers**
 
 ---
 
@@ -105,7 +205,6 @@ github and then deployed to test/main ToolSheds
 [galaxyproject/**tools-devteam** ](https://github.com/galaxyproject/tools-devteam)
 
 Many older tools appearing on usegalaxy.org.
-
 
 ---
 
@@ -126,16 +225,9 @@ Other repositories with high quality tools:
  * [AAFC-MBB Canada repo](https://github.com/AAFC-MBB/Galaxy/tree/master/wrappers)
  * [Mark Einon's repo](https://gitlab.com/einonm/galaxy-tools)
 
-
 ---
 
-[galaxyproject/**starforge** ](https://github.com/galaxyproject/starforge)
-
-Build Galaxy Tool dependencies for the ToolShed in Docker containers
-
-Build Galaxy framework dependencies as Python wheels
-
----
+class: enlarge150
 
 [galaxyproject/**planemo** ](https://github.com/galaxyproject/planemo)
 
@@ -151,7 +243,26 @@ container, virtual machines, Google compute images
 
 ---
 
-galaxyproject/**{ansible-\*, \*-playbook}**
+class: enlarge150
+
+[galaxyproject/**starforge** ](https://github.com/galaxyproject/starforge)
+
+![StarForge logo](https://raw.githubusercontent.com/galaxyproject/starforge/master/docs/starforge_logo.png)
+
+Build Galaxy framework dependencies as Python wheels when needed.
+
+---
+
+class: enlarge200
+
+**For Deployers and Admins**
+
+---
+
+class: enlarge150
+
+galaxyproject/**{ansible-\*, \*-playbook}**<br>
+usegalaxy-eu/**{ansible-\*, \*-playbook}**
 
 [Ansible](https://www.ansible.com/) components to automate almost every aspect of Galaxy installation and maintenance.
 
@@ -161,7 +272,11 @@ These playbooks are used to maintain Galaxy main, cloud and Docker images, virtu
 
 ---
 
-[galaxyproject/**pulsar**](https://github.com/galaxyproject/pulsar)
+class: enlarge150
+
+[galaxyproject/**pulsar** ](https://github.com/galaxyproject/pulsar)
+
+![Pulsar Logo](https://galaxyproject.org/images/galaxy-logos/pulsar_transparent.png)
 
 Distributed job execution engine for Galaxy.
 
@@ -173,38 +288,236 @@ Can act as its own queuing system or access an existing cluster DRM.
 
 ---
 
-[galaxyproject/**bioblend** ](https://github.com/galaxyproject/bioblend)
+class: enlarge150
 
-Official Python client for the Galaxy, ToolShed, and CloudMan APIs.
+[galaxyproject/**ephemeris** ](https://github.com/galaxyproject/ephemeris)
 
-Best documented path to scripting the Galaxy API.
+Library and CLI for managing Galaxy plugins - tools, index data, and workflows.
 
----
-
-- [galaxyproject/**blend4php**](https://github.com/galaxyproject/blend4php)
-- [**jmchilton/blend4j**](https://github.com/jmchilton/blend4j)
-- [**chapmanb/clj-blend**](https://github.com/chapmanb/clj-blend)
-
-Galaxy API bindings for other languages.
+Layer on top of BioBlend building useful utilities for working with the Galaxy API from an administrator perspective.
 
 ---
 
-[**bgruening/docker-galaxy-stable** ](https://github.com/bgruening/docker-galaxy-stable)
+class: enlarge150
 
-High quality Docker containers for stable Galaxy environments.
+[**usegalaxy-eu/gxadmin **](https://github.com/usegalaxy-eu/gxadmin)
 
-Releases corresponding to each new version of Galaxy.
-
-Many flavors available.
+Handy command-line utility for Galaxy administrators.
 
 ---
 
-class: white
-![Docker](../../images/docker-chart.png)
+class: enlarge150
+
+### ephemeris vs gxadmin
+
+Ephemeris generally talks to the Galaxy API and is a pure Python project, gxadmin talks directly to the Galaxy database and relevant files.
+
+---
+
+### Some (out of many) friends of the project
+
+![Bioconda](../../../../shared/images/conda_logo.png)
+
+![Biocontainers](../../images/biocontainers.png)
+
+Check out dev training materials "Tool Dependencies and Conda" and "Tool Dependencies and Containers"
+for more context.
+
+---
+
+## Putting it all together
+
+![](../../images/galaxy_main_scheme.png)
+
+???
+
+TODO: cover gxformat2, helmchart, cloudlaunch
+
+---
+
+class: enlarge200
+
+[galaxyproject/**galaxy** ](https://github.com/galaxyproject/galaxy)
+
+The rest of the slides will focus on the core repository.
+
+---
+
+## Project Management
+
+*The social architecture of the project.*
+
+---
+
+class: enlarge200
+
+### Contributing Quick Start
+
+Contribution guidelines: https://bit.ly/gx-CONTRIBUTING-md
+
+---
+
+class: enlarge200
+
+### Pull Requests
+
+Nearly all changes should come in through GitHub Pull Requests.
+
+The exceptions include security patches, packaging and release process artifacts, and backporting fixes to older releases.
+
+---
+
+class: enlarge150
+
+### Security (SECURITY_POLICY.md)
+
+In brief, to responsibly report security issues e-mail
+
+[`galaxy-committers@lists.galaxyproject.org`](mailto:galaxy-committers@lists.galaxyproject.org)
+
+Check out the full policy in [SECURITY_POLICY.md](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY_POLICY.md).
+
+---
+
+### Branches
+
+![Branches](../../images/core_branches.plantuml.svg)
+
+---
+
+class: enlarge150
+
+### Committers & Open Goverance
+
+All repository goverance is done in the open on GitHub via Pull Requests and voting. Galaxy goes beyond open source to open goverance.
+
+> "The committers group is the group of trusted developers and advocates who manage the core Galaxy code base."
+
+> "Galaxy Project committers are the only individuals who may commit to the core Galaxy code base."
+
+> "Committers may participate in all formal votes, including votes to modify team membership, merge pull requests, and modify [policies]."
+
+---
+
+class: enlarge150
+
+### Working Groups
+
+https://galaxyproject.org/community/wg/
+
+> "Galaxy has grown a lot over the years, going from a project at one university in 2005 to the global community it is today. Several parts of the Galaxy ecosystem have become avowedly and obviously community driven during that time, including tools, code, training, and several other international efforts. Galaxy Working Groups push this global model to other areas of Galaxy as well."
+
+---
+
+class: enlarge200
+
+### Code of Conduct (CODE_OF_CONDUCT.md)
+
+Describes expectations, encourages diversity, and describes how to report issues such as unacceptable behavior.
+
+Check out the full policy in [CODE_OF_CONDUCT.md](https://github.com/galaxyproject/galaxy/blob/dev/CODE_OF_CONDUCT.md).
+
+---
+
+class: enlarge150
+
+### Release Process
+
+New large releases are issued roughly every 4 months. The process is guided by an auto-created
+self documenting release issue.
+
+Check out the [20.05 release issue](https://github.com/galaxyproject/galaxy/issues/9636) as an example.
+
+---
+
+class: enlarge150
+
+### Organizing Issues and Pull Requests
+
+Extensive use of Github tags are used to try to organize the numerous issues and
+pull requests of the Galaxy repository.
+
+The tags are described in detail in [issues.rst](https://github.com/galaxyproject/galaxy/blob/dev/doc/source/project/issues.rst).
+
+---
+
+### Continuous Integration (CI)
+
+![Galaxy CI](../../images/core_ci.png)
+
+If you get Red Xs - take a second to ponder whether they make sense and don't be afraid to ask, it is a complex system with a lot of noise!
+
+---
+
+### Linting and Code Formatting
+
+Part of the Galaxy CI process includes linting both the backend Python and frontend ES 6 code.
+This linting process captures many common problems as well as enforcing a common code style.
+
+The output reports from the CI process are relatively straightforward, but it is a good process
+to lint changes before opening pull requests for them. The Python linter can be run using `tox`
+as follows.
+
+```
+$ tox -e lint
+```
+
+The client code formatting guidelines are much more strict but as a result can be applied
+automatically for very consistent code. Execute the `client-format` make command to format
+the code and then the `client-lint` command to check the result.
+
+```
+$ make client-format
+$ make client-lint
+```
+
+---
+
+### mypy and Python Types
+
+Starting with release 21.01, we are experimenting with adding type annotations to our Python
+code. We are not enforcing typing for imported library code and [mypy](https://mypy.readthedocs.io/en/stable/) does a fair job inferring
+types in most situations, so this process should be relatively transparent to contributors.
+
+If there are problems with typing, the CI should produce fairly explicit output about how to
+correct problems. These problems generally just require a single type annotation - feel free
+to request help on a pull request for what that should look like.
+
+To run a subset of the python type checking locally, `tox` again can be used:
+
+```
+$ tox -e mypy
+```
+
+A quick overview about why one might want to add type annotation to Python code and how to use
+them can be found on this [blog post](https://dev.to/dstarner/using-pythons-type-annotations-4cfe).
+Additional useful resources include [this cheat sheet from mypy](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html)
+and the Python docs for the [typing module](https://docs.python.org/3/library/typing.html).
+
+---
+
+class: enlarge200
+
+### Development Environments
+
+Galaxy developers use a wide range of IDEs and we don't offer any formal recommendation of one over another.
+
+However, Marius has assembled some documentation on debugging the [Galaxy server](https://docs.galaxyproject.org/en/master/dev/debugging_galaxy.html) and [tests](https://docs.galaxyproject.org/en/master/dev/debugging_tests.html) using VS Code.
+
+---
+
+### docs.galaxyproject.org
+
+![docs.galaxyproject.org](../../images/core_docs.png)
+
+All these documents as well as versions code and deployment documentation and release notes
+can be found at docs.galaxyproject.org.
 
 ---
 
 ## Principles
+
+*The guiding principles of the core code architecture.*
 
 ---
 
@@ -232,9 +545,9 @@ flexibility is paramount.
 - Consistent colors, fonts, themes, etc...
 - Reusable components for presenting common widgets - from the generic (forms and grids) to the specific (tools and histories).
 - Tied to specific technologies:
-  - JavaScript driven
-  - Backbone for MVC
-  - webpack & RequireJS for modules
+  - Implemented in JavaScript (ES6)
+  - Built with [webpack](https://webpack.js.org/)
+  - [Vue.js](https://vuejs.org/) for component definitions
 
 ---
 
@@ -243,11 +556,11 @@ flexibility is paramount.
 Galaxy's backend is in many ways driven by *pluggable interfaces* and
 can be adapted to many different technologies.
 
-- SQLAlchemy allows using sqlite, postgres, or MySQL for a database.
+- SQLAlchemy allows using SQLite, PostgreSQL, or MySQL (sort of) for your database.
 - Many different cluster backends or job managers are supported.
 - Different frontend proxies (e.g. nginx) are supported as well as web
   application containers (e.g. uWSGI).
-- Different storage strategies and technologies are supported (e.g. S3).
+- Different storage strategies and technologies are supported (e.g. S3, iRODS).
 - Tool definitions, job metrics, stat middleware, tool dependency resolution, workflow modules,
   datatype definitions are all plugin driven.
 
@@ -273,57 +586,124 @@ So by default Galaxy does not require:
 
 ---
 
+### In other words...
+
+The Galaxy frontend is architected with the bench scientist in mind first and foremost,
+the Galaxy backend is architected with Galaxy administrators in mind first and foremost.
+
+???
+
+TODO: slide connecting architecture to people here
+
+---
+
+## Files and Directories
+
+*The physical architecture of the Galaxy code.*
+
+---
+
+### Project Docs
+
+![Project Files](../../images/core_files_project_docs.plantuml.svg)
+
+---
+
+### Code
+
+![Code](../../images/core_files_code.plantuml.svg)
+
+---
+
+### Scripts
+
+![Scripts](../../images/core_files_scripts.plantuml.svg)
+
+---
+
+### Test Sources
+
+![Test Source Files](../../images/core_files_test.plantuml.svg)
+
+---
+
+### Continuous Integration
+
+![Continuous Integration Files](../../images/core_files_ci.plantuml.svg)
+
+---
+
+### One Repository, Two Views of a Project
+
+![Two Views of Galaxy Python Project](../../images/core_files_code_python_2_views.plantuml.svg)
+
+`lib` contains a single monolithic view of the `galaxy` namespace.
+
+Each sub-directory of `packages` contains a logical subset of this `galaxy` namespace. Directory symbolic links are used to ensure the same files are used.
+
+???
+
+TODO: a slide before this one describing Python modules and how they map to files
+using galaxy.util, galaxy.model.mapping, and galaxy.web.framework.
+
+---
+
+### Package Structure
+
+![package structure](../../images/core_packages.plantuml.svg)
+
+(somewhat aspirational still)
+
+---
+
+### PyPI
+
+![galaxy-tool-util on PyPI](../../images/core_tool_util_pypi.png)
+
+---
+
+![Package Files](../../images/core_files_code_package.plantuml.svg)
+
+---
+
 ## Web Frameworks
 
----
-
-![Client-Server Communications](../../images/server_client.plantuml.svg)
-
-???
-
-Workflow, Data Libraries, Visualization, History, Tool Menu,
-Many Grids, User and preference management.
+*The architecture of an interaction.*
 
 ---
 
-class: white
+class: reduce70
 
-![Backbone MVC](../../images/backbone-model-view.svg)
+![Client-Server Communications](../../images/server_client_vuejs.plantuml.svg)
 
-### Backbone MVC
-
----
-
-![Client-Server Communications (old)](../../images/server_client_old.plantuml.svg)
-
-???
-
-Admin things, Reports and Tool Shed Web app
+Bits and pieces of older client technologies appear throughout - ranging from Python
+mako templates to generate HTML, lower-level jQuery, and lots of Backbone legacy MVC.
 
 ---
 
-![WSGI Application](../../images/wsgi_app.svg)
+![Processing requests on the server](../../images/wsgi_app.plantuml.svg)
 
-### Galaxy WSGI
+Expanding the right side of that diagram. We will move through the component left to right.
 
 ---
 
 ### WSGI
 
 - Python interface for web servers defined by PEP 333 - https://www.python.org/dev/peps/pep-0333/.
-- Galaxy moving from Paster to uWSGI to host the application.
-  - https://bitbucket.org/ianb/paste
-  - https://uwsgi-docs.readthedocs.io/
+- Galaxy tends to favor uWSGI, but other options such as Gunicorn and Paste can be used to host the application.
+  - https://uwsgi-docs.readthedocs.io/ (a million bells and whistles, highly performant, a bit brittle)
+  - https://gunicorn.org/ (simpler, more standard Python 3 WSGI server)
+  - https://bitbucket.org/ianb/paste (more of legacy interest, but still heavily used in testing for instance)
 
 ---
 
-![WSGI Request](../../images/wsgi_request.svg)
+![Processing requests on the server](../../images/wsgi_app.plantuml.svg)
 
 ---
 
 template: left-aligned
 
-### Galaxy WSGI Middleware
+### WSGI Middleware
 
 A WSGI function:
 
@@ -352,6 +732,18 @@ Middleware configured in `galaxy.webapps.galaxy.buildapp#wrap_in_middleware`.
 
 ---
 
+![Processing requests on the server](../../images/wsgi_app.plantuml.svg)
+
+---
+
+### Classes
+
+![GalaxyWebApplication class diagram](../../images/webapp_classes.plantuml.svg)
+
+---
+
+### Instances
+
 ![webapp](../../images/webapp.plantuml.svg)
 
 ---
@@ -360,7 +752,7 @@ template: left-aligned
 
 ### Routes
 
-Setup on `webapp` in `galaxy.web.webapps.galaxy.buildapp.py`.
+Setup on `webapp` in `galaxy.webapps.galaxy.buildapp.py`.
 
 ```python
 webapp.add_route(
@@ -412,6 +804,18 @@ def handle_request(self, environ, start_response):
 
 ---
 
+class: enlarge150
+
+### Why not just Django?
+
+We do build on many of the same standards, concepts, and libraries - the entire stack isn't custom code but there is a non-trivial web framework defined in "Galaxy".
+
+The Galaxy community likes Django and uses it to build newer webapps, Galaxy simply predates it and has evolved its own framework.
+
+---
+
+class: enlarge150
+
 ### API Controllers
 
 - `lib/galaxy/webapps/galaxy/controllers/api/`
@@ -422,16 +826,62 @@ def handle_request(self, environ, start_response):
 
 ---
 
+class: enlarge150
+
 ### Legacy Controllers
 
 - `lib/galaxy/webapps/galaxy/controllers/`
 - Return arbitrary content - JSON, HTML, etc...
 - Render HTML components using [mako](http://www.makotemplates.org/) templates (see `templates/`)
-- The usage of these should decrease over time.
+- The usage of these should continue to decrease over time.
 
 ---
 
-## Application Components
+## Application Components - Models and Managers
+
+*The architecture surrounding Galaxy components.*
+
+---
+
+![This section will talk about that manager layer and what lies below](../../images/wsgi_app.plantuml.svg)
+
+---
+
+The are many of ways to describe and visualize the Galaxy server architecture,
+one is to imagine the Galaxy database as the ultimate source for Galaxy "stuff"
+and the API controllers as the ultimate sink.
+
+In this architecture imagining of Galaxy, managers are the layer meant to
+mediate all controller interactions (and isolate the backend from the web
+framework) while the model layer is meant to mediate all database interactions
+(and isolate the backend from database internals).
+
+---
+
+![Models and Managers](../../images/core_models_managers.plantuml.svg)
+
+---
+
+### Managers
+
+High-level business logic that ties all of these components together.
+
+Controllers should ideally be thin wrappers around actions defined in managers.
+
+Whenever a model requires more than just the database, the operation should be defined
+in a manager instead of in the model.
+
+---
+
+### Managers - Some Key Files
+
+![Key Managers](../../images/core_files_managers.plantuml.svg)
+
+---
+
+### Managers - Some Helpers
+
+![Manager Helpers](../../images/core_files_managers_helpers.plantuml.svg)
 
 ---
 
@@ -478,15 +928,13 @@ https://galaxyproject.org/admin/internals/data-model/
 
 ---
 
-### Metadata
+### Dataset Metadata
 
 - Typed key-value pairs attached to HDA.
 - Keys and types defined at the datatype level.
 - Can be used by tools to dynamically control the tool form.
 
 ???
-
-Slides for datatypes, example of meta data definitions...
 
 ---
 
@@ -510,11 +958,50 @@ Slides for datatypes, example of meta data definitions...
 
 ---
 
-![Data Managers](../../images/data_managers.svg)
+## Application Components - Plugins
+
+*The architecture of pluggable Galaxy components.*
 
 ---
 
-### Job Components
+![Models and Managers](../../images/core_models_managers.plantuml.svg)
+
+---
+
+### Plugins All the Way Down
+
+![Plugins](../../images/core_plugins_overview.plantuml.svg)
+
+---
+
+#### Datatypes
+
+![Datatype Files](../../images/core_files_datatypes.plantuml.svg)
+
+Developer docs on adding new datatypes can be found at https://docs.galaxyproject.org/en/latest/dev/data_types.html.
+
+---
+
+#### Tools
+
+![ToolBox Classes](../../images/core_toolbox_classes.plantuml.svg)
+
+Three major classes can be summarized as - the `ToolBox` contains `Tool` objects
+that execute a `ToolAction`.
+
+---
+
+#### Subclasses of Tool
+
+![Tool Classes](../../images/core_tool_classes.plantuml.svg)
+
+---
+
+![Running Tools](../../images/core_tool_sequence.plantuml.svg)
+
+---
+
+### A Little About Jobs
 
 - Job is placed into the database and picked up by the job handler.
 - Job handler (`JobHandler`) watches the job and transitions job's state - common startup and finishing.
@@ -523,27 +1010,20 @@ Slides for datatypes, example of meta data definitions...
 
 ---
 
-### Object Store
+### Job Runners
 
-.strike[```
->>> fh = open( dataset.file_path, 'w' )
->>> fh.write( ‘foo’ )
->>> fh.close()
->>> fh = open( dataset.file_path, ‘r’ )
->>> fh.read()
-```]
-
-```
->>> update_from_file( dataset, file_name=‘foo.txt’ )
->>> get_data( dataset )
->>> get_data( dataset, start=42, count=4096 )
-```
+![Job Runners](../../images/core_runner_classes.plantuml.svg)
 
 ---
 
-![Object Store](../../images/objectstore.plantuml.svg)
+![Handling Jobs](../../images/core_jobs_sequence.plantuml.svg)
 
 ---
+
+![Data Managers](../../images/data_managers.svg)
+
+---
+
 
 ### Visualization Plugins
 
@@ -563,19 +1043,19 @@ class: reduce70
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE visualization SYSTEM "../../visualization.dtd">
-<visualization name="Charts">
+<visualization name="ChiRAViz">
+    <description>ChiRAViz</description>
     <data_sources>
         <data_source>
-            <model_class>HistoryDatasetAssociation</model_class>
-            <test type="isinstance" test_attr="datatype" result_type="datatype">tabular.Tabular</test>
-            <test type="isinstance" test_attr="datatype" result_type="datatype">tabular.CSV</test>
+           <model_class>HistoryDatasetAssociation</model_class>
+           <test type="isinstance" test_attr="datatype" result_type="datatype">binary.ChiraSQLite</test>
             <to_param param_attr="id">dataset_id</to_param>
         </data_source>
     </data_sources>
     <params>
         <param type="dataset" var_name_in_template="hda" required="true">dataset_id</param>
     </params>
-    <entry_point entry_point_type="mako">charts.mako</entry_point>
+    <template>chiraviz.mako</template>
 </visualization>
 ```
 
@@ -587,6 +1067,7 @@ template: left-aligned
 
 All in `config/plugins/visualizations`:
 
+- `chiraviz` - Latest addition mid-2020, demonstrates current state of the art building and packing. [#9562](https://github.com/galaxyproject/galaxy/pull/9562)
 - `csg` - Chemical structure viewer
 - `graphviz` - Visualize graph data using [cytoscape.js](http://www.cytoscape.org/)
 - `charts` - Classic charts as well as some integrated BioJS visualizations
@@ -631,21 +1112,146 @@ All in `config/plugins/interactive_environments`:
 - `phinch`
 - `bam_iobio`
 
+---
+
+### Object Store
+
+.strike[```python
+>>> fh = open(dataset.file_path, 'w')
+>>> fh.write(‘foo’)
+>>> fh.close()
+>>> fh = open(dataset.file_path, ‘r’)
+>>> fh.read()
+```]
+
+```python
+>>> app.objectstore.update_from_file(dataset, file_name=‘foo.txt’)
+>>> app.objectstore.get_data(dataset)
+>>> app.objectstore.get_data(dataset, start=42, count=4096)
+```
 
 ---
 
-### Managers
+![Object Store](../../images/objectstore.plantuml.svg)
 
-High-level business logic that tie all of these components together.
+These implementation are found below `lib/galaxy/objectstore/`.
 
-Controllers should ideally be thin wrappers around actions defined in managers.
+---
 
-Whenever model require more than just the database, the operation should be defined
-in a manager instead of in the model.
+#### Workflow Modules
+
+![Workflow Modules](../../images/core_workflow_modules.plantuml.svg)
+
+All these modules are found in `lib/galaxy/workflow/modules.py`.
+
+---
+
+#### `lib/galaxy/util/plugin_config.py`
+
+Standardized way to load both a set of possible plugin class implementations
+from a directory of Python files and to parse either an XML or YAML/JSON
+description of configured plugins.
+
+---
+
+#### `lib/galaxy/util/plugin_config.py` Example Files
+
+![Workflow Modules](../../images/core_files_plugin_example.plantuml.svg)
+
+---
+
+#### `lib/galaxy/util/plugin_config.py` Plugin Implementations
+
+```python
+def plugins_dict(module, plugin_type_identifier):
+    plugin_dict = {}
+
+    for plugin_module in import_submodules(module, ordered=True):
+        for clazz in __plugin_classes_in_module(plugin_module):
+            plugin_type = getattr(clazz, plugin_type_identifier, None)
+            if plugin_type:
+                plugin_dict[plugin_type] = clazz
+
+    return plugin_dict
+```
+
+---
+
+#### Pieces of `lib/galaxy/tool_util/deps/containers.py`
+
+```python
+class ContainerRegistry(object):
+
+    def __init__(self, app_info, mulled_resolution_cache=None):
+        self.resolver_classes = self.__resolvers_dict()
+        self.app_info = app_info
+        self.container_resolvers = self.__build_container_resolvers(app_info)
+        # ... other stuff here
+
+    def __build_container_resolvers(self, app_info):
+        conf_file = getattr(app_info, 'containers_resolvers_config_file', None)
+        plugin_source = plugin_config.plugin_source_from_path(conf_file)
+        return self._parse_resolver_conf(plugin_source)
+
+    def _parse_resolver_conf(self, plugin_source):
+        extra_kwds = {
+            'app_info': self.app_info
+        }
+        return plugin_config.load_plugins(
+            self.resolver_classes, plugin_source, extra_kwds
+        )
+
+    def __resolvers_dict(self):
+        import galaxy.tool_util.deps.container_resolvers
+        return plugin_config.plugins_dict(
+            galaxy.tool_util.deps.container_resolvers,
+            'resolver_type'
+        )
+```
+
+---
+
+#### Pieces of `lib/galaxy/tool_util/deps/container_resolvers/mulled.py`
+
+
+```python
+class CachedMulledDockerContainerResolver(ContainerResolver):
+
+resolver_type = "cached_mulled"
+
+    def __init__(self, app_info=None, namespace="biocontainers", hash_func="v2", **kwds):
+        super(CachedMulledDockerContainerResolver, self).__init__(app_info)
+        self.namespace = namespace
+        self.hash_func = hash_func
+
+    def resolve(self, enabled_container_types, tool_info, **kwds):
+        # ... do the magic with configured plugin
+```
+
+---
+
+`container_resolvers_conf.xml`
+
+```xml
+<container_resolvers>
+  <cached_mulled />
+  <cached_mulled namespace="mycustom" />
+</container_resolvers>
+```
+
+`container_resolvers_conf.yml`
+
+```yaml
+- resolver_type: cached_mulled
+- resolver_type: cached_mulled
+  namespace: mycustom
+```
 
 ---
 
 ## Client Architecture
+
+*The architecture of Galaxy's web user interface.*
 
 ---
 
@@ -653,11 +1259,12 @@ template: left-aligned
 
 ### Client Directories
 
-- Source stylesheets and JavaScript in `client/galaxy/{style|scripts}`
-- "Packed" scripts served by Galaxy stored in `static/{style|scripts}`
+- Source stylesheets and JavaScript (ES6) in `client/galaxy/{style|scripts}`
+- "Packed" bundles served by Galaxy stored in `static/dist`
+  - `run.sh` uses `git diff` to try to determine if client needs to be built before starting Galaxy
   - webpack builds these "compiled" artifacts
 
-Upshot - modify files in `client` and rebuild with `make client` before
+Upshot - to develop against the client, modify files in `client/` and rebuild with `make client` before
 deployment.
 
 ---
@@ -666,84 +1273,26 @@ class: normal
 
 ### Building the Client - Makefile Targets
 
-```
-client: grunt style ## Rebuild all client-side artifacts
+```Makefile
+client: node-deps ## Rebuild all client-side artifacts (for local dev)
+  cd client && yarn run build
 
-grunt: npm-deps ## Calls out to Grunt to build client
-  cd client && node_modules/grunt-cli/bin/grunt
+client-production-maps: node-deps ## Build optimized artifacts with sourcemaps.
+  cd client && yarn run build-production-maps
 
-style: npm-deps ## Calls the style task of Grunt
-  cd client && node_modules/grunt-cli/bin/grunt style
+client-watch: node-deps ## Rebuild client on each change.
+  cd client && yarn run watch
 
-npm-deps: ## Install NodeJS dependencies.
-  cd client && npm install
-```
+client-format: node-deps ## Reformat client code
+  cd client && yarn run prettier
 
----
+client-eslint: node-deps # Run client linting
+  cd client && yarn run eslint
 
-template: left-aligned
+client-test: node-deps  ## Run JS unit tests via Karma
+  cd client && yarn run test
 
-### grunt
-
-Build tool for node/JavaScript, tasks in `client/Gruntfile.js`. Default task is
-
-.center[`grunt.registerTask( 'default', [ 'check-modules', 'uglify', 'webpack' ] );`]
-
-- `check-modules` Verifies node dependencies are correct and exact.
-- [`uglify`](https://github.com/mishoo/UglifyJS) Compresses JavaScript modules in `client` and move to `static` and creates source maps.
-   - JavaScript loads much faster but difficult to debug by default
-   - Source maps re-enable proper stack traces.
-- `webpack` Bundles modules together into a single JavaScript file - quickly loadable.
-
----
-
-template: left-aligned
-
-### JavaScript Modules - The Problem
-
-From https://requirejs.org/docs/why.html:
-
-- Web sites are turning into Web apps
-- Code complexity grows as the site gets bigger
-- Assembly gets harder
-- Developer wants discrete JS files/modules
-- Deployment wants optimized code in just one or a few HTTP calls
-
----
-
-template: left-aligned
-
-### JavaScript Modules - The Solution
-
-From https://requirejs.org/docs/why.html:
-
- - Some sort of #include/import/require
- - Ability to load nested dependencies
- - Ease of use for developer but then backed by an optimization tool that helps deployment
-
-RequireJS an implementation of AMD.
-
-
----
-
-### JavaScript Modules - Galaxy AMD Example
-
-```javascript
-/**
-    This is the workflow tool form.
-*/
-define(['utils/utils', 'mvc/tool/tool-form-base'],
-    function(Utils, ToolFormBase) {
-
-    // create form view
-    var View = ToolFormBase.extend({
-      ...
-    });
-
-    return {
-        View: View
-    };
-});
+node-deps: ## Install NodeJS and dependencies.
 ```
 
 ---
@@ -753,17 +1302,42 @@ class: white
 
 ---
 
+class: enlarge150
+
 ### webpack in Galaxy
 
-- Turns Galaxy modules into an "app".
-- Builds two bundles currently - a common set of libraries and an analysis "app".
-- https://github.com/galaxyproject/galaxy/issues/1041
-- https://github.com/galaxyproject/galaxy/pull/1144
+Packs and "transpiles" Galaxy ES6 code (.js), Galaxy Vue modules (.vue), libraries from npm, scss stylesheets (.scss) into browser native bundles.
+
+Hundreds of high-level well organized files into optimized single files that can be quickly downloaded.
+
+Lots of active development and complexity around Viz plugins and dependencies for instance, but the webpack configuration file in `config/webpack.config.js` is fairly straightforward.
 
 ---
 
 class: white
 ![Webpack in Action](../../images/jsload.png)
+
+---
+
+### Stylesheets
+
+- Galaxy stylesheets are generally defined using the SCSS syntax
+- SCSS is a high-level superset of CSS - https://sass-lang.com/documentation/syntax
+- `sass` is leveraged by webpack to convert these styles to native CSS at client build time
+- Rebuild style with `make style`
+- Galaxy's SCSS files can be found in `client/galaxy/style/scss/`
+
+---
+
+### Package and Build Files
+
+![Client Build Files](../../images/core_files_client_build.plantuml.svg)
+
+---
+
+### Source Files
+
+![Client Build Files](../../images/core_files_client_sources.plantuml.svg)
 
 ---
 
@@ -808,15 +1382,6 @@ Adds an entry to the history menu - no functionality as of now
 
 ---
 
-### Stylesheets
-
-- Galaxy uses the less CSS preprocessor - https://lesscss.org/
-- Rebuild style with `make style`
-- Less files in `client/galaxy/style/less`
-- Build happens with grunt recipe in `client/grunt-tasks/style.js`
-
----
-
 ## Dependencies
 
 ---
@@ -840,11 +1405,8 @@ template: left-aligned
 
 ### Dependencies - JavaScript
 
-These come bundled with Galaxy, so do not need to be fetched at runtime.
-
-- Dependencies are defined `galaxy/client/bower.json`.
-- Bower (https://bower.io/) is used to re-fetch these.
-- `cd client; grunt install-libs`
+- Dependencies are defined in `client/package.json`.
+- These are fetched from npm and compiled into bundles as part of `make client` and related `Makefile` targets.
 
 ---
 
@@ -854,7 +1416,7 @@ These come bundled with Galaxy, so do not need to be fetched at runtime.
 
 ### Cloning Galaxy
 
-```
+```bash
 $ git clone https://github.com/galaxyproject/galaxy.git galaxy
 Cloning into 'galaxy'...
 remote: Counting objects: 173809, done.
@@ -875,7 +1437,7 @@ class: reduce90
 
 ### Copying Configs
 
-```
+```bash
 $ sh run.sh
 Initializing config/migrated_tools_conf.xml from migrated_tools_conf.xml.sample
 Initializing config/shed_tool_conf.xml from shed_tool_conf.xml.sample
@@ -1423,5 +1985,46 @@ This used to be an important detail - but uWSGI makes things a lot easier.
 ---
 
 ## Q & A
+
+---
+
+---
+
+### Legacy Client Architecture
+
+???
+
+Still some backbone and templates here and there, might be better to drop though?
+
+---
+
+![Client-Server Communications](../../images/server_client.plantuml.svg)
+
+???
+
+Workflow, Data Libraries, Visualization, History, Tool Menu,
+Many Grids, User and preference management.
+
+---
+
+class: white
+
+![Backbone MVC](../../images/backbone-model-view.svg)
+
+### Backbone MVC
+
+---
+
+![Client-Server Communications (old)](../../images/server_client_old.plantuml.svg)
+
+???
+
+Admin things, Reports and Tool Shed Web app
+
+---
+
+![WSGI Application](../../images/wsgi_app.svg)
+
+### Galaxy WSGI
 
 ---

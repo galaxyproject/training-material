@@ -1,5 +1,28 @@
 module Jekyll
   module TopicFilter
+
+    def most_recent_contributors(contributors, count)
+      # Remove non-hof
+      hof = contributors.select{ |k, v| v.fetch("halloffame", "yes") != "no" }
+      # Get keys + sort by joined date
+      hof_k = hof.keys.sort{ |x, y|
+        hof[y].fetch('joined', '2016-01') <=> hof[x].fetch('joined', '2016-01')
+      }
+
+      # Transform back into hash
+      Hash[hof_k.slice(0, count).collect{|k| [k, hof[k]]}]
+    end
+
+    def filter_recent_modified(tutorials, count)
+      latest = tutorials.sort{ |x, y|
+        x.data['last_modified_at'].format = '%s' # Originally %d-%b-%y
+        y.data['last_modified_at'].format = '%s' # Originally %d-%b-%y
+
+        y.data['last_modified_at'].to_s <=> x.data['last_modified_at'].to_s
+      }
+      latest.slice(0, count)
+    end
+
     def topic_count(resources)
       # Count lines in the table except introduction slides
       resources.select{ |a| a['type'] != 'introduction' }.length
@@ -17,7 +40,7 @@ module Jekyll
         page_parts = page.url.split('/')
         # Skip anything outside of topics.
         if not page.url.include?('/topics/') then next end
-
+        page.data['url'] = page.url
         # If the path is long enough and it is under the topic name
         if page_parts.length > 3 and page_parts[2] == topic_name
           # Automate the tutorial-name thing. This writes back to the shared
@@ -92,8 +115,10 @@ module Jekyll
 
         # We'll handle slides first and have hands-on override.
         page = false
+        slide_has_video = false
         if slides_page_keys.length == 1 then
           page = interesting[slides_page_keys[0]]
+          slide_has_video = page.data.has_key?('video') and page['video']
         end
 
         if tutorial_page_keys.length == 1 then
@@ -129,6 +154,7 @@ module Jekyll
         # Similar as above.
         page_obj['workflows'] = resources.include?('workflows')
         page_obj['tours'] = resources.include?('tours')
+        page_obj['video'] = slide_has_video
         # I feel less certain about this override, but it works well enough in
         # practice, and I did not find any examples of `type: <anything other
         # than tutorial>` in topics/*/tutorials/*/tutorial.md but that doesn't
@@ -142,7 +168,7 @@ module Jekyll
 
       # The complete resources we'll return is the introduction slides first
       # (regardless of alphabetisation), and then the rest of the pages.
-      resource_pages = resource_intro + resource_pages.sort_by{ |k| k["title"] }
+      resource_pages = resource_intro + resource_pages.sort_by{ |k| k["title"].downcase}
 
       if resource_pages.length == 0 then
         puts "Error? Could not find any relevant pages for #{topic_name}"

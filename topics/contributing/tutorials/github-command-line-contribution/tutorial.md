@@ -14,6 +14,7 @@ objectives:
   - "Create a pull request"
   - "Update a pull request"
 time_estimation: "30m"
+subtopic: contribute
 key_points:
   - "Work on your fork"
   - "1 branch = 1 feature"
@@ -28,7 +29,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Most of the content is written in [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/) with some metadata (or variables) found in [YAML](http://yaml.org/) files. Everything is stored on a [GitHub](https://github.com) repository: [{{ site.github.repository_url }}]({{ site.github.repository_url }}).
+Most of the content is written in [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/) with some metadata (or variables) found in [YAML](http://yaml.org/) files. Everything is stored on a [GitHub](https://github.com) repository: [{{ site.github_repository }}]({{ site.github_repository }}).
 
 The process of development of new content is open and transparent, using git and following the [GitHub flow](https://guides.github.com/introduction/flow/):
 
@@ -39,7 +40,7 @@ The process of development of new content is open and transparent, using git and
 1. Create a new branch in your local copy for each significant change
 2. Commit the changes in that branch
 1. Push that branch to your fork on GitHub
-1. Submit a pull request from that branch to the [original repository]({{ site.github.repository_url }})
+1. Submit a pull request from that branch to the [original repository]({{ site.github_repository }})
 1. If you receive feedback, make changes in your local clone and push them to your branch on GitHub: the pull request will update automatically
 1. Pull requests will be merged by the training team members after at least one other person has reviewed the Pull request and approved it.
 
@@ -62,7 +63,7 @@ Forking a repository is a simple two-step process:
 
 > ### {% icon hands_on %} Hands-on: Fork the repository
 >
-> 1. Go on the GitHub repository: [{{ site.github.repository_url }}]({{ site.github.repository_url }})
+> 1. Go on the GitHub repository: [{{ site.github_repository }}]({{ site.github_repository }})
 > 2. Click on **Fork** (top-right corner of the page)
 >
 >    ![Fork](../../images/PR_fork.jpg)
@@ -82,9 +83,9 @@ To modify the content of the repository, you need a copy of it on your computer.
 > ### {% icon hands_on %} Hands-on: Clone the GitHub repository
 >
 > 1. Get the URL of your fork. You can find this on the main page of your fork under the green button:
->    1. Click on **Clone or download** (right)
+>    1. Click on **Code** (right)
 >
->       ![Get fork URL](../../images/PR_github_url.png)
+>       ![Get fork URL](../../images/clone_code_button.png)
 >
 >    2. Copy the URL
 >
@@ -111,7 +112,7 @@ To modify the content of the repository, you need a copy of it on your computer.
 
 # Create a new branch
 
-You have now your repository locally and you want to modify it. For this example tutorial, you will add yourself as contributor of the project to appear on the [Hall of Fame]({{ site.baseurl }}{% link hall-of-fame.md %}).
+You have now your repository locally and you want to modify it. For this example tutorial, you will add yourself as contributor of the project to appear on the [Hall of Fame]({% link hall-of-fame.md %}).
 
 In GitHub flow, there is a concept: one new feature or change = one branch.
 
@@ -119,7 +120,7 @@ When you're working on a project, you're going to have a bunch of different feat
 
 ![Divergence of a branch compared to master](../../images/PR_branches_01.png "When you create a branch in your project, you're creating an environment where you can try out new ideas. Changes you make on a branch don't affect the master branch")
 
-Here for this tutorial, you will create a branch called "my_new_branch" in which you will modify the `CONTRIBUTORS.yaml` file, the file used to generate the [Hall of Fame]({{ site.baseurl }}{% link hall-of-fame.md %}).
+Here for this tutorial, you will create a branch called "my_new_branch" in which you will modify the `CONTRIBUTORS.yaml` file, the file used to generate the [Hall of Fame]({% link hall-of-fame.md %}).
 
 > ### {% icon hands_on %} Hands-on: Create a branch
 >
@@ -217,7 +218,7 @@ The changes you made on your branch are only on the local copy of the repository
 
 # Open a pull request
 
-You pushed your changes to GitHub, but currently they are only on your fork. You want to have these changes in the main GitHub repository in order to appear on our [Hall of Fame]({{ site.baseurl }}{% link hall-of-fame.md %}) online. You can't add or push directly the main GitHub repository, so you need to create what we call a pull request:
+You pushed your changes to GitHub, but currently they are only on your fork. You want to have these changes in the main GitHub repository in order to appear on our [Hall of Fame]({% link hall-of-fame.md %}) online. You can't add or push directly the main GitHub repository, so you need to create what we call a pull request:
 
 ![Pull request](../../images/PR_schema_05.png "Pull Requests provide a way to notify project maintainers about the changes you'd like them to consider")
 
@@ -244,7 +245,7 @@ You pushed your changes to GitHub, but currently they are only on your fork. You
 
 Once the pull is open, it will be reviewed. There are two possible outcomes:
 
-1. Your pull request is accepted. Congratulations! Your changes will be merged into the master branch of the original repository. The website will be re-built and you will be in the [Hall of Fame]({{ site.baseurl }}{% link hall-of-fame.md %})
+1. Your pull request is accepted. Congratulations! Your changes will be merged into the master branch of the original repository. The website will be re-built and you will be in the [Hall of Fame]({% link hall-of-fame.md %})
 2. Your pull request needs modifications: the reviewers will ask for some changes, possibly because the automatic tests are failing.
 
 # Make the requested changes
@@ -298,7 +299,7 @@ One of the reviewers of your pull request asked you to add your name after your 
 
 # Check the automatic tests
 
-When a pull request is opened, some automated tests are automatically launched on [Travis](http://travis-ci.org/) to be sure that the changes do not break the website, the URL are valid, etc.
+When a pull request is opened, some automated tests are automatically launched on [Travis](http://travis-ci.com/) to be sure that the changes do not break the website, the URL are valid, etc.
 
 On the bottom of your pull request, you can see the status of the tests:
 
@@ -312,7 +313,7 @@ On the bottom of your pull request, you can see the status of the tests:
 
     ![Failed tests](../../images/PR_test_red.png)
 
-    When it is red, you can investigate why by clicking on **Details**. You will be redirected on [Travis](http://travis-ci.org/) where you can see the logs of the tests. Get in touch with us on [Gitter]({{ site.gitter_url }}) if you need help to understand the issue.
+    When it is red, you can investigate why by clicking on **Details**. You will be redirected on [Travis](http://travis-ci.com/) where you can see the logs of the tests. Get in touch with us on [Gitter]({{ site.gitter_url }}) if you need help to understand the issue.
 
 - Green (with tick)
 

@@ -1,0 +1,52 @@
+---
+- doc: Test sample data for the workflow
+  job:
+    Input_collection:
+      class: Collection
+      collection_type: list
+      elements:
+        - identifier: T2_A1.mzml
+          class: File
+          location: https://zenodo.org/record/4037137/files/T2_A1.mzml
+          filetype: mzml
+        - identifier: T2_B1.mzml
+          class: File
+          location: https://zenodo.org/record/4037137/files/T2_B1.mzml
+          filetype: mzml
+        - identifier: T7A_1.mzml
+          class: File
+          location: https://zenodo.org/record/4037137/files/T7A_1.mzml
+          filetype: mzml
+        - identifier: T7B_1.mzml
+          class: File
+          location: https://zenodo.org/record/4037137/files/T7B_1.mzml
+          filetype: mzml
+    ExperimentalDesign.tsv:
+      class: File
+      location: https://zenodo.org/record/4037137/files/ExperimentalDesign.tsv
+      filetype: tabular
+    ProteinDB_cRAP.fasta:
+      class: File
+      location: https://zenodo.org/record/4037137/files/ProteinDB_cRAP.fasta
+      filetype: fasta
+  outputs:
+    go_cc:
+      asserts:
+        has_text:
+          text: 'IVLQGNDIESAVAETDPQTQYGIVR'
+    go_mf:
+      asserts:
+        has_text:
+          text: 'SGLPLRDTDCVSCGQCVTACPCAALDYR'
+    go_bp:
+      asserts:
+        has_text:
+          text: 'EANYNVSIGVAK'
+    go_ec:
+      asserts:
+        has_text:
+          text: 'FLNEDPWER'
+    regex:
+      asserts:
+        has_text:
+          text: 'ADIVVVGSLNMDITVR'

@@ -1,473 +1,488 @@
 {
-    "a_galaxy_workflow": "true", 
-    "annotation": "", 
-    "format-version": "0.1", 
-    "name": "ProteinID_SG_PS_Tutorial_WF_datasetCollection", 
-    "steps": {
-        "0": {
-            "annotation": "Proteome Fasta database of organism of interest. Do not include decoys.", 
-            "content_id": null, 
-            "id": 0, 
-            "input_connections": {}, 
-            "inputs": [
-                {
-                    "description": "Proteome Fasta database of organism of interest. Do not include decoys.", 
-                    "name": "Input protein FASTA database"
-                }
-            ], 
-            "label": null, 
-            "name": "Input dataset", 
-            "outputs": [], 
-            "position": {
-                "left": 216.5, 
-                "top": 205.5
-            }, 
-            "tool_errors": null, 
-            "tool_id": null, 
-            "tool_state": "{\"name\": \"Input protein FASTA database\"}", 
-            "tool_version": null, 
-            "type": "data_input", 
-            "uuid": "74015737-98ed-47e3-8cda-3f6cf7f97078", 
-            "workflow_outputs": []
-        }, 
-        "1": {
-            "annotation": "Add all input files into a \"List of files\" first.", 
-            "content_id": null, 
-            "id": 1, 
-            "input_connections": {}, 
-            "inputs": [
-                {
-                    "description": "Add all input files into a \"List of files\" first.", 
-                    "name": "Input: List of mzML files"
-                }
-            ], 
-            "label": null, 
-            "name": "Input dataset collection", 
-            "outputs": [], 
-            "position": {
-                "left": 165, 
-                "top": 300
-            }, 
-            "tool_errors": null, 
-            "tool_id": null, 
-            "tool_state": "{\"collection_type\": \"list\", \"name\": \"Input: List of mzML files\"}", 
-            "tool_version": null, 
-            "type": "data_collection_input", 
-            "uuid": "1b360056-d424-4942-af3b-064d22841df8", 
-            "workflow_outputs": []
-        }, 
-        "2": {
-            "annotation": "", 
-            "content_id": "PeakPickerHiRes", 
-            "id": 2, 
-            "input_connections": {
-                "param_in": {
-                    "id": 1, 
-                    "output_name": "output"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool PeakPickerHiRes", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "PeakPickerHiRes", 
-            "outputs": [
-                {
-                    "name": "param_out", 
-                    "type": "mzml"
-                }
-            ], 
-            "position": {
-                "left": 410, 
-                "top": 291
-            }, 
-            "post_job_actions": {
-                "HideDatasetActionparam_out": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "param_out"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "PeakPickerHiRes", 
-            "tool_state": "{\"__page__\": 0, \"rep_param_algorithm_ms_levels\": \"[]\", \"param_algorithm_SignalToNoise_win_len\": \"\\\"200.0\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"param_algorithm_SignalToNoise_bin_count\": \"\\\"30\\\"\", \"param_algorithm_report_FWHM_unit\": \"\\\"relative(ppm)\\\"\", \"param_in|__identifier__\": \"\\\"ST903.mzML centroided\\\"\", \"__rerun_remap_job_id__\": null, \"param_algorithm_signal_to_noise\": \"\\\"1.0\\\"\", \"param_algorithm_SignalToNoise_min_required_elements\": \"\\\"10\\\"\", \"param_algorithm_SignalToNoise_write_log_messages\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"param_algorithm_report_FWHM\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "ed6dbbc6-7166-4681-9cb1-6071977ec9f7", 
-            "workflow_outputs": []
-        }, 
-        "3": {
-            "annotation": "", 
-            "content_id": "FileConverter", 
-            "id": 3, 
-            "input_connections": {
-                "param_in": {
-                    "id": 2, 
-                    "output_name": "param_out"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool FileConverter", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "FileConverter", 
-            "outputs": [
-                {
-                    "name": "param_out", 
-                    "type": "_sniff_"
-                }
-            ], 
-            "position": {
-                "left": 594, 
-                "top": 339
-            }, 
-            "post_job_actions": {
-                "HideDatasetActionparam_out": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "param_out"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "FileConverter", 
-            "tool_state": "{\"__page__\": 0, \"param_out_type\": \"\\\"mgf\\\"\", \"adv_opts\": \"{\\\"param_process_lowmemory\\\": \\\"false\\\", \\\"param_MGF_compact\\\": \\\"false\\\", \\\"adv_opts_selector\\\": \\\"advanced\\\", \\\"param_force\\\": \\\"false\\\", \\\"__current_case__\\\": 1, \\\"param_TIC_DTA2D\\\": \\\"false\\\"}\", \"__rerun_remap_job_id__\": null, \"param_in|__identifier__\": \"\\\"ST903.mzML centroided\\\"\", \"param_UID_postprocessing\": \"\\\"ensure\\\"\", \"param_write_mzML_index\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "94853922-971c-4f02-8fa1-9cb8f3b10bc5", 
-            "workflow_outputs": []
-        }, 
-        "4": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/2.9.0", 
-            "id": 4, 
-            "input_connections": {
-                "input_database": {
-                    "id": 0, 
-                    "output_name": "output"
-                }, 
-                "peak_lists": {
-                    "id": 3, 
-                    "output_name": "param_out"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Search GUI", 
-                    "name": "peak_lists"
-                }, 
-                {
-                    "description": "runtime parameter for tool Search GUI", 
-                    "name": "input_database"
-                }
-            ], 
-            "label": null, 
-            "name": "Search GUI", 
-            "outputs": [
-                {
-                    "name": "searchgui_results", 
-                    "type": "searchgui_archive"
-                }
-            ], 
-            "position": {
-                "left": 768, 
-                "top": 207
-            }, 
-            "post_job_actions": {
-                "HideDatasetActionsearchgui_results": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "searchgui_results"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/2.9.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "78fad25eff17", 
-                "name": "peptideshaker", 
-                "owner": "galaxyp", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"msgf\": \"{\\\"msgf_advanced\\\": \\\"no\\\", \\\"__current_case__\\\": 0}\", \"use_gene_mapping\": \"\\\"false\\\"\", \"min_charge\": \"\\\"2\\\"\", \"__page__\": 0, \"peak_lists\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"engines\": \"[\\\"X!Tandem\\\", \\\"MSGF\\\"]\", \"__rerun_remap_job_id__\": null, \"create_decoy\": \"\\\"true\\\"\", \"enzyme\": \"\\\"Trypsin\\\"\", \"precursor_ion_tol_units\": \"\\\"1\\\"\", \"omssa\": \"{\\\"omssa_advanced\\\": \\\"no\\\", \\\"__current_case__\\\": 0}\", \"precursor_ion_tol\": \"\\\"10.0\\\"\", \"variable_modifications\": \"[\\\"Oxidation of M\\\"]\", \"input_database\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"fragment_tol\": \"\\\"0.5\\\"\", \"reverse_ion\": \"\\\"y\\\"\", \"forward_ion\": \"\\\"b\\\"\", \"searchgui_advanced\": \"{\\\"searchgui_advanced_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"xtandem\": \"{\\\"__current_case__\\\": 0, \\\"xtandem_advanced\\\": \\\"no\\\"}\", \"max_charge\": \"\\\"4\\\"\", \"fixed_modifications\": \"[\\\"Carbamidomethylation of C\\\"]\", \"comet\": \"{\\\"comet_advanced\\\": \\\"no\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"missed_cleavages\": \"\\\"2\\\"\"}", 
-            "tool_version": "2.9.0", 
-            "type": "tool", 
-            "uuid": "d27ca46d-7f81-491d-9a4a-ef835fa5a3a8", 
-            "workflow_outputs": []
-        }, 
-        "5": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.11.0", 
-            "id": 5, 
-            "input_connections": {
-                "searchgui_input": {
-                    "id": 4, 
-                    "output_name": "searchgui_results"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Peptide Shaker", 
-                    "name": "searchgui_input"
-                }
-            ], 
-            "label": null, 
-            "name": "Peptide Shaker", 
-            "outputs": [
-                {
-                    "name": "mzidentML", 
-                    "type": "mzid"
-                }, 
-                {
-                    "name": "output_cps", 
-                    "type": "peptideshaker_archive"
-                }, 
-                {
-                    "name": "output_zip", 
-                    "type": "zip"
-                }, 
-                {
-                    "name": "output_certificate", 
-                    "type": "txt"
-                }, 
-                {
-                    "name": "output_hierarchical", 
-                    "type": "tabular"
-                }, 
-                {
-                    "name": "output_psm_phosphorylation", 
-                    "type": "tabular"
-                }, 
-                {
-                    "name": "output_psm", 
-                    "type": "tabular"
-                }, 
-                {
-                    "name": "output_peptides_phosphorylation", 
-                    "type": "tabular"
-                }, 
-                {
-                    "name": "output_peptides", 
-                    "type": "tabular"
-                }, 
-                {
-                    "name": "output_proteins_phosphorylation", 
-                    "type": "tabular"
-                }, 
-                {
-                    "name": "output_proteins", 
-                    "type": "tabular"
-                }
-            ], 
-            "position": {
-                "left": 1056, 
-                "top": 210
-            }, 
-            "post_job_actions": {
-                "HideDatasetActionmzidentML": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "mzidentML"
-                }, 
-                "HideDatasetActionoutput_certificate": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "output_certificate"
-                }, 
-                "HideDatasetActionoutput_cps": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "output_cps"
-                }, 
-                "HideDatasetActionoutput_hierarchical": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "output_hierarchical"
-                }, 
-                "HideDatasetActionoutput_peptides_phosphorylation": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "output_peptides_phosphorylation"
-                }, 
-                "HideDatasetActionoutput_proteins_phosphorylation": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "output_proteins_phosphorylation"
-                }, 
-                "HideDatasetActionoutput_psm": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "output_psm"
-                }, 
-                "HideDatasetActionoutput_psm_phosphorylation": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "output_psm_phosphorylation"
-                }, 
-                "HideDatasetActionoutput_zip": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "output_zip"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.11.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "78fad25eff17", 
-                "name": "peptideshaker", 
-                "owner": "galaxyp", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"__page__\": 0, \"processing_options\": \"{\\\"processing_options_selector\\\": \\\"no\\\", \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"filtering_options\": \"{\\\"filtering_options_selector\\\": \\\"no\\\", \\\"__current_case__\\\": 0}\", \"searchgui_input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"outputs\": \"[\\\"zip\\\", \\\"mzidentML\\\", \\\"3\\\", \\\"5\\\", \\\"7\\\"]\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
-            "tool_version": "1.11.0", 
-            "type": "tool", 
-            "uuid": "814dcbd4-945f-496b-906d-58e7ad93ac8e", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "output_proteins", 
-                    "uuid": "56f3da79-09c0-4ac8-8636-386de367f71e"
-                }, 
-                {
-                    "label": null, 
-                    "output_name": "output_peptides", 
-                    "uuid": "a5766292-49b9-4340-888b-6b8d4a7d773d"
-                }
-            ]
-        }, 
-        "6": {
-            "annotation": "Output: all identified contaminant proteins", 
-            "content_id": "Grep1", 
-            "id": 6, 
-            "input_connections": {
-                "input": {
-                    "id": 5, 
-                    "output_name": "output_proteins"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Select", 
-                    "name": "input"
-                }
-            ], 
-            "label": null, 
-            "name": "Select", 
-            "outputs": [
-                {
-                    "name": "out_file1", 
-                    "type": "input"
-                }
-            ], 
-            "position": {
-                "left": 1351, 
-                "top": 424
-            }, 
-            "post_job_actions": {
-                "HideDatasetActionout_file1": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "out_file1"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "Grep1", 
-            "tool_state": "{\"__page__\": 0, \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"invert\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"pattern\": \"\\\"CONTAMINANT\\\"\"}", 
-            "tool_version": "1.0.1", 
-            "type": "tool", 
-            "uuid": "9270a579-e526-4386-807b-86a3fd7c4609", 
-            "workflow_outputs": []
-        }, 
-        "7": {
-            "annotation": "Output: all identified non-contaminant proteins", 
-            "content_id": "Grep1", 
-            "id": 7, 
-            "input_connections": {
-                "input": {
-                    "id": 5, 
-                    "output_name": "output_proteins"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Select", 
-                    "name": "input"
-                }
-            ], 
-            "label": null, 
-            "name": "Select", 
-            "outputs": [
-                {
-                    "name": "out_file1", 
-                    "type": "input"
-                }
-            ], 
-            "position": {
-                "left": 1353, 
-                "top": 534
-            }, 
-            "post_job_actions": {
-                "HideDatasetActionout_file1": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "out_file1"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "Grep1", 
-            "tool_state": "{\"__page__\": 0, \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"invert\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"pattern\": \"\\\"CONTAMINANT\\\"\"}", 
-            "tool_version": "1.0.1", 
-            "type": "tool", 
-            "uuid": "ad43cc9c-bac9-4292-87b9-805abb70280d", 
-            "workflow_outputs": []
-        }, 
-        "8": {
-            "annotation": "Output: identified non-contaminant proteins, validated to be \"Confident\".", 
-            "content_id": "Grep1", 
-            "id": 8, 
-            "input_connections": {
-                "input": {
-                    "id": 7, 
-                    "output_name": "out_file1"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Select", 
-                    "name": "input"
-                }
-            ], 
-            "label": null, 
-            "name": "Select", 
-            "outputs": [
-                {
-                    "name": "out_file1", 
-                    "type": "input"
-                }
-            ], 
-            "position": {
-                "left": 1546, 
-                "top": 535
-            }, 
-            "post_job_actions": {
-                "HideDatasetActionout_file1": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "out_file1"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "Grep1", 
-            "tool_state": "{\"__page__\": 0, \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"invert\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"pattern\": \"\\\"Doubtful\\\"\"}", 
-            "tool_version": "1.0.1", 
-            "type": "tool", 
-            "uuid": "0280af4a-a81d-4cd0-8531-402fe75fb936", 
-            "workflow_outputs": []
+  "a_galaxy_workflow": "true",
+  "annotation": "Peptide and Protein ID using SearchGUI and PeptideShaker",
+  "format-version": "0.1",
+  "name": "ProteinID SG PS Tutorial WF datasetCollection",
+  "steps": {
+    "0": {
+      "annotation": "Proteome Fasta database of organism of interest. Do not include decoys.",
+      "content_id": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "Proteome Fasta database of organism of interest. Do not include decoys.",
+          "name": "Input protein FASTA database"
         }
-    }, 
-    "uuid": "3a467a4d-4748-47a3-a5b6-ccdc06fe6423"
+      ],
+      "label": null,
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 216.5,
+        "top": 205.5
+      },
+      "tool_errors": null,
+      "tool_id": null,
+      "tool_state": "{\"name\": \"Input protein FASTA database\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "74015737-98ed-47e3-8cda-3f6cf7f97078",
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "Add all input files into a \"List of files\" first.",
+      "content_id": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "Add all input files into a \"List of files\" first.",
+          "name": "Input: List of mzML files"
+        }
+      ],
+      "label": null,
+      "name": "Input dataset collection",
+      "outputs": [],
+      "position": {
+        "left": 165,
+        "top": 300
+      },
+      "tool_errors": null,
+      "tool_id": null,
+      "tool_state": "{\"collection_type\": \"list\", \"name\": \"Input: List of mzML files\"}",
+      "tool_version": null,
+      "type": "data_collection_input",
+      "uuid": "1b360056-d424-4942-af3b-064d22841df8",
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": "PeakPickerHiRes",
+      "id": 2,
+      "input_connections": {
+        "param_in": {
+          "id": 1,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool PeakPickerHiRes",
+          "name": "param_in"
+        }
+      ],
+      "label": null,
+      "name": "PeakPickerHiRes",
+      "outputs": [
+        {
+          "name": "param_out",
+          "type": "mzml"
+        }
+      ],
+      "position": {
+        "left": 410,
+        "top": 291
+      },
+      "post_job_actions": {
+        "HideDatasetActionparam_out": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "param_out"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "PeakPickerHiRes",
+      "tool_state": "{\"__page__\": 0, \"rep_param_algorithm_ms_levels\": \"[]\", \"param_algorithm_SignalToNoise_win_len\": \"\\\"200.0\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"param_algorithm_SignalToNoise_bin_count\": \"\\\"30\\\"\", \"param_algorithm_report_FWHM_unit\": \"\\\"relative(ppm)\\\"\", \"param_in|__identifier__\": \"\\\"ST903.mzML centroided\\\"\", \"__rerun_remap_job_id__\": null, \"param_algorithm_signal_to_noise\": \"\\\"1.0\\\"\", \"param_algorithm_SignalToNoise_min_required_elements\": \"\\\"10\\\"\", \"param_algorithm_SignalToNoise_write_log_messages\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"param_algorithm_report_FWHM\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "ed6dbbc6-7166-4681-9cb1-6071977ec9f7",
+      "workflow_outputs": [],
+      "tool_shed_repository": {
+        "changeset_revision": "5ae104d0da6e",
+        "name": "openms_peakpickerhires",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      }
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "FileConverter",
+      "id": 3,
+      "input_connections": {
+        "param_in": {
+          "id": 2,
+          "output_name": "param_out"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool FileConverter",
+          "name": "param_in"
+        }
+      ],
+      "label": null,
+      "name": "FileConverter",
+      "outputs": [
+        {
+          "name": "param_out",
+          "type": "_sniff_"
+        }
+      ],
+      "position": {
+        "left": 594,
+        "top": 339
+      },
+      "post_job_actions": {
+        "HideDatasetActionparam_out": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "param_out"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "FileConverter",
+      "tool_state": "{\"__page__\": 0, \"param_out_type\": \"\\\"mgf\\\"\", \"adv_opts\": \"{\\\"param_process_lowmemory\\\": \\\"false\\\", \\\"param_MGF_compact\\\": \\\"false\\\", \\\"adv_opts_selector\\\": \\\"advanced\\\", \\\"param_force\\\": \\\"false\\\", \\\"__current_case__\\\": 1, \\\"param_TIC_DTA2D\\\": \\\"false\\\"}\", \"__rerun_remap_job_id__\": null, \"param_in|__identifier__\": \"\\\"ST903.mzML centroided\\\"\", \"param_UID_postprocessing\": \"\\\"ensure\\\"\", \"param_write_mzML_index\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "94853922-971c-4f02-8fa1-9cb8f3b10bc5",
+      "workflow_outputs": [],
+      "tool_shed_repository": {
+        "changeset_revision": "6634cad7d797",
+        "name": "openms_fileconverter",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      }
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/2.9.0",
+      "id": 4,
+      "input_connections": {
+        "input_database": {
+          "id": 0,
+          "output_name": "output"
+        },
+        "peak_lists": {
+          "id": 3,
+          "output_name": "param_out"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Search GUI",
+          "name": "peak_lists"
+        },
+        {
+          "description": "runtime parameter for tool Search GUI",
+          "name": "input_database"
+        }
+      ],
+      "label": null,
+      "name": "Search GUI",
+      "outputs": [
+        {
+          "name": "searchgui_results",
+          "type": "searchgui_archive"
+        }
+      ],
+      "position": {
+        "left": 768,
+        "top": 207
+      },
+      "post_job_actions": {
+        "HideDatasetActionsearchgui_results": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "searchgui_results"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/2.9.0",
+      "tool_shed_repository": {
+        "changeset_revision": "78fad25eff17",
+        "name": "peptideshaker",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"msgf\": \"{\\\"msgf_advanced\\\": \\\"no\\\", \\\"__current_case__\\\": 0}\", \"use_gene_mapping\": \"\\\"false\\\"\", \"min_charge\": \"\\\"2\\\"\", \"__page__\": 0, \"peak_lists\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"engines\": \"[\\\"X!Tandem\\\", \\\"MSGF\\\"]\", \"__rerun_remap_job_id__\": null, \"create_decoy\": \"\\\"true\\\"\", \"enzyme\": \"\\\"Trypsin\\\"\", \"precursor_ion_tol_units\": \"\\\"1\\\"\", \"omssa\": \"{\\\"omssa_advanced\\\": \\\"no\\\", \\\"__current_case__\\\": 0}\", \"precursor_ion_tol\": \"\\\"10.0\\\"\", \"variable_modifications\": \"[\\\"Oxidation of M\\\"]\", \"input_database\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"fragment_tol\": \"\\\"0.5\\\"\", \"reverse_ion\": \"\\\"y\\\"\", \"forward_ion\": \"\\\"b\\\"\", \"searchgui_advanced\": \"{\\\"searchgui_advanced_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"xtandem\": \"{\\\"__current_case__\\\": 0, \\\"xtandem_advanced\\\": \\\"no\\\"}\", \"max_charge\": \"\\\"4\\\"\", \"fixed_modifications\": \"[\\\"Carbamidomethylation of C\\\"]\", \"comet\": \"{\\\"comet_advanced\\\": \\\"no\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"missed_cleavages\": \"\\\"2\\\"\"}",
+      "tool_version": "2.9.0",
+      "type": "tool",
+      "uuid": "d27ca46d-7f81-491d-9a4a-ef835fa5a3a8",
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.11.0",
+      "id": 5,
+      "input_connections": {
+        "searchgui_input": {
+          "id": 4,
+          "output_name": "searchgui_results"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Peptide Shaker",
+          "name": "searchgui_input"
+        }
+      ],
+      "label": null,
+      "name": "Peptide Shaker",
+      "outputs": [
+        {
+          "name": "mzidentML",
+          "type": "mzid"
+        },
+        {
+          "name": "output_cps",
+          "type": "peptideshaker_archive"
+        },
+        {
+          "name": "output_zip",
+          "type": "zip"
+        },
+        {
+          "name": "output_certificate",
+          "type": "txt"
+        },
+        {
+          "name": "output_hierarchical",
+          "type": "tabular"
+        },
+        {
+          "name": "output_psm_phosphorylation",
+          "type": "tabular"
+        },
+        {
+          "name": "output_psm",
+          "type": "tabular"
+        },
+        {
+          "name": "output_peptides_phosphorylation",
+          "type": "tabular"
+        },
+        {
+          "name": "output_peptides",
+          "type": "tabular"
+        },
+        {
+          "name": "output_proteins_phosphorylation",
+          "type": "tabular"
+        },
+        {
+          "name": "output_proteins",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 1056,
+        "top": 210
+      },
+      "post_job_actions": {
+        "HideDatasetActionmzidentML": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "mzidentML"
+        },
+        "HideDatasetActionoutput_certificate": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output_certificate"
+        },
+        "HideDatasetActionoutput_cps": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output_cps"
+        },
+        "HideDatasetActionoutput_hierarchical": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output_hierarchical"
+        },
+        "HideDatasetActionoutput_peptides_phosphorylation": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output_peptides_phosphorylation"
+        },
+        "HideDatasetActionoutput_proteins_phosphorylation": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output_proteins_phosphorylation"
+        },
+        "HideDatasetActionoutput_psm": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output_psm"
+        },
+        "HideDatasetActionoutput_psm_phosphorylation": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output_psm_phosphorylation"
+        },
+        "HideDatasetActionoutput_zip": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output_zip"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.11.0",
+      "tool_shed_repository": {
+        "changeset_revision": "78fad25eff17",
+        "name": "peptideshaker",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": 0, \"processing_options\": \"{\\\"processing_options_selector\\\": \\\"no\\\", \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"filtering_options\": \"{\\\"filtering_options_selector\\\": \\\"no\\\", \\\"__current_case__\\\": 0}\", \"searchgui_input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"outputs\": \"[\\\"zip\\\", \\\"mzidentML\\\", \\\"3\\\", \\\"5\\\", \\\"7\\\"]\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "1.11.0",
+      "type": "tool",
+      "uuid": "814dcbd4-945f-496b-906d-58e7ad93ac8e",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output_proteins",
+          "uuid": "56f3da79-09c0-4ac8-8636-386de367f71e"
+        },
+        {
+          "label": null,
+          "output_name": "output_peptides",
+          "uuid": "a5766292-49b9-4340-888b-6b8d4a7d773d"
+        }
+      ]
+    },
+    "6": {
+      "annotation": "Output: all identified contaminant proteins",
+      "content_id": "Grep1",
+      "id": 6,
+      "input_connections": {
+        "input": {
+          "id": 5,
+          "output_name": "output_proteins"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Select",
+          "name": "input"
+        }
+      ],
+      "label": null,
+      "name": "Select",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1351,
+        "top": 424
+      },
+      "post_job_actions": {
+        "HideDatasetActionout_file1": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "out_file1"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "Grep1",
+      "tool_state": "{\"__page__\": 0, \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"invert\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"pattern\": \"\\\"CONTAMINANT\\\"\"}",
+      "tool_version": "1.0.1",
+      "type": "tool",
+      "uuid": "9270a579-e526-4386-807b-86a3fd7c4609",
+      "workflow_outputs": []
+    },
+    "7": {
+      "annotation": "Output: all identified non-contaminant proteins",
+      "content_id": "Grep1",
+      "id": 7,
+      "input_connections": {
+        "input": {
+          "id": 5,
+          "output_name": "output_proteins"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Select",
+          "name": "input"
+        }
+      ],
+      "label": null,
+      "name": "Select",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1353,
+        "top": 534
+      },
+      "post_job_actions": {
+        "HideDatasetActionout_file1": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "out_file1"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "Grep1",
+      "tool_state": "{\"__page__\": 0, \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"invert\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"pattern\": \"\\\"CONTAMINANT\\\"\"}",
+      "tool_version": "1.0.1",
+      "type": "tool",
+      "uuid": "ad43cc9c-bac9-4292-87b9-805abb70280d",
+      "workflow_outputs": []
+    },
+    "8": {
+      "annotation": "Output: identified non-contaminant proteins, validated to be \"Confident\".",
+      "content_id": "Grep1",
+      "id": 8,
+      "input_connections": {
+        "input": {
+          "id": 7,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Select",
+          "name": "input"
+        }
+      ],
+      "label": null,
+      "name": "Select",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1546,
+        "top": 535
+      },
+      "post_job_actions": {
+        "HideDatasetActionout_file1": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "out_file1"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "Grep1",
+      "tool_state": "{\"__page__\": 0, \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"invert\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"pattern\": \"\\\"Doubtful\\\"\"}",
+      "tool_version": "1.0.1",
+      "type": "tool",
+      "uuid": "0280af4a-a81d-4cd0-8531-402fe75fb936",
+      "workflow_outputs": []
+    }
+  },
+  "uuid": "3a467a4d-4748-47a3-a5b6-ccdc06fe6423",
+  "tags": [
+    "proteomics"
+  ]
 }

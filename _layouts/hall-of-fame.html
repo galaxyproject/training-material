@@ -3,8 +3,14 @@ layout: base
 ---
 
 {% assign contributors = site.data['contributors'] %}
-{% assign stories = site.pages | where:"layout", "training_philosophy" %}
+{% assign ckeys = "" | split: ',' %}
+{% for x in contributors %}
+	 {% assign ckeys = ckeys | push: x[0] %}
+{% endfor %}
+{% assign ckeysN = ckeys | size %}
+{% assign shuffled_contributors = ckeys | sample: ckeysN %}
 
+{% assign stories = site.pages | where:"layout", "training_philosophy" %}
 
 {% include _includes/default-header.html %}
 
@@ -13,23 +19,22 @@ layout: base
         <h1>Hall of Fame</h1>
 
         <p class="lead">
-            A big <em>Thank You!</em> to the <strong>{{ contributors|size }}</strong>
+            A big <em>Thank You!</em> to the <strong>{{ contributors| where_exp: "item", "item.halloffame != 'no'"| size }}</strong>
             awesome contributors to the Galaxy training materials!
         </p>
 
         <div class="hall-of-fame">
-            {% for contributor in contributors %}
-                {% assign username = contributor[0] %}
+            {% for username in shuffled_contributors %}
+                {% unless contributors[username].halloffame == "no" %}
                 <div class="hall-of-fame-hero" id="{{ username }}">
+
+                    <a href="{{ site.baseurl }}/hall-of-fame/{{ username }}/" class="thumbnail">
                     {% if contributors[username].github != false %}
-                        <a href="https://github.com/{{ username }}" class="thumbnail">
-                            <img src="https://avatars.githubusercontent.com/{{ username }}" alt="{{ username }}">
-                        </a>
+                        <img src="https://avatars.githubusercontent.com/{{ username }}" alt="{{ username }}">
                     {% else %}
-                        <span class="thumbnail">
-                            <img src="https://avatars.githubusercontent.com/{{ username }}" alt="{{ username }}">
-                        </span>
+                        <img src="https://avatars.githubusercontent.com/{{ username }}" alt="{{ username }}">
                     {% endif %}
+                    </a>
 
                     <div class="name">
                         {{ contributors[username].name | default: username }}
@@ -50,39 +55,8 @@ layout: base
                     </div>
                     {% endif %}
 
-                    <div class="contact-items">
-                        {% if contributors[username].github != false %}
-                            <a title="GitHub" href="https://github.com/{{ username }}">
-                                {% icon github %}
-                            </a>
-                        {% endif %}
-                        {% if contributors[username].email %}
-                            <a title="E-mail" href="mailto:{{ contributors[username].email }}">
-                                {% icon email %}
-                            </a>
-                        {% endif %}
-                        {% if contributors[username].gitter %}
-                            <a title="Gitter" href="https://gitter.im/{{ contributors[username].gitter }}">
-                                {% icon gitter %}
-                            </a>
-                        {% endif %}
-                        {% if contributors[username].twitter %}
-                            <a title="Twitter" href="https://twitter.com/{{ contributors[username].twitter }}">
-                                {% icon twitter %}
-                            </a>
-                        {% endif %}
-                        {% if contributors[username].linkedin %}
-                            <a title="LinkedIn" href="https://www.linkedin.com/in/{{ contributors[username].linkedin }}">
-                                {% icon linkedin %}
-                            </a>
-                        {% endif %}
-                        {% if contributors[username].orcid %}
-                            <a title="ORCID" href="https://orcid.org/{{ contributors[username].orcid }}">
-                                {% icon orcid %}
-                            </a>
-                        {% endif %}
-                    </div>
                 </div>
+                {% endunless %}
             {% endfor %}
         </div>
     </section>
