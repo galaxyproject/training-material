@@ -267,28 +267,43 @@ of a digit we can predict whether the digit (0 to 9). We then evaluate the train
 >
 > - {% tool [Create a deep learning model architecture](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0) %}
 >    - *"Select keras model type"*: `sequential`
->    - *"input_shape"*: `(500,)`
+>    - *"input_shape"*: `(784,)`
 >    - In *"LAYER"*:
 >        - {% icon param-repeat %} *"1: LAYER"*:
->            - *"Choose the type of layer"*: `Embedding -- Embedding`
->                - *"input_dim"*": `10000`
->                - *"output_dim"*": `32`
+>            - *"Choose the type of layer"*: `Core -- Reshape`
+>                - *"target_shape"*": `(28,28,1)`
 >        - {% icon param-repeat %} *"2: LAYER"*:
->            - *"Choose the type of layer"*: `Recurrent -- LSTM`
->                - *"units"*": `100`
+>            - *"Choose the type of layer"*: `Convolutional -- Conv2D`
+>                - *"filters"*": `64`
+>                - *"kernel_size"*": `3`
+>                - *"Activation function"*": `relu`
 >        - {% icon param-repeat %} *"3: LAYER"*:
+>            - *"Choose the type of layer"*: `Pooling -- MaxPooling2D`
+>                - *"pool_size"*: `(2,2)`
+>        - {% icon param-repeat %} *"4: LAYER"*:
+>            - *"Choose the type of layer"*: `Convolutional -- Conv2D`
+>                - *"filters"*": `32`
+>                - *"kernel_size"*": `2`
+>                - *"Activation function"*": `relu`
+>        - {% icon param-repeat %} *"5: LAYER"*:
+>            - *"Choose the type of layer"*: `Pooling -- MaxPooling2D`
+>                - *"pool_size"*: `(2,2)`
+>        - {% icon param-repeat %} *"6: LAYER"*:
+>            - *"Choose the type of layer"*: `Core -- Flatten`
+>        - {% icon param-repeat %} *"7: LAYER"*:
 >            - *"Choose the type of layer"*: `Core -- Dense`
->                - *"units"*: `1`
->                - *"Activation function"*: `sigmoid`
+>                - *"units"*": `10`
+>                - *"Activation function"*": `softmax`
 >    - Click *"Execute"* 
 {: .hands_on}
 
-Input is a movie review of size 500 (longer reviews were trimmed and shorter ones padded). Our neural network has 3 layers. The first layer is 
-an embedding layer, that transforms each review words into a 32 dimensional vector (*output_dim*). We have 10000 unique words in our IMDB dataset 
-(*input_dim*). The second layer is an *LSTM* layer, which is a type of RNN. Output of the LSTM layer has a size of *100*. The third layer is a 
-*Dense* layer, which is a fully connected layer (all 100 output neurons in LSTM layer are connected to a single neuron in this layer). It has a 
-*sigmoid* activation function, that generates an output between 0 and 1. Any output greater than 0.5 is considered a predicted positive review, 
-and anything less than 0.5 a negative one. The model config can be downloaded as a JSON file.
+Each image is passed in as a 784 dimensional vector (28 x 28 = 784). The reshape layer reshapes it into (28, 28, 1) dimensions -- 28 rows, 28 columns, and 
+1 channel. Channel is 1 since the image is grayscale and each pixel can be represented by one integer. Color images are represented by 3 integers (RGB 
+values) and have channel size 3. Our CNN then has 2 convolution + pooling layers. First convolution layer has 64 filters (output would be 64 dimensional),
+and filter size is 3 by 3. Second convolutional layer has 32 filters (output would be 32 dimensional). Both pooling layers are MaxPool layers with pool size 
+of 2 by 2. Afterwards, we flatten the previous layers output (every row/colum/channel would be an individual node). Finally, we add a fully connected layer
+with 10 nodes and use a softmax activation function to get the probability of each digit. Digit with the highest probability is predicted by CNN. The model 
+config can be downloaded as a JSON file.
 
 ### **Create a deep learning model**
 
@@ -299,19 +314,19 @@ and anything less than 0.5 a negative one. The model config can be downloaded as
 >    - *"Select the dataset containing model configuration"*: Select the *Keras Model Config* from the previous step.
 >    - *"Do classification or regression?"*: `KerasGClassifier`
 >    - In *"Compile Parameters"*:
->        - *"Select a loss function"*: `binary_crossentropy` 
+>        - *"Select a loss function"*: `categorical_crossentropy` 
 >        - *"Select an optimizer"*: `Adam - Adam optimizer `
 >        - *"Select metrics"*: `acc/accuracy`
 >    - In *"Fit Parameters"*:
 >        - *"epochs"*: `2`
->        - *"batch_size"*: `128`
+>        - *"batch_size"*: `500`
 >    - Click *"Execute"*
 {: .hands_on}
 
-A loss function measures how different the predicted output is versus the expected output. For binary classification problems, we use 
-*binary cross entropy* as loss function. Epochs is the number of times the whole training data is used to train the model. Setting *epochs* to 2 
+A loss function measures how different the predicted output is versus the expected output. For multi-class classification problems, we use 
+*categorical cross entropy* as loss function. Epochs is the number of times the whole training data is used to train the model. Setting *epochs* to 2 
 means each training example in our dataset is used twice to train our model. If we update network weights/biases after all the training data is 
-feed to the network, the training will be very slow (as we have 25000 training examples in our dataset). To speed up the training, we present 
+feed to the network, the training will be very slow (as we have 60000 training examples in our dataset). To speed up the training, we present 
 only a subset of the training examples to the network, after which we update the weights/biases. *batch_size* decides the size of this subset. 
 The model builder can be downloaded as a zip file.
 
@@ -350,8 +365,7 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 >
 {: .hands_on}
 
-The prediction step generates 1 dataset. It's a file that has predictions (1 or 0 for positive or negative movie reviews) for every review in 
-the test dataset.
+The prediction step generates 1 dataset. It's a file that has predictions (0 to 9 for the predicted digits) for every image in the test dataset.
 
 ### **Machine Learning Visualization Extension**
 
@@ -383,7 +397,7 @@ $$ F score = \frac{2 * \text{Precision * Recall}}{\text{Precision + Recall}} $$
 
 ![Confusion matrix for our sentiment analysis problem](../../images/ConfusionMatrix.png "Sentiment analysis confusion matrix")
 
-Figure 12 is the resultant confusion matrix for our sentiment analysis problem. The first row in the table represents the *true* 0 (or negative sentiment) 
+Figure 11 is the resultant confusion matrix for our sentiment analysis problem. The first row in the table represents the *true* 0 (or negative sentiment) 
 class labels (we have 10,397 + 2,103 = 12,500 reviews with negative sentiment). The second row represents the *true* 1 (or positive sentiment) class labels 
 (Again, we have 1,281 + 11,219 = 12,500 reviews with positive sentiment). The left column represents the *predicted* negative sentiment class labels (Our RNN 
 predicted 10,397 + 1,281 = 11,678 reviews as having a negative sentiment). The right column represents the *predicted* positive class labels (Our RNN 
@@ -402,6 +416,5 @@ $$ F score = \frac{2 * \text{Precision * Recall}}{\text{Precision + Recall}} = \
 # Conclusion
 {:.no_toc}
 
-In this tutorial, we briefly reviewed feedforward neural networks, explained how recurrent neural networks are different, and discussed various 
-RNN input/output and architectures. We also discussed various text representation and preprocessing schemes and used Galaxy to solve a sentiment 
-classification problem using RNN on IMDB movie reviews dataset. 
+In this tutorial, we explained the motivation for convolutional neural networks, explained their architecture, and discussed convolution 
+operator and its parameters. We then used Galaxy to solve an image classification problem using CNN on MNIST dataset. 
