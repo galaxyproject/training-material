@@ -19,7 +19,8 @@ objectives:
 - Find a gene on your genome using Prokka + JBrowse
 time_estimation: 2h
 key_points:
-- Illumina assembly is easy with Shovill
+- Illumina assemblies can be done with Shovill, but the assemblies are not completely resolved
+- Annotation with Prokka is very easy
 tags:
 - illumina
 - assembly
@@ -133,6 +134,15 @@ To assess the quality by hand would be too much work. That's why tools like
 which will generate a summary and plots of the data statistics. NanoPlot is
 mainly used for long-read data, like ONT and PACBIO and FastQC for short read,
 like Illumina and Sanger.
+
+
+Before doing any assembly, the first questions you should ask about your input
+reads include:
+
+- What is the coverage of my genome?
+- How good are my reads?
+- Do I need to ask/perform for a new sequencing run?
+- Is it suitable for the analysis I need to do?
 
 > ### {% icon hands_on %} Hands-on: QC & Filtering
 >

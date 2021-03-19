@@ -13,14 +13,14 @@ objectives:
 - Assess your data on quality and quantity
 - Assemble a genome
 - Assess your assembly quality
-- Assess presence of anitmicrobial resistance genes
+- Assess presence of antimicrobial resistance genes
 - Perform a species identification and MLST typing
 - Search for resistance genes on the assembly
 - Find a gene on your genome using Prokka + JBrowse
 time_estimation: 2h
 key_points:
-- Nanopore produces fantastic assemblies
-- Assembly and annotation with Flye and Prokka is very efficient
+- Nanopore produces fantastic assemblies but with low quality data
+- Annotation with Prokka is very easy
 tags:
 - nanopore
 - assembly
@@ -48,10 +48,10 @@ follow_up_training:
 
 In this training you're going to make an assembly of data produced by
 "Complete Genome Sequences of Eight Methicillin-Resistant
-Staphylococcus aureus Strains Isolated from Patients in
+*Staphylococcus aureus* Strains Isolated from Patients in
 Japan" from {% cite Hikichi_2019 %} which describes:
 
-> Methicillin-resistant Staphylococcus aureus (MRSA) is a major pathogen
+> Methicillin-resistant *Staphylococcus aureus* (MRSA) is a major pathogen
 causing nosocomial infections, and the clinical manifestations of MRSA
 range from asymptomatic colonization of the nasal mucosa to soft tissue
 infection to fulminant invasive disease. Here, we report the complete
@@ -79,7 +79,7 @@ Nanopore Technologies sequencing have much longer variable lengths.
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. {% tool [Import](upload1) %} the files from [Zenodo]({{ page.zenodo_link }}/files/DRR187567.fastq.bz2) or from the shared data library
+> 2. {% tool [Import](upload1) %} the files from [Zenodo]({{ page.zenodo_link }}) or from the shared data library
 >
 >    ```
 >    {{ page.zenodo_link }}/files/DRR187567.fastq.bz2
@@ -106,8 +106,6 @@ Nanopore Technologies sequencing have much longer variable lengths.
 >    >
 >    > 1. What are the 4 main features of each read in a fastq file.
 >    > 2. What is the name of your first read?
->    >
->    >    *Can’t find it? Read the background information.*
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > 1. The following:
