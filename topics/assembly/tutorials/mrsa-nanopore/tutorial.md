@@ -18,7 +18,9 @@ objectives:
 - Search for resistance genes on the assembly
 - Find a gene on your genome using Prokka + JBrowse
 time_estimation: 2h
-key_points: []
+key_points:
+- Nanopore produces fantastic assemblies
+- Assembly and annotation with Flye and Prokka is very efficient
 tags:
 - nanopore
 - assembly
@@ -44,7 +46,10 @@ follow_up_training:
   topic_name: visualisation
   tutorials:
   - jbrowse
-
+- type: "internal"
+  topic_name: galaxy-interface
+  tutorials:
+  - history-to-workflow
 ---
 
 
@@ -179,45 +184,15 @@ reads include:
 {: .hands_on}
 
 In principle we just ran the NanoPlot 2 times. For this reason, we have two
-reports we want to view and compare.
+reports we want to view and compare!
 
 Comparing different output files is easier if we can view more than one dataset
 simultaneously. The Scratchbook function allows us to build up a collection of
 datasets that will be shown on the screen together.
 
-> ### {% icon hands_on %} View the outputs using the Scratchbook
->
-> 1. The **Scratchbook** is enabled by clicking the nine-blocks icon seen on the right of the Galaxy top menubar:
->
->    ![scratchbook icon](../../../transcriptomics/images/ref-based/menubarWithScratchbook.png)
->
-> 2. When the Scratchbook is **enabled** datasets being viewed (by clicking the eye-icon) are added to the Scratchbook view:
->
->    ![Scratchbook icon enabled](../../../transcriptomics/images/ref-based/menubarWithScratchbookEnabled.png)
->
-> 3. Click the {% icon galaxy-eye %} (eye) icon to view one of the files you want to view. Instead of occupying the entire middle bar the dataset view is now shown an overlay:
->
->    ![Scratchbook one dataset shown](../../../transcriptomics/images/ref-based/scratchbookOneDataset.png)
->
-> 4. When a dataset is shown **click in the main interface** to prepare to select another dataset. The interface now shows that there is one saved view in the Scratchbook:
->
->    ![scratchbook one saved view](../../../transcriptomics/images/ref-based/scratchbookOneSavedView.png)
->
-> 5. Next click the {% icon galaxy-eye %} (eye) icon on the second file.  The two datasets can now be seen side by side:
->
->    ![Scratchbook two datasets shown](../../../transcriptomics/images/ref-based/scratchbookTwoDatasetsShown.png)
->
-> 6. To **leave** Scratchbook selection mode, click on the **Scratchbook icon** again. Your saved view will still remain for future viewing:
->
->    ![Scratchbook disabled datasets saved](../../../transcriptomics/images/ref-based/scratchbookDisabledWithSavedDatasets.png)
->
-> 7. To end your Scratchbook session, click again on the icon.
->
->    ![scratchbook icon](../../../transcriptomics/images/ref-based/menubarWithScratchbook.png)
->
-{: .hands_on}
+{% include snippets/scratchbook.md %}
 
-Check the **General summary** and compare the results
+Open both NanoPlot HTML Reports and check the **General summary** section of each to compare the results:
 
 General summary     | Not Filtered   | Filtered (Filtlong) | Change (%)
 ------------------- | -------------- | ------------------- | ----------
@@ -237,27 +212,40 @@ Before | After
 >
 > 1. What is the increase of your median read length?
 > 2. What is the decrease in total bases?
-> 3. What would be the coverage before and after trimming, based on a genome size of 2,976,370 bp?
+> 3. What is coverage?
+> 4. What would be the coverage before and after trimming, based on a genome size of 2.9 Mbp?
 >
 > > ### {% icon solution %} Solution
 > > 1. 3,400.0 to 5,451.0, a 60.3% increase
-> > 2. $$621,945,741 - 609,657,642 = 12,288,099$$
-> > 3. $$ \frac{609,657,642}{2,976,370} = 204.83...$$
+> > 2. -2.0% decrease, not a very significant decrease so our data was quite good to start with and didn't have many short reads which were removed.
+> > 3. Coverage is a measure of, on average, how many reads 'cover' a single base in the genome. If you divide the total reads, by the genome size, you will get a number how many times your genomes could theoretically be ‘covered’ by reads.
+> > 4. Before $$ \frac{621,945,741}{2,900,000} = 214.4$$ and after $$ \frac{609,657,642}{2,900,000} = 210.2$$. This is *not* a very big decrease in coverage, so no cause for concern. Generally in sequencing experiments you have some minimum coverage you expect to see based on how much of your sample you sequenced. If it falls below that threshold it might be cause for concern.
+> >
+> > Additionally many people do not do any filtering or QC steps with their NanoPore data, it is expected that the quality is low, and often the focus is on assembling large <abbr title="structural variations">SVs</abbr> rather than having high quality reads and base-level variation analyses.
 > {: .solution}
 {: .question}
 
+While there is currently no community consensus over
+the best trimming or filtering practices with long read data, there are still
+some steps that can be beneficial to do for the assembly process.
+{% tool [Porechop](toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.3) %}
+is a commonly used tool for removing adapter sequences, and we used
+{% tool [filtlong](toolshed.g2.bx.psu.edu/repos/iuc/filtlong/filtlong/0.2.0) %}
+for removing shorter reads which might make the assembly process more difficult.
 
 # Assembly
 
-When the quality of the reads is determined and the data is filtered and/or
-trimmed an assembly can be made. There are many tools that create assembly for
-long-read data, but in this tutorial
-[Flye](https://github.com/fenderglass/Flye) will be used. Flye is a de novo
-assembler for single molecule sequencing reads. It can be used from bacteria to
-human assemblies. The Flye assembly is based on finding overlapping reads with
-variable length with high error tolerance. Flye will output the assembly in a
-.fasta file, which looks like a .fastq file without the 3rd and 4th line
-for the "+" sign and the quality score.
+When the quality of the reads is determined and the data is filtered (like we
+did with filtlong) and/or trimmed (like is more often done with short read data)
+an assembly can be made.
+
+There are many tools that create assembly for long-read data, but in this
+tutorial [Flye](https://github.com/fenderglass/Flye) will be used. Flye is a de
+novo assembler for single molecule sequencing reads. It can be used from
+bacteria to human assemblies. The Flye assembly is based on finding overlapping
+reads with variable length with high error tolerance. Flye will output the
+assembly in a .fasta file, which looks like a .fastq file without the 3rd and
+4th line for the "+" sign and the quality score.
 
 {% include snippets/warning_results_may_vary.md %}
 
@@ -267,7 +255,7 @@ for the "+" sign and the quality score.
 >    - {% icon param-file %} *"Input reads"*: `DRR187567-filtered` (output of **filtlong** {% icon tool %})
 >    - *"estimated genome size (for example, 5m or 2.6g)"*: `2.8m` or `2800000` (average genome size of MRSA)
 >
-> 2. View {% icon galaxy-eye %} the `assembly_info` output and check the **General summary** and compare the results.
+> 2. View {% icon galaxy-eye %} the `assembly_info` output and check the *General summary* table in the assembly info file, and compare the results.
 >
 >    #seq_name | length  | cov. | circ. | repeat | mult. | graph_path
 >    --------- | ------  | ---- | ----- | ------ | ----- | ----------
@@ -288,8 +276,9 @@ for the "+" sign and the quality score.
 > ### {% icon question %} Question
 >
 > 1. How many contigs do you have?
-> 2. What is the coverage of your biggest contig?
-> 3. What is the length of your biggest contig?
+> 2. What is the coverage of your longest contig?
+> 3. What is the length of your longest contig?
+> 4. Does this feel like potentially a MRSA genome?
 >
 > > ### {% icon solution %} Solution
 > > While results may vary due to randomness in the assembly process, in our case we had:
@@ -297,6 +286,7 @@ for the "+" sign and the quality score.
 > > 1. 2
 > > 2. 181
 > > 2. 2.9mb
+> > 3. Yes, you've got one 2.9Mb genome which is approximately the size of a MRSA genome, and one small potential plasmid genome.
 > {: .solution}
 {: .question}
 
@@ -326,7 +316,6 @@ also possible with QUAST.
 >
 {: .hands_on}
 
-
 One can see that there are two contigs. The largest contig is 2,927,008
 bp (for comparison [MRSA Isolate HC1335
 Strain](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5174738/) genome
@@ -335,13 +324,13 @@ length was 2,976,370 bp) and the smallest is 2,987,958 (total length) -
 the largest contig can mean that it is the total chromosomal DNA of the *S. aureus*.
 
 > ### {% icon question %} Question
+>
 > 1. What is you GC content?
-> 2. Is your GC content similar compared to other MRSA strains?
 >
 > > ### {% icon solution %} Solution
+> >
 > > 1. The GC content for our assembly was 32.73% (for comparison [MRSA Isolate HC1335 Strain](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5174738/) GC% is 32.89%). This means the length and GC% of the assembly could be good!
 > >
-> > 2. Compare your own data vs the above.
 > {: .solution}
 {: .question}
 
@@ -386,13 +375,17 @@ CARD can be very helpful to check all the resistance genes and check if
 it is logical to find the resistance gene in a specific bacteria.
 
 > ### {% icon question %} Question
+>
 > 1. To what family does [mecA](https://card.mcmaster.ca/ontology/36911) belong?
 > 2. Do you expect to find this gene in this MRSA strain and why?
 > 3. Is the accession number of the entry related to the accession reported by staramr?
+>
 > > ### {% icon solution %} Solution
+> >
 > > 1. [Methicillin resistant PBP2](https://card.mcmaster.ca/ontology/37589)
 > > 2. The strain we use is a Methicillin(multi) resistant Staphylococcus aureus. As `mecA` has a perfect resistome mach with *S. aureus*, and the AMR Gene Family is methicillin resistant PBP2, we expect to see mecA in MRSA.
 > > 3. No, these are completely unrelated. Unfortunately this is a **very** common issue in bioinformatics. Everyone builds their own numbering system for entries in their database (usually calling them 'accessions'), and then someone else needs to build a service to link these databases.
+> >
 > {: .solution}
 {: .question}
 
@@ -417,7 +410,7 @@ from prokka as an information track.
 >    - *"Genus name (--genus)"*: `staphylococcus `
 >    - *"Species name (--species)"*: `aureus`
 >    - *"Kingdom (--kingdom)"*: `Bacteria`
->    - *"Additional outputs"*: Select only the "Annotation in GFF3 format contaianing both sequences and annotations"
+>    - *"Additional outputs"*: Select only the "Annotation in GFF3 format containing both sequences and annotations"
 >
 > 2. {% tool [Select lines that match an expression](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `staramr on data .. detailed_summary.tsv`
