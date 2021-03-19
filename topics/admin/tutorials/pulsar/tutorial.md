@@ -654,6 +654,37 @@ You'll notice that the Pulsar server has received the job (all the way in Austra
 
 How awesome is that? Pulsar in another continent with reference data automatically from CVMFS :)
 
+# Retries of the staging actions
+
+When the staging actions are carried out by the Pulsar server itself (like in the case when driving Pulsar by message queue), there are some parameters that can be tweaked to ensure reliable communication between the Galaxy server and the remote Pulsar server. 
+The aim of these parameters is to control the retrying of staging actions in the event of a failure.
+
+For each action (preprocess/input or postprocess/output), you can specify:
+```text
+ - *_action_max_retries    - the maximum number of retries before giving up
+ - *_action_interval_start - how long start sleeping between retries (in seconds)
+ - *_action_interval_step  - by how much the interval is increased for each retry (in seconds)
+ - *_action_interval_max   - the maximum number of seconds to sleep between retries
+```
+substitute the * with `preprocess` or `postprocess`
+
+In the following box, as an example, we have collected the values adopted in a Pulsar site with an unreliable network connection:
+
+```yaml
+preprocess_action_max_retries: 30
+preprocess_action_interval_start: 2
+preprocess_action_interval_step: 10
+preprocess_action_interval_max: 300
+postprocess_action_max_retries: 30
+postprocess_action_interval_start: 2
+postprocess_action_interval_step: 10
+postprocess_action_interval_max: 300
+
+```
+In this case, for both actions, Pulsar will try to carry out the staging action 30 times, sleeping 2 secs after the first retry and adding 10 secs more to each next retries, until a maximum of 300 seconds between retries.
+
+We hope you never have to experience a situation like this one, but if needed just adapt the numbers to your case and add the parameters in the `pulsar_yaml_config` section of your `pulsarservers.yml` file.
+
 # Pulsar in Production
 
 If you want to make use of Pulsar on a Supercomputer, you only need access to a submit node, and you will need to run Pulsar there. We recommend that if you need to run a setup with Pulsar, that you deploy an AMQP server (e.g. RabbitMQ) alongside your Galaxy. That way, you can run Pulsar on any submit nodes, and it can connect directly to the AMQP and Galaxy. Other Pulsar deployment options require exposing ports wherever Pulsar is running, and this requires significant more coordination effort.
