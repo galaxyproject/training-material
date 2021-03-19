@@ -7,6 +7,8 @@ import yaml
 from pathlib import Path
 
 
+BASEURL="https://training.galaxyproject.org"
+
 def check_exists(fp, noerror=False):
     '''Check if file in fp exists
     
@@ -92,36 +94,39 @@ def create_author_summary(metadata):
         
     return a
 
-def extract_metadata(yaml_metadata, contributor_fp):
+
+def extract_metadata(yaml_metadata, contributor_fp, tuto_link):
     '''Extract metadata needed by pandoc from tutorial and contributors
 
     :param yaml_metadata: YAML content on the top of a tutorial
     :param contributor_fp: Path object to file with contributors
     '''
     metadata = {
-        'title': '',
+        'title': yaml_metadata['title'],
         'author': [],
         'abstract': '',
         'author_summary': '',
-        'bibliography': 'references.bib'
+        'bibliography': 'references.bib',
+        'zenodo_link': yaml_metadata['zenodo_link'],
+        'tutorial_link': tuto_link
     }
+
     contributors = extract_contributors(contributor_fp)
-    
-    metadata['title'] = yaml_metadata['title']
     for c in yaml_metadata['contributors']:
         metadata['author'].append(get_author_name(c, contributors))
+    
     metadata['abstract'] = create_abstract(yaml_metadata)
     metadata['author_summary'] = create_author_summary(yaml_metadata)
 
     return metadata
 
 
-def format_tuto_content(content, yaml_metadata, tuto_fp):
+def format_tuto_content(content, yaml_metadata, tuto_link):
     '''Format the tutorial content (boxes)
 
     :param content: list with tutorial lines
     :param yaml_metadata: YAML content on the top of a tutorial
-    :param tuto_fp: string with path to file with original tutorial
+    :param tuto_link: link to online tutorial
     '''
     l_content = []
     do_not_add_next_lines = 0
@@ -203,9 +208,7 @@ def format_tuto_content(content, yaml_metadata, tuto_fp):
         "Europe server ([https://usegalaxy.eu/](https://usegalaxy.eu/)).\n\n" \
         "The tutorial presented in this article has been developed by the Galaxy Training Network "\
         "\cite{batut2018community} and its most up-to-date version is available online on the "\
-        "[Galaxy Training Materials](https://training.galaxyproject.org/"
-    intro += tuto_fp.replace('md', 'html')
-    intro += ') website.\n\n'
+        "[Galaxy Training Materials](%s) website.\n\n" % tuto_link
 
     # prepare references
     #ref = "\n# References\n\n"
@@ -231,7 +234,7 @@ def format_tuto_content(content, yaml_metadata, tuto_fp):
     # replace {{site.baseurl}}{% link ... %}
     form_content = re.sub(
         r'{{[ ]?site\.baseurl[ ]?}}{% link (topics\/[a-z0-9\-\_\/]+)\.md %}', 
-        'https://training.galaxyproject.org/\g<1>.html',
+        '%s/\g<1>.html' % BASEURL,
         form_content)
 
     # replace '../../images/folder/' and '../../images/'
@@ -251,9 +254,12 @@ def format_tutorial(tuto_fp, formatted_tuto_fp, contributor_fp):
     :param tuto_fp: Path object to file with original tutorial
     :param formatted_tuto_fp: Path object to file with formatted tutorial for pandoc
     :param contributor_fp: Path object to file with contributors
-    '''    
+    '''
+    tuto_link = "%s/%s" % (BASEURL, str(tuto_fp).replace('md', 'html'))
+
     with tuto_fp.open("r") as tuto_f:
         full_content = tuto_f.readlines()#yaml.load(tuto_f)
+        print(full_content)
 
         yaml_content = ''
         for i, l in enumerate(full_content[1:]):
@@ -261,11 +267,11 @@ def format_tutorial(tuto_fp, formatted_tuto_fp, contributor_fp):
                 break
         yaml_metadata = yaml.load(''.join(full_content[1:i]), Loader=yaml.FullLoader)
 
-        metadata = extract_metadata(yaml_metadata, contributor_fp)
+        metadata = extract_metadata(yaml_metadata, contributor_fp, tuto_link)
         (formatted_tuto_content, img) = format_tuto_content(
             full_content[i+2:],
             yaml_metadata,
-            str(tuto_fp))
+            tuto_link)
         
     with formatted_tuto_fp.open("w") as tuto_f:
         tuto_f.write('---\n')

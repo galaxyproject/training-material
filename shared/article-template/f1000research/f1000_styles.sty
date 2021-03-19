@@ -1,0 +1,131 @@
+\ProvidesPackage{f1000_styles}
+% Packages
+\usepackage{authblk}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage{colortbl}
+\usepackage[usenames,dvipsnames,table]{xcolor}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage[labelsep=period,justification=justified]{caption}
+\usepackage{lastpage}
+\usepackage{xifthen}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{array}
+
+%\usepackage{todonotes}
+\usepackage[hmargin=1.8cm,vmargin=2.2cm]{geometry}
+
+% Define the versionDate and flogo commands
+\newcommand{\versionDate}{\footnotesize F1000Research \number \year - DRAFT ARTICLE}
+\newcommand{\flogo}{\includegraphics[height=12pt]{F1000header.png}}
+  
+% Section heading styles
+\usepackage[compact]{titlesec} 
+
+\titleformat*{\section}{\large\usefont{OT1}{phv}{b}{n}\color{heading1}}
+\titleformat*{\subsection}{\large\usefont{OT1}{phv}{n}{n}\color{heading2}}
+\titleformat*{\subsubsection}{\large\usefont{OT1}{phv}{n}{n}\color{heading2}}
+
+% Section heading spacing (reduced space below headings)
+\titlespacing\section{0pt}{3.5ex plus 1.2ex minus .2ex}{0ex}
+\titlespacing\subsection{0pt}{3.25ex plus 1.2ex minus .2ex}{0ex}
+\titlespacing\subsubsection{0pt}{3.25ex plus 1.2ex minus .2ex}{0ex}
+
+% Caption style
+\captionsetup{labelfont={color=f1ROrange,bf},textfont={color=black}}
+
+% Allow rowstyles to be set
+\newcolumntype{$}{>{\global\let\currentrowstyle\relax}}
+\newcolumntype{^}{>{\currentrowstyle}}
+\newcommand{\rowstyle}[1]{\gdef\currentrowstyle{#1}%
+  #1\ignorespaces
+}
+
+% Table style
+\newcommand{\header}{\rowcolor{tableHeading}\rowstyle{\bfseries}}
+\newcommand{\row}{\rowstyle{\normalsize{}}}
+\newenvironment{tabledata}[1][1]{%
+  \renewcommand*{\extrarowheight}{0.1cm}%
+  \tabular%
+}{%
+  \endtabular
+}
+\rowcolors{2}{tableShading}{white}
+
+
+% Define a title note command
+\newcommand\titlenote[1]{\renewcommand\@titlenote{#1}}
+\newcommand\@titlenote{}
+
+% Column separation
+\setlength{\columnsep}{0.25in}
+
+% Page margins, headers and footers
+\pagestyle{fancy}
+\setlength\parindent{0in}
+%\setlength\parskip{0.1in}
+\setlength\headheight{16.5pt}
+\renewcommand{\footrulewidth}{1pt}
+\lhead{\textsc{\flogo}}
+\chead{}
+\rhead{\versionDate}
+\lfoot{}
+\cfoot{}
+\rfoot{\footnotesize Page \thepage\ of \color{black}\pageref*{LastPage}}
+%
+\renewenvironment{abstract}{%
+\usefont{OT1}{phv}{m}{n}
+\hfill\begin{minipage}{0.65\textwidth}
+\rule{\textwidth}{1pt}\\ \textcolor{f1ROrange}{\textbf{\abstractname}}}
+{\par\noindent\rule{\textwidth}{1pt}\end{minipage}}
+%
+\makeatletter
+\renewcommand\@maketitle{%
+\begin{minipage}{0.95\textwidth}
+\vskip 2em
+\let\footnote\thanks 
+{\fontsize{20}{22}\usefont{OT1}{phv}{b}{n}\color{titleColour} \@title \par \color{black} {\normalsize{\@titlenote}} }
+\vskip 1.5em
+{\@author \par}
+\end{minipage}
+\vskip 1em \par
+}
+\makeatother
+\renewcommand\Authfont{\fontsize{14}{16}\usefont{OT1}{phv}{b}{n}}
+\renewcommand\Affilfont{\fontsize{10}{12}\usefont{OT1}{phv}{b}{n}}
+
+% Default figure position
+\makeatletter 
+\def\fps@figure{htbp}
+\makeatother
+
+%Default table position
+\makeatletter 
+\def\fps@table{htbp}
+\makeatother
+
+% underfill badness parameters
+\hbadness = 99999
+\vbadness = 99999
+
+% Colour definitions
+\definecolor{titleColour}{HTML}{374f5a}
+\definecolor{f1ROrange}{HTML}{cc6638}
+\definecolor{heading1}{HTML}{374e59}
+\definecolor{heading2}{HTML}{006a89}
+\definecolor{tableHeading}{HTML}{becad5}
+\definecolor{tableShading}{HTML}{e7eaef}
+
+% Hyperlink styles
+\hypersetup{
+  colorlinks=true,
+  linkcolor=f1ROrange,
+  urlcolor=f1ROrange,
+  citecolor=f1ROrange
+}

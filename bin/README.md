@@ -2,8 +2,12 @@
 
 1. Get `format-tutorial-for-paper` branch on the training material
 2. Install Latex, bibtex
+    - Ubuntu: `sudo apt install texlive-latex-extra`
 3. Run `make create-pandoc-env`
-4. Run `make format-for-article TUTO:=topics/<topic_name>/tutorials/<tutorial_name>`
+4. Run `make format-for-article TUTO:=topics/<topic_name>/tutorials/<tutorial_name> JOURNAL:=<f1000research|plos>` by replacing
+    - `<topic_name>` by the name of the topic folder
+    - `<tutorial_name>` by the name of the tutorial folder
+    - `<f1000research|plos>` by the name of the journal to submit to: F1000 Research or PlOS
 
     It will create a `article` folder in the tutorial folder with several files inside:
 

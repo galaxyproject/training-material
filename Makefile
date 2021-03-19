@@ -239,9 +239,10 @@ format-for-article: ## format a tutorial for article (specify TUTO with path to 
 	source $(shell dirname $(dir $(CONDA)))/bin/deactivate && \
 	source $(shell dirname $(dir $(CONDA)))/bin/activate gtn_paper && \
 	cd ${TUTO}/article && \
-	pandoc -f markdown -t latex --template ${ROOT}/${ARTICLE_TEMPLATE}/plos_latex_template.tex -o article_2.tex article_1.md && \
+	pandoc -f markdown -t latex --template ${ROOT}/${ARTICLE_TEMPLATE}/${JOURNAL}/template.tex -o article_2.tex article_1.md && \
 	source $(shell dirname $(dir $(CONDA)))/bin/deactivate && \
-	cp ${ROOT}/${ARTICLE_TEMPLATE}/plos2015.bst . && \
+	[[ -f ${ROOT}/${ARTICLE_TEMPLATE}/${JOURNAL}/*.bst ]] && cp ${ROOT}/${ARTICLE_TEMPLATE}/${JOURNAL}/*.bst . && \
+	[[ -f ${ROOT}/${ARTICLE_TEMPLATE}/${JOURNAL}/*.sty ]] && cp ${ROOT}/${ARTICLE_TEMPLATE}/${JOURNAL}/*.sty . && \
 	pdflatex article_2.tex && \
 	bibtex article_2.aux && \
 	${ACTIVATE_ENV} && \
