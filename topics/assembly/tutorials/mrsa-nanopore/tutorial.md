@@ -302,7 +302,7 @@ also possible with QUAST.
 >    thing, because each corner means one contig. A contig is the contiguous
 >    sequence made by combining all separate reads in the assembly
 >
->    ![Image showing the HTML output of quast including a table over conting informatoin and a cumulative length graph with the contigs.](../../images/mrsa/quast.png)
+>    ![Image showing the HTML output of quast including a table over conting information and a cumulative length graph with the contigs.](../../images/mrsa/quast.png)
 >
 {: .hands_on}
 

@@ -45,10 +45,16 @@ follow_up_training:
 # Introduction
 {:.no_toc}
 
-_Staphylococcus aureus_ is currently the pathogen responsible of most common hospital-acquired infections, whose success results of its extensive virulence factors. One of the characteristics of this bacterial species is its ability to adquire resistance to antibiotics, which often results in epidemic waves. Methicillin-resistant _S. aureus_ (MRSA) refers to group of strains which have adquired a multiple drug resistance to beta-lactam antibiotics. Its clinical manifestations range from asymptomatic colonization of the nasal mucosa to soft tissue infection to fulminant invasive disease.
-    
-In this training we are going to report the complete genome sequences of eight MRSA strains isolated from patients in Japan, by using RNA-seq data generated in {% cite Hikichi_2019 %}.
+In this training you're going to make an assembly of data produced by
+"Complete Genome Sequences of Eight Methicillin-Resistant
+Staphylococcus aureus Strains Isolated from Patients in
+Japan" from {% cite Hikichi_2019 %} which describes:
 
+> Methicillin-resistant Staphylococcus aureus (MRSA) is a major pathogen
+causing nosocomial infections, and the clinical manifestations of MRSA
+range from asymptomatic colonization of the nasal mucosa to soft tissue
+infection to fulminant invasive disease. Here, we report the complete
+genome sequences of eight MRSA strains isolated from patients in Japan.
 
 > ### Agenda
 >
@@ -61,7 +67,11 @@ In this training we are going to report the complete genome sequences of eight M
 
 # Background
 
-Sequencing (determining of DNA/RNA nucleotide sequence) is used all over the world for all kinds of analysis. The product of these sequencers are reads, which are sequences of detected nucleotides. Depending on the technique these have specific lengths (30-500bp) or using Oxford Nanopore Technologies sequencing have much longer variable lengths.
+Sequencing (determining of DNA/RNA nucleotide sequence) is used all over
+the world for all kinds of analysis. The product of these sequencers are
+reads, which are sequences of detected nucleotides. Depending on the
+technique these have specific lengths (30-500bp) or using Oxford
+Nanopore Technologies sequencing have much longer variable lengths.
 
 {% include snippets/illumina-miseq.md %}
 
@@ -120,7 +130,7 @@ Tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md
 To assess the quality by hand would be too much work. That's why tools like
 [NanoPlot](https://github.com/wdecoster/NanoPlot) or
 [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) are made,
-which allows generate a summary and plots of the data statistics. NanoPlot is
+which will generate a summary and plots of the data statistics. NanoPlot is
 mainly used for long-read data, like ONT and PACBIO and FastQC for short read,
 like Illumina and Sanger.
 
@@ -276,7 +286,7 @@ based genome assembler, improved to work faster and only for smaller
 >    ![Bandage output showing a mess of a genome graph](../../images/mrsa/bandage-illumina.jpg)
 {: .hands_on}
 
-## Genome assembly evaluation
+## Genome Assembly Evaluation
 
 [Quast](http://quast.bioinf.spbau.ru/) ({% cite Gurevich2013 %})
 is a tool providing quality metrics for assemblies, and can also be used
@@ -306,13 +316,13 @@ also possible with QUAST.
 This fasta file contains 32 contigs, meaning the chromosome is separated over multiple contigs. These contigs can also contain (parts of) plasmids.
 
 > ### {% icon question %} Question
+>
 > 1. What is you GC content?
-> 2. Is your GC content similar compared to other MRSA strains?
 >
 > > ### {% icon solution %} Solution
+> >
 > > 1. The GC content for our assembly was 32.77% (for comparison [MRSA Isolate HC1335 Strain](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5174738/) GC% is 32.89%). This means the length and GC% of the assembly could be good!
 > >
-> > 2. Compare your own data vs the above.
 > {: .solution}
 {: .question}
 
@@ -357,13 +367,17 @@ CARD can be very helpful to check all the resistance genes and check if
 it is logical to find the resistance gene in a specific bacteria.
 
 > ### {% icon question %} Question
+>
 > 1. To what family does [mecA](https://card.mcmaster.ca/ontology/36911) belong?
 > 2. Do you expect to find this gene in this MRSA strain and why?
 > 3. Is the accession number of the entry related to the accession reported by staramr?
+>
 > > ### {% icon solution %} Solution
+> >
 > > 1. [Methicillin resistant PBP2](https://card.mcmaster.ca/ontology/37589)
 > > 2. The strain we use is a Methicillin(multi) resistant Staphylococcus aureus. As `mecA` has a perfect resistome mach with *S. aureus*, and the AMR Gene Family is methicillin resistant PBP2, we expect to see mecA in MRSA.
 > > 3. No, these are completely unrelated. Unfortunately this is a **very** common issue in bioinformatics. Everyone builds their own numbering system for entries in their database (usually calling them 'accessions'), and then someone else needs to build a service to link these databases.
+> >
 > {: .solution}
 {: .question}
 
