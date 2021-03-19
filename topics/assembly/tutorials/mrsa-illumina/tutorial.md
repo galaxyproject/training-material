@@ -47,10 +47,10 @@ follow_up_training:
 
 In this training you're going to make an assembly of data produced by
 "Complete Genome Sequences of Eight Methicillin-Resistant
-Staphylococcus aureus Strains Isolated from Patients in
+*Staphylococcus aureus* Strains Isolated from Patients in
 Japan" from {% cite Hikichi_2019 %} which describes:
 
-> Methicillin-resistant Staphylococcus aureus (MRSA) is a major pathogen
+> Methicillin-resistant *Staphylococcus aureus* (MRSA) is a major pathogen
 causing nosocomial infections, and the clinical manifestations of MRSA
 range from asymptomatic colonization of the nasal mucosa to soft tissue
 infection to fulminant invasive disease. Here, we report the complete
@@ -92,9 +92,9 @@ Nanopore Technologies sequencing have much longer variable lengths.
 >
 >    {% include snippets/convert_datatype.md conversion="Convert compressed to uncompressed" %}
 >
-> 4. Rename the uncompressed dataset to just the sequence run ID: `DRR187567_1` and `DRR187567_2`
+> 4. Rename the uncompressed dataset to just the sequence run ID: `DRR187559_1` and `DRR187559_2`
 >
->    {% include snippets/rename_dataset.md name="DRR187567_1" %}
+>    {% include snippets/rename_dataset.md name="DRR187559_1" %}
 >
 > 5. Tag the dataset `#unfiltered`
 >
@@ -137,7 +137,7 @@ like Illumina and Sanger.
 > ### {% icon hands_on %} Hands-on: QC & Filtering
 >
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
->    - {% icon param-files %} *"Short read data from your current history"*: `DRR187567_1` and `DRR187567_2`
+>    - {% icon param-files %} *"Short read data from your current history"*: `DRR187559_1` and `DRR187559_2`
 >
 > 2. Examine the output "WebPage" files
 >
@@ -156,15 +156,24 @@ For each position, a boxplot is drawn with:
 - the 10% and 90% values in the upper and lower whiskers
 - the mean quality, represented by the blue line
 
-Depending on the analysis it could be possible that a certain quality or length is needed. In this case we’re going to trim the data using Trimmomatic.
-
+Depending on the analysis it could be possible that a certain quality or length
+is needed. In this case we’re going to trim the data using Trimmomatic. Here we
+will trim the start (LEADING) and end (TRAILING)of the reads if those fall
+below a quality score of 20. Different trimming tools have different algorithms
+for deciding when to cut but trimmomatic will cut based on the quality csore of
+one base alone. Trimmomatic starts from each end, and as long as the base is
+below 20, it will be cut until it reaches one greater than 20. A sliding window
+trimming will be performed where if the average quality of 4 bases drops below
+20, the read will be truncated there. And last we will also filter for reads
+which are at least 30 bases long, anything shorter will complicate the assembly
+and we will drop.
 
 > ### {% icon hands_on %} Hands-on: Assessing the data quality of the trimmed reads and comparing to the input reads
 >
 > 1. {% tool [Trimmomatic](toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic) %}  with the following parameters:
 >    - *"Single-end or paired-end reads?"*: `Paired-end (two separate input files)`
 >        - {% icon param-file %} *"Input FASTQ file (R1/first of pair)"*: `DRR187559_1 uncompressed`
->        - {% icon param-file %} *"Input FASTQ file (R2/second of pair)"*: `DRR187559_1 uncompressed`
+>        - {% icon param-file %} *"Input FASTQ file (R2/second of pair)"*: `DRR187559_2 uncompressed`
 >    - *"Perform initial ILLUMINACLIP step?"*: `Yes`
 >    - In *"Trimmomatic Operation"*:
 >        - {% icon param-repeat %} *"Insert Trimmomatic Operation"*
@@ -191,7 +200,7 @@ Depending on the analysis it could be possible that a certain quality or length 
 >    {% include snippets/add_tag.md %}
 >
 > 3. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
->    - {% icon param-files %} *"Short read data from your current history"*: `Trimmomatic on DRR187567_1 (R1 Paired)` and `Trimmomatic on DRR187567_2 (R2 Paired)`
+>    - {% icon param-files %} *"Short read data from your current history"*: `Trimmomatic on DRR187559_1 (R1 Paired)` and `Trimmomatic on DRR187559_2 (R2 Paired)`
 >
 > 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9) %} with the following parameters:
 >    - In *"Results"*:
@@ -199,7 +208,7 @@ Depending on the analysis it could be possible that a certain quality or length 
 >            - *"Which tool was used generate logs?"*: `FastQC`
 >                - In *"FastQC output"*:
 >                    - {% icon param-repeat %} *"Insert FastQC output"*
->                        - {% icon param-files %} *"FastQC output"*: select **all** of the RawData files.
+>                        - {% icon param-files %} *"FastQC output"*: select **all** of the `FastQC on data ... RawData` files. You should have 4; 2 FastQCs from before trimming, 2 from after trimming.
 >
 {: .hands_on}
 
@@ -207,35 +216,21 @@ MultiQC is a tool to combine multiple outputs in one clear and easy to read over
 
 > ### {% icon question %} Question
 >
-> 1. How many reads do all files have? Is it a coincidence that the forward and reverse files have the same number of reads?
-> 2. What is the decrease in total bases for your forward and reverse file?
-> 3. What would be the coverage before and after trimming, based on a genome size of 2,914,567bp?
+> Looking at your `MultiQC on data ....: Webpage` output, answer the following questions:
+>
+> 1. How did the duplicate reads change from before to after?
+> 2. How did the average read length change?
+> 3. Did trimming improve the mean quality scores?
+> 4. Did trimming affect the GC content?
+> 5. Is this data ok to assemble? Do we need to re-sequence it?
 >
 > > ### {% icon solution %} Solution
-> > 1. This can be found in the original FastQC reports most easily.
 > >
-> >    File                | Reads
-> >    ----                | -----
-> >    DRR187559_1         | 451782 reads
-> >    DRR187559_2         | 451782 reads
-> >    Trimmed DRR187559_1 | 437144 reads
-> >    Trimmed DRR187559_1 | 437144 reads
-> >
-> > 2. The calculations follow. We're asked for total bases, and none of the tools report this, so we need to infer this from the mean read lengths. Using the original numbers in the above table combined with the "Length" column of MultiQC's "General Statistics" section.
-> >
-> >    - Forward: (451782 * 190) – (437144 * 151) = 19829836 bp (23.18% decrease)
-> >    - Reverse: (451782 * 221) – (437144 * 191) = 16349318 bp (16.25% decrease)
-> >
-> > 3. What would be the coverage before and after trimming, based on a genome size of 2,914,567bp?
-> >
-> >    - Forward: (451782 * 190.8503437) = 86,222,750 bases
-> >    - Reverse: (451782 * 221.4850348) = 100,062,952 bases
-> >    - 86,222,750 + 100,062,952 = 186,285,702 bases
-> >    - 186,285,702 /2,914,567 = 63.9 coverage
-> >    - Trim Forward: (437144 * 151.5129889) = 66,232,994 bases
-> >    - Trim Reverse: (437144 * 191.6990374) = 83,800,084 bases
-> >    - 66,232,944 + 83,800,084 = 150,033,078 bases
-> >    - 150,033,078/2,914,567 = 51.5 coverage
+> > 1. There were slight decreases in duplicate reads (19.8% →  18%, 21.2% →  20.5%)
+> > 2. Read lengths went down more significantly; 191 to 152 bp, and 221 to 192 bp. These are still probably fine for assembly but you'll see that MultiQC has marked the 152 bp result in yellow.
+> > 3. Yes, definitely. It is most visible at the end of the reads, they stay completely in the "green zone", unlike the untrimmed data which falls into the yellow.
+> > 4. No, it did not. If it had, that would be unexpected.
+> > 5. This data looks OK. The number of shorter reads in R1 is not optimal but it should assemble something. Probably not the entire, closed genomes but something.
 > >
 > {: .solution}
 {: .question}
@@ -243,11 +238,12 @@ MultiQC is a tool to combine multiple outputs in one clear and easy to read over
 
 # Assembly
 
-When the quality of the reads is determined and the data is filtered and/or
-trimmed an assembly can be made. There are many tools that create assembly for
-long-read data, but in this tutorial Shovill will be used. Shovill is a SPAdes
-based genome assembler, improved to work faster and only for smaller
-(bacterial) genomes.
+When the quality of the reads is determined and the data is filtered and/or trimmed (like we did with trimmomatic)
+an assembly can be made.
+
+There are many tools that create assembly for short-read data, but in this
+tutorial Shovill will be used. Shovill is a SPAdes based genome assembler,
+improved to work faster and only for smaller (bacterial) genomes.
 
 {% include snippets/warning_results_may_vary.md %}
 
@@ -255,8 +251,8 @@ based genome assembler, improved to work faster and only for smaller
 >
 > 1. {% tool [Shovill](toolshed.g2.bx.psu.edu/repos/iuc/shovill) %} with the following parameters:
 >    - *"Input reads type, collection or single library"*: `Paired End`
->        - {% icon param-file %} *"Forward reads (R1)"*: `Trimmomatic on DRR187567_1 uncompressed (R1 paired)`
->        - {% icon param-file %} *"Reverse reads (R2)"*: `Trimmomatic on DRR187567_2 uncompressed (R2 paired)`
+>        - {% icon param-file %} *"Forward reads (R1)"*: `Trimmomatic on DRR187559_1 uncompressed (R1 paired)`
+>        - {% icon param-file %} *"Reverse reads (R2)"*: `Trimmomatic on DRR187559_2 uncompressed (R2 paired)`
 >    - In *"Advanced options"*:
 >        - *"Estimated genome size"*: `2914567`
 >        - *"Minimum contig length"*: `500`
@@ -286,6 +282,20 @@ based genome assembler, improved to work faster and only for smaller
 >    ![Bandage output showing a mess of a genome graph](../../images/mrsa/bandage-illumina.jpg)
 {: .hands_on}
 
+
+> ### {% icon question %} Question
+> First read [this page in the Bandage wiki](https://github.com/rrwick/Bandage/wiki/Simple-example) to help understand what the graph means.
+>
+> 1. What do you think of this assembly? Is it useful? Is it good enough?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. This is a very messy assembly, with a lot of potential paths through the sequence. We cannot feel confident in the output .fasta file (as it is much smaller than the expected 2.9Mbp). In real life we might consider doing a hybrid assembly with Nanopore or other long read data to help resolve these issues.
+> >
+> {: .solution}
+{: .question}
+
+
 ## Genome Assembly Evaluation
 
 [Quast](http://quast.bioinf.spbau.ru/) ({% cite Gurevich2013 %})
@@ -308,7 +318,7 @@ also possible with QUAST.
 >    thing, because each corner means one contig. A contig is the contiguous
 >    sequence made by combining all separate reads in the assembly
 >
->    ![Image showing the HTML output of quast including a table over conting informatoin and a cumulative length graph with the contigs.](../../images/mrsa/quast-illumina.png)
+>    ![Image showing the HTML output of quast including a table over conting information and a cumulative length graph with the contigs.](../../images/mrsa/quast-illumina.png)
 >
 {: .hands_on}
 
@@ -430,8 +440,8 @@ from prokka as an information track.
 >
 > 4. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.3.4.3+galaxy0) %} with the following parameters:
 >    - *"Is this single or paired library"*: `Paired-end`
->        - {% icon param-file %} *"FASTA/Q file #1"*: `Trimmomatic on DRR187567_1 uncompressed (R1 paired)` (output of **Trimmomatic** {% icon tool %})
->        - {% icon param-file %} *"FASTA/Q file #2"*: `Trimmomatic on DRR187567_2 uncompressed (R2 paired)` (output of **Trimmomatic** {% icon tool %})
+>        - {% icon param-file %} *"FASTA/Q file #1"*: `Trimmomatic on DRR187559_1 uncompressed (R1 paired)` (output of **Trimmomatic** {% icon tool %})
+>        - {% icon param-file %} *"FASTA/Q file #2"*: `Trimmomatic on DRR187559_2 uncompressed (R2 paired)` (output of **Trimmomatic** {% icon tool %})
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from the history and build index`
 >        - {% icon param-file %} *"Select reference genome"*: `contigs` (output of **Shovill** {% icon tool %})
 >    - *"Select analysis mode"*: `1: Default setting only` - You should have a look at the non-default parameters and try to understand them, but they don't need to be changed currently.
@@ -439,7 +449,7 @@ from prokka as an information track.
 >
 > 5. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
->        - {% icon param-file %} *"Select the reference genome"*: `consensus` (output of **Shovill assembly** {% icon tool %})
+>        - {% icon param-file %} *"Select the reference genome"*: `Shovill on ...: Contigs` (output of **Shovill assembly** {% icon tool %})
 >    - *"Genetic Code"*: `11. The Bacterial, Archaeal and Plant Plastid Code`
 >    - In *"Track Group"*:
 >        - {% icon param-repeat %} *"Insert Track Group"*
@@ -447,7 +457,7 @@ from prokka as an information track.
 >            - In *"Annotation Track"*:
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `GFF/GFF3/BED Features`
->                        - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `out_gff` (output of **Prokka** {% icon tool %})
+>                        - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `Prokka on data ...: gff` (output of **Prokka** {% icon tool %})
 >                        - *"JBrowse Track Type [Advanced]"*: `Neat Canvas Features`
 >                        - *"Track Visibility"*: `On for new users`
 >        - {% icon param-repeat %} *"Insert Track Group"*
