@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Genome Assembly of MRSA using Illumina MiSeq Data
-zenodo_link: 'https://zenodo.org/record/4304328'
+zenodo_link: 'https://zenodo.org/record/4534098'
 questions:
 - How to check the quality of the MiSeq data?
 - How to perform an assembly with MiSeq data?
@@ -13,12 +13,13 @@ objectives:
 - Assess your data on quality and quantity
 - Assemble a genome
 - Assess your assembly quality
-- Assess presence of anitmicrobial resistance genes
+- Assess presence of antimicrobial resistance genes
 - Perform a species identification and MLST typing
 - Search for resistance genes on the assembly
 - Find a gene on your genome using Prokka + JBrowse
 time_estimation: 2h
-key_points: []
+key_points:
+- Illumina assembly is easy with Shovill
 tags:
 - illumina
 - assembly
@@ -29,22 +30,15 @@ contributors:
 - shiltemann
 - hexylena
 
-requirements:
-- type: "internal"
-  topic_name: introduction
-  tutorials:
-  - galaxy-intro-short
-- type: "internal"
-  topic_name: sequence-analysis
-  tutorials:
-  - quality-control
-
 follow_up_training:
 - type: "internal"
   topic_name: visualisation
   tutorials:
   - jbrowse
-
+- type: "internal"
+  topic_name: galaxy-interface
+  tutorials:
+  - history-to-workflow
 ---
 
 
@@ -74,11 +68,11 @@ Sequencing (determining of DNA/RNA nucleotide sequence) is used all over the wor
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. {% tool [Import](upload1) %} the files from [Zenodo](https://zenodo.org/record/4304328/) or from the shared data library
+> 2. {% tool [Import](upload1) %} the files from [Zenodo]({{ page.zenodo_link }}) or from the shared data library
 >
 >    ```
->    https://zenodo.org/record/4304328/files/DRR187567_1.fastq.bz2
->    https://zenodo.org/record/4304328/files/DRR187567_2.fastq.bz2
+>    {{ page.zenodo_link }}/files/DRR187559_1.fastqsanger.bz2
+>    {{ page.zenodo_link }}/files/DRR187559_2.fastqsanger.bz2
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -284,7 +278,7 @@ based genome assembler, improved to work faster and only for smaller
 
 ## Genome assembly evaluation
 
-[Quast](http://quast.bioinf.spbau.ru/) ({% cite Gurevich2013% %})
+[Quast](http://quast.bioinf.spbau.ru/) ({% cite Gurevich2013 %})
 is a tool providing quality metrics for assemblies, and can also be used
 to compare multiple assemblies. The tool can also take an optional
 reference file as input, and will provide complementary metrics. QUAST

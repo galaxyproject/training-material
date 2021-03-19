@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Genome Assembly of MRSA using Oxford Nanopore MinION Data
-zenodo_link: 'https://zenodo.org/record/4304328'
+zenodo_link: 'https://zenodo.org/record/4534098'
 questions:
 - How to check the quality of the MinION data?
 - How to perform an assembly with MinION data?
@@ -30,16 +30,6 @@ contributors:
 - miaomiaozhou88
 - shiltemann
 - hexylena
-
-requirements:
-- type: "internal"
-  topic_name: introduction
-  tutorials:
-  - galaxy-intro-short
-- type: "internal"
-  topic_name: sequence-analysis
-  tutorials:
-  - quality-control
 
 follow_up_training:
 - type: "internal"
@@ -89,10 +79,10 @@ Nanopore Technologies sequencing have much longer variable lengths.
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. {% tool [Import](upload1) %} the files from [Zenodo](https://zenodo.org/record/4304328/files/DRR187567.fastq.bz2) or from the shared data library
+> 2. {% tool [Import](upload1) %} the files from [Zenodo]({{ page.zenodo_link }}/files/DRR187567.fastq.bz2) or from the shared data library
 >
 >    ```
->    https://zenodo.org/record/4304328/files/DRR187567.fastq.bz2
+>    {{ page.zenodo_link }}/files/DRR187567.fastq.bz2
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
