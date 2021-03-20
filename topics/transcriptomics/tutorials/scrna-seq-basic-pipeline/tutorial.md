@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: Filter, Plot and Explore Single-cell RNA-seq Data
 subtopic: single-cell
 priority: 10
-zenodo_link: ''
+zenodo_link: 'https://zenodo.org/record/4624461'
 questions:
 - Is my single cell dataset a quality dataset?
 - How do I generate and annotate cell clusters?
@@ -57,31 +57,23 @@ https://training.galaxyproject.org/training-material/topics/transcriptomics/tuto
 
 ## Get data
 
-We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html) if you used the full fastq files rather than the subsampled ones (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find this dataset in this [input history]() or download from Zenodo below.
+We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html) if you used the full fastq files rather than the subsampled ones (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find this dataset in this [input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/filter-plot-and-explore-single-cell-rna-seq-data---input) or download from Zenodo below.
 
-> ### {% icon hands_on %} Hands-on: Data upload - FIXME
+> ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]() or from the shared data library
+> 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
->    
+>    {{ page.zenodo_link }}/files/Mito-counted_AnnData
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
 >
-> 3. **Rename** the datasets `Mito-counted AnnData`
+> 3. **Rename** {% icon galaxy-pencil %} the datasets `Mito-counted AnnData`
 > 4. Check that the datatype is `h5ad`
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
 >
 {: .hands_on}
 
@@ -566,7 +558,7 @@ We're still looking at around 20 dimensions at this point. We need to identify h
 >
 > 1. {% tool [Scanpy ComputeGraph](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.6.0+galaxy4) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunPCA** {% icon tool %})
->    - *"Use programme defaults"*: `No`
+>    - *"Use programme defaults"*: {% icon history-share %} `No`
 >    - *"Maximum number of neighbours used"*: `15`
 >    - *"Number of PCs to use"*: `20`
 {: .hands_on}
@@ -586,12 +578,12 @@ Two major visualisations for this data are tSNE and UMAP. We must calculate the 
 >
 > 1. {% tool [Scanpy RunTSNE](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.6.0+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy ComputeGraph** {% icon tool %})
->    - *"Use programme defaults"*: `No`
+>    - *"Use programme defaults"*: {% icon history-share %} `No`
 >    - *"The perplexity is related to the number of nearest neighbours, select a value between 5 and 50"*: `30`
 >
 > 2. {% tool [Scanpy RunUMAP](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.6.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FindTSNE** {% icon tool %})
->    - *"Use programme defaults"*: `Yes`
+>    - *"Use programme defaults"*: {% icon history-share %} `Yes`
 {: .hands_on}
 
 {% icon congratulations %} Congratulations! You have prepared your object and created neighborhood coordinates. We can now use those to call some clusters!
@@ -625,19 +617,19 @@ Finally, let's identify clusters! Unfortunately, it's not as majestic as biologi
 >
 > 1. {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.6.0+galaxy4) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy ComputeGraph** {% icon tool %})
->    - *"Use programme defaults"*: `No`
+>    - *"Use programme defaults"*: {% icon history-share %} `No`
 >    - *"Resolution, high value for more and smaller clusters"*: `0.6`
 {: .hands_on}
 
-Nearly plotting time! But one final piece is to add in SOME gene information. Right now we'll focus on genes driving the clusters, but fear not, we'll add in more information later!
+Nearly plotting time! But one final piece is to add in SOME gene information. Let's focus on genes driving the clusters.
 
 ## FindMarkers
 
 > ### {% icon hands_on %} Hands-on: FindMarkers
 >
-> 1. {% tool [Scanpy FindMarkers](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy2) %} with the following parameters:
+> 1. {% tool [Scanpy FindMarkers](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FindClusters** {% icon tool %})
->    - *"Use programme defaults"*: `Yes`
+>    - *"Use programme defaults"*: {% icon history-share %} `No` <--- trust me, there's an odd glitch here in some tool versions that is solved by simply ticking `No` here
 >
 > 2. **Rename** {% icon galaxy-pencil %} output table (not h5ad) `Markers - cluster`
 >
@@ -648,11 +640,11 @@ Nearly plotting time! But one final piece is to add in SOME gene information. Ri
 > 3. {% tool [Scanpy FindMarkers](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy4) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final object`
 >    - *"The sample grouping/clustering to use"*: `genotype`
->    - *"Use programme defaults"*: `Yes`
+>    - *"Use programme defaults"*: {% icon history-share %} `No`
 >
 > 4. **Rename** {% icon galaxy-pencil %} output table (not h5ad) `Markers - genotype`
 >
-> 5. Do not **Rename** the output AnnData object - you have the marker tables to enjoy, but we want to keep the cluster comparisons, rather than gene comparisons, stored in the AnnData object for later.
+> 5. Do not **Rename** the output AnnData object (in fact, you can delete it!). You have the genotype marker table to enjoy, but we want to keep the cluster comparisons, rather than gene comparisons, stored in the AnnData object for later.
 >
 {: .hands_on}
 
@@ -661,32 +653,28 @@ Now, there's a small problem here, which is that if you {% icon galaxy-eye %} in
 > ### {% icon hands_on %} Hands-on: Adding in Gene Names
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **Scanpy FindMarkers** {% icon tool %})
+>    - {% icon param-file %} *"Annotated data matrix"*: `Final matrix`
 >    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
 >
 > This gives us our table of all the possible genes with their names.
 >
->> ### {% icon hands_on %} Hands-on: Task description
->
-> 2. **Join two Datasets** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Join"*: `Markers - cluster`
->    - *"using column"*: `cColumn: 4`
+> 2. {% tool [Join two Datasets side by side on a specified field](tool_id=join1) %} with the following parameters:
+>    - {% icon param-file %} *"Join"*: {% icon param-files %} Select multiple files: `Markers - cluster` and `Markers - genotype`
+>    - *"using column"*: `Column: 4`
 >    - {% icon param-file %} *"with"*: `var` (output of **Inspect AnnData** {% icon tool %})
->    - *"and column"*: `cColumn: 2`
+>    - *"and column"*: `Column: 2`
 >    - *"Keep lines of first input that do not join with second input"*: `Yes`
 >    - *"Keep lines of first input that are incomplete"*: `Yes`
 >    - *"Fill empty columns"*: `No`
 >    - *"Keep the header lines"*: `Yes`
 >
-> We have lots of extra information we don't need in our marker gene table, so...
+> We have lots of extra information we don't need in our marker gene tables, so...
 >
-> 3. **Cut** {% icon tool %} with the following parameters:
+> 3. {% tool [Cut columns from a table](tool_id=Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1,c2,c3,c4,c11,c5,c6,c7,c8`
->    - {% icon param-file %} *"From"*: `out_file1` (output of **Join two Datasets** {% icon tool %})
+>    - {% icon param-file %} *"From"*: {% icon param-files %} Select multiple files: `out_file1` and `output_file2` (outputs of **Join two Datasets** {% icon tool %})
 >
-> 4. **Rename** {% icon galaxy-pencil %} output table `Markers - cluster - named`
->
-> Feel free to repeat this process for the `Markers-genotype`!
+> 4. **Rename** {% icon galaxy-pencil %} output tables `Markers - cluster - named` and `Markers - genotype - named`
 {: .hands_on}
 
 {% icon congratulations %} Well done! It's time for the best bit, the plotting!
@@ -694,37 +682,27 @@ Now, there's a small problem here, which is that if you {% icon galaxy-eye %} in
 # Plotting!
 
 It's time! Let's plot it all!
-But first, let's pick some marker genes from the `Markers-genotype` list that you made as well. I'll be honest, in practice, you'd now be spending a lot of time looking up what each gene does (thank you google!). There are burgeoning automated-annotation tools, however, so long as you have a good reference (well annotated dataset you'll use as the ideal). Watch this space for this!
-
-In the mean time, let's do this the old-fashioned way, and copy a bunch of the markers in the original paper.
+But first, let's pick some marker genes from the `Markers-cluster` list that you made as well. I'll be honest, in practice, you'd now be spending a lot of time looking up what each gene does (thank you google!). There are burgeoning automated-annotation tools, however, so long as you have a good reference (a well annotated dataset that you'll use as the ideal). In the mean time, let's do this the old-fashioned way, and just copy a bunch of the markers in the original paper.
 
 > ### {% icon hands_on %} Hands-on: Plot the cells!
 >
-> 1. **Scanpy PlotEmbed** {% icon tool %} with the following parameters:
+> 1. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final object`
 >    - *"name of the embedding to plot"*: `pca`
->    - *"color by attributes, comma separated texts"*: `louvain,genotype,sex,batch,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,Hba-a1,log1p_total_counts`
+>    - *"color by attributes, comma separated texts"*: `louvain,sex,batch,genotype,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,Hba-a1,log1p_total_counts`
 >    - *"Field for gene symbols"*: `Symbol`
+>    - {% icon time %} *You can re-run {% icon galaxy-refresh %} the same tool again, but change `pca` to `tsne` and then finally to `umap` in order to skip the following two steps.*
 >
-> > ### {% icon tip %} Tip: Re-run the same tool again, but
-> >
-> > * Copy the link location
-> > * Open the Galaxy Upload Manager
-> > * Select **Paste/Fetch Data**
-> > * Paste the link into the text field
-> > * Press **Start**
-{: .tip}
->
-> 2. **Scanpy PlotEmbed** {% icon tool %} with the following parameters:
+> 2. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final object`
 >    - *"name of the embedding to plot"*: `tsne`
->    - *"color by attributes, comma separated texts"*: `louvain,genotype,sex,batch,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,Hba-a1,log1p_total_counts`
+>    - *"color by attributes, comma separated texts"*: `louvain,sex,batch,genotype,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,Hba-a1,log1p_total_counts`
 >    - *"Field for gene symbols"*: `Symbol`
 >
-> 3. **Scanpy PlotEmbed** {% icon tool %} with the following parameters:
+> 3. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final object`
 >    - *"name of the embedding to plot"*: `umap`
->    - *"color by attributes, comma separated texts"*: `louvain,genotype,sex,batch,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,Hba-a1,log1p_total_counts`
+>    - *"color by attributes, comma separated texts"*: `louvain,sex,batch,genotype,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,Hba-a1,log1p_total_counts`
 >    - *"Field for gene symbols"*: `Symbol`
 {: .hands_on}
 
@@ -743,9 +721,7 @@ Now it's the fun bit! We can see where genes are expressed, and start considerin
 >
 > > ### {% icon solution %} Solution
 > >
-> > You can see why a PCA is generally not enough to see clusters in samples - keep in mind, you're only seeing components 1 and 2! - and therefore why the tSNE and UMAP visualisation dimensionality reductions are so useful. But there is not necessarily a clear winner between tSNE and UMAP. However, if we investigate further, we can use our biological knowledge. This sample should contain developing T-cells, as red blood cells have been removed.  Red blood cells express hemoglobin, **Hba-a1**).
-> > ![Hba-a1 expression](../../images/wab-hbalocation.png "Red blood cells")
-> > In the tSNE version of this, the red blood cells cluster inside the bulk lot of T-cells. This could be misleading, so all other things being equal, we will proceed with the UMAP where this is not the case!
+> > You can see why a PCA is generally not enough to see clusters in samples - keep in mind, you're only seeing components 1 and 2! - and therefore why the tSNE and UMAP visualisation dimensionality reductions are so useful. But there is not necessarily a clear winner between tSNE and UMAP, but I think UMAP is slightly clearer with its clusters, so we'll stick with that for the rest of the analysis.
 > >
 > {: .solution}
 >
@@ -755,54 +731,51 @@ Note that the cluster numbering is based on size alone - clusters 0 and 1 are no
 
 | Clusters | Marker | Cell type |
 |------ |--------------------|
-| 4 | Il2ra    | Double negative (early T-cell)    |
-| 0,1,3,5 | Cd8b1, Cd8a, Cd4    | Double positive (middle T-cell)|
+| 3 | Il2ra    | Double negative (early T-cell)    |
+| 0,1,4,6 | Cd8b1, Cd8a, Cd4    | Double positive (middle T-cell)|
+| 5 | Cd8b1, Cd8a, Cd4 - high | Double positive (late middle T-cell)
 | 2 | Itm2a    | Mature T-cell
-| 6 | Hba-a1    | Red blood cells |
-| 7 | Aif1    | Macrophages    |
+| 7 | Hba-a1    | Red blood cells |
+| 8 | Aif1    | Macrophages    |
 
 ![Marker Gene UMAPs](../../images/wab-markergeneumaps.png "Known marker gene locations")
 
-The authors weren't interested in further annotation of the DP cells, so neither are we, and sometimes that just happens, the maths tries to call similar (ish) sized clusters, whether it is biologically relevant or not, or the question being asked doesn't really require such granularity.
+The authors weren't interested in further annotation of the DP cells, so neither are we. Sometimes that just happens. The maths tries to call similar (ish) sized clusters, whether it is biologically relevant or not. Or, the question being asked doesn't really require such granularity of clusters.
 
 ### Annotating Clusters
 
 > ### {% icon hands_on %} Hands-on: Annotating clusters
 >
-> 1. **Manipulate Anndata** {% icon tool %} with the following parameters:
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Final object`
->    - *"Function to manipulate the object"*: `**Rename** categories of annotation`
+>    - *"Function to manipulate the object"*: `Rename categories of annotation`
 >    - *"Key for observations or variables annotation"*: `louvain`
->    - *"Comma-separated list of new categories"*: `DP-1,DP-2,T-mat,DP-3,DN,DP-4,RBC,Macrophages`
+>    - *"Comma-separated list of new categories"*: `DP-M1,DP-M2,T-mat,DN,DP-M3,DP-L,DP-M4,RBC,Macrophages`
+>    - Hang on here, though. This unfortunately deletes the original cluster numbering. Just in case you might want this back, we can add that annotation back in.
 >
-> Hang on here, though. This unfortunately deletes the original cluster numbering. Just in case you might want this back, we can add that annotation back in.
->
-> 2. **AnnData Operations** {% icon tool %} with the following parameters:
+> 2. {% tool [AnnData Operations](tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Final object`
 >    - *"Copy observations (such as clusters)"*: {% icon history-share %} *Yes*
 >    - **"Keys from obs to copy"**
 >    - *"Keys from obs to copy"*
 >    - *"Key contains"*: `louvain`
 >    - {% icon param-file %} *"AnnData objects with obs to copy"*: (output of **Manipulate AnnData** {% icon tool %})
+>    - You've added the new cell annotations in, now titled `louvain_0`. What, that's not good enough? You want to change the title as well? So be it.
 >
-> You've added the new cell annotations in, now titled `louvain_0`. What, that's not good enough? You want to change the title as well? So be it.
->
-> 3. **AnnData Operations** {% icon tool %} with the following parameters:
+> 3. {% tool [AnnData Operations](tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1) %} {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: (output of **AnnData Operations** {% icon tool %})
 >    - *"Change field names in AnnData observations"*
->    - {% icon galaxy-wf-new %} *"Insert Change field names in AnnData observations"
+>    - {% icon galaxy-wf-new %} *"Insert Change field names in AnnData observations"*
 >    - *"1: Change field names in AnnData observations"*
->    - *"Original name": `louvain_0`
+>    - *"Original name"*: `louvain_0`
 >    - *"New name"*: `cell_type`
 >
 > 4. **Rename** {% icon galaxy-pencil %} output h5ad `Final cell annotated object`
->
-> Time to re-plot! Feel free to re-run {icon galaxy-refresh %} the plot.embed tool on the new object plotting `cell_type` to speed this up. Otherwise...
->
-> 5. **Scanpy PlotEmbed** {% icon tool %} with the following parameters:
+>   -  Time to re-plot! {% icon time %} Feel free to re-run {% icon galaxy-refresh %} the **Scanpy PlotEmbed** tool {% icon tool %} on the new object plotting `cell_type` to speed this up. Otherwise...
+> 5. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final cell annotated object`
 >    - *"name of the embedding to plot"*: `umap`
->    - *"color by attributes, comma separated texts"*: `cell_type,genotype,sex,batch,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,Hba-a1,log1p_total_counts`
+>    - *"color by attributes, comma separated texts"*: `cell_type,sex,batch,genotype,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,Hba-a1,log1p_total_counts`
 >    - *"Field for gene symbols"*: `Symbol`
 >
 {: .hands_on}
@@ -819,7 +792,7 @@ Now that we know what we're dealing with, let's examine the effect of our variab
 >
 > > ### {% icon solution %} Solution
 > >
-> > We can see that DP-4, which seems to be extending away from the main DP bunch, and the mature T-cells (or particularly the bottom half) are missing the knockout cells. Perhaps there is some sort of inhibition here? INTERESTING! What next? We might look further at the transcripts present in both those populations, and perhaps also look at the genotype marker table... So much to investigate! But before we set you off to explore to your heart's delight, let's also look at this a bit more technically.
+> > We can see that DP-L, which seems to be extending away from the DP-M bunch, as well as the mature T-cells (or particularly the top half) are missing some knockout cells. Perhaps there is some sort of inhibition here? INTERESTING! What next? We might look further at the transcripts present in both those populations, and perhaps also look at the genotype marker table... So much to investigate! But before we set you off to explore to your heart's delight, let's also look at this a bit more technically.
 > >
 > {: .solution}
 >
@@ -833,11 +806,11 @@ Is our analysis real? Is it right? Well, we can assess that a little bit.
 >
 > Is there a batch effect?
 >
-> ![Batch effect](../../images/wab-batcheffect.png "Genotype differences")
+> ![Batch effect](../../images/wab-batcheffect.png "Batch effect?")
 >
 > > ### {% icon solution %} Solution
 > >
-> > While some shifts are expected and nothing to be concerned about, DP-4 looks to be comprised of only two samples - N706 and N705. Now, to be fair, both of those are wildtype, but still, it's not good that only 50% of the wildtype samples are really in that cluster. What's to say that's the reason there are no knockout cells there? There might be a bit of batch effect, so you could consider using batch correction on this dataset. However, if we focus our attention on the other cluster - mature T-cells -  where there is batch mixing, we can still assess this biologically even without batch correction.
+> > While some shifts are expected and nothing to be concerned about, DP-L looks to be comprised of only two samples - N706 and N705. Now, to be fair, both of those are wildtype, but still, it's not good that only 50% of the wildtype samples are really in that cluster. What's to say that's the reason there are no knockout cells there? There might be a bit of batch effect, so you could consider using batch correction on this dataset. However, if we focus our attention on the other cluster - mature T-cells -  where there is batch mixing, we can still assess this biologically even without batch correction.
 > > Additionally, we will also look at the confounding effect of sex.
 > >
 > > ![Sex effect](../../images/wab-sex-batch.png "Sex differences")
@@ -856,7 +829,7 @@ Is our analysis real? Is it right? Well, we can assess that a little bit.
 >
 > > ### {% icon solution %} Solution
 > >
-> > Eureka! This explains the odd DP shift between wildtype and knockout cells - the left side of the DP cells simply have a higher sequencing depth (UMIs/cell) than the ones on the right side. Well, that explains some of the sub-cluster that we're seeing in that splurge. Importantly, we don't see that the DP-4 or (mostly) the mature T-cell clusters are similarly affected. So, whilst again, this variable of sequencing depth might be something to regress out somehow, it doesn't seem to be impacting our dataset. The less you can regress/modify your data, in general, the better - you want to stay as true as you can to the raw data, and only use maths to correct your data when you really need to (and not to create insights where there are none!).
+> > Eureka! This explains the odd DP shift between wildtype and knockout cells - the right side of the DP cells simply have a higher sequencing depth (UMIs/cell) than the ones on the left side. Well, that explains some of the sub-cluster that we're seeing in that splurge. Importantly, we don't see that the DP-L or (mostly) the mature T-cell clusters are similarly affected. So, whilst again, this variable of sequencing depth might be something to regress out somehow, it doesn't seem to be impacting our dataset. The less you can regress/modify your data, in general, the better - you want to stay as true as you can to the raw data, and only use maths to correct your data when you really need to (and not to create insights where there are none!).
 > >
 > {: .solution}
 >
@@ -870,7 +843,7 @@ Is our analysis real? Is it right? Well, we can assess that a little bit.
 >
 > > ### {% icon solution %} Solution
 > >
-> > These clusters are not very tight or distinct, so we could consider stronger filtering. For instance, while hemoglobin is high in the red blood cells cluster, it appears throughout the entire sample in low numbers. This suggests some background in the media the cells were in, and we might consider in the wet lab trying to get a purer, happier sample, or in the dry lab, techniques such as SoupX or others to remove this background. Playing with filtering settings (increasing minimum counts/cell, etc.) is often the place to start in these scenarios.
+> > We have seen in the previous images that these clusters are not very tight or distinct, so we could consider stronger filtering. For instance, while hemoglobin is high in the red blood cells cluster, it appears throughout the entire sample in low numbers. This suggests some background in the media the cells were in, and we might consider in the wet lab trying to get a purer, happier sample, or in the dry lab, techniques such as SoupX or others to remove this background. Playing with filtering settings (increasing minimum counts/cell, etc.) is often the place to start in these scenarios.
 > >
 > {: .solution}
 >
@@ -884,46 +857,27 @@ Is our analysis real? Is it right? Well, we can assess that a little bit.
 >
 > > ### {% icon solution %} Solution
 > >
-> > Important to note, lest all bioinformaticians combine forces to attack the biologists. Just because a cluster doesn't look like a cluster by eye is NOT enough to say it's not a cluster! But looking at the biology here, we struggled to find marker genes to distinguish the DP population, which we know is also affected by depth of sequencing. That's a reasonable argument that DP-1, DP-2, and DP-3 might not be all that different. Maybe we need more depth of sequencing across all the DP cells, or to compare these explicitly to each other (consider variations on FindMarkers!). However, DP-4 is both seemingly leaving the DP cluster and also has fewer knockout cells, so we might go and look at what DP-4 (Cluster 5) is expressing in the marker genes. If we look at T-mat further, we can see that its marker gene - Itm2a - is only expressed in the bottom half of the cluster. You might consider sub-clustering this to investigate further, either through changing the resolution or through analysing this cluster alone.
-> > If we look at the differences between genotypes alone (so the pseudo-bulk), we can see that most of the genes in that list are actually ribosomal. This might be a housekeeping background, this might be cell cycle related, this might be biological, or all three. You might consider investigating the cycling status of the cells, or even regressing this out.
+> > Important to note, lest all bioinformaticians combine forces to attack the biologists: just because a cluster doesn't look like a cluster by eye is NOT enough to say it's not a cluster! But looking at the biology here, we struggled to find marker genes to distinguish the DP population, which we know is also affected by depth of sequencing. That's a reasonable argument that DP-M1, DP-M2, and DP-M3 might not be all that different. Maybe we need more depth of sequencing across all the DP cells, or to compare these explicitly to each other (consider variations on FindMarkers!). However, DP-L is both seemingly leaving the DP cluster and also has fewer knockout cells, so we might go and look at what DP-L is expressing in the marker genes. If we look at T-mat further, we can see that its marker gene - Itm2a - is only expressed in the top half of the cluster. You might consider sub-clustering this to investigate further, either through changing the resolution or through analysing this cluster alone.
+> > If we look at the differences between genotypes alone (so the pseudo-bulk), we can see that most of the genes in that list are actually ribosomal. This might be a housekeeping background, this might be cell cycle related, this might be biological, or all three. You might consider investigating the cycling status of the cells, or even regressing this out (which is what the authors did).
 > {: .solution}
 >
 {: .question}
 
-Ultimately, there are quite a lot ways to analyse the data, both within the confines of this tutorial (the many parameters that could be changed throughout) and outside of it (batch correction, sub-clustering, cell-cycle scoring, trajectories, etc.) Most analyses will still yield the same general output - there are fewer knockout cells in the mature T-cell population.
+Ultimately, there are quite a lot ways to analyse the data, both within the confines of this tutorial (the many parameters that could be changed throughout) and outside of it (batch correction, sub-clustering, cell-cycle scoring, trajectories, etc.) Most analyses will still yield the same general output, though: there are fewer knockout cells in the mature T-cell population.
 
 {% icon congratulations %} Congratulations! You have interpreted your plots in several important ways!
 
 # Interactive visualisations
 
-Before we leave you to explore the unknown, you might have noticed that the above interpretations are only a few of the possible options. Plus you might have had fun trying to figure out which sample is which genotype is which sex and flicking back and forth between plots repeatedly. Figuring out which plots will be your *final publishable* plots takes a lot of time and testing. Luckily, there are helpful interactive viewer export tools {% cite Moreno2020.04.08.032698 %} that can help you explore without having to produce new plots over and over!
-
-
-<---- This is not working FIXME ----->
-
-> ### {% icon hands_on %} Hands-on: UCSC Cell Browser
->
-> 1. {% tool [UCSC Cell Browser]() %} with the following parameters:
->    - *"Choose the format of the expression data"*: `Scanpy AnnData HDF5 serialised object`
->    - {% icon param-file %} *"Input object in AnnData hdf5 format"*: `Final cell annotated object`
->    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
->
-> This gives us our table of all the possible genes with their names.
->
->> ### {% icon hands_on %} Hands-on: Task description
->
-{: .hands_on}
-
-For more information on how to use UCSC cell browser, check out their site, which contains lots of public data and tutorials [UCSC site](https://cells.ucsc.edu).
-
-Another option, within Galaxy, is to produce a live visualisation using cellxgene.
+Before we leave you to explore the unknown, you might have noticed that the above interpretations are only a few of the possible options. Plus you might have had fun trying to figure out which sample is which genotype is which sex and flicking back and forth between plots repeatedly. Figuring out which plots will be your *final publishable* plots takes a lot of time and testing. Luckily, there is a helpful interactive viewer export tool {% cite Moreno2020.04.08.032698 %} that can help you explore without having to produce new plots over and over!
 
 > ### {% icon hands_on %} Hands-on: Cellxgene
 >
-> 1. {% tool [Interactive CellXgene Environment]() %} with the following parameters:
+> 1. {% tool [Interactive CellXgene Environment](tool_id=interactive_tool_cellxgene) %} with the following parameters:
 >    - {% icon param-file %} *"Concatenate dataset"*: `Final cell annotated object`
 >
-> 2. When ready, you will see a message: {% icon details %} *There is an InteractiveTool result view available, click here to display* <---- Click there!
+> 2. When ready, you will see a message
+>    - {% icon details %} *There is an InteractiveTool result view available, click here to display* <---- Click there!
 >
 > Sometimes this link can aggravate a firewall or something similar. It should be fine to go to the site. You will be asked to `name your annotation`, so do so to start playing around!
 >
@@ -932,7 +886,7 @@ Another option, within Galaxy, is to produce a live visualisation using cellxgen
 > 4. You will need to `STOP` this active environment in Galaxy by going to `User`, `Interactive Tools`, selecting the environment, and selecting `Stop`. You may also want to delete the dataset in the history, because otherwise it continues appearing as if it's processing.
 {: .hands_on}
 
-Be warned - both visualisation tools are powerful options for exploring your data, but they both take some time to get used to. Consider exploring them as your own tutorials for another day!
+Be warned - this visualisation tool is a powerful option for exploring your data, but it takes some time to get used to. Consider exploring it as your own tutorial for another day!
 
 # Conclusion
 {:.no_toc}
@@ -940,13 +894,15 @@ Be warned - both visualisation tools are powerful options for exploring your dat
 > ### {% icon details %} Working in a group? The finale!
 > Hopefully, no matter which pathway of analysis you took, you found the same general interpretations. If not, this is a good time to discuss and consider with your group why that might be - what decision was 'wrong' or 'ill-advised', and how would you go about ensuring you correctly interpreted your data in the future? Top tip - trial and error is a good idea, believe it or not, and the more ways you find the same insight, the more confident you can be! But nothing beats experimental validation...
 > For those that did not take the 'control' options, please
-> > 1. **Rename** your history (by clicking on the history title) as **DECISION-Filtering and Plotting Single-cell RNA-seq Data**
+> > 1. **Rename** your history (by clicking on the history title) as `DECISION-Filtering and Plotting Single-cell RNA-seq Data`
 > > 2. Add a history annotation {% icon history-annotate %} that includes which parameters you changed/steps you changed from the *control*
-> > 3. {% include snippets/sharing_history.md %}
-> > 4. Feel free to explore any other similar histories
+> >
+> >     {% include snippets/sharing_history.md %}
+> >
+> > 3. Feel free to explore any other similar histories
 {: .details}
 
-{% icon congratulations %} Congratulations! You've made it to the end! You might find this [example history](FIXME helpful to compare with.
+{% icon congratulations %} Congratulations! You've made it to the end! You might find this [example control history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/filter-plot-and-explore-single-cell-rna-seq-data---answer-key) helpful to compare with.
 
 In this tutorial, you moved from technical processing to biological exploration. By analysing real data - both the exciting and the messy! - you have, hopefully, experienced what it's like to analyse and question a dataset, potentially without clear cut-offs or clear answers. If you were working in a group, you each analysed the data in different ways, and most likely found similar insights. One of the biggest problems in analysing scRNA-seq is the lack of a clearly defined pathway or parameters. You have to make the best call you can as you move through your analysis, and ultimately, when in doubt, try it multiple ways and see what happens!
 
