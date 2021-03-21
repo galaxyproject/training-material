@@ -21,6 +21,7 @@ contributors:
   - slugger70
   - mvdbeek
   - hexylena
+  - gmauro
 subtopic: features
 tags:
   - jobs
