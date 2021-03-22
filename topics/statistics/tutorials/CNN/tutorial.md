@@ -271,20 +271,21 @@ of a digit we can predict whether the digit (0 to 9). We then evaluate the train
 >    - In *"LAYER"*:
 >        - {% icon param-repeat %} *"1: LAYER"*:
 >            - *"Choose the type of layer"*: `Core -- Reshape`
->                - *"target_shape"*": `(28,28,1)`
+>                - *"target_shape"*: `(28,28,1)`
 >        - {% icon param-repeat %} *"2: LAYER"*:
 >            - *"Choose the type of layer"*: `Convolutional -- Conv2D`
->                - *"filters"*": `64`
->                - *"kernel_size"*": `3`
->                - *"Activation function"*": `relu`
+>                - *"filters"*: `64`
+>                - *"kernel_size"*: `3`
+>                - *"Activation function"*: `relu`
+>                - *"Type in key words arguments if different from the default"*: `padding='same'`
 >        - {% icon param-repeat %} *"3: LAYER"*:
 >            - *"Choose the type of layer"*: `Pooling -- MaxPooling2D`
 >                - *"pool_size"*: `(2,2)`
 >        - {% icon param-repeat %} *"4: LAYER"*:
 >            - *"Choose the type of layer"*: `Convolutional -- Conv2D`
->                - *"filters"*": `32`
->                - *"kernel_size"*": `2`
->                - *"Activation function"*": `relu`
+>                - *"filters"*: `32`
+>                - *"kernel_size"*: `3`
+>                - *"Activation function"*: `relu`
 >        - {% icon param-repeat %} *"5: LAYER"*:
 >            - *"Choose the type of layer"*: `Pooling -- MaxPooling2D`
 >                - *"pool_size"*: `(2,2)`
@@ -293,7 +294,7 @@ of a digit we can predict whether the digit (0 to 9). We then evaluate the train
 >        - {% icon param-repeat %} *"7: LAYER"*:
 >            - *"Choose the type of layer"*: `Core -- Dense`
 >                - *"units"*": `10`
->                - *"Activation function"*": `softmax`
+>                - *"Activation function"*: `softmax`
 >    - Click *"Execute"* 
 {: .hands_on}
 
@@ -381,13 +382,13 @@ The prediction step generates 1 dataset. It's a file that has predictions (0 to 
 >
 {: .hands_on}
 
-**Confusion Matrix** is a table that describes the performance of a classification model. It lists the number of positive and negative examples 
-that were correctly classified by the model, True positives (TP) and true negatives (TN), respectively. It also lists the number of examples that 
-were classified as positive that were actually negative (False positive, FP, or Type I error), and the number of examples that were classified 
-as negative that were actually positive (False negative, FN, or Type 2 error). Given the confusion matrix, we can calculate **precision** and 
-**recall** {% cite TatbulEtAl  %}. Precision is the fraction of predicted positives that are true positives (Precision = TP / (TP + FP)). Recall 
-is the fraction of true positives that are predicted (Recall = TP / (TP + FN)). One way to describe the confusion matrix with just one value is 
-to use the **F score**, which is the harmonic mean of precision and recall 
+**Confusion Matrix** is a table that describes the performance of a classification model. It lists the number of examples that were correctly
+classified by the model, True positives (TP) and true negatives (TN). It also lists the number of examples that were classified as positive that
+were actually negative (False positive, FP, or Type I error), and the number of examples that were classified as negative that were actually
+positive (False negative, FN, or Type 2 error). Given the confusion matrix, we can calculate **precision** and
+**recall** {% cite TatbulEtAl  %}. Precision is the fraction of predicted positives that are true positives (Precision = TP / (TP + FP)). Recall
+is the fraction of true positives that are predicted (Recall = TP / (TP + FN)). One way to describe the confusion matrix with just one value is
+to use the **F score**, which is the harmonic mean of precision and recall
 
 $$ Precision = \frac{\text{True positives}}{\text{True positives + False positives}} $$
 
@@ -395,23 +396,28 @@ $$ Recall = \frac{\text{True positives}}{\text{True positives + False negatives}
 
 $$ F score = \frac{2 * \text{Precision * Recall}}{\text{Precision + Recall}} $$
 
-![Confusion matrix for our sentiment analysis problem](../../images/ConfusionMatrix.png "Sentiment analysis confusion matrix")
+![Confusion matrix for MNIST image classification problem](../../images/Conv_confusion_matrix.png "Image classification confusion matrix")
 
-Figure 11 is the resultant confusion matrix for our sentiment analysis problem. The first row in the table represents the *true* 0 (or negative sentiment) 
-class labels (we have 10,397 + 2,103 = 12,500 reviews with negative sentiment). The second row represents the *true* 1 (or positive sentiment) class labels 
-(Again, we have 1,281 + 11,219 = 12,500 reviews with positive sentiment). The left column represents the *predicted* negative sentiment class labels (Our RNN 
-predicted 10,397 + 1,281 = 11,678 reviews as having a negative sentiment). The right column represents the *predicted* positive class labels (Our RNN 
-predicted 11,219 + 2,103 = 13,322 reviews as having a positive sentiment).Looking at the bottom right cell, we seethat our RNN has correctly predicted 11,219 
-reviews as having a positive sentiment (True positives). Looking at the top right cell, we see that our RNN has incorrectly predicted 2,103 reviews as having 
-a positive (False positives). Similarly, looking at the top left cell, we see that our RNN has correctly predicted 10,397 reviews as having negative sentiment
-(True negative). Finally, looking at the bottom left cell, we see that our RNN has incorrectly predicted 1,281 reviews as negative (False negative). Given 
-these numbers we can calculate Precision, Recall, and the F score as follows:  
+Figure 11 is the resultant confusion matrix for our image problem. The first row in the table represents the *true* digit 0 class labels (we have
+967 + 2 + 1 + 8 + 2 = 980 digit 0 images). The second row represents the *true* digit 1 class labels (Again, we have 1,132 + 1 + 2 = 1,135 digit 1
+images). Similarly, you can count the true class labels for digits 2 to 9 by adding up the numbers in the coresponding row. The first column from the
+left represents the *predicted* digit 0 class labels (Our CNN predicted 967 + 4 + 2 + 8 +7 + 2 = 990 images as being digit 0). The second column from
+the left represents the *predicted* digit 1 class labels (Our CNN predicted 1,132 + 7 + 3 + 12 + 3 + 5 = 1,162 images as being digit 1). Similarly,
+you can count the predicted class labels for digits 2 to 9 by adding up the numbers in the corresponding column.
 
-$$ Precision = \frac{\text{True positives}}{\text{True positives + False positives}} = \frac{11,219}{11,219 + 2,102} = 0.84 $$
+For digit 0, looking at the top-left green cell, we see that our CNN has correctly predicted 967 images as digit 0 (True positives). Adding the numbers
+in the left most column besides the True positives (4 + 2 + 8 + 7 + 2 = 23), we see that our CNN has incorrectly predicted 23 images as being digit 0
+(False positives). Adding the numbers on the top row besides the True positives (2 + 1 + 8 + 2 = 13), we see that our CNN has incorrectly predicted
+13 digits 0 images as not being digit 0 (False negatives). Given these numbers we can calculate Precision, Recall, and the F score for digit 0 as
+follows:
 
-$$ Recall = \frac{\text{True positives}}{\text{True positives + False negatives}} = \frac{11,219}{11,219 + 1,281} = 0.89 $$
+$$ Precision = \frac{\text{True positives}}{\text{True positives + False positives}} = \frac{967}{967 + 23} = 0.97 $$
 
-$$ F score = \frac{2 * \text{Precision * Recall}}{\text{Precision + Recall}} = \frac{2 * 0.84 * 0.89}{0.84 + 0.89} = 0.86 $$
+$$ Recall = \frac{\text{True positives}}{\text{True positives + False negatives}} = \frac{967}{967 + 13} = 0.98 $$
+
+$$ F score = \frac{2 * \text{Precision * Recall}}{\text{Precision + Recall}} = \frac{2 * 0.97 * 0.98}{0.97 + 0.98} = 0.97 $$
+
+You can calculate the Precision, Recall, and F score for other digits in a similar manner.
 
 # Conclusion
 {:.no_toc}
