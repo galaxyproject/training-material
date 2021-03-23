@@ -290,7 +290,7 @@ Now that we've assessed the differences in our samples, we will look at the libr
 It's now time to apply these thresholds to our data! First, a reminder of how many cells and genes are in your object: `25281 cells` and `35734 genes`. Let's see how that changes each time!
 
 > ### {% icon details %} Working in a group? Decision-time!
-> If you are working in a group, you can now divvy up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
+> If you are working in a group, you can now divide up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
 > - Control
 >      - **log1p_n_genes_by_counts** > `5.7`
 >      - **log1p_total_counts** > `6.3`
@@ -439,7 +439,7 @@ Here's a quick overall summary for easy visualisation if you fancy it.
 Fantastic work! However, you've now removed a whole heap of cells, and since the captured genes are sporadic (i.e. a small percentage of the overall transcriptome per cell) this means there are a number of genes in your matrix that are currently not in any of the remaining cells. Genes that do not appear in any cell, or even in only 1 or 2 cells, will make some analytical tools break and overall will not be biologically informative. So let's remove them! Note that `3` is not necessarily the best number, rather it is a fairly conservative threshold. You could go as high as 10 or more.
 
 > ### {% icon details %} Working in a group? Decision-time!
-> If you are working in a group, you can now divvy up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
+> If you are working in a group, you can now divide up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
 > - Variable: **n_cells**
 > - Control > `3`
 > - Everyone else: Choose your own thresholds and compare results! Note if you go less than 3 (or even remove this step entirely), future tools are likely to fail due to empty gene data.
@@ -547,7 +547,7 @@ We can see that there is really not much variation explained past component 19. 
 We're still looking at around 20 dimensions at this point. We need to identify how similar a cell is to another cell, across every cell across these dimensions. For this, we will use the kNN, or k-nearest neighbor, graph, to identify which cells are close together and which are not. The kNN graph plots connections between cells if their distance (when plotted in this 20 dimensional space!) is amonst the k-th smallest distances from that cell to other cells. This will be crucial for identifying clusters, and is necessary for plotting a UMAP. [Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default](https://github.com/lmcinnes/umap).
 
 > ### {% icon details %} Working in a group? Decision-time!
-> If you are working in a group, you can now divvy up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
+> If you are working in a group, you can now divide up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
 > - Control
 >      - **Number of PCs to use** = `20`
 >      - **Maximum number of neighbours used** = `15`
@@ -568,7 +568,7 @@ We're still looking at around 20 dimensions at this point. We need to identify h
 Two major visualisations for this data are tSNE and UMAP. We must calculate the coordinates for both prior to visualisation. For tSNE, the parameter [**perplexity**](https://www.nature.com/articles/s41467-019-13056-x) can be changed to best represent the data, while for UMAP the main change would be to change the kNN graph above itself, by changing the **neighbours**.
 
 > ### {% icon details %} Working in a group? Decision-time!
-> If you are working in a group, you can now divvy up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
+> If you are working in a group, you can now divide up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
 > - Control
 >      - **Perplexity** = `30`
 > - Everyone else: Choose your own perplexity, between 5 and 50!
