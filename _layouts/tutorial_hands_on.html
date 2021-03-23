@@ -216,12 +216,10 @@ layout: base
                     </blockquote>
                     {% endif %}
 
-                    {% if hasfaq == "true" %}
                     <h1>Frequently Asked Questions</h1>
-                    Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> to see if your question is listed there.
+                    Have questions about this tutorial? Check out the {% if hasfaq == "true" %}<a href="faqs/">tutorial FAQ page</a> or the {% endif %} <a href="{{site.baseurl}}/topics/{{topic.name}}/faqs/">FAQ page for the {{topic.title}} topic</a> to see if your question is listed there.
                     If not, please ask your question on the <a href="{{site.gitter_url}}">GTN Gitter Channel</a> or the
                     <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
-                    {% endif %}
 
                     {% if topic.references %}
                     <h1 data-toc-skip>Useful literature</h1>
