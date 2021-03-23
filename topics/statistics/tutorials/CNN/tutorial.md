@@ -29,7 +29,6 @@ contributors:
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
 
 Artificial neural networks are a machine learning discipline that have been successfully applied to problems 
 in pattern classification, clustering, regression, association, time series prediction, optimiztion, and control {% cite JainEtAl %}.
