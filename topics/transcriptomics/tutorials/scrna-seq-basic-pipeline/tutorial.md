@@ -204,7 +204,7 @@ That's a lot of information! Let's attack this in sections and see what question
 > > 2. Keeping in mind that this is a log scale - which means that small differences can mean large differences - the violin plots probably look pretty similar.
 > >    - `N707` and `N703` might be a bit lower on genes and counts (or UMIs), but the differences aren't catastrophic.
 > >    - The `pct_counts_mito` looks pretty similar across the batches, so this also looks good.
-> >    - Nothing here would cause me to eliminate a sample from my analysis, but if you see a sample looking completely different from the rest, you would need to question why that is and consider eliminating it from your experiment!
+> >    - Nothing here would cause us to eliminate a sample from our analysis, but if you see a sample looking completely different from the rest, you would need to question why that is and consider eliminating it from your experiment!
 > >
 > {: .solution}
 >
