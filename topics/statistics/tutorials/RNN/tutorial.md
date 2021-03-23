@@ -213,14 +213,9 @@ cost function via backpropagation.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-<<<<<<< HEAD
-> 1. {% tool [Import some data](upload1) %}
->    - Create a new history for this tutorial
->    - Import the files from [Zenodo](https://zenodo.org/record/4477881) or from the shared data library
-=======
 > 1. Create a new history for this tutorial
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the files from [Zenodo](https://zenodo.org/record/4477881) or from the shared data library
 >
@@ -238,19 +233,11 @@ cost function via backpropagation.
 >
 > 3. Rename the datasets as `X_test`, `X_train`, `y_test`, and `y_train` respectively.
 >
-<<<<<<< HEAD
->      {% snippet faqs/galaxy/datasets_rename.md %}
->
->    - Check that the datatype of all the four datasets is `tabular`. If not, change the dataset's datatype to tabular.
->
-> {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
-=======
->    {% snippet snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 4. Check that the datatype of all the four datasets is `tabular`. If not, change the dataset's datatype to tabular.
 >
->    {% snippet snippets/change_datatype.md datatype="tabular" %}
->>>>>>> master
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
 {: .hands_on}
 
