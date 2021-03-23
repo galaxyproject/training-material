@@ -209,13 +209,15 @@ In this tutorial, we find an n dimensional representation of the IMDB movie revi
 improve the sentiment classification task. The n dimensional representation is learned by the learning algorithm, simply by reducing the 
 cost function via backpropagation. 
 
-# Get data
+# Get Data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> - {% tool [Import some data](upload1) %}
->    - Create a new history for this tutorial
->    - Import the files from [Zenodo](https://zenodo.org/record/4477881) or from the shared data library
+> 1. Create a new history for this tutorial
+>
+>    {% snippet snippets/create_new_history.md %}
+>
+> 2. Import the files from [Zenodo](https://zenodo.org/record/4477881) or from the shared data library
 >
 >    ```
 >    https://zenodo.org/record/4477881/files/X_test.tsv
@@ -223,16 +225,17 @@ cost function via backpropagation.
 >    https://zenodo.org/record/4477881/files/y_test.tsv
 >    https://zenodo.org/record/4477881/files/y_train.tsv
 >    ```
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
 >
->    - Rename the datasets as `X_test`, `X_train`, `y_test`, and `y_train` respectively
+>    {% snippet snippets/import_via_link.md %}
+>    {% snippet snippets/import_from_data_library.md %}    
 >
->    {% include snippets/rename_dataset.md %}
+> 3. Rename the datasets as `X_test`, `X_train`, `y_test`, and `y_train` respectively.
 >
->    - Check that the datatype of all the four datasets is `tabular`. If not, change the dataset's datatype to tabular. 
+>    {% snippet snippets/rename_dataset.md %}
 >
->    {% include snippets/change_datatype.md datatype="tabular" %}
+> 4. Check that the datatype of all the four datasets is `tabular`. If not, change the dataset's datatype to tabular. 
+>
+>    {% snippet snippets/change_datatype.md datatype="tabular" %}
 >
 {: .hands_on}
 
