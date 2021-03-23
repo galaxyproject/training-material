@@ -193,7 +193,7 @@ That's a lot of information! Let's attack this in sections and see what question
 
 > ### {% icon question %} Question - Batch Variation
 >
-> Are their differences in sequencing depth across the samples?
+> Are there differences in sequencing depth across the samples?
 > 1. Which plot(s) addresses this?
 > 2. How do you interpret it?
 >
