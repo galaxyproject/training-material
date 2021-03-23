@@ -73,7 +73,7 @@ This used to be a complex process involving multiple algorithms, or was performe
  * [Kallisto/ bustools](https://www.kallistobus.tools/) - developed by the originators of the transcriptome quantification method, Kallisto.
  * [Alevin](https://salmon.readthedocs.io/en/latest/alevin.html) - another transcriptome method developed by the authors of the Salmon tool.
 
-We're going to use Alevin {% cite Bacon2018 %} for demonstration purposes, but we do not endorse one method over another.
+We're going to use Alevin {% cite article-Alevin %} for demonstration purposes, but we do not endorse one method over another.
 
 ## Get Data
 
