@@ -524,7 +524,7 @@ Principal components are calculated from highly dimensional data to find the mos
 
 > ### {% icon hands_on %} Hands-on: Calculate Principal Components
 >
-> 1. {% tool [Scanpy RunPCA](tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.6.0+galaxy1) %} with the following parameters:
+> 1. {% tool [Scanpy RunPCA](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.6.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy ScaleData** {% icon tool %})
 >    - *"Number of PCs to produce"*: `50`
 >
@@ -576,7 +576,7 @@ Two major visualisations for this data are tSNE and UMAP. We must calculate the 
 
 > ### {% icon hands_on %} Hands-on: Calculating tSNE & UMAP
 >
-> 1. {% tool [Scanpy RunTSNE](tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.6.0+galaxy2) %} with the following parameters:
+> 1. {% tool [Scanpy RunTSNE](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.6.0+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy ComputeGraph** {% icon tool %})
 >    - *"Use programme defaults"*: {% icon history-share %} `No`
 >    - *"The perplexity is related to the number of nearest neighbours, select a value between 5 and 50"*: `30`
@@ -753,7 +753,7 @@ The authors weren't interested in further annotation of the DP cells, so neither
 >    - *"Comma-separated list of new categories"*: `DP-M1,DP-M2,T-mat,DN,DP-M3,DP-L,DP-M4,RBC,Macrophages`
 >    - Hang on here, though. This unfortunately deletes the original cluster numbering. Just in case you might want this back, we can add that annotation back in.
 >
-> 2. {% tool [AnnData Operations](tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1) %} with the following parameters:
+> 2. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Final object`
 >    - *"Copy observations (such as clusters)"*: {% icon history-share %} *Yes*
 >    - **"Keys from obs to copy"**
@@ -762,7 +762,7 @@ The authors weren't interested in further annotation of the DP cells, so neither
 >    - {% icon param-file %} *"AnnData objects with obs to copy"*: (output of **Manipulate AnnData** {% icon tool %})
 >    - You've added the new cell annotations in, now titled `louvain_0`. What, that's not good enough? You want to change the title as well? So be it.
 >
-> 3. {% tool [AnnData Operations](tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1) %} {% icon tool %} with the following parameters:
+> 3. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1) %} {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: (output of **AnnData Operations** {% icon tool %})
 >    - *"Change field names in AnnData observations"*
 >    - {% icon galaxy-wf-new %} *"Insert Change field names in AnnData observations"*
