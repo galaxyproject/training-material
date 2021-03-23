@@ -629,7 +629,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 25, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 23, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -685,7 +685,7 @@
 
 <p>In this tutorial we will use the chilli dataset generated in the lab of Robert Winkler at the CINVESTAV institute in Irapuato (Mexico) and deposited at <a href="https://zenodo.org/record/484496">Zenodo</a>. The data was acquired to demonstrate their self-made low-cost ‘plug and play’ MSI system as well as their open source R scripts and to show they allow the direct spatially resolved detection of volatile organic compounds (VOCs) from plant tissue (<a href="https://doi.org/10.1016/j.jprot.2014.03.003">Maldonado-Torres et al.</a> and <a href="https://doi.org/10.1007/s00216-015-8744-9">Gamboa-Becerra et al.</a>).</p>
 
-<p>The mass spectrometer consisted of a low-temperature plasma (LTP) ionization source coupled to a quadrupole mass analyzer. This ionization source allows measurement of semi-volatile organic compunds directly from fresh material under ambient conditions without destruction of the sample. To get an idea how this set up and the chilli looks, have a look at their <a href="https://www.youtube.com/watch?v=NbZ1QqTZvXM">video</a> and <a href="http://lababi.bioprocess.org/">website</a>. The chilli (<em>Capsicum annuum</em>) was purchased from a local market in Irapuato, Mexico and longitudinally cut into a slice of 80 x 35 mm and 4 mm thickness and laid onto a glass slide. Mass spectra were acquired with a spatial resolution of 1 mm and in a mass range from 15 – 2000 Thomson (Th, unit of m/z) to measure semi-volatile and volatile organic compounds (VOCs).</p>
+<p>The mass spectrometer consisted of a low-temperature plasma (LTP) ionization source coupled to a quadrupole mass analyzer. This ionization source allows measurement of semi-volatile organic compunds directly from fresh material under ambient conditions without destruction of the sample. To get an idea how this set up and the chilli looks, have a look at their <a href="https://www.youtube.com/watch?v=NbZ1QqTZvXM">video</a> and <a href="http://lababi.bioprocess.org/">website</a>. The chilli (<em>Capsicum annuum</em>) was purchased from a local market in Irapuato, Mexico and longitudinally cut into a slice of 80 x 35 mm and 4 mm thickness and laid onto a glass slide. Mass spectra were acquired with a spatial resolution of 1 mm and in a mass range from 15 – 2000 m/z to measure semi-volatile and volatile organic compounds (VOCs).</p>
 
 <p>We will check the properties of the dataset and then perform a similar analysis to that described by <a href="https://doi.org/10.1007/s00216-015-8744-9">Gamboa-Becerra et al.</a>: plotting an average mass spectrum, filtering the dataset for the relevant m/z range, automatical generation of m/z images to find analytes that correspond to morphological features and generating an image that overlays three different analytes.</p>
 
@@ -777,7 +777,7 @@
         <li><em>“Centroided input”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
         <li><em>“Processed imzML file”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
           <ul>
-            <li><em>“Mass accuracy to which the m/z values will be binned”</em>: <code class="language-plaintext highlighter-rouge">0.1</code></li>
+            <li><em>“Mass accuracy to which the m/z values will be binned”</em>: <code class="language-plaintext highlighter-rouge">0.2</code></li>
             <li><em>“Unit of the mass accuracy”</em>: <code class="language-plaintext highlighter-rouge">mz</code></li>
           </ul>
         </li>
@@ -821,7 +821,7 @@
   <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
-    <li>In what m/z range were the data acquired?</li>
+    <li>In which m/z range were the data acquired?</li>
     <li>How many spectra (pixels) were measured?</li>
     <li>In which images can you guess the shape of the chilli?</li>
   </ol>
@@ -832,7 +832,7 @@
     <ol>
       <li>The measured m/z range was m/z 15 - 2000.</li>
       <li>4166 spectra were measured.</li>
-      <li>The rough shape of the chilli section is visible in the “Number of peaks per spectrum”; “TIC per spectrum” and “PCA result” images.</li>
+      <li>The rough shape of the chilli section is visible in the “Number of peaks per spectrum”; “Total Ion Current” and “PCA result” images.</li>
     </ol>
 
   </blockquote>
@@ -845,7 +845,7 @@
 
 <p>seeds: x=39 y=53, placenta: x=50 y=44, pericarp: x=25 y=60</p>
 
-<p>The relevant m/z range for VOCs was not known before the measurement and therefore chosen quite liberally. The average mass spectra plots give a hint about the relevant m/z range of the sample with most peaks below 750 Th and no distinct peaks above 750 Th.</p>
+<p>The relevant m/z range for VOCs was not known before the measurement and therefore chosen quite liberally. The average mass spectra plots give a hint about the relevant m/z range of the sample with most peaks below 750 m/z and no distinct peaks above 750 m/z.</p>
 
 <figure id="figure-4"><img src="../../images/msi_distribution_qc.png" alt="quality report" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Example plots from the quality report</figcaption></figure>
 
@@ -857,17 +857,17 @@
   <h3 id="hands_on-hands-on-average-mass-spectra"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Average mass spectra</h3>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.0"><strong>MSI plot spectra</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.0</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.3" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.3"><strong>MSI plot spectra</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.3</span></span>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="language-plaintext highlighter-rouge">ltpmsi-chilli.imzML</code> (Input dataset)</li>
         <li><em>“Centroided input”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
         <li><em>“Processed imzML file”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
           <ul>
-            <li><em>“Mass accuracy to which the m/z values will be binned”</em>: <code class="language-plaintext highlighter-rouge">0.1</code></li>
+            <li><em>“Mass accuracy to which the m/z values will be binned”</em>: <code class="language-plaintext highlighter-rouge">0.2</code></li>
             <li><em>“Unit of the mass accuracy”</em>: <code class="language-plaintext highlighter-rouge">mz</code></li>
           </ul>
         </li>
-        <li><em>“Choose spectra (pixel)”</em>: <code class="language-plaintext highlighter-rouge">All spectra</code>
+        <li><em>“Choose spectra”</em>: <code class="language-plaintext highlighter-rouge">Plot mean spectra based on all spectra</code>
           <ul>
             <li>In <em>“zoomed in m/z range”</em>: <code class="language-plaintext highlighter-rouge">Manual input</code>
               <ul>
@@ -936,7 +936,7 @@
 
 </blockquote>
 
-<p>In the average spectrum of the complete m/z range there are no visible peaks above 800 Th. Most of the high intensity peaks are below 300 Th, which corresponds to the typical masses of VOCs. Even in the zoomed mass spectra between 1500 and 2000 Th only a few distinct peaks can be identified in the noise. In accordance with <a href="https://doi.org/10.1007/s00216-015-8744-9">Gamboa-Becerra et al.</a>, we will restrict further analysis to the m/z range between 15 and 1000.</p>
+<p>In the average spectrum of the complete m/z range there are no visible peaks above 800 m/z. Most of the high intensity peaks are below 300 Th, which corresponds to the typical masses of VOCs. Even in the zoomed mass spectra between 1500 and 2000 m/z only a few distinct peaks can be identified in the noise. In accordance with <a href="https://doi.org/10.1007/s00216-015-8744-9">Gamboa-Becerra et al.</a>, we will restrict further analysis to the m/z range between 15 and 1000.</p>
 
 <figure id="figure-5"><img src="../../images/msi_distribution_average_spectra.png" alt="Average plots" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Complete and zoomed in average mass spectra</figcaption></figure>
 
@@ -946,9 +946,7 @@
   <h3 id="hands_on-hands-on-mass-spectra-of-different-chilli-compartments"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Mass spectra of different chilli compartments</h3>
 
   <ol>
-    <li>
-      <p>Create a tabular file with the coordinates of interest and rename it:</p>
-
+    <li>Create a tabular file with the coordinates of interest and rename it to ‘annotations’:
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x     y     compartment
 39    53    seeds
 50    44    placenta
@@ -967,17 +965,17 @@
         </ul>
       </blockquote>
     </li>
-    <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.0"><strong>MSI plot spectra</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.0</span></span></p>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.3" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.3"><strong>MSI plot spectra</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.3</span></span>
       <ul>
         <li>Press the rerun button, changing only the following:</li>
-        <li><em>“Choose spectra (pixel) and/or add spectra annotations”</em>: <code class="language-plaintext highlighter-rouge">Single spectra</code>
+        <li><em>“Choose spectra”</em>: <code class="language-plaintext highlighter-rouge">Plot single spectra (separate or overlaid)</code>
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Load tabular file with pixel coordinates”</em>: <code class="language-plaintext highlighter-rouge">annotations</code> (Input dataset)</li>
             <li><em>“Column with x values”</em>: <code class="language-plaintext highlighter-rouge">column:1</code></li>
             <li><em>“Column with y values”</em>: <code class="language-plaintext highlighter-rouge">column:2</code></li>
-            <li><em>“Column with pixel annotations”</em>: <code class="language-plaintext highlighter-rouge">column:3</code></li>
             <li><em>“Tabular file contains a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Separate plot per spectrum or overlaid plot with average spectra per annotation group”</em>: <code class="language-plaintext highlighter-rouge">Overlaid spectra plots</code></li>
+            <li><em>“Select column with annotations”</em>: <code class="language-plaintext highlighter-rouge">column:3</code></li>
           </ul>
         </li>
       </ul>
@@ -998,8 +996,8 @@
     <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>The highest intensity peak at around 80 Th belongs to the spectrum that is located in the pericarp of the chilli.</li>
-      <li>The peak at around 60 Th belongs to the spectrum that is located in the seeds.</li>
+      <li>The highest intensity peak at around 80 m/z belongs to the spectrum that is located in the pericarp of the chilli.</li>
+      <li>The peak at around 60 m/z belongs to the spectrum that is located in the seeds.</li>
     </ol>
   </blockquote>
 
@@ -1021,7 +1019,7 @@
         <li><em>“Centroided input”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
         <li><em>“Processed imzML file”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
           <ul>
-            <li><em>“Mass accuracy to which the m/z values will be binned”</em>: <code class="language-plaintext highlighter-rouge">0.1</code></li>
+            <li><em>“Mass accuracy to which the m/z values will be binned”</em>: <code class="language-plaintext highlighter-rouge">0.2</code></li>
             <li><em>“Unit of the mass accuracy”</em>: <code class="language-plaintext highlighter-rouge">mz</code></li>
           </ul>
         </li>
@@ -1050,7 +1048,7 @@
 
     <ol>
       <li>After filtering 4926 m/z features are left.</li>
-      <li>The dataset originally had 9927 m/z features; after filtering 4926 are left, which means that 5001 were removed.</li>
+      <li>The dataset originally had 9926 m/z features; after filtering 4926 are left, which means that 5000 were removed.</li>
     </ol>
 
   </blockquote>
@@ -1063,9 +1061,9 @@
 
 <h2 id="automatic-generation-of-analyte-images">Automatic generation of analyte images</h2>
 
-<p>The main question for the chilli dataset is which m/z features have a localized distribution in the fruit. This question can be addressed by automatically generating distribution images for all analytes (m/z features) and then visually identifying which features are localized in specific compartments of the fruit. <a href="https://doi.org/10.1007/s00216-015-8744-9">Gamboa-Becerra et al.</a> scan the m/z range with a step size of 0.2 Th and a tolerance of 0.4 Th, which resulted in more than 2000 images which they visually explored for localized features. In this training we will only generate images for the two mass ranges where we have already seen high intensity peaks in the spectra plots: around 60 and 80 Th.</p>
+<p>The main question for the chilli dataset is which m/z features have a localized distribution in the fruit. This question can be addressed by automatically generating distribution images for all analytes (m/z features) and then visually identifying which features are localized in specific compartments of the fruit. <a href="https://doi.org/10.1007/s00216-015-8744-9">Gamboa-Becerra et al.</a> scan the m/z range with a step size of 0.2 m/z and a tolerance of 0.4 Th, which resulted in more than 2000 images which they visually explored for localized features. In this training we will only generate images for the two mass ranges where we have already seen high intensity peaks in the spectra plots: around 60 and 80 m/z.</p>
 
-<p>This requires three steps. Firstly, all m/z features of the dataset with the MSI data exporter are extracted. Secondly, all m/z features are filtered in the m/z ranges that we are interested in: between 55 and 65 Th, as well as between 75 and 85 Th (this step can be skipped to obtain distribution images for all features). Thirdly, the MSI m/z image tool is used to automatically generate distribution images for each of the m/z from the second step. As the data is already binned to 0.2 Th, only the m/z tolerance of 0.4 Th has to be specified. The large tolerance was chosen to obtain images from overlapping m/z ranges to make the signal intensity more robust against small m/z inaccuracies in individual mass spectra.</p>
+<p>This requires three steps. Firstly, all m/z features of the dataset with the MSI data exporter are extracted. Secondly, all m/z features are filtered in the m/z ranges that we are interested in: between 55 and 65 Th, as well as between 75 and 85 m/z (this step can be skipped to obtain distribution images for all features). Thirdly, the MSI m/z image tool is used to automatically generate distribution images for each of the m/z from the second step. As the data is already binned to 0.2 Th, only the m/z tolerance of 0.4 m/z has to be specified. The large tolerance was chosen to obtain images from overlapping m/z ranges to make the signal intensity more robust against small m/z inaccuracies in individual mass spectra.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-generation-of-multiple-analyte-images"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generation of multiple analyte images</h3>
@@ -1084,7 +1082,7 @@
         <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.1"><strong>MSI mz images</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/cardinal_mz_images/cardinal_mz_images/2.6.0.1</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.2"><strong>MSI mz images</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/cardinal_mz_images/cardinal_mz_images/2.6.0.2</span></span>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="language-plaintext highlighter-rouge">filtered imzML</code> (output of <strong>MSI filtering</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Centroided input”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
@@ -1092,8 +1090,8 @@
         <li><em>“Column with m/z values”</em>: <code class="language-plaintext highlighter-rouge">column:2</code></li>
         <li><em>“Column with name of m/z values”</em>: <code class="language-plaintext highlighter-rouge">column:1</code></li>
         <li><em>“Tabular file contains a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-        <li><em>“Contrast enhancement”</em>: <code class="language-plaintext highlighter-rouge">suppression</code></li>
         <li><em>“M/z range”</em>: <code class="language-plaintext highlighter-rouge">0.4</code></li>
+        <li><em>“Contrast enhancement”</em>: <code class="language-plaintext highlighter-rouge">suppression</code></li>
       </ul>
     </li>
   </ol>
@@ -1112,8 +1110,8 @@
     <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>Defining the exact m/z with the best localization is quite tricky. Between 61.8 and 62.6 Th there is a localized feature, as well as between 84 and 84.4 Th. We can choose 62.2 and 84.2 to get the best images (in the publication it was 62.1 and 84.1).</li>
-      <li>The comparison of the feature localization with the chilli image shows that the 62.2 Th feature is located in the seeds and the 84.2 Th feature more uniformly in the placenta and pericarp.</li>
+      <li>Defining the exact m/z with the best localization is quite tricky. Between 61.8 and 62.6 m/z there is a localized feature, as well as between 84 and 84.4 m/z. We can choose 62.2 and 84.2 to get the best images (in the publication it was 62.1 and 84.1).</li>
+      <li>The comparison of the feature localization with the chilli image shows that the 62.2 m/z feature is located in the seeds and the 84.2 m/z feature more uniformly in the placenta and pericarp.</li>
     </ol>
 
   </blockquote>
@@ -1122,19 +1120,19 @@
 
 <figure id="figure-7"><img src="../../images/msi_distribution_auto_images.png" alt="best images" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Distribution images for the analytes with the most localized distribution</figcaption></figure>
 
-<p>In this tutorial we only evaluated 102 features, while the authors of this study evaluated more than 2000 images visually. This process is time-consuming and biased by the judgment of the scientist, but nonetheless this method seems to be quite common. Several attempts have been made to circumvent this process and obtain m/z features with localized distribution automatically, for example by <a href="https://doi.org/10.1093/bioinformatics/btt388">Alexandrov and Bartels</a> and <a href="https://doi.org/10.1093/bioinformatics/bty622">Ingelese et al.</a>.</p>
+<p>In this tutorial we only evaluated 102 features, while the authors of this study evaluated more than 2000 images visually. This process is time-consuming and biased by the judgment of the scientist, but seems to still be used sometimes. Several attempts have been made to circumvent this process and obtain m/z features with localized distribution automatically, for example by <a href="https://doi.org/10.1093/bioinformatics/btt388">Alexandrov and Bartels</a> and <a href="https://doi.org/10.1093/bioinformatics/bty622">Ingelese et al.</a>.</p>
 
-<p>After m/z features with a localized distribution have been found, it is interesting to identify them. <a href="https://doi.org/10.1007/s00216-015-8744-9">Gamboa-Becerra et al.</a> performed additional gas and liquid chromatography mass spectrometry (GC-MS and LC-MS) which enabled the identification of several features with high certainty. Unfortunately the highly localized features at 62.2 and 84.2 Th could not be identified, but the defined localization implies their biological importance. Several capsaicinoids could be identified, amongst them capsaicin (306.6 Th).</p>
+<p>After m/z features with a localized distribution have been found, it is interesting to identify them. <a href="https://doi.org/10.1007/s00216-015-8744-9">Gamboa-Becerra et al.</a> performed additional gas and liquid chromatography mass spectrometry (GC-MS and LC-MS) which enabled the identification of several features with high certainty. Unfortunately the highly localized features at 62.2 and 84.2 m/z could not be identified, but the defined localization implies their biological importance. Several capsaicinoids could be identified, amongst them capsaicin (306.6 m/z).</p>
 
 <blockquote class="comment">
   <h3 id="comment-identification-of-mz-features"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Identification of m/z features</h3>
-  <p>The identification of m/z features in MSI experiments is not always necessary, but can increase the confidence in the analysis and the molecular understanding. m/z features are either matched to databases or for more confidence another experiment is performed on the same sample to restrict the identification possibilities to analytes that are actually present in the sample. In this study other mass spectrometry techniques were applied, allowing identification of several m/z features, but at the same time features with defined localization could not be identified (e.g. 62.2 Th and 84.2 Th). These molecules may be fragments, metabolites or contaminants that are not available with the used mass spectrometry techniques.
+  <p>The identification of m/z features in MSI experiments is not always necessary, but can increase the confidence in the analysis and the molecular understanding. m/z features are either matched to databases or for more confidence another experiment is performed on the same sample to restrict the identification possibilities to analytes that are actually present in the sample. In this study other mass spectrometry techniques were applied, allowing identification of several m/z features, but at the same time features with defined localization could not be identified (e.g. 62.2 m/z and 84.2 m/z). These molecules may be fragments, metabolites or contaminants that are not available with the used mass spectrometry techniques.
 Targeted analysis can be performed if the m/z of the molecule of interest is already known (e.g. when studying the tissue distribution of a drug and its known metabolites). In this case distribution images for the molecules of interest are a good starting point and scanning through all m/z features might not be necessary.</p>
 </blockquote>
 
 <h2 id="overlay-image-for-three-analyte-features">Overlay image for three analyte features</h2>
 
-<p>To get an idea about the distribution of capsaicin in the chilli we will plot its distribution in an overlay image with the two unknown but localized features 62.2 Th and 84.2 Th.</p>
+<p>To get an idea about the distribution of capsaicin in the chilli we will plot its distribution in an overlay image with the two unknown but localized features 62.2 m/z and 84.2 m/z.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-overlay-image-for-several-mz-features"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Overlay image for several m/z features</h3>
@@ -1161,7 +1159,7 @@ Targeted analysis can be performed if the m/z of the molecule of interest is alr
       </blockquote>
     </li>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.0"><strong>MSI mz images</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/cardinal_mz_images/cardinal_mz_images/2.6.0.0</span></span></p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.2"><strong>MSI mz images</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/cardinal_mz_images/cardinal_mz_images/2.6.0.2</span></span></p>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="language-plaintext highlighter-rouge">filtered imzML</code> (output of <strong>MSI filtering</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Centroided input”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
@@ -1169,8 +1167,10 @@ Targeted analysis can be performed if the m/z of the molecule of interest is alr
         <li><em>“Column with m/z values”</em>: <code class="language-plaintext highlighter-rouge">column:1</code></li>
         <li><em>“Column with name of m/z values”</em>: <code class="language-plaintext highlighter-rouge">column:1</code></li>
         <li><em>“Tabular file contains a header line”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-        <li><em>“Contrast enhancement”</em>: <code class="language-plaintext highlighter-rouge">suppression</code></li>
         <li><em>“M/z range”</em>: <code class="language-plaintext highlighter-rouge">0.4</code></li>
+        <li><em>“Contrast enhancement”</em>: <code class="language-plaintext highlighter-rouge">suppression</code></li>
+        <li><em>“Alpha Power”</em>: <code class="language-plaintext highlighter-rouge">1.5</code></li>
+        <li><em>“Linear normalization of image”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Overlay image”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
           <ul>
             <li><em>“1: Colours for the plots”</em>: <code class="language-plaintext highlighter-rouge">blue</code></li>
@@ -1291,8 +1291,8 @@ Targeted analysis can be performed if the m/z of the molecule of interest is alr
     author = "Melanie Föll and Maren Stillger",
     title = "Mass spectrometry imaging: Examining the spatial distribution of analytes (Galaxy Training Materials)",
     year = "2021",
-    month = "02",
-    day = "25"
+    month = "03",
+    day = "23"
     url = "\url{/training-material/topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
