@@ -270,7 +270,7 @@ x     y     compartment
 >        - *"Column with x values"*: `column:1`
 >        - *"Column with y values"*: `column:2`
 >        - *"Tabular file contains a header line"*: `Yes`
->        - *"Separate plot per spectrum or overlaid plot with average spectra per annotation group"*: `Yes`
+>        - *"Separate plot per spectrum or overlaid plot with average spectra per annotation group"*: `Overlaid spectra plots`
 >        - *"Select column with annotations"*: `column:3`
 >
 {: .hands_on}
@@ -371,7 +371,7 @@ This requires three steps. Firstly, all m/z features of the dataset with the MSI
 
 ![best images](../../images/msi_distribution_auto_images.png "Distribution images for the analytes with the most localized distribution")
 
-In this tutorial we only evaluated 102 features, while the authors of this study evaluated more than 2000 images visually. This process is time-consuming and biased by the judgment of the scientist, but nonetheless this method seems to be quite common. Several attempts have been made to circumvent this process and obtain m/z features with localized distribution automatically, for example by [Alexandrov and Bartels](https://doi.org/10.1093/bioinformatics/btt388) and [Ingelese et al.](https://doi.org/10.1093/bioinformatics/bty622).
+In this tutorial we only evaluated 102 features, while the authors of this study evaluated more than 2000 images visually. This process is time-consuming and biased by the judgment of the scientist, but seems to still be used sometimes. Several attempts have been made to circumvent this process and obtain m/z features with localized distribution automatically, for example by [Alexandrov and Bartels](https://doi.org/10.1093/bioinformatics/btt388) and [Ingelese et al.](https://doi.org/10.1093/bioinformatics/bty622).
 
 After m/z features with a localized distribution have been found, it is interesting to identify them. [Gamboa-Becerra et al.](https://doi.org/10.1007/s00216-015-8744-9) performed additional gas and liquid chromatography mass spectrometry (GC-MS and LC-MS) which enabled the identification of several features with high certainty. Unfortunately the highly localized features at 62.2 and 84.2 m/z could not be identified, but the defined localization implies their biological importance. Several capsaicinoids could be identified, amongst them capsaicin (306.6 m/z).
 
