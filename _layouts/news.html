@@ -3,6 +3,22 @@ layout: page
 ---
 
 {% assign contributors = site.data['contributors'] %}
+{% if page.cover %}
+ {% assign coverimage = page.cover %}
+ {% assign coverimagealt = page.coveralt %}
+{% elsif page.tags contains "cofest" %}
+ {% assign coverimage = "/assets/images/cofest.png" %}
+ {% assign coverimagealt = "CoFest logo with two generic people shapes conversing next to the GTN logo and text 'gtn cofest'" %}
+{% elsif page.tags contains "galaxy" %}
+ {% assign coverimage = "/assets/images/GalaxyNews.png" %}
+ {% assign coverimagealt = "Galaxy News logo on dark blue background with Galaxy logo and words 'Galaxy News'" %}
+{% elsif n.tags contains "gat" %}
+ {% assign coverimage = "/assets/images/gat.png" %}
+ {% assign coverimagealt = "GTN Logo on a spiral galaxy background with text 'galaxy admin training'" %}
+{% else %}
+ {% assign coverimage = "/assets/images/GTN.png" %}
+ {% assign coverimagealt = "GTN logo with a multi-coloured star and the words Galaxy Training Network" %}
+{% endif %}
 
 <div class="newsitem">
 {% if page.contributors %}
@@ -15,6 +31,7 @@ layout: page
 
 <hr/>
 
+<img class="float-right" alt="{{ coverimagealt }}" src="{% unless coverimage contains 'http' %}{{site.baseurl}}/{% endunless %}{{coverimage}}" width="300"/>
 {{content}}
 
 {% if page.link %}

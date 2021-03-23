@@ -9,6 +9,8 @@ title: The headline for your news item
 contributors: [contributor1,contributor2]    # authors of the post or tutorial etc
 tags: [keyword1, keyword2]   # optional
 cover: <link to cover image> # optional
+coveralt: # Alt text describing your cover image.
+          # Mandatory if you set a cover image.
 external: true|false         # optional, set to "true" if you just want to link to an external website
 link: "https://<yourlink>"   # optional, if you would like to link to an external post or page
                              # mandataory if you set external: true above
