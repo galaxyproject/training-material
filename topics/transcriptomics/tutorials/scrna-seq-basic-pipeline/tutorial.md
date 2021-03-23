@@ -448,7 +448,7 @@ Fantastic work! However, you've now removed a whole heap of cells, and since the
 
 > ### {% icon hands_on %} Hands-on: Filter genes
 >
-> 1. {% tool [Scanpy FilterGenes](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_genes/scanpy_filter_genes/1.6.0+galaxy0) %} with the following parameters:
+> 1. {% tool [Scanpy FilterGenes](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_genes/scanpy_filter_genes/1.6.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Mito-filtered Object`
 >    - In *"Parameters to select genes to keep"*:
 >        - {% icon param-repeat %} *"Insert Parameters to select genes to keep"*
@@ -524,7 +524,7 @@ Principal components are calculated from highly dimensional data to find the mos
 
 > ### {% icon hands_on %} Hands-on: Calculate Principal Components
 >
-> 1. {% tool [Scanpy RunPCA](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.6.0+galaxy1) %} with the following parameters:
+> 1. {% tool [Scanpy RunPCA](tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.6.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy ScaleData** {% icon tool %})
 >    - *"Number of PCs to produce"*: `50`
 >
@@ -576,7 +576,7 @@ Two major visualisations for this data are tSNE and UMAP. We must calculate the 
 
 > ### {% icon hands_on %} Hands-on: Calculating tSNE & UMAP
 >
-> 1. {% tool [Scanpy RunTSNE](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.6.0+galaxy2) %} with the following parameters:
+> 1. {% tool [Scanpy RunTSNE](tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.6.0+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy ComputeGraph** {% icon tool %})
 >    - *"Use programme defaults"*: {% icon history-share %} `No`
 >    - *"The perplexity is related to the number of nearest neighbours, select a value between 5 and 50"*: `30`
