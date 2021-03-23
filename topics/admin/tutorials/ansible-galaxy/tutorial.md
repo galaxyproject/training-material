@@ -725,7 +725,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >         - name: Install Dependencies
 >           package:
 >    -        name: 'python3-psycopg2'
->    +        name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv', 'other-package']
+>    +        name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
 >       roles:
 >         - galaxyproject.postgresql
 >         - role: natefoo.postgresql_objects
@@ -1640,7 +1640,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    @@ -8,6 +8,11 @@
 >         - name: Install Dependencies
 >           package:
->             name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv', 'other-package']
+>             name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
 >    +  handlers:
 >    +    - name: Restart Galaxy
 >    +      systemd:
