@@ -14,10 +14,15 @@
         <a class="dropdown-item" href="{{ site.baseurl }}/faq" title="Check our FAQs">
            {% icon question %} FAQs
         </a>
-        {% if topic or page.layout == 'topic' %}
+        {% if topic %}
         <a class="dropdown-item" href="{{ site.baseurl }}/topics/{{topic.name}}/faqs/" title="Check our FAQs for the {{topic.title}} topic">
            {% icon question %} Topic FAQs
         </a>
+        {% elsif page.layout == 'topic' %}
+        <a class="dropdown-item" href="{{ site.baseurl }}/topics/{{page.topic_name}}/faqs/" title="Check our FAQs for the {{page.topic_title}} topic">
+           {% icon question %} Topic FAQs
+        </a>
+
         {% endif %}
         <a class="dropdown-item" href="{{ site.help_url }}" title="Discuss on Galaxy Help">
             {% icon feedback %} Galaxy Help Forum
