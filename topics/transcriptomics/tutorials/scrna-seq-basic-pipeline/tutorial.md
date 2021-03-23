@@ -57,7 +57,7 @@ https://training.galaxyproject.org/training-material/topics/transcriptomics/tuto
 
 ## Get data
 
-We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html) if you used the full fastq files rather than the subsampled ones (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find this dataset in this [input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/filter-plot-and-explore-single-cell-rna-seq-data---input) or download from Zenodo below.
+We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html) if you used the full FASTQ files rather than the subsampled ones (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find this dataset in this [input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/filter-plot-and-explore-single-cell-rna-seq-data---input) or download from Zenodo below.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -193,7 +193,7 @@ That's a lot of information! Let's attack this in sections and see what question
 
 > ### {% icon question %} Question - Batch Variation
 >
-> Are their differences in sequencing depth across the samples?
+> Are there differences in sequencing depth across the samples?
 > 1. Which plot(s) addresses this?
 > 2. How do you interpret it?
 >
@@ -204,7 +204,7 @@ That's a lot of information! Let's attack this in sections and see what question
 > > 2. Keeping in mind that this is a log scale - which means that small differences can mean large differences - the violin plots probably look pretty similar.
 > >    - `N707` and `N703` might be a bit lower on genes and counts (or UMIs), but the differences aren't catastrophic.
 > >    - The `pct_counts_mito` looks pretty similar across the batches, so this also looks good.
-> >    - Nothing here would cause me to eliminate a sample from my analysis, but if you see a sample looking completely different from the rest, you would need to question why that is and consider eliminating it from your experiment!
+> >    - Nothing here would cause us to eliminate a sample from our analysis, but if you see a sample looking completely different from the rest, you would need to question why that is and consider eliminating it from your experiment!
 > >
 > {: .solution}
 >
@@ -212,7 +212,7 @@ That's a lot of information! Let's attack this in sections and see what question
 
 > ### {% icon question %} Question - Biological Variables
 >
-> Are their differences in sequencing depth across sex? Genotype?
+> Are there differences in sequencing depth across sex? Genotype?
 > 1. Which plot(s) addresses this?
 > 2. How do you interpret the `sex` differences?
 > 3. How do you interpret the `genotype` differences?
@@ -544,7 +544,7 @@ We can see that there is really not much variation explained past component 19. 
 
 ## Neighborhood graph
 
-We're still looking at around 20 dimensions at this point. We need to identify how similar a cell is to another cell, across every cell across these dimensions. For this, we will use the kNN, or k-nearest neighbor, graph, to identify which cells are close together and which are not. The kNN graph plots connections between cells if their distance (when plotted in this 20 dimensional space!) is amonst the k-th smallest distances from that cell to other cells. This will be crucial for identifying clusters, and is necessary for plotting a UMAP. [Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default](https://github.com/lmcinnes/umap).
+We're still looking at around 20 dimensions at this point. We need to identify how similar a cell is to another cell, across every cell across these dimensions. For this, we will use the k-nearest neighbor (kNN) graph, to identify which cells are close together and which are not. The kNN graph plots connections between cells if their distance (when plotted in this 20 dimensional space!) is amonst the k-th smallest distances from that cell to other cells. This will be crucial for identifying clusters, and is necessary for plotting a UMAP. [Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default](https://github.com/lmcinnes/umap).
 
 > ### {% icon details %} Working in a group? Decision-time!
 > If you are working in a group, you can now divide up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
