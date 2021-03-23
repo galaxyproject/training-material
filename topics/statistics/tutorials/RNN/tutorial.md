@@ -209,36 +209,14 @@ In this tutorial, we find an n dimensional representation of the IMDB movie revi
 improve the sentiment classification task. The n dimensional representation is learned by the learning algorithm, simply by reducing the 
 cost function via backpropagation. 
 
-# Get data
-
-Let's start with a fresh history.
-
-> ### {% icon hands_on %} Hands-on: Create history
->
-> 1. Make sure you have an empty analysis history.
->
->    {% snippet snippets/create_new_history.md %}
->
-> 2. **Rename your history** to make it easy to recognize
->
->    > ### {% icon tip %} Rename a history
->    >
->    > * Click on the title of the history (by default the title is `Unnamed history`)
->    >
->    >   ![Renaming history](../../../../shared/images/rename_history.png)
->    >
->    > * Type `Galaxy Introduction` as the name
->    > * Press <kbd>Enter</kbd>
->    >
->    {: .tip}
->
-{: .hands_on}
-
-## Data upload
+# Get Data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
+>
+>    {% snippet snippets/create_new_history.md %}
+>
 > 2. Import the files from [Zenodo](https://zenodo.org/record/4477881) or from the shared data library
 >
 >    ```
