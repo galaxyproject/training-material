@@ -107,6 +107,7 @@ For this tutorial, in order to speed up the analysis time, we will use 6 of the 
 >    https://zenodo.org/record/3247504/files/RB10.fasta
 >    https://zenodo.org/record/3247504/files/RB12.fasta
 >    ```
+>
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. **Build a list collection** containing all fasta files. Name it `Plasmids`
@@ -129,11 +130,11 @@ report page.
 > ### {% icon hands_on %} Hands-on: Plotting scripts for long read sequencing data
 >
 > 1. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters
->   - {% icon param-select %} *"Select multifile mode"*: `batch`
->   - {% icon param-select %} *"Type of the file(s) to work on"*: `fasta`
->   - {% icon param-collection %} *"files"*: The `Plasmids` dataset collection you just created
+>    - {% icon param-select %} *"Select multifile mode"*: `batch`
+>    - {% icon param-select %} *"Type of the file(s) to work on"*: `fasta`
+>    - {% icon param-collection %} *"files"*: The `Plasmids` dataset collection you just created
 >
->     {% snippet faqs/galaxy/tools_select_collection.md %}
+>    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
 {: .hands_on}
 
@@ -236,8 +237,8 @@ Thus the per-base error rate is similar to the raw input reads.
 > ### {% icon hands_on %} Hands-on: De novo assembly
 >
 > 1. {% tool [miniasm](toolshed.g2.bx.psu.edu/repos/iuc/miniasm/miniasm/0.3+galaxy0) %} with the following parameters
->   - {% icon param-collection %} *"Sequence Reads"*: The `Plasmids` dataset collection
->   - {% icon param-collection %} *"PAF file"*: `Output Minimap dataset collection` created by **Minimap2** {% icon tool %}
+>    - {% icon param-collection %} *"Sequence Reads"*: The `Plasmids` dataset collection
+>    - {% icon param-collection %} *"PAF file"*: `Output Minimap dataset collection` created by **Minimap2** {% icon tool %}
 >
 >    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
@@ -286,7 +287,7 @@ The Assembly graph created can be used for mapping again with Minimap2, but firs
 >       - {% icon param-select %} *"Select an output format"*: `paf`
 >
 >
->     {% snippet faqs/galaxy/tools_select_collection.md %}
+>    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
 {: .hands_on}
 
@@ -393,6 +394,7 @@ Let's try it on our data!
 >    - Tip: Search your history for the term `bandage` to easily find the outputs from our two bandage runs
 >
 >    {% snippet faqs/galaxy/features_scratchbook.md %}
+>
 >    {% snippet faqs/galaxy/histories_search.md %}
 >
 > 5. Repeat this comparison for the other samples.

@@ -65,10 +65,13 @@ The serum proteomic samples and the fasta file for this training were deposited 
 >    https://zenodo.org/record/4274987/files/Sample1.raw
 >    https://zenodo.org/record/4274987/files/Sample2.raw
 >    ```
+>
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Once the files are green, rename the raw datasets into 'sample1' and 'sample2' and the fasta file into 'protein database'
+>
 >    {% snippet faqs/galaxy/datasets_rename.md %}
+>
 > 4. Set the data type to thermo.raw for 'sample1' and 'sample2'
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="thermo.raw" %}
@@ -247,7 +250,7 @@ To explore the proteomic composition of the two serum samples some postprocessin
 
 > ### {% icon question %} Questions
 >
-> 1. How many decoy proteins were removed? 
+> 1. How many decoy proteins were removed?
 > 2. What are the top 5 most abundant proteins in both files? Do they reflect typical serum proteins?
 > 3. Which sample was depleted for the top serum proteins?
 > 4. How much did the serum albumin abundance percentage decrease? Was the depletion overall succesful?

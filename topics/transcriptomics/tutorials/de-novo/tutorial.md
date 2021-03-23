@@ -50,6 +50,7 @@ Due to the large size of this dataset, we have downsampled it to only include re
 > 1. Create a new history for this RNA-seq exercise
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Open the data upload manager (Get Data -> Upload file)
@@ -64,21 +65,21 @@ Due to the large size of this dataset, we have downsampled it to only include re
 >
 > 10. Import the data from [Zenodo](https://zenodo.org/record/583140) [![DOI](https://zenodo.org/badge/DOI/10.123/GTNdenovoRNAseq.svg)](https://zenodo.org/record/583140)
 >
->    ```
->    https://zenodo.org/record/583140/files/G1E_rep1_forward_read_%28SRR549355_1%29
->    https://zenodo.org/record/583140/files/G1E_rep1_reverse_read_%28SRR549355_2%29
->    https://zenodo.org/record/583140/files/G1E_rep2_forward_read_%28SRR549356_1%29
->    https://zenodo.org/record/583140/files/G1E_rep2_reverse_read_%28SRR549356_2%29
->    https://zenodo.org/record/583140/files/Megakaryocyte_rep1_forward_read_%28SRR549357_1%29
->    https://zenodo.org/record/583140/files/Megakaryocyte_rep1_reverse_read_%28SRR549357_2%29
->    https://zenodo.org/record/583140/files/Megakaryocyte_rep2_forward_read_%28SRR549358_1%29
->    https://zenodo.org/record/583140/files/Megakaryocyte_rep2_reverse_read_%28SRR549358_2%29
->    https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
->    ```
+>     ```
+>     https://zenodo.org/record/583140/files/G1E_rep1_forward_read_%28SRR549355_1%29
+>     https://zenodo.org/record/583140/files/G1E_rep1_reverse_read_%28SRR549355_2%29
+>     https://zenodo.org/record/583140/files/G1E_rep2_forward_read_%28SRR549356_1%29
+>     https://zenodo.org/record/583140/files/G1E_rep2_reverse_read_%28SRR549356_2%29
+>     https://zenodo.org/record/583140/files/Megakaryocyte_rep1_forward_read_%28SRR549357_1%29
+>     https://zenodo.org/record/583140/files/Megakaryocyte_rep1_reverse_read_%28SRR549357_2%29
+>     https://zenodo.org/record/583140/files/Megakaryocyte_rep2_forward_read_%28SRR549358_1%29
+>     https://zenodo.org/record/583140/files/Megakaryocyte_rep2_reverse_read_%28SRR549358_2%29
+>     https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
+>     ```
 >
->    You will need to fetch the link to the annotation file yourself ;)
+>     You will need to fetch the link to the annotation file yourself ;)
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>     {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 {: .hands_on}
 

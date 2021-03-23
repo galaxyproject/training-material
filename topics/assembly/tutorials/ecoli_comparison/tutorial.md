@@ -241,39 +241,39 @@ Because phiX173 is around 5,000bp, we can remove those sequences by setting a mi
 >
 >
 > 2. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %} in entire line:
->   - *"File to process"*: the output of the Filter sequences by length {% icon tool %}
->   - *"1: Replacement"*
->     - *"Find Pattern"*: `^>1.*`
->     - *"Replace with"*: `>Ecoli_C`
+>    - *"File to process"*: the output of the Filter sequences by length {% icon tool %}
+>    - *"1: Replacement"*
+>      - *"Find Pattern"*: `^>1.*`
+>      - *"Replace with"*: `>Ecoli_C`
 >
->   {% snippet faqs/galaxy/datasets_rename.md name="E. coli C" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="E. coli C" %}
 >
->   > ### {% icon tip %} Regular Expressions
->   >
->   > The program we just entered is a so-called [Regular Expression](https://en.wikipedia.org/wiki/Regular_expression)
->   >
->   > The expression `^>1.*` contains several pieces that you need to understand. Let's write it top-to-bottom and explain:
->   >
->   > - `^` - says start looking at *the beginning* of each line
->   > - `>` - is the first character we want to match. Remember that name of the sequence in FASTA files starts with `>`
->   > - `1` - is the number present is our old name (`>1 length=4576293 depth=1.00x circular=true` to `>Ecoli_C`)
->   > - `.` - dot has a special meaning. It signifies *any* character
->   > - `*` - is a *quantifier*. From [Wikipedia](https://en.wikipedia.org/wiki/Regular_expression): "The asterisk indicates zero or more occurrences of the preceding element. For example, ab*c matches `ac`, `abc`, `abbc`, `abbbc`, and so on."
->   >
->   >So in short we are replacing `>1 length=4576293 depth=1.00x circular=true` with `>Ecoli_C`. The *Regular expression* `^>1.*` is used here to represent `>1 length=4576293 depth=1.00x circular=true`.<br>
->   >Detailed description of regular expressions is outside of the scope of this tutorial, but there are other great resources. Start with [Software Carpentry Regular Expressions tutorial](http://v4.software-carpentry.org/regexp/index.html).
->   {: .tip}
+>    > ### {% icon tip %} Regular Expressions
+>    >
+>    > The program we just entered is a so-called [Regular Expression](https://en.wikipedia.org/wiki/Regular_expression)
+>    >
+>    > The expression `^>1.*` contains several pieces that you need to understand. Let's write it top-to-bottom and explain:
+>    >
+>    > - `^` - says start looking at *the beginning* of each line
+>    > - `>` - is the first character we want to match. Remember that name of the sequence in FASTA files starts with `>`
+>    > - `1` - is the number present is our old name (`>1 length=4576293 depth=1.00x circular=true` to `>Ecoli_C`)
+>    > - `.` - dot has a special meaning. It signifies *any* character
+>    > - `*` - is a *quantifier*. From [Wikipedia](https://en.wikipedia.org/wiki/Regular_expression): "The asterisk indicates zero or more occurrences of the preceding element. For example, ab*c matches `ac`, `abc`, `abbc`, `abbbc`, and so on."
+>    >
+>    >So in short we are replacing `>1 length=4576293 depth=1.00x circular=true` with `>Ecoli_C`. The *Regular expression* `^>1.*` is used here to represent `>1 length=4576293 depth=1.00x circular=true`.<br>
+>    >Detailed description of regular expressions is outside of the scope of this tutorial, but there are other great resources. Start with [Software Carpentry Regular Expressions tutorial](http://v4.software-carpentry.org/regexp/index.html).
+>    {: .tip}
 >
->   > ### {% icon question %} Questions
->   >
->   > 1. What is the meaning of `^` character is SED expression?
->   >
->   > > ### {% icon solution %} Solution
->   > >
->   > > 1. It tells SED to start matching from the beginning of the string.
->   > >
->   > {: .solution}
->   {: .question}
+> > ### {% icon question %} Questions
+> >
+> > 1. What is the meaning of `^` character is SED expression?
+> >
+> > > ### {% icon solution %} Solution
+> > >
+> > > 1. It tells SED to start matching from the beginning of the string.
+> > >
+> > {: .solution}
+> {: .question}
 >
 {: .hands_on}
 
@@ -869,9 +869,9 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 >
 > 6. Change the datatype of the collection to `bed` and rename it to `Genes (E. coli Relatives)`
 >
->   {% snippet faqs/galaxy/datasets_change_datatype.md datatype="bed" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="bed" %}
 >
->   {% snippet faqs/galaxy/datasets_rename.md name="Genes (E. coli Relatives)" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="Genes (E. coli Relatives)" %}
 >
 >    > ### {% icon question %} Question
 >    > How does your output look?
@@ -913,9 +913,9 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 >
 > 3. Change the datatype of the collection to `bed` and rename it to `Genes (E. coli Relatives) with Symbol Name`
 >
->   {% snippet faqs/galaxy/datasets_change_datatype.md datatype="bed" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="bed" %}
 >
->   {% snippet faqs/galaxy/datasets_rename.md name="Genes (E. coli Relatives) with Symbol Name" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="Genes (E. coli Relatives) with Symbol Name" %}
 >
 {: .hands_on}
 

@@ -82,7 +82,9 @@ For the purpose of this tutorial, input data for a single point location (ALP1) 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial. If you are not inspired, you can name it *fates*.
+>
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 > 2. Import the [input data](https://doi.org/10.5281/zenodo.4108341) and the [restart dataset from Zenodo](https://doi.org/10.5281/zenodo.4126404)
 >    or from the shared data library. Restart dataset will be used if you want to initialize the model from exisiting experiments rather than running the model from a cold start to shorten spin-up time needed for the model.
 >
@@ -92,6 +94,7 @@ For the purpose of this tutorial, input data for a single point location (ALP1) 
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Check the datatype (for both files) is **tar**

@@ -50,6 +50,7 @@ We will look at the first run SRR034310 out of seven which includes 16 samples f
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this RAD-seq exercise. If you are not inspired, you can name it "STACKS RAD: population genomics with reference genome" for example...
+>
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. **EBI SRA** {% icon tool %} import files from SRA:
@@ -66,6 +67,7 @@ We will look at the first run SRR034310 out of seven which includes 16 samples f
 >    https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
 >    https://zenodo.org/record/1134547/files/Reference_genome_11_chromosomes.fasta
 >    ```
+>
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 4. Make sure the fastq.gz files you imported are of datatype `fastqsanger.gz`

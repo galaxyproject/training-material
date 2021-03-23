@@ -70,7 +70,9 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial. If you are not inspired, you can name it *Panoply* for example...
+>
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 > 2. Import the file from [Zenodo](https://doi.org/10.5281/zenodo.3697454) or from the shared data library
 >
 >    ```
@@ -79,6 +81,7 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Check that the datatype is **netcdf**
@@ -126,8 +129,8 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 > ### {% icon hands_on %} Hands-on: Inspect dataset
 >
 > 1. Inspect dataset content
-> 
->    Here you can look at the dataset (ecv_1979.nc) and related variables (`latitude`, `longitude`, `number`, `siconc`, etc) 
+>
+>    Here you can look at the dataset (ecv_1979.nc) and related variables (`latitude`, `longitude`, `number`, `siconc`, etc)
 >
 >    > ### {% icon question %} Question
 >    >

@@ -92,7 +92,7 @@ that allows the user to set this parameter when running the workflow.
 >
 > 10. Run your workflow
 >
->    {% snippet faqs/galaxy/workflows_run.md %}
+>     {% snippet faqs/galaxy/workflows_run.md %}
 >
 >    Notice the new input that can be changed before the workflow is run
 {: .hands_on }

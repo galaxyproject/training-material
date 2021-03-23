@@ -18,7 +18,7 @@ follow_up_training:
     tutorials:
       - proteogenomics-dbsearch
       - proteogenomics-novel-peptide-analysis
-      
+
 contributors:
   - subinamehta
   - timothygriffin
@@ -81,14 +81,17 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Rename the datasets with more descriptive names (strip off the url prefixes)
+>
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 4. Make sure that the datatype of file `FASTQ_ProB_22List.fastqsanger` is set to `fastqsanger`
+>
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastqsanger" %}
 >
 > 5. Make sure the Database/Build (dbkey) is set to `Mouse.Dec 2011 (GRCm38/mm10)(mm10)`
+>
 >    {% snippet faqs/galaxy/datasets_change_dbkey.md dbkey="Mouse.Dec 2011 (GRCm38/mm10)(mm10)"%}
-> 
+>
 > 6. **Note**: If you are running the workflow taken from the **GTN**, then make sure the tool "**Tabular-to-FASTA**" (tool number 26)
 >    has Title Column labeled as "1" and Sequence Column as "2".
 {: .hands_on}
@@ -243,7 +246,7 @@ There are 6 files are generated through the CustomProDB tool:
 - RData: set of annotation files (in RData format) to create reference and variant protein sequences
 
 
-For mapping proteins to genome and an RData file for variant protein coding sequences. Similar to the genomic mapping, a variant mapping file 
+For mapping proteins to genome and an RData file for variant protein coding sequences. Similar to the genomic mapping, a variant mapping file
 is also generated from CustomProDB. This SQLite file is also converted to tabular format and made SearchGUI-compatible. This
 variant annotation file will be used to visualize the variants in the Multi-omics Visualization Platform (in-house visualization platform developed by Galaxy-P senior developers).
 
@@ -269,9 +272,13 @@ Its input can include not only the alignments of raw reads used by other transcr
 >      - {% icon param-select %} *"Output coverage file?"*: `No`
 > 2. Inspect {% icon galaxy-eye %} the resulting files.
 > 3. Rename the output to `Stringtie_output.gtf`
+>
 >    {% snippet faqs/galaxy/datasets_rename.md %}
+>
 > 4. Make sure the datatype is `gtf`
+>
 >    {% snippet faqs/galaxy/datasets_change_datatype.md %}
+>
 {: .hands_on}
 
 StringTie accepts a BAM (or SAM) file of paired-end RNA-seq reads, which must be sorted by genomic location (coordinate position). This file contains spliced read alignments and can be produced directly by programs such as HISAT2. We recommend using HISAT2 as it is a fast and accurate alignment program. Every spliced read alignment (i.e. an alignment across at least one junction) in the input BAM file must contain the tag XS to indicate the genomic strand that produced the RNA from which the read was sequenced. Alignments produced by HISAT2 (when run with the `--dta` option) already include this tag, but if you use a different read mapper
@@ -450,7 +457,7 @@ along with the UniProt and cRAP databases.
 
 For visualization purposes we also use the concatenate tool to concatenate the genomic mapping with the protein mapping dataset. This output will be used for visualization in MVP to view the genomic coordinates of the variant peptide.
 
-We also need to modify the CustomProDB protein accessions the same as was done for the FASTA database. 
+We also need to modify the CustomProDB protein accessions the same as was done for the FASTA database.
 
 An SQLite database containing the genomic mapping SQLite, variant annotation and information from the protein mapping file is concatenated to form a single genomic mapping SQLite database later used as an input for the 'Peptide Genomic Coordinate' tool. For that we need to follow the steps below:
 
@@ -469,10 +476,11 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 >   - {% icon param-file %} *"Omit column headers from tabular output"*: `No`
 >
 > 2. Rename output to `genomic_mapping_sqlite`
+>
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
->    The output is further processed so that the results are compatible with the Multiomics Visualization Platform. 
->    We need to modify the CustomProDB protein accessions the same as was done for the FASTA database. 
+>    The output is further processed so that the results are compatible with the Multiomics Visualization Platform.
+>    We need to modify the CustomProDB protein accessions the same as was done for the FASTA database.
 >
 > 3. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `genomic_mapping_sqlite' (tabular)`
@@ -521,7 +529,7 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 
 ## Variant Annotations database
 
-We will repeat the process for the variant annotations (this file will be used as a input to the new updates that will be made on the Multiomics Visualization platform).  We need to modify the CustomProDB protein accessions the same as was done for the FASTA database. 
+We will repeat the process for the variant annotations (this file will be used as a input to the new updates that will be made on the Multiomics Visualization platform).  We need to modify the CustomProDB protein accessions the same as was done for the FASTA database.
 
 > ### {% icon hands_on %} Hands-on: Create database for variant annotations
 >
@@ -596,7 +604,7 @@ To do so:
 
 ## List of Reference Protein Accession names
 
-Generate a list of Reference Proteins. Identify peptides that are contained in the reference proteins will be filtered out in the next tutorial. 
+Generate a list of Reference Proteins. Identify peptides that are contained in the reference proteins will be filtered out in the next tutorial.
 
 > ### {% icon hands_on %} Hands-on: FASTA to Tabular
 > 1. **FASTA-to-Tabular** {% icon tool %}: with the default parameters

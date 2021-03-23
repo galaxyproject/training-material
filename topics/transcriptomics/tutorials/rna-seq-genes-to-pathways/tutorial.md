@@ -58,18 +58,17 @@ We will use several files for this analysis:
 > 1. Create a new history for this RNA-seq exercise e.g. `RNA-seq genes to pathways`
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
-> 2. Import the files
->
->    To import the files, there are two options:
+> 2. **Import the files**, there are two options:
 >    - Option 1: From a shared data library if available (ask your instructor)
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>      {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    - Option 2: From [Zenodo](https://zenodo.org/record/2596382)
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>      {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >    You can paste the names and links below into the Upload tool:
 >
@@ -83,6 +82,7 @@ We will use several files for this analysis:
 >    ```
 >
 > 3. Add a tag called `#basal` to the `limma-voom_basalpregnant-basallactate` and a tag called `#luminal` to the `limma-voom_luminalpregnant-luminallactate` files.
+>
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}

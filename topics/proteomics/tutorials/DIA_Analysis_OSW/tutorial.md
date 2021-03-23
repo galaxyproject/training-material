@@ -32,23 +32,23 @@ contributors:
 # Introduction
 {:.no_toc}
 
-This training covers data independent acquisition (DIA) mass spectrometry (MS) applying spectral libraries for peptide identification and quantification. 
+This training covers data independent acquisition (DIA) mass spectrometry (MS) applying spectral libraries for peptide identification and quantification.
 You can learn how to prepare and optimize a spectral library for the analysis of DIA data in the[DIA library generation tutorial]({{site.baseurl}}/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.html).
 
 The proteome refers to the entirety of proteins in a biological system (e.g cell, tissue, organism). Proteomics is the large-scale experimental analysis of proteins and proteomes, most often performed by mass spectrometry that enables great sensitivity and throughput. Especially for complex protein mixtures, bottom-up mass spectrometry is the standard approach. In bottom-up proteomics, proteins are digested with a specific protease into peptides and the measured peptides are in silico reassembled into the corresponding proteins. Inside the mass spectrometer, not only the peptides are measured (MS1 level), but the peptides are also fragmented into smaller peptides which are measured again (MS2 level). This is referred to as tandem-mass spectrometry (MS/MS). Identification of peptides is performed by peptide spectrum matching of the theoretical spectra generated from the input protein database (fasta file) with the measured MS2 spectra. Peptide quantification is most often performed by measuring the area under the curve of the MS1 level peptide peaks, but special techniques such as TMT allow to quantify peptides on MS2 level. Nowadays, bottom-up tandem-mass spectrometry approaches allow for the identification and quantification of several thousand proteins.
 
-In clinical proteomic studies often two or more conditions should be compared against each other, thus focusing on the proteins which were found in all conditions. Using the data dependent acquisition (DDA) approach could lead to limited numbers of cumulative proteins, due to method instrinsic dependencies (e.g. if the same peptides is selected for fragmentation in all measurements). 
-Over the last decade another acquisition method has been developed addressing the urgent need for increased cumulatively identified and quantified peptides and proteins across multiple measurements ({% cite Ludwig2018 %}). The so called data independent acquisition (DIA) circumvents the time and abundance dependent selection for fragmentation by using predefined fragmentation windows (m/z windows) going through the whole m/z range of the previous MS1 scan. 
+In clinical proteomic studies often two or more conditions should be compared against each other, thus focusing on the proteins which were found in all conditions. Using the data dependent acquisition (DDA) approach could lead to limited numbers of cumulative proteins, due to method instrinsic dependencies (e.g. if the same peptides is selected for fragmentation in all measurements).
+Over the last decade another acquisition method has been developed addressing the urgent need for increased cumulatively identified and quantified peptides and proteins across multiple measurements ({% cite Ludwig2018 %}). The so called data independent acquisition (DIA) circumvents the time and abundance dependent selection for fragmentation by using predefined fragmentation windows (m/z windows) going through the whole m/z range of the previous MS1 scan.
 ![DIA_window_schema](../../images/DIA_analysis_window.png "Measurement principles of DIA and m/z window schema of staggered DIA windows.")
 
 
-Therefore, all peptides which are present in the same m/z window at the same time are fragmented simultaneously and a MS2 spectra containing fragments from multiple peptides is acquired. Using the same m/z windows for all measurements, results in more reproducible fragmentation and potential identification across multiple measurements. 
-However, the resulting MS2 spectra contain fragments from multiple peptides and are often more complex and do not allow to directly link a specific (m/z) mass from the MS1 to a single MS2 fragment spectra. 
+Therefore, all peptides which are present in the same m/z window at the same time are fragmented simultaneously and a MS2 spectra containing fragments from multiple peptides is acquired. Using the same m/z windows for all measurements, results in more reproducible fragmentation and potential identification across multiple measurements.
+However, the resulting MS2 spectra contain fragments from multiple peptides and are often more complex and do not allow to directly link a specific (m/z) mass from the MS1 to a single MS2 fragment spectra.
 ![DIA_vs_DDA](../../images/DIA_analysis_MS2.png "The MS2 scans in the DIA approach contain fragment ions from multiple precursers and are therefore more complex than the precursor-specific MS2 scans in DDA.")
 
 To allow for the identification of peptides in those ambiguous MS2 spectra, a spectral library can be used. The spectral library contains experimentally measured  MS2 spectra, which are specific for one precursor (from previous DDA measurements). In more recent approaches the MS2 spectra can be predicted based on theoretical peptide sequences (e.g. from a protein database).
 ![DIA_basics](../../images/DIA_analysis_basic.png "Spectral libraries are necesseary for the identification of peptides in DIA MS2 scans. In this example the spectral library is generated based on DDA data from the same samples.")
- 
+
 One of the open-source software options for DIA data analysis is *OpenSwath* ({% cite Rost2014 %}), which requires a spectral library, retention time alignment peptides as well as the DIA MS data.
 
 The dataset in this tutorial consists of two different Spike-in mixtures of human and Ecoli peptides, with an increase of the Ecoli peptides in one of the Spike-ins. For each Spike-in there a four replicate measurements to allow for statistical analysis later on. Here we will go through the data analysis of DIA mass spectrometry data and will get first impressions on which of the Spike-ins might contain higher amounts of Ecoli peptides.
@@ -85,11 +85,15 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 >    https://zenodo.org/record/4301690/files/Sample7.raw
 >    https://zenodo.org/record/4301690/files/Sample8.raw
 >    ```
+>
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Once the files are green, rename the sample annotation file in 'Sample_annotation', the spectral library in 'HEK_Ecoli_lib', the iRT transition file in 'iRTassays' and the raw files in 'Sample1.raw', 'Sample2.raw', 'Sample3.raw', 'Sample4.raw', 'Sample5.raw', 'Sample6.raw', 'Sample7.raw' and 'Sample8.raw'
+>
 >    {% snippet faqs/galaxy/datasets_rename.md %}
+>
 > 4. Generate a collection for all .raw files (and name it DIA_data)
+>
 >    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 {: .hands_on}
@@ -196,8 +200,8 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Yes, we can see a clearly different distribution of the target identification and the decoys. Both, target and decoy distribution were highest around 0. However, the target distribution shows a second peak at positiv d-score values. 
-> > 2. The decoy identifications show a Gaussian distribution around 0 which could be explained by the fact that the decoy sequences were randomly generated alterations from the target sequences in the spectral library (see [DIA library generation tutorial]({{site.baseurl}}/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.html)). Most target identifications show also d-scores around 0, thus reflect potential false positive identifications. Only the distribution of target identifications shows a second increase in higher d-score values, representing more confident identifications. 
+> > 1. Yes, we can see a clearly different distribution of the target identification and the decoys. Both, target and decoy distribution were highest around 0. However, the target distribution shows a second peak at positiv d-score values.
+> > 2. The decoy identifications show a Gaussian distribution around 0 which could be explained by the fact that the decoy sequences were randomly generated alterations from the target sequences in the spectral library (see [DIA library generation tutorial]({{site.baseurl}}/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.html)). Most target identifications show also d-scores around 0, thus reflect potential false positive identifications. Only the distribution of target identifications shows a second increase in higher d-score values, representing more confident identifications.
 > >
 > {: .solution}
 >
@@ -260,7 +264,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 >        - {% icon param-file %} *"Study design tabular file"*: `Sample_annotation`
 >
 >    > ### {% icon comment %} Comment: swath2stats functionality
->    >Utilizing the swath2stats functionality generates a summary as well as a peptide and protein expression matrix. In addition to the non-processed pyprophet tabular output a refined tabular is generated using the specified criteria. The refined tabular `msstats_input.tabular` is dircetly compatable with **MSstats** for statistical analysis. 
+>    >Utilizing the swath2stats functionality generates a summary as well as a peptide and protein expression matrix. In addition to the non-processed pyprophet tabular output a refined tabular is generated using the specified criteria. The refined tabular `msstats_input.tabular` is dircetly compatable with **MSstats** for statistical analysis.
 >    {: .comment}
 >
 {: .hands_on}
@@ -273,13 +277,13 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 > > ### {% icon solution %} Solution
 > >
 > > 1. In total, over 27.300 peptides and over 5.100 proteins were identified and quantified in the DIA measurements.
-> > 2. No, the summary mainly provides an overview of the identifications in each individual DIA measurement as well as some descriptive statistics such as CVs and correlations. 
+> > 2. No, the summary mainly provides an overview of the identifications in each individual DIA measurement as well as some descriptive statistics such as CVs and correlations.
 > >
 > {: .solution}
 >
 {: .question}
 
-> ### {% icon hands_on %} Hands-On: Analysis of Ecoli Spike-in 
+> ### {% icon hands_on %} Hands-On: Analysis of Ecoli Spike-in
 >
 > 1. {% tool [Select lines that match an expression ](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `protein_signal.tabular` (output of **PyProphet export** {% icon tool %})
@@ -294,7 +298,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 >
 > > ### {% icon solution %} Solution
 > > 1. Over 800 Ecoli proteins were identified and quantified in the six DIA measurements.
-> > 2. It seems that the samples in Spike_in_2 contained higher amounts of Ecoli peptides than the samples in Spike_in_1. 
+> > 2. It seems that the samples in Spike_in_2 contained higher amounts of Ecoli peptides than the samples in Spike_in_1.
 > {: .solution }
 {: .question}
 

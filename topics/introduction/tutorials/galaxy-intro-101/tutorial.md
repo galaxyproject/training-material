@@ -123,7 +123,7 @@ Below we describe how you can do this, but it is not necessary for this tutorial
 > In order to get the datasets from the UCSC server, you need to have an account in the [useGalaxy.org](https://usegalaxy.org/) instance.
 {: .comment}
 
-    
+
 > ### {% icon tip %} Optional: Obtaining the Data directly from UCSC
 >
 > This tool works a bit differently than most Galaxy tools, but if you wish to obtain the newest data from UCSC, you can do that as follows:
@@ -443,7 +443,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 >    ![Selection of steps for `Extract Workflow` from history](../../images/101_25.png)
 >
 > 3. **Rename** the workflow to something descriptive, for example `Find exons with the highest number of features`.
-> 
+>
 > While we created this workflow initially to analyse SNPs, if we had similarly formatted datasets we could use this workflow to find different features.
 >
 >    If there are any steps that shouldn't be included in the workflow, you can **uncheck** them.
@@ -559,7 +559,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    ![`Run` option in the workflow menu](../../images/101_37.png)
 >
->     {% snippet faqs/galaxy/workflows_run.md %}
+>    {% snippet faqs/galaxy/workflows_run.md %}
 >
 >    The central panel will change to allow you to configure and launch the workflow.
 >

@@ -224,7 +224,7 @@ We now know the role of UMIs and cell barcodes, but how do we handle them in the
 > https://zenodo.org/record/2573177/files/test_barcodes_celseq2_R2.fastq.gz
 >    ```
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md %} <br/>
+>       {% snippet faqs/galaxy/datasets_import_via_link.md %} <br/>
 >
 >    1. Build a *Dataset pair* for the two FASTQ files <!-- cannot force this to count from 3 -->
 >       - Click the *Operations on multiple datasets* check box at the top of the history panel
@@ -261,6 +261,7 @@ At this point we now have a history with two items: our paired FASTQ test data, 
 >      - **Output positive matches, negative matches, or both?**:`Just positive matches (ID on list), as a single file`
 >
 > 1. Change the datatypes of the output pair to `fastqsanger` if not already set.
+>
 >    {% snippet faqs/galaxy/datasets_change_datatype.md %}
 >
 > 1. Viewing our 4 reads side-by-side

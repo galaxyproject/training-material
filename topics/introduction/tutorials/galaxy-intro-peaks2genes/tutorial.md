@@ -118,6 +118,7 @@ Let's start with a fresh history.
 >    ![History section](../../images/intro_01.png)
 >
 >    Directly uploading files is not the only way to get data into Galaxy
+>
 >    {% snippet faqs/galaxy/datasets_import_via_link.md format="interval" %}
 >
 >    > ### {% icon tip %} Tip: Importing data to Galaxy
@@ -158,6 +159,7 @@ Let's start with a fresh history.
 > 4. Search for `mm9` in **Database/Build** attribute and select `Mouse July 2007 (NCBI37/mm9)` (the paper tells us the peaks are from `mm9`)
 > 5. Click on **Save** on the top
 > 6. Add a tag called `#peaks` to the dataset to make it easier to track in the history
+>
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 >    The dataset should now look like below in the history

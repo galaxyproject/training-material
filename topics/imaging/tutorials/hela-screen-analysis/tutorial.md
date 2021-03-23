@@ -75,6 +75,7 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. **Unzip file** {% icon tool %} with the following parameters:
@@ -91,6 +92,7 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >    - *"Extract single file"*: `All files`
 >
 > 6. Rename {% icon galaxy-pencil %} the resulting collection to `control`
+>
 >    {% snippet faqs/galaxy/collections_rename.md %}
 >
 > 7. Import {% icon galaxy-upload %} the following dataset from [Zenodo]( https://zenodo.org/record/3362976) or from the data library (ask your instructor).
@@ -100,6 +102,7 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 8. **Unzip** {% icon tool %} to extract the zipped screen:
@@ -113,6 +116,7 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >    min	500	0.
 >    max	100000	0.5
 >    ```
+>
 >    {% snippet faqs/galaxy/datasets_create_new_file.md format="tabular" %}
 >
 > 9. Rename {% icon galaxy-pencil %} dataset to `rules`
@@ -206,6 +210,7 @@ The resulting workflow should look something like this:
 > 1. Run the screen analysis workflow {% icon workflow %} on the `control` screen and the `rules` file
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
+>
 > 2. Run the screen analysis workflow {% icon workflow %} on the `PLK1` screen and the `rules` file
 >
 {: .hands_on}

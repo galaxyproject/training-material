@@ -49,6 +49,7 @@ We will look at the first run SRR034310 out of seven which includes 16 samples f
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a **new history** for this RAD-seq exercise. If you are not inspired, you can name it *STACKS RAD: population genomics without reference genome* for example...
+>
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. **EBI SRA** {% icon tool %} with the following parameters:

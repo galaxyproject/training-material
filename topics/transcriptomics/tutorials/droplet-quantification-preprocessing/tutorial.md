@@ -313,11 +313,11 @@ To use emptyDrops effectively, we need to go back and re-run Alevin, stopping it
 
 > ### {% icon hands_on %} Hands-on: Stopping Alevin from thresholding
 > 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2) %} (Click re-run on the last Alevin output)
->   - *"Optional commands"*
->   - *"keepCBFraction"*: '1' - i.e. keep them all!
->   - *"freqThreshold"*: '3' - This will only remove cell barcodes with a frequency of less than 3, a low bar to pass but useful way of avoiding processing a bunch of almost certainly empty barcodes
+>    - *"Optional commands"*
+>    - *"keepCBFraction"*: '1' - i.e. keep them all!
+>    - *"freqThreshold"*: '3' - This will only remove cell barcodes with a frequency of less than 3, a low bar to pass but useful way of avoiding processing a bunch of almost certainly empty barcodes
 >
->   {% snippet faqs/galaxy/tools_rerun.md %}
+> {% snippet faqs/galaxy/tools_rerun.md %}
 {: .hands_on}
 
 > ### {% icon question %} Question
@@ -528,6 +528,7 @@ This sample was originally one of seven. So to run the other [12 downsampled FAS
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets

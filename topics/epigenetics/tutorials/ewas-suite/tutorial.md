@@ -62,11 +62,11 @@ The first step of the Infinium Human Methylation BeadChip array analysis is raw 
 
 > ### {% icon hands_on %} Hands-on: Data Loading
 >
-> Create a new history for this tutorial and give it a proper name
+> 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> Import the following IDAT files from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) or from the data library (ask your instructor)
+> 2. Import the following IDAT files from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) or from the data library (ask your instructor)
 >    - `GSM1588704_8795207135_R01C02_Red.idat`
 >    - `GSM1588705_8795207119_R05C02_Red.idat`
 >    - `GSM1588706_8795207135_R02C02_Red.idat`
@@ -93,7 +93,7 @@ The first step of the Infinium Human Methylation BeadChip array analysis is raw 
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> Run **Infinium Human Methylation BeadChip** {% icon tool %} with the following parameters:
+> 3. Run **Infinium Human Methylation BeadChip** {% icon tool %} with the following parameters:
 >    - {% icon param-files %} *"red channel files"*: all files ending in `_Red`
 >    - {% icon param-files %} *"green channel files"*: all files ending in `Grn`
 > ![Raw_intensity_data_loading](../../images/1Raw_intensity_data_loading.png)
@@ -168,7 +168,9 @@ However, for the purpose of this tutorial we would like you to upload phenotype 
 > We will now map the imported datasets against phenotype covariate and reference genome obtained from UCSC.
 > Click on the **Differentially_Methylated_Positions.bed** output in your history to expand it.
 > Set the database build of your dataset to `Human Feb. 2009 (GRCh37/hg19) (hg19)`(if it is not set automatically)
->    {% snippet faqs/galaxy/datasets_change_dbkey.md dbkey="hg19" %}
+>
+> {% snippet faqs/galaxy/datasets_change_dbkey.md dbkey="hg19" %}
+>
 > Click on `display at UCSC` towards the bottom of the history item.
 > This will launch UCSC Genome Browser with your Custom Track
 {: .hands_on}

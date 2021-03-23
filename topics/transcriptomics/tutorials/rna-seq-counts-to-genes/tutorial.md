@@ -95,15 +95,16 @@ We will use three files for this analysis:
 > 1. Create a new history for this RNA-seq exercise e.g. `RNA-seq with limma-voom`
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the mammary gland counts table and the associated sample information file.
 >
->     To import the files, there are two options:
+>    To import the files, there are two options:
 >     - Option 1: From a shared data library if available (`GTN - Material -> {{ page.topic_name }} -> {{ page.title }}`)
 >     - Option 2: From [Zenodo](https://zenodo.org/record/4273218)
 >
->     {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>       {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >     - You can paste both links below into the **Paste/Fetch** box:
 >
@@ -115,7 +116,6 @@ We will use three files for this analysis:
 > 2. Rename the counts dataset as `countdata` and the sample information dataset as `factordata` using the {% icon galaxy-pencil %} (pencil) icon.
 > 3. Check that the datatype is `tabular`.
 >    If the datatype is not `tabular`, please change the file type to `tabular`.
->
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >

@@ -88,10 +88,11 @@ A prepared file is available via Zenodo. Alternatively, you can prepare the file
 
 > ### {% icon comment %} Alternative upload
 > As an alternative option, if you prefer to upload the cleaned file directly from Zenodo, you can do so with the following link:
->    ```
->    https://zenodo.org/record/2598415/files/1AKI_clean.pdb
->    ```
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+> ```
+> https://zenodo.org/record/2598415/files/1AKI_clean.pdb
+> ```
+>
+> {% snippet faqs/galaxy/datasets_import_via_link.md %}
 {: .comment}
 
 > ### {% icon details %} Background: What is the PDB (Protein Data Bank) and format?

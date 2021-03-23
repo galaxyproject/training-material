@@ -113,6 +113,7 @@ Let's start with uploading the data.
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import from [Zenodo](https://zenodo.org/record/2579335) or a data library (ask your instructor):
@@ -131,6 +132,7 @@ Let's start with uploading the data.
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
@@ -776,9 +778,9 @@ This tutorial focused on simple gene essentiality prediction in individual sampl
 
 Once you get this list of gene, it is interesting to verify manually the genes classified as essentials. In order to do that, you can visualize the read mapped on your genome by displaying the bam files in IGV.
 
->    {% snippet topics/visualisation/faqs/visualizations_igv_add_genome.md %}
+{% snippet topics/visualisation/faqs/visualizations_igv_add_genome.md %}
 
->    {% snippet topics/visualisation/faqs/visualizations_igv_view_mapping.md %}
+{% snippet topics/visualisation/faqs/visualizations_igv_view_mapping.md %}
 
 When looking at the read mapping at the location of predicted essential genes, you may encounter several situation: Some gene will have no read at all mapping to them, some will have an empty region, while other will have no clearly defined empty region but a very low count of reads, possibly indicating a growth defect induced by the gene disruption.
 

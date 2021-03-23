@@ -111,57 +111,57 @@ All data required for this tutorial has been made available from Zenodo [![DOI](
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. **Import Sample Data.**
->       - Import the sample FASTQ files to your history, either from a shared data library (if available), or from Zenodo
->         using the URLs listed in the box below (click {% icon param-repeat %} to expand):
+>    - Import the sample FASTQ files to your history, either from a shared data library (if available), or from Zenodo
+>      using the URLs listed in the box below (click {% icon param-repeat %} to expand):
 >
->       > ### {% icon solution %} List of Zenodo URLs
->       > ```
->       > https://zenodo.org/record/800651/files/F3D0_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D0_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D141_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D141_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D142_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D142_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D143_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D143_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D144_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D144_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D145_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D145_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D146_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D146_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D147_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D147_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D148_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D148_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D149_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D149_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D150_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D150_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D1_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D1_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D2_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D2_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D3_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D3_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D5_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D5_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D6_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D6_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D7_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D7_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D8_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D8_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D9_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D9_R2.fastq
->       > https://zenodo.org/record/800651/files/Mock_R1.fastq
->       > https://zenodo.org/record/800651/files/Mock_R2.fastq
->       > ```
->       {: .solution }
+>      > ### {% icon solution %} List of Zenodo URLs
+>      > ```
+>      > https://zenodo.org/record/800651/files/F3D0_R1.fastq
+>      > https://zenodo.org/record/800651/files/F3D0_R2.fastq
+>      > https://zenodo.org/record/800651/files/F3D141_R1.fastq
+>      > https://zenodo.org/record/800651/files/F3D141_R2.fastq
+>      > https://zenodo.org/record/800651/files/F3D142_R1.fastq
+>      > https://zenodo.org/record/800651/files/F3D142_R2.fastq
+>      > https://zenodo.org/record/800651/files/F3D143_R1.fastq
+>      > https://zenodo.org/record/800651/files/F3D143_R2.fastq
+>      > https://zenodo.org/record/800651/files/F3D144_R1.fastq
+>      > https://zenodo.org/record/800651/files/F3D144_R2.fastq
+>      > https://zenodo.org/record/800651/files/F3D145_R1.fastq
+>      > https://zenodo.org/record/800651/files/F3D145_R2.fastq
+>      > https://zenodo.org/record/800651/files/F3D146_R1.fastq
+>      > https://zenodo.org/record/800651/files/F3D146_R2.fastq
+>      > https://zenodo.org/record/800651/files/F3D147_R1.fastq
+>      > https://zenodo.org/record/800651/files/F3D147_R2.fastq
+>      > https://zenodo.org/record/800651/files/F3D148_R1.fastq
+>      > https://zenodo.org/record/800651/files/F3D148_R2.fastq
+>      > https://zenodo.org/record/800651/files/F3D149_R1.fastq
+>      > https://zenodo.org/record/800651/files/F3D149_R2.fastq
+>      > https://zenodo.org/record/800651/files/F3D150_R1.fastq
+>      > https://zenodo.org/record/800651/files/F3D150_R2.fastq
+>      > https://zenodo.org/record/800651/files/F3D1_R1.fastq
+>      > https://zenodo.org/record/800651/files/F3D1_R2.fastq
+>      > https://zenodo.org/record/800651/files/F3D2_R1.fastq
+>      > https://zenodo.org/record/800651/files/F3D2_R2.fastq
+>      > https://zenodo.org/record/800651/files/F3D3_R1.fastq
+>      > https://zenodo.org/record/800651/files/F3D3_R2.fastq
+>      > https://zenodo.org/record/800651/files/F3D5_R1.fastq
+>      > https://zenodo.org/record/800651/files/F3D5_R2.fastq
+>      > https://zenodo.org/record/800651/files/F3D6_R1.fastq
+>      > https://zenodo.org/record/800651/files/F3D6_R2.fastq
+>      > https://zenodo.org/record/800651/files/F3D7_R1.fastq
+>      > https://zenodo.org/record/800651/files/F3D7_R2.fastq
+>      > https://zenodo.org/record/800651/files/F3D8_R1.fastq
+>      > https://zenodo.org/record/800651/files/F3D8_R2.fastq
+>      > https://zenodo.org/record/800651/files/F3D9_R1.fastq
+>      > https://zenodo.org/record/800651/files/F3D9_R2.fastq
+>      > https://zenodo.org/record/800651/files/Mock_R1.fastq
+>      > https://zenodo.org/record/800651/files/Mock_R2.fastq
+>      > ```
+>      {: .solution }
 >
->       {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>      {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->       {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>      {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. **Import Reference Data**
 >    - Import the following reference datasets

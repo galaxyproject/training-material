@@ -105,7 +105,9 @@ In other words, using a workflow makes it possible to apply the same procedure t
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. **Rename your history** to be meaningful and easy to find. For instance, you can choose **Galaxy 101 for everyone** as the name of your new history.
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
+>
 {: .hands_on}
 
 ## Upload the Iris dataset

@@ -68,7 +68,7 @@ This data is available at Zenodo using the following [link](https://doi.org/10.5
 
 > ### {% icon hands_on %} Hands-on: Get the data
 >
-> 1.  Import all of the following files into a new history:
+> 1. Import all of the following files into a new history:
 >     - [mutant_R1.fastq](https://zenodo.org/record/582600/files/mutant_R1.fastq)
 >     - [mutant_R2.fastq](https://zenodo.org/record/582600/files/mutant_R2.fastq)
 >     - [wildtype.fna](https://zenodo.org/record/582600/files/wildtype.fna)

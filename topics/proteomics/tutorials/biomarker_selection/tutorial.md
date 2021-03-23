@@ -77,6 +77,7 @@ We will start by selecting proteins associated with heart muscle tissue based on
 > ### {% icon hands_on %} Hands-on: Build tissue-specific expression dataset based on ImmunoHistoChemistry
 >
 > 1. **Create a new history** and give it a name.
+>
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. **Build tissue-specific expression dataset** {% icon tool %} with the following parameters:
@@ -283,8 +284,8 @@ candidates to their corresponding UniProt accession number. The tool **ID Conver
 >   > ### Output
 >   > **ID converter**: In this dataset, 2 columns (columns 6 and 7, at the end) which contain
 >   > UniProt accession number and ID are added.
->   > Note: We used here the release "Homo sapiens 08/05/2019"; results can be slightly different 
->   > according to the version number of Uniprot. 
+>   > Note: We used here the release "Homo sapiens 08/05/2019"; results can be slightly different
+>   > according to the version number of Uniprot.
 >   {: .comment}
 {: .hands_on}
 

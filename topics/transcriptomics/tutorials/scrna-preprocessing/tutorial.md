@@ -277,7 +277,7 @@ We now have a BAM file of our aligned reads, with cell and UMI barcodes embedded
 >  1. Click on the {% icon galaxy-eye %} symbol of the BAM output from STAR.
 >  2. There are many header lines that begin with `@` which we are not interested in.
 >  3. Look at 10th read directly below the header lines:
-> 
+>
 >         SRR5683689.38437_GCATTC_CTTCGT	16	chr1	3439991	255	70M	*	0	0	CTTTGAATCTCTTCTTCCCAGCTAGTCATCTTCCTGCTTTTCTCTCTGTCTGTCTGTCTGTCTGTCTGTC	'0'<B<''B77<BFBBBBB7'FBFB0F7FBB<B'''<IFFBF<FBFB<FBBFBB0<BFFFBB0BBFFB<<	NH:i:1 HI:i:1 AS:i:66 nM:i:1
 >
 >
@@ -556,6 +556,7 @@ Once again, file naming is important, and so we will rename our matrix files app
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 1. Rename a matrix
@@ -602,6 +603,7 @@ Let us now merge our matrices from different batches. In order to ensure that ou
 > ### {% icon hands_on %} Hands-on: Table Merge
 >
 > 1. **Create a Dataset List**
+>
 >    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 > 1. **Column Join on Collections** {% icon tool %} with the following parameters:
