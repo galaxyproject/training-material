@@ -212,7 +212,7 @@ That's a lot of information! Let's attack this in sections and see what question
 
 > ### {% icon question %} Question - Biological Variables
 >
-> Are their differences in sequencing depth across sex? Genotype?
+> Are there differences in sequencing depth across sex? Genotype?
 > 1. Which plot(s) addresses this?
 > 2. How do you interpret the `sex` differences?
 > 3. How do you interpret the `genotype` differences?
