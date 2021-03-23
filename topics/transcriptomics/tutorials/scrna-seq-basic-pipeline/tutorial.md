@@ -869,7 +869,7 @@ Ultimately, there are quite a lot ways to analyse the data, both within the conf
 
 # Interactive visualisations
 
-Before we leave you to explore the unknown, you might have noticed that the above interpretations are only a few of the possible options. Plus you might have had fun trying to figure out which sample is which genotype is which sex and flicking back and forth between plots repeatedly. Figuring out which plots will be your *final publishable* plots takes a lot of time and testing. Luckily, there is a helpful interactive viewer export tool {% cite Moreno2020.04.08.032698 %} that can help you explore without having to produce new plots over and over!
+Before we leave you to explore the unknown, you might have noticed that the above interpretations are only a few of the possible options. Plus you might have had fun trying to figure out which sample is which genotype is which sex and flicking back and forth between plots repeatedly. Figuring out which plots will be your *final publishable* plots takes a lot of time and testing. Luckily, there is a helpful interactive viewer {% cite Cakir2020 %} export tool {% cite Moreno2020.04.08.032698 %} that can help you explore without having to produce new plots over and over!
 
 > ### {% icon hands_on %} Hands-on: Cellxgene
 >
