@@ -1036,3 +1036,5 @@ The steps of this workflow can be found in the related workflow.
 ![Workflow]({% link topics/transcriptomics/images/raceid_workflow.png %} "RaceID Workflow")
 
 All steps of the workflow have produced an R Data object (RDS) that serves as an input into the next step, but these objects can also be loaded into an R environment and analysed using any desired library.
+
+This tutorial is part of the https://singlecell.usegalaxy.eu portal ({% cite tekman2020single %}).

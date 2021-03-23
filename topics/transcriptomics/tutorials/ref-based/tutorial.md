@@ -728,8 +728,7 @@ We now run **featureCounts** to count the number of reads per annotated gene.
 >    - In *"Advanced options"*:
 >       - *"GFF feature type filter"*: `exon`
 >       - *"GFF gene identifier"*: `gene_id`
->       - *"Allow read to contribute to multiple features"*: `No`
->       - *"Count multi-mapping reads/fragments"*: `Disabled; multi-mapping reads are excluded (default)`
+>       - *"Allow reads to map to multiple features"*: `Disabled; reads that align to multiple features or overlapping features are excluded`
 >       - *"Minimum mapping quality per read"*: `10`
 >
 > 2. **MultiQC** {% icon tool %} to aggregate the report:
@@ -814,7 +813,7 @@ Here we counted reads mapped to genes for two samples. It is really interesting 
 
 > ### {% icon hands_on %} (Optional) Hands-on: Re-run on the other datasets
 >
-> You can do the same process on the other sequence files available on [Zenodo]({{ page.zenodo_link }}) and on the data library
+> You can do the same process on the other sequence files available on [Zenodo]({{ page.zenodo_link }}) and on the data library.
 >
 > - Paired-end data
 >     - `GSM461178_1` and `GSM461178_2`
@@ -1101,7 +1100,7 @@ TPM, RPKM or FPKM do not deal with these differences in library composition in n
 >
 {: .details}
 
-DESeq2 runs also the Differential Gene Expression (DGE) analysis, whose two basic tasks are:
+DESeq2 also runs the Differential Gene Expression (DGE) analysis, whose two basic tasks are:
 
 - Estimate the biological variance using the replicates for each condition
 - Estimate the significance of expression differences between any two conditions
@@ -1117,7 +1116,7 @@ This expression analysis is estimated from read counts and attempts are made to 
 > We recommend to combine the count tables for different technical replicates (but not for biological replicates) before a differential expression analysis (see [DESeq2 documentation](http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#collapsing-technical-replicates))
 {: .details}
 
-Multiple factors with several levels can then be incorporated in the analysis describing known sources of variation (e.g. treatment, tissue type, gender, batches), with several levels representing the conditions for one factor. After normalization we can compare the response of the expression of any gene to the presence of different levels of a factor in a statistically reliable way.
+Multiple factors with several levels can then be incorporated in the analysis describing known sources of variation (e.g. treatment, tissue type, gender, batches), with two or more levels representing the conditions for each factor. After normalization we can compare the response of the expression of any gene to the presence of different levels of a factor in a statistically reliable way.
 
 In our example, we have samples with two varying factors that can contribute to differences in gene expression:
 
@@ -1218,7 +1217,7 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
         > How are the samples grouped?
         >
         > > ### {% icon solution %} Solution
-        > > They are first grouped by the treatment (the first factor) and secondly by the library type (the second factor), as in the PCA plot.
+        > > They are first grouped by the treatment (the first factor) and secondly by the sequencing type (the second factor), as in the PCA plot.
         > >
         > {: .solution}
         {: .question}
@@ -1258,8 +1257,7 @@ For more information about **DESeq2** and its outputs, you can have a look at [*
 > >
 > > 1. FBgn0003360 is differentially expressed because of the treatment: it has a significant adjusted p-value ($$4.0 \cdot 10^{-178} << 0.05$$). It is less expressed (`-` in the log2FC column) in treated samples compared to untreated samples, by a factor ~8 ($$2^{log2FC} = 2^{2.99977727873544}$$).
 > > 2. DESeq2 in Galaxy returns the comparison between the different levels for the 1st factor, after
-correction for the variability due to the 2nd factor. In our current case, treated against untreated for any sequencing type. To compare both sequencing types, we should run again DESeq2 by switching
-both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) becomes factor 1.
+correction for the variability due to the 2nd factor. In our current case, treated against untreated for any sequencing type. To compare sequencing types, we should run DESeq2 again switching factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) becomes factor 1.
 > > 3. To add the interaction between two factors (e.g. treated for paired-end data vs untreated for single-end), we should run DESeq2 another time but with only one factor with the following 4 levels:
 > >    - treated-PE
 > >    - untreated-PE
@@ -1378,7 +1376,7 @@ The column names may not be precise so we would like to add them before going fu
 >    {% snippet faqs/galaxy/datasets_create_new_file.md format="tabular" %}
 >
 > 2. **Concatenate datasets** {% icon tool %} to add this header line to the **Annotate** output:
->    - {% icon param-file %} *"Concatenate Dataset"*: `Pasted entry` dataset
+>    - {% icon param-file %} *"Concatenate Dataset"*: the `Pasted entry` dataset
 >    - *"Dataset"*
 >       - Click on {% icon param-repeat %} *"Insert Dataset"*
 >         - {% icon param-file %} *"select"*: output of **Annotate**
@@ -1544,7 +1542,7 @@ We have extracted genes that are differentially expressed in treated (PS gene-de
 
 [Gene Ontology (GO)](http://www.geneontology.org/) analysis is widely used to reduce complexity and highlight biological processes in genome-wide expression studies. However, standard methods give biased results on RNA-Seq data due to over-detection of differential expression for long and highly-expressed transcripts.
 
-[**goseq**](https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf) ({% cite young2010gene %}) provides methods for performing GO analysis of RNA-Seq data while taking length bias into account. **goseq** could also be applied to other category based tests of RNA-Seq data, such as KEGG pathway analysis, as discussed in a further section.
+[**goseq**](https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf) ({% cite young2010gene %}) provides methods for performing GO analysis of RNA-Seq data while taking length bias into account. **goseq** could also be applied to other category-based tests of RNA-Seq data, such as KEGG pathway analysis, as discussed in a further section.
 
 **goseq** needs 2 files as inputs:
 
@@ -1574,7 +1572,7 @@ We have extracted genes that are differentially expressed in treated (PS gene-de
 >
 >    We just generated the first input for **goseq**. As second input for **goseq** we need the gene lengths. We can use here the gene lengths generated by **featureCounts** {% icon tool %} and format the gene IDs.
 >
-> 5. Drag and drop one of the gene length file generated by **featureCounts** {% icon tool %} into this history using the {% icon galaxy-columns %} **View all histories**
+> 5. Drag and drop one of the feature length datasets generated by **featureCounts** {% icon tool %} into this history using the {% icon galaxy-columns %} **View all histories**
 >
 > 6. **Change Case** {% icon tool %} with
 >    - {% icon param-file %} *"From"*: the `feature lengths` (output of **featureCounts** {% icon tool %})
@@ -1614,7 +1612,7 @@ We have now the two required input files for goseq.
     6. `term`: detail of the term
     7. `ontology`: MF (Molecular Function - molecular activities of gene products), CC (Cellular Component - where gene products are active), BP (Biological Process - pathways and larger processes made up of the activities of multiple gene products)
     8. `p.adjust.over_represented`: *p*-value for over-representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure
-    9. `p.adjust.under_represented`: *p*-value for over-representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure
+    9. `p.adjust.under_represented`: *p*-value for under-representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure
 
     To identify categories significantly enriched/unenriched below some p-value cutoff, it is necessary to use the adjusted *p*-value.
 
