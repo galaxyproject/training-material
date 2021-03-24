@@ -236,7 +236,7 @@ reads with variable length with high error tolerance. Flye will output the
 assembly in a .fasta file, which looks like a .fastq file without the 3rd and
 4th line for the "+" sign and the quality score.
 
-{% wnippet faqs/galaxy/analysis_warning_results_may_vary.md %}
+{% snippet faqs/galaxy/analysis_warning_results_may_vary.md %}
 
 > ### {% icon hands_on %} Hands-on: Assembly using Flye
 >
