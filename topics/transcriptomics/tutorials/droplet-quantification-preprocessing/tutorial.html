@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Generating a cell matrix using Alevin</title>
+        <title>Generating a single cell matrix using Alevin</title>
         
             <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
 
@@ -23,7 +23,7 @@
         
         
         <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
-        <meta property="og:title" content="Galaxy Training: Generating a cell matrix using Alevin" />
+        <meta property="og:title" content="Galaxy Training: Generating a single cell matrix using Alevin" />
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
@@ -241,7 +241,7 @@
     "url": "https://galaxyproject.org/teach/gtn/"
   },
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
-  "headline": "Generating a cell matrix using Alevin",
+  "headline": "Generating a single cell matrix using Alevin",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -276,7 +276,7 @@
   },
   "courseCode": "transcriptomics / droplet-quantification-preprocessing / hands-on",
   "learningResourceType": "hands-on tutorial",
-  "name": "Hands-on for 'Generating a cell matrix using Alevin' tutorial",
+  "name": "Hands-on for 'Generating a single cell matrix using Alevin' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html",
   "timeRequired": "PT3H",
   "keywords": "single-cell, 10x",
@@ -421,7 +421,7 @@
     </script>
 
     <section class="tutorial">
-        <h1 data-toc-skip>Generating a cell matrix using Alevin</h1>
+        <h1 data-toc-skip>Generating a single cell matrix using Alevin</h1>
         
 
         <div class="contributors-line">By: 
@@ -592,7 +592,11 @@
                     
                         
                     
+                        
+                    
                 
+                    
+                        
                     
                         
                     
@@ -695,7 +699,7 @@
 
                 
                     <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/workflows/" title="Workflows" alt="Generating a cell matrix using Alevin workflows">
+    <a class="topic-icon" href="/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/workflows/" title="Workflows" alt="Generating a single cell matrix using Alevin workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
     </a>
 
@@ -770,13 +774,9 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
             Galaxy@GenOuest
         </a>
-        
-    
         
     
         
@@ -857,10 +857,6 @@
     
         
     
-        
-    
-        
-    
     </ul>
 
 
@@ -870,7 +866,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 3, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 23, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -940,7 +936,7 @@
 
 <h2 id="get-data">Get Data</h2>
 
-<p>We’ve provided you with some example data to play with, a small subset of the <span class="notranslate">reads</span> in a mouse dataset of fetal growth restriction (see the study in <span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">here</a> and the project submission <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">here</a>). This is a study using the Drop-seq chemistry, however this tutorial is almost identical to a 10x chemistry. We will point out the one tool parameter change you will need to run 10x samples. This data is not carefully curated, standard tutorial data - it’s real, it’s messy, it desperately needs filtering, it has background <span class="notranslate">RNA</span> running around, and most of all it will give you a chance to practice your analysis as if this data were yours.</p>
+<p>We’ve provided you with some example data to play with, a small subset of the <span class="notranslate">reads</span> in a mouse dataset of fetal growth restriction <a class="citation" href="#Bacon2018">Bacon <i>et al.</i> 2018</a> (see the study in <span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">here</a> and the project submission <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">here</a>). This is a study using the Drop-seq chemistry, however this tutorial is almost identical to a 10x chemistry. We will point out the one tool parameter change you will need to run 10x samples. This data is not carefully curated, standard tutorial data - it’s real, it’s messy, it desperately needs filtering, it has background <span class="notranslate">RNA</span> running around, and most of all it will give you a chance to practice your analysis as if this data were yours.</p>
 
 <p>Down-sampled <span class="notranslate">reads</span> and some associated annotation can be downloaded from Zenodo below, or you can import this <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/input---pre-processing-with-alevin">example input history</a>. How did I downsample these FASTQ files? Check out <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-1---how-to-downsample">this history</a> to find out!
 Additionally, to map your <span class="notranslate">reads</span>, you will need a transcriptome to align against (a FASTA) as well as the gene information for each transcript (a gtf) file. You can download these for your species of interest from Ensembl <a href="https://www.ensembl.org/info/data/ftp/index.html">here</a>. Additionally, these files are available in the above history as well as the Zenodo links below. Keep in mind, these are big files, so they may take a bit to import!</p>
@@ -1882,6 +1878,9 @@ You may be interested in seeing an <a href="https://humancellatlas.usegalaxy.eu/
   <li>Retrieved partially analysed data from the <span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas</li>
 </ul>
 
+<p>To discuss with like-minded scientists, join our Gitter channel for all things <span class="notranslate">Galaxy</span>-<span class="notranslate">single cell</span>!
+ <a href="https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg" alt="Gitter" /></a></p>
+
 
                     
                     <blockquote class="key_points">
@@ -1905,7 +1904,18 @@ You may be interested in seeing an <a href="https://humancellatlas.usegalaxy.eu/
 
                     
                     <h1 id="bibliography">References</h1>
-                    <ol class="bibliography"><li><span id="article-Alevin">Srivastava, A., L. Malik, T. Smith, I. Sudbery, and R. Patro, 2019 <b>Alevin efficiently estimates accurate gene abundances from dscRNA-seq data</b>. Genome Biology 20:</span>
+                    <ol class="bibliography"><li><span id="Bacon2018">Bacon, W. A., R. S. Hamilton, Z. Yu, J. Kieckbusch, D. Hawkes <i>et al.</i>, 2018 <b>Single-Cell Analysis Identifies Thymic Maturation Delay in Growth-Restricted Neonatal Mice</b>. Frontiers in Immunology 9:</span>
+    
+    
+    <a href="https://doi.org/10.3389/fimmu.2018.02523">10.3389/fimmu.2018.02523</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="article-Alevin">Srivastava, A., L. Malik, T. Smith, I. Sudbery, and R. Patro, 2019 <b>Alevin efficiently estimates accurate gene abundances from dscRNA-seq data</b>. Genome Biology 20:</span>
     
     
     <a href="https://doi.org/10.1186/s13059-019-1670-y">10.1186/s13059-019-1670-y</a>
@@ -1960,7 +1970,7 @@ You may be interested in seeing an <a href="https://humancellatlas.usegalaxy.eu/
                                     e.hide();
 
                                     $("#feedback-form").html(`
-                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Generating a cell matrix using Alevin (Transcriptomics)">Loading...</iframe>
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Generating a single cell matrix using Alevin (Transcriptomics)">Loading...</iframe>
                                     `)
                                 })
                             });
@@ -1972,7 +1982,7 @@ You may be interested in seeing an <a href="https://humancellatlas.usegalaxy.eu/
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Wendi Bacon, Jonathan Manning, 2021 <b>Generating a cell matrix using Alevin (Galaxy Training Materials)</b>. <a href="/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html">/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Wendi Bacon, Jonathan Manning, 2021 <b>Generating a single cell matrix using Alevin (Galaxy Training Materials)</b>. <a href="/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html">/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1988,10 +1998,10 @@ You may be interested in seeing an <a href="https://humancellatlas.usegalaxy.eu/
                     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{transcriptomics-droplet-quantification-preprocessing,
     author = "Wendi Bacon and Jonathan Manning",
-    title = "Generating a cell matrix using Alevin (Galaxy Training Materials)",
+    title = "Generating a single cell matrix using Alevin (Galaxy Training Materials)",
     year = "2021",
     month = "03",
-    day = "03"
+    day = "23"
     url = "\url{/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
