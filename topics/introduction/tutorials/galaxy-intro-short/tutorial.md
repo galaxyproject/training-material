@@ -266,11 +266,11 @@ Let's create a new history.
 > ### {% icon hands_on %} Hands-on: New history
 > 1. Create a new history
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Rename your history, *e.g.* "Next-analysis"
 >
->    {% snippet snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 {: .hands_on}
 

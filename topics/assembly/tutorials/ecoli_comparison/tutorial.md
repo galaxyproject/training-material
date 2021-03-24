@@ -52,7 +52,7 @@ In this tutorial we begin with a new genome assembly just produced in the [Unicy
 >    https://zenodo.org/record/3382053/files/genomes_proks.txt
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 2. And skip ahead to [comparing the most related genomes](#comparing-genome-architectures).
 {: .comment}
@@ -99,11 +99,11 @@ Our initial objective is to compare our assembly against all complete *E. coli* 
 >
 > 5. As this file is a CSV file, we need to convert it to TSV before Galaxy can use it.
 >
->    {% snippet snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
+>    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="Convert CSV to Tabular" %}
 >
 > 6. Rename this file to `genomes.tsv`
 >
->    {% snippet snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
+>    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="Convert CSV to Tabular" %}
 >
 {: .details}
 
@@ -241,39 +241,39 @@ Because phiX173 is around 5,000bp, we can remove those sequences by setting a mi
 >
 >
 > 2. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %} in entire line:
->   - *"File to process"*: the output of the Filter sequences by length {% icon tool %}
->   - *"1: Replacement"*
->     - *"Find Pattern"*: `^>1.*`
->     - *"Replace with"*: `>Ecoli_C`
+>    - *"File to process"*: the output of the Filter sequences by length {% icon tool %}
+>    - *"1: Replacement"*
+>      - *"Find Pattern"*: `^>1.*`
+>      - *"Replace with"*: `>Ecoli_C`
 >
->   {% snippet snippets/rename_dataset.md name="E. coli C" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="E. coli C" %}
 >
->   > ### {% icon tip %} Regular Expressions
->   >
->   > The program we just entered is a so-called [Regular Expression](https://en.wikipedia.org/wiki/Regular_expression)
->   >
->   > The expression `^>1.*` contains several pieces that you need to understand. Let's write it top-to-bottom and explain:
->   >
->   > - `^` - says start looking at *the beginning* of each line
->   > - `>` - is the first character we want to match. Remember that name of the sequence in FASTA files starts with `>`
->   > - `1` - is the number present is our old name (`>1 length=4576293 depth=1.00x circular=true` to `>Ecoli_C`)
->   > - `.` - dot has a special meaning. It signifies *any* character
->   > - `*` - is a *quantifier*. From [Wikipedia](https://en.wikipedia.org/wiki/Regular_expression): "The asterisk indicates zero or more occurrences of the preceding element. For example, ab*c matches `ac`, `abc`, `abbc`, `abbbc`, and so on."
->   >
->   >So in short we are replacing `>1 length=4576293 depth=1.00x circular=true` with `>Ecoli_C`. The *Regular expression* `^>1.*` is used here to represent `>1 length=4576293 depth=1.00x circular=true`.<br>
->   >Detailed description of regular expressions is outside of the scope of this tutorial, but there are other great resources. Start with [Software Carpentry Regular Expressions tutorial](http://v4.software-carpentry.org/regexp/index.html).
->   {: .tip}
+>    > ### {% icon tip %} Regular Expressions
+>    >
+>    > The program we just entered is a so-called [Regular Expression](https://en.wikipedia.org/wiki/Regular_expression)
+>    >
+>    > The expression `^>1.*` contains several pieces that you need to understand. Let's write it top-to-bottom and explain:
+>    >
+>    > - `^` - says start looking at *the beginning* of each line
+>    > - `>` - is the first character we want to match. Remember that name of the sequence in FASTA files starts with `>`
+>    > - `1` - is the number present is our old name (`>1 length=4576293 depth=1.00x circular=true` to `>Ecoli_C`)
+>    > - `.` - dot has a special meaning. It signifies *any* character
+>    > - `*` - is a *quantifier*. From [Wikipedia](https://en.wikipedia.org/wiki/Regular_expression): "The asterisk indicates zero or more occurrences of the preceding element. For example, ab*c matches `ac`, `abc`, `abbc`, `abbbc`, and so on."
+>    >
+>    >So in short we are replacing `>1 length=4576293 depth=1.00x circular=true` with `>Ecoli_C`. The *Regular expression* `^>1.*` is used here to represent `>1 length=4576293 depth=1.00x circular=true`.<br>
+>    >Detailed description of regular expressions is outside of the scope of this tutorial, but there are other great resources. Start with [Software Carpentry Regular Expressions tutorial](http://v4.software-carpentry.org/regexp/index.html).
+>    {: .tip}
 >
->   > ### {% icon question %} Questions
->   >
->   > 1. What is the meaning of `^` character is SED expression?
->   >
->   > > ### {% icon solution %} Solution
->   > >
->   > > 1. It tells SED to start matching from the beginning of the string.
->   > >
->   > {: .solution}
->   {: .question}
+> > ### {% icon question %} Questions
+> >
+> > 1. What is the meaning of `^` character is SED expression?
+> >
+> > > ### {% icon solution %} Solution
+> > >
+> > > 1. It tells SED to start matching from the beginning of the string.
+> > >
+> > {: .solution}
+> {: .question}
 >
 {: .hands_on}
 
@@ -605,7 +605,7 @@ Now we will perform alignments between our assembly and the three most closely r
 >
 > 2. Rename the `LASTZ on collection... mapped reads` something more memorable like `LASTZ Alignments`
 >
->    {% snippet snippets/rename_collection.md name="LASTZ Alignments" %}
+>    {% snippet faqs/galaxy/collections_rename.md name="LASTZ Alignments" %}
 >
 {: .hands_on}
 
@@ -639,7 +639,7 @@ The first step will be collapsing the collection containing the three genomes in
 >
 > 2. Convert the datatype of this output to uncompress it
 >
->    {% snippet snippets/convert_datatype.md conversion="Convert compressed to uncompressed" %}
+>    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="Convert compressed to uncompressed" %}
 >
 > 3. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0) %} tail-to-head (cat):
 >    - *"Datasets to concatenate"*: `Collapse collection ... uncompressed`, the output from the uncompression step.
@@ -648,7 +648,7 @@ The first step will be collapsing the collection containing the three genomes in
 >
 > 4. Rename the output to `DNA (E. coli C + Relatives)`
 >
->    {% snippet snippets/rename_dataset.md name="DNA (E. coli C + Relatives)" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="DNA (E. coli C + Relatives)" %}
 {: .hands_on}
 
 The resulting dataset contains four sequences: three genomes plus our assembly.
@@ -709,7 +709,7 @@ Column 13 of the fields chosen by us for [LASTZ run](#hands_on-hands-on-aligning
 >
 > 4. We will reuse this file later so let's rename it `Unprocessed Alignments`
 >
->    {% snippet snippets/rename_dataset.md name="Unprocessed Alignments" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="Unprocessed Alignments" %}
 >
 > 4. {% tool [Cut](Cut1) %} columns from a table:
 >
@@ -750,7 +750,7 @@ Column 13 of the fields chosen by us for [LASTZ run](#hands_on-hands-on-aligning
 >
 > 5. Rename this "Target Alignments"
 >
->    {% snippet snippets/rename_dataset.md name="Target Alignments" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="Target Alignments" %}
 >
 > 6. {% tool [Cut columns from a table](Cut1) %} with the following parameters
 >    - *"Cut columns"*: `c7,c9,c10,c14,c12,c8` (look at the data shown above and the definition of BED to see why we make these choices.)
@@ -758,7 +758,7 @@ Column 13 of the fields chosen by us for [LASTZ run](#hands_on-hands-on-aligning
 >
 > 5. Rename this "Query Alignments"
 >
->    {% snippet snippets/rename_dataset.md name="Query Alignments" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="Query Alignments" %}
 >
 > 6. {% tool [Concatenate datasets tail-to-head](cat1) %}
 >    - *"Concatenate Dataset"*: `Query Alignments`
@@ -767,9 +767,9 @@ Column 13 of the fields chosen by us for [LASTZ run](#hands_on-hands-on-aligning
 >
 > 7. Change the datatype of the output to BED and rename the output "Target & Query Alignments"
 >
->    {% snippet snippets/change_datatype.md datatype="bed" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="bed" %}
 >
->    {% snippet snippets/rename_dataset.md name="Target & Query Alignments" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="Target & Query Alignments" %}
 >
 {: .hands_on}
 
@@ -869,9 +869,9 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 >
 > 6. Change the datatype of the collection to `bed` and rename it to `Genes (E. coli Relatives)`
 >
->   {% snippet snippets/change_datatype.md datatype="bed" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="bed" %}
 >
->   {% snippet snippets/rename_dataset.md name="Genes (E. coli Relatives)" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="Genes (E. coli Relatives)" %}
 >
 >    > ### {% icon question %} Question
 >    > How does your output look?
@@ -913,9 +913,9 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 >
 > 3. Change the datatype of the collection to `bed` and rename it to `Genes (E. coli Relatives) with Symbol Name`
 >
->   {% snippet snippets/change_datatype.md datatype="bed" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="bed" %}
 >
->   {% snippet snippets/rename_dataset.md name="Genes (E. coli Relatives) with Symbol Name" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="Genes (E. coli Relatives) with Symbol Name" %}
 >
 {: .hands_on}
 
@@ -1013,7 +1013,7 @@ You will notice that all three genomes have a region starting past 3,200,000 and
 >
 > 2. Rename this dataset `Gaps`
 >
->    {% snippet snippets/rename_dataset.md name="Gaps" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="Gaps" %}
 {: .hands_on}
 
 
@@ -1051,16 +1051,16 @@ JBrowse is an interactive genome browser, which has been integrated into Galaxy 
 We have embedded a copy of the resulting JBrowse here, if something went wrong during one of the steps you can always just check this output:
 
 
-{% snippet snippets/jbrowse.html datadir="data" %}
+{% snippet topics/visualisation/faqs/visualizations_jbrowse.html datadir="data" %}
 
 Let's start by looking at the gaps in our alignments. The deletion from our assembly is easy to see. It looks like a gap in alignments because target genomes are longer than our assembly by the amount equal to the length of the deletion. Clicking on the following links to jump to the right locations in the genome browser above:
 
 {% capture jbtracks %}DNA%2C45ccd03761795e5db829b6ab104c6a5a_0%2C0b4cc6e1931ece5bd0f487148c40ba37_0%2C36c31c84288257f526dbf55dc63fac9e_0{% endcapture %}
 
 <ul>
-  <li>{% snippet snippets/jbrowse-link.html datadir="data" loc="LT906474.1:3238836..3318993" tracks=jbtracks %}</li>
-  <li>{% snippet snippets/jbrowse-link.html datadir="data" loc="CP020543.1:3246920..3310052" tracks=jbtracks %}</li>
-  <li>{% snippet snippets/jbrowse-link.html datadir="data" loc="CP024090.1:3221116..3295268" tracks=jbtracks %}</li>
+  <li>{% snippet topics/visualisation/faqs/visualizations_jbrowse_link.html datadir="data" loc="LT906474.1:3238836..3318993" tracks=jbtracks %}</li>
+  <li>{% snippet topics/visualisation/faqs/visualizations_jbrowse_link.html datadir="data" loc="CP020543.1:3246920..3310052" tracks=jbtracks %}</li>
+  <li>{% snippet topics/visualisation/faqs/visualizations_jbrowse_link.html datadir="data" loc="CP024090.1:3221116..3295268" tracks=jbtracks %}</li>
 </ul>
 
 Close ups of deleted region (this region is deleted from our assembly and looks like a gap when our assembly is aligned to genomic sequences shown here). In CP0205543 and LT906474 the continuity of the region is interrupted by a small aligned region that has relatively low identity (~72%). This is a spurious alignment and can be ignored.
@@ -1175,7 +1175,7 @@ Goodall et al. have recently published a list of essential genes for *E. coli* K
 >    https://zenodo.org/record/3382053/files/inline-supplementary-material-7.tsv
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 {: .hands_on}
 
