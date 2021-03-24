@@ -79,8 +79,9 @@ As explained in the Zenodo link, the datasets have been modified to use more com
 >    {{ page.zenodo_link }}/files/GSE123818_Root_single_cell_wt_datamatrix.fixednames.transposed.csv.gz
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets to `cells_shr` and `cells_wt`.
 {: .hands_on}
@@ -175,7 +176,7 @@ If the above feels like a convoluted way to get the dimensionality, that's becau
 > 1. **TODO** {% tool [Scatter Plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata` (output of **Manipulate AnnData** {% icon tool %})
 >    - *"Method used for inspecting"*: `Calculate quality control metrics, using 'pp.calculate_qc_metrics'`
-> 
+>
 {: .hands_on}
 
 
