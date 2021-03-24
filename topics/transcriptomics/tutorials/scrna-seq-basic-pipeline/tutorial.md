@@ -24,7 +24,7 @@ requirements:
     type: "internal"
     topic_name: transcriptomics
     tutorials:
-        - droplet-quantification-processing
+        - droplet-quantification-preprocessing
 tags:
 - single-cell
 - 10x
