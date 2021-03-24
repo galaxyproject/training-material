@@ -117,8 +117,8 @@ layout: base
     {% assign new_members = site.data['contributors'] | most_recent_contributors: 10 %}
     <ul>
     {% for m in new_members %}
-        {% assign i = m[0] %}{% assign n = m[1].name %}
-        <li>{% include _includes/contributor-badge.html id=i name=n %}</li>
+        {% assign i = m[0] %}
+        <li>{% include _includes/contributor-badge.html id=i %}</li>
     {% endfor %}
     </ul>
     <p class="card-text">Thanks a lot for your contributions!</p>

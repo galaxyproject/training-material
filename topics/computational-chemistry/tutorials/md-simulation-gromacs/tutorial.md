@@ -74,7 +74,7 @@ A prepared file is available via Zenodo. Alternatively, you can prepare the file
 > ### {% icon hands_on %} Hands-on: Upload an initial structure
 > 1. First of all, create a new history and give it a name.
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Use the **Get PDB** {% icon tool %} tool to download a PDB file for simulation:
 >    - *"PDB accession code"*: `1AKI`
@@ -88,10 +88,11 @@ A prepared file is available via Zenodo. Alternatively, you can prepare the file
 
 > ### {% icon comment %} Alternative upload
 > As an alternative option, if you prefer to upload the cleaned file directly from Zenodo, you can do so with the following link:
->    ```
->    https://zenodo.org/record/2598415/files/1AKI_clean.pdb
->    ```
->    {% snippet snippets/import_via_link.md %}
+> ```
+> https://zenodo.org/record/2598415/files/1AKI_clean.pdb
+> ```
+>
+> {% snippet faqs/galaxy/datasets_import_via_link.md %}
 {: .comment}
 
 > ### {% icon details %} Background: What is the PDB (Protein Data Bank) and format?

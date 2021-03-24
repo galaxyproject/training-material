@@ -99,8 +99,8 @@ In this example, we will use a dataset originally hosted in the __NCBI SRA datab
 >     ```
 >     - Assign a name to the new collection: `soil collection`
 >
->    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
 {: .hands_on}
