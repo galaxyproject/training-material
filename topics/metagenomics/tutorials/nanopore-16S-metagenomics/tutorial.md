@@ -16,6 +16,8 @@ key_points:
 - We preprocessed Nanopore sequences in order to improve their quality
 contributors:
 - gallardoalba
+tags:
+  - nanopore
 
 ---
 
