@@ -1,5 +1,4 @@
-
-5. Need more help? Please see the *How to make a workflow subsection* [here]({% link topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.md %})---
+---
 layout: tutorial_hands_on
 
 title: Filter, Plot and Explore Single-cell RNA-seq Data
