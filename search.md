@@ -69,7 +69,7 @@ function search(idx, q){
 	$("#results-container").html(results.map(x => x.entry));
 }
 
-fetch('{% link search.json %}')
+fetch('{{ site.baseurl }}/search.json')
 	.then(response => response.json())
 	.then(data => {
 		var idx = lunr.Index.load(data);
