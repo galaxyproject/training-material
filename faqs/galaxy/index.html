@@ -445,6 +445,29 @@ Histories are an important part of <span class="notranslate">Galaxy</span>, most
 
 
  <br><br> 
+<h2 id="sequencing"> <a href="#sequencing"> Sequencing </a></h2>
+<hr/>
+
+
+
+<h3 class="faq-area"> Illumina MiSeq sequencing <a href="/training-material/faqs/galaxy/sequencing_illumina_miseq.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+
+<!--SNIPPET--><blockquote class="comment">  <h3 data-toc-skip id="-illumina-miseq-sequencing"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Illumina MiSeq sequencing</h3>  <p>Illumina MiSeq sequencing is based on sequencing by synthesis. As the namesuggests, fluorescent labels are measured for every base that bind at aspecific moment at a specific place on a flow cell. These flow cells arecovered with oligos (small single strand <span class="notranslate">DNA</span> strands). In the librarypreparation the <span class="notranslate">DNA</span> strands are cut into small <span class="notranslate">DNA</span> fragments (differs perkit/device) and specific pieces of <span class="notranslate">DNA</span> (adapters) are added, which arecomplementary to the oligos. Using bridge amplification large amounts ofclusters of these <span class="notranslate">DNA</span> fragments are made. The reverse string is washed away,making the clusters single stranded. Fluorescent bases are added one by one,which emit a specific light for different bases when added. This is happeningfor whole clusters, so this light can be detected and this data is basecalled(translation from light to a nucleotide) to a nucleotide sequence (Read). Forevery base a quality score is determined and also saved per read. Thisprocess is repeated for the reverse strand on the same place on the flowcell, so the forward and reverse <span class="notranslate">reads</span> are from the same <span class="notranslate">DNA</span> strand. Theforward and reversed <span class="notranslate">reads</span> are linked together and should always be processedtogether!For more information watch this <a href="https://youtu.be/fCd6B5HRaZ8">video from Illumina</a></p></blockquote>
+
+
+
+
+
+
+<h3 class="faq-area"> Nanopore sequencing <a href="/training-material/faqs/galaxy/sequencing_nanopore.html"><i class="fas fa-external-link-alt"></i></a> </h3>
+
+<!--SNIPPET--><blockquote class="comment">  <h3 data-toc-skip id="-nanopore-sequencing"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Nanopore sequencing</h3>  <p>Nanopore sequencing has several properties that make it well-suited for our purposes</p>  <ol>    <li>Long-read sequencing technology offers <strong>simplified</strong> and less ambiguous genome <strong>assembly</strong></li>    <li>Long-read sequencing gives the ability to <strong>span repetitive genomic regions</strong></li>    <li>Long-read sequencing makes it possible to <strong>identify large structural variations</strong><img src="/training-material/topics/metagenomics/images/plasmid-metagenomics-nanopore/sequence_method.jpg" alt="How nanopore sequencing works" title="Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: &lt;a href=&quot;https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512&quot;&gt;Nanopore sequencing: The advantages of long reads for genome assembly&lt;/a&gt;)" /> <br /><br />When using Oxford Nanopore Technologies (ONT) sequencing, the change inelectrical current is measured over the membrane of a flow cell. Whennucleotides pass the pores in the flow cell the current change is translated(basecalled) to nucleotides by a basecaller. A schematic overview is given inthe picture above.When sequencing using a MinIT or MinION Mk1C, the basecalling software ispresent on the devices. With basecalling the electrical signals are translatedto bases (A,T,G,C) with a quality score per base. The sequenced <span class="notranslate">DNA</span> strand willbe basecalled and this will form one read. Multiple <span class="notranslate">reads</span> will be stored in afastq file.</li>  </ol></blockquote>
+
+
+
+
+
+ <br><br> 
 <h2 id="tools"> <a href="#tools"> Tools </a></h2>
 <hr/>
 
@@ -591,7 +614,7 @@ You can create a <span class="notranslate">Galaxy</span> <span class="notranslat
         <p>
     The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
 </p>
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/9bbbee3f3f52c505fd8ff913d439e11f891e3c34">9bbbee3f3f52c505fd8ff913d439e11f891e3c34</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/8f618e5d5695c6538d473824110cf81f7011f50d">8f618e5d5695c6538d473824110cf81f7011f50d</a></p>
     </div>
 </footer>
 

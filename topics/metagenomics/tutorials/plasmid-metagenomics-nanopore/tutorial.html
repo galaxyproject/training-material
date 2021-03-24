@@ -284,7 +284,7 @@
   "name": "Hands-on for 'Antibiotic resistance detection' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/metagenomics/tutorials/plasmid-metagenomics-nanopore/tutorial.html",
   "timeRequired": "PT3H",
-  "keywords": "nanopore, plasmids",
+  "keywords": "nanopore, plasmids, assembly, amr",
   "description": "The questions this  addresses are:\n - How do I assemble a genome with Nanopore data?\n - How do I get more information about the structure of the genomes?\n - How do I get more information about the antimicrobial resistance genes?\n\n\\nThe objectives are:\n - Perform Quality control on your reads\n - Assemble a genome with Minimap2/Miniasm/Racon\n - Determine the structure of the genome(s)\n - Scan for antimicrobial resistance genes with Staramr\n\n",
   "coursePrerequisites": [
     {
@@ -507,6 +507,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -516,12 +518,6 @@
     
         
     
-        
-    
-        
-        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
-            Galaxy@GenOuest
-        </a>
         
     
         
@@ -585,8 +581,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -633,7 +627,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 23, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 24, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -715,21 +709,8 @@ The <span class="notranslate">downstream</span> analysis will use <strong>Nanopl
 <p>We are interested in the reconstruction of full plasmid sequences and determining the presence of any antimicrobial resistance genes.
 We will use the plasmid dataset created by <a class="citation" href="#LiXie2018">Li <i>et al.</i> 2018</a> for their evaluation of the efficiency of MDR plasmid sequencing by MinION platform. In the experiment, 12 MDR plasmid-bearing bacterial strains were selected for plasmid extraction, including <em>E. coli</em>, <em>S. typhimurium</em>, <em>V. parahaemolyticus</em>, and <em>K. pneumoniae</em>.</p>
 
-<blockquote class="comment">
-  <h3 id="comment-background-nanopore-sequencing"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: Nanopore sequencing</h3>
-
-  <p>Nanopore sequencing has several properties that make it well-suited for our purposes</p>
-
-  <ol>
-    <li>Long-read sequencing technology offers <strong>simplified</strong> and less ambiguous genome <strong>assembly</strong></li>
-    <li>Long-read sequencing gives the ability to <strong>span repetitive genomic regions</strong></li>
-    <li>Long-read sequencing makes it possible to <strong>identify large structural variations</strong></li>
-  </ol>
-
-  <figure id="figure-1"><img src="../../images/plasmid-metagenomics-nanopore/sequence_method.jpg" alt="How nanopore sequencing works" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Using nanopore sequencing, a single molecule of <span class="notranslate">DNA</span> or <span class="notranslate">RNA</span> can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: <a href="https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512">Nanopore sequencing: The advantages of long <span class="notranslate">reads</span> for genome assembly</a>)</figcaption></figure>
-  <p><br /><br /></p>
-
-</blockquote>
+<!--SNIPPET-->
+<blockquote class="comment">  <h3 data-toc-skip="" id="-nanopore-sequencing"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Nanopore sequencing</h3>  <p>Nanopore sequencing has several properties that make it well-suited for our purposes</p>  <ol>    <li>Long-read sequencing technology offers <strong>simplified</strong> and less ambiguous genome <strong>assembly</strong></li>    <li>Long-read sequencing gives the ability to <strong>span repetitive genomic regions</strong></li>    <li>Long-read sequencing makes it possible to <strong>identify large structural variations</strong><img src="/training-material/topics/metagenomics/images/plasmid-metagenomics-nanopore/sequence_method.jpg" alt="How nanopore sequencing works" title="Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: &lt;a href=&quot;https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512&quot;&gt;Nanopore sequencing: The advantages of long reads for genome assembly&lt;/a&gt;)" /> <br /><br />When using Oxford Nanopore Technologies (ONT) sequencing, the change inelectrical current is measured over the membrane of a flow cell. Whennucleotides pass the pores in the flow cell the current change is translated(basecalled) to nucleotides by a basecaller. A schematic overview is given inthe picture above.When sequencing using a MinIT or MinION Mk1C, the basecalling software ispresent on the devices. With basecalling the electrical signals are translatedto bases (A,T,G,C) with a quality score per base. The sequenced <span class="notranslate">DNA</span> strand willbe basecalled and this will form one read. Multiple <span class="notranslate">reads</span> will be stored in afastq file.</li>  </ol></blockquote>
 
 <h2 id="importing-the-data-into-galaxy">Importing the data into <span class="notranslate">Galaxy</span></h2>
 
@@ -962,7 +943,7 @@ It simply concatenates pieces of read sequences to generate the final sequences.
 The optimal case would be to recreate a complete chromosome or plasmid.
 Thus the per-base error rate is similar to the raw input <span class="notranslate">reads</span>.</p>
 
-<figure id="figure-2"><img src="../../images/plasmid-metagenomics-nanopore/Miniasm.png" alt="Pairwise alignment" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Sequencing and Assembly Schematic. A longer sequence is constructed from many smaller, overlapping fragments. These are aligned and reconstructed during assembly to produce the best guess assembly.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/plasmid-metagenomics-nanopore/Miniasm.png" alt="Pairwise alignment" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Sequencing and Assembly Schematic. A longer sequence is constructed from many smaller, overlapping fragments. These are aligned and reconstructed during assembly to produce the best guess assembly.</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-de-novo-assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: De novo assembly</h3>
@@ -1118,7 +1099,7 @@ This is not the case for most of the samples, but we will improve our assemblies
 
 <p>For example, the assembly for sample RB01 looks something like this (your assembly will look a bit different due to randomness in several of the tools):</p>
 
-<figure id="figure-3"><img src="../../images/plasmid-metagenomics-nanopore/bandage_pre_unicycler.png" alt="Bandage output for sample RB01" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Bandage output for sample RB01. Large fragments were assembled, but not the full circular plasmid molecules.</figcaption></figure>
+<figure id="figure-2"><img src="../../images/plasmid-metagenomics-nanopore/bandage_pre_unicycler.png" alt="Bandage output for sample RB01" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Bandage output for sample RB01. Large fragments were assembled, but not the full circular plasmid molecules.</figcaption></figure>
 
 <p>As you can see from these Bandage outputs, we were able to assemble our data into fairly large fragments, but were not quite successful in assembling the full (circular) plasmid sequences.</p>
 
@@ -1301,7 +1282,7 @@ and compiles a summary report of detected antimicrobial resistance genes.</p>
 <h2 id="card-database">CARD database</h2>
 <p>To get more information about these antibiotic resistant genes, you can check the <a href="https://card.mcmaster.ca">CARD database</a> (<strong>C</strong>omprehensive <strong>A</strong>ntibiotic <strong>R</strong>esistance <strong>D</strong>atabase) (<a class="citation" href="#Jia2016">Jia <i>et al.</i> 2016</a>)</p>
 
-<figure id="figure-4"><img src="../../images/plasmid-metagenomics-nanopore/card_database.png" alt="Screenshot of the CARD database" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Screenshot of the CARD database interface. CARD gives information about the antibiotic resistance genes, as well as links to relevant publications.</figcaption></figure>
+<figure id="figure-3"><img src="../../images/plasmid-metagenomics-nanopore/card_database.png" alt="Screenshot of the CARD database" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Screenshot of the CARD database interface. CARD gives information about the antibiotic resistance genes, as well as links to relevant publications.</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-question-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -1655,7 +1636,7 @@ may provide further insight.</p>
     title = "Antibiotic resistance detection (Galaxy Training Materials)",
     year = "2021",
     month = "03",
-    day = "23"
+    day = "24"
     url = "\url{/training-material/topics/metagenomics/tutorials/plasmid-metagenomics-nanopore/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
