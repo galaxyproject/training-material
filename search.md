@@ -62,8 +62,7 @@ var tutorials = { {% for topic in site.data %}
 
 
 function search(idx, q){
-console.log(`Looking for ${q}`)
-	var results = idx.search(q).map(x => {
+	var results = idx.search(`*${q}*`).map(x => {
 		return tutorials['/' + x.ref.replaceAll(".md", ".html")];
 	}).filter(x => x !== undefined);
 
