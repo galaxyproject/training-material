@@ -70,7 +70,7 @@ We've provided you with experimental data to analyse from a mouse dataset of fet
 > 3. **Rename** {% icon galaxy-pencil %} the datasets `Mito-counted AnnData`
 > 4. Check that the datatype is `h5ad`
 >
->    {% snippet snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet snippets/change_datatype.md datatype="h5ad" %}
 >
 {: .hands_on}
 
