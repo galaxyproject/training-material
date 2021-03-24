@@ -407,7 +407,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 11, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 18, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -459,7 +459,6 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
         <li>Install conda (if not already installed): <code class="language-plaintext highlighter-rouge">make install-conda</code></li>
         <li>(You may need to exit the terminal and re-open for conda to be recognised. Navigate back to the same place.)</li>
         <li>Create the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_training_material</code> conda environment: <code class="language-plaintext highlighter-rouge">make create-env</code></li>
-        <li>Activate the environment: <code class="language-plaintext highlighter-rouge">conda activate <span class="notranslate">galaxy</span>_training_material</code></li>
       </ol>
     </li>
     <li>Install Jekyll and related modules into the conda environment: <code class="language-plaintext highlighter-rouge">make install</code></li>
@@ -479,7 +478,7 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
   <h3 id="hands_on-hands-on-checking-the-website-generation-locally"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Checking the website generation locally</h3>
 
   <ol>
-    <li>Run a local Jekyll server with <code class="language-plaintext highlighter-rouge">make serve</code></li>
+    <li>Run a local Jekyll server with <code class="language-plaintext highlighter-rouge">make serve-quick</code></li>
     <li>Visualize at <a href="http://localhost:4000/training-material/">http://localhost:4000/training-material/ </a></li>
     <li>Edit one of the tutorials:
       <ul>
@@ -496,29 +495,37 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
 
 </blockquote>
 
-<p>With <code class="language-plaintext highlighter-rouge">make serve</code>, a local Jekyll server will run in background. It will check the changes and regenerate the website accordingly. You may need to reload the page to see the changes (and sometimes to wait 1-2 minutes).</p>
+<p>With <code class="language-plaintext highlighter-rouge">make serve-quick</code>, a local Jekyll server will run in background. It will check the changes and regenerate the website accordingly. You may need to reload the page to see the changes (and sometimes to wait 1-2 minutes).</p>
 
 <blockquote class="tip">
   <h3 id="tip-tips"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tips</h3>
 
   <ol>
     <li>
-      <p>Running on a VM or remote machine?
-If you are not running this on your local machine, but e.g. on a VM, you may need to configure a webserver to serve the website.</p>
+      <p>Use <code class="language-plaintext highlighter-rouge">make serve</code> instead of <code class="language-plaintext highlighter-rouge">make serve-quick</code> to get all plugins, but also configure the post, host and pass additional flags. This however can be quite slow.</p>
+    </li>
+    <li>
+      <p>Need to speed up the cloning step? You coud fetch only the latest commit of the master branch:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone https://github.com/<span class="notranslate">galaxy</span>project/training-material.git --depth 1 --branch master
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Running on a VM or remote machine?</p>
+
+      <p>If you are not running this on your local machine, but e.g. on a VM, you may need to configure a webserver to serve the website.</p>
 
       <p>Below is an example NGINX configuration (e.g. in <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-enabled/default</code>)</p>
+
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>location /training-material/ {
   root /home/ubuntu/training-material/_site/;
 }
 </code></pre></div>      </div>
-      <p>(Change the <code class="language-plaintext highlighter-rouge">root</code> path above to wherever you cloned the training material folder)</p>
-    </li>
-    <li>
-      <p>Need to speed up the cloning step? You coud fetch only the latest commit of the master branch:</p>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/<span class="notranslate">galaxy</span>project/training-material.git --depth 1 --branch master
-</code></pre></div>      </div>
+
+      <p>Change the <code class="language-plaintext highlighter-rouge">root</code> path above to wherever you cloned the training material folder</p>
     </li>
   </ol>
+
 </blockquote>
 
 <h1 id="stopping-the-server">Stopping the server</h1>
@@ -608,8 +615,8 @@ If you are not running this on your local machine, but e.g. on a VM, you may nee
     author = "Bérénice Batut and Björn Grüning and Saskia Hiltemann",
     title = "Running the Galaxy Training material website locally (Galaxy Training Materials)",
     year = "2021",
-    month = "02",
-    day = "11"
+    month = "03",
+    day = "18"
     url = "\url{/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
