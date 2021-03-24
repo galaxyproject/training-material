@@ -74,7 +74,7 @@ reads, which are sequences of detected nucleotides. Depending on the
 technique these have specific lengths (30-500bp) or using Oxford
 Nanopore Technologies sequencing have much longer variable lengths.
 
-{% include snippets/illumina-miseq.md %}
+{% snippet faqs/galaxy/analysis_illumina-miseq.md %}
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -86,20 +86,21 @@ Nanopore Technologies sequencing have much longer variable lengths.
 >    {{ page.zenodo_link }}/files/DRR187559_2.fastqsanger.bz2
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Convert the datatype of this output to uncompress it
 >
->    {% include snippets/convert_datatype.md conversion="Convert compressed to uncompressed" %}
+>    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="Convert compressed to uncompressed" %}
 >
 > 4. Rename the uncompressed dataset to just the sequence run ID: `DRR187559_1` and `DRR187559_2`
 >
->    {% include snippets/rename_dataset.md name="DRR187559_1" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="DRR187559_1" %}
 >
 > 5. Tag the dataset `#unfiltered`
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 > 6. **View** {% icon galaxy-eye %} the renamed file
 >
@@ -207,7 +208,7 @@ and we will drop.
 >
 > 2. Edit the tags of the trimmomatic outputs. Remove the `#unfiltered` tag and add a new tag, `#filtered`
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 > 3. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
 >    - {% icon param-files %} *"Short read data from your current history"*: `Trimmomatic on DRR187559_1 (R1 Paired)` and `Trimmomatic on DRR187559_2 (R2 Paired)`
@@ -255,7 +256,7 @@ There are many tools that create assembly for short-read data, but in this
 tutorial Shovill will be used. Shovill is a SPAdes based genome assembler,
 improved to work faster and only for smaller (bacterial) genomes.
 
-{% include snippets/warning_results_may_vary.md %}
+{% snippet faqs/galaxy/analysis_warning_results_may_vary.md %}
 
 > ### {% icon hands_on %} Hands-on: Assembly using Shovill
 >
@@ -494,7 +495,7 @@ In the output of the JBrowse you can view the mapped reads and the found genes a
 
 If it takes too long to build the JBrowse instance, you can view an embedded one here. (**Warning**: feature name search will not work.)
 
-{% include snippets/jbrowse.html datadir="data" loc="contig00018:5488..27391" tracks="DNA,14e421a8469880793f2a8d774224e10d_0,6851a9d3f5d62263e4e4b34f1513980c_0" %}
+{% snippet topics/visualisation/faqs/visualizations_jbrowse.html datadir="data" loc="contig00018:5488..27391" tracks="DNA,14e421a8469880793f2a8d774224e10d_0,6851a9d3f5d62263e4e4b34f1513980c_0" %}
 
 # Conclusion
 {:.no_toc}
