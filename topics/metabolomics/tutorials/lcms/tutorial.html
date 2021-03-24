@@ -82,9 +82,14 @@
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
-           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQ
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/metabolomics/faqs/" title="Check our FAQs for the Metabolomics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
         <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
             <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
         </a>
@@ -453,6 +458,10 @@
                 
 
                 
+                
+                
+
+                
                     <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
@@ -584,8 +593,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -628,7 +635,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 25, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 23, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -743,16 +750,16 @@ having to launch jobs manually for each sample. You can start using the dataset 
     <li>
       <p>Create a new history for this tutorial</p>
 
-      <blockquote class="tip">  <h3 id="tip-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>    <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>    <li>Select the option <strong>Create New</strong> from the menu</li>  </ol></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panelIf the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>    <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>    <li>Select the option <strong>Create New</strong> from the menu</li>  </ol></blockquote>
     </li>
     <li>Import the 9 <code class="language-plaintext highlighter-rouge">mzXML</code> files into a collection named <code class="language-plaintext highlighter-rouge">sacurine</code>
       <ul>
         <li>Option 1: from a shared data library (ask your instructor)</li>
-        <li>
-          <p>Option 2: from Zenodo using the URLs given below</p>
+        <li>Option 2: from Zenodo using the URLs given below</li>
+      </ul>
 
-          <p><a href="https://doi.org/10.5281/zenodo.3244991"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3244991.svg" alt="DOI" /></a></p>
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3244991/files/HU_neg_048.mzML
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3244991/files/HU_neg_048.mzML
 https://zenodo.org/record/3244991/files/HU_neg_090.mzML
 https://zenodo.org/record/3244991/files/HU_neg_123.mzML
 https://zenodo.org/record/3244991/files/HU_neg_157.mzML
@@ -761,19 +768,21 @@ https://zenodo.org/record/3244991/files/HU_neg_192.mzML
 https://zenodo.org/record/3244991/files/QC1_002.mzML
 https://zenodo.org/record/3244991/files/QC1_008.mzML
 https://zenodo.org/record/3244991/files/QC1_014.mzML
-</code></pre></div>          </div>
-        </li>
-      </ul>
+</code></pre></div>      </div>
 
-      <blockquote class="tip">  <h3 id="tip-tip-importing-data-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>  <ul>    <li>Copy the link location</li>    <li>      <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>    </li>    <li>      <p>Click on <strong>Collection</strong> on the top</p>    </li>    <li>Select <strong>Paste/Fetch Data</strong></li>    <li>      <p>Paste the link into the text field</p>    </li>    <li>      <p>Change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">mzml</code></p>    </li>    <li>      <p>Press <strong>Start</strong></p>    </li>    <li>      <p>Click on <strong>Build</strong> when available</p>    </li>    <li>      <p>Enter a name for the collection</p>      <ul>        <li>sacurine</li>      </ul>    </li>    <li>Click on <strong>Create list</strong> (and wait a bit)</li>  </ul></blockquote>
-      <blockquote class="tip">  <h3 id="tip-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>    <li>      <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>    </li>    <li>      <p>Find the correct folder (ask your instructor)</p>    </li>    <li>Select the desired files</li>    <li>Click on the <strong>To History</strong> button near the top and select <strong>as a Collection</strong> from the dropdown menu</li>    <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>    <li>Click on <strong>Import</strong></li>  </ul></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>    <li>Copy the link location</li>    <li>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</li>    <li>Click on <strong>Collection</strong> on the top</li>    <li>Select <strong>Paste/Fetch Data</strong></li>    <li>Paste the link into the text field</li>    <li>Change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">mzml</code></li>    <li>Press <strong>Start</strong></li>    <li>Click on <strong>Build</strong> when available</li>    <li>Enter a name for the collection      <ul>        <li>sacurine</li>      </ul>    </li>    <li>Click on <strong>Create list</strong> (and wait a bit)</li>  </ul></blockquote>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>    <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>    <li>Find the correct folder (ask your instructor)</li>    <li>Select the desired files</li>    <li>Click on the <strong>To History</strong> button near the top and select <strong>as a Collection</strong> from the dropdown menu</li>    <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>    <li>Click on <strong>Import</strong></li>  </ul></blockquote>
     </li>
     <li>Make sure your data is in a <strong>collection</strong>. Make sure it is named <code class="language-plaintext highlighter-rouge">sacurine</code>
       <ul>
         <li>If you forgot to select the collection option during import, you can create the collection now:</li>
       </ul>
 
-      <blockquote class="tip">  <h3 id="tip-tip-creating-a-dataset-collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a dataset collection</h3>  <ul>    <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="../../../galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>    <li>Check all the datasets in your history you would like to include</li>    <li>      <p>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong></p>      <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>    </li>    <li>Enter a name for your collection</li>    <li>Click <strong>Create List</strong> to build your collection</li>    <li>Click on the checkmark icon at the top of your history again</li>  </ul></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-dataset-collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a dataset collection</h3>  <ul>    <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>    <li>Check all the datasets in your history you would like to include</li>    <li>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></li>    <li>Enter a name for your collection</li>    <li>Click <strong>Create List</strong> to build your collection</li>    <li>Click on the checkmark icon at the top of your history again</li>  </ul></blockquote>
     </li>
   </ol>
 </blockquote>
@@ -796,10 +805,11 @@ https://zenodo.org/record/3244991/files/QC1_014.mzML
       <ul>
         <li><em>“File(s) from your history containing your chromatograms”</em>: the <code class="language-plaintext highlighter-rouge">sacurine</code> dataset collection</li>
       </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-selecting-a-datast-collection-as-input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Selecting a datast collection as input</h3>  <ol>    <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in front of the input parameter you want to supply the collection to.</li>    <li>Select the collection you want to use from the list</li>  </ol></blockquote>
     </li>
   </ol>
-
-  <blockquote class="tip">  <h3 id="tip-tip-selecting-a-dataset-collection-as-input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Selecting a dataset collection as input</h3>  <ol>    <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> infront of the input parameter you want to supply the collection to.</li>    <li>Select the collection you want to use from the list</li>  </ol></blockquote>
 
   <blockquote class="question">
     <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -1162,15 +1172,19 @@ be uploaded into <span class="notranslate">Galaxy</span>.</p>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3244991/files/sampleMetadata_completed.tsv
 </code></pre></div>      </div>
 
-      <blockquote class="tip">  <h3 id="tip-tip-importing-data-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>  <ul>    <li>Copy the link location</li>    <li>      <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>    </li>    <li>Select <strong>Paste/Fetch Data</strong></li>    <li>      <p>Paste the link into the text field</p>    </li>    <li>      <p>Press <strong>Start</strong></p>    </li>    <li><strong>Close</strong> the window</li>  </ul>  <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p></blockquote>
-      <blockquote class="tip">  <h3 id="tip-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>    <li>      <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>    </li>    <li>      <p>Find the correct folder (ask your instructor)</p>    </li>    <li>Select the desired files</li>    <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>    <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>    <li>Click on <strong>Import</strong></li>  </ul></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>    <li>Copy the link location</li>    <li>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</li>    <li>Select <strong>Paste/Fetch Data</strong></li>    <li>Paste the link into the text field</li>    <li>Press <strong>Start</strong></li>    <li><strong>Close</strong> the windowBy default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li>  </ul></blockquote>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>    <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>    <li>Find the correct folder (ask your instructor)</li>    <li>Select the desired files</li>    <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>    <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>    <li>Click on <strong>Import</strong></li>  </ul></blockquote>
     </li>
     <li>Check the data type of your imported files.
       <ul>
         <li>The datatype should be <code class="language-plaintext highlighter-rouge">tabular</code>, if this is not the case, please change the datatype now</li>
       </ul>
 
-      <blockquote class="tip">  <h3 id="tip-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>    <li>Select ``</li>    <li>Click the <strong>Change datatype</strong> button</li>  </ul></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>    <li>Select  your desired datatype</li>    <li>Click the <strong>Change datatype</strong> button</li>  </ul></blockquote>
 
       <blockquote class="comment">
         <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
@@ -1185,7 +1199,8 @@ right away if you happen to get one of these obvious issues.</p>
     <li>
       <p>Rename your sampleMetadata file with a shorter name ‘sampleMetadata_completed.tsv’</p>
 
-      <blockquote class="tip">  <h3 id="tip-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, change the <strong>Name</strong> field</li>    <li>Click the <strong>Save</strong> button</li>  </ul></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, change the <strong>Name</strong> field</li>    <li>Click the <strong>Save</strong> button</li>  </ul></blockquote>
     </li>
   </ol>
 
@@ -1238,7 +1253,8 @@ The tool automatically takes the second column as colour groups when a file is p
         <li><em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">sampleMetadata_completed.tsv</code> you uploaded previously</li>
       </ul>
 
-      <blockquote class="tip">  <h3 id="tip-tip-selecting-a-dataset-collection-as-input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Selecting a dataset collection as input</h3>  <ol>    <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> infront of the input parameter you want to supply the collection to.</li>    <li>Select the collection you want to use from the list</li>  </ol></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-selecting-a-datast-collection-as-input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Selecting a datast collection as input</h3>  <ol>    <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in front of the input parameter you want to supply the collection to.</li>    <li>Select the collection you want to use from the list</li>  </ol></blockquote>
 
       <blockquote class="comment">
         <h3 id="comment-comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
@@ -1350,7 +1366,8 @@ the Merger tool.</p>
         <li><em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">Nothing selected</code></li>
       </ul>
 
-      <blockquote class="tip">  <h3 id="tip-tip-selecting-a-dataset-collection-as-input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Selecting a dataset collection as input</h3>  <ol>    <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> infront of the input parameter you want to supply the collection to.</li>    <li>Select the collection you want to use from the list</li>  </ol></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-selecting-a-datast-collection-as-input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Selecting a datast collection as input</h3>  <ol>    <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in front of the input parameter you want to supply the collection to.</li>    <li>Select the collection you want to use from the list</li>  </ol></blockquote>
     </li>
   </ol>
 
@@ -1428,7 +1445,7 @@ previous peak group, thus not assigned to any peak group due to the 0.5 minimum 
 </blockquote>
 
 <p>When looking at the plots from plotChromPeakDensity.pdf, we can notice that in some cases there seems to be a small drift of retention time for some samples.
-This phenomenon is well known with LC-MS techniques. To be able to attribute correct groups for peaks, it may be needed to perform some retention time 
+This phenomenon is well known with LC-MS techniques. To be able to attribute correct groups for peaks, it may be needed to perform some retention time
 correction accross samples. Thus, the idea is (when needed) to apply a retention time strategy on the output of your grouping step, then to perform
 a second grouping step on the corrected data.</p>
 
@@ -1736,16 +1753,21 @@ long and thus may reduce the names’ readability. Hence, we highly recommend yo
   <h3 id="hands_on-hands-on-copying-the-3-tables-into-a-new-history-and-renaming-them"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Copying the 3 tables into a new history and renaming them</h3>
 
   <ol>
-    <li>Create a new history with the 3 tables
-      <blockquote class="tip">  <h3 id="tip-tip-copy-dataset-to-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Copy dataset to a new history</h3>  <ol>    <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>    <li>Click on <strong>Copy Dataset</strong></li>    <li>      <p>Select the desired files</p>    </li>    <li>      <p>“New history name:” <code class="language-plaintext highlighter-rouge">Sacurine Processing</code></p>    </li>    <li>Click on the new history name in the green box that have just appear to switch to this history</li>  </ol></blockquote>
+    <li>
+      <p>Create a new history with the 3 tables</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-copy-a-dataset-to-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Copy a dataset to a new history</h3>  <ol>    <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>    <li>Click on <strong>Copy Dataset</strong></li>    <li>Select the desired files</li>    <li>“New history name:” <code class="language-plaintext highlighter-rouge">Sacurine Processing</code></li>    <li>Click on the new history name in the green box that have just appear to switch to this history</li>  </ol></blockquote>
     </li>
-    <li>Rename the 3 tables with shorter names:
+    <li>
+      <p>Rename the 3 tables with shorter names:</p>
       <ul>
         <li><code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.adjustRtime.groupChromPeaks.fillpeaks.dataMatrix.tsv</code> -&gt; <strong>dataMatrix.tsv</strong></li>
         <li><code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.*.fillChromPeaks.annotate.variableMetadata.tsv</code> -&gt; <strong>variableMetadata.tsv</strong></li>
       </ul>
 
-      <blockquote class="tip">  <h3 id="tip-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, change the <strong>Name</strong> field</li>    <li>Click the <strong>Save</strong> button</li>  </ul></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, change the <strong>Name</strong> field</li>    <li>Click the <strong>Save</strong> button</li>  </ul></blockquote>
     </li>
   </ol>
 
@@ -2009,7 +2031,7 @@ statistical analysis, and you do not need the pools anymore since they do not pa
     <ol>
       <li>The <em>0.3</em> value corresponds to the maximum value kept in the dataset (‘Interval of values to remove: <em>upper</em>’) regarding the
 <em>poolCV</em> column in your <em>Variable metadata</em> file. As mentioned previously in ‘Step 1: global variability in the data’ section,
-pool CV values are commonly considered as reflecting unstable ions when superior to 0.3. 
+pool CV values are commonly considered as reflecting unstable ions when superior to 0.3.
 Although the signal drift correction decreased the proportion of ions with pool CV &gt; 30% from 74% to 53%, we still need to get
 rid of these remaining unstable ions for which sample comparisons would be difficult and at high risk of being unreliable.</li>
       <li>The <em>1.0</em> value corresponds to the maximum value kept in the dataset (‘Interval of values to remove: <em>upper</em>’) regarding the
@@ -2066,7 +2088,7 @@ and the ions that we have in our dataset. For this calculation we can use the <s
 based on a relevant statistical strategy (which would more likely be to <em>use</em> multiple testing correction). It is based on
 the fact that with only 6 biological samples in a dataset of 2706 ions it is almost impossible to settle for correlation
 coefficients significantly different from zero. Consequently, to illustrate better the filtering step that will follow,
-we chose not to apply the multiple testing correction, allowing us to obtain something that looks like ‘significant’ results 
+we chose not to apply the multiple testing correction, allowing us to obtain something that looks like ‘significant’ results
 regarding statistical indices.</p>
       </blockquote>
     </li>
@@ -2178,7 +2200,7 @@ an adequate reference bank online. However, it is also possible that none of the
 case, you may need to construct your own database, to be able to search for relevant matches for your ions of interest.</p>
 
 <p>In this tutorial, we chose the ‘easy’ case of human urinary samples. Thus, one possibility we have is to use the online reference
-bank HMDB (The Human Metabolome Database). Let’s try requesting directly into this widely used bank using the <strong>HMDB MS search</strong> 
+bank HMDB (The Human Metabolome Database). Let’s try requesting directly into this widely used bank using the <strong>HMDB MS search</strong>
 <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool.</p>
 
 <blockquote class="notranslate hands_on">
@@ -2243,6 +2265,11 @@ and create, run and share!</p>
                         </ul>
                     </blockquote>
                     
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/metabolomics/faqs/">FAQ page for the Metabolomics topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
                     
 
@@ -2372,8 +2399,8 @@ and create, run and share!</p>
     author = "Mélanie Petera and Gildas Le Corguillé and Jean-François Martin and Yann Guitton and Workflow4Metabolomics core team",
     title = "Mass spectrometry: LC-MS analysis (Galaxy Training Materials)",
     year = "2021",
-    month = "02",
-    day = "25"
+    month = "03",
+    day = "23"
     url = "\url{/training-material/topics/metabolomics/tutorials/lcms/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

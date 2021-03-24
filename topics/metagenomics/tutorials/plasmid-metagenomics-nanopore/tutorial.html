@@ -82,9 +82,14 @@
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
-           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQ
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/metagenomics/faqs/" title="Check our FAQs for the Metagenomics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
         <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
             <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
         </a>
@@ -443,6 +448,10 @@
                 
 
                 
+                
+                
+
+                
                     <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
@@ -578,8 +587,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -626,7 +633,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 25, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 23, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -698,7 +705,8 @@ The <span class="notranslate">downstream</span> analysis will use <strong>Nanopl
 
 </blockquote>
 
-<blockquote class="comment">  <h3 id="comment-note-results-may-vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note: results may vary</h3>  <p>Your results may be slightly different from the ones presented in this tutorialdue to differing versions of tools, reference data, exte<span class="notranslate">rna</span>l databases, orbecause of stochastic processes in the algorithms.</p></blockquote>
+<!--SNIPPET-->
+<blockquote class="comment">  <h3 data-toc-skip="" id="-results-may-vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Results may vary</h3>  <p>Your results may be slightly different from the ones presented in this tutorialdue to differing versions of tools, reference data, exte<span class="notranslate">rna</span>l databases, orbecause of stochastic processes in the algorithms.</p></blockquote>
 
 <p>In this tutorial we use metagenomic Nanopore data, but similar pipelines can be used for other types of datasets or other long-read sequencing platforms.</p>
 
@@ -734,7 +742,8 @@ We will use the plasmid dataset created by <a class="citation" href="#LiXie2018"
     <li>
       <p>Make sure you have an empty analysis history. Give it a name.</p>
 
-      <blockquote class="tip">  <h3 id="tip-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>    <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>    <li>Select the option <strong>Create New</strong> from the menu</li>  </ol></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panelIf the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>    <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>    <li>Select the option <strong>Create New</strong> from the menu</li>  </ol></blockquote>
     </li>
     <li><strong>Import Sample Data</strong> <a href="https://doi.org/10.5281/zenodo.3247504"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3247504.svg" alt="DOI" /></a>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3247504/files/RB01.fasta
@@ -744,12 +753,15 @@ https://zenodo.org/record/3247504/files/RB05.fasta
 https://zenodo.org/record/3247504/files/RB10.fasta
 https://zenodo.org/record/3247504/files/RB12.fasta
 </code></pre></div>      </div>
-      <blockquote class="tip">  <h3 id="tip-tip-importing-data-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>  <ul>    <li>Copy the link location</li>    <li>      <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>    </li>    <li>Select <strong>Paste/Fetch Data</strong></li>    <li>      <p>Paste the link into the text field</p>    </li>    <li>      <p>Press <strong>Start</strong></p>    </li>    <li><strong>Close</strong> the window</li>  </ul>  <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p></blockquote>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>    <li>Copy the link location</li>    <li>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</li>    <li>Select <strong>Paste/Fetch Data</strong></li>    <li>Paste the link into the text field</li>    <li>Press <strong>Start</strong></li>    <li><strong>Close</strong> the windowBy default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li>  </ul></blockquote>
     </li>
     <li>
       <p><strong>Build a list collection</strong> containing all fasta files. Name it <code class="language-plaintext highlighter-rouge">Plasmids</code></p>
 
-      <blockquote class="tip">  <h3 id="tip-tip-creating-a-dataset-collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a dataset collection</h3>  <ul>    <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="../../../galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>    <li>Check all the datasets in your history you would like to include</li>    <li>      <p>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong></p>      <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>    </li>    <li>Enter a name for your collection</li>    <li>Click <strong>Create List</strong> to build your collection</li>    <li>Click on the checkmark icon at the top of your history again</li>  </ul></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-dataset-collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a dataset collection</h3>  <ul>    <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>    <li>Check all the datasets in your history you would like to include</li>    <li>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></li>    <li>Enter a name for your collection</li>    <li>Click <strong>Create List</strong> to build your collection</li>    <li>Click on the checkmark icon at the top of your history again</li>  </ul></blockquote>
     </li>
   </ol>
 
@@ -776,7 +788,8 @@ report page.</p>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“files”</em>: The <code class="language-plaintext highlighter-rouge">Plasmids</code> dataset collection you just created</li>
       </ul>
 
-      <blockquote class="tip">  <h3 id="tip-tip-selecting-a-dataset-collection-as-input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Selecting a dataset collection as input</h3>  <ol>    <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> infront of the input parameter you want to supply the collection to.</li>    <li>Select the collection you want to use from the list</li>  </ol></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-selecting-a-datast-collection-as-input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Selecting a datast collection as input</h3>  <ol>    <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in front of the input parameter you want to supply the collection to.</li>    <li>Select the collection you want to use from the list</li>  </ol></blockquote>
     </li>
   </ol>
 
@@ -849,7 +862,8 @@ the Minimap2 publication (<a class="citation" href="#Li2018">Li 2018</a>).</p>
         </li>
       </ul>
 
-      <blockquote class="tip">  <h3 id="tip-tip-selecting-a-dataset-collection-as-input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Selecting a dataset collection as input</h3>  <ol>    <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> infront of the input parameter you want to supply the collection to.</li>    <li>Select the collection you want to use from the list</li>  </ol></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-selecting-a-datast-collection-as-input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Selecting a datast collection as input</h3>  <ol>    <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in front of the input parameter you want to supply the collection to.</li>    <li>Select the collection you want to use from the list</li>  </ol></blockquote>
     </li>
   </ol>
 
@@ -960,7 +974,8 @@ Thus the per-base error rate is similar to the raw input <span class="notranslat
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“PAF file”</em>: <code class="language-plaintext highlighter-rouge">Output Minimap dataset collection</code> created by <strong>Minimap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
 
-      <blockquote class="tip">  <h3 id="tip-tip-selecting-a-dataset-collection-as-input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Selecting a dataset collection as input</h3>  <ol>    <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> infront of the input parameter you want to supply the collection to.</li>    <li>Select the collection you want to use from the list</li>  </ol></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-selecting-a-datast-collection-as-input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Selecting a datast collection as input</h3>  <ol>    <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in front of the input parameter you want to supply the collection to.</li>    <li>Select the collection you want to use from the list</li>  </ol></blockquote>
     </li>
   </ol>
 
@@ -1024,7 +1039,8 @@ Hint: run <strong>Nanoplot</strong> <i class="fas fa-wrench" aria-hidden="true">
         </li>
       </ul>
 
-      <blockquote class="tip">  <h3 id="tip-tip-selecting-a-dataset-collection-as-input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Selecting a dataset collection as input</h3>  <ol>    <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> infront of the input parameter you want to supply the collection to.</li>    <li>Select the collection you want to use from the list</li>  </ol></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-selecting-a-datast-collection-as-input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Selecting a datast collection as input</h3>  <ol>    <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in front of the input parameter you want to supply the collection to.</li>    <li>Select the collection you want to use from the list</li>  </ol></blockquote>
     </li>
   </ol>
 
@@ -1151,8 +1167,11 @@ This is not the case for most of the samples, but we will improve our assemblies
         <li>Tip: Search your history for the term <code class="language-plaintext highlighter-rouge">bandage</code> to easily find the outputs from our two bandage runs</li>
       </ul>
 
-      <blockquote class="tip">  <h3 id="tip-tip-using-the-scratchbook-to-view-multiple-datasets-at-once"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Using the Scratchbook to view multiple datasets at once</h3>  <p>If you would like to view two or more datasets at once, you can use the <strong>Scratchbook</strong> feature in <span class="notranslate">Galaxy</span>:</p>  <ol>    <li><strong>Click</strong> on the <em>Scratchbook</em> icon <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-scratchbook</span> on the top menu bar.      <ul>        <li>You should see a little checkmark on the icon now</li>      </ul>    </li>    <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> a dataset by clicking on the eye icon <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> to view the output      <ul>        <li>You should see the output in a window overlayed over <span class="notranslate">Galaxy</span></li>        <li>You can resize this window by dragging the bottom-right corner</li>      </ul>    </li>    <li><strong>Click</strong> outside the file to exit the Scratchbook</li>    <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> a second dataset from your history      <ul>        <li>You should now see a second window with the new dataset</li>        <li>This makes it easier to compare the two outputs</li>      </ul>    </li>    <li>Repeat this for as many files as you would like to compare</li>    <li>You can turn off the <strong>Scratchbook</strong> <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-scratchbook</span> by clicking on the icon again</li>  </ol></blockquote>
-      <blockquote class="tip">  <h3 id="tip-tip-searching-your-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Searching your history</h3>  <p>To make it easier to find datasets in large histories, you can filter your history by keywords as follows:</p>  <ol>    <li>      <p><strong>Click</strong> on the <em>search datasets</em> box at the top of the history panel.</p>      <p><img src="/training-material/shared/images/history_search_datasets.png" alt="history search box" /></p>    </li>    <li><strong>Type</strong> a search term in this box      <ul>        <li>For example a tool name, or sample name</li>      </ul>    </li>    <li>To undo the filtering and show your full history again, press on the <em>clear search</em> button <i class="fas fa-times-circle" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-clear</span> next to the search box</li>  </ol></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-using-the-scratchbook-to-view-multiple-datasets"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using the Scratchbook to view multiple datasets</h3>  <p>If you would like to view two or more datasets at once, you can use the <strong>Scratchbook</strong> feature in <span class="notranslate">Galaxy</span>:</p>  <ol>    <li><strong>Click</strong> on the <em>Scratchbook</em> icon <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-scratchbook</span> on the top menu bar.      <ul>        <li>You should see a little checkmark on the icon now</li>      </ul>    </li>    <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> a dataset by clicking on the eye icon <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> to view the output      <ul>        <li>You should see the output in a window overlayed over <span class="notranslate">Galaxy</span></li>        <li>You can resize this window by dragging the bottom-right corner</li>      </ul>    </li>    <li><strong>Click</strong> outside the file to exit the Scratchbook</li>    <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> a second dataset from your history      <ul>        <li>You should now see a second window with the new dataset</li>        <li>This makes it easier to compare the two outputs</li>      </ul>    </li>    <li>Repeat this for as many files as you would like to compare</li>    <li>You can turn off the <strong>Scratchbook</strong> <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-scratchbook</span> by clicking on the icon again</li>  </ol></blockquote>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-searching-your-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Searching your history</h3>  <p>To make it easier to find datasets in large histories, you can filter your history by keywords as follows:</p>  <ol>    <li><strong>Click</strong> on the <em>search datasets</em> box at the top of the history panel.<img src="/training-material/shared/images/history_search_datasets.png" alt="history search box" /></li>    <li><strong>Type</strong> a search term in this box      <ul>        <li>For example a tool name, or sample name</li>      </ul>    </li>    <li>To undo the filtering and show your full history again, press on the <em>clear search</em> button <i class="fas fa-times-circle" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-clear</span> next to the search box</li>  </ol></blockquote>
     </li>
     <li>
       <p>Repeat this comparison for the other samples.</p>
@@ -1335,6 +1354,11 @@ may provide further insight.</p>
                         </ul>
                     </blockquote>
                     
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/metagenomics/faqs/">FAQ page for the Metagenomics topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
                     
                     <h1 data-toc-skip>Useful literature</h1>
@@ -1630,8 +1654,8 @@ may provide further insight.</p>
     author = "Willem de Koning and Saskia Hiltemann",
     title = "Antibiotic resistance detection (Galaxy Training Materials)",
     year = "2021",
-    month = "02",
-    day = "25"
+    month = "03",
+    day = "23"
     url = "\url{/training-material/topics/metagenomics/tutorials/plasmid-metagenomics-nanopore/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

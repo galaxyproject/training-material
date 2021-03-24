@@ -82,9 +82,14 @@
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
-           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQ
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/climate/faqs/" title="Check our FAQs for the Climate topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
         <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
             <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
         </a>
@@ -595,6 +600,10 @@
                 
 
                 
+                
+                
+
+                
                     <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
@@ -618,7 +627,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 25, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 23, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -675,7 +684,7 @@
 FATES needs what we call a “Host Land Model” (HLM) to run and in this tutorial
 we will be using the <a href="http://www.cesm.ucar.edu/models/clm/">Community Land Model</a>
 of the <a href="https://github.com/ESCOMP/CTSM">Community Terrestrial Systems Model</a> (CLM-CTSM).
-FATES was derived from the CLM Ecosystem Demography model (CLM(ED)), which was documented in 
+FATES was derived from the CLM Ecosystem Demography model (CLM(ED)), which was documented in
 <a class="citation" href="#Fisher2015"><b>Taking off the training wheels: the properties of a dynamic vegetation model without climate envelopes, CLM4.5(ED)</b> 2015</a>.
 and this technical note was first published as an appendix to <a href="https://pdfs.semanticscholar.org/396c/b9f172cb681421ed78325a2237bfb428eece.pdf">that paper</a>.
 The <a href="https://fates-docs.readthedocs.io/en/latest/index.html">FATES documentation</a> will provide some more insight on FATES too.</p>
@@ -697,7 +706,7 @@ This interactive tool is only available from <a href="https://live.usegalaxy.eu/
 </ul>
 
 <p>The main advantage over the <span class="notranslate">Galaxy</span> CLM-FATES tool is that you can run any versions of FATES, including developments
-that are not released yet. However, it is not recommended to run more than a few decades of simulation time. 
+that are not released yet. However, it is not recommended to run more than a few decades of simulation time.
 In that particular case, we would suggest to use the <span class="notranslate">Galaxy</span> CLM-FATES <span class="notranslate">Galaxy</span> tool.</p>
 
 <blockquote class="comment">
@@ -714,8 +723,11 @@ stopping your JupyterLab.</p>
   <h2 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h2>
 
   <ol>
-    <li>Create a new history for this tutorial. If you are not inspired, you can name it <em>fates-jupyterlab</em>.
-      <blockquote class="tip">  <h3 id="tip-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>    <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>    <li>Select the option <strong>Create New</strong> from the menu</li>  </ol></blockquote>
+    <li>
+      <p>Create a new history for this tutorial. If you are not inspired, you can name it <em>fates-jupyterlab</em>.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panelIf the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>    <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>    <li>Select the option <strong>Create New</strong> from the menu</li>  </ol></blockquote>
     </li>
     <li>
       <p>Import the files from <a href="https://doi.org/10.5281/zenodo.4108341">Zenodo</a> or from the shared data library</p>
@@ -723,13 +735,17 @@ stopping your JupyterLab.</p>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar
 </code></pre></div>      </div>
 
-      <blockquote class="tip">  <h3 id="tip-tip-importing-data-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>  <ul>    <li>Copy the link location</li>    <li>      <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>    </li>    <li>Select <strong>Paste/Fetch Data</strong></li>    <li>      <p>Paste the link into the text field</p>    </li>    <li>      <p>Press <strong>Start</strong></p>    </li>    <li><strong>Close</strong> the window</li>  </ul>  <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p></blockquote>
-      <blockquote class="tip">  <h3 id="tip-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>    <li>      <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>    </li>    <li>      <p>Find the correct folder (ask your instructor)</p>    </li>    <li>Select the desired files</li>    <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>    <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>    <li>Click on <strong>Import</strong></li>  </ul></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>    <li>Copy the link location</li>    <li>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</li>    <li>Select <strong>Paste/Fetch Data</strong></li>    <li>Paste the link into the text field</li>    <li>Press <strong>Start</strong></li>    <li><strong>Close</strong> the windowBy default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li>  </ul></blockquote>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>    <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>    <li>Find the correct folder (ask your instructor)</li>    <li>Select the desired files</li>    <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>    <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>    <li>Click on <strong>Import</strong></li>  </ul></blockquote>
     </li>
     <li>
       <p>Check the datatype is <strong>tar</strong></p>
 
-      <blockquote class="tip">  <h3 id="tip-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>    <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code></li>    <li>Click the <strong>Change datatype</strong> button</li>  </ul></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>    <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code></li>    <li>Click the <strong>Change datatype</strong> button</li>  </ul></blockquote>
     </li>
     <li>
       <p>Rename Datasets</p>
@@ -737,12 +753,14 @@ stopping your JupyterLab.</p>
       <p>As “https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar” is not a beautiful name and can give errors for some tools,
 it is a good practice to change the dataset name by something more meaningfull. For example by removing <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/4108341/files/</code> to obtain <code class="language-plaintext highlighter-rouge">inputdata_version2.0.0_ALP1.tar</code>, respectively.</p>
 
-      <blockquote class="tip">  <h3 id="tip-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, change the <strong>Name</strong> field</li>    <li>Click the <strong>Save</strong> button</li>  </ul></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, change the <strong>Name</strong> field</li>    <li>Click the <strong>Save</strong> button</li>  </ul></blockquote>
     </li>
     <li>
       <p>Add a tag to the dataset corresponding to <code class="language-plaintext highlighter-rouge">fates-jupyterlab</code></p>
 
-      <blockquote class="tip">  <h3 id="tip-tip-adding-a-tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Adding a tag</h3>  <ul>    <li>Click on the dataset</li>    <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>    <li>      <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>      <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>    </li>    <li>Check that the tag is appearing below the dataset name</li>  </ul></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-adding-a-tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag</h3>  <ul>    <li>Click on the dataset</li>    <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>    <li>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code>  Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</li>    <li>Check that the tag is appearing below the dataset name</li>  </ul></blockquote>
     </li>
   </ol>
 
@@ -835,7 +853,7 @@ conda create --name fates -y fates-emerald=2.0.1
   <p>The command above is required once only. It creates a new conda environment called <strong>fates</strong> and
 install <strong>fates-emerald</strong> version 2.0.1 conda package. It is important to always specify the version of
 CLM-FATES you would like to use as it needs to match your input dataset.
-Now a new <strong>fates</strong> conda environment has been 
+Now a new <strong>fates</strong> conda environment has been
 created in your current JupyterLab session and can be use every time you activate it.</p>
 
   <p>Then to activate this new conda environment:</p>
@@ -937,7 +955,7 @@ tutorial.</p>
     <li>From a new code cell:</li>
   </ol>
 
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%%bash 
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%%bash
 
 cd $HOME/work/fates_alp1
 ls -la
@@ -993,7 +1011,7 @@ path = os.path.join(os.getenv('HOME'), 'archive', case, 'lnd', 'hist')
 dset = xr.open_mfdataset(path + '/*.nc', combine='by_coords')
 dset
 </code></pre></div>  </div>
-  <p>As shown above, we are now using Python 3 for analyzing the results and <a href="http://xarray.pydata.org/en/stable/">xarray</a> which 
+  <p>As shown above, we are now using Python 3 for analyzing the results and <a href="http://xarray.pydata.org/en/stable/">xarray</a> which
 is a Python package that can easily handle <a href="https://en.wikipedia.org/wiki/NetCDF">netCDF</a> files.
 we opened all the history files we have produced and print metadata.</p>
 
@@ -1023,13 +1041,13 @@ We also changed the aspect of the plot (aspect=3, size=6).</p>
 source activate fates
 cd $HOME/ctsm_cases/fates_alp1
 
-./xmlchange RUN_STARTDATE=0001-01-01      # set up the starting date of your simulation 
+./xmlchange RUN_STARTDATE=0001-01-01      # set up the starting date of your simulation
 ./xmlchange STOP_OPTION=nyears            # set the simulation periods to "years"
 ./xmlchange STOP_N=5                      # set the length of simulation, i.e, how many years
 ./xmlchange CONTINUE_RUN=TRUE             # if you want to continue your simulation from restart file, set it to TRUE
 ./xmlchange RESUBMIT=1                    # set up how many times you want to resubmit your simulation.
-                                          # e.g, STOP_N=5, RESUBMIT=1, you will have simulation for 5+5*1=10 
-./xmlchange DATM_CLMNCEP_YR_START=1901    # set up the start year of the atmospheric forcing 
+                                          # e.g, STOP_N=5, RESUBMIT=1, you will have simulation for 5+5*1=10
+./xmlchange DATM_CLMNCEP_YR_START=1901    # set up the start year of the atmospheric forcing
 ./xmlchange DATM_CLMNCEP_YR_END=1910      # set up the end year of the atmospheric forcing
 ./case.submit &gt; case_submit_sontinue_run.out 2&gt;&amp;1
 </code></pre></div>  </div>
@@ -1196,7 +1214,7 @@ find . -name create_newcase
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./cime/scripts/create_newcase --case $HOME/ctsm_cases/fates_alp1_local --compset 2000_DATM%1PTGSWP3_CLM50%FATES_SICE_SOCN_MOSART_SGLC_SWAV --res 1x1_ALP1 --machine espresso --run-unsupported
 
 </code></pre></div>  </div>
-  <p>Finally, if you wish to make changes to the source code, we recommend first to add your changes in different folder and use the option <code class="language-plaintext highlighter-rouge">--user-mods-dir</code> when 
+  <p>Finally, if you wish to make changes to the source code, we recommend first to add your changes in different folder and use the option <code class="language-plaintext highlighter-rouge">--user-mods-dir</code> when
 creating your case. In addition, you should make sure to use version control to save your changes.
 If you are not familiar with <code class="language-plaintext highlighter-rouge">git</code>, you could also save your changes in the corresponding <span class="notranslate">Galaxy</span> history.</p>
 </blockquote>
@@ -1223,6 +1241,11 @@ If you are not familiar with <code class="language-plaintext highlighter-rouge">
                         </ul>
                     </blockquote>
                     
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/climate/faqs/">FAQ page for the Climate topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
                     
 
@@ -1292,8 +1315,8 @@ If you are not familiar with <code class="language-plaintext highlighter-rouge">
     author = "Anne Fouilloux",
     title = "Functionally Assembled Terrestrial Ecosystem Simulator (FATES) with Galaxy Climate JupyterLab (Galaxy Training Materials)",
     year = "2021",
-    month = "02",
-    day = "25"
+    month = "03",
+    day = "23"
     url = "\url{/training-material/topics/climate/tutorials/fates-jupyterlab/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

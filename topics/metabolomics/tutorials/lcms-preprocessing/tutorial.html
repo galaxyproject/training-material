@@ -82,9 +82,14 @@
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
-           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQ
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/metabolomics/faqs/" title="Check our FAQs for the Metabolomics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
         <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
             <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
         </a>
@@ -447,6 +452,10 @@
                 
 
                 
+                
+                
+
+                
                     <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
@@ -470,7 +479,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 25, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 23, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -489,7 +498,7 @@ It focuses on studying the very small molecules which are called <em>metabolites
 <p>One of the three main technologies used to perform metabolomic analyses is <strong>Liquid-Chromatography Mass Spectrometry</strong> (LC-MS). Data analysis
 for this technology requires a large variety of steps, ranging from extracting information from the raw data to statistical analysis and annotation.
 To be able to perform a complete LC-MS analysis in a single environment, the <a href="http://workflow4metabolomics.org/">Wokflow4Metabolomics</a>
-team provides <span class="notranslate">Galaxy</span> tools dedicated to metabolomics. This tutorial details the steps involved in the first part of untargeted LC-MS 
+team provides <span class="notranslate">Galaxy</span> tools dedicated to metabolomics. This tutorial details the steps involved in the first part of untargeted LC-MS
 data processing: extracting information from raw data to obtain what is called a peak table. This step is commonly refered to as
 the preprocessing step. This tutorial will show you how to perform such a step using the <span class="notranslate">Galaxy</span> implementation of the XCMS software.</p>
 
@@ -587,7 +596,8 @@ having to launch jobs manually for each sample. You can start using the dataset 
     <li>
       <p>Create a new history for this tutorial</p>
 
-      <blockquote class="tip">  <h3 id="tip-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>    <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>    <li>Select the option <strong>Create New</strong> from the menu</li>  </ol></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panelIf the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>    <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>    <li>Select the option <strong>Create New</strong> from the menu</li>  </ol></blockquote>
     </li>
     <li>Import the 12 <code class="language-plaintext highlighter-rouge">mzXML</code> files into a collection named <code class="language-plaintext highlighter-rouge">mzML</code>
       <ul>
@@ -612,15 +622,19 @@ https://zenodo.org/record/3757956/files/QC1_014.mzML
         </li>
       </ul>
 
-      <blockquote class="tip">  <h3 id="tip-tip-importing-data-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>  <ul>    <li>Copy the link location</li>    <li>      <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>    </li>    <li>      <p>Click on <strong>Collection</strong> on the top</p>    </li>    <li>Select <strong>Paste/Fetch Data</strong></li>    <li>      <p>Paste the link into the text field</p>    </li>    <li>      <p>Change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">mzml</code></p>    </li>    <li>      <p>Press <strong>Start</strong></p>    </li>    <li>      <p>Click on <strong>Build</strong> when available</p>    </li>    <li>      <p>Enter a name for the collection</p>      <ul>        <li>mzML</li>      </ul>    </li>    <li>Click on <strong>Create list</strong> (and wait a bit)</li>  </ul></blockquote>
-      <blockquote class="tip">  <h3 id="tip-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>    <li>      <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>    </li>    <li>      <p>Find the correct folder (ask your instructor)</p>    </li>    <li>Select the desired files</li>    <li>Click on the <strong>To History</strong> button near the top and select <strong>as a Collection</strong> from the dropdown menu</li>    <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>    <li>Click on <strong>Import</strong></li>  </ul></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>    <li>Copy the link location</li>    <li>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</li>    <li>Click on <strong>Collection</strong> on the top</li>    <li>Select <strong>Paste/Fetch Data</strong></li>    <li>Paste the link into the text field</li>    <li>Change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">mzml</code></li>    <li>Press <strong>Start</strong></li>    <li>Click on <strong>Build</strong> when available</li>    <li>Enter a name for the collection      <ul>        <li>mzML</li>      </ul>    </li>    <li>Click on <strong>Create list</strong> (and wait a bit)</li>  </ul></blockquote>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>    <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>    <li>Find the correct folder (ask your instructor)</li>    <li>Select the desired files</li>    <li>Click on the <strong>To History</strong> button near the top and select <strong>as a Collection</strong> from the dropdown menu</li>    <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>    <li>Click on <strong>Import</strong></li>  </ul></blockquote>
     </li>
     <li>Make sure your data is in a <strong>collection</strong>. Make sure it is named <code class="language-plaintext highlighter-rouge">mzML</code>
       <ul>
         <li>If you forgot to select the collection option during import, you can create the collection now:</li>
       </ul>
 
-      <blockquote class="tip">  <h3 id="tip-tip-creating-a-dataset-collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a dataset collection</h3>  <ul>    <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="../../../galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>    <li>Check all the datasets in your history you would like to include</li>    <li>      <p>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong></p>      <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>    </li>    <li>Enter a name for your collection</li>    <li>Click <strong>Create List</strong> to build your collection</li>    <li>Click on the checkmark icon at the top of your history again</li>  </ul></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-dataset-collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a dataset collection</h3>  <ul>    <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>    <li>Check all the datasets in your history you would like to include</li>    <li>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></li>    <li>Enter a name for your collection</li>    <li>Click <strong>Create List</strong> to build your collection</li>    <li>Click on the checkmark icon at the top of your history again</li>  </ul></blockquote>
     </li>
   </ol>
 
@@ -650,12 +664,16 @@ this step corresponds to the dataset collection number 13.</p>
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-msnbase-readmsdata"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: MSnbase readMSData</h3>
 
-  <p>Run <strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
-  <ul>
-    <li><em>“File(s) from your history containing your chromatograms”</em>: the <code class="language-plaintext highlighter-rouge">mzML</code> dataset collection</li>
-  </ul>
+  <ol>
+    <li>Run <strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“File(s) from your history containing your chromatograms”</em>: the <code class="language-plaintext highlighter-rouge">mzML</code> dataset collection</li>
+      </ul>
 
-  <blockquote class="tip">  <h3 id="tip-tip-selecting-a-dataset-collection-as-input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Selecting a dataset collection as input</h3>  <ol>    <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> infront of the input parameter you want to supply the collection to.</li>    <li>Select the collection you want to use from the list</li>  </ol></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-selecting-a-datast-collection-as-input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Selecting a datast collection as input</h3>  <ol>    <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in front of the input parameter you want to supply the collection to.</li>    <li>Select the collection you want to use from the list</li>  </ol></blockquote>
+    </li>
+  </ol>
 
   <blockquote class="tip">
     <h3 id="tip-comment-to-w4m-users-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Comment to W4M users</h3>
@@ -719,7 +737,7 @@ Note that you can either:</p>
 <blockquote class="tip">
   <h3 id="tip-optional-generate-the-right-template-with-xcms-get-a-samplemetadata-file-tool"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Optional: Generate the right template with <strong>xcms get a sampleMetadata file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></h3>
 
-  <p>In the case of this tutorial, we already prepared a <em>sampleMetadata</em> file with all the necessary information. 
+  <p>In the case of this tutorial, we already prepared a <em>sampleMetadata</em> file with all the necessary information.
 Below is an optional hands-on explaining how to get a template to fill, with the two following advantages:</p>
   <ol>
     <li>You will have the exact list of the samples you used in <span class="notranslate">Galaxy</span>, with the exact identifiers (<em>i.e.</em> exact sample names)</li>
@@ -1080,15 +1098,19 @@ be uploaded into <span class="notranslate">Galaxy</span>.</p>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3757956/files/sampleMetadata_12samp_completed.tsv
 </code></pre></div>      </div>
 
-      <blockquote class="tip">  <h3 id="tip-tip-importing-data-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>  <ul>    <li>Copy the link location</li>    <li>      <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>    </li>    <li>Select <strong>Paste/Fetch Data</strong></li>    <li>      <p>Paste the link into the text field</p>    </li>    <li>      <p>Press <strong>Start</strong></p>    </li>    <li><strong>Close</strong> the window</li>  </ul>  <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p></blockquote>
-      <blockquote class="tip">  <h3 id="tip-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>    <li>      <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>    </li>    <li>      <p>Find the correct folder (ask your instructor)</p>    </li>    <li>Select the desired files</li>    <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>    <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>    <li>Click on <strong>Import</strong></li>  </ul></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>    <li>Copy the link location</li>    <li>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</li>    <li>Select <strong>Paste/Fetch Data</strong></li>    <li>Paste the link into the text field</li>    <li>Press <strong>Start</strong></li>    <li><strong>Close</strong> the windowBy default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li>  </ul></blockquote>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>    <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>    <li>Find the correct folder (ask your instructor)</li>    <li>Select the desired files</li>    <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>    <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>    <li>Click on <strong>Import</strong></li>  </ul></blockquote>
     </li>
     <li>Check the data type of your imported files.
       <ul>
         <li>The datatype should be <code class="language-plaintext highlighter-rouge">tabular</code>, if this is not the case, please change the datatype now.</li>
       </ul>
 
-      <blockquote class="tip">  <h3 id="tip-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>    <li>Select ``</li>    <li>Click the <strong>Change datatype</strong> button</li>  </ul></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>    <li>Select  your desired datatype</li>    <li>Click the <strong>Change datatype</strong> button</li>  </ul></blockquote>
 
       <blockquote class="comment">
         <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
@@ -1103,7 +1125,8 @@ right away if you appear to get one of these obvious issues.</p>
     <li>
       <p>Rename your sampleMetadata file with a shorter name ‘sampleMetadata_completed.tsv’</p>
 
-      <blockquote class="tip">  <h3 id="tip-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, change the <strong>Name</strong> field</li>    <li>Click the <strong>Save</strong> button</li>  </ul></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, change the <strong>Name</strong> field</li>    <li>Click the <strong>Save</strong> button</li>  </ul></blockquote>
     </li>
   </ol>
 
@@ -1148,7 +1171,7 @@ The tool automatically takes the second column as colour groups when a file is p
 
 <p>Note that you can also check the chromatograms at any moment during the <span class="notranslate">workflow</span>, in particular at the following steps:</p>
 <ul>
-  <li>After <strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to help you to define retention time ranges that you may want to discard from the very beginning 
+  <li>After <strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to help you to define retention time ranges that you may want to discard from the very beginning
 (<em>“Spectra Filters”</em> section in <strong>xcms findChromPeaks (xcmsSet)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> parameters)</li>
   <li>After <strong>adjustRtime</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to check the result of the correction (and potentially rerun <em>adjustRtime</em> with other settings)</li>
 </ul>
@@ -1187,7 +1210,7 @@ one with colours based on provided groups, one with one colour per sample.</p>
 <p><img src="../../images/lcmspreproc_BPC12samp.png" alt="Base Peak Intensity Chromatograms" /></p>
 
 <p>How BPIs and TICs look like is dependant of the kind of data you have: LC-MS technology used, study design, type of samples, events that may have occured during the analysis…
-It can vary a lot from one experiment to another due to these characteristics. 
+It can vary a lot from one experiment to another due to these characteristics.
 Sometimes you can see (un)expected effects on these plots as retention time variations accros samples, overall sample intensity differences due to analytical or biological
 matters, specific peak areas… Generally, it is recommended to first focus on QC pooled samples if you have some, since they are not supposed to be affected by
 biological variabilities: it helps you to focus on aspects uncorrelated to individual sample effects. Evaluation of blank samples (if any) can also be a good start:
@@ -1317,7 +1340,7 @@ the dataset number 57.</p>
 To obtain such a table, we need to determine, among the individual ion lists, which ions are the same. This is the aim of the present step, called
 ‘grouping’.</p>
 
-<p>Various methods are available to proceed to the grouping step. In this tutorial, we will focus on the ‘PeakDensity’ method 
+<p>Various methods are available to proceed to the grouping step. In this tutorial, we will focus on the ‘PeakDensity’ method
 that performs peak grouping based on time dimension peak densities.</p>
 
 <p><a href="../../tutorials/lcms-preprocessing/slides.html#groupchrompeaks">Check the next 8 slides</a>,
@@ -1364,13 +1387,13 @@ an ion if there is at least one class where the ion is found in at least the spe
     <p>The way to define what kind of classes would be relevant is not straightforward. It is a somehow complex combination of your study objectives,
 the kind of biological matrix you analyse, assumptions you may have on the presence or absence of some compounds…
 What could typically be considered is whether you have radically different kind of samples (distinct parts of an organism, distinct kind of
-sample preparation…) and whether you expect huge composition differences between specific biological groups of individuals. 
+sample preparation…) and whether you expect huge composition differences between specific biological groups of individuals.
 For example, if you study human blood samples in order to distinguish specificities between women and men, even if most of the metabolites
 present may be expected to be find in both groups (at various levels but always present), some may be specific to one such as hormones.
 Thus, you may consider putting men and women samples in distinct classes.</p>
 
     <p>In the Sacurine study, no specific a priori groups were defined. Thus, no specific assumption was taken into consideration regarding biological
-classes. Thus, in this tutorial we considered only three classes: one for samples, one for pools and one for blanks. 
+classes. Thus, in this tutorial we considered only three classes: one for samples, one for pools and one for blanks.
 Since pools are a mix of all biological samples,
 we may want to consider an ion only if it is found in every pools. Thus, we may consider setting the ‘Minimum fraction of samples’ parameter to 1.
 Considering that it sometimes happens that one sample can be a little out of the box for various reasons (pools do not make exception),
@@ -1502,9 +1525,9 @@ that have not been found, in any blank.</p>
 
 </blockquote>
 
-<p>When looking back at the plots from plotChromPeakDensity.pdf, we can notice that in some cases there seems to be a small drift of retention time for some samples. 
-This phenomenon is well known with LC-MS techniques. To be able to attribute correct groups for peaks, it may be needed to perform some retention time 
-correction accross samples. Thus, the idea is (when needed) to apply a retention time strategy on the output of your grouping step, then to perform 
+<p>When looking back at the plots from plotChromPeakDensity.pdf, we can notice that in some cases there seems to be a small drift of retention time for some samples.
+This phenomenon is well known with LC-MS techniques. To be able to attribute correct groups for peaks, it may be needed to perform some retention time
+correction accross samples. Thus, the idea is (when needed) to apply a retention time strategy on the output of your grouping step, then to perform
 a second grouping step on the corrected data.</p>
 
 <h1 id="optional-xcms-step-retention-time-correction">Optional XCMS step: <em>retention time correction</em></h1>
@@ -1512,12 +1535,12 @@ a second grouping step on the corrected data.</p>
 <p>Sometimes with LC-MS techniques, a deviation in retention time occurs from a sample to another. In particular, this is likely to be observed when you
 inject large sequences of samples.</p>
 
-<p>This optional step aims at correcting retention time drift for each peak among samples. The XCMS package provides two algorithms to do so. 
+<p>This optional step aims at correcting retention time drift for each peak among samples. The XCMS package provides two algorithms to do so.
 <a href="../../tutorials/lcms-preprocessing/slides.html#adjustrtime">Check the next 4 slides</a>,
 you will find additional material to help you understand the retention time correction algorithms.
 In this training material we will focus on the “PeakGroups” method.</p>
 
-<p>This correction is based on what is called <em>well behaved peaks</em>. 
+<p>This correction is based on what is called <em>well behaved peaks</em>.
 One characteristic of these peaks is that they are found in all samples or at least in most of the samples.
 Sometimes it is difficult to find enough peaks present in all samples. The user can define a percentage of the total number of samples in which
 a peak should be found to be considered a well behaved peak. This parameter is called <em>minimum required fraction of samples</em>.</p>
@@ -1549,7 +1572,7 @@ peaks’ parameter to put them aside.</p>
     <p>If you have a very large number of samples (<em>e.g.</em> a thousand), it might be impossible to find peaks that are present in 100% of your samples.
 If that is the case and you still set a very high value for the minimum required fraction of samples, the tool can not complete successfully the retention
 time correction.
-A special attention should also be given to this parameter when you expect a large number of peaks not to be present in part of your samples 
+A special attention should also be given to this parameter when you expect a large number of peaks not to be present in part of your samples
 (<em>e.g.</em> when dealing with some blank samples).</p>
   </blockquote>
 
@@ -1849,13 +1872,13 @@ the dataset number 77.</p>
 
 </blockquote>
 
-<p>At this step, you get all the data needed to proceed to any appropriate data processing and analysis using the 3 tables you obtained from 
+<p>At this step, you get all the data needed to proceed to any appropriate data processing and analysis using the 3 tables you obtained from
 this pre-processing <span class="notranslate">workflow</span>.</p>
 
 <blockquote class="tip">
   <h3 id="tip-tip-switch-your-identifiers-with-id-choice-tool"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Switch your identifiers with <strong>ID choice</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></h3>
 
-  <p>You may have noticed the option provided in XCMS modules to specify a number of decimal places for m/z and RT values reported in 
+  <p>You may have noticed the option provided in XCMS modules to specify a number of decimal places for m/z and RT values reported in
 ions’ identifiers. This option, available for modules generating variableMetadata files, creates an additional column named <em>namecustom</em>.
 You can use this column to switch automatic ion IDs to these customised ones, using the <strong>ID choice</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool.</p>
 
@@ -1887,17 +1910,17 @@ the raw files (used to determine sample IDs in XCMS) have automatically-generate
 
 </blockquote>
 
-<p>The pre-processing part of a metabolomic analysis corresponds to quite a few number of steps, depending of your analysis. 
-It can generate several versions of your 3 tables, with only one of interest for each at the end of the extraction process. 
-We highly recommend, at this step of a metabolomic <span class="notranslate">workflow</span>, to split your analysis by beginning a new <span class="notranslate">Galaxy</span> history with only 
+<p>The pre-processing part of a metabolomic analysis corresponds to quite a few number of steps, depending of your analysis.
+It can generate several versions of your 3 tables, with only one of interest for each at the end of the extraction process.
+We highly recommend, at this step of a metabolomic <span class="notranslate">workflow</span>, to split your analysis by beginning a new <span class="notranslate">Galaxy</span> history with only
 the 3 tables you need. This will help you in limiting selecting the wrong datasets in further analyses, and bring a little tidiness
 for future review of your analysis process.</p>
 
-<p>We also recommend you to rename your 3 tables before proceeding with further data processing and analysis. 
-Indeed, you may have notice that the XCMS tools generate output names that contain the different XCMS steps you used, 
-enabling easy traceability while browsing your history. However, knowing that the next steps of analysis are also going to extend 
-the 3 tables’ names, if you keep the original names it will become very long and thus may reduce the names’ readability. 
-Hence, we highly recommend you to rename them with something short, e.g. ‘sampleMetadata’, ‘variableMetadata’ and ‘dataMatrix’, 
+<p>We also recommend you to rename your 3 tables before proceeding with further data processing and analysis.
+Indeed, you may have notice that the XCMS tools generate output names that contain the different XCMS steps you used,
+enabling easy traceability while browsing your history. However, knowing that the next steps of analysis are also going to extend
+the 3 tables’ names, if you keep the original names it will become very long and thus may reduce the names’ readability.
+Hence, we highly recommend you to rename them with something short, e.g. ‘sampleMetadata’, ‘variableMetadata’ and ‘dataMatrix’,
 or anything not too long that you may find convenient.</p>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
@@ -1926,6 +1949,11 @@ and create, run and share!</p>
                         </ul>
                     </blockquote>
                     
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/metabolomics/faqs/">FAQ page for the Metabolomics topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
                     
 
@@ -2055,8 +2083,8 @@ and create, run and share!</p>
     author = "Mélanie Petera and Jean-François Martin and Gildas Le Corguillé and Workflow4Metabolomics core team",
     title = "Mass spectrometry: LC-MS preprocessing with XCMS (Galaxy Training Materials)",
     year = "2021",
-    month = "02",
-    day = "25"
+    month = "03",
+    day = "23"
     url = "\url{/training-material/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

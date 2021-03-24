@@ -82,9 +82,14 @@
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
-           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQ
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
         <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
             <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
         </a>
@@ -635,11 +640,15 @@
                 
 
                 
+                
+                
+
+                
                 </div>
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 25, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 11, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -739,7 +748,8 @@
 
 <p>If the terms “Ansible”, “role” and “playbook” mean nothing to you, please checkout <a href="/training-material/topics/admin/tutorials/ansible/slides.html">the Ansible introduction slides</a> and <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html">the Ansible introduction tutorial</a></p>
 
-<blockquote class="tip">  <h3 id="tip-tip-running-ansible-on-your-remote-machine"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Running Ansible on your remote machine</h3>  <p>It is possible to have ansible installed on the remote machine and run it there, not just from your local machine connecting to the remote machine.</p>  <p>Your hosts file will need to use <code class="language-plaintext highlighter-rouge">localhost</code>,  and whenever you run playbooks with <code class="language-plaintext highlighter-rouge">ansible-playbook -i hosts playbook.yml</code>, you will need to add <code class="language-plaintext highlighter-rouge">-c local</code> to your command.</p>  <p>Be <strong>certain</strong> that the playbook that you’re writing on the remote machine is stored somewhere safe, like your user home directory, or backed up on your local machine. The cloud can be unreliable and things can disappear at any time.</p></blockquote>
+<!--SNIPPET-->
+<blockquote class="tip">  <h3 data-toc-skip="" id="-tip-running-ansible-on-your-remote-machine"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running Ansible on your remote machine</h3>  <p>It is possible to have ansible installed on the remote machine and run it there, not just from your local machine connecting to the remote machine.Your hosts file will need to use <code class="language-plaintext highlighter-rouge">localhost</code>,  and whenever you run playbooks with <code class="language-plaintext highlighter-rouge">ansible-playbook -i hosts playbook.yml</code>, you will need to add <code class="language-plaintext highlighter-rouge">-c local</code> to your command.Be <strong>certain</strong> that the playbook that you’re writing on the remote machine is stored somewhere safe, like your user home directory, or backed up on your local machine. The cloud can be unreliable and things can disappear at any time.</p></blockquote>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-installing-cvmfs-with-ansible"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing CVMFS with Ansible</h3>
@@ -951,7 +961,8 @@
     <li>
       <p>Install the BWA-MEM tool, if needed.</p>
 
-      <blockquote class="tip">  <h3 id="tip-tip-install-tools-via-the-admin-ui"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Install tools via the Admin UI</h3>  <ol>    <li>Open <span class="notranslate">Galaxy</span> in your browser and type <code class="language-plaintext highlighter-rouge">bwa</code> in the tool search box on the left. If “Map with BWA-MEM” is among the search results, you can skip the following steps.</li>    <li>Access the Admin menu from the top bar (you need to be logged-in with an email specified in the <code class="language-plaintext highlighter-rouge">admin_users</code> setting)</li>    <li>Click “Install and Uninstall”, which can be found on the left, under “Tool Management”</li>    <li>Enter <code class="language-plaintext highlighter-rouge">bwa</code> in the search interface</li>    <li>Click on the first hit, having <code class="language-plaintext highlighter-rouge">devteam</code> as owner</li>    <li>Click the “Install” button for the latest revision</li>    <li>Enter “<span class="notranslate">Mapping</span>” as the target section and click “OK”.</li>  </ol></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-install-tools-via-the-admin-ui"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Install tools via the Admin UI</h3>  <ol>    <li>Open <span class="notranslate">Galaxy</span> in your browser and type <code class="language-plaintext highlighter-rouge">bwa</code> in the tool search box on the left. If “Map with BWA-MEM” is among the search results, you can skip the following steps.</li>    <li>Access the Admin menu from the top bar (you need to be logged-in with an email specified in the <code class="language-plaintext highlighter-rouge">admin_users</code> setting)</li>    <li>Click “Install and Uninstall”, which can be found on the left, under “Tool Management”</li>    <li>Enter <code class="language-plaintext highlighter-rouge">bwa</code> in the search interface</li>    <li>Click on the first hit, having <code class="language-plaintext highlighter-rouge">devteam</code> as owner</li>    <li>Click the “Install” button for the latest revision</li>    <li>Enter “<span class="notranslate">Mapping</span>” as the target section and click “OK”.</li>  </ol></blockquote>
     </li>
     <li>
       <p>In your <span class="notranslate">Galaxy</span> server, open the <strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool. Now check that there are a lot more reference genomes available for use!</p>
@@ -993,6 +1004,11 @@
 
 
                     
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/admin/faqs/">FAQ page for the Galaxy Server administration topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
                     
 
@@ -1052,8 +1068,8 @@
     author = "Simon Gladman and Helena Rasche",
     title = "Reference Data with CVMFS (Galaxy Training Materials)",
     year = "2021",
-    month = "02",
-    day = "25"
+    month = "03",
+    day = "11"
     url = "\url{/training-material/topics/admin/tutorials/cvmfs/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

@@ -82,9 +82,14 @@
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
-           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQ
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/contributing/faqs/" title="Check our FAQs for the Contributing to the Galaxy Training Material topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
         <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
             <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
         </a>
@@ -395,6 +400,18 @@
                 
 
                 
+                
+                
+                     <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+    </a>
+  </li>
+
+
+                
+
+                
                     <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
@@ -418,7 +435,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 4, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 16, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -458,6 +475,7 @@
       <li><a href="#warning-box" id="markdown-toc-warning-box"><strong>Warning</strong> box</a></li>
       <li><a href="#nested-boxes" id="markdown-toc-nested-boxes">Nested boxes</a></li>
       <li><a href="#code-box" id="markdown-toc-code-box"><strong>Code</strong> box</a></li>
+      <li><a href="#faqs-snippets" id="markdown-toc-faqs-snippets">FAQs (snippets)</a></li>
       <li><a href="#icons" id="markdown-toc-icons">Icons</a></li>
     </ol>
   </li>
@@ -1347,6 +1365,109 @@ With well chosen wrong answers, MCQs can do much more than just measure how much
 </code></pre></div>  </div>
 </blockquote>
 
+<h2 id="faqs-snippets">FAQs (snippets)</h2>
+
+<p>Many common questions or instructions may be useful to share between different tutorials. For example instructions on how to start a new history or importing data. To make these types of snippets easier to re-use and avoid duplication, they are available in the form of <em>snippets</em>.</p>
+
+<h3 id="finding-snippets">Finding snippets</h3>
+<p>These are available in folders named <code class="language-plaintext highlighter-rouge">faqs</code>, either at the project level, topic level, or tutorial level.</p>
+
+<ul>
+  <li><strong>Project-level FAQs:</strong> <code class="language-plaintext highlighter-rouge">faqs/</code>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">faqs/<span class="notranslate">galaxy</span>/</code> for general <span class="notranslate">Galaxy</span> questions</li>
+      <li><code class="language-plaintext highlighter-rouge">faqs/gtn/</code> for questions regarding the GTN website itself</li>
+    </ul>
+  </li>
+  <li><strong>Topic-level FAQs:</strong> <code class="language-plaintext highlighter-rouge">topics/&lt;topic&gt;/faqs/</code>
+    <ul>
+      <li>for questions pertaining to that specific topic</li>
+    </ul>
+  </li>
+  <li><strong>Tutorial-level FAQs:</strong> <code class="language-plaintext highlighter-rouge">topics/&lt;topic&gt;/tutorials/&lt;tutorial&gt;/faqs/</code>
+    <ul>
+      <li>for questions pertaining to that specific tutorial</li>
+      <li>if this is present, it is linked to from the tutorial overview box at the top, and from the end of the tutorial</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="including-faqssnippets-in-your-tutorials">Including FAQs/snippets in your tutorials</h3>
+
+<p>To include one of these snippets in your tutorial, you can use the following syntax:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% snippet faqs/<span class="notranslate">galaxy</span>/histories_create_new.md %}
+</code></pre></div></div>
+
+<p>Which will be rendered as:</p>
+
+<!--SNIPPET-->
+<blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panelIf the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>    <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>    <li>Select the option <strong>Create New</strong> from the menu</li>  </ol></blockquote>
+
+<p>The advantage of this approach is that when the <span class="notranslate">Galaxy</span> interface updates, we only have to update the snippet, rather than every tutorial. Please try to use snippets whenever you can!</p>
+
+<p>You could also specify the box type you want the snippet to be rendered in:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% snippet faqs/<span class="notranslate">galaxy</span>/histories_create_new.md box_type="hands_on" %}
+</code></pre></div></div>
+
+<!--SNIPPET-->
+<blockquote class="notranslate hands_on">  <h3 data-toc-skip="" id="-hands-on-creating-a-new-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panelIf the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>    <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>    <li>Select the option <strong>Create New</strong> from the menu</li>  </ol></blockquote>
+
+<p>or without a box altogether:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% snippet faqs/<span class="notranslate">galaxy</span>/histories_create_new.md box_type="none" %}
+</code></pre></div></div>
+
+<!--SNIPPET-->
+<p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+<p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+<ol>  <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>  <li>Select the option <strong>Create New</strong> from the menu</li></ol>
+
+<h3 id="creating-new-faqssnippets">Creating new FAQs/snippets</h3>
+
+<p>Do you want to include something in your tutorial that you think might be useful in other tutorials as well? Or are you answering a frequently asked question? Consider creating a snippet for it</p>
+
+<p>Each snippet (question) is a separate file, with some metadata, residing in one of the <code class="language-plaintext highlighter-rouge">faqs</code> folders:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">How do I run a <span class="notranslate">workflow</span>?</span>
+<span class="na">area</span><span class="pi">:</span> <span class="s">workflows</span>      <span class="c1"># FAQs will be grouped by these areas on the FAQ page</span>
+<span class="na">box_type</span><span class="pi">:</span> <span class="s">tip</span>        <span class="c1"># tip/comment/hands_on; optional, if you want the content to be in a box</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">faq</span>          <span class="c1"># if you set this the snippet will get its own page and be included in the FAQs page</span>
+<span class="nn">---</span>
+
+<span class="s">Here you can write the snippet / answer to the FAQ in Markdown</span>
+
+<span class="pi">-</span> <span class="s">Go to `Workflows` on the top menu bar</span>
+<span class="pi">-</span> <span class="s">Click on ..</span>
+<span class="pi">-</span> <span class="s">..</span>
+
+</code></pre></div></div>
+
+<h3 id="faq-pages">FAQ pages</h3>
+
+<p>All FAQs will also be collected on their own page, this makes it easy for and teachers to prepare the session, and for participants to quickly find the answers to common questions.</p>
+
+<p>To do this, create a file named <code class="language-plaintext highlighter-rouge">index.md</code> inside the faq folder:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">faq-page</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<p>If you would like to enforce an order of the faq areas, you can do so:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">faq-page</span>
+<span class="na">area_order</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">introduction</span><span class="pi">,</span> <span class="nv">learners</span><span class="pi">,</span> <span class="nv">instructors</span><span class="pi">,</span> <span class="nv">contributors</span><span class="pi">,</span> <span class="nv">other</span><span class="pi">]</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<p>(just make sure you list all existing areas in the folder)</p>
+
+<p>If a tutorial-level FAQ page exists (<code class="language-plaintext highlighter-rouge">topics/&lt;topic&gt;/tutorials/&lt;tutorial&gt;/faqs/index.md</code>) it will be automatically linked to from the overview box at the top of the tutorial, and at the end of the tutorial. Have a look at this tutorial to see it in action.</p>
+
 <h2 id="icons">Icons</h2>
 
 <p>To use these icons, take the name of the icon, ‘details’ in this example, and write something like this in your tutorial:</p>
@@ -1788,6 +1909,13 @@ With well chosen wrong answers, MCQs can do much more than just measure how much
   note = {Accessed 2019-04-08},
   title = {<span class="notranslate">Galaxy</span> Training materials website}
 }
+
+@online{<span class="notranslate">Galaxy</span>-P_Metaproteomics,
+  author = {<span class="notranslate">Galaxy</span>-P Team},
+  title = {<span class="notranslate">Galaxy</span>-P Metaproteomics instance},
+  url = {https://proteomics.use<span class="notranslate">galaxy</span>.eu/},
+  urldate = {2020-10-13}
+}
 </code></pre></div></div>
 
 <p>You can use this in your tutorial as follows:</p>
@@ -1824,6 +1952,11 @@ and the corresponding website {% cite <span class="notranslate">galaxy</span>-tr
                         </ul>
                     </blockquote>
                     
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/contributing/faqs/">FAQ page for the Contributing to the Galaxy Training Material topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
                     
 
@@ -1907,7 +2040,7 @@ and the corresponding website {% cite <span class="notranslate">galaxy</span>-tr
     title = "Creating content in Markdown (Galaxy Training Materials)",
     year = "2021",
     month = "03",
-    day = "04"
+    day = "16"
     url = "\url{/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

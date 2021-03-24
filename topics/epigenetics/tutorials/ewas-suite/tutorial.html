@@ -82,9 +82,14 @@
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
-           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQ
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/epigenetics/faqs/" title="Check our FAQs for the Epigenetics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
         <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
             <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
         </a>
@@ -533,6 +538,10 @@
                 
 
                 
+                
+                
+
+                
                     <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
@@ -673,8 +682,6 @@
     
         
     
-        
-    
     </ul>
 
 
@@ -684,7 +691,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 25, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 23, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -767,25 +774,28 @@ Datasets include the Infinium Human Methylation BeadChip array performed in mela
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-loading"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data Loading</h3>
 
-  <p>Create a new history for this tutorial and give it a proper name</p>
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial and give it a proper name</p>
 
-  <blockquote class="tip">  <h3 id="tip-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>    <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>    <li>Select the option <strong>Create New</strong> from the menu</li>  </ol></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panelIf the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>    <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>    <li>Select the option <strong>Create New</strong> from the menu</li>  </ol></blockquote>
+    </li>
+    <li>Import the following IDAT files from <a href="https://zenodo.org/record/1251211#.WwREQ1Mvz-Y">Zenodo</a> or from the data library (ask your instructor)
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">GSM1588704_8795207135_R01C02_Red.idat</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GSM1588705_8795207119_R05C02_Red.idat</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GSM1588706_8795207135_R02C02_Red.idat</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GSM1588707_8795207119_R06C02_Red.idat</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GSM1588704_8795207135_R01C02_Grn.idat</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GSM1588705_8795207119_R05C02_Grn.idat</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GSM1588706_8795207135_R02C02_Grn.idat</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GSM1588707_8795207119_R06C02_Grn.idat</code></li>
+      </ul>
 
-  <p>Import the following IDAT files from <a href="https://zenodo.org/record/1251211#.WwREQ1Mvz-Y">Zenodo</a> or from the data library (ask your instructor)</p>
-  <ul>
-    <li><code class="language-plaintext highlighter-rouge">GSM1588704_8795207135_R01C02_Red.idat</code></li>
-    <li><code class="language-plaintext highlighter-rouge">GSM1588705_8795207119_R05C02_Red.idat</code></li>
-    <li><code class="language-plaintext highlighter-rouge">GSM1588706_8795207135_R02C02_Red.idat</code></li>
-    <li><code class="language-plaintext highlighter-rouge">GSM1588707_8795207119_R06C02_Red.idat</code></li>
-    <li><code class="language-plaintext highlighter-rouge">GSM1588704_8795207135_R01C02_Grn.idat</code></li>
-    <li><code class="language-plaintext highlighter-rouge">GSM1588705_8795207119_R05C02_Grn.idat</code></li>
-    <li><code class="language-plaintext highlighter-rouge">GSM1588706_8795207135_R02C02_Grn.idat</code></li>
-    <li><code class="language-plaintext highlighter-rouge">GSM1588707_8795207119_R06C02_Grn.idat</code></li>
-  </ul>
-
-  <blockquote class="details">
-    <h3 id="details-list-of-zenodo-urls"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> List of Zenodo URLs</h3>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1251211/files/GSM1588704_8795207135_R01C02_Red.idat
+      <blockquote class="details">
+        <h3 id="details-list-of-zenodo-urls"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> List of Zenodo URLs</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1251211/files/GSM1588704_8795207135_R01C02_Red.idat
 https://zenodo.org/record/1251211/files/GSM1588706_8795207135_R02C02_Red.idat
 https://zenodo.org/record/1251211/files/GSM1588705_8795207119_R05C02_Red.idat
 https://zenodo.org/record/1251211/files/GSM1588707_8795207119_R06C02_Red.idat
@@ -793,19 +803,23 @@ https://zenodo.org/record/1251211/files/GSM1588704_8795207135_R01C02_Grn.idat
 https://zenodo.org/record/1251211/files/GSM1588706_8795207135_R02C02_Grn.idat
 https://zenodo.org/record/1251211/files/GSM1588705_8795207119_R05C02_Grn.idat
 https://zenodo.org/record/1251211/files/GSM1588707_8795207119_R06C02_Grn.idat
-</code></pre></div>    </div>
-  </blockquote>
+</code></pre></div>        </div>
+      </blockquote>
 
-  <blockquote class="tip">  <h3 id="tip-tip-importing-data-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>  <ul>    <li>Copy the link location</li>    <li>      <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>    </li>    <li>Select <strong>Paste/Fetch Data</strong></li>    <li>      <p>Paste the link into the text field</p>    </li>    <li>      <p>Press <strong>Start</strong></p>    </li>    <li><strong>Close</strong> the window</li>  </ul>  <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>    <li>Copy the link location</li>    <li>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</li>    <li>Select <strong>Paste/Fetch Data</strong></li>    <li>Paste the link into the text field</li>    <li>Press <strong>Start</strong></li>    <li><strong>Close</strong> the windowBy default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li>  </ul></blockquote>
 
-  <blockquote class="tip">  <h3 id="tip-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>    <li>      <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>    </li>    <li>      <p>Find the correct folder (ask your instructor)</p>    </li>    <li>Select the desired files</li>    <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>    <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>    <li>Click on <strong>Import</strong></li>  </ul></blockquote>
-
-  <p>Run <strong>Infinium Human Methylation BeadChip</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
-  <ul>
-    <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“red channel files”</em>: all files ending in <code class="language-plaintext highlighter-rouge">_Red</code></li>
-    <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“green channel files”</em>: all files ending in <code class="language-plaintext highlighter-rouge">Grn</code>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>    <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>    <li>Find the correct folder (ask your instructor)</li>    <li>Select the desired files</li>    <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>    <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>    <li>Click on <strong>Import</strong></li>  </ul></blockquote>
+    </li>
+    <li>Run <strong>Infinium Human Methylation BeadChip</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“red channel files”</em>: all files ending in <code class="language-plaintext highlighter-rouge">_Red</code></li>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“green channel files”</em>: all files ending in <code class="language-plaintext highlighter-rouge">Grn</code>
 <img src="../../images/1Raw_intensity_data_loading.png" alt="Raw_intensity_data_loading" /></li>
-  </ul>
+      </ul>
+    </li>
+  </ol>
 </blockquote>
 
 <h1 id="idat-preprocessing">.idat preprocessing</h1>
@@ -886,7 +900,10 @@ Wait for the upload to finish
 We will now map the imported datasets against phenotype covariate and reference genome obtained from UCSC.
 Click on the <strong>Differentially_Methylated_Positions.<span class="notranslate">bed</span></strong> output in your history to expand it.
 Set the database build of your dataset to <code class="language-plaintext highlighter-rouge">Human Feb. 2009 (GRCh37/hg19) (hg19)</code>(if it is not set automatically)</p>
-  <blockquote class="tip">  <h3 id="tip-tip-changing-databasebuild-dbkey"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing Database/Build (dbkey)</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, change the <strong>Database/Build</strong> field</li>    <li>Select your desired database key from the dropdown list: <code class="language-plaintext highlighter-rouge">hg19</code></li>    <li>Click the <strong>Save</strong> button</li>  </ul></blockquote>
+
+  <!--SNIPPET-->
+  <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-changing-databasebuild-dbkey"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing database/build (dbkey)</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, change the <strong>Database/Build</strong> field</li>    <li>Select your desired database key from the dropdown list: <code class="language-plaintext highlighter-rouge">hg19</code></li>    <li>Click the <strong>Save</strong> button</li>  </ul></blockquote>
+
   <p>Click on <code class="language-plaintext highlighter-rouge">display at UCSC</code> towards the bottom of the history item.
 This will launch UCSC Genome Browser with your Custom Track</p>
 </blockquote>
@@ -1006,6 +1023,11 @@ This will launch UCSC Genome Browser with your Custom Track</p>
                     </blockquote>
                     
 
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/epigenetics/faqs/">FAQ page for the Epigenetics topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
                     
 
                     
@@ -1096,8 +1118,8 @@ This will launch UCSC Genome Browser with your Custom Track</p>
     author = "Katarzyna Murat and Krzysztof Poterlowicz",
     title = "Infinium Human Methylation BeadChip (Galaxy Training Materials)",
     year = "2021",
-    month = "02",
-    day = "25"
+    month = "03",
+    day = "23"
     url = "\url{/training-material/topics/epigenetics/tutorials/ewas-suite/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

@@ -82,9 +82,14 @@
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
-           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQ
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/statistics/faqs/" title="Check our FAQs for the Statistics and machine learning topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
         <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
             <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
         </a>
@@ -477,6 +482,10 @@
                 
 
                 
+                
+                
+
+                
                     <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
@@ -620,8 +629,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -678,15 +685,15 @@
 
 <!-- This is a comment. -->
 
-<p>Artificial neural networks are a machine learning discipline roughly inspired by how neurons in a 
-human brain work. In the past decade, there has been a huge resurgence of neural networks thanks 
-to the vast availability of data and enormous increases in computing capacity (Successfully 
-training complex neural networks in some domains requires lots of data and compute capacity). There 
-are various types of neural networks (Feedforward, recurrent, etc). In this tutorial, we discuss 
-recurrent neural networks, which model sequential data, and have been successfully applied to language 
-generation, machine translation, speech recognition, image description, and text summarization 
-(<a class="citation" href="#wen-etal-2015-semantically">Wen <i>et al.</i> 2015</a>, <a class="citation" href="#cho-etal-2014-learning">Cho <i>et al.</i> 2014</a>, <a class="citation" href="#LimEtAl">Lim <i>et al.</i> 2016</a>, 
-<a class="citation" href="#karpathyEtAl">Karpathy and Fei-Fei 2017</a>, <a class="citation" href="#li-etal-2017-deep">Li <i>et al.</i> 2017</a>). We then explain how RNN differ from feedforward networks, 
+<p>Artificial neural networks are a machine learning discipline roughly inspired by how neurons in a
+human brain work. In the past decade, there has been a huge resurgence of neural networks thanks
+to the vast availability of data and enormous increases in computing capacity (Successfully
+training complex neural networks in some domains requires lots of data and compute capacity). There
+are various types of neural networks (Feedforward, recurrent, etc). In this tutorial, we discuss
+recurrent neural networks, which model sequential data, and have been successfully applied to language
+generation, machine translation, speech recognition, image description, and text summarization
+(<a class="citation" href="#wen-etal-2015-semantically">Wen <i>et al.</i> 2015</a>, <a class="citation" href="#cho-etal-2014-learning">Cho <i>et al.</i> 2014</a>, <a class="citation" href="#LimEtAl">Lim <i>et al.</i> 2016</a>,
+<a class="citation" href="#karpathyEtAl">Karpathy and Fei-Fei 2017</a>, <a class="citation" href="#li-etal-2017-deep">Li <i>et al.</i> 2017</a>). We then explain how RNN differ from feedforward networks,
 describe various RNN architectures and solve a sentiment analysis problem using RNN in <span class="notranslate">Galaxy</span>.</p>
 
 <blockquote class="agenda">
@@ -721,11 +728,11 @@ describe various RNN architectures and solve a sentiment analysis problem using 
 
 <h1 id="review-of-feedforward-neural-networks-fnn">Review of feedforward neural networks (FNN)</h1>
 
-<p>In feedforward neural networks (FNN) a single training example is presented to the network, 
-after which the the network generates an output. For example, a lung X-ray image is passed 
-to a FNN, and the network predicts tumor or no tumor. By contrast, in RNN a sequence of 
-training examples are presented to the network one at a time. For example, a sequence of 
-English words is passed to a RNN, one at a time, and the network generates a sequence of 
+<p>In feedforward neural networks (FNN) a single training example is presented to the network,
+after which the the network generates an output. For example, a lung X-ray image is passed
+to a FNN, and the network predicts tumor or no tumor. By contrast, in RNN a sequence of
+training examples are presented to the network one at a time. For example, a sequence of
+English words is passed to a RNN, one at a time, and the network generates a sequence of
 Persian words, one at a time. RNN handle sequential data, whether its temporal or ordinal.</p>
 
 <h2 id="single-layer-fnn">Single layer FNN</h2>
@@ -738,35 +745,35 @@ weight. Afterwards, the results are summed up, along with a bias, and passed to 
 <figure id="figure-2"><img src="../../images/activation.gif" alt="An activation function (such as Sigmoid, Tanh, etc.) applied to the input of the only neuron in the output layer of a feedforward neural network" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Activation of the output neuron o1. Activation function f could be Sigmoid, Tanh, ReLU, etc.</figcaption></figure>
 
 <p>The activation function can have many forms (sigmoid, tanh, ReLU, linear, step function, sign function, etc.).
-Output layer neurons usually have sigmoid or tanh functions. For more information on the listed activation 
+Output layer neurons usually have sigmoid or tanh functions. For more information on the listed activation
 functions, please refer to <a class="citation" href="#nwankpaEtAl">Nwankpa <i>et al.</i> 2018</a>.</p>
 
 <figure id="figure-3"><img src="../../images/sigmoid.gif" alt="Mathmatical formula for Sigmoid activation function" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Sigmoid activation function</figcaption></figure>
 
 <h2 id="multi-layer-ffn">Multi-layer FFN</h2>
 
-<p>Minsky and Papert showed that a single layer FNN cannot solve problems in which the data is not linearly separable, 
-such as the XOR problem (<a class="citation" href="#Newell780">Newell 1969</a>). Adding one (or more) hidden layers to FNN enables it to solve problems 
-in which data is non-linearly separable. Per Universal Approximation Theorem, a FNN with one hidden layer can represent 
-any function (<a class="citation" href="#Cybenko1989">Cybenko 1989</a>), although in practice training such a model is very difficult (if not impossible), 
+<p>Minsky and Papert showed that a single layer FNN cannot solve problems in which the data is not linearly separable,
+such as the XOR problem (<a class="citation" href="#Newell780">Newell 1969</a>). Adding one (or more) hidden layers to FNN enables it to solve problems
+in which data is non-linearly separable. Per Universal Approximation Theorem, a FNN with one hidden layer can represent
+any function (<a class="citation" href="#Cybenko1989">Cybenko 1989</a>), although in practice training such a model is very difficult (if not impossible),
 hence, we usually add multiple hidden layers to solve complex problems.</p>
 
 <figure id="figure-4"><img src="../../images/FFNN.png" alt="Neurons forming the input, output, and hidden layers of a multi-layer feedforward neural network" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are omitted for clarity</figcaption></figure>
 
 <h2 id="learning-algorithm">Learning algorithm</h2>
 
-<p>In supervised learning, we are given a set of input-output pairs, called the <em>training set</em>. Given the training set, the learning algorithm 
-(iteratively) adjusts the model parameters, so that the model can accurately map inputs to outputs. We usually have another set of input-output 
-pairs, called the <em>test set</em>, which is not used by the learning algorithm. When the learning algorithm completes, we assess the learned model by 
-providing the test set inputs to the model and comparing the model outputs to test set outputs. We need to define a <strong>loss function</strong> to objectively 
+<p>In supervised learning, we are given a set of input-output pairs, called the <em>training set</em>. Given the training set, the learning algorithm
+(iteratively) adjusts the model parameters, so that the model can accurately map inputs to outputs. We usually have another set of input-output
+pairs, called the <em>test set</em>, which is not used by the learning algorithm. When the learning algorithm completes, we assess the learned model by
+providing the test set inputs to the model and comparing the model outputs to test set outputs. We need to define a <strong>loss function</strong> to objectively
 measure how much the model output is off of the expected output. For classification problems we use the <strong>cross entropy</strong> loss function.</p>
 
 <figure id="figure-5"><img src="../../images/CrossEntropy.gif" alt="Mathematical formula for calculating the cross entropy loss function, which quantifies the difference between the predicted and desired output of a neural network" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Cross entropy loss function</figcaption></figure>
 
-<p>The loss function is calculated for each input-output pair in the training set. The average of the calculated loss functions for all training 
-set input-output pairs is called the <strong>Cost function</strong>. The goal of the learning algorithm is to minimize the cost function. The cost function 
-is a function of network weights and biases of all neurons in all layers. The <strong>backpropagation</strong> learning algorithm <a class="citation" href="#Rumelhart1986">Rumelhart <i>et al.</i> 1986</a> 
-iteratively computes the gradient of cost function relative to each weight and bias, then updates the weights and biases in the opposite 
+<p>The loss function is calculated for each input-output pair in the training set. The average of the calculated loss functions for all training
+set input-output pairs is called the <strong>Cost function</strong>. The goal of the learning algorithm is to minimize the cost function. The cost function
+is a function of network weights and biases of all neurons in all layers. The <strong>backpropagation</strong> learning algorithm <a class="citation" href="#Rumelhart1986">Rumelhart <i>et al.</i> 1986</a>
+iteratively computes the gradient of cost function relative to each weight and bias, then updates the weights and biases in the opposite
 direction of the gradient, to find the local minimum.</p>
 
 <figure id="figure-6"><img src="../../images/CostFunction.gif" alt="Mathematical formula for calcuating the cross entropy cost function, which is just the average of cross entropy loss functions for training samples" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Cross entropy cost function</figcaption></figure>
@@ -777,104 +784,104 @@ direction of the gradient, to find the local minimum.</p>
 
 <h2 id="possible-rnn-inputsoutputs">Possible RNN inputs/outputs</h2>
 
-<p>There are 4 possible input/output combinations for RNN and each have a specific application. One-to-one is basically a FNN. One-to-many, 
-where we have one input and a variable number of output. One example application is image captioning, where a single image is provided 
+<p>There are 4 possible input/output combinations for RNN and each have a specific application. One-to-one is basically a FNN. One-to-many,
+where we have one input and a variable number of output. One example application is image captioning, where a single image is provided
 as input and a variable number of words (which caption the image) is returned as output (See Figure 7).</p>
 
 <figure id="figure-7"><img src="../../images/RNN_1_to_n.png" alt="Neurons forming a one-to-many recurrent neural network" /><figcaption><span class="figcaption-prefix">Figure 7:</span> One-to-many RNN</figcaption></figure>
 
-<p>Many-to-one RNN, on the other hand, have a variable number of inputs and a single output. One example application is document sentiment 
+<p>Many-to-one RNN, on the other hand, have a variable number of inputs and a single output. One example application is document sentiment
 classification, where a variable number of words in a document are presented as input, and a single output predicts whether the document
 has a positive or negative sentiment regarding a topic (See Figure 8).</p>
 
 <figure id="figure-8"><img src="../../images/RNN_n_to_1.png" alt="Neurons forming a many-to-one recurrent neural network" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Many-to-one RNN</figcaption></figure>
 
-<p>There are two types of many-to-many RNN. One in which the number of inputs and outputs match, e.g., in labeling the video frames the number 
-of frames matches the number of labels, and the other in which the number of inputs and outputs do not match, e.g., in language translation 
+<p>There are two types of many-to-many RNN. One in which the number of inputs and outputs match, e.g., in labeling the video frames the number
+of frames matches the number of labels, and the other in which the number of inputs and outputs do not match, e.g., in language translation
 we pass in n words in English and get m words in Italian (See Figure 9).</p>
 
 <figure id="figure-9"><img src="../../images/RNN_n_to_m.png" alt="Neurons forming a many-to-many recurrent neural network" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Many-to-many RNN</figcaption></figure>
 
 <h2 id="rnn-architectures">RNN architectures</h2>
 
-<p>Mainly, there are three types of RNN: 1) Vanilla RNN, 2) LSTM (<a class="citation" href="#hochreiter1997long">Hochreiter and Schmidhuber 1997</a>), and 3) GRU (<a class="citation" href="#cho-etal-2014-learning">Cho <i>et al.</i> 2014</a>). 
-A Vanilla RNN, simply combines the state information from the previous timestamp with the input from the current timestamp to generate the 
-state information for current timestamp. The problem with Vanilla RNN is that training deep RNN networks is impossible due to the 
-<strong>vanishing gradient</strong> problem. Basically, starting from the output layer, in order to determine weights/biases updates, we need to calculate 
-the derivative of the loss function relative to the layers input, which is usually a small number. This is not a problem for the output layer, 
-but for the previous layers, this process must be repeated recursively, resulting in very small updates to weights/biases of the initial layers 
+<p>Mainly, there are three types of RNN: 1) Vanilla RNN, 2) LSTM (<a class="citation" href="#hochreiter1997long">Hochreiter and Schmidhuber 1997</a>), and 3) GRU (<a class="citation" href="#cho-etal-2014-learning">Cho <i>et al.</i> 2014</a>).
+A Vanilla RNN, simply combines the state information from the previous timestamp with the input from the current timestamp to generate the
+state information for current timestamp. The problem with Vanilla RNN is that training deep RNN networks is impossible due to the
+<strong>vanishing gradient</strong> problem. Basically, starting from the output layer, in order to determine weights/biases updates, we need to calculate
+the derivative of the loss function relative to the layers input, which is usually a small number. This is not a problem for the output layer,
+but for the previous layers, this process must be repeated recursively, resulting in very small updates to weights/biases of the initial layers
 of the RNN, halting the learning process.</p>
 
-<p>LSTM and GRU are two RNN architectures that address vanishing gradient problem. Full description of LSTM/GRU is beyond the scope of this 
-tutorial (Please refer to ref1 and ref2), but in a nutshell both LSTM and GRU use <strong>gates</strong> such that the weights/biases updates in previous 
-layers are calculated via a series of additions (not multiplications). Hence, these architectures can learn even when the RNN has hundreds or 
+<p>LSTM and GRU are two RNN architectures that address vanishing gradient problem. Full description of LSTM/GRU is beyond the scope of this
+tutorial (Please refer to ref1 and ref2), but in a nutshell both LSTM and GRU use <strong>gates</strong> such that the weights/biases updates in previous
+layers are calculated via a series of additions (not multiplications). Hence, these architectures can learn even when the RNN has hundreds or
 thousands of layers.</p>
 
 <h1 id="text-representation-schemes">Text representation schemes</h1>
 
-<p>In this tutorial we perform sentiment analysis on IMDB (https://www.imdb.com/) movie reviews dataset (<a class="citation" href="#maas-EtAl">Maas <i>et al.</i> 2011</a>). We train our RNN on 
-the training dataset, which is made up of 25000 movie reviews, some positive and some negative. We then test our RNN on the test set, which is 
-also made up of 25000 movie reviews, again some positive and some negative. The training and test sets have no overlap. Since we are dealing with 
-text data, it’s a good idea to review various mechanisms for representing text data. Before that, we are going to briefly discuss how to preprocess 
+<p>In this tutorial we perform sentiment analysis on IMDB (https://www.imdb.com/) movie reviews dataset (<a class="citation" href="#maas-EtAl">Maas <i>et al.</i> 2011</a>). We train our RNN on
+the training dataset, which is made up of 25000 movie reviews, some positive and some negative. We then test our RNN on the test set, which is
+also made up of 25000 movie reviews, again some positive and some negative. The training and test sets have no overlap. Since we are dealing with
+text data, it’s a good idea to review various mechanisms for representing text data. Before that, we are going to briefly discuss how to preprocess
 text documents.</p>
 
 <h2 id="text-preprocessing">Text preprocessing</h2>
 
-<p>The first step is to tokenize a document, i.e., break it down into words. Next, we remove the punctuation marks, URLs, and stop words – words like 
-‘a’, ‘of’, ‘the’, etc. that happen frequently in all documents and do not have much value in discriminating between documents. Next, we normalize 
-the text, e.g., replace ‘brb’ with ‘Be right back’, etc. Then, We then run the spell checker to fix typos and also make all words lowercase. Next, we perform stemming or lemmatization. Basically, if we have words like ‘organizer’, ‘organize’, ‘organized’, and ‘organization’ we want to reduce all of them to a single word. Stemming cuts the end of these words to come up with a single root (e.g., ‘organiz’). The root may not be an actual word. 
-Lemmatization is smarter in that it reduces the word variants to a root that is actually a word (e.g., ‘organize’). All of these steps help reduce 
+<p>The first step is to tokenize a document, i.e., break it down into words. Next, we remove the punctuation marks, URLs, and stop words – words like
+‘a’, ‘of’, ‘the’, etc. that happen frequently in all documents and do not have much value in discriminating between documents. Next, we normalize
+the text, e.g., replace ‘brb’ with ‘Be right back’, etc. Then, We then run the spell checker to fix typos and also make all words lowercase. Next, we perform stemming or lemmatization. Basically, if we have words like ‘organizer’, ‘organize’, ‘organized’, and ‘organization’ we want to reduce all of them to a single word. Stemming cuts the end of these words to come up with a single root (e.g., ‘organiz’). The root may not be an actual word.
+Lemmatization is smarter in that it reduces the word variants to a root that is actually a word (e.g., ‘organize’). All of these steps help reduce
 the number of features in feature vector of a document and should make the training of our model faster/easier.</p>
 
-<p>For this introductory tutorial, we do minimal text preprocessing. We ignore the top 50 words in IMDB reviews (mostly stop words) and include 
+<p>For this introductory tutorial, we do minimal text preprocessing. We ignore the top 50 words in IMDB reviews (mostly stop words) and include
 the next 10,000 words in our dataset. Reviews are limited to 500 words. They are trimmed if they are longer and padded if they are shorter.</p>
 
 <h2 id="bag-of-words-and-tf-idf">Bag of words and TF-IDF</h2>
 
 <p>If you don’t care about the order of the words in a document, you can use bag of words (BoW) or text frequency inverse document frequency (TF-IDF).
 In these models we have a 2 dimensional array. The rows represent the documents (in our example, the movie reviews) and the columns
-represent the words in our vocabulary (all the unique words in all the documents). If a word is not present in a document, we have a zero 
-at the corresponding row and column as the entry. If a word is present in the document, we have a one as the entry – Alte<span class="notranslate">rna</span>tively, we could use 
+represent the words in our vocabulary (all the unique words in all the documents). If a word is not present in a document, we have a zero
+at the corresponding row and column as the entry. If a word is present in the document, we have a one as the entry – Alte<span class="notranslate">rna</span>tively, we could use
 the word count or frequency.</p>
 
 <figure id="figure-10"><img src="../../images/BoW.png" alt="Table showing a bag-of-words representation of sample documents" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Bag of words (BoW) representation</figcaption></figure>
 
-<p>Suppose we have the following 2 documents: 1) Magic passed the basketball to Kareem, and 2) Lebron stole the basketball from Curry. The BoW 
+<p>Suppose we have the following 2 documents: 1) Magic passed the basketball to Kareem, and 2) Lebron stole the basketball from Curry. The BoW
 representation of these documents is given in Figure 10.</p>
 
 <p>BoW’s advantage is its simplicity, yet it does not take into account the rarity of a word across documents, which unlike common words are
 important for document classification.</p>
 
-<p>In TF-IDF, similar to BoW we have an entry for each document-word pair. In TD-IDF, the entry is the product of 1) Text frequency, the 
-frequency of a word in a document, and 2) Inverse document frequency, the inverse of the number of documents that have the word divided 
+<p>In TF-IDF, similar to BoW we have an entry for each document-word pair. In TD-IDF, the entry is the product of 1) Text frequency, the
+frequency of a word in a document, and 2) Inverse document frequency, the inverse of the number of documents that have the word divided
 by the total number of documents (we usually use logarithm of the IDF).</p>
 
-<p>TF-IDF takes into account the rarity of a word across documents, but like BoW does not capture word order or word meaning in documents. BoW 
+<p>TF-IDF takes into account the rarity of a word across documents, but like BoW does not capture word order or word meaning in documents. BoW
 and TF-IDF are suitable representations for when word order is not important. They are used in document classification problems like spam detection.</p>
 
 <h2 id="one-hot-encoding-ohe">One hot encoding (OHE)</h2>
 
-<p>OHE is a technique to convert categorical variables such as words into a vector. Suppose our vocabulary has 3 words: orange, apple, banana. 
-Each word for this vocabulary is represented by a vector of size 3. Orange is represented by a vector whose first element is 1 and other 
-elements are 0; Apple is represented by a vector whose second element is 1 and other elements are 0; And banana is represented by a 
-vector whose third element is 1 and other elements are 0. As you can see only one element in the vector is 1 and the rest are 0’s. The same 
+<p>OHE is a technique to convert categorical variables such as words into a vector. Suppose our vocabulary has 3 words: orange, apple, banana.
+Each word for this vocabulary is represented by a vector of size 3. Orange is represented by a vector whose first element is 1 and other
+elements are 0; Apple is represented by a vector whose second element is 1 and other elements are 0; And banana is represented by a
+vector whose third element is 1 and other elements are 0. As you can see only one element in the vector is 1 and the rest are 0’s. The same
 concept applies if the size of the vocabulary is N.</p>
 
 <figure id="figure-11"><img src="../../images/OHE.gif" alt="Mathematical vectors representing one-hot-encoding representation of words orange, apple, and banana" /><figcaption><span class="figcaption-prefix">Figure 11:</span> One hot encoding (OHE) representation</figcaption></figure>
 
-<p>The problem with OHE is that for very large vocabulary sizes (say, 100,000 words) it requires tremendous amount of storage. Also, it has no 
+<p>The problem with OHE is that for very large vocabulary sizes (say, 100,000 words) it requires tremendous amount of storage. Also, it has no
 concept of word similarity.</p>
 
 <h2 id="word2vec">Word2Vec</h2>
 
-<p>In Word2Vec, each word is represented as an n dimensional vector (n being much smaller than vocabulary size), such that the words that have 
-similar meanings are closer to each other in the vector space, and words that don’t have a similar meaning are farther apart. Words are 
-considered to have a similar meaning if they co-occur often in documents. There are 2 Word2Vec architectures, one that predicts the probability 
-of a word given the surrounding words (Continuous BOW), and one that given a word predicts the probability of the surrounding words (Continuous 
+<p>In Word2Vec, each word is represented as an n dimensional vector (n being much smaller than vocabulary size), such that the words that have
+similar meanings are closer to each other in the vector space, and words that don’t have a similar meaning are farther apart. Words are
+considered to have a similar meaning if they co-occur often in documents. There are 2 Word2Vec architectures, one that predicts the probability
+of a word given the surrounding words (Continuous BOW), and one that given a word predicts the probability of the surrounding words (Continuous
 skip-gram).</p>
 
 <p>In this tutorial, we find an n dimensional representation of the IMDB movie review words, not based on word meanings, but based on how they
-improve the sentiment classification task. The n dimensional representation is learned by the learning algorithm, simply by reducing the 
+improve the sentiment classification task. The n dimensional representation is learned by the learning algorithm, simply by reducing the
 cost function via backpropagation.</p>
 
 <h1 id="get-data">Get Data</h1>
@@ -886,7 +893,8 @@ cost function via backpropagation.</p>
     <li>
       <p>Create a new history for this tutorial</p>
 
-      <blockquote class="tip">  <h3 id="tip-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>    <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>    <li>Select the option <strong>Create New</strong> from the menu</li>  </ol></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panelIf the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>    <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>    <li>Select the option <strong>Create New</strong> from the menu</li>  </ol></blockquote>
     </li>
     <li>
       <p>Import the files from <a href="https://zenodo.org/record/4477881">Zenodo</a> or from the shared data library</p>
@@ -897,18 +905,23 @@ https://zenodo.org/record/4477881/files/y_test.tsv
 https://zenodo.org/record/4477881/files/y_train.tsv
 </code></pre></div>      </div>
 
-      <blockquote class="tip">  <h3 id="tip-tip-importing-data-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>  <ul>    <li>Copy the link location</li>    <li>      <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>    </li>    <li>Select <strong>Paste/Fetch Data</strong></li>    <li>      <p>Paste the link into the text field</p>    </li>    <li>      <p>Press <strong>Start</strong></p>    </li>    <li><strong>Close</strong> the window</li>  </ul>  <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p></blockquote>
-      <blockquote class="tip">  <h3 id="tip-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>    <li>      <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>    </li>    <li>      <p>Find the correct folder (ask your instructor)</p>    </li>    <li>Select the desired files</li>    <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>    <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>    <li>Click on <strong>Import</strong></li>  </ul></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>    <li>Copy the link location</li>    <li>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</li>    <li>Select <strong>Paste/Fetch Data</strong></li>    <li>Paste the link into the text field</li>    <li>Press <strong>Start</strong></li>    <li><strong>Close</strong> the windowBy default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li>  </ul></blockquote>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>    <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>    <li>Find the correct folder (ask your instructor)</li>    <li>Select the desired files</li>    <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>    <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>    <li>Click on <strong>Import</strong></li>  </ul></blockquote>
     </li>
     <li>
       <p>Rename the datasets as <code class="language-plaintext highlighter-rouge">X_test</code>, <code class="language-plaintext highlighter-rouge">X_train</code>, <code class="language-plaintext highlighter-rouge">y_test</code>, and <code class="language-plaintext highlighter-rouge">y_train</code> respectively.</p>
 
-      <blockquote class="tip">  <h3 id="tip-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, change the <strong>Name</strong> field</li>    <li>Click the <strong>Save</strong> button</li>  </ul></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, change the <strong>Name</strong> field</li>    <li>Click the <strong>Save</strong> button</li>  </ul></blockquote>
     </li>
     <li>
       <p>Check that the datatype of all the four datasets is <code class="language-plaintext highlighter-rouge">tabular</code>. If not, change the dataset’s datatype to tabular.</p>
 
-      <blockquote class="tip">  <h3 id="tip-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>    <li>Select <code class="language-plaintext highlighter-rouge">tabular</code></li>    <li>Click the <strong>Change datatype</strong> button</li>  </ul></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>    <li>Select <code class="language-plaintext highlighter-rouge">tabular</code></li>    <li>Click the <strong>Change datatype</strong> button</li>  </ul></blockquote>
     </li>
   </ol>
 
@@ -916,8 +929,8 @@ https://zenodo.org/record/4477881/files/y_train.tsv
 
 <h1 id="sentiment-classification-of-imdb-movie-reviews-with-rnn">Sentiment Classification of IMDB movie reviews with RNN</h1>
 
-<p>In the section, we define a RNN and train it using IMDB movie reviews training dataset. The goal is to learn a model such that given the 
-words in a review we can predict whether the review was positive or negative. We then evaluate the trained RNN on the test dataset 
+<p>In the section, we define a RNN and train it using IMDB movie reviews training dataset. The goal is to learn a model such that given the
+words in a review we can predict whether the review was positive or negative. We then evaluate the trained RNN on the test dataset
 and plot the confusion matrix.</p>
 
 <h3 id="create-a-deep-learning-model-architecture"><strong>Create a deep learning model architecture</strong></h3>
@@ -969,11 +982,11 @@ and plot the confusion matrix.</p>
   </ul>
 </blockquote>
 
-<p>Input is a movie review of size 500 (longer reviews were trimmed and shorter ones padded). Our neural network has 3 layers. The first layer is 
-an embedding layer, that transforms each review words into a 32 dimensional vector (<em>output_dim</em>). We have 10000 unique words in our IMDB dataset 
-(<em>input_dim</em>). The second layer is an <em>LSTM</em> layer, which is a type of RNN. Output of the LSTM layer has a size of <em>100</em>. The third layer is a 
-<em>Dense</em> layer, which is a fully connected layer (all 100 output neurons in LSTM layer are connected to a single neuron in this layer). It has a 
-<em>sigmoid</em> activation function, that generates an output between 0 and 1. Any output greater than 0.5 is considered a predicted positive review, 
+<p>Input is a movie review of size 500 (longer reviews were trimmed and shorter ones padded). Our neural network has 3 layers. The first layer is
+an embedding layer, that transforms each review words into a 32 dimensional vector (<em>output_dim</em>). We have 10000 unique words in our IMDB dataset
+(<em>input_dim</em>). The second layer is an <em>LSTM</em> layer, which is a type of RNN. Output of the LSTM layer has a size of <em>100</em>. The third layer is a
+<em>Dense</em> layer, which is a fully connected layer (all 100 output neurons in LSTM layer are connected to a single neuron in this layer). It has a
+<em>sigmoid</em> activation function, that generates an output between 0 and 1. Any output greater than 0.5 is considered a predicted positive review,
 and anything less than 0.5 a negative one. The model config can be downloaded as a JSON file.</p>
 
 <h3 id="create-a-deep-learning-model"><strong>Create a deep learning model</strong></h3>
@@ -1006,11 +1019,11 @@ and anything less than 0.5 a negative one. The model config can be downloaded as
   </ul>
 </blockquote>
 
-<p>A loss function measures how different the predicted output is versus the expected output. For binary classification problems, we use 
-<em>binary cross entropy</em> as loss function. Epochs is the number of times the whole training data is used to train the model. Setting <em>epochs</em> to 2 
-means each training example in our dataset is used twice to train our model. If we update network weights/biases after all the training data is 
-feed to the network, the training will be very slow (as we have 25000 training examples in our dataset). To speed up the training, we present 
-only a subset of the training examples to the network, after which we update the weights/biases. <em>batch_size</em> decides the size of this subset. 
+<p>A loss function measures how different the predicted output is versus the expected output. For binary classification problems, we use
+<em>binary cross entropy</em> as loss function. Epochs is the number of times the whole training data is used to train the model. Setting <em>epochs</em> to 2
+means each training example in our dataset is used twice to train our model. If we update network weights/biases after all the training data is
+feed to the network, the training will be very slow (as we have 25000 training examples in our dataset). To speed up the training, we present
+only a subset of the training examples to the network, after which we update the weights/biases. <em>batch_size</em> decides the size of this subset.
 The model builder can be downloaded as a zip file.</p>
 
 <h3 id="deep-learning-training-and-evaluation"><strong>Deep learning training and evaluation</strong></h3>
@@ -1038,7 +1051,7 @@ The model builder can be downloaded as a zip file.</p>
 
 </blockquote>
 
-<p>The training step generates 3 datasets. 1) accuracy of the trained model, 2) the trained model, downloadable as a zip file, and 3) the trained 
+<p>The training step generates 3 datasets. 1) accuracy of the trained model, 2) the trained model, downloadable as a zip file, and 3) the trained
 model weights, downloadable as an hdf5 file. These files are needed for prediction in the next step.</p>
 
 <h3 id="model-prediction"><strong>Model Prediction</strong></h3>
@@ -1062,7 +1075,7 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 
 </blockquote>
 
-<p>The prediction step generates 1 dataset. It’s a file that has predictions (1 or 0 for positive or negative movie reviews) for every review in 
+<p>The prediction step generates 1 dataset. It’s a file that has predictions (1 or 0 for positive or negative movie reviews) for every review in
 the test dataset.</p>
 
 <h3 id="machine-learning-visualization-extension"><strong>Machine Learning Visualization Extension</strong></h3>
@@ -1085,12 +1098,12 @@ the test dataset.</p>
 
 </blockquote>
 
-<p><strong>Confusion Matrix</strong> is a table that describes the performance of a classification model. It lists the number of positive and negative examples 
-that were correctly classified by the model, True positives (TP) and true negatives (TN), respectively. It also lists the number of examples that 
-were classified as positive that were actually negative (False positive, FP, or Type I error), and the number of examples that were classified 
-as negative that were actually positive (False negative, FN, or Type 2 error). Given the confusion matrix, we can calculate <strong>precision</strong> and 
-<strong>recall</strong> <a class="citation" href="#TatbulEtAl">Tatbul <i>et al.</i> 2018</a>. Precision is the fraction of predicted positives that are true positives (Precision = TP / (TP + FP)). Recall 
-is the fraction of true positives that are predicted (Recall = TP / (TP + FN)). One way to describe the confusion matrix with just one value is 
+<p><strong>Confusion Matrix</strong> is a table that describes the performance of a classification model. It lists the number of positive and negative examples
+that were correctly classified by the model, True positives (TP) and true negatives (TN), respectively. It also lists the number of examples that
+were classified as positive that were actually negative (False positive, FP, or Type I error), and the number of examples that were classified
+as negative that were actually positive (False negative, FN, or Type 2 error). Given the confusion matrix, we can calculate <strong>precision</strong> and
+<strong>recall</strong> <a class="citation" href="#TatbulEtAl">Tatbul <i>et al.</i> 2018</a>. Precision is the fraction of predicted positives that are true positives (Precision = TP / (TP + FP)). Recall
+is the fraction of true positives that are predicted (Recall = TP / (TP + FN)). One way to describe the confusion matrix with just one value is
 to use the <strong>F score</strong>, which is the harmonic mean of precision and recall</p>
 
 \[Precision = \frac{\text{True positives}}{\text{True positives + False positives}}\]
@@ -1101,14 +1114,14 @@ to use the <strong>F score</strong>, which is the harmonic mean of precision and
 
 <figure id="figure-12"><img src="../../images/ConfusionMatrix.png" alt="Confusion matrix for our sentiment analysis problem" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Sentiment analysis confusion matrix</figcaption></figure>
 
-<p>Figure 12 is the resultant confusion matrix for our sentiment analysis problem. The first row in the table represents the <em>true</em> 0 (or negative sentiment) 
-class labels (we have 10,397 + 2,103 = 12,500 reviews with negative sentiment). The second row represents the <em>true</em> 1 (or positive sentiment) class labels 
-(Again, we have 1,281 + 11,219 = 12,500 reviews with positive sentiment). The left column represents the <em>predicted</em> negative sentiment class labels (Our RNN 
-predicted 10,397 + 1,281 = 11,678 reviews as having a negative sentiment). The right column represents the <em>predicted</em> positive class labels (Our RNN 
-predicted 11,219 + 2,103 = 13,322 reviews as having a positive sentiment).Looking at the bottom right cell, we seethat our RNN has correctly predicted 11,219 
-reviews as having a positive sentiment (True positives). Looking at the top right cell, we see that our RNN has incorrectly predicted 2,103 reviews as having 
+<p>Figure 12 is the resultant confusion matrix for our sentiment analysis problem. The first row in the table represents the <em>true</em> 0 (or negative sentiment)
+class labels (we have 10,397 + 2,103 = 12,500 reviews with negative sentiment). The second row represents the <em>true</em> 1 (or positive sentiment) class labels
+(Again, we have 1,281 + 11,219 = 12,500 reviews with positive sentiment). The left column represents the <em>predicted</em> negative sentiment class labels (Our RNN
+predicted 10,397 + 1,281 = 11,678 reviews as having a negative sentiment). The right column represents the <em>predicted</em> positive class labels (Our RNN
+predicted 11,219 + 2,103 = 13,322 reviews as having a positive sentiment).Looking at the bottom right cell, we seethat our RNN has correctly predicted 11,219
+reviews as having a positive sentiment (True positives). Looking at the top right cell, we see that our RNN has incorrectly predicted 2,103 reviews as having
 a positive (False positives). Similarly, looking at the top left cell, we see that our RNN has correctly predicted 10,397 reviews as having negative sentiment
-(True negative). Finally, looking at the bottom left cell, we see that our RNN has incorrectly predicted 1,281 reviews as negative (False negative). Given 
+(True negative). Finally, looking at the bottom left cell, we see that our RNN has incorrectly predicted 1,281 reviews as negative (False negative). Given
 these numbers we can calculate Precision, Recall, and the F score as follows:</p>
 
 \[Precision = \frac{\text{True positives}}{\text{True positives + False positives}} = \frac{11,219}{11,219 + 2,102} = 0.84\]
@@ -1119,12 +1132,17 @@ these numbers we can calculate Precision, Recall, and the F score as follows:</p
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
-<p>In this tutorial, we briefly reviewed feedforward neural networks, explained how recurrent neural networks are different, and discussed various 
-RNN input/output and architectures. We also discussed various text representation and preprocessing schemes and used <span class="notranslate">Galaxy</span> to solve a sentiment 
+<p>In this tutorial, we briefly reviewed feedforward neural networks, explained how recurrent neural networks are different, and discussed various
+RNN input/output and architectures. We also discussed various text representation and preprocessing schemes and used <span class="notranslate">Galaxy</span> to solve a sentiment
 classification problem using RNN on IMDB movie reviews dataset.</p>
 
 
                     
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/statistics/faqs/">FAQ page for the Statistics and machine learning topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
                     
 
