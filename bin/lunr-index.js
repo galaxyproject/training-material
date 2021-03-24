@@ -35,7 +35,7 @@ tutorials = findTutorials("topics", "tutorial.md").map(tuto => {
 	filtered = result.content.split('\n')
 		.filter(x => x[0] !== '>') // Remove boxes
 		.filter(x => x[0] !== '{') // remove closing tag
-		.slice(0, 25) // first 25 lines
+		//.slice(0, 25) // first 25 lines
 		.join('\n')
 
 	output = {
