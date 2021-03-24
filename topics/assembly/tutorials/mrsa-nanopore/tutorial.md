@@ -74,7 +74,7 @@ reads, which are sequences of detected nucleotides. Depending on the
 technique these have specific lengths (30-500bp) or using Oxford
 Nanopore Technologies sequencing have much longer variable lengths.
 
-{% snippet faqs/galaxy/analysis_nanopore.md %}
+{% snippet faqs/galaxy/sequencing_nanopore.md %}
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -236,7 +236,7 @@ reads with variable length with high error tolerance. Flye will output the
 assembly in a .fasta file, which looks like a .fastq file without the 3rd and
 4th line for the "+" sign and the quality score.
 
-{% snippet faqs/galaxy/analysis_warning_results_may_vary.md %}
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 > ### {% icon hands_on %} Hands-on: Assembly using Flye
 >

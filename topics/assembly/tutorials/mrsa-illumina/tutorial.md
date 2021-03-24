@@ -74,7 +74,7 @@ reads, which are sequences of detected nucleotides. Depending on the
 technique these have specific lengths (30-500bp) or using Oxford
 Nanopore Technologies sequencing have much longer variable lengths.
 
-{% snippet faqs/galaxy/analysis_illumina-miseq.md %}
+{% snippet faqs/galaxy/sequencing_illumina_miseq.md %}
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -256,7 +256,7 @@ There are many tools that create assembly for short-read data, but in this
 tutorial Shovill will be used. Shovill is a SPAdes based genome assembler,
 improved to work faster and only for smaller (bacterial) genomes.
 
-{% snippet faqs/galaxy/analysis_warning_results_may_vary.md %}
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 > ### {% icon hands_on %} Hands-on: Assembly using Shovill
 >
