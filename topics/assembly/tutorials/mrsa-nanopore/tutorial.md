@@ -74,7 +74,7 @@ reads, which are sequences of detected nucleotides. Depending on the
 technique these have specific lengths (30-500bp) or using Oxford
 Nanopore Technologies sequencing have much longer variable lengths.
 
-{% include snippets/nanopore.md %}
+{% snippet faqs/galaxy/analysis_nanopore.md %}
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -85,20 +85,21 @@ Nanopore Technologies sequencing have much longer variable lengths.
 >    {{ page.zenodo_link }}/files/DRR187567.fastq.bz2
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Convert the datatype of this output to uncompress it
 >
->    {% include snippets/convert_datatype.md conversion="Convert compressed to uncompressed" %}
+>    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="Convert compressed to uncompressed" %}
 >
 > 4. Rename the dataset to just the sequence run ID: `DRR187567`
 >
->    {% include snippets/rename_dataset.md name="DRR187567" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="DRR187567" %}
 >
 > 5. Tag the dataset `#unfiltered`
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 > 6. **View** {% icon galaxy-eye %} the renamed file
 >
@@ -156,11 +157,11 @@ reads include:
 >
 > 2. Rename the dataset to `DRR187567-filtered`
 >
->    {% include snippets/rename_dataset.md name="DRR187567-filtered" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="DRR187567-filtered" %}
 >
 > 3. Tag the dataset `#filtered`
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 > 3. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters:
 >    - *"Select multifile mode"*: `batch`
@@ -178,7 +179,7 @@ Comparing different output files is easier if we can view more than one dataset
 simultaneously. The Scratchbook function allows us to build up a collection of
 datasets that will be shown on the screen together.
 
-{% include snippets/scratchbook.md %}
+{% snippet faqs/galaxy/features_scratchbook.md %}
 
 Open both NanoPlot HTML Reports and check the **General summary** section of each to compare the results:
 
@@ -235,7 +236,7 @@ reads with variable length with high error tolerance. Flye will output the
 assembly in a .fasta file, which looks like a .fastq file without the 3rd and
 4th line for the "+" sign and the quality score.
 
-{% include snippets/warning_results_may_vary.md %}
+{% wnippet faqs/galaxy/analysis_warning_results_may_vary.md %}
 
 > ### {% icon hands_on %} Hands-on: Assembly using Flye
 >
@@ -468,7 +469,7 @@ from prokka as an information track.
 
 If it takes too long to build the JBrowse instance, you can view an embedded one here. (**Warning**: feature name search will not work.)
 
-{% include snippets/jbrowse.html datadir="data" tracks="DNA,d6de62f94b0de381be4ee8f27dd61ab9_0,81dca2c0e6930aa541a1a88927ed51dd_0" %}
+{% snippet topics/visualisation/faqs/visualizations_jbrowse.html datadir="data" tracks="DNA,d6de62f94b0de381be4ee8f27dd61ab9_0,81dca2c0e6930aa541a1a88927ed51dd_0" %}
 
 A useful option is the "search features" option
 
