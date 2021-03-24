@@ -65,12 +65,12 @@ We've provided you with experimental data to analyse from a mouse dataset of fet
 >    {{ page.zenodo_link }}/files/Mito-counted_AnnData
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. **Rename** {% icon galaxy-pencil %} the datasets `Mito-counted AnnData`
 > 4. Check that the datatype is `h5ad`
 >
->    {% snippet snippets/change_datatype.md datatype="h5ad" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="h5ad" %}
 >
 {: .hands_on}
 
@@ -113,7 +113,7 @@ You have generated an annotated AnnData object from your raw scRNA-seq fastq fil
 
 {% icon time %} **Top time-saving advice** - turn the 3 **Inspect AnnData** outputs above into a workflow for quick access!
 
-{% snippet snippets/create_new_workflow.md %}
+{% snippet faqs/galaxy/workflows_create_new.md %}
 
 ## Generate QC Plots
 
@@ -186,7 +186,7 @@ We want to filter our cells, but first we need to know what our data looks like.
 
 That's a lot of information! Let's attack this in sections and see what questions these plots can help us answer. The *scratchbook* {% icon galaxy-scratchbook %} may help here to look at the different plots at the same time!
 
-{% snippet snippets/use_scratchbook.md %}
+{% snippet faqs/galaxy/features_scratchbook.md %}
 
 > ### {% icon question %} Question - Batch Variation
 >
@@ -894,7 +894,7 @@ Be warned - this visualisation tool is a powerful option for exploring your data
 > > 1. **Rename** your history (by clicking on the history title) as `DECISION-Filtering and Plotting Single-cell RNA-seq Data`
 > > 2. Add a history annotation {% icon history-annotate %} that includes which parameters you changed/steps you changed from the *control*
 > >
-> >    {% snippet snippets/sharing_history.md %}
+> >    {% snippet faqs/galaxy/histories_sharing.md %}
 > >
 > > 3. Feel free to explore any other similar histories
 {: .details}
