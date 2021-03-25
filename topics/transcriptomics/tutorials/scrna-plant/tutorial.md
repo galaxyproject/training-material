@@ -45,7 +45,7 @@ Single cell RNA-seq analysis is a cornerstone of developmental research and prov
 ![The various cell subpopulations that are expected within this tutorial](../../images/scrna-plant/scrna-plant1.jpg)
 
 
-This tutorial replicates the paper ["Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing"](https://doi.org/10.1016/j.devcel.2019.02.022), where the major plant cell types are recovered in the data as well as distinguishing QC and meristematic cells.
+This tutorial replicates the paper ["Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing"](https://doi.org/10.1016/j.devcel.2019.02.022), where the major plant cell types are recovered in the data as well as distinguishing between QC and meristematic cells.
 
 
 > ### Agenda
@@ -367,7 +367,6 @@ With our data now sufficiently "flat" and ready for human consumption, we can no
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in PCA coordinates, using 'pl.pca`
 >      - *"Keys for annotations of observations/cells or variables/genes"*: `batch`
 >      - In *"Plot attributes"*
->        - *"Location of legend"*: `on data`
 >        - *"Colors to use for plotting categorical annotation groups"*: `rainbow`
 >
 > 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
@@ -375,7 +374,6 @@ With our data now sufficiently "flat" and ready for human consumption, we can no
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
 >      - *"Keys for annotations of observations/cells or variables/genes"*: `batch`
 >      - In *"Plot attributes"*
->        - *"Location of legend"*: `on data`
 >        - *"Colors to use for plotting categorical annotation groups"*: `rainbow`
 >
 {: .hands_on}
@@ -415,7 +413,18 @@ Let us cluster the cells and see what cell types we can discover in the plots. T
 >            - *"Legend font size"*: `14`
 >            - *"Colors to use for plotting categorical annotation groups"*: `rainbow (Miscellaneous)`
 >
+>    > ### {% icon comment %} Comment
+>    >
+>    > We print the legend on the data because it's easier to see where the cluster labels apply.
+>    {: .comment} 
+>
 {: .hands_on}
+
+![UMAP Leiden Clusters](../../images/scrna-plant/clusters_found.png)
+
+Here we have recovered 10 clusters (TODO: Fix this) but we don't yet know what types they describe. If we have a list of genes that we know are indicative of a certain cell type (i.e. are marker genes) then we can use this to assign labels to our clusters.
+
+Let us here try to recreate the DotPlot from the paper using the clusters we have discovered.
 
 ## DotPlot and Validating Cell Types
 
@@ -470,6 +479,14 @@ Let us cluster the cells and see what cell types we can discover in the plots. T
 >
 {: .hands_on}
 
+By running the above we end up with the following DotPlot:
+
+![Dotplot In Analyssis](../../images/dotplot_found.png)
+
+Notice how we have the Columella, QC and NC sharing the same cluster XXX, that the Endodermis is localised in cluster XXX, the Cortex in cluster XXX, the Trichoblast cells in cluster XXXX, the Xylem showing strong expression in cluster XXXX, VC most in clusters XXXX and YYYY, and the Atrichoblasts have a mixed expression in the first few clusters. These characteristics are the same as the Dotplot in the original paper.
+
+We can use this Dotplot as a guide to relabel our clusters and give more meaningful annotations to the plots.
+
 ## Relabel clusters
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -492,23 +509,12 @@ Let us cluster the cells and see what cell types we can discover in the plots. T
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
+![Relabelled clusters](../../images/scrna-plant/clusters_found_relabelled.png)
 
 ## Conclusions
 
-None yet. We need to know whether or not we do lineage, maybe using Seurat?
+In this tutorial we have recapitulated the same clustering analysis in the ["Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing"](https://doi.org/10.1016/j.devcel.2019.02.022) paper, and validated them by comparing DotPlots for specific genes that were used as markers in that paper.
+
+From this point we can perform a lineage analysis to infer a differentiation pathway between the clusters. For ScanPy there is the PAGA option, however this does not work so well with the current dataset, so it is encouraged that users use the original Seurat trajectory suite that was given in the paper, or to experiment with Monocle.
+
+Both libraries are available within the RStudio and Jupyter Notebook libraries in the interactive Galaxy envronments which can be found in the *"Miscellaneous Tools"* section under the *"Interactive Tools"* subheading.
