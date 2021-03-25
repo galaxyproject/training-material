@@ -1,13 +1,11 @@
 ---
 layout: tutorial_hands_on
 
-title: "miRNA target indentification in Arabidopsis thaliana"
-subtopic: other
+title: 'miRNA target indentification in Arabidopsis thaliana'
 zenodo_link: 'https://zenodo.org/record/4606701'
 tags: 
     - miRNA
     - plants
-    - rna-seq
 questions:
 - Which miRNAs are upregulated in response to brassinosteroids?
 - Which genes are potential target of brassinosteroid-induced miRNAs?
@@ -130,7 +128,6 @@ The first step of our analysis consists of retrieving the RNA-seq datasets from 
 >    - Copy the Zenodo links included in the `Control mRNA samples` section and press <kbd>Start</kbd> and <kbd>Build</kbd>
 >    - Assign a name to the new collection: `Control mRNA`
 >
->    {% snippet snippets/import_via_link.md %}
 >    {% snippet snippets/import_from_data_library.md %}
 >
 > 3. Add informative tags (i.e. `#mRNA` and `#control`)
@@ -661,7 +658,7 @@ Now we will now obtain the sequences of miRNAs whose expression is induced by br
 
 > ### {% icon hands_on %} Hands-on: identification of potential miRNA targets
 >
-> 1. {% tool [TargetFinder](toolshed.g2.bx.psu.edu/repos/rnateam/targetfinder/targetfinder/1.7.0+galaxy1) %} with the following parameters:
+> 1. {% tool [TargetFinder](toolshed.g2.bx.psu.edu/repos/rnateam/targetfinder/targetfinder/1.7.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input small RNA sequences file"*: `miRNA_upreguled_sequences.fasta`
 >    - {% icon param-file %} *"Target sequence database file*": `mRNA_downregulated_sequences.fasta`
 >    - *"Prediction score cutoff value"*: `5.0`
@@ -705,7 +702,7 @@ In order to test the second hypothesis, we will use the miRNA sequences obtained
 
 > ### {% icon hands_on %} Hands-on: identification of potential miRNA targets (round 2)
 >
-> 1. {% tool [TargetFinder](toolshed.g2.bx.psu.edu/repos/rnateam/targetfinder/targetfinder/1.7.0+galaxy1) %} with the following parameters:
+> 1. {% tool [TargetFinder](toolshed.g2.bx.psu.edu/repos/rnateam/targetfinder/targetfinder/1.7.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input small RNA sequences file"*: `miRNA_sequences_original_dataset.fasta`
 >    - {% icon param-file %} *"Target sequence database file*": `mRNA_downregulated_sequences.fasta`
 >    - *"Prediction score cutoff value"*: `5.0`
