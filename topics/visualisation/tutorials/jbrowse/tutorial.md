@@ -55,7 +55,7 @@ This tutorial covers version 1.16.5+ of the JBrowse tool, earlier versions will 
 >
 > 1. Create and name a new history for this tutorial.
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the datasets we will visualize:
 >
@@ -72,7 +72,7 @@ This tutorial covers version 1.16.5+ of the JBrowse tool, earlier versions will 
 >    https://zenodo.org/record/3591856/files/variants.vcf
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 {: .hands_on}
 

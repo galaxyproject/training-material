@@ -542,13 +542,13 @@ This data is available from directly from GenBank using the following [link](htt
 
 > ### {% icon hands_on %} Hands-on: Get the reference genome data
 >
-> 1.  Import the following file into your history:
+> 1. Import the following file into your history:
 >
->     ```
->https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/858/895/GCF_009858895.2_ASM985889v3/GCF_009858895.2_ASM985889v3_genomic.fna.gz
->     ```
+>    ```
+>    https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/858/895/GCF_009858895.2_ASM985889v3/GCF_009858895.2_ASM985889v3_genomic.fna.gz
+>    ```
 >
->    {% snippet snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 {: .hands_on}
 

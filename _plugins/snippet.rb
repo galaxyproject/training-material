@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+require 'yaml'
 
 module Jekyll
   module Tags
@@ -9,6 +9,18 @@ module Jekyll
           Jekyll::Converters::Markdown
         ).convert(text.to_s)
       end
+
+      def get_icon(icon)
+         if icon.start_with?("fa")
+          %Q(<i class="#{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
+         elsif icon.start_with?("ai")
+          %Q(<i class="ai #{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
+         end
+      end
+
+       def get_config(context)
+           context.registers[:site].config['icon-tag']
+       end
 
       def render(context)
 
@@ -24,9 +36,45 @@ module Jekyll
 
         context.stack do
           context["include"] = parse_params(context) if @params
-          x = inclusion.render(context)
-          x.gsub!(/\A---(.|\n)*?---/, '')
-          markdownify(x).gsub(/\r/, '').gsub(/\n/, '')
+          x = "#{inclusion.render(context)}"
+          p = context["include"]
+
+          box_start=""
+          box_end=""
+          if x.slice(0, 3) == '---'
+            metadata = YAML.load(x)
+
+            # allow overriding box type with include parameter ("none" to render without a box)
+            if not p.nil? and p["box_type"]
+                box_type = p["box_type"]
+            else
+                box_type = metadata['box_type']
+            end
+            icons = get_config(context)
+
+            if box_type == 'tip'
+                icon_text = icons['tip']
+                box_start = '> ### '+get_icon(icon_text)+' Tip: ' + metadata['title']
+                box_end   = "\n{: .tip}"
+            end
+            if box_type == 'hands_on'
+                icon_text = icons['hands_on']
+                box_start = '> ### '+get_icon(icon_text)+' Hands-on: ' + metadata['title']
+                box_end   = "\n{: .hands_on}"
+            end
+            if box_type == 'comment'
+                icon_text = icons['comment']
+                box_start = '> ### '+get_icon(icon_text)+' ' + metadata['title']
+                box_end   = "\n{: .comment}"
+            end
+          end
+          y = x.gsub(/\A---(.|\n)*?---/, '')
+          if box_start != ""
+             y = y.gsub(/\R+/,"\n> ")
+             #puts box_start+y+box_end
+          end
+
+          '<!--SNIPPET-->' + markdownify(box_start+y+box_end).gsub(/\R+/, '').gsub('<h3','<h3 data-toc-skip')
         end
       end
 
@@ -64,6 +112,20 @@ module Jekyll
       end
     end
   end
+
+  module RegexReplace
+    def regex_replace(str, regex_search, value_replace)
+      regex = /#{regex_search}/m
+      return str.gsub(regex, value_replace)
+    end
+
+    def regex_replace_once(str, regex_search, value_replace)
+      regex = /#{regex_search}/m
+      return str.sub(regex, value_replace)
+    end
+  end
+
 end
 
 Liquid::Template.register_tag("snippet", Jekyll::Tags::SnippetIncludeTag)
+Liquid::Template.register_filter(Jekyll::RegexReplace)

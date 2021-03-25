@@ -1,16 +1,11 @@
 ---
-layout: base
+layout: page
 ---
 
-{% include _includes/default-header.html %}
+{{ page.description }}
+<hr>
 
-<div class="container main-content">
-    <section>
-        <h1>Frequently asked questions</h1>
+{{content | regex_replace: '<hr.*—<\/p>', '' }}
 
-        {{ content }}
 
-    </section>
-</div>
 
-{% include _includes/default-footer.html %}
