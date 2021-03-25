@@ -319,9 +319,21 @@ After normalising and regressing out unwanted factors, we will then scale the da
 
 ## Dimension Reduction
 
-PCA and UMAP
+Dimension reduction is the art of reducing a high dimensional dataset into a low dimensional "embedding" that humans can actually see (i.e. 2 or 3 dimensions), ideally such that the relationships or distances between data points are preserved in this embedding. In the context of single-cell datasets, this essentially means compressing > 10 000 genes into just 2 X/Y variables. 
 
-> ### {% icon hands_on %} Hands-on: Task description
+
+> ### {% icon tip %} Tip: Dimension Reduction
+>
+> You can learn more about dimension reduction by consulting the [Introduction to scRNA-seq video at slide XXXX]().
+>    {: .tip}
+
+This is usually a two step process: 
+
+ 1. A Principal Component Analysis (PCA) is used to perform an optimized "rotation" of the ~ 20 000 "unit" gene axes that we have, in order to better fit the data. These new axes or "principal components" are then *linear* combinations of the original unit axes, with an assosciated score of how variable each new axis is. By sorting these principal components by most variable to least variable, we can select the top N components and discard the rest, leaving us with most of the variation still in the data. Usually we select the top 40 principal components, which from 20 000 is a *huge* reduction in the dimensionality of the dataset. 
+
+1. We then perform a more complex kind of dimension reduction, one that does not assume any linearality in the axes. For scRNA-seq this is either tSNE or UMAP, with UMAP being the main choice due to how flexible it is in incorporating new data. Though UMAP is capable of working on extremely high dimensional datasets, it is often limited by time and space constraints (read: the computer does not respond in a reasonable timeframe, or it crashes), and so therefore it is quite normal to feed UMAP the output of the PCA as input. This will then be a dimension reduction from 50 to 2. With these final 2 dimensions, we can plot the data.
+
+> ### {% icon hands_on %} Hands-on: PCA and UMAP
 >
 > 1. {% tool [Cluster, infer trajectories and embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Inspect and manipulate** {% icon tool %})
@@ -335,22 +347,56 @@ PCA and UMAP
 >        - *"The size of local neighborhood (in terms of number of neighboring data points) used for manifold approximation"*: `10`
 >        - *"Number of PCs to use"*: `40`
 >
+>    > ### {% icon comment %} Comment
+>    >
+>    > UMAP relies on a connected graph of cells to operate. Please see: [Introduction to scRNA-seq video at slide XXXX]() for more information on how this process works.
+>    {: .comment} 
+>
 > 1. {% tool [Cluster, infer trajectories and embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Inspect and manipulate** {% icon tool %})
 >    - *"Method used"*: `Embed the neighborhood graph using UMAP, using 'tl.umap'`
 >
->    ***TODO***: *Check parameter descriptions*
+{: .hands_on}
+
+With our data now sufficiently "flat" and ready for human consumption, we can now do a naive plot of both the PCA and the UMAP and show cell assignments coloured by batch.
+
+> ### {% icon hands_on %} Hands-on: Plot the PCA and UMAP by Batch
 >
->    ***TODO***: *Consider adding a comment or tip box*
+> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Cluster, infer trajectories and embed** {% icon tool %})
+>    - *"Method used for plotting"*: `Embeddings: Scatter plot in PCA coordinates, using 'pl.pca`
+>      - *"Keys for annotations of observations/cells or variables/genes"*: `batch`
+>      - In *"Plot attributes"*
+>        - *"Location of legend"*: `on data`
+>        - *"Colors to use for plotting categorical annotation groups"*: `rainbow`
 >
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Cluster, infer trajectories and embed** {% icon tool %})
+>    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
+>      - *"Keys for annotations of observations/cells or variables/genes"*: `batch`
+>      - In *"Plot attributes"*
+>        - *"Location of legend"*: `on data`
+>        - *"Colors to use for plotting categorical annotation groups"*: `rainbow`
 >
 {: .hands_on}
 
+| PCA                                | UMAP                                 |
+|:----------------------------------:|:------------------------------------:|
+| ![PCA](../../images/pca_batch.png) | ![UMAP](../../images/umap_batch.png) |
+
+
+From this we can see that there is a reasonable overlap in our batches shown both in the PCA and UMAP embeddings. This is good because it shows that though there is *some* batch effect (i.e. cells from one batch appear to cluster on a different side of the plot than the other) it is not significant enough for there not to be some commonality between the batches. 
+
+There are batch correction algorithms for cases where one batch clusters completely seperate from the other, but this is not necessary here. 
+
 ## Clustering
+
+Let us cluster the cells and see what cell types we can discover in the plots. The cell types that we wish to recover are those shown in the original paper, as highlighted by the gene markers in the DotPlot below.
+
+| UMAP                                   | DotPlot                                    |
+|:--------------------------------------:|:------------------------------------------:|
+| ![PCA](../../images/clusters_expected) | ![UMAP](../../images/dotplot_expected.png) |
+
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
