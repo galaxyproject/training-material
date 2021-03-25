@@ -36,11 +36,16 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 > ### {% icon comment %} Comment
 >
-> Please familiarise yourself with the ["Clustering 3K PBMCs with ScanPy"]() tutorial first, as much of the concepts and processes are the same.
+> Please familiarise yourself with the ["Clustering 3K PBMCs with ScanPy"]() tutorial first, as much of the process is the same, and the accompanying slide deck better explains some of the methods and concepts better.
 >
 {: .comment}
 
-This tutorial replicates the paper ["Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing"](https://doi.org/10.1016/j.devcel.2019.02.022).
+Single cell RNA-seq analysis is a cornerstone of developmental research and provides a great level of detail in understanding the underlying dynamic processes within tissues. In the context of plants, this highlights some of the key differentiation pathways that root cells undergo.
+
+![The various cell subpopulations that are expected within this tutorial](../../images/scrna-plant/scrna-plant1.jpg)
+
+
+This tutorial replicates the paper ["Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing"](https://doi.org/10.1016/j.devcel.2019.02.022), where the major plant cell types are recovered in the data as well as distinguishing QC and meristematic cells.
 
 
 > ### Agenda
@@ -54,17 +59,12 @@ This tutorial replicates the paper ["Spatiotemporal Developmental Trajectories i
 
 # Data
 
-In this paper we replicate the analysis of the plant dataset.
+The *Arabidopsis* root cells come from two biological replicates which were isolated and profiles using droplet-based scRNA-seq (please see: ["Tenx Tutorial"](TODO); a "short root" mutant (labelled: `shr`) and a wild-type (labelled: `wt`):
 
-Some intro on why plant datasets are the new thing, why it's worth studying.
+* GSE123818_Root_single_cell_**shr**_datamatrix.fixednames.transposed.csv.gz
+* GSE123818_Root_single_cell_**wt**_datamatrix.fixednames.transposed.csv.gz
 
-We have two datasets, wildtype and mutant
-
-
-* GSE123818_Root_single_cell_shr_datamatrix.fixednames.transposed.csv.gz
-* GSE123818_Root_single_cell_wt_datamatrix.fixednames.transposed.csv.gz
-
-As explained in the Zenodo link, the datasets have been modified to use more common gene names and the datasets have been transposed to better suit AnnData.
+As explained in the Zenodo link, the datasets have been modified to use more common gene names (hence the "fixednames" suffix) and the datasets have been transposed to better suit the AnnData format (hence the "transposed" suffix). The datasets are CSV tabular files which have been compressed using gunzip. We will now import these for analysis.
 
 
 ## Data upload
@@ -72,7 +72,7 @@ As explained in the Zenodo link, the datasets have been modified to use more com
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the `GSE123818_Root_single_cell_shr_datamatrix.fixednames.transposed.csv.gz` and `GSE123818_Root_single_cell_wt_datamatrix.fixednames.transposed.csv.gz` from [Zenodo]({{ page.zenodo_link }}) or from the shared data library
+> 2. Import the two datasets from [Zenodo]({{ page.zenodo_link }}) or from the shared data library
 >
 >    ```
 >    {{ page.zenodo_link }}/files/GSE123818_Root_single_cell_shr_datamatrix.fixednames.transposed.csv.gz
@@ -83,12 +83,15 @@ As explained in the Zenodo link, the datasets have been modified to use more com
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Rename the datasets to `cells_shr` and `cells_wt`.
+> 3. Apply the tags `#shr` and `#wt` to one of the datasets, with respect to the initial labels. These tags will be inherited for each task that the dataset undergoes.
+>
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
+>
 {: .hands_on}
 
 > ### {% icon question %} Questions
 >
-> We can peek at the `cells_shr` file, and determine the dimensionality and naming scheme of the data. The rows and the columns depict different variables.
+> We can peek at the `#shr` file, and determine the dimensionality and naming scheme of the data. The rows and the columns depict different variables.
 >
 > 1. Which are the cell barcodes? Rows or Columns?
 > 1. Which are the gene names? Rows or Columns?
@@ -98,9 +101,9 @@ As explained in the Zenodo link, the datasets have been modified to use more com
 > > ### {% icon solution %} Solution
 > >
 > > 1. Rows, notice the long A-C-T-G based names.
-> > 1. Columns, "ATXG" are the prefixes commonly used by XXXX.
+> > 1. Columns, "ATXG" are the gene prefixes commonly used by the Arabidopsis genomes.
 > > 1. There are 1 099 lines and therefore 1 099 cells
-> > 1. If we scroll the preview window all the way to the right we see 27630 as the last number. Given that the first column are the cell names, we must subtract by 1 to get 27 629 cells.
+> > 1. If we scroll the preview window all the way to the right we see 27 630 as the last number. Given that the first column are the cell names, we must subtract by 1 to get 27 629 cells.
 > >
 > {: .solution}
 >
@@ -108,44 +111,62 @@ As explained in the Zenodo link, the datasets have been modified to use more com
 
 If the above feels like a convoluted way to get the dimensionality, that's because we haven't imported the data into the right format. For this we need to import both datasets into a single AnnData object (see the [AnnData]() section in the "ScanPy Tutorial" tutorial).
 
-
 ## CSV to AnnData
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Converting the Data
 >
 > 1. {% tool [Import Anndata and loom](toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy0) %} with the following parameters:
 >    - *"hd5 format to be created"*: `Anndata file`
 >        - *"Format for the annotated data matrix"*: `Tabular, CSV, TSV`
 >            - {% icon param-file %} *"Annotated data matrix"*: Multi-select both `SHR` and `WT` datasets
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
+>    > ### {% icon tip %} Tip: Automatic 
+>    >
+>    > We can now inspect the dimensionality of the dataset by "peeking" at the dataset in the history and observing the general information, 
+>    {: .tip}
+>    
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > We can now inspect the dimensionality of the dataset by "peeking" at the dataset in the history and observing the general information, simply by clicking on the name of the dataset.
+>    >
+>    > The `#shr` dataset should show:
+>    >    ```
+>    >    [n_obs x n_vars]
+>    >        1099 x 27629
+>    >    ```
+>    > 
+>    > and the `#wt` should show:
+>    >    ```
+>    >    [n_obs x n_vars]
+>    >        4727 x 27629
+>    >    ```
+>    >
+>    > where *obs* refers to our observed cells, and *vars* references the genes/variables.
+>    > 
 >    {: .comment}
 >
 {: .hands_on}
 
+Currently we have two seperate datasets, but we can merge them into one single AnnData object seperated by batch identifiers "shr" and "wt". To do this, we simply manipulate one of the datasets and concatenate the other onto it.
+
 
 ## Merge Batches and Relabel
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Merging Data
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `SHR dataset` (output of **Import Anndata and loom** {% icon tool %})
 >    - *"Function to manipulate the object"*: `Concatenate along the observations axis`
 >        - {% icon param-file %} *"Annotated data matrix to add"*: `WT dataset` (output of **Import Anndata and loom** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+>    > ### {% icon tip %} Tip: Scheduling
+>    >
+>    > You can queue on the next task without the previous one being complete yet, just ensure that the input dataset for the next task is at least orange and not grey.
+>    {: .tip}
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > At this point, the AnnData dataset batch information has a value of `0` for the "SHR" cells and `1` for the "WT" cells. This is fine if you wish to remember these two values for the remainder of the analysis since the step below is optional, however for plotting purposes it can just be easier to relabel the batch information with the action text labels `shr` and `wt`.
 >    {: .comment}
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
@@ -154,86 +175,124 @@ If the above feels like a convoluted way to get the dimensionality, that's becau
 >        - *"Key for observations or variables annotation"*: `batch`
 >        - *"Comma-separated list of new categories"*: `shr, wt`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
+>    > ### {% icon warning %} Warning: Order matters!
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    > The order in which the datasets are concatenated can affect the accuracy of the new labelling. If the `#wt` dataset was first selected and then the `#shr` dataset concatenated onto it, then the comma-seperated list of new categories above should be inverted.
+>    {: .warning}
 >
 {: .hands_on}
 
+We can confirm that our datasets have been combined into a single object by peeking at the dataset in the history and confirming two things:
+
+1. The number of observations is equal to the total of the two initial AnnData datasets.
+2. The file size of the new AnnData dataset is approximately equal to the total of the two initial AnnData datasets.
+
+> |     Batch | Number of Cells | File Size |
+> |----------:|:----------------|----------:|
+> |       shr | 1099            |  117.2 MB |
+> |        wt | 4727            |  499.7 MB |
+> |----------:|:----------------|----------:|
+> | **Total** | 5826            |  615.6 MB |
+{: .matrix}
+
+A happy coincidence here is that both datasets already had the exact same variables, so that the merging of the two datasets still yields the same number of genes.
+
 ## Quality Control
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Generating some metrics
 >
 > 1. {% tool [Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata` (output of **Manipulate AnnData** {% icon tool %})
 >    - *"Method used for inspecting"*: `Calculate quality control metrics, using 'pp.calculate_qc_metrics'`
 >
-> 1. **TODO** {% tool [Scatter Plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0) %} with the following parameters:
+> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata` (output of **Manipulate AnnData** {% icon tool %})
->    - *"Method used for inspecting"*: `Calculate quality control metrics, using 'pp.calculate_qc_metrics'`
+>    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
+>      - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
+>        - *"Keys for accessing variables"*: `n_genes_by_counts, total_counts`
+>      - *"The key of the observation grouping to consider"*: `batch`
+>      - In *"Violin plot attributes"*:
+>        - *"Add a stripplot on top of the violin plot"*: `Yes`
+>          - *"Add a jitter to the stripplot"*: `Yes`
+>            - *"Size of the jitter points"*: `0.4`
+>        - *"Display keys in multiple panels"*: `Yes`
 >
 {: .hands_on}
 
+This should result in the following violin plot, where we see the distribution of the number of genes per cell (`n_genes_by_counts`) and the library size per cell, where the library size is the total number of mRNA in a cell, regardless of which gene it came from (`total_counts`).
+
+!["Violin Plots per Batch"](../../images/scrna-plant/violin1.png)
+
+Each dot is a cell, and the x-axis has two groups showing the absolute values of for each batch (`shr` and `wt`). The y-values correspond to the actual value of each cell, but the x-vales within each group are just random jitter to help see the cells more clearly. The outline of the violin plot shows us the density of each batch, where we can see that most of the cells in the `shr` group have an average number of features just below 2000 genes, compared to `wt` which has an average number of features just below 4000 genes. If we compare the library size however, we notice that the outlines are very similar and that the average library size across batches are comparable.
 
 ### Filter
 
-> ### {% icon hands_on %} Hands-on: Task description
+Most scRNA-seq datasets need to set a minimum threshold of detectability in order to ensure that the cells are of high enough quality to be used for analysis. Conversely, sometimes an upper threshold also should be set to counter the case where a cell is a cell-doublet (in the sense that two cells were captured and sequenced accidentally as a single cell). 
+
+The above violin plots suggest quite a few outliers, mostly on the upper-end of the density plots, suggesting a few cell-doublets in the data. The effect of these is not something we cannot easily regress out, and so we must filter them out instead. By looking at the plots, we can see that a good maximum library size here would be 100 000 transcripts, and a good maximum feature size would be 10 000 transcripts.
+
+For this analysis we will set a minimum threshold of detectability that each cell should count transcripts from at least 200 genes, and that each gene should be expressed in at least 5 cells. These lower-bound thresholds are not so easy to derive from such QC plots, but depend mostly on the type of data you are using. If the number of features and the library sizes were one order of magnitude higher, one might consider also scaling the lower-bound thresholds by one order of magnitude.
+
+> ### {% icon hands_on %} Hands-on: Filtering
 >
 > 1. {% tool [Filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Inspect and manipulate** {% icon tool %})
 >    - *"Method used for filtering"*: `Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'`
 >        - *"Filter"*: `Minimum number of genes expressed`
->            - *"Minimum number of genes expressed required for a cell to pass filtering"*: `TBD`
+>            - *"Minimum number of genes expressed required for a cell to pass filtering"*: `200`
 >
 > 1. {% tool [Filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Filter** {% icon tool %})
 >    - *"Method used for filtering"*: `Filter genes based on number of cells or counts, using 'pp.filter_genes'`
 >        - *"Filter"*: `Minimum number of cells expressed`
->            - *"Minimum number of cells expressed required for a gene to pass filtering"*: `TBD`
+>            - *"Minimum number of cells expressed required for a gene to pass filtering"*: `5`
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > We now set the upper limits to the analysis.
+>    > 
+>    {: .comment}
 >
 > 1. {% tool [Filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Filter** {% icon tool %})
 >    - *"Method used for filtering"*: `Filter genes based on number of cells or counts, using 'pp.filter_genes'`
 >        - *"Filter"*: `Maximum number of counts`
->            - *"Maximum number of counts required for a gene to pass filtering"*: `TBD`
+>            - *"Maximum number of counts required for a gene to pass filtering"*: `10000`
 >
 > 1. {% tool [Filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Filter** {% icon tool %})
 >    - *"Method used for filtering"*: `Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'`
 >        - *"Filter"*: `Maximum number of counts`
->            - *"Maximum number of counts required for a cell to pass filtering"*: `TBD`
+>            - *"Maximum number of counts required for a cell to pass filtering"*: `100000`
 >
 {: .hands_on}
 
-## Freeze Raw Data
+If we inspect the resulting dataset, we see that the number of cells remaining is `5826` and the number of genes is `18913`, which is still a good number of cells and genes. It is good practice to save the raw data in case we need to use it data, so we "freeze the raw data" into a slot for later safe keeping.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Saving the original matrix
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Filter** {% icon tool %})
 >    - *"Function to manipulate the object"*: `Freeze the current state into the 'raw' attribute`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
+
 
 ## Confounder Removal
 
-Normalizing, scaling and regressing out library size
+Now we have a set of cells we are reasonably confident contain desirable biological variation (please see the introduction video from XXXX as a reference for the types of wanted and unwanted variation). We wish to now regress out the library size variation, as it is not indicative of cell type. To do this we will first ensure that all cells are of the same comparable library size by applying individual size factors to each cell. 
 
-> ### {% icon hands_on %} Hands-on: Task description
+We will also apply a log transformation to the cells, as this compresses the variation into a less extreme space, making it easier to see the relative differences between cells. 
+
+After normalising and regressing out unwanted factors, we will then scale the data to have unit variance with a zero mean, so that the mean expression of each gene is not a factor in the analysis and only the variation is, ensuring that the later clustering is driven only by the relative variation of the genes, and not neccesarily how expressive those genes are.
+
+> ### {% icon hint %} Highly Variable Genes?
+>
+> Those of you who are familiar with the [ScanPy Tutorial]() might wonder why we have not reduced the number of genes by performing a highly variable gene selection. 
+> The answer is simply that it did not help with this particular dataset, and that by removing the least variable genes in the analysis, it did help us replicate the analysis in the paper. Try it for yourself as an intermediate step (after this analysis) and see!
+{: .hint}
+
+> ### {% icon hands_on %} Hands-on: Normalize and Scale
 >
 > 1. {% tool [Normalize](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata` (output of **Manipulate AnnData** {% icon tool %})
@@ -256,6 +315,7 @@ Normalizing, scaling and regressing out library size
 >        - *"Maximum value"*: `10.0`
 >
 {: .hands_on}
+
 
 ## Dimension Reduction
 
