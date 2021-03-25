@@ -11,7 +11,9 @@ questions:
   - Can we reclaim cell markers using a different analysis method?
   - Are highly variable genes paramount to the analysis?
 objectives:
-  - Fill in later
+  - Perform filtering, dimension reduction, and clustering
+  - Generate a DotPlot emulating the original paper using a different analysis tool
+  - Determine robust clusters across scRNA-seq pipelines
 requirements:
   -
     type: "internal"
@@ -19,9 +21,10 @@ requirements:
     tutorials:
         - scrna-scanpy-pbmc3k
 
-time_estimation: 1H
+time_estimation: 2H
 key_points:
-  - Fill in later
+  - Filtering parameters are dependent on the dataset, and should be explored using scatter or violin plots
+  - A DotPlot is a fantastic way to validate clusters across different analyses
 contributors:
   - mtekman
 
