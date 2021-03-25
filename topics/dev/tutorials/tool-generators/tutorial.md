@@ -3,11 +3,11 @@
 layout: tutorial_hands_on
 title: "Tool generation from simple scripts in Galaxy: the ToolFactory"
 key_points:
-  - The ToolFactory is a Galaxy tool for programmers and informaticians.
+  - The ToolFactory is a fully automated Galaxy tool generator, suitable for programmers and informaticians who routinely write command line scripts.
   - It can turn a working command line script into a proper Galaxy tool with a test in a few minutes.
   - It automatically generates simple, complete Galaxy tools from information provided by filling in a normal Galaxy form in the familiar UI.
   - Enjoy developing scripts in Galaxy using IEs but struggle to wrap even simple scripts at first because there is so much to learn and so little time? Try the TooLFactory (once you have a working command line version)
-  - A script defines how parameters are read from the command line, allowing some of the ToolFactory's limited flexibility to be overcome.
+  - Unlike a typical Conda package, a command line script can define how parameters are read from the command line. In particular, it is usually easy to ignore empty optional parameters, allowing some of the ToolFactory's limited flexibility to be overcome.
   - The ToolFactory code generator is limited to relatively simple requirements but these are very common in small scale Galaxy analyses, particularly in new fields where few tools are already available.
   - Dedicated Galaxy tool developers use more powerful tools without limits but correspondingly more experience to master.
   - Those are needed to deal with many complicated Conda dependency requirements.
@@ -334,9 +334,12 @@ cost of this convenience is that ToolFactory is limited to automated generation 
 - Set up your own working ToolFactory, install the samples in a history and then start exploring it and figuring out how it might help your work.
 - Depending on your preferences, install your own ToolFactory from one of the options described below.
 - The sections after this can **only be completed with a working ToolFactory**.
-- `persistence` is used in describing each option. It indicates whether the history recording all your ToolFactory work will still be there, next time you start working.
-- Some options are not persistent. They are **recommended only for testing or teaching**.
-- In all cases, the first time they are run and the first time a tool is built, most versions take a while to start - there's a lot that needs to be installed. Check for Conda and other running processes before assuming it has stopped.
+- Work done in a Planemo ToolFactory will not be `persistent`. For any serious use, this is a problem although saving histories or converted workflows can be used
+to manually persist the ToolFactory configuration for each new tool. Some options involve `persistent` Galaxy servers and these are much more useful for building and
+more importantly, updating tools. It can be disappointing to learn that the history recording all your ToolFactory work is no longer available the next time you start working.
+- Non persistent options are **recommended only for testing or teaching - not production**.
+- In all cases, the first time they are run and the first time a tool is built, most versions take a while to start - there's a lot that needs to be installed.
+Check for Conda and other running processes before assuming it has frozen.
 
 >#### Active Tutorial content follows
 >
