@@ -71,7 +71,26 @@ that allows the user to set this parameter when running the workflow.
 
 > ### {% icon hands_on %} Hands-on: Updating the Workflow
 >
-> 1. Upload a dataset using "Paste/Fetch data" with the contents `Helena and Marius are amazing`
+> 1. Upload a dataset using "Paste/Fetch data" with the contents:
+>
+>    ```
+>    E. coli (O19:H34. Extracellular pathogenic)
+>    E. coli (O7:K1. Extracellular pathogenic)
+>    E. coli 536
+>    E. coli APEC O1 (O1:K12:H7. APEC
+>    E. coli CFT083 (O6:K2:H1. UPEC)
+>    E. coli E2348/69 (O127:H6. Enteropathogenic)
+>    E. coli EC4115 (O157:H7 EHEC)
+>    E. coli ED1a O81 (Commensal)
+>    E. coli EDL933 (O157:H7 EHEC)
+>    E. coli F11
+>    E. coli S88 (O45:K1. Extracellular pathogenic)
+>    E. coli SE15 (O150:H5. Commensal)
+>    E. coli Sakai (O157:H7 EHEC)
+>    E. coli TW14359 (O157:H7 EHEC)
+>    E. coli UMN026 (O17:K52:H18. Extracellular pathogenic)
+>    E. coli UTI89 O18:K1:H7. UPEC)
+>    ```
 >
 > 2. Open the **workflow editor**
 >
