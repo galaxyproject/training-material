@@ -21,6 +21,7 @@ contributors:
   - slugger70
   - mvdbeek
   - hexylena
+  - gmauro
 subtopic: features
 tags:
   - jobs
@@ -589,7 +590,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >
 > 2. Install the BWA and BWA-MEM tools, if needed.
 >
->    {% snippet snippets/install_tool.md query="bwa" name="Map with BWA-MEM" section="Mapping" %}
+>    {% snippet topics/admin/faqs/install_tool.md query="bwa" name="Map with BWA-MEM" section="Mapping" %}
 >
 > 3. We now need to tell Galaxy to send BWA and BWA-MEM jobs to the `pulsar` destination. We specify this in the `<tools>` section of the `job_conf.xml` file.
 >
@@ -653,6 +654,37 @@ Now we will upload a small set of data to run bwa-mem with.
 You'll notice that the Pulsar server has received the job (all the way in Australia!) and now should be installing bwa-mem via conda. Once this is complete (which may take a while - first time only) the job will run. When it starts running it will realise it needs the *E. coli* genome from CVMFS and fetch that, and then results will be returned to Galaxy!
 
 How awesome is that? Pulsar in another continent with reference data automatically from CVMFS :)
+
+# Retries of the staging actions
+
+When the staging actions are carried out by the Pulsar server itself (like in the case when driving Pulsar by message queue), there are some parameters that can be tweaked to ensure reliable communication between the Galaxy server and the remote Pulsar server. 
+The aim of these parameters is to control the retrying of staging actions in the event of a failure.
+
+For each action (preprocess/input or postprocess/output), you can specify:
+```text
+ - *_action_max_retries    - the maximum number of retries before giving up
+ - *_action_interval_start - how long start sleeping between retries (in seconds)
+ - *_action_interval_step  - by how much the interval is increased for each retry (in seconds)
+ - *_action_interval_max   - the maximum number of seconds to sleep between retries
+```
+substitute the * with `preprocess` or `postprocess`
+
+In the following box, as an example, we have collected the values adopted in a Pulsar site with an unreliable network connection:
+
+```yaml
+preprocess_action_max_retries: 30
+preprocess_action_interval_start: 2
+preprocess_action_interval_step: 10
+preprocess_action_interval_max: 300
+postprocess_action_max_retries: 30
+postprocess_action_interval_start: 2
+postprocess_action_interval_step: 10
+postprocess_action_interval_max: 300
+
+```
+In this case, for both actions, Pulsar will try to carry out the staging action 30 times, sleeping 2 secs after the first retry and adding 10 secs more to each next retries, until a maximum of 300 seconds between retries.
+
+We hope you never have to experience a situation like this one, but if needed just adapt the numbers to your case and add the parameters in the `pulsar_yaml_config` section of your `pulsarservers.yml` file.
 
 # Pulsar in Production
 

@@ -86,11 +86,11 @@ Let's begin by uploading the necessary datasets.
 >    https://zenodo.org/record/3738729/files/test_rows.csv
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Rename the datasets as `train_rows`, `test_rows_labels` and `test_rows` respectively.
 >
->    {% snippet snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 

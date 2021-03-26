@@ -88,8 +88,8 @@ We will use a pre-calculated expression matrix, along with some additional metad
 >    https://zenodo.org/record/3386291/files/mt_controls.txt
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
 
@@ -248,3 +248,5 @@ As discussed previously, technical artefacts can bias scRNA-seq analyses. Strong
 {:.no_toc}
 We have gone through the process of filtering low-quality data from an scRNA-seq expression matrix, using the visualise-filter-visualise paradigm, which proves to be a very effective way of quality-controlling scRNA-seq data. Cells that have low read-coverage, low expression values, or high mitochondrial gene expression have been filtered out. We have then examined ways of looking at confounding factors to examine batch effects in our data.
 The workflow available from the "Supporting Materials" of this tutorial can be directly imported and used or adapted to a specific analysis.
+
+This tutorial is part of the https://singlecell.usegalaxy.eu portal ({% cite tekman2020single %} and {% cite etherington2019galaxy %})

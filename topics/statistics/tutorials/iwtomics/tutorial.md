@@ -59,7 +59,7 @@ The first tool (IWTomics Load Smooth and Plot) imports a collection of genomic r
 > ### {% icon hands_on %} Hands-on: Get the data
 > 1. Create a new history for this tutorial
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import datasets:
 >    - Fixed ETn (`ETn_fixed.bed`) regions
