@@ -15,11 +15,13 @@ objectives:
 - Idenfity potential miRNAs involved in brassinosteroid-mediated regulation networks
 time_estimation: '2H'
 key_points:
-- We learned to perform a miRNA differential expression analysis
-- We used a quasi-mapping approach for quantifiying gene expression
-- We learned how to identify potential miRNA targets
+- MiRDeep2 in combination with the PmiREN database allows to quantify miRNA expression in plants
+- The use of the Salmon tool and the AtRTD2 transcriptome allows rapid and accurate quantification of transcripts in Arabidopsis
+- The combination of differential expression analysis and the targetfinder tool is an effective strategy for the identification of miRNA target genes
 contributors:
 - gallardoalba
+- pavanvidem
+- beatrizserrano
 
 ---
 
@@ -29,15 +31,15 @@ contributors:
 
 Water stress is the main limiting factor faced by agricultural productivity and crop geographical distribution, and its consequences are increasing due to climate change ({% cite Fbregas2018 %}). The physiological effects of water stress on plant organisms (such as damage to antioxidant systems, decreased chlorophyll contents, negatively affect photosynthetic activity) leads to significant losses in crop yields. Understanding the mechanisms involved in the response to drought stress is a prerequisite for reducing their associated adverse effects.
 
-As sessile organisms, the survival of plant organisms under adverse environmental conditions depends to a large extent on their ability to perceibe stress stimuly and respond appropriately to counter the potential damaging effects. Coordination of phytohormones and reactive oxygen species are considered a key element for enhacing stress resistance, allowing fine-tune of gene expression in response to environmental changes. These molecules constitute complex signaling networks, endowing with the hability to respond to a variable natural environment.
+As sessile organisms, the survival of plant organisms under adverse environmental conditions depends, to a large extent, on their ability to perceive stress stimuli and respond appropriately to counteract the potentially damaging effects. Coordination of phytohormones and reactive oxygen species are considered a key element for enhancing stress resistance, allowing fine-tuning of gene expression in response to environmental changes. These molecules constitute complex signalling networks, endowing with the ability to respond to a variable natural environment.
 
 Brassinosteroids (BRs) are a group of plant steroid hormones essential for plant growth and development, as well as for controlling abiotic and biotic stress. Structurally, BRs are polyhydroxylated sterol derivatives with close similarity to animal hormones. This group of phytohormones is comprised of around 60 different compounds, of which brassinolide (BL), 24-epibrassinolide (EBR), and 28-homobrassinolide (HBR) are considered the most bioactive.
 
 ![Esteroid hormones](../../images/brassinosteroids.png "Structure of various plant and animal steroid hormones.")
 
-Several recent studies suggest that the BR-mediated gene regulatory networks have the potential to reshape the future of agriculture, not only by alleviating the antagonistic effect of drought stress but also by enhancing plant growth and yield. For instance, in tomato (_Solanum lycopersicum_), EBR treatment enhances drought tolerance, improving photosynthetic capacity, leaf water status, and antioxidant defense ({% cite Wang2018 %}). In pepper (_Capsicum annuum_), BL treatment increased the efficiency of light utilization under drought ({% cite Hu2013 %}). Gram (_Cicer arietinum_) plants exposed to drought stress and treated with BL showed significant increases in weight ({% cite Anwar2018 %}). However, the mechanisms of BRs action in enhancing plant tolerance to abiotic stresses still remain largely unknown. In this tutorial, we aim to explore the interplay between brassinosteroids and the miRNA-gene silencing pathway, considered one of the most versatile regulatory mechanisms in response to stressful situations in plants.
+Several recent studies suggest that the BR-mediated gene regulatory networks have the potential to reshape the future of agriculture, not only by alleviating the antagonistic effect of drought stress but also by enhancing plant growth and yield. For instance, in tomato (_Solanum lycopersicum_), EBR treatment enhances drought tolerance, improving photosynthetic capacity, leaf water status, and antioxidant defense ({% cite Wang2018 %}). In pepper (_Capsicum annuum_), BL treatment increased the efficiency of light utilization under drought ({% cite Hu2013 %}). Gram (_Cicer arietinum_) plants exposed to drought stress and treated with BL showed significant increases in weight ({% cite Anwar2018 %}). However, the mechanisms of BRs action in enhancing plant tolerance to abiotic stresses still remain largely unknown.
 
-MicroRNAs (miRNAs), mainly 20–22 nucleotide small RNAs (sRNAs), are characterized for regulating gene expression at the post-transcriptional level. miRNAs are distinguished from other sRNAs by being generated from precursor harboring an imperfect stem‐loop structure. Unlike in animals, the pre-processing of plant miRNA occurs in the nucleus. The pre-miRNAs are then exported to the cytoplasm after methylation and incorporated into the Argonaute 1 protein to form RISC (RNA-induced silencing complex). The miRNA itself does not has the ability to cleave mRNAs or interfere with translation, but it plays roles in scanning the appropriate target.
+MicroRNAs (miRNAs), mainly 20–22 nucleotide small RNAs (sRNAs), are characterized for regulating gene expression at the post-transcriptional level. miRNAs are distinguished from other sRNAs by being generated from precursor harboring an imperfect stem‐loop structure. Unlike in animals, the pre-processing of plant miRNA occurs in the nucleus. The pre-miRNAs are then exported to the cytoplasm after methylation and incorporated into the Argonaute 1 protein to form RISC (RNA-induced silencing complex). The miRNA itself does not have the ability to cleave mRNAs or interfere with translation, but it plays a role in scanning the appropriate target. 
 
 
 ![miRNA biosynthesis](../../images/plant_mirna_synthesis.png "Plant miRNA biosynthesis, homeostesis and mechanisms of action.")
@@ -50,7 +52,7 @@ miRNAs have been found to be important regulators of many physiological processe
 - The majority of plant miRNAs regulate the genes encoding for transcription factors (TFs)
 - Targets include not only mRNAs but also long noncoding RNAs (lncRNAs)
 
-In plants, miRNAs can silence targets through RNA degradation as well as translational repression pathways, and unlike animals, a large proportion of miRNA and their targets have less than four mismatches. This feature has been exploited for developing miRNAs target prediction tools, providing an efficient approach to elucidate the miRNA-mediated regulatory networks, which can contribute to biotechnological solutions to improve crops productivity.
+In plants, miRNAs can silence targets through RNA degradation as well as translational repression pathways, and unlike animals, a large proportion of miRNA and their targets have less than four mismatches. This feature has been exploited for developing miRNAs target prediction tools, providing an efficient approach to elucidate the miRNA-mediated regulatory networks, which can contribute to biotechnological solutions to improve crops productivity. In this tutorial, inspired by {% cite Park2020 %}, we aim to explore the interplay between brassinosteroids and the miRNA-gene silencing pathway, considered one of the most versatile regulatory mechanisms in response to stressful situations in plants.
 
 
 > ### Agenda
@@ -74,7 +76,7 @@ The datasets to be used in this training can be classified into three groups: mR
 
 ## mRNA reads
 
-The first dataset consists of four fastq files, generated through the Illumina HiSeq 2000 sequencing system. The samples were obtaied from wild-type Columbia (Col-0) seedlings treated with mock or 100 nM BL for 4 hours. The original datasets are available in the NCBI SRA database, with the accession number [SRP032274](https://www.ncbi.nlm.nih.gov/sra?term=SRP032274). For this tutorial, subsets from the original data were generated in order to reduce the analysis run time.
+The first dataset consists of four fastq files, generated through the Illumina HiSeq 2000 sequencing system. The samples were obtained from wild-type Columbia (Col-0) seedlings treated with mock or 100 nM BL for 4 hours. The original datasets are available in the NCBI SRA database, with the accession number [SRP032274](https://www.ncbi.nlm.nih.gov/sra?term=SRP032274). For this tutorial, subsets from the original data were generated in order to reduce the analysis run time.
 
 __Control mRNA samples:__
 ```
@@ -126,7 +128,7 @@ The first step of our analysis consists of retrieving the RNA-Seq datasets from 
 >    - Click on __Collection__ tab
 >    - Click of the **Paste/Fetch** button
 >    - Copy the Zenodo links included in the `Control mRNA samples` section and press <kbd>Start</kbd> and <kbd>Build</kbd>
->    - Assign a name to the new collection: `Control mRNA`
+>    - Assign a name to the new collection: `Control mRNA` and press <kbd>Create list</kbd>
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
@@ -135,7 +137,7 @@ The first step of our analysis consists of retrieving the RNA-Seq datasets from 
 >
 {: .hands_on}
 
-Next we will retrieve the remaining datasets, included in the section
+Next we will retrieve the remaining datasets.
 
 > ### {% icon hands_on %} Hands-on: Retrieve the additional datasets
 >
@@ -160,6 +162,20 @@ Next we will retrieve the remaining datasets, included in the section
 >
 {: .hands_on}
 
+> ### {% icon details %} Dataset subsampling 
+>
+> As indicated above, for this tutorial the depth of the samples was reduced in order to speed up the time needed to carry out the analysis. This was done as follows:
+>
+> > ### {% icon hands_on %} Hands-on: Initial quality check
+> >
+> > 1. {% tool [Sub-sample sequences files ](toolshed.g2.bx.psu.edu/repos/peterjc/sample_seqs) %} with the following parameters:
+> >    - {% icon param-files %} *"Multiple datasets"*: Each of the fastq files
+> >    - *"Subsampling approach"*: `Take every N-th sequence (or pair e.g. every fifth sequence)`
+> >    - *"N"*: `100`
+> {: .hands_on}
+> 
+> In this way, we will only take 1% of readings at a random sampling rate.
+{: .comment}
 
 # mRNA differential expression analysis
 
@@ -203,7 +219,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 > >
 > > All parameters are within acceptable limits. However, the adapter content shows the presence of universal adapters in our readings, which can be removed to avoid possible interferences at later stages.
 > >
-> >    ![Experimental design](../../images/miRNA_adapter_01.png "Experimental design")
+> >    ![Adapter content of mRNA samples](../../images/miRNA_adapter_01.png "Quality assessment of mRNA samples")
 > >
 > {: .solution}
 {: .question}
@@ -214,21 +230,21 @@ Sequence quality control is therefore an essential first step in your analysis. 
 
 ## Quantification of gene expression: **Salmon**
 
-After performing the quality assessment of the reads, we can move on to quantifying the gene expression. The aim of this step is to identify which transcript each read comes from and the total number of reads associated with each transcript. In this tutorial, we will use the [Salmon](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5600148/) tool for the quantification of mRNA transcripts.
+After performing the quality assessment of the reads, we can move on to quantifying the gene expression. The aim of this step is to identify which transcript each read comes from and the total number of reads associated with each transcript. In this tutorial, we will use the Salmon tool ({% cite Patro2017 %})  for the quantification of mRNA transcripts.
 
-![Experimental design](../../images/salmon_logo.png)
+![Salmon logo](../../images/salmon_logo.png)
 
 One of the characteristics of __Salmon__ is that it doesn't require performing a base-to-base alignment, which is the time-consuming step of tools such as __STAR__ and __HISAT2__. Salmon relies on the quasi-mapping concept, a new mapping technique that allows the rapid and accurate mapping of RNA-Seq reads to a target transcriptome. Rather than a standard alignment, quasi-mapping seeks to find the best mappings for each read, and does so by finding minimal collections of dynamically sized, right-maximal, matching contexts between target and query positions ({% cite Srivastava2016 %})
 
-The quasi-mapping approach utilized by __Salmon__ requires a reference index to determine the position and orientation information for where the fragments best map prior to quantification. It allows to provide the transcriptome in a format that is easily and rapidly searchable. Therefore, it will allow us to quickly find the positions in the transcriptome where each of the reads originated.
+The quasi-mapping approach by __Salmon__ requires a reference index to determine the position and orientation information for accurate mapping prior to quantification. It allows providing the transcriptome in a format that optimizes its use in transcript identification and quantification.
 
-After determining the best mapping for each read/fragment using the quasi-mapping method, __Salmon__  generates the final transcript abundance estimates after modeling sample-specific parameters and biases. Note that reads/fragments that map equally well to more than one transcript will have the count divided between all of the mappings; thereby not losing information for the various gene isoforms.
+After determining the best mapping for each read, __Salmon__  generates the final transcript abundance estimation after modeling sample-specific parameters and biases. Reads that map equally well to more than one transcript will have the count divided between all of the mappings, thus avoiding the loss of information on the different gene isoforms.
 
 
 > ### {% icon details %} Quasi-mapping algorithm
-> The quasi-mapping algorithm makes use of two main data structures, the generalized suffix array (SA) of the transcriptome T, and a hash table (h) mapping each k-mer occurring in T to its SA interval (by default k = 31). During the quasi-mapping procedure a read is scanned from left to right until a k-mer (k<sub>i</sub>) is encountered that appears in h. The k-mer is looked up in the hash table and the SA intervals are retrieved, giving all suffixes containing that k-mer. Then, the procedure described above is used to compute the Maximal Mappable Prefix (MMP<sub>i</sub>) by finding the longest read that matches the reference suffixes, and ℓ = NIP(MMP<sub>i</sub>), where NIP states for "next informative position".
-> ![Experimental design](../../images/salmon_quasialignment.png "Quasi mapping")
-> The search procedure then advances to position i+ℓ−k in the read, and again begins hashing the k-mers it encounters. This process of determining the MMP and NIP of each processed k-mer and advancing to the NIP in the read continues until the NIP exceeds position l<sub>r</sub>−k where l<sub>r</sub> is the length of the read r. The result of applying this procedure to a read is a set S of query positions, MMP orientations and SA intervals, with one such triplet corresponding to each MMP.  ({% cite Srivastava2016 %}).
+>  The quasi-mapping algorithm makes use of two main data structures, the generalized suffix array (SA) of the transcriptome T, and a hash table (h) mapping each k-mer occurring in T to its SA interval (by default k = 31). During the quasi-mapping procedure, a read is scanned from left to right until a k-mer (k<sub>i</sub>) is encountered that appears in h. The k-mer is looked up in the hash table and the SA intervals are retrieved, giving all suffixes containing that k-mer. Then, the procedure described above is used to compute the Maximal Mappable Prefix (MMP<sub>i</sub>) by finding the longest read that matches the reference suffixes, and ℓ = NIP(MMP<sub>i</sub>), where NIP states for "next informative position".
+> ![Quasi-mapping algorithm](../../images/salmon_quasialignment.png "Quasi-mapping algorithm")
+> The search procedure then advances to position i+ℓ−k in the read, and again begins hashing the k-mers it encounters. This process of determining the MMP and NIP of each processed k-mer and advancing to the NIP in the read continues until the NIP exceeds position l<sub>r</sub>−k where l<sub>r</sub> is the length of the read r. The result of applying this procedure to a read is a set S of query positions, MMP orientations and SA intervals, with one such triplet corresponding to each MMP ({% cite Srivastava2016 %}).
 {: .comment}
 
 
@@ -311,7 +327,7 @@ DESeq2 is a tool for differential gene expression analysis based on a negative b
 
 DESeq2 generated 2 outputs: a table with the normalized counts and a graphical summary of the results. To evaluate the similarity of our samples, we are going to evaluate the Principal Component Analysis (PCA) plot. PCA allows evaluating the dominant directions of the highest variability in the data. Thus, the samples subjected to the same conditions should cluster together.
 
-![Experimental design](../../images/miRNA_PC.png " PCA plot of differential expression data from control and BR treated samples.")
+![PCA plot of miRNA samples](../../images/miRNA_PC.png " PCA plot of differential expression data from control and BR treated samples.")
 
 > ### {% icon question %} Questions
 >
@@ -386,7 +402,7 @@ One way to assess whether the results obtained are biologically meaningful is to
 > 2. Click on the {% icon galaxy-eye %} (eye) icon and inspect the generated file
 {: .hands_on}
 
-![Experimental design](../../images/miRNA_upregulated_genes.png "Top upregulated genes in response to brassinosteroids")
+![Top upregulted genes](../../images/miRNA_upregulated_genes.png "Top upregulated genes in response to brassinosteroids")
 
 In order to functionally characterize the Arabidopsis genes, we can consult the [TAIR database](https://www.arabidopsis.org/index.jsp).
 
@@ -405,7 +421,7 @@ In order to functionally characterize the Arabidopsis genes, we can consult the 
 
 # miRNA differential expression analysis
 
-Once the differential expression analysis of mRNAs has been carried out, the next stage of our involve to analyze how miRNA expression is altered in response to brassinosteroids.
+Once the differential expression analysis of mRNAs has been carried out, the next stage is to analyze how miRNA expression is altered in response to brassinosteroids.
 
 ## Quality assessment of miRNA reads
 
@@ -439,16 +455,16 @@ As in the previous section, we shall begin by assessing the quality of our seque
 > >
 > > 1. The report generated by __MultiQC__ indicates that three quality parameters show values outside the recommended limits: per sequence G/C content, overrepresented sequences and adapter content.
 > >
-> > ![Experimental design](../../images/miRNA_GC_content.png " PCA plot of expression data from control and BR treated samples.")
-> > ![Experimental design](../../images/miRNA_overepresented.png " PCA plot of expression data from control and BR treated samples.")
-> > ![Experimental design](../../images/miRNA_adaptors.png " PCA plot of expression data from control and BR treated samples.")
+> > ![GC content](../../images/miRNA_GC_content.png "Per sequence GC content of the miRNA samples.")
+> > ![Overrepresented sequences](../../images/miRNA_overepresented.png "Overrepresented sequences in miRNA samples.")
+> > ![Adaptor content](../../images/miRNA_adaptors.png "Adaptor content of miRNA samples.")
 > >
 > > Particularly remarkable is the content of adapters, which are up to 80% of the readings in some samples. Given the abundance of adapters, one would expect that if we eliminate this source of contamination, the rest of the parameters would show a noticeable improvement.
 > >
 > {: .solution}
 {: .question}
 
-To remove the adapters contamination, we will employ the __Trim Galore__ tool, a wrapper script around __Cutadapt__ and __FastQC__ which automates quality and adapter trimming.
+To remove the adapters contamination, we will employ the __Trim Galore__ tool, a wrapper script around [__Cutadapt__](https://journal.embnet.org/index.php/embnetjournal/article/view/200) and __FastQC__ which automates quality and adapter trimming.
 
 > ### {% icon hands_on %} Hands-on: Trimming of adapter sequences
 >
@@ -564,7 +580,7 @@ To use the outputs generated by __MiRDeep2 Quantifier__ in the differential expr
 > 3. Click on the {% icon galaxy-eye %} (eye) icon and inspect the `DESeq2 plots miRNA` file
 {: .hands_on}
 
-![Experimental design](../../images/miRNA_PCA_2.png " PCA plot of expression data from control and BR treated miRNA samples.")
+![PCA miRNA](../../images/miRNA_PCA_2.png " PCA plot of expression data from control and BR treated miRNA samples.")
 
 As can be seen, in this case, the samples are much less similar to each other. Likewise, the main axes account for only 47% and 19% of the total variation. This suggests that the effect of brassinosteroids on miRNA regulation is limited.
 
@@ -597,7 +613,7 @@ To conclude the analysis of the differential expression of miRNAs, we will extra
 > > ### {% icon solution %} Solution
 > >
 > > Only four of the miRNAs are significantly overexpressed in response to brassinosteroids.
-> > ![Experimental design](../../images/miRNA_upregulated.png "Statistically significative upregulated miRNAs in response to brassinosteroids.")
+> > ![Upregulated genes](../../images/miRNA_upregulated.png "Statistically significative upregulated miRNAs in response to brassinosteroids.")
 > {: .solution}
 >
 {: .question}
@@ -658,11 +674,10 @@ Now we will obtain the sequences of miRNAs whose expression is induced by brassi
 
 > ### {% icon hands_on %} Hands-on: identification of potential miRNA targets
 >
-> 1. {% tool [TargetFinder](toolshed.g2.bx.psu.edu/repos/rnateam/targetfinder/targetfinder/1.7.0) %} with the following parameters:
+> 1. {% tool [TargetFinder](toolshed.g2.bx.psu.edu/repos/rnateam/targetfinder/targetfinder/1.7.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input small RNA sequences file"*: `miRNA_upreguled_sequences.fasta`
 >    - {% icon param-file %} *"Target sequence database file*": `mRNA_downregulated_sequences.fasta`
 >    - *"Prediction score cutoff value"*: `5.0`
->    - *"Output format"*: `Tab-delimited format`
 > 2. Click on the {% icon galaxy-eye %} (eye) icon and inspect the output of **TargetFinder**.
 {: .hands_on}
 
@@ -676,7 +691,7 @@ Now we will obtain the sequences of miRNAs whose expression is induced by brassi
 > > 1. Unfortunately, we have not detected any target genes.
 > > 2. The negative result of our analysis may be due to one of the following causes:
 > > - Brassinosteroid-mediated regulation of gene expression does not involve miRNAs.
-> > - The datasets didn't have  sufficient read depth to detect biologically important genes; sequencing below this threshold will reduce statistical power ({% cite Bass2019 %}).
+> > - The datasets don't have sufficient read depth to detect biologically important genes; sequencing below a certain threshold reduces statistical power ({% cite Bass2019 %}).
 > >
 > {: .solution}
 >
@@ -695,30 +710,31 @@ To test the second hypothesis, we will use the miRNA sequences obtained from the
 > ```
 > https://zenodo.org/record/4606701/files/upregulated_miRNA_BR_complete_dataset.fasta
 > ```
->
 > 2. Rename each dataset as `miRNA_sequences_original_dataset.fasta`.
->
 >
 {: .hands_on}
 
 > ### {% icon hands_on %} Hands-on: identification of potential miRNA targets (round 2)
 >
-> 1. {% tool [TargetFinder](toolshed.g2.bx.psu.edu/repos/rnateam/targetfinder/targetfinder/1.7.0) %} with the following parameters:
+> 1. {% tool [TargetFinder](toolshed.g2.bx.psu.edu/repos/rnateam/targetfinder/targetfinder/1.7.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input small RNA sequences file"*: `miRNA_sequences_original_dataset.fasta`
 >    - {% icon param-file %} *"Target sequence database file*": `mRNA_downregulated_sequences.fasta`
 >    - *"Prediction score cutoff value"*: `5.0`
->    - *"Output format"*: `Tab-delimited format`
 > 2. Click on the {% icon galaxy-eye %} (eye) icon and inspect the output of **TargetFinder**.
 {: .hands_on}
 
 
-![Experimental design](../../images/miRNA_targets.png "Potential miRNA targets found by the targetFinder tool.")
+![Targets miRNA](../../images/miRNA_targets.png "Potential miRNA targets found by the targetFinder tool.")
 
-Congratulations! You have identified two potential genes involved in the brassinosteroid-miRNA regulatory network. According to the bibliography, the gene AT5G63810 codifies the BGAL10 protein, a member of the Glycosidase hydrolase family. On the other hand, the gene AT1G56660 codifies a MAEBL domain protein, whose function has not been characterized.
+Congratulations! You have identified two potential genes involved in the brassinosteroid-miRNA regulatory network. 
+
+The gene [AT5G63810](https://www.arabidopsis.org/servlets/TairObject?id=133285&type=locus) codifies the BGAL10 protein, a member of the Glycosidase hydrolase family. According the bibliography, this protein is involve in the metabolism of xyloglucan, a polysaccharide constituent of plant cell walls, and its downregulation could contribute to a delay in fruit ripening as a result of the maintenance of the structural integrity of the cell wall ({% cite Miedes2010 %}).
+
+On the other hand, the gene [AT1G56660](https://www.arabidopsis.org/servlets/TairObject?id=29512&type=locus) codifies a MAEBL domain protein, whose function has not been characterized.
 
 # Optional exercise
 
-As an additional activity, you can try to repeat the workflow using the sequences stored in the NCBI GEO database with the accession number `GSM3373998`.
+As an additional activity, you can try to repeat the workflow using the sequences stored in the NCBI GEO database with the accession number `GSM3373998`. This is a two-factor experiment. The first factor is the genotype, which includes WT plants (Col-0) and mutants overexpressing the brassinosteroid receptor BRL3. The second factor is condition, which includes control and water-stressed samples. Each genotype and condition includes three biological samples.
 
 # Conclusion
 {:.no_toc}
