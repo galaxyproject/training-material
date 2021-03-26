@@ -270,18 +270,21 @@ After determining the best mapping for each read, __Salmon__  generates the fina
 >
 {: .hands_on}
 
-Salmon generates two output from each read dataset:
+_Salmon_ generates two output from each read dataset:
 
 - Quantification: summarizes the quantifications by transcript
 - Gene quantification: summarizes the quantification by gene
 
 Each output consists of a tabular dataset with five columns:
 
-- Name: the name of the target transcript provided in the input transcriptome
-- Length: the length of the target transcript
-- EffectiveLength: the computed effective length
-- TPM: the relative abundance of this transcript in units of Transcripts Per Million
-- NumReads: the number of reads mapping to each transcript that was quantified
+Field             | Description
+------------------| ----------
+Name              | The name of the target transcript provided in the input transcriptome.
+Lenght            | The length of the target transcript.
+EffectiveLength   | The computed effective length.
+TPM               | The relative abundance of this transcript in units of Transcripts Per Million.
+NumReads          | The number of reads mapping to each transcript that was quantified.
+
 
 > ### {% icon question %} Questions
 >
@@ -728,7 +731,7 @@ To test the second hypothesis, we will use the miRNA sequences obtained from the
 
 Congratulations! You have identified two potential genes involved in the brassinosteroid-miRNA regulatory network. 
 
-The gene [AT5G63810](https://www.arabidopsis.org/servlets/TairObject?id=133285&type=locus) codifies the BGAL10 protein, a member of the Glycosidase hydrolase family. According the bibliography, this protein is involve in the metabolism of xyloglucan, a polysaccharide constituent of plant cell walls, and its downregulation could contribute to a delay in fruit ripening as a result of the maintenance of the structural integrity of the cell wall ({% cite Miedes2010 %}).
+The gene [AT5G63810](https://www.arabidopsis.org/servlets/TairObject?id=133285&type=locus) codifies the BGAL10 protein, a member of the Glycosidase hydrolase family. According the bibliography, this protein is involved in xyloglucan metabolism, a polysaccharide constituent of plant cell walls, and its downregulation could contribute to a delay in fruit ripening as a result of the maintenance of the structural integrity of the cell wall ({% cite Miedes2010 %}).
 
 On the other hand, the gene [AT1G56660](https://www.arabidopsis.org/servlets/TairObject?id=29512&type=locus) codifies a MAEBL domain protein, whose function has not been characterized.
 
