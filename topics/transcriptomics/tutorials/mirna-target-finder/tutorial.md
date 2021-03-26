@@ -166,7 +166,7 @@ Next we will retrieve the remaining datasets.
 >
 > As indicated above, for this tutorial the depth of the samples was reduced in order to speed up the time needed to carry out the analysis. This was done as follows:
 >
-> > ### {% icon hands_on %} Hands-on: Initial quality check
+> > ### {% icon hands_on %} Hands-on: Dataset subsampling
 > >
 > > 1. {% tool [Sub-sample sequences files ](toolshed.g2.bx.psu.edu/repos/peterjc/sample_seqs) %} with the following parameters:
 > >    - {% icon param-files %} *"Multiple datasets"*: Each of the fastq files
