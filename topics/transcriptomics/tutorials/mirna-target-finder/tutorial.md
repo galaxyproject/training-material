@@ -737,7 +737,7 @@ On the other hand, the gene [AT1G56660](https://www.arabidopsis.org/servlets/Tai
 
 # Optional exercise
 
-As an additional activity, you can try to repeat the workflow using the sequences stored in the NCBI GEO database with the accession number `GSM3373998`. This is a two-factor experiment. The first factor is the genotype, which includes WT plants (Col-0) and mutants overexpressing the brassinosteroid receptor BRL3. The second factor is condition, which includes control and water-stressed samples. Each genotype and condition includes three biological samples.
+As additional activity, you can try to repeat the workflow by using the sequences stored in the NCBI GEO database with the accession number `GSM3373998`. This is a two-factor experiment. The first factor is the genotype, which includes wild-type plants (Col-0) and mutants overexpressing the brassinosteroid receptor BRL3. The second factor is condition, which includes control and water-stressed samples. Each genotype and condition includes three biological replicates.
 
 # Conclusion
 {:.no_toc}
