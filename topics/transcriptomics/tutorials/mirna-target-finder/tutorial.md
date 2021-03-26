@@ -348,9 +348,9 @@ DESeq2 generated 2 outputs: a table with the normalized counts and a graphical s
 
 Next, we will extract those genes whose expression is statistically significant, selecting those whose adjusted p-value is less than 0.01. A cut-off value of 0.01 means that the probability of a false positive is less than one per thousand.
 
-> ### {% icon details %} P-value vs P-adj
+> ### {% icon details %} p-value vs p-adj
 >
-> The p-value is a measure of the probability that an observed difference could have occurred just by random chance. A small p-value indicates that there is a small chance of getting this data if no real difference existed. A p-value threshold of 0.05 indicates that there is a 5% chance that the result is a false positive. The q-value is an adjusted p-value which taking in to account the false discovery rate (FDR). Applying a FDR becomes necessary when we're measuring thousands of variables from a small sample set.
+> The p-value is a measure of the probability that an observed difference could have occurred just by random chance. A small p-value indicates that there is a small chance of getting this data if no real difference existed. A p-value threshold of 0.05 indicates that there is a 5% chance that the result is a false positive. The p-adj (also known as q-value) is an adjusted p-value which taking in to account the false discovery rate (FDR). Applying a FDR becomes necessary when we're measuring thousands of variables from a small sample set.
 >
 {: .comment}
 
