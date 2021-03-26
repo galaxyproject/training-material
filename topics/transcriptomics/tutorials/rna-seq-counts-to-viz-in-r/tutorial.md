@@ -92,7 +92,7 @@ In this tutorial, we will take the list of DE genes extracted from DESEq2's outp
 >
 {: .agenda}
 
-{% snippet snippets/launch_rstudio.md %}
+{% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
 
 # Visualization
 

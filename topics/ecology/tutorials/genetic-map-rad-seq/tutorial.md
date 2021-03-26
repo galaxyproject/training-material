@@ -49,8 +49,8 @@ The original data is available at [STACKS website](http://catchenlab.life.illino
 >
 > 1. Create a new history for this RAD-seq exercise.
 >
->    {% snippet snippets/create_new_history.md %}
->    {% snippet snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import Fasta files from parents and 20 progeny.
 >
@@ -85,7 +85,7 @@ The original data is available at [STACKS website](http://catchenlab.life.illino
 >    https://zenodo.org/record/1219888/files/progeny_20
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >    As default, Galaxy takes the link as name. It does not link the dataset to a database or a reference genome.
 >

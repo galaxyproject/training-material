@@ -87,7 +87,7 @@ In the second part of the tutorial, read counts of all 7 samples are used to ide
 >
 > 1. Create a new history for this RNA-Seq exercise
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the FASTQ file pairs from [Zenodo]({{ page.zenodo_link }}) or a data library:
 >    - `GSM461177` (untreated): `GSM461177_1` and `GSM461177_2`
@@ -100,8 +100,8 @@ In the second part of the tutorial, read counts of all 7 samples are used to ide
 >    {{ page.zenodo_link }}/files/GSM461180_2.fastqsanger
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    > ### {% icon comment %} Comment
 >    > Note that these are the full files for the samples and ~1.5Gb each so it may take some minutes to import.
@@ -118,15 +118,15 @@ In the second part of the tutorial, read counts of all 7 samples are used to ide
 >
 > 3. Rename each dataset according to the sample id (e.g. `GSM461177_1`)
 >
->    {% snippet snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 4. Check that the datatype is `fastqsanger` (e.g. **not** `fastq`). If it is not, please change the datatype to `fastqsanger`.
 >
->    {% snippet snippets/change_datatype.md datatype="fastqsanger" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastqsanger" %}
 >
 > 5. Add to each dataset a tag corresponding to the name of the sample (`#GSM461177` or `#GSM461180`)
 >
->    {% snippet snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 
@@ -145,7 +145,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 > 1. **FastQC** {% icon tool %} with the following parameters:
 >    - {% icon param-files %} *"Short read data from your current history"*: input datasets selected with **Multiple datasets**
 >
->    {% snippet snippets/select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
 > 2. Inspect the webpage output of **FastQC** {% icon tool %} for the `GSM461177` sample
 >
@@ -1155,7 +1155,7 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 >    - *"Visualising the analysis results"*: `Yes`
 >    - *"Output normalized counts table"*: `Yes`
 >
->    {% snippet snippets/select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
 >    > ### {% icon comment %} Comment: Using group tags for large sample sets
 >    >
@@ -1373,7 +1373,7 @@ The column names may not be precise so we would like to add them before going fu
 >    GeneID	Base mean	log2(FC)	StdErr	Wald-Stats	P-value	P-adj	Chromosome	Start	End	Strand	Feature	Gene name
 >    ```
 >
->    {% snippet snippets/create_new_file.md format="tabular" %}
+>    {% snippet faqs/galaxy/datasets_create_new_file.md format="tabular" %}
 >
 > 2. **Concatenate datasets** {% icon tool %} to add this header line to the **Annotate** output:
 >    - {% icon param-file %} *"Concatenate Dataset"*: the `Pasted entry` dataset
