@@ -406,7 +406,7 @@ Let us cluster the cells and see what cell types we can discover in the plots. T
 >    - *"Method used"*: `Cluster cells into subgroups, using 'tl.leiden'`
 >        - *"Coarseness of the clusterin"*: `0.3`
 >
-> 1. {% tool [Plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
+> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Cluster, infer trajectories and embed** {% icon tool %})
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
 >        - *"Keys for annotations of observations/cells or variables/genes"*: `leiden, batch`
@@ -433,7 +433,7 @@ Let us here try to recreate the DotPlot from the paper using the clusters we hav
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
+> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Cluster, infer trajectories and embed** {% icon tool %})
 >    - *"Method used for plotting"*: `Generic: Makes a dot plot of the expression values, using 'pl.dotplot'`
 >        - *"Variables to plot (columns of the heatmaps)"*: `Subset of variables in 'adata.var_names'`
@@ -500,7 +500,7 @@ We can use this Dotplot as a guide to relabel our clusters and give more meaning
 >        - *"Key for observations or variables annotation"*: `leiden`
 >        - *"Comma-separated list of new categories"*: `0, 1, 2, 3, trichoblast, 5, 6, cortex, 8, 9, 10, columella+QC+NC, xylem, 13`
 >
-> 1. {% tool [Plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
+> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata` (output of **Manipulate AnnData** {% icon tool %})
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
 >        - *"Keys for annotations of observations/cells or variables/genes"*: `leiden, batch`
@@ -514,6 +514,10 @@ We can use this Dotplot as a guide to relabel our clusters and give more meaning
 
 ![Relabelled clusters](../../images/scrna-plant/clusters_found_relabelled.png)
 
+
+If we look at the clusters now, and compare them to the original image in the paper, we can infer that the meristematic cells are likely to be derived from cluster 1, which shares soft clustering with the trichoblasts suggesting a trajectory pathway which could be explored.
+
+
 ## Conclusions
 
 In this tutorial we have recapitulated the same clustering analysis in the ["Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing"](https://doi.org/10.1016/j.devcel.2019.02.022) paper, and validated them by comparing DotPlots for specific genes that were used as markers in that paper.
@@ -521,3 +525,9 @@ In this tutorial we have recapitulated the same clustering analysis in the ["Spa
 From this point we can perform a lineage analysis to infer a differentiation pathway between the clusters. For ScanPy there is the PAGA option, however this does not work so well with the current dataset, so it is encouraged that users use the original Seurat trajectory suite that was given in the paper, or to experiment with Monocle.
 
 Both libraries are available within the RStudio and Jupyter Notebook libraries in the interactive Galaxy envronments which can be found in the *"Miscellaneous Tools"* section under the *"Interactive Tools"* subheading.
+
+This entire tutorial can be invoked from the scRNA Plant Workflow shown below:
+
+![scRNA Plant](../../images/scrna-plant/scrna-plant-workflow.png)
+
+The input parameters take two datasets as input, and 5 parameters using the defaults shown in this tutorial: min cells, min genes, max features, max library size, and leiden clustering resolution. Play with these options to see how robust the analysis really is!
