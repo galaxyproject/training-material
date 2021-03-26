@@ -2278,7 +2278,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    > - `nginx_x_accel_redirect_base`: This is required to have NGINX serve user files. You don't want Galaxy to waste time reading a 100GB fastq file a user has asked for, so you offload that to NGINX. The request is passed through to Galaxy, so permissions checks still occur, but Galaxy instead replies to NGINX just the path to the file that it should send to the requesting user.
 >    > - `enable_quotas`: You definitely want to set a default quota for your users!
 >    > - `expose_user_name`: This exposes usernames in the history and dataset sharing forms which makes life easier for your users.
->    > - `expose_dataset_path`: This shares the entire dataset path.
+>    > - `expose_dataset_path`: This shares the entire dataset path and enable the user to have access to the command line that the wrapper launched.
 >    > - `cleanup_job`: This prevents a job from being cleaned up if it failed, allowing you to debug and see what went wrong.
 >    > - `allow_user_impersonation`: Users submit horrible bug reports (often screenshots of unrelated things), impersonation means you can just see their history and look at what went wrong.
 >    {: .tip}
@@ -2460,4 +2460,3 @@ It may seem daunting to use ansible, but you don't have to do everything in ansi
 If you've been following along you should have a production-ready Galaxy, secured, everything ready to go.
 
 If you missed any steps, you can compare against the [reference files]({{ site.github_repository }}/tree/{{ site.github_repository_branch }}/topics/admin/tutorials/ansible-galaxy).
-
