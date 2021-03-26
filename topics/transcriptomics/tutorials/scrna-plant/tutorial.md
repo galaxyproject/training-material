@@ -62,7 +62,7 @@ This tutorial replicates the paper ["Spatiotemporal Developmental Trajectories i
 
 # Data
 
-The *Arabidopsis* root cells come from two biological replicates which were isolated and profiles using droplet-based scRNA-seq (please see: ["Tenx Tutorial"](TODO); a "short root" mutant (labelled: `shr`) and a wild-type (labelled: `wt`):
+The *Arabidopsis* root cells come from two biological replicates which were isolated and profiles using droplet-based scRNA-seq (please see: ["Pre-processing of 10X Single-Cell RNA Datasets"]({% link topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial.md %})); a "short root" mutant (labelled: `shr`) and a wild-type (labelled: `wt`):
 
 * GSE123818_Root_single_cell_**shr**_datamatrix.fixednames.transposed.csv.gz
 * GSE123818_Root_single_cell_**wt**_datamatrix.fixednames.transposed.csv.gz
@@ -283,7 +283,7 @@ If we inspect the resulting dataset, we see that the number of cells remaining i
 
 ## Confounder Removal
 
-Now we have a set of cells we are reasonably confident contain desirable biological variation (please see the introduction video from XXXX as a reference for the types of wanted and unwanted variation). We wish to now regress out the library size variation, as it is not indicative of cell type. To do this we will first ensure that all cells are of the same comparable library size by applying individual size factors to each cell. 
+Now we have a set of cells we are reasonably confident contain desirable biological variation (please see the ["An introduction to scRNA-seq data"]({% link videos/#video-transcriptomics-scrna-intro %}) at time point 11:28 as a reference for the types of wanted and unwanted variation). We wish to now regress out the library size variation, as it is not indicative of cell type. To do this we will first ensure that all cells are of the same comparable library size by applying individual size factors to each cell. 
 
 We will also apply a log transformation to the cells, as this compresses the variation into a less extreme space, making it easier to see the relative differences between cells. 
 
@@ -327,7 +327,7 @@ Dimension reduction is the art of reducing a high dimensional dataset into a low
 
 > ### {% icon tip %} Tip: Dimension Reduction
 >
-> You can learn more about dimension reduction by consulting the [Introduction to scRNA-seq video at slide XXXX]().
+> You can learn more about dimension reduction by consulting the [An introduction to scRNA-seq data analysis]({% link videos/#video-transcriptomics-scrna-intro %}) at time point 13:46.
 >    {: .tip}
 
 This is usually a two step process: 
@@ -352,7 +352,7 @@ This is usually a two step process:
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > UMAP relies on a connected graph of cells to operate. Please see: [Introduction to scRNA-seq video at slide XXXX]() for more information on how this process works.
+>    > UMAP relies on a connected graph of cells to operate. Please see: [An introduction to scRNA-seq data analysis]({% link videos/#video-transcriptomics-scrna-intro %}) at time point 13:40 for more information on how this process works.
 >    {: .comment} 
 >
 > 1. {% tool [Cluster, infer trajectories and embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0) %} with the following parameters:
@@ -425,7 +425,7 @@ Let us cluster the cells and see what cell types we can discover in the plots. T
 
 ![UMAP Leiden Clusters](../../images/scrna-plant/clusters_found.png)
 
-Here we have recovered 10 clusters (TODO: Fix this) but we don't yet know what types they describe. If we have a list of genes that we know are indicative of a certain cell type (i.e. are marker genes) then we can use this to assign labels to our clusters.
+Here we have recovered 13 clusters but we don't yet know what types they describe. If we have a list of genes that we know are indicative of a certain cell type (i.e. are marker genes) then we can use this to assign labels to our clusters.
 
 Let us here try to recreate the DotPlot from the paper using the clusters we have discovered.
 
@@ -486,7 +486,7 @@ By running the above we end up with the following DotPlot:
 
 ![Dotplot In Analyssis](../../images/dotplot_found.png)
 
-Notice how we have the Columella, QC and NC sharing the same cluster XXX, that the Endodermis is localised in cluster XXX, the Cortex in cluster XXX, the Trichoblast cells in cluster XXXX, the Xylem showing strong expression in cluster XXXX, VC most in clusters XXXX and YYYY, and the Atrichoblasts have a mixed expression in the first few clusters. These characteristics are the same as the Dotplot in the original paper.
+Notice how we have the Columella, QC and NC sharing the same cluster 11, that the Endodermis is localised in cluster 8, the Cortex in cluster 9, the Trichoblast cells in cluster 3, the Xylem showing strong expression in cluster 12, VC in clusters 4 and 6, and the Atrichoblasts have a mixed expression in a range of clusters. These characteristics are the same as the Dotplot in the original paper.
 
 We can use this Dotplot as a guide to relabel our clusters and give more meaningful annotations to the plots.
 
