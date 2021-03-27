@@ -359,7 +359,7 @@ Next, we will extract those genes whose expression is statistically significant,
 
 > ### {% icon hands_on %} Hands-on: Extract statistically significant genes
 >
-> 1. {% tool [Filter (Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
+> 1. {% tool [Filter](Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
 >    - {% icon param-file %} *"Filter"*: output of **DESeq2** {% icon tool %}
 >    - *"With following condition"*: `c7<0.01`
 > 2. Rename the output as `Statistically significant genes`
