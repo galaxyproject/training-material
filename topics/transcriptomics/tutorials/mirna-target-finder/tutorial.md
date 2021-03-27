@@ -29,9 +29,9 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Water stress is the main limiting factor faced by agricultural productivity and crop geographical distribution, and its consequences are increasing due to climate change ({% cite Fbregas2018 %}). The physiological effects of water stress on plant organisms (such as damage to antioxidant systems, decreased chlorophyll contents, negatively affect photosynthetic activity) leads to significant losses in crop yields. Understanding the mechanisms involved in the response to drought stress is a prerequisite for reducing their associated adverse effects.
+Water stress is the main limiting factor faced by agricultural productivity and crop geographical distribution, and its consequences are increasing due to climate change ({% cite Fbregas2018 %}). The physiological effects of water stress on plant organisms (such as damage to antioxidant systems, decreased chlorophyll contents) leads to significant losses in crop yields. Understanding the mechanisms involved in the response to drought stress is a prerequisite for reducing their associated adverse effects.
 
-As sessile organisms, the survival of plant organisms under adverse environmental conditions depends, to a large extent, on their ability to perceive stress stimuli and respond appropriately to counteract the potentially damaging effects. Coordination of phytohormones and reactive oxygen species are considered a key element for enhancing stress resistance, allowing fine-tuning of gene expression in response to environmental changes. These molecules constitute complex signalling networks, endowing with the ability to respond to a variable natural environment.
+As sessile organisms, the survival of plants under adverse environmental conditions depends, to a large extent, on their ability to perceive stress stimuli and respond appropriately to counteract the potentially damaging effects. Coordination of phytohormones and reactive oxygen species are considered a key element for enhancing stress resistance, allowing fine-tuning of gene expression in response to environmental changes ({% cite PlanasRiverola2019 %}, {% cite Ivashuta2011 %}). These molecules constitute complex signalling networks, endowing with the ability to respond to a variable natural environment.
 
 Brassinosteroids (BRs) are a group of plant steroid hormones essential for plant growth and development, as well as for controlling abiotic and biotic stress. Structurally, BRs are polyhydroxylated sterol derivatives with close similarity to animal hormones. This group of phytohormones is comprised of around 60 different compounds, of which brassinolide (BL), 24-epibrassinolide (EBR), and 28-homobrassinolide (HBR) are considered the most bioactive.
 
@@ -673,6 +673,8 @@ Now we will obtain the sequences of miRNAs whose expression is induced by brassi
 
 
 ## Identification of miRNA targets with **targetFinder**
+
+We are now ready to launch the search for miRNA target genes. For this we will use the __Targetfinder__ tool , which, according to several publications, is one of the tools that offers the best results ({% cite Srivastava2014 %}, {% cite Ma2017 %}).
 
 
 > ### {% icon hands_on %} Hands-on: identification of potential miRNA targets
