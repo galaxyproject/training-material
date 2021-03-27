@@ -359,6 +359,11 @@ Next, we will extract those genes whose expression is statistically significant,
 
 > ### {% icon hands_on %} Hands-on: Extract statistically significant genes
 >
+> > ### {% icon comment %} Comments
+> > 
+> > You can that tool in the _Filter and Sort_ section.
+> >
+> {: .comment}
 > 1. {% tool [Filter](Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
 >    - {% icon param-file %} *"Filter"*: output of **DESeq2** {% icon tool %}
 >    - *"With following condition"*: `c7<0.01`
@@ -373,7 +378,7 @@ Next, we will extract those genes whose expression is statistically significant,
 >    - {% icon param-file %} *"Filter"*: `Statistically significant genes`
 >    - *"With following condition"*: `c3<-1`
 > 6. Rename it as `Statistically upregulated mRNAs`
->
+> 
 {: .hands_on}
 
 > ### {% icon question %} Questions
