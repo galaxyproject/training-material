@@ -38,7 +38,7 @@ RUN apt update -y -qq && apt install -y -qq python3-dev gcc python3-pip build-es
 && cp $TARGDIR/config/datatypes_conf.xml.sample $TARGDIR/config/datatypes_conf.xml \
 && sed -i 's/<\/registration>/<datatype extension="tgz" type="galaxy.datatypes.binary:Binary" subclass="true" mimetype="multipart\/x-gzip" display_in_upload="true"\/> <\/registration>/' $TARGDIR/config/datatypes_conf.xml \
 && sed -i 's/<datatype extension="html"/<datatype extension="html" display_in_upload="true"/' $TARGDIR/config/datatypes_conf.xml \
-&& sed -i '/-l|-list|--list)/i\\t --dev-wheels|-dev-wheels)\n\t\t shift\n\t\t ;;\n' $TARGDIR/run_tests.sh \
+&& sed -i '/-l|-list|--list)/i \\n\t --dev-wheels|-dev-wheels)\n\t\tshift\n\t\t;;\n' $GALDIR/run_tests.sh \
 && apt-get clean && apt-get purge \
 &&  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 ADD topics/dev/tutorials/tool-generators/docker/welcome.html $TARGDIR/static/welcome.html.sample

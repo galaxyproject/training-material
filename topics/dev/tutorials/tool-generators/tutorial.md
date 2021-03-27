@@ -417,7 +417,7 @@ See [the tutorial on installing tools from the toolshed](https://galaxyproject.o
 
 > ### {% icon details %} Sample script to install a local disposable ToolFactory in a planemo virtual environment
 > > ### {% icon code-in %} Input: topics/dev/tutorials/tool-builders/docker/maketf.sh
-> > ```bash
+> > ```
 > > # GALDIR could be an existing dev directory, and the curl line could be commented out to save time
 > > GALDIR="galaxy-central"
 > > PDIR="planemo"
@@ -511,6 +511,7 @@ can with a local venv described above - but a little slower and isolated in a co
 > >&& cp $TARGDIR/config/datatypes_conf.xml.sample $TARGDIR/config/datatypes_conf.xml \
 > >&& sed -i 's/<\/registration>/<datatype extension="tgz" type="galaxy.datatypes.binary:Binary" subclass="true" mimetype="multipart\/x-gzip" display_in_upload="true"\/> <\/registration>/' $TARGDIR/config/datatypes_conf.xml \
 > >&& sed -i 's/<datatype extension="html"/<datatype extension="html" display_in_upload="true"/' $TARGDIR/config/datatypes_conf.xml \
+> >&& sed -i '/-l|-list|--list)/i \\n\t --dev-wheels|-dev-wheels)\n\t\tshift\n\t\t;;\n' $TARGDIR/run_tests.sh
 > >&& apt-get clean && apt-get purge \
 > >&&  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 > >ADD topics/dev/tutorials/tool-generators/docker/welcome.html $TARGDIR/static/welcome.html.sample
