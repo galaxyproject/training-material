@@ -675,7 +675,7 @@ Now we will obtain the sequences of miRNAs whose expression is induced by brassi
 {: .hands_on}
 
 
-## Identification of miRNA targets with **targetFinder**
+## Identification of miRNA targets with **TargetFinder**
 
 We are now ready to launch the search for miRNA target genes. For this we will use the __Targetfinder__ tool , which, according to several publications, is one of the tools that offers the best results ({% cite Srivastava2014 %}, {% cite Ma2017 %}).
 
@@ -732,7 +732,7 @@ To test the second hypothesis, we will use the miRNA sequences obtained from the
 {: .hands_on}
 
 
-![fig14:Targets miRNA](../../images/miRNA_targets.png "Potential miRNA targets found by the targetFinder tool.")
+![fig14:Targets miRNA](../../images/miRNA_targets.png "Potential miRNA targets found by the TargetFinder tool.")
 
 Congratulations! You have identified two potential genes involved in the brassinosteroid-miRNA regulatory network. 
 
