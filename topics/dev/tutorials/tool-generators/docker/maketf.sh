@@ -13,7 +13,7 @@ mkdir -p $GALDIR
 curl -L -s $GALURL | tar xzf - --strip-components=1 -C $GALDIR
 cp $PDIR/planemo_ext/welcome.html $GALDIR/static/welcome.html
 cp $PDIR/planemo_ext/welcome.html $GALDIR/static/welcome.html.sample
-sed -i '/-l|-list|--list)/i\\t --dev-wheels|-dev-wheels)\n\t\t shift\n\t\t ;;\n' $GALDIR/run_tests.sh
+sed -i '/-l|-list|--list)/i \\n\t --dev-wheels|-dev-wheels)\n\t\tshift\n\t\t;;\n' $GALDIR/run_tests.sh
 # planemo will not run as a tool successfully without this - something fishy with recent changes to planemo and run_tests.sh. I dunno
 # https://github.com/galaxyproject/planemo/issues/1148
 sed 's/#sanitize_all_html\: true/sanitize_all_html\: false/g' $GALDIR/config/galaxy.yml.sample > $GALDIR/config/galaxy.yml

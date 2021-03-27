@@ -104,6 +104,7 @@ workflows. They currently lack the formal reproducibility provided by dependency
 and made into a working command line script ready to be turned into a typical Galaxy tool.
 
 ## A bridge from scripts to tools
+{: .no_toc}
 
 Any command line script that run correctly with sample test data input files and parameter settings can potentially be turned into a Galaxy tool.
 These may be derived from notebook scripts that have been consolidated and rewritten to take positional or argparse style parameters and tested
@@ -312,6 +313,7 @@ handy for developers new to Galaxy, and for Galaxy users who are capable of corr
 
 
 ## Limits
+{: .no_toc}
 It works best wrapping simple R/Bash/Python and other interpreted scripts with a few user supplied parameters and a few i/o history files. Scripts are easier than some
 Conda packages because they are easily modified to respond to default empty parameters as if they had not been passed. As a result, advanced tool building elements
 such as conditionals and related tricks requiring manual coding, can often be avoided. On the other hand, many Conda dependencies will require XML conditionals
