@@ -738,7 +738,7 @@ The gene [AT5G63810](https://www.arabidopsis.org/servlets/TairObject?id=133285&t
 On the other hand, the gene [AT1G56660](https://www.arabidopsis.org/servlets/TairObject?id=29512&type=locus) codifies a MAEBL domain protein, whose function has not been characterized.
 
 > ### {% icon comment %} Comments
-> Othe of the hyphothesis that can be infered from our resuls is: the inhibition BGAL10 protein translation could result in plants with a delayed fruit rippenning. Can we validate it? Yes! A proposed approach is to adquiree [mutants AT5G63810 seeds](https://abrc.osu.edu/stocks?search%5Btaxon%5D=Arabidopsis+thaliana&search%5Bsearch_text%5D=AT5G63810&search%5Bmaterial_type%5D%5B%5D=seed&search%5Bsearch_fields%5D=All) and [wild type seeds](http://arabidopsis.info/StockInfo?NASC_id=N1093) and grow them under two controlled conditions: watering and drought, analythe plant weight after 33 days (fig.15).
+> One of the hyphothesis that can be infered from our results is: the inhibition of the BGAL10 protein translation can result in plants with a delayed fruit rippenning. Is it possible to validate it? Yes! We proporse this approach: to adquire [mutants AT5G63810 seeds](https://abrc.osu.edu/stocks?search%5Btaxon%5D=Arabidopsis+thaliana&search%5Bsearch_text%5D=AT5G63810&search%5Bmaterial_type%5D%5B%5D=seed&search%5Bsearch_fields%5D=All) and [wild type seeds](http://arabidopsis.info/StockInfo?NASC_id=N1093) and grow them under two controlled conditions: watering and drought, and anayze plant weight after 33 days (fig.15).
 >
 > ![fig15:Plant groWth](../../images/arabidopis_growth_protocol.png "Arabidopsis control growthcondition protocol ({% cite deOllas2019 %}).")
 >
