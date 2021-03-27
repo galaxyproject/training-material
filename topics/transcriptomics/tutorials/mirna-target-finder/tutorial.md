@@ -740,7 +740,7 @@ On the other hand, the gene [AT1G56660](https://www.arabidopsis.org/servlets/Tai
 > ### {% icon comment %} Comments
 > One of the hypothesis that we could propose from our results is: the inhibition of the BGAL10 protein translation can result in plants with improved resistante to droght conditions. Is it possible to validate it? Yes! We proporse this approach: to adquire [AT5G63810 mutant seeds](https://abrc.osu.edu/stocks?search%5Btaxon%5D=Arabidopsis+thaliana&search%5Bsearch_text%5D=AT5G63810&search%5Bmaterial_type%5D%5B%5D=seed&search%5Bsearch_fields%5D=All) and [wild type seeds](http://arabidopsis.info/StockInfo?NASC_id=N1093), grow them under two controlled conditions: watering and drought, and anayze plant weight after 33 days (fig.15).
 >
-> ![fig15:Plant groWth](../../images/arabidopis_growth_protocol.png "Arabidopsis control growthcondition protocol ({% cite deOllas2019 %}).")
+> ![fig15:Plant groWth](../../images/arabidopis_growth_protocol.png "Arabidopsis growth conditions protocol ({% cite deOllas2019 %}).")
 >
 >
 {: .comment}
