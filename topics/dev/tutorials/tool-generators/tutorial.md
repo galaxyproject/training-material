@@ -305,19 +305,19 @@ handy for developers new to Galaxy, and for Galaxy users who are capable of corr
 {: .tip}
 
 
-> ### {% icon tip %} Note on scope
-> - Compared to the more usual shell and a text editor, The ToolFactory in Galaxy is a slow and clumsy way to debugging scripts. More than a minute per cycle because`planemo test` is run twice, building and tearing down a Galaxy each time.
-> - **Starting a new ToolFactory tool with a know good command line and data** is strongly recommended. You will know exactly what to expect from the tool test for a first sanity check.
-> - Corrolary: Unless there is a working script that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is of little use.
-{: .tip}
 
-
-## Limits
+## Limits and scope
 {: .no_toc}
-It works best wrapping simple R/Bash/Python and other interpreted scripts with a few user supplied parameters and a few i/o history files. Scripts are easier than some
-Conda packages because they are easily modified to respond to default empty parameters as if they had not been passed. As a result, advanced tool building elements
-such as conditionals and related tricks requiring manual coding, can often be avoided. On the other hand, many Conda dependencies will require XML conditionals
+
+- It works best wrapping simple R/Bash/Python and other interpreted scripts with a few user supplied parameters and a few i/o history files.
+- Scripts are easier than some Conda packages because they can easily be modified to respond to default empty parameters as if they had not been passed. As a result, advanced tool building elements
+such as conditionals and related tricks requiring manual coding, can often be avoided.
+- On the other hand, many Conda dependencies will require XML conditionals
 or other tool XML constructs that are not easy to generate automatically. While some simple requirements may be manageable, complex ones will not be suitable for the ToolFactory.
+- Compared to the more usual shell and a text editor, The ToolFactory in Galaxy is a slow and clumsy way to debugging scripts. More than a minute per cycle because`planemo test` is run twice, building and tearing down a Galaxy each time.
+- **Starting a new ToolFactory tool with a know good command line and data** is strongly recommended. You will know exactly what to expect from the tool test for a first sanity check.
+- Corrolary: Unless there is a working script that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is of little use.
+
 
 **The ToolFactory is for developers and informaticians not yet familiar with those far more flexible tools.**
 **Scripts they need to wrap are frequently simple enough for the ToolFactory.**
