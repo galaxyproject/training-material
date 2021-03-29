@@ -520,7 +520,7 @@ If we look at the clusters now, and compare them to the original image in the pa
 
 ## Conclusions
 
-In this tutorial we have recapitulated the same clustering analysis in the ["Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing"](https://doi.org/10.1016/j.devcel.2019.02.022) paper, and validated them by comparing DotPlots for specific genes that were used as markers in that paper.
+In this tutorial, we have recapitulated the same clustering analysis in the ["Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing"](https://doi.org/10.1016/j.devcel.2019.02.022) paper, and validated them by comparing DotPlots for specific genes that were used as markers in that paper.
 
 From this point, we can perform a lineage analysis to infer a differentiation pathway between the clusters. For ScanPy there is the PAGA option, however, this does not work so well with the current dataset, so it is encouraged that users use the original Seurat trajectory suite that was given in the paper, or to experiment with Monocle.
 
