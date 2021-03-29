@@ -283,7 +283,7 @@ If we inspect the resulting dataset, we see that the number of cells remaining i
 
 ## Confounder Removal
 
-Now we have a set of cells we are reasonably confident contain desirable biological variation (please see the ["An introduction to scRNA-seq data"]({% link videos/#video-transcriptomics-scrna-intro %}) at time point 11:28 as a reference for the types of wanted and unwanted variation). We wish to now regress out the library size variation, as it is not indicative of cell type. To do this we will first ensure that all cells are of the same comparable library size by applying individual size factors to each cell. 
+Now we have a set of cells we are reasonably confident contain desirable biological variation (please see the ["An introduction to scRNA-seq data"]({% link videos/#video-transcriptomics-scrna-intro %}) at time point 11:28 as a reference for the types of wanted and unwanted variation). We wish to now regress out the library size variation, as it is not indicative of cell type. To do this, we will first ensure that all cells are of the same comparable library size by applying individual size factors to each cell. 
 
 We will also apply a log transformation to the cells, as this compresses the variation into a less extreme space, making it easier to see the relative differences between cells. 
 
