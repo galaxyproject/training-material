@@ -234,7 +234,7 @@ Most scRNA-seq datasets need to set a minimum threshold of detectability in orde
 
 The above violin plots suggest quite a few outliers, mostly on the upper-end of the density plots, suggesting a few cell-doublets in the data. The effect of these is not something we cannot easily regress out, and so we must filter them out instead. By looking at the plots, we can see that a good maximum library size here would be 100 000 transcripts, and a good maximum feature size would be 10 000 transcripts.
 
-For this analysis we will set a minimum threshold of detectability that each cell should count transcripts from at least 200 genes, and that each gene should be expressed in at least 5 cells. These lower-bound thresholds are not so easy to derive from such QC plots, but depend mostly on the type of data you are using. If the number of features and the library sizes were one order of magnitude higher, one might consider also scaling the lower-bound thresholds by one order of magnitude.
+For this analysis, we will set a minimum threshold of detectability that each cell should count transcripts from at least 200 genes, and that each gene should be expressed in at least 5 cells. These lower-bound thresholds are not so easy to derive from such QC plots, but depend mostly on the type of data you are using. If the number of features and the library sizes were one order of magnitude higher, one might consider also scaling the lower-bound thresholds by one order of magnitude.
 
 > ### {% icon hands_on %} Hands-on: Filtering
 >
