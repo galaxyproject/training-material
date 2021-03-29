@@ -43,7 +43,10 @@ contributors:
 
 It requires sequence-specific excision of a locus containing 19 base-pair inverted repeats.
 
-You have reads without nucleosomes (histones) = open chromatin regions, and reads with these complexes which will be filtered out because of their length.
+You have reads without nucleosomes (histones) = open chromatin regions, and reads with these complexes.
+If the length is too big (bigger than 800bp) it is not correctly amplified by PCR and/or not efficiently sequenced by illumina sequencers.
+That's why it is so important to build coverage around the insertion sites and not fully between the mates of the pairs.
+If the pairs are larger apart than 170bp you don't know if there was a nucleosome between them.
 
 ---
 
@@ -51,7 +54,7 @@ You have reads without nucleosomes (histones) = open chromatin regions, and read
 
 - Typically you have at least two biological replicates.
 - You also have a control. The control is the genomic DNA from the sample that is not treated with transposase. It is fragmented, e.g., by sonication. It has adapters ligated. It is sequenced along with the ATAC sample.
-- ATAC-Seq is paired-end sequencing. You need both ends to idenfiy a true open chromatin region. That is why you need both adapters.
+- ATAC-Seq is usually paired-end sequencing. The it is easier to idenfiy a true open chromatin region. That is why you need then both adapters.
 
 ---
 
@@ -64,7 +67,7 @@ You have reads without nucleosomes (histones) = open chromatin regions, and read
 ![](../images/atac-seq/Screenshot_sizeDistribution_Good.png)
 
 
-- Typical insert size of 150-200 bp and then a multiple of the number of nucelosomes.
+- Typical insert size of 150-200 bp.
 - The first peak of 50 basepairs correspond to nucleosome-free regions.
 - The second peak that is a bit less than 200 basepairs corresponds to a single nucleosome.
 
@@ -88,15 +91,17 @@ The third one (around 400bp) is where Tn5 inserted around two adjacent nucleosom
 
 ## Filtering Reads
 
+- Filter for uniquely mapped reads with end-to-end alignment.
 - Remove reads mapping to mitochondrial DNA.
 - Remove PCR duplicates.
-- Filter for uniquely mapped reads with end-to-end alignment.
 
 ???
 
-ATAC-seq datasets usually contain a large percentage of reads that are derived from mitochondrial DNA. Since there are no ATAC-seq peaks of interest in the mitochondrial genome you can discard those reads.
+ATAC-seq datasets usually contain a large percentage of reads that are derived from mitochondrial DNA.
+Since there are no ATAC-seq peaks of interest in the mitochondrial genome you can discard those reads.
+Especially because there is no nucleosome on the mitochondrion, so it makes this part of the genome very sensitive to Tn5.
 
-End-to-End Alignement is important because you are intersted on the exact binding regions.
+End-to-End alignement is probably useful because you are interested in the exact open chromatin regions.
 
 ---
 
@@ -104,7 +109,8 @@ End-to-End Alignement is important because you are intersted on the exact bindin
 
 ![](../images/atac-seq/schemeWithLegend.jpg)
 
-- You need a peak caller taking into consideration that the adapters are separated by 9 basepairs. When Tn5 cuts an accessible chromatin locus it inserts adapters separated by 9 basepairs.
+- You would prefer a peak caller taking into consideration that the adapters are separated by 9 basepairs.
+- When Tn5 cuts an accessible chromatin locus it inserts adapters separated by 9 basepairs.
 - It is better to test Genrich and MACS2. Both of them might produce different results based on the read coverage.
 
 ???
