@@ -386,7 +386,7 @@ With our data now sufficiently "flat" and ready for human consumption, we can no
 | ![PCA](../../images/pca_batch.png) | ![UMAP](../../images/umap_batch.png) |
 
 
-From this we can see that there is a reasonable overlap in our batches shown both in the PCA and UMAP embeddings. This is good because it shows that though there is *some* batch effect (i.e. cells from one batch appear to cluster on a different side of the plot than the other) it is not significant enough for there not to be some commonality between the batches. 
+From this, we can see that there is a reasonable overlap in our batches shown both in the PCA and UMAP embeddings. This is good because it shows that though there is *some* batch effect (i.e. cells from one batch appear to cluster on a different side of the plot than the other) it is not significant enough for there not to be some commonality between the batches. 
 
 There are batch correction algorithms for cases where one batch clusters completely seperate from the other, but this is not necessary here. 
 
