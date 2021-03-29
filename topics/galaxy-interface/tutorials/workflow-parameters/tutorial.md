@@ -71,26 +71,47 @@ that allows the user to set this parameter when running the workflow.
 
 > ### {% icon hands_on %} Hands-on: Updating the Workflow
 >
-> 1. Open the **workflow editor**
+> 1. Upload a dataset using "Paste/Fetch data" with the contents:
+>
+>    ```
+>    E. coli (O19:H34. Extracellular pathogenic)
+>    E. coli (O7:K1. Extracellular pathogenic)
+>    E. coli 536
+>    E. coli APEC O1 (O1:K12:H7. APEC
+>    E. coli CFT083 (O6:K2:H1. UPEC)
+>    E. coli E2348/69 (O127:H6. Enteropathogenic)
+>    E. coli EC4115 (O157:H7 EHEC)
+>    E. coli ED1a O81 (Commensal)
+>    E. coli EDL933 (O157:H7 EHEC)
+>    E. coli F11
+>    E. coli S88 (O45:K1. Extracellular pathogenic)
+>    E. coli SE15 (O150:H5. Commensal)
+>    E. coli Sakai (O157:H7 EHEC)
+>    E. coli TW14359 (O157:H7 EHEC)
+>    E. coli UMN026 (O17:K52:H18. Extracellular pathogenic)
+>    E. coli UTI89 O18:K1:H7. UPEC)
+>    ```
+>
+> 2. Open the **workflow editor**
 >
 >    {% snippet faqs/galaxy/workflows_edit.md %}
 >
-> 2. Click the **Select first** {% icon tool %} tool in your workflow
-> 3. Find the **Number of lines** parameter in the right hand panel.
-> 4. Click on the workflow connection button {% icon galaxy-wf-connection %} to convert the Number of lines parameter into a workflow parameter connection
+> 3. Click the **Select first** {% icon tool %} tool in your workflow
+> 4. Find the **Number of lines** parameter in the right hand panel.
+> 5. Click on the workflow connection button {% icon galaxy-wf-connection %} to convert the Number of lines parameter into a workflow parameter connection
 >
 >    You will see that a new input with the text `Number of lines` has appeared on the **Select first** tool in the editor.
 >
-> 5. Add a **Simple inputs used for workflow logic**, found under the Inputs section of your toolbox
-> 6. If you click on the Input parameter box in the editor you will see in the `Details panel` that the **Parameter type** is set to `Text`. If you try to connect this parameter to the "Number of lines" parameter you will see that the noodle turns orange and that you cannot create a connection.
+> 6. Add a **Simple inputs used for workflow logic**, found under the Inputs section of your toolbox
+> 7. If you click on the Input parameter box in the editor you will see in the `Details panel` that the **Parameter type** is set to `Text`. If you try to connect this parameter to the "Number of lines" parameter you will see that the noodle turns orange and that you cannot create a connection.
 >
-> 7. Click on Input parameter, and change the **Parameter type** to **Integer**
+> 8. Click on Input parameter, and change the **Parameter type** to **Integer**
 >
-> 8. Connect *"output"* from Input parameter {% icon tool %} to the *"Number of lines"* input of the Select first {% icon tool %}.
+> 9. Connect *"output"* from Input parameter {% icon tool %} to the *"Number of lines"* input of the Select first {% icon tool %}.
 >
-> 9. Save {% icon galaxy-save %} your workflow
+> 10. Save {% icon galaxy-save %} your workflow
 >
-> 10. Run your workflow
+> 11. Run your workflow
 >
 >     {% snippet faqs/galaxy/workflows_run.md %}
 >
