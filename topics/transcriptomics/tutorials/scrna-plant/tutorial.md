@@ -226,7 +226,7 @@ This should result in the following violin plot, where we see the distribution o
 
 !["Violin Plots per Batch"](../../images/scrna-plant/violin1.png)
 
-Each dot is a cell, and the x-axis has two groups showing the absolute values of for each batch (`shr` and `wt`). The y-values correspond to the actual value of each cell, but the x-vales within each group are just random jitter to help see the cells more clearly. The outline of the violin plot shows us the density of each batch, where we can see that most of the cells in the `shr` group have an average number of features just below 2000 genes, compared to `wt` which has an average number of features just below 4000 genes. If we compare the library size however, we notice that the outlines are very similar and that the average library size across batches are comparable.
+Each dot is a cell, and the x-axis has two groups showing the absolute values of for each batch (`shr` and `wt`). The y-values correspond to the actual value of each cell, but the x-vales within each group are just random jitter to help see the cells more clearly. The outline of the violin plot shows us the density of each batch, where we can see that most of the cells in the `shr` group have an average number of features just below 2000 genes, compared to `wt` which has an average number of features just below 4000 genes. If we compare the library size, however, we notice that the outlines are very similar and that the average library sizes across batches are comparable.
 
 ### Filter
 
