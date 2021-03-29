@@ -530,4 +530,4 @@ This entire tutorial can be invoked from the scRNA Plant Workflow shown below:
 
 ![scRNA Plant](../../images/scrna-plant/scrna-plant-workflow.png)
 
-The input parameters take two datasets as input, and 5 parameters using the defaults shown in this tutorial: min cells, min genes, max features, max library size, and leiden clustering resolution. Play with these options to see how robust the analysis really is!
+The input parameters take two datasets as input, and 5 parameters using the defaults shown in this tutorial: min cells, min genes, max features, max library size, and Leiden clustering resolution. Play with these options to see how robust the analysis really is!
