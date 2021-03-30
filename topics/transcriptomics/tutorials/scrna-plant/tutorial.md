@@ -27,6 +27,8 @@ key_points:
   - A DotPlot is a fantastic way to validate clusters across different analyses
 contributors:
   - mtekman
+  - beatrizserrano
+
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
@@ -123,9 +125,9 @@ If the above feels like a convoluted way to get the dimensionality, that's becau
 >        - *"Format for the annotated data matrix"*: `Tabular, CSV, TSV`
 >            - {% icon param-file %} *"Annotated data matrix"*: Multi-select both `SHR` and `WT` datasets
 >
->    > ### {% icon tip %} Tip: Automatic 
+>    > ### {% icon tip %} Tip: Automatic
 >    >
->    > We can now inspect the dimensionality of the dataset by "peeking" at the dataset in the history and observing the general information, 
+>    > We can now inspect the dimensionality of the dataset by "peeking" at the dataset in the history and observing the general information.
 >    {: .tip}
 >    
 >    > ### {% icon comment %} Comment
@@ -230,7 +232,7 @@ Each dot is a cell, and the x-axis has two groups showing the absolute values of
 
 ### Filter
 
-Most scRNA-seq datasets need to set a minimum threshold of detectability in order to ensure that the cells are of high enough quality to be used for analysis. Conversely, sometimes an upper threshold also should be set to counter the case where a cell is a cell-doublet (in the sense that two cells were captured and sequenced accidentally as a single cell). 
+Most scRNA-seq datasets need to set a minimum threshold of detectability in order to ensure that the cells are of high enough quality to be used for analysis. Conversely, sometimes an upper threshold also should be set to counter the case where a cell is a cell-doublet (in the sense that two cells were captured and sequenced accidentally as a single cell).
 
 The above violin plots suggest quite a few outliers, mostly on the upper-end of the density plots, suggesting a few cell-doublets in the data. The effect of these is not something we cannot easily regress out, and so we must filter them out instead. By looking at the plots, we can see that a good maximum library size here would be 100 000 transcripts, and a good maximum feature size would be 10 000 transcripts.
 
@@ -283,9 +285,9 @@ If we inspect the resulting dataset, we see that the number of cells remaining i
 
 ## Confounder Removal
 
-Now we have a set of cells we are reasonably confident contain desirable biological variation (please see the ["An introduction to scRNA-seq data"]({% link videos/#video-transcriptomics-scrna-intro %}) at time point 11:28 as a reference for the types of wanted and unwanted variation). We wish to now regress out the library size variation, as it is not indicative of cell type. To do this, we will first ensure that all cells are of the same comparable library size by applying individual size factors to each cell. 
+Now we have a set of cells we are reasonably confident contain desirable biological variation (please see the ["An introduction to scRNA-seq data"]({% link videos/#video-transcriptomics-scrna-intro %}) at time point 11:28 as a reference for the types of wanted and unwanted variation). We wish to now regress out the library size variation, as it is not indicative of cell type. To do this, we will first ensure that all cells are of the same comparable library size by applying individual size factors to each cell.
 
-We will also apply a log transformation to the cells, as this compresses the variation into a less extreme space, making it easier to see the relative differences between cells. 
+We will also apply a log transformation to the cells, as this compresses the variation into a less extreme space, making it easier to see the relative differences between cells.
 
 After normalising and regressing out unwanted factors, we will then scale the data to have unit variance with a zero mean, so that the mean expression of each gene is not a factor in the analysis and only the variation is, ensuring that the later clustering is driven only by the relative variation of the genes, and not neccesarily how expressive those genes are.
 
@@ -322,7 +324,7 @@ After normalising and regressing out unwanted factors, we will then scale the da
 
 ## Dimension Reduction
 
-Dimension reduction is the art of reducing a high dimensional dataset into a low dimensional "embedding" that humans can actually see (i.e. 2 or 3 dimensions), ideally such that the relationships or distances between data points are preserved in this embedding. In the context of single-cell datasets, this essentially means compressing > 10 000 genes into just 2 X/Y variables. 
+Dimension reduction is the art of reducing a high dimensional dataset into a low dimensional "embedding" that humans can actually see (i.e. 2 or 3 dimensions), ideally such that the relationships or distances between data points are preserved in this embedding. In the context of single-cell datasets, this essentially means compressing > 10 000 genes into just 2 X/Y variables.
 
 
 > ### {% icon tip %} Tip: Dimension Reduction
@@ -330,7 +332,7 @@ Dimension reduction is the art of reducing a high dimensional dataset into a low
 > You can learn more about dimension reduction by consulting the [An introduction to scRNA-seq data analysis]({% link videos/#video-transcriptomics-scrna-intro %}) at time point 13:46.
 >    {: .tip}
 
-This is usually a two step process: 
+This is usually a two step process:
 
 1. A Principal Component Analysis (PCA) is used to perform an optimized "rotation" of the ~ 20 000 "unit" gene axes that we have, in order to better fit the data. These new axes or "principal components" are then *linear* combinations of the original unit axes, with an associated score of how variable each new axis is. By sorting these principal components by most variable to least variable, we can select the top N components and discard the rest, leaving us with most of the variation still in the data. Usually we select the top 40 principal components, which from 20 000 is a *huge* reduction in the dimensionality of the dataset.
 1. We then perform a more complex kind of dimension reduction, one that does not assume any linearity in the axes. For scRNA-seq, this is either tSNE or UMAP, with UMAP being the main choice due to how flexible it is in incorporating new data. Though UMAP is capable of working on extremely high dimensional datasets, it is often limited by time and space constraints (read: the computer does not respond in a reasonable timeframe, or it crashes), and so therefore it is quite normal to feed UMAP the output of the PCA as input. This will then be a dimension reduction from 50 to 2. With these final 2 dimensions, we can plot the data.
@@ -352,7 +354,7 @@ This is usually a two step process:
 >    > ### {% icon comment %} Comment
 >    >
 >    > UMAP relies on a connected graph of cells to operate. Please see: [An introduction to scRNA-seq data analysis]({% link videos/#video-transcriptomics-scrna-intro %}) at time point 13:40 for more information on how this process works.
->    {: .comment} 
+>    {: .comment}
 >
 > 1. {% tool [Cluster, infer trajectories and embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Inspect and manipulate** {% icon tool %})
@@ -385,9 +387,9 @@ With our data now sufficiently "flat" and ready for human consumption, we can no
 | ![PCA](../../images/pca_batch.png) | ![UMAP](../../images/umap_batch.png) |
 
 
-From this, we can see that there is a reasonable overlap in our batches shown both in the PCA and UMAP embeddings. This is good because it shows that though there is *some* batch effect (i.e. cells from one batch appear to cluster on a different side of the plot than the other) it is not significant enough for there not to be some commonality between the batches. 
+From this, we can see that there is a reasonable overlap in our batches shown both in the PCA and UMAP embeddings. This is good because it shows that though there is *some* batch effect (i.e. cells from one batch appear to cluster on a different side of the plot than the other) it is not significant enough for there not to be some commonality between the batches.
 
-There are batch correction algorithms for cases where one batch clusters completely seperate from the other, but this is not necessary here. 
+There are batch correction algorithms for cases where one batch clusters completely seperate from the other, but this is not necessary here.
 
 ## Clustering
 
@@ -418,7 +420,7 @@ Let us cluster the cells and see what cell types we can discover in the plots. T
 >    > ### {% icon comment %} Comment
 >    >
 >    > We print the legend on the data because it's easier to see where the cluster labels apply.
->    {: .comment} 
+>    {: .comment}
 >
 {: .hands_on}
 
