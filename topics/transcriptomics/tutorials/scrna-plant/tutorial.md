@@ -114,7 +114,7 @@ As explained in the Zenodo link, the datasets have been modified to use more com
 >
 {: .question}
 
-If the above feels like a convoluted way to get the dimensionality, that's because we haven't imported the data into the right format. For this we need to import both datasets into a single AnnData object (see the [AnnData section in the previous tutorial]({% link topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.md#anndata %})).
+If the above feels like a convoluted way to get the dimensionality, that's because we haven't imported the data into the right format. For this we need to import both datasets into a single AnnData object (see the [AnnData section in the previous tutorial]({% link topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}#anndata)).
 
 ## CSV to AnnData
 
