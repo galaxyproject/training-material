@@ -505,7 +505,7 @@ A final example of a Fragment size distribution of a very good ATAC-Seq, even if
 
 ## Call Peaks
 
-We have now finished the data preprocessing. Next, in order to find regions corresponding to potential open chromatin regions, we want to identify regions where reads have piled up (peaks) greater than the background read coverage. The tools which are currently used are [Genrich](https://github.com/jsh58/Genrich) and [MACS2](https://github.com/taoliu/MACS). MACS2 is more widely used. Genrich has a mode dedicated to ATAC-Seq but is still not published. It is very important at this point that we will re-center the reads on the 5' extremity (read start site) as this is where Tn5 cuts. You want your peaks around the nucleosomes and not directly on the nucleosome:
+We have now finished the data preprocessing. Next, in order to find regions corresponding to potential open chromatin regions, we want to identify regions where reads have piled up (peaks) greater than the background read coverage. The tools which are currently used are [Genrich](https://github.com/jsh58/Genrich) and [MACS2](https://github.com/taoliu/MACS). MACS2 is more widely used. Genrich has a mode dedicated to ATAC-Seq but is still not published and the more you have reads, the less you have peaks (see the issue [here](https://github.com/jsh58/Genrich/issues/33)). That's why we will not use Genrich in this tutorial. It is very important at this point that we will re-center the reads on the 5' extremity (read start site) as this is where Tn5 cuts. You want your peaks around the nucleosomes and not directly on the nucleosome:
 ![Scheme of ATAC-Seq reads relative to nucleosomes](../../images/atac-seq/schemeWithLegend.jpg "Scheme of ATAC-Seq reads relative to nucleosomes")
 
 > ### {% icon comment %} Comment on Tn5 insertion
@@ -563,81 +563,28 @@ We call peaks with MACS2. In order to get the coverage centered on the 5' extend
 >
 {: .hands_on}
 
-### Using Genrich
-
-> ### {% icon comment %} Comment on Genrich filters
->
-> Using **Genrich**, you can do most of the filtering we did previously:
->
-> Remove PCR duplicates: Yes
->
-> Comma-separated list of chromosomes to exclude:
-> chrM
->
-> Minimum MAPQ to keep an alignment.
-> 30
->
-> However, you cannot filter the unconcordant pairs, and you cannot get the fragment size histogram on filtered reads, that's why in this training we performed all filtering step prior to the use of Genrich.
-{: .comment}
-
-
-> ### {% icon hands_on %} Hands-on: Identifying enriched genomic regions
->
-> 1. **Genrich** {% icon tool %} with the following parameters:
->    - *"Are you pooling Treatment Files?"*: `No`
->    - {% icon param-file %} *"Treatment File(s)"*: Select the output of  **MarkDuplicates** {% icon tool %}
->    - *"Do you have a Control File?"*: `No`
->    - *"ATAC Options"*:
->        - *"Use ATAC-seq mode."*: `Yes`
->        - *"Expand cut sites."*: `200` # Default is 100 but to compare to MACS2 we will set to 200.
->    - *"Output Options"*:
->        - *"Bedgraph-ish Pileups"*: `Yes`
->
-{: .hands_on}
-
 # Visualisation of Coverage
 
 ## Prepare the Datasets
 
-Thanks to **Genrich** we now have a coverage file which represents the coverage of the read start sites extended 100 bp to each side.
-The output of **Genrich** is a BedGraph-ish pileup (6 columns text format with a comment line and a header). We will first need to convert it to a bedgraph format (4 columns text format with no header) to be able to visualise it.
+## TODO extract CTCF peaks on chr22
 
-### Convert BedGraph-ish pileup of **Genrich** to bedgraph
-
-First, we need to remove the 2 header lines. Then, we select the first 4 columns.
-
-> ### {% icon hands_on %} Hands-on: Convert bedgraph-ish pileup to bedgraph.
->
-> 1. **Remove beginning** of a file {% icon tool %} with the following parameters:
->    - *"Remove first"*: `2`
->    - {% icon param-file %} *"from"*: Select the output of **Genrich** {% icon tool %} *"Bedgraph Pileups"*.
->
-> 2. **Cut** columns from a table {% icon tool %} with the following parameters:
->    - {% icon param-text %} *"Cut columns"*: `c1,c2,c3,c4`
->    - {% icon param-text %} *"Delimited by"*: `Tab`
->    - {% icon param-file %} *"From"*: Select the output of **Remove beginning** {% icon tool %}
->
-> 3. Chage the datatype from interval to bedgraph.
->
-> 4. Add a tag called `#Genrich_cov` to the output of **Cut**.
-{: .hands_on}
-
-### Convert bedgraph from **Genrich** and **MACS2** to bigwig
+### Convert bedgraph from **MACS2** to bigwig
 The bedgraph format is easily readable for human but it can be very large and visualising a specific region is quite slow. We will change it to bigwig format which is a binary format, so we can visualise any region of the genome very quickly.
 
 > ### {% icon hands_on %} Hands-on: Convert bedgraphs to bigWig.
 >
 > 1. **Wig/BedGraph-to-bigWig** converter {% icon tool %} with the following parameters:
->    - {% icon param-files %} *"Convert"*: Select both the output of **Cut** {% icon tool %} and the output of **MACS2** {% icon tool %} (Bedgraph Treatment).
+>    - {% icon param-file %} *"Convert"*: Select the output of **MACS2** {% icon tool %} (Bedgraph Treatment).
 >    - *"Converter settings to use"*: `Default`
 >
-> 2. Rename the datasets `MACS2 bigwig` and `Genrich bigwig` (you can use the tags to know which one is which one).
+> 2. Rename the datasets `MACS2 bigwig`.
 {: .hands_on}
 
 
 ## Create heatmap of coverage at TSS with deepTools
 
-You might be interested in checking the coverage on specific regions. For this, you can compute a heatmap. We will use the **deepTools plotHeatmap**. As an example, we will here make a heatmap centered on the transcription start sites (TSS).
+You might be interested in checking the coverage on specific regions. For this, you can compute a heatmap. We will use the **deepTools plotHeatmap**. As an example, we will here make a heatmap centered on the transcription start sites (TSS) and another one centered on CTCF peaks.
 
 ### Generate computeMatrix
 
@@ -650,7 +597,7 @@ The input of **plotHeatmap** is a matrix in a hdf5 format. To generate it we use
 >        - 1. *"Select regions"*
 >            - {% icon param-file %} *"Regions to plot"*: Select the dataset `chr22 genes`
 >    - *"Sample order matters"*: `No`
->        - {% icon param-file %} *"Score file"*: Select the both outputs of **Wig/BedGraph-to-bigWig** {% icon tool %} that should be named `MACS2 bigwig` and `Genrich bigwig`.
+>        - {% icon param-file %} *"Score file"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %} that should be named `MACS2 bigwig`.
 >    - *"computeMatrix has two main output options"*: `reference-point`
 >    - *"The reference point for the plotting"*: `beginning of region (e.g. TSS)`
 >    - *"Show advanced output settings"*: `no`
@@ -672,6 +619,7 @@ We will now generate a heatmap. Each line will be a transcript. The coverage wil
 >    - *"Show advanced options"*: `no`
 {: .hands_on}
 
+## TODO update the results
 > ### {% icon comment %} plotHeatmap Results
 > This is what you get from plotHeatmap:
 > ![plotHeatmap output](../../images/atac-seq/plotHeatmapOutput.png "plotHeatmap output")
@@ -685,16 +633,8 @@ We will now generate a heatmap. Each line will be a transcript. The coverage wil
 > > ### {% icon solution %} Solution
 > >
 > > 1. No, it is higher on the left which is expected as usually the promoter of active genes is accessible.
-> > 2. Around 4 for Genrich and 5.5 for MACS2.
+> > 2. Around 5.5.
 > >
-> > > ### {% icon tip %} Tip: Why the height is different
-> > >
-> > > MACS2 coverage is very simple, each 5' is extended 200bp (+/-100bp).
-> > > Genrich coverage is evaluated in a more subtle way: if the fragment length is above 200 (the expension size), the coverage will be each 5' extended 200bp (+/-100bp), but if it is less, the coverage will be between each 5' extended 100bp (-100bp - fragment size - + 100bp):
-> > > ![MACS2 vs Genrich](../../images/atac-seq/Screenshot_macs2vsGenrich.png "MACS2 vs Genrich coverage")
-> > > In this example, we see on the left a pair with a long fragment size: both algorithm behave the same.
-> > > On the left a pair with a short fragment size: Genrich reports only one interval joining both extremities wheareas MACS2 will still report 2 intervals even if they overlap.
-> > {: .tip}
 > {: .solution}
 >
 {: .question}
@@ -709,21 +649,6 @@ In order to visualise a specific region (e.g. the gene *RAC2*), we can either us
 >    - *"Region of the genome to limit the operation"*: `chr22:37,193,000-37,252,000`
 >    - In *"Include tracks in your plot"*:
 >        - *"1. Include tracks in your plot"*
->            - *"Choose style of the track"*: `Bigwig track `
->                - *"Plot title"*: `Coverage from Genrich (extended +/-100bp)`
->                - {% icon param-file %} *"Track file bigwig format"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %} called `Genrich bigwig`.
->                - *"Color of track"*: Select the color of your choice
->                - *"Minimum value"*: 0
->                - *"height"*: `5`
->                - *"Show visualization of data range"*: `Yes`
->        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
->            - *"Choose style of the track"*: `NarrowPeak track`
->                - *"Plot title"*: `Peaks from Genrich (extended +/-100bp)`
->                - {% icon param-file %} *"Track file bed format"*: Select the output of **Genrich** {% icon tool %}.
->                - *"Color of track"*: Select the color of your choice
->                - *"display to use"*: `box: Draw a box`
->                - *"Plot labels (name, p-val, q-val)"*: `No`
->        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `Bigwig track `
 >                - *"Plot title"*: `Coverage from MACS2 (extended +/-100bp)`
 >                - {% icon param-file %} *"Track file bigwig format"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %} called `MACS2 bigwig`.
@@ -760,18 +685,15 @@ In order to visualise a specific region (e.g. the gene *RAC2*), we can either us
 >
 {: .hands_on}
 
+## TODO update the result
 
 > ### {% icon comment %} pyGenomeTracks Results
 > You should get similar to results to this from pyGenomeTracks:
 > ![pyGenomeTracks output](../../images/atac-seq/pyGenomeTracksOutput.png "pyGenomeTracks output")
 {: .comment}
 
-Unfortunately, Genrich does not work very well with our small training dataset (every covered region is called a peak). This is because most of the data is on chr22 whereas the background model was built on the whole genome. When the pipeline described here was run on 20 million of pairs from the original dataset, this is the output of pyGenomeTracks:
-![pyGenomeTracks output for 20 million of pairs on the whole genome](../../images/atac-seq/pyGenomeTracksOutput_20M.png "pyGenomeTracks output for 20 million of pairs on the whole genome").
-
-
 > ### {% icon question %} Questions
-> In the ATAC-Seq sample in this selected region we see four peaks detected by MACS2 (with these parameters Genrich does not detect any peak).
+> In the ATAC-Seq sample in this selected region we see four peaks detected by MACS2.
 >
 > 1. How many TSS are accessible in the sample in the displayed region?
 > 2. How many CTCF binding loci are accessible?
@@ -789,16 +711,6 @@ Unfortunately, Genrich does not work very well with our small training dataset (
 >
 {: .question}
 
-TODO: Change the conclusions or use genrich 100bp...
-
-We can see that in this region both peak calling perform the same. However, when zooming out, we see that MACS2 is more sensitive:
-![pyGenomeTracks output for 20 million of pairs on the whole genome zoom out](../../images/atac-seq/pyGenomeTracksOutput_20M_zo.png "pyGenomeTracks output for 20 million of pairs on the whole genome zoom out").
-
-When the number of reads increases, the number of peaks with MACS2 increases but the number of peaks with Genrich decreases:
-![pyGenomeTracks output for 100 million of pairs on the whole genome zoom out](../../images/atac-seq/pyGenomeTracksOutput_100M_zo.png "pyGenomeTracks output for 100 million of pairs on the whole genome zoom out").
-![pyGenomeTracks output for 200 million of pairs on the whole genome zoom out](../../images/atac-seq/pyGenomeTracksOutput_200M_zo.png "pyGenomeTracks output for 200 million of pairs on the whole genome zoom out").
-
-
 As CTCF binds so ubiquitously and by itself can displace the nucleosome creating accessible regions, a region containing a peak with no corresponding CTCF peak or TSS could be a putative enhancer. In the pyGenomeTracks plot we see a region like this located in the intron of a gene and another one between genes. However, it is impossible to guess from the position which would be the gene controlled by this region. And of course, more analyses are needed to assess if it is a real enhancer, for example, histone ChIP-seq, 3D structure, transgenic assay, etc.
 
 
@@ -809,7 +721,8 @@ is a method to investigate the chromatin accessibility and the genome is treated
 a transposase (enzyme) called Tn5. It marks open chromatin regions by cutting and
 inserting adapters for sequencing. The training material gave you an insight into how to quality control the data. You should look for low quality bases, adapter contamination, correct insert size and PCR duplicates (duplication level). We showed you how to remove adapters and PCR duplicates, if **FastQC**, shows a warning in these areas. We mapped the reads
 with **Bowtie2**, filtered our reads for properly paired, good quality and reads that do not
-map to the mitochondrial genome. We found open chromatin regions with **Genrich**, a tool to find regions of genomic enrichment (peaks). We investigated the read coverage around TSS with the help of **computeMatrix** and **plotHeatmap**. Last but not least, we visualised the peaks and other informative tracks, such as CTCF binding regions and hg38 genes, with the help of **pyGenomeTracks**. At the end, we found open chromatin regions that did not overlap with CTCF sites or TSS, which could be potential putative enhancer regions detected by the ATAC-Seq experiment.
+map to the mitochondrial genome. We found open chromatin regions with **MACS2**, a tool to find regions of genomic enrichment (peaks). We investigated the read coverage around TSS with the help of **computeMatrix** and **plotHeatmap**. Last but not least, we visualised the peaks and other informative tracks, such as CTCF binding regions and hg38 genes, with the help of **pyGenomeTracks**. At the end, we found open chromatin regions that did not overlap with CTCF sites or TSS, which could be potential putative enhancer regions detected by the ATAC-Seq experiment.
 
+## TODO update workflow
 
 ![ATAC workflow](../../images/atac-seq/ATACWF.svg "ATAC workflow")
