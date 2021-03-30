@@ -75,7 +75,7 @@ another is also very small. This implies that critical information is not transm
 is captured by the interconnections. What enables slow computing elements in the brain to perfrom 
 complex tasks so quickly is the distributed computation and representation nature of the brain ({% cite JainEtAl %}). 
 
-## Perceptron
+# Perceptron
 
 Perceptron ({% cite Rosenblatt %}) is the oldest neural network still in use today. Its a form of a 
 feedforward neural network, in which the connections between the nodes do not form a loop. It accepts 
@@ -100,13 +100,10 @@ Figure 2 shows a Perceptron, a single layer FNN, where the input is 3 dimensiona
 
 ![Neurons forming the input and output layers of a single layer feedforward neural network](../../images/FFNN_no_hidden.png "A perceptron")
 
-The activation function can be other than the step function (E.g., sigmoid, tanh, ReLU, linear, 
-sign function, etc.). Output layer neurons usually have sigmoid or tanh functions. For more 
-information on the listed activation functions, please refer to {% cite nwankpaEtAl %}.
-
-![Mathmatical formula for Sigmoid activation function](../../images/sigmoid.gif "Sigmoid activation function")
-
-## Multi-layer FFN
+In supervised learning, we are given a set of input-output pairs, called the *training set*. Given the training set,
+the learning algorithm (iteratively) adjusts the model parameters (weights and biases), so that the model can accurately 
+map inputs to outputs. The learning algorithm for Perceptron is very simple and reduces the weights (via a small learning 
+rate multiplier) if the predcited output is more than the expected output and increases them otherwise ({% cite Rosenblatt %}).
 
 Minsky and Papert showed that a single layer FNN cannot solve problems in which the data is not linearly separable,
 such as the XOR problem ({% cite Newell780 %}). Adding one (or more) hidden layers to FNN enables it to solve problems
@@ -116,129 +113,44 @@ hence, we usually add multiple hidden layers to solve complex problems.
 
 ![Neurons forming the input, output, and hidden layers of a multi-layer feedforward neural network](../../images/FFNN.png "Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are omitted for clarity")
 
-## Learning algorithm
+The problem with multi-layer FNN was lack of a learning algorithm, as the Perceptron's learning algorithm could not 
+be extended to multi-layer FNN. This along with Minsky and Papert highlighting the limitations of Perceptron resulted 
+in sudden drop in interest in neural networks (coined as *AI winter*). In the 80's the backpropagation algorithm was 
+proposed ({% cite Rumelhart1986 %}), which enabled learning in multi-layer FNN, and resulted in a renewed interest in 
+the field.
 
-In supervised learning, we are given a set of input-output pairs, called the *training set*. Given the training set, the learning algorithm
-(iteratively) adjusts the model parameters, so that the model can accurately map inputs to outputs. We usually have another set of input-output
-pairs, called the *test set*, which is not used by the learning algorithm. When the learning algorithm completes, we assess the learned model by
-providing the test set inputs to the model and comparing the model outputs to test set outputs. We need to define a **loss function** to objectively
-measure how much the model output is off of the expected output. For classification problems we use the **cross entropy** loss function.
+# Activation functions
 
-![Mathematical formula for calculating the cross entropy loss function, which quantifies the difference between the predicted and desired output of a neural network](../../images/CrossEntropy.gif "Cross entropy loss function")
+The activation function can be other than the step function (E.g., sigmoid, tanh, ReLU, linear, 
+sign function, etc.). Output layer neurons usually have sigmoid or tanh functions. For more 
+information on the listed activation functions, please refer to {% cite nwankpaEtAl %}.
 
-The loss function is calculated for each input-output pair in the training set. The average of the calculated loss functions for all training
-set input-output pairs is called the **Cost function**. The goal of the learning algorithm is to minimize the cost function. The cost function
-is a function of network weights and biases of all neurons in all layers. The **backpropagation** learning algorithm {% cite Rumelhart1986 %}
-iteratively computes the gradient of cost function relative to each weight and bias, then updates the weights and biases in the opposite
-direction of the gradient, to find the local minimum.
+![Mathmatical formula for Sigmoid activation function](../../images/sigmoid.gif "Sigmoid activation function")
 
-![Mathematical formula for calcuating the cross entropy cost function, which is just the average of cross entropy loss functions for training samples](../../images/CostFunction.gif "Cross entropy cost function")
+# Classification/Regression problems
 
-# Recurrent neural networks
+# The Learning algorithm
 
-Unlike FNN, in RNN the output of the network at time t is used as network input at time t+1. RNN handle sequential data (e.g. temporal or ordinal).
+In supervised learning, we are given a set of input-output pairs, called the *training set*. Given the training set, 
+the learning algorithm (iteratively) adjusts the model parameters, so that the model can accurately map inputs to 
+outputs. We usually have another set of input-output pairs, called the *test set*, which is not used by the learning 
+algorithm. When the learning algorithm completes, we assess the learned model by providing the test set inputs to 
+the model and comparing the model outputs to test set outputs. We need to define a **loss function** to objectively
+measure how much the model output is off of the expected output. For classification problems we use the **cross entropy** 
+loss function.
 
-## Possible RNN inputs/outputs
+$$ L(\boldsymbol{\hat{y^{(j)}}}, \boldsymbol{y^{(j)}}) = - \sum_{i=1}^{n} \boldsymbol{y_{i}^{(j)}}ln(\boldsymbol{\hat{y_{i}^{(j)}}}) $$
 
-There are 4 possible input/output combinations for RNN and each have a specific application. One-to-one is basically a FNN. One-to-many,
-where we have one input and a variable number of output. One example application is image captioning, where a single image is provided
-as input and a variable number of words (which caption the image) is returned as output (See Figure 7).
+The loss function is calculated for each input-output pair in the training set. The average of the calculated loss 
+functions for all training set input-output pairs is called the **Cost function**. The goal of the learning algorithm 
+is to minimize the cost function. The cost function is a function of network weights and biases of all neurons in all 
+layers. 
 
-![Neurons forming a one-to-many recurrent neural network](../../images/RNN_1_to_n.png "One-to-many RNN")
+$$ J(\boldsymbol{W}, \boldsymbol{b}) = - \frac{1}{m} \sum_{j=1}^{m} \sum_{i=1}^{n} \boldsymbol{y_{i}^{(j)}}ln(\boldsymbol{\hat{y_{i}^{(j)}}}) $$
 
-Many-to-one RNN, on the other hand, have a variable number of inputs and a single output. One example application is document sentiment
-classification, where a variable number of words in a document are presented as input, and a single output predicts whether the document
-has a positive or negative sentiment regarding a topic (See Figure 8).
-
-![Neurons forming a many-to-one recurrent neural network](../../images/RNN_n_to_1.png "Many-to-one RNN")
-
-There are two types of many-to-many RNN. One in which the number of inputs and outputs match, e.g., in labeling the video frames the number
-of frames matches the number of labels, and the other in which the number of inputs and outputs do not match, e.g., in language translation
-we pass in n words in English and get m words in Italian (See Figure 9).
-
-![Neurons forming a many-to-many recurrent neural network](../../images/RNN_n_to_m.png "Many-to-many RNN")
-
-## RNN architectures
-
-Mainly, there are three types of RNN: 1) Vanilla RNN, 2) LSTM ({% cite hochreiter1997long %}), and 3) GRU ({% cite cho-etal-2014-learning %}).
-A Vanilla RNN, simply combines the state information from the previous timestamp with the input from the current timestamp to generate the
-state information for current timestamp. The problem with Vanilla RNN is that training deep RNN networks is impossible due to the
-**vanishing gradient** problem. Basically, starting from the output layer, in order to determine weights/biases updates, we need to calculate
-the derivative of the loss function relative to the layers input, which is usually a small number. This is not a problem for the output layer,
-but for the previous layers, this process must be repeated recursively, resulting in very small updates to weights/biases of the initial layers
-of the RNN, halting the learning process.
-
-LSTM and GRU are two RNN architectures that address vanishing gradient problem. Full description of LSTM/GRU is beyond the scope of this
-tutorial (Please refer to ref1 and ref2), but in a nutshell both LSTM and GRU use **gates** such that the weights/biases updates in previous
-layers are calculated via a series of additions (not multiplications). Hence, these architectures can learn even when the RNN has hundreds or
-thousands of layers.
-
-# Text representation schemes
-
-In this tutorial we perform sentiment analysis on IMDB (https://www.imdb.com/) movie reviews dataset ({% cite maas-EtAl %}). We train our RNN on
-the training dataset, which is made up of 25000 movie reviews, some positive and some negative. We then test our RNN on the test set, which is
-also made up of 25000 movie reviews, again some positive and some negative. The training and test sets have no overlap. Since we are dealing with
-text data, it's a good idea to review various mechanisms for representing text data. Before that, we are going to briefly discuss how to preprocess
-text documents.
-
-## Text preprocessing
-
-The first step is to tokenize a document, i.e., break it down into words. Next, we remove the punctuation marks, URLs, and stop words -- words like
-'a', 'of', 'the', etc. that happen frequently in all documents and do not have much value in discriminating between documents. Next, we normalize
-the text, e.g., replace 'brb' with 'Be right back', etc. Then, We then run the spell checker to fix typos and also make all words lowercase. Next, we perform stemming or lemmatization. Basically, if we have words like 'organizer', 'organize', 'organized', and 'organization' we want to reduce all of them to a single word. Stemming cuts the end of these words to come up with a single root (e.g., 'organiz'). The root may not be an actual word.
-Lemmatization is smarter in that it reduces the word variants to a root that is actually a word (e.g., 'organize'). All of these steps help reduce
-the number of features in feature vector of a document and should make the training of our model faster/easier.
-
-For this introductory tutorial, we do minimal text preprocessing. We ignore the top 50 words in IMDB reviews (mostly stop words) and include
-the next 10,000 words in our dataset. Reviews are limited to 500 words. They are trimmed if they are longer and padded if they are shorter.
-
-## Bag of words and TF-IDF
-
-If you don't care about the order of the words in a document, you can use bag of words (BoW) or text frequency inverse document frequency (TF-IDF).
-In these models we have a 2 dimensional array. The rows represent the documents (in our example, the movie reviews) and the columns
-represent the words in our vocabulary (all the unique words in all the documents). If a word is not present in a document, we have a zero
-at the corresponding row and column as the entry. If a word is present in the document, we have a one as the entry -- Alternatively, we could use
-the word count or frequency.
-
-![Table showing a bag-of-words representation of sample documents](../../images/BoW.png "Bag of words (BoW) representation")
-
-Suppose we have the following 2 documents: 1) Magic passed the basketball to Kareem, and 2) Lebron stole the basketball from Curry. The BoW
-representation of these documents is given in Figure 10.
-
-BoW's advantage is its simplicity, yet it does not take into account the rarity of a word across documents, which unlike common words are
-important for document classification.
-
-In TF-IDF, similar to BoW we have an entry for each document-word pair. In TD-IDF, the entry is the product of 1) Text frequency, the
-frequency of a word in a document, and 2) Inverse document frequency, the inverse of the number of documents that have the word divided
-by the total number of documents (we usually use logarithm of the IDF).
-
-TF-IDF takes into account the rarity of a word across documents, but like BoW does not capture word order or word meaning in documents. BoW
-and TF-IDF are suitable representations for when word order is not important. They are used in document classification problems like spam detection.
-
-## One hot encoding (OHE)
-
-OHE is a technique to convert categorical variables such as words into a vector. Suppose our vocabulary has 3 words: orange, apple, banana.
-Each word for this vocabulary is represented by a vector of size 3. Orange is represented by a vector whose first element is 1 and other
-elements are 0; Apple is represented by a vector whose second element is 1 and other elements are 0; And banana is represented by a
-vector whose third element is 1 and other elements are 0. As you can see only one element in the vector is 1 and the rest are 0's. The same
-concept applies if the size of the vocabulary is N.
-
-![Mathematical vectors representing one-hot-encoding representation of words orange, apple, and banana](../../images/OHE.gif "One hot encoding (OHE) representation")
-
-The problem with OHE is that for very large vocabulary sizes (say, 100,000 words) it requires tremendous amount of storage. Also, it has no
-concept of word similarity.
-
-## Word2Vec
-
-In Word2Vec, each word is represented as an n dimensional vector (n being much smaller than vocabulary size), such that the words that have
-similar meanings are closer to each other in the vector space, and words that don't have a similar meaning are farther apart. Words are
-considered to have a similar meaning if they co-occur often in documents. There are 2 Word2Vec architectures, one that predicts the probability
-of a word given the surrounding words (Continuous BOW), and one that given a word predicts the probability of the surrounding words (Continuous
-skip-gram).
-
-In this tutorial, we find an n dimensional representation of the IMDB movie review words, not based on word meanings, but based on how they
-improve the sentiment classification task. The n dimensional representation is learned by the learning algorithm, simply by reducing the
-cost function via backpropagation.
+The **backpropagation** learning algorithm {% cite Rumelhart1986 %} iteratively computes the gradient of cost 
+function relative to each weight and bias, then updates the weights and biases in the opposite direction of the gradient, 
+to find the local minimum.
 
 # Get Data
 
@@ -272,7 +184,7 @@ cost function via backpropagation.
 >
 {: .hands_on}
 
-# Sentiment Classification of IMDB movie reviews with RNN
+# Solve a regression problem using Boston housing dataset via FNN in Galaxy
 
 In the section, we define a RNN and train it using IMDB movie reviews training dataset. The goal is to learn a model such that given the
 words in a review we can predict whether the review was positive or negative. We then evaluate the trained RNN on the test dataset
