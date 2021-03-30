@@ -39,7 +39,7 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 > ### {% icon comment %} Comment
 >
-> Please familiarise yourself with the ["Clustering 3K PBMCs with ScanPy"]() tutorial first, as much of the process is the same, and the accompanying slide deck better explains some of the methods and concepts better.
+> Please familiarise yourself with the ["Clustering 3K PBMCs with ScanPy"]({% link topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial first, as much of the process is the same, and the accompanying slide deck better explains some of the methods and concepts better.
 >
 {: .comment}
 
@@ -48,7 +48,7 @@ Single cell RNA-seq analysis is a cornerstone of developmental research and prov
 ![The various cell subpopulations that are expected within this tutorial](../../images/scrna-plant/scrna-plant1.jpg)
 
 
-This tutorial replicates the paper ["Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing"](https://doi.org/10.1016/j.devcel.2019.02.022), where the major plant cell types are recovered in the data as well as distinguishing between QC and meristematic cells.
+This tutorial replicates the paper ["Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing"](https://doi.org/10.1016/j.devcel.2019.02.022) {% cite denyer2019spatiotemporal %}, where the major plant cell types are recovered in the data as well as distinguishing between QC and meristematic cells. The original paper used the Seurat analysis suite {% cite satija2015spatial %}, but here we will use the ScanPy analysis suite {% cite wolf2018scanpy %} integrated within the single-cell resources in Galaxy {% cite tekman2020single %} .
 
 
 > ### Agenda
@@ -112,7 +112,7 @@ As explained in the Zenodo link, the datasets have been modified to use more com
 >
 {: .question}
 
-If the above feels like a convoluted way to get the dimensionality, that's because we haven't imported the data into the right format. For this we need to import both datasets into a single AnnData object (see the [AnnData]() section in the "ScanPy Tutorial" tutorial).
+If the above feels like a convoluted way to get the dimensionality, that's because we haven't imported the data into the right format. For this we need to import both datasets into a single AnnData object (see the [AnnData section in the previous tutorial]({% link topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.md#anndata %})).
 
 ## CSV to AnnData
 
@@ -291,7 +291,7 @@ After normalising and regressing out unwanted factors, we will then scale the da
 
 > ### {% icon hint %} Highly Variable Genes?
 >
-> Those of you who are familiar with the [ScanPy Tutorial]() might wonder why we have not reduced the number of genes by performing a highly variable gene selection. 
+> Those of you who are familiar with the [ScanPy Tutorial]({% link topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) might wonder why we have not reduced the number of genes by performing a highly variable gene selection.
 > The answer is simply that it did not help with this particular dataset, and that by removing the least variable genes in the analysis, it did help us replicate the analysis in the paper. Try it for yourself as an intermediate step (after this analysis) and see!
 {: .hint}
 
@@ -519,7 +519,7 @@ If we look at the clusters now, and compare them to the original image in the pa
 
 ## Conclusions
 
-In this tutorial, we have recapitulated the same clustering analysis in the ["Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing"](https://doi.org/10.1016/j.devcel.2019.02.022) paper, and validated them by comparing DotPlots for specific genes that were used as markers in that paper.
+In this tutorial, we have recapitulated the same clustering analysis in the ["Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing"](https://doi.org/10.1016/j.devcel.2019.02.022) {% cite denyer2019spatiotemporal %} paper, and validated them by comparing DotPlots for specific genes that were used as markers in that paper.
 
 From this point, we can perform a lineage analysis to infer a differentiation pathway between the clusters. For ScanPy there is the PAGA option, however, this does not work so well with the current dataset, so it is encouraged that users use the original Seurat trajectory suite that was given in the paper, or to experiment with Monocle.
 
