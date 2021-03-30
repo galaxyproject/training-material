@@ -107,8 +107,8 @@ This first step consist of downloading and properly prepare the data to use it i
 > 1. Create a new history for this tutorial and give it a name (example: "DATRAS data analysis through PAMPA workflow")
 >    for you to find it again later if needed.
 >
->    {% snippet snippets/create_new_history.md %}
->    {% snippet snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the CSV files from [Zenodo](https://doi.org/10.5281/zenodo.4264936) via link with the three following links
 >    ```
@@ -117,12 +117,12 @@ This first step consist of downloading and properly prepare the data to use it i
 >    https://zenodo.org/record/4264936/files/CPUE%20per%20length%20per%20area_C.csv?download=1
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >    You may as well use the shared data library or directly download the data from the DATRAS data portal but the previous
 >    method is preferred.
 >
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    The files used for this tutorial have been imported from DATRAS data portal in October 2020. Those files are
 >    often updated on the data portal. So if you choose to download files directly from DATRAS there may be
@@ -157,13 +157,13 @@ This first step consist of downloading and properly prepare the data to use it i
 >       - tag `#SWCIBTS` to the tabular data file of the SWC-IBTS survey : "CPUE per length per area_B.csv"
 >       - tag `#BITS` to the tabular data file of the BITS survey : "CPUE per length per area_C.csv"
 >
->    {% snippet snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 >    If tags doesn't display directly on your history, refresh the page.
 >
 > 5. Convert datatype CSV to tabular for each data file
 >
->    {% snippet snippets/convert_datatype.md conversion="Convert CSV to tabular" %}
+>    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="Convert CSV to tabular" %}
 >
 {: .hands_on}
 
@@ -236,11 +236,11 @@ Before starting the preparation of the data, we need to identify which inputs we
 > 1. {% tool [Concatenate datasets tail-to-head (cat)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0) %} select the three `#BITS`, `#EVHOE` and `#SWCIBTS`
 >    datasets in {% icon param-files %} *"Datasets to concatenate"*
 >
->    {% snippet snippets/select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
 > 2. Suppress the `#BITS`, `#EVHOE` and `#SWCIBTS` tags and add the `#Concatenate` tag to the Concatenated data file
 >
->    {% snippet snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 > 3. Verify if the three header lines have been included in the concatenate with {% tool [Count occurrences of each record](Count1) %}
 >    and following parameters :
@@ -307,7 +307,7 @@ the three `#BITS`, `#EVHOE` and `#SWCIBTS` original tabular files used for the c
 >         - {% icon param-text %} *"Find Regex"*: `([A-Z]{3}[A-Z]+)`
 >         - {% icon param-text %} *"Replacement"*: `\1-`
 >
->    {% snippet snippets/select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
 >    > ### {% icon question %} Question
 >    > What did we do with this tool?

@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 
 title: "Antibiotic resistance detection"
-tags: [nanopore, plasmids]
 zenodo_link: "https://doi.org/10.5281/zenodo.3247504"
 questions:
   - "How do I assemble a genome with Nanopore data?"
@@ -23,6 +22,11 @@ key_points:
 contributors:
   - willemdek11
   - shiltemann
+tags:
+  - nanopore
+  - plasmids
+  - assembly
+  - amr
 ---
 
 # Overview
@@ -62,7 +66,7 @@ A schematic view of the workflow we will perform in this tutorial is given below
 {: .agenda}
 
 
-{% snippet snippets/warning_results_may_vary.md %}
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 In this tutorial we use metagenomic Nanopore data, but similar pipelines can be used for other types of datasets or other long-read sequencing platforms.
 
@@ -72,21 +76,7 @@ In this tutorial we use metagenomic Nanopore data, but similar pipelines can be 
 We are interested in the reconstruction of full plasmid sequences and determining the presence of any antimicrobial resistance genes.
 We will use the plasmid dataset created by {% cite LiXie2018 %} for their evaluation of the efficiency of MDR plasmid sequencing by MinION platform. In the experiment, 12 MDR plasmid-bearing bacterial strains were selected for plasmid extraction, including *E. coli*, *S. typhimurium*, *V. parahaemolyticus*, and *K. pneumoniae*.
 
-
-> ### {% icon comment %} Background: Nanopore sequencing
->
-> Nanopore sequencing has several properties that make it well-suited for our purposes
->
-> 1. Long-read sequencing technology offers **simplified** and less ambiguous genome **assembly**
-> 2. Long-read sequencing gives the ability to **span repetitive genomic regions**
-> 3. Long-read sequencing makes it possible to **identify large structural variations**
->
-> ![How nanopore sequencing works](../../images/plasmid-metagenomics-nanopore/sequence_method.jpg "Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: <a href="https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512">Nanopore sequencing: The advantages of long reads for genome assembly</a>)") <br><br>
->
->
-{: .comment}
-
-
+{% snippet faqs/galaxy/sequencing_nanopore.md %}
 
 ## Importing the data into Galaxy
 
@@ -96,7 +86,7 @@ For this tutorial, in order to speed up the analysis time, we will use 6 of the 
 >
 > 1. Make sure you have an empty analysis history. Give it a name.
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. **Import Sample Data** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3247504.svg)](https://doi.org/10.5281/zenodo.3247504)
 >    ```
@@ -107,11 +97,12 @@ For this tutorial, in order to speed up the analysis time, we will use 6 of the 
 >    https://zenodo.org/record/3247504/files/RB10.fasta
 >    https://zenodo.org/record/3247504/files/RB12.fasta
 >    ```
->    {% snippet snippets/import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. **Build a list collection** containing all fasta files. Name it `Plasmids`
 >
->    {% snippet snippets/build_list_collection.md %}
+>    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 {: .hands_on}
 
@@ -129,11 +120,11 @@ report page.
 > ### {% icon hands_on %} Hands-on: Plotting scripts for long read sequencing data
 >
 > 1. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters
->   - {% icon param-select %} *"Select multifile mode"*: `batch`
->   - {% icon param-select %} *"Type of the file(s) to work on"*: `fasta`
->   - {% icon param-collection %} *"files"*: The `Plasmids` dataset collection you just created
+>    - {% icon param-select %} *"Select multifile mode"*: `batch`
+>    - {% icon param-select %} *"Type of the file(s) to work on"*: `fasta`
+>    - {% icon param-collection %} *"files"*: The `Plasmids` dataset collection you just created
 >
->     {% snippet snippets/select_collection.md %}
+>    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
 {: .hands_on}
 
@@ -190,7 +181,7 @@ the Minimap2 publication ({% cite Li2018 %}).
 >    - In the section **Set advanced output options**:
 >      - {% icon param-select %} *"Select an output format"*: `paf`
 >
->    {% snippet snippets/select_collection.md %}
+>    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
 {: .hands_on}
 
@@ -236,10 +227,10 @@ Thus the per-base error rate is similar to the raw input reads.
 > ### {% icon hands_on %} Hands-on: De novo assembly
 >
 > 1. {% tool [miniasm](toolshed.g2.bx.psu.edu/repos/iuc/miniasm/miniasm/0.3+galaxy0) %} with the following parameters
->   - {% icon param-collection %} *"Sequence Reads"*: The `Plasmids` dataset collection
->   - {% icon param-collection %} *"PAF file"*: `Output Minimap dataset collection` created by **Minimap2** {% icon tool %}
+>    - {% icon param-collection %} *"Sequence Reads"*: The `Plasmids` dataset collection
+>    - {% icon param-collection %} *"PAF file"*: `Output Minimap dataset collection` created by **Minimap2** {% icon tool %}
 >
->    {% snippet snippets/select_collection.md %}
+>    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
 {: .hands_on}
 
@@ -286,7 +277,7 @@ The Assembly graph created can be used for mapping again with Minimap2, but firs
 >       - {% icon param-select %} *"Select an output format"*: `paf`
 >
 >
->     {% snippet snippets/select_collection.md %}
+>    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
 {: .hands_on}
 
@@ -392,8 +383,9 @@ Let's try it on our data!
 >      2. The assembly obtained with **Unicycler** {% icon tool %}
 >    - Tip: Search your history for the term `bandage` to easily find the outputs from our two bandage runs
 >
->    {% snippet snippets/scratchbook.md %}
->    {% snippet snippets/history_search.md %}
+>    {% snippet faqs/galaxy/features_scratchbook.md %}
+>
+>    {% snippet faqs/galaxy/histories_search.md %}
 >
 > 5. Repeat this comparison for the other samples.
 >

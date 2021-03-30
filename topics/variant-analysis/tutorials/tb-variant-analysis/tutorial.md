@@ -49,8 +49,8 @@ The data for today is a sample of *M. tuberculosis* [collected](https://www.ncbi
 >https://zenodo.org/record/3960260/files/Mycobacterium_tuberculosis_h37rv.ASM19595v2.45.chromosome.Chromosome.gff3
 >```
 >
->    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
 
@@ -75,7 +75,7 @@ tutorial on ["Quality control"]({% link topics/sequence-analysis/tutorials/quali
 >
 >       - {% icon param-files %} *"Short read data from your current history"*: select both FASTQ datasets.
 >
->    {% snippet snippets/select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
 >    The **FastQC** {% icon tool %} input form looks like this. You only need to pay attention to the top part
 >    where *Short read data from your current history* is selected. Leave all the other parameters at their default
