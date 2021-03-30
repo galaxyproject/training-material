@@ -12,7 +12,7 @@ FROM bgruening/galaxy-stable:latest
 
 MAINTAINER Galaxy Training Material
 
-ENV GALAXY_CONFIG_BRAND "GTN: Title of the topic"
+ENV GALAXY_CONFIG_BRAND "GTN: Text Mining"
 
 # copy the tutorials directory for your topic
 ADD topics/text-mining/tutorials/ /tutorials/
