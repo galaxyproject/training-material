@@ -29,20 +29,18 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Water stress is the main limiting factor faced by agricultural productivity and crop geographical distribution, and its consequences are increasing due to climate change ({% cite Fbregas2018 %}). The physiological effects of water stress on plant organisms (such as damage to antioxidant systems, decreased chlorophyll contents) leads to significant losses in crop yields. Understanding the mechanisms involved in the response to drought stress is a prerequisite for reducing their associated adverse effects.
-
 As sessile organisms, the survival of plants under adverse environmental conditions depends, to a large extent, on their ability to perceive stress stimuli and respond appropriately to counteract the potentially damaging effects. Coordination of phytohormones and reactive oxygen species are considered a key element for enhancing stress resistance, allowing fine-tuning of gene expression in response to environmental changes ({% cite PlanasRiverola2019 %}, {% cite Ivashuta2011 %}). These molecules constitute complex signalling networks, endowing with the ability to respond to a variable natural environment.
 
 Brassinosteroids (BRs) are a group of plant steroid hormones essential for plant growth and development, as well as for controlling abiotic and biotic stress. Structurally, BRs are polyhydroxylated sterol derivatives with close similarity to animal hormones (fig.1). This group of phytohormones is comprised of around 60 different compounds, of which brassinolide (BL), 24-epibrassinolide (EBR), and 28-homobrassinolide (HBR) are considered the most bioactive.
 
 ![fig1:Esteroid hormones](../../images/brassinosteroids.png "Structure of various plant and animal steroid hormones.")
 
-Several recent studies suggest that the BR-mediated gene regulatory networks have the potential to reshape the future of agriculture, not only by alleviating the antagonistic effect of drought stress but also by enhancing plant growth and yield. For instance, in tomato (_Solanum lycopersicum_), EBR treatment enhances drought tolerance, improving photosynthetic capacity, leaf water status, and antioxidant defense ({% cite Wang2018 %}). In pepper (_Capsicum annuum_), BL treatment increased the efficiency of light utilization under drought ({% cite Hu2013 %}). Gram (_Cicer arietinum_) plants exposed to drought stress and treated with BL showed significant increases in weight ({% cite Anwar2018 %}). However, the mechanisms of BRs action in enhancing plant tolerance to abiotic stresses still remain largely unknown.
+Several recent studies suggest that the BR-mediated gene regulatory networks have the potential to reshape the future of agriculture, not only by alleviating the antagonistic effect diverse abiotic stress conditios, such as drought, but also by enhancing plant growth and yield. For instance, in tomato (_Solanum lycopersicum_), EBR treatment enhances drought tolerance, improving photosynthetic capacity, leaf water status, and antioxidant defense ({% cite Wang2018 %}). In pepper (_Capsicum annuum_), BL treatment increased the efficiency of light utilization under drought ({% cite Hu2013 %}). Gram (_Cicer arietinum_) plants exposed to drought stress and treated with BL showed significant increases in weight ({% cite Anwar2018 %}). However, the mechanisms of BRs action in enhancing plant tolerance to abiotic stresses still remain largely unknown.
 
 MicroRNAs (miRNAs), mainly 20–22 nucleotide small RNAs (sRNAs), are characterized for regulating gene expression at the post-transcriptional level. miRNAs are distinguished from other sRNAs by being generated from precursor harboring an imperfect stem‐loop structure. Unlike in animals, the pre-processing of plant miRNA occurs in the nucleus (fig.2). The pre-miRNAs are then exported to the cytoplasm after methylation and incorporated into the Argonaute 1 protein to form RISC (RNA-induced silencing complex). The miRNA itself does not have the ability to cleave mRNAs or interfere with translation, but it plays a role in scanning the appropriate target. 
 
 
-![fig2:miRNA biosynthesis](../../images/plant_mirna_synthesis.png "Plant miRNA biosynthesis, homeostesis and mechanisms of action ({% cite Wang2019 %}).")
+![fig2:miRNA biosynthesis](../../images/plant_mirna_synthesis.png "Plant miRNA biosynthesis, homeostasis and mechanisms of action ({% cite Wang2019 %}).")
 
 
 miRNAs have been found to be important regulators of many physiological processes, such as stress and hormonal responses. Four factors justify the miRNAs to be considered as master regulators of the plant response to the surrounding environment:
@@ -366,18 +364,18 @@ Next, we will extract those genes whose expression is statistically significant,
 > {: .comment}
 > 1. {% tool [Filter](Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
 >    - {% icon param-file %} *"Filter"*: output of **DESeq2** {% icon tool %}
->    - *"With following condition"*: `c7<0.01`
+>    - *"With following condition"*: `c7<0.05`
 > 2. Rename the output as `Statistically significant genes`
 >
 > 3. {% tool [Filter](Filter1) %}data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `Statistically significant mRNAs`
 >    - *"With following condition"*: `c3>1`
-> 4. Rename it as `Statistically downregulated mRNAs`
+> 4. Rename it as `Statistically upregulated mRNAs`
 >
 > 5. {% tool [Filter](Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `Statistically significant genes`
 >    - *"With following condition"*: `c3<-1`
-> 6. Rename it as `Statistically upregulated mRNAs`
+> 6. Rename it as `Statistically downregulated mRNAs`
 > 
 {: .hands_on}
 
@@ -388,8 +386,8 @@ Next, we will extract those genes whose expression is statistically significant,
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The total number of genes whose expression differential between the two experimental conditions is 163.
-> > 2. Of them, 108 are downregulated by the BR treatment and 26 are upregulated.
+> > 1. The total number of genes whose expression differential between the two experimental conditions is 239.
+> > 2. Of them, 41 are downregulated by the BR treatment and 141 are upregulated.
 > >
 > {: .solution}
 >
@@ -400,16 +398,16 @@ Next, we will extract those genes whose expression is statistically significant,
 >
 {: .question}
 
-One way to assess whether the results obtained are biologically meaningful is to rank the genes whose expression is upregulated by brassinosteroid treatment and to seek information on the function of those genes that show a greater induction of their expression.
+One way to assess whether the results obtained are biologically meaningful is to rank the genes whose expression is downregulated by brassinosteroid treatment and to seek information on the function of those genes that show a greater induction of their expression.
 
 > ### {% icon hands_on %} Hands-on: Sort upregulated genes
 >
 > 1. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %} with the following parameters:
->    - {% icon param-file %} *"Sort Query"*: `Statistically upregulated mRNAs`
+>    - {% icon param-file %} *"Sort Query"*: `Statistically downregulated mRNAs`
 >    - In *"Column selections"*:
 >        - {% icon param-repeat %} *"Insert Column selections"*
 >            - *"on column"*: `c3`
->            - *"in"*: `Descending order`
+>            - *"in"*: `Ascending order`
 > 2. Click on the {% icon galaxy-eye %} (eye) icon and inspect the generated file
 {: .hands_on}
 
@@ -419,7 +417,7 @@ In order to functionally characterize the Arabidopsis genes, we can consult the 
 
 > ### {% icon question %} Questions
 >
-> What is the biological function of BR6OX2, the most upregulated gene?
+> What is the biological function of BR6OX2, the most downregulated gene?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -601,18 +599,18 @@ To conclude the analysis of the differential expression of miRNAs, we will extra
 
 > ### {% icon hands_on %} Hands-on: Filter upregulated miRNAs
 >
-> 1. {% tool [Filter](Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters: with the following parameters:
+> 1. {% tool [Filter](Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters: 
 >    - {% icon param-file %} *"Filter"*: `DESeq2 results miRNA`
->    - *"With following condition"*: `c6<0.05`
+>    - *"With following condition"*: `c7<0.05`
 > 2. Rename the output as `Differentially expressed miRNAs`
 >
-> 3. {% tool [Filter](Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters: with the following parameters:
+> 3. {% tool [Filter](Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `Differentially expressed miRNAs`
 >    - *"With following condition"*: `c3<0`
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > In this case we have chosen to apply a much less restrictive filtering than in the previous case, since the samples have much greater diversity among themselves. Thus, we have applied a threshold of 0.05 on the p-value, instead of opting for a threshold of 0.01 on the adjusted p-value as in the case of total mRNA. This results in a much higher probability of false positives.
+>    > In this case we have chosen to apply a much less restrictive filtering than in the previous case, since the samples have much greater diversity among themselves. Thus, we have applied a threshold of 0.05, instead of opting for a threshold of 0.01 on the adjusted p-value as in the case of total mRNA. This results in a much higher probability of false positives.
 >    {: .comment}
 >
 {: .hands_on}
@@ -623,8 +621,7 @@ To conclude the analysis of the differential expression of miRNAs, we will extra
 >
 > > ### {% icon solution %} Solution
 > >
-> > Only four of the miRNAs are significantly overexpressed in response to brassinosteroids (fig.14).
-> > ![fig14:Upregulated genes](../../images/miRNA_upregulated.png "Statistically significative upregulated miRNAs in response to brassinosteroids.")
+> > Unfortunately, we have not detected any upregulated miRNA. In this case, this is caused by the fact that the subsampled datasets don't have sufficient read depth to detect genes with low expression levels.
 > {: .solution}
 >
 {: .question}
@@ -632,12 +629,31 @@ To conclude the analysis of the differential expression of miRNAs, we will extra
 
 # Identification of miRNA targets
 
-To identify potential targets of upregulated miRNAs, it is necessary to obtain the sequences of all genes in FASTA format.
+From this point on, we will use the results generated from the raw datasets, rather than the subsamples. By using data from higher sequencing depth, the statistical power to detect differential expression is increased, and thus the probability of identifying biologically significant genes. ({% cite Bass2019 %}).
+
+> ### {% icon hands_on %} Hands-on: Retrieve the sequences of upregulated miRNAs obtained from the original datasets
+>
+> 1. Import the files from Zenodo:
+>
+>    - Open the file {% icon galaxy-upload %} __upload__ menu
+>    - Click of the **Paste/Fetch** button
+>    - Copy the Zenodo links and press <kbd>Start</kbd>
+>
+> ```
+> https://zenodo.org/record/4606701/files/upregulated_miRNA_BR_complete_dataset.fasta
+> https://zenodo.org/record/4647332/files/downregulated_mRNA_complete_dataset.fasta
+> ```
+> 2. Rename each dataset as `miRNA_upregulated_raw.fasta` and `mRNA_downregulated_raw.fasta`.
+>
+{: .hands_on}
+
+To identify potential targets of upregulated miRNAs, it is necessary to obtain the sequences of all genes in FASTA format. 
+
 
 > ### {% icon hands_on %} Hands-on: Obtaining the gene sequences of downregulated mRNAs
 >
 > 1. {% tool [Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} columns from a table (cut) (Galaxy Version 1.0.2)  with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `Statistically downregulated mRNAs`
+>    - {% icon param-file %} *"File to cut"*: `mRNA_downregulated_raw.fasta`
 >    - *"Cut by"*: `fields`
 >        - *"List of Fields"*: `c['1']`
 > 2. Rename the output as `mRNA ids`
@@ -656,7 +672,7 @@ Now we will obtain the sequences of miRNAs whose expression is induced by brassi
 > ### {% icon hands_on %} Hands-on: Obtaining the sequences of upregulated miRNAs
 >
 > 1. {% tool [Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %}  columns from a table (cut) (Galaxy Version 1.0.2) with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `Statistically upregulated miRNAs`
+>    - {% icon param-file %} *"File to cut"*: `miRNA_upregulated_raw.fasta`
 >    - *"Cut by"*: `fields`
 >        - *"List of Fields"*: `c['1']`
 >
@@ -684,8 +700,7 @@ Now we will obtain the sequences of miRNAs whose expression is induced by brassi
 
 We are now ready to launch the search for miRNA target genes. For this we will use the __Targetfinder__ tool , which, according to several publications, is one of the tools that offers the best results ({% cite Srivastava2014 %}, {% cite Ma2017 %}).
 
-
-> ### {% icon hands_on %} Hands-on: identification of potential miRNA targets
+> ### {% icon hands_on %} Hands-on: identification of potential miRNA targets (round 2)
 >
 > 1. {% tool [TargetFinder](toolshed.g2.bx.psu.edu/repos/rnateam/targetfinder/targetfinder/1.7.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input small RNA sequences file"*: `miRNA_upreguled_sequences.fasta`
@@ -694,59 +709,15 @@ We are now ready to launch the search for miRNA target genes. For this we will u
 > 2. Click on the {% icon galaxy-eye %} (eye) icon and inspect the output of **TargetFinder**.
 {: .hands_on}
 
-> ### {% icon question %} Questions
->
-> 1. How many target genes have been identified?
-> 2. Could you provide an explanation for this outcome?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Unfortunately, we have not detected any target genes.
-> > 2. The negative result of our analysis may be due to one of the following causes:
-> > - Brassinosteroid-mediated regulation of gene expression does not involve miRNAs.
-> > - The datasets don't have sufficient read depth to detect biologically important genes; sequencing below a certain threshold reduces statistical power ({% cite Bass2019 %}).
-> >
-> {: .solution}
->
-{: .question}
-
-To test the second hypothesis, we will use the miRNA sequences obtained from the processing of the original datasets (remember that in order to ensure that the workflow ran in a reasonable time, we used subsamples of the original datasets).
-
-> ### {% icon hands_on %} Hands-on: Retrieve the sequences of upregulated miRNAs obtained from the original datasets
->
-> 1. Import the files from Zenodo:
->
->    - Open the file {% icon galaxy-upload %} __upload__ menu
->    - Click of the **Paste/Fetch** button
->    - Copy the Zenodo links and press <kbd>Start</kbd>
->
-> ```
-> https://zenodo.org/record/4606701/files/upregulated_miRNA_BR_complete_dataset.fasta
-> ```
-> 2. Rename each dataset as `miRNA_sequences_original_dataset.fasta`.
->
-{: .hands_on}
-
-> ### {% icon hands_on %} Hands-on: identification of potential miRNA targets (round 2)
->
-> 1. {% tool [TargetFinder](toolshed.g2.bx.psu.edu/repos/rnateam/targetfinder/targetfinder/1.7.0+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input small RNA sequences file"*: `miRNA_sequences_original_dataset.fasta`
->    - {% icon param-file %} *"Target sequence database file*": `mRNA_downregulated_sequences.fasta`
->    - *"Prediction score cutoff value"*: `5.0`
-> 2. Click on the {% icon galaxy-eye %} (eye) icon and inspect the output of **TargetFinder**.
-{: .hands_on}
-
 
 ![fig14:Targets miRNA](../../images/miRNA_targets.png "Potential miRNA targets found by the TargetFinder tool.")
 
-Congratulations! You have identified two potential genes involved in the brassinosteroid-miRNA regulatory network. 
+Congratulations! You have identified one potential gene involved in the brassinosteroid-miRNA regulatory network. 
 
-The gene [AT5G63810](https://www.arabidopsis.org/servlets/TairObject?id=133285&type=locus) codifies the BGAL10 protein, a member of the glycosidase  hydrolase family. According the bibliography, this protein is involved in xyloglucan metabolism, a polysaccharide constituent of plant cell walls, and its downregulation could contribute to a delay in fruit ripening as a result of the maintenance of the structural integrity of the cell wall ({% cite Miedes2010 %}).
-
-On the other hand, the gene [AT1G56660](https://www.arabidopsis.org/servlets/TairObject?id=29512&type=locus) codifies a MAEBL domain protein, whose function has not been characterized.
+The gene [AT5G03670](https://www.arabidopsis.org/servlets/TairObject?id=133285&type=locus) codifies the TRM28 protein, a member of the histone-lysine N-methyltransferase SETD1B-like protein familiy. According the bibliography, this protein is involved in the tolerance to acid soil conditions. 
 
 > ### {% icon comment %} Comments
-> One of the hypothesis that we could propose from our results is: the inhibition of the BGAL10 protein translation can result in plants with improved resistante to droght conditions. Is it possible to validate it? Yes! We proporse this approach: to adquire [AT5G63810 mutant seeds](https://abrc.osu.edu/stocks?search%5Btaxon%5D=Arabidopsis+thaliana&search%5Bsearch_text%5D=AT5G63810&search%5Bmaterial_type%5D%5B%5D=seed&search%5Bsearch_fields%5D=All) and [wild type seeds](http://arabidopsis.info/StockInfo?NASC_id=N1093), grow them under two controlled conditions: watering and drought, and anayze plant weight after 33 days (fig.15).
+> One of the hypotheses that we could propose from our results is: the inhibition of the TRM28 protein translation can result in plants with impaired resistance to acid soils. Is it possible to validate it? Yes! We propose this approach: to acquire [AT5G03670 mutant seeds](https://abrc.osu.edu/stocks?search%5Btaxon%5D=Arabidopsis+thaliana&search%5Bsearch_text%5D=AT5G63810&search%5Bmaterial_type%5D%5B%5D=seed&search%5Bsearch_fields%5D=All) and [wild type seeds](http://arabidopsis.info/StockInfo?NASC_id=N1093), grow them under two controlled conditions: neutral substrate and acid substrate, and analyze plant weight after 33 days (fig.15).
 >
 > ![fig15:Plant groWth](../../images/arabidopis_growth_protocol.png "Arabidopsis growth conditions protocol ({% cite deOllas2019 %}).")
 >
