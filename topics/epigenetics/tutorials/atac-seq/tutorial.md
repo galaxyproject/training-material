@@ -35,7 +35,7 @@ In this tutorial we will use data from the study of {% cite Buenrostro2013 %}, t
 
 ### When working with real data
 {:.no_toc}
-When you use your own data we suggest you to use [this workflow](https://usegalaxy.eu/u/ldelisle/w/atac-seq-gtm-with-control-and-macs2) which includes the same steps but is compatible with replicates. If you do not have any control data you can import and edit this workflow, removing all steps with the controls. Controls for the ATAC-Seq procedure are not commonly performed, as discussed [here](https://informatics.fas.harvard.edu/atac-seq-guidelines.html), but could be ATAC-Seq of purified DNA.
+When you use your own data we suggest you to use [this workflow](https://usegalaxy.eu/u/ldelisle/w/copy-of-atac-seq-gtm-with-control-and-macs2-1) which includes the same steps but is compatible with replicates. If you do not have any control data you can import and edit this workflow, removing all steps with the controls. Controls for the ATAC-Seq procedure are not commonly performed, as discussed [here](https://informatics.fas.harvard.edu/atac-seq-guidelines.html), but could be ATAC-Seq of purified DNA.
 
 > ### Agenda
 >
@@ -100,7 +100,7 @@ We will visualise regions later in the analysis and obtain the gene information 
 >    - *"genome"*: `Human`
 >    - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
 >    - *"group"*: `Genes and Gene Prediction`
->    - *"track"*: `All GENCODE V31`
+>    - *"track"*: `All GENCODE V37`
 >    - *"table"*: `Basic`
 >    - *"region"*: `position` `chr22`
 >    - *"output format"*: `all fields from selected table`
@@ -113,7 +113,7 @@ We will visualise regions later in the analysis and obtain the gene information 
 > 4. **Cut** columns from a table {% icon tool %} with the following parameters:
 >    - {% icon param-text %} *"Cut columns"*: `c3,c5,c6,c13,c12,c4`
 >    - {% icon param-text %} *"Delimited by"*: `Tab`
->    - {% icon param-file %} *"From"*: `UCSC Main on Human: wgEncodeGencodeBasicV31 (chr22:1-50,818,468)`
+>    - {% icon param-file %} *"From"*: `UCSC Main on Human: wgEncodeGencodeBasicV37 (chr22:1-50,818,468)`
 >
 > 5. Check the contents of your file, is this as you expect it to be?
 >
@@ -129,10 +129,10 @@ We will visualise regions later in the analysis and obtain the gene information 
 >    > > 1. We expect at least 3 columns, `chromosome - start - end`, and possibly more optional columns
 >    > > 2. Your file should look something like this:
 >    > >    ```
->    > >    Chrom	Start	End	Name	Score	Strand	ThickStart	ThickEnd	ItemRGB	BlockCount	BlockSizes	BlockStarts
->    > >    chr22	10736170	10736283	RF00004	0	-
+>    > >    chr22	10736170	10736283	U2	0	-
 >    > >    chr22	11066417	11068174	CU104787.1	0	+
->    > >    chr22	11249808	11249959	RF00002	0	-
+>    > >    chr22	11249808	11249959	5_8S_rRNA	0	-
+>    > >    chr22	15273854	15273961	U6	0	+
 >    > >    [..]
 >    > >    ```
 >    > >
@@ -155,12 +155,14 @@ We will visualise regions later in the analysis and obtain the gene information 
 >
 >    {% snippet snippets/change_datatype.md datatype="bed" %}
 >
+> 8. Click on the {% icon galaxy-eye %} (eye) icon of the file. It should have now column names and they should match the content.
+>
 {: .hands_on}
 
 >
 > ### {% icon comment %} Gene file
 > The chr22 genes BED we produced only contains the start, the end, the name, and the strand of each transcript. It does not contain exon information.
-> To be able to have the exon information, you could use a GTF file which can be downloaded from the [gencode website](ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_31/gencode.v31.annotation.gtf.gz) but this file would include the information for the whole genome and would slow the analysis.
+> To be able to have the exon information, you could use a GTF file which can be downloaded from the [gencode website](ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_37/gencode.v37.annotation.gtf.gz) but this file would include the information for the whole genome and would slow the analysis.
 {: .comment}
 
 ## Quality Control
@@ -277,8 +279,9 @@ The forward and reverse adapters are slightly different. We will also trim low q
 {: .hands_on}
 
 > ### {% icon comment %} FastQC Results
-> If we run FastQC again we should see under **Overrepresented sequences** that there is no more overrepresented sequences and under **Adapter Content** that the Nextera adapters are no longer present.
+> Now, you should see under **Overrepresented sequences** that there is no more overrepresented sequences and under **Adapter Content** that the Nextera adapters are no longer present.
 > ![FastQC screenshot on the adapter content section after cutadapt](../../images/atac-seq/Screenshot_fastqcAftercutadapt.png "FastQC screenshot on the adapter content section after cutadapt")
+> However, you may have noticed that you have a new section with warning: **Sequence Length Distribution**. This is expected as you trimmed part of the reads.
 {: .comment}
 
 # Mapping
@@ -379,7 +382,7 @@ We apply some filters to the reads after the mapping. ATAC-Seq datasets can have
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The original BAM file is 28 MB, the filtered one is 15.1 MB. Approximately half of the alignments were removed.
+> > 1. The original BAM file is 28.1 MB, the filtered one is 15.2 MB. Approximately half of the alignments were removed.
 > >
 > > 2. You should modify the mapQuality criteria and decrease the threshold.
 > >
@@ -429,11 +432,12 @@ Because of the PCR amplification, there might be read duplicates (different read
 >    - {% icon param-file %} *"Select lines from"*: Select the output of  **MarkDuplicates** {% icon tool %}
 >    - *"that*: `Matching`
 >    - *"the pattern*: `(Library|LIBRARY)`
-> 2. Check that the datatype is tabular. If not, change the datatype as described above.
+> 2. Check that the datatype is tabular. If not, change it.
+>    {% snippet snippets/change_datatype.md datatype="tabular" %}
 > 3. **Transpose** {% icon tool %}:
 >    - {% icon param-file %} *"Select lines from"*: Select the output of **Select** {% icon tool %}
 >
-> ![Metrics of MarkDuplicates](../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.20191218.png "Metrics of MarkDuplicates")
+> ![Metrics of MarkDuplicates](../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.png "Metrics of MarkDuplicates")
 >
 {: .tip}
 
@@ -453,16 +457,16 @@ Because of the PCR amplification, there might be read duplicates (different read
 
 ## Check Insert Sizes
 
-We will check the insert sizes with **Picard CollectInsertSizeMetrics**. The insert size is the distance between the R1 and R2 read pairs. This tells us the size of the DNA fragment the read pairs came from. The fragment length distribution of a sample gives a very good indication of the quality of the ATAC-Seq.
+We will check the insert sizes with **Paired-end histogram** of insert size frequency. The insert size is the distance between the R1 and R2 read pairs. This tells us the size of the DNA fragment the read pairs came from. The fragment length distribution of a sample gives a very good indication of the quality of the ATAC-Seq.
 
 > ### {% icon hands_on %} Hands-on: Plot the distribution of fragment sizes.
 >
-> 1. **CollectInsertSizeMetrics** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: Select the output of  **MarkDuplicates** {% icon tool %} *"BAM output"*
->    - *"Load reference genome from"*: `Local cache`
->        - *"Using reference genome"*: `Human Dec. 2013 (GRCh38/hg38) (hg38)`
+> 1. **Paired-end histogram** of insert size frequency {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"BAM file"*: Select the output of  **MarkDuplicates** {% icon tool %} *"BAM output"*
+>    - *"Lower bp limit (optional)"*: `0`
+>    - *"Upper bp limit (optional)"*: `1000`
 >
-> 2. Click on the {% icon galaxy-eye %} (eye) icon of the upper one of the 2 outputs (the pdf file).
+> 2. Click on the {% icon galaxy-eye %} (eye) icon of the lower one of the 2 outputs (the png file).
 {: .hands_on}
 
 > ### {% icon comment %} CollectInsertSizeMetrics Results
@@ -496,22 +500,12 @@ Here are examples of Fragment size distributions of ATAC-Seq which were very noi
 A final example of a Fragment size distribution of a very good ATAC-Seq, even if we cannot see the third nucleosome "peak".
 ![Fragment size distribution of a good ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Good.png "Fragment size distribution of a good ATAC-Seq")
 
-> ### {% icon comment %} Comment on FR and RF
->
-> FR stands for forward reverse orientation of the read pairs, meaning, your reads are oriented as -> <- so the first read is on the forward and the second on the reverse strand. RF stands for reverse forward oriented, i.e., <- ->. It really depends on your experiment, how your reads are oriented and if the orientation plays a role.
-> Here, we expected FR and we got some RF for small reads. This is because when reads fully overlap:
-> ```
->    ------>
->    <------
-> ```
-> Bowtie2 gives a negative fragment size (8th field of SAM files) thus the Picard tool **CollectInsertSizeMetrics** {% icon tool %} attribute them to FR if the first read in the pair is forward and RF if the first read in the pair is reverse.
-{: .comment}
 
 # Peak calling
 
 ## Call Peaks
 
-We have now finished the data preprocessing. Next, in order to find regions corresponding to potential open chromatin regions, we want to identify regions where reads have piled up (peaks) greater than the background read coverage. The tools which are currently used are [Genrich](https://github.com/jsh58/Genrich) and [MACS2](https://github.com/taoliu/MACS). Genrich has a mode dedicated to ATAC-Seq but is still not published, so both are presented here. It is very important at this point that we center the reads on the 5' extremity (read start site) as this is where Tn5 cuts. You want your peaks around the nucleosomes and not directly on the nucleosome:
+We have now finished the data preprocessing. Next, in order to find regions corresponding to potential open chromatin regions, we want to identify regions where reads have piled up (peaks) greater than the background read coverage. The tools which are currently used are [Genrich](https://github.com/jsh58/Genrich) and [MACS2](https://github.com/taoliu/MACS). MACS2 is more widely used. Genrich has a mode dedicated to ATAC-Seq but is still not published. It is very important at this point that we will re-center the reads on the 5' extremity (read start site) as this is where Tn5 cuts. You want your peaks around the nucleosomes and not directly on the nucleosome:
 ![Scheme of ATAC-Seq reads relative to nucleosomes](../../images/atac-seq/schemeWithLegend.jpg "Scheme of ATAC-Seq reads relative to nucleosomes")
 
 > ### {% icon comment %} Comment on Tn5 insertion
@@ -519,10 +513,55 @@ We have now finished the data preprocessing. Next, in order to find regions corr
 > When Tn5 cuts an accessible chromatin locus it inserts adapters separated by 9bp {% cite Kia2017 %}:
 > ![Nextera Library Construction](../../images/atac-seq/NexteraLibraryConstruction.jpg "Nextera Library Construction")
 >
-> This means that to have the read start site reflect the centre of where Tn5 bound, the reads on the positive strand should be shifted 4 bp to the right and reads on the negative strands should be shifted 5 bp to the left as in [Buenrostro et al. 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825). **Genrich** can apply these shifts when ATAC-seq mode is selected.
+> This means that to have the read start site reflect the centre of where Tn5 bound, the reads on the positive strand should be shifted 4 bp to the right and reads on the negative strands should be shifted 5 bp to the left as in [Buenrostro et al. 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825). **Genrich** can apply these shifts when ATAC-seq mode is selected. In most cases, we do not have 9bp resolution so we don't take it into account but if you are interested in footprint, this is important.
 {: .comment}
 
-If we only assess the coverage of the start sites of the reads, the data would be too sparse and it would be impossible to call peaks. Thus, we will extend the start sites of the reads by 100bp (50 bp in each direction) to assess coverage.
+If we only assess the coverage of the 5' extremity of the reads, the data would be too sparse and it would be impossible to call peaks. Thus, we will extend the start sites of the reads by 200bp (100 bp in each direction) to assess coverage.
+
+### Using MACS2
+
+We convert the BAM file to BED format because when we set the extension size to MACS2, it will only consider one of the read pairs while here we would like to keep both information.
+
+> ### {% icon hands_on %} Hands-on: Convert the BAM to BED
+>
+> 1. **bedtools BAM to BED** converter {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Convert the following BAM file to BED"*: Select the output of **MarkDuplicates** {% icon tool %}
+>
+{: .hands_on}
+
+We call peaks with MACS2. In order to get the coverage centered on the 5' extended 100bp each side we will use `--shift -100` and `--extend 200`:
+![MACS2 options to get 100bp each side](../../images/atac-seq/macs2Options.jpg "MACS2 options to get 100bp each side")
+
+
+> ### {% icon hands_on %} Hands-on: Call peaks with MACS2
+>
+> 1. **MACS2 callpeak** {% icon tool %} with the following parameters:
+>    - *"Are you pooling Treatment Files?"*: `No`
+>    - *"ChIP-Seq Treatment File"*: Select the output of **bedtools BAM to BED** converter {% icon tool %}
+>    - *"Do you have a Control File?"*: `No`
+>    - *"Format of Input Files"*: `Single-end BED`
+>    - *"Effective genome size"*: `H. sapiens (2.7e9)`
+>    - *"Build Model"*: `Do not build the shifting model (--nomodel)`
+>        - *"Set extension size"*: `200`
+>        - *"Set shift size"*: `-100`. It needs to be - half the extension size to be centered on the 5'.
+>    - *"Additional Outputs"*:
+>        - Check `Peaks as tabular file (compatible with MultiQC)`
+>        - Check `Peak summits`
+>        - Check `Scores in bedGraph files`
+>    - In *"Advanced Options"*:
+>        - *"Composite broad regions"*: `No broad regions`
+>            - *"Use a more sophisticated signal processing approach to find subpeak summits in each enriched peak region"*: `Yes`
+>        - *"How many duplicate tags at the exact same location are allowed?"*: `all`
+>
+>    > ### {% icon comment %} Why keeping all duplicates is important
+>    >
+>    > We previously removed duplicates using **MarkDuplicates** {% icon tool %} using paired-end information. If two pairs had identical R1 but different R2, we knew it was not a PCR duplicate. Because we converted the BAM to BED we lost the pair information. If we keep the default (removing duplicates) one of the 2 identical R1 would be filtered out as duplicate.
+>    {: .comment}
+>
+> 2. Add a tag called `#MACS2_cov` to the output called MACS2 callpeak ...(Bedgraph Treatment).
+>
+>
+{: .hands_on}
 
 ### Using Genrich
 
@@ -550,51 +589,9 @@ If we only assess the coverage of the start sites of the reads, the data would b
 >    - *"Do you have a Control File?"*: `No`
 >    - *"ATAC Options"*:
 >        - *"Use ATAC-seq mode."*: `Yes`
->        - *"Expand cut sites."*: `100`
+>        - *"Expand cut sites."*: `200` # Default is 100 but to compare to MACS2 we will set to 200.
 >    - *"Output Options"*:
 >        - *"Bedgraph-ish Pileups"*: `Yes`
->
-{: .hands_on}
-
-### Using MACS2
-
-We convert the BAM file to BED format because when we shift the reads with MACS2, it will only consider one of the read pairs.
-
-> ### {% icon hands_on %} Hands-on: Convert the BAM to BED
->
-> 1. **bedtools BAM to BED** converter {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Convert the following BAM file to BED"*: Select the output of **MarkDuplicates** {% icon tool %}
->
-{: .hands_on}
-
-We call peaks with MACS2. Usually people expand 200bp around cut sites (+/-100bp). Here, to be able to compare with **Genrich**, we will use 100bp.
-
-> ### {% icon hands_on %} Hands-on: Call peaks with MACS2
->
-> 1. **MACS2 callpeak** {% icon tool %} with the following parameters:
->    - *"Are you pooling Treatment Files?"*: `No`
->    - *"Do you have a Control File?"*: `No`
->    - *"Format of Input Files"*: `Single-end BED`
->    - *"Effective genome size"*: `H. sapiens (2.7e9)`
->    - *"Build Model"*: `Do not build the shifting model (--nomodel)`
->        - *"Set extension size"*: `100`, people usually put `200`
->        - *"Set shift size"*: `-50`, people usually put `-100`. It needs to be - half the extension size to be centered on the 5'.
->    - *"Additional Outputs"*:
->        - Check `Peaks as tabular file`
->        - Check `Peak summits`
->        - Check `Scores in bedGraph files`
->    - In *"Advanced Options"*:
->        - *"Composite broad regions"*: `No broad regions`
->            - *"Use a more sophisticated signal processing approach to find subpeak summits in each enriched peak region"*: `Yes`
->        - *"How many duplicate tags at the exact same location are allowed?"*: `all`
->
->    > ### {% icon comment %} Why keeping all duplicates is important
->    >
->    > We previously removed duplicates using **MarkDuplicates** {% icon tool %} using paired-end information. If two pairs had identical R1 but different R2, we knew it was not a PCR duplicate. Because we converted the BAM to BED we lost the pair information. If we keep the default (removing duplicates) one of the 2 identical R1 would be filtered out as duplicate.
->    {: .comment}
->
-> 2. Add a tag called `#MACS2_cov` to the output called MACS2 callpeak ...(Bedgraph Treatment).
->
 >
 {: .hands_on}
 
@@ -602,7 +599,7 @@ We call peaks with MACS2. Usually people expand 200bp around cut sites (+/-100bp
 
 ## Prepare the Datasets
 
-Thanks to **Genrich** we now have a coverage file which represents the coverage of the read start sites extended 50 bp to each side.
+Thanks to **Genrich** we now have a coverage file which represents the coverage of the read start sites extended 100 bp to each side.
 The output of **Genrich** is a BedGraph-ish pileup (6 columns text format with a comment line and a header). We will first need to convert it to a bedgraph format (4 columns text format with no header) to be able to visualise it.
 
 ### Convert BedGraph-ish pileup of **Genrich** to bedgraph
@@ -637,20 +634,10 @@ The bedgraph format is easily readable for human but it can be very large and vi
 > 2. Rename the datasets `MACS2 bigwig` and `Genrich bigwig` (you can use the tags to know which one is which one).
 {: .hands_on}
 
-### Sort CTCF Peaks
-In order to visualise a specific region (e.g. the gene *RAC2*), we can either use a genome browser like **IGV** or **UCSC browser**, or use **pyGenomeTracks** to make publishable figures. We will use **pyGenomeTracks**. The **pyGenomeTracks** tool needs all BED files sorted, thus we sort the CTCF peaks.
-
-> ### {% icon hands_on %} Hands-on: Sort the BED files
->
-> 2. **bedtools SortBED** order the intervals  {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Sort the following BED/bedGraph/GFF/VCF file"*: `ENCFF933NTR.bed.gz`
->    - {% icon param-file %} *"Sort by"*: `chromosome, then by start position (asc)`
->
-{: .hands_on}
 
 ## Create heatmap of coverage at TSS with deepTools
 
-You might also be interested in specific regions. For this, you can compute a heatmap. We will use the **deepTools plotHeatmap**. As an example, we will here make a heatmap centered on the transcription start sites (TSS).
+You might be interested in checking the coverage on specific regions. For this, you can compute a heatmap. We will use the **deepTools plotHeatmap**. As an example, we will here make a heatmap centered on the transcription start sites (TSS).
 
 ### Generate computeMatrix
 
@@ -698,12 +685,12 @@ We will now generate a heatmap. Each line will be a transcript. The coverage wil
 > > ### {% icon solution %} Solution
 > >
 > > 1. No, it is higher on the left which is expected as usually the promoter of active genes is accessible.
-> > 2. Around 2.5 for Genrich and 3 for MACS2.
+> > 2. Around 4 for Genrich and 5.5 for MACS2.
 > >
 > > > ### {% icon tip %} Tip: Why the height is different
 > > >
-> > > MACS2 coverage is very simple, each 5' is extended 100bp (+/-50bp).
-> > > Genrich coverage is evaluated in a more subtle way: if the fragment length is above 100 (the expension size), the coverage will be each 5' extended 100bp (+/-50bp), but if it is less, the coverage will be between each 5' extended 50bp (-50bp - fragment size - + 50bp):
+> > > MACS2 coverage is very simple, each 5' is extended 200bp (+/-100bp).
+> > > Genrich coverage is evaluated in a more subtle way: if the fragment length is above 200 (the expension size), the coverage will be each 5' extended 200bp (+/-100bp), but if it is less, the coverage will be between each 5' extended 100bp (-100bp - fragment size - + 100bp):
 > > > ![MACS2 vs Genrich](../../images/atac-seq/Screenshot_macs2vsGenrich.png "MACS2 vs Genrich coverage")
 > > > In this example, we see on the left a pair with a long fragment size: both algorithm behave the same.
 > > > On the left a pair with a short fragment size: Genrich reports only one interval joining both extremities wheareas MACS2 will still report 2 intervals even if they overlap.
@@ -714,6 +701,8 @@ We will now generate a heatmap. Each line will be a transcript. The coverage wil
 
 ## Visualise Regions with pyGenomeTracks
 
+In order to visualise a specific region (e.g. the gene *RAC2*), we can either use a genome browser like **IGV** or **UCSC browser**, or use **pyGenomeTracks** to make publishable figures. We will use **pyGenomeTracks**.
+
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **pyGenomeTracks** {% icon tool %} with the following parameters:
@@ -721,7 +710,7 @@ We will now generate a heatmap. Each line will be a transcript. The coverage wil
 >    - In *"Include tracks in your plot"*:
 >        - *"1. Include tracks in your plot"*
 >            - *"Choose style of the track"*: `Bigwig track `
->                - *"Plot title"*: `Coverage from Genrich (extended +/-50bp)`
+>                - *"Plot title"*: `Coverage from Genrich (extended +/-100bp)`
 >                - {% icon param-file %} *"Track file bigwig format"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %} called `Genrich bigwig`.
 >                - *"Color of track"*: Select the color of your choice
 >                - *"Minimum value"*: 0
@@ -729,14 +718,14 @@ We will now generate a heatmap. Each line will be a transcript. The coverage wil
 >                - *"Show visualization of data range"*: `Yes`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `NarrowPeak track`
->                - *"Plot title"*: `Peaks from Genrich (extended +/-50bp)`
+>                - *"Plot title"*: `Peaks from Genrich (extended +/-100bp)`
 >                - {% icon param-file %} *"Track file bed format"*: Select the output of **Genrich** {% icon tool %}.
 >                - *"Color of track"*: Select the color of your choice
 >                - *"display to use"*: `box: Draw a box`
 >                - *"Plot labels (name, p-val, q-val)"*: `No`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `Bigwig track `
->                - *"Plot title"*: `Coverage from MACS2 (extended +/-50bp)`
+>                - *"Plot title"*: `Coverage from MACS2 (extended +/-100bp)`
 >                - {% icon param-file %} *"Track file bigwig format"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %} called `MACS2 bigwig`.
 >                - *"Color of track"*: Select the color of your choice
 >                - *"Minimum value"*: 0
@@ -744,7 +733,7 @@ We will now generate a heatmap. Each line will be a transcript. The coverage wil
 >                - *"Show visualization of data range"*: `Yes`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `NarrowPeak track`
->                - *"Plot title"*: `Peaks from MACS2 (extended +/-50bp)`
+>                - *"Plot title"*: `Peaks from MACS2 (extended +/-100bp)`
 >                - {% icon param-file %} *"Track file bed format"*: Select the output of **MACS2** {% icon tool %} (narrow Peaks).
 >                - *"Color of track"*: Select the color of your choice
 >                - *"display to use"*: `box: Draw a box`
@@ -760,7 +749,7 @@ We will now generate a heatmap. Each line will be a transcript. The coverage wil
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `NarrowPeak track`
 >                - *"Plot title"*: `CTCF peaks`
->                - {% icon param-file %} *"Track file bed format"*: Select the dataset `bedtools SortBED of ENCFF933NTR.bed.gz`
+>                - {% icon param-file %} *"Track file bed format"*: Select the first dataset: `ENCFF933NTR.bed.gz`
 >                - *"Color of track"*: Select the color of your choice
 >                - *"display to use"*: `box: Draw a box`
 >                - *"Plot labels (name, p-val, q-val)"*: `No`
@@ -782,7 +771,7 @@ Unfortunately, Genrich does not work very well with our small training dataset (
 
 
 > ### {% icon question %} Questions
-> In the ATAC-Seq sample in this selected region we see four peaks detected by Genrich and MACS2.
+> In the ATAC-Seq sample in this selected region we see four peaks detected by MACS2 (with these parameters Genrich does not detect any peak).
 >
 > 1. How many TSS are accessible in the sample in the displayed region?
 > 2. How many CTCF binding loci are accessible?
@@ -799,6 +788,8 @@ Unfortunately, Genrich does not work very well with our small training dataset (
 > {: .solution}
 >
 {: .question}
+
+TODO: Change the conclusions or use genrich 100bp...
 
 We can see that in this region both peak calling perform the same. However, when zooming out, we see that MACS2 is more sensitive:
 ![pyGenomeTracks output for 20 million of pairs on the whole genome zoom out](../../images/atac-seq/pyGenomeTracksOutput_20M_zo.png "pyGenomeTracks output for 20 million of pairs on the whole genome zoom out").
