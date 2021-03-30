@@ -121,11 +121,35 @@ the field.
 
 # Activation functions
 
-The activation function can be other than the step function (E.g., sigmoid, tanh, ReLU, linear, 
-sign function, etc.). Output layer neurons usually have sigmoid or tanh functions. For more 
-information on the listed activation functions, please refer to {% cite nwankpaEtAl %}.
+There are many activation functions besides the step function used in Perceptron {% cite nwankpaEtAl %}. Figure 4 shows
+some of the more common activation functions.
 
-![Mathmatical formula for Sigmoid activation function](../../images/sigmoid.gif "Sigmoid activation function")
+![Table showing the formula, graph, derivative, and range of common activation functions](../../images/FNN_activation_functions.png "Common activation functions (Source: https://en.wikipedia.org/wiki/Activation_function)")
+
+Linear activation function is used in the output layer of a network when we have a regression problem. It does 
+not make sense to use it in all layers, as such multi-layer network can be reduced to a single layer network. 
+Also, networks with linear activation functions cannot model non-linear relationships between input and output.
+
+Binary step activation function is used in Perceptron. It cannot be used in multi-layers networks as they use 
+back propagation learning algorithm, which changes network weights/biases based on derivative of the derivative 
+of the activation function, which is zero. Hence, there would no weights/biases updates in back propagation.
+
+Sigmoid activation function can be used both at the output layer and hidden layers of a multilayer network. They 
+allow the network to model non-linear realtionships between input and output. The problem with Sigmoid activation
+function is that the derivative values away from the origin are very small and quickly approach zero. In a multi
+layer network, in order to calculate weight updates in layers closer to the input layer, we use the chain rule 
+which requires multiplying multiple Sigmoid derivative values. Multiplying multiple small numbers results in 
+a *very* small number, meaning that the weight updates will be minimal and the learning algorithm will be very 
+slow. This is known as the *vanishing gradient* problem. In networks with many hidden layers (so called *deep 
+networks*), we must use ReLU activation function (Discussed below).
+
+Hyperbolic tangent (or tanh), similar to Sigmoid function, is a soft step function. But its range is between -1 
+and 1 (instead of 0 and 1). One benefit of tanh over Sigmoid is that its derivative values are larger, so it
+suffers less from the vanishing gradient problem.
+
+Finally, ReLU (Rectified Linear Unit) is an activation function popular is deep neural networks. Since it
+does not sufer from vanishing gradient problem, it is preferred to Sigmoid or tanh. Sigmoid or tanh can 
+still be used in the output layer of deep networks.      
 
 # Classification/Regression problems
 
