@@ -281,7 +281,7 @@ This tutorial will help you setup the connection between Galaxy and Dropbox, all
 >      id: dropbox
 >      label: Your Dropbox Files
 >      doc: Your Dropbox files - configure an access token via the user preferences
->      accessToken: ${user.preferences['dropbox|access_token']}
+>      accessToken: ${user.preferences.get('dropbox|access_token', '') if $user.preferences else ''}
 >    ```
 > 3. Create `files/galaxy/config/user_preferences_extra_conf.yml` with the following contents:
 >

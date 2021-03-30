@@ -40,7 +40,7 @@ This practical aims at familiarizing you with the Galaxy user interface.
 It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows and sharing your work.
 Not everyone has the same background and that's ok!
 
-{% snippet snippets/warning_results_may_vary.md %}
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 > ### Agenda
 >
@@ -102,10 +102,12 @@ In other words, using a workflow makes it possible to apply the same procedure t
 >
 > 1. Make sure you start from an empty analysis history.
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. **Rename your history** to be meaningful and easy to find. For instance, you can choose **Galaxy 101 for everyone** as the name of your new history.
->    {% snippet snippets/rename_history.md %}
+>
+>    {% snippet faqs/galaxy/histories_rename.md %}
+>
 {: .hands_on}
 
 ## Upload the Iris dataset
@@ -118,13 +120,13 @@ In other words, using a workflow makes it possible to apply the same procedure t
 >    https://zenodo.org/record/1319069/files/iris.csv
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
 > 2. **Rename** {% icon galaxy-pencil %} the dataset to `iris`
 >
->    {% snippet snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 3. Check the **datatype**
 >    - Click on the history item to expand it to get more information.
@@ -133,12 +135,12 @@ In other words, using a workflow makes it possible to apply the same procedure t
 >      - Option 1: Datatypes can be **autodetected**
 >      - Option 2: Datatypes can be **manually set**
 >
->    {% snippet snippets/detect_datatype.md datatype="datatypes" %}
->    {% snippet snippets/change_datatype.md datatype="csv" %}
+>    {% snippet faqs/galaxy/datasets_detect_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="csv" %}
 >
 > 4. Add an `#iris` tag {% icon galaxy-tags %} to the dataset
 >
->    {% snippet snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 >    Make sure the tag starts with a hash symbol (`#`), which will make the tag stick not only to this dataset, but also to any results derived from it.
 >    This will help you make sense of your history.
@@ -163,11 +165,11 @@ First, we will convert the file from comma-separated to tab-separated format. Ga
 >
 > 1. **Convert** {% icon galaxy-pencil %} the CSV file (comma-separated values) to tabular format (tsv; tab-separated values)
 >
->    {% snippet snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
+>    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="Convert CSV to Tabular" %}
 >
 > 2. **Rename** {% icon galaxy-pencil %} the resulting dataset to `iris tabular`
 >
->    {% snippet snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 3. **View** the generated file by clicking on the {% icon galaxy-eye %} (eye) icon
 >
@@ -212,7 +214,7 @@ Now it is time to run your first tool! We saw in the previous step that our file
 >
 > 2. **Rename** {% icon galaxy-pencil %} the dataset to `iris clean`
 >
->    {% snippet snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 3. Click on the new history item to expand it
 >
@@ -253,7 +255,7 @@ In order to answer this question, we will have to look at column 5 of our file, 
 >
 > 2. **Rename** {% icon galaxy-pencil %} the dataset to `iris species column`
 >
->    {% snippet snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 3. **View** {% icon galaxy-eye %} the resulting file
 >
@@ -329,7 +331,7 @@ Looking at the tool help for **Group** {% icon tool %}, we see that we can also 
 >      - *"Type"*: `Count`
 >      - *"On column"*: `Column: 1`
 >
->    {% snippet snippets/rerun_tool.md %}
+>    {% snippet faqs/galaxy/tools_rerun.md %}
 >
 > 2. **Rename** {% icon galaxy-pencil %} the dataset to `iris samples per species group`
 >
@@ -417,7 +419,7 @@ In our dataset, we have the following features measured for each sample:
 >
 > 2. Rename the dataset to `iris summary and statistics`
 >
->    {% snippet snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 3. **View** {% icon galaxy-eye %} the generated file
 >
@@ -558,7 +560,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 > If you had problems extracting your workflow in the previous step, we provide a working copy for you [here]({% link topics/introduction/tutorials/galaxy-intro-101-everyone/workflows/main_workflow.ga %}),
 > which you can import to Galaxy and use for the next sections (see below how to import a workflow to Galaxy).
 >
-> {% snippet snippets/import_workflow.md %}
+> {% snippet faqs/galaxy/workflows_import.md %}
 >
 {: .comment}
 
@@ -589,7 +591,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >    - Now, when we run the workflow, we will only see these final outputs
 >        - i.e. the two dataset with species, the dataset with number of samples by species and the two scatterplots.
 >
->    {% snippet snippets/workflow_hide_intermediate_steps.md %}
+>    {% snippet faqs/galaxy/workflows_hide_intermediate_steps.md %}
 >
 > 4. **Renaming output datasets**
 >    - When we performed the analysis manually, we often renamed output datasets to something more meaningful
@@ -599,7 +601,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >        - **Group** {% icon tool %}, output `out_file1`: rename to `samples per category`
 >        - Rename the scatterplot outputs as well, remember to choose a generic name, since we can now also run this on data other than iris plants.
 >
->    {% snippet snippets/workflow_rename_output.md %}
+>    {% snippet faqs/galaxy/workflows_rename_output.md %}
 >
 > 5. **Save your workflow** (important!) by clicking on the {% icon galaxy-save %} icon at the top right of the screen.
 >
@@ -621,7 +623,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 > 1. Create a **new history** and give it a name.
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. {% tool [Import](upload1) %} the file `diamonds.csv` from [Zenodo](https://zenodo.org/record/3540705/files/diamonds.csv) or from the data library (ask your instructor)
 >
@@ -629,16 +631,16 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >    https://zenodo.org/record/3540705/files/diamonds.csv
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. **Rename** {% icon galaxy-pencil %} the dataset to `diamonds`
 >
->    {% snippet snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 4. Add a propagating tag {% icon galaxy-tags %} (e.g. `#diamonds`)
 >
->    {% snippet snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 {: .hands_on}
 
 The `diamonds` dataset comes from the well-known [ggplot2](https://ggplot2.tidyverse.org/reference/diamonds.html) package developed by Hadley Wickham and was initially collected from the Diamond Search Engine in 2008.

@@ -797,6 +797,107 @@ Rendered:
 > ```
 {: .code-out}
 
+
+## FAQs (snippets)
+
+Many common questions or instructions may be useful to share between different tutorials. For example instructions on how to start a new history or importing data. To make these types of snippets easier to re-use and avoid duplication, they are available in the form of *snippets*.
+
+### Finding snippets
+These are available in folders named `faqs`, either at the project level, topic level, or tutorial level.
+
+- **Project-level FAQs:** `faqs/`
+  - `faqs/galaxy/` for general Galaxy questions
+  - `faqs/gtn/` for questions regarding the GTN website itself
+
+- **Topic-level FAQs:** `topics/<topic>/faqs/`
+  - for questions pertaining to that specific topic
+
+- **Tutorial-level FAQs:** `topics/<topic>/tutorials/<tutorial>/faqs/`
+  - for questions pertaining to that specific tutorial
+  - if this is present, it is linked to from the tutorial overview box at the top, and from the end of the tutorial
+
+
+
+### Including FAQs/snippets in your tutorials
+
+To include one of these snippets in your tutorial, you can use the following syntax:
+
+```
+{% raw %}{% snippet faqs/galaxy/histories_create_new.md %}{% endraw %}
+```
+
+Which will be rendered as:
+
+{% snippet faqs/galaxy/histories_create_new.md %}
+
+The advantage of this approach is that when the Galaxy interface updates, we only have to update the snippet, rather than every tutorial. Please try to use snippets whenever you can!
+
+You could also specify the box type you want the snippet to be rendered in:
+
+```
+{% raw %}{% snippet faqs/galaxy/histories_create_new.md box_type="hands_on" %}{% endraw %}
+```
+
+{% snippet faqs/galaxy/histories_create_new.md box_type="hands_on" %}
+
+or without a box altogether:
+
+```
+{% raw %}{% snippet faqs/galaxy/histories_create_new.md box_type="none" %}{% endraw %}
+```
+
+{% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
+
+
+### Creating new FAQs/snippets
+
+Do you want to include something in your tutorial that you think might be useful in other tutorials as well? Or are you answering a frequently asked question? Consider creating a snippet for it
+
+Each snippet (question) is a separate file, with some metadata, residing in one of the `faqs` folders:
+
+```yaml
+---
+title: How do I run a workflow?
+area: workflows      # FAQs will be grouped by these areas on the FAQ page
+box_type: tip        # tip/comment/hands_on; optional, if you want the content to be in a box
+layout: faq          # if you set this the snippet will get its own page and be included in the FAQs page
+---
+
+Here you can write the snippet / answer to the FAQ in Markdown
+
+- Go to `Workflows` on the top menu bar
+- Click on ..
+- ..
+
+```
+
+### FAQ pages
+
+All FAQs will also be collected on their own page, this makes it easy for and teachers to prepare the session, and for participants to quickly find the answers to common questions.
+
+
+To do this, create a file named `index.md` inside the faq folder:
+
+```yaml
+---
+layout: faq-page
+---
+```
+
+If you would like to enforce an order of the faq areas, you can do so:
+
+```yaml
+---
+layout: faq-page
+area_order: [introduction, learners, instructors, contributors, other]
+---
+```
+
+(just make sure you list all existing areas in the folder)
+
+If a tutorial-level FAQ page exists (`topics/<topic>/tutorials/<tutorial>/faqs/index.md`) it will be automatically linked to from the overview box at the top of the tutorial, and at the end of the tutorial. Have a look at this tutorial to see it in action.
+
+
 ## Icons
 
 To use these icons, take the name of the icon, 'details' in this example, and write something like this in your tutorial:
@@ -835,6 +936,13 @@ If you would like to cite any articles, books or websites in your tutorial, you 
   url = {https://training.galaxyproject.org},
   note = {Accessed 2019-04-08},
   title = {Galaxy Training materials website}
+}
+
+@online{Galaxy-P_Metaproteomics,
+  author = {Galaxy-P Team},
+  title = {Galaxy-P Metaproteomics instance},
+  url = {https://proteomics.usegalaxy.eu/},
+  urldate = {2020-10-13}
 }
 ```
 {% endraw %}

@@ -11,7 +11,7 @@ objectives:
 time_estimation: "20m"
 subtopic: contribute
 key_points:
-  - "You can't add or push directly to the `master` branch, so you need to create a pull request"
+  - "You can't add or push directly to the `main` branch, so you need to create a pull request"
   - "1 pull request = 1 branch"
   - "The pull request is the foundation of the collaborative development of the training material"
 contributors:
@@ -109,14 +109,14 @@ You can now modify the `CONTRIBUTORS.yaml` file to add your information there
 Without realizing it, GitHub let you create your first branch (named here `patch-1`) and add a changement on this branch.
 
 > ### {% icon comment %} Branching
-> Branching is the way to work on different versions of a repository at one time. By default your repository has one branch named `master` which is considered to be the definitive branch. When you create a branch off the master branch, you're making a copy, or snapshot, of `master` as it was at that point in time.
+> Branching is the way to work on different versions of a repository at one time. By default your repository has one branch named `main` which is considered to be the definitive branch. When you create a branch off the main branch, you're making a copy, or snapshot, of `main` as it was at that point in time.
 >
-> By changing a file in this branch, it will diverge from the `master` branch. It will contain data that is only on this new branch.
+> By changing a file in this branch, it will diverge from the `main` branch. It will contain data that is only on this new branch.
 {: .comment}
 
 # Open a Pull Request
 
-Then the addition of your information in the `CONTRIBUTORS.yaml` file is currently only on your branch `patch-1`. Not on the `master` branch and so not only on the [Hall of Fame]({% link hall-of-fame.md %}). You can't add or push directly to the `master` branch, so you need to create what we call a pull request.
+Then the addition of your information in the `CONTRIBUTORS.yaml` file is currently only on your branch `patch-1`. Not on the `main` branch and so not only on the [Hall of Fame]({% link hall-of-fame.md %}). You can't add or push directly to the `main` branch, so you need to create what we call a pull request.
 
 The GitHub interface guides you through this process: after clicking on **Propose file change**, a new page opens:
 
@@ -124,7 +124,7 @@ The GitHub interface guides you through this process: after clicking on **Propos
 
 > ### {% icon hands_on %} Hands-on: Edit a file
 >
-> 1. Open and read the [CONTRIBUTING.md]({{ site.github_repository }}/blob/master/CONTRIBUTING.md) file
+> 1. Open and read the [CONTRIBUTING.md]({{ site.github_repository }}/blob/main/CONTRIBUTING.md) file
 > 1. Come back to the pull request
 > 2. Fill in the pull request description
 >
@@ -133,7 +133,7 @@ The GitHub interface guides you through this process: after clicking on **Propos
 >    1. Add a title for the Pull Request
 >    1. Add a message explaining the changes you made
 >
->       This message is a good way to introduce yourself and to explain the message you made. Be kind and descriptive. It helps the reviewers to understand why you did your changes and if it should be intergrated into the `master` branch (and then website).
+>       This message is a good way to introduce yourself and to explain the message you made. Be kind and descriptive. It helps the reviewers to understand why you did your changes and if it should be intergrated into the `main` branch (and then website).
 >
 >       > ### {% icon comment %} Pull request messages
 >       > GitHub uses [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet), a simple Markup language, to render the Pull request messages. You can then add bold test, lists, images, etc.
@@ -151,7 +151,7 @@ You have created your first pull request!
 
 Your pull request will be reviewed. There are two possible outcomes:
 
-1. Your pull request is accepted. Congratulations! Your changes will be merged into the master branch of the original repository. The website will be re-built and you will be in the [Hall of Fame]({% link hall-of-fame.md %})
+1. Your pull request is accepted. Congratulations! Your changes will be merged into the main branch of the original repository. The website will be re-built and you will be in the [Hall of Fame]({% link hall-of-fame.md %})
 2. Your pull request needs modifications: the reviewers will ask for some changes, possibly because the automatic tests are failing.
 
 # Update a Pull Request
