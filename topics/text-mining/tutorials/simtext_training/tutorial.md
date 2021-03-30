@@ -7,16 +7,20 @@ questions:
 - How can I automatically collect PubMed data for a set of biomedical entities such as genes?
 - How can I analyze similarities among biomedical entities based on PubMed data on large-scale?
 objectives:
-- Learn how to use the SimText toolset:
+- Learn how to use the SimText toolset
 - Upload table with biomedical entities in Galaxy
 - Retrieve PubMed data for each of the biomedical entities
 - Extract biomedical terms from the PubMed data for each biomedical entity
 - Analyze the similarity among the biomedical entities based on the extracted data in an interactive app
 time_estimation: 1H
 key_points:
-- The SimText toolset can be used to interactively analyze a set of entities/ search queries based on their associated terms in the literature.
+- The SimText toolset allows large-scale literature analysis of a set of biomedical entities such as genes or diseases
+- The similarities among the biomedical entities can be explored interactively
+- The litertaure based grouping can be compared to an existing grouping to discover similarities/ relationships hidden in the literature
 contributors:
+- mgramm1
 - dlalgroup
+- blankenberg
 
 ---
 
@@ -25,9 +29,9 @@ contributors:
 
 Literature exploration in PubMed on a large number of biomedical entities (e.g., genes, diseases, or experiments) can be time-consuming and challenging, especially when assessing associations between entities. Here, we use SimText, a toolset for literature research that allows you to collect text from PubMed for any given set of biomedical entities, extract associated terms, and analyze similarities among them and their key characteristics in an interactive tool.
 
-This tutorial is based on the example given in {% cite Gramm2020 %}. We are going to analyze similarities among 95 genes based on their associated biomedical terms in the literature, and compare their pre-existing disorder categories to their grouping based on the literature.
+This tutorial is based on a proof-of-concept example given in {% cite gramm2020 %}. We are going to analyze similarities among 95 genes based on their associated biomedical terms in the literature, and compare their pre-existing disorder categories to their grouping based on the literature.
 
-The workflow combines 3 main steps, starting with the retrievel of PubMed data for each of the genes. We then use the PubMed data from each gene to extract related scientific terms that are all combined in one large binary matrix. Finally, we explore the generated data in an interactive tool that performs different unsupervised machine-learning algorithms to analyze the similarities/ grouping among the genes based on their extracted terms from the literature.
+The workflow combines 3 main steps, starting with the retrieval of PubMed data for each of the genes. We then use the PubMed data from each gene to extract related scientific terms that are all combined in one large binary matrix. Finally, we explore the generated data in an interactive tool that performs different unsupervised machine-learning algorithms to analyze the similarities/ the grouping among the genes based on their extracted terms from the literature.
 
 ![Tutorial overview](../../images/simtext_overview_tutorial.png "Schematic presentation of the workflow.")
 
@@ -41,8 +45,6 @@ The workflow combines 3 main steps, starting with the retrievel of PubMed data f
 {: .agenda}
 
 # Input data
-
-## Input data
 
 The input data is a simple table with the genes we want to analyze as well as their pre-existing grouping (the grouping is required later on to compare it to our text-based gene grouping). In order for the tools to recognize the column with the biomedical entities of interest, our 95 genes, the column name should start with "ID_", and for the grouping variable with "GROUPING_".
 
@@ -62,9 +64,9 @@ The input data is a simple table with the genes we want to analyze as well as th
 >
 {: .hands_on}
 
-# 1. Retrieval of PubMed data
+# Retrieval of PubMed data
 
-In the first step we collect PubMed data for each of the genes. Here, the genes are used as search queries to download a defined number of PMIDs, here up to 500, from PubMed. The PMIDs are saved in additional columns of our input data.
+In the first step we collect PubMed data for each of the genes. The genes are used as search queries to download a defined number of PMIDs, here up to 500, from PubMed. The PMIDs are saved in additional columns of our input data.
 
 > ### {% icon details %} NCBI API key (optional)
 >
@@ -80,14 +82,14 @@ In the first step we collect PubMed data for each of the genes. Here, the genes 
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > The tool is also able to save the abstracts as text instead of PMIDs. This feature is used for another type of analysis. 
+>    > The tool is also able to save the abstracts as text instead of their PMIDs. This feature is used for another type of analysis (see {% cite gramm2020 %}), or can be used if the user wants to use the tool independent from a workflow to retrieve many abstract texts at once. For the next step of our example in this tutorial, PMIDs are required.
 >    {: .comment}
 >
 {: .hands_on}
 
-# 2. Extraction of biomedical terms from PubMed abstracts
+# Extraction of biomedical terms from PubMed abstracts
 
-Next, we extract the 100 most frequent 'Disease' and 'Gene' terms (PubTator annotations) from the PubMed data. Each gene with its 100 associated terms are then combined in one large binary matrix. Each row represents a gene and each column one of the extracted terms. This matrix is later used to find similar genes, i.e. genes that have many common terms associated with them.
+Next, we extract the 100 most frequent 'Disease' and 'Gene' terms (PubTator annotations) from the PubMed data. All genes with their 100 associated terms are then combined in one large binary matrix. Each row represents a gene and each column one of the extracted terms. This matrix is later used to find similar genes, i.e. genes that have many common terms associated with them.
 
 > ### {% icon hands_on %} Hands-on: Extraction of PubTator annotations
 >
@@ -98,25 +100,22 @@ Next, we extract the 100 most frequent 'Disease' and 'Gene' terms (PubTator anno
 >
 >    > ### {% icon comment %} PubTator
 >    > PubTator annotates terms of the following categories: Gene, Disease, Mutation, Species and Chemical. 
->    > In this example we chose to only extract Gene and Disease terms but you can also select other categories if you are interested in those.
+>    > In this example we chose to only extract gene and disease terms but you can also select other categories if you are interested in those.
 >    > 
 >    {: .comment}
 >
 {: .hands_on}
 
 
-# 3. Exploration of data in interactive tool
+# Exploration of data in interactive tool
 
 After generating the large binary matrix, we can explore the similarities/ the grouping among the genes in the interactive SimText tool.
 The following features are generated:
 
-1. word clouds for each gene
-2. dimension reduction and hierarchical clustering of the binary matrix
-3. calculation of the adjusted rand index (similarity of the grouping based on literature and the pre-existing disorder categories)
-4. table with terms and their frequency among the genes
-
-![Interactive tools](../../images/simtextapp.png "Screenshot of interactive SimText tool.")
-
+1. Word clouds for each gene
+2. Dimension reduction and hierarchical clustering of the binary matrix
+3. Calculation of the adjusted rand index (similarity between text-based grouping and the pre-existing disorder categories)
+4. Table with terms and their frequency among the genes
 
 > ### {% icon hands_on %} Hands-on: Explore data interactively
 >
@@ -131,5 +130,9 @@ The following features are generated:
 >
 {: .hands_on}
 
+![Wordcloud](../../images/simtextapp_wordcloud.gif "Left: For all genes a wordcloud with their associated terms cen be generated. Right: In the dimension reduction plot the similarities among the genes can be explored. The colouring corresponds to the pre-existing disorder categories.")
+![Clustering](../../images/simtextapp_clustering.gif "Hierarchical clustering of the matrix. Different clustering methods can be selected and the adjusted rand index be calculated.")
+
 # Conclusion
 {:.no_toc}
+
