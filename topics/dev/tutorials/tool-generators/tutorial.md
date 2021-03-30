@@ -4,7 +4,8 @@ layout: tutorial_hands_on
 title: "Tool generation from simple scripts in Galaxy: the ToolFactory"
 key_points:
   - The ToolFactory is a fully automated Galaxy tool generator, suitable for programmers and informaticians who routinely write command line scripts.
-  - It can turn a working command line script into a proper Galaxy tool with a test in a few minutes.
+  - It can turn a **working command line script** into a proper Galaxy tool with a test in a few minutes.
+  - If the script you are wrapping fails on the command line, it will certainly also fail inside the new tool - the ToolFactory will not fix bugs in the supplied script.
   - It automatically generates simple, complete Galaxy tools from information provided by filling in a normal Galaxy form in the familiar UI.
   - Enjoy developing scripts in Galaxy using IEs but struggle to wrap even simple scripts at first because there is so much to learn and so little time? Try the TooLFactory (once you have a working command line version)
   - Unlike a typical Conda package, a command line script can define how parameters are read from the command line. In particular, it is usually easy to ignore empty optional parameters, allowing some of the ToolFactory's limited flexibility to be overcome.
@@ -1044,6 +1045,22 @@ planemo lint $TOOLNAME >> $2
 - It is not hard to imagine using a Python wrapper to finesse more complex tools just as bash was used in the `planemo lint` example.
 - The ToolFactory, if in a persistent form, is a slightly clumsy but useable way to create and maintain Galaxy tools.
 - Tools can have command-override and test-override pasted in as in one of the BWA samples. This can solve some of the limitations. However, if the package requires that kind of complexity, it might be better to prepare the wrapper manually.
+
+---
+
+## Notes on some commonly reported errors and their solutions
+
+#### My Rscript generates a strange R error on STDOUT about an invalid operation on a closure called 'args' ?
+
+- Does your code create the args vector at the start of the script with something like `args = commandArgs(trailingOnly=TRUE)` before Rscript tries to access args[1] ?
+
+#### I want to use a collection for outputs but the test always fails. Even more odd, planemo reports that it performed zero tests in the html output!
+
+- Unfortunately, collections are tricky to generate automated tests for. The contents are never known until the tool has been run.
+- The galaxyxml code for collections is in need of work to address this - pull requests welcome.
+- Until it's automated, please take a look at the plotter sample. It is recommended that you modify the test over-ride that appears in that sample form. Substitute one
+of the file names you expect to see after the collection is filled by your new tool for the pdf used in the plotter sample tool test.
+
 
 ---
 ## Running your newly generated tools
