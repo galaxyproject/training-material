@@ -35,7 +35,7 @@ follow_up_training:
 
 # Running Galaxy Jobs with Slurm
 
-{% snippet snippets/warning_results_may_vary.md %}
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 The tools that are added to Galaxy can have a wide variance in the compute resources that they require and work efficiently on.
 To account for this, Galaxy's job configuration needs to be tuned to run these tools properly. In addition, site-specific variables must
