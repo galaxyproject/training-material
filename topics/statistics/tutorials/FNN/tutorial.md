@@ -120,7 +120,18 @@ The problem with multi-layer FNN was lack of a learning algorithm, as the Percep
 algorithm could not be extended to multi-layer FNN. This along with Minsky and Papert highlighting
 the limitations of Perceptron resulted in sudden drop in interest in neural networks (referred to 
 as *AI winter*). In the 80's the backpropagation algorithm was proposed ({% cite Rumelhart1986 %}), 
-which enabled learning in multi-layer FNN, and resulted in a renewed interest in the field.
+which enabled learning in multi-layer FNN, and resulted in a renewed interest in the field. 
+
+In a multi-layer neural network, we have an iput layer, an output layer, and one or more hidden layers 
+(between input and output layers). The input layer has as many neurons as the dimension of the input 
+data. The number of neurons in the output layer depends on the type of the problem the neural network
+is trying to solve (See Supervised learning section below). The more hidden layers that we have (and 
+the more neurons we have in each hidden layer), our neural network can estimate more complex functions.
+However, this comes at the cost of increased training time (due to increased number of parameters) and 
+increased likelihood of *overfitting*. Overfitting happens when a model captures the details of the 
+training data, performs well on the training data, but is unable to perform well on data not used in 
+the training. The neural network, hence, cannot *generalize* to unseen data. There are regularization
+techniques that can prevent that ({% cite KukackaEtAl  %}) but they are outside the scope of this tutorial.
 
 # Activation functions
 
@@ -154,10 +165,10 @@ Finally, ReLU (Rectified Linear Unit) is an activation function popular is deep 
 does not sufer from vanishing gradient problem, it is preferred to Sigmoid or tanh. Sigmoid or tanh can 
 still be used in the output layer of deep networks.      
 
-# Classification/Regression problems
+# Supervised learning
 
 In supervised learning a *training set* is defined as 
-$$ {(\boldsymbol{x^{(1)}}, \boldsymbol{y^{(1)}}), ((\boldsymbol{x^{(2)}}, \boldsymbol{y^{(2)}}), ..., ((\boldsymbol{x^{(m)}}, \boldsymbol{y^{(m)}})} $$ {% cite Bagheri %}
+$$ {(\boldsymbol{x^{(1)}}, \boldsymbol{y^{(1)}}), ((\boldsymbol{x^{(2)}}, \boldsymbol{y^{(2)}}), ..., ((\boldsymbol{x^{(m)}}, \boldsymbol{y^{(m)}})} $$ 
 and each pair $$ (\boldsymbol{x^{(i)}}, \boldsymbol{y^{(i)}}) $$ is called a *training example*. 
 *m* is the number of training examples and $$ \boldsymbol{x^{(i)}} $$ is called *feature vector* 
 or *input vector*.  Each element of the vector is called a *feature*. Each $$ \boldsymbol{x^{(i)}} $$
@@ -168,28 +179,82 @@ function $$ \hat{f(\boldsymbol{x})} $$. We want $$ \hat{f(\boldsymbol{x})} $$ to
 $$ f(\boldsymbol{x})$$ not only for training set, but for training examples not in training 
 set {% cite Bagheri %}.
 
-# The Learning algorithm
+When the label is a numerical variable, we call the problem a *regression* problem, and when it's a categorical variable, 
+we call it a *classification* problem. In classification problems, the label can be represented by the set 
+$$ \boldsymbol{y^{i}} \in {1,2,...,c}$$, where each number is a class label and *c* is the number of classes.
+If *c*=2, the class labels are mutually exclusive, we call it a *binary classification* problem. If *c* > 2, and 
+the labels are mutually exclusive, we call *multiclass classification* problem. If labels are *not* mutually exclusive,
+we call it a *multilabel classification* problem ({% cite Bagheri %}).
+
+We use a method called *one-hot encoding* to convert binary and multiclass classification class label numbers into 
+binary values. We convert the scalar label *y* into a vector $$  \boldsymbol{y} $$ which has *c* elements. When y is 
+equal to k, the k-th element of $$ \boldsymbol{y} is one and all other elements are zero. Wihen labels are *not* 
+mutually exclusive, we use another method called *multi-hot encoding*. Suppose we are doing a multilabel image 
+classification, where an image can have a dog, panda, or cat in it. We represent the label by a vector of 3, and if
+dog anf cat are present in the image, first and third element of the vector are one and the second elemt is zero ({% cite Bagheri %}).
+
+![Three images illustrating binary, multiclass, and multilabel classifications and their label representation](../../images/FNN_output_encoding.png "Examples of binary, multiclass, and multilbel classifications and their label representation ({% cite Bagheri %})")
+
+Figure 5 shows examples of binary, multiclass, and multilabel classfication problems and their associated one-hot 
+encoded or multi-hot encoded labels. The output layer of a neural network for binary classification usually has a 
+single neuron with Sigmoid activation function. If the neuron's output is greater than 0.5, we assume the output is 1, 
+and otherwise we assume the output is 0. For multilabel classification problems, the output layer of the neural network
+usually has as many neurons as the number of classes and the neurons use Sigmoid activation function. Again, we use a 
+threshold of 0.5 to determine whether the output of each neuron is 1 or 0. For multiclass classification problems, the 
+output layer usually has as many neurons as the number of classes. However, instead of Sigmoid,  we use a *Softmax* 
+activation function, which takes the input to all the neurons in the output layer, and creates a probability distribution, 
+so the sum of outputs of all output layer neurons adds up to 1. The neuron with the highest proability denotes the predicted 
+label.     
+
+# Loss/Cost function
+
+During training, for each training example in the training set $$ (\boldsymbol{x^{(i)}}, \boldsymbol{y^{(i)}}) $$, we 
+present the feature vector $$ \boldsymbol{x^{(i)}} $$ to the neural network, and compare the network's predicted output
+$$ \boldsymbol{\hat{y}} $$ with the corresponding label $$ \boldsymbol{y^{(1)}} $$. We need to define a **loss function** 
+to objectively measure how much the network's predicted output is different than the expected output (the corresponding 
+label). We use the **cross entropy** loss function for classification problems, and *quadratic* loss function for 
+regression problems. 
+
+For multiclass classification problems, the cross entropy is calculated as below 
+
+$$ L(\boldsymbol{\hat{y^{(j)}}}, \boldsymbol{y^{(j)}}) = - \sum_{i=1}^{c} \boldsymbol{y_{i}^{(j)}}ln(\boldsymbol{\hat{y_{i}^{(j)}}}) $$
+
+You can find the cross entropy formula for binary and multilabel classifications in {% cite bagheri %}. They are just special 
+cases of multiclass cross entropy, and are not give here for the sake of brevity.
+
+The loss function is calculated for each training example in the training set. The average of the calculated loss functions 
+for all training examples in the training set is the **cost function**. For multiclass classification problems, the cost function
+is calculated as below (again refer to {% cite Bagheri %} for binary classification and multilabel classification formulas).
+
+$$ J(\boldsymbol{W}, \boldsymbol{b}) = - \frac{1}{m} \sum_{j=1}^{m} \sum_{i=1}^{c} \boldsymbol{y_{i}^{(j)}}ln(\boldsymbol{\hat{y_{i}^{(j)}}}) $$
+
+For regression problems, the quadratic loss function is calculated as below:
+
+$$ L(\boldsymbol{\hat{y^{(j)}}}, \boldsymbol{y^{(j)}}) = \frac{1}{2} \| \boldsymbol{y^{(j)}} - \boldsymbol{\hat{y^{(j)}}} \| ^ 2$$
+
+Similarly, the *quadratic* cost function (or *Mean Squared Error (MSE)*) is the average of the calculated loss functions
+for all training examples in the training set.
+
+$$ J(\boldsymbol{W}, \boldsymbol{b}) = \frac{1}{2m} \sum_{j=1}^{m} \| \boldsymbol{y^{(j)}} - \boldsymbol{\hat{y^{(j)}}} \| ^ 2 $$
+
+The goal of a learning algorithm is to minimize the cost function. The cost function is a function of the network weights 
+and biases of all the neurons in all the layers. 
+
+# Backpropagation Learning algorithm
+
+The **backpropagation** learning algorithm {% cite Rumelhart1986 %} iteratively computes the gradient of cost
+function relative to each weight and bias, then updates the weights and biases in the opposite direction of the gradient,
+to find the local minimum.
+
 
 In supervised learning, we are given a set of input-output pairs, called the *training set*. Given the training set, 
 the learning algorithm (iteratively) adjusts the model parameters, so that the model can accurately map inputs to 
 outputs. We usually have another set of input-output pairs, called the *test set*, which is not used by the learning 
 algorithm. When the learning algorithm completes, we assess the learned model by providing the test set inputs to 
-the model and comparing the model outputs to test set outputs. We need to define a **loss function** to objectively
-measure how much the model output is off of the expected output. For classification problems we use the **cross entropy** 
-loss function.
-
-$$ L(\boldsymbol{\hat{y^{(j)}}}, \boldsymbol{y^{(j)}}) = - \sum_{i=1}^{n} \boldsymbol{y_{i}^{(j)}}ln(\boldsymbol{\hat{y_{i}^{(j)}}}) $$
-
-The loss function is calculated for each input-output pair in the training set. The average of the calculated loss 
-functions for all training set input-output pairs is called the **Cost function**. The goal of the learning algorithm 
-is to minimize the cost function. The cost function is a function of network weights and biases of all neurons in all 
-layers. 
-
-$$ J(\boldsymbol{W}, \boldsymbol{b}) = - \frac{1}{m} \sum_{j=1}^{m} \sum_{i=1}^{n} \boldsymbol{y_{i}^{(j)}}ln(\boldsymbol{\hat{y_{i}^{(j)}}}) $$
+the model and comparing the model outputs to test set outputs. 
 
 The **backpropagation** learning algorithm {% cite Rumelhart1986 %} iteratively computes the gradient of cost 
 function relative to each weight and bias, then updates the weights and biases in the opposite direction of the gradient, 
-to find the local minimum.
 
 # Get Data
 
