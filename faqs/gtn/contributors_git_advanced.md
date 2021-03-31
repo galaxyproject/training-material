@@ -36,7 +36,7 @@ To manage changes, we use [GitHub flow](https://guides.github.com/introduction/f
 
 Globally, the process of development of new content is open and transparent:
 
-1. Creation of a branch derived from the master branch of the GitHub repository
+1. Creation of a branch derived from the main branch of the GitHub repository
 2. Initialization of a new directory for the tutorial
 3. Filling of the metadata with title, questions, learning objectives, etc
 4. Generation of the input dataset for the tutorial
