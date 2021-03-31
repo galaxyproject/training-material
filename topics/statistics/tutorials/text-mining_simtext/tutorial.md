@@ -33,7 +33,7 @@ This tutorial is based on a proof-of-concept example given in {% cite gramm2020 
 
 The workflow combines 3 main steps, starting with the retrieval of PubMed data for each of the genes. We then use the PubMed data from each gene to extract related scientific terms that are all combined in one large binary matrix. Finally, we explore the generated data in an interactive tool that performs different unsupervised machine-learning algorithms to analyze the similarities/ the grouping among the genes based on their extracted terms from the literature.
 
-![Tutorial overview](../../images/simtext_overview_tutorial.png "Schematic presentation of the workflow.")
+![Tutorial overview](images/simtext_overview_tutorial.png "Schematic presentation of the workflow.")
 
 > ### Agenda
 >
@@ -125,13 +125,13 @@ The following features are generated:
 >
 > 2. Open interactive tool 
 >    - Go to User > Active InteractiveTools
->    ![Interactive tools](../../images/interactivetools.png)
+>    ![Interactive tools](images/interactivetools.png)
 >    - Click on "SimText App"
 >
 {: .hands_on}
 
-![Wordcloud](../../images/simtextapp_wordcloud.gif "Left: For all genes a wordcloud with their associated terms cen be generated. Right: In the dimension reduction plot the similarities among the genes can be explored. The colouring corresponds to the pre-existing disorder categories.")
-![Clustering](../../images/simtextapp_clustering.gif "Hierarchical clustering of the matrix. Different clustering methods can be selected and the adjusted rand index be calculated.")
+![Wordcloud](images/simtextapp_wordcloud.gif "Left: For all genes a wordcloud with their associated terms cen be generated. Right: In the dimension reduction plot the similarities among the genes can be explored. The colouring corresponds to the pre-existing disorder categories.")
+![Clustering](images/simtextapp_clustering.gif "Hierarchical clustering of the matrix. Different clustering methods can be selected and the adjusted rand index be calculated.")
 
 # Conclusion
 {:.no_toc}
