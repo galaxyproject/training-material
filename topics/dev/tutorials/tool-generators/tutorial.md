@@ -23,10 +23,11 @@ objectives:
  - Generate new simple Galaxy tools using your own scripts
 
 questions:
- - What's the quickest way for a new-to-Galaxy developer to convert a functioning command line script into a real, workflow compatible, shareable tool?
- - Who might want to use the ToolFactory for quick tools from scripts?
- - Can I use a script developed in a Galaxy Interactive Environment notebook?
+ - What options exist for new-to-Galaxy developers to convert functioning command line scripts into Galaxy tools?
+ - Can any command line script I've written be wrapped as a Galaxy tool?
+ - Can I make a tool from a script developed in a Galaxy Interactive Environment notebook?
  - How can I get the ToolFactory working locally, since you tell me it should never be exposed on a public server?
+ - What is the difference between a hand-crafted tool and a ToolFactory generated one?
 
 time_estimation: 1H
 
@@ -61,16 +62,18 @@ contributors:
 
 ---
 
-> ### {% icon tip %} Check to see if this tutorial will be useful for your needs.
+> ### {% icon tip %} This training material is specifically for Galaxy users who write command line scripts in their work.
 >
-> * This tutorial is designed for informaticians and researchers working in Galaxy, who routinely develop their own analysis scripts.
-> * It shows a quick way to bridge the gap between developing command line scripts and installing real tools in Galaxy
-> * It is particularly useful for developers new to Galaxy from other scientific fields
-> * Scientists using Galaxy who do not routinely use common scripting languages will find the hands-on part of this tutorial challenging.
+> * This tutorial is designed for informaticians and researchers working in Galaxy, who routinely develop their own analysis scripts using bash, Python, Perl, Rscript or something similar.
+> * It shows a quick way to bridge the gap between developing command line scripts and installing real tools in Galaxy.
+> * Readers who *do not routinely use common scripting languages* in their work will not have any use for the ToolFactory.
+> * It is particularly useful for those new to Galaxy who have scripting skills developed in other scientific fields.
 > * Although the ToolFactory is a Galaxy tool, used through the Galaxy interface, bash and other command line scripting skills are needed to prepare the code that
-generated tools run. No explicit instruction about scripting is offered.
-> * Students will need to explore to find ways to use the ToolFactory for their work.  This tutorial is introductory and offers broad guidance only.
-> * Experienced galaxy tool developers will not need this training because they already have specialised tools and training available to suit their needs.
+generated tools run.
+> * No explicit instruction about scripting is offered in this training. It is assumed that the reader is capable.
+> * Readers will need to test and explore to find ways to use the ToolFactory for their work.
+> * This tutorial is introductory. It offers broad guidance on a tool. It is up to the user to adapt it to their own work.
+> * Experienced galaxy tool developers already have specialised tools and training to suit their needs so may not gain much from this material.
 {: .tip }
 
 
@@ -492,7 +495,7 @@ can with a local venv described above - but a little slower and isolated in a co
 > >FROM ubuntu:latest
 > >
 > >MAINTAINER Ross Lazarus
-> ># with fixes by Helena Rasch
+> ># contributions from: Helena Rasch
 > >ENV TARGDIR "/galaxy-central"
 > >ENV PDIR "/planemo"
 > >ADD topics/dev/tutorials/tool-generators/docker/welcome.html $TARGDIR/static/welcome.html.sample
@@ -1140,8 +1143,8 @@ planemo tool_factory.
 
 This tutorial exists because so many people have contributed to the Galaxy project over the last 15 years. Specific thanks are owed to:
 
-- Marius van den Beek for thoughtful comments on the role of the ToolFactory that helped motivate the design and construction of this tutorial.
-- Helena Rasch for review and assistance in validating, rationalising and revising the tutorial.
+- Marius van den Beek for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.
+- Helena Rasch for review and revisions to the tutorial and associated code.
 
 ---
 
