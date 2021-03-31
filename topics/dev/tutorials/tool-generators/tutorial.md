@@ -523,17 +523,23 @@ can with a local venv described above - but a little slower and isolated in a co
 > >&& cd $TARGDIR && export GALAXY_VIRTUAL_ENV=/root/.planemo/gx_venv_3.9 && make setup-venv \
 > >&& planemo test --galaxy_root $TARGDIR /planemo/tacrev --galaxy_python_version 3.9 \
 > >&& rm -rf /usr/local/share/.cache/yarn \
-> >&& apt-get clean && apt-get purge \ .code-in}
-> >&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*details}
+> >&& apt-get clean && apt-get purge \
+> >&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+> >VOLUME /planemo/mytools
+> >WORKDIR $PDIR
+> >ENV GALAXY_CONFIG_BRAND "ToolFactory in Planemo"
+> >EXPOSE 9090
+> >ENTRYPOINT ["/usr/local/bin/planemo" ,"tool_factory", "--galaxy_root" ,"/galaxy-central", "--port", "9090", "--host", "0.0.0.0", "--conda_prefix", "/planemo/con", "--extra_tools", "/planemo/mytools", "--galaxy_python_version", "3.9"]
 > >```
-> > {: .code-in}
+>  {: .code-in}
 {: .details}
+
 ---
-     VOLUME /planemo/mytools
-##WORKDIR $PDIR## 4. CYOA option - Install the ToolFactory docker container with integrated toolshed
-     ENV GALAXY_CONFIG_BRAND "ToolFactory in Planemo"
-- T EXPOSE 9090here is a more complex but integrated solution using the [ToolFactory docker container](https://github.com/fubar2/toolfactory-galaxy-docker).
-- InENTRYPOINT ["/usr/local/bin/planemo" ,"tool_factory", "--galaxy_root" ,"/galaxy-central", "--port", "9090", "--host", "0.0.0.0", "--conda_prefix", "/planemo/con", "--extra_tools", "/planemo/mytools", "--galaxy_python_version", "3.9"]stallation is documented in the respository and bash scripts to build and run the Docker image are provided. They will probably need to be adjusted as described there.
+
+#### 4. CYOA option - Install the ToolFactory docker container with integrated toolshed
+
+- There is a more complex but integrated solution using the [ToolFactory docker container](https://github.com/fubar2/toolfactory-galaxy-docker).
+- Installation is documented in the respository and bash scripts to build and run the Docker image are provided. They will probably need to be adjusted as described there.
 - First time installation is slow and there seems to be a race condition that makes it fail sometimes :( but it gets better after that.
 - It provides an integrated local private toolshed and allows tools to be installed and used in the Galaxy used to run the ToolFactory.
 - Like installation in a local Galaxy server, the docker container can be persisted as shown in the documentation for docker-galaxy-stable upon which it is based.
