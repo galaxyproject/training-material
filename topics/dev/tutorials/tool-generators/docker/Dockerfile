@@ -20,8 +20,6 @@ MAINTAINER Ross Lazarus
 # with fixes by Helena Rasch
 ENV TARGDIR "/galaxy-central"
 ENV PDIR "/planemo"
-ADD topics/dev/tutorials/tool-generators/docker/welcome.html $TARGDIR/static/welcome.html.sample
-ADD topics/dev/tutorials/tool-generators/docker/welcome.html $TARGDIR/static/welcome.html
 RUN apt update -y -qq && apt install -y -qq python3-dev gcc python3-pip build-essential python3-venv python3-wheel nano curl wget git python3-setuptools gnupg curl mercurial \
 && python3 -m pip install --upgrade pip \
 && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
@@ -50,8 +48,8 @@ RUN apt update -y -qq && apt install -y -qq python3-dev gcc python3-pip build-es
 && rm -rf /usr/local/share/.cache/yarn \
 && apt-get clean && apt-get purge \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-
+ADD topics/dev/tutorials/tool-generators/docker/welcome.html $TARGDIR/static/welcome.html.sample
+ADD topics/dev/tutorials/tool-generators/docker/welcome.html $TARGDIR/static/welcome.html
 VOLUME /planemo/mytools
 WORKDIR $PDIR
 ENV GALAXY_CONFIG_BRAND "ToolFactory in Planemo"

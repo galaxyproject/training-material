@@ -62,19 +62,17 @@ contributors:
 
 ---
 
-> ### {% icon tip %} This training material is specifically for Galaxy users who write command line scripts in their work.
+> ### {% icon warning %} This training material is specifically for Galaxy users who write command line scripts in their work.
 >
 > * This tutorial is designed for informaticians and researchers working in Galaxy, who routinely develop their own analysis scripts using bash, Python, Perl, Rscript or something similar.
 > * It shows a quick way to bridge the gap between developing command line scripts and installing real tools in Galaxy.
-> * Readers who *do not routinely use common scripting languages* in their work will not have any use for the ToolFactory.
-> * It is particularly useful for those new to Galaxy who have scripting skills developed in other scientific fields.
-> * Although the ToolFactory is a Galaxy tool, used through the Galaxy interface, bash and other command line scripting skills are needed to prepare the code that
-generated tools run.
+> * Galaxy users who *routinely use common scripting languages* in their work may find the ToolFactory useful, particulary if they are new to Galaxy from other scientific disciplines and not yet familiar with manual tool development processes.
+> * The ToolFactory is a Galaxy tool controlled through the usual Galaxy tool interface. However, bash or other command line scripting skills are needed to prepare the code for the ToolFactory to wrap in the generated tool.
 > * No explicit instruction about scripting is offered in this training. It is assumed that the reader is capable.
 > * Readers will need to test and explore to find ways to use the ToolFactory for their work.
 > * This tutorial is introductory. It offers broad guidance on a tool. It is up to the user to adapt it to their own work.
 > * Experienced galaxy tool developers already have specialised tools and training to suit their needs so may not gain much from this material.
-{: .tip }
+{: .warning }
 
 
 
