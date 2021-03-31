@@ -1,4 +1,3 @@
-
 # Galaxy - Using Galaxy tools to generate new Galaxy tools
 #
 # To build the docker image, go to root of the training repo and
@@ -18,8 +17,11 @@
 FROM ubuntu:latest
 
 MAINTAINER Ross Lazarus
+# with fixes by Helena Rasch
 ENV TARGDIR "/galaxy-central"
 ENV PDIR "/planemo"
+ADD topics/dev/tutorials/tool-generators/docker/welcome.html $TARGDIR/static/welcome.html.sample
+ADD topics/dev/tutorials/tool-generators/docker/welcome.html $TARGDIR/static/welcome.html
 RUN apt update -y -qq && apt install -y -qq python3-dev gcc python3-pip build-essential python3-venv python3-wheel nano curl wget git python3-setuptools gnupg curl mercurial \
 && python3 -m pip install --upgrade pip \
 && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
@@ -27,25 +29,30 @@ RUN apt update -y -qq && apt install -y -qq python3-dev gcc python3-pip build-es
 && mkdir -p $TARGDIR \
 && curl -L -s https://github.com/galaxyproject/galaxy/archive/dev.tar.gz | tar xzf - --strip-components=1 -C $TARGDIR \
 && git clone --recursive https://github.com/fubar2/planemo.git $PDIR \
-&& cd $PDIR \
-&& mkdir mytools \
+&& mkdir $PDIR/mytools \
 && rm -rf $PDIR/doc \
+&& cd $PDIR \
 && python3 setup.py build \
 && python3 setup.py install \
+&& pip install -U pip \
 && planemo conda_init --conda_prefix $PDIR/con \
 && hg clone https://fubar@toolshed.g2.bx.psu.edu/repos/fubar/tacrev  /planemo/tacrev \
-&& planemo test --galaxy_root $TARGDIR /planemo/tacrev \
 && cp $TARGDIR/config/datatypes_conf.xml.sample $TARGDIR/config/datatypes_conf.xml \
 && sed -i 's/<\/registration>/<datatype extension="tgz" type="galaxy.datatypes.binary:Binary" subclass="true" mimetype="multipart\/x-gzip" display_in_upload="true"\/> <\/registration>/' $TARGDIR/config/datatypes_conf.xml \
 && sed -i 's/<datatype extension="html"/<datatype extension="html" display_in_upload="true"/' $TARGDIR/config/datatypes_conf.xml \
-&& sed -i '/-l|-list|--list)/i \\n\t --dev-wheels|-dev-wheels)\n\t\tshift\n\t\t;;\n' $GALDIR/run_tests.sh \
+&& sed -i '/-l|-list|--list)/i \\n\t --dev-wheels|-dev-wheels)\n\t\tshift\n\t\t;;\n' $TARGDIR/run_tests.sh \
 && apt-get clean && apt-get purge \
-&&  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-ADD topics/dev/tutorials/tool-generators/docker/welcome.html $TARGDIR/static/welcome.html.sample
-ADD topics/dev/tutorials/tool-generators/docker/welcome.html $TARGDIR/static/welcome.html
+&&  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+&& virtualenv /root/.planemo/gx_venv_3.9 \
+&& . /root/.planemo/gx_venv_3.9/bin/activate && pip install -U setuptools \
+&& cd $TARGDIR && export GALAXY_VIRTUAL_ENV=/root/.planemo/gx_venv_3.9 && make setup-venv \
+&& planemo test --galaxy_root $TARGDIR /planemo/tacrev --galaxy_python_version 3.9 \
+&& rm -rf /usr/local/share/.cache/yarn \
+&& apt-get clean && apt-get purge \
+&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-
+VOLUME /planemo/mytools
+WORKDIR $PDIR
 ENV GALAXY_CONFIG_BRAND "ToolFactory in Planemo"
 EXPOSE 9090
-ENTRYPOINT ["/usr/local/bin/planemo" ,"tool_factory", "--galaxy_root" ,"/galaxy-central", "--port", "9090", "--host", "0.0.0.0", "--conda_prefix", "/planemo/con", "--extra_tools", "/planemo/mytools"]
-
+ENTRYPOINT ["/usr/local/bin/planemo" ,"tool_factory", "--galaxy_root" ,"/galaxy-central", "--port", "9090", "--host", "0.0.0.0", "--conda_prefix", "/planemo/con", "--extra_tools", "/planemo/mytools", "--galaxy_python_version", "3.9"]
