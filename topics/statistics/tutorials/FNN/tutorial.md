@@ -100,24 +100,27 @@ Figure 2 shows a Perceptron, a single layer FNN, where the input is 3 dimensiona
 
 ![Neurons forming the input and output layers of a single layer feedforward neural network](../../images/FFNN_no_hidden.png "A perceptron")
 
-In supervised learning, we are given a set of input-output pairs, called the *training set*. Given the training set,
-the learning algorithm (iteratively) adjusts the model parameters (weights and biases), so that the model can accurately 
-map inputs to outputs. The learning algorithm for Perceptron is very simple and reduces the weights (via a small learning 
-rate multiplier) if the predcited output is more than the expected output and increases them otherwise ({% cite Rosenblatt %}).
+In supervised learning, we are given a set of input-output pairs, called the *training 
+set*. Given the training set, the learning algorithm (iteratively) adjusts the model
+parameters (weights and biases), so that the model can accurately map inputs to outputs.
+The learning algorithm for Perceptron is very simple and reduces the weights (via a
+small learning rate multiplier) if the predcited output is more than the expected output
+and increases them otherwise ({% cite Rosenblatt %}).
 
-Minsky and Papert showed that a single layer FNN cannot solve problems in which the data is not linearly separable,
-such as the XOR problem ({% cite Newell780 %}). Adding one (or more) hidden layers to FNN enables it to solve problems
-in which data is non-linearly separable. Per Universal Approximation Theorem, a FNN with one hidden layer can represent
-any function ({% cite Cybenko1989 %}), although in practice training such a model is very difficult (if not impossible),
-hence, we usually add multiple hidden layers to solve complex problems.
+Minsky and Papert showed that a single layer FNN cannot solve problems in which the data is not 
+linearly separable, such as the XOR problem ({% cite Newell780 %}). Adding one (or more) hidden 
+layers to FNN enables it to solve problems in which data is non-linearly separable. Per Universal 
+Approximation Theorem, a FNN with one hidden layer can represent any function ({% cite Cybenko1989 %}), 
+although in practice training such a model is very difficult (if not impossible), hence, we usually 
+add multiple hidden layers to solve complex problems.
 
 ![Neurons forming the input, output, and hidden layers of a multi-layer feedforward neural network](../../images/FFNN.png "Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are omitted for clarity")
 
-The problem with multi-layer FNN was lack of a learning algorithm, as the Perceptron's learning algorithm could not 
-be extended to multi-layer FNN. This along with Minsky and Papert highlighting the limitations of Perceptron resulted 
-in sudden drop in interest in neural networks (coined as *AI winter*). In the 80's the backpropagation algorithm was 
-proposed ({% cite Rumelhart1986 %}), which enabled learning in multi-layer FNN, and resulted in a renewed interest in 
-the field.
+The problem with multi-layer FNN was lack of a learning algorithm, as the Perceptron's learning
+algorithm could not be extended to multi-layer FNN. This along with Minsky and Papert highlighting
+the limitations of Perceptron resulted in sudden drop in interest in neural networks (referred to 
+as *AI winter*). In the 80's the backpropagation algorithm was proposed ({% cite Rumelhart1986 %}), 
+which enabled learning in multi-layer FNN, and resulted in a renewed interest in the field.
 
 # Activation functions
 
@@ -152,6 +155,18 @@ does not sufer from vanishing gradient problem, it is preferred to Sigmoid or ta
 still be used in the output layer of deep networks.      
 
 # Classification/Regression problems
+
+In supervised learning a *training set* is defined as 
+$$ {(\boldsymbol{x^{(1)}}, \boldsymbol{y^{(1)}}), ((\boldsymbol{x^{(2)}}, \boldsymbol{y^{(2)}}), ..., ((\boldsymbol{x^{(m)}}, \boldsymbol{y^{(m)}})} $$ {% cite Bagheri %}
+and each pair $$ (\boldsymbol{x^{(i)}}, \boldsymbol{y^{(i)}}) $$ is called a *training example*. 
+*m* is the number of training examples and $$ \boldsymbol{x^{(i)}} $$ is called *feature vector* 
+or *input vector*.  Each element of the vector is called a *feature*. Each $$ \boldsymbol{x^{(i)}} $$
+corresponds to a label $$ \boldsymbol{y^{(1)}} $$. We assume there is an unknown function 
+$$ \boldsymbol{y} = f(\boldsymbol{x})$$ that maps the feature vectors to labels. The goal of
+supervised learning is to use the training set to learn or estimate *f*. We call this estimated
+function $$ \hat{f(\boldsymbol{x})} $$. We want $$ \hat{f(\boldsymbol{x})} $$ to be close to 
+$$ f(\boldsymbol{x})$$ not only for training set, but for training examples not in training 
+set {% cite Bagheri %}.
 
 # The Learning algorithm
 
