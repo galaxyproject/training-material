@@ -122,7 +122,7 @@ the limitations of Perceptron resulted in sudden drop in interest in neural netw
 as *AI winter*). In the 80's the backpropagation algorithm was proposed ({% cite Rumelhart1986 %}), 
 which enabled learning in multi-layer FNN, and resulted in a renewed interest in the field. 
 
-In a multi-layer neural network, we have an iput layer, an output layer, and one or more hidden layers 
+In a multi-layer neural network, we have an input layer, an output layer, and one or more hidden layers 
 (between input and output layers). The input layer has as many neurons as the dimension of the input 
 data. The number of neurons in the output layer depends on the type of the problem the neural network
 is trying to solve (See Supervised learning section below). The more hidden layers that we have (and 
@@ -175,7 +175,7 @@ or *input vector*.  Each element of the vector is called a *feature*. Each $$ \b
 corresponds to a label $$ \boldsymbol{y^{(1)}} $$. We assume there is an unknown function 
 $$ \boldsymbol{y} = f(\boldsymbol{x})$$ that maps the feature vectors to labels. The goal of
 supervised learning is to use the training set to learn or estimate *f*. We call this estimated
-function $$ \hat{f(\boldsymbol{x})} $$. We want $$ \hat{f(\boldsymbol{x})} $$ to be close to 
+function $$ \hat{f}(\boldsymbol{x}) $$. We want $$ \hat{f}(\boldsymbol{x}) $$ to be close to 
 $$ f(\boldsymbol{x})$$ not only for training set, but for training examples not in training 
 set {% cite Bagheri %}.
 
@@ -217,7 +217,7 @@ regression problems.
 
 For multiclass classification problems, the cross entropy is calculated as below 
 
-$$ L(\boldsymbol{\hat{y^{(j)}}}, \boldsymbol{y^{(j)}}) = - \sum_{i=1}^{c} \boldsymbol{y_{i}^{(j)}}ln(\boldsymbol{\hat{y_{i}^{(j)}}}) $$
+$$ \mathcal{L}(\boldsymbol{\hat{y}^{(j)}}, \boldsymbol{y^{(j)}}) = - \sum_{i=1}^{c} \boldsymbol{y_{i}^{(j)}}ln(\boldsymbol{\hat{y}_{i}^{(j)}}) $$
 
 You can find the cross entropy formula for binary and multilabel classifications in {% cite bagheri %}. They are just special 
 cases of multiclass cross entropy, and are not give here for the sake of brevity.
@@ -226,35 +226,46 @@ The loss function is calculated for each training example in the training set. T
 for all training examples in the training set is the **cost function**. For multiclass classification problems, the cost function
 is calculated as below (again refer to {% cite Bagheri %} for binary classification and multilabel classification formulas).
 
-$$ J(\boldsymbol{W}, \boldsymbol{b}) = - \frac{1}{m} \sum_{j=1}^{m} \sum_{i=1}^{c} \boldsymbol{y_{i}^{(j)}}ln(\boldsymbol{\hat{y_{i}^{(j)}}}) $$
+$$ J(\boldsymbol{W}, \boldsymbol{b}) = - \frac{1}{m} \sum_{j=1}^{m} \sum_{i=1}^{c} \boldsymbol{y_{i}^{(j)}}ln(\boldsymbol{\hat{y}_{i}^{(j)}}) $$
 
 For regression problems, the quadratic loss function is calculated as below:
 
-$$ L(\boldsymbol{\hat{y^{(j)}}}, \boldsymbol{y^{(j)}}) = \frac{1}{2} \| \boldsymbol{y^{(j)}} - \boldsymbol{\hat{y^{(j)}}} \| ^ 2$$
+$$ \mathcal{L}(\boldsymbol{\hat{y}^{(j)}}, \boldsymbol{y^{(j)}}) = \frac{1}{2} \| \boldsymbol{y^{(j)}} - \boldsymbol{\hat{y}^{(j)}} \| ^ 2$$
 
 Similarly, the *quadratic* cost function (or *Mean Squared Error (MSE)*) is the average of the calculated loss functions
 for all training examples in the training set.
 
-$$ J(\boldsymbol{W}, \boldsymbol{b}) = \frac{1}{2m} \sum_{j=1}^{m} \| \boldsymbol{y^{(j)}} - \boldsymbol{\hat{y^{(j)}}} \| ^ 2 $$
-
-The goal of a learning algorithm is to minimize the cost function. The cost function is a function of the network weights 
-and biases of all the neurons in all the layers. 
+$$ J(\boldsymbol{W}, \boldsymbol{b}) = \frac{1}{2m} \sum_{j=1}^{m} \| \boldsymbol{y^{(j)}} - \boldsymbol{\hat{y}^{(j)}} \| ^ 2 $$
 
 # Backpropagation Learning algorithm
 
-The **backpropagation** learning algorithm {% cite Rumelhart1986 %} iteratively computes the gradient of cost
-function relative to each weight and bias, then updates the weights and biases in the opposite direction of the gradient,
-to find the local minimum.
+The **backpropagation** algorithm {% cite Rumelhart1986 %} is a gradient descent technique. Gradient descent aims to find
+a local minimum of a function by iteratively moving in the oposite direction of the gradient (i.e. the slope) of the 
+function at the current point. The goal of a learning in neural networks is to minimize the cost function given the 
+training set. The cost function is a function of network weights and biases of all the neurons in all the layers. 
+Backpropagation iteratively computes the gradient of cost function relative to each weight and bias, then updates 
+the weights and biases in the opposite direction of the gradient, to find a local minimum.
 
+In order to specify the formula for backpropagation, we need to define the error of the $$i^{th}$$ neuron in $$l^{th}$$ 
+layer of a network for the $$j^{th}$$ training example as follows (where $$ z_{i}^{[l](j)} $$ is the weighted some of 
+input to the neuron, and $$ \mathcal{L} $$ is the loss function):
 
-In supervised learning, we are given a set of input-output pairs, called the *training set*. Given the training set, 
-the learning algorithm (iteratively) adjusts the model parameters, so that the model can accurately map inputs to 
-outputs. We usually have another set of input-output pairs, called the *test set*, which is not used by the learning 
-algorithm. When the learning algorithm completes, we assess the learned model by providing the test set inputs to 
-the model and comparing the model outputs to test set outputs. 
+$$ \delta_{i}^{[l](j)} = \frac{\partial \mathcal{L}(\boldsymbol{\hat{y}^{(j)}}, \boldsymbol{y^{(j)}})}{\partial z_{i}^{[l](j)}}$$
 
-The **backpropagation** learning algorithm {% cite Rumelhart1986 %} iteratively computes the gradient of cost 
-function relative to each weight and bias, then updates the weights and biases in the opposite direction of the gradient, 
+Backpropagation forumuls are expressed in terms of the error defined above. Full derivation of the formulas below is outside
+the scope of this tutorial (Repeated use of chain rule is needed. Please refer to the excellent article by {% cite Bagheri %} 
+for details). Note that in formulas below L denotes the output layer, g the activation function, $$ \nabla $$ the gradient,
+$$ W^{[l]^{T}} $$ layer l weights transposed, $$ b_{i}^{l} $$ bias of neuron i at layer l, $$ w_{ik}^{l} $$ weight to neuron 
+i at layer l from neuron k from layer l-1, and $$ a_{k}^{[l-1](j)} $$ activation of neuron k at layer l-1 for training example j.    
+ 
+
+$$ \boldsymbol{\delta}^{[L](j)} = \nabla_{\boldsymbol{\hat{y}^{(j)}}}\mathcal{L} \odot (g^{[L]})^{'} (\boldsymbol{z}^{[L](j)}) $$
+
+$$ \boldsymbol{\delta}^{[l](j)} = W^{[l+1]^{T}} \boldsymbol{\delta}^{[l+1](j)}  \odot (g^{[l]})^{'} (\boldsymbol{z}^{[l](j)}) $$
+
+$$ \frac{\partial L}{\partial b_{i}^{[l]}} = \boldsymbol{\delta}^{[l](j)} $$
+
+$$ \frac{\partial L}{\partial w_{ik}^{l}} = \boldsymbol{\delta}_{i}^{[l](j)} a_{k}^{[l-1](j)} $$
 
 # Get Data
 
