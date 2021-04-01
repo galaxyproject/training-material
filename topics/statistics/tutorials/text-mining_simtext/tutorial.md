@@ -124,9 +124,8 @@ The following features are generated:
 >    - {% icon param-file %} *"Matrix file"*: output of **PMIDs to PubTator** {% icon tool %}
 >
 > 2. Open interactive tool 
->    - Go to User > Active InteractiveTools
->    ![Interactive tools](images/interactivetools.png)
->    - Click on "SimText App"
+>
+>    {% snippet faqs/galaxy/interactive_tools_open.md tool="SimText app" %}
 >
 {: .hands_on}
 
