@@ -657,9 +657,9 @@ From this point on, we will use the results generated from the raw datasets, rat
 
 ## Identification of miRNA targets with **TargetFinder**
 
-We are now ready to launch the search for miRNA target genes. For this we will use the __Targetfinder__ tool , which, according to several publications, is one of the tools that offers the best results ({% cite Srivastava2014 %}, {% cite Ma2017 %}).
+We are now ready to launch the search for miRNA target genes. For this we will use the __TargetFinder__ tool that is implemented and used for miRNA target prediction in plants ({% cite Srivastava2014 %}, {% cite Ma2017 %}).
 
-> ### {% icon hands_on %} Hands-on: identification of potential miRNA targets (round 2)
+> ### {% icon hands_on %} Hands-on: identification of potential miRNA targets
 >
 > 1. {% tool [TargetFinder](toolshed.g2.bx.psu.edu/repos/rnateam/targetfinder/targetfinder/1.7.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input small RNA sequences file"*: `upregulated_miRNA_BR_complete_dataset.fasta`
