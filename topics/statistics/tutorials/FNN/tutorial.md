@@ -152,10 +152,11 @@ Sigmoid activation function can be used both at the output layer and hidden laye
 allow the network to model non-linear realtionships between input and output. The problem with Sigmoid activation
 function is that the derivative values away from the origin are very small and quickly approach zero. In a multi
 layer network, in order to calculate weight updates in layers closer to the input layer, we use the chain rule 
-which requires multiplying multiple Sigmoid derivative values. Multiplying multiple small numbers results in 
-a *very* small number, meaning that the weight updates will be minimal and the learning algorithm will be very 
-slow. This is known as the *vanishing gradient* problem. In networks with many hidden layers (so called *deep 
-networks*), we must use ReLU activation function (Discussed below).
+which requires multiplying multiple Sigmoid derivative values (formula given in Backpropagation learning algorithm 
+section below). Multiplying multiple small numbers results in a *very* small number, meaning that the weight updates 
+will be minimal and the learning algorithm will be very slow. This is known as the *vanishing gradient* problem. In 
+networks with many hidden layers (so called *deep networks*), we generally avoid Sigmoid and use ReLU activation 
+function.
 
 Hyperbolic tangent (or tanh), similar to Sigmoid function, is a soft step function. But its range is between -1 
 and 1 (instead of 0 and 1). One benefit of tanh over Sigmoid is that its derivative values are larger, so it
@@ -259,7 +260,7 @@ $$ W^{[l]^{T}} $$ layer l weights transposed, $$ b_{i}^{l} $$ bias of neuron i a
 i at layer l from neuron k from layer l-1, and $$ a_{k}^{[l-1](j)} $$ activation of neuron k at layer l-1 for training example j.    
  
 
-$$ \boldsymbol{\delta}^{[L](j)} = \nabla_{\boldsymbol{\hat{y}^{(j)}}}\mathcal{L} \odot (g^{[L]})^{'} (\boldsymbol{z}^{[L](j)}) $$
+$$ \boldsymbol{\delta}^{[L](j)} = \nabla_{\boldsymbol{\hat{y}^{(j)}}}\mathcal{L} \odot (g^{[L]})^{'} (\boldsymbol{z}^{[L](j)}) = \boldsymbol{\hat{y}^{(j)}} - \boldsymbol{y^{(j)}} $$
 
 $$ \boldsymbol{\delta}^{[l](j)} = W^{[l+1]^{T}} \boldsymbol{\delta}^{[l+1](j)}  \odot (g^{[l]})^{'} (\boldsymbol{z}^{[l](j)}) $$
 
@@ -267,6 +268,29 @@ $$ \frac{\partial L}{\partial b_{i}^{[l]}} = \boldsymbol{\delta}^{[l](j)} $$
 
 $$ \frac{\partial L}{\partial w_{ik}^{l}} = \boldsymbol{\delta}_{i}^{[l](j)} a_{k}^{[l-1](j)} $$
 
+As you can see, we can calculate the error at the output layerfor sample *j* using the first equation. Afterwards, we can calculate 
+the error in the layer right before the output layer for sample *j* using the second equation. The second equation is recursive, 
+meaning that we can calculate the error in any layer, given the error values for the next layer. This backward calculation of the 
+errors is the reason this algorithm is called *backpropagation*. 
+
+After the error values for all the layers are calculated for sample *j*, we use the third and forth equations to calculate the gradient 
+of loss function relative to biases and weights for sample *j*. We can repeat these steps for all the samples, average the gradients of
+the los function relative to biases and weights, and use the average value to update the biases and weights. This is called *batch 
+gradient descent*. If we have too many samples, such calculations will take a long time. An alternative is to update the biases/weights
+based on the gradient of each sample. This is called *stochastic gradient descent*. While this is much faster than batch gradient descent, 
+the gradient calculated based on a single sample is not a good estimate of the gradient calculated in the batch version of the algorithm. 
+A middle ground solution is to calculate the gradient of a *batch*, and update the biases and weights based on the average of the gradients  
+in the batch. This is called *mini-batch gradient descent* and is preferred to the other two variations of the algorithm.
+
+Also, note that in the second equation which is recursiven, we have a term that is the derivative of the activation function for that 
+layer. The recursive nature of this equation means, calculating the error values in the layer prior to the output layer requires 1 
+multiplication by the derivative value; calculating the error values in two (or more) layers before the output layer requires 2 (or more) 
+multiplication by the derivative values. If these derivative values are small, as could be the case for the Sigmoid function, the product 
+of multiple small values will result in a *very* small value. Since these error values decide the updates for biases and weights, this 
+means the update to biases and weights in layers closer to the input layer will bevery small, slowing the learning algorithm to a halt. 
+This phenomenon is known as the *vanishing gradient* problem and is the reason Sigmoid function cannot be used in very deep networks (And 
+why ReLU is so popular in deep networks).
+ 
 # Get Data
 
 > ### {% icon hands_on %} Hands-on: Data upload
