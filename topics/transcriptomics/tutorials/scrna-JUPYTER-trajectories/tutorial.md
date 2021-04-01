@@ -60,15 +60,21 @@ We've provided you with experimental data to analyse from a mouse dataset of fet
 > 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
->    {{ page.zenodo_link }}/files/Mito-counted_AnnData
+>    {{ page.zenodo_link }}/files/Trajectories_Instructions.ipynb
+>    {{ page.zenodo_link }}/files/Final_cell_annotated_object.h5ad
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
-> 3. **Rename** {% icon galaxy-pencil %} the datasets `Mito-counted AnnData`
+> 3. **Rename** {% icon galaxy-pencil %} the .h5ad object as `Final cell annotated object`
+>
 > 4. Check that the datatype is `h5ad`
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="h5ad" %}
+>
+> 5. **Rename** {% icon galaxy-pencil %} the .ipynb object as `Trajectories_Instructions.ipynb`
+>
+> 6. Check that the datatype is `.ipynb`
 >
 {: .hands_on}
 
@@ -102,9 +108,17 @@ One problem with our current dataset is that it's not just T-cells: we found in 
 >
 {: .hands_on}
 
+You should now have `7795` cells, as opposed to the `7874` you started with. You've only removed a few cells (the contaminants!), but it makes a big difference in the next steps.
+
 Take note of what # this dataset is in your history, as you will need that shortly!
 
 ## Launching Jupyter
+
+> ### {% icon hands_on %} Hands-on: Downloading the directions
+>
+> 1. Click the **Trajectories_Instructions.ipynb** dataset and the download {% icon galaxy-save %} button to get the file onto your computer
+>
+{: .hands_on}
 
 JupyterLab is a bit like RStudio but for other coding languages. What, you've never heard of RStudio? Then don't worry, just follow the instructions!
 
@@ -112,15 +126,15 @@ JupyterLab is a bit like RStudio but for other coding languages. What, you've ne
 
 > ### {% icon hands_on %} Hands-on: Launching JupyterLab
 >
-> 1. Click [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_jupyter_notebook)
+> 1. Follow [this link](https://live.usegalaxy.eu/?tool_id=interactive_tool_jupyter_notebook)
 >
-> 2. You may need to sign in again (it will be the same sign-in as whatever usegalaxy.eu instance you are on)
+> 2. You may need to sign in again (it will be the same sign-in as whatever usegalaxy.eu instance you are on) and navigate (in that **Galaxy/Live** instance) to the history you were working on!
 >
-> 3. Click on the jupyter icon to active the {% tool [Interactive Jupyter Notebook](interactive_tool_jupyter_notebook) %}
+> 3. Click on the jupyter icon to activate the {% tool [Interactive Jupyter Notebook](interactive_tool_jupyter_notebook) %}
 > ![Jupyter Lab button](../../images/wab-jupyterlablogo.png "JupyterLab Button")
 >
 >    - *"Do you already have a notebook?"*: `Start with a fresh notebook`
->    - *"Include data into the environment"*: `T-cell_object.h5ad`
+>    - {% icon param-file %} *"Include data into the environment"*:  `Nothing selected`
 >
 >  This may take a moment, but once the `Executed notebook` in your dataset is orange, you are up and running!
 >
@@ -132,29 +146,52 @@ JupyterLab is a bit like RStudio but for other coding languages. What, you've ne
 
 Welcome!
 
-{% icon warning %} Do NOT delete or close this notebook dataset in your history. YOU WILL LOSE IT!
+> ### {% icon warning %} Danger: You can lose data!
+> Do NOT delete or close this notebook dataset in your history. YOU WILL LOSE IT!
+{: .warning}
 
 > ### {% icon hands_on %} Hands-on: Creating a notebook
 >
-> 1. Click the *Python 3* icon under *Notebook*
+> 1. Click the **Python 3** icon under **Notebook**
 > ![Python 3 icon](../../images/wab-python3logo.png "Python 3 Button")
 >
-> 2. Save your file (*File*: *Save*, or click the {% icon galaxy-save %} Save icon at the top left
+> 2. Save your file (**File**: **Save**, or click the {% icon galaxy-save %} Save icon at the top left
 >
-> 3. If you right click on the file in the explorer window at the left, you can rename your file `whateveryoulike.ipynb`
+> 3. If you right click on the file in the folder window at the left, you can rename your file `whateveryoulike.ipynb`
 >
 {: .hands_on}
 
-{% icon warning %} You should {% icon galaxy-save %} **Save** frequently, both for good practice and to protect you in case you accidentally close the browser. Your environment will still run, so it will contain the last saved notebook you have. You might eventually stop your environment after this tutorial, but ONLY once you have saved and exported your notebook (more on that at the end!) Note that you can have multiple notebooks going at the same time within this JupyterLab, so if you do, you will need to save and export each individual notebook. You can also download them at any time.
+Cool! Now you know how to create a file! Helpfully, however, we have created one for you, and you've downloaded it onto your computer already!
 
-> ### {% icon comment %} Woah, this is weird!
-> Where did the `2262` come from? The quickest way to figure out how many highly variable genes you have, in my opinion, is to re-run {% icon galaxy-refresh %} the **Scanpy FindVariableGenes** tool and select the parameter to *Remove genes not marked as highly variable*. Then you can Inspect your resulting object and you'll see only 2262 genes. I prefer to keep these in the object, just in case something is important (paranoia?), but you will get the same results whether you keep these or remove them. The following steps all use only highly variable genes.
-{: .comment}
+> ### {% icon hands_on %} Hands-on: Uploading the tutorial notebook
+>
+> 1. In the folder window, {% icon galaxy-upload %} Upload the `Trajectories_Instructions.ipynb` from your computer. It should appear in the file window.
+>
+> 2. Open it by double clicking it in the file window.
+>
+{: .hands_on}
+
+> ### {% icon warning %} You should {% icon galaxy-save %} **Save** frequently!
+> This is both for good practice and to protect you in case you accidentally close the browser. Your environment will still run, so it will contain the last saved notebook you have. You might eventually stop your environment after this tutorial, but ONLY once you have saved and exported your notebook (more on that at the end!) Note that you can have multiple notebooks going at the same time within this JupyterLab, so if you do, you will need to save and export each individual notebook. You can also download them at any time.
+{: .warning}
 
 # Run the tutorial!
 
-At this point, to save you having to switch back and forth between screens, the directions for the tutorial are all in the notebook you input! Go to `data` and double click `Trajectories_Instructions.ipynb` You may have to change certain numbers in the code blocks, so do read carefully. You will be able to run each step be clicking on the code block and pressing the {% icon workflow-run %} **Run the selected cells and advance** step. You will want to keep a tab open with your Galaxy history showing (so just launch another browser of your usegalaxy.eu instance), so that you can see when your files appear there.
+At this point, to prevent you having to switch back and forth between browsers, the directions for the rest of tutorial are all in the notebook you input! Go to `data` and double click `Trajectories_Instructions.ipynb` You may have to change certain numbers in the code blocks, so do read carefully. You will be able to run each step be clicking on the code block and pressing the {% icon workflow-run %} *Run the selected cells and advance* step. You will want to keep a tab open with your Galaxy history showing (so just launch another browser of your usegalaxy.eu instance), so that you can see when your files appear there. The tutorial is adapted from the [Scanpy Trajectory inference tutorial](https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html).
 
+# After Jupyter
+
+{% icon congratulations %} Congratulations! You've made it through Jupyter!
+
+> ### {% icon hands_on %} Hands-on: Closing JupyterLab
+>
+> 1. Click **User**: **Active Interactive Tools**
+>
+> 2. Tick {% icon galaxy-selector %} the box of your Jupyter Interactive Tool, and click **Stop**
+>
+{: .hands_on}
+
+If you want to run this notebook again, or share it with others, it now exists in your history. You can use this 'finished' version just the same way you imported the file from zenodo (or from a shared Galaxy history) and input it into starting JupyterLab at the beginning of this tutorial.
 
 # Conclusion
 {:.no_toc}
