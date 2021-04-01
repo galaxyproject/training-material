@@ -8,7 +8,7 @@ questions:
 - How can I analyze similarities among biomedical entities based on PubMed data on large-scale?
 objectives:
 - Learn how to use the SimText toolset
-- Upload table with biomedical entities in Galaxy
+- Upload a table with biomedical entities in Galaxy
 - Retrieve PubMed data for each of the biomedical entities
 - Extract biomedical terms from the PubMed data for each biomedical entity
 - Analyze the similarity among the biomedical entities based on the extracted data in an interactive app
@@ -125,7 +125,7 @@ The following features are generated:
 >
 > 2. Open interactive tool 
 >
->    {% snippet faqs/galaxy/interactive_tools_open.md tool="SimText app" %}
+>    {% snippet faqs/galaxy/interactive_tools_open.md tool="SimText app" box_type="tip" %}
 >
 {: .hands_on}
 

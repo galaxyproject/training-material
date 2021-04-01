@@ -6,5 +6,5 @@ layout: faq
 ---
 
 1. Go to User > Active InteractiveTools
-2. Wait for the {% include.tool %} to be running (Job Info)
-3. Click on {% include.tool %}
+2. Wait for the {{ include.tool }} to be running (Job Info)
+3. Click on {{ include.tool }}
