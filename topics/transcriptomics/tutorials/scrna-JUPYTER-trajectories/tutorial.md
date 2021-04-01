@@ -175,7 +175,7 @@ At this point, to prevent you having to switch back and forth between browsers, 
 
 # Tutorial Plot Answers
 
-Just in case, we've put the plots you should generate in the tutorial here. If things have gone wrong, you can also download this [answer key tutorial]({{ page.zenodo_link }}/files/Trajectories_AnswerKey.ipynb?download=1).
+Just in case, we've put the plots you should generate in the tutorial here. If things have gone wrong, you can also download this [answer key tutorial]({{ page.zenodo_link }}/files/Trajectories_AnswerKey.ipynb).
 
 ![Plot1-Force-Directed Graph](../../images/wab-Plot1.png "Plot1-Force-Directed Graph")
 
