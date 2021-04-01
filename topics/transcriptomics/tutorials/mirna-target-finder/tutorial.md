@@ -31,13 +31,13 @@ contributors:
 
 As sessile organisms, the survival of plants under adverse environmental conditions depends, to a large extent, on their ability to perceive stress stimuli and respond appropriately to counteract the potentially damaging effects. Coordination of phytohormones and reactive oxygen species are considered a key element for enhancing stress resistance, allowing fine-tuning of gene expression in response to environmental changes ({% cite PlanasRiverola2019 %}, {% cite Ivashuta2011 %}). These molecules constitute complex signalling networks, endowing with the ability to respond to a variable natural environment.
 
-Brassinosteroids (BRs) are a group of plant steroid hormones essential for plant growth and development, as well as for controlling abiotic and biotic stress. Structurally, BRs are polyhydroxylated sterol derivatives with close similarity to animal hormones ([Figure 1](#fig1:Esteroid hormones)). This group of phytohormones is comprised of around 60 different compounds, of which brassinolide (BL), 24-epibrassinolide (EBR), and 28-homobrassinolide (HBR) are considered the most bioactive.
+Brassinosteroids (BRs) are a group of plant steroid hormones essential for plant growth and development, as well as for controlling abiotic and biotic stress. Structurally, BRs are polyhydroxylated sterol derivatives with close similarity to animal hormones (Figure 1). This group of phytohormones is comprised of around 60 different compounds, of which brassinolide (BL), 24-epibrassinolide (EBR), and 28-homobrassinolide (HBR) are considered the most bioactive.
 
 ![fig1:Esteroid hormones](../../images/brassinosteroids.png "Structure of various plant and animal steroid hormones.")
 
 Several recent studies suggest that the BR-mediated gene regulatory networks have the potential to reshape the future of agriculture, not only by alleviating the antagonistic effect diverse abiotic stress conditios, such as drought, but also by enhancing plant growth and yield. For instance, in tomato (_Solanum lycopersicum_), EBR treatment enhances drought tolerance, improving photosynthetic capacity, leaf water status, and antioxidant defense ({% cite Wang2018 %}). In pepper (_Capsicum annuum_), BL treatment increased the efficiency of light utilization under drought ({% cite Hu2013 %}). Gram (_Cicer arietinum_) plants exposed to drought stress and treated with BL showed significant increases in weight ({% cite Anwar2018 %}). However, the mechanisms of BRs action in enhancing plant tolerance to abiotic stresses still remain largely unknown.
 
-MicroRNAs (miRNAs), mainly 20–22 nucleotide small RNAs (sRNAs), are characterized for regulating gene expression at the post-transcriptional level. miRNAs are distinguished from other sRNAs by being generated from precursor harboring an imperfect stem‐loop structure. Unlike in animals, the pre-processing of plant miRNA occurs in the nucleus ([Figure 2](#fig2:miRNA biosynthesis)). The pre-miRNAs are then exported to the cytoplasm after methylation and incorporated into the Argonaute 1 protein to form RISC (RNA-induced silencing complex). The miRNA itself does not have the ability to cleave mRNAs or interfere with translation, but it plays a role in scanning the appropriate target.
+MicroRNAs (miRNAs), mainly 20–22 nucleotide small RNAs (sRNAs), are characterized for regulating gene expression at the post-transcriptional level. miRNAs are distinguished from other sRNAs by being generated from precursor harboring an imperfect stem‐loop structure. Unlike in animals, the pre-processing of plant miRNA occurs in the nucleus (Figure 2). The pre-miRNAs are then exported to the cytoplasm after methylation and incorporated into the Argonaute 1 protein to form RISC (RNA-induced silencing complex). The miRNA itself does not have the ability to cleave mRNAs or interfere with translation, but it plays a role in scanning the appropriate target.
 
 
 ![fig2:miRNA biosynthesis](../../images/plant_mirna_synthesis.png "Plant miRNA biosynthesis, homeostasis and mechanisms of action ({% cite Wang2019 %}).")
@@ -64,7 +64,7 @@ In plants, miRNAs can silence targets through RNA degradation as well as transla
 
 # Experimental design
 
-The main objective of this training is to identify potential targets of miRNAs whose expression is induced by brassinosteroids. Our starting hypothesis is that there must be brassinosteroid-induced miRNAs that have high sequence complementarity with mRNAs whose expression is inhibited in the presence of these hormones ([Figure 3](#fig3:Experimental design)).
+The main objective of this training is to identify potential targets of miRNAs whose expression is induced by brassinosteroids. Our starting hypothesis is that there must be brassinosteroid-induced miRNAs that have high sequence complementarity with mRNAs whose expression is inhibited in the presence of these hormones (Figure 3).
 
 ![fig3:Experimental design](../../images/miRNA_pipeline.png "Experimental design")
 
@@ -263,7 +263,7 @@ Next, we will reassess the quality of the sequences to check if the adapters hav
 >
 {: .hands_on}
 
-The evaluation of the report generated by __MultiQC__ after having processed the samples by __Trim Galore__ indicates that the G/C content has been successfully corrected, and that the adapter contamination has been eliminated. However, the samples still show a high degree of over-represented sequences ([Figure 7](#fig7:Adaptor content)).
+The evaluation of the report generated by __MultiQC__ after having processed the samples by __Trim Galore__ indicates that the G/C content has been successfully corrected, and that the adapter contamination has been eliminated. However, the samples still show a high degree of over-represented sequences (Figure 7).
 
 ![fig7:Overexpressed sequences](../../images/miRNA_overepresented_processed.png "Report of overexpressed sequences in the miRNA reads")
 
@@ -355,7 +355,7 @@ __DESeq2__ is a tool for differential gene expression analysis based on a negati
 DESeq2 generated 2 outputs: a table with the normalized counts and a graphical summary of the results. To evaluate the similarity of our samples, we are going to inspect the Principal Component Analysis (PCA) plot. PCA allows evaluating the dominant directions of the highest variability in the data. Thus, the samples subjected to the same conditions should cluster together.
 ![fig8:PCA miRNA](../../images/miRNA_PCA.png " PCA plot of expression data from control and BR treated miRNA samples.")
 
-As can be seen, in this case, the samples are much less similar to each other. Likewise, the main axes account for only 47% and 19% of the total variation. This suggests that the effect of brassinosteroids on miRNA regulation is limited ([Figure 8](#fig8:PCA miRNA)).
+As can be seen, in this case, the samples are much less similar to each other. Likewise, the main axes account for only 47% and 19% of the total variation. This suggests that the effect of brassinosteroids on miRNA regulation is limited (Figure 8).
 
 ## Filter significantly differentially expressed miRNAs
 
@@ -443,7 +443,7 @@ As in the previous section, we shall begin by assessing the quality of our seque
 >
 > > ### {% icon solution %} Solution
 > >
-> > All the stats are within acceptable limits. However, the adapter content shows the presence of universal adapters in our reads, which can be removed to avoid possible interferences at later stages ([Figure 10](#fig10:Adapter content of mRNA samples)).
+> > All the stats are within acceptable limits. However, the adapter content shows the presence of universal adapters in our reads, which can be removed to avoid possible interferences at later stages (Figure 10).
 > >
 > >    ![fig10:Adapter content of mRNA samples](../../images/miRNA_adapter_01.png "Quality assessment of mRNA samples")
 > >
@@ -676,7 +676,7 @@ Congratulations! You have identified one potential gene involved in the brassino
 The gene [AT5G03670](https://www.arabidopsis.org/servlets/TairObject?id=133285&type=locus) codifies the TRM28 protein, a member of the histone-lysine N-methyltransferase SETD1B-like protein familiy. According the bibliography, this protein is involved in the tolerance to acid soil conditions.
 
 > ### {% icon comment %} Comments
-> One of the hypotheses that we could propose from our results is: the inhibition of the TRM28 protein translation can result in plants with impaired resistance to acid soils. Is it possible to validate it? Yes! We propose this approach: to acquire [AT5G03670 mutant seeds](https://abrc.osu.edu/stocks/243294) and [wild type seeds](http://arabidopsis.info/StockInfo?NASC_id=N1093), grow them under two controlled conditions: neutral substrate and acid substrate, and analyze plant weight after 33 days ([Figure 16](#fig16:Plant growth)).
+> One of the hypotheses that we could propose from our results is: the inhibition of the TRM28 protein translation can result in plants with impaired resistance to acid soils. Is it possible to validate it? Yes! We propose this approach: to acquire [AT5G03670 mutant seeds](https://abrc.osu.edu/stocks/243294) and [wild type seeds](http://arabidopsis.info/StockInfo?NASC_id=N1093), grow them under two controlled conditions: neutral substrate and acid substrate, and analyze plant weight after 33 days (Figure 16).
 >
 > ![fig16:Plant growth](../../images/arabidopis_growth_protocol.png "_Arabidopsis_ growth conditions protocol ({% cite deOllas2019 %}).")
 >
