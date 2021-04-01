@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: Trajectory Analysis using Python (Jupyter Notebook) in Galaxy
 subtopic: single-cell
 priority: 11
-zenodo_link: ''
+zenodo_link: 'https://zenodo.org/record/4655947'
 questions:
 - How can I infer lineage relationships between single cells based on their RNA, without a time series?
 objectives:
@@ -126,13 +126,7 @@ JupyterLab is a bit like RStudio but for other coding languages. What, you've ne
 
 > ### {% icon hands_on %} Hands-on: Launching JupyterLab
 >
-> 1. Follow [this link](https://live.usegalaxy.eu/?tool_id=interactive_tool_jupyter_notebook)
->
-> 2. You may need to sign in again (it will be the same sign-in as whatever usegalaxy.eu instance you are on) and navigate (in that **Galaxy/Live** instance) to the history you were working on!
->
-> 3. Click on the jupyter icon to activate the {% tool [Interactive Jupyter Notebook](interactive_tool_jupyter_notebook) %}
-> ![Jupyter Lab button](../../images/wab-jupyterlablogo.png "JupyterLab Button")
->
+> 1. {% tool [Interactive Jupyter Notebook](tool_id=interactive_tool_jupyter_notebook) %} with the following parameters:
 >    - *"Do you already have a notebook?"*: `Start with a fresh notebook`
 >    - {% icon param-file %} *"Include data into the environment"*:  `Nothing selected`
 >
@@ -179,6 +173,24 @@ Cool! Now you know how to create a file! Helpfully, however, we have created one
 
 At this point, to prevent you having to switch back and forth between browsers, the directions for the rest of tutorial are all in the notebook you input! Go to `data` and double click `Trajectories_Instructions.ipynb` You may have to change certain numbers in the code blocks, so do read carefully. You will be able to run each step be clicking on the code block and pressing the {% icon workflow-run %} *Run the selected cells and advance* step. You will want to keep a tab open with your Galaxy history showing (so just launch another browser of your usegalaxy.eu instance), so that you can see when your files appear there. The tutorial is adapted from the [Scanpy Trajectory inference tutorial](https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html).
 
+# Tutorial Plot Answers
+
+Just in case, we've put the plots you should generate in the tutorial here. If things have gone wrong, you can also download this [answer key tutorial]({{ page.zenodo_link }}/files/Trajectories_AnswerKey.ipynb?download=1).
+
+![Plot1-Force-Directed Graph](../../images/wab-Plot1.png "Plot1-Force-Directed Graph")
+
+![Diffusion Map](../../images/wab-Plot2.png "Diffusion Map")
+
+![PAGA](../../images/wab-Plot3.png "PAGA")
+
+![Force-Directed + PAGA - Cell type](../../images/wab-Plot4.png "Force-Directed + PAGA - Cell type")
+
+![Force-Directed + PAGA - Genotype](../../images/wab-Plot5.png "Force-Directed + PAGA - Genotype")
+
+![Force-Directed + PAGA - Markers](../../images/wab-Plot6.png "Force-Directed + PAGA - Markers")
+
+![Force-Directed + Pseudotime](../../images/wab-Plot7.png "Force-Directed + Pseudotime")
+
 # After Jupyter
 
 {% icon congratulations %} Congratulations! You've made it through Jupyter!
@@ -191,14 +203,14 @@ At this point, to prevent you having to switch back and forth between browsers, 
 >
 {: .hands_on}
 
-If you want to run this notebook again, or share it with others, it now exists in your history. You can use this 'finished' version just the same way you imported the file from zenodo (or from a shared Galaxy history) and input it into starting JupyterLab at the beginning of this tutorial.
+If you want to run this notebook again, or share it with others, it now exists in your history. You can use this 'finished' version just the same way as you downloaded the directions file and uploaded into the Jupyter environment.
 
 # Conclusion
 {:.no_toc}
 
-{% icon congratulations %} Congratulations! You've made it to the end! You might find this answer key [notebook](FIXME) useful.
+{% icon congratulations %} Congratulations! You've made it to the end! You might be interested in the [Answer Key History](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/trajectories---jupyter---answer-key)
 
-In this tutorial, you moved from called clusters to inferred relationships and trajectories using pseudotime analysis. You found an alternative to PCA (diffusion map), an alternative to tSNE (force-directed graph), a means of identifying cluster relationships (PAGA), and a metric for pseudotime (diffusion pseudotime) to identify early and late cells. If you were working in a group, you found that such analysis is slightly more sensitive to your decisions that the simpler filtering/plotting/clustering previously. We are inferring and assuming relationships and time, so that makes sense!
+In this tutorial, you moved from called clusters to inferred relationships and trajectories using pseudotime analysis. You found an alternative to PCA (diffusion map), an alternative to tSNE (force-directehttps://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/trajectories---jupyter---answer-keyd graph), a means of identifying cluster relationships (PAGA), and a metric for pseudotime (diffusion pseudotime) to identify early and late cells. If you were working in a group, you found that such analysis is slightly more sensitive to your decisions than the simpler filtering/plotting/clustering is. We are inferring and assuming relationships and time, so that makes sense!
 
 To discuss with like-minded scientists, join our Gitter channel for all things Galaxy-single cell!
 [![Gitter](https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg)](https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
