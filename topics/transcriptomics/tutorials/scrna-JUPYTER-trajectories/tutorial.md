@@ -13,7 +13,7 @@ objectives:
 time_estimation: 2H
 key_points:
 - Trajectory analysis is less robust than pure plotting methods, as such 'inferred relationships' are a bigger mathematical leap
-- As always with single-cell analysis, you must know enough biology to deduce if your analysis is reasonable, before exploring or deducing further, novel insight
+- As always with single-cell analysis, you must know enough biology to deduce if your analysis is reasonable, before exploring or deducing novel insight
 requirements:
 -
     type: "internal"
@@ -54,7 +54,7 @@ We will use the same sample from the previous two tutorials, which contains larg
 
 We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial.html#neighborhood-graph) (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find the final dataset in this [input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/trajectories---input) or download from Zenodo below.
 
-> ### {% icon hands_on %} Hands-on: Data upload FIXME
+> ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
 > 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
