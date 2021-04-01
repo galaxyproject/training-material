@@ -323,11 +323,11 @@ why ReLU is so popular in deep networks).
 >
 {: .hands_on}
 
-# Solve a regression problem using Boston housing dataset via FNN in Galaxy
+# Solve a regression problem using real estate price prediction dataset via FNN in Galaxy
 
-In the section, we define a RNN and train it using IMDB movie reviews training dataset. The goal is to learn a model such that given the
-words in a review we can predict whether the review was positive or negative. We then evaluate the trained RNN on the test dataset
-and plot the confusion matrix.
+In the section, we define a FNN and train it using real estate price prediction training dataset. The goal is to learn a model such that 
+given certain attributes of a house, we can accurately predict its price. We then evaluate the trained FNN on the test dataset and plot 
+various graphs to assess themodelr's performance.
 
 ### **Create a deep learning model architecture**
 
@@ -335,28 +335,30 @@ and plot the confusion matrix.
 >
 > - {% tool [Create a deep learning model architecture](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0) %}
 >    - *"Select keras model type"*: `sequential`
->    - *"input_shape"*: `(500,)`
+>    - *"input_shape"*: `(6,)`
 >    - In *"LAYER"*:
 >        - {% icon param-repeat %} *"1: LAYER"*:
->            - *"Choose the type of layer"*: `Embedding -- Embedding`
->                - *"input_dim"*": `10000`
->                - *"output_dim"*": `32`
+>            - *"Choose the type of layer"*: `Normalization -- BatchNormalization`
 >        - {% icon param-repeat %} *"2: LAYER"*:
->            - *"Choose the type of layer"*: `Recurrent -- LSTM`
->                - *"units"*": `100`
+>            - *"Choose the type of layer"*: `Core -- Dense`
+>                - *"units"*": `24`
+>                - *"Activation function"*: `relu`
 >        - {% icon param-repeat %} *"3: LAYER"*:
 >            - *"Choose the type of layer"*: `Core -- Dense`
->                - *"units"*: `1`
->                - *"Activation function"*: `sigmoid`
+>                - *"units"*": `12`
+>                - *"Activation function"*: `relu`
+>        - {% icon param-repeat %} *"4: LAYER"*:
+>            - *"Choose the type of layer"*: `Core -- Dense`
+>                - *"units"*": `1`
+>                - *"Activation function"*: `linear`
 >    - Click *"Execute"*
 {: .hands_on}
 
-Input is a movie review of size 500 (longer reviews were trimmed and shorter ones padded). Our neural network has 3 layers. The first layer is
-an embedding layer, that transforms each review words into a 32 dimensional vector (*output_dim*). We have 10000 unique words in our IMDB dataset
-(*input_dim*). The second layer is an *LSTM* layer, which is a type of RNN. Output of the LSTM layer has a size of *100*. The third layer is a
-*Dense* layer, which is a fully connected layer (all 100 output neurons in LSTM layer are connected to a single neuron in this layer). It has a
-*sigmoid* activation function, that generates an output between 0 and 1. Any output greater than 0.5 is considered a predicted positive review,
-and anything less than 0.5 a negative one. The model config can be downloaded as a JSON file.
+Input is a movie review of size 500 (longer reviews were trimmed and shorter ones padded). Our neural network has 4 layers. The 
+first layer isa normalization layer, which normalizes the input data (subtracts the mean then divides by the standard deviation 
+of the batch). The next 2 layers are fully connected layers with 24 and 12 neurons with ReLU activation function, and the last 
+layer has a single neuron with a linear activation function, used in regression problems. The model config can be downloaded as 
+a JSON file.
 
 ### **Create a deep learning model**
 
@@ -365,23 +367,21 @@ and anything less than 0.5 a negative one. The model config can be downloaded as
 > - {% tool [Create deep learning model](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0) %}
 >    - *"Choose a building mode"*: `Build a training model`
 >    - *"Select the dataset containing model configuration"*: Select the *Keras Model Config* from the previous step.
->    - *"Do classification or regression?"*: `KerasGClassifier`
+>    - *"Do classification or regression?"*: `KerasGRegressor`
 >    - In *"Compile Parameters"*:
->        - *"Select a loss function"*: `binary_crossentropy`
+>        - *"Select a loss function"*: `mse / MSE / mean_squared_error`
 >        - *"Select an optimizer"*: `Adam - Adam optimizer `
->        - *"Select metrics"*: `acc/accuracy`
+>        - *"Select metrics"*: `mse / MSE / mean_squared_error`
 >    - In *"Fit Parameters"*:
->        - *"epochs"*: `2`
->        - *"batch_size"*: `128`
+>        - *"epochs"*: `1000`
 >    - Click *"Execute"*
 {: .hands_on}
 
-A loss function measures how different the predicted output is versus the expected output. For binary classification problems, we use
-*binary cross entropy* as loss function. Epochs is the number of times the whole training data is used to train the model. Setting *epochs* to 2
-means each training example in our dataset is used twice to train our model. If we update network weights/biases after all the training data is
-feed to the network, the training will be very slow (as we have 25000 training examples in our dataset). To speed up the training, we present
-only a subset of the training examples to the network, after which we update the weights/biases. *batch_size* decides the size of this subset.
-The model builder can be downloaded as a zip file.
+A loss function measures how different the predicted output is versus the expected output. For regression problems, we use
+*Mean Squared Error (MSE)* loss function, which averages the sqare of the difference between predicted and actual values for 
+the batch. Epochs is the number of times the whole training data is used to train the model. Setting *epochs* to 1000
+means each training example in our dataset is used 1000 times to train our model. The model builder can be downloaded as a 
+zip file.
 
 ### **Deep learning training and evaluation**
 
@@ -393,8 +393,10 @@ The model builder can be downloaded as a zip file.
 >    - *"Select input type:"*: `tabular data`
 >        - *"Training samples dataset"*: Select `X_train` dataset
 >        - *"Choose how to select data by column:"*: `All columns`
+>        - *"Does the dataset contain header:"*: `Yes`
 >        - *"Dataset containing class labels or target values"*: Select `y_train` dataset
 >        - *"Choose how to select data by column:"*: `All columns`
+>        - *"Does the dataset contain header:"*: `Yes`
 >    - Click *"Execute"*
 >
 >
@@ -414,62 +416,36 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 >    - *"Select input data type for prediction"*: `tabular data`
 >    - *"Training samples dataset"*: Select `X_test` dataset
 >    - *"Choose how to select data by column:"*: `All columns`
->    - Click *"Execute"*
->
-{: .hands_on}
-
-The prediction step generates 1 dataset. It's a file that has predictions (1 or 0 for positive or negative movie reviews) for every review in
-the test dataset.
-
-### **Machine Learning Visualization Extension**
-
-> ### {% icon hands_on %} Hands-on: Creating the confusion matrix
->
-> - {% tool [Machine Learning Visualization Extension](toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.2) %}
->    - *"Select a plotting type"*: `Confusion matrix for classes`
->    - *"Select dataset containing the true labels"*": `y_test`
->    - *"Choose how to select data by column:"*: `All columns`
->    - *"Select dataset containing the predicted labels"*": Select `Model Prediction` from the previous step
 >    - *"Does the dataset contain header:"*: `Yes`
 >    - Click *"Execute"*
 >
 {: .hands_on}
 
-**Confusion Matrix** is a table that describes the performance of a classification model. It lists the number of positive and negative examples
-that were correctly classified by the model, True positives (TP) and true negatives (TN), respectively. It also lists the number of examples that
-were classified as positive that were actually negative (False positive, FP, or Type I error), and the number of examples that were classified
-as negative that were actually positive (False negative, FN, or Type 2 error). Given the confusion matrix, we can calculate **precision** and
-**recall** {% cite TatbulEtAl  %}. Precision is the fraction of predicted positives that are true positives (Precision = TP / (TP + FP)). Recall
-is the fraction of true positives that are predicted (Recall = TP / (TP + FN)). One way to describe the confusion matrix with just one value is
-to use the **F score**, which is the harmonic mean of precision and recall
+The prediction step generates 1 dataset. It's a file that has house price predictions for every house in the test dataset.
 
-$$ Precision = \frac{\text{True positives}}{\text{True positives + False positives}} $$
+### **Machine Learning Visualization Extension**
 
-$$ Recall = \frac{\text{True positives}}{\text{True positives + False negatives}} $$
+> ### {% icon hands_on %} Hands-on: Check and visualize the predictions
+>
+> - {% tool [Machine Learning Visualization Extension](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/0.1) %}
+>    - *"Select input data file"*: `y_test`
+>    - *"Select predicted data file"*": Select `Model Prediction` from the previous step
+>    - Click *"Execute"*
+>
+{: .hands_on}
 
-$$ F score = \frac{2 * \text{Precision * Recall}}{\text{Precision + Recall}} $$
-
-![Confusion matrix for our sentiment analysis problem](../../images/ConfusionMatrix.png "Sentiment analysis confusion matrix")
-
-Figure 12 is the resultant confusion matrix for our sentiment analysis problem. The first row in the table represents the *true* 0 (or negative sentiment)
-class labels (we have 10,397 + 2,103 = 12,500 reviews with negative sentiment). The second row represents the *true* 1 (or positive sentiment) class labels
-(Again, we have 1,281 + 11,219 = 12,500 reviews with positive sentiment). The left column represents the *predicted* negative sentiment class labels (Our RNN
-predicted 10,397 + 1,281 = 11,678 reviews as having a negative sentiment). The right column represents the *predicted* positive class labels (Our RNN
-predicted 11,219 + 2,103 = 13,322 reviews as having a positive sentiment).Looking at the bottom right cell, we seethat our RNN has correctly predicted 11,219
-reviews as having a positive sentiment (True positives). Looking at the top right cell, we see that our RNN has incorrectly predicted 2,103 reviews as having
-a positive (False positives). Similarly, looking at the top left cell, we see that our RNN has correctly predicted 10,397 reviews as having negative sentiment
-(True negative). Finally, looking at the bottom left cell, we see that our RNN has incorrectly predicted 1,281 reviews as negative (False negative). Given
-these numbers we can calculate Precision, Recall, and the F score as follows:
-
-$$ Precision = \frac{\text{True positives}}{\text{True positives + False positives}} = \frac{11,219}{11,219 + 2,102} = 0.84 $$
-
-$$ Recall = \frac{\text{True positives}}{\text{True positives + False negatives}} = \frac{11,219}{11,219 + 1,281} = 0.89 $$
-
-$$ F score = \frac{2 * \text{Precision * Recall}}{\text{Precision + Recall}} = \frac{2 * 0.84 * 0.89}{0.84 + 0.89} = 0.86 $$
+This step generates 3 graphs. The first graph (Figure 6) plots true vs predicted values. The closer the points are to each other,
+the better our model's prediction performance at predicting. The second graph is a scatter plot of true vs predicted values. If 
+our model predicts all values correctly, we would get the orange line. The more the predicted vs true points are off the orange 
+line, the worse our model's prediction performance. The R2 (coefficient of determination) score (0.72) is not too close to the 
+best possible score of 1.0 (meaning there is room for prediction improvement). The RMSE (root mean squared error) is 6.94. The 
+best value for RMSR is 0 for perfect prediction. The third graph plots residual (predicted - true) vs predcited values. The 
+better our model's predictions, the closer the points to y=0 line. 
 
 # Conclusion
 {:.no_toc}
 
-In this tutorial, we briefly reviewed feedforward neural networks, explained how recurrent neural networks are different, and discussed various
-RNN input/output and architectures. We also discussed various text representation and preprocessing schemes and used Galaxy to solve a sentiment
-classification problem using RNN on IMDB movie reviews dataset.
+In this tutorial, we discussed the inspiration behind the neural networks, and explained Perceptron, one of the earliest neural 
+networks still in use. We then discussed different activation function, what supervised learning is, what are loss/cost functions, 
+and how backpropagation minimizes the cost function. Finally, we implemented a FNN in Galaxy to solve a regression problem on real 
+estate price prediction data.
