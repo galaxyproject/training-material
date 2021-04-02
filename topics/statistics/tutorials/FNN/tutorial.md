@@ -135,7 +135,7 @@ techniques that can prevent that ({% cite KukackaEtAl  %}) but they are outside 
 
 # Activation functions
 
-There are many activation functions besides the step function used in Perceptron {% cite nwankpaEtAl %}. Figure 4 shows
+There are many activation functions besides the step function used in Perceptron ({% cite nwankpaEtAl %}). Figure 4 shows
 some of the more common activation functions.
 
 ![Table showing the formula, graph, derivative, and range of common activation functions](../../images/FNN_activation_functions.png "Common activation functions (Source: https://en.wikipedia.org/wiki/Activation_function)")
@@ -178,7 +178,7 @@ $$ \boldsymbol{y} = f(\boldsymbol{x})$$ that maps the feature vectors to labels.
 supervised learning is to use the training set to learn or estimate *f*. We call this estimated
 function $$ \hat{f}(\boldsymbol{x}) $$. We want $$ \hat{f}(\boldsymbol{x}) $$ to be close to 
 $$ f(\boldsymbol{x})$$ not only for training set, but for training examples not in training 
-set {% cite Bagheri %}.
+set ({% cite Bagheri %}).
 
 When the label is a numerical variable, we call the problem a *regression* problem, and when it's a categorical variable, 
 we call it a *classification* problem. In classification problems, the label can be represented by the set 
