@@ -567,7 +567,25 @@ We call peaks with MACS2. In order to get the coverage centered on the 5' extend
 
 ## Prepare the Datasets
 
-## TODO extract CTCF peaks on chr22
+### Extract CTCF peaks on chr22 in intergenic regions
+As our training dataset is focused on chromosome 22 we will only use the CTCF peaks from chr22. We expect to have ATAC-seq coverage at TSS but only good ATAC-seq have coverage on intergenic CTCF. Indeed, the CTCF protein is able to position nucleosomes and creates a region depleted of nucleosome of around 120bp {% cite fu_insulator_2008 %}. This is smaller than the 200bp nucleosome-free region around TSS and also probably not present in all cells. Thus it is more difficult to get enrichment. In order to get the list of intergenic CTCF peaks of chr22, we will first select the peaks on chr22 and then exclude the one which overlap with genes.
+
+> ### {% icon hands_on %} Hands-on: Select CTCF peaks from chr22 in intergenic regions:
+>
+> 1. **Filter** data on any column using simple expressions {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Filter"*: Select the first dataset: `ENCFF933NTR.bed.gz`
+>    - *"With following condition"*: `c1=='chr22'`
+>
+> 2. **bedtools Intersect intervals** find overlapping intervals in various ways {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"File A to intersect with B"*: Select the output of **Filter** data on any column using simple expressions {% icon tool %}
+>    - *Combined or separate output files*:
+>        - {% icon param-file %} *"File B to intersect with A"*: Select the dataset `chr22 genes`
+>    - *What should be written to the output file?*: `Write the original entry in A for each overlap (-wa)`
+>    - Report only those alignments that **do not** overlap with file(s) B: `Yes`
+>
+> 3. Rename the datasets `intergenic CTCF peaks chr22`.
+{: .hands_on}
+
 
 ### Convert bedgraph from **MACS2** to bigwig
 The bedgraph format is easily readable for human but it can be very large and visualising a specific region is quite slow. We will change it to bigwig format which is a binary format, so we can visualise any region of the genome very quickly.
@@ -584,7 +602,7 @@ The bedgraph format is easily readable for human but it can be very large and vi
 
 ## Create heatmap of coverage at TSS with deepTools
 
-You might be interested in checking the coverage on specific regions. For this, you can compute a heatmap. We will use the **deepTools plotHeatmap**. As an example, we will here make a heatmap centered on the transcription start sites (TSS) and another one centered on CTCF peaks.
+You might be interested in checking the coverage on specific regions. For this, you can compute a heatmap. We will use the **deepTools plotHeatmap**. As an example, we will here make a heatmap centered on the transcription start sites (TSS) and another one centered on intergenic CTCF peaks. First, on the TSS:
 
 ### Generate computeMatrix
 
@@ -619,7 +637,6 @@ We will now generate a heatmap. Each line will be a transcript. The coverage wil
 >    - *"Show advanced options"*: `no`
 {: .hands_on}
 
-## TODO update the results
 > ### {% icon comment %} plotHeatmap Results
 > This is what you get from plotHeatmap:
 > ![plotHeatmap output](../../images/atac-seq/plotHeatmapOutput.png "plotHeatmap output")
@@ -638,6 +655,40 @@ We will now generate a heatmap. Each line will be a transcript. The coverage wil
 > {: .solution}
 >
 {: .question}
+
+Now we will repeat the procedure for CTCF peaks of chr22 in intergenic regions:
+
+> ### {% icon hands_on %} Hands-on: Generate the matrix
+>
+> 1. **computeMatrix** {% icon tool %} with the following parameters:
+>    - In *"Select regions"*:
+>        - 1. *"Select regions"*
+>            - {% icon param-file %} *"Regions to plot"*: Select the dataset `intergenic CTCF peaks chr22`
+>    - *"Sample order matters"*: `No`
+>        - {% icon param-file %} *"Score file"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %} that should be named `MACS2 bigwig`.
+>    - *"computeMatrix has two main output options"*: `reference-point`
+>    - *"The reference point for the plotting"*: `center of region`
+>    - *"Show advanced output settings"*: `no`
+>    - *"Show advanced options"*: `yes`
+>        - *"Convert missing values to 0?"*: `yes`
+>
+> 2. **plotHeatmap** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: Select the output of **computeMatrix** {% icon tool %}.
+>    - *"Show advanced output settings"*: `no`
+>    - *"Show advanced options"*: `yes`
+>        - *"Colormap to use for each sample"*:
+>            - {% icon param-repeat %} *"Insert Colormap to use for each sample"*:
+>                - *"Color map to use for the heatmap"*: Blues # Or what you want
+>        - *"The x-axis label"*: `distance from peak center (bp)`
+>        - *"The y-axis label for the top panel"*: `CTCF peaks` # I don't know why this does not work currently...
+>        - *"Reference point label"*: `peak center`
+{: .hands_on}
+
+> ### {% icon comment %} plotHeatmap Results
+> This is what you get from plotHeatmap, this is much more symetric:
+> ![plotHeatmap output on CTCF](../../images/atac-seq/plotHeatmapOutput_CTCF.png "plotHeatmap output on CTCF")
+{: .comment}
+
 
 ## Visualise Regions with pyGenomeTracks
 
@@ -685,8 +736,6 @@ In order to visualise a specific region (e.g. the gene *RAC2*), we can either us
 >
 {: .hands_on}
 
-## TODO update the result
-
 > ### {% icon comment %} pyGenomeTracks Results
 > You should get similar to results to this from pyGenomeTracks:
 > ![pyGenomeTracks output](../../images/atac-seq/pyGenomeTracksOutput.png "pyGenomeTracks output")
@@ -711,7 +760,7 @@ In order to visualise a specific region (e.g. the gene *RAC2*), we can either us
 >
 {: .question}
 
-As CTCF binds so ubiquitously and by itself can displace the nucleosome creating accessible regions, a region containing a peak with no corresponding CTCF peak or TSS could be a putative enhancer. In the pyGenomeTracks plot we see a region like this located in the intron of a gene and another one between genes. However, it is impossible to guess from the position which would be the gene controlled by this region. And of course, more analyses are needed to assess if it is a real enhancer, for example, histone ChIP-seq, 3D structure, transgenic assay, etc.
+As CTCF creates accessible regions, a region containing a peak with no corresponding CTCF peak or TSS could be a putative enhancer. In the pyGenomeTracks plot we see a region like this located in the intron of a gene and another one between genes. However, it is impossible to guess from the position which would be the gene controlled by this region. And of course, more analyses are needed to assess if it is a real enhancer, for example, histone ChIP-seq, 3D structure, transgenic assay, etc.
 
 
 # Conclusion
@@ -722,7 +771,5 @@ a transposase (enzyme) called Tn5. It marks open chromatin regions by cutting an
 inserting adapters for sequencing. The training material gave you an insight into how to quality control the data. You should look for low quality bases, adapter contamination, correct insert size and PCR duplicates (duplication level). We showed you how to remove adapters and PCR duplicates, if **FastQC**, shows a warning in these areas. We mapped the reads
 with **Bowtie2**, filtered our reads for properly paired, good quality and reads that do not
 map to the mitochondrial genome. We found open chromatin regions with **MACS2**, a tool to find regions of genomic enrichment (peaks). We investigated the read coverage around TSS with the help of **computeMatrix** and **plotHeatmap**. Last but not least, we visualised the peaks and other informative tracks, such as CTCF binding regions and hg38 genes, with the help of **pyGenomeTracks**. At the end, we found open chromatin regions that did not overlap with CTCF sites or TSS, which could be potential putative enhancer regions detected by the ATAC-Seq experiment.
-
-## TODO update workflow
 
 ![ATAC workflow](../../images/atac-seq/ATACWF.svg "ATAC workflow")
