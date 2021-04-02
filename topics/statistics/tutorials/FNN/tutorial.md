@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Introduction to feedforward neural networks (FNN)
-zenodo_link: https://zenodo.org/record/4477881
+zenodo_link: https://zenodo.org/record/4660497
 questions:
 - What is a feedforward neural network (FNN)?
 - What are some applications of FNN?
@@ -299,13 +299,13 @@ why ReLU is so popular in deep networks).
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the files from [Zenodo](https://zenodo.org/record/4477881) or from the shared data library
+> 2. Import the files from [Zenodo](https://zenodo.org/record/4660497) or from the shared data library
 >
 >    ```
->    https://zenodo.org/record/4477881/files/X_test.tsv
->    https://zenodo.org/record/4477881/files/X_train.tsv
->    https://zenodo.org/record/4477881/files/y_test.tsv
->    https://zenodo.org/record/4477881/files/y_train.tsv
+>    https://zenodo.org/record/4660497/files/X_test.tsv
+>    https://zenodo.org/record/4660497/files/X_train.tsv
+>    https://zenodo.org/record/4660497/files/y_test.tsv
+>    https://zenodo.org/record/4660497/files/y_train.tsv
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -329,7 +329,7 @@ In this section, we define a FNN ({% cite Python %}) and train it using car purc
 about an individual (age, gender, average miles driven per day, personal debt, and monthly income), and the money they spent on purchasing 
 a car, the goal is to learn a model such that given an individual's attributes, we can accurately predict how much money they are will spend 
 purchasing a car. We then evaluate the trained FNN on the test dataset and plot various graphs to assess the model's performance. Our training 
-dataset has 723 training examples, and our test dataset has 242 test examples.
+dataset has 723 training examples, and our test dataset has 242 test examples. Input features have been scaled to be in 0 to 1 range.
 
 ### **Create a deep learning model architecture**
 
