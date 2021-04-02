@@ -11,7 +11,7 @@ objectives:
 - Learn various activation functions, and classification/regression problems solved by neural networks
 - Discuss various cost/loss functions and the backpropagation algorithm
 - Learn how to create a neural network using Galaxy's deep learning tools
-- Solve a regression problem using Boston housing dataset via FNN in Galaxy
+- Solve a simple regression problem, car purchase price prediction, via FNN in Galaxy
 requirements:
   -
     type: internal
@@ -37,8 +37,8 @@ feedforward neural networks (FNN), which have been successfully applied to patte
 clustering, regression, association, optimization, control, and forecasting ({% cite JainEtAl %}. 
 We will discuss biological neurons that inspired artificial neural networks, review activation 
 functions, classification/regression problems solved by neural networks, and the backpropagation 
-learning algorithm. Finally, we construct a FNN to solve a regression problem using Boston housing 
-dataset. 
+learning algorithm. Finally, we construct a FNN to solve a regression problem using car purchase
+price prediction dataset. 
 
 > ### Agenda
 >
@@ -323,11 +323,13 @@ why ReLU is so popular in deep networks).
 >
 {: .hands_on}
 
-# Solve a regression problem using real estate price prediction dataset via FNN in Galaxy
+# Solve a simple regression problem using car purchase price prediction dataset via FNN in Galaxy
 
-In the section, we define a FNN and train it using real estate price prediction training dataset. The goal is to learn a model such that 
-given certain attributes of a house, we can accurately predict its price. We then evaluate the trained FNN on the test dataset and plot 
-various graphs to assess themodelr's performance.
+In this section, we define a FNN ({% cite Python %}) and train it using car purchase price prediction dataset ({% cite Grogan %}). Given 5 attributes 
+about an individual (age, gender, average miles driven per day, personal debt, and monthly income), and the money they spent on purchasing 
+a car, the goal is to learn a model such that given an individual's attributes, we can accurately predict how much money they are will spend 
+purchasing a car. We then evaluate the trained FNN on the test dataset and plot various graphs to assess the model's performance. Our training 
+dataset has 723 training examples, and our test dataset has 242 test examples.
 
 ### **Create a deep learning model architecture**
 
@@ -335,30 +337,26 @@ various graphs to assess themodelr's performance.
 >
 > - {% tool [Create a deep learning model architecture](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0) %}
 >    - *"Select keras model type"*: `sequential`
->    - *"input_shape"*: `(6,)`
+>    - *"input_shape"*: `(5,)`
 >    - In *"LAYER"*:
 >        - {% icon param-repeat %} *"1: LAYER"*:
->            - *"Choose the type of layer"*: `Normalization -- BatchNormalization`
->        - {% icon param-repeat %} *"2: LAYER"*:
->            - *"Choose the type of layer"*: `Core -- Dense`
->                - *"units"*": `24`
->                - *"Activation function"*: `relu`
->        - {% icon param-repeat %} *"3: LAYER"*:
 >            - *"Choose the type of layer"*: `Core -- Dense`
 >                - *"units"*": `12`
 >                - *"Activation function"*: `relu`
->        - {% icon param-repeat %} *"4: LAYER"*:
+>        - {% icon param-repeat %} *"2: LAYER"*:
+>            - *"Choose the type of layer"*: `Core -- Dense`
+>                - *"units"*": `8`
+>                - *"Activation function"*: `relu`
+>        - {% icon param-repeat %} *"3: LAYER"*:
 >            - *"Choose the type of layer"*: `Core -- Dense`
 >                - *"units"*": `1`
 >                - *"Activation function"*: `linear`
 >    - Click *"Execute"*
 {: .hands_on}
 
-Input is a movie review of size 500 (longer reviews were trimmed and shorter ones padded). Our neural network has 4 layers. The 
-first layer isa normalization layer, which normalizes the input data (subtracts the mean then divides by the standard deviation 
-of the batch). The next 2 layers are fully connected layers with 24 and 12 neurons with ReLU activation function, and the last 
-layer has a single neuron with a linear activation function, used in regression problems. The model config can be downloaded as 
-a JSON file.
+Input has 5 attributes: age, gender, average miles driven per day, personal debt, and monthly income. Our neural network has 3 layers. All
+three layers are fully connected. The last layer has a single neuron with a linear activation function, used in regression problems. Prior 
+layers use ReLU activation function. The model config can be downloaded as a JSON file.
 
 ### **Create a deep learning model**
 
@@ -373,15 +371,17 @@ a JSON file.
 >        - *"Select an optimizer"*: `Adam - Adam optimizer `
 >        - *"Select metrics"*: `mse / MSE / mean_squared_error`
 >    - In *"Fit Parameters"*:
->        - *"epochs"*: `1000`
+>        - *"epochs"*: `150`
+>        - *"batch_size"*: `50`
 >    - Click *"Execute"*
 {: .hands_on}
 
-A loss function measures how different the predicted output is versus the expected output. For regression problems, we use
+A loss function measures how different the predicted output is from the expected output. For regression problems, we use
 *Mean Squared Error (MSE)* loss function, which averages the sqare of the difference between predicted and actual values for 
-the batch. Epochs is the number of times the whole training data is used to train the model. Setting *epochs* to 1000
-means each training example in our dataset is used 1000 times to train our model. The model builder can be downloaded as a 
-zip file.
+the batch. Epochs is the number of times the whole training data is used to train the model. If we update network weights/biases 
+after all the training data is fed to the network, the training will be slow (as we have 723 training examples in our dataset). 
+To speed up the training, we present only a subset of the training examples to the network, after which we update the weights/biases. 
+batch_size decides the size of this subset (which we set to 50). The model builder can be downloaded as a zip file.
 
 ### **Deep learning training and evaluation**
 
@@ -421,7 +421,7 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 >
 {: .hands_on}
 
-The prediction step generates 1 dataset. It's a file that has house price predictions for every house in the test dataset.
+The prediction step generates 1 dataset. It's a file that has the predicted car purchase price for every row in the test dataset.
 
 ### **Machine Learning Visualization Extension**
 
@@ -435,17 +435,23 @@ The prediction step generates 1 dataset. It's a file that has house price predic
 {: .hands_on}
 
 This step generates 3 graphs. The first graph (Figure 6) plots true vs predicted values. The closer the points are to each other,
-the better our model's prediction performance at predicting. The second graph is a scatter plot of true vs predicted values. If 
-our model predicts all values correctly, we would get the orange line. The more the predicted vs true points are off the orange 
-line, the worse our model's prediction performance. The R2 (coefficient of determination) score (0.72) is not too close to the 
-best possible score of 1.0 (meaning there is room for prediction improvement). The RMSE (root mean squared error) is 6.94. The 
-best value for RMSR is 0 for perfect prediction. The third graph plots residual (predicted - true) vs predcited values. The 
-better our model's predictions, the closer the points to y=0 line. 
+the better our model's performance at predicting. The second graph (Figure 7) is a scatter plot of true vs predicted values. If 
+our model predicts all values correctly, we would get a diagonal line (going from bottom left to upper right). The more the 
+predicted vs true points are off this diagonal line, the worse our model's performance at predicting. The R2 (coefficient of 
+determination) score for our model is 0.87 (out of the best possible score of 1.0). The RMSE (root mean squared error) is 0.11. 
+The best value for RMSE is obviously 0 for perfect prediction. The third graph (Figure 8) plots residual (predicted - true) vs 
+predcited values. The better our model's predictions, the closer the points to y=0 line. 
+
+![True vs predicted values plot](../../images/FNN_true_predicted_plot.png "True vs predicted values plot")
+
+![Scatterplot of true vs predicted values plot](../../images/FNN_scatter_plot.png "Scatterplot of true vs predicted values plot")
+
+![Residual vs predicted values plot](../../images/FNN_residual_plot.png "Residual vs predicted values plot")
 
 # Conclusion
 {:.no_toc}
 
 In this tutorial, we discussed the inspiration behind the neural networks, and explained Perceptron, one of the earliest neural 
-networks still in use. We then discussed different activation function, what supervised learning is, what are loss/cost functions, 
-and how backpropagation minimizes the cost function. Finally, we implemented a FNN in Galaxy to solve a regression problem on real 
-estate price prediction data.
+networks still in use today. We then discussed different activation functions, what supervised learning is, what are loss/cost functions, 
+and how backpropagation minimizes the cost function. Finally, we implemented a FNN in Galaxy to solve a regression problem on car purchase 
+orice prediction data.
