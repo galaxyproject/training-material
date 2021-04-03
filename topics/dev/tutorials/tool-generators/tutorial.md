@@ -62,13 +62,13 @@ contributors:
 
 ---
 
-> ### {% icon warning %} This training material is specifically for Galaxy users who write command line scripts in their work.
+> ### {% icon warning %} This training material is for Galaxy users who routinely develop command line scripts as part of their work.
 >
-> * This tutorial is designed for informaticians and researchers working in Galaxy, who routinely develop their own analysis scripts using bash, Python, Perl, Rscript or something similar.
-> * It shows a quick way to bridge the gap between developing command line scripts and installing real tools in Galaxy.
-> * Galaxy users who *routinely use common scripting languages* in their work may find the ToolFactory useful, particulary if they are new to Galaxy from other scientific disciplines and not yet familiar with manual tool development processes.
-> * The ToolFactory is a Galaxy tool controlled through the usual Galaxy tool interface. However, bash or other command line scripting skills are needed to prepare the code for the ToolFactory to wrap in the generated tool.
-> * No explicit instruction about scripting is offered in this training. It is assumed that the reader is capable.
+> * This tutorial is designed for informaticians, developers and researchers working in Galaxy, who routinely develop their own analysis scripts using bash, Python, Perl, Rscript or something similar.
+> * It shows a quick way to bridge the gap between a working command line script and installing a real tool that "wraps" that script as a tool in Galaxy.
+> * Galaxy users who *routinely use common scripting languages* may find the ToolFactory useful, particulary if they are new to Galaxy from other scientific disciplines and not yet familiar with manual tool development processes.
+> * The ToolFactory is a Galaxy tool controlled through the usual Galaxy tool interface. Command line scripting skills are needed to prepare the code for the ToolFactory to wrap in the generated tool.
+> * No explicit instruction about scripting is offered in this training. It is assumed that the reader is brings these skills.
 > * Readers will need to test and explore to find ways to use the ToolFactory for their work.
 > * This tutorial is introductory. It offers broad guidance on a tool. It is up to the user to adapt it to their own work.
 > * Experienced galaxy tool developers already have specialised tools and training to suit their needs so may not gain much from this material.
@@ -125,7 +125,7 @@ The ToolFactory is an automated, form driven code generator.
 It runs as a typical Galaxy tool, except that it will only run for an administrative
 user. This is a minimal security precaution (see warnings below). Any scripting language interpreter supported by Conda can be used including bash, Python and Rscript.
 
-It was developed for informaticians who need to create new "real" Galaxy tools for their users. Any user comfortable with scripting languages on a linux command
+It was developed for informaticians who need new "real" Galaxy tools for their users. Any user comfortable with scripting languages on a linux command
 line may find it useful if they ever need a real Galaxy tool that wraps a working script.
 
 Generated tools pass Planemo lint, and are functionally indistinguishable from equivalent manually written tools. They contain a test based on the test data provided
@@ -281,7 +281,8 @@ worth some study. Text on the form is all in the XML and it all comes from the T
 
 > ### {% icon tip %} If this is confusing...
 >
-> If you are not yet familiar with the basics of Galaxy tools covered in the `tool integration` tutorial, the example may seem confusing. You may gain more by reviewing that tutorial and then coming back here?
+> If you are not yet familiar with the basics of Galaxy tools covered in the ![tool integration training material](http://planemo.readthedocs.io/en/latest/writing_standalone.html)
+, the example may seem confusing. You may gain more by reviewing the introductory part of that material, and then coming back here?
 > It's a lot to learn and it is complicated. While a form driven code generator can hide much of the complexity of generating the code,
 > the user must supply valid inputs for the code to be useful.
 >
@@ -1066,7 +1067,7 @@ planemo lint $TOOLNAME >> $2
 #### I want to use a collection for outputs but the test always fails. Even more odd, planemo reports that it performed zero tests in the html output!
 
 - Unfortunately, collections are tricky to generate automated tests for. The contents are never known until the tool has been run.
-- The galaxyxml code for collections is in need of work to address this - pull requests welcome.
+- The galaxyxml code for collections is in need of work to address this - pull requests is pending.
 - Until it's automated, please take a look at the plotter sample. It is recommended that you modify the test over-ride that appears in that sample form. Substitute one
 of the file names you expect to see after the collection is filled by your new tool for the pdf used in the plotter sample tool test.
 
@@ -1098,9 +1099,9 @@ of the file names you expect to see after the collection is filled by your new t
 > ### {% icon hands_on %} Hands-on: Loading new generated tools in a venv or docker ToolFactory in Planemo
 >
 > - Download the toolshed archive from the Galaxy history where you generated the tool.
-> - Unpack the archive into the planemo/mytools directory. It should appear as a single directory containing a test-data subdirectory and the new tool xml.
+> - Unpack the archive into the local directory (or the directory mapped as a volume in Docker) /planemo/mytools directory. It should appear as a single directory containing a test-data subdirectory and the new tool xml.
 > - Stop planemo - `^c` will do it somewhat messily
-> - Restart planemo with an additional parameter `--extra_tools planemo/mytools/`
+> - Restart planemo with an additional parameter `--extra_tools planemo/mytools/`. This is automatic in the Docker container.
 > - The new tool should be ready to test on the tool menu
 {: .hands_on}
 
