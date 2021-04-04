@@ -62,50 +62,61 @@ contributors:
 
 ---
 
-> ### {% icon warning %} This training material is for Galaxy users who routinely develop command line scripts as part of their work.
+> ### {% icon curriculum %} This training material is for Galaxy users who routinely develop command line scripts as part of their work.
 >
-> * This tutorial is designed for informaticians, developers and researchers working in Galaxy, who routinely develop their own analysis scripts using bash, Python, Perl, Rscript or something similar.
+> * This tutorial is for informaticians, developers and researchers routinely developing their own analysis scripts using bash, Python, Perl, Rscript or something similar.
 > * It shows a quick way to bridge the gap between a working command line script and installing a real tool that "wraps" that script as a tool in Galaxy.
-> * Galaxy users who *routinely use common scripting languages* may find the ToolFactory useful, particulary if they are new to Galaxy from other scientific disciplines and not yet familiar with manual tool development processes.
-> * The ToolFactory is a Galaxy tool controlled through the usual Galaxy tool interface. Command line scripting skills are needed to prepare the code for the ToolFactory to wrap in the generated tool.
-> * No explicit instruction about scripting is offered in this training. It is assumed that the reader is brings these skills.
+> * Users new to Galaxy from other scientific disciplines and not yet familiar with manual tool development processes may find uses for a tool generator.
+> * The ToolFactory is a Galaxy tool controlled through the usual Galaxy tool interface, but without a script, it is of little use.
+> * Command line scripting skills are needed to prepare the code for the ToolFactory to wrap in the generated tool.
+> * No explicit instruction about scripting is offered in this training. They are prerequisite skills.
 > * Readers will need to test and explore to find ways to use the ToolFactory for their work.
 > * This tutorial is introductory. It offers broad guidance on a tool. It is up to the user to adapt it to their own work.
 > * Experienced galaxy tool developers already have specialised tools and training to suit their needs so may not gain much from this material.
-{: .warning }
+{: .curriculum}
 
 
 
-> ### {% icon tip %} Brief note on tutorial design.
+> ### {% icon announcement %} Tutorial process overview - what to expect.
 >
-- This tutorial is suitable for Galaxy users who write code as part of their routine work.
-- It is in 3 parts.
-- The first part is all reading, with an optional demonstration video and a dissected `Hello World!` example
+- This tutorial for Galaxy users who write code as part of their routine work is in 3 parts.
+- The first part is all background reading, with an optional demonstration video and a dissected `Hello World!` example
 - It should help readers understand what the ToolFactory does so they can decide whether the training is relevant to their needs. A *sorting hat*.
 - After that it's all hands on.
-- The second part involves choosing how they would prefer to run the ToolFactory, installing it and importing the demonstrations in a sample history.
+- The second part involves choosing how to run the ToolFactory, installing it and importing the demonstrations in a sample history.
 - The third part offers some tips and suggestions for exploring the demonstration tools and introduces some useful features.
-- The sample tools are the core documentation. Hosting the ToolFactory on a public server is ill-advised, so an interactive tutorial is not possible.
-- This is for developers and when they see the examples, they will be able to figure it out if they want to use it.
-{: .tip}
+- The sample tools are the core documentation.
+- Hosting the ToolFactory on a public server is ill-advised, so an interactive tutorial is not possible.
+- When a developer examines the examples, they will quickly figure it out how it might be useful.
+{: .announcement}
 
 # 1. Tools, tool wrappers and the ToolFactory in Galaxy.
 {:.no_toc}
 
 
-## Tools make Galaxy useful and attractive to scientists.
+## Tools make Galaxy useful in almost any branch of data intensive science.
 {: .no_toc}
-Tools are the fundamental building blocks for analyses in Galaxy. Thousands are available in the project tool library. Tool execution is tightly constrained in that
-user supplied parameters and data inputs exposed on the tool form are the only things that can be changed before execution. Everything else is fixed. The project supports
-extensive software infrastructure for manually creating new tools including Planemo and the new Galaxy language server. These are complex and powerful with substantial
-learning curves but can be used to turn almost any command line software package into a tool.
 
-In contrast to normal tools, Galaxy Interactive Environments allow unconstrained scripting in a Galaxy environment. They are popular and useful for skilled researchers
+Tools are the fundamental building blocks for analyses in Galaxy. Thousands are available in the project tool library from many different kinds of science. Galaxy
+tools can be created from almost any Linux command line software packages or interpreter scripts. What happens
+at tool execution is decoupled from the framework itself, so the framework is agnostic to scientific discipline or coding language.
+This is one reason for rapid uptake in new data intensive scientific areas. All it takes is a set of discipline specific tools to bring a whole new community into Galaxy.
+
+Tool execution is tightly constrained in that
+user supplied parameters and data inputs exposed on the tool form are the only things that can be changed before execution. Everything else is fixed. This is ideal
+for non-programmer Galaxy users who rely on prepared tools for their work. Tools are utterly predictable to the point of being as reproducible as any complex
+computing component can be.
+
+## Galaxy Intereactive Environments (GIE)
+
+In contrast to normal tools, GIE allow unconstrained scripting in a Galaxy environment. They are popular and useful for skilled researchers
 and developers, because they allow code to run inside Galaxy that is not available in any existing tool. Notebooks can be shared and reused and can even run in
-workflows. They currently lack the formal reproducibility provided by dependency management built-in to real tools but the underlying code can be extracted, parameterised
-and made into a working command line script ready to be turned into a typical Galaxy tool.
+workflows. They do not currently take advantage of the formal reproducibility provided by dependency management built-in to real tools.
 
-## A bridge from scripts to tools
+If a tool that performs exactly the same functions as a GIE is needed, the code can be extracted and turned into a parameterised command line script.
+Any functional script can be turned into a typical Galaxy tool.
+
+## From scripts to tools
 {: .no_toc}
 
 Any command line script that run correctly with sample test data input files and parameter settings can potentially be turned into a Galaxy tool.
@@ -113,8 +124,11 @@ These may be derived from notebook scripts that have been consolidated and rewri
 in a shell using small data input files. Alternatively, skilled users can develop scripts and test them using small input data files on the command line
 without using Galaxy.
 
-No matter how it was created, once there is a working script and sample data, it may be possible to create a new Galaxy tool "wrapping" that script in a few minutes, using a
-special Galaxy tool that generates tools from scripts. This tutorial is designed to introduce that unusual tool.
+The project supports extensive software infrastructure for manually creating new tools including Planemo and the new Galaxy language server. These are complex and powerful with substantial
+learning curves but can be used to turn almost any command line software package into a tool.
+
+For those new to Galaxy, in many simple cases, it may be possible to generate a new tool "wrapping" that script in a few minutes, using a
+specialised Galaxy tool for developers that generates tools from scripts. This tutorial is designed to introduce that unusual tool.
 
 
 ## The ToolFactory generates new Galaxy tools.
@@ -123,15 +137,15 @@ special Galaxy tool that generates tools from scripts. This tutorial is designed
 The ToolFactory is an automated, form driven code generator.
 
 It runs as a typical Galaxy tool, except that it will only run for an administrative
-user. This is a minimal security precaution (see warnings below). Any scripting language interpreter supported by Conda can be used including bash, Python and Rscript.
+user. This is a minimal security precaution (see warnings below).
 
-It was developed for informaticians who need new "real" Galaxy tools for their users. Any user comfortable with scripting languages on a linux command
-line may find it useful if they ever need a real Galaxy tool that wraps a working script.
+It was developed for skilled programmers who need new "real" Galaxy tools for their own use or for users they support. Any user comfortable with scripting languages on a Linux command
+line may find it useful if they ever need a real Galaxy tool that wraps a working script. Shell utilities and scripting language interpreters supported by Conda can be used.
 
 Generated tools pass Planemo lint, and are functionally indistinguishable from equivalent manually written tools. They contain a test based on the test data provided
-at tool generation. Working examples using Rscript, Python, bash, Lisp, Perl and sed are provided and described below. If you are a scientist/programmer or informatician new to Galaxy
-and new to the dark arts of Galaxy tool building, this tutorial may be of help. It will show how to convert IE notebook or other scripts into real tools
-quickly *inside* Galaxy using a Galaxy tool.
+at tool generation. Trivial working examples using bash, Python, Rscript, Lisp, Prolog, Perl and sed are provided and described below. If you are a scientist/programmer or informatician new to Galaxy
+and new to the dark arts of Galaxy tool building, this tutorial may be of help. It introduces an automated way to convert any useful script into a toolshed ready tool,
+quickly *inside* Galaxy.
 
 
 > ### {% icon tip %} Note on alternatives to the ToolFactory:
@@ -163,7 +177,7 @@ The form collects all the information needed for a new Galaxy tool. It is long a
 a command line for the script when the generated tool runs. Other information such as the name and dependencies are needed to construct the relevant
 sections of the generated XML file in the toolshed archive. The ToolFactory form configured to generate the `Hello` example can be viewed below.
 
-> ### {% icon details %} ToolFactory form sections with annotation
+> ### {% icon details %} Annotated ToolFactory form that generates `Hello World`
 >>>![First part of the form](../../images/ToolFactory_hello1form.png)
 >
 > - **The first part of the form collects the new tool name and dependencies to be installed.**
@@ -279,14 +293,15 @@ worth some study. Text on the form is all in the XML and it all comes from the T
 {: .details}
 
 
-> ### {% icon tip %} If this is confusing...
+> ### {% icon requirements %} If this is confusing...
 >
-> If you are not yet familiar with the basics of Galaxy tools covered in the ![tool integration training material](http://planemo.readthedocs.io/en/latest/writing_standalone.html)
-, the example may seem confusing. You may gain more by reviewing the introductory part of that material, and then coming back here?
+> If you are not yet familiar with the basics of Galaxy tools covered in the
+> [tool integration training material](../tool-integration/slides.html), the example form and XML
+> will be confusing. You may gain more by reviewing the introductory part of that material, and then coming back here?
 > It's a lot to learn and it is complicated. While a form driven code generator can hide much of the complexity of generating the code,
 > the user must supply valid inputs for the code to be useful.
 >
-{: .tip}
+{: .requirements}
 
 
 ---
@@ -647,8 +662,7 @@ In practice, it's a flexible basis for generating many simple tools.
 >
 > - The ToolFactory has limited flexibility and works best for simple tools.
 > - Even then, the form becomes complicated as more parameters are added.
-> - Tools can have unlimited numbers of some items,
-> including input files, output files, citations and user parameters.
+> - Tools can have unlimited numbers of some items, including input files, output files, citations and user parameters.
 > - Each one has half a dozen metadata or text details. Galaxy form repeats are used for those.
 > - As more repeats are added, the Galaxy UI becomes increasingly unwieldy.
 > - In theory, the Toolfactory can potentially generate very complicated tools with large numbers if inputs, outputs and user modifiable parameters.
@@ -661,7 +675,7 @@ In practice, it's a flexible basis for generating many simple tools.
 
 Galaxy can be used as a tool development environment for users who can write their own scripts as shown in this process overview slide
 
-> ### {% icon details %} Overview of the ToolFactory development cycle process
+> ### {% icon galaxy-refresh %} The redo button is handy in the ToolFactory development cycle.
 >
 > - Start by confirming that your script correctly processes the sample inputs on the command line using the default parameters you will supply.
 > - Upload all the sample inputs needed for your script. These *must be in the history* where you are working when you start the Toolfactory or you will not be able to add them as inputs to the form - they are required so make sure they are available before you start.
@@ -674,7 +688,7 @@ Galaxy can be used as a tool development environment for users who can write the
 > - Galaxy can be used as an Integrated Development Environment for tools - clunky but oddly satisfying. Note this is distinct from debugging the script - that is not at all satisfying in Galaxy unless you like waiting for jobs to finish. A shell is much better for that.
 >
 >> ![Galaxy as an IDE for tools with the ToolFactory](../../images/ToolFactory_big_picture.png)
-{: .details}
+{: .galaxy-refresh}
 
 ---
 
@@ -995,6 +1009,146 @@ planemo lint $TOOLNAME >> $2
 >>
 >>```
 {: .details}
+
+
+#### Running Lisp and Prolog scripts in Galaxy.
+
+- Any interpreted language in Conda can be used, as long as it will take a command line script path or read from STDIN.
+- Trivial samples using Lisp and Prolog are included in the demonstration history.
+- They show how easy it is to use either of these as scripting languages in Galaxy for long running applications.
+- The Prolog tool has an inbuilt script.
+- Substitute the sample script for real code and add inputs, user-configurable parameters and outputs to produce a tool wrapping a Prolog script if you ever need one in Galaxy.
+- The Lisp tool will try to execute the selected input text file, hoping it contains a Lisp program.
+- This is a terrible idea for a public server and is shown only as a skeletal example of what is possible, not what is sensible.
+
+> ### {% icon details %} `Prolog` and `Lisp` demonstration tools
+> >```xml
+> ><tool name="prolog_demo" id="prolog_demo" version="0.01">
+> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
+> >  <!--Created by admin@galaxy.org at 04/04/2021 17:21:32 using the Galaxy Tool Factory.-->
+> >  <description>Runs a prolog script</description>
+> >  <requirements>
+> >    <requirement version="" type="package">swi-prolog</requirement>
+> >  </requirements>
+> >  <stdio>
+> >    <exit_code range="1:" level="fatal"/>
+> >  </stdio>
+> >  <version_command><![CDATA[echo "0.01"]]></version_command>
+> >  <command><![CDATA[swipl
+> >-q
+> >-g
+> >main
+> >-s
+> >
+> >$runme
+> >>
+> >$prolog_out]]></command>
+> >  <configfiles>
+> >    <configfile name="runme"><![CDATA[
+> >parent(pam,bob).
+> >parent(tom,bob).
+> >parent(tom,liz).
+> >parent(bob,ann).
+> >parent(bob,pat).
+> >parent(pat,jim).
+> >
+> >main :-
+> >    parent(X,jim),
+> >    format('~a is the parent of jim~n', [X]),
+> >    halt.
+> >]]></configfile>
+> >  </configfiles>
+> >  <inputs/>
+> >  <outputs>
+> >    <data name="prolog_out" format="txt" label="prolog_out" hidden="false"/>
+> >  </outputs>
+> >  <tests>
+> >    <test>
+> >      <output name="prolog_out" value="prolog_out_sample" compare="diff" lines_diff="0"/>
+> >    </test>
+> >  </tests>
+> >  <help><![CDATA[
+> >
+> >**What it Does**
+> >
+> >
+> >
+> >Prolog demonstration in the ToolFactory
+> >
+> >
+> >
+> >------
+> >
+> >
+> >Script::
+> >
+> >    parent(pam,bob).
+> >    parent(tom,bob).
+> >    parent(tom,liz).
+> >    parent(bob,ann).
+> >    parent(bob,pat).
+> >    parent(pat,jim).
+> >    main :-
+> >        parent(X,jim),
+> >        format('~a is the parent of jim~n', [X]),
+> >        halt.
+> >
+> >]]></help>
+> >  <citations>
+> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
+> >  </citations>
+> ></tool>
+> >```
+> >
+> > Lisp too!
+> > In this case, the tool takes a lisp script as input
+> >
+> > A lisp expression was typed into the upload tool text box and saved as hello_lisp.txt ```(write-line "Hello, ToolFactory does Lisp!")```.
+> > It or any other lisp script can be used as input to the SBCL Conda dependency.
+> >
+> >```xml
+> ><tool name="lisp_demo" id="lisp_demo" version="0.01">
+> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
+> >  <!--Created by admin@galaxy.org at 04/04/2021 16:38:47 using the Galaxy Tool Factory.-->
+> >  <description>Runs SBCL hello world demonstration</description>
+> >  <requirements>
+> >    <requirement version="" type="package">sbcl</requirement>
+> >  </requirements>
+> >  <stdio>
+> >    <exit_code range="1:" level="fatal"/>
+> >  </stdio>
+> >  <version_command><![CDATA[echo "0.01"]]></version_command>
+> >  <command><![CDATA[sbcl
+> >--script
+> >$script
+> >>
+> >$lisp_out]]></command>
+> >  <inputs>
+> >    <param optional="false" label="SBCL lisp script to execute" help="" format="txt" multiple="false" type="data" name="script" argument="--script"/>
+> >  </inputs>
+> >  <outputs>
+> >    <data name="lisp_out" format="txt" label="lisp_out" hidden="false"/>
+> >  </outputs>
+> >  <tests>
+> >    <test>
+> >      <output name="lisp_out" value="lisp_out_sample" compare="diff" lines_diff="0"/>
+> >      <param name="script" value="script_sample"/>
+> >    </test>
+> >  </tests>
+> >  <help><![CDATA[
+> >
+> >**What it Does**
+> >
+> >Lisp in the ToolFactory
+> >
+> > ]]></help>
+> >  <citations>
+> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
+> >  </citations>
+> ></tool>
+> >```
+{: .details}
+
 
 #### Command over-ride and test over-ride
 
