@@ -129,7 +129,7 @@ It was developed for informaticians who need new "real" Galaxy tools for their u
 line may find it useful if they ever need a real Galaxy tool that wraps a working script.
 
 Generated tools pass Planemo lint, and are functionally indistinguishable from equivalent manually written tools. They contain a test based on the test data provided
-at tool generation. Working examples using Rscript, Python, bash, perl and sed are provided and described below. If you are a scientist/programmer or informatician new to Galaxy
+at tool generation. Working examples using Rscript, Python, bash, Lisp, Perl and sed are provided and described below. If you are a scientist/programmer or informatician new to Galaxy
 and new to the dark arts of Galaxy tool building, this tutorial may be of help. It will show how to convert IE notebook or other scripts into real tools
 quickly *inside* Galaxy using a Galaxy tool.
 
