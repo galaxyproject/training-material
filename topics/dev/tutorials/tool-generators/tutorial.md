@@ -572,15 +572,16 @@ can with a local venv described above - but a little slower and isolated in a co
 - You can edit the form and regenerate a new tool with your changes incorporated.
 
 
-> ### {% icon comment %} Note!
+> ### {% icon announcement %} Note!
 > - This is the **first step** recommended after any of the installation options above until you are comfortable using the ToolFactory
-> - It will give access to some sample ToolFactory tools that can be used to learn how the ToolFactory works
+> - It provides access to the sample ToolFactory tools.
+> - They are the best way to learn how the ToolFactory works and how you might adapt the variations shown in your own work.
 > - It provides functional documentation and is not needed once you are comfortable using the ToolFactory.
 > - It is pre-installed in the [ToolFactory docker container](https://github.com/fubar2/toolfactory-galaxy-docker)
-{: .comment}
+{: .announcement}
 
 
-- Use this [zenodo link](https://zenodo.org/record/4542837/files/planemo_demohistory_jan23.tar.gz?download=1).
+- Use this [zenodo link](https://zenodo.org/record/4661849/files/TFdemo_history_april_4.tar.gz?download=1).
 - Copy it and paste it into the URL box on the screen for importing a remote history.
 - The link is also on the welcome page of the virtualenv Planemo installation described above.
 
