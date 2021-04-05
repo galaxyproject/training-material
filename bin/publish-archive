@@ -1,16 +1,7 @@
 #!/usr/bin/env bash
 
-# Adjust baseurl
-sed -i s"|^baseurl: .*|baseurl: '/archive/${TRAVIS_TAG}'|g" _config.yml
-sed -i s"|^github_repository_branch: .*|github_repository_branch: '${TRAVIS_TAG}'|g" _config.yml
-
-# Clean in order to remove anything from previous build
-make clean
-# And then rebuild with new version + updated _config.yml
-make build
-
 # Deploy
-aws s3 sync _site/training-material/ s3://galaxy-training/archive/${TRAVIS_TAG}/
+aws s3 sync _site/training-material/ s3://galaxy-training/archive/${SOURCE_TAG}/
 
 INDEX_PAGE_DIR=$(mktemp -d)
 INDEX="${INDEX_PAGE_DIR}/index.html"

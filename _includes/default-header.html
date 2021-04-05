@@ -16,12 +16,22 @@
                             {% icon hall-of-fame %} Contributors
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ site.github.repository_url }}" title="View on GitHub">
-                            {% icon github %} View on GitHub
-                        </a>
-                    </li>
                     {% include _includes/help.html %}
+
+                    {% include _includes/extras.html %}
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="{{site.baseurl}}/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
                 </ul>
             </div>
         </div>

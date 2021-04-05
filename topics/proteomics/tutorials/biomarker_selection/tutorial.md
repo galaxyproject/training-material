@@ -66,7 +66,7 @@ Criteria candidate biomarkers have to fulfill through this pipeline are:
 ![Overview of the pipeline described in this tutorial](../../images/pipeline.png "Pipeline of the tutorial, from Nguyen et al., as of in 2019.")
 
 
-{% include snippets/warning_results_may_vary.md %}
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 # Selection of tissue-specific proteins
 
@@ -77,7 +77,8 @@ We will start by selecting proteins associated with heart muscle tissue based on
 > ### {% icon hands_on %} Hands-on: Build tissue-specific expression dataset based on ImmunoHistoChemistry
 >
 > 1. **Create a new history** and give it a name.
->    {% include snippets/create_new_history.md %}
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. **Build tissue-specific expression dataset** {% icon tool %} with the following parameters:
 >    - *"Experimental data source (antibody- or RNAseq-based)"*: `Expression profiles based on immunohistochemistry`
@@ -194,7 +195,7 @@ rest of our pipeline.
 >
 > 3. Let's rename the 931 IDs dataset in "heart931" for simplification.
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 
@@ -251,7 +252,7 @@ Let's use **Filter by keywords and/or numerical value** {% icon tool %} to selec
 >
 > 2. Let's rename the filtered dataset **heart115**
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 
@@ -283,8 +284,8 @@ candidates to their corresponding UniProt accession number. The tool **ID Conver
 >   > ### Output
 >   > **ID converter**: In this dataset, 2 columns (columns 6 and 7, at the end) which contain
 >   > UniProt accession number and ID are added.
->   > Note: We used here the release "Homo sapiens 08/05/2019"; results can be slightly different 
->   > according to the version number of Uniprot. 
+>   > Note: We used here the release "Homo sapiens 08/05/2019"; results can be slightly different
+>   > according to the version number of Uniprot.
 >   {: .comment}
 {: .hands_on}
 

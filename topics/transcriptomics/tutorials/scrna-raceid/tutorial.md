@@ -1,6 +1,9 @@
 ---
 layout: tutorial_hands_on
-title: Downstream Single-cell RNA analysis with RaceID
+title: "Downstream Single-cell RNA analysis with RaceID"
+subtopic: single-cell
+priority: 6
+
 zenodo_link: 'https://zenodo.org/record/1511582'
 tags:
   - single-cell
@@ -22,9 +25,15 @@ requirements:
     type: "internal"
     topic_name: transcriptomics
     tutorials:
-        - scrna-plates-batches-barcodes
-        - scrna-umis
-        - scrna-preprocessing
+        - scrna-scater-qc
+
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: transcriptomics
+    tutorials:
+      - scrna-preprocessing-tenx
+
 
 time_estimation: 3H
 key_points:
@@ -36,6 +45,9 @@ contributors:
   - mtekman
   - astrovsky01
 
+gitter: Galaxy-Training-Network/galaxy-single-cell
+
+
 ---
 
 <!-- TODO: Subset analysis to validate prior cell labelling -->
@@ -46,7 +58,7 @@ contributors:
 
 The data provided here as part of this tutorial analyses single-cell RNA-seq data from a study published by [Grün et.al](https://doi.org/10.1016/j.stem.2016.05.010) in 2016. The data was used to cluster cells from *Lgr5*-positive intestinal stem cells of C57BL6/J mice, with the aim of discovering distinct cell sub-populations and deriving a lineage tree between them to find out how these sub-populations relate (or are derived from) one another.
 
-The input data consists of a single count matrix consisting of ~21,000 genes (rows) and ~400 cells (columns) in tidy data format, generated via [scRNA pre-processing methods]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.md %}) using the [CelSeq2 protocol]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}).
+The input data consists of a single count matrix consisting of ~21,000 genes (rows) and ~400 cells (columns) in tidy data format, generated via [scRNA pre-processing methods]({% link topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.md %}) using the [CelSeq2 protocol]({% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}).
 
 > ### {% icon comment %} Comment: Tidy Data
 > The [tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) convention prevalent amongst the R data analysis community assigns every value to a variable and an observation. The values are the number of reads which are assigned to a particular gene (a variable) that was measured within a specific cell (an observation).
@@ -82,8 +94,8 @@ First, let's setup our history and initial dataset.
 >
 > 1. Create a new history for this tutorial and name it "RaceID on scRNA"
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the file from [Zenodo](https://zenodo.org/record/1511582) or from the shared data library
 >
@@ -91,13 +103,13 @@ First, let's setup our history and initial dataset.
 >    https://zenodo.org/record/1511582/files/intestinalData.tsv
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the dataset to *"intestinal"*
 > 4. Check that the datatype is a tab-separated file
 >
->    {% include snippets/change_datatype.md datatype="tabular" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
 {: .hands_on}
 
@@ -130,12 +142,12 @@ Is each batch equally populated? We can investigate this ourselves by extracting
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Select first** {% icon tool %} with the following parameters:
+> 1. {% tool [Select first](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0) %}  with the following parameters:
 >    - {% icon param-file %} *"File to select"*: imported tabular file
 >    - *"Operation"*: `Keep first lines`
 >    - *"Number of lines"*: `1`
 >
-> 2. **Transpose** {% icon tool %}
+> 2. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0) %}
 >    - {% icon param-file %} *"Input tabular dataset"*: output of **Select first**
 >
 >    > ### {% icon question %} Questions
@@ -147,7 +159,7 @@ Is each batch equally populated? We can investigate this ourselves by extracting
 >    > {: .solution}
 >    {: .question}
 >
-> 1. **Text transformation** {% icon tool %} with the following parameters:
+> 1. {% tool [Text transformation](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1) %}  with the following parameters:
 >    - {% icon param-file %} *"File to process"*: output of **Transpose**
 >    - *"SED Program"*: `s/_[0-9]+//`
 >
@@ -163,7 +175,7 @@ Is each batch equally populated? We can investigate this ourselves by extracting
 >    > {: .solution}
 >    {: .question}
 >
-> 1. **Datamash** {% icon tool %} with the following parameters:
+> 1. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %}  with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: output of **Text transformation**
 >    - *"Group by fields"*: `1`
 >    - *"Input file has a header line"* : `Yes`
@@ -204,7 +216,7 @@ We can refine filtering thresholds by examining how much a histogram of our plot
 
 > ### {% icon hands_on %} Hands-on: Unique Cell Types
 >
-> 1. **Filtering, Normalisation, and Confounder Removal using RaceID** {% icon tool %} with the following parameters:
+> 1. {% tool [Initial processing using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_filtnormconf/raceid_filtnormconf/3.1) %}  with the following parameters:
 >    - {% icon param-file %} *"Count Matrix"*: `intestinal` (Input dataset)
 >    - In *"Filtering"*:
 >        - *"Min Transcripts"*: `3000`
@@ -219,7 +231,7 @@ The tool provides metrics on the library size and the number of detected feature
 
 > ### {% icon details %} Details: Library Size and Number of Features (Definitions)
 >
-> ![Library Size and Detected Genes]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_libsize.svg %} "Library Size and Number of Features")
+> ![Library Size and Detected Genes]({% link topics/transcriptomics/images/raceid_libsize.svg %} "Library Size and Number of Features")
 >
 > * **Library Size**: The total number of transcripts in a cell, or a column sum. *The minimum threshold for this can be set by "Min Transcripts" (= 3000)*.
 > * **Gene Transcripts**: The total number of transcripts for a gene, or a row sum.
@@ -235,7 +247,7 @@ The tool provides metrics on the library size and the number of detected feature
 
 Four histograms are generated with the top line giving the raw expression data fed into the tool, and the bottom line giving the filtered data (cells with at least 3,000 transcripts in total and genes with at least 5 transcripts in at least 5 cells).
 
-![Histograms of raw and filtered data]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_filter_plots.png %} "RaceID Histograms of raw and filtered data")
+![Histograms of raw and filtered data]({% link topics/transcriptomics/images/raceid_filter_plots.png %} "RaceID Histograms of raw and filtered data")
 
 
 
@@ -266,7 +278,7 @@ Four histograms are generated with the top line giving the raw expression data f
 
 > ### {%icon comment %} Comment: Choosing Filtering Thresholds
 >
-> The minimum total filtering threshold of 3000 chosen for this dataset is derived from analysing the *Cross-Contamination Plots* from the [Pre-processing of Single-Cell RNA Data]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.md %}).
+> The minimum total filtering threshold of 3000 chosen for this dataset is derived from analysing the *Cross-Contamination Plots* from the [Pre-processing of Single-Cell RNA Data]({% link topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.md %}).
 >
 > This threshold is dependent primarily on the capture efficiency of the cells that were sequenced, with some cell types being easier to capture than others. For example, neuron cells would have a lower filtering threshold of ~1500 compared to the ~3000 used for hematopoietic cells.
 >
@@ -292,7 +304,7 @@ Four histograms are generated with the top line giving the raw expression data f
 >
 > > ### {% icon solution %} Solution
 > >
-> > The answer to the first two questions can be seen in log file generated **Filtering, Normalisation, and Confounder Removal using RaceID**
+> > The answer to the first two questions can be seen in log file generated **Initial processing using RaceID**
 > >
 > > 1. 287 cells remain (66%)
 > > 2. 2089 genes remain (10%)
@@ -319,7 +331,7 @@ The effectiveness of the clustering relies on the normalisation. The ideal metho
 
 ## Biological Variation
 
-![Sources of variation]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_cellcycle.svg %} "Sources of unwanted biological variation: (Left) Transcriptional Bursting, and (Right) Cell-cycle Variation")
+![Sources of variation]({% link topics/transcriptomics/images/raceid_cellcycle.svg %} "Sources of unwanted biological variation: (Left) Transcriptional Bursting, and (Right) Cell-cycle Variation")
 
 Transcriptional bursting is a stochastic model for the transcription process in a cell, where transcription does not occur as a smooth or continuous process but occurs in spontaneous and discrete 'bursts' thought to be only loosely associated with chromatin conformation/availability. It is an effect that is not seen in bulk RNA-seq due to the smoothing effect of measuring average gene expression across a tissue. The effect is more pronounced in single-cell and is hard to model against.
 
@@ -328,14 +340,14 @@ On the other hand, cell-cycle variation is well defined and can be modelled agai
 
 ## Technical Variation
 
-![Sources of variation]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_technical_variation.svg %} "Sources of unwanted technical variation")
+![Sources of variation]({% link topics/transcriptomics/images/raceid_technical_variation.svg %} "Sources of unwanted technical variation")
 
 Technical variation appears in three main forms: *Library size variation*, *Amplification bias*, and *Dropout events*.
 
 > ### {% icon details %} Details: Technical Variation
 > 1. **Library size variation** occurs where two cells of the same cell type may produce a different amount of total transcripts than one another (e.g. due to cell-cycle effects, or differing capture efficiencies), but have a similar *proportion* of transcripts for specific genes. For example, a neural cell with 10 counts of SOX2 and a library size of 100 and one with 20 counts and a library size of 200 have the same proportion of SOX2. The two cells have different library sizes, but harbour the same expression for that gene because they are of the same cell type.
 >
-> 1. **Amplification bias** stems from an uneven amplification of certain transcripts of a cell over others, giving a false number of reads for the number of mRNA molecules actually observed in the cell. Unique Molecular Identifiers can significantly reduce this bias, and are covered more extensively in the [*Understanding Barcodes*]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on.
+> 1. **Amplification bias** stems from an uneven amplification of certain transcripts of a cell over others, giving a false number of reads for the number of mRNA molecules actually observed in the cell. Unique Molecular Identifiers can significantly reduce this bias, and are covered more extensively in the [*Understanding Barcodes*]({% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on.
 >
 > 1. **Dropout events** are the zero counts that are prevalent in the data due to the reduced sequencing sensitivity in detecting reads, which yields many false negatives in the detection of genes, often resulting in over 80% of the count values in the count matrix being zero. A major point to take into account is that some of these zeroes are *real* (i.e. no transcripts of that gene were detected in that cell) and some of these are *false* (i.e. the transcripts were never captured due to the low sequencing depth). Modelling this duality in the data and mitigating against it is one of the biggest challenges of normalising single-cell data.
 >
@@ -351,8 +363,8 @@ Here we assume that there is no unwanted technical or biological variability in 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Clustering using RaceID** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input RaceID RDS"*: `outrdat` (output of **Filtering, Normalisation, and Confounder Removal using RaceID** {% icon tool %})
+> 1. {% tool [Clustering using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_clustering/raceid_clustering/3.1) %}  with the following parameters:
+>    - {% icon param-file %} *"Input RaceID RDS"*: `outrdat` (output of **Initial processing using RaceID** {% icon tool %})
 >    - In *"Clustering"*:
 >        - *"Use Defaults?"*: `Yes`
 >    - In *"Outliers"*:
@@ -369,7 +381,7 @@ Here we assume that there is no unwanted technical or biological variability in 
 > In order to perform clustering, the proximity of cells to one another are first defined by a distance metric
 > such as [Euclidean distance or other](https://en.wikipedia.org/wiki/Metric_(mathematics)).
 >
-> ![Distances]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_distance.svg %} "Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)")
+> ![Distances]({% link topics/transcriptomics/images/raceid_distance.svg %} "Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)")
 >
 > The clustering then tries to find groupings of cells using this distance matrix.
 >
@@ -391,7 +403,7 @@ Here we assume that there is no unwanted technical or biological variability in 
 
 The first three plots in the PDF report tell us about the stability/reliability of our clusters, and are more important indicators for the quality of our clustering than any of the resultant graph projections, such as PCA or tSNE.
 
-![Stability Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_sat_jacc.png %} "RaceID Saturation and Jaccard Distance Plots")
+![Stability Plots]({% link topics/transcriptomics/images/raceid_sat_jacc.png %} "RaceID Saturation and Jaccard Distance Plots")
 
 * (Top-Left) Dispersion within each cluster for given K values, with mean change in dispersion for said K value overlayed.
 
@@ -417,7 +429,7 @@ The first three plots in the PDF report tell us about the stability/reliability 
 >
 > In the case of single-cell data, sets are defined as the cells contained within a given cluster, and the Jaccard similarity score provides a quantitative measure for how distinct a given cluster is, based on its similarity to other sets.
 >
-> ![Jaccard]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_jaccard.svg %} "Example Jaccard Distance calculation")
+> ![Jaccard]({% link topics/transcriptomics/images/raceid_jaccard.svg %} "Example Jaccard Distance calculation")
 >
 {: .details}
 
@@ -433,7 +445,7 @@ Outlier detection attempts to refine the initially detected clusters to find sma
 The next three plots attempts to do this by describing the variation of the gene expression, given by; a Background plot, a Sensitivity plot, and an Outlier probability plot.
 
 
-![Gene Expression Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_gexpr.png %} "RaceID Gene Expression Plots")
+![Gene Expression Plots]({% link topics/transcriptomics/images/raceid_gexpr.png %} "RaceID Gene Expression Plots")
 
 
 * (Top-Left) Outlier identification via background model based on distribution of transcript counts within a cluster.
@@ -532,7 +544,7 @@ The remainder of the plots are heatmaps derived from k-medoids clustering, showi
 {: .details}
 
 
-![Heatmaps]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_heatmaps.png %} "RaceID Heatmaps for initial and final clusters")
+![Heatmaps]({% link topics/transcriptomics/images/raceid_heatmaps.png %} "RaceID Heatmaps for initial and final clusters")
 
 The difference shown between the initial and final clustering is sometimes subtle depending which of the clusters the new clusters have been extracted from.
 
@@ -553,7 +565,7 @@ The difference shown between the initial and final clustering is sometimes subtl
 
 All the following plots are heatmaps for the individual genes expressed in each cluster.
 
-![Gene Heatmaps]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_geneheatmaps.png %} "RaceID Individual (final) heatmaps for the top 10 significant genes in clusters 1 to 4")
+![Gene Heatmaps]({% link topics/transcriptomics/images/raceid_geneheatmaps.png %} "RaceID Individual (final) heatmaps for the top 10 significant genes in clusters 1 to 4")
 
 The top 10 defining genes from each cluster (above only `c1`-`c4` are shown) give us an idea of how unique these genes are to the cluster.
 
@@ -580,7 +592,7 @@ The previous section produced plots that spoke about the quality of the clusteri
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Cluster Inspection using RaceID** {% icon tool %} with the following parameters:
+> 1. {% tool [Cluster Inspection using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/3.1) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RaceID RDS"*: `outrdat` (output of **Clustering using RaceID** {% icon tool %})
 >    - *"Plot All Clusters?"*: `Yes`
 >    - *"Perform Subset Analysis?"*: `No`
@@ -597,7 +609,7 @@ The previous section produced plots that spoke about the quality of the clusteri
 The main issue with visualising this data is that as before, we have C cells that serve as our observations which are described by G genes. Representing G dimensional data in the 2 or 3 dimensional plots that we are more familiar falls under the problem of [*dimensional reduction*](https://en.wikipedia.org/wiki/Dimensionality_reduction).
 
 > ### {% icon details %} Details: Dimension Reduction
-> ![Dim red]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_dimred.svg %} "Reducing a set of 4 observations from 3D to 2D space, whilst approximating the 3D relationships")
+> ![Dim red]({% link topics/transcriptomics/images/raceid_dimred.svg %} "Reducing a set of 4 observations from 3D to 2D space, whilst approximating the 3D relationships")
 >
 > Dimension reduction aims to preserve the distances and relationship of the higher dimensional (G-dimensional) data in a lower dimensional (usually 2D) space.
 >
@@ -621,7 +633,7 @@ Preserving these higher dimensional distances in lower dimensional space is a co
 
 **RaceID** makes use of tSNE and force-directed (Fruchterman-Reingold) graph layouts to space the clusters in a visually meaningful manner to show the separation and relative proximity of clusters to one another.
 
-![Clusters]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_tsne_fr.png %} "RaceID Initial and Final clusters using tSNE and F-R projections")
+![Clusters]({% link topics/transcriptomics/images/raceid_tsne_fr.png %} "RaceID Initial and Final clusters using tSNE and F-R projections")
 
 The figure above displays the initial (left top/bottom) clusters detected during the clustering stage, as well as the final (right top/bottom) clusters determined during the outlier detection stage, projected using tSNE and Fruchterman-Rheingold graph layouts.
 
@@ -649,13 +661,13 @@ To answer this question, we must understand the nature of the data which *does* 
 
 > ### {% icon details %} Details: Continuous Phenotypes vs Discrete Clustering Methods
 >
-> ![Continuous Phenotypes]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_contpheno.svg %} "The continuous phenotypes along a red blood cell development trajectory")
+> ![Continuous Phenotypes]({% link topics/transcriptomics/images/raceid_contpheno.svg %} "The continuous phenotypes along a red blood cell development trajectory")
 >
 > The gene expression profile for Reticulocytes is distinct from the gene expression profile for the mature Red Blood Cells that they will become, but the cells that are actually undergoing this short-lived transition from Reticulocyte to Red Blood Cell will not fit neatly into the two aforementioned gene expression profiles, instead having their own profile which lies somewhere in between.
 >
 > As a result it is often false to think of cell clustering as an exercise in classification, but better to be thought of as a desire to find the relatedness between expression profiles. A helpful visual example of this is to not think of assigning cells to different disconnected 'peaks' of expression, but to place cells along an expression peak landscape that describes not only which expression profile they resemble the most, but along which gradient (or development trajectory) they adhere to, allowing transient cell types to be better assigned.
 >
-> ![Discrete vs Continuous]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_mountains.svg %} "(Above) Cells assigned to discrete profiles, compared to (Below) Cells placed along a continuous expression profile landscape.")
+> ![Discrete vs Continuous]({% link topics/transcriptomics/images/raceid_mountains.svg %} "(Above) Cells assigned to discrete profiles, compared to (Below) Cells placed along a continuous expression profile landscape.")
 >
 > The clustering of cells with single-cell RNA-seq data, is therefore not a classification problem, but a *manifold* detection one, where the manifold ultimately describes the topology of the data, and allows us to see relatedness between clusters.
 >
@@ -688,7 +700,7 @@ Here we will compare how the cells in cluster 1 are differentially expressed com
 
 > ### {% icon hands_on %} Hands-on: MA plot
 >
-> 1. **Cluster Inspection using RaceID** {% icon tool %} with the following parameters:
+> 1. {% tool [Cluster Inspection using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/3.1) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RaceID RDS"*: `outrdat` (output of **Clustering using RaceID** {% icon tool %})
 >    - *"Plot All Clusters?"*: `No`
 >    - *"Perform Subset Analysis?"*: `No`
@@ -706,7 +718,7 @@ Here we will compare how the cells in cluster 1 are differentially expressed com
 >
 {: .hands_on}
 
-![Cluster Inspection of Cells]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_clustinspect_cells.png %} "RaceID MA plot of cells in cluster 1 and cluster 3")
+![Cluster Inspection of Cells]({% link topics/transcriptomics/images/raceid_clustinspect_cells.png %} "RaceID MA plot of cells in cluster 1 and cluster 3")
 
 The genes shown as grey dots are not labelled because they are not so differentially expressed between the two clusters, but the genes as labelled red dots on the fringes do display significant variability between the clusters.
 
@@ -735,7 +747,7 @@ Here we will look at the combined expression of *Gstm3*, *St3gal4*, and *Gna11* 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Cluster Inspection using RaceID** {% icon tool %} with the following parameters:
+> 1. {% tool [Cluster Inspection using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/3.1) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RaceID RDS"*: `outrdat` (output of **Clustering using RaceID** {% icon tool %})
 >    - *"Plot All Clusters?"*: `No`
 >    - *"Perform Subset Analysis?"*: `No`
@@ -747,7 +759,7 @@ Here we will look at the combined expression of *Gstm3*, *St3gal4*, and *Gna11* 
 {: .hands_on}
 
 
-![Expression Plot]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_goi.png %} "RaceID Expression plot of genes of interest across different cells.")
+![Expression Plot]({% link topics/transcriptomics/images/raceid_goi.png %} "RaceID Expression plot of genes of interest across different cells.")
 
 The above figure shows where the combined expression of *Gstm3*, *St3gal4*, and *Gna11* is centred, which from the tSNE plot (top-left) appears to be concentrated in cluster 6. The log expression plot (top-right) changes the scale so that lesser expression in other clusters is still visible. The bottom images provide the same information but using the F-R layout.
 
@@ -758,7 +770,7 @@ The above figure shows where the combined expression of *Gstm3*, *St3gal4*, and 
 >
 > Are these genes (the top 3 DE genes from cluster 1) expressed where we expect them to be?
 >
-> {% include snippets/use_scratchbook.md %}
+> {% snippet faqs/galaxy/features_scratchbook.md %}
 >
 >
 > > ### {% icon solution %} Solution
@@ -782,7 +794,7 @@ It was [mentioned previously](#details-details-continuous-phenotypes-vs-discrete
 
 > ### {% icon hands_on %} Hands-on
 >
-> 1. **Lineage computation using StemID** {% icon tool %} with the following parameters:
+> 1. {% tool [Lineage computation using StemID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_trajectory/raceid_trajectory/3.1) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RDS"*: `outrdat` (output of **Clustering using RaceID** {% icon tool %})
 >    - In *"Compute transcriptome entropy of each cell"*:
 >        - *"Use Defaults?"*: `Yes`
@@ -804,7 +816,7 @@ It was [mentioned previously](#details-details-continuous-phenotypes-vs-discrete
 >
 {: .hands_on}
 
-![Lineage Computation Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_lineage.png %} "StemID Lineage Tree and Branches of significance.")
+![Lineage Computation Plots]({% link topics/transcriptomics/images/raceid_stemid_lineage.png %} "StemID Lineage Tree and Branches of significance.")
 
 * (Top-Left) Minimum spanning tree showing most likely connections between clusters
 
@@ -867,7 +879,7 @@ It was [mentioned previously](#details-details-continuous-phenotypes-vs-discrete
 To see how the link score is actually calculated, the image below provides some context:
 
 
-![Link scores]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_linkscores.png %} "StemID Link scores between branches.")
+![Link scores]({% link topics/transcriptomics/images/raceid_stemid_linkscores.png %} "StemID Link scores between branches.")
 
 The top of the three charts shows the number of links above a threshold that each cluster exhibits to another. The more links a cluster has, the more evidence that the cluster describes a progenitor cell type that gives rise to other more mature types.
 
@@ -902,7 +914,7 @@ The bottom chart is simply the top chart multiplied by the middle chart, which a
 {: .question}
 
 <!--
-![Other link scores]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_other.png %} "Other link scores between branches.")
+![Other link scores]({% link topics/transcriptomics/images/raceid_stemid_other.png %} "Other link scores between branches.")
 -->
 
 In a similar vein to how clusters were explored individually in RaceID, we can also explore individual branches of the lineage tree to see how some genes are up or down regulated.
@@ -914,7 +926,7 @@ Here we will explore one branching point of interest; `c3` giving rise to `c1` a
 
 > ### {% icon hands_on %} Hands-on: Comparing trajectory paths 3 to 1, and 3 to 5
 >
-> 1. **Lineage Branch Analysis using StemID** {% icon tool %} with the following parameters:
+> 1. {% tool [Lineage Branch Analysis using StemID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspecttrajectory/raceid_inspecttrajectory/3.1) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RDS"*: `outrdat` (output of **Lineage computation using StemID** {% icon tool %})
 >    - In *"StemID Branch Link Examine"*:
 >        - *"Perform StemID?"*: `Yes`
@@ -932,7 +944,7 @@ Here we will explore one branching point of interest; `c3` giving rise to `c1` a
 >
 {: .hands_on}
 
-![Heatmap Cells]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_cells.png %} "(Top) StemID Minimal spanning tree of all cells projected along the links between clusters. (Bottom) StemID Heatmap of Cluster 3 cells compared to other clusters.")
+![Heatmap Cells]({% link topics/transcriptomics/images/raceid_stemid_cells.png %} "(Top) StemID Minimal spanning tree of all cells projected along the links between clusters. (Bottom) StemID Heatmap of Cluster 3 cells compared to other clusters.")
 
 The vertical names along the heatmap are the cells from `c3` being compared to all other clusters.
 
@@ -984,7 +996,7 @@ Here we will see if we can see any pseudo-time dynamics taking place between the
 
 > ### {% icon hands_on %} Hands-on
 >
-> 1. **Lineage Branch Analysis using StemID** {% icon tool %} with the following parameters:
+> 1. {% tool [Lineage Branch Analysis using StemID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspecttrajectory/raceid_inspecttrajectory/3.1) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RDS"*: `outrdat` (output of **Lineage computation using StemID** {% icon tool %})
 >    - In *"StemID Branch Link Examine"*:
 >        - *"Perform StemID?"*: `No`
@@ -996,7 +1008,7 @@ Here we will see if we can see any pseudo-time dynamics taking place between the
 >
 {: .hands_on}
 
-![Heatmap FateID]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_fateid.png %} "FateID Heatmap")
+![Heatmap FateID]({% link topics/transcriptomics/images/raceid_fateid.png %} "FateID Heatmap")
 
 The heatmaps generated depict the same data, but at different "heat" scales to better colourise the map. The genes here are not genes, but are gene expression modules, which can be interpreted as gene motifs that are present in both `c1` and `c5`, but at different levels of expression.
 
@@ -1021,6 +1033,8 @@ In this tutorial we have learned to filter, normalise, and cluster cells from he
 
 The steps of this workflow can be found in the related workflow.
 
-![Workflow]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_workflow.png %} "RaceID Workflow")
+![Workflow]({% link topics/transcriptomics/images/raceid_workflow.png %} "RaceID Workflow")
 
 All steps of the workflow have produced an R Data object (RDS) that serves as an input into the next step, but these objects can also be loaded into an R environment and analysed using any desired library.
+
+This tutorial is part of the https://singlecell.usegalaxy.eu portal ({% cite tekman2020single %}).

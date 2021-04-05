@@ -57,8 +57,8 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >
 > 1. Create a new history for this tutorial and give it a proper name
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import `GSM461178_untreat_paired_subset_1.fastq` from [Zenodo](https://zenodo.org/record/61771) or from the data library (ask your instructor)
 >
@@ -66,14 +66,14 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >
 > 4. Rename the file to `reads_1`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="reads_1" %}
 >
 {: .hands_on}
 
@@ -608,7 +608,7 @@ Paired-end sequencing generates 2 FASTQ files:
 - One file with the sequences corresponding to **forward** orientation of all the fragments
 - One file with the sequences corresponding to **reverse** orientation of all the fragments
 
-Usually we recognize these two files which belong to one sample by the name which has the same identifier for the reads but a different extension, e.g. `sampleA_R1.fastq` for the forward reads and `sampleA_R2.fastq` for the reverse reads. It can also be `_r` or `_1` for the forward reads and `_f` or `_2` for the reverse reads.
+Usually we recognize these two files which belong to one sample by the name which has the same identifier for the reads but a different extension, e.g. `sampleA_R1.fastq` for the forward reads and `sampleA_R2.fastq` for the reverse reads. It can also be `_f` or `_1` for the forward reads and `_r` or `_2` for the reverse reads.
 
 The data we analyzed in the previous step was not single-end data but the forward reads of paired-end data. We will now do the quality control on the reverse reads.
 
@@ -629,7 +629,7 @@ The data we analyzed in the previous step was not single-end data but the forwar
 >           - *"Type of FastQC output?"*: `Raw data`
 >           - {% icon param-files %} *"FastQC output"*: `Raw data` files (output of both **FastQC** {% icon tool %})
 >
->    {% include snippets/select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
 > 5. Inspect the webpage output from MultiQC
 >
@@ -686,7 +686,7 @@ After trimming, reverse reads will be shorter because of their quality and then 
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > 1. 44,164 bp (`Quality-trimmed:`) for the forward reads and 138,638 bp for the reverse reads.
->    > > 2. 1,376 sequences have been removed because at least one read was shorter than the length cutoff (334 when only the forward reads were analyzed).
+>    > > 2. 1,376 sequences have been removed because at least one read was shorter than the length cutoff (322 when only the forward reads were analyzed).
 >    > {: .solution }
 >    {: .question}
 >

@@ -3,7 +3,7 @@
 > 1. **JBrowse** {% icon tool %} genome browser, with the following parameters:
 >    - *"Reference genome to display"*: Use a built-in genome
 >       - *"Select a reference genome"*: `mm10`
->    - *"Produce Standalone Instance"*: Yes
+>    - *"JBrowse-in-Galaxy Action"*: `New JBrowse Instance`
 >    - *"Insert Track Group"*:
 >       - *"Insert Annotation Track"*:
 >          - *"Track Type"*: BAM Pileups

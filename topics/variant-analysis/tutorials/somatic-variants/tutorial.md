@@ -21,7 +21,7 @@ objectives:
 time_estimation: 7h
 key_points:
 - Follow best practices for read mapping, quality control and mapped reads postprocessing
-  to minimze false-positive variant calls.
+  to minimize false-positive variant calls.
 - Use a dedicated somatic variant caller to call variants and to classify them into
   somatic, germline and LOH event variants on statistical grounds.
 - Annotations and queries based on variant properties add relevance to variant and
@@ -97,8 +97,8 @@ downsampled though to include only the reads from human chromosomes 5, 12 and
 >
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the following four files from
 >    [Zenodo](https://zenodo.org/record/2582555):
@@ -117,14 +117,14 @@ downsampled though to include only the reads from human chromosomes 5, 12 and
 >    through a shared data library (your instructor may tell you so), in which
 >    case you may prefer to import the data directly from there.
 >
->    {% include snippets/import_via_link.md format="fastqsanger.gz" %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md format="fastqsanger.gz" %}
 >
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Check that all newly created datasets in your history have their datatypes assigned 
 >    correctly, and fix any missing or wrong datatype assignment
 >
->    {% include snippets/change_datatype.md datatype="fastqsanger.gz" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastqsanger.gz" %}
 >
 > 4. Rename the datasets and add appropriate tags to them
 >
@@ -132,7 +132,7 @@ downsampled though to include only the reads from human chromosomes 5, 12 and
 >    address as the dataset name, which you will likely want to shorten to
 >    just the file names.
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 >    Large parts of the analysis in this tutorial will consist of
 >    identical steps performed on the normal and on the tumor tissue data
@@ -144,7 +144,7 @@ downsampled though to include only the reads from human chromosomes 5, 12 and
 >    dataset, that tag will automatically propagate to any new dataset
 >    derived from the tagged dataset.
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 >    Before starting our analysis it is, thus, a good idea to tag the two
 >    fastq datasets representing the normal tissue with, *e.g.*, `#normal`
@@ -195,8 +195,8 @@ a read provide evidence for is, of course, a prerequisite for variant calling.
 > ### {% icon comment %} More on quality control and mapping
 > If you would like to explore the topics of quality control and read mapping
 > in detail, you should take a look at the separate
-> [Quality Control]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
-> and [Mapping]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/mapping/tutorial.md %})
+> [Quality Control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
+> and [Mapping]({% link topics/sequence-analysis/tutorials/mapping/tutorial.md %})
 > tutorials.
 > Here, we will only illustrate the concrete steps necessary for quality
 > control and read mapping of our particular datasets.
@@ -205,16 +205,16 @@ a read provide evidence for is, of course, a prerequisite for variant calling.
 ## Quality control
 
 > ### {% icon hands_on %} Hands-on: Quality control of the input datasets
-> 1. Run **FastQC** {% icon tool %} on each of your four fastq datasets
+> 1. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} on each of your four fastq datasets
 >       - {% icon param-files %} *"Short read data from your current history"*: all 4 FASTQ  datasets selected with **Multiple datasets**
 >
->    {% include snippets/select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
 >    When you start this job, eight new datasets (one with the calculated raw
 >    data, another one with an html report of the findings for each input
 >    dataset) will get added to your history.
 >
-> 2. Use **MultiQC** {% icon tool %} to aggregate the raw **FastQC** data of all four input datasets into one report
+> 2. Use {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %} to aggregate the raw **FastQC** data of all four input datasets into one report
 >      - In *"Results"*
 >        - *"Which tool was used generate logs?"*: `FastQC`
 >        - In *"FastQC output"*
@@ -262,7 +262,7 @@ quality already, we will apply read trimming and filtering to see if we can
 improve things still a bit, but also to demonstrate the general concept.
 
 > ### {% icon hands_on %} Hands-on: Read trimming and filtering of the normal tissue reads
-> 1. **Trimmomatic** {% icon tool %} to trim and filter the normal tissue reads
+> 1. Run {% tool [Trimmomatic](toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5) %} to trim and filter the normal tissue reads
 >    - *"Single-end or paired-end reads?"*: `Paired-end (two separate
 >      input files)`
 >      
@@ -337,7 +337,7 @@ Running this job will generate four output datasets:
 {: .hands_on}
 
 > ### {% icon hands_on %} Exercise: Quality control of the polished datasets
-> Use **FastQC** {% icon tool %} and **MultiQC** {% icon tool %} like before,
+> Use {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} and {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %} like before,
 > but using the four trimmed datasets produced by Trimmomatic as input.
 >
 >    > ### {% icon question %} Questions
@@ -357,7 +357,7 @@ Running this job will generate four output datasets:
 ## Read Mapping
 
 > ### {% icon hands_on %} Hands-on: Read Mapping
-> 1. **Map with BWA-MEM** {% icon tool %} to map the reads from the **normal tissue** sample to the reference genome
+> 1. Use {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} to map the reads from the **normal tissue** sample to the reference genome
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a built-in genome index`
 >        - *"Using reference genome"*: `Human: hg19` (or a similarly named option)
 > 
@@ -390,7 +390,7 @@ Running this job will generate four output datasets:
 >    > biological sample.
 >    {: .comment}
 >
-> 2. **Map with BWA-MEM** {% icon tool %} to map the reads from the **tumor tissue** sample,
+> 2. Use {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} to map the reads from the **tumor tissue** sample,
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a built-in genome index`
 >        - *"Using reference genome"*: `Human: hg19` (or a similarly named option)
 >
@@ -425,7 +425,7 @@ and for which the mate read has also been mapped:
 
 > ### {% icon hands_on %} Hands-on: Filtering for mapping status and quality
 >
-> 1. **Filter BAM datasets on a variety of attributes** {% icon tool %} with the following parameters:
+> 1. Run {% tool [Filter BAM datasets on a variety of attributes](toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1) %} with the following parameters:
 >   - {% icon param-files %} *"BAM dataset(s) to filter"*: mapped reads
 >     datasets from the normal *and* the tumor tissue data, outputs of
 >     **Map with BWA-MEM** {% icon tool %}
@@ -434,7 +434,7 @@ and for which the mate read has also been mapped:
 >       - In *"Filter"*:
 >         - In *"1: Filter"*:
 >           - *"Select BAM property to filter on"*: `mapQuality`
->             - *"Filter on read mapping quality (phred scale)"*: `1`
+>             - *"Filter on read mapping quality (phred scale)"*: `>=1`
 >         - In *"2: Filter"*:
 >           - *"Select BAM property to filter on"*: `isMapped`
 >             - *"Selected mapped reads"*: `Yes`
@@ -480,7 +480,7 @@ This will result in two new datasets, one for each of the normal and tumor data.
 
 > ### {% icon hands_on %} Hands-on: Remove duplicates
 >
-> 1. **RmDup** {% icon tool %} with the following parameters:
+> 1. Run {% tool [RmDup](toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1) %} with the following parameters:
 >   - {% icon param-files %} *"BAM file"*: filtered reads datasets from
 >     the normal *and* the tumor tissue data; the outputs of
 >     **Filter SAM or BAM**
@@ -496,14 +496,14 @@ tumor data.
 
 > ### {% icon hands_on %} Hands-on: Left-align
 >
-> 1. **BamLeftAlign** {% icon tool %} with the following parameters:
+> 1. Run {% tool [BamLeftAlign](toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.1) %} with the following parameters:
 >    - *"Choose the source for the reference genome"*: `Locally cached`
 >      - {% icon param-files %} *"BAM dataset to re-align"*: your
 >        filtered and deduplicated reads datasets from the normal *and* the tumor
 >        tissue data; the outputs of **RmDup**
 >      - *"Using reference genome"*: `Human: hg19` (or a similarly
 >        named choice)
->   - *"Maximum number of iterations"*: `5`
+>    - *"Maximum number of iterations"*: `5`
 >
 > > ### {% icon comment %} Using the imported `hg19` sequence
 > > If you have imported the `hg19` sequence as a fasta dataset into your
@@ -519,7 +519,7 @@ As before, this will generate two new datasets, one for each of the normal and t
 
 > ### {% icon hands_on %} Hands-on: Recalibrate read quality scores
 >
-> 1. **CalMD** {% icon tool %} with the following parameters:
+> 1. Run {% tool [CalMD](toolshed.g2.bx.psu.edu/repos/devteam/samtools_calmd/samtools_calmd/2.0.2) %} with the following parameters:
 >    - {% icon param-files %} *"BAM file to recalculate"*: the left-aligned
 >      datasets from the normal and the tumor tissue data; the outputs of
 >      **BamLeftAlign** {% icon tool %}
@@ -586,7 +586,7 @@ To remove such reads from the data:
 
 > ### {% icon hands_on %} Hands-on: Eliminating reads with undefined mapping quality
 >
-> 1. **Filter BAM datasets on a variety of attributes** {% icon tool %} with the following parameters:
+> 1. Run {% tool [Filter BAM datasets on a variety of attributes](toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1) %} with the following parameters:
 >   - {% icon param-files %} *"BAM dataset(s) to filter"*: the recalibrated
 >     datasets from the normal and the tumor tissue data; the outputs of
 >     **CalMD** {% icon tool %}
@@ -614,7 +614,7 @@ somatic variant calling that:
 
 > ### {% icon hands_on %} Hands-on: Variant calling and classification
 >
-> 1. **VarScan somatic** {% icon tool %} with the following parameters:
+> 1. Run {% tool [VarScan somatic](toolshed.g2.bx.psu.edu/repos/iuc/varscan_somatic/varscan_somatic/2.4.3.6) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in
 >   genome?"*: `Use a built-in genome`
 >      - *"reference genome"*: `Human: hg19` (or a similarly named choice)
@@ -629,10 +629,10 @@ somatic variant calling that:
 >
 >    - {% icon param-file %} *"aligned reads from normal sample"*: the mapped
 >      and fully post-processed normal tissue dataset; one of the two outputs
->      of **CalMD** {% icon tool %}
+>      of filtering the **CalMD** {% icon tool %} outputs
 >    - {% icon param-file %}*"aligned reads from tumor sample"*: the mapped
 >      and fully post-processed tumor tissue dataset; the other output of
->      **CalMD** {% icon tool %}
+>      filtering the **CalMD** {% icon tool %} outputs
 >    - *"Estimated purity (non-tumor content) of normal sample"*: `1`
 >    - *"Estimated purity (tumor content) of tumor sample"*: `0.5`
 >    - *"Generate separate output datasets for SNP and indel calls?"*: `No`
@@ -743,7 +743,7 @@ Such functional genomic annotations can be added to a VCF dataset of variants
 with *SnpEff*.
 
 > ### {% icon hands_on %} Hands-on: Adding annotations with SnpEff
-> 1. **SnpEff eff** {% icon tool %}
+> 1. Run {% tool [SnpEff eff](toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Sequence changes (SNPs, MNPs, InDels)"*: the
 >      output of **VarScan somatic** {% icon tool %}
 >    - *"Input format"*: `VCF`
@@ -774,7 +774,7 @@ handled more efficiently than a VCF dataset. We will use the *GEMINI* tool
 suite for this task and for all further work with the variants.
 
 > ### {% icon hands_on %} Hands-on: Creating a GEMINI database from a variants dataset
-> 1. **GEMINI load** {% icon tool %} with
+> 1. Run {% tool [GEMINI load](toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"VCF dataset to be loaded in the GEMINI database"*:
 >      the output of **SnpEff eff** {% icon tool %}
 >    - *"The variants in this input are"*: `annotated with snpEff`
@@ -863,7 +863,7 @@ dataset and we are going to extract them from there and add them to the
 {: .details}
 
 > ### {% icon hands_on %} Hands-on: Making variant call statistics accessible
-> 1. **GEMINI annotate** {% icon tool %}:
+> 1. Run {% tool [GEMINI annotate](toolshed.g2.bx.psu.edu/repos/iuc/gemini_annotate/gemini_annotate/0.20.1+galaxy2) %}:
 >    - {% icon param-file %} *"GEMINI database"*: output of **GEMINI load**
 >    - {% icon param-file %} *"Dataset to use as the annotation source"*: output of **VarScan somatic**
 >    - *"Strict variant-identity matching of database and annotation records
@@ -932,7 +932,7 @@ want to add:
 - information from the **Cancer Genome Interpreter (CGI)**
 
 > ### {% icon hands_on %} Hands-on: Adding further annotations
-> 1. **GEMINI annotate** {% icon tool %} to add further annotations from **dbSNP**
+> 1. Run {% tool [GEMINI annotate](toolshed.g2.bx.psu.edu/repos/iuc/gemini_annotate/gemini_annotate/0.20.1+galaxy2) %} to add further annotations from **dbSNP**
 >    - {% icon param-file %} *"GEMINI database"*: the output of the last
 >      **GEMINI annotate** {% icon tool %} run
 >    - {% icon param-file %} *"Dataset to use as the annotation source"*: the imported `dbsnp.b147.chr5_12_17.vcf`
@@ -957,7 +957,7 @@ want to add:
 >        This recipe extracts the dbSNP *SAO* field and adds it as *rs_ss* to
 >        the GEMINI database.
 >
-> 2. **GEMINI annotate** {% icon tool %} to add further annotations from **cancerhotspots**
+> 2. Run {% tool [GEMINI annotate](toolshed.g2.bx.psu.edu/repos/iuc/gemini_annotate/gemini_annotate/0.20.1+galaxy2) %} to add further annotations from **cancerhotspots**
 >    - {% icon param-file %} *"GEMINI database"*: the output of the last
 >      **GEMINI annotate** {% icon tool %} run
 >    - {% icon param-file %} *"Dataset to use as the annotation source"*: the imported `cancerhotspots_v2.bed`
@@ -988,7 +988,7 @@ want to add:
 >        cancerhotspots sites and adding them as *hs_qvalue* to the GEMINI
 >        database.
 >
-> 3. **GEMINI annotate** {% icon tool %} to add links to **CIViC**
+> 3. Run {% tool [GEMINI annotate](toolshed.g2.bx.psu.edu/repos/iuc/gemini_annotate/gemini_annotate/0.20.1+galaxy2) %} to add links to **CIViC**
 >    - {% icon param-file %} *"GEMINI database"*: the output of the last
 >      **GEMINI annotate** {% icon tool %} run
 >    - {% icon param-file %} *"Dataset to use as the annotation source"*: the imported `CIViC.bed`
@@ -1017,7 +1017,7 @@ want to add:
 >        sites and adding them as a list of *overlapping_civic_urls* to the
 >        GEMINI database.
 >
-> 3. **GEMINI annotate** {% icon tool %} to add information from the **Cancer Genome Interpreter (CGI)**
+> 3. Run {% tool [GEMINI annotate](toolshed.g2.bx.psu.edu/repos/iuc/gemini_annotate/gemini_annotate/0.20.1+galaxy2) %} to add information from the **Cancer Genome Interpreter (CGI)**
 >    - {% icon param-file %} *"GEMINI database"*: the output of the last
 >      **GEMINI annotate** {% icon tool %} run
 >    - {% icon param-file %} *"Dataset to use as the annotation source"*: the imported `cgi_variant_positions.bed`
@@ -1075,7 +1075,7 @@ somatic variants. Our strategy for retrieving them is to:
    tumor sample
 
 > ### {% icon hands_on %} Hands-on: Querying the GEMINI database for somatic variants
-> 1. **GEMINI query** {% icon tool %} with:
+> 1. Run {% tool [GEMINI query](toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.20.1+galaxy1) %} with:
 >    - {% icon param-file %} *"GEMINI database"*: the fully annotated database
 >      created in the last **GEMINI annotate** {% icon tool %} step
 >    - *"Build GEMINI query using"*: `Basic variant query constructor`
@@ -1137,7 +1137,7 @@ somatic variants. Our strategy for retrieving them is to:
 What about more sophisticated filtering?
 
 > ### {% icon hands_on %} Hands-on: More complex filter criteria
-> 1. **GEMINI query** {% icon tool %} with the exact same settings as before, but:
+> 1. Run {% tool [GEMINI query](toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.20.1+galaxy1) %} with the exact same settings as before, but:
 >    - *"Additional constraints expressed in SQL syntax"*: `somatic_status = 2 AND somatic_p <= 0.05 AND filter IS NULL`
 >
 >     This translates into "variants classified as somatic with a p-value <=
@@ -1161,7 +1161,7 @@ Before we focus on the content of the report, however, we could enhance the
 report format a bit more.
 
 > ### {% icon hands_on %} Hands-on: SQL-based output formatting
-> 1. **GEMINI query** {% icon tool %} with the exact same settings as in the
+> 1. Run {% tool [GEMINI query](toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.20.1+galaxy1) %} with the exact same settings as in the
 > last example, but:
 >    - In *"Output format options"*
 >      - *"Additional columns (comma-separated)"*: `type, gt_alt_freqs.TUMOR, gt_alt_freqs.NORMAL,
@@ -1223,7 +1223,7 @@ with the `Basic query constructor` we have used so far, but requires an
 advanced mode for composing the query.
 
 > ### {% icon hands_on %} Hands-on: Turning query results into gene-centered reports
-> 1. **GEMINI query** {% icon tool %} in advanced mode by choosing
+> 1. Run {% tool [GEMINI query](toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.20.1+galaxy1) %} in advanced mode by choosing
 >   - *"Build GEMINI query using"*: `Advanced query constructor`
 >   - *"The query to be issued to the database"*: `SELECT v.gene, v.chrom,
 >     g.synonym, g.hgnc_id, g.entrez_id, g.rvis_pct, v.clinvar_gene_phenotype
@@ -1277,7 +1277,7 @@ unwanted columns, while *rearranging* the remaining ones.
 
 > ### {% icon hands_on %} Hands-on: Join 
 > 
-> 1. **Join two files** {% icon tool %} to add **UniProt cancer genes** information
+> 1. Use {% tool [Join two files](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.1) %} to add **UniProt cancer genes** information
 >    - {% icon param-file %} *"1st file"*: the GEMINI-generated gene report from the previous step
 >    - *"Column to use from 1st file"*: `Column: 1`
 >    - {% icon param-file %}  *"2nd file"*: the imported `Uniprot_Cancer_Genes` dataset 
@@ -1301,7 +1301,7 @@ unwanted columns, while *rearranging* the remaining ones.
 >      a variant is neither a known proto-oncogene, nor a tumor suppressor
 >      gene.
 >
-> 2. **Join two files** {% icon tool %} to add **CGI biomarkers** information
+> 2. Use {% tool [Join two files](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.1) %} to add **CGI biomarkers** information
 >    - {% icon param-file %} *"1st file"*: the partially annotated dataset from the previous
 >    - *"Column to use from 1st file"*: `Column: 1`
 >    - {% icon param-file %} *"2nd file"*: the imported `cgi_genes` dataset
@@ -1315,7 +1315,7 @@ unwanted columns, while *rearranging* the remaining ones.
 >    Inspect the input and the result dataset to make sure you understand what
 >    happened at this step.
 >
-> 3. **Join two files** {% icon tool %} to add gene information from **CIViC**
+> 3. Use {% tool [Join two files](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.1) %} to add gene information from **CIViC**
 >    - {% icon param-file %} *"1st file"*: the partially annotated dataset from step 2
 >    - *"Column to use from 1st file"*: `Column: 1`
 >    - {% icon param-file %} *"2nd file"*: the imported `GeneSummaries` dataset
@@ -1344,7 +1344,7 @@ issues and rearrange to get a fully annotated gene report.
 
 
 > ### {% icon hands_on %} Hands-on: Rearrange to get a fully annotated gene report 
-> 4. **Column arrange by header name** {% icon tool %} configured like
+> 4. Run {% tool [Column arrange by header name](toolshed.g2.bx.psu.edu/repos/bgruening/column_arrange_by_header/bg_column_arrange_by_header/0.2) %} configured like
 >    this:
 >    - {% icon param-file %} *"file to rearrange"*: the final **Join** result dataset from step 3
 >    - In *"Specify the first few columns by name"*

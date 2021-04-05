@@ -27,9 +27,9 @@ contributors:
 This practical aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.
 
 > ###  {% icon comment %} Audience
-> This tutorial is for those who are new to Galaxy, genomics, and bioinformatics.  If you aren't new to bioinformatics you can just do the items listed in the Hands-On boxes ({% icon hands_on %}), or you can try one of the [other introductory tutorials]({{ site.baseurl }}{% link topics/introduction/index.md %}).
+> This tutorial is for those who are new to Galaxy, genomics, and bioinformatics.  If you aren't new to bioinformatics you can just do the items listed in the Hands-On boxes ({% icon hands_on %}), or you can try one of the [other introductory tutorials]({% link topics/introduction/index.md %}).
 >
-> This tutorial teaches the same basic content as [Galaxy 101]({{ site.baseurl }}{% link topics/introduction/tutorials/galaxy-intro-101/tutorial.md %}), but requires less knowledge of biology to understand the questions this tutorial addresses.
+> This tutorial teaches the same basic content as [Galaxy 101]({% link topics/introduction/tutorials/galaxy-intro-101/tutorial.md %}), but requires less knowledge of biology to understand the questions this tutorial addresses.
 {: .comment}
 
 > ### Agenda
@@ -109,16 +109,15 @@ The Galaxy interface consists of three main parts. The available tools are liste
 
 > ### {% icon hands_on %} Hands-on: Start with an empty history
 >
-> * If this is the first time you have used this Galaxy server, then your history panel will look like the image above.
+> - At the start of the tutorial you should ensure that you are working in a new history, i.e. one without any datasets
 >
-> * If your history has datasets in it (there will be one or more green boxes, *datasets*, there) then create a new history:
->     1. Click the **gear icon** at the top of the history panel
->     2. Select the option **Create New** from the menu
+>   {% snippet faqs/galaxy/histories_create_new.md %}
+>
 {: .hands_on}
 
 ## Get data into Galaxy
 
-There are [many ways to get data into a Galaxy instance]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/get-data/slides.html %}). We are going to use the **Get Data** toolbox in the **Tools** panel on the left.
+There are [many ways to get data into a Galaxy instance]({% link topics/galaxy-interface/tutorials/get-data/slides.html %}). We are going to use the **Get Data** toolbox in the **Tools** panel on the left.
 
 > ### {% icon hands_on %} Hands-on: Open **Get Data** toolbox
 >
@@ -128,13 +127,13 @@ There are [many ways to get data into a Galaxy instance]({{ site.baseurl }}{% li
 >
 {: .hands_on}
 
-The **Get Data** toolbox contains a list of data sources that this Galaxy instance can get data directly from.  **Upload file** is quite useful for getting data from your computer or from the web (see the [Getting data into Galaxy slides]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/get-data/slides.html %})).  Today we are going to use the **UCSC Main table browser**.
+The **Get Data** toolbox contains a list of data sources that this Galaxy instance can get data directly from.  **Upload file** is quite useful for getting data from your computer or from the web (see the [Getting data into Galaxy slides]({% link topics/galaxy-interface/tutorials/get-data/slides.html %})).  Today we are going to use the **UCSC Main table browser**.
 
 ### Get genes
 
 > ### {% icon hands_on %} Hands-on: Go to UCSC
 >
-> 1. *Click* on the tool **UCSC Main table browser** to go to UCSC.
+> 1. *Click* on the tool {% tool [UCSC Main table browser](ucsc_table_direct1) %} to go to UCSC.
 >
 >    ![Click on UCSC Main table browser](../../images/101_01.png)
 >
@@ -152,13 +151,14 @@ The Table Browser has a daunting number of options. Fortunately, they are all se
 * **genome:** `Human`
 * **assembly:** `Dec. 2013 (GRCh38/hg38)`
 * **group:** `Genes and Gene Predictions`
-* **track:** `GENCODE v24`
+* **track:** `GENCODE v32`
 
 **clade** and **genome** seem pretty clear.  **assembly** asks which version/definition of the human genome we want.  (Any will do for our question, but UCSC is suggesting `hg38`, which is also the most recent.)  **group** is set to `Genes and Gene Predictions` which sounds like what we want. So far so good.
 
-**track** has a bewildering list of options. UCSC suggests `GENCODE v24`.  A web search leads us to the [GENCODE web site](https://www.gencodegenes.org/) which prominently states:
+**track** has a bewildering list of options. UCSC suggests `GENCODE v32`.  A web search leads us to the [GENCODE web site](https://www.gencodegenes.org/) which prominently states:
 
-The GENCODE project produces high quality reference gene annotation and ...
+>The goal of the GENCODE project is to identify and classify all gene features in the human and mouse genomes with high accuracy based on biological evidence...
+{: .quote}
 
 Time for a few more definitions.
 
@@ -179,7 +179,7 @@ Time for a few more definitions.
 
 The **track** option asks us which set of annotations do we want to get?  There are so many choices because annotation is the result of analysis and interpretation, and there are many ways to do this. (And in this case, many of the options aren't even genes or gene predictions.)
 
-GENCODE is "high-quality" and  "gene annotation." That sounds like a good thing to use.  Lets stay with the default: `GENCODE V24`.
+GENCODE is "high-quality" and  "gene annotation." That sounds like a good thing to use.  Lets stay with the default: `GENCODE V32`.
 
 So far we haven't changed *anything* from the defaults.  Lets change something.  The default  **region** is the whole genome, which can be done, but it's a lot of information. For this exercise lets use just one (small) chromosome.
 
@@ -305,10 +305,10 @@ How might we do this?  Column 6 contains the strand information.  Can we split g
 > ### {% icon hands_on %} Searching for and launching a tool
 >
 > 1. Try the **tools search box**.  Think of terms that might describe what we want to do and type them in the search box.  Do you see anything promising?  Explore a little.
-> 2. If you haven't already searched with it, *enter* `split` in the **tool search box**.  Near the top of the results is
->    - **Filter** data on any column using simple expressions.
+> 2. If you haven't already searched with it, *enter* `filter` in the **tool search box**.  Among the results you should see
+>    - {% tool [Filter](Filter1) %} data on any column using simple expressions.
 >    - That might work.
-> 3. *Click* on **Filter** to open the Filter tool in the central panel.
+> 3. *Click* on {% tool [Filter](Filter1) %} to open the Filter tool in the central panel.
 > 4. Take a look at the **Syntax** and **Example** sections to understand what the tool does.
 >
 > ![The Filter Tool form](../../images/filter_tool_defaults.png)
@@ -347,7 +347,7 @@ Now we want to get the genes on the reverse strand.  There are actually many way
 > 1. *Click* the **Execute** button.
 >
 > **Method 2**
-> 1. *Click* on **Filter** in the tool panel to open the Filter tool in the central panel.
+> 1. *Click* on {% tool [Filter](Filter1) %} in the tool panel to open the Filter tool in the central panel.
 > 1. *Fill* the form as before, *except*:
 >    * Make sure the **Dataset** pulldown is set to the `Genes` dataset.
 >    * *Set* **Condition** to `c6 == "-"`.
@@ -389,7 +389,7 @@ Galaxy excels at answering questions about genomic intervals and different sets 
 
 > ### {% icon hands_on %} Hands-on: Genomic Interval Tools
 >
-> * In the tool panel, *open* the **Operate on Genomic Intervals** toolbox.  It's typically past the **NGS** toolboxes.
+> * The next step is finding overlapping intervals, so type `interval` in the tool search box. There are many results from this search, so you might want to click the *Show sections* button (available on Galaxy servers) to see which sections the tools are organised into.
 > * *Explore* the tools in this toolbox, looking for something that we can use to see which genes on opposite strands overlap.
 {: .hands_on}
 
@@ -397,8 +397,7 @@ Of the tools in the **Operate on Genomic Intervals** toolbox, **Join** and parti
 
 > ### {% icon hands_on %} Hands-on: Genomic Interval Tools
 >
-> 1. In the tool panel, *click* **Intersect** in the **Operate on Genomic Intervals** toolbox.
-> 2. **Intersect** {% icon tool %} with the following parameters:
+> 1. {% tool [Intersect](toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0) %} with the following parameters:
 >     - **Return** to `Overlapping Intervals`.
 >       - This looks like it might return whole genes, while `Overlapping pieces` may return only the parts that overlap.  We suspect that whole genes might be more useful.
 >     - **of** (the first dataset) to `Genes, forward strand`
@@ -434,7 +433,7 @@ It turns out that **Lift-Over** and **Collection Operations** are not what we wa
 >
 > 1. *Open* the **Text Manipulation** toolbox.
 > 2. Near the top of the toolbox is **Concatenate datasets tail-to-head**. *Click* on it.  Lets try that tool.
-> 3. **Concatenate** {% icon tool %} with the following parameters:
+> 3. {% tool [Concatenate](cat1) %} with the following parameters:
 >   * *Set* **Concatenate Dataset** to `Overlapping reverse genes`.
 >   * *Click* **+ Insert Dataset**.  This adds a second dataset pull-down menu to the form.
 >   * *Select* `Overlapping forward genes` as the second dataset.
@@ -518,7 +517,7 @@ Let's refine our question slightly
 
 ## Walk through the workflow tutorial
 
-Run the [Create a reusable workflow from a history]({{ site.baseurl }}{% link topics/galaxy-ui/tutorials/history-to-workflow/tutorial.md %}) tutorial for how to do this, *and then come back here to run your newly created workflow with the exon data.*
+Run the [Create a reusable workflow from a history]({% link topics/galaxy-interface/tutorials/history-to-workflow/tutorial.md %}) tutorial for how to do this, *and then come back here to run your newly created workflow with the exon data.*
 
 ## Rerun analysis with exon data
 
@@ -543,13 +542,13 @@ We want to run the same analysis, but this time only look for overlaps that happ
 
 And your new history appears in the history panel with the copied *genes* dataset.  What we need is *exons.* How can we get the exon information?  There are two relatively easy ways to get this information, one of which will be very familiar.
 
-The first method involves going back to the UCSC Table Browser.  Everything on the first form would stay the same: We still want human, hg38, GENCODE v24, and just `chr22`. The second form is what changes.  Instead of getting the **Whole Gene**, we need to retrieve the **Coding Exons** only.
+The first method involves going back to the UCSC Table Browser.  Everything on the first form would stay the same: We still want human, hg38, GENCODE v32, and just `chr22`. The second form is what changes.  Instead of getting the **Whole Gene**, we need to retrieve the **Coding Exons** only.
 
 The second method is to use the **Gene BED To Exon/Intron/Codon BED expander** tool in the **Operate on Genomic Intervals** toolbox to extract the exon information from the genes BED file we already have. (*Of course!* you say.  Umm, there is no way that you should have known that you already had this information in the genes file, or that this tool existed.)
 
 > ### {% icon hands_on %} Get the exon data
 >
-> 1. Get the exon information, either by revisiting UCSC, or by using the **Gene BED To Exon/Intron/Codon BED expander** tool.  If you use the expander tool select **Coding Exons only** from the **Extract** pull-down.
+> 1. Get the exon information, either by revisiting UCSC, or by using the {% tool [Gene BED To Exon/Intron/Codon BED expander](gene2exon1) %} tool.  If you use the expander tool select **Coding Exons only** from the **Extract** pull-down.
 > 2. Give the resulting dataset a meaningful name.
 {: .hands_on}
 

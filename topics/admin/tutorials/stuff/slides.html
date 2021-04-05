@@ -18,8 +18,39 @@ contributors:
   - natefoo
   - bgruening
   - slugger70
-  - erasche
+  - hexylena
 ---
+
+<!-- move to dev -->
+## Data Types
+
+* Galaxy's method of understanding users' files.
+* Data types and converters are shipped with Galaxy.
+* Admin UI displays all available data types.
+  * Can be configured by modifying `config/datatypes_conf.xml` file.
+* Use class inheritance (`text:json` is a super class of `hivtrace`, `biom1`, `d3_hierarchy`...)
+  * Affects how tools consume datasets.
+
+???
+Some datatypes can be installed from toolshed but this practice is deprecated and discouraged.
+
+
+---
+# Data Providers
+
+Provide efficient access to data for viz & API
+
+Framework provides direct link to read the raw dataset
+or use data providers to adapt it
+
+In config, assert that visualization requires a given type of data providers
+
+Data providers process data before sending to browser - slice, filter, reformat, ...
+
+
+<!-- dnuno what to do with this. -->
+---
+
 ## Admin UI
 
 Has a lot of tools and lists that are useful for administrators of the Galaxy server.
@@ -33,69 +64,6 @@ Has a lot of tools and lists that are useful for administrators of the Galaxy se
   * Tool whitelist
   * Tool errors
 
----
-
-## Display applications
-
-The list of applications that can be used to display various datatypes.
-
-They are set in the `datatypes_conf.xml` file. For example:
-```
-  <datatype extension="bam" type="galaxy.datatypes.binary:Bam" mimetype="application/octet-stream" display_in_upload="true" description="A binary file compressed in the BGZF format with a '.bam' file extension." description_url="https://wiki.galaxyproject.org/Learn/Datatypes#BAM">
-      <converter file="bam_to_bai.xml" target_datatype="bai"/>
-      <converter file="bam_to_bigwig_converter.xml" target_datatype="bigwig"/>
-      <display file="ucsc/bam.xml" />
-      <display file="ensembl/ensembl_bam.xml" />
-      <display file="igv/bam.xml" />
-      <display file="igb/bam.xml" />
-      <display file="iobio/bam.xml" />
-  </datatype>
-```
-
-[Tutorial](https://galaxyproject.org/admin/tools/external-display-applications-tutorial/) about creating new display apps.
-
----
-## Data Types
-
-* Galaxy's method of understanding users' files.
-* Data types and converters are shipped with Galaxy.
-* Admin UI displays all available data types.
-  * Can be configured by modifying `config/datatypes_conf.xml` file.
-* Use class inheritance (`text:json` is a super class of `hivtrace`, `biom1`, `d3_hierarchy`...)
-  * Affects how tools consume datasets.
-
-???
-Some datatypes can be installed from toolshed but this practice is deprecated and discouraged.
-
----
-
-## `datatypes_conf.xml`
-
-Config file for datatypes.
-
-```xml
-<?xml version="1.0"?>
-<datatypes>
-  <registration converters_path="lib/galaxy/datatypes/converters" display_path="display_applications">
-    <datatype extension="ab1" type="galaxy.datatypes.binary:Ab1" mimetype="application/octet-stream" display_in_upload="true" description="A binary sequence file in 'ab1' format with a '.ab1' file extension.  You must manually select this 'File Format' when uploading the file." description_url="https://wiki.galaxyproject.org/Learn/Datatypes#Ab1"/>
-    <datatype extension="afg" type="galaxy.datatypes.assembly:Amos" display_in_upload="false" />
-    <datatype extension="arff" type="galaxy.datatypes.text:Arff" mimetype="text/plain" display_in_upload="True" />
-    <datatype extension="asn1" type="galaxy.datatypes.data:GenericAsn1" mimetype="text/plain" display_in_upload="true" />
-    <datatype extension="asn1-binary" type="galaxy.datatypes.binary:GenericAsn1Binary" mimetype="application/octet-stream" display_in_upload="true" />
-    <datatype extension="axt" type="galaxy.datatypes.sequence:Axt" display_in_upload="true" description="blastz pairwise alignment format.  Each alignment block in an axt file contains three lines: a summary line and 2 sequence lines.  Blocks are separated from one another by blank lines.  The summary line contains chromosomal position and size information about the alignment. It consists of 9 required fields." description_url="https://wiki.galaxyproject.org/Learn/Datatypes#Axt"/>
-    <datatype extension="fli" type="galaxy.datatypes.tabular:FeatureLocationIndex" display_in_upload="false"/>
-    <datatype extension="bam" type="galaxy.datatypes.binary:Bam" mimetype="application/octet-stream" display_in_upload="true" description="A binary file compressed in the BGZF format with a '.bam' file extension." description_url="https://wiki.galaxyproject.org/Learn/Datatypes#BAM">
-      <converter file="bam_to_bai.xml" target_datatype="bai"/>
-
-...
-
-```
-**Exercise**: Allow **Genbank** files to be specified at upload time.
-
-  * Search `/srv/galaxy/server/config/datatypes_conf.xml.sample` for Genbank
-  * Add `display_in_upload="true"` to the xml tag.
-
-You'll then need to restart Galaxy.
 
 ---
 
@@ -123,90 +91,3 @@ You'll then need to restart Galaxy.
   * **Users, Groups, Roles** - Used for quotas, libraries, sharing...
   * **Impersonate user** - Allows to switch to a user account. Has to be enabled in configuration.
 
-
----
-# DB Shell
-
-`scripts/db_shell.py`
-
-A programmer's interface to the database. Interact with the database using Galaxy's model
-
-```console
-$ python -i scripts/db_shell.py -c config/galaxy.yml
- >>> new_user = User("admin@gmail.com")
- >>> new_user.set_password
- >>> sa_session.add(new_user)
- >>> sa_session.commit()
- >>> sa_session.query(User).all()
-```
-
----
-# Runaway Jobs
-
-Tips:
-- Set job output size limit in `job_conf.xml`
-- Set job concurrency limits in `job_conf.xml`
-- Public servers
-  - Require email verification
-  - Watch for duplicates
-
----
-# Runaway Storage
-
-Tips:
-- Set quotas
-- `tmpwatch` your job working directory
-  - `cleanup_job` in `galaxy.yml` (defaults to `always` though)
-- Set up dataset cleanup
-
----
-# Dataset Cleanup
-
-- `scripts/cleanup_datasets/pgcleanup.py`: PostgreSQL-optimized fast cleanup script
-- `scripts/cleanup_datasets/cleanup_datasets.py`: General cleanup script
-
----
-# Dataset Cleanup Lifecycle
-
-Mark deleted all "anonymous" histories not used within the last `$days` days:
-
-`python ./scripts/cleanup_datasets/pgcleanup.py -o $days -s delete_userless_histories`
-
-Remove all history exports older than `$days` days:
-
-`python ./scripts/cleanup_datasets/pgcleanup.py -o $days -s delete_exported_histories`
-
-Mark purged HDAs in histories deleted `$days` or more days ago (not user-recoverable):
-
-`python ./scripts/cleanup_datasets/pgcleanup.py -o $days -s purge_deleted_histories`
-
----
-# Dataset Cleanup Lifecycle
-
-Mark purged individual HDAs deleted `$days` or more days ago (not user-recoverable):
-
-`python ./scripts/cleanup_datasets/pgcleanup.py -o $days -s purge_deleted_hdas`
-
-Mark datasets with all purged HDAs last updated `$days` or more days ago deleted:
-
-`python ./scripts/cleanup_datasets/pgcleanup.py -o $days -s delete_datasets`
-
-Mark purged all datasets last updated `$days` or more days ago **and remove from disk**:
-
-`python ./scripts/cleanup_datasets/pgcleanup.py -o $days -s purge_datasets`
-
----
-
-# Backups
-
-What to back up:
-- Configs
-- Database
-- Installed shed tools and dependencies
-- Datasets (if you can...)
-
-What not to back up:
-- Anything in `database/` not mentioned above
-- Job working directories
-
----

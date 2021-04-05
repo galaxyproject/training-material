@@ -6,7 +6,7 @@ layout: base
 {% assign contributors = site.data['contributors'] %}
 {% assign instances = site.data['instances'] %}
 {% assign topic_material = site.pages | topic_filter:page.topic_name %}
-{% assign language = site.other_languages | split: ", " %}
+{% assign language = site.other_languages  %}
 
 {% assign intro_link = false %}
 {% assign intro_target = "" %}
@@ -28,14 +28,21 @@ layout: base
     {% endif %}
 {% endfor %}
 
-{% if topic.gitter %}
+<!-- Gitter -->
+{% if page.gitter %}
+  {% assign gitter = page.gitter %}
+{% elsif topic.gitter %}
+  {% assign gitter = topic.gitter %}
+{% else %}
+  {% assign gitter = site.gitter_url %}
+{% endif %}
+
 <script>
   ((window.gitter = {}).chat = {}).options = {
-  room: '{{ topic.gitter }}'
+  room: '{{ gitter | remove: "https://gitter.im/" }}'
   };
 </script>
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-{% endif %}
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -56,26 +63,30 @@ layout: base
                         </a>
                     </li>
 
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
-                            EN
-                        </a>
-                        <div class="dropdown-menu">
-                            {% for lang in language %}
-                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl={{ lang }}&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ topic.name }}%2Ftutorials%2F{{ page.tutorial_name }}%2Ftutorial.html&edit-text=&act=url" title="{{ inst[0] }}">
-                                {{ lang | upcase }}
-                            </a>
-                            {% endfor %}
-                        </div>
-                    </li>
-
                     {% include _includes/help.html %}
 
+                    {% include _includes/extras.html %}
+                    <!--
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ site.github.repository_url }}/edit/{{ site.repository_branch }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/tutorial.md">
+                        <a class="nav-link" href="{{ site.github_repository }}/edit/{{ site.github_repository_branch }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/tutorial.md">
                             {% icon github %} Edit
                         </a>
                     </li>
+                    -->
+
+                     <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="{{site.baseurl}}/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+
                 </ul>
             </div>
         </div>
@@ -118,8 +129,8 @@ layout: base
             {% if topic.requirements or page.requirements %}
             <strong>{% icon requirements %} Requirements</strong>
             <ul>
-            {% include snippets/display_extra_training.md extra_trainings=topic.requirements %}
-            {% include snippets/display_extra_training.md extra_trainings=page.requirements %}
+            {% include _includes/display_extra_training.md extra_trainings=topic.requirements %}
+            {% include _includes/display_extra_training.md extra_trainings=page.requirements %}
             </ul>
             {% endif %}
 
@@ -150,8 +161,8 @@ layout: base
                         {% icon slides %} Slides
                     </a></li>
                 {% elsif intro_link %}
-                    <li class="btn btn-default supporting_material"><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ intro_target }}" title="Introduction slides">
-                        {% icon slides %} Introduction slides
+                    <li class="btn btn-default supporting_material"><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ intro_target }}" title="Topic Overview slides">
+                        {% icon slides %} Topic Overview slides
                     </a></li>
                 {% endif %}
 
@@ -165,6 +176,12 @@ layout: base
 
                 {% if own_material.tours %}
                     <li class="btn btn-default supporting_material">{% include _includes/resource-tours.html material=own_material topic=topic.name label=true %}</li>
+                {% endif %}
+
+                {% assign faqpage = page.dir | append: 'faqs/index.md' | remove_first: '/' %}
+                {% capture hasfaq %}{% file_exists {{faqpage}} %}{% endcapture %}
+                {% if hasfaq == "true" %}
+                   {% include _includes/resource-faqs.html material=own_material topic=topic.name %}
                 {% endif %}
 
                 {% if tuto_has_docker and topic.name != 'admin' %}
@@ -199,6 +216,11 @@ layout: base
                     </blockquote>
                     {% endif %}
 
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the {% if hasfaq == "true" %}<a href="faqs/">tutorial FAQ page</a> or the {% endif %} <a href="{{site.baseurl}}/topics/{{topic.name}}/faqs/">FAQ page for the {{topic.title}} topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="{{site.gitter_url}}">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
                     {% if topic.references %}
                     <h1 data-toc-skip>Useful literature</h1>
                     <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="{{ site.baseurl }}/topics/{{ topic.name }}#references">here</a>.</p>
@@ -208,6 +230,39 @@ layout: base
                     <h1 id="bibliography">References</h1>
                     {% bibliography --cited %}
                     {% endif %}
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833={{ page.title }} ({{ topic.title }})">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
 
                     <h1>Citing this Tutorial</h1>
                     <p>
@@ -294,22 +349,10 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
         <blockquote class="agenda follow-up">
             <strong class="follow-up">{% icon curriculum %} Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
             <ul>
-                {% include snippets/display_extra_training.md extra_trainings=page.follow_up_training %}
+                {% include _includes/display_extra_training.md extra_trainings=page.follow_up_training %}
             </ul>
         </blockquote>
         {% endif %}
-
-        <hr>
-        <br>
-
-        <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
-        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833={{ page.title }} ({{ topic.title }})">Loading...
-        </iframe>
-
-        <blockquote class="feedback">
-            <h3>{% icon feedback %} Give us even more feedback on this content!</h3>
-            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262={{ page.title }} ({{ topic.title }})">Feedback Form</a>.</p>
-        </blockquote>
     </section>
 </div>
 
@@ -323,7 +366,8 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="{{ site.github.repository_url }}/tree/{{ site.repository_branch }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/tutorial.md">GitHub</a>.
+            <a href="{{ site.github_repository }}/tree/{{ site.github_repository_branch }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/tutorial.md">GitHub</a>.
         </p>
+        {% include _includes/license.html %}
     </div>
 </footer>

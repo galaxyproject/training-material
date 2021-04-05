@@ -7,7 +7,7 @@ zenodo_link: ""
 requirements:
   -
     type: "internal"
-    topic_name: galaxy-ui
+    topic_name: galaxy-interface
     tutorials:
         - rstudio
 follow_up_training:
@@ -51,9 +51,9 @@ contributors:
 >
 {: .agenda}
 
-Before diving in the tutorial, we need to open RStudio. If you do not know how or never interacted with RStudio, please follow the [dedicated tutorial]({{ site.baseurl }}{% link topics/galaxy-ui/tutorials/rstudio/tutorial.md %}).
+Before diving in the tutorial, we need to open RStudio. If you do not know how or never interacted with RStudio, please follow the [dedicated tutorial]({% link topics/galaxy-interface/tutorials/rstudio/tutorial.md %}).
 
-{% include snippets/launch_rstudio.md %}
+{% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
 
 # Creating objects in R
 
@@ -811,7 +811,7 @@ Let's summarize this section on coercion with a few take home messages:
 Lists are quite useful in R. You may come across lists in the way that some bioinformatics programs may store and/or return data to you. One of the key attributes of a list is that, unlike a vector, a list may contain data of more than one mode.
 
 > ### {% icon comment %} Learning more about lists
-> Learn more about creating and using lists using this [nice tutorial](http://r4ds.had.co.nz/lists.html). In this one example, we will create a named list and show you how to retrieve items from the list.
+> Learn more about creating and using lists using this [nice tutorial](https://r4ds.had.co.nz/vectors.html#lists). In this one example, we will create a named list and show you how to retrieve items from the list.
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Create and manipulate list objects

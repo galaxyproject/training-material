@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "Secretome Prediction"
 zenodo_link: "https://zenodo.org/record/519260"
+level: Intermediate
 questions:
   - "How to predict cellular protein localization based upon GO-terms?"
   - "How to combine multiple localization predictions?"

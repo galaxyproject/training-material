@@ -1,5 +1,27 @@
 {% if include.material.slides %}
-    <a class="topic-icon" href="{{ site.baseurl }}/topics/{{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/slides.html">
-    {% icon slides %}
+    <span class="btn-group">
+        <a class="btn btn-default topic-icon" href="{{ site.baseurl }}/topics/{{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/slides.html">
+            {% icon slides %}
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        {% for lang in language %}
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl={{ lang[0] }}&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ include.topic }}%2Ftutorials%2F{{ include.material.tutorial_name }}%2Fslides.html&edit-text=&act=url" title="{{ inst[0] }}">
+                {{ lang[1] }}
+            </a>
+        {% endfor %}
+        <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ include.topic }}%2Ftutorials%2F{{ include.material.tutorial_name }}%2Fslides.html&edit-text=&act=url" title="{{ inst[0] }}">
+            And more!
+        </a>
+    </ul>
+    {% endif %}
+{% if include.material.video %}
+/
+<a class="topic-icon" href="{{ site.baseurl }}/topics/{{ include.topic }}/videos/#video-{{ include.topic }}-{{ include.material.tutorial_name }}">
+    {% icon video %}
 </a>
 {% endif %}
+    </span>
+

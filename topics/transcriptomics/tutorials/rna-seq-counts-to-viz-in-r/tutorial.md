@@ -2,11 +2,13 @@
 layout: tutorial_hands_on
 
 title: RNA Seq Counts to Viz in R
+subtopic: visualisation
+
 zenodo_link: "https://zenodo.org/record/3477564/"
 requirements:
   -
     type: "internal"
-    topic_name: galaxy-ui
+    topic_name: galaxy-interface
     tutorials:
         - rstudio
   -
@@ -40,15 +42,46 @@ contributors:
 
 {% include topics/introduction/tutorials/r-basics/tutorial_origin.md %}
 
-With RNA-Seq data analysis, we generated tables containing list of DE genes, their expression, some statistics, etc. We can manipulate these tables using Galaxy, as we saw in some tutorials, e.g. ["Reference-based RNA-Seq data analysis"]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), and create some visualisations.
+With RNA-Seq data analysis, we generated tables containing list of DE genes, their expression, some statistics, etc. We can manipulate these tables using Galaxy, as we saw in some tutorials, e.g. ["Reference-based RNA-Seq data analysis"]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), and create some visualisations.
 
 Sometimes we want to have some customizations on visualization, some complex table manipulations or some statistical analysis. If we can not find a Galaxy tools for that or the right parameters, we may need to use programming languages as R or Python.
 
 > ### {% icon tip %} Prerequisites
 > It is expected that you are already somewhat familiar with the R basics (how to create variables, create and access lists, etc.) If you are not yet comfortable with those topics, we recommend that you complete the requirements listed at the start of this tutorial first, before proceeding.
+>
+> If you are starting with this tutorial, you will need to import a dataset:
+>
+> > ### {% icon hands_on %} Hands-on: Using datasets from Galaxy
+> >
+> > 1. Upload the following URL to Galaxy:
+> >    ```
+> >    https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular
+> >    ```
+> >
+> > 2. Note the history ID of the dataset in your Galaxy history
+> >
+> > 3. {% tool [RStudio](interactive_tool_rstudio) %} in Galaxy provides some special functions to import and export from your history:
+> >
+> >    ```R
+> >    annotatedDEgenes <- read.csv(gx_get(2), sep="\t") # will import dataset number 2 from your history, use the correct ID for your dataset.
+> >    ```
+> >
+> >
+> {: .hands_on}
+>
+> > ### {% icon hands_on %} Hands-on: Using datasets without Galaxy
+> > 1. Read the tabular file into an object called `annotatedDEgenes`:
+> >
+> >    ```R
+> >    ## read in a CSV file and save it as 'annotatedDEgenes'
+> >    annotatedDEgenes <- read.csv("https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular", sep="\t")
+> >    ```
+> >
+> >  {: .tip}
+> {: .hands_on}
 {: .tip}
 
-In this tutorial, we will take the list of DE genes extracted from DESEq2's output that we generated in the ["Reference-based RNA-Seq data analysis" tutorial]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), manipulate it and create some visualizations.
+In this tutorial, we will take the list of DE genes extracted from DESEq2's output that we generated in the ["Reference-based RNA-Seq data analysis" tutorial]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), manipulate it and create some visualizations.
 
 > ### Agenda
 >
@@ -59,7 +92,7 @@ In this tutorial, we will take the list of DE genes extracted from DESEq2's outp
 >
 {: .agenda}
 
-{% include snippets/launch_rstudio.md %}
+{% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
 
 # Visualization
 
@@ -71,6 +104,8 @@ In RNA-seq data analysis and other omics experiments, visualization are an impor
 
 ```R
 ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +
+  <GEOM_FUNCTION>() +
+  <GEOM_FUNCTION>() +
   <GEOM_FUNCTION>()
 ```
 
@@ -401,9 +436,9 @@ We would like now to make a barplot showing the number of differentially express
 
 Data manipulation and visualization are important parts of any RNA-Seq analysis. Galaxy provides several tools for that as explained in several tutorials:
 
-- [Reference-based RNA-Seq]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/ref-based/tutorial.md %})
-- [Visualization of RNA-seq results with heatmap2]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.md %})
-- [Visualization of RNA-seq results with Volcano Plot]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %})
+- [Reference-based RNA-Seq]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %})
+- [Visualization of RNA-seq results with heatmap2]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.md %})
+- [Visualization of RNA-seq results with Volcano Plot]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %})
 
 But sometimes we need more customization and then need to use programming languages as R or Python.
 

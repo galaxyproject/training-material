@@ -7,14 +7,11 @@
 #    docker run -p "8080:80" -t <your_tag>
 #    use -d to automatically dowload the datalibraries in the container
 
-FROM bgruening/galaxy-stable:latest
+FROM quay.io/bgruening/galaxy:20.05
 
 MAINTAINER Galaxy Training Material
 
 ENV GALAXY_CONFIG_BRAND "GTN: Contributing"
-
-# prerequisites
-RUN pip install ephemeris -U
 
 # copy the tutorials directory for your topic
 ADD topics/contributing/tutorials/ /tutorials/

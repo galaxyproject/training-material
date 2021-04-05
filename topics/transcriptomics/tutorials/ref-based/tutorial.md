@@ -2,10 +2,13 @@
 layout: tutorial_hands_on
 
 title: "Reference-based RNA-Seq data analysis"
+subtopic: introduction
+priority: 2
+
 tags:
     - bulk
     - rna-seq
-zenodo_link: "https://zenodo.org/record/1185122"
+zenodo_link: "https://zenodo.org/record/4541751"
 questions:
     - What are the steps to process RNA-Seq data?
     - How to identify differentially expressed genes across multiple experimental conditions?
@@ -84,11 +87,11 @@ In the second part of the tutorial, read counts of all 7 samples are used to ide
 >
 > 1. Create a new history for this RNA-Seq exercise
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the FASTQ file pairs from [Zenodo]({{ page.zenodo_link }}) or a data library:
->   - `GSM461177` (untreated): `GSM461177_1` and `GSM461177_2`
->   - `GSM461180` (treated): `GSM461180_1` and `GSM461180_2`
+>    - `GSM461177` (untreated): `GSM461177_1` and `GSM461177_2`
+>    - `GSM461180` (treated): `GSM461180_1` and `GSM461180_2`
 >
 >    ```
 >    {{ page.zenodo_link }}/files/GSM461177_1.fastqsanger
@@ -97,26 +100,33 @@ In the second part of the tutorial, read counts of all 7 samples are used to ide
 >    {{ page.zenodo_link }}/files/GSM461180_2.fastqsanger
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    > ### {% icon comment %} Comment
 >    > Note that these are the full files for the samples and ~1.5Gb each so it may take some minutes to import.
 >    >
->    > For a quicker run-through of the FASTQ steps a small subset of each FASTQ file (~5Mb) can be found here on [Zenodo]({{ page.zenodo_link }})
+>    > For a quicker run-through of the FASTQ steps a small subset of each FASTQ file (~5Mb) can be found here on [Zenodo]({{ page.zenodo_link }}):
+>    >
+>    > ```
+>    > {{ page.zenodo_link }}/files/GSM461177_1_subsampled.fastqsanger
+>    > {{ page.zenodo_link }}/files/GSM461177_2_subsampled.fastqsanger
+>    > {{ page.zenodo_link }}/files/GSM461180_1_subsampled.fastqsanger
+>    > {{ page.zenodo_link }}/files/GSM461180_2_subsampled.fastqsanger
+>    > ```
 >    {: .comment}
 >
 > 3. Rename each dataset according to the sample id (e.g. `GSM461177_1`)
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 4. Check that the datatype is `fastqsanger` (e.g. **not** `fastq`). If it is not, please change the datatype to `fastqsanger`.
 >
->    {% include snippets/change_datatype.md datatype="fastqsanger" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastqsanger" %}
 >
 > 5. Add to each dataset a tag corresponding to the name of the sample (`#GSM461177` or `#GSM461180`)
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 
@@ -126,16 +136,16 @@ The reads are raw data from the sequencing machine without any pretreatments. Th
 
 # Quality control
 
-During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data.
+During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. Adapters may also be present if the reads are longer than the fragments sequenced and trimming these may improve the number of reads mapped.
 
-Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the ["Quality control" training]({{site.baseurl}}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) ({% cite marcel2011cutadapt %}).
+Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the ["Quality control" tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) to create a report of sequence quality, [MultiQC](https://multiqc.info/) ({% cite ewels2016multiqc %}) to aggregate generated reports and [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) ({% cite marcel2011cutadapt %}) to improve the quality of sequences via trimming and filtering.
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
 > 1. **FastQC** {% icon tool %} with the following parameters:
->       - {% icon param-files %} *"Short read data from your current history"*: input datasets selected with **Multiple datasets**
+>    - {% icon param-files %} *"Short read data from your current history"*: input datasets selected with **Multiple datasets**
 >
->    {% include snippets/select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
 > 2. Inspect the webpage output of **FastQC** {% icon tool %} for the `GSM461177` sample
 >
@@ -152,11 +162,11 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    {: .question}
 >
 > 3. **MultiQC** {% icon tool %} with the following parameters to aggregate the FastQC reports:
->      - In *"Results"*
->        - *"Which tool was used generate logs?"*: `FastQC`
->        - In *"FastQC output"*
->           - *"Type of FastQC output?"*: `Raw data`
->           - {% icon param-files %} *"FastQC output"*: `Raw data` files (output of **FastQC** {% icon tool %})
+>     - In *"Results"*
+>       - *"Which tool was used generate logs?"*: `FastQC`
+>       - In *"FastQC output"*
+>         - *"Type of FastQC output?"*: `Raw data`
+>         - {% icon param-files %} *"FastQC output"*: `Raw data` files (output of **FastQC** {% icon tool %})
 >
 > 4. Inspect the webpage output from MultiQC for each FASTQ
 >
@@ -167,32 +177,33 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. Everything seems OK for 3 of the files, but for `GSM461180_2` the quality decreases quite a lot at the end of the sequences:
->    > >     - The `GSM461177` have 10.3 millions of sequences and `GSM461180` 12.3 millions
->    > >     - All except `GSM461180_2` have a high proportion of duplicated reads (expected in RNA-Seq data)
+>    > > 1. Everything seems good for 3 of the files. The `GSM461177` have 10.3 millions of sequences and `GSM461180` 12.3 millions of sequences. But in `GSM461180_2` (reverse reads of GSM461180) the quality decreases quite a lot at the end of the sequences.
 >    > >
->    > >        ![Sequence Counts](../../images/ref-based/fastqc_sequence_counts_plot.png "Sequence Counts")
+>    > >    All files except `GSM461180_2` have a high proportion of duplicated reads (expected in RNA-Seq data)
 >    > >
->    > >     - The "Per base sequence quality" is globally good with a slight decrease at the end of the sequences. For `GSM461180_2`, the decrease is quite large.
+>    > >    ![Sequence Counts](../../images/ref-based/fastqc_sequence_counts_plot.png "Sequence Counts")
 >    > >
->    > >        ![Sequence Quality](../../images/ref-based/fastqc_per_base_sequence_quality_plot.png "Sequence Quality")
+>    > >    The "Per base sequence quality" is globally good with a slight decrease at the end of the sequences. For `GSM461180_2`, the decrease is quite large.
 >    > >
->    > >     - The mean quality score over the reads is quite high, but the distribution is slightly different for `GSM461180_2`
+>    > >    ![Sequence Quality](../../images/ref-based/fastqc_per_base_sequence_quality_plot.png "Sequence Quality")
 >    > >
->    > >        ![Per Sequence Quality Scores](../../images/ref-based/fastqc_per_sequence_quality_scores_plot.png "Per Sequence Quality Scores")
+>    > >    The mean quality score over the reads is quite high, but the distribution is slightly different for `GSM461180_2`
 >    > >
->    > >     - Reads are not really following a normal distribution of GC content, except `GSM461180_2`
+>    > >    ![Per Sequence Quality Scores](../../images/ref-based/fastqc_per_sequence_quality_scores_plot.png "Per Sequence Quality Scores")
 >    > >
->    > >        ![Per Sequence GC Content](../../images/ref-based/fastqc_per_sequence_gc_content_plot.png "Per Sequence GC Content")
+>    > >    Reads are not really following a normal distribution of GC content, except `GSM461180_2`
 >    > >
->    > >     - Few N in the reads
+>    > >    ![Per Sequence GC Content](../../images/ref-based/fastqc_per_sequence_gc_content_plot.png "Per Sequence GC Content")
 >    > >
->    > >        ![Per base N content](../../images/ref-based/fastqc_per_base_n_content_plot.png "Per base N content")
+>    > >    Few N in the reads
 >    > >
->    > >     - Duplicated sequences: >10 to >500
+>    > >    ![Per base N content](../../images/ref-based/fastqc_per_base_n_content_plot.png "Per base N content")
 >    > >
->    > >        ![Sequence Duplication Levels](../../images/ref-based/fastqc_sequence_duplication_levels_plot.png "Sequence Duplication Levels")
->    > >     - Almost no known adapters and overrepresented sequences
+>    > >    Duplicated sequences: >10 to >500
+>    > >
+>    > >    ![Sequence Duplication Levels](../../images/ref-based/fastqc_sequence_duplication_levels_plot.png "Sequence Duplication Levels")
+>    > >
+>    > >    Almost no known adapters and overrepresented sequences
 >    > >
 >    > > 2. If the quality of the reads is not good, we should:
 >    > >    1. Check what is wrong and think about it: it may come from the type of sequencing or what we sequenced (high quantity of overrepresented sequences in transcriptomics data, biaised percentage of bases in HiC data)
@@ -204,7 +215,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >
 {: .hands_on}
 
-We should trim sequenced read to get rid of bases that were sequenced with high uncertainty (= low quality bases) at the read ends but also remove the reads of overall bad quality.
+We should trim the reads to get rid of bases that were sequenced with high uncertainty (i.e. low quality bases) at the read ends, and also remove the reads of overall bad quality.
 
 {% include topics/sequence-analysis/tutorials/quality-control/paired_end_question.md forward="GSM461177_1" reverse="GSM461177_2" %}
 
@@ -234,7 +245,7 @@ We should trim sequenced read to get rid of bases that were sequenced with high 
 >    > 2. How many sequence pairs have been removed because at least one read was shorter than the length cutoff?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. For `GSM461177`, 5,072,810 bp has been trimmed for the forward reads (read 1) and 8,648,619 bp on the reverse (read 2) because of quality. For `GSM461180`, 10,224,537 bp on forward and 51,746,850 bp on the reverse. It is not a surprise: we saw that at the end of the sequences the quality was dropping more for the reverse reads than for the forward reads, specially for `GSM461180_2`.
+>    > > 1. For `GSM461177`, 5,072,810 bp has been trimmed for the forward reads (read 1) and 8,648,619 bp on the reverse (read 2) because of quality. For `GSM461180`, 10,224,537 bp on forward and 51,746,850 bp on the reverse. It is not a surprise: we saw that at the end of the reads the quality was dropping more for the reverse reads than for the forward reads, especially for `GSM461180`.
 >    > > 2. 147,810 (1.4%) reads were too short for `GSM461177` and 1,101,875 (9%) for `GSM461180`.
 >    > {: .solution }
 >    {: .question}
@@ -242,27 +253,22 @@ We should trim sequenced read to get rid of bases that were sequenced with high 
 
 # Mapping
 
-To make sense of the reads, we need to first figure out where the sequenced DNA fragments originated from in the genome, so we can then determine to which genes they belong.
-
-This process is known as aligning or 'mapping' the reads to a reference. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique.
+To make sense of the reads, we need to first figure out where the sequences originated from in the genome, so we can then determine to which genes they belong. When a reference genome for the organism is available, this process is known as aligning or "mapping" the reads to the reference. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique.
 
 > ### {% icon comment %} Comment
 >
-> Do you want to learn more about the principles behind mapping? Follow our [training]({{site.baseurl}}{% link topics/sequence-analysis/tutorials/mapping/tutorial.md %}).
+> Do you want to learn more about the principles behind mapping? Follow our [training]({% link topics/sequence-analysis/tutorials/mapping/tutorial.md %}).
 {: .comment}
 
-As a reference genome for *Drosophila melanogaster* is available, we can map the sequences to this genome in order to identify which genes are affected by the *Pasilla* gene depletion.
+In this study, the authors used *Drosophila melanogaster* cells. We should then map the quality-controlled sequences to the reference genome of *Drosophila melanogaster*.
 
 {% include topics/sequence-analysis/tutorials/mapping/ref_genome_explanation.md answer_3="The genome of *Drosophila melanogaster* is known and assembled and it can be used as the reference genome in this analysis. Note that new versions of reference genomes may be released if the assembly improves, for this tutorial we are going to use the release 6 of the *Drosophila melanogaster* reference genome assembly [(dm6)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4383921/)."%}
 
-With eukaryotic transcriptomes most reads originate from processed mRNAs lacking introns, therefore they cannot be simply mapped back to the genome as we normally do for DNA data. Instead the reads must be separated into two categories:
+With eukaryotic transcriptomes most reads originate from processed mRNAs lacking introns:
 
-- Reads that can be mapped entirely within an exon
-- Reads spanning two or more exons
+![Types of RNA-Seq reads](../../images/ref-based/rna-seq-reads.png "The types of RNA-seq reads (adaption of the Figure 1a from {% cite kim2015hisat %}): reads that mapped entirely within an exon (in red), reads spanning over 2 exons (in blue), read spanning over more than 2 exons (in purple)")
 
-![Five types of RNA-Seq reads](../../images/five_type_rna_seq_reads.png "The five types of RNA-seq reads (Figure 1a from {% cite kim2015hisat %})")
-
-Spliced mappers have been developed to efficiently map transcript-derived reads against genomes:
+Therefore they cannot be simply mapped back to the genome as we normally do for DNA data. Spliced-awared mappers have been developed to efficiently map transcript-derived reads against a reference genome:
 
 ![Splice-aware alignment](../../images/splice_aware_alignment.png "Principle of spliced mappers: (1) identification of the reads spanning a single exon, (2) identification of the splicing junctions on the unmapped reads")
 
@@ -296,7 +302,7 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 
 ## Mapping
 
-We will map our RNA reads to the *Drosophila melanogaster* genome using **STAR** ({% cite dobin2013star %}).
+We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({% cite dobin2013star %}).
 
 > ### {% icon hands_on %} Hands-on: Spliced mapping
 >
@@ -312,7 +318,7 @@ We will map our RNA reads to the *Drosophila melanogaster* genome using **STAR**
 >    > ### {% icon comment %} How to get annotation file?
 >    >
 >    > Annotation files from model organisms may be available on the Shared Data library (the path to them will change from one Galaxy server to the other). You could also retrieve the annotation file from UCSC (using **UCSC Main** tool).
->    > 
+>    >
 >    >
 >    {: .comment}
 >
@@ -342,7 +348,7 @@ We will map our RNA reads to the *Drosophila melanogaster* genome using **STAR**
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. More than 83% for GSM461177 and more than 79% for GSM461180
+>    > > 1. More than 83% for GSM461177 and more than 79% for GSM461180. We can proceed with the analysis since only percentages below 70% should be investigated for potential contamination.
 >    > > 2. We also have access to the number and percentage of reads that are mapped at several location, mapped at too many different location, not mapped because too short.
 >    > >
 >    > >    ![STAR Alignment Scores](../../images/ref-based/star_alignment_plot.png "Alignment scores")
@@ -353,15 +359,15 @@ We will map our RNA reads to the *Drosophila melanogaster* genome using **STAR**
 >    {: .question}
 {: .hands_on}
 
-**STAR** generates a BAM file with the mapped reads.
+According to the **MultiQC** report, more than 80% of reads for both samples are mapped exactly once to the reference genome. We can proceed with the analysis since only percentages below 70% should be investigated for potential contamination. Both samples have a low (less than 10%) percentage of reads that mapped to multiple locations on the reference genome. This is in the normal range for Illumina short-read sequencing, but may be lower for newer long-read sequencing datasets that can span larger repeated regions in the reference genome.
+
+The main output of **STAR** is a BAM file.
 
 {% include topics/sequence-analysis/tutorials/mapping/bam_explanation.md mapper="RNA STAR" %}
 
 ## Inspection of the mapping results
 
-The BAM file contains information about where the reads are mapped on the reference genome. But as it is a binary file containing information for many reads (several million for these samples), it is difficult to inspect and explore the file.
-
-A powerful tool to visualize the content of BAM files is the Integrative Genomics Viewer (**IGV**, {% cite robinson2011integrative %}).
+The BAM file contains information for all our reads, making it difficult to inspect and explore in text format. A powerful tool to visualize the content of BAM files is the Integrative Genomics Viewer (**IGV**, {% cite robinson2011integrative %}).
 
 > ### {% icon hands_on %} Hands-on: Inspection of mapping results
 >
@@ -432,7 +438,7 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 >
 > The quality of the data and mapping can be checked further, e.g. by inspecting read duplication level, number of reads mapped to each chromosome, gene body coverage, and read distribution across features.
 >
-> *These steps have been inspired by the ones provided in the [great "RNA-Seq reads to counts" tutorial]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md %}) and adapted to our datasets.*
+> *These steps have been inspired by the ones provided in the [great "RNA-Seq reads to counts" tutorial]({% link topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md %}) and adapted to our datasets.*
 >
 > #### Duplicate reads
 >
@@ -440,7 +446,7 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 >
 > ![Sequence Duplication Levels](../../images/ref-based/fastqc_sequence_duplication_levels_plot.png "Sequence Duplication Levels")
 >
-> Duplicate reads can come from highly-expressed genes, therefore they are usually kept in RNA-Seq differential expression analysis. But a high percentage of duplicates may indicate an issue, e.g. over amplification during PCA of low complexity library.
+> Duplicate reads can come from highly-expressed genes, therefore they are usually kept in RNA-Seq differential expression analysis. But a high percentage of duplicates may indicate an issue, e.g. over amplification during PCR of low complexity library.
 >
 > **MarkDuplicates** from [Picard suite](http://broadinstitute.github.io/picard/) examines aligned records from a BAM file to locate duplicate reads, i.e. reads mapping to the same location (based on the start position of the mapping).
 >
@@ -479,9 +485,9 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 > >
 > > 2. **MultiQC** {% icon tool %} to aggregate the idxstats logs:
 > >    - In *"Results"*
-> >      - *"Which tool was used generate logs?"*: `idxstats`
+> >      - *"Which tool was used generate logs?"*: `Samtools`
 > >      - In *"Samtools output"*
-> >         - *"Type of Samtools output?"*: `Markdups`
+> >         - *"Type of Samtools output?"*: `idxstats`
 > >         - {% icon param-files %} *"Samtools output"*: `Samtools idxstats` files
 > >
 > >    > ### {% icon question %} Questions
@@ -571,18 +577,18 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 > Now that we have checked the results of the read mapping, we can proceed to the next phase of the analysis.
 {: .details}
 
-After the mapping, we have the information on where the reads are located on the reference genome. We also know how well they were mapped. The next step in RNA-Seq data analysis is quantification of the number of reads mapped to genomic features (genes, transcripts, exons, ...).
+After the mapping, we have now the information on where the reads are located on the reference genome and how well they were mapped. The next step in RNA-Seq data analysis is quantification of the number of reads mapped to genomic features (genes, transcripts, exons, ...).
 
 > ### {% icon comment %} Comment
 >
 > The quantification depends on both the reference genome (the FASTA file) and its associated annotations (the GTF file). It is extremely important to use an annotation file that corresponds to the same version of the reference genome you used for the mapping (e.g. `dm6` here), as the chromosomal coordinates of genes are usually different amongst different reference genome versions.
 {: .comment}
 
-In order to identify genes that are regulated by the *Pasilla* gene, we need to identify genes which are differentially expressed between samples with PS gene depletion (treated) and control (untreated) samples. 
+Here we will focus on the genes as we would like to identify the ones that are differentially expressed because of the Pasilla gene knockdown.
 
 # Counting the number of reads per annotated gene
 
-To compare the expression of single genes between different conditions (*e.g.* with or without PS depletion), an essential first step is to quantify the number of reads per gene.
+To compare the expression of single genes between different conditions (*e.g.* with or without PS depletion), an essential first step is to quantify the number of reads per gene, or more specifically the number of reads mapping to the exons of each gene.
 
 ![Counting the number of reads per annotated gene](../../images/gene_counting.png "Counting the number of reads per annotated gene")
 
@@ -609,13 +615,13 @@ To compare the expression of single genes between different conditions (*e.g.* w
 > {: .solution}
 {: .question}
 
-Two main tools could be used for that: [**HTSeq-count**](http://htseq.readthedocs.io/en/release_0.9.1/count.html) ({% cite anders2015htseq %}) or **featureCounts** ({% cite liao2013featurecounts %}). FeatureCounts is considerably faster and requires far less computational resources, so we will use it here.
+Two main tools could be used for that: [**HTSeq-count**](http://htseq.readthedocs.io/en/release_0.9.1/count.html) ({% cite anders2015htseq %}) or **featureCounts** ({% cite liao2013featurecounts %}). **featureCounts** is considerably faster and requires far less computational resources, so we will use it here.
 
-In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be given to **featureCounts**: for example the strandness.
+In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be given to **featureCounts**, e.g. the strandness.
 
 ## Estimation of the strandness
 
-RNAs that are typically targeted in RNA-Seq experiments are single stranded (*e.g.*, mRNAs) and thus have polarity (5' and 3' ends that are functionally distinct). During a typical RNA-Seq experiment the information about strandness is lost after both strands of cDNA are synthesized, size selected, and converted into a sequencing library. However, this information can be quite useful for the read counting step:
+RNAs that are typically targeted in RNA-Seq experiments are single stranded (*e.g.*, mRNAs) and thus have polarity (5' and 3' ends that are functionally distinct). During a typical RNA-Seq experiment the information about strandness is lost after both strands of cDNA are synthesized, size selected, and converted into a sequencing library. However, this information can be quite useful for the read counting step, especially for reads located on the overlap of 2 genes that are on different strands.
 
 ![Why strandness?](../../images/ref-based/strandness_why.png "Read1 will be assigned to gene1 located on the forward strand but Read2 could be assigned to gene1 (forward strand) or gene2 (reverse strand) depending if the strandness information is conserved.")
 
@@ -639,7 +645,7 @@ Some library preparation protocols create so called *stranded* RNA-Seq libraries
 
 This information should be provided with your FASTQ files, ask your sequencing facility! If not, try to find it on the site where you downloaded the data or in the corresponding publication.
 
-Another option is to estimate these parameters with a tool called **Infer Experiment** from the RSeQC ({% cite wang2012rseqc %}) tool suite. This tool takes the output of your mappings (BAM files), selects a subsample of your reads and compares their genome coordinates and strands with those of the reference gene model (from an annotation file). Based on the strand of the genes, it can gauge whether sequencing is strand-specific, and if so, how reads are stranded (forward or reverse):
+Another option is to estimate these parameters with a tool called **Infer Experiment** from the RSeQC ({% cite wang2012rseqc %}) tool suite. This tool takes the BAM files from the mapping, selects a subsample of the reads and compares their genome coordinates and strands with those of the reference gene model (from an annotation file). Based on the strand of the genes, it can gauge whether sequencing is strand-specific, and if so, how reads are stranded (forward or reverse):
 
 ![How to estimate the strandness?](../../images/ref-based/strandness_cases.png "In a stranded forward library, reads map mostly on the genes located on forward strand (here gene1). With stranded reverse library, reads map mostly on genes on the reverse strand (here gene2). With unstranded library, reads maps on genes on both strands.")
 
@@ -656,6 +662,7 @@ Another option is to estimate these parameters with a tool called **Infer Experi
 {: .hands_on}
 
 **Infer Experiment** {% icon tool %} tool generates one file with information on:
+
 - Paired-end or single-end library
 - Fraction of reads failed to determine
 - 2 lines
@@ -721,8 +728,7 @@ We now run **featureCounts** to count the number of reads per annotated gene.
 >    - In *"Advanced options"*:
 >       - *"GFF feature type filter"*: `exon`
 >       - *"GFF gene identifier"*: `gene_id`
->       - *"Allow read to contribute to multiple features"*: `No`
->       - *"Count multi-mapping reads/fragments"*: `Disabled; multi-mapping reads are excluded (default)`
+>       - *"Allow reads to map to multiple features"*: `Disabled; reads that align to multiple features or overlapping features are excluded`
 >       - *"Minimum mapping quality per read"*: `10`
 >
 > 2. **MultiQC** {% icon tool %} to aggregate the report:
@@ -750,30 +756,28 @@ We now run **featureCounts** to count the number of reads per annotated gene.
 >
 {: .hands_on}
 
-The main output of **featureCounts** is a table with the counts for each genes in the provided annotation.
+The main output of **featureCounts** is a table with the counts, i.e. the number of reads (or fragments in the case of paired-end reads) mapped to each gene (in rows, with their ID in the first column) in the provided annotation. **FeatureCount** generates also the **feature length** output datasets. We will need this file later on when we will run the **goseq** tool.
 
 > ### {% icon question %} Question
 >
-> 1. What information does the generated table contain?
-> 2. Which feature has the most counts for both samples? (Hint: Use the Sort tool)
+> Which feature has the most counts for both samples? (Hint: Use the Sort tool)
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The table has two columns: the gene ID and the number of reads (or fragments in the case of paired-end reads) mapped to the gene
-> > 2. To display the most abundantly detected feature, we need to sort the table of counts. This can be done using the **Sort** {% icon tool %} tool:
+> > To display the most abundantly detected feature, we need to sort the table of counts. This can be done using the **Sort** {% icon tool %} tool:
 > >    - {% icon param-file %} *"Sort Query"*: count file, output of by **featureCounts**
 > >    - *"Number of header"*: `1`
 > >    - In *"1: Column selections"*:
 > >      - *"on column"*: `2`
 > >
 > >        This column contains the number of reads = counts
-> > 
+> >
 > >      - *"in"*: `Descending order`
 > >
 > >    The result of sorting the table on column 2 reveals that FBgn0000556 is the feature with the most counts (around 128,741 in `GSM461177` and 127,416 in `GSM461180`).
-> > 
+> >
 > >    Comparing different output files is easier if we can view more than one dataset simultaneously. The Scratchbook function allows us to build up a collection of datasets that will be shown on the screen together.
-> >    
+> >
 > >    > ### {% icon hands_on %} (Optional) View the sorted featureCounts using the Scratchbook
 > >    >
 > >    > 1. The **Scratchbook** is enabled by clicking the nine-blocks icon seen on the right of the Galaxy top menubar:
@@ -805,13 +809,11 @@ The main output of **featureCounts** is a table with the counts for each genes i
 > {: .solution}
 {: .question}
 
-**FeatureCount** generates also the **feature length** output datasets. We will need this file later on when we will run the **goseq** tool.
-
 Here we counted reads mapped to genes for two samples. It is really interesting to redo the same procedure on the other datasets, especially to check how parameters differ given the different type of data (single-end versus paired-end).
 
 > ### {% icon hands_on %} (Optional) Hands-on: Re-run on the other datasets
 >
-> You can do the same process on the other sequence files available on [Zenodo]({{ page.zenodo_link }}) and on the data library
+> You can do the same process on the other sequence files available on [Zenodo]({{ page.zenodo_link }}) and on the data library.
 >
 > - Paired-end data
 >     - `GSM461178_1` and `GSM461178_2`
@@ -839,7 +841,7 @@ Here we counted reads mapped to genes for two samples. It is really interesting 
 
 ## Identification of the differentially expressed features
 
-To be able to identify differential gene expression induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed following the same procedure. To save time, we have run the previous steps for you. We then obtain 7 files with the counts for each gene of *Drosophila* for each sample. 
+To be able to identify differential gene expression induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed following the same procedure. To save time, we have run the previous steps for you. We then obtain 7 files with the counts for each gene of *Drosophila* for each sample.
 
 > ### {% icon hands_on %} Hands-on: Import all count files
 >
@@ -890,7 +892,7 @@ The number of sequenced reads mapped to a gene depends then on:
 
     Longer genes will have more reads mapping to them
 
-To compare samples or gene expressions, the gene counts need to be normalized. We could use TPM (Transcripts Per Kilobase Million). 
+To compare samples or gene expressions, the gene counts need to be normalized. We could use TPM (Transcripts Per Kilobase Million).
 
 > ### {% icon details %} RPKM, FPKM and TPM?
 >
@@ -913,7 +915,7 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 >    **Scaling factor** | 3.5 | 4.5 | 10.6
 >
 >    *Because of the small values in the example, we are scoring using a factor of 10.*
->    
+>
 > 2. Divide the read counts by the "per million" scaling factor
 >
 >    This normalizes for sequencing depth, giving reads per million (RPM)
@@ -923,8 +925,8 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 >    A (2kb) | 2.86 | 2.67 | 2.83
 >    B (4kb) | 5.71 | 5.56 | 5.66
 >    C (1kb) | 1.43 | 1.78 | 1.43
->    D (10kb) | 0 | 0 | 0.09  
-> 
+>    D (10kb) | 0 | 0 | 0.09
+>
 > 3. Divide the RPM values by the length of the gene, in kilobases
 >
 >    Gene | Sample 1 RPKM | Sample 2 RPKM | Sample 3 RPKM
@@ -932,15 +934,15 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 >    A (2kb) | 1.43 | 1.33 | 1.42
 >    B (4kb) | 1.43 | 1.39 | 1.42
 >    C (1kb) | 1.43 | 1.78 | 1.42
->    D (10kb) | 0 | 0 | 0.009  
+>    D (10kb) | 0 | 0 | 0.009
 >
 > **FPKM** (Fragments Per Kilobase Million) is very similar to RPKM. RPKM is for single-end RNA-seq and FPKM for paired-end RNA-seq. With single-end, every read corresponds to a single fragment that was sequenced. With paired-end RNA-seq, two reads of a pair are mapped from a single fragment, or if one read in the pair did not map, one read can correspond to a single fragment (in case we decided to keep these). FPKM keeps tracks of fragments so that one fragment with 2 reads is counted only once.
 >
 >
 > **TPM** (Transcripts Per Kilobase Million) is very similar to RPKM and FPKM, except the order of the operation
-> 
+>
 > 1. Divide the read counts by the length of each gene in kilobases
-> 
+>
 >    This gives the reads per kilobase (RPK).
 >
 >    Gene | Sample 1 RPK | Sample 2 RPK | Sample 3 RPK
@@ -949,7 +951,7 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 >    B (4kb) | 5 | 6.25 | 15
 >    C (1kb) | 5 | 8 | 15
 >    D (10kb) | 0 | 0 | 0.1
-> 
+>
 > 2. Compute the "per million" scaling factor: sum up all the RPK values in a sample and divide this number by 1,000,000
 >
 >    Gene | Sample 1 RPK | Sample 2 RPK | Sample 3 RPK
@@ -971,10 +973,10 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 >    B (4kb) | 3.33 | 3.09 | 3.33
 >    C (1kb) | 3.33 | 3.95 | 3.33
 >    D (10kb) | 0 | 0 | 0.1
-> 
+>
 >
 > Contrary to RPKM and FPKM, when calculating TPM, we normalize for gene length first, and then normalize for sequencing depth second. However, the effects of this difference are quite profound, as we could already see with the example.
-> 
+>
 > The sums of each colum are very different:
 >
 >    Gene | Sample 1 RPKM | Sample 2 RPKM | Sample 3 RPKM
@@ -994,10 +996,10 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 >    **Total** | 10 | 10 | 10
 >
 > The sum of all TPMs in each sample are the same. This makes it easier to compare the proportion of reads that mapped to a gene in each sample. In contrast, with RPKM and FPKM, the sum of the normalized reads in each sample may be different, and this makes it harder to compare samples directly.
-> 
+>
 > In the example, TPM for gene A in Sample 1 is 3.33 and in sample 2 is 3.33. The same proportion of total reads maps then to gene A in both samples (0.33 here). Indeed, the sum of the TPMs in both samples adds up to the same number (10 here), the denominator required to calculate the proportions is then the same regardless of the sample, and so the proportion of reads for gene A (3.33/10 = 0.33) for both sample.
-> 
-> With RPKM or FPKM, it is harder to compare the proportion of total reads because the sum of normalized reads in each sample can be different (4.29 for Sample 1 and 4.25 for Sample 2). Thus, if RPKM for gene A in Sample 1 is 1.43 and in Sample B is 1.43, we do not know if the same proportion of reads in Sample 1 mapped to gene A as in Sample 2. 
+>
+> With RPKM or FPKM, it is harder to compare the proportion of total reads because the sum of normalized reads in each sample can be different (4.29 for Sample 1 and 4.25 for Sample 2). Thus, if RPKM for gene A in Sample 1 is 1.43 and in Sample B is 1.43, we do not know if the same proportion of reads in Sample 1 mapped to gene A as in Sample 2.
 >
 > Since RNA-Seq is all about comparing relative proportion of reads, TPM seems more appropriate than RPKM/FPKM.
 {: .details}
@@ -1020,7 +1022,7 @@ F | 13 | 102
 
 The read count for all genes except for gene C and D is really high in Sample 2. But the only differentially expressed gene is gene D.
 
-TPM, RPKM or FPKM do not deal with these differences in library composition in normalization, but more complex tools, like DESeq2, do. 
+TPM, RPKM or FPKM do not deal with these differences in library composition in normalization, but more complex tools, like DESeq2, do.
 
 [**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) ({% cite love2014moderated %}) is a great tool for dealing with RNA-seq data and running Differential Gene Expression (DGE) analysis. It takes read count files from different samples, combines them into a big table (with genes in the rows and samples in the columns) and applies normalization for **sequencing depth** and **library composition**. Gene length normalization does not need to be accounted for because we are comparing the counts between sample groups for the same gene.
 
@@ -1036,7 +1038,7 @@ TPM, RPKM or FPKM do not deal with these differences in library composition in n
 > The goal is to calculate a scaling factor for each sample, that takes read depth and library composition into account.
 >
 > 1. Take the log$$_e$$ of all the values
-> 
+>
 >     Gene | log(Sample 1) | log(Sample 2) | log(Sample 3)
 >     A | -Inf | 2.3 | 1.4
 >     B | 0.7 | 1.8 | 2.5
@@ -1054,7 +1056,7 @@ TPM, RPKM or FPKM do not deal with these differences in library composition in n
 > 3. Filter out genes with infinity
 >
 >     Gene | Average of log values
->      | 
+>      |
 >     B | 1.7
 >     C | 4.3
 >
@@ -1063,9 +1065,9 @@ TPM, RPKM or FPKM do not deal with these differences in library composition in n
 > 4. Substract the average log value from the log counts
 >
 >     Gene | log(Sample 1) | log(Sample 2) | log(Sample 3)
->      |  |  | 
->     B | -1.0 | 0.1 | 0.5
->     C | -0.8 | -0.3 | 1.3
+>      |  |  |
+>     B | -1.0 | 0.1 | 0.8
+>     C | -0.8 | -0.3 | 1.0
 >
 >     $$log(\textrm{counts for gene X}) - average(\textrm{log values for counts for gene X}) = log(\frac{\textrm{counts for gene X}}{\textrm{average for gene X}})$$
 >
@@ -1074,9 +1076,9 @@ TPM, RPKM or FPKM do not deal with these differences in library composition in n
 > 5. Calculate the median of the ratios for each sample
 >
 >     Gene | log(Sample 1) | log(Sample 2) | log(Sample 3)
->      |  |  | 
->     B | -1.0 | 0.1 | 0.5
->     C | -0.8 | -0.3 | 1.3
+>      |  |  |
+>     B | -1.0 | 0.1 | 0.8
+>     C | -0.8 | -0.3 | 1.0
 >     **Median** | -0.9 | -0.1 | 0.9
 >
 >     The median is used here to avoid extreme genes (most likely rare ones) from swaying the value too much in one direction. It helps to put more emphasis on moderately expressed genes.
@@ -1085,19 +1087,20 @@ TPM, RPKM or FPKM do not deal with these differences in library composition in n
 >
 >     Gene | Sample 1 | Sample 2 | Sample 3
 >     **Median** | -0.9 | -0.1 | 0.9
->     **Scaling factors** | 0.4 | 0.7 | 2.5
+>     **Scaling factors** | 0.4 | 0.9 | 2.5
 >
 > 7. Compute the normalized counts: divide the original counts by the scaling factors
 >
 >     Gene | Sample 1 | Sample 2 | Sample 3
->     A | 0 | 14 | 2
->     B | 5 | 9 | 5
->     C | 83 | 79 | 80
+>     A | 0 | 11.11 | 1.6
+>     B | 5 | 6.67 | 4.8
+>     C | 83 | 61.11 | 80
 >
-> *This explanation is a transcription and adaptation of the [StatQuest video explaining Library Normalization in DESEq2](https://www.youtube.com/watch?v=UFB993xufUU)*
+> *This explanation is a transcription and adaptation of the [StatQuest video explaining Library Normalization in DESEq2](https://www.youtube.com/watch?v=UFB993xufUU&t=35s)*
+>
 {: .details}
 
-DESeq2 runs also the Differential Gene Expression (DGE) analysis, whose two basic tasks are:
+DESeq2 also runs the Differential Gene Expression (DGE) analysis, whose two basic tasks are:
 
 - Estimate the biological variance using the replicates for each condition
 - Estimate the significance of expression differences between any two conditions
@@ -1113,7 +1116,7 @@ This expression analysis is estimated from read counts and attempts are made to 
 > We recommend to combine the count tables for different technical replicates (but not for biological replicates) before a differential expression analysis (see [DESeq2 documentation](http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#collapsing-technical-replicates))
 {: .details}
 
-Multiple factors with several levels can then be incorporated in the analysis. After normalization we can compare the response of the expression of any gene to the presence of different levels of a factor in a statistically reliable way.
+Multiple factors with several levels can then be incorporated in the analysis describing known sources of variation (e.g. treatment, tissue type, gender, batches), with two or more levels representing the conditions for each factor. After normalization we can compare the response of the expression of any gene to the presence of different levels of a factor in a statistically reliable way.
 
 In our example, we have samples with two varying factors that can contribute to differences in gene expression:
 
@@ -1131,39 +1134,35 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 >
 > 1. **DESeq2** {% icon tool %} with the following parameters:
 >    - *"how"*: `Select datasets per level`
->       - In *"Factor"*:
->          - In "1: Factor"
->              - *"Specify a factor name"*: `Treatment`
->              - In *"Factor level"*:
->                  - In *"1: Factor level"*:
->                      - *"Specify a factor level"*: `treated`
->                      - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `treat` in their name
->                  - In *"2: Factor level"*:
->                      - *"Specify a factor level"*: `untreated`
->                      - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `untreat` in their name
->
->          - Click on {% icon param-repeat %} *"Insert Factor"* (not on "Insert Factor level")
->          - In "2: Factor"
->              - "Specify a factor name" to `Sequencing`
->              - In *"Factor level"*:
->                  - In *"1: Factor level"*:
->                      - *"Specify a factor level"*: `PE`
->                      - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `paired` in their name
->                  - In *"2: Factor level"*:
->                      - *"Specify a factor level"*: `SE`
->                      - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `single` in their name
+>      - In "1: Factor"
+>        - *"Specify a factor name"*: `Treatment`
+>        - In *"1: Factor level"*:
+>          - *"Specify a factor level"*: `treated`
+>          - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `treat` in their name
+>        - In *"2: Factor level"*:
+>          - *"Specify a factor level"*: `untreated`
+>          - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `untreat` in their name
+>      - Click on {% icon param-repeat %} *"Insert Factor"* (not on "Insert Factor level")
+>      - In "2: Factor"
+>        - "Specify a factor name" to `Sequencing`
+>        - In *"1: Factor level"*:
+>          - *"Specify a factor level"*: `PE`
+>          - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `paired` in their name
+>        - In *"2: Factor level"*:
+>          - *"Specify a factor level"*: `SE`
+>          - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `single` in their name
 >    - *"Files have header?"*: `No`
 >    - *"Visualising the analysis results"*: `Yes`
 >    - *"Output normalized counts table"*: `Yes`
 >
->    {% include snippets/select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
 >    > ### {% icon comment %} Comment: Using group tags for large sample sets
 >    >
 >    > If you have a large number of samples, or a complex experimental design, manually selecting files for each factor level
 >    > may be a lot of work. In these situations, **group tags** can make your life a lot easier.
 >    >
->    > For more information about setting and using group tags, please see [this tutorial]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/group-tags/tutorial.md %})
+>    > For more information about setting and using group tags, please see [this tutorial]({% link topics/galaxy-interface/tutorials/group-tags/tutorial.md %})
 >    {: .comment}
 >
 {: .hands_on}
@@ -1208,8 +1207,8 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
         {: .question}
 
     2. Heatmap of the sample-to-sample distance matrix (with clustering) based on the normalized counts
-    
-        The heatmap gives an overview of similarities and dissimilarities between samples: the color represents the distance between the samples. Dark blue means shorter distance, i.e. closer samples given the normalized counts. 
+
+        The heatmap gives an overview of similarities and dissimilarities between samples: the color represents the distance between the samples. Dark blue means shorter distance, i.e. closer samples given the normalized counts.
 
         > ### {% icon question %} Questions
         >
@@ -1218,7 +1217,7 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
         > How are the samples grouped?
         >
         > > ### {% icon solution %} Solution
-        > > They are first grouped by the treatment (the first factor) and secondly by the library type (the second factor), as in the PCA plot.
+        > > They are first grouped by the treatment (the first factor) and secondly by the sequencing type (the second factor), as in the PCA plot.
         > >
         > {: .solution}
         {: .question}
@@ -1230,9 +1229,9 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
     4. Histogram of *p*-values for the genes in the comparison between the 2 levels of the 1st factor
 
     5. [MA plot](https://en.wikipedia.org/wiki/MA_plot)
-    
+
         It displays the global view of the relationship between the expression change of conditions (log ratios, M), the average expression strength of the genes (average mean, A), and the ability of the algorithm to detect differential gene expression. The genes that passed the significance threshold (adjusted p-value < 0.1) are colored in red.
-    
+
 - A summary file with the following values for each gene
 
     1.  Gene identifiers
@@ -1252,14 +1251,13 @@ For more information about **DESeq2** and its outputs, you can have a look at [*
 >
 > 1. Is the FBgn0003360 gene differentially expressed because of the treatment? If yes, how much?
 > 2. We could also hypothetically be interested in the effect of the sequencing (or other secondary factors in other cases). How would we know the differentially expressed genes because of sequencing type?
-> 3. We would like to analyze the interaction between the treatment and the sequencing. 
+> 3. We would like to analyze the interaction between the treatment and the sequencing.
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. FBgn0003360 is differentially expressed because of the treatment: it has a significant adjusted p-value ($$4.0 \cdot 10^{-178} << 0.05$$). It is less expressed (`-` in the log2FC column) in treated samples compared to untreated samples, by a factor ~8 ($$2^{log2FC} = 2^{2.99977727873544}$$).
-> > 2. DESeq2 in Galaxy returns the comparison between the different levels for the 1st factor, after 
-correction for the variability due to the 2nd factor. In our current case, treated against untreated for any sequencing type. To compare both sequencing types, we should run again DESeq2 by switching
-both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) becomes factor 1.
+> > 2. DESeq2 in Galaxy returns the comparison between the different levels for the 1st factor, after
+correction for the variability due to the 2nd factor. In our current case, treated against untreated for any sequencing type. To compare sequencing types, we should run DESeq2 again switching factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) becomes factor 1.
 > > 3. To add the interaction between two factors (e.g. treated for paired-end data vs untreated for single-end), we should run DESeq2 another time but with only one factor with the following 4 levels:
 > >    - treated-PE
 > >    - untreated-PE
@@ -1267,7 +1265,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
 > >    - untreated-SE
 > >
 > >    By selection *"Output all levels vs all levels of primary factor (use when you have >2 levels for primary factor)"* to `Yes`, we can then compare treated-PE vs untreated-SE.
-> > 
+> >
 > {: .solution}
 {: .question}
 
@@ -1320,7 +1318,7 @@ Now we would like to extract the most differentially expressed genes due to the 
 
 We now have a table with 130 lines corresponding to the most differentially expressed genes. For each gene, we have its ID, its mean normalized counts (averaged over all samples from both conditions), its $$log_{2} FC$$ and other information.
 
-The ID for each gene is something like FBgn0003360, which is an ID from the corresponding database, here Flybase. These IDs are unique but sometimes we prefer to have the gene names, even if they may not reference an unique gene (e.g. duplicated after re-annotation). But gene names may hint already to a function or they help you to search for desired candidates. We would also like to have the location of these genes within the genome. To do that, we need do add extra annotations from the annotation file which we used for mapping and counting.
+The ID for each gene is something like FBgn0003360, which is an ID from the corresponding database, here Flybase ({% cite thurmond2018flybase %}). These IDs are unique but sometimes we prefer to have the gene names, even if they may not reference an unique gene (e.g. duplicated after re-annotation). But gene names may hint already to a function or they help you to search for desired candidates. We would also like to display the location of these genes within the genome. We can extract such information from the annotation file which we used for mapping and counting.
 
 > ### {% icon hands_on %} Hands-on: Annotation of the differentially expressed genes
 >
@@ -1338,6 +1336,7 @@ The ID for each gene is something like FBgn0003360, which is an ID from the corr
 {: .hands_on}
 
 The generated output is an extension of the previous file:
+
 1. Gene identifiers
 2. Mean normalized counts over all samples
 3. Log2 fold change
@@ -1374,10 +1373,10 @@ The column names may not be precise so we would like to add them before going fu
 >    GeneID	Base mean	log2(FC)	StdErr	Wald-Stats	P-value	P-adj	Chromosome	Start	End	Strand	Feature	Gene name
 >    ```
 >
->    {% include snippets/create_new_file.md format="tabular" %}
+>    {% snippet faqs/galaxy/datasets_create_new_file.md format="tabular" %}
 >
 > 2. **Concatenate datasets** {% icon tool %} to add this header line to the **Annotate** output:
->    - {% icon param-file %} *"Concatenate Dataset"*: `Pasted entry` dataset
+>    - {% icon param-file %} *"Concatenate Dataset"*: the `Pasted entry` dataset
 >    - *"Dataset"*
 >       - Click on {% icon param-repeat %} *"Insert Dataset"*
 >         - {% icon param-file %} *"select"*: output of **Annotate**
@@ -1391,14 +1390,15 @@ The column names may not be precise so we would like to add them before going fu
 We could plot the $$log_{2} FC$$ for the extracted genes, but here we would like to look at a heatmap of expression for these genes in the different samples. So we need to extract the normalized counts for these genes.
 
 We proceed in several steps:
+
 - Extract and plot the normalized counts for these genes for each sample with a heatmap, using the normalized count file generated by DESeq2
 - Compute, extract and plot the Z-score of the normalized counts
 
 > ### {% icon comment %} Advanced tutorials on visualization
 >
 > In this tutorial, we will quickly explain some possible visualization. For more details, please have a look in the extra tutorials on visualization of RNA-Seq results:
-> - [Visualization of RNA-Seq results with heatmap2]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.md %})
-> - [Visualization of RNA-Seq results with Volcano Plot]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %})
+> - [Visualization of RNA-Seq results with heatmap2]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.md %})
+> - [Visualization of RNA-Seq results with Volcano Plot]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %})
 {: .comment}
 
 ### Visualization of the normalized counts
@@ -1406,7 +1406,7 @@ We proceed in several steps:
 To extract the normalized counts for the interesting genes, we join the normalized count table generated by DESeq2 with the table we just generated. We will then keep only the lines corresponding to the most differentially expressed genes.
 
 > ### {% icon hands_on %} Hands-on: Extract the normalized counts of the most differentially expressed genes
-> 3. **Join two Datasets** {% icon tool %} with the following parameters:
+> 1. **Join two Datasets** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Join"*: the `Normalized counts` file (output of **DESeq2** {% icon tool %})
 >    - *"using column"*: `Column: 1`
 >    - {% icon param-file %} *"with"*: `Genes with significant adj p-value & abs(FC) > 2`
@@ -1416,7 +1416,7 @@ To extract the normalized counts for the interesting genes, we join the normaliz
 >
 >    The generated file has more columns than we need for the heatmap: mean normalized counts, $$log_{2} FC$$ and other annotation information. We need to remove the extra columns.
 >
-> 4. **Cut** {% icon tool %} to extract the columns with the gene IDs and normalized counts:
+> 2. **Cut** {% icon tool %} to extract the columns with the gene IDs and normalized counts:
 >    - *"Cut columns"*: `c1-c8`
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: the joined dataset (output of **Join two Datasets** {% icon tool %})
@@ -1459,16 +1459,17 @@ You should obtain something similar to:
 
 To compare the gene expression over samples, we could also use the Z-score, which is often represented in publications.
 
-The Z-score gives the number of standard-deviations that a value is away from the mean of all the values in the same group, here the same gene. A Z-score of -2 for the gene X in sample A means that this value is 2 standard-deviations lower than the mean of the values for gene X in all the samples (A, B, C, etc). 
+The Z-score gives the number of standard-deviations that a value is away from the mean of all the values in the same group, here the same gene. A Z-score of -2 for the gene X in sample A means that this value is 2 standard-deviations lower than the mean of the values for gene X in all the samples (A, B, C, etc).
 
 The Z-score $$z_{i,j}$$ for a gene $$i$$ in a sample $$j$$ given the normalized count $$x_{i,j}$$ is computed as $$z_{i,j} = \frac{x_{i,j}- \overline{x_i}}{s_i}$$ with $$\overline{x_i}$$ the mean and $$s_i$$ the standard deviation of the normalized counts for the gene $$i$$ over all samples.
 
 > ### {% icon comment %} Compute the Z-score for all genes
-> 
+>
 > To save time in this tutorial, we will compute the Z-score directly on the normalized count of the most differentially expressed genes. In a standard analysis, we would compute the Z-score on all the genes (`Normalized count` file from **DESeq**) and then filter for the interesting genes as we did in the previous step.
 {: .comment}
 
 To compute the Z-score, we break the process into 2 steps:
+
 1. Substract each value by the mean of values in the row (i.e. $$x_{i,j}- \overline{x_i}$$) using the normalized count table
 2. Divide the previous values by the standard deviation of values of row, using 2 tables (the normalized counts and the table computed in the previous step)
 
@@ -1481,7 +1482,7 @@ To compute the Z-score, we break the process into 2 steps:
 >          - *"Custom expression on 'table', along 'axis' (0 or 1)"*: `table.sub(table.mean(1), 0)`
 >
 >            The `table.mean(1)` expression computes the mean for each row (here the genes) and `table.sub(table.mean(1), 0)` substracts each value by the mean of the row (computed with `table.mean(1)`)
->    
+>
 > 1. **Table Compute** {% icon tool %} with the following parameters:
 >    - *"Input Single or Multiple Tables"*: `Multiple Table`
 >      - In *"1: Tables"*:
@@ -1535,18 +1536,19 @@ We would like now to plot a heatmap for the Z-scores:
 
 # Functional enrichment analysis of the DE genes
 
-We have extracted genes that are differentially expressed in treated (PS gene-depleted) samples compared to untreated samples. Now, we would like to know if the differentially expressed genes are enriched transcripts of genes which belong to more common or specific categories to classify their potential function a bit better. These categories are called Gene Ontologies (GO).
+We have extracted genes that are differentially expressed in treated (PS gene-depleted) samples compared to untreated samples. Now, we would like to know if the differentially expressed genes are enriched transcripts of genes which belong to more common or specific categories in order to identify biological functions that might be impacted.
 
 ## Gene Ontology analysis
 
 [Gene Ontology (GO)](http://www.geneontology.org/) analysis is widely used to reduce complexity and highlight biological processes in genome-wide expression studies. However, standard methods give biased results on RNA-Seq data due to over-detection of differential expression for long and highly-expressed transcripts.
 
-The [**goseq**](https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf) tool ({% cite young2010gene %}) provides methods for performing GO analysis of RNA-Seq data, taking length bias into account. The methods and software used by goseq are equally applicable to other category based tests of RNA-Seq data, such as KEGG pathway analysis.
+[**goseq**](https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf) ({% cite young2010gene %}) provides methods for performing GO analysis of RNA-Seq data while taking length bias into account. **goseq** could also be applied to other category-based tests of RNA-Seq data, such as KEGG pathway analysis, as discussed in a further section.
 
 **goseq** needs 2 files as inputs:
+
 - A tabular file with the differentially expressed genes from all genes assayed in the RNA-Seq experiment with 2 columns:
     - the Gene IDs (unique within the file), in uppercase letters
-    - a boolean telling if the gene is differentially expressed or not: `True` if differentially expressed or `False` if not
+    - a boolean indicating whether the gene is differentially expressed or not (`True` if differentially expressed or `False` if not)
 - A file with information about the length of a gene to correct for potential length bias in differentially expressed genes
 
 > ### {% icon hands_on %} Hands-on: Prepare the datasets for goseq
@@ -1570,7 +1572,7 @@ The [**goseq**](https://bioconductor.org/packages/release/bioc/vignettes/goseq/i
 >
 >    We just generated the first input for **goseq**. As second input for **goseq** we need the gene lengths. We can use here the gene lengths generated by **featureCounts** {% icon tool %} and format the gene IDs.
 >
-> 5. Drag and drop one of the gene length file generated by **featureCounts** {% icon tool %} into this history using the {% icon galaxy-columns %} **View all histories**
+> 5. Drag and drop one of the feature length datasets generated by **featureCounts** {% icon tool %} into this history using the {% icon galaxy-columns %} **View all histories**
 >
 > 6. **Change Case** {% icon tool %} with
 >    - {% icon param-file %} *"From"*: the `feature lengths` (output of **featureCounts** {% icon tool %})
@@ -1600,7 +1602,8 @@ We have now the two required input files for goseq.
 
 **goseq** generates with these parameters 3 outputs:
 
-1. A big table (`Ranked category list - Wallenius method`) with the following columns for each GO term:
+1. A table (`Ranked category list - Wallenius method`) with the following columns for each GO term:
+
     1. `category`: GO category
     2. `over_rep_pval`: *p*-value for over-representation of the term in the differentially expressed genes
     3. `under_rep_pval`: *p*-value for under-representation of the term in the differentially expressed genes
@@ -1609,7 +1612,7 @@ We have now the two required input files for goseq.
     6. `term`: detail of the term
     7. `ontology`: MF (Molecular Function - molecular activities of gene products), CC (Cellular Component - where gene products are active), BP (Biological Process - pathways and larger processes made up of the activities of multiple gene products)
     8. `p.adjust.over_represented`: *p*-value for over-representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure
-    9. `p.adjust.under_represented`: *p*-value for over-representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure
+    9. `p.adjust.under_represented`: *p*-value for under-representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure
 
     To identify categories significantly enriched/unenriched below some p-value cutoff, it is necessary to use the adjusted *p*-value.
 
@@ -1634,7 +1637,7 @@ We have now the two required input files for goseq.
 2. A graph with the top 10 over-represented GO terms
 
     > ### {% icon question %} Questions
-    > 
+    >
     > ![Top over-represented GO terms](../../images/ref-based/top_over-represented_go_terms.png)
     >
     > What is the x-axis? How is it computed?
@@ -1648,14 +1651,14 @@ We have now the two required input files for goseq.
 
 3. A table with the differentially expressed genes (from the list we provided) associated to the GO terms (`DE genes for categories (GO/KEGG terms)`)
 
-> ### {% icon comment %} Advanced tutorial on visualization
+> ### {% icon comment %} Advanced tutorial on enrichment analysis
 >
-> In this tutorial, we covered GO enrichment analysis with **goseq**. To learn other gene set enrichment analysis, please have a look at the ["RNA-Seq genes to pathways"]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.md %}) tutorial.
+> In this tutorial, we covered GO enrichment analysis with **goseq**. To learn other gene set enrichment analysis, please have a look at the ["RNA-Seq genes to pathways"]({% link topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.md %}) tutorial.
 {: .comment}
 
 ## KEGG pathways analysis
 
-**goseq** can also be used to identify interesting KEGG pathways. The KEGG pathway database is a collection of pathway maps representing the current knowledge on the molecular interaction, reaction and relation networks. A map can integrate many entities including genes, proteins, RNAs, chemical compounds, glycans, and chemical reactions, as well as disease genes and drug targets. 
+**goseq** can also be used to identify interesting KEGG pathways. The KEGG pathway database is a collection of pathway maps representing the current knowledge on the molecular interaction, reaction and relation networks. A map can integrate many entities including genes, proteins, RNAs, chemical compounds, glycans, and chemical reactions, as well as disease genes and drug targets.
 
 For example, the pathway `dme00010` represents the Glycolysis process (conversion of glucose into pyruvate with generation of small amounts of ATP and NADH) for Drosophila melanogaster:
 
@@ -1701,6 +1704,7 @@ As for the GO terms, 2 files are generated:
 We could investigate which genes are involved in which pathways by looking at the second file generated by **goseq**. But it can be cumbersome and we would like to see the pathways as represented in the previous image. **Pathview** ({% cite luo2013pathview %}) can help to generate automatically similar images as the previous one but also add extra information about the genes (e.g. expression) in our study.
 
 This tool needs 2 main information as inputs:
+
 - Pathway ID(s) to plot, either as just one ID or as a file with one column with the pathway IDs
 - A tabular file with the genes in the RNA-Seq experiment with 2 (or more) columns:
     - the gene IDs (unique within the file)
@@ -1748,7 +1752,7 @@ Here we would like to visualize the 2 KEGG pathways: the over-represented `00010
 **Pathview** generates a collection with the KEGG visualization: one file per pathway.
 
 > ### {% icon question %} Questions
-> 
+>
 > `dme00010` KEGG pathway from **Pathview**
 >
 > ![KEGG pathway](../../images/ref-based/dme00010.png)

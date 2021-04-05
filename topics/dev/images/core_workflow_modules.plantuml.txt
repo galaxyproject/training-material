@@ -1,0 +1,33 @@
+@startuml
+
+!include plantuml_options.txt
+
+abstract class WorkflowModule {
+    from_dict()
+    from_workflow_step()
+    get_tool_state()
+    get_export_state()
+    get_all_inputs()
+    get_all_outputs()
+    get_config_form()
+    get_runtime_inputs()
+    get_runtime_state()
+}
+
+class SubWorkflowModule
+class InputModule
+class InputDataModule
+class InputDataCollectionModule
+class InputParameterModule
+class ToolModule
+class PauseModule
+
+WorkflowModule <|-- SubWorkflowModule
+WorkflowModule <|-- InputModule
+InputModule <|-- InputDataModule
+InputModule <|-- InputDataCollectionModule
+InputModule <|-- InputParameterModule
+WorkflowModule <|-- ToolModule
+WorkflowModule <|-- PauseModule
+
+@enduml

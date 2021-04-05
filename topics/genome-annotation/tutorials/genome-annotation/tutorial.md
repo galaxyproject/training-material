@@ -6,8 +6,10 @@ zenodo_link: "https://doi.org/10.5281/zenodo.1250793"
 tags:
   - prokaryote
 questions:
+enable: false
 objectives:
 time_estimation: "2H"
+level: Introductory
 key_points:
 contributors:
   - erxleben

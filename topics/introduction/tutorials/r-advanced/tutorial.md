@@ -7,7 +7,7 @@ zenodo_link: ""
 requirements:
   -
     type: "internal"
-    topic_name: galaxy-ui
+    topic_name: galaxy-interface
     tutorials:
         - rstudio
   -
@@ -46,7 +46,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-With HTS-Seq data analysis, we generated tables containing list of DE genes, their expression, some statistics, etc. We can manipulate these tables using Galaxy, as we saw in some tutorials, e.g. ["Reference-based RNA-Seq data analysis"]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), and create some visualisations.
+With HTS-Seq data analysis, we generated tables containing list of DE genes, their expression, some statistics, etc. We can manipulate these tables using Galaxy, as we saw in some tutorials, e.g. ["Reference-based RNA-Seq data analysis"]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), and create some visualisations.
 
 Sometimes we want to have some customizations on visualization, some complex table manipulations or some statistical analysis. If we can not find a Galaxy tools for that or the right parameters, we may need to use programming languages as R or Python.
 
@@ -55,7 +55,7 @@ Sometimes we want to have some customizations on visualization, some complex tab
 {% include topics/introduction/tutorials/r-basics/r_introduction.md %}
 {% include topics/introduction/tutorials/r-basics/disclaimer.md %}
 
-In this tutorial, we will take the list of DE genes extracted from DESEq2's output that we generated in the ["Reference-based RNA-Seq data analysis" tutorial]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), manipulate it and create some visualizations.
+In this tutorial, we will take the list of DE genes extracted from DESEq2's output that we generated in the ["Reference-based RNA-Seq data analysis" tutorial]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), manipulate it and create some visualizations.
 
 > ### Agenda
 >
@@ -150,7 +150,7 @@ Now, let's read the file with the annotated differentially expressed genes that 
 >  > Rstudio in Galaxy provides some special functions to import and export from your history.
 >  >
 >  > ```R
->   > gx_get(2) # will import dataset number 2 from your history
+>  > gx_get(2) # will import dataset number 2 from your history
 >  > ```
 >  {: .tip}
 {: .hands_on}

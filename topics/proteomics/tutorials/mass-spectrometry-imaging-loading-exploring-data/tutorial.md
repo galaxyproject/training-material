@@ -65,7 +65,7 @@ The data for this tutorial comes from MALDI-TOF imaging of peptides in a mouse k
 >
 > 1. **Create a new history** and give it a name.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Upload the data from [Zenodo](https://zenodo.org/record/1560646) via the **composite** option
 >
@@ -91,7 +91,7 @@ The data for this tutorial comes from MALDI-TOF imaging of peptides in a mouse k
 >
 >    > ### {% icon tip %} Tip: FTP upload for large files
 >    > * In case one subfile is larger than 2 GB the uploading needs to be done via ftp.
->    > * The necessary steps are explained in this tutorial [Getting data into Galaxy]({{ site.baseurl }}/topics/galaxy-data-manipulation/tutorials/get-data/slides.html)
+>    > * The necessary steps are explained in this tutorial [Getting data into Galaxy]({{ site.baseurl }}/topics/galaxy-interface/tutorials/get-data/slides.html)
 >    {: .tip}
 >
 >    > ### {% icon tip %} Tip: Uploading an Analyze7.5 file
@@ -132,11 +132,11 @@ The mouse kidney dataset contains internal calibrants that were sprayed together
 >    1570.68    Fibrinopeptide_B
 >    2465.19    ACTH_18-39
 >    ```
->    {% include snippets/create_new_file.md convertspaces=true %}
+>    {% snippet faqs/galaxy/datasets_create_new_file.md convertspaces=true %}
 >
 > 2. **Rename dataset** to `Calibrants`
 >
->    {% include snippets/rename_dataset.md name="Calibrants" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="Calibrants" %}
 >
 > 3. Run the **MSI Qualitycontrol** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"MSI data"*: `mouse_kidney_cut imzML` will be automatically recognized as input file
@@ -250,7 +250,7 @@ The spectra data output can be filtered for certain spectra to obtain some spect
 >    - *"Flavor"*: `general numeric sort`
 >
 > 3. Run **Select lines that match an expression** {% icon tool %} from the 'filter and sort' category with the following parameters:
->    - {% icon param-file %} *"Sort Query"*: `Data exporter spectra` (output of **MSI data exporter** {% icon tool %})
+>    - {% icon param-file %} *"Select lines from"*: `Data exporter spectra` (output of **MSI data exporter** {% icon tool %})
 >    - *"the pattern"*: `(xy_40_40)|(xy_23_70)|(xy_20_73)`
 >
 {: .hands_on}

@@ -1,7 +1,10 @@
 ---
 layout: tutorial_hands_on
 
-title: Single-cell quality control with scater
+title: "Single-cell quality control with scater"
+subtopic: single-cell
+priority: 5
+
 zenodo_link: 'https://zenodo.org/record/3386291'
 tags:
   - single-cell
@@ -17,7 +20,14 @@ requirements:
     type: "internal"
     topic_name: transcriptomics
     tutorials:
-      - scrna-preprocessing
+      - scrna-plates-batches-barcodes
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: transcriptomics
+    tutorials:
+      - scrna-raceid
+
 time_estimation: 1H
 key_points:
 - Single-cell RNA-seq data is often noisy
@@ -25,6 +35,8 @@ key_points:
 contributors:
 - ethering
 - nsoranzo
+
+gitter: Galaxy-Training-Network/galaxy-single-cell
 
 ---
 
@@ -76,8 +88,8 @@ We will use a pre-calculated expression matrix, along with some additional metad
 >    https://zenodo.org/record/3386291/files/mt_controls.txt
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
 
@@ -92,7 +104,7 @@ Take a look at the uploaded data by clicking on the {% icon galaxy-eye %} symbol
 
 > ### {% icon hands_on %} Hands-on: Calculate QC metrics
 >
-> 1. **Scater: Calculate QC metrics** {% icon tool %} with the following parameters:
+> 1. {% tool [Scater: Calculate QC metrics](toolshed.g2.bx.psu.edu/repos/iuc/scater_create_qcmetric_ready_sce/scater_create_qcmetric_ready_sce/1.12.2) %}  with the following parameters:
 >    - {% icon param-file %} *"Expression matrix in tabular format"*: `counts.txt` (Input dataset)
 >    - {% icon param-file %} *"Format dataset describing the features in tabular format"*: `annotation.txt` (Input dataset)
 >    - {% icon param-file %} *"Dataset containing the list of the mitochondrial control genes"*: `mt_controls.txt` (Input dataset)
@@ -108,7 +120,7 @@ Next, lets take a look at the data by plotting various properties to see what ou
 
 > ### {% icon hands_on %} Hands-on: Plot library QC
 >
-> 1. **Scater: plot library QC** {% icon tool %} with the following parameters:
+> 1. {% tool [Scater: plot library QC](toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2) %}  with the following parameters:
 >    - {% icon param-file %} *"Input SingleCellLoomExperiment dataset"*: `output_loom` (output of **Scater: Calculate QC metrics** {% icon tool %})
 >     - {% icon param-check %} *"Plot on log scale"*: `No`
 >
@@ -141,7 +153,7 @@ Here, we'll use the manual filtering method.
 
 > ### {% icon hands_on %} Hands-on: Filtering with scater
 >
-> 1. **Scater: filter SCE** {% icon tool %} with the following parameters:
+> 1. {% tool [Scater: filter SCE](toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2) %}  with the following parameters:
 >    - {% icon param-file %} *"Input SingleCellLoomExperiment dataset"*: `output_loom` (output of **Scater: Calculate QC metrics** {% icon tool %})
 >    - *"Type of filter"*: `manual`
 >        - *"Number of reads mapped to a gene for it to be counted as expressed"*: `4.0`
@@ -164,7 +176,7 @@ Here, we'll use the manual filtering method.
 
 > ### {% icon hands_on %} Hands-on: Plot library QC after filtering
 >
-> 1. **Scater: plot library QC** {% icon tool %} with the following parameters:
+> 1. {% tool [Scater: plot library QC](toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2) %}  with the following parameters:
 >    - {% icon param-file %} *"Input SingleCellLoomExperiment dataset"*: `output_loom` (output of **Scater: filter SCE** {% icon tool %})
 >
 {: .hands_on}
@@ -186,7 +198,7 @@ Another filtering approach is to identify outliers in the data and remove them. 
 As we are using a rather small test dataset, it's unlikely that PCA filtering will make any difference; for a larger, noisier dataset this is what we would perform instead:
 
 > ### {% icon hands_on %} Hands-on: Task description
-> 1. **Scater: filter SCE** {% icon tool %} with the following parameters:
+> 1. {% tool [Scater: filter SCE](toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2) %}  with the following parameters:
 >    - {% icon param-file %} *"Input SingleCellLoomExperiment dataset"*: `output_loom` (output of **Scater: Calculate QC metrics** {% icon tool %})
 >    - *"Type of filter"*: `automatic`
 >
@@ -208,7 +220,7 @@ As we are using a rather small test dataset, it's unlikely that PCA filtering wi
 As discussed previously, technical artefacts can bias scRNA-seq analyses. Strong batch effects can mask real biological differences in the data, so must be identified and removed from the data. Logging meta-data details such as date of library construction, sequencing batch, sample name, technical replicate, plate number, etc., is essential to identify batch effects in the data. We can use this information to visualise the data to examine it for clustering according to batch, rather than any real biological feature.
 
 > ### {% icon hands_on %} Hands-on: PCA plot
-> 1. **Scater: PCA plot** {% icon tool %} with the following parameters:
+> 1. {% tool [Scater: PCA plot](toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_pca/scater_plot_pca/1.12.2) %}  with the following parameters:
 >    - {% icon param-file %} *"Input SingleCellLoomExperiment dataset"*: `output_loom` (output of **Scater: filter SCE** {% icon tool %})
 >    - *"Feature (from annotation file) to colour PCA plot points by"*: `Mutation_Status`
 >    - *"Feature (from annotation file) to shape PCA plot points by"*: `Cell_Cycle`
@@ -236,3 +248,5 @@ As discussed previously, technical artefacts can bias scRNA-seq analyses. Strong
 {:.no_toc}
 We have gone through the process of filtering low-quality data from an scRNA-seq expression matrix, using the visualise-filter-visualise paradigm, which proves to be a very effective way of quality-controlling scRNA-seq data. Cells that have low read-coverage, low expression values, or high mitochondrial gene expression have been filtered out. We have then examined ways of looking at confounding factors to examine batch effects in our data.
 The workflow available from the "Supporting Materials" of this tutorial can be directly imported and used or adapted to a specific analysis.
+
+This tutorial is part of the https://singlecell.usegalaxy.eu portal ({% cite tekman2020single %} and {% cite etherington2019galaxy %})

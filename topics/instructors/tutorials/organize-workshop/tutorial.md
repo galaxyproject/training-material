@@ -12,7 +12,7 @@ key_points:
 - This document is a non-exhaustive list, please add to it!
 contributors:
 - bebatut
-- erasche
+- hexylena
 ---
 
 # Introduction

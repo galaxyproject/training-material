@@ -40,7 +40,7 @@ This practical aims at familiarizing you with the Galaxy user interface.
 It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows and sharing your work.
 Not everyone has the same background and that's ok!
 
-{% include snippets/warning_results_may_vary.md %}
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 > ### Agenda
 >
@@ -52,21 +52,25 @@ Not everyone has the same background and that's ok!
 {: .agenda}
 
 > ### {% icon comment %} Background
-> The Iris flower data set or Fisher’s Iris data set is a multivariate dataset introduced by the British statistician and biologist Ronald Fisher in his 1936 paper ({% cite Fisher1936 %}).
-> Each row of the table represents an iris flower, including its species and dimensions of its botanical parts, sepal and petal, in centimeters.
-> For more history of this dataset read here [Wikipedia](https://en.wikipedia.org/wiki/Iris_flower_data_set).
+> The Iris flower data set, also known as Fisher’s or Anderson's Iris data set, is a multivariate dataset introduced by the British statistician and biologist Ronald Fisher in his 1936 paper ({% cite Fisher1936 %}).
+> Each row of the table represents an iris flower sample, describing its species and the dimensions in centimeters of its botanical parts, the sepals and petals.
+> You can find more detailed information about this dataset on its dedicated [Wikipedia page](https://en.wikipedia.org/wiki/Iris_flower_data_set).
 {: .comment}
 
 ## What does Galaxy look like?
 
 > ### {% icon hands_on %} Hands-on: Log in or register
-> Browse to your [Galaxy instance](https://galaxyproject.org/use/) and log in or register.
-> 1. Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)
-> 2. Browse to your Galaxy instance
-> 3. Log in or register
+> 1. Open your favorite browser (Chrome/Chromium, Safari or Firefox, but not Internet Explorer/Edge!)
+> 2. Browse to a [Galaxy instance](https://galaxyproject.org/use/) of your choice
+> 3. Choose *Login or Register* from the navigation bar at the top of the page
+> 4. If you have previously registered an account with this particular instance of Galaxy (user accounts are *not* shared between public servers!), proceed by logging in with your registered *public name*, or email address, and your password.
+>
+>    If you need to create a new account, click on *Register here* instead.
 >
 >   > ### {% icon comment %} Different Galaxy servers
->   > The particular Galaxy server that you are using may look slightly different than the one shown in this training. Don't worry!
+>   > The particular Galaxy server that you are using may look slightly different than the one shown in this training.
+>   > Galaxy instance administrators can choose the exact version of Galaxy they would like to offer and can customize its look and feel to some extent.
+>   > The basic functionaity will be rather similar across instances, so don't worry!
 >   {: .comment}
 >
 {: .hands_on}
@@ -78,17 +82,17 @@ The Galaxy interface consists of three main parts:
 2. Your analysis history is recorded on the right
 3. The central panel will let you run analyses and view outputs
 
-![Galaxy ecosystem]({{ site.baseurl }}{% link shared/images/galaxy_interface.png %})
+![Galaxy ecosystem]({% link shared/images/galaxy_interface.png %})
 
 
 # Create a history
 
-Galaxy allows you to create analysis histories. A **history** can be thought of as an electronic experimental lab book; it keeps tracks of all the tools and parameters you used in your analysis. From such a history, a **workflow** can be extracted; this workflow can be used to easily repeat the analysis on different data.
+Galaxy allows you to create analysis histories. A **history** can be thought of as an electronic experimental lab book; it keeps track of all the tools and parameters you used in your analysis. From such a history, a **workflow** can be extracted; this workflow can be used to easily repeat the analysis on different data.
 
 Think of a workflow as a cooking recipe with a list of ingredients (datasets) and a set of instructions
 (pipeline of operations) that describes how to prepare or make something (such as a plot, or a new dataset).
 The order of operations is important as very often the next operation takes as input the result of the previous operations. For instance, when baking
-a cake, you would first sift flour and then mix it with eggs as it would be impossible to sift flour afterwards.
+a cake, you would first sift the flour and then mix it with eggs as it would be impossible to sift the flour afterwards.
 That is what we call a pipeline. To make a full meal, we may need to combine multiple recipes (pipelines) together.
 
 The finalized pipelines can be generalized as a workflow. If we use cooking as an analogy, a workflow could represent an entire menu with all the recipes for each meal.
@@ -98,29 +102,31 @@ In other words, using a workflow makes it possible to apply the same procedure t
 >
 > 1. Make sure you start from an empty analysis history.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. **Rename your history** to be meaningful and easy to find. For instance, you can choose **Galaxy 101 for everyone** as the name of your new history.
->    {% include snippets/rename_history.md %}
+>
+>    {% snippet faqs/galaxy/histories_rename.md %}
+>
 {: .hands_on}
 
-## Upload Iris dataset
+## Upload the Iris dataset
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. **Import** {% icon galaxy-upload %} the file `iris.csv` from [Zenodo](https://zenodo.org/record/1319069/files/iris.csv) or from the data library (ask your instructor)
+> 1. {% tool [Import](upload1) %} the file `iris.csv` from [Zenodo](https://zenodo.org/record/1319069/files/iris.csv) or from the data library (ask your instructor)
 >
 >    ```
 >    https://zenodo.org/record/1319069/files/iris.csv
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
 > 2. **Rename** {% icon galaxy-pencil %} the dataset to `iris`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 3. Check the **datatype**
 >    - Click on the history item to expand it to get more information.
@@ -129,22 +135,23 @@ In other words, using a workflow makes it possible to apply the same procedure t
 >      - Option 1: Datatypes can be **autodetected**
 >      - Option 2: Datatypes can be **manually set**
 >
->    {% include snippets/detect_datatype.md datatype="datatypes" %}
->    {% include snippets/change_datatype.md datatype="csv" %}
+>    {% snippet faqs/galaxy/datasets_detect_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="csv" %}
 >
-> 4. Add a tag {% icon galaxy-tags %} called `iris` to the dataset
->    - Make sure the tag start with a hashtag symbol (`#iris`)
->    - This tag will stay with your dataset any any results derived from it, and will help you make sense of your history
+> 4. Add an `#iris` tag {% icon galaxy-tags %} to the dataset
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
+>
+>    Make sure the tag starts with a hash symbol (`#`), which will make the tag stick not only to this dataset, but also to any results derived from it.
+>    This will help you make sense of your history.
 >
 {: .hands_on}
 
 # Pre-processing
 
-One or more pre-processing step may be required to proceed with analysis. In our case, the tools we will use require tab-separated files, and assume there is no header line. Since our data is comma-separated and has a header line, we will have to do some pre-processing of the files to make them ready for analysis.
+Often, one or more data pre-processing step(s) may be required to proceed with an analysis.
+In our case, the tools we will use require tab-separated input data, and assume there is no header line. Since our data is comma-separated and has a header line, we will have to perform the following pre-processing steps to prepare it for the actual analysis:
 
-In the next steps we will perform two pre-processng steps:
 - Format conversion
 - Header removal
 
@@ -158,11 +165,11 @@ First, we will convert the file from comma-separated to tab-separated format. Ga
 >
 > 1. **Convert** {% icon galaxy-pencil %} the CSV file (comma-separated values) to tabular format (tsv; tab-separated values)
 >
->    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
+>    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="Convert CSV to Tabular" %}
 >
 > 2. **Rename** {% icon galaxy-pencil %} the resulting dataset to `iris tabular`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 3. **View** the generated file by clicking on the {% icon galaxy-eye %} (eye) icon
 >
@@ -187,13 +194,13 @@ Now it is time to run your first tool! We saw in the previous step that our file
 >
 > Different Galaxy servers may have tools available under different sections, therefore it is often useful to use the **search bar** at the top of the tool panel to find your tool.
 >
-> Additionally different servers may have multiple, similarly named tools which accomplish similar functions. For these tutorials, you should select precisely the one that is described. However, in your real analyses, you'll need to search among the various options to find the one that works for you.
+> Additionally different servers may have multiple, similarly named tools which accomplish similar functions. When following tutorials, you should use precisely the tools that they describe. For real analyses, however, you will need to search among the various options to find the one that works for you.
 >
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Removing header
 >
-> 1. **Remove beginning** {% icon tool %} with the following parameters:
+> 1. {% tool [Remove Beginning](Remove+beginning1) %} with the following parameters:
 >    - *Remove first*: `1` (to remove the first line only)
 >    - {% icon param-file %} *"from"*: select the **iris tabular** file from your history
 >    - Click **Execute**
@@ -207,7 +214,7 @@ Now it is time to run your first tool! We saw in the previous step that our file
 >
 > 2. **Rename** {% icon galaxy-pencil %} the dataset to `iris clean`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 3. Click on the new history item to expand it
 >
@@ -239,20 +246,20 @@ Now we are going to inspect the dataset using simple tools in order to get used 
 
 In order to answer this question, we will have to look at column 5 of our file, and count how many different values (species) appear there. There are several ways we could do this in Galaxy. One approach might be to first extract this column from the file, and then count how many unique lines the file contains. Let's do it!
 
-> ### {% icon hands_on %} Hands-on: Filtering dataset
+> ### {% icon hands_on %} Hands-on: Extract species
 >
-> 1. **Cut** - columns from a table {% icon tool %} with the following parameters:
+> 1. {% tool [Cut](Cut1) %} columns from a table with the following parameters:
 >      - *"Cut columns"*: `c5`
 >      - *"Delimited by"*: `Tab`
 >      - {% icon param-file %} *"From"*: `iris clean` dataset
 >
 > 2. **Rename** {% icon galaxy-pencil %} the dataset to `iris species column`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 3. **View** {% icon galaxy-eye %} the resulting file
 >
-> 4. **Unique** - occurrences of each record {% icon tool %} with the following parameters:
+> 4. {% tool [Unique](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0) %} occurrences of each record  with the following parameters:
 >      - {% icon param-file %} *"File to scan for unique values"*: `iris species column` (the output from **Cut** {% icon tool %})
 >
 > 5. **Rename** {% icon galaxy-pencil %} the dataset to `iris species`
@@ -268,9 +275,9 @@ In order to answer this question, we will have to look at column 5 of our file, 
 >    > >
 >    > > 1. There are 3 species.
 >    > > 2. The 3 different Iris species are:
->    > > - setosa
->    > > - versicolor
->    > > - virginica
+>    > >     - setosa
+>    > >     - versicolor
+>    > >     - virginica
 >    > {: .solution}
 >    {: .question}
 {: .hands_on}
@@ -291,7 +298,7 @@ Like we mentioned before, there are often multiple ways to reach your answer in 
 > 3. **Rename** {% icon galaxy-pencil %} the dataset to `iris species group`
 >
 > > ### {% icon solution %} Solution
-> > 1. **Group** {% icon tool %} with the following parameters:
+> > 1. {% tool [Group](Grouping1) %}   with the following parameters:
 > >   - *"Select data"* select `iris clean` dataset
 > >   - *"Group by column"*: `Column: 5`
 > >
@@ -324,7 +331,7 @@ Looking at the tool help for **Group** {% icon tool %}, we see that we can also 
 >      - *"Type"*: `Count`
 >      - *"On column"*: `Column: 1`
 >
->    {% include snippets/rerun_tool.md %}
+>    {% snippet faqs/galaxy/tools_rerun.md %}
 >
 > 2. **Rename** {% icon galaxy-pencil %} the dataset to `iris samples per species group`
 >
@@ -349,7 +356,7 @@ Looking at the tool help for **Group** {% icon tool %}, we see that we can also 
 
 # Analysis: How to differentiate the different Iris species?
 
-Our objective is to find what differentiate the different Iris species (Figure 1). We know that we have **3** species of iris flowers, with
+Our objective is to find what distinguishes the different Iris species (Figure 1). We know that we have **3** species of iris flowers, with
 **50** samples for each:
 - setosa
 - versicolor
@@ -357,7 +364,7 @@ Our objective is to find what differentiate the different Iris species (Figure 1
 
 These species look very much alike as shown on the figure below.
 
-![3 species of Iris flowers](../../images/iris_flowers.png "3 species of Iris flowers")
+![Three species of Iris flowers](../../images/iris_flowers.png "Three species of Iris flowers (Image attributions: versicolor by Danielle Langlois licensed under CC BY-SA 3.0, retrieved from <a href="https://commons.wikimedia.org/wiki/File:Iris_versicolor_3.jpg">WikiMedia</a>; virginica by Christer Johansson licensed under CC BY-SA 3.0, retrieved from <a href="https://commons.wikimedia.org/wiki/File:IMG_7911-Iris_virginica.jpg">WikiMedia</a>; setosa by and used with permission of Sonja Keohane, retrieved from <a href="http://www.twofrog.com/irissetosa.html">www.twofrog.com</a>)")
 
 And our objective is to find out whether the features we have been given for each species can help us to highlight the differences between the 3 species.
 
@@ -372,15 +379,15 @@ In our dataset, we have the following features measured for each sample:
 > ![Sepal and petal](../../images/iris_sepal_petal.png "Sepal and petal of Iris flowers")
 {: .comment}
 
-## Summary and descriptive statistics with **Datamash**
+## Generate summary and descriptive statistics with
 
 > ### {% icon hands_on %} Hands-on: Get the mean and sample standard deviation of Iris flower features
 >
-> 1. **Datamash** {% icon tool %} with the following parameters:
+> 1. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: `iris tabular`
 >    - *"Group by fields"*: `5`
 >    - *"Input file has a header line"*: `Yes`
->    - *"Print header line"*: `No`
+>    - *"Print header line"*: `Yes`
 >    - *"Sort input"*: `Yes`
 >    - "Print all fields from input file": `No`
 >    - *"Ignore case when grouping"*: `Yes`
@@ -412,7 +419,7 @@ In our dataset, we have the following features measured for each sample:
 >
 > 2. Rename the dataset to `iris summary and statistics`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 3. **View** {% icon galaxy-eye %} the generated file
 >
@@ -434,14 +441,14 @@ In our dataset, we have the following features measured for each sample:
 >
 {: .hands_on}
 
-## Visualize Iris dataset with **Scatterplot w ggplot2**
+## Visualize Iris dataset features with two-dimensional scatterplots
 
 Let's visualize the Iris dataset to see how the features depend on each other, and
 check whether we can spot any immediate patterns.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Plot iris feature pairs in two dimensions
 >
-> 1. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
+> 1. {% tool [Scatterplot w ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy1) %}   with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: **iris clean**
 >    - *"Column to plot on x-axis"*: `1`
 >    - *"Column to plot on y-axis"*: `2`
@@ -454,6 +461,8 @@ check whether we can spot any immediate patterns.
 >        - *"Plotting multiple groups"*: `Plot multiple groups of data on one plot`
 >            - *"column differentiating the different groups"*: `5`
 >            - *"Color schemes to differentiate your groups"*: `Set 2 - predefined color pallete`
+>    - In *"Output Options"*:
+>        - *Additional output format*: `PDF`
 >
 > 2. **View** {% icon galaxy-eye%} the resulting plot:
 >
@@ -482,7 +491,7 @@ check whether we can spot any immediate patterns.
 >  > > 1. We get similar results than with Summary and statistics: *Iris setosa* can clearly be distinguished from *Iris versicolor* and
 >  > > *Iris virginica*. We can also see that sepal width and length are not sufficient features to differentiate *Iris versicolor* from *Iris
 >    > > virginica*.
->  > > 2. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
+>  > > 2. {% tool [Scatterplot w ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy1) %} with the following parameters:
 >  > >     - {% icon param-file %} *"Input tabular dataset"*: `iris clean`
 >  > >     - *"Column to plot on x-axis"*: `3`
 >  > >     - *"Column to plot on y-axis"*: `4`
@@ -548,10 +557,10 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 
 
 > ### {% icon comment %} Tip: Problems creating your workflow?
-> If you had problems extracting your workflow in the previous step, we provide a working copy for you [here]({{ site.baseurl }}{% link topics/introduction/tutorials/galaxy-intro-101-everyone/workflows/main_workflow.ga %}),
+> If you had problems extracting your workflow in the previous step, we provide a working copy for you [here]({% link topics/introduction/tutorials/galaxy-intro-101-everyone/workflows/main_workflow.ga %}),
 > which you can import to Galaxy and use for the next sections (see below how to import a workflow to Galaxy).
 >
-> {% include snippets/import_workflow.md %}
+> {% snippet faqs/galaxy/workflows_import.md %}
 >
 {: .comment}
 
@@ -574,29 +583,28 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 > 3. **Hiding intermediate outputs**
 >    - We can tell Galaxy which outputs of a workflow are important and should be shown in our history when we run it, and which can be hidden.
 >    - By default, all outputs will be shown
->    - Click the **asterisk** for outputs to mark them as important:
->        - `out_file` in  **Unique** {% icon tool %}
+>    - Click the **checkbox** next to the outputs to mark them as important:
+>        - `outfile` in  **Unique** {% icon tool %}
 >        - `out_file1` in **Group** {% icon tool%} step
 >            - This should be the Group tool where we performed the counting, you can check which one that is by clicking on it and looking at the parameter settings in the **Details** box on the right.
 >        - `png` in both **Scatterplot w ggplot2** {% icon tool %} steps
 >    - Now, when we run the workflow, we will only see these final outputs
 >        - i.e. the two dataset with species, the dataset with number of samples by species and the two scatterplots.
 >
->    {% include snippets/workflow_hide_intermediate_steps.md %}
+>    {% snippet faqs/galaxy/workflows_hide_intermediate_steps.md %}
 >
 > 4. **Renaming output datasets**
 >    - When we performed the analysis manually, we often renamed output datasets to something more meaningful
 >    - We can do the same in a workflow (see the tip box below)
->    - Let's rename the outputs we marked with an asterisk (and thus do not hide) to more meaningful names:
->        - **Unique** {% icon tool%}, output `out_file`: rename to `categories` tool
+>    - Let's rename the outputs we marked as important with the checkbox (and thus do not hide) to more meaningful names:
+>        - **Unique** {% icon tool%}, output `outfile`: rename to `categories` tool
 >        - **Group** {% icon tool %}, output `out_file1`: rename to `samples per category`
 >        - Rename the scatterplot outputs as well, remember to choose a generic name, since we can now also run this on data other than iris plants.
 >
->    {% include snippets/workflow_rename_output.md %}
+>    {% snippet faqs/galaxy/workflows_rename_output.md %}
 >
 > 5. **Save your workflow** (important!) by clicking on the {% icon galaxy-save %} icon at the top right of the screen.
 >
->    ![Save option in the workflow editor menu](../../images/workflow_editor_save.png)
 >
 > 6. **Return** to the analysis view by clicking on **Analyze Data** at the top menu bar.
 >
@@ -609,68 +617,79 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 
 ## Run workflow on different data
 
-Now that we have built our workflow, let's use it on some different data. For example, let's describing `diamonds` R dataset.
-
-
-
+Now that we have built our workflow, let's use it on some different data. For example, let us explore the `diamonds` R dataset with it.
 
 > ### {% icon hands_on %} Hands-on: Create a new history and upload a new data
 >
 > 1. Create a **new history** and give it a name.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. **Import** {% icon galaxy-upload %} the file `diamonds.csv` from [Zenodo](https://zenodo.org/record/3540705/files/diamonds.csv) or from the data library (ask your instructor)
+> 2. {% tool [Import](upload1) %} the file `diamonds.csv` from [Zenodo](https://zenodo.org/record/3540705/files/diamonds.csv) or from the data library (ask your instructor)
 >
 >    ```
 >    https://zenodo.org/record/3540705/files/diamonds.csv
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. **Rename** {% icon galaxy-pencil %} the dataset to `diamonds`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 4. Add a propagating tag {% icon galaxy-tags %} (e.g. `#diamonds`)
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 {: .hands_on}
 
-The `diamonds` data set comes from the well-known ggplot2 package developed by Hadley and initially collected from Diamond Search Engine in 2008.
-For this training, we have created a simpler dataset by selecting a subset of columns.
-The dataset contains 53940 observations and 5 variables within the 4 Cs (carat, cut, color and clarity):
-  - **Carat** refers to the weight of the diamond when measured on a scale
-  - **Cut** applies to the quality of the cut (Fair, Good, Very Good, Premium, Ideal)
-  - **Color**, is a qualitative data graded on a letter scale from D to Z (D being the best, known as colorless), color describes the overall tint, or lack thereof, of the diamond, from colorless/white to yellow. In our dataset, the color column is encoded as an integer with 1 for D and 23 for Z.
-  - **Clarity** describes the amount and location of naturally occuring "inclusions" found in nearly all diamonds, a measurement of how clear the diamond is: 1 (Flawless), 2 (Internally Flawless), 3 (VVS1), 4 (VVS2), 5 (VS1), 6 (VS2), 7 (SI1), 8 (SI2), 9 (I1), 10 (I2) and 11 (I3). In term of quality, the "ideal" diamond would be Flawless (1) while the worst would be I3 (11).
+The `diamonds` dataset comes from the well-known [ggplot2](https://ggplot2.tidyverse.org/reference/diamonds.html) package developed by Hadley Wickham and was initially collected from the Diamond Search Engine in 2008.
+The original dataset consists of 53940 specimen of diamonds, for which it lists the prices and various properties.
+For this training, we have created a simpler dataset from the original, in which only the five columns relating to the price and the so-called 4 Cs (carat, cut, color and clarity) of diamond characteristics have been retained.
 
-![4 Cs](../../images/4cs-of-diamond-buying.jpg "The 4 Cs of diamond of diamonds.")
+> ### {% icon comment %} The 4 Cs of diamond grading
+> According to the [GIA's (Gemological Institute of America) diamond grading system](https://4cs.gia.edu/wp-content/uploads/2013/03/All-Scales.jpg)
+> - **Carat** refers to the weight of the diamond when measured on a scale
+> - **Cut** refers to the quality of the cut and can take the grades *Fair*, *Good*, *Very Good*, *Premium* and *Ideal*
+> - **Color** describes the overall tint, or lack thereof, of the diamond from colorless/white to yellow and is given on a letter scale ranging from D to Z (D being the best, known as colorless).
+> - **Clarity** describes the amount and location of naturally occuring "inclusions" found in nearly all diamonds on a scale of eleven grades ranging from *Flawless* (the ideal situation) to *I3* (Included level 3, the worst quality).
+{:.comment}
+
+As a further simplification, our training dataset has the qualities in the *color* and *clarity* columns re-encoded as integer values (1-23 for color qualities D-Z, and 1-11 for the clarity levels from *Flawless* to *I3*).
+With this adjustment, we can reuse our workflow on the data, and analyze and visualize it following the same steps as we took for the Iris dataset.
 
 > ### {% icon hands_on %} Hands-on: Run workflow
 >
-> 1. We wish to analyze diamonds by their 4 Cs by recycling our workflow.
+> To analyze the diamonds price/4 Cs dataset by reusing our workflow:
 >
-> 2. Open the **workflow menu** (top menu bar).
+> 1. Open the **workflow menu** (top menu bar).
 >    - Find the workflow you made in the previous section,
 >    - Select the option `Run`.
 >    - The central panel will change to allow you to configure and launch the workflow.
 >
-> 3. Select the appropriate dataset for the input.
+> 2. Select the `diamonds` dataset as the input dataset.
 >
-> 4. Customize the first scatter plot:
->    - Change `Plot title` to **Diamond price as a function of carat**
->    - Change `Label for x axis` to **weight of the diamond (carat)**
->    - Change `Label for y axis` to **Price (US dollars)**
+> 3. Customize the first scatter plot:
 >
->    > > ![Customize scatter plot](../../images/customize_diamond_plot.png)
+>    This step is preconfigured to plot column 1 along the x and column 2 along the y axis, while grouping by column 5.
+>    This is fine and will result in *price* getting plotted against *carat* with grouping by *cut*, but you would want to adjust the plot title and axis labels accordingly:
 >
-> 5. Customize the second scatter plot. Instead of plotting color as a function of clarity, we would rather plot the price according to carat with clarity as factor.
->    - Change `Plot title` to **Diamond price as a function of carat with clarity as a factor**
->    - Change `Label for x axis` to **weight of the diamond (carat)**
->    - Change `Label for y axis` to **Price (US dollars)**
->    - And finally in `Advanced Options` change `column differentiating the different groups` to **4** (Clarity).
+>    - Change *"Plot title"* to `Diamond price as a function of carat with cut as a factor`
+>    - Change *"Label for x axis"* to `Weight of the diamond (carat)`
+>    - Change *"Label for y axis"* to `Price (US dollars)`
+>
+>    ![Customize scatter plot](../../images/customize_diamond_plot.png)
+>
+> 4. Customize the second scatter plot.
+>
+>    This one is preconfigured to plot column 3 along the x and column 4 along the y axis, which, for our new data, would plot *color* as a function of *clarity*. However, we would rather want to stick to plotting *price* against weight in *carat* as in the first plot, but group by *clarity* instead of by *cut* this time, so:
+>
+>    - Change *"Column to plot on x-axis"* to `1`
+>    - Change *"Column to plot on y-axis"* to `2`
+>    - Change *"Plot title"* to `Diamond price as a function of carat with clarity as a factor`
+>    - Change *"Label for x axis"* to `Weight of the diamond (carat)`
+>    - Change *"Label for y axis"* to `Price (US dollars)`
+>    - And finally in *"Advanced Options"* change *"column differentiating the different groups"* to `4` (clarity).
 >
 > 6. Click `Run workflow`.
 >

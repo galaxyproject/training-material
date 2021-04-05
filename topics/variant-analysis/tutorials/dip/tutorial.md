@@ -144,7 +144,7 @@ This makes it highly unlikely that **AA** is a true genotype of this individual.
 
 Freebayes is a *haplotype-based* variant caller. This implies that instead of looking at an individual positions within an alignment of reads to the reference genome, it looks at a haplotype window, length of which is dynamically determined (see section 3.2. in [FreeBayes manuscript](https://arxiv.org/pdf/1207.3907v2.pdf)):
 
-![Haplotype-based calling](../../images/freebayes.png "Looking at a haplotype window makes misalignments tolerable. In this case a low complexity poly(A) stretch is misaligned. As a result looking at individual positions will result in calling multiple spurious varians. In the case of FreeBayes looking at a haplotype identifies two alleles (this is a diploid example) A(7) and A(6), while A(8) is likely an error. Image by Erik Garrison")
+![Haplotype-based calling](../../images/freebayes.png "Looking at a haplotype window makes misalignments tolerable. In this case a low complexity poly(A) stretch is misaligned. As a result looking at individual positions will result in calling multiple spurious variants. In the case of FreeBayes looking at a haplotype identifies two alleles (this is a diploid example) A(7) and A(6), while A(8) is likely an error. Image by Erik Garrison")
 
 ### The data
 
@@ -160,7 +160,7 @@ Yet for a quick tutorial these datasets are way too big, so we created a [downsa
 >
 > 1. Create a new history for this variant calling exercise
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the files named `GIAB-Ashkenazim-Trio.txt` (tabular format) and `GIAB-Ashkenazim-Trio-hg19` (BAM format) from [Zenodo](https://doi.org/10.5281/zenodo.60520) or a data library:
 > 3. Specify the used genome for mapping:
@@ -338,10 +338,10 @@ This short tutorial should give you an overall idea on how generate variant data
 
 | Tutorial | PDF | Galaxy library | Galaxy history |
 |:---------|:---:|:--------------:|:--------------:|
-| Introduction | [{% icon references %}](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf) | [{% icon galaxy-library %}](https://usegalaxy.org/library/list#folders/F0283ca691a41c352) | [{% icon galaxy-history %}]( https://usegalaxy.org/u/aun1/h/gemini-introduction) |
-| Identifying *de novo* mutations underlying Mendelian disease | [{% icon references %}](https://s3.amazonaws.com/gemini-tutorials/Gemini-DeNovo-Tutorial.pdf) | [{% icon galaxy-library %}](https://usegalaxy.org/library/list#folders/F775008f45cbbf010) | [{% icon galaxy-history %}]( https://usegalaxy.org/u/aun1/h/gemini-de-novo-mutations) |
-| Identifying autosomal recessive variants underlying Mendelian disease | [{% icon references %}](https://s3.amazonaws.com/gemini-tutorials/Gemini-Recessive-Tutorial.pdf) | [{% icon galaxy-library %}](https://usegalaxy.org/library/list#folders/F35b262f5ac8aa63a) | [{% icon galaxy-history %}](https://usegalaxy.org/u/aun1/h/gemini-autosomal-recessive) |
-| Identifying autosomal dominant variants underlying Mendelian disease | [{% icon references %}](https://s3.amazonaws.com/gemini-tutorials/Gemini-Dominant-Tutorial.pdf) | [{% icon galaxy-library %}](https://usegalaxy.org/library/list#folders/F1c4722ad56892a31) | [{% icon galaxy-history %}]( https://usegalaxy.org/u/aun1/h/gemini-autosomal-dominant ) |
+| Introduction | [{% icon references %}](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf) | [{% icon galaxy-library %}](https://usegalaxy.org/library/folders/F0283ca691a41c352) | [{% icon galaxy-history %}]( https://usegalaxy.org/u/aun1/h/gemini-introduction) |
+| Identifying *de novo* mutations underlying Mendelian disease | [{% icon references %}](https://s3.amazonaws.com/gemini-tutorials/Gemini-DeNovo-Tutorial.pdf) | [{% icon galaxy-library %}](https://usegalaxy.org/library/folders/F775008f45cbbf010) | [{% icon galaxy-history %}]( https://usegalaxy.org/u/aun1/h/gemini-de-novo-mutations) |
+| Identifying autosomal recessive variants underlying Mendelian disease | [{% icon references %}](https://s3.amazonaws.com/gemini-tutorials/Gemini-Recessive-Tutorial.pdf) | [{% icon galaxy-library %}](https://usegalaxy.org/library/folders/F35b262f5ac8aa63a) | [{% icon galaxy-history %}](https://usegalaxy.org/u/aun1/h/gemini-autosomal-recessive) |
+| Identifying autosomal dominant variants underlying Mendelian disease | [{% icon references %}](https://s3.amazonaws.com/gemini-tutorials/Gemini-Dominant-Tutorial.pdf) | [{% icon galaxy-library %}](https://usegalaxy.org/library/folders/F1c4722ad56892a31) | [{% icon galaxy-history %}]( https://usegalaxy.org/u/aun1/h/gemini-autosomal-dominant ) |
 
 ### How to use these tutorials?
 

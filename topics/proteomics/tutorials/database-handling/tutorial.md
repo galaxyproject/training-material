@@ -52,10 +52,10 @@ In this tutorial, we will explore **Protein Database Downloader** {% icon tool %
 >
 > 1. Create a new history for this Database Handling exercise.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Open **Protein Database Downloader** {% icon tool %}
-> 3. Select in the drop-down menues `Taxonomy`: "Homo sapiens (Human)" and `reviewed`: "UniprotKB/Swiss-Prot (reviewed only)".
+> 2. Open {% tool [Protein Database Downloader](toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.1) %}
+> 3. Select in the drop-down menues  *"Taxonomy"*: `Homo sapiens (Human)` and `reviewed`: "UniprotKB/Swiss-Prot (reviewed only)".
 > 4. Click on `Execute`. There will be a new dataset named `Protein database` in your history, now.
 > 5. Rename the `Protein database` to `Main database`.
 >
@@ -84,16 +84,18 @@ In proteomic samples, some protein contaminants are commonly present. These prot
 A widely used database for common contaminants is the **c**ommon **R**epository of **A**dventitious **P**roteins (cRAP). When using samples generated in cell cultures, it is furthermore recommended to include _Mycoplasma_ proteomes in the search database. _Mycoplasma_ infections are very common in cell culture and often go unnoticed ([Drexler and Uphoff, Cytotechnology, 2002](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3463982/)).
 
 > ### {% icon hands_on %} Hands-on: Contaminant databases
-> 1. Open **Protein Database Downloader** {% icon tool %}.
-> 2. Select `Download from`: "cRAP (contaminants)" and execute.
-> 3. Rename the new database to "crap database".
+> 1. Open {% tool [Protein Database Downloader](toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.1) %}
+> 2. Select *"Download from"*: `cRAP (contaminants)` and execute.
+> 3. Rename the new database to `crap database`.
 >
 > To be able to distinguish contaminants from proteins of interest, you should add a tag to each contaminant protein.
 >
-> 1. Run **FASTA-to-Tabular** {% icon tool %} on your crap database.
-> 2. Run **Add column** {% icon tool %} on the new output. In the field `Add this value` enter "CONTAMINANT" and execute.
-> 3. Run **Tabular-to-FASTA** {% icon tool %}. Use column 1 and column 3 as Title columns and column 2 as sequence column.
-> 4. Rename the **Tabular-to-FASTA** {% icon tool %} output to "Tagged cRAP database".
+> 1. Run {% tool [FASTA-to-Tabular](toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1) %} on your crap database.
+> 2. Run {% tool [Add column](addValue) %} on the new output. In the field `Add this value` enter "CONTAMINANT" and execute.
+> 3. Run {% tool [Tabular-to-FASTA](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1) %} . 
+>    - *"Title column"*: `Column 1` and `Column 3`
+>    - *"Sequence column"*: `Column 2`
+> 4. Rename the new fasta file to `Tagged cRAP database`.
 >
 >
 >  > ### {% icon question %} Question
@@ -111,10 +113,10 @@ A widely used database for common contaminants is the **c**ommon **R**epository 
 > ### {% icon hands_on %} Optional Hands-On: _Mycoplasma_ databases
 > 90 - 95 % of mycoplasma infection in cell culture originates from the following species: _M. orale, M. hyorhinis, M. arginini, M. fermentans, M. hominis_ and _A. laidlawii_ ([Drexler and Uphoff, Cytotechnology, 2002](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3463982/)).
 >
-> 1. Use **Protein Database Downloader** {% icon tool %} to download the six mycoplasma databases. We will merge them to the main database in the next part of the tutorial.
-> 2. Run **FASTA Merge Files and Filter Unique Sequences** {% icon tool %} to combine all mycoplasma databases into a single one.
-> 3. Tag each entry in the combined database with the string "MYCOPLASMA_CONTAMINANT" by using **FASTA-to-Tabular** {% icon tool %}, **Add column** {% icon tool %} and **Tabular-to-FASTA** {% icon tool %}, as explained [above](#contaminant-databases).
-> 4. Rename the **Tabular-to-FASTA** {% icon tool %} output to "Tagged Mycoplasma database".
+> 1. Run {% tool [Protein Database Downloader](toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.1) %} five times to download all reviewed mycoplasma databases. We will merge them to the main database in the next part of the tutorial.
+> 2. Run {% tool [FASTA Merge Files and Filter Unique Sequences](toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0) %} to combine all mycoplasma databases into a single one.
+> 3. Tag each entry in the combined database with the string "MYCOPLASMA_CONTAMINANT" by using {% tool [FASTA-to-Tabular](toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1) %}, {% tool [Add column](addValue) %} and {% tool [Tabular-to-FASTA](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1) %}, as explained [above](#contaminant-databases).
+> 4. Rename the **Tabular-to-FASTA** {% icon tool %} output to `Tagged Mycoplasma database`.
 >
 >  > ### {% icon comment %} Comment
 >  > The reviewed mycoplasma databases do not contain all known proteins. It is better to also include the TREMBL database. _Mycoplasma_ proteomes are relatively small, so even downloading TrEMBL sequences will not incraese the size of your main database by much.
@@ -128,8 +130,15 @@ Depending on the search algorithm in use,  you might need to merge all FASTA ent
 
 > ### {% icon hands_on %} Hands-on: Merging databases
 >
-> 1. Run **FASTA Merge Files and Filter Unique Sequences** {% icon tool %} on the main database and the tagged cRAP database.
-    - Set `How are sequences judged to be unique?` to 'Accession Only'.
+> 1. Run {% tool [FASTA Merge Files and Filter Unique Sequences](toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0) %} on the main database and the tagged cRAP database.
+>    - In *"Input FASTA File(s)"*: 
+>    - {% icon param-repeat %} Click on *"Insert Input FASTA File(s)"*
+>       - In *"Input FASTA File(s)"*
+>          - *"FASTA file"*: `tagged cRAP database`
+>    - {% icon param-repeat %} Click on *"Insert Input FASTA File(s)"*
+>       - In *"Input FASTA File(s)"*
+>          - *"FASTA file"*: `main database`
+>    - Set *"How are sequences judged to be unique?"* to `Accession Only`.
 >
 > 2. **Optional**: Merging mycoplasma databases
 >
@@ -142,7 +151,8 @@ Depending on the search algorithm in use,  you might need to merge all FASTA ent
 The most common method of peptide and protein False Discovery Rate (FDR) calculation is by adding protein sequences that are not expected to be present in the sample. These are also called decoy protein sequences. This can be done by generating reverse sequences of the target protein entries and appending these protein entries to the protein database. Some search algoritmms use premade target-decoy protein sequences while others can generate a target-decoy protein sequence database from a target protein sequence database before using them for peptide spectral matching.
 
 > ### {% icon hands_on %} Hands-on: Creating a Decoy Database
-> 1. Run **DecoyDatabase**  {% icon tool %} on the merged database.
+> 1. Run {% tool [DecoyDatabase](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_decoydatabase/DecoyDatabase/2.6+galaxy0) %} on the merged database.
+> 2. Rename the final database to `human reviewed cRAP decoy database`, or `human reviewed cRAP mycoplasma decoy database`
 >
 >  > ### {% icon comment %} Decoy tags
 >  > The string you enter as a decoy tag will be added as a prefix or suffix (your choice) to the description of each decoy protein entry. Thus you can see from which entry in the target database the decoy was computed.

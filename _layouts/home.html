@@ -35,7 +35,7 @@ layout: base
                     </thead>
                     <tbody>
                     {% for topic in sorted_topics %}
-                        {% if topic[1].type == "use" %}
+                        {% if topic[1].type == "use" and topic[1].enable != false %}
                         <tr>
                             {% assign tutorial_number = site.pages | topic_filter:topic[1].name | topic_count %}
                             <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
@@ -57,7 +57,7 @@ layout: base
                     </thead>
                     <tbody>
                     {% for topic in sorted_topics %}
-                        {% if topic[1].type == "basics" %}
+                        {% if topic[1].type == "basics" and topic[1].enable != false  %}
                         <tr>
                             {% assign tutorial_number = site.pages | topic_filter:topic[1].name | topic_count %}
                             <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
@@ -78,7 +78,7 @@ layout: base
                     </thead>
                     <tbody>
                     {% for topic in sorted_topics %}
-                        {% if topic[1].type == "admin-dev" %}
+                        {% if topic[1].type == "admin-dev" and topic[1].enable != false  %}
                         <tr>
                             {% assign tutorial_number = site.pages | topic_filter:topic[1].name | topic_count %}
                             <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
@@ -107,7 +107,7 @@ layout: base
                     </thead>
                     <tbody>
                     {% for topic in sorted_topics %}
-                        {% if topic[1].type == "instructors" %}
+                        {% if topic[1].type == "instructors" and topic[1].enable != false %}
                         <tr>
                             {% assign tutorial_number = site.pages | topic_filter:topic[1].name | topic_count %}
                             <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
@@ -121,28 +121,40 @@ layout: base
             </div>
         </div>
 
-        <h2>Acknowledgment and Funding</h2>
-        <p>
-            More information about this project can be found in our <a href="https://doi.org/10.1016/j.cels.2018.05.012">publication in Cell Systems</a>.
-            We would like to thank all <a href="{{ site.baseurl }}/hall-of-fame">contributors</a> to our Galaxy
-            training materials, the Galaxy community for their constant support, and our funding sources:
-        </p>
-
-        <p>
-            <a href="https://www.denbi.de/"><img src="https://raw.githubusercontent.com/bgruening/rbc_docs/master/logo/deNBI_Logo_rgb.png" alt="de.NBI" width="15%" style="max-width:100%;"></a>
-            <a href="https://www.nih.gov"><img src="{{ site.baseurl }}/shared/images/nih.png" alt="National Institutes of Health" width="7%" style="max-width:100%;"></a>
-            <a href="https://www.sfb992.uni-freiburg.de/"><img src="https://raw.githubusercontent.com/bgruening/presentations/bce348bb606c312d531c479e63a66efc2bc38d44/shared/resources/img/MEDEP.jpg" alt="Collaborative Research Centre 992" width="15%" style="max-width:100%;"></a>
-            <a href="https://www.ie-freiburg.mpg.de"><img src="https://raw.githubusercontent.com/bgruening/presentations/master/shared/resources/img/14_MPI_IE_logo_mit_180.gif" alt="Max Planck Institute of Immunology and Epigenetics" width="15%" style="max-width:100%;"></a>
-            <a href="https://www.uni-freiburg.de/"><img src="https://raw.githubusercontent.com/bgruening/presentations/a2e38e4b007994af798320db3a0131c4bb891c0e/shared/resources/img/logo_freiburg.jpg" alt="University of Freiburg" width="15%" style="max-width:100%;"></a>
-            <a href="http://www.psu.edu"><img src="{{ site.baseurl }}/shared/images/psu.png" alt="The Pennsylvania State University" width="5%" style="max-width:100%;"></a>
-            <a href="https://wiki.galaxyproject.org/Teach/GTN"><img src="{{ site.baseurl }}/shared/images/GTNLogo1000.png" alt="Galaxy Training Network" width="15%" style="max-width:100%;"></a>
-            <a href="https://www.france-bioinformatique.fr/"><img src="https://www.france-bioinformatique.fr/sites/default/files/ifb-logo_1.png" alt="Institut Français de Bioinformatique" width="15%" style="max-width:100%;"></a>
-            <a href="https://www.elixir-europe.org/"><img src="{{ site.baseurl }}/shared/images/elixir.png" alt="Elixir" width="10%" style="max-width:100%;"></a>
-            <a href="https://www.elixir-europe.org/excelerate/"><img src="{{ site.baseurl }}/shared/images/Excelerate_whitebackground.png" alt="Elixir Excelerate" width="15%" style="max-width:100%;"></a>
-            <a href="https://www.nsf.gov"><img src="{{ site.baseurl }}/shared/images/nsf.gif" alt="National Science Foundation" width="7%" style="max-width:100%;"></a>
-        </p>
-
         <div class="row">
+
+            <!-- GTN video -->
+            <div class="col-md-6">
+                 <h3>Welcome to the GTN!</h3>
+                 <p> New to the GTN? This video gives an introduction to what it's all about </p>
+                 <iframe width="100%" height="314" src="https://www.youtube.com/embed/lDqWxzWNk1k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                 <p>Video created by Geert Bonamie.</p>
+            </div>
+
+            <!-- Galaxy community video  -->
+            <div class="col-md-6">
+                 <h3>Meet & Join the Galaxy Community! </h3>
+                 <p> Find out how you can become part of the Galaxy community</p>
+                 <iframe width="100%" height="314" src="https://www.youtube.com/embed/-1MPdxmRs8U" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                 <p> Video created by Beatriz Serrano-Solano</p>
+            </div>
+
+            <!-- GTN news  -->
+            <div class="col-md-6">
+                 <h3><a href="{% link news.md %}">The latest GTN news</a></h3>
+                 <p> Read about new tutorials, features, events and more! </p>
+                 {% include _includes/newslist.html %}
+                 <p><a href="{% link news.md %}">See all news</a>
+            </div>
+
+            <!-- GTN Tweets -->
+            <div class="col-md-6">
+                <h3>GTN Tweets</h3>
+                <a class="twitter-timeline" data-height="500" href="https://twitter.com/gxytraining?ref_src=twsrc%5Etfw">Tweets by gxytraining</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+
+
+            <!-- Our awesome Contributors -->
             <div class="col-md-6">
                 <h2>Contributor Hall of Fame</h2>
                 <p>
@@ -152,24 +164,34 @@ layout: base
 
                 <div class="container-fluid contributors">
                     <div id="contributors-carousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+
+                        {% assign ckeys = "" | split: ',' %}
+                        {% for x in contributors %}
+                             {% assign ckeys = ckeys | push: x[0] %}
+                        {% endfor %}
+                        {% assign ckeysN = ckeys | size %}
+                        {% assign shuffled_contributors = ckeys | sample: ckeysN %}
+
                         <div class="carousel-inner" role="listbox">
-                            {% for contributor in contributors %}
-                                {% capture modulo %}{{ forloop.index0 | modulo:4 }}{% endcapture %}
+                            {% assign counter = 0 %}
+                            {% for username in shuffled_contributors %}
+                              {% assign contributor = contributors[username] %}
+                              {% unless contributor.halloffame == "no" %}
+                                {% capture modulo %}{{ counter | modulo:10 }}{% endcapture %}
+                                  {% if modulo == '0' or counter == 0 %}
+                                  {% if counter != 0 %}</div>{% endif %}
 
-                                {% if modulo == '0' or forloop.first %}
-                                {% if forloop.first == false %}</div>{% endif %}
-                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                  <div class="carousel-item {% if counter == 0 %}active{% endif %}">
                                 {% endif %}
-
-                                {% assign username = contributor[0] %}
-                                {% assign fullname = contributor[1].name %}
-                                <div class="hall-of-fame-hero">
-                                    <a class="thumbnail" href="{{ site.baseurl }}/hall-of-fame#{{ username }}">
+                                  {% assign fullname = contributor.name %}
+                                  <div class="hall-of-fame-hero">
+                                      <a class="thumbnail" href="{{ site.baseurl }}/hall-of-fame/{{ username }}/">
                                         <img class="img-fluid" src="https://avatars.githubusercontent.com/{{ username }}" alt="{{ username }}">
-                                    </a>
+                                      </a>
                                     <p class="name">{{ username }}</p>
-                                </div>
-
+                                  </div>
+                                {% assign counter = counter | plus:1 %}
+                                {% endunless%}
                                 {% if forloop.last %}
                                 </div>
                                 {% endif %}
@@ -184,10 +206,10 @@ layout: base
 
                 <p>Do you want to help with this project and join our Hall of Fame? Please see our <a href="{{ site.baseurl }}/topics/contributing/">dedicated tutorials</a> or our <a href="{{ site.baseurl }}/faq">Frequently Asked Questions</a> to get you started.</p>
 
-                <h2>License</h2>
-                <p>This work is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
-
             </div>
+
+
+
             <div class="col-md-6">
                 <h2>The Galaxy Training Network<h2>
                 <div class="embed-responsive embed-responsive-4by3">
@@ -195,7 +217,45 @@ layout: base
                 </div>
             </div>
         </div>
+
+        <h2 id="acknowledgment-and-funding">Acknowledgment and Funding</h2>
+        <p>
+            More information about this project can be found in our <a href="https://doi.org/10.1016/j.cels.2018.05.012">publication in Cell Systems</a>.
+            We would like to thank all <a href="{{ site.baseurl }}/hall-of-fame">contributors</a> to our Galaxy
+            training materials, the Galaxy community for their constant support, and our funding sources:
+        </p>
+
+        <p>
+            <a href="https://www.denbi.de/"><img src="https://raw.githubusercontent.com/bgruening/rbc_docs/master/logo/deNBI_Logo_rgb.png" alt="de.NBI" width="15%" style="max-width:100%;"></a>
+            <a href="https://www.nih.gov"><img src="{{ site.baseurl }}/shared/images/nih.png" alt="National Institutes of Health" width="7%" style="max-width:100%;"></a>
+            <a href="https://www.sfb992.uni-freiburg.de/"><img src="https://raw.githubusercontent.com/bgruening/presentations/bce348bb606c312d531c479e63a66efc2bc38d44/shared/resources/img/MEDEP.jpg" alt="Collaborative Research Centre 992" width="15%" style="max-width:100%;"></a>
+            <a href="https://www.ie-freiburg.mpg.de"><img src="https://raw.githubusercontent.com/bgruening/presentations/master/shared/resources/img/14_MPI_IE_logo_mit_180.gif" alt="Max Planck Institute of Immunology and Epigenetics" width="15%" style="max-width:100%;"></a>
+            <a href="https://www.uni-freiburg.de/"><img src="https://raw.githubusercontent.com/bgruening/presentations/a2e38e4b007994af798320db3a0131c4bb891c0e/shared/resources/img/logo_freiburg.jpg" alt="University of Freiburg" width="15%" style="max-width:100%;"></a>
+            <a href="http://www.psu.edu"><img src="{{ site.baseurl }}/shared/images/psu.png" alt="The Pennsylvania State University" width="5%" style="max-width:100%;"></a>
+            <a href="https://wiki.galaxyproject.org/Teach/GTN"><img src="{{ site.baseurl }}/shared/images/GTNLogo1000.png" alt="Galaxy Training Network" width="15%" style="max-width:100%;"></a>
+			<a href="https://www.france-bioinformatique.fr/"><img src="{{ site.baseurl }}/shared/images/ifb.png" alt="Institut Français de Bioinformatique" width="15%" style="max-width:100%;"></a>
+            <a href="https://www.elixir-europe.org/"><img src="{{ site.baseurl }}/shared/images/elixir.png" alt="Elixir" width="10%" style="max-width:100%;"></a>
+            <a href="https://www.elixir-europe.org/excelerate/"><img src="{{ site.baseurl }}/shared/images/Excelerate_whitebackground.png" alt="Elixir Excelerate" width="15%" style="max-width:100%;"></a>
+            <a href="https://www.nsf.gov"><img src="{{ site.baseurl }}/shared/images/nsf.gif" alt="National Science Foundation" width="7%" style="max-width:100%;"></a>
+            <a href="https://www.erasmusmc.nl"><img src="{{ site.baseurl }}/shared/images/logo-erasmusmc.png" alt="Erasmus Mecial Center" width="15%" style="max-width:100%;"></a>
+            <a href="https://cineca-project.eu"><img src="{{ site.baseurl }}/shared/images/CINECA_logo.png" alt="CINECA project" width="15%" style="max-width:100%;"></a>
+            <a href="https://gallantries.github.io/"><img src="{{ site.baseurl }}/shared/images/Gallantries_logo.png" alt="Gallantries Project" width="15%" style="max-width:100%;"></a>
+            <a href="https://ec.europa.eu/programmes/erasmus-plus/node_en"><img src="{{ site.baseurl }}/shared/images/EU-logo-beneficaires-gallantries.jpg" alt="EU Erasmus+ programme" width="15%" style="max-width:100%;"></a>
+            <a href="https://www.avans.nl"><img src="{{ site.baseurl }}/shared/images/logo-avans.png" alt="Avans University of Applied Sciences" width="15%" style="max-width:100%;"></a>
+            <a href="https://www.ebi.ac.uk"><img  src="https://raw.githubusercontent.com/nomadscientist/scrnaseq_training/d0fccaa9dc8dc8615eb7146d6c5e96bd36f11f3a/EMBL_EBI_Logo_black.svg" alt="European Bioinformatics Institute" width="15%" style="max-width:100%;"></a>
+            <a href="https://mrc.ukri.org"><img  src="https://raw.githubusercontent.com/nomadscientist/scrnaseq_training/master/logo.png" alt="UK Medical Research Council" width="15%" style="max-width:100%;"></a>
+	     </p>
+
+
     </section>
 </div>
+
+<!-- Gitter -->
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: '{{ site.gitter_url | remove: "https://gitter.im/" }}'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 {% include _includes/default-footer.html %}
