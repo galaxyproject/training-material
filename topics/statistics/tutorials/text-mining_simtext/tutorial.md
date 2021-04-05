@@ -27,7 +27,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Literature exploration in PubMed on a large number of biomedical entities (e.g., genes, diseases, or experiments) can be time-consuming and challenging, especially when assessing associations between entities. Here, we use SimText, a toolset for literature research that allows you to collect text from PubMed for any given set of biomedical entities, extract associated terms, and analyze similarities among them and their key characteristics in an interactive tool.
+Literature exploration in [PubMed](https://pubmed.ncbi.nlm.nih.gov/) on a large number of biomedical entities (e.g., genes, diseases, or experiments) can be time-consuming and challenging, especially when assessing associations between entities. Here, we use SimText, a toolset for literature research that allows you to collect text from PubMed for any given set of biomedical entities, extract associated terms, and analyze similarities among them and their key characteristics in an interactive tool.
 
 This tutorial is based on a proof-of-concept example given in {% cite gramm2020 %}. We are going to analyze similarities among 95 genes based on their associated biomedical terms in the literature, and compare their pre-existing disorder categories to their grouping based on the literature.
 
@@ -70,7 +70,7 @@ In the first step we collect PubMed data for each of the genes. The genes are us
 
 > ### {% icon details %} NCBI API key (optional)
 >
-> To speed up the the download of PubMed data users can obtain an API key from the Settings page of their NCBI account (to create an account, visit http://www.ncbi.nlm.nih.gov/account/) and add it to the Galaxy user-preferences (User/ Preferences/ Manage Information).
+> To speed up the the download of PubMed data users can obtain an API key from the settings page of their NCBI account (to create an account, visit http://www.ncbi.nlm.nih.gov/account/) and add it to the Galaxy user-preferences (User → Preferences → Manage Information).
 >
 {: .details}
 
@@ -82,7 +82,7 @@ In the first step we collect PubMed data for each of the genes. The genes are us
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > The tool is also able to save the abstracts as text instead of their PMIDs. This feature is used for another type of analysis (see {% cite gramm2020 %}), or can be used if the user wants to use the tool independent from a workflow to retrieve many abstract texts at once. For the next step of our example in this tutorial, PMIDs are required.
+>    > The tool is also able to save the abstracts as text instead of their PMIDs. This feature is used for another type of analysis (see {% cite gramm2020 %}), or can be used if the user wants to use the tool independent from a workflow to retrieve many abstract texts at once. For the next step of our example in this tutorial, only PMIDs are required.
 >    {: .comment}
 >
 {: .hands_on}
@@ -125,7 +125,7 @@ The following features are generated:
 >
 > 2. Open interactive tool 
 >
->    {% snippet faqs/galaxy/interactive_tools_open.md tool="SimText app" box_type="tip" %}
+>    {% snippet faqs/galaxy/interactive_tools_open.md tool="SimText app" %}
 >
 {: .hands_on}
 
