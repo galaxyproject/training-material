@@ -3,41 +3,6 @@ layout: base
 ---
 {% include _includes/default-header.html %}
 
-<style type="text/css">
-::cue {
-	color:#333;
-}
-video {
-	background: black;
-}
-.main-content {
-	padding-top: 0em !important;
-}
-
-#playlist .pl-item a {
-	display: flex;
-}
-
-#playlist .pl-item a .title {
-	font-weight: 700;
-}
-#playlist .pl-item a .topic{
-	font-style: italic
-}
-
-#playlist .pl-item a .cover{
-	width: 200px;
-}
-#transcript {
-	height: 400px;
-	overflow-y: scroll;
-}
-#transcript tr td:nth-child(1) {
-	padding-right: 1em;
-	color: #555;
-}
-</style>
-
 <div class="container main-content">
 	<div class="row">
 		<div class="col-md-12">
@@ -67,7 +32,7 @@ video {
 					<b>Other Videos</b>
 				</div>
 			</div>
-			<div class="row" id="playlist">
+			<div class="row" id="playlist" class="vertical">
 			</div>
 		</div>
 	</div>

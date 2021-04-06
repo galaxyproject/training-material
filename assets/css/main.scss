@@ -1055,7 +1055,46 @@ span.tool {
  }
 }
 
+// Videos
+
 video::cue {
   background: #000000cc;
   color: white;
+}
+
+#playlist {
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+
+    .vertical {
+        flex-direction: column;
+    }
+
+    .pl-item a {
+        display: flex;
+        flex-direction: column;
+
+        .title {
+            font-weight: 700;
+        }
+        .topic {
+            font-style: italic;
+        }
+
+        .cover {
+            width: 200px;
+        }
+    }
+}
+
+
+#transcript {
+    height: 400px;
+    overflow-y: scroll;
+
+    tr td:nth-child(1) {
+        padding-right: 1em;
+        color: #555;
+    }
 }
