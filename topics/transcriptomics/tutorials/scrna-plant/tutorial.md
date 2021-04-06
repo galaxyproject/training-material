@@ -291,11 +291,11 @@ We will also apply a log transformation to the cells, as this compresses the var
 
 After normalising and regressing out unwanted factors, we will then scale the data to have unit variance with a zero mean, so that the mean expression of each gene is not a factor in the analysis and only the variation is, ensuring that the later clustering is driven only by the relative variation of the genes, and not neccesarily how expressive those genes are.
 
-> ### {% icon hint %} Highly Variable Genes?
+> ### {% icon tip %} Highly Variable Genes?
 >
 > Those of you who are familiar with the [ScanPy Tutorial]({% link topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) might wonder why we have not reduced the number of genes by performing a highly variable gene selection.
 > The answer is simply that it did not help with this particular dataset, and that by removing the least variable genes in the analysis, it did help us replicate the analysis in the paper. Try it for yourself as an intermediate step (after this analysis) and see!
-{: .hint}
+{: .tip}
 
 > ### {% icon hands_on %} Hands-on: Normalize and Scale
 >
