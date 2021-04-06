@@ -384,7 +384,7 @@ With our data now sufficiently "flat" and ready for human consumption, we can no
 
 | PCA                                | UMAP                                 |
 |:----------------------------------:|:------------------------------------:|
-| ![PCA]({% link topics/transcriptomics/images/pca_batch.png %}) | ![UMAP]({% link topics/transcriptomics/images/umap_batch.png %})|
+| ![PCA]({% link topics/transcriptomics/images/scrna-plant/pca_batch.png %}) | ![UMAP]({% link topics/transcriptomics/images/scrna-plant/umap_batch.png %})|
 
 
 From this, we can see that there is a reasonable overlap in our batches shown both in the PCA and UMAP embeddings. This is good because it shows that though there is *some* batch effect (i.e. cells from one batch appear to cluster on a different side of the plot than the other) it is not significant enough for there not to be some commonality between the batches.
@@ -397,7 +397,7 @@ Let us cluster the cells and see what cell types we can discover in the plots. T
 
 | UMAP                                   | DotPlot                                    |
 |:--------------------------------------:|:------------------------------------------:|
-| ![PCA]({% link topics/transcriptomics/images/clusters_expected %}) | ![UMAP]({% link topics/transcriptomics/images/dotplot_expected.png %})|
+| ![PCA]({% link topics/transcriptomics/images/scrna-plant/clusters_expected.png %}) | ![UMAP]({% link topics/transcriptomics/images/scrna-plant/dotplot_expected.png %})|
 
 
 > ### {% icon hands_on %} Hands-on: Generate and Plots Clusters
@@ -485,7 +485,7 @@ Let us here try to recreate the DotPlot from the paper using the clusters we hav
 
 By running the above we end up with the following DotPlot:
 
-![Dotplot In Analyssis]({% link topics/transcriptomics/images/dotplot_found.png %})
+![Dotplot In Analyssis]({% link topics/transcriptomics/images/scrna-plant/dotplot_found.png %})
 
 Notice how we have the Columella, QC and NC sharing the same cluster 11, that the Endodermis is localised in cluster 8, the Cortex in cluster 9, the Trichoblast cells in cluster 3, the Xylem showing strong expression in cluster 12, VC in clusters 4 and 6, and the Atrichoblasts have a mixed expression in a range of clusters. These characteristics are the same as the Dotplot in the original paper.
 
