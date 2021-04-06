@@ -44,7 +44,7 @@ layout: base
 var params = (new URL(document.location)).searchParams,
 	videoid = params.get('v'),
 	seekTo = params.get('t'),
-	videohost = '{{ site.baseurl }}',
+	videohost = 'https://training.galaxyproject.org',
 	vtt = `${videohost}/videos/topics/${videoid}.en.vtt`,
 	mp4 = `${videohost}/videos/topics/${videoid}.mp4`,
 	png = `${videohost}/videos/topics/${videoid}.mp4.png`,
