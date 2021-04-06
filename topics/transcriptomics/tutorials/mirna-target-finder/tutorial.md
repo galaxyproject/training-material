@@ -371,26 +371,80 @@ Next, we will extract those genes whose expression is statistically significantl
 >
 > > ### {% icon comment %} Comments
 > >
-> > You can that tool in the _Filter and Sort_ section.
+> > You can that find these tools in the _Filter and Sort_ section.
 > >
 > {: .comment}
 > 1. {% tool [Filter](Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `DESeq2 results miRNA`
 >    - *"With following condition"*: `c7<0.05`
-> 2. Rename the output as `Differentially expressed miRNAs`
 >
 {: .hands_on}
 
 > ### {% icon question %} Questions
 >
-> How many miRNAs show statistically significant upregulation?
+> How many miRNAs show statistically significant differential expression?
 >
 > > ### {% icon solution %} Solution
 > >
-> > Unfortunately, we have not detected any upregulated miRNA. In this case, this is caused by the fact that the subsampled datasets don't have sufficient read depth to detect genes with low expression levels.
+> > Unfortunately, we have not detected any differentially expressed miRNAs. In this case, this is caused by the fact that the subsampled datasets don't have sufficient read depth to test for differential expression.
 > {: .solution}
 >
 {: .question}
+
+To get any sensible results, it is worth analyzing the full dataset. You can analyze the full datasets following the above tutorial. Otherwise, you can import the DESeq2 analysis results that we generated from full dataset into your history.
+
+> ### {% icon hands_on %} Hands-on: Retrieve the DESeq2 analysis results on full miRNA dataset
+>
+> 1. Import the files from Zenodo:
+>
+>    - Open the file {% icon galaxy-upload %} __upload__ menu
+>    - Click of the **Paste/Fetch** button
+>    - Copy the Zenodo links and press <kbd>Start</kbd>
+>
+> ```
+> https://zenodo.org/record/4663389/files/miRNA_DESeq2_results_complete_dataset.tabular
+> ```
+>
+> 2. Rename each dataset according to the sample id (e.g. `miRNA_DESeq2_results_complete_dataset`)
+> 3. Add all miRNA data analysis related tags: #miRNA #BR #control
+{: .hands_on}
+
+Repeat the filtering step on the imported DESeq2 result.
+
+> ### {% icon hands_on %} Hands-on: Filter and sort differentially expressed miRNAs from the full dataset
+>
+> > ### {% icon comment %} Comments
+> >
+> > You can that find these tools in the _Filter and Sort_ section.
+> >
+> {: .comment}
+> 1. {% tool [Filter](Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
+>    - {% icon param-file %} *"Filter"*: `miRNA_DESeq2_results_complete_dataset`
+>    - *"With following condition"*: `c7<0.05`
+> 2. Rename the output as `Differentially expressed miRNAs`
+> 3. {% tool [Filter](Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
+>    - {% icon param-file %} *"Filter"*: `Differentially expressed miRNAs`
+>    - *"With following condition"*: `c3>0`
+> 4. Rename the output as `Upregulated miRNAs`
+> 5. {% tool [Sort](sort1) %} data in ascending or descending order (Galaxy Version 1.1.0) with the following parameters:
+>    - {% icon param-file %} *"Sort Dataset"*: `Upregulated miRNAs`
+>    - *"on column"*: `Column: 3`
+>    - *"everything in"*: `Descending order`
+{: .hands_on}
+
+> ### {% icon question %} Questions
+>
+> 1. How many miRNAs are differentially expressed?
+> 2. How many miRNAs show statistically significant upregulation and what is the most upregulated miRNA?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Out of 442 miRNAs, 39 show significant differential expression.
+> > 2. There are 16 upregulated miRNAs and `Ath-miR156g` is the most upregulated one.
+> {: .solution}
+>
+{: .question}
+
 
 # mRNA data analysis
 
@@ -566,24 +620,42 @@ NumReads          | The number of reads mapping to each transcript that was quan
 
 ## Filter significantly differentially expressed mRNAs
 
-To conclude the analysis of the differential expression of mRNAs, we will extract those transcripts that show a significant induction of expression in response to brassinosteroids.
+To conclude the analysis of the differential expression of mRNAs, we will extract those transcripts that show a significant induction of expression in response to brassinosteroids. Before continuing with further analysis, similar to miRNA data analysis, import the DESeq2 results generated from full mRNA datasets.
 
-> ### {% icon hands_on %} Hands-on: Extract statistically significant genes
+> ### {% icon hands_on %} Hands-on: Retrieve the DESeq2 analysis results on full mRNA dataset
+>
+> 1. Import the files from Zenodo:
+>
+>    - Open the file {% icon galaxy-upload %} __upload__ menu
+>    - Click of the **Paste/Fetch** button
+>    - Copy the Zenodo links and press <kbd>Start</kbd>
+>
+> ```
+> https://zenodo.org/record/4663389/files/mRNA_DESeq2_results_complete_dataset.tabular
+> ```
+>
+> 2. Rename each dataset according to the sample id (e.g. `mRNA_DESeq2_results_complete_dataset`)
+> 3. Add all miRNA data analysis related tags: #mRNA #BR #control
+{: .hands_on}
+
+Now we continue with the DE genes analysis.
+
+> ### {% icon hands_on %} Hands-on: Extract significantly DE genes
 >
 > 1. {% tool [Filter](Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
->    - {% icon param-file %} *"Filter"*: output of **DESeq2** {% icon tool %}
+>    - {% icon param-file %} *"Filter"*: `mRNA_DESeq2_results_complete_dataset`
 >    - *"With following condition"*: `c7<0.05`
 > 2. Rename the output as `Differentially expressed mRNAs`
 >
 > 3. {% tool [Filter](Filter1) %}data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `Differentially expressed miRNAs`
 >    - *"With following condition"*: `c3>1`
-> 4. Rename it as `upregulated mRNAs`
+> 4. Rename it as `Upregulated mRNAs`
 >
 > 5. {% tool [Filter](Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
->    - {% icon param-file %} *"Filter"*: `Significantly DE mRNAs`
+>    - {% icon param-file %} *"Filter"*: `Differentially expressed miRNAs`
 >    - *"With following condition"*: `c3<-1`
-> 6. Rename it as `downregulated mRNAs`
+> 6. Rename it as `Downregulated mRNAs`
 >
 {: .hands_on}
 
@@ -591,12 +663,13 @@ To conclude the analysis of the differential expression of mRNAs, we will extrac
 >
 > 1. How many genes show statistically significant differential expression?
 > 2. How many of them are upregulated? And downregulated?
+> 3. What is the most significantly DE downregulated gene and what is it biological function?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The total number of genes whose expression differential between the two experimental conditions is 255.
-> > 2. Of them, 44 are downregulated by the BR treatment and 150 are upregulated.
-> >
+> > 1. The total number of genes whose expression differential between the two experimental conditions is 4176.
+> > 2. Of them, 328 are downregulated by the BR treatment and 778 are upregulated.
+> > 3. The most significantly DE gene is AT3G30180 (BR60X2). BR60X2 encodes a cytochrome p450 enzyme that catalyzes the last reaction in the production of brassinolide. It is capable of converting 6-deoxocastasterone into castasterone, a C-6 oxidation, as well as the further conversion of castasterone into brassinolide (source: [TAIR database](https://www.arabidopsis.org/servlets/TairObject?name=at3g30180&type=locus){:target="_blank"}).
 > {: .solution}
 >
 > > ### {% icon comment %} Comments
@@ -606,79 +679,82 @@ To conclude the analysis of the differential expression of mRNAs, we will extrac
 >
 {: .question}
 
-One way to assess whether the results obtained are biologically meaningful is to rank the genes whose expression is downregulated by brassinosteroid treatment and to seek information on the function of those genes that show a greater induction of their expression.
-
-> ### {% icon hands_on %} Hands-on: Sort upregulated genes
->
-> 1. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %} data in ascending or descending order with the following parameters:
->    - {% icon param-file %} *"Sort Query"*: `downregulated mRNAs`
->    - In *"Column selections"*:
->        - {% icon param-repeat %} *"Insert Column selections"*
->            - *"on column"*: `c3`
->            - *"in"*: `Ascending order`
-> 2. Click on the {% icon galaxy-eye %} (eye) icon and inspect the generated file
-{: .hands_on}
-
-![fig14:Top upregulted genes](../../images/miRNA_upregulated_genes.png "Top upregulated genes in response to brassinosteroids")
-
-In order to functionally characterize the _Arabidopsis_ genes, we can consult the [TAIR database](https://www.arabidopsis.org/index.jsp).
-
-> ### {% icon question %} Questions
->
-> What is the biological function of BR6OX2, the most downregulated gene?
->
-> > ### {% icon solution %} Solution
-> >
-> > BR60X2 encodes a cytochrome p450 enzyme that catalyzes the last reaction in the production of brassinolide. It is capable of converting 6-deoxocastasterone into castasterone, a C-6 oxidation, as well as the further conversion of castasterone into brassinolide (source: [TAIR database](https://www.arabidopsis.org/servlets/TairObject?name=at3g30180&type=locus)).
-> >
-> {: .solution}
->
-{: .question}
-
 # Identification of miRNA targets
 
-From this point on, we will use the results generated from the raw datasets, rather than the subsamples. By using data from higher sequencing depth, the statistical power to detect differential expression is increased, and thus the probability of identifying biologically significant genes. ({% cite Bass2019 %}).
+To predict which miRNAs target which mRNAs, first we need their transcriptomic sequences in FASTA format. Now we will obtain the sequences of miRNAs whose expression is induced by brassinosteroids.
 
-> ### {% icon hands_on %} Hands-on: Retrieve the sequences of upregulated miRNAs obtained from the original datasets
+> ### {% icon hands_on %} Hands-on: Obtaining the sequences of upregulated miRNAs
+> > ### {% icon comment %} Comment
+> >
+> > The following tools can be found in _Text Manipulation_ and _Filter and Sort_ sections.
+> >
+> {: .comment}
 >
-> 1. Import the files from Zenodo:
->
->    - Open the file {% icon galaxy-upload %} __upload__ menu
->    - Click of the **Paste/Fetch** button
->    - Copy the Zenodo links and press <kbd>Start</kbd>
->
-> ```
-> https://zenodo.org/record/4606701/files/upregulated_miRNA_BR_complete_dataset.fasta
-> https://zenodo.org/record/4647332/files/downregulated_mRNA_complete_dataset.fasta
-> ```
-> 2. Rename datasets as `upregulated_miRNA_BR_complete_dataset.fasta` and `downregulated_mRNA_complete_dataset.fasta`.
->
+> 1. {% tool [Cut columns from a table](toolshed.g2.bx.psu.edu/repos/devteam/cut_columns) %} with the following parameters:
+>    - *"Cut columns"*: `c1`
+>    - *"Delimited by"*: `Tab`
+>    - {% icon param-collection %} *"From"*: `Upregulated miRNAs`
+> 2. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} with the following parameters:
+>    - {% icon param-file %} *"File to process"*: output of **Cut** {% icon tool %}
+>    - *"Find pattern"*: `*`
+>    - *"Replace with"*: (Leave empty)
+>    - *"Find and Replace text in"*: `entire line`
+> 3. {% tool [Unique](toolshed.g2.bx.psu.edu/repos/bgruening/unique/bg_uniq/0.3) %} with the following parameters:
+>    - {% icon param-file %} *"from query"*: output of **Replace** {% icon tool %}
+> 4. Rename the output as `Upregulated miRNA ids`
+> 5. {% tool [Filter FASTA](toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1) %} with the following parameters:
+>    - {% icon param-file %} *"FASTA sequences"*: `PmiREN_miRNA_database.fasta`
+>    - *"Criteria for filtering on the headers"*: `List of IDs`
+>        - {% icon param-file %} *"List of IDs to extract sequences for"*: `Upregulated miRNA ids`
+>        - *"Match IDs by"*: `Default: ID is expected at the beginning: >ID`
+> 6. Rename it as `Upreguled miRNA sequences`
+> 7. Click on the {% icon galaxy-eye %} (eye) icon and inspect the `Upreguled miRNA sequences` file
 {: .hands_on}
 
-## Identification of miRNA targets with **TargetFinder**
+To identify putative targets of upregulated miRNAs, it is necessary to obtain the sequences of all downregulated mRNAs in FASTA format.
+
+> ### {% icon hands_on %} Hands-on: Obtaining the gene sequences of downregulated mRNAs
+> 1. {% tool [Cut columns from a table](toolshed.g2.bx.psu.edu/repos/devteam/cut_columns) %} with the following parameters:
+>    - *"Cut columns"*: `c1`
+>    - *"Delimited by"*: `Tab`
+>    - {% icon param-collection %} *"From"*: `Downregulated mRNAs`
+> 2. Rename the output as `Downregulated mRNA ids`
+> 3. {% tool [Filter FASTA](toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1) %} with the following parameters:
+>    - {% icon param-file %} *"FASTA sequences"*: `transcriptome_AtRTD2.fasta.gz` (Input dataset)
+>    - *"Criteria for filtering on the headers"*: `List of IDs`
+>        - {% icon param-file %} *"List of IDs to extract sequences for: `Downregulated mRNA ids`
+>        - *"Match IDs by"*: `Custom regex pattern`
+>           - *"Regex search pattern for ID"*: `GENE=(AT.{7})`
+> 4. Rename it as `Downregulated mRNA sequences`
+> 5. Click on the {% icon galaxy-eye %} (eye) icon and inspect the `Downregulated mRNA sequences`  file
+{: .hands_on}
+
+## miRNA target prediction using **TargetFinder**
 
 We are now ready to launch the search for miRNA target genes. For this we will use the __TargetFinder__ tool that is implemented and used for miRNA target prediction in plants ({% cite Srivastava2014 %}, {% cite Ma2017 %}).
 
 > ### {% icon hands_on %} Hands-on: identification of potential miRNA targets
 >
 > 1. {% tool [TargetFinder](toolshed.g2.bx.psu.edu/repos/rnateam/targetfinder/targetfinder/1.7.0+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input small RNA sequences file"*: `upregulated_miRNA_BR_complete_dataset.fasta`
->    - {% icon param-file %} *"Target sequence database file*": `downregulated_mRNA_complete_dataset.fasta`
+>    - {% icon param-file %} *"Input small RNA sequences file"*: `Upreguled miRNA sequences`
+>    - {% icon param-file %} *"Target sequence database file*": `Downregulated mRNA sequences`
 >    - *"Prediction score cutoff value"*: `5.0`
 > 2. Click on the {% icon galaxy-eye %} (eye) icon and inspect the output of **TargetFinder**.
 {: .hands_on}
 
+Congratulations! You have identified the following 5 potential genes involved in the brassinosteroid-miRNA regulatory network:
+- [AT5G10180](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT5G10180){:target="_blank"}
+- [AT3G09220](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT3G09220){:target="_blank"}
+- [AT2G46850](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT2G46850){:target="_blank"}
+- [AT5G64260](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT5G64260){:target="_blank"}
+- [AT4G25160](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT4G25160){:target="_blank"}
 
-![fig15:Targets miRNA](../../images/miRNA_targets.png "Potential miRNA targets found by the TargetFinder tool.")
-
-Congratulations! You have identified one potential gene involved in the brassinosteroid-miRNA regulatory network.
-
-The gene [AT5G03670](https://www.arabidopsis.org/servlets/TairObject?id=133285&type=locus) codifies the TRM28 protein, a member of the histone-lysine N-methyltransferase SETD1B-like protein familiy. According the bibliography, this protein is involved in the tolerance to acid soil conditions.
+The gene [AT5G03670](https://www.arabidopsis.org/servlets/TairObject?id=133285&type=locus){:target="_blank"} codifies the TRM28 protein, a member of the histone-lysine N-methyltransferase SETD1B-like protein familiy. According the bibliography, this protein is involved in the tolerance to acid soil conditions.
 
 > ### {% icon comment %} Comments
 > One of the hypotheses that we could propose from our results is: the inhibition of the TRM28 protein translation can result in plants with impaired resistance to acid soils. Is it possible to validate it? Yes! We propose this approach: to acquire [AT5G03670 mutant seeds](https://abrc.osu.edu/stocks/243294) and [wild type seeds](http://arabidopsis.info/StockInfo?NASC_id=N1093), grow them under two controlled conditions: neutral substrate and acid substrate, and analyze plant weight after 33 days (Figure 16).
 >
-> ![fig16:Plant growth](../../images/arabidopis_growth_protocol.png "_Arabidopsis_ growth conditions protocol ({% cite deOllas2019 %}).")
+> ![fig16:Plant growth](../../images/arabidopis_growth_protocol.png "Arabidopsis growth conditions protocol ({% cite deOllas2019 %}).")
 >
 {: .comment}
 
