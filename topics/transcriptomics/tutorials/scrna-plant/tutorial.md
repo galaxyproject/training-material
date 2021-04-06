@@ -47,7 +47,7 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 Single cell RNA-seq analysis is a cornerstone of developmental research and provides a great level of detail in understanding the underlying dynamic processes within tissues. In the context of plants, this highlights some of the key differentiation pathways that root cells undergo.
 
-![The various cell subpopulations that are expected within this tutorial](../../images/scrna-plant/scrna-plant1.jpg)
+![The various cell subpopulations that are expected within this tutorial]({% link topics/transcriptomics/images/scrna-plant/scrna-plant1.jpg %})
 
 
 This tutorial replicates the paper ["Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing"](https://doi.org/10.1016/j.devcel.2019.02.022) {% cite denyer2019spatiotemporal %}, where the major plant cell types are recovered in the data as well as distinguishing between QC and meristematic cells. The original paper used the Seurat analysis suite {% cite satija2015spatial %}, but here we will use the ScanPy analysis suite {% cite wolf2018scanpy %} integrated within the single-cell resources in Galaxy {% cite tekman2020single %} .
@@ -226,7 +226,7 @@ A happy coincidence here is that both datasets already had the exact same variab
 
 This should result in the following violin plot, where we see the distribution of the number of genes per cell (`n_genes_by_counts`) and the library size per cell, where the library size is the total number of mRNA in a cell, regardless of which gene it came from (`total_counts`).
 
-!["Violin Plots per Batch"](../../images/scrna-plant/violin1.png)
+!["Violin Plots per Batch"]({% link topics/transcriptomics/images/scrna-plant/violin1.png %})
 
 Each dot is a cell, and the x-axis has two groups showing the absolute values of for each batch (`shr` and `wt`). The y-values correspond to the actual value of each cell, but the x-vales within each group are just random jitter to help see the cells more clearly. The outline of the violin plot shows us the density of each batch, where we can see that most of the cells in the `shr` group have an average number of features just below 2000 genes, compared to `wt` which has an average number of features just below 4000 genes. If we compare the library size, however, we notice that the outlines are very similar and that the average library sizes across batches are comparable.
 
@@ -384,7 +384,7 @@ With our data now sufficiently "flat" and ready for human consumption, we can no
 
 | PCA                                | UMAP                                 |
 |:----------------------------------:|:------------------------------------:|
-| ![PCA](../../images/pca_batch.png) | ![UMAP](../../images/umap_batch.png) |
+| ![PCA]({% link topics/transcriptomics/images/pca_batch.png %}) | ![UMAP]({% link topics/transcriptomics/images/umap_batch.png %})|
 
 
 From this, we can see that there is a reasonable overlap in our batches shown both in the PCA and UMAP embeddings. This is good because it shows that though there is *some* batch effect (i.e. cells from one batch appear to cluster on a different side of the plot than the other) it is not significant enough for there not to be some commonality between the batches.
@@ -397,7 +397,7 @@ Let us cluster the cells and see what cell types we can discover in the plots. T
 
 | UMAP                                   | DotPlot                                    |
 |:--------------------------------------:|:------------------------------------------:|
-| ![PCA](../../images/clusters_expected) | ![UMAP](../../images/dotplot_expected.png) |
+| ![PCA]({% link topics/transcriptomics/images/clusters_expected %}) | ![UMAP]({% link topics/transcriptomics/images/dotplot_expected.png %})|
 
 
 > ### {% icon hands_on %} Hands-on: Generate and Plots Clusters
@@ -424,7 +424,7 @@ Let us cluster the cells and see what cell types we can discover in the plots. T
 >
 {: .hands_on}
 
-![UMAP Leiden Clusters](../../images/scrna-plant/clusters_found.png)
+![UMAP Leiden Clusters]({% link topics/transcriptomics/images/scrna-plant/clusters_found.png %})
 
 Here we have recovered 13 clusters but we don't yet know what types they describe. If we have a list of genes that we know are indicative of a certain cell type (i.e. are marker genes) then we can use this to assign labels to our clusters.
 
@@ -485,7 +485,7 @@ Let us here try to recreate the DotPlot from the paper using the clusters we hav
 
 By running the above we end up with the following DotPlot:
 
-![Dotplot In Analyssis](../../images/dotplot_found.png)
+![Dotplot In Analyssis]({% link topics/transcriptomics/images/dotplot_found.png %})
 
 Notice how we have the Columella, QC and NC sharing the same cluster 11, that the Endodermis is localised in cluster 8, the Cortex in cluster 9, the Trichoblast cells in cluster 3, the Xylem showing strong expression in cluster 12, VC in clusters 4 and 6, and the Atrichoblasts have a mixed expression in a range of clusters. These characteristics are the same as the Dotplot in the original paper.
 
@@ -513,7 +513,7 @@ We can use this Dotplot as a guide to relabel our clusters and give more meaning
 >
 {: .hands_on}
 
-![Relabelled clusters](../../images/scrna-plant/clusters_found_relabelled.png)
+![Relabelled clusters]({% link topics/transcriptomics/images/scrna-plant/clusters_found_relabelled.png %})
 
 
 If we look at the clusters now, and compare them to the original image in the paper, we can infer that the meristematic cells are likely to be derived from cluster 1, which shares soft clustering with the trichoblasts suggesting a trajectory pathway which could be explored.
@@ -529,6 +529,6 @@ Both libraries are available within the RStudio and Jupyter Notebook libraries i
 
 This entire tutorial can be invoked from the scRNA Plant Workflow shown below:
 
-![scRNA Plant](../../images/scrna-plant/scrna-plant-workflow.png)
+![scRNA Plant]({% link topics/transcriptomics/images/scrna-plant/scrna-plant-workflow.png %})
 
 The input parameters take two datasets as input, and 5 parameters using the defaults shown in this tutorial: min cells, min genes, max features, max library size, and Leiden clustering resolution. Play with these options to see how robust the analysis really is!
