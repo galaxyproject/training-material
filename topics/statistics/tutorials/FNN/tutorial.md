@@ -18,6 +18,12 @@ requirements:
     topic_name: statistics
     tutorials:
       - intro_deep_learning
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: statistics
+    tutorials:
+      - RNN
 time_estimation: 2H
 contributors:
 - kxk302
@@ -25,8 +31,6 @@ contributors:
 
 # Introduction
 {:.no_toc}
-
-<!-- This is a comment. -->
 
 Artificial neural networks are a machine learning discipline roughly inspired by how neurons in a
 human brain work. In the past decade, there has been a huge resurgence of neural networks thanks
@@ -253,7 +257,7 @@ input to the neuron, and $$ \mathcal{L} $$ is the loss function):
 
 $$ \delta_{i}^{[l](j)} = \frac{\partial \mathcal{L}(\boldsymbol{\hat{y}^{(j)}}, \boldsymbol{y^{(j)}})}{\partial z_{i}^{[l](j)}}$$
 
-Backpropagation forumuls are expressed in terms of the error defined above. Full derivation of the formulas below is outside
+Backpropagation formulas are expressed in terms of the error defined above. Full derivation of the formulas below is outside
 the scope of this tutorial (Repeated use of chain rule is needed. Please refer to the excellent article by {% cite Bagheri %} 
 for details). Note that in formulas below L denotes the output layer, g the activation function, $$ \nabla $$ the gradient,
 $$ W^{[l]^{T}} $$ layer l weights transposed, $$ b_{i}^{l} $$ bias of neuron i at layer l, $$ w_{ik}^{l} $$ weight to neuron 
@@ -268,7 +272,7 @@ $$ \frac{\partial L}{\partial b_{i}^{[l]}} = \boldsymbol{\delta}^{[l](j)} $$
 
 $$ \frac{\partial L}{\partial w_{ik}^{l}} = \boldsymbol{\delta}_{i}^{[l](j)} a_{k}^{[l-1](j)} $$
 
-As you can see, we can calculate the error at the output layerfor sample *j* using the first equation. Afterwards, we can calculate 
+As you can see, we can calculate the error at the output layer for sample *j* using the first equation. Afterwards, we can calculate 
 the error in the layer right before the output layer for sample *j* using the second equation. The second equation is recursive, 
 meaning that we can calculate the error in any layer, given the error values for the next layer. This backward calculation of the 
 errors is the reason this algorithm is called *backpropagation*. 
@@ -282,11 +286,11 @@ the gradient calculated based on a single sample is not a good estimate of the g
 A middle ground solution is to calculate the gradient of a *batch*, and update the biases and weights based on the average of the gradients  
 in the batch. This is called *mini-batch gradient descent* and is preferred to the other two variations of the algorithm.
 
-Also, note that in the second equation which is recursiven, we have a term that is the derivative of the activation function for that 
+Also, note that in the second equation which is recursive, we have a term that is the derivative of the activation function for that 
 layer. The recursive nature of this equation means, calculating the error values in the layer prior to the output layer requires 1 
 multiplication by the derivative value; calculating the error values in two (or more) layers before the output layer requires 2 (or more) 
 multiplication by the derivative values. If these derivative values are small, as could be the case for the Sigmoid function, the product 
-of multiple small values will result in a *very* small value. Since these error values decide the updates for biases and weights, this 
+of multiple small values will result in a *very* small value (e.g. 0.001). Since these error values decide the updates for biases and weights, this 
 means the update to biases and weights in layers closer to the input layer will bevery small, slowing the learning algorithm to a halt. 
 This phenomenon is known as the *vanishing gradient* problem and is the reason Sigmoid function cannot be used in very deep networks (And 
 why ReLU is so popular in deep networks).
