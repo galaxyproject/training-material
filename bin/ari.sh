@@ -32,6 +32,7 @@ slides=$1  # e.g. _site/training-material/topic/admin/tutorials/ansible/slides.p
 source=$2  # e.g. topic/admin/tutorials/ansible/slides.html
 output=$3  # e.g. _site/training-material/topic/admin/tutorials/ansible/slides.mp4
 subtitles="$(dirname "$output")"/"$(basename "$output" .mp4)".en.vtt
+cover="$output".png
 srcdir="$(dirname "$source")"
 
 # Metadata
@@ -108,3 +109,5 @@ mkdir -p "$(dirname "$output")"
 # Copy our files over
 cp "${build_dir}/out.mp4" "$output"
 cp "${build_dir}/out.vtt" "$subtitles"
+cp "${build_dir}/slides.000.png" "$cover"
+ffprobe -loglevel warning -show_format -show_private_data -show_streams -print_format json -i "$output" "$output".json

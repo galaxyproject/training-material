@@ -1,8 +1,29 @@
 ---
-layout: base
+title: GTN Videos
+layout: page
+redirect_from:
+  - /topics/admin/videos/index
+  - /topics/assembly/videos/index
+  - /topics/climate/videos/index
+  - /topics/computational-chemistry/videos/index
+  - /topics/contributing/videos/index
+  - /topics/dev/videos/index
+  - /topics/ecology/videos/index
+  - /topics/epigenetics/videos/index
+  - /topics/galaxy-interface/videos/index
+  - /topics/genome-annotation/videos/index
+  - /topics/imaging/videos/index
+  - /topics/instructors/videos/index
+  - /topics/introduction/videos/index
+  - /topics/metabolomics/videos/index
+  - /topics/metagenomics/videos/index
+  - /topics/proteomics/videos/index
+  - /topics/sequence-analysis/videos/index
+  - /topics/statistics/videos/index
+  - /topics/transcriptomics/videos/index
+  - /topics/variant-analysis/videos/index
+  - /topics/visualisation/videos/index
 ---
-
-{% include _includes/default-header.html %}
 
 {% assign sorted_topics = "" | split: "," %}
 {% assign sorted_topics_pre = site.data | sort | order: "title" %}
@@ -15,29 +36,38 @@ layout: base
     {% endif %}
 {% endfor %}
 
-
-<div class="container main-content">
-<section>
-
-<h1> GTN Video Slides </h1>
-
 The GTN now generates videos for selected slide decks. Click on a topic below to jump to the video page for that topic!
 
-<br/><br/>
+{% for topic in sorted_topics %}
+{% assign topic_id = topic[0] %}
+{% assign t = site.data[topic_id] %}
 
-<table class="table table-striped">
- <thead>
-  <tr><th>Topic</th></tr>
- </thead>
- <tbody>
-  {% for topic in sorted_topics %} {% unless topic[0] == 'contributors' %}
-  {% if topic[1].name %}
-  <tr><td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/videos/">{{ topic[1].title }}</a></td></tr>
-  {% endif %}
-  {% endunless %}{% endfor %}
- </tbody>
-</table>
+	{% assign has_video = false %}
+	{% assign topic_material = site.pages | topic_filter:topic[0] %}
+	{% for material in topic_material %}
+		{% if material.video %}
+			{% assign has_video = true %}
+		{% endif %}
+	{% endfor %}
 
-</section>
+{% if has_video == true %}
+<h2>{{ t.title }}</h2>
+<div id="playlist">
+	{% for material in topic_material %}
+		{% if material.video %}
+			{% capture vid %}{{ topic_id }}/{% if material.type == "introduction" %}slides/introduction{% else %}tutorials/{{ material.tutorial_name }}/slides{% endif %}{% endcapture %}
+			<div class="pl-item">
+				<a href="watch.html?v={{ vid }}">
+					<div class="cover">
+						<img src="{{site.baseurl}}/videos/topics/{{ vid }}.mp4.png" width="200px"/>
+					</div>
+					<div>
+						<div class="title">{{ material.title }}</div>
+					</div>
+				</a>
+			</div>
+		{% endif %}
+	{% endfor %}
 </div>
-{% include _includes/default-footer.html %}
+{% endif %}
+{% endfor %}
