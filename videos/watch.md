@@ -6,7 +6,7 @@ layout: base
 <div class="container main-content">
 	<div class="row">
 		<div class="col-md-12">
-			<video id="player" width="100%" height="610" controls preload="metadata">
+			<video id="player" width="100%" height="610" controls preload="metadata" style="background: black">
 			</video>
 		</div>
 	</div>
