@@ -30,6 +30,7 @@ layout: base
 			<div class="row">
 				<div class="col-sm-12">
 					<h3>Other Videos</h3>
+					<div><a href="{% link videos/index.md %}">See all GTN Videos</a></div>
 					<div id="playlist" class="vertical">
 					</div>
 				</div>
