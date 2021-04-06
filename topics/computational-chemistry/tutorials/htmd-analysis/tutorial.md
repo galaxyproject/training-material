@@ -162,6 +162,7 @@ Inspecting the contents of the `Ligand (PDB)` file shows that it contains no hyd
 >    - *"Charge of the molecule"*: `0`
 >    - *"Multiplicity"*: `1`
 >    - *"Force field to use for parameterization"*: `gaff`
+>    - *"Charge method"*: `bcc (default)`
 >    - *"Save GRO file?"*: `Yes`
 >
 {: .hands_on}
@@ -222,10 +223,13 @@ The next step is solvation of the newly created simulation box - as we are simul
 > ### {% icon hands_on %} Hands-on: Solvation
 >
 > 1. **GROMACS solvation and adding ions** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"GRO structure file"*: `output` (output of **GROMACS structure configuration** {% icon tool %})
->    - {% icon param-file %} *"System topology"*: `output`
+>    - {% icon param-file %} *"GRO structure file"*: output of **GROMACS structure configuration** {% icon tool %}
+>    - {% icon param-file %} *"Topology (TOP) file"*: `TOP` output of **Merge GROMACS topologies**
+>    - *"Water model for solvation"*: `SPC (generic three-point model)`
+>    - *"Add ions to neutralize system"*: `Yes, add ions`
+>    - *"Specify salt concentration (sodium chloride) to add, in mol/liter"*: `0`
 >    - *"Generate detailed log"*: `Yes`
->
+> 2. Rename the outputs to `Solvated GRO` and `Solvated TOP`.
 >
 {: .hands_on}
 
@@ -301,7 +305,7 @@ Simulation under the NVT ensemble allows the solvent to be brought to the desire
 >
 > 1. **GROMACS simulation** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: `Minimized GRO file` (from energy minimization step)
->    - {% icon param-file %} *"Topology (TOP) file"*: TOP file produced by solvation step.
+>    - {% icon param-file %} *"Topology (TOP) file"*: `Solvated TOP`
 >    - In *"Inputs"*:
 >        - {% icon param-file %} *"Position restraint (ITP) file"*: ITP file produced by initial setup step.
 >    - In *"Outputs"*:
@@ -336,7 +340,7 @@ NVT simulation.
 >
 > 1. **GROMACS simulation** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO output of **GROMACS simulation** {% icon tool %} (NVT equilibration)
->    - {% icon param-file %} *"Topology (TOP) file"*: TOP file produced by solvation step.
+>    - {% icon param-file %} *"Topology (TOP) file"*: `Solvated TOP`
 >    - In *"Inputs"*:
 >        - {% icon param-file %} *"Checkpoint (CPT) file"*: Output of **GROMACS simulation** {% icon tool %} (NVT equilibration))
 >        - {% icon param-file %} *"Position restraint (ITP) file"*: ITP file produced by initial setup step.
@@ -368,7 +372,7 @@ We can now remove the restraints and continue with the production simulation. Th
 >
 > 1. **GROMACS simulation** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: Output of **GROMACS simulation** {% icon tool %} (NPT equilibration)
->    - {% icon param-file %} *"Topology (TOP) file"*: Output of the solvation step
+>    - {% icon param-file %} *"Topology (TOP) file"*: `Solvated TOP`
 >    - In *"Inputs"*:
 >        - {% icon param-file %} *"Checkpoint (CPT) file"*: Output of **GROMACS simulation** {% icon tool %} (NPT simulation))
 >    - In *"Outputs"*:
@@ -629,6 +633,26 @@ If you are able to write small scripts, you can automate everything you have lea
 >    ```
 >
 {: .hands_on}
+
+Another option is to use the Planemo command-line tool. Planemo has a very wide range of functions, including the ability to run Galaxy workflows from the command line. For a full overview, see the [tutorial](https://planemo.readthedocs.io/en/latest/running.html).
+
+Assuming you have Planemo installed, you can create a file with the name `htmd-job.yml` with the following contents:
+
+```
+SDF file with (docked) ligands:
+  class: File
+  galaxy_id: '11ac94870d0bb33a79c5fa18b0fd3b4c'
+  # path: ligands.sdf
+
+```
+
+You can specify the dataset either using its Galaxy ID, or with the path of a local file. Then run:
+
+```
+planemo run adc6d049e9283789 htmd-job.yml --galaxy_url https://usegalaxy.eu --galaxy_user_key YOUR_USEGALAXY_EU_API_KEY --history_name "HTMD with planemo"
+```
+
+If you now return to the web-browser, you should see a new history should have been created named `HTMD with planemo` and it should begin to fill with datasets.
 
 
 # Conclusion
