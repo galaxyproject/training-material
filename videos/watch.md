@@ -17,7 +17,7 @@ layout: base
 			</div>
 			<div class="row">
 				<div class="col-sm-6">
-					<b>Transcript</b>
+					<h3>Transcript</h3>
 				</div>
 				<div class="col-sm-6" id="transcript-edit">
 					Edit
@@ -29,10 +29,10 @@ layout: base
 		<div class="col-sm-4">
 			<div class="row">
 				<div class="col-sm-12">
-					<b>Other Videos</b>
+					<h3>Other Videos</h3>
+					<div id="playlist" class="vertical">
+					</div>
 				</div>
-			</div>
-			<div class="row" id="playlist" class="vertical">
 			</div>
 		</div>
 	</div>
