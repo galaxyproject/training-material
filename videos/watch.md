@@ -61,7 +61,18 @@ player.innerHTML = `
 document.getElementById("transcript-edit").innerHTML = `<a href="https://github.com/galaxyproject/training-material/edit/main/topics/${videoid}.html">Found a typo? Edit</a>`
 
 if(seekTo !== null){
-	player.currentTime = parseInt(seekTo);
+	if(seekTo.indexOf(":") > -1){
+		var seekToparts = seekTo.split(":");
+		if(seekToparts.length == 2) {
+			player.currentTime = (parseInt(seekToparts[0]) * 60) + parseInt(seekToparts[1]);
+		} else if (seekToparts.length == 3){
+			player.currentTime = (parseInt(seekToparts[0]) * 3600) + (parseInt(seekToparts[1]) * 60) + parseInt(seekToparts[2]);
+		} else {
+			console.error("Could not parse time")
+		}
+	} else {
+		player.currentTime = parseInt(seekTo);
+	}
 }
 
 
