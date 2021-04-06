@@ -35,7 +35,7 @@ in pattern classification, clustering, regression, association, time series pred
 With the increasing popularity of social media in the past decade, image and video processing tasks have become very
 important. The previous neural network architectures (e.g. feedforward neural networks) could not scale up to handle
 image and video processing tasks. This gave way to the development of convolutional neural networks that are specifically
-tailroed to image and video processing tasks. In this tutorial, we explain what convolutional neural networks are, discuss
+tailored to image and video processing tasks. In this tutorial, we explain what convolutional neural networks are, discuss
 their architecture, and solve an image classification problem using MNIST digit classification dataset using a CNN in Galaxy.
 
 > ### Agenda
