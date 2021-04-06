@@ -57,7 +57,7 @@ The GTN now generates videos for selected slide decks. Click on a topic below to
 		{% if material.video %}
 			{% capture vid %}{{ topic_id }}/{% if material.type == "introduction" %}slides/introduction{% else %}tutorials/{{ material.tutorial_name }}/slides{% endif %}{% endcapture %}
 			<div class="pl-item">
-				<a href="player.html?v={{ vid }}">
+				<a href="watch.html?v={{ vid }}">
 					<div class="cover">
 						<img src="{{site.baseurl}}/videos/topics/{{ vid }}.mp4.png" width="200px"/>
 					</div>
