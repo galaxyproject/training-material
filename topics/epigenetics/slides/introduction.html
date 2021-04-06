@@ -27,11 +27,7 @@ contributors:
 
 ---
 
-# What is ATAC sequencing?
-
----
-
-### Where my data comes from?
+### Where does my data comes from?
 
 ![](../images/atac-seq/atac.jpg)
 
@@ -44,10 +40,10 @@ contributors:
 
 ???
 
-You have reads without nucleosomes (histones) = open chromatin regions, and reads with these complexes.
-If the length is too big (bigger than 800bp) it is not correctly amplified by PCR and/or not efficiently sequenced by illumina sequencers.
-That's why it is so important to build coverage around the insertion sites and not fully between the mates of the pairs.
-If the pairs are larger apart than 170bp you don't know if there was a nucleosome between them.
+- You have reads without nucleosomes (histones) = open chromatin regions, and reads with these complexes.
+- If the length is too big (bigger than 800bp) it is not correctly amplified by PCR and/or not efficiently sequenced by illumina sequencers.
+- That's why it is so important to build coverage around the insertion sites and not fully between the mates of the pairs.
+- If the pairs are larger apart than 170bp you don't know if there was a nucleosome between them.
 
 ---
 
@@ -57,9 +53,17 @@ If the pairs are larger apart than 170bp you don't know if there was a nucleosom
 - You may also have a control. A control could be purified DNA, which has no more nucleosomes, treated with Tn5. It is sequenced along with the ATAC sample.
 - ATAC-Seq is usually paired-end sequencing. The it is easier to idenfiy a true open chromatin region. That is why you need then both adapters.
 
+???
+
+- TODO
+
 ---
 
 ## How to analyze ATAC-Seq data?
+
+???
+
+- TODO
 
 ---
 
@@ -74,7 +78,7 @@ If the pairs are larger apart than 170bp you don't know if there was a nucleosom
 
 ???
 
-The third one (around 400bp) is where Tn5 inserted around two adjacent nucleosomes and the fourth one (around 600bp) is where Tn5 inserted around three adjacent nucleosomes.
+- The third one (around 400bp) is where Tn5 inserted around two adjacent nucleosomes and the fourth one (around 600bp) is where Tn5 inserted around three adjacent nucleosomes.
 
 ---
 
@@ -82,11 +86,11 @@ The third one (around 400bp) is where Tn5 inserted around two adjacent nucleosom
 
 ![](../images/atac-seq/per_base_sequence_content.png)
 
-- Your experiment might have a nucelotide bias because of the transposase treatment.
+- Your experiment might have a nucelotide bias because of the transposase treatment ([Brian Green et. al. 2012](https://doi.org/10.1186/1759-8753-3-3))
 
 ???
 
-([Brian Green et. al. 2012](https://doi.org/10.1186/1759-8753-3-3))
+- TODO
 
 ---
 
@@ -98,11 +102,10 @@ The third one (around 400bp) is where Tn5 inserted around two adjacent nucleosom
 
 ???
 
-ATAC-seq datasets usually contain a large percentage of reads that are derived from mitochondrial DNA.
-Since there are no ATAC-seq peaks of interest in the mitochondrial genome you can discard those reads.
-Especially because there is no nucleosome on the mitochondrion, so it makes this part of the genome very sensitive to Tn5.
-
-End-to-End alignement is probably useful because you are interested in the exact open chromatin regions.
+- ATAC-seq datasets usually contain a large percentage of reads that are derived from mitochondrial DNA.
+- Since there are no ATAC-seq peaks of interest in the mitochondrial genome you can discard those reads.
+- Especially because there is no nucleosome on the mitochondrion, so it makes this part of the genome very sensitive to Tn5.
+- End-to-End alignement is probably useful because you are interested in the exact open chromatin regions.
 
 ---
 
@@ -112,12 +115,12 @@ End-to-End alignement is probably useful because you are interested in the exact
 
 - You would prefer a peak caller taking into consideration that the adapters are separated by 9 basepairs.
 - When Tn5 cuts an accessible chromatin locus it inserts adapters separated by 9 basepairs.
-- It is better to test Genrich and MACS2. Both of them might produce different results based on the read coverage.
+- It is better to test Genrich and MACS2. Both of them might produce different results based on the read coverage [Kia et al. 2017](https://doi.org/10.1186/s12896-016-0326-1)
 
 ???
 
-[Kia et al. 2017](https://doi.org/10.1186/s12896-016-0326-1)
-This means that to have the read start site reflect the centre of where Tn5 bound, the reads on the positive strand should be shifted 4 bp to the right and reads on the negative strands should be shifted 5 bp to the left as in [Buenrostro et al. 2013](https://doi.org/10.1002/0471142727.mb2129s109). Genrich can apply these shifts when ATAC-seq mode is selected.
+- TODO
+- This means that to have the read start site reflect the centre of where Tn5 bound, the reads on the positive strand should be shifted 4 bp to the right and reads on the negative strands should be shifted 5 bp to the left as in Buenrostro et al. 2013. Genrich can apply these shifts when ATAC-seq mode is selected.
 
 ---
 
@@ -126,3 +129,7 @@ This means that to have the read start site reflect the centre of where Tn5 boun
 ![](../images/atac-seq/ATACWF.svg)
 
 - This is an overview of ATAC-Seq data analysis.
+
+???
+
+- TODO
