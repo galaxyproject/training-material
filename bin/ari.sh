@@ -110,3 +110,4 @@ mkdir -p "$(dirname "$output")"
 cp "${build_dir}/out.mp4" "$output"
 cp "${build_dir}/out.vtt" "$subtitles"
 cp "${build_dir}/slides.000.png" "$cover"
+ffprobe -loglevel warning -show_format -show_private_data -show_streams -print_format json -i "$output" "$output".json
