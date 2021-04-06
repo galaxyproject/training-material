@@ -285,7 +285,7 @@ If we inspect the resulting dataset, we see that the number of cells remaining i
 
 ## Confounder Removal
 
-Now we have a set of cells we are reasonably confident contain desirable biological variation (please see the ["An introduction to scRNA-seq data"]({% link videos/#video-transcriptomics-scrna-intro %}) at time point 11:28 as a reference for the types of wanted and unwanted variation). We wish to now regress out the library size variation, as it is not indicative of cell type. To do this, we will first ensure that all cells are of the same comparable library size by applying individual size factors to each cell.
+Now we have a set of cells we are reasonably confident contain desirable biological variation (please view the  following segment from [*"An introduction to scRNA-seq data analysis"*]({% link videos/watch.md %}?v=transcriptomics/tutorials/scrna-intro/slides&t=11:28) as a reference for the types of wanted and unwanted variation). We wish to now regress out the library size variation, as it is not indicative of cell type. To do this, we will first ensure that all cells are of the same comparable library size by applying individual size factors to each cell.
 
 We will also apply a log transformation to the cells, as this compresses the variation into a less extreme space, making it easier to see the relative differences between cells.
 
@@ -329,7 +329,7 @@ Dimension reduction is the art of reducing a high dimensional dataset into a low
 
 > ### {% icon tip %} Tip: Dimension Reduction
 >
-> You can learn more about dimension reduction by consulting the [An introduction to scRNA-seq data analysis]({% link videos/#video-transcriptomics-scrna-intro %}) at time point 13:46.
+> You can learn more about dimension reduction by consulting the following segment from [*"An introduction to scRNA-seq data analysis"*]({% link videos/watch.md %}?v=transcriptomics/tutorials/scrna-intro/slides&t=13:46).
 >    {: .tip}
 
 This is usually a two step process:
@@ -353,7 +353,7 @@ This is usually a two step process:
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > UMAP relies on a connected graph of cells to operate. Please see: [An introduction to scRNA-seq data analysis]({% link videos/#video-transcriptomics-scrna-intro %}) at time point 13:40 for more information on how this process works.
+>    > UMAP relies on a connected graph of cells to operate. Please view the following segment from [*"An introduction to scRNA-seq data analysis"*]({% link videos/watch.md %}?v=transcriptomics/tutorials/scrna-intro/slides&t=13:40) %}) for more information on how this process works.
 >    {: .comment}
 >
 > 1. {% tool [Cluster, infer trajectories and embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0) %} with the following parameters:
