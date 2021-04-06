@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Deep Learning - Part 2: Recurrent neural networks (RNN)
+title: Deep Learning (Part 2) - Recurrent neural networks (RNN)
 zenodo_link: https://zenodo.org/record/4477881
 questions:
 - What is a recurrent neural network (RNN)?
@@ -20,7 +20,7 @@ requirements:
       - FNN
 follow_up_training:
   -
-    type: "internal"
+    type: internal
     topic_name: statistics
     tutorials:
       - CNN

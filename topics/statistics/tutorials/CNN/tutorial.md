@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Deep Learning - Part 3: Convolutional neural networks (CNN)
+title: Deep Learning (Part 3) - Convolutional neural networks (CNN)
 zenodo_link:
 questions:
 - What is a convolutional neural network (CNN)?
