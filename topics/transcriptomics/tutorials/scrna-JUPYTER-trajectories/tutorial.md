@@ -136,7 +136,7 @@ JupyterLab is a bit like RStudio but for other coding languages. What, you've ne
 >    - *"Do you already have a notebook?"*: `Start with a fresh notebook`
 >    - {% icon param-file %} *"Include data into the environment"*:  `Nothing selected`
 >
->  This may take a moment, but once the `Executed notebook` in your dataset is orange, you are up and running!
+>    This may take a moment, but once the `Executed notebook` in your dataset is orange, you are up and running!
 >
 > 4. Either click on the blue `User menu`, or go to the top of the screen and choose `User` and then `Active InteractiveTools`
 >
