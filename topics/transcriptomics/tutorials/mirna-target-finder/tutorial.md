@@ -760,7 +760,7 @@ Finally, we can access all the information available on the genes identified in 
 - [AT3G63200](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT3G63200): PATATIN-LIKE PROTEIN 9, PLA IIIB
 
 > ### {% icon comment %} Comments
-> One of the hypotheses that we could propose from our results is: the inhibition of the AT2G46850 gene can result in plants with improved resistance to drought conditions. Is it possible to validate it? Yes! We propose this approach: to acquire [AT2G46850 mutant seeds](https://abrc.osu.edu/stocks/392113) and [wild type seeds](http://arabidopsis.info/StockInfo?NASC_id=N1093), grow them under two controlled conditions: watered and drought stress, and analyze plant weight after 33 days (Figure 16).
+> One of the hypotheses that we could propose from our results is: the inhibition of the AT2G46850 gene can result in plants with improved resistance to drought conditions. Is it possible to validate it? Yes! We propose this approach: to acquire [AT2G46850 mutant seeds](https://abrc.osu.edu/stocks/392113) and [wild type seeds](http://arabidopsis.info/StockInfo?NASC_id=N1093), grow them under two controlled conditions: watered and drought stress, and analyze plant weight after 33 days (Figure 13).
 >
 > ![fig16:Plant growth](../../images/arabidopis_growth_protocol.png "Arabidopsis growth conditions protocol ({% cite deOllas2019 %}).")
 >
