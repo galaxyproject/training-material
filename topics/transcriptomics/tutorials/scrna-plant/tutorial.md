@@ -316,7 +316,7 @@ After normalising and regressing out unwanted factors, we will then scale the da
 Dimensionality reduction is the art of reducing a high dimensional dataset into a low dimensional "embedding" that humans can actually see (i.e. 2 or 3 dimensions), ideally such that the relationships or distances between data points are preserved in this embedding. In the context of single-cell datasets, this essentially means compressing > 10 000 genes into just 2 X/Y variables.
 
 
-> ### {% icon tip %} Tip: Dimension Reduction
+> ### {% icon tip %} Tip: What is Dimensionality Reduction?
 >
 > You can learn more about dimensionality reduction by consulting the following segment from [*"An introduction to scRNA-seq data analysis"*]({% link videos/watch.md %}?v=transcriptomics/tutorials/scrna-intro/slides&t=13:46).
 >    {: .tip}
