@@ -78,6 +78,8 @@ We've provided you with experimental data to analyse from a mouse dataset of fet
 >
 > 5. **Rename** {% icon galaxy-pencil %} the .ipynb object as `Trajectories_Instructions.ipynb`
 >
+>    {% snippet faqs/galaxy/datasets_rename.md name="Trajectories_Instructions.ipynb" %}
+>
 > 6. Check that the datatype is `.ipynb`
 >
 {: .hands_on}
