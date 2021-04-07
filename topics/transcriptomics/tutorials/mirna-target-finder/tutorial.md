@@ -50,7 +50,9 @@ miRNAs have been found to be important regulators of many physiological processe
 - The majority of plant miRNAs regulate the genes encoding for transcription factors (TFs)
 - Targets include not only mRNAs but also long noncoding RNAs (lncRNAs)
 
-In plants, miRNAs can silence targets through RNA degradation as well as translational repression pathways, and unlike animals, a large proportion of miRNA and their targets have less than four mismatches. This feature has been exploited for developing miRNAs target prediction tools, providing an efficient approach to elucidate the miRNA-mediated regulatory networks, which can contribute to biotechnological solutions to improve crops productivity. In this tutorial, inspired by {% cite Park2020 %}, we aim to explore the interplay between brassinosteroids and the miRNA-gene silencing pathway, considered one of the most versatile regulatory mechanisms in response to stressful situations in plants.
+In plants, miRNAs can silence targets through RNA degradation as well as translational repression pathways, and unlike animals, a large proportion of miRNA and their targets have less than four mismatches. This feature has been exploited for developing miRNAs target prediction tools, providing an efficient approach to elucidate the miRNA-mediated regulatory networks, which can contribute to biotechnological solutions to improve crops productivity. 
+
+In this tutorial, inspired by {% cite Park2020 %}, we aim to explore the interplay between brassinosteroids and the miRNA-gene silencing pathway, considered one of the most versatile regulatory mechanisms in response to stressful situations in plants.
 
 
 > ### Agenda
@@ -128,7 +130,7 @@ The first step of our analysis consists of retrieving the miRNA-Seq datasets fro
 >    - Click on __Collection__ tab
 >    - Click of the **Paste/Fetch** button
 >    - Copy the Zenodo links included in the `Control miRNA samples` section and press <kbd>Start</kbd> and <kbd>Build</kbd>
->    - Simplify names by clicking on each file name and removing `https://zenodo.org/record/4606701/files/` from the file name.
+>    - Rename the samples, keeping only the accession number (e.g. `SRR11611351`)
 >    - Assign a name to the new collection: `Control miRNA` and press <kbd>Create list</kbd>
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
@@ -145,6 +147,7 @@ Next we will retrieve the remaining datasets.
 > 1. Import the files from Zenodo:
 >
 >    - Open the file {% icon galaxy-upload %} __upload__ menu
+>    - Click on __Regular__ tab
 >    - Click of the **Paste/Fetch** button
 >    - Copy the Zenodo links and press <kbd>Start</kbd>
 >
@@ -744,16 +747,19 @@ We are now ready to launch the search for miRNA target genes. For this we will u
 {: .hands_on}
 
 Congratulations! You have identified the following 5 potential genes involved in the brassinosteroid-miRNA regulatory network:
-- [AT5G10180](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT5G10180){:target="_blank"}
-- [AT3G09220](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT3G09220){:target="_blank"}
-- [AT2G46850](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT2G46850){:target="_blank"}
-- [AT5G64260](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT5G64260){:target="_blank"}
-- [AT3G63200](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT3G63200){:target="_blank"}
 
-The gene [AT5G03670](https://www.arabidopsis.org/servlets/TairObject?id=133285&type=locus){:target="_blank"} codifies the TRM28 protein, a member of the histone-lysine N-methyltransferase SETD1B-like protein familiy. According the bibliography, this protein is involved in the tolerance to acid soil conditions.
+![fig15:TargetFinder results](../../images/targetFinder_results.png "TargetFinder results.")
+
+Finally, we can access all the information available on the genes identified in the TAIR database:
+
+- [AT5G10180](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT5G10180): ARABIDOPSIS SULFATE TRANSPORTER 68, AST6
+- [AT3G09220](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT3G09220): LAC7, LACCASE 7
+- [AT2G46850](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT2G46850): Protein kinase superfamily protein
+- [AT5G64260](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT5G64260): EXL2, EXORDIUM LIKE 2
+- [AT3G63200](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT3G63200): PATATIN-LIKE PROTEIN 9, PLA IIIB
 
 > ### {% icon comment %} Comments
-> One of the hypotheses that we could propose from our results is: the inhibition of the TRM28 protein translation can result in plants with impaired resistance to acid soils. Is it possible to validate it? Yes! We propose this approach: to acquire [AT5G03670 mutant seeds](https://abrc.osu.edu/stocks/243294) and [wild type seeds](http://arabidopsis.info/StockInfo?NASC_id=N1093), grow them under two controlled conditions: neutral substrate and acid substrate, and analyze plant weight after 33 days (Figure 16).
+> One of the hypotheses that we could propose from our results is: the inhibition of the AT2G46850 gene can result in plants with improved resistance to drought conditions. Is it possible to validate it? Yes! We propose this approach: to acquire [AT2G46850 mutant seeds](https://abrc.osu.edu/stocks/392113) and [wild type seeds](http://arabidopsis.info/StockInfo?NASC_id=N1093), grow them under two controlled conditions: watered and drought stress, and analyze plant weight after 33 days (Figure 16).
 >
 > ![fig16:Plant growth](../../images/arabidopis_growth_protocol.png "Arabidopsis growth conditions protocol ({% cite deOllas2019 %}).")
 >
@@ -766,4 +772,4 @@ As additional activity, you can try to repeat the workflow by using the sequence
 # Conclusion
 {:.no_toc}
 
-In this tutorial, we have analyzed RNA sequencing data to extract information about potential genes regulated by brassinosteroids. For this purpose, the approach chosen was the identification of genes complementary to miRNAs upregulated in response by brassinosteroids. The final result has been the identification of one potential target, AT5G03670, for which there is no evidence in the literature of their involvement in brassinosteroid regulation.
+In this tutorial, we have analyzed RNA sequencing data to extract information about potential genes regulated by brassinosteroids. For this purpose, the approach chosen was the identification of genes complementary to miRNAs upregulated in response by brassinosteroids. The final result has been the identification of five potential miRNA targets.
