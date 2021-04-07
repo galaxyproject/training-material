@@ -246,7 +246,7 @@ To remove the adapters contamination, we will employ the __Trim Galore__ tool, a
 
 Next, we will reassess the quality of the sequences to check if the adapters have been removed.
 
-> ### {% icon hands_on %} Hands-on: Initial quality check
+> ### {% icon hands_on %} Hands-on: Post-processing quality check
 >
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
 >    - {% icon param-collection %} *"Dataset collection"*: `Control miRNA trimmed`
@@ -371,11 +371,6 @@ Next, we will extract those genes whose expression is statistically significantl
 
 > ### {% icon hands_on %} Hands-on: Filter differentially expressed miRNAs
 >
-> > ### {% icon comment %} Comments
-> >
-> > You can that find these tools in the _Filter and Sort_ section.
-> >
-> {: .comment}
 > 1. {% tool [Filter](Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `DESeq2 results miRNA`
 >    - *"With following condition"*: `c7<0.05`
@@ -415,10 +410,6 @@ Repeat the filtering step on the imported DESeq2 result.
 
 > ### {% icon hands_on %} Hands-on: Filter and sort differentially expressed miRNAs from the full dataset
 >
-> > ### {% icon comment %} Comments
-> >
-> > You can that find these tools in the _Filter and Sort_ section.
-> >
 > {: .comment}
 > 1. {% tool [Filter](Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `miRNA_DESeq2_results_complete_dataset`
@@ -465,10 +456,12 @@ First, we retrieve  the mRNA-Seq datasets from Zenodo and organizing them into c
 >    - Click on __Collection__ tab
 >    - Click of the **Paste/Fetch** button
 >    - Copy the Zenodo links included in the `Control mRNA samples` section and press <kbd>Start</kbd> and <kbd>Build</kbd>
->    - Simplify names by clicking on each file name and removing `https://zenodo.org/record/4606701/files/` from the file name.
+>    - Rename the samples, keeping only the accession number (e.g. SRR1019437).
 >    - Assign a name to the new collection: `Control mRNA` and press <kbd>Create list</kbd>
 > 3. Add informative tags (i.e. `#mRNA` and `#control`)
 > 4. Repeat the procedure with the `BR treated mRNA samples`.
+{: .hands_on}
+
 
 ## Quality assessment of mRNA reads
 
@@ -747,7 +740,7 @@ We are now ready to launch the search for miRNA target genes. For this we will u
 > 2. Click on the {% icon galaxy-eye %} (eye) icon and inspect the output of **TargetFinder**.
 {: .hands_on}
 
-Congratulations! You have identified the following 5 potential genes involved in the brassinosteroid-miRNA regulatory network:
+Congratulations! You have identified the following 5 potential genes involved in the brassinosteroid-miRNA regulatory network.
 
 ![fig15:TargetFinder results](../../images/targetFinder_results.png "TargetFinder results.")
 
