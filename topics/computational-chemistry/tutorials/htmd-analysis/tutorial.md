@@ -646,11 +646,15 @@ SDF file with (docked) ligands:
 
 ```
 
-You can specify the dataset either using its Galaxy ID, or with the path of a local file. Then run:
+You can specify the dataset either using its Galaxy ID, or with the path of a local file. The Galaxy ID is associated with the specific server you are using - in
+this case `usegalaxy.eu`. You can get this ID by clicking on the `View details` icon of a dataset in your Galaxy history - it is provided in the `Dataset Information`
+table as `History Content API ID`. Then run:
 
 ```
 planemo run adc6d049e9283789 htmd-job.yml --galaxy_url https://usegalaxy.eu --galaxy_user_key YOUR_USEGALAXY_EU_API_KEY --history_name "HTMD with planemo"
 ```
+
+Here `adc6d049e9283789` is the Galaxy ID associated with the workflow on `usegalaxy.eu`, but the `planemo run` command can also use a local workflow file.
 
 If you now return to the web-browser, you should see a new history should have been created named `HTMD with planemo` and it should begin to fill with datasets.
 
