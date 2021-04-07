@@ -252,11 +252,7 @@ For this analysis, we will set a minimum threshold of detectability that each ce
 >        - *"Filter"*: `Minimum number of cells expressed`
 >            - *"Minimum number of cells expressed required for a gene to pass filtering"*: `5`
 >
->    > ### {% icon comment %} Comment
->    >
->    > We now set the upper limits to the analysis.
->    > 
->    {: .comment}
+>    We now set the upper limits to the analysis.
 >
 > 1. {% tool [Filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Filter** {% icon tool %})
