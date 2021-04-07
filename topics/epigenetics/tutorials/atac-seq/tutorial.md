@@ -508,7 +508,7 @@ A final example of a Fragment size distribution of a very good ATAC-Seq, even if
 
 ## Call Peaks
 
-We have now finished the data preprocessing. Next, in order to find regions corresponding to potential open chromatin regions, we want to identify regions where reads have piled up (peaks) greater than the background read coverage. The tools which are currently used are [Genrich](https://github.com/jsh58/Genrich) and [MACS2](https://github.com/taoliu/MACS). MACS2 is more widely used. Genrich has a mode dedicated to ATAC-Seq but is still not published and the more you have reads, the less you have peaks (see the issue [here](https://github.com/jsh58/Genrich/issues/33)). That's why we will not use Genrich in this tutorial.
+We have now finished the data preprocessing. Next, in order to find regions corresponding to potential open chromatin regions, we want to identify regions where reads have piled up (peaks) greater than the background read coverage. The tools which are currently used are [Genrich](https://github.com/jsh58/Genrich) and [MACS2](https://github.com/taoliu/MACS). MACS2 is more widely used. Genrich has a mode dedicated to ATAC-Seq but is still not published and the more reads you have, the less peaks you get (see the issue [here](https://github.com/jsh58/Genrich/issues/33)). That's why we will not use Genrich in this tutorial.
 
 At this step, two approaches exists:
 
@@ -521,14 +521,14 @@ At this step, two approaches exists:
 > When Tn5 cuts an accessible chromatin locus it inserts adapters separated by 9bp ({% cite Kia2017 %}):
 > ![Nextera Library Construction](../../images/atac-seq/NexteraLibraryConstruction.jpg "Nextera Library Construction")
 >
-> This means that to have the read start site reflect the centre of where Tn5 bound, the reads on the positive strand should be shifted 4 bp to the right and reads on the negative strands should be shifted 5 bp to the left as in [Buenrostro et al. 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825). **Genrich** can apply these shifts when ATAC-seq mode is selected. In most cases, we do not have 9bp resolution so we don't take it into account but if you are interested in footprint, this is important.
+> This means in order to have the read start site reflecting the centre of where Tn5 bound, the reads on the positive strand should be shifted 4 bp to the right and reads on the negative strands should be shifted 5 bp to the left as in [Buenrostro et al. 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825). **Genrich** can apply these shifts when ATAC-seq mode is selected. In most cases, we do not have 9bp resolution so we don't take it into account but if you are interested in the footprint, this is important.
 {: .comment}
 
 If we only assess the coverage of the 5' extremity of the reads, the data would be too sparse and it would be impossible to call peaks. Thus, we will extend the start sites of the reads by 200bp (100 bp in each direction) to assess coverage.
 
 ### Using MACS2
 
-We convert the BAM file to BED format because when we set the extension size to MACS2, it will only consider one of the read pairs while here we would like to keep both information.
+We convert the BAM file to BED format because when we set the extension size in MACS2, it will only consider one read of the pair while here we would like to use the information from both.
 
 > ### {% icon hands_on %} Hands-on: Convert the BAM to BED
 >
