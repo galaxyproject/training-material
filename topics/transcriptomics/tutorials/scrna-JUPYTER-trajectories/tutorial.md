@@ -72,13 +72,13 @@ We've provided you with experimental data to analyse from a mouse dataset of fet
 >
 > 3. **Rename** {% icon galaxy-pencil %} the .h5ad object as `Final cell annotated object`
 >
+>    {% snippet faqs/galaxy/datasets_rename.md name="Final cell annotated object" %}
+>
 > 4. Check that the datatype is `h5ad`
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="h5ad" %}
 >
 > 5. **Rename** {% icon galaxy-pencil %} the .ipynb object as `Trajectories_Instructions.ipynb`
->
->    {% snippet faqs/galaxy/datasets_rename.md name="Trajectories_Instructions.ipynb" %}
 >
 > 6. Check that the datatype is `.ipynb`
 >
@@ -132,7 +132,7 @@ JupyterLab is a bit like RStudio but for other coding languages. What, you've ne
 
 > ### {% icon hands_on %} Hands-on: Launching JupyterLab
 >
-> 1. {% tool [Interactive Jupyter Notebook](tool_id=interactive_tool_jupyter_notebook) %} with the following parameters:
+> 1. {% tool [Interactive Jupyter Notebook](interactive_tool_jupyter_notebook) %} with the following parameters:
 >    - *"Do you already have a notebook?"*: `Start with a fresh notebook`
 >    - {% icon param-file %} *"Include data into the environment"*:  `Nothing selected`
 >
@@ -156,7 +156,7 @@ Welcome!
 >
 >   ![Python 3 icon](../../images/wab-python3logo.png "Python 3 Button")
 >
-> 2. Save your file (**File**: **Save**, or click the {% icon galaxy-save %} Save icon at the top left
+> 2. Save your file (**File**: **Save**, or click the {% icon galaxy-save %} Save icon at the top left)
 >
 > 3. If you right click on the file in the folder window at the left, you can rename your file `whateveryoulike.ipynb`
 >
@@ -217,7 +217,7 @@ If you want to run this notebook again, or share it with others, it now exists i
 
 {% icon congratulations %} Congratulations! You've made it to the end! You might be interested in the [Answer Key History](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/trajectories---jupyter---answer-key)
 
-In this tutorial, you moved from called clusters to inferred relationships and trajectories using pseudotime analysis. You found an alternative to PCA (diffusion map), an alternative to tSNE (force-directehttps://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/trajectories---jupyter---answer-keyd graph), a means of identifying cluster relationships (PAGA), and a metric for pseudotime (diffusion pseudotime) to identify early and late cells. If you were working in a group, you found that such analysis is slightly more sensitive to your decisions than the simpler filtering/plotting/clustering is. We are inferring and assuming relationships and time, so that makes sense!
+In this tutorial, you moved from called clusters to inferred relationships and trajectories using pseudotime analysis. You found an alternative to PCA (diffusion map), an alternative to tSNE (force-directed graph), a means of identifying cluster relationships (PAGA), and a metric for pseudotime (diffusion pseudotime) to identify early and late cells. If you were working in a group, you found that such analysis is slightly more sensitive to your decisions than the simpler filtering/plotting/clustering is. We are inferring and assuming relationships and time, so that makes sense!
 
 To discuss with like-minded scientists, join our Gitter channel for all things Galaxy-single cell!
 [![Gitter](https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg)](https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
