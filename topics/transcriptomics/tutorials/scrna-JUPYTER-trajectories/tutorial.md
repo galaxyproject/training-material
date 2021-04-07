@@ -153,7 +153,8 @@ Welcome!
 > ### {% icon hands_on %} Hands-on: Creating a notebook
 >
 > 1. Click the **Python 3** icon under **Notebook**
-> ![Python 3 icon](../../images/wab-python3logo.png "Python 3 Button")
+>
+>   ![Python 3 icon](../../images/wab-python3logo.png "Python 3 Button")
 >
 > 2. Save your file (**File**: **Save**, or click the {% icon galaxy-save %} Save icon at the top left
 >
