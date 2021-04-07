@@ -126,7 +126,7 @@ Take note of what # this dataset is in your history, as you will need that short
 >
 {: .hands_on}
 
-JupyterLab is a bit like RStudio but for other coding languages. What, you've never heard of RStudio? Then don't worry, just follow the instructions!
+JupyterLab is a bit like RStudio but for other coding languages. What, you've never heard of [RStudio](https://www.rstudio.com/products/rstudio/features/)? Then don't worry, just follow the instructions!
 
 {% icon warning %} Please note: this is only currently available on the [usegalaxy.eu](https://usegalaxy.eu) site.
 
