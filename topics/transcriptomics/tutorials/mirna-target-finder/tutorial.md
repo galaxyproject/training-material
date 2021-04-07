@@ -425,7 +425,7 @@ Repeat the filtering step on the imported DESeq2 result.
 >    - {% icon param-file %} *"Filter"*: `Differentially expressed miRNAs`
 >    - *"With following condition"*: `c3>0`
 > 4. Rename the output as `Upregulated miRNAs`
-> 5. {% tool Sort %} data in ascending or descending order (Galaxy Version 1.1.0) with the following parameters:
+> 5. {% tool [Sort](sort1) %} data in ascending or descending order (Galaxy Version 1.1.0) with the following parameters:
 >    - {% icon param-file %} *"Sort Dataset"*: `Upregulated miRNAs`
 >    - *"on column"*: `Column: 3`
 >    - *"everything in"*: `Descending order`
