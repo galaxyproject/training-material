@@ -743,6 +743,7 @@ We are now ready to launch the search for miRNA target genes. For this we will u
 >    - {% icon param-file %} *"Input small RNA sequences file"*: `Upreguled miRNA sequences`
 >    - {% icon param-file %} *"Target sequence database file*": `Downregulated mRNA sequences`
 >    - *"Prediction score cutoff value"*: `5.0`
+>    - *"Output format"*: `Tab-delimited format`
 > 2. Click on the {% icon galaxy-eye %} (eye) icon and inspect the output of **TargetFinder**.
 {: .hands_on}
 
