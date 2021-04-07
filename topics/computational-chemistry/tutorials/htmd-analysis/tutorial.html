@@ -520,6 +520,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -644,7 +646,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 12, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 7, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -845,6 +847,7 @@
         <li><em>“Charge of the molecule”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
         <li><em>“Multiplicity”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li><em>“Force field to use for parameterization”</em>: <code class="language-plaintext highlighter-rouge">gaff</code></li>
+        <li><em>“Charge method”</em>: <code class="language-plaintext highlighter-rouge">bcc (default)</code></li>
         <li><em>“Save GRO file?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
@@ -922,11 +925,15 @@ minimization step.</p>
   <ol>
     <li><strong>GROMACS solvation and adding ions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>GROMACS structure configuration</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“System topology”</em>: <code class="language-plaintext highlighter-rouge">output</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: output of <strong>GROMACS structure configuration</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: <code class="language-plaintext highlighter-rouge">TOP</code> output of <strong>Merge GROMACS topologies</strong></li>
+        <li><em>“Water model for solvation”</em>: <code class="language-plaintext highlighter-rouge">SPC (generic three-point model)</code></li>
+        <li><em>“Add ions to neutralize system”</em>: <code class="language-plaintext highlighter-rouge">Yes, add ions</code></li>
+        <li><em>“Specify salt concentration (sodium chloride) to add, in mol/liter”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
         <li><em>“Generate detailed log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
+    <li>Rename the outputs to <code class="language-plaintext highlighter-rouge">Solvated GRO</code> and <code class="language-plaintext highlighter-rouge">Solvated TOP</code>.</li>
   </ol>
 
 </blockquote>
@@ -1028,7 +1035,7 @@ minimization step.</p>
     <li><strong>GROMACS simulation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: <code class="language-plaintext highlighter-rouge">Minimized GRO file</code> (from energy minimization step)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: TOP file produced by solvation step.</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: <code class="language-plaintext highlighter-rouge">Solvated TOP</code></li>
         <li>In <em>“Inputs”</em>:
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Position restraint (ITP) file”</em>: ITP file produced by initial setup step.</li>
@@ -1080,7 +1087,7 @@ NVT simulation.</p>
     <li><strong>GROMACS simulation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: GRO output of <strong>GROMACS simulation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (NVT equilibration)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: TOP file produced by solvation step.</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: <code class="language-plaintext highlighter-rouge">Solvated TOP</code></li>
         <li>In <em>“Inputs”</em>:
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Checkpoint (CPT) file”</em>: Output of <strong>GROMACS simulation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (NVT equilibration))</li>
@@ -1129,7 +1136,7 @@ NVT simulation.</p>
     <li><strong>GROMACS simulation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: Output of <strong>GROMACS simulation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (NPT equilibration)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: Output of the solvation step</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: <code class="language-plaintext highlighter-rouge">Solvated TOP</code></li>
         <li>In <em>“Inputs”</em>:
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Checkpoint (CPT) file”</em>: Output of <strong>GROMACS simulation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (NPT simulation))</li>
@@ -1448,6 +1455,28 @@ for name, _id in ligands.items():
 </code></pre></div>  </div>
 
 </blockquote>
+
+<p>Another option is to use the Planemo command-line tool. Planemo has a very wide range of functions, including the ability to run <span class="notranslate">Galaxy</span> workflows from the command line. For a full overview, see the <a href="https://planemo.readthedocs.io/en/latest/running.html">tutorial</a>.</p>
+
+<p>Assuming you have Planemo installed, you can create a file with the name <code class="language-plaintext highlighter-rouge">htmd-job.yml</code> with the following contents:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SDF file with (docked) ligands:
+  class: File
+  <span class="notranslate">galaxy</span>_id: '11ac94870d0bb33a79c5fa18b0fd3b4c'
+  # path: ligands.sdf
+
+</code></pre></div></div>
+
+<p>You can specify the dataset either using its <span class="notranslate">Galaxy</span> ID, or with the path of a local file. The <span class="notranslate">Galaxy</span> ID is associated with the specific server you are using - in
+this case <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>.eu</code>. You can get this ID by clicking on the <code class="language-plaintext highlighter-rouge">View details</code> icon of a dataset in your <span class="notranslate">Galaxy</span> history - it is provided in the <code class="language-plaintext highlighter-rouge">Dataset Information</code>
+table as <code class="language-plaintext highlighter-rouge">History Content API ID</code>. Then run:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>planemo run adc6d049e9283789 htmd-job.yml --<span class="notranslate">galaxy</span>_url https://use<span class="notranslate">galaxy</span>.eu --<span class="notranslate">galaxy</span>_user_key YOUR_USE<span class="notranslate">GALAXY</span>_EU_API_KEY --history_name "HTMD with planemo"
+</code></pre></div></div>
+
+<p>Here <code class="language-plaintext highlighter-rouge">adc6d049e9283789</code> is the <span class="notranslate">Galaxy</span> ID associated with the <span class="notranslate">workflow</span> on <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>.eu</code>, but the <code class="language-plaintext highlighter-rouge">planemo run</code> command can also use a local <span class="notranslate">workflow</span> file.</p>
+
+<p>If you now return to the web-browser, you should see a new history should have been created named <code class="language-plaintext highlighter-rouge">HTMD with planemo</code> and it should begin to fill with datasets.</p>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
@@ -1788,8 +1817,8 @@ Publisher: Nature Publishing Group.
     author = "Simon Bray and Tharindu Senapathi and Christopher Barnett and Björn Grüning",
     title = "High Throughput Molecular Dynamics and Analysis (Galaxy Training Materials)",
     year = "2021",
-    month = "03",
-    day = "12"
+    month = "04",
+    day = "07"
     url = "\url{/training-material/topics/computational-chemistry/tutorials/htmd-analysis/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
