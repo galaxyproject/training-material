@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-title: "Downstream Single-cell RNA Plant analysis with ScanPy"
+title: "Analysis of plant scRNA-Seq Data with Scanpy"
 subtopic: single-cell
 priority:
 
