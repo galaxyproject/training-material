@@ -125,7 +125,7 @@ If the above feels like a convoluted way to get the dimensionality, that's becau
 >        - *"Format for the annotated data matrix"*: `Tabular, CSV, TSV`
 >            - {% icon param-file %} *"Annotated data matrix"*: Multi-select both `SHR` and `WT` datasets
 >
->    > ### {% icon tip %} Tip: Automatic
+>    > ### {% icon tip %} Tip: Checking Dimensionality
 >    >
 >    > We can now inspect the dimensionality of the dataset by "peeking" at the dataset in the history and observing the general information.
 >    {: .tip}
