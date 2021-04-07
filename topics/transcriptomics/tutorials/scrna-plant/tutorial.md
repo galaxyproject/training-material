@@ -13,7 +13,7 @@ questions:
   - Can we reclaim cell markers using a different analysis method?
   - Are highly variable genes paramount to the analysis?
 objectives:
-  - Perform filtering, dimension reduction, and clustering
+  - Perform filtering, dimensionality reduction, and clustering
   - Generate a DotPlot emulating the original paper using a different analysis tool
   - Determine robust clusters across scRNA-seq pipelines
 requirements:
@@ -311,20 +311,20 @@ After normalising and regressing out unwanted factors, we will then scale the da
 {: .hands_on}
 
 
-## Dimension Reduction
+## Dimensionality Reduction
 
-Dimension reduction is the art of reducing a high dimensional dataset into a low dimensional "embedding" that humans can actually see (i.e. 2 or 3 dimensions), ideally such that the relationships or distances between data points are preserved in this embedding. In the context of single-cell datasets, this essentially means compressing > 10 000 genes into just 2 X/Y variables.
+Dimensionality reduction is the art of reducing a high dimensional dataset into a low dimensional "embedding" that humans can actually see (i.e. 2 or 3 dimensions), ideally such that the relationships or distances between data points are preserved in this embedding. In the context of single-cell datasets, this essentially means compressing > 10 000 genes into just 2 X/Y variables.
 
 
 > ### {% icon tip %} Tip: Dimension Reduction
 >
-> You can learn more about dimension reduction by consulting the following segment from [*"An introduction to scRNA-seq data analysis"*]({% link videos/watch.md %}?v=transcriptomics/tutorials/scrna-intro/slides&t=13:46).
+> You can learn more about dimensionality reduction by consulting the following segment from [*"An introduction to scRNA-seq data analysis"*]({% link videos/watch.md %}?v=transcriptomics/tutorials/scrna-intro/slides&t=13:46).
 >    {: .tip}
 
 This is usually a two step process:
 
 1. A Principal Component Analysis (PCA) is used to perform an optimized "rotation" of the ~ 20 000 "unit" gene axes that we have, in order to better fit the data. These new axes or "principal components" are then *linear* combinations of the original unit axes, with an associated score of how variable each new axis is. By sorting these principal components by most variable to least variable, we can select the top N components and discard the rest, leaving us with most of the variation still in the data. Usually we select the top 40 principal components, which from 20 000 is a *huge* reduction in the dimensionality of the dataset.
-1. We then perform a more complex kind of dimension reduction, one that does not assume any linearity in the axes. For scRNA-seq, this is either tSNE or UMAP, with UMAP being the main choice due to how flexible it is in incorporating new data. Though UMAP is capable of working on extremely high dimensional datasets, it is often limited by time and space constraints (read: the computer does not respond in a reasonable timeframe, or it crashes), and so therefore it is quite normal to feed UMAP the output of the PCA as input. This will then be a dimension reduction from 50 to 2. With these final 2 dimensions, we can plot the data.
+1. We then perform a more complex kind of dimensionality reduction, one that does not assume any linearity in the axes. For scRNA-seq, this is either tSNE or UMAP, with UMAP being the main choice due to how flexible it is in incorporating new data. Though UMAP is capable of working on extremely high dimensional datasets, it is often limited by time and space constraints (read: the computer does not respond in a reasonable timeframe, or it crashes), and so therefore it is quite normal to feed UMAP the output of the PCA as input. This will then be a dimensionality reduction from 50 to 2. With these final 2 dimensions, we can plot the data.
 
 > ### {% icon hands_on %} Hands-on: PCA and UMAP
 >
