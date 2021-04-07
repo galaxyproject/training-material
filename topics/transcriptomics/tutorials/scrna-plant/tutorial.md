@@ -37,13 +37,6 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 ---
 
-
-> ### {% icon comment %} Comment
->
-> Please familiarise yourself with the ["Clustering 3K PBMCs with ScanPy"]({% link topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial first, as much of the process is the same, and the accompanying slide deck better explains some of the methods and concepts better.
->
-{: .comment}
-
 Single cell RNA-seq analysis is a cornerstone of developmental research and provides a great level of detail in understanding the underlying dynamic processes within tissues. In the context of plants, this highlights some of the key differentiation pathways that root cells undergo.
 
 ![The various cell subpopulations that are expected within this tutorial]({% link topics/transcriptomics/images/scrna-plant/scrna-plant1.jpg %})
@@ -60,6 +53,12 @@ This tutorial replicates the paper ["Spatiotemporal Developmental Trajectories i
 > {:toc}
 >
 {: .agenda}
+
+> ### {% icon comment %} Comment
+>
+> Please familiarise yourself with the ["Clustering 3K PBMCs with ScanPy"]({% link topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial first, as much of the process is the same, and the accompanying slide deck better explains some of the methods and concepts better.
+>
+{: .comment}
 
 # Data
 
