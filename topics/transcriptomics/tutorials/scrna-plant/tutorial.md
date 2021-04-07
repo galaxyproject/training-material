@@ -50,7 +50,7 @@ Single cell RNA-seq analysis is a cornerstone of developmental research and prov
 ![The various cell subpopulations that are expected within this tutorial]({% link topics/transcriptomics/images/scrna-plant/scrna-plant1.jpg %})
 
 
-This tutorial replicates the paper ["Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing"](https://doi.org/10.1016/j.devcel.2019.02.022) {% cite denyer2019spatiotemporal %}, where the major plant cell types are recovered in the data as well as distinguishing between QC and meristematic cells. The original paper used the Seurat analysis suite {% cite satija2015spatial %}, but here we will use the ScanPy analysis suite {% cite wolf2018scanpy %} integrated within the single-cell resources in Galaxy {% cite tekman2020single %} .
+This tutorial replicates the paper ["Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing"](https://doi.org/10.1016/j.devcel.2019.02.022) ({% cite denyer2019spatiotemporal %}), where the major plant cell types are recovered in the data as well as distinguishing between QC and meristematic cells. The original paper used the Seurat analysis suite ({% cite satija2015spatial %}), but here we will use the ScanPy analysis suite ({% cite wolf2018scanpy %}) integrated within the single-cell resources in Galaxy ({% cite tekman2020single %}).
 
 
 > ### Agenda
