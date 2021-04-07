@@ -38,9 +38,6 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 ---
 
 
-# Introduction
-{:.no_toc}
-
 > ### {% icon comment %} Comment
 >
 > Please familiarise yourself with the ["Clustering 3K PBMCs with ScanPy"]({% link topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial first, as much of the process is the same, and the accompanying slide deck better explains some of the methods and concepts better.
