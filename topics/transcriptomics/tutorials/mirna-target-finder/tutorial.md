@@ -154,7 +154,6 @@ Next we will retrieve the remaining datasets.
 > https://zenodo.org/record/4606701/files/star_miRNA_seq.fasta
 > https://zenodo.org/record/4606701/files/mature_miRNA_AT.fasta
 > https://zenodo.org/record/4606701/files/miRNA_stem-loop_seq.fasta
-> https://zenodo.org/record/4606701/files/PmiREN_miRNA_database.fasta
 > ```
 >
 > 2. Rename each dataset according to the sample id (e.g. `annotation_AtRTD2.gtf`)
@@ -497,7 +496,7 @@ As in the previous section, we shall begin by assessing the quality of our seque
 >
 > > ### {% icon solution %} Solution
 > >
-> > All the stats are within acceptable limits. However, the adapter content shows the presence of universal adapters in our reads, which can be removed to avoid possible interferences at later stages (Figure 10).
+> > All the stats are within acceptable limits. However, the adapter content shows the presence of Illumina universal adapters in our reads, which can be removed to avoid possible interferences at later stages (Figure 10).
 > >
 > >    ![fig10:Adapter content of mRNA samples](../../images/miRNA_adapter_01.png "Quality assessment of mRNA samples")
 > >
@@ -694,21 +693,23 @@ To predict which miRNAs target which mRNAs, first we need their transcriptomic s
 >    - *"Cut columns"*: `c1`
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-collection %} *"From"*: `Upregulated miRNAs`
-> 2. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: output of **Cut** {% icon tool %}
->    - *"Find pattern"*: `*`
->    - *"Replace with"*: (Leave empty)
->    - *"Find and Replace text in"*: `entire line`
-> 3. {% tool [Unique](toolshed.g2.bx.psu.edu/repos/bgruening/unique/bg_uniq/0.3) %} with the following parameters:
->    - {% icon param-file %} *"from query"*: output of **Replace** {% icon tool %}
-> 4. Rename the output as `Upregulated miRNA ids`
-> 5. {% tool [Filter FASTA](toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1) %} with the following parameters:
->    - {% icon param-file %} *"FASTA sequences"*: `PmiREN_miRNA_database.fasta`
+> 2. Rename the output as `Upregulated miRNA ids`
+> 3. {% tool [Filter FASTA](toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1) %} with the following parameters:
+>    - {% icon param-file %} *"FASTA sequences"*: `mature_miRNA_AT.fasta`
 >    - *"Criteria for filtering on the headers"*: `List of IDs`
 >        - {% icon param-file %} *"List of IDs to extract sequences for"*: `Upregulated miRNA ids`
 >        - *"Match IDs by"*: `Default: ID is expected at the beginning: >ID`
-> 6. Rename it as `Upreguled miRNA sequences`
-> 7. Click on the {% icon galaxy-eye %} (eye) icon and inspect the `Upreguled miRNA sequences` file
+> 4. {% tool [Filter FASTA](toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1) %} with the following parameters:
+>    - {% icon param-file %} *"FASTA sequences"*: `star_miRNA_seq.fasta`
+>    - *"Criteria for filtering on the headers"*: `List of IDs`
+>        - {% icon param-file %} *"List of IDs to extract sequences for"*: `Upregulated miRNA ids`
+>        - *"Match IDs by"*: `Default: ID is expected at the beginning: >ID`
+> 5. {% tool [Concatenate datasets](cat1) %} tail-to-head (Galaxy Version 1.0.0) with the following parameters:
+>    - {% icon param-file %} *"Concatenate Dataset"*: output of **Filter FASTA** {% icon tool %} on `mature_miRNA_AT.fasta`
+>    - + Insert Dataset
+>        - {% icon param-file %} *"Select"*: output of **Filter FASTA** {% icon tool %} on `star_miRNA_seq.fasta`
+> 6. Rename it as `Upregulated miRNA sequences`
+> 7. Click on the {% icon galaxy-eye %} (eye) icon and inspect the `Upregulated miRNA sequences` file
 {: .hands_on}
 
 To identify putative targets of upregulated miRNAs, it is necessary to obtain the sequences of all downregulated mRNAs in FASTA format.
@@ -747,7 +748,7 @@ Congratulations! You have identified the following 5 potential genes involved in
 - [AT3G09220](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT3G09220){:target="_blank"}
 - [AT2G46850](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT2G46850){:target="_blank"}
 - [AT5G64260](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT5G64260){:target="_blank"}
-- [AT4G25160](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT4G25160){:target="_blank"}
+- [AT3G63200](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT3G63200){:target="_blank"}
 
 The gene [AT5G03670](https://www.arabidopsis.org/servlets/TairObject?id=133285&type=locus){:target="_blank"} codifies the TRM28 protein, a member of the histone-lysine N-methyltransferase SETD1B-like protein familiy. According the bibliography, this protein is involved in the tolerance to acid soil conditions.
 
