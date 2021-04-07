@@ -7,6 +7,8 @@ priority:
 zenodo_link: 'https://zenodo.org/record/4597857'
 tags:
   - single-cell
+  - plants
+  - paper-replication
 questions:
   - Can we reclaim cell markers using a different analysis method?
   - Are highly variable genes paramount to the analysis?
