@@ -21,6 +21,10 @@ requirements:
     tutorials:
         - droplet-quantification-preprocessing
         - scrna-seq-basic-pipeline
+-
+    type: "internal"
+    topic_name: galaxy-interface
+    tutorials:
         - galaxy-intro-jupyter
 tags:
 - single-cell
