@@ -59,7 +59,7 @@ The GTN now generates videos for selected slide decks. Click on a topic below to
 			<div class="pl-item">
 				<a href="watch.html?v={{ vid }}">
 					<div class="cover">
-						<img src="{{site.baseurl}}/videos/topics/{{ vid }}.mp4.png" width="200px"/>
+						<img src="https://training.galaxyproject.org/videos/topics/{{ vid }}.mp4.png" width="200px"/>
 					</div>
 					<div>
 						<div class="title">{{ material.title }}</div>

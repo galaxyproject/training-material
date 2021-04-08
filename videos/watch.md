@@ -44,7 +44,7 @@ layout: base
 var params = (new URL(document.location)).searchParams,
 	videoid = params.get('v'),
 	seekTo = params.get('t'),
-	videohost = '{{ site.baseurl }}',
+	videohost = 'https://training.galaxyproject.org',
 	vtt = `${videohost}/videos/topics/${videoid}.en.vtt`,
 	mp4 = `${videohost}/videos/topics/${videoid}.mp4`,
 	png = `${videohost}/videos/topics/${videoid}.mp4.png`,
@@ -108,7 +108,7 @@ fetch('{{ site.baseurl }}/api/videos.json')
 			<div class="pl-item">
 				<a href="?v=${x.id}">
 					<div class="cover">
-						<img src="{{site.baseurl}}/videos/topics/${x.id}.mp4.png" width="200px"/>
+						<img src="https://training.galaxyproject.org/videos/topics/${x.id}.mp4.png" width="200px"/>
 					</div>
 					<div>
 						<div class="title">${x.title}</div>
