@@ -47,7 +47,7 @@ miRNAs have been found to be important regulators of many physiological processe
 
 - Multiple miRNA genes are regulated under given environmental conditions
 - Computational predictions estimate that each miRNA regulates hundreds of genes
-- The majority of plant miRNAs regulate the genes encoding for transcription factors (TFs)
+- The majority of plant miRNAs regulate genes encoding for transcription factors (TFs)
 - Targets include not only mRNAs but also long noncoding RNAs (lncRNAs)
 
 In plants, miRNAs can silence targets through RNA degradation as well as translational repression pathways, and unlike animals, a large proportion of miRNA and their targets have less than four mismatches. This feature has been exploited for developing miRNAs target prediction tools, providing an efficient approach to elucidate the miRNA-mediated regulatory networks, which can contribute to biotechnological solutions to improve crops productivity.
