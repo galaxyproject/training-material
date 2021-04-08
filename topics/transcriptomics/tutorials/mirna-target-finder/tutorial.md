@@ -105,23 +105,30 @@ The first step of our analysis consists of retrieving the miRNA-Seq datasets fro
 >    - *"Upload data as"*: `Collection(s)`
 >    - Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
->   ```
-> SRR11611349	Control miRNA	https://zenodo.org/record/4606701/files/SRR11611349_MIRNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
-> SRR11611350	Control miRNA	https://zenodo.org/record/4606701/files/SRR11611350_MIRNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
-> SRR11611351	Control miRNA	https://zenodo.org/record/4606701/files/SRR11611351.MIRNASEQ_CTLfastqsanger.gz	fastqsanger.gz
-> SRR11611352	BR treated miRNA	https://zenodo.org/record/4606701/files/SRR11611352_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
-> SRR11611353	BR treated miRNA	https://zenodo.org/record/4606701/files/SRR11611353_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
-> SRR11611354	BR treated miRNA	https://zenodo.org/record/4606701/files/SRR11611354_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
-> SRR1019436	Control mRNA	https://zenodo.org/record/4606701/files/SRR1019436_RNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
-> SRR1019437	Control mRNA	https://zenodo.org/record/4606701/files/SRR1019437_RNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
-> SRR1019438	BR treated mRNA	        https://zenodo.org/record/4606701/files/SRR1019438_RNASEQ_BL.fastqsanger.gz	fastqsanger.gz
-> SRR1019439	BR treated mRNA	        https://zenodo.org/record/4606701/files/SRR1019439_RNASEQ_BL.fastqsanger.gz	fastqsanger.gz
->   ```
+>      ```
+>      SRR11611349	Control miRNA	https://zenodo.org/record/4606701/files/SRR11611349_MIRNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
+>      SRR11611350	Control miRNA	https://zenodo.org/record/4606701/files/SRR11611350_MIRNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
+>      SRR11611351	Control miRNA	https://zenodo.org/record/4606701/files/SRR11611351.MIRNASEQ_CTLfastqsanger.gz	fastqsanger.gz
+>      SRR11611352	BR treated miRNA	https://zenodo.org/record/4606701/files/SRR11611352_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
+>      SRR11611353	BR treated miRNA	https://zenodo.org/record/4606701/files/SRR11611353_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
+>      SRR11611354	BR treated miRNA	https://zenodo.org/record/4606701/files/SRR11611354_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
+>      SRR1019436	Control mRNA	https://zenodo.org/record/4606701/files/SRR1019436_RNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
+>      SRR1019437	Control mRNA	https://zenodo.org/record/4606701/files/SRR1019437_RNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
+>      SRR1019438	BR treated mRNA	https://zenodo.org/record/4606701/files/SRR1019438_RNASEQ_BL.fastqsanger.gz	fastqsanger.gz
+>      SRR1019439	BR treated mRNA	https://zenodo.org/record/4606701/files/SRR1019439_RNASEQ_BL.fastqsanger.gz	fastqsanger.gz
+>      ```
+>
 >    - From **Rules** menu select `Add / Modify Column Definitions`
 >       - Click `Add Definition` button and select `List Identifier(s)`: column `A`
+>
+>         > ### {% icon tip %} Can't find *List Identifier*?
+>         > Then you've chosen to upload as a 'dataset' and not a 'collection'. Close the upload menu, and restart the process, making sure you check *Upload data as*: **Collection(s)**
+>         {: .tip}
+>
 >       - Click `Add Definition` button and select `Collection Name`: column `B`
 >       - Click `Add Definition` button and select `URL`: column `C`
 >       - Click `Add Definition` button and select `Type`: column `D`
+>
 >    - Click `Apply` and press <kbd>Upload</kbd>
 >
 > {% snippet faqs/galaxy/datasets_add_tag.md type="name" %}
