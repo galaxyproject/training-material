@@ -86,7 +86,7 @@ As explained in the Zenodo link, the datasets have been modified to use more com
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Apply the tags `#shr` and `#wt` to one of the datasets, with respect to the initial labels. These tags will be inherited for each task that the dataset undergoes.
+> 3. Apply the tags `#shr` and `#wt` to each of the datasets, with respect to the initial labels. These tags will be inherited for each task that the dataset undergoes.
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
@@ -362,7 +362,7 @@ With our data now sufficiently "flat" and ready for human consumption, we can no
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in PCA coordinates, using 'pl.pca`
 >      - *"Keys for annotations of observations/cells or variables/genes"*: `batch`
 >      - In *"Plot attributes"*
->        - *"Colors to use for plotting categorical annotation groups"*: `rainbow`
+>        - *"Colors to use for plotting categorical annotation groups"*: `rainbow (Miscellaneous)`
 >
 > 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Cluster, infer trajectories and embed** {% icon tool %})
@@ -370,6 +370,7 @@ With our data now sufficiently "flat" and ready for human consumption, we can no
 >      - *"Keys for annotations of observations/cells or variables/genes"*: `batch`
 >      - In *"Plot attributes"*
 >        - *"Colors to use for plotting categorical annotation groups"*: `rainbow`
+>        - *"Colors to use for plotting categorical annotation groups"*: `rainbow (Miscellaneous)`
 >
 {: .hands_on}
 
