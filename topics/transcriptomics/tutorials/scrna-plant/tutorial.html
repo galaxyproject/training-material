@@ -1,0 +1,1868 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Analysis of plant scRNA-Seq Data with Scanpy</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:title" content="Galaxy Training: Analysis of plant scRNA-Seq Data with Scanpy" />
+        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/galaxy-single-cell'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/transcriptomics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Transcriptomics
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/transcriptomics/faqs/" title="Check our FAQs for the Transcriptomics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/scrna-plant/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/transcriptomics/tutorials/scrna-plant/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/scrna-plant/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/scrna-plant/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/scrna-plant/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/scrna-plant/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/scrna-plant/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Fscrna-plant%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/scrna-plant/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                    -->
+
+                     <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Analysis of plant scRNA-Seq Data with Scanpy",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/main/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Transcriptomics",
+    "description": "Training material for all kinds of transcriptomics analysis.",
+    "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/"
+  },
+  "courseCode": "transcriptomics / scrna-plant / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Analysis of plant scRNA-Seq Data with Scanpy' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/tutorials/scrna-plant/tutorial.html",
+  "timeRequired": "PT2H",
+  "keywords": "single-cell, plants, paper-replication",
+  "description": "The questions this  addresses are:\n - Can we reclaim cell markers using a different analysis method?\n - Are highly variable genes paramount to the analysis?\n\n\\nThe objectives are:\n - Perform filtering, dimensionality reduction, and clustering\n - Generate a DotPlot emulating the original paper using a different analysis tool\n - Determine robust clusters across scRNA-seq pipelines\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
+      "name": "Mapping",
+      "description": "Hands-on for 'Mapping' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/slides.html",
+      "name": "Clustering 3K PBMCs with Scanpy",
+      "description": "Slides for 'Clustering 3K PBMCs with Scanpy' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html",
+      "name": "Clustering 3K PBMCs with Scanpy",
+      "description": "Hands-on for 'Clustering 3K PBMCs with Scanpy' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Mehmet Tekman"
+    },
+    {
+      "@type": "Person",
+      "name": "Beatriz Serrano-Solano"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Mehmet Tekman"
+    },
+    {
+      "@type": "Person",
+      "name": "Beatriz Serrano-Solano"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Transcriptomics",
+      "description": "Training material for all kinds of transcriptomics analysis.",
+      "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3308",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3308",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3308"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Analysis of plant scRNA-Seq Data with Scanpy</h1>
+        
+
+        <div class="contributors-line">By: 
+
+ <a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mtekman" alt="Mehmet Tekman">Mehmet Tekman</a> <a href="/training-material/hall-of-fame/beatrizserrano/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/beatrizserrano" alt="Beatriz Serrano-Solano">Beatriz Serrano-Solano</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>Can we reclaim cell markers using a different analysis method?</p>
+</li>
+            
+            <li><p>Are highly variable genes paramount to the analysis?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Perform filtering, dimensionality reduction, and clustering</p>
+</li>
+            
+            <li><p>Generate a DotPlot emulating the original paper using a different analysis tool</p>
+</li>
+            
+            <li><p>Determine robust clusters across scRNA-seq pipelines</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/sequence-analysis">Sequence analysis</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Quality Control:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                
+                    
+                        
+                            
+                            <li> Mapping:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/mapping/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/transcriptomics">Transcriptomics</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Clustering 3K PBMCs with Scanpy:
+                            
+                                <a href="/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours</p>
+            
+
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/transcriptomics/slides/introduction.html" title="Topic Overview slides">
+                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Topic Overview slides
+                    </a></li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://zenodo.org/record/4597857">
+    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+</li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/transcriptomics/tutorials/scrna-plant/workflows/" title="Workflows" alt="Analysis of plant scRNA-Seq Data with Scanpy workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+</li>
+                
+
+                
+
+                
+                
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/transcriptomics/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
+            Galaxy Africa
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
+            Human Cell Atlas
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://singlecell.usegalaxy.eu/" title="Single Cell Omics workbench">
+            Single Cell Omics workbench
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
+            UseGalaxy.be
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
+            UseGalaxy.no
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
+            UseGalaxy.org (Main)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
+            UseGalaxy.org.au
+        </a>
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 8, 2021 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <p><span class="notranslate">Single cell</span> <span class="notranslate">RNA</span>-seq analysis is a cornerstone of developmental research and provides a great level of detail in understanding the underlying dynamic processes within tissues. In the context of plants, this highlights some of the key differentiation pathways that root cells undergo.</p>
+
+<p><img src="/training-material/topics/transcriptomics/images/scrna-plant/scrna-plant1.jpg" alt="The various cell subpopulations that are expected within this tutorial" /></p>
+
+<p>This tutorial replicates the paper <a href="https://doi.org/10.1016/j.devcel.2019.02.022">“Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput <span class="notranslate">Single-Cell</span> <span class="notranslate">RNA</span> Sequencing”</a> (<a class="citation" href="#denyer2019spatiotemporal">Denyer <i>et al.</i> 2019</a>), where the major plant cell types are recovered in the data as well as distinguishing between QC and meristematic cells. The original paper used the Seurat analysis suite (<a class="citation" href="#satija2015spatial">Satija <i>et al.</i> 2015</a>), but here we will use the ScanPy analysis suite (<a class="citation" href="#wolf2018scanpy">Wolf <i>et al.</i> 2018</a>) integrated within the <span class="notranslate">single-cell</span> resources in <span class="notranslate">Galaxy</span> (<a class="citation" href="#tekman2020single">Tekman <i>et al.</i> 2020</a>).</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#data" id="markdown-toc-data">Data</a>    <ol>
+      <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
+      <li><a href="#csv-to-anndata" id="markdown-toc-csv-to-anndata">CSV to AnnData</a></li>
+      <li><a href="#merge-batches-and-relabel" id="markdown-toc-merge-batches-and-relabel">Merge Batches and Relabel</a></li>
+      <li><a href="#quality-control" id="markdown-toc-quality-control">Quality Control</a></li>
+      <li><a href="#confounder-removal" id="markdown-toc-confounder-removal">Confounder Removal</a></li>
+      <li><a href="#dimensionality-reduction" id="markdown-toc-dimensionality-reduction">Dimensionality Reduction</a></li>
+      <li><a href="#clustering" id="markdown-toc-clustering">Clustering</a></li>
+      <li><a href="#dotplot-and-validating-cell-types" id="markdown-toc-dotplot-and-validating-cell-types">DotPlot and Validating Cell Types</a></li>
+      <li><a href="#relabel-clusters" id="markdown-toc-relabel-clusters">Relabel clusters</a></li>
+      <li><a href="#conclusions" id="markdown-toc-conclusions">Conclusions</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+  <p>Please familiarise yourself with the <a href="/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html">“Clustering 3K PBMCs with ScanPy”</a> tutorial first, as much of the process is the same, and the accompanying slide deck better explains some of the methods and concepts better.</p>
+
+</blockquote>
+
+<h1 id="data">Data</h1>
+
+<p>The <em>Arabidopsis</em> root cells come from two biological replicates which were isolated and profiles using droplet-based sc<span class="notranslate">RNA</span>-seq (please see: <a href="/training-material/topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial.html">“Pre-processing of 10X <span class="notranslate">Single-Cell</span> <span class="notranslate">RNA</span> Datasets”</a>); a “short root” mutant (labelled: <code class="language-plaintext highlighter-rouge">shr</code>) and a wild-type (labelled: <code class="language-plaintext highlighter-rouge">wt</code>):</p>
+
+<ul>
+  <li>GSE123818_Root_single_cell_<strong>shr</strong>_datamatrix.fixe<span class="notranslate">dna</span>mes.transposed.csv.gz</li>
+  <li>GSE123818_Root_single_cell_<strong>wt</strong>_datamatrix.fixe<span class="notranslate">dna</span>mes.transposed.csv.gz</li>
+</ul>
+
+<p>As explained in the Zenodo link, the datasets have been modified to use more common gene names (hence the “fixe<span class="notranslate">dna</span>mes” suffix) and the datasets have been transposed to better suit the AnnData format (hence the “transposed” suffix). The datasets are CSV tabular files which have been compressed using gunzip. We will now import these for analysis.</p>
+
+<h2 id="data-upload">Data upload</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>
+      <p>Import the two datasets from <a href="https://zenodo.org/record/4597857">Zenodo</a> or from the shared data library</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4597857/files/GSE123818_Root_single_cell_shr_datamatrix.fixe<span class="notranslate">dna</span>mes.transposed.csv.gz
+https://zenodo.org/record/4597857/files/GSE123818_Root_single_cell_wt_datamatrix.fixe<span class="notranslate">dna</span>mes.transposed.csv.gz
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>    <li>Copy the link location</li>    <li>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</li>    <li>Select <strong>Paste/Fetch Data</strong></li>    <li>Paste the link into the text field</li>    <li>Press <strong>Start</strong></li>    <li><strong>Close</strong> the windowBy default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li>  </ul></blockquote>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>    <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>    <li>Find the correct folder (ask your instructor)</li>    <li>Select the desired files</li>    <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>    <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>    <li>Click on <strong>Import</strong></li>  </ul></blockquote>
+    </li>
+    <li>
+      <p>Apply the tags <code class="language-plaintext highlighter-rouge">#shr</code> and <code class="language-plaintext highlighter-rouge">#wt</code> to one of the datasets, with respect to the initial labels. These tags will be inherited for each task that the dataset undergoes.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-adding-a-tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag</h3>  <ul>    <li>Click on the dataset</li>    <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>    <li>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code>  Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</li>    <li>Check that the tag is appearing below the dataset name</li>  </ul></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>We can peek at the <code class="language-plaintext highlighter-rouge">#shr</code> file, and determine the dimensionality and naming scheme of the data. The rows and the columns depict different variables.</p>
+
+  <ol>
+    <li>Which are the cell barcodes? Rows or Columns?</li>
+    <li>Which are the gene names? Rows or Columns?</li>
+    <li>How many cells in the dataset?</li>
+    <li>How many genes in the dataset?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>Rows, notice the long A-C-T-G based names.</li>
+      <li>Columns, “ATXG” are the gene prefixes commonly used by the Arabidopsis genomes.</li>
+      <li>There are 1 099 lines and therefore 1 099 cells</li>
+      <li>If we scroll the preview window all the way to the right we see 27 630 as the last number. Given that the first column are the cell names, we must subtract by 1 to get 27 629 cells.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>If the above feels like a convoluted way to get the dimensionality, that’s because we haven’t imported the data into the right format. For this we need to import both datasets into a single AnnData object (see the <a href="/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html#anndata">AnnData section in the previous tutorial</a>).</p>
+
+<h2 id="csv-to-anndata">CSV to AnnData</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-converting-the-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Converting the Data</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy0"><strong>Import Anndata and loom</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><em>“hd5 format to be created”</em>: <code class="language-plaintext highlighter-rouge">Anndata file</code>
+          <ul>
+            <li><em>“Format for the annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Tabular, CSV, TSV</code>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: Multi-select both <code class="language-plaintext highlighter-rouge">SHR</code> and <code class="language-plaintext highlighter-rouge">WT</code> datasets</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-checking-dimensionality"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Checking Dimensionality</h3>
+
+        <p>We can now inspect the dimensionality of the dataset by “peeking” at the dataset in the history and observing the general information, simply by clicking on the name of the dataset.</p>
+
+        <p>The <code class="language-plaintext highlighter-rouge">#shr</code> dataset should show:</p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   [n_obs x n_vars]
+       1099 x 27629
+</code></pre></div>        </div>
+
+        <p>and the <code class="language-plaintext highlighter-rouge">#wt</code> should show:</p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   [n_obs x n_vars]
+       4727 x 27629
+</code></pre></div>        </div>
+
+        <p>where <em>obs</em> refers to our observed cells, and <em>vars</em> references the genes/variables.</p>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Currently we have two seperate datasets, but we can merge them into one single AnnData object seperated by batch identifiers “shr” and “wt”. To do this, we simply manipulate one of the datasets and concatenate the other onto it.</p>
+
+<h2 id="merge-batches-and-relabel">Merge Batches and Relabel</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-merging-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Merging Data</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">SHR dataset</code> (output of <strong>Import Anndata and loom</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Concatenate along the observations axis</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix to add”</em>: <code class="language-plaintext highlighter-rouge">WT dataset</code> (output of <strong>Import Anndata and loom</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-scheduling"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Scheduling</h3>
+
+        <p>You can queue on the next task without the previous one being complete yet, just ensure that the input dataset for the next task is at least orange and not grey.</p>
+      </blockquote>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>At this point, the AnnData dataset batch information has a value of <code class="language-plaintext highlighter-rouge">0</code> for the “SHR” cells and <code class="language-plaintext highlighter-rouge">1</code> for the “WT” cells. This is fine if you wish to remember these two values for the remainder of the analysis since the step below is optional, however for plotting purposes it can just be easier to relabel the batch information with the action text labels <code class="language-plaintext highlighter-rouge">shr</code> and <code class="language-plaintext highlighter-rouge">wt</code>.</p>
+      </blockquote>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata</code> (output of <strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Rename categories of annotation</code>
+          <ul>
+            <li><em>“Key for observations or variables annotation”</em>: <code class="language-plaintext highlighter-rouge">batch</code></li>
+            <li><em>“Comma-separated list of new categories”</em>: <code class="language-plaintext highlighter-rouge">shr, wt</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="warning">
+        <h3 id="warning-warning-order-matters"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Warning: Order matters!</h3>
+
+        <p>The order in which the datasets are concatenated can affect the accuracy of the new labelling. If the <code class="language-plaintext highlighter-rouge">#wt</code> dataset was first selected and then the <code class="language-plaintext highlighter-rouge">#shr</code> dataset concatenated onto it, then the comma-seperated list of new categories above should be inverted.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>We can confirm that our datasets have been combined into a single object by peeking at the dataset in the history and confirming two things:</p>
+
+<ol>
+  <li>The number of observations is equal to the total of the two initial AnnData datasets.</li>
+  <li>The file size of the new AnnData dataset is approximately equal to the total of the two initial AnnData datasets.</li>
+</ol>
+
+<blockquote class="matrix">
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align: right">Batch</th>
+        <th style="text-align: left">Number of Cells</th>
+        <th style="text-align: right">File Size</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: right">shr</td>
+        <td style="text-align: left">1099</td>
+        <td style="text-align: right">117.2 MB</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">wt</td>
+        <td style="text-align: left">4727</td>
+        <td style="text-align: right">499.7 MB</td>
+      </tr>
+    </tbody>
+    <tbody>
+      <tr>
+        <td style="text-align: right"><strong>Total</strong></td>
+        <td style="text-align: left">5826</td>
+        <td style="text-align: right">615.6 MB</td>
+      </tr>
+    </tbody>
+  </table>
+</blockquote>
+
+<p>A happy coincidence here is that both datasets already had the exact same variables, so that the merging of the two datasets still yields the same number of genes.</p>
+
+<h2 id="quality-control">Quality Control</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-generating-some-metrics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generating some metrics</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0"><strong>Inspect and manipulate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata</code> (output of <strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used for inspecting”</em>: <code class="language-plaintext highlighter-rouge">Calculate quality control metrics, using 'pp.calculate_qc_metrics'</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata</code> (output of <strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Violin plot, using 'pl.violin'</code>
+          <ul>
+            <li><em>“Keys for accessing variables”</em>: <code class="language-plaintext highlighter-rouge">Subset of variables in 'adata.var_names' or fields of '.obs'</code>
+              <ul>
+                <li><em>“Keys for accessing variables”</em>: <code class="language-plaintext highlighter-rouge">n_genes_by_counts, total_counts</code></li>
+              </ul>
+            </li>
+            <li><em>“The key of the observation grouping to consider”</em>: <code class="language-plaintext highlighter-rouge">batch</code></li>
+            <li>In <em>“Violin plot attributes”</em>:
+              <ul>
+                <li><em>“Add a stripplot on top of the violin plot”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+                  <ul>
+                    <li><em>“Add a jitter to the stripplot”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+                      <ul>
+                        <li><em>“Size of the jitter points”</em>: <code class="language-plaintext highlighter-rouge">0.4</code></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><em>“Display keys in multiple panels”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This should result in the following violin plot, where we see the distribution of the number of genes per cell (<code class="language-plaintext highlighter-rouge">n_genes_by_counts</code>) and the library size per cell, where the library size is the total number of m<span class="notranslate">RNA</span> in a cell, regardless of which gene it came from (<code class="language-plaintext highlighter-rouge">total_counts</code>).</p>
+
+<p><img src="/training-material/topics/transcriptomics/images/scrna-plant/violin1.png" alt="&quot;Violin Plots per Batch&quot;" /></p>
+
+<p>Each dot is a cell, and the x-axis has two groups showing the absolute values of for each batch (<code class="language-plaintext highlighter-rouge">shr</code> and <code class="language-plaintext highlighter-rouge">wt</code>). The y-values correspond to the actual value of each cell, but the x-vales within each group are just random jitter to help see the cells more clearly. The outline of the violin plot shows us the density of each batch, where we can see that most of the cells in the <code class="language-plaintext highlighter-rouge">shr</code> group have an average number of features just below 2000 genes, compared to <code class="language-plaintext highlighter-rouge">wt</code> which has an average number of features just below 4000 genes. If we compare the library size, however, we notice that the outlines are very similar and that the average library sizes across batches are comparable.</p>
+
+<h3 id="filter">Filter</h3>
+
+<p>Most sc<span class="notranslate">RNA</span>-seq datasets need to set a minimum threshold of detectability in order to ensure that the cells are of high enough quality to be used for analysis. Conversely, sometimes an upper threshold also should be set to counter the case where a cell is a cell-doublet (in the sense that two cells were captured and sequenced accidentally as a <span class="notranslate">single cell</span>).</p>
+
+<p>The above violin plots suggest quite a few outliers, mostly on the upper-end of the density plots, suggesting a few cell-doublets in the data. The effect of these is not something we cannot easily regress out, and so we must filter them out instead. By looking at the plots, we can see that a good maximum library size here would be 100 000 transcripts, and a good maximum feature size would be 10 000 transcripts.</p>
+
+<p>For this analysis, we will set a minimum threshold of detectability that each cell should count transcripts from at least 200 genes, and that each gene should be expressed in at least 5 cells. These lower-bound thresholds are not so easy to derive from such QC plots, but depend mostly on the type of data you are using. If the number of features and the library sizes were one order of magnitude higher, one might consider also scaling the lower-bound thresholds by one order of magnitude.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filtering</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Inspect and manipulate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used for filtering”</em>: <code class="language-plaintext highlighter-rouge">Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'</code>
+          <ul>
+            <li><em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Minimum number of genes expressed</code>
+              <ul>
+                <li><em>“Minimum number of genes expressed required for a cell to pass filtering”</em>: <code class="language-plaintext highlighter-rouge">200</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used for filtering”</em>: <code class="language-plaintext highlighter-rouge">Filter genes based on number of cells or counts, using 'pp.filter_genes'</code>
+          <ul>
+            <li><em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Minimum number of cells expressed</code>
+              <ul>
+                <li><em>“Minimum number of cells expressed required for a gene to pass filtering”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>We now set the upper limits to the analysis.</p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used for filtering”</em>: <code class="language-plaintext highlighter-rouge">Filter genes based on number of cells or counts, using 'pp.filter_genes'</code>
+          <ul>
+            <li><em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Maximum number of counts</code>
+              <ul>
+                <li><em>“Maximum number of counts required for a gene to pass filtering”</em>: <code class="language-plaintext highlighter-rouge">10000</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used for filtering”</em>: <code class="language-plaintext highlighter-rouge">Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'</code>
+          <ul>
+            <li><em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Maximum number of counts</code>
+              <ul>
+                <li><em>“Maximum number of counts required for a cell to pass filtering”</em>: <code class="language-plaintext highlighter-rouge">100000</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>If we inspect the resulting dataset, we see that the number of cells remaining is <code class="language-plaintext highlighter-rouge">5826</code> and the number of genes is <code class="language-plaintext highlighter-rouge">18913</code>, which is still a good number of cells and genes. It is good practice to save the raw data in case we need to use it data, so we “freeze the raw data” into a slot for later safe keeping.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-saving-the-original-matrix"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Saving the original matrix</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Freeze the current state into the 'raw' attribute</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="confounder-removal">Confounder Removal</h2>
+
+<p>Now we have a set of cells we are reasonably confident contain desirable biological variation (please view the  following segment from <a href="/training-material/videos/watch.html?v=transcriptomics/tutorials/scrna-intro/slides&amp;t=11:28"><em>“An introduction to sc<span class="notranslate">RNA</span>-seq data analysis”</em></a> as a reference for the types of wanted and unwanted variation). We wish to now regress out the library size variation, as it is not indicative of cell type. To do this, we will first ensure that all cells are of the same comparable library size by applying individual size factors to each cell.</p>
+
+<p>We will also apply a log transformation to the cells, as this compresses the variation into a less extreme space, making it easier to see the relative differences between cells.</p>
+
+<p>After normalising and regressing out unwanted factors, we will then scale the data to have unit variance with a zero mean, so that the mean <span class="notranslate">expression</span> of each gene is not a factor in the analysis and only the variation is, ensuring that the later clustering is driven only by the relative variation of the genes, and not neccesarily how expressive those genes are.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-highly-variable-genes"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Highly Variable Genes?</h3>
+
+  <p>Those of you who are familiar with the <a href="/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html">ScanPy Tutorial</a> might wonder why we have not reduced the number of genes by performing a highly variable gene selection.
+The answer is simply that it did not help with this particular dataset, and that by removing the least variable genes in the analysis, it did help us replicate the analysis in the paper. Try it for yourself as an intermediate step (after this analysis) and see!</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-normalize-and-scale"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Normalize and Scale</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.7.1+galaxy0"><strong>Normalize</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata</code> (output of <strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used for normalization”</em>: <code class="language-plaintext highlighter-rouge">Normalize counts per cell, using 'pp.normalize_total'</code>
+          <ul>
+            <li><em>“Target sum”</em>: <code class="language-plaintext highlighter-rouge">10000.0</code></li>
+            <li><em>“Exclude (very) highly expressed genes for the computation of the normalization factor (size factor) for each cell”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0"><strong>Inspect and manipulate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Normalize</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used for inspecting”</em>: <code class="language-plaintext highlighter-rouge">Logarithmize the data matrix, using 'pp.log1p'</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_remove_confounders/scanpy_remove_confounders/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_remove_confounders/scanpy_remove_confounders/1.7.1+galaxy0"><strong>Remove confounders</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_remove_confounders/scanpy_remove_confounders/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Inspect and manipulate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Regress out unwanted sources of variation, using 'pp.regress_out'</code>
+          <ul>
+            <li><em>“Keys for observation annotation on which to regress on”</em>: <code class="language-plaintext highlighter-rouge">total_counts</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0"><strong>Inspect and manipulate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Remove confounders</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used for inspecting”</em>: <code class="language-plaintext highlighter-rouge">Scale data to unit variance and zero mean, using 'pp.scale'</code>
+          <ul>
+            <li><em>“Maximum value”</em>: <code class="language-plaintext highlighter-rouge">10.0</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="dimensionality-reduction">Dimensionality Reduction</h2>
+
+<p>Dimensionality reduction is the art of reducing a high dimensional dataset into a low dimensional “embedding” that humans can actually see (i.e. 2 or 3 dimensions), ideally such that the relationships or distances between data points are preserved in this embedding. In the context of <span class="notranslate">single-cell</span> datasets, this essentially means compressing &gt; 10 000 genes into just 2 X/Y variables.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-what-is-dimensionality-reduction"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: What is Dimensionality Reduction?</h3>
+
+  <p>You can learn more about dimensionality reduction by consulting the following segment from <a href="/training-material/videos/watch.html?v=transcriptomics/tutorials/scrna-intro/slides&amp;t=13:46"><em>“An introduction to sc<span class="notranslate">RNA</span>-seq data analysis”</em></a>.</p>
+
+</blockquote>
+
+<p>This is usually a two step process:</p>
+
+<ol>
+  <li>A Principal Component Analysis (PCA) is used to perform an optimized “rotation” of the ~ 20 000 “unit” gene axes that we have, in order to better fit the data. These new axes or “principal components” are then <em>linear</em> combinations of the original unit axes, with an associated score of how variable each new axis is. By sorting these principal components by most variable to least variable, we can select the top N components and discard the rest, leaving us with most of the variation still in the data. Usually we select the top 40 principal components, which from 20 000 is a <em>huge</em> reduction in the dimensionality of the dataset.</li>
+  <li>We then perform a more complex kind of dimensionality reduction, one that does not assume any linearity in the axes. For sc<span class="notranslate">RNA</span>-seq, this is either tSNE or UMAP, with UMAP being the main choice due to how flexible it is in incorporating new data. Though UMAP is capable of working on extremely high dimensional datasets, it is often limited by time and space constraints (read: the computer does not respond in a reasonable timeframe, or it crashes), and so therefore it is quite normal to feed UMAP the output of the PCA as input. This will then be a dimensionality reduction from 50 to 2. With these final 2 dimensions, we can plot the data.</li>
+</ol>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-pca-and-umap"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: PCA and UMAP</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0"><strong>Cluster, infer trajectories and embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Inspect and manipulate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Computes PCA (principal component analysis) coordinates, loadings and variance decomposition, using 'tl.pca'</code>
+          <ul>
+            <li><em>“Type of PCA?”</em>: <code class="language-plaintext highlighter-rouge">Full PCA</code>
+              <ul>
+                <li><em>“SVD solver to use”</em>: <code class="language-plaintext highlighter-rouge">ARPACK wrapper in SciPy</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0"><strong>Inspect and manipulate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Cluster, infer trajectories and embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used for inspecting”</em>: <code class="language-plaintext highlighter-rouge">Compute a neighborhood graph of observations, using 'pp.neighbors'</code>
+          <ul>
+            <li><em>“The size of local neighborhood (in terms of number of neighboring data points) used for manifold approximation”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
+            <li><em>“Number of PCs to use”</em>: <code class="language-plaintext highlighter-rouge">40</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>UMAP relies on a connected graph of cells to operate. Please view the following segment from <a href="/training-material/videos/watch.html?v=transcriptomics/tutorials/scrna-intro/slides&amp;t=13:40"><em>“An introduction to sc<span class="notranslate">RNA</span>-seq data analysis”</em></a> for more information on how this process works.</p>
+      </blockquote>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0"><strong>Cluster, infer trajectories and embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Inspect and manipulate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Embed the neighborhood graph using UMAP, using 'tl.umap'</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>With our data now sufficiently “flat” and ready for human consumption, we can now do a naive plot of both the PCA and the UMAP and show cell assignments coloured by batch.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-plot-the-pca-and-umap-by-batch"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot the PCA and UMAP by Batch</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Cluster, infer trajectories and embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Embeddings: Scatter plot in PCA coordinates, using 'pl.pca</code>
+          <ul>
+            <li><em>“Keys for annotations of observations/cells or variables/genes”</em>: <code class="language-plaintext highlighter-rouge">batch</code></li>
+            <li>In <em>“Plot attributes”</em>
+              <ul>
+                <li><em>“Colors to use for plotting categorical annotation groups”</em>: <code class="language-plaintext highlighter-rouge">rainbow</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Cluster, infer trajectories and embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Embeddings: Scatter plot in UMAP basis, using 'pl.umap'</code>
+          <ul>
+            <li><em>“Keys for annotations of observations/cells or variables/genes”</em>: <code class="language-plaintext highlighter-rouge">batch</code></li>
+            <li>In <em>“Plot attributes”</em>
+              <ul>
+                <li><em>“Colors to use for plotting categorical annotation groups”</em>: <code class="language-plaintext highlighter-rouge">rainbow</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">PCA</th>
+      <th style="text-align: center">UMAP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="/training-material/topics/transcriptomics/images/scrna-plant/pca_batch.png" alt="PCA" /></td>
+      <td style="text-align: center"><img src="/training-material/topics/transcriptomics/images/scrna-plant/umap_batch.png" alt="UMAP" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>From this, we can see that there is a reasonable overlap in our batches shown both in the PCA and UMAP embeddings. This is good because it shows that though there is <em>some</em> batch effect (i.e. cells from one batch appear to cluster on a different side of the plot than the other) it is not significant enough for there not to be some commonality between the batches.</p>
+
+<p>There are batch correction algorithms for cases where one batch clusters completely seperate from the other, but this is not necessary here.</p>
+
+<h2 id="clustering">Clustering</h2>
+
+<p>Let us cluster the cells and see what cell types we can discover in the plots. The cell types that we wish to recover are those shown in the original paper, as highlighted by the gene markers in the DotPlot below.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">UMAP</th>
+      <th style="text-align: center">DotPlot</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="/training-material/topics/transcriptomics/images/scrna-plant/clusters_expected.png" alt="PCA" /></td>
+      <td style="text-align: center"><img src="/training-material/topics/transcriptomics/images/scrna-plant/dotplot_expected.png" alt="UMAP" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-generate-and-plots-clusters"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate and Plots Clusters</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0"><strong>Cluster, infer trajectories and embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Cluster, infer trajectories and embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Cluster cells into subgroups, using 'tl.leiden'</code>
+          <ul>
+            <li><em>“Coarseness of the clusterin”</em>: <code class="language-plaintext highlighter-rouge">0.3</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Cluster, infer trajectories and embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Embeddings: Scatter plot in UMAP basis, using 'pl.umap'</code>
+          <ul>
+            <li><em>“Keys for annotations of observations/cells or variables/genes”</em>: <code class="language-plaintext highlighter-rouge">leiden, batch</code></li>
+            <li><em>“Show edges?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+            <li>In <em>“Plot attributes”</em>:
+              <ul>
+                <li><em>“Location of legend”</em>: <code class="language-plaintext highlighter-rouge">on data</code></li>
+                <li><em>“Legend font size”</em>: <code class="language-plaintext highlighter-rouge">14</code></li>
+                <li><em>“Colors to use for plotting categorical annotation groups”</em>: <code class="language-plaintext highlighter-rouge">rainbow (Miscellaneous)</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>We print the legend on the data because it’s easier to see where the cluster labels apply.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img src="/training-material/topics/transcriptomics/images/scrna-plant/clusters_found.png" alt="UMAP Leiden Clusters" /></p>
+
+<p>Here we have recovered 13 clusters but we don’t yet know what types they describe. If we have a list of genes that we know are indicative of a certain cell type (i.e. are marker genes) then we can use this to assign labels to our clusters.</p>
+
+<p>Let us here try to recreate the DotPlot from the paper using the clusters we have discovered.</p>
+
+<h2 id="dotplot-and-validating-cell-types">DotPlot and Validating Cell Types</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-dot-plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Dot Plot</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Cluster, infer trajectories and embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Makes a dot plot of the <span class="notranslate">expression</span> values, using 'pl.dotplot'</code>
+          <ul>
+            <li><em>“Variables to plot (columns of the heatmaps)”</em>: <code class="language-plaintext highlighter-rouge">Subset of variables in 'adata.var_names'</code>
+              <ul>
+                <li><em>“List of variables to plot”</em>: <code class="language-plaintext highlighter-rouge">AT1G26680,COBL2,AT3G55180,NCED2,AT5G22550,ATL63,RGF8,TEL1,DUF9,AGL42,PLT1,PLT2,PER3,PER9,PBL15,TBL30,AT2G48130,AT3G22620,AED3,T3P18-7,MBK21-8,NPF6-4,CYP71B34,IAMT1,AT1G31950,F14G6-22,GL2,ANL2,PMEI4,MUD21-4,EXPA7,MES15,ADF8,COBL9,TPR14,BHLH144,MYB83,SCPL35,MYB46,COBL4,PIN7,PIN3   </code></li>
+              </ul>
+            </li>
+            <li><em>“The key of the observation grouping to consider”</em>: <code class="language-plaintext highlighter-rouge">leiden</code></li>
+            <li><em>“Number of categories”</em>: <code class="language-plaintext highlighter-rouge">9</code></li>
+            <li><em>“Use ‘raw’ attribute of input if present”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li>In <em>“Group of variables to highlight”</em>:
+              <ul>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Group of variables to highlight”</em>
+                  <ul>
+                    <li><em>“Start”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+                    <li><em>“End”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+                    <li><em>“Label”</em>: <code class="language-plaintext highlighter-rouge">Columella</code></li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Group of variables to highlight”</em>
+                  <ul>
+                    <li><em>“Start”</em>: <code class="language-plaintext highlighter-rouge">6</code></li>
+                    <li><em>“End”</em>: <code class="language-plaintext highlighter-rouge">9</code></li>
+                    <li><em>“Label”</em>: <code class="language-plaintext highlighter-rouge">QC</code></li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Group of variables to highlight”</em>
+                  <ul>
+                    <li><em>“Start”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
+                    <li><em>“End”</em>: <code class="language-plaintext highlighter-rouge">11</code></li>
+                    <li><em>“Label”</em>: <code class="language-plaintext highlighter-rouge">NC</code></li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Group of variables to highlight”</em>
+                  <ul>
+                    <li><em>“Start”</em>: <code class="language-plaintext highlighter-rouge">12</code></li>
+                    <li><em>“End”</em>: <code class="language-plaintext highlighter-rouge">17</code></li>
+                    <li><em>“Label”</em>: <code class="language-plaintext highlighter-rouge">Endodermis</code></li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Group of variables to highlight”</em>
+                  <ul>
+                    <li><em>“Start”</em>: <code class="language-plaintext highlighter-rouge">18</code></li>
+                    <li><em>“End”</em>: <code class="language-plaintext highlighter-rouge">23</code></li>
+                    <li><em>“Label”</em>: <code class="language-plaintext highlighter-rouge">Cortex</code></li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Group of variables to highlight”</em>
+                  <ul>
+                    <li><em>“Start”</em>: <code class="language-plaintext highlighter-rouge">24</code></li>
+                    <li><em>“End”</em>: <code class="language-plaintext highlighter-rouge">29</code></li>
+                    <li><em>“Label”</em>: <code class="language-plaintext highlighter-rouge">Atrichoblast</code></li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Group of variables to highlight”</em>
+                  <ul>
+                    <li><em>“Start”</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
+                    <li><em>“End”</em>: <code class="language-plaintext highlighter-rouge">34</code></li>
+                    <li><em>“Label”</em>: <code class="language-plaintext highlighter-rouge">Trichoblast</code></li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Group of variables to highlight”</em>
+                  <ul>
+                    <li><em>“Start”</em>: <code class="language-plaintext highlighter-rouge">35</code></li>
+                    <li><em>“End”</em>: <code class="language-plaintext highlighter-rouge">39</code></li>
+                    <li><em>“Label”</em>: <code class="language-plaintext highlighter-rouge">Xylem</code></li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Group of variables to highlight”</em>
+                  <ul>
+                    <li><em>“Start”</em>: <code class="language-plaintext highlighter-rouge">40</code></li>
+                    <li><em>“End”</em>: <code class="language-plaintext highlighter-rouge">41</code></li>
+                    <li><em>“Label”</em>: <code class="language-plaintext highlighter-rouge">VC</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><em>“Custom figure size”</em>: <code class="language-plaintext highlighter-rouge">No: the figure width is set based on the number of variable names and the height is set to 10.</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>By running the above we end up with the following DotPlot:</p>
+
+<p><img src="/training-material/topics/transcriptomics/images/scrna-plant/dotplot_found.png" alt="Dotplot In Analyssis" /></p>
+
+<p>Notice how we have the Columella, QC and NC sharing the same cluster 11, that the Endodermis is localised in cluster 8, the Cortex in cluster 9, the Trichoblast cells in cluster 3, the Xylem showing strong <span class="notranslate">expression</span> in cluster 12, VC in clusters 4 and 6, and the Atrichoblasts have a mixed <span class="notranslate">expression</span> in a range of clusters. These characteristics are the same as the Dotplot in the original paper.</p>
+
+<p>We can use this Dotplot as a guide to relabel our clusters and give more meaningful annotations to the plots.</p>
+
+<h2 id="relabel-clusters">Relabel clusters</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-cluster-re-labelling"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Cluster Re-labelling</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Cluster, infer trajectories and embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Rename categories of annotation</code>
+          <ul>
+            <li><em>“Key for observations or variables annotation”</em>: <code class="language-plaintext highlighter-rouge">leiden</code></li>
+            <li><em>“Comma-separated list of new categories”</em>: <code class="language-plaintext highlighter-rouge">0, 1, 2, 3, trichoblast, 5, 6, cortex, 8, 9, 10, columella+QC+NC, xylem, 13</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata</code> (output of <strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Embeddings: Scatter plot in UMAP basis, using 'pl.umap'</code>
+          <ul>
+            <li><em>“Keys for annotations of observations/cells or variables/genes”</em>: <code class="language-plaintext highlighter-rouge">leiden, batch</code></li>
+            <li><em>“Show edges?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+            <li>In <em>“Plot attributes”</em>:
+              <ul>
+                <li><em>“Location of legend”</em>: <code class="language-plaintext highlighter-rouge">on data</code></li>
+                <li><em>“Legend font size”</em>: <code class="language-plaintext highlighter-rouge">14</code></li>
+                <li><em>“Colors to use for plotting categorical annotation groups”</em>: <code class="language-plaintext highlighter-rouge">rainbow (Miscellaneous)</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img src="/training-material/topics/transcriptomics/images/scrna-plant/clusters_found_relabelled.png" alt="Relabelled clusters" /></p>
+
+<p>If we look at the clusters now, and compare them to the original image in the paper, we can infer that the meristematic cells are likely to be derived from cluster 1, which shares soft clustering with the trichoblasts suggesting a trajectory pathway which could be explored.</p>
+
+<h2 id="conclusions">Conclusions</h2>
+
+<p>In this tutorial, we have recapitulated the same clustering analysis in the <a href="https://doi.org/10.1016/j.devcel.2019.02.022">“Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput <span class="notranslate">Single-Cell</span> <span class="notranslate">RNA</span> Sequencing”</a> <a class="citation" href="#denyer2019spatiotemporal">Denyer <i>et al.</i> 2019</a> paper, and validated them by comparing DotPlots for specific genes that were used as markers in that paper.</p>
+
+<p>From this point, we can perform a lineage analysis to infer a differentiation pathway between the clusters. For ScanPy there is the PAGA option, however, this does not work so well with the current dataset, so it is encouraged that users use the original Seurat trajectory suite that was given in the paper, or to experiment with Monocle.</p>
+
+<p>Both libraries are available within the RStudio and Jupyter Notebook libraries in the interactive <span class="notranslate">Galaxy</span> envronments which can be found in the <em>“Miscellaneous Tools”</em> section under the <em>“Interactive Tools”</em> subheading.</p>
+
+<p>This entire tutorial can be invoked from the sc<span class="notranslate">RNA</span> Plant <span class="notranslate">Workflow</span> shown below:</p>
+
+<p><img src="/training-material/topics/transcriptomics/images/scrna-plant/scrna-plant-workflow.png" alt="scRNA Plant" /></p>
+
+<p>The input parameters take two datasets as input, and 5 parameters using the defaults shown in this tutorial: min cells, min genes, max features, max library size, and Leiden clustering resolution. Play with these options to see how robust the analysis really is!</p>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>Filtering parameters are dependent on the dataset, and should be explored using scatter or violin plots</p>
+</li>
+                            
+                            <li><p>A DotPlot is a fantastic way to validate clusters across different analyses</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/transcriptomics/faqs/">FAQ page for the Transcriptomics topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                    
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="satija2015spatial">Satija, R., J. A. Farrell, D. Gennert, A. F. Schier, and A. Regev, 2015 <b>Spatial reconstruction of single-cell gene expression data</b>. Nature biotechnology 33: 495–502.</span>
+    
+    
+    
+
+</li>
+<li><span id="wolf2018scanpy">Wolf, F. A., P. Angerer, and F. J. Theis, 2018 <b>SCANPY: large-scale single-cell gene expression data analysis</b>. Genome biology 19: 15.</span>
+    
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1382-0">https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1382-0</a>
+      
+    
+
+</li>
+<li><span id="denyer2019spatiotemporal">Denyer, T., X. Ma, S. Klesen, E. Scacchi, K. Nieselt <i>et al.</i>, 2019 <b>Spatiotemporal developmental trajectories in the Arabidopsis root revealed using high-throughput single-cell RNA sequencing</b>. Developmental cell 48: 840–852.</span>
+    
+    
+    
+
+</li>
+<li><span id="tekman2020single">Tekman, M., B. Batut, A. Ostrovsky, C. Antoniewski, D. Clements <i>et al.</i>, 2020 <b>A single-cell RNA-sequencing training and analysis suite using the Galaxy framework</b>. GigaScience 9: giaa102.</span>
+    
+    
+    
+
+</li></ol>
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Analysis of plant scRNA-Seq Data with Scanpy (Transcriptomics)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Mehmet Tekman, Beatriz Serrano-Solano, 2021 <b>Analysis of plant scRNA-Seq Data with Scanpy (Galaxy Training Materials)</b>. <a href="/training-material/topics/transcriptomics/tutorials/scrna-plant/tutorial.html">/training-material/topics/transcriptomics/tutorials/scrna-plant/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{transcriptomics-scrna-plant,
+    author = "Mehmet Tekman and Beatriz Serrano-Solano",
+    title = "Analysis of plant scRNA-Seq Data with Scanpy (Galaxy Training Materials)",
+    year = "2021",
+    month = "04",
+    day = "08"
+    url = "\url{/training-material/topics/transcriptomics/tutorials/scrna-plant/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Mehmet Tekman, Beatriz Serrano-Solano)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/transcriptomics/tutorials/scrna-plant/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
