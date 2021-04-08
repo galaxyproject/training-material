@@ -238,27 +238,35 @@ For this analysis, we will set a minimum threshold of detectability that each ce
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Inspect and manipulate** {% icon tool %})
 >    - *"Method used for filtering"*: `Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'`
 >        - *"Filter"*: `Minimum number of genes expressed`
->            - *"Minimum number of genes expressed required for a cell to pass filtering"*: `200`
+>            - *"Minimum number of genes expressed required for a cell to pass filtering"*: `100`
 >
 > 1. {% tool [Filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Filter** {% icon tool %})
 >    - *"Method used for filtering"*: `Filter genes based on number of cells or counts, using 'pp.filter_genes'`
 >        - *"Filter"*: `Minimum number of cells expressed`
->            - *"Minimum number of cells expressed required for a gene to pass filtering"*: `5`
+>            - *"Minimum number of cells expressed required for a gene to pass filtering"*: `2`
 >
 >    We now set the upper limits to the analysis.
 >
-> 1. {% tool [Filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0) %} with the following parameters:
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Filter** {% icon tool %})
->    - *"Method used for filtering"*: `Filter genes based on number of cells or counts, using 'pp.filter_genes'`
->        - *"Filter"*: `Maximum number of counts`
->            - *"Maximum number of counts required for a gene to pass filtering"*: `10000`
+>    - *"Function to manipulate the object"*: `Filter observations or variables`
+>        - *"What to filter?"*: `Observations (obs)`
+>        - *"Type of filtering?"*: `By key (column) values`
+>            - *"Key to filter"*: `n_genes_by_counts`
+>            - *"Type of value to filter"*: `Number`
+>                - *"Filter"*: `less than`
+>                - *"Value"*: `12000`
 >
-> 1. {% tool [Filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Filter** {% icon tool %})
->    - *"Method used for filtering"*: `Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'`
->        - *"Filter"*: `Maximum number of counts`
->            - *"Maximum number of counts required for a cell to pass filtering"*: `100000`
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `anndata` (output of **Manipulate AnnData** {% icon tool %})
+>    - *"Function to manipulate the object"*: `Filter observations or variables`
+>        - *"What to filter?"*: `Observations (obs)`
+>        - *"Type of filtering?"*: `By key (column) values`
+>            - *"Key to filter"*: `total_counts`
+>            - *"Type of value to filter"*: `Number`
+>                - *"Filter"*: `less than`
+>                - *"Value"*: `120000`
 >
 {: .hands_on}
 
@@ -368,8 +376,9 @@ With our data now sufficiently "flat" and ready for human consumption, we can no
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Cluster, infer trajectories and embed** {% icon tool %})
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
 >      - *"Keys for annotations of observations/cells or variables/genes"*: `batch`
+>      - *"Show edges?"*: `No`
 >      - In *"Plot attributes"*
->        - *"Colors to use for plotting categorical annotation groups"*: `rainbow`
+>        - *"Legend font size"*: `14`
 >        - *"Colors to use for plotting categorical annotation groups"*: `rainbow (Miscellaneous)`
 >
 {: .hands_on}
@@ -399,7 +408,7 @@ Let us cluster the cells and see what cell types we can discover in the plots. T
 > 1. {% tool [Cluster, infer trajectories and embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Cluster, infer trajectories and embed** {% icon tool %})
 >    - *"Method used"*: `Cluster cells into subgroups, using 'tl.leiden'`
->        - *"Coarseness of the clusterin"*: `0.3`
+>        - *"Coarseness of the clusterin"*: `0.35`
 >
 > 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Cluster, infer trajectories and embed** {% icon tool %})
@@ -493,7 +502,7 @@ We can use this Dotplot as a guide to relabel our clusters and give more meaning
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Cluster, infer trajectories and embed** {% icon tool %})
 >    - *"Function to manipulate the object"*: `Rename categories of annotation`
 >        - *"Key for observations or variables annotation"*: `leiden`
->        - *"Comma-separated list of new categories"*: `0, 1, 2, 3, trichoblast, 5, 6, cortex, 8, 9, 10, columella+QC+NC, xylem, 13`
+>        - *"Comma-separated list of new categories"*: `0, 1, 2, trichoblasts, 4, 5, 6, atrichoblasts, endodermis, cortex, 10, columella+QC+NC, xylem`
 >
 > 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata` (output of **Manipulate AnnData** {% icon tool %})
