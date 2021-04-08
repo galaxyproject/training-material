@@ -144,13 +144,14 @@ Next we will retrieve the remaining datasets.
 >    - *"Upload data as"*: `Datasets`
 >    - Once again, copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
->   ```
-> annotation_AtRTD2.gtf       https://zenodo.org/record/4606701/files/annotation_AtRTD2_19April2016.gtf.gz
-> transcriptome.fasta         https://zenodo.org/record/4606701/files/transcriptome_AtRTD2_12April2016.fasta.gz
-> star_miRNA_seq.fasta        https://zenodo.org/record/4606701/files/star_miRNA_seq.fasta
-> mature_miRNA_AT.fasta       https://zenodo.org/record/4606701/files/mature_miRNA_AT.fasta
-> miRNA_stem-loop_seq.fasta   https://zenodo.org/record/4606701/files/miRNA_stem-loop_seq.fasta
->   ```
+>      ```
+>      annotation_AtRTD2.gtf	https://zenodo.org/record/4606701/files/annotation_AtRTD2_19April2016.gtf.gz
+>      transcriptome.fasta	https://zenodo.org/record/4606701/files/transcriptome_AtRTD2_12April2016.fasta.gz
+>      star_miRNA_seq.fasta	https://zenodo.org/record/4606701/files/star_miRNA_seq.fasta
+>      mature_miRNA_AT.fasta	https://zenodo.org/record/4606701/files/mature_miRNA_AT.fasta
+>      miRNA_stem-loop_seq.fasta	https://zenodo.org/record/4606701/files/miRNA_stem-loop_seq.fasta
+>      ```
+>
 >    - From **Rules** menu select `Add / Modify Column Definitions`
 >       - Click `Add Definition` button and select `Name`: column `A`
 >       - Click `Add Definition` button and select `URL`: column `B`
