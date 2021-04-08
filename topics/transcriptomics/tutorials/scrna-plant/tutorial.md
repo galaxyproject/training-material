@@ -64,8 +64,8 @@ This tutorial replicates the paper ["Spatiotemporal Developmental Trajectories i
 
 The *Arabidopsis* root cells come from two biological replicates which were isolated and profiles using droplet-based scRNA-seq (please see: ["Pre-processing of 10X Single-Cell RNA Datasets"]({% link topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial.md %})); a "short root" mutant (labelled: `shr`) and a wild-type (labelled: `wt`):
 
-* GSE123818_Root_single_cell_**shr**_datamatrix.fixednames.transposed.csv.gz
-* GSE123818_Root_single_cell_**wt**_datamatrix.fixednames.transposed.csv.gz
+* GSE123818\_Root\_single\_cell\_**shr**\_datamatrix.fixednames.transposed.csv.gz
+* GSE123818\_Root\_single\_cell\_**wt**\_datamatrix.fixednames.transposed.csv.gz
 
 As explained in the Zenodo link, the datasets have been modified to use more common gene names (hence the "fixednames" suffix) and the datasets have been transposed to better suit the AnnData format (hence the "transposed" suffix). The datasets are CSV tabular files which have been compressed using gunzip. We will now import these for analysis.
 
@@ -132,7 +132,7 @@ If the above feels like a convoluted way to get the dimensionality, that's becau
 >    >    [n_obs x n_vars]
 >    >        1099 x 27629
 >    >    ```
->    > 
+>    >
 >    > and the `#wt` should show:
 >    >    ```
 >    >    [n_obs x n_vars]
@@ -140,7 +140,7 @@ If the above feels like a convoluted way to get the dimensionality, that's becau
 >    >    ```
 >    >
 >    > where *obs* refers to our observed cells, and *vars* references the genes/variables.
->    > 
+>    >
 >    {: .comment}
 >
 {: .hands_on}
@@ -319,7 +319,8 @@ Dimensionality reduction is the art of reducing a high dimensional dataset into 
 > ### {% icon tip %} Tip: What is Dimensionality Reduction?
 >
 > You can learn more about dimensionality reduction by consulting the following segment from [*"An introduction to scRNA-seq data analysis"*]({% link videos/watch.md %}?v=transcriptomics/tutorials/scrna-intro/slides&t=13:46).
->    {: .tip}
+>
+{: .tip}
 
 This is usually a two step process:
 
@@ -342,7 +343,7 @@ This is usually a two step process:
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > UMAP relies on a connected graph of cells to operate. Please view the following segment from [*"An introduction to scRNA-seq data analysis"*]({% link videos/watch.md %}?v=transcriptomics/tutorials/scrna-intro/slides&t=13:40) %}) for more information on how this process works.
+>    > UMAP relies on a connected graph of cells to operate. Please view the following segment from [*"An introduction to scRNA-seq data analysis"*]({% link videos/watch.md %}?v=transcriptomics/tutorials/scrna-intro/slides&t=13:40) for more information on how this process works.
 >    {: .comment}
 >
 > 1. {% tool [Cluster, infer trajectories and embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0) %} with the following parameters:
