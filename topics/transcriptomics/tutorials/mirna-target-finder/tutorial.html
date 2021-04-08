@@ -1,0 +1,2147 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Whole transcriptome analysis of Arabidopsis thaliana</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:title" content="Galaxy Training: Whole transcriptome analysis of Arabidopsis thaliana" />
+        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/transcriptomics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Transcriptomics
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/transcriptomics/faqs/" title="Check our FAQs for the Transcriptomics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Fmirna-target-finder%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                    -->
+
+                     <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Whole transcriptome analysis of Arabidopsis thaliana",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/main/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Transcriptomics",
+    "description": "Training material for all kinds of transcriptomics analysis.",
+    "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/"
+  },
+  "courseCode": "transcriptomics / mirna-target-finder / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Whole transcriptome analysis of Arabidopsis thaliana' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html",
+  "timeRequired": "PT2H",
+  "keywords": "miRNA, plants",
+  "description": "The questions this  addresses are:\n - Which miRNAs are upregulated in response to brassinosteroids?\n - Which genes are potential target of brassinosteroid-induced miRNAs?\n\n\\nThe objectives are:\n - Perform miRNA differential expression analysis\n - Understand the quasi-mapping-based Salmon method for quantifying the expression of transcripts using RNA-Seq data\n - Idenfity potential miRNAs involved in brassinosteroid-mediated regulation networks\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
+      "name": "Mapping",
+      "description": "Hands-on for 'Mapping' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Cristóbal Gallardo"
+    },
+    {
+      "@type": "Person",
+      "name": "Pavankumar Videm"
+    },
+    {
+      "@type": "Person",
+      "name": "Beatriz Serrano-Solano"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Cristóbal Gallardo"
+    },
+    {
+      "@type": "Person",
+      "name": "Pavankumar Videm"
+    },
+    {
+      "@type": "Person",
+      "name": "Beatriz Serrano-Solano"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Transcriptomics",
+      "description": "Training material for all kinds of transcriptomics analysis.",
+      "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3308",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3308",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3308"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Whole transcriptome analysis of Arabidopsis thaliana</h1>
+        
+
+        <div class="contributors-line">By: 
+
+ <a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/gallardoalba" alt="Cristóbal Gallardo">Cristóbal Gallardo</a> <a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pavanvidem" alt="Pavankumar Videm">Pavankumar Videm</a> <a href="/training-material/hall-of-fame/beatrizserrano/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/beatrizserrano" alt="Beatriz Serrano-Solano">Beatriz Serrano-Solano</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>Which miRNAs are upregulated in response to brassinosteroids?</p>
+</li>
+            
+            <li><p>Which genes are potential target of brassinosteroid-induced miRNAs?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Perform miRNA differential expression analysis</p>
+</li>
+            
+            <li><p>Understand the quasi-mapping-based Salmon method for quantifying the expression of transcripts using RNA-Seq data</p>
+</li>
+            
+            <li><p>Idenfity potential miRNAs involved in brassinosteroid-mediated regulation networks</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/sequence-analysis">Sequence analysis</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Quality Control:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                
+                    
+                        
+                            
+                            <li> Mapping:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/mapping/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours</p>
+            
+
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/transcriptomics/slides/introduction.html" title="Topic Overview slides">
+                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Topic Overview slides
+                    </a></li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://zenodo.org/record/4606701">
+    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+</li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/transcriptomics/tutorials/mirna-target-finder/workflows/" title="Workflows" alt="Whole transcriptome analysis of Arabidopsis thaliana workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+</li>
+                
+
+                
+
+                
+                
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/transcriptomics/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://clipseq.usegalaxy.eu/" title="CLIP-Explorer">
+            CLIP-Explorer
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
+            Galaxy Africa
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
+            Human Cell Atlas
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://singlecell.usegalaxy.eu/" title="Single Cell Omics workbench">
+            Single Cell Omics workbench
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
+            UseGalaxy.no
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 8, 2021 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>As sessile organisms, the survival of plants under adverse environmental conditions depends, to a large extent, on their ability to perceive stress stimuli and respond appropriately to counteract the potentially damaging effects. Coordination of phytohormones and reactive oxygen species are considered a key element for enhancing stress resistance, allowing fine-tuning of gene <span class="notranslate">expression</span> in response to environmental changes (<a class="citation" href="#PlanasRiverola2019">Planas-Riverola <i>et al.</i> 2019</a>, <a class="citation" href="#Ivashuta2011">Ivashuta <i>et al.</i> 2011</a>). These molecules constitute complex signalling networks, endowing with the ability to respond to a variable natural environment.</p>
+
+<p>Brassinosteroids (BRs) are a group of plant steroid hormones essential for plant growth and development, as well as for controlling abiotic and biotic stress. Structurally, BRs are polyhydroxylated sterol derivatives with close similarity to animal hormones (Figure 1). This group of phytohormones is comprised of around 60 different compounds, of which brassinolide (BL), 24-epibrassinolide (EBR), and 28-homobrassinolide (HBR) are considered the most bioactive.</p>
+
+<figure id="figure-1"><img src="../../images/brassinosteroids.png" alt="fig1:Esteroid hormones" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Structure of various plant and animal steroid hormones.</figcaption></figure>
+
+<p>Several recent studies suggest that the BR-mediated gene regulatory networks have the potential to reshape the future of agriculture, not only by alleviating the antagonistic effect diverse abiotic stress conditios, such as drought, but also by enhancing plant growth and yield. For instance, in tomato (<em>Solanum lycopersicum</em>), EBR treatment enhances drought tolerance, improving photosynthetic capacity, leaf water status, and antioxidant defense (<a class="citation" href="#Wang2018">Wang <i>et al.</i> 2018</a>). In pepper (<em>Capsicum annuum</em>), BL treatment increased the efficiency of light utilization under drought (<a class="citation" href="#Hu2013">Hu <i>et al.</i> 2013</a>). Gram (<em>Cicer arietinum</em>) plants exposed to drought stress and treated with BL showed significant increases in weight (<a class="citation" href="#Anwar2018">Anwar <i>et al.</i> 2018</a>). However, the mechanisms of BRs action in enhancing plant tolerance to abiotic stresses still remain largely unknown.</p>
+
+<p>Micro<span class="notranslate">RNA</span>s (mi<span class="notranslate">RNA</span>s), mainly 20–22 nucleotide small <span class="notranslate">RNA</span>s (s<span class="notranslate">RNA</span>s), are characterized for regulating gene <span class="notranslate">expression</span> at the post-transcriptional level. mi<span class="notranslate">RNA</span>s are distinguished from other s<span class="notranslate">RNA</span>s by being generated from precursor harboring an imperfect stem‐loop structure. Unlike in animals, the pre-processing of plant mi<span class="notranslate">RNA</span> occurs in the nucleus (Figure 2). The pre-mi<span class="notranslate">RNA</span>s are then exported to the cytoplasm after methylation and incorporated into the Argonaute 1 protein to form RISC (<span class="notranslate">RNA</span>-induced silencing complex). The mi<span class="notranslate">RNA</span> itself does not have the ability to cleave m<span class="notranslate">RNA</span>s or interfere with translation, but it plays a role in scanning the appropriate target.</p>
+
+<figure id="figure-2"><img src="../../images/plant_mirna_synthesis.png" alt="fig2:miRNA biosynthesis" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Plant mi<span class="notranslate">RNA</span> biosynthesis, homeostasis and mechanisms of action (<a class="citation" href="#Wang2019">Wang <i>et al.</i> 2018</a>).</figcaption></figure>
+
+<p>mi<span class="notranslate">RNA</span>s have been found to be important regulators of many physiological processes, such as stress and hormonal responses. Four factors justify the mi<span class="notranslate">RNA</span>s to be considered as master regulators of the plant response to the surrounding environment:</p>
+
+<ul>
+  <li>Multiple mi<span class="notranslate">RNA</span> genes are regulated under given environmental conditions</li>
+  <li>Computational predictions estimate that each mi<span class="notranslate">RNA</span> regulates hundreds of genes</li>
+  <li>The majority of plant mi<span class="notranslate">RNA</span>s regulate genes encoding for transcription factors (TFs)</li>
+  <li>Targets include not only m<span class="notranslate">RNA</span>s but also long noncoding <span class="notranslate">RNA</span>s (lnc<span class="notranslate">RNA</span>s)</li>
+</ul>
+
+<p>In plants, mi<span class="notranslate">RNA</span>s can silence targets through <span class="notranslate">RNA</span> degradation as well as translational repression pathways, and unlike animals, a large proportion of mi<span class="notranslate">RNA</span> and their targets have less than four mismatches. This feature has been exploited for developing mi<span class="notranslate">RNA</span>s target prediction tools, providing an efficient approach to elucidate the mi<span class="notranslate">RNA</span>-mediated regulatory networks, which can contribute to biotechnological solutions to improve crops productivity.</p>
+
+<p>In this tutorial, inspired by <a class="citation" href="#Park2020">Park <i>et al.</i> 2020</a>, we aim to explore the interplay between brassinosteroids and the mi<span class="notranslate">RNA</span>-gene silencing pathway, considered one of the most versatile regulatory mechanisms in response to stressful situations in plants.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#experimental-design" id="markdown-toc-experimental-design">Experimental design</a></li>
+  <li><a href="#background-on-data" id="markdown-toc-background-on-data">Background on data</a></li>
+  <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+  <li><a href="#mirna-data-analysis" id="markdown-toc-mirna-data-analysis">mi<span class="notranslate">RNA</span> data analysis</a>    <ol>
+      <li><a href="#quality-assessment-of-mirna-reads" id="markdown-toc-quality-assessment-of-mirna-reads">Quality assessment of mi<span class="notranslate">RNA</span> <span class="notranslate">reads</span></a></li>
+      <li><a href="#mirna-quantification-mirdeep2" id="markdown-toc-mirna-quantification-mirdeep2">mi<span class="notranslate">RNA</span> quantification: <strong>MiRDeep2</strong></a></li>
+      <li><a href="#differential-expression-analysis-of-mirnas-deseq2" id="markdown-toc-differential-expression-analysis-of-mirnas-deseq2">Differential <span class="notranslate">expression</span> analysis of mi<span class="notranslate">RNA</span>s: <strong>DESeq2</strong></a></li>
+      <li><a href="#filter-significantly-differentially-expressed-mirnas" id="markdown-toc-filter-significantly-differentially-expressed-mirnas">Filter significantly differentially expressed mi<span class="notranslate">RNA</span>s</a></li>
+    </ol>
+  </li>
+  <li><a href="#mrna-data-analysis" id="markdown-toc-mrna-data-analysis">m<span class="notranslate">RNA</span> data analysis</a>    <ol>
+      <li><a href="#quality-assessment-of-mrna-reads" id="markdown-toc-quality-assessment-of-mrna-reads">Quality assessment of m<span class="notranslate">RNA</span> <span class="notranslate">reads</span></a></li>
+      <li><a href="#quantification-of-gene-expression-salmon" id="markdown-toc-quantification-of-gene-expression-salmon">Quantification of gene <span class="notranslate">expression</span>: <strong>Salmon</strong></a></li>
+      <li><a href="#differential-expression-analysis-of-mrnas-deseq2" id="markdown-toc-differential-expression-analysis-of-mrnas-deseq2">Differential <span class="notranslate">expression</span> analysis of m<span class="notranslate">RNA</span>s: <strong>DESeq2</strong></a></li>
+      <li><a href="#filter-significantly-differentially-expressed-mrnas" id="markdown-toc-filter-significantly-differentially-expressed-mrnas">Filter significantly differentially expressed m<span class="notranslate">RNA</span>s</a></li>
+    </ol>
+  </li>
+  <li><a href="#identification-of-mirna-targets" id="markdown-toc-identification-of-mirna-targets">Identification of mi<span class="notranslate">RNA</span> targets</a>    <ol>
+      <li><a href="#mirna-target-prediction-using-targetfinder" id="markdown-toc-mirna-target-prediction-using-targetfinder">mi<span class="notranslate">RNA</span> target prediction using <strong>TargetFinder</strong></a></li>
+    </ol>
+  </li>
+  <li><a href="#optional-exercise" id="markdown-toc-optional-exercise">Optional exercise</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="experimental-design">Experimental design</h1>
+
+<p>The main objective of this training is to identify potential targets of mi<span class="notranslate">RNA</span>s whose <span class="notranslate">expression</span> is induced by brassinosteroids. Our starting hypothesis is that there must be brassinosteroid-induced mi<span class="notranslate">RNA</span>s that have high sequence complementarity with m<span class="notranslate">RNA</span>s whose <span class="notranslate">expression</span> is inhibited in the presence of these hormones (Figure 3).</p>
+
+<figure id="figure-3"><img src="../../images/miRNA_pipeline.png" alt="fig3:Experimental design" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Experimental design</figcaption></figure>
+
+<h1 id="background-on-data">Background on data</h1>
+
+<p>The datasets to be used in this training can be classified into three groups: mi<span class="notranslate">RNA</span> <span class="notranslate">reads</span>, m<span class="notranslate">RNA</span> <span class="notranslate">reads</span> and additional datasets.</p>
+
+<h3 id="mirna-reads">mi<span class="notranslate">RNA</span> <span class="notranslate">reads</span></h3>
+
+<p>The mi<span class="notranslate">RNA</span> datasets consist of six FASTQ files, obtained by using the Illumina GAxII sequencing platform. The plant samples were obtained from wild-type Ws-2 seedlings treated with mock or 1 μM EBR for 90 min before harvest. The original datasets are available in the NCBI SRA database, with the accession number <a href="https://www.ncbi.nlm.nih.gov/sra?term=SRP258575">SRP258575</a>. As in the previous case, for this tutorial, we will use a reduced version of the data.</p>
+
+<h3 id="mrna-reads">m<span class="notranslate">RNA</span> <span class="notranslate">reads</span></h3>
+
+<p>The m<span class="notranslate">RNA</span> datasets consist of four FASTQ files, generated through the Illumina HiSeq 2000 sequencing system. The samples were obtained from wild-type Columbia (Col-0) seedlings treated with mock or 100 nM BL for 4 hours. The original datasets are available in the NCBI SRA database, with the accession number <a href="https://www.ncbi.nlm.nih.gov/sra?term=SRP032274">SRP032274</a>. For this tutorial, subsets from the original data were generated in order to reduce the analysis run time.</p>
+
+<h3 id="additional-datasets">Additional datasets</h3>
+
+<p>In addition to the <span class="notranslate">RNA</span>-Seq <span class="notranslate">reads</span> obtained from the NCBI database, we will use datasets from two sources:</p>
+
+<ul>
+  <li><a href="https://ics.hutton.ac.uk/atRTD/">AtRTD2</a> is a high-quality transcript reference dataset developed to exploit the accuracy of transcript quantification tools such as <strong>Salmon</strong> and <strong>Kallisto</strong> in analyzing <em>Arabidopsis</em> <span class="notranslate">RNA</span>-Seq data.</li>
+  <li><a href="http://pmiren.com/">PmiREN</a> is a comprehensive functional plant mi<span class="notranslate">RNA</span> database that includes more than 20,000 annotated mi<span class="notranslate">RNA</span>s diverse plant species.</li>
+</ul>
+
+<h1 id="get-data">Get data</h1>
+
+<p>The first step of our analysis consists of retrieving the mi<span class="notranslate">RNA</span>-Seq datasets from Zenodo and organizing them into collections.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-retrieve-mirna-seq-and-mrna-seq-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Retrieve mi<span class="notranslate">RNA</span>-Seq and m<span class="notranslate">RNA</span>-Seq datasets</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>
+      <p>Import the files from Zenodo:</p>
+
+      <ul>
+        <li>Open the file <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> <strong>upload</strong> menu</li>
+        <li>Click on <strong>Rule-based</strong> tab</li>
+        <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
+        <li>
+          <p>Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd></p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SRR11611349	Control mi<span class="notranslate">RNA</span>	https://zenodo.org/record/4606701/files/SRR11611349_MI<span class="notranslate">RNA</span>SEQ_CTL.fastqsanger.gz	fastqsanger.gz
+SRR11611350	Control mi<span class="notranslate">RNA</span>	https://zenodo.org/record/4606701/files/SRR11611350_MI<span class="notranslate">RNA</span>SEQ_CTL.fastqsanger.gz	fastqsanger.gz
+SRR11611351	Control mi<span class="notranslate">RNA</span>	https://zenodo.org/record/4606701/files/SRR11611351.MI<span class="notranslate">RNA</span>SEQ_CTLfastqsanger.gz	fastqsanger.gz
+SRR11611352	BR treated mi<span class="notranslate">RNA</span>	https://zenodo.org/record/4606701/files/SRR11611352_MI<span class="notranslate">RNA</span>SEQ_BL.fastqsanger.gz	fastqsanger.gz
+SRR11611353	BR treated mi<span class="notranslate">RNA</span>	https://zenodo.org/record/4606701/files/SRR11611353_MI<span class="notranslate">RNA</span>SEQ_BL.fastqsanger.gz	fastqsanger.gz
+SRR11611354	BR treated mi<span class="notranslate">RNA</span>	https://zenodo.org/record/4606701/files/SRR11611354_MI<span class="notranslate">RNA</span>SEQ_BL.fastqsanger.gz	fastqsanger.gz
+SRR1019436	Control m<span class="notranslate">RNA</span>	https://zenodo.org/record/4606701/files/SRR1019436_<span class="notranslate">RNA</span>SEQ_CTL.fastqsanger.gz	fastqsanger.gz
+SRR1019437	Control m<span class="notranslate">RNA</span>	https://zenodo.org/record/4606701/files/SRR1019437_<span class="notranslate">RNA</span>SEQ_CTL.fastqsanger.gz	fastqsanger.gz
+SRR1019438	BR treated m<span class="notranslate">RNA</span>	https://zenodo.org/record/4606701/files/SRR1019438_<span class="notranslate">RNA</span>SEQ_BL.fastqsanger.gz	fastqsanger.gz
+SRR1019439	BR treated m<span class="notranslate">RNA</span>	https://zenodo.org/record/4606701/files/SRR1019439_<span class="notranslate">RNA</span>SEQ_BL.fastqsanger.gz	fastqsanger.gz
+</code></pre></div>          </div>
+        </li>
+        <li>From <strong>Rules</strong> menu select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
+          <ul>
+            <li>
+              <p>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">List Identifier(s)</code>: column <code class="language-plaintext highlighter-rouge">A</code></p>
+
+              <blockquote class="tip">
+                <h3 id="tip-cant-find-list-identifier"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Can’t find <em>List Identifier</em>?</h3>
+                <p>Then you’ve chosen to upload as a ‘dataset’ and not a ‘collection’. Close the upload menu, and restart the process, making sure you check <em>Upload data as</em>: <strong>Collection(s)</strong></p>
+              </blockquote>
+            </li>
+            <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Collection Name</code>: column <code class="language-plaintext highlighter-rouge">B</code></li>
+            <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">URL</code>: column <code class="language-plaintext highlighter-rouge">C</code></li>
+            <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Type</code>: column <code class="language-plaintext highlighter-rouge">D</code></li>
+          </ul>
+        </li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Apply</code> and press <kbd>Upload</kbd></li>
+      </ul>
+    </li>
+  </ol>
+
+  <!--SNIPPET-->
+  <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-adding-a-tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag</h3>  <ul>    <li>Click on the dataset</li>    <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>    <li>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code>  Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</li>    <li>Check that the tag is appearing below the dataset name</li>  </ul></blockquote>
+</blockquote>
+
+<p>Next we will retrieve the remaining datasets.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-retrieve-the-additional-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Retrieve the additional datasets</h3>
+
+  <ol>
+    <li>
+      <p>Import the files from Zenodo:</p>
+
+      <ul>
+        <li>Open the file <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> <strong>upload</strong> menu</li>
+        <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Datasets</code></li>
+        <li>
+          <p>Once again, copy the tabular data, paste it into the textbox and press <kbd>Build</kbd></p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>annotation_AtRTD2.gtf	https://zenodo.org/record/4606701/files/annotation_AtRTD2_19April2016.gtf.gz
+transcriptome.fasta	https://zenodo.org/record/4606701/files/transcriptome_AtRTD2_12April2016.fasta.gz
+star_mi<span class="notranslate">RNA</span>_seq.fasta	https://zenodo.org/record/4606701/files/star_mi<span class="notranslate">RNA</span>_seq.fasta
+mature_mi<span class="notranslate">RNA</span>_AT.fasta	https://zenodo.org/record/4606701/files/mature_mi<span class="notranslate">RNA</span>_AT.fasta
+mi<span class="notranslate">RNA</span>_stem-loop_seq.fasta	https://zenodo.org/record/4606701/files/mi<span class="notranslate">RNA</span>_stem-loop_seq.fasta
+</code></pre></div>          </div>
+        </li>
+        <li>From <strong>Rules</strong> menu select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
+          <ul>
+            <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Name</code>: column <code class="language-plaintext highlighter-rouge">A</code></li>
+            <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">URL</code>: column <code class="language-plaintext highlighter-rouge">B</code></li>
+          </ul>
+        </li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Apply</code> and press <kbd>Upload</kbd></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-dataset-subsampling"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Dataset subsampling</h3>
+
+  <p>As indicated above, for this tutorial the depth of the samples was reduced in order to speed up the time needed to carry out the analysis. This was done as follows:</p>
+
+  <blockquote class="notranslate hands_on">
+    <h3 id="hands_on-hands-on-dataset-subsampling"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Dataset subsampling</h3>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/peterjc/sample_seqs" title="Tested with toolshed.g2.bx.psu.edu/repos/peterjc/sample_seqs"><strong>Sub-sample sequences files </strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/peterjc/sample_seqs</span></span>  with the following parameters:
+        <ul>
+          <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Multiple datasets”</em>: Each of the fastq files</li>
+          <li><em>“Subsampling approach”</em>: <code class="language-plaintext highlighter-rouge">Take every N-th sequence (or pair e.g. every fifth sequence)</code></li>
+          <li><em>“N”</em>: <code class="language-plaintext highlighter-rouge">100</code></li>
+        </ul>
+      </li>
+    </ol>
+  </blockquote>
+
+  <p>In this way, we will only take 1% of <span class="notranslate">reads</span> at a random sampling rate.</p>
+</blockquote>
+
+<h1 id="mirna-data-analysis">mi<span class="notranslate">RNA</span> data analysis</h1>
+
+<p>Once we have imported the data, we can begin to study how brassinosteroid exposure alters gene <span class="notranslate">expression</span> patterns.</p>
+
+<h2 id="quality-assessment-of-mirna-reads">Quality assessment of mi<span class="notranslate">RNA</span> <span class="notranslate">reads</span></h2>
+
+<p>Due to technical limitations, sequencing is considered an error-prone process. In Illumina sequencing platforms, substitution type miscalls are the dominant source of errors, which can lead to inconsistent results. Another factor that can interfere with our analyses is the presence of adapter contaminants, which can result in an increased number of unaligned <span class="notranslate">reads</span>, since the adapter sequences are synthetic and do not occur in the genomic sequence.</p>
+
+<p>Sequence quality control is therefore an essential first step in your analysis. We will use two popular tools for evaluating the quality of our raw <span class="notranslate">reads</span>: <strong>FastQC</strong> and <strong>MultiQC</strong>.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-comments"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
+  <p>In order to visualize the data from both collections together in the <strong>MultiQC</strong> tool, it will be necessary to combine the results generated by <strong>FastQC</strong>.
+For more information on the topic of quality control, please see our training materials <a href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">here</a>.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-initial-quality-check"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Initial quality check</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Dataset collection”</em>: <code class="language-plaintext highlighter-rouge">Control mi<span class="notranslate">RNA</span></code></li>
+      </ul>
+    </li>
+    <li>Rename the outputs as <code class="language-plaintext highlighter-rouge">FastQC unprocessed control mi<span class="notranslate">RNA</span>: RawData</code> and <code class="language-plaintext highlighter-rouge">FastQC unprocessed control mi<span class="notranslate">RNA</span>: Webpage</code></li>
+    <li>Repeat the previous steps with the <code class="language-plaintext highlighter-rouge">BR treated mi<span class="notranslate">RNA</span></code> collection.</li>
+    <li><span class="tool" data-tool="__MERGE_COLLECTION__" title="Tested with __MERGE_COLLECTION__"><strong>Merge Collections</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <strong>MERGE_COLLECTION</strong></span></span>  with the following parameters:
+      <ul>
+        <li>In <em>“Input collections”</em>:
+          <ul>
+            <li><em>“1.Input Collections”</em>: <code class="language-plaintext highlighter-rouge">FastQC unprocessed control mi<span class="notranslate">RNA</span>: RawData</code></li>
+            <li><em>“2.Input Collections”</em>: <code class="language-plaintext highlighter-rouge">FastQC unprocessed BR treated mRiNA: RawData</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li>In <em>“Results”</em>:
+          <ul>
+            <li><em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">FastQC</code></li>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Dataset collection”</em>: select the output generated in the previous step.</li>
+          </ul>
+        </li>
+        <li>In <em>“Report title”</em>: <code class="language-plaintext highlighter-rouge">mi<span class="notranslate">RNA</span> initial quality check</code></li>
+      </ul>
+    </li>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon and inspect the generated HTML file</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>Based on the information provided by <strong>MultiQC</strong>, is it necessary to trimming/filtering the <span class="notranslate">reads</span>?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>The report generated by <strong>MultiQC</strong> indicates that three quality parameters show values outside the recommended limits: per sequence G/C content, overrepresented sequences and adapter content.</p>
+
+    <figure id="figure-4"><img src="../../images/miRNA_GC_content.png" alt="fig4:GC content" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Per sequence GC content of the mi<span class="notranslate">RNA</span> samples.</figcaption></figure>
+    <figure id="figure-5"><img src="../../images/miRNA_overepresented.png" alt="fig5:Overrepresented sequences" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Overrepresented sequences in mi<span class="notranslate">RNA</span> samples.</figcaption></figure>
+    <figure id="figure-6"><img src="../../images/miRNA_adaptors.png" alt="fig6:Adaptor content" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Adaptor content of mi<span class="notranslate">RNA</span> samples.</figcaption></figure>
+
+    <p>Particularly remarkable is the content of adapters, which are up to 80% of the <span class="notranslate">reads</span> in some samples. Given the abundance of adapters, one would expect that if we eliminate this source of contamination, the rest of the parameters would show a noticeable improvement.</p>
+
+  </blockquote>
+</blockquote>
+
+<p>To remove the adapters contamination, we will employ the <strong>Trim Galore</strong> tool, a wrapper script around <a href="https://journal.embnet.org/index.php/embnetjournal/article/view/200"><strong>Cutadapt</strong></a> and <strong>FastQC</strong> which automates quality and adapter trimming.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-trimming-of-adapter-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Trimming of adapter sequences</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.3.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.3.1"><strong>Trim Galore!</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.3.1</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Is this library paired- or single-end?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
+          <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“<span class="notranslate">Reads</span> in FASTQ format”</em>: <code class="language-plaintext highlighter-rouge">Control mi<span class="notranslate">RNA</span></code></li>
+            <li><em>“Adapter sequence to be trimmed”</em>: <code class="language-plaintext highlighter-rouge">Illumina small <span class="notranslate">RNA</span> adapters</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Rename the output collection as <code class="language-plaintext highlighter-rouge">Control mi<span class="notranslate">RNA</span> trimmed</code></li>
+    <li>Repeat the previous steps with the <code class="language-plaintext highlighter-rouge">BR treated mi<span class="notranslate">RNA</span></code> collection.</li>
+  </ol>
+
+</blockquote>
+
+<p>Next, we will reassess the quality of the sequences to check if the adapters have been removed.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-post-processing-quality-check"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Post-processing quality check</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Dataset collection”</em>: <code class="language-plaintext highlighter-rouge">Control mi<span class="notranslate">RNA</span> trimmed</code></li>
+      </ul>
+    </li>
+    <li>Rename the outputs as <code class="language-plaintext highlighter-rouge">FastQC processed control mi<span class="notranslate">RNA</span>: RawData</code> and <code class="language-plaintext highlighter-rouge">FastQC processed control mi<span class="notranslate">RNA</span>: Webpage</code></li>
+    <li>Repeat the previous steps with the <code class="language-plaintext highlighter-rouge">BR treated mi<span class="notranslate">RNA</span> trimmed</code> collection.</li>
+    <li><span class="tool" data-tool="__MERGE_COLLECTION__" title="Tested with __MERGE_COLLECTION__"><strong>Merge Collections</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <strong>MERGE_COLLECTION</strong></span></span>  with the following parameters:
+      <ul>
+        <li>In <em>“Input collections”</em>:
+          <ul>
+            <li><em>“1.Input Collections”</em>: <code class="language-plaintext highlighter-rouge">FastQC processed control mi<span class="notranslate">RNA</span>: RawData</code></li>
+            <li><em>“2.Input Collections”</em>: <code class="language-plaintext highlighter-rouge">FastQC processed BR treated mi<span class="notranslate">RNA</span>: RawData</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li>In <em>“Results”</em>:
+          <ul>
+            <li><em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">FastQC</code></li>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Dataset collection”</em>: select the output generated in the previous step.</li>
+          </ul>
+        </li>
+        <li>In <em>“Report title”</em>: <code class="language-plaintext highlighter-rouge">mi<span class="notranslate">RNA</span> trimmed quality check</code></li>
+      </ul>
+    </li>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon and inspect the generated HTML file</li>
+  </ol>
+
+</blockquote>
+
+<p>The evaluation of the report generated by <strong>MultiQC</strong> after having processed the samples by <strong>Trim Galore</strong> indicates that the G/C content has been successfully corrected, and that the adapter contamination has been eliminated. However, the samples still show a high degree of over-represented sequences (Figure 7).</p>
+
+<figure id="figure-7"><img src="../../images/miRNA_overepresented_processed.png" alt="fig7:Overexpressed sequences" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Report of overexpressed sequences in the mi<span class="notranslate">RNA</span> <span class="notranslate">reads</span></figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>What do you think could be the cause of the high number of over-represented sequences?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>Two of the factors that may determine the abundance of overrepresented sequences are the existence of highly expressed mi<span class="notranslate">RNA</span>s (Seco-Cervera et al. 2018), the existence of highly conserved sequence motifs within the mi<span class="notranslate">RNA</span> (<a class="citation" href="#Glazov2008">Glazov <i>et al.</i> 2008</a>), and contamination with foreign sequences.</p>
+
+  </blockquote>
+</blockquote>
+
+<h2 id="mirna-quantification-mirdeep2">mi<span class="notranslate">RNA</span> quantification: <strong>MiRDeep2</strong></h2>
+
+<p>Quantification of mi<span class="notranslate">RNA</span>s requires to use two different tools:</p>
+<ul>
+  <li>The <strong>MiRDeep2 Mapper</strong> tool for preprocessing the <span class="notranslate">reads</span>.</li>
+  <li>The <strong>MiRDeep2 Quantifier</strong>  tool for <span class="notranslate">mapping</span> the deep sequencing <span class="notranslate">reads</span> to predefined mi<span class="notranslate">RNA</span> precursors and determining the <span class="notranslate">expression</span> of the corresponding mi<span class="notranslate">RNA</span>s. It is carried out in two steps: firstly, the predefined mature mi<span class="notranslate">RNA</span> sequences are mapped to the predefined precursors (optionally, predefined star sequences can be mapped to the precursors too). And second, the deep sequencing <span class="notranslate">reads</span> are mapped to the precursors.</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-quantification-of-mirnas"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quantification of mi<span class="notranslate">RNA</span>s</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/mirdeep2_mapper/rbc_mirdeep2_mapper/2.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/rnateam/mirdeep2_mapper/rbc_mirdeep2_mapper/2.0.0"><strong>MiRDeep2 Mapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">rna</span>team/mirdeep2_mapper/rbc_mirdeep2_mapper/2.0.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Deep sequencing <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Control mi<span class="notranslate">RNA</span> trimmed</code></li>
+        <li><em>“Remove <span class="notranslate">reads</span> with non-standard nucleotides”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Clip 3’ Adapter Sequence”</em>: <code class="language-plaintext highlighter-rouge">Don't Clip</code></li>
+        <li><em>“Collapse <span class="notranslate">reads</span> and/or Map”</em>: <code class="language-plaintext highlighter-rouge">Collapse</code></li>
+      </ul>
+    </li>
+    <li>Rename the output as <code class="language-plaintext highlighter-rouge">Collapsed control mi<span class="notranslate">RNA</span></code></li>
+    <li>
+      <p>Repeat the previous stages by providing <code class="language-plaintext highlighter-rouge">BR treated mi<span class="notranslate">RNA</span> trimmed</code>as input, and rename it as <code class="language-plaintext highlighter-rouge">Collapsed BR treated mi<span class="notranslate">RNA</span></code>.</p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/mirdeep2_quantifier/rbc_mirdeep2_quantifier/2.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/rnateam/mirdeep2_quantifier/rbc_mirdeep2_quantifier/2.0.0"><strong>MiRDeep2 Quantifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">rna</span>team/mirdeep2_quantifier/rbc_mirdeep2_quantifier/2.0.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collapsed deep sequencing <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Collapsed control mi<span class="notranslate">RNA</span></code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Precursor sequences”</em>: <code class="language-plaintext highlighter-rouge">mi<span class="notranslate">RNA</span>_stem-loop_seq.fasta</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Mature mi<span class="notranslate">RNA</span> sequences”</em>: <code class="language-plaintext highlighter-rouge">mature_mi<span class="notranslate">RNA</span>_AT.fasta</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Star sequences”</em>: <code class="language-plaintext highlighter-rouge">star_mi<span class="notranslate">RNA</span>_seq.fasta</code></li>
+      </ul>
+    </li>
+    <li>Rename the outputs as <code class="language-plaintext highlighter-rouge">MiRDeep2 control mi<span class="notranslate">RNA</span></code> and <code class="language-plaintext highlighter-rouge">MiRDeep2 control mi<span class="notranslate">RNA</span> (html)</code>.</li>
+    <li>Repeat the fourth step by providing <code class="language-plaintext highlighter-rouge">Collapsed BR treated mi<span class="notranslate">RNA</span></code> as input, and rename the outputs as <code class="language-plaintext highlighter-rouge">MiRDeep2 BR treated mi<span class="notranslate">RNA</span></code> and <code class="language-plaintext highlighter-rouge">MiRDeep2 BR treated mi<span class="notranslate">RNA</span> (html)</code></li>
+  </ol>
+
+</blockquote>
+
+<p>To use the outputs generated by <strong>MiRDeep2 Quantifier</strong> in the differential <span class="notranslate">expression</span> analysis, it is necessary to modify the datasets.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-edition-of-mirdeep2-quantifier-outputs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Edition of MiRDeep2 Quantifier outputs</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/cut_columns" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/cut_columns"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/cut_columns</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c2</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">MiRDeep2 control mi<span class="notranslate">RNA</span></code></li>
+      </ul>
+    </li>
+    <li>Rename the output as <code class="language-plaintext highlighter-rouge">control mi<span class="notranslate">RNA</span> counts</code></li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/cut_columns" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/cut_columns"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/cut_columns</span></span>   with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c2</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">MiRDeep2 BR treated mi<span class="notranslate">RNA</span></code></li>
+      </ul>
+    </li>
+    <li>Rename the output as <code class="language-plaintext highlighter-rouge">BR treated mi<span class="notranslate">RNA</span> counts</code></li>
+  </ol>
+
+</blockquote>
+
+<h2 id="differential-expression-analysis-of-mirnas-deseq2">Differential <span class="notranslate">expression</span> analysis of mi<span class="notranslate">RNA</span>s: <strong>DESeq2</strong></h2>
+
+<p><strong>DESeq2</strong> is a tool for differential gene <span class="notranslate">expression</span> analysis based on a negative binomial generalized linear model. <strong>DESeq2</strong> inte<span class="notranslate">rna</span>lly corrects the differences in library size, due to which no preliminary normalization of input datasets is required.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-comments-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
+  <p>It is desirable to use at least three replicates of each experimental condition to ensure sufficient statistical power.</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-differential-expression-analysis-using-deseq2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Differential <span class="notranslate">expression</span> analysis using <strong>DESeq2</strong></h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1"><strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><em>“How”</em>: <code class="language-plaintext highlighter-rouge">Select datasets per level</code>
+          <ul>
+            <li>In <em>“Factor”</em>:
+              <ul>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Factor”</em>
+                  <ul>
+                    <li><em>“Specify a factor name, e.g. effects_drug_x or cancer_markers”</em>: <code class="language-plaintext highlighter-rouge">effects_brassinolide</code></li>
+                    <li>In <em>“Factor level”</em>:
+                      <ul>
+                        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Factor level”</em>
+                          <ul>
+                            <li><em>“Specify a factor level”</em>: <code class="language-plaintext highlighter-rouge">brassinolide</code></li>
+                            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Counts file(s)”</em>: <code class="language-plaintext highlighter-rouge">BR treated mi<span class="notranslate">RNA</span> counts</code></li>
+                          </ul>
+                        </li>
+                        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Factor level”</em>
+                          <ul>
+                            <li><em>“Specify a factor level”</em>: <code class="language-plaintext highlighter-rouge">control</code></li>
+                            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Counts file(s)”</em>: <code class="language-plaintext highlighter-rouge">control mi<span class="notranslate">RNA</span> counts</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Files have header?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Choice of Input data”</em>: <code class="language-plaintext highlighter-rouge">Count data (e.g. from HTSeq-count, featureCounts or StringTie)</code></li>
+      </ul>
+    </li>
+    <li>Rename the outputs as <code class="language-plaintext highlighter-rouge">DESeq2 results mi<span class="notranslate">RNA</span></code> and <code class="language-plaintext highlighter-rouge">DESeq2 plots mi<span class="notranslate">RNA</span></code></li>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon and inspect the <code class="language-plaintext highlighter-rouge">DESeq2 plots mi<span class="notranslate">RNA</span></code> file</li>
+  </ol>
+</blockquote>
+
+<p>DESeq2 generated 2 outputs: a table with the normalized counts and a graphical summary of the results. To evaluate the similarity of our samples, we are going to inspect the Principal Component Analysis (PCA) plot. PCA allows evaluating the dominant directions of the highest variability in the data. Thus, the samples subjected to the same conditions should cluster together.</p>
+<figure id="figure-8"><img src="../../images/miRNA_PCA.png" alt="fig8:PCA miRNA" /><figcaption><span class="figcaption-prefix">Figure 8:</span>  PCA plot of <span class="notranslate">expression</span> data from control and BR treated mi<span class="notranslate">RNA</span> samples.</figcaption></figure>
+
+<p>As can be seen, in this case, the samples are much less similar to each other. Likewise, the main axes account for only 47% and 19% of the total variation. This suggests that the effect of brassinosteroids on mi<span class="notranslate">RNA</span> regulation is limited (Figure 8).</p>
+
+<h2 id="filter-significantly-differentially-expressed-mirnas">Filter significantly differentially expressed mi<span class="notranslate">RNA</span>s</h2>
+
+<p>Next, we will extract those genes whose <span class="notranslate">expression</span> is statistically significantly differentially expressed (DE) due to BR treatment by selecting those whose adjusted p-value is less than or 0.05. A cut-off value of 0.05 indicates that the probability of a false positive result is less than 5%.</p>
+
+<blockquote class="details">
+  <h3 id="details-p-value-vs-p-adj"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> p-value vs p-adj</h3>
+
+  <p>The p-value is a measure of the probability that an observed difference could have occurred just by random chance. A small p-value indicates that there is a small chance of getting this data if no real difference existed. A p-value threshold of 0.05 indicates that there is a 5% chance that the result is a false positive. The p-adj (also known as q-value) is an adjusted p-value which taking in to account the false discovery rate (FDR). Applying a FDR becomes necessary when we’re measuring thousands of variables from a small sample set.</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-filter-differentially-expressed-mirnas"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter differentially expressed mi<span class="notranslate">RNA</span>s</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  data on any column using simple <span class="notranslate">expression</span>s (<span class="notranslate">Galaxy</span> Version 1.1.1) with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">DESeq2 results mi<span class="notranslate">RNA</span></code></li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c7&lt;0.05</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>How many mi<span class="notranslate">RNA</span>s show statistically significant differential <span class="notranslate">expression</span>?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>Unfortunately, we have not detected any differentially expressed mi<span class="notranslate">RNA</span>s. In this case, this is caused by the fact that the subsampled datasets don’t have sufficient read depth to test for differential <span class="notranslate">expression</span>.</p>
+  </blockquote>
+
+</blockquote>
+
+<p>To get any sensible results, it is worth analyzing the full dataset. You can analyze the full datasets following the above tutorial. Otherwise, you can import the DESeq2 analysis results that we generated from full dataset into your history.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-retrieve-the-deseq2-analysis-results-on-full-mirna-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Retrieve the DESeq2 analysis results on full mi<span class="notranslate">RNA</span> dataset</h3>
+
+  <ol>
+    <li>
+      <p>Import the files from Zenodo:</p>
+
+      <ul>
+        <li>Open the file <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> <strong>upload</strong> menu</li>
+        <li>Click of the <strong>Paste/Fetch</strong> button</li>
+        <li>
+          <p>Copy the Zenodo links and press <kbd>Start</kbd></p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4663389/files/mi<span class="notranslate">RNA</span>_DESeq2_results_complete_dataset.tabular
+</code></pre></div>          </div>
+        </li>
+      </ul>
+    </li>
+    <li>Rename each dataset according to the sample id (e.g. <code class="language-plaintext highlighter-rouge">mi<span class="notranslate">RNA</span>_DESeq2_results_complete_dataset</code>)</li>
+    <li>Add all mi<span class="notranslate">RNA</span> data analysis related tags: #mi<span class="notranslate">RNA</span> #BR #control</li>
+  </ol>
+</blockquote>
+
+<p>Repeat the filtering step on the imported DESeq2 result.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-filter-and-sort-differentially-expressed-mirnas-from-the-full-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter and sort differentially expressed mi<span class="notranslate">RNA</span>s from the full dataset</h3>
+
+  <ol class="comment">
+    <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  data on any column using simple <span class="notranslate">expression</span>s (<span class="notranslate">Galaxy</span> Version 1.1.1) with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">mi<span class="notranslate">RNA</span>_DESeq2_results_complete_dataset</code></li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c7&lt;0.05</code></li>
+      </ul>
+    </li>
+    <li>Rename the output as <code class="language-plaintext highlighter-rouge">Differentially expressed mi<span class="notranslate">RNA</span>s</code></li>
+    <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  data on any column using simple <span class="notranslate">expression</span>s (<span class="notranslate">Galaxy</span> Version 1.1.1) with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Differentially expressed mi<span class="notranslate">RNA</span>s</code></li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c3&gt;0</code></li>
+      </ul>
+    </li>
+    <li>Rename the output as <code class="language-plaintext highlighter-rouge">Upregulated mi<span class="notranslate">RNA</span>s</code></li>
+    <li><span class="tool" data-tool="sort1" title="Tested with sort1"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: sort1</span></span>  data in ascending or descending order (<span class="notranslate">Galaxy</span> Version 1.1.0) with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Dataset”</em>: <code class="language-plaintext highlighter-rouge">Upregulated mi<span class="notranslate">RNA</span>s</code></li>
+        <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 3</code></li>
+        <li><em>“everything in”</em>: <code class="language-plaintext highlighter-rouge">Descending order</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many mi<span class="notranslate">RNA</span>s are differentially expressed?</li>
+    <li>How many mi<span class="notranslate">RNA</span>s show statistically significant upregulation and what is the most upregulated mi<span class="notranslate">RNA</span>?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>Out of 442 mi<span class="notranslate">RNA</span>s, 39 show significant differential <span class="notranslate">expression</span>.</li>
+      <li>There are 16 upregulated mi<span class="notranslate">RNA</span>s and <code class="language-plaintext highlighter-rouge">Ath-miR156g</code> is the most upregulated one.</li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<h1 id="mrna-data-analysis">m<span class="notranslate">RNA</span> data analysis</h1>
+
+<p>Once the differential <span class="notranslate">expression</span> analysis of mi<span class="notranslate">RNA</span>s has been carried out, the next stage is to analyze how m<span class="notranslate">RNA</span> <span class="notranslate">expression</span> is altered in response to brassinosteroids.</p>
+
+<h2 id="quality-assessment-of-mrna-reads">Quality assessment of m<span class="notranslate">RNA</span> <span class="notranslate">reads</span></h2>
+
+<p>As in the previous section, we shall begin by assessing the quality of our sequences.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-initial-quality-check-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Initial quality check</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Dataset collection”</em>: <code class="language-plaintext highlighter-rouge">Control m<span class="notranslate">RNA</span></code></li>
+      </ul>
+    </li>
+    <li>Rename the outputs as <code class="language-plaintext highlighter-rouge">FastQC unprocessed control m<span class="notranslate">RNA</span>: RawData</code> and <code class="language-plaintext highlighter-rouge">FastQC unprocessed control m<span class="notranslate">RNA</span>: Webpage</code></li>
+    <li>Repeat the previous step with the <code class="language-plaintext highlighter-rouge">BR treated m<span class="notranslate">RNA</span></code> collection.</li>
+    <li><span class="tool" data-tool="__MERGE_COLLECTION__" title="Tested with __MERGE_COLLECTION__"><strong>Merge Collections</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <strong>MERGE_COLLECTION</strong></span></span>  with the following parameters:
+      <ul>
+        <li>In <em>“Input collections”</em>:
+          <ul>
+            <li><em>“1.Input Collections”</em>: <code class="language-plaintext highlighter-rouge">FastQC unprocessed control m<span class="notranslate">RNA</span>: RawData</code></li>
+            <li><em>“2.Input Collections”</em>: <code class="language-plaintext highlighter-rouge">FastQC unprocessed BR treated m<span class="notranslate">RNA</span>: RawData</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li>In <em>“Results”</em>:
+          <ul>
+            <li><em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">FastQC</code></li>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Dataset collection”</em>: select the output generated in the previous step.</li>
+          </ul>
+        </li>
+        <li><em>“Report title”</em>: <code class="language-plaintext highlighter-rouge">m<span class="notranslate">RNA</span> initial quality check</code></li>
+      </ul>
+    </li>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon and inspect the generated HTML file</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>Are there any stats that indicate the need to process the samples in order to improve their quality?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>All the stats are within acceptable limits. However, the adapter content shows the presence of Illumina universal adapters in our <span class="notranslate">reads</span>, which can be removed to avoid possible interferences at later stages (Figure 10).</p>
+
+    <figure id="figure-9"><img src="../../images/miRNA_adapter_01.png" alt="fig10:Adapter content of mRNA samples" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Quality assessment of m<span class="notranslate">RNA</span> samples</figcaption></figure>
+
+  </blockquote>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-comments-2"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
+  <p>Although our samples have adapters, we are not going to trim them in this case. We will explain the reason in the next section.</p>
+</blockquote>
+
+<h2 id="quantification-of-gene-expression-salmon">Quantification of gene <span class="notranslate">expression</span>: <strong>Salmon</strong></h2>
+
+<p>After performing the quality assessment of the <span class="notranslate">reads</span>, we can move on to quantifying the gene <span class="notranslate">expression</span>. The aim of this step is to identify which transcript each read comes from and the total number of <span class="notranslate">reads</span> associated with each transcript. In this tutorial, we will use the Salmon tool (<a class="citation" href="#Patro2017">Patro <i>et al.</i> 2017</a>)  for the quantification of m<span class="notranslate">RNA</span> transcripts.</p>
+
+<p><img src="../../images/salmon_logo.png" alt="fig11:Salmon logo" /></p>
+
+<p>One of the characteristics of <strong>Salmon</strong> is that it doesn’t require performing a base-to-base alignment, which is the time-consuming step of tools such as <strong>STAR</strong> and <strong>HISAT2</strong>. Salmon relies on the quasi-<span class="notranslate">mapping</span> concept, a new <span class="notranslate">mapping</span> technique that allows the rapid and accurate <span class="notranslate">mapping</span> of <span class="notranslate">RNA</span>-Seq <span class="notranslate">reads</span> to a target transcriptome. Rather than a standard alignment, quasi-<span class="notranslate">mapping</span> seeks to find the best <span class="notranslate">mapping</span>s for each read, and does so by finding minimal collections of dynamically sized, right-maximal, matching contexts between target and query positions (<a class="citation" href="#Srivastava2016">Srivastava <i>et al.</i> 2016</a>)</p>
+
+<p>The quasi-<span class="notranslate">mapping</span> approach by <strong>Salmon</strong> requires a reference index to determine the position and orientation information for accurate <span class="notranslate">mapping</span> prior to quantification. It allows providing the transcriptome in a format that optimizes its use in transcript identification and quantification.</p>
+
+<p>After determining the best <span class="notranslate">mapping</span> for each read, <strong>Salmon</strong>  generates the final transcript abundance estimation after modeling sample-specific parameters and biases. <span class="notranslate">Reads</span> that map equally well to more than one transcript will have the count divided between all of the <span class="notranslate">mapping</span>s, thus avoiding the loss of information on the different gene isoforms.</p>
+
+<blockquote class="details">
+  <h3 id="details-quasi-mapping-algorithm"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Quasi-<span class="notranslate">mapping</span> algorithm</h3>
+  <p>The quasi-<span class="notranslate">mapping</span> algorithm makes use of two main data structures, the generalized suffix array (SA) of the transcriptome T, and a hash table (h) that maps each k-mer in T to its SA interval (by default k = 31). During the quasi-<span class="notranslate">mapping</span> procedure, a read is scanned from left to right until a k-mer (k<sub>i</sub>, starting at position i on the read) is encountered that appears in h. The k<sub>i</sub> is looked up in the hash table and the SA intervals are retrieved, giving all suffixes containing the k-mer k<sub>i</sub>. Then, the Maximal Mappable Prefix (MMP<sub>i</sub>) is computed by finding the longest substring of the read that matches the reference suffixes. Owing to sequencing errors, the MMPs may not span the complete read. In this case, the next informative position (NIP) is determined based on the longest common prefix of the SA intervals of MMP<sub>i</sub>. Suffix array search continues from k-bases before NIP until the final NIP is less than k-bases before the read end. Finally, for each read, the algorithm reports the transcripts it mapped to, location and strand information (<a class="citation" href="#Srivastava2016">Srivastava <i>et al.</i> 2016</a>).</p>
+  <figure id="figure-10"><img src="../../images/salmon_quasialignment.png" alt="fig12:Quasi-mapping algorithm" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Illustration of the quasi-<span class="notranslate">mapping</span> of a read using k=3. Hash table lookup of k<sub>i</sub> returns the suffix array interval [b, e). The base 'G' at position 6 in the read is a result of sequencing error. Hence, the MMP<sub>i</sub> is 'ATTGA' and the SA interval of MMP<sub>i</sub> is [b', e'). The next k-mer starts at k-bases prior to the NIP which is base after the longest common prefix of the interval [b',e'). In the end, the read in the above example most likely map to the suffix array at [e'-1, e').</figcaption></figure>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-quantify-gene-expression-with-salmon"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quantify gene <span class="notranslate">expression</span> with <strong>Salmon</strong></h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.14.1.2+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.14.1.2+galaxy1"><strong>Salmon quant</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.14.1.2+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Select salmon quantification mode:”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">Reads</span></code>
+          <ul>
+            <li><em>“Select a reference transcriptome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use one from the history</code>
+              <ul>
+                <li>In <em>“Salmon index”</em>:
+                  <ul>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Transcripts fasta file”</em>: <code class="language-plaintext highlighter-rouge">transcriptome_AtRTD2.fasta.gz</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>In <em>“Data input”</em>:
+              <ul>
+                <li><em>“Is this library mate-paired?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
+                  <ul>
+                    <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/FASTA file”</em>: <code class="language-plaintext highlighter-rouge">Control m<span class="notranslate">RNA</span></code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><em>“Validate <span class="notranslate">mapping</span>s”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File containing a <span class="notranslate">mapping</span> of transcripts to genes”</em>: <code class="language-plaintext highlighter-rouge">annotation_AtRTD2.gtf.gz</code></li>
+      </ul>
+    </li>
+    <li>Rename the outputs as <code class="language-plaintext highlighter-rouge">Salmon control m<span class="notranslate">RNA</span> (Quantification)</code> and <code class="language-plaintext highlighter-rouge">Salmon control m<span class="notranslate">RNA</span> (Gene Quantification)</code></li>
+    <li>Repeat the previous procedure by using the <code class="language-plaintext highlighter-rouge">BR treated m<span class="notranslate">RNA</span></code> dataset</li>
+  </ol>
+
+  <blockquote class="comment">
+    <h3 id="comment-quasi-mapping-sequence-requirements"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Quasi-<span class="notranslate">mapping</span> sequence requirements</h3>
+    <p>Trimming the <span class="notranslate">reads</span> is not required  when using this method, since if there are k-mers in the <span class="notranslate">reads</span> that are not in the hash table, they are not counted. Quantification of the <span class="notranslate">reads</span> is only as good as the quality of the reference transcriptome.</p>
+  </blockquote>
+
+</blockquote>
+
+<p><strong>Salmon</strong> generates two outputs for each input sample:</p>
+
+<ul>
+  <li>Quantification: summarizes the quantifications by transcript</li>
+  <li>Gene quantification: summarizes the quantification by gene</li>
+</ul>
+
+<p>Each output consists of a tabular dataset with five columns:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>The name of the target transcript provided in the input transcriptome.</td>
+    </tr>
+    <tr>
+      <td>Length</td>
+      <td>The length of the target transcript.</td>
+    </tr>
+    <tr>
+      <td>EffectiveLength</td>
+      <td>The computed effective length.</td>
+    </tr>
+    <tr>
+      <td>TPM</td>
+      <td>The relative abundance of this transcript in units of Transcripts Per Million.</td>
+    </tr>
+    <tr>
+      <td>Num<span class="notranslate">Reads</span></td>
+      <td>The number of <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to each transcript that was quantified.</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="question">
+  <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>Could you explain why we did not trim the <span class="notranslate">reads</span> before?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>The reason is that, since the k-mers which contain the adaptor sequences are not present in the transcriptome (from which the hash table is generated), they are omitted.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="differential-expression-analysis-of-mrnas-deseq2">Differential <span class="notranslate">expression</span> analysis of m<span class="notranslate">RNA</span>s: <strong>DESeq2</strong></h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-dea-using-deseq2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: DEA using <strong>DEseq2</strong></h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1"><strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><em>“How”</em>: <code class="language-plaintext highlighter-rouge">Select datasets per level</code>
+          <ul>
+            <li>In <em>“Factor”</em>:
+              <ul>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Factor”</em>
+                  <ul>
+                    <li><em>“Specify a factor name, e.g. effects_drug_x or cancer_markers”</em>: <code class="language-plaintext highlighter-rouge">effects_brassinolide</code></li>
+                    <li>In <em>“Factor level”</em>:
+                      <ul>
+                        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Factor level”</em>
+                          <ul>
+                            <li><em>“Specify a factor level”</em>: <code class="language-plaintext highlighter-rouge">brassinolide</code></li>
+                            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Counts file(s)”</em>: <code class="language-plaintext highlighter-rouge">Salmon BR treated m<span class="notranslate">RNA</span> (Gene Quantification)</code></li>
+                          </ul>
+                        </li>
+                        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Factor level”</em>
+                          <ul>
+                            <li><em>“Specify a factor level”</em>: <code class="language-plaintext highlighter-rouge">control</code></li>
+                            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Counts file(s)”</em>: <code class="language-plaintext highlighter-rouge">Salmon control m<span class="notranslate">RNA</span> (Gene Quantification)</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Choice of Input data”</em>: <code class="language-plaintext highlighter-rouge">TPM values (e.g. from kallisto, sailfish or salmon)</code>
+          <ul>
+            <li><em>“Program used to generate TPMs”</em>: <code class="language-plaintext highlighter-rouge">Salmon</code></li>
+            <li><em>“Gene <span class="notranslate">mapping</span> format”</em>: <code class="language-plaintext highlighter-rouge">GTF/GFF3</code>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF/GFF3 annotation file”</em>: <code class="language-plaintext highlighter-rouge">annotation_AtRTD2.gtf</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Rename the outputs as <code class="language-plaintext highlighter-rouge">DESeq2 results m<span class="notranslate">RNA</span></code> and <code class="language-plaintext highlighter-rouge">DESeq2 plots m<span class="notranslate">RNA</span></code></li>
+  </ol>
+</blockquote>
+
+<figure id="figure-11"><img src="../../images/mRNA_PCA.png" alt="fig13:PCA plot of mRNA samples" /><figcaption><span class="figcaption-prefix">Figure 11:</span>  PCA plot of differential <span class="notranslate">expression</span> data from control and BR treated samples.</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-questions-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>What conclusions about the similarity of the samples can be derived from the PCA plot?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>From the information provided by the plot, it is possible to state that there is a high similarity between the samples belonging to the same experimental conditions, since the first dimension (x-axis) allows to explain 81% of the variability, and the samples are located at opposite ends of the x-axis.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="filter-significantly-differentially-expressed-mrnas">Filter significantly differentially expressed m<span class="notranslate">RNA</span>s</h2>
+
+<p>To conclude the analysis of the differential <span class="notranslate">expression</span> of m<span class="notranslate">RNA</span>s, we will extract those transcripts that show a significant induction of <span class="notranslate">expression</span> in response to brassinosteroids. Before continuing with further analysis, similar to mi<span class="notranslate">RNA</span> data analysis, import the DESeq2 results generated from full m<span class="notranslate">RNA</span> datasets.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-retrieve-the-deseq2-analysis-results-on-full-mrna-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Retrieve the DESeq2 analysis results on full m<span class="notranslate">RNA</span> dataset</h3>
+
+  <ol>
+    <li>
+      <p>Import the files from Zenodo:</p>
+
+      <ul>
+        <li>Open the file <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> <strong>upload</strong> menu</li>
+        <li>Click of the <strong>Paste/Fetch</strong> button</li>
+        <li>
+          <p>Copy the Zenodo links and press <kbd>Start</kbd></p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4663389/files/m<span class="notranslate">RNA</span>_DESeq2_results_complete_dataset.tabular
+</code></pre></div>          </div>
+        </li>
+      </ul>
+    </li>
+    <li>Rename each dataset according to the sample id (e.g. <code class="language-plaintext highlighter-rouge">m<span class="notranslate">RNA</span>_DESeq2_results_complete_dataset</code>)</li>
+    <li>Add all mi<span class="notranslate">RNA</span> data analysis related tags: #m<span class="notranslate">RNA</span> #BR #control</li>
+  </ol>
+</blockquote>
+
+<p>Now we continue with the DE genes analysis.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-extract-significantly-de-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract significantly DE genes</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  data on any column using simple <span class="notranslate">expression</span>s (<span class="notranslate">Galaxy</span> Version 1.1.1) with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">m<span class="notranslate">RNA</span>_DESeq2_results_complete_dataset</code></li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c7&lt;0.05</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the output as <code class="language-plaintext highlighter-rouge">Differentially expressed m<span class="notranslate">RNA</span>s</code></p>
+    </li>
+    <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span> data on any column using simple <span class="notranslate">expression</span>s (<span class="notranslate">Galaxy</span> Version 1.1.1) with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Differentially expressed mi<span class="notranslate">RNA</span>s</code></li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c3&gt;1</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename it as <code class="language-plaintext highlighter-rouge">Upregulated m<span class="notranslate">RNA</span>s</code></p>
+    </li>
+    <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  data on any column using simple <span class="notranslate">expression</span>s (<span class="notranslate">Galaxy</span> Version 1.1.1) with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Differentially expressed mi<span class="notranslate">RNA</span>s</code></li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c3&lt;-1</code></li>
+      </ul>
+    </li>
+    <li>Rename it as <code class="language-plaintext highlighter-rouge">Downregulated m<span class="notranslate">RNA</span>s</code></li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-7"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many genes show statistically significant differential <span class="notranslate">expression</span>?</li>
+    <li>How many of them are upregulated? And downregulated?</li>
+    <li>What is the most significantly DE downregulated gene and what is it biological function?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>The total number of genes whose <span class="notranslate">expression</span> differential between the two experimental conditions is 4176.</li>
+      <li>Of them, 328 are downregulated by the BR treatment and 778 are upregulated.</li>
+      <li>The most significantly DE gene is AT3G30180 (BR60X2). BR60X2 encodes a cytochrome p450 enzyme that catalyzes the last reaction in the production of brassinolide. It is capable of converting 6-deoxocastasterone into castasterone, a C-6 oxidation, as well as the further conversion of castasterone into brassinolide (source: <a href="https://www.arabidopsis.org/servlets/TairObject?name=at3g30180&amp;type=locus" target="_blank">TAIR database</a>).</li>
+    </ol>
+  </blockquote>
+
+  <blockquote class="comment">
+    <h3 id="comment-comments-3"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
+    <p>The sum of genes considered as upregulated and downregulated is lower than the total number of genes whose <span class="notranslate">expression</span> is statistically different is due to the fact that we have selected only those whose difference in transcript abundance is greater than a factor of 2.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="identification-of-mirna-targets">Identification of mi<span class="notranslate">RNA</span> targets</h1>
+
+<p>To predict which mi<span class="notranslate">RNA</span>s target which m<span class="notranslate">RNA</span>s, first we need their transcriptomic sequences in FASTA format. Now we will obtain the sequences of mi<span class="notranslate">RNA</span>s whose <span class="notranslate">expression</span> is induced by brassinosteroids.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-obtaining-the-sequences-of-upregulated-mirnas"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Obtaining the sequences of upregulated mi<span class="notranslate">RNA</span>s</h3>
+  <blockquote class="comment">
+    <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+    <p>The following tools can be found in <em>Text Manipulation</em> and <em>Filter and Sort</em> sections.</p>
+
+  </blockquote>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/cut_columns" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/cut_columns"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/cut_columns</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">Upregulated mi<span class="notranslate">RNA</span>s</code></li>
+      </ul>
+    </li>
+    <li>Rename the output as <code class="language-plaintext highlighter-rouge">Upregulated mi<span class="notranslate">RNA</span> ids</code></li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1"><strong>Filter FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/filter_by_fasta_ids/filter_by_fasta_ids/2.1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA sequences”</em>: <code class="language-plaintext highlighter-rouge">mature_mi<span class="notranslate">RNA</span>_AT.fasta</code></li>
+        <li><em>“Criteria for filtering on the headers”</em>: <code class="language-plaintext highlighter-rouge">List of IDs</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“List of IDs to extract sequences for”</em>: <code class="language-plaintext highlighter-rouge">Upregulated mi<span class="notranslate">RNA</span> ids</code></li>
+            <li><em>“Match IDs by”</em>: <code class="language-plaintext highlighter-rouge">Default: ID is expected at the beginning: &gt;ID</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1"><strong>Filter FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/filter_by_fasta_ids/filter_by_fasta_ids/2.1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA sequences”</em>: <code class="language-plaintext highlighter-rouge">star_mi<span class="notranslate">RNA</span>_seq.fasta</code></li>
+        <li><em>“Criteria for filtering on the headers”</em>: <code class="language-plaintext highlighter-rouge">List of IDs</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“List of IDs to extract sequences for”</em>: <code class="language-plaintext highlighter-rouge">Upregulated mi<span class="notranslate">RNA</span> ids</code></li>
+            <li><em>“Match IDs by”</em>: <code class="language-plaintext highlighter-rouge">Default: ID is expected at the beginning: &gt;ID</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="cat1" title="Tested with cat1"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: cat1</span></span>  tail-to-head (<span class="notranslate">Galaxy</span> Version 1.0.0) with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Concatenate Dataset”</em>: output of <strong>Filter FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on <code class="language-plaintext highlighter-rouge">mature_mi<span class="notranslate">RNA</span>_AT.fasta</code></li>
+        <li>
+          <ul>
+            <li>Insert Dataset
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select”</em>: output of <strong>Filter FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on <code class="language-plaintext highlighter-rouge">star_mi<span class="notranslate">RNA</span>_seq.fasta</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Rename it as <code class="language-plaintext highlighter-rouge">Upregulated mi<span class="notranslate">RNA</span> sequences</code></li>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon and inspect the <code class="language-plaintext highlighter-rouge">Upregulated mi<span class="notranslate">RNA</span> sequences</code> file</li>
+  </ol>
+</blockquote>
+
+<p>To identify putative targets of upregulated mi<span class="notranslate">RNA</span>s, it is necessary to obtain the sequences of all downregulated m<span class="notranslate">RNA</span>s in FASTA format.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-obtaining-the-gene-sequences-of-downregulated-mrnas"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Obtaining the gene sequences of downregulated m<span class="notranslate">RNA</span>s</h3>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/cut_columns" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/cut_columns"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/cut_columns</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">Downregulated m<span class="notranslate">RNA</span>s</code></li>
+      </ul>
+    </li>
+    <li>Rename the output as <code class="language-plaintext highlighter-rouge">Downregulated m<span class="notranslate">RNA</span> ids</code></li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1"><strong>Filter FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/filter_by_fasta_ids/filter_by_fasta_ids/2.1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA sequences”</em>: <code class="language-plaintext highlighter-rouge">transcriptome_AtRTD2.fasta.gz</code> (Input dataset)</li>
+        <li><em>“Criteria for filtering on the headers”</em>: <code class="language-plaintext highlighter-rouge">List of IDs</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *“List of IDs to extract sequences for: <code class="language-plaintext highlighter-rouge">Downregulated m<span class="notranslate">RNA</span> ids</code></li>
+            <li><em>“Match IDs by”</em>: <code class="language-plaintext highlighter-rouge">Custom regex pattern</code>
+              <ul>
+                <li><em>“Regex search pattern for ID”</em>: <code class="language-plaintext highlighter-rouge">GENE=(AT.{7})</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Rename it as <code class="language-plaintext highlighter-rouge">Downregulated m<span class="notranslate">RNA</span> sequences</code></li>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon and inspect the <code class="language-plaintext highlighter-rouge">Downregulated m<span class="notranslate">RNA</span> sequences</code>  file</li>
+  </ol>
+</blockquote>
+
+<h2 id="mirna-target-prediction-using-targetfinder">mi<span class="notranslate">RNA</span> target prediction using <strong>TargetFinder</strong></h2>
+
+<p>We are now ready to launch the search for mi<span class="notranslate">RNA</span> target genes. For this we will use the <strong>TargetFinder</strong> tool that is implemented and used for mi<span class="notranslate">RNA</span> target prediction in plants (<a class="citation" href="#Srivastava2014">Srivastava <i>et al.</i> 2014</a>, <a class="citation" href="#Ma2017">Ma <i>et al.</i> 2017</a>).</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-identification-of-potential-mirna-targets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: identification of potential mi<span class="notranslate">RNA</span> targets</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/targetfinder/targetfinder/1.7.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/rnateam/targetfinder/targetfinder/1.7.0+galaxy1"><strong>TargetFinder</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">rna</span>team/targetfinder/targetfinder/1.7.0+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input small <span class="notranslate">RNA</span> sequences file”</em>: <code class="language-plaintext highlighter-rouge">Upreguled mi<span class="notranslate">RNA</span> sequences</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Target sequence database file</em>”: <code class="language-plaintext highlighter-rouge">Downregulated m<span class="notranslate">RNA</span> sequences</code></li>
+        <li><em>“Prediction score cutoff value”</em>: <code class="language-plaintext highlighter-rouge">5.0</code></li>
+        <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">Tab-delimited format</code></li>
+      </ul>
+    </li>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon and inspect the output of <strong>TargetFinder</strong>.</li>
+  </ol>
+</blockquote>
+
+<p>Congratulations! You have identified the following 5 potential genes involved in the brassinosteroid-mi<span class="notranslate">RNA</span> regulatory network.</p>
+
+<figure id="figure-12"><img src="../../images/targetFinder_results.png" alt="fig15:TargetFinder results" /><figcaption><span class="figcaption-prefix">Figure 12:</span> TargetFinder results.</figcaption></figure>
+
+<p>Finally, we can access all the information available on the genes identified in the TAIR database:</p>
+
+<ul>
+  <li><a href="https://www.arabidopsis.org/servlets/TairObject?type=locus&amp;name=AT5G10180">AT5G10180</a>: ARABIDOPSIS SULFATE TRANSPORTER 68, AST6</li>
+  <li><a href="https://www.arabidopsis.org/servlets/TairObject?type=locus&amp;name=AT3G09220">AT3G09220</a>: LAC7, LACCASE 7</li>
+  <li><a href="https://www.arabidopsis.org/servlets/TairObject?type=locus&amp;name=AT2G46850">AT2G46850</a>: Protein kinase superfamily protein</li>
+  <li><a href="https://www.arabidopsis.org/servlets/TairObject?type=locus&amp;name=AT5G64260">AT5G64260</a>: EXL2, EXORDIUM LIKE 2</li>
+  <li><a href="https://www.arabidopsis.org/servlets/TairObject?type=locus&amp;name=AT3G63200">AT3G63200</a>: PATATIN-LIKE PROTEIN 9, PLA IIIB</li>
+</ul>
+
+<blockquote class="comment">
+  <h3 id="comment-comments-4"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
+  <p>One of the hypotheses that we could propose from our results is: the inhibition of the AT2G46850 gene can result in plants with improved resistance to drought conditions. Is it possible to validate it? Yes! We propose this approach: to acquire <a href="https://abrc.osu.edu/stocks/392113">AT2G46850 mutant seeds</a> and <a href="http://arabidopsis.info/StockInfo?NASC_id=N1093">wild type seeds</a>, grow them under two controlled conditions: watered and drought stress, and analyze plant weight after 33 days (Figure 13).</p>
+
+  <figure id="figure-13"><img src="../../images/arabidopis_growth_protocol.png" alt="fig16:Plant growth" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Arabidopsis growth conditions protocol (<a class="citation" href="#deOllas2019">de Ollas <i>et al.</i> 2019</a>).</figcaption></figure>
+
+</blockquote>
+
+<h1 id="optional-exercise">Optional exercise</h1>
+
+<p>As additional activity, you can try to repeat the <span class="notranslate">workflow</span> by using the sequences stored in the NCBI GEO database with the accession number <code class="language-plaintext highlighter-rouge">GSM3373998</code>. This is a two-factor experiment. The first factor is the genotype, which includes wild-type plants (Col-0) and mutants overexpressing the brassinosteroid receptor BRL3. The second factor is condition, which includes control and water-stressed samples. Each genotype and condition includes three biological replicates.</p>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, we have analyzed <span class="notranslate">RNA</span> sequencing data to extract information about potential genes regulated by brassinosteroids. For this purpose, the approach chosen was the identification of genes complementary to mi<span class="notranslate">RNA</span>s upregulated in response by brassinosteroids. The final result has been the identification of five potential mi<span class="notranslate">RNA</span> targets.</p>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>MiRDeep2 in combination with the PmiREN database allows to quantify miRNA expression in plants</p>
+</li>
+                            
+                            <li><p>The use of the Salmon tool and the AtRTD2 transcriptome allows rapid and accurate quantification of transcripts in <em>Arabidopsis</em></p>
+</li>
+                            
+                            <li><p>The combination of differential expression analysis and the TargetFinder tool is an effective strategy for the identification of miRNA target genes</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/transcriptomics/faqs/">FAQ page for the Transcriptomics topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                    
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="Glazov2008">Glazov, E. A., S. McWilliam, W. C. Barris, and B. P. Dalrymple, 2008 <b>Origin,  Evolution,  and Biological Role of miRNA Cluster in DLK-DIO3 Genomic Region in Placental Mammals</b>. Molecular Biology and Evolution 25: 939–948.</span>
+    
+    
+    <a href="https://doi.org/10.1093/molbev/msn045">10.1093/molbev/msn045</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Ivashuta2011">Ivashuta, S., I. R. Banks, B. E. Wiggins, Y. Zhang, T. E. Ziegler <i>et al.</i>, 2011 <b>Regulation of Gene Expression in Plants through miRNA Inactivation</b> (G. Dalmasso, Ed.). PLoS ONE 6: e21330.</span>
+    
+    
+    <a href="https://doi.org/10.1371/journal.pone.0021330">10.1371/journal.pone.0021330</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Hu2013">Hu, W.-hai, X.-hong Yan, Y.-an Xiao, J.-jun Zeng, H.-juan Qi <i>et al.</i>, 2013 <b>24-Epibrassinosteroid alleviate drought-induced inhibition of photosynthesis in Capsicum annuum</b>. Scientia Horticulturae 150: 232–237.</span>
+    
+    
+    <a href="https://doi.org/10.1016/j.scienta.2012.11.012">10.1016/j.scienta.2012.11.012</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Srivastava2014">Srivastava, P. K., T. Moturu, P. Pandey, I. T. Baldwin, and S. P. Pandey, 2014 <b>A comparison of performance of plant miRNA target prediction tools and the characterization of features for genome-wide target prediction</b>. BMC Genomics 15: 348.</span>
+    
+    
+    <a href="https://doi.org/10.1186/1471-2164-15-348">10.1186/1471-2164-15-348</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Srivastava2016">Srivastava, A., H. Sarkar, N. Gupta, and R. Patro, 2016 <b>RapMap: a rapid,  sensitive and accurate tool for mapping RNA-seq reads to transcriptomes</b>. Bioinformatics 32: i192–i200.</span>
+    
+    
+    <a href="https://doi.org/10.1093/bioinformatics/btw277">10.1093/bioinformatics/btw277</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Patro2017">Patro, R., G. Duggal, M. I. Love, R. A. Irizarry, and C. Kingsford, 2017 <b>Salmon provides fast and bias-aware quantification of transcript expression</b>. Nature Methods 14: 417–419.</span>
+    
+    
+    <a href="https://doi.org/10.1038/nmeth.4197">10.1038/nmeth.4197</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Ma2017">Ma, X., C. Liu, L. Gu, B. Mo, X. Cao <i>et al.</i>, 2017 <b>TarHunter,  a tool for predicting conserved microRNA targets and target mimics in plants</b> (I. Hofacker, Ed.). Bioinformatics 34: 1574–1576.</span>
+    
+    
+    <a href="https://doi.org/10.1093/bioinformatics/btx797">10.1093/bioinformatics/btx797</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Wang2018">Wang, C.-Y., T. Jégu, H.-P. Chu, H. J. Oh, and J. T. Lee, 2018 <b>SMCHD1 Merges Chromosome Compartments and Assists Formation of Super-Structures on the Inactive X</b>. Cell 174: 406–421.e25.</span>
+    
+    
+    <a href="https://doi.org/10.1016/j.cell.2018.05.007">10.1016/j.cell.2018.05.007</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Wang2019">Wang, Y., J.-J. Cao, K.-X. Wang, X.-J. Xia, K. Shi <i>et al.</i>, 2018 <b>BZR1 Mediates Brassinosteroid-Induced Autophagy and Nitrogen Starvation in Tomato</b>. Plant Physiology 179: 671–685.</span>
+    
+    
+    <a href="https://doi.org/10.1104/pp.18.01028">10.1104/pp.18.01028</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Anwar2018">Anwar, A., Y. Liu, R. Dong, L. Bai, X. Yu <i>et al.</i>, 2018 <b>The physiological and molecular mechanism of brassinosteroid in response to stress: a review</b>. Biological Research 51:</span>
+    
+    
+    <a href="https://doi.org/10.1186/s40659-018-0195-2">10.1186/s40659-018-0195-2</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="PlanasRiverola2019">Planas-Riverola, A., A. Gupta, I. Betegón-Putze, N. Bosch, M. Ibañes <i>et al.</i>, 2019 <b>Brassinosteroid signaling in plant development and adaptation to stress</b>. Development 146: dev151894.</span>
+    
+    
+    <a href="https://doi.org/10.1242/dev.151894">10.1242/dev.151894</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="deOllas2019">Ollas, C. de, C. Segarra-Medina, M. González-Guzmán, J. Puertolas, and A. Gómez-Cadenas, 2019 <b>A customizable method to characterize Arabidopsis thaliana transpiration under drought conditions</b>. Plant Methods 15:</span>
+    
+    
+    <a href="https://doi.org/10.1186/s13007-019-0474-0">10.1186/s13007-019-0474-0</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Park2020">Park, S. Y., J.-H. Choi, D.-H. Oh, J. C. Johnson, M. Dassanayake <i>et al.</i>, 2020 <b>Genome-wide analysis of brassinosteroid responsive small RNAs in Arabidopsis thaliana</b>. Genes &amp; Genomics 42: 957–969.</span>
+    
+    
+    <a href="https://doi.org/10.1007/s13258-020-00964-2">10.1007/s13258-020-00964-2</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li></ol>
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Whole transcriptome analysis of Arabidopsis thaliana (Transcriptomics)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Cristóbal Gallardo, Pavankumar Videm, Beatriz Serrano-Solano, 2021 <b>Whole transcriptome analysis of Arabidopsis thaliana (Galaxy Training Materials)</b>. <a href="/training-material/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html">/training-material/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{transcriptomics-mirna-target-finder,
+    author = "Cristóbal Gallardo and Pavankumar Videm and Beatriz Serrano-Solano",
+    title = "Whole transcriptome analysis of Arabidopsis thaliana (Galaxy Training Materials)",
+    year = "2021",
+    month = "04",
+    day = "08"
+    url = "\url{/training-material/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Cristóbal Gallardo, Pavankumar Videm, Beatriz Serrano-Solano)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
