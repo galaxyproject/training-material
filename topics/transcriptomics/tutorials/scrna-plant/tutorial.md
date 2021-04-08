@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 title: "Analysis of plant scRNA-Seq Data with Scanpy"
 subtopic: single-cell
-priority:
+priority: 12
 
 zenodo_link: 'https://zenodo.org/record/4597857'
 tags:
@@ -147,7 +147,6 @@ If the above feels like a convoluted way to get the dimensionality, that's becau
 
 Currently we have two seperate datasets, but we can merge them into one single AnnData object seperated by batch identifiers "shr" and "wt". To do this, we simply manipulate one of the datasets and concatenate the other onto it.
 
-
 ## Merge Batches and Relabel
 
 > ### {% icon hands_on %} Hands-on: Merging Data
@@ -180,6 +179,8 @@ Currently we have two seperate datasets, but we can merge them into one single A
 >
 {: .hands_on}
 
+# Quality Control
+
 We can confirm that our datasets have been combined into a single object by peeking at the dataset in the history and confirming two things:
 
 1. The number of observations is equal to the total of the two initial AnnData datasets.
@@ -195,7 +196,7 @@ We can confirm that our datasets have been combined into a single object by peek
 
 A happy coincidence here is that both datasets already had the exact same variables, so that the merging of the two datasets still yields the same number of genes.
 
-## Quality Control
+## Filtering the Matrix
 
 > ### {% icon hands_on %} Hands-on: Generating some metrics
 >
@@ -381,6 +382,8 @@ From this, we can see that there is a reasonable overlap in our batches shown bo
 
 There are batch correction algorithms for cases where one batch clusters completely seperate from the other, but this is not necessary here.
 
+# Finding Cell Types
+
 ## Clustering
 
 Let us cluster the cells and see what cell types we can discover in the plots. The cell types that we wish to recover are those shown in the original paper, as highlighted by the gene markers in the DotPlot below.
@@ -509,7 +512,7 @@ We can use this Dotplot as a guide to relabel our clusters and give more meaning
 If we look at the clusters now, and compare them to the original image in the paper, we can infer that the meristematic cells are likely to be derived from cluster 1, which shares soft clustering with the trichoblasts suggesting a trajectory pathway which could be explored.
 
 
-## Conclusions
+# Conclusions
 
 In this tutorial, we have recapitulated the same clustering analysis in the ["Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing"](https://doi.org/10.1016/j.devcel.2019.02.022) {% cite denyer2019spatiotemporal %} paper, and validated them by comparing DotPlots for specific genes that were used as markers in that paper.
 
