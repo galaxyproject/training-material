@@ -74,70 +74,57 @@ The main objective of this training is to identify potential targets of miRNAs w
 
 The datasets to be used in this training can be classified into three groups: miRNA reads, mRNA reads and additional datasets.
 
-## miRNA reads
+### miRNA reads
 
-The second group of files consists of six FASTQ files, obtained by using the Illumina GAxII sequencing platform. The plant samples were obtained from wild-type Ws-2 seedlings treated with mock or 1 μM EBR for 90 min before harvest. The original datasets are available in the NCBI SRA database, with the accession number [SRP258575](https://www.ncbi.nlm.nih.gov/sra?term=SRP258575). As in the previous case, for this tutorial, we will use a reduced version of the data.
+The miRNA datasets consist of six FASTQ files, obtained by using the Illumina GAxII sequencing platform. The plant samples were obtained from wild-type Ws-2 seedlings treated with mock or 1 μM EBR for 90 min before harvest. The original datasets are available in the NCBI SRA database, with the accession number [SRP258575](https://www.ncbi.nlm.nih.gov/sra?term=SRP258575). As in the previous case, for this tutorial, we will use a reduced version of the data.
 
-__Control miRNA samples:__
-```
-https://zenodo.org/record/4606701/files/SRR11611349_MIRNASEQ_CTL.fastqsanger.gz
-https://zenodo.org/record/4606701/files/SRR11611350_MIRNASEQ_CTL.fastqsanger.gz
-https://zenodo.org/record/4606701/files/SRR11611351.MIRNASEQ_CTLfastqsanger.gz
-```
 
-__BR treated miRNA samples:__
-```
-https://zenodo.org/record/4606701/files/SRR11611352_MIRNASEQ_BL.fastqsanger.gz
-https://zenodo.org/record/4606701/files/SRR11611353_MIRNASEQ_BL.fastqsanger.gz
-https://zenodo.org/record/4606701/files/SRR11611354_MIRNASEQ_BL.fastqsanger.gz
-```
+### mRNA reads
 
-## mRNA reads
+The mRNA datasets consist of four FASTQ files, generated through the Illumina HiSeq 2000 sequencing system. The samples were obtained from wild-type Columbia (Col-0) seedlings treated with mock or 100 nM BL for 4 hours. The original datasets are available in the NCBI SRA database, with the accession number [SRP032274](https://www.ncbi.nlm.nih.gov/sra?term=SRP032274). For this tutorial, subsets from the original data were generated in order to reduce the analysis run time.
 
-The first dataset consists of four fastq files, generated through the Illumina HiSeq 2000 sequencing system. The samples were obtained from wild-type Columbia (Col-0) seedlings treated with mock or 100 nM BL for 4 hours. The original datasets are available in the NCBI SRA database, with the accession number [SRP032274](https://www.ncbi.nlm.nih.gov/sra?term=SRP032274). For this tutorial, subsets from the original data were generated in order to reduce the analysis run time.
 
-__Control mRNA samples:__
-```
-https://zenodo.org/record/4606701/files/SRR1019436_RNASEQ_CTL.fastqsanger.gz
-https://zenodo.org/record/4606701/files/SRR1019437_RNASEQ_CTL.fastqsanger.gz
-```
-
-__BR treated mRNA samples:__
-```
-https://zenodo.org/record/4606701/files/SRR1019438_RNASEQ_BL.fastqsanger.gz
-https://zenodo.org/record/4606701/files/SRR1019439_RNASEQ_BL.fastqsanger.gz
-```
-
-## Additional datasets
+### Additional datasets
 
 In addition to the RNA-Seq reads obtained from the NCBI database, we will use datasets from two sources:
 
 - [AtRTD2](https://ics.hutton.ac.uk/atRTD/) is a high-quality transcript reference dataset developed to exploit the accuracy of transcript quantification tools such as __Salmon__ and __Kallisto__ in analyzing _Arabidopsis_ RNA-Seq data.
 - [PmiREN](http://pmiren.com/) is a comprehensive functional plant miRNA database that includes more than 20,000 annotated miRNAs diverse plant species.
 
-# miRNA data analysis
-
-## Get data
+# Get data
 
 The first step of our analysis consists of retrieving the miRNA-Seq datasets from Zenodo and organizing them into collections.
 
-> ### {% icon hands_on %} Hands-on: Retrieve miRNA-Seq datasets
+> ### {% icon hands_on %} Hands-on: Retrieve miRNA-Seq and mRNA-Seq datasets
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from Zenodo:
 >
 >    - Open the file {% icon galaxy-upload %} __upload__ menu
->    - Click on __Collection__ tab
->    - Click of the **Paste/Fetch** button
->    - Copy the Zenodo links included in the `Control miRNA samples` section and press <kbd>Start</kbd> and <kbd>Build</kbd>
->    - Rename the samples, keeping only the accession number (e.g. `SRR11611351`)
->    - Assign a name to the new collection: `Control miRNA` and press <kbd>Create list</kbd>
+>    - Click on __Rule-based__ tab
+>    - *"Upload data as"*: `Collection(s)`
+>    - Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>   ```
+> SRR11611349	Control miRNA	https://zenodo.org/record/4606701/files/SRR11611349_MIRNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
+> SRR11611350	Control miRNA	https://zenodo.org/record/4606701/files/SRR11611350_MIRNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
+> SRR11611351	Control miRNA	https://zenodo.org/record/4606701/files/SRR11611351.MIRNASEQ_CTLfastqsanger.gz	fastqsanger.gz
+> SRR11611352	BR treated miRNA	https://zenodo.org/record/4606701/files/SRR11611352_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
+> SRR11611353	BR treated miRNA	https://zenodo.org/record/4606701/files/SRR11611353_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
+> SRR11611354	BR treated miRNA	https://zenodo.org/record/4606701/files/SRR11611354_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
+> SRR1019436	Control mRNA	https://zenodo.org/record/4606701/files/SRR1019436_RNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
+> SRR1019437	Control mRNA	https://zenodo.org/record/4606701/files/SRR1019437_RNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
+> SRR1019438	BR treated mRNA	        https://zenodo.org/record/4606701/files/SRR1019438_RNASEQ_BL.fastqsanger.gz	fastqsanger.gz
+> SRR1019439	BR treated mRNA	        https://zenodo.org/record/4606701/files/SRR1019439_RNASEQ_BL.fastqsanger.gz	fastqsanger.gz
+>   ```
+>    - From **Rules** menu select `Add / Modify Column Definitions`
+>       - Click `Add Definition` button and select `List Identifier(s)`: column `A`
+>       - Click `Add Definition` button and select `Collection Name`: column `B`
+>       - Click `Add Definition` button and select `URL`: column `C`
+>       - Click `Add Definition` button and select `Type`: column `D`
+>    - Click `Apply` and press <kbd>Upload</kbd>
 >
-> 3. Add informative tags (i.e. `#miRNA` and `#control`)
-> 4. Repeat the procedure with the `BR treated miRNA samples`.
->
+> {% snippet faqs/galaxy/datasets_add_tag.md type="name" %}
 {: .hands_on}
 
 Next we will retrieve the remaining datasets.
@@ -147,21 +134,21 @@ Next we will retrieve the remaining datasets.
 > 1. Import the files from Zenodo:
 >
 >    - Open the file {% icon galaxy-upload %} __upload__ menu
->    - Click on __Regular__ tab
->    - Click of the **Paste/Fetch** button
->    - Copy the Zenodo links and press <kbd>Start</kbd>
+>    - *"Upload data as"*: `Datasets`
+>    - Once again, copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
->      ```
->      https://zenodo.org/record/4606701/files/annotation_AtRTD2_19April2016.gtf.gz
->      https://zenodo.org/record/4606701/files/transcriptome_AtRTD2_12April2016.fasta.gz
->      https://zenodo.org/record/4606701/files/star_miRNA_seq.fasta
->      https://zenodo.org/record/4606701/files/mature_miRNA_AT.fasta
->      https://zenodo.org/record/4606701/files/miRNA_stem-loop_seq.fasta
->      ```
+>   ```
+> annotation_AtRTD2.gtf       https://zenodo.org/record/4606701/files/annotation_AtRTD2_19April2016.gtf.gz
+> transcriptome.fasta         https://zenodo.org/record/4606701/files/transcriptome_AtRTD2_12April2016.fasta.gz
+> star_miRNA_seq.fasta        https://zenodo.org/record/4606701/files/star_miRNA_seq.fasta
+> mature_miRNA_AT.fasta       https://zenodo.org/record/4606701/files/mature_miRNA_AT.fasta
+> miRNA_stem-loop_seq.fasta   https://zenodo.org/record/4606701/files/miRNA_stem-loop_seq.fasta
+>   ```
+>    - From **Rules** menu select `Add / Modify Column Definitions`
+>       - Click `Add Definition` button and select `Name`: column `A`
+>       - Click `Add Definition` button and select `URL`: column `B`
+>    - Click `Apply` and press <kbd>Upload</kbd>
 >
-> 2. Rename each dataset according to the sample id (e.g. `annotation_AtRTD2.gtf`)
->
->    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 
@@ -181,6 +168,8 @@ Next we will retrieve the remaining datasets.
 {: .details}
 
 
+# miRNA data analysis
+
 Once we have imported the data, we can begin to study how brassinosteroid exposure alters gene expression patterns.
 
 ## Quality assessment of miRNA reads
@@ -199,7 +188,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
 >    - {% icon param-collection %} *"Dataset collection"*: `Control miRNA`
 > 2. Rename the outputs as `FastQC unprocessed control miRNA: RawData` and `FastQC unprocessed control miRNA: Webpage`
-> 3. Repeat the previous steps with the `BR treated mRiNA` collection.
+> 3. Repeat the previous steps with the `BR treated miRNA` collection.
 > 4. {% tool [Merge Collections](__MERGE_COLLECTION__) %} with the following parameters:
 >    - In *"Input collections"*:
 >        - *"1.Input Collections"*: `FastQC unprocessed control miRNA: RawData`
@@ -442,26 +431,6 @@ Repeat the filtering step on the imported DESeq2 result.
 # mRNA data analysis
 
 Once the differential expression analysis of miRNAs has been carried out, the next stage is to analyze how mRNA expression is altered in response to brassinosteroids.
-
-## Get data
-
-First, we retrieve  the mRNA-Seq datasets from Zenodo and organizing them into collections.
-
-> ### {% icon hands_on %} Hands-on: Retrieve mRNA-Seq datasets
->
-> 1. Create a new history for this tutorial
-> 2. Import the files from Zenodo:
->
->    - Open the file {% icon galaxy-upload %} __upload__ menu
->    - Click on __Collection__ tab
->    - Click of the **Paste/Fetch** button
->    - Copy the Zenodo links included in the `Control mRNA samples` section and press <kbd>Start</kbd> and <kbd>Build</kbd>
->    - Rename the samples, keeping only the accession number (e.g. SRR1019437).
->    - Assign a name to the new collection: `Control mRNA` and press <kbd>Create list</kbd>
-> 3. Add informative tags (i.e. `#mRNA` and `#control`)
-> 4. Repeat the procedure with the `BR treated mRNA samples`.
-{: .hands_on}
-
 
 ## Quality assessment of mRNA reads
 
