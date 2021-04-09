@@ -399,6 +399,14 @@
     {
       "@type": "Person",
       "name": "Beatriz Serrano-Solano"
+    },
+    {
+      "@type": "Person",
+      "name": "Cristóbal Gallardo"
+    },
+    {
+      "@type": "Person",
+      "name": "Pavankumar Videm"
     }
   ],
   "contributor": [
@@ -409,6 +417,14 @@
     {
       "@type": "Person",
       "name": "Beatriz Serrano-Solano"
+    },
+    {
+      "@type": "Person",
+      "name": "Cristóbal Gallardo"
+    },
+    {
+      "@type": "Person",
+      "name": "Pavankumar Videm"
     }
   ],
   "about": [
@@ -435,7 +451,7 @@
 
         <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mtekman" alt="Mehmet Tekman">Mehmet Tekman</a> <a href="/training-material/hall-of-fame/beatrizserrano/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/beatrizserrano" alt="Beatriz Serrano-Solano">Beatriz Serrano-Solano</a>
+ <a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mtekman" alt="Mehmet Tekman">Mehmet Tekman</a> <a href="/training-material/hall-of-fame/beatrizserrano/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/beatrizserrano" alt="Beatriz Serrano-Solano">Beatriz Serrano-Solano</a> <a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/gallardoalba" alt="Cristóbal Gallardo">Cristóbal Gallardo</a> <a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pavanvidem" alt="Pavankumar Videm">Pavankumar Videm</a>
 
 </div>
 
@@ -861,7 +877,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 8, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 9, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -887,15 +903,21 @@
       <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
       <li><a href="#csv-to-anndata" id="markdown-toc-csv-to-anndata">CSV to AnnData</a></li>
       <li><a href="#merge-batches-and-relabel" id="markdown-toc-merge-batches-and-relabel">Merge Batches and Relabel</a></li>
-      <li><a href="#quality-control" id="markdown-toc-quality-control">Quality Control</a></li>
+    </ol>
+  </li>
+  <li><a href="#quality-control" id="markdown-toc-quality-control">Quality Control</a>    <ol>
+      <li><a href="#filtering-the-matrix" id="markdown-toc-filtering-the-matrix">Filtering the Matrix</a></li>
       <li><a href="#confounder-removal" id="markdown-toc-confounder-removal">Confounder Removal</a></li>
       <li><a href="#dimensionality-reduction" id="markdown-toc-dimensionality-reduction">Dimensionality Reduction</a></li>
+    </ol>
+  </li>
+  <li><a href="#finding-cell-types" id="markdown-toc-finding-cell-types">Finding Cell Types</a>    <ol>
       <li><a href="#clustering" id="markdown-toc-clustering">Clustering</a></li>
       <li><a href="#dotplot-and-validating-cell-types" id="markdown-toc-dotplot-and-validating-cell-types">DotPlot and Validating Cell Types</a></li>
       <li><a href="#relabel-clusters" id="markdown-toc-relabel-clusters">Relabel clusters</a></li>
-      <li><a href="#conclusions" id="markdown-toc-conclusions">Conclusions</a></li>
     </ol>
   </li>
+  <li><a href="#conclusions" id="markdown-toc-conclusions">Conclusions</a></li>
 </ol>
 
 </blockquote>
@@ -939,7 +961,7 @@ https://zenodo.org/record/4597857/files/GSE123818_Root_single_cell_wt_datamatrix
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>    <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>    <li>Find the correct folder (ask your instructor)</li>    <li>Select the desired files</li>    <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>    <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>    <li>Click on <strong>Import</strong></li>  </ul></blockquote>
     </li>
     <li>
-      <p>Apply the tags <code class="language-plaintext highlighter-rouge">#shr</code> and <code class="language-plaintext highlighter-rouge">#wt</code> to one of the datasets, with respect to the initial labels. These tags will be inherited for each task that the dataset undergoes.</p>
+      <p>Apply the tags <code class="language-plaintext highlighter-rouge">#shr</code> and <code class="language-plaintext highlighter-rouge">#wt</code> to each of the datasets, with respect to the initial labels. These tags will be inherited for each task that the dataset undergoes.</p>
 
       <!--SNIPPET-->
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-adding-a-tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag</h3>  <ul>    <li>Click on the dataset</li>    <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>    <li>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code>  Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</li>    <li>Check that the tag is appearing below the dataset name</li>  </ul></blockquote>
@@ -1069,6 +1091,8 @@ https://zenodo.org/record/4597857/files/GSE123818_Root_single_cell_wt_datamatrix
 
 </blockquote>
 
+<h1 id="quality-control">Quality Control</h1>
+
 <p>We can confirm that our datasets have been combined into a single object by peeking at the dataset in the history and confirming two things:</p>
 
 <ol>
@@ -1109,7 +1133,7 @@ https://zenodo.org/record/4597857/files/GSE123818_Root_single_cell_wt_datamatrix
 
 <p>A happy coincidence here is that both datasets already had the exact same variables, so that the merging of the two datasets still yields the same number of genes.</p>
 
-<h2 id="quality-control">Quality Control</h2>
+<h2 id="filtering-the-matrix">Filtering the Matrix</h2>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-generating-some-metrics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generating some metrics</h3>
@@ -1179,7 +1203,7 @@ https://zenodo.org/record/4597857/files/GSE123818_Root_single_cell_wt_datamatrix
           <ul>
             <li><em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Minimum number of genes expressed</code>
               <ul>
-                <li><em>“Minimum number of genes expressed required for a cell to pass filtering”</em>: <code class="language-plaintext highlighter-rouge">200</code></li>
+                <li><em>“Minimum number of genes expressed required for a cell to pass filtering”</em>: <code class="language-plaintext highlighter-rouge">100</code></li>
               </ul>
             </li>
           </ul>
@@ -1193,7 +1217,7 @@ https://zenodo.org/record/4597857/files/GSE123818_Root_single_cell_wt_datamatrix
           <ul>
             <li><em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Minimum number of cells expressed</code>
               <ul>
-                <li><em>“Minimum number of cells expressed required for a gene to pass filtering”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+                <li><em>“Minimum number of cells expressed required for a gene to pass filtering”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
               </ul>
             </li>
           </ul>
@@ -1202,28 +1226,42 @@ https://zenodo.org/record/4597857/files/GSE123818_Root_single_cell_wt_datamatrix
 
       <p>We now set the upper limits to the analysis.</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Method used for filtering”</em>: <code class="language-plaintext highlighter-rouge">Filter genes based on number of cells or counts, using 'pp.filter_genes'</code>
+        <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Filter observations or variables</code>
           <ul>
-            <li><em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Maximum number of counts</code>
+            <li><em>“What to filter?”</em>: <code class="language-plaintext highlighter-rouge">Observations (obs)</code></li>
+            <li><em>“Type of filtering?”</em>: <code class="language-plaintext highlighter-rouge">By key (column) values</code>
               <ul>
-                <li><em>“Maximum number of counts required for a gene to pass filtering”</em>: <code class="language-plaintext highlighter-rouge">10000</code></li>
+                <li><em>“Key to filter”</em>: <code class="language-plaintext highlighter-rouge">n_genes_by_counts</code></li>
+                <li><em>“Type of value to filter”</em>: <code class="language-plaintext highlighter-rouge">Number</code>
+                  <ul>
+                    <li><em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">less than</code></li>
+                    <li><em>“Value”</em>: <code class="language-plaintext highlighter-rouge">12000</code></li>
+                  </ul>
+                </li>
               </ul>
             </li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Method used for filtering”</em>: <code class="language-plaintext highlighter-rouge">Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'</code>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata</code> (output of <strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Filter observations or variables</code>
           <ul>
-            <li><em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Maximum number of counts</code>
+            <li><em>“What to filter?”</em>: <code class="language-plaintext highlighter-rouge">Observations (obs)</code></li>
+            <li><em>“Type of filtering?”</em>: <code class="language-plaintext highlighter-rouge">By key (column) values</code>
               <ul>
-                <li><em>“Maximum number of counts required for a cell to pass filtering”</em>: <code class="language-plaintext highlighter-rouge">100000</code></li>
+                <li><em>“Key to filter”</em>: <code class="language-plaintext highlighter-rouge">total_counts</code></li>
+                <li><em>“Type of value to filter”</em>: <code class="language-plaintext highlighter-rouge">Number</code>
+                  <ul>
+                    <li><em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">less than</code></li>
+                    <li><em>“Value”</em>: <code class="language-plaintext highlighter-rouge">120000</code></li>
+                  </ul>
+                </li>
               </ul>
             </li>
           </ul>
@@ -1387,7 +1425,7 @@ The answer is simply that it did not help with this particular dataset, and that
             <li><em>“Keys for annotations of observations/cells or variables/genes”</em>: <code class="language-plaintext highlighter-rouge">batch</code></li>
             <li>In <em>“Plot attributes”</em>
               <ul>
-                <li><em>“Colors to use for plotting categorical annotation groups”</em>: <code class="language-plaintext highlighter-rouge">rainbow</code></li>
+                <li><em>“Colors to use for plotting categorical annotation groups”</em>: <code class="language-plaintext highlighter-rouge">rainbow (Miscellaneous)</code></li>
               </ul>
             </li>
           </ul>
@@ -1400,9 +1438,11 @@ The answer is simply that it did not help with this particular dataset, and that
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Embeddings: Scatter plot in UMAP basis, using 'pl.umap'</code>
           <ul>
             <li><em>“Keys for annotations of observations/cells or variables/genes”</em>: <code class="language-plaintext highlighter-rouge">batch</code></li>
+            <li><em>“Show edges?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
             <li>In <em>“Plot attributes”</em>
               <ul>
-                <li><em>“Colors to use for plotting categorical annotation groups”</em>: <code class="language-plaintext highlighter-rouge">rainbow</code></li>
+                <li><em>“Legend font size”</em>: <code class="language-plaintext highlighter-rouge">14</code></li>
+                <li><em>“Colors to use for plotting categorical annotation groups”</em>: <code class="language-plaintext highlighter-rouge">rainbow (Miscellaneous)</code></li>
               </ul>
             </li>
           </ul>
@@ -1432,6 +1472,8 @@ The answer is simply that it did not help with this particular dataset, and that
 
 <p>There are batch correction algorithms for cases where one batch clusters completely seperate from the other, but this is not necessary here.</p>
 
+<h1 id="finding-cell-types">Finding Cell Types</h1>
+
 <h2 id="clustering">Clustering</h2>
 
 <p>Let us cluster the cells and see what cell types we can discover in the plots. The cell types that we wish to recover are those shown in the original paper, as highlighted by the gene markers in the DotPlot below.</p>
@@ -1460,7 +1502,7 @@ The answer is simply that it did not help with this particular dataset, and that
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Cluster, infer trajectories and embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Cluster cells into subgroups, using 'tl.leiden'</code>
           <ul>
-            <li><em>“Coarseness of the clusterin”</em>: <code class="language-plaintext highlighter-rouge">0.3</code></li>
+            <li><em>“Coarseness of the clusterin”</em>: <code class="language-plaintext highlighter-rouge">0.35</code></li>
           </ul>
         </li>
       </ul>
@@ -1614,7 +1656,7 @@ The answer is simply that it did not help with this particular dataset, and that
         <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Rename categories of annotation</code>
           <ul>
             <li><em>“Key for observations or variables annotation”</em>: <code class="language-plaintext highlighter-rouge">leiden</code></li>
-            <li><em>“Comma-separated list of new categories”</em>: <code class="language-plaintext highlighter-rouge">0, 1, 2, 3, trichoblast, 5, 6, cortex, 8, 9, 10, columella+QC+NC, xylem, 13</code></li>
+            <li><em>“Comma-separated list of new categories”</em>: <code class="language-plaintext highlighter-rouge">0, 1, 2, trichoblasts, 4, 5, 6, atrichoblasts, endodermis, cortex, 10, columella+QC+NC, xylem</code></li>
           </ul>
         </li>
       </ul>
@@ -1645,13 +1687,13 @@ The answer is simply that it did not help with this particular dataset, and that
 
 <p>If we look at the clusters now, and compare them to the original image in the paper, we can infer that the meristematic cells are likely to be derived from cluster 1, which shares soft clustering with the trichoblasts suggesting a trajectory pathway which could be explored.</p>
 
-<h2 id="conclusions">Conclusions</h2>
+<h1 id="conclusions">Conclusions</h1>
 
 <p>In this tutorial, we have recapitulated the same clustering analysis in the <a href="https://doi.org/10.1016/j.devcel.2019.02.022">“Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput <span class="notranslate">Single-Cell</span> <span class="notranslate">RNA</span> Sequencing”</a> <a class="citation" href="#denyer2019spatiotemporal">Denyer <i>et al.</i> 2019</a> paper, and validated them by comparing DotPlots for specific genes that were used as markers in that paper.</p>
 
 <p>From this point, we can perform a lineage analysis to infer a differentiation pathway between the clusters. For ScanPy there is the PAGA option, however, this does not work so well with the current dataset, so it is encouraged that users use the original Seurat trajectory suite that was given in the paper, or to experiment with Monocle.</p>
 
-<p>Both libraries are available within the RStudio and Jupyter Notebook libraries in the interactive <span class="notranslate">Galaxy</span> envronments which can be found in the <em>“Miscellaneous Tools”</em> section under the <em>“Interactive Tools”</em> subheading.</p>
+<p>Both libraries are available within the RStudio and Jupyter Notebook libraries in the interactive <span class="notranslate">Galaxy</span> envronments which can be found in the <em>“Miscellaneous Tools”</em> section under the <em>“Interactive Tools”</em> subheading. An excellent follow-up tutorial to perform a trajectory analysis in <span class="notranslate">Galaxy</span> using Jupyter notebooks would be the <a href="/training-material/topics/transcriptomics/tutorials/scrna-JUPYTER-trajectories/tutorial.html"><em>“Trajectory Analysis using Python (Jupyter Notebook) in <span class="notranslate">Galaxy</span>”</em></a>.</p>
 
 <p>This entire tutorial can be invoked from the sc<span class="notranslate">RNA</span> Plant <span class="notranslate">Workflow</span> shown below:</p>
 
@@ -1754,7 +1796,7 @@ The answer is simply that it did not help with this particular dataset, and that
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Mehmet Tekman, Beatriz Serrano-Solano, 2021 <b>Analysis of plant scRNA-Seq Data with Scanpy (Galaxy Training Materials)</b>. <a href="/training-material/topics/transcriptomics/tutorials/scrna-plant/tutorial.html">/training-material/topics/transcriptomics/tutorials/scrna-plant/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Mehmet Tekman, Beatriz Serrano-Solano, Cristóbal Gallardo, Pavankumar Videm, 2021 <b>Analysis of plant scRNA-Seq Data with Scanpy (Galaxy Training Materials)</b>. <a href="/training-material/topics/transcriptomics/tutorials/scrna-plant/tutorial.html">/training-material/topics/transcriptomics/tutorials/scrna-plant/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1769,11 +1811,11 @@ The answer is simply that it did not help with this particular dataset, and that
 
                     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{transcriptomics-scrna-plant,
-    author = "Mehmet Tekman and Beatriz Serrano-Solano",
+    author = "Mehmet Tekman and Beatriz Serrano-Solano and Cristóbal Gallardo and Pavankumar Videm",
     title = "Analysis of plant scRNA-Seq Data with Scanpy (Galaxy Training Materials)",
     year = "2021",
     month = "04",
-    day = "08"
+    day = "09"
     url = "\url{/training-material/topics/transcriptomics/tutorials/scrna-plant/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
@@ -1820,7 +1862,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
         <p>
             This material is the result of a collaborative work. Thanks to the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Mehmet Tekman, Beatriz Serrano-Solano)!
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Mehmet Tekman, Beatriz Serrano-Solano, Cristóbal Gallardo, Pavankumar Videm)!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
