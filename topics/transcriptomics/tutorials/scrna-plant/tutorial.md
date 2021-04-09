@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 title: "Analysis of plant scRNA-Seq Data with Scanpy"
 subtopic: single-cell
-priority:
+priority: 11
 
 zenodo_link: 'https://zenodo.org/record/4597857'
 tags:
@@ -30,6 +30,8 @@ key_points:
 contributors:
   - mtekman
   - beatrizserrano
+  - gallardoalba
+  - pavanvidem
 
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
@@ -86,7 +88,7 @@ As explained in the Zenodo link, the datasets have been modified to use more com
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Apply the tags `#shr` and `#wt` to one of the datasets, with respect to the initial labels. These tags will be inherited for each task that the dataset undergoes.
+> 3. Apply the tags `#shr` and `#wt` to each of the datasets, with respect to the initial labels. These tags will be inherited for each task that the dataset undergoes.
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
@@ -147,7 +149,6 @@ If the above feels like a convoluted way to get the dimensionality, that's becau
 
 Currently we have two seperate datasets, but we can merge them into one single AnnData object seperated by batch identifiers "shr" and "wt". To do this, we simply manipulate one of the datasets and concatenate the other onto it.
 
-
 ## Merge Batches and Relabel
 
 > ### {% icon hands_on %} Hands-on: Merging Data
@@ -180,6 +181,8 @@ Currently we have two seperate datasets, but we can merge them into one single A
 >
 {: .hands_on}
 
+# Quality Control
+
 We can confirm that our datasets have been combined into a single object by peeking at the dataset in the history and confirming two things:
 
 1. The number of observations is equal to the total of the two initial AnnData datasets.
@@ -195,7 +198,7 @@ We can confirm that our datasets have been combined into a single object by peek
 
 A happy coincidence here is that both datasets already had the exact same variables, so that the merging of the two datasets still yields the same number of genes.
 
-## Quality Control
+## Filtering the Matrix
 
 > ### {% icon hands_on %} Hands-on: Generating some metrics
 >
@@ -237,27 +240,35 @@ For this analysis, we will set a minimum threshold of detectability that each ce
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Inspect and manipulate** {% icon tool %})
 >    - *"Method used for filtering"*: `Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'`
 >        - *"Filter"*: `Minimum number of genes expressed`
->            - *"Minimum number of genes expressed required for a cell to pass filtering"*: `200`
+>            - *"Minimum number of genes expressed required for a cell to pass filtering"*: `100`
 >
 > 1. {% tool [Filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Filter** {% icon tool %})
 >    - *"Method used for filtering"*: `Filter genes based on number of cells or counts, using 'pp.filter_genes'`
 >        - *"Filter"*: `Minimum number of cells expressed`
->            - *"Minimum number of cells expressed required for a gene to pass filtering"*: `5`
+>            - *"Minimum number of cells expressed required for a gene to pass filtering"*: `2`
 >
 >    We now set the upper limits to the analysis.
 >
-> 1. {% tool [Filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0) %} with the following parameters:
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Filter** {% icon tool %})
->    - *"Method used for filtering"*: `Filter genes based on number of cells or counts, using 'pp.filter_genes'`
->        - *"Filter"*: `Maximum number of counts`
->            - *"Maximum number of counts required for a gene to pass filtering"*: `10000`
+>    - *"Function to manipulate the object"*: `Filter observations or variables`
+>        - *"What to filter?"*: `Observations (obs)`
+>        - *"Type of filtering?"*: `By key (column) values`
+>            - *"Key to filter"*: `n_genes_by_counts`
+>            - *"Type of value to filter"*: `Number`
+>                - *"Filter"*: `less than`
+>                - *"Value"*: `12000`
 >
-> 1. {% tool [Filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Filter** {% icon tool %})
->    - *"Method used for filtering"*: `Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'`
->        - *"Filter"*: `Maximum number of counts`
->            - *"Maximum number of counts required for a cell to pass filtering"*: `100000`
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `anndata` (output of **Manipulate AnnData** {% icon tool %})
+>    - *"Function to manipulate the object"*: `Filter observations or variables`
+>        - *"What to filter?"*: `Observations (obs)`
+>        - *"Type of filtering?"*: `By key (column) values`
+>            - *"Key to filter"*: `total_counts`
+>            - *"Type of value to filter"*: `Number`
+>                - *"Filter"*: `less than`
+>                - *"Value"*: `120000`
 >
 {: .hands_on}
 
@@ -361,14 +372,16 @@ With our data now sufficiently "flat" and ready for human consumption, we can no
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in PCA coordinates, using 'pl.pca`
 >      - *"Keys for annotations of observations/cells or variables/genes"*: `batch`
 >      - In *"Plot attributes"*
->        - *"Colors to use for plotting categorical annotation groups"*: `rainbow`
+>        - *"Colors to use for plotting categorical annotation groups"*: `rainbow (Miscellaneous)`
 >
 > 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Cluster, infer trajectories and embed** {% icon tool %})
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
 >      - *"Keys for annotations of observations/cells or variables/genes"*: `batch`
+>      - *"Show edges?"*: `No`
 >      - In *"Plot attributes"*
->        - *"Colors to use for plotting categorical annotation groups"*: `rainbow`
+>        - *"Legend font size"*: `14`
+>        - *"Colors to use for plotting categorical annotation groups"*: `rainbow (Miscellaneous)`
 >
 {: .hands_on}
 
@@ -380,6 +393,8 @@ With our data now sufficiently "flat" and ready for human consumption, we can no
 From this, we can see that there is a reasonable overlap in our batches shown both in the PCA and UMAP embeddings. This is good because it shows that though there is *some* batch effect (i.e. cells from one batch appear to cluster on a different side of the plot than the other) it is not significant enough for there not to be some commonality between the batches.
 
 There are batch correction algorithms for cases where one batch clusters completely seperate from the other, but this is not necessary here.
+
+# Finding Cell Types
 
 ## Clustering
 
@@ -395,7 +410,7 @@ Let us cluster the cells and see what cell types we can discover in the plots. T
 > 1. {% tool [Cluster, infer trajectories and embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Cluster, infer trajectories and embed** {% icon tool %})
 >    - *"Method used"*: `Cluster cells into subgroups, using 'tl.leiden'`
->        - *"Coarseness of the clusterin"*: `0.3`
+>        - *"Coarseness of the clusterin"*: `0.35`
 >
 > 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Cluster, infer trajectories and embed** {% icon tool %})
@@ -489,7 +504,7 @@ We can use this Dotplot as a guide to relabel our clusters and give more meaning
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Cluster, infer trajectories and embed** {% icon tool %})
 >    - *"Function to manipulate the object"*: `Rename categories of annotation`
 >        - *"Key for observations or variables annotation"*: `leiden`
->        - *"Comma-separated list of new categories"*: `0, 1, 2, 3, trichoblast, 5, 6, cortex, 8, 9, 10, columella+QC+NC, xylem, 13`
+>        - *"Comma-separated list of new categories"*: `0, 1, 2, trichoblasts, 4, 5, 6, atrichoblasts, endodermis, cortex, 10, columella+QC+NC, xylem`
 >
 > 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata` (output of **Manipulate AnnData** {% icon tool %})
@@ -509,13 +524,13 @@ We can use this Dotplot as a guide to relabel our clusters and give more meaning
 If we look at the clusters now, and compare them to the original image in the paper, we can infer that the meristematic cells are likely to be derived from cluster 1, which shares soft clustering with the trichoblasts suggesting a trajectory pathway which could be explored.
 
 
-## Conclusions
+# Conclusions
 
 In this tutorial, we have recapitulated the same clustering analysis in the ["Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing"](https://doi.org/10.1016/j.devcel.2019.02.022) {% cite denyer2019spatiotemporal %} paper, and validated them by comparing DotPlots for specific genes that were used as markers in that paper.
 
 From this point, we can perform a lineage analysis to infer a differentiation pathway between the clusters. For ScanPy there is the PAGA option, however, this does not work so well with the current dataset, so it is encouraged that users use the original Seurat trajectory suite that was given in the paper, or to experiment with Monocle.
 
-Both libraries are available within the RStudio and Jupyter Notebook libraries in the interactive Galaxy envronments which can be found in the *"Miscellaneous Tools"* section under the *"Interactive Tools"* subheading.
+Both libraries are available within the RStudio and Jupyter Notebook libraries in the interactive Galaxy envronments which can be found in the *"Miscellaneous Tools"* section under the *"Interactive Tools"* subheading. An excellent follow-up tutorial to perform a trajectory analysis in Galaxy using Jupyter notebooks would be the [*"Trajectory Analysis using Python (Jupyter Notebook) in Galaxy"*]({% link topics/transcriptomics/tutorials/scrna-JUPYTER-trajectories/tutorial.md %}).
 
 This entire tutorial can be invoked from the scRNA Plant Workflow shown below:
 
