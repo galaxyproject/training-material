@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 title: "Analysis of plant scRNA-Seq Data with Scanpy"
 subtopic: single-cell
-priority: 12
+priority: 11
 
 zenodo_link: 'https://zenodo.org/record/4597857'
 tags:
@@ -30,6 +30,8 @@ key_points:
 contributors:
   - mtekman
   - beatrizserrano
+  - gallardoalba
+  - pavanvidem
 
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
@@ -528,7 +530,7 @@ In this tutorial, we have recapitulated the same clustering analysis in the ["Sp
 
 From this point, we can perform a lineage analysis to infer a differentiation pathway between the clusters. For ScanPy there is the PAGA option, however, this does not work so well with the current dataset, so it is encouraged that users use the original Seurat trajectory suite that was given in the paper, or to experiment with Monocle.
 
-Both libraries are available within the RStudio and Jupyter Notebook libraries in the interactive Galaxy envronments which can be found in the *"Miscellaneous Tools"* section under the *"Interactive Tools"* subheading.
+Both libraries are available within the RStudio and Jupyter Notebook libraries in the interactive Galaxy envronments which can be found in the *"Miscellaneous Tools"* section under the *"Interactive Tools"* subheading. An excellent follow-up tutorial to perform a trajectory analysis in Galaxy using Jupyter notebooks would be the [*"Trajectory Analysis using Python (Jupyter Notebook) in Galaxy"*]({% link topics/transcriptomics/tutorials/scrna-JUPYTER-trajectories/tutorial.md %}).
 
 This entire tutorial can be invoked from the scRNA Plant Workflow shown below:
 
