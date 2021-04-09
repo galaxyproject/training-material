@@ -3,11 +3,10 @@
 layout: tutorial_hands_on
 title: "Tool generation from simple scripts in Galaxy: the ToolFactory"
 key_points:
-  - The ToolFactory is a fully automated Galaxy tool generator, suitable for programmers and informaticians who routinely write command line scripts.
+  - The ToolFactory is a fully automated Galaxy tool generator for scientists and developers who routinely write command line scripts.
   - It can turn a **working command line script** into a proper Galaxy tool with a test in a few minutes.
   - If the script you are wrapping fails on the command line, it will certainly also fail inside the new tool - the ToolFactory will not fix bugs in the supplied script.
   - It automatically generates simple, complete Galaxy tools from information provided by filling in a normal Galaxy form in the familiar UI.
-  - Enjoy developing scripts in Galaxy using IEs but struggle to wrap even simple scripts at first because there is so much to learn and so little time? Try the TooLFactory (once you have a working command line version)
   - Unlike a typical Conda package, a command line script can define how parameters are read from the command line. In particular, it is usually easy to ignore empty optional parameters, allowing some of the ToolFactory's limited flexibility to be overcome.
   - The ToolFactory code generator is limited to relatively simple requirements but these are very common in small scale Galaxy analyses, particularly in new fields where few tools are already available.
   - Dedicated Galaxy tool developers use more powerful tools without limits but correspondingly more experience to master.
@@ -64,7 +63,7 @@ contributors:
 
 > ### {% icon curriculum %} This training material is for Galaxy users who routinely develop command line scripts as part of their work.
 >
-> * This tutorial is for informaticians, developers and researchers routinely developing their own analysis scripts using bash, Python, Perl, Rscript or something similar.
+> * This tutorial is for developers and researchers routinely developing their own analysis scripts using bash, Python, Perl, Rscript or other scripting language
 > * It shows a quick way to bridge the gap between a working command line script and installing a real tool that "wraps" that script as a tool in Galaxy.
 > * Users new to Galaxy from other scientific disciplines and not yet familiar with manual tool development processes may find uses for a tool generator.
 > * The ToolFactory is a Galaxy tool controlled through the usual Galaxy tool interface, but without a script, it is of little use.
@@ -584,6 +583,10 @@ can with a local venv described above - but a little slower and isolated in a co
 - Use this [zenodo link](https://zenodo.org/record/4661849/files/TFdemo_history_april_4.tar.gz?download=1).
 - Copy it and paste it into the URL box on the screen for importing a remote history.
 - The link is also on the welcome page of the virtualenv Planemo installation described above.
+- WORK IN PROGRESS WARNING: Use the link above - not the link on the welcome.html.
+   - It has the prolog and lisp samples but will complain until you manually install the ToolFactory tool fubar/tool_factory_2 from the main toolshed
+   - I may have fixed this by the time you read this
+   - This latest history was not generated in planemo - long tedious story involving manually editing workflows and such.
 
 > ### {% icon hands_on %} Hands-on: Steps to use that URL to import the history
 >
@@ -1016,11 +1019,9 @@ planemo lint $TOOLNAME >> $2
 
 - Any interpreted language in Conda can be used, as long as it will take a command line script path or read from STDIN.
 - Trivial samples using Lisp and Prolog are included in the demonstration history.
-- They show how easy it is to use either of these as scripting languages in Galaxy for long running applications.
-- The Prolog tool has an inbuilt script.
-- Substitute the sample script for real code and add inputs, user-configurable parameters and outputs to produce a tool wrapping a Prolog script if you ever need one in Galaxy.
-- The Lisp tool will try to execute the selected input text file, hoping it contains a Lisp program.
-- This is a terrible idea for a public server and is shown only as a skeletal example of what is possible, not what is sensible.
+- They may be old, but they show how it is easy to use any Conda scripting language package in Galaxy for long running applications.
+- The Prolog tool has an inbuilt script. Substitute the sample script for real code and add inputs, user-configurable parameters and outputs to produce a tool wrapping a Prolog script if you ever need one in Galaxy.
+- The Lisp tool will try to execute the selected input text file, hoping it contains a Lisp program like the `hello world` example supplied. This is a terrible idea for a public server and is shown only as a skeletal example of what is possible, not what is sensible.
 
 > ### {% icon details %} `Prolog` and `Lisp` demonstration tools
 > >```xml
