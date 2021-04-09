@@ -9,29 +9,30 @@ A program to update outdated Galaxy Tours to conform to the latest version
 (21.01 as of this writing) of the Galaxy UI.
 
 This program generates a Jinja2 template and externalizes tool IDs to a 
-separate vars.yaml file so tool versions can be updated automatically (see the
-update-tour.py program) without editing the tour file itself.
+separate vars.yaml file so tool versions can be updated automatically without 
+editing the tour file itself. See the update_tour.py program for details on
+updating tours. 
 
 A list of the tools used in the tour are  written to a tools.yaml file so 
 admins can easily see and install the tools needed by a particular tour. The
-tools.yaml file is also updated by the update-tour.py program.
+tools.yaml file is also updated by the update_tour.py program.
 
-Use the render-tour.py program to generate the tour YAML file that will be 
+Use the render_tour.py program to generate the tour YAML file that will be 
 loaded by Galaxy.
 
-NOTE: Since YAML is a PITA to roundtrip cleanly and easily we don't use a YAML
-parser to read the original tour.yaml file, but simple read it line by line and
-do string replacements.  The problem is Block Literals, i.e. multi-line strings
-specified with >- or |-. Once those strings are stored in dictionaries the style
-of input is lost and the YAML processor will pick what it thinks is best when
-it outputs the string.
+NOTE: Since YAML is a PITA to round trip cleanly and easily we don't use a YAML
+parser to read the original tour.yaml file. Instead we simply read it line by 
+line and do string replacements.  The problem is Block Literals, i.e. multi-line 
+strings specified with >- or |-. Once those strings are stored in dictionaries 
+the style of input is lost and the YAML processor will pick what it thinks is 
+best, which is almost always not what we want.
 '''
 
 DEFAULT_TOOLSHED = 'https://toolshed.g2.bx.psu.edu'
 shed = toolshed.ToolShedInstance(DEFAULT_TOOLSHED)
 
 # The strings that we do simple search/replace on.
-# TODO These values should be parameterized.
+# TODO These values should be parameterized, or at least loaded from a config.
 replacements = [
     (' .fa.fa-upload', ''),
     ('#history-options-button', '#history-new-button'),
@@ -86,9 +87,11 @@ def parse_tour(tour_file, directory):
         for line in f.readlines():
             line = do_replacement(line)
             if line.startswith("steps:"):
+                # Add tags immediately before the steps element.  None of the
+                # existing tours have tags so this is safe.
                 lines.append("tags:\n")
-                lines.append(f'  - "{ tag }"\n')
-                lines.append('  - auto\n')
+                # lines.append(f'  - "{ tag }"\n')
+                lines.append('  - Auto\n')
                 lines.append(line)
             elif line.find("/tool_runner?tool_id=") > 0:
                 start = line.index("tool_id=") + 8

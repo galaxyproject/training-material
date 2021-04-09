@@ -4,6 +4,11 @@ import yaml
 from bioblend import toolshed
 from urllib.parse import quote_plus as urlencode
 
+'''
+Update the tool versions used in a given tour.  Both the tools.yaml and
+vars.yaml files are updated with the latest version available on the ToolShed.
+'''
+
 DEFAULT_TOOLSHED = 'https://toolshed.g2.bx.psu.edu'
 
 # Common keys into the tools dict. Defined solely so our IDE can do completions
@@ -18,6 +23,11 @@ REVISIONS = 'revisions'
 tool_sheds = {DEFAULT_TOOLSHED: toolshed.ToolShedInstance(DEFAULT_TOOLSHED)}
 
 def get_guid(info):
+    '''
+    Get the GUID for a given tool.
+
+    The tool's GUID is the tool id used by selectors in the tour.
+    '''
     for m in info:
         if 'model_class' in m and m['model_class'] == 'RepositoryMetadata':
             return m['valid_tools'][0]['guid']
@@ -31,16 +41,13 @@ def validate(tool):
         tool[REVISIONS] = []
 
 
-def append(tool, revision):
-    if revision not in tool[REVISIONS]:
-        tool[REVISIONS].append(revision)
-
-
-def replace(tool, revision):
-    tool[REVISIONS] = [revision]
-
-
 def get_tool_shed(tool):
+    '''
+    Get the ToolShed URL for the toolshed the tool was installed from.
+
+    #TODO We shoud probably raise an exception if a tool comes from anywhere
+          but the main tool shed.
+    '''
     url = tool[SHED]
     if url in tool_sheds:
         ts = tool_sheds[url]
@@ -51,6 +58,10 @@ def get_tool_shed(tool):
 
 
 def update_tour(tour_dir):
+    '''
+    Update the tools.yaml and vars.yaml with the latest tool versions used
+    in the tour.
+    '''
     print(f'Updating {os.path.basename(tour_dir)}')
     tools_file = os.path.join(tour_dir, 'tools.yaml')
     if not os.path.exists(tools_file):
