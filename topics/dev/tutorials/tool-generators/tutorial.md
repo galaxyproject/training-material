@@ -770,7 +770,26 @@ for those rare situations where that's all you need. No i/o or other parameters 
 > >  </configfiles>
 > >  <inputs>
 > >    <repeat name="R_mi" title="Add as many Input lots of inputs as needed">
-> >      <param name="mi" type="data" optional="false" label="Input lots of inputs" help="" format="None" multiple="false"/>
+> >      <param name="mi" type="data" optional="false" label="Input lots of inputs" help="" format="ab1,affybatch,agilentbrukeryep.d.tar,agilentmasshunter.d.tar,analyze75,arff,asn1,
+> > asn1-binary,augustus,axt,bam,bcf,bed,bed12,bed6,bedgraph,bedstrict,bigbed,bigwig,biom1,biom2,blastxml,blib,brukerbaf.d.tar,brukertdf.d.tar,bus,cel,chira.sqlite,chrint,cisml,ckpt,cmap,
+> > cml,consensusxml,cool,cps,cpt,cram,csfasta,csv,ct,cuffdiff.sqlite,cxb,d3_hierarchy,daa,dada2_dada,dada2_errorrates,dada2_mergepairs,dada2_sequencetable,dada2_uniques,dbn,dbnsfp.tabular,
+> > dcd,deeptools_compute_matrix_archive,deeptools_coverage_matrix,dlib,drf,dta,dta2d,dzi,edr,edta,eland,elandmulti,elib,embl,encodepeak,eset,excel.xls,expression.json,fai,fast5.tar,
+> > fast5.tar.bz2,fast5.tar.gz,fasta,fasta.gz,fastg,fastq,fastq.bz2,fastq.gz,fastqcssanger,fastqcssanger.bz2,fastqcssanger.gz,fastqillumina,fastqillumina.bz2,fastqillumina.gz,fastqsanger,
+> > fastqsanger.bz2,fastqsanger.gz,fastqsolexa,fastqsolexa.bz2,fastqsolexa.gz,featurexml,ffdata,ffindex,flv,fped,fphe,fps,fqtoc,gafa.sqlite,gal,gatk_dbsnp,gatk_interval,gatk_recal,gatk_report,
+> > gatk_tranche,gemini.sqlite,genbank,genbank.gz,geojson,gfa1,gfa2,gff,gff3,gff3.bz2,gff3.gz,gii,gii.gz,gpr,grd,grd.tgz,gro,gtf,h5,h5ad,hdt,hhr,hlf,hmm2,hmm3,icm,idat,ideaspre,idpdb,idxml,
+> > imgt.json,imzml,inchi,intermine_tabular,interval,ipynb,isa-json,isa-tab,itp,jellyfish,json,jsonld,kallisto.idx,kroenik,lav,ldindep,len,loom,lped,maf,malist,mascotxml,maskinfo-asn1,
+> > maskinfo-asn1-binary,mcool,mdp,memepsp,memexml,meryldb,mgf,mkv,mol,mol2,mothur.accnos,mothur.align,mothur.align.check,mothur.align.report,mothur.axes,mothur.cons.taxonomy,
+> > mothur.count_table,mothur.design,mothur.dist,mothur.filter,mothur.filtered.masked.quan,mothur.filtered.quan,mothur.freq,mothur.groups,mothur.list,mothur.lower.dist,mothur.map,
+> > mothur.masked.quan,mothur.names,mothur.oligos,mothur.otu,mothur.otu.corr,mothur.otulabels,mothur.pair.dist,mothur.quan,mothur.rabund,mothur.rdp.taxonomy,
+> > mothur.ref.taxonomy,mothur.relabund,mothur.sabund,mothur.seq.taxonomy,mothur.sff.flow,mothur.shared,mothur.square.dist,mothur.summary,mothur.tax.summary,mothur.tre,mp3,mp4,
+> > mpg,mrm,ms2,msh,msp,mtx,mz.sqlite,mz5,mzdata,mzid,mzml,mzq,mztab,mztab2,mzxml,n3,ncbitaxonomy.sqlite,ndx,neostore.zip,netcdf,newick,nex,nhx,nii1,nii1.gz,nii2,nii2.gz,nmrml,
+> > nt,obfs,obo,odgi,ome.tiff,osw,owl,oxlicg,oxligl,oxling,oxliss,oxlist,oxlits,paf,paf.gz,par,paramxml,parquet,pbed,pdb,pdbqt,pdf,peff,peplist,peptideshaker_archive,pepxml,pepxml.tsv,phylip,
+> > phyloxml,picard_interval_list,pileup,plyascii,plybinary,png,postgresql,pphe,pqp,pqr,probam,probed,protobuf2,protobuf3,protxml,protxml.tsv,psms,pssm-asn1,ptkscmp,qcml,qname_sorted.bam,
+> > qual454,qualillumina,qualsolexa,qualsolid,rdata,rdata.camera.negative,rdata.camera.positive,rdata.camera.quick,rdata.msnbase.raw,rdata.sce,rdata.xcms.fillpeaks,rdata.xcms.findchrompeaks,
+> > rdata.xcms.group,rdata.xcms.raw,rdata.xcms.retcor,rdf,rdock_as,rma6,rna_eps,sam,sbml,scf,scidx,sdf,searchgui_archive,sf3,sff,shp,sif,smat,smi,snaphmm,snpeffdb,snpmatrix,snpsiftdbnsfp,
+> > snptest,spalndba,spalndbnp,spec.xml,splib,splib_noindex,sqlite,sqmass,sra,sra_manifest.tabular,stl,stockholm,tabular,tabular.gz,tandem,tar,taxonomy,tck,textgrid,tgz,thermo.raw,tiff,top,tpr,
+> > trackhub,trafoxml,traml,trk,trr,tsv,ttl,twobit,txt,uniprotxml,unsorted.bam,vcf,vcf_bgzip,vel,velvet,vg,vtkascii,vtkbinary,watersmasslynx.raw.tar,wav,wiff,wiff.tar,wig,xg,xgmml,xlsx,xmfa,xml,
+> > xquest.xml,xtc,xvg,zip" multiple="false"/>
 > >    </repeat>
 > >    <repeat name="R_mp" title="Add as many things to add as needed">
 > >      <param name="mp" type="text" value="Add lots of things" label="things to add" help=""/>
