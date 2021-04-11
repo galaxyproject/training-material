@@ -728,10 +728,14 @@ for those rare situations where that's all you need. No i/o or other parameters 
 - Repeats *on the generated tool form* are supported for input and user edited parameters
 - The user sees the usual "Add another" button associated with the parameter and can add any number of them that they wish
 - The script must be able to parse and deal correctly with multiple instances of the same parameter name.
-- Use argparse as shown in the example below.
+- A Python argparse sample is shown in the example below.
 - Repeats do not make much sense for positional parameters because their number is unpredictable. They will be ignored and a warning issued.
 - Repeats on output parameters are not supported - use a `collection` described below when there an unpredictable number of output files are required.
-- A sample shows a trivial example where one input parameter and one text parameter are embedded within `<repeat>` tags in the `<inputs>` and `<tests>` sections.
+- The sample has one input parameter and one text parameter. The `repeat` option is selected for both.
+- In the resulting tool XML wrapper, these are embedded within `<repeat>` tags in the `<inputs>` and `<tests>` sections automatically.
+- Note that repeats are limited to single parameters - parameter groups cannot be repeated at present and will require manual coding.
+- The end user sees the form with repeatable fields as shown at the end of the detail below.
+- The sample trivially returns whatever the user chose to repeat.
 
 > ### {% icon details %} Repeats demonstration tool XML
 > >
@@ -1028,7 +1032,7 @@ a Collection can be used to hide them in an organised list as a single new histo
 > >
 > >**What it Does**
 > >
-> >Echos your selection
+> >Echoes your selection
 > >
 > >
 > >
@@ -1413,10 +1417,13 @@ planemo tool_factory.
 
 # Acknowledgements.
 
-This tutorial exists because so many people have contributed to the Galaxy project over the last 15 years. Specific thanks are owed to:
+This tutorial exists because so many people have contributed to the Galaxy project over the last 15 years.
+Specific thanks are owed to:
 
 - Marius van den Beek for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.
-- Helena Rasch for review and revisions to the tutorial and associated code.
+- Helena Rasch for
+    - review and revisions to the tutorial and associated code.
+    - elegantly generated lint-free XML provided by [galaxyml code](https://github.com/hexylena/galaxyxml)
 
 ---
 
