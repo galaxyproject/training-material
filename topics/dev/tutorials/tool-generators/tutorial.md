@@ -714,14 +714,109 @@ Galaxy can be used as a tool development environment for users who can write the
 selection list will generate a simple filter tool, executing a script or Conda dependency with input on STDIN and output on STDOUT
 for those rare situations where that's all you need. No i/o or other parameters for the user to set. Used in the tacrev demonstration tool.
 
-#### Repeats in the ToolFactory form permit any number of parameters.
+#### Repeats in the ToolFactory form theoretically permit *any* number of parameters.
 
 - Inputs, outputs and additional user parameters are all presented within repeat elements on the form.
-- Repeats are unlimited in number for any given tool from a technical perspective
-- The limit is having the patience to create them in the relatively clumsy Galaxy UI.
-- A handful is manageable but there are no technical limits to the actual total number
-- Repeats *on the generated tool form* are supported for input and output parameters. Other user parameter repeats will be possible with changes to Galaxyxml.
+- For any given tool, repeats allow an unlimited number of each of those tool elements - from a technical perspective.
+- The practical limit is reached when your patience runs out as you add them in the current Galaxy forms UI.
+- The form gets very long, very quickly.
+- A handful is easily manageable.
 
+#### Repeated parameters in generated tools allow the end user to supply multiple values
+
+- *WARNING: Work in progress* - this section depends on a pending PR for galaxyxml - will not work as at April 11 but works fine with the update.
+- Repeats *on the generated tool form* are supported for input and user edited parameters
+- The user sees the usual "Add another" button associated with the parameter and can add any number of them that they wish
+- The script must be able to parse and deal correctly with multiple instances of the same parameter name.
+- Use argparse as shown in the example below.
+- Repeats do not make much sense for positional parameters because their number is unpredictable. They will be ignored and a warning issued.
+- Repeats on output parameters are not supported - use a `collection` described below when there an unpredictable number of output files are required.
+- A sample shows a trivial example where one input parameter and one text parameter are embedded within `<repeat>` tags in the `<inputs>` and `<tests>` sections.
+
+> ### {% icon details %} Repeats demonstration tool XML
+> >
+> >
+> >```xml
+> ><tool name="reps" id="reps" version="0.01">
+> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
+> >  <!--Created by planemo@galaxyproject.org at 11/04/2021 10:18:15 using the Galaxy Tool Factory.-->
+> >  <description></description>
+> >  <requirements/>
+> >  <stdio>
+> >    <exit_code range="1:" level="fatal"/>
+> >  </stdio>
+> >  <version_command><![CDATA[echo "0.01"]]></version_command>
+> >  <command><![CDATA[python
+> >$runme
+> >#for $rep in $R_mi:
+> >--mi "$rep.mi"
+> >#end for
+> >#for $rep in $R_mp:
+> >--mp "$rep.mp"
+> >#end for
+> >>
+> >$repout]]></command>
+> >  <configfiles>
+> >    <configfile name="runme"><![CDATA[
+> >import argparse
+> >parser = argparse.ArgumentParser()
+> >a = parser.add_argument
+> >a("--mi", action="append")
+> >a("--mp", action="append")
+> >args = parser.parse_args()
+> >print(" and ".join(args.mi))
+> >print(" and".join(args.mp))
+> >]]></configfile>
+> >  </configfiles>
+> >  <inputs>
+> >    <repeat name="R_mi" title="Add as many Input lots of inputs as needed">
+> >      <param name="mi" type="data" optional="false" label="Input lots of inputs" help="" format="None" multiple="false"/>
+> >    </repeat>
+> >    <repeat name="R_mp" title="Add as many things to add as needed">
+> >      <param name="mp" type="text" value="Add lots of things" label="things to add" help=""/>
+> >    </repeat>
+> >  </inputs>
+> >  <outputs>
+> >    <data name="repout" format="txt" label="repout" hidden="false"/>
+> >  </outputs>
+> >  <tests>
+> >    <test>
+> >      <output name="repout" value="repout_sample" compare="sim_size" delta_frac="0.2"/>
+> >      <repeat name="R_mi">
+> >        <param name="mi" value="mi_sample"/>
+> >      </repeat>
+> >      <repeat name="R_mp">
+> >        <param name="mp" value="Add lots of things"/>
+> >      </repeat>
+> >    </test>
+> >  </tests>
+> >  <help><![CDATA[
+> >
+> >**What it Does**
+> >
+> >
+> >
+> >------
+> >
+> >
+> >Script::
+> >
+> >    import argparse
+> >    parser = argparse.ArgumentParser()
+> >    a = parser.add_argument
+> >    a("--mi", action="append")
+> >    a("--mp", action="append")
+> >    args = parser.parse_args()
+> >    print(" and ".join(args.mi))
+> >    print(" and".join(args.mp))
+> >
+> >]]></help>
+> >  <citations>
+> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
+> >  </citations>
+> ></tool>
+> >```
+{: .details}
 
 #### ToolFactory collection outputs are handy for hiding dozens of miscellaneous tool outputs in a single history item
 
@@ -870,7 +965,7 @@ a Collection can be used to hide them in an organised list as a single new histo
 >>
 >>![Form to configure an additional parameter as a select](../../images/toolfactory_select_demo_form.png)
 > >
->>The generated XML is shown below.
+> >The generated XML is shown below.
 > >
 > >```xml
 > ><tool name="select_test" id="select_test" version="0.01">
