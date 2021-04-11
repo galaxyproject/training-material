@@ -835,6 +835,9 @@ for those rare situations where that's all you need. No i/o or other parameters 
 > >  </citations>
 > ></tool>
 > >```
+> > - The user sees the following form after adding 3 repeats for each of the two available items
+> >
+> > ![Form to configure an additional parameter as a select](../../images/toolfactory_repeats_sample_form.png)
 {: .details}
 
 #### ToolFactory collection outputs are handy for hiding dozens of miscellaneous tool outputs in a single history item
