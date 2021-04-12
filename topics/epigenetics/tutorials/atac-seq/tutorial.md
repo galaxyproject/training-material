@@ -97,7 +97,7 @@ We will visualise regions later in the analysis and obtain the gene information 
 
 > ### {% icon hands_on %} Hands-on: Obtain Annotation for hg38 genes
 >
-> 1. {% tool [UCSC Main](ucsc_table_direct1) %} with the following parameters:
+> 1. {% tool [UCSC Main table browser](ucsc_table_direct1) %} with the following parameters:
 >    - *"clade"*: `Mammal`
 >    - *"genome"*: `Human`
 >    - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
@@ -439,7 +439,7 @@ Because of the PCR amplification, there might be read duplicates (different read
 >    - *"the pattern*: `(Library|LIBRARY)`
 > 2. Check that the datatype is tabular. If not, change it.
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
-> 3. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0) %}:
+> 3. {% tool  [Transpose rows/columns in a tabular file](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0) %}:
 >    - {% icon param-file %} *"Select lines from"*: Select the output of **Select** {% icon tool %}
 >
 > ![Metrics of MarkDuplicates](../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.png "Metrics of MarkDuplicates")
@@ -709,7 +709,7 @@ In order to visualise a specific region (e.g. the gene *RAC2*), we can either us
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [pyGenomeTracks](toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.3) %} with the following parameters:
+> 1. {% tool [pyGenomeTracks](toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.6) %} with the following parameters:
 >    - *"Region of the genome to limit the operation"*: `chr22:37,193,000-37,252,000`
 >    - In *"Include tracks in your plot"*:
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
