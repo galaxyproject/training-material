@@ -844,16 +844,25 @@ for those rare situations where that's all you need. No i/o or other parameters 
 > > ![Form to configure an additional parameter as a select](../../images/toolfactory_repeats_sample_form.png)
 {: .details}
 
-#### ToolFactory collection outputs are handy for hiding dozens of miscellaneous tool outputs in a single history item
+#### ToolFactory `collection` outputs are handy for hiding dozens of miscellaneous tool outputs in a single history item
 
-- If the script writes a large number of different output file types (images, reports..) that are not in themselves useful for downstream analyses,
-a Collection can be used to hide them in an organised list as a single new history item.
-- Collections are special kinds of outputs. They present a directory full of files as a single new history item that can be expanded to view them.
+- If the script writes a large number of different output file types (images, reports..) that are not in themselves useful for downstream analyses.
+- A Collection can be used to hide them in an organised list as a single new history item.
+- Collections are special kinds of Galaxy history items that can present a directory full of files arranged inside one single new history item.
+- When viewed, that history item presents them all as a list, each a typical, viewable Galaxy history item.
+- They don't clutter the user's history because they are all hidden in the collection.
 - The plotter example uses an Rscript.
-- It generates as many pairs of random plots as you want.
+- It generates as many pairs of random plots as the parameter supplied requires.
 - The script sends them into the the collection that appears in the history after the job runs.
-- The user's history shows only one new item after it runs.
-- That is a collection. When selected, objects linked to each plot will be listed for viewing.
+- The user's history shows only one new item after it runs - it must be viewed to see all the individual contents.
+
+> ### {% icon warning %} The generated test for `collections` always passes because it doesn't test anything.
+>
+>    - Nothing is known about what's in the collection when the `<test>` code is generated.
+>    - Introspecting arbitrary scripts to populate the test with actual file names?. Yeah, Nah.
+>    - Asking the ToolFactory user to supply some on the form would be possible.
+>    - It would also make the form even more complex, but is very welcome as a PR if anyone feels strongly about this bogus test.
+{: .warning}
 
 > ### {% icon details %} `plotter` collection output demonstration tool form, generated XML and outputs
 > >
@@ -1417,8 +1426,9 @@ planemo tool_factory.
 
 # Acknowledgements.
 
-This tutorial exists because so many people have contributed to the Galaxy project over the last 15 years.
-Specific thanks are owed to:
+This tutorial is based on the work of thousands of contributers to the Galaxy project over the last 15 years or so. Thanks all!
+
+Special thanks are owed to:
 
 - Marius van den Beek for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.
 - Helena Rasch for
