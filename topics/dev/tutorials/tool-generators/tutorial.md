@@ -856,12 +856,14 @@ for those rare situations where that's all you need. No i/o or other parameters 
 - The script sends them into the the collection that appears in the history after the job runs.
 - The user's history shows only one new item after it runs - it must be viewed to see all the individual contents.
 
-> ### {% icon warning %} The generated test for `collections` always passes because it doesn't test anything.
+> ### {% icon warning %} The default generated test for output collections always passes because it doesn't test anything.
 >
->    - Nothing is known about what's in the collection when the `<test>` code is generated.
->    - Introspecting arbitrary scripts to populate the test with actual file names?. Yeah, Nah.
->    - Asking the ToolFactory user to supply some on the form would be possible.
->    - It would also make the form even more complex, but is very welcome as a PR if anyone feels strongly about this bogus test.
+>    - It is *possible* to supply a test over-ride. Example code is shown on the sample form. It provides a single predicted <element> so the test really does test something.
+>    - Otherwise, the test will be empty, because that represents what the code generator knows about what's in the collection when the `<test>` code is generated. Nothing.
+>    - Introspecting arbitrary scripts to reliably populate the test with actual file names?. Not likely any time soon.
+>    - Asking the ToolFactory user to supply some on the form could be used to populate the test properly.
+>    - It would also make the form even more complex, but is very welcome as a PR.
+>
 {: .warning}
 
 > ### {% icon details %} `plotter` collection output demonstration tool form, generated XML and outputs
