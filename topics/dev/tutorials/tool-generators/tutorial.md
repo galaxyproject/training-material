@@ -61,14 +61,17 @@ contributors:
 
 ---
 
-> ### {% icon curriculum %} This training material is for Galaxy users who routinely develop command line scripts as part of their work.
+> ### {% icon curriculum %} It is assumed that the reader has arrived here after seeing the ![overview slide presentation](./slides.html) and thinking it looked interesting and relevant for their work.
+>
 >
 > * This tutorial is for developers and researchers routinely developing their own analysis scripts using bash, Python, Perl, Rscript or other scripting language
 > * It shows a quick way to bridge the gap between a working command line script and installing a real tool that "wraps" that script as a tool in Galaxy.
 > * Users new to Galaxy from other scientific disciplines and not yet familiar with manual tool development processes may find uses for a tool generator.
-> * The ToolFactory is a Galaxy tool controlled through the usual Galaxy tool interface, but without a script, it is of little use.
-> * Command line scripting skills are needed to prepare the code for the ToolFactory to wrap in the generated tool.
-> * No explicit instruction about scripting is offered in this training. They are prerequisite skills.
+> * The ToolFactory is a Galaxy tool controlled through the usual Galaxy tool interface.
+> * Without a working script that needs to be available as a tool in Galaxy, it is of little use.
+> * Command line scripting skills are needed to prepare the working code needed.
+> * The ToolFactory generates a wrapper for the code supplied, so it runs every time the generated tool is executed by a user.
+> * No explicit instruction about scripting is offered in this training. It is a mandatory prerequisite skill.
 > * Readers will need to test and explore to find ways to use the ToolFactory for their work.
 > * This tutorial is introductory. It offers broad guidance on a tool. It is up to the user to adapt it to their own work.
 > * Experienced galaxy tool developers already have specialised tools and training to suit their needs so may not gain much from this material.
@@ -78,15 +81,13 @@ contributors:
 
 > ### {% icon announcement %} Tutorial process overview - what to expect.
 >
-- This tutorial for Galaxy users who write code as part of their routine work is in 3 parts.
-- The first part is all background reading, with an optional demonstration video and a dissected `Hello World!` example
-- It should help readers understand what the ToolFactory does so they can decide whether the training is relevant to their needs. A *sorting hat*.
-- After that it's all hands on.
-- The second part involves choosing how to run the ToolFactory, installing it and importing the demonstrations in a sample history.
+- This tutorial is in 3 parts.
+- The first part is background and introduction with an optional demonstration video and a dissected `Hello World!` example.
+- The rest is all hands on.
+- The second part involves choosing how to run the ToolFactory, installing it and importing the demonstration tools in a sample history where they can be rerun to see how the samples were configured.
 - The third part offers some tips and suggestions for exploring the demonstration tools and introduces some useful features.
-- The sample tools are the core documentation.
+- The sample tools are the core documentation. They are trivially simple samples, each illustrating specific features as models for getting things done.
 - Hosting the ToolFactory on a public server is ill-advised, so an interactive tutorial is not possible.
-- When a developer examines the examples, they will quickly figure it out how it might be useful.
 {: .announcement}
 
 # 1. Tools, tool wrappers and the ToolFactory in Galaxy.
@@ -142,7 +143,9 @@ It was developed for skilled programmers who need new "real" Galaxy tools for th
 line may find it useful if they ever need a real Galaxy tool that wraps a working script. Shell utilities and scripting language interpreters supported by Conda can be used.
 
 Generated tools pass Planemo lint, and are functionally indistinguishable from equivalent manually written tools. They contain a test based on the test data provided
-at tool generation. Trivial working examples using bash, Python, Rscript, Lisp, Prolog, Perl and sed are provided and described below. If you are a scientist/programmer or informatician new to Galaxy
+at tool generation. Trivial working examples using bash, Python, Rscript, Lisp, Prolog, Perl and sed are provided and described below.
+
+If you are a scientist/programmer or informatician new to Galaxy
 and new to the dark arts of Galaxy tool building, this tutorial may be of help. It introduces an automated way to convert any useful script into a toolshed ready tool,
 quickly *inside* Galaxy.
 
@@ -164,7 +167,7 @@ quickly *inside* Galaxy.
 ## A dissected demonstration:`Hello World!` generated using the ToolFactory
 {: .no_toc}
 
-The ToolFactory can easily generate the ubiquitous `Hello World!` as a Galaxy tool. A parameter is added so the user can supply the text after "Hello..." and
+The ToolFactory can generate a `Hello World!` script as a Galaxy tool. A parameter is added so the user can supply the text after "Hello..." and
 the tool can write the combined string to a new history item. Trivial, but an excellent model worth studying in detail. It is
 implemented as a tool that wraps a bash script of one line - `echo "Hello $1!"` to echo the first parameter passed on the command line. This is a
 generic model for many Galaxy tools with the addition of a file or a parameter or two, as discussed below.
@@ -224,8 +227,8 @@ Two new items are created in the history when the ToolFactory is executed - the 
 {: .details }
 
 
-The generated tool XML (found in the collection and also in the archive) and the new tool form are well
-worth some study. Text on the form is all in the XML and it all comes from the ToolFactory form.
+The generated tool XML (found in the collection and also in the archive) and the new tool form are
+worth reviewing. Text on the form is all in the XML and it all comes from the ToolFactory form.
 
 >### {% icon details %} Generated XML and tool form
 >
@@ -316,8 +319,8 @@ handy for developers new to Galaxy, and for Galaxy users who are capable of corr
 
 > ### {% icon tip %} Under the hood:
 >
->  - It uses galaxyxml to generate the tool XML from ToolFactory form settings.
->  - It uses Planemo to generate the test outputs
+>  - It uses [galaxyml](https://github.com/hexylena/galaxyxml) to generate the tool XML from ToolFactory form settings.
+>  - It uses [Planemo](https://github.com/galaxyproject/planemo) to generate the test outputs
 >  - Then again to test newly generated code
 {: .tip}
 
@@ -858,11 +861,13 @@ for those rare situations where that's all you need. No i/o or other parameters 
 
 > ### {% icon warning %} The default generated test for output collections always passes because it doesn't test anything.
 >
->    - It is *possible* to supply a test over-ride. Example code is shown on the sample form. It provides a single predicted <element> so the test really does test something.
->    - Otherwise, the test will be empty, because that represents what the code generator knows about what's in the collection when the `<test>` code is generated. Nothing.
+>    - Supplying a test over-ride is recommended for collections.
+>    - Example code is shown on the sample tool's form and in the original example code below - removed from the current sample.
+>    - For a real test, one or more expected <element.../> tags must be provided so the test really does test something.
+>    - Add your own file names to the sample to make a real test for your own collections.
+>    - Otherwise, the generated test will be empty, because that is what the code generator knows about what's in the collection when the `<test>` code is generated. Nothing.
 >    - Introspecting arbitrary scripts to reliably populate the test with actual file names?. Not likely any time soon.
->    - Asking the ToolFactory user to supply some on the form could be used to populate the test properly.
->    - It would also make the form even more complex, but is very welcome as a PR.
+>    - Introspecting the Planemo test result to write the test and then retest might be possible but is not planned.
 >
 {: .warning}
 
