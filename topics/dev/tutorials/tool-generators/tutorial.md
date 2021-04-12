@@ -986,7 +986,8 @@ for those rare situations where that's all you need. No i/o or other parameters 
 >> Collections are ideal for messy analysis reporting outputs such as images, pdfs and other material that is not useful as an input to a downstream tool.
 >> It is material that the user will want kept together, so a single history item is ideal to avoid unnecessary clutter.
 >> As shown above, the script only has to write the files to a directory.
->> Note that the test is over-ridden in the ToolFactory form to generate this tool because I could not get it to test correctly otherwise.
+>> Note that the test is over-ridden in the ToolFactory form to generate this tool.
+>> Without an over-ride to suit your script, an empty test will be generated that will not do any testing - see warning above.
 >>
 >>
 >>![Plotter collection opens to show all the plots as separate items to be viewed or downloaded](../../images/toolfactory_plotter_sample_output.png)
@@ -1357,13 +1358,14 @@ planemo lint $TOOLNAME >> $2
 
 - Does your code create the args vector at the start of the script with something like `args = commandArgs(trailingOnly=TRUE)` before Rscript tries to access args[1] ?
 
-#### I want to use a collection for outputs but the test always fails. Even more odd, planemo reports that it performed zero tests in the html output!
+#### I want to use a collection for outputs but it always passes the test even when the script fails. What gives?
 
 - Unfortunately, collections are tricky to generate automated tests for. The contents are never known until the tool has been run.
-- The galaxyxml code for collections is in need of work to address this - pull requests is pending.
-- Until it's automated, please take a look at the plotter sample. It is recommended that you modify the test over-ride that appears in that sample form. Substitute one
-of the file names you expect to see after the collection is filled by your new tool for the pdf used in the plotter sample tool test.
-
+- Automation is hard. If you can help, pull requests are welcomed.
+- Until it's automated, please take a look at the plotter sample.
+- It is recommended that you modify the test over-ride that appears in that sample form. Substitute one
+or more of the file names you expect to see after the collection is filled by your new tool for the pdf used in the plotter sample tool test.
+- That will test properly.
 
 ---
 ## Running your newly generated tools
