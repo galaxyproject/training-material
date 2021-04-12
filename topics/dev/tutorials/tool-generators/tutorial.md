@@ -63,7 +63,7 @@ contributors:
 
 > ### {% icon curriculum %} This tutorial is about the ToolFactory. It is only useful if you have a script to be turned into a Galaxy tool.
 >
-> * The ![overview slide presentation](./slides.html) should look interesting and relevant for your work if you are starting here.
+> * The [overview slide presentation](./slides.html) should look interesting and relevant for your work if you are starting here.
 > * This tutorial is for developers and researchers routinely developing their own analysis scripts using bash, Python, Perl, Rscript or other scripting language
 > * It shows a quick way to bridge the gap between a working command line script and installing a real tool that "wraps" that script as a tool in Galaxy.
 > * Users new to Galaxy from other scientific disciplines and not yet familiar with manual tool development processes may find uses for a tool generator.
