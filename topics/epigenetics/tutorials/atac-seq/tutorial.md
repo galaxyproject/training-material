@@ -62,7 +62,9 @@ We first need to download the sequenced reads (FASTQs) as well as other annotati
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the files from [Zenodo](https://doi.org/10.5281/zenodo.3862792) or from the shared data library
+> 2. Import the files from [Zenodo](https://doi.org/10.5281/zenodo.3862792) or from
+>    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
+>     -> `{{ page.title }}`):
 >
 >    ```
 >    https://zenodo.org/record/3862793/files/ENCFF933NTR.bed.gz
@@ -95,7 +97,7 @@ We will visualise regions later in the analysis and obtain the gene information 
 
 > ### {% icon hands_on %} Hands-on: Obtain Annotation for hg38 genes
 >
-> 1. **UCSC Main** {% icon tool %} with the following parameters:
+> 1. {% tool [UCSC Main](ucsc_table_direct1) %} with the following parameters:
 >    - *"clade"*: `Mammal`
 >    - *"genome"*: `Human`
 >    - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
@@ -110,9 +112,9 @@ We will visualise regions later in the analysis and obtain the gene information 
 >
 >    This table contains all the information but is not in a BED format. To transform it into BED format we will cut out the required columns and rearrange:
 >
-> 4. **Cut** columns from a table {% icon tool %} with the following parameters:
->    - {% icon param-text %} *"Cut columns"*: `c3,c5,c6,c13,c12,c4`
->    - {% icon param-text %} *"Delimited by"*: `Tab`
+> 4. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
+>    - *"Cut columns"*: `c3,c5,c6,c13,c12,c4`
+>    - *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: `UCSC Main on Human: wgEncodeGencodeBasicV37 (chr22:1-50,818,468)`
 >
 > 5. Check the contents of your file, is this as you expect it to be?
@@ -171,7 +173,7 @@ The first step is to check the quality of the reads and the presence of the Next
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **FastQC** {% icon tool %} with the default parameters:
+> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
 >       - *"Short read data from your current history"*: Choose here either only the `SRR891268_R1` file with {% icon param-file %} or use {% icon param-files %} **Multiple datasets** to choose both `SRR891268_R1` and `SRR891268_R2`.
 > 2. Inspect the web page output of **FastQC** {% icon tool %} for the `SRR891268_R1` sample. Check what adapters are found at the end of the reads.
 >
@@ -224,7 +226,7 @@ The forward and reverse adapters are slightly different. We will also trim low q
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Cutadapt** {% icon tool %} with the following parameters:
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5) %} with the following parameters:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end`
 >        - {% icon param-file %} *"FASTQ/A file #1"*: select `SRR891268_R1`
 >        - {% icon param-file %} *"FASTQ/A file #2"*: select `SRR891268_R2`
@@ -232,18 +234,18 @@ The forward and reverse adapters are slightly different. We will also trim low q
 >            - In *"3' (End) Adapters"*:
 >                - {% icon param-repeat %} *"Insert 3' (End) Adapters"*
 >                    - *"Source"*: `Enter custom sequence`
->                        - {% icon param-text %} *"Enter custom 3' adapter name (Optional if Multiple output is 'No')"*: `Nextera R1`
->                        - {% icon param-text %} *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCTCCGAGCCCACGAGAC`
+>                        - *"Enter custom 3' adapter name (Optional if Multiple output is 'No')"*: `Nextera R1`
+>                        - *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCTCCGAGCCCACGAGAC`
 >        - In *"Read 2 Options"*:
 >            - In *"3' (End) Adapters"*:
 >                - {% icon param-repeat %} *"Insert 3' (End) Adapters"*
 >                    - *"Source"*: `Enter custom sequence`
->                        - {% icon param-text %} *"Enter custom 3' adapter name (Optional)"*: `Nextera R2`
->                        - {% icon param-text %} *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCTGACGCTGCCGACGA`
+>                        - *"Enter custom 3' adapter name (Optional)"*: `Nextera R2`
+>                        - *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCTGACGCTGCCGACGA`
 >    - In *"Filter Options"*:
->        - {% icon param-text %} *"Minimum length"*: `20`
+>        - *"Minimum length"*: `20`
 >    - In *"Read Modification Options"*:
->        - {% icon param-text %} *"Quality cutoff"*: `20`
+>        - *"Quality cutoff"*: `20`
 >    - In *"Output Options"*:
 >        - *"Report"*: `Yes`
 >
@@ -272,7 +274,7 @@ The forward and reverse adapters are slightly different. We will also trim low q
 
 > ### {% icon hands_on %} Hands-on: Check Adapter Removal with FastQC
 >
-> 1. **FastQC** {% icon tool %} with the default parameters:
+> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
 >       - *"Short read data from your current history"*: select the output of **Cutadapt** {% icon param-files %} **Multiple datasets** to choose both `Read 1 Output` and `Read 2 Output`.
 >
 > 2. Click on the {% icon galaxy-eye %} (eye) icon of the report and read the first lines.
@@ -298,13 +300,13 @@ AGCTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGC
   CTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGCCT
   ----------------------Mate 2--------------------->
 ```
-This is what we call dovetailing and we want to consider this pair as a valid concordant alignment.
+> This is what we call dovetailing and we want to consider this pair as a valid concordant alignment.
 {: .comment}
 
 
 > ### {% icon hands_on %} Hands-on: Mapping reads to reference genome
 >
-> 1. **Bowtie2** {% icon tool %} with the following parameters:
+> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0) %} with the following parameters:
 >    - *"Is this single or paired library"*: `Paired-end`
 >        - {% icon param-file %} *"FASTQ/A file #1"*: select the output of **Cutadapt** {% icon tool %} *"Read 1 Output"*
 >        - {% icon param-file %} *"FASTQ/A file #2"*: select the output of **Cutadapt** {% icon tool %} *"Read 2 Output"*
@@ -313,8 +315,10 @@ This is what we call dovetailing and we want to consider this pair as a valid co
 >            - *"Allow mate dovetailing"*: `Yes`
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a built-in genome index`
 >        - *"Select reference genome"*: `Human (Homo sapiens): hg38 Canonical`
+>    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `1: Default setting only`
 >        - *"Do you want to use presets?"*: `Very sensitive end-to-end (--very-sensitive)`
+>    - *"Do you want to tweak SAM/BAM Options?"*: `No`
 >    - *"Save the bowtie2 mapping statistics to the history"*: `Yes`
 >
 > 2. Click on the {% icon galaxy-eye %} (eye) icon of the mapping stats.
@@ -354,12 +358,12 @@ We apply some filters to the reads after the mapping. ATAC-Seq datasets can have
 
 > ### {% icon hands_on %} Hands-on: Filtering of uninformative reads
 >
-> 1. **Filter** BAM datasets on a variety of attributes {% icon tool %} with the following parameters:
+> 1. {% tool [Filter BAM datasets on a variety of attributes](toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1) %} with the following parameters:
 >    - {% icon param-file %} *"BAM dataset(s) to filter"*: Select the output of  **Bowtie2** {% icon tool %} *"alignments"*
 >    - In *"Condition"*:
->        - *"1: Condition"*
+>        - {% icon param-repeat %} *"Insert Condition"*
 >            - In *"Filter"*:
->                - *"1: Filter"*
+>                - {% icon param-repeat %} *"Insert Filter"*
 >                    - *"Select BAM property to filter on"*: `mapQuality`
 >                        - *"Filter on read mapping quality (phred scale)"*: `>=30`
 >                - {% icon param-repeat %} *"Insert Filter"*
@@ -395,9 +399,9 @@ However, it does not predict the quality of the rest of the data. It is just tha
 
 > ### {% icon tip %} Tip: Getting the number of mitochondrial reads
 >
-> To get the number of reads that mapped to the mitochondrial genome (chrM) you can run **Samtools idxstats** {% icon tool %} on the output of  **Bowtie2** {% icon tool %} *"alignments"*.
+> To get the number of reads that mapped to the mitochondrial genome (chrM) you can run {% tool [Samtools idxstats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3) %} on the output of  **Bowtie2** {% icon tool %} *"alignments"*.
 > The columns of the output are: chromosome name, chromosome length, number of reads mapping to the chromosome, number of unaligned mate whose mate is mapping to the chromosome.
-> The first 2 lines of the result would be (after using **Sort** {% icon tool %}):
+> The first 2 lines of the result would be (after using {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %}):
 >
 > ![Samtools idxstats result](../../images/atac-seq/Screenshot_samtoolsIdxStatsChrM.png "Samtools idxstats result")
 >
@@ -410,7 +414,7 @@ Because of the PCR amplification, there might be read duplicates (different read
 
 > ### {% icon hands_on %} Hands-on: Remove duplicates
 >
-> 1. **MarkDuplicates** {% icon tool %} with the following parameters:
+> 1. {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2) %} with the following parameters:
 >    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: Select the output of  **Filter** {% icon tool %} *"BAM"*
 >    - *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"*: `Yes`
 >
@@ -429,13 +433,13 @@ Because of the PCR amplification, there might be read duplicates (different read
 
 > ### {% icon tip %} Tip: Formatting the MarkDuplicate metrics for readability
 >
-> 1. **Select** lines that match an expression {% icon tool %} with the following parameters:
+> 1. {% tool [Select lines that match an expression](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: Select the output of  **MarkDuplicates** {% icon tool %}
 >    - *"that*: `Matching`
 >    - *"the pattern*: `(Library|LIBRARY)`
 > 2. Check that the datatype is tabular. If not, change it.
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
-> 3. **Transpose** {% icon tool %}:
+> 3. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0) %}:
 >    - {% icon param-file %} *"Select lines from"*: Select the output of **Select** {% icon tool %}
 >
 > ![Metrics of MarkDuplicates](../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.png "Metrics of MarkDuplicates")
@@ -464,7 +468,7 @@ We will check the insert sizes with **Paired-end histogram** of insert size freq
 
 > ### {% icon hands_on %} Hands-on: Plot the distribution of fragment sizes.
 >
-> 1. **Paired-end histogram** of insert size frequency {% icon tool %} with the following parameters:
+> 1. {% tool [Paired-end histogram](toolshed.g2.bx.psu.edu/repos/iuc/pe_histogram/pe_histogram/1.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"BAM file"*: Select the output of  **MarkDuplicates** {% icon tool %} *"BAM output"*
 >    - *"Lower bp limit (optional)"*: `0`
 >    - *"Upper bp limit (optional)"*: `1000`
@@ -532,7 +536,7 @@ We convert the BAM file to BED format because when we set the extension size in 
 
 > ### {% icon hands_on %} Hands-on: Convert the BAM to BED
 >
-> 1. **bedtools BAM to BED** converter {% icon tool %} with the following parameters:
+> 1. {% tool [bedtools BAM to BED converter](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0) %} with the following parameters:
 >    - {% icon param-file %} *"Convert the following BAM file to BED"*: Select the output of **MarkDuplicates** {% icon tool %}
 >
 {: .hands_on}
@@ -543,9 +547,9 @@ We call peaks with MACS2. In order to get the coverage centered on the 5' extend
 
 > ### {% icon hands_on %} Hands-on: Call peaks with MACS2
 >
-> 1. **MACS2 callpeak** {% icon tool %} with the following parameters:
+> 1. {% tool [MACS2 callpeak](toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6) %} with the following parameters:
 >    - *"Are you pooling Treatment Files?"*: `No`
->    - *"ChIP-Seq Treatment File"*: Select the output of **bedtools BAM to BED** converter {% icon tool %}
+>        - {% icon param-file %} Select the output of **bedtools BAM to BED** converter {% icon tool %}
 >    - *"Do you have a Control File?"*: `No`
 >    - *"Format of Input Files"*: `Single-end BED`
 >    - *"Effective genome size"*: `H. sapiens (2.7e9)`
@@ -577,16 +581,17 @@ As our training dataset is focused on chromosome 22 we will only use the CTCF pe
 
 > ### {% icon hands_on %} Hands-on: Select CTCF peaks from chr22 in intergenic regions:
 >
-> 1. **Filter** data on any column using simple expressions {% icon tool %} with the following parameters:
+> 1. {% tool [Filter data on any column using simple expressions](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: Select the first dataset: `ENCFF933NTR.bed.gz`
 >    - *"With following condition"*: `c1=='chr22'`
 >
-> 2. **bedtools Intersect intervals** find overlapping intervals in various ways {% icon tool %} with the following parameters:
+> 1. {% tool [bedtools Intersect intervals find overlapping intervals in various ways](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0) %} with the following parameters:
 >    - {% icon param-file %} *"File A to intersect with B"*: Select the output of **Filter** data on any column using simple expressions {% icon tool %}
->    - *Combined or separate output files*:
->        - {% icon param-file %} *"File B to intersect with A"*: Select the dataset `chr22 genes`
->    - *What should be written to the output file?*: `Write the original entry in A for each overlap (-wa)`
->    - Report only those alignments that **do not** overlap with file(s) B: `Yes`
+>    - *"Combined or separate output files"*: `One output file per 'input B' file`
+>        - {% icon param-file %} *"File B to intersect with A"*:  Select the dataset `chr22 genes`
+>    - *"What should be written to the output file?"*: `Write the original entry in A for each overlap (-wa)`
+>    - *"Required overlap"*: `Default: 1bp`
+>    - *"Report only those alignments that **do not** overlap with file(s) B"*: `Yes`
 >
 > 3. Rename the datasets `intergenic CTCF peaks chr22`.
 {: .hands_on}
@@ -597,7 +602,7 @@ The bedgraph format is easily readable for human but it can be very large and vi
 
 > ### {% icon hands_on %} Hands-on: Convert bedgraphs to bigWig.
 >
-> 1. **Wig/BedGraph-to-bigWig** converter {% icon tool %} with the following parameters:
+> 1. {% tool [Wig/BedGraph-to-bigWig](wig_to_bigWig) %} with the following parameters:
 >    - {% icon param-file %} *"Convert"*: Select the output of **MACS2** {% icon tool %} (Bedgraph Treatment).
 >    - *"Converter settings to use"*: `Default`
 >
@@ -615,9 +620,9 @@ The input of **plotHeatmap** is a matrix in a hdf5 format. To generate it we use
 
 > ### {% icon hands_on %} Hands-on: Generate the matrix
 >
-> 1. **computeMatrix** {% icon tool %} with the following parameters:
+> 1. {% tool [computeMatrix](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.0.2.0) %} with the following parameters:
 >    - In *"Select regions"*:
->        - 1. *"Select regions"*
+>        - {% icon param-repeat %} *"Insert Select regions"*
 >            - {% icon param-file %} *"Regions to plot"*: Select the dataset `chr22 genes`
 >    - *"Sample order matters"*: `No`
 >        - {% icon param-file %} *"Score file"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %} that should be named `MACS2 bigwig`.
@@ -625,7 +630,7 @@ The input of **plotHeatmap** is a matrix in a hdf5 format. To generate it we use
 >    - *"The reference point for the plotting"*: `beginning of region (e.g. TSS)`
 >    - *"Show advanced output settings"*: `no`
 >    - *"Show advanced options"*: `yes`
->        - *"Convert missing values to 0?"*: `yes`
+>        - *"Convert missing values to 0?"*: `Yes`
 >
 {: .hands_on}
 
@@ -636,7 +641,7 @@ We will now generate a heatmap. Each line will be a transcript. The coverage wil
 
 > ### {% icon hands_on %} Hands-on: Generate the heatmap
 >
-> 1. **plotHeatmap** {% icon tool %} with the following parameters:
+> 1. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.0.2.0) %} with the following parameters:
 >    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: Select the output of **computeMatrix** {% icon tool %}.
 >    - *"Show advanced output settings"*: `no`
 >    - *"Show advanced options"*: `no`
@@ -665,28 +670,31 @@ Now we will repeat the procedure for CTCF peaks of chr22 in intergenic regions:
 
 > ### {% icon hands_on %} Hands-on: Generate the matrix
 >
-> 1. **computeMatrix** {% icon tool %} with the following parameters:
+> 1. {% tool [computeMatrix](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0) %} with the following parameters:
 >    - In *"Select regions"*:
->        - 1. *"Select regions"*
+>        - {% icon param-repeat %} *"Insert Select regions"*
 >            - {% icon param-file %} *"Regions to plot"*: Select the dataset `intergenic CTCF peaks chr22`
 >    - *"Sample order matters"*: `No`
 >        - {% icon param-file %} *"Score file"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %} that should be named `MACS2 bigwig`.
+>    - *"Would you like custom sample labels?"*: `No, use sample names in the history`
 >    - *"computeMatrix has two main output options"*: `reference-point`
->    - *"The reference point for the plotting"*: `center of region`
+>        - *"The reference point for the plotting"*: `center of region`
 >    - *"Show advanced output settings"*: `no`
 >    - *"Show advanced options"*: `yes`
->        - *"Convert missing values to 0?"*: `yes`
+>        - *"Convert missing values to 0?"*: `Yes`
 >
-> 2. **plotHeatmap** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: Select the output of **computeMatrix** {% icon tool %}.
+> 1. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1) %} with the following parameters:
+>    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*:  Select the output of **computeMatrix** {% icon tool %}.
 >    - *"Show advanced output settings"*: `no`
 >    - *"Show advanced options"*: `yes`
->        - *"Colormap to use for each sample"*:
->            - {% icon param-repeat %} *"Insert Colormap to use for each sample"*:
->                - *"Color map to use for the heatmap"*: Blues # Or what you want
+>        - In *"Colormap to use for each sample"*:
+>            - {% icon param-repeat %} *"Insert Colormap to use for each sample"*
+>                - *"Color map to use for the heatmap"*: `Blues` # Or what you want
 >        - *"The x-axis label"*: `distance from peak center (bp)`
 >        - *"The y-axis label for the top panel"*: `CTCF peaks` # I don't know why this does not work currently...
 >        - *"Reference point label"*: `peak center`
+>        - *"Did you compute the matrix with more than one groups of regions?"*: `Yes, I used multiple groups of regions`
+>
 {: .hands_on}
 
 > ### {% icon comment %} plotHeatmap Results
@@ -701,36 +709,42 @@ In order to visualise a specific region (e.g. the gene *RAC2*), we can either us
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **pyGenomeTracks** {% icon tool %} with the following parameters:
+> 1. {% tool [pyGenomeTracks](toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.3) %} with the following parameters:
 >    - *"Region of the genome to limit the operation"*: `chr22:37,193,000-37,252,000`
 >    - In *"Include tracks in your plot"*:
->        - *"1. Include tracks in your plot"*
->            - *"Choose style of the track"*: `Bigwig track `
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `Bigwig track`
 >                - *"Plot title"*: `Coverage from MACS2 (extended +/-100bp)`
->                - {% icon param-file %} *"Track file bigwig format"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %} called `MACS2 bigwig`.
+>                - {% icon param-file %} *"Track file(s) bigwig format"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %} called `MACS2 bigwig`.
 >                - *"Color of track"*: Select the color of your choice
->                - *"Minimum value"*: 0
+>                - *"Use a different color for negative values"*: `No`
+>                - *"Minimum value"*: `0`
 >                - *"height"*: `5`
+>                - *"Choose style of the plot."*: `fill`
 >                - *"Show visualization of data range"*: `Yes`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `NarrowPeak track`
 >                - *"Plot title"*: `Peaks from MACS2 (extended +/-100bp)`
->                - {% icon param-file %} *"Track file bed format"*: Select the output of **MACS2** {% icon tool %} (narrow Peaks).
+>                - {% icon param-file %} *"Track file(s) encodepeak or bed format"*: Select the output of **MACS2** {% icon tool %} (narrow Peaks).
 >                - *"Color of track"*: Select the color of your choice
 >                - *"display to use"*: `box: Draw a box`
 >                - *"Plot labels (name, p-val, q-val)"*: `No`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `Gene track / Bed track`
 >                - *"Plot title"*: `Genes`
->                - {% icon param-file %} *"Track file bed format"*: `chr22 genes`
+>                - {% icon param-file %} *"Track file(s) bed or gtf format"*: `chr22 genes`
+>                - *"Define color:"*: `manually`
 >                - *"Color of track"*: Select the color of your choice
+>                - *"Define border color:"*: `manually`
 >                - *"height"*: `5`
->                - *"Put all labels inside the plotted region"*: `Yes`
->                - *"Allow to put labels in the right margin"*: `Yes`
+>                - *"Plot labels"*: `yes`
+>                    - *"Put all labels inside the plotted region"*: `Yes`
+>                    - *"Allow to put labels in the right margin"*: `Yes`
+>                - *"Bed style"*: `flybase (blocks with arrow at extremities)`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `NarrowPeak track`
 >                - *"Plot title"*: `CTCF peaks`
->                - {% icon param-file %} *"Track file bed format"*: Select the first dataset: `ENCFF933NTR.bed.gz`
+>                - {% icon param-file %} *"Track file(s) encodepeak or bed format"*: Select the first dataset: `ENCFF933NTR.bed.gz`
 >                - *"Color of track"*: Select the color of your choice
 >                - *"display to use"*: `box: Draw a box`
 >                - *"Plot labels (name, p-val, q-val)"*: `No`
