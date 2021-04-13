@@ -740,6 +740,27 @@ Finally, we can access all the information available on the genes identified in 
 
 As additional activity, you can try to repeat the workflow by using the sequences stored in the NCBI GEO database with the accession number `GSM3373998`. This is a two-factor experiment. The first factor is the genotype, which includes wild-type plants (Col-0) and mutants overexpressing the brassinosteroid receptor BRL3. The second factor is condition, which includes control and water-stressed samples. Each genotype and condition includes three biological replicates.
 
+```
+SRR7779219	WT Drought mRNA	https://zenodo.org/record/4672228/files/SRR7779219_WT_Drought.fastqsanger.gz	fastqsanger.gz
+SRR7779220	WT Drought mRNA	https://zenodo.org/record/4672228/files/SRR7779220_WT_Drought.fastqsanger.gz	fastqsanger.gz
+SRR7779221	WT Drought mRNA	https://zenodo.org/record/4672228/files/SRR7779221_WT_Drought.fastqsanger.gz	fastqsanger.gz
+SRR7779222	BLR3 Drought mRNA	https://zenodo.org/record/4672228/files/SRR7779222_BLR3_Drought.fastqsanger.gz	fastqsanger.gz
+SRR7779223	BLR3 Drought mRNA	https://zenodo.org/record/4672228/files/SRR7779223_BLR3_Drought.fastqsanger.gz	fastqsanger.gz
+SRR7779224	BLR3 Drought mRNA	https://zenodo.org/record/4672228/files/SRR7779224_BLR3_Drought.fastqsanger.gz	fastqsanger.gz
+SRR7779225	WT Watered mRNA	https://zenodo.org/record/4672228/files/SRR7779225_WT_Watered.fastqsanger.gz	fastqsanger.gz
+SRR7779226	WT Watered mRNA	https://zenodo.org/record/4672228/files/SRR7779226_WT_Watered.fastqsanger.gz	fastqsanger.gz
+SRR7779227	WT Watered mRNA	https://zenodo.org/record/4672228/files/SRR7779227_WT_Watered.fastqsanger.gz	fastqsanger.gz
+SRR7779228	BLR3 Watered mRNA	https://zenodo.org/record/4672228/files/SRR7779228_BLR3_Watered.fastqsanger.gz	fastqsanger.gz
+SRR7779229	BLR3 Watered mRNA	https://zenodo.org/record/4672228/files/SRR7779229_BLR3_Watered.fastqsanger.gz	fastqsanger.gz
+```
+
+In the case of miRNA samples, we will use the results obtained in the previous analysis.
+
+```
+Upregulated miRNA   https://zenodo.org/record/4672228/files/upregulated_miRNA_BR_complete_dataset.fasta
+```
+
+
 # Conclusion
 {:.no_toc}
 
