@@ -732,7 +732,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 7, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 12, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -812,7 +812,9 @@
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panelIf the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>    <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>    <li>Select the option <strong>Create New</strong> from the menu</li>  </ol></blockquote>
     </li>
     <li>
-      <p>Import the files from <a href="https://doi.org/10.5281/zenodo.3862792">Zenodo</a> or from the shared data library</p>
+      <p>Import the files from <a href="https://doi.org/10.5281/zenodo.3862792">Zenodo</a> or from
+the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">epigenetics</code>
+ -&gt; <code class="language-plaintext highlighter-rouge">ATAC-Seq data analysis</code>):</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3862793/files/ENCFF933NTR.<span class="notranslate">bed</span>.gz
 https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R1.fastq.gz
@@ -856,7 +858,7 @@ https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R2.fastq.gz
   <h3 id="hands_on-hands-on-obtain-annotation-for-hg38-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Obtain Annotation for hg38 genes</h3>
 
   <ol>
-    <li><strong>UCSC Main</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="ucsc_table_direct1" title="Tested with ucsc_table_direct1"><strong>UCSC Main table browser</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: ucsc_table_direct1</span></span>  with the following parameters:
       <ul>
         <li><em>“clade”</em>: <code class="language-plaintext highlighter-rouge">Mammal</code></li>
         <li><em>“genome”</em>: <code class="language-plaintext highlighter-rouge">Human</code></li>
@@ -875,10 +877,10 @@ https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R2.fastq.gz
 
       <p>This table contains all the information but is not in a <span class="notranslate">BED</span> format. To transform it into <span class="notranslate">BED</span> format we will cut out the required columns and rearrange:</p>
     </li>
-    <li><strong>Cut</strong> columns from a table <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:
       <ul>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c3,c5,c6,c13,c12,c4</code></li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c3,c5,c6,c13,c12,c4</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">UCSC Main on Human: wgEncodeGencodeBasicV37 (chr22:1-50,818,468)</code></li>
       </ul>
     </li>
@@ -956,7 +958,7 @@ To be able to have the exon information, you could use a GTF file which can be d
   <h3 id="hands_on-hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
-    <li><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the default parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
       <ul>
         <li><em>“Short read data from your current history”</em>: Choose here either only the <code class="language-plaintext highlighter-rouge">SRR891268_R1</code> file with <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> or use <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong> to choose both <code class="language-plaintext highlighter-rouge">SRR891268_R1</code> and <code class="language-plaintext highlighter-rouge">SRR891268_R2</code>.</li>
       </ul>
@@ -1029,7 +1031,7 @@ They correspond to adapters amplified head-to-head.
   <h3 id="hands_on-hands-on-task-description-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
-    <li><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5" title="Tested with toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5"><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5</span></span>  with the following parameters:
       <ul>
         <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code>
           <ul>
@@ -1043,8 +1045,8 @@ They correspond to adapters amplified head-to-head.
                       <ul>
                         <li><em>“Source”</em>: <code class="language-plaintext highlighter-rouge">Enter custom sequence</code>
                           <ul>
-                            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Enter custom 3’ adapter name (Optional if Multiple output is ‘No’)”</em>: <code class="language-plaintext highlighter-rouge">Nextera R1</code></li>
-                            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Enter custom 3’ adapter sequence”</em>: <code class="language-plaintext highlighter-rouge">CTGTCTCTTATACACATCTCCGAGCCCACGAGAC</code></li>
+                            <li><em>“Enter custom 3’ adapter name (Optional if Multiple output is ‘No’)”</em>: <code class="language-plaintext highlighter-rouge">Nextera R1</code></li>
+                            <li><em>“Enter custom 3’ adapter sequence”</em>: <code class="language-plaintext highlighter-rouge">CTGTCTCTTATACACATCTCCGAGCCCACGAGAC</code></li>
                           </ul>
                         </li>
                       </ul>
@@ -1061,8 +1063,8 @@ They correspond to adapters amplified head-to-head.
                       <ul>
                         <li><em>“Source”</em>: <code class="language-plaintext highlighter-rouge">Enter custom sequence</code>
                           <ul>
-                            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Enter custom 3’ adapter name (Optional)”</em>: <code class="language-plaintext highlighter-rouge">Nextera R2</code></li>
-                            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Enter custom 3’ adapter sequence”</em>: <code class="language-plaintext highlighter-rouge">CTGTCTCTTATACACATCTGACGCTGCCGACGA</code></li>
+                            <li><em>“Enter custom 3’ adapter name (Optional)”</em>: <code class="language-plaintext highlighter-rouge">Nextera R2</code></li>
+                            <li><em>“Enter custom 3’ adapter sequence”</em>: <code class="language-plaintext highlighter-rouge">CTGTCTCTTATACACATCTGACGCTGCCGACGA</code></li>
                           </ul>
                         </li>
                       </ul>
@@ -1075,12 +1077,12 @@ They correspond to adapters amplified head-to-head.
         </li>
         <li>In <em>“Filter Options”</em>:
           <ul>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum length”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
+            <li><em>“Minimum length”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
           </ul>
         </li>
         <li>In <em>“Read Modification Options”</em>:
           <ul>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Quality cutoff”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
+            <li><em>“Quality cutoff”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
           </ul>
         </li>
         <li>In <em>“Output Options”</em>:
@@ -1124,7 +1126,7 @@ They correspond to adapters amplified head-to-head.
   <h3 id="hands_on-hands-on-check-adapter-removal-with-fastqc"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check Adapter Removal with FastQC</h3>
 
   <ol>
-    <li><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the default parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
       <ul>
         <li><em>“Short read data from your current history”</em>: select the output of <strong>Cutadapt</strong> <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong> to choose both <code class="language-plaintext highlighter-rouge">Read 1 Output</code> and <code class="language-plaintext highlighter-rouge">Read 2 Output</code>.</li>
       </ul>
@@ -1161,7 +1163,7 @@ AGCTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGC
   <h3 id="hands_on-hands-on-mapping-reads-to-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: <span class="notranslate">Mapping</span> <span class="notranslate">reads</span> to reference genome</h3>
 
   <ol>
-    <li><strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0"><strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
       <ul>
         <li><em>“Is this single or paired library”</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code>
           <ul>
@@ -1180,11 +1182,13 @@ AGCTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGC
             <li><em>“Select reference genome”</em>: <code class="language-plaintext highlighter-rouge">Human (Homo sapiens): hg38 Canonical</code></li>
           </ul>
         </li>
+        <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Do not set</code></li>
         <li><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">1: Default setting only</code>
           <ul>
             <li><em>“Do you want to use presets?”</em>: <code class="language-plaintext highlighter-rouge">Very sensitive end-to-end (--very-sensitive)</code></li>
           </ul>
         </li>
+        <li><em>“Do you want to tweak SAM/BAM Options?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><em>“Save the bowtie2 <span class="notranslate">mapping</span> statistics to the history”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
@@ -1231,16 +1235,16 @@ Another reason is that we have <span class="notranslate">reads</span> that map t
   <h3 id="hands_on-hands-on-filtering-of-uninformative-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filtering of uninformative <span class="notranslate">reads</span></h3>
 
   <ol>
-    <li><strong>Filter</strong> BAM datasets on a variety of attributes <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1"><strong>Filter BAM datasets on a variety of attributes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM dataset(s) to filter”</em>: Select the output of  <strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <em>“alignments”</em></li>
         <li>In <em>“Condition”</em>:
           <ul>
-            <li><em>“1: Condition”</em>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Condition”</em>
               <ul>
                 <li>In <em>“Filter”</em>:
                   <ul>
-                    <li><em>“1: Filter”</em>
+                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Filter”</em>
                       <ul>
                         <li><em>“Select BAM property to filter on”</em>: <code class="language-plaintext highlighter-rouge">mapQuality</code>
                           <ul>
@@ -1311,9 +1315,9 @@ However, it does not predict the quality of the rest of the data. It is just tha
 <blockquote class="tip">
   <h3 id="tip-tip-getting-the-number-of-mitochondrial-reads"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Getting the number of mitochondrial <span class="notranslate">reads</span></h3>
 
-  <p>To get the number of <span class="notranslate">reads</span> that mapped to the mitochondrial genome (chrM) you can run <strong>Samtools idxstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the output of  <strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <em>“alignments”</em>.
+  <p>To get the number of <span class="notranslate">reads</span> that mapped to the mitochondrial genome (chrM) you can run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3"><strong>Samtools idxstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3</span></span>  on the output of  <strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <em>“alignments”</em>.
 The columns of the output are: chromosome name, chromosome length, number of <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to the chromosome, number of unaligned mate whose mate is <span class="notranslate">mapping</span> to the chromosome.
-The first 2 lines of the result would be (after using <strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>):</p>
+The first 2 lines of the result would be (after using <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1</span></span> ):</p>
 
   <figure id="figure-7"><img src="../../images/atac-seq/Screenshot_samtoolsIdxStatsChrM.png" alt="Samtools idxstats result" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Samtools idxstats result</figcaption></figure>
 
@@ -1328,7 +1332,7 @@ The first 2 lines of the result would be (after using <strong>Sort</strong> <i c
   <h3 id="hands_on-hands-on-remove-duplicates"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove duplicates</h3>
 
   <ol>
-    <li><strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2"><strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select SAM/BAM dataset or dataset collection”</em>: Select the output of  <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <em>“BAM”</em></li>
         <li><em>“If true do not write duplicates to the output file instead of writing them with appropriate flags set”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1354,7 +1358,7 @@ The first 2 lines of the result would be (after using <strong>Sort</strong> <i c
   <h3 id="tip-tip-formatting-the-markduplicate-metrics-for-readability"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Formatting the MarkDuplicate metrics for readability</h3>
 
   <ol>
-    <li><strong>Select</strong> lines that match an <span class="notranslate">expression</span> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="Grep1" title="Tested with Grep1"><strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: Select the output of  <strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“that</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
@@ -1363,7 +1367,7 @@ The first 2 lines of the result would be (after using <strong>Sort</strong> <i c
     </li>
     <li>Check that the datatype is tabular. If not, change it.
 <!--SNIPPET-->&lt;blockquote class="tip"&gt;  &lt;h3 data-toc-skip id="-tip-changing-the-datatype"&gt;<i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype&lt;/h3&gt;  &lt;ul&gt;    &lt;li&gt;Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes&lt;/li&gt;    &lt;li&gt;In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top&lt;/li&gt;    &lt;li&gt;Select <code class="language-plaintext highlighter-rouge">tabular</code>&lt;/li&gt;    &lt;li&gt;Click the <strong>Change datatype</strong> button&lt;/li&gt;  &lt;/ul&gt;&lt;/blockquote&gt;</li>
-    <li><strong>Transpose</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0"><strong>Transpose rows/columns in a tabular file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0</span></span> :
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: Select the output of <strong>Select</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
@@ -1404,7 +1408,7 @@ The first 2 lines of the result would be (after using <strong>Sort</strong> <i c
   <h3 id="hands_on-hands-on-plot-the-distribution-of-fragment-sizes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot the distribution of fragment sizes.</h3>
 
   <ol>
-    <li><strong>Paired-end histogram</strong> of insert size frequency <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pe_histogram/pe_histogram/1.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pe_histogram/pe_histogram/1.0.1"><strong>Paired-end histogram</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pe_histogram/pe_histogram/1.0.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM file”</em>: Select the output of  <strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <em>“BAM output”</em></li>
         <li><em>“Lower bp limit (optional)”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
@@ -1482,7 +1486,7 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
   <h3 id="hands_on-hands-on-convert-the-bam-to-bed"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Convert the BAM to <span class="notranslate">BED</span></h3>
 
   <ol>
-    <li><strong><span class="notranslate">bed</span>tools BAM to <span class="notranslate">BED</span></strong> converter <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0"><strong><span class="notranslate">bed</span>tools BAM to <span class="notranslate">BED</span> converter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/<span class="notranslate">bed</span>tools/<span class="notranslate">bed</span>tools_bamtobed/2.30.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert the following BAM file to <span class="notranslate">BED</span>”</em>: Select the output of <strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
@@ -1498,10 +1502,13 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
   <h3 id="hands_on-hands-on-call-peaks-with-macs2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Call peaks with MACS2</h3>
 
   <ol>
-    <li><strong>MACS2 callpeak</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6"><strong>MACS2 callpeak</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6</span></span>  with the following parameters:
       <ul>
-        <li><em>“Are you pooling Treatment Files?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-        <li><em>“ChIP-Seq Treatment File”</em>: Select the output of <strong><span class="notranslate">bed</span>tools BAM to <span class="notranslate">BED</span></strong> converter <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Are you pooling Treatment Files?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> Select the output of <strong><span class="notranslate">bed</span>tools BAM to <span class="notranslate">BED</span></strong> converter <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          </ul>
+        </li>
         <li><em>“Do you have a Control File?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><em>“Format of Input Files”</em>: <code class="language-plaintext highlighter-rouge">Single-end <span class="notranslate">BED</span></code></li>
         <li><em>“Effective genome size”</em>: <code class="language-plaintext highlighter-rouge">H. sapiens (2.7e9)</code></li>
@@ -1551,22 +1558,23 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
   <h3 id="hands_on-hands-on-select-ctcf-peaks-from-chr22-in-intergenic-regions"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Select CTCF peaks from chr22 in intergenic regions:</h3>
 
   <ol>
-    <li><strong>Filter</strong> data on any column using simple <span class="notranslate">expression</span>s <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: Select the first dataset: <code class="language-plaintext highlighter-rouge">ENCFF933NTR.<span class="notranslate">bed</span>.gz</code></li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c1=='chr22'</code></li>
       </ul>
     </li>
-    <li><strong><span class="notranslate">bed</span>tools Intersect intervals</strong> find overlapping intervals in various ways <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0"><strong><span class="notranslate">bed</span>tools Intersect intervals find overlapping intervals in various ways</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/<span class="notranslate">bed</span>tools/<span class="notranslate">bed</span>tools_intersectbed/2.30.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File A to intersect with B”</em>: Select the output of <strong>Filter</strong> data on any column using simple <span class="notranslate">expression</span>s <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>Combined or separate output files</em>:
+        <li><em>“Combined or separate output files”</em>: <code class="language-plaintext highlighter-rouge">One output file per 'input B' file</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File B to intersect with A”</em>: Select the dataset <code class="language-plaintext highlighter-rouge">chr22 genes</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File B to intersect with A”</em>:  Select the dataset <code class="language-plaintext highlighter-rouge">chr22 genes</code></li>
           </ul>
         </li>
-        <li><em>What should be written to the output file?</em>: <code class="language-plaintext highlighter-rouge">Write the original entry in A for each overlap (-wa)</code></li>
-        <li>Report only those alignments that <strong>do not</strong> overlap with file(s) B: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“What should be written to the output file?”</em>: <code class="language-plaintext highlighter-rouge">Write the original entry in A for each overlap (-wa)</code></li>
+        <li><em>“Required overlap”</em>: <code class="language-plaintext highlighter-rouge">Default: 1bp</code></li>
+        <li><em>“Report only those alignments that <strong>do not</strong> overlap with file(s) B”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
     <li>Rename the datasets <code class="language-plaintext highlighter-rouge">intergenic CTCF peaks chr22</code>.</li>
@@ -1580,7 +1588,7 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
   <h3 id="hands_on-hands-on-convert-bedgraphs-to-bigwig"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Convert <span class="notranslate">bed</span>graphs to bigWig.</h3>
 
   <ol>
-    <li><strong>Wig/<span class="notranslate">Bed</span>Graph-to-bigWig</strong> converter <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="wig_to_bigWig" title="Tested with wig_to_bigWig"><strong>Wig/<span class="notranslate">Bed</span>Graph-to-bigWig</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: wig_to_bigWig</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert”</em>: Select the output of <strong>MACS2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<span class="notranslate">Bed</span>graph Treatment).</li>
         <li><em>“Converter settings to use”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
@@ -1602,18 +1610,14 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
   <h3 id="hands_on-hands-on-generate-the-matrix"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate the matrix</h3>
 
   <ol>
-    <li><strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.0.2.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.0.2.0"><strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.0.2.0</span></span>  with the following parameters:
       <ul>
         <li>In <em>“Select regions”</em>:
           <ul>
-            <li>
-              <ol>
-                <li><em>“Select regions”</em>
-                  <ul>
-                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Regions to plot”</em>: Select the dataset <code class="language-plaintext highlighter-rouge">chr22 genes</code></li>
-                  </ul>
-                </li>
-              </ol>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Select regions”</em>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Regions to plot”</em>: Select the dataset <code class="language-plaintext highlighter-rouge">chr22 genes</code></li>
+              </ul>
             </li>
           </ul>
         </li>
@@ -1627,7 +1631,7 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
         <li><em>“Show advanced output settings”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
         <li><em>“Show advanced options”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
           <ul>
-            <li><em>“Convert missing values to 0?”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
+            <li><em>“Convert missing values to 0?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
@@ -1644,7 +1648,7 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
   <h3 id="hands_on-hands-on-generate-the-heatmap"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate the heatmap</h3>
 
   <ol>
-    <li><strong>plotHeatmap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.0.2.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.0.2.0"><strong>plotHeatmap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.0.2.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Matrix file from the computeMatrix tool”</em>: Select the output of <strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
         <li><em>“Show advanced output settings”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
@@ -1686,18 +1690,14 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
   <h3 id="hands_on-hands-on-generate-the-matrix-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate the matrix</h3>
 
   <ol>
-    <li><strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0"><strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0</span></span>  with the following parameters:
       <ul>
         <li>In <em>“Select regions”</em>:
           <ul>
-            <li>
-              <ol>
-                <li><em>“Select regions”</em>
-                  <ul>
-                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Regions to plot”</em>: Select the dataset <code class="language-plaintext highlighter-rouge">intergenic CTCF peaks chr22</code></li>
-                  </ul>
-                </li>
-              </ol>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Select regions”</em>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Regions to plot”</em>: Select the dataset <code class="language-plaintext highlighter-rouge">intergenic CTCF peaks chr22</code></li>
+              </ul>
             </li>
           </ul>
         </li>
@@ -1706,27 +1706,31 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Score file”</em>: Select the output of <strong>Wig/<span class="notranslate">Bed</span>Graph-to-bigWig</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> that should be named <code class="language-plaintext highlighter-rouge">MACS2 bigwig</code>.</li>
           </ul>
         </li>
-        <li><em>“computeMatrix has two main output options”</em>: <code class="language-plaintext highlighter-rouge">reference-point</code></li>
-        <li><em>“The reference point for the plotting”</em>: <code class="language-plaintext highlighter-rouge">center of region</code></li>
+        <li><em>“Would you like custom sample labels?”</em>: <code class="language-plaintext highlighter-rouge">No, use sample names in the history</code></li>
+        <li><em>“computeMatrix has two main output options”</em>: <code class="language-plaintext highlighter-rouge">reference-point</code>
+          <ul>
+            <li><em>“The reference point for the plotting”</em>: <code class="language-plaintext highlighter-rouge">center of region</code></li>
+          </ul>
+        </li>
         <li><em>“Show advanced output settings”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
         <li><em>“Show advanced options”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
           <ul>
-            <li><em>“Convert missing values to 0?”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
+            <li><em>“Convert missing values to 0?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><strong>plotHeatmap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1"><strong>plotHeatmap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Matrix file from the computeMatrix tool”</em>: Select the output of <strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Matrix file from the computeMatrix tool”</em>:  Select the output of <strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
         <li><em>“Show advanced output settings”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
         <li><em>“Show advanced options”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
           <ul>
-            <li><em>“Colormap to use for each sample”</em>:
+            <li>In <em>“Colormap to use for each sample”</em>:
               <ul>
-                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Colormap to use for each sample”</em>:
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Colormap to use for each sample”</em>
                   <ul>
-                    <li><em>“Color map to use for the heatmap”</em>: Blues # Or what you want</li>
+                    <li><em>“Color map to use for the heatmap”</em>: <code class="language-plaintext highlighter-rouge">Blues</code> # Or what you want</li>
                   </ul>
                 </li>
               </ul>
@@ -1734,11 +1738,13 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
             <li><em>“The x-axis label”</em>: <code class="language-plaintext highlighter-rouge">distance from peak center (bp)</code></li>
             <li><em>“The y-axis label for the top panel”</em>: <code class="language-plaintext highlighter-rouge">CTCF peaks</code> # I don’t know why this does not work currently…</li>
             <li><em>“Reference point label”</em>: <code class="language-plaintext highlighter-rouge">peak center</code></li>
+            <li><em>“Did you compute the matrix with more than one groups of regions?”</em>: <code class="language-plaintext highlighter-rouge">Yes, I used multiple groups of regions</code></li>
           </ul>
         </li>
       </ul>
     </li>
   </ol>
+
 </blockquote>
 
 <blockquote class="comment">
@@ -1755,20 +1761,22 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
   <h3 id="hands_on-hands-on-task-description-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
 
   <ol>
-    <li><strong>pyGenomeTracks</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.6" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.6"><strong>pyGenomeTracks</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.6</span></span>  with the following parameters:
       <ul>
         <li><em>“Region of the genome to limit the operation”</em>: <code class="language-plaintext highlighter-rouge">chr22:37,193,000-37,252,000</code></li>
         <li>In <em>“Include tracks in your plot”</em>:
           <ul>
-            <li><em>“1. Include tracks in your plot”</em>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Include tracks in your plot”</em>
               <ul>
-                <li><em>“Choose style of the track”</em>: <code class="language-plaintext highlighter-rouge">Bigwig track </code>
+                <li><em>“Choose style of the track”</em>: <code class="language-plaintext highlighter-rouge">Bigwig track</code>
                   <ul>
                     <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Coverage from MACS2 (extended +/-100bp)</code></li>
-                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file bigwig format”</em>: Select the output of <strong>Wig/<span class="notranslate">Bed</span>Graph-to-bigWig</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> called <code class="language-plaintext highlighter-rouge">MACS2 bigwig</code>.</li>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file(s) bigwig format”</em>: Select the output of <strong>Wig/<span class="notranslate">Bed</span>Graph-to-bigWig</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> called <code class="language-plaintext highlighter-rouge">MACS2 bigwig</code>.</li>
                     <li><em>“Color of track”</em>: Select the color of your choice</li>
-                    <li><em>“Minimum value”</em>: 0</li>
+                    <li><em>“Use a different color for negative values”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                    <li><em>“Minimum value”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
                     <li><em>“height”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+                    <li><em>“Choose style of the plot.”</em>: <code class="language-plaintext highlighter-rouge">fill</code></li>
                     <li><em>“Show visualization of data range”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
                   </ul>
                 </li>
@@ -1779,7 +1787,7 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
                 <li><em>“Choose style of the track”</em>: <code class="language-plaintext highlighter-rouge">NarrowPeak track</code>
                   <ul>
                     <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Peaks from MACS2 (extended +/-100bp)</code></li>
-                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file <span class="notranslate">bed</span> format”</em>: Select the output of <strong>MACS2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (narrow Peaks).</li>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file(s) encodepeak or <span class="notranslate">bed</span> format”</em>: Select the output of <strong>MACS2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (narrow Peaks).</li>
                     <li><em>“Color of track”</em>: Select the color of your choice</li>
                     <li><em>“display to use”</em>: <code class="language-plaintext highlighter-rouge">box: Draw a box</code></li>
                     <li><em>“Plot labels (name, p-val, q-val)”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -1792,11 +1800,18 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
                 <li><em>“Choose style of the track”</em>: <code class="language-plaintext highlighter-rouge">Gene track / <span class="notranslate">Bed</span> track</code>
                   <ul>
                     <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Genes</code></li>
-                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file <span class="notranslate">bed</span> format”</em>: <code class="language-plaintext highlighter-rouge">chr22 genes</code></li>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file(s) <span class="notranslate">bed</span> or gtf format”</em>: <code class="language-plaintext highlighter-rouge">chr22 genes</code></li>
+                    <li><em>“Define color:”</em>: <code class="language-plaintext highlighter-rouge">manually</code></li>
                     <li><em>“Color of track”</em>: Select the color of your choice</li>
+                    <li><em>“Define border color:”</em>: <code class="language-plaintext highlighter-rouge">manually</code></li>
                     <li><em>“height”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
-                    <li><em>“Put all labels inside the plotted region”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-                    <li><em>“Allow to put labels in the right margin”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                    <li><em>“Plot labels”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
+                      <ul>
+                        <li><em>“Put all labels inside the plotted region”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                        <li><em>“Allow to put labels in the right margin”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                      </ul>
+                    </li>
+                    <li><em>“<span class="notranslate">Bed</span> style”</em>: <code class="language-plaintext highlighter-rouge">flybase (blocks with arrow at extremities)</code></li>
                   </ul>
                 </li>
               </ul>
@@ -1806,7 +1821,7 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
                 <li><em>“Choose style of the track”</em>: <code class="language-plaintext highlighter-rouge">NarrowPeak track</code>
                   <ul>
                     <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">CTCF peaks</code></li>
-                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file <span class="notranslate">bed</span> format”</em>: Select the first dataset: <code class="language-plaintext highlighter-rouge">ENCFF933NTR.<span class="notranslate">bed</span>.gz</code></li>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file(s) encodepeak or <span class="notranslate">bed</span> format”</em>: Select the first dataset: <code class="language-plaintext highlighter-rouge">ENCFF933NTR.<span class="notranslate">bed</span>.gz</code></li>
                     <li><em>“Color of track”</em>: Select the color of your choice</li>
                     <li><em>“display to use”</em>: <code class="language-plaintext highlighter-rouge">box: Draw a box</code></li>
                     <li><em>“Plot labels (name, p-val, q-val)”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -2035,7 +2050,7 @@ map to the mitochondrial genome. We found open chromatin regions with <strong>MA
     title = "ATAC-Seq data analysis (Galaxy Training Materials)",
     year = "2021",
     month = "04",
-    day = "07"
+    day = "12"
     url = "\url{/training-material/topics/epigenetics/tutorials/atac-seq/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
