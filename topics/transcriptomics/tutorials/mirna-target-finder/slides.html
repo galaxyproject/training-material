@@ -1,0 +1,166 @@
+---
+layout: tutorial_slides
+logo: "GTN"
+
+title: "Whole transcriptome analysis of arabidopsis Thaliana"
+contributors:
+  - gallardoalba
+  - pavanvidem
+
+priority: 4
+
+zenodo_link: ""
+
+
+---
+
+# (m)RNA-Seq data analysis
+
+???
+- (m)RNA-Seq data analysis
+
+---
+
+# Experimental design
+
+![Experimental deign](../images/plant_rnaseq_pipeline2.png)
+
+???
+- The second part of the tutorial deals with the mRNA-Seq data analysis and micro RNA target prediction.
+- First, we assess the quality of the mRNA-Seq reads, then quantify the genes, and carry out differential gene expression analysis.
+- Finally, we will predict which mRNAs are possibly downregulated by the upregulated micro RNAs.
+
+---
+
+# Background on data and tools
+
+???
+- Now we will look at  the data and tools that we are going to use in the tutorial
+
+---
+
+## Background on mRNA-Seq data
+
+![mRNA-Seq data used in the analysis](../images/data_plant_mrna.png)
+
+???
+- The mRNA-Seq data were generated using Illumina HiSeq 2000 sequencing platform.
+- Similar to micro RNA-Seq data, we have data from two conditions, namely control and brassinolide treatment.
+- And we have two biological replicates from each condition.
+.footnote[[*Oh E, Zhu JY, Bai MY, Arenhart RA et al., Elife, 2014*](https://www.ncbi.nlm.nih.gov/pubmed/24867218)]
+
+---
+
+## Tools used in mRNA-Seq data analysis
+
+![Tools used for the analysis](../images/tools_plant_mrna.png)
+
+???
+- We start with the quality assessment of the raw sequencing reads using Fast QC and Multi QC.
+- Then, we quantify the mRNAs using Salmon followed by the differential expression analysis using DE Seq 2.
+- Finally, we will use the Target Finder tool for micro RNA target prediction.
+---
+
+## Background on tools
+
+![Tools used for the analysis](../images/tools_mrna.png)
+
+- No adapter clipping!
+- No base-to-base alignment!
+
+???
+- If you observe, the adapter clipping step is not included in this analysis!
+- There is also no additional mapping step!
+- The reason behind this is the usage of the Salmon tool.
+- Salmon quantifies the transcripts or genes without requiring to align the reads base-by-base to the reference.
+- From the working principle of Salmon, we gain little to no advantage of clipping the adapters from the reads.
+
+---
+
+### Salmon overview
+
+![Salmon overview](../images/salmon_steps.jpg)
+
+.footnote[[*Patro, Nat Methods, 2017*](https://www.ncbi.nlm.nih.gov/pubmed/28263959)]
+
+???
+- Salmon accepts either raw or aligned reads
+- When raw reads are provided, Salmon uses its lightweight, ultra-fast mapping model called "quasi-mapping" for further abundance estimation.
+- Then an online inference algorithm estimates initial expression levels and model parameters.
+- Following that, an offline inference module learns the background bias models from the initial abundance estimates and corrects the effective transcript lengths.
+- Finally, an expectation-maximization algorithm is used to estimate the relative abundances.
+
+---
+
+### Salmon quasi-mapping
+
+![Salmon quasi-mapping](../images/salmon_quasialignment.png)
+
+.footnote[[*Srivastava, Bioinformatics, 2016*](https://www.ncbi.nlm.nih.gov/pubmed/27307617)]
+
+???
+- Quasi-mapping allows quantification without generating any intermediate alignment files.
+- It is faster than conventional mapping and saves a considerable amount of time and space.
+- Quasi-mapping was first proposed in the RapMap tool.
+- The quasi-mapping algorithm makes use of two main data structures, the generalized suffix array of the transcriptome, and a hash table that maps each k-mer in transcriptome to its suffix array interval.
+- During the quasi-mapping procedure, a read is scanned from left to right until a k-mer is encountered that appears in the hash table.
+- That k-mer is looked up in the hash table and the suffix array intervals are retrieved.
+- Then, the Maximal Mappable Prefix is computed by finding the longest substring of the read that matches the reference suffixes.
+- Owing to sequencing errors, the Maximal Mappable Prefix may not span the complete read. In this case, the next informative position is determined. The next informative position is the position on the read that has a unique matching base on the reference transcripts after a mismatch or a deletion.
+- Suffix array search continues from k-bases before the next informative position.
+- Finally, for each read, the algorithm reports the transcripts it mapped to, location, and strand information.
+- This figure is an illustration of the quasi-mapping of a read using k=3. Hash table lookup of k-mer A T T returns the suffix array interval b and e.
+- The current k-mer and its matching suffix intervals are colored in green.
+- The base G at position 6 has a mismatch with the C on reference transcripts represents a possible sequencing error.
+- Hence, the first five bases A T T G A is the maximal mappable prefix and the suffix array interval of this maximal mappable prefix is b' and e'.
+- A T T G A C T A which is the red colored box is the longest common prefix of the suffix array interval b' and e'. So the next informative position on the read is the 9th base T.
+- In the end, the read in the above example most likely map to the suffix array at e'.
+
+---
+
+### Salmon advantages and limitations
+
+- Adapter clipping can be skipped
+- Consider trimming low-quality reads
+- Fast and accurate quantification
+- Suitable for well-annotated organisms
+- Cannot be used to detect or annotate novel isoforms/transcripts
+
+???
+- Salmon has several advantages and few limitations over the traditional alignment methods.
+- Since the k-mers which contain the adaptor sequences are not present in the transcriptome index from which the hash table is generated, they cannot be mapped.
+- Hence, if there is no significant amount of adapters present in the reads, adapter clipping can safely be skipped.
+- However, it is always good to trim the low-quality reads.
+- Salmon provides fast and accurate quantification.
+- Because of the large memory footprints of hash tables and suffix arrays, generally, transcriptome FASTA file is used for Salmon quantification instead of whole genome FASTA file.
+- Therefore it is advisable to use this tool on well-annotated organisms.
+- For the same reason, Salmon cannot be used to detect or annotate novel transcripts.
+
+---
+
+### plant small RNA target prediction using TargetFinder
+
+- Inputs
+    - Small RNA sequence
+    - FASTA-formated target sequence database file
+- Uses Smith-Waterman algorithm to align query small RNA sequence to the target sequence database
+- Penalty of 1 for mismatches, single-nucleotide gaps, or single-nucleotide bulges
+- Penalty of 0.5 G U base pairs
+- Doubled penalty scores at positions 2-13 relative to the 5' end of the small RNA query sequence
+- Duplexes with the following characteristics are rejected:
+    - more than one single-nucleotide bulge or gap
+    - more than seven total mismatches, G:U base pairs, bulges and gaps
+    - more than four total mismatches or four total G:U base pairs
+
+???
+- In animals usually, base pairing in the seed region of the micro RNA, that is 2 to 8 bases is enough for target recognition.
+- Plant micro RNAs require more stringent base pairing. Generally, a near-perfect pairing in 5 prime region and a substantial pairing in 3 prime region is necessary.
+- Due to this strict pairing mechanism, plant miRNAs have a significantly less number of target genes.
+- For this reason, we use a plant-specific micro RNA target prediction algorithm called Target finder.
+- Target finder takes a small RNA sequence and a FASTA formatted file of the target sequence database.
+- It uses the popular Smith-Watermann local alignment algorithm for aligning small RNA sequence to the target sequence database.
+- A penalty of 1 is added for each mismatch, gap, and bulge and 0.5 for non-canonical G U base pairing.
+- These penalties are doubled from positions 2 to 13.
+- It allows at most one single-nucleotide bulge or gap in the duplex.
+- If the sum of mismatches, G U base pairs, bulges, and gaps of a duplex is more than 7, then it is ignored.
+- Duplexes with more than four total mismatches or four total G U base pairs are also ignored.
