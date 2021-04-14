@@ -354,7 +354,7 @@ __DESeq2__ is a tool for differential gene expression analysis based on a negati
 DESeq2 generated 2 outputs: a table with the normalized counts and a graphical summary of the results. To evaluate the similarity of our samples, we are going to inspect the Principal Component Analysis (PCA) plot. PCA allows evaluating the dominant directions of the highest variability in the data. Thus, the samples subjected to the same conditions should cluster together.
 ![fig8:PCA miRNA](../../images/miRNA_PCA.png " PCA plot of expression data from control and BR treated miRNA samples.")
 
-As can be seen, in this case, the samples are much less similar to each other. Likewise, the main axes account for only 47% and 19% of the total variation. This suggests that the effect of brassinosteroids on miRNA regulation is limited (Figure 8).
+As can be seen, the main axes account for only 47% and 19% of the total variation. This suggests that the effect of brassinosteroids on miRNA regulation is limited (Figure 8).
 
 ## Filter significantly differentially expressed miRNAs
 
@@ -506,12 +506,12 @@ After determining the best mapping for each read, __Salmon__  generates the fina
 >    - *"Select salmon quantification mode:"*: `Reads`
 >        - *"Select a reference transcriptome from your history or use a built-in index?"*: `Use one from the history`
 >            - In *"Salmon index"*:
->                - {% icon param-file %} *"Transcripts fasta file"*: `transcriptome_AtRTD2.fasta.gz`
+>                - {% icon param-file %} *"Transcripts fasta file"*: `transcriptome.fasta`
 >        - In *"Data input"*:
 >            - *"Is this library mate-paired?"*: `Single-end`
 >                - {% icon param-collection %} *"FASTQ/FASTA file"*: `Control mRNA`
 >        - *"Validate mappings"*: `Yes`
->    - {% icon param-file %} *"File containing a mapping of transcripts to genes"*: `annotation_AtRTD2.gtf.gz`
+>    - {% icon param-file %} *"File containing a mapping of transcripts to genes"*: `annotation_AtRTD2.gtf`
 >
 > 2. Rename the outputs as `Salmon control mRNA (Quantification)` and `Salmon control mRNA (Gene Quantification)`
 > 3. Repeat the previous procedure by using the `BR treated mRNA` dataset
@@ -607,7 +607,7 @@ To conclude the analysis of the differential expression of mRNAs, we will extrac
 >      ```
 >
 > 2. Rename each dataset according to the sample id (e.g. `mRNA_DESeq2_results_complete_dataset`)
-> 3. Add all miRNA data analysis related tags: #mRNA #BR #control
+> 3. Add all mRNA data analysis related tags: #mRNA #BR #control
 {: .hands_on}
 
 Now we continue with the DE genes analysis.
@@ -694,7 +694,7 @@ To identify putative targets of upregulated miRNAs, it is necessary to obtain th
 >    - {% icon param-collection %} *"From"*: `Downregulated mRNAs`
 > 2. Rename the output as `Downregulated mRNA ids`
 > 3. {% tool [Filter FASTA](toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1) %} with the following parameters:
->    - {% icon param-file %} *"FASTA sequences"*: `transcriptome_AtRTD2.fasta.gz` (Input dataset)
+>    - {% icon param-file %} *"FASTA sequences"*: `transcriptome.fasta` (Input dataset)
 >    - *"Criteria for filtering on the headers"*: `List of IDs`
 >        - {% icon param-file %} *"List of IDs to extract sequences for: `Downregulated mRNA ids`
 >        - *"Match IDs by"*: `Custom regex pattern`
