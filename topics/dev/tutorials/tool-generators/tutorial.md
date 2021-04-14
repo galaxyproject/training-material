@@ -583,13 +583,9 @@ can with a local venv described above - but a little slower and isolated in a co
 {: .announcement}
 
 
-- Use this [zenodo link](https://zenodo.org/record/4661849/files/TFdemo_history_april_4.tar.gz?download=1).
+- Use this [zenodo link](https://zenodo.org/record/4686436/files/TF_demo_planemo_april14.tar.gz?download=1).
 - Copy it and paste it into the URL box on the screen for importing a remote history.
 - The link is also on the welcome page of the virtualenv Planemo installation described above.
-- WORK IN PROGRESS WARNING: Use the link above - not the link on the welcome.html.
-   - It has the prolog and lisp samples but will complain until you manually install the ToolFactory tool fubar/tool_factory_2 from the main toolshed
-   - I may have fixed this by the time you read this
-   - This latest history was not generated in planemo - long tedious story involving manually editing workflows and such.
 
 > ### {% icon hands_on %} Hands-on: Steps to use that URL to import the history
 >
@@ -727,7 +723,6 @@ for those rare situations where that's all you need. No i/o or other parameters 
 
 #### Repeated parameters in generated tools allow the end user to supply multiple values
 
-- *WARNING: Work in progress* - this section depends on a pending PR for galaxyxml - will not work as at April 11 but works fine with the update.
 - Repeats *on the generated tool form* are supported for input and user edited parameters
 - The user sees the usual "Add another" button associated with the parameter and can add any number of them that they wish
 - The script must be able to parse and deal correctly with multiple instances of the same parameter name.

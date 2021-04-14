@@ -27,36 +27,39 @@ contributors:
 
 - The ToolFactory is a specialised Galaxy tool.
 - It generates new tools from working command line scripts.
-- Generated tools will run the supplied script in Galaxy with all required Conda dependencies.
-- They are the same as manually prepared Galaxy tools.
+- Generated tools work the same way manually prepared Galaxy tools do.
+- They can be installed from a toolshed and used in workflows.
+- The script is run each time the tool is executed.
 
 ???
 
-It is a Galaxy tool for developers and users who routinely write their own analysis code.
-Given a working command line script, it can generate a tool to execute that script.
-It generates fully functional toolshed-ready tools.
+The ToolFactory is a Galaxy tool for developers and users who routinely write their own analysis code.
+It generates fully functional, toolshed-ready, tools.
+Supplied with a working command line script, it can generate a new Galaxy tool that "wraps" that script.
+
 
 ---
 
 # BYO programming skills
 
-- If you write and want to make new tools, the ToolFactory may be of use.
+- If you write useful scripts and want to make them into new tools, the ToolFactory may help.
 - Command line scripting skills are required to use the ToolFactory.
-- This training material assumes scripting skills.
+- Scripting skills are a required prerequisite for this training material.
 
 ???
 
 Programming skills are required to make new tools with the ToolFactory.
-If you want to make new tools from your own analysis scripts, it may be useful in your work.
+If you want to make new Galaxy tools from your own analysis scripts, it may be useful in your work.
 
 ---
 
 # Start with a **working command line script**
 
 - Bash, Rscript, Python,Lisp,....,any interpreter in Conda.
-- A command line passes all the parameter settings, data input file paths and output file paths.
-- *python3 x.py --fin x.pasta --fout x.out --latkes "please!"*
-- It **works** if you can run the command in a Linux shell and get useful, correct outputs.
+- All the parameter settings, data input file paths and output file paths are passed on the **command line**.
+- The script must correctly handle the passed parameters.
+- **python3 x.py --fin x.pasta --cooked "al dente" --sauce "tomato,onion, garlic and basil"**
+- It **works** if you can run a command like the one above in a Linux shell and get useful, correct outputs.
 
 ???
 
@@ -70,9 +73,10 @@ Without a working script, it is about as useful as a chocolate teapot.
 
 - Make the script work correctly in a shell.
 - Upload the samples used into a new Galaxy history.
-- Describe the inputs, outputs and parameters for the script.
-- These descriptions are collected on the ToolFactory form.
-- Each input requires a sample selected from the history datasets.
+- Paste the script. Describe the inputs, outputs and parameters for the script.
+- A completed ToolFactory form specifies a new tool.
+- This has the tool parameters such as input files, output files and user specified values.
+- Each input defined requires a small sample selected from the history datasets for a test.
 
 ???
 
@@ -100,7 +104,7 @@ Persisted jobs can be re-run, so the new tool can be adjusted and regenerated at
 
 ---
 
-# Limits and benefits
+# Limited scope but easy to figure out
 
 - A code generator is limited in scope compared to the Galaxy command line tool development infrastructure.
 - As a Galaxy tool, the ToolFactory is limited to simple scripts but it takes far less time to become productive.
@@ -109,9 +113,9 @@ Persisted jobs can be re-run, so the new tool can be adjusted and regenerated at
 
 ???
 
-Although a code generator is easy to learn to use, it will not work for all possible Galaxy tools.
-Many Conda packages require complexities that a code generator cannot provide.
-Scripts are ideal because the code can often be adapted to work around some ToolFactory limitations.
+Although a code generator is easy to learn to use, it is limited to relatively simple Galaxy tools.
+Many Conda packages require complexities that no code generator can provide. Hand written code is required.
+Scripts are often easier. The code is available so can sometimes be adapted to work around some of the limitations of a code generator.
 
 ---
 
@@ -139,4 +143,4 @@ In this way, tools can easily be maintained as long as the job that generates th
 ???
 
 If you would like to learn more about the ToolFactory, there is a far more detailed introduction and hands-on tutorial available.
-We hope you enjoy using the ToolFactory in Galaxy for your work.
+We hope you find the ToolFactory in Galaxy useful for your work.
