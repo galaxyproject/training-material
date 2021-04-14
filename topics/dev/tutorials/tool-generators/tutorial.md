@@ -583,7 +583,8 @@ can with a local venv described above - but a little slower and isolated in a co
 {: .announcement}
 
 
-- Use this [zenodo link](https://zenodo.org/record/4686436/files/TF_demo_planemo_april14.tar.gz?download=1).
+- Use this url `https://zenodo.org/record/4686436/files/TF_demo_planemo_april14.tar.gz?download=1`
+-[zenodo link](https://zenodo.org/record/4686436/files/TF_demo_planemo_april14.tar.gz?download=1).
 - Copy it and paste it into the URL box on the screen for importing a remote history.
 - The link is also on the welcome page of the virtualenv Planemo installation described above.
 
@@ -692,6 +693,13 @@ Galaxy can be used as a tool development environment for users who can write the
 >
 >> ![Galaxy as an IDE for tools with the ToolFactory](../../images/ToolFactory_big_picture.png)
 {: .galaxy-refresh}
+
+
+#### Workflow used to create the tools in the demonstration history
+
+The workflow at https://zenodo.org/record/4686436/files/TFdemo_wf_april13_planemo.ga?download=1 was used to create the sample history examples. It requires some data files as inputs. They
+can be copied from the imported history to a new history and the workflow can be imported and run from there. After connecting appropriate data sets to the different inputs, it will
+re-create all the samples for anyone wanting to see them run.
 
 ---
 
