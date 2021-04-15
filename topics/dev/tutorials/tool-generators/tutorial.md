@@ -150,16 +150,20 @@ and new to the dark arts of Galaxy tool building, this tutorial may be of help. 
 quickly *inside* Galaxy.
 
 
-> ### {% icon tip %} Note on alternatives to the ToolFactory:
->- Planemo can [generate tool XML](https://planemo.readthedocs.io/en/latest/writing_standalone.html) with an optional test.
->- Planemo is recommended for developers who will focus on Galaxy tools. Excellent documentation.
->- Widely used by experienced developers. Requires relatively little time to figure out - Galaxy tool syntax takes longer.
->- No GUI. Command line only. Can create archives with additional steps.
->- Need to pass all i/o and parameter details at once on the command line.
->- Takes longer to learn to use and less accessible to many users than a form driven GUI might be.
->- Manual XML editing required for selects and collections.
->- See the recommended next steps at the end of this tutorial for Planemo related training.
->- The ToolFactory uses planemo to generate test data and to run the test.
+> ### {% icon tip %} Alternative ways to generate tools:
+> - Planemo can [generate tool XML](https://planemo.readthedocs.io/en/latest/writing_standalone.html) with an optional test.
+>    - Planemo is recommended for developers who will focus on Galaxy tools. Excellent documentation.
+>    - Widely used by experienced developers. Requires relatively little time to figure out - Galaxy tool syntax takes longer.
+>    - No GUI. Command line only. Can create archives with additional steps.
+>    - Need to pass all i/o and parameter details at once on the command line.
+>    - Takes longer to learn to use and less accessible to many users than a form driven GUI might be.
+>    - Manual XML editing required for selects and collections.
+>    - See the recommended next steps at the end of this tutorial for Planemo related training.
+>    - The ToolFactory uses planemo to generate test data and to run the test.
+> - Many Unix utilities (sed, awk...) are already available as IUC tools.
+>    - They are `generic` in the sense that a script must be supplied at **run time** by the end user.
+>    - This can be done using the ToolFactory as the Lisp demonstration shows, but usually a specific script is wrapped as a tool so the user supplies only specific I/O and parameter values for each run
+>    - Use whichever one suits your users and your needs.
 {: .tip }
 
 ---
@@ -1404,7 +1408,6 @@ or more of the file names you expect to see after the collection is filled by yo
 > >     - *Please do not upload trivial tools to the main ToolShed!*
 > >     - The ToolFactory provides an option to upload a newly built tool to a toolshed. This was designed for the persistent docker option but works in the planemo tool_factory.
 > >     - Please do not abuse it by adding trivial tools to confuse users looking for useful tools.
-> >
 > >     - The [ToolFactory docker container](https://github.com/fubar2/toolfactory-galaxy-docker) includes a local toolshed
 > >     - This allows new tools to be automatically installed back into the Galaxy running the ToolFactory.
 > >     - Please run your own local toolshed for trivial tools that are so simple or specialised that they are not likely to ever be useful for other scientists
