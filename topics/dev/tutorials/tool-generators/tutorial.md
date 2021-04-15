@@ -732,16 +732,17 @@ for those rare situations where that's all you need. No i/o or other parameters 
 #### Repeated parameters in generated tools allow the end user to supply multiple values
 
 - Repeats *on the generated tool form* are supported for input and user edited parameters
-- The user sees the usual "Add another" button associated with the parameter and can add any number of them that they wish
+- The generated tool form has the usual "Add..." button associated with the parameter, so the tool user can add any number of them.
 - The script must be able to parse and deal correctly with multiple instances of the same parameter name.
-- A Python argparse sample is shown in the example below.
-- Repeats do not make much sense for positional parameters because their number is unpredictable. They will be ignored and a warning issued.
-- Repeats on output parameters are not supported - use a `collection` described below when there an unpredictable number of output files are required.
-- The sample has one input parameter and one text parameter. The `repeat` option is selected for both.
-- In the resulting tool XML wrapper, these are embedded within `<repeat>` tags in the `<inputs>` and `<tests>` sections automatically.
-- Note that repeats are limited to single parameters - parameter groups cannot be repeated at present and will require manual coding.
+- A Python sample script using argparse with `action="append"` parameters to deal with potentially any number of multiples of each parameter command
+line will echo all the repeated parameters is shown in the example shown in the example below.
+- Repeats do not make sense for `positional parameters` because their number is unpredictable. The ToolFactory will ignore repeats in positional mode. A warning is issued in the log.
+- Repeats on `output parameters` are not supported - use a `collection` described below when an unpredictable number of output files are required.
+- The sample shown below has one input data parameter and one text parameter. The `repeat` option is selected for both on the ToolFactory form.
+- In the generated tool XML wrapper, these are embedded within `<repeat>` tags in the `<inputs>` and also in the `<tests>` sections automatically.
+- Note that repeats are limited to *single parameters* - groups of parameters cannot currently be repeated. They will require manual tool writing.
 - The end user sees the form with repeatable fields as shown at the end of the detail below.
-- The sample trivially returns whatever the user chose to repeat.
+- The demonstration trivially returns whatever the user chose to repeat.
 
 > ### {% icon details %} Repeats demonstration tool XML
 > >
@@ -1371,61 +1372,49 @@ or more of the file names you expect to see after the collection is filled by yo
 - That will test properly.
 
 ---
-## Running your newly generated tools
 
-#### Using the ToolFactory installed directly into a development instance
-- Requires a private toolshed.
-- DO NOT use any public toolshed for trivial tools
 
-> ### {% icon hands_on %} Hands-on: Loading new generated tools in a normal development Galaxy
+> ### {% icon details %} Advanced Topic: Running your newly generated tools
 >
-> - You need a local toolshed that the Galaxy server is configured to talk to in `config/tool_sheds_conf.xml`
-> - Edit the default tool_shed.yml admin_users email to suit your needs - default is admin@galaxy.org.
-> - From the Galaxy root, `sh run_tool_shed.sh` should start one on `localhost:9009`
-> - The Galaxy config/tool_shed_conf.xml must include this local toolshed for it to appear on the administrative drop down available toolshed list
-> - Register and login as the administrator and create some categories. Tools don't seem to appear without them.
-> - Make a new repository, add categories and upload the new toolshed archive
-> - In the `Admin` menu, search for the new tool in your local toolshed and then choose `install`
-> - If the new tool does not appear in the Galaxy admin interface, you may need to get whoosh reindexing your toolshed. It's a pain.
-       - This and other challenges are resolved in the specialised [ToolFactory docker container](https://github.com/fubar2/toolfactory-galaxy-docker)
-> - Refresh the tool menu when installation is complete
-{: .hands_on}
-
-
-#### Using Planemo in a virtual environment or GTN docker container
-
-> ### {% icon hands_on %} Hands-on: Loading new generated tools in a venv or docker ToolFactory in Planemo
+> > - **1. Using the ToolFactory installed directly into a development instance**
+> >     - Requires a private toolshed.
+> >     - DO NOT use any public toolshed for trivial tools
+> >     - You need a local toolshed that the Galaxy server is configured to talk to in `config/tool_sheds_conf.xml`
+> >     - Edit the default tool_shed.yml admin_users email to suit your needs - default is admin@galaxy.org.
+> >     - From the Galaxy root, `sh run_tool_shed.sh` should start one on `localhost:9009`
+> >     - The Galaxy config/tool_shed_conf.xml must include this local toolshed for it to appear on the administrative drop down available toolshed list
+> >     - Register and login as the administrator and create some categories. Tools don't seem to appear without them.
+> >     - Make a new repository, add categories and upload the new toolshed archive
+> >     - In the `Admin` menu, search for the new tool in your local toolshed and then choose `install`
+> >     - If the new tool does not appear in the Galaxy admin interface, you may need to get whoosh reindexing your toolshed. It's a pain.
+> >         - This and other challenges are resolved in the specialised [ToolFactory docker container](https://github.com/fubar2/toolfactory-galaxy-docker)
+> >     - Refresh the tool menu when installation is complete
+> >
+> > - **2. Using Planemo in a virtual environment or GTN docker container**
+> >     - Download the toolshed archive from the Galaxy history where you generated the tool.
+> >     - Unpack the archive into the local directory (or the directory mapped as a volume in Docker) /planemo/mytools directory. It should appear as a single directory containing a test-data subdirectory and the new tool xml.
+> >     - Stop planemo - `^c` will do it somewhat messily
+> >     - Restart planemo with an additional parameter `--extra_tools planemo/mytools/`. This is automatic in the Docker container.
+> >     - The new tool should be ready to test on the tool menu
+> >
+> >
+> > - **3. Uploading generated archives to toolsheds**
+> >
+> >     - **Trivial tools do not belong in the public toolsheds!**
+> >     - *Please do not upload trivial tools to the main ToolShed!*
+> >     - The ToolFactory provides an option to upload a newly built tool to a toolshed. This was designed for the persistent docker option but works in the planemo tool_factory.
+> >     - Please do not abuse it by adding trivial tools to confuse users looking for useful tools.
+> >
+> >     - The [ToolFactory docker container](https://github.com/fubar2/toolfactory-galaxy-docker) includes a local toolshed
+> >     - This allows new tools to be automatically installed back into the Galaxy running the ToolFactory.
+> >     - Please run your own local toolshed for trivial tools that are so simple or specialised that they are not likely to ever be useful for other scientists
+> >     - Uploading them to the main ToolShed is unlikely to help anyone
 >
-> - Download the toolshed archive from the Galaxy history where you generated the tool.
-> - Unpack the archive into the local directory (or the directory mapped as a volume in Docker) /planemo/mytools directory. It should appear as a single directory containing a test-data subdirectory and the new tool xml.
-> - Stop planemo - `^c` will do it somewhat messily
-> - Restart planemo with an additional parameter `--extra_tools planemo/mytools/`. This is automatic in the Docker container.
-> - The new tool should be ready to test on the tool menu
-{: .hands_on}
-
+{: .details}
 
 ---
 
-## Uploading generated archives to toolsheds
-
-
-> ### {% icon warning %} Trivial tools do not belong in the public toolsheds!
->- *Please do not upload trivial tools to the main ToolShed!*
->- The ToolFactory provides an option to upload a newly built tool to a toolshed. This was designed for the persistent docker option but works in the
-planemo tool_factory.
->- Please do not abuse it by adding trivial tools to confuse users looking for useful tools.
-{: .warning}
-
-
-- The [ToolFactory docker container](https://github.com/fubar2/toolfactory-galaxy-docker) includes a local toolshed
-- This allows new tools to be automatically installed back into the Galaxy running the ToolFactory.
-- Please run your own local toolshed for trivial tools that are so simple or specialised that they are not likely to ever be useful for other scientists
-- Uploading them to the main ToolShed is unlikely to help anyone
-
----
-
-
-# Please help improve this community resource
+# Your turn! Please help improve this community resource!
 - tell Ross (ross.lazarus@gmail.com) what went well and what could be improved for the benefit of future students
 - This tutorial has had almost no testing yet.
 - It is in pre-review.
