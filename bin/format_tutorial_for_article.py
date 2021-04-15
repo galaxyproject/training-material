@@ -121,23 +121,37 @@ def extract_metadata(yaml_metadata, contributor_fp, tuto_link):
     return metadata
 
 
-def format_tuto_content(content, yaml_metadata, tuto_link):
-    '''Format the tutorial content (boxes)
+def format_lines(content_l, tuto_dp):
+    '''Check the tutorial content lines by lines to see what to keep
 
     :param content: list with tutorial lines
-    :param yaml_metadata: YAML content on the top of a tutorial
-    :param tuto_link: link to online tutorial
+    :param tuto_dp: Path to tutorial folder
     '''
-    l_content = []
+    content = {
+        'text': [],
+        'images': [],
+        'hands_on': []
+    }
     do_not_add_next_lines = 0
     do_not_add_commented_part = False
     code_section = False
-    images = []
-    hands_on = []
-
-    for l in content:
-        # remove lines with includes
+    for l in content_l:
+        # include content from include
         if '{% include' in l:
+            s = re.search(r'include (.+.md) ', l)
+            if s:
+                include_fp = s.group(1)
+                print(include_fp)
+                if '{{ page.dir }}' in include_fp:
+                    include_fp = include_fp.replace('{{ page.dir }}', "%s/" % str(tuto_dp))
+                include_fp = Path(include_fp)
+                print(include_fp)
+                with include_fp.open("r") as include_f:
+                    include_content_l = include_f.readlines()
+                include_content = format_lines(include_content_l, tuto_dp)
+                content['text'] += include_content['text']
+                content['images'] += include_content['images']
+                content['hands_on'] += include_content['hands_on']
             continue
         # remove questions, comments, details, tips, agenda boxes 
         elif re.search(r'{% icon (question|details|comment|tip|warning) %}', l):
@@ -174,23 +188,35 @@ def format_tuto_content(content, yaml_metadata, tuto_link):
             l = l.replace('> ### {% icon hands_on %} ', '***')
             l = l[:-1] +  '***\n\n'
             l2 = l.replace('Hands-on: ', '')
-            hands_on.append(l2)
+            content['hands_on'].append(l2)
         elif '{: .hands_on}' in l:
             continue
         elif l.startswith('> '):
             l = l[2:]
-            hands_on.append(l)
+            content['hands_on'].append(l)
         elif l.startswith('>'):
             continue
-        # remove {:.no_toc}
+        # remove {:.no_t
         elif re.search(r'{:[ ]?\.no_toc}', l):
             continue
         # rename 1st part
         elif '# Introduction' in l:
             l = '# Description of the data\n'
         elif 'images/' in l:
-            images.append(l)
-        l_content.append(l)
+            content['images'].append(l)
+        content['text'].append(l)
+    return content
+
+
+def format_tuto_content(content_l, yaml_metadata, tuto_link, tuto_dp):
+    '''Format the tutorial content (boxes)
+
+    :param content_l: list with tutorial lines
+    :param yaml_metadata: YAML content on the top of a tutorial
+    :param tuto_link: link to online tutorial
+    :param tuto_dp: Path to tutorial folder
+    '''
+    content = format_lines(content_l, tuto_dp)
 
     # prepare introduction
     intro = "\n# Introduction\n\n" \
@@ -214,7 +240,7 @@ def format_tuto_content(content, yaml_metadata, tuto_link):
     #ref = "\n# References\n\n"
 
     # transform list of lines into string, add introduction, add references
-    form_content = intro + ''.join(l_content)# + ref
+    form_content = intro + ''.join(content['text'])# + ref
 
     # replace {{ page.zenodo_link }} by correct link
     form_content = form_content.replace(
@@ -241,10 +267,10 @@ def format_tuto_content(content, yaml_metadata, tuto_link):
     form_content = re.sub(r'\.\.\/\.\.\/images[a-z0-9\-\_\/]+\/', 'images/', form_content)
     form_content = re.sub(r'\.\.\/\.\.\/images\/', 'images/', form_content)
 
-    return (form_content, images)
+    return (form_content, content['images'])
 
 
-def format_tutorial(tuto_fp, formatted_tuto_fp, contributor_fp):
+def format_tutorial(tuto_fp, formatted_tuto_fp, contributor_fp, tuto_dp):
     '''Read tutorial content, format it for pandoc and export it
     
     1. Extract metadata needed by pandoc from tutorial and contributors
@@ -254,12 +280,12 @@ def format_tutorial(tuto_fp, formatted_tuto_fp, contributor_fp):
     :param tuto_fp: Path object to file with original tutorial
     :param formatted_tuto_fp: Path object to file with formatted tutorial for pandoc
     :param contributor_fp: Path object to file with contributors
+    :param tuto_dp: Path to tutorial folder
     '''
     tuto_link = "%s/%s" % (BASEURL, str(tuto_fp).replace('md', 'html'))
 
     with tuto_fp.open("r") as tuto_f:
         full_content = tuto_f.readlines()#yaml.load(tuto_f)
-        print(full_content)
 
         yaml_content = ''
         for i, l in enumerate(full_content[1:]):
@@ -271,7 +297,8 @@ def format_tutorial(tuto_fp, formatted_tuto_fp, contributor_fp):
         (formatted_tuto_content, img) = format_tuto_content(
             full_content[i+2:],
             yaml_metadata,
-            tuto_link)
+            tuto_link,
+            tuto_dp)
         
     with formatted_tuto_fp.open("w") as tuto_f:
         tuto_f.write('---\n')
@@ -334,8 +361,9 @@ def copy_images(images, images_dp, tuto_dp):
     :param images_dp:
     '''
     for img in images:
+        print(img)
         #m = re.search(r'(?P<path>\.\.\/\.\.\/images[a-z0-9\-\_\/\.]+)', img)
-        m = re.search(r'(\blink\b)?(?P<path>(\.\.\/\.\.|topics/[a-z0-9\-\_\/]+)/images[a-z0-9\-\_\/\.]+)', img)
+        m = re.search(r'(\blink\b)?(?P<path>(\.\.\/\.\.|topics\/[a-z0-9\-\_\/]+)\/images\/[a-zA-Z0-9\-\_\/\.]+)', img)
         if m is not None:
             img_fp = tuto_dp / Path(m.group('path'))
             if not check_exists(img_fp, noerror=True):
@@ -368,7 +396,7 @@ if __name__ == '__main__':
     check_exists(contributor_fp)
 
     # format tutorial
-    images = format_tutorial(original_tuto_fp, formatted_tuto_fp, contributor_fp)
+    images = format_tutorial(original_tuto_fp, formatted_tuto_fp, contributor_fp, tuto_dp)
 
     # add references
     tuto_ref_fp = tuto_dp / "tutorial.bib"
