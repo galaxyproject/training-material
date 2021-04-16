@@ -111,7 +111,7 @@ computing component can be.
 
 In contrast to normal tools, GIE allow unconstrained scripting in a Galaxy environment. They are popular and useful for skilled researchers
 and developers, because they allow code to run inside Galaxy that is not available in any existing tool. Notebooks can be shared and reused and can even run in
-workflows. They do not currently take advantage of the formal reproducibility provided by dependency management built-in to real tools.
+workflows.
 
 If a tool that performs exactly the same functions as a GIE is needed, the code can be extracted and turned into a parameterised command line script.
 Any functional script can be turned into a typical Galaxy tool.
@@ -161,9 +161,11 @@ quickly *inside* Galaxy.
 >    - See the recommended next steps at the end of this tutorial for Planemo related training.
 >    - The ToolFactory uses planemo to generate test data and to run the test.
 > - Many Unix utilities (sed, awk...) are already available as IUC tools.
->    - They are `generic` in the sense that a script must be supplied at **run time** by the end user.
->    - This can be done using the ToolFactory as the Lisp demonstration shows, but usually a specific script is wrapped as a tool so the user supplies only specific I/O and parameter values for each run
->    - Use whichever one suits your users and your needs.
+>    - They are `generic` in the sense that a script is supplied at **run time** by the tool user.
+>    - The Lisp demonstration uses that model, but it may be desirable that one very specific script is "wrapped" as a reproducible tool.
+>        - The user supplies only those I/O and parameter values specified on the ToolFactory form.
+>        - Nothing else can be changed - just like with most Galaxy tools.
+> - Choose whichever one fits best for the task at hand.
 {: .tip }
 
 ---
@@ -385,7 +387,83 @@ Check for Conda and other running processes before assuming it has frozen.
 >- Fortunately, there are a number of local installation alternatives to choose from, depending on how you prefer to work, described in the next section.
 {: .warning}
 
-#### 1. Recommended: Install into an existing local non-docker development Galaxy
+#### Using a docker container - not persistent - but convenient for testing
+
+- if you would like to work through the tutorial using a docker container, use `quay.io/fubar2/toolfactory_tutorial`
+- Assuming docker is running, `docker run -d -p 9090:9090 quay.io/fubar2/toolfactory_tutorial:latest` should start it locally
+- Planemo takes 20 to 30 seconds to spin up a Galaxy after the container boots.
+- Once it has settled down, navigate to [http://localhost:9090](http://localhost:9090) where you will find a Galaxy running
+- The ToolFactory will be installed and ready to run
+- <a href="#section3">Skip to Section 3</a> below to import the sample history and continue with the Tutorial
+
+> ### {% icon details %} Dockerfile used to generate `quay.io/fubar2/toolfactory_tutorial`
+> > ```docker
+> > # Galaxy - Using Galaxy tools to generate new Galaxy tools
+> > #
+> > # To build the docker image, go to root of the training repo and
+> > #    docker build -t tool-generators -f topics/tool-generators/docker/Dockerfile .
+> > # Take a break. Takes a while!
+> > # To run image, make a `planemo --extra_tools` tool directory where you want to run it regularly and then
+> > #    docker run -p "9090:9090" -v mytools:/planemo/mytools/  -t tool-generators
+> > # ToolFactory planemo will be available on localhost:9090
+> > # Toolshed archives you generate can be downloaded and then unpacked under the mytools directory.
+> > # They will be loaded by planemo into the Galaxy it runs and be available in the tool menu the next time you restart the container and planemo
+> > # This allows you to load newly generated tools for testing and refinement.
+> > # WARNING: Export your history before you shut this container down or lose your ToolFactory form work when you stop the container.
+> > # Planemo always starts with an empty history.
+> > #
+> > # Rate limited on ubuntu image so using a quay.io minimal
+> > # derived from https://github.com/cybozu/ubuntu-base/tree/main/20.04/ubuntu
+> >
+> > FROM quay.io/cybozu/ubuntu-minimal:focal-20210217
+> > ENV DEBIAN_FRONTEND=noninteractive
+> > MAINTAINER Ross Lazarus
+> > # with fixes by Helena Rasch
+> > ENV TARGDIR "/galaxy-central"
+> > ENV PDIR "/planemo"
+> > RUN apt-get update \
+> > && apt-get install -y -qq --no-install-recommends locales tzdata openssl netbase apt-utils apt-transport-https libreadline8 \
+> >     ca-certificates curl python3-dev gcc python3-pip build-essential python3-venv python3-wheel nano wget git python3-setuptools gnupg mercurial \
+> > && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+> > && apt-get -y upgrade \
+> > && locale-gen en_US.UTF-8 \
+> > && update-locale LANG=en_US.UTF-8 \
+> > && cp /usr/share/zoneinfo/Australia/Sydney /etc/timezone \
+> > && dpkg-reconfigure -f noninteractive tzdata \
+> > && python3 -m pip install --upgrade pip \
+> > && mkdir -p $TARGDIR \
+> > && curl -L -s https://github.com/galaxyproject/galaxy/archive/dev.tar.gz | tar xzf - --strip-components=1 -C $TARGDIR \
+> > && git clone --recursive https://github.com/fubar2/planemo.git $PDIR \
+> > && cp $PDIR/planemo_ext/welcome.html $TARGDIR/static/welcome.html.sample \
+> > && cp $PDIR/planemo_ext/welcome.html $TARGDIR/static/welcome.html \
+> > && mkdir $PDIR/mytools \
+> > && rm -rf $PDIR/doc \
+> > && cd $PDIR \
+> > && python3 setup.py build \
+> > && python3 setup.py install \
+> > && pip install -U pip \
+> > && planemo conda_init --conda_prefix $PDIR/con \
+> > && hg clone https://fubar@toolshed.g2.bx.psu.edu/repos/fubar/tacrev $PDIR/tacrev \
+> > && cp $TARGDIR/config/datatypes_conf.xml.sample $TARGDIR/config/datatypes_conf.xml \
+> > && sed -i 's/<\/registration>/<datatype extension="tgz" type="galaxy.datatypes.binary:Binary" subclass="true" mimetype="multipart\/x-gzip" display_in_upload="true"\/> <\/registration>/' $TARGDIR/config/datatypes_conf.xml \
+> > && sed -i 's/<datatype extension="html"/<datatype extension="html" display_in_upload="true"/' $TARGDIR/config/datatypes_conf.xml \
+> > && sed -i 's/<datatype extension="toolshed.gz"/<datatype extension="toolshed.gz" display_in_upload="true" /' $TARGDIR/config/datatypes_conf.xml \
+> > && sed -i '/-l|-list|--list)/i \\n\t --dev-wheels|-dev-wheels)\n\t\tshift\n\t\t;;\n' $TARGDIR/run_tests.sh \
+> > && virtualenv /root/.planemo/gx_venv_3.9 \
+> > && . /root/.planemo/gx_venv_3.9/bin/activate && pip install -U setuptools \
+> > && cd $TARGDIR && export GALAXY_VIRTUAL_ENV=/root/.planemo/gx_venv_3.9 && make setup-venv \
+> > && planemo test --galaxy_root $TARGDIR --galaxy_python_version 3.9 --conda_prefix $PDIR/con /planemo/tacrev/tacrev/tacrev.xml \
+> > && rm -rf /usr/local/share/.cache/yarn \
+> > && apt-get clean && apt-get purge \
+> > && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+> > VOLUME /planemo/mytools
+> > WORKDIR $PDIR
+> > ENV GALAXY_CONFIG_BRAND "ToolFactory in Planemo"
+> > EXPOSE 9090
+> > ENTRYPOINT ["/usr/local/bin/planemo" ,"tool_factory", "--galaxy_root" ,"/galaxy-central", "--port", "9090", "--host", "0.0.0.0", "--conda_prefix", "/planemo/con", "--extra_tools", "/planemo/mytools", "--galaxy_python_version", "3.9"]
+> > ```
+{: .details}
+#### For production: Install the ToolFactory directly into an existing local non-docker development Galaxy
 
 - Quick and easy if you already have a throw-away Galaxy available.
 - ToolFactory work will be persistent like any other jobs on that Galaxy.
@@ -413,9 +491,11 @@ See [the tutorial on installing tools from the toolshed](https://galaxyproject.o
 > 3. Under the `Tool Management` option, select `Install and Uninstall - Search and install new tools and other Galaxy utilities from the Tool Shed. See the tutorial.`
 > 2. Make sure the Main toolshed is selected so the entire category list is displayed. Choose the `Tool Generators` link.
 > 3. Select `tool_factory_2 updated version of the tool factory`
-> 3. Select `Install` for the first listed version - revision 119 at present.
+> 3. Select `Install` for the first listed version - 138 currently.
 > 4. Wait a few minutes - it takes some time for Conda to install all the dependencies
 {: .details}
+- <a href="#section3">Skip to Section 3</a> below to import the sample history and continue with the Tutorial
+
 
 ---
 
@@ -441,7 +521,7 @@ See [the tutorial on installing tools from the toolshed](https://galaxyproject.o
 
 > ### {% icon details %} Sample script to install a local disposable ToolFactory in a planemo virtual environment
 > > ### {% icon code-in %} Input: topics/dev/tutorials/tool-builders/docker/maketf.sh
-> > ```
+> > ```bash
 > > # GALDIR could be an existing dev directory, and the curl line could be commented out to save time
 > > GALDIR="galaxy-central"
 > > PDIR="planemo"
@@ -474,6 +554,8 @@ See [the tutorial on installing tools from the toolshed](https://galaxyproject.o
 > {: .code-in}
 {: .details}
 
+- Navigate to [http://localhost:9090](http://localhost:9090) where a Galaxy with the ToolFactory installed will be running
+- <a href="#section3">Skip to Section 3</a> below to import the sample history and continue with the Tutorial
 
 ---
 
@@ -557,6 +639,10 @@ can with a local venv described above - but a little slower and isolated in a co
 >  {: .code-in}
 {: .details}
 
+
+- Navigate to [http://localhost:9090](http://localhost:9090) where a Galaxy with the ToolFactory installed will be running
+- <a href="#section3">Skip to Section 3</a> below to import the sample history and continue with the Tutorial
+
 ---
 
 #### 4. CYOA option - Install the ToolFactory docker container with integrated toolshed
@@ -603,14 +689,17 @@ can with a local venv described above - but a little slower and isolated in a co
 
 - It will take a few minutes to import.
 - Get up and have a stretch for a minute.
-- When it's complete, select the link to view histories and switch to the new one.
-- You will see a large number of pairs of history items and 4 data files used for testing.
+- When it's complete, select the link to view histories and choose `switch` from the drop down arrow on the new history to make the imported one your current history.
+- Viewing the new history, you will see a large number of pairs of history items and 4 data files used for testing.
 - Each pair comprises a toolshed ready archive containing a generated tool and a test, and a collection including a Planemo test report, the tool XML and a job log.
 - The archive history object has a circular "redo" button. Click that button and the ToolFactory form that generated the sample tool will appear. You can see how the tool was
 built using the ToolFactory's limited capacities. Most of them are trivial of course. They are meant to be models rather than useful examples.
+- It is recommended that you rerun one job and wait until it is complete before starting multiple jobs - there will likely be a race condition if planemo tries to configure
+Conda for the initial run with more than one tool running - once the first one is done, it seems to work well even when building multiple tools at the same time. It uses
+sqlite so is far less robust than ideal but it works well for development.
 
 ---
-
+<sup id='section3'>*</sup>
 # 3. Hands-on: Learning to use the ToolFactory
 
 > ### {% icon comment %}First time use involves a long pause in some installations
@@ -1161,7 +1250,7 @@ planemo lint $TOOLNAME >> $2
 {: .details}
 
 
-#### Running Lisp and Prolog scripts in Galaxy.
+#### Other languages such as Lisp and Prolog scripts in Galaxy.
 
 - Any interpreted language in Conda can be used, as long as it will take a command line script path or read from STDIN.
 - Trivial samples using Lisp and Prolog are included in the demonstration history.
@@ -1360,7 +1449,16 @@ planemo lint $TOOLNAME >> $2
 
 ---
 
-## Notes on some commonly reported errors and their solutions
+## Notes on some commonly reported issues
+
+#### First job I submitted in Planemo ToolFactory and the Docker container remains grey for a long time - is it broken?
+
+- Check with top or other system monitor to see if Conda is running.
+- The first run generally takes a while to install all the needed dependencies.
+- Subsequent runs should start immediately
+- Installing new Conda dependencies also takes time so tools that have new Conda packages will take longer to generate as they must be installed before the tool can be tested.
+- In general, a complete ToolFactory job usually takes less than a minute - planemo has to build and tear down a new Galaxy for generating test results and then
+again for testing properly. Longer if the tool has Conda dependencies....
 
 #### My Rscript generates a strange R error on STDOUT about an invalid operation on a closure called 'args' ?
 
@@ -1369,11 +1467,12 @@ planemo lint $TOOLNAME >> $2
 #### I want to use a collection for outputs but it always passes the test even when the script fails. What gives?
 
 - Unfortunately, collections are tricky to generate automated tests for. The contents are never known until the tool has been run.
+- A manual test override is currently the only way to test collections properly.
 - Automation is hard. If you can help, pull requests are welcomed.
 - Until it's automated, please take a look at the plotter sample.
 - It is recommended that you modify the test over-ride that appears in that sample form. Substitute one
-or more of the file names you expect to see after the collection is filled by your new tool for the pdf used in the plotter sample tool test.
-- That will test properly.
+or more of the file names you expect to see after the collection is filled by your new tool for the `<element.../>` used in the plotter sample's tool test.
+
 
 ---
 
