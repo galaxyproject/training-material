@@ -38,9 +38,9 @@ zenodo_link: ""
 
 ???
 - Brassinosteroids are a group of plant steroid hormones essential for plant growth and development, as well as for controlling abiotic and biotic stress.
-- Structurally, BRs are polyhydroxylated sterol derivatives with close similarity to animal hormones.
+- Structurally, brassinosteroids are polyhydroxylated sterol derivatives with close similarity to animal hormones.
 - Brassinosteroids have the ability to stimulate plant growth, influencing germination, rhizogenesis, flowering, senescence, abscission and ripening processes.
-- In addition, several experimental results have demonstrated their ability to confer resistance to several types of abiotic and biotic stresses, such as heat, cold, salinity and drought
+- In addition, several experimental results have demonstrated their ability to confer resistance to several types of abiotic and biotic stresses, such as heat, cold, salinity and drought.
 
 ---
 
@@ -49,10 +49,10 @@ zenodo_link: ""
 ![plant microRNAs](../images/plant_mirna_synthesis_simple.png)
 
 ???
-- Micro RNAs, mainly 20–22 nucleotide small RNAs, are characterized for regulating gene expression at the post-transcriptional level.
-- Micro RNAs are distinguished from other small RNAs by being generated from precursor harboring an imperfect stem‐loop structure. Unlike in animals, the pre-processing of plant micro RNA occurs in the nucleus.
+- miRNAs, mainly 20–22 nucleotide small RNAs, are characterized for regulating gene expression at the post-transcriptional level.
+- miRNAs are distinguished from other small RNAs by being generated from precursor harboring an imperfect stem‐loop structure. Unlike in animals, the pre-processing of plant miRNA occurs in the nucleus.
 
-- The pre micro RNAs are then exported to the cytoplasm after methylation and incorporated into the Argonaute 1 protein to form an RNA-induced silencing complex. The micro RNA itself does not have the ability to cleave mRNAs or interfere with translation, but it plays a role in scanning the appropriate target.
+- The pre miRNAs are then exported to the cytoplasm after methylation and incorporated into the Argonaute 1 protein to form an RNA-induced silencing complex. The miRNA itself does not have the ability to cleave mRNAs or interfere with translation, but it plays a role in scanning the appropriate target.
 
 ---
 
@@ -67,7 +67,7 @@ zenodo_link: ""
 - Targets include not only mRNAs but also long noncoding RNAs
 
 ???
-- Four factors determine that micro RNAs are considered master regulators.
+- Four factors determine that miRNAs are considered master regulators.
 - The first one is that multiple miRNA genes are regulated under given environmental conditions.
 - The second one is that computational predictions estimate that each miRNA regulates hundreds of genes.
 - The third factor is that the majority of plant miRNAs regulate genes encoding for transcription factors.
@@ -87,8 +87,8 @@ zenodo_link: ""
 ![Experimental design](../images/miRNA_pipeline.png)
 
 ???
-- As shown here, we can divide the analysis into three stages. Differential expression analysis of micro RNAs, differential expression analysis of mRNAs and micro RNA target identification.
-- The starting hypothesis is that there should be sequence complementarity between upregulated micro RNAs and downregulated mRNAs signifying micro RNA regulation.
+- As shown here, we can divide the analysis into three stages. Differential expression analysis of miRNAs, differential expression analysis of mRNAs and miRNA target identification.
+- The starting hypothesis is that there should be sequence complementarity between upregulated miRNAs and downregulated mRNAs signifying miRNA regulation.
 
 ---
 
@@ -105,7 +105,7 @@ zenodo_link: ""
 .footnote[[*E Oh, Elife, 2014*](https://www.ncbi.nlm.nih.gov/pubmed/24867218) and [*SY Park, Genes Genomics, 2020*](https://www.ncbi.nlm.nih.gov/pubmed/32648234)]
 
 ???
-- For the micro RNA-Seq data analysis we will use a total of 6 samples. Three of which are mock-treated biological replicates and the remaining three are the biological replicates of brassinosteroid treatment.
+- For the miRNA-Seq data analysis we will use a total of 6 samples. Three of which are mock-treated biological replicates and the remaining three are the biological replicates of brassinosteroid treatment.
 - From mRNA-Seq data we have two replicates of each condition.
 - In order to simplify the analysis, the biological replicates will be grouped in Galaxy into data collections.
 - Collections allow to combine numerous datasets in a single entity that can be easily manipulated.
@@ -117,15 +117,15 @@ zenodo_link: ""
 
 ???
 - Now we will look at the tools that are used in the tutorial.
-- We categorize both the micro RNA and mRNA sequencing data analysis into three analysis stages, namely quality assessment, quantification and differential expression.
-- On the left side you can see the tools used for micro RNA-Seq data analysis and on the right side, mRNA-Seq data analysis.
-- We first assess the quality of the raw sequencing reads using Fast QC and Multi QC.
-- Fast QC is used to quality control checks on raw sequencing data from individual samples. Multi QC allows aggregating the results generated by Fast QC across several samples into a single report.
-- Trim Galore is a wrapper tool around cutadapt and Fast QC to consistently apply quality and adapter trimming on FastQ files.
-- To carry out micro RNA quantification, we will use two modules belonging to the MiRDeep2 tool. MiRDeep2 mapper and MiRDeep2 quantifier.
+- We categorize both the miRNA and mRNA sequencing data analysis into three analysis stages, namely quality assessment, quantification and differential expression.
+- On the left side you can see the tools used for miRNA-Seq data analysis and on the right side, mRNA-Seq data analysis.
+- We first assess the quality of the raw sequencing reads using fastqc and multiqc.
+- fastqc is used to quality control checks on raw sequencing data from individual samples. multiqc allows aggregating the results generated by fastqc across several samples into a single report.
+- Trim Galore is a wrapper tool around cutadapt and fastqc to consistently apply quality and adapter trimming on FastQ files.
+- To carry out miRNA quantification, we will use two modules belonging to the MiRDeep2 tool. MiRDeep2 mapper and MiRDeep2 quantifier.
 - We will use Salmon for mRNA quantification.
-- For both the differential expression analyses, we will use DE Seq2, a package for differential expression analysis of count data based on the negative binomial distribution.
-- Finally, we will use the Target Finder tool for micro RNA target prediction.
+- For both the differential expression analyses, we will use DESeq2, a package for differential expression analysis of count data based on the negative binomial distribution.
+- Finally, we will use the Target Finder tool for miRNA target prediction.
 
 ---
 
@@ -176,8 +176,8 @@ zenodo_link: ""
 - The quasi-mapping algorithm makes use of two main data structures, the generalized suffix array of the transcriptome, and a hash table that maps each k-mer in transcriptome to its suffix array interval.
 - During the quasi-mapping procedure, a read is scanned from left to right until a k-mer is encountered that appears in the hash table.
 - That k-mer is looked up in the hash table and the suffix array intervals are retrieved.
-- Then, the Maximal Mappable Prefix is computed by finding the longest substring of the read that matches the reference suffixes.
-- Owing to sequencing errors, the Maximal Mappable Prefix may not span the complete read. In this case, the next informative position is determined. The next informative position is the position on the read that has a unique matching base on the reference transcripts after a mismatch or a deletion.
+- Then, the maximal mappable prefix is computed by finding the longest substring of the read that matches the reference suffixes.
+- Owing to sequencing errors, the maximal mappable prefix may not span the complete read. In this case, the next informative position is determined. The next informative position is the position on the read that has a unique matching base on the reference transcripts after a mismatch or a deletion.
 - Suffix array search continues from k-bases before the next informative position.
 - Finally, for each read, the algorithm reports the transcripts it mapped to, location, and strand information.
 - This figure is an illustration of the quasi-mapping of a read using k=3. Hash table lookup of k-mer A T T returns the suffix array interval b and e.
@@ -203,7 +203,7 @@ zenodo_link: ""
 - Since the k-mers which contain the adapter sequences are not present in the transcriptome index from which the hash table is generated, the adapters are not mapped.
 - If there is no significant amount of adapters present in the reads, adapter clipping can safely be skipped.
 - However, it is always good to trim the low-quality reads.
-- Because of the large memory footprints of hash tables and suffix arrays, generally, transcriptome FASTA file is used for Salmon quantification instead of whole genome FASTA file.
+- Because of the large memory footprints of hash tables and suffix arrays, generally, transcriptome fasta file is used for Salmon quantification instead of whole genome fasta file.
 - Therefore it is advisable to use this tool on well-annotated organisms.
 - For the same reason, Salmon cannot be used to detect or annotate novel transcripts.
 
@@ -224,11 +224,11 @@ zenodo_link: ""
     - more than four total mismatches or four total G:U base pairs
 
 ???
-- In animals usually, base pairing in the seed region of the micro RNA, that is 2 to 8 bases is enough for target recognition.
-- Plant micro RNAs require more stringent base pairing. Generally, a near-perfect pairing in 5 prime region and a substantial pairing in 3 prime region is necessary.
+- In animals usually, base pairing in the seed region of the miRNA, that is 2 to 8 bases is enough for target recognition.
+- Plant miRNAs require more stringent base pairing. Generally, a near-perfect pairing in 5 prime region and a substantial pairing in 3 prime region is necessary.
 - Due to this strict pairing mechanism, plant miRNAs have a significantly less number of target genes.
-- For this reason, we use a plant-specific micro RNA target prediction algorithm called Target finder.
-- Target finder takes a small RNA sequence and a FASTA formatted file of the target sequence database.
+- For this reason, we use a plant-specific miRNA target prediction algorithm called TargetFinder.
+- TargetFinder takes a small RNA sequence and a fasta formatted file of the target sequence database.
 - It uses the popular Smith-Watermann local alignment algorithm for aligning small RNA sequence to the target sequence database.
 - A penalty of 1 is added for each mismatch, gap, and bulge and 0.5 for non-canonical G U base pairing.
 - These penalties are doubled from positions 2 to 13.
