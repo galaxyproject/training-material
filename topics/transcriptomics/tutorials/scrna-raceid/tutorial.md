@@ -216,7 +216,7 @@ We can refine filtering thresholds by examining how much a histogram of our plot
 
 > ### {% icon hands_on %} Hands-on: Unique Cell Types
 >
-> 1. {% tool [Initial processing using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_filtnormconf/raceid_filtnormconf/3.1) %}  with the following parameters:
+> 1. {% tool [Initial processing using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_filtnormconf/raceid_filtnormconf/0.2.3+galaxy0) %}  with the following parameters:
 >    - {% icon param-file %} *"Count Matrix"*: `intestinal` (Input dataset)
 >    - In *"Filtering"*:
 >        - *"Min Transcripts"*: `3000`
@@ -363,7 +363,7 @@ Here we assume that there is no unwanted technical or biological variability in 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Clustering using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_clustering/raceid_clustering/3.1) %}  with the following parameters:
+> 1. {% tool [Clustering using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_clustering/raceid_clustering/0.2.3+galaxy0) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RaceID RDS"*: `outrdat` (output of **Initial processing using RaceID** {% icon tool %})
 >    - In *"Clustering"*:
 >        - *"Use Defaults?"*: `Yes`
@@ -592,7 +592,7 @@ The previous section produced plots that spoke about the quality of the clusteri
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Cluster Inspection using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/3.1) %}  with the following parameters:
+> 1. {% tool [Cluster Inspection using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/0.2.3+galaxy0) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RaceID RDS"*: `outrdat` (output of **Clustering using RaceID** {% icon tool %})
 >    - *"Plot All Clusters?"*: `Yes`
 >    - *"Perform Subset Analysis?"*: `No`
@@ -700,7 +700,7 @@ Here we will compare how the cells in cluster 1 are differentially expressed com
 
 > ### {% icon hands_on %} Hands-on: MA plot
 >
-> 1. {% tool [Cluster Inspection using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/3.1) %}  with the following parameters:
+> 1. {% tool [Cluster Inspection using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/0.2.3+galaxy0) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RaceID RDS"*: `outrdat` (output of **Clustering using RaceID** {% icon tool %})
 >    - *"Plot All Clusters?"*: `No`
 >    - *"Perform Subset Analysis?"*: `No`
@@ -747,7 +747,7 @@ Here we will look at the combined expression of *Gstm3*, *St3gal4*, and *Gna11* 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Cluster Inspection using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/3.1) %}  with the following parameters:
+> 1. {% tool [Cluster Inspection using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/0.2.3+galaxy0) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RaceID RDS"*: `outrdat` (output of **Clustering using RaceID** {% icon tool %})
 >    - *"Plot All Clusters?"*: `No`
 >    - *"Perform Subset Analysis?"*: `No`
@@ -794,7 +794,7 @@ It was [mentioned previously](#details-details-continuous-phenotypes-vs-discrete
 
 > ### {% icon hands_on %} Hands-on
 >
-> 1. {% tool [Lineage computation using StemID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_trajectory/raceid_trajectory/3.1) %}  with the following parameters:
+> 1. {% tool [Lineage computation using StemID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_trajectory/raceid_trajectory/0.2.3+galaxy0) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RDS"*: `outrdat` (output of **Clustering using RaceID** {% icon tool %})
 >    - In *"Compute transcriptome entropy of each cell"*:
 >        - *"Use Defaults?"*: `Yes`
@@ -926,7 +926,7 @@ Here we will explore one branching point of interest; `c3` giving rise to `c1` a
 
 > ### {% icon hands_on %} Hands-on: Comparing trajectory paths 3 to 1, and 3 to 5
 >
-> 1. {% tool [Lineage Branch Analysis using StemID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspecttrajectory/raceid_inspecttrajectory/3.1) %}  with the following parameters:
+> 1. {% tool [Lineage Branch Analysis using StemID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspecttrajectory/raceid_inspecttrajectory/0.2.3+galaxy0) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RDS"*: `outrdat` (output of **Lineage computation using StemID** {% icon tool %})
 >    - In *"StemID Branch Link Examine"*:
 >        - *"Perform StemID?"*: `Yes`
@@ -996,7 +996,7 @@ Here we will see if we can see any pseudo-time dynamics taking place between the
 
 > ### {% icon hands_on %} Hands-on
 >
-> 1. {% tool [Lineage Branch Analysis using StemID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspecttrajectory/raceid_inspecttrajectory/3.1) %}  with the following parameters:
+> 1. {% tool [Lineage Branch Analysis using StemID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspecttrajectory/raceid_inspecttrajectory/0.2.3+galaxy0) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RDS"*: `outrdat` (output of **Lineage computation using StemID** {% icon tool %})
 >    - In *"StemID Branch Link Examine"*:
 >        - *"Perform StemID?"*: `No`
