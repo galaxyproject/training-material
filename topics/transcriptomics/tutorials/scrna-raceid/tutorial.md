@@ -633,7 +633,7 @@ Preserving these higher dimensional distances in lower dimensional space is a co
 
 **RaceID** makes use of tSNE and force-directed (Fruchterman-Reingold) graph layouts to space the clusters in a visually meaningful manner to show the separation and relative proximity of clusters to one another.
 
-![Clusters]({% link topics/transcriptomics/images/scrna-raceid/tsne_fr.png %} "RaceID Initial and Final clusters using tSNE and F-R projections")
+![Clusters]({% link topics/transcriptomics/images/scrna-raceid/tsne_umap_fr.png %} "RaceID Initial and Final clusters using tSNE, UMAP and F-R projections")
 
 The figure above displays the initial (left top/bottom) clusters detected during the clustering stage, as well as the final (right top/bottom) clusters determined during the outlier detection stage, projected using tSNE and Fruchterman-Rheingold graph layouts.
 
