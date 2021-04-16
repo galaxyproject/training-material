@@ -16,7 +16,7 @@ def check_exists(fp):
         raise ValueError("%s does not exist" % fp)
 
 
-def format_article(orig_article_fp, ref_fp, format_article_dp):
+def format_article(orig_article_fp, ref_fp, format_article_dp, journal):
     '''Read article content, format it for PloS template and export it
     
     1. Extract metadata needed by pandoc from tutorial and contributors
@@ -26,6 +26,7 @@ def format_article(orig_article_fp, ref_fp, format_article_dp):
     :param orig_article_fp: Path object to file with original article from pandoc
     :param ref_fp: Path object to file with formatted references
     :param format_article_dp: Path object to file with formatted article for latex
+    :param journal: Journal
     '''
     content = []
     with orig_article_fp.open("r") as orig_article_f:
@@ -63,11 +64,12 @@ def format_article(orig_article_fp, ref_fp, format_article_dp):
     format_content = format_content.replace('section{', 'section*{')
     
     # add references
-    ref = ''
-    with ref_fp.open("r") as ref_f:
-        ref = ref_f.read()
-    format_content += ref
-    format_content += '\end{document}'
+    #if journal == 'plos':
+    #    ref = ''
+    #    with ref_fp.open("r") as ref_f:
+    #        ref = ref_f.read()
+    #    format_content += ref
+    #    format_content += '\end{document}'
         
     with format_article_dp.open("w") as format_article_f:
         format_article_f.write(format_content)
@@ -78,6 +80,7 @@ if __name__ == '__main__':
     parser._action_groups.pop()
     required = parser.add_argument_group('required arguments')
     required.add_argument('-a', '--article', help="Path to article directory", required=True)
+    required.add_argument('-j', '--journal', help="Journal", required=True)
     args = parser.parse_args()
 
     # get file paths
@@ -85,11 +88,12 @@ if __name__ == '__main__':
     check_exists(article_dp)
     orig_article_fp =  article_dp / "article_2.tex"
     check_exists(orig_article_fp)
-    ref_fp =  article_dp / "article_2.bbl"
-    check_exists(ref_fp)
+    ref_fp = Path()
+    #ref_fp =  article_dp / "article_2.bbl"
+    #check_exists(ref_fp)
     format_article_dp = article_dp / "article_3.tex"
 
     # format tutorial
-    format_article(orig_article_fp, ref_fp, format_article_dp)
+    format_article(orig_article_fp, ref_fp, format_article_dp, args.journal)
 
     

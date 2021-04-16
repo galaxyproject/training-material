@@ -141,11 +141,9 @@ def format_lines(content_l, tuto_dp):
             s = re.search(r'include (.+.md) ', l)
             if s:
                 include_fp = s.group(1)
-                print(include_fp)
                 if '{{ page.dir }}' in include_fp:
                     include_fp = include_fp.replace('{{ page.dir }}', "%s/" % str(tuto_dp))
                 include_fp = Path(include_fp)
-                print(include_fp)
                 with include_fp.open("r") as include_f:
                     include_content_l = include_f.readlines()
                 include_content = format_lines(include_content_l, tuto_dp)
@@ -154,15 +152,18 @@ def format_lines(content_l, tuto_dp):
                 content['hands_on'] += include_content['hands_on']
             continue
         # remove questions, comments, details, tips, agenda boxes 
-        elif re.search(r'{% icon (question|details|comment|tip|warning) %}', l):
+        elif re.search(r'{% icon (question|details|comment|tip|warning|solution) %}', l):
             do_not_add_next_lines += 1
             continue
         elif '### Agenda' in l:
             do_not_add_next_lines += 1
             continue
         elif do_not_add_next_lines > 0:
-            if re.search(r'{:[ ]?\.(question|details|comment|tip|warning|agenda)}', l):
+            if re.search(r'{:[ ]?\.(question|details|comment|tip|warning|agenda|solution) ?}', l):
                 do_not_add_next_lines -= 1
+            continue
+        # remove snippet / assign
+        elif re.search(r'{% (snippet|assign)', l):
             continue
         # remove commented section
         elif '{% comment %}' in l:
@@ -176,20 +177,18 @@ def format_lines(content_l, tuto_dp):
         elif '```' in l:
             if code_section:
                 code_section = False
-                continue
             else:
                 code_section = True
-                continue
         elif code_section:
             if 'zenodo' in l:
                 continue
         # format hands-on boxes
-        elif '{% icon hands_on %}' in l:
+        elif re.search(r'{% icon hands_on %}',l):
             l = l.replace('> ### {% icon hands_on %} ', '***')
             l = l[:-1] +  '***\n\n'
             l2 = l.replace('Hands-on: ', '')
             content['hands_on'].append(l2)
-        elif '{: .hands_on}' in l:
+        elif re.search(r'{: .hands_on}', l):
             continue
         elif l.startswith('> '):
             l = l[2:]
@@ -202,6 +201,7 @@ def format_lines(content_l, tuto_dp):
         # rename 1st part
         elif '# Introduction' in l:
             l = '# Description of the data\n'
+        # copy image link
         elif 'images/' in l:
             content['images'].append(l)
         content['text'].append(l)
@@ -361,7 +361,6 @@ def copy_images(images, images_dp, tuto_dp):
     :param images_dp:
     '''
     for img in images:
-        print(img)
         #m = re.search(r'(?P<path>\.\.\/\.\.\/images[a-z0-9\-\_\/\.]+)', img)
         m = re.search(r'(\blink\b)?(?P<path>(\.\.\/\.\.|topics\/[a-z0-9\-\_\/]+)\/images\/[a-zA-Z0-9\-\_\/\.]+)', img)
         if m is not None:

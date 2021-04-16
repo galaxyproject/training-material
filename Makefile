@@ -241,13 +241,11 @@ format-for-article: ## format a tutorial for article (specify TUTO with path to 
 	cd ${TUTO}/article && \
 	pandoc -f markdown -t latex --template ${ROOT}/${ARTICLE_TEMPLATE}/${JOURNAL}/template.tex -o article_2.tex article_1.md && \
 	source $(shell dirname $(dir $(CONDA)))/bin/deactivate && \
-	[[ -f ${ROOT}/${ARTICLE_TEMPLATE}/${JOURNAL}/*.bst ]] && cp ${ROOT}/${ARTICLE_TEMPLATE}/${JOURNAL}/*.bst . && \
-	[[ -f ${ROOT}/${ARTICLE_TEMPLATE}/${JOURNAL}/*.sty ]] && cp ${ROOT}/${ARTICLE_TEMPLATE}/${JOURNAL}/*.sty . && \
-	pdflatex article_2.tex && \
-	bibtex article_2.aux && \
+	cp ${ROOT}/${ARTICLE_TEMPLATE}/${JOURNAL}/* . && \
 	${ACTIVATE_ENV} && \
-	python ${ROOT}bin/format_article_latex.py -a . && \
+	python ${ROOT}bin/format_article_latex.py -a . --journal ${JOURNAL} && \
 	pdflatex article_3.tex && \
+	bibtex article_3.aux && \
 	pdflatex article_3.tex && \
 	cd ${ROOT}/
 .PHONY: format-for-article

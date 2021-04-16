@@ -52,7 +52,7 @@
 
 
 \documentclass[10pt,a4paper]{article}
-\usepackage{f1000_styles}
+\usepackage{f1000research}
 
 %% Default: numerical citations
 \usepackage[numbers]{natbib}
@@ -64,6 +64,8 @@
 % \usepackage[round]{natbib}
 % \let\cite\citep
 
+\def\tightlist{}
+
 \begin{document}
 \pagestyle{fancy}
 
@@ -72,17 +74,11 @@
 
 % Please list all authors that played a significant role in writing the article. 
 % As a guide, authors should refer to the criteria for authorship that have been developed by The International Committee of Medical Journal Editors \href{http://www.icmje.org/recommendations/browse/roles-and-responsibilities/defining-the-role-of-authors-and-contributors.html}{(ICMJE)}. 
-$for(author)$\author[1]{$author$}$endfor$
-\\
-% Please provide full affiliation information (including full institutional address, ZIP code and e-mail address) for all authors, and identify who is/are the corresponding author(s).
-\textbf{1} Affiliation Dept/Program/Center, Institution Name, City, State, Country
-\\
+$for(author)$\author[1]{$author$}\affil[1]{Address of author-1}$endfor$
 
 \maketitle
 \thispagestyle{fancy}
 
-\\
-\\
 \begin{abstract}
 % Abstracts should be up to 300 words and provide a succinct summary of the article. 
 % Although the abstract should explain why the article might be interesting, care should be taken not to inappropriately over-emphasise the importance of the work described in the article.
@@ -93,8 +89,6 @@ $abstract$
 \section*{\color{f1ROrange}Keywords}
 % Please list up to eight relevant keywords that describe the subject of their article. 
 % These will improve the visibility of your article.
-
-
 \clearpage
 \pagestyle{fancy}
 
@@ -108,11 +102,13 @@ $body$
 
 \subsection*{Source data}
 
-Data used as input for this tutorial can be found at \href{$zenodo_link$}{$zenodo_link$}
+Data used as input for this tutorial can be found at 
+\href{$zenodo_link$}{$zenodo_link$}
 
 \subsection*{Training availability}
 
-The tutorial is avalaible at \href{$tutorial_link$}{$tutorial_link$}
+The tutorial is avalaible at 
+\href{$tutorial_link$}{$tutorial_link$}
 
 \section*{Competing interests}
 % All financial, personal, or professional competing interests for any of the authors that could be construed to unduly influence the content of the article must be disclosed and will be displayed alongside the article. If there are no relevant competing interests to declare, please add the following: 'No competing interests were disclosed'.
