@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: Trajectory Analysis using Python (Jupyter Notebook) in Galaxy
 subtopic: single-cell
 priority: 11
-zenodo_link: 'https://zenodo.org/record/4655947'
+zenodo_link: 'https://zenodo.org/record/4697220'
 questions:
 - How can I infer lineage relationships between single cells based on their RNA, without a time series?
 objectives:
