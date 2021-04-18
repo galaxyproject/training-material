@@ -730,7 +730,7 @@ Finally, we can access all the information available on the genes identified in 
 - [AT3G63200](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT3G63200){:target="_blank"}: PATATIN-LIKE PROTEIN 9, PLA IIIB
 
 > ### {% icon comment %} Comments
-> One of the hypotheses that we could propose from our results is: the inhibition of the AT2G46850 gene can result in plants with improved resistance to drought conditions. Is it possible to validate it? Yes! We propose this approach: to acquire [AT2G46850 mutant seeds](https://abrc.osu.edu/stocks/392113){:target="_blank"}) and [wild type seeds](http://arabidopsis.info/StockInfo?NASC_id=N1093){:target="_blank"}), grow them under two controlled conditions: watered and drought stress, and analyze plant weight after 33 days (Figure 13).
+> One of the hypotheses that we could propose from our results is: the inhibition of the AT2G46850 gene can result in plants with improved resistance to drought conditions. Is it possible to validate it? Yes! We propose this approach: to acquire [AT2G46850 mutant seeds](https://abrc.osu.edu/stocks/392113){:target="_blank"} and [wild type seeds](http://arabidopsis.info/StockInfo?NASC_id=N1093){:target="_blank"}, grow them under two controlled conditions: watered and drought stress, and analyze plant weight after 33 days (Figure 13).
 >
 > ![fig16:Plant growth](../../images/arabidopis_growth_protocol.png "Arabidopsis growth conditions protocol ({% cite deOllas2019 %}).")
 >
@@ -738,14 +738,14 @@ Finally, we can access all the information available on the genes identified in 
 
 # Optional exercise
 
-As additional activity, you can try to repeat the workflow by using the sequences stored in the NCBI GEO database with the accession number `GSM3373998`. In that case, we will compare gene expression patterns of mutants overexpressing the brassinosteroid receptor BRL3 under two experimental conditions: control and water-stress.
+As additional activity, you can try to repeat the workflow by using the sequences stored in the NCBI GEO database with the accession number `GSE119382`. In that case, we will compare gene expression patterns of mutants overexpressing the brassinosteroid receptor BRL3 under two experimental conditions: control and water-stress.
 
 ```
-SRR7779222	BLR3 Drought mRNA	https://zenodo.org/record/4672228/files/SRR7779222_BLR3_Drought.fastqsanger.gz	fastqsanger.gz
-SRR7779223	BLR3 Drought mRNA	https://zenodo.org/record/4672228/files/SRR7779223_BLR3_Drought.fastqsanger.gz	fastqsanger.gz
-SRR7779224	BLR3 Drought mRNA	https://zenodo.org/record/4672228/files/SRR7779224_BLR3_Drought.fastqsanger.gz	fastqsanger.gz
-SRR7779228	BLR3 Watered mRNA	https://zenodo.org/record/4672228/files/SRR7779228_BLR3_Watered.fastqsanger.gz	fastqsanger.gz
-SRR7779229	BLR3 Watered mRNA	https://zenodo.org/record/4672228/files/SRR7779229_BLR3_Watered.fastqsanger.gz	fastqsanger.gz
+SRR7779222	BLR3 Drought mRNA	https://zenodo.org/record/4698605/files/SRR7779222_BRL3_mRNA_drought.fastqsanger.gz	fastqsanger.gz
+SRR7779223	BLR3 Drought mRNA	https://zenodo.org/record/4698605/files/SRR7779223_BRL3_mRNA_drought.fastqsanger.gz	fastqsanger.gz
+SRR7779224	BLR3 Drought mRNA	https://zenodo.org/record/4698605/files/SRR7779224_BRL3_mRNA_drought.fastqsanger.gz	fastqsanger.gz
+SRR7779228	BLR3 Watered mRNA	https://zenodo.org/record/4698605/files/SRR7779228_BRL3_mRNA_drought.fastqsanger.gz	fastqsanger.gz
+SRR7779229	BLR3 Watered mRNA	https://zenodo.org/record/4698605/files/SRR7779229_BRL3_mRNA_drought.fastqsanger.gz	fastqsanger.gz
 ```
 
 We will use the upregulated miRNAs obtained in the previous analysis in order to identify potential targets.
