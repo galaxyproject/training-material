@@ -14,8 +14,7 @@
 #
 # Rate limited on ubuntu image so using a quay.io minimal
 # derived from https://github.com/cybozu/ubuntu-base/tree/main/20.04/ubuntu
-# now needs --privileged and docker.sock - live dangerously folks.
-#    sudo docker run -d --privileged -p 8080:80 -p 9090:9090  -v /var/run/docker.sock:/var/run/docker.sock \
+#    docker run -d --privileged -p 8080:80 -p 9090:9090  -v /var/run/docker.sock:/var/run/docker.sock \
 #       -v /home/ross/rossgit/planemo/mytools:/planemo/mytools \
 #       quay.io/fubar2/toolfactory_tutorial:latest
 # So, please make your own script like shown here and save as start.sh

@@ -366,7 +366,7 @@ cost of this convenience is that ToolFactory is limited to automated generation 
 to manually persist the ToolFactory configuration for each new tool. Some options involve `persistent` Galaxy servers and these are much more useful for building and
 more importantly, updating tools. It can be disappointing to learn that the history recording all your ToolFactory work is no longer available the next time you start working.
 - Non persistent options are **recommended only for testing or teaching - not production**.
-- In all cases, the first time they are run and the first time a tool is built, most versions take a while to start - there's a lot that needs to be installed.
+- In all cases, the first time they are run and the first time a tool is built, most versions take 10 minutes or so  - there's a lot that needs to be installed.
 Check for Conda and other running processes before assuming it has frozen.
 
 >#### Active Tutorial content follows
@@ -393,8 +393,9 @@ Check for Conda and other running processes before assuming it has frozen.
 - Assuming docker is running, `docker run -d -p 9090:9090 quay.io/fubar2/toolfactory_tutorial:latest` should start it locally
 - Planemo takes 20 to 30 seconds to spin up a Galaxy after the container boots.
 - Once it has settled down, navigate to [http://localhost:9090](http://localhost:9090) where you will find a Galaxy running
-- The ToolFactory will be installed and ready to run
-- <a href="#section3">Skip to Section 3</a> below to import the sample history and continue with the Tutorial
+- The ToolFactory will be installed and ready to run.
+- The first time you re-run a sample in the sample history, it will take about 7-10 minutes to finish. Conda does a lot so keep an eye on processes - when it finishes, rerunning that same job will take a minute or less.
+- Then, <a href="#section3">Skip to Section 3</a> below to import the sample history and continue with the Tutorial
 
 > ### {% icon details %} Dockerfile used to generate `quay.io/fubar2/toolfactory_tutorial`
 > > ```docker
@@ -414,28 +415,40 @@ Check for Conda and other running processes before assuming it has frozen.
 > > #
 > > # Rate limited on ubuntu image so using a quay.io minimal
 > > # derived from https://github.com/cybozu/ubuntu-base/tree/main/20.04/ubuntu
+> > #    docker run -d --privileged -p 8080:80 -p 9090:9090  -v /var/run/docker.sock:/var/run/docker.sock \
+> > #       -v /home/ross/rossgit/planemo/mytools:/planemo/mytools \
+> > #       quay.io/fubar2/toolfactory_tutorial:latest
+> > # So, please make your own script like shown here and save as start.sh
+> > # the volume can be populated with newly generated tools from unpacked toolshed archives and remains persistent
+> > # history WILL NOT persist so save it if you want to import it in the future to save typing all your work again.
+> >
+> > # biocontainer should involve a little less waiting at the first run - and first impressions count.
 > >
 > > FROM quay.io/cybozu/ubuntu-minimal:focal-20210217
 > > ENV DEBIAN_FRONTEND=noninteractive
 > > MAINTAINER Ross Lazarus
 > > # with fixes by Helena Rasch
-> > ENV TARGDIR "/galaxy-central"
+> > ENV GALDIR "/galaxy-central"
 > > ENV PDIR "/planemo"
 > > RUN apt-get update \
-> > && apt-get install -y -qq --no-install-recommends locales tzdata openssl netbase apt-utils apt-transport-https libreadline8 \
-> >     ca-certificates curl python3-dev gcc python3-pip build-essential python3-venv python3-wheel nano wget git python3-setuptools gnupg mercurial \
-> > && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 > > && apt-get -y upgrade \
+> > && apt-get install -y -qq --no-install-recommends locales tzdata openssl netbase apt-utils apt-transport-https libreadline8  \
+> >  software-properties-common ca-certificates curl python3-dev gcc python3-pip build-essential python3-venv \
+> >  python3-wheel nano wget git python3-setuptools gnupg mercurial \
+> > && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 > > && locale-gen en_US.UTF-8 \
 > > && update-locale LANG=en_US.UTF-8 \
-> > && cp /usr/share/zoneinfo/Australia/Sydney /etc/timezone \
 > > && dpkg-reconfigure -f noninteractive tzdata \
+> > && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
+> > && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
+> > && apt-get -y update  \
+> > && apt install -y docker-ce-cli \
 > > && python3 -m pip install --upgrade pip \
-> > && mkdir -p $TARGDIR \
-> > && curl -L -s https://github.com/galaxyproject/galaxy/archive/dev.tar.gz | tar xzf - --strip-components=1 -C $TARGDIR \
+> > && mkdir -p $GALDIR \
+> > && curl -L -s https://github.com/galaxyproject/galaxy/archive/dev.tar.gz | tar xzf - --strip-components=1 -C $GALDIR \
 > > && git clone --recursive https://github.com/fubar2/planemo.git $PDIR \
-> > && cp $PDIR/planemo_ext/welcome.html $TARGDIR/static/welcome.html.sample \
-> > && cp $PDIR/planemo_ext/welcome.html $TARGDIR/static/welcome.html \
+> > && cp $PDIR/planemo_ext/welcome.html $GALDIR/static/welcome.html.sample \
+> > && cp $PDIR/planemo_ext/welcome.html $GALDIR/static/welcome.html \
 > > && mkdir $PDIR/mytools \
 > > && rm -rf $PDIR/doc \
 > > && cd $PDIR \
@@ -444,15 +457,15 @@ Check for Conda and other running processes before assuming it has frozen.
 > > && pip install -U pip \
 > > && planemo conda_init --conda_prefix $PDIR/con \
 > > && hg clone https://fubar@toolshed.g2.bx.psu.edu/repos/fubar/tacrev $PDIR/tacrev \
-> > && cp $TARGDIR/config/datatypes_conf.xml.sample $TARGDIR/config/datatypes_conf.xml \
-> > && sed -i 's/<\/registration>/<datatype extension="tgz" type="galaxy.datatypes.binary:Binary" subclass="true" mimetype="multipart\/x-gzip" display_in_upload="true"\/> <\/registration>/' $TARGDIR/config/datatypes_conf.xml \
-> > && sed -i 's/<datatype extension="html"/<datatype extension="html" display_in_upload="true"/' $TARGDIR/config/datatypes_conf.xml \
-> > && sed -i 's/<datatype extension="toolshed.gz"/<datatype extension="toolshed.gz" display_in_upload="true" /' $TARGDIR/config/datatypes_conf.xml \
-> > && sed -i '/-l|-list|--list)/i \\n\t --dev-wheels|-dev-wheels)\n\t\tshift\n\t\t;;\n' $TARGDIR/run_tests.sh \
+> > && cp $GALDIR/config/datatypes_conf.xml.sample $GALDIR/config/datatypes_conf.xml \
+> > && sed -i 's/<\/registration>/<datatype extension="tgz" type="galaxy.datatypes.binary:Binary" subclass="true" mimetype="multipart\/x-gzip" display_in_upload="true"\/> <\/registration>/' $GALDIR/config/datatypes_conf.xml \
+> > && sed -i 's/<datatype extension="html"/<datatype extension="html" display_in_upload="true"/' $GALDIR/config/datatypes_conf.xml \
+> > && sed -i 's/<datatype extension="toolshed.gz"/<datatype extension="toolshed.gz" display_in_upload="true" /' $GALDIR/config/datatypes_conf.xml \
+> > && sed -i '/-l|-list|--list)/i \\n\t --dev-wheels|-dev-wheels)\n\t\tshift\n\t\t;;\n' $GALDIR/run_tests.sh \
 > > && virtualenv /root/.planemo/gx_venv_3.9 \
 > > && . /root/.planemo/gx_venv_3.9/bin/activate && pip install -U setuptools \
-> > && cd $TARGDIR && export GALAXY_VIRTUAL_ENV=/root/.planemo/gx_venv_3.9 && make setup-venv \
-> > && planemo test --galaxy_root $TARGDIR --galaxy_python_version 3.9 --conda_prefix $PDIR/con /planemo/tacrev/tacrev/tacrev.xml \
+> > && cd $GALDIR && export GALAXY_VIRTUAL_ENV=/root/.planemo/gx_venv_3.9 && make setup-venv \
+> > && planemo test --galaxy_root $GALDIR $PDIR/tacrev/tacrev/tacrev.xml \
 > > && rm -rf /usr/local/share/.cache/yarn \
 > > && apt-get clean && apt-get purge \
 > > && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -460,7 +473,7 @@ Check for Conda and other running processes before assuming it has frozen.
 > > WORKDIR $PDIR
 > > ENV GALAXY_CONFIG_BRAND "ToolFactory in Planemo"
 > > EXPOSE 9090
-> > ENTRYPOINT ["/usr/local/bin/planemo" ,"tool_factory", "--galaxy_root" ,"/galaxy-central", "--port", "9090", "--host", "0.0.0.0", "--conda_prefix", "/planemo/con", "--extra_tools", "/planemo/mytools", "--galaxy_python_version", "3.9"]
+> > ENTRYPOINT ["/usr/local/bin/planemo" ,"tool_factory", "--galaxy_python_version", "3.9", "--galaxy_root" ,"/galaxy-central", "--port", "9090", "--host", "0.0.0.0", "--conda_prefix", "/planemo/con", "--extra_tools", "/planemo/mytools", "--galaxy_python_version", "3.9"]
 > > ```
 {: .details}
 #### For production: Install the ToolFactory directly into an existing local non-docker development Galaxy
@@ -559,93 +572,7 @@ See [the tutorial on installing tools from the toolshed](https://galaxyproject.o
 
 ---
 
-#### 3. Choose your own adventure recommendation - Build a simple Docker container using the tutorial supplied Dockerfile
-
-- This option may be attractive if you are comfortable with docker and do not have a handy development Galaxy
-- Your work is not persistent so this is only useful for testing. Serious development needs persistence through a different method.
-- The instance will be torn down when you stop the container.
-- It might be possible to use a volume mount and persist Galaxy's data that way.
-- Otherwise, when restarted, your previous work will all be gone.
-- Be sure to save your history before shutting down or you will lose your work.
-- The Docker script provided with this topic builds a different Galaxy from most GTN Docker containers.
-- It does not include this tutorial.
-- It runs planemo tool_factory for you and exposes it on `localhost:9090` so you can do all the same things as you
-can with a local venv described above - but a little slower and isolated in a container.
-
-> ### {% icon details %} Sample Dockerfile to build a simple version of the ToolFactory in Planemo
->
->  *See comments for build and run recipes*
->
-> > ### {% icon code-in %} Input: topics/dev/tutorials/tool-generators/docker/Dockerfile
-> > ```docker
-> ># Galaxy - Using Galaxy tools to generate new Galaxy tools
-> >#
-> ># To build the docker image, go to root of the training repo and
-> >#    docker build -t tool-generators -f topics/tool-generators/docker/Dockerfile .
-> ># Take a break. Takes a while!
-> ># To run image, make a `planemo --extra_tools` tool directory where you want to run it regularly and then
-> >#    docker run -p "9090:9090" -v mytools:/planemo/mytools/  -t tool-generators
-> ># ToolFactory planemo will be available on localhost:9090
-> ># Toolshed archives you generate can be downloaded and then unpacked under the mytools directory.
-> ># They will be loaded by planemo into the Galaxy it runs and be available in the tool menu the next time you restart the container and planemo
-> ># This allows you to load newly generated tools for testing and refinement.
-> ># WARNING: Save your history as a history or lose your ToolFactory form work when you stop the container.
-> ># Planemo always starts with an empty history.
-> ># A downloaded history can be imported into the new Planemo and the form regenerated by rerunning the job.
-> ># Training material is not yet installed - not sure how to do that in Planemo ?
-> >
-> >FROM ubuntu:latest
-> >
-> >MAINTAINER Ross Lazarus
-> ># contributions from: Helena Rasch
-> >ENV TARGDIR "/galaxy-central"
-> >ENV PDIR "/planemo"
-> >ADD topics/dev/tutorials/tool-generators/docker/welcome.html $TARGDIR/static/welcome.html.sample
-> >ADD topics/dev/tutorials/tool-generators/docker/welcome.html $TARGDIR/static/welcome.html
-> >RUN apt update -y -qq && apt install -y -qq python3-dev gcc python3-pip build-essential python3-venv python3-wheel nano curl wget git python3-setuptools gnupg curl mercurial \
-> >&& python3 -m pip install --upgrade pip \
-> >&& curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-> >&& apt upgrade -y \
-> >&& mkdir -p $TARGDIR \
-> >&& curl -L -s https://github.com/galaxyproject/galaxy/archive/dev.tar.gz | tar xzf - --strip-components=1 -C $TARGDIR \
-> >&& git clone --recursive https://github.com/fubar2/planemo.git $PDIR \
-> >&& mkdir $PDIR/mytools \
-> >&& rm -rf $PDIR/doc \
-> >&& cd $PDIR \
-> >&& python3 setup.py build \
-> >&& python3 setup.py install \
-> >&& pip install -U pip \
-> >&& planemo conda_init --conda_prefix $PDIR/con \
-> >&& hg clone https://fubar@toolshed.g2.bx.psu.edu/repos/fubar/tacrev  /planemo/tacrev \
-> >&& cp $TARGDIR/config/datatypes_conf.xml.sample $TARGDIR/config/datatypes_conf.xml \
-> >&& sed -i 's/<\/registration>/<datatype extension="tgz" type="galaxy.datatypes.binary:Binary" subclass="true" mimetype="multipart\/x-gzip" display_in_upload="true"\/> <\/registration>/' $TARGDIR/config/datatypes_conf.xml \
-> >&& sed -i 's/<datatype extension="html"/<datatype extension="html" display_in_upload="true"/' $TARGDIR/config/datatypes_conf.xml \
-> >&& sed -i '/-l|-list|--list)/i \\n\t --dev-wheels|-dev-wheels)\n\t\tshift\n\t\t;;\n' $TARGDIR/run_tests.sh \
-> >&& apt-get clean && apt-get purge \
-> >&&  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-> >&& virtualenv /root/.planemo/gx_venv_3.9 \
-> >&& . /root/.planemo/gx_venv_3.9/bin/activate && pip install -U setuptools \
-> >&& cd $TARGDIR && export GALAXY_VIRTUAL_ENV=/root/.planemo/gx_venv_3.9 && make setup-venv \
-> >&& planemo test --galaxy_root $TARGDIR /planemo/tacrev --galaxy_python_version 3.9 \
-> >&& rm -rf /usr/local/share/.cache/yarn \
-> >&& apt-get clean && apt-get purge \
-> >&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-> >VOLUME /planemo/mytools
-> >WORKDIR $PDIR
-> >ENV GALAXY_CONFIG_BRAND "ToolFactory in Planemo"
-> >EXPOSE 9090
-> >ENTRYPOINT ["/usr/local/bin/planemo" ,"tool_factory", "--galaxy_root" ,"/galaxy-central", "--port", "9090", "--host", "0.0.0.0", "--conda_prefix", "/planemo/con", "--extra_tools", "/planemo/mytools", "--galaxy_python_version", "3.9"]
-> >```
->  {: .code-in}
-{: .details}
-
-
-- Navigate to [http://localhost:9090](http://localhost:9090) where a Galaxy with the ToolFactory installed will be running
-- <a href="#section3">Skip to Section 3</a> below to import the sample history and continue with the Tutorial
-
----
-
-#### 4. CYOA option - Install the ToolFactory docker container with integrated toolshed
+#### 3. CYOA option - Install the ToolFactory docker container with integrated toolshed
 
 - There is a more complex but integrated solution using the [ToolFactory docker container](https://github.com/fubar2/toolfactory-galaxy-docker).
 - Installation is documented in the respository and bash scripts to build and run the Docker image are provided. They will probably need to be adjusted as described there.
@@ -1451,9 +1378,9 @@ planemo lint $TOOLNAME >> $2
 
 ## Notes on some commonly reported issues
 
-#### First job I submitted in Planemo ToolFactory and the Docker container remains grey for a long time - is it broken?
+#### First job I submitted in Planemo ToolFactory or the Docker container remains grey or running for a long time - is it broken?
 
-- Check with top or other system monitor to see if Conda is running.
+- Check with top or your system monitor - if Conda is running, things are working but it's slow the first time.
 - The first run generally takes a while to install all the needed dependencies.
 - Subsequent runs should start immediately
 - Installing new Conda dependencies also takes time so tools that have new Conda packages will take longer to generate as they must be installed before the tool can be tested.
