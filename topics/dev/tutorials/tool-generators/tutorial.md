@@ -1,17 +1,11 @@
 ---
 
 layout: tutorial_hands_on
-title: "Tool generation from simple scripts in Galaxy: the ToolFactory"
+title: "ToolFactory: Generating Tools From Simple Scripts"
 key_points:
   - The ToolFactory is a fully automated Galaxy tool generator for scientists and developers who routinely write command line scripts.
-  - It can turn a **working command line script** into a proper Galaxy tool with a test in a few minutes.
-  - If the script you are wrapping fails on the command line, it will certainly also fail inside the new tool - the ToolFactory will not fix bugs in the supplied script.
+  - It can turn a working command line script into a proper Galaxy tool with a test in a few minutes.
   - It automatically generates simple, complete Galaxy tools from information provided by filling in a normal Galaxy form in the familiar UI.
-  - Unlike a typical Conda package, a command line script can define how parameters are read from the command line. In particular, it is usually easy to ignore empty optional parameters, allowing some of the ToolFactory's limited flexibility to be overcome.
-  - The ToolFactory code generator is limited to relatively simple requirements but these are very common in small scale Galaxy analyses, particularly in new fields where few tools are already available.
-  - Dedicated Galaxy tool developers use more powerful tools without limits but correspondingly more experience to master.
-  - Those are needed to deal with many complicated Conda dependency requirements.
-  - Please do not upload trivial tools to the main toolshed. Run your own local toolshed for trivial tools please.
 
 objectives:
  - Learn why you might want to use the ToolFactory
@@ -36,66 +30,39 @@ requirements:
     tutorials:
       - galaxy-intro-short
       - galaxy-intro-101-everyone
+  - type: "internal"
     topic_name: dev
     tutorials:
       - tool-integration
       - interactive-environments
 
+follow_up_training:
+  - type: "internal"
+    topic_name: dev
+    tutorials:
+      - tool-generators-advanced
+
 contributors:
   - fubar2
-
+  - hexylena
 ---
 
-> ### {% icon warning %} In need of pre-review sanity testing.
-> - This is a beta tutorial release.
-> - As yet unreviewed
-> - Thank you for caring enough to take a look.
-> - Sanity checking, testing and feedback are all needed. Please.
-> - Fork is at https://github.com/fubar2/training-material
-> - Introductory/passive material is now laid out for more comfortable reading - not in bullet-point form.
-> - This is an aesthetic issue. It helps distinguish the passive/active tutorial sections. Advice appreciated.
-> - enjoy....
+This tutorial is for developers and researchers routinely developing their own analysis scripts using bash, Python, Perl, Rscript or other scripting language
+It shows a quick way to bridge the gap between a working command line script and installing a real tool that "wraps" that script as a tool in Galaxy.
+Users new to Galaxy from other scientific disciplines, those not yet familiar with the more manual tool development process, may find the ToolFactory useful for familiarising themselves with tool development in Galaxy.
+
+The ToolFactory itself is developed as a Galaxy tool, run via the Galaxy tool interface.
+This tutorial is intended to be an introduction to the ToolFactory and it offers broad guidance. It is up to the user to adapt it to their own work.
+Experienced galaxy tool developers already have specialised tools and training to suit their needs so may not gain much from this material.
+
+> ### Agenda
 >
-{: .warning}
-
-
----
-
-> ### {% icon curriculum %} This tutorial is about the ToolFactory. It is only useful if you have a script to be turned into a Galaxy tool.
+> 1. TOC
+> {:toc}
 >
-> * The [overview slide presentation](./slides.html) should look interesting and relevant for your work if you are starting here.
-> * This tutorial is for developers and researchers routinely developing their own analysis scripts using bash, Python, Perl, Rscript or other scripting language
-> * It shows a quick way to bridge the gap between a working command line script and installing a real tool that "wraps" that script as a tool in Galaxy.
-> * Users new to Galaxy from other scientific disciplines and not yet familiar with manual tool development processes may find uses for a tool generator.
-> * The ToolFactory is a Galaxy tool controlled through the usual Galaxy tool interface.
-> * Without a working script that needs to be available as a tool in Galaxy, it is of little use.
-> * Command line scripting skills are needed to prepare the working code needed.
-> * The ToolFactory generates a wrapper for the code supplied, so it runs every time the generated tool is executed by a user.
-> * No explicit instruction about scripting is offered in this training. It is a mandatory prerequisite skill.
-> * Readers will need to test and explore to find ways to use the ToolFactory for their work.
-> * This tutorial is introductory. It offers broad guidance on a tool. It is up to the user to adapt it to their own work.
-> * Experienced galaxy tool developers already have specialised tools and training to suit their needs so may not gain much from this material.
-{: .curriculum}
+{: .agenda}
 
-
-
-> ### {% icon announcement %} Tutorial process overview - what to expect.
->
-- This tutorial is in 3 parts.
-- The first part is background and introduction with an optional demonstration video and a dissected `Hello World!` example.
-- The rest is all hands on.
-- The second part involves choosing how to run the ToolFactory, installing it and importing the demonstration tools in a sample history where they can be rerun to see how the samples were configured.
-- The third part offers some tips and suggestions for exploring the demonstration tools and introduces some useful features.
-- The sample tools are the core documentation. They are trivially simple samples, each illustrating specific features as models for getting things done.
-- Hosting the ToolFactory on a public server is ill-advised, so an interactive tutorial is not possible.
-{: .announcement}
-
-# 1. Tools, tool wrappers and the ToolFactory in Galaxy.
-{:.no_toc}
-
-
-## Tools make Galaxy useful in almost any branch of data intensive science.
-{: .no_toc}
+# Tools, tool wrappers and the ToolFactory in Galaxy.
 
 Tools are the fundamental building blocks for analyses in Galaxy. Thousands are available in the project tool library from many different kinds of science. Galaxy
 tools can be created from almost any Linux command line software packages or interpreter scripts. What happens
@@ -117,7 +84,6 @@ If a tool that performs exactly the same functions as a GIE is needed, the code 
 Any functional script can be turned into a typical Galaxy tool.
 
 ## From scripts to tools
-{: .no_toc}
 
 Any command line script that run correctly with sample test data input files and parameter settings can potentially be turned into a Galaxy tool.
 These may be derived from notebook scripts that have been consolidated and rewritten to take positional or argparse style parameters and tested
@@ -131,16 +97,14 @@ For those new to Galaxy, in many simple cases, it may be possible to generate a 
 specialised Galaxy tool for developers that generates tools from scripts. This tutorial is designed to introduce that unusual tool.
 
 
-## The ToolFactory generates new Galaxy tools.
-{: .no_toc}
+## The ToolFactory
 
 The ToolFactory is an automated, form driven code generator.
-
 It runs as a typical Galaxy tool, except that it will only run for an administrative
-user. This is a minimal security precaution (see warnings below).
+user, as a security precaution.
 
-It was developed for skilled programmers who need new "real" Galaxy tools for their own use or for users they support. Any user comfortable with scripting languages on a Linux command
-line may find it useful if they ever need a real Galaxy tool that wraps a working script. Shell utilities and scripting language interpreters supported by Conda can be used.
+It was developed for skilled programmers who need new Galaxy tools for their own use or for users they support. Any user comfortable with scripting languages on a Linux command
+line may find it useful if they ever need a Galaxy tool that wraps a working script. Shell utilities and scripting language interpreters supported by Conda can be used.
 
 Generated tools pass Planemo lint, and are functionally indistinguishable from equivalent manually written tools. They contain a test based on the test data provided
 at tool generation. Trivial working examples using bash, Python, Rscript, Lisp, Prolog, Perl and sed are provided and described below.
@@ -168,10 +132,7 @@ quickly *inside* Galaxy.
 > - Choose whichever one fits best for the task at hand.
 {: .tip }
 
----
-
-## A dissected demonstration:`Hello World!` generated using the ToolFactory
-{: .no_toc}
+## `Hello World!` with the ToolFactory
 
 The ToolFactory can generate a `Hello World!` script as a Galaxy tool. A parameter is added so the user can supply the text after "Hello..." and
 the tool can write the combined string to a new history item. Trivial, but an excellent model worth studying in detail. It is
@@ -186,52 +147,22 @@ a command line for the script when the generated tool runs. Other information su
 sections of the generated XML file in the toolshed archive. The ToolFactory form configured to generate the `Hello` example can be viewed below.
 
 > ### {% icon details %} Annotated ToolFactory form that generates `Hello World`
->>>![First part of the form](../../images/ToolFactory_hello1form.png)
+> ![First part of the form](../../images/ToolFactory_hello1form.png "The first part of the form collects the new tool name and dependencies to be installed. In this case, no Conda dependency is used. bash can be specified as a conda dependency, but it is not very version dependent and usually available. Reproducibility is not an issue for this trivial example. When it is, specify the dependencies and their versions here and the generated tool will always use them. If run in a shell, the bash script <code>echo "Hello $1"</code> in the text box will emit a string that includes the first command line parameter - such as "Hello Galaxy Training Network" This will be collected from STDOUT (configured below) into a new history output file (named and configured below). Positional parameters are chosen so the first parameter on the command line will be emitted when the script runs.")
 >
-> - **The first part of the form collects the new tool name and dependencies to be installed.**
-> - In this case, no Conda dependency is used .
-> - bash can be specified as a conda dependency, but it is not very version dependent and usually available. Reproducibility is not an issue for this trivial example. When it is, specify the dependencies and their versions here and the generated tool will always use them.
-> - If run in a shell, the bash script `echo "Hello $1"` in the text box will emit a string that includes the first command line parameter - such as "Hello Galaxy Training Network"
-> - This will be collected from STDOUT (configured below) into a new history output file (named and configured below)
-> - Positional parameters are chosen so the first parameter on the command line will be emitted when the script runs.
+> ![Second part of the form](../../images/ToolFactory_hello2form.png "The second section shows the new generated history output. It uses the special name <code>STDOUT</code> so the tool will take whatever the bash script writes and create a new text file called <code>Hello_output</code>. When the test is generated, the pass criterion is that the default value <code>Galaxy Training Network</code> should appear as the message in <code>hello_output</code>. no difference. Other criteria including <code>sim_size</code> are available for the test applied to each output file. There is no limit (other than your patience) to the number of new generated history outputs. Note that this example has no history input files. Again, any number of these can be specified on the form using the repeat.")
 >
-> ---
+> ![Third part of the form](../../images/ToolFactory_hello3form.png "The third section shows the user supplied parameter to be passed in to the bash script on the command line. It will be the first positional parameter because the ordinal position is 1. Argparse parameters are shown in other samples. The help and label text for each input file and user defined parameter will appear on the generated tool form for the user so make them informative. This is where you can change the default from "World" to "Galaxy Training Network" on the sample provided and regenerate it to make a new tool later in the tutorial.")
 >
->>> ![Second part of the form](../../images/ToolFactory_hello2form.png)
-> - **The second section shows the new generated history output.**
-> - It uses the special name `STDOUT` so the tool will take whatever the bash script writes and create a new text file called `Hello_output`
-> - When the test is generated, the pass criterion is that the default value `Galaxy Training Network` should appear as the message in `hello_output`
-with no difference. Other criteria including `sim_size` are available for the test applied to each output file.
-> - There is no limit (other than your patience) to the number of new generated history outputs
-> - Note that this example has no history input files. Again, any number of these can be specified on the form using the repeat
->
-> ---
->
->>> ![Third part of the form](../../images/ToolFactory_hello3form.png)
-> - **The third section shows the user supplied parameter to be passed in to the bash script on the command line**
-> - It will be the first positional parameter because the ordinal position is 1. Argparse parameters are shown in other samples.
-> - The help and label text for each input file and user defined parameter will appear on the generated tool form for the user so make them informative
-> - This is where you can change the default from "World" to "Galaxy Training Network" on the sample provided and regenerate it to make a new tool later in the tutorial
->
-> ---
->
->>> ![Fourth part of the form](../../images/ToolFactory_hello4form.png)
-> - **The fourth section controls ToolFactory actions and optional outputs**
-> - If you supply appropriate API keys, the ToolFactory can upload the newly generated tool to a toolshed. Optionally it can be installed
-back into the Galaxy server specified.
-> - *This is potentially annoying and dangerous if you have API keys you can misuse - so please be mindful*
+> ![Fourth part of the form](../../images/ToolFactory_hello4form.png "The fourth section controls ToolFactory actions and optional outputs. If you supply appropriate API keys, the ToolFactory can upload the newly generated tool to a toolshed. Optionally it can be installed into the Galaxy server specified. <em>This is potentially annoying and dangerous if you have API keys you can misuse - so please be mindful.</em>")
 >
 {: .details }
 
 Two new items are created in the history when the ToolFactory is executed - the new tool in an archive and a collection with log, XML and a planemo test report.
 
 >### {% icon details %} History items created after a successful run
->> ![History outputs created after executing the generated tool](../../images/toolfactory_outputs_hello.png)
->> - The first item is a downloadable toolshed archive containing the tool and test ready to upload or install (see below on installing newly generated tools)
->> - The second item is a collection containing a test result, expanded in this image, the generated XML and log.
->> ![Collection contents including the generated XML and planemo test](../../images/toolfactory_hello_collection.png)
+> ![History outputs created after executing the generated tool](../../images/toolfactory_outputs_hello.png "The first item is a downloadable toolshed archive containing the tool and test ready to upload or install (see below on installing newly generated tools).")
+> ![Collection contents including the generated XML and planemo test](../../images/toolfactory_hello_collection.png "The second item is a collection containing a test result, expanded in this image, the generated XML and log.")
 {: .details }
-
 
 The generated tool XML (found in the collection and also in the archive) and the new tool form are
 worth reviewing. Text on the form is all in the XML and it all comes from the ToolFactory form.
@@ -240,411 +171,111 @@ worth reviewing. Text on the form is all in the XML and it all comes from the To
 >
 > [Galaxy XML documentation is here](https://docs.galaxyproject.org/en/latest/dev/schema.html)
 >
-> - Note how text from the form appears in the generated tool XML
+> Note how text from the form appears in the generated tool XML
 >
->```xml
-><tool name="hello_toolshed" id="hello_toolshed" version="0.01">
->  <!--Source in git at: https://github.com/fubar2/toolfactory-->
->  <!--Created by planemo@galaxyproject.org at 22/01/2021 13:48:27 using the Galaxy Tool Factory.-->
->  <description>Says hello</description>
->  <stdio>
->    <exit_code range="1:" level="fatal"/>
->  </stdio>
-> <version_command><![CDATA[echo "0.01"]]></version_command>
-> <command><![CDATA[bash
-> $runme
-> "$sayhelloto" > $Hello_output]]>
-> </command>
->  <configfiles>
->    <configfile name="runme"><![CDATA[
-> echo "Hello $1"
-> ]]></configfile>
->  </configfiles>
->  <inputs>
->    <param label="Say hello to" help="" value="Galaxy Training Network!!" type="text" name="sayhelloto" argument="sayhelloto"/>
->  </inputs>
->  <outputs>
->    <data name="Hello_output" format="txt" label="Hello_output" hidden="false"/>
->  </outputs>
->  <tests>
->    <test>
->      <output name="Hello_output" value="Hello_output_sample" compare="diff" lines_diff="0"/>
->      <param name="sayhelloto" value="Galaxy Training Network!!"/>
->    </test>
->  </tests>
->  <help><![CDATA[
+> ```xml
+> <tool name="hello_toolshed" id="hello_toolshed" version="0.01">
+>   <!--Source in git at: https://github.com/fubar2/toolfactory-->
+>   <!--Created by planemo@galaxyproject.org at 22/01/2021 13:48:27 using the Galaxy Tool Factory.-->
+>   <description>Says hello</description>
+>   <stdio>
+>     <exit_code range="1:" level="fatal"/>
+>   </stdio>
+>  <version_command><![CDATA[echo "0.01"]]></version_command>
+>  <command><![CDATA[bash
+>  $runme
+>  "$sayhelloto" > $Hello_output]]>
+>  </command>
+>   <configfiles>
+>     <configfile name="runme"><![CDATA[
+>  echo "Hello $1"
+>  ]]></configfile>
+>   </configfiles>
+>   <inputs>
+>     <param label="Say hello to" help="" value="Galaxy Training Network!!" type="text" name="sayhelloto" argument="sayhelloto"/>
+>   </inputs>
+>   <outputs>
+>     <data name="Hello_output" format="txt" label="Hello_output" hidden="false"/>
+>   </outputs>
+>   <tests>
+>     <test>
+>       <output name="Hello_output" value="Hello_output_sample" compare="diff" lines_diff="0"/>
+>       <param name="sayhelloto" value="Galaxy Training Network!!"/>
+>     </test>
+>   </tests>
+>   <help><![CDATA[
 >
->**What it Does**
+> **What it Does**
 >
->ToolFactory demonstration - hello world in Galaxy
->
->
->
->------
+> ToolFactory demonstration - hello world in Galaxy
 >
 >
->Script::
 >
->    echo "Hello $1"
+> ------
 >
->]]></help>
->  <citations>
->    <citation type="doi">10.1093/bioinformatics/bts573</citation>
->  </citations>
-></tool>
->```
-> The form displayed when the generated Hello tool is executed is below.
-> The user sees a text box to enter any string
-> When executed, it will be echoed to a new history file called `Hello_output`
 >
-> ![Generated form seen by the new tool user](../../images/toolfactory_hello_demo_form.png)
+> Script::
+>
+>     echo "Hello $1"
+>
+> ]]></help>
+>   <citations>
+>     <citation type="doi">10.1093/bioinformatics/bts573</citation>
+>   </citations>
+> </tool>
+> ```
+>
+> Which, when seen loaded into Galaxy looks like the following figure:
+> ![Generated form seen by the new tool user](../../images/toolfactory_hello_demo_form.png "The form displayed when the generated Hello tool is executed is below. The user sees a text box to enter any string. When executed, it will be echoed to a new history file called <code>Hello_output</code>")
+>
 {: .details}
 
 
-> ### {% icon requirements %} If this is confusing...
+> ### {% icon tip %} If this is confusing
 >
 > If you are not yet familiar with the basics of Galaxy tools covered in the
-> [tool integration training material](../tool-integration/slides.html), the example form and XML
+> [tool integration training material]({% link topics/dev/tutorials/tool-integration/slides.html %}), the example form and XML
 > will be confusing. You may gain more by reviewing the introductory part of that material, and then coming back here?
 > It's a lot to learn and it is complicated. While a form driven code generator can hide much of the complexity of generating the code,
 > the user must supply valid inputs for the code to be useful.
 >
-{: .requirements}
-
-
----
-
-## The ToolFactory supports users who routinely write command line scripts in their work.
-{: .no_toc}
-
-The ToolFactory can be found in the main ToolShed under the `tool-generators` category. It automates much of the work needed to prepare a
-new Galaxy tool using information provided by the script writer,
-on the ToolFactory form. The ToolFactory can wrap any simple script that runs correctly on the linux command line with some small test input samples. This is potentially
-handy for developers new to Galaxy, and for Galaxy users who are capable of correctly scripting on the command line for themselves.
-
-
-> ### {% icon tip %} Under the hood:
->
->  - It uses [galaxyml](https://github.com/hexylena/galaxyxml) to generate the tool XML from ToolFactory form settings.
->  - It uses [Planemo](https://github.com/galaxyproject/planemo) to generate the test outputs
->  - Then again to test newly generated code
 {: .tip}
 
 
-
 ## Limits and scope
-{: .no_toc}
 
-- It works best wrapping simple R/Bash/Python and other interpreted scripts with a few user supplied parameters and a few i/o history files.
-- Scripts are easier than some Conda packages because they can easily be modified to respond to default empty parameters as if they had not been passed. As a result, advanced tool building elements
-such as conditionals and related tricks requiring manual coding, can often be avoided.
-- On the other hand, many Conda dependencies will require XML conditionals
-or other tool XML constructs that are not easy to generate automatically. While some simple requirements may be manageable, complex ones will not be suitable for the ToolFactory.
+- It works best wrapping simple R/Bash/Python and other interpreted scripts, with few user supplied parameters and a few inputs or outputs.
+- Scripts are easier than some Conda packages
+  - They can easily be modified to respond to default empty parameters as if they had not been passed.
+  - As a result, advanced tool building elements such as conditionals and related tricks requiring manual coding, can often be avoided.
+- On the other hand, many Conda dependencies will require XML conditionals or other tool XML constructs that are not easy to generate automatically.
+- While some simple requirements may be manageable, complex ones will not be suitable for the ToolFactory.
 - Compared to the more usual shell and a text editor, The ToolFactory in Galaxy is a slow and clumsy way to debugging scripts. More than a minute per cycle because`planemo test` is run twice, building and tearing down a Galaxy each time.
 - **Starting a new ToolFactory tool with a know good command line and data** is strongly recommended. You will know exactly what to expect from the tool test for a first sanity check.
 - Corrolary: Unless there is a working script that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is of little use.
 
+# Running the ToolFactory
 
-**The ToolFactory is for developers and informaticians not yet familiar with those far more flexible tools.**
-**Scripts they need to wrap are frequently simple enough for the ToolFactory.**
-
-Compared to other Galaxy tool development software, there is far less to learn in order to get up to speed when using a form driven, automated code generator. The
-cost of this convenience is that ToolFactory is limited to automated generation of a large but limited subset of simple script and package wrappers.
-
----
-
-# 2. Getting your hands on a ToolFactory for some hands-on training.
-{: .no_toc}
-
-#### Run the ToolFactory locally and adapt the sample tools
-
-- If you found the introductory material presented so far relevant to your own needs, you may wish to start the DIY/hands-on part of the tutorial that follows
-- Set up your own working ToolFactory, install the samples in a history and then start exploring it and figuring out how it might help your work.
-- Depending on your preferences, install your own ToolFactory from one of the options described below.
-- The sections after this can **only be completed with a working ToolFactory**.
-- Work done in a Planemo ToolFactory will not be `persistent`. For any serious use, this is a problem although saving histories or converted workflows can be used
-to manually persist the ToolFactory configuration for each new tool. Some options involve `persistent` Galaxy servers and these are much more useful for building and
-more importantly, updating tools. It can be disappointing to learn that the history recording all your ToolFactory work is no longer available the next time you start working.
-- Non persistent options are **recommended only for testing or teaching - not production**.
-- In all cases, the first time they are run and the first time a tool is built, most versions take 10 minutes or so  - there's a lot that needs to be installed.
-Check for Conda and other running processes before assuming it has frozen.
-
->#### Active Tutorial content follows
+> ### {% icon hands_on %} Hands-on: Launching the Container
 >
-> 1. TOC
-> {:toc}
+> 1. [Install Docker](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform
 >
-{: .agenda}
-
-## Installation options
-
-> ### {% icon warning %} Security advisory!
->- *Please do not install the ToolFactory on a public server*
->- Although it will only run for administrative users, it allows unlimited scripting and that is a high security risk opportunity for any public facing machine.
->- In fact, Galaxy is very good at isolating tools to stop them doing mischief. But that's no reason to chance your arm. They keep inventing better mice.
->- Please install it locally as described below.
->- For this reason, the training materials can't make use of existing public Galaxy infrastructure like most of the GTN material.
->- Fortunately, there are a number of local installation alternatives to choose from, depending on how you prefer to work, described in the next section.
-{: .warning}
-
-#### 1. Using a docker container - not persistent - but convenient for testing
-
-- if you would like to work through the tutorial using a docker container, use `quay.io/fubar2/toolfactory_tutorial`
-- Assuming docker is running, `docker run -d -p 9090:9090 quay.io/fubar2/toolfactory_tutorial:latest` should start it locally
-- Planemo takes 20 to 30 seconds to spin up a Galaxy after the container boots.
-- Once it has settled down, navigate to [http://localhost:9090](http://localhost:9090) where you will find a Galaxy running
-- The ToolFactory will be installed and ready to run.
-- The first time you re-run a sample in the sample history, it will take about 7-10 minutes to finish. Conda does a lot so keep an eye on processes - when it finishes, rerunning that same job will take a minute or less.
-- Then, <a href="#section3">Skip to Section 3</a> below to import the sample history and continue with the Tutorial
-
-> ### {% icon details %} Dockerfile used to generate `quay.io/fubar2/toolfactory_tutorial`
-> > ```docker
-> > # Galaxy - Using Galaxy tools to generate new Galaxy tools
-> > #
-> > # To build the docker image, go to root of the training repo and
-> > #    docker build -t tool-generators -f topics/tool-generators/docker/Dockerfile .
-> > # Take a break. Takes a while!
-> > # To run image, make a `planemo --extra_tools` tool directory where you want to run it regularly and then
-> > #    docker run -p "9090:9090" -v mytools:/planemo/mytools/  -t tool-generators
-> > # ToolFactory planemo will be available on localhost:9090
-> > # Toolshed archives you generate can be downloaded and then unpacked under the mytools directory.
-> > # They will be loaded by planemo into the Galaxy it runs and be available in the tool menu the next time you restart the container and planemo
-> > # This allows you to load newly generated tools for testing and refinement.
-> > # WARNING: Export your history before you shut this container down or lose your ToolFactory form work when you stop the container.
-> > # Planemo always starts with an empty history.
-> > #
-> > # Rate limited on ubuntu image so using a quay.io minimal
-> > # derived from https://github.com/cybozu/ubuntu-base/tree/main/20.04/ubuntu
-> > #    docker run -d --privileged -p 8080:80 -p 9090:9090  -v /var/run/docker.sock:/var/run/docker.sock \
-> > #       -v /home/ross/rossgit/planemo/mytools:/planemo/mytools \
-> > #       quay.io/fubar2/toolfactory_tutorial:latest
-> > # So, please make your own script like shown here and save as start.sh
-> > # the volume can be populated with newly generated tools from unpacked toolshed archives and remains persistent
-> > # history WILL NOT persist so save it if you want to import it in the future to save typing all your work again.
-> >
-> > # biocontainer should involve a little less waiting at the first run - and first impressions count.
-> >
-> > FROM quay.io/cybozu/ubuntu-minimal:focal-20210217
-> > ENV DEBIAN_FRONTEND=noninteractive
-> > MAINTAINER Ross Lazarus
-> > # with fixes by Helena Rasch
-> > ENV GALDIR "/galaxy-central"
-> > ENV PDIR "/planemo"
-> > RUN apt-get update \
-> > && apt-get -y upgrade \
-> > && apt-get install -y -qq --no-install-recommends locales tzdata openssl netbase apt-utils apt-transport-https libreadline8  \
-> >  software-properties-common ca-certificates curl python3-dev gcc python3-pip build-essential python3-venv \
-> >  python3-wheel nano wget git python3-setuptools gnupg mercurial \
-> > && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-> > && locale-gen en_US.UTF-8 \
-> > && update-locale LANG=en_US.UTF-8 \
-> > && dpkg-reconfigure -f noninteractive tzdata \
-> > && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
-> > && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
-> > && apt-get -y update  \
-> > && apt install -y docker-ce-cli \
-> > && python3 -m pip install --upgrade pip \
-> > && mkdir -p $GALDIR \
-> > && curl -L -s https://github.com/galaxyproject/galaxy/archive/dev.tar.gz | tar xzf - --strip-components=1 -C $GALDIR \
-> > && git clone --recursive https://github.com/fubar2/planemo.git $PDIR \
-> > && cp $PDIR/planemo_ext/welcome.html $GALDIR/static/welcome.html.sample \
-> > && cp $PDIR/planemo_ext/welcome.html $GALDIR/static/welcome.html \
-> > && mkdir $PDIR/mytools \
-> > && rm -rf $PDIR/doc \
-> > && cd $PDIR \
-> > && python3 setup.py build \
-> > && python3 setup.py install \
-> > && pip install -U pip \
-> > && planemo conda_init --conda_prefix $PDIR/con \
-> > && hg clone https://fubar@toolshed.g2.bx.psu.edu/repos/fubar/tacrev $PDIR/tacrev \
-> > && cp $GALDIR/config/datatypes_conf.xml.sample $GALDIR/config/datatypes_conf.xml \
-> > && sed -i 's/<\/registration>/<datatype extension="tgz" type="galaxy.datatypes.binary:Binary" subclass="true" mimetype="multipart\/x-gzip" display_in_upload="true"\/> <\/registration>/' $GALDIR/config/datatypes_conf.xml \
-> > && sed -i 's/<datatype extension="html"/<datatype extension="html" display_in_upload="true"/' $GALDIR/config/datatypes_conf.xml \
-> > && sed -i 's/<datatype extension="toolshed.gz"/<datatype extension="toolshed.gz" display_in_upload="true" /' $GALDIR/config/datatypes_conf.xml \
-> > && sed -i '/-l|-list|--list)/i \\n\t --dev-wheels|-dev-wheels)\n\t\tshift\n\t\t;;\n' $GALDIR/run_tests.sh \
-> > && virtualenv /root/.planemo/gx_venv_3.9 \
-> > && . /root/.planemo/gx_venv_3.9/bin/activate && pip install -U setuptools \
-> > && cd $GALDIR && export GALAXY_VIRTUAL_ENV=/root/.planemo/gx_venv_3.9 && make setup-venv \
-> > && planemo test --galaxy_root $GALDIR $PDIR/tacrev/tacrev/tacrev.xml \
-> > && rm -rf /usr/local/share/.cache/yarn \
-> > && apt-get clean && apt-get purge \
-> > && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-> > VOLUME /planemo/mytools
-> > WORKDIR $PDIR
-> > ENV GALAXY_CONFIG_BRAND "ToolFactory in Planemo"
-> > EXPOSE 9090
-> > ENTRYPOINT ["/usr/local/bin/planemo" ,"tool_factory", "--galaxy_python_version", "3.9", "--galaxy_root" ,"/galaxy-central", "--port", "9090", "--host", "0.0.0.0", "--conda_prefix", "/planemo/con", "--extra_tools", "/planemo/mytools", "--galaxy_python_version", "3.9"]
-> > ```
-{: .details}
-
-#### 2. For production: Install the ToolFactory directly into an existing local non-docker development Galaxy
-
-- Quick and easy if you already have a throw-away Galaxy available.
-- ToolFactory work will be persistent like any other jobs on that Galaxy.
-    - Only local administrative users can successfully execute it
-    - It will fail with an explanation for non-administrative users.
-- If you have a private toolshed, you can configure the ToolFactory to upload new tools and then install them back to the host Galaxy.
-- Provide the URL and API key for the toolshed and the Galaxy and choose the install after test option toward the end of the form.
-    - This is good for seeing exactly what a user is going to work with.
-    - It is quite feasible to rebuild the tool after edits to fix warts observed during testing.
-- The Galaxy GUI is an odd choice for an IDE, but it works surprisingly well in practice for refining tools.
-
-> ### {% icon warning %} The normal ToolFactory will not run as a Galaxy tool in Docker!
-> - The normal ToolFactory tool fails mysteriously when run as a tool in Galaxy under docker.
-> - Option 2 uses a fork of Planemo. The ToolFactory works happily inside a Galaxy inside Planemo without Docker. Go Figure.
-> - There is a [Docker compatible version of the ToolFactory you can use instead in Galaxy in Docker](https://github.com/fubar2/toolfactory_docker) that uses a biocontainer.
-> - See option 4 below.
-{: .warning}
-
-See [the tutorial on installing tools from the toolshed](https://galaxyproject.org/admin/tools/add-tool-from-toolshed-tutorial)
-
-> ### {% icon details %} Install the ToolFactory tool in an existing disposable development Galaxy
+> 2. Start the container
 >
-> 1. Log in to Galaxy as an administrative user
-> 2. Select the`Admin` tab from the top bar in Galaxy;
-> 3. Under the `Tool Management` option, select `Install and Uninstall - Search and install new tools and other Galaxy utilities from the Tool Shed. See the tutorial.`
-> 2. Make sure the Main toolshed is selected so the entire category list is displayed. Choose the `Tool Generators` link.
-> 3. Select `tool_factory_2 updated version of the tool factory`
-> 3. Select `Install` for the first listed version - 138 currently.
-> 4. Wait a few minutes - it takes some time for Conda to install all the dependencies
-{: .details}
-- <a href="#section3">Skip to Section 3</a> below to import the sample history and continue with the Tutorial
-
-
----
-
-#### 3. Alternative recommendation - Install in a virtual environment using the ToolFactory inside Planemo
-
-- This method is recommended for testing the ToolFactory if :
-    - you do not already run a development Galaxy
-    - you do not wish to risk the health of your existing development Galaxy instance.
-    - you have Python3, python3-venv, curl and git already installed. The script will complain until they are installed.
-- Make a new (potentially throw away) directory for the Planemo installation - e.g. `mkdir tftute` and `cd tftute`
-- Expose and copy the script below. Paste it into a file in the new directory and run it with `sh`.
-- It will create a new Python virtual environment, download a fork of planemo and install a local copy of galaxy-dev.
-- Edit the location of the galaxy directory `$GALDIR` and remove the code to download galaxy-dev if you already have a cloned Galaxy repository and wish to save time and space.
-- It will take some time - so watch the Hello World demonstration while you wait.
-- Your work is not persistent!
-- The instance will be torn down when you exit Planemo
-- Be sure to save your history - either as a history or exported as a workflow - before shutting down.
-- After shutting down with `ctrl+C` only the last line of the script needs to be rerun to restart Planemo if the directory contents remain untouched.
-- Newly generated tools can be tested in this setup as described below.
-- It involves a restart of planemo and loss of all your unsaved work! Saving the new tool archive does not save the ToolFactory form settings.
-- Saving the history or an extracted workflow for the new tool is necessary
-- It is a good way to get a taste without much typing.
-
-> ### {% icon details %} Sample script to install a local disposable ToolFactory in a planemo virtual environment
-> > ### {% icon code-in %} Input: topics/dev/tutorials/tool-builders/docker/maketf.sh
-> > ```bash
-> > # GALDIR could be an existing dev directory, and the curl line could be commented out to save time
-> > GALDIR="galaxy-central"
-> > PDIR="planemo"
-> > CDIR=`pwd`
-> > git clone --recursive https://github.com/fubar2/planemo.git $PDIR
-> > rm -rf $PDIR/docs
-> > mkdir -p $GALDIR
-> > curl -L -s https://github.com/galaxyproject/galaxy/archive/dev.tar.gz | tar xzf - --strip-components=1 -C $GALDIR
-> > cp $PDIR/planemo_ext/welcome.html $GALDIR/static/welcome.html.sample
-> > sed -i '/-l|-list|--list)/i \\n\t --dev-wheels|-dev-wheels)\n\t\tshift\n\t\t;;\n' $GALDIR/run_tests.sh
-> > # planemo will not run as a tool successfully without this - something fishy with recent changes to run_tests.sh
-> > # https://github.com/galaxyproject/planemo/issues/1148
-> > sed 's/#sanitize_all_html\: true/sanitize_all_html\: false/g' $GALDIR/config/galaxy.yml.sample > $GALDIR/config/galaxy.yml
-> > # need this to see planemo html reports
-> > cp $PDIR/planemo_ext/welcome.html $GALDIR/static/welcome.html
-> > cp $PDIR/planemo_ext/welcome.html $GALDIR/static/welcome.html.sample
-> > mkdir -p $PDIR/mytools
-> > cd $PDIR
-> > python3 -m venv .venv
-> > . .venv/bin/activate
-> > python3 setup.py build
-> > python3 setup.py install
-> > cd $CDIR
-> > planemo conda_init --conda_prefix $PDIR/con
-> > planemo tool_factory --galaxy_root $GALDIR --port 9090 --host 0.0.0.0 --conda_prefix $PDIR/con
-> > # use planemo tool_factory --galaxy_root galaxy-central --port 9090 --host 0.0.0.0 --conda_prefix planemo/con
-> > # after activating the venv as above to restart planemo next time without all the downloading
-> > # ALL YOUR WORK WILL BE GONE unless you explicitly exported your ToolFactory jobs as histories or as workflows.
-> > ```
-> {: .code-in}
-{: .details}
-
-- Navigate to [http://localhost:9090](http://localhost:9090) where a Galaxy with the ToolFactory installed will be running
-- <a href="#section3">Skip to Section 3</a> below to import the sample history and continue with the Tutorial
-
----
-
-#### 4. CYOA option - Install the ToolFactory docker container with integrated toolshed
-
-- There is a more complex but integrated solution using the [ToolFactory docker container](https://github.com/fubar2/toolfactory-galaxy-docker).
-- Installation is documented in the respository and bash scripts to build and run the Docker image are provided. They will probably need to be adjusted as described there.
-- First time installation is slow and there seems to be a race condition that makes it fail sometimes :( but it gets better after that.
-- It provides an integrated local private toolshed and allows tools to be installed and used in the Galaxy used to run the ToolFactory.
-- Like installation in a local Galaxy server, the docker container can be persisted as shown in the documentation for docker-galaxy-stable upon which it is based.
-
----
-
-## Import ToolFactory functional documentation - the demonstration tools.
-
-- Congratulations on getting this far and acquiring a local instance of the ToolFactory
-- There is a history you should import that shows some sample tools
-- You can examine how these were generated by using the Galaxy job redo button.
-- This will show you the fully completed ToolFactory form used to generate the sample
-- You can edit the form and regenerate a new tool with your changes incorporated.
-
-
-> ### {% icon announcement %} Note!
-> - This is the **first step** recommended after any of the installation options above until you are comfortable using the ToolFactory
-> - It provides access to the sample ToolFactory tools.
-> - They are the best way to learn how the ToolFactory works and how you might adapt the variations shown in your own work.
-> - It provides functional documentation and is not needed once you are comfortable using the ToolFactory.
-> - It is pre-installed in the [ToolFactory docker container](https://github.com/fubar2/toolfactory-galaxy-docker)
-{: .announcement}
-
-
-- Use this url `https://zenodo.org/record/4686436/files/TF_demo_planemo_april14.tar.gz?download=1`
--[zenodo link](https://zenodo.org/record/4686436/files/TF_demo_planemo_april14.tar.gz?download=1).
-- Copy it and paste it into the URL box on the screen for importing a remote history.
-- The link is also on the welcome page of the virtualenv Planemo installation described above.
-
-> ### {% icon hands_on %} Hands-on: Steps to use that URL to import the history
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > docker run -d -p 9090:9090 -v ./mytools:/planemo/mytools quay.io/fubar2/toolfactory_tutorial:d0c2e1e
+>    > ```
+>    {: .code-in}
 >
-> 1. Select the`User` tab from the top bar in Galaxy;
-> 2. Select `Histories`
-> 3. Select `Import`
-> 4. Paste the URL into the URL field and press `import`
+>    > ### {% icon tip %} Tip: Patience!
+>    > This step can take quite some time to pull the container and boot it. Additionally when you run the ToolFactory for the first time inside the container, it will also require some time to build the conda environment.
+>    {: .tip}
+>
+> 3. Navigate to [http://localhost:9090](http://localhost:9090) where you will find a Galaxy running
+>
 {: .hands_on}
 
-
-- It will take a few minutes to import.
-- Get up and have a stretch for a minute.
-- When it's complete, select the link to view histories and choose `switch` from the drop down arrow on the new history to make the imported one your current history.
-- Viewing the new history, you will see a large number of pairs of history items and 4 data files used for testing.
-- Each pair comprises a toolshed ready archive containing a generated tool and a test, and a collection including a Planemo test report, the tool XML and a job log.
-- The archive history object has a circular "redo" button. Click that button and the ToolFactory form that generated the sample tool will appear. You can see how the tool was
-built using the ToolFactory's limited capacities. Most of them are trivial of course. They are meant to be models rather than useful examples.
-- It is recommended that you rerun one job and wait until it is complete before starting multiple jobs - there will likely be a race condition if planemo tries to configure
-Conda for the initial run with more than one tool running - once the first one is done, it seems to work well even when building multiple tools at the same time. It uses
-sqlite so is far less robust than ideal but it works well for development.
-
----
-<sup id='section3'>*</sup>
-# 3. Hands-on: Learning to use the ToolFactory
-
-> ### {% icon comment %}First time use involves a long pause in some installations
-> - The first job takes longer in some installation scenarios because the ToolFactory dependencies are installed before the tool can run.
-{: .comment}
-
-
-> ### {% icon hands_on %} Exploring the sample tools by regenerating their original ToolFactory forms
->
-> * With the ToolFactory working and the sample history active as described above
-> * Select any of the generated toolshed archive history items.
-> * This should open the item details up, so you can see the circular "redo" button
-> * Click that button - the ToolFactory form that generated that tool will appear.
-> * Examine the form settings used to generate the tool.
-> * Try changing names or prompts. Add new parameters or inputs/outputs; press `execute`; check the new version of the tool
-> * For example, change the default for the Hello example to `Galaxy Training Network` and generate an updated version.
-{: .hands_on}
 
 
 The best way to explore the kinds of tasks that can be achieved with simple scripts is to take a look at each sample tool. Note how the various
@@ -652,720 +283,92 @@ options have been configured and what kinds of scripts this could be used for in
 new parameters added to suit, to extend the toy examples and create tools of use to your users. Change the tool name on the newly edited form, press `execute` and
 rerun the job to generate a new toolshed archive and test report collection.
 
-Consider the trivial `Hello World!` tool example. It is readily extended to suit many situations where a tool is needed quickly for a workflow. Try adding another parameter.
-For example, the planemo `lint` and `test` tool examples (described below) can be derived by adding a history toolshed archive as input, plus a few more lines of bash script.
-In practice, it's a flexible basis for generating many simple tools.
+## Hello World!
 
-> ### {% icon details %} Summary: details needed and how they are used to generate a new tool
+> ### {% icon hands_on %} Hands-on: Building the Hello World example
 >
-> #### What information is needed to generate a tool ?
+> 1. Run {% tool ToolFactory %} with the following parameters:
+>    - "Dependencies, optional script and script interpreter"
+>      - *"Interpreter for the script"*: `bash`
+>      - *"Script for executable above to interpret"*: `echo "Hello $1"`
+>    - "Data file input, output and settings forming the executable or script command line"
+>      - *"Command line parameter passing method to use"*: `positional`
+>      - "Input and output files"
+>        - {% icon param-repeat %} *"Insert one or more new history items output by the executable to appear in the user history after the tool runs"*
+>          - *"Name for this output to appear in new history"*: `Hello_output`
+>          - *"Select the datatype for this output"*: `txt`
+>          - *"Positional: ordinal integer. Use STDOUT if '>' required. Otherwise ignored if argparse because name is used"*: `1`
+>      - "Executable or script settings passed on the command line other than I/O files"
+>        - {% icon param-repeat %} *"Insert zero or more command line settings for the user to pass to the executable"*
+>          - *"Choose the name for this parameter - MUST not be blank!"*: `say_hello_to`
+>          - *"Enter this parameter's label for the form"*: `Say hello to`
+>          - *"Positional ordinal \| argparse argument name"*: `1`
 >
-> - The code generator requires enough detail to be able to create the appropriate command line
-> template to call the script or executable and pass the required file paths and other settings correctly.
-> - Small input samples and default settings are used to construct a test for the newly generated tool. These should be known to work with the script, having been used to debug
-> the script on the command line.
-> - Upload the samples to the current history before
-> starting a new tool in the ToolFactory. No tool will be generated without sample inputs. This test becomes part of the XML and of the toolshed archive.
-> - The outputs from running the script during the first planemo run become sample outputs to be compared with test outputs in the archive.
+>    > ### {% icon comment %} First time use involves a long pause in some installations
+>    > The first job takes longer in some installation scenarios because the ToolFactory dependencies are installed before the tool can run.
+>    {: .comment}
 >
-> - In addition to an ID and name, a tool may have any combination of:
+> 2. Explore the outputs. Check out the test results in the collection. Did the test pass?
 >
->     - Multiple dependencies. Conda is currently supported. System utilities can be used assuming the target server exposes them to tools, or they can be provided as Conda dependencies to ensure they will always be available
->     - Argparse (named) or positional (ordered) style parameter passing at tool execution time depending on the script requirements. Positional works well for bash scripts with only a handful of parameters. Argparse is preferred for clarity.
->     - Unlimited individual input data files to be selected from the user's history.
->     - Unlimited individual output files to be written to the user's history, paths determined at tool execution.
->     - Unlimited additional command line parameters that the user can control on the new tool form.
->     - an (optional) script to execute. Running a script to call an executable using parameters passed from the user can be useful to overcome some limitations of the ToolFactory for more complex tools.
+> 3. TODO: Refresh your Galaxy page to see the tool in the toolbox
 >
-> - Many of these generate parameter input boxes and history data selects on the new tool form.
-> - Metadata about command line formatting together with text strings for the form seen by the user are needed.
+> 4. TODO: Run the tool that has been added
+{: .hands_on}
+
+### The Development Cycle
+
+1. Test your script on the command line and confirm it works.
+1. Upload script, and all inputs.
+1. Run the tool Factory
+1. Use the {% icon galaxy-refresh %} rerun button to fix errors
+1. Rinse, repeat...
+
+Galaxy can be used as an Integrated Development Environment for tools - clunky but oddly satisfying. Note this is distinct from debugging the script - that is not at all satisfying in Galaxy unless you like waiting for jobs to finish. A shell is much better for that.
+
+![Galaxy as an IDE for tools with the ToolFactory](../../images/ToolFactory_big_picture.png "Galaxy can be used as a tool development environment for users who can write their own scripts as shown in this process overview slide.")
+
+### Hello World: Continued
+
+> ### {% icon hands_on %} Hands-on: Modifying the Hello World example
 >
-> - Many of these are components of the generated command line template.
-> - This can be seen in the new tool XML. Galaxy file paths for the script are only determined at generated tool execution. The generated template ensures that these are correct.
+> 1. Rerun the output of your previous job, and make the following changes
 >
-> #### The Galaxy UI imposes additional limits
+>    - "Dependencies, optional script and script interpreter"
+>      - *"Script for executable above to interpret"*: `echo "Hello $1"; echo "Goodbye $2";`
+>    - "Data file input, output and settings forming the executable or script command line"
+>      - "Executable or script settings passed on the command line other than I/O files"
+>        - Add a second {% icon param-repeat %} *"Insert zero or more command line settings for the user to pass to the executable"*
+>          - *"Choose the name for this parameter - MUST not be blank!"*: `say_bye_to`
+>          - *"Enter this parameter's label for the form"*: `Say bye to`
+>          - *"Positional ordinal \| argparse argument name"*: `2`
 >
-> - The ToolFactory has limited flexibility and works best for simple tools.
-> - Even then, the form becomes complicated as more parameters are added.
-> - Tools can have unlimited numbers of some items, including input files, output files, citations and user parameters.
-> - Each one has half a dozen metadata or text details. Galaxy form repeats are used for those.
-> - As more repeats are added, the Galaxy UI becomes increasingly unwieldy.
-> - In theory, the Toolfactory can potentially generate very complicated tools with large numbers if inputs, outputs and user modifiable parameters.
-> - Great patience would be required.
-> - That is why manual methods are likely more productive for complicated requirements.
+{: .hands_on}
+
+
+## Hello Collections!
+
+> ### {% icon hands_on %} Hands-on: Building the Hello World example
 >
+> 1. Run {% tool ToolFactory %} with the following parameters: TODO
 >
-{: .details}
+{: .hands_on}
 
 
-Galaxy can be used as a tool development environment for users who can write their own scripts as shown in this process overview slide
-
-> ### {% icon galaxy-refresh %} The redo button is handy in the ToolFactory development cycle.
->
-> - Start by confirming that your script correctly processes the sample inputs on the command line using the default parameters you will supply.
-> - Upload all the sample inputs needed for your script. These *must be in the history* where you are working when you start the Toolfactory or you will not be able to add them as inputs to the form - they are required so make sure they are available before you start.
-> - Create a tool by providing the information categories (bottom of the slide) represented on the ToolFactory form - dependencies, history i/o, help, additional parameters...
-> - Execute the generator - fix errors and repeat if necessary
-> - Examine the new tool and decide on edits or changes - see below for hints on installing new tools depending on how the ToolFactory has been deployed
-> - Use the Redo button on the toolshed archive history item to recreate the ToolFactory form that generated the last version
-> - Make changes and generate an updated version
-> - Rinse, repeat...
-> - Galaxy can be used as an Integrated Development Environment for tools - clunky but oddly satisfying. Note this is distinct from debugging the script - that is not at all satisfying in Galaxy unless you like waiting for jobs to finish. A shell is much better for that.
->
->> ![Galaxy as an IDE for tools with the ToolFactory](../../images/ToolFactory_big_picture.png)
-{: .galaxy-refresh}
-
-
-#### Workflow used to create the tools in the demonstration history
-
-The workflow at https://zenodo.org/record/4686436/files/TFdemo_wf_april13_planemo.ga?download=1 was used to create the sample history examples. It requires some data files as inputs. They
-can be copied from the imported history to a new history and the workflow can be imported and run from there. After connecting appropriate data sets to the different inputs, it will
-re-create all the samples for anyone wanting to see them run.
-
----
-
-## ToolFactory tips and tricks illustrated by some of the examples.
-
-#### Before you begin a new tool
-
-- Make sure it runs correctly on a command line with your sample inputs and default parameter settings. That is how the test will be generated.
-- You cannot specify any inputs on the form without providing samples, and those samples must run correctly, with the supplied defaults.
-- Easiest to make sure those samples are in the history before you begin.
-- Be well prepared. The ToolFactory cannot do that preparation for  you.
-
-#### STDIN and STDOUT
-
-- Demonstration tools often capture output from a bash script using the special STDOUT designation for output files
-- This can save sending the output path as a parameter to the script or executable
-- STDIN is also available as a special designation for history inputs if the script takes input from STDIN when it runs.
-- The option `Tool reads selected input file from STDIN and writes STDOUT with no parameters` in the parameter passing model
-selection list will generate a simple filter tool, executing a script or Conda dependency with input on STDIN and output on STDOUT
-for those rare situations where that's all you need. No i/o or other parameters for the user to set. Used in the tacrev demonstration tool.
-
-#### Repeats in the ToolFactory form theoretically permit *any* number of parameters.
-
-- Inputs, outputs and additional user parameters are all presented within repeat elements on the form.
-- For any given tool, repeats allow an unlimited number of each of those tool elements - from a technical perspective.
-- The practical limit is reached when your patience runs out as you add them in the current Galaxy forms UI.
-- The form gets very long, very quickly.
-- A handful is easily manageable.
-
-#### Repeated parameters in generated tools allow the end user to supply multiple values
-
-- Repeats *on the generated tool form* are supported for input and user edited parameters
-- The generated tool form has the usual "Add..." button associated with the parameter, so the tool user can add any number of them.
-- The script must be able to parse and deal correctly with multiple instances of the same parameter name.
-- A Python sample script using argparse with `action="append"` parameters to deal with potentially any number of multiples of each parameter command
-line will echo all the repeated parameters is shown in the example shown in the example below.
-- Repeats do not make sense for `positional parameters` because their number is unpredictable. The ToolFactory will ignore repeats in positional mode. A warning is issued in the log.
-- Repeats on `output parameters` are not supported - use a `collection` described below when an unpredictable number of output files are required.
-- The sample shown below has one input data parameter and one text parameter. The `repeat` option is selected for both on the ToolFactory form.
-- In the generated tool XML wrapper, these are embedded within `<repeat>` tags in the `<inputs>` and also in the `<tests>` sections automatically.
-- Note that repeats are limited to *single parameters* - groups of parameters cannot currently be repeated. They will require manual tool writing.
-- The end user sees the form with repeatable fields as shown at the end of the detail below.
-- The demonstration trivially returns whatever the user chose to repeat.
-
-> ### {% icon details %} Repeats demonstration tool XML
-> >
-> >
-> >```xml
-> ><tool name="reps" id="reps" version="0.01">
-> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
-> >  <!--Created by planemo@galaxyproject.org at 11/04/2021 10:18:15 using the Galaxy Tool Factory.-->
-> >  <description></description>
-> >  <requirements/>
-> >  <stdio>
-> >    <exit_code range="1:" level="fatal"/>
-> >  </stdio>
-> >  <version_command><![CDATA[echo "0.01"]]></version_command>
-> >  <command><![CDATA[python
-> >$runme
-> >#for $rep in $R_mi:
-> >--mi "$rep.mi"
-> >#end for
-> >#for $rep in $R_mp:
-> >--mp "$rep.mp"
-> >#end for
-> >>
-> >$repout]]></command>
-> >  <configfiles>
-> >    <configfile name="runme"><![CDATA[
-> >import argparse
-> >parser = argparse.ArgumentParser()
-> >a = parser.add_argument
-> >a("--mi", action="append")
-> >a("--mp", action="append")
-> >args = parser.parse_args()
-> >print(" and ".join(args.mi))
-> >print(" and".join(args.mp))
-> >]]></configfile>
-> >  </configfiles>
-> >  <inputs>
-> >    <repeat name="R_mi" title="Add as many Input lots of inputs as needed">
-> >      <param name="mi" type="data" optional="false" label="Input lots of inputs" help="" format="ab1,affybatch,agilentbrukeryep.d.tar,agilentmasshunter.d.tar,analyze75,arff,asn1,
-> > asn1-binary,augustus,axt,bam,bcf,bed,bed12,bed6,bedgraph,bedstrict,bigbed,bigwig,biom1,biom2,blastxml,blib,brukerbaf.d.tar,brukertdf.d.tar,bus,cel,chira.sqlite,chrint,cisml,ckpt,cmap,
-> > cml,consensusxml,cool,cps,cpt,cram,csfasta,csv,ct,cuffdiff.sqlite,cxb,d3_hierarchy,daa,dada2_dada,dada2_errorrates,dada2_mergepairs,dada2_sequencetable,dada2_uniques,dbn,dbnsfp.tabular,
-> > dcd,deeptools_compute_matrix_archive,deeptools_coverage_matrix,dlib,drf,dta,dta2d,dzi,edr,edta,eland,elandmulti,elib,embl,encodepeak,eset,excel.xls,expression.json,fai,fast5.tar,
-> > fast5.tar.bz2,fast5.tar.gz,fasta,fasta.gz,fastg,fastq,fastq.bz2,fastq.gz,fastqcssanger,fastqcssanger.bz2,fastqcssanger.gz,fastqillumina,fastqillumina.bz2,fastqillumina.gz,fastqsanger,
-> > fastqsanger.bz2,fastqsanger.gz,fastqsolexa,fastqsolexa.bz2,fastqsolexa.gz,featurexml,ffdata,ffindex,flv,fped,fphe,fps,fqtoc,gafa.sqlite,gal,gatk_dbsnp,gatk_interval,gatk_recal,gatk_report,
-> > gatk_tranche,gemini.sqlite,genbank,genbank.gz,geojson,gfa1,gfa2,gff,gff3,gff3.bz2,gff3.gz,gii,gii.gz,gpr,grd,grd.tgz,gro,gtf,h5,h5ad,hdt,hhr,hlf,hmm2,hmm3,icm,idat,ideaspre,idpdb,idxml,
-> > imgt.json,imzml,inchi,intermine_tabular,interval,ipynb,isa-json,isa-tab,itp,jellyfish,json,jsonld,kallisto.idx,kroenik,lav,ldindep,len,loom,lped,maf,malist,mascotxml,maskinfo-asn1,
-> > maskinfo-asn1-binary,mcool,mdp,memepsp,memexml,meryldb,mgf,mkv,mol,mol2,mothur.accnos,mothur.align,mothur.align.check,mothur.align.report,mothur.axes,mothur.cons.taxonomy,
-> > mothur.count_table,mothur.design,mothur.dist,mothur.filter,mothur.filtered.masked.quan,mothur.filtered.quan,mothur.freq,mothur.groups,mothur.list,mothur.lower.dist,mothur.map,
-> > mothur.masked.quan,mothur.names,mothur.oligos,mothur.otu,mothur.otu.corr,mothur.otulabels,mothur.pair.dist,mothur.quan,mothur.rabund,mothur.rdp.taxonomy,
-> > mothur.ref.taxonomy,mothur.relabund,mothur.sabund,mothur.seq.taxonomy,mothur.sff.flow,mothur.shared,mothur.square.dist,mothur.summary,mothur.tax.summary,mothur.tre,mp3,mp4,
-> > mpg,mrm,ms2,msh,msp,mtx,mz.sqlite,mz5,mzdata,mzid,mzml,mzq,mztab,mztab2,mzxml,n3,ncbitaxonomy.sqlite,ndx,neostore.zip,netcdf,newick,nex,nhx,nii1,nii1.gz,nii2,nii2.gz,nmrml,
-> > nt,obfs,obo,odgi,ome.tiff,osw,owl,oxlicg,oxligl,oxling,oxliss,oxlist,oxlits,paf,paf.gz,par,paramxml,parquet,pbed,pdb,pdbqt,pdf,peff,peplist,peptideshaker_archive,pepxml,pepxml.tsv,phylip,
-> > phyloxml,picard_interval_list,pileup,plyascii,plybinary,png,postgresql,pphe,pqp,pqr,probam,probed,protobuf2,protobuf3,protxml,protxml.tsv,psms,pssm-asn1,ptkscmp,qcml,qname_sorted.bam,
-> > qual454,qualillumina,qualsolexa,qualsolid,rdata,rdata.camera.negative,rdata.camera.positive,rdata.camera.quick,rdata.msnbase.raw,rdata.sce,rdata.xcms.fillpeaks,rdata.xcms.findchrompeaks,
-> > rdata.xcms.group,rdata.xcms.raw,rdata.xcms.retcor,rdf,rdock_as,rma6,rna_eps,sam,sbml,scf,scidx,sdf,searchgui_archive,sf3,sff,shp,sif,smat,smi,snaphmm,snpeffdb,snpmatrix,snpsiftdbnsfp,
-> > snptest,spalndba,spalndbnp,spec.xml,splib,splib_noindex,sqlite,sqmass,sra,sra_manifest.tabular,stl,stockholm,tabular,tabular.gz,tandem,tar,taxonomy,tck,textgrid,tgz,thermo.raw,tiff,top,tpr,
-> > trackhub,trafoxml,traml,trk,trr,tsv,ttl,twobit,txt,uniprotxml,unsorted.bam,vcf,vcf_bgzip,vel,velvet,vg,vtkascii,vtkbinary,watersmasslynx.raw.tar,wav,wiff,wiff.tar,wig,xg,xgmml,xlsx,xmfa,xml,
-> > xquest.xml,xtc,xvg,zip" multiple="false"/>
-> >    </repeat>
-> >    <repeat name="R_mp" title="Add as many things to add as needed">
-> >      <param name="mp" type="text" value="Add lots of things" label="things to add" help=""/>
-> >    </repeat>
-> >  </inputs>
-> >  <outputs>
-> >    <data name="repout" format="txt" label="repout" hidden="false"/>
-> >  </outputs>
-> >  <tests>
-> >    <test>
-> >      <output name="repout" value="repout_sample" compare="sim_size" delta_frac="0.2"/>
-> >      <repeat name="R_mi">
-> >        <param name="mi" value="mi_sample"/>
-> >      </repeat>
-> >      <repeat name="R_mp">
-> >        <param name="mp" value="Add lots of things"/>
-> >      </repeat>
-> >    </test>
-> >  </tests>
-> >  <help><![CDATA[
-> >
-> >**What it Does**
-> >
-> >
-> >
-> >------
-> >
-> >
-> >Script::
-> >
-> >    import argparse
-> >    parser = argparse.ArgumentParser()
-> >    a = parser.add_argument
-> >    a("--mi", action="append")
-> >    a("--mp", action="append")
-> >    args = parser.parse_args()
-> >    print(" and ".join(args.mi))
-> >    print(" and".join(args.mp))
-> >
-> >]]></help>
-> >  <citations>
-> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
-> >  </citations>
-> ></tool>
-> >```
-> > - The user sees the following form after adding 3 repeats for each of the two available items
-> >
-> > ![Form to configure an additional parameter as a select](../../images/toolfactory_repeats_sample_form.png)
-{: .details}
-
-#### ToolFactory `collection` outputs are handy for hiding dozens of miscellaneous tool outputs in a single history item
-
-- If the script writes a large number of different output file types (images, reports..) that are not in themselves useful for downstream analyses.
-- A Collection can be used to hide them in an organised list as a single new history item.
-- Collections are special kinds of Galaxy history items that can present a directory full of files arranged inside one single new history item.
-- When viewed, that history item presents them all as a list, each a typical, viewable Galaxy history item.
-- They don't clutter the user's history because they are all hidden in the collection.
-- The plotter example uses an Rscript.
-- It generates as many pairs of random plots as the parameter supplied requires.
-- The script sends them into the the collection that appears in the history after the job runs.
-- The user's history shows only one new item after it runs - it must be viewed to see all the individual contents.
-
-> ### {% icon warning %} The default generated test for output collections always passes because it doesn't test anything.
->
->    - Supplying a test over-ride is recommended for collections.
->    - Example code is shown on the sample tool's form and in the original example code below - removed from the current sample.
->    - For a real test, one or more expected <element.../> tags must be provided so the test really does test something.
->    - Add your own file names to the sample to make a real test for your own collections.
->    - Otherwise, the generated test will be empty, because that is what the code generator knows about what's in the collection when the `<test>` code is generated. Nothing.
->    - Introspecting arbitrary scripts to reliably populate the test with actual file names?. Not likely any time soon.
->    - Introspecting the Planemo test result to write the test and then retest might be possible but is not planned.
->
+> ### {% icon warning %} Collection Testing
+> The default generated test for output collections always passes because it doesn't test anything.
+> Supplying a test over-ride is recommended for collections.
+> For a real test, one or more expected <element.../> tags must be provided so the test really does test something.
 {: .warning}
 
-> ### {% icon details %} `plotter` collection output demonstration tool form, generated XML and outputs
-> >
-> > - The ToolFactory form for the plotter example tool
-> > is configured as shown below, from "rerunning" the plotter job from the sample history.
-> >
-> >![ToolFactory form configuration of the output collection in the plotter example](../../images/toolfactory_plotter_demo_form.png)
-> >
-> > The Rscript is contained in a configfile so`#` is escaped - this is automatic.
-> >
-> >```xml
-> ><tool name="plotter" id="plotter" version="0.01">
-> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
-> >  <!--Created by admin@galaxy.org at 24/01/2021 05:02:33 using the Galaxy Tool Factory.-->
-> >  <description>ToolFactory collection demonstration - random plots</description>
-> >  <requirements>
-> >    <requirement version="" type="package">r-base</requirement>
-> >  </requirements>
-> >  <stdio>
-> >    <exit_code range="1:" level="fatal"/>
-> >  </stdio>
-> >  <version_command><![CDATA[echo "0.01"]]></version_command>
-> >  <command><![CDATA[Rscript
-> >$runme
-> >"$nplot"]]></command>
-> >  <configfiles>
-> >    <configfile name="runme"><![CDATA[
-> >\# demo
-> >args = commandArgs(trailingOnly=TRUE)
-> >if (length(args)==0) {
-> >   n_plots = 3
-> >} else {
-> >   n_plots = as.integer(args[1]) }
-> >dir.create('plots')
-> >for (i in 1:n_plots) {
-> >    foo = runif(100)
-> >    bar = rnorm(100)
-> >    bar = foo + 0.05*bar
-> >    pdf(paste('plots/yet',i,"anotherplot.pdf",sep='_'))
-> >    plot(foo,bar,main=paste("Foo by Bar plot \#",i),col="maroon", pch=3,cex=0.6)
-> >    dev.off()
-> >    foo = data.frame(a=runif(100),b=runif(100),c=runif(100),d=runif(100),e=runif(100),f=runif(100))
-> >    bar = as.matrix(foo)
-> >    pdf(paste('plots/yet',i,"anotherheatmap.pdf",sep='_'))
-> >    heatmap(bar,main='Random Heatmap')
-> >    dev.off()
-> >}
-> >
-> >]]></configfile>
-> >  </configfiles>
-> >  <inputs>
-> >    <param label="Number of random plots pairs to draw" help="" value="3" type="text" name="nplot" argument="nplot"/>
-> >  </inputs>
-> >  <outputs>
-> >    <collection name="plots" type="list" label="Plots">
-> >      <discover_datasets pattern="__name_and_ext__" directory="plots" visible="false"/>
-> >    </collection>
-> >  </outputs>
-> >
-> >
-> >  <tests>
-> >    <test>
-> >      <param name="nplot" value="3" />
-> >      <output_collection name="plots" type="list">
-> >     <element file="yet_1_anotherplot_sample" name="yet_1_anotherplot" ftype="pdf" compare="sim_size" delta_frac="0.05"/>
-> >    </output_collection>
-> > </test>
-> >  </tests>
->>
->>
-> >
-> >  <help><![CDATA[
-> >
-> >**What it Does**
-> >
-> >Draws as many random plot pairs as you need
-> >
-> >
-> >
-> >------
-> >
-> >
-> >Script::
-> >
-> >    # demo
-> >    args = commandArgs(trailingOnly=TRUE)
-> >    if (length(args)==0) {
-> >       n_plots = 3
-> >    } else {
-> >       n_plots = as.integer(args[1]) }
-> >    dir.create('plots')
-> >    for (i in 1:n_plots) {
-> >        foo = runif(100)
-> >        bar = rnorm(100)
-> >        bar = foo + 0.05*bar
-> >        pdf(paste('plots/yet',i,"anotherplot.pdf",sep='_'))
-> >        plot(foo,bar,main=paste("Foo by Bar plot #",i),col="maroon", pch=3,cex=0.6)
-> >        dev.off()
-> >        foo = data.frame(a=runif(100),b=runif(100),c=runif(100),d=runif(100),e=runif(100),f=runif(100))
-> >        bar = as.matrix(foo)
-> >        pdf(paste('plots/yet',i,"anotherheatmap.pdf",sep='_'))
-> >        heatmap(bar,main='Random Heatmap')
-> >        dev.off()
-> >    }
-> >
-> >]]></help>
-> >  <citations>
-> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
-> >  </citations>
-> ></tool>
->>```
->> After requesting 25 pairs of plots from the sample tool, a collection appears in the history and is shown below.
->> One of them is displayed by clicking the "eye" icon.
->> Collections are ideal for messy analysis reporting outputs such as images, pdfs and other material that is not useful as an input to a downstream tool.
->> It is material that the user will want kept together, so a single history item is ideal to avoid unnecessary clutter.
->> As shown above, the script only has to write the files to a directory.
->> Note that the test is over-ridden in the ToolFactory form to generate this tool.
->> Without an over-ride to suit your script, an empty test will be generated that will not do any testing - see warning above.
->>
->>
->>![Plotter collection opens to show all the plots as separate items to be viewed or downloaded](../../images/toolfactory_plotter_sample_output.png)
-{: .details}
 
-#### Selects as user supplied parameters
+## The ToolFactory supports users who routinely write command line scripts in their work.
 
-- Additional parameter types are selected from a drop down list. It includes text, numeric and select parameters.
-- Selects offer a list of prespecified options to the user.
-- There is a repeat on the ToolFactory form to collect options as pairs of names/values.
-- It is clumsy and suitable only for a limited number of options.
-- Galaxyxml generates appropriate select parameters on the generated tool as shown in the select demonstration tool.
+The ToolFactory can be found in the main ToolShed under the `tool-generators` category. It automates much of the work needed to prepare a
+new Galaxy tool using information provided by the script writer,
+on the ToolFactory form. The ToolFactory can wrap any simple script that runs correctly on the linux command line with some small test input samples. This is potentially
+handy for developers new to Galaxy, and for Galaxy users who are capable of correctly scripting on the command line for themselves.
 
-> ### {% icon details %} `select_test` select field demonstration tool generated XML
->>
->>The ToolFactory form section for user configurable command line settings is
->> configured as shown here for the select demonstration
->>
->>![Form to configure an additional parameter as a select](../../images/toolfactory_select_demo_form.png)
-> >
-> >The generated XML is shown below.
-> >
-> >```xml
-> ><tool name="select_test" id="select_test" version="0.01">
-> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
-> >  <!--Created by admin@galaxy.org at 24/01/2021 05:03:21 using the Galaxy Tool Factory.-->
-> >  <description>ToolFactory select demonstration</description>
-> >  <stdio>
-> >    <exit_code range="1:" level="fatal"/>
-> >  </stdio>
-> >  <version_command><![CDATA[echo "0.01"]]></version_command>
-> >  <command><![CDATA[bash
-> >$runme
-> >"$choose"
-> >>
-> >$select_out]]></command>
-> >  <configfiles>
-> >    <configfile name="runme"><![CDATA[
-> >echo "You chose \$1"
-> >]]></configfile>
-> >  </configfiles>
-> >  <inputs>
-> >    <param label="Choose" help="" type="select" name="choose" argument="choose">
-> >      <option value="won">one</option>
-> >      <option value="too">two</option>
-> >      <option value="free">three</option>
-> >    </param>
-> >  </inputs>
-> >  <outputs>
-> >    <data name="select_out" format="txt" label="select_out" hidden="false"/>
-> >  </outputs>
-> >  <tests>
-> >    <test>
-> >      <output name="select_out" value="select_out_sample" compare="diff" lines_diff="0"/>
-> >      <param name="choose" value="won"/>
-> >    </test>
-> >  </tests>
-> >  <help><![CDATA[
-> >
-> >**What it Does**
-> >
-> >Echoes your selection
-> >
-> >
-> >
-> >------
-> >
-> >
-> >Script::
-> >
-> >    echo "You chose $1"
-> >
-> >]]></help>
-> >  <citations>
-> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
-> >  </citations>
-> ></tool>
-> >```
-> > The generated tool form from the select demonstration shows the three options and returns the one selected.
-> >
-> >![Generated form seen by users of the select demonstration tool](../../images/toolfactory_select_test_tool.png)
-{: .details}
-
-
-
-#### The ToolFactory can wrap some Conda packages correctly using a simple wrapper script to work around limitations.
-
-- There are two demonstration tools that use Planemo as a Conda dependency
-- One runs `planemo test...` and the other `planemo lint....` on toolshed archives in a history
-- The linter XML is available below. It's a variant of the Hello example in using a bash script.
-- Instead of echo "Hello $1", it takes an input toolshed archive and writes the planemo lint output to STDOUT with this script pasted into the box:
-
-```
-cp \$1 foo.tar
-tar -xvf foo.tar
-TOOLNAME=`find . -name "*.xml"`
-planemo lint $TOOLNAME >> $2
-```
-
-- The ToolFactory makes exposing these Planemo functions as Galaxy tools fairly easy.
-- Similarly tractable Conda dependencies are also potential candidates for being quickly wrapped as tools
-
-> ### {% icon details %} `planemo lint` demonstration tool generated XML
-> >```xml
-> ><tool name="planemo_lint" id="planemo_lint" version="0.01">
-> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
-> >  <!--Created by planemo@galaxyproject.org at 08/01/2021 17:34:35 using the Galaxy Tool Factory.-->
-> >  <description>Lints a ToolFactory or other xml using planemo</description>
-> >  <requirements>
-> >    <requirement version="0.74.1" type="package">planemo</requirement>
-> >  </requirements>
-> >  <stdio>
-> >    <exit_code range="1:" level="fatal"/>
-> >  </stdio>
-> >  <version_command><![CDATA[echo "0.01"]]></version_command>
-> >  <command><![CDATA[bash
-> >$runme
-> >$input1
-> >$lint_output]]></command>
-> >  <configfiles>
-> >    <configfile name="runme"><![CDATA[
-> >cp \$1 foo.tar
-> >tar -xvf foo.tar
-> >TOOLNAME=`find . -name "*.xml"`
-> >planemo lint \$TOOLNAME >> \$2
-> >]]></configfile>
-> >  </configfiles>
-> >  <inputs>
-> >    <param optional="false" label="Toolshed archive to be linted" help="" format="tgz" multiple="false" type="data" name="input1" argument="input1"/>
-> >  </inputs>
-> >  <outputs>
-> >    <data name="lint_output" format="txt" label="lint_output" hidden="false"/>
-> >  </outputs>
-> >  <tests>
-> >    <test>
-> >      <output name="lint_output" value="lint_output_sample" compare="diff" lines_diff="5"/>
-> >      <param name="input1" value="input1_sample"/>
-> >    </test>
-> >  </tests>
-> >  <help><![CDATA[
-> >
-> >*What it Does**
-> >
-> >planemo lint
-> >
-> >-----
-> >
-> >Script::
-> >
-> >  cp $1 foo.tar
-> >  tar -xvf foo.tar
-> >  TOOLNAME=`find . -name "*.xml"`
-> >  echo "$$$$$TOOLNAME = $TOOLNAME" > $2
-> >  planemo lint $TOOLNAME >> $2
-> >
-> >]></help>
-> ><citations>
-> >  <citation type="doi">10.1093/bioinformatics/bts573</citation>
-> ></citations>
-> >/tool>
->>
->>```
-{: .details}
-
-
-#### Other languages such as Lisp and Prolog scripts in Galaxy.
-
-- Any interpreted language in Conda can be used, as long as it will take a command line script path or read from STDIN.
-- Trivial samples using Lisp and Prolog are included in the demonstration history.
-- They may be old, but they show how it is easy to use any Conda scripting language package in Galaxy for long running applications.
-- The Prolog tool has an inbuilt script. Substitute the sample script for real code and add inputs, user-configurable parameters and outputs to produce a tool wrapping a Prolog script if you ever need one in Galaxy.
-- The Lisp tool will try to execute the selected input text file, hoping it contains a Lisp program like the `hello world` example supplied. This is a terrible idea for a public server and is shown only as a skeletal example of what is possible, not what is sensible.
-
-> ### {% icon details %} `Prolog` and `Lisp` demonstration tools
-> >```xml
-> ><tool name="prolog_demo" id="prolog_demo" version="0.01">
-> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
-> >  <!--Created by admin@galaxy.org at 04/04/2021 17:21:32 using the Galaxy Tool Factory.-->
-> >  <description>Runs a prolog script</description>
-> >  <requirements>
-> >    <requirement version="" type="package">swi-prolog</requirement>
-> >  </requirements>
-> >  <stdio>
-> >    <exit_code range="1:" level="fatal"/>
-> >  </stdio>
-> >  <version_command><![CDATA[echo "0.01"]]></version_command>
-> >  <command><![CDATA[swipl
-> >-q
-> >-g
-> >main
-> >-s
-> >
-> >$runme
-> >>
-> >$prolog_out]]></command>
-> >  <configfiles>
-> >    <configfile name="runme"><![CDATA[
-> >parent(pam,bob).
-> >parent(tom,bob).
-> >parent(tom,liz).
-> >parent(bob,ann).
-> >parent(bob,pat).
-> >parent(pat,jim).
-> >
-> >main :-
-> >    parent(X,jim),
-> >    format('~a is the parent of jim~n', [X]),
-> >    halt.
-> >]]></configfile>
-> >  </configfiles>
-> >  <inputs/>
-> >  <outputs>
-> >    <data name="prolog_out" format="txt" label="prolog_out" hidden="false"/>
-> >  </outputs>
-> >  <tests>
-> >    <test>
-> >      <output name="prolog_out" value="prolog_out_sample" compare="diff" lines_diff="0"/>
-> >    </test>
-> >  </tests>
-> >  <help><![CDATA[
-> >
-> >**What it Does**
-> >
-> >
-> >
-> >Prolog demonstration in the ToolFactory
-> >
-> >
-> >
-> >------
-> >
-> >
-> >Script::
-> >
-> >    parent(pam,bob).
-> >    parent(tom,bob).
-> >    parent(tom,liz).
-> >    parent(bob,ann).
-> >    parent(bob,pat).
-> >    parent(pat,jim).
-> >    main :-
-> >        parent(X,jim),
-> >        format('~a is the parent of jim~n', [X]),
-> >        halt.
-> >
-> >]]></help>
-> >  <citations>
-> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
-> >  </citations>
-> ></tool>
-> >```
-> >
-> > Lisp too!
-> > In this case, the tool takes a lisp script as input
-> >
-> > A lisp expression was typed into the upload tool text box and saved as hello_lisp.txt ```(write-line "Hello, ToolFactory does Lisp!")```.
-> > It or any other lisp script can be used as input to the SBCL Conda dependency.
-> >
-> >```xml
-> ><tool name="lisp_demo" id="lisp_demo" version="0.01">
-> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
-> >  <!--Created by admin@galaxy.org at 04/04/2021 16:38:47 using the Galaxy Tool Factory.-->
-> >  <description>Runs SBCL hello world demonstration</description>
-> >  <requirements>
-> >    <requirement version="" type="package">sbcl</requirement>
-> >  </requirements>
-> >  <stdio>
-> >    <exit_code range="1:" level="fatal"/>
-> >  </stdio>
-> >  <version_command><![CDATA[echo "0.01"]]></version_command>
-> >  <command><![CDATA[sbcl
-> >--script
-> >$script
-> >>
-> >$lisp_out]]></command>
-> >  <inputs>
-> >    <param optional="false" label="SBCL lisp script to execute" help="" format="txt" multiple="false" type="data" name="script" argument="--script"/>
-> >  </inputs>
-> >  <outputs>
-> >    <data name="lisp_out" format="txt" label="lisp_out" hidden="false"/>
-> >  </outputs>
-> >  <tests>
-> >    <test>
-> >      <output name="lisp_out" value="lisp_out_sample" compare="diff" lines_diff="0"/>
-> >      <param name="script" value="script_sample"/>
-> >    </test>
-> >  </tests>
-> >  <help><![CDATA[
-> >
-> >**What it Does**
-> >
-> >Lisp in the ToolFactory
-> >
-> > ]]></help>
-> >  <citations>
-> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
-> >  </citations>
-> ></tool>
-> >```
-{: .details}
-
-
-#### Command over-ride and test over-ride
-
-- There are two simple BWA wrappers based on a Planemo documentation advanced example
-- One uses a command over-ride pasted into the appropriate text box on the ToolFactory form
-- This was based on the one shown in the example it is copied from.
-- It allows templating - `$foo` is interpreted by mako.
-- The pasted over-ride completely replaces the galaxyxml generated ones.
-
-> ### {% icon details %} `bwa_test_command_override` sample - the command override
->> ToolFactory command over-ride section adapted from the Planemo BWA example.
->>
->>```
->> ## Build reference
->>#set $reference_fasta_filename = "localref.fa"
->>ln -s "${ref_file}" "${reference_fasta_filename}" ;
->>bwa index -a is "${reference_fasta_filename}" ;
->>bwa mem -t "\${GALAXY_SLOTS:-4}" -v 1 "${reference_fasta_filename}" "${fastq_input1}"  | samtools view -Sb - > temporary_bam_file.bam ;
->>samtools sort -o "${bwa_test_commover_bam_output}" temporary_bam_file.bam
->>```
-{: .details}
-
-- There is another sample bwa_test tool that achieves the same results using a bash script.
-- It does not need a command over-ride but is more typing because three positional parameters are named for readability.
-- Bash is probably more familiar to many ToolFactory users than mako templating.
-- The effects of templating the command line can usually be achieved using bash or Python at the expense of needing to script the handling of parameters.
-
-> ### {% icon details %} `bwa_test_toolfactory_positional_bash` sample alternative.
->> ToolFactory form bash script to replace above command over-ride section:
->>
->>```
->>REFFILE=$1
->>FASTQ=$2
->>BAMOUT=$3
->>rm -f "refalias"
->>ln -s "$REFFILE" "refalias"
->>bwa index -a is "refalias"
->>bwa mem -t "2"  -v 1 "refalias" "$FASTQ"  > tempsam
->>samtools view -Sb tempsam > temporary_bam_file.bam
->>samtools sort -o "$BAMOUT" temporary_bam_file.bam
->>```
-{: .details}
-
-
-- Most users may never need to use the command over-ride option to access templating for wrapping their own scripts where they control the command line interpretation.
-- Where the generated test is not sufficient, a hand written one can be substituted. Not needed for the simple BWA example.
-- Test or command over-rides are likely to be edge cases more suited to the alternate, more powerful tools.
-
-
----
-
-## Limits and workarounds
+### Limits and workarounds
 
 - The ToolFactory is an automated code generator.
 - No generator can replace manual editing by a skilled developer other than in constrained, simple cases.
@@ -1375,96 +378,34 @@ planemo lint $TOOLNAME >> $2
 - The ToolFactory, if in a persistent form, is a slightly clumsy but useable way to create and maintain Galaxy tools.
 - Tools can have command-override and test-override pasted in as in one of the BWA samples. This can solve some of the limitations. However, if the package requires that kind of complexity, it might be better to prepare the wrapper manually.
 
----
+# Next Steps
 
-## Notes on some commonly reported issues
+This was a very brief introduction to the ToolFactory, we recommend you first explore the history Ross has produced, full of examples of using the ToolFactory. You can re-run these examples to see how they ToolFactory was configured and explore their outputs.
 
-#### First job I submitted in Planemo ToolFactory or the Docker container remains grey or running for a long time - is it broken?
-
-- Check with top or your system monitor - if Conda is running, things are working but it's slow the first time.
-- The first run generally takes a while to install all the needed dependencies.
-- Subsequent runs should start immediately
-- Installing new Conda dependencies also takes time so tools that have new Conda packages will take longer to generate as they must be installed before the tool can be tested.
-- In general, a complete ToolFactory job usually takes less than a minute - planemo has to build and tear down a new Galaxy for generating test results and then
-again for testing properly. Longer if the tool has Conda dependencies....
-
-#### My Rscript generates a strange R error on STDOUT about an invalid operation on a closure called 'args' ?
-
-- Does your code create the args vector at the start of the script with something like `args = commandArgs(trailingOnly=TRUE)` before Rscript tries to access args[1] ?
-
-#### I want to use a collection for outputs but it always passes the test even when the script fails. What gives?
-
-- Unfortunately, collections are tricky to generate automated tests for. The contents are never known until the tool has been run.
-- A manual test override is currently the only way to test collections properly.
-- Automation is hard. If you can help, pull requests are welcomed.
-- Until it's automated, please take a look at the plotter sample.
-- It is recommended that you modify the test over-ride that appears in that sample form. Substitute one
-or more of the file names you expect to see after the collection is filled by your new tool for the `<element.../>` used in the plotter sample's tool test.
-
-
----
-
-
-> ### {% icon details %} Advanced Topic: Running your newly generated tools
+> ### {% icon hands_on %} Hands-on: Steps to use that URL to import the history
 >
-> > - **1. Using the ToolFactory installed directly into a development instance**
-> >     - Requires a private toolshed.
-> >     - DO NOT use any public toolshed for trivial tools
-> >     - You need a local toolshed that the Galaxy server is configured to talk to in `config/tool_sheds_conf.xml`
-> >     - Edit the default tool_shed.yml admin_users email to suit your needs - default is admin@galaxy.org.
-> >     - From the Galaxy root, `sh run_tool_shed.sh` should start one on `localhost:9009`
-> >     - The Galaxy config/tool_shed_conf.xml must include this local toolshed for it to appear on the administrative drop down available toolshed list
-> >     - Register and login as the administrator and create some categories. Tools don't seem to appear without them.
-> >     - Make a new repository, add categories and upload the new toolshed archive
-> >     - In the `Admin` menu, search for the new tool in your local toolshed and then choose `install`
-> >     - If the new tool does not appear in the Galaxy admin interface, you may need to get whoosh reindexing your toolshed. It's a pain.
-> >         - This and other challenges are resolved in the specialised [ToolFactory docker container](https://github.com/fubar2/toolfactory-galaxy-docker)
-> >     - Refresh the tool menu when installation is complete
-> >
-> > - **2. Using Planemo in a virtual environment or GTN docker container**
-> >     - Download the toolshed archive from the Galaxy history where you generated the tool.
-> >     - Unpack the archive into the local directory (or the directory mapped as a volume in Docker) /planemo/mytools directory. It should appear as a single directory containing a test-data subdirectory and the new tool xml.
-> >     - Stop planemo - `^c` will do it somewhat messily
-> >     - Restart planemo with an additional parameter `--extra_tools planemo/mytools/`. This is automatic in the Docker container.
-> >     - The new tool should be ready to test on the tool menu
-> >
-> >
-> > - **3. Uploading generated archives to toolsheds**
-> >
-> >     - **Trivial tools do not belong in the public toolsheds!**
-> >     - *Please do not upload trivial tools to the main ToolShed!*
-> >     - The ToolFactory provides an option to upload a newly built tool to a toolshed. This was designed for the persistent docker option but works in the planemo tool_factory.
-> >     - Please do not abuse it by adding trivial tools to confuse users looking for useful tools.
-> >     - The [ToolFactory docker container](https://github.com/fubar2/toolfactory-galaxy-docker) includes a local toolshed
-> >     - This allows new tools to be automatically installed back into the Galaxy running the ToolFactory.
-> >     - Please run your own local toolshed for trivial tools that are so simple or specialised that they are not likely to ever be useful for other scientists
-> >     - Uploading them to the main ToolShed is unlikely to help anyone
+> 1. Select the`User` tab from the top bar in Galaxy;
+> 2. Select `Histories`
+> 3. Select `Import`
+> 4. Paste the URL into the URL field and press `import`
 >
-{: .details}
+>    ```
+>    https://zenodo.org/record/4686436/files/TF_demo_planemo_april14.tar.gz?download=1
+>    ```
+>
+> 5. When it's complete, select "Switch to history", or find it from the History Switcher {% icon galaxy-history %}.
+>
+{: .hands_on}
 
----
+Then, expand your knowledge further with the Advanced ToolFactory tutorial listed below.
 
-# Your turn! Please help improve this community resource!
-- tell Ross (ross.lazarus@gmail.com) what went well and what could be improved for the benefit of future students
-- This tutorial has had almost no testing yet.
-- It is in pre-review.
-- A PR will soon appear once we get the showstoppers sorted.
-- Please use the fork at https://github.com/fubar2/training-material for issues and pull requests for the nonce.
-- The ToolFactory has had little testing in the present form so expect many bugs
-- If the ToolFactory works well for you, please tell your friends.
-- If you find bugs, please tell me by raising an issue at https://github.com/fubar2/toolfactory, or better, a pull request with the fix :)
-
-
-# Acknowledgements.
+# Acknowledgements
 
 This tutorial is based on the work of thousands of contributers to the Galaxy project over the last 15 years or so. Thanks all!
 
 Special thanks are owed to:
 
-- Marius van den Beek for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.
-- Helena Rasch for
+- ({% include _includes/contributor-badge.html id="mvdbeek" %}) for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.
+- ({% include _includes/contributor-badge.html id="hexylena" %}) for
     - review and revisions to the tutorial and associated code.
     - elegantly generated lint-free XML provided by [galaxyml code](https://github.com/hexylena/galaxyxml)
-
----
-
