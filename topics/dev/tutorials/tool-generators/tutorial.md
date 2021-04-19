@@ -397,7 +397,7 @@ This was a very brief introduction to the ToolFactory, we recommend you first ex
 >
 {: .hands_on}
 
-Then, expand your knowledge further with the Advanced ToolFactory tutorial listed below.
+Then, expand your knowledge further with the [Advanced ToolFactory tutorial]({% link topics/dev/tutorials/tool-generators-advanced/tutorial.md %})
 
 # Acknowledgements
 
