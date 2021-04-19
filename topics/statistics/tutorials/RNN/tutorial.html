@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Introduction to recurrent neural networks (RNN)</title>
+        <title>Deep Learning (Part 2) - Recurrent neural networks (RNN)</title>
         
             <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
 
@@ -23,7 +23,7 @@
         
         
         <meta name="description" content="Statistical Analyses for omics data and machine learning ..." />
-        <meta property="og:title" content="Galaxy Training: Introduction to recurrent neural networks (RNN)" />
+        <meta property="og:title" content="Galaxy Training: Deep Learning (Part 2) - Recurrent neural networks (RNN)" />
         <meta property="og:description" content="Statistical Analyses for omics data and machine learning ..." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
@@ -250,7 +250,7 @@
     "url": "https://galaxyproject.org/teach/gtn/"
   },
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
-  "headline": "Introduction to recurrent neural networks (RNN)",
+  "headline": "Deep Learning (Part 2) - Recurrent neural networks (RNN)",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -285,7 +285,7 @@
   },
   "courseCode": "statistics / RNN / hands-on",
   "learningResourceType": "hands-on tutorial",
-  "name": "Hands-on for 'Introduction to recurrent neural networks (RNN)' tutorial",
+  "name": "Hands-on for 'Deep Learning (Part 2) - Recurrent neural networks (RNN)' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/statistics/tutorials/RNN/tutorial.html",
   "timeRequired": "PT2H",
   "description": "The questions this  addresses are:\n - What is a recurrent neural network (RNN)?\n - What are some applications of RNN?\n\n\\nThe objectives are:\n - Understand the difference between feedforward neural networks (FNN) and RNN\n - Learn various RNN types and architectures\n - Learn how to create a neural network using Galaxy's deep learning tools\n - Solve a sentiment analysis problem on IMDB movie review dataset using RNN in Galaxy\n\n",
@@ -351,7 +351,7 @@
     </script>
 
     <section class="tutorial">
-        <h1 data-toc-skip>Introduction to recurrent neural networks (RNN)</h1>
+        <h1 data-toc-skip>Deep Learning (Part 2) - Recurrent neural networks (RNN)</h1>
         
 
         <div class="contributors-line">By: 
@@ -424,6 +424,10 @@
                         
                     
                         
+                    
+                        
+                    
+                        
                             
                             <li> Introduction to deep learning:
                             
@@ -433,6 +437,28 @@
                                 
                             
                             </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
                         
                     
                         
@@ -478,7 +504,7 @@
 
                 
                     <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/RNN/workflows/" title="Workflows" alt="Introduction to recurrent neural networks (RNN) workflows">
+    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/RNN/workflows/" title="Workflows" alt="Deep Learning (Part 2) - Recurrent neural networks (RNN) workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
     </a>
 
@@ -505,6 +531,10 @@
             </a>
         </li>
     
+    
+        
+    
+        
     
         
     
@@ -601,13 +631,9 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://ml.usegalaxy.eu/" title="Machine Learning Workbench">
             Machine Learning Workbench
         </a>
-        
-    
         
     
         
@@ -679,7 +705,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 23, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 6, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -712,7 +738,7 @@ describe various RNN architectures and solve a sentiment analysis problem using 
 <ol id="markdown-toc">
   <li><a href="#review-of-feedforward-neural-networks-fnn" id="markdown-toc-review-of-feedforward-neural-networks-fnn">Review of feedforward neural networks (FNN)</a>    <ol>
       <li><a href="#single-layer-fnn" id="markdown-toc-single-layer-fnn">Single layer FNN</a></li>
-      <li><a href="#multi-layer-ffn" id="markdown-toc-multi-layer-ffn">Multi-layer FFN</a></li>
+      <li><a href="#multi-layer-fnn" id="markdown-toc-multi-layer-fnn">Multi-layer FNN</a></li>
       <li><a href="#learning-algorithm" id="markdown-toc-learning-algorithm">Learning algorithm</a></li>
     </ol>
   </li>
@@ -758,7 +784,7 @@ functions, please refer to <a class="citation" href="#nwankpaEtAl">Nwankpa <i>et
 
 <figure id="figure-3"><img src="../../images/sigmoid.gif" alt="Mathmatical formula for Sigmoid activation function" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Sigmoid activation function</figcaption></figure>
 
-<h2 id="multi-layer-ffn">Multi-layer FFN</h2>
+<h2 id="multi-layer-fnn">Multi-layer FNN</h2>
 
 <p>Minsky and Papert showed that a single layer FNN cannot solve problems in which the data is not linearly separable,
 such as the XOR problem (<a class="citation" href="#Newell780">Newell 1969</a>). Adding one (or more) hidden layers to FNN enables it to solve problems
@@ -1311,7 +1337,7 @@ classification problem using RNN on IMDB movie reviews dataset.</p>
                                     e.hide();
 
                                     $("#feedback-form").html(`
-                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Introduction to recurrent neural networks (RNN) (Statistics and machine learning)">Loading...</iframe>
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Deep Learning (Part 2) - Recurrent neural networks (RNN) (Statistics and machine learning)">Loading...</iframe>
                                     `)
                                 })
                             });
@@ -1323,7 +1349,7 @@ classification problem using RNN on IMDB movie reviews dataset.</p>
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Kaivan Kamali, 2021 <b>Introduction to recurrent neural networks (RNN) (Galaxy Training Materials)</b>. <a href="/training-material/topics/statistics/tutorials/RNN/tutorial.html">/training-material/topics/statistics/tutorials/RNN/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Kaivan Kamali, 2021 <b>Deep Learning (Part 2) - Recurrent neural networks (RNN) (Galaxy Training Materials)</b>. <a href="/training-material/topics/statistics/tutorials/RNN/tutorial.html">/training-material/topics/statistics/tutorials/RNN/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1339,10 +1365,10 @@ classification problem using RNN on IMDB movie reviews dataset.</p>
                     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{statistics-RNN,
     author = "Kaivan Kamali",
-    title = "Introduction to recurrent neural networks (RNN) (Galaxy Training Materials)",
+    title = "Deep Learning (Part 2) - Recurrent neural networks (RNN) (Galaxy Training Materials)",
     year = "2021",
-    month = "03",
-    day = "23"
+    month = "04",
+    day = "06"
     url = "\url{/training-material/topics/statistics/tutorials/RNN/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
@@ -1379,6 +1405,60 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
 
         
 
+        
+        <blockquote class="agenda follow-up">
+            <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+            <ul>
+                
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/statistics">Statistics and machine learning</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Deep Learning (Part 3) - Convolutional neural networks (CNN):
+                            
+                            
+                                
+                                     <a href="/training-material/topics/statistics/tutorials/CNN/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+        </blockquote>
         
     </section>
 </div>
