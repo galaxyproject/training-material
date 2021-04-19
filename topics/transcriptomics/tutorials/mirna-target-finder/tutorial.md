@@ -641,7 +641,7 @@ Now we continue with the DE genes analysis.
 > >
 > > 1. The total number of genes whose expression differential between the two experimental conditions is 4176.
 > > 2. Of them, 328 are downregulated by the BR treatment and 778 are upregulated.
-> > 3. The most significantly DE gene is AT3G30180 (BR60X2). BR60X2 encodes a cytochrome p450 enzyme that catalyzes the last reaction in the production of brassinolide. It is capable of converting 6-deoxocastasterone into castasterone, a C-6 oxidation, as well as the further conversion of castasterone into brassinolide (source: [TAIR database](https://www.arabidopsis.org/servlets/TairObject?name=at3g30180&type=locus){:target="_blank"}.
+> > 3. The most significantly DE gene is AT3G30180 (BR60X2). BR60X2 encodes a cytochrome p450 enzyme that catalyzes the last reaction in the production of brassinolide. It is capable of converting 6-deoxocastasterone into castasterone, a C-6 oxidation, as well as the further conversion of castasterone into brassinolide (source: [TAIR database](https://www.arabidopsis.org/servlets/TairObject?name=at3g30180&type=locus){:target="_blank"}).
 > {: .solution}
 >
 > > ### {% icon comment %} Comments
