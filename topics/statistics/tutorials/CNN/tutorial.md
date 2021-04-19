@@ -204,9 +204,7 @@ to compare various Machine Learning techniques.
 
 ## Get data
 
-Let's start with a fresh history.
-
-> ### {% icon hands_on %} Hands-on: Create history
+> ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Make sure you have an empty analysis history.
 >
@@ -226,8 +224,7 @@ Let's start with a fresh history.
 >    {: .tip}
 >
 >
-> 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }})
+> 3. Import the files from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
 >    {{ page.zenodo_link }}/files/X_train.tsv
@@ -238,11 +235,11 @@ Let's start with a fresh history.
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
-> 3. Rename the datasets as `X_train`, `y_train`, `X_test`, and `y_test` respectively.
+> 4. Rename the datasets as `X_train`, `y_train`, `X_test`, and `y_test` respectively.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
-> 4. Check that the datatype of all the three datasets is `tabular`.
+> 5. Check that the datatype of all the three datasets is `tabular`.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
