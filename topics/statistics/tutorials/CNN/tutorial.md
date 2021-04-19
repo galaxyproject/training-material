@@ -231,9 +231,9 @@ Let's start with a fresh history.
 >
 >    ```
 >    {{ page.zenodo_link }}/files/X_train.tsv
->    https://zenodo.org/record/<>/files/y_train.tsv
->    https://zenodo.org/record/<>/files/X_test.tsv
->    https://zenodo.org/record/<>/files/y_test.tsv
+>    {{ page.zenodo_link }}/files/y_train.tsv
+>    {{ page.zenodo_link }}/files/X_test.tsv
+>    {{ page.zenodo_link }}/files/y_test.tsv
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
