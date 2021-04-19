@@ -235,7 +235,7 @@ Let's start with a fresh history.
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
->    https://zenodo.org/record/<>/files/X_train.tsv
+>    {{ page.zenodo_link }}/files/X_train.tsv
 >    https://zenodo.org/record/<>/files/y_train.tsv
 >    https://zenodo.org/record/<>/files/X_test.tsv
 >    https://zenodo.org/record/<>/files/y_test.tsv
