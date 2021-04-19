@@ -225,11 +225,6 @@ Let's start with a fresh history.
 >    >
 >    {: .tip}
 >
-{: .hands_on}
-
-### Data upload
-
-> ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }})
