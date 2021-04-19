@@ -387,7 +387,7 @@ Check for Conda and other running processes before assuming it has frozen.
 >- Fortunately, there are a number of local installation alternatives to choose from, depending on how you prefer to work, described in the next section.
 {: .warning}
 
-#### Using a docker container - not persistent - but convenient for testing
+#### 1. Using a docker container - not persistent - but convenient for testing
 
 - if you would like to work through the tutorial using a docker container, use `quay.io/fubar2/toolfactory_tutorial`
 - Assuming docker is running, `docker run -d -p 9090:9090 quay.io/fubar2/toolfactory_tutorial:latest` should start it locally
@@ -476,7 +476,8 @@ Check for Conda and other running processes before assuming it has frozen.
 > > ENTRYPOINT ["/usr/local/bin/planemo" ,"tool_factory", "--galaxy_python_version", "3.9", "--galaxy_root" ,"/galaxy-central", "--port", "9090", "--host", "0.0.0.0", "--conda_prefix", "/planemo/con", "--extra_tools", "/planemo/mytools", "--galaxy_python_version", "3.9"]
 > > ```
 {: .details}
-#### For production: Install the ToolFactory directly into an existing local non-docker development Galaxy
+
+#### 2. For production: Install the ToolFactory directly into an existing local non-docker development Galaxy
 
 - Quick and easy if you already have a throw-away Galaxy available.
 - ToolFactory work will be persistent like any other jobs on that Galaxy.
@@ -512,7 +513,7 @@ See [the tutorial on installing tools from the toolshed](https://galaxyproject.o
 
 ---
 
-#### 2. Alternative recommendation - Install in a virtual environment using the ToolFactory inside Planemo
+#### 3. Alternative recommendation - Install in a virtual environment using the ToolFactory inside Planemo
 
 - This method is recommended for testing the ToolFactory if :
     - you do not already run a development Galaxy
@@ -572,7 +573,7 @@ See [the tutorial on installing tools from the toolshed](https://galaxyproject.o
 
 ---
 
-#### 3. CYOA option - Install the ToolFactory docker container with integrated toolshed
+#### 4. CYOA option - Install the ToolFactory docker container with integrated toolshed
 
 - There is a more complex but integrated solution using the [ToolFactory docker container](https://github.com/fubar2/toolfactory-galaxy-docker).
 - Installation is documented in the respository and bash scripts to build and run the Docker image are provided. They will probably need to be adjusted as described there.
