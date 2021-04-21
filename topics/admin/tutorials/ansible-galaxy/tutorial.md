@@ -977,7 +977,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +3636313438626533633831323239373461373538646635613637
 >    {% endraw %}
 >    ```
->    {: data-commit="Add id_secret to the vault"}
+>    {: data-commit="Add id_secret to the vault" data-comment="The password is password"}
 >
 > 8. Load the secrets in the playbook
 >
