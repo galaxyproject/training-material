@@ -99,9 +99,8 @@ The second method works at any step during the analysis.
 >
 >    - Click on **Rules** and then **Add / Modify Column Definitions**
 >    - Click on **Add Definition** and select:
->      - *"URL"*: Column A
 >      - *"List Identifiers"*: Column B
->      - *"Group Tags"*: Columns C and D
+>      - *"Group Tags"*: Columns C and D (Select Column C first and then add D by clicking on *"... Add another column"*)
 >    - Click **Apply**
 >    - Enter a name for the new collection
 >    - Click **Build**
