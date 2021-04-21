@@ -249,12 +249,12 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 
 > ### {% icon comment %} Comment
 >
-> {% tool [RNA STARsolo](toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a) %} consumes a large amount of memory. During the Smörgåsbord training please use `Human (Homo Sapiens): hg19 chrX` as the reference genome if you follow this tutorial on [usegalaxy.org](https://usegalaxy.org). This performs the mapping only against chromosome X. The full output dataset is available at [zenodo](https://zenodo.org/record/3581213/files/matrix.mtx) and will be the starting point for the next tutorial.
+> {% tool [RNA STARsolo](toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.7a) %} consumes a large amount of memory. During the Smörgåsbord training please use `Human (Homo Sapiens): hg19 chrX` as the reference genome if you follow this tutorial on [usegalaxy.org](https://usegalaxy.org). This performs the mapping only against chromosome X. The full output dataset is available at [zenodo](https://zenodo.org/record/3581213/files/matrix.mtx) and will be the starting point for the next tutorial.
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on
 >
-> {% tool [RNA STARsolo](toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a) %}  with the following parameters:
+> {% tool [RNA STARsolo](toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.7a) %}  with the following parameters:
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
 >            - *"Select reference genome"*: `Human (Homo Sapiens): hg19 Full` or `Human (Homo Sapiens): hg19 chrX`
