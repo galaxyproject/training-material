@@ -740,8 +740,8 @@ Finally, we can access all the information available on the genes identified in 
 
 As additional activity, you can try to repeat the workflow by using the sequences stored in the NCBI GEO database with the accession number `GSE119382`. In that case, we will compare gene expression patterns of mutants overexpressing the brassinosteroid receptor BRL3 under two experimental conditions: control and drought-stress. The required datasets are available in the data library:
 
-> ### {% icon hands_on %} Hands-on: Import data from the Data Library
-> 1. Go into __Shared data__ (top panel) and click on __Data libraries__
+> ### {% icon hands_on %} Hands-on: Import data from the Data Libraries
+> 1. Go into __Shared data__ (top panel) and click on __Data Libraries__
 > 2. In In the search box enter the following identifier: `4710649`
 > 3. Select the following files:
 > ```
