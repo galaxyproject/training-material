@@ -763,7 +763,7 @@ As additional activity, you can try to repeat the workflow by using the sequence
 We will use the upregulated miRNAs obtained in the previous analysis in order to identify potential targets.
 
 ```
-Upregulated miRNA   https://zenodo.org/record/4672228/files/upregulated_miRNA_BR_complete_dataset.fasta
+Upregulated miRNA   https://zenodo.org/record/4710649/files/upregulated_miRNA_BR_complete_dataset.fasta
 ```
 
 # Conclusion
