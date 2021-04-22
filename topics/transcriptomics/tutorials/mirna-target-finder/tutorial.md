@@ -738,7 +738,7 @@ Finally, we can access all the information available on the genes identified in 
 
 # Optional exercise
 
-As additional activity, you can try to repeat the workflow by using the sequences stored in the NCBI GEO database with the accession number `GSE119382`. In that case, we will compare gene expression patterns of mutants overexpressing the brassinosteroid receptor BRL3 under two experimental conditions: control and water-stress. The required datasets are available in the data library:
+As additional activity, you can try to repeat the workflow by using the sequences stored in the NCBI GEO database with the accession number `GSE119382`. In that case, we will compare gene expression patterns of mutants overexpressing the brassinosteroid receptor BRL3 under two experimental conditions: control and drought-stress. The required datasets are available in the data library:
 
 > ### {% icon hands_on %} Hands-on: Import data from the Data Library
 > 1. Go into __Shared data__ (top panel) and click on __Data libraries__
@@ -757,7 +757,7 @@ As additional activity, you can try to repeat the workflow by using the sequence
 > https://zenodo.org/record/4710649/files/SRR7779228_BRL3_mRNA_watered.fastqsanger.gz
 > https://zenodo.org/record/4710649/files/SRR7779229_BRL3_mRNA_watered.fastqsanger.gz
 > ```
-> 9. Finally provide it the name `BRL3 mRNA watered` and push <kbd>Create list</kbd>
+> 9. Finally provide it the name `BRL3 mRNA control` and push <kbd>Create list</kbd>
 {: .hands_on}
 
 We will use the upregulated miRNAs obtained in the previous analysis in order to identify potential targets.
