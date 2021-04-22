@@ -742,7 +742,7 @@ As additional activity, you can try to repeat the workflow by using the sequence
 
 > ### {% icon hands_on %} Hands-on: Import data from the Data Libraries
 > 1. Go into __Shared data__ (top panel) and click on __Data Libraries__
-> 2. In In the search box enter the following identifier: `4710649`
+> 2. In the search box enter the following identifier: `4710649`
 > 3. Select the following files:
 > ```
 > https://zenodo.org/record/4710649/files/SRR7779222_BRL3_mRNA_drought.fastqsanger.gz
