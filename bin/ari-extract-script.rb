@@ -89,36 +89,6 @@ if has_keypoints
 end
 blocks.push(["Thank you for watching!"])
 
-def translate(word)
-  if /^\s+$/.match(word)
-    return word
-  end
-
-  if PUNCTUATION.find_index(word) then
-    return word
-  end
-
-  if WORD_MAP.key?(word) then
-    return WORD_MAP[word]
-  end
-
-  m = /([^A-Za-z0-9]*)([A-Za-z0-9]+)([^A-Za-z0-9]*)(.*)/.match(word)
-
-  if ! m then
-    puts "Error: #{word}"
-    return word
-  end
-
-  if m[2] then
-    fixed = WORD_MAP.fetch(m[2].downcase, m[2])
-  else
-    fixed = m[2]
-  end
-
-  #puts "#{m} ⇒ #{m[1] + fixed + m[3]}"
-  return m[1] + fixed + m[3] + m[4]
-end
-
 # For each block, cleanup first.
 blocks = blocks.map{ |block|
   # Remove the - prefix from each line
