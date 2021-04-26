@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Whole transcriptome analysis of Arabidopsis thaliana'
-zenodo_link: 'https://zenodo.org/record/4606701'
+zenodo_link: 'https://zenodo.org/record/4710649'
 tags:
     - miRNA
     - plants
@@ -106,16 +106,16 @@ The first step of our analysis consists of retrieving the miRNA-Seq datasets fro
 >    - Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >      ```
->      SRR11611349	Control miRNA	https://zenodo.org/record/4606701/files/SRR11611349_MIRNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
->      SRR11611350	Control miRNA	https://zenodo.org/record/4606701/files/SRR11611350_MIRNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
->      SRR11611351	Control miRNA	https://zenodo.org/record/4606701/files/SRR11611351.MIRNASEQ_CTLfastqsanger.gz	fastqsanger.gz
->      SRR11611352	BR treated miRNA	https://zenodo.org/record/4606701/files/SRR11611352_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
->      SRR11611353	BR treated miRNA	https://zenodo.org/record/4606701/files/SRR11611353_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
->      SRR11611354	BR treated miRNA	https://zenodo.org/record/4606701/files/SRR11611354_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
->      SRR1019436	Control mRNA	https://zenodo.org/record/4606701/files/SRR1019436_RNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
->      SRR1019437	Control mRNA	https://zenodo.org/record/4606701/files/SRR1019437_RNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
->      SRR1019438	BR treated mRNA	https://zenodo.org/record/4606701/files/SRR1019438_RNASEQ_BL.fastqsanger.gz	fastqsanger.gz
->      SRR1019439	BR treated mRNA	https://zenodo.org/record/4606701/files/SRR1019439_RNASEQ_BL.fastqsanger.gz	fastqsanger.gz
+>      SRR11611349	Control miRNA	https://zenodo.org/record/4710649/files/SRR11611349_MIRNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
+>      SRR11611350	Control miRNA	https://zenodo.org/record/4710649/files/SRR11611350_MIRNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
+>      SRR11611351	Control miRNA	https://zenodo.org/record/4710649/files/SRR11611351.MIRNASEQ_CTLfastqsanger.gz	fastqsanger.gz
+>      SRR11611352	BR treated miRNA	https://zenodo.org/record/4710649/files/SRR11611352_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
+>      SRR11611353	BR treated miRNA	https://zenodo.org/record/4710649/files/SRR11611353_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
+>      SRR11611354	BR treated miRNA	https://zenodo.org/record/4710649/files/SRR11611354_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
+>      SRR1019436	Control mRNA	https://zenodo.org/record/4710649/files/SRR1019436_RNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
+>      SRR1019437	Control mRNA	https://zenodo.org/record/4710649/files/SRR1019437_RNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
+>      SRR1019438	BR treated mRNA	https://zenodo.org/record/4710649/files/SRR1019438_RNASEQ_BL.fastqsanger.gz	fastqsanger.gz
+>      SRR1019439	BR treated mRNA	https://zenodo.org/record/4710649/files/SRR1019439_RNASEQ_BL.fastqsanger.gz	fastqsanger.gz
 >      ```
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
@@ -145,11 +145,11 @@ Next we will retrieve the remaining datasets.
 >    - Once again, copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >      ```
->      annotation_AtRTD2.gtf	https://zenodo.org/record/4606701/files/annotation_AtRTD2_19April2016.gtf.gz
->      transcriptome.fasta	https://zenodo.org/record/4606701/files/transcriptome_AtRTD2_12April2016.fasta.gz
->      star_miRNA_seq.fasta	https://zenodo.org/record/4606701/files/star_miRNA_seq.fasta
->      mature_miRNA_AT.fasta	https://zenodo.org/record/4606701/files/mature_miRNA_AT.fasta
->      miRNA_stem-loop_seq.fasta	https://zenodo.org/record/4606701/files/miRNA_stem-loop_seq.fasta
+>      annotation_AtRTD2.gtf	https://zenodo.org/record/4710649/files/annotation_AtRTD2_19April2016.gtf.gz
+>      transcriptome.fasta	https://zenodo.org/record/4710649/files/transcriptome_AtRTD2_12April2016.fasta.gz
+>      star_miRNA_seq.fasta	https://zenodo.org/record/4710649/files/star_miRNA_seq.fasta
+>      mature_miRNA_AT.fasta	https://zenodo.org/record/4710649/files/mature_miRNA_AT.fasta
+>      miRNA_stem-loop_seq.fasta	https://zenodo.org/record/4710649/files/miRNA_stem-loop_seq.fasta
 >      ```
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
@@ -738,22 +738,33 @@ Finally, we can access all the information available on the genes identified in 
 
 # Optional exercise
 
-As additional activity, you can try to repeat the workflow by using the sequences stored in the NCBI GEO database with the accession number `GSE119382`. In that case, we will compare gene expression patterns of mutants overexpressing the brassinosteroid receptor BRL3 under two experimental conditions: control and water-stress.
+As additional activity, you can try to repeat the workflow by using the sequences stored in the NCBI GEO database with the accession number `GSE119382`. In that case, we will compare gene expression patterns of mutants overexpressing the brassinosteroid receptor BRL3 under two experimental conditions: control and drought-stress. The required datasets are available in the data library:
 
-```
-SRR7779222	BLR3 Drought mRNA	https://zenodo.org/record/4698605/files/SRR7779222_BRL3_mRNA_drought.fastqsanger.gz	fastqsanger.gz
-SRR7779223	BLR3 Drought mRNA	https://zenodo.org/record/4698605/files/SRR7779223_BRL3_mRNA_drought.fastqsanger.gz	fastqsanger.gz
-SRR7779224	BLR3 Drought mRNA	https://zenodo.org/record/4698605/files/SRR7779224_BRL3_mRNA_drought.fastqsanger.gz	fastqsanger.gz
-SRR7779228	BLR3 Watered mRNA	https://zenodo.org/record/4698605/files/SRR7779228_BRL3_mRNA_drought.fastqsanger.gz	fastqsanger.gz
-SRR7779229	BLR3 Watered mRNA	https://zenodo.org/record/4698605/files/SRR7779229_BRL3_mRNA_drought.fastqsanger.gz	fastqsanger.gz
-```
+> ### {% icon hands_on %} Hands-on: Import data from the Data Libraries
+> 1. Go into __Shared data__ (top panel) and click on __Data Libraries__
+> 2. In the search box enter the following identifier: `4710649`
+> 3. Select the following files:
+> ```
+> https://zenodo.org/record/4710649/files/SRR7779222_BRL3_mRNA_drought.fastqsanger.gz
+> https://zenodo.org/record/4710649/files/SRR7779223_BRL3_mRNA_drought.fastqsanger.gz
+> https://zenodo.org/record/4710649/files/SRR7779224_BRL3_mRNA_drought.fastqsanger.gz
+> ```
+> 4. Click on __Export to History__ and __as a Collection__
+> 5. In the pop-up window press <kbd>Continue</kbd>
+> 6. Provide it the name `BRL3 mRNA drought` and push <kbd>Create list</kbd>
+> 7. Repeat the previous procedure with the remaining files:
+> ```
+> https://zenodo.org/record/4710649/files/SRR7779228_BRL3_mRNA_watered.fastqsanger.gz
+> https://zenodo.org/record/4710649/files/SRR7779229_BRL3_mRNA_watered.fastqsanger.gz
+> ```
+> 9. Finally provide it the name `BRL3 mRNA control` and push <kbd>Create list</kbd>
+{: .hands_on}
 
 We will use the upregulated miRNAs obtained in the previous analysis in order to identify potential targets.
 
 ```
-Upregulated miRNA   https://zenodo.org/record/4672228/files/upregulated_miRNA_BR_complete_dataset.fasta
+Upregulated miRNA   https://zenodo.org/record/4710649/files/upregulated_miRNA_BR_complete_dataset.fasta
 ```
-
 
 # Conclusion
 {:.no_toc}
