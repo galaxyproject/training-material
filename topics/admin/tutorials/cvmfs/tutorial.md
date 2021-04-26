@@ -23,14 +23,14 @@ requirements:
       - ansible-galaxy
 voice:
   id: Olivia
+  lang: en-AU
   neural: true
 ---
 
 > These words come from a transcript of Simon Gladman teaching this course. He
 > is a bioinformatician at the University of Melbourne in Australia and also
 > one of the administrators of Galaxy Australia.
-{ .spoken}
-
+>
 > Hello everybody and welcome back to the Galaxy
 > administrators course. in this session we're going to be talking about
 > reference data in Galaxy using CVMFS.
@@ -46,7 +46,7 @@ voice:
 > with Ansible and hopefully you
 > understand what Ansible is and how
 > it's used.
-{: .spoken data-visual="gtn" data-target="#top" }
+{: .spoken data-visual="gtn" data-target="#top-navbar" }
 
 # Overview
 {:.no_toc}
@@ -65,7 +65,7 @@ From the Cern website:
 > The CernVM File System provides a scalable, reliable and low-maintenance software distribution service. It was developed to assist High Energy Physics (HEP) collaborations to deploy software on the worldwide-distributed computing infrastructure used to run data processing applications. CernVM-FS is implemented as a POSIX read-only file system in user space (a FUSE module). Files and directories are hosted on standard web servers and mounted in the universal namespace /cvmfs."
 >
 > -- [https://cernvm.cern.ch/portal/filesystem](https://cernvm.cern.ch/portal/filesystem)
-{: .quote}
+{: .quote id="cvmfs-quote"}
 
 > All right, just a quick recap. CVMFS or
 > Cern-VMFS is a distributed file system perfectly
@@ -87,7 +87,7 @@ From the Cern website:
 > or coming up soon this week that explains how to
 > use those singularity containers within Galaxy as
 > well. So we're just going to get on with things.
-{: .spoken data-visual="gtn" data-target="self"}
+{: .spoken data-visual="gtn" data-target="#cvmfs-quote"}
 
 A slideshow presentation on this subject can be found [here](slides.html). More details on the usegalaxy.org (Galaxy Main's) reference data setup and CVMFS system can be found [here](https://galaxyproject.org/admin/reference-data-repo/#usegalaxyorg-reference-data)
 
@@ -101,17 +101,19 @@ A slideshow presentation on this subject can be found [here](slides.html). More 
 > The agenda we're going to follow today is: We're going to install and
 > configure Galaxy CVMFS reference data using ansible. We're going to explore
 > the CVMFS installation and then we're going to configure Galaxy to use it.
-{: .spoken data-visual="gtn" data-target="self"}
+{: .spoken data-visual="gtn" data-target="#agenda"}
 
 # Ansible-CVMFS and Galaxy
 
 > There are a few different repositories that um Galaxy project has created and
-> shared with everybody. The first one is the reference data and indices and this
-> is in data.galaxyproject.org. And then we have another one called
-> singularity.galaxyproject.org If you want to have a look at what's in there you
-> can click on the "data cache", and this link here will show you all the things
-> that are inside this data.galaxyproject.org
-{: .spoken data-visual="gtn" data-target="self"}
+> shared with everybody. The first one is the reference data and indices and
+> this is in data.galaxyproject.org. And then we have another one called
+> singularity.galaxyproject.org.
+>
+> If you want to have a look at what's in there you can click on the "data
+> cache", and this link here will show you all the things that are inside this
+> data.galaxyproject.org
+{: .spoken data-visual="gtn" data-target="#ansible-cvmfs-and-galaxy" }
 
 The Galaxy project supports a few CVMFS repositories.
 
@@ -124,7 +126,7 @@ The Galaxy project supports a few CVMFS repositories.
 
 You can browse the contents of `data.galaxyproject.org` at the [datacache](http://datacache.galaxyproject.org/).
 
-## Installing and configuring Galaxy's CVMFS reference data with Ansible
+## Installing and Configuring
 
 Luckily for us, the Galaxy Project has a lot of experience with using and configuring CVMFS and we are going to leverage off that. To get CVMFS working on our Galaxy server, we will use the Ansible role for CVMFS written by the Galaxy Project. Firstly, we need to install the role and then write a playbook for using it.
 
@@ -136,31 +138,39 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 > CVMFS reference data with Ansible. We are going to do some Ansible here and
 > we're going to install CVMFS onto our Galaxy server. Hopefully you all have
 > access to a Galaxy server.
-{: .spoken data-visual="gtn" data-target="self"}
-
+{: .spoken data-visual="gtn" data-target="#installing-and-configuring"}
 
 > Here is mine. And on it I am an admin user and I have access to the admin
 > page. This was done as part of the installation of Galaxy um and hopefully
-> you've installed a tool. I have bwa and bwa-mem installed under Mapping.
-{: .spoken data-visual="galaxy"}
+> you've installed a tool.
+{: .spoken data-visual="galaxy" data-target="/" data-action="goto"}
 
-> And as you can see here I have bwa-mem. So if I click on that you can see
+> I have bwa and bwa-mem installed under Mapping.
+{: .spoken data-visual="galaxy" data-target=".search-input input" data-action="fill" data-value="bwa-mem"}
+
+> So if I click on that you can see
 > here that I have bwa-mem but there are no options available for reference
 > genomes, so we want to fix that. We want to connect to all of Galaxy's
 > pre-built references and so we're going to use Galaxy's CVMFS system to let
 > our own Galaxies connect and get access to all the pre-built caches and
 > everything we already have.
-> <!-- TODO: click on the ref genomes? Clicking? -->
-{: .spoken data-visual="galaxy" data-target="/?tool_id=bwa-mem"}
+{: .spoken data-visual="galaxy" data-target="/?tool_id=bwa_mem" data-action="goto"}
 
 > Okay, so let's get started. If we go back to our
 > tutorial here, it says that we need to install a CVMFS role into our
 > requirements.yml and then add it to our Ansible.
-{: .spoken data-visual="gtn" data-target="self"}
+{: .spoken data-visual="gtn" data-target="#hands_on-hands-on-installing-cvmfs-with-ansible"}
 
 > ### {% icon hands_on %} Hands-on: Installing CVMFS with Ansible
 >
 > 1. In your working directory, add the CVMFS role to your `requirements.yml`
+>
+>    > Well the first thing I need to do is log into my Galaxy machine in the
+>    > terminal.
+>    {: .spoken data-visual="terminal" data-cmd="whoami; hostname -f"}
+>
+>    > Have a look at he contents of this directory and I'll go into galaxy and here we have all of the Ansible scripts that hopefully everybody already has.
+>    {: .spoken data-visual="terminal" data-cmd="ls -al"}
 >
 >    {% raw %}
 >    ```diff
@@ -176,13 +186,6 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```
 >    {: data-commit="Add requirement" data-ref="add-req"}
 >
->    > Well the first thing I need to do is log into my Galaxy machine in the
->    > terminal.
->    {: .spoken data-visual="terminal" data-cmd="whoami; hostname -f"}
->
->    > Have a look at he contents of this directory and I'll go into galaxy and here we have all of the Ansible scripts that hopefully everybody already has.
->    {: .spoken data-visual="terminal" data-cmd="ls -al"}
->
 >    > Okay, so the first thing I'm going to do is I'm going to add the CVMFS
 >    > role to the requirements.yml.
 >    > Edit requirements.yml and we need to add this to the bottom of that file. Copy. Paste. And save it.
@@ -194,7 +197,8 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    > ```
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
->    {: .code-in data-cmd="true" data-ref="req-install"}
+>    > {: data-cmd="true" data-ref="req-install"}
+>    {: .code-in}
 >
 >    > And now install the role into our local Ansible scripts using the
 >    > ansible-galaxy command. And as you can see, it's downloading the CVMFS
@@ -219,7 +223,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    > we want to have installed. And this is an important one - the quota
 >    > limit. This is basically saying that CVMFS will cache some data on your
 >    > local machine and the quota limit is the maximum size of that cache.
->    {: .spoken  data-visual="gtn" data-target="self"}
+>    {: .spoken  data-visual="gtn" data-target="#variables-table"}
 >
 >    | Variable             | Type          | Description                                                                                                                                                                    |
 >    | ----------           | -------       | -------------                                                                                                                                                                  |
@@ -228,6 +232,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    | `cvmfs_server_urls`  | list of dicts | CVMFS server URLs, the value of `CVMFS_SERVER_URL` in `/etc/cvmfs/domain.d/<domain>.conf`.                                                                                     |
 >    | `cvmfs_repositories` | list of dicts | CVMFS repository configurations, `CVMFS_REPOSITORIES` in `/etc/cvmfs/default.local` plus additional settings in `/etc/cvmfs/repositories.d/<repository>/{client,server}.conf`. |
 >    | `cvmfs_quota_limit`  | integer in MB | Size of CVMFS client cache. Default is `4000`.                                                                                                                                 |
+>    {: id="variables-table"}
 >
 >    But, luckily for us, the Galaxy Project CVMFS role has a lot of defaults for these variables which we can use by just setting `galaxy_cvmfs_repos_enabled` to `config-repo`. We will also set the `cvmfs_quota_limit` to something sensible (500MB) as we have relatively small disks on our instances. In a production setup, you should size this appropriately for the client.
 >
@@ -274,7 +279,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    > I'll paste this in. So basically the CVMFS role we want this machine to
 >    > have is client. Which means that we just want it to be able to access
 >    > all of our CVMFS reference data. And then we want we're going to set
->    > this one here to say that, “yes we want to set this up for Galaxy.” And
+>    > this one here to say that, "yes we want to set this up for Galaxy." And
 >    > the config repo is the one that tells CVMFS how to set everything else
 >    > up. And then this is the other important one - the CVMFS quota limit.
 >    > We're setting to 500 megabytes and that's just so we don't fill the root
@@ -312,18 +317,17 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    > ```
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in data-cmd="true" data-ref="run-pb1"}
->
->    > Okay now we just run the playbook. ansible-playbook. We want to run the
->    > Galaxy one.
->    > <!-- TODO: Hmm. This won't line up, adding pauses is unreliable. Not sure how to sync -->
->    > So. All right, we're about to get to the CVMFS repo here. We are
->    > now it's installing the um the apt package of CVMFS. It's going to get
->    > that out of this special um Cern apt repository. Okay, it's installing
->    > it. Hopefully it won't take too long. Okay, now setting up the
->    > repositories. And it's done.
->    {: .spoken data-visual="terminal" data-ref="run-pb1"}
+>    > {: data-cmd="true" data-ref="run-pb1"}
+>    {: .code-in }
 {: .hands_on}
+
+> Okay now we just run the playbook. ansible-playbook. We want to run the
+> Galaxy one. So. All right, we're about to get to the CVMFS repo here. We are
+> now it's installing the um the apt package of CVMFS. It's going to get
+> that out of this special um Cern apt repository. Okay, it's installing
+> it. Hopefully it won't take too long. Okay, now setting up the
+> repositories. And it's done.
+{: .spoken data-visual="terminal" data-ref="run-pb1"}
 
 Congratulations, you've set up CVMFS.
 
@@ -448,6 +452,7 @@ Examples of data include:
 * SAMTools FASTA indexes (`.fai`)
 
 Now all we need to do is tell Galaxy how to find it! This tutorial assumes that you have run the tutorial in the requirements, [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}). The hands-on below will use the Galaxy Project Ansible role to configure everything.
+{: id="spoken-7"}
 
 > So that's what we're going to do now. Okay. So now we're going to try and
 > configure Galaxy to use this CVMFS data. And and to have it so that we can run
@@ -456,11 +461,11 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 > people in the Galaxy community have done a lot of work for reference data for
 > us already.
 >
->  So the way to do this is we're going to edit the groupvars galaxyservers
->  file and we're going to add a variable called tool_data_table_config_path.
->  And then we're going to point it to the two files that are in - there's one
->  in byhand and one in managed.
-{: .spoken  data-visual="gtn" data-target="self"}
+> So the way to do this is we're going to edit the groupvars galaxyservers
+> file and we're going to add a variable called tool_data_table_config_path.
+> And then we're going to point it to the two files that are in - there's one
+> in byhand and one in managed.
+{: .spoken  data-visual="gtn" data-target="#spoken-7"}
 
 
 > If we go into byhand you can see here. And then we're going to location. As
@@ -515,7 +520,8 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    > ```
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in data-cmd="true" data-ref="pb-run2"}
+>    > {: data-cmd="true" data-ref="pb-run2"}
+>    {: .code-in }
 >
 >    > So this time what we're going to do, all we're doing is making a minor change
 >    > to the Galaxy yaml file in the Galaxy config to add that one line and then
@@ -540,14 +546,19 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 
 > Okay let's go and have a look at our Galaxy server and see if bwa can
 > suddenly see all of those - that stuff. All right so we're back on our Galaxy
-> server.
->
-> I'll click on Analyze Data to just to reload the page.
-> <!-- TODO: click? -->
->
-> I'll go back to Mapping and load bwa-mem. And then suddenly, instead of
+> server. I'll click on Analyze Data to just to reload the page.
+{: .spoken data-visual="galaxy" data-target="#analysis a" data-action="click"}
+
+> I'll go back to Mapping
+{: .spoken data-visual="galaxy" data-target=".search-input input" data-action="click"}
+
+>  and load bwa-mem.
+{: .spoken data-visual="galaxy" data-target=".search-input input" data-action="fill" data-value="bwa-mem"}
+
+> And then suddenly, instead of
 > having no options available, you can see here we've got the Bee genome.
->
+{: .spoken data-visual="galaxy" data-target="/?tool_id=bwa_mem" data-action="goto"}
+
 >  Now click on that. Oh look at that, there are lots and lots and lots of
 >  available genomes now including: lots of human, mouse, rat, yeast, all sorts
 >  of things. And in fact if you want to see the list of all the different
@@ -565,8 +576,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >  server has access to all the uh the data the reference data and the tool
 >  indices that the community have built over a number of years and it's super
 >  simple.
-{: .spoken data-visual="galaxy"}
-
+{: .spoken data-visual="galaxy" data-target="s2id_field-uid-12_select a" data-action="click"}
 
 # Common Production Questions
 
@@ -603,7 +613,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 > CVMFS client is smart enough to automatically go to the next closest one and
 > so you won't lose anything. If you're interested in looking at plant data
 > there's a link here for that.
-{: .spoken data-visual="gtn" data-target="self"}
+{: .spoken data-visual="gtn" data-target="#other-aspects" }
 
 ## Development
 
