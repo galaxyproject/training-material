@@ -24,7 +24,8 @@ function logtime(now, start, msg){
 
 (async () => {
 	var start = new Date();
-	const browser = await chromium.launch();
+	// this seems to be ignored? no way to set zoom?
+	const browser = await chromium.launch({args: ["--force-device-scale-factor=1.5"]});
 	const context = await browser.newContext({ignoreHTTPSErrors: true});
 	const page = await context.newPage();
 	await page.setViewportSize({
@@ -39,21 +40,23 @@ function logtime(now, start, msg){
 		if(step.action == 'goto'){
 			await page.goto(step.target);
 			await page.waitForLoadState('networkidle');
+			now = new Date();
+			logtime(now, start, {action: 'gone', 'target': step.target})
 		} else if (step.action == 'scrollTo'){
 			await page.evaluate((step) => document.getElementById(step.target.slice(1)).scrollIntoView({behavior: "smooth"}), step).catch((err) => console.log(err));
-			now = new Date();
-			logtime(now, start, {action: 'scroll', 'target': step.target})
 			await page.waitForTimeout(step.sleep * videoSpeed);
+			now = new Date();
+			logtime(now, start, {action: 'scrolled', 'target': step.target})
 		} else if (step.action == 'fill'){
 			await page.fill(step.target, step.value)
-			now = new Date();
-			logtime(now, start, {action: 'fill', 'target': step.target})
 			await page.waitForTimeout(step.sleep * videoSpeed);
+			now = new Date();
+			logtime(now, start, {action: 'filled', 'target': step.target})
 		} else if (step.action == 'click'){
 			await page.click(step.target)
-			now = new Date();
-			logtime(now, start, {action: 'click', 'target': step.target})
 			await page.waitForTimeout(step.sleep * videoSpeed);
+			now = new Date();
+			logtime(now, start, {action: 'clicked', 'target': step.target})
 		} else {
 			console.log("Unknown step type!", step)
 		}
