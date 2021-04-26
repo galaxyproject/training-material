@@ -52,12 +52,13 @@ testing see the [Reference-based RNA-Seq data analysis]({{ site.baseurl }}/topic
 # Setting group tags using the apply rules tool
 
 There are three ways to set group tags:
-  - Using the rule builder / apply_rules tool
+  - Using the Rule Based Uploader
   - Using the "Tag elements from file" tool
   - Manually adding dataset tags with the prefix `group:`
+  - Using the "Apply Rules" tool
 
 We will use the first two methods in this tutorial.
-The second method works at any step during the analysis.
+The second and third methods work at any step during the analysis.
 
 ## Set group tags during upload
 
