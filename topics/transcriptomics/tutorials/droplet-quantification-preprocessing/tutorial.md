@@ -502,9 +502,6 @@ You should now have `111` barcodes! You now have an annotated expression matrix 
 >
 {: .hands_on}
 
-<<<<<<< Updated upstream
-{% icon congratulations %} Congrats! Your object is ready to for the scanpy pipeline! However, it may be that you want to combine this object with others like it, for instance, maybe you ran 5 samples, and you are starting with 10 FASTQ files...
-=======
 {% icon congratulations %} Congrats! Your object is ready to for the scanpy pipeline! You can can check your work against the [example history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-1---answer-key).
 
 However, it may be that you want to combine this object with others like it, for instance, maybe you ran 5 samples, and you are starting with 10 FASTQ files...
