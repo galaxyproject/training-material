@@ -32,8 +32,11 @@ Grouping datasets in this way has numerous advantages:
 
 While collections can be split in any way, doing so for multi-factor analysis
 quickly becomes cumbersome and messy. An alternative is to label collection
-elements with special group tags. These tags can be displayed in the Tool form,
-allowing users to select subsets of collections.
+elements with special group tags, i.e. tags prefixed by the string `group:`.
+Note that group tags currently do not propagate, i.e. they are not inherited
+to datasets resulting from analyses. These tags can be displayed in the Tool
+form, allowing users to select subsets
+of collections.
 
 This tutorial outlines how to set and use group tags with the DESeq2 tool.
 For a more detailed description and background for differential expression
@@ -51,14 +54,16 @@ testing see the [Reference-based RNA-Seq data analysis]({{ site.baseurl }}/topic
 
 # Setting group tags using the apply rules tool
 
-There are three ways to set group tags:
+There are several ways to set group tags:
   - Using the Rule Based Uploader
   - Using the "Tag elements from file" tool
-  - Manually adding dataset tags with the prefix `group:`
   - Using the "Apply Rules" tool
+  - Manually adding dataset tags with the prefix `group:`
 
 We will use the first two methods in this tutorial.
 The second and third methods work at any step during the analysis.
+Note that the function of the "Apply Rules" tool is (nearly) identical
+to the Rule Based Uploader. 
 
 ## Set group tags during upload
 
@@ -100,6 +105,7 @@ The second and third methods work at any step during the analysis.
 >
 >    - Click on **Rules** and then **Add / Modify Column Definitions**
 >    - Click on **Add Definition** and select:
+>      - *"URL"*: Column A (Note that this option is absent when using the "Apply rules tool")
 >      - *"List Identifiers"*: Column B
 >      - *"Group Tags"*: Columns C and D (Select Column C first and then add D by clicking on *"... Add another column"*)
 >    - Click **Apply**
