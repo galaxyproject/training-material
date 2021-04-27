@@ -49,7 +49,7 @@ We want to give you a comprehensive understanding of how the Galaxy installation
 >
 {: .agenda}
 
-{% snippet snippets/admin-testing.md %}
+{% snippet topics/admin/faqs/admin-testing.md %}
 
 # Playbook Overview
 

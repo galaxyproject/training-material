@@ -56,13 +56,25 @@ class: center, middle, inverse
 {% if page.logo == "GTN" %}
 <img src="{{ site.baseurl }}/{{ site.small_logo }}" alt="Galaxy Training Network" style="height: 40px;"/>
 {% else %}
-<img src="{{ page.logo }}" alt="page logo" style="height: 40px;"/>
+  {% if page.logo contains "://" %}
+<img src="{% if page.small_logo %}{{ page.small_logo }}{% else %}{{ page.logo }}{% endif %}" alt="page logo" style="height: 40px;"/>
+  {% else %}
+<img src="{{ site.baseurl }}/{% if page.small_logo %}{{ page.small_logo }}{% else %}{{ page.logo }}{% endif %}" alt="page logo" style="height: 40px;"/>
+  {% endif %}
 {% endif %}
 </span></div>
 
 ---
 
-<img src="{{ site.baseurl }}/{{ site.logo }}" alt="Galaxy Training Network" style="height: 8em;"/>
+{% if page.logo == "GTN" %}
+<img src="{{ site.baseurl }}/{{ site.logo }}" alt="Galaxy Training Network" class="cover-logo"/>
+{% else %}
+  {% if page.logo contains "://" %}
+<img src="{% if page.logo %}{{ page.logo }}{% else %}{{ page.logo }}{% endif %}" alt="page logo" class="cover-logo" />
+  {% else %}
+<img src="{{ site.baseurl }}/{% if page.logo %}{{ page.logo }}{% else %}{{ page.logo }}{% endif %}" alt="page logo" class="cover-logo" />
+  {% endif %}
+{% endif %}
 
 # {{ title }}
 
@@ -80,8 +92,8 @@ class: center, middle, inverse
 
 Before diving into this slide deck, we recommend you to have a look at:
 
-{% include snippets/display_extra_training_slides.md extra_trainings=topic.requirements %}
-{% include snippets/display_extra_training_slides.md extra_trainings=page.requirements %}
+{% include _includes/display_extra_training_slides.md extra_trainings=topic.requirements %}
+{% include _includes/display_extra_training_slides.md extra_trainings=page.requirements %}
 
 {% endif %}
 
@@ -116,13 +128,17 @@ This material is the result of a collaborative work. Thanks to the [Galaxy Train
 {% if page.logo == "GTN" %}
 <img src="{{ site.baseurl }}/{{ site.logo }}" alt="Galaxy Training Network" style="height: 100px;"/>
 {% else %}
-<img src="{{ page.logo }}" alt="page logo" style="height: 40px;"/>
+  {% if page.logo contains "://" %}
+<img src="{{ page.logo }}" alt="page logo" style="height: 100px;"/>
+  {% else %}
+<img src="{{ site.baseurl }}/{{ page.logo }}" alt="page logo" style="height: 100px;"/>
+  {% endif %}
 {% endif %}
 
 This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
 
 {% if page.layout == "base_slides" %}
-.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/master{{ page.url }})]
+.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/main{{ page.url }})]
 {% endif %}
     </textarea>
 	<script src="{{ "/assets/js/remark-latest.min.js" | prepend: site.baseurl }}" type="text/javascript"></script>

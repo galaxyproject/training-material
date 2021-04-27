@@ -95,9 +95,9 @@ Additionally, to map your reads, you will need a transcriptome to align against 
 >    {{ page.zenodo_link }}/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.fastq
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename {% icon galaxy-pencil %} the datasets
 >
@@ -179,7 +179,7 @@ We now have:
 * transcript/ gene mapping
 * filtered FASTA
 
-We can now run Alevin. In some public instances, Alevin won't show up if you search for it. Instead, you have to click the Single Cell tab at the left and scroll down to the Alevin tool. Tip: If you click the tools from the tutorial option within Galaxy, you'll always have the correct version of the tool! In this case, it is: (Galaxy Version 0.14.1.2+galaxy1) - it should be default. If not, click 'Versions' and choose that version.
+We can now run Alevin. In some public instances, Alevin won't show up if you search for it. Instead, you have to click the Single Cell tab at the left and scroll down to the Alevin tool. Tip: If you click the tools from the tutorial option within Galaxy, you'll always have the correct version of the tool! In this case, it is: (Galaxy Version 1.3.0+galaxy2) - it should be default. If not, click 'Versions' and choose that version.
 
 ![Tutorial option in Galaxy](../../images/wab-tutorial-in-galaxy.png "Tutorial option at the top right in Galaxy")
 
@@ -313,11 +313,11 @@ To use emptyDrops effectively, we need to go back and re-run Alevin, stopping it
 
 > ### {% icon hands_on %} Hands-on: Stopping Alevin from thresholding
 > 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2) %} (Click re-run on the last Alevin output)
->   - *"Optional commands"*
->   - *"keepCBFraction"*: '1' - i.e. keep them all!
->   - *"freqThreshold"*: '3' - This will only remove cell barcodes with a frequency of less than 3, a low bar to pass but useful way of avoiding processing a bunch of almost certainly empty barcodes
+>    - *"Optional commands"*
+>    - *"keepCBFraction"*: '1' - i.e. keep them all!
+>    - *"freqThreshold"*: '3' - This will only remove cell barcodes with a frequency of less than 3, a low bar to pass but useful way of avoiding processing a bunch of almost certainly empty barcodes
 >
->   {% snippet snippets/rerun_tool.md %}
+> {% snippet faqs/galaxy/tools_rerun.md %}
 {: .hands_on}
 
 > ### {% icon question %} Question
@@ -510,7 +510,6 @@ However, it may be that you want to combine this object with others like it, for
 
 This sample was originally one of seven. So to run the other [12 downsampled FASTQ files](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/alevin-tutorial---all-samples---400k), you can use a [workflow](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/pre-processing-with-alevin---part-1-imported-from-uploaded-file)! Note - the N705 subsample is unluckily largely junk reads, so emptyDrops doesn't work. Instead, I processed it with Alevin. The total sample runs fine on emptyDrops of course. All these samples are going to take a while, so go and have several cups of tea... Or, better yet, I have [run them myself](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---input-generation), and plopped them in a [new clean history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---input) for you to import as a fresh history. Alternatively, you can get data with zenodo.
 
-
 ## Data
 
 > ### {% icon hands_on %} Hands-on: Data upload - Combining files
@@ -529,13 +528,14 @@ This sample was originally one of seven. So to run the other [12 downsampled FAS
 >    {{ page.zenodo_link }}/files/N707-400k-AnnData.h5ad
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets
 > 4. Check that the datatype is `h5ad`, otherwise you will need to change each file to `h5ad`!
 >
->    {% snippet snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 {: .hands_on}
 
