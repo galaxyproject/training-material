@@ -502,14 +502,13 @@ You should now have `111` barcodes! You now have an annotated expression matrix 
 >
 {: .hands_on}
 
-{% icon congratulations %} Congrats! Your object is ready to for the scanpy pipeline! You can can check your work against the [example history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-1---answer-key). 
+{% icon congratulations %} Congrats! Your object is ready to for the scanpy pipeline! You can can check your work against the [example history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-1---answer-key).
 
 However, it may be that you want to combine this object with others like it, for instance, maybe you ran 5 samples, and you are starting with 10 FASTQ files...
 
 # Combining FASTQ files
 
 This sample was originally one of seven. So to run the other [12 downsampled FASTQ files](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/alevin-tutorial---all-samples---400k), you can use a [workflow](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/pre-processing-with-alevin---part-1-imported-from-uploaded-file)! Note - the N705 subsample is unluckily largely junk reads, so emptyDrops doesn't work. Instead, I processed it with Alevin. The total sample runs fine on emptyDrops of course. All these samples are going to take a while, so go and have several cups of tea... Or, better yet, I have [run them myself](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---input-generation), and plopped them in a [new clean history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---input) for you to import as a fresh history. Alternatively, you can get data with zenodo.
-
 
 ## Data
 
@@ -520,13 +519,13 @@ This sample was originally one of seven. So to run the other [12 downsampled FAS
 >
 >    ```
 >    {{ page.zenodo_link }}/files/Experimental_Design.tabular
->    {{ page.zenodo_link }}/files/N701-400k-AnnData-h5ad
->    {{ page.zenodo_link }}/files/N702-400k-AnnData-h5ad
->    {{ page.zenodo_link }}/files/N703-400k-AnnData-h5ad
->    {{ page.zenodo_link }}/files/N704-400k-AnnData-h5ad
->    {{ page.zenodo_link }}/files/N705-400k-AnnData-h5ad
->    {{ page.zenodo_link }}/files/N706-400k-AnnData-h5ad
->    {{ page.zenodo_link }}/files/N707-400k-AnnData-h5ad
+>    {{ page.zenodo_link }}/files/N701-400k-AnnData.h5ad
+>    {{ page.zenodo_link }}/files/N702-400k-AnnData.h5ad
+>    {{ page.zenodo_link }}/files/N703-400k-AnnData.h5ad
+>    {{ page.zenodo_link }}/files/N704-400k-AnnData.h5ad
+>    {{ page.zenodo_link }}/files/N705-400k-AnnData.h5ad
+>    {{ page.zenodo_link }}/files/N706-400k-AnnData.h5ad
+>    {{ page.zenodo_link }}/files/N707-400k-AnnData.h5ad
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
