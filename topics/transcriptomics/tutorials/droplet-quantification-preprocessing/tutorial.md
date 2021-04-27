@@ -502,7 +502,13 @@ You should now have `111` barcodes! You now have an annotated expression matrix 
 >
 {: .hands_on}
 
+<<<<<<< Updated upstream
 {% icon congratulations %} Congrats! Your object is ready to for the scanpy pipeline! However, it may be that you want to combine this object with others like it, for instance, maybe you ran 5 samples, and you are starting with 10 FASTQ files...
+=======
+{% icon congratulations %} Congrats! Your object is ready to for the scanpy pipeline! You can can check your work against the [example history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-1---answer-key).
+
+However, it may be that you want to combine this object with others like it, for instance, maybe you ran 5 samples, and you are starting with 10 FASTQ files...
+>>>>>>> Stashed changes
 
 # Combining FASTQ files
 
@@ -518,13 +524,13 @@ This sample was originally one of seven. So to run the other [12 downsampled FAS
 >
 >    ```
 >    {{ page.zenodo_link }}/files/Experimental_Design.tabular
->    {{ page.zenodo_link }}/files/N701-400k-AnnData-h5ad
->    {{ page.zenodo_link }}/files/N702-400k-AnnData-h5ad
->    {{ page.zenodo_link }}/files/N703-400k-AnnData-h5ad
->    {{ page.zenodo_link }}/files/N704-400k-AnnData-h5ad
->    {{ page.zenodo_link }}/files/N705-400k-AnnData-h5ad
->    {{ page.zenodo_link }}/files/N706-400k-AnnData-h5ad
->    {{ page.zenodo_link }}/files/N707-400k-AnnData-h5ad
+>    {{ page.zenodo_link }}/files/N701-400k-AnnData.h5ad
+>    {{ page.zenodo_link }}/files/N702-400k-AnnData.h5ad
+>    {{ page.zenodo_link }}/files/N703-400k-AnnData.h5ad
+>    {{ page.zenodo_link }}/files/N704-400k-AnnData.h5ad
+>    {{ page.zenodo_link }}/files/N705-400k-AnnData.h5ad
+>    {{ page.zenodo_link }}/files/N706-400k-AnnData.h5ad
+>    {{ page.zenodo_link }}/files/N707-400k-AnnData.h5ad
 >    ```
 >
 >    {% snippet snippets/import_via_link.md %}
