@@ -1,19 +1,21 @@
 #!/bin/bash
+OUR_DIR=$(dirname "$0")
 SCRIPT="$1";
 SCRIPT_LOG="$2";
+rm -f "$SCRIPT_LOG"
 # Disable git's paging which can cause a hang
 export GIT_PAGER=cat
 # Prevent pip from shouting everywhere
 pip config --user set global.progress_bar off
 # Setup the demo-magic
-. ./demo-magic/demo-magic.sh -n
+. ${OUR_DIR}/video-term-demo-magic.sh -n
 # Go into right dir
-cd /home/hxr/arbeit/galaxy/git-gat/
+cd /home/hxr/arbeit/galaxy/git-gat/ || exit
 # Hide our demo-magic activation
 clear
 
 OLDIFS="$IFS"
-IFS=$'\n' # bash specific
+IFS=$'\n'
 scriptStart=$(date +%s.%N)
 for line in $(cat $SCRIPT | jq '.[]' -c); do
 	# These aren't fast.
@@ -21,16 +23,28 @@ for line in $(cat $SCRIPT | jq '.[]' -c); do
 	time=$(echo "$line" | jq .time -r)
 	data=$(echo "$line" | jq .data -r)
 
-	# We'll track how long this action takes.
+	# We'll track how long this action takes. This is also where we should start talking.
 	actionStart=$(date +%s.%N)
+	currentTime=$(echo "$actionStart - $scriptStart" | bc -l)
+	echo -e "$currentTime\t$action" >> "$SCRIPT_LOG"
 	if [[ "$action" == "checkout" ]]; then
 		git checkout -q "$data"
 		echo "$(tput bold)Next step: $(git show --pretty=%s | head -n 1)$(tput sgr0)"
+		edited_file_name=$(git show --name-only | tail -n 1)
+		sleep 1
+		# Fake the PS1 to show the command they should use
+		p "nano $edited_file_name"
 		sleep 2
-		echo "File changed: $(git show --name-only | tail -n 1)"
-		sleep 2
-		git show --pretty | tail -n+9
-		sleep 5
+		# Checkout the previous commit so we can show the diff properly
+		git checkout -q "$data^1"
+		# This will pretend to edit it in """"vim""""
+		python3 ${OUR_DIR}/video-diffplayer.py \
+			--diff <(git show "$data") \
+			--nosave \
+			--speed 0.1 \
+			--session-min-length "$time"
+		# But now we actually need to be on the commit we say we are
+		git checkout -q "$data"
 	elif [[ "$action" == "cmd" ]]; then
 		pe "$data"
 	else
@@ -45,13 +59,13 @@ for line in $(cat $SCRIPT | jq '.[]' -c); do
 	actionExpTime=$time
 	# If this took less time than expected,
 
+	echo "$actionObsTime < $actionExpTime"
 	res=$(echo "$actionObsTime < $actionExpTime" |bc -l);
 	if (( res )); then
 		toWait=$(echo "$actionExpTime - $actionObsTime" | bc -l)
 		# Wait to catch up to that value
+		echo "sleep $toWait"
 		sleep "$toWait"
 	fi
-	currentTime=$(echo "$actionEnd - $scriptStart" | bc -l)
-	echo -e "$currentTime\t$action\t$data\t$time" >> "$SCRIPT_LOG"
 done
 IFS="$OLDIFS"

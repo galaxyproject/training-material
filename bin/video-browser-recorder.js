@@ -41,22 +41,22 @@ function logtime(now, start, msg){
 			await page.goto(step.target);
 			await page.waitForLoadState('networkidle');
 			now = new Date();
-			logtime(now, start, {action: 'gone', 'target': step.target})
+			logtime(now, start, 'gone')
 		} else if (step.action == 'scrollTo'){
 			await page.evaluate((step) => document.getElementById(step.target.slice(1)).scrollIntoView({behavior: "smooth"}), step).catch((err) => console.log(err));
+			logtime(now, start, 'scrolled')
 			await page.waitForTimeout(step.sleep * videoSpeed);
 			now = new Date();
-			logtime(now, start, {action: 'scrolled', 'target': step.target})
 		} else if (step.action == 'fill'){
 			await page.fill(step.target, step.value)
+			logtime(now, start, 'filled')
 			await page.waitForTimeout(step.sleep * videoSpeed);
 			now = new Date();
-			logtime(now, start, {action: 'filled', 'target': step.target})
 		} else if (step.action == 'click'){
 			await page.click(step.target)
+			logtime(now, start, 'clicked')
 			await page.waitForTimeout(step.sleep * videoSpeed);
 			now = new Date();
-			logtime(now, start, {action: 'clicked', 'target': step.target})
 		} else {
 			console.log("Unknown step type!", step)
 		}

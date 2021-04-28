@@ -96,7 +96,41 @@ def runningGroup(steps):
     yield c
 
 
-def muxAudioVideo(group, videoin, videoout):
+def calculateSyncing(syncpoints, audio):
+    """
+    # This tracks where in the video precisely (mostly) the audio should start
+    syncpoints = [
+        {"msg": "checkout", "time": 162.959351},
+        {"msg": "cmd", "time": 18899.63733},
+        {"msg": "cmd", "time": 22978.593038},
+    ]
+
+    # Here are the lengths of the audio
+    audio = [
+        {"end": 13.608},
+        {"end": 3.936},
+        {"end": 7.488},
+    ]
+
+    So we need to get back something that has like (the commnd took 18.89
+    seconds to run, but we have 13 seconds of audio, the next clip needs a 5
+    second delay)
+
+    {'end': 13.608} 162.959
+    {'end': 3.936} 5128.677
+    {'end': 7.488}  142.955
+    """
+    if len(syncpoints) != len(audio):
+        print("????? Something odd is going on!")
+
+    since = 0
+    for (aud, syn) in zip(audio, syncpoints):
+        delay = syn["time"] - since
+        yield (int(delay), aud)
+        since = syn["time"] + (aud['mediameta']["end"] * 1000)
+
+
+def muxAudioVideo(group, videoin, videoout, syncpoints):
     # We'll construct a complex ffmpeg filter here.
     #
     # There is incorrect quotation/line breaking in the filter_complex for clarity
@@ -135,20 +169,22 @@ def muxAudioVideo(group, videoin, videoout):
         mux_cmd.extend(["-i", g["mediameta"]["fn"]])
     mux_cmd.append("-filter_complex")
 
+    delayResults = list(calculateSyncing(syncpoints, group))
+
     # The first audio sample must have a correct adelay for when that action happens.
     complex_filter = []
     concat_filter = ""
-    for i2, g in enumerate(group, start=1):
-        complex_filter.append(
-            f"[{i2}:a]atrim=start=0,adelay=20,asetpts=PTS-STARTPTS[a{i2}]"
-        )
+    for i2, (delay, g) in enumerate(delayResults, start=1):
+        filt = f"[{i2}:a]atrim=start=0,adelay={delay},asetpts=PTS-STARTPTS[a{i2}]"
+        print(filt)
+        complex_filter.append(filt)
         concat_filter += f"[a{i2}]"
 
     final_concat = f"{concat_filter}concat=n={len(group)}:v=0:a=1[a]"
     complex_filter.append(final_concat)
     final_complex = ";".join(complex_filter)
     mux_cmd.extend([final_complex, "-map", "0:v", "-map", "[a]", videoout])
-    print(" ".join(mux_cmd))
+    # print(" ".join(mux_cmd))
     subprocess.check_call(mux_cmd)
 
 def recordBrowserPlay(idx):
@@ -168,8 +204,104 @@ def recordBrowserPlay(idx):
     subprocess.check_call(cmd)
 
     # Build the video with sound.
-    muxAudioVideo(group, silent_video_cropped, f"video-{idx}.mp4")
+    muxAudioVideo(group, silent_video_cropped, f"video-{idx}.mp4", resulting_script)
 
+
+def recordGtn(idx, group):
+    # We've got N bits of text
+    __import__("pprint").pprint(group)
+    actions = [
+        {
+            "action": "goto",
+            "target": "http://localhost:4002/training-material/topics/admin/tutorials/cvmfs/tutorial.html",
+        }
+    ]
+    for g in group:
+        actions.append(
+            {
+                "action": "scrollTo",
+                "target": g["data"]["target"],
+                "sleep": g["mediameta"]["end"],
+            }
+        )
+
+    with open(f"play-{idx}.json", "w") as handle:
+        json.dump(actions, handle)
+
+    recordBrowserPlay(idx)
+
+def recordGxy(idx, group):
+    server = "https://gat-1.be.training.galaxyproject.eu"
+    actions = [
+        {
+            "action": "goto",
+            "target": server,
+        }
+    ]
+    for g in group:
+        action = {
+            "action": g['data']['action'],
+            "target": g["data"]["target"],
+            "value": g['data'].get('value', None),
+            "sleep": g["mediameta"]["end"],
+        }
+        if action['action'] == 'goto':
+            action['target'] = server + action['target']
+
+        actions.append(action)
+
+    with open(f"play-{idx}.json", "w") as handle:
+        json.dump(actions, handle)
+
+    recordBrowserPlay(idx)
+
+def recordTerm(idx, group):
+    actions = []
+    for g in group:
+        if 'commit' in g['data']:
+            g['data']['commitId'] = commitMap[g['data']['commit']]
+            del g['code']
+
+        # t = g.get('mediameta', {'end': -1})['end']
+        t = g['mediameta']['end']
+        if 'commitId' in g['data']:
+            actions.append({'action': 'checkout', 'time': t, 'data': g['data']['commitId']})
+        else:
+            if 'cmd' in g:
+                cmd = g['cmd']
+            elif 'cmd' in g['data']:
+                cmd = g['data']['cmd']
+            else:
+                print('????? SOMETHING IS WRONG')
+            actions.append({'action': 'cmd', 'time': t, 'data': cmd})
+    with open(f"play-{idx}.json", "w") as handle:
+        json.dump(actions, handle)
+
+    # Remove any previous versions of the cast.
+    cast_file = f'{GTN_HOME}/play-{idx}.cast'
+    if os.path.exists(cast_file):
+        os.unlink(cast_file)
+
+    # Do the recording
+    innercmd = ['bash', os.path.join(GTN_HOME, 'bin', "video-term-recorder.sh"), f'{GTN_HOME}/play-{idx}.json', f'{GTN_HOME}/play-{idx}.log']
+    cmd = [
+        'asciinema', 'rec', cast_file, '-t', f'Play step {idx}', '-c', ' '.join(innercmd)
+    ]
+    subprocess.check_call(cmd)
+    # Convert to MP4
+    subprocess.check_call(['python', 'asciicast2movie/asciicast2movie.py', f'play-{idx}.cast', f'play-{idx}.mp4'])
+
+    resulting_script = []
+    with open(f'play-{idx}.log', 'r') as handle:
+        for line in handle.readlines():
+            line = line.strip().split('\t')
+            resulting_script.append({
+                'time': float(line[0]) * 1000,
+                'msg': line[1],
+            })
+
+    # Mux with audio
+    muxAudioVideo(group, f'play-{idx}.mp4', f"video-{idx}.mp4", resulting_script)
 
 # Next pass, we'll aggregate things of the same 'type'. This will make
 # recording videos easier because we can more smoothly tween between steps.
@@ -177,92 +309,13 @@ def recordBrowserPlay(idx):
 # the audios for those.
 for idx, group in enumerate(runningGroup(steps)):
     typ = group[0]["data"]["visual"]
+    print(typ, len(group), idx)
     if typ == "gtn":
         continue
-
-        # We've got N bits of text
-        __import__("pprint").pprint(group)
-        actions = [
-            {
-                "action": "goto",
-                "target": "http://localhost:4002/training-material/topics/admin/tutorials/cvmfs/tutorial.html",
-            }
-        ]
-        for g in group:
-            actions.append(
-                {
-                    "action": "scrollTo",
-                    "target": g["data"]["target"],
-                    "sleep": g["mediameta"]["end"],
-                }
-            )
-
-        with open(f"play-{idx}.json", "w") as handle:
-            json.dump(actions, handle)
-
-        recordBrowserPlay(idx)
-
+        recordGtn(idx, group)
     elif typ == "terminal":
-        continue
-
-
-        actions = []
-
-        for g in group:
-            if 'commit' in g['data']:
-                g['data']['commitId'] = commitMap[g['data']['commit']]
-                del g['code']
-
-            # t = g.get('mediameta', {'end': -1})['end']
-            t = g['mediameta']['end']
-            if 'commitId' in g['data']:
-                actions.append({'action': 'checkout', 'time': t, 'data': g['data']['commitId']})
-            else:
-                if 'cmd' in g:
-                    cmd = g['cmd']
-                elif 'cmd' in g['data']:
-                    cmd = g['data']['cmd']
-                else:
-                    print('????? SOMETHING IS WRONG')
-                actions.append({'action': 'cmd', 'time': t, 'data': cmd})
-        with open(f"play-{idx}.json", "w") as handle:
-            json.dump(actions, handle)
-
-        # Do the recording
-        innercmd = ['bash', os.path.join(GTN_HOME, 'bin', "video-term-recorder.js"), f'{GTN_HOME}/play-{idx}.json', f'{GTN_HOME}/play-{idx}.log']
-        cmd = [
-            'asciinema', 'rec', f'{GTN_HOME}/play-{idx}.cast', '-t', f'Play step {idx}', '-c', ' '.join(innercmd)
-        ]
-        subprocess.check_call(cmd, cwd='../automated-gat/')
-        # Convert to MP4
-        subprocess.check_call(['python', 'asciicast2movie/asciicast2movie.py', f'play-{idx}.cast', f'play-{idx}.mp4'])
-        # Mux with audio
-        muxAudioVideo(group, f'play-{idx}.mp4', f"video-{idx}.mp4")
-
+        recordTerm(idx, group)
         sys.exit()
     elif typ == "galaxy":
-        print(typ, len(group), idx)
-
-        server = "https://gat-1.be.training.galaxyproject.eu"
-        actions = [
-            {
-                "action": "goto",
-                "target": server,
-            }
-        ]
-        for g in group:
-            action = {
-                "action": g['data']['action'],
-                "target": g["data"]["target"],
-                "value": g['data'].get('value', None),
-                "sleep": g["mediameta"]["end"],
-            }
-            if action['action'] == 'goto':
-                action['target'] = server + action['target']
-
-            actions.append(action)
-
-        with open(f"play-{idx}.json", "w") as handle:
-            json.dump(actions, handle)
-
-        recordBrowserPlay(idx)
+        continue
+        recordGxy(idx, group)

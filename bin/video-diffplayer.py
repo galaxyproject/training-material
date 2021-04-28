@@ -79,7 +79,7 @@ class Buffer(object):
 
 class EditorGUI(object):
 
-    def __init__(self, stdscr, filename, stream=None, speed=0):
+    def __init__(self, stdscr, filename, stream=None, speed=0, nosave=False, seshlen=0):
         """Create the GUI with curses screen and optional filename to load."""
         self._stdscr = stdscr
 
@@ -97,8 +97,12 @@ class EditorGUI(object):
         self._mode = 'normal'
         self._message = ''
         self._will_exit = False
+        # Extras
         self._char_stream = stream
         self._speed = speed
+        self._nosave = nosave
+        self._seshlen = seshlen
+        self._start_time = time.time()
 
     def _draw_gutter(self, num_start, num_rows, last_line_num):
         """Draw the gutter, and return the gutter width."""
@@ -118,7 +122,7 @@ class EditorGUI(object):
         self._stdscr.erase()
         height = self._stdscr.getmaxyx()[0]
         width = self._stdscr.getmaxyx()[1]
-        self._draw_status_line(0, height - 1, width)
+        # self._draw_status_line(0, height - 1, width)
         self._draw_text(0, 0, width, height - 1)
         self._stdscr.refresh()
 
@@ -368,9 +372,15 @@ class EditorGUI(object):
                 else:
                     # Push write and quit
                     stream.append(ord('q'))
-                    stream.append(ord('w'))
+                    if not self._nosave:
+                        stream.append(ord('w'))
                     # Pause before writing/exiting
-                    time.sleep(2)
+                    now = time.time()
+                    elapsed_time = now - self._start_time
+                    if self._seshlen > elapsed_time:
+                        time.sleep(self._seshlen - elapsed_time)
+                    else:
+                        time.sleep(2)
             else:
                 char = self._stdscr.getch()
 
@@ -427,9 +437,11 @@ def curses_main():
     """Start the curses GUI."""
     parser = argparse.ArgumentParser(description='Process some integers.')
     parser.add_argument('--diff', type=argparse.FileType('r'), help="Path to the diff to apply")
-    parser.add_argument('--file', type=argparse.FileType('r'), help="Path to the diff to apply")
+    parser.add_argument('--file', type=argparse.FileType('r'), help="Path to file to edit (conflicts with --dif)")
     parser.add_argument('--speed', type=float, default=0.01, help="Time to sleep between button presses")
+    parser.add_argument('--session-min-length', type=float, default=0, help="The minimum time of the recording session (for syncing with audio.) Will sleep until this time has been reached.")
     parser.add_argument('--debug', action='store_true', help="Print out character stream and exit")
+    parser.add_argument('--nosave', action='store_true', help="Do not save the output")
     args = parser.parse_args()
 
     stream = None
@@ -507,7 +519,7 @@ def curses_main():
         stream = list(map(ord, stream))
 
     with use_curses() as stdscr:
-        gui = EditorGUI(stdscr, fn, stream=stream, speed=args.speed)
+        gui = EditorGUI(stdscr, fn, stream=stream, speed=args.speed, nosave=args.nosave, seshlen=args.session_min_length)
         gui.main()
 
 
