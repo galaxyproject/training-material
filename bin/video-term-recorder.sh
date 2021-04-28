@@ -59,12 +59,10 @@ for line in $(cat $SCRIPT | jq '.[]' -c); do
 	actionExpTime=$time
 	# If this took less time than expected,
 
-	echo "$actionObsTime < $actionExpTime"
 	res=$(echo "$actionObsTime < $actionExpTime" |bc -l);
 	if (( res )); then
 		toWait=$(echo "$actionExpTime - $actionObsTime" | bc -l)
 		# Wait to catch up to that value
-		echo "sleep $toWait"
 		sleep "$toWait"
 	fi
 done

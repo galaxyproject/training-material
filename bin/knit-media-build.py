@@ -6,7 +6,11 @@ import tempfile
 import json
 import yaml
 import sys
-GTN_HOME = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..')
+
+GTN_URL = "http://localhost:4002/training-material"
+# GTN_URL = "https://training.galaxyproject.org/training-material"
+GXY_URL = "https://gat-1.be.training.galaxyproject.eu"
+GTN_HOME = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..")
 
 data = yaml.safe_load(open(sys.argv[1], "r").read())
 meta = data["meta"]
@@ -64,19 +68,21 @@ for step in steps:
         json.dump(steps, handle)
 
 
-def loadGitGatCommits(tutorial='admin/cvmfs'):
-    subprocess.check_call(['git', 'checkout', 'main'], cwd='/home/hxr/arbeit/galaxy/git-gat/')
-    results = subprocess.check_output(['git', 'log', '--pretty=reference'], cwd='/home/hxr/arbeit/galaxy/git-gat/').decode('utf-8')
-    commits = results.strip().split('\n')[::-1]
+def loadGitGatCommits(tutorial="admin/cvmfs"):
+    subprocess.check_call(["git", "checkout", "main"], cwd="/home/hxr/arbeit/galaxy/git-gat/")
+    results = subprocess.check_output(["git", "log", "--pretty=reference"], cwd="/home/hxr/arbeit/galaxy/git-gat/").decode("utf-8")
+    commits = results.strip().split("\n")[::-1]
     commits = [x for x in commits if tutorial in x]
     commitMap = {}
     for commit in commits:
-        m= re.match('([0-9a-f]+) \(.*: (.*), [0-9-]*\)', commit)
+        m = re.match("([0-9a-f]+) \(.*: (.*), [0-9-]*\)", commit)
         g = m.groups()
         commitMap[g[1]] = g[0]
     return commitMap
 
+
 commitMap = loadGitGatCommits()
+
 
 def runningGroup(steps):
     c = None
@@ -127,7 +133,7 @@ def calculateSyncing(syncpoints, audio):
     for (aud, syn) in zip(audio, syncpoints):
         delay = syn["time"] - since
         yield (int(delay), aud)
-        since = syn["time"] + (aud['mediameta']["end"] * 1000)
+        since = syn["time"] + (aud["mediameta"]["end"] * 1000)
 
 
 def muxAudioVideo(group, videoin, videoout, syncpoints):
@@ -187,11 +193,17 @@ def muxAudioVideo(group, videoin, videoout, syncpoints):
     # print(" ".join(mux_cmd))
     subprocess.check_call(mux_cmd)
 
+
 def recordBrowser(idx):
     # Record our video. It'll start with a blank screen and page loading which we'll need to crop.
     silent_video = f"video-{idx}-silent.mp4"
     silent_video_cropped = f"video-{idx}-cropped.mp4"
-    cmd = ["node", os.path.join(GTN_HOME, 'bin', "video-browser-recorder.js"), f"scene-{idx}.json", silent_video]
+    cmd = [
+        "node",
+        os.path.join(GTN_HOME, "bin", "video-browser-recorder.js"),
+        f"scene-{idx}.json",
+        silent_video,
+    ]
     print(" ".join(cmd))
     resulting_script = json.loads(subprocess.check_output(cmd).decode("utf-8"))
 
@@ -199,7 +211,16 @@ def recordBrowser(idx):
     adelay = resulting_script[0]["time"]
 
     # Crop the 'init' portion of the video.
-    cmd = ['ffmpeg', '-ss', f'{adelay}ms', '-i', silent_video, '-c', 'copy', silent_video_cropped]
+    cmd = [
+        "ffmpeg",
+        "-ss",
+        f"{adelay}ms",
+        "-i",
+        silent_video,
+        "-c",
+        "copy",
+        silent_video_cropped,
+    ]
     print(" ".join(cmd))
     subprocess.check_call(cmd)
 
@@ -209,20 +230,10 @@ def recordBrowser(idx):
 
 def recordGtn(idx, group):
     # We've got N bits of text
-    __import__("pprint").pprint(group)
-    actions = [
-        {
-            "action": "goto",
-            "target": "http://localhost:4002/training-material/topics/admin/tutorials/cvmfs/tutorial.html",
-        }
-    ]
+    actions = [{"action": "goto", "target": GTN_URL + "/topics/admin/tutorials/cvmfs/tutorial.html"}]
     for g in group:
         actions.append(
-            {
-                "action": "scrollTo",
-                "target": g["data"]["target"],
-                "sleep": g["mediameta"]["end"],
-            }
+            {"action": "scrollTo", "target": g["data"]["target"], "sleep": g["mediameta"]["end"],}
         )
 
     with open(f"scene-{idx}.json", "w") as handle:
@@ -230,23 +241,18 @@ def recordGtn(idx, group):
 
     recordBrowser(idx)
 
+
 def recordGxy(idx, group):
-    server = "https://gat-1.be.training.galaxyproject.eu"
-    actions = [
-        {
-            "action": "goto",
-            "target": server,
-        }
-    ]
+    actions = [{"action": "goto", "target": GXY_URL,}]
     for g in group:
         action = {
-            "action": g['data']['action'],
+            "action": g["data"]["action"],
             "target": g["data"]["target"],
-            "value": g['data'].get('value', None),
+            "value": g["data"].get("value", None),
             "sleep": g["mediameta"]["end"],
         }
-        if action['action'] == 'goto':
-            action['target'] = server + action['target']
+        if action["action"] == "goto":
+            action["target"] = GXY_URL + action["target"]
 
         actions.append(action)
 
@@ -255,53 +261,67 @@ def recordGxy(idx, group):
 
     recordBrowser(idx)
 
+
 def recordTerm(idx, group):
     actions = []
     for g in group:
-        if 'commit' in g['data']:
-            g['data']['commitId'] = commitMap[g['data']['commit']]
-            del g['code']
+        if "commit" in g["data"]:
+            g["data"]["commitId"] = commitMap[g["data"]["commit"]]
+            del g["code"]
 
         # t = g.get('mediameta', {'end': -1})['end']
-        t = g['mediameta']['end']
-        if 'commitId' in g['data']:
-            actions.append({'action': 'checkout', 'time': t, 'data': g['data']['commitId']})
+        t = g["mediameta"]["end"]
+        if "commitId" in g["data"]:
+            actions.append({"action": "checkout", "time": t, "data": g["data"]["commitId"]})
         else:
-            if 'cmd' in g:
-                cmd = g['cmd']
-            elif 'cmd' in g['data']:
-                cmd = g['data']['cmd']
+            if "cmd" in g:
+                cmd = g["cmd"]
+            elif "cmd" in g["data"]:
+                cmd = g["data"]["cmd"]
             else:
-                print('????? SOMETHING IS WRONG')
-            actions.append({'action': 'cmd', 'time': t, 'data': cmd})
+                print("????? SOMETHING IS WRONG")
+            actions.append({"action": "cmd", "time": t, "data": cmd})
     with open(f"scene-{idx}.json", "w") as handle:
         json.dump(actions, handle)
 
     # Remove any previous versions of the cast.
-    cast_file = f'{GTN_HOME}/scene-{idx}.cast'
+    cast_file = f"{GTN_HOME}/scene-{idx}.cast"
     if os.path.exists(cast_file):
         os.unlink(cast_file)
 
     # Do the recording
-    innercmd = ['bash', os.path.join(GTN_HOME, 'bin', "video-term-recorder.sh"), f'{GTN_HOME}/scene-{idx}.json', f'{GTN_HOME}/scene-{idx}.log']
+    innercmd = [
+        "bash",
+        os.path.join(GTN_HOME, "bin", "video-term-recorder.sh"),
+        f"{GTN_HOME}/scene-{idx}.json",
+        f"{GTN_HOME}/scene-{idx}.log",
+    ]
     cmd = [
-        'asciinema', 'rec', cast_file, '-t', f'Scene {idx}', '-c', ' '.join(innercmd)
+        "asciinema",
+        "rec",
+        cast_file,
+        "-t",
+        f"Scene {idx}",
+        "-c",
+        " ".join(innercmd),
     ]
     subprocess.check_call(cmd)
     # Convert to MP4
-    subprocess.check_call(['python', 'asciicast2movie/asciicast2movie.py', f'scene-{idx}.cast', f'scene-{idx}.mp4'])
+    subprocess.check_call(
+        ["python", "asciicast2movie/asciicast2movie.py", f"scene-{idx}.cast", f"scene-{idx}.mp4",]
+    )
 
     resulting_script = []
-    with open(f'scene-{idx}.log', 'r') as handle:
+    with open(f"scene-{idx}.log", "r") as handle:
         for line in handle.readlines():
-            line = line.strip().split('\t')
-            resulting_script.append({
-                'time': float(line[0]) * 1000,
-                'msg': line[1],
-            })
+            line = line.strip().split("\t")
+            resulting_script.append(
+                {"time": float(line[0]) * 1000, "msg": line[1],}
+            )
 
     # Mux with audio
-    muxAudioVideo(group, f'scene-{idx}.mp4', f"video-{idx}.mp4", resulting_script)
+    muxAudioVideo(group, f"scene-{idx}.mp4", f"video-{idx}.mp4", resulting_script)
+
 
 # Next pass, we'll aggregate things of the same 'type'. This will make
 # recording videos easier because we can more smoothly tween between steps.
