@@ -650,7 +650,7 @@ Now, there's a small problem here, which is that if you {% icon galaxy-eye %} in
 > ### {% icon hands_on %} Hands-on: Adding in Gene Names
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Final matrix`
+>    - {% icon param-file %} *"Annotated data matrix"*: `Final object`
 >    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
 >
 > This gives us our table of all the possible genes with their names.
