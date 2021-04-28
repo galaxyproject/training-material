@@ -187,11 +187,11 @@ def muxAudioVideo(group, videoin, videoout, syncpoints):
     # print(" ".join(mux_cmd))
     subprocess.check_call(mux_cmd)
 
-def recordBrowserPlay(idx):
+def recordBrowser(idx):
     # Record our video. It'll start with a blank screen and page loading which we'll need to crop.
     silent_video = f"video-{idx}-silent.mp4"
     silent_video_cropped = f"video-{idx}-cropped.mp4"
-    cmd = ["node", os.path.join(GTN_HOME, 'bin', "video-browser-recorder.js"), f"play-{idx}.json", silent_video]
+    cmd = ["node", os.path.join(GTN_HOME, 'bin', "video-browser-recorder.js"), f"scene-{idx}.json", silent_video]
     print(" ".join(cmd))
     resulting_script = json.loads(subprocess.check_output(cmd).decode("utf-8"))
 
@@ -225,10 +225,10 @@ def recordGtn(idx, group):
             }
         )
 
-    with open(f"play-{idx}.json", "w") as handle:
+    with open(f"scene-{idx}.json", "w") as handle:
         json.dump(actions, handle)
 
-    recordBrowserPlay(idx)
+    recordBrowser(idx)
 
 def recordGxy(idx, group):
     server = "https://gat-1.be.training.galaxyproject.eu"
@@ -250,10 +250,10 @@ def recordGxy(idx, group):
 
         actions.append(action)
 
-    with open(f"play-{idx}.json", "w") as handle:
+    with open(f"scene-{idx}.json", "w") as handle:
         json.dump(actions, handle)
 
-    recordBrowserPlay(idx)
+    recordBrowser(idx)
 
 def recordTerm(idx, group):
     actions = []
@@ -274,25 +274,25 @@ def recordTerm(idx, group):
             else:
                 print('????? SOMETHING IS WRONG')
             actions.append({'action': 'cmd', 'time': t, 'data': cmd})
-    with open(f"play-{idx}.json", "w") as handle:
+    with open(f"scene-{idx}.json", "w") as handle:
         json.dump(actions, handle)
 
     # Remove any previous versions of the cast.
-    cast_file = f'{GTN_HOME}/play-{idx}.cast'
+    cast_file = f'{GTN_HOME}/scene-{idx}.cast'
     if os.path.exists(cast_file):
         os.unlink(cast_file)
 
     # Do the recording
-    innercmd = ['bash', os.path.join(GTN_HOME, 'bin', "video-term-recorder.sh"), f'{GTN_HOME}/play-{idx}.json', f'{GTN_HOME}/play-{idx}.log']
+    innercmd = ['bash', os.path.join(GTN_HOME, 'bin', "video-term-recorder.sh"), f'{GTN_HOME}/scene-{idx}.json', f'{GTN_HOME}/scene-{idx}.log']
     cmd = [
-        'asciinema', 'rec', cast_file, '-t', f'Play step {idx}', '-c', ' '.join(innercmd)
+        'asciinema', 'rec', cast_file, '-t', f'Scene {idx}', '-c', ' '.join(innercmd)
     ]
     subprocess.check_call(cmd)
     # Convert to MP4
-    subprocess.check_call(['python', 'asciicast2movie/asciicast2movie.py', f'play-{idx}.cast', f'play-{idx}.mp4'])
+    subprocess.check_call(['python', 'asciicast2movie/asciicast2movie.py', f'scene-{idx}.cast', f'scene-{idx}.mp4'])
 
     resulting_script = []
-    with open(f'play-{idx}.log', 'r') as handle:
+    with open(f'scene-{idx}.log', 'r') as handle:
         for line in handle.readlines():
             line = line.strip().split('\t')
             resulting_script.append({
@@ -301,7 +301,7 @@ def recordTerm(idx, group):
             })
 
     # Mux with audio
-    muxAudioVideo(group, f'play-{idx}.mp4', f"video-{idx}.mp4", resulting_script)
+    muxAudioVideo(group, f'scene-{idx}.mp4', f"video-{idx}.mp4", resulting_script)
 
 # Next pass, we'll aggregate things of the same 'type'. This will make
 # recording videos easier because we can more smoothly tween between steps.
