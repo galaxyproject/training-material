@@ -362,12 +362,14 @@ class EditorGUI(object):
             if automated:
                 if len(stream) > 0:
                     if len(stream) == len(self._char_stream):
+                        # Pause before starting
                         time.sleep(2)
                     char = stream.pop()
                 else:
                     # Push write and quit
                     stream.append(ord('q'))
                     stream.append(ord('w'))
+                    # Pause before writing/exiting
                     time.sleep(2)
             else:
                 char = self._stdscr.getch()
@@ -412,13 +414,13 @@ def use_curses():
 
 
 def move(target, current):
+    n = target - current
     if target > current:
-        return ['j'] * (target - current)
+        return (n, ['j'] * n)
     elif target < current:
-        return ['k'] * (target - current)
+        return (n, ['k'] * n)
     else:
-        return [] # On correct line
-
+        return (n, []) # On correct line
 
 
 def curses_main():
@@ -459,17 +461,20 @@ def curses_main():
                     if args.debug:
                         stream.append(f'CASE A/- move {c.old + line_delta}<-{current_line}')
                     # print(f'removing line {c.old}: {c.line}')
-                    stream.extend(move(c.old + line_delta, current_line))
-                    current_line = c.old + line_delta
+                    (motion_count, motions) = move(c.old + line_delta, current_line)
+                    stream.extend(motions)
+                    current_line += motion_count
 
                     stream.extend(['x'] * len(c.line))
                     stream.extend(['i', chr(CHAR_BKSP), chr(CHAR_ESC), '0'])
                     current_line -= 1
+                    line_delta -= 1
 
                 elif c.old is None:
                     if args.debug:
                         stream.append(f'CASE B/+ move {c.new}<-{current_line}')
-                    stream.extend(move(c.new, current_line))
+                    (motion_count, motions) = move(c.new, current_line)
+                    stream.extend(motions)
                     current_line = c.new
 
                     stream.append('O') # Enter edit mode
