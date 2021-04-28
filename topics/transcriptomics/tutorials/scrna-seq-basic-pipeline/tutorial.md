@@ -113,7 +113,7 @@ You have generated an annotated AnnData object from your raw scRNA-seq fastq fil
 
 {% icon time %} **Top time-saving advice** - turn the 3 **Inspect AnnData** outputs above into a workflow for quick access!
 
-{% snippet faqs/galaxy/workflows_create_new.md %}
+{% snippet faqs/galaxy/workflows_extract_from_history.md %}
 
 ## Generate QC Plots
 
@@ -282,7 +282,7 @@ Now that we've assessed the differences in our samples, we will look at the libr
 > {: .solution}
 {: .question}
 
-## Apply the Thresholds
+## Apply the thresholds
 
 It's now time to apply these thresholds to our data! First, a reminder of how many cells and genes are in your object: `25281 cells` and `35734 genes`. Let's see how that changes each time!
 
@@ -585,7 +585,7 @@ Two major visualisations for this data are tSNE and UMAP. We must calculate the 
 
 {% icon congratulations %} Congratulations! You have prepared your object and created neighborhood coordinates. We can now use those to call some clusters!
 
-# Cell Clusters & Gene Markers
+# Cell clusters & gene markers
 
 > ### {% icon question %} Question
 >
@@ -899,7 +899,7 @@ Be warned - this visualisation tool is a powerful option for exploring your data
 > > 3. Feel free to explore any other similar histories
 {: .details}
 
-{% icon congratulations %} Congratulations! You've made it to the end! You might find this [example control history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/filter-plot-and-explore-single-cell-rna-seq-data---answer-key) helpful to compare with.
+{% icon congratulations %} Congratulations! You've made it to the end! You might find this [example control history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/filter-plot-and-explore-single-cell-rna-seq-data---answer-key) helpful to compare with, or this [workflow](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/filter-plot-and-explore-single-cell-rna-seq-data).
 
 In this tutorial, you moved from technical processing to biological exploration. By analysing real data - both the exciting and the messy! - you have, hopefully, experienced what it's like to analyse and question a dataset, potentially without clear cut-offs or clear answers. If you were working in a group, you each analysed the data in different ways, and most likely found similar insights. One of the biggest problems in analysing scRNA-seq is the lack of a clearly defined pathway or parameters. You have to make the best call you can as you move through your analysis, and ultimately, when in doubt, try it multiple ways and see what happens!
 
