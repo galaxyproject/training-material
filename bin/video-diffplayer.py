@@ -361,6 +361,8 @@ class EditorGUI(object):
             time.sleep(self._speed)
             if automated:
                 if len(stream) > 0:
+                    if len(stream) == len(self._char_stream):
+                        time.sleep(2)
                     char = stream.pop()
                 else:
                     # Push write and quit
@@ -423,13 +425,16 @@ def curses_main():
     """Start the curses GUI."""
     parser = argparse.ArgumentParser(description='Process some integers.')
     parser.add_argument('--diff', type=argparse.FileType('r'), help="Path to the diff to apply")
+    parser.add_argument('--file', type=argparse.FileType('r'), help="Path to the diff to apply")
     parser.add_argument('--speed', type=float, default=0.01, help="Time to sleep between button presses")
     parser.add_argument('--debug', action='store_true', help="Print out character stream and exit")
+    args = parser.parse_args()
 
     stream = None
     fn = None
+    if args.file:
+        fn = args.file.name
 
-    args = parser.parse_args()
     if args.diff:
         p = list(whatthepatch.parse_patch(args.diff.read()))
 
@@ -448,24 +453,22 @@ def curses_main():
                 os.makedirs(directory, exist_ok=True)
 
             current_line = 1
-            # We add and remove lines over the course of editing. This can cause c.old to get out of sync from where it should be.
             line_delta = 0
             for c in changes:
                 if c.new is None:
                     if args.debug:
-                        stream.append('CASE A/-')
+                        stream.append(f'CASE A/- move {c.old + line_delta}<-{current_line}')
                     # print(f'removing line {c.old}: {c.line}')
                     stream.extend(move(c.old + line_delta, current_line))
-                    current_line = c.old
+                    current_line = c.old + line_delta
 
                     stream.extend(['x'] * len(c.line))
                     stream.extend(['i', chr(CHAR_BKSP), chr(CHAR_ESC), '0'])
-                    # This should finish removing the line
-                    line_delta -= 1
+                    current_line -= 1
 
                 elif c.old is None:
                     if args.debug:
-                        stream.append('CASE B/+')
+                        stream.append(f'CASE B/+ move {c.new}<-{current_line}')
                     stream.extend(move(c.new, current_line))
                     current_line = c.new
 
@@ -473,8 +476,8 @@ def curses_main():
                     stream.extend(c.line)
                     stream.append(chr(CHAR_ESC)) # Return to normal
                     stream.append('0') # Ensure at start of line
-                    line_delta += 1
                 else:
+                    line_delta = c.new - c.old
                     # if args.debug:
                         # stream.append('CASE C/=')
                     # stream.extend(move(c.new, current_line))
