@@ -655,7 +655,7 @@ Now, there's a small problem here, which is that if you {% icon galaxy-eye %} in
 >
 > This gives us our table of all the possible genes with their names.
 >
-> 2. {% tool [Join two Datasets side by side on a specified field](tool_id=join1) %} with the following parameters:
+> 2. {% tool [Join two Datasets side by side on a specified field](join1) %} with the following parameters:
 >    - {% icon param-file %} *"Join"*: {% icon param-files %} Select multiple files: `Markers - cluster` and `Markers - genotype`
 >    - *"using column"*: `Column: 4`
 >    - {% icon param-file %} *"with"*: `var` (output of **Inspect AnnData** {% icon tool %})
@@ -667,7 +667,7 @@ Now, there's a small problem here, which is that if you {% icon galaxy-eye %} in
 >
 > We have lots of extra information we don't need in our marker gene tables, so...
 >
-> 3. {% tool [Cut columns from a table](tool_id=Cut1) %} with the following parameters:
+> 3. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1,c2,c3,c4,c11,c5,c6,c7,c8`
 >    - {% icon param-file %} *"From"*: {% icon param-files %} Select multiple files: `out_file1` and `output_file2` (outputs of **Join two Datasets** {% icon tool %})
 >
@@ -870,7 +870,7 @@ Before we leave you to explore the unknown, you might have noticed that the abov
 
 > ### {% icon hands_on %} Hands-on: Cellxgene
 >
-> 1. {% tool [Interactive CellXgene Environment](tool_id=interactive_tool_cellxgene) %} with the following parameters:
+> 1. {% tool [Interactive CellXgene Environment](interactive_tool_cellxgene) %} with the following parameters:
 >    - {% icon param-file %} *"Concatenate dataset"*: `Final cell annotated object`
 >
 > 2. When ready, you will see a message
