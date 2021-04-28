@@ -613,7 +613,7 @@ Finally, let's identify clusters! Unfortunately, it's not as majestic as biologi
 > ### {% icon hands_on %} Hands-on: FindClusters
 >
 > 1. {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.6.0+galaxy4) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy ComputeGraph** {% icon tool %})
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunUMAP** {% icon tool %})
 >    - *"Use programme defaults"*: {% icon history-share %} `No`
 >    - *"Resolution, high value for more and smaller clusters"*: `0.6`
 {: .hands_on}
