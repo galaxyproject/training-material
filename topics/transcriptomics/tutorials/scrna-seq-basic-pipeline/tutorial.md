@@ -113,7 +113,7 @@ You have generated an annotated AnnData object from your raw scRNA-seq fastq fil
 
 {% icon time %} **Top time-saving advice** - turn the 3 **Inspect AnnData** outputs above into a workflow for quick access!
 
-{% snippet faqs/galaxy/workflows_create_new.md %}
+{% snippet faqs/galaxy/workflows_extract_from_history.md %}
 
 ## Generate QC Plots
 
@@ -282,7 +282,7 @@ Now that we've assessed the differences in our samples, we will look at the libr
 > {: .solution}
 {: .question}
 
-## Apply the Thresholds
+## Apply the thresholds
 
 It's now time to apply these thresholds to our data! First, a reminder of how many cells and genes are in your object: `25281 cells` and `35734 genes`. Let's see how that changes each time!
 
@@ -585,7 +585,7 @@ Two major visualisations for this data are tSNE and UMAP. We must calculate the 
 
 {% icon congratulations %} Congratulations! You have prepared your object and created neighborhood coordinates. We can now use those to call some clusters!
 
-# Cell Clusters & Gene Markers
+# Cell clusters & gene markers
 
 > ### {% icon question %} Question
 >

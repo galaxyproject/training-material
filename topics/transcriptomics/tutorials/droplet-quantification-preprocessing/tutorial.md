@@ -97,8 +97,6 @@ Additionally, to map your reads, you will need a transcriptome to align against 
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->
 > 3. Rename {% icon galaxy-pencil %} the datasets
 >
 {: .hands_on}
