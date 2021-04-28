@@ -47,7 +47,7 @@ Prokka requires assembled contigs.
 >
 > 1. Make sure you have an empty analysis history. Give it a name.
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the following files from [Zenodo](https://doi.org/10.5281/zenodo.1156405) or from the shared data library
 >
@@ -55,8 +55,8 @@ Prokka requires assembled contigs.
 >    https://zenodo.org/record/1156405/files/contigs.fasta
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
 

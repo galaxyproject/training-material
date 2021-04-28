@@ -106,7 +106,7 @@ def translate(word)
   m = /([^A-Za-z0-9]*)([A-Za-z0-9]+)([^A-Za-z0-9]*)(.*)/.match(word)
 
   if ! m then
-    puts "Error: #{word}"
+    STDERR.puts "Error: #{word}"
     return word
   end
 

@@ -149,11 +149,11 @@ The barcodes in the R1 FASTQ data are checked against these known cell barcodes 
 >
 > 1. Create a new history and rename it (e.g. scRNA-seq 10X dataset tutorial)
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 1. Import the sub-sampled FASTQ data from [`Zenodo`](https://zenodo.org/record/3457880) or from the data library (ask your instructor)
 >
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    ```
 >    https://zenodo.org/record/3457880/files/subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz
@@ -162,7 +162,7 @@ The barcodes in the R1 FASTQ data are checked against these known cell barcodes 
 >    https://zenodo.org/record/3457880/files/subset_pbmc_1k_v3_S1_L002_R2_001.fastq.gz
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Import the Gene Annotations and Cell Barcodes from [`Zenodo`](https://zenodo.org/record/3457880) or from the data library (ask your instructor)
 >
@@ -266,13 +266,14 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 >        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: Multi-select `L001_R2_001` and `L002_R2_001` using the Ctrl key.
 >        - {% icon param-file %} *"RNA-Seq Cell Barcode Whitelist"*: `3M-february-2018.txt.gz`
 >        - *"Configure Chemistry Options"*: `Cell Ranger v3`
->        - *"UMI deduplication (collapsing) algorithm"*: `All`
->        - *"Matching the Cell Barcodes to the WhiteList"*: `Multiple matches (CellRanger 3)`
+>        - *"UMI deduplication (collapsing) algorithm"*: `CellRanger2-4 algorithm`
+>        - *"Matching the Cell Barcodes to the WhiteList"*: `Multiple matches (CellRanger 2)`
 >    - Under *"Advanced Settings"*:
 >        - *"Strandedness of Library"*: `Forward`
 >        - *"Collect UMI counts for these genomic features"*: `Gene: Count reads matching the Gene Transcript`
->        - *"Type of UMI filtering"*: `Remove lower-count UMIs that map to more than one gene, matching CellRanger 3.0.0`
+>        - *"Type of UMI filtering"*: `Remove UMIs with N and homopolymers (similar to CellRanger 2.2.0)`
 >        - *"Cell filter type and parameters"*: `Do not filter`
+>        - *"Field 3 in the Genes output"*: `Gene Expression`
 >
 >    > ### {% icon comment %} Comment
 >    >
