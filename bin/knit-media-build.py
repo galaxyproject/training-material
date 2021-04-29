@@ -9,8 +9,10 @@ import sys
 
 GTN_URL = "http://localhost:4002/training-material"
 # GTN_URL = "https://training.galaxyproject.org/training-material"
+ANSIBLE_HOST_OVERRIDE = "gat-1.be.training.galaxyproject.eu"
 GXY_URL = "https://gat-1.be.training.galaxyproject.eu"
 GTN_HOME = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..")
+GIT_GAT = '/home/ubuntu/galaxy/'
 
 data = yaml.safe_load(open(sys.argv[1], "r").read())
 meta = data["meta"]
@@ -69,8 +71,9 @@ for step in steps:
 
 
 def loadGitGatCommits(tutorial="admin/cvmfs"):
-    subprocess.check_call(["git", "checkout", "main"], cwd="/home/hxr/arbeit/galaxy/git-gat/")
-    results = subprocess.check_output(["git", "log", "--pretty=reference"], cwd="/home/hxr/arbeit/galaxy/git-gat/").decode("utf-8")
+    subprocess.check_call(["git", "stash"], cwd=GIT_GAT)
+    subprocess.check_call(["git", "checkout", "main"], cwd=GIT_GAT)
+    results = subprocess.check_output(["git", "log", "--pretty=reference"], cwd=GIT_GAT).decode("utf-8")
     commits = results.strip().split("\n")[::-1]
     commits = [x for x in commits if tutorial in x]
     commitMap = {}
@@ -196,10 +199,13 @@ def muxAudioVideo(group, videoin, videoout, syncpoints):
 
 def recordBrowser(idx):
     # Record our video. It'll start with a blank screen and page loading which we'll need to crop.
+    if os.path.exists(f"video-{idx}.mp4"):
+        return
+
     silent_video = f"video-{idx}-silent.mp4"
     silent_video_cropped = f"video-{idx}-cropped.mp4"
     cmd = [
-        "node",
+        "/srv/galaxy/venv/bin/node",
         os.path.join(GTN_HOME, "bin", "video-browser-recorder.js"),
         f"scene-{idx}.json",
         silent_video,
@@ -225,7 +231,7 @@ def recordBrowser(idx):
     subprocess.check_call(cmd)
 
     # Build the video with sound.
-    muxAudioVideo(group, silent_video_cropped, f"video-{idx}.mp4", resulting_script)
+    muxAudioVideo(group, silent_video_cropped, f"video-{idx}.mp4", resulting_script[1:])
 
 
 def recordGtn(idx, group):
@@ -263,6 +269,9 @@ def recordGxy(idx, group):
 
 
 def recordTerm(idx, group):
+    if os.path.exists(f"video-{idx}.mp4"):
+        return
+
     actions = []
     for g in group:
         if "commit" in g["data"]:
@@ -295,6 +304,8 @@ def recordTerm(idx, group):
         os.path.join(GTN_HOME, "bin", "video-term-recorder.sh"),
         f"{GTN_HOME}/scene-{idx}.json",
         f"{GTN_HOME}/scene-{idx}.log",
+        ANSIBLE_HOST_OVERRIDE,
+        GIT_GAT,
     ]
     cmd = [
         "asciinema",
@@ -305,6 +316,7 @@ def recordTerm(idx, group):
         "-c",
         " ".join(innercmd),
     ]
+    print(' '.join(cmd))
     subprocess.check_call(cmd)
     # Convert to MP4
     subprocess.check_call(
@@ -335,7 +347,6 @@ for idx, group in enumerate(runningGroup(steps)):
         recordGtn(idx, group)
     elif typ == "terminal":
         recordTerm(idx, group)
-        sys.exit()
     elif typ == "galaxy":
-        continue
         recordGxy(idx, group)
+    input("Continue,....")

@@ -2,6 +2,8 @@
 OUR_DIR=$(dirname "$0")
 SCRIPT="$1";
 SCRIPT_LOG="$2";
+ANSIBLE_HOST_OVERRIDE="$3";
+GIT_GAT="$4";
 rm -f "$SCRIPT_LOG"
 # Disable git's paging which can cause a hang
 export GIT_PAGER=cat
@@ -10,7 +12,7 @@ pip config --user set global.progress_bar off
 # Setup the demo-magic
 . ${OUR_DIR}/video-term-demo-magic.sh -n
 # Go into right dir
-cd /home/hxr/arbeit/galaxy/git-gat/ || exit
+cd ${GIT_GAT} || exit
 # Hide our demo-magic activation
 clear
 
@@ -46,7 +48,10 @@ for line in $(cat $SCRIPT | jq '.[]' -c); do
 		# But now we actually need to be on the commit we say we are
 		git checkout -q "$data"
 	elif [[ "$action" == "cmd" ]]; then
+		sed -i "s/gat.*.galaxyproject.eu/${ANSIBLE_HOST_OVERRIDE}/" ${GIT_GAT}/hosts
+		echo 'password' > ${GIT_GAT}/.vault-password.txt
 		pe "$data"
+		git checkout -q -- hosts 2>/dev/null
 	else
 		echo "???? ERROR"
 		exit 42

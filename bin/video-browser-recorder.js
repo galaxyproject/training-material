@@ -44,21 +44,22 @@ function logtime(now, start, msg){
 			logtime(now, start, 'gone')
 		} else if (step.action == 'scrollTo'){
 			await page.evaluate((step) => document.getElementById(step.target.slice(1)).scrollIntoView({behavior: "smooth"}), step).catch((err) => console.log(err));
-			logtime(now, start, 'scrolled')
-			await page.waitForTimeout(step.sleep * videoSpeed);
 			now = new Date();
+			logtime(now, start, 'scrolled')
 		} else if (step.action == 'fill'){
 			await page.fill(step.target, step.value)
-			logtime(now, start, 'filled')
-			await page.waitForTimeout(step.sleep * videoSpeed);
 			now = new Date();
+			logtime(now, start, 'filled')
 		} else if (step.action == 'click'){
 			await page.click(step.target)
-			logtime(now, start, 'clicked')
-			await page.waitForTimeout(step.sleep * videoSpeed);
 			now = new Date();
+			logtime(now, start, 'clicked')
 		} else {
 			console.log("Unknown step type!", step)
+		}
+
+		if(step.sleep){
+			await page.waitForTimeout(step.sleep * videoSpeed);
 		}
 	}
 	// Sleep an extra 1.5s at the end.
