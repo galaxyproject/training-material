@@ -342,7 +342,7 @@ Congratulations, you've set up CVMFS.
 {: .spoken data-visual="terminal" data-cmd="cd /"}
 
 > Do an ll. You can see here there's a directory here called cvmfs.
-{: .spoken data-visual="terminal" data-cmd="ll"}
+{: .spoken data-visual="terminal" data-cmd="ls -al"}
 
 >  So we'll go in there and have a look and see what's in there.
 {: .spoken data-visual="terminal" data-cmd="cd /cvmfs"}
@@ -353,7 +353,7 @@ Congratulations, you've set up CVMFS.
 > particular thing we're looking for. And so what we're going to do here is I'm
 > going to go: cd data.galaxyproject.org, because I know that's one of the one
 > of the repositories that should have been installed.
-{: .spoken data-visual="terminal" data-cmd="ll"}
+{: .spoken data-visual="terminal" data-cmd="ls -al"}
 
 > And when I do that, autofs is automatically going to mount it for me on the
 > fly. Like that.
@@ -361,7 +361,7 @@ Congratulations, you've set up CVMFS.
 
 > And now I've cd'd into it and if I do an ll, you can see here I've got some
 > things in here now. I've got byhand and managed.
-{: .spoken data-visual="terminal" data-cmd="ll"}
+{: .spoken data-visual="terminal" data-cmd="ls -al"}
 
 >  If I go into byhand you can see here that I have quite a lot of different
 >  genomes and their tool indices.
@@ -472,7 +472,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 > you can see in here, are all the lock files, but you'll also see there's an
 > xml file here called tool_data_table_conf xml and we're going to point Galaxy
 > at this file and there's another one in the same position in managed.
-{: .spoken data-visual="terminal" data-cmd="ls location;"}
+{: .spoken data-visual="terminal" data-cmd="cd /cvmfs/data.galaxyproject.org/byhand;  ls location;"}
 
 > And you can see here there's another one in managed there. And so we're going to
 > add both of these files to our Galaxy configuration and then Galaxy will be
