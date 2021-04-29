@@ -718,10 +718,8 @@ In order to visualise a specific region (e.g. the gene *RAC2*), we can either us
 >                - *"Plot title"*: `Coverage from MACS2 (extended +/-100bp)`
 >                - {% icon param-file %} *"Track file(s) bigwig format"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %} called `MACS2 bigwig`.
 >                - *"Color of track"*: Select the color of your choice
->                - *"Use a different color for negative values"*: `No`
 >                - *"Minimum value"*: `0`
 >                - *"height"*: `5`
->                - *"Choose style of the plot."*: `fill`
 >                - *"Show visualization of data range"*: `Yes`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `NarrowPeak track`
@@ -734,14 +732,11 @@ In order to visualise a specific region (e.g. the gene *RAC2*), we can either us
 >            - *"Choose style of the track"*: `Gene track / Bed track`
 >                - *"Plot title"*: `Genes`
 >                - {% icon param-file %} *"Track file(s) bed or gtf format"*: `chr22 genes`
->                - *"Define color:"*: `manually`
 >                - *"Color of track"*: Select the color of your choice
->                - *"Define border color:"*: `manually`
 >                - *"height"*: `5`
 >                - *"Plot labels"*: `yes`
 >                    - *"Put all labels inside the plotted region"*: `Yes`
 >                    - *"Allow to put labels in the right margin"*: `Yes`
->                - *"Bed style"*: `flybase (blocks with arrow at extremities)`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `NarrowPeak track`
 >                - *"Plot title"*: `CTCF peaks`
