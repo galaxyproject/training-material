@@ -882,7 +882,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
 >    +  uwsgi:
->    +    http: 0.0.0.0:8080
+>    +    http: 0.0.0.0:5000
 >    +    buffer-size: 16384
 >    +    processes: 1
 >    +    threads: 4
@@ -1521,7 +1521,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >     farm: job-handlers:1,2
 >    >     hook-master-start: unix_signal:2 gracefully_kill_them_all
 >    >     hook-master-start: unix_signal:15 gracefully_kill_them_all
->    >     http: 0.0.0.0:8080
+>    >     http: 0.0.0.0:5000
 >    >     master: true
 >    >     module: galaxy.webapps.galaxy.buildapp:uwsgi_app()
 >    >     mule: lib/galaxy/main.py
@@ -1584,7 +1584,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 > 3. Change directory into `/srv/galaxy/server`
 > 4. Activate virtualenv (`. ../venv/bin/activate`)
 > 5. `uwsgi --yaml ../config/galaxy.yml`
-> 6. Access at port `<ip address>:8080` once the server has started
+> 6. Access at port `<ip address>:5000` once the server has started
 {: .hands_on}
 
 Galaxy is now configured with an admin user, a database, and a place to store data. Additionally we've immediately configured the mules for production Galaxy serving. So we're ready to set up systemd which will manage the Galaxy processes!. Get back to your user with which you have ran ansible-playbook. First by deactivating virtual environment with `deactivate` and then with `exit` leave galaxy user.
@@ -1623,7 +1623,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    +
 >    +# systemd
 >    +galaxy_systemd_mode: mule
->    +galaxy_zergpool_listen_addr: 127.0.0.1:8080
+>    +galaxy_zergpool_listen_addr: 127.0.0.1:5000
 >    +galaxy_restart_handler_name: "Restart Galaxy"
 >    {% endraw %}
 >    ```
@@ -1718,10 +1718,10 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 {: .hands_on}
 
-Galaxy should now be accessible over port :8080, again try connecting to your VM now and checking that Galaxy is working. Note that the welcome page is broken, this is a known issue, and a good reminder to write your own :)
+Galaxy should now be accessible over port :5000, again try connecting to your VM now and checking that Galaxy is working. Note that the welcome page is broken, this is a known issue, and a good reminder to write your own :)
 
 > ### {% icon tip %} "Empty Response"
-> This can happen whenever uWSGI is speaking its own "uwsgi" protocol instead of HTTP. Check that your uwsgi is listening on `http: 0.0.0.0:8080`
+> This can happen whenever uWSGI is speaking its own "uwsgi" protocol instead of HTTP. Check that your uwsgi is listening on `http: 0.0.0.0:5000`
 >
 > At this step in the tutorial you should be starting Galaxy and uWSGI through systemd. If you need to change something in your configuration, check that Galaxy has been restarted after you re-run the playbook.
 {: .tip}
@@ -1745,7 +1745,7 @@ With this we have:
 - PostgreSQL running
 - Galaxy running (managed by systemd)
 
-When we first configured Galaxy, we used the setting `http: 0.0.0.0:8080`, which instructed uWSGI to handle the serving of Galaxy, and to process the HTTP requests itself. This has some overhead and is not as efficient as is desired in production. So we will set up a reverse proxy to handle the HTTP processing, and translate this into the more efficient uWSGI protocol. Additionally it can handle serving static files for us without the requests going through uWSGI, allowing it to spend more time on useful tasks like processing jobs.
+When we first configured Galaxy, we used the setting `http: 0.0.0.0:5000`, which instructed uWSGI to handle the serving of Galaxy, and to process the HTTP requests itself. This has some overhead and is not as efficient as is desired in production. So we will set up a reverse proxy to handle the HTTP processing, and translate this into the more efficient uWSGI protocol. Additionally it can handle serving static files for us without the requests going through uWSGI, allowing it to spend more time on useful tasks like processing jobs.
 
 Additionally, by moving to NGINX or another reverse proxy, it can automatically compress selected content, we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at `/` and Galaxy at `/galaxy`. Lastly, it can provide authentication as well, as noted in the [External Authentication]({{ site.baseurl }}/topics/admin/tutorials/external-auth/tutorial.html) tutorial.
 
@@ -1769,7 +1769,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    ```
 >    {: data-commit="Add nginx to playbook"}
 >
-> 2. Edit your `group_vars/galaxyservers.yml`, we will update the line that `http: 0.0.0.0:8080` to be `socket: 127.0.0.1:8080`. This will cause uWSGI to only respond to uWSGI protocol, and only to requests originating on localhost.
+> 2. Edit your `group_vars/galaxyservers.yml`, we will update the line that `http: 0.0.0.0:5000` to be `socket: 127.0.0.1:5000`. This will cause uWSGI to only respond to uWSGI protocol, and only to requests originating on localhost.
 >
 >    {% raw %}
 >    ```diff
@@ -1779,8 +1779,8 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
 >       uwsgi:
->    -    http: 0.0.0.0:8080
->    +    socket: 127.0.0.1:8080
+>    -    http: 0.0.0.0:5000
+>    +    socket: 127.0.0.1:5000
 >         buffer-size: 16384
 >         processes: 1
 >         threads: 4
@@ -1797,7 +1797,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -67,3 +67,33 @@ galaxy_config:
 >     galaxy_systemd_mode: mule
->     galaxy_zergpool_listen_addr: 127.0.0.1:8080
+>     galaxy_zergpool_listen_addr: 127.0.0.1:5000
 >     galaxy_restart_handler_name: "Restart Galaxy"
 >    +
 >    +# Certbot
@@ -1952,7 +1952,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +    # The most important location block, by default all requests are sent to uWSGI
 >    +    location / {
 >    +        # This is the backend to send the requests to.
->    +        uwsgi_pass 127.0.0.1:8080;
+>    +        uwsgi_pass 127.0.0.1:5000;
 >    +        uwsgi_param UWSGI_SCHEME $scheme;
 >    +        include uwsgi_params;
 >    +    }
@@ -2159,7 +2159,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >         id_secret: "{{ vault_id_secret }}"
 >    +    job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
 >       uwsgi:
->         socket: 127.0.0.1:8080
+>         socket: 127.0.0.1:5000
 >         buffer-size: 16384
 >    {% endraw %}
 >    ```
@@ -2182,7 +2182,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    +
 >     # systemd
 >     galaxy_systemd_mode: mule
->     galaxy_zergpool_listen_addr: 127.0.0.1:8080
+>     galaxy_zergpool_listen_addr: 127.0.0.1:5000
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy job conf to config dir"}
@@ -2267,7 +2267,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    +    # Tool security
 >    +    outputs_to_working_directory: true
 >       uwsgi:
->         socket: 127.0.0.1:8080
+>         socket: 127.0.0.1:5000
 >         buffer-size: 16384
 >    {% endraw %}
 >    ```

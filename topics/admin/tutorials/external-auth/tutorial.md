@@ -53,7 +53,7 @@ For this exercise we will use a basic password file method for authenticating - 
 >
 >    ```diff
 >    @@ -14,6 +14,10 @@
->             uwsgi_pass 127.0.0.1:8080;
+>             uwsgi_pass 127.0.0.1:5000;
 >             uwsgi_param UWSGI_SCHEME $scheme;
 >             include uwsgi_params;
 >    +        auth_basic           galaxy;

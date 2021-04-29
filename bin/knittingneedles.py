@@ -4,7 +4,7 @@ import re
 BOXES = r"^([\s>]*>[\s>]*)"
 BOX_PREFIX = r"\s*{% raw %}"
 BOX_OPEN = r"\s*```diff"
-BOX_CLOSE = r'\s*{: data-commit="([^"]*)"}'
+BOX_CLOSE = r'\s*{: data-commit="([^"]*)"[^}]*}'
 BOX_CLOSE_ALL = r'\s*{:\s*(.spoken|data-commit|.code-in\s*data-cmd).*}'
 WHITESPACE = r"^(\s*)"
 
