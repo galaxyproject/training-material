@@ -78,6 +78,7 @@ for line, text in enumerate(tutorial_contents):
         # Compare the diff messages
         obs_msg = knit.extractCommitMsg(current).strip()
         exp_msg = from_patch[0].strip()
+        obs_extra = m2.groups()[1]
         if obs_msg != exp_msg:
             # Most just got truncated
             if exp_msg not in obs_msg:
@@ -92,7 +93,7 @@ for line, text in enumerate(tutorial_contents):
         chunks.extend([f'{prefix}{amount * " "}{line}'.strip() for line in new_diff])
         chunks.append(prefix_text + "{% endraw %}")
         chunks.append(prefix_text + "```")
-        chunks.append(prefix_text + '{: data-commit="%s"}' % exp_msg)
+        chunks.append(prefix_text + '{: data-commit="%s"%s}' % (exp_msg, obs_extra))
         diff_idx += 1
         current = None
 
