@@ -66,10 +66,10 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -18,3 +18,7 @@
->       version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
->     - src: gantsign.golang
+>    @@ -20,3 +20,7 @@
 >       version: 2.6.3
+>     - src: galaxyproject.cvmfs
+>       version: 0.2.13
 >    +- src: galaxyproject.repos
 >    +  version: 0.0.2
 >    +- src: galaxyproject.slurm
@@ -111,7 +111,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -140,3 +140,13 @@ golang_gopath: '/opt/workspace-go'
+>    @@ -141,3 +141,13 @@ golang_gopath: '/opt/workspace-go'
 >     # Singularity target version
 >     singularity_version: "3.7.0"
 >     singularity_go_path: "{{ golang_install_dir }}"
@@ -348,7 +348,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -104,6 +104,7 @@ galaxy_config_files:
+>    @@ -105,6 +105,7 @@ galaxy_config_files:
 >     galaxy_systemd_mode: mule
 >     galaxy_zergpool_listen_addr: 127.0.0.1:5000
 >     galaxy_restart_handler_name: "Restart Galaxy"

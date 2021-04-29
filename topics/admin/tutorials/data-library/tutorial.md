@@ -83,9 +83,9 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >       galaxy:
 >    +    library_import_dir: /libraries/admin
 >    +    user_library_import_dir: /libraries/user
+>         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
 >         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
 >         containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
->         brand: "🧬🔬🚀"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure the library import directories"}
