@@ -258,21 +258,35 @@ worth reviewing. Text on the form is all in the XML and it all comes from the To
 
 > ### {% icon hands_on %} Hands-on: Launching the Container
 >
-> 1. [Install Docker](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform
+> 1. [Install Docker and Docker Compose](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform
 >
-> 2. Start the container
+> 2. Go to [the ToolFactory appliance github repository](https://github.com/fubar2/toolfactory-galaxy-server)
+>
+> 3. Clone it or download the zip and unzip it somewhere handy - such as `~/toolfactory-galaxy-server-main`
+>
+> 4. Change to the compose directory - `cd ~/toolfactory-galaxy-server-main/compose`
+>
+> 5. `docker-compose up`
+>
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
->    > docker run -d -p 9090:9090 -v ./mytools:/planemo/mytools quay.io/fubar2/toolfactory_tutorial:d0c2e1e
+>    > wget https://github.com/fubar2/toolfactory-galaxy-server/archive/refs/heads/main.zip
+>    > unzip main.zip
+>    > cd toolfactory-galaxy-server-main/compose
+>    > docker-compose up
 >    > ```
 >    {: .code-in}
 >
 >    > ### {% icon tip %} Tip: Patience!
->    > This step can take quite some time to pull the container and boot it. Additionally when you run the ToolFactory for the first time inside the container, it will also require some time to build the conda environment.
+>    > When you run the ToolFactory for the first time inside the container and whenever you run a new tool with new dependencies, it will require some time to build the conda environment.
+>    > Check for Conda or other processes if things seem stuck.
 >    {: .tip}
 >
-> 3. Navigate to [http://localhost:9090](http://localhost:9090) where you will find a Galaxy running
+>
+> 6. Wait a minute or until process activity dies down
+>
+> 7. Browse to [port 8080 on your local machine - http://localhost:8080](http://localhost:8080)
 >
 {: .hands_on}
 
@@ -390,7 +404,7 @@ This was a very brief introduction to the ToolFactory, we recommend you first ex
 > 4. Paste the URL into the URL field and press `import`
 >
 >    ```
->    https://zenodo.org/record/4686436/files/TF_demo_planemo_april14.tar.gz?download=1
+>   https://zenodo.org/record/4729971/files/TF_demo_history_April30.tar.gz?download=1
 >    ```
 >
 > 5. When it's complete, select "Switch to history", or find it from the History Switcher {% icon galaxy-history %}.
