@@ -332,15 +332,20 @@ rerun the job to generate a new toolshed archive and test report collection.
 ### The Development Cycle
 
 1. Test your script on the command line and confirm it works.
-1. Upload script, and all inputs.
-1. Run the tool Factory
-1. Refresh the page to find the new tool in the ToolFactory section ready to run.
+1. In the appliance, start a new history and upload all the input samples used on the command line.
+1. Open the ToolFactory tool form.
+1. Define the tool metadata, dependencies, interpreter and paste the script.
+1. Add the required history inputs using the small samples as examples.
+1. Specify all the output files to be created in the user's history.
+1. Add any user adjustable command line parameters such as text fields. Look at the samples to see how the ToolFactory form can be used.
+1. Execute the tool when the form is completed.
+1. When the job is complete, refresh the page (Home icon or Analysis tab). The new tool will be found in the ToolFactory section, ready to run.
 1. Note that building a tool with the name `mytool` will overwrite any previously generated ToolFactory tool with the same name.
 1. Run your new tool and see if it looks right and make sure it works.
-1. Then, open the collection in the history from when you made the tool. Open one of the items and use the {% icon galaxy-refresh %} rerun button to
+1. If it needs any changes, open the collection created when the tool was generated. Open one of the collection items and use the {% icon galaxy-refresh %} rerun button to
 recreate the ToolFactory form as it was when you last ran it. Adjust as needed and use the tool form`execute` button to run the ToolFactory again with updated settings.
 1. Rinse, repeat.
-1. When everything is to your satisfaction, generate the tool again but select the option to generate the test and make a toolshed ready archive.
+1. When everything is to your satisfaction, generate the tool again but select the option to run the test and make a toolshed ready archive.
 1. Nothing much happens in Galaxy, but a new tested tool archive will eventually appear in `compose/export/galaxy/testedTFarchives/[tool name]` on your
 local machine where the container has a mapped volume.
 
