@@ -334,8 +334,15 @@ rerun the job to generate a new toolshed archive and test report collection.
 1. Test your script on the command line and confirm it works.
 1. Upload script, and all inputs.
 1. Run the tool Factory
-1. Use the {% icon galaxy-refresh %} rerun button to fix errors
-1. Rinse, repeat...
+1. Refresh the page to find the new tool in the ToolFactory section ready to run.
+1. Note that building a tool with the name `mytool` will overwrite any previously generated ToolFactory tool with the same name.
+1. Run your new tool and see if it looks right and make sure it works.
+1. Then, open the collection in the history from when you made the tool. Open one of the items and use the {% icon galaxy-refresh %} rerun button to
+recreate the ToolFactory form as it was when you last ran it. Adjust as needed and use the  {% icon galaxy-execute %} button to run the ToolFactory again with updated settings.
+1. Rinse, repeat.
+1. When everything is to your satisfaction, generate the tool again but select the option to generate the test and make a toolshed ready archive.
+1. Nothing much happens in Galaxy, but a new tested tool archive will eventually appear in `compose/export/galaxy/testedTFarchives/[tool name]` on your
+local machine where the container has a mapped volume.
 
 Galaxy can be used as an Integrated Development Environment for tools - clunky but oddly satisfying. Note this is distinct from debugging the script - that is not at all satisfying in Galaxy unless you like waiting for jobs to finish. A shell is much better for that.
 
