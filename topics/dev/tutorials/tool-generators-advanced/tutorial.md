@@ -29,6 +29,7 @@ requirements:
 
 contributors:
   - fubar2
+  - hexylena
 
 ---
 
