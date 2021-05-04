@@ -108,38 +108,92 @@ Check for Conda and other running processes before assuming it has frozen.
 # Running the ToolFactory
 
 > ### {% icon hands_on %} Hands-on: Launching the Container
->
-> 1. [Install Docker and Docker Compose](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform
->
-> 2. Go to [the ToolFactory appliance github repository](https://github.com/fubar2/toolfactory-galaxy-server)
->
-> 3. Clone it or download the zip and unzip it somewhere handy - such as `~/toolfactory-galaxy-server-main`
->
-> 4. Change to the compose directory - `cd ~/toolfactory-galaxy-server-main/compose`
->
-> 5. `docker-compose up`
->
->
->    > ### {% icon code-in %} Input: Bash
->    > ```bash
->    > wget https://github.com/fubar2/toolfactory-galaxy-server/archive/refs/heads/main.zip
->    > unzip main.zip
->    > cd toolfactory-galaxy-server-main/compose
->    > docker-compose up
->    > ```
->    {: .code-in}
->
->    > ### {% icon tip %} Tip: Patience!
->    > When you run the ToolFactory for the first time inside the container and whenever you run a new tool with new dependencies, it will require some time to build the conda environment.
->    > Check for Conda or other processes if things seem stuck.
->    {: .tip}
->
->
-> 6. Wait a minute or until process activity dies down
->
-> 7. Browse to [port 8080 on your local machine - http://localhost:8080](http://localhost:8080)
->
+>>
+>> 1. [Install Docker and Docker Compose](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform
+>>
+>> 2. Go to [the ToolFactory appliance github repository](https://github.com/fubar2/toolfactory-galaxy-server)
+>>
+>> 3. Clone it or download the zip and unzip it somewhere handy - such as `~/toolfactory-galaxy-server-main`
+>>
+>> 4. Change to the compose directory - `cd ~/toolfactory-galaxy-server-main/compose`
+>>
+>>Something like this should get it started - *adding the singularity yml to the command is essential for the planemo tester to work*:
+>>
+>>```
+>>git clone https://github.com/fubar2/toolfactory-galaxy-server
+>>cd toolfactory-galaxy-server/compose
+>>docker-compose -f docker-compose.yml -f docker-compose.singularity.yml up -d
+>>```
+>>
+>>
+>>
+>>    > ### {% icon code-in %} Input: Bash
+>>    > ```bash
+>>    > wget https://github.com/fubar2/toolfactory-galaxy-server/archive/refs/heads/main.zip
+>>    > unzip main.zip
+>>    > cd toolfactory-galaxy-server-main/compose
+>>    > docker-compose -f docker-compose.yml -f docker-compose.singularity.yml up -d
+>>    > ```
+>>
+>>Your appliance should be running with a local Galaxy on  [port 8080 of your workstation](http://localhost:8080) after a fair bit of activity.
+>>
+>> -  Out of the box login is 'admin@galaxy.org' and the password is 'password'
+>>    - This is obviously insecure but convenient and easily changed at first login.
+>>    - Or more permanently in the docker-compose.yml if you prefer.
+>>
+>>- The container `/export` directory is mounted locally at `compose/export` .
+>>
+>>## Demonstration tools are the functional documentation
+>>
+>>- At first login you will find the demonstration history ready to explore
+>>
+>>- To explore an example, open the toolshed archive by clicking on the name, and select the `rerun` button from the expanded view
+>>    - The form that generated that tool will appear for you to examine
+>>    - Edit the form - add parameters and change the script to suit - and rerun to create an *updated* tool. The history has previous versions.
+>>    - Change the tool ID to change the tool name.
+>>
+>>## To safely shut the appliance down
+>>
+>>`docker-compose down`
+>>
+>>from the same place you started should shut it down nicely
+>>    {: .code-in}
+>>
+>>    > ### {% icon tip %} Tip: Patience!
+>>    > When you run the ToolFactory for the first time inside the container and whenever you run a new tool with new dependencies, it will require some time to build the conda environment.
+>>    > Check for Conda or other processes if things seem stuck.
+>>    {: .tip}
+>>
+>>
 {: .hands_on}
+
+> ### {% icon hands_on %} Hands-on: Brief Guide to ToolFactory Appliance Operation
+>>
+>>## Generating new tools - what happens when you press `execute` on a valid ToolFactory form?
+>>
+>> - The form is processed and a new tool generated.
+>> - The new tool is installed to the Appliance.
+>>    - The tool generation process takes only a few seconds.
+>>    - The `Home` or `Analysis` tab should be selected so the screen is refreshed after building.
+>>         - Otherwise the new tool menu will not be loaded so the newly generated tool will not be there
+>> - Choose the names thoughtfully and be warned: there are no checks on tool names
+>> - Any existing installed tool with the same name will be overwritten permanently.
+>> - The history will retain all the generating jobs if you accidentally overwrite a tool.
+>> - Rerun the job and adjust the form. Rinse and repeat until ready.
+>>
+>> - Note that the generated tool has not been run to generate test outputs, so the archive is not complete although the installed tool may work fine.
+>>
+>> - To generate a real, tested toolshed archive, use the ToolFactory generated planemo_test tool.
+>> - It will run Planemo to generate outputs, then run a real test and return a proper toolshed archive.
+>>
+>> - The first test takes 6 minutes. Subsequently more like 40 seconds depending on conda and the complexity of dependencies needed for the tool to run.
+>>
+>> - An archive containing the tool with proper test will be returned with the planemo report in the history.
+>> - The archive can be downloaded and shared in the usual ways. It is a normal Galaxy tool that wraps the supplied script
+>>
+{: .hands_on}
+
+----
 
 ## Import ToolFactory functional documentation - the demonstration tools.
 
@@ -206,7 +260,7 @@ options have been configured and what kinds of scripts this could be used for in
 new parameters added to suit, to extend the toy examples and create tools of use to your users. Change the tool name on the newly edited form, press `execute` and
 rerun the job to generate a new toolshed archive and test report collection.
 
-Consider the trivial `Hello World!` tool example. It is readily extended to suit many situations where a tool is needed quickly for a workflow. Try adding another parameter.
+The trivial `Hello World!` tool example is readily extended to suit many situations where a tool is needed quickly for a workflow. Try adding another parameter.
 For example, the planemo `lint` tool example (described below) can be derived by adding a history toolshed archive as input, plus a few more lines of bash script.
 In practice, it's a flexible basis for generating many simple tools.
 
@@ -299,107 +353,152 @@ line will echo all the repeated parameters is shown in the example shown in the 
 - The end user sees the form with repeatable fields as shown at the end of the detail below.
 - The demonstration trivially returns whatever the user chose to repeat.
 
+
+
+
+<tool name="tool1" id="tool1" version="0.01">
+  <!--Source in git at: https://github.com/fubar2/toolfactory-->
+  <!--Created by planemo@galaxyproject.org at 07/04/2021 14:55:09 using the Galaxy Tool Factory.-->
+  <description>test repeats</description>
+  <expand macro="requirements"/>
+  <stdio>
+    <exit_code range="1:" level="fatal"/>
+  </stdio>
+  <expand macro="stdio"/>
+  <version_command><![CDATA[echo "0.01"]]></version_command>
+  <command><![CDATA[python
+$runme
+ #for $rep in $R_repeat:
+--repeat $rep.repeat
+#end for
+>
+$rep_out]]></command>
+  <configfiles>
+    <configfile name="runme"><![CDATA[
+import argparse
+parser = argparse.ArgumentParser()
+a = parser.add_argument
+a('--repeat',default=[],action="append")
+args = parser.parse_args()
+s = ' and '.join(args.repeat)
+print(s)
+]]></configfile>
+  </configfiles>
+  <inputs>
+    <repeat name="R_repeat" title="Add as many Things to pass as needed">
+      <param name="repeat" type="text" value="add lots of repeats" label="Things to pass" help=""/>
+    </repeat>
+  </inputs>
+  <outputs>
+    <data name="rep_out" format="txt" label="rep_out" hidden="false"/>
+  </outputs>
+  <tests>
+    <test>
+      <output name="rep_out" value="rep_out_sample" compare="diff" lines_diff="0"/>
+      <repeat name="R_repeat">
+        <param name="repeat" value="add lots of repeats"/>
+      </repeat>
+    </test>
+  </tests>
+  <help><![CDATA[
+
+**What it Does**
+
+
+
+------
+
+
+Script::
+
+    import argparse
+    parser = argparse.ArgumentParser()
+    a = parser.add_argument
+    a('--repeat',default=[],action="append")
+    args = parser.parse_args()
+    s = ' and '.join(args.repeat)
+    print(s)
+
+]]></help>
+  <citations>
+    <citation type="doi">10.1093/bioinformatics/bts573</citation>
+  </citations>
+</tool>
+
+
+
 > ### {% icon details %} Repeats demonstration tool XML
 > >
 > >
 > >```xml
-> ><tool name="reps" id="reps" version="0.01">
-> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
-> >  <!--Created by planemo@galaxyproject.org at 11/04/2021 10:18:15 using the Galaxy Tool Factory.-->
-> >  <description></description>
-> >  <requirements/>
-> >  <stdio>
-> >    <exit_code range="1:" level="fatal"/>
-> >  </stdio>
-> >  <version_command><![CDATA[echo "0.01"]]></version_command>
-> >  <command><![CDATA[python
-> >$runme
-> >#for $rep in $R_mi:
-> >--mi "$rep.mi"
-> >#end for
-> >#for $rep in $R_mp:
-> >--mp "$rep.mp"
-> >#end for
-> >>
-> >$repout]]></command>
-> >  <configfiles>
-> >    <configfile name="runme"><![CDATA[
-> >import argparse
-> >parser = argparse.ArgumentParser()
-> >a = parser.add_argument
-> >a("--mi", action="append")
-> >a("--mp", action="append")
-> >args = parser.parse_args()
-> >print(" and ".join(args.mi))
-> >print(" and".join(args.mp))
-> >]]></configfile>
-> >  </configfiles>
-> >  <inputs>
-> >    <repeat name="R_mi" title="Add as many Input lots of inputs as needed">
-> >      <param name="mi" type="data" optional="false" label="Input lots of inputs" help="" format="ab1,affybatch,agilentbrukeryep.d.tar,agilentmasshunter.d.tar,analyze75,arff,asn1,
-> > asn1-binary,augustus,axt,bam,bcf,bed,bed12,bed6,bedgraph,bedstrict,bigbed,bigwig,biom1,biom2,blastxml,blib,brukerbaf.d.tar,brukertdf.d.tar,bus,cel,chira.sqlite,chrint,cisml,ckpt,cmap,
-> > cml,consensusxml,cool,cps,cpt,cram,csfasta,csv,ct,cuffdiff.sqlite,cxb,d3_hierarchy,daa,dada2_dada,dada2_errorrates,dada2_mergepairs,dada2_sequencetable,dada2_uniques,dbn,dbnsfp.tabular,
-> > dcd,deeptools_compute_matrix_archive,deeptools_coverage_matrix,dlib,drf,dta,dta2d,dzi,edr,edta,eland,elandmulti,elib,embl,encodepeak,eset,excel.xls,expression.json,fai,fast5.tar,
-> > fast5.tar.bz2,fast5.tar.gz,fasta,fasta.gz,fastg,fastq,fastq.bz2,fastq.gz,fastqcssanger,fastqcssanger.bz2,fastqcssanger.gz,fastqillumina,fastqillumina.bz2,fastqillumina.gz,fastqsanger,
-> > fastqsanger.bz2,fastqsanger.gz,fastqsolexa,fastqsolexa.bz2,fastqsolexa.gz,featurexml,ffdata,ffindex,flv,fped,fphe,fps,fqtoc,gafa.sqlite,gal,gatk_dbsnp,gatk_interval,gatk_recal,gatk_report,
-> > gatk_tranche,gemini.sqlite,genbank,genbank.gz,geojson,gfa1,gfa2,gff,gff3,gff3.bz2,gff3.gz,gii,gii.gz,gpr,grd,grd.tgz,gro,gtf,h5,h5ad,hdt,hhr,hlf,hmm2,hmm3,icm,idat,ideaspre,idpdb,idxml,
-> > imgt.json,imzml,inchi,intermine_tabular,interval,ipynb,isa-json,isa-tab,itp,jellyfish,json,jsonld,kallisto.idx,kroenik,lav,ldindep,len,loom,lped,maf,malist,mascotxml,maskinfo-asn1,
-> > maskinfo-asn1-binary,mcool,mdp,memepsp,memexml,meryldb,mgf,mkv,mol,mol2,mothur.accnos,mothur.align,mothur.align.check,mothur.align.report,mothur.axes,mothur.cons.taxonomy,
-> > mothur.count_table,mothur.design,mothur.dist,mothur.filter,mothur.filtered.masked.quan,mothur.filtered.quan,mothur.freq,mothur.groups,mothur.list,mothur.lower.dist,mothur.map,
-> > mothur.masked.quan,mothur.names,mothur.oligos,mothur.otu,mothur.otu.corr,mothur.otulabels,mothur.pair.dist,mothur.quan,mothur.rabund,mothur.rdp.taxonomy,
-> > mothur.ref.taxonomy,mothur.relabund,mothur.sabund,mothur.seq.taxonomy,mothur.sff.flow,mothur.shared,mothur.square.dist,mothur.summary,mothur.tax.summary,mothur.tre,mp3,mp4,
-> > mpg,mrm,ms2,msh,msp,mtx,mz.sqlite,mz5,mzdata,mzid,mzml,mzq,mztab,mztab2,mzxml,n3,ncbitaxonomy.sqlite,ndx,neostore.zip,netcdf,newick,nex,nhx,nii1,nii1.gz,nii2,nii2.gz,nmrml,
-> > nt,obfs,obo,odgi,ome.tiff,osw,owl,oxlicg,oxligl,oxling,oxliss,oxlist,oxlits,paf,paf.gz,par,paramxml,parquet,pbed,pdb,pdbqt,pdf,peff,peplist,peptideshaker_archive,pepxml,pepxml.tsv,phylip,
-> > phyloxml,picard_interval_list,pileup,plyascii,plybinary,png,postgresql,pphe,pqp,pqr,probam,probed,protobuf2,protobuf3,protxml,protxml.tsv,psms,pssm-asn1,ptkscmp,qcml,qname_sorted.bam,
-> > qual454,qualillumina,qualsolexa,qualsolid,rdata,rdata.camera.negative,rdata.camera.positive,rdata.camera.quick,rdata.msnbase.raw,rdata.sce,rdata.xcms.fillpeaks,rdata.xcms.findchrompeaks,
-> > rdata.xcms.group,rdata.xcms.raw,rdata.xcms.retcor,rdf,rdock_as,rma6,rna_eps,sam,sbml,scf,scidx,sdf,searchgui_archive,sf3,sff,shp,sif,smat,smi,snaphmm,snpeffdb,snpmatrix,snpsiftdbnsfp,
-> > snptest,spalndba,spalndbnp,spec.xml,splib,splib_noindex,sqlite,sqmass,sra,sra_manifest.tabular,stl,stockholm,tabular,tabular.gz,tandem,tar,taxonomy,tck,textgrid,tgz,thermo.raw,tiff,top,tpr,
-> > trackhub,trafoxml,traml,trk,trr,tsv,ttl,twobit,txt,uniprotxml,unsorted.bam,vcf,vcf_bgzip,vel,velvet,vg,vtkascii,vtkbinary,watersmasslynx.raw.tar,wav,wiff,wiff.tar,wig,xg,xgmml,xlsx,xmfa,xml,
-> > xquest.xml,xtc,xvg,zip" multiple="false"/>
-> >    </repeat>
-> >    <repeat name="R_mp" title="Add as many things to add as needed">
-> >      <param name="mp" type="text" value="Add lots of things" label="things to add" help=""/>
-> >    </repeat>
-> >  </inputs>
-> >  <outputs>
-> >    <data name="repout" format="txt" label="repout" hidden="false"/>
-> >  </outputs>
-> >  <tests>
-> >    <test>
-> >      <output name="repout" value="repout_sample" compare="sim_size" delta_frac="0.2"/>
-> >      <repeat name="R_mi">
-> >        <param name="mi" value="mi_sample"/>
+> >  <tool name="tool1" id="tool1" version="0.01">
+> >    <!--Source in git at: https://github.com/fubar2/toolfactory-->
+> >    <!--Created by planemo@galaxyproject.org at 07/04/2021 14:55:09 using the Galaxy Tool Factory.-->
+> >    <description>test repeats</description>
+> >    <expand macro="requirements"/>
+> >    <stdio>
+> >      <exit_code range="1:" level="fatal"/>
+> >    </stdio>
+> >    <expand macro="stdio"/>
+> >    <version_command><![CDATA[echo "0.01"]]></version_command>
+> >    <command><![CDATA[python
+> >  $runme
+> >   #for $rep in $R_repeat:
+> >  --repeat $rep.repeat
+> >  #end for
+> >  >
+> >  $rep_out]]></command>
+> >    <configfiles>
+> >      <configfile name="runme"><![CDATA[
+> >  import argparse
+> >  parser = argparse.ArgumentParser()
+> >  a = parser.add_argument
+> >  a('--repeat',default=[],action="append")
+> >  args = parser.parse_args()
+> >  s = ' and '.join(args.repeat)
+> >  print(s)
+> >  ]]></configfile>
+> >    </configfiles>
+> >    <inputs>
+> >      <repeat name="R_repeat" title="Add as many Things to pass as needed">
+> >        <param name="repeat" type="text" value="add lots of repeats" label="Things to pass" help=""/>
 > >      </repeat>
-> >      <repeat name="R_mp">
-> >        <param name="mp" value="Add lots of things"/>
-> >      </repeat>
-> >    </test>
-> >  </tests>
-> >  <help><![CDATA[
+> >    </inputs>
+> >    <outputs>
+> >      <data name="rep_out" format="txt" label="rep_out" hidden="false"/>
+> >    </outputs>
+> >    <tests>
+> >      <test>
+> >        <output name="rep_out" value="rep_out_sample" compare="diff" lines_diff="0"/>
+> >        <repeat name="R_repeat">
+> >          <param name="repeat" value="add lots of repeats"/>
+> >        </repeat>
+> >      </test>
+> >    </tests>
+> >    <help><![CDATA[
 > >
-> >**What it Does**
+> >  **What it Does**
 > >
 > >
 > >
-> >------
+> >  ------
 > >
 > >
-> >Script::
+> >  Script::
 > >
-> >    import argparse
-> >    parser = argparse.ArgumentParser()
-> >    a = parser.add_argument
-> >    a("--mi", action="append")
-> >    a("--mp", action="append")
-> >    args = parser.parse_args()
-> >    print(" and ".join(args.mi))
-> >    print(" and".join(args.mp))
+> >      import argparse
+> >      parser = argparse.ArgumentParser()
+> >      a = parser.add_argument
+> >      a('--repeat',default=[],action="append")
+> >      args = parser.parse_args()
+> >      s = ' and '.join(args.repeat)
+> >      print(s)
 > >
-> >]]></help>
-> >  <citations>
-> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
-> >  </citations>
-> ></tool>
+> >  ]]></help>
+> >    <citations>
+> >      <citation type="doi">10.1093/bioinformatics/bts573</citation>
+> >    </citations>
+> >  </tool>
 > >```
 > > - The user sees the following form after adding 3 repeats for each of the two available items
 > >

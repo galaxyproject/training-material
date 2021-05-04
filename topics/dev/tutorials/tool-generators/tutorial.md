@@ -97,13 +97,14 @@ For those new to Galaxy, in many simple cases, it may be possible to generate a 
 specialised Galaxy tool for developers that generates tools from scripts. This tutorial is designed to introduce that unusual tool.
 
 
-## The ToolFactory
+## The ToolFactory Appliance
 
-The ToolFactory is an automated, form driven code generator.
-It runs as a typical Galaxy tool, except that it will only run for an administrative
-user, as a security precaution.
+The ToolFactory is an automated, form driven code generator that installs newly generated tools in the Appliance so you can try them straight away.
+The ToolFactory runs as a normal Galaxy tool
 
-It was developed for skilled programmers who need new Galaxy tools for their own use or for users they support. Any user comfortable with scripting languages on a Linux command
+The Appliance was developed for skilled programmers who need new Galaxy tools for their own use or for users they support. Any user comfortable with scientific or general
+scripting languages
+on a Linux command
 line may find it useful if they ever need a Galaxy tool that wraps a working script. Shell utilities and scripting language interpreters supported by Conda can be used.
 
 Generated tools pass Planemo lint, and are functionally indistinguishable from equivalent manually written tools. They contain a test based on the test data provided
@@ -132,7 +133,7 @@ quickly *inside* Galaxy.
 > - Choose whichever one fits best for the task at hand.
 {: .tip }
 
-## `Hello World!` with the ToolFactory
+## `Hello World!` with the ToolFactory Appliance
 
 The ToolFactory can generate a `Hello World!` script as a Galaxy tool. A parameter is added so the user can supply the text after "Hello..." and
 the tool can write the combined string to a new history item. Trivial, but an excellent model worth studying in detail. It is
@@ -254,40 +255,68 @@ worth reviewing. Text on the form is all in the XML and it all comes from the To
 - **Starting a new ToolFactory tool with a know good command line and data** is strongly recommended. You will know exactly what to expect from the tool test for a first sanity check.
 - Corrolary: Unless there is a working script that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is of little use.
 
-# Running the ToolFactory
+## The ToolFactory Appliance requires a Linux workstation, Docker and docker-compose.
 
 > ### {% icon hands_on %} Hands-on: Launching the Container
->
-> 1. [Install Docker and Docker Compose](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform
->
-> 2. Go to [the ToolFactory appliance github repository](https://github.com/fubar2/toolfactory-galaxy-server)
->
-> 3. Clone it or download the zip and unzip it somewhere handy - such as `~/toolfactory-galaxy-server-main`
->
-> 4. Change to the compose directory - `cd ~/toolfactory-galaxy-server-main/compose`
->
-> 5. `docker-compose up`
->
->
->    > ### {% icon code-in %} Input: Bash
->    > ```bash
->    > wget https://github.com/fubar2/toolfactory-galaxy-server/archive/refs/heads/main.zip
->    > unzip main.zip
->    > cd toolfactory-galaxy-server-main/compose
->    > docker-compose up
->    > ```
->    {: .code-in}
->
->    > ### {% icon tip %} Tip: Patience!
->    > When you run the ToolFactory for the first time inside the container and whenever you run a new tool with new dependencies, it will require some time to build the conda environment.
->    > Check for Conda or other processes if things seem stuck.
->    {: .tip}
->
->
-> 6. Wait a minute or until process activity dies down
->
-> 7. Browse to [port 8080 on your local machine - http://localhost:8080](http://localhost:8080)
->
+>>
+>> 1. [Install Docker](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform. Then, `pip install docker-compose`
+>>
+>> 2. Go to [the ToolFactory appliance github repository](https://github.com/fubar2/toolfactory-galaxy-server)
+>>
+>> 3. Clone it or download the zip and unzip it somewhere handy - such as `~/toolfactory-galaxy-server-main`
+>>
+>> 4. Change to the compose directory - `cd ~/toolfactory-galaxy-server-main/compose`
+>>
+>>- Note that
+>>   - the -d in the docker-compose command detaches the terminal so you can keep working.
+>>   - It can be useful to remove that flag and stay attached when things go wrong to watch the startup.
+>>
+>>```
+>>git clone https://github.com/fubar2/toolfactory-galaxy-server
+>>cd toolfactory-galaxy-server/compose
+>>docker-compose -f docker-compose.yml -f docker-compose.singularity.yml up -d
+>>```
+>>
+>>
+>>
+>>    > ### {% icon code-in %} Input: Bash
+>>    > ```bash
+>>    > wget https://github.com/fubar2/toolfactory-galaxy-server/archive/refs/heads/main.zip
+>>    > unzip main.zip
+>>    > cd toolfactory-galaxy-server-main/compose
+>>    > docker-compose -f docker-compose.yml -f docker-compose.singularity.yml up -d
+>>    > ```
+>>
+>>Your appliance should be running with a local Galaxy on [port 8080 of your workstation](http://localhost:8080) after a fair bit of activity.
+>>
+>> -  Out of the box login is 'admin@galaxy.org' and the password is 'password'
+>>    - This is obviously insecure but convenient and easily changed at first login.
+>>    - Or more permanently in the docker-compose.yml if you prefer.
+>>
+>>- The container `/export` directory is mounted locally at `compose/export` .
+>>
+>>## Demonstration tools are the functional documentation
+>>
+>>- At first login you will find the demonstration history ready to explore
+>>
+>> - To explore an example, open the toolshed archive by clicking on the name, and select the `rerun` button from the expanded view
+>>    - The form that generated that tool will appear for you to examine
+>>    - Edit the form - add parameters and change the script to suit - and rerun to create an *updated* tool. The history has previous versions.
+>>    - Change the tool ID to change the tool name.
+>>
+>>## To safely shut the appliance down
+>>
+>>`docker-compose down`
+>>
+>>from the same place you started should shut it down nicely. Most things will still be there next time you start it. We are working on the installed tools disappearing!
+>>    {: .code-in}
+>>
+>>    > ### {% icon tip %} Tip: Patience!
+>>    > When you run the ToolFactory for the first time inside the container and whenever you run a new tool with new dependencies, it will require some time to build the conda environment.
+>>    > Check for Conda or other processes if things seem stuck.
+>>    {: .tip}
+>>
+>>
 {: .hands_on}
 
 
