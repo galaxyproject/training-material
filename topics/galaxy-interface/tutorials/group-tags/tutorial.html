@@ -362,7 +362,7 @@
 
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 12, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 4, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -385,8 +385,11 @@ Grouping datasets in this way has numerous advantages:</p>
 
 <p>While collections can be split in any way, doing so for multi-factor analysis
 quickly becomes cumbersome and messy. An alte<span class="notranslate">rna</span>tive is to label collection
-elements with special group tags. These tags can be displayed in the Tool form,
-allowing users to select subsets of collections.</p>
+elements with special group tags, i.e. tags prefixed by the string <code class="language-plaintext highlighter-rouge">group:</code>.
+Note that group tags currently do not propagate, i.e. they are not inherited
+to datasets resulting from analyses. These tags can be displayed in the Tool
+form, allowing users to select subsets
+of collections.</p>
 
 <p>This tutorial outlines how to set and use group tags with the DESeq2 tool.
 For a more detailed description and background for differential <span class="notranslate">expression</span>
@@ -410,15 +413,18 @@ testing see the <a href="/training-material/topics/transcriptomics/tutorials/ref
 
 <h1 id="setting-group-tags-using-the-apply-rules-tool">Setting group tags using the apply rules tool</h1>
 
-<p>There are three ways to set group tags:</p>
+<p>There are several ways to set group tags:</p>
 <ul>
-  <li>Using the rule builder / apply_rules tool</li>
+  <li>Using the Rule Based Uploader</li>
   <li>Using the “Tag elements from file” tool</li>
+  <li>Using the “Apply Rules” tool</li>
   <li>Manually adding dataset tags with the prefix <code class="language-plaintext highlighter-rouge">group:</code></li>
 </ul>
 
 <p>We will use the first two methods in this tutorial.
-The second method works at any step during the analysis.</p>
+The second and third methods work at any step during the analysis.
+Note that the function of the “Apply Rules” tool is (nearly) identical
+to the Rule Based Uploader.</p>
 
 <h2 id="set-group-tags-during-upload">Set group tags during upload</h2>
 
@@ -468,9 +474,9 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
         <li>Click on <strong>Rules</strong> and then <strong>Add / Modify Column Definitions</strong></li>
         <li>Click on <strong>Add Definition</strong> and select:
           <ul>
-            <li><em>“URL”</em>: Column A</li>
+            <li><em>“URL”</em>: Column A (Note that this option is absent when using the “Apply rules tool”)</li>
             <li><em>“List Identifiers”</em>: Column B</li>
-            <li><em>“Group Tags”</em>: Columns C and D</li>
+            <li><em>“Group Tags”</em>: Columns C and D (Select Column C first and then add D by clicking on <em>“… Add another column”</em>)</li>
           </ul>
         </li>
         <li>Click <strong>Apply</strong></li>
@@ -719,8 +725,8 @@ our collection to specify factors.</p>
     author = "Marius van den Beek",
     title = "Group tags for complex experimental designs (Galaxy Training Materials)",
     year = "2021",
-    month = "03",
-    day = "12"
+    month = "05",
+    day = "04"
     url = "\url{/training-material/topics/galaxy-interface/tutorials/group-tags/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
