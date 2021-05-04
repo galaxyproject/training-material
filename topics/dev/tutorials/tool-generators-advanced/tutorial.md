@@ -3,10 +3,12 @@
 layout: tutorial_hands_on
 title: "ToolFactory: Generating Tools From More Complex Scripts"
 key_points:
-  - The ToolFactory is an automated Galaxy tool generator suitable for simple tools.
-  - It was designed for scientists and developers who routinely write command line scripts.
-  - It can turn a working command line script into a proper Galaxy tool with a test in a few minutes.
-  - It generates complete Galaxy tools from information provided by filling in a normal Galaxy form in the familiar Galaxy UI.
+  - The ToolFactory Appliance is an automated Galaxy tool generator running in a flavour of docker-galaxy-stable
+  - It was designed for scientists and developers who routinely write scripts for their analyses.
+  - It can turn a working command line script into an untested Galaxy tool in a few seconds.
+  - It generates tools from information on a normal Galaxy form in the familiar Galaxy UI.
+  - The new tool is installed in the appliance so can be used and tested immediately.
+   - Adding a test takes a few minutes and is only needed when the new tool is ready for sharing.
 
 objectives:
  - Further develop your ToolFactory Skills
@@ -41,12 +43,15 @@ contributors:
 >
 {: .agenda}
 
-## The ToolFactory supports users who routinely write command line scripts in their work.
+## The ToolFactory Appliance is a pop-up MYOT (make your own tools) Galaxy for scientists who routinely write command line scripts in their work.
 
-The ToolFactory can be found in the main ToolShed under the `tool-generators` category. It automates much of the work needed to prepare a
+The ToolFactory automates much of the work needed to prepare a
 new Galaxy tool using information provided by the script writer,
 on the ToolFactory form. The ToolFactory can wrap any simple script that runs correctly on the linux command line with some small test input samples. This is potentially
 handy for developers new to Galaxy, and for Galaxy users who are capable of correctly scripting on the command line for themselves.
+
+Untested tools are immediately available and the Galaxy server is fully functional. Tools can be generated or added from the Toolshed to create a
+tailored Galaxy. The appliance is an ideal way for any data intensive scientist to quickly develop and refine new tools on their workstations, ready for deployment in production and sharing.
 
 
 > ### {% icon tip %} Under the hood:
@@ -60,7 +65,8 @@ handy for developers new to Galaxy, and for Galaxy users who are capable of corr
 
 ## Limits and scope
 
-- It works best wrapping simple R/Bash/Python and other interpreted scripts with a few user supplied parameters and a few i/o history files.
+- The Appliance can import any tool from a Toolshed and is a fully functional Galaxy, capable of connecting to clusters if desired but designed for development.
+- The ToolFactory works best wrapping simple R/Bash/Python and other interpreted scripts, with a few user supplied parameters and a few i/o history files.
 - Scripts are easier than some Conda packages because they can easily be modified to respond to default empty parameters as if they had not been passed. As a result, advanced tool building elements
 such as conditionals and related tricks requiring manual coding, can often be avoided.
 - On the other hand, many Conda dependencies will require XML conditionals
@@ -70,11 +76,11 @@ or other tool XML constructs that are not easy to generate automatically. While 
 - Corrolary: Unless there is a working script that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is of little use.
 
 
-**The ToolFactory is for developers and code-writing scientists not yet familiar with the more flexible and complex manual tools, and who need to wrap scripts that are simple
+**The ToolFactory Appliance is for developers and code-writing scientists not yet familiar with the more flexible and complex manual tools, and who need to wrap scripts that are simple
 enough for the ToolFactory.**
 
-Compared to other Galaxy tool development software, there is far less to learn in order to get up to speed when using a form driven, automated code generator. The
-cost of this convenience is that ToolFactory is limited to automated generation of a large but limited subset of simple script and package wrappers.
+Compared to other Galaxy tool development software, there is far less to learn in order to get up to speed when using a form driven, automated code generator
+in a tailored, readily deployed appliance. The cost of this convenience is that ToolFactory is limited to automated generation of a large but limited subset of simple script and package wrappers.
 
 
 # 2. Getting your hands on a ToolFactory for some hands-on training.
@@ -122,7 +128,7 @@ Check for Conda and other running processes before assuming it has frozen.
 >>```
 >>git clone https://github.com/fubar2/toolfactory-galaxy-server
 >>cd toolfactory-galaxy-server/compose
->> docker-compose -f docker-compose.yml -f docker-compose.singularity.yml pull
+>>docker-compose -f docker-compose.yml -f docker-compose.singularity.yml pull
 >>docker-compose -f docker-compose.yml -f docker-compose.singularity.yml up -d
 >>```
 >>

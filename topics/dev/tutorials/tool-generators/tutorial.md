@@ -52,7 +52,9 @@ It shows a quick way to bridge the gap between a working command line script and
 Users new to Galaxy from other scientific disciplines, those not yet familiar with the more manual tool development process, may find the ToolFactory useful for familiarising themselves with tool development in Galaxy.
 
 The ToolFactory itself is developed as a Galaxy tool, run via the Galaxy tool interface.
-This tutorial is intended to be an introduction to the ToolFactory and it offers broad guidance. It is up to the user to adapt it to their own work.
+It comes as a docker-galaxy-stable based appliance, ready to use for learning about or using the ToolFactory.
+This first tutorial is an introduction and it offers broad guidance.
+It is up to the user to adapt it to their own work.
 Experienced galaxy tool developers already have specialised tools and training to suit their needs so may not gain much from this material.
 
 > ### Agenda
@@ -100,15 +102,17 @@ specialised Galaxy tool for developers that generates tools from scripts. This t
 ## The ToolFactory Appliance
 
 The ToolFactory is an automated, form driven code generator that installs newly generated tools in the Appliance so you can try them straight away.
-The ToolFactory runs as a normal Galaxy tool
+The ToolFactory runs as a normal Galaxy tool in specially prepared docker containers.
 
 The Appliance was developed for skilled programmers who need new Galaxy tools for their own use or for users they support. Any user comfortable with scientific or general
-scripting languages
-on a Linux command
+scripting languages on a Linux command
 line may find it useful if they ever need a Galaxy tool that wraps a working script. Shell utilities and scripting language interpreters supported by Conda can be used.
 
-Generated tools pass Planemo lint, and are functionally indistinguishable from equivalent manually written tools. They contain a test based on the test data provided
-at tool generation. Trivial working examples using bash, Python, Rscript, Lisp, Prolog, Perl and sed are provided and described below.
+Generated tools pass Planemo lint, and are functionally indistinguishable from equivalent manually written tools. A second tool can be used to finalise
+ToolFactory untested archives. It uses Planemo. The tested toolshed archives contain a test based on the test data provided
+at tool generation.
+
+Working examples using bash, Python, Rscript, Lisp, Prolog, Perl and sed are provided and described below. Many demonstrate advanced ToolFactory features.
 
 If you are a scientist/programmer or informatician new to Galaxy
 and new to the dark arts of Galaxy tool building, this tutorial may be of help. It introduces an automated way to convert any useful script into a toolshed ready tool,
