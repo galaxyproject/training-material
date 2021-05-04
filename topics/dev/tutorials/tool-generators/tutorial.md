@@ -275,6 +275,7 @@ worth reviewing. Text on the form is all in the XML and it all comes from the To
 >>```
 >>git clone https://github.com/fubar2/toolfactory-galaxy-server
 >>cd toolfactory-galaxy-server/compose
+>>docker-compose -f docker-compose.yml -f docker-compose.singularity.yml pull
 >>docker-compose -f docker-compose.yml -f docker-compose.singularity.yml up -d
 >>```
 >>

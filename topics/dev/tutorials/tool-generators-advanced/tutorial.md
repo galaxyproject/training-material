@@ -122,6 +122,7 @@ Check for Conda and other running processes before assuming it has frozen.
 >>```
 >>git clone https://github.com/fubar2/toolfactory-galaxy-server
 >>cd toolfactory-galaxy-server/compose
+>> docker-compose -f docker-compose.yml -f docker-compose.singularity.yml pull
 >>docker-compose -f docker-compose.yml -f docker-compose.singularity.yml up -d
 >>```
 >>
