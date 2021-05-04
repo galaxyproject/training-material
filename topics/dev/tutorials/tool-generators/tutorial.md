@@ -259,7 +259,7 @@ worth reviewing. Text on the form is all in the XML and it all comes from the To
 
 > ### {% icon hands_on %} Hands-on: Launching the Container
 >>
->> 1. [Install Docker](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform. Then, `pip install docker-compose`
+>> 1. [Install Docker](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform. Then, `pip3 install docker-compose`
 >>
 >> 2. Go to [the ToolFactory appliance github repository](https://github.com/fubar2/toolfactory-galaxy-server)
 >>
@@ -418,13 +418,6 @@ Galaxy can be used as an Integrated Development Environment for tools - clunky b
 {: .warning}
 
 
-## The ToolFactory supports users who routinely write command line scripts in their work.
-
-The ToolFactory can be found in the main ToolShed under the `tool-generators` category. It automates much of the work needed to prepare a
-new Galaxy tool using information provided by the script writer,
-on the ToolFactory form. The ToolFactory can wrap any simple script that runs correctly on the linux command line with some small test input samples. This is potentially
-handy for developers new to Galaxy, and for Galaxy users who are capable of correctly scripting on the command line for themselves.
-
 ### Limits and workarounds
 
 - The ToolFactory is an automated code generator.
@@ -437,24 +430,7 @@ handy for developers new to Galaxy, and for Galaxy users who are capable of corr
 
 # Next Steps
 
-This was a very brief introduction to the ToolFactory, we recommend you first explore the history Ross has produced, full of examples of using the ToolFactory. You can re-run these examples to see how they ToolFactory was configured and explore their outputs.
-
-> ### {% icon hands_on %} Hands-on: Steps to use that URL to import the history
->
-> 1. Select the`User` tab from the top bar in Galaxy;
-> 2. Select `Histories`
-> 3. Select `Import`
-> 4. Paste the URL into the URL field and press `import`
->
->    ```
->   https://zenodo.org/record/4729971/files/TF_demo_history_April30.tar.gz?download=1
->    ```
->
-> 5. When it's complete, select "Switch to history", or find it from the History Switcher {% icon galaxy-history %}.
->
-{: .hands_on}
-
-Then, expand your knowledge further with the [Advanced ToolFactory tutorial]({% link topics/dev/tutorials/tool-generators-advanced/tutorial.md %})
+Expand your knowledge further with the [Advanced ToolFactory tutorial]({% link topics/dev/tutorials/tool-generators-advanced/tutorial.md %})
 
 # Acknowledgements
 

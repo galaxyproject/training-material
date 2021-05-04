@@ -109,7 +109,7 @@ Check for Conda and other running processes before assuming it has frozen.
 
 > ### {% icon hands_on %} Hands-on: Launching the Container
 >>
->> 1. [Install Docker and Docker Compose](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform
+>> 1. [Install Docker](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform. Then `pip3 install docker-compose`.
 >>
 >> 2. Go to [the ToolFactory appliance github repository](https://github.com/fubar2/toolfactory-galaxy-server)
 >>
