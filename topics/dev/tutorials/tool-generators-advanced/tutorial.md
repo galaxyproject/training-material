@@ -3,9 +3,10 @@
 layout: tutorial_hands_on
 title: "ToolFactory: Generating Tools From More Complex Scripts"
 key_points:
-  - The ToolFactory is a fully automated Galaxy tool generator for scientists and developers who routinely write command line scripts.
+  - The ToolFactory is an automated Galaxy tool generator suitable for simple tools.
+  - It was designed for scientists and developers who routinely write command line scripts.
   - It can turn a working command line script into a proper Galaxy tool with a test in a few minutes.
-  - It automatically generates simple, complete Galaxy tools from information provided by filling in a normal Galaxy form in the familiar UI.
+  - It generates complete Galaxy tools from information provided by filling in a normal Galaxy form in the familiar Galaxy UI.
 
 objectives:
  - Further develop your ToolFactory Skills
@@ -51,8 +52,8 @@ handy for developers new to Galaxy, and for Galaxy users who are capable of corr
 > ### {% icon tip %} Under the hood:
 >
 >  - It uses [galaxyml](https://github.com/hexylena/galaxyxml) to generate the tool XML from ToolFactory form settings.
->  - It uses [Planemo](https://github.com/galaxyproject/planemo) to generate the test outputs
->  - Then again to test newly generated code
+>  - It uses [Planemo](https://github.com/galaxyproject/planemo) to generate the test outputs and then again to test newly generated code
+>  - The appliance in Docker is built on [docker-galaxy-stable](https://github.com/bgruening/docker-galaxy-stable) infrastructure
 {: .tip}
 
 
@@ -69,8 +70,8 @@ or other tool XML constructs that are not easy to generate automatically. While 
 - Corrolary: Unless there is a working script that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is of little use.
 
 
-**The ToolFactory is for developers and informaticians not yet familiar with those far more flexible tools.**
-**Scripts they need to wrap are frequently simple enough for the ToolFactory.**
+**The ToolFactory is for developers and code-writing scientists not yet familiar with the more flexible and complex manual tools, and who need to wrap scripts that are simple
+enough for the ToolFactory.**
 
 Compared to other Galaxy tool development software, there is far less to learn in order to get up to speed when using a form driven, automated code generator. The
 cost of this convenience is that ToolFactory is limited to automated generation of a large but limited subset of simple script and package wrappers.
@@ -82,12 +83,8 @@ cost of this convenience is that ToolFactory is limited to automated generation 
 
 - If you found the introductory material presented so far relevant to your own needs, you may wish to start the DIY/hands-on part of the tutorial that follows
 - Set up your own working ToolFactory, install the samples in a history and then start exploring it and figuring out how it might help your work.
-- Depending on your preferences, install your own ToolFactory from one of the options described below.
+- Install your own ToolFactory Appliance as described below.
 - The sections after this can **only be completed with a working ToolFactory**.
-- Work done in a Planemo ToolFactory will not be `persistent`. For any serious use, this is a problem although saving histories or converted workflows can be used
-to manually persist the ToolFactory configuration for each new tool. Some options involve `persistent` Galaxy servers and these are much more useful for building and
-more importantly, updating tools. It can be disappointing to learn that the history recording all your ToolFactory work is no longer available the next time you start working.
-- Non persistent options are **recommended only for testing or teaching - not production**.
 - In all cases, the first time they are run and the first time a tool is built, most versions take 10 minutes or so  - there's a lot that needs to be installed.
 Check for Conda and other running processes before assuming it has frozen.
 
@@ -101,8 +98,8 @@ Check for Conda and other running processes before assuming it has frozen.
 ## Installation
 
 > ### {% icon warning %} Security advisory!
->- *Please do not install the ToolFactory on a public server*
->- Although it will only run for administrative users, it allows unlimited scripting and that is a high security risk opportunity for any public facing machine.
+>- *Please do not install the ToolFactory on any public server*
+>- Although it will only run for administrative users, it allows unlimited scripting and that exposes unwise security weakness for any public facing machine.
 >- In fact, Galaxy is very good at isolating tools to stop them doing mischief. But that's no reason to chance your arm. They keep inventing better mice.
 >- Please install it locally as described below.
 >- For this reason, the training materials can't make use of existing public Galaxy infrastructure like most of the GTN material.
