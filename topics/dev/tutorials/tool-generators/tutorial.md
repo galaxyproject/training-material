@@ -268,6 +268,7 @@ worth reviewing. Text on the form is all in the XML and it all comes from the To
 >> 4. Change to the compose directory - `cd ~/toolfactory-galaxy-server-main/compose`
 >>
 >>- Note that
+>>   - pull is only needed the first time, or if there is a newer version available. Building the containers takes 20 minutes or more.
 >>   - the -d in the docker-compose command detaches the terminal so you can keep working.
 >>   - It can be useful to remove that flag and stay attached when things go wrong to watch the startup.
 >>
@@ -284,6 +285,7 @@ worth reviewing. Text on the form is all in the XML and it all comes from the To
 >>    > wget https://github.com/fubar2/toolfactory-galaxy-server/archive/refs/heads/main.zip
 >>    > unzip main.zip
 >>    > cd toolfactory-galaxy-server-main/compose
+>>    > docker-compose -f docker-compose.yml -f docker-compose.singularity.yml pull
 >>    > docker-compose -f docker-compose.yml -f docker-compose.singularity.yml up -d
 >>    > ```
 >>
