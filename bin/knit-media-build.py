@@ -7,12 +7,15 @@ import json
 import yaml
 import sys
 
-GTN_URL = "http://localhost:4002/training-material"
-# GTN_URL = "https://training.galaxyproject.org/training-material"
-ANSIBLE_HOST_OVERRIDE = "gat-1.be.training.galaxyproject.eu"
-GXY_URL = "https://gat-1.be.training.galaxyproject.eu"
 GTN_HOME = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..")
+
+ANSIBLE_HOST_OVERRIDE = "gat-1.be.training.galaxyproject.eu"
+GTN_URL = "https://training.galaxyproject.org/training-material"
+GXY_URL = "https://gat-1.be.training.galaxyproject.eu"
 GIT_GAT = '/home/ubuntu/galaxy/'
+
+GTN_URL = "http://localhost:4002/training-material"
+GIT_GAT = '/home/hxr/arbeit/galaxy/git-gat'
 
 data = yaml.safe_load(open(sys.argv[1], "r").read())
 meta = data["meta"]
@@ -341,12 +344,10 @@ def recordTerm(idx, group):
 # the audios for those.
 for idx, group in enumerate(runningGroup(steps)):
     typ = group[0]["data"]["visual"]
-    print(typ, len(group), idx)
+    # print(typ, len(group), idx)
     if typ == "gtn":
-        continue
         recordGtn(idx, group)
     elif typ == "terminal":
         recordTerm(idx, group)
     elif typ == "galaxy":
         recordGxy(idx, group)
-    input("Continue,....")
