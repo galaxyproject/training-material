@@ -44,14 +44,19 @@ contributors:
 >
 {: .agenda}
 
-## The ToolFactory Appliance is a pop-up MYOT (make your own tools) Galaxy for scientists who routinely write command line scripts in their work.
+## The ToolFactory Appliance: A pop-up MYOT (make your own tools) Galaxy for scientists who write command line scripts in their work.
 
 The ToolFactory automates much of the work needed to prepare a new Galaxy tool using information provided by the script writer,
 on the ToolFactory form. The ToolFactory can wrap any simple script that runs correctly on the linux command line with some small test input samples. This is potentially
 handy for developers new to Galaxy, and for Galaxy users who are capable of correctly scripting on the command line for themselves.
 
-Untested tools are immediately available and the Galaxy server is fully functional. Tools can be generated or added from the Toolshed to create a
-tailored Galaxy. The appliance is an ideal way for any data intensive scientist to quickly develop and refine new tools on their workstations,
+Untested tools are immediately available providing instant feedback for the developer. Wording in labels and help text can be edited by re-running the job. The
+newly generated version will have all the text updated so it can be checked again.
+
+The Appliance Galaxy server is fully functional. Tools can be generated or added from the Toolshed to create a
+tailored Galaxy for any kind of analysis.
+
+The appliance is an ideal way for any data intensive scientist to quickly develop and refine new tools on their workstations,
 ready for deployment in production and sharing.
 
 
@@ -940,9 +945,9 @@ planemo lint $TOOLNAME >> $2
 
 ## Notes on some commonly reported issues
 
-#### First job I submitted in Planemo ToolFactory or the Docker container remains grey or running for a long time - is it broken?
+#### First Appliance job I submitted container remains grey or running for a long time - is it broken?
 
-- Check with top or your system monitor - if Conda is running, things are working but it's slow the first time.
+- Check with `top` or your system monitor - if Conda is running, things are working but it's slow the first time a dependency is installed.
 - The first run generally takes a while to install all the needed dependencies.
 - Subsequent runs should start immediately
 - Installing new Conda dependencies also takes time so tools that have new Conda packages will take longer to generate as they must be installed before the tool can be tested.

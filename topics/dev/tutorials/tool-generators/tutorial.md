@@ -396,9 +396,13 @@ worth reviewing. Text on the form is all in the XML and it all comes from the To
 1. If it needs any changes, open the collection created when the tool was generated. Open one of the collection items and use the {% icon galaxy-refresh %} rerun button to
 recreate the ToolFactory form as it was when you last ran it. Adjust as needed and use the tool form`execute` button to run the ToolFactory again with updated settings.
 1. Rinse, repeat.
-1. When everything is to your satisfaction, generate the tool again but select the option to run the test and make a toolshed ready archive.
-1. Nothing much happens in Galaxy, but a new tested tool archive will eventually appear in `compose/export/galaxy/testedTFarchives/[tool name]` on your
-local machine where the container has a mapped volume.
+1. When everything is to your satisfaction, use the planemo_test tool in the ToolFactory section.
+    1. Select the untested tool archive to be tested.
+    1. Run the test
+    1. First time will take 10 minutes or so.
+    1. Subsequently, time will depend on Conda dependencies. If none a minute or so.
+    1. A new tested archive together with a collection containing test reports will be in the history when the job finishes.
+    1. It can be downloaded from the history or found in compose/export/galaxy/tools/[tool name]
 
 Galaxy can be used as an Integrated Development Environment for tools - clunky but oddly satisfying. Note this is distinct from debugging the script - that is not at all satisfying in Galaxy unless you like waiting for jobs to finish. A shell is much better for that.
 
@@ -438,15 +442,17 @@ Galaxy can be used as an Integrated Development Environment for tools - clunky b
 {: .warning}
 
 
-### Limits and workarounds
+### Limits, workarounds and value proposition
 
-- The ToolFactory is an automated code generator.
-- No generator can replace manual editing by a skilled developer other than in constrained, simple cases.
+- The ToolFactory Appliance is a slightly clumsy but useable way to create, test and maintain Galaxy tools in a web GUI.
+- The ToolFactory tool is an automated code generator installed in the appliance tool menu
+- No generator can replace manual editing by a skilled developer other than in constrained simple cases.
 - These are common enough in the daily work of most data intensive scientific fields to make a tool generator potentially worth keeping handy.
-- For simple scripts and appropriate Conda packages, it's potentially very useful.
-- It is not hard to imagine using a Python wrapper to finesse more complex tools just as bash was used in the `planemo lint` example.
-- The ToolFactory, if in a persistent form, is a slightly clumsy but useable way to create and maintain Galaxy tools.
-- Tools can have command-override and test-override pasted in as in one of the BWA samples. This can solve some of the limitations. However, if the package requires that kind of complexity, it might be better to prepare the wrapper manually.
+- For simple scripts and appropriate Conda packages, a professional Galaxy tool developer can probably do it quickly by hand, but those skills take time to acquire
+and are not widely available, particularly in scientific fields coming to Galaxy.
+- Tools can have command-override and test-override pasted in as in one of the BWA samples.
+   - This can solve some of the limitations but if it is needed, it might be better to prepare the wrapper manually if a skilled developer is available.
+- The ToolFactory can help new scientists and developers to quickly get some simple tools working for their colleagues while awaiting help with the complex ones.
 
 # Next Steps
 
