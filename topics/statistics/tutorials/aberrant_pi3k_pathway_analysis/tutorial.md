@@ -185,30 +185,17 @@ This first step is designed to generate model with ERK/RAS/PI3K signaling axis p
 >    - {% icon param-file %} *"Filename of mutation burden"*: `mutation_burden_freeze.tsv` (Input dataset).
 >    - {% icon param-file %} *"Filename of sample"*: `sample_freeze.tsv` (Input dataset) Input TCGA processed sample information data. See dataset descriptions for details.
 >    - {% icon param-text %} *"Comma separated string of HUGO gene symbols"*: `ERBB2,PIK3CA,KRAS,AKT1` 
->    - {% icon param-text %} *"Comma sep string of TCGA disease acronyms. If no arguments are passed, filtering will default to options given in --filter_count and --filter_prop."*: `BLCA,BRCA,CESC,COAD,ESCA,LUAD,LUSC,OV,PRAD,READ,STAD,UCEC,UCS` 
->    - *"option to set seed"*: `1234`  
->    - *"Number of cross validation folds to perform"*: `5` 
->    - *"Decision to drop input genes from X matrix"*: `Yes` 
+>    - {% icon param-text %} *"Comma sep string of TCGA disease acronyms. If no arguments are passed, filtering will default to options given in --filter_count and --filter_prop."*: `BLCA,BRCA,CESC,COAD,ESCA,LUAD,LUSC,OV,PRAD,READ,STAD,UCEC,UCS`
 >    - {% icon param-select %} *"Supplement Y matrix with copy number events"*: `Yes` 
 >    - {% icon param-file %} *"File with Copy number loss"*: `copy_number_loss_status.tsv` (Input dataset) 
 >    - {% icon param-file %} *"File with Copy number gain"*: `copy_number_gain_status.tsv` (Input dataset) 
 >    - {% icon param-file %} *"File with cancer gene classification table"*: `cosmic_cancer_classification.tsv` (Input dataset) 
->    - *"Min number of mutations in diseases to include"*: `15` 
->    - *"Min proportion of positives to include disease"*: `0.05` 
->    - *"Number of MAD genes to include in classifier"*: `8000` 
->    - *"the alphas for parameter sweep"*: `0.1,0.13,0.15,0.18,0.2,0.3,0.4,0.6,0.7` 
->    - *"the l1 ratios for parameter sweep"*: `0.1,0.125,0.15,0.2,0.25,0.3,0.35` 
 >    - {% icon param-text %} *"alternative genes to test performance"*: `PTEN,PIK3R1,STK11` 
->    - {% icon param-text %} *"The alternative diseases to test performance"*: `BRCA,COAD,ESCA,HNSC,LGG,LUAD,LUSC,PRAD,READ,GBM,UCEC,UCS` 
->    - *"Min number of mutations in disease to include in alternate"*: `15` 
->    - *"Min proportion of positives to include disease in alternate"*: `0.05` 
->    - *"Remove hypermutated samples"*: `Yes` 
->    - *"Keep intermediate ROC values for plotting"*: `Yes` 
+>    - {% icon param-text %} *"The alternative diseases to test performance"*: `BRCA,COAD,ESCA,HNSC,LGG,LUAD,LUSC,PRAD,READ,GBM,UCEC,UCS`
+>    - *"Decision to drop input genes from X matrix"*: `Yes`
+>    - *"Remove hypermutated samples"*: `Yes`
+>    - *"Keep intermediate ROC values for plotting"*: `Yes`
 >    - *"Shuffle the input gene exprs matrix alongside"*: `Yes` 
->    - *"Shuffle the gene exprs matrix before training"*: `No` 
->    - *"Remove mutation data from y matrix"*: `No` 
->    - *"Decision to drop gene expression values from X"*: `No` 
->    - *"Decision to drop covariate information from X"*: `No` 
 {: .hands_on}
 
 > ### {% icon details %} PanCancer Aberrant Pathway Activity Analysis `pancancer_classifier.py` inputs
@@ -261,11 +248,7 @@ This step is designed to generate individual pan-within models for each individu
 >    - {% icon param-file %} *"File with Copy number loss"*: `copy_number_loss_status.tsv` (Input dataset)
 >    - {% icon param-file %} *"File with Copy number gain"*: `copy_number_gain_status.tsv` (Input dataset)
 >    - {% icon param-file %} *"File with cancer gene classification table"*: `cosmic_cancer_classification.tsv` (Input dataset)
->    - *"the alphas for parameter sweep"*: `0.1,0.13,0.15,0.18,0.2,0.3,0.4,0.6,0.7`
->    - *"the l1 ratios for parameter sweep"*: `0.1,0.125,0.15,0.2,0.25,0.3,0.35`
 >    - *"Remove hypermutated samples"*: `Yes`
->    - *"option to set seed"*: `1234`
->    - *"Number of MAD genes to include in classifier"*: `8000`
 {: .hands_on}
 
 > ### {% icon details %} PanCancer Aberrant Pathway Activity Analysis `within_disease_analysis.py` inputs
