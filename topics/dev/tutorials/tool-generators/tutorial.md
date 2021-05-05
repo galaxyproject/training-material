@@ -162,7 +162,7 @@ sections of the generated XML file in the toolshed archive. The ToolFactory form
 >
 {: .details }
 
-Two new items are created in the history when the ToolFactory is executed - the new tool in an archive and a collection with log, XML and a planemo test report.
+Two new items are created in the history when the ToolFactory is executed - the new tool in an archive and a collection with new tool XML and all input samples.
 
 >### {% icon details %} History items created after a successful run
 > ![History outputs created after executing the generated tool](../../images/toolfactory_outputs_hello.png "The first item is a downloadable toolshed archive containing the tool and test ready to upload or install (see below on installing newly generated tools).")
@@ -258,8 +258,15 @@ worth reviewing. Text on the form is all in the XML and it all comes from the To
 - Compared to the more usual shell and a text editor, The ToolFactory in Galaxy is a slow and clumsy way to debugging scripts. More than a minute per cycle because`planemo test` is run twice, building and tearing down a Galaxy each time.
 - **Starting a new ToolFactory tool with a know good command line and data** is strongly recommended. You will know exactly what to expect from the tool test for a first sanity check.
 - Corrolary: Unless there is a working script that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is of little use.
+- Generated tools are untested and not recommended for sharing.
+  - Testing is easy - use the planemo_test tool from the ToolFactory tool menu.
+  - In a new Appliance, the first run takes 10 or more minutes to install all the dependencies it needs.
+  - Subsequently more like a minute depending on the specific Conda dependencies required by the tool.
+  - The planemo_test tool creates a new tested toolshed archive ready for sharing, and a collection with reports.
+      - The Planemo test report is in the collection with a run log. Please check the html report to make sure it passed before sharing your new tool.
+----
 
-## The ToolFactory Appliance requires a Linux workstation, Docker and docker-compose.
+## Installing the ToolFactory Appliance: requires a Linux workstation, Docker and docker-compose.
 
 > ### {% icon hands_on %} Hands-on: Launching the Container
 >>
@@ -329,7 +336,9 @@ worth reviewing. Text on the form is all in the XML and it all comes from the To
 >>
 {: .hands_on}
 
+----
 
+## Exploring the ToolFactory in the running Appliance.
 
 The best way to explore the kinds of tasks that can be achieved with simple scripts is to take a look at each sample tool. Note how the various
 options have been configured and what kinds of scripts this could be used for in your work. The example script can be swapped out for another one known to work and additional
