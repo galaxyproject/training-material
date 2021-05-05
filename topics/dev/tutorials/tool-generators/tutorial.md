@@ -272,15 +272,16 @@ worth reviewing. Text on the form is all in the XML and it all comes from the To
 >> 4. Change to the compose directory - `cd ~/toolfactory-galaxy-server-main/compose`
 >>
 >>- Note that
->>   - pull is only needed the first time, or if there is a newer version available. Building the containers takes 20 minutes or more.
+>>   - pull is only needed the first time, or if there is a newer version available.
+>>   - Building the containers takes 20 minutes or more.
 >>   - the -d in the docker-compose command detaches the terminal so you can keep working.
 >>   - It can be useful to remove that flag and stay attached when things go wrong to watch the startup.
 >>
 >>```
 >>git clone https://github.com/fubar2/toolfactory-galaxy-server
 >>cd toolfactory-galaxy-server/compose
->>docker-compose -f docker-compose.yml -f docker-compose.singularity.yml pull
->>docker-compose -f docker-compose.yml -f docker-compose.singularity.yml up -d
+>>docker-compose pull
+>>docker-compose up -d
 >>```
 >>
 >>
@@ -290,8 +291,8 @@ worth reviewing. Text on the form is all in the XML and it all comes from the To
 >>    > wget https://github.com/fubar2/toolfactory-galaxy-server/archive/refs/heads/main.zip
 >>    > unzip main.zip
 >>    > cd toolfactory-galaxy-server-main/compose
->>    > docker-compose -f docker-compose.yml -f docker-compose.singularity.yml pull
->>    > docker-compose -f docker-compose.yml -f docker-compose.singularity.yml up -d
+>>    > docker-compose pull
+>>    > docker-compose up -d
 >>    > ```
 >>
 >>Your appliance should be running with a local Galaxy on [port 8080 of your workstation](http://localhost:8080) after a fair bit of activity.
@@ -304,7 +305,9 @@ worth reviewing. Text on the form is all in the XML and it all comes from the To
 >>
 >>## Demonstration tools are the functional documentation
 >>
->>- At first login you will find the demonstration history ready to explore
+>>- At first login you will find the demonstration history ready to explore if you waited for all the Conda activity to die down
+>>- It takes a minute or two to import because the dependencies for the ToolFactory must first be installed.
+>>- If it's not there, you can import it manually from Zenodo as described in the Welcome page text.
 >>
 >> - To explore an example, open the toolshed archive by clicking on the name, and select the `rerun` button from the expanded view
 >>    - The form that generated that tool will appear for you to examine
@@ -315,7 +318,7 @@ worth reviewing. Text on the form is all in the XML and it all comes from the To
 >>
 >>`docker-compose down`
 >>
->>from the same place you started should shut it down nicely. Most things will still be there next time you start it. We are working on the installed tools disappearing!
+>>from the same place you started should shut it down nicely. Most things will still be there next time you start it.
 >>    {: .code-in}
 >>
 >>    > ### {% icon tip %} Tip: Patience!

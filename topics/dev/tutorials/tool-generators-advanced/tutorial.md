@@ -3,12 +3,13 @@
 layout: tutorial_hands_on
 title: "ToolFactory: Generating Tools From More Complex Scripts"
 key_points:
-  - The ToolFactory Appliance is an automated Galaxy tool generator running in a flavour of docker-galaxy-stable
+  - The ToolFactory Appliance is an automated form driven tool generator
+  - It runs in a flavour of docker-galaxy-stable and produces new tools as Toolshed ready archives
   - It was designed for scientists and developers who routinely write scripts for their analyses.
-  - It can turn a working command line script into an untested Galaxy tool in a few seconds.
-  - It generates tools from information on a normal Galaxy form in the familiar Galaxy UI.
-  - The new tool is installed in the appliance so can be used and tested immediately.
-   - Adding a test takes a few minutes and is only needed when the new tool is ready for sharing.
+  - It can quickly turn a working command line script into a toolshed-ready archive.
+  - It generates tools from information entered on a Galaxy form in the familiar UI.
+  - The new tool is installed in the appliance after generation so can be used and tested immediately.
+  - Adding a test to the toolshed archive takes a few minutes and is only needed when the new tool is ready for sharing.
 
 objectives:
  - Further develop your ToolFactory Skills
@@ -45,54 +46,52 @@ contributors:
 
 ## The ToolFactory Appliance is a pop-up MYOT (make your own tools) Galaxy for scientists who routinely write command line scripts in their work.
 
-The ToolFactory automates much of the work needed to prepare a
-new Galaxy tool using information provided by the script writer,
+The ToolFactory automates much of the work needed to prepare a new Galaxy tool using information provided by the script writer,
 on the ToolFactory form. The ToolFactory can wrap any simple script that runs correctly on the linux command line with some small test input samples. This is potentially
 handy for developers new to Galaxy, and for Galaxy users who are capable of correctly scripting on the command line for themselves.
 
 Untested tools are immediately available and the Galaxy server is fully functional. Tools can be generated or added from the Toolshed to create a
-tailored Galaxy. The appliance is an ideal way for any data intensive scientist to quickly develop and refine new tools on their workstations, ready for deployment in production and sharing.
+tailored Galaxy. The appliance is an ideal way for any data intensive scientist to quickly develop and refine new tools on their workstations,
+ready for deployment in production and sharing.
 
 
 > ### {% icon tip %} Under the hood:
 >
 >  - It uses [galaxyml](https://github.com/hexylena/galaxyxml) to generate the tool XML from ToolFactory form settings.
 >  - It uses [Planemo](https://github.com/galaxyproject/planemo) to generate the test outputs and then again to test newly generated code
->  - The appliance in Docker is built on [docker-galaxy-stable](https://github.com/bgruening/docker-galaxy-stable) infrastructure
+>  - The appliance in Docker is built on [docker-galaxy-stable](https://github.com/bgruening/docker-galaxy-stable/compose) infrastructure
 {: .tip}
 
 
 
 ## Limits and scope
 
-- The Appliance can import any tool from a Toolshed and is a fully functional Galaxy, capable of connecting to clusters if desired but designed for development.
-- The ToolFactory works best wrapping simple R/Bash/Python and other interpreted scripts, with a few user supplied parameters and a few i/o history files.
-- Scripts are easier than some Conda packages because they can easily be modified to respond to default empty parameters as if they had not been passed. As a result, advanced tool building elements
-such as conditionals and related tricks requiring manual coding, can often be avoided.
-- On the other hand, many Conda dependencies will require XML conditionals
-or other tool XML constructs that are not easy to generate automatically. While some simple requirements may be manageable, complex ones will not be suitable for the ToolFactory.
-- Compared to the more usual shell and a text editor, The ToolFactory in Galaxy is a slow and clumsy way to debugging scripts. More than a minute per cycle because`planemo test` is run twice, building and tearing down a Galaxy each time.
-- **Starting a new ToolFactory tool with a know good command line and data** is strongly recommended. You will know exactly what to expect from the tool test for a first sanity check.
-- Corrolary: Unless there is a working script that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is of little use.
+- The Appliance can generate, install and run new tools from scripts on your desktop.
+    - However, it is a fully functional Galaxy instance, so it can also import any existing
+tool from a Toolshed and [can easily be connected to a cluster for real work](https://github.com/bgruening/docker-galaxy-stable/compose).
+- The ToolFactory works best wrapping simple R/Bash/Python and other interpreted scripts, with a few user supplied parameters and a few I/O history files.
+- Scripts are easier than some Conda packages
+    - This is because the tool builder can modify the code to respond to default empty parameters as if they had not been passed.
+    - This may not sound like much, but as a result, advanced tool building elements such as conditionals and related tricks requiring manual coding, can sometimes be avoided.
+    - In contrast, some Conda dependencies or combinations will require XML conditionals
+or other complex tool XML constructs that are not easy to generate automatically.
+    - While some simple requirements may be manageable, complex ones will not be suitable for the ToolFactory.
+- Compared to the more usual linux shell and text editor, the ToolFactory appliance is a rather clumsy way to debug scripts.
+    - **Starting a new ToolFactory tool with a know good command line and data** is strongly recommended. You will know exactly what to expect from the tool test for a first sanity check.
+    - Corrolary: Unless there is a working script that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is of little use.
+- The ToolFactory Appliance is for developers and code-writing scientists not yet familiar with the more flexible and complex manual tools, and who need to wrap scripts that are simple
+enough for the ToolFactory.
+    - Compared to the more flexible manual Galaxy tool development software, there is far less to learn to get up to speed with a form driven,
+automated code generator in a tailored, readily deployed appliance.
+    - The cost of this convenience is that ToolFactory is limited to a limited subset of simple script and package wrappers.
 
 
-**The ToolFactory Appliance is for developers and code-writing scientists not yet familiar with the more flexible and complex manual tools, and who need to wrap scripts that are simple
-enough for the ToolFactory.**
+# 2. Getting your hands on a ToolFactory Appliance for some hands-on training.
 
-Compared to other Galaxy tool development software, there is far less to learn in order to get up to speed when using a form driven, automated code generator
-in a tailored, readily deployed appliance. The cost of this convenience is that ToolFactory is limited to automated generation of a large but limited subset of simple script and package wrappers.
-
-
-# 2. Getting your hands on a ToolFactory for some hands-on training.
-
-#### Run the ToolFactory locally and adapt the sample tools
-
-- If you found the introductory material presented so far relevant to your own needs, you may wish to start the DIY/hands-on part of the tutorial that follows
-- Set up your own working ToolFactory, install the samples in a history and then start exploring it and figuring out how it might help your work.
+- If you found the introductory material relevant to your own needs, you may wish to start the DIY/hands-on part of the tutorial that follows.
 - Install your own ToolFactory Appliance as described below.
-- The sections after this can **only be completed with a working ToolFactory**.
-- In all cases, the first time they are run and the first time a tool is built, most versions take 10 minutes or so  - there's a lot that needs to be installed.
-Check for Conda and other running processes before assuming it has frozen.
+- Start exploring the provided samples to figure out if and how it might help your work.
+- Tutorial material that follows **can only be completed with a working ToolFactory**.
 
 >#### Active Tutorial content follows
 >
@@ -123,13 +122,13 @@ Check for Conda and other running processes before assuming it has frozen.
 >>
 >> 4. Change to the compose directory - `cd ~/toolfactory-galaxy-server-main/compose`
 >>
->>Something like this should get it started - *adding the singularity yml to the command is essential for the planemo tester to work*:
+>>Something like this should get it started:
 >>
 >>```
 >>git clone https://github.com/fubar2/toolfactory-galaxy-server
 >>cd toolfactory-galaxy-server/compose
->>docker-compose -f docker-compose.yml -f docker-compose.singularity.yml pull
->>docker-compose -f docker-compose.yml -f docker-compose.singularity.yml up -d
+>>docker-compose pull
+>>docker-compose up -d
 >>```
 >>
 >>
@@ -139,8 +138,8 @@ Check for Conda and other running processes before assuming it has frozen.
 >>    > wget https://github.com/fubar2/toolfactory-galaxy-server/archive/refs/heads/main.zip
 >>    > unzip main.zip
 >>    > cd toolfactory-galaxy-server-main/compose
->>    > docker-compose -f docker-compose.yml -f docker-compose.singularity.yml pull
->>    > docker-compose -f docker-compose.yml -f docker-compose.singularity.yml up -d
+>>    > docker-compose pull
+>>    > docker-compose up -d
 >>    > ```
 >>
 >>Your appliance should be running with a local Galaxy on  [port 8080 of your workstation](http://localhost:8080) after a fair bit of activity.
@@ -153,7 +152,10 @@ Check for Conda and other running processes before assuming it has frozen.
 >>
 >>## Demonstration tools are the functional documentation
 >>
->>- At first login you will find the demonstration history ready to explore
+>>- At first login to a new Appliance, you will find the demonstration history ready to explore if you waited a minute for all the Conda activity to die down
+>>- It takes a minute or two to import because the dependencies for the ToolFactory must first be installed.
+>>- If it's not there, you can import it manually from Zenodo as described in the Welcome page text.
+
 >>
 >>- To explore an example, open the toolshed archive by clicking on the name, and select the `rerun` button from the expanded view
 >>    - The form that generated that tool will appear for you to examine
@@ -161,12 +163,11 @@ Check for Conda and other running processes before assuming it has frozen.
 >>    - Change the tool ID to change the tool name.
 >>
 >>## To safely shut the appliance down
->>
->>`docker-compose down`
->>
->>from the same place you started should shut it down nicely
+>> - If the console was not detached using the --detach/-d flag
+>>      - `<ctrl><c>` in the console will gracefully shut the server down - takes time but your work will be preserved.
+>> - If the -d flag was used,
+>>    - `docker-compose down` from the same directory it was started `.../compose`, should shut it down nicely
 >>    {: .code-in}
->>
 >>    > ### {% icon tip %} Tip: Patience!
 >>    > When you run the ToolFactory for the first time inside the container and whenever you run a new tool with new dependencies, it will require some time to build the conda environment.
 >>    > Check for Conda or other processes if things seem stuck.
@@ -181,7 +182,7 @@ Check for Conda and other running processes before assuming it has frozen.
 >>
 >> - The form is processed and a new tool generated.
 >> - The new tool is installed to the Appliance.
->>    - The tool generation process takes only a few seconds.
+>>    - The tool generation process takes a few seconds.
 >>    - The `Home` or `Analysis` tab should be selected so the screen is refreshed after building.
 >>         - Otherwise the new tool menu will not be loaded so the newly generated tool will not be there
 >> - Choose the names thoughtfully and be warned: there are no checks on tool names
@@ -191,13 +192,10 @@ Check for Conda and other running processes before assuming it has frozen.
 >>
 >> - Note that the generated tool has not been run to generate test outputs, so the archive is not complete although the installed tool may work fine.
 >>
->> - To generate a real, tested toolshed archive, use the ToolFactory generated planemo_test tool.
->> - It will run Planemo to generate outputs, then run a real test and return a proper toolshed archive.
->>
->> - The first test takes 6 minutes. Subsequently more like 40 seconds depending on conda and the complexity of dependencies needed for the tool to run.
->>
->> - An archive containing the tool with proper test will be returned with the planemo report in the history.
->> - The archive can be downloaded and shared in the usual ways. It is a normal Galaxy tool that wraps the supplied script
+>> - To generate a "proper" tested toolshed archive, use the ToolFactory generated `planemo_test` tool in the ToolFactory section of the tools menu.
+>> - It will run Planemo to generate outputs, then run a real test and return a proper toolshed archive and test reports.
+>>     - An archive containing the tool with proper test will be returned with the planemo report in the history.
+>>     - The archive can be downloaded and shared in the usual ways. It is a normal Galaxy tool that wraps the supplied script
 >>
 {: .hands_on}
 
@@ -206,49 +204,41 @@ Check for Conda and other running processes before assuming it has frozen.
 ## Import ToolFactory functional documentation - the demonstration tools.
 
 - Congratulations on getting this far and acquiring a local instance of the ToolFactory
-- There is a history you should import that shows some sample tools
-- You can examine how these were generated by using the Galaxy job redo button.
+- There is a sample history built in that shows some sample tools.
+- Note that this is installed the first time a new Appliance is run. It takes a minute - wait until all the installation processes have settled down before first logging in.
+- If there is an empty history when you first log in, check the histories after a minute - if still not there, follow the Welcome page instructions to install it manually.
+- You can examine how these were generated by using the Galaxy job redo button on either of the two history items sharing the tool name.
 - This will show you the fully completed ToolFactory form used to generate the sample
 - You can edit the form and regenerate a new tool with your changes incorporated.
+- When the job completes, a new edited version of that tool will be installed and ready to run.
+- Refresh the Galaxy panels to find it in the new "ToolFactory Generated Tools" section.
+- Change the tool name to generate a different tool - the Appliance will overwrite any existing tool of the same name without warning.
 
 
 > ### {% icon announcement %} Note!
-> - This is the **first step** recommended after any of the installation options above until you are comfortable using the ToolFactory
-> - It provides access to the sample ToolFactory tools.
-> - They are the best way to learn how the ToolFactory works and how you might adapt the variations shown in your own work.
-> - It provides functional documentation and is not needed once you are comfortable using the ToolFactory.
-> - It is pre-installed in the [ToolFactory docker container](https://github.com/fubar2/toolfactory-galaxy-docker)
+> - This is the **first step** recommended
+> - Sample ToolFactory tools are the best way to learn how the ToolFactory works and how you might adapt the variations shown in your own work.
+> - They provide functional documentation to help you become comfortable using the ToolFactory.
 {: .announcement}
 
-
-- Use this url `https://zenodo.org/record/4729971/files/TF_demo_history_April30.tar.gz?download=1`
--[zenodo link](https://zenodo.org/record/4729971/files/TF_demo_history_April30.tar.gz?download=1).
-- Copy it and paste it into the URL box on the screen for importing a remote history.
-- The link is also on the welcome page of the virtualenv Planemo installation described above.
-
-> ### {% icon hands_on %} Hands-on: Steps to use that URL to import the history
->
-> 1. Select the`User` tab from the top bar in Galaxy;
-> 2. Select `Histories`
-> 3. Select `Import`
-> 4. Paste the URL into the URL field and press `import`
-{: .hands_on}
-
-
-- It will take a few minutes to import.
-- Get up and have a stretch for a minute.
-- When it's complete, select the link to view histories and choose `switch` from the drop down arrow on the new history to make the imported one your current history.
-- Viewing the new history, you will see a large number of history items and 5 data files used for testing.
-- Each item is a collection. Opening it will reveal a toolshed ready archive containing a generated tool and the generated tool XML.
-- These items have a {% icon galaxy-refresh %} rerun button. Click that button and the ToolFactory form that generated the sample tool will appear. You can see how the tool was
-built using the ToolFactory's limited capacities. Most of them are trivial of course. They are meant to be models rather than useful examples.
+- Viewing the samples history, you will see a large number of pairs of history items sharing the same tool name, and some data files used for all the building and tool testing.
+- There is an untested toolshed archive for each tool, and a collection. Opening it (click on the name) will reveal the generated tool XML and the future test input file samples.
+- Both these items for each tool have a {% icon galaxy-refresh %} rerun button.
+    - Click that button and the ToolFactory form that generated the sample tool will appear.
+    - You can see how the tool was built using the ToolFactory's limited capacities.
+    - Most of them are trivial of course.
+    - They are models that show how different kinds of scripts and tasks can be accomplished
 
 <sup id='section3'>*</sup>
 # 3. Hands-on: Learning to use the ToolFactory
 
-> ### {% icon comment %}First time use involves a long pause in some installations
-> - The first job takes longer in some installation scenarios because the ToolFactory dependencies are installed before the tool can run.
-{: .comment}
+> ### {% icon tip %} Using an Appliance involves dependency installation that may cause long pauses...
+>>- There will be delays as any new dependencies are installed for the first time
+>>        - the first ToolFactory run after first starting a new Appliance will involve Conda installing the ToolFactory dependencies before running the job.
+>>        - the first time any new tool with a new dependency is run, Conda must install it locally taking a variable amount of time depending on complexity.
+>>        - the first time the planemo_test tool is run, there will be a 10+ minute delay as Conda grinds away.
+>>        - Check for Conda and other running processes before assuming it has frozen.
+{: .tip}
 
 
 > ### {% icon hands_on %} Exploring the sample tools by regenerating their original ToolFactory forms
@@ -286,7 +276,14 @@ In practice, it's a flexible basis for generating many simple tools.
 >
 > - In addition to an ID and name, a tool may have any combination of:
 >
->     - Multiple dependencies. Conda is currently supported. System utilities can be used assuming the target server exposes them to tools, or they can be provided as Conda dependencies to ensure they will always be available
+>     - Multiple dependencies. Conda is currently supported.
+>     - Interpreters such as python, r-base and perl are typically used for ToolFactory tools.
+>     - System utilities such as bash and sed can be used.
+>     - The Appliance server always exposes them to tools, but this may/should not happen on production servers.
+>         - It is recommended that they be added as dependencies after testing locally before testing and export of production ready toolshed archives.
+>         - They can be added to the tool form like other Conda dependencies
+>         - This will ensure that they are available when the script runs. Bash, sed and so on are all available in Conda.
+>         - Versions may not matter as much as other packages. Latest will be used by default but a version can be specified to ensure reproducibility.
 >     - Argparse (named) or positional (ordered) style parameter passing at tool execution time depending on the script requirements. Positional works well for bash scripts with only a handful of parameters. Argparse is preferred for clarity.
 >     - Unlimited individual input data files to be selected from the user's history.
 >     - Unlimited individual output files to be written to the user's history, paths determined at tool execution.
@@ -932,12 +929,12 @@ planemo lint $TOOLNAME >> $2
 
 ## Limits and workarounds
 
-- The ToolFactory is an automated code generator.
-- No generator can replace manual editing by a skilled developer other than in constrained, simple cases.
+- The ToolFactory is an automated, form based code generator.
+- A generator can replace manual editing by a skilled developer only in relatively constrained, simple cases.
 - These are common enough in the daily work of most data intensive scientific fields to make a tool generator potentially worth keeping handy.
 - For simple scripts and appropriate Conda packages, it's potentially very useful.
 - It is not hard to imagine using a Python wrapper to finesse more complex tools just as bash was used in the `planemo lint` example.
-- The ToolFactory, if in a persistent form, is a slightly clumsy but useable way to create and maintain Galaxy tools.
+- The ToolFactory appliance is a convenient and efficient way to create and maintain Galaxy tools from working scripts.
 - Tools can have command-override and test-override pasted in as in one of the BWA samples. This can solve some of the limitations. However, if the package requires that kind of complexity, it might be better to prepare the wrapper manually.
 
 
