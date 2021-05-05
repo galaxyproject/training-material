@@ -264,6 +264,7 @@ worth reviewing. Text on the form is all in the XML and it all comes from the To
   - Subsequently more like a minute depending on the specific Conda dependencies required by the tool.
   - The planemo_test tool creates a new tested toolshed archive ready for sharing, and a collection with reports.
       - The Planemo test report is in the collection with a run log. Please check the html report to make sure it passed before sharing your new tool.
+
 ----
 
 ## Installing the ToolFactory Appliance: requires a Linux workstation, Docker and docker-compose.
@@ -340,12 +341,14 @@ worth reviewing. Text on the form is all in the XML and it all comes from the To
 
 ## Exploring the ToolFactory in the running Appliance.
 
-The best way to explore the kinds of tasks that can be achieved with simple scripts is to take a look at each sample tool. Note how the various
-options have been configured and what kinds of scripts this could be used for in your work. The example script can be swapped out for another one known to work and additional
-new parameters added to suit, to extend the toy examples and create tools of use to your users. Change the tool name on the newly edited form, press `execute` and
-rerun the job to generate a new toolshed archive and test report collection.
+- The best way to explore the kinds of tasks that can be achieved with simple scripts is to take a look at each sample tool.
+- Note how the various options have been configured and what kinds of scripts this could be used for in your work.
+- The example script can be swapped out for another one known to work and additional new parameters added to suit, to extend the toy examples and create tools of use to your users.
+- Change the tool name on the newly edited form, press `execute` and rerun the job to generate a new toolshed archive and test report collection.
+- If you don't change the tool name before re-generating a tool, the original installed tool will be updated with the new configuration.
 
-## Hello World!
+
+### Hello World!
 
 > ### {% icon hands_on %} Hands-on: Building the Hello World example
 >
@@ -419,7 +422,7 @@ Galaxy can be used as an Integrated Development Environment for tools - clunky b
 {: .hands_on}
 
 
-## Hello Collections!
+### Hello Collections!
 
 > ### {% icon hands_on %} Hands-on: Building the Hello World example
 >
