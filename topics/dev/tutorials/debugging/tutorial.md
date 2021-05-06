@@ -3,276 +3,227 @@ layout: tutorial_hands_on
 
 title: "Galaxy Development"
 questions:
-  - "What are Galaxy Webhooks?"
-  - "How to create them?"
+  - "How do I debug Galaxy?"
 objectives:
-  - "Discover what Galaxy Webhooks are"
-  - "Be able to create Webhooks"
-  - "Be able to add a Galaxy Webhook in a Galaxy instance"
-time_estimation: "1h"
+  - "Fix a broken branch"
+  - "Interpret the results of failed tests on GitHub"
+  - "Run individual tests locally"
+  - "Fix simple errors identified by failing tests"
+  - "Write a simple test exposing the identified bug"
+time_estimation: "2h"
 key_points:
-  - "A Galaxy Webhook provides an easy way to customize the Galaxy UI with plugins"
-  - "Right now there are 4 entry points: tool, workflow, masthead, history-menu"
-  - "With a minimal amount of code you can extend Galaxy's user-interace."
+  - "Unit Tests"
+  - "API or Integration Tests"
+  - "Client Linting Failure"
+  - "Client Tests"
+  - "Selenium Tests"
+  - "Runtime Error"
+requirements:
+  -
+    type: "internal"
+    topic_name: dev
+    tutorials:
+      - architecture
+  - Familiarity with basic Git commands
+  - Basic knowledge of Python and Javascript
+  - Mac OS or Linux that can run Galaxy & your favorite IDE or editor
 contributors:
-  - blankclemens
-  - martenson
-  - bgruening
+  - assuntad23
+  - ic4f
+  - jmchilton
 ---
 
 ## Introduction
 
-In this tutorial we are going to demonstrate how to add a webhook to the tool-execution endpoint. This is the web-page that appears
-after you have executed a tool. As a more useful example we are going to ask [phdcomics](http://phdcomics.com) for a random comic that we can
-display to entertain our users.
+In this tutorial we are going to demonstrate how to find common types of bugs or errors that you may encounter as a contributor to Galaxy.We aim to step you through the process of finding and fixing a bug - from identifying them on GitHub, to finding and developing a solution, to committing your code change.
+
+With the skills from this tutorial, it is our hope that you will feel more prepared to develop solutions for Galaxy and more confidently navigate the obstacles along the way. 
 
 
-At first let's create a config file that defines the name and the type of your webhook. The `name` is `phdcomics` and with the type we define the entry-points
-at which we modify the Galaxy user-interface. In our case we want to display an image at the `tool` and `workflow` entry-point.
-The key `activate` gives you control per-webhook to activate or deactivate it.
+## Some Basics
+
+For almost every type of error you encounter, there will be a relatively similar process:
+
+1. View failing test/error on GitHub workflows
+2. Run failing test locally
+3. Search for issue causing failure
+4. Analyze the code, develop and implement a solution
+5. Ensure test passes locally
+6. Push fixed branch to local fork
+
+Note: This process will not be the same for the runtime error, since there will be no failed test to review initially.
+
+## Getting Started: Pulling the Buggy Fork
+
+Good news! All of the failing tests are on the same fork of Galaxy! That means you only need to download and work off of one branch. The downside is that this is one buggy branch with issues all over the place. 
+
+We have no doubts that you can solve them though!
+
+The fork is located at : TODO [insert link] 
 
 
-> ### {% icon hands_on %} Hands-on
->
-> 1. Create a file named `config/phdcomics.yaml` with the following content:
->
->    ```yaml
->       name: phdcomics
->       type:
->         - tool
->         - workflow
->       activate: true
->    ```
-{: .hands_on}
+### Directions for Cloning/Basing off this fork
 
+TODO
 
-The next step is to define HTML/JS part which will control the part of the Galaxy UI. We create a new PHDComicsAppView view extended from Backbone.
-Inside this view we define a simple `div`-container with a button and a placeholder for our image called `phdcomics-img`. You can add additional
-functionality to your view, for example getting a new image on button click. The essential functionality however is stored getRandomComic.
-The big problem with phdcomics is that there is no nice API to retrive the comics, so we need to fallback to parse the HTML pages. We decided to do this
-in Python to demonstrate webhooks abilitity to call self-defined python functions. Please note the `url = galaxyRoot + 'api/webhooks/phdcomics/get_data';`, which
-calls an REST endpoint defined by use in the next step. The return value of this endpoint is retrived in JS and can be displayed or modified.
+> ###  {% icon comment %} Galaxy Repository
+> Note: This tutorial uses a fork to house the issues created for the purposes of this tutorial. In the future, when you contribute to the Galaxy project, you'll want to use one of the repositories located at [https://github.com/galaxyproject]. Most likely you'll be using the main repo, simply titled "galaxy".
+{: .comment}
 
-> ### {% icon hands_on %} Hands-on
->
-> 1. Create a file named `static/script.js` with the following content:
->
->    ```js
->        $(document).ready(function() {
->
->            var galaxyRoot = typeof Galaxy != 'undefined' ? Galaxy.root : '/';
->
->            var PHDComicsAppView = Backbone.View.extend({
->                el: '#phdcomics',
->
->                appTemplate: _.template(
->                    '<div id="phdcomics-header">' +
->                       '<div id="phdcomics-name">PHD Comics</div>' +
->                        '<button id="phdcomics-random">Random</button>' +
->                    '</div>' +
->                    '<div id="phdcomics-img"></div>'
->                ),
->
->                imgTemplate: _.template('<img src="<%= src %>"">'),
->
->                events: {
->                    'click #phdcomics-random': 'getRandomComic'
->                },
->
->                initialize: function() {
->                    this.render();
->                },
->
->                render: function() {
->                    this.$el.html(this.appTemplate());
->                    this.$comicImg = this.$('#phdcomics-img');
->                    this.getRandomComic();
->                    return this;
->                },
->
->                getRandomComic: function() {
->                    var me = this,
->                        url = galaxyRoot + 'api/webhooks/phdcomics/get_data';
->
->                    this.$comicImg.html($('<div/>', {
->                        id: 'phdcomics-loader'
->                    }));
->
->                    $.getJSON(url, function(data) {
->                        if (data.success) {
->                            me.renderImg(data.src);
->                        } else {
->                            console.error('[ERROR] "' + url + '":\n' + data.error);
->                        }
->                    });
->                },
->
->                renderImg: function(src) {
->                    this.$comicImg.html(this.imgTemplate({src: src}));
->                }
->            });
->
->            new PHDComicsAppView();
->        });
->    ```
-{: .hands_on}
+## Unit Test Failure
 
+We're going to start with our failing unit test. 
+TODO definition/purpose of tests? 
 
-The following hands-on will define an API endpoint that is called from the JS code of your webhook.
-Make sure you name the python function `main` and that all third-party requirements are installed in your Galaxy virtual environment.
-Please note that the `main()` can consume `params` from your client but also the Galaxy `trans` object, which will give you access to the
-entire user-object, including histories and datasets.
+### Finding the failing test on GitHub
 
+If you navigate to TODO [insert link] you'll see that there are quite a few failing checks. One of them says TODO (check text >)"Unit Test". Feel free to click on that to see a log of all the tests. 
 
-> ### {% icon hands_on %} Hands-on
->
-> 1. Create a file named `helper/__init__.py` with the following content:
->
->    ```python
->    import urllib
->    import re
->    import random
->    import logging
->
->    log = logging.getLogger(__name__)
->
->
->    def main(trans, webhook, params):
->        error = ''
->        comic_src = ''
->
->        try:
->            # Third-party dependencies
->            try:
->                from bs4 import BeautifulSoup
->            except ImportError as e:
->                log.exception(e)
->                return {'success': False, 'error': str(e)}
->
->            # Get latest id
->            if 'latest_id' not in webhook.config.keys():
->                url = 'https://phdcomics.com/gradfeed.php'
->                content = urllib.urlopen(url).read()
->                soap = BeautifulSoup(content, 'html.parser')
->                pattern = '(?:https://www\.phdcomics\.com/comics\.php\?f=)(\d+)'
->                webhook.config['latest_id'] = max([
->                    int(re.search(pattern, link.text).group(1))
->                    for link in soap.find_all('link', text=re.compile(pattern))
->                ])
->
->            random_id = random.randint(1, webhook.config['latest_id'])
->            url = 'https://www.phdcomics.com/comics/archive.php?comicid=%d' % \
->                random_id
->            content = urllib.urlopen(url).read()
->            soup = BeautifulSoup(content, 'html.parser')
->            comic_img = soup.find_all('img', id='comic2')
->
->            try:
->                comic_src = comic_img[0].attrs.get('src')
->            except IndexError:
->                pattern = '<img id=comic2 name=comic2 src=([\w:\/\.]+)'
->                comic_src = re.search(pattern, content).group(1)
->
->        except Exception as e:
->            error = str(e)
->
->        return {'success': not error, 'error': error, 'src': comic_src}
->   ```
-{: .hands_on}
+Try to identify which test is failing based on the logs.
 
+TODO hidden solution test/unit/util/test_utils.py::test_strip_control_characters
 
-To make your webhook appealing you can also add custom CSS which you can use in your HTML/JS code.
+### Running the test locally
 
+TODO
 
-> ### {% icon hands_on %} Hands-on
->
-> 1. Create a file named `static/styles.css` with the following content:
->
->    ```css
->        #phdcomics {
->            border: 1px solid #52697d;
->            text-align: center;
->            border-radius: 3px;
->            overflow: hidden;
->        }
->
->        #phdcomics-header {
->            background: #52697d;
->            border-bottom: 1px solid #52697d;
->            padding: 15px 0;
->        }
->
->        #phdcomics-name {
->            color: #fff;
->            padding-bottom: 10px;
->        }
->
->        #phdcomics-header button {
->            color: #fff;
->            font-size: 14px;
->            background-color: #768fa5;
->            border: none;
->            border-radius: 7px;
->            box-shadow: 0 5px #5c768c;
->            padding: 5px 10px;
->        }
->
->        #phdcomics-header button:focus {
->            outline: 0;
->        }
->
->        #phdcomics-header button:hover {
->            background-color: #67839b;
->        }
->
->        #phdcomics-header button:active {
->            background-color: #67839b;
->            box-shadow: 0 0 #5c768c;
->            transform: translateY(5px);
->        }
->
->        #phdcomics-img {
->            background: #fff;
->        }
->
->        #phdcomics-img img {
->            padding: 10px;
->            max-width: 100%;
->            margin-bottom: -4px;
->        }
->
->        #phdcomics-loader {
->            border: 5px solid #f3f3f3;
->            border-top: 5px solid #52697d;
->            border-radius: 50%;
->            width: 25px;
->            height: 25px;
->            animation: spin 1.5s linear infinite;
->            margin: 15px auto;
->        }
->
->        @keyframes spin {
->            0% { transform: rotate(0deg); }
->            100% { transform: rotate(360deg); }
->        }
->    ```
-{: .hands_on}
+### Finding and Fixing the Issue
 
+TODO
 
-Please make sure you have activated webhooks in your `config/galaxy.yml` file by setting the `webhooks_dir` to the path in which your `phdcomics` folder is located.
+If you think you've got it, try running the test locally again to be sure. 
 
-> ### {% icon hands_on %} Hands-on
->
-> 1. Submit one tool and see if your webhook is working on the tool-submit page.
->
-{: .hands_on}
+### A good commit message
 
+TODO
 
-If successful it should look like this:
+Congratulations - you found and fixed a Unit Test failure! 
 
-![First view](../../images/phdcomics.png)
+## API or Integration Test Failure
+
+Next up is the API test. 
+TODO definition/purpose of tests?  
+
+### Finding the failing test on GitHub
+
+One of the failing tests on GitHub says TODO (check text >)"API Test". Feel free to click on that to see a log of all the tests. 
+
+Try to identify which test is failing based on the logs.
+
+TODO hidden solution 
+
+### Running the test locally
+
+TODO
+
+### Finding and Fixing the Issue
+
+TODO
+
+If you think you've got it, try running the test locally again to be sure. 
+
+### A good commit message
+
+TODO
+
+Woo-hoo - you fixed a Failing API Test! 
+
+## Client Linting Failure
+
+Client Linting is next on deck. 
+TODO definition/purpose of tests?  
+
+### Finding the failing test on GitHub
+
+One of the failing tests on GitHub says TODO (check text >) "Client Linting". Feel free to click on that to see a log of all the tests. 
+
+Try to identify which test is failing based on the logs.
+
+TODO hidden solution 
+
+### Running the test locally
+
+TODO
+
+### Finding and Fixing the Issue
+
+TODO
+
+If you think you've got it, try running the test locally again to be sure. 
+
+### A good commit message
+
+TODO
+
+Awesome work - you now understand how to solve client linting issues!
+
+## Client Test Failure
+
+A failing Client Test walks into a bar... 
+TODO definition/purpose of tests?  
+
+### Finding the failing test on GitHub
+
+One of the failing tests on GitHub says TODO (check text >) "Client Test". Feel free to click on that to see a log of all the tests. 
+
+Try to identify which test is failing based on the logs.
+
+TODO hidden solution 
+
+### Running the test locally
+
+TODO
+
+### Finding and Fixing the Issue
+
+TODO
+
+If you think you've got it, try running the test locally again to be sure. 
+
+### A good commit message
+
+TODO
+
+Nice Job - you now have a handle on client tests!
+
+## Selenium Test Failure
+
+Selenium tests can be difficult to fix, since they cover an expanse of code, but I'm sure you can do it.
+TODO definition/purpose of tests?  
+
+### Finding the failing test on GitHub
+
+One of the failing tests on GitHub says TODO (check text >) "Selenium Test (3.1, 3.0? --- what does this even mean?)". Feel free to click on that to see a log of all the tests. 
+
+Try to identify which test is failing based on the logs.
+
+TODO hidden solution 
+
+### Running the test locally
+
+TODO
+
+### Finding and Fixing the Issue
+
+TODO
+
+If you think you've got it, try running the test locally again to be sure. 
+
+### A good commit message
+
+TODO
+
+Excellent! Selenium tests are in the bag!
+
+## Runtime Error 
+
+TODO
+
+## Finally --- Back in the Green
+
 
 
 ## Conclusion
 
-First of all, thank you for completing this tutorial. We have learned how to add webhooks to your Galaxy.
+First of all, thank you for completing this tutorial. We hope you feel more confident debugging your code on Galaxy. Of course, we are always available to help answer questions and support you!
+
