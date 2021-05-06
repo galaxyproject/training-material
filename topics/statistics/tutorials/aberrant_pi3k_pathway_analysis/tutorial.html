@@ -1,0 +1,1632 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Statistical Analyses for omics data and machine learning ..." />
+        <meta property="og:title" content="Galaxy Training: PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis" />
+        <meta property="og:description" content="Statistical Analyses for omics data and machine learning ..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/statistics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Statistics and machine learning
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/statistics/faqs/" title="Check our FAQs for the Statistics and machine learning topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fstatistics%2Ftutorials%2Faberrant_pi3k_pathway_analysis%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                    -->
+
+                     <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/main/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Statistics and machine learning",
+    "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+    "url": "https://training.galaxyproject.org//training-material/topics/statistics/"
+  },
+  "courseCode": "statistics / aberrant_pi3k_pathway_analysis / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/tutorial.html",
+  "timeRequired": "PT1H30M",
+  "keywords": "Machine learning, Pan-cancer, cancer biomarkers, oncogenes and tumor suppressor genes",
+  "description": "The questions this  addresses are:\n - How to predict aberrant pathway activity in The Cancer Genome Atlas (TCGA) using Machine learning approaches?\n\n\\nThe objectives are:\n - Learn to predict aberrant pathway activity using RNA-Seq data, mutational status and copy number variation data from TCGA.\n - Apply logistic regression based machine learning algorithms on TCGA data.\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Vijay"
+    },
+    {
+      "@type": "Person",
+      "name": "Daniel Blankenberg"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Vijay"
+    },
+    {
+      "@type": "Person",
+      "name": "Daniel Blankenberg"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Statistics and machine learning",
+      "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+      "url": "https://training.galaxyproject.org//training-material/topics/statistics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2269",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2269",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_2269"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis</h1>
+        
+
+        <div class="contributors-line">By: 
+
+ <a href="/training-material/hall-of-fame/nvk747/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nvk747" alt="Vijay">Vijay</a> <a href="/training-material/hall-of-fame/blankenberg/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/blankenberg" alt="Daniel Blankenberg">Daniel Blankenberg</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How to predict aberrant pathway activity in The Cancer Genome Atlas (TCGA) using Machine learning approaches?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Learn to predict aberrant pathway activity using RNA-Seq data, mutational status and copy number variation data from TCGA.</p>
+</li>
+            
+            <li><p>Apply logistic regression based machine learning algorithms on TCGA data.</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1 hour 30 minutes</p>
+            
+
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://zenodo.org/record/4306639#.X9FJF-lKgZE">
+    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+</li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/workflows/" title="Workflows" alt="PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+</li>
+                
+
+                
+
+                
+                
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/statistics/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 5, 2021 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Signaling pathways are among the most commonly altered across different tumor types. Many tumors possess at least one driver alteration and nearly half of such alterations are potentially targeted by currently available drugs. A recent study in TCGA tumors has identified patterns of somatic variations and mechanisms in 10 canonical pathways
+(<a class="citation" href="#SanchezVega2018">Sanchez-Vega <i>et al.</i> 2018</a>). One-third of these tumors possess multiple alterations and have potentially complex phenotypes. Identifying a transcriptomic signature in these tumors would enable personalized therapeutic design strategies. A plethora of evidence suggests complex diseases, like cancer, can be the result of multiple genetic aberrations in biological networks or pathways rather than variation in a single gene. Often starter mutations occur in a key component network that ultimately leads to multi-gene dysregulation causing hallmark cancer phenotypes (<a class="citation" href="#Hanahan2000">Hanahan and Weinberg 2000</a>). Many of these phenotypes are the result of disrupted transcriptional programs that affect the clinical progression and therapeutic responsiveness. Recent progress in exploring these transcriptomic changes in cancer pathogenesis provided useful clues in precision medicine (<a class="citation" href="#Bradner2017">Bradner <i>et al.</i> 2017</a>).</p>
+
+<p>The RTK/RAS/PI3K molecular genetic axis controls critical cellular functions and is commonly altered in various cancers (<a class="citation" href="#Fruman2014">Fruman and Rommel 2014</a>). Perturbations across this axis can lead to deficiencies in cell-cycle, survival, metabolism, motility and genome stability, triggering hallmark phenotypes of cancer. The constitutive activation and presence of phosphatidylinositol-3,4,5-trisphosphate (PIP3) trigger membrane-bound onco-signalosomes. This presents significant challenges for treatment, as PI3K cascade can be activated in several ways (<a class="citation" href="#Zhao2006">Zhao and Roberts 2006</a>).</p>
+
+<p>Cancer driver genes comprising both oncogenes (OG) and Tumor suppressor genes (TSG) share common phenotypical outcome. However, they often have divergent molecular mechanisms  that drive the outcome. We are interested in capturing mutational specific differential transcriptional outcome among OG and TSG. In Figure 1, genes in red are oncogenes (have activating or copy gain) and genes in blue are tumor suppressor genes (have inactivating or copy loss).</p>
+
+<p>In this tutorial we plan to measure aberrant PI3K pathway activity in TCGA dataset using <span class="notranslate">RNA</span>-Seq information and mutational and copy number information of following frequently altered genes. We named this tutorial as PanCancer Aberrant Pathway Activity Analysis (PAPAA).</p>
+
+<figure id="figure-1"><img src="../../images/aberrant_pi3k_pathway_analysis/pi3k_pathway.png" alt="pi3k_pathway" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Genes used in this study from ERK/RAS/PI3K pathway. Red text indicates Oncogenes (OG), blue text indicates Tumor suppressors genes (TSG).</figcaption></figure>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>Let’s learn how to install this tutorial using Docker with <span class="notranslate">galaxy</span>, and how to download the datasets from Zenodo :</p>
+
+<ol id="markdown-toc">
+  <li><a href="#pre-installed-tutorial-tools-datasets-and-workflows-from-the-docker-image" id="markdown-toc-pre-installed-tutorial-tools-datasets-and-workflows-from-the-docker-image"><strong>Pre-installed tutorial tools, datasets and workflows from the docker image</strong></a></li>
+  <li><a href="#get-data-for-analysis-from-classifier-to-pharmacological-correlations" id="markdown-toc-get-data-for-analysis-from-classifier-to-pharmacological-correlations">Get data for analysis from classifier to pharmacological correlations</a></li>
+  <li><a href="#pancancer-aberrant-pathway-activity-analysis-papaa" id="markdown-toc-pancancer-aberrant-pathway-activity-analysis-papaa">PanCancer aberrant pathway activity analysis (PAPAA)</a>    <ol>
+      <li><a href="#papaa-pancancer-classifier" id="markdown-toc-papaa-pancancer-classifier">PAPAA: PanCancer classifier</a></li>
+      <li><a href="#pancancer-within-disease-analysis" id="markdown-toc-pancancer-within-disease-analysis">PanCancer within disease analysis</a></li>
+      <li><a href="#pancancer-compare-within-models" id="markdown-toc-pancancer-compare-within-models">PanCancer compare within models</a></li>
+      <li><a href="#pancancer-apply-weights" id="markdown-toc-pancancer-apply-weights">PanCancer apply weights</a></li>
+      <li><a href="#pancancer-visualize-decisions" id="markdown-toc-pancancer-visualize-decisions">PanCancer visualize decisions</a></li>
+      <li><a href="#pancancer-map-mutation-class" id="markdown-toc-pancancer-map-mutation-class">PanCancer map mutation class</a></li>
+      <li><a href="#pancancer-alternative-genes-pathwaymapper" id="markdown-toc-pancancer-alternative-genes-pathwaymapper">PanCancer alte<span class="notranslate">rna</span>tive genes pathwaymapper</a></li>
+      <li><a href="#pancancer-pathway-count-heatmaps" id="markdown-toc-pancancer-pathway-count-heatmaps">PanCancer pathway count heatmaps</a></li>
+      <li><a href="#pancancer-targene-summary-figures" id="markdown-toc-pancancer-targene-summary-figures">PanCancer targene summary figures</a></li>
+      <li><a href="#pancancer-targene-cell-line-predictions" id="markdown-toc-pancancer-targene-cell-line-predictions">PanCancer targene cell line predictions</a></li>
+      <li><a href="#pancancer-external-sample-status-prediction" id="markdown-toc-pancancer-external-sample-status-prediction">PanCancer exte<span class="notranslate">rna</span>l sample status prediction</a></li>
+      <li><a href="#pancancer-targene-pharmacology" id="markdown-toc-pancancer-targene-pharmacology">PanCancer targene pharmacology</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="pre-installed-tutorial-tools-datasets-and-workflows-from-the-docker-image"><strong>Pre-installed tutorial tools, datasets and workflows from the docker image</strong></h1>
+<blockquote>
+  <p>An efficient way to install and run the tutorial using papaa tools is available on docker based <span class="notranslate">galaxy</span> instance that has pre-installed papaa tool-suite as <strong>papaa</strong> under tools section. Additionally this local <span class="notranslate">galaxy</span> instance comes with datasets and <span class="notranslate">workflow</span> for generating PI3K_OG classifier. Instructions to run the docker image is below.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-tutorial-for-galaxy-docker-container-installation-and-running-the-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Tutorial for <span class="notranslate">galaxy</span> docker container installation and running the <span class="notranslate">workflow</span>:</h3>
+  <ol>
+    <li>Pulling the docker image from docker hub: Open a terminal and type the following command:
+   <code class="language-plaintext highlighter-rouge">docker pull nvk747/<span class="notranslate">galaxy</span>_papaa:0.1.9</code></li>
+    <li>For running the docker container use the following command :
+   <code class="language-plaintext highlighter-rouge">docker run -p 8888:80 --detach nvk747/<span class="notranslate">galaxy</span>_papaa:0.1.9</code></li>
+    <li>Open the following <a href="http://localhost:8888"><em>http://localhost:8888</em></a> in your web browser.</li>
+    <li>Use <em>‘admin’</em> as use<span class="notranslate">rna</span>me and <em>‘password’</em> as password to login as <strong>admin</strong> into the docker <span class="notranslate">galaxy</span> instance.</li>
+    <li>The <span class="notranslate">Workflow</span> <strong>‘papaa@0.1.9_PI3K_OG_model_tutorial’</strong> from <span class="notranslate">workflow</span> section to run PI3K_OG tutorial is pre-installed.</li>
+    <li>Instructions to get datasets from shared library is given in Hands-on: Data upload.</li>
+  </ol>
+</blockquote>
+
+<h1 id="get-data-for-analysis-from-classifier-to-pharmacological-correlations">Get data for analysis from classifier to pharmacological correlations</h1>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/record/4306639#.X9FJF-lKgZE">PAPAA-Zenodo</a> or from the docker <span class="notranslate">galaxy</span> <code class="language-plaintext highlighter-rouge">Shared Data -&gt; Data Libraries -&gt; (GTN - Material -&gt; statistics -&gt; PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis )</code></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/CCLE_DepMap_18Q1_maf_20180207.txt.gz
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/CCLE_MUT_CNA_AMP_DEL_binary_Revealer.tsv.gz
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/ccle_<span class="notranslate">rna</span>seq_genes_rpkm_20180929_mod.tsv.gz
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/compounds_of_interest.txt
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/copy_number_gain_status.tsv.gz
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/copy_number_loss_status.tsv.gz
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/cosmic_cancer_classification.tsv
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/gdsc1_ccle_pharm_fitted_dose_data.txt.gz
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/gdsc2_ccle_pharm_fitted_dose_data.txt.gz
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GDSC_CCLE_common_mut_cnv_binary.tsv.gz
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GDSC_EXP_CCLE_converted_name.tsv.gz
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE69822_pi3k_sign.txt
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE69822_pi3k_trans.csv
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/path_rtk_ras_pi3k_genes.txt
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/mc3.v0.2.8.PUBLIC.maf.gz
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/mutation_burden_freeze.tsv
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/pancan_mutation_freeze.tsv.gz
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/pancan_<span class="notranslate">rna</span>seq_freeze.tsv.gz
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/sample_freeze.tsv
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/tcga_dictionary.tsv
+</code></pre></div>      </div>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-some-additional-files-that-you-can-use-for-alternative-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Some additional files that you can use for alte<span class="notranslate">rna</span>tive analysis</h3>
+  <ol>
+    <li>These files are provided to optionally enable you to perform an additional analysis, using the same methodology
+described here, but are not required for the main tutorial.</li>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/record/4306639#.X9FJF-lKgZE">PAPAA-Zenodo</a> or from the docker <span class="notranslate">galaxy</span> <code class="language-plaintext highlighter-rouge">Shared Data -&gt; Data Libraries -&gt; (GTN - Material -&gt; statistics -&gt; PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis )</code></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE94937_kras_sign.txt
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE94937_rpkm_kras.csv
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/path_cell_cycle_genes.txt
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/path_myc_genes.txt
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/path_ras_genes.txt
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/path_wnt_genes.txt
+</code></pre></div>      </div>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-note"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note:</h3>
+  <p>Some of the imported files may still contain a <strong>.gz</strong> extension but only uncompressed files are used in our analysis. So kindly ignore the extension!!</p>
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-datasets-descriptions"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Datasets descriptions</h3>
+
+  <ul>
+    <li><strong>pancan_<span class="notranslate">rna</span>seq_freeze.tsv:</strong> Publicly available gene <span class="notranslate">expression</span> data for the TCGA Pan-cancer dataset. This file has gene-<span class="notranslate">expression</span> data for ~20,000 genes (columns) in ~10,000 samples (rows).</li>
+    <li><strong>pancan_mutation_freeze.tsv:</strong> Publicly available Mutational information for TCGA Pan-cancer dataset. This file has mutational data for all genes (columns) as binary valued (0/1) in all samples (rows).</li>
+    <li><strong>mutation_burden_freeze.tsv:</strong> Publicly available Mutational information for TCGA Pan-cancer dataset. This file has mutational burden information for all samples(rows).</li>
+    <li><strong>sample_freeze.tsv:</strong> The file lists the frozen samples as determined by TCGA PanCancer Atlas consortium along with raw <span class="notranslate">RNA</span>-Seq and mutation data. These were previously determined and included for all <span class="notranslate">downstream</span> analysis All other datasets were processed and subset according to the frozen samples.</li>
+    <li><strong>cosmic_cancer_classification.tsv:</strong> Compendium of OG and TSG used for the analysis. This file has list of cancer genes(rows) from <a href="https://cancer.sanger.ac.uk/cosmic">cosmic database</a> classified as Oncogene or tumor suppressor (columns).</li>
+    <li><strong>CCLE_DepMap_18Q1_maf_20180207.txt:</strong> Publicly available Mutational data for CCLE cell lines from Broad Institute Cancer Cell Line Encyclopedia <a href="https://portals.broadinstitute.org/ccle">CCLE</a>/<a href="https://depmap.org/portal/">DepMap Portal</a>. Variant classification along with nucleotide and protein level changes are provided in the columns for genes(rows).</li>
+    <li><strong>ccle_<span class="notranslate">rna</span>seq_genes_rpkm_20180929_mod.tsv:</strong> Publicly available <span class="notranslate">Expression</span> data for 1,019 cell lines (RPKM) from Broad Institute Cancer Cell Line Encyclopedia (CCLE) / DepMap Portal. This file has gene-<span class="notranslate">expression</span> data for genes(rows) in various cell lines (columns).</li>
+    <li><strong>CCLE_MUT_CNA_AMP_DEL_binary_Revealer.tsv:</strong> Publicly available merged Mutational and copy number alterations that include gene amplifications and deletions for the CCLE cell lines. This file has mutational/copy number variation data for all cancer genes (rows) as binary valued (0/1) in all CCLE cell lines (columns).</li>
+    <li><strong>GDSC_cell_lines_EXP_CCLE_names.tsv:</strong> Publicly available RMA normalized <span class="notranslate">expression</span> data for Genomics of Drug Sensitivity in Cancer <a href="https://www.cancerrxgene.org/">GDSC</a> cell-lines. This data was subset to 382 cell lines that are common among CCLE and GDSC. This file has gene-<span class="notranslate">expression</span> data for genes(rows) in various cell lines (columns).</li>
+    <li><strong>GDSC_CCLE_common_mut_cnv_binary.tsv:</strong> A subset of merged Mutational and copy number alterations that include gene amplifications and deletions for common cell lines between GDSC and CCLE.</li>
+    <li><strong>gdsc1_ccle_pharm_fitted_dose_data.txt:</strong> Pharmacological data for GDSC-1 cell lines. This data was subset to 379 cell lines that are common among CCLE and GDSC. This file has pharmacological data like IC50, Z-scores, drug information, concentrations used, AUC(columns) of 304 tested compounds in various cell-lines(rows).</li>
+    <li><strong>gdsc2_ccle_pharm_fitted_dose_data.txt:</strong> Pharmacological data for GDSC-2 cell lines. This data was subset to 347 cell lines that are common among CCLE and GDSC. This file has pharmacological data like IC50, Z-scores, drug information, concentrations used, AUC(columns) of 170 tested compounds in various cell-lines(rows).</li>
+    <li><strong>compounds_of_interest.txt:</strong> This file contains the compounds of interest for generation of pharmacological correlations with classifier scores. List of inhibitor compounds against EGFR-signaling, ERK-MAPK-signaling, Other-kinases, PI3K/MTOR-signaling, and RTK-signaling pathways.</li>
+    <li><strong>tcga_dictonary.tsv:</strong> List of cancer types used in the analysis.</li>
+    <li><strong>GSE69822_pi3k_sign.txt:</strong> File with values assigned for tumor [1] or normal [-1] for exte<span class="notranslate">rna</span>l data samples deposited in Gene <span class="notranslate">Expression</span> Omnibus database accession:<a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822">GSE69822</a>.</li>
+    <li><strong>GSE69822_pi3k_trans.csv:</strong> Variant stabilized transformed values for the <span class="notranslate">RNA</span> <span class="notranslate">expression</span> levels in the exte<span class="notranslate">rna</span>l samples from <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822">GSE69822</a>.</li>
+    <li><strong>path_rtk_ras_pi3k_genes.txt:</strong> List of genes belong to RTK,RAS,PI3K used in our study.</li>
+    <li><strong>path_myc_genes.txt:</strong> List of genes belong to Myc signaling pathway <a href="https://www.cell.com/action/showPdf?pii=S0092-8674%2818%2930359-3">Sanchez Vega et.al 2018</a>.</li>
+    <li><strong>path_ras_genes.txt:</strong> List of genes belong to Ras signaling Pathway <a href="https://www.cell.com/action/showPdf?pii=S0092-8674%2818%2930359-3">Sanchez Vega et.al 2018</a>.</li>
+    <li><strong>path_cell_cycle_genes.txt:</strong> List of genes belong to cell cycle pathway <a href="https://www.cell.com/action/showPdf?pii=S0092-8674%2818%2930359-3">Sanchez Vega et.al 2018</a>.</li>
+    <li><strong>path_wnt_genes.txt:</strong> List of genes belong to wnt signaling pathway <a href="https://www.cell.com/action/showPdf?pii=S0092-8674%2818%2930359-3">Sanchez Vega et.al 2018</a>.</li>
+    <li><strong>GSE94937_rpkm_kras.csv:</strong> <span class="notranslate">RNA</span> <span class="notranslate">expression</span> levels in the exte<span class="notranslate">rna</span>l samples from <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE94937">GSE94937</a>.</li>
+    <li><strong>GSE94937_kras_sign.txt:</strong> File with values assigned for tumor [1] or normal [-1] for exte<span class="notranslate">rna</span>l data samples deposited in Gene <span class="notranslate">Expression</span> Omnibus database accession: <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE94937">GSE94937</a>.</li>
+  </ul>
+</blockquote>
+
+<h1 id="pancancer-aberrant-pathway-activity-analysis-papaa">PanCancer aberrant pathway activity analysis (PAPAA)</h1>
+
+<p><a href="https://en.wikipedia.org/wiki/Machine_learning">Machine Learning</a> algorithms  learn from various features in datasets and generate predictive models. Extracting transcriptional patterns and learning insights of tumor physiology from gene <span class="notranslate">expression</span> data is a developing research area. Transcriptional profiling was used to identify differentially expressed genes and pathways associated with drug resistance in breast cancer ((missing reference)). Machine learning-based modeling provides a systematic manner to leverage these multi-omic data to predict phenotype or stratify tumors based on gene <span class="notranslate">expression</span> and pathway variations. We extended a previously developed elastic net penalized logistic regression classification modeling approach to derive transcription signature or pathway alterations to measure aberrant PI3K activity in the PanCancer data (<a class="citation" href="#Way2018">Way <i>et al.</i> 2018</a>). This method integrates bulk <span class="notranslate">RNA</span> Sequencing (<span class="notranslate">RNA</span>-Seq), copy number and mutation data from <a href="https://gdc.cancer.gov/about-data/publications/pancanatlas">PanCanAtlas</a>.</p>
+
+<p>TCGA Pancancer has uniformly processed multi-omic data including <span class="notranslate">RNA</span>-Seq, copy number and mutational data. It covers 33 different cancer types and having information from over 10000 samples. We used publicly available <span class="notranslate">RNA</span>-Seq, mutation and CNV data sets from TCGA. Description and processing details of these data sets are listed at this site: <a href="https://github.com/nvk747/papaa.git">PanCancer aberrant pathway activity analysis</a>.</p>
+
+<p><strong><em>Machine learning methodology</em></strong>
+Logistic regression is a kind of machine learning approach where statistical analysis is used to predict the outcome of a dependent variable based on observed changes in other variables. e.g. Changes in gene <span class="notranslate">expression</span> are directly connected to alterations/mutations in genes. We used above approach to predict mutational status given the gene <span class="notranslate">expression</span>. Optimizing to the above prediction of mutational status with gene <span class="notranslate">expression</span> variable, we used elastic net penalty with gradient descent algorithm is used to find the optimal cost function by going over a number of iterations. The objective of the classifier is to determine the probability a given sample (<em>i</em>) has a aberrant gene event given the sample’s <span class="notranslate">RNA</span>-Seq measurements (<em>Xi</em>). In order to achieve the objective, the classifier learns a vector of coefficients or gene-specific weights (<em>w</em>) that optimize the following penalized logistic function.</p>
+
+<figure id="figure-2"><img src="../../images/aberrant_pi3k_pathway_analysis/equation.png" alt="Equations for probability measurement " /><figcaption><span class="figcaption-prefix">Figure 2:</span> Equation for prediction of mutational status(Yi) from <span class="notranslate">expression</span> data X(i) for each sample. Mutational status can be estimated by Multiplying Xi with gene specific weights (W). The negative log likelihood (L) is used for calculating minimum weights for each sample</figcaption></figure>
+
+<p>Where <em>alpha</em> and <em>l</em> are regularization and elastic net mixing hyperparameters respectively. Their optimal values are found during 5 fold cross validation by using scikit-learn <a href="https://scikit-learn.org/0.17/modules/generated/sklearn.grid_search.GridSearchCV.html">girdsearchCV</a> approach.</p>
+
+<p><strong><em>Sample Processing step:</em></strong></p>
+
+<ul>
+  <li><strong>x-matrix:</strong>
+    <blockquote>
+      <p>Gene-<span class="notranslate">expression</span> data comprises of <span class="notranslate">expression</span> levels for ~20,000 genes/sample and ~10,000 samples. Top 8,000 highly variable genes per sample with in each disease were measured by median absolute deviation (MAD) and considered for analysis.</p>
+    </blockquote>
+  </li>
+  <li><strong>y-matrix:</strong>
+    <blockquote>
+      <p>Copy number and mutational data as binary valued (0/1) datasets for all samples. This matrix is subset to given pathway target genes and cancer types.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>We then randomly held out 10% of the samples to create a test set and rest 90% for training.  The testing set is used as the validation to evaluate the performance of any machine learning algorithm and the remaining parts are used for learning/training. The training set is balanced for different cancer-types and PI3K status.</p>
+
+<p>Predicting probabilities of an observation belonging to each class in a classification problem is more flexible rather than predicting classes directly. This method has an added advantage to trade-off errors made by the model as it depends on interpretation of probabilities using different thresholds. Two diagnostic tools that help in the interpretation of probabilistic forecast for binary (two-class) classification predictive modeling problems are Receiver Operating Characteristic (ROC) Curves and Precision-Recall curves. Each model generated is evaluated and performance metrics are measured using Area Under the Receiver Operating Characteristic (AUROC) and Area Under the Precision-Recall (AUPR).</p>
+
+<p>As elastic net penalty with stochastic decent gradient approach induces sparsity in the number of features used in classification, and the best/top features (genes) are likely to represent transcriptional signature of given disease or aberrant activity of the mutated genes in a pathway.</p>
+
+<p>Each feature (gene) is given a rank and score (negative or positive) depending on its contribution to classification. The positive scored genes are likely to be up-regulated in activated pathway samples and negatively scored genes are likely to be <span class="notranslate">downstream</span> targets of altered pathways.</p>
+
+<p>In this tutorial, we made series of steps to generate classification models and used those models for predicting pharmacological response or identifying potential biomarkers that may be helpful for treatment of various cancers. Here, we generate models using <a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=ERBB2">ERBB2</a>, <a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=KRAS">KRAS</a>, <a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=PIK3CA">PIK3CA</a>, and <a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=AKT1">AKT1</a> oncogenes from the ERK/RAS/PI3K signaling axis pathway.  <strong>Have fun!</strong></p>
+
+<h2 id="papaa-pancancer-classifier">PAPAA: PanCancer classifier</h2>
+<p>This first step is designed to generate model with ERK/RAS/PI3K signaling axis pathway genes (path_genes): ERBB2, KRAS, PIK3CA ,AKT11 genes and various the Cancer Genome Atlas (TCGA) cancer types/diseases: BLCA, BRCA, CESC, COAD, ESCA, LUAD, LUSC, OV, PRAD, READ, STAD, UCEC, and UCS (ref: tcga_dictionary.tsv). This step takes gene <span class="notranslate">expression</span> information (pancan_<span class="notranslate">rna</span>seq_freeze.tsv), mutational information (pancan_mutation_freeze.tsv), load of mutations in each samples (mutation_burden_freeze.tsv), threshold passed sample information (sample_freeze.tsv) and copy number information (copy_number_loss_status.tsv &amp; copy_number_gain_status.tsv) and generates PI3K_OG model. AUROC and AUPR metrics are calculated for training,test,CV and random shuffled sets. As an additional option, the generated model was used to evaluate alte<span class="notranslate">rna</span>tive genes (PTEN, PIK3R1, and STK11) and alte<span class="notranslate">rna</span>tive diseases (BRCA, COAD, ESCA, HNSC, LGG, LUAD, LUSC, PRAD, READ, GBM, UCEC, and UCS) performance.</p>
+
+<figure id="figure-3"><img src="../../images/aberrant_pi3k_pathway_analysis/pi3k_OG_auroc_aupr.png" alt="Prediction metrics for PI3K_OG model" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Prediction metrics of the PI3K_OG classifier- AUROC and AUPR curve for training, test, CV, and random shuffled sets.</figcaption></figure>
+<figure id="figure-4"><img src="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_classifier_coef.png" alt="PI3K_OG Classifier Coefficients" /><figcaption><span class="figcaption-prefix">Figure 4:</span> PI3K_OG classifier coefficients represent the genes that impact the classification</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-generating-model-from-erbb2pik3cakrasakt1-genes-with-specific-disease-types"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generating model from ERBB2,PIK3CA,KRAS,AKT1 genes with specific disease types</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_classifier/pancancer_classifier/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_classifier/pancancer_classifier/0.1.9"><strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/vijay/pancancer_classifier/pancancer_classifier/0.1.9</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of features to use in model”</em>: <code class="language-plaintext highlighter-rouge">pancan_<span class="notranslate">rna</span>seq_freeze.tsv</code> (Input dataset).</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename mutations”</em>: <code class="language-plaintext highlighter-rouge">pancan_mutation_freeze.tsv</code> (Input dataset).</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of mutation burden”</em>: <code class="language-plaintext highlighter-rouge">mutation_burden_freeze.tsv</code> (Input dataset).</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of sample”</em>: <code class="language-plaintext highlighter-rouge">sample_freeze.tsv</code> (Input dataset) Input TCGA processed sample information data. See dataset descriptions for details.</li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Comma separated string of HUGO gene symbols”</em>: <code class="language-plaintext highlighter-rouge">ERBB2,PIK3CA,KRAS,AKT1</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Comma sep string of TCGA disease acronyms. If no arguments are passed, filtering will default to options given in –filter_count and –filter_prop.”</em>: <code class="language-plaintext highlighter-rouge">BLCA,BRCA,CESC,COAD,ESCA,LUAD,LUSC,OV,PRAD,READ,STAD,UCEC,UCS</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Supplement Y matrix with copy number events”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with Copy number loss”</em>: <code class="language-plaintext highlighter-rouge">copy_number_loss_status.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with Copy number gain”</em>: <code class="language-plaintext highlighter-rouge">copy_number_gain_status.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with cancer gene classification table”</em>: <code class="language-plaintext highlighter-rouge">cosmic_cancer_classification.tsv</code> (Input dataset)</li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“alte<span class="notranslate">rna</span>tive genes to test performance”</em>: <code class="language-plaintext highlighter-rouge">PTEN,PIK3R1,STK11</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“The alte<span class="notranslate">rna</span>tive diseases to test performance”</em>: <code class="language-plaintext highlighter-rouge">BRCA,COAD,ESCA,HNSC,LGG,LUAD,LUSC,PRAD,READ,GBM,UCEC,UCS</code></li>
+        <li><em>“Decision to drop input genes from X matrix”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Remove hypermutated samples”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Keep intermediate ROC values for plotting”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Shuffle the input gene exprs matrix alongside”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-pancancer-aberrant-pathway-activity-analysis-pancancer_classifierpy-inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> PanCancer Aberrant Pathway Activity Analysis <code class="language-plaintext highlighter-rouge">pancancer_classifier.py</code> inputs</h3>
+  <ul>
+    <li>--genes: Comma separated string of HUGO symbols for target genes or targenes_list.csv file</li>
+    <li>--diseases: Comma separated string of disease types/TCGA acronyms for classifier</li>
+    <li>--folds: Number of cross validation folds</li>
+    <li>--drop: Drop the input genes from the X matrix</li>
+    <li>--seed: Value specifies the initial value of the random number seed</li>
+    <li>--copy_number: Optional flag to supplement copy number to define Y</li>
+    <li>--filter_count: Integer number for minimum count of mutations to include per disease</li>
+    <li>--filter_prop: Floating value for minimum proportion of mutated samples per disease</li>
+    <li>--num_features: Integer number for genes to include in classifier</li>
+    <li>--alphas: Comma separated string of alphas to test in pipeline</li>
+    <li>--l1_ratios: Comma separated string of l1 parameters to test</li>
+    <li>--alt_genes: Comma separated string of alte<span class="notranslate">rna</span>tive genes to test</li>
+    <li>--alt_diseases: Comma separated string of alte<span class="notranslate">rna</span>tive diseases to test</li>
+    <li>--alt_filter_count: Integer number for minimum count of mutations to include per alt_diseases</li>
+    <li>--alt_filter_prop: Floating value for minimum proportion of mutated samples alt_disease</li>
+    <li>--alt_folder: String for location to save the classifier figures</li>
+    <li>--remove_hyper: Store_true: remove hypermutated samples</li>
+    <li>--keep_intermediate: Store_true: keep intermediate roc curve items</li>
+    <li>--x_matrix: File name of features gene <span class="notranslate">expression</span> matrix to use</li>
+    <li>--classifier_folder: String of the location to store classifier data</li>
+  </ul>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-outputs"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Outputs</h3>
+  <ul>
+    <li>Log file for script run and additional information</li>
+    <li>A combined disease model (Pan-model) and individual disease models are generated.</li>
+    <li>An overall model statistics are provided in the form of classifier summary: classifier_summary.txt</li>
+    <li>Logistic regression with elastic net penalization outputs sparse classifiers with 150-250 genes whose scores or weights are important for classification tasks: classifier_coefficients.tsv . <em>Lets examine this file for the top scored genes. These genes are potential predictive biomarkers and can be helpful for precision medicine approaches</em>.</li>
+    <li>A tabular output that includes each gene mutation and copy number counts per each targene and proportions in various diseases is listed: <em>summary_counts.csv</em></li>
+    <li>Heatmap for all the AUROC values at different alphas and L1 rations: cv_heatmap.pdf</li>
+    <li>Disease classifier figures: list of 2 files [disease_pr and disease_auroc]</li>
+    <li>This tool computes predictions, accuracy measurements and measures AUROC and AUPR curves for the combined disease model (Pan-model): <em>all_disease_pr.pdf ; pancan_roc_results.tsv ; all_disease_roc.pdf ; disease_aupr.pdf ; disease_auroc.pdf</em></li>
+    <li>Additionally, the output also includes above performance and prediction metrics when the pan-model applied to alte<span class="notranslate">rna</span>tive genes and cancer types: <em>alt_gene_alt_disease_summary.tsv ; alt_summary_counts.csv ; alt_gene_alt_disease_aupr_bar.pdf ; alt_gene_alt_disease_auroc_bar.pdf</em> Examine these files to analyze our PI3K_OG model on other alte<span class="notranslate">rna</span>te diseases.</li>
+  </ul>
+</blockquote>
+
+<h2 id="pancancer-within-disease-analysis">PanCancer within disease analysis</h2>
+<p>This step is designed to generate individual pan-within models for each individual disease. It takes the same inputs as first step and generates similar output for each individual disease.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-generating-models-for-individual-diseases-listed-for-erbb2pik3cakrasakt1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generating models for individual diseases listed for ERBB2,PIK3CA,KRAS,AKT1</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_within_disease_analysis/pancancer_within_disease_analysis/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_within_disease_analysis/pancancer_within_disease_analysis/0.1.9"><strong>PAPAA: PanCancer within disease analysis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/vijay/pancancer_within_disease_analysis/pancancer_within_disease_analysis/0.1.9</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of features to use in model”</em>: <code class="language-plaintext highlighter-rouge">pancan_<span class="notranslate">rna</span>seq_freeze.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename mutations”</em>: <code class="language-plaintext highlighter-rouge">pancan_mutation_freeze.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of mutation burden”</em>: <code class="language-plaintext highlighter-rouge">mutation_burden_freeze.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of sample”</em>: <code class="language-plaintext highlighter-rouge">sample_freeze.tsv</code> (Input dataset)</li>
+        <li><em>“Comma separated string of HUGO gene symbols”</em>: <code class="language-plaintext highlighter-rouge">ERBB2,PIK3CA,KRAS,AKT1</code></li>
+        <li><em>“Comma sep string of TCGA disease acronyms. If no arguments are passed, filtering will default to options given in –filter_count and –filter_prop.”</em>: <code class="language-plaintext highlighter-rouge">BLCA,BRCA,CESC,COAD,ESCA,LUAD,LUSC,OV,PRAD,READ,STAD,UCEC,UCS</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with Copy number loss”</em>: <code class="language-plaintext highlighter-rouge">copy_number_loss_status.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with Copy number gain”</em>: <code class="language-plaintext highlighter-rouge">copy_number_gain_status.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with cancer gene classification table”</em>: <code class="language-plaintext highlighter-rouge">cosmic_cancer_classification.tsv</code> (Input dataset)</li>
+        <li><em>“Remove hypermutated samples”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-pancancer-aberrant-pathway-activity-analysis-within_disease_analysispy-inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> PanCancer Aberrant Pathway Activity Analysis <code class="language-plaintext highlighter-rouge">within_disease_analysis.py</code> inputs</h3>
+  <ul>
+    <li>--genes: Comma separated string of HUGO symbols for target genes or targenes_list.csv file</li>
+    <li>--diseases: Comma separated string of disease types/TCGA acronyms for classifier</li>
+    <li>--alphas: Comma separated string of alphas to test in pipeline</li>
+    <li>--l1_ratios: Comma separated string of l1 parameters to test</li>
+    <li>--remove_hyper: Remove hypermutated samples</li>
+    <li>--alt_folder: String of location to classification folder extending to individual diseases</li>
+    <li>--x_matrix: File name of features gene <span class="notranslate">expression</span> matrix to use in the model</li>
+    <li>--filename_mut: Filename of sample/gene mutations to use in model</li>
+    <li>--filename_mut_burden: Filename of sample mutation burden to use in model</li>
+    <li>--filename_sample: Filename of patient/samples to use in model</li>
+    <li>--filename_copy_loss: Filename of copy number loss</li>
+    <li>--filename_copy_gain: Filename of copy number gain</li>
+    <li>--filename_cancer_gene_classification: Filename of cancer gene classification table</li>
+  </ul>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-outputs-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Outputs</h3>
+  <p>This tool creates individual classifiers from each of the diseases specified to generate the full or pan model. Each of the classifiers has a similar output as specified for the pan-cancer classifier. The within models are trained using the same combination of targenes but considering only one disease for training and testing.</p>
+  <ul>
+    <li>Log file for script run and additional information</li>
+    <li>list of classifier_summary.txt for each disease</li>
+    <li>list of classifier_coefficients.tsv for each disease</li>
+    <li>list of pancan_roc_results.tsv for each disease</li>
+    <li>list of summary_counts.csv for each disease</li>
+    <li>Within disease figures:  List of 5 files [all_disease_pr, all_disease_roc, cv_heatmap, disease_pr, disease_roc] for individual diseases</li>
+    <li>Disease classifier figures: list of 2 files [disease_pr disease_roc] for each disease</li>
+  </ul>
+</blockquote>
+
+<h2 id="pancancer-compare-within-models">PanCancer compare within models</h2>
+<p>we next do a performance comparison between the ERBB2,PIK3CA,KRAS,AKT1 pan model and individual models.</p>
+<figure id="figure-5"><img src="../../images/aberrant_pi3k_pathway_analysis/within.png" alt="Compare Pan model with with-in disease model" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Cross-validation performance characteristic metric AUROC for the pan-cancer model compared to individual models trained on each cancer type</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-compare-the-erbb2_pik3ca_kras_akt1-pan-model-with-individual-disease-models"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: compare the ERBB2_PIK3CA_KRAS_AKT1 pan model with individual disease models</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9"><strong>PAPAA: PanCancer compare within models</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer classifier summary”</em>: <code class="language-plaintext highlighter-rouge">classifier_summary.txt</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer classifier coefficients”</em>: <code class="language-plaintext highlighter-rouge">classifier_coefficients.tsv</code> (output of <strong>PAPAA: Pancancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pan_within classifier summary”</em>: <code class="language-plaintext highlighter-rouge">classifier_summary</code> (output of <strong>PAPAA: PanCancer within disease analysis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)(Note: Select all pan-within classifier summaries as dataset collection instead of multiple datasets)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pan_within classifier coefficients”</em>: <code class="language-plaintext highlighter-rouge">classifier_coefficients</code> (output of <strong>PAPAA: Pancancer within disease analysis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>) (Note: Select all pan-within classifier coefficients as dataset collection instead of multiple datasets)</li>
+        <li><em>“Would you want to compare given model with alt gene model?”</em>: <code class="language-plaintext highlighter-rouge">do not do alt gene</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-pancancer-aberrant-pathway-activity-analysis-compare_within_modelsr-inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> PanCancer Aberrant Pathway Activity Analysis <code class="language-plaintext highlighter-rouge">compare_within_models.R</code> inputs</h3>
+  <ul>
+    <li>--pancan_model: location of pan and pan-within-disease models classifier_summary.txt/s and classifier_coefficients.tsv/s dataset collections.</li>
+    <li>--alt_model: location of alt and alt-within-disease models classifier_summary.txt/s and classifier_coefficients.tsv/s dataset collections.</li>
+  </ul>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-outputs-2"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Outputs</h3>
+  <ul>
+    <li>Comparison plots for Pan and Pan_within models (“auroc_comparison.pdf” and “aupr_comparison.pdf”)</li>
+    <li>Comparison plots for altgene, alt_within, Pan_alt models (“alt_gene_auroc_comparison.pdf” and “alt_gene_aupr_comparison.pdf”)</li>
+  </ul>
+</blockquote>
+
+<h2 id="pancancer-apply-weights">PanCancer apply weights</h2>
+<p>In this step we would like to predict ‘y’ status (mutational status) using ‘x’ matrix (gene <span class="notranslate">expression</span>). We subset the x matrix to top variable genes (determined by Median Absolute Deviation), scaling the <span class="notranslate">expression</span> and adding covariate information. A logit transformation will be applied to output probabilities and classifier decisions.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-apply-weights-for-erbb2_pik3ca_kras_akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Apply weights for ERBB2_PIK3CA_KRAS_AKT1 model</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_apply_weights/pancancer_apply_weights/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_apply_weights/pancancer_apply_weights/0.1.9"><strong>PAPAA: PanCancer apply weights</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/vijay/pancancer_apply_weights/pancancer_apply_weights/0.1.9</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of features to use in model”</em>: <code class="language-plaintext highlighter-rouge">pancan_<span class="notranslate">rna</span>seq_freeze.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename mutations”</em>: <code class="language-plaintext highlighter-rouge">pancan_mutation_freeze.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of mutation burden”</em>: <code class="language-plaintext highlighter-rouge">mutation_burden_freeze.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of sample”</em>: <code class="language-plaintext highlighter-rouge">sample_freeze.tsv</code> (Input dataset)</li>
+        <li><em>“Supplement Y matrix with copy number events”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with Copy number loss”</em>: <code class="language-plaintext highlighter-rouge">copy_number_loss_status.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with Copy number gain”</em>: <code class="language-plaintext highlighter-rouge">copy_number_gain_status.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with cancer gene classification table”</em>: <code class="language-plaintext highlighter-rouge">cosmic_cancer_classification.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer classifier summary”</em>: <code class="language-plaintext highlighter-rouge">classifier_summary</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer classifier coefficients”</em>: <code class="language-plaintext highlighter-rouge">classifier_coefficients</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-pancancer-aberrant-pathway-activity-analysis-apply_weightspy-inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> PanCancer Aberrant Pathway Activity Analysis <code class="language-plaintext highlighter-rouge">apply_weights.py</code> inputs</h3>
+  <ul>
+    <li>--classifier_summary: String of the location of classifier_summary.txt file</li>
+    <li>--copy_number: Supplement Y matrix with copy number events</li>
+    <li>--x_matrix: Filename of gene <span class="notranslate">expression</span> features to use in model</li>
+    <li>--filename_mut: Filename of sample/gene mutations to use in model</li>
+    <li>--filename_mut_burden: Filename of sample mutation burden to use in model</li>
+    <li>--filename_sample: Filename of patient/samples to use in model</li>
+    <li>--filename_copy_loss: Filename of copy number loss</li>
+    <li>--filename_copy_gain: Filename of copy number gain</li>
+    <li>--filename_cancer_gene_classification: Filename of cancer gene classification table</li>
+  </ul>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-outputs-3"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Outputs</h3>
+  <ul>
+    <li>Apply a logit transform on <span class="notranslate">expression</span> values (y = 1/(1+e^(-wX))) to output mutational probabilities. Generates “classifier_decisions.tsv” file which has scores/probabilities and other covariate information.  The scores/probabilities will be used for gene ranking and variant specific classification.</li>
+    <li>Log file for script run and additional information</li>
+  </ul>
+</blockquote>
+
+<h2 id="pancancer-visualize-decisions">PanCancer visualize decisions</h2>
+<p>In this step we generate visualization plots using classifier decision function for samples in each individual disease, total decisions for all samples in all diseases, and hypermutated samples in all diseases.</p>
+<figure id="figure-6"><img src="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_total_decisions.png" alt="PI3K_OG_total_decisions_plot" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Probability density plot for total decisions for all samples with the given classifier decision function</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-visualize-decisions-for-erbb2_pik3ca_kras_akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualize decisions for ERBB2_PIK3CA_KRAS_AKT1 model</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_visualize_decisions/pancancer_visualize_decisions/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_visualize_decisions/pancancer_visualize_decisions/0.1.9"><strong>PAPAA: PanCancer visualize decisions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/vijay/pancancer_visualize_decisions/pancancer_visualize_decisions/0.1.9</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer decisions”</em>: <code class="language-plaintext highlighter-rouge">classifier_decisions</code> (output of <strong>PAPAA: PanCancer apply weights</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-pancancer-aberrant-pathway-activity-analysis-visualize_decisionspy-inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> PanCancer Aberrant Pathway Activity Analysis <code class="language-plaintext highlighter-rouge">visualize_decisions.py</code> inputs</h3>
+  <ul>
+    <li>--classifier_decisions: String of the folder location of classifier_decisions.tsv</li>
+    <li>--custom: Comma separated list of columns to plot
+   (optional: True)</li>
+  </ul>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-outputs-4"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Outputs</h3>
+  <ul>
+    <li>Log file for script run and additional information</li>
+    <li>Visualize decision function for all samples (“total_decisions.pdf”)</li>
+    <li>Plot disease type specific decision functions (“decision_plot_{}.pdf”)</li>
+    <li>Visualize decision function for hyper mutated tumors (“hyper_mutated.pdf”)</li>
+  </ul>
+</blockquote>
+
+<h2 id="pancancer-map-mutation-class">PanCancer map mutation class</h2>
+<p>In this step we combined variant level information for each mutation combining with classifier predictions.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-map-mutation-class-for-erbb2_pik3ca_kras_akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: map mutation class for ERBB2_PIK3CA_KRAS_AKT1 model</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_map_mutation_class/pancancer_map_mutation_class/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_map_mutation_class/pancancer_map_mutation_class/0.1.9"><strong>PAPAA: PanCancer map mutation class</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/vijay/pancancer_map_mutation_class/pancancer_map_mutation_class/0.1.9</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer decisions”</em>: <code class="language-plaintext highlighter-rouge">classifier_decisions.tsv</code> (output of <strong>PAPAA: PanCancer apply weights</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“string of the genes to extract or gene list file”</em>: <code class="language-plaintext highlighter-rouge">path_rtk_ras_pi3k_genes.txt</code> (Input dataset)</li>
+        <li><em>“Supplement Y matrix with copy number events”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with Copy number loss”</em>: <code class="language-plaintext highlighter-rouge">copy_number_loss_status.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with Copy number gain”</em>: <code class="language-plaintext highlighter-rouge">copy_number_gain_status.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of raw mut MAF”</em>: <code class="language-plaintext highlighter-rouge">mc3.v0.2.8.PUBLIC.maf</code> (Input dataset)</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-pancancer-aberrant-pathway-activity-analysis-map_mutation_classpy-inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> PanCancer Aberrant Pathway Activity Analysis <code class="language-plaintext highlighter-rouge">map_mutation_class.py</code> inputs</h3>
+  <ul>
+    <li>--classifier_decisions: String of the location of folder containing classifier_decisions.tsv</li>
+    <li>--path_genes: Comma separated string of HUGO symbols for all genes in the pathway or Pathway genes list file</li>
+    <li>--filename_copy_loss: Filename of copy number loss</li>
+    <li>--filename_copy_gain: Filename of copy number gain</li>
+    <li>--filename_raw_mut: Filename of raw mut MAF</li>
+  </ul>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-outputs-5"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Outputs</h3>
+  <ul>
+    <li>Merge per sample classifier scores with mutation types present in each sample and generate “mutation_classification_scores.tsv” file</li>
+    <li>Log file for script run and additional information</li>
+  </ul>
+</blockquote>
+
+<h2 id="pancancer-alternative-genes-pathwaymapper">PanCancer alte<span class="notranslate">rna</span>tive genes pathwaymapper</h2>
+<p>In this step we combine classifier weights, copy number information, recalculate metrics for positive samples, visualize distribution for AUROC and AUPR for all genes and metrics for each gene.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-alternative-genes-pathway-mapper-for-erbb2_pik3ca_kras_akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: alte<span class="notranslate">rna</span>tive genes pathway mapper for ERBB2_PIK3CA_KRAS_AKT1 model</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_alternative_genes_pathwaymapper/pancancer_alternative_genes_pathwaymapper/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_alternative_genes_pathwaymapper/pancancer_alternative_genes_pathwaymapper/0.1.9"><strong>PAPAA: PanCancer alte<span class="notranslate">rna</span>tive genes pathwaymapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/vijay/pancancer_alte<span class="notranslate">rna</span>tive_genes_pathwaymapper/pancancer_alte<span class="notranslate">rna</span>tive_genes_pathwaymapper/0.1.9</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer decisions”</em>: <code class="language-plaintext highlighter-rouge">classifier_decisions.tsv</code> (output of <strong>PAPAA: PanCancer apply weights</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Comma separated string of HUGO gene symbols”</em>: <code class="language-plaintext highlighter-rouge">ERBB2,PIK3CA,KRAS,AKT1</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“string of the genes to extract or gene list file”</em>: <code class="language-plaintext highlighter-rouge">path_rtk_ras_pi3k_genes.txt</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename mutations”</em>: <code class="language-plaintext highlighter-rouge">pancan_mutation_freeze.tsv </code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of sample”</em>: <code class="language-plaintext highlighter-rouge">sample_freeze.tsv</code> (Input dataset)</li>
+        <li><em>“Supplement Y matrix with copy number events”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with Copy number loss”</em>: <code class="language-plaintext highlighter-rouge">copy_number_loss_status.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with Copy number gain”</em>: <code class="language-plaintext highlighter-rouge">copy_number_gain_status.tsv</code> (Input dataset)</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-pancancer-aberrant-pathway-activity-analysis-targene_alternative_genes_pathwaymapperpy-inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> PanCancer Aberrant Pathway Activity Analysis <code class="language-plaintext highlighter-rouge">targene_alte<span class="notranslate">rna</span>tive_genes_pathwaymapper.py</code> inputs</h3>
+  <ul>
+    <li>--genes: Comma separated string of HUGO symbols for target genes or targenes_list.csv file</li>
+    <li>--path_genes: Comma separated string of HUGO symbols for all genes in the target pathway or path_genes.csv file</li>
+    <li>--classifier_decisions: String of the location of classifier scores/alt_folder</li>
+    <li>--filename_mut: Filename of sample/gene mutations to use in model</li>
+    <li>--filename_mut_burden: Filename of sample mutation burden to use in model</li>
+    <li>--filename_sample: Filename of patient/samples to use in model</li>
+    <li>--filename_copy_loss: Filename of copy number loss</li>
+    <li>--filename_copy_gain: Filename of copy number gain</li>
+  </ul>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-outputs-6"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Outputs</h3>
+  <ul>
+    <li>Calculate and display pathway metrics (“pathway_metrics_pathwaymapper.txt”)</li>
+    <li>Visualize Distribution of AUROC and AUPRC for all genes and Get Metrics for All Genes (“all_gene_metric_ranks.tsv”)</li>
+    <li>Log file for script run and additional information</li>
+  </ul>
+</blockquote>
+
+<h2 id="pancancer-pathway-count-heatmaps">PanCancer pathway count heatmaps</h2>
+<p>This step generates combined heatmap from mutation and copy number information and summarizes mutation, copy and total counts per sample for all the genes in target pathway.</p>
+<figure id="figure-7"><img src="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_combined_heatmap.png" alt="PI3K_OG_combined_heatmap" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Combined count heatmap (mutation and copynumber) for all genes in the target pathway with in each cancer type</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-heatmaps-for-erbb2_pik3ca_kras_akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Heatmaps for ERBB2_PIK3CA_KRAS_AKT1 model</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_pathway_count_heatmaps/pancancer_pathway_count_heatmaps/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_pathway_count_heatmaps/pancancer_pathway_count_heatmaps/0.1.9"><strong>PAPAA: PanCancer pathway count heatmaps</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/vijay/pancancer_pathway_count_heatmaps/pancancer_pathway_count_heatmaps/0.1.9</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer decisions”</em>: <code class="language-plaintext highlighter-rouge">classifier_decisions.tsv</code> (output of <strong>PAPAA: PanCancer apply weights</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer metrics pathwaymapper”</em>: <code class="language-plaintext highlighter-rouge">pathway_metrics_pathwaymapper.txt</code> (output of <strong>PAPAA: PanCancer alte<span class="notranslate">rna</span>tive genes pathwaymapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer gene metric ranks”</em>: <code class="language-plaintext highlighter-rouge">all_gene_metric_ranks.tsv</code> (output of <strong>PAPAA: PanCancer alte<span class="notranslate">rna</span>tive genes pathwaymapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Comma separated string of HUGO gene symbols”</em>: <code class="language-plaintext highlighter-rouge">ERBB2,PIK3CA,KRAS,AKT1</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“String of the pathway genes to extract”</em>: <code class="language-plaintext highlighter-rouge">path_rtk_ras_pi3k_genes.txt</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of features to use in model”</em>: <code class="language-plaintext highlighter-rouge">pancan_<span class="notranslate">rna</span>seq_freeze.tsv.gz</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename mutations”</em>: <code class="language-plaintext highlighter-rouge">pancan_mutation_freeze.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of mutation burden”</em>: <code class="language-plaintext highlighter-rouge">mutation_burden_freeze.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of sample”</em>: <code class="language-plaintext highlighter-rouge">sample_freeze.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with Copy number loss”</em>: <code class="language-plaintext highlighter-rouge">copy_number_loss_status.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with Copy number gain”</em>: <code class="language-plaintext highlighter-rouge">copy_number_gain_status.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with cancer gene classification table”</em>: <code class="language-plaintext highlighter-rouge">cosmic_cancer_classification.tsv</code> (Input dataset)</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-pancancer-aberrant-pathway-activity-analysis-targene_pathway_count_heatmapspy-inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> PanCancer Aberrant Pathway Activity Analysis <code class="language-plaintext highlighter-rouge">targene_pathway_count_heatmaps.py</code> inputs</h3>
+  <ul>
+    <li>--genes: Comma separated string of HUGO symbols for target genes or targenes_list.csv file</li>
+    <li>--path_genes: Comma separated string of HUGO symbols for all genes in the target pathway or path_genes.csv file</li>
+    <li>--classifier_decisions: String of the location of classifier scores/alt_folder</li>
+    <li>--x_matrix: Filename of features to use in model</li>
+    <li>--filename_mut: Filename of sample/gene mutations to use in model</li>
+    <li>--filename_mut_burden: Filename of sample mutation burden to use in model</li>
+    <li>--filename_sample: Filename of patient/samples to use in model</li>
+    <li>--filename_copy_loss: Filename of copy number loss</li>
+    <li>--filename_copy_gain: Filename of copy number gain</li>
+    <li>--filename_cancer_gene_classification: Filename of cancer gene classification table</li>
+  </ul>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-outputs-7"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Outputs</h3>
+  <ul>
+    <li>Mutational count heatmap for all genes in the target pathway with in each cancer type (cancer_type_mutation_heatmap.pdf).</li>
+    <li>Copy number count heatmap for all genes in the target pathway with in each cancer type (cancer_type_copy_number_heatmap.pdf).</li>
+    <li>Combined count heatmap for all genes in the target pathway with in each cancer type (cancer_type_combined_total_heatmap.pdf).</li>
+    <li>Calculates Mutations and copy number percentages of the genes in the and generates “pathway_mapper_percentages.txt” file.</li>
+    <li>Summarizes mutation, copy, and total counts per sample by targene pathway and generates “path_events_per_sample.tsv” file</li>
+  </ul>
+</blockquote>
+
+<h2 id="pancancer-targene-summary-figures">PanCancer targene summary figures</h2>
+<p>This step generates plots summarizing various analysis, including heatmaps for distribution of aberrant events across tumors, distribution of predictions at variant levels.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-summary-figures-for-erbb2_pik3ca_kras_akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Summary figures for ERBB2_PIK3CA_KRAS_AKT1 model</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_summary_figures/pancancer_targene_summary_figures/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_summary_figures/pancancer_targene_summary_figures/0.1.9"><strong>PAPAA: PanCancer targene summary figures</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/vijay/pancancer_targene_summary_figures/pancancer_targene_summary_figures/0.1.9</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Classifier data”</em>: <code class="language-plaintext highlighter-rouge">classifier_summary.txt</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer classifier coefficients”</em>: <code class="language-plaintext highlighter-rouge">classifier_coefficients.tsv</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“option to set seed”</em>: <code class="language-plaintext highlighter-rouge">123</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“summary counts”</em>: <code class="language-plaintext highlighter-rouge">summary_counts.csv</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“mutation classification scores”</em>: <code class="language-plaintext highlighter-rouge">mutation_classification_scores.tsv</code> (output of <strong>PAPAA: PanCancer map mutation class</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“path events per sample”</em>: <code class="language-plaintext highlighter-rouge">path_events_per_sample.tsv</code> (output of <strong>PAPAA: PanCancer pathway count heatmaps</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer gene metric ranks”</em>: <code class="language-plaintext highlighter-rouge">all_gene_metric_ranks.tsv</code> (output of <strong>PAPAA: PanCancer alte<span class="notranslate">rna</span>tive genes pathwaymapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-pancancer-aberrant-pathway-activity-analysis-targene_summary_figuresr-inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> PanCancer Aberrant Pathway Activity Analysis <code class="language-plaintext highlighter-rouge">targene_summary_figures.R</code> inputs</h3>
+  <ul>
+    <li>--classifier_summary: String of the location of classifier data</li>
+    <li>--seed: Value specifies the initial value of the random number seed</li>
+  </ul>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-outputs-8"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Outputs</h3>
+  <ul>
+    <li>Heatmap for mutation and gain proportions for the genes used in model across all the TCGA cancer types (all_targene_heatmap.pdf”)</li>
+    <li>Heatmap for total mutation and total gain proportions for the genes used in model across all the TCGA cancer types (targene_heatmap.pdf”)</li>
+    <li>Gene weights/Coefficients contributing to the model (targene_coef_plot.pdf)</li>
+    <li>Plot distributions of predictions according to variant classification for OG and TSG (“variant_gain_fill_map.pdf” and “variant_loss_fill_map.pdf”)</li>
+    <li>Targene Summary Counts Distribution (“path_events_per_sample.tsv”)</li>
+    <li>Targene pathway events counts (“targene_pathway_events_counts.pdf”)</li>
+    <li>Performance Metrics Distribution across pathway members (“aupr_distribution.pdf” and “auroc_distribution.pdf”)</li>
+    <li>T-Test for AUPR between targene pathway genes and Other genes (“targene_pathway_variant_AUPR_ttest.txt”)</li>
+    <li>Log file for script run and additional information</li>
+    <li>Extracting sample classifier scores for nucleotide level alterations in each sample and generate “nucleotide_mutation_scores.tsv” file</li>
+    <li>Extracting sample classifier scores for amino-acid level alterations in each sample and generate “amino_acid_mutation_scores.tsv” file</li>
+  </ul>
+</blockquote>
+
+<h2 id="pancancer-targene-cell-line-predictions">PanCancer targene cell line predictions</h2>
+<p>In this step we use our classifier information and predict mutational status for various cell lines in CCLE and GDSC data sources.</p>
+<figure id="figure-8"><img src="../../images/aberrant_pi3k_pathway_analysis/ccle_classification.png" alt="CCLE_targene_celline_classification" /><figcaption><span class="figcaption-prefix">Figure 8:</span> PI3K_OG classifiers applied to CCLE cell lines. Cell lines that harbor mutations in ERBB2, KRAS, PIK3CA, AKT1 are indicated by yellow boxes with red dots and wild types with the green boxes and blue dots.</figcaption></figure>
+<figure id="figure-9"><img src="../../images/aberrant_pi3k_pathway_analysis/gdsc_classification.png" alt="GDSC_targene_celline_classification" /><figcaption><span class="figcaption-prefix">Figure 9:</span> PI3K_OG classifiers applied to CCLE 390 standard cell lines between CCLE and GDSC cell lines that harbor mutations in ERBB2, KRAS, PIK3CA, AKT1 are indicated by yellow boxes with red dots and wild types with the green boxes and blue dots. </figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-analysis-of-ccle-and-gdsc-cell-lines-using-erbb2_pik3ca_kras_akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Analysis of CCLE and GDSC cell-lines using ERBB2_PIK3CA_KRAS_AKT1 model</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_cell_line_predictions/pancancer_targene_cell_line_predictions/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_cell_line_predictions/pancancer_targene_cell_line_predictions/0.1.9"><strong>PAPAA: PanCancer targene cell line predictions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/vijay/pancancer_targene_cell_line_predictions/pancancer_targene_cell_line_predictions/0.1.9</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Classifier data”</em>: <code class="language-plaintext highlighter-rouge">classifier_summary.txt</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer classifier coefficients”</em>: <code class="language-plaintext highlighter-rouge">classifier_coefficients.tsv</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“nucleotide mutation scores”</em>: <code class="language-plaintext highlighter-rouge">nucleotide_acid_mutation_scores.tsv</code> (output of <strong>PAPAA: PanCancer targene summary figures</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“amino acid mutation scores”</em>: <code class="language-plaintext highlighter-rouge">amino_acid_mutation_scores.tsv</code> (output of <strong>PAPAA: PanCancer targene summary figures</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Comma separated string of HUGO targene symbols”</em>: <code class="language-plaintext highlighter-rouge">ERBB2_MUT,PIK3CA_MUT,KRAS_MUT,AKT1_MUT</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“string of the genes to extract or gene list file”</em>: <code class="language-plaintext highlighter-rouge">path_rtk_ras_pi3k_genes.txt</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename ccle <span class="notranslate">rna</span>seq data”</em>: <code class="language-plaintext highlighter-rouge">ccle_<span class="notranslate">rna</span>seq_genes_rpkm_20180929_mod.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename ccle mutational data”</em>: <code class="language-plaintext highlighter-rouge">CCLE_MUT_CNA_AMP_DEL_binary_Revealer.gct</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename ccle variant data”</em>: <code class="language-plaintext highlighter-rouge">CCLE_DepMap_18Q1_maf_20180207.txt</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename gdsc <span class="notranslate">rna</span>seq data”</em>: <code class="language-plaintext highlighter-rouge">GDSC_EXP_CCLE_converted_name.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename gdsc mutational data”</em>: <code class="language-plaintext highlighter-rouge">GDSC_CCLE_common_mut_cnv_binary.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename for gdsc1 pharmacological data file”</em>: <code class="language-plaintext highlighter-rouge">gdsc1_ccle_pharm_fitted_dose_data.txt</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename for gdsc2 pharmacological data file”</em>: <code class="language-plaintext highlighter-rouge">gdsc2_ccle_pharm_fitted_dose_data.txt</code> (Input dataset)</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-pancancer-aberrant-pathway-activity-analysis-targene_cell_line_predictionspy-inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> PanCancer Aberrant Pathway Activity Analysis <code class="language-plaintext highlighter-rouge">targene_cell_line_predictions.py</code> inputs</h3>
+  <ul>
+    <li>--targenes: Comma separated string of HUGO symbols for target genes or targenes_list.csv file</li>
+    <li>--path_genes: Comma separated string of HUGO symbols for all genes in the target pathway or path_genes.csv file</li>
+    <li>--classifier_summary: String of the location of classifier_summary file</li>
+    <li>--ccle_<span class="notranslate">rna</span>seq: Filename of CCLE gene <span class="notranslate">expression</span> data file</li>
+    <li>--ccle_mut: Filename of CCLE cell lines/gene mutations data file</li>
+    <li>--ccle_maf: Filename of CCLE mutational variant level data file</li>
+    <li>--gdsc_<span class="notranslate">rna</span>seq: Filename of GDSC gene <span class="notranslate">expression</span> data file</li>
+    <li>--gdsc_mut: Filename of GDSC cell lines/gene mutations data file</li>
+    <li>--gdsc1_phar: Filename of GDSC1 pharmacological response data</li>
+    <li>--gdsc2_phar: Filename of GDSC2 pharmacological response data</li>
+  </ul>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-outputs-9"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Outputs</h3>
+  <ul>
+    <li>Generate predictions for CCLE data using targene classifier(ccle_histogram.png)</li>
+    <li>Generate classifier scores for CCLE cell lines and combines CCLE mutational data and variant data with classifier scores (ccle_targene_classifier_scores.tsv).</li>
+    <li>Performs t-test on classifier weights across targene mutant vs targene wild type cell-line groups(ccle_targene_WT_MUT_predictions.pdf)</li>
+    <li>Add CCLE nucleotide scores at variant level and update nucleotide_mutation_scores.tsv (updated_Data_nucleotide_scores.csv)</li>
+    <li>Add CCLE protein scores at variant level and update aminoacid_mutation_scores.tsv (updated_Data_aminoacid_scores.csv)</li>
+    <li>Generate predictions for GDSC data using targene classifier(gdsc_scores_histogram.png)</li>
+    <li>Generate classifier scores for GDSC cell lines and combines CCLE mutational data and variant data with classifier scores (gdsc_targene_classifier_scores.tsv).</li>
+    <li>Performs t-test on classifier weights across targene mutant vs targene wild type cell-line groups(gdsc_targene_WT_MUT_predictions.pdf)</li>
+    <li>Apply GDSC classifier scores to evaluate GDSC1 pharmacological data response (gdsc1_targene_pharmacology_predictions.tsv)</li>
+    <li>Apply GDSC classifier scores to evaluate GDSC2 pharmacological data response (gdsc2_targene_pharmacology_predictions.tsv)</li>
+    <li>Apply CCLE classifier scores to evaluate GDSC1 pharmacological data response (gdsc1_ccle_targene_pharmacology_predictions.tsv)</li>
+    <li>Apply CCLE classifier scores to evaluate GDSC2 pharmacological data response (gdsc2_ccle_targene_pharmacology_predictions.tsv)</li>
+  </ul>
+</blockquote>
+
+<h2 id="pancancer-external-sample-status-prediction">PanCancer exte<span class="notranslate">rna</span>l sample status prediction</h2>
+<p>In this step we use our classifier information and predict mutational status from exte<span class="notranslate">rna</span>l gene <span class="notranslate">expression</span> data. Gene <span class="notranslate">expression</span> data from <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822">GSE69822</a>, where MCF10a cell lines are either having PI3KCA/PTENKO mutation or WT/WT+A66 treated samples. Note WT+A66 is wild-type MCF10a cell line treated with A66 a potent PI3K inhibitor. A distribution plot is generated to see how many samples match to prediction. Samples with scores below 0.5 are considered WT and above 0.5 are considered mutant.</p>
+<figure id="figure-10"><img src="../../images/aberrant_pi3k_pathway_analysis/external.png" alt="GSE69822_samples_classification" /><figcaption><span class="figcaption-prefix">Figure 10:</span> PI3K_OG classifiers applied to MCF10a cell lines dataset (GEO: GSE69822). The samples were either WT/WT+A66 (blue circles) or having a PIK3CA-H1074R/PTENKO mutation (orange circles).</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-external-sample-evaluation-with-erbb2_pik3ca_kras_akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: exte<span class="notranslate">rna</span>l sample evaluation with ERBB2_PIK3CA_KRAS_AKT1 model</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_external_sample_status_prediction/pancancer_external_sample_status_prediction/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_external_sample_status_prediction/pancancer_external_sample_status_prediction/0.1.9"><strong>PAPAA: PanCancer exte<span class="notranslate">rna</span>l sample status prediction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/vijay/pancancer_exte<span class="notranslate">rna</span>l_sample_status_prediction/pancancer_exte<span class="notranslate">rna</span>l_sample_status_prediction/0.1.9</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Classifier data”</em>: <code class="language-plaintext highlighter-rouge">classifier_summary.txt</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer classifier coefficients”</em>: <code class="language-plaintext highlighter-rouge">classifier_coefficients.tsv</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“exte<span class="notranslate">rna</span>l sample gene <span class="notranslate">expression</span> data”</em>: <code class="language-plaintext highlighter-rouge">GSE69822_pi3k_trans.csv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“given mutational status”</em>: <code class="language-plaintext highlighter-rouge">GSE69822_pi3k_sign.txt</code> (Input dataset)</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-pancancer-aberrant-pathway-activity-analysis-external_sample_pred_targene_classifierpy-inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> PanCancer Aberrant Pathway Activity Analysis <code class="language-plaintext highlighter-rouge">exte<span class="notranslate">rna</span>l_sample_pred_targene_classifier.py</code> inputs</h3>
+  <ul>
+    <li>--classifier_summary: String of the location of classifier scores file</li>
+    <li>--<span class="notranslate">expression</span>_file: File path for exte<span class="notranslate">rna</span>l sample <span class="notranslate">expression</span> data file (fpkm/rpkm/rlog/vlog/nlog values)</li>
+    <li>--status_sign: Provide sign for tumor/mutant [1] or normal/WT [-1] along with sorted sample names</li>
+  </ul>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-outputs-10"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Outputs</h3>
+  <ul>
+    <li>Model based classification scores distribution Plots for exte<span class="notranslate">rna</span>l normal and tumor samples (“targene_exte<span class="notranslate">rna</span>l_sample_predictions.pdf and targene_exte<span class="notranslate">rna</span>l_sample_predictions_1.pdf”)</li>
+    <li>Log file for script run and additional information</li>
+  </ul>
+</blockquote>
+
+<h2 id="pancancer-targene-pharmacology">PanCancer targene pharmacology</h2>
+<p>In this step we use the classifier derived cell line predictions and use them to evaluate pharmacological response of these cell lines. We plot log IC50 with classifier scores for each cell line and draw a correlation for drug response in absence or presence of targene mutations.</p>
+
+<figure id="figure-11"><img src="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_gdsc1_ccle_drug.png" alt="Afatinib_pharmacological_response" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Natural log fitted IC50 (Ln-IC50) values of Afatinib pharmacological response compared against PI3K_OG classifier scores of various cell lines. Cell lines with mutant (orange) or wild-type (blue) for ERBB2, KRAS, PIK3CA, AKT1 are indicated. The trend lines and p values are shown separately for wild-type or mutant cell lines. Cell lines treated with Afatinib, a known EGFR inhibitor.</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-gdsc1-and-gdsc2-pharmacological-analysis-using-erbb2_pik3ca_kras_akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: GDSC1 and GDSC2 pharmacological analysis using ERBB2_PIK3CA_KRAS_AKT1 model</h3>
+  <ul>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“gdsc1 targene pharmacology predictions”</em>: <code class="language-plaintext highlighter-rouge">gdsc1_targene_pharmacology_predictions.tsv</code> (output of <strong>PAPAA: PanCancer targene cell line predictions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“gdsc2 targene pharmacology predictions”</em>: <code class="language-plaintext highlighter-rouge">gdsc2_targene_pharmacology_predictions.tsv</code> (output of <strong>PAPAA: PanCancer targene cell line predictions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“gdsc1 ccle targene pharmacology predictions”</em>: <code class="language-plaintext highlighter-rouge">gdsc1_ccle_targene_pharmacology_predictions.tsv</code> (output of <strong>PAPAA: PanCancer targene cell line predictions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“gdsc2 ccle targene pharmacology predictions”</em>: <code class="language-plaintext highlighter-rouge">gdsc2_ccle_targene_pharmacology_predictions.tsv</code> (output of <strong>PAPAA: PanCancer targene cell line predictions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename list of compounds”</em>: <code class="language-plaintext highlighter-rouge">compounds_of_interest.txt</code> (Input dataset)</li>
+  </ul>
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-pancancer-aberrant-pathway-activity-analysis-targene_pharmacologyr-inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> PanCancer Aberrant Pathway Activity Analysis <code class="language-plaintext highlighter-rouge">targene_pharmacology.R</code> inputs</h3>
+  <ul>
+    <li>--classifier_results: String of the location of classifier folder</li>
+    <li>--compound: Filename of list of pharmacological compounds for evaluation</li>
+  </ul>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-outputs-11"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Outputs</h3>
+  <ul>
+    <li>Scatter plots with visualizing drug response compared to GDSC targene classifier scores
+   for GDSC1 pharmacological dataset (GDSC1_targene_all_drug_response.pdf)</li>
+    <li>Scatter plots with visualizing drug response compared to CCLE targene classifier scores
+   for GDSC1 pharmacological dataset (GDSC1_ccle_targene_all_drug_response.pdf)</li>
+    <li>Scatter plots with visualizing drug response compared to GDSC targene classifier scores
+   for GDSC2 pharmacological dataset (GDSC2_targene_all_drug_response.pdf)</li>
+    <li>Scatter plots with visualizing drug response compared to CCLE targene classifier scores
+   for GDSC2 pharmacological dataset (GDSC2_ccle_targene_all_drug_response.pdf)</li>
+  </ul>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-tutorial-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Tutorial Questions</h3>
+
+  <ol>
+    <li>Can you build a classifier for tumor suppressor genes (TSG) combination in PI3K pathway?</li>
+    <li>How did the PI3K_TSG model performed compared to PI3K_OG?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>Try building PI3K_TSG model using (<a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=PTEN">PTEN</a>,<a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=PIK3R1">PIK3R1</a>,<a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=STK11">STK11</a> genes and BRCA,COAD,ESCA,HNSC,LGG,LUAD,LUSC,PRAD,READ,GBM, UCEC,UCS cancer-types). The PI3K_TSG model should show a very different transcriptomic signature compared to PI3K_OG model. We should see unique predictive biomarkers associated with tumors with TSG mutations. e.g. GYS1,CABC1,GLUD1,GRB7. This suggests that tumors with TSG mutations have different molecular paths although they have similar phenotypes compared to tumors with OG mutations.</li>
+      <li>Check the AUROC and AUPR values. The PI3K_TSG model should show AUROC &gt;82% and AUPR &gt;68% accuracy during cross validations.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 class="no_toc" id="conclusions">Conclusions</h1>
+
+<ul>
+  <li>In our tutorial, we used machine learning based PI3K oncogene classifier in <span class="notranslate">galaxy</span> to distinguish tumor samples using PI3K activity. The classifier shows high accuracy ~80-86% in detecting aberrant PI3K activity in TCGA samples.</li>
+  <li>The model output include top weighted genes that represent transcriptional signature of the tumors with selected gene mutations.  The pan model (all disease gene model) when compared to individual disease models have equal or higher performance for most of individual diseases.</li>
+  <li>We also learned how to work with multi-omic datasets, and perform 5 fold cross-validation to output probability scores for each samples belonging to each disease/cancer type.</li>
+  <li>Further, we can apply the trained models to make predictions on a exte<span class="notranslate">rna</span>l <span class="notranslate">expression</span> dataset provided and predict their mutational status.</li>
+  <li>In addition we used our models to evaluated cell-lines pharmacological response against various compounds. This information will be helpful to improve personalized medicine approaches to various individuals.</li>
+</ul>
+
+<figure id="figure-12"><img src="../../images/aberrant_pi3k_pathway_analysis/project_summary.png" alt="tutorial_summary" /><figcaption><span class="figcaption-prefix">Figure 12:</span> <span class="notranslate">Galaxy</span> based Machine Learning approach for Pan-cancer Aberrant Pathway Activity Analysis(PAPAA) using TCGA multi-omic data. </figcaption></figure>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>Machine learning based Aberrant pathway activity analysis can distinguish normal and tumor samples. Also can identify transcriptomic signature of tumors associated with oncogene or tumor suppressor gene mutations.</p>
+</li>
+                            
+                            <li><p>Correlations from classifier predictions and pharmacological responses determine drug sensitivity among cancer cell lines and can be useful in improving personalized medicine approaches.</p>
+</li>
+                            
+                            <li><p>Classifier models generated from the suite-papaa can identify potential biomarkers with in the transcriptomic signature of tumors.</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/statistics/faqs/">FAQ page for the Statistics and machine learning topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="Hanahan2000">Hanahan, D., and R. A. Weinberg, 2000 <b>The Hallmarks of Cancer</b>. Cell 100: 57–70.</span>
+    
+    
+    <a href="https://doi.org/10.1016/s0092-8674(00)81683-9">10.1016/s0092-8674(00)81683-9</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Zhao2006">Zhao, J. J., and T. M. Roberts, 2006 <b>PI3 Kinases in Cancer: From Oncogene Artifact to Leading Cancer Target</b>. Science’s STKE 2006: pe52–pe52.</span>
+    
+    
+    <a href="https://doi.org/10.1126/stke.3652006pe52">10.1126/stke.3652006pe52</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Fruman2014">Fruman, D. A., and C. Rommel, 2014 <b>PI3K and cancer: lessons,  challenges and opportunities</b>. Nature Reviews Drug Discovery 13: 140–156.</span>
+    
+    
+    <a href="https://doi.org/10.1038/nrd4204">10.1038/nrd4204</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Bradner2017">Bradner, J. E., D. Hnisz, and R. A. Young, 2017 <b>Transcriptional Addiction in Cancer</b>. Cell 168: 629–643.</span>
+    
+    
+    <a href="https://doi.org/10.1016/j.cell.2016.12.013">10.1016/j.cell.2016.12.013</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Way2018">Way, G. P., F. Sanchez-Vega, K. La, J. Armenia, W. K. Chatila <i>et al.</i>, 2018 <b>Machine Learning Detects Pan-cancer Ras Pathway Activation in The Cancer Genome Atlas</b>. Cell Reports 23: 172–180.e3.</span>
+    
+    
+    <a href="https://doi.org/10.1016/j.celrep.2018.03.046">10.1016/j.celrep.2018.03.046</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="SanchezVega2018">Sanchez-Vega, F., M. Mina, J. Armenia, W. K. Chatila, A. Luna <i>et al.</i>, 2018 <b>Oncogenic Signaling Pathways in The Cancer Genome Atlas</b>. Cell 173: 321–337.e10.</span>
+    
+    
+    <a href="https://doi.org/10.1016/j.cell.2018.03.035">10.1016/j.cell.2018.03.035</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li></ol>
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis (Statistics and machine learning)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Vijay, Daniel Blankenberg, 2021 <b>PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis (Galaxy Training Materials)</b>. <a href="/training-material/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/tutorial.html">/training-material/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{statistics-aberrant_pi3k_pathway_analysis,
+    author = "Vijay and Daniel Blankenberg",
+    title = "PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis (Galaxy Training Materials)",
+    year = "2021",
+    month = "05",
+    day = "05"
+    url = "\url{/training-material/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Vijay, Daniel Blankenberg)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
