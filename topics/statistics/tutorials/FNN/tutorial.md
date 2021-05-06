@@ -38,7 +38,7 @@ to the vast availability of data and enormous increases in computing capacity (S
 training complex neural networks in some domains requires lots of data and compute capacity). There
 are various types of neural networks (Feedforward, recurrent, etc). In this tutorial, we discuss
 feedforward neural networks (FNN), which have been successfully applied to pattern classification, 
-clustering, regression, association, optimization, control, and forecasting ({% cite JainEtAl %}. 
+clustering, regression, association, optimization, control, and forecasting ({% cite JainEtAl %}).
 We will discuss biological neurons that inspired artificial neural networks, review activation 
 functions, classification/regression problems solved by neural networks, and the backpropagation 
 learning algorithm. Finally, we construct a FNN to solve a regression problem using car purchase
@@ -149,7 +149,7 @@ not make sense to use it in all layers, as such multi-layer network can be reduc
 Also, networks with linear activation functions cannot model non-linear relationships between input and output.
 
 Binary step activation function is used in Perceptron. It cannot be used in multi-layers networks as they use 
-back propagation learning algorithm, which changes network weights/biases based on derivative of the derivative 
+back propagation learning algorithm, which changes network weights/biases based on the derivative
 of the activation function, which is zero. Hence, there would no weights/biases updates in back propagation.
 
 Sigmoid activation function can be used both at the output layer and hidden layers of a multilayer network. They 
@@ -167,7 +167,7 @@ and 1 (instead of 0 and 1). One benefit of tanh over Sigmoid is that its derivat
 suffers less from the vanishing gradient problem.
 
 Finally, ReLU (Rectified Linear Unit) is an activation function popular is deep neural networks. Since it
-does not sufer from vanishing gradient problem, it is preferred to Sigmoid or tanh. Sigmoid or tanh can 
+does not suffer from vanishing gradient problem, it is preferred to Sigmoid or tanh. Sigmoid or tanh can 
 still be used in the output layer of deep networks.      
 
 # Supervised learning
@@ -177,7 +177,7 @@ $$ {(\boldsymbol{x^{(1)}}, \boldsymbol{y^{(1)}}), ((\boldsymbol{x^{(2)}}, \bolds
 and each pair $$ (\boldsymbol{x^{(i)}}, \boldsymbol{y^{(i)}}) $$ is called a *training example*. 
 *m* is the number of training examples and $$ \boldsymbol{x^{(i)}} $$ is called *feature vector* 
 or *input vector*.  Each element of the vector is called a *feature*. Each $$ \boldsymbol{x^{(i)}} $$
-corresponds to a label $$ \boldsymbol{y^{(1)}} $$. We assume there is an unknown function 
+corresponds to a label $$ \boldsymbol{y^{(i)}} $$. We assume there is an unknown function
 $$ \boldsymbol{y} = f(\boldsymbol{x})$$ that maps the feature vectors to labels. The goal of
 supervised learning is to use the training set to learn or estimate *f*. We call this estimated
 function $$ \hat{f}(\boldsymbol{x}) $$. We want $$ \hat{f}(\boldsymbol{x}) $$ to be close to 
@@ -193,10 +193,10 @@ we call it a *multilabel classification* problem ({% cite Bagheri %}).
 
 We use a method called *one-hot encoding* to convert binary and multiclass classification class label numbers into 
 binary values. We convert the scalar label *y* into a vector $$  \boldsymbol{y} $$ which has *c* elements. When y is 
-equal to k, the k-th element of $$ \boldsymbol{y} is one and all other elements are zero. Wihen labels are *not* 
+equal to k, the k-th element of $$ \boldsymbol{y} $$ is one and all other elements are zero. When labels are *not*
 mutually exclusive, we use another method called *multi-hot encoding*. Suppose we are doing a multilabel image 
 classification, where an image can have a dog, panda, or cat in it. We represent the label by a vector of 3, and if
-dog anf cat are present in the image, first and third element of the vector are one and the second elemt is zero ({% cite Bagheri %}).
+dog anf cat are present in the image, first and third element of the vector are one and the second element is zero ({% cite Bagheri %}).
 
 ![Three images illustrating binary, multiclass, and multilabel classifications and their label representation](../../images/FNN_output_encoding.png "Examples of binary, multiclass, and multilbel classifications and their label representation ({% cite Bagheri %})")
 
@@ -224,7 +224,7 @@ For multiclass classification problems, the cross entropy is calculated as below
 
 $$ \mathcal{L}(\boldsymbol{\hat{y}^{(j)}}, \boldsymbol{y^{(j)}}) = - \sum_{i=1}^{c} \boldsymbol{y_{i}^{(j)}}ln(\boldsymbol{\hat{y}_{i}^{(j)}}) $$
 
-You can find the cross entropy formula for binary and multilabel classifications in {% cite bagheri %}. They are just special 
+You can find the cross entropy formula for binary and multilabel classifications in {% cite Bagheri %}. They are just special
 cases of multiclass cross entropy, and are not give here for the sake of brevity.
 
 The loss function is calculated for each training example in the training set. The average of the calculated loss functions 
@@ -245,7 +245,7 @@ $$ J(\boldsymbol{W}, \boldsymbol{b}) = \frac{1}{2m} \sum_{j=1}^{m} \| \boldsymbo
 # Backpropagation Learning algorithm
 
 The **backpropagation** algorithm {% cite Rumelhart1986 %} is a gradient descent technique. Gradient descent aims to find
-a local minimum of a function by iteratively moving in the oposite direction of the gradient (i.e. the slope) of the 
+a local minimum of a function by iteratively moving in the opposite direction of the gradient (i.e. the slope) of the
 function at the current point. The goal of a learning in neural networks is to minimize the cost function given the 
 training set. The cost function is a function of network weights and biases of all the neurons in all the layers. 
 Backpropagation iteratively computes the gradient of cost function relative to each weight and bias, then updates 
@@ -268,9 +268,9 @@ $$ \boldsymbol{\delta}^{[L](j)} = \nabla_{\boldsymbol{\hat{y}^{(j)}}}\mathcal{L}
 
 $$ \boldsymbol{\delta}^{[l](j)} = W^{[l+1]^{T}} \boldsymbol{\delta}^{[l+1](j)}  \odot (g^{[l]})^{'} (\boldsymbol{z}^{[l](j)}) $$
 
-$$ \frac{\partial L}{\partial b_{i}^{[l]}} = \boldsymbol{\delta}^{[l](j)} $$
+$$ \frac{\partial L}{\partial b_{i}^{[l]}} = \boldsymbol{\delta}_{i}^{[l](j)} $$
 
-$$ \frac{\partial L}{\partial w_{ik}^{l}} = \boldsymbol{\delta}_{i}^{[l](j)} a_{k}^{[l-1](j)} $$
+$$ \frac{\partial L}{\partial w_{ik}^{[l]}} = \boldsymbol{\delta}_{i}^{[l](j)} a_{k}^{[l-1](j)} $$
 
 As you can see, we can calculate the error at the output layer for sample *j* using the first equation. Afterwards, we can calculate 
 the error in the layer right before the output layer for sample *j* using the second equation. The second equation is recursive, 
@@ -279,7 +279,7 @@ errors is the reason this algorithm is called *backpropagation*.
 
 After the error values for all the layers are calculated for sample *j*, we use the third and forth equations to calculate the gradient 
 of loss function relative to biases and weights for sample *j*. We can repeat these steps for all the samples, average the gradients of
-the los function relative to biases and weights, and use the average value to update the biases and weights. This is called *batch 
+the loss function relative to biases and weights, and use the average value to update the biases and weights. This is called *batch
 gradient descent*. If we have too many samples, such calculations will take a long time. An alternative is to update the biases/weights
 based on the gradient of each sample. This is called *stochastic gradient descent*. While this is much faster than batch gradient descent, 
 the gradient calculated based on a single sample is not a good estimate of the gradient calculated in the batch version of the algorithm. 
@@ -291,7 +291,7 @@ layer. The recursive nature of this equation means, calculating the error values
 multiplication by the derivative value; calculating the error values in two (or more) layers before the output layer requires 2 (or more) 
 multiplication by the derivative values. If these derivative values are small, as could be the case for the Sigmoid function, the product 
 of multiple small values will result in a *very* small value (e.g. 0.001). Since these error values decide the updates for biases and weights, this 
-means the update to biases and weights in layers closer to the input layer will bevery small, slowing the learning algorithm to a halt. 
+means the update to biases and weights in layers closer to the input layer will be very small, slowing the learning algorithm to a halt.
 This phenomenon is known as the *vanishing gradient* problem and is the reason Sigmoid function cannot be used in very deep networks (And 
 why ReLU is so popular in deep networks).
  
