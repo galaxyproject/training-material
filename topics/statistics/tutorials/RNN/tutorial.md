@@ -62,8 +62,8 @@ describe various RNN architectures and solve a sentiment analysis problem using 
 
 In feedforward neural networks (FNN) a single training example is presented to the network,
 after which the the network generates an output. For example, a lung X-ray image is passed
-to a FNN, and the network predicts tumor or no tumor. By contrast, in RNN a sequence of
-training examples are presented to the network one at a time. For example, a sequence of
+to a FNN, and the network predicts tumor or no tumor. By contrast, in RNN a training example
+is a sequence, which is presented to the network one at a time. For example, a sequence of
 English words is passed to a RNN, one at a time, and the network generates a sequence of
 Persian words, one at a time. RNN handle sequential data, whether its temporal or ordinal.
 
