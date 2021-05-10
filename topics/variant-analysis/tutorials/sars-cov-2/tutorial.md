@@ -236,10 +236,10 @@ First we need to find a good dataset to play with. The [Sequence Read Archive (S
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. Go to NCBI's SRA page by pointing your browser to https://www.ncbi.nlm.nih.gov/sra
-> 2. In the search box enter `SARS-CoV-2 Patient Sequencing From Partners / MGH metagenomic`:
-> ![Find data](../../../images/find_mgh_data.png) (Alternatively, you simply click on this [link](https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH%3A+metagenomic))
-> 3. It is **VERY IMPORTANT** that you select only metagenomic, not amplicon, datasets. SARS-CoV-2 amplicon sequencing datasets require addition analysis steps not discussed in this tutorial.
-> 4. The web page will show a large number of SRA datasets (at the time of writing there were 2,223). This is data from a [study](https://science.sciencemag.org/content/early/2020/12/09/science.abe3261) describing analysis of SARS-CoV-2 in Boston area.
+> 2. In the search box enter `SARS-CoV-2 Patient Sequencing From Partners / MGH`:
+> ![Find data](../../../images/find_mgh_data.png) (Alternatively, you simply click on this [link](https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH))
+> 3. Note that some of the datasets found say "ARTICv3 amplicon sequencing". This is a sequencing technique that requires addition analysis steps not discussed in this tutorial. The data that we will analyse (datasets mentioned below) uses a technique called "metagenomic sequencing".
+> 4. The web page will show a large number of SRA datasets (at the time of writing there were 3,927). This is data from a [study](https://science.sciencemag.org/content/early/2020/12/09/science.abe3261) describing analysis of SARS-CoV-2 in Boston area.
 > 5. Download metadata describing these datasets by:
 >   - clicking on **Send to:** dropdown
 >   - Selecting `File`
