@@ -738,7 +738,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 12, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 29, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -1616,7 +1616,7 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
   <h3 id="hands_on-hands-on-generate-the-matrix"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate the matrix</h3>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.0.2.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.0.2.0"><strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.0.2.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0"><strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0</span></span>  with the following parameters:
       <ul>
         <li>In <em>“Select regions”</em>:
           <ul>
@@ -1654,7 +1654,7 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
   <h3 id="hands_on-hands-on-generate-the-heatmap"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate the heatmap</h3>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.0.2.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.0.2.0"><strong>plotHeatmap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.0.2.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1"><strong>plotHeatmap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Matrix file from the computeMatrix tool”</em>: Select the output of <strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
         <li><em>“Show advanced output settings”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
@@ -1742,8 +1742,9 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
               </ul>
             </li>
             <li><em>“The x-axis label”</em>: <code class="language-plaintext highlighter-rouge">distance from peak center (bp)</code></li>
-            <li><em>“The y-axis label for the top panel”</em>: <code class="language-plaintext highlighter-rouge">CTCF peaks</code> # I don’t know why this does not work currently…</li>
+            <li><em>“The y-axis label for the top panel”</em>: <code class="language-plaintext highlighter-rouge">CTCF peaks</code></li>
             <li><em>“Reference point label”</em>: <code class="language-plaintext highlighter-rouge">peak center</code></li>
+            <li><em>“Labels for the regions plotted in the heatmap”</em>: <code class="language-plaintext highlighter-rouge">CTCF_peaks</code></li>
             <li><em>“Did you compute the matrix with more than one groups of regions?”</em>: <code class="language-plaintext highlighter-rouge">Yes, I used multiple groups of regions</code></li>
           </ul>
         </li>
@@ -1779,10 +1780,8 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
                     <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Coverage from MACS2 (extended +/-100bp)</code></li>
                     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file(s) bigwig format”</em>: Select the output of <strong>Wig/<span class="notranslate">Bed</span>Graph-to-bigWig</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> called <code class="language-plaintext highlighter-rouge">MACS2 bigwig</code>.</li>
                     <li><em>“Color of track”</em>: Select the color of your choice</li>
-                    <li><em>“Use a different color for negative values”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
                     <li><em>“Minimum value”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
                     <li><em>“height”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
-                    <li><em>“Choose style of the plot.”</em>: <code class="language-plaintext highlighter-rouge">fill</code></li>
                     <li><em>“Show visualization of data range”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
                   </ul>
                 </li>
@@ -1807,9 +1806,7 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
                   <ul>
                     <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Genes</code></li>
                     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file(s) <span class="notranslate">bed</span> or gtf format”</em>: <code class="language-plaintext highlighter-rouge">chr22 genes</code></li>
-                    <li><em>“Define color:”</em>: <code class="language-plaintext highlighter-rouge">manually</code></li>
                     <li><em>“Color of track”</em>: Select the color of your choice</li>
-                    <li><em>“Define border color:”</em>: <code class="language-plaintext highlighter-rouge">manually</code></li>
                     <li><em>“height”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
                     <li><em>“Plot labels”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
                       <ul>
@@ -1817,7 +1814,6 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
                         <li><em>“Allow to put labels in the right margin”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
                       </ul>
                     </li>
-                    <li><em>“<span class="notranslate">Bed</span> style”</em>: <code class="language-plaintext highlighter-rouge">flybase (blocks with arrow at extremities)</code></li>
                   </ul>
                 </li>
               </ul>
@@ -2056,7 +2052,7 @@ map to the mitochondrial genome. We found open chromatin regions with <strong>MA
     title = "ATAC-Seq data analysis (Galaxy Training Materials)",
     year = "2021",
     month = "04",
-    day = "12"
+    day = "29"
     url = "\url{/training-material/topics/epigenetics/tutorials/atac-seq/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
