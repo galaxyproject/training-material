@@ -138,14 +138,15 @@ we pass in n words in English and get m words in Italian (See Figure 9).
 
 Mainly, there are three types of RNN: 1) Vanilla RNN, 2) LSTM ({% cite hochreiter1997long %}), and 3) GRU ({% cite cho-etal-2014-learning %}).
 A Vanilla RNN, simply combines the state information from the previous timestamp with the input from the current timestamp to generate the
-state information for current timestamp. The problem with Vanilla RNN is that training deep RNN networks is impossible due to the
-**vanishing gradient** problem. Basically, starting from the output layer, in order to determine weights/biases updates, we need to calculate
-the derivative of the loss function relative to the layers input, which is usually a small number. This is not a problem for the output layer,
-but for the previous layers, this process must be repeated recursively, resulting in very small updates to weights/biases of the initial layers
-of the RNN, halting the learning process.
+state information and output for current timestamp. The problem with Vanilla RNN is that training deep RNN networks is impossible due to the
+**vanishing gradient** problem. Basically, weights/biases are updated according to the gradient of the loss functions relative to 
+the weights/biases. The gradients are calculated recursively from the output layer towards the input layer (Hence, the name *backpropagation*).
+The gradient of the input layer is the product of the gradient of the subsequent layers. If those gradients are small, the gradient of the input
+layer (which is the product of multiple small values) will very small, resulting in very small updates to weights/biases of the initial layers
+of the RNN, effectively halting the learning process.
 
 LSTM and GRU are two RNN architectures that address vanishing gradient problem. Full description of LSTM/GRU is beyond the scope of this
-tutorial (Please refer to ref1 and ref2), but in a nutshell both LSTM and GRU use **gates** such that the weights/biases updates in previous
+tutorial (Please refer to {% cite hochreiter1997long %} and {% cite cho-etal-2014-learning %}), but in a nutshell both LSTM and GRU use **gates** such that the weights/biases updates in previous
 layers are calculated via a series of additions (not multiplications). Hence, these architectures can learn even when the RNN has hundreds or
 thousands of layers.
 
@@ -170,7 +171,7 @@ the next 10,000 words in our dataset. Reviews are limited to 500 words. They are
 
 ## Bag of words and TF-IDF
 
-If you don't care about the order of the words in a document, you can use bag of words (BoW) or text frequency inverse document frequency (TF-IDF).
+If you don't care about the order of the words in a document, you can use bag of words (BoW) or term frequency inverse document frequency (TF-IDF).
 In these models we have a 2 dimensional array. The rows represent the documents (in our example, the movie reviews) and the columns
 represent the words in our vocabulary (all the unique words in all the documents). If a word is not present in a document, we have a zero
 at the corresponding row and column as the entry. If a word is present in the document, we have a one as the entry -- Alternatively, we could use
@@ -184,7 +185,7 @@ representation of these documents is given in Figure 10.
 BoW's advantage is its simplicity, yet it does not take into account the rarity of a word across documents, which unlike common words are
 important for document classification.
 
-In TF-IDF, similar to BoW we have an entry for each document-word pair. In TD-IDF, the entry is the product of 1) Text frequency, the
+In TF-IDF, similar to BoW we have an entry for each document-word pair. In TD-IDF, the entry is the product of 1) Term frequency, the
 frequency of a word in a document, and 2) Inverse document frequency, the inverse of the number of documents that have the word divided
 by the total number of documents (we usually use logarithm of the IDF).
 
