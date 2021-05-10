@@ -76,7 +76,7 @@ In 1959 Hubel and Wiesel conducted an experiment to understand how the visual co
 They recorded the activity of the neurons in the visual cortex of a cat while moving a bright line in front of the cat. They noticed that some cells fire
 when the bright line is shown at a particular angle and a particular location (They called these **simple** cells). Other neurons fired when the bright
 line was shown regardless of the angle/location and seemed to detect movement (They called these **complex** cells). It seemed complex cells receive
-inputs multiple simple cells and have an hierarchical structure. Hubel and Wiesel won the Noble prize for their findings in 1981.
+inputs from multiple simple cells and have an hierarchical structure. Hubel and Wiesel won the Noble prize for their findings in 1981.
 
 In 1980, inspired by hierarchical structure of complex and simple cells, Fukushima proposed Neocognitron ({% cite Fukishima %}), a hierarchical neural
 network used for handwritten Japanese character recognition. Neocognitron was the first CNN, and had its own training algorithm. In 1989, LeCun et. al.
@@ -109,7 +109,7 @@ The convolution layer is composed of multiple filters (also called kernels). Fil
 a 28 pixel by 28 pixel grayscale image. Each pixel is represented by a number between 0 and 255, where 0 represents the color black,
 255 represents the color white, and the values in between represent different shades of gray. Suppose we have a 3 by 3 filter (9
 values in total), and the values are randomly set to 0 or 1. Convolution is the process of placing the 3 by 3 filter on the top left
-corner of the image, multiplying filter values by the pixel values and adding the result, moving the filter to the right one pixel at
+corner of the image, multiplying filter values by the pixel values and adding the results, moving the filter to the right one pixel at
 a time and repeating this process. When we get to the top right corner of the image, we simply move the filter down one pixel and
 restart from the right. This process ends when we get to the bottom right corner of the image.
 
@@ -146,8 +146,8 @@ instead of a contiguous 3 by 3 subset of the image, every other pixel of a 5 by 
 
 ![A 3 by 3 filter applied to a 7 by 7 image, with dilation of 2, resulting in a 3 by 3 image](../../images/Conv_dilation.gif "A 3 by 3 filter applied to a 7 by 7 image, with dilation of 2, resulting in a 3 by 3 image ({% cite DumoulinVisin %})")
 
-After the filter scan the whole image, we apply an activation function to filter output to introduce non-linearlity. The preferred activation function
-used in CNN is ReLU or one its variants like Leaky ReLU ({% cite NwankpaEtAl %}). ReLU leavs pixels with positive values in filter output as is, and
+After the filter scans the whole image, we apply an activation function to filter output to introduce non-linearlity. The preferred activation function
+used in CNN is ReLU or one its variants like Leaky ReLU ({% cite NwankpaEtAl %}). ReLU leaves pixels with positive values in filter output as is, and
 replacing negative values with 0 (or a small number in case of Leaky ReLU). Figure 6 shows the results of applying ReLU activation function to a filter
 output.
 
@@ -157,10 +157,10 @@ Given the input size, filter size, padding, stride and dilation you can calculat
 
 $$ \frac{(\text{input size} - \text{(filter size + (filter size -1)*(dilation - 1)})) + (2*padding)}{stride} + 1 $$
 
-![One matrix representing an input vector and another matrix representing a filter, along with calculation for single input channel two dimensional convolution operation ](../../images/Conv_single_input_channel.png "Illustration of single input channel two dimensional convolution")
+![One matrix representing an input vector and another matrix representing a filter, along with calculation for single input channel two dimensional convolution operation](../../images/Conv_single_input_channel.png "Illustration of single input channel two dimensional convolution")
 
 Figure 7 illustrates the calculations for a convolution operation, via a 3 by 3 filter on a single channel 5 by 5 input vector (5 x 5 x 1). Figure 8
-illusrates the calculations when the input vector has 3 channels (5 x 5 x 3). To show this in 2 dimensions, we are displaying each channel in input
+illustrates the calculations when the input vector has 3 channels (5 x 5 x 3). To show this in 2 dimensions, we are displaying each channel in input
 vector and filter separately. Figure 9 shows a sample multi-channel 2D convolution in 3 dimensions. As Figures 8 and 9 show the output of a multi-channel
 2 dimensional filter is a single channel 2 dimensional image. Applying *multiple* filters to the input image results in a multi-channel 2 dimensional
 image for the output. For example, if the input image is 28 by 28 by 3 (rows x columns x channels), and we apply a 3 by 3 filter with 1 by 1 padding,
@@ -186,7 +186,7 @@ filter with a stride of 2 that returns the maximum value as it slides over the i
 
 As shown in Figure 10, a typical CNN usually has more than one convolution layer plus pooling layer. Each convolution plus pooling layer is responsible
 for feature extraction at a different level of abstraction. For example, the filters in the first layer could detect horizental, vertical, and diagonal
-edges. The filters in the next layer could detect shapes, and thefilters in the last layer could detect collection of shapes. Filter values are randomly
+edges. The filters in the next layer could detect shapes, and the filters in the last layer could detect collection of shapes. Filter values are randomly
 initialized and are learned by the learning algorithm. This makes CNN very powerful as they not only do classification, but can also automatically do
 feature extraction. This distinguishes CNN from other classification techniques (like Support Vector Machines), which cannot do feature extraction.
 
