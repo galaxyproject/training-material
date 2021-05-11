@@ -290,10 +290,10 @@ of a digit we can predict whether the digit (0 to 9). We then evaluate the train
 Each image is passed in as a 784 dimensional vector (28 x 28 = 784). The reshape layer reshapes it into (28, 28, 1) dimensions -- 28 rows (image height), 28 columns (image width), and
 1 channel. Channel is 1 since the image is grayscale and each pixel can be represented by one integer. Color images are represented by 3 integers (RGB
 values) and have channel size 3. Our CNN then has 2 convolution + pooling layers. First convolution layer has 64 filters (output would be 64 dimensional),
-and filter size is 3 by 3. Second convolutional layer has 32 filters (output would be 32 dimensional). Both pooling layers are MaxPool layers with pool size
-of 2 by 2. Afterwards, we flatten the previous layers output (every row/colum/channel would be an individual node). Finally, we add a fully connected layer
-with 10 nodes and use a softmax activation function to get the probability of each digit. Digit with the highest probability is predicted by CNN. The model
-config can be downloaded as a JSON file.
+and filter size is 3 x 3. Second convolutional layer has 32 filters (output would be 32 dimensional), and filter size is 3 x 3. Both pooling layers are
+MaxPool layers with pool size of 2 by 2. Afterwards, we flatten the previous layers output (every row/colum/channel would be an individual node). Finally,
+we add a fully connected layer with 10 nodes and use a softmax activation function to get the probability of each digit. Digit with the highest
+probability is predicted by CNN. The model config can be downloaded as a JSON file.
 
 ### **Create a deep learning model**
 
