@@ -431,7 +431,7 @@ The prediction step generates 1 dataset. It's a file that has the predicted car 
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the predictions
 >
-> - {% tool [Machine Learning Visualization Extension](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/0.1) %}
+> - {% tool [Plot actual vs predicted curves and residual plots](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/0.1) %}
 >    - *"Select input data file"*: `y_test`
 >    - *"Select predicted data file"*": Select `Model Prediction` from the previous step
 >    - Click *"Execute"*
