@@ -3,13 +3,14 @@
 layout: tutorial_hands_on
 title: "ToolFactory: Generating Tools From More Complex Scripts"
 key_points:
-  - The ToolFactory Appliance is an automated form driven tool generator
+  - The ToolFactory Appliance includes an automated form driven tool generator
   - It runs in a flavour of docker-galaxy-stable and produces new tools as Toolshed ready archives
   - It was designed for scientists and developers who routinely write scripts for their analyses.
   - It can quickly turn a working command line script into a toolshed-ready archive.
   - It generates tools from information entered on a Galaxy form in the familiar UI.
-  - The new tool is installed in the appliance after generation so can be used and tested immediately.
-  - Adding a test to the toolshed archive takes a few minutes and is only needed when the new tool is ready for sharing.
+  - The new tool is installed in the appliance after generation so can be used and explored immediately.
+  - New tools can easily be adjusted as needed by re-running the job that generated the tool and updating the form settings to suit.
+  - Adding a test to the toolshed archive takes a few minutes and is only needed when the new tool is ready to export for sharing.
 
 objectives:
  - Further develop your ToolFactory Skills
@@ -44,7 +45,7 @@ contributors:
 >
 {: .agenda}
 
-## The ToolFactory Appliance: A pop-up MYOT (make your own tools) Galaxy for scientists who write command line scripts in their work.
+## The ToolFactory Appliance: A docker pop-up MYOT (make your own tools) Galaxy for scientists who write command line scripts in their work.
 
 The ToolFactory automates much of the work needed to prepare a new Galaxy tool using information provided by the script writer,
 on the ToolFactory form. The ToolFactory can wrap any simple script that runs correctly on the linux command line with some small test input samples. This is potentially
@@ -133,22 +134,23 @@ automated code generator in a tailored, readily deployed appliance.
 >>git clone https://github.com/fubar2/toolfactory-galaxy-server
 >>cd toolfactory-galaxy-server/compose
 >>docker-compose pull
->>docker-compose up -d
+>>docker-compose up
 >>```
 >>
 >>
 >>
->>    > ### {% icon code-in %} Input: Bash
+>>    > ### {% icon code-in %} Input: Bash using wget instead of git clone
 >>    > ```bash
 >>    > wget https://github.com/fubar2/toolfactory-galaxy-server/archive/refs/heads/main.zip
 >>    > unzip main.zip
 >>    > cd toolfactory-galaxy-server-main/compose
 >>    > docker-compose pull
->>    > docker-compose up -d
+>>    > docker-compose up
 >>    > ```
 >>
 >>Your appliance should be running with a local Galaxy on  [port 8080 of your workstation](http://localhost:8080) after a fair bit of activity.
->>
+>> -  Watch the output and wait until there is no further activity after importing the sample history before logging in for the first time
+>> -  Once configured, the `-d` flag can be added to the startup command `docker-compose up -d` to `d`etach the terminal but it is very important to watch the process the first time in case something goes wrong.
 >> -  Out of the box login is 'admin@galaxy.org' and the password is 'password'
 >>    - This is obviously insecure but convenient and easily changed at first login.
 >>    - Or more permanently in the docker-compose.yml if you prefer.
@@ -197,7 +199,7 @@ automated code generator in a tailored, readily deployed appliance.
 >>
 >> - Note that the generated tool has not been run to generate test outputs, so the archive is not complete although the installed tool may work fine.
 >>
->> - To generate a "proper" tested toolshed archive, use the ToolFactory generated `planemo_test` tool in the ToolFactory section of the tools menu.
+>> - To generate a "proper" tested toolshed archive, set the use the ToolFactory generated `planemo_test` tool in the ToolFactory section of the tools menu.
 >> - It will run Planemo to generate outputs, then run a real test and return a proper toolshed archive and test reports.
 >>     - An archive containing the tool with proper test will be returned with the planemo report in the history.
 >>     - The archive can be downloaded and shared in the usual ways. It is a normal Galaxy tool that wraps the supplied script
@@ -967,6 +969,15 @@ again for testing properly. Longer if the tool has Conda dependencies....
 - It is recommended that you modify the test over-ride that appears in that sample form. Substitute one
 or more of the file names you expect to see after the collection is filled by your new tool for the `<element.../>` used in the plotter sample's tool test.
 
+#### `docker-compose up` fails and the last log message before the galaxy-server_1 exits is `/usr/bin/start.sh: line 133: /galaxy/.venv/bin/uwsgi: No such file or directory`
+
+- This is why it's useful to watch the boot process without detaching
+- This can happen if a container has become corrupt on disk after being interrupted
+    - usually cured by
+        - make sure no docker galaxy-server related processes are running - use docker ps to check and stop them manually
+        - remove all stopped containers by answering `y` to the prompt after `docker container prune`
+        - and for good measure `docker image prune`
+    - then try `docker-compose up` again
 
 
 # Your turn! Please help improve this community resource!
