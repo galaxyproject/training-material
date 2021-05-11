@@ -29,3 +29,13 @@ The proposed extension could be implemented several different ways on Galaxy's b
 With simplicity in mind, we will implement our proposed extension to Galaxy by adding a single new table to Galaxy's data model called ``user_favorite_extension``. The concept of a favorite extension will be represented by a one-to-many relationship from the table that stores Galaxy's user records to this new table. The extension itself that will be favorited will be stored as a ``Text`` field in this new table. This table will also need to include a integer primary key named ``id`` to follow the example set by the rest of the Galaxy data model.
 
 The relational database tables consumed by Galaxy are defined in ``lib/galaxy/model/mapping.py``.
+
+> ### {% icon question %} Questions
+>
+> 1. What should the SQL Alchemy model named corresponding to the table ``user_favorite_extension`` based on other examples in the file.
+> 2. What table stores Galaxy's user records?
+> 2. What is another simple table with a relationship with the Galaxy's user table?
+>
+> > ### {% icon solution %} Solution
+> > 1. 
+> > 2. 
