@@ -20,3 +20,12 @@ key_points:
 
 This tutorial walks you through an extension to Galaxy and how to contribute back to the core project.
 
+To setup the proposed extension imagine you're running a specialized Galaxy server and each of your users only use a few of Galaxy datatypes. You'd like to tailor the UI experience by allowing user's of Galaxy to select their favorite extensions for additional filtering in downstream applications, UI extensions, etc..
+
+Like many extensions to Galaxy, the proposed change requires persistent state. Galaxy stores most persistent state in its relational database. The Python layer that defines Galaxy data model is setup by defining SQL Alchemy models.
+
+The proposed extension could be implemented several different ways on Galaxy's backend and we will choose one for this example for its simplicity not for its correctness or cleverness, because our purpose here to demonstrate modifying and extending various layers of Galaxy.
+
+With simplicity in mind, we will implement our proposed extension to Galaxy by adding a single new table to Galaxy's data model called ``user_favorite_extension``. The concept of a favorite extension will be represented by a one-to-many relationship from the table that stores Galaxy's user records to this new table. The extension itself that will be favorited will be stored as a ``Text`` field in this new table. This table will also need to include a integer primary key named ``id`` to follow the example set by the rest of the Galaxy data model.
+
+The relational database tables consumed by Galaxy are defined in ``lib/galaxy/model/mapping.py``.
