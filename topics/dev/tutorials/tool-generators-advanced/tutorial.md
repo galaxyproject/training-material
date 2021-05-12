@@ -3,10 +3,10 @@
 layout: tutorial_hands_on
 title: "ToolFactory: Generating Tools From More Complex Scripts"
 key_points:
-  - The ToolFactory Appliance includes an automated form driven tool generator
+  - The ToolFactory Appliance includes an automated form driven tool generator available as a pop-up Docker appliance.
   - It runs in a flavour of docker-galaxy-stable and produces new tools as Toolshed ready archives
   - It was designed for scientists and developers who routinely write scripts for their analyses.
-  - It can quickly turn a working command line script into a toolshed-ready archive.
+  - It can quickly turn a working command line script into a working Galaxy tool.
   - It generates tools from information entered on a Galaxy form in the familiar UI.
   - The new tool is installed in the appliance after generation so can be used and explored immediately.
   - New tools can easily be adjusted as needed by re-running the job that generated the tool and updating the form settings to suit.
@@ -58,7 +58,7 @@ The Appliance Galaxy server is fully functional. Tools can be generated or added
 tailored Galaxy for any kind of analysis.
 
 The appliance is an ideal way for any data intensive scientist to quickly develop and refine new tools on their workstations,
-ready for deployment in production and sharing.
+ready for deployment in production and sharing. It is also a fully functional Galaxy server, ideal for learning how Galaxy works.
 
 
 > ### {% icon tip %} Under the hood:
@@ -73,7 +73,7 @@ ready for deployment in production and sharing.
 ## Limits and scope
 
 - The Appliance can generate, install and run new tools from scripts on your desktop.
-    - However, it is a fully functional Galaxy instance, so it can also import any existing
+    - It is a fully functional Galaxy instance, so it can also import any existing
 tool from a Toolshed and [can easily be connected to a cluster for real work](https://github.com/bgruening/docker-galaxy-stable/compose).
 - The ToolFactory works best wrapping simple R/Bash/Python and other interpreted scripts, with a few user supplied parameters and a few I/O history files.
 - Scripts are easier than some Conda packages
@@ -164,10 +164,10 @@ automated code generator in a tailored, readily deployed appliance.
 >>- If it's not there, you can import it manually from Zenodo as described in the Welcome page text.
 
 >>
->>- To explore an example, open the toolshed archive by clicking on the name, and select the `rerun` button from the expanded view
->>    - The form that generated that tool will appear for you to examine
+>>- To explore an example, open the generated XML job by clicking on the name, and select the `rerun` button from the expanded view
+>>    - The form that generated that tool will appear for you to examine.
 >>    - Edit the form - add parameters and change the script to suit - and rerun to create an *updated* tool. The history has previous versions.
->>    - Change the tool ID to change the tool name.
+>>    - Change the tool ID to change the tool name or the newly generated tool will be installed in place of the old one without warning.
 >>
 >>## To safely shut the appliance down
 >> - If the console was not detached using the --detach/-d flag
@@ -199,10 +199,10 @@ automated code generator in a tailored, readily deployed appliance.
 >>
 >> - Note that the generated tool has not been run to generate test outputs, so the archive is not complete although the installed tool may work fine.
 >>
->> - To generate a "proper" tested toolshed archive, set the use the ToolFactory generated `planemo_test` tool in the ToolFactory section of the tools menu.
->> - It will run Planemo to generate outputs, then run a real test and return a proper toolshed archive and test reports.
->>     - An archive containing the tool with proper test will be returned with the planemo report in the history.
->>     - The archive can be downloaded and shared in the usual ways. It is a normal Galaxy tool that wraps the supplied script
+>> - To generate a "proper" tested toolshed archive, set the "Finalise" toggle to "Yes".
+>> - After regenerating the tool XML, the appliance will run Planemo in the background to generate outputs, then run a real test and return a proper toolshed archive and test reports.
+>>     - An archive containing the tool with proper test will be returned with the planemo lint and test reports, in a history collection.
+>>     - The archive can be downloaded and shared in the usual ways. It is a normal Galaxy tool that wraps the supplied script and contains a test to validate it.
 >>
 {: .hands_on}
 
@@ -322,7 +322,7 @@ In practice, it's a flexible basis for generating many simple tools.
 
 The workflow at https://zenodo.org/record/4686436/files/TFdemo_wf_april13_planemo.ga?download=1 was used to create the sample history examples. It requires some data files as inputs. They
 can be copied from the imported history to a new history and the workflow can be imported and run from there. After connecting appropriate data sets to the different inputs, it will
-re-create all the samples for anyone wanting to see them run.
+re-create all the samples for anyone wanting to see them run. Without a cluster overlay, the workflow runner will show red for all the jobs but they will all run and generate XML outputs.
 
 ## ToolFactory tips and tricks illustrated by some of the examples.
 
