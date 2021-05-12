@@ -71,12 +71,12 @@ and for developing new tools for new kinds of scientists using Galaxy.
 > - Newly generated tools appear in the tool menu after a refresh, and can immediately be viewed and used as the user will see them.
 > - Tool generation jobs can be rerun after editing the form to make changes to the tool the user will see in Galaxy.
 > - The Appliance is a Toolfactory flavour of the [docker-galaxy-stable resource](https://github.com/bgruening/docker-galaxy-stable/compose).
->       - Documentation on connecting the appliance to a cluster for getting real work done with newly generated tools can be found at that repository.
->       - It can be backed up and persisted for as long as required, or it can be treated as a throw-away instance and deleted when no longer needed.
->       - There is almost zero technical friction if Docker and docker-compose are already installed. Only time is required.
->       - Usefulness will depend on sufficient hardware. Plenty of cores, RAM and disk storage are needed.
->       - On a modern workstation it will perform well out of the box.
->       - It can be run on high end laptops but will struggle on older domestic hardware with little RAM and few CPU cores.
+>    - Documentation on connecting the appliance to a cluster for getting real work done with newly generated tools can be found at that repository.
+>    - It can be backed up and persisted for as long as required, or it can be treated as a throw-away instance and deleted when no longer needed.
+>    - There is almost zero technical friction if Docker and docker-compose are already installed. Only time is required.
+>    - Usefulness will depend on sufficient hardware. Plenty of cores, RAM and disk storage are needed.
+>    - On a modern workstation it will perform well out of the box.
+>    - It can be run on high end laptops but will struggle on older domestic hardware with little RAM and few CPU cores.
 {: .tip }
 
 
@@ -288,7 +288,8 @@ Text on the form is all in the XML and it all comes from inputs to the ToolFacto
 
 > ### {% icon hands_on %} Hands-on: Launching the Container
 >>
->> 1. [Install Docker](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform. Then, `pip3 install docker-compose`
+>> 1. [Install Docker](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform.
+>>    - Then, `pip3 install docker-compose`
 >>
 >> 2. Go to [the ToolFactory appliance github repository](https://github.com/fubar2/toolfactory-galaxy-server)
 >>
@@ -300,8 +301,10 @@ Text on the form is all in the XML and it all comes from inputs to the ToolFacto
 >>   - pull is only needed the first time, or if there is a newer version available.
 >>   - Add -d at the end of the docker-compose command to detach the terminal so you can keep working - but only after watching the process the first time please.
 >>       - It is important to wait until the server stops sending log messages before you first log in. That means everything is ready.
->>   - For the first time start, it is strongly recommended t can be useful to remove that flag and stay attached when things go wrong to watch the startup.
+>>   - For the first time start, watching the startup process logs is highly recommended. You will learn a lot about Galaxy and see when the Appliance is ready to use.
 >>   - It may not go well on an underpowered machine. Multiple cores and GB of RAM and fast disk are needed for an enjoyable appliance.
+>>   - The demonstration history will only appear after logging in with the administrator credentials - `admin@galaxy.org` and password `password`.
+>>   - Change your admin password immediately but please note that the API key `fakekey` must remain as is please ensure that your appliance is not accessible to any potential miscreants on the local or public internet.
 >>
 >>```
 >>git clone https://github.com/fubar2/toolfactory-galaxy-server
