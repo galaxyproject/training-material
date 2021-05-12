@@ -276,11 +276,12 @@ Text on the form is all in the XML and it all comes from inputs to the ToolFacto
 - **Starting a new ToolFactory tool with a know good command line and data** is strongly recommended. You will know exactly what to expect from the tool test for a first sanity check.
 - Corrolary: Unless there is a working script that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is of little use.
 - Generated tools are untested and not recommended for sharing.
-  - Testing is easy - use the planemo_test tool from the ToolFactory tool menu.
-  - In a new Appliance, the first run takes 10 or more minutes to install all the dependencies it needs.
-  - Subsequently more like a minute depending on the specific Conda dependencies required by the tool.
+  - Testing is easy - toggle the `Finalise new archive with test outputs.` flag and regenerate the tool. Planemo will run and eventually return the tested tool to your history in a new collection.
+  - In a new Appliance, the first test run takes +10 minutes to install all the dependencies it needs for the first test.
+  - Subsequently it runs more quickly - about 1-2 minutes depending on the specific Conda dependencies required by the tool.
   - The planemo_test tool creates a new tested toolshed archive ready for sharing, and a collection with reports.
-      - The Planemo test report is in the collection with a run log. Please check the html report to make sure it passed before sharing your new tool.
+      - The Planemo test report is in the collection with a lint report.
+      - Please check the html report to make sure it passed before sharing your new tool.
 
 ----
 
