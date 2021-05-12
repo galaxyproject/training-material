@@ -72,4 +72,5 @@ defined in ``lib/galaxy/model/__init__.py``.
 
 There is one last database issue to consider before moving on to considering the API.
 Each successive release of Galaxy requires recipes for how to migrate old database schemes
-to updated ones. In Galaxy these a
+to updated ones. These recipes are called versions and currently implemented using SQL
+Alchemy migrate. These versions are stored in ``lib/galaxy/model/migrate``.
