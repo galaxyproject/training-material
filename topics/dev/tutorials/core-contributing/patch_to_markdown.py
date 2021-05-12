@@ -33,7 +33,7 @@ Changes to file ``{diff_of_filename}``:
             in_diff = match
             diff_block = ""
         else:
-            diff_block += line
+            diff_block += f"{line}\n"
     if in_diff:
         handle_diff()
 
