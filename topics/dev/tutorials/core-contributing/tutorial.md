@@ -34,7 +34,7 @@ The relational database tables consumed by Galaxy are defined in ``lib/galaxy/mo
 >
 > 1. What should the SQL Alchemy model named corresponding to the table ``user_favorite_extension`` based on other examples in the file.
 > 2. What table stores Galaxy's user records?
-> 2. What is another simple table with a relationship with the Galaxy's user table?
+> 3. What is another simple table with a relationship with the Galaxy's user table?
 >
 > > ### {% icon solution %} Solution
 > > 1. ``UserFavoriteExtension`` 
@@ -74,3 +74,34 @@ There is one last database issue to consider before moving on to considering the
 Each successive release of Galaxy requires recipes for how to migrate old database schemes
 to updated ones. These recipes are called versions and currently implemented using SQL
 Alchemy migrate. These versions are stored in ``lib/galaxy/model/migrate``.
+
+Each of these versions is prefixed with a number 4 digit (e.g. ``0125``) to specify the linear
+order these migrations should be applied in.
+
+We've devloped a lot of abstractions around the underlying migration library we use, so it
+is probably better to find existing examples inside of Galaxy for writing migrations than
+consulting the SQL Alchemy Migrate documentation.
+
+A good example for the table we need to construct for this example is again based on the existing
+user preferences concept in Galaxy.
+
+> ### {% icon question %} Questions
+>
+> 1. What existing Galaxy migration added the concept of user preferences to the Galaxy codebase?
+>
+> > ### {% icon solution %} Solution
+> > 1. ``lib/galaxy/model/migrate/versions/0021_user_prefs.py``
+> >  {: .solution }
+{: .question}
+
+
+> ### {% icon hands_on %} Hands-on: Implement a Data Model Migration
+>    > Add a new file to ``lib/galaxy/model/migrate/versions/`` prefixed appropriately.
+>    >
+>    > ### {% icon solution %} Solution
+>    >
+>    > {% include dev/tutorials/core-contributing/0175_add_user_favorite_extensions.py_diff.md %}
+>    >
+>    > {: .solution }
+{: .hands_on}
+
