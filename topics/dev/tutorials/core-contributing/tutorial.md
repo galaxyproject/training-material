@@ -1,7 +1,8 @@
+
 ---
 layout: tutorial_hands_on
 
-title: "Data source integration"
+title: "Contributing to Galaxy Core"
 questions:
  - How can I develop extensions to Galaxy data model?
  - How can I implement new API functionality within Galaxy?
@@ -16,7 +17,7 @@ key_points:
  - Galaxy client code should do its best to separate API interaction logic from display components.
 ---
 
-# Contributed to Galaxy Core 
+# Contributing to Galaxy Core 
 
 This tutorial walks you through an extension to Galaxy and how to contribute back to the core project.
 
@@ -65,9 +66,9 @@ defined in ``lib/galaxy/model/__init__.py``.
 >    >
 >    > ### {% icon solution %} Solution
 >    >
->    > {% include dev/tutorials/core-contributing/__init__.py_diff.md %}
+>    > {% include topics/dev/tutorials/core-contributing/__init__.py_diff.md %}
 >    >
->    > {: .solution }
+>    {: .solution }
 {: .hands_on}
 
 There is one last database issue to consider before moving on to considering the API.
@@ -100,7 +101,7 @@ user preferences concept in Galaxy.
 >    >
 >    > ### {% icon solution %} Solution
 >    >
->    > {% include dev/tutorials/core-contributing/0175_add_user_favorite_extensions.py_diff.md %}
+>    > {% include topics/dev/tutorials/core-contributing/0175_add_user_favorite_extensions.py_diff.md %}
 >    >
 >    > {: .solution }
 {: .hands_on}
