@@ -58,7 +58,7 @@ contributors:
 >   > ### {% icon comment %} Diferentes servidores Galaxy
 >   >  Esta es una imagen de Galaxy Australia, situado en [usegalaxy.org.au](https://usegalaxy.org.au/)
 >   >
->   > El servidor de Galaxy que estas usando podría lucir un poco distinto y tener otra dirección web:
+>   > El servidor de Galaxy que estás usando podría lucir un poco distinto y tener otra dirección web:
 >   > - El servidor principal de Galaxy es [usegalaxy.org](https://usegalaxy.org/)
 >   > - El servidor europeo de Galaxy es [usegalaxy.eu](https://usegalaxy.eu/)
 >   >
