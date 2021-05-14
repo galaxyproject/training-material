@@ -86,3 +86,49 @@ Add a new file to ``lib/galaxy/model/migrate/versions/`` prefixed appropriately.
 
 {% include topics/dev/tutorials/core-contributing/0175_add_user_favorite_extensions.py_diff.md %}
 
+With the database model in place, we need to start adding the rest of
+the Python plubming required to implement this feature. We will do
+this with a test-driven approach and start by implementing an API test
+that exercises operations we would like to have available for favorite
+extensions.
+
+We will stick a test case for user extensions in
+``lib/galaxy_test/api/test_users.py`` which is a relatively
+straight-forward file that contains tests for other user API
+endpoints.
+
+Various user centered operations have endpoints under
+``api/user/<user_id>`` and ``api/user/current`` is sometimes
+substituable as the current user.
+
+We will keep things very simple and only implement this functionality
+for the current user.
+
+We will implement three very API endpoints.
+
+- ``GET <galaxy_root_url>/api/users/current/favorites/extensions``. This should return a list of favorited extensions for the current user.
+- ``POST <galaxy_root_url>/api/users/current/favorites/extensions/<extension>``. This should mark an extension as a favorite for the current user.
+- ``DELETE <galaxy_root_url>/api/users/current/favorites/extensions/<extension>``. This should unmark an extension as a favorite for the current user.
+
+Please review ``test_users.py`` and attempt to write a test case that:
+
+- Verifies the test user's initially favorited extensions is an empty list.
+- Verifies that a ``POST`` to ``<galaxy_root_url>/api/users/current/favorites/extensions/fasta`` returns a 200 status code indicating success.
+- Verifies that after this ``POST`` the list of user favorited extensions contains ``fasta`` and is of size 1.
+- Verifies that a ``DELETE`` to ``<galaxy_root_url>/api/users/current/favorites/extensions/fasta`` succeeds.
+- Verifies that after this ``DELETE`` the favorited extensions list is again empty.
+
+{% include topics/dev/tutorials/core-contributing/test_users.py_diff.md %}
+
+Verify this test fails when running stand-alone.
+
+```
+./run_tests.sh -api lib/galaxy_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
+```
+
+Add a new API implementation file to
+``lib/galaxy/webapps/galaxy/api/`` called ``user_favorites.py`` with
+an API implementation of the endpoints we just outlined.
+
+
+get_favorite_extensions, add_favorite_extension, delete_favorite_extension.
