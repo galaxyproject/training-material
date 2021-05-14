@@ -41,7 +41,7 @@ The relational database tables consumed by Galaxy are defined in ``lib/galaxy/mo
 > > 1. ``UserFavoriteExtension`` 
 > > 2. ``galaxy_user``
 > > 3. An example table might be the ``user_preference`` table.
-> >  {: .solution }
+> {: .solution }
 {: .question}
 
 
@@ -51,9 +51,9 @@ The relational database tables consumed by Galaxy are defined in ``lib/galaxy/mo
 >    >
 >    > ### {% icon solution %} Solution
 >    >
->    > {% include dev/tutorials/core-contributing/mapping.py_diff.md %}
+>    > include dev/tutorials/core-contributing/mapping.py_diff.md
 >    >
->    > {: .solution }
+>    {: .solution }
 {: .hands_on}
 
 
@@ -66,7 +66,7 @@ defined in ``lib/galaxy/model/__init__.py``.
 >    >
 >    > ### {% icon solution %} Solution
 >    >
->    > {% include topics/dev/tutorials/core-contributing/__init__.py_diff.md %}
+>    > include topics/dev/tutorials/core-contributing/__init__.py_diff.md
 >    >
 >    {: .solution }
 {: .hands_on}
@@ -92,7 +92,7 @@ user preferences concept in Galaxy.
 >
 > > ### {% icon solution %} Solution
 > > 1. ``lib/galaxy/model/migrate/versions/0021_user_prefs.py``
-> >  {: .solution }
+> {: .solution }
 {: .question}
 
 
@@ -101,8 +101,8 @@ user preferences concept in Galaxy.
 >    >
 >    > ### {% icon solution %} Solution
 >    >
->    > {% include topics/dev/tutorials/core-contributing/0175_add_user_favorite_extensions.py_diff.md %}
+>    > include topics/dev/tutorials/core-contributing/0175_add_user_favorite_extensions.py_diff.md
 >    >
->    > {: .solution }
+>    {: .solution }
 {: .hands_on}
 
