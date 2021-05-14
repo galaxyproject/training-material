@@ -1,7 +1,13 @@
 ---
 layout: tutorial_hands_on
 
-title: "Breve introducción a Galaxy"
+title: "Breve introducción a Galaxy - en español"
+subtopic: espanol
+priority: 1
+
+tags:
+  - espanol
+
 zenodo_link: "https://doi.org/10.5281/zenodo.582600"
 level: Introductory
 questions:
@@ -20,11 +26,12 @@ key_points:
   - "Ejecuta la herramienta. Los archivos de salida se guardarán en la parte superior de tu historial."
   - "Visualiza los archivos de salida haciendo clic en el icono del ojo."
   - "Visualiza todos tus historiales y mueve archivos entre ellos. Cambia a un historial diferente."
-  - "Termina sesión en tu servidor de Galaxy. Cuando vuelvas a iniciar sesión (en el mismo servidor), tus historiales estarán allí.”
+  - "Termina sesión en tu servidor de Galaxy. Cuando vuelvas a iniciar sesión (en el mismo servidor), tus historiales estarán allí."
 
-subtopic: core
 contributors:
   - annasyme
+  - pclo
+  - ales-ibt
 
 ---
 
@@ -40,7 +47,6 @@ contributors:
 {: .agenda}
 
 ## ¿Qué aspecto tiene Galaxy?
-
 
 > ### {% icon hands_on %} Práctica: Iniciar sesión en Galaxy
 > 1. Abre tu navegador favorito (usa Chrome, Safari o Firefox, no Internet Explorer!)
@@ -266,11 +272,11 @@ Vamos a crear un historial nuevo.
 > ### {% icon hands_on %} Práctica: Nuevo historial
 > 1. Crear un nuevo historial
 >
->	{% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Cambiar el nombre de tu historial, *e.g.* "Nuevo-Analisis"
 >
->	{% snippet faqs/galaxy/histories_rename.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 {: .hands_on}
 
