@@ -62,7 +62,7 @@ contributors:
 >   > - El servidor principal de Galaxy es [usegalaxy.org](https://usegalaxy.org/)
 >   > - El servidor europeo de Galaxy es [usegalaxy.eu](https://usegalaxy.eu/)
 >   >
->   > También puedes encontrar más servidores de Galaxy posibles en la parte superior de este tutorial en **Available on these Galaxies**
+>   > También puedes encontrar otros servidores de Galaxy en la parte superior de este tutorial en **Available on these Galaxies**
 >   {: .comment}
 {: .hands_on}
 
