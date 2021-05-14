@@ -17,12 +17,16 @@ def main():
         diff_of_filename = in_diff.group(1)
         diff_of_basename = os.path.basename(diff_of_filename)
         with open(f"{diff_of_basename}_diff.md", "w") as f:
+            indented_block = "\n".join([f"> {line}" for line in diff_block.splitlines()])
             f.write(f"""
-Changes to file ``{diff_of_filename}``:
-
-```diff
-{diff_block}
-```
+> ### {{% icon solution %}} {diff_of_filename}
+> 
+> Possible changes to file ``{diff_of_filename}``:
+> 
+> ```diff
+{indented_block}
+> ```
+{{. :solution }}
 """)
 
     for line in contents.splitlines():

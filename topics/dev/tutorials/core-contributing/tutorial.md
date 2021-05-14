@@ -31,7 +31,7 @@ With simplicity in mind, we will implement our proposed extension to Galaxy by a
 
 The relational database tables consumed by Galaxy are defined in ``lib/galaxy/model/mapping.py``.
 
-> ### {% icon question %} Questions
+> ### {% icon question %} Questions about Mapping
 >
 > 1. What should the SQL Alchemy model named corresponding to the table ``user_favorite_extension`` based on other examples in the file.
 > 2. What table stores Galaxy's user records?
@@ -42,34 +42,20 @@ The relational database tables consumed by Galaxy are defined in ``lib/galaxy/mo
 > > 2. ``galaxy_user``
 > > 3. An example table might be the ``user_preference`` table.
 > {: .solution }
-{: .question}
+{: .question }
 
+Implement the required changes ``mapping.py`` to add a mapping for
+the proposed ``user_favorite_extension`` table.
 
-> ### {% icon hands_on %} Hands-on: Implement the SQL Alchemy Mapping
->    > Implement the required changes ``mapping.py`` to add a mapping for
->    > the proposed ``user_favorite_extension`` table.
->    >
->    > ### {% icon solution %} Solution
->    >
->    > include dev/tutorials/core-contributing/mapping.py_diff.md
->    >
->    {: .solution }
-{: .hands_on}
-
+{% include dev/tutorials/core-contributing/mapping.py_diff.md %}
 
 The Python model objects used by Galaxy corresponding to these tables are
 defined in ``lib/galaxy/model/__init__.py``.
 
-> ### {% icon hands_on %} Hands-on: Implement a Model Object
->    > Modify ``lib/galaxy/model/__init__.py`` to add a model class
->    > called ``UserFavoriteExtension`` as described above.
->    >
->    > ### {% icon solution %} Solution
->    >
->    > include topics/dev/tutorials/core-contributing/__init__.py_diff.md
->    >
->    {: .solution }
-{: .hands_on}
+Modify ``lib/galaxy/model/__init__.py`` to add a model class
+called ``UserFavoriteExtension`` as described above.
+
+{% include topics/dev/tutorials/core-contributing/__init__.py_diff.md %}
 
 There is one last database issue to consider before moving on to considering the API.
 Each successive release of Galaxy requires recipes for how to migrate old database schemes
@@ -86,23 +72,17 @@ consulting the SQL Alchemy Migrate documentation.
 A good example for the table we need to construct for this example is again based on the existing
 user preferences concept in Galaxy.
 
-> ### {% icon question %} Questions
+> ### {% icon question %} Questions about Migrations
 >
 > 1. What existing Galaxy migration added the concept of user preferences to the Galaxy codebase?
 >
 > > ### {% icon solution %} Solution
 > > 1. ``lib/galaxy/model/migrate/versions/0021_user_prefs.py``
 > {: .solution }
-{: .question}
+{: .question }
 
 
-> ### {% icon hands_on %} Hands-on: Implement a Data Model Migration
->    > Add a new file to ``lib/galaxy/model/migrate/versions/`` prefixed appropriately.
->    >
->    > ### {% icon solution %} Solution
->    >
->    > include topics/dev/tutorials/core-contributing/0175_add_user_favorite_extensions.py_diff.md
->    >
->    {: .solution }
-{: .hands_on}
+Add a new file to ``lib/galaxy/model/migrate/versions/`` prefixed appropriately.
+
+{% include topics/dev/tutorials/core-contributing/0175_add_user_favorite_extensions.py_diff.md %}
 
