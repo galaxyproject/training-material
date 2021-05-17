@@ -1,281 +1,610 @@
 {
-  "a_galaxy_workflow": "true",
-  "annotation": "Metatranscriptomics analysis using microbiome RNA-seq data (short)\n",
-  "format-version": "0.1",
-  "name": "Workflow 3: Functional Information (quick) [Metatranscriptomics]",
-  "steps": {
-    "0": {
-      "annotation": "",
-      "content_id": null,
-      "errors": null,
-      "id": 0,
-      "input_connections": {},
-      "inputs": [],
-      "label": "Gene Family abundance",
-      "name": "Input dataset",
-      "outputs": [],
-      "position": {
-        "left": 212.25,
-        "top": 350.25
-      },
-      "tool_id": null,
-      "tool_state": "{}",
-      "tool_version": null,
-      "type": "data_input",
-      "uuid": "5371236d-c8e0-4e91-8b97-52c7b07b0d65",
-      "workflow_outputs": [
-        {
-          "label": null,
-          "output_name": "output",
-          "uuid": "a211bfeb-2a5a-4ce1-9a87-de691b2db840"
-        }
-      ]
-    },
-    "1": {
-      "annotation": "",
-      "content_id": null,
-      "errors": null,
-      "id": 1,
-      "input_connections": {},
-      "inputs": [],
-      "label": "Pathway abundance",
-      "name": "Input dataset",
-      "outputs": [],
-      "position": {
-        "left": 209.25,
-        "top": 484.25
-      },
-      "tool_id": null,
-      "tool_state": "{}",
-      "tool_version": null,
-      "type": "data_input",
-      "uuid": "166fce38-68aa-40a5-b14d-4ed223a2b9d1",
-      "workflow_outputs": [
-        {
-          "label": null,
-          "output_name": "output",
-          "uuid": "a7cc7f80-921c-45df-a483-6cf082a6bc31"
-        }
-      ]
-    },
-    "2": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann2_renorm_table/humann2_renorm_table/0.11.1.0",
-      "errors": null,
-      "id": 2,
-      "input_connections": {
-        "input": {
-          "id": 0,
-          "output_name": "output"
-        }
-      },
-      "inputs": [],
-      "label": null,
-      "name": "Renormalize",
-      "outputs": [
-        {
-          "name": "output_table",
-          "type": "tsv"
-        }
-      ],
-      "position": {
-        "left": 655.5,
-        "top": 412
-      },
-      "post_job_actions": {
-        "RenameDatasetActionoutput_table": {
-          "action_arguments": {
-            "newname": "Normalized gene families"
-          },
-          "action_type": "RenameDatasetAction",
-          "output_name": "output_table"
-        }
-      },
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann2_renorm_table/humann2_renorm_table/0.11.1.0",
-      "tool_shed_repository": {
-        "changeset_revision": "dbf0e8eeeeed",
-        "name": "humann2_renorm_table",
-        "owner": "iuc",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"mode\": \"\\\"community\\\"\", \"update_snames\": \"\\\"true\\\"\", \"units\": \"\\\"relab\\\"\", \"input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"special\": \"\\\"true\\\"\"}",
-      "tool_version": null,
-      "type": "tool",
-      "uuid": "dd594dd2-cb9b-4f4e-bfb9-9e46beace5fb",
-      "workflow_outputs": [
-        {
-          "label": null,
-          "output_name": "output_table",
-          "uuid": "f18449ea-6204-440a-b686-64c99898253d"
-        }
-      ]
-    },
-    "3": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/bebatut/group_humann2_uniref_abundances_to_go/group_humann2_uniref_abundances_to_go/1.2.3",
-      "errors": null,
-      "id": 3,
-      "input_connections": {
-        "humann2_gene_families_abundance": {
-          "id": 0,
-          "output_name": "output"
-        }
-      },
-      "inputs": [],
-      "label": null,
-      "name": "Group abundances",
-      "outputs": [
-        {
-          "name": "molecular_function_abundance",
-          "type": "tabular"
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Workflow 3: Functional Information (quick)",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Pathway abundance"
+                }
+            ],
+            "label": "Pathway abundance",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 460.1999969482422,
+                "height": 82.19999694824219,
+                "left": 551.5,
+                "right": 751.5,
+                "top": 378,
+                "width": 200,
+                "x": 551.5,
+                "y": 378
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "fa89b7c9-cc16-42a5-8cd3-7a44454f1ad7",
+            "workflow_outputs": []
         },
-        {
-          "name": "biological_process_abundance",
-          "type": "tabular"
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Gene Family abundance"
+                }
+            ],
+            "label": "Gene Family abundance",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 798.1999969482422,
+                "height": 82.19999694824219,
+                "left": 551.5,
+                "right": 751.5,
+                "top": 716,
+                "width": 200,
+                "x": 551.5,
+                "y": 716
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "df6077de-66e0-4dad-a41c-35f134416625",
+            "workflow_outputs": []
         },
-        {
-          "name": "cellular_component_abundance",
-          "type": "tabular"
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.0.0+galaxy1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Renormalize",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 465.1999969482422,
+                "height": 93.19999694824219,
+                "left": 829.5,
+                "right": 1029.5,
+                "top": 372,
+                "width": 200,
+                "x": 829.5,
+                "y": 372
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Normalized pathways"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.0.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "4137b492233e",
+                "name": "humann_renorm_table",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"mode\": \"community\", \"special\": \"true\", \"units\": \"relab\", \"update_snames\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.0+galaxy1",
+            "type": "tool",
+            "uuid": "0e83de5d-3866-4237-975e-ff21e3965c27",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "2ea42f31-27a8-489c-8d3a-14dc1c5df62a"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.0.0+galaxy1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Renormalize",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 803.1999969482422,
+                "height": 93.19999694824219,
+                "left": 829.5,
+                "right": 1029.5,
+                "top": 710,
+                "width": 200,
+                "x": 829.5,
+                "y": 710
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Normalized gene families"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.0.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "4137b492233e",
+                "name": "humann_renorm_table",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"mode\": \"community\", \"special\": \"true\", \"units\": \"relab\", \"update_snames\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.0+galaxy1",
+            "type": "tool",
+            "uuid": "85d9b14e-550b-418d-a7bb-b6401522edc6",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "d393d4dd-7af7-4709-8c49-badc83bbee64"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann_regroup_table/humann_regroup_table/3.0.0+galaxy1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Regroup",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 1128.1999969482422,
+                "height": 93.19999694824219,
+                "left": 829.5,
+                "right": 1029.5,
+                "top": 1035,
+                "width": 200,
+                "x": 829.5,
+                "y": 1035
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann_regroup_table/humann_regroup_table/3.0.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "c409a495841f",
+                "name": "humann_regroup_table",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"function\": \"sum\", \"grouping\": {\"type\": \"large\", \"__current_case__\": 1, \"grouping\": \"utility_mapping-full-map_go_uniref90-3.0.0-13052021\", \"reversed\": \"false\"}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"precision\": \"3\", \"protected\": \"true\", \"ungrouped\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.0+galaxy1",
+            "type": "tool",
+            "uuid": "3cb72c42-1ecf-4570-a8da-e2b99ea8a86e",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "e0532301-308e-4f01-86bb-128fe1f98fa3"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann_unpack_pathways/humann_unpack_pathways/3.0.0+galaxy1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input_genes": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "input_pathways": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Unpack pathway abundances",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 647,
+                "height": 266,
+                "left": 1107.5,
+                "right": 1307.5,
+                "top": 381,
+                "width": 200,
+                "x": 1107.5,
+                "y": 381
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann_unpack_pathways/humann_unpack_pathways/3.0.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "4033827c76b8",
+                "name": "humann_unpack_pathways",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"gene_mapping\": null, \"input_genes\": {\"__class__\": \"ConnectedValue\"}, \"input_pathways\": {\"__class__\": \"ConnectedValue\"}, \"pathway_mapping\": null, \"remove_taxonomy\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.0+galaxy1",
+            "type": "tool",
+            "uuid": "fac0f6ed-0595-4517-9b4b-81111d2a8cad",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "7a624926-cd78-4d0a-b9c2-b7cb4060d17e"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.1.0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "humann2_file": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Combine MetaPhlAn2 and HUMAnN2 outputs",
+            "outputs": [
+                {
+                    "name": "gene_families_output_file",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 992.2000122070312,
+                "height": 307.20001220703125,
+                "left": 1107.5,
+                "right": 1307.5,
+                "top": 685,
+                "width": 200,
+                "x": 1107.5,
+                "y": 685
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "31394a0c0242",
+                "name": "combine_metaphlan2_humann2",
+                "owner": "bebatut",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"humann2_file\": {\"__class__\": \"ConnectedValue\"}, \"metaphlan2_file\": null, \"type\": \"gene_families\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.0",
+            "type": "tool",
+            "uuid": "f23e9d81-c75f-4032-ac5e-268c55df7ca7",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "gene_families_output_file",
+                    "uuid": "2c732114-eb4f-4b0d-bb24-265effb62803"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Split a HUMAnN table",
+            "outputs": [
+                {
+                    "name": "stratified",
+                    "type": "tabular"
+                },
+                {
+                    "name": "unstratified",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 1255.6000061035156,
+                "height": 225.60000610351562,
+                "left": 1107.5,
+                "right": 1307.5,
+                "top": 1030,
+                "width": 200,
+                "x": 1107.5,
+                "y": 1030
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "75bedfb2078b",
+                "name": "humann_split_stratified_table",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.0+galaxy0",
+            "type": "tool",
+            "uuid": "6d83c57d-9d00-4c6c-a711-b1edba904b5f",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "unstratified",
+                    "uuid": "5cb069db-07dc-459e-b557-ca1f31934442"
+                },
+                {
+                    "label": null,
+                    "output_name": "stratified",
+                    "uuid": "5f978b0c-5560-4bbc-9ef6-cb770e8c38fd"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.0.0+galaxy0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Rename features",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 1407.6000061035156,
+                "height": 113.60000610351562,
+                "left": 1107.5,
+                "right": 1307.5,
+                "top": 1294,
+                "width": 200,
+                "x": 1107.5,
+                "y": 1294
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.0.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d24841f5c3d2",
+                "name": "humann_rename_table",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"renaming\": {\"type\": \"advanced\", \"__current_case__\": 1, \"names\": \"utility_mapping-full-map_go_name-3.0.0-13052021\"}, \"simplify\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.0+galaxy0",
+            "type": "tool",
+            "uuid": "edd00e5f-4bdf-4896-a187-d0e073de9002",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "c88003fc-bff9-46a6-a176-4125488aaaf1"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "Grep1",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Select",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 1285.1999969482422,
+                "height": 93.19999694824219,
+                "left": 1385.5,
+                "right": 1585.5,
+                "top": 1192,
+                "width": 200,
+                "x": 1385.5,
+                "y": 1192
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "[MF] GO terms and their abundance"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Grep1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"false\", \"pattern\": \"\\\\[MF\\\\] \", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "cbf50b5e-e929-4904-9f3d-afe90a6178b8",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "dad1cdb3-5c8c-46fe-ae56-393df1bba04f"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "Grep1",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Select",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 1416.1999969482422,
+                "height": 93.19999694824219,
+                "left": 1385.5,
+                "right": 1585.5,
+                "top": 1323,
+                "width": 200,
+                "x": 1385.5,
+                "y": 1323
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "[BP] GO terms and their abundance"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Grep1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"false\", \"pattern\": \"\\\\[BP\\\\] \", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "6c7a4c62-750c-4188-b3f7-c5b81bd5babe",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "e8bfeecf-ce24-4dce-bac8-43c423981c44"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "Grep1",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Select",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 1547.1999969482422,
+                "height": 93.19999694824219,
+                "left": 1385.5,
+                "right": 1585.5,
+                "top": 1454,
+                "width": 200,
+                "x": 1385.5,
+                "y": 1454
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "[CC] GO terms and their abundance"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Grep1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"false\", \"pattern\": \"\\\\[CC\\\\] \", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "44dc2e40-440e-445d-850b-aa18d92dd0f0",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "ff8e8cd7-2cd4-4588-a77b-67cb00668070"
+                }
+            ]
         }
-      ],
-      "position": {
-        "left": 649.5,
-        "top": 559
-      },
-      "post_job_actions": {},
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/bebatut/group_humann2_uniref_abundances_to_go/group_humann2_uniref_abundances_to_go/1.2.3",
-      "tool_shed_repository": {
-        "changeset_revision": "fd2cf7c9d3ec",
-        "name": "group_humann2_uniref_abundances_to_go",
-        "owner": "bebatut",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"__page__\": null, \"humann2_gene_families_abundance\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__rerun_remap_job_id__\": null, \"gene_ontology_file\": \"null\", \"slim_gene_ontology_file\": \"null\", \"uniref50_go_file\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
-      "tool_version": null,
-      "type": "tool",
-      "uuid": "9a93e91c-defe-4c61-9805-3bfa6d9f4a76",
-      "workflow_outputs": [
-        {
-          "label": null,
-          "output_name": "molecular_function_abundance",
-          "uuid": "75e6ad85-cbab-4b37-85af-61a78152b53a"
-        },
-        {
-          "label": null,
-          "output_name": "biological_process_abundance",
-          "uuid": "406b6039-f57f-4ea9-97ee-1abf174dcc44"
-        },
-        {
-          "label": null,
-          "output_name": "cellular_component_abundance",
-          "uuid": "50a969e2-45ce-4912-90a1-f1bcd805ccc3"
-        }
-      ]
     },
-    "4": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann2_renorm_table/humann2_renorm_table/0.11.1.0",
-      "errors": null,
-      "id": 4,
-      "input_connections": {
-        "input": {
-          "id": 1,
-          "output_name": "output"
-        }
-      },
-      "inputs": [],
-      "label": null,
-      "name": "Renormalize",
-      "outputs": [
-        {
-          "name": "output_table",
-          "type": "tsv"
-        }
-      ],
-      "position": {
-        "left": 641.5,
-        "top": 200
-      },
-      "post_job_actions": {
-        "RenameDatasetActionoutput_table": {
-          "action_arguments": {
-            "newname": "Normalized pathways"
-          },
-          "action_type": "RenameDatasetAction",
-          "output_name": "output_table"
-        }
-      },
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann2_renorm_table/humann2_renorm_table/0.11.1.0",
-      "tool_shed_repository": {
-        "changeset_revision": "dbf0e8eeeeed",
-        "name": "humann2_renorm_table",
-        "owner": "iuc",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"mode\": \"\\\"community\\\"\", \"update_snames\": \"\\\"true\\\"\", \"units\": \"\\\"relab\\\"\", \"input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"special\": \"\\\"true\\\"\"}",
-      "tool_version": null,
-      "type": "tool",
-      "uuid": "c2686269-9ffa-47ac-8422-618d010088f6",
-      "workflow_outputs": [
-        {
-          "label": null,
-          "output_name": "output_table",
-          "uuid": "6f316143-93d2-48c0-a66e-980b346b8a3b"
-        }
-      ]
-    },
-    "5": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann2_unpack_pathways/humann2_unpack_pathways/0.11.1.0",
-      "errors": null,
-      "id": 5,
-      "input_connections": {
-        "input_genes": {
-          "id": 2,
-          "output_name": "output_table"
-        },
-        "input_pathways": {
-          "id": 4,
-          "output_name": "output_table"
-        }
-      },
-      "inputs": [],
-      "label": null,
-      "name": "Unpack pathway abundances to show genes included",
-      "outputs": [
-        {
-          "name": "output",
-          "type": "tsv"
-        }
-      ],
-      "position": {
-        "left": 987.5,
-        "top": 250
-      },
-      "post_job_actions": {},
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/humann2_unpack_pathways/humann2_unpack_pathways/0.11.1.0",
-      "tool_shed_repository": {
-        "changeset_revision": "d2e4fee96dd1",
-        "name": "humann2_unpack_pathways",
-        "owner": "iuc",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"input_pathways\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"pathway_mapping\": \"null\", \"input_genes\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"gene_mapping\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"remove_taxonomy\": \"\\\"false\\\"\"}",
-      "tool_version": null,
-      "type": "tool",
-      "uuid": "07b741bc-8aec-4bb8-9925-64918d497187",
-      "workflow_outputs": [
-        {
-          "label": null,
-          "output_name": "output",
-          "uuid": "8b101840-323b-48e4-a259-97c791e09cff"
-        }
-      ]
-    }
-  },
-  "tags": [
-    "metagenomics"
-  ],
-  "uuid": "98ceb28d-7a84-4fd1-a8c2-0dd168e76207",
-  "version": 4
+    "tags": [],
+    "uuid": "6002ee8c-728c-4ff3-9a2a-d7e6dd67bff4",
+    "version": 2
 }
