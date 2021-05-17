@@ -69,14 +69,14 @@ and for developing new tools for new kinds of scientists using Galaxy.
 > - Any Galaxy tool from the toolshed can be installed and used.
 > - Any reasonably simple script can be generated as a tool.
 > - Newly generated tools appear in the tool menu after a refresh, and can immediately be viewed and used as the user will see them.
-> - Tool generation jobs can be rerun after editing the form to make changes to the tool the user will see in Galaxy.
+> - Tool generation jobs can be rerun using the {% icon galaxy-refresh %} button on the history item after editing the form to make changes to the tool the user will see in Galaxy.
 > - The Appliance is a Toolfactory flavour of the [docker-galaxy-stable resource](https://github.com/bgruening/docker-galaxy-stable/compose).
 >    - Documentation on connecting the appliance to a cluster for getting real work done with newly generated tools can be found at that repository.
 >    - It can be backed up and persisted for as long as required, or it can be treated as a throw-away instance and deleted when no longer needed.
 >    - There is almost zero technical friction if Docker and docker-compose are already installed. Only time is required.
 >    - Usefulness will depend on sufficient hardware. Plenty of cores, RAM and disk storage are needed.
 >    - On a modern workstation it will perform well out of the box.
->    - It can be run on high end laptops but will struggle on older domestic hardware with little RAM and few CPU cores.
+>    - It will run on a high-end laptop but will struggle on older consumer hardware with limited RAM and CPU capacity.
 {: .tip }
 
 
@@ -115,10 +115,8 @@ These may be derived from notebook scripts that have been consolidated and rewri
 in a shell using small data input files. Alternatively, skilled users can develop scripts and test them using small input data files on the command line
 without using Galaxy.
 
-The project supports extensive software infrastructure for manually creating new tools including Planemo and the new Galaxy language server. These are complex and powerful with substantial
-learning curves but can be used to turn almost any command line software package into a tool.
-
-For those new to Galaxy, in many simple cases, it may be possible to generate a new tool "wrapping" that script in a few minutes, using a
+The Galaxy developers support extensive software infrastructure for manually creating new tools including Planemo and the new Galaxy language server. These are complex and powerful with substantial
+learning curves but can be used to turn almost any command line software package into a tool. For those new to Galaxy, in many simple cases, it may be possible to generate a new tool "wrapping" that script in a few minutes, using a
 specialised Galaxy tool for developers that generates tools from scripts. This tutorial is designed to introduce that unusual tool.
 
 
@@ -135,7 +133,7 @@ Generated tools pass Planemo lint, and are functionally indistinguishable from e
 ToolFactory untested archives. It uses Planemo. The tested toolshed archives contain a test based on the test data provided
 at tool generation.
 
-Working examples using bash, Python, Rscript, Lisp, Prolog, Perl and sed are provided and described below. Many demonstrate advanced ToolFactory features.
+Working generated examples using bash, Python, Rscript, Lisp, Prolog, Perl and sed are provided and described below. Many demonstrate ToolFactory features.
 
 If you are a scientist/programmer or informatician new to Galaxy
 and new to the dark arts of Galaxy tool building, this tutorial may be of help. It introduces an automated way to convert any useful script into a toolshed ready tool,
@@ -151,7 +149,7 @@ quickly *inside* Galaxy.
 >    - Takes longer to learn to use and less accessible to many users than a form driven GUI might be.
 >    - Manual XML editing required for selects and collections.
 >    - See the recommended next steps at the end of this tutorial for Planemo related training.
->    - The ToolFactory uses planemo to generate test data and to run the test.
+>    - The ToolFactory uses planemo to generate test data and to run the test in the companion `planemo_test` tool.
 > - Many Unix utilities (sed, awk...) are already available as IUC tools.
 >    - They are `generic` in the sense that a script is supplied at **run time** by the tool user.
 >    - The Lisp demonstration uses that model, but it may be desirable that one very specific script is "wrapped" as a reproducible tool.
@@ -186,7 +184,7 @@ sections of the generated XML file in the toolshed archive. The ToolFactory form
 {: .details }
 
 
-The generated tool XML appears in the history after the ToolFactory is executed and the tool itself is installed in the ToolFactory Generated Tools submenu.
+The generated tool XML appears in the history after the ToolFactory is executed and the tool itself is installed in the `ToolFactory Generated Tools` submenu.
 Text on the form is all in the XML and it all comes from inputs to the ToolFactory form.
 
 >### {% icon details %} Generated XML and tool form
@@ -276,12 +274,10 @@ Text on the form is all in the XML and it all comes from inputs to the ToolFacto
 - **Starting a new ToolFactory tool with a know good command line and data** is strongly recommended. You will know exactly what to expect from the tool test for a first sanity check.
 - Corrolary: Unless there is a working script that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is of little use.
 - Generated tools are untested and not recommended for sharing.
-  - Testing is easy - toggle the `Finalise new archive with test outputs.` flag and regenerate the tool. Planemo will run and eventually return the tested tool to your history in a new collection.
-  - In a new Appliance, the first test run takes +10 minutes to install all the dependencies it needs for the first test.
-  - Subsequently it runs more quickly - about 1-2 minutes depending on the specific Conda dependencies required by the tool.
+  - Testing is easy - use the Planemo test tool. It may take a while to run depending on Conda dependency installation. It will return the tested tool to your history and a report collection.
   - The planemo_test tool creates a new tested toolshed archive ready for sharing, and a collection with reports.
-      - The Planemo test report is in the collection with a lint report.
-      - Please check the html report to make sure it passed before sharing your new tool.
+      - The Planemo test report is in the collection with a lint report and a log of the entire run.
+      - *Please check the html report to make sure it passed* before sharing your new tool.
 
 ----
 
@@ -298,14 +294,6 @@ Text on the form is all in the XML and it all comes from inputs to the ToolFacto
 >>
 >> 4. Change to the compose directory - `cd ~/toolfactory-galaxy-server-main/compose`
 >>
->>- Note that
->>   - pull is only needed the first time, or if there is a newer version available.
->>   - Add -d at the end of the docker-compose command to detach the terminal so you can keep working - but only after watching the process the first time please.
->>       - It is important to wait until the server stops sending log messages before you first log in. That means everything is ready.
->>   - For the first time start, watching the startup process logs is highly recommended. You will learn a lot about Galaxy and see when the Appliance is ready to use.
->>   - It may not go well on an underpowered machine. Multiple cores and GB of RAM and fast disk are needed for an enjoyable appliance.
->>   - The demonstration history will only appear after logging in with the administrator credentials - `admin@galaxy.org` and password `password`.
->>   - Change your admin password immediately but please note that the API key `fakekey` must remain as is please ensure that your appliance is not accessible to any potential miscreants on the local or public internet.
 >>
 >>```
 >>git clone https://github.com/fubar2/toolfactory-galaxy-server
@@ -325,24 +313,35 @@ Text on the form is all in the XML and it all comes from inputs to the ToolFacto
 >>    > docker-compose up
 >>    > ```
 >>
+>>- Note:
+>>   - `pull` is only needed the first time, or if there is a newer version available.
+>>   - Add `-d` at the end of the `docker-compose` command to detach the terminal so you can keep working - but only after watching the process the first time please.
+>>       - It is important to wait until the server stops sending log messages before you first log in. That means everything is ready. The first startup is very complex and takes time.
+>>   - For the first time start, watching the startup process logs is highly recommended.
+>>       - You will learn a lot about how a Galaxy server works and see when the Appliance is ready to use.
+>>   - The docker containers may not fit or run well on an underpowered machine. Multiple cores and GB of RAM and fast disk are needed for an enjoyable appliance.
+>>   - The demonstration history will only be available after logging in with the administrator credentials - `admin@galaxy.org` and password `password`. Check your histories if the smaller data-only history appears when you log in.
+>>   - Change your admin password immediately but please note that the API key `fakekey` must remain as is please ensure that your appliance is not accessible to any potential miscreants on the local or public internet.
+>>
 >>Your appliance should be running with a local Galaxy on [port 8080 of your workstation](http://localhost:8080) after a fair bit of activity.
 >>
 >> -  Out of the box login is 'admin@galaxy.org' and the password is 'password'
 >>    - This is obviously insecure but convenient and easily changed at first login.
 >>    - Or more permanently in the docker-compose.yml if you prefer.
 >>
->>- The container `/export` directory is mounted locally at `compose/export` .
+>>- The container `/export` directory is mounted locally at `compose/export` so you can find your generated and tested tools for sharing.
 >>
 >>## Demonstration tools are the functional documentation
 >>
 >>- At first login you will find the demonstration history ready to explore if you waited for all the Conda activity to die down
 >>- It takes a minute or two to import because the dependencies for the ToolFactory must first be installed.
+>>- Check the histories if a different one appears - two are loaded and there seems some randomness about which appears at login.
 >>- If it's not there, you can import it manually from Zenodo as described in the Welcome page text.
 >>
->> - To explore an example, open the toolshed archive by clicking on the name, and select the `rerun` button from the expanded view
+>> - To explore an example, open the toolshed XML history item by clicking on the name, and select the {% icon galaxy-refresh %} `rerun` button from the expanded view
 >>    - The form that generated that tool will appear for you to examine
 >>    - Edit the form - add parameters and change the script to suit - and rerun to create an *updated* tool. The history has previous versions.
->>    - Change the tool ID to change the tool name.
+>>    - Change the tool ID to change the tool name and generate a different tool. *Generating a same-name tool will overwrite the old version*.
 >>
 >>## To safely shut the appliance down
 >>
@@ -417,12 +416,10 @@ Text on the form is all in the XML and it all comes from inputs to the ToolFacto
 1. If it needs any changes, open the collection created when the tool was generated. Open one of the collection items and use the {% icon galaxy-refresh %} rerun button to
 recreate the ToolFactory form as it was when you last ran it. Adjust as needed and use the tool form`execute` button to run the ToolFactory again with updated settings.
 1. Rinse, repeat.
-1. When everything is to your satisfaction, re-run the generating job but toggle "Finalise new archive with test outputs" to `Yes`.
-    1. The tool will be generated again
-    1. A Planemo test will be run in the background. The outputs will automatically appear in the history when they are ready.
-    1. First time will take 10 minutes or so.
-    1. Subsequently, time will depend on Conda dependencies. If none a minute or so.
-    1. A new tested archive, Planemo test report, Planemo lint output and the tested archive ready for sharing will be in a new collection in the user's history when the job finishes.
+1. When everything is to your satisfaction, start the `planemo_test` tool in the ToolFactory menu and select the tool XML to finalise.
+    1. A Planemo test will be run
+    1. Time will depend on Conda dependencies. If none a minute or so.
+    1. A new tested archive, Planemo test report, Planemo lint output and a log of the test run will be in a new collection in the user's history when the job finishes.
     1. The tested toolshed archive can be downloaded from the history or found in `...compose/export/galaxy/tested_TF_archives/[tool name]`
 1. Warning: building a tool with the name `mytool` will overwrite any previously generated ToolFactory tool with the same name. Persisted jobs in user histories always allow older versions to be recreated if necessary.
 
