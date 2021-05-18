@@ -2,12 +2,6 @@
 layout: tutorial_hands_on
 
 title: "Breve introducción a Galaxy - en español"
-subtopic: espanol
-priority: 1
-
-tags:
-  - espanol
-
 zenodo_link: "https://doi.org/10.5281/zenodo.582600"
 level: Introductory
 questions:
