@@ -70,7 +70,7 @@ and for developing new tools for new kinds of scientists using Galaxy.
 > - Any reasonably simple script can be generated as a tool.
 > - Newly generated tools appear in the tool menu after a refresh, and can immediately be viewed and used as the user will see them.
 > - Tool generation jobs can be rerun using the {% icon galaxy-refresh %} button on the history item after editing the form to make changes to the tool the user will see in Galaxy.
-> - The Appliance is a Toolfactory flavour of the [docker-galaxy-stable resource](https://github.com/bgruening/docker-galaxy-stable/compose).
+> - The Appliance is a Toolfactory flavour of the [docker-galaxy-stable resource](https://github.com/bgruening/docker-galaxy-stable/tree/master/compose).
 >    - Documentation on connecting the appliance to a cluster for getting real work done with newly generated tools can be found at that repository.
 >    - It can be backed up and persisted for as long as required, or it can be treated as a throw-away instance and deleted when no longer needed.
 >    - There is almost zero technical friction if Docker and docker-compose are already installed. Only time is required.
@@ -141,6 +141,7 @@ quickly *inside* Galaxy.
 
 
 > ### {% icon tip %} Alternative ways to generate tools:
+> - The [Galaxy Language Server](https://github.com/galaxyproject/galaxy-language-server) is a rapidly developing specialised manual tool building environment with VCS bindings.
 > - Planemo can [generate tool XML](https://planemo.readthedocs.io/en/latest/writing_standalone.html) with an optional test.
 >    - Planemo is recommended for developers who will focus on Galaxy tools. Excellent documentation.
 >    - Widely used by experienced developers. Requires relatively little time to figure out - Galaxy tool syntax takes longer.
@@ -161,15 +162,17 @@ quickly *inside* Galaxy.
 ## `Hello World!` with the ToolFactory Appliance
 
 The ToolFactory can generate a `Hello World!` script as a Galaxy tool. A parameter is added so the user can supply the text after "Hello..." and
-the tool can write the combined string to a new history item. Trivial, but an excellent model worth studying in detail. It is
-implemented as a tool that wraps a bash script of one line - `echo "Hello $1!"` to echo the first parameter passed on the command line. This is a
-generic model for many Galaxy tools with the addition of a file or a parameter or two, as discussed below.
+the tool can write the combined string to a new history item. Trivial, but an excellent model worth studying in detail because it is easily extended to do
+more useful tasks. It wraps a trivial bash script of one line - `echo "Hello $1!"` to decorate and return the first parameter passed on the command line. This is a
+generic model for many Galaxy tools with the addition of a few more files and parameters, as discussed below. Bash is used here but any scripting language available in Conda could
+probably be used.
 
 Watch a 6 minute [`Hello world` demonstration video](https://drive.google.com/file/d/1xpkcVGQ0jRdG78Kt-qLwqeFpE3RnSRsK/view?usp=sharing)
 (Apologies for the poor quality - will try to make a shorter one.)
 
-The form collects all the information needed for a new Galaxy tool. It is long and complex as a result. Much of what is collected is used to construct
-a command line for the script when the generated tool runs. Other information such as the name and dependencies are needed to construct the relevant
+The form collects all the information needed for a new Galaxy tool. It is long and complex as a result, particularly with many repeated form elements for more complex tools.
+Much of what is collected is used to construct a command line for the script when the generated tool runs.
+Other information such as the name and dependencies are needed to construct the relevant
 sections of the generated XML file in the toolshed archive. The ToolFactory form configured to generate the `Hello` example can be viewed below.
 
 > ### {% icon details %} Annotated ToolFactory form that generates `Hello World`
@@ -177,9 +180,7 @@ sections of the generated XML file in the toolshed archive. The ToolFactory form
 >
 > ![Second part of the form](../../images/ToolFactory_hello2form.png "The second section shows the new generated history output. It uses the special name <code>STDOUT</code> so the tool will take whatever the bash script writes and create a new text file called <code>Hello_output</code>. When the test is generated, the pass criterion is that the default value <code>Galaxy Training Network</code> should appear as the message in <code>hello_output</code>. no difference. Other criteria including <code>sim_size</code> are available for the test applied to each output file. There is no limit (other than your patience) to the number of new generated history outputs. Note that this example has no history input files. Again, any number of these can be specified on the form using the repeat.")
 >
-> ![Third part of the form](../../images/ToolFactory_hello3form.png "The third section shows the user supplied parameter to be passed in to the bash script on the command line. It will be the first positional parameter because the ordinal position is 1. Argparse parameters are shown in other samples. The help and label text for each input file and user defined parameter will appear on the generated tool form for the user so make them informative. This is where you can change the default from "World" to "Galaxy Training Network" on the sample provided and regenerate it to make a new tool later in the tutorial.")
->
-> ![Fourth part of the form](../../images/ToolFactory_hello4form.png "The fourth section controls ToolFactory actions and optional outputs. If you supply appropriate API keys, the ToolFactory can upload the newly generated tool to a toolshed. Optionally it can be installed into the Galaxy server specified. <em>This is potentially annoying and dangerous if you have API keys you can misuse - so please be mindful.</em>")
+> ![Third part of the form](../../images/ToolFactory_hello3form.png "The third section shows the form settings for the user supplied parameter to be passed in to the bash script on the command line. It will be the first positional parameter because the ordinal position is 1. Argparse parameters are shown in other samples. The help and label text for each input file and user defined parameter will appear on the generated tool form for the user so make them informative. This is where you can change the default from "World" to "Galaxy Training Network" on the sample provided and regenerate it to make a new tool later in the tutorial.")
 >
 {: .details }
 
@@ -247,7 +248,10 @@ Text on the form is all in the XML and it all comes from inputs to the ToolFacto
 >
 > Which, when seen loaded into Galaxy looks like the following figure:
 > ![Generated form seen by the new tool user](../../images/toolfactory_hello_demo_form.png "The form displayed when the generated Hello tool is executed is below. The user sees a text box to enter any string. When executed, it will be echoed to a new history file called <code>Hello_output</code>")
->
+> When a user runs the tool and enters some text in the text box, the decorated output will appear in a new history text dataset.
+> This may not seem very exciting but serves to illustrate a useful pattern that can easily be adapted and extended .
+> The script could do something far more interesting and could take unlimited input datasets, user configurable parameters and can produce as many outputs as needed in the history.
+
 {: .details}
 
 
@@ -264,13 +268,13 @@ Text on the form is all in the XML and it all comes from inputs to the ToolFacto
 
 ## Limits and scope
 
-- It works best wrapping simple R/Bash/Python and other interpreted scripts, with few user supplied parameters and a few inputs or outputs.
+- It works best wrapping simple R/Bash/Python and other interpreted scripts, with few user supplied parameters and a few inputsand outputs.
 - Scripts are easier than some Conda packages
   - They can easily be modified to respond to default empty parameters as if they had not been passed.
   - As a result, advanced tool building elements such as conditionals and related tricks requiring manual coding, can often be avoided.
 - On the other hand, many Conda dependencies will require XML conditionals or other tool XML constructs that are not easy to generate automatically.
 - While some simple requirements may be manageable, complex ones will not be suitable for the ToolFactory.
-- Compared to the more usual shell and a text editor, The ToolFactory in Galaxy is a slow and clumsy way to debugging scripts. More than a minute per cycle because`planemo test` is run twice, building and tearing down a Galaxy each time.
+- Compared to the more usual shell and a text editor, The ToolFactory in Galaxy is a slow and clumsy way to debugging scripts.
 - **Starting a new ToolFactory tool with a know good command line and data** is strongly recommended. You will know exactly what to expect from the tool test for a first sanity check.
 - Corrolary: Unless there is a working script that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is of little use.
 - Generated tools are untested and not recommended for sharing.

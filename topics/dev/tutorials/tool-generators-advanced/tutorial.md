@@ -981,6 +981,11 @@ or more of the file names you expect to see after the collection is filled by yo
         - run `docker system prune` to clear out any old corrupted containers, images or networks.
         - run `docker-compose up` again
 
+#### Only one Planemo test runs at a time. Why doesn't the server allow more than one at once?
+
+- When a new dependency is being installed in the Planemo Conda repository, there is no locking to prevent a second process from overwriting or otherwise
+interfering with it's own independent repository update. The result is not pretty.
+- Allowing two tests to run at once has proven to be unstable so the Appliance is currently limited to one.
 
 # Your turn! Please help improve this community resource!
 - tell Ross (ross.lazarus@gmail.com) what went well and what could be improved for the benefit of future students
