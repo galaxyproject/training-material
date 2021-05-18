@@ -80,7 +80,7 @@ The first step in this tutorial is to perfrom BLAST-P analysis using the NCBI-NR
 
 > ### {% icon hands_on %} Hands-on: NCBI BLAST+ blastp
 >
-> 1. **NCBI BLAST+ blastp** {% icon tool %} with the following parameters:
+> 1. {% tool [**NCBI BLAST+ blastp**](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/0.3.3) %} with the following parameters:
 >    - {% icon param-file %} **Protein query sequence(s)** - `Peptides for Blast-P analysis.tabular`
 >    - {% icon param-select %} **Subject database/sequences** - `Locally installed BLAST database`
 >      - {% icon param-select %} **Protein BLAST database** - `NCBI-NR(dated)`
@@ -110,7 +110,7 @@ Once Blast-P search is performed, it provides a tabular output containing “**N
 
 > ### {% icon hands_on %} Hands-on: Query Tabular
 >
-> 1. **Query Tabular** {% icon tool %} with the following parameters:
+> 1. {% tool [**Query Tabular**](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %} with the following parameters:
 >    - {% icon param-repeat %} **Insert Database Table**
 >      - Section **Table Options**
 >        - *"Specify Name for Table"*: `blast`
@@ -166,7 +166,7 @@ Once this step is completed, a tabular output containing novel proteoforms are d
 
 > ### {% icon hands_on %} Hands-on: Query Tabular
 >
-> 1. **Query Tabular** {% icon tool %}: with the following parameters:
+> 1. {% tool [**Query Tabular**](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %}
 >    - {% icon param-repeat %} **Insert Database Table**
 >      - Section **Filter Dataset Input**
 >        - {% icon param-repeat %} **Insert Filter Tabular Input Lines**
@@ -293,7 +293,7 @@ peptides provided as input. This outputs bed file for peptides.
 
 > ### {% icon hands_on %} Hands-on: Peptide genomic Coordinate
 >
-> 1. Run **Peptide genomic Coordinate** {% icon tool %} with the following parameters:
+> 1. Run {% tool [**Peptide genomic Coordinate**] (toolshed.g2.bx.psu.edu/repos/galaxyp/peptide_genomic_coordinate/peptide_genomic_coordinate/0.1.1) %} with the following parameters:
 >    - *"Input"*: `Peptide list file`, `mzsqlite sqlite DB file`, and `genomic mapping sqlite DB file`
 >    - *"Output"*: `Tabular BED file with all the columns`
 >
@@ -311,7 +311,7 @@ Given chromosomal locations of peptides in a BED file, PepPointer classifies the
 
 > ### {% icon hands_on %} Hands-on: Peppointer
 >
-> 1. **Peppointer** {% icon tool %} with the following parameters:
+> 1. {% tool [**Peppointer**](toolshed.g2.bx.psu.edu/repos/galaxyp/pep_pointer/pep_pointer/0.1.3) %} with the following parameters:
 >   - {% icon param-select %} *"Choose the source of the GTF file"* - `From History`
 >   - {% icon param-file %} *"GTF file with the genome of interest"* - `edited_Mus_Musculus_GRCm38.90_Ensembl_GTF`
 >   - {% icon param-file %} *"BED file with chromosomal coordinates of peptides"*: `Bed file from Peptide genomic coordinate tool`
@@ -331,7 +331,7 @@ The final tool for this workflow generates a tabular output that summarizes the 
 
 > ### {% icon hands_on %} Hands-on: Query Tabular
 >
->  1. **Query Tabular** {% icon tool %} with the following parameters:
+>  1. {% tool [**Query Tabular**](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %}
 >     - {% icon param-repeat %}  **Insert Database Table**
 >       - Section **Table Options**:
 >         - *"Specify Name for Table"*: `bed_pep_pointer`
