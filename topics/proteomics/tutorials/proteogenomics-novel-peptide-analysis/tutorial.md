@@ -331,7 +331,7 @@ The final tool for this workflow generates a tabular output that summarizes the 
 
 > ### {% icon hands_on %} Hands-on: Query Tabular
 >
->  1. {% tool [**Query Tabular**](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %}
+>  1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %}
 >     - {% icon param-repeat %}  **Insert Database Table**
 >       - Section **Table Options**:
 >         - *"Specify Name for Table"*: `bed_pep_pointer`
