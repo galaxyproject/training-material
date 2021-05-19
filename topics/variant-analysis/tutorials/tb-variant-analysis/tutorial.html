@@ -695,6 +695,10 @@
         
     
         
+    
+        
+    
+        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -747,7 +751,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 12, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 18, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -1123,7 +1127,7 @@ gene annotation from the <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962
 <p>Finally, TB Variant Report use the COMBAT-TB <a href="https://explorer.sanbi.ac.za">eXplorer</a> <a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btz658/5554700">database</a> of <em>M. tuberculosis</em> genome annotation to annotate variants in Mtb. It also takes the output of <em>TB Profiler</em> and produces a neat report that is easy to browse and search.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-run-tb-profiler"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run TB Profiler</h3>
+  <h3 id="hands_on-hands-on-run-tb-profiler-and-tb-variant-report"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run TB Profiler and TB Variant Report</h3>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/2.8.4+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/2.8.4+galaxy1"><strong>TB-Profiler profile</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/2.8.4+<span class="notranslate">galaxy</span>1</span></span> : <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
@@ -1141,12 +1145,13 @@ gene annotation from the <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962
       <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1"><strong>Text transformation with sed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1</span></span> : <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
 
       <ul>
+        <li><em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">TB Variant Filter on data XX</code></li>
         <li><em>“SED Program”</em>: <code class="language-plaintext highlighter-rouge">s/GENE_//g</code></li>
       </ul>
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/0.1.7+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/0.1.7+galaxy0"><strong>TB Variant Report</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/0.1.7+<span class="notranslate">galaxy</span>0</span></span> : <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><em>“Input SnpEff annotated M.tuberculosis VCF(s)”</em>: <code class="language-plaintext highlighter-rouge">TB-Profiler Profile VCF on data XX</code></li>
+        <li><em>“Input SnpEff annotated M.tuberculosis VCF(s)”</em>: <code class="language-plaintext highlighter-rouge">Text transformation on data XX</code></li>
         <li><em>“TBProfiler Drug Resistance Report (Optional)”</em>: <code class="language-plaintext highlighter-rouge">TB-Profiler Profile on data XX: Results.json</code></li>
       </ul>
     </li>
@@ -1492,8 +1497,8 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR124/042/SRR12416842/SRR12416842_2.fastq.gz
     author = "Peter van Heusden and Simon Gladman and Thoba Lose",
     title = "M. tuberculosis Variant Analysis (Galaxy Training Materials)",
     year = "2021",
-    month = "03",
-    day = "12"
+    month = "05",
+    day = "18"
     url = "\url{/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
