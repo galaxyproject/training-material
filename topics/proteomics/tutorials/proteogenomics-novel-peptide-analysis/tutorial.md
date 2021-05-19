@@ -293,7 +293,7 @@ peptides provided as input. This outputs bed file for peptides.
 
 > ### {% icon hands_on %} Hands-on: Peptide genomic Coordinate
 >
-> 1. Run {% tool [**Peptide genomic Coordinate**] (toolshed.g2.bx.psu.edu/repos/galaxyp/peptide_genomic_coordinate/peptide_genomic_coordinate/0.1.1) %} with the following parameters:
+> 1. Run {% tool [Peptide genomic Coordinate] (toolshed.g2.bx.psu.edu/repos/galaxyp/peptide_genomic_coordinate/peptide_genomic_coordinate/0.1.1) %} with the following parameters:
 >    - *"Input"*: `Peptide list file`, `mzsqlite sqlite DB file`, and `genomic mapping sqlite DB file`
 >    - *"Output"*: `Tabular BED file with all the columns`
 >
