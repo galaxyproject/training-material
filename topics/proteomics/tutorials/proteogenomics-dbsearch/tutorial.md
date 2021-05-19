@@ -222,7 +222,7 @@ The mzidentml output from the Peptide shaker is converted into an sqlite databas
 >
 > This tool extracts mzidentml and its associated proteomics datasets into a sqlite db
 >
-> 1. {% tool [**mz to sqlite**](toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1) %} with the following parameters:
+> 1. {% tool [mz to sqlite](toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Proteomics identification files"*: `PeptideShaker_mzidentml`
 >    - {% icon param-file %} *"Proteomics Spectrum files"*: `Mo_Tai_MGFs`
 >    - {% icon param-file %} *"Proteomics Search Database Fasta"*: `Uniprot_cRAP_SAV_indel_translatedbed.FASTA`
@@ -393,4 +393,3 @@ This workflow was developed by the Galaxy-P team at the University of Minnesota.
 
 
 {: .comment}
-
