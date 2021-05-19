@@ -311,7 +311,7 @@ Given chromosomal locations of peptides in a BED file, PepPointer classifies the
 
 > ### {% icon hands_on %} Hands-on: Peppointer
 >
-> 1. {% tool [**Peppointer**](toolshed.g2.bx.psu.edu/repos/galaxyp/pep_pointer/pep_pointer/0.1.3) %} with the following parameters:
+> 1. {% tool [Peppointer](toolshed.g2.bx.psu.edu/repos/galaxyp/pep_pointer/pep_pointer/0.1.3) %} with the following parameters:
 >   - {% icon param-select %} *"Choose the source of the GTF file"* - `From History`
 >   - {% icon param-file %} *"GTF file with the genome of interest"* - `edited_Mus_Musculus_GRCm38.90_Ensembl_GTF`
 >   - {% icon param-file %} *"BED file with chromosomal coordinates of peptides"*: `Bed file from Peptide genomic coordinate tool`
