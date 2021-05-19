@@ -45,20 +45,27 @@ contributors:
 >
 {: .agenda}
 
-## The ToolFactory Appliance: A docker pop-up MYOT (make your own tools) Galaxy for scientists who write command line scripts in their work.
+## The ToolFactory Appliance: A pop-up private Galaxy for scientists and developers who write command line scripts in their work.
 
-The ToolFactory automates much of the work needed to prepare a new Galaxy tool using information provided by the script writer,
-on the ToolFactory form. The ToolFactory can wrap any simple script that runs correctly on the linux command line with some small test input samples. This is potentially
-handy for developers new to Galaxy, and for Galaxy users who are capable of correctly scripting on the command line for themselves.
+The ToolFactory automates much of the work needed to prepare a new Galaxy tool using information provided by the script writer
+on a Galaxy tool form. It can generate XML to wrap any simple script that runs correctly on the linux command line with some small test input samples. This is potentially
+handy for developers new to Galaxy, and for Galaxy users who are capable of correctly scripting on the command line for themselves, because those working scripts can
+be wrapped and tested to make toolshed ready, shareable Galaxy tools, or if too trivial to be worth sharing, used on the host desktop Galaxy for real analyses.
 
-Untested tools are immediately available providing instant feedback for the developer. Wording in labels and help text can be edited by re-running the job. The
-newly generated version will have all the text updated so it can be checked again.
+Generated tools are immediately installed and ready to run. This provides instant feedback for the developer in an integrated tool
+development environment for simple scripts. Jobs that generate tools can always be rerun using {% icon galaxy-refresh %}. The form reappears as it was
+when the tool was generated. Data and user configurable parameters can be added or removed. Text that appears when the tool is run, such as user parameter or data input
+labels and help, can be updated by editing the form. When the updated tool is generated, installed and run as a tool, the tool form will include all the changes, ready to run.
 
-The Appliance Galaxy server is fully functional. Tools can be generated or added from the Toolshed to create a
-tailored Galaxy for any kind of analysis.
+Tools can be tested and prepared for export as toolshed ready archives when the developer is ready using a companion `planemo_test` tool in the ToolFactory tool section.
 
+The ToolFactory is distributed as a convenient Docker appliance, based on a fully functional Galaxy server. Tools can be generated locally or added from a Toolshed to create a
+tailored Galaxy for analyses and for developing workflows for areas of data-intensive science where Galaxy tools are not yet available.
 The appliance is an ideal way for any data intensive scientist to quickly develop and refine new tools on their workstations,
-ready for deployment in production and sharing. It is also a fully functional Galaxy server, ideal for learning how Galaxy works.
+ready for deployment in production and sharing.
+
+It also may be useful as a private sandbox for learning about tools and Galaxy administration or experimenting with code development. In the worst possible scenario where the
+system is damaged, the Appliance can be rebuilt from scratch in a few minutes.
 
 
 > ### {% icon tip %} Under the hood:
@@ -73,8 +80,12 @@ ready for deployment in production and sharing. It is also a fully functional Ga
 ## Limits and scope
 
 - The Appliance can generate, install and run new tools from scripts on your desktop.
-    - It is a fully functional Galaxy instance, so it can also import any existing
-tool from a Toolshed and [can easily be connected to a cluster for real work](https://github.com/bgruening/docker-galaxy-stable/compose).
+    - It is a fully functional development Galaxy instance, so it can import any existing tool from a toolshed and can handle as much data as your desktop disks will fit.
+    - It [can connect to a cluster for real work](https://github.com/bgruening/docker-galaxy-stable/compose) so potentially useful for development at scale.
+    - It takes only a few minutes to install and can be completely removed even more quickly when no longer useful.
+    - It lacks the data backup and security provided by an institutional Galaxy service.
+    - The user is entirely responsible for securing and backing up all their work.
+    - It is not recommended for production use.
 - The ToolFactory works best wrapping simple R/Bash/Python and other interpreted scripts, with a few user supplied parameters and a few I/O history files.
 - Scripts are easier than some Conda packages
     - This is because the tool builder can modify the code to respond to default empty parameters as if they had not been passed.
@@ -89,7 +100,7 @@ or other complex tool XML constructs that are not easy to generate automatically
 enough for the ToolFactory.
     - Compared to the more flexible manual Galaxy tool development software, there is far less to learn to get up to speed with a form driven,
 automated code generator in a tailored, readily deployed appliance.
-    - The cost of this convenience is that ToolFactory is limited to a limited subset of simple script and package wrappers.
+    - The cost of this convenience is that ToolFactory is limited to a subset of simple script and package wrappers.
 
 
 # 2. Getting your hands on a ToolFactory Appliance for some hands-on training.
@@ -118,9 +129,9 @@ automated code generator in a tailored, readily deployed appliance.
 
 # Running the ToolFactory
 
-> ### {% icon hands_on %} Hands-on: Launching the Container
+> ### {% icon hands_on %} Hands-on: Launching the Appliance
 >>
->> 1. [Install Docker](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform. Then `pip3 install docker-compose`.
+>> 1. If necessary, [install Docker](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform. Then `pip3 install docker-compose`.
 >>
 >> 2. Go to [the ToolFactory appliance github repository](https://github.com/fubar2/toolfactory-galaxy-server)
 >>
@@ -128,7 +139,7 @@ automated code generator in a tailored, readily deployed appliance.
 >>
 >> 4. Change to the compose directory - `cd ~/toolfactory-galaxy-server-main/compose`
 >>
->>Something like this should get it started:
+>>Something like this should get it started :
 >>
 >>```
 >>git clone https://github.com/fubar2/toolfactory-galaxy-server
@@ -148,14 +159,14 @@ automated code generator in a tailored, readily deployed appliance.
 >>    > docker-compose up
 >>    > ```
 >>
->>Your appliance should be running with a local Galaxy on  [port 8080 of your workstation](http://localhost:8080) after a fair bit of activity.
+>>Your appliance should be running with a local Galaxy on  [port 8080 of your workstation](http://localhost:8080) after a lot of activity and 5-10 minutes.
 >> -  Watch the output and wait until there is no further activity after importing the sample history before logging in for the first time. It takes a long time and the log is an interesting and instructive read.
 >> -  Once configured, the `-d` flag can be added to the startup command `docker-compose up -d` to `d`etach the terminal but it is very important to watch the process the first time in case something goes wrong.
 >> -  Out of the box login is 'admin@galaxy.org' and the password is 'password'
 >>    - This is obviously insecure but convenient and easily changed at first login.
 >>    - Or more permanently in the docker-compose.yml if you prefer.
 >>
->>- The container `/export` directory is mounted locally at `compose/export` .
+>>- The container `/export` directory is mounted locally at `...compose/export` .
 >>
 >>## Demonstration tools are the functional documentation
 >>
@@ -199,29 +210,29 @@ automated code generator in a tailored, readily deployed appliance.
 >>
 >> - Note that the generated tool has not been run to generate test outputs, so the archive is not complete although the installed tool may work fine.
 >>
->> - To generate a "proper" tested toolshed archive, run the `planemo_test` tool on the relevant tool XML in the history.
->> - The appliance will run Planemo to generate sample outputs, then run a real test and return a proper toolshed archive and test reports.
+>> - To generate a "proper" tested toolshed archive, execute the `planemo_test` tool from the ToolFactory tool submenu after selecting the relevant tool XML from the history.
+>> - The appliance will run Planemo to generate sample outputs, then run a real test.
 >>     - An archive containing the tool with proper test will be returned with a collection containing the testing run log, planemo lint and test reports.
 >>     - The archive can be downloaded and shared in the usual ways. It is a normal Galaxy tool that wraps the supplied script and contains a test to validate it.
->>     - It is in `..compose/export/galaxy/testedTFarchives/[tool name]` on your workstation because that is mounted as a volume into the container.
+>>     - It is in `..compose/export/galaxy/testedTFtools/[tool name]` on your workstation because that is mounted as a volume into the container.
 {: .hands_on}
 
 ----
 
-## Import ToolFactory functional documentation - the demonstration tools.
+## ToolFactory functional documentation - the demonstration tools.
 
 - Congratulations on getting this far and acquiring a local instance of the ToolFactory
 - There is a sample history built in that shows some sample tools.
-- Sometimes it appears second - check the history list when first logging in if there are only half a dozen datasets in the current history - there should be a larger one too with all the samples.
-- Note that this is installed the first time a new Appliance is run. It takes a minute - wait until all the installation processes have settled down before first logging in.
-- If there is an empty history when you first log in, check the histories after a minute - if still not there, follow the Welcome page instructions to install it manually.
+  - Sometimes it appears second - check the history list when first logging in if there are only half a dozen datasets in the current history - there should be a larger one too with all the samples.
+  - If there is an empty history when you first log in, check the histories after a minute - if still not there, follow the Welcome page instructions to install it manually.
 - They can be examined to learn how the ToolFactory form was configured to generate the tool.
-- Click the Galaxy job `redo` button on either of the two history items sharing the tool name.
-- This will show you the fully completed ToolFactory form used to generate the sample
-- You can edit the form and regenerate a new tool with your changes incorporated.
-- When the job completes, a new edited version of that tool will be installed and ready to run.
-- Refresh the Galaxy panels to find it in the new "ToolFactory Generated Tools" section.
-- Change the tool name to generate a different tool - the Appliance will overwrite any existing tool of the same name without warning.
+- Click the Galaxy job `redo` {% icon galaxy-refresh %} button on any generated XML in the history.
+- This will show you the settings for the ToolFactory form used to generate the sample
+- Edit the form and regenerate an updated tool with your changes incorporated.
+- When the job completes, the edited version of that tool will be installed and ready to run.
+- Refresh the Galaxy panels to find it in the new "ToolFactory Generated Tools" section if the tool name is new.
+- Change the tool name to generate a new tool.
+  - *The Appliance will overwrite an existing tool of the same name without warning.*
 
 
 > ### {% icon announcement %} Note!
@@ -230,13 +241,11 @@ automated code generator in a tailored, readily deployed appliance.
 > - They provide functional documentation to help you become comfortable using the ToolFactory.
 {: .announcement}
 
-- Viewing the samples history, you will see a large number of pairs of history items sharing the same tool name, and some data files used for all the building and tool testing.
-- There is an untested toolshed archive for each tool, and a collection. Opening it (click on the name) will reveal the generated tool XML and the future test input file samples.
-- Both these items for each tool have a {% icon galaxy-refresh %} rerun button.
+- Viewing the samples history, you will see generated XML wrappers and some data files used for all the building and tool testing.
+- Each tool XML has a {% icon galaxy-refresh %} `rerun` button.
     - Click that button and the ToolFactory form that generated the sample tool will appear.
     - You can see how the tool was built using the ToolFactory's limited capacities.
-    - Most of them are trivial of course.
-    - They are models that show how different kinds of scripts and tasks can be accomplished
+    - Most of the examples are trivial models that show how different kinds of scripts can be wrapped.
 
 <sup id='section3'>*</sup>
 # 3. Hands-on: Learning to use the ToolFactory
@@ -260,12 +269,6 @@ automated code generator in a tailored, readily deployed appliance.
 > * Try changing names or prompts. Add new parameters or inputs/outputs; press `execute`; check the new version of the tool
 > * For example, change the default for the Hello example to `Galaxy Training Network` and generate an updated version.
 {: .hands_on}
-
-
-The best way to explore the kinds of tasks that can be achieved with simple scripts is to take a look at each sample tool. Note how the various
-options have been configured and what kinds of scripts this could be used for in your work. The example script can be swapped out for another one known to work and additional
-new parameters added to suit, to extend the toy examples and create tools of use to your users. Change the tool name on the newly edited form, press `execute` and
-rerun the job to generate a new toolshed archive and test report collection.
 
 The trivial `Hello World!` tool example is readily extended to suit many situations where a tool is needed quickly for a workflow. Try adding another parameter.
 For example, the planemo `lint` tool example (described below) can be derived by adding a history toolshed archive as input, plus a few more lines of bash script.
@@ -320,11 +323,6 @@ In practice, it's a flexible basis for generating many simple tools.
 {: .details}
 
 
-#### Workflow used to create the tools in the demonstration history
-
-The workflow at https://zenodo.org/record/4686436/files/TFdemo_wf_april13_planemo.ga?download=1 was used to create the sample history examples. It requires some data files as inputs. They
-can be copied from the imported history to a new history and the workflow can be imported and run from there. After connecting appropriate data sets to the different inputs, it will
-re-create all the samples for anyone wanting to see them run. Without a cluster overlay, the workflow runner will show red for all the jobs but they will all run and generate XML outputs.
 
 ## ToolFactory tips and tricks illustrated by some of the examples.
 
@@ -979,7 +977,8 @@ or more of the file names you expect to see after the collection is filled by yo
         - make sure no docker galaxy-server related processes are running - use docker ps to check and stop them manually
         - delete the `..compose/export directory` with `sudo rm -rf export/*` to clean out any corrupted files
         - run `docker system prune` to clear out any old corrupted containers, images or networks.
-        - run `docker-compose up` again
+        - run `docker-compose pull` again to ensure the images are correct
+        - run `docker-compose up` to completely rebuild the appliance from scratch. Please be patient.
 
 #### Only one Planemo test runs at a time. Why doesn't the server allow more than one at once?
 
