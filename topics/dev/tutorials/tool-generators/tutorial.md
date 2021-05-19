@@ -276,7 +276,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 
 ## Limits and scope
 
-- It works best wrapping simple R/Bash/Python and other interpreted scripts, with few user supplied parameters and a few inputsand outputs.
+- It works best wrapping simple R/Bash/Python and other interpreted scripts, with few user supplied parameters and a few input and output files.
 - Scripts are easier than some Conda packages
   - They can easily be modified to respond to default empty parameters as if they had not been passed.
   - As a result, advanced tool building elements such as conditionals and related tricks requiring manual coding, can often be avoided.
@@ -295,7 +295,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 
 ## Installing the ToolFactory Appliance: requires a Linux workstation, Docker and docker-compose.
 
-> ### {% icon hands_on %} Hands-on: Launching the Container
+> ### {% icon hands_on %} Installing and launching the Container
 >>
 >> 1. [Install Docker](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform.
 >>    - Then, `pip3 install docker-compose`
@@ -304,7 +304,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >>
 >> 3. Clone it or download the zip and unzip it somewhere handy - such as `~/toolfactory-galaxy-server-main`
 >>
->> 4. Change to the compose directory - `cd ~/toolfactory-galaxy-server-main/compose`
+>> 4. Change to the `compose` directory - `cd ~/toolfactory-galaxy-server-main/compose`
 >>
 >>
 >>```
@@ -324,16 +324,25 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >>    > docker-compose pull
 >>    > docker-compose up
 >>    > ```
+>>    {: .code-in}
 >>
->>- Note:
->>   - `pull` is only needed the first time, or if there is a newer version available.
->>   - Add `-d` at the end of the `docker-compose` command to detach the terminal so you can keep working - but only after watching the process the first time please.
->>       - It is important to wait until the server stops sending log messages before you first log in. That means everything is ready. The first startup is very complex and takes time.
->>   - For the first time start, watching the startup process logs is highly recommended.
->>       - You will learn a lot about how a Galaxy server works and see when the Appliance is ready to use.
->>   - The docker containers may not fit or run well on an underpowered machine. Multiple cores and GB of RAM and fast disk are needed for an enjoyable appliance.
->>   - The demonstration history will only be available after logging in with the administrator credentials - `admin@galaxy.org` and password `password`. Check your histories if the smaller data-only history appears when you log in.
->>   - Change your admin password immediately but please note that the API key `fakekey` must remain as is please ensure that your appliance is not accessible to any potential miscreants on the local or public internet.
+>>  > ### {% icon tip %} Appliance tips
+>>  >
+>>  >  - `pull` is only needed the first time, or if there is a newer version available of the base `docker-galaxy-stable` images or of the toolfactory-configurator.
+>>  >  - Add `-d` at the end of the `docker-compose` command to detach the terminal so you can keep working - but only after watching the process the first time please.
+>>  >      - It is important to wait until the server stops sending log messages before you first log in. That means everything is ready. The first startup is very complex and takes time.
+>>  >  - For the first time start, watching the startup process logs is highly recommended.
+>>  >      - You will learn a lot about how a Galaxy server works and see when the Appliance is ready to use.
+>>  >  - The docker containers may not fit or run well on an underpowered machine. Multiple CPU cores, 8GB of RAM and fast disk are needed for an enjoyable appliance.
+>>  >  - The demonstration history will only be available after logging in with the administrator credentials - `admin@galaxy.org` and password `password`. Check your histories if the smaller data-only history appears when you log in.
+>>  >  - Change your admin password and if anyone else has possible network access, the API key `fakekey` used for configuration.
+>>  >  - It is important that your appliance is not accessible to any potential miscreants on the local or public internet.
+>>  >  - It is recommended for use only as a private disposable desktop development environment.
+>>  >    - The Appliance keeps no backup of any work.
+>>  >    - The user can backup the export directory if desired.
+>>  >    - An institutional server is a safer bet for preserving real research.
+>>  >
+>>  {: .tip}
 >>
 >>Your appliance should be running with a local Galaxy on [port 8080 of your workstation](http://localhost:8080) after a fair bit of activity.
 >>
@@ -406,11 +415,18 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >    > The first job takes longer in some installation scenarios because the ToolFactory dependencies are installed before the tool can run.
 >    {: .comment}
 >
-> 2. Explore the outputs. Check out the test results in the collection. Did the test pass?
+> 2. Explore the outputs - do they match what you expected?
 >
-> 3. TODO: Refresh your Galaxy page to see the tool in the toolbox
+> 3. Refresh the view - click the home icon (or the "Analysis" tab) - to see the new tool in the `ToolFactory Generated Tools` section of the tools menu.
 >
-> 4. TODO: Run the tool that has been added
+> 4. Run the tool that has been added - Select the new tool and examine the form. Check that all the changes are as they should be.
+>
+> 5. Test the tool using the `planemo_test` tool from the `ToolFactory` tool section. This may take 5 or 10 minutes if this is the first test on a new appliance. Subsequent startup will be quicker.
+>     - Check the lint report
+>     - View the planemo test report - is it ok? See if you can open up the details hidden when you first view the page.
+>     - Take a look at what Planemo did in the report log. It is very, very long and usually involves popping up and tearing down a Galaxy server twice.
+>     - This can take time, particularly if Conda dependencies are required as they can take a long time to initialise.
+>
 {: .hands_on}
 
 ### The Development Cycle
@@ -425,13 +441,13 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 1. Execute the tool when the form is completed.
 1. When the job is complete, refresh the page (Home icon or Analysis tab). The new tool will be found in the `ToolFactory Generated Tools` section, ready to run.
 1. Run the new tool and check that it does what you expect, or re-generate after adjusting the form settings as needed.
-1. If it needs any changes, open the collection created when the tool was generated. Open one of the collection items and use the {% icon galaxy-refresh %} rerun button to
-recreate the ToolFactory form as it was when you last ran it. Adjust as needed and use the tool form`execute` button to run the ToolFactory again with updated settings.
+1. If it needs any changes, open the XML history item created when the tool was generated and use the {% icon galaxy-refresh %} rerun button to
+recreate the ToolFactory form as it was when you last ran it. Adjust as needed and use the tool form`Execute` button to run the ToolFactory again with updated settings.
 1. Rinse, repeat.
 1. When everything is to your satisfaction, start the `planemo_test` tool in the ToolFactory menu and select the tool XML to finalise.
     1. A Planemo test will be run
     1. Time will depend on Conda dependencies. If none a minute or so.
-    1. A new tested archive, Planemo test report, Planemo lint output and a log of the test run will be in a new collection in the user's history when the job finishes.
+    1. A new tested archive, Planemo test report, Planemo lint output and a log of the test run will be in a new collection in the history when the job finishes.
     1. The tested toolshed archive can be downloaded from the history or found in `...compose/export/galaxy/tested_TF_archives/[tool name]`
 1. Warning: building a tool with the name `mytool` will overwrite any previously generated ToolFactory tool with the same name. Persisted jobs in user histories always allow older versions to be recreated if necessary.
 

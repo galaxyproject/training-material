@@ -226,26 +226,6 @@ automated code generator in a tailored, readily deployed appliance.
   - Sometimes it appears second - check the history list when first logging in if there are only half a dozen datasets in the current history - there should be a larger one too with all the samples.
   - If there is an empty history when you first log in, check the histories after a minute - if still not there, follow the Welcome page instructions to install it manually.
 - They can be examined to learn how the ToolFactory form was configured to generate the tool.
-- Click the Galaxy job `redo` {% icon galaxy-refresh %} button on any generated XML in the history.
-- This will show you the settings for the ToolFactory form used to generate the sample
-- Edit the form and regenerate an updated tool with your changes incorporated.
-- When the job completes, the edited version of that tool will be installed and ready to run.
-- Refresh the Galaxy panels to find it in the new "ToolFactory Generated Tools" section if the tool name is new.
-- Change the tool name to generate a new tool.
-  - *The Appliance will overwrite an existing tool of the same name without warning.*
-
-
-> ### {% icon announcement %} Note!
-> - This is the **first step** recommended
-> - Sample ToolFactory tools are the best way to learn how the ToolFactory works and how you might adapt the variations shown in your own work.
-> - They provide functional documentation to help you become comfortable using the ToolFactory.
-{: .announcement}
-
-- Viewing the samples history, you will see generated XML wrappers and some data files used for all the building and tool testing.
-- Each tool XML has a {% icon galaxy-refresh %} `rerun` button.
-    - Click that button and the ToolFactory form that generated the sample tool will appear.
-    - You can see how the tool was built using the ToolFactory's limited capacities.
-    - Most of the examples are trivial models that show how different kinds of scripts can be wrapped.
 
 <sup id='section3'>*</sup>
 # 3. Hands-on: Learning to use the ToolFactory
@@ -321,7 +301,6 @@ In practice, it's a flexible basis for generating many simple tools.
 >
 >
 {: .details}
-
 
 
 ## ToolFactory tips and tricks illustrated by some of the examples.
@@ -672,78 +651,121 @@ line will echo all the repeated parameters is shown in the example shown in the 
 
 #### The ToolFactory can wrap some Conda packages correctly using a simple wrapper script to work around limitations.
 
-- There are two demonstration tools that use Planemo as a Conda dependency
+- There are two tools that use Planemo as a Conda dependency
 - One runs `planemo test...` and the other `planemo lint....` on toolshed archives in a history
-- The linter XML is available below. It's a variant of the Hello example in using a bash script.
-- Instead of echo "Hello $1", it takes an input toolshed archive and writes the planemo lint output to STDOUT with this script pasted into the box:
+- The linter XML is available below. It is a small python script that parses out the tool name from the XML input file and
+runs planemo lint on the inferred tool path. STDOUT is captured with the linter output.
 
-```
-cp \$1 foo.tar
-tar -xvf foo.tar
-TOOLNAME=`find . -name "*.xml"`
-planemo lint $TOOLNAME >> $2
-```
-
-- The ToolFactory makes exposing these Planemo functions as Galaxy tools fairly easy. Planemo test will not work.
-- Similarly tractable Conda dependencies are also potential candidates for being quickly wrapped as tools
+- The ToolFactory exposes the Planemo function as Galaxy tool that works on ToolFactory generated XML files.
+  - Planemo test will not work as it involves planemo within planemo in a tool and this, unsurprisingly, does not seem to work.
+  - Some other tractable Conda dependencies are also potential candidates for being wrapped as tools
+- Many complex tools require manual coding to make them useable.
+  - Often complex tools hide data being moved between multiple dependencies such as samtools in the bwa tool.
+  - These are often not suitable for the simple automated tool generator in the ToolFactory.
+     - Sometimes a suitable script may be able to perform the complications needed so a tool can be created.
+     - A lot depends on the ingenuity and preferences of the developer.
+     - For specialist use and complex tools, the project developer supported tool building infrastructure is recommended.
 
 > ### {% icon details %} `planemo lint` demonstration tool generated XML
+> > The labels for outputs have been edited to include the tool name in this sample - this is not possible at present in the ToolFactory.
 > >```xml
 > ><tool name="planemo_lint" id="planemo_lint" version="0.01">
 > >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
-> >  <!--Created by planemo@galaxyproject.org at 08/01/2021 17:34:35 using the Galaxy Tool Factory.-->
-> >  <description>Lints a ToolFactory or other xml using planemo</description>
+> >  <!--Created by admin@galaxy.org at 18/05/2021 01:16:17 using the Galaxy Tool Factory.-->
+> >  <description>Runs Planemo lint on any ToolFactory xml history file</description>
 > >  <requirements>
-> >    <requirement version="0.74.1" type="package">planemo</requirement>
+> >    <requirement version="0.74.3" type="package">planemo</requirement>
+> >    <requirement version="3.7" type="package">python</requirement>
+> >    <requirement type="package" version="4.6.3">lxml</requirement>
 > >  </requirements>
 > >  <stdio>
 > >    <exit_code range="1:" level="fatal"/>
 > >  </stdio>
 > >  <version_command><![CDATA[echo "0.01"]]></version_command>
-> >  <command><![CDATA[bash
+> >  <command><![CDATA[python
 > >$runme
-> >$input1
+> >$ToolFactory_XML_to_be_linted
+> >>
 > >$lint_output]]></command>
 > >  <configfiles>
-> >    <configfile name="runme"><![CDATA[
-> >cp \$1 foo.tar
-> >tar -xvf foo.tar
-> >TOOLNAME=`find . -name "*.xml"`
-> >planemo lint \$TOOLNAME >> \$2
-> >]]></configfile>
+> >    <configfile name="runme"><![CDATA[#raw
+> >
+> >import lxml.etree as ET
+> >import os
+> >import subprocess
+> >import sys
+> >
+> >def main():
+> >    assert len(sys.argv) >= 2, 'Must have input xml on command line'
+> >    xmlin = sys.argv[1]
+> >    tree = ET.parse(xmlin)
+> >    root = tree.getroot()
+> >    toolname = root.get('id')
+> >    toolxml = os.path.join('/export/galaxy/tools/TFtools', toolname, '%s.xml' % toolname)
+> >    cl = ['planemo', 'lint', toolxml]
+> >    print('Running', cl)
+> >    p = subprocess.run(cl, shell=False)
+> >    if p.returncode > 0:
+> >         print('Planemo lint call returned error %d')
+> >    else:
+> >         print('Lint report ends')
+> >main()
+> >
+> >
+> >#end raw]]></configfile>
 > >  </configfiles>
 > >  <inputs>
-> >    <param optional="false" label="Toolshed archive to be linted" help="" format="tgz" multiple="false" type="data" name="input1" argument="input1"/>
+> >    <param name="ToolFactory_XML_to_be_linted" type="data" optional="false" label="ToolFactory XML to be linted" help="" format="xml" multiple="false"/>
 > >  </inputs>
 > >  <outputs>
-> >    <data name="lint_output" format="txt" label="lint_output" hidden="false"/>
+> >    <data name="lint_output" format="txt" label="${ToolFactory_XML_to_be_linted.name}_lint_output" hidden="false"/>
 > >  </outputs>
 > >  <tests>
 > >    <test>
 > >      <output name="lint_output" value="lint_output_sample" compare="diff" lines_diff="5"/>
-> >      <param name="input1" value="input1_sample"/>
+> >      <param name="ToolFactory_XML_to_be_linted" value="ToolFactory_XML_to_be_linted_sample"/>
 > >    </test>
 > >  </tests>
 > >  <help><![CDATA[
 > >
-> >*What it Does**
+> >**What it Does**
 > >
-> >planemo lint
+> >ToolFactory demonstration script using bash to run planemo lint from a history XML representing a tool.
 > >
-> >-----
+> >
+> >
+> >------
+> >
 > >
 > >Script::
 > >
-> >  tar -xvf $1
-> >  TOOLNAME=`find . -name "*.xml"`
-> >  echo "$$$$$TOOLNAME = $TOOLNAME" > $2
-> >  planemo lint $TOOLNAME >> $2
+> >    import lxml.etree as ET
+> >    import os
+> >    import subprocess
+> >    import sys
+> >    def main():
+> >        assert len(sys.argv) >= 2, 'Must have input xml on command line'
+> >        xmlin = sys.argv[1]
+> >        tree = ET.parse(xmlin)
+> >        root = tree.getroot()
+> >        toolname = root.get('id')
+> >        toolxml = os.path.join('/export/galaxy/tools/TFtools', toolname, '%s.xml' % toolname)
+> >        cl = ['planemo', 'lint', toolxml]
+> >        print('Running', cl)
+> >        p = subprocess.run(cl, shell=False)
+> >        if p.returncode > 0:
+> >             print('Planemo lint call returned error %d')
+> >        else:
+> >             print('Lint report ends')
+> >    main()
+> >#end raw
+> >]]></help>
+> >  <citations>
+> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
+> >  </citations>
+> ></tool>
 > >
-> >]></help>
-> ><citations>
-> >  <citation type="doi">10.1093/bioinformatics/bts573</citation>
-> ></citations>
-> >/tool>
+> >
 >>
 >>```
 {: .details}
