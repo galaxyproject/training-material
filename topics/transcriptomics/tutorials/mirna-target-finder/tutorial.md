@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Whole transcriptome analysis of Arabidopsis thaliana'
-zenodo_link: 'https://zenodo.org/record/4606701'
+zenodo_link: 'https://zenodo.org/record/4710649'
 tags:
     - miRNA
     - plants
@@ -76,20 +76,20 @@ The datasets to be used in this training can be classified into three groups: mi
 
 ### miRNA reads
 
-The miRNA datasets consist of six FASTQ files, obtained by using the Illumina GAxII sequencing platform. The plant samples were obtained from wild-type Ws-2 seedlings treated with mock or 1 μM EBR for 90 min before harvest. The original datasets are available in the NCBI SRA database, with the accession number [SRP258575](https://www.ncbi.nlm.nih.gov/sra?term=SRP258575){:target="_blank"}). As in the previous case, for this tutorial, we will use a reduced version of the data.
+The miRNA datasets consist of six FASTQ files, obtained by using the Illumina GAxII sequencing platform. The plant samples were obtained from wild-type Ws-2 seedlings treated with mock or 1 μM EBR for 90 min before harvest. The original datasets are available in the NCBI SRA database, with the accession number [SRP258575](https://www.ncbi.nlm.nih.gov/sra?term=SRP258575){:target="_blank"}. As in the previous case, for this tutorial, we will use a reduced version of the data.
 
 
 ### mRNA reads
 
-The mRNA datasets consist of four FASTQ files, generated through the Illumina HiSeq 2000 sequencing system. The samples were obtained from wild-type Columbia (Col-0) seedlings treated with mock or 100 nM BL for 4 hours. The original datasets are available in the NCBI SRA database, with the accession number [SRP032274](https://www.ncbi.nlm.nih.gov/sra?term=SRP032274){:target="_blank"}). For this tutorial, subsets from the original data were generated in order to reduce the analysis run time.
+The mRNA datasets consist of four FASTQ files, generated through the Illumina HiSeq 2000 sequencing system. The samples were obtained from wild-type Columbia (Col-0) seedlings treated with mock or 100 nM BL for 4 hours. The original datasets are available in the NCBI SRA database, with the accession number [SRP032274](https://www.ncbi.nlm.nih.gov/sra?term=SRP032274){:target="_blank"}. For this tutorial, subsets from the original data were generated in order to reduce the analysis run time.
 
 
 ### Additional datasets
 
 In addition to the RNA-Seq reads obtained from the NCBI database, we will use datasets from two sources:
 
-- [AtRTD2](https://ics.hutton.ac.uk/atRTD/){:target="_blank"}) is a high-quality transcript reference dataset developed to exploit the accuracy of transcript quantification tools such as __Salmon__ and __Kallisto__ in analyzing _Arabidopsis_ RNA-Seq data.
-- [PmiREN](http://pmiren.com/){:target="_blank"}) is a comprehensive functional plant miRNA database that includes more than 20,000 annotated miRNAs diverse plant species.
+- [AtRTD2](https://ics.hutton.ac.uk/atRTD/){:target="_blank"} is a high-quality transcript reference dataset developed to exploit the accuracy of transcript quantification tools such as __Salmon__ and __Kallisto__ in analyzing _Arabidopsis_ RNA-Seq data.
+- [PmiREN](http://pmiren.com/){:target="_blank"} is a comprehensive functional plant miRNA database that includes more than 20,000 annotated miRNAs diverse plant species.
 
 # Get data
 
@@ -106,16 +106,16 @@ The first step of our analysis consists of retrieving the miRNA-Seq datasets fro
 >    - Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >      ```
->      SRR11611349	Control miRNA	https://zenodo.org/record/4606701/files/SRR11611349_MIRNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
->      SRR11611350	Control miRNA	https://zenodo.org/record/4606701/files/SRR11611350_MIRNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
->      SRR11611351	Control miRNA	https://zenodo.org/record/4606701/files/SRR11611351.MIRNASEQ_CTLfastqsanger.gz	fastqsanger.gz
->      SRR11611352	BR treated miRNA	https://zenodo.org/record/4606701/files/SRR11611352_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
->      SRR11611353	BR treated miRNA	https://zenodo.org/record/4606701/files/SRR11611353_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
->      SRR11611354	BR treated miRNA	https://zenodo.org/record/4606701/files/SRR11611354_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
->      SRR1019436	Control mRNA	https://zenodo.org/record/4606701/files/SRR1019436_RNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
->      SRR1019437	Control mRNA	https://zenodo.org/record/4606701/files/SRR1019437_RNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
->      SRR1019438	BR treated mRNA	https://zenodo.org/record/4606701/files/SRR1019438_RNASEQ_BL.fastqsanger.gz	fastqsanger.gz
->      SRR1019439	BR treated mRNA	https://zenodo.org/record/4606701/files/SRR1019439_RNASEQ_BL.fastqsanger.gz	fastqsanger.gz
+>      SRR11611349	Control miRNA	https://zenodo.org/record/4710649/files/SRR11611349_MIRNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
+>      SRR11611350	Control miRNA	https://zenodo.org/record/4710649/files/SRR11611350_MIRNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
+>      SRR11611351	Control miRNA	https://zenodo.org/record/4710649/files/SRR11611351.MIRNASEQ_CTLfastqsanger.gz	fastqsanger.gz
+>      SRR11611352	BR treated miRNA	https://zenodo.org/record/4710649/files/SRR11611352_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
+>      SRR11611353	BR treated miRNA	https://zenodo.org/record/4710649/files/SRR11611353_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
+>      SRR11611354	BR treated miRNA	https://zenodo.org/record/4710649/files/SRR11611354_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
+>      SRR1019436	Control mRNA	https://zenodo.org/record/4710649/files/SRR1019436_RNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
+>      SRR1019437	Control mRNA	https://zenodo.org/record/4710649/files/SRR1019437_RNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
+>      SRR1019438	BR treated mRNA	https://zenodo.org/record/4710649/files/SRR1019438_RNASEQ_BL.fastqsanger.gz	fastqsanger.gz
+>      SRR1019439	BR treated mRNA	https://zenodo.org/record/4710649/files/SRR1019439_RNASEQ_BL.fastqsanger.gz	fastqsanger.gz
 >      ```
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
@@ -145,11 +145,11 @@ Next we will retrieve the remaining datasets.
 >    - Once again, copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >      ```
->      annotation_AtRTD2.gtf	https://zenodo.org/record/4606701/files/annotation_AtRTD2_19April2016.gtf.gz
->      transcriptome.fasta	https://zenodo.org/record/4606701/files/transcriptome_AtRTD2_12April2016.fasta.gz
->      star_miRNA_seq.fasta	https://zenodo.org/record/4606701/files/star_miRNA_seq.fasta
->      mature_miRNA_AT.fasta	https://zenodo.org/record/4606701/files/mature_miRNA_AT.fasta
->      miRNA_stem-loop_seq.fasta	https://zenodo.org/record/4606701/files/miRNA_stem-loop_seq.fasta
+>      annotation_AtRTD2.gtf	https://zenodo.org/record/4710649/files/annotation_AtRTD2_19April2016.gtf.gz
+>      transcriptome.fasta	https://zenodo.org/record/4710649/files/transcriptome_AtRTD2_12April2016.fasta.gz
+>      star_miRNA_seq.fasta	https://zenodo.org/record/4710649/files/star_miRNA_seq.fasta
+>      mature_miRNA_AT.fasta	https://zenodo.org/record/4710649/files/mature_miRNA_AT.fasta
+>      miRNA_stem-loop_seq.fasta	https://zenodo.org/record/4710649/files/miRNA_stem-loop_seq.fasta
 >      ```
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
@@ -188,7 +188,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 
 > ### {% icon comment %} Comments
 > In order to visualize the data from both collections together in the __MultiQC__ tool, it will be necessary to combine the results generated by __FastQC__.
-> For more information on the topic of quality control, please see our training materials [here](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html){:target="_blank"}).
+> For more information on the topic of quality control, please see our training materials [here](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html){:target="_blank"}.
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Initial quality check
@@ -309,12 +309,12 @@ To use the outputs generated by __MiRDeep2 Quantifier__ in the differential expr
 
 > ### {% icon hands_on %} Hands-on: Edition of MiRDeep2 Quantifier outputs
 >
-> 1. {% tool [Cut columns from a table](toolshed.g2.bx.psu.edu/repos/devteam/cut_columns) %} with the following parameters:
+> 1. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1,c2`
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-collection %} *"From"*: `MiRDeep2 control miRNA`
 > 2. Rename the output as `control miRNA counts`
-> 3. {% tool [Cut columns from a table](toolshed.g2.bx.psu.edu/repos/devteam/cut_columns) %}  with the following parameters:
+> 3. {% tool [Cut columns from a table](Cut1) %}  with the following parameters:
 >    - *"Cut columns"*: `c1,c2`
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-collection %} *"From"*: `MiRDeep2 BR treated miRNA`
@@ -662,7 +662,7 @@ To predict which miRNAs target which mRNAs, first we need their transcriptomic s
 > >
 > {: .comment}
 >
-> 1. {% tool [Cut columns from a table](toolshed.g2.bx.psu.edu/repos/devteam/cut_columns) %} with the following parameters:
+> 1. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1`
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-collection %} *"From"*: `Upregulated miRNAs`
@@ -688,7 +688,7 @@ To predict which miRNAs target which mRNAs, first we need their transcriptomic s
 To identify putative targets of upregulated miRNAs, it is necessary to obtain the sequences of all downregulated mRNAs in FASTA format.
 
 > ### {% icon hands_on %} Hands-on: Obtaining the gene sequences of downregulated mRNAs
-> 1. {% tool [Cut columns from a table](toolshed.g2.bx.psu.edu/repos/devteam/cut_columns) %} with the following parameters:
+> 1. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1`
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-collection %} *"From"*: `Downregulated mRNAs`
@@ -723,14 +723,14 @@ Congratulations! You have identified the following 5 potential genes involved in
 
 Finally, we can access all the information available on the genes identified in the TAIR database:
 
-- [AT5G10180](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT5G10180): ARABIDOPSIS SULFATE TRANSPORTER 68, AST6
-- [AT3G09220](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT3G09220): LAC7, LACCASE 7
-- [AT2G46850](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT2G46850): Protein kinase superfamily protein
-- [AT5G64260](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT5G64260): EXL2, EXORDIUM LIKE 2
-- [AT3G63200](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT3G63200): PATATIN-LIKE PROTEIN 9, PLA IIIB
+- [AT5G10180](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT5G10180){:target="_blank"}: ARABIDOPSIS SULFATE TRANSPORTER 68, AST6
+- [AT3G09220](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT3G09220){:target="_blank"}: LAC7, LACCASE 7
+- [AT2G46850](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT2G46850){:target="_blank"}: Protein kinase superfamily protein
+- [AT5G64260](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT5G64260){:target="_blank"}: EXL2, EXORDIUM LIKE 2
+- [AT3G63200](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT3G63200){:target="_blank"}: PATATIN-LIKE PROTEIN 9, PLA IIIB
 
 > ### {% icon comment %} Comments
-> One of the hypotheses that we could propose from our results is: the inhibition of the AT2G46850 gene can result in plants with improved resistance to drought conditions. Is it possible to validate it? Yes! We propose this approach: to acquire [AT2G46850 mutant seeds](https://abrc.osu.edu/stocks/392113){:target="_blank"}) and [wild type seeds](http://arabidopsis.info/StockInfo?NASC_id=N1093){:target="_blank"}), grow them under two controlled conditions: watered and drought stress, and analyze plant weight after 33 days (Figure 13).
+> One of the hypotheses that we could propose from our results is: the inhibition of the AT2G46850 gene can result in plants with improved resistance to drought conditions. Is it possible to validate it? Yes! We propose this approach: to acquire [AT2G46850 mutant seeds](https://abrc.osu.edu/stocks/392113){:target="_blank"} and [wild type seeds](http://arabidopsis.info/StockInfo?NASC_id=N1093){:target="_blank"}, grow them under two controlled conditions: watered and drought stress, and analyze plant weight after 33 days (Figure 13).
 >
 > ![fig16:Plant growth](../../images/arabidopis_growth_protocol.png "Arabidopsis growth conditions protocol ({% cite deOllas2019 %}).")
 >
@@ -738,22 +738,33 @@ Finally, we can access all the information available on the genes identified in 
 
 # Optional exercise
 
-As additional activity, you can try to repeat the workflow by using the sequences stored in the NCBI GEO database with the accession number `GSM3373998`. In that case, we will compare gene expression patterns of mutants overexpressing the brassinosteroid receptor BRL3 under two experimental conditions: control and water-stress.
+As additional activity, you can try to repeat the workflow by using the sequences stored in the NCBI GEO database with the accession number `GSE119382`. In that case, we will compare gene expression patterns of mutants overexpressing the brassinosteroid receptor BRL3 under two experimental conditions: control and drought-stress. The required datasets are available in the data library:
 
-```
-SRR7779222	BLR3 Drought mRNA	https://zenodo.org/record/4672228/files/SRR7779222_BLR3_Drought.fastqsanger.gz	fastqsanger.gz
-SRR7779223	BLR3 Drought mRNA	https://zenodo.org/record/4672228/files/SRR7779223_BLR3_Drought.fastqsanger.gz	fastqsanger.gz
-SRR7779224	BLR3 Drought mRNA	https://zenodo.org/record/4672228/files/SRR7779224_BLR3_Drought.fastqsanger.gz	fastqsanger.gz
-SRR7779228	BLR3 Watered mRNA	https://zenodo.org/record/4672228/files/SRR7779228_BLR3_Watered.fastqsanger.gz	fastqsanger.gz
-SRR7779229	BLR3 Watered mRNA	https://zenodo.org/record/4672228/files/SRR7779229_BLR3_Watered.fastqsanger.gz	fastqsanger.gz
-```
+> ### {% icon hands_on %} Hands-on: Import data from the Data Libraries
+> 1. Go into __Shared data__ (top panel) and click on __Data Libraries__
+> 2. In the search box enter the following identifier: `4710649`
+> 3. Select the following files:
+> ```
+> https://zenodo.org/record/4710649/files/SRR7779222_BRL3_mRNA_drought.fastqsanger.gz
+> https://zenodo.org/record/4710649/files/SRR7779223_BRL3_mRNA_drought.fastqsanger.gz
+> https://zenodo.org/record/4710649/files/SRR7779224_BRL3_mRNA_drought.fastqsanger.gz
+> ```
+> 4. Click on __Export to History__ and __as a Collection__
+> 5. In the pop-up window press <kbd>Continue</kbd>
+> 6. Provide it the name `BRL3 mRNA drought` and push <kbd>Create list</kbd>
+> 7. Repeat the previous procedure with the remaining files:
+> ```
+> https://zenodo.org/record/4710649/files/SRR7779228_BRL3_mRNA_watered.fastqsanger.gz
+> https://zenodo.org/record/4710649/files/SRR7779229_BRL3_mRNA_watered.fastqsanger.gz
+> ```
+> 9. Finally provide it the name `BRL3 mRNA control` and push <kbd>Create list</kbd>
+{: .hands_on}
 
 We will use the upregulated miRNAs obtained in the previous analysis in order to identify potential targets.
 
 ```
-Upregulated miRNA   https://zenodo.org/record/4672228/files/upregulated_miRNA_BR_complete_dataset.fasta
+Upregulated miRNA   https://zenodo.org/record/4710649/files/upregulated_miRNA_BR_complete_dataset.fasta
 ```
-
 
 # Conclusion
 {:.no_toc}

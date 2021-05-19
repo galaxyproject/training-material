@@ -1,457 +1,530 @@
 {
-  "a_galaxy_workflow": "true",
-  "annotation": "Downstream Single-cell RNA analysis with RaceID",
-  "format-version": "0.1",
-  "name": "RaceID3 Split Workflow",
-  "steps": {
-    "0": {
-      "annotation": "",
-      "content_id": null,
-      "errors": null,
-      "id": 0,
-      "input_connections": {},
-      "inputs": [],
-      "label": "count_matrix",
-      "name": "Input dataset",
-      "outputs": [],
-      "position": {
-        "left": 215,
-        "top": 233
-      },
-      "tool_id": null,
-      "tool_state": "{}",
-      "tool_version": null,
-      "type": "data_input",
-      "uuid": "7145fffc-b2d4-4661-8da8-0ce70cd874a7",
-      "workflow_outputs": []
+    "a_galaxy_workflow": "true",
+    "annotation": "Downstream Single-cell RNA analysis with RaceID",
+    "format-version": "0.1",
+    "name": "RaceID Workflow",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Tabular Matrix"
+                }
+            ],
+            "label": "Tabular Matrix",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 167.21666717529297,
+                "height": 48.96665954589844,
+                "left": 38.75,
+                "right": 198.75,
+                "top": 118.25000762939453,
+                "width": 160,
+                "x": 38.75,
+                "y": 118.25000762939453
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "ba3fe014-c728-486e-8ce4-55be24df0682",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "0c858705-5e28-44e0-8023-46aec4a01725"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "raceid_filtnormconf",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "intable": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Initial processing using RaceID",
+            "outputs": [
+                {
+                    "name": "outtable",
+                    "type": "tabular"
+                },
+                {
+                    "name": "outpdf",
+                    "type": "pdf"
+                },
+                {
+                    "name": "outrdat",
+                    "type": "rdata"
+                },
+                {
+                    "name": "outlog",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 410.7666702270508,
+                "height": 293.76666259765625,
+                "left": 272.5,
+                "right": 432.5,
+                "top": 117.00000762939453,
+                "width": 160,
+                "x": 272.5,
+                "y": 117.00000762939453
+            },
+            "post_job_actions": {},
+            "tool_id": "raceid_filtnormconf",
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/tmp/tmp8dp_jicw/galaxy-dev/tool-data/shared/ucsc/chrom/?.len\", \"filt\": {\"mintotal\": \"3000\", \"minexpr\": \"5\", \"minnumber\": \"5\", \"hist_geq_one\": \"false\", \"use\": {\"def\": \"yes\", \"__current_case__\": 0}}, \"intable\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.3+galaxy0",
+            "type": "tool",
+            "uuid": "6fd8dbde-93d2-4903-865f-78cc3c2fa299",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outtable",
+                    "uuid": "d9293468-efef-4a10-89a6-0064a1740afd"
+                },
+                {
+                    "label": null,
+                    "output_name": "outpdf",
+                    "uuid": "358ddb8a-a6ca-4162-8d53-354902f905cf"
+                },
+                {
+                    "label": null,
+                    "output_name": "outrdat",
+                    "uuid": "68451b36-8875-45ca-bdb9-e315cc836e49"
+                },
+                {
+                    "label": null,
+                    "output_name": "outlog",
+                    "uuid": "35505252-c65a-4572-9d66-b0e69893c01b"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "raceid_clustering",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "inputrds": {
+                    "id": 1,
+                    "output_name": "outrdat"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Clustering using RaceID",
+            "outputs": [
+                {
+                    "name": "outpdf",
+                    "type": "pdf"
+                },
+                {
+                    "name": "outrdat",
+                    "type": "rdata"
+                },
+                {
+                    "name": "outassignments",
+                    "type": "tabular"
+                },
+                {
+                    "name": "outgenelist",
+                    "type": "tabular"
+                },
+                {
+                    "name": "outlog",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 466.46668243408203,
+                "height": 350.7166748046875,
+                "left": 520,
+                "right": 680,
+                "top": 115.75000762939453,
+                "width": 160,
+                "x": 520,
+                "y": 115.75000762939453
+            },
+            "post_job_actions": {},
+            "tool_id": "raceid_clustering",
+            "tool_state": "{\"__input_ext\": \"rdata\", \"chromInfo\": \"/tmp/tmp8dp_jicw/galaxy-dev/tool-data/shared/ucsc/chrom/?.len\", \"clust\": {\"metric\": \"pearson\", \"funcluster\": \"kmedoids\", \"use\": {\"def\": \"yes\", \"__current_case__\": 0}}, \"extra\": {\"tablelim\": \"25\", \"plotlim\": \"10\", \"foldchange\": \"1.0\", \"pvalue\": \"0.01\"}, \"inputrds\": {\"__class__\": \"ConnectedValue\"}, \"outlier\": {\"outminc\": \"5\", \"outlg\": \"2\", \"final\": \"false\", \"use\": {\"def\": \"yes\", \"__current_case__\": 0}}, \"tsne\": {\"perplexity\": \"30\", \"knn\": \"10\", \"umap_nn\": \"15\", \"use\": {\"def\": \"yes\", \"__current_case__\": 0}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.3+galaxy0",
+            "type": "tool",
+            "uuid": "ca88c6cb-03e0-400c-8942-4c7ac0545a67",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outpdf",
+                    "uuid": "48b02eb6-1b70-4d1f-a210-03aa93a189d8"
+                },
+                {
+                    "label": null,
+                    "output_name": "outrdat",
+                    "uuid": "e59d7dff-7e4b-42b4-ba62-09858f83c75c"
+                },
+                {
+                    "label": null,
+                    "output_name": "outassignments",
+                    "uuid": "2514a8cc-48a9-4cf2-9640-8663f81d6cd6"
+                },
+                {
+                    "label": null,
+                    "output_name": "outgenelist",
+                    "uuid": "b69f7d2f-4efe-41ca-ac2f-c74d45c2327e"
+                },
+                {
+                    "label": null,
+                    "output_name": "outlog",
+                    "uuid": "68cbc6ab-4697-4042-b5a0-0d9cd842e09a"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "raceid_trajectory",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "inputrds": {
+                    "id": 2,
+                    "output_name": "outrdat"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Lineage computation using StemID",
+            "outputs": [
+                {
+                    "name": "outpdf",
+                    "type": "pdf"
+                },
+                {
+                    "name": "outrdat",
+                    "type": "rdata"
+                }
+            ],
+            "position": {
+                "bottom": 298.08333587646484,
+                "height": 179.8333282470703,
+                "left": 778.75,
+                "right": 938.75,
+                "top": 118.25000762939453,
+                "width": 160,
+                "x": 778.75,
+                "y": 118.25000762939453
+            },
+            "post_job_actions": {},
+            "tool_id": "raceid_trajectory",
+            "tool_state": "{\"__input_ext\": \"rdata\", \"chromInfo\": \"/tmp/tmp8dp_jicw/galaxy-dev/tool-data/shared/ucsc/chrom/?.len\", \"comppval\": {\"pthr\": \"0.01\", \"sensitive\": \"false\"}, \"compscore\": {\"nn\": \"1\", \"scthr\": \"0.0\"}, \"inputrds\": {\"__class__\": \"ConnectedValue\"}, \"plotgraph\": {\"showcells\": \"false\", \"scthr\": \"0.0\", \"use\": {\"def\": \"yes\", \"__current_case__\": 0}}, \"projback\": {\"pdishuf\": \"2000\", \"use\": {\"def\": \"yes\", \"__current_case__\": 0}}, \"projcell\": {\"knn\": \"3\", \"cthr\": \"5\", \"use\": {\"def\": \"yes\", \"__current_case__\": 0}}, \"use_log\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.3+galaxy0",
+            "type": "tool",
+            "uuid": "515732a4-cba5-402a-9cc8-11980c4815c6",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outpdf",
+                    "uuid": "5de0f2cb-41a8-4278-8faa-20cdb534f3c4"
+                },
+                {
+                    "label": null,
+                    "output_name": "outrdat",
+                    "uuid": "91b567ed-cf6e-4ff4-a84d-186d49502dff"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "raceid_inspectclusters",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "inputrds": {
+                    "id": 2,
+                    "output_name": "outrdat"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cluster Inspection using RaceID",
+            "outputs": [
+                {
+                    "name": "outpdf",
+                    "type": "pdf"
+                },
+                {
+                    "name": "outlog",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 512.9500045776367,
+                "height": 147.1999969482422,
+                "left": 773.75,
+                "right": 933.75,
+                "top": 365.75000762939453,
+                "width": 160,
+                "x": 773.75,
+                "y": 365.75000762939453
+            },
+            "post_job_actions": {},
+            "tool_id": "raceid_inspectclusters",
+            "tool_state": "{\"__input_ext\": \"rdata\", \"chromInfo\": \"/tmp/tmp8dp_jicw/galaxy-dev/tool-data/shared/ucsc/chrom/?.len\", \"diffgtest\": {\"do_opt\": \"no\", \"__current_case__\": 0}, \"gois\": {\"do_opt\": \"no\", \"__current_case__\": 0}, \"inputrds\": {\"__class__\": \"ConnectedValue\"}, \"plotgen\": {\"do_opt\": \"yes\", \"__current_case__\": 1, \"clusts_plot\": \"\"}, \"plotsym\": {\"do_opt\": \"no\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.3+galaxy0",
+            "type": "tool",
+            "uuid": "727ee241-4de7-408f-867a-fc1ed21c23cb",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outpdf",
+                    "uuid": "051cbdaa-6513-4239-91b6-e22004f6469f"
+                },
+                {
+                    "label": null,
+                    "output_name": "outlog",
+                    "uuid": "bf324238-9739-4960-90c0-2935d225bd42"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "raceid_inspectclusters",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "inputrds": {
+                    "id": 2,
+                    "output_name": "outrdat"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cluster Inspection using RaceID",
+            "outputs": [
+                {
+                    "name": "outpdf",
+                    "type": "pdf"
+                },
+                {
+                    "name": "outlog",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 712.9500045776367,
+                "height": 147.1999969482422,
+                "left": 773.75,
+                "right": 933.75,
+                "top": 565.7500076293945,
+                "width": 160,
+                "x": 773.75,
+                "y": 565.7500076293945
+            },
+            "post_job_actions": {},
+            "tool_id": "raceid_inspectclusters",
+            "tool_state": "{\"__input_ext\": \"rdata\", \"chromInfo\": \"/tmp/tmp8dp_jicw/galaxy-dev/tool-data/shared/ucsc/chrom/?.len\", \"diffgtest\": {\"do_opt\": \"no\", \"__current_case__\": 0}, \"gois\": {\"do_opt\": \"yes\", \"__current_case__\": 1, \"inspect_goi_genes\": \"Gstm3, St3gal4, Gna11\", \"inspect_goi_cells\": \"\", \"use\": {\"def\": \"yes\", \"__current_case__\": 0}}, \"inputrds\": {\"__class__\": \"ConnectedValue\"}, \"plotgen\": {\"do_opt\": \"no\", \"__current_case__\": 0}, \"plotsym\": {\"do_opt\": \"no\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.3+galaxy0",
+            "type": "tool",
+            "uuid": "6db63f68-65bc-4bb5-96a2-9d3e75712287",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outpdf",
+                    "uuid": "344cd8bc-01a1-4614-8def-806815a615af"
+                },
+                {
+                    "label": null,
+                    "output_name": "outlog",
+                    "uuid": "3268d277-37a0-4081-ae95-8c7a83efb903"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "raceid_inspectclusters",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "inputrds": {
+                    "id": 2,
+                    "output_name": "outrdat"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cluster Inspection using RaceID",
+            "outputs": [
+                {
+                    "name": "outpdf",
+                    "type": "pdf"
+                },
+                {
+                    "name": "outlog",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 827.9499664306641,
+                "height": 147.1999969482422,
+                "left": 1035,
+                "right": 1195,
+                "top": 680.7499694824219,
+                "width": 160,
+                "x": 1035,
+                "y": 680.7499694824219
+            },
+            "post_job_actions": {},
+            "tool_id": "raceid_inspectclusters",
+            "tool_state": "{\"__input_ext\": \"rdata\", \"chromInfo\": \"/tmp/tmp8dp_jicw/galaxy-dev/tool-data/shared/ucsc/chrom/?.len\", \"diffgtest\": {\"do_opt\": \"yes\", \"__current_case__\": 1, \"set_a\": {\"name_set\": \"Cells in 1\", \"meth\": {\"type\": \"cln\", \"__current_case__\": 0, \"selector\": \"1\"}}, \"set_b\": {\"name_set\": \"Cells in 3\", \"meth\": {\"type\": \"cln\", \"__current_case__\": 0, \"selector\": \"3\"}}, \"use\": {\"def\": \"yes\", \"__current_case__\": 0}}, \"gois\": {\"do_opt\": \"no\", \"__current_case__\": 0}, \"inputrds\": {\"__class__\": \"ConnectedValue\"}, \"plotgen\": {\"do_opt\": \"no\", \"__current_case__\": 0}, \"plotsym\": {\"do_opt\": \"no\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.3+galaxy0",
+            "type": "tool",
+            "uuid": "57c7332a-c6f5-484f-8a5c-d5467d320e72",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outpdf",
+                    "uuid": "d028c3e8-3acb-44ba-968a-74b1cdfb4bb1"
+                },
+                {
+                    "label": null,
+                    "output_name": "outlog",
+                    "uuid": "8f9f3e29-3c56-4fcf-af0a-f2bea2c10234"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "raceid_inspecttrajectory",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "inputrds": {
+                    "id": 3,
+                    "output_name": "outrdat"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Lineage Branch Analysis using StemID",
+            "outputs": [
+                {
+                    "name": "outpdf",
+                    "type": "pdf"
+                },
+                {
+                    "name": "outdiffgenes",
+                    "type": "tabular"
+                },
+                {
+                    "name": "outlog",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 372.61666107177734,
+                "height": 253.1166534423828,
+                "left": 1041.25,
+                "right": 1201.25,
+                "top": 119.50000762939453,
+                "width": 160,
+                "x": 1041.25,
+                "y": 119.50000762939453
+            },
+            "post_job_actions": {},
+            "tool_id": "raceid_inspecttrajectory",
+            "tool_state": "{\"__input_ext\": \"rdata\", \"chromInfo\": \"/tmp/tmp8dp_jicw/galaxy-dev/tool-data/shared/ucsc/chrom/?.len\", \"inputrds\": {\"__class__\": \"ConnectedValue\"}, \"trjfid\": {\"basic\": {\"doit\": \"no\", \"__current_case__\": 0}}, \"trjsid\": {\"basic\": {\"doit\": \"yes\", \"__current_case__\": 1, \"i\": \"3\", \"br\": \"1,3,5\", \"use\": {\"def\": \"yes\", \"__current_case__\": 0}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.3+galaxy0",
+            "type": "tool",
+            "uuid": "4a519b59-2319-4811-969e-3b872f95c377",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outpdf",
+                    "uuid": "1e19e4d3-802d-4713-b920-ba8264bce2d0"
+                },
+                {
+                    "label": null,
+                    "output_name": "outdiffgenes",
+                    "uuid": "814ac5ce-500d-4ea2-bbc7-ab8c4f5d2962"
+                },
+                {
+                    "label": null,
+                    "output_name": "outlog",
+                    "uuid": "4404cdf2-ee33-4e08-8fed-83b52bbfad88"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "raceid_inspecttrajectory",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "inputrds": {
+                    "id": 3,
+                    "output_name": "outrdat"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Lineage Branch Analysis using StemID",
+            "outputs": [
+                {
+                    "name": "outpdf",
+                    "type": "pdf"
+                },
+                {
+                    "name": "outlog",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 625.5833358764648,
+                "height": 179.8333282470703,
+                "left": 1040,
+                "right": 1200,
+                "top": 445.75000762939453,
+                "width": 160,
+                "x": 1040,
+                "y": 445.75000762939453
+            },
+            "post_job_actions": {},
+            "tool_id": "raceid_inspecttrajectory",
+            "tool_state": "{\"__input_ext\": \"rdata\", \"chromInfo\": \"/tmp/tmp8dp_jicw/galaxy-dev/tool-data/shared/ucsc/chrom/?.len\", \"inputrds\": {\"__class__\": \"ConnectedValue\"}, \"trjfid\": {\"basic\": {\"doit\": \"yes\", \"__current_case__\": 1, \"cellsfromz\": \"1,3,5\", \"use\": {\"def\": \"yes\", \"__current_case__\": 0}, \"som\": {\"doit\": \"no\", \"__current_case__\": 0}}}, \"trjsid\": {\"basic\": {\"doit\": \"no\", \"__current_case__\": 0}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.3+galaxy0",
+            "type": "tool",
+            "uuid": "883ffd05-1545-449f-8028-c45c0f9edfd5",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outpdf",
+                    "uuid": "8ef7bad4-ff15-42d2-acc4-6c5bc5de89e4"
+                },
+                {
+                    "label": null,
+                    "output_name": "outlog",
+                    "uuid": "23f0fab3-0128-443a-a26a-a3e40cee4578"
+                }
+            ]
+        }
     },
-    "1": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_filtnormconf/raceid_filtnormconf/3.0.2.1",
-      "errors": null,
-      "id": 1,
-      "input_connections": {
-        "intable": {
-          "id": 0,
-          "output_name": "output"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool Filtering, Normalisation, and Confounder Removal using RaceID",
-          "name": "intable"
-        }
-      ],
-      "label": "Filtering, Normalisation, and Confounder Removal",
-      "name": "Filtering, Normalisation, and Confounder Removal using RaceID",
-      "outputs": [
-        {
-          "name": "outpdf",
-          "type": "pdf"
-        },
-        {
-          "name": "outrdat",
-          "type": "rdata"
-        },
-        {
-          "name": "outlog",
-          "type": "txt"
-        }
-      ],
-      "position": {
-        "left": 200.5,
-        "top": 332
-      },
-      "post_job_actions": {},
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_filtnormconf/raceid_filtnormconf/3.0.2.1",
-      "tool_shed_repository": {
-        "changeset_revision": "8dc8ff057b0f",
-        "name": "raceid_filtnormconf",
-        "owner": "iuc",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"intable\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"filt\": \"{\\\"minexpr\\\": \\\"5\\\", \\\"minnumber\\\": \\\"5\\\", \\\"mintotal\\\": \\\"3000\\\", \\\"use\\\": {\\\"__current_case__\\\": 0, \\\"def\\\": \\\"yes\\\"}}\"}",
-      "tool_version": "3.0.2.1",
-      "type": "tool",
-      "uuid": "e82e0f74-ca4f-48e9-9a79-a5b09b63512c",
-      "workflow_outputs": [
-        {
-          "label": "filterlog",
-          "output_name": "outlog",
-          "uuid": "5f4e6e0c-42c8-42c0-b5b4-69efe4222886"
-        }
-      ]
-    },
-    "2": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_clustering/raceid_clustering/3.0.2.1",
-      "errors": null,
-      "id": 2,
-      "input_connections": {
-        "inputrds": {
-          "id": 1,
-          "output_name": "outrdat"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool Clustering using RaceID",
-          "name": "inputrds"
-        }
-      ],
-      "label": "Computing Clusters",
-      "name": "Clustering using RaceID",
-      "outputs": [
-        {
-          "name": "outpdf",
-          "type": "pdf"
-        },
-        {
-          "name": "outrdat",
-          "type": "rdata"
-        },
-        {
-          "name": "outgenelist",
-          "type": "tabular"
-        },
-        {
-          "name": "outlog",
-          "type": "txt"
-        }
-      ],
-      "position": {
-        "left": 322,
-        "top": 526
-      },
-      "post_job_actions": {},
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_clustering/raceid_clustering/3.0.2.1",
-      "tool_shed_repository": {
-        "changeset_revision": "4ea021bd7513",
-        "name": "raceid_clustering",
-        "owner": "iuc",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"__page__\": null, \"clust\": \"{\\\"funcluster\\\": \\\"kmedoids\\\", \\\"metric\\\": \\\"pearson\\\", \\\"use\\\": {\\\"__current_case__\\\": 0, \\\"def\\\": \\\"yes\\\"}}\", \"extra\": \"{\\\"foldchange\\\": \\\"1.0\\\", \\\"plotlim\\\": \\\"10\\\", \\\"pvalue\\\": \\\"0.01\\\", \\\"tablelim\\\": \\\"25\\\"}\", \"tsne\": \"{\\\"knn\\\": \\\"10\\\", \\\"perplexity\\\": \\\"30\\\", \\\"use\\\": {\\\"__current_case__\\\": 0, \\\"def\\\": \\\"yes\\\"}}\", \"__rerun_remap_job_id__\": null, \"outlier\": \"{\\\"final\\\": \\\"false\\\", \\\"outlg\\\": \\\"2\\\", \\\"outminc\\\": \\\"5\\\", \\\"use\\\": {\\\"__current_case__\\\": 0, \\\"def\\\": \\\"yes\\\"}}\", \"inputrds\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
-      "tool_version": "3.0.2.1",
-      "type": "tool",
-      "uuid": "1e2cdc00-219a-421c-9b2c-76da52d4f6c6",
-      "workflow_outputs": [
-        {
-          "label": "clustering_log",
-          "output_name": "outlog",
-          "uuid": "6f0b7aa8-dd05-414c-9b81-b2b26c181bc5"
-        },
-        {
-          "label": "clustering_genelist",
-          "output_name": "outgenelist",
-          "uuid": "619c2479-4e9f-4fef-85ed-ed4b27c4a78d"
-        }
-      ]
-    },
-    "3": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/3.0.2.1",
-      "errors": null,
-      "id": 3,
-      "input_connections": {
-        "inputrds": {
-          "id": 2,
-          "output_name": "outrdat"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool Cluster Inspection using RaceID",
-          "name": "inputrds"
-        }
-      ],
-      "label": "Cluster Insp. (All Clusters)",
-      "name": "Cluster Inspection using RaceID",
-      "outputs": [
-        {
-          "name": "outpdf",
-          "type": "pdf"
-        },
-        {
-          "name": "outlog",
-          "type": "txt"
-        }
-      ],
-      "position": {
-        "left": 740,
-        "top": 246
-      },
-      "post_job_actions": {},
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/3.0.2.1",
-      "tool_shed_repository": {
-        "changeset_revision": "9fec5dd8fbb9",
-        "name": "raceid_inspectclusters",
-        "owner": "iuc",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"__page__\": null, \"gois\": \"{\\\"__current_case__\\\": 0, \\\"do_opt\\\": \\\"no\\\"}\", \"diffgtest\": \"{\\\"__current_case__\\\": 0, \\\"do_opt\\\": \\\"no\\\"}\", \"__rerun_remap_job_id__\": null, \"plotsym\": \"{\\\"__current_case__\\\": 0, \\\"do_opt\\\": \\\"no\\\"}\", \"inputrds\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"plotgen\": \"{\\\"__current_case__\\\": 1, \\\"do_opt\\\": \\\"yes\\\"}\"}",
-      "tool_version": "3.0.2.1",
-      "type": "tool",
-      "uuid": "ee9b5cb1-dd43-48ec-982e-61d2893ec5d5",
-      "workflow_outputs": []
-    },
-    "4": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/3.0.2.1",
-      "errors": null,
-      "id": 4,
-      "input_connections": {
-        "inputrds": {
-          "id": 2,
-          "output_name": "outrdat"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool Cluster Inspection using RaceID",
-          "name": "inputrds"
-        }
-      ],
-      "label": "Cluster Insp. (Diff Gene)",
-      "name": "Cluster Inspection using RaceID",
-      "outputs": [
-        {
-          "name": "outpdf",
-          "type": "pdf"
-        },
-        {
-          "name": "outlog",
-          "type": "txt"
-        }
-      ],
-      "position": {
-        "left": 741,
-        "top": 372
-      },
-      "post_job_actions": {},
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/3.0.2.1",
-      "tool_shed_repository": {
-        "changeset_revision": "9fec5dd8fbb9",
-        "name": "raceid_inspectclusters",
-        "owner": "iuc",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"__page__\": null, \"gois\": \"{\\\"__current_case__\\\": 0, \\\"do_opt\\\": \\\"no\\\"}\", \"diffgtest\": \"{\\\"__current_case__\\\": 1, \\\"do_opt\\\": \\\"yes\\\", \\\"set_a\\\": {\\\"meth\\\": {\\\"__current_case__\\\": 0, \\\"selector\\\": \\\"1\\\", \\\"type\\\": \\\"cln\\\"}, \\\"name_set\\\": \\\"Cells in 1\\\"}, \\\"set_b\\\": {\\\"meth\\\": {\\\"__current_case__\\\": 0, \\\"selector\\\": \\\"3\\\", \\\"type\\\": \\\"cln\\\"}, \\\"name_set\\\": \\\"Cells in 3\\\"}, \\\"use\\\": {\\\"__current_case__\\\": 0, \\\"def\\\": \\\"yes\\\"}}\", \"__rerun_remap_job_id__\": null, \"plotsym\": \"{\\\"__current_case__\\\": 0, \\\"do_opt\\\": \\\"no\\\"}\", \"inputrds\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"plotgen\": \"{\\\"__current_case__\\\": 0, \\\"do_opt\\\": \\\"no\\\"}\"}",
-      "tool_version": "3.0.2.1",
-      "type": "tool",
-      "uuid": "8678cbea-7a6a-445e-95ec-9afeabce6a1d",
-      "workflow_outputs": []
-    },
-    "5": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/3.0.2.1",
-      "errors": null,
-      "id": 5,
-      "input_connections": {
-        "inputrds": {
-          "id": 2,
-          "output_name": "outrdat"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool Cluster Inspection using RaceID",
-          "name": "inputrds"
-        }
-      ],
-      "label": "Cluster Insp. (GOI)",
-      "name": "Cluster Inspection using RaceID",
-      "outputs": [
-        {
-          "name": "outpdf",
-          "type": "pdf"
-        },
-        {
-          "name": "outlog",
-          "type": "txt"
-        }
-      ],
-      "position": {
-        "left": 738,
-        "top": 504
-      },
-      "post_job_actions": {},
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/3.0.2.1",
-      "tool_shed_repository": {
-        "changeset_revision": "9fec5dd8fbb9",
-        "name": "raceid_inspectclusters",
-        "owner": "iuc",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"__page__\": null, \"gois\": \"{\\\"__current_case__\\\": 1, \\\"do_opt\\\": \\\"yes\\\", \\\"inspect_goi_cells\\\": \\\"\\\", \\\"inspect_goi_genes\\\": \\\"Ptma,Rps2\\\", \\\"use\\\": {\\\"__current_case__\\\": 0, \\\"def\\\": \\\"yes\\\"}}\", \"diffgtest\": \"{\\\"__current_case__\\\": 0, \\\"do_opt\\\": \\\"no\\\"}\", \"__rerun_remap_job_id__\": null, \"plotsym\": \"{\\\"__current_case__\\\": 0, \\\"do_opt\\\": \\\"no\\\"}\", \"inputrds\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"plotgen\": \"{\\\"__current_case__\\\": 0, \\\"do_opt\\\": \\\"no\\\"}\"}",
-      "tool_version": "3.0.2.1",
-      "type": "tool",
-      "uuid": "a057c85c-1b79-47d4-8e6b-82a9e3772a64",
-      "workflow_outputs": []
-    },
-    "6": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_trajectory/raceid_trajectory/3.0.2.1",
-      "errors": null,
-      "id": 6,
-      "input_connections": {
-        "inputrds": {
-          "id": 2,
-          "output_name": "outrdat"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool Lineage computation using StemID",
-          "name": "inputrds"
-        }
-      ],
-      "label": null,
-      "name": "Lineage computation using StemID",
-      "outputs": [
-        {
-          "name": "outpdf",
-          "type": "pdf"
-        },
-        {
-          "name": "outrdat",
-          "type": "rdata"
-        },
-        {
-          "name": "outlog",
-          "type": "txt"
-        }
-      ],
-      "position": {
-        "left": 540,
-        "top": 760
-      },
-      "post_job_actions": {},
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_trajectory/raceid_trajectory/3.0.2.1",
-      "tool_shed_repository": {
-        "changeset_revision": "ff7cd3c7c1df",
-        "name": "raceid_trajectory",
-        "owner": "iuc",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"compscore\": \"{\\\"nn\\\": \\\"1\\\", \\\"scthr\\\": \\\"0.0\\\"}\", \"__page__\": null, \"plotgraph\": \"{\\\"scthr\\\": \\\"0.0\\\", \\\"showcells\\\": \\\"false\\\", \\\"use\\\": {\\\"__current_case__\\\": 0, \\\"def\\\": \\\"yes\\\"}}\", \"__rerun_remap_job_id__\": null, \"comppval\": \"{\\\"pthr\\\": \\\"0.01\\\", \\\"sensitive\\\": \\\"false\\\"}\", \"use_log\": \"\\\"false\\\"\", \"inputrds\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"projback\": \"{\\\"pdishuf\\\": \\\"2000\\\", \\\"use\\\": {\\\"__current_case__\\\": 0, \\\"def\\\": \\\"yes\\\"}}\", \"projcell\": \"{\\\"cthr\\\": \\\"5\\\", \\\"knn\\\": \\\"3\\\", \\\"use\\\": {\\\"__current_case__\\\": 0, \\\"def\\\": \\\"yes\\\"}}\"}",
-      "tool_version": "3.0.2.1",
-      "type": "tool",
-      "uuid": "074e6d61-83cf-41cc-a5ae-f657121f43d1",
-      "workflow_outputs": []
-    },
-    "7": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspecttrajectory/raceid_inspecttrajectory/3.0.2.1",
-      "errors": null,
-      "id": 7,
-      "input_connections": {
-        "inputrds": {
-          "id": 6,
-          "output_name": "outrdat"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool Lineage Branch Analysis using StemID",
-          "name": "inputrds"
-        }
-      ],
-      "label": "Lineage Branch (StemID)",
-      "name": "Lineage Branch Analysis using StemID",
-      "outputs": [
-        {
-          "name": "outpdf",
-          "type": "pdf"
-        },
-        {
-          "name": "outdiffgenes",
-          "type": "tabular"
-        },
-        {
-          "name": "outlog",
-          "type": "txt"
-        }
-      ],
-      "position": {
-        "left": 985.5,
-        "top": 680
-      },
-      "post_job_actions": {},
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspecttrajectory/raceid_inspecttrajectory/3.0.2.1",
-      "tool_shed_repository": {
-        "changeset_revision": "e0e9b24d76aa",
-        "name": "raceid_inspecttrajectory",
-        "owner": "iuc",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"inputrds\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"trjsid\": \"{\\\"basic\\\": {\\\"__current_case__\\\": 1, \\\"br\\\": \\\"1,3,5\\\", \\\"doit\\\": \\\"yes\\\", \\\"i\\\": \\\"1\\\", \\\"use\\\": {\\\"__current_case__\\\": 0, \\\"def\\\": \\\"yes\\\"}}}\", \"trjfid\": \"{\\\"basic\\\": {\\\"__current_case__\\\": 0, \\\"doit\\\": \\\"no\\\"}}\", \"__rerun_remap_job_id__\": null, \"__page__\": null}",
-      "tool_version": "3.0.2.1",
-      "type": "tool",
-      "uuid": "bc0f0c22-dbfc-4a6c-925d-2416228bedde",
-      "workflow_outputs": [
-        {
-          "label": "lineagebranch_stemid_diffgenes",
-          "output_name": "outdiffgenes",
-          "uuid": "bac26527-3ac5-4ef2-a943-da34cf6fcc38"
-        }
-      ]
-    },
-    "8": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspecttrajectory/raceid_inspecttrajectory/3.0.2.1",
-      "errors": null,
-      "id": 8,
-      "input_connections": {
-        "inputrds": {
-          "id": 6,
-          "output_name": "outrdat"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool Lineage Branch Analysis using StemID",
-          "name": "inputrds"
-        }
-      ],
-      "label": "Lineage Branch (FateID)",
-      "name": "Lineage Branch Analysis using StemID",
-      "outputs": [
-        {
-          "name": "outpdf",
-          "type": "pdf"
-        },
-        {
-          "name": "outdiffgenes",
-          "type": "tabular"
-        },
-        {
-          "name": "outlog",
-          "type": "txt"
-        }
-      ],
-      "position": {
-        "left": 979.5,
-        "top": 867
-      },
-      "post_job_actions": {},
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspecttrajectory/raceid_inspecttrajectory/3.0.2.1",
-      "tool_shed_repository": {
-        "changeset_revision": "e0e9b24d76aa",
-        "name": "raceid_inspecttrajectory",
-        "owner": "iuc",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"inputrds\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"trjsid\": \"{\\\"basic\\\": {\\\"__current_case__\\\": 0, \\\"doit\\\": \\\"no\\\"}}\", \"trjfid\": \"{\\\"basic\\\": {\\\"__current_case__\\\": 1, \\\"cellsfromz\\\": \\\"1,3,5\\\", \\\"doit\\\": \\\"yes\\\", \\\"som\\\": {\\\"__current_case__\\\": 0, \\\"doit\\\": \\\"no\\\"}, \\\"use\\\": {\\\"__current_case__\\\": 0, \\\"def\\\": \\\"yes\\\"}}}\", \"__rerun_remap_job_id__\": null, \"__page__\": null}",
-      "tool_version": "3.0.2.1",
-      "type": "tool",
-      "uuid": "2d4d7829-e887-49a4-abb3-3c941c89bd70",
-      "workflow_outputs": []
-    }
-  },
-  "tags": [
-    "transcriptomics"
-  ],
-  "uuid": "555a5f76-4828-4058-8f1a-e0e0c9d27dc1",
-  "version": 0
+    "tags": [
+        "transcriptomics",
+        "single-cell"
+    ],
+    "uuid": "48285e72-0fb6-4cd6-a329-73d0e28effea",
+    "version": 1
 }
