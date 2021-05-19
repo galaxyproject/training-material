@@ -99,8 +99,7 @@ The R programming language has gained considerable popularity among statistician
 
 There are several biological domains where machine learning techniques are applied for knowledge extraction from data. The following figure (retrieved from [Pedro Larrañaga et.al, Briefings in Bioinformatics 7:1, 2006](https://doi.org/10.1093/bib/bbk007)) shows a scheme of the main biological problems where computational methods are being applied.
 
-![Classification of the topics where machine learning methods are applied (https://doi.org/10.1093/bib/bbk007)](https://raw.githubusercontent.com/fpsom/IntroToMachineLearning/gh-pages/static/images/bioinformatics-ml.png "Classification of the topics where machine learning methods are applied (https://doi.org/10.1093/bib/bbk007)")
-
+![Classification of the topics where machine learning methods are applied (https://doi.org/10.1093/bib/bbk007)](../../images/intro-to-ml-with-r/bioinformatics-ml.png "Classification of the topics where machine learning methods are applied (https://doi.org/10.1093/bib/bbk007)")
 
 ### Examples of different Machine Learning / Data Mining techniques that can be applied to different NGS data analysis pipelines.
 
@@ -226,7 +225,7 @@ library(GGally)
 ggpairs(breastCancerDataNoID[1:5], aes(color=Diagnosis, alpha=0.4))
 ```
 
-![ggpairs output of the first 5 variables](https://raw.githubusercontent.com/fpsom/2020-07-machine-learning-sib/master/static/images/ggpairs5variables.png "ggpairs output of the first 5 variables")
+![ggpairs output of the first 5 variables](../../images/intro-to-ml-with-r/ggpairs5variables.png "ggpairs output of the first 5 variables")
 
 Note that the features have widely varying centers and scales (means and standard deviations), so we'll want to center and scale them in some situations. We will use the `[caret](https://cran.r-project.org/web/packages/caret/vignettes/caret.html)` package for this, and specifically, the `preProcess` function.
 
@@ -288,7 +287,7 @@ library(GGally)
 ggpairs(breastCancerDataNoID_tr[1:5], aes(color=Diagnosis, alpha=0.4))
 ```
 
-![ggpairs output of the first 5 variables of the recentered/rescaled data](https://raw.githubusercontent.com/fpsom/2020-07-machine-learning-sib/master/static/images/ggpairs5variables_tr.png "ggpairs output of the first 5 variables of the recentered/rescaled data")
+![ggpairs output of the first 5 variables of the recentered/rescaled data](../../images/intro-to-ml-with-r/ggpairs5variables_tr.png "ggpairs output of the first 5 variables of the recentered/rescaled data")
 
 _Question: **Do you see any differences?**_
 
@@ -397,7 +396,7 @@ ggbiplot(ppv_pca, choices=c(1, 2),
   theme(legend.position = "bottom")
 ```
 
-![Visualization of the first two PCs on the UCI Breast Cancer dataset](https://raw.githubusercontent.com/fpsom/2020-07-machine-learning-sib/master/static/images/pc12Visualization_Full.png "Visualization of the first two PCs on the UCI Breast Cancer dataset")
+![Visualization of the first two PCs on the UCI Breast Cancer dataset](../../images/intro-to-ml-with-r/pc12Visualization_Full.png "Visualization of the first two PCs on the UCI Breast Cancer dataset")
 
 | **Exercises**  |   |
 |--------|----------|
@@ -472,7 +471,7 @@ ggplot(as.data.frame(ppv_pca$x), aes(x=PC1, y=PC2, color=as.factor(km.out$cluste
   labs(title = "K-Means clusters against PCA", x = "PC1", y = "PC2", color = "Cluster", shape = "Diagnosis")
 ```
 
-![Visualization of the k-means results against the first two PCs on the UCI Breast Cancer dataset](https://raw.githubusercontent.com/fpsom/2020-07-machine-learning-sib/master/static/images/kmeans-pc12-Visualization.png "Visualization of the k-means results against the first two PCs on the UCI Breast Cancer dataset")
+![Visualization of the k-means results against the first two PCs on the UCI Breast Cancer dataset](../../images/intro-to-ml-with-r/kmeans-pc12-Visualization.png "Visualization of the k-means results against the first two PCs on the UCI Breast Cancer dataset")
 
 
 (_There is a lot of information to unpack here, so we will discuss during the course what these 5 lines of code actually do_)
@@ -572,7 +571,7 @@ ggplot(elbow, aes(x = X2.max_k, y = wss)) +
   scale_x_continuous(breaks = seq(1, 20, by = 1))
 ```
 
-!["Elbow" plot for multiple values of k](https://raw.githubusercontent.com/fpsom/2020-07-machine-learning-sib/master/static/images/elbow-plot-kmeans.png "Elbow plot for multiple values of k")
+!["Elbow" plot for multiple values of k](../../images/intro-to-ml-with-r/elbow-plot-kmeans.png "Elbow plot for multiple values of k")
 
 From the graph, you can see the optimal `k` is around 10, where the curve is starting to have a diminishing return.
 
@@ -620,7 +619,7 @@ hclust_avg <- hclust(dist_mat, method = 'average')
 plot(hclust_avg)
 ```
 
-![Hierarchical clustering (attempt 1)](https://raw.githubusercontent.com/fpsom/2020-07-machine-learning-sib/master/static/images/hclust-fig1.png "Hierarchical clustering (attempt 1)")
+![Hierarchical clustering (attempt 1)](../../images/intro-to-ml-with-r/hclust-fig1.png "Hierarchical clustering (attempt 1)")
 
 Notice how the dendrogram is built and every data point finally merges into a single cluster with the height(distance) shown on the y-axis.
 
@@ -638,7 +637,7 @@ rect.hclust(hclust_avg , k = 2, border = c("red","green"), which = c(1, 2))
 # Draw a line at the height that the cut takes place
 abline(h = 18, col = 'red', lwd=3, lty=2)
 ```
-![Hierarchical clustering (attempt 2)](https://raw.githubusercontent.com/fpsom/2020-07-machine-learning-sib/master/static/images/hclust-fig2.png "Hierarchical clustering (attempt 2)")
+![Hierarchical clustering (attempt 2)](../../images/intro-to-ml-with-r/hclust-fig2.png "Hierarchical clustering (attempt 2)")
 
 Now we can see the two clusters enclosed in two different colored boxes. We can also use the `color_branches()` function from the `dendextend` library to visualize our tree with different colored branches.
 
@@ -650,7 +649,7 @@ avg_col_dend <- color_branches(avg_dend_obj, k = 2, groupLabels=TRUE)
 plot(avg_col_dend, main = "Cluster dendrogram with color per cluster (k = 2)", xlab = "Breast Cancer ID", ylab = "Height")
 ```
 
-![Hierarchical clustering (attempt 3)](https://raw.githubusercontent.com/fpsom/2020-07-machine-learning-sib/master/static/images/hclust-fig3.png "Hierarchical clustering (attempt 3)")
+![Hierarchical clustering (attempt 3)](../../images/intro-to-ml-with-r/hclust-fig3.png "Hierarchical clustering (attempt 3)")
 
 We can change the way branches are colored, to reflect the `Diagnosis` value:
 
@@ -659,7 +658,7 @@ avg_col_dend <- color_branches(avg_dend_obj, clusters = breastCancerData$Diagnos
 plot(avg_col_dend, main = "Cluster dendrogram with Diagnosis color", xlab = "Breast Cancer ID", ylab = "Height")
 ```
 
-![Hierarchical clustering (attempt 4)](https://raw.githubusercontent.com/fpsom/2020-07-machine-learning-sib/master/static/images/hclust-fig4.png "Hierarchical clustering (attempt 4)")
+![Hierarchical clustering (attempt 4)](../../images/intro-to-ml-with-r/hclust-fig4.png "Hierarchical clustering (attempt 4)")
 
 ```r
 ggplot(as.data.frame(ppv_pca$x), aes(x=PC1, y=PC2, color=as.factor(cut_avg), shape = breastCancerData$Diagnosis)) +
@@ -669,7 +668,7 @@ ggplot(as.data.frame(ppv_pca$x), aes(x=PC1, y=PC2, color=as.factor(cut_avg), sha
   labs(title = "Hierarchical clustering (cut at k=2) against PCA", x = "PC1", y = "PC2", color = "Cluster", shape = "Diagnosis")
 ```
 
-![Visualization of the Hierarchical clustering (cut at k=2) results against the first two PCs on the UCI Breast Cancer dataset](https://raw.githubusercontent.com/fpsom/2020-07-machine-learning-sib/master/static/images/hclust-pc12-Visualization.png "Visualization of the Hierarchical clustering (cut at k=2) results against the first two PCs on the UCI Breast Cancer dataset")
+![Visualization of the Hierarchical clustering (cut at k=2) results against the first two PCs on the UCI Breast Cancer dataset](../../images/intro-to-ml-with-r/hclust-pc12-Visualization.png "Visualization of the Hierarchical clustering (cut at k=2) results against the first two PCs on the UCI Breast Cancer dataset")
 
 | **Exercises**  |   |
 |--------|----------|
@@ -760,7 +759,7 @@ We see the following output and a figure:
 4 -1.00000000      6 0.2727273 0.3006993 0.04330166
 ```
 
-![Full decision tree](https://raw.githubusercontent.com/fpsom/2020-07-machine-learning-sib/master/static/images/decisionTreeFull.png "Full decision tree")
+![Full decision tree](../../images/intro-to-ml-with-r/decisionTreeFull.png "Full decision tree")
 
 The parameters that we used reflect the following aspects of the model:
 - `minsplit`: the minimum number of instances in a node so that it is split
@@ -789,7 +788,7 @@ B  245  34
 M   9   109
 ```
 
-![Pruned decision tree](https://raw.githubusercontent.com/fpsom/2020-07-machine-learning-sib/master/static/images/decisionTreePruned.png "Pruned decision tree")
+![Pruned decision tree](../../images/intro-to-ml-with-r/decisionTreePruned.png "Pruned decision tree")
 
 _Question: **What does the above "Confusion Matrix" tells you?**_
 
@@ -813,7 +812,7 @@ BreastCancer_pred   B   M
                 M   1  53
 ```
 
-![Prediction Plot](https://raw.githubusercontent.com/fpsom/2020-07-machine-learning-sib/master/static/images/predictionPlot.png "Prediction Plot")
+![Prediction Plot](../../images/intro-to-ml-with-r/predictionPlot.png "Prediction Plot")
 
 | **Exercises**  |   |
 |--------|----------|
@@ -886,7 +885,7 @@ We can view the overall performance of the model here:
 plot(rf, main = "")
 ```
 
-![Error rate plot for the Random Forest model](https://raw.githubusercontent.com/fpsom/2020-07-machine-learning-sib/master/static/images/error-rate-rf.png "Error rate plot for the Random Forest model")
+![Error rate plot for the Random Forest model](../../images/intro-to-ml-with-r/error-rate-rf.png "Error rate plot for the Random Forest model")
 
 We can also review which of the variables has the highest "importance" (i.e. impact to the performance of the model):
 
@@ -932,7 +931,7 @@ Symmetry.Worst                 2.1507714
 Fractal.Dimension.Worst        1.1498020
 ```
 
-![Importance of the individual variables](https://raw.githubusercontent.com/fpsom/2020-07-machine-learning-sib/master/static/images/importance-variables.png "Importance of the individual variables")
+![Importance of the individual variables](../../images/intro-to-ml-with-r/importance-variables.png "Importance of the individual variables")
 
 Let's try to do a prediction of the `Diagnosis` for the test set, using the new model. The margin of a data point is as the proportion of votes for the correct class minus maximum proportion of votes for other classes. Positive margin means correct classification.
 
@@ -951,7 +950,7 @@ BreastCancer_pred_RD   B   M
                    M   2  63
 ```
 
-![Margin plot for the Random Forest](https://raw.githubusercontent.com/fpsom/2020-07-machine-learning-sib/master/static/images/margin-rf.png "Margin plot for the Random Forest")
+![Margin plot for the Random Forest](../../images/intro-to-ml-with-r/margin-rf.png "Margin plot for the Random Forest")
 
 Feature selection: We can evaluate the prediction performance of models with reduced numbers of variables that are ranked by their importance.
 
@@ -960,12 +959,7 @@ result <- rfcv(breastCancerData.train, breastCancerData.train$Diagnosis, cv.fold
 with(result, plot(n.var, error.cv, log="x", type="o", lwd=2))
 ```
 
-![Random Forest Cross-Valdidation for feature selection](https://github.com/fpsom/2020-07-machine-learning-sib/blob/master/static/images/rfcv.png "Random Forest Cross-Valdidation for feature selection")
-
-| **Exercises**  |   |
-|--------|----------|
-| 1 | ToDo |
-| 2 | ToDo |
+![Random Forest Cross-Valdidation for feature selection](../../images/intro-to-ml-with-r/rfcv.png "Random Forest Cross-Valdidation for feature selection")
 
 
 ## Supervised Learning II: regression
@@ -1016,7 +1010,7 @@ preds <- predict(bc_model_full)
 plot(preds, bc$Radius.Mean, xlab = "Prediction", ylab = "Observed")
 abline(a = 0, b = 1)
 ```
-![Prediction Plot GLM](https://raw.githubusercontent.com/fpsom/2020-07-machine-learning-sib/master/static/images/lm_full_dataset.png "Prediction Plot GLM")
+![Prediction Plot GLM](../../images/intro-to-ml-with-r/lm_full_dataset.png "Prediction Plot GLM")
 
 We can also have a better look at what the model contains with `summary(bc_model_full)`:
 
@@ -1040,7 +1034,7 @@ Residual standard error: 0.5563 on 566 degrees of freedom
 Multiple R-squared:  0.9752,	Adjusted R-squared:  0.9751
 F-statistic: 1.111e+04 on 2 and 566 DF,  p-value: < 2.2e-16
 ```
-But his only provides the evaluation on the whole datset that we sued for training. we don't know how it will perform on unknown dataset. So, let's split our dataset into training and test set, create the model on trainign set and visualize the predictions
+But his only provides the evaluation on the whole dataset that we sued for training. we don't know how it will perform on unknown dataset. So, let's split our dataset into training and test set, create the model on training set and visualize the predictions
 
 ```r
 set.seed(123)
@@ -1065,7 +1059,7 @@ ggplot(bc_train, aes(x = pred, y = Radius.Mean)) +
   geom_point() +
   geom_abline(color = "blue")
 ```
-![Prediction Plot GLM](https://raw.githubusercontent.com/fpsom/2020-07-machine-learning-sib/master/static/images/lm_train_dataset.png "Prediction Plot GLM")
+![Prediction Plot GLM](../../images/intro-to-ml-with-r/lm_train_dataset.png "Prediction Plot GLM")
 
 You will note that it is quite similar to when using whole dataset
 
@@ -1081,8 +1075,13 @@ ggplot(bc_test, aes(x = pred, y = Radius.Mean)) +
 
 Now let's use the RMSE and the R_square metrics to evaluate our model on the training and test set.
 
-#####1. Evaluating model using RMSE - on training set
+| **Exercises**  |   |
+|--------|----------|
+| 1 | Try evaluating model using RMSE, but on the training set this time|
+
+
 ```r
+##### Answer to exercise 1.
 #Calculate residuals
 res <- bc_train$Radius.Mean-bc_train$pred
 #For training data we can also obtain the residuals using the bc_model$residuals
@@ -1097,9 +1096,11 @@ res <- bc_train$Radius.Mean-bc_train$pred
 ```
 So we can see that our RMSE is very small compared to SD, hence it is a good model
 
-######Exercise 1 Calculate RMSE for the test data and check if the model is not overfit.
-
-#####2. Evaluating model using R Square - on training set
+| **Exercises**  |   |
+|--------|----------|
+| 1 | Calculate RMSE for the test data and check if the model is not overfit. |
+| 2 |  Evaluating model using R Square - on training set. |
+| 3 | Calculate R_Square for the test data and check if the model is not overfit. |
 
 ```r
 # Calculate mean of outcome: bc_mean. Print it
@@ -1117,100 +1118,6 @@ rss <- sum(err^2)
 [1] 0.974028
 ```
 This again confirms that our model is very good as the R_Square value is very close to 1
-
-###### Exercise 2 Calculate R_Square for the test data and check if the model is not overfit.
-
-
-### Generalized Linear Model (GLM)
-
-GLM, as the name implies, generalizes linear regression by allowing the linear model to be related to the response variable via a link function and allowing the magnitude of the variance of each measurement to be a function of its predicted value. It unifies various other statistical models, including linear regression, logistic regression and Poisson regression. The corresponding function is `glm()`; it fits generalized linear models, specified by giving a symbolic description of the linear predictor and a description of the error distribution.
-
-We will perform Linear Regression using GLM with family =Gaussian. GLM with the log link function we are modeling the linear regression as ln(f(y)).  type for response indicates the type of prediction required. The default is on the scale of the linear predictors,  and the alternative "response" is on the scale of the response variable.
-
-And we will do visualization and calculate RMSE adn RSquare for the training data after generating our model and compare the results for linear regression we got above.
-
-
-```r
-myFormula <-Radius.Mean ~ Concave.Points.Mean + Area.Mean
-bc_model2 <-glm(myFormula, family=gaussian("log"),data=bc_train)
-
-summary(bc_model2)
-
-```
-
-The output is the following:
-
-```
-Call:
-glm(formula = myFormula, family = gaussian("log"), data = bc_train)
-
-Deviance Residuals:
-    Min       1Q   Median       3Q      Max  
--8.8018  -0.5850   0.1779   0.7005   1.8351  
-
-Coefficients:
-                     Estimate Std. Error t value Pr(>|t|)    
-(Intercept)         2.285e+00  7.747e-03  294.89  < 2e-16 ***
-Concave.Points.Mean 8.571e-01  1.517e-01    5.65 2.98e-08 ***
-Area.Mean           4.639e-04  1.476e-05   31.44  < 2e-16 ***
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-(Dispersion parameter for gaussian family taken to be 1.303883)
-
-    Null deviance: 5103.49  on 418  degrees of freedom
-Residual deviance:  542.41  on 416  degrees of freedom
-AIC: 1305.2
-
-Number of Fisher Scoring iterations: 6
-```
-
-We can now make prediction and visualize the result:
-
-```r
-bc_train$pred2 <-predict(bc_model2,type = "response")
-
-ggplot(bc_train, aes(x = pred2, y = Radius.Mean)) +
-  geom_point() +
-  geom_abline(color = "blue")
-
-
-######RMSE
-res <- bc_train$Radius.Mean-bc_train$pred2
-
-(rmse <- sqrt(mean(res^2)))
-[1] 1.137781
-
-# Calculate the standard deviation of actual outcome and print it
-(sd_bc_train <- sd(bc_train$Radius.Mean))
-[1] 3.494182
-
-######R_Sq
-# Calculate mean of outcome: bc_mean.
-bc_mean <- mean(bc_train$Radius.Mean)
-
-# Calculate total sum of squares: tss
-tss <- sum((bc_train$Radius.Mean - bc_mean)^2)
-
-# Calculate residual sum of squares: rss.
-err <- bc_train$Radius.Mean-bc_train$pred2
-rss <- sum(err^2)
-
-# Calculate R-squared: rsq. Print it. Is it a good fit?
-(rsq <- 1-(rss/tss))
-[1] 0.8937169
-
-```
-The plot, the value of RMSE (higher than in linear regression) and RSquare (lower than that for linear regression) indicates that this model is not as good as linear regression.
-
-![Prediction Plot GLM](https://raw.githubusercontent.com/fpsom/2020-07-machine-learning-sib/master/static/images/glm_train_dataset.png "Prediction Plot GLM")
-
-| **Exercises**  |   |
-|--------|----------|
-| 1 | Try working with additional columns as targets for the regression. |
-
-
-
 
 
 # Conclusion
