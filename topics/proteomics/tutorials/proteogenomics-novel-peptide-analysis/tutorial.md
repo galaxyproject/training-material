@@ -80,7 +80,7 @@ The first step in this tutorial is to perfrom BLAST-P analysis using the NCBI-NR
 
 > ### {% icon hands_on %} Hands-on: NCBI BLAST+ blastp
 >
-> 1. {% tool [**NCBI BLAST+ blastp**](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/0.3.3) %} with the following parameters:
+> 1. {% tool [NCBI BLAST+ blastp](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/0.3.3) %} with the following parameters:
 >    - {% icon param-file %} **Protein query sequence(s)** - `Peptides for Blast-P analysis.tabular`
 >    - {% icon param-select %} **Subject database/sequences** - `Locally installed BLAST database`
 >      - {% icon param-select %} **Protein BLAST database** - `NCBI-NR(dated)`
