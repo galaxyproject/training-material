@@ -110,7 +110,7 @@ Once Blast-P search is performed, it provides a tabular output containing “**N
 
 > ### {% icon hands_on %} Hands-on: Query Tabular
 >
-> 1. {% tool [**Query Tabular**](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %} with the following parameters:
+> 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %} with the following parameters:
 >    - {% icon param-repeat %} **Insert Database Table**
 >      - Section **Table Options**
 >        - *"Specify Name for Table"*: `blast`
