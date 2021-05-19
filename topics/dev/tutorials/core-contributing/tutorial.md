@@ -1,4 +1,3 @@
-
 ---
 layout: tutorial_hands_on
 
@@ -130,5 +129,80 @@ Add a new API implementation file to
 ``lib/galaxy/webapps/galaxy/api/`` called ``user_favorites.py`` with
 an API implementation of the endpoints we just outlined.
 
+To implement the API itself, add three methods to the user manager in
+``lib/galaxy/managers/users.py``.
 
-get_favorite_extensions, add_favorite_extension, delete_favorite_extension.
+- ``get_favorite_extensions(user)``
+- ``add_favorite_extension(user, extension)``
+- ``delete_favorite_extension(user, extension)``
+
+{% include topics/dev/tutorials/core-contributing/user_favorites.py_diff.md %}
+
+{% include topics/dev/tutorials/core-contributing/users.py_diff.md %}
+
+This part is relatively challenging and takes time to really become an
+expert at - it requires greping around the backend to find similar examples,
+lots of trial and error, debugging the test case and the implementation in unison,
+etc..
+
+Ideally, you'd start at the top of test case - make sure it fails on the first API request,
+implement ``get_favorite_extensions`` on the manager and the API code to wire it up, and continue
+with ``add_favorite_extension`` before finishing with ``delete_favorite_extension``.
+
+
+```
+./run_tests.sh -api lib/galaxy_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
+```
+
+Once the API test is done, it is time to build a user interface for this addition to Galaxy. Lets get
+some of the plumbing out of the way right away. We'd like to have a URL for viewing the current user's
+favorite extensions in the UI. This URL needs to be registered as a client route in ``lib/galaxy/webapps/galaxy/buildapp.py``.
+
+Add ``/user/favorite/extensions`` as a route for the client in ``buildapp.py.
+
+{% include topics/dev/tutorials/core-contributing/buildapp.py_diff.md %}
+
+Let's add the ability to navigate to this URL and future component to
+the "User" menu in the Galaxy masthead. The file ``client/src/layout/menu.js``
+contains the "model" data describing the masthead. Add a link to the route
+we described above to ``menu.js`` with a entry titled "Favorite Extensions".
+
+{% include topics/dev/tutorials/core-contributing/menu.js_diff.md %}
+
+The next piece of this plumbing is to respond to this route the
+analysis router. The analysis router maps URLs to UI components to
+render.
+
+Assume a VueJS component will be available called
+``FavoriteExtensions`` in the file
+``components/User/FavoriteExtensions/index.js``.  In
+``client/src/entry/analysis/AnalysisRouter.js`` respond to the route
+added above in ``buildapp.py`` and render the fictious VueJS component
+``FavoriteExtensions``.
+
+{% include topics/dev/tutorials/core-contributing/AnalysisRouter.js_diff.md %}
+
+There are many ways to perform the next steps, but like the API entry-point lets
+start with a test case describing the UI component we want to write. Below is a
+Jest unit test for a VueJS component that mocks out some API calls to ``/api/datatypes``
+and the API entry points we implemented earlier and renders an editable list of
+extensions based on it.
+
+{% include topics/dev/tutorials/core-contributing/List.test.js_diff.md %}
+
+Sketching out this unit test would take a lot of practice, this a step
+that might be best done just by copying the file over. Make sure the
+individual components make sense before continuing though.
+
+Next implement a VueJS component in that same directory called
+``List.vue`` that fullfills the contract described by the unit test.
+
+{% include topics/dev/tutorials/core-contributing/List.vue_diff.md %}
+
+Finally, we added a level of indirection when we utilized this
+component from the analysis router above by importing it from
+``index.js``. Let's setup that file and import the component from
+``List.vue`` and export as a component called
+``FavoriteExtensions``.
+
+{% include topics/dev/tutorials/core-contributing/index.js_diff.md %}
