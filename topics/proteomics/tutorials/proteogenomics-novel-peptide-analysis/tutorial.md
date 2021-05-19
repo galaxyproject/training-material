@@ -166,7 +166,7 @@ Once this step is completed, a tabular output containing novel proteoforms are d
 
 > ### {% icon hands_on %} Hands-on: Query Tabular
 >
-> 1. {% tool [**Query Tabular**](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %}
+> 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %}
 >    - {% icon param-repeat %} **Insert Database Table**
 >      - Section **Filter Dataset Input**
 >        - {% icon param-repeat %} **Insert Filter Tabular Input Lines**
