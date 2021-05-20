@@ -457,5 +457,4 @@ predcited values. The better our model's predictions, the closer the points to y
 
 In this tutorial, we discussed the inspiration behind the neural networks, and explained Perceptron, one of the earliest neural 
 networks still in use today. We then discussed different activation functions, what supervised learning is, what are loss/cost functions, 
-and how backpropagation minimizes the cost function. Finally, we implemented a FNN in Galaxy to solve a regression problem on car purchase 
-orice prediction data.
+and how backpropagation minimizes the cost function. Finally, we implemented a FNN in Galaxy to solve a regression problem on car purchase price prediction data.
