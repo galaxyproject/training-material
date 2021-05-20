@@ -110,9 +110,9 @@ With `make serve-quick`, a local Jekyll server will run in background. It will c
 
 # Stopping the server
 
-Once you are done, you can stop the server and cleaning your repository.
+Once you are done, you can stop the server and clean your repository.
 
-> ### {% icon hands_on %} Hands-on: Stoping the server
+> ### {% icon hands_on %} Hands-on: Stopping the server
 >
 > 1. Stop the server with <kbd>CTRL</kbd>-<kbd>C</kbd>
 > 2. Clean the repository: `make clean`
