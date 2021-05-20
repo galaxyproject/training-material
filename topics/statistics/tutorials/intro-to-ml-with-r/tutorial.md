@@ -28,9 +28,18 @@ follow_up_training:
     tutorials:
         - age-prediction-with-ml
 questions:
-- To be added
+- What are the main categories in Machine Learning algorithms?
+- How can I perform exploratory data analysis?
+- What are the main part of a clustering process?
+- How can a create a decision tree?
+- How can I assess a linear regression model?
 objectives:
-- To be added
+- Understand the ML taxonomy and the commonly used machine learning algorithms for analysing "omics" data
+- Understand differences between ML algorithms categories and to which kind of problem they can be applied
+- Understand different applications of ML in different -omics studies
+- Use some basic, widely used R packages for ML
+- Interpret and visualize the results obtained from ML analyses on omics datasets
+- Apply the ML techniques to analyse their own datasets
 time_estimation: 3H
 key_points:
 - To be added
@@ -794,7 +803,7 @@ There are various classifiers available:
 - **Decision Trees** – These are organized in the form of sets of questions and answers in the tree structure.
 - **Naive Bayes Classifiers** – A probabilistic machine learning model that is used for classification.
 - **K-NN Classifiers** – Based on the similarity measures like distance, it classifies new cases.
-- **Support Vector Machines** – It is a non-probabilistic binary linear classifier that builds a model to classify a case into one of the two categories.
+- **Support Vector Machines** – It is a non-probabilistic binary classifier that builds a model to classify a case into one of the two categories. They rely on a `kernel` function that essentially projects the data points to higher-dimensional space; depending on this new space, there can be both linear and non-linear SVMs.
 
 ### Decision trees
 
@@ -1196,7 +1205,7 @@ Linear regression is to predict response with a linear function of predictors. T
 {: .hands_on}
 
 
-Now let's use the RMSE and the R_square metrics to evaluate our model on the training and test set.
+Now let's use the RMSE and the R_square metrics to evaluate our model on the training and test set. R_square measures how much of variability in dependent variable can be explained by the model. It is defined as the square of the correlation coefficient (`R`), and that is why it is called "R Square" (more info [here](https://en.wikipedia.org/wiki/Coefficient_of_determination)).
 
 
 > ### {% icon question %} Question
@@ -1228,8 +1237,8 @@ Now let's use the RMSE and the R_square metrics to evaluate our model on the tra
 > ### {% icon question %} Question
 >
 > 1. Calculate RMSE for the test data and check if the model is not overfit.
-> 2. Evaluating model using R Square - on training set.
-> 3. Calculate R_Square for the test data and check if the model is not overfit.
+> 2. Evaluating model using R_square - on training set.
+> 3. Calculate R_square for the test data and check if the model is not overfit.
 >
 > > ### {% icon solution %} Solution
 > >
@@ -1254,9 +1263,13 @@ rss <- sum(err^2)
 [1] 0.974028
 ```
 
-This again confirms that our model is very good as the R_Square value is very close to 1
+This again confirms that our model is very good as the R_square value is very close to 1
 
 
 # Conclusion
-{:.no_toc}
 
+With the rise in high-throughput sequencing technologies, the volume of omics data has grown exponentially in recent times and a major issue is to mine useful knowledge from these data which are also heterogeneous in nature. Machine learning (ML) is a discipline in which computers perform automated learning without being programmed explicitly and assist humans to make sense of large and complex data sets. The analysis of complex high-volume data is not trivial and classical tools cannot be used to explore their full potential. Machine learning can thus be very useful in mining large omics datasets to uncover new insights that can advance the field of bioinformatics.
+
+This tutorial was only a first introductory step into the main concepts and approaches in machine learning. We looked at some of the common methods being used to analyse a representative dataset, by providing a practical context through the use of basic but widely used R libraries. Hopefully, at this point, you will have acquired a first understanding of the standard ML processes, as well as the practical skills in applying them on familiar problems and publicly available real-world data sets.
+
+{:.no_toc}
