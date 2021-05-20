@@ -2,12 +2,6 @@
 layout: tutorial_hands_on
 
 title: "Breve introducción a Galaxy - en español"
-subtopic: espanol
-priority: 1
-
-tags:
-  - espanol
-
 zenodo_link: "https://doi.org/10.5281/zenodo.582600"
 level: Introductory
 questions:
@@ -27,7 +21,8 @@ key_points:
   - "Visualiza los archivos de salida haciendo clic en el icono del ojo."
   - "Visualiza todos tus historiales y mueve archivos entre ellos. Cambia a un historial diferente."
   - "Termina sesión en tu servidor de Galaxy. Cuando vuelvas a iniciar sesión (en el mismo servidor), tus historiales estarán allí."
-
+translations:
+  - en
 contributors:
   - annasyme
   - pclo
@@ -58,11 +53,11 @@ contributors:
 >   > ### {% icon comment %} Diferentes servidores Galaxy
 >   >  Esta es una imagen de Galaxy Australia, situado en [usegalaxy.org.au](https://usegalaxy.org.au/)
 >   >
->   > El servidor de Galaxy que estas usando podría lucir un poco distinto y tener otra dirección web:
+>   > El servidor de Galaxy que estás usando podría lucir un poco distinto y tener otra dirección web:
 >   > - El servidor principal de Galaxy es [usegalaxy.org](https://usegalaxy.org/)
 >   > - El servidor europeo de Galaxy es [usegalaxy.eu](https://usegalaxy.eu/)
 >   >
->   > También puedes encontrar más servidores de Galaxy posibles en la parte superior de este tutorial en **Available on these Galaxies**
+>   > También puedes encontrar otros servidores de Galaxy en la parte superior de este tutorial en **Available on these Galaxies**
 >   {: .comment}
 {: .hands_on}
 
