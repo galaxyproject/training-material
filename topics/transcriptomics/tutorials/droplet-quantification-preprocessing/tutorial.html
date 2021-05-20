@@ -126,23 +126,25 @@
 
             <div id="lang-selector">
                 
-                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html&edit-text=&act=url">
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html&edit-text=&act=url">
                 Français
                 </a>
                 
-                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html&edit-text=&act=url">
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html&edit-text=&act=url">
                 日本語
                 </a>
                 
-                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html&edit-text=&act=url">
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html&edit-text=&act=url">
                 Español
                 </a>
                 
-                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html&edit-text=&act=url">
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html&edit-text=&act=url">
                 Português
                 </a>
                 
-                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html&edit-text=&act=url">
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html&edit-text=&act=url">
                 العربية
                 </a>
                 
@@ -154,7 +156,7 @@
 
         <div class="dropdown-item">
             <div>
-                Theme
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
             </div>
 
             <div id="theme-selector" data-toggle="buttons">
@@ -880,6 +882,12 @@
     
         
     
+        
+    
+        
+    
+        
+    
     </ul>
 
 
@@ -889,7 +897,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 28, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 20, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -950,9 +958,9 @@
 <p>This used to be a complex process involving multiple algorithms, or was performed with technology-specific methods (such as 10X’s ‘Cellranger’ tool)  but is now much simpler thanks to the advent of a few new methods. When selecting methodology for your own work you should consider:</p>
 
 <ul>
-  <li><a href="https://github.com/alexdobin/STAR">STARsolo</a> - a dsc<span class="notranslate">RNA</span>-seq-specific variant of the popular genome alignment method STAR. Produces results very close to those of Cellranger (which itself uses STAR under the hood).</li>
+  <li><a href="https://github.com/alexdobin/STAR">STARsolo</a> - a droplet-based sc<span class="notranslate">RNA</span>-seq-specific variant of the popular genome alignment method STAR. Produces results very close to those of Cellranger (which itself uses STAR under the hood).</li>
   <li><a href="https://www.kallistobus.tools/">Kallisto/ bustools</a> - developed by the originators of the transcriptome quantification method, Kallisto.</li>
-  <li><a href="https://salmon.readthedocs.io/en/latest/alevin.html">Alevin</a> - another transcriptome method developed by the authors of the Salmon tool.</li>
+  <li><a href="https://salmon.readthedocs.io/en/latest/alevin.html">Alevin</a> - another transcriptome analysis method developed by the authors of the Salmon tool.</li>
 </ul>
 
 <p>We’re going to use Alevin <a class="citation" href="#article-Alevin">Srivastava <i>et al.</i> 2019</a> for demonstration purposes, but we do not endorse one method over another.</p>
@@ -1010,7 +1018,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 
 <h2 id="generate-a-transcript-to-gene-map">Generate a transcript to gene map</h2>
 
-<p>Gene-level, rather than transcript-level, quantification is standard in sc<span class="notranslate">RNA</span>-seq, which means that that the <span class="notranslate">expression</span> level of alte<span class="notranslate">rna</span>tively spliced <span class="notranslate">RNA</span> molecules are combined to create gene-level values. Droplet-based sc<span class="notranslate">RNA</span>-seq techniques only sample one end each transcript, so lack the full-molecule coverage that would be required to accurately quantify different transcript isoforms.</p>
+<p>Gene-level, rather than transcript-level, quantification is standard in sc<span class="notranslate">RNA</span>-seq, which means that the <span class="notranslate">expression</span> level of alte<span class="notranslate">rna</span>tively spliced <span class="notranslate">RNA</span> molecules are combined to create gene-level values. Droplet-based sc<span class="notranslate">RNA</span>-seq techniques only sample one end each transcript, so lack the full-molecule coverage that would be required to accurately quantify different transcript isoforms.</p>
 
 <p>To generate gene-level quantifications based on transcriptome quantification, Alevin and similar tools require a conversion between transcript and gene identifiers. We can derive a transcript-gene conversion from the gene annotations available in genome resources such as Ensembl. The transcripts in such a list need to match the ones we will use later to build a binary transcriptome index. If you were using spike-ins, you’d need to add these to the transcriptome and the transcript-gene <span class="notranslate">mapping</span>.</p>
 
@@ -2034,8 +2042,8 @@ You may be interested in seeing an <a href="https://humancellatlas.usegalaxy.eu/
     author = "Wendi Bacon and Jonathan Manning",
     title = "Generating a single cell matrix using Alevin (Galaxy Training Materials)",
     year = "2021",
-    month = "04",
-    day = "28"
+    month = "05",
+    day = "20"
     url = "\url{/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
