@@ -21,7 +21,8 @@ key_points:
   - "Visualiza los archivos de salida haciendo clic en el icono del ojo."
   - "Visualiza todos tus historiales y mueve archivos entre ellos. Cambia a un historial diferente."
   - "Termina sesión en tu servidor de Galaxy. Cuando vuelvas a iniciar sesión (en el mismo servidor), tus historiales estarán allí."
-
+translations:
+  - en
 contributors:
   - annasyme
   - pclo
