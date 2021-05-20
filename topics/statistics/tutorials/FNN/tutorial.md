@@ -427,7 +427,7 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 
 The prediction step generates 1 dataset. It's a file that has the predicted car purchase price for every row in the test dataset.
 
-### **Machine Learning Visualization Extension**
+### **Plot actual vs predicted curves and residual plots**
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the predictions
 >
