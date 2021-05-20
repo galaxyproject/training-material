@@ -32,7 +32,7 @@
                   {% endfor %}
                 {% endif %}
                 <strong>Automatic Translations</strong>
-{% for lang in site.other_languages %}{% unless lang == 'en' %}
+{% for lang in site.other_languages %}{% unless lang[0]=='en' %}
 <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl={{lang[0]}}&u=https%3A%2F%2Ftraining.galaxyproject.org{{page.url}}&edit-text=&act=url">
                 {{lang[1]}}
                 </a>
