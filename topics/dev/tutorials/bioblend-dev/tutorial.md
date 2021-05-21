@@ -29,7 +29,7 @@ contributors:
 ## Introduction
 {:.no_toc}
 
-[BioBlend](https://academic.oup.com/bioinformatics/article-pdf/29/13/1685/6411064/btt199.pdf){:target="_blank"} is a Python library for easy interaction with [Galaxy](https://academic.oup.com/nar/article-pdf/46/W1/W537/25110642/gky379.pdf){:target="_blank"}.
+[BioBlend](https://academic.oup.com/bioinformatics/article-pdf/29/13/1685/6411064/btt199.pdf) is a Python library for easy interaction with [Galaxy](https://academic.oup.com/nar/article-pdf/46/W1/W537/25110642/gky379.pdf).
 
 Galaxy is a server for accessible, reproducible and transparent computational research. It includes a web interface where users can design and perform tasks in a visual and interactive manner. The server also exposes this functionality through its REST-based Application Programming Interface (API).
 
@@ -40,13 +40,13 @@ BioBlend provides classes and methods that handle the specific details of this c
 Similar libraries exist for interacting with Galaxy via other programming languages:
 
 blend4j
-: [https://github.com/galaxyproject/blend4j](https://github.com/galaxyproject/blend4j){:target="_blank"}
+: [https://github.com/galaxyproject/blend4j](https://github.com/galaxyproject/blend4j)
 
 blend4php
-: [https://github.com/galaxyproject/blend4php](https://github.com/galaxyproject/blend4php){:target="_blank"}
+: [https://github.com/galaxyproject/blend4php](https://github.com/galaxyproject/blend4php)
 
 clj-blend
-: [https://github.com/chapmanb/clj-blend](https://github.com/chapmanb/clj-blend){:target="_blank"}
+: [https://github.com/chapmanb/clj-blend](https://github.com/chapmanb/clj-blend)
 
 > ### Agenda
 >
@@ -65,10 +65,10 @@ Galaxy and BioBlend are developed as open source projects on GitHub and contribu
 {:.no_toc}
 
 Galaxy
-: [https://github.com/galaxyproject/galaxy](https://github.com/galaxyproject/galaxy){:target="_blank"}
+: [https://github.com/galaxyproject/galaxy](https://github.com/galaxyproject/galaxy)
 
 BioBlend
-: [https://github.com/galaxyproject/bioblend](https://github.com/galaxyproject/bioblend){:target="_blank"}
+: [https://github.com/galaxyproject/bioblend](https://github.com/galaxyproject/bioblend)
 
 ###  Contributing on GitHub
 {:.no_toc}
@@ -88,9 +88,9 @@ It is generally a good idea to enable “Allow edits and access to secrets by ma
 ## Downloading Galaxy and BioBlend
 
 Now we are ready to set up our development environment! Since BioBlend communicates with the Galaxy API, we must also set up a Galaxy server in order to test BioBlend functionality.
-We use the [git](https://git-scm.com){:target="_blank"} versioning tool to download the repositories.
+We use the [git](https://git-scm.com) versioning tool to download the repositories.
 
-For this we require a public SSH key associated with our GitHub account. It makes sense to set this up now, since pushing changes to GitHub without a public key will promt for credentials every time. See the [GitHub Docs](https://docs.github.com/en/github-ae@latest/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent){:target="_blank"} for information on setting up an SSH key.
+For this we require a public SSH key associated with our GitHub account. It makes sense to set this up now, since pushing changes to GitHub without a public key will promt for credentials every time. See the [GitHub Docs](https://docs.github.com/en/github-ae@latest/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) for information on setting up an SSH key.
 
 To download Galaxy and set it up as a local repository, run:
 ```shell
@@ -103,9 +103,9 @@ git clone git@github.com:galaxyproject/bioblend.git
 
 ## Structure of the Galaxy API
 
-The source code for the API endpoints is contained in various files under [lib/galaxy/webapps/galaxy/api/](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/webapps/galaxy/api){:target="_blank"}. Each of these files contains a controller which exposes functionality for a specific entity. For example, the dataset-related functionality is contained in the `DatasetsController` class in the [datasets.py](https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/webapps/galaxy/api/datasets.py){:target="_blank"} file.
+The source code for the API endpoints is contained in various files under [lib/galaxy/webapps/galaxy/api/](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/webapps/galaxy/api). Each of these files contains a controller which exposes functionality for a specific entity. For example, the dataset-related functionality is contained in the `DatasetsController` class in the [datasets.py](https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/webapps/galaxy/api/datasets.py) file.
 
-Additionally, the [builapp.py](https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/webapps/galaxy/buildapp.py){:target="_blank"} file contains a complete listing of all the endpoints.
+Additionally, the [builapp.py](https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/webapps/galaxy/buildapp.py) file contains a complete listing of all the endpoints.
 
 > ### {% icon comment %} Note
 > Different versions of Galaxy differ in the functionality that is implemented. The development version is named `dev` and includes the most recent changes. Release versions are named according to their release date. These Galaxy releases can be accessed via git branches. At the time of writing BioBlend supports Galaxy releases 17.09 and later, although some functionality is not supported by all of these versions.
@@ -146,14 +146,14 @@ Library
 
 ## Structure of the BioBlend library
 
-BioBlend methods for the Galaxy API are stored under [bioblend/galaxy/](https://github.com/galaxyproject/bioblend/tree/main/bioblend/galaxy){:target="_blank"}. The functionality for each Galaxy entity is in a separate folder. For example, the methods for interacting with workflows are stored under [bioblend/galaxy/workflows](https://github.com/galaxyproject/bioblend/tree/main/bioblend/galaxy/workflows){:target="_blank"} in the `WorkflowsClient` class.
+BioBlend methods for the Galaxy API are stored under [bioblend/galaxy/](https://github.com/galaxyproject/bioblend/tree/main/bioblend/galaxy). The functionality for each Galaxy entity is in a separate folder. For example, the methods for interacting with workflows are stored under [bioblend/galaxy/workflows](https://github.com/galaxyproject/bioblend/tree/main/bioblend/galaxy/workflows) in the `WorkflowsClient` class.
 
-The tests for these methods are stored under [tests/](https://github.com/galaxyproject/bioblend/tree/main/bioblend/_tests){:target="_blank"}. For example, the tests related to workflows are in the file [tests/TestGalaxyWorkflows.py](https://github.com/galaxyproject/bioblend/blob/main/bioblend/_tests/TestGalaxyWorkflows.py){:target="_blank"}.
+The tests for these methods are stored under [tests/](https://github.com/galaxyproject/bioblend/tree/main/bioblend/_tests). For example, the tests related to workflows are in the file [tests/TestGalaxyWorkflows.py](https://github.com/galaxyproject/bioblend/blob/main/bioblend/_tests/TestGalaxyWorkflows.py).
 
-The classic approach for accessing the Galaxy API is using the various clients and their methods. Each of these methods corresponds to one of the API endpoints. They send a request to the Galaxy server and return a Python object representing the parsed JSON response. Alternatively, there is also [BioBlend.objects](https://academic.oup.com/bioinformatics/article-pdf/30/19/2816/7251557/btu386.pdf){:target="_blank"}, which provides an object-oriented API. Interaction with the API occurs via wrapper classes. These wrappers represent entity instances and provide methods to interact with and manipulate them. For example, a wrapper could represent a single workflow. See [Tip 1](#tip-1) for additional information.
+The classic approach for accessing the Galaxy API is using the various clients and their methods. Each of these methods corresponds to one of the API endpoints. They send a request to the Galaxy server and return a Python object representing the parsed JSON response. Alternatively, there is also [BioBlend.objects](https://academic.oup.com/bioinformatics/article-pdf/30/19/2816/7251557/btu386.pdf), which provides an object-oriented API. Interaction with the API occurs via wrapper classes. These wrappers represent entity instances and provide methods to interact with and manipulate them. For example, a wrapper could represent a single workflow. See [Tip 1](#tip-1) for additional information.
 
 > ### {% icon comment %} Note
-> BioBlend also provides methods for interacting with the Galaxy [ToolShed](https://galaxyproject.org/toolshed/){:target="_blank"} and [Cloudman](https://galaxyproject.org/cloudman/){:target="_blank"}. However, this tutorial focuses on the part of BioBlend which provides access to the Galaxy API.
+> BioBlend also provides methods for interacting with the Galaxy [ToolShed](https://galaxyproject.org/toolshed/) and [Cloudman](https://galaxyproject.org/cloudman/). However, this tutorial focuses on the part of BioBlend which provides access to the Galaxy API.
 {:.comment}
 
 ## Communicating with the Galaxy API
@@ -162,11 +162,11 @@ We will make some manual requests to get a better feel for the Galaxy API.
 
 We need a valid API key in order to communicate with the Galaxy server through the API.
 
-A quick way to get an API key is to create a new user on our local Galaxy server. Navigate to the Galaxy base directory and execute the [run.sh](https://github.com/galaxyproject/galaxy/blob/dev/run.sh){:target="_blank"} script. This starts the Galaxy server. Next, open [http://localhost:8080/](http://localhost:8080/){:target="_blank"} in a web browser. This should open the web interface of our local Galaxy server. Create a new user by clicking `Login or Register` in the top menu. We can generate an API key for our user by navigating to `User > Preferences > Manage API Key` and clicking the `Create a new Key` button.
+A quick way to get an API key is to create a new user on our local Galaxy server. Navigate to the Galaxy base directory and execute the [run.sh](https://github.com/galaxyproject/galaxy/blob/dev/run.sh) script. This starts the Galaxy server. Next, open [http://localhost:8080/](http://localhost:8080/) in a web browser. This should open the web interface of our local Galaxy server. Create a new user by clicking `Login or Register` in the top menu. We can generate an API key for our user by navigating to `User > Preferences > Manage API Key` and clicking the `Create a new Key` button.
 
-In the following examples we make use of a simple networking tool named [curl](https://curl.se){:target="_blank"}. Each command is listed together with the corresponding BioBlend and BioBlend.objects code.
+In the following examples we make use of a simple networking tool named [curl](https://curl.se). Each command is listed together with the corresponding BioBlend and BioBlend.objects code.
 
-We assume basic familiarity with HTTP request methods. For an overview, see the Mozilla Developer Network [documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods){:target="_blank"}.
+We assume basic familiarity with HTTP request methods. For an overview, see the Mozilla Developer Network [documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods).
 
 Now, open a terminal window and let's make a few manual requests!
 
@@ -264,22 +264,22 @@ print(history.name)
 As an introduction to BioBlend development, we will extend the BioBlend `ToolsClient` class by adding a new method named `uninstall_dependencies`. This method will send a request to the Galaxy server to uninstall any dependencies for the specified tool.
 
 > ### {% icon comment %} Note
-> This example is based on the pull request named “[Improving Tools API coverage](https://github.com/galaxyproject/bioblend/pull/390){:target="_blank"}” in the BioBlend repository.
+> This example is based on the pull request named “[Improving Tools API coverage](https://github.com/galaxyproject/bioblend/pull/390)” in the BioBlend repository.
 {:.comment}
 
 ### Identifying the relevant Galaxy endpoint
 {:.no_toc}
 
-We should check the Galaxy controller to verify whether this functionality is already implemented in the Galaxy API. Let's check the `dev` version of Galaxy. Our method interacts with the tools API, so let's check the [api/tools.py](https://github.com/galaxyproject/galaxy/blob/43e59989ba09ddc62040443f766b7c6cc1263e9f/lib/galaxy/webapps/galaxy/api/tools.py){:target="_blank"} file.
+We should check the Galaxy controller to verify whether this functionality is already implemented in the Galaxy API. Let's check the `dev` version of Galaxy. Our method interacts with the tools API, so let's check the [api/tools.py](https://github.com/galaxyproject/galaxy/blob/43e59989ba09ddc62040443f766b7c6cc1263e9f/lib/galaxy/webapps/galaxy/api/tools.py) file.
 
-As it turns out, a corresponding [`uninstall_dependencies`](https://github.com/galaxyproject/galaxy/blob/43e59989ba09ddc62040443f766b7c6cc1263e9f/lib/galaxy/webapps/galaxy/api/tools.py#L291){:target="_blank"} endpoint method is already available in Galaxy `dev`. Lucky us! If this was not the case, then we would first have to implement the endpoint in Galaxy before a BioBlend method could interact with it.
+As it turns out, a corresponding [`uninstall_dependencies`](https://github.com/galaxyproject/galaxy/blob/43e59989ba09ddc62040443f766b7c6cc1263e9f/lib/galaxy/webapps/galaxy/api/tools.py#L291) endpoint method is already available in Galaxy `dev`. Lucky us! If this was not the case, then we would first have to implement the endpoint in Galaxy before a BioBlend method could interact with it.
 
 ### Constructing the correct method signature
 {:.no_toc}
 
 Let's look at the signature of the endpoint method.
 
-__File [api/tools.py](https://github.com/galaxyproject/galaxy/blob/43e59989ba09ddc62040443f766b7c6cc1263e9f/lib/galaxy/webapps/galaxy/api/tools.py#L291){:target="_blank"}, line 291__:
+__File [api/tools.py](https://github.com/galaxyproject/galaxy/blob/43e59989ba09ddc62040443f766b7c6cc1263e9f/lib/galaxy/webapps/galaxy/api/tools.py#L291), line 291__:
 ```python
 def uninstall_dependencies(self, trans: GalaxyWebTransaction, id, **kwds):
 ```
@@ -316,7 +316,7 @@ return tool.tool_requirements_status
 ```
 Here the tool API controller calls the `tool_requirements_status` property of the `Tool` class instance, which represents the tool corresponding to the `id` parameter. Let's also check the definition of this property.
 
-__File [tools/\_\_init\_\_.py](https://github.com/galaxyproject/galaxy/blob/43e59989ba09ddc62040443f766b7c6cc1263e9f/lib/galaxy/tools/__init__.py#L1833){:target="_blank"}, line 1833__:
+__File [tools/\_\_init\_\_.py](https://github.com/galaxyproject/galaxy/blob/43e59989ba09ddc62040443f766b7c6cc1263e9f/lib/galaxy/tools/__init__.py#L1833), line 1833__:
 ```python
 def tool_requirements_status(self):
     """
@@ -387,7 +387,7 @@ __Example__:
 ```
 Previously we made sure that Galaxy `dev` supported our method. Let's now check if older versions of Galaxy also support it. At the time of writing, Galaxy 17.09 is the earliest version supported by BioBlend, so it makes sense to check it first.
 
-It turns out that Galaxy 17.09 also [supports](https://github.com/galaxyproject/galaxy/blob/b04b3d949baaf32c9a9d9127c5a61250ffb580dd/lib/galaxy/webapps/galaxy/api/tools.py#L159){:target="_blank"} our method! This means that all later versions do as well, and thus we do not need to add a note.
+It turns out that Galaxy 17.09 also [supports](https://github.com/galaxyproject/galaxy/blob/b04b3d949baaf32c9a9d9127c5a61250ffb580dd/lib/galaxy/webapps/galaxy/api/tools.py#L159) our method! This means that all later versions do as well, and thus we do not need to add a note.
 
 ### Putting it all together
 {:.no_toc}
@@ -450,7 +450,7 @@ Two useful optional parameters:
 -  `-e <python_version>`
 -  `-t <path_to_test>`
 
-    We can specify a subset of tests to run by supplying this argument. This is specified in [pytest](https://pytest.org/) format. See the [documentation](https://docs.pytest.org/en/latest/how-to/usage.html#specifying-which-tests-to-run){:target="_blank"} for more information.
+    We can specify a subset of tests to run by supplying this argument. This is specified in [pytest](https://pytest.org/) format. See the [documentation](https://docs.pytest.org/en/latest/how-to/usage.html#specifying-which-tests-to-run) for more information.
 
 __Examples__:
 
@@ -517,7 +517,7 @@ __Step 5__: Declare the desired logging level
 ```shell
 LOG_LEVEL=DEBUG
 ```
-The available logging levels can be found in the [documentation](https://docs.python.org/3/library/logging.html#logging-levels){:target="_blank"} of the Python [logging](https://docs.python.org/3/library/logging.html){:target="_blank"} library.
+The available logging levels can be found in the [documentation](https://docs.python.org/3/library/logging.html#logging-levels) of the Python [logging](https://docs.python.org/3/library/logging.html) library.
 
 
 __Step 6__: Create the Galaxy configuration file
@@ -603,7 +603,7 @@ The `GalaxyInstance` class represents an instance of a galaxy user session. It i
 
 In the BioBlend tests, `self.gi` corresponds to the `GalaxyInstance`.
 
-The exception to this rule is [TestGalaxyObjects.py](https://github.com/galaxyproject/bioblend/blob/main/bioblend/_tests/TestGalaxyObjects.py){:target="_blank"}. This file contains tests for the various API wrapper classes of the BioBlend object-oriented API. These wrappers have their own version of the `GalaxyInstance`, namely the `objects.GalaxyInstance` class, which includes additional functionality specific to the object-oriented API.
+The exception to this rule is [TestGalaxyObjects.py](https://github.com/galaxyproject/bioblend/blob/main/bioblend/_tests/TestGalaxyObjects.py). This file contains tests for the various API wrapper classes of the BioBlend object-oriented API. These wrappers have their own version of the `GalaxyInstance`, namely the `objects.GalaxyInstance` class, which includes additional functionality specific to the object-oriented API.
 
 In the TestGalaxyObjects.py file, `self.gi` points to the `objects.GalaxyInstance`. The normal `GalaxyInstance` is accessed as `self.gi.gi`.
 
@@ -649,7 +649,7 @@ A parameter can be specified explicitly in the signature of the endpoint method.
 
 __Example__:
 
-In the histories API [`delete`](https://github.com/galaxyproject/galaxy/blob/43e59989ba09ddc62040443f766b7c6cc1263e9f/lib/galaxy/webapps/galaxy/api/histories.py#L385){:target="_blank"} endpoint method, the `id` parameter is specified explicitly.
+In the histories API [`delete`](https://github.com/galaxyproject/galaxy/blob/43e59989ba09ddc62040443f766b7c6cc1263e9f/lib/galaxy/webapps/galaxy/api/histories.py#L385) endpoint method, the `id` parameter is specified explicitly.
 ```python
 def delete(self, trans, id, **kwd):
 ```
@@ -676,7 +676,7 @@ In BioBlend, the `Client._get` helper method is used for GET requests. It takes 
 
 A HTTP request is comprised of (1) a request line, (2) headers with metadata, (3) an empty line and (4) an optional message body. The HTTP GET method uses query parameters to specify which resource should be retrieved from the server. These parameters are included in the request line as part of the URL. The HTTP POST and PUT methods create or update resources. This data is specified in the payload, which is included in the message body of the request.
 
-We can see the difference using [curl](https://curl.se){:target="_blank"} and [ncat](https://nmap.org/ncat/){:target="_blank"}.
+We can see the difference using [curl](https://curl.se) and [ncat](https://nmap.org/ncat/).
 
 Open a terminal and run the `ncat` command in listen mode on port 8080. The loop will print out any incoming requests; each request separated by a line containing `---`.
 ```shell
@@ -684,7 +684,7 @@ while ncat --listen 8080; do printf "\n---\n"; done
 ```
 
 > ### {% icon comment %} Note
-> The `ncat` command is a low-level networking tool that does not respond to any incoming connections. Since HTTP is done over [TCP](https://en.wikipedia.org/wiki/Transmission_Control_Protocol){:target="_blank"}, the `curl` command will hang expecting a response. Simply press <kbd>CTRL</kbd> + <kbd>C</kbd> to terminate the `curl` command.
+> The `ncat` command is a low-level networking tool that does not respond to any incoming connections. Since HTTP is done over [TCP](https://en.wikipedia.org/wiki/Transmission_Control_Protocol), the `curl` command will hang expecting a response. Simply press <kbd>CTRL</kbd> + <kbd>C</kbd> to terminate the `curl` command.
 {:.comment}
 
 #### Parameters
