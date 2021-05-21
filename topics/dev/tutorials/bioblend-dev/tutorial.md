@@ -163,11 +163,9 @@ The classic approach for accessing the Galaxy API is using the various clients a
 
 ## Communicating with the Galaxy API
 
-We will make some manual requests to get a better feel for the Galaxy API.
+We will make some manual requests to get a better feel for the Galaxy API. But first we need a valid API key in order to communicate with the Galaxy server through the API.
 
-We need a valid API key in order to communicate with the Galaxy server through the API.
-
-A quick way to get an API key is to create a new user on our local Galaxy server. Navigate to the Galaxy base directory and execute the [run.sh](https://github.com/galaxyproject/galaxy/blob/dev/run.sh) script. This starts the Galaxy server. Next, open [http://localhost:8080/](http://localhost:8080/) in a web browser. This should open the web interface of our local Galaxy server. Create a new user by clicking `Login or Register` in the top menu. We can generate an API key for our user by navigating to `User > Preferences > Manage API Key` and clicking the `Create a new Key` button.
+{% snippet faqs/galaxy/preferences_admin_api_key.md dev=true %}
 
 In the following examples we make use of a simple networking tool named [curl](https://curl.se). Each command is listed together with the corresponding BioBlend and BioBlend.objects code.
 
