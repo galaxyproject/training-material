@@ -537,8 +537,7 @@ What we are going to do is group the tumor data points into two clusters using a
 >
 >    ![Visualization of the k-means results against the first two PCs on the UCI Breast Cancer dataset](../../images/intro-to-ml-with-r/kmeans-pc12-Visualization.png "Visualization of the k-means results against the first two PCs on the UCI Breast Cancer dataset")
 >
->
->    TODO: (_There is a lot of information to unpack here, so we will discuss during the course what these 5 lines of code actually do_)
+>    This is a rather complex plotting command that is based on the `ggplot` library. For an overview of how `ggplot` works, have a look at the [RNA Seq Counts to Viz in R](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-viz-in-r/tutorial.html) tutorial.
 >
 > 4. Now that we have a cluster for each tumor (clusters 1 and 2), we can check how well they coincide with the labels that we know. To do this we will use a cool method called **cross-tabulation**: a cross-tab is a table that allows you to read off how many data points in clusters 1 and 2 were actually benign or malignant respectively.
 >
