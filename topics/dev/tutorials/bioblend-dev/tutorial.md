@@ -10,20 +10,20 @@ objectives:
     - "Learn how to run the BioBlend test suite."
 requirements:
     -
-        title: "Basic knowledge of the Python programming language"
+        title: "Command line basics"
         type: none
     -
-        title: "Basic familiarity with HTTP methods"
+        title: "Python programming basics"
         type: none
     -
-        title: "Basic familiarity with javascript object notation (JSON)"
+        title: "Familiarity with HTTP methods and javascript object notation (JSON)"
         type: none
 time_estimation: "60m"
 key_points:
     - "BioBlend is a Python library that provides methods for easy interaction with the Galaxy API."
     - "Implementing BioBlend methods is generally quite an easy process, making it well suited to beginners and a viable stepping stone into Galaxy server development."
 contributors:
-    - contributor1
+    - rikeshi
 ---
 
 ## Introduction
@@ -78,6 +78,7 @@ To contribute to BioBlend, a GitHub account is required.
 Changes are proposed via a pull request (PR). This allows the project maintainers to review the changes and suggest improvements.
 
 The general steps are as follows:
+
 1. Fork the BioBlend repository
 2. Make changes in a new branch
 3. Open a pull request for this branch in the upstream BioBlend repository
@@ -213,11 +214,13 @@ for preview in previews:
 ### Making a GET request with query parameters
 {:.no_toc}
 
-In this example we include two query parameters in our request, `limit` and `include_terminal`. With `limit=5` we limit the result to at most 5 invocations. With `include_terminal=False` we indicate that invocations in a terminal state should be excluded from the results.
+In this example we include two query parameters in our request, `limit` and `include_terminal`.
 ```shell
 curl -X GET -H 'x-api-key: <API_KEY>' \
      'localhost:8080/api/invocations?limit=5&include_terminal=False'
 ```
+With `limit=5` we limit the result to at most 5 invocations. With `include_terminal=False` we indicate that invocations in a terminal state should be excluded from the results.
+
 __BioBlend code__:
 ```python
 invs = gi.invocations.get_invocations(limit=5, include_terminal=False)
@@ -282,7 +285,7 @@ def uninstall_dependencies(self, trans: GalaxyWebTransaction, id, **kwds):
 ```
 The `GalaxyWebTransaction` is an object which represents our API request. It is internal to the Galaxy server. We do not specify it as a parameter in BioBlend.
 
-We can see that it also expects an `id` parameter, which is the tool ID. The `kwds` argument indicates that the endpoint might accept aditional keyword arguments as well.
+We can see that it also expects an `id` parameter, which is the tool ID. The `kwds` argument indicates that the endpoint might accept additional keyword arguments as well.
 
 Let's check the method documentation:
 ```python
@@ -343,14 +346,17 @@ The `self` parameter corresponds to the `ToolsClient` instance. The parameter `t
 Our method is part of the `ToolsClient` class. This means that our method has access to all its helper methods.
 Let's recall that the endpoint expects a DELETE request at URL `/api/tools/{tool_id}/dependencies`.
 To translate this into BioBlend source code, we do the following:
--  We use the `self._make_url` helper method to construct a valid URL with the supplied `tool_id` parameter. Finally, we need to append `'/dependencies'` for our endpoint.
-```python
-url = self._make_url(tool_id) + '/dependencies'
-```
--  BioBlend clients also include helper methods for making requests of various types. In this case we want to make a DELETE request, so we use the `self._delete` helper method with our constructed URL as argument.  It also expects a `payload` argument. Our payload will be empty, since we use `tool_id` to construct the URL. This helper method automatically parses the JSON reponse into a python object, so we can directly return its result.
-```python
-return self._delete(payload={}, url=url)
-```
+- We use the `self._make_url` helper method to construct a valid URL with the supplied `tool_id` parameter. Finally, we need to append `'/dependencies'` for our endpoint.
+
+    ```python
+    url = self._make_url(tool_id) + '/dependencies'
+    ```
+
+- BioBlend clients also include helper methods for making requests of various types. In this case we want to make a DELETE request, so we use the `self._delete` helper method with our constructed URL as argument.  It also expects a `payload` argument. Our payload will be empty, since we use `tool_id` to construct the URL. This helper method automatically parses the JSON reponse into a python object, so we can directly return its result.
+
+    ```python
+    return self._delete(payload={}, url=url)
+    ```
 
 ### Adding the docstring
 {:.no_toc}
@@ -431,21 +437,24 @@ It makes sense to test our method against the most recent changes of Galaxy, so 
 > On our local machine we only test against Galaxy `dev`, so it might happen that tests on GitHub still fail because there tests run against all supported Galaxy versions. When this happens we simply need to update our changes to fix those errors as well.
 {:.comment}
 
-### Using the ‘run_bioblend_tests.sh’ script
+### Using the `run_bioblend_tests.sh` script
 {:.no_toc}
 
 This script is provided in the repository. It will lint the Python code and run the BioBlend tests. It works well for running all tests, or for small tests that require little to no debugging or experimentation.
 
 Since BioBlend requires a Galaxy server, we must specify the path to the Galaxy server directory:
 -  `-g <galaxy_path>`
+
 Two useful optional parameters:
+
 -  `-e <python_version>`
 -  `-t <path_to_test>`
-We can specify a subset of tests to run by supplying this argument. This is specified in 'pytest' format. See the [documentation](https://docs.pytest.org/en/latest/how-to/usage.html#specifying-which-tests-to-run){:target="_blank"} for more information.
+
+    We can specify a subset of tests to run by supplying this argument. This is specified in [pytest](https://pytest.org/) format. See the [documentation](https://docs.pytest.org/en/latest/how-to/usage.html#specifying-which-tests-to-run){:target="_blank"} for more information.
 
 __Examples__:
 
-Let's assume that our galaxy directory is ‘../galaxy_dev’.
+Let's assume that our galaxy directory is `../galaxy_dev`.
 
 Then this command runs all BioBlend tests:
 ```shell
@@ -458,7 +467,7 @@ And this command runs only the test named `test_get_jobs`:
     -e py39 \
     -t tests/TestGalaxyJobs.py::TestGalaxyJobs::test_get_jobs
 ```
-__Downside of the ‘run_bioblend_tests.sh’ script__:
+__Downside of the `run_bioblend_tests.sh` script__:
 
 The script starts and stops a new instance of the Galaxy server every time it is run. This makes it robust. However, it also means we have to wait for the server to start up every time. This makes it painful to debug more complicated tests.
 
@@ -594,9 +603,11 @@ The `GalaxyInstance` class represents an instance of a galaxy user session. It i
 
 In the BioBlend tests, `self.gi` corresponds to the `GalaxyInstance`.
 
-The exception to this rule is [TestGalaxyObjects.py](https://github.com/galaxyproject/bioblend/blob/main/bioblend/_tests/TestGalaxyObjects.py){:target="_blank"}. This file contains tests for the various API wrapper classes of the BioBlend object-oriented API. These wrappers have their own version of the `GalaxyInstance`, namely the `objects.GalaxyInstance` class, which includes additional functionality specific to the object-oriented API. In the TestGalaxyObjects.py file, `self.gi` points to the `objects.GalaxyInstance`. The normal `GalaxyInstance` is accessed as `self.gi.gi`.
+The exception to this rule is [TestGalaxyObjects.py](https://github.com/galaxyproject/bioblend/blob/main/bioblend/_tests/TestGalaxyObjects.py){:target="_blank"}. This file contains tests for the various API wrapper classes of the BioBlend object-oriented API. These wrappers have their own version of the `GalaxyInstance`, namely the `objects.GalaxyInstance` class, which includes additional functionality specific to the object-oriented API.
 
-### <a name="tip-2"></a> 2. Use of the ‘@test_util.skip_unless_galaxy’ decorator
+In the TestGalaxyObjects.py file, `self.gi` points to the `objects.GalaxyInstance`. The normal `GalaxyInstance` is accessed as `self.gi.gi`.
+
+### <a name="tip-2"></a> 2. Use of the `@test_util.skip_unless_galaxy` decorator
 {:.no_toc}
 
 On our local machine we normally test our changes against a single version of Galaxy, for example `dev`. However, GitHub Actions Continuous Integration runs the BioBlend tests against all supported versions of Galaxy.
@@ -658,14 +669,16 @@ __Example__:
 
 The Datasets API `index` method uses this format. The `q` and `qv` parameters are passed to the endpoint as part of `kwd`. They are not used in the endpoint itself, but rather implicitely passed into the `self.parse_filter_params` helper method as part of `kwd`.
 
-### <a name="tip-6"></a> 6. Params vs payload
+### <a name="tip-6"></a> 6. Params versus payload
 {:.no_toc}
 
 In BioBlend, the `Client._get` helper method is used for GET requests. It takes a `params` argument. The `Client._post` and `Client._put` helper methods make POST and PUT request respectively. They expect a `payload` argument. In this section we briefly explain the difference.
 
 A HTTP request is comprised of (1) a request line, (2) headers with metadata, (3) an empty line and (4) an optional message body. The HTTP GET method uses query parameters to specify which resource should be retrieved from the server. These parameters are included in the request line as part of the URL. The HTTP POST and PUT methods create or update resources. This data is specified in the payload, which is included in the message body of the request.
 
-We can see the difference using [curl](https://curl.se){:target="_blank"} and [ncat](https://nmap.org/ncat/){:target="_blank"}. Open a terminal and run the `ncat` command in listen mode on port 8080. The loop will print out any incoming requests; each request separated by a line containing `---`.
+We can see the difference using [curl](https://curl.se){:target="_blank"} and [ncat](https://nmap.org/ncat/){:target="_blank"}.
+
+Open a terminal and run the `ncat` command in listen mode on port 8080. The loop will print out any incoming requests; each request separated by a line containing `---`.
 ```shell
 while ncat --listen 8080; do printf "\n---\n"; done
 ```
