@@ -117,7 +117,7 @@ Unlike FNN, in RNN the output of the network at time t is used as network input 
 ## Possible RNN inputs/outputs
 
 There are 4 possible input/output combinations for RNN and each have a specific application. One-to-one is basically a FNN. One-to-many,
-where we have one input and a variable number of output. One example application is image captioning, where a single image is provided
+where we have one input and a variable number of outputs. One example application is image captioning, where a single image is provided
 as input and a variable number of words (which caption the image) is returned as output (See Figure 7).
 
 ![Neurons forming a one-to-many recurrent neural network](../../images/RNN_1_to_n.png "One-to-many RNN")
