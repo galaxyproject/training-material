@@ -15,7 +15,7 @@ time_estimation: "30m"
 key_points:
   - "La interfaz gráfica de Galaxy tiene las herramientas a la izquierda, el panel de visualización en el centro, y el historial de análisis de tus datos a la derecha."
   - "Puedes crear un historial nuevo en cada análisis. Todos tus historiales serán guardados."
-  - "Para introducir datos a Galaxy, puedes cargar un archivo pegando la dirección de una página web. Existen otras formas de introducir datos en Galaxy (que no serán cubiertas en este tutorial): como cargar un archivo desde tu computadora e importar un historial completo."
+  - "Para subir datos a Galaxy, puedes cargar un archivo pegando la dirección de una página web. Existen otras formas de subir datos a Galaxy (que no serán cubiertas en este tutorial): cómo cargar un archivo desde tu computadora e importar un historial completo."
   - "Selecciona una herramienta y cambia cualquier configuración para tu análisis."
   - "Ejecuta la herramienta. Los archivos de salida se guardarán en la parte superior de tu historial."
   - "Visualiza los archivos de salida haciendo clic en el icono del ojo."
@@ -134,7 +134,7 @@ Cuando el archivo se haya cargado en Galaxy, aparecerá en color verde.
 
 El contenido del archivo se desplegará en el panel central de Galaxy.
 
-Este archivo contiene lecturas de secuenciación de ADN de una bacteria en formato FASTQ:
+Este archivo contiene lecturas de secuenciación de ADN bacteriano en formato FASTQ:
 
    ![fastq](../../images/fastq.png){:width="620px"}
 
@@ -162,7 +162,7 @@ La herramienta se ejecutará y dos nuevos archivos de salida aparecerán en la p
 Vamos a ver el archivo de salida llamado *FastQC on data 1: Webpage*.
 
 > ### {% icon comment %} Comentario
-> * Nota que Galaxy ha nombrado este conjunto de datos usando como base el nombre de la herramienta con que se generó (“FastQC”) y el archivo de entrada (“data 1”)
+> * Observa que Galaxy ha nombrado este conjunto de datos usando como base el nombre de la herramienta con que se generó (“FastQC”) y el archivo de entrada (“data 1”)
 > * El nombre "data 1" significa que la salida corresponde al conjunto de datos número 1 en el historial actual de Galaxy (nuestro archivo FASTQ).
 >
 {: .comment}
