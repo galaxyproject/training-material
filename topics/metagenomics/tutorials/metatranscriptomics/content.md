@@ -81,7 +81,7 @@ A graphical representation of the ASaiM workflow which we will be using today is
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
-> 2. [Import](upload1) `T1A_forward` and `T1A_reverse` from [Zenodo]({{ page.zenodo_link }}) or from the data library (ask your instructor)
+> 2. {% tool [Import](upload1) %} `T1A_forward` and `T1A_reverse` from [Zenodo]({{ page.zenodo_link }}) or from the data library (ask your instructor)
 >
 >    ```
 >    {{ page.zenodo_link }}/files/T1A_forward.fastqsanger
@@ -422,7 +422,7 @@ Different approaches can be used:
 
 - Identification and classification of OTUs, as used in amplicon data
 
-    Such an approach first requires sequence sorting to extract only the 16S and 18S sequences (e.g. using the aligned reads from **SortMeRNA**), then again using the same tools as for amplicon data (as explained in tutorials like [16S Microbial Analysis with mothur]({% link topics/metagenomics/tutorials/mothur-miseq-sop/tutorial.md %} or [16S Microbial analysis with Nanopore data]({% link topics/metagenomics/tutorials/nanopore-16S-metagenomics/tutorial.md %})).
+    Such an approach first requires sequence sorting to extract only the 16S and 18S sequences (e.g. using the aligned reads from **SortMeRNA**), then again using the same tools as for amplicon data (as explained in tutorials like [16S Microbial Analysis with mothur]({% link topics/metagenomics/tutorials/mothur-miseq-sop/tutorial.md %}) or [16S Microbial analysis with Nanopore data]({% link topics/metagenomics/tutorials/nanopore-16S-metagenomics/tutorial.md %})).
     
     However, because rRNA sequences represent less than 50% of the raw sequences, this approach is not the most statistically supported.
 
@@ -616,7 +616,7 @@ It takes a taxonomic tree file as the input. We first need to convert the **Meta
 >    - *"List which levels should use the external legend for the annotation"*: `3,4,5`
 >    - *"List which levels should be highlight with a shaded background"*: `1`
 >
-> 3. {% tool [Generation, personalization and annotation of tree](htoolshed.g2.bx.psu.edu/repos/iuc/graphlan_annotate/graphlan_annotate/1.0.0.0) %} with the following parameters:
+> 3. {% tool [Generation, personalization and annotation of tree](toolshed.g2.bx.psu.edu/repos/iuc/graphlan_annotate/graphlan_annotate/1.0.0.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input tree"*: `Tree` (output of **Export to GraPhlAn**)
 >    - {% icon param-file %} *"Annotation file"*: `Annotation` (output of **Export to GraPhlAn**)
 >
@@ -748,7 +748,7 @@ To identify the functions made by the community, we do not need the rRNA sequenc
     > 3. How many gene families have been identified?
     >
     > > ### {% icon solution %} Solution
-    > > 1. The most abundant family is the first one in the family: UniRef90_A3DCI4. We can use the tool {% tool [Rename features of a HUMAnN generated table](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.0.0+galaxy1) %} to add extra information about the gene family. 
+    > > 1. The most abundant family is the first one in the family: UniRef90_A3DCI4. We can use the tool {% tool [Rename features of a HUMAnN generated table](toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.0.0+galaxy1) %} to add extra information about the gene family. 
     > > 2. Beta-lactamase TEM seems mostly produced here by *Hungateiclostridium thermocellum*.
     > > 3. There is 6,374 lines in gene family file. But some of the gene families have multiple lines when the involved species are known.
     > >
