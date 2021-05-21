@@ -43,7 +43,6 @@ objectives:
 time_estimation: 3H
 key_points:
 - To be added
-subtopic: r
 contributors:
   - fpsom
 ---
