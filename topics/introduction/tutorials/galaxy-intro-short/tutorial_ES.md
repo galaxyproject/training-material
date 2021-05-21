@@ -15,7 +15,7 @@ time_estimation: "30m"
 key_points:
   - "La interfaz gráfica de Galaxy tiene las herramientas a la izquierda, el panel de visualización en el centro, y el historial de análisis de tus datos a la derecha."
   - "Puedes crear un historial nuevo en cada análisis. Todos tus historiales serán guardados."
-  - "Para introducir datos a Galaxy, puedes cargar un archivo pegando la dirección de una página web. Existen otras formas de introducir datos a Galaxy (que no serán cubiertas en este tutorial): como cargar un archivo desde tu computadora e importar un historial completo."
+  - "Para introducir datos a Galaxy, puedes cargar un archivo pegando la dirección de una página web. Existen otras formas de introducir datos en Galaxy (que no serán cubiertas en este tutorial): como cargar un archivo desde tu computadora e importar un historial completo."
   - "Selecciona una herramienta y cambia cualquier configuración para tu análisis."
   - "Ejecuta la herramienta. Los archivos de salida se guardarán en la parte superior de tu historial."
   - "Visualiza los archivos de salida haciendo clic en el icono del ojo."
@@ -44,7 +44,7 @@ contributors:
 ## ¿Qué aspecto tiene Galaxy?
 
 > ### {% icon hands_on %} Práctica: Iniciar sesión en Galaxy
-> 1. Abre tu navegador favorito (usa Chrome, Safari o Firefox, no Internet Explorer!)
+> 1. Abre tu navegador favorito (usa Chrome, Safari o Firefox, pero no Internet Explorer!)
 > 2. Navega hasta tu instancia de Galaxy
 > 3. Inicia sesión o regístrate
 >
@@ -86,7 +86,7 @@ Tu “Historial” está en el panel de la derecha.
 > 4. Presiona <kbd>Enter</kbd> en tu teclado para guardar
 >
 > > ### {% icon comment %} ¿Cambiar el nombre no funciona?
-> > Si cambiar el nombre no funciona, es posible que no hayas iniciado sesión, trata de iniciar sesión en Galaxy primero.Usuarios anónimos tienen permitido tener un solo historial y no pueden cambiarle el nombre.
+> > Si cambiar el nombre no funciona, es posible que no hayas iniciado sesión, trata de iniciar sesión en Galaxy primero. Los usuarios anónimos tienen permitido tener un solo historial y no pueden cambiarle el nombre.
 > {: .comment}
 >
 {: .hands_on}
@@ -116,7 +116,7 @@ Tus herramientas están en el panel de la izquierda.
 >
 {: .hands_on}
 
-Tu archivo se ha cargado y aparece ahora en tu historial actual.
+Tu archivo aparece ahora en tu historial actual.
 Cuando el archivo se haya cargado en Galaxy, aparecerá en color verde.
 
 > ### {% icon comment %} Comentario
@@ -134,7 +134,7 @@ Cuando el archivo se haya cargado en Galaxy, aparecerá en color verde.
 
 El contenido del archivo se desplegará en el panel central de Galaxy.
 
-Este archivo contiene lecturas de secuenciación de ADN bacteriano en formato FASTQ:
+Este archivo contiene lecturas de secuenciación de ADN de una bacteria en formato FASTQ:
 
    ![fastq](../../images/fastq.png){:width="620px"}
 
@@ -162,7 +162,7 @@ La herramienta se ejecutará y dos nuevos archivos de salida aparecerán en la p
 Vamos a ver el archivo de salida llamado *FastQC on data 1: Webpage*.
 
 > ### {% icon comment %} Comentario
-> * Nota que Galaxy ha nombrado este conjunto de datos con base en el nombre de la herramienta con que se generó (“FastQC”) y el archivo de entrada (“data 1”)
+> * Nota que Galaxy ha nombrado este conjunto de datos usando como base el nombre de la herramienta con que se generó (“FastQC”) y el archivo de entrada (“data 1”)
 > * El nombre "data 1" significa que la salida corresponde al conjunto de datos número 1 en el historial actual de Galaxy (nuestro archivo FASTQ).
 >
 {: .comment}
@@ -249,7 +249,7 @@ Ahora hemos decidido que nuestro conjunto de datos de entrada tiene que ser filt
 >	Por ejemplo, podrías decidir que el 80 por ciento de las bases tengan una calidad de 36 o superior, en lugar de 35.
 >
 > 3. Haz clic en **Execute**
-> 4. Visualiza los resultados: Haz clic en el nombre del conjunto de datos de salida para expandir la información. (*Note*: No uses el icono {% icon galaxy-eye %} (ojo))
+> 4. Visualiza los resultados: Haz clic en el nombre del conjunto de datos de salida para expandir la información. (*Nota*: No uses el icono {% icon galaxy-eye %} (ojo))
 {: .hands_on}
 
 > ### {% icon question %} Preguntas
@@ -300,7 +300,7 @@ Este nuevo historial todavía no tiene datos.
 >
 {: .hands_on}
 
-Tu ventana principal de Galaxy mostrará la historia actual como "Nuevo-Analisis" y contendrá un conjunto de datos.
+Tu ventana principal de Galaxy mostrará el historia actual como "Nuevo-Analisis" y contendrá un conjunto de datos.
 
 Puedes regresar a la página "View all histories" en cualquier momento para cambiar de historial.
 
