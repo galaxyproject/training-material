@@ -1,0 +1,2264 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Introduction to Machine Learning using R</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Statistical Analyses for omics data and machine learning ..." />
+        <meta property="og:title" content="Galaxy Training: Introduction to Machine Learning using R" />
+        <meta property="og:description" content="Statistical Analyses for omics data and machine learning ..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/statistics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Statistics and machine learning
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/statistics/faqs/" title="Check our FAQs for the Statistics and machine learning topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/intro-to-ml-with-r/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/statistics/tutorials/intro-to-ml-with-r/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/statistics/tutorials/intro-to-ml-with-r/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/statistics/tutorials/intro-to-ml-with-r/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/statistics/tutorials/intro-to-ml-with-r/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/statistics/tutorials/intro-to-ml-with-r/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/statistics/tutorials/intro-to-ml-with-r/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fstatistics%2Ftutorials%2Fintro-to-ml-with-r%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/intro-to-ml-with-r/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                    -->
+
+                     <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Introduction to Machine Learning using R",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/main/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Statistics and machine learning",
+    "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+    "url": "https://training.galaxyproject.org//training-material/topics/statistics/"
+  },
+  "courseCode": "statistics / intro-to-ml-with-r / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Introduction to Machine Learning using R' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/statistics/tutorials/intro-to-ml-with-r/tutorial.html",
+  "timeRequired": "PT3H",
+  "description": "The questions this  addresses are:\n - What are the main categories in Machine Learning algorithms?\n - How can I perform exploratory data analysis?\n - What are the main part of a clustering process?\n - How can a create a decision tree?\n - How can I assess a linear regression model?\n\n\\nThe objectives are:\n - Understand the ML taxonomy and the commonly used machine learning algorithms for analysing \"omics\" data\n - Understand differences between ML algorithms categories and to which kind of problem they can be applied\n - Understand different applications of ML in different -omics studies\n - Use some basic, widely used R packages for ML\n - Interpret and visualize the results obtained from ML analyses on omics datasets\n - Apply the ML techniques to analyse their own datasets\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/tutorials/rstudio/tutorial.html",
+      "name": "RStudio in Galaxy",
+      "description": "Hands-on for 'RStudio in Galaxy' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/tutorials/r-basics/tutorial.html",
+      "name": "R basics in Galaxy",
+      "description": "Hands-on for 'R basics in Galaxy' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/tutorials/r-advanced/tutorial.html",
+      "name": "Advanced R in Galaxy",
+      "description": "Hands-on for 'Advanced R in Galaxy' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Fotis E. Psomopoulos"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Fotis E. Psomopoulos"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Statistics and machine learning",
+      "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+      "url": "https://training.galaxyproject.org//training-material/topics/statistics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2269",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2269",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_2269"
+    }
+  ],
+  "skillLevel": "Intermediate"
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Introduction to Machine Learning using R</h1>
+        
+
+        <div class="contributors-line">By: 
+
+ <a href="/training-material/hall-of-fame/fpsom/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/fpsom" alt="Fotis E. Psomopoulos">Fotis E. Psomopoulos</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>What are the main categories in Machine Learning algorithms?</p>
+</li>
+            
+            <li><p>How can I perform exploratory data analysis?</p>
+</li>
+            
+            <li><p>What are the main part of a clustering process?</p>
+</li>
+            
+            <li><p>How can a create a decision tree?</p>
+</li>
+            
+            <li><p>How can I assess a linear regression model?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Understand the ML taxonomy and the commonly used machine learning algorithms for analysing “omics” data</p>
+</li>
+            
+            <li><p>Understand differences between ML algorithms categories and to which kind of problem they can be applied</p>
+</li>
+            
+            <li><p>Understand different applications of ML in different -omics studies</p>
+</li>
+            
+            <li><p>Use some basic, widely used R packages for ML</p>
+</li>
+            
+            <li><p>Interpret and visualize the results obtained from ML analyses on omics datasets</p>
+</li>
+            
+            <li><p>Apply the ML techniques to analyse their own datasets</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/galaxy-interface">Using Galaxy and Managing your Data</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> RStudio in Galaxy:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/galaxy-interface/tutorials/rstudio/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> R basics in Galaxy:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/introduction/tutorials/r-basics/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Advanced R in Galaxy:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/introduction/tutorials/r-advanced/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 3 hours</p>
+            
+
+            
+            <p><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
+             Intermediate 
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+</span>
+
+</p>
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+
+                
+
+                
+
+                
+
+                
+                
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/statistics/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 21, 2021 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 id="introduction-to-machine-learning-and-data-mining">Introduction to Machine Learning and Data mining</h1>
+
+<p>This is an Introduction to Machine Learning in R, in which you’ll learn the basics of unsupervised learning for pattern recognition and supervised learning for prediction. At the end of this workshop, we hope that you will:</p>
+<ul>
+  <li>appreciate the importance of performing exploratory data analysis (or EDA) before starting to model your data.</li>
+  <li>understand the basics of unsupervised learning and know the examples of principal component analysis (PCA) and k-means clustering.</li>
+  <li>understand the basics of supervised learning for prediction and the differences between classification and regression.</li>
+  <li>understand modern machine learning techniques and principles, such as test train split, k-fold cross validation and regularization.</li>
+  <li>be able to write code to implement the above techniques and methodologies using <code class="language-plaintext highlighter-rouge">R</code>, <code class="language-plaintext highlighter-rouge">caret</code> and <code class="language-plaintext highlighter-rouge">glmnet</code>.</li>
+</ul>
+
+<p>We will not be focusing on the mathematical foundation for each of the methods and approaches we’ll be discussing. There are many resources that can provide this context, but for the purposes of this workshop we believe that they are beyond the scope.</p>
+
+<p><em><strong>Note</strong></em>: All material here has been adapted from the course material for the Machine Learning course at SIB (22-23/07/2020) <a class="citation" href="#ZENODO.3958880">Baichoo <i>et al.</i> 2020</a></p>
+
+<h2 id="machine-learning-basic-concepts">Machine Learning basic concepts</h2>
+
+<p>Machine Learning (ML) is a subset of Artificial Intelligence (AI) in the field of computer science that often uses statistical techniques to give computers the ability to “learn” (i.e., progressively improve performance on a specific task) with data, without being explicitly programmed.</p>
+
+<p>Machine Learning is often closely related, if not used as an alte<span class="notranslate">rna</span>te term, to fields like Data Mining (the process of discovering patterns in large data sets involving methods at the intersection of machine learning, statistics, and database systems), Pattern Recognition, Statistical Inference or Statistical Learning. All these areas often employ the same methods and perhaps the name changes based on the practitioner’s expertise or the application domain.</p>
+
+<h2 id="taxonomy-of-ml-and-examples-of-algorithms">Taxonomy of ML and examples of algorithms</h2>
+
+<p>The main ML tasks are typically classified into two broad categories, depending on whether there is “feedback” or a “teacher” available to the learning system or not.</p>
+
+<ul>
+  <li><strong>Supervised Learning</strong>: The system is presented with example inputs and their desired outputs provided by the “teacher” and the goal of the machine learning algorithm is to create a <span class="notranslate">mapping</span> from the inputs to the outputs. The <span class="notranslate">mapping</span> can be thought of as a function that if it is given as an input one of the training samples it should output the desired value.</li>
+  <li><strong>Unsupervised Learning</strong>: In the unsupervised learning case, the machine learning algorithm is not given any examples of desired output, and is left on its own to find structure in its input.</li>
+</ul>
+
+<p>The main machine learning tasks are separated based on what the system tries to accomplish in the end:</p>
+<ul>
+  <li><strong>Dimensionality Reduction</strong>: simplifies inputs by <span class="notranslate">mapping</span> them into a lower-dimensional space. Topic modeling is a related problem, where a program is given a list of human language documents and is tasked with finding out which documents cover similar topics.</li>
+  <li><strong>Clustering</strong>: a set of inputs is to be divided into groups. Unlike in classification, the groups
+are not known beforehand, making this typically an unsupervised task.</li>
+  <li><strong>Classification</strong>: inputs are divided into two or more classes, and the learner must produce a model that assigns unseen inputs to one or more (multi-label classification) of these classes. This is typically tackled in a supervised manner. Identification of patient vs cases is an example of classification, where the inputs are gene <span class="notranslate">expression</span> and/or clinical profiles and the classes are “patient” and “healthy”.</li>
+  <li><strong>Regression</strong>: also a supervised problem, the outputs are continuous rather than discrete.</li>
+  <li><strong>Association Rules learning</strong> (or dependency modelling): Searches for relationships between inputs. For example, a supermarket might gather data on customer purchasing habits. Using association rule learning, the supermarket can determine which products are frequently bought together and use this information for marketing purposes. This is sometimes referred to as market basket analysis.</li>
+</ul>
+
+<h2 id="overview-of-deep-learning">Overview of Deep learning</h2>
+
+<p>Deep learning is a recent trend in machine learning that models highly non-linear representations of data. In the past years, deep learning has gained a tremendous momentum and prevalence for a variety of applications. Among these are image and speech recognition, driverless cars, natural language processing and many more. Interestingly, the majority of mathematical concepts for deep learning have been known for decades. However, it is only through several recent developments that the full potential of deep learning has been unleashed. The success of deep learning has led to a wide range of frameworks and libraries for various programming languages. Examples include <code class="language-plaintext highlighter-rouge">Caffee</code>, <code class="language-plaintext highlighter-rouge">Theano</code>, <code class="language-plaintext highlighter-rouge">Torch</code> and <code class="language-plaintext highlighter-rouge">TensorFlow</code>, amongst others.</p>
+
+<p>The R programming language has gained considerable popularity among statisticians and data miners for its ease-of-use, as well as its sophisticated visualizations and analyses. With the advent of the deep learning era, the support for deep learning in R has grown ever since, with an increasing number of packages becoming available. This section presents an overview on deep learning in R as provided by the following packages: <code class="language-plaintext highlighter-rouge">MXNetR</code>, <code class="language-plaintext highlighter-rouge">darch</code>, <code class="language-plaintext highlighter-rouge">deepnet</code>, <code class="language-plaintext highlighter-rouge">H2O</code> and <code class="language-plaintext highlighter-rouge">deepr</code>. It’s important noting that the underlying learning algorithms greatly vary from one package to another. As such, the following table shows a list of the available methods/architectures in each of the packages.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Package</th>
+      <th>Available architectures of neural networks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MXNetR</td>
+      <td>Feed-forward neural network, convolutional neural network (CNN)</td>
+    </tr>
+    <tr>
+      <td>darch</td>
+      <td>Restricted Boltzmann machine, deep belief network</td>
+    </tr>
+    <tr>
+      <td>deepnet</td>
+      <td>Feed-forward neural network, restricted Boltzmann machine, deep belief network, stacked autoencoders</td>
+    </tr>
+    <tr>
+      <td>H2O</td>
+      <td>Feed-forward neural network, deep autoencoders</td>
+    </tr>
+    <tr>
+      <td>deepr</td>
+      <td>Simplify some functions from H2O and deepnet packages</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="applications-of-ml-in-bioinformatics">Applications of ML in Bioinformatics</h2>
+
+<p>There are several biological domains where machine learning techniques are applied for knowledge extraction from data. The following figure (retrieved from <a href="https://doi.org/10.1093/bib/bbk007">Pedro Larrañaga et.al, Briefings in Bioinformatics 7:1, 2006</a>) shows a scheme of the main biological problems where computational methods are being applied.</p>
+
+<figure id="figure-1"><img src="../../images/intro-to-ml-with-r/bioinformatics-ml.png" alt="A series of overlapping boxes showing intersections of different topics like text mining and proteomics and evolution and microarrays, with various topics listed in the intersections. Unfortunately the source image is too low resolution even for sighted users." /><figcaption><span class="figcaption-prefix">Figure 1:</span> Classification of the topics where machine learning methods are applied (<a href="https://doi.org/10.1093/bib/bbk007">https://doi.org/10.1093/bib/bbk007</a>)</figcaption></figure>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-examples-of-different-machine-learning--data-mining-techniques-that-can-be-applied-to-different-ngs-data-analysis-pipelines"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Examples of different Machine Learning / Data Mining techniques that can be applied to different NGS data analysis pipelines.</h3>
+  <p>An extensive list of examples of applications of Machine Learning in Bioinformatics can be found in the <a class="citation" href="#Larra_aga_2006">Larrañaga <i>et al.</i> 2006</a></p>
+</blockquote>
+
+<h2 id="how-to-choose-the-right-machine-learning-technique">How to choose the right Machine Learning technique?</h2>
+
+<p>Tip 4 in the “Ten quick tips for machine learning in computational biology” (<a class="citation" href="#Chicco_2017">Chicco 2017</a>) provides a nice overview of what one should keep in mind, when choosing the right Machine Learning technique in Bioinformatics.</p>
+
+<blockquote class="quote">
+  <p><strong>Which algorithm should you choose to start? In short; The simplest one!</strong></p>
+
+  <p>Once you understand what kind of biological problem you are trying to solve, and which method category can fit your situation, you then have to choose the machine learning algorithm with which to start your project. Even if it always advisable to use multiple techniques and compare their results, the decision on which one to start can be tricky.</p>
+
+  <p>Many textbooks suggest to select a machine learning method by just taking into account the problem representation, while Pedro Domingos (“A few useful things to know about machine learning”, Commun ACM. 2012; 55(10):78–87) suggests to take into account also the cost evaluation, and the performance optimization.</p>
+
+  <p>This algorithm-selection step, which usually occurs at the beginning of a machine learning journey, can be dangerous for beginners. In fact, an inexperienced practitioner might end up choosing a complicated, inappropriate data mining method which might lead him/her to bad results, as well as to lose precious time and energy. Therefore, this is our tip for the algorithm selection: if undecided, start with the simplest algorithm (Hand DJ, “Classifier technology and the illusion of progress”. Stat Sci. 2006; 21(1):1–14).</p>
+
+  <p>By employing a simple algorithm, you will be able to keep everything under control, and better understand what is happening during the application of the method. In addition, a simple algorithm will provide better generalization skills, less chance of overfitting, easier training and faster learning properties than complex methods. As David J. Hand explained, complex models should be employed only if the dataset features provide some reasonable justification for their usage.</p>
+
+  <p>(from <a class="citation" href="#Chicco_2017">Chicco 2017</a>)</p>
+</blockquote>
+
+<h1 id="exploratory-data-analysis-eda-and-unsupervised-learning">Exploratory Data Analysis (EDA) and Unsupervised Learning</h1>
+
+<p>Before diving in the tutorial, we need to open RStudio. If you do not know how or never interacted with RStudio, please follow the <a href="/training-material/topics/galaxy-interface/tutorials/rstudio/tutorial.html">dedicated tutorial</a>.</p>
+
+<!--SNIPPET-->
+<blockquote class="notranslate hands_on">  <h3 data-toc-skip="" id="-hands-on-launch-rstudio"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launch RStudio</h3>  <p>Depending on which server you are using, you may be able to run RStudio directly in <span class="notranslate">Galaxy</span>. If that is not available, RStudio Cloud can be an alte<span class="notranslate">rna</span>tive.</p>  <blockquote class="tip">    <h3 data-toc-skip="" id="tip-tip-launch-rstudio-in-galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Launch RStudio in <span class="notranslate">Galaxy</span></h3>    <p>Currently RStudio in <span class="notranslate">Galaxy</span> is only available on <a href="https://usegalaxy.eu">Use<span class="notranslate">Galaxy</span>.eu</a> and <a href="https://usegalaxy.org">Use<span class="notranslate">Galaxy</span>.org</a></p>    <ol>      <li>Open the Rstudio tool <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> by clicking <a href="https://usegalaxy.eu/?tool_id=interactive_tool_rstudio">here</a></li>      <li>Click Execute</li>      <li>The tool will start running and will stay running permanently</li>      <li>Click on the “User” menu at the top and go to “Active InteractiveTools” and locate the RStudio instance you started.</li>    </ol>  </blockquote>  <blockquote class="tip">    <h3 data-toc-skip="" id="tip-tip-launch-rstudio-cloud-if-not-available-on-galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Launch RStudio Cloud if not available on <span class="notranslate">Galaxy</span></h3>    <p>If RStudio is not available on the <span class="notranslate">Galaxy</span> instance:</p>    <ol>      <li>Register for <a href="https://client.login.rstudio.cloud/oauth/login?show_auth=0&amp;show_login=1&amp;show_setup=1">RStudio Cloud</a>, or login if you already have an account</li>      <li>Create a new project</li>    </ol>  </blockquote></blockquote>
+
+<h2 id="loading-and-exploring-data">Loading and exploring data</h2>
+
+<p>The data that we will be using for this workshop are from the following sources:</p>
+
+<ul>
+  <li>The <a href="http://archive.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+%28diagnostic%29">Breast Cancer Wisconsin (Diagnostic) Data Set</a> from the <a href="http://archive.ics.uci.edu/ml/">UCI Machine Learning repository</a>.</li>
+  <li><span class="notranslate">RNA</span>-Seq data from the study of tooth growth in mouse embryos from the <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE76316">Gene <span class="notranslate">Expression</span> Omnibus ID:GSE76316</a></li>
+</ul>
+
+<p>We will first load up the UCI dataset. The dataset itself does not contain column names, we’ve created a second file with only the column names, which we will use.
+We will be using <a href="https://www.tidyverse.org">tidyverse</a>, a collection of R packages for Data Science.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-load-the-uci-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Load the UCI Dataset</h3>
+
+  <ol>
+    <li>
+      <p>Load the data</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span><span class="w"> </span><span class="c1"># working with data frames, plotting</span><span class="w">
+
+</span><span class="n">breastCancerData</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data"</span><span class="p">,</span><span class="w">
+               </span><span class="n">col_names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">breastCancerDataColNames</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"https://raw.githubusercontent.com/fpsom/2020-07-machine-learning-sib/master/data/wdbc.colnames.csv"</span><span class="p">,</span><span class="w">
+                                     </span><span class="n">col_names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">colnames</span><span class="p">(</span><span class="n">breastCancerData</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">breastCancerDataColNames</span><span class="o">$</span><span class="n">X1</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>If all goes well, we can see that our dataset contains 569 observations across 32 variables. This is what the first 6 lines look like:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Check out head of dataframe
+breastCancerData %&gt;% head()
+
+# A tibble: 6 x 32
+      ID Diagnosis Radius.Mean Texture.Mean Perimeter.Mean Area.Mean Smoothness.Mean
+   &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;        &lt;dbl&gt;          &lt;dbl&gt;     &lt;dbl&gt;           &lt;dbl&gt;
+1 8.42e5 M                18.0         10.4          123.      1001           0.118
+2 8.43e5 M                20.6         17.8          133.      1326           0.0847
+3 8.43e7 M                19.7         21.2          130       1203           0.110
+4 8.43e7 M                11.4         20.4           77.6      386.          0.142
+5 8.44e7 M                20.3         14.3          135.      1297           0.100
+6 8.44e5 M                12.4         15.7           82.6      477.          0.128
+# ... with 25 more variables: Compactness.Mean &lt;dbl&gt;, Concavity.Mean &lt;dbl&gt;,
+#   Concave.Points.Mean &lt;dbl&gt;, Symmetry.Mean &lt;dbl&gt;, Fractal.Dimension.Mean &lt;dbl&gt;,
+#   Radius.SE &lt;dbl&gt;, Texture.SE &lt;dbl&gt;, Perimeter.SE &lt;dbl&gt;, Area.SE &lt;dbl&gt;,
+#   Smoothness.SE &lt;dbl&gt;, Compactness.SE &lt;dbl&gt;, Concavity.SE &lt;dbl&gt;, Concave.Points.SE &lt;dbl&gt;,
+#   Symmetry.SE &lt;dbl&gt;, Fractal.Dimension.SE &lt;dbl&gt;, Radius.Worst &lt;dbl&gt;, Texture.Worst &lt;dbl&gt;,
+#   Perimeter.Worst &lt;dbl&gt;, Area.Worst &lt;dbl&gt;, Smoothness.Worst &lt;dbl&gt;,
+#   Compactness.Worst &lt;dbl&gt;, Concavity.Worst &lt;dbl&gt;, Concave.Points.Worst &lt;dbl&gt;,
+#   Symmetry.Worst &lt;dbl&gt;, Fractal.Dimension.Worst &lt;dbl&gt;
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>We will also make our <code class="language-plaintext highlighter-rouge">Diagnosis</code> column a factor:</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Make Diagnosis a factor</span><span class="w">
+</span><span class="n">breastCancerData</span><span class="o">$</span><span class="n">Diagnosis</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.factor</span><span class="p">(</span><span class="n">breastCancerData</span><span class="o">$</span><span class="n">Diagnosis</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <blockquote class="question">
+        <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>What is a factor?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>TODO</p>
+
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="what-is-exploratory-data-analysis-eda-and-why-is-it-useful">What is Exploratory Data Analysis (EDA) and why is it useful?</h2>
+
+<p>Before thinking about modeling, have a look at your data. There is no point in throwing a 10000 layer convolutional neural network (whatever that means) at your data before you even know what you’re dealing with.</p>
+
+<p>We will first remove the first column, which is the unique identifier of each row:</p>
+
+<blockquote class="question">
+  <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>Why?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>TODO</p>
+
+  </blockquote>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-exploratory-data-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Exploratory Data Analysis</h3>
+  <ol>
+    <li>
+      <p>Remove the first column</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Remove first column</span><span class="w">
+</span><span class="n">breastCancerDataNoID</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">breastCancerData</span><span class="p">[</span><span class="m">2</span><span class="o">:</span><span class="n">ncol</span><span class="p">(</span><span class="n">breastCancerData</span><span class="p">)]</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>View the dataset. The output should like like this:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># View head
+breastCancerDataNoID %&gt;% head()
+
+# A tibble: 6 x 31
+  Diagnosis Radius.Mean Texture.Mean Perimeter.Mean Area.Mean Smoothness.Mean
+  &lt;fct&gt;           &lt;dbl&gt;        &lt;dbl&gt;          &lt;dbl&gt;     &lt;dbl&gt;           &lt;dbl&gt;
+1 M                18.0         10.4          123.      1001           0.118
+2 M                20.6         17.8          133.      1326           0.0847
+3 M                19.7         21.2          130       1203           0.110
+4 M                11.4         20.4           77.6      386.          0.142
+5 M                20.3         14.3          135.      1297           0.100
+6 M                12.4         15.7           82.6      477.          0.128
+# ... with 25 more variables: Compactness.Mean &lt;dbl&gt;, Concavity.Mean &lt;dbl&gt;,
+#   Concave.Points.Mean &lt;dbl&gt;, Symmetry.Mean &lt;dbl&gt;, Fractal.Dimension.Mean &lt;dbl&gt;,
+#   Radius.SE &lt;dbl&gt;, Texture.SE &lt;dbl&gt;, Perimeter.SE &lt;dbl&gt;, Area.SE &lt;dbl&gt;,
+#   Smoothness.SE &lt;dbl&gt;, Compactness.SE &lt;dbl&gt;, Concavity.SE &lt;dbl&gt;, Concave.Points.SE &lt;dbl&gt;,
+#   Symmetry.SE &lt;dbl&gt;, Fractal.Dimension.SE &lt;dbl&gt;, Radius.Worst &lt;dbl&gt;, Texture.Worst &lt;dbl&gt;,
+#   Perimeter.Worst &lt;dbl&gt;, Area.Worst &lt;dbl&gt;, Smoothness.Worst &lt;dbl&gt;,
+#   Compactness.Worst &lt;dbl&gt;, Concavity.Worst &lt;dbl&gt;, Concave.Points.Worst &lt;dbl&gt;,
+#   Symmetry.Worst &lt;dbl&gt;, Fractal.Dimension.Worst &lt;dbl&gt;
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>We have many variables in this dataset. For the interest of time, we will focus only on the first five. Let’s have a look at a plot:</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">GGally</span><span class="p">)</span><span class="w">
+
+</span><span class="n">ggpairs</span><span class="p">(</span><span class="n">breastCancerDataNoID</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">],</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">Diagnosis</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="o">=</span><span class="m">0.4</span><span class="p">))</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <figure id="figure-2"><img src="../../images/intro-to-ml-with-r/ggpairs5variables.png" alt="ggpairs output of the first 5 variables" /><figcaption><span class="figcaption-prefix">Figure 2:</span> ggpairs output of the first 5 variables</figcaption></figure>
+    </li>
+    <li>
+      <p>Next, we need to center and scale the data.</p>
+
+      <p>Note that the features have widely varying centers and scales (means and standard deviations), so we’ll want to center and scale them in some situations. We will use the <code class="language-plaintext highlighter-rouge">[caret](https://cran.r-project.org/web/packages/caret/vignettes/caret.html)</code> package for this, and specifically, the <code class="language-plaintext highlighter-rouge">preProcess</code> function.</p>
+
+      <p>The <code class="language-plaintext highlighter-rouge">preProcess</code> function can be used for many operations on predictors, including centering and scaling. The function <code class="language-plaintext highlighter-rouge">preProcess</code> estimates the required parameters for each operation and <code class="language-plaintext highlighter-rouge">predict.preProcess</code> is used to apply them to specific data sets. This function can also be interfaced when calling the <code class="language-plaintext highlighter-rouge">train</code> function.</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">caret</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Center &amp; scale data</span><span class="w">
+</span><span class="n">ppv</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">preProcess</span><span class="p">(</span><span class="n">breastCancerDataNoID</span><span class="p">,</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"center"</span><span class="p">,</span><span class="w"> </span><span class="s2">"scale"</span><span class="p">))</span><span class="w">
+</span><span class="n">breastCancerDataNoID_tr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">ppv</span><span class="p">,</span><span class="w"> </span><span class="n">breastCancerDataNoID</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Let’s have a look on the impact of this process by viewing the summary of the first 5 variables before and after the process:</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Summarize first 5 columns of the original data</span><span class="w">
+</span><span class="n">breastCancerDataNoID</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">]</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">summary</span><span class="p">()</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <p>It should look like:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Diagnosis  Radius.Mean      Texture.Mean   Perimeter.Mean     Area.Mean
+B:357     Min.   : 6.981   Min.   : 9.71   Min.   : 43.79   Min.   : 143.5
+M:212     1st Qu.:11.700   1st Qu.:16.17   1st Qu.: 75.17   1st Qu.: 420.3
+          Median :13.370   Median :18.84   Median : 86.24   Median : 551.1
+          Mean   :14.127   Mean   :19.29   Mean   : 91.97   Mean   : 654.9
+          3rd Qu.:15.780   3rd Qu.:21.80   3rd Qu.:104.10   3rd Qu.: 782.7
+          Max.   :28.110   Max.   :39.28   Max.   :188.50   Max.   :2501.0
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Let’s check the summary of the re-centered and scaled data</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Summarize first 5 columns of the re-centered and scaled data</span><span class="w">
+</span><span class="n">breastCancerDataNoID_tr</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">]</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">summary</span><span class="p">()</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <p>It now should look like this:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Diagnosis  Radius.Mean       Texture.Mean     Perimeter.Mean      Area.Mean
+B:357     Min.   :-2.0279   Min.   :-2.2273   Min.   :-1.9828   Min.   :-1.4532
+M:212     1st Qu.:-0.6888   1st Qu.:-0.7253   1st Qu.:-0.6913   1st Qu.:-0.6666
+          Median :-0.2149   Median :-0.1045   Median :-0.2358   Median :-0.2949
+          Mean   : 0.0000   Mean   : 0.0000   Mean   : 0.0000   Mean   : 0.0000
+          3rd Qu.: 0.4690   3rd Qu.: 0.5837   3rd Qu.: 0.4992   3rd Qu.: 0.3632
+          Max.   : 3.9678   Max.   : 4.6478   Max.   : 3.9726   Max.   : 5.2459
+</code></pre></div>      </div>
+
+      <p>As, we can observe here, all variables in our new data have a mean of 0 while maintaining the same distribution of the values. However, this also means that the absolute values do not correspond to the “real”, original data - and is just a representation of them.</p>
+    </li>
+    <li>
+      <p>We can also check whether our plot has changed with the new data:</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">GGally</span><span class="p">)</span><span class="w">
+
+</span><span class="n">ggpairs</span><span class="p">(</span><span class="n">breastCancerDataNoID_tr</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">],</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">Diagnosis</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="o">=</span><span class="m">0.4</span><span class="p">))</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <figure id="figure-3"><img src="../../images/intro-to-ml-with-r/ggpairs5variables_tr.png" alt="ggpairs output of the first 5 variables of the recentered/rescaled data" /><figcaption><span class="figcaption-prefix">Figure 3:</span> ggpairs output of the first 5 variables of the recentered/rescaled data</figcaption></figure>
+
+      <blockquote class="question">
+        <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>Do you see any differences?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>TODO</p>
+
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="unsupervised-learning">Unsupervised Learning</h2>
+
+<h3 id="dimensionality-reduction-and-pca">Dimensionality Reduction and PCA</h3>
+
+<p><strong>Machine learning</strong> is the science and art of giving computers the ability to learn to make decisions from data without being explicitly programmed.</p>
+
+<p><strong>Unsupervised learning</strong>, in essence, is the machine learning task of uncovering hidden patterns and structures from <strong>unlabeled data</strong>. For example, a researcher might want to group their samples into distinct groups, based on their gene <span class="notranslate">expression</span> data without in advance what these categories maybe. This is known as <strong>clustering</strong>, one branch of unsupervised learning.</p>
+
+<p><strong>Supervised learning</strong> (which will be addressed later in depth), is the branch of machine learning that involves <strong>predicting labels</strong>, such as whether a tumor will be benign or malignant.</p>
+
+<p>Another form of unsupervised learning, is dimensionality reduction; in the UCI dataset, for example, there are too many features to keep track of. What if we could reduce the number of features yet still keep much of the information?</p>
+
+<p>Principal component analysis (PCA) is one of the most commonly used methods of dimensionality reduction, and extracts the features with the largest variance. What PCA essentially does is the following:</p>
+<ul>
+  <li>The first step of PCA is to decorrelate your data and this corresponds to a linear transformation of the vector space your data lie in;</li>
+  <li>The second step is the actual dimension reduction; what is really happening is that your decorrelation step (the first step above) transforms the features into new and uncorrelated features; this second step then chooses the features that contain most of the information about the data.</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-dimensionality-reduction--pca"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Dimensionality Reduction &amp; PCA</h3>
+
+  <ol>
+    <li>Let’s have a look into the variables that we currently have, and apply PCA to them. As you can see, we will be using only the numerical variables (i.e. we will exclude the first two, <code class="language-plaintext highlighter-rouge">ID</code> and <code class="language-plaintext highlighter-rouge">Diagnosis</code>):
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ppv_pca</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">prcomp</span><span class="p">(</span><span class="n">breastCancerData</span><span class="p">[</span><span class="m">3</span><span class="o">:</span><span class="n">ncol</span><span class="p">(</span><span class="n">breastCancerData</span><span class="p">)],</span><span class="w"> </span><span class="n">center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">scale.</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>We can use the <code class="language-plaintext highlighter-rouge">summary()</code> function to get a summary of the PCA:</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">summary</span><span class="p">(</span><span class="n">ppv_pca</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <p>The resulting table, shows us the importance of each Principal Component; the standard deviation, the proportion of the variance that it captures, as well as the cumulative proportion of variance capture by the principal components.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Importance of components:
+                          PC1    PC2     PC3     PC4     PC5     PC6     PC7     PC8    PC9
+Standard deviation     3.6444 2.3857 1.67867 1.40735 1.28403 1.09880 0.82172 0.69037 0.6457
+Proportion of Variance 0.4427 0.1897 0.09393 0.06602 0.05496 0.04025 0.02251 0.01589 0.0139
+Cumulative Proportion  0.4427 0.6324 0.72636 0.79239 0.84734 0.88759 0.91010 0.92598 0.9399
+                          PC10   PC11    PC12    PC13    PC14    PC15    PC16    PC17
+Standard deviation     0.59219 0.5421 0.51104 0.49128 0.39624 0.30681 0.28260 0.24372
+Proportion of Variance 0.01169 0.0098 0.00871 0.00805 0.00523 0.00314 0.00266 0.00198
+Cumulative Proportion  0.95157 0.9614 0.97007 0.97812 0.98335 0.98649 0.98915 0.99113
+                          PC18    PC19    PC20   PC21    PC22    PC23   PC24    PC25    PC26
+Standard deviation     0.22939 0.22244 0.17652 0.1731 0.16565 0.15602 0.1344 0.12442 0.09043
+Proportion of Variance 0.00175 0.00165 0.00104 0.0010 0.00091 0.00081 0.0006 0.00052 0.00027
+Cumulative Proportion  0.99288 0.99453 0.99557 0.9966 0.99749 0.99830 0.9989 0.99942 0.99969
+                          PC27    PC28    PC29    PC30
+Standard deviation     0.08307 0.03987 0.02736 0.01153
+Proportion of Variance 0.00023 0.00005 0.00002 0.00000
+Cumulative Proportion  0.99992 0.99997 1.00000 1.00000
+</code></pre></div>      </div>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Principal Components are the underlying structure in the data. They are the directions where there is the most variance, the directions where the data is most spread out. This means that we try to find the straight line that best sp<span class="notranslate">reads</span> the data out when it is projected along it. This is the first principal component, the straight line that shows the most substantial variance in the data.</p>
+
+<p>PCA is a type of linear transformation on a given data set that has values for a certain number of variables (coordinates) for a certain amount of spaces. In this way, you transform a set of <code class="language-plaintext highlighter-rouge">x</code> correlated variables over <code class="language-plaintext highlighter-rouge">y</code> samples to a set of <code class="language-plaintext highlighter-rouge">p</code> uncorrelated principal components over the same samples.</p>
+
+<p>Where many variables correlate with one another, they will all contribute strongly to the same principal component. Where your initial variables are strongly correlated with one another, you will be able to approximate most of the complexity in your dataset with just a few principal components. As you add more principal components, you summarize more and more of the original dataset. Adding additional components makes your estimate of the total dataset more accurate, but also more unwieldy.</p>
+
+<p>Every eigenvector has a corresponding eigenvalue. Simply put, an eigenvector is a direction, such as “vertical” or “45 degrees”, while an eigenvalue is a number telling you how much variance there is in the data in that direction. The eigenvector with the highest eigenvalue is, therefore, the first principal component. The number of eigenvalues and eigenvectors that exits is equal to the number of dimensions the data set has. In our case, we had 30 variables (32 original, minus the first two), so we have produced 30 eigenvectors / PCs. And we can see that we can address more than 95% of the variance (0.95157) using only the first 10 PCs.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-deeper-look-into-pca"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Deeper look into PCA</h3>
+
+  <ol>
+    <li>
+      <p>We should also have a deeper look in our PCA object:</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">str</span><span class="p">(</span><span class="n">ppv_pca</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <p>The output should look like this:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>List of 5
+ $ sdev    : num [1:30] 3.64 2.39 1.68 1.41 1.28 ...
+ $ rotation: num [1:30, 1:30] -0.219 -0.104 -0.228 -0.221 -0.143 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:30] "Radius.Mean" "Texture.Mean" "Perimeter.Mean" "Area.Mean" ...
+  .. ..$ : chr [1:30] "PC1" "PC2" "PC3" "PC4" ...
+ $ center  : Named num [1:30] 14.1273 19.2896 91.969 654.8891 0.0964 ...
+  ..- attr(*, "names")= chr [1:30] "Radius.Mean" "Texture.Mean" "Perimeter.Mean" "Area.Mean" ...
+ $ scale   : Named num [1:30] 3.524 4.301 24.299 351.9141 0.0141 ...
+  ..- attr(*, "names")= chr [1:30] "Radius.Mean" "Texture.Mean" "Perimeter.Mean" "Area.Mean" ...
+ $ x       : num [1:569, 1:30] -9.18 -2.39 -5.73 -7.12 -3.93 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : NULL
+  .. ..$ : chr [1:30] "PC1" "PC2" "PC3" "PC4" ...
+ - attr(*, "class")= chr "prcomp"
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>The information listed captures the following:</p>
+
+      <ol>
+        <li>The center point (<code class="language-plaintext highlighter-rouge">$center</code>), scaling (<code class="language-plaintext highlighter-rouge">$scale</code>) and the standard deviation(<code class="language-plaintext highlighter-rouge">$sdev</code>) of each original variable</li>
+        <li>The relationship (correlation or anticorrelation, etc) between the initial variables and the principal components (<code class="language-plaintext highlighter-rouge">$rotation</code>)</li>
+        <li>The values of each sample in terms of the principal components (<code class="language-plaintext highlighter-rouge">$x</code>)</li>
+      </ol>
+
+      <p>Let’s try to visualize the results we’ve got so far. We will be using the <a href="https://github.com/vqv/ggbiplot"><code class="language-plaintext highlighter-rouge">ggbiplot</code> library</a> for this purpose.</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggbiplot</span><span class="p">(</span><span class="n">ppv_pca</span><span class="p">,</span><span class="w"> </span><span class="n">choices</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w">
+         </span><span class="n">labels</span><span class="o">=</span><span class="n">rownames</span><span class="p">(</span><span class="n">breastCancerData</span><span class="p">),</span><span class="w">
+         </span><span class="n">ellipse</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
+         </span><span class="n">groups</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">breastCancerData</span><span class="o">$</span><span class="n">Diagnosis</span><span class="p">,</span><span class="w">
+         </span><span class="n">obs.scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w">
+         </span><span class="n">var.axes</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">var.scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ggtitle</span><span class="p">(</span><span class="s2">"PCA of Breast Cancer Dataset"</span><span class="p">)</span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_minimal</span><span class="p">()</span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bottom"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <figure id="figure-4"><img src="../../images/intro-to-ml-with-r/pc12Visualization_Full.png" alt="Visualization of the first two PCs on the UCI Breast Cancer dataset" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Visualization of the first two PCs on the UCI Breast Cancer dataset</figcaption></figure>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <ol>
+    <li>Try changing the parameters of the plot. For example, check the <code class="language-plaintext highlighter-rouge">choices</code> and the <code class="language-plaintext highlighter-rouge">var.scale</code>. Is there an impact? What does this mean?</li>
+    <li>We have been using the entire table of data. What if we restrict our analysis on the <code class="language-plaintext highlighter-rouge">mean</code> values (i.e. columns 3-12)? Is there an impact?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>TODO</p>
+
+  </blockquote>
+</blockquote>
+
+<h3 id="clustering">Clustering</h3>
+
+<p>One popular technique in unsupervised learning is clustering. As the name itself suggests, Clustering algorithms group a set of data points into subsets or clusters. The algorithms’ goal is to create clusters that are coherent inte<span class="notranslate">rna</span>lly, but clearly different from each other exte<span class="notranslate">rna</span>lly. In other words, entities within a cluster should be as similar as possible and entities in one cluster should be as dissimilar as possible from entities in another.</p>
+
+<p>Broadly speaking there are two ways of clustering data points based on the algorithmic structure and operation, namely agglomerative and divisive.</p>
+
+<ul>
+  <li><strong>Agglomerative</strong>: An agglomerative approach begins with each observation in a distinct (singleton) cluster, and successively merges clusters together until a stopping criterion is satisfied.</li>
+  <li><strong>Divisive</strong>: A divisive method begins with all patterns in a single cluster and performs splitting until a stopping criterion is met.</li>
+</ul>
+
+<p>Essentially, this is the task of grouping your data points, based on something about them, such as closeness in space. Clustering is more of a tool to help you explore a dataset, and should not always be used as an automatic method to classify data. Hence, you may not always deploy a clustering algorithm for real-world production scenario. They are often too unreliable, and a single clustering alone will not be able to give you all the information you can extract from a dataset.</p>
+
+<h3 id="k-means">K-Means</h3>
+
+<p>What we are going to do is group the tumor data points into two clusters using an algorithm called <code class="language-plaintext highlighter-rouge">k-means</code>, which aims to cluster the data in order to minimize the variances of the clusters. The basic idea behind k-means clustering consists of defining clusters so that the total intra-cluster variation (known as total within-cluster variation) is minimized. There are several k-means algorithms available. However, the standard algorithm defines the total within-cluster variation as the sum of squared distances Euclidean distances between items and the corresponding centroid:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-lets-cluster-our-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Let’s cluster our data</h3>
+
+  <ol>
+    <li>
+      <p>Let’s cluster our data points (ignoring their know classes) using k-means and then we’ll compare the results to the actual labels that we know:</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">set.seed</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w">
+</span><span class="n">km.out</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">kmeans</span><span class="p">(</span><span class="n">breastCancerData</span><span class="p">[</span><span class="m">3</span><span class="o">:</span><span class="n">ncol</span><span class="p">(</span><span class="n">breastCancerData</span><span class="p">)],</span><span class="w"> </span><span class="n">centers</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">nstart</span><span class="o">=</span><span class="m">20</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <p>The <code class="language-plaintext highlighter-rouge">nstart</code> option attempts multiple initial configurations and reports on the best one within the kmeans function. Seeds allow us to create a starting point for randomly generated numbers, so that each time our code is run, the same answer is generated.
+Also, note that k-means requires the number of clusters to be defined beforehand and given via the <code class="language-plaintext highlighter-rouge">centers</code> option.</p>
+    </li>
+    <li>
+      <p>Let’s check now what the output contains:</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">str</span><span class="p">(</span><span class="n">km.out</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <p>The output will be:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>List of 9
+ $ cluster     : int [1:569] 2 2 2 1 2 1 2 1 1 1 ...
+ $ centers     : num [1:2, 1:30] 12.6 19.4 18.6 21.7 81.1 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:2] "1" "2"
+  .. ..$ : chr [1:30] "Radius.Mean" "Texture.Mean" "Perimeter.Mean" "Area.Mean" ...
+ $ totss       : num 2.57e+08
+ $ withinss    : num [1:2] 28559677 49383423
+ $ tot.withinss: num 77943100
+ $ betweenss   : num 1.79e+08
+ $ size        : int [1:2] 438 131
+ $ iter        : int 1
+ $ ifault      : int 0
+ - attr(*, "class")= chr "kmeans"
+</code></pre></div>      </div>
+
+      <p>The information contained here is:</p>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">$cluster</code>: a vector of integers (from 1:k) indicating the cluster to which each point is allocated.</li>
+        <li><code class="language-plaintext highlighter-rouge">$centers</code>: a matrix of cluster centers.</li>
+        <li><code class="language-plaintext highlighter-rouge">$withinss</code>: vector of within-cluster sum of squares, one component per cluster.</li>
+        <li><code class="language-plaintext highlighter-rouge">$tot.withinss</code>: total within-cluster sum of squares (i.e. <code class="language-plaintext highlighter-rouge">sum(withinss)</code>).</li>
+        <li><code class="language-plaintext highlighter-rouge">$size</code>: the number of points in each cluster.</li>
+      </ul>
+    </li>
+    <li>
+      <p>Let’s have a look at the clusters, and we will do this in relationship to the principal components we identified earlier:</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggplot</span><span class="p">(</span><span class="n">as.data.frame</span><span class="p">(</span><span class="n">ppv_pca</span><span class="o">$</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">PC1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">PC2</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="n">as.factor</span><span class="p">(</span><span class="n">km.out</span><span class="o">$</span><span class="n">cluster</span><span class="p">),</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">breastCancerData</span><span class="o">$</span><span class="n">Diagnosis</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_minimal</span><span class="p">()</span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bottom"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"K-Means clusters against PCA"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"PC1"</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"PC2"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Cluster"</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Diagnosis"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <figure id="figure-5"><img src="../../images/intro-to-ml-with-r/kmeans-pc12-Visualization.png" alt="Visualization of the k-means results against the first two PCs on the UCI Breast Cancer dataset" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Visualization of the k-means results against the first two PCs on the UCI Breast Cancer dataset</figcaption></figure>
+
+      <p>This is a rather complex plotting command that is based on the <code class="language-plaintext highlighter-rouge">ggplot</code> library. For an overview of how <code class="language-plaintext highlighter-rouge">ggplot</code> works, have a look at the <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-viz-in-r/tutorial.html"><span class="notranslate">RNA</span> Seq Counts to Viz in R</a> tutorial.</p>
+    </li>
+    <li>
+      <p>Now that we have a cluster for each tumor (clusters 1 and 2), we can check how well they coincide with the labels that we know. To do this we will use a cool method called <strong>cross-tabulation</strong>: a cross-tab is a table that allows you to read off how many data points in clusters 1 and 2 were actually benign or malignant respectively.</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Cross-tab of clustering &amp; known labels</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">gmodels</span><span class="p">)</span><span class="w">
+</span><span class="n">CrossTable</span><span class="p">(</span><span class="n">breastCancerData</span><span class="o">$</span><span class="n">Diagnosis</span><span class="p">,</span><span class="w"> </span><span class="n">km.out</span><span class="o">$</span><span class="n">cluster</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <p>The output should look like this:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cell Contents
+|-------------------------|
+|                       N |
+| Chi-square contribution |
+|           N / Row Total |
+|           N / Col Total |
+|         N / Table Total |
+|-------------------------|
+
+
+Total Observations in Table:  569
+
+
+                           | km.out$cluster
+breastCancerData$Diagnosis |         1 |         2 | Row Total |
+---------------------------|-----------|-----------|-----------|
+                         B |       356 |         1 |       357 |
+                           |    23.988 |    80.204 |           |
+                           |     0.997 |     0.003 |     0.627 |
+                           |     0.813 |     0.008 |           |
+                           |     0.626 |     0.002 |           |
+---------------------------|-----------|-----------|-----------|
+                         M |        82 |       130 |       212 |
+                           |    40.395 |   135.060 |           |
+                           |     0.387 |     0.613 |     0.373 |
+                           |     0.187 |     0.992 |           |
+                           |     0.144 |     0.228 |           |
+---------------------------|-----------|-----------|-----------|
+              Column Total |       438 |       131 |       569 |
+                           |     0.770 |     0.230 |           |
+---------------------------|-----------|-----------|-----------|
+</code></pre></div>      </div>
+
+      <p><em>Question: <strong>How well did the clustering work?</strong></em></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h4 id="optimal-k">Optimal k</h4>
+
+<p>One technique to choose the best <code class="language-plaintext highlighter-rouge">k</code> is called the <strong>elbow method</strong>. This method uses within-group homogeneity or within-group heterogeneity to evaluate the variability. In other words, you are interested in the percentage of the variance explained by each cluster. You can expect the variability to increase with the number of clusters, alte<span class="notranslate">rna</span>tively, heterogeneity decreases. Our challenge is to find the <code class="language-plaintext highlighter-rouge">k</code> that is beyond the diminishing returns. Adding a new cluster does not improve the variability in the data because very few information is left to explain.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-finding-the-optimal-k"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Finding the optimal k</h3>
+
+  <ol>
+    <li>
+      <p>First of all, let’s create a function that computes the total within clusters sum of squares:</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kmean_withinss</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">cluster</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">kmeans</span><span class="p">(</span><span class="n">breastCancerData</span><span class="p">[</span><span class="m">3</span><span class="o">:</span><span class="n">ncol</span><span class="p">(</span><span class="n">breastCancerData</span><span class="p">)],</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w">
+  </span><span class="n">return</span><span class="w"> </span><span class="p">(</span><span class="n">cluster</span><span class="o">$</span><span class="n">tot.withinss</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>We can try for a single <code class="language-plaintext highlighter-rouge">k</code> (e.g. 2), and see the value:</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kmean_withinss</span><span class="p">(</span><span class="m">2</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[1] 77943100
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>However, we need to test this <code class="language-plaintext highlighter-rouge">n</code> times. We will use the <code class="language-plaintext highlighter-rouge">sapply()</code> function to run the algorithm over a range of <code class="language-plaintext highlighter-rouge">k</code>. This technique is faster than creating a loop and store the value each time.</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Set maximum cluster</span><span class="w">
+</span><span class="n">max_k</span><span class="w"> </span><span class="o">&lt;</span><span class="m">-20</span><span class="w">
+</span><span class="c1"># Run algorithm over a range of k</span><span class="w">
+</span><span class="n">wss</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sapply</span><span class="p">(</span><span class="m">2</span><span class="o">:</span><span class="n">max_k</span><span class="p">,</span><span class="w"> </span><span class="n">kmean_withinss</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Finally, let’s save the results into a data frame, so that we can work with it:</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Create a data frame to plot the graph</span><span class="w">
+</span><span class="n">elbow</span><span class="w"> </span><span class="o">&lt;-</span><span class="n">data.frame</span><span class="p">(</span><span class="m">2</span><span class="o">:</span><span class="n">max_k</span><span class="p">,</span><span class="w"> </span><span class="n">wss</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Now that we have the data, we can plot them and try to identify the “elbow” point:</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Plot the graph with gglop</span><span class="w">
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">elbow</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X2.max_k</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wss</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_line</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_x_continuous</span><span class="p">(</span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <figure id="figure-6"><img src="../../images/intro-to-ml-with-r/elbow-plot-kmeans.png" alt="Elbow plot for multiple values of k" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Elbow plot for multiple values of k</figcaption></figure>
+
+      <blockquote class="question">
+        <h3 id="question-question-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>What is the optimal <code class="language-plaintext highlighter-rouge">k</code> value?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>From the graph, you can see the optimal <code class="language-plaintext highlighter-rouge">k</code> is around 10, where the curve is starting to have a diminishing return.</p>
+
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <ol>
+    <li>Try re-running the clustering step with the new k. Is there a significant difference?</li>
+    <li>Try to think of alte<span class="notranslate">rna</span>tive metrics that could be used as a “distance” measure, instead of the default “Euclidean”. Do you think there might be an optimal for our case?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>TODO</p>
+
+  </blockquote>
+</blockquote>
+
+<h3 id="hierarchical-clustering">Hierarchical clustering</h3>
+
+<p>k-means clustering requires us to specify the number of clusters, and determining the optimal number of clusters is often not trivial. Hierarchical clustering is an alte<span class="notranslate">rna</span>tive approach which builds a hierarchy from the bottom-up, and doesn’t require us to specify the number of clusters beforehand but requires extra steps to extract final clusters.
+The algorithm works as follows:</p>
+
+<ul>
+  <li>Put each data point in its own cluster.</li>
+  <li>Identify the closest two clusters and combine them into one cluster.</li>
+  <li>Repeat the above step till all the data points are in a single cluster.</li>
+</ul>
+
+<p>Once this is done, it is usually represented by a dendrogram like structure. There are a few ways to determine how close two clusters are:</p>
+
+<ol>
+  <li><strong>Complete linkage clustering</strong>: Find the maximum possible distance between points belonging to two different clusters.</li>
+  <li><strong>Single linkage clustering</strong>: Find the minimum possible distance between points belonging to two different clusters.</li>
+  <li><strong>Mean linkage clustering</strong>: Find all possible pairwise distances for points belonging to two different clusters and then calculate the average.</li>
+  <li><strong>Centroid linkage clustering</strong>: Find the centroid of each cluster and calculate the distance between centroids of two clusters.</li>
+</ol>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-k-means-clustering"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: k-means Clustering</h3>
+  <ol>
+    <li>
+      <p>We will be applying Hierarchical clustering to our dataset, and see what the result might be. Remember that our dataset has some columns with nominal (categorical) values (columns <code class="language-plaintext highlighter-rouge">ID</code> and <code class="language-plaintext highlighter-rouge">Diagnosis</code>), so we will need to make sure we only use the columns with numerical values. There are no missing values in this dataset that we need to clean before clustering. But the scales of the features are different and we need to normalize it.</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">breastCancerDataScaled</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.data.frame</span><span class="p">(</span><span class="n">scale</span><span class="p">(</span><span class="n">breastCancerData</span><span class="p">[</span><span class="m">3</span><span class="o">:</span><span class="n">ncol</span><span class="p">(</span><span class="n">breastCancerData</span><span class="p">)]))</span><span class="w">
+</span><span class="n">summary</span><span class="p">(</span><span class="n">breastCancerDataScaled</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>We can now proceed with creating the distance matrix:</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dist_mat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="n">breastCancerDataScaled</span><span class="p">,</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'euclidean'</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <p>There are several options for <code class="language-plaintext highlighter-rouge">method</code>: <code class="language-plaintext highlighter-rouge">euclidean</code>, <code class="language-plaintext highlighter-rouge">maximum</code>, <code class="language-plaintext highlighter-rouge">manhattan</code>, <code class="language-plaintext highlighter-rouge">canberra</code>, <code class="language-plaintext highlighter-rouge">binary</code> or <code class="language-plaintext highlighter-rouge">minkowski</code>.</p>
+    </li>
+    <li>
+      <p>The next step is to actually perform the hierarchical clustering, which means that at this point we should decide which linkage method we want to use. We can try all kinds of linkage methods and later decide on which one performed better. Here we will proceed with <code class="language-plaintext highlighter-rouge">average</code> linkage method (i.e. UPGMA); other methods include <code class="language-plaintext highlighter-rouge">ward.D</code>, <code class="language-plaintext highlighter-rouge">ward.D2</code>, <code class="language-plaintext highlighter-rouge">single</code>, <code class="language-plaintext highlighter-rouge">complete</code>, <code class="language-plaintext highlighter-rouge">mcquitty</code> (= WPGMA), <code class="language-plaintext highlighter-rouge">median</code> (= WPGMC) and <code class="language-plaintext highlighter-rouge">centroid</code> (= UPGMC).</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hclust_avg</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hclust</span><span class="p">(</span><span class="n">dist_mat</span><span class="p">,</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'average'</span><span class="p">)</span><span class="w">
+
+</span><span class="n">plot</span><span class="p">(</span><span class="n">hclust_avg</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <figure id="figure-7"><img src="../../images/intro-to-ml-with-r/hclust-fig1.png" alt="Hierarchical clustering (attempt 1)" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Hierarchical clustering (attempt 1)</figcaption></figure>
+
+      <p>Notice how the dendrogram is built and every data point finally merges into a single cluster with the height(distance) shown on the y-axis.</p>
+    </li>
+    <li>
+      <p>Next, we can cut the dendrogram in order to create the desired number of clusters. In our case, we might want to check whether our two groups (<code class="language-plaintext highlighter-rouge">M</code> and <code class="language-plaintext highlighter-rouge">B</code>) can be identified as sub-trees of our clustering - so we’ll set <code class="language-plaintext highlighter-rouge">k = 2</code> and then plot the result.</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cut_avg</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cutree</span><span class="p">(</span><span class="n">hclust_avg</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+
+</span><span class="n">plot</span><span class="p">(</span><span class="n">hclust_avg</span><span class="p">,</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">breastCancerData</span><span class="o">$</span><span class="n">ID</span><span class="p">,</span><span class="w"> </span><span class="n">hang</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="p">,</span><span class="w">
+     </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Cluster dendrogram (k = 2)"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Breast Cancer ID"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Height"</span><span class="p">)</span><span class="w">
+</span><span class="c1"># k: Cut the dendrogram such that exactly k clusters are produced</span><span class="w">
+</span><span class="c1"># border: Vector with border colors for the rectangles. Coild also be a number vector 1:2</span><span class="w">
+</span><span class="c1"># which: A vector selecting the clusters around which a rectangle should be drawn (numbered from left to right)</span><span class="w">
+</span><span class="n">rect.hclust</span><span class="p">(</span><span class="n">hclust_avg</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="s2">"green"</span><span class="p">),</span><span class="w"> </span><span class="n">which</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">))</span><span class="w">
+</span><span class="c1"># Draw a line at the height that the cut takes place</span><span class="w">
+</span><span class="n">abline</span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'red'</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+      <figure id="figure-8"><img src="../../images/intro-to-ml-with-r/hclust-fig2.png" alt="Hierarchical clustering (attempt 2)" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Hierarchical clustering (attempt 2)</figcaption></figure>
+    </li>
+    <li>
+      <p>Now we can see the two clusters enclosed in two different colored boxes. We can also use the <code class="language-plaintext highlighter-rouge">color_branches()</code> function from the <code class="language-plaintext highlighter-rouge">dendextend</code> library to visualize our tree with different colored branches.</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">dendextend</span><span class="p">)</span><span class="w">
+</span><span class="n">avg_dend_obj</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.dendrogram</span><span class="p">(</span><span class="n">hclust_avg</span><span class="p">)</span><span class="w">
+</span><span class="c1"># We can use either k (number of clusters), or clusters (and specify the cluster type)</span><span class="w">
+</span><span class="n">avg_col_dend</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">color_branches</span><span class="p">(</span><span class="n">avg_dend_obj</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">groupLabels</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">avg_col_dend</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Cluster dendrogram with color per cluster (k = 2)"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Breast Cancer ID"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Height"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <figure id="figure-9"><img src="../../images/intro-to-ml-with-r/hclust-fig3.png" alt="Hierarchical clustering (attempt 3)" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Hierarchical clustering (attempt 3)</figcaption></figure>
+    </li>
+    <li>
+      <p>We can change the way branches are colored, to reflect the <code class="language-plaintext highlighter-rouge">Diagnosis</code> value:</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">avg_col_dend</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">color_branches</span><span class="p">(</span><span class="n">avg_dend_obj</span><span class="p">,</span><span class="w"> </span><span class="n">clusters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">breastCancerData</span><span class="o">$</span><span class="n">Diagnosis</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">avg_col_dend</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Cluster dendrogram with Diagnosis color"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Breast Cancer ID"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Height"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <figure id="figure-10"><img src="../../images/intro-to-ml-with-r/hclust-fig4.png" alt="Hierarchical clustering (attempt 4)" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Hierarchical clustering (attempt 4)</figcaption></figure>
+    </li>
+    <li>
+      <p>TODO? Step Title</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggplot</span><span class="p">(</span><span class="n">as.data.frame</span><span class="p">(</span><span class="n">ppv_pca</span><span class="o">$</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">PC1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">PC2</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="n">as.factor</span><span class="p">(</span><span class="n">cut_avg</span><span class="p">),</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">breastCancerData</span><span class="o">$</span><span class="n">Diagnosis</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_minimal</span><span class="p">()</span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bottom"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Hierarchical clustering (cut at k=2) against PCA"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"PC1"</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"PC2"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Cluster"</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Diagnosis"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <figure id="figure-11"><img src="../../images/intro-to-ml-with-r/hclust-pc12-Visualization.png" alt="Visualization of the Hierarchical clustering (cut at k=2) results against the first two PCs on the UCI Breast Cancer dataset" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Visualization of the Hierarchical clustering (cut at k=2) results against the first two PCs on the UCI Breast Cancer dataset</figcaption></figure>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <ol>
+    <li>The hierarchical clustering performed so far, only used two methods: <code class="language-plaintext highlighter-rouge">euclidean</code> and <code class="language-plaintext highlighter-rouge">average</code>. Try experimenting with different methods. Do the final results improve?</li>
+    <li>Obviously the cut-off selection (k=2) was not optimal. Try using different cut-offs to ensure that the final clustering could provide some context to the original question.</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>TODO</p>
+
+  </blockquote>
+</blockquote>
+
+<h1 id="supervised-learning">Supervised Learning</h1>
+
+<p>Supervised learning is the branch of Machine Learning (ML) that involves predicting labels, such as ‘Survived’ or ‘Not’. Such models learn from labelled data, which is data that includes whether a passenger survived (called “model training”), and then predict on unlabeled data.</p>
+
+<p>These are generally called train and test sets because</p>
+<ul>
+  <li>You want to build a model that learns patterns in the training set, and</li>
+  <li>You then use the model to make predictions on the test set.</li>
+</ul>
+
+<p>We can then calculate the percentage that you got correct: this is known as the accuracy of your model.</p>
+
+<h2 id="how-to-start-with-supervised-learning">How To Start with Supervised Learning</h2>
+
+<p>As you might already know, a good way to approach supervised learning is the following:</p>
+<ul>
+  <li>Perform an Exploratory Data Analysis (EDA) on your data set;</li>
+  <li>Build a quick and dirty model, or a baseline model, which can serve as a comparison against later models that you will build;</li>
+  <li>Iterate this process. You will do more EDA and build another model;</li>
+  <li>Engineer features: take the features that you already have and combine them or extract more information from them to eventually come to the last point, which is</li>
+  <li>Get a model that performs better.</li>
+</ul>
+
+<p>A common practice in all supervised learning is the construction and use of the <strong>train- and test- datasets</strong>. This process takes all of the input randomly splits into the two datasets (training and test); the ratio of the split is usually up to the researcher, and can be anything: 80/20, 70/30, 60/40…</p>
+
+<h2 id="supervised-learning-i-classification">Supervised Learning I: classification</h2>
+
+<p>There are various classifiers available:</p>
+
+<ul>
+  <li><strong>Decision Trees</strong> – These are organized in the form of sets of questions and answers in the tree structure.</li>
+  <li><strong>Naive Bayes Classifiers</strong> – A probabilistic machine learning model that is used for classification.</li>
+  <li><strong>K-NN Classifiers</strong> – Based on the similarity measures like distance, it classifies new cases.</li>
+  <li><strong>Support Vector Machines</strong> – It is a non-probabilistic binary classifier that builds a model to classify a case into one of the two categories. They rely on a <code class="language-plaintext highlighter-rouge">kernel</code> function that essentially projects the data points to higher-dimensional space; depending on this new space, there can be both linear and non-linear SVMs.</li>
+</ul>
+
+<h3 id="decision-trees">Decision trees</h3>
+
+<p>It is a type of supervised learning algorithm. We use it for classification problems. It works for both types of input and output variables. In this technique, we split the population into two or more homogeneous sets. Moreover, it is based on the most significant splitter/differentiator in input variables.</p>
+
+<p>The Decision Tree is a powerful non-linear classifier. A Decision Tree makes use of a tree-like structure to generate relationship among the various features and potential outcomes. It makes use of branching decisions as its core structure.</p>
+
+<p>There are two types of decision trees:</p>
+<ul>
+  <li><strong>Categorical (classification)</strong> Variable Decision Tree: Decision Tree which has a categorical target variable.</li>
+  <li><strong>Continuous (Regression)</strong> Variable Decision Tree: Decision Tree has a continuous target variable.</li>
+</ul>
+
+<p>Regression trees are used when the dependent variable is continuous while classification trees are used when the dependent variable is categorical. In continuous, a value obtained is a mean response of observation. In classification, a value obtained by a terminal node is a mode of observations.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-decision-trees"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Decision Trees</h3>
+  <ol>
+    <li>
+      <p>Here, we will use the <code class="language-plaintext highlighter-rouge">rpart</code> and the <code class="language-plaintext highlighter-rouge">rpart.plot</code> package in order to produce and visualize a decision tree. First of all, we’ll create the train and test datasets using a 70/30 ratio and a fixed seed so that we can reproduce the results.</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># split into training and test subsets</span><span class="w">
+</span><span class="n">set.seed</span><span class="p">(</span><span class="m">1000</span><span class="p">)</span><span class="w">
+</span><span class="n">ind</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sample</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="p">(</span><span class="n">breastCancerData</span><span class="p">),</span><span class="w"> </span><span class="n">replace</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">prob</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">0.3</span><span class="p">))</span><span class="w">
+</span><span class="n">breastCancerData.train</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">breastCancerDataNoID</span><span class="p">[</span><span class="n">ind</span><span class="o">==</span><span class="m">1</span><span class="p">,]</span><span class="w">
+</span><span class="n">breastCancerData.test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">breastCancerDataNoID</span><span class="p">[</span><span class="n">ind</span><span class="o">==</span><span class="m">2</span><span class="p">,]</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Now, we will load the library and create our model. We would like to create a model that predicts the <code class="language-plaintext highlighter-rouge">Diagnosis</code> based on the mean of the radius and the area, as well as the SE of the texture. For ths reason we’ll use the notation of <code class="language-plaintext highlighter-rouge">myFormula &lt;- Diagnosis ~ Radius.Mean + Area.Mean + Texture.SE</code>. If we wanted to create a prediction model based on all variables, we will have used <code class="language-plaintext highlighter-rouge">myFormula &lt;- Diagnosis ~ .</code> instead. Finally, <code class="language-plaintext highlighter-rouge">minsplit</code> stands for the the minimum number of instances in a node so that it is split.</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">rpart</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">rpart.plot</span><span class="p">)</span><span class="w">
+</span><span class="n">myFormula</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Diagnosis</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Radius.Mean</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Area.Mean</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Texture.SE</span><span class="w">
+
+</span><span class="n">breastCancerData.model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rpart</span><span class="p">(</span><span class="n">myFormula</span><span class="p">,</span><span class="w">
+                                </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"class"</span><span class="p">,</span><span class="w">
+                                </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">breastCancerData.train</span><span class="p">,</span><span class="w">
+                                </span><span class="n">minsplit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w">
+                                </span><span class="n">minbucket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w">
+                                </span><span class="n">maxdepth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w">
+                                </span><span class="n">cp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-1</span><span class="p">)</span><span class="w">
+
+</span><span class="n">print</span><span class="p">(</span><span class="n">breastCancerData.model</span><span class="o">$</span><span class="n">cptable</span><span class="p">)</span><span class="w">
+</span><span class="n">rpart.plot</span><span class="p">(</span><span class="n">breastCancerData.model</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>We see the following output and a figure:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      CP       nsplit rel error   xerror     xstd
+1  0.69930070      0 1.0000000 1.0000000 0.06688883
+2  0.02797203      1 0.3006993 0.3006993 0.04330166
+3  0.00000000      2 0.2727273 0.3006993 0.04330166
+4 -1.00000000      6 0.2727273 0.3006993 0.04330166
+</code></pre></div>      </div>
+
+      <figure id="figure-12"><img src="../../images/intro-to-ml-with-r/decisionTreeFull.png" alt="Full decision tree" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Full decision tree</figcaption></figure>
+
+      <p>The parameters that we used reflect the following aspects of the model:</p>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">minsplit</code>: the minimum number of instances in a node so that it is split</li>
+        <li><code class="language-plaintext highlighter-rouge">minbucket</code>: the minimum allowed number of instances in each leaf of the tree</li>
+        <li><code class="language-plaintext highlighter-rouge">maxdepth</code>: the maximum depth of the tree</li>
+        <li><code class="language-plaintext highlighter-rouge">cp</code>: parameter that controls the complexity for a split and is set intuitively (the larger its value, the more probable to apply pruning to the tree)</li>
+      </ul>
+    </li>
+    <li>
+      <p>As we can observe, this might not be the best model. So we can select the tree with the minimum prediction error:</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">opt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">which.min</span><span class="p">(</span><span class="n">breastCancerData.model</span><span class="o">$</span><span class="n">cptable</span><span class="p">[,</span><span class="w"> </span><span class="s2">"xerror"</span><span class="p">])</span><span class="w">
+</span><span class="n">cp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">breastCancerData.model</span><span class="o">$</span><span class="n">cptable</span><span class="p">[</span><span class="n">opt</span><span class="p">,</span><span class="w"> </span><span class="s2">"CP"</span><span class="p">]</span><span class="w">
+</span><span class="c1"># prune tree</span><span class="w">
+</span><span class="n">breastCancerData.pruned.model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">prune</span><span class="p">(</span><span class="n">breastCancerData.model</span><span class="p">,</span><span class="w"> </span><span class="n">cp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cp</span><span class="p">)</span><span class="w">
+</span><span class="c1"># plot tree</span><span class="w">
+</span><span class="n">rpart.plot</span><span class="p">(</span><span class="n">breastCancerData.pruned.model</span><span class="p">)</span><span class="w">
+
+</span><span class="n">table</span><span class="p">(</span><span class="n">predict</span><span class="p">(</span><span class="n">breastCancerData.pruned.model</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"class"</span><span class="p">),</span><span class="w"> </span><span class="n">breastCancerData.train</span><span class="o">$</span><span class="n">Diagnosis</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <p>The output now is the following Confusion Matrix and pruned tree:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    B    M
+B  245  34
+M   9   109
+</code></pre></div>      </div>
+
+      <figure id="figure-13"><img src="../../images/intro-to-ml-with-r/decisionTreePruned.png" alt="Pruned decision tree" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Pruned decision tree</figcaption></figure>
+
+      <blockquote class="question">
+        <h3 id="question-question-7"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>What does the above “Confusion Matrix” tells you?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>TODO</p>
+
+        </blockquote>
+      </blockquote>
+    </li>
+    <li>
+      <p>Now that we have a model, we should check how the prediction works in our test dataset.</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## make prediction</span><span class="w">
+</span><span class="n">BreastCancer_pred</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">breastCancerData.pruned.model</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">breastCancerData.test</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"class"</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">BreastCancer_pred</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Diagnosis</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">breastCancerData.test</span><span class="p">,</span><span class="w">
+     </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Observed"</span><span class="p">,</span><span class="w">
+     </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Prediction"</span><span class="p">)</span><span class="w">
+</span><span class="n">table</span><span class="p">(</span><span class="n">BreastCancer_pred</span><span class="p">,</span><span class="w"> </span><span class="n">breastCancerData.test</span><span class="o">$</span><span class="n">Diagnosis</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <p>The new Confusion Matrix is the following:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>BreastCancer_pred   B   M
+                B 102  16
+                M   1  53
+</code></pre></div>      </div>
+
+      <figure id="figure-14"><img src="../../images/intro-to-ml-with-r/predictionPlot.png" alt="Prediction Plot" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Prediction Plot</figcaption></figure>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-8"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <ol>
+    <li>Can we improve the above model? What are the key parameters that have the most impact?</li>
+    <li>We have been using only some of the variables in our model. What is the impact of using all variables / features for our prediction? Is this a good or a bad plan?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>TODO</p>
+
+  </blockquote>
+</blockquote>
+
+<h3 id="random-forests">Random Forests</h3>
+
+<p>Random Forests is an ensemble learning technique, which essentially constructs multiple decision trees. Each tree is trained with a random sample of the training dataset and on a randomly chosen subspace. The final prediction result is derived from the predictions of all individual trees, with mean (for regression) or majority voting (for classification). The advantage is that it has better performance and is less likely to overfit than a single decision tree; however it has lower interpretability.</p>
+
+<p>There are two main libraries in R that provide the functionality for Random Forest creation; the <code class="language-plaintext highlighter-rouge">randomForest</code> and the <code class="language-plaintext highlighter-rouge">party: cforest()</code>.</p>
+
+<p>Package <code class="language-plaintext highlighter-rouge">randomForest</code></p>
+<ul>
+  <li>very fast</li>
+  <li>cannot handle data with missing values</li>
+  <li>a limit of 32 to the maximum number of levels of each categorical attribute</li>
+  <li>extensions: extendedForest, gradientForest</li>
+</ul>
+
+<p>Package <code class="language-plaintext highlighter-rouge">party: cforest()</code></p>
+<ul>
+  <li>not limited to the above maximum levels</li>
+  <li>slow</li>
+  <li>needs more memory</li>
+</ul>
+
+<p>In this exercise, we will be using the <code class="language-plaintext highlighter-rouge">randomForest</code>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-random-forests"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Random Forests</h3>
+  <ol>
+    <li>
+      <p>First, let’s train the model:</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">randomForest</span><span class="p">)</span><span class="w">
+</span><span class="n">set.seed</span><span class="p">(</span><span class="m">1000</span><span class="p">)</span><span class="w">
+</span><span class="n">rf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">randomForest</span><span class="p">(</span><span class="n">Diagnosis</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">.</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">breastCancerData.train</span><span class="p">,</span><span class="w">
+                   </span><span class="n">ntree</span><span class="o">=</span><span class="m">100</span><span class="p">,</span><span class="w">
+                   </span><span class="n">proximity</span><span class="o">=</span><span class="nb">T</span><span class="p">)</span><span class="w">
+
+</span><span class="n">table</span><span class="p">(</span><span class="n">predict</span><span class="p">(</span><span class="n">rf</span><span class="p">),</span><span class="w"> </span><span class="n">breastCancerData.train</span><span class="o">$</span><span class="n">Diagnosis</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <p>The output is the following:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   B   M
+B 249  12
+M   5 131
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>We can also investigate the content of the model:</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">print</span><span class="p">(</span><span class="n">rf</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <p>The output shows the individual components and inte<span class="notranslate">rna</span>l parameters of the Random Forest model.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Call:
+ randomForest(formula = Diagnosis ~ ., data = breastCancerData.train,      ntree = 100, proximity = T)
+               Type of random forest: classification
+                     Number of trees: 100
+No. of variables tried at each split: 5
+
+        OOB estimate of  error rate: 4.28%
+Confusion matrix:
+    B   M class.error
+B 249   5  0.01968504
+M  12 131  0.08391608
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>We can view the overall performance of the model here:</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plot</span><span class="p">(</span><span class="n">rf</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <figure id="figure-15"><img src="../../images/intro-to-ml-with-r/error-rate-rf.png" alt="Error rate plot for the Random Forest model" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Error rate plot for the Random Forest model</figcaption></figure>
+    </li>
+    <li>
+      <p>We can also review which of the variables has the highest “importance” (i.e. impact to the performance of the model):</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">importance</span><span class="p">(</span><span class="n">rf</span><span class="p">)</span><span class="w">
+
+</span><span class="n">varImpPlot</span><span class="p">(</span><span class="n">rf</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <p>The output is the table and the figure below:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ID                             1.0244803
+Radius.Mean                    7.8983552
+Texture.Mean                   1.9614134
+Perimeter.Mean                 9.3502914
+Area.Mean                      7.3438007
+Smoothness.Mean                0.7228277
+Compactness.Mean               2.6595043
+Concavity.Mean                11.2341661
+Concave.Points.Mean           18.5940046
+Symmetry.Mean                  0.8989458
+Fractal.Dimension.Mean         0.7465322
+Radius.SE                      3.1941672
+Texture.SE                     0.6363906
+Perimeter.SE                   2.4672730
+Area.SE                        5.3446273
+Smoothness.SE                  0.6089522
+Compactness.SE                 0.7785777
+Concavity.SE                   0.5576146
+Concave.Points.SE              1.0314107
+Symmetry.SE                    0.8839428
+Fractal.Dimension.SE           0.6475348
+Radius.Worst                  18.2035365
+Texture.Worst                  3.2765864
+Perimeter.Worst               25.3605679
+Area.Worst                    17.1063000
+Smoothness.Worst               2.1677456
+Compactness.Worst              2.9489506
+Concavity.Worst                6.0009637
+Concave.Points.Worst          25.6081497
+Symmetry.Worst                 2.1507714
+Fractal.Dimension.Worst        1.1498020
+</code></pre></div>      </div>
+
+      <figure id="figure-16"><img src="../../images/intro-to-ml-with-r/importance-variables.png" alt="Importance of the individual variables" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Importance of the individual variables</figcaption></figure>
+    </li>
+    <li>
+      <p>Let’s try to do a prediction of the <code class="language-plaintext highlighter-rouge">Diagnosis</code> for the test set, using the new model. The margin of a data point is as the proportion of votes for the correct class minus maximum proportion of votes for other classes. Positive margin means correct classification.</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">BreastCancer_pred_RD</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">rf</span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">breastCancerData.test</span><span class="p">)</span><span class="w">
+</span><span class="n">table</span><span class="p">(</span><span class="n">BreastCancer_pred_RD</span><span class="p">,</span><span class="w"> </span><span class="n">breastCancerData.test</span><span class="o">$</span><span class="n">Diagnosis</span><span class="p">)</span><span class="w">
+
+</span><span class="n">plot</span><span class="p">(</span><span class="n">margin</span><span class="p">(</span><span class="n">rf</span><span class="p">,</span><span class="w"> </span><span class="n">breastCancerData.test</span><span class="o">$</span><span class="n">Diagnosis</span><span class="p">))</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <p>The output is the table and figure below:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>BreastCancer_pred_RD   B   M
+                   B 101   6
+                   M   2  63
+</code></pre></div>      </div>
+
+      <figure id="figure-17"><img src="../../images/intro-to-ml-with-r/margin-rf.png" alt="Margin plot for the Random Forest" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Margin plot for the Random Forest</figcaption></figure>
+    </li>
+    <li>
+      <p>Feature selection: We can evaluate the prediction performance of models with reduced numbers of variables that are ranked by their importance.</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rfcv</span><span class="p">(</span><span class="n">breastCancerData.train</span><span class="p">,</span><span class="w"> </span><span class="n">breastCancerData.train</span><span class="o">$</span><span class="n">Diagnosis</span><span class="p">,</span><span class="w"> </span><span class="n">cv.fold</span><span class="o">=</span><span class="m">3</span><span class="p">)</span><span class="w">
+</span><span class="n">with</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="p">(</span><span class="n">n.var</span><span class="p">,</span><span class="w"> </span><span class="n">error.cv</span><span class="p">,</span><span class="w"> </span><span class="n">log</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"o"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">))</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <figure id="figure-18"><img src="../../images/intro-to-ml-with-r/rfcv.png" alt="Random Forest Cross-Valdidation for feature selection" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Random Forest Cross-Valdidation for feature selection</figcaption></figure>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="supervised-learning-ii-regression">Supervised Learning II: regression</h2>
+
+<h3 id="linear-regression">Linear regression</h3>
+
+<p>Linear regression is to predict response with a linear function of predictors. The most common function in R for this is <code class="language-plaintext highlighter-rouge">lm</code>. In our dataset, let’s try to investigate the relationship between <code class="language-plaintext highlighter-rouge">Radius.Mean</code>, <code class="language-plaintext highlighter-rouge">Concave.Points.Mean</code> and <code class="language-plaintext highlighter-rouge">Area.Mean</code>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-linear-regression"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Linear Regression</h3>
+  <ol>
+    <li>
+      <p>We can get a first impression by looking at the correlation of these variables:</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## correlation between Radius.Mean and Concave.Points.Mean / Area.Mean</span><span class="w">
+</span><span class="n">cor</span><span class="p">(</span><span class="n">breastCancerData</span><span class="o">$</span><span class="n">Radius.Mean</span><span class="p">,</span><span class="w"> </span><span class="n">breastCancerData</span><span class="o">$</span><span class="n">Concave.Points.Mean</span><span class="p">)</span><span class="w">
+</span><span class="c1">## [1] 0.8225285</span><span class="w">
+</span><span class="n">cor</span><span class="p">(</span><span class="n">breastCancerData</span><span class="o">$</span><span class="n">Concave.Points.Mean</span><span class="p">,</span><span class="w"> </span><span class="n">breastCancerData</span><span class="o">$</span><span class="n">Area.Mean</span><span class="p">)</span><span class="w">
+</span><span class="c1">## [1] 0.8232689</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+    <li>Lets create a short version of our data
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">select</span><span class="p">(</span><span class="n">breastCancerData</span><span class="p">,</span><span class="n">Radius.Mean</span><span class="p">,</span><span class="n">Concave.Points.Mean</span><span class="p">,</span><span class="n">Area.Mean</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Let’s build now a linear regression model with function <code class="language-plaintext highlighter-rouge">lm()</code> on the whole dataset:</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bc_model_full</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lm</span><span class="p">(</span><span class="n">Radius.Mean</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Concave.Points.Mean</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Area.Mean</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">bc</span><span class="p">)</span><span class="w">
+</span><span class="n">bc_model_full</span><span class="w">
+</span></code></pre></div>      </div>
+
+      <p>The output is the following:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Call:
+lm(formula = Radius.Mean ~ ., data = bc)
+
+Coefficients:
+        (Intercept)  Concave.Points.Mean            Area.Mean
+            7.68087              2.72493              0.00964
+</code></pre></div>      </div>
+
+      <p>This tells us what are the coefficients of <code class="language-plaintext highlighter-rouge">Concave.Points.Mean</code> and <code class="language-plaintext highlighter-rouge">Area.Mean</code>, in the linear equation that connects them to <code class="language-plaintext highlighter-rouge">Radius.Mean</code>. Let’s see if we can predict now the mean radius of a new sample, with <code class="language-plaintext highlighter-rouge">Concave.Points.Mean</code> = 2.724931 and <code class="language-plaintext highlighter-rouge">Area.Mean</code> = 0.00964.</p>
+    </li>
+    <li>Let’s make predictions on our training dataset and visualize
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">preds</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">bc_model_full</span><span class="p">)</span><span class="w">
+
+</span><span class="n">plot</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span><span class="w"> </span><span class="n">bc</span><span class="o">$</span><span class="n">Radius.Mean</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Prediction"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Observed"</span><span class="p">)</span><span class="w">
+</span><span class="n">abline</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+      <figure id="figure-19"><img src="../../images/intro-to-ml-with-r/lm_full_dataset.png" alt="Prediction Plot GLM" /><figcaption><span class="figcaption-prefix">Figure 19:</span> Prediction Plot GLM</figcaption></figure>
+    </li>
+    <li>
+      <p>We can also have a better look at what the model contains with <code class="language-plaintext highlighter-rouge">summary(bc_model_full)</code>:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Call:
+lm(formula = Radius.Mean ~ ., data = bc)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-4.8307 -0.1827  0.1497  0.3608  0.7411
+
+Coefficients:
+                     Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)         7.6808702  0.0505533 151.936   &lt;2e-16 ***
+Concave.Points.Mean 2.7249328  1.0598070   2.571   0.0104 *
+Area.Mean           0.0096400  0.0001169  82.494   &lt;2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.5563 on 566 degrees of freedom
+Multiple R-squared:  0.9752,	Adjusted R-squared:  0.9751
+F-statistic: 1.111e+04 on 2 and 566 DF,  p-value: &lt; 2.2e-16
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>But his only provides the evaluation on the whole dataset that we sued for training. we don’t know how it will perform on unknown dataset. So, let’s split our dataset into training and test set, create the model on training set and visualize the predictions</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">set.seed</span><span class="p">(</span><span class="m">123</span><span class="p">)</span><span class="w">
+</span><span class="n">ind</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sample</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="p">(</span><span class="n">bc</span><span class="p">),</span><span class="w"> </span><span class="n">replace</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">prob</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0.75</span><span class="p">,</span><span class="w"> </span><span class="m">0.25</span><span class="p">))</span><span class="w">
+</span><span class="n">bc_train</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">bc</span><span class="p">[</span><span class="n">ind</span><span class="o">==</span><span class="m">1</span><span class="p">,]</span><span class="w">
+</span><span class="n">bc_test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">bc</span><span class="p">[</span><span class="n">ind</span><span class="o">==</span><span class="m">2</span><span class="p">,]</span><span class="w">
+
+
+</span><span class="c1">#Let's build now a linear regression model using the training data and print it:</span><span class="w">
+</span><span class="p">(</span><span class="n">bc_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lm</span><span class="p">(</span><span class="n">Radius.Mean</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Concave.Points.Mean</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Area.Mean</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">bc_train</span><span class="p">))</span><span class="w">
+
+</span><span class="c1">#We can also view the model's summary</span><span class="w">
+</span><span class="n">summary</span><span class="p">(</span><span class="n">bc_model</span><span class="p">)</span><span class="w">
+
+
+</span><span class="c1">######Evaluating graphically</span><span class="w">
+</span><span class="c1">#Let's make predictions on our training dataset and store the predictions as a new column</span><span class="w">
+</span><span class="n">bc_train</span><span class="o">$</span><span class="n">pred</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">bc_model</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># plot the ground truths vs predictions for training set</span><span class="w">
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">bc_train</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pred</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Radius.Mean</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_abline</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+      <figure id="figure-20"><img src="../../images/intro-to-ml-with-r/lm_train_dataset.png" alt="Prediction Plot GLM" /><figcaption><span class="figcaption-prefix">Figure 20:</span> Prediction Plot GLM</figcaption></figure>
+
+      <p>You will note that it is quite similar to when using whole dataset</p>
+    </li>
+    <li>Let’s predict using test data
+      <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bc_test</span><span class="o">$</span><span class="n">pred</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">predict</span><span class="p">(</span><span class="n">bc_model</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">newdata</span><span class="o">=</span><span class="n">bc_test</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>and plot</p>
+
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># plot the ground truths vs predictions for test set and examine the plot. Does it look as good with the predictions on the training set?</span><span class="w">
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">bc_test</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pred</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Radius.Mean</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_abline</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Now let’s use the RMSE and the R_square metrics to evaluate our model on the training and test set. R_square measures how much of variability in dependent variable can be explained by the model. It is defined as the square of the correlation coefficient (<code class="language-plaintext highlighter-rouge">R</code>), and that is why it is called “R Square” (more info <a href="https://en.wikipedia.org/wiki/Coefficient_of_determination">here</a>).</p>
+
+<blockquote class="question">
+  <h3 id="question-question-9"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>Try evaluating model using RMSE, but on the training set this time</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-9"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##### Answer to exercise 1.</span><span class="w">
+</span><span class="c1">#Calculate residuals</span><span class="w">
+</span><span class="n">res</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">bc_train</span><span class="o">$</span><span class="n">Radius.Mean</span><span class="o">-</span><span class="n">bc_train</span><span class="o">$</span><span class="n">pred</span><span class="w">
+</span><span class="c1">#For training data we can also obtain the residuals using the bc_model$residuals</span><span class="w">
+
+</span><span class="c1"># Calculate RMSE, assign it to the variable rmse and print it</span><span class="w">
+</span><span class="p">(</span><span class="n">rmse</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">res</span><span class="o">^</span><span class="m">2</span><span class="p">)))</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="m">0.5624438</span><span class="w">
+
+</span><span class="c1"># Calculate the standard deviation of actual outcome and print it</span><span class="w">
+</span><span class="p">(</span><span class="n">sd_bc_train</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sd</span><span class="p">(</span><span class="n">bc_train</span><span class="o">$</span><span class="n">Radius.Mean</span><span class="p">))</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="m">3.494182</span><span class="w">
+</span></code></pre></div>    </div>
+
+    <p>So we can see that our RMSE is very small compared to SD, hence it is a good model</p>
+
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-10"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <ol>
+    <li>Calculate RMSE for the test data and check if the model is not overfit.</li>
+    <li>Evaluating model using R_square - on training set.</li>
+    <li>Calculate R_square for the test data and check if the model is not overfit.</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-10"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>TODO</p>
+
+  </blockquote>
+</blockquote>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Calculate mean of outcome: bc_mean.</span><span class="w">
+</span><span class="n">bc_mean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">bc_train</span><span class="o">$</span><span class="n">Radius.Mean</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Calculate total sum of squares: tss.</span><span class="w">
+</span><span class="n">tss</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">((</span><span class="n">bc_train</span><span class="o">$</span><span class="n">Radius.Mean</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">bc_mean</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Calculate residual sum of squares: rss.</span><span class="w">
+</span><span class="n">err</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">bc_train</span><span class="o">$</span><span class="n">Radius.Mean</span><span class="o">-</span><span class="n">bc_train</span><span class="o">$</span><span class="n">pred</span><span class="w">
+</span><span class="n">rss</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">err</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Calculate R-squared: rsq. Print it. Is it a good fit?</span><span class="w">
+</span><span class="p">(</span><span class="n">rsq</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="o">-</span><span class="p">(</span><span class="n">rss</span><span class="o">/</span><span class="n">tss</span><span class="p">))</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="m">0.974028</span><span class="w">
+</span></code></pre></div></div>
+
+<p>This again confirms that our model is very good as the R_square value is very close to 1</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>With the rise in high-throughput sequencing technologies, the volume of omics data has grown exponentially in recent times and a major issue is to mine useful knowledge from these data which are also heterogeneous in nature. Machine learning (ML) is a discipline in which computers perform automated learning without being programmed explicitly and assist humans to make sense of large and complex data sets. The analysis of complex high-volume data is not trivial and classical tools cannot be used to explore their full potential. Machine learning can thus be very useful in mining large omics datasets to uncover new insights that can advance the field of bioinformatics.</p>
+
+<p>This tutorial was only a first introductory step into the main concepts and approaches in machine learning. We looked at some of the common methods being used to analyse a representative dataset, by providing a practical context through the use of basic but widely used R libraries. Hopefully, at this point, you will have acquired a first understanding of the standard ML processes, as well as the practical skills in applying them on familiar problems and publicly available real-world data sets.</p>
+
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>To be added</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/statistics/faqs/">FAQ page for the Statistics and machine learning topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="Larra_aga_2006">Larrañaga, P., B. Calvo, R. Santana, C. Bielza, J. Galdiano <i>et al.</i>, 2006 <b>Machine learning in bioinformatics</b>. Briefings in Bioinformatics 7: 86–112.</span>
+    
+    
+    <a href="https://doi.org/10.1093/bib/bbk007">10.1093/bib/bbk007</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Chicco_2017">Chicco, D., 2017 <b>Ten quick tips for machine learning in computational biology</b>. BioData Mining 10:</span>
+    
+    
+    <a href="https://doi.org/10.1186/s13040-017-0155-3">10.1186/s13040-017-0155-3</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="ZENODO.3958880">Baichoo, S., W. Duchemin, G. V. Geest, T. V. D. Tran, F. E. Psomopoulos <i>et al.</i>, 2020 <b>Introduction to Machine Learning</b>.</span>
+    
+    
+    <a href="https://doi.org/10.5281/ZENODO.3958880">10.5281/ZENODO.3958880</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="https://zenodo.org/record/3958880">https://zenodo.org/record/3958880</a>
+      
+    
+
+</li></ol>
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Introduction to Machine Learning using R (Statistics and machine learning)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Fotis E. Psomopoulos, 2021 <b>Introduction to Machine Learning using R (Galaxy Training Materials)</b>. <a href="/training-material/topics/statistics/tutorials/intro-to-ml-with-r/tutorial.html">/training-material/topics/statistics/tutorials/intro-to-ml-with-r/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{statistics-intro-to-ml-with-r,
+    author = "Fotis E. Psomopoulos",
+    title = "Introduction to Machine Learning using R (Galaxy Training Materials)",
+    year = "2021",
+    month = "05",
+    day = "21"
+    url = "\url{/training-material/topics/statistics/tutorials/intro-to-ml-with-r/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+        <blockquote class="agenda follow-up">
+            <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+            <ul>
+                
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/statistics">Statistics and machine learning</a>
+        
+            <ul>
+                
+                    
+                        
+                            
+                            <li> Age prediction using machine learning:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/statistics/tutorials/age-prediction-with-ml/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+        </blockquote>
+        
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Fotis E. Psomopoulos)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/statistics/tutorials/intro-to-ml-with-r/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
