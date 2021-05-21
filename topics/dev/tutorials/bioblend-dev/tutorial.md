@@ -92,14 +92,19 @@ We use the [git](https://git-scm.com) versioning tool to download the repositori
 
 For this we require a public SSH key associated with our GitHub account. It makes sense to set this up now, since pushing changes to GitHub without a public key will promt for credentials every time. See the [GitHub Docs](https://docs.github.com/en/github-ae@latest/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) for information on setting up an SSH key.
 
-To download Galaxy and set it up as a local repository, run:
-```shell
-git clone git@github.com:galaxyproject/galaxy.git
-```
-Likewise, to download BioBlend, run:
-```shell
-git clone git@github.com:galaxyproject/bioblend.git
-```
+> ### {% icon hands_on %} Hands-on: Downloading repositories
+> Download Galaxy and set it up as a local repository:
+>
+> ```shell
+> git clone git@github.com:galaxyproject/galaxy.git
+> ```
+>
+> Likewise, download BioBlend:
+>
+> ```shell
+> git clone git@github.com:galaxyproject/bioblend.git
+> ```
+{:.hands_on}
 
 ## Structure of the Galaxy API
 
@@ -170,93 +175,112 @@ We assume basic familiarity with HTTP request methods. For an overview, see the 
 
 Now, open a terminal window and let's make a few manual requests!
 
-### Making a GET request
-{:.no_toc}
+> ### {% icon hands_on %} Hands-on: Making requests to the API
+> 1. __GET request__
+>
+>    This is a simplest type of request. We request data from a specific URL, but we do not provide any further information apart from our API key. In this example we request a listing of all our invocations.
+>
+>    > > ### {% icon code-in %} Input: curl
+>    > > ```shell
+>    > > curl -X GET -H 'x-api-key: <API_KEY>' 'localhost:8080/api/invocations'
+>    > > ```
+>    > >
+>    > > The `-X` flag specifies the HTTP method of our request. In this case we are making a GET request. Since GET is the default method, we could technically omit it here.
+>    > >
+>    > > The `-H` flag is used to specify HTTP headers. We authenticate our requests by specifying our API key in the `x-api-key` header.
+>    > {:.code-in}
+>
+>    > > ### {% icon code-out %} Output: Example JSON response
+>    > > ```javascript
+>    > > [{
+>    > >     'history_id': '2f94e8ae9edff68a',
+>    > >     'id': 'df7a1f0c02a5b08e',
+>    > >     'model_class': 'WorkflowInvocation',
+>    > >     'state': 'new',
+>    > >     'update_time': '2015-10-31T22:00:22',
+>    > >     'uuid': 'c8aa2b1c-801a-11e5-a9e5-8ca98228593c',
+>    > >     'workflow_id': '03501d7626bd192f',
+>    > > }]
+>    > > ```
+>    > >
+>    > > The above response would mean that our user only once invoked a workflow. The workflow's encoded ID is listed, as well as the encoded ID of the history containing this workflow. The state `new` indicates that the request to invoke this workflow is still pending and that the invocation has not been scheduled yet.
+>    > {:.code-out}
+>
+>    BioBlend code:
+>
+>    ```python
+>    from bioblend.galaxy import GalaxyInstance
+>    gi = GalaxyInstance('http://localhost:8080', key=<API_KEY>)
+>    invs = gi.invocations.get_invocations()
+>    print(invs)
+>    ```
+>
+>    BioBlend.objects code:
+>
+>    ```python
+>    from bioblend.galaxy.objects import GalaxyInstance
+>    obj_gi = GalaxyInstance('http://localhost:8080', key=<API_KEY>)
+>    previews = obj_gi.invocations.get_previews()
+>    for preview in previews:
+>        print(preview.id)
+>    ```
+>
+> 2. __GET request with query parameters__
+>
+>    > > ### {% icon code-in %} Input: curl
+>    > > In this example we include two query parameters in our request, `limit` and `include_terminal`.
+>    > >
+>    > > ```shell
+>    > > curl -X GET -H 'x-api-key: <API_KEY>' \
+>    > >      'localhost:8080/api/invocations?limit=5&include_terminal=False'
+>    > > ```
+>    > >
+>    > > With `limit=5` we limit the result to at most 5 invocations. With `include_terminal=False` we indicate that invocations in a terminal state should be excluded from the results.
+>    > {:.code-in}
+>
+>    BioBlend code:
+>    ```python
+>    invs = gi.invocations.get_invocations(limit=5, include_terminal=False)
+>    print(invs)
+>    ```
+>
+>    BioBlend.objects code:
+>    ```python
+>    invs = obj_gi.invocations.list(limit=5, include_terminal=False)
+>    for invocation in invs:
+>        print(invocation.id)
+>    ```
+>
+> 3. __POST request with a payload__
+>
+>    > > ### {% icon code-in %} Input: curl
+>    > > ```shell
+>    > > curl -X POST \
+>    > >     -H 'x-api-key: <API_KEY>' \
+>    > >     -H 'Content-Type: application/json' \
+>    > >     -d '{"name":"MyNewHistory"}' \
+>    > >     'localhost:8080/api/histories'
+>    > > ```
+>    > >
+>    > > This creates a new history with the name ‘MyNewHistory’.
+>    > {:.code-in}
+>
+>    BioBlend code:
+>    ```python
+>    history = gi.histories.create_history('MyNewHistory')
+>    print(history)
+>    ```
+>
+>    BioBlend.objects code:
+>
+>    ```python
+>    history = obj_gi.histories.create('MyNewHistory')
+>    print(history.name)
+>    ```
+{:.hands_on}
 
-This is a simplest type of request. We request data from a specific URL, but we do not provide any further information apart from our API key. In this example we request a listing of all our invocations.
-```shell
-curl -X GET -H 'x-api-key: <API_KEY>' 'localhost:8080/api/invocations'
-```
-The `-X` flag specifies the HTTP method of our request. In this case we are making a GET request. Since GET is the default method, we could technically omit it here.
-
-The `-H` flag is used to specify HTTP headers. We authenticate our requests by specifying our API key in the `x-api-key` header.
-
-__Example JSON response__:
-```javascript
-[{
-    'history_id': '2f94e8ae9edff68a',
-    'id': 'df7a1f0c02a5b08e',
-    'model_class': 'WorkflowInvocation',
-    'state': 'new',
-    'update_time': '2015-10-31T22:00:22',
-    'uuid': 'c8aa2b1c-801a-11e5-a9e5-8ca98228593c',
-    'workflow_id': '03501d7626bd192f',
-}]
-```
-The above response would mean that our user only once invoked a workflow. The workflow's encoded ID is listed, as well as the encoded ID of the history containing this workflow. The state `new` indicates that the request to invoke this workflow is still pending and that the invocation has not been scheduled yet.
-
-__BioBlend code__:
-```python
-from bioblend.galaxy import GalaxyInstance
-gi = GalaxyInstance('http://localhost:8080', key=<API_KEY>)
-invs = gi.invocations.get_invocations()
-print(invs)
-```
-__BioBlend.objects code__:
-```python
-from bioblend.galaxy.objects import GalaxyInstance
-obj_gi = GalaxyInstance('http://localhost:8080', key=<API_KEY>)
-previews = obj_gi.invocations.get_previews()
-for preview in previews:
-    print(preview.id)
-```
-
-### Making a GET request with query parameters
-{:.no_toc}
-
-In this example we include two query parameters in our request, `limit` and `include_terminal`.
-```shell
-curl -X GET -H 'x-api-key: <API_KEY>' \
-     'localhost:8080/api/invocations?limit=5&include_terminal=False'
-```
-With `limit=5` we limit the result to at most 5 invocations. With `include_terminal=False` we indicate that invocations in a terminal state should be excluded from the results.
-
-__BioBlend code__:
-```python
-invs = gi.invocations.get_invocations(limit=5, include_terminal=False)
-print(invs)
-```
-__BioBlend.objects code__:
-```python
-invs = obj_gi.invocations.list(limit=5, include_terminal=False)
-for invocation in invs:
-    print(invocation.id)
-```
-
-### Making a POST request with a payload
-{:.no_toc}
-
-```shell
-curl -X POST \
-     -H 'x-api-key: <API_KEY>' \
-     -H 'Content-Type: application/json' \
-     -d '{"name":"MyNewHistory"}' \
-     'localhost:8080/api/histories'
-```
-This creates a new history with the name ‘MyNewHistory’.
-
-__BioBlend code__:
-```python
-history = gi.histories.create_history('MyNewHistory')
-print(history)
-```
-__BioBlend.objects code__:
-```python
-history = obj_gi.histories.create('MyNewHistory')
-print(history.name)
-```
 > ### {% icon comment %} Note
-> For additional information regarding the difference between query parameters and the payload, see [Tip 6](#tip-6).
+> For information regarding the difference between query parameters and the payload, see [Tip 6](#tip-6).
 {:.comment}
 
 ## Creating a simple BioBlend method
@@ -274,156 +298,162 @@ We should check the Galaxy controller to verify whether this functionality is al
 
 As it turns out, a corresponding [`uninstall_dependencies`](https://github.com/galaxyproject/galaxy/blob/43e59989ba09ddc62040443f766b7c6cc1263e9f/lib/galaxy/webapps/galaxy/api/tools.py#L291) endpoint method is already available in Galaxy `dev`. Lucky us! If this was not the case, then we would first have to implement the endpoint in Galaxy before a BioBlend method could interact with it.
 
-### Constructing the correct method signature
-{:.no_toc}
-
-Let's look at the signature of the endpoint method.
-
-__File [api/tools.py](https://github.com/galaxyproject/galaxy/blob/43e59989ba09ddc62040443f766b7c6cc1263e9f/lib/galaxy/webapps/galaxy/api/tools.py#L291), line 291__:
-```python
-def uninstall_dependencies(self, trans: GalaxyWebTransaction, id, **kwds):
-```
-The `GalaxyWebTransaction` is an object which represents our API request. It is internal to the Galaxy server. We do not specify it as a parameter in BioBlend.
-
-We can see that it also expects an `id` parameter, which is the tool ID. The `kwds` argument indicates that the endpoint might accept additional keyword arguments as well.
-
-Let's check the method documentation:
-```python
-"""
-DELETE /api/tools/{tool_id}/dependencies
-Attempts to uninstall requirements via the dependency resolver
-
-parameters:
-
-    index:
-        index of dependency resolver to use when installing dependency.
-        Defaults to using the highest ranking resolver
-
-    resolver_type:
-        Use the dependency resolver of this resolver_type to install
-        dependency
-"""
-```
-The endpoint expects a DELETE request at URL `/api/tools/{tool_id}/dependencies`. The `id` parameter in the method signature corresponds to the variable `{tool_id}` present in the endpoint URL.
-
-There are two additional parameters: `index` and `resolver_type`. These parameters specify how the server should resolve the tool dependencies. For an average API user these options are probably too specific as they require knowledge of the resolvers used by the Galaxy server backend. We will skip these parameters for this example.
-
-Lastly, we need to find out what the endpoint returns. Unfortunately the return type is not listed in the method documentation. It is a reality that various parts of the Galaxy API lack complete documentation, although this is being worked on.
-
-Let's look at the return statement of the endpoint:
-```python
-return tool.tool_requirements_status
-```
-Here the tool API controller calls the `tool_requirements_status` property of the `Tool` class instance, which represents the tool corresponding to the `id` parameter. Let's also check the definition of this property.
-
-__File [tools/\_\_init\_\_.py](https://github.com/galaxyproject/galaxy/blob/43e59989ba09ddc62040443f766b7c6cc1263e9f/lib/galaxy/tools/__init__.py#L1833), line 1833__:
-```python
-def tool_requirements_status(self):
-    """
-    Return a list of dictionaries for all tool dependencies with their
-    associated status
-    """
-    return self._view.get_requirements_status(
-        {self.id: self.tool_requirements},
-        self.installed_tool_dependencies
-    )
-```
-The documentation of this method mentions that it returns a list of dictionaries for all tool dependencies with their associated status. Now we know the return type of the endpoint method!
-
-Our Bioblend method will receive this list of dictionaries encoded as JSON in the server response. It will parse the JSON and return the list. Thus, the signature of our new `uninstall_dependencies` method will be as follows:
-```python
-def install_dependencies(self, tool_id: str) -> List[dict]:
-```
-The `self` parameter corresponds to the `ToolsClient` instance. The parameter `tool_id` corresponds to the encoded ID for a given tool. This ID will be substituted in place of `{tool_id}` in the request URL.
-
-> ### {% icon comment %} Note
-> In Galaxy and BioBlend, encoded IDs are hexadecimal strings. See [Tip 4](#tip-4) for additional information.
-{:.comment}
-
-### Adding the method body
-{:.no_toc}
-
-Our method is part of the `ToolsClient` class. This means that our method has access to all its helper methods.
-Let's recall that the endpoint expects a DELETE request at URL `/api/tools/{tool_id}/dependencies`.
-To translate this into BioBlend source code, we do the following:
-- We use the `self._make_url` helper method to construct a valid URL with the supplied `tool_id` parameter. Finally, we need to append `'/dependencies'` for our endpoint.
-
-    ```python
-    url = self._make_url(tool_id) + '/dependencies'
-    ```
-
-- BioBlend clients also include helper methods for making requests of various types. In this case we want to make a DELETE request, so we use the `self._delete` helper method with our constructed URL as argument.  It also expects a `payload` argument. Our payload will be empty, since we use `tool_id` to construct the URL. This helper method automatically parses the JSON reponse into a python object, so we can directly return its result.
-
-    ```python
-    return self._delete(payload={}, url=url)
-    ```
-
-### Adding the docstring
-{:.no_toc}
-
-We should document the method and its parameter for the user.
-```python
-"""
-Uninstall dependencies for a given tool via a resolver.
-
-:type tool_id: str
-:param tool_id: id of the requested tool
-
-:rtype: list of dicts
-:return: Tool requirement statuses
-"""
-```
-This is the docstring format used in BioBlend. At the top we provide a short general description of the method. Then we document each parameter with its type and a short description. The return value of the method is documented last.
-
-### Checking Galaxy version compatibility
-{:.no_toc}
-
-In case certain versions of Galaxy do not support our method's functionality, we should append a note to the method's docstring.
-
-__Example__:
-```
-.. note::
-    This method is only supported by Galaxy 19.09 or later.
-```
-Previously we made sure that Galaxy `dev` supported our method. Let's now check if older versions of Galaxy also support it. At the time of writing, Galaxy 17.09 is the earliest version supported by BioBlend, so it makes sense to check it first.
-
-It turns out that Galaxy 17.09 also [supports](https://github.com/galaxyproject/galaxy/blob/b04b3d949baaf32c9a9d9127c5a61250ffb580dd/lib/galaxy/webapps/galaxy/api/tools.py#L159) our method! This means that all later versions do as well, and thus we do not need to add a note.
-
-### Putting it all together
-{:.no_toc}
-
-In the end, our new method should look something like this:
-```python
-def install_dependencies(self, tool_id: str) -> List[dict]:
-    """
-    Install dependencies for a given tool via a resolver.
-
-    :type tool_id: str
-    :param tool_id: id of the requested tool
-
-    :rtype: list of dicts
-    :return: Tool requirement statuses
-    """
-    url = self._make_url(tool_id) + '/install_dependencies'
-    return self._delete(payload={}, url=url)
-```
-
-### Writing a test for our new method
-{:.no_toc}
-
-It is best to keep BioBlend tests simple. We need to check that we get an expected response, but testing minute details is unnecessary, since those are the responsibility of the Galaxy server itself.
-
-Therefore, let's check that, when run on a given tool ID, the returned status indicates that the dependencies are null. We can reuse a tool ID from an existent test method. Let's take `CONVERTER_fasta_to_bowtie_color_index`, which has only one dependency.
-```python
-def test_tool_dependency_uninstall(self):
-    statuses = self.gi.tools.uninstall_dependencies(
-         'CONVERTER_fasta_to_bowtie_color_index'
-    )
-    self.assertEqual(statuses[0]['model_class'], 'NullDependency')
-```
-> ### {% icon comment %} Note
-> It might sometimes be necessary to skip a test for Galaxy versions that do not support the tested functionality. See [Tip 2](#tip-2) for additional information.
-{:.comment}
+> ### {% icon hands_on %} Hands-on: Creating the method and a simple test
+> 1. __Constructing the correct method signature__
+>
+>    Let's look at the signature of the endpoint method:
+>
+>    __File [api/tools.py](https://github.com/galaxyproject/galaxy/blob/43e59989ba09ddc62040443f766b7c6cc1263e9f/lib/galaxy/webapps/galaxy/api/tools.py#L291), line 291__:
+>    ```python
+>    def uninstall_dependencies(self, trans: GalaxyWebTransaction, id, **kwds):
+>    ```
+>    The `GalaxyWebTransaction` is an object which represents our API request. It is internal to the Galaxy server. We do not specify it as a parameter in BioBlend.
+>
+>    We can see that it also expects an `id` parameter, which is the tool ID. The `kwds` argument indicates that the endpoint might accept additional keyword arguments as well.
+>
+>    Let's check the method documentation:
+>    ```python
+>    """
+>    DELETE /api/tools/{tool_id}/dependencies
+>    Attempts to uninstall requirements via the dependency resolver
+>
+>    parameters:
+>
+>        index:
+>            index of dependency resolver to use when installing dependency.
+>            Defaults to using the highest ranking resolver
+>
+>        resolver_type:
+>            Use the dependency resolver of this resolver_type to install
+>            dependency
+>    """
+>    ```
+>    The endpoint expects a DELETE request at URL `/api/tools/{tool_id}/dependencies`. The `id` parameter in the method signature corresponds to the variable `{tool_id}` present in the endpoint URL.
+>
+>    There are two additional parameters: `index` and `resolver_type`. These parameters specify how the server should resolve the tool dependencies. For an average API user these options are probably too specific as they require knowledge of the resolvers used by the Galaxy server backend. We will skip these parameters for this example.
+>
+>    Lastly, we need to find out what the endpoint returns. Unfortunately the return type is not listed in the method documentation. It is a reality that various parts of the Galaxy API lack complete documentation, although this is being worked on.
+>
+>    Let's look at the return statement of the endpoint:
+>    ```python
+>    return tool.tool_requirements_status
+>    ```
+>    Here the tool API controller calls the `tool_requirements_status` property of the `Tool` class instance, which represents the tool corresponding to the `id` parameter. Let's also check the definition of this property.
+>
+>    __File [tools/\_\_init\_\_.py](https://github.com/galaxyproject/galaxy/blob/43e59989ba09ddc62040443f766b7c6cc1263e9f/lib/galaxy/tools/__init__.py#L1833), line 1833__:
+>    ```python
+>    def tool_requirements_status(self):
+>        """
+>        Return a list of dictionaries for all tool dependencies with their
+>        associated status
+>        """
+>        return self._view.get_requirements_status(
+>            {self.id: self.tool_requirements},
+>            self.installed_tool_dependencies
+>        )
+>    ```
+>    The documentation of this method mentions that it returns a list of dictionaries for all tool dependencies with their associated status. Now we know the return type of the endpoint method!
+>
+>    Our Bioblend method will receive this list of dictionaries encoded as JSON in the server response. It will parse the JSON and return the list. Thus, the signature of our new `uninstall_dependencies` method will be as follows:
+>
+>    ```python
+>    def install_dependencies(self, tool_id: str) -> List[dict]:
+>    ```
+>
+>    The `self` parameter corresponds to the `ToolsClient` instance. The parameter `tool_id` corresponds to the encoded ID for a given tool. This ID will be substituted in place of `{tool_id}` in the request URL.
+>
+>    > ### {% icon comment %} Note
+>    > In Galaxy and BioBlend, encoded IDs are hexadecimal strings. See [Tip 4](#tip-4) for additional information.
+>    {:.comment}
+>
+> 2. __Adding the method body__
+>
+>    Our method is part of the `ToolsClient` class. This means that our method has access to all its helper methods.
+>    Let's recall that the endpoint expects a DELETE request at URL `/api/tools/{tool_id}/dependencies`.
+>
+>    To translate this into BioBlend source code, we do the following:
+>
+>    - We use the `self._make_url` helper method to construct a valid URL with the supplied `tool_id` parameter. Finally, we need to append `'/dependencies'` for our endpoint.
+>
+>        ```python
+>        url = self._make_url(tool_id) + '/dependencies'
+>        ```
+>
+>    - BioBlend clients also include helper methods for making requests of various types. In this case we want to make a DELETE request, so we use the `self._delete` helper method with our constructed URL as argument.  It also expects a `payload` argument. Our payload will be empty, since we use `tool_id` to construct the URL. This helper method automatically parses the JSON reponse into a python object, so we can directly return its result.
+>
+>        ```python
+>        return self._delete(payload={}, url=url)
+>        ```
+>
+> 3. __Adding the docstring__
+>
+>    We should document the method and its parameter for the user.
+>    ```python
+>    """
+>    Uninstall dependencies for a given tool via a resolver.
+>
+>    :type tool_id: str
+>    :param tool_id: id of the requested tool
+>
+>    :rtype: list of dicts
+>    :return: Tool requirement statuses
+>    """
+>    ```
+>
+>    This is the docstring format used in BioBlend. At the top we provide a short general description of the method. Then we document each parameter with its type and a short description. The return value of the method is documented last.
+>
+> 4. __Checking Galaxy version compatibility__
+>
+>    In case certain versions of Galaxy do not support our method's functionality, we should append a note to the method's docstring.
+>
+>    __Example__:
+>
+>    ```
+>    .. note::
+>        This method is only supported by Galaxy 19.09 or later.
+>    ```
+>
+>    Previously we made sure that Galaxy `dev` supported our method. Let's now check if older versions of Galaxy also support it. At the time of writing, Galaxy 17.09 is the earliest version supported by BioBlend, so it makes sense to check it first.
+>
+>    It turns out that Galaxy 17.09 also [supports](https://github.com/galaxyproject/galaxy/blob/b04b3d949baaf32c9a9d9127c5a61250ffb580dd/lib/galaxy/webapps/galaxy/api/tools.py#L159) our method! This means that all later versions do as well, and thus we do not need to add a note.
+>
+> 5. __Putting it all together__
+>
+>    In the end, our new method should look something like this:
+>
+>    ```python
+>    def install_dependencies(self, tool_id: str) -> List[dict]:
+>        """
+>        Install dependencies for a given tool via a resolver.
+>
+>        :type tool_id: str
+>        :param tool_id: id of the requested tool
+>
+>        :rtype: list of dicts
+>        :return: Tool requirement statuses
+>        """
+>        url = self._make_url(tool_id) + '/install_dependencies'
+>        return self._delete(payload={}, url=url)
+>    ```
+>
+> 6. __Writing a test for our new method__
+>
+>    It is best to keep BioBlend tests simple. We need to check that we get an expected response, but testing minute details is unnecessary, since those are the responsibility of the Galaxy server itself.<br>
+>
+>    Therefore, let's check that, when run on a given tool ID, the returned status indicates that the dependencies are null. We can reuse a tool ID from an existent test method. Let's take `CONVERTER_fasta_to_bowtie_color_index`, which has only one dependency.
+>
+>    ```python
+>    def test_tool_dependency_uninstall(self):
+>        statuses = self.gi.tools.uninstall_dependencies(
+>             'CONVERTER_fasta_to_bowtie_color_index'
+>        )
+>        self.assertEqual(statuses[0]['model_class'], 'NullDependency')
+>    ```
+>
+>    > ### {% icon comment %} Note
+>    > It might sometimes be necessary to skip a test for Galaxy versions that do not support the tested functionality. See [Tip 2](#tip-2) for additional information.
+>    {:.comment}
+{:.hands_on}
 
 ## Running the BioBlend tests
 
@@ -437,39 +467,40 @@ It makes sense to test our method against the most recent changes of Galaxy, so 
 > On our local machine we only test against Galaxy `dev`, so it might happen that tests on GitHub still fail because there tests run against all supported Galaxy versions. When this happens we simply need to update our changes to fix those errors as well.
 {:.comment}
 
-### Using the `run_bioblend_tests.sh` script
-{:.no_toc}
-
-This script is provided in the repository. It will lint the Python code and run the BioBlend tests. It works well for running all tests, or for small tests that require little to no debugging or experimentation.
-
-Since BioBlend requires a Galaxy server, we must specify the path to the Galaxy server directory:
--  `-g <galaxy_path>`
-
-Two useful optional parameters:
-
--  `-e <python_version>`
--  `-t <path_to_test>`
-
-    We can specify a subset of tests to run by supplying this argument. This is specified in [pytest](https://pytest.org/) format. See the [documentation](https://docs.pytest.org/en/latest/how-to/usage.html#specifying-which-tests-to-run) for more information.
-
-__Examples__:
-
-Let's assume that our galaxy directory is `../galaxy_dev`.
-
-Then this command runs all BioBlend tests:
-```shell
-./run_bioblend_tests -g ../galaxy_dev -e py39
-```
-And this command runs only the test named `test_get_jobs`:
-```shell
-./run_bioblend_tests \
-    -g ../galaxy_dev \
-    -e py39 \
-    -t tests/TestGalaxyJobs.py::TestGalaxyJobs::test_get_jobs
-```
-__Downside of the `run_bioblend_tests.sh` script__:
-
-The script starts and stops a new instance of the Galaxy server every time it is run. This makes it robust. However, it also means we have to wait for the server to start up every time. This makes it painful to debug more complicated tests.
+> ### {% icon hands_on %} Hands-on: Using the `run_bioblend_tests.sh` script
+>
+> This script is provided in the repository. It will lint the Python code and run the BioBlend tests. It works well for running all tests, or for small tests that require little to no debugging or experimentation.
+>
+> Since BioBlend requires a Galaxy server, we must specify the path to the Galaxy server directory:
+>
+> -  `-g <galaxy_path>`
+>
+> Two useful optional parameters:
+>
+> -  `-e <python_version>`
+> -  `-t <path_to_test>`
+>
+>     We can specify a subset of tests to run by supplying this argument. This is specified in [pytest](https://pytest.org/) format. See the [documentation](https://docs.pytest.org/en/latest/how-to/usage.html#specifying-which-tests-to-run) for more information.
+>
+> __Examples__:
+>
+> Let's assume that our galaxy directory is `../galaxy_dev`.
+>
+> Then this command runs all BioBlend tests:
+> ```shell
+> ./run_bioblend_tests -g ../galaxy_dev -e py39
+> ```
+> And this command runs only the test named `test_get_jobs`:
+> ```shell
+> ./run_bioblend_tests \
+>     -g ../galaxy_dev \
+>     -e py39 \
+>     -t tests/TestGalaxyJobs.py::TestGalaxyJobs::test_get_jobs
+> ```
+> __Downside of the `run_bioblend_tests.sh` script__:
+>
+> The script starts and stops a new instance of the Galaxy server every time it is run. This makes it robust. However, it also means we have to wait for the server to start up every time. This makes it painful to debug more complicated tests.
+{:.hands_on}
 
 ### Running the tests directly
 {:.no_toc}
@@ -487,110 +518,137 @@ We can speed up our test environment by controlling the Galaxy server and the Bi
 > It is preferable to write tests that are robust in this regard!
 {:.warning}
 
-### Starting the Galaxy server
-{:.no_toc}
+> ### {% icon hands_on %} Hands-on: Starting the Galaxy server with a custom configuration
+>
+> Open a terminal in the Galaxy base directory and execute the following commands:
+>
+> 1. __Declare an API key of our choosing to use for testing__
+>
+>    We will include this key in the Galaxy server configuration. The server will then accept incoming requests that use this key.
+>
+>    ```shell
+>    API_KEY=LetMeIn
+>    ```
+>
+> 2. __Create a temporary directory__
+>
+>    ```shell
+>    TEMP_DIR=$(mktemp -d)
+>    echo "Galaxy directory: $TEMP_DIR"
+>    ```
+>
+>    The temporary directory will contain useful information for debugging tests, such as the ‘main.log' file and the ‘universe.sqlite' database.
+>
+> 3. __Export environment variables required by the Galaxy server__
+>
+>    ```shell
+>    export SKIP_GALAXY_CLIENT_BUILD=1
+>    export GALAXY_LOG_FILE=$TEMP_DIR/main.log
+>    export GALAXY_CONFIG_FILE=$TEMP_DIR/test_galaxy.ini
+>    ```
+>
+> 4. __Copy a sample tool configuration__
+>
+>    ```shell
+>    cp config/tool_conf.xml.sample $TEMP_DIR/tool_conf.xml.sample
+>    ```
+>
+> 5. __Declare the desired logging level__
+>
+>    ```shell
+>    LOG_LEVEL=DEBUG
+>    ```
+>
+>    The available logging levels can be found in the [documentation](https://docs.python.org/3/library/logging.html#logging-levels) of the Python [logging](https://docs.python.org/3/library/logging.html) library.
+>
+> 6. __Create the Galaxy configuration file__
+>
+>    ```shell
+>    cat << EOF > $GALAXY_CONFIG_FILE
+>    [server:main]
+>
+>    use = egg:Paste#http
+>    port = 8080
+>
+>    [app:main]
+>
+>    log_level = $LOG_LEVEL
+>    paste.app_factory = galaxy.web.buildapp:app_factory
+>    database_connection = sqlite:///$TEMP_DIR/universe.sqlite?isolation_level=IMMEDIATE
+>    file_path = $TEMP_DIR/files
+>    new_file_path = $TEMP_DIR/tmp
+>    tool_config_file = $TEMP_DIR/tool_conf.xml.sample
+>    conda_auto_init = True
+>    job_working_directory = $TEMP_DIR/jobs_directory
+>    allow_library_path_paste = True
+>    admin_users = test@test.test
+>    allow_user_deletion = True
+>    allow_user_dataset_purge = True
+>    enable_beta_workflow_modules = True
+>    master_api_key = $API_KEY
+>    enable_quotas = True
+>    cleanup_job = onsuccess
+>    EOF
+>    ```
+>
+> 7. __Start the Galaxy server__
+>
+>    ```shell
+>    ./run.sh
+>    ```
+{:.hands_on}
 
-Open a terminal in the Galaxy base directory and execute the following commands:
-
-__Step 1__: Declare an API key of our choosing to use for testing. We will include this key in the Galaxy server configuration. The server will then accept incoming requests that use this key.
-```shell
-API_KEY=LetMeIn
-```
-__Step 2__: Create a temporary directory
-```shell
-TEMP_DIR=$(mktemp -d)
-echo "Galaxy directory: $TEMP_DIR"
-```
-The temporary directory will contain useful information for debugging tests, such as the ‘main.log' file and the ‘universe.sqlite' database.
-
-__Step 3__: Export environment variables required by the Galaxy server
-```shell
-export SKIP_GALAXY_CLIENT_BUILD=1
-export GALAXY_LOG_FILE=$TEMP_DIR/main.log
-export GALAXY_CONFIG_FILE=$TEMP_DIR/test_galaxy.ini
-```
-__Step 4__: Copy a sample tool configuration
-```shell
-cp config/tool_conf.xml.sample $TEMP_DIR/tool_conf.xml.sample
-```
-__Step 5__: Declare the desired logging level
-```shell
-LOG_LEVEL=DEBUG
-```
-The available logging levels can be found in the [documentation](https://docs.python.org/3/library/logging.html#logging-levels) of the Python [logging](https://docs.python.org/3/library/logging.html) library.
-
-
-__Step 6__: Create the Galaxy configuration file
-```shell
-cat << EOF > $GALAXY_CONFIG_FILE
-[server:main]
-
-use = egg:Paste#http
-port = 8080
-
-[app:main]
-
-log_level = $LOG_LEVEL
-paste.app_factory = galaxy.web.buildapp:app_factory
-database_connection = sqlite:///$TEMP_DIR/universe.sqlite?isolation_level=IMMEDIATE
-file_path = $TEMP_DIR/files
-new_file_path = $TEMP_DIR/tmp
-tool_config_file = $TEMP_DIR/tool_conf.xml.sample
-conda_auto_init = True
-job_working_directory = $TEMP_DIR/jobs_directory
-allow_library_path_paste = True
-admin_users = test@test.test
-allow_user_deletion = True
-allow_user_dataset_purge = True
-enable_beta_workflow_modules = True
-master_api_key = $API_KEY
-enable_quotas = True
-cleanup_job = onsuccess
-EOF
-```
-__Step 7__: Start the Galaxy server
-```shell
-./run.sh
-```
-
-### Running tests
-{:.no_toc}
-
-Now we have a Galaxy server running with our specified configuration. We can run tests against this server in a separate terminal.
-
-Navigate to the BioBlend base directory and execute the following commands:
-
-__Step 1__: Declare the same API key we used for the Galaxy server
-```shell
-API_KEY=LetMeIn
-```
-__Step 2__: Export environment variables required by BioBlend
-```shell
-export BIOBLEND_GALAXY_API_KEY=$API_KEY
-export BIOBLEND_GALAXY_URL=http://localhost:8080/
-```
-__Step 3__: Activate the virtual environment
-```shell
-source <GALAXY_DIRECTORY>/.venv/bin/activate
-```
-__Step 4__: Declare the desired test logging level
-```shell
-LOG_LEVEL=WARNING
-```
-__Step 5__: Run the desired BioBlend test(s)
-```shell
-# selection format: tests/<file>::<module>::<test>
-pytest --override-ini log_cli_level=$LOG_LEVEL \
-    tests/TestGalaxyWorkflows.py::TestGalaxyWorkflows::test_show_versions
-```
-__Step 6__: We should also lint our code to detect bad practices and potential errors
-```shell
-tox -e lint
-```
-__Step 7__: We can leave the virtual environment when we are done testing
-```shell
-deactivate
-```
+> ### {% icon hands_on %} Hands-on: Running the tests
+>
+> Now we have a Galaxy server running with our specified configuration. We can run tests against this server in a separate terminal.
+>
+> Navigate to the BioBlend base directory and execute the following commands:
+>
+> 1. __Declare the same API key we used for the Galaxy server__
+>
+>    ```shell
+>    API_KEY=LetMeIn
+>    ```
+>
+> 2. __Export environment variables required by BioBlend__
+>
+>    ```shell
+>    export BIOBLEND_GALAXY_API_KEY=$API_KEY
+>    export BIOBLEND_GALAXY_URL=http://localhost:8080/
+>    ```
+>
+> 3. __Activate the virtual environment__
+>
+>    ```shell
+>    source <GALAXY_DIRECTORY>/.venv/bin/activate
+>    ```
+>
+> 4. __Declare the desired test logging level__
+>
+>    ```shell
+>    LOG_LEVEL=WARNING
+>    ```
+>
+> 5. __Run the desired BioBlend test(s)__
+>
+>    ```shell
+>    # selection format: tests/<file>::<module>::<test>
+>    pytest --override-ini log_cli_level=$LOG_LEVEL \
+>        tests/TestGalaxyWorkflows.py::TestGalaxyWorkflows::test_show_versions
+>    ```
+>
+> 6. __Lint our code to detect bad practices and potential errors__
+>
+>    ```shell
+>    tox -e lint
+>    ```
+>
+> 7. __Leave the virtual environment when we are done testing__
+>
+>    ```shell
+>    deactivate
+>    ```
+{:.hands_on}
 
 ## Additional tips
 
@@ -650,6 +708,7 @@ A parameter can be specified explicitly in the signature of the endpoint method.
 __Example__:
 
 In the histories API [`delete`](https://github.com/galaxyproject/galaxy/blob/43e59989ba09ddc62040443f766b7c6cc1263e9f/lib/galaxy/webapps/galaxy/api/histories.py#L385) endpoint method, the `id` parameter is specified explicitly.
+
 ```python
 def delete(self, trans, id, **kwd):
 ```
@@ -663,6 +722,7 @@ Other parameters might get passed to the endpoint as an element of `kwd`. If the
 {:.no_toc}
 
 Filtering parameters might also be expected as pairs of `q` and `qv` values. These are then parsed into filters by the Galaxy server.
+
 The general format is `q={filter}-{operation}` and `qv={value}`. The accepted values for these parameters must be identified in order to construct valid `q` and `qv` pairs.
 
 __Example__:
@@ -679,6 +739,7 @@ A HTTP request is comprised of (1) a request line, (2) headers with metadata, (3
 We can see the difference using [curl](https://curl.se) and [ncat](https://nmap.org/ncat/).
 
 Open a terminal and run the `ncat` command in listen mode on port 8080. The loop will print out any incoming requests; each request separated by a line containing `---`.
+
 ```shell
 while ncat --listen 8080; do printf "\n---\n"; done
 ```
@@ -690,39 +751,50 @@ while ncat --listen 8080; do printf "\n---\n"; done
 #### Parameters
 
 Open a second terminal and send a GET request with a query parameter:
-```shell
-curl -X GET localhost:8080/?message=Hello
-```
 
-__Output of ncat__:
-```
-GET /?message=Hello HTTP/1.1
-Host: localhost:8080
-User-Agent: curl/7.76.1
-Accept: */*
+> ### {% icon code-in %} Input: curl
+> ```shell
+> curl -X GET localhost:8080/?message=Hello
+> ```
+{:.code-in}
 
-
-```
-The two blank lines indicate that the payload is empty.
+> ### {% icon code-out %} Output: ncat
+> ```
+> GET /?message=Hello HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.76.1
+> Accept: */*
+>
+>
+> ```
+>
+> The two blank lines indicate that the payload is empty.
+{:.code-out}
 
 #### Payload
 
 Send a POST request with the payload ‘My name is curl’.
-```shell
-curl -X POST -d 'My name is curl' localhost:8080
-```
-__Output of ncat__:
-```
-POST / HTTP/1.1
-Host: localhost:8080
-User-Agent: curl/7.76.1
-Accept: */*
-Content-Length: 15
-Content-Type: application/x-www-form-urlencoded
 
-My name is curl
-```
-The message body now contains our payload.
+> ### {% icon code-in %} Input: curl
+> ```shell
+> curl -X POST -d 'My name is curl' localhost:8080
+> ```
+{:.code-in}
+
+> ### {% icon code-out %} Output: ncat
+> ```
+> POST / HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.76.1
+> Accept: */*
+> Content-Length: 15
+> Content-Type: application/x-www-form-urlencoded
+>
+> My name is curl
+> ```
+>
+> The message body now contains our payload.
+{:.code-out}
 
 ### Determining the Galaxy version in BioBlend
 {:.no_toc}
