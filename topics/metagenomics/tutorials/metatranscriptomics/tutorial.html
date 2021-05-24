@@ -289,7 +289,7 @@
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on for 'Metatranscriptomics analysis using microbiome RNA-seq data' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/metagenomics/tutorials/metatranscriptomics/tutorial.html",
-  "timeRequired": "PT6H",
+  "timeRequired": "PT5H",
   "keywords": "metatranscriptomics",
   "description": "The questions this  addresses are:\n - How to analyze metatranscriptomics data?\n - What information can be extracted of metatranscriptomics data?\n - How to assign taxa and function to the identified sequences?\n\n\\nThe objectives are:\n - Choose the best approach to analyze metatranscriptomics data\n - Understand the functional microbiome characterization using metatranscriptomic results\n - Understand where metatranscriptomics fits in 'multi-omic' analysis of microbiomes\n - Visualise a community structure\n\n",
   "coursePrerequisites": [
@@ -449,7 +449,7 @@
             
 
             
-            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 6 hours</p>
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 5 hours</p>
             
 
             
@@ -477,7 +477,7 @@
 
                 
                     <li class="btn btn-default supporting_material">
-<a class="topic-icon" href="https://zenodo.org/record/3362849">
+<a class="topic-icon" href="https://zenodo.org/record/4776250">
     <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
 </a>
 
@@ -513,6 +513,8 @@
             </a>
         </li>
     
+    
+        
     
         
     
@@ -621,8 +623,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -643,10 +643,6 @@
         
     
         
-        <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
-            UseGalaxy.be
-        </a>
-        
     
         
         <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
@@ -656,10 +652,6 @@
     
         
     
-        
-        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
-            UseGalaxy.no
-        </a>
         
     
         
@@ -681,7 +673,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 5, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 20, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -756,20 +748,18 @@ analysis steps (e.g. data cleaning) at once, please see the <a href="/training-m
   <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
   <li><a href="#preprocessing" id="markdown-toc-preprocessing">Preprocessing</a>    <ol>
       <li><a href="#quality-control" id="markdown-toc-quality-control">Quality control</a></li>
-      <li><a href="#data-cleaning" id="markdown-toc-data-cleaning">Data Cleaning</a></li>
       <li><a href="#ribosomal-rna-fragments-filtering" id="markdown-toc-ribosomal-rna-fragments-filtering">Ribosomal <span class="notranslate">RNA</span> fragments filtering</a></li>
       <li><a href="#interlace-forward-and-reverse-reads" id="markdown-toc-interlace-forward-and-reverse-reads">Interlace forward and reverse <span class="notranslate">reads</span></a></li>
     </ol>
   </li>
   <li><a href="#extraction-of-the-community-profile" id="markdown-toc-extraction-of-the-community-profile">Extraction of the community profile</a>    <ol>
-      <li><a href="#extract-abundance-at-the-different-taxonomic-levels" id="markdown-toc-extract-abundance-at-the-different-taxonomic-levels">Extract abundance at the different taxonomic levels</a></li>
       <li><a href="#community-structure-visualization" id="markdown-toc-community-structure-visualization">Community structure visualization</a></li>
     </ol>
   </li>
   <li><a href="#extract-the-functional-information" id="markdown-toc-extract-the-functional-information">Extract the functional information</a>    <ol>
       <li><a href="#normalize-the-abundances" id="markdown-toc-normalize-the-abundances">Normalize the abundances</a></li>
       <li><a href="#identify-the-gene-families-involved-in-the-pathways" id="markdown-toc-identify-the-gene-families-involved-in-the-pathways">Identify the gene families involved in the pathways</a></li>
-      <li><a href="#group-abundances-into-go-slim-terms" id="markdown-toc-group-abundances-into-go-slim-terms">Group abundances into GO slim terms</a></li>
+      <li><a href="#group-gene-families-into-go-terms" id="markdown-toc-group-gene-families-into-go-terms">Group gene families into GO terms</a></li>
     </ol>
   </li>
   <li><a href="#combine-taxonomic-and-functional-information" id="markdown-toc-combine-taxonomic-and-functional-information">Combine taxonomic and functional information</a></li>
@@ -792,10 +782,10 @@ analysis steps (e.g. data cleaning) at once, please see the <a href="/training-m
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history</h3>  <ol>    <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>    <li>Type the new name</li>    <li>Press <kbd>Enter</kbd></li>  </ol></blockquote>
     </li>
     <li>
-      <p>Import <code class="language-plaintext highlighter-rouge">T1A_forward</code> and <code class="language-plaintext highlighter-rouge">T1A_reverse</code> from <a href="https://zenodo.org/record/3362849">Zenodo</a> or from the data library (ask your instructor)</p>
+      <p><span class="tool" data-tool="upload1" title="Tested with upload1"><strong>Import</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>  <code class="language-plaintext highlighter-rouge">T1A_forward</code> and <code class="language-plaintext highlighter-rouge">T1A_reverse</code> from <a href="https://zenodo.org/record/4776250">Zenodo</a> or from the data library (ask your instructor)</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3362849/files/T1A_forward.fastqsanger
-https://zenodo.org/record/3362849/files/T1A_reverse.fastqsanger
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4776250/files/T1A_forward.fastqsanger
+https://zenodo.org/record/4776250/files/T1A_reverse.fastqsanger
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
@@ -842,7 +832,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
   <h3 id="hands_on-hands-on-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality control</h3>
 
   <ol>
-    <li><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: both <code class="language-plaintext highlighter-rouge">T1A_forward</code> and <code class="language-plaintext highlighter-rouge">T1A_reverse</code> datasets selected with <strong>Multiple datasets</strong></li>
       </ul>
@@ -867,7 +857,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
 
       </blockquote>
     </li>
-    <li><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to aggregate the FastQC reports:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7</span></span>  with the following parameters to aggregate the FastQC reports:
       <ul>
         <li>In <em>“Results”</em>
           <ul>
@@ -964,8 +954,6 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
   </blockquote>
 </blockquote>
 
-<h2 id="data-cleaning">Data Cleaning</h2>
-
 <p>Even though our data is already of pretty high quality, we can improve it even more by:</p>
 <ol>
   <li>Trimming <span class="notranslate">reads</span> to remove bases that were sequenced with low certainty (= low-quality bases) at the ends of the <span class="notranslate">reads</span></li>
@@ -973,28 +961,28 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
   <li>Removing <span class="notranslate">reads</span> that are too short to be informative in <span class="notranslate">downstream</span> analysis</li>
 </ol>
 
-<p>There are several tools out there that can perform theses steps, but in this analysis we use <strong>Cutadapt</strong> (<a class="citation" href="#martin2011cutadapt">Martin 2011</a>).</p>
-
-<p><strong>Cutadapt</strong> also helps find and remove adapter sequences, primers, poly-A tails and/or other unwanted sequences from the input FASTQ files. It trims the input <span class="notranslate">reads</span> by finding the adapter or primer sequences in an error-tolerant way. Additional features include modifying and filtering <span class="notranslate">reads</span>.</p>
-
 <blockquote class="question">
   <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-  <p>Are there any other tool which can perform similar functions?</p>
+  <p>What are the possible tools to perform such functions?</p>
 
   <blockquote class="solution">
     <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>Yes, there are many tools such as Trimmomatic, Trim Galore, Clip, trim putative adapter sequences. etc. We choose Cutadapt here because it is error tolerant, it is fast and the version is pretty stable.</p>
+    <p>There are many tools such as <strong>Cutadapt</strong>, <strong>Trimmomatic</strong>, <strong>Trim Galore</strong>, <strong>Clip</strong>, <strong>trim putative adapter</strong> sequences. etc. We choose here <strong>Cutadapt</strong> because it is error tolerant, it is fast and the version is pretty stable.</p>
   </blockquote>
 
 </blockquote>
+
+<p>There are several tools out there that can perform these steps, but in this analysis we use <strong>Cutadapt</strong> (<a class="citation" href="#martin2011cutadapt">Martin 2011</a>).</p>
+
+<p><strong>Cutadapt</strong> also helps find and remove adapter sequences, primers, poly-A tails and/or other unwanted sequences from the input FASTQ files. It trims the input <span class="notranslate">reads</span> by finding the adapter or primer sequences in an error-tolerant way. Additional features include modifying and filtering <span class="notranslate">reads</span>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-read-trimming-and-filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Read trimming and filtering</h3>
 
   <ol>
-    <li><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to trim low quality sequences:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5" title="Tested with toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5"><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5</span></span>  with the following parameters to trim low quality sequences:
       <ul>
         <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code>
           <ul>
@@ -1035,8 +1023,13 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
         </li>
       </ul>
     </li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">Read 1 output</code> to <code class="language-plaintext highlighter-rouge">QC controlled forward <span class="notranslate">reads</span></code></li>
+        <li><code class="language-plaintext highlighter-rouge">Read 2 output</code> to <code class="language-plaintext highlighter-rouge">QC controlled reverse <span class="notranslate">reads</span></code></li>
+      </ul>
+    </li>
   </ol>
-
 </blockquote>
 
 <p><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> outputs a report file containing some information about the trimming and filtering it performed.</p>
@@ -1044,7 +1037,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
 <blockquote class="question">
   <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-  <p>View the output report from <strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+  <p>Inspect the output report from <strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
   <ol>
     <li>How many basepairs has been removed from the forwards <span class="notranslate">reads</span> because of bad quality? And from the reverse <span class="notranslate">reads</span>?</li>
@@ -1062,7 +1055,9 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
 
 <h2 id="ribosomal-rna-fragments-filtering">Ribosomal <span class="notranslate">RNA</span> fragments filtering</h2>
 
-<p>Metatranscriptomics sequencing targets any <span class="notranslate">RNA</span> in a pool of micro-organisms. The highest proportion of the <span class="notranslate">RNA</span> sequences in any organism will be ribosomal <span class="notranslate">RNA</span>s. These r<span class="notranslate">RNA</span>s are useful for the taxonomic assignment (i.e. which organisms are found) but they do not provide any functional information, (i.e. which genes are expressed) To make the <span class="notranslate">downstream</span> functional annotation faster, we will sort the r<span class="notranslate">RNA</span> sequences using <strong>SortMe<span class="notranslate">RNA</span></strong> (<a class="citation" href="#kopylova2012sortmerna">Kopylova <i>et al.</i> 2012</a>). It can handle large <span class="notranslate">RNA</span> databases and sort out all fragments matching to the database with high accuracy and specificity:</p>
+<p>Metatranscriptomics sequencing targets any <span class="notranslate">RNA</span> in a pool of micro-organisms. The highest proportion of the <span class="notranslate">RNA</span> sequences in any organism will be ribosomal <span class="notranslate">RNA</span>s.</p>
+
+<p>These r<span class="notranslate">RNA</span>s are useful for the taxonomic assignment (i.e. which organisms are found) but they do not provide any functional information, (i.e. which genes are expressed) To make the <span class="notranslate">downstream</span> functional annotation faster, we will sort the r<span class="notranslate">RNA</span> sequences using <strong>SortMe<span class="notranslate">RNA</span></strong> (<a class="citation" href="#kopylova2012sortmerna">Kopylova <i>et al.</i> 2012</a>). It can handle large <span class="notranslate">RNA</span> databases and sort out all fragments matching to the database with high accuracy and specificity:</p>
 
 <p><img src="../../images/metatranscriptomics/sortmerna.png" alt="SortMeRNA" /></p>
 
@@ -1070,12 +1065,12 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
   <h3 id="hands_on-hands-on-ribosomal-rna-fragments-filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Ribosomal <span class="notranslate">RNA</span> fragments filtering</h3>
 
   <ol>
-    <li><strong>Filter with SortMe<span class="notranslate">RNA</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/sortmerna/bg_sortmerna/2.1b.6" title="Tested with toolshed.g2.bx.psu.edu/repos/rnateam/sortmerna/bg_sortmerna/2.1b.6"><strong>Filter with SortMe<span class="notranslate">RNA</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">rna</span>team/sortme<span class="notranslate">rna</span>/bg_sortme<span class="notranslate">rna</span>/2.1b.6</span></span>  with the following parameters:
       <ul>
         <li><em>“Sequencing type”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">Reads</span> are paired</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Forward <span class="notranslate">reads</span>”</em>: the <code class="language-plaintext highlighter-rouge">Read 1 Output</code> (outputs of <strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reverse <span class="notranslate">reads</span>”</em>: the <code class="language-plaintext highlighter-rouge">Read 2 Output</code> (outputs of <strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Forward <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">QC controlled forward <span class="notranslate">reads</span></code> (output of <strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reverse <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">QC controlled reverse <span class="notranslate">reads</span></code> (output of <strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
             <li><em>“If one of the paired-end <span class="notranslate">reads</span> aligns and the other one does not”</em>: <code class="language-plaintext highlighter-rouge">Output both <span class="notranslate">reads</span> to rejected file (--paired_out)</code></li>
           </ul>
         </li>
@@ -1104,7 +1099,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
       </ul>
     </li>
     <li>
-      <p>Expand the aligned and unaligned forward <span class="notranslate">reads</span></p>
+      <p>Expand the aligned and unaligned forward <span class="notranslate">reads</span> datasets in the history</p>
 
       <blockquote class="question">
         <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1119,7 +1114,6 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
         </blockquote>
       </blockquote>
     </li>
-    <li>Inspect the log file (<code class="language-plaintext highlighter-rouge">Log</code>)</li>
   </ol>
 
 </blockquote>
@@ -1129,8 +1123,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
 <blockquote class="question">
   <h3 id="question-questions-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-  <p>View the log file output from <strong>SortMe<span class="notranslate">RNA</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, and scroll down to the
-<code class="language-plaintext highlighter-rouge">Results</code> section.</p>
+  <p>Inspect the log output from <strong>SortMe<span class="notranslate">RNA</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, and scroll down to the <code class="language-plaintext highlighter-rouge">Results</code> section.</p>
 
   <ol>
     <li>How many <span class="notranslate">reads</span> have been processed?</li>
@@ -1141,53 +1134,42 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
   <blockquote class="solution">
     <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <ol>
-      <li>465,754 <span class="notranslate">reads</span> are processed: 232,877 for forward and 232,877 for reverse (given the <strong>Cutadapt</strong> report)</li>
-      <li>Out of the 465,754 <span class="notranslate">reads</span>, 119,646 (26%) have passed the e-value threshold and are identified as r<span class="notranslate">RNA</span>. The proportion of r<span class="notranslate">RNA</span> sequences is then quite high (around 40%), compared to metagenomics data where usually they represent &lt; 1% of the sequences. Indeed there are only few copies of r<span class="notranslate">RNA</span> genes in genomes, but they are expressed a lot for the cells.
-Some of the aligned <span class="notranslate">reads</span> are forward (resp. reverse) <span class="notranslate">reads</span> but the corresponding reverse (resp. forward) <span class="notranslate">reads</span> are not aligned. As we choose <em>“If one of the paired-end <span class="notranslate">reads</span> aligns and the other one does not”</em>: <code class="language-plaintext highlighter-rouge">Output both <span class="notranslate">reads</span> to rejected file (--paired_out)</code>, if one read in a pair does not align, both go to unaligned.</li>
-      <li>The 20.56% r<span class="notranslate">RNA</span> <span class="notranslate">reads</span> are 23S bacterial r<span class="notranslate">RNA</span>, 2.34% 16S bacterial r<span class="notranslate">RNA</span> and 1.74% 18S eukaryotic r<span class="notranslate">RNA</span>. We then expect to identify mostly bacteria but also probably some archae (18S eukaryotic r<span class="notranslate">RNA</span>).</li>
+      <li>
+        <p>465,754 <span class="notranslate">reads</span> are processed: 232,877 for forward and 232,877 for reverse (given the <strong>Cutadapt</strong> report)</p>
+      </li>
+      <li>
+        <p>Out of the 465,754 <span class="notranslate">reads</span>, 119,646 (26%) have passed the e-value threshold and are identified as r<span class="notranslate">RNA</span>.</p>
+
+        <p>The proportion of r<span class="notranslate">RNA</span> sequences is then quite high (around 40%), compared to metagenomics data where usually they represent &lt; 1% of the sequences. Indeed there are only few copies of r<span class="notranslate">RNA</span> genes in genomes, but they are expressed a lot for the cells.</p>
+
+        <p>Some of the aligned <span class="notranslate">reads</span> are forward (resp. reverse) <span class="notranslate">reads</span> but the corresponding reverse (resp. forward) <span class="notranslate">reads</span> are not aligned. As we choose <em>“If one of the paired-end <span class="notranslate">reads</span> aligns and the other one does not”</em>: <code class="language-plaintext highlighter-rouge">Output both <span class="notranslate">reads</span> to rejected file (--paired_out)</code>, if one read in a pair does not align, both go to unaligned.</p>
+      </li>
+      <li>
+        <p>The 20.56% r<span class="notranslate">RNA</span> <span class="notranslate">reads</span> are 23S bacterial r<span class="notranslate">RNA</span>, 2.34% 16S bacterial r<span class="notranslate">RNA</span> and 1.74% 18S eukaryotic r<span class="notranslate">RNA</span>. We then expect to identify mostly bacteria but also probably some archae (18S eukaryotic r<span class="notranslate">RNA</span>).</p>
+      </li>
     </ol>
   </blockquote>
 </blockquote>
 
 <h2 id="interlace-forward-and-reverse-reads">Interlace forward and reverse <span class="notranslate">reads</span></h2>
 
-<p>Tools for taxonomic and functional annotations need a single file as input, even with paired-end data. We need to join the two separate files (forward and reverse) to create a single interleaced file, using <strong>FASTQ interlacer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, in which the forward <span class="notranslate">reads</span> have <code class="language-plaintext highlighter-rouge">/1</code> in their id and reverse <span class="notranslate">reads</span> <code class="language-plaintext highlighter-rouge">/2</code>. The join is performed using sequence identifiers (headers), allowing the two files to contain differing ordering. If a sequence identifier does not appear in both files, it is output in a separate file named <code class="language-plaintext highlighter-rouge">singles</code>.</p>
+<p>The tool for functional annotations needs a single file as input, even with paired-end data.</p>
 
-<p>We use <strong>FASTQ interlacer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the outputs of <strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and on the unaligned (non-r<span class="notranslate">RNA</span>) <span class="notranslate">reads</span> from <strong>SortMe<span class="notranslate">RNA</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to prepare for <span class="notranslate">downstream</span> analysis</p>
+<p>We need to join the two separate files (forward and reverse) to create a single interleaced file, using <strong>FASTQ interlacer</strong>, in which the forward <span class="notranslate">reads</span> have <code class="language-plaintext highlighter-rouge">/1</code> in their id and reverse <span class="notranslate">reads</span> <code class="language-plaintext highlighter-rouge">/2</code>. The join is performed using sequence identifiers (headers), allowing the two files to contain differing ordering. If a sequence identifier does not appear in both files, it is output in a separate file named <code class="language-plaintext highlighter-rouge">singles</code>.</p>
+
+<p>We use <strong>FASTQ interlacer</strong> on the unaligned (non-r<span class="notranslate">RNA</span>) <span class="notranslate">reads</span> from <strong>SortMe<span class="notranslate">RNA</span></strong> to prepare for the functional analysis.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-interlace-fastq-files"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Interlace FastQ files</h3>
 
   <ol>
-    <li><strong>FASTQ interlacer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><em>“Type of paired-end datasets”</em>: <code class="language-plaintext highlighter-rouge">2 separate datasets</code>
-          <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Left-hand mates”</em>: <code class="language-plaintext highlighter-rouge">Read 1 Output</code> (outputs of <strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Right-hand mates”</em>: <code class="language-plaintext highlighter-rouge">Read 2 Output</code> (outputs of <strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li>
-      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the pair output to <code class="language-plaintext highlighter-rouge">Interlaced QC controlled <span class="notranslate">reads</span></code></p>
-
-      <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, change the <strong>Name</strong> field</li>    <li>Click the <strong>Save</strong> button</li>  </ul></blockquote>
-    </li>
-    <li>
-      <p><strong>Change the datatype</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> to <code class="language-plaintext highlighter-rouge">fastq</code></p>
-
-      <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>    <li>Select <code class="language-plaintext highlighter-rouge">fastq</code></li>    <li>Click the <strong>Change datatype</strong> button</li>  </ul></blockquote>
-    </li>
-    <li><strong>FASTQ interlacer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastq_paired_end_interlacer/fastq_paired_end_interlacer/1.2.0.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastq_paired_end_interlacer/fastq_paired_end_interlacer/1.2.0.1+galaxy0"><strong>FASTQ interlacer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastq_paired_end_interlacer/fastq_paired_end_interlacer/1.2.0.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
       <ul>
         <li><em>“Type of paired-end datasets”</em>: <code class="language-plaintext highlighter-rouge">2 separate datasets</code></li>
       </ul>
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Left-hand mates”</em>: <code class="language-plaintext highlighter-rouge">Unaligned Forward <span class="notranslate">reads</span></code> (output of <strong>SortMe<span class="notranslate">RNA</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Right-hand mates”</em>: <code class="language-plaintext highlighter-rouge">Unaligned Reverse <span class="notranslate">reads</span></code> (output of <strong>SortMe<span class="notranslate">RNA</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Left-hand mates”</em>: <code class="language-plaintext highlighter-rouge">Unaligned forward <span class="notranslate">reads</span></code> (output of <strong>SortMe<span class="notranslate">RNA</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Right-hand mates”</em>: <code class="language-plaintext highlighter-rouge">Unaligned reverse <span class="notranslate">reads</span></code> (output of <strong>SortMe<span class="notranslate">RNA</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
     <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the pair output to <code class="language-plaintext highlighter-rouge">Interlaced non r<span class="notranslate">RNA</span> <span class="notranslate">reads</span></code></li>
@@ -1196,79 +1178,121 @@ Some of the aligned <span class="notranslate">reads</span> are forward (resp. re
 </blockquote>
 
 <h1 id="extraction-of-the-community-profile">Extraction of the community profile</h1>
+
 <p><a href="../metatranscriptomics-short/tutorial.html#extraction-of-the-community-profile"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to short tutorial</a></p>
 
-<p>The first important information to get from microbiome data is the community structure: which organisms are present and in which abundance. This is called taxonomic profiling. Different approaches can be used:</p>
+<p>The first important information to get from microbiome data is the community structure: which organisms are present and in which abundance. This is called <strong>taxonomic profiling</strong>.</p>
+
+<p>Different approaches can be used:</p>
 
 <ul>
   <li>
     <p>Identification and classification of OTUs, as used in amplicon data</p>
 
-    <p>Such an approach first requires sequence sorting to extract only the 16S and 18S sequences, then again using the same tools as for amplicon data. However, because r<span class="notranslate">RNA</span> sequences represent less than 50% of the raw sequences, this approach is not the most statistically supported</p>
+    <p>Such an approach first requires sequence sorting to extract only the 16S and 18S sequences (e.g. using the aligned <span class="notranslate">reads</span> from <strong>SortMe<span class="notranslate">RNA</span></strong>), then again using the same tools as for amplicon data (as explained in tutorials like <a href="/training-material/topics/metagenomics/tutorials/mothur-miseq-sop/tutorial.html">16S Microbial Analysis with mothur</a> or <a href="/training-material/topics/metagenomics/tutorials/nanopore-16S-metagenomics/tutorial.html">16S Microbial analysis with Nanopore data</a>).</p>
+
+    <p>However, because r<span class="notranslate">RNA</span> sequences represent less than 50% of the raw sequences, this approach is not the most statistically supported.</p>
   </li>
   <li>
     <p>Assignment of taxonomy on the whole sequences using databases with marker genes</p>
   </li>
 </ul>
 
-<p>In this tutorial, we follow second approach using <strong>MetaPhlAn2</strong> (<a class="citation" href="#truong2015metaphlan2">Truong <i>et al.</i> 2015</a>). This tool uses a database of ~1M unique clade-specific marker genes (not only the r<span class="notranslate">RNA</span> genes) identified from ~17,000 reference (bacterial, archeal, viral and eukaryotic) genomes. We will use the <code class="language-plaintext highlighter-rouge">Interlaced QC controlled <span class="notranslate">reads</span></code> file with all <span class="notranslate">reads</span> (not only the non r<span class="notranslate">RNA</span>s) because the r<span class="notranslate">RNA</span>s <span class="notranslate">reads</span> are good marker genes.</p>
+<p>In this tutorial, we follow second approach using <strong>MetaPhlAn</strong> ((missing reference)). This tool uses a database of ~1M unique clade-specific marker genes (not only the r<span class="notranslate">RNA</span> genes) identified from ~17,000 reference (bacterial, archeal, viral and eukaryotic) genomes.</p>
+
+<p>As r<span class="notranslate">RNA</span>s <span class="notranslate">reads</span> are good marker genes, we will use directly the quality controlled files (output of <strong>Cutadapt</strong>) with all <span class="notranslate">reads</span> (not only the non r<span class="notranslate">RNA</span>s).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-extract-the-community-structure"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract the community structure</h3>
 
   <ol>
-    <li><strong>MetaPhlAn2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/metaphlan/metaphlan/3.0.8+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/metaphlan/metaphlan/3.0.8+galaxy0"><strong>MetaPhlAn</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/metaphlan/metaphlan/3.0.8+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">Interlaced QC controled <span class="notranslate">reads</span></code></li>
-        <li><em>“Database with clade-specific marker genes”</em>: <code class="language-plaintext highlighter-rouge">Locally cached</code>
+        <li>In <em>“Input(s)”</em>
           <ul>
-            <li><em>“Cached database with clade-specific marker genes”</em>: <code class="language-plaintext highlighter-rouge">MetaPhlAn2 clade-specific marker genes</code></li>
+            <li><em>“Input(s)”</em>: <code class="language-plaintext highlighter-rouge">Fasta/FastQ file(s) with metagenomic <span class="notranslate">reads</span></code>
+              <ul>
+                <li><em>“Fasta/FastQ file(s) with metagenomic <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Paired-end files</code>
+                  <ul>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Forward paired-end Fasta/FastQ file with metagenomic <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">QC controlled forward <span class="notranslate">reads</span></code> (output of <strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reverse paired-end Fasta/FastQ file with metagenomic <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">QC controlled reverse <span class="notranslate">reads</span></code> (outputs of <strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><em>“Database with clade-specific marker genes”</em>: <code class="language-plaintext highlighter-rouge">Locally cached</code>
+              <ul>
+                <li><em>“Cached database with clade-specific marker genes”</em>: <code class="language-plaintext highlighter-rouge">MetaPhlAn2 clade-specific marker genes (mpa_v30_CHOCOPhlAn_201901)</code></li>
+              </ul>
+            </li>
           </ul>
         </li>
-        <li><em>“Type of analysis to perform”</em>: <code class="language-plaintext highlighter-rouge">Profiling a metagenomes in terms of relative abundances</code>
+        <li>In <em>“Analysis”</em>
           <ul>
-            <li><em>“Taxonomic level for the relative abundance output”</em>: <code class="language-plaintext highlighter-rouge">All taxonomic levels</code></li>
+            <li><em>“Type of analysis to perform”</em>: <code class="language-plaintext highlighter-rouge">rel_ab: Profiling a metagenomes in terms of relative abundances</code>
+              <ul>
+                <li><em>“Taxonomic level for the relative abundance output”</em>: <code class="language-plaintext highlighter-rouge">All taxonomic levels</code></li>
+                <li>*“Generate a report for each taxonomic level?”: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+              </ul>
+            </li>
+            <li><em>“Quantile value for the robust average”</em>: <code class="language-plaintext highlighter-rouge">0.1</code></li>
+            <li><em>“Organisms to profile”</em>:
+              <ul>
+                <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">Profile viral organisms (add_viruses)</code></li>
+              </ul>
+            </li>
           </ul>
         </li>
-        <li><em>“Profile viral organisms?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-        <li><em>“Profile eukaryotic organisms?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-        <li><em>“Profile bacteria organisms?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-        <li><em>“Profile archea organisms?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li>In <em>“Output”</em>
+          <ul>
+            <li><em>“Output for Krona”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ol>
-
 </blockquote>
 
 <p>This step may take a couple of minutes as each sequence is compare to the full database with ~1 million reference sequences.</p>
 
-<p>3 files are generated by <strong>MetPhlAn2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>:</p>
+<p>5 files and a collection are generated by <strong>MetaPhlAn2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>:</p>
 
 <ul>
-  <li>A <strong>SAM file</strong> with the results of the sequence <span class="notranslate">mapping</span> via the reference database.</li>
-  <li>A <strong>BIOM file</strong> with the same information as the previous file but in BIOM format
-BIOM format is quite common in microbiomics. This is standard, for example, as the input for tools like mothur or QIIME.</li>
   <li>
-    <p>A <strong>tabular file</strong> with the <em>*community profile</em></p>
+    <p>The main output: A <strong>tabular file</strong> called <code class="language-plaintext highlighter-rouge">Predicted taxon relative abundances</code> with the <em>*community profile</em></p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  #SampleID	Metaphlan2_Analysis
-  k__Bacteria	99.73011
-  k__Archaea	0.26989
-  k__Bacteria|p__Firmicutes	99.68722
-  k__Archaea|p__Euryarchaeota	0.26989
-  k__Bacteria|p__Proteobacteria	0.04289
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  #mpa_v30_CHOCOPhlAn_201901
+  # ....
+  #SampleID	Metaphlan_Analysis		
+  #clade_name	NCBI_tax_id	relative_abundance	additional_species
+  k__Bacteria	2	99.40284	
+  k__Archaea	2157	0.59716	
+  k__Bacteria|p__Firmicutes	2|1239	94.67418	
+  k__Bacteria|p__Coprothermobacterota	2|2138240	4.72866	
+  k__Archaea|p__Euryarchaeota	2157|28890	0.59716	
+  k__Bacteria|p__Firmicutes|c__Clostridia	2|1239|186801	94.67418	
+  k__Bacteria|p__Coprothermobacterota|c__Coprothermobacteria	2|2138240|2138243	4.72866	
+  k__Archaea|p__Euryarchaeota|c__Methanobacteria
 </code></pre></div>    </div>
 
-    <p>Each line contains a taxa and its relative abundance found for our sample. The file starts with high level taxa (kingdom: <code class="language-plaintext highlighter-rouge">k__</code>) and go to more precise taxa.</p>
+    <p>Each line contains 4 columns:</p>
+    <ol>
+      <li>the lineage with different taxonomic levels</li>
+      <li>the previous lineage with NCBI taxon id</li>
+      <li>the relative abundance found for our sample for the lineage</li>
+      <li>any additional species</li>
+    </ol>
+
+    <p>The file starts with high level taxa (kingdom: <code class="language-plaintext highlighter-rouge">k__</code>) and go to more precise taxa.</p>
 
     <blockquote class="question">
       <h3 id="question-questions-7"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-      <p>Inspect the <code class="language-plaintext highlighter-rouge">Community profile</code> file output by <strong>MetaPhlAn2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
+      <p>Inspect the <code class="language-plaintext highlighter-rouge">Predicted taxon relative abundances</code> file output by <strong>MetaPhlAn</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
 
       <ol>
         <li>How many taxons have been identified?</li>
-        <li>What are the different taxonomic levels we have access to with MetaPhlAn2?</li>
+        <li>What are the different taxonomic levels we have access to with MetaPhlAn?</li>
         <li>What genus and species are found in our sample?</li>
         <li>Has only bacteria been identified in our sample?</li>
       </ol>
@@ -1276,12 +1300,12 @@ BIOM format is quite common in microbiomics. This is standard, for example, as t
       <blockquote class="solution">
         <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
         <ol>
-          <li>The file has 28 lines, including an header. Therefore, 27 taxons of different levels have been identified</li>
+          <li>The file has 20 lines, including an header. Therefore, 17 taxons of different levels have been identified</li>
           <li>We have access: kingdom (<code class="language-plaintext highlighter-rouge">k__</code>), phylum (<code class="language-plaintext highlighter-rouge">p__</code>), class (<code class="language-plaintext highlighter-rouge">c__</code>), order (<code class="language-plaintext highlighter-rouge">o__</code>), family (<code class="language-plaintext highlighter-rouge">f__</code>), genus (<code class="language-plaintext highlighter-rouge">g__</code>), species (<code class="language-plaintext highlighter-rouge">s__</code>), strain (<code class="language-plaintext highlighter-rouge">t__</code>)</li>
           <li>In our sample, we identified:
             <ul>
-              <li>4 genera (Clostridium, Coprothermobacter, Methanothermobacter, Escherichia) and 1 genus unclassified (Thermodesulfobiaceae unclassified)</li>
-              <li>4 species (Clostridium thermocellum, Coprothermobacter proteolyticus, Methanothermobacter thermautotrophicus) and 1 unclassified species  (Escherichia unclassified)</li>
+              <li>3 genera: Coprothermobacter, Methanothermobacter, Hungateiclostridium</li>
+              <li>3 species: Coprothermobacter proteolyticus, Methanothermobacter thermautotrophicus, Hungateiclostridium thermocellum</li>
             </ul>
           </li>
           <li>As expected from the r<span class="notranslate">RNA</span> sorting, we have some archaea, Methanobacteria, in our sample.</li>
@@ -1289,58 +1313,44 @@ BIOM format is quite common in microbiomics. This is standard, for example, as t
       </blockquote>
     </blockquote>
   </li>
+  <li>A <strong>collection</strong> with the same information as in the tabular file but splitted into different files, one per taxonomic level</li>
+  <li>A <strong>tabular file</strong> called <code class="language-plaintext highlighter-rouge">Predicted taxon relative abundances for Krona</code> with the same information as the previous file but formatted for visualization using Krona. We will use this file later</li>
+  <li>
+    <p>A <strong>BIOM file</strong> with the same information as the previous file but in BIOM format</p>
+
+    <p>BIOM format is quite common in microbiomics. This is standard, for example, as the input for tools like mothur or QIIME.</p>
+  </li>
+  <li>A <strong>SAM file</strong> with the results of the sequence <span class="notranslate">mapping</span> on the reference database.</li>
+  <li>A <strong>tabular file</strong> called <code class="language-plaintext highlighter-rouge">Bowtie2 output</code> with similar information as the one in the <strong>SAM file</strong></li>
 </ul>
 
 <blockquote class="comment">
   <h3 id="comment-note-analyzing-an-isolated-metatranscriptome"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note: Analyzing an isolated metatranscriptome</h3>
 
-  <p>We are analyzing our <span class="notranslate">RNA</span> <span class="notranslate">reads</span> as we would do for <span class="notranslate">DNA</span> <span class="notranslate">reads</span>. This approach has one main caveat. In <strong>MetaPhlAn2</strong>, the species are quantified based on the recruitment of <span class="notranslate">reads</span> to species-specific marker genes. In metagenomic data, each genome copy is assumed to donate ~1 copy of each marker. But the same assumption cannot be made for <span class="notranslate">RNA</span> data: markers may be transcribed more or less within a given species in this sample compared to the average transcription rate. A species will still be detected in the metatranscriptomic data as long as a non-trivial fraction of the species’ markers is expressed.</p>
+  <p>We are analyzing our <span class="notranslate">RNA</span> <span class="notranslate">reads</span> as we would do for <span class="notranslate">DNA</span> <span class="notranslate">reads</span>. This approach has one main caveat. In <strong>MetaPhlAn</strong>, the species are quantified based on the recruitment of <span class="notranslate">reads</span> to species-specific marker genes. In metagenomic data, each genome copy is assumed to donate ~1 copy of each marker. But the same assumption cannot be made for <span class="notranslate">RNA</span> data: markers may be transcribed more or less within a given species in this sample compared to the average transcription rate. A species will still be detected in the metatranscriptomic data as long as a non-trivial fraction of the species’ markers is expressed.</p>
 
   <p>We should then carefully interpret the species relative abundance. These values reflect species’ relative contributions to the pool of species-specific transcripts and not the overall transcript pool.</p>
 </blockquote>
 
-<h2 id="extract-abundance-at-the-different-taxonomic-levels">Extract abundance at the different taxonomic levels</h2>
+<p>Some <span class="notranslate">downstream</span> tools need the MetaPhlAn table with predicted taxon abundance with only 2 columns: the lineage and the abundance.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-format-metaphlan2-output"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Format MetaPhlAn2 output</h3>
-
+  <h3 id="hands_on-hands-on-format-taxon-relative-abundances-table"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Format taxon relative abundances table</h3>
   <ol>
-    <li><strong>Format MetaPhlAn2 output</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file (MetaPhlAN2 output)”</em>: <code class="language-plaintext highlighter-rouge">Community profile</code> (output of <strong>MetaPhlAn2</strong>)</li>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c3</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">Predicted taxon relative abundances</code> (output of <strong>MetaPhlAn</strong>)</li>
       </ul>
-
-      <blockquote class="question">
-        <h3 id="question-questions-8"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
-
-        <ol>
-          <li>What does <strong>Format MetaPhlAn2 output</strong> do?</li>
-          <li>What is the need for formatting the data?</li>
-        </ol>
-
-        <blockquote class="solution">
-          <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-
-          <ol>
-            <li>
-              <p>This tool formats the output file of MetaPhlan2 containing community content (abundance) at all taxonomic levels (from kingdom to strains).
-9 files are generated: one file per taxonomic level with abundance for corresponding clades and one file combining all taxonomic levels and corresponding abundances.</p>
-            </li>
-            <li>
-              <p>This tool helps in simplifying the data for easy interpretation.</p>
-            </li>
-          </ol>
-
-        </blockquote>
-      </blockquote>
     </li>
+    <li>Rename <code class="language-plaintext highlighter-rouge">Cut predicted taxon relative abundances table</code></li>
   </ol>
 
 </blockquote>
 
 <h2 id="community-structure-visualization">Community structure visualization</h2>
 
-<p>Even if the output of MetaPhlAn2 can be easy to parse, we want to visualize and explore the community structure. 2 tools can be used there:</p>
+<p>Even if the output of <strong>MetaPhlAn</strong> can be easy to parse, we want to visualize and explore the community structure. 2 tools can be used there:</p>
 
 <ul>
   <li><strong>Krona</strong> for an interactive HTML output</li>
@@ -1351,16 +1361,11 @@ BIOM format is quite common in microbiomics. This is standard, for example, as t
   <h3 id="hands_on-hands-on-interactive-community-structure-visualization-with-krona"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Interactive community structure visualization with KRONA</h3>
 
   <ol>
-    <li><strong>Format MetaPhlAn2 output for Krona</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file (MetaPhlAN2 output)”</em>: <code class="language-plaintext highlighter-rouge">Community profile</code> (output of <strong>MetaPhlAn2</strong>)</li>
-      </ul>
-    </li>
-    <li><strong>Krona pie chart</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0"><strong>Krona pie chart</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+<span class="notranslate">galaxy</span>0</span></span>  with
       <ul>
         <li><em>“What is the type of your input data”</em>: <code class="language-plaintext highlighter-rouge">Tabular</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: output of <strong>Format MetaPhlAn2 output for Krona</strong></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">Predicted taxon relative abundances for Krona</code> (output of <strong>MetaPhlAn</strong>)</li>
           </ul>
         </li>
       </ul>
@@ -1372,53 +1377,60 @@ BIOM format is quite common in microbiomics. This is standard, for example, as t
 <p><strong>Krona</strong> <a class="citation" href="#ondov2011interactive">Ondov <i>et al.</i> 2011</a> renders results of a metagenomic profiling as a zoomable pie chart. It allows hierarchical data, here taxonomic levels, to be explored with zooming, multi-layered pie charts</p>
 
 <blockquote class="question">
-  <h3 id="question-questions-9"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-8"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <p>Inspect the output from <strong>Krona</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. (The interactive plot is also shown below)</p>
 
   <ol>
     <li>What are the abundances of 2 kingdoms identified here?</li>
-    <li>When zooming on bacteria, what are the 2 subclasses identified?</li>
+    <li>When zooming on Bacteria, what are the 2 subclasses identified?</li>
   </ol>
 
   <p><br /><br /></p>
   <center><iframe id="krona" src="krona.html" frameborder="0" width="90%" height="600px"> ![Krona at bacteria level](../../images/metatranscriptomics/krona_bacteria.png) </iframe></center>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-9"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>Archaea represents 0.3% so bacteria are 99.7% of the organisms identified in our sample
-<img src="../../images/metatranscriptomics/krona.png" alt="Krona" width="75%" /></li>
-      <li>0.02% of bacteria are Enterobacteriales and the rest Clostridia.
-<img src="../../images/metatranscriptomics/krona_bacteria.png" alt="Krona at bacteria level" width="75%" /></li>
+      <li>
+        <p>Archaea represents 0.6% so bacteria are 99.4% of the organisms identified in our sample</p>
+
+        <p><img src="../../images/metatranscriptomics/krona.png" alt="Krona" width="75%" /></p>
+      </li>
+      <li>
+        <p>55% of bacteria are Coprothermobacter proteolyticus and the rest Hungateiclostridium thermocellum .</p>
+
+        <p><img src="../../images/metatranscriptomics/krona_bacteria.png" alt="Krona at bacteria level" width="75%" /></p>
+      </li>
     </ol>
+
   </blockquote>
 </blockquote>
 
 <p><strong>GraPhlAn</strong> is another software tool for producing high-quality circular representations of taxonomic and phylogenetic trees.</p>
 
-<p>It takes a taxonomic tree file as the input. We first need to convert the <strong>MetaPhlAn2</strong> output using <strong>export2graphlan</strong>. This conversion software tool produces both annotation and tree file for GraPhlAn.</p>
+<p>It takes a taxonomic tree file as the input. We first need to convert the <strong>MetaPhlAn</strong> output using <strong>Export to GraPhlAn</strong>. This conversion software tool produces both annotation and tree file for GraPhlAn.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-publication-ready-community-structure-visualization-with-graphlan"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Publication-ready community structure visualization with GraPhlAn</h3>
 
   <ol>
-    <li><strong>Export to GraPhlAn</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/export2graphlan/export2graphlan/0.20+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/export2graphlan/export2graphlan/0.20+galaxy0"><strong>Export to GraPhlAn</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/export2graphlan/export2graphlan/0.20+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">Community profile</code> (output of <strong>MetaPhlAn2</strong>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">Cut predicted taxon relative abundances table</code></li>
         <li><em>“List which levels should be annotated in the tree”</em>: <code class="language-plaintext highlighter-rouge">1,2</code></li>
         <li><em>“List which levels should use the exte<span class="notranslate">rna</span>l legend for the annotation”</em>: <code class="language-plaintext highlighter-rouge">3,4,5</code></li>
         <li><em>“List which levels should be highlight with a shaded background”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
       </ul>
     </li>
-    <li><strong>Generation, personalization and annotation of tree</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/graphlan_annotate/graphlan_annotate/1.0.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/graphlan_annotate/graphlan_annotate/1.0.0.0"><strong>Generation, personalization and annotation of tree</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/graphlan_annotate/graphlan_annotate/1.0.0.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tree”</em>: <code class="language-plaintext highlighter-rouge">Tree</code> (output of <strong>Export to GraPhlAn</strong>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotation file”</em>: <code class="language-plaintext highlighter-rouge">Annotation</code> (output of <strong>Export to GraPhlAn</strong>)</li>
       </ul>
     </li>
-    <li><strong>GraPhlAn</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/graphlan/graphlan/1.0.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/graphlan/graphlan/1.0.0.0"><strong>GraPhlAn</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/graphlan/graphlan/1.0.0.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tree”</em>: <code class="language-plaintext highlighter-rouge">Tree in PhyloXML</code></li>
         <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">PNG</code></li>
@@ -1436,64 +1448,80 @@ BIOM format is quite common in microbiomics. This is standard, for example, as t
 
 <p>We would now like to answer the question “What are the micro-organisms doing?” or “Which functions are performed by the micro-organisms in the environment?”.</p>
 
-<p>In the metatranscriptomics data, we have access to the genes that are expressed by the community. We can use that to identify genes, their functions, and build pathways, etc., to investigate their contribution to the community using <strong>HUMAnN2</strong> (<a class="citation" href="#franzosa2018species">Franzosa <i>et al.</i> 2018</a>). <strong>HUMAnN2</strong> is a pipeline developed for efficiently and accurately profiling the presence/absence and abundance of microbial pathways in a community from metagenomic or metatranscriptomic sequencing data.</p>
+<p>In the metatranscriptomics data, we have access to the genes that are expressed by the community. We can use that to identify genes, their functions, and build pathways, etc., to investigate their contribution to the community using <strong>HUMAnN</strong> (<a class="citation" href="#franzosa2018species">Franzosa <i>et al.</i> 2018</a>). <strong>HUMAnN</strong> is a pipeline developed for efficiently and accurately profiling the presence/absence and abundance of microbial pathways in a community from metagenomic or metatranscriptomic sequencing data.</p>
 
-<p>To identify the functions made by the community, we do not need the r<span class="notranslate">RNA</span> sequences, specially because they had noise and will slow the run. We will then use the output of <strong>SortMe<span class="notranslate">RNA</span></strong>, but also the identified community profile from <strong>MetaPhlAn2</strong>. This will help <strong>HUMAnN2</strong> to focus on the know sequences for the identified organisms.</p>
+<p>To identify the functions made by the community, we do not need the r<span class="notranslate">RNA</span> sequences, specially because they had noise and will slow the run. We will then use the output of <strong>SortMe<span class="notranslate">RNA</span></strong>, but also the identified community profile from <strong>MetaPhlAn</strong>. This will help <strong>HUMAnN</strong> to focus on the know sequences for the identified organisms.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-extract-the-functional-information"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract the functional information</h3>
 
   <ol>
-    <li><strong>HUMAnN2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann/humann/3.0.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/humann/humann/3.0.0+galaxy1"><strong>HUMAnN</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/humann/humann/3.0.0+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input sequence file”</em>: <code class="language-plaintext highlighter-rouge">Interlaced non r<span class="notranslate">RNA</span> <span class="notranslate">reads</span></code></li>
-        <li><em>“Use of a custom taxonomic profile”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+        <li><em>“Input(s)”</em>: <code class="language-plaintext highlighter-rouge">Quality-controlled shotgun sequencing <span class="notranslate">reads</span> (metagenome (<span class="notranslate">DNA</span> <span class="notranslate">reads</span>) or metatranscriptome (<span class="notranslate">RNA</span> <span class="notranslate">reads</span>))</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span><em>“Taxonomic profile file”</em>: <code class="language-plaintext highlighter-rouge">Community profile</code> (output of <strong>MetaPhlAn2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Quality-controlled shotgun sequencing <span class="notranslate">reads</span> (metagenome (<span class="notranslate">DNA</span> <span class="notranslate">reads</span>) or metatranscriptome (<span class="notranslate">RNA</span> <span class="notranslate">reads</span>))”</em>: <code class="language-plaintext highlighter-rouge">Interlaced non r<span class="notranslate">RNA</span> <span class="notranslate">reads</span></code></li>
           </ul>
         </li>
-        <li><em>“Nucleotide database”</em>: <code class="language-plaintext highlighter-rouge">Locally cached</code>
+        <li><em>“Steps”</em>: <code class="language-plaintext highlighter-rouge">Bypass the taxonomic profiling step and creates a custom ChocoPhlAn database of the species provided afterwards</code>
           <ul>
-            <li><em>“Nucleotide database”</em>: <code class="language-plaintext highlighter-rouge">Full</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span><em>“Taxonomic profile file”</em>: <code class="language-plaintext highlighter-rouge">Predicted taxon relative abundances</code> (output of <strong>MetaPhlAn</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li>In <em>“Nucleotide search / <span class="notranslate">Mapping</span> <span class="notranslate">reads</span> to community pangenomes”</em>
+              <ul>
+                <li><em>“Nucleotide database”</em>: <code class="language-plaintext highlighter-rouge">Locally cached</code>
+                  <ul>
+                    <li><em>“Nucleotide database”</em>: <code class="language-plaintext highlighter-rouge">Full ChocoPhlAn for HUMAnN</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>In <em>“Translated search / Aligning unmapped <span class="notranslate">reads</span> to a protein database”</em>
+              <ul>
+                <li><em>“Protein database”</em>: <code class="language-plaintext highlighter-rouge">Locally cached</code>
+                  <ul>
+                    <li><em>“Protein database”</em>: <code class="language-plaintext highlighter-rouge">Full UniRef90 for HUMAnN</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
           </ul>
         </li>
-        <li><em>“Software to use for translated alignment”</em>: <code class="language-plaintext highlighter-rouge">Diamond</code></li>
-        <li><em>“Protein database”</em>: <code class="language-plaintext highlighter-rouge">Locally cached</code>
-          <ul>
-            <li><em>“Protein database”</em>: <code class="language-plaintext highlighter-rouge">Full UniRef50</code></li>
-          </ul>
-        </li>
-        <li><em>“Search for uniref50 or uniref90 gene families?”</em>: <code class="language-plaintext highlighter-rouge">uniref50</code></li>
-        <li><em>“Database to use for pathway computations”</em>: <code class="language-plaintext highlighter-rouge">MetaCyc</code></li>
       </ul>
-
-      <p>This is a large step and might take some time, so please be patient. Otherwise, we have pre-generated the outputs and you can upload them to inspect them without waiting.</p>
     </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-running-low-on-time-import-the-humann-outputs"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Running low on time? Import the HUMAnN outputs</h3>
+
+  <ol>
     <li>
       <p>Import the 2 files:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3362849/files/T1A_humann2_gene_family_abundances.tsv
-https://zenodo.org/record/3362849/files/T1A_humann2_pathway_abundances.tsv
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4776250/files/T1A_HUMAnN_Gene_families_and_their_abundance.tabular
+https://zenodo.org/record/4776250/files/T1A_HUMAnN_Pathways_and_their_abundance.tabular
 </code></pre></div>      </div>
     </li>
   </ol>
 </blockquote>
 
-<p><strong>HUMAnN2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> generates 3 files:</p>
+<p><strong>HUMAnN</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> generates 4 files:</p>
 
 <ol>
   <li>
-    <p>A file with the <strong>abundance of gene families</strong>:</p>
+    <p>A tabular file with the <strong>gene families and their abundance</strong>:</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # Gene Family	humann2_Abundance-RPKs
- UNMAPPED	109359.0000000000
- UniRef50_P62593: Beta-lactamase TEM	51842.4304363200
- UniRef50_P62593: Beta-lactamase TEM|g__Clostridium.s__Clostridium_thermocellum	51842.4304363200
- UniRef50_R5FV61	46966.2923149157
- UniRef50_R5FV61|g__Clostridium.s__Clostridium_thermocellum	46966.2923149157
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # Gene Family	humann_Abundance-RPKs
+ UNMAPPED	98294.0000000000
+ UniRef90_A3DCI4	42213.2661898446
+ UniRef90_A3DCI4|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	42205.5707425926
+ UniRef90_A3DCI4|unclassified	7.6954472520
+ UniRef90_A3DCB9	39273.2031556915
+ UniRef90_A3DCB9|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	39273.2031556915
 </code></pre></div>    </div>
 
-    <p>This file details the abundance of each gene family in the community. Gene families are groups of evolutionarily-related protein-coding sequences that often perform similar functions. Here we used <a href="https://www.uniprot.org/help/uniref">UniRef50 gene families</a>: sequences in a gene families have at least 50% sequence identity.</p>
+    <p>This file details the abundance of each gene family in the community. Gene families are groups of evolutionarily-related protein-coding sequences that often perform similar functions. Here we used <a href="https://www.uniprot.org/help/uniref">UniRef90 gene families</a>: sequences in a gene families have at least 50% sequence identity.</p>
 
     <p>Gene family abundance at the community level is stratified to show the contributions from known and unknown species. Individual species’ abundance contributions sum to the community total abundance.</p>
 
@@ -1502,9 +1530,9 @@ https://zenodo.org/record/3362849/files/T1A_humann2_pathway_abundances.tsv
     <p>The “UNMAPPED” value is the total number of <span class="notranslate">reads</span> which remain unmapped after both alignment steps (nucleotide and translated search). Since other gene features in the table are quantified in RPK units, “UNMAPPED” can be interpreted as a single unknown gene of length 1 kilobase recruiting all <span class="notranslate">reads</span> that failed to map to known sequences.</p>
 
     <blockquote class="question">
-      <h3 id="question-questions-10"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+      <h3 id="question-questions-9"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-      <p><strong>Inspect</strong> the <code class="language-plaintext highlighter-rouge">Gene Family Abundances</code> file from <strong>HUMAnN2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
+      <p><strong>Inspect</strong> the <code class="language-plaintext highlighter-rouge">Gene families and their abundances</code> file from <strong>HUMAnN</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
 
       <ol>
         <li>What is the most abundant family?</li>
@@ -1513,37 +1541,39 @@ https://zenodo.org/record/3362849/files/T1A_humann2_pathway_abundances.tsv
       </ol>
 
       <blockquote class="solution">
-        <h3 id="solution-solution-10"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+        <h3 id="solution-solution-9"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
         <ol>
-          <li>The most abundant family is the first one in the family: UniRef50_P62593, involved in Beta-lactamase TEM, enzymes produced by bacteria that provide multi-resistance to β-lactam antibiotics.</li>
-          <li>Beta-lactamase TEM seems mostly produced here by <em>Clostridium thermocellum</em>.</li>
+          <li>The most abundant family is the first one in the family: UniRef90_A3DCI4. We can use the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.0.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.0.0+galaxy1"><strong>Rename features of a HUMAnN generated table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.0.0+<span class="notranslate">galaxy</span>1</span></span>  to add extra information about the gene family.</li>
+          <li>Beta-lactamase TEM seems mostly produced here by <em>Hungateiclostridium thermocellum</em>.</li>
           <li>
-            <p>There is 6,861 lines in gene family file. But some of the gene families have multiple lines when the involved species are known.</p>
+            <p>There is 6,374 lines in gene family file. But some of the gene families have multiple lines when the involved species are known.</p>
 
-            <p>To know the number of gene families, we need to remove all lines with the species information, i.e. lines with <code class="language-plaintext highlighter-rouge">|</code> in them using the tool <strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:</p>
+            <p>To know the number of gene families, we need to remove all lines with the species information, i.e. lines with <code class="language-plaintext highlighter-rouge">|</code> in them using the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1"><strong>Split a HUMAnN table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+<span class="notranslate">galaxy</span>1</span></span></p>
+
+            <p>The tool generates 2 output file:</p>
             <ul>
-              <li><em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">Gene families and their abundance</code> (output of <strong>HUMAnN2</strong>)</li>
-              <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">NOT Matching</code></li>
-              <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">\|</code></li>
+              <li>a stratified table with all lines with <code class="language-plaintext highlighter-rouge">|</code> in them</li>
+              <li>a unstratied table with all lines without <code class="language-plaintext highlighter-rouge">|</code> in them</li>
             </ul>
 
-            <p>The output file has 3,418 lines, including the header and the UNMAPPED. So 3,416 UniRef50 gene families have been identified for our sample.</p>
+            <p>In the unstratified table, there are 3,175 lines, so 3,174 gene families.</p>
           </li>
         </ol>
       </blockquote>
     </blockquote>
   </li>
   <li>
-    <p>A file with the <strong>abundance of pathways</strong>:</p>
+    <p>A tabular file with the <strong>pathways and their abundance</strong>:</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # Pathway	humann2_Abundance
- UNMAPPED	11417.7392070186
- UNINTEGRATED	65807.9719501939
- UNINTEGRATED|g__Clostridium.s__Clostridium_thermocellum	48238.6191078367
- UNINTEGRATED|g__Coprothermobacter.s__Coprothermobacter_proteolyticus	6335.2676240042
- UNINTEGRATED|g__Methanothermobacter.s__Methanothermobacter_thermautotrophicus	80.7884346284
- PWY-6305: putrescine biosynthesis IV	764.5363426532
- PWY-6305: putrescine biosynthesis IV|g__Clostridium.s__Clostridium_thermocellum	751.0036125447
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  # Pathway	humann_Abundance
+ UNMAPPED	21383.0328532606
+ UNINTEGRATED	123278.2617863865
+ UNINTEGRATED|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	114029.8324087679
+ UNINTEGRATED|unclassified	6301.1699240597
+ UNINTEGRATED|g__Coprothermobacter.s__Coprothermobacter_proteolyticus	5407.2826151090
+ PWY-6609: adenine and adenosine salvage III	285.7955913866
+ PWY-6609: adenine and adenosine salvage III|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	66.3688569288
+ PWY-1042: glycolysis IV	194.7465938041
 </code></pre></div>    </div>
 
     <p>This file shows each pathway and their abundance. Here, we used  the <a href="https://metacyc.org/">MetaCyc Metabolic Pathway Database</a>, a curated database of experimentally elucidated metabolic pathways from all domains of life.</p>
@@ -1553,9 +1583,9 @@ https://zenodo.org/record/3362849/files/T1A_humann2_pathway_abundances.tsv
     <p>The pathway abundance is computed once for all species (community level) and again for each species  using species gene abundances along the components of the pathway. Unlike gene abundance, a pathway’s  abundance at community-level is not necessarily the sum of the abundance values of each species. For example, for the same pathway example as above, if the abundances of RXNs 1-4 are [5, 5, 10, 10] in Species A and [10, 10, 5, 5] in Species B, the pathway abundance would be 5 for Species A and Species B, but 15 at the community level as the reaction totals are [15, 15, 15, 15].</p>
 
     <blockquote class="question">
-      <h3 id="question-questions-11"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+      <h3 id="question-questions-10"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-      <p><strong>View</strong> the <code class="language-plaintext highlighter-rouge">Pathway Abundances</code> output from <strong>HUMAnN2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
+      <p><strong>View</strong> the <code class="language-plaintext highlighter-rouge">Pathways and their abundance</code> output from <strong>HUMAnN</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
 
       <ol>
         <li>What is the most abundant pathway?</li>
@@ -1565,13 +1595,13 @@ https://zenodo.org/record/3362849/files/T1A_humann2_pathway_abundances.tsv
       </ol>
 
       <blockquote class="solution">
-        <h3 id="solution-solution-11"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+        <h3 id="solution-solution-10"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
         <ol>
-          <li>The most abundant pathway is PWY-6305. It produces the polyamine putrescine that may be involved in interactions with proteins, <span class="notranslate">DNA</span> and <span class="notranslate">RNA</span> molecules.</li>
-          <li>Like the gene family, this pathway is mostly achieved by <em>Clostridium thermocellum</em>.</li>
+          <li>The most abundant pathway is PWY-6609. It produces the adenine and adenosine salvage III.</li>
+          <li>Like the gene family, this pathway is mostly achieved by <em>Hungateiclostridium thermocellum</em>.</li>
           <li>
-            <p>There are 146 lines in the pathway file, including the lines with species information. To compute the number of gene families, we need to apply a similar approach as for the gene families by removing the lines with <code class="language-plaintext highlighter-rouge">|</code> in them using the tool <strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.
-  The output file has 79 lines, including the header, UNMAPPED and UNINTEGRATED. Therefore, 76 UniRef50 pathways have been identified for our sample.”</p>
+            <p>There are 118 lines in the pathway file, including the lines with species information. To compute the number of gene families, we need to apply a similar approach as for the gene families by removing the lines with <code class="language-plaintext highlighter-rouge">|</code> in them using the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1"><strong>Split a HUMAnN table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+<span class="notranslate">galaxy</span>1</span></span> .
+  The unstratified output file has 64 lines, including the header, UNMAPPED and UNINTEGRATED. Therefore, 61 MetaCyc pathways have been identified for our sample.</p>
           </li>
           <li>The “UNINTEGRATED” abundance corresponds to the total abundance of genes in the different levels that do not contribute to any pathways.</li>
         </ol>
@@ -1579,20 +1609,23 @@ https://zenodo.org/record/3362849/files/T1A_humann2_pathway_abundances.tsv
     </blockquote>
   </li>
   <li>
-    <p>A file with the <strong>coverage of pathways</strong>:</p>
+    <p>A file with the <strong>pathways and their coverage</strong>:</p>
 
     <p>Pathway coverage provides an alte<span class="notranslate">rna</span>tive description of the presence (1) and absence (0) of pathways in a community, independent of their quantitative abundance.</p>
+  </li>
+  <li>
+    <p>A log file</p>
   </li>
 </ol>
 
 <blockquote class="comment">
   <h3 id="comment-note-analyzing-an-isolated-metatranscriptome-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note: Analyzing an isolated metatranscriptome</h3>
 
-  <p>As we already mentioned above, we are analyzing our <span class="notranslate">RNA</span> <span class="notranslate">reads</span> as we would do for <span class="notranslate">DNA</span> <span class="notranslate">reads</span> and therefore we should be careful when interpreting the results. We already mentioned the analysis of the species’ relative abundance from <strong>MetaPhlAn2</strong>, but there is another aspect we should be careful about.</p>
+  <p>As we already mentioned above, we are analyzing our <span class="notranslate">RNA</span> <span class="notranslate">reads</span> as we would do for <span class="notranslate">DNA</span> <span class="notranslate">reads</span> and therefore we should be careful when interpreting the results. We already mentioned the analysis of the species’ relative abundance from <strong>MetaPhlAn</strong>, but there is another aspect we should be careful about.</p>
 
   <p>From a lone metatranscriptomic dataset, the transcript abundance can be confounded with the underlying gene copy number. For example, transcript X may be more abundant in sample A relative to sample B because the underlying X gene (same number in both samples) is more highly expressed in sample A relative to sample B; or there are more copies of gene X in sample A relative to sample B (all of which are equally expressed). This is a general challenge in analyzing isolated metatranscriptomes.</p>
 
-  <p>The best approach would be to combine the metatranscriptomic analysis with a metagenomic analysis. In this case, rather than running <strong>MetaPhlAn2</strong> on the metatranscriptomic data, we run it on the metagenomic data and use the taxonomic profile as input to <strong>HUMAnN2</strong>. <span class="notranslate">RNA</span> <span class="notranslate">reads</span> are then mapped to any species’ pangenomes detected in the metagenome. Then we run <strong>HUMAnN2</strong> on both metagenomics and metatranscriptomic data. We can use both outputs to normalize the <span class="notranslate">RNA</span>-level outputs (e.g. transcript family abundance) by corresponding <span class="notranslate">DNA</span>-level outputs to the quantification of microbial <span class="notranslate">expression</span> independent of gene copy number.</p>
+  <p>The best approach would be to combine the metatranscriptomic analysis with a metagenomic analysis. In this case, rather than running <strong>MetaPhlAn</strong> on the metatranscriptomic data, we run it on the metagenomic data and use the taxonomic profile as input to <strong>HUMAnN</strong>. <span class="notranslate">RNA</span> <span class="notranslate">reads</span> are then mapped to any species’ pangenomes detected in the metagenome. Then we run <strong>HUMAnN</strong> on both metagenomics and metatranscriptomic data. We can use both outputs to normalize the <span class="notranslate">RNA</span>-level outputs (e.g. transcript family abundance) by corresponding <span class="notranslate">DNA</span>-level outputs to the quantification of microbial <span class="notranslate">expression</span> independent of gene copy number.</p>
 
   <p>Here we do not have a metagenomic dataset to combine with and need to be careful in our interpretation</p>
 
@@ -1606,9 +1639,9 @@ https://zenodo.org/record/3362849/files/T1A_humann2_pathway_abundances.tsv
   <h3 id="hands_on-hands-on-normalize-the-gene-family-abundances"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Normalize the gene family abundances</h3>
 
   <ol>
-    <li><strong>Renormalize a HUMAnN2 generated table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.0.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.0.0+galaxy1"><strong>Renormalize a HUMAnN generated table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.0.0+<span class="notranslate">galaxy</span>1</span></span>  with
       <ul>
-        <li><em>“Gene/pathway table”</em>: <code class="language-plaintext highlighter-rouge">Gene families and their abundance</code> (output of <strong>HUMAnN2</strong>)</li>
+        <li><em>“Gene/pathway table”</em>: <code class="language-plaintext highlighter-rouge">Gene families and their abundance</code> (output of <strong>HUMAnN</strong>)</li>
         <li><em>“Normalization scheme”</em>: <code class="language-plaintext highlighter-rouge">Relative abundance</code></li>
         <li><em>“Normalization level”</em>: <code class="language-plaintext highlighter-rouge">Normalization of all levels by community total</code></li>
       </ul>
@@ -1619,7 +1652,7 @@ https://zenodo.org/record/3362849/files/T1A_humann2_pathway_abundances.tsv
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-questions-12"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-11"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <p><strong>Inspect</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the <code class="language-plaintext highlighter-rouge">Normalized gene families</code> file</p>
 
@@ -1629,10 +1662,10 @@ https://zenodo.org/record/3362849/files/T1A_humann2_pathway_abundances.tsv
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-12"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-11"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <ol>
-      <li>14% (<code class="language-plaintext highlighter-rouge">0.140345 x 100</code>) of the sequences have not be assigned to a gene family</li>
-      <li>The Beta-lactamase TEM gene family represents 6% of the <span class="notranslate">reads</span>.</li>
+      <li>14% (<code class="language-plaintext highlighter-rouge">0.14438 x 100</code>) of the sequences have not be assigned to a gene family</li>
+      <li>The UniRef90_A3DCI4 family represents 6% of the <span class="notranslate">reads</span>.</li>
     </ol>
   </blockquote>
 </blockquote>
@@ -1643,9 +1676,9 @@ https://zenodo.org/record/3362849/files/T1A_humann2_pathway_abundances.tsv
   <h3 id="hands_on-hands-on-normalize-the-pathway-abundances"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Normalize the pathway abundances</h3>
 
   <ol>
-    <li><strong>Renormalize a HUMAnN2 generated table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.0.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.0.0+galaxy1"><strong>Renormalize a HUMAnN generated table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.0.0+<span class="notranslate">galaxy</span>1</span></span>  with
       <ul>
-        <li><em>“Gene/pathway table”</em>: <code class="language-plaintext highlighter-rouge">Pathways and their abundance</code> (output of <strong>HUMAnN2</strong>)</li>
+        <li><em>“Gene/pathway table”</em>: <code class="language-plaintext highlighter-rouge">Pathways and their abundance</code> (output of <strong>HUMAnN</strong>)</li>
         <li><em>“Normalization scheme”</em>: <code class="language-plaintext highlighter-rouge">Relative abundance</code></li>
         <li><em>“Normalization level”</em>: <code class="language-plaintext highlighter-rouge">Normalization of all levels by community total</code></li>
       </ul>
@@ -1656,9 +1689,9 @@ https://zenodo.org/record/3362849/files/T1A_humann2_pathway_abundances.tsv
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-questions-13"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-12"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-  <p><strong>Examine</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the <code class="language-plaintext highlighter-rouge">Normalized pathways</code> file.</p>
+  <p><strong>Inspect</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the <code class="language-plaintext highlighter-rouge">Normalized pathways</code> file.</p>
   <ol>
     <li>What is the UNMAPPED percentage?</li>
     <li>What percentage of <span class="notranslate">reads</span> assigned to a gene family has not be assigned to a pathway?</li>
@@ -1666,11 +1699,11 @@ https://zenodo.org/record/3362849/files/T1A_humann2_pathway_abundances.tsv
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-13"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-12"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <ol>
       <li>UNMAPPED, here 14% of the <span class="notranslate">reads</span>, corresponds to the percentage of <span class="notranslate">reads</span> not assigned to gene families. It is the same value as in the normalized gene family file.</li>
-      <li>81% (UNINTEGRATED) of <span class="notranslate">reads</span> assigned to a gene family have not be assigned to a pathway</li>
-      <li>The PWY-6305 pathway represents 0.9% of the <span class="notranslate">reads</span>.</li>
+      <li>83% (UNINTEGRATED) of <span class="notranslate">reads</span> assigned to a gene family have not be assigned to a pathway</li>
+      <li>The PWY-6609 pathway represents 0.2% of the <span class="notranslate">reads</span>.</li>
     </ol>
   </blockquote>
 </blockquote>
@@ -1678,17 +1711,16 @@ https://zenodo.org/record/3362849/files/T1A_humann2_pathway_abundances.tsv
 <h2 id="identify-the-gene-families-involved-in-the-pathways">Identify the gene families involved in the pathways</h2>
 
 <p>We would like to know which gene families are involved in our most abundant pathways and which species.
-For this, we use the tool <strong>Unpack pathway abundances to show genes included</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
+For this, we use the tool <strong>Unpack pathway abundances to show genes included</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> from <strong>HUMAnN</strong> tool suites.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-normalize-the-gene-family-abundances-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Normalize the gene family abundances</h3>
 
   <ol>
-    <li><strong>Unpack pathway abundances to show genes included</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_unpack_pathways/humann_unpack_pathways/3.0.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/humann_unpack_pathways/humann_unpack_pathways/3.0.0+galaxy1"><strong>Unpack pathway abundances to show genes included</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/humann_unpack_pathways/humann_unpack_pathways/3.0.0+<span class="notranslate">galaxy</span>1</span></span>  with
       <ul>
         <li><em>“Gene family or EC abundance file”</em>: <code class="language-plaintext highlighter-rouge">Normalized gene families</code></li>
         <li><em>“Pathway abundance file”</em>: <code class="language-plaintext highlighter-rouge">Normalized pathways</code></li>
-        <li><em>“Remove the taxonomy from the output file?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
     </li>
   </ol>
@@ -1697,65 +1729,143 @@ For this, we use the tool <strong>Unpack pathway abundances to show genes includ
 
 <p>This tool unpacks the pathways to show the genes for each. It adds another level of stratification to the pathway abundance table by including the gene family abundances:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Pathway	humann2_Abundance
-ANAGLYCOLYSIS-PWY: glycolysis III (from glucose)	46.9853692906
-ANAGLYCOLYSIS-PWY|g__Coprothermobacter.s__Coprothermobacter_proteolyticus	23.6863932121
-ANAGLYCOLYSIS-PWY|g__Coprothermobacter.s__Coprothermobacter_proteolyticus|UniRef50_B5Y8V1: 6-phosphofructokinase 1 (Phosphofructokinase 1)(Phosphohexokinase 1) (ATP-PFK)	12.4204627049
-ANAGLYCOLYSIS-PWY|g__Coprothermobacter.s__Coprothermobacter_proteolyticus|UniRef50_B5Y8V2: 6-phosphofructokinase (Phosphofructokinase)(Phosphohexokinase)	24.9672323561
-ANAGLYCOLYSIS-PWY|g__Coprothermobacter.s__Coprothermobacter_proteolyticus|UniRef50_B5Y8I1: Triosephosphate isomerase
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Pathway	humann_Abundance-RELAB
+ANAGLYCOLYSIS-PWY: glycolysis III (from glucose)	0.000312308
+BRANCHED-CHAIN-AA-SYN-PWY: superpathway of branched chain amino acid biosynthesis	0.00045009
+BRANCHED-CHAIN-AA-SYN-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	0.00045009
+BRANCHED-CHAIN-AA-SYN-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DIY4	9.67756e-06
+BRANCHED-CHAIN-AA-SYN-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DIE1	0.000123259
+BRANCHED-CHAIN-AA-SYN-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DID9	9.73261e-05
+BRANCHED-CHAIN-AA-SYN-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DDR1	7.97357e-05
+BRANCHED-CHAIN-AA-SYN-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DF94	1.4837e-05
+BRANCHED-CHAIN-AA-SYN-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DIY3	0.000117313
 </code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-questions-14"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-13"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-  <p><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the output from <strong>Unpack pathway abundances to show genes included</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
+  <p><strong>Inspect</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the output from <strong>Unpack pathway abundances to show genes included</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
 
-  <ol>
-    <li>Which gene families are involved in the PWY-6305 pathway? And which species?</li>
-  </ol>
+  <p>Which gene families are involved in the PWY-6609 pathway (the most abundant one)? And which species?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-14"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <ol>
-      <li>If we search the generated file for (using <kbd>CTR</kbd><kbd>F</kbd>):</li>
-    </ol>
+    <h3 id="solution-solution-13"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>If we search the generated file for (using <kbd>CTR</kbd><kbd>F</kbd> or <kbd>CMD</kbd><kbd>F</kbd>):</p>
 
-    <pre><code class="language-`">PWY-6305: putrescine biosynthesis IV	0.00939758
-PWY-6305|g__Clostridium.s__Clostridium_thermocellum	0.00923124
-PWY-6305|g__Clostridium.s__Clostridium_thermocellum|UniRef50_Q814Q2: Agmatinase	0.00189827
-PWY-6305|g__Clostridium.s__Clostridium_thermocellum|UniRef50_D4KNP6: Arginine decarboxylase	8.60858e-05
-PWY-6305|g__Clostridium.s__Clostridium_thermocellum|UniRef50_G8LSV4: Arginine/lysine/ornithine decarboxylase	0.000559771
+    <pre><code class="language-`">PWY-6609: adenine and adenosine salvage III	0.00192972
+PWY-6609|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	0.000448128
+PWY-6609|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DD28	4.47176e-05
+PWY-6609|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DHM7	0.000235689
+PWY-6609|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DEQ4	3.68298e-05
 </code></pre>
 
-    <p>The gene families UniRef50_Q814Q2, UniRef50_D4KNP6 and UniRef50_G8LSV4 are identified, for <em>Clostridium thermocellum</em>.</p>
+    <p>The gene families UniRef90_A3DD28, UniRef90_A3DHM7 and UniRef90_A3DEQ4 are identified, for <em>Hungateiclostridium thermocellum</em>.</p>
   </blockquote>
 </blockquote>
 
-<h2 id="group-abundances-into-go-slim-terms">Group abundances into GO slim terms</h2>
+<h2 id="group-gene-families-into-go-terms">Group gene families into GO terms</h2>
 
-<p>The gene families can be a long list of ids and going through the gene families one by one to identify the interesting ones can be cumbersome. To help constuct a big picture, we could identify and use categories of genes using the gene families. <a href="http://www.geneontology.org/">Gene Ontology (GO)</a> analysis is widely used to reduce complexity and highlight biological processes in genome-wide <span class="notranslate">expression</span> studies. There is a dedicated tool which groups and converts UniRef50 gene family abundances generated with HUMAnN2 into GO slim terms.</p>
+<p>The gene families can be a long list of ids and going through the gene families one by one to identify the interesting ones can be cumbersome. To help constuct a big picture, we could identify and use categories of genes using the gene families.</p>
+
+<p><a href="http://www.geneontology.org/">Gene Ontology (GO)</a> analysis is widely used to reduce complexity and highlight biological processes in genome-wide <span class="notranslate">expression</span> studies. There is a dedicated tool which groups and converts UniRef50 gene family abundances generated with <strong>HUMAnN</strong> into GO terms.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-group-abundances-into-go-slim-terms"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Group abundances into GO slim terms</h3>
+  <h3 id="hands_on-hands-on-group-abundances-into-go-terms"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Group abundances into GO terms</h3>
 
   <ol>
-    <li><strong>Group abundances</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_regroup_table/humann_regroup_table/3.0.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/humann_regroup_table/humann_regroup_table/3.0.0+galaxy1"><strong>Regroup HUMAnN table features</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/humann_regroup_table/humann_regroup_table/3.0.0+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“HUMAnN2 output with UniRef 50 gene family abundance”</em>: <code class="language-plaintext highlighter-rouge">Gene families and their abundance</code> (output of <strong>HUMAnN2</strong>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene families table”</em>: <code class="language-plaintext highlighter-rouge">Gene families and their abundance</code> (output of <strong>HUMAnN</strong>)</li>
+        <li><em>“How to combine grouped features?”</em>: <code class="language-plaintext highlighter-rouge">Sum</code></li>
+        <li><em>“Grouping”</em>: <code class="language-plaintext highlighter-rouge">Grouping with larger <span class="notranslate">mapping</span></code>
+          <ul>
+            <li><em>“<span class="notranslate">Mapping</span> to use for the grouping”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">Mapping</span> (full) for Gene Ontology (GO) from UniRef90</code></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ol>
 
 </blockquote>
 
-<p>3 outputs are generated from executing this tool: the abundances of GO slim terms grouped in 3 groups (molecular functions, biological processes and cellular components). Each file is a tabular file with 3 columns: GO slim term id, name and abundance.</p>
+<p>The output is a table with the GO terms, their abundance and the involved species:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Gene Family	humann_Abundance-RPKs
+UNMAPPED	98294.0
+UNGROUPED	174431.144
+UNGROUPED|g__Coprothermobacter.s__Coprothermobacter_proteolyticus	6941.859
+UNGROUPED|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	151964.371
+UNGROUPED|unclassified	15524.915
+GO:0000015	250.882
+GO:0000015|g__Coprothermobacter.s__Coprothermobacter_proteolyticus	11.313
+GO:0000015|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	239.568
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-questions-14"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>How many GO term have been identified?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-14"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>Using the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1"><strong>Split a HUMAnN table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+<span class="notranslate">galaxy</span>1</span></span> , we see that the unstratified table has 1,171 lines (including the UNMAPPED, UNGROUPED and the header). So 1,168 GO terms have been identified.</p>
+  </blockquote>
+</blockquote>
+
+<p>The GO term with their id are quite cryptic. We can rename them and then split them in 3 groups  (molecular functions [MF], biological processes [BP] and cellular components [CC])</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-rename-go-terms"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Rename GO terms</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.0.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.0.0+galaxy0"><strong>Rename features of a HUMAnN generated table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.0.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene families table”</em>: output of <strong>Regroup HUMAnN table features</strong></li>
+        <li><em>“Type of feature renaming”</em>: <code class="language-plaintext highlighter-rouge">Advanced feature renaming</code>
+          <ul>
+            <li><em>“Features to be renamed”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">Mapping</span> (full) between Gene Ontology (GO) ids and names</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Grep1" title="Tested with Grep1"><strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: output of last <strong>Rename features of a HUMAnN generated table</strong></li>
+        <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
+        <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">\[CC\]</code></li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the generated file <code class="language-plaintext highlighter-rouge">[CC] GO terms and their abundance</code></p>
+    </li>
+    <li><span class="tool" data-tool="Grep1" title="Tested with Grep1"><strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: output of last <strong>Rename features of a HUMAnN generated table</strong></li>
+        <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
+        <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">\[MF\]</code></li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the generated file <code class="language-plaintext highlighter-rouge">[MF] GO terms and their abundance</code></p>
+    </li>
+    <li><span class="tool" data-tool="Grep1" title="Tested with Grep1"><strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: output of last <strong>Rename features of a HUMAnN generated table</strong></li>
+        <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
+        <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">\[BP\]</code></li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the generated file <code class="language-plaintext highlighter-rouge">[BP] GO terms and their abundance</code></li>
+  </ol>
+</blockquote>
 
 <blockquote class="question">
   <h3 id="question-questions-15"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-  <p><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the 3 outputs of this tool (<code class="language-plaintext highlighter-rouge">Group abundances ..</code>)</p>
+  <p><strong>Inspect</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the 3 outputs of these steps</p>
 
   <ol>
+    <li>How many GO terms have been identified</li>
     <li>Which of the GO terms related to molecular functions is the most abundant?</li>
   </ol>
 
@@ -1763,46 +1873,53 @@ PWY-6305|g__Clostridium.s__Clostridium_thermocellum|UniRef50_G8LSV4: Arginine/ly
     <h3 id="solution-solution-15"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>The GO terms in the <code class="language-plaintext highlighter-rouge">Molecular function abundance</code> file are not sorted by abundance:</li>
+      <li>After running <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1"><strong>Split a HUMAnN table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+<span class="notranslate">galaxy</span>1</span></span>  on the 3 outputs, we found:
+        <ul>
+          <li>414 BP GO terms</li>
+          <li>689 MF GO terms</li>
+          <li>59 CC GO terms</li>
+        </ul>
+      </li>
+      <li>
+        <p>The GO terms in the <code class="language-plaintext highlighter-rouge">[MF] GO terms and their abundance</code> file are not sorted by abundance:</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GO:0000030: [MF] mannosyltransferase activity	16.321
+GO:0000030: [MF] mannosyltransferase activity|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	16.321
+GO:0000036: [MF] acyl carrier activity	726.249
+GO:0000036: [MF] acyl carrier activity|g__Coprothermobacter.s__Coprothermobacter_proteolyticus	10.101
+GO:0000036: [MF] acyl carrier activity|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	572.281
+GO:0000036: [MF] acyl carrier activity|unclassified	143.868
+GO:0000049: [MF] t<span class="notranslate">RNA</span> binding	4818.299
+</code></pre></div>        </div>
+
+        <p>So to identify the most abundant GO terms, we first need to sort the file using the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1"><strong>Sort data in ascending or descending order</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1</span></span>  tool (on column 2, in descending order):</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GO:0015035: [MF] protein disulfide oxidoreductase activity	42908.123
+GO:0003735: [MF] structural constituent of ribosome	42815.337
+GO:0015035: [MF] protein disulfide oxidoreductase activity|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	40533.997
+GO:0005524: [MF] ATP binding	37028.271
+GO:0046872: [MF] metal ion binding	31068.144
+</code></pre></div>        </div>
+
+        <p>The most abundant GO terms related to molecular functions seem to be linked to protein disulfide oxidoreductase activity, but also to structural constituent of ribosome and ATP and metal ion binding.</p>
+      </li>
     </ol>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GO id	GO name	Abundance
-GO:0000150	recombinase activity	123.345
-GO:0000150|g__Clostridium.s__Clostridium_thermocellum	recombinase activity|g__Clostridium.s__Clostridium_thermocellum	123.345
-GO:0000166	nucleotide binding	51078.796
-GO:0000166|g__Clostridium.s__Clostridium_thermocellum	nucleotide binding|g__Clostridium.s__Clostridium_thermocellum	43316.679
-GO:0000166|g__Coprothermobacter.s__Coprothermobacter_proteolyticus	nucleotide binding|g__Coprothermobacter.s__Coprothermobacter_proteolyticus	7609.601
-GO:0000166|g__Methanothermobacter.s__Methanothermobacter_thermautotrophicus	nucleotide binding|g__Methanothermobacter.s__Methanothermobacter_thermautotrophicus	152.517
-</code></pre></div>    </div>
-
-    <p>So to identify the most abundant GO terms, we first need to sort the file using the <strong>Sort data in ascending or descending order</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool:</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GO:0016491	oxidoreductase activity	58558.589
-GO:0016787	hydrolase activity	58119.165
-GO:0016787|g__Clostridium.s__Clostridium_thermocellum	hydrolase activity|g__Clostridium.s__Clostridium_thermocellum	57390.482
-GO:0016491|g__Clostridium.s__Clostridium_thermocellum	oxidoreductase activity|g__Clostridium.s__Clostridium_thermocellum	54813.645
-GO:0000166	nucleotide binding	51078.796
-GO:0043167	ion binding	50385.168
-GO:0003735	structural constituent of ribosome	46442.807
-</code></pre></div>    </div>
-
-    <p>The most abundant GO terms related to molecular functions seem to be linked to oxidoreductase or hydrolase activity, but also to nucleotide, ion, nucleic acid, metal ion binding.</p>
   </blockquote>
 </blockquote>
 
 <h1 id="combine-taxonomic-and-functional-information">Combine taxonomic and functional information</h1>
 
-<p>With <strong>MetaPhlAn2</strong> and <strong>HUMAnN2</strong>, we investigated “Which micro-organims are present in my sample?” and “What functions are performed by the micro-organisms in my sample?”. We can go further in these analyses, for example using a combination of functional and taxonomic results. Although we did not detail that in this tutorial you can find more methods of analysis in our tutorials on shotgun metagenomic data analysis.</p>
+<p>With <strong>MetaPhlAn</strong> and <strong>HUMAnN</strong>, we investigated “Which micro-organims are present in my sample?” and “What functions are performed by the micro-organisms in my sample?”. We can go further in these analyses, for example using a combination of functional and taxonomic results. Although we did not detail that in this tutorial you can find more methods of analysis in our tutorials on shotgun metagenomic data analysis.</p>
 
-<p>Although gene families and pathways, and their abundance may be related to a species, in the <strong>HUMAnN2</strong> output, relative abundance of the species is not indicated. Therefore, for each gene family/pathway and the corresponding taxonomic stratification, we will now extract the relative abundance of this gene family/pathway and the relative abundance of the corresponding species and genus.</p>
+<p>Although gene families and pathways, and their abundance may be related to a species, in the <strong>HUMAnN</strong> output, relative abundance of the species is not indicated. Therefore, for each gene family/pathway and the corresponding taxonomic stratification, we will now extract the relative abundance of this gene family/pathway and the relative abundance of the corresponding species and genus.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-combine-taxonomic-and-functional-information"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Combine taxonomic and functional information</h3>
 
   <ol>
-    <li><strong>Combine MetaPhlAn2 and HUMAnN2 outputs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.1.0"><strong>Combine MetaPhlAn2 and HUMAnN2 outputs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.1.0</span></span>   with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file corresponding to MetaPhlAN2 output”</em>: <code class="language-plaintext highlighter-rouge">Community profile</code> (output of <strong>MetaPhlAn2</strong>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file corresponding to MetaPhlAN2 output”</em>: <code class="language-plaintext highlighter-rouge">Cut predicted taxon relative abundances table</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file corresponding HUMAnN2 output”</em>: <code class="language-plaintext highlighter-rouge">Normalized gene families</code></li>
         <li><em>“Type of characteristics in HUMAnN2 file”</em>: <code class="language-plaintext highlighter-rouge">Gene families</code></li>
       </ul>
@@ -1823,19 +1940,21 @@ GO:0003735	structural constituent of ribosome	46442.807
 </ol>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>genus	genus_abundance	species	species_abundance	gene_families_id	gene_families_name	gene_families_abundance
-Clostridium	76.65512	Clostridium_thermocellum	76.65512	UniRef50_P62593	Beta lactamase TEM	6.65317186667
-Clostridium	76.65512	Clostridium_thermocellum	76.65512	UniRef50_R5FV61		6.0274016911
-Clostridium	76.65512	Clostridium_thermocellum	76.65512	UniRef50_P80579	Thioredoxin	5.34305149909
-Clostridium	76.65512	Clostridium_thermocellum	76.65512	UniRef50_A3DC67		4.56309128026
+Hungateiclostridium	94.67418	Hungateiclostridium_thermocellum	94.67418	UniRef90_A3DCI4		6.199410892039433
+Hungateiclostridium	94.67418	Hungateiclostridium_thermocellum	94.67418	UniRef90_A3DCB9		5.768680830061254
+Hungateiclostridium	94.67418	Hungateiclostridium_thermocellum	94.67418	UniRef90_A3DC67		4.872720701140655
+Hungateiclostridium	94.67418	Hungateiclostridium_thermocellum	94.67418	UniRef90_A3DBR3		3.3930004882222335
+Hungateiclostridium	94.67418	Hungateiclostridium_thermocellum	94.67418	UniRef90_A3DI60		2.924280420777634
+Hungateiclostridium	94.67418	Hungateiclostridium_thermocellum	94.67418	UniRef90_G2JC59		2.639170379752865
 </code></pre></div></div>
 
 <blockquote class="question">
   <h3 id="question-questions-16"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
-    <li>Are there gene families associated with each genus identified with <strong>MetaPhlAn2</strong>?</li>
+    <li>Are there gene families associated with each genus identified with <strong>MetaPhlAn</strong>?</li>
     <li>How many gene families are associated to each genus?</li>
-    <li>Are there gene families associated to each species identified with <strong>MetaPhlAn2</strong>?</li>
+    <li>Are there gene families associated to each species identified with <strong>MetaPhlAn</strong>?</li>
     <li>How many gene families are associated to each species?</li>
   </ol>
 
@@ -1849,7 +1968,7 @@ Clostridium	76.65512	Clostridium_thermocellum	76.65512	UniRef50_A3DC67		4.563091
         <blockquote class="notranslate hands_on">
           <h3 id="hands_on-hands-on-group-by-genus-and-count-gene-families"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Group by genus and count gene families</h3>
           <ol>
-            <li><strong>Group data by a column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+            <li><span class="tool" data-tool="Grouping1" title="Tested with Grouping1"><strong>Group data by a column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grouping1</span></span>
               <ul>
                 <li><em>“Select data”</em>: output of <strong>Combine MetaPhlAn2 and HUMAnN2 outputs</strong></li>
                 <li><em>“Group by column”</em>: <code class="language-plaintext highlighter-rouge">Column:1</code></li>
@@ -1868,10 +1987,10 @@ Clostridium	76.65512	Clostridium_thermocellum	76.65512	UniRef50_A3DC67		4.563091
           </ol>
         </blockquote>
 
-        <p>With <strong>MetaPhlAn2</strong>, we identified 4 genus (Clostridium, Coprothermobacter, Methanothermobacter, Escherichia). But in the output of <strong>Combine MetaPhlAn2 and HUMAnN2 outputs</strong>, we have only gene families for Clostridium, Coprothermobacter and Methanothermobacter. The abundance of Escherichia is probably too low to correctly identify correctly some gene families.</p>
+        <p>With <strong>MetaPhlAn</strong>, we identified 3 genus (Coprothermobacter, Methanothermobacter, Hungateiclostridium). But in the output of <strong>Combine MetaPhlAn2 and HUMAnN2 outputs</strong>, we have only gene families for Coprothermobacter and Hungateiclostridium. The abundance of Methanothermobacter is probably too low to correctly identify correctly some gene families.</p>
       </li>
       <li>
-        <p>2323 gene families are associated to Clostridium, 918 to Coprothermobacter and 202 to Methanothermobacter. Given a genus abundance of 76.65512 for Clostridium, 20.75226 for Coprothermobacter and 0.26989 for Methanothermobacter, the ratio between number of gene families and genus abundance is really high for Methanothermobacter (748.45) compare to Methanothermobacter (44.26) and Coprothermobacter (30.30).</p>
+        <p>1,889 gene families are associated to Hungateiclostridium and 528 to Coprothermobacter and 202 to Methanothermobacter.</p>
       </li>
       <li>
         <p>For this question, we should group on the 3rd column:</p>
@@ -1879,7 +1998,7 @@ Clostridium	76.65512	Clostridium_thermocellum	76.65512	UniRef50_A3DC67		4.563091
         <blockquote class="notranslate hands_on">
           <h3 id="hands_on-hands-on-group-by-species-and-count-gene-families"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Group by species and count gene families</h3>
           <ol>
-            <li><strong>Group data by a column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+            <li><span class="tool" data-tool="Grouping1" title="Tested with Grouping1"><strong>Group data by a column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grouping1</span></span>
               <ul>
                 <li><em>“Select data”</em>: output of <strong>Combine MetaPhlAn2 and HUMAnN2 outputs</strong></li>
                 <li><em>“Group by column”</em>: <code class="language-plaintext highlighter-rouge">Column:3</code></li>
@@ -1898,10 +2017,10 @@ Clostridium	76.65512	Clostridium_thermocellum	76.65512	UniRef50_A3DC67		4.563091
           </ol>
         </blockquote>
 
-        <p>The 3 species (Clostridium thermocellum, Coprothermobacter proteolyticus, Methanothermobacter thermautotrophicus) identified by <strong>MetaPhlAn2</strong> are associated to gene families.</p>
+        <p>Only 2 species (Coprothermobacter_proteolyticus and Hungateiclostridium thermocellum) identified by <strong>MetaPhlAn</strong> are associated to gene families.</p>
       </li>
       <li>
-        <p>As the species found derived directly from the genus (not 2 species for the same genus here), the number of gene families identified are the sames: 2323 for Clostridium thermocellum, 918 for Coprothermobacter proteolyticus	and 202 Methanothermobacter thermautotrophicus. The abundances are also the same.</p>
+        <p>As the species found derived directly from the genus (not 2 species for the same genus here), the number of gene families identified are the sames: 528 for Coprothermobacter proteolyticus and 1,889 for Hungateiclostridium thermocellum.</p>
       </li>
     </ol>
 
@@ -1988,12 +2107,6 @@ Clostridium	76.65512	Clostridium_thermocellum	76.65512	UniRef50_A3DC67		4.563091
     
 
 </li>
-<li><span id="truong2015metaphlan2">Truong, D. T., E. A. Franzosa, T. L. Tickle, M. Scholz, G. Weingart <i>et al.</i>, 2015 <b>MetaPhlAn2 for enhanced metagenomic taxonomic profiling</b>. Nature methods 12: 902.</span>
-    
-    
-    
-
-</li>
 <li><span id="batut2018asaim">Batut, B., K. Gravouil, C. Defois, S. Hiltemann, J.-F. Brugère <i>et al.</i>, 2018 <b>ASaiM: a Galaxy-based framework to analyze microbiota data</b>. GigaScience 7: giy057.</span>
     
     
@@ -2050,7 +2163,7 @@ Clostridium	76.65512	Clostridium_thermocellum	76.65512	UniRef50_A3DC67		4.563091
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Pratik Jagtap, Subina Mehta, Ray Sajulga, Bérénice Batut, Emma Leith, Praveen Kumar, Saskia Hiltemann, 2020 <b>Metatranscriptomics analysis using microbiome RNA-seq data (Galaxy Training Materials)</b>. <a href="/training-material/topics/metagenomics/tutorials/metatranscriptomics/tutorial.html">/training-material/topics/metagenomics/tutorials/metatranscriptomics/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Pratik Jagtap, Subina Mehta, Ray Sajulga, Bérénice Batut, Emma Leith, Praveen Kumar, Saskia Hiltemann, 2021 <b>Metatranscriptomics analysis using microbiome RNA-seq data (Galaxy Training Materials)</b>. <a href="/training-material/topics/metagenomics/tutorials/metatranscriptomics/tutorial.html">/training-material/topics/metagenomics/tutorials/metatranscriptomics/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -2067,9 +2180,9 @@ Clostridium	76.65512	Clostridium_thermocellum	76.65512	UniRef50_A3DC67		4.563091
 <code id="citation-code">@misc{metagenomics-metatranscriptomics,
     author = "Pratik Jagtap and Subina Mehta and Ray Sajulga and Bérénice Batut and Emma Leith and Praveen Kumar and Saskia Hiltemann",
     title = "Metatranscriptomics analysis using microbiome RNA-seq data (Galaxy Training Materials)",
-    year = "2020",
-    month = "02",
-    day = "05"
+    year = "2021",
+    month = "05",
+    day = "20"
     url = "\url{/training-material/topics/metagenomics/tutorials/metatranscriptomics/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
