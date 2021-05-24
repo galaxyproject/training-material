@@ -72,13 +72,13 @@ for finding spatial relationships in the image data.
 
 ## Inspiration for convolutional neural networks
 
-In 1959 Hubel and Wiesel conducted an experiment to understand how the visual cortex of the brain processes visual information {% cite HubelWiesel %}.
+In 1959 Hubel and Wiesel conducted an experiment to understand how the visual cortex of the brain processes visual information ({% cite HubelWiesel %}).
 They recorded the activity of the neurons in the visual cortex of a cat while moving a bright line in front of the cat. They noticed that some cells fire
 when the bright line is shown at a particular angle and a particular location (They called these **simple** cells). Other neurons fired when the bright
 line was shown regardless of the angle/location and seemed to detect movement (They called these **complex** cells). It seemed complex cells receive
 inputs from multiple simple cells and have an hierarchical structure. Hubel and Wiesel won the Noble prize for their findings in 1981.
 
-In 1980, inspired by hierarchical structure of complex and simple cells, Fukushima proposed Neocognitron ({% cite Fukishima %}), a hierarchical neural
+In 1980, inspired by hierarchical structure of complex and simple cells, Fukushima proposed *Neocognitron* ({% cite Fukishima %}), a hierarchical neural
 network used for handwritten Japanese character recognition. Neocognitron was the first CNN, and had its own training algorithm. In 1989, LeCun et. al.
 ({% cite LeCunEtAl %}) proposed a CNN that could be trained by backpropagation algorithm. CNN gained immense popularity when they outperformed other
 models at ILSVRC (ImageNet Large Scale Visual Recognition Challenge). ILSVRC is a competition in object classification and detection on hundreds of
@@ -161,11 +161,7 @@ $$ \frac{(\text{input size} - \text{(filter size + (filter size -1)*(dilation - 
 
 Figure 7 illustrates the calculations for a convolution operation, via a 3 by 3 filter on a single channel 5 by 5 input vector (5 x 5 x 1). Figure 8
 illustrates the calculations when the input vector has 3 channels (5 x 5 x 3). To show this in 2 dimensions, we are displaying each channel in input
-vector and filter separately. Figure 9 shows a sample multi-channel 2D convolution in 3 dimensions. As Figures 8 and 9 show the output of a multi-channel
-2 dimensional filter is a single channel 2 dimensional image. Applying *multiple* filters to the input image results in a multi-channel 2 dimensional
-image for the output. For example, if the input image is 28 by 28 by 3 (rows x columns x channels), and we apply a 3 by 3 filter with 1 by 1 padding,
-we would get a 28 by 28 by 1 image. If we apply 15 filters to the input image, our output would be 28 by 28 by 15. Hence, the number of filters in a
-convolution layer allows us to increase or decrease the channel size.
+vector and filter separately. Figure 9 shows a sample multi-channel 2D convolution in 3 dimensions. 
 
 ![Three matrices representing an input vector and another three matrices representing a filter, along with calculation for multiple input channel two dimensional convolution operation ](../../images/Conv_multiple_input_channel.png "Illustration of multiple input channel two dimensional convolution")
 
@@ -174,7 +170,7 @@ input image results in a multi-channel 2 dimensional image for the output. For e
 and we apply a 3 by 3 filter with 1 by 1 padding, we would get a 28 by 28 by 1 image. If we apply 15 filters to the input image, our output would be 28
 by 28 by 15. Hence, the number of filters in a convolution layer allows us to increase or decrease the channel size.
 
-![Multiple cubes representing input vector, filter, and output in a 3 channel 2 dimensional convolution operation](../../images/Conv_multiple_channel_3d.gif "Three dimensional illustration of 3 input channel 2D convolution operation (Source: https://thomelane.github.io/convolutions/2DConvRGB.html)")
+![Multiple cubes representing input vector, filter, and output in a 3 channel 2 dimensional convolution operation](../../images/Conv_multiple_channel_3d.gif "Three dimensional illustration of multiple input channel two dimensional convolution (Source: https://thomelane.github.io/convolutions/2DConvRGB.html)")
 
 ### Pooling layer
 
