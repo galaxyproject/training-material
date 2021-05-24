@@ -111,7 +111,7 @@ Additionally, the [buildapp.py](https://github.com/galaxyproject/galaxy/blob/dev
 {:.comment}
 
 
-> ### {% icon tip %} Going deeper into the Galaxy backend code
+> ### {% icon tip %} Going deeper into the Galaxy back-end code
 > The various Galaxy API methods that are exposed to the outside are contained in controller classes. These contain the endpoint methods corresponding to the URLs of the Galaxy API. These endpoint methods handle the incoming requests from BioBlend.
 >
 > A focus for development of the Galaxy API is to make these controllers as “terse” as possible. This basically means that any logic not strictly required by the API endpoint method is moved to a corresponding manager class. This approach separates the API more cleanly from internal functionality. The manager classes should contain as much of the functionality as possible. An example is the [`DatasetManager`](https://github.com/galaxyproject/galaxy/blob/v21.01/lib/galaxy/managers/datasets.py#L26), referenced to regularly by the `DatasetsController` which is exposed directly to the API.
@@ -371,7 +371,7 @@ Now, open a terminal window and let's make a few manual requests! In each case, 
 >
 > In BioBlend, the `Client._get()` helper method is used for GET requests. It takes a `params` argument. The `Client._post()` and `Client._put()` helper methods make POST and PUT requests respectively. They expect a `payload` argument. In this section we briefly explain the difference.
 >
-> A HTTP request is comprised of (1) a request line, (2) headers with metadata, (3) an empty line and (4) an optional message body. The HTTP GET method uses query parameters to specify which resource should be retrieved from the server. These parameters are included in the request line as part of the URL. The HTTP POST and PUT methods create or update resources. This data is specified in the payload, which is included in the message body of the request.
+> An HTTP request is comprised of (1) a request line, (2) headers with metadata, (3) an empty line and (4) an optional message body. The HTTP GET method uses query parameters to specify which resource should be retrieved from the server. These parameters are included in the request line as part of the URL. The HTTP POST and PUT methods create or update resources. This data is specified in the payload, which is included in the message body of the request.
 >
 > We can see the difference using [curl](https://curl.se) and [ncat](https://nmap.org/ncat/).
 >
@@ -480,7 +480,7 @@ As it turns out, a corresponding [`uninstall_dependencies()`](https://github.com
 >    ```
 >    The endpoint expects a DELETE request at URL `/api/tools/{tool_id}/dependencies`. The `id` parameter in the method signature corresponds to the variable `{tool_id}` present in the endpoint URL.
 >
->    There are two additional parameters: `index` and `resolver_type`. These parameters specify how the server should resolve the tool dependencies. For an average API user these options are probably too specific as they require knowledge of the resolvers used by the Galaxy server backend. We will skip these parameters for this example.
+>    There are two additional parameters: `index` and `resolver_type`. These parameters specify how the server should resolve the tool dependencies. For an average API user these options are probably too specific as they require knowledge of the resolvers used by the Galaxy server back end. We will skip these parameters for this example.
 >
 >    Lastly, we need to find out what the endpoint returns. Unfortunately the return type is not listed in the method documentation. It is a reality that various parts of the Galaxy API lack complete documentation, although this is being worked on.
 >
@@ -860,7 +860,7 @@ Once tests are passing, the final step would be to [open a PR](https://github.co
 
 # Conclusion
 
-We covered the basics of BioBlend development. We also touched briefly on some key concepts relating to the Galaxy API and the structure of the Galaxy backend code.
+We covered the basics of BioBlend development. We also touched briefly on some key concepts relating to the Galaxy API and the structure of the Galaxy back-end code.
 
 Compared to Galaxy, BioBlend is a smaller project with limited complexity. Changes are generally not very hard to implement, which makes it a good candidate for contributions from those not yet familiar with Galaxy in its entirety.
 
