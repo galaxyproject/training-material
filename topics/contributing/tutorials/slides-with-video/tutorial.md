@@ -60,19 +60,9 @@ Every slide must have some narration in the presenter notes. It does not make se
 
 ### Sentence Structure
 
-Use short and uncomplex sentences whenever possible. Break up ideas into easy to digest bits. Students will be listening to this spoken and possibly reading the captions.
+Use simple and uncomplex sentences whenever possible. Break up ideas into easy to digest bits. Students will be listening to this spoken and possibly reading the captions.
 
-The captioning process is completely automated, but it means that for very long sentences, we do not currently break them up into multiple captions. So please keep your sentences under ~120 characters where possible.
-
-> > **Good**
-> > - Configuration management manages the configuration of machines.
-> > - It specifies what software should be installed, and how it should be configured.
-> {: .code-in}
->
-> > **Bad**
-> > Configuration management manages the configuration of machines, it specifies what software should be installed, and how it should be configured
-> {: .code-out}
-{: .code-2col}
+*2021-05-01* There used to be a limit of ~120 characters per sentence, but this is no longer an issue. We now break up sentences which are too long in the captions and show them over multiple timepoints. So if you need to write a really long sentence, you can, but we still advise to simplify sentences where possible.
 
 ### Captions per Slide
 
