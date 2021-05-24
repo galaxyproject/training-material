@@ -178,6 +178,11 @@ The pooling layer performs down sampling to reduce the spatial dimensionality of
 reduces the learning time and computation, and the likelihood of overfitting. The most popular type of pooling is *max pooling*. Its usually a 2 by 2
 filter with a stride of 2 that returns the maximum value as it slides over the input data (similar to convolution filters).
 
+### Fully connected layer
+
+The last layer in a CNN is a fully connected layer. We connect all the nodes from the previous layer to this fully connected layer, which is responsible
+for classification of the image.
+
 ![A convolutional neural network with 3 convolution layers followed by 3 pooling layers](../../images/Conv_CNN.png "A convolutional neural network with 3 convolution layers followed by 3 pooling layers ({% cite OSheaEtAl %})")
 
 As shown in Figure 10, a typical CNN usually has more than one convolution layer plus pooling layer. Each convolution plus pooling layer is responsible
@@ -185,11 +190,6 @@ for feature extraction at a different level of abstraction. For example, the fil
 edges. The filters in the next layer could detect shapes, and the filters in the last layer could detect collection of shapes. Filter values are randomly
 initialized and are learned by the learning algorithm. This makes CNN very powerful as they not only do classification, but can also automatically do
 feature extraction. This distinguishes CNN from other classification techniques (like Support Vector Machines), which cannot do feature extraction.
-
-### Fully connected layer
-
-The last layer in a CNN is a fully connected layer. We connect all the nodes from the previous layer to this fully connected layer, which is responsible
-for classification of the image.
 
 ## MNIST dataset
 
