@@ -231,6 +231,16 @@ layout: base
                     {% bibliography --cited %}
                     {% endif %}
 
+                    {% if page.abbreviations %}
+                    <h1 data-toc-skip>Glossary</h1>
+                    <dl>
+                        {% for abbr in page.abbreviations %}
+                        <dt>{{ abbr[0] }}</dt>
+                        <dd>{{ abbr[1] }}</dd>
+                        {% endfor %}
+                    </dl>
+                    {% endif %}
+
                     <h1>Feedback</h1>
                     <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
