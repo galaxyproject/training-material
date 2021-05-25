@@ -234,7 +234,8 @@ layout: base
                     {% if page.abbreviations %}
                     <h1 data-toc-skip>Glossary</h1>
                     <dl>
-                        {% for abbr in page.abbreviations %}
+                        {% assign sorted_abbrs = page.abbreviations | sort %}
+                        {% for abbr in sorted_abbrs %}
                         <dt>{{ abbr[0] }}</dt>
                         <dd>{{ abbr[1] }}</dd>
                         {% endfor %}
