@@ -6,4 +6,4 @@ box_type: tip
 layout: faq
 ---
 
-Haz click sobre el icono {% icon new-history %} en la parte superior del del panel de historiales
+Haz click sobre el icono {% icon new-history %} en la parte superior del panel de historiales.
