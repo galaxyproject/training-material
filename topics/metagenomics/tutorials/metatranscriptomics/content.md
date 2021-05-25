@@ -294,7 +294,7 @@ There are several tools out there that can perform these steps, but in this anal
 >
 > 2. **Rename** {% icon galaxy-pencil %}
 >     - `Read 1 output` to `QC controlled forward reads`
->     - `Read 2 output` to `QC controlled reverse reads` 
+>     - `Read 2 output` to `QC controlled reverse reads`
 {: .hands_on}
 
 {% endunless %}
@@ -378,11 +378,11 @@ These rRNAs are useful for the taxonomic assignment (i.e. which organisms are fo
 > > 1. 465,754 reads are processed: 232,877 for forward and 232,877 for reverse (given the **Cutadapt** report)
 > >
 > > 2. Out of the 465,754 reads, 119,646 (26%) have passed the e-value threshold and are identified as rRNA.
-> >    
+> >
 > >    The proportion of rRNA sequences is then quite high (around 40%), compared to metagenomics data where usually they represent < 1% of the sequences. Indeed there are only few copies of rRNA genes in genomes, but they are expressed a lot for the cells.
-> >    
+> >
 > >    Some of the aligned reads are forward (resp. reverse) reads but the corresponding reverse (resp. forward) reads are not aligned. As we choose *"If one of the paired-end reads aligns and the other one does not"*: `Output both reads to rejected file (--paired_out)`, if one read in a pair does not align, both go to unaligned.
-> > 
+> >
 > > 3. The 20.56% rRNA reads are 23S bacterial rRNA, 2.34% 16S bacterial rRNA and 1.74% 18S eukaryotic rRNA. We then expect to identify mostly bacteria but also probably some archae (18S eukaryotic rRNA).
 > {: .solution }
 {: .question}
@@ -390,7 +390,7 @@ These rRNAs are useful for the taxonomic assignment (i.e. which organisms are fo
 
 ## Interlace forward and reverse reads
 
-The tool for functional annotations needs a single file as input, even with paired-end data. 
+The tool for functional annotations needs a single file as input, even with paired-end data.
 
 We need to join the two separate files (forward and reverse) to create a single interleaced file, using **FASTQ interlacer**, in which the forward reads have `/1` in their id and reverse reads `/2`. The join is performed using sequence identifiers (headers), allowing the two files to contain differing ordering. If a sequence identifier does not appear in both files, it is output in a separate file named `singles`.
 
@@ -423,12 +423,12 @@ Different approaches can be used:
 - Identification and classification of OTUs, as used in amplicon data
 
     Such an approach first requires sequence sorting to extract only the 16S and 18S sequences (e.g. using the aligned reads from **SortMeRNA**), then again using the same tools as for amplicon data (as explained in tutorials like [16S Microbial Analysis with mothur]({% link topics/metagenomics/tutorials/mothur-miseq-sop/tutorial.md %}) or [16S Microbial analysis with Nanopore data]({% link topics/metagenomics/tutorials/nanopore-16S-metagenomics/tutorial.md %})).
-    
+
     However, because rRNA sequences represent less than 50% of the raw sequences, this approach is not the most statistically supported.
 
 - Assignment of taxonomy on the whole sequences using databases with marker genes
 
-In this tutorial, we follow second approach using **MetaPhlAn** ({% cite beghini2021integrating %}). This tool uses a database of ~1M unique clade-specific marker genes (not only the rRNA genes) identified from ~17,000 reference (bacterial, archeal, viral and eukaryotic) genomes. 
+In this tutorial, we follow second approach using **MetaPhlAn** ({% cite beghini2021integrating %}). This tool uses a database of ~1M unique clade-specific marker genes (not only the rRNA genes) identified from ~17,000 reference (bacterial, archeal, viral and eukaryotic) genomes.
 
 As rRNAs reads are good marker genes, we will use directly the quality controlled files (output of **Cutadapt**) with all reads (not only the non rRNAs).
 
@@ -488,15 +488,15 @@ This step may take a couple of minutes as each sequence is compare to the full d
     ```
     #mpa_v30_CHOCOPhlAn_201901
     # ....
-    #SampleID	Metaphlan_Analysis		
+    #SampleID	Metaphlan_Analysis
     #clade_name	NCBI_tax_id	relative_abundance	additional_species
-    k__Bacteria	2	99.40284	
-    k__Archaea	2157	0.59716	
-    k__Bacteria|p__Firmicutes	2|1239	94.67418	
-    k__Bacteria|p__Coprothermobacterota	2|2138240	4.72866	
-    k__Archaea|p__Euryarchaeota	2157|28890	0.59716	
-    k__Bacteria|p__Firmicutes|c__Clostridia	2|1239|186801	94.67418	
-    k__Bacteria|p__Coprothermobacterota|c__Coprothermobacteria	2|2138240|2138243	4.72866	
+    k__Bacteria	2	99.40284
+    k__Archaea	2157	0.59716
+    k__Bacteria|p__Firmicutes	2|1239	94.67418
+    k__Bacteria|p__Coprothermobacterota	2|2138240	4.72866
+    k__Archaea|p__Euryarchaeota	2157|28890	0.59716
+    k__Bacteria|p__Firmicutes|c__Clostridia	2|1239|186801	94.67418
+    k__Bacteria|p__Coprothermobacterota|c__Coprothermobacteria	2|2138240|2138243	4.72866
     k__Archaea|p__Euryarchaeota|c__Methanobacteria
     ```
 
@@ -505,7 +505,7 @@ This step may take a couple of minutes as each sequence is compare to the full d
     2. the previous lineage with NCBI taxon id
     3. the relative abundance found for our sample for the lineage
     4. any additional species
-    
+
     The file starts with high level taxa (kingdom: `k__`) and go to more precise taxa.
 
     > ### {% icon question %} Questions
@@ -532,7 +532,7 @@ This step may take a couple of minutes as each sequence is compare to the full d
 - A **BIOM file** with the same information as the previous file but in BIOM format
 
     BIOM format is quite common in microbiomics. This is standard, for example, as the input for tools like mothur or QIIME.
-    
+
 - A **SAM file** with the results of the sequence mapping on the reference database.
 - A **tabular file** called `Bowtie2 output` with similar information as the one in the **SAM file**
 
@@ -553,7 +553,7 @@ Some downstream tools need the MetaPhlAn table with predicted taxon abundance wi
 >    - *"Cut columns"*: `c1,c3`
 >    - {% icon param-file %} *"From"*: `Predicted taxon relative abundances` (output of **MetaPhlAn**)
 >
-> 2. Rename `Cut predicted taxon relative abundances table` 
+> 2. Rename `Cut predicted taxon relative abundances table`
 >
 {: .hands_on}
 
@@ -596,7 +596,7 @@ Even if the output of **MetaPhlAn** can be easy to parse, we want to visualize a
 > >
 > >    ![Krona](../../images/metatranscriptomics/krona.png){: width="75%"}
 > >
-> > 2. 55% of bacteria are Coprothermobacter proteolyticus and the rest Hungateiclostridium thermocellum .
+> > 2. 5% of bacteria are Coprothermobacter proteolyticus and the rest Hungateiclostridium thermocellum .
 > >
 > >    ![Krona at bacteria level](../../images/metatranscriptomics/krona_bacteria.png){: width="75%"}
 > >
@@ -611,7 +611,7 @@ It takes a taxonomic tree file as the input. We first need to convert the **Meta
 > ### {% icon hands_on %} Hands-on: Publication-ready community structure visualization with GraPhlAn
 >
 > 2. {% tool [Export to GraPhlAn](toolshed.g2.bx.psu.edu/repos/iuc/export2graphlan/export2graphlan/0.20+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file"*: `Cut predicted taxon relative abundances table` 
+>    - {% icon param-file %} *"Input file"*: `Cut predicted taxon relative abundances table`
 >    - *"List which levels should be annotated in the tree"*: `1,2`
 >    - *"List which levels should use the external legend for the annotation"*: `3,4,5`
 >    - *"List which levels should be highlight with a shaded background"*: `1`
@@ -702,7 +702,7 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 >          - *"Protein database"*: `Locally cached`
 >             - *"Protein database"*: `Full UniRef90 for HUMAnN`
 >
->    
+>
 {: .hands_on}
 
 > ### {% icon tip %} Tip: Running low on time? Import the HUMAnN outputs
@@ -748,7 +748,7 @@ To identify the functions made by the community, we do not need the rRNA sequenc
     > 3. How many gene families have been identified?
     >
     > > ### {% icon solution %} Solution
-    > > 1. The most abundant family is the first one in the family: UniRef90_A3DCI4. We can use the tool {% tool [Rename features of a HUMAnN generated table](toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.0.0+galaxy1) %} to add extra information about the gene family. 
+    > > 1. The most abundant family is the first one in the family: UniRef90_A3DCI4. We can use the tool {% tool [Rename features of a HUMAnN generated table](toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.0.0+galaxy1) %} to add extra information about the gene family.
     > > 2. Beta-lactamase TEM seems mostly produced here by *Hungateiclostridium thermocellum*.
     > > 3. There is 6,374 lines in gene family file. But some of the gene families have multiple lines when the involved species are known.
     > >
@@ -1032,7 +1032,7 @@ The GO term with their id are quite cryptic. We can rename them and then split t
 > >   - 414 BP GO terms
 > >   - 689 MF GO terms
 > >   - 59 CC GO terms
-> > 
+> >
 > > 2. The GO terms in the `[MF] GO terms and their abundance` file are not sorted by abundance:
 > >
 > >    ```
@@ -1133,7 +1133,7 @@ Hungateiclostridium	94.67418	Hungateiclostridium_thermocellum	94.67418	UniRef90_
 > >
 > >    Only 2 species (Coprothermobacter_proteolyticus and Hungateiclostridium thermocellum) identified by **MetaPhlAn** are associated to gene families.
 > >
-> > 4. As the species found derived directly from the genus (not 2 species for the same genus here), the number of gene families identified are the sames: 528 for Coprothermobacter proteolyticus and 1,889 for Hungateiclostridium thermocellum. 
+> > 4. As the species found derived directly from the genus (not 2 species for the same genus here), the number of gene families identified are the sames: 528 for Coprothermobacter proteolyticus and 1,889 for Hungateiclostridium thermocellum.
 > >
 > {: .solution}
 {: .question}
