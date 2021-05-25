@@ -189,7 +189,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    rabbitmq_password_galaxy_au: areallylongpasswordhere
 >    ```
 >
->    This is going in a special file because both of our services, Galaxy and Pulsar, need it. Both Galaxy in the job configuration, and Pulsar in its configuration. The `group_vars/all.yml` is included for every playbook run, no matter which group a machine belong to.
+>    This is going in a special file because both of our services, Galaxy and Pulsar, need it. Both Galaxy in the job configuration, and Pulsar in its configuration. The `group_vars/all.yml` is included for every playbook run, no matter which group a machine belongs to.
 >
 >    Replace `areallylongpasswordhere` with a long randomish (or not) string.
 >
