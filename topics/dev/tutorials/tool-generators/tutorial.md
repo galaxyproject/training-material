@@ -163,7 +163,7 @@ It introduces an automated way to convert any useful script into a toolshed read
 > - Choose whichever one fits best for the task at hand.
 {: .tip }
 
-## `Hello World!` with the ToolFactory Appliance
+# `Hello World!` with the ToolFactory Appliance
 
 A `Hello World!` Galaxy tool is a good start. It takes no input files, but produces a text output file in the history. A single parameter allows the user to supply the text after
 "Hello..." and the tool will write the combined string to a new history item. Trivial, but an excellent model worth studying in detail because it is easily extended to do
@@ -269,27 +269,25 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >
 {: .tip}
 
+> ### {% icon comment %} Limits and scope
+>
+> - It works best wrapping simple R/Bash/Python and other interpreted scripts, with few user supplied parameters and a few input and output files.
+> - Scripts are easier than some Conda packages
+>   - They can easily be modified to respond to default empty parameters as if they had not been passed.
+>   - As a result, advanced tool building elements such as conditionals and related tricks requiring manual coding, can often be avoided.
+> - On the other hand, many Conda dependencies will require XML conditionals or other tool XML constructs that are not easy to generate automatically.
+> - While some simple requirements may be manageable, complex ones will not be suitable for the ToolFactory.
+> - Compared to the more usual shell and a text editor, The ToolFactory in Galaxy is a slow and clumsy way to debugging scripts.
+> - **Starting a new ToolFactory tool with a know good command line and data** is strongly recommended. You will know exactly what to expect from the tool test for a first sanity check.
+> - Corrolary: Unless there is a working script that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is of little use.
+> - Generated tools are untested and not recommended for sharing.
+>   - Testing is easy - use the Planemo test tool. It may take a while to run depending on Conda dependency installation. It will return the tested tool to your history and a report collection.
+>   - The planemo_test tool creates a new tested toolshed archive ready for sharing, and a collection with reports.
+>       - The Planemo test report is in the collection with a lint report and a log of the entire run.
+>       - *Please check the html report to make sure it passed* before sharing your new tool.
+{: .comment}
 
-## Limits and scope
-
-- It works best wrapping simple R/Bash/Python and other interpreted scripts, with few user supplied parameters and a few input and output files.
-- Scripts are easier than some Conda packages
-  - They can easily be modified to respond to default empty parameters as if they had not been passed.
-  - As a result, advanced tool building elements such as conditionals and related tricks requiring manual coding, can often be avoided.
-- On the other hand, many Conda dependencies will require XML conditionals or other tool XML constructs that are not easy to generate automatically.
-- While some simple requirements may be manageable, complex ones will not be suitable for the ToolFactory.
-- Compared to the more usual shell and a text editor, The ToolFactory in Galaxy is a slow and clumsy way to debugging scripts.
-- **Starting a new ToolFactory tool with a know good command line and data** is strongly recommended. You will know exactly what to expect from the tool test for a first sanity check.
-- Corrolary: Unless there is a working script that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is of little use.
-- Generated tools are untested and not recommended for sharing.
-  - Testing is easy - use the Planemo test tool. It may take a while to run depending on Conda dependency installation. It will return the tested tool to your history and a report collection.
-  - The planemo_test tool creates a new tested toolshed archive ready for sharing, and a collection with reports.
-      - The Planemo test report is in the collection with a lint report and a log of the entire run.
-      - *Please check the html report to make sure it passed* before sharing your new tool.
-
-----
-
-## Installing the ToolFactory Appliance: requires a Linux workstation, Docker and docker-compose.
+## Installation
 
 > ### {% icon hands_on %} Hands-on: Launching the Appliance
 >
@@ -328,30 +326,29 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >
 > 5. Your appliance should be running with a local Galaxy on [port 8080 of your workstation](http://localhost:8080) after a fair bit of activity.
 >
->    -  Login with the username `admin@galaxy.org` and the password `password`
+>    - Login with the username `admin@galaxy.org` and the password `password`
 >    - This is obviously insecure but convenient and easily changed at first login.
 >    - The container `/export` directory is mounted locally at `compose/export` so you can find your generated and tested tools for sharing.
 >
-> 6. Demonstration tools are the functional documentation
+>    > ### {% icon tip %} Tip: Demonstration tools are the functional documentation
+>    >
+>    > - At first login you will find the demonstration history ready to explore if you waited for all the Conda activity to die down
+>    > - It takes a minute or two to import because the dependencies for the ToolFactory must first be installed.
+>    > - Check the histories if a different one appears - two are loaded and there seems some randomness about which appears at login.
+>    > - If it's not there, you can import it manually from Zenodo as described in the Welcome page text.
+>    > - To explore an example, open the toolshed XML history item by clicking on the name, and select the {% icon galaxy-refresh %} `rerun` button from the expanded view
+>    >    - The form that generated that tool will appear for you to examine
+>    >    - Edit the form - add parameters and change the script to suit - and rerun to create an *updated* tool. The history has previous versions.
+>    >    - Change the tool ID to change the tool name and generate a different tool. *Generating a same-name tool will overwrite the old version*.
+>    {: .tip}
 >
->    - At first login you will find the demonstration history ready to explore if you waited for all the Conda activity to die down
->    - It takes a minute or two to import because the dependencies for the ToolFactory must first be installed.
->    - Check the histories if a different one appears - two are loaded and there seems some randomness about which appears at login.
->    - If it's not there, you can import it manually from Zenodo as described in the Welcome page text.
->    - To explore an example, open the toolshed XML history item by clicking on the name, and select the {% icon galaxy-refresh %} `rerun` button from the expanded view
->       - The form that generated that tool will appear for you to examine
->       - Edit the form - add parameters and change the script to suit - and rerun to create an *updated* tool. The history has previous versions.
->       - Change the tool ID to change the tool name and generate a different tool. *Generating a same-name tool will overwrite the old version*.
->
->     > ### {% icon tip %} Tip: Patience!
->     > When you run the ToolFactory for the first time inside the container and whenever you run a new tool with new dependencies, it will require some time to build the conda environment.
->     > Check for Conda or other processes if things seem stuck.
->     {: .tip}
+>    > ### {% icon tip %} Tip: Patience!
+>    > When you run the ToolFactory for the first time inside the container and whenever you run a new tool with new dependencies, it will require some time to build the conda environment.
+>    > Check for Conda or other processes if things seem stuck.
+>    {: .tip}
 >
 >
 {: .hands_on}
-
-----
 
 ## Exploring the ToolFactory in the running Appliance.
 
@@ -362,7 +359,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 - If you don't change the tool name before re-generating a tool, the original installed tool will be updated with the new configuration.
 
 
-### Hello World!
+## Hello World!
 
 > ### {% icon hands_on %} Hands-on: Building the Hello World example
 >
@@ -403,7 +400,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >
 {: .hands_on}
 
-### The Development Cycle
+## The Development Cycle
 
 1. Test your script on the command line and confirm it works.
 1. In the appliance, start a new history and upload all the input samples used on the command line.
@@ -429,7 +426,7 @@ Galaxy can be used as an Integrated Development Environment for tools - clunky b
 
 ![Galaxy as an IDE for tools with the ToolFactory](../../images/ToolFactory_big_picture.png "Galaxy can be used as a tool development environment for users who can write their own scripts as shown in this process overview slide.")
 
-### Hello World: Continued
+## Hello World: Continued
 
 > ### {% icon hands_on %} Hands-on: Modifying the Hello World example
 >
@@ -446,7 +443,7 @@ Galaxy can be used as an Integrated Development Environment for tools - clunky b
 >
 {: .hands_on}
 
-### Hello Collections!
+## Hello Collections!
 
 > ### {% icon hands_on %} Hands-on: Building a File Splitter
 >
@@ -497,7 +494,7 @@ Hopefully this is a motivating example and you can imagine what else you might b
 > For a real test, one or more expected <element.../> tags must be provided so the test really does test something.
 {: .warning}
 
-### Done!
+## Done!
 
 > ### {% icon hands_on %} Hands-on: To safely shut the appliance down
 >
@@ -529,7 +526,7 @@ This tutorial is based on the work of thousands of contributers to the Galaxy pr
 
 Special thanks are owed to:
 
-- ({% include _includes/contributor-badge.html id="mvdbeek" %}) for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.
-- ({% include _includes/contributor-badge.html id="hexylena" %}) for
+- {% include _includes/contributor-badge.html id="mvdbeek" %} for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.
+- {% include _includes/contributor-badge.html id="hexylena" %} for
     - review and revisions to the tutorial and associated code.
     - elegantly generated lint-free XML provided by [galaxyml code](https://github.com/hexylena/galaxyxml)
