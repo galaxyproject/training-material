@@ -1,13 +1,13 @@
 
-> ### {% icon solution %} lib/galaxy/model/migrate/versions/0175_add_user_favorite_extensions.py
+> ### {% icon solution %} lib/galaxy/model/migrate/versions/0177_add_user_favorite_extensions.py
 > 
-> Possible changes to file ``lib/galaxy/model/migrate/versions/0175_add_user_favorite_extensions.py``:
+> Possible changes to file ``lib/galaxy/model/migrate/versions/0177_add_user_favorite_extensions.py``:
 > 
 > ```diff
 > new file mode 100644
-> index 0000000..c9f3715
+> index 0000000000..c9f3715ac4
 > --- /dev/null
-> +++ b/lib/galaxy/model/migrate/versions/0175_add_user_favorite_extensions.py
+> +++ b/lib/galaxy/model/migrate/versions/0177_add_user_favorite_extensions.py
 > @@ -0,0 +1,37 @@
 > +"""
 > +Migration script to add the user_favorite_extension table.

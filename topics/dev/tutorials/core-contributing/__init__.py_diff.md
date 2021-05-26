@@ -4,10 +4,10 @@
 > Possible changes to file ``lib/galaxy/model/__init__.py``:
 > 
 > ```diff
-> index 873edab..0fd1437 100644
+> index 2c0b8a4dc4..69a74b0ad2 100644
 > --- a/lib/galaxy/model/__init__.py
 > +++ b/lib/galaxy/model/__init__.py
-> @@ -6591,6 +6591,11 @@ class UserPreference(RepresentById):
+> @@ -6617,6 +6617,11 @@ class UserPreference(RepresentById):
 >          self.value = value
 >  
 >  

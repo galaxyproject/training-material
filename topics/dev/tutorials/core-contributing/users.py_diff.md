@@ -4,10 +4,10 @@
 > Possible changes to file ``lib/galaxy/managers/users.py``:
 > 
 > ```diff
-> index cb9f4c6..0e79157 100644
+> index 3407a6bd75..f15bb4c5d6 100644
 > --- a/lib/galaxy/managers/users.py
 > +++ b/lib/galaxy/managers/users.py
-> @@ -602,6 +602,23 @@ class UserManager(base.ModelManager, deletable.PurgableManagerMixin):
+> @@ -590,6 +590,23 @@ class UserManager(base.ModelManager, deletable.PurgableManagerMixin):
 >                  log.exception('Subscribing to the mailing list has failed.')
 >                  return "Subscribing to the mailing list has failed."
 >  

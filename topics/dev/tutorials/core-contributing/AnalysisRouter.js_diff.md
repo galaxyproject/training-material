@@ -4,7 +4,7 @@
 > Possible changes to file ``client/src/entry/analysis/AnalysisRouter.js``:
 > 
 > ```diff
-> index b409c83..d8cef68 100644
+> index b409c8374f..61b01f85fa 100644
 > --- a/client/src/entry/analysis/AnalysisRouter.js
 > +++ b/client/src/entry/analysis/AnalysisRouter.js
 > @@ -32,6 +32,7 @@ import InteractiveTools from "components/InteractiveTools/InteractiveTools.vue";
@@ -27,7 +27,7 @@
 >              this.page.display(new FormWrapper.View(_.extend(model[form_id], { active_tab: "user" })));
 >          },
 >  
-> +        show_user_favorite_extensions: function() {
+> +        show_user_favorite_extensions: function () {
 > +            this._display_vue_helper(FavoriteExtensions, {});
 > +        },
 > +

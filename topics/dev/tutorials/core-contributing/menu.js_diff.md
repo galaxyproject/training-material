@@ -4,7 +4,7 @@
 > Possible changes to file ``client/src/layout/menu.js``:
 > 
 > ```diff
-> index 062191b..de91d96 100644
+> index 062191b492..de91d9670c 100644
 > --- a/client/src/layout/menu.js
 > +++ b/client/src/layout/menu.js
 > @@ -314,6 +314,11 @@ export function fetchMenu(options = {}) {

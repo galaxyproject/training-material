@@ -4,7 +4,7 @@
 > Possible changes to file ``lib/galaxy/webapps/galaxy/buildapp.py``:
 > 
 > ```diff
-> index 66c89f0..ba1a112 100644
+> index 7fbe248c66..76fe7cd819 100644
 > --- a/lib/galaxy/webapps/galaxy/buildapp.py
 > +++ b/lib/galaxy/webapps/galaxy/buildapp.py
 > @@ -155,6 +155,7 @@ def app_pair(global_conf, load_app_kwds=None, wsgi_preflight=True, **kwargs):

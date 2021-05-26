@@ -5,10 +5,10 @@
 > 
 > ```diff
 > new file mode 100644
-> index 0000000..79418b8
+> index 0000000000..e5e7d07ab2
 > --- /dev/null
 > +++ b/client/src/components/User/FavoriteExtensions/List.vue
-> @@ -0,0 +1,87 @@
+> @@ -0,0 +1,82 @@
 > +<template>
 > +    <div class="favorite-extensions-card">
 > +        <b-alert variant="error" show v-if="errorMessage">
@@ -75,22 +75,17 @@
 > +            axios
 > +                .get(this.favoriteExtensionsUrl)
 > +                .then((response) => {
-> +                    console.log("loadinging favorites");
 > +                    this.favoriteExtensions = response.data;
-> +                    console.log(this.favoriteExtensions);
 > +                })
 > +                .catch(this.handleError);
 > +        },
 > +        markAsFavorite(extension) {
-> +            console.log("marking a favorite....");
 > +            axios.post(`${this.favoriteExtensionsUrl}/${extension}`).then(this.loadFavorites).catch(this.handleError);
 > +        },
 > +        unmarkAsFavorite(extension) {
-> +            console.log("unmark");
 > +            axios.delete(`${this.favoriteExtensionsUrl}/${extension}`).then(this.loadFavorites).catch(this.handleError);
 > +        },
 > +        handleError(error) {
-> +            console.log("handing a n error");
 > +            this.errorMessage = errorMessageAsString(error);
 > +        },
 > +    },

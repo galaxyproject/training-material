@@ -83,7 +83,7 @@ user preferences concept in Galaxy.
 
 Add a new file to ``lib/galaxy/model/migrate/versions/`` prefixed appropriately.
 
-{% include topics/dev/tutorials/core-contributing/0175_add_user_favorite_extensions.py_diff.md %}
+{% include topics/dev/tutorials/core-contributing/0177_add_user_favorite_extensions.py_diff.md %}
 
 With the database model in place, we need to start adding the rest of
 the Python plubming required to implement this feature. We will do

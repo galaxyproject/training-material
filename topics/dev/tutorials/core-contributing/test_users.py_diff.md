@@ -4,7 +4,7 @@
 > Possible changes to file ``lib/galaxy_test/api/test_users.py``:
 > 
 > ```diff
-> index ca1796e..47b24e6 100644
+> index e6fbfec6ee..7dc82d7179 100644
 > --- a/lib/galaxy_test/api/test_users.py
 > +++ b/lib/galaxy_test/api/test_users.py
 > @@ -171,6 +171,33 @@ class UsersApiTestCase(ApiTestCase):
@@ -39,10 +39,10 @@
 > +        assert len(index) == 0
 > +
 >      def __url(self, action, user):
->          return self._api_url("users/{}/{}".format(user["id"], action), params=dict(key=self.master_api_key))
+>          return self._api_url(f"users/{user['id']}/{action}", params=dict(key=self.master_api_key))
 >  
 > -- 
-> 2.7.4
+> 2.30.1 (Apple Git-130)
 > 
 > ```
 {. :solution }

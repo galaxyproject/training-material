@@ -5,7 +5,7 @@
 > 
 > ```diff
 > new file mode 100644
-> index 0000000..c897f34
+> index 0000000000..c897f34a3b
 > --- /dev/null
 > +++ b/client/src/components/User/FavoriteExtensions/index.js
 > @@ -0,0 +1 @@

@@ -5,7 +5,7 @@
 > 
 > ```diff
 > new file mode 100644
-> index 0000000..ff01fb2
+> index 0000000000..ff01fb2db5
 > --- /dev/null
 > +++ b/lib/galaxy/webapps/galaxy/api/user_favorites.py
 > @@ -0,0 +1,74 @@

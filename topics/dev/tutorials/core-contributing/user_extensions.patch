@@ -1,31 +1,31 @@
-From ba8926f7e21118dadf300a06cbd382ae6c3187a7 Mon Sep 17 00:00:00 2001
+From 64a67939c97c6a08999ffdcbe057f08e8b6aef3d Mon Sep 17 00:00:00 2001
 From: John Chilton <jmchilton@gmail.com>
 Date: Tue, 27 Apr 2021 17:23:52 -0400
 Subject: [PATCH] Add user favorite extensions.
 
 ---
- .../User/FavoriteExtensions/List.test.js           | 97 ++++++++++++++++++++++
- .../components/User/FavoriteExtensions/List.vue    | 87 +++++++++++++++++++
- .../components/User/FavoriteExtensions/index.js    |  1 +
- client/src/entry/analysis/AnalysisRouter.js        |  6 ++
- client/src/layout/menu.js                          |  5 ++
- lib/galaxy/managers/users.py                       | 17 ++++
- lib/galaxy/model/__init__.py                       |  5 ++
- lib/galaxy/model/mapping.py                        | 10 +++
- .../versions/0175_add_user_favorite_extensions.py  | 37 +++++++++
- lib/galaxy/webapps/galaxy/api/user_favorites.py    | 74 +++++++++++++++++
- lib/galaxy/webapps/galaxy/buildapp.py              |  1 +
- lib/galaxy_test/api/test_users.py                  | 27 ++++++
- 12 files changed, 367 insertions(+)
+ .../User/FavoriteExtensions/List.test.js      | 97 +++++++++++++++++++
+ .../User/FavoriteExtensions/List.vue          | 82 ++++++++++++++++
+ .../User/FavoriteExtensions/index.js          |  1 +
+ client/src/entry/analysis/AnalysisRouter.js   |  6 ++
+ client/src/layout/menu.js                     |  5 +
+ lib/galaxy/managers/users.py                  | 17 ++++
+ lib/galaxy/model/__init__.py                  |  5 +
+ lib/galaxy/model/mapping.py                   | 10 ++
+ .../0177_add_user_favorite_extensions.py      | 37 +++++++
+ .../webapps/galaxy/api/user_favorites.py      | 74 ++++++++++++++
+ lib/galaxy/webapps/galaxy/buildapp.py         |  1 +
+ lib/galaxy_test/api/test_users.py             | 27 ++++++
+ 12 files changed, 362 insertions(+)
  create mode 100644 client/src/components/User/FavoriteExtensions/List.test.js
  create mode 100644 client/src/components/User/FavoriteExtensions/List.vue
  create mode 100644 client/src/components/User/FavoriteExtensions/index.js
- create mode 100644 lib/galaxy/model/migrate/versions/0175_add_user_favorite_extensions.py
+ create mode 100644 lib/galaxy/model/migrate/versions/0177_add_user_favorite_extensions.py
  create mode 100644 lib/galaxy/webapps/galaxy/api/user_favorites.py
 
 diff --git a/client/src/components/User/FavoriteExtensions/List.test.js b/client/src/components/User/FavoriteExtensions/List.test.js
 new file mode 100644
-index 0000000..7efa1c7
+index 0000000000..7efa1c76ec
 --- /dev/null
 +++ b/client/src/components/User/FavoriteExtensions/List.test.js
 @@ -0,0 +1,97 @@
@@ -128,10 +128,10 @@ index 0000000..7efa1c7
 +});
 diff --git a/client/src/components/User/FavoriteExtensions/List.vue b/client/src/components/User/FavoriteExtensions/List.vue
 new file mode 100644
-index 0000000..79418b8
+index 0000000000..e5e7d07ab2
 --- /dev/null
 +++ b/client/src/components/User/FavoriteExtensions/List.vue
-@@ -0,0 +1,87 @@
+@@ -0,0 +1,82 @@
 +<template>
 +    <div class="favorite-extensions-card">
 +        <b-alert variant="error" show v-if="errorMessage">
@@ -198,22 +198,17 @@ index 0000000..79418b8
 +            axios
 +                .get(this.favoriteExtensionsUrl)
 +                .then((response) => {
-+                    console.log("loadinging favorites");
 +                    this.favoriteExtensions = response.data;
-+                    console.log(this.favoriteExtensions);
 +                })
 +                .catch(this.handleError);
 +        },
 +        markAsFavorite(extension) {
-+            console.log("marking a favorite....");
 +            axios.post(`${this.favoriteExtensionsUrl}/${extension}`).then(this.loadFavorites).catch(this.handleError);
 +        },
 +        unmarkAsFavorite(extension) {
-+            console.log("unmark");
 +            axios.delete(`${this.favoriteExtensionsUrl}/${extension}`).then(this.loadFavorites).catch(this.handleError);
 +        },
 +        handleError(error) {
-+            console.log("handing a n error");
 +            this.errorMessage = errorMessageAsString(error);
 +        },
 +    },
@@ -221,13 +216,13 @@ index 0000000..79418b8
 +</script>
 diff --git a/client/src/components/User/FavoriteExtensions/index.js b/client/src/components/User/FavoriteExtensions/index.js
 new file mode 100644
-index 0000000..c897f34
+index 0000000000..c897f34a3b
 --- /dev/null
 +++ b/client/src/components/User/FavoriteExtensions/index.js
 @@ -0,0 +1 @@
 +export { default as FavoriteExtensions } from "./List.vue";
 diff --git a/client/src/entry/analysis/AnalysisRouter.js b/client/src/entry/analysis/AnalysisRouter.js
-index b409c83..d8cef68 100644
+index b409c8374f..61b01f85fa 100644
 --- a/client/src/entry/analysis/AnalysisRouter.js
 +++ b/client/src/entry/analysis/AnalysisRouter.js
 @@ -32,6 +32,7 @@ import InteractiveTools from "components/InteractiveTools/InteractiveTools.vue";
@@ -250,7 +245,7 @@ index b409c83..d8cef68 100644
              this.page.display(new FormWrapper.View(_.extend(model[form_id], { active_tab: "user" })));
          },
  
-+        show_user_favorite_extensions: function() {
++        show_user_favorite_extensions: function () {
 +            this._display_vue_helper(FavoriteExtensions, {});
 +        },
 +
@@ -258,7 +253,7 @@ index b409c83..d8cef68 100644
              this._display_vue_helper(InteractiveTools);
          },
 diff --git a/client/src/layout/menu.js b/client/src/layout/menu.js
-index 062191b..de91d96 100644
+index 062191b492..de91d9670c 100644
 --- a/client/src/layout/menu.js
 +++ b/client/src/layout/menu.js
 @@ -314,6 +314,11 @@ export function fetchMenu(options = {}) {
@@ -274,10 +269,10 @@ index 062191b..de91d96 100644
          };
          if (Galaxy.config.visualizations_visible) {
 diff --git a/lib/galaxy/managers/users.py b/lib/galaxy/managers/users.py
-index cb9f4c6..0e79157 100644
+index 3407a6bd75..f15bb4c5d6 100644
 --- a/lib/galaxy/managers/users.py
 +++ b/lib/galaxy/managers/users.py
-@@ -602,6 +602,23 @@ class UserManager(base.ModelManager, deletable.PurgableManagerMixin):
+@@ -590,6 +590,23 @@ class UserManager(base.ModelManager, deletable.PurgableManagerMixin):
                  log.exception('Subscribing to the mailing list has failed.')
                  return "Subscribing to the mailing list has failed."
  
@@ -302,10 +297,10 @@ index cb9f4c6..0e79157 100644
          user.active = True
          self.session().add(user)
 diff --git a/lib/galaxy/model/__init__.py b/lib/galaxy/model/__init__.py
-index 873edab..0fd1437 100644
+index 2c0b8a4dc4..69a74b0ad2 100644
 --- a/lib/galaxy/model/__init__.py
 +++ b/lib/galaxy/model/__init__.py
-@@ -6591,6 +6591,11 @@ class UserPreference(RepresentById):
+@@ -6617,6 +6617,11 @@ class UserPreference(RepresentById):
          self.value = value
  
  
@@ -318,10 +313,10 @@ index 873edab..0fd1437 100644
      def __init__(self, id=None, create_time=None, user_id=None, session_id=None, action=None, params=None, context=None):
          self.id = id
 diff --git a/lib/galaxy/model/mapping.py b/lib/galaxy/model/mapping.py
-index e8fc136..9bbfe6d 100644
+index 5aaef76a03..3245355720 100644
 --- a/lib/galaxy/model/mapping.py
 +++ b/lib/galaxy/model/mapping.py
-@@ -1573,6 +1573,12 @@ model.UserPreference.table = Table(
+@@ -1583,6 +1583,12 @@ model.UserPreference.table = Table(
      Column("name", Unicode(255), index=True),
      Column("value", Text))
  
@@ -334,15 +329,15 @@ index e8fc136..9bbfe6d 100644
  model.UserAction.table = Table(
      "user_action", metadata,
      Column("id", Integer, primary_key=True),
-@@ -1661,6 +1667,7 @@ simple_mapping(model.WorkerProcess)
+@@ -1671,6 +1677,7 @@ simple_mapping(model.WorkerProcess)
  
  # User tables.
- mapper(model.UserPreference, model.UserPreference.table, properties={})
-+mapper(model.UserFavoriteExtension, model.UserFavoriteExtension.table, properties={})
- mapper(model.UserAction, model.UserAction.table, properties=dict(
+ mapper_registry.map_imperatively(model.UserPreference, model.UserPreference.table, properties={})
++mapper_registry.map_imperatively(model.UserFavoriteExtension, model.UserFavoriteExtension.table, properties={})
+ mapper_registry.map_imperatively(model.UserAction, model.UserAction.table, properties=dict(
      # user=relation( model.User.mapper )
      user=relation(model.User)
-@@ -1927,6 +1934,9 @@ mapper(model.User, model.User.table, properties=dict(
+@@ -1928,6 +1935,9 @@ mapper_registry.map_imperatively(model.User, model.User.table, properties=dict(
      _preferences=relation(model.UserPreference,
          backref="user",
          collection_class=attribute_mapped_collection('name')),
@@ -352,11 +347,11 @@ index e8fc136..9bbfe6d 100644
      # addresses=relation( UserAddress,
      #     primaryjoin=( User.table.c.id == UserAddress.table.c.user_id ) ),
      values=relation(model.FormValues,
-diff --git a/lib/galaxy/model/migrate/versions/0175_add_user_favorite_extensions.py b/lib/galaxy/model/migrate/versions/0175_add_user_favorite_extensions.py
+diff --git a/lib/galaxy/model/migrate/versions/0177_add_user_favorite_extensions.py b/lib/galaxy/model/migrate/versions/0177_add_user_favorite_extensions.py
 new file mode 100644
-index 0000000..c9f3715
+index 0000000000..c9f3715ac4
 --- /dev/null
-+++ b/lib/galaxy/model/migrate/versions/0175_add_user_favorite_extensions.py
++++ b/lib/galaxy/model/migrate/versions/0177_add_user_favorite_extensions.py
 @@ -0,0 +1,37 @@
 +"""
 +Migration script to add the user_favorite_extension table.
@@ -397,7 +392,7 @@ index 0000000..c9f3715
 +        log.exception("Dropping user_favorite_extension table failed.")
 diff --git a/lib/galaxy/webapps/galaxy/api/user_favorites.py b/lib/galaxy/webapps/galaxy/api/user_favorites.py
 new file mode 100644
-index 0000000..ff01fb2
+index 0000000000..ff01fb2db5
 --- /dev/null
 +++ b/lib/galaxy/webapps/galaxy/api/user_favorites.py
 @@ -0,0 +1,74 @@
@@ -476,7 +471,7 @@ index 0000000..ff01fb2
 +    ) -> str:
 +        self.user_manager.delete_favorite_extension(trans.user, extension)
 diff --git a/lib/galaxy/webapps/galaxy/buildapp.py b/lib/galaxy/webapps/galaxy/buildapp.py
-index 66c89f0..ba1a112 100644
+index 7fbe248c66..76fe7cd819 100644
 --- a/lib/galaxy/webapps/galaxy/buildapp.py
 +++ b/lib/galaxy/webapps/galaxy/buildapp.py
 @@ -155,6 +155,7 @@ def app_pair(global_conf, load_app_kwds=None, wsgi_preflight=True, **kwargs):
@@ -488,7 +483,7 @@ index 66c89f0..ba1a112 100644
      webapp.add_client_route('/visualizations/edit')
      webapp.add_client_route('/visualizations/sharing')
 diff --git a/lib/galaxy_test/api/test_users.py b/lib/galaxy_test/api/test_users.py
-index ca1796e..47b24e6 100644
+index e6fbfec6ee..7dc82d7179 100644
 --- a/lib/galaxy_test/api/test_users.py
 +++ b/lib/galaxy_test/api/test_users.py
 @@ -171,6 +171,33 @@ class UsersApiTestCase(ApiTestCase):
@@ -523,8 +518,8 @@ index ca1796e..47b24e6 100644
 +        assert len(index) == 0
 +
      def __url(self, action, user):
-         return self._api_url("users/{}/{}".format(user["id"], action), params=dict(key=self.master_api_key))
+         return self._api_url(f"users/{user['id']}/{action}", params=dict(key=self.master_api_key))
  
 -- 
-2.7.4
+2.30.1 (Apple Git-130)
 
