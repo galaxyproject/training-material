@@ -1,0 +1,22 @@
+name: Build GIT-GAT
+
+on: [pull-request]
+  #push:
+    #branches:
+      #- main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
+
+      - name: Build Site
+        run: |
+            bin/knit-automated.sh export
