@@ -3,7 +3,7 @@ name: Deploy Website
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
@@ -21,6 +21,10 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
       - uses: actions/cache@v2
         with:
           path: vendor/bundle

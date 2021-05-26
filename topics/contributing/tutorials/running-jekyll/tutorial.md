@@ -85,10 +85,10 @@ With `make serve-quick`, a local Jekyll server will run in background. It will c
 >
 > 1. Use `make serve` instead of `make serve-quick` to get all plugins, but also configure the post, host and pass additional flags. This however can be quite slow.
 >
-> 2. Need to speed up the cloning step? You coud fetch only the latest commit of the master branch:
+> 2. Need to speed up the cloning step? You coud fetch only the latest commit of the main branch:
 >
 >    ```
->    $ git clone {{ site.github_repository }}.git --depth 1 --branch master
+>    $ git clone {{ site.github_repository }}.git --depth 1 --branch main
 >    ```
 >
 > 3. Running on a VM or remote machine?
@@ -110,9 +110,9 @@ With `make serve-quick`, a local Jekyll server will run in background. It will c
 
 # Stopping the server
 
-Once you are done, you can stop the server and cleaning your repository.
+Once you are done, you can stop the server and clean your repository.
 
-> ### {% icon hands_on %} Hands-on: Stoping the server
+> ### {% icon hands_on %} Hands-on: Stopping the server
 >
 > 1. Stop the server with <kbd>CTRL</kbd>-<kbd>C</kbd>
 > 2. Clean the repository: `make clean`

@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Introduction to recurrent neural networks (RNN)
+title: Deep Learning (Part 2) - Recurrent neural networks (RNN)
 zenodo_link: https://zenodo.org/record/4477881
 questions:
 - What is a recurrent neural network (RNN)?
@@ -17,6 +17,13 @@ requirements:
     topic_name: statistics
     tutorials:
       - intro_deep_learning
+      - FNN
+follow_up_training:
+  -
+    type: internal
+    topic_name: statistics
+    tutorials:
+      - CNN
 time_estimation: 2H
 contributors:
 - kxk302
@@ -75,7 +82,7 @@ functions, please refer to {% cite nwankpaEtAl %}.
 
 ![Mathmatical formula for Sigmoid activation function](../../images/sigmoid.gif "Sigmoid activation function")
 
-## Multi-layer FFN
+## Multi-layer FNN
 
 Minsky and Papert showed that a single layer FNN cannot solve problems in which the data is not linearly separable,
 such as the XOR problem ({% cite Newell780 %}). Adding one (or more) hidden layers to FNN enables it to solve problems

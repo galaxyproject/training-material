@@ -111,6 +111,7 @@ div#theme-selector,div#lang-selector {
 	flex-wrap: wrap;
 	width: 200px;
 	justify-content: flex-start;
+    margin-left: 1em;
 
 	label.btn,a.btn {
 		margin: 0.1em;
@@ -522,6 +523,15 @@ nav input.nicer {
             border-bottom: 2px solid #eceeef;
         }
     }
+
+	div.container blockquote {
+		ul, p, li > p:last-child {
+			margin-bottom: 0.5rem;
+		}
+		p:last-child {
+			margin-bottom: 0;
+		}
+	}
 
     // tutorial boxes
     blockquote {
@@ -1055,7 +1065,46 @@ span.tool {
  }
 }
 
+// Videos
+
 video::cue {
   background: #000000cc;
   color: white;
+}
+
+#playlist {
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+
+    &.vertical {
+        flex-direction: column;
+    }
+
+    .pl-item a {
+        display: flex;
+        flex-direction: column;
+
+        .title {
+            font-weight: 700;
+        }
+        .topic {
+            font-style: italic;
+        }
+
+        .cover {
+            width: 200px;
+        }
+    }
+}
+
+
+#transcript {
+    height: 400px;
+    overflow-y: scroll;
+
+    tr td:nth-child(1) {
+        padding-right: 1em;
+        color: #555;
+    }
 }

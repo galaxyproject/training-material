@@ -266,13 +266,14 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 >        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: Multi-select `L001_R2_001` and `L002_R2_001` using the Ctrl key.
 >        - {% icon param-file %} *"RNA-Seq Cell Barcode Whitelist"*: `3M-february-2018.txt.gz`
 >        - *"Configure Chemistry Options"*: `Cell Ranger v3`
->        - *"UMI deduplication (collapsing) algorithm"*: `All`
->        - *"Matching the Cell Barcodes to the WhiteList"*: `Multiple matches (CellRanger 3)`
+>        - *"UMI deduplication (collapsing) algorithm"*: `CellRanger2-4 algorithm`
+>        - *"Matching the Cell Barcodes to the WhiteList"*: `Multiple matches (CellRanger 2)`
 >    - Under *"Advanced Settings"*:
 >        - *"Strandedness of Library"*: `Forward`
 >        - *"Collect UMI counts for these genomic features"*: `Gene: Count reads matching the Gene Transcript`
->        - *"Type of UMI filtering"*: `Remove lower-count UMIs that map to more than one gene, matching CellRanger 3.0.0`
+>        - *"Type of UMI filtering"*: `Remove UMIs with N and homopolymers (similar to CellRanger 2.2.0)`
 >        - *"Cell filter type and parameters"*: `Do not filter`
+>        - *"Field 3 in the Genes output"*: `Gene Expression`
 >
 >    > ### {% icon comment %} Comment
 >    >

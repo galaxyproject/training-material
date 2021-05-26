@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: "Chloroplast genome assembly"
 zenodo_link: "http://doi.org/10.5281/zenodo.3567224"
 tags:
-  - plant
+  - plants
   - nanopore
 questions:
   - "How can we assemble a chloroplast genome?"

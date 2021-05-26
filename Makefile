@@ -9,7 +9,7 @@ PDF_HOST?=127.0.0.1
 SITE_URL=http://${PDF_HOST}:${PORT}/training-material
 PDF_DIR=_pdf
 REPO=$(shell echo "$${ORIGIN_REPO:-galaxyproject/training-material}")
-BRANCH=$(shell echo "$${ORIGIN_BRANCH:-master}")
+BRANCH=$(shell echo "$${ORIGIN_BRANCH:-main}")
 MINICONDA_URL=https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 SHELL=bash
 RUBY_VERSION=2.4.4
@@ -83,7 +83,7 @@ _check-html: # Internal
 	      	--assume-extension \
 	      	--http-status-ignore 405,503,999 \
 	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
-	      	--url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
+	      	--url-swap "github.com/galaxyproject/training-material/tree/main:github.com/${REPO}/tree/${BRANCH}" \
 	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
 	      	--allow-hash-href \
 	      	./_site
@@ -106,8 +106,8 @@ _check-html-internal: # Internal
 		htmlproofer \
 	      	--assume-extension \
 	      	--http-status-ignore 405,503,999 \
-	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#/","/#embedded_jbrowse/" \
-	      	--url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
+	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#/","/#embedded_jbrowse/","/.*videos.*.mp4.png/" \
+	      	--url-swap "github.com/galaxyproject/training-material/tree/main:github.com/${REPO}/tree/${BRANCH}" \
 	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
 	      	--disable-external \
 	      	--allow-hash-href \
