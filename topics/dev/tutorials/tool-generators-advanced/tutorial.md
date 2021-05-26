@@ -128,14 +128,9 @@ automated code generator in a tailored, readily deployed appliance.
 >
 > 2. Then, `pip3 install docker-compose`
 >
-> 2. Go to [the ToolFactory appliance github repository](https://github.com/fubar2/toolfactory-galaxy-server)
->
-> 3. Clone it or download the zip and unzip it somewhere handy - such as `~/toolfactory-galaxy-server-main`
->
-> 4. Change to the compose directory and launch it:
+> 3. Clone/Download, Change to the compose directory, and Launch it:
 >
 >    ```bash
->    cd ~/toolfactory-galaxy-server-main/compose`
 >    git clone https://github.com/fubar2/toolfactory-galaxy-server
 >    cd toolfactory-galaxy-server/compose
 >    docker-compose pull
@@ -175,30 +170,32 @@ automated code generator in a tailored, readily deployed appliance.
 >    -  Out of the box login is 'admin@galaxy.org' and the password is 'password'
 >      - This is obviously insecure but convenient and easily changed at first login.
 >      - Or more permanently in the docker-compose.yml if you prefer.
->   - The container `/export` directory is mounted locally at `compose/export` so you can find your generated and tested tools for sharing.
+>    - The container `/export` directory is mounted locally at `compose/export` so you can find your generated and tested tools for sharing.
 >
-> 6. Demonstration tools are the functional documentation
+>    > ### {% icon tip %} Tip: Demonstration tools are the functional documentation
+>    >
+>    > - At first login you will find the demonstration history ready to explore if you waited for all the Conda activity to die down
+>    > - It takes a minute or two to import because the dependencies for the ToolFactory must first be installed.
+>    > - Check the histories if a different one appears - two are loaded and there seems some randomness about which appears at login.
+>    > - If it's not there, you can import it manually from Zenodo as described in the Welcome page text.
+>    > - To explore an example, open the toolshed XML history item by clicking on the name, and select the {% icon galaxy-refresh %} `rerun` button from the expanded view
+>    >    - The form that generated that tool will appear for you to examine
+>    >    - Edit the form - add parameters and change the script to suit - and rerun to create an *updated* tool. The history has previous versions.
+>    >    - Change the tool ID to change the tool name and generate a different tool. *Generating a same-name tool will overwrite the old version*.
+>    {: .tip}
 >
->    - At first login you will find the demonstration history ready to explore if you waited for all the Conda activity to die down
->    - It takes a minute or two to import because the dependencies for the ToolFactory must first be installed.
->    - Check the histories if a different one appears - two are loaded and there seems some randomness about which appears at login.
->    - If it's not there, you can import it manually from Zenodo as described in the Welcome page text.
->    - To explore an example, open the toolshed XML history item by clicking on the name, and select the {% icon galaxy-refresh %} `rerun` button from the expanded view
->       - The form that generated that tool will appear for you to examine
->       - Edit the form - add parameters and change the script to suit - and rerun to create an *updated* tool. The history has previous versions.
->       - Change the tool ID to change the tool name and generate a different tool. *Generating a same-name tool will overwrite the old version*.
+>    > ### {% icon tip %} Tip: Patience!
+>    > When you run the ToolFactory for the first time inside the container and whenever you run a new tool with new dependencies, it will require some time to build the conda environment.
+>    > Check for Conda or other processes if things seem stuck.
+>    {: .tip}
 >
-> ## To safely shut the appliance down
->  - If the console was not detached using the --detach/-d flag
->       - `<ctrl><c>` in the console will gracefully shut the server down - takes time but your work will be preserved.
->  - If the -d flag was used,
->     - `docker-compose down` from the same directory it was started `.../compose`, should shut it down nicely
->     {: .code-in}
->     > ### {% icon tip %} Tip: Patience!
->     > When you run the ToolFactory for the first time inside the container and whenever you run a new tool with new dependencies, it will require some time to build the conda environment.
->     > Check for Conda or other processes if things seem stuck.
->     {: .tip}
+> 6. Later, after you've finished this tutorial:
 >
+>    To safely shut the appliance down
+>    - If the console was not detached using the --detach/-d flag:
+>         - `<ctrl><c>` in the console will gracefully shut the server down - takes time but your work will be preserved.
+>    - If the -d flag was used:
+>       - `docker-compose down` from the same directory it was started `.../compose`, should shut it down nicely
 >
 {: .hands_on}
 
@@ -1016,11 +1013,11 @@ interfering with it's own independent repository update. The result is not prett
 - Allowing two tests to run at once has proven to be unstable so the Appliance is currently limited to one.
 
 # Your turn! Please help improve this community resource!
-- tell Ross (ross.lazarus@gmail.com) what went well and what could be improved for the benefit of future students
+- tell Ross ([mailto:ross.lazarus@gmail.com](ross.lazarus@gmail.com)) what went well and what could be improved for the benefit of future students
 - This tutorial has had almost no testing yet.
 - It is in pre-review.
 - A PR will soon appear once we get the showstoppers sorted.
-- Please use the fork at https://github.com/fubar2/training-material for issues and pull requests for the nonce.
+- Please use the fork at [fubar2/training-material](https://github.com/fubar2/training-material) for issues and pull requests for the nonce.
 - The ToolFactory has had little testing in the present form so expect many bugs
 - If the ToolFactory works well for you, please tell your friends.
-- If you find bugs, please tell me by raising an issue at https://github.com/fubar2/toolfactory, or better, a pull request with the fix :)
+- If you find bugs, please tell me by raising an issue at [fubar2/toolfactory](https://github.com/fubar2/toolfactory), or better, a pull request with the fix :)
