@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          fetch-depth: 1
       - uses: actions/setup-python@v2
         with:
           python-version: '3.7'
@@ -19,4 +19,9 @@ jobs:
 
       - name: Build Site
         run: |
-            bin/knit-automated.sh export
+            bin/knit-automated.sh export;
+            cd /tmp/git-gat/;
+            git init
+            git am *.patch;
+            rm *.patch;
+            find;
