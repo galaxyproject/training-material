@@ -25,7 +25,7 @@ if [[ "$op" == "export" ]]; then
 		+
 		+This is a git repository with the current <abbr title="Galaxy Admin Training">GAT</abbr> history. See the current [GAT schedule](https://gxy.io/gat).
 		+
-		+This is built from [the GTN's library of admin training](https://training.galaxyproject.org/topics/admin/tutorials/)
+		+This is built from [the GTN's library of admin training](https://training.galaxyproject.org/topics/admin/tutorials/) as part of GitHub Run $GITHUB_RUN_ID for GTN commit $GITHUB_SHA
 		--
 		2.25.1
 	EOF
