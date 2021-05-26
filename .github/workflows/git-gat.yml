@@ -1,9 +1,18 @@
 name: Build GIT-GAT
 
-on: [pull_request]
-  #push:
-    #branches:
-      #- main
+on:
+  pull_request:
+    paths:
+      - 'topics/admin/**'
+      - 'bin/knit*'
+      - 'bin/video*'
+  push:
+    branches:
+      - main
+    paths:
+      - 'topics/admin/**'
+      - 'bin/knit*'
+      - 'bin/video*'
 
 jobs:
   deploy:
