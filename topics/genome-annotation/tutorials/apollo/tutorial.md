@@ -4,32 +4,32 @@ layout: tutorial_hands_on
 title: Refining Genome Annotations with Apollo
 zenodo_link: https://zenodo.org/record/3270822
 tags:
-- eukaryote
+  - prokaryote
 questions:
-- How to visualize your genome after automated annotations have been performed?
-- How to manually annotate genome after automated annotations have been performed?
-- How to evaluate and visualize annotated genomic features?
+  - How to visualize your genome after automated annotations have been performed?
+  - How to manually annotate genome after automated annotations have been performed?
+  - How to evaluate and visualize annotated genomic features?
 objectives:
-- Load genome into Galaxy
-- View annotations in JBrowse
-- Learn how to load JBrowse data into Apollo
-- Learn how to manually refine genome annotations within Apollo
-- Export refined genome annotations
+  - Load genome into Galaxy
+  - View annotations in JBrowse
+  - Learn how to load JBrowse data into Apollo
+  - Learn how to manually refine genome annotations within Apollo
+  - Export refined genome annotations
 time_estimation: 3h
 key_points:
-- Apollo allows a group to view and manually refine predicged genome annotations
-- Use Apollo to edit annotations within your group.
-- Export manual annotations as GFF3.
+  - Apollo allows a group to view and manually refine predicged genome annotations
+  - Use Apollo to edit annotations within your group.
+  - Export manual annotations as GFF3.
 contributors:
-- abretaud
-- erasche
-- nathandunn
+  - abretaud
+  - hexylena
+  - nathandunn
 
 requirements:
-- type: "internal"
-  topic_name: galaxy-data-manipulation
-  tutorials:
-    - upload-rules
+  - type: "internal"
+    topic_name: galaxy-interface
+    tutorials:
+      - upload-rules
 #- type: "internal"
 #  topic_name genome-annotation
 #  tutorials:
@@ -45,9 +45,9 @@ requirements:
 
 After automatically annotating your genome using [Prokka](../annotation-with-prokka/tutorial.html) or [Maker](../annotation-with-maker/tutorial.html), it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
 
-[Apollo](https://github.com/gmod/apollo) {% cite Dunn2019 %} provides a platform to do this, it is a web-based, collaborative genome annotation editor. Think of it as "Google Docs" for genome annotation, multiple users can work together simultaneously to curate evidences and annotate a genome.
+[Apollo](https://github.com/gmod/apollo) {% cite Dunn2019 %} provides a platform to do this. It is a web-based, collaborative genome annotation editor. Think of it as "Google Docs" for genome annotation, multiple users can work together simultaneously to curate evidences and annotate a genome.
 
-This demo is inspired by the [Apollo User's Guide](https://genomearchitect.readthedocs.io/en/latest/UsersGuide.html), which provides additional guidance. 
+This demo is inspired by the [Apollo User's Guide](https://genomearchitect.readthedocs.io/en/latest/UsersGuide.html), which provides additional guidance.
 
 > ### Agenda
 >
@@ -75,12 +75,17 @@ In this tutorial we have obtained some data from NCBI related to [*Escherichia c
 
 ## Get data
 
+<!-- Data for E.coli from https://usegalaxy.eu/u/helena-rasche/h/e-coli-k-12-apollo -->
+<!-- other datasets available: -->
+<!-- Apis mellifera: https://zenodo.org/record/3270822 (based on https://hymenoptera.elsiklab.missouri.edu/beebase/download_sequences probably) -->
+<!-- Schizosaccharomyces pombe: https://usegalaxy.eu/u/abretaud/h/apollo-eukaryote-data -->
+
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 0. Create a new history and give it a good name
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 1. Click the upload icon {% icon galaxy-upload %}
 >
@@ -89,12 +94,22 @@ In this tutorial we have obtained some data from NCBI related to [*Escherichia c
 > 3. Copy & Paste the following table into the Rule-based uploader textbox:
 >
 >    ```
->    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/Amel_4.5_scaffolds.fa.gz	Scaffolds	fasta.gz
->    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/amel_OGSv3.2.gff3.gz	OGS v3.2	gff3
->    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/forager_Amel4.5_accepted_hits.bam	forager_Amel4.5_accepted_hits	bam
->    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/forager.bw	forager coverage	bigwig
->    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/nurse_Amel4.5_accepted_hits.bam	nurse_Amel4.5_accepted_hits	bam
->    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/nurse.bw	nurse coverage	bigwig
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/augustus.gff3	Augustus genes	gff3
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/blastp_vs_swissprot_2018-01-22.blastxml	Blastp vs swissprot	blastxml
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/BWA-MEM_K12_Coverage.bigwig	BWA-MEM_K12_Coverage	bigwig
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/BWA-MEM_K12_Mapping.bam	BWA-MEM_K12_Mapping	bam
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/BWA-MEM_O104_Coverage.bigwig	BWA-MEM_O104_Coverage	bigwig
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/BWA-MEM_O104_Mapping.bam	BWA-MEM_O104_Mapping	bam
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/E._coli_str_K-12substr_MG1655_100kb_subset.fasta	Genome	fasta
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/K12_Variants.vcf	K12_Variants	vcf
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/NCBI_AnnotWriter_Genes.gff3	NCBI_AnnotWriter_Genes	gff3
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/NCBI_AnnotWriter_Proteins.fasta	NCBI_AnnotWriter_Proteins	fasta
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/O104_H4_LASTZ_Alignment.bed	O104_H4_LASTZ_Alignment	bed
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/O104_Variants.vcf	O104_Variants	vcf
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/TopHat_SRR1927169_rep1.bam	TopHat_SRR1927169_rep1	bam
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/TopHat_SRR1927169_rep1_Coverage.bigwig	TopHat_SRR1927169_rep1_Coverage	bigwig
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/TopHat_SRR1927170_rep2.bam	TopHat_SRR1927170_rep2	bam
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/TopHat_SRR1927170_rep2_Coverage.bigwig	TopHat_SRR1927170_rep2_Coverage	bigwig
 >    ```
 > 4. Click **Build**
 >
@@ -104,11 +119,9 @@ In this tutorial we have obtained some data from NCBI related to [*Escherichia c
 >      - *"Name"*: `B`
 >    - Repeat this again and select `URL` instead.
 >      - *"URL"*: `A`
->    - Repeat this again and select `URL` instead.
+>    - Repeat this again and select `Type` instead.
 >      - *"Type"*: `C`
 >    - Click `Apply`
->
-> 6. At the bottom of the dialog on the left, set your Genome to `A. mellifera 04 Nov 2010 (Amel_4.5/apiMel4)`
 >
 > 7. Click **Upload**
 >
@@ -197,7 +210,7 @@ In this tutorial we will focus more on the practical portions than the theoretic
 >    >
 >    > JBrowse is highly configurable, we have set a very basic configuration but there are many more advanced features available to you, if you need them. You can choose precisely how data is displayed, and even what menu options are available when users click on features. If your features have some external identifiers like an NCBI Gene ID, you can even configure JBrowse that when the user clicks on the feature, it should show the gene page for that feature in a new tab. These sort of features are incredibly helpful for building very rich experiences.
 >    >
->    > A static genome browser like this (just JBrowse, not in Apollo) is very useful for summarising results of a genomics workflow, where the next step is simply interpretation and not annotation.
+>    > A static genome browser like this (just JBrowse, not in Apollo) is very useful for summarising results of a genomics workflow, where the next step is simply interpretation and not annotation. Have a look at the [JBrowse tutorial]({% link topics/visualisation/tutorials/jbrowse/tutorial.md %}) for more information.
 >    >
 >    > Currently we have built a standalone genome browser (data + the html page and user interface and javascript), but it's possible to just compile the data directory if you intend to send this data to Apollo, and don't need to view the static data in Galaxy.
 >    {: .comment}
