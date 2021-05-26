@@ -51,11 +51,8 @@ contributors:
 ---
 
 This tutorial is for developers and researchers routinely developing their own analysis scripts using bash, Python, Perl, Rscript or other scripting languages.
-
 It shows a convenient way to bridge the gap between a working command line script and installing a real tool that "wraps" that script as a tool in Galaxy.
-
-The ToolFactory is a Galaxy tool, run in the usual Galaxy tool interface. It is distributed as the ToolFactory Appliance, ready to run on a local linux workstation or high end laptop using
-Docker.
+The ToolFactory is a Galaxy tool, run in the usual Galaxy tool interface. It is distributed as the ToolFactory Appliance, ready to run on a local linux workstation or high end laptop using Docker.
 
 This first tutorial is an introduction. It shows how ToolFactory generates a `Hello World!` Galaxy tool and how the Appliance can be installed locally.
 The reader will soon learn if it might be adapted to their work. If so, an [Advanced ToolFactory tutorial]({% link topics/dev/tutorials/tool-generators-advanced/tutorial.md %}) is
@@ -64,23 +61,6 @@ available if the material here is relevant to your needs and you would like to l
 Experienced galaxy tool developers already have specialised tools and training to suit their needs so may not gain much from this material.
 Users new to Galaxy from other scientific disciplines not yet familiar with the manual tool development process,
 may find the ToolFactory appliance useful for familiarising themselves with tool development in Galaxy.
-
-> ### {% icon tip %} The ToolFactory appliance provides a fully featured Galaxy server.
-> - It is a private local desktop Galaxy server, ideal for tinkering and experimentation, learning how the Galaxy server works
-and for developing new tools for new kinds of scientists using Galaxy.
-> - Any Galaxy tool from the toolshed can be installed and used.
-> - Any reasonably simple script can be generated as a tool.
-> - Newly generated tools appear in the tool menu after a refresh, and can be viewed and used as the user will see them.
-> - Tool generation jobs can be rerun using the {% icon galaxy-refresh %} button on the history item after editing the form to make changes to the tool the user will see in Galaxy.
-> - The Appliance is a Toolfactory flavour of the [docker-galaxy-stable resource](https://github.com/bgruening/docker-galaxy-stable/tree/master/compose).
->    - Documentation on connecting the appliance to a cluster for getting real work done with newly generated tools can be found at that repository.
->    - It can be backed up and persisted for as long as required, or it can be treated as a throw-away instance and deleted when no longer needed.
->    - There is almost zero technical friction if Docker and docker-compose are already installed. Only time is required.
->    - Usefulness will depend on sufficient hardware. Plenty of cores, RAM and disk storage are needed.
->    - On a modern workstation or well-endowed laptop, it will perform well out of the box.
->    - It will struggle on older consumer hardware with limited RAM and CPU capacity.
-{: .tip }
-
 
 > ### Agenda
 >
@@ -131,6 +111,22 @@ This tutorial introduces that unusual tool.
 
 The ToolFactory is an unusual but useful Galaxy tool. It implements an automated, form driven code generator that installs newly generated tools so you can try them straight away
 in Galaxy. The ToolFactory is distributed as a Docker appliance and can be "popped up" and ready to run in a few minutes.
+
+> ### {% icon tip %} The ToolFactory appliance provides a fully featured Galaxy server.
+> - It is a private local desktop Galaxy server, ideal for tinkering and experimentation, learning how the Galaxy server works
+and for developing new tools for new kinds of scientists using Galaxy.
+> - Any Galaxy tool from the toolshed can be installed and used.
+> - Any reasonably simple script can be generated as a tool.
+> - Newly generated tools appear in the tool menu after a refresh, and can be viewed and used as the user will see them.
+> - Tool generation jobs can be rerun using the {% icon galaxy-refresh %} button on the history item after editing the form to make changes to the tool the user will see in Galaxy.
+> - The Appliance is a Toolfactory flavour of the [docker-galaxy-stable resource](https://github.com/bgruening/docker-galaxy-stable/tree/master/compose).
+>    - Documentation on connecting the appliance to a cluster for getting real work done with newly generated tools can be found at that repository.
+>    - It can be backed up and persisted for as long as required, or it can be treated as a throw-away instance and deleted when no longer needed.
+>    - There is almost zero technical friction if Docker and docker-compose are already installed. Only time is required.
+>    - Usefulness will depend on sufficient hardware. Plenty of cores, RAM and disk storage are needed.
+>    - On a modern workstation or well-endowed laptop, it will perform well out of the box.
+>    - It will struggle on older consumer hardware with limited RAM and CPU capacity.
+{: .tip }
 
 The Appliance was developed for skilled programmers who need new Galaxy tools for their own use or for users they support. Any user comfortable with scientific or general
 scripting languages on a Linux command
@@ -196,7 +192,7 @@ sections of the generated XML file in the toolshed archive. The ToolFactory form
 The generated tool XML appears in the history after the ToolFactory is executed and the tool itself is installed in the `ToolFactory Generated Tools` submenu.
 Text on the form is specified in the XML and it all comes from the ToolFactory form.
 
->### {% icon details %} Generated XML and tool form
+> ### {% icon details %} Generated XML and tool form
 >
 > [Galaxy XML documentation is here](https://docs.galaxyproject.org/en/latest/dev/schema.html)
 >
@@ -259,7 +255,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 > When a user runs the tool and enters some text in the text box, the decorated output will appear in a new history text dataset.
 > This may not seem very exciting but it provides a useful pattern that can easily be adapted and extended.
 > The script could do something far more interesting and could take unlimited input datasets, user configurable parameters and can produce as many outputs as needed in the history.
-
+>
 {: .details}
 
 
@@ -295,88 +291,64 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 
 ## Installing the ToolFactory Appliance: requires a Linux workstation, Docker and docker-compose.
 
-> ### {% icon hands_on %} Installing and launching the Container
->>
->> 1. [Install Docker](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform.
->>    - Then, `pip3 install docker-compose`
->>
->> 2. Go to [the ToolFactory appliance github repository](https://github.com/fubar2/toolfactory-galaxy-server)
->>
->> 3. Clone it or download the zip and unzip it somewhere handy - such as `~/toolfactory-galaxy-server-main`
->>
->> 4. Change to the `compose` directory - `cd ~/toolfactory-galaxy-server-main/compose`
->>
->>
->>```
->>git clone https://github.com/fubar2/toolfactory-galaxy-server
->>cd toolfactory-galaxy-server/compose
->>docker-compose pull
->>docker-compose up
->>```
->>
->>
->>
->>    > ### {% icon code-in %} Input: Bash example with wget instead of git clone
->>    > ```bash
->>    > wget https://github.com/fubar2/toolfactory-galaxy-server/archive/refs/heads/main.zip
->>    > unzip main.zip
->>    > cd toolfactory-galaxy-server-main/compose
->>    > docker-compose pull
->>    > docker-compose up
->>    > ```
->>    {: .code-in}
->>
->>  > ### {% icon tip %} Appliance tips
->>  >
->>  >  - `pull` is only needed the first time, or if there is a newer version available of the base `docker-galaxy-stable` images or of the toolfactory-configurator.
->>  >  - Add `-d` at the end of the `docker-compose` command to detach the terminal so you can keep working - but only after watching the process the first time please.
->>  >      - It is important to wait until the server stops sending log messages before you first log in. That means everything is ready. The first startup is very complex and takes time.
->>  >  - For the first time start, watching the startup process logs is highly recommended.
->>  >      - You will learn a lot about how a Galaxy server works and see when the Appliance is ready to use.
->>  >  - The docker containers may not fit or run well on an underpowered machine. Multiple CPU cores, 8GB of RAM and fast disk are needed for an enjoyable appliance.
->>  >  - The demonstration history will only be available after logging in with the administrator credentials - `admin@galaxy.org` and password `password`. Check your histories if the smaller data-only history appears when you log in.
->>  >  - Change your admin password and if anyone else has possible network access, the API key `fakekey` used for configuration.
->>  >  - It is important that your appliance is not accessible to any potential miscreants on the local or public internet.
->>  >  - It is recommended for use only as a private disposable desktop development environment.
->>  >    - The Appliance keeps no backup of any work.
->>  >    - The user can backup the export directory if desired.
->>  >    - An institutional server is a safer bet for preserving real research.
->>  >
->>  {: .tip}
->>
->>Your appliance should be running with a local Galaxy on [port 8080 of your workstation](http://localhost:8080) after a fair bit of activity.
->>
->> -  Out of the box login is 'admin@galaxy.org' and the password is 'password'
->>    - This is obviously insecure but convenient and easily changed at first login.
->>    - Or more permanently in the docker-compose.yml if you prefer.
->>
->>- The container `/export` directory is mounted locally at `compose/export` so you can find your generated and tested tools for sharing.
->>
->>## Demonstration tools are the functional documentation
->>
->>- At first login you will find the demonstration history ready to explore if you waited for all the Conda activity to die down
->>- It takes a minute or two to import because the dependencies for the ToolFactory must first be installed.
->>- Check the histories if a different one appears - two are loaded and there seems some randomness about which appears at login.
->>- If it's not there, you can import it manually from Zenodo as described in the Welcome page text.
->>
->> - To explore an example, open the toolshed XML history item by clicking on the name, and select the {% icon galaxy-refresh %} `rerun` button from the expanded view
->>    - The form that generated that tool will appear for you to examine
->>    - Edit the form - add parameters and change the script to suit - and rerun to create an *updated* tool. The history has previous versions.
->>    - Change the tool ID to change the tool name and generate a different tool. *Generating a same-name tool will overwrite the old version*.
->>
->>## To safely shut the appliance down
->>
->>`docker-compose down`
->>
->>from the same place you started should shut it down nicely. Most things will still be there next time you start it.
->>    {: .code-in}
->>
->>    > ### {% icon tip %} Tip: Patience!
->>    > When you run the ToolFactory for the first time inside the container and whenever you run a new tool with new dependencies, it will require some time to build the conda environment.
->>    > Check for Conda or other processes if things seem stuck.
->>    {: .tip}
->>
->>
+> ### {% icon hands_on %} Hands-on: Launching the Appliance
+>
+> 1. [Install Docker](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform.
+>
+> 2. Then, `pip3 install docker-compose`
+>
+> 2. Go to [the ToolFactory appliance github repository](https://github.com/fubar2/toolfactory-galaxy-server)
+>
+> 3. Clone it or download the zip and unzip it somewhere handy - such as `~/toolfactory-galaxy-server-main`
+>
+> 4. Change to the compose directory and launch it:
+>
+>    > ### {% icon code-in %} Input Bash: Clone the Code
+>    > ```bash
+>    > wget https://github.com/fubar2/toolfactory-galaxy-server/archive/refs/heads/main.zip
+>    > unzip main.zip
+>    > cd toolfactory-galaxy-server-main/compose
+>    > docker-compose pull
+>    > docker-compose up
+>    > ```
+>    {: .code-in}
+>
+>    > ### {% icon tip %} Appliance tips
+>    >
+>    >  - For the first time start, watching the startup process logs is highly recommended.
+>    >      - You will learn a lot about how a Galaxy server works and see when the Appliance is ready to use.
+>    >  - The docker containers may not fit or run well on an underpowered machine. Multiple CPU cores, 8GB of RAM and fast disk are needed for an enjoyable appliance.
+>    >  - Change your admin password and if anyone else has possible network access, the API key `fakekey` used for configuration.
+>    >  - It is important that your appliance is not accessible to any potential miscreants on the local or public internet.
+>    >  - It is recommended for use only as a private disposable desktop development environment.
+>    >    - The Appliance keeps no backup of any work.
+>    >    - The user can backup the export directory if desired.
+>    >    - An institutional server is a safer bet for preserving real research.
+>    {: .tip}
+>
+> 5. Your appliance should be running with a local Galaxy on [port 8080 of your workstation](http://localhost:8080) after a fair bit of activity.
+>
+>    -  Login with the username `admin@galaxy.org` and the password `password`
+>    - This is obviously insecure but convenient and easily changed at first login.
+>    - The container `/export` directory is mounted locally at `compose/export` so you can find your generated and tested tools for sharing.
+>
+> 6. Demonstration tools are the functional documentation
+>
+>    - At first login you will find the demonstration history ready to explore if you waited for all the Conda activity to die down
+>    - It takes a minute or two to import because the dependencies for the ToolFactory must first be installed.
+>    - Check the histories if a different one appears - two are loaded and there seems some randomness about which appears at login.
+>    - If it's not there, you can import it manually from Zenodo as described in the Welcome page text.
+>    - To explore an example, open the toolshed XML history item by clicking on the name, and select the {% icon galaxy-refresh %} `rerun` button from the expanded view
+>       - The form that generated that tool will appear for you to examine
+>       - Edit the form - add parameters and change the script to suit - and rerun to create an *updated* tool. The history has previous versions.
+>       - Change the tool ID to change the tool name and generate a different tool. *Generating a same-name tool will overwrite the old version*.
+>
+>     > ### {% icon tip %} Tip: Patience!
+>     > When you run the ToolFactory for the first time inside the container and whenever you run a new tool with new dependencies, it will require some time to build the conda environment.
+>     > Check for Conda or other processes if things seem stuck.
+>     {: .tip}
+>
+>
 {: .hands_on}
 
 ----
@@ -401,12 +373,12 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >    - "Data file input, output and settings forming the executable or script command line"
 >      - *"Command line parameter passing method to use"*: `positional`
 >      - "Input and output files"
->        - {% icon param-repeat %} *"Insert one or more new history items output by the executable to appear in the user history after the tool runs"*
+>        - {% icon param-repeat %} *"Insert Outputs"*
 >          - *"Name for this output to appear in new history"*: `Hello_output`
 >          - *"Select the datatype for this output"*: `txt`
->          - *"Positional: ordinal integer. Use STDOUT if '>' required. Otherwise ignored if argparse because name is used"*: `1`
->      - "Executable or script settings passed on the command line other than I/O files"
->        - {% icon param-repeat %} *"Insert zero or more command line settings for the user to pass to the executable"*
+>          - *"Position"*: `STDOUT`
+>      - "Arguments"
+>        - {% icon param-repeat %} *"Insert Command Line Parameters"*
 >          - *"Choose the name for this parameter - MUST not be blank!"*: `say_hello_to`
 >          - *"Enter this parameter's label for the form"*: `Say hello to`
 >          - *"Positional ordinal \| argparse argument name"*: `1`
@@ -415,9 +387,11 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >    > The first job takes longer in some installation scenarios because the ToolFactory dependencies are installed before the tool can run.
 >    {: .comment}
 >
+> 2. Execute
+>
 > 2. Explore the outputs - do they match what you expected?
 >
-> 3. Refresh the view - click the home icon (or the "Analysis" tab) - to see the new tool in the `ToolFactory Generated Tools` section of the tools menu.
+> 3. Refresh the page - click the home icon (or the "Analysis" tab) - to see the new tool in the `ToolFactory Generated Tools` section of the tools menu.
 >
 > 4. Run the tool that has been added - Select the new tool and examine the form. Check that all the changes are as they should be.
 >
@@ -464,23 +438,58 @@ Galaxy can be used as an Integrated Development Environment for tools - clunky b
 >    - "Dependencies, optional script and script interpreter"
 >      - *"Script for executable above to interpret"*: `echo "Hello $1"; echo "Goodbye $2";`
 >    - "Data file input, output and settings forming the executable or script command line"
->      - "Executable or script settings passed on the command line other than I/O files"
->        - Add a second {% icon param-repeat %} *"Insert zero or more command line settings for the user to pass to the executable"*
+>      - "Arguments"
+>        - Add a second {% icon param-repeat %} *"Insert Command Line Parameters"*
 >          - *"Choose the name for this parameter - MUST not be blank!"*: `say_bye_to`
 >          - *"Enter this parameter's label for the form"*: `Say bye to`
 >          - *"Positional ordinal \| argparse argument name"*: `2`
 >
 {: .hands_on}
 
-
 ### Hello Collections!
 
-> ### {% icon hands_on %} Hands-on: Building the Hello World example
+> ### {% icon hands_on %} Hands-on: Building a File Splitter
 >
-> 1. Run {% tool ToolFactory %} with the following parameters: TODO
+> 1. Run {% tool ToolFactory %} with the following parameters:
+>    - *"New tool ID and title for outputs"*: `file_splitter`
+>    - "Dependencies, optional script and script interpreter"
+>      - *"Interpreter for the script"*: `bash`
+>      - *"Script for executable above to interpret"*:
 >
+>        ```bash
+>        mkdir -p outputs/;
+>        split --lines=$2 --additional-suffix=.txt $1 outputs/
+>        ```
+>
+>    - "Data file input, output and settings forming the executable or script command line"
+>      - *"Command line parameter passing method to use"*: `positional`
+>      - "Input and output files"
+>        - {% icon param-repeat %} *"Insert Inputs"*
+>          - *"Select an input file from your history"*: Choose any XML file from your history, we'll use this as an example
+>          - *"Select the datatype for this output"*: `txt`
+>          - *"This will become the user prompt for the form so please make it informative"*: `File to split`
+>          - *"Positional: ordinal integer. Argparse: argument name. STDIN if the executable/script expects it"*: `1`
+>        - {% icon param-repeat %} *"Insert Output Collections"*
+>          - *"Select the kind of collection for this output"*: `List`
+>          - *"Label for this collection"*: `File Parts`
+>      - "Arguments"
+>        - {% icon param-repeat %} *"Insert Command Line Parameters"*
+>          - *"Choose the name for this parameter - MUST not be blank!"*: `lines`
+>          - *"Select the type for this parameter"*: `Integer`
+>            - *"Enter this parameter's default integer value"*: `4`
+>          - *"Enter this parameter's label for the form"*: `Number of lines in each split file`
+>          - *"Positional ordinal \| argparse argument name"*: `2`
+>
+> 2. Execute
+>
+> 3. Refresh the Galaxy Page and locate your `collections_test` tool
+>
+> 4. Run the tool, selecting any text file in your history, e.g. the XML output from the ToolFactory that created this tool.
+>
+> 5. You should see a collection filled with files named `aa` to `ao` (or so), each with 4 lines from your file.
 {: .hands_on}
 
+Hopefully this is a motivating example and you can imagine what else you might be able to accomplish with collection outputs! You could extend this example to split a `.fastq` file which could speed up your processing, or you could use collections to store extra images or plots produced by your tool.
 
 > ### {% icon warning %} Collection Testing
 > The default generated test for output collections always passes because it doesn't test anything.
@@ -488,6 +497,15 @@ Galaxy can be used as an Integrated Development Environment for tools - clunky b
 > For a real test, one or more expected <element.../> tags must be provided so the test really does test something.
 {: .warning}
 
+### Done!
+
+> ### {% icon hands_on %} Hands-on: To safely shut the appliance down
+>
+> 1. Type <kbd>Ctrl-C</kbd> in the terminal where you ran `docker-compose`. Most things will still be there next time you start it.
+>
+> 2. Explore the `export/galaxy/tools/TFtools` directory. There you should find directories with the tools you created during this tutorial, as well as some others that are pre-loaded.
+>
+{: .hands_on}
 
 ### Limits, workarounds and value proposition
 

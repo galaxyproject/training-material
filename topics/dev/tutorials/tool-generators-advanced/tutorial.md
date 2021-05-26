@@ -34,16 +34,8 @@ requirements:
 
 contributors:
   - fubar2
-  - hexylena
 
 ---
-
-> ### Agenda
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
 
 ## The ToolFactory Appliance: A pop-up private Galaxy for scientists and developers who write command line scripts in their work.
 
@@ -103,14 +95,15 @@ automated code generator in a tailored, readily deployed appliance.
     - The cost of this convenience is that ToolFactory is limited to a subset of simple script and package wrappers.
 
 
-# 2. Getting your hands on a ToolFactory Appliance for some hands-on training.
+# Getting your hands on a ToolFactory Appliance for some hands-on training.
 
 - If you found the introductory material relevant to your own needs, you may wish to start the DIY/hands-on part of the tutorial that follows.
 - Install your own ToolFactory Appliance as described below.
 - Start exploring the provided samples to figure out if and how it might help your work.
 - Tutorial material that follows **can only be completed with a working ToolFactory**.
 
->#### Active Tutorial content follows
+
+> ### Agenda
 >
 > 1. TOC
 > {:toc}
@@ -130,91 +123,106 @@ automated code generator in a tailored, readily deployed appliance.
 # Running the ToolFactory
 
 > ### {% icon hands_on %} Hands-on: Launching the Appliance
->>
->> 1. If necessary, [install Docker](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform. Then `pip3 install docker-compose`.
->>
->> 2. Go to [the ToolFactory appliance github repository](https://github.com/fubar2/toolfactory-galaxy-server)
->>
->> 3. Clone it or download the zip and unzip it somewhere handy - such as `~/toolfactory-galaxy-server-main`
->>
->> 4. Change to the compose directory - `cd ~/toolfactory-galaxy-server-main/compose`
->>
->>Something like this should get it started :
->>
->>```
->>git clone https://github.com/fubar2/toolfactory-galaxy-server
->>cd toolfactory-galaxy-server/compose
->>docker-compose pull
->>docker-compose up
->>```
->>
->>
->>
->>    > ### {% icon code-in %} Input: Bash using wget instead of git clone
->>    > ```bash
->>    > wget https://github.com/fubar2/toolfactory-galaxy-server/archive/refs/heads/main.zip
->>    > unzip main.zip
->>    > cd toolfactory-galaxy-server-main/compose
->>    > docker-compose pull
->>    > docker-compose up
->>    > ```
->>
->>Your appliance should be running with a local Galaxy on  [port 8080 of your workstation](http://localhost:8080) after a lot of activity and 5-10 minutes.
->> -  Watch the output and wait until there is no further activity after importing the sample history before logging in for the first time. It takes a long time and the log is an interesting and instructive read.
->> -  Once configured, the `-d` flag can be added to the startup command `docker-compose up -d` to `d`etach the terminal but it is very important to watch the process the first time in case something goes wrong.
->> -  Out of the box login is 'admin@galaxy.org' and the password is 'password'
->>    - This is obviously insecure but convenient and easily changed at first login.
->>    - Or more permanently in the docker-compose.yml if you prefer.
->>
->>- The container `/export` directory is mounted locally at `...compose/export` .
->>
->>## Demonstration tools are the functional documentation
->>
->>- At first login to a new Appliance, you will find the demonstration history ready to explore if you waited a minute for all the Conda activity to die down
->>- It takes a minute or two to import because the dependencies for the ToolFactory must first be installed.
->>- If it's not there, you can import it manually from Zenodo as described in the Welcome page text.
-
->>
->>- To explore an example, open the generated XML job by clicking on the name, and select the {% icon galaxy-refresh %} button from the expanded view
->>    - The form that generated that tool will appear for you to examine.
->>    - Edit the form - add parameters and change the script to suit - and rerun to create an *updated* tool. The history has previous versions.
->>    - Change the tool ID to change the tool name or the newly generated tool will be installed in place of the old one without warning.
->>
->>## To safely shut the appliance down
->> - If the console was not detached using the --detach/-d flag
->>      - `<ctrl><c>` in the console will gracefully shut the server down - takes time but your work will be preserved.
->> - If the -d flag was used,
->>    - `docker-compose down` from the same directory it was started `.../compose`, should shut it down nicely
->>    {: .code-in}
->>    > ### {% icon tip %} Tip: Patience!
->>    > When you run the ToolFactory for the first time inside the container and whenever you run a new tool with new dependencies, it will require some time to build the conda environment.
->>    > Check for Conda or other processes if things seem stuck.
->>    {: .tip}
->>
->>
+>
+> 1. [Install Docker](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform.
+>
+> 2. Then, `pip3 install docker-compose`
+>
+> 2. Go to [the ToolFactory appliance github repository](https://github.com/fubar2/toolfactory-galaxy-server)
+>
+> 3. Clone it or download the zip and unzip it somewhere handy - such as `~/toolfactory-galaxy-server-main`
+>
+> 4. Change to the compose directory and launch it:
+>
+>    ```bash
+>    cd ~/toolfactory-galaxy-server-main/compose`
+>    git clone https://github.com/fubar2/toolfactory-galaxy-server
+>    cd toolfactory-galaxy-server/compose
+>    docker-compose pull
+>    docker-compose up
+>    ```
+>
+>    > ### {% icon tip %} Tip: Bash using wget instead of git clone
+>    > ```bash
+>    > wget https://github.com/fubar2/toolfactory-galaxy-server/archive/refs/heads/main.zip
+>    > unzip main.zip
+>    > cd toolfactory-galaxy-server-main/compose
+>    > docker-compose pull
+>    > docker-compose up
+>    > ```
+>    {: .tip}
+>
+>    > ### {% icon tip %} Appliance tips
+>    >
+>    >  - `pull` is only needed the first time, or if there is a newer version available of the base `docker-galaxy-stable` images or of the toolfactory-configurator.
+>    >  - Add `-d` at the end of the `docker-compose` command to detach the terminal so you can keep working - but only after watching the process the first time please.
+>    >      - It is important to wait until the server stops sending log messages before you first log in. That means everything is ready. The first startup is very complex and takes time.
+>    >  - For the first time start, watching the startup process logs is highly recommended.
+>    >      - You will learn a lot about how a Galaxy server works and see when the Appliance is ready to use.
+>    >  - The docker containers may not fit or run well on an underpowered machine. Multiple CPU cores, 8GB of RAM and fast disk are needed for an enjoyable appliance.
+>    >  - The demonstration history will only be available after logging in with the administrator credentials - `admin@galaxy.org` and password `password`. Check your histories if the smaller data-only history appears when you log in.
+>    >  - Change your admin password and if anyone else has possible network access, the API key `fakekey` used for configuration.
+>    >  - It is important that your appliance is not accessible to any potential miscreants on the local or public internet.
+>    >  - It is recommended for use only as a private disposable desktop development environment.
+>    >    - The Appliance keeps no backup of any work.
+>    >    - The user can backup the export directory if desired.
+>    >    - An institutional server is a safer bet for preserving real research.
+>    >
+>    {: .tip}
+>
+> 5. Your appliance should be running with a local Galaxy on [port 8080 of your workstation](http://localhost:8080) after a fair bit of activity.
+>
+>    -  Out of the box login is 'admin@galaxy.org' and the password is 'password'
+>      - This is obviously insecure but convenient and easily changed at first login.
+>      - Or more permanently in the docker-compose.yml if you prefer.
+>   - The container `/export` directory is mounted locally at `compose/export` so you can find your generated and tested tools for sharing.
+>
+> 6. Demonstration tools are the functional documentation
+>
+>    - At first login you will find the demonstration history ready to explore if you waited for all the Conda activity to die down
+>    - It takes a minute or two to import because the dependencies for the ToolFactory must first be installed.
+>    - Check the histories if a different one appears - two are loaded and there seems some randomness about which appears at login.
+>    - If it's not there, you can import it manually from Zenodo as described in the Welcome page text.
+>    - To explore an example, open the toolshed XML history item by clicking on the name, and select the {% icon galaxy-refresh %} `rerun` button from the expanded view
+>       - The form that generated that tool will appear for you to examine
+>       - Edit the form - add parameters and change the script to suit - and rerun to create an *updated* tool. The history has previous versions.
+>       - Change the tool ID to change the tool name and generate a different tool. *Generating a same-name tool will overwrite the old version*.
+>
+> ## To safely shut the appliance down
+>  - If the console was not detached using the --detach/-d flag
+>       - `<ctrl><c>` in the console will gracefully shut the server down - takes time but your work will be preserved.
+>  - If the -d flag was used,
+>     - `docker-compose down` from the same directory it was started `.../compose`, should shut it down nicely
+>     {: .code-in}
+>     > ### {% icon tip %} Tip: Patience!
+>     > When you run the ToolFactory for the first time inside the container and whenever you run a new tool with new dependencies, it will require some time to build the conda environment.
+>     > Check for Conda or other processes if things seem stuck.
+>     {: .tip}
+>
+>
 {: .hands_on}
 
 > ### {% icon hands_on %} Hands-on: Brief Guide to ToolFactory Appliance Operation
->>
->>## Generating new tools - what happens when you press `execute` on a valid ToolFactory form?
->>
->> - The form is processed and a new tool generated.
->> - The new tool is installed to the Appliance.
->>    - The tool generation process takes a few seconds.
->>    - The `Home` or `Analysis` tab should be selected so the screen is refreshed after building.
->>         - Otherwise the new tool menu will not be loaded so the newly generated tool will not be there
->> - Choose the names thoughtfully and be warned: there are no checks on tool names
->> - Any existing installed tool with the same name will be overwritten permanently.
->> - The history will retain all the generating jobs if you accidentally overwrite a tool.
->> - Rerun the job and adjust the form. Rinse and repeat until ready.
->>
->> - Note that the generated tool has not been run to generate test outputs, so the archive is not complete although the installed tool may work fine.
->>
->> - To generate a "proper" tested toolshed archive, execute the `planemo_test` tool from the ToolFactory tool submenu after selecting the relevant tool XML from the history.
->> - The appliance will run Planemo to generate sample outputs, then run a real test.
->>     - An archive containing the tool with proper test will be returned with a collection containing the testing run log, planemo lint and test reports.
->>     - The archive can be downloaded and shared in the usual ways. It is a normal Galaxy tool that wraps the supplied script and contains a test to validate it.
->>     - It is in `..compose/export/galaxy/testedTFtools/[tool name]` on your workstation because that is mounted as a volume into the container.
+>
+> ## Generating new tools - what happens when you press `execute` on a valid ToolFactory form?
+>
+> - The form is processed and a new tool generated.
+> - The new tool is installed to the Appliance.
+>    - The tool generation process takes a few seconds.
+>    - The `Home` or `Analysis` tab should be selected so the screen is refreshed after building.
+>         - Otherwise the new tool menu will not be loaded so the newly generated tool will not be there
+> - Choose the names thoughtfully and be warned: there are no checks on tool names
+> - Any existing installed tool with the same name will be overwritten permanently.
+> - The history will retain all the generating jobs if you accidentally overwrite a tool.
+> - Rerun the job and adjust the form. Rinse and repeat until ready.
+>
+> - Note that the generated tool has not been run to generate test outputs, so the archive is not complete although the installed tool may work fine.
+>
+> - To generate a "proper" tested toolshed archive, execute the `planemo_test` tool from the ToolFactory tool submenu after selecting the relevant tool XML from the history.
+> - The appliance will run Planemo to generate sample outputs, then run a real test.
+>     - An archive containing the tool with proper test will be returned with a collection containing the testing run log, planemo lint and test reports.
+>     - The archive can be downloaded and shared in the usual ways. It is a normal Galaxy tool that wraps the supplied script and contains a test to validate it.
+>     - It is in `..compose/export/galaxy/testedTFtools/[tool name]` on your workstation because that is mounted as a volume into the container.
 {: .hands_on}
 
 ----
@@ -227,8 +235,7 @@ automated code generator in a tailored, readily deployed appliance.
   - If there is an empty history when you first log in, check the histories after a minute - if still not there, follow the Welcome page instructions to install it manually.
 - They can be examined to learn how the ToolFactory form was configured to generate the tool.
 
-<sup id='section3'>*</sup>
-# 3. Hands-on: Learning to use the ToolFactory
+# Hands-on: Learning to use the ToolFactory
 
 > ### {% icon tip %} Using an Appliance involves dependency installation that may cause long pauses...
 >>- There will be delays as any new dependencies are installed for the first time
