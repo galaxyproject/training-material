@@ -20,7 +20,7 @@ if [[ "$op" == "export" ]]; then
 
 		--- /dev/null
 		+++ b/readme.md
-		@@ -0,0 +1,12 @@
+		@@ -0,0 +1,11 @@
 		+# GIT-GAT
 		+
 		+This is a git repository with the current <abbr title="Galaxy Admin Training">GAT</abbr> history. See the current [GAT schedule](https://gxy.io/gat).
@@ -31,7 +31,6 @@ if [[ "$op" == "export" ]]; then
 		+--- | ---
 		+Date | $(date --rfc-3339=seconds)
 		+Github Run ID | [$GITHUB_RUN_ID](https://github.com/galaxyproject/training-material/actions/runs/$GITHUB_RUN_ID)
-		+Github Action | [$GITHUB_ACTION](https://github.com/galaxyproject/training-material/runs/$GITHUB_ACTION)
 		+GTN Commit | [$GITHUB_SHA](https://github.com/galaxyproject/training-material/tree/$GITHUB_SHA)
 		--
 		2.25.1
