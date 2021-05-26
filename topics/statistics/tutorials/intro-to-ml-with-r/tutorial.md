@@ -34,7 +34,7 @@ questions:
 - How can a create a decision tree?
 - How can I assess a linear regression model?
 objectives:
-- Understand the ML taxonomy and the commonly used machine learning algorithms for analysing "omics" data
+- Understand the ML taxonomy and the commonly used machine learning algorithms for analysing -omics data
 - Understand differences between ML algorithms categories and to which kind of problem they can be applied
 - Understand different applications of ML in different -omics studies
 - Use some basic, widely used R packages for ML
