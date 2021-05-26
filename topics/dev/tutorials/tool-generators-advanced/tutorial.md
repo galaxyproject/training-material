@@ -26,6 +26,7 @@ requirements:
     tutorials:
       - galaxy-intro-short
       - galaxy-intro-101-everyone
+  - type: "internal"
     topic_name: dev
     tutorials:
       - tool-integration
