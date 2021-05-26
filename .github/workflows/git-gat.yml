@@ -20,8 +20,16 @@ jobs:
       - name: Build git-gat repo
         run: |
             bin/knit-automated.sh export;
-            cd /tmp/git-gat/;
-            git init;
-            git am *.patch;
-            rm *.patch;
-            ls -al;
+
+      - name: Build git-gat repo
+        run: |
+            cd /tmp/git-gat/
+            git config --global init.defaultBranch main
+            git config --global user.email "galaxytrainingnetwork@gmail.com"
+            git config --global user.name "The Galaxy Training Network"
+            git init
+            git am *.patch
+            rm -f *.patch
+            ls -al
+            git remote add origin git@github.com:hexylena/git-gat
+            git push -u origin main
