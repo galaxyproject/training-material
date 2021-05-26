@@ -147,7 +147,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >
 >    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
-> 2. Inspect the webpage output of {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} for the `GSM461177` sample
+> 2. Inspect the webpage output of **FastQC** for the `GSM461177` sample
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -166,7 +166,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >       - *"Which tool was used generate logs?"*: `FastQC`
 >       - In *"FastQC output"*
 >         - *"Type of FastQC output?"*: `Raw data`
->         - {% icon param-files %} *"FastQC output"*: `Raw data` files (output of {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %})
+>         - {% icon param-files %} *"FastQC output"*: `Raw data` files (output of **FastQC**)
 >
 > 4. Inspect the webpage output from MultiQC for each FASTQ
 >
@@ -324,8 +324,8 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >
 > 2. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a) %} with the following parameters to map your reads on the reference genome:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as individual datasets)`
->       - {% icon param-files %} *"RNA-Seq FASTQ/FASTA file, forward reads"*: the `Read 1 Output` (outputs of {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5) %})
->       - {% icon param-files %} *"RNA-Seq FASTQ/FASTA file, reverse reads"*: the `Read 2 Output` (outputs of {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5) %})
+>       - {% icon param-files %} *"RNA-Seq FASTQ/FASTA file, forward reads"*: the `Read 1 Output` (outputs of **Cutadapt**)
+>       - {% icon param-files %} *"RNA-Seq FASTQ/FASTA file, reverse reads"*: the `Read 2 Output` (outputs of **Cutadapt**)
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >       - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
 >           - *"Select reference genome"*: `Fly (Drosophila Melanogaster): dm6 Full`
@@ -339,7 +339,7 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >        - *"Which tool was used generate logs?"*: `STAR`
 >        - In *"STAR output"*
 >           - *"Type of STAR output?"*: `Log`
->           - {% icon param-files %} *"STAR output"*: `log` files (output of {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a) %})
+>           - {% icon param-files %} *"STAR output"*: `log` files (output of **RNA STAR**)
 >
 >    > ### {% icon question %} Question
 >    >
@@ -373,7 +373,7 @@ The BAM file contains information for all our reads, making it difficult to insp
 >
 > 1. Install [**IGV**](https://software.broadinstitute.org/software/igv/download) (if not already installed)
 > 2. Start IGV locally
-> 3. Expand the {% icon param-file %} `mapped.bam` file (output of {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a) %}) for `GSM461177`
+> 3. Expand the {% icon param-file %} `mapped.bam` file (output of **RNA STAR**) for `GSM461177`
 > 4. Click on the `local` in `display with IGV local D. melanogaster (dm6)` to load the reads into the IGV browser
 >
 >    > ### {% icon comment %} Comments
@@ -453,14 +453,14 @@ The BAM file contains information for all our reads, making it difficult to insp
 > > ### {% icon hands_on %} Hands-on: Check duplicate reads
 > >
 > > 1. {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2) %}:
-> >    - {% icon param-files %} *"Select SAM/BAM dataset or dataset collection"*: `mapped.bam` files (outputs of {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a) %})
+> >    - {% icon param-files %} *"Select SAM/BAM dataset or dataset collection"*: `mapped.bam` files (outputs of **RNA STAR**)
 > >
 > > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7) %} to aggregate the MarkDuplicates logs:
 > >    - In *"Results"*
 > >      - *"Which tool was used generate logs?"*: `Picard`
 > >      - In *"Picard output"*
 > >         - *"Type of Picard output?"*: `Markdups`
-> >         - {% icon param-files %} *"Picard output"*: `MarkDuplicate metrics` files (output of {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2) %})
+> >         - {% icon param-files %} *"Picard output"*: `MarkDuplicate metrics` files (output of **MarkDuplicates**)
 > >
 > >    > ### {% icon question %} Question
 > >    >
@@ -519,15 +519,15 @@ The BAM file contains information for all our reads, making it difficult to insp
 > >
 > > 2. {% tool [Gene Body Coverage (BAM)](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3) %}:
 > >    - *"Run each sample separately, or combine mutiple samples into one plot"*: `Run each sample separately`
-> >      - {% icon param-files %} *"Input .bam file"*: `mapped.bam` files (outputs of {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a) %})
-> >    - *"Reference gene model"*: BED12 file (output {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %})
+> >      - {% icon param-files %} *"Input .bam file"*: `mapped.bam` files (outputs of **RNA STAR**)
+> >    - *"Reference gene model"*: BED12 file (output **Convert GTF to BED12**)
 > >
 > > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7) %} to aggregate the idxstats logs:
 > >    - In *"Results"*
 > >      - *"Which tool was used generate logs?"*: `RSeQC`
 > >      - In *"RSeQC output"*
 > >         - *"Type of RSeQC output?"*: `gene_body_coverage`
-> >         - {% icon param-files %} *"RSeQC gene_body_coverage output"*: `(text)` files (outputs of {% tool [Gene Body Coverage (BAM)](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3) %})
+> >         - {% icon param-files %} *"RSeQC gene_body_coverage output"*: `(text)` files (outputs of **Gene Body Coverage (BAM)**)
 > >
 > >    > ### {% icon question %} Question
 > >    >
@@ -551,15 +551,15 @@ The BAM file contains information for all our reads, making it difficult to insp
 > > ### {% icon hands_on %} Hands-on: Check the number of reads mapped to each chromosome
 > >
 > > 1. {% tool [Read Distribution](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/2.6.4.1) %}:
-> >    - {% icon param-files %} *"Input .bam/.sam file"*: `mapped.bam` files (outputs of {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a) %})
-> >    - *"Reference gene model"*: BED12 file (output {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %})
+> >    - {% icon param-files %} *"Input .bam/.sam file"*: `mapped.bam` files (outputs of **RNA STAR**)
+> >    - *"Reference gene model"*: BED12 file (output **Convert GTF to BED12**)
 > >
 > > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7) %} to aggregate the idxstats logs:
 > >    - In *"Results"*
 > >      - *"Which tool was used generate logs?"*: `RSeQC`
 > >      - In *"RSeQC output"*
 > >         - *"Type of RSeQC output?"*: `read_distribution`
-> >         - {% icon param-files %} *"RSeQC read_distribution output"*: outputs of {% tool [Read Distribution](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/2.6.4.1) %})
+> >         - {% icon param-files %} *"RSeQC read_distribution output"*: outputs of **Read Distribution**
 > >
 > >    > ### {% icon question %} Question
 > >    >
@@ -655,8 +655,8 @@ Another option is to estimate these parameters with a tool called **Infer Experi
 >    - {% icon param-file %} *"GTF File to convert"*: `Drosophila_melanogaster.BDGP6.87.gtf`
 >
 > 2. {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} to determine the library strandness with:
->    - {% icon param-files %} *"Input .bam file"*: `mapped.bam` files (outputs of {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a) %})
->    - {% icon param-file %} *"Reference gene model"*: BED12 file (output {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %})
+>    - {% icon param-files %} *"Input .bam file"*: `mapped.bam` files (outputs of **RNA STAR**)
+>    - {% icon param-file %} *"Reference gene model"*: BED12 file (output **Convert GTF to BED12**)
 >    - *"Number of reads sampled from SAM/BAM file (default = 200000)"*: `200000`
 >
 {: .hands_on}
@@ -717,7 +717,7 @@ We now run **featureCounts** to count the number of reads per annotated gene.
 > ### {% icon hands_on %} Hands-on: Counting the number of reads per annotated gene
 >
 > 1. {% tool [featureCounts](toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1) %} to count the number of reads per gene:
->    - {% icon param-files %} *"Alignment file"*: `mapped.bam` files (outputs of {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a) %})
+>    - {% icon param-files %} *"Alignment file"*: `mapped.bam` files (outputs of **RNA STAR**)
 >    - *"Specify strand information"*: `Unstranded`
 >    - *"Gene annotation file"*: `in your history`
 >       - {% icon param-file %} *"Gene annotation file"*: `Drosophila_melanogaster.BDGP6.87.gtf`
@@ -734,7 +734,7 @@ We now run **featureCounts** to count the number of reads per annotated gene.
 > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7) %} to aggregate the report:
 >     - In *"Results"*:
 >       - *"Which tool was used generate logs?"*: `featureCounts`
->           - {% icon param-files %} *"Output of FeatureCounts"*: `summary` files (outputs of {% tool [featureCounts](toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1) %})
+>           - {% icon param-files %} *"Output of FeatureCounts"*: `summary` files (outputs of **featureCounts**)
 >
 >    > ### {% icon question %} Question
 >    >
@@ -1275,7 +1275,7 @@ Now we would like to extract the most differentially expressed genes due to the 
 
 > ### {% icon hands_on %} Hands-on: Extract the most differentially expressed genes
 >
-> 1. {% tool [Filter data on any column using simple expressions](https://usegalaxy.eu/root?tool_id=Filter1) %} to extract genes with a significant change in gene expression (adjusted *p*-value below 0.05) between treated and untreated samples:
+> 1. {% tool [Filter data on any column using simple expressions](Filter1) %} to extract genes with a significant change in gene expression (adjusted *p*-value below 0.05) between treated and untreated samples:
 >    - {% icon param-file %} *"Filter"*: the `DESeq2 result file`
 >    - *"With following condition"*: `c7<0.05`
 >
@@ -1299,7 +1299,7 @@ Now we would like to extract the most differentially expressed genes due to the 
 >
 >    We will now select only the genes with an absolute fold change (FC) > 2
 >
-> 3. {% tool [Filter](https://usegalaxy.eu/root?tool_id=Filter1) %} to extract genes with an $$abs(log_{2} FC) > 1$$:
+> 3. {% tool [Filter](Filter1) %} to extract genes with an $$abs(log_{2} FC) > 1$$:
 >    - {% icon param-file %} *"Filter"*: `Genes with significant adj p-value`
 >    - *"With following condition"*: `abs(c3)>1`
 >
@@ -1407,7 +1407,7 @@ To extract the normalized counts for the interesting genes, we join the normaliz
 
 > ### {% icon hands_on %} Hands-on: Extract the normalized counts of the most differentially expressed genes
 > 1. {% tool [Join two Datasets](toolshed.g2.bx.psu.edu/repos/devteam/join/gops_join_1/1.0.0) %} with the following parameters:
->    - {% icon param-file %} *"Join"*: the `Normalized counts` file (output of {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1) %})
+>    - {% icon param-file %} *"Join"*: the `Normalized counts` file (output of **DESeq2**)
 >    - *"using column"*: `Column: 1`
 >    - {% icon param-file %} *"with"*: `Genes with significant adj p-value & abs(FC) > 2`
 >    - *"and column"*: `Column: 1`
@@ -1419,7 +1419,7 @@ To extract the normalized counts for the interesting genes, we join the normaliz
 > 2. {% tool [Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} to extract the columns with the gene IDs and normalized counts:
 >    - *"Cut columns"*: `c1-c8`
 >    - *"Delimited by"*: `Tab`
->    - {% icon param-file %} *"From"*: the joined dataset (output of {% tool [Join two Datasets](toolshed.g2.bx.psu.edu/repos/devteam/join/gops_join_1/1.0.0) %})
+>    - {% icon param-file %} *"From"*: the joined dataset (output of **Join two Datasets**)
 >
 > 5. Rename the output to `Normalized counts for the most differentially expressed genes`
 {: .hands_on}
@@ -1560,22 +1560,22 @@ We have extracted genes that are differentially expressed in treated (PS gene-de
 > 2. {% tool [Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with
 >    - *"Cut columns"*: `c1,c8`
 >    - *"Delimited by"*: `Tab`
->    - {% icon param-file %} *"From"*: the output of the {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %}
+>    - {% icon param-file %} *"From"*: the output of the **Compute**
 >
-> 3. {% tool [Change Case](https://usegalaxy.eu/root?tool_id=ChangeCase) %} with
->    - {% icon param-file %} *"From"*: the output of the previous {% tool [Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %}
+> 3. {% tool [Change Case](ChangeCase) %} with
+>    - {% icon param-file %} *"From"*: the output of the previous **Cut**
 >    - *"Change case of columns"*: `c1`
 >    - *"Delimited by"*: `Tab`
 >    - *"To"*: `Upper case`
 >
 > 4. Rename the output to `Gene IDs and differentially expression`
 >
->    We just generated the first input for **goseq**. As second input for **goseq** we need the gene lengths. We can use here the gene lengths generated by {% tool [featureCounts](toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1) %} and format the gene IDs.
+>    We just generated the first input for **goseq**. As second input for **goseq** we need the gene lengths. We can use here the gene lengths generated by **featureCounts** and format the gene IDs.
 >
-> 5. Drag and drop one of the feature length datasets generated by {% tool [featureCounts](toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1) %} into this history using the {% icon galaxy-columns %} **View all histories**
+> 5. Drag and drop one of the feature length datasets generated by **featureCounts** into this history using the {% icon galaxy-columns %} **View all histories**
 >
-> 6. {% tool [Change Case](https://usegalaxy.eu/root?tool_id=ChangeCase) %} with
->    - {% icon param-file %} *"From"*: the `feature lengths` (output of {% tool [featureCounts](toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1) %})
+> 6. {% tool [Change Case](ChangeCase) %} with
+>    - {% icon param-file %} *"From"*: the `feature lengths` (output of **featureCounts**)
 >    - *"Change case of columns"*: `c1`
 >    - *"Delimited by"*: `Tab`
 >    - *"To"*: `Upper case`
@@ -1625,11 +1625,11 @@ We have now the two required input files for goseq.
     > >
     > > 1. 31 GO terms (0.27%) are over-represented and 83 (0.72%) under-represented
     > >
-    > >    {% tool [Filter](https://usegalaxy.eu/root?tool_id=Filter1) %} on c8 (adjusted p-value for over-represented GO terms) and c9 (adjusted p-value for under-represented GO terms)
+    > >    {% tool [Filter](Filter1) %} on c8 (adjusted p-value for over-represented GO terms) and c9 (adjusted p-value for under-represented GO terms)
     > >
     > > 2. For over-represented, 20 BP, 3 CC and 8 MF and for under-represented, 49 BP, 29 CC and 5 MF
     > >
-    > >    {% tool [Group data](https://usegalaxy.eu/root?tool_id=Grouping1) %} on column 7 (category) and count on column 1 (IDs)
+    > >    {% tool [Group data](Grouping1) %} on column 7 (category) and count on column 1 (IDs)
     > >
     > {: .solution}
     {: .question}
@@ -1693,9 +1693,9 @@ As for the GO terms, 2 files are generated:
     > > ### {% icon solution %} Solution
     > >
     > > 1. The file has 127 lines including an header, so 126 KEGG pathways have been identified.
-    > > 2. 2 KEGG pathways (1.57%) are over-represented, using {% tool [Filter](https://usegalaxy.eu/root?tool_id=Filter1) %} on c6 (adjusted p-value for over-represented KEGG pathways)
+    > > 2. 2 KEGG pathways (1.57%) are over-represented, using **Filter** on c6 (adjusted p-value for over-represented KEGG pathways)
     > > 3. The first 2 KEGG pathways are `01100` and `00010`. By searching on the [KEGG database](https://www.genome.jp/kegg/kegg2.html) for them, we can find more information about these pathways: `01100` corresponds to all metabolic pathways and `00010` to pathway for Glycolysis / Gluconeogenesis.
-    > > 4. 1 KEGG pathways (0.79%) is under-represented, using {% tool [Filter](https://usegalaxy.eu/root?tool_id=Filter1) %} on c7 (adjusted p-value for under-represented KEGG pathways): `03040`, Spliceosome
+    > > 4. 1 KEGG pathways (0.79%) is under-represented, using **Filter** on c7 (adjusted p-value for under-represented KEGG pathways): `03040`, Spliceosome
     > {: .solution}
     {: .question}
 
@@ -1790,8 +1790,8 @@ This step is similar to the step of [counting the number of reads per annotated 
 >
 > 2. {% tool [DEXSeq-Count](toolshed.g2.bx.psu.edu/repos/iuc/dexseq/dexseq_count/1.28.1.0) %}: Count reads using **DEXSeq-Count** with
 >     - *"Mode of operation"*: `Count reads`
->       - {% icon param-files %} *"Input bam file"*: the `BAM` files generated by {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a) %}
->       - {% icon param-file %} *"DEXSeq compatible GTF file"*: the GTF file generated by {% tool [DEXSeq-Count](toolshed.g2.bx.psu.edu/repos/iuc/dexseq/dexseq_count/1.28.1.0) %}
+>       - {% icon param-files %} *"Input bam file"*: the `BAM` files generated by **RNA STAR**
+>       - {% icon param-file %} *"DEXSeq compatible GTF file"*: the GTF file generated by **DEXSeq-Count**
 >       - *"Is library paired end?"*: `Yes`
 >       - *"Is library strand specific?*: `No`
 >       - *"Skip all reads with alignment quality lower than the given minimum value"*:  `10`
@@ -1893,7 +1893,7 @@ Similarly to DESeq2, DEXSeq generates a table with:
 
 > ### {% icon hands_on %} Hands-on:
 >
-> 1. {% tool [Filter](https://usegalaxy.eu/root?tool_id=Filter1) %} to extract exons with a significant differential usage (adjusted *p*-value equal or below 0.05) between treated and untreated samples
+> 1. {% tool [Filter](Filter1) %} to extract exons with a significant differential usage (adjusted *p*-value equal or below 0.05) between treated and untreated samples
 >
 >    > ### {% icon question %} Question
 >    >
