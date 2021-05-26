@@ -95,8 +95,8 @@ These include very basic submission parameters. We want more information!
 >
 >    {% raw %}
 >    ```diff
->    --- galaxyservers.yml.old
->    +++ galaxyservers.yml
+>    --- a/galaxyservers.yml
+>    +++ b/galaxyservers.yml
 >      galaxy_config:
 >        galaxy:
 >    +     job_metrics_config_file: "{{ galaxy_config_dir }}/job_metrics_conf.xml"

@@ -1,27 +1,19 @@
 ---
-layout: base
+layout: page
+title: Search Tutorials
 ---
 
-{% include _includes/default-header.html %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous"></script>
 
-<div class="container main-content">
-<section>
-  <h2> Search Tutorials </h2>
-
-  <div id="search-container">
-    <input type="text" id="search-input" placeholder=" search..." class="nicer">{% icon search %}
-    <div class="search-results row" id="results-container"></div>
-  </div>
-</section>
+<div id="search-container">
+	<input type="text" id="search-input" placeholder=" search..." class="nicer">{% icon search %}
+	<div class="search-results row" id="results-container"></div>
 </div>
 
-<!-- Simple-Jekyll-Search script -->
-<script src="assets/js/search-script.js" type="text/javascript"></script>
 
 <!-- Configuration -->
 <script>
-
-var data= [ {% for topic in site.data %}
+var tutorials = { {% for topic in site.data %}
     {% unless topic[0] == 'contributors' %}
       {% assign topic_material = site.pages | topic_filter:topic[0] %}
       {% assign topic_title = topic[1].title %}
@@ -47,7 +39,7 @@ var data= [ {% for topic in site.data %}
           </div>
           </div>
           {% endcapture %}
-      {
+      "{{ tutorial.url }}": {
         "topic"    : "{{ topic_title }}",
         "title"    : "{{ tutorial.title | escape }}",
         "description": "{{ tutorial.description }}",
@@ -65,28 +57,32 @@ var data= [ {% for topic in site.data %}
     {% unless forloop.last %},{% endunless %}
     {% endunless %}
   {% endfor %}
-]
+};
 
-var sjs = SimpleJekyllSearch({
-  searchInput: document.getElementById('search-input'),
-  resultsContainer: document.getElementById('results-container'),
-  json: data,
-  limit: '25',
-  noResultsText: ("No result found!"),
-  success: function(){},
-  searchResultTemplate: '{entry}'
+
+
+function search(idx, q){
+	var results = idx.search(`*${q}*`).map(x => {
+		return tutorials['/' + x.ref.replaceAll(".md", ".html")];
+	}).filter(x => x !== undefined);
+
+	$("#results-container").html(results.map(x => x.entry));
+}
+
+fetch('{{ site.baseurl }}/search.json')
+	.then(response => response.json())
+	.then(data => {
+		var idx = lunr.Index.load(data);
+
+		var  params = (new URL(document.location)).searchParams;
+		paramQuery = params.get('query');
+		if(paramQuery){
+			document.getElementById('search-input').value = paramQuery;
+			search(idx, paramQuery);
+		}
+
+		$("#search-input").on("change keyup paste", function(){
+			search(idx, $("#search-input").val());
+		})
 });
-
-window.addEventListener('DOMContentLoaded', (event) => {
-    params = (new URL(document.location)).searchParams;
-    paramQuery = params.get('query');
-    if(paramQuery){
-      document.getElementById('search-input').value = paramQuery;
-      sjs.search(paramQuery);
-    }
-});
-
-
 </script>
-
-{% include _includes/default-footer.html %}

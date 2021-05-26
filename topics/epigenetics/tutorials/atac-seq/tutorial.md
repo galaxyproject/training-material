@@ -620,7 +620,7 @@ The input of **plotHeatmap** is a matrix in a hdf5 format. To generate it we use
 
 > ### {% icon hands_on %} Hands-on: Generate the matrix
 >
-> 1. {% tool [computeMatrix](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.0.2.0) %} with the following parameters:
+> 1. {% tool [computeMatrix](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0) %} with the following parameters:
 >    - In *"Select regions"*:
 >        - {% icon param-repeat %} *"Insert Select regions"*
 >            - {% icon param-file %} *"Regions to plot"*: Select the dataset `chr22 genes`
@@ -641,7 +641,7 @@ We will now generate a heatmap. Each line will be a transcript. The coverage wil
 
 > ### {% icon hands_on %} Hands-on: Generate the heatmap
 >
-> 1. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.0.2.0) %} with the following parameters:
+> 1. {% tool [plotHeatmap](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: Select the output of **computeMatrix** {% icon tool %}.
 >    - *"Show advanced output settings"*: `no`
 >    - *"Show advanced options"*: `no`
@@ -691,8 +691,9 @@ Now we will repeat the procedure for CTCF peaks of chr22 in intergenic regions:
 >            - {% icon param-repeat %} *"Insert Colormap to use for each sample"*
 >                - *"Color map to use for the heatmap"*: `Blues` # Or what you want
 >        - *"The x-axis label"*: `distance from peak center (bp)`
->        - *"The y-axis label for the top panel"*: `CTCF peaks` # I don't know why this does not work currently...
+>        - *"The y-axis label for the top panel"*: `CTCF peaks`
 >        - *"Reference point label"*: `peak center`
+>        - *"Labels for the regions plotted in the heatmap"*: `CTCF_peaks`
 >        - *"Did you compute the matrix with more than one groups of regions?"*: `Yes, I used multiple groups of regions`
 >
 {: .hands_on}
@@ -717,10 +718,8 @@ In order to visualise a specific region (e.g. the gene *RAC2*), we can either us
 >                - *"Plot title"*: `Coverage from MACS2 (extended +/-100bp)`
 >                - {% icon param-file %} *"Track file(s) bigwig format"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %} called `MACS2 bigwig`.
 >                - *"Color of track"*: Select the color of your choice
->                - *"Use a different color for negative values"*: `No`
 >                - *"Minimum value"*: `0`
 >                - *"height"*: `5`
->                - *"Choose style of the plot."*: `fill`
 >                - *"Show visualization of data range"*: `Yes`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `NarrowPeak track`
@@ -733,14 +732,11 @@ In order to visualise a specific region (e.g. the gene *RAC2*), we can either us
 >            - *"Choose style of the track"*: `Gene track / Bed track`
 >                - *"Plot title"*: `Genes`
 >                - {% icon param-file %} *"Track file(s) bed or gtf format"*: `chr22 genes`
->                - *"Define color:"*: `manually`
 >                - *"Color of track"*: Select the color of your choice
->                - *"Define border color:"*: `manually`
 >                - *"height"*: `5`
 >                - *"Plot labels"*: `yes`
 >                    - *"Put all labels inside the plotted region"*: `Yes`
 >                    - *"Allow to put labels in the right margin"*: `Yes`
->                - *"Bed style"*: `flybase (blocks with arrow at extremities)`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `NarrowPeak track`
 >                - *"Plot title"*: `CTCF peaks`
