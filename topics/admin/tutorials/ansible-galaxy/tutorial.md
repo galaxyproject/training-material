@@ -882,7 +882,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
 >    +  uwsgi:
->    +    http: 0.0.0.0:5000
+>    +    socket: 127.0.0.1:5000
 >    +    buffer-size: 16384
 >    +    processes: 1
 >    +    threads: 4
@@ -1521,7 +1521,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >     farm: job-handlers:1,2
 >    >     hook-master-start: unix_signal:2 gracefully_kill_them_all
 >    >     hook-master-start: unix_signal:15 gracefully_kill_them_all
->    >     http: 0.0.0.0:5000
+>    >     socket: 127.0.0.1:5000
 >    >     master: true
 >    >     module: galaxy.webapps.galaxy.buildapp:uwsgi_app()
 >    >     mule: lib/galaxy/main.py
@@ -1575,16 +1575,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > ```
 >    {: .code-out.code-max-300}
 >
-{: .hands_on}
-
-> ### {% icon hands_on %} Hands-on: (Optional) Launching uWSGI by hand
->
-> 1. SSH into your server
-> 2. Switch user to Galaxy account (`sudo -iu galaxy`)
-> 3. Change directory into `/srv/galaxy/server`
-> 4. Activate virtualenv (`. ../venv/bin/activate`)
-> 5. `uwsgi --yaml ../config/galaxy.yml`
-> 6. Access at port `<ip address>:5000` once the server has started
 {: .hands_on}
 
 Galaxy is now configured with an admin user, a database, and a place to store data. Additionally we've immediately configured the mules for production Galaxy serving. So we're ready to set up systemd which will manage the Galaxy processes!. Get back to your user with which you have ran ansible-playbook. First by deactivating virtual environment with `deactivate` and then with `exit` leave galaxy user.
@@ -1718,14 +1708,6 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 {: .hands_on}
 
-Galaxy should now be accessible over port :5000, again try connecting to your VM now and checking that Galaxy is working. Note that the welcome page is broken, this is a known issue, and a good reminder to write your own :)
-
-> ### {% icon tip %} "Empty Response"
-> This can happen whenever uWSGI is speaking its own "uwsgi" protocol instead of HTTP. Check that your uwsgi is listening on `http: 0.0.0.0:5000`
->
-> At this step in the tutorial you should be starting Galaxy and uWSGI through systemd. If you need to change something in your configuration, check that Galaxy has been restarted after you re-run the playbook.
-{: .tip}
-
 > ### {% icon details %} Ansible, failures, and notifications
 >
 > Sometimes Ansible tasks will fail. Usually due to misconfiguration, but occasionally due to other issues like your coworker restarted the server while you were doing maintenance, or network failures, or any other possible error. It happens. An unfortunate side effect can be observed in specific situations:
@@ -1745,10 +1727,7 @@ With this we have:
 - PostgreSQL running
 - Galaxy running (managed by systemd)
 
-When we first configured Galaxy, we used the setting `http: 0.0.0.0:5000`, which instructed uWSGI to handle the serving of Galaxy, and to process the HTTP requests itself. This has some overhead and is not as efficient as is desired in production. So we will set up a reverse proxy to handle the HTTP processing, and translate this into the more efficient uWSGI protocol. Additionally it can handle serving static files for us without the requests going through uWSGI, allowing it to spend more time on useful tasks like processing jobs.
-
-Additionally, by moving to NGINX or another reverse proxy, it can automatically compress selected content, we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at `/` and Galaxy at `/galaxy`. Lastly, it can provide authentication as well, as noted in the [External Authentication]({{ site.baseurl }}/topics/admin/tutorials/external-auth/tutorial.html) tutorial.
-
+By moving to NGINX or another reverse proxy, it can automatically compress selected content, we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at `/` and Galaxy at `/galaxy`. Lastly, it can provide authentication as well, as noted in the [External Authentication]({{ site.baseurl }}/topics/admin/tutorials/external-auth/tutorial.html) tutorial.
 
 For this, we will use NGINX. It is possible to configure Galaxy with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache. [Google's PageSpeed Tools](https://developers.google.com/speed/pagespeed/insights/) can identify any compression or caching improvements you can make.
 
@@ -1768,25 +1747,6 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add nginx to playbook"}
->
-> 2. Edit your `group_vars/galaxyservers.yml`, we will update the line that `http: 0.0.0.0:5000` to be `socket: 127.0.0.1:5000`. This will cause uWSGI to only respond to uWSGI protocol, and only to requests originating on localhost.
->
->    {% raw %}
->    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -38,7 +38,7 @@ galaxy_config:
->         object_store_store_by: uuid
->         id_secret: "{{ vault_id_secret }}"
->       uwsgi:
->    -    http: 0.0.0.0:5000
->    +    socket: 127.0.0.1:5000
->         buffer-size: 16384
->         processes: 1
->         threads: 4
->    {% endraw %}
->    ```
->    {: data-commit="Swap listening port"}
 >
 > 3. We need to configure the virtualhost. This is a slightly more complex process as we have to write the proxying configuration ourselves. This may seem annoying, but it is often the case that sites have individual needs to cater to, and it is difficult to provide a truly generic webserver configuration. Additionally, we will enable secure communication via HTTPS using SSL/TLS certificates provided by [certbot](https://certbot.eff.org/).
 >
