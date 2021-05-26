@@ -1,0 +1,1635 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>ToolFactory: Generating Tools From Simple Scripts</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta property="og:title" content="Galaxy Training: ToolFactory: Generating Tools From Simple Scripts" />
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxyproject/dev'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/dev" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Development in Galaxy
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/dev/faqs/" title="Check our FAQs for the Development in Galaxy topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/tool-generators/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/dev/tutorials/tool-generators/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/tool-generators/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/tool-generators/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/tool-generators/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/tool-generators/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/tool-generators/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fdev%2Ftutorials%2Ftool-generators%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/tool-generators/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                    -->
+
+                     <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "ToolFactory: Generating Tools From Simple Scripts",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/main/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Development in Galaxy",
+    "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+    "url": "https://training.galaxyproject.org//training-material/topics/dev/"
+  },
+  "courseCode": "dev / tool-generators / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'ToolFactory: Generating Tools From Simple Scripts' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/dev/tutorials/tool-generators/tutorial.html",
+  "timeRequired": "PT1H",
+  "description": "The questions this  addresses are:\n - What options exist for new-to-Galaxy developers to convert functioning command line scripts into Galaxy tools?\n - Can any command line script I've written be wrapped as a Galaxy tool?\n - Can I make a tool from a script developed in a Galaxy Interactive Environment notebook?\n - How can I get the ToolFactory working locally, since you tell me it should never be exposed on a public server?\n - What is the difference between a hand-crafted tool and a ToolFactory generated one?\n\n\\nThe objectives are:\n - Learn why you might want to use the ToolFactory Appliance\n - Watch a video demonstration and explore the generated code - Hello Galaxy Training Network!\n - Run it locally in Docker.\n - Install and explore the simple examples provided.\n - Modify and re-generate them to see how the changes affect the tool\n - Generate new simple Galaxy tools using your own scripts\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html",
+      "name": "A Short Introduction to Galaxy",
+      "description": "Slides for 'A Short Introduction to Galaxy' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html",
+      "name": "A short introduction to Galaxy",
+      "description": "Hands-on for 'A short introduction to Galaxy' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html",
+      "name": "Galaxy 101 for everyone",
+      "description": "Hands-on for 'Galaxy 101 for everyone' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/dev/tutorials/tool-integration/slides.html",
+      "name": "Tool development and integration into Galaxy",
+      "description": "Slides for 'Tool development and integration into Galaxy' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "http://planemo.readthedocs.io/en/latest/writing_standalone.html",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive"
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/dev/tutorials/interactive-environments/slides.html",
+      "name": "Galaxy Interactive Environments",
+      "description": "Slides for 'Galaxy Interactive Environments' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Ross Lazarus"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Ross Lazarus"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Development in Galaxy",
+      "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+      "url": "https://training.galaxyproject.org//training-material/topics/dev/"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>ToolFactory: Generating Tools From Simple Scripts</h1>
+        
+
+        <div class="contributors-line">By: 
+
+ <a href="/training-material/hall-of-fame/fubar2/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/fubar2" alt="Ross Lazarus">Ross Lazarus</a> <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Helena Rasche">Helena Rasche</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>What options exist for new-to-Galaxy developers to convert functioning command line scripts into Galaxy tools?</p>
+</li>
+            
+            <li><p>Can any command line script I’ve written be wrapped as a Galaxy tool?</p>
+</li>
+            
+            <li><p>Can I make a tool from a script developed in a Galaxy Interactive Environment notebook?</p>
+</li>
+            
+            <li><p>How can I get the ToolFactory working locally, since you tell me it should never be exposed on a public server?</p>
+</li>
+            
+            <li><p>What is the difference between a hand-crafted tool and a ToolFactory generated one?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Learn why you might want to use the ToolFactory Appliance</p>
+</li>
+            
+            <li><p>Watch a video demonstration and explore the generated code - Hello Galaxy Training Network!</p>
+</li>
+            
+            <li><p>Run it locally in Docker.</p>
+</li>
+            
+            <li><p>Install and explore the simple examples provided.</p>
+</li>
+            
+            <li><p>Modify and re-generate them to see how the changes affect the tool</p>
+</li>
+            
+            <li><p>Generate new simple Galaxy tools using your own scripts</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> A short introduction to Galaxy:
+                            
+                                <a href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Galaxy 101 for everyone:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/dev">Development in Galaxy</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Tool development and integration into Galaxy:
+                            
+                                <a href="/training-material/topics/dev/tutorials/tool-integration/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="http://planemo.readthedocs.io/en/latest/writing_standalone.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Galaxy Interactive Environments:
+                            
+                                <a href="/training-material/topics/dev/tutorials/interactive-environments/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1 hour</div>
+            
+
+            
+
+            
+            
+
+            
+            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default"><a href="/training-material/topics/dev/tutorials/tool-generators/slides.html" title="Slides for this tutorial">
+                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides
+                    </a></li>
+                
+
+                
+
+                
+
+                
+
+                
+                
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/dev/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 26, 2021 </div>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <p>This tutorial is for developers and researchers routinely developing their own analysis scripts using bash, Python, Perl, Rscript or other scripting languages.
+It shows a convenient way to bridge the gap between a working command line script and installing a real tool that “wraps” that script as a tool in <span class="notranslate">Galaxy</span>.
+The ToolFactory is a <span class="notranslate">Galaxy</span> tool, run in the usual <span class="notranslate">Galaxy</span> tool interface. It is distributed as the ToolFactory Appliance, ready to run on a local linux workstation or high end laptop using Docker.</p>
+
+<p>This first tutorial is an introduction. It shows how ToolFactory generates a <code class="language-plaintext highlighter-rouge">Hello World!</code> <span class="notranslate">Galaxy</span> tool and how the Appliance can be installed locally.
+The reader will soon learn if it might be adapted to their work. If so, an <a href="/training-material/topics/dev/tutorials/tool-generators-advanced/tutorial.html">Advanced ToolFactory tutorial</a> is
+available if the material here is relevant to your needs and you would like to learn more details about the different kinds of tools and features the ToolFactory offers.</p>
+
+<p>Experienced <span class="notranslate">galaxy</span> tool developers already have specialised tools and training to suit their needs so may not gain much from this material.
+Users new to <span class="notranslate">Galaxy</span> from other scientific disciplines not yet familiar with the manual tool development process,
+may find the ToolFactory appliance useful for familiarising themselves with tool development in <span class="notranslate">Galaxy</span>.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+<ol id="markdown-toc">
+  <li><a href="#tools-tool-wrappers-and-the-toolfactory-in-galaxy" id="markdown-toc-tools-tool-wrappers-and-the-toolfactory-in-galaxy">Tools, tool wrappers and the ToolFactory in <span class="notranslate">Galaxy</span>.</a>    <ol>
+      <li><a href="#galaxy-intereactive-environments-gie" id="markdown-toc-galaxy-intereactive-environments-gie"><span class="notranslate">Galaxy</span> Intereactive Environments (GIE)</a></li>
+      <li><a href="#pathways-from-scripts-to-tools" id="markdown-toc-pathways-from-scripts-to-tools">Pathways from scripts to tools</a></li>
+      <li><a href="#the-toolfactory-appliance" id="markdown-toc-the-toolfactory-appliance">The ToolFactory Appliance</a></li>
+    </ol>
+  </li>
+  <li><a href="#hello-world-with-the-toolfactory-appliance" id="markdown-toc-hello-world-with-the-toolfactory-appliance"><code class="language-plaintext highlighter-rouge">Hello World!</code> with the ToolFactory Appliance</a>    <ol>
+      <li><a href="#installation" id="markdown-toc-installation">Installation</a></li>
+      <li><a href="#exploring-the-toolfactory-in-the-running-appliance" id="markdown-toc-exploring-the-toolfactory-in-the-running-appliance">Exploring the ToolFactory in the running Appliance.</a></li>
+      <li><a href="#hello-world" id="markdown-toc-hello-world">Hello World!</a></li>
+      <li><a href="#the-development-cycle" id="markdown-toc-the-development-cycle">The Development Cycle</a></li>
+      <li><a href="#hello-world-continued" id="markdown-toc-hello-world-continued">Hello World: Continued</a></li>
+      <li><a href="#hello-collections" id="markdown-toc-hello-collections">Hello Collections!</a></li>
+      <li><a href="#done" id="markdown-toc-done">Done!</a></li>
+    </ol>
+  </li>
+  <li><a href="#next-steps" id="markdown-toc-next-steps">Next Steps</a></li>
+  <li><a href="#acknowledgements" id="markdown-toc-acknowledgements">Acknowledgements</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="tools-tool-wrappers-and-the-toolfactory-in-galaxy">Tools, tool wrappers and the ToolFactory in <span class="notranslate">Galaxy</span>.</h1>
+
+<p>Tools are the fundamental building blocks for analyses in <span class="notranslate">Galaxy</span>. Thousands are available in the project tool library from many different kinds of science. <span class="notranslate">Galaxy</span>
+tools can be created from almost any Linux command line software packages or interpreter scripts. What happens
+at tool execution is decoupled from the framework itself, so the framework is agnostic to scientific discipline or coding language.
+This is one reason for rapid uptake in new data intensive scientific areas. All it takes is a set of discipline specific tools to bring a whole new community
+of scientists into <span class="notranslate">Galaxy</span>.</p>
+
+<p>Tool execution is tightly constrained and secured. User supplied parameters and data inputs exposed on the tool form are the only things that can be changed
+before execution. Everything else is fixed. This is ideal for non-programmer <span class="notranslate">Galaxy</span> users who rely on prepared tools for their work. Tools are
+utterly predictable to the point of being as reproducible as any complex computing component can be and this is one of the strengths of the <span class="notranslate">Galaxy</span> framework.</p>
+
+<h2 id="galaxy-intereactive-environments-gie"><span class="notranslate">Galaxy</span> Intereactive Environments (GIE)</h2>
+
+<p>In contrast to tools, GIE allow unconstrained scripting in a <span class="notranslate">Galaxy</span> environment. They offer complete freedom from the constraints of existing tools for
+appropriately skilled researchers and developers, because they allow code to run inside <span class="notranslate">Galaxy</span> that is not available in any existing tool.
+Notebooks can be shared and reused and can even run in workflows.</p>
+
+<p>If a tool that performs exactly the same functions as a GIE script is needed, the code can be extracted and turned into a parameterised command line script.
+Any functional script can be turned into a typical <span class="notranslate">Galaxy</span> tool.</p>
+
+<h2 id="pathways-from-scripts-to-tools">Pathways from scripts to tools</h2>
+
+<p>Any command line script that runs correctly with sample test data input files and parameter settings can be turned into a <span class="notranslate">Galaxy</span> tool.
+These may be derived from notebook scripts that have been consolidated and rewritten to take positional or argparse style parameters and tested
+in a shell using small data input files. Alte<span class="notranslate">rna</span>tively, skilled users can develop scripts and test them using small input data files on the command line
+without using <span class="notranslate">Galaxy</span>.</p>
+
+<p>The <span class="notranslate">Galaxy</span> developers support extensive software infrastructure for manually creating new tools including Planemo and the new <span class="notranslate">Galaxy</span> language server.
+These are complex and powerful with substantial
+learning curves but can be used to turn almost any command line software package into a tool.</p>
+
+<p>For those new to <span class="notranslate">Galaxy</span>, in many simple cases, it may be possible to generate a new tool “wrapping” that script in a few minutes, using a
+specialised <span class="notranslate">Galaxy</span> tool for developers that generates tools from scripts.</p>
+
+<p>This tutorial introduces that unusual tool.</p>
+
+<h2 id="the-toolfactory-appliance">The ToolFactory Appliance</h2>
+
+<p>The ToolFactory is an unusual but useful <span class="notranslate">Galaxy</span> tool. It implements an automated, form driven code generator that installs newly generated tools so you can try them straight away
+in <span class="notranslate">Galaxy</span>. The ToolFactory is distributed as a Docker appliance and can be “popped up” and ready to run in a few minutes.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-the-toolfactory-appliance-provides-a-fully-featured-galaxy-server"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> The ToolFactory appliance provides a fully featured <span class="notranslate">Galaxy</span> server.</h3>
+  <ul>
+    <li>It is a private local desktop <span class="notranslate">Galaxy</span> server, ideal for tinkering and experimentation, learning how the <span class="notranslate">Galaxy</span> server works
+and for developing new tools for new kinds of scientists using <span class="notranslate">Galaxy</span>.</li>
+    <li>Any <span class="notranslate">Galaxy</span> tool from the <span class="notranslate">toolshed</span> can be installed and used.</li>
+    <li>Any reasonably simple script can be generated as a tool.</li>
+    <li>Newly generated tools appear in the tool menu after a refresh, and can be viewed and used as the user will see them.</li>
+    <li>Tool generation jobs can be rerun using the <i class="fas fa-sync-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> button on the history item after editing the form to make changes to the tool the user will see in <span class="notranslate">Galaxy</span>.</li>
+    <li>The Appliance is a Toolfactory flavour of the <a href="https://github.com/bgruening/docker-galaxy-stable/tree/master/compose">docker-<span class="notranslate">galaxy</span>-stable resource</a>.
+      <ul>
+        <li>Documentation on connecting the appliance to a cluster for getting real work done with newly generated tools can be found at that repository.</li>
+        <li>It can be backed up and persisted for as long as required, or it can be treated as a throw-away instance and deleted when no longer needed.</li>
+        <li>There is almost zero technical friction if Docker and docker-compose are already installed. Only time is required.</li>
+        <li>Usefulness will depend on sufficient hardware. Plenty of cores, RAM and disk storage are needed.</li>
+        <li>On a modern workstation or well-endowed laptop, it will perform well out of the box.</li>
+        <li>It will struggle on older consumer hardware with limited RAM and CPU capacity.</li>
+      </ul>
+    </li>
+  </ul>
+</blockquote>
+
+<p>The Appliance was developed for skilled programmers who need new <span class="notranslate">Galaxy</span> tools for their own use or for users they support. Any user comfortable with scientific or general
+scripting languages on a Linux command
+line may find it useful if they ever need a <span class="notranslate">Galaxy</span> tool that wraps a working script. Shell utilities and scripting language interpreters supported by Conda can be used.</p>
+
+<p>Generated tools pass Planemo lint, and are functionally indistinguishable from equivalent manually written tools. A second tool can be used to finalise
+ToolFactory untested archives. It uses Planemo. The tested <span class="notranslate">toolshed</span> archives contain a test based on the test data provided
+at tool generation.</p>
+
+<p>Working generated examples using bash, Python, Rscript, Lisp, Prolog, Perl and sed are provided and described below. Many demonstrate ToolFactory features.
+All can be updated and changed easily, supporting learning by experimenting. More useful tools can be developed and tested using more complex scripts and as many inputs, outputs
+and user supplied parameters as needed by that script.</p>
+
+<p>If you are a scientist/programmer or software developer new to <span class="notranslate">Galaxy</span> and new to the dark arts of <span class="notranslate">Galaxy</span> tool building, this tutorial may be of help.
+It introduces an automated way to convert any useful script into a <span class="notranslate">toolshed</span> ready tool, quickly <em>inside</em> <span class="notranslate">Galaxy</span>.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-alternative-ways-to-generate-tools"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Alte<span class="notranslate">rna</span>tive ways to generate tools:</h3>
+  <ul>
+    <li>The <a href="https://github.com/galaxyproject/galaxy-language-server"><span class="notranslate">Galaxy</span> Language Server</a> is a rapidly developing specialised manual tool building environment with VCS bindings.</li>
+    <li>Planemo can <a href="https://planemo.readthedocs.io/en/latest/writing_standalone.html">generate tool XML</a> with an optional test.
+      <ul>
+        <li>Planemo is recommended for developers who will focus on <span class="notranslate">Galaxy</span> tools. Excellent documentation.</li>
+        <li>Widely used by experienced developers. Requires relatively little time to figure out - <span class="notranslate">Galaxy</span> tool syntax takes longer.</li>
+        <li>No GUI. Command line only. Can create archives with additional steps.</li>
+        <li>Need to pass all i/o and parameter details at once on the command line.</li>
+        <li>Takes longer to learn to use and less accessible to many users than a form driven GUI might be.</li>
+        <li>Manual XML editing required for selects and collections.</li>
+        <li>See the recommended next steps at the end of this tutorial for Planemo related training.</li>
+        <li>The ToolFactory uses planemo to generate test data and to run the test in the companion <code class="language-plaintext highlighter-rouge">planemo_test</code> tool.</li>
+      </ul>
+    </li>
+    <li>Many Unix utilities (sed, awk…) are already available as IUC tools.
+      <ul>
+        <li>They are <code class="language-plaintext highlighter-rouge">generic</code> in the sense that a script is supplied at <strong>run time</strong> by the tool user.</li>
+        <li>The Lisp demonstration uses that model, but it may be desirable that one very specific script is “wrapped” as a reproducible tool.
+          <ul>
+            <li>The user supplies only those I/O and parameter values specified on the ToolFactory form.</li>
+            <li>Nothing else can be changed - just like with most <span class="notranslate">Galaxy</span> tools.</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Choose whichever one fits best for the task at hand.</li>
+  </ul>
+</blockquote>
+
+<h1 id="hello-world-with-the-toolfactory-appliance"><code class="language-plaintext highlighter-rouge">Hello World!</code> with the ToolFactory Appliance</h1>
+
+<p>A <code class="language-plaintext highlighter-rouge">Hello World!</code> <span class="notranslate">Galaxy</span> tool is a good start. It takes no input files, but produces a text output file in the history. A single parameter allows the user to supply the text after
+“Hello…” and the tool will write the combined string to a new history item. Trivial, but an excellent model worth studying in detail because it is easily extended to do
+more useful tasks. The ToolFactory sample wraps a bash script fragment - <code class="language-plaintext highlighter-rouge">echo "Hello $1!"</code> to decorate and return the first parameter passed on the command line. This is a
+generic model for many <span class="notranslate">Galaxy</span> tools with the addition of a few more files and parameters, as discussed below. Bash is used here but any scripting language available in Conda could
+probably be used.</p>
+
+<p>Watch a 6 minute <a href="https://drive.google.com/file/d/1xpkcVGQ0jRdG78Kt-qLwqeFpE3RnSRsK/view?usp=sharing"><code class="language-plaintext highlighter-rouge">Hello world</code> demonstration video</a>
+(Apologies for the poor quality - will try to make a shorter one.)</p>
+
+<p>The form collects all the information needed for a new <span class="notranslate">Galaxy</span> tool. It is long and complex as a result, particularly with many repeated form elements for more complex tools.
+Much of what is collected is used to construct a command line for the script when the generated tool runs.
+Other information such as the name and dependencies are needed to construct the relevant
+sections of the generated XML file in the <span class="notranslate">toolshed</span> archive. The ToolFactory form configured to generate the <code class="language-plaintext highlighter-rouge">Hello</code> example can be viewed below.</p>
+
+<blockquote class="details">
+  <h3 id="details-annotated-toolfactory-form-that-generates-hello-world"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Annotated ToolFactory form that generates <code class="language-plaintext highlighter-rouge">Hello World</code></h3>
+  <figure id="figure-1"><img src="../../images/ToolFactory_hello1form.png" alt="First part of the form" /><figcaption><span class="figcaption-prefix">Figure 1:</span> The first part of the form collects the new tool name and dependencies to be installed. In this case, no Conda dependency is used. bash can be specified as a conda dependency, but it is not very version dependent and usually available. Reproducibility is not an issue for this trivial example. When it is, specify the dependencies and their versions here and the generated tool will always use them. If run in a shell, the bash script <code>echo "Hello $1"</code> in the text box will emit a string that includes the first command line parameter - such as "Hello <span class="notranslate">Galaxy</span> Training Network" This will be collected from STDOUT (configured below) into a new history output file (named and configured below). Positional parameters are chosen so the first parameter on the command line will be emitted when the script runs.</figcaption></figure>
+
+  <figure id="figure-2"><img src="../../images/ToolFactory_hello2form.png" alt="Second part of the form" /><figcaption><span class="figcaption-prefix">Figure 2:</span> The second section shows the new generated history output. It uses the special name <code>STDOUT</code> so the tool will take whatever the bash script writes and create a new text file called <code>Hello_output</code>. When the test is generated, the pass criterion is that the default value <code><span class="notranslate">Galaxy</span> Training Network</code> should appear as the message in <code>hello_output</code>. no difference. Other criteria including <code>sim_size</code> are available for the test applied to each output file. There is no limit (other than your patience) to the number of new generated history outputs. Note that this example has no history input files. Again, any number of these can be specified on the form using the repeat.</figcaption></figure>
+
+  <figure id="figure-3"><img src="../../images/ToolFactory_hello3form.png" alt="Third part of the form" /><figcaption><span class="figcaption-prefix">Figure 3:</span> The third section shows the form settings for the user supplied parameter to be passed in to the bash script on the command line. It will be the first positional parameter because the ordinal position is 1. Argparse parameters are shown in other samples. The help and label text for each input file and user defined parameter will appear on the generated tool form for the user so make them informative. This is where you can change the default from "World" to "<span class="notranslate">Galaxy</span> Training Network" on the sample provided and regenerate it to make a new tool later in the tutorial.</figcaption></figure>
+
+</blockquote>
+
+<p>The generated tool XML appears in the history after the ToolFactory is executed and the tool itself is installed in the <code class="language-plaintext highlighter-rouge">ToolFactory Generated Tools</code> submenu.
+Text on the form is specified in the XML and it all comes from the ToolFactory form.</p>
+
+<blockquote class="details">
+  <h3 id="details-generated-xml-and-tool-form"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Generated XML and tool form</h3>
+
+  <p><a href="https://docs.galaxyproject.org/en/latest/dev/schema.html"><span class="notranslate">Galaxy</span> XML documentation is here</a></p>
+
+  <p>Note how text from the form appears in the generated tool XML</p>
+
+  <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"hello_<span class="notranslate">toolshed</span>"</span> <span class="na">id=</span><span class="s">"hello_<span class="notranslate">toolshed</span>"</span> <span class="na">version=</span><span class="s">"0.01"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!--Source in git at: https://github.com/fubar2/toolfactory--&gt;</span>
+  <span class="c">&lt;!--Created by planemo@<span class="notranslate">galaxy</span>project.org at 22/01/2021 13:48:27 using the <span class="notranslate">Galaxy</span> Tool Factory.--&gt;</span>
+  <span class="nt">&lt;description&gt;</span>Says hello<span class="nt">&lt;/description&gt;</span>
+  <span class="nt">&lt;stdio&gt;</span>
+    <span class="nt">&lt;exit_code</span> <span class="na">range=</span><span class="s">"1:"</span> <span class="na">level=</span><span class="s">"fatal"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/stdio&gt;</span>
+ <span class="nt">&lt;version_command&gt;</span><span class="cp">&lt;![CDATA[echo "0.01"]]&gt;</span><span class="nt">&lt;/version_command&gt;</span>
+ <span class="nt">&lt;command&gt;</span><span class="cp">&lt;![CDATA[bash
+ $runme
+ "$sayhelloto" &gt;</span> $Hello_output]]&gt;
+ <span class="nt">&lt;/command&gt;</span>
+  <span class="nt">&lt;configfiles&gt;</span>
+    <span class="nt">&lt;configfile</span> <span class="na">name=</span><span class="s">"runme"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[
+ echo "Hello $1"
+ ]]&gt;</span><span class="nt">&lt;/configfile&gt;</span>
+  <span class="nt">&lt;/configfiles&gt;</span>
+  <span class="nt">&lt;inputs&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">label=</span><span class="s">"Say hello to"</span> <span class="na">help=</span><span class="s">""</span> <span class="na">value=</span><span class="s">"<span class="notranslate">Galaxy</span> Training Network!!"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"sayhelloto"</span> <span class="na">argument=</span><span class="s">"sayhelloto"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/inputs&gt;</span>
+  <span class="nt">&lt;outputs&gt;</span>
+    <span class="nt">&lt;data</span> <span class="na">name=</span><span class="s">"Hello_output"</span> <span class="na">format=</span><span class="s">"txt"</span> <span class="na">label=</span><span class="s">"Hello_output"</span> <span class="na">hidden=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/outputs&gt;</span>
+  <span class="nt">&lt;tests&gt;</span>
+    <span class="nt">&lt;test&gt;</span>
+      <span class="nt">&lt;output</span> <span class="na">name=</span><span class="s">"Hello_output"</span> <span class="na">value=</span><span class="s">"Hello_output_sample"</span> <span class="na">compare=</span><span class="s">"diff"</span> <span class="na">lines_diff=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"sayhelloto"</span> <span class="na">value=</span><span class="s">"<span class="notranslate">Galaxy</span> Training Network!!"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/test&gt;</span>
+  <span class="nt">&lt;/tests&gt;</span>
+  <span class="nt">&lt;help&gt;</span><span class="cp">&lt;![CDATA[
+
+**What it Does**
+
+ToolFactory demonstration - hello world in <span class="notranslate">Galaxy</span>
+
+
+
+------
+
+
+Script::
+
+    echo "Hello $1"
+
+]]&gt;</span><span class="nt">&lt;/help&gt;</span>
+  <span class="nt">&lt;citations&gt;</span>
+    <span class="nt">&lt;citation</span> <span class="na">type=</span><span class="s">"doi"</span><span class="nt">&gt;</span>10.1093/bioinformatics/bts573<span class="nt">&lt;/citation&gt;</span>
+  <span class="nt">&lt;/citations&gt;</span>
+<span class="nt">&lt;/tool&gt;</span>
+</code></pre></div>  </div>
+
+  <p>Which, when seen loaded into <span class="notranslate">Galaxy</span> looks like an ordinary tool:</p>
+  <figure id="figure-4"><img src="../../images/toolfactory_hello_demo_form.png" alt="Generated form seen by the new tool user" /><figcaption><span class="figcaption-prefix">Figure 4:</span> The form displayed when the generated Hello tool is executed is below. The user sees a text box to enter any string. When executed, it will be echoed to a new history file called <code>Hello_output</code></figcaption></figure>
+  <p>When a user runs the tool and enters some text in the text box, the decorated output will appear in a new history text dataset.
+This may not seem very exciting but it provides a useful pattern that can easily be adapted and extended.
+The script could do something far more interesting and could take unlimited input datasets, user configurable parameters and can produce as many outputs as needed in the history.</p>
+
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-if-this-is-confusing"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> If this is confusing</h3>
+
+  <p>If you are not yet familiar with the basics of <span class="notranslate">Galaxy</span> tools covered in the
+<a href="/training-material/topics/dev/tutorials/tool-integration/slides.html">tool integration training material</a>, the example form and XML
+will be confusing. You may gain more by reviewing the introductory part of that material, and then coming back here?
+It’s a lot to learn and it is complicated. While a form driven code generator can hide much of the complexity of generating the code,
+the user must supply valid inputs for the code to be useful.</p>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-limits-and-scope"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Limits and scope</h3>
+
+  <ul>
+    <li>It works best wrapping simple R/Bash/Python and other interpreted scripts, with few user supplied parameters and a few input and output files.</li>
+    <li>Scripts are easier than some Conda packages
+      <ul>
+        <li>They can easily be modified to respond to default empty parameters as if they had not been passed.</li>
+        <li>As a result, advanced tool building elements such as conditionals and related tricks requiring manual coding, can often be avoided.</li>
+      </ul>
+    </li>
+    <li>On the other hand, many Conda dependencies will require XML conditionals or other tool XML constructs that are not easy to generate automatically.</li>
+    <li>While some simple requirements may be manageable, complex ones will not be suitable for the ToolFactory.</li>
+    <li>Compared to the more usual shell and a text editor, The ToolFactory in <span class="notranslate">Galaxy</span> is a slow and clumsy way to debugging scripts.</li>
+    <li><strong>Starting a new ToolFactory tool with a know good command line and data</strong> is strongly recommended. You will know exactly what to expect from the tool test for a first sanity check.</li>
+    <li>Corrolary: Unless there is a working script that needs to be wrapped into a <span class="notranslate">toolshed</span>-ready <span class="notranslate">Galaxy</span> tool, the ToolFactory is of little use.</li>
+    <li>Generated tools are untested and not recommended for sharing.
+      <ul>
+        <li>Testing is easy - use the Planemo test tool. It may take a while to run depending on Conda dependency installation. It will return the tested tool to your history and a report collection.</li>
+        <li>The planemo_test tool creates a new tested <span class="notranslate">toolshed</span> archive ready for sharing, and a collection with reports.
+          <ul>
+            <li>The Planemo test report is in the collection with a lint report and a log of the entire run.</li>
+            <li><em>Please check the html report to make sure it passed</em> before sharing your new tool.</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</blockquote>
+
+<h2 id="installation">Installation</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-launching-the-appliance"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Launching the Appliance</h3>
+
+  <ol>
+    <li>
+      <p><a href="https://docs.docker.com/engine/install/">Install Docker</a> following the appropriate instructions for your platform.</p>
+    </li>
+    <li>
+      <p>Then, <code class="language-plaintext highlighter-rouge">pip3 install docker-compose</code></p>
+    </li>
+    <li>
+      <p>Go to <a href="https://github.com/fubar2/toolfactory-galaxy-server">the ToolFactory appliance github repository</a></p>
+    </li>
+    <li>
+      <p>Clone it or download the zip and unzip it somewhere handy - such as <code class="language-plaintext highlighter-rouge">~/toolfactory-<span class="notranslate">galaxy</span>-server-main</code></p>
+    </li>
+    <li>
+      <p>Change to the compose directory and launch it:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-clone-the-code"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input Bash: Clone the Code</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://github.com/fubar2/toolfactory-<span class="notranslate">galaxy</span>-server/archive/refs/heads/main.zip
+unzip main.zip
+<span class="nb">cd </span>toolfactory-<span class="notranslate">galaxy</span>-server-main/compose
+docker-compose pull
+docker-compose up
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="tip-appliance-tips"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Appliance tips</h3>
+
+        <ul>
+          <li>For the first time start, watching the startup process logs is highly recommended.
+            <ul>
+              <li>You will learn a lot about how a <span class="notranslate">Galaxy</span> server works and see when the Appliance is ready to use.</li>
+            </ul>
+          </li>
+          <li>The docker containers may not fit or run well on an underpowered machine. Multiple CPU cores, 8GB of RAM and fast disk are needed for an enjoyable appliance.</li>
+          <li>Change your admin password and if anyone else has possible network access, the API key <code class="language-plaintext highlighter-rouge">fakekey</code> used for configuration.</li>
+          <li>It is important that your appliance is not accessible to any potential miscreants on the local or public internet.</li>
+          <li>It is recommended for use only as a private disposable desktop development environment.
+            <ul>
+              <li>The Appliance keeps no backup of any work.</li>
+              <li>The user can backup the export directory if desired.</li>
+              <li>An institutional server is a safer bet for preserving real research.</li>
+            </ul>
+          </li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Your appliance should be running with a local <span class="notranslate">Galaxy</span> on <a href="http://localhost:8080">port 8080 of your workstation</a> after a fair bit of activity.</p>
+
+      <ul>
+        <li>Login with the use<span class="notranslate">rna</span>me <code class="language-plaintext highlighter-rouge">admin@<span class="notranslate">galaxy</span>.org</code> and the password <code class="language-plaintext highlighter-rouge">password</code></li>
+        <li>This is obviously insecure but convenient and easily changed at first login.</li>
+        <li>The container <code class="language-plaintext highlighter-rouge">/export</code> directory is mounted locally at <code class="language-plaintext highlighter-rouge">compose/export</code> so you can find your generated and tested tools for sharing.</li>
+      </ul>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-demonstration-tools-are-the-functional-documentation"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Demonstration tools are the functional documentation</h3>
+
+        <ul>
+          <li>At first login you will find the demonstration history ready to explore if you waited for all the Conda activity to die down</li>
+          <li>It takes a minute or two to import because the dependencies for the ToolFactory must first be installed.</li>
+          <li>Check the histories if a different one appears - two are loaded and there seems some randomness about which appears at login.</li>
+          <li>If it’s not there, you can import it manually from Zenodo as described in the Welcome page text.</li>
+          <li>To explore an example, open the <span class="notranslate">toolshed</span> XML history item by clicking on the name, and select the <i class="fas fa-sync-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> <code class="language-plaintext highlighter-rouge">rerun</code> button from the expanded view
+            <ul>
+              <li>The form that generated that tool will appear for you to examine</li>
+              <li>Edit the form - add parameters and change the script to suit - and rerun to create an <em>updated</em> tool. The history has previous versions.</li>
+              <li>Change the tool ID to change the tool name and generate a different tool. <em>Generating a same-name tool will overwrite the old version</em>.</li>
+            </ul>
+          </li>
+        </ul>
+      </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-patience"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Patience!</h3>
+        <p>When you run the ToolFactory for the first time inside the container and whenever you run a new tool with new dependencies, it will require some time to build the conda environment.
+Check for Conda or other processes if things seem stuck.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="exploring-the-toolfactory-in-the-running-appliance">Exploring the ToolFactory in the running Appliance.</h2>
+
+<ul>
+  <li>The best way to explore the kinds of tasks that can be achieved with simple scripts is to take a look at each sample tool.</li>
+  <li>Note how the various options have been configured and what kinds of scripts this could be used for in your work.</li>
+  <li>The example script can be swapped out for another one known to work and additional new parameters added to suit, to extend the toy examples and create tools of use to your users.</li>
+  <li>Change the tool name on the newly edited form, press <code class="language-plaintext highlighter-rouge">execute</code> and rerun the job to generate a new <span class="notranslate">toolshed</span> archive and test report collection.</li>
+  <li>If you don’t change the tool name before re-generating a tool, the original installed tool will be updated with the new configuration.</li>
+</ul>
+
+<h2 id="hello-world">Hello World!</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-building-the-hello-world-example"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Building the Hello World example</h3>
+
+  <ol>
+    <li>Run <span><strong>ToolFactory</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>  with the following parameters:
+      <ul>
+        <li>“Dependencies, optional script and script interpreter”
+          <ul>
+            <li><em>“Interpreter for the script”</em>: <code class="language-plaintext highlighter-rouge">bash</code></li>
+            <li><em>“Script for executable above to interpret”</em>: <code class="language-plaintext highlighter-rouge">echo "Hello $1"</code></li>
+          </ul>
+        </li>
+        <li>“Data file input, output and settings forming the executable or script command line”
+          <ul>
+            <li><em>“Command line parameter passing method to use”</em>: <code class="language-plaintext highlighter-rouge">positional</code></li>
+            <li>“Input and output files”
+              <ul>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Outputs”</em>
+                  <ul>
+                    <li><em>“Name for this output to appear in new history”</em>: <code class="language-plaintext highlighter-rouge">Hello_output</code></li>
+                    <li><em>“Select the datatype for this output”</em>: <code class="language-plaintext highlighter-rouge">txt</code></li>
+                    <li><em>“Position”</em>: <code class="language-plaintext highlighter-rouge">STDOUT</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>“Arguments”
+              <ul>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Command Line Parameters”</em>
+                  <ul>
+                    <li><em>“Choose the name for this parameter - MUST not be blank!”</em>: <code class="language-plaintext highlighter-rouge">say_hello_to</code></li>
+                    <li><em>“Enter this parameter’s label for the form”</em>: <code class="language-plaintext highlighter-rouge">Say hello to</code></li>
+                    <li><em>“Positional ordinal | argparse argument name”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-first-time-use-involves-a-long-pause-in-some-installations"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> First time use involves a long pause in some installations</h3>
+        <p>The first job takes longer in some installation scenarios because the ToolFactory dependencies are installed before the tool can run.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Execute</p>
+    </li>
+    <li>
+      <p>Explore the outputs - do they match what you expected?</p>
+    </li>
+    <li>
+      <p>Refresh the page - click the home icon (or the “Analysis” tab) - to see the new tool in the <code class="language-plaintext highlighter-rouge">ToolFactory Generated Tools</code> section of the tools menu.</p>
+    </li>
+    <li>
+      <p>Run the tool that has been added - Select the new tool and examine the form. Check that all the changes are as they should be.</p>
+    </li>
+    <li>Test the tool using the <code class="language-plaintext highlighter-rouge">planemo_test</code> tool from the <code class="language-plaintext highlighter-rouge">ToolFactory</code> tool section. This may take 5 or 10 minutes if this is the first test on a new appliance. Subsequent startup will be quicker.
+      <ul>
+        <li>Check the lint report</li>
+        <li>View the planemo test report - is it ok? See if you can open up the details hidden when you first view the page.</li>
+        <li>Take a look at what Planemo did in the report log. It is very, very long and usually involves popping up and tearing down a <span class="notranslate">Galaxy</span> server twice.</li>
+        <li>This can take time, particularly if Conda dependencies are required as they can take a long time to initialise.</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="the-development-cycle">The Development Cycle</h2>
+
+<ol>
+  <li>Test your script on the command line and confirm it works.</li>
+  <li>In the appliance, start a new history and upload all the input samples used on the command line.</li>
+  <li>Open the ToolFactory tool form.</li>
+  <li>Define the tool metadata, dependencies, interpreter and paste the script.</li>
+  <li>Add the required history inputs using the small samples as examples.</li>
+  <li>Specify all the output files to be created in the user’s history.</li>
+  <li>Add any user adjustable command line parameters such as text fields. Look at the samples to see how the ToolFactory form can be used.</li>
+  <li>Execute the tool when the form is completed.</li>
+  <li>When the job is complete, refresh the page (Home icon or Analysis tab). The new tool will be found in the <code class="language-plaintext highlighter-rouge">ToolFactory Generated Tools</code> section, ready to run.</li>
+  <li>Run the new tool and check that it does what you expect, or re-generate after adjusting the form settings as needed.</li>
+  <li>If it needs any changes, open the XML history item created when the tool was generated and use the <i class="fas fa-sync-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> rerun button to
+recreate the ToolFactory form as it was when you last ran it. Adjust as needed and use the tool form<code class="language-plaintext highlighter-rouge">Execute</code> button to run the ToolFactory again with updated settings.</li>
+  <li>Rinse, repeat.</li>
+  <li>When everything is to your satisfaction, start the <code class="language-plaintext highlighter-rouge">planemo_test</code> tool in the ToolFactory menu and select the tool XML to finalise.
+    <ol>
+      <li>A Planemo test will be run</li>
+      <li>Time will depend on Conda dependencies. If none a minute or so.</li>
+      <li>A new tested archive, Planemo test report, Planemo lint output and a log of the test run will be in a new collection in the history when the job finishes.</li>
+      <li>The tested <span class="notranslate">toolshed</span> archive can be downloaded from the history or found in <code class="language-plaintext highlighter-rouge">...compose/export/<span class="notranslate">galaxy</span>/tested_TF_archives/[tool name]</code></li>
+    </ol>
+  </li>
+  <li>Warning: building a tool with the name <code class="language-plaintext highlighter-rouge">mytool</code> will overwrite any previously generated ToolFactory tool with the same name. Persisted jobs in user histories always allow older versions to be recreated if necessary.</li>
+</ol>
+
+<p><span class="notranslate">Galaxy</span> can be used as an Integrated Development Environment for tools - clunky but oddly satisfying. Note this is distinct from debugging the script - that is not at all satisfying in <span class="notranslate">Galaxy</span> unless you like waiting for jobs to finish. A shell is much better for that.</p>
+
+<figure id="figure-5"><img src="../../images/ToolFactory_big_picture.png" alt="Galaxy as an IDE for tools with the ToolFactory" /><figcaption><span class="figcaption-prefix">Figure 5:</span> <span class="notranslate">Galaxy</span> can be used as a tool development environment for users who can write their own scripts as shown in this process overview slide.</figcaption></figure>
+
+<h2 id="hello-world-continued">Hello World: Continued</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-modifying-the-hello-world-example"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Modifying the Hello World example</h3>
+
+  <ol>
+    <li>
+      <p>Rerun the output of your previous job, and make the following changes</p>
+
+      <ul>
+        <li>“Dependencies, optional script and script interpreter”
+          <ul>
+            <li><em>“Script for executable above to interpret”</em>: <code class="language-plaintext highlighter-rouge">echo "Hello $1"; echo "Goodbye $2";</code></li>
+          </ul>
+        </li>
+        <li>“Data file input, output and settings forming the executable or script command line”
+          <ul>
+            <li>“Arguments”
+              <ul>
+                <li>Add a second <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Command Line Parameters”</em>
+                  <ul>
+                    <li><em>“Choose the name for this parameter - MUST not be blank!”</em>: <code class="language-plaintext highlighter-rouge">say_bye_to</code></li>
+                    <li><em>“Enter this parameter’s label for the form”</em>: <code class="language-plaintext highlighter-rouge">Say bye to</code></li>
+                    <li><em>“Positional ordinal | argparse argument name”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="hello-collections">Hello Collections!</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-building-a-file-splitter"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Building a File Splitter</h3>
+
+  <ol>
+    <li>Run <span><strong>ToolFactory</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>  with the following parameters:
+      <ul>
+        <li><em>“New tool ID and title for outputs”</em>: <code class="language-plaintext highlighter-rouge">file_splitter</code></li>
+        <li>“Dependencies, optional script and script interpreter”
+          <ul>
+            <li><em>“Interpreter for the script”</em>: <code class="language-plaintext highlighter-rouge">bash</code></li>
+            <li>
+              <p><em>“Script for executable above to interpret”</em>:</p>
+
+              <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> outputs/<span class="p">;</span>
+<span class="nb">split</span> <span class="nt">--lines</span><span class="o">=</span><span class="nv">$2</span> <span class="nt">--additional-suffix</span><span class="o">=</span>.txt <span class="nv">$1</span> outputs/
+</code></pre></div>              </div>
+            </li>
+          </ul>
+        </li>
+        <li>“Data file input, output and settings forming the executable or script command line”
+          <ul>
+            <li><em>“Command line parameter passing method to use”</em>: <code class="language-plaintext highlighter-rouge">positional</code></li>
+            <li>“Input and output files”
+              <ul>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Inputs”</em>
+                  <ul>
+                    <li><em>“Select an input file from your history”</em>: Choose any XML file from your history, we’ll use this as an example</li>
+                    <li><em>“Select the datatype for this output”</em>: <code class="language-plaintext highlighter-rouge">txt</code></li>
+                    <li><em>“This will become the user prompt for the form so please make it informative”</em>: <code class="language-plaintext highlighter-rouge">File to split</code></li>
+                    <li><em>“Positional: ordinal integer. Argparse: argument name. STDIN if the executable/script expects it”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Output Collections”</em>
+                  <ul>
+                    <li><em>“Select the kind of collection for this output”</em>: <code class="language-plaintext highlighter-rouge">List</code></li>
+                    <li><em>“Label for this collection”</em>: <code class="language-plaintext highlighter-rouge">File Parts</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>“Arguments”
+              <ul>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Command Line Parameters”</em>
+                  <ul>
+                    <li><em>“Choose the name for this parameter - MUST not be blank!”</em>: <code class="language-plaintext highlighter-rouge">lines</code></li>
+                    <li><em>“Select the type for this parameter”</em>: <code class="language-plaintext highlighter-rouge">Integer</code>
+                      <ul>
+                        <li><em>“Enter this parameter’s default integer value”</em>: <code class="language-plaintext highlighter-rouge">4</code></li>
+                      </ul>
+                    </li>
+                    <li><em>“Enter this parameter’s label for the form”</em>: <code class="language-plaintext highlighter-rouge">Number of lines in each split file</code></li>
+                    <li><em>“Positional ordinal | argparse argument name”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Execute</p>
+    </li>
+    <li>
+      <p>Refresh the <span class="notranslate">Galaxy</span> Page and locate your <code class="language-plaintext highlighter-rouge">collections_test</code> tool</p>
+    </li>
+    <li>
+      <p>Run the tool, selecting any text file in your history, e.g. the XML output from the ToolFactory that created this tool.</p>
+    </li>
+    <li>You should see a collection filled with files named <code class="language-plaintext highlighter-rouge">aa</code> to <code class="language-plaintext highlighter-rouge">ao</code> (or so), each with 4 lines from your file.</li>
+  </ol>
+</blockquote>
+
+<p>Hopefully this is a motivating example and you can imagine what else you might be able to accomplish with collection outputs! You could extend this example to split a <code class="language-plaintext highlighter-rouge">.fastq</code> file which could speed up your processing, or you could use collections to store extra images or plots produced by your tool.</p>
+
+<blockquote class="warning">
+  <h3 id="warning-collection-testing"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Collection Testing</h3>
+  <p>The default generated test for output collections always passes because it doesn’t test anything.
+Supplying a test over-ride is recommended for collections.
+For a real test, one or more expected <element...></element...> tags must be provided so the test really does test something.</p>
+</blockquote>
+
+<h2 id="done">Done!</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-to-safely-shut-the-appliance-down"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: To safely shut the appliance down</h3>
+
+  <ol>
+    <li>
+      <p>Type <kbd>Ctrl-C</kbd> in the terminal where you ran <code class="language-plaintext highlighter-rouge">docker-compose</code>. Most things will still be there next time you start it.</p>
+    </li>
+    <li>
+      <p>Explore the <code class="language-plaintext highlighter-rouge">export/<span class="notranslate">galaxy</span>/tools/TFtools</code> directory. There you should find directories with the tools you created during this tutorial, as well as some others that are pre-loaded.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h3 id="limits-workarounds-and-value-proposition">Limits, workarounds and value proposition</h3>
+
+<ul>
+  <li>The ToolFactory Appliance is a slightly clumsy but useable way to create, test and maintain <span class="notranslate">Galaxy</span> tools in a web GUI.</li>
+  <li>The ToolFactory tool is an automated code generator installed in the appliance tool menu</li>
+  <li>No generator can replace manual editing by a skilled developer other than in constrained simple cases.</li>
+  <li>These are common enough in the daily work of most data intensive scientific fields to make a tool generator potentially worth keeping handy.</li>
+  <li>For simple scripts and appropriate Conda packages, a professional <span class="notranslate">Galaxy</span> tool developer can probably do it quickly by hand, but those skills take time to acquire
+and are not widely available, particularly in scientific fields coming to <span class="notranslate">Galaxy</span>.</li>
+  <li>Tools can have command-override and test-override pasted in as in one of the BWA samples.
+    <ul>
+      <li>This can solve some of the limitations but if it is needed, it might be better to prepare the wrapper manually if a skilled developer is available.</li>
+    </ul>
+  </li>
+  <li>The ToolFactory can help new scientists and developers to quickly get some simple tools working for their colleagues while awaiting help with the complex ones.</li>
+</ul>
+
+<h1 id="next-steps">Next Steps</h1>
+
+<p>Expand your knowledge further with the <a href="/training-material/topics/dev/tutorials/tool-generators-advanced/tutorial.html">Advanced ToolFactory tutorial</a></p>
+
+<h1 id="acknowledgements">Acknowledgements</h1>
+
+<p>This tutorial is based on the work of thousands of contributers to the <span class="notranslate">Galaxy</span> project over the last 15 years or so. Thanks all!</p>
+
+<p>Special thanks are owed to:</p>
+
+<ul>
+  <li><a href="/training-material/hall-of-fame/mvdbeek/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mvdbeek" alt="Marius van den Beek" />Marius van den Beek</a> for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.</li>
+  <li><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Helena Rasche" />Helena Rasche</a> for
+    <ul>
+      <li>review and revisions to the tutorial and associated code.</li>
+      <li>elegantly generated lint-free XML provided by <a href="https://github.com/hexylena/galaxyxml"><span class="notranslate">galaxy</span>ml code</a></li>
+    </ul>
+  </li>
+</ul>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>The ToolFactory is a fully automated Galaxy tool generator for scientists and developers who routinely write command line scripts.</p>
+</li>
+                            
+                            <li><p>It can turn a working command line script into a proper Galaxy tool with a test in a few minutes.</p>
+</li>
+                            
+                            <li><p>It automatically generates simple, complete Galaxy tools from information provided by filling in a normal Galaxy form in the familiar UI.</p>
+</li>
+                            
+                            <li><p>It is installed as a docker-galaxy-stable flavour - the ToolFactory Appliance.</p>
+</li>
+                            
+                            <li><p>The Appliance is a Galaxy server running in Docker, suited to any modern Linux workstation or high-end laptop.</p>
+</li>
+                            
+                            <li><p>Useful for learning about system administration or framework code, and for developing tools - all on your own private pop-up server.</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/dev/faqs/">FAQ page for the Development in Galaxy topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                    
+
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=ToolFactory: Generating Tools From Simple Scripts (Development in Galaxy)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Ross Lazarus, Helena Rasche, 2021 <b>ToolFactory: Generating Tools From Simple Scripts (Galaxy Training Materials)</b>. <a href="/training-material/topics/dev/tutorials/tool-generators/tutorial.html">/training-material/topics/dev/tutorials/tool-generators/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{dev-tool-generators,
+    author = "Ross Lazarus and Helena Rasche",
+    title = "ToolFactory: Generating Tools From Simple Scripts (Galaxy Training Materials)",
+    year = "2021",
+    month = "05",
+    day = "26"
+    url = "\url{/training-material/topics/dev/tutorials/tool-generators/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+        <blockquote class="agenda follow-up">
+            <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+            <ul>
+                
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/dev">Development in Galaxy</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> ToolFactory: Generating Tools From More Complex Scripts:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/dev/tutorials/tool-generators-advanced/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+        </blockquote>
+        
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Ross Lazarus, Helena Rasche)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/dev/tutorials/tool-generators/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

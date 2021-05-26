@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>Introduction to the ToolFactory tutorial.</title>
+    
+        <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="Galaxy is an open-source project. Everyone can contribute..." />
+    <meta property="og:title" content="Galaxy Training: Introduction to the ToolFactory tutorial." />
+    <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute..." />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    <script type="application/ld+json">
+      
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Introduction to the ToolFactory tutorial.",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/main/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Development in Galaxy",
+    "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+    "url": "https://training.galaxyproject.org//training-material/topics/dev/"
+  },
+  "courseCode": "dev / tool-generators / slides",
+  "learningResourceType": "slides",
+  "name": "Slides for 'Introduction to the ToolFactory tutorial.' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/dev/tutorials/tool-generators/slides.html",
+  "description": "The objectives are:\n - Learn whether the ToolFactory tutorial is useful for your work in Galaxy\n\n",
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Ross Lazarus"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Ross Lazarus"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Development in Galaxy",
+      "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+      "url": "https://training.galaxyproject.org//training-material/topics/dev/"
+    }
+  ]
+}
+    </script>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/dev" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/tool-generators/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+
+# Introduction to the ToolFactory tutorial.
+
+
+<div class="contributors-line">
+
+
+ <a href="/training-material/hall-of-fame/fubar2/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/fubar2" alt="Ross Lazarus">Ross Lazarus</a>
+
+
+</div>
+
+
+
+
+.footnote[Tip: press `P` to view the presenter notes]
+
+???
+Presenter notes contain extra information which might be useful if you
+intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other. Useful when presenting.
+
+---
+
+
+
+
+
+
+
+
+### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
+
+
+- Learn whether the ToolFactory tutorial is useful for your work in Galaxy
+
+
+---
+
+
+# What is the ToolFactory?
+
+- The ToolFactory is a specialised Galaxy tool.
+- It generates new tools from working command line scripts.
+- Generated tools work the same way manually prepared Galaxy tools do.
+- They can be installed from a toolshed and used in workflows.
+- The script is run each time the tool is executed.
+
+???
+
+The ToolFactory is a Galaxy tool for developers and users who routinely write their own analysis code.
+It generates fully functional, toolshed-ready, tools.
+Supplied with a working command line script, it can generate a new Galaxy tool that &quot;wraps&quot; that script.
+
+
+---
+
+# BYO programming skills
+
+- If you write useful scripts and want to make them into new tools, the ToolFactory may help.
+- Command line scripting skills are required to use the ToolFactory.
+- Scripting skills are a required prerequisite for this training material.
+
+???
+
+Programming skills are required to make new tools with the ToolFactory.
+If you want to make new Galaxy tools from your own analysis scripts, it may be useful in your work.
+
+---
+
+# Start with a **working command line script**
+
+- Bash, Rscript, Python,Lisp,....,any interpreter in Conda.
+- All the parameter settings, data input file paths and output file paths are passed on the **command line**.
+- The script must correctly handle the passed parameters.
+- **python3 x.py --fin x.pasta --cooked &quot;al dente&quot; --sauce &quot;tomato,onion, garlic and basil&quot;**
+- It **works** if you can run a command like the one above in a Linux shell and get useful, correct outputs.
+
+???
+
+The ToolFactory can help you turn working scripts, into new Galaxy tools.
+The tool cannot work if the script was broken to start with.
+Without a working script, it is about as useful as a chocolate teapot.
+
+---
+
+# What does the developer do ?
+
+- Make the script work correctly in a shell.
+- Upload the samples used into a new Galaxy history.
+- Paste the script. Describe the inputs, outputs and parameters for the script.
+- A completed ToolFactory form specifies a new tool.
+- This has the tool parameters such as input files, output files and user specified values.
+- Each input defined requires a small sample selected from the history datasets for a test.
+
+???
+
+The developer prepares the working script and samples.
+The ToolFactory tool is started in Galaxy after uploading all the sample input files.
+It collects all the information needed to generate a new Galaxy tool.
+The samples become the inputs for the built in test.
+
+---
+
+# What happens when the ToolFactory is executed?
+
+- The information from the form drives a code generator.
+- The Galaxyxml library generates the wrapper XML
+- Planemo is used to test the tool.
+- Reports and the new toolshed archive are written to the history
+- This is all automated.
+
+???
+
+A toolshed ready archive is generated in the history.
+The planemo test report, a copy of the generated XML wrapper and a log file are also available.
+Persisted jobs can be re-run, so the new tool can be adjusted and regenerated at any time.
+
+
+---
+
+# Limited scope but easy to figure out
+
+- A code generator is limited in scope compared to the Galaxy command line tool development infrastructure.
+- As a Galaxy tool, the ToolFactory is limited to simple scripts but it takes far less time to become productive.
+- The job that generates a tool can be re-run like any other persisted Galaxy job
+- This allows the tool form to be adjusted and the generated tool updated at any time if changes are needed.
+
+???
+
+Although a code generator is easy to learn to use, it is limited to relatively simple Galaxy tools.
+Many Conda packages require complexities that no code generator can provide. Hand written code is required.
+Scripts are often easier. The code is available so can sometimes be adapted to work around some of the limitations of a code generator.
+
+---
+
+# The big picture
+
+![Galaxy as an IDE for tools with the ToolFactory](../../images/ToolFactory_big_picture.png)
+
+???
+
+Galaxy can serve as a persistent integrated tool development environment.
+The developer supplies all the details for the new tool on the form, including a known good script with test data.
+Clicking &quot;Execute&quot; on the form runs a Galaxy job.
+It generates and then tests the new tool, writing it to the history.
+ToolFactory jobs are like any other jobs - clicking the redo button will recreate the form used.
+The developer can return to adjust the form and generate an updated tool at any time.
+In this way, tools can easily be maintained as long as the job that generates them is saved.
+
+---
+
+# If you got this far
+
+- [There is a tutorial to follow](./tutorial.html)
+- It introduces the ToolFactory in more detail, shows how to run your own and how to explore the samples to learn how to use it.
+
+???
+
+If you would like to learn more about the ToolFactory, there is a far more detailed introduction and hands-on tutorial available.
+We hope you find the ToolFactory in Galaxy useful for your work.
+
+
+
+
+---
+### &lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
+
+
+- The ToolFactory is an unusual Galaxy tool for developers
+
+- It uses the usual Galaxy tool interface
+
+- It can turn a simple script into a Galaxy tool
+
+- Samples are provided using python, perl, bash, sed and Rscript
+
+- Any system utility or scripting language in Conda could be used to interpret a script
+
+- Generated tools are toolshed-ready and have a built in test
+
+- The test is based on the sample data provided on the ToolFactory form
+
+- Generated code passes planemo linting
+
+- A code generator can only cope with a subset of all possible tools
+
+- The ToolFactory is very efficient for simple scripts requiring only a few parameters and I/O files
+
+
+
+
+
+
+
+---
+
+## Thank you!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors!
+
+
+<div class="contributors-line">
+
+
+ <a href="/training-material/hall-of-fame/fubar2/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/fubar2" alt="Ross Lazarus">Ross Lazarus</a>
+
+
+</div>
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false,}});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+
+  </body>
+</html>
