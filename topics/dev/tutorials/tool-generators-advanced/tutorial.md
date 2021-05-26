@@ -1013,7 +1013,7 @@ interfering with it's own independent repository update. The result is not prett
 - Allowing two tests to run at once has proven to be unstable so the Appliance is currently limited to one.
 
 # Your turn! Please help improve this community resource!
-- tell Ross ([mailto:ross.lazarus@gmail.com](ross.lazarus@gmail.com)) what went well and what could be improved for the benefit of future students
+- tell Ross ([ross.lazarus@gmail.com](mailto:ross.lazarus@gmail.com)) what went well and what could be improved for the benefit of future students
 - This tutorial has had almost no testing yet.
 - It is in pre-review.
 - A PR will soon appear once we get the showstoppers sorted.
