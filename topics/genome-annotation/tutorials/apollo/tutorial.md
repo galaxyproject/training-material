@@ -96,20 +96,20 @@ In this tutorial we have obtained some data from NCBI related to [*Escherichia c
 >    ```
 >    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/augustus.gff3	Augustus genes	gff3
 >    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/blastp_vs_swissprot_2018-01-22.blastxml	Blastp vs swissprot	blastxml
->    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/BWA-MEM_K12_Coverage.bigwig	BWA-MEM_K12_Coverage	bigwig
->    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/BWA-MEM_K12_Mapping.bam	BWA-MEM_K12_Mapping	bam
->    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/BWA-MEM_O104_Coverage.bigwig	BWA-MEM_O104_Coverage	bigwig
->    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/BWA-MEM_O104_Mapping.bam	BWA-MEM_O104_Mapping	bam
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/BWA-MEM_K12_Coverage.bigwig	BWA-MEM K12 Coverage	bigwig
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/BWA-MEM_K12_Mapping.bam	BWA-MEM K12 Mapping	bam
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/BWA-MEM_O104_Coverage.bigwig	BWA-MEM O104 Coverage	bigwig
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/BWA-MEM_O104_Mapping.bam	BWA-MEM O104 Mapping	bam
 >    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/E._coli_str_K-12substr_MG1655_100kb_subset.fasta	Genome	fasta
->    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/K12_Variants.vcf	K12_Variants	vcf
->    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/NCBI_AnnotWriter_Genes.gff3	NCBI_AnnotWriter_Genes	gff3
->    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/NCBI_AnnotWriter_Proteins.fasta	NCBI_AnnotWriter_Proteins	fasta
->    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/O104_H4_LASTZ_Alignment.bed	O104_H4_LASTZ_Alignment	bed
->    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/O104_Variants.vcf	O104_Variants	vcf
->    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/TopHat_SRR1927169_rep1.bam	TopHat_SRR1927169_rep1	bam
->    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/TopHat_SRR1927169_rep1_Coverage.bigwig	TopHat_SRR1927169_rep1_Coverage	bigwig
->    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/TopHat_SRR1927170_rep2.bam	TopHat_SRR1927170_rep2	bam
->    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/TopHat_SRR1927170_rep2_Coverage.bigwig	TopHat_SRR1927170_rep2_Coverage	bigwig
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/K12_Variants.vcf	K12 Variants	vcf
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/NCBI_AnnotWriter_Genes.gff3	NCBI AnnotWriter Genes	gff3
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/NCBI_AnnotWriter_Proteins.fasta	NCBI AnnotWriter Proteins	fasta
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/O104_H4_LASTZ_Alignment.bed	O104 H4 LASTZ_Alignment	bed
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/O104_Variants.vcf	O104 Variants	vcf
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/TopHat_SRR1927169_rep1.bam	TopHat SRR1927169 rep1	bam
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/TopHat_SRR1927169_rep1_Coverage.bigwig	TopHat SRR1927169 rep1_Coverage	bigwig
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/TopHat_SRR1927170_rep2.bam	TopHat SRR1927170 rep2	bam
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/TopHat_SRR1927170_rep2_Coverage.bigwig	TopHat SRR1927170 rep2_Coverage	bigwig
 >    ```
 > 4. Click **Build**
 >
