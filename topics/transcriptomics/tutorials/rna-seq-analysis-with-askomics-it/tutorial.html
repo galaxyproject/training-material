@@ -290,7 +290,7 @@
   "name": "Hands-on for 'RNA-Seq analysis with AskOmics Interactive Tool' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/tutorial.html",
   "timeRequired": "PT2H",
-  "description": "The questions this  addresses are:\n - How to integrate RNA-Seq results with other datasets using AskOmics?\n - How to query these datasets to answer a biological question?\n - How to exploit distant SPARQL endpoint to retrieve information?\n\n\\nThe objectives are:\n - Launch an AskOmics Interactive Tool\n - Integrate RNA-Seq and reference datasets into AskOmics\n - Create a complex query to get over-expressed genes, their location on the reference genome, and check if they are included in a known QTL\n - Complete the query to get the human homologs and their location using neXtProt database\n\n",
+  "description": "The questions this  addresses are:\n - How to integrate RNA-Seq results with other datasets using AskOmics?\n - How to query these datasets to answer a biological question?\n - How to exploit a distant SPARQL endpoint to retrieve information?\n\n\\nThe objectives are:\n - Launch an AskOmics Interactive Tool\n - Integrate RNA-Seq and reference datasets into AskOmics\n - Create a complex query to get over-expressed genes, their location on the reference genome, and check if they are included in a known QTL\n - Complete the query to get the human homologs and their location using neXtProt database\n\n",
   "coursePrerequisites": [
     {
       "@type": "CreativeWork",
@@ -394,6 +394,10 @@
     {
       "@type": "Person",
       "name": "Olivier Dameron"
+    },
+    {
+      "@type": "Person",
+      "name": "Mateo Boudet"
     }
   ],
   "contributor": [
@@ -412,6 +416,10 @@
     {
       "@type": "Person",
       "name": "Olivier Dameron"
+    },
+    {
+      "@type": "Person",
+      "name": "Mateo Boudet"
     }
   ],
   "about": [
@@ -438,7 +446,7 @@
 
         <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/xgaia/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/xgaia" alt="Xavier Garnier">Xavier Garnier</a> <a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/abretaud" alt="Anthony Bretaudeau">Anthony Bretaudeau</a> <a href="/training-material/hall-of-fame/annesiegel/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/annesiegel" alt="Anne Siegel">Anne Siegel</a> <a href="/training-material/hall-of-fame/odameron/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/odameron" alt="Olivier Dameron">Olivier Dameron</a>
+ <a href="/training-material/hall-of-fame/xgaia/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/xgaia" alt="Xavier Garnier">Xavier Garnier</a> <a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/abretaud" alt="Anthony Bretaudeau">Anthony Bretaudeau</a> <a href="/training-material/hall-of-fame/annesiegel/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/annesiegel" alt="Anne Siegel">Anne Siegel</a> <a href="/training-material/hall-of-fame/odameron/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/odameron" alt="Olivier Dameron">Olivier Dameron</a> <a href="/training-material/hall-of-fame/mboudet/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mboudet" alt="Mateo Boudet">Mateo Boudet</a>
 
 </div>
 
@@ -453,7 +461,7 @@
             <li><p>How to query these datasets to answer a biological question?</p>
 </li>
             
-            <li><p>How to exploit distant SPARQL endpoint to retrieve information?</p>
+            <li><p>How to exploit a distant SPARQL endpoint to retrieve information?</p>
 </li>
             
             </ul>
@@ -688,7 +696,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 12, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 21, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -701,10 +709,10 @@
                     <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <!-- AskOmics intro -->
-<p>AskOmics is a web application for data integration and querying using the Semantic Web technologies. It helps users to convert multiple data sources (CSV/TSV files, GFF and <span class="notranslate">BED</span> annotation) into “RDF triples” and store them in a specific kind of database: an “RDF triplestore”. Under this form, data can then be queried using a specific language: “SPARQL”. AskOmics hides the complexty of these technologies and and allows to perform complex queries using a user-friendly interface.</p>
+<p>AskOmics is a web application for data integration and querying using the Semantic Web technologies. It helps users to convert multiple data sources (CSV/TSV files, GFF and <span class="notranslate">BED</span> annotation) into “RDF triples” and store them in a specific kind of database: an “RDF triplestore”. Under this form, data can then be queried using a specific language: “SPARQL”. AskOmics hides the complexity of these technologies and allows to perform complex queries using a user-friendly interface.</p>
 
 <!-- AskOmics for RNA-Seq -->
-<p>AskOmics comes useful for cross-referencing results datasets with various reference data. For example, in <span class="notranslate">RNA</span>-Seq studies, we often need to filter the results on the fold change and the p-value, to get the most significant differentially expressed genes. If you are studying a particular phenotype and already know the position of some QTL associated to this phenotype, you would then want to find the positions of the differentially expressed genes and determine which gene is located within one of those QTL. Finally, you would want to know if these genes have human homologs, and use the neXtProt database to get the location of the proteins coded by the homologs. The whole process involves several tools to parse and manipulate the different data format, and to map datasets on each other. AskOmics offer a solution to 1) automatically convert the multiple formats to RDF, 2) use a user-friendly interface to perform complex SPARQL queries on the RDF datasets to find the genes you are interested in, and 3) connect exte<span class="notranslate">rna</span>l SPARQL databases and link exte<span class="notranslate">rna</span>l data with your own.</p>
+<p>AskOmics comes in useful for cross-referencing results datasets with various reference data. For example, in <span class="notranslate">RNA</span>-Seq studies, we often need to filter the results on the fold change and the p-value, to get the most significant differentially expressed genes. If you are studying a particular phenotype and already know the position of some QTL associated to this phenotype, you would then want to find the positions of the differentially expressed genes and determine which gene is located within one of those QTL. Finally, you would want to know if these genes have human homologs, and use the neXtProt database to get the location of the proteins coded by the homologs. The whole process involves several tools to parse and manipulate the different data format, and to map datasets on each other. AskOmics offer a solution to 1) automatically convert the multiple formats to RDF, 2) use a user-friendly interface to perform complex SPARQL queries on the RDF datasets to find the genes you are interested in, and 3) connect exte<span class="notranslate">rna</span>l SPARQL databases and link exte<span class="notranslate">rna</span>l data with your own.</p>
 
 <!-- The data -->
 <p>In this tutorial, we will use results from a differential <span class="notranslate">expression</span> analysis. This file is provided for you below. You could also generate the file yourself, by following the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html"><span class="notranslate">RNA</span>-Seq counts to gene tutorial</a>. The file used here was generated from limma-voom but you could use a file from any <span class="notranslate">RNA</span>-seq differential <span class="notranslate">expression</span> tool, such as edgeR or DESeq2, as long as it contains the required columns (see below).</p>
@@ -959,7 +967,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
     <li>Edit attribute names and types:
       <ul>
         <li>change <code class="language-plaintext highlighter-rouge">symbol</code> to <code class="language-plaintext highlighter-rouge">Gene Symbol</code> and set type to <em>entity</em></li>
-        <li>change <code class="language-plaintext highlighter-rouge">ensembl</code> to <code class="language-plaintext highlighter-rouge">linkedTo@gene</code> and set type to <em>Symetric relation</em></li>
+        <li>Set <code class="language-plaintext highlighter-rouge">to mouse genes@gene</code> type to <em>Symetric relation</em></li>
       </ul>
     </li>
     <li>Click on the <strong>Integrate (private dataset)</strong> button</li>
@@ -992,7 +1000,6 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
       <ul>
         <li>change <code class="language-plaintext highlighter-rouge">HomoloGene ID</code> to <code class="language-plaintext highlighter-rouge">Homolog Group</code> and set type to <em>start entity</em></li>
         <li>set <code class="language-plaintext highlighter-rouge">Common Organism Name</code> type to <em>category</em></li>
-        <li>set <code class="language-plaintext highlighter-rouge">Chr</code> type to <em>Reference</em></li>
         <li>change <code class="language-plaintext highlighter-rouge">Symbol</code> to <code class="language-plaintext highlighter-rouge">linkedTo@Gene Symbol</code> and set type to <em>Directed relation</em></li>
         <li>Keep the other column names and set their types to <em>text</em></li>
       </ul>
@@ -1064,6 +1071,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
     <li>Display <code class="language-plaintext highlighter-rouge">logFC</code> and <code class="language-plaintext highlighter-rouge">adj.P.val</code> by clicking on the eye icon</li>
     <li><strong>Run &amp; preview</strong></li>
   </ol>
+  <figure id="figure-12"><img src="images/preview_results.png" alt="preview results" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Results preview</figcaption></figure>
 </blockquote>
 
 <p><strong>Run &amp; preview</strong> launch the query with a limit of 30 rows returned. We use this button to get an idea of the results returned.</p>
@@ -1081,6 +1089,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
     <li>Filter <code class="language-plaintext highlighter-rouge">adj.P.val</code> with <code class="language-plaintext highlighter-rouge">≤ 0.05</code></li>
     <li><strong>Run &amp; preview</strong></li>
   </ol>
+  <figure id="figure-13"><img src="images/preview_results_filtered.png" alt="preview filtered results" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Filtered results preview</figcaption></figure>
 </blockquote>
 
 <p>The preview shows only significantly over-expressed genes.</p>
@@ -1099,7 +1108,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
     <li>Instantiate <code class="language-plaintext highlighter-rouge">gene</code> by clicking on the <code class="language-plaintext highlighter-rouge">gene</code> node</li>
     <li><strong>Run &amp; preview</strong></li>
   </ol>
-  <figure id="figure-12"><img src="images/preview_results.png" alt="preview results" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Results preview</figcaption></figure>
+  <figure id="figure-14"><img src="images/gene_query.png" alt="gene query" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Gene query</figcaption></figure>
 </blockquote>
 
 <p>Results now show the Ensembl id of our over-expressed genes. We have now access to all the information about the <code class="language-plaintext highlighter-rouge">gene</code> entity contained in the GFF file. For example, we can filter on chromosome and display chromosome and strand to get information about gene location.</p>
@@ -1112,6 +1121,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
     <li>Filter <code class="language-plaintext highlighter-rouge">strand</code> by selecting <code class="language-plaintext highlighter-rouge">+</code> strand</li>
     <li><strong>Run &amp; preview</strong></li>
   </ol>
+  <figure id="figure-15"><img src="images/gene_filter.png" alt="gene filter" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Gene filtering</figcaption></figure>
 </blockquote>
 
 <h3 id="query-on-the-position-of-elements-on-the-genome">Query on the position of elements on the genome.</h3>
@@ -1141,7 +1151,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
     <li>Check that the relation is <code class="language-plaintext highlighter-rouge">gene</code> <code class="language-plaintext highlighter-rouge">included in</code> <code class="language-plaintext highlighter-rouge">QTL</code> <code class="language-plaintext highlighter-rouge">on the same reference</code> with <code class="language-plaintext highlighter-rouge">strict</code> ticked</li>
     <li><strong>Run &amp; preview</strong></li>
   </ol>
-  <figure id="figure-13"><img src="images/query_builder_position.png" alt="FALDO query" /><figcaption><span class="figcaption-prefix">Figure 13:</span> FALDO query</figcaption></figure>
+  <figure id="figure-16"><img src="images/query_builder_position.png" alt="FALDO query" /><figcaption><span class="figcaption-prefix">Figure 16:</span> FALDO query</figcaption></figure>
 </blockquote>
 
 <p>To go further, we can filter on <code class="language-plaintext highlighter-rouge">QTL</code> to refine the results.</p>
@@ -1178,10 +1188,10 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
     <li>instantiate <code class="language-plaintext highlighter-rouge">Gene Symbol</code> and hide his <code class="language-plaintext highlighter-rouge">Label</code></li>
     <li>Instantiate <code class="language-plaintext highlighter-rouge">Homolog Group</code>, hide his label and filter his <code class="language-plaintext highlighter-rouge">Common Organism Name</code> with <code class="language-plaintext highlighter-rouge">human</code></li>
   </ol>
-  <figure id="figure-14"><img src="images/filter_organism_name.png" alt="Organism name filter" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Organism name filter</figcaption></figure>
+  <figure id="figure-17"><img src="images/filter_organism_name.png" alt="Organism name filter" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Organism name filter</figcaption></figure>
   <ol>
-    <li>Instantiate another <code class="language-plaintext highlighter-rouge">Gene Symbol</code> and hide his <code class="language-plaintext highlighter-rouge">Label</code></li>
-    <li>Finally, follow the <code class="language-plaintext highlighter-rouge">to neXtProt Gene</code> link and instantiate <code class="language-plaintext highlighter-rouge">Gene</code></li>
+    <li>From <code class="language-plaintext highlighter-rouge">Homolog Group</code>, instantiate another <code class="language-plaintext highlighter-rouge">Gene Symbol</code> and hide his <code class="language-plaintext highlighter-rouge">Label</code></li>
+    <li>Finally, follow the <code class="language-plaintext highlighter-rouge">to neXtProt Gene</code> link and instantiate <code class="language-plaintext highlighter-rouge">Gene</code> (with a capital G)</li>
     <li><strong>Run &amp; preview</strong></li>
   </ol>
 </blockquote>
@@ -1195,13 +1205,13 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
   <ol>
     <li>Instantiate <code class="language-plaintext highlighter-rouge">Entry</code></li>
     <li>Instantiate <code class="language-plaintext highlighter-rouge">Isoform</code> and hide the <code class="language-plaintext highlighter-rouge">Label</code></li>
-    <li>Many nodes are connected to <code class="language-plaintext highlighter-rouge">Isoform</code>. Use the <em>Filter links</em> field to get only node that are linked with a link named <code class="language-plaintext highlighter-rouge">location</code></li>
+    <li>Many nodes are connected to <code class="language-plaintext highlighter-rouge">Isoform</code>. Use the <em>Filter links</em> field to filter nodes linked with a link named <code class="language-plaintext highlighter-rouge">location</code></li>
   </ol>
-  <figure id="figure-15"><img src="images/filter_links.png" alt="Filter links" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Filter links</figcaption></figure>
+  <figure id="figure-18"><img src="images/filter_links.png" alt="Filter links" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Filter links</figcaption></figure>
   <ol>
-    <li>Instantiate the <code class="language-plaintext highlighter-rouge">Subcellular Location</code> node and hide <code class="language-plaintext highlighter-rouge">Label</code></li>
-    <li>Use the <em>Filter node</em> field to filter nodes that a named <code class="language-plaintext highlighter-rouge">Location</code></li>
-    <li>Instantiate <code class="language-plaintext highlighter-rouge">Uniprot subcellular Location CV</code> (you can use the node filter)</li>
+    <li>Instantiate the <code class="language-plaintext highlighter-rouge">Subcellular Location</code> node and hide <code class="language-plaintext highlighter-rouge">Uri</code></li>
+    <li>Use the <em>Filter node</em> field to filter nodes with “location” in their name</li>
+    <li>Instantiate <code class="language-plaintext highlighter-rouge">Uniprot subcellular Location CV</code> (you can use the node filter to clear up the screen)</li>
     <li><strong>Run &amp; preview</strong></li>
   </ol>
 </blockquote>
@@ -1228,7 +1238,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
   </ol>
 </blockquote>
 
-<figure id="figure-16"><img src="images/results_table.png" alt="preview table" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Results table</figcaption></figure>
+<figure id="figure-19"><img src="images/results_table.png" alt="preview table" /><figcaption><span class="figcaption-prefix">Figure 19:</span> Results table</figcaption></figure>
 
 <p>The <strong>Action</strong> column contain button to perform certain action:</p>
 
@@ -1249,9 +1259,10 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
   </ol>
 </blockquote>
 
-<figure id="figure-17"><img src="images/galaxy_history_results.png" alt="history results" /><figcaption><span class="figcaption-prefix">Figure 17:</span> <span class="notranslate">Galaxy</span> history with the two results</figcaption></figure>
+<figure id="figure-20"><img src="images/galaxy_history_results.png" alt="history results" /><figcaption><span class="figcaption-prefix">Figure 20:</span> <span class="notranslate">Galaxy</span> history with the two results</figcaption></figure>
 
-<p>Now that you have used AskOmics to generate this final tabular file, you can continue analysing it with other <span class="notranslate">Galaxy</span> tools.</p>
+<p>Now that you have used AskOmics to generate this final tabular file, you can continue analysing it with other <span class="notranslate">Galaxy</span> tools.
+If you are done, don’t forget to close the AskOmics instance by going to the “User” &gt; “Active Interactive Tools” page.</p>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
@@ -1324,7 +1335,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Xavier Garnier, Anthony Bretaudeau, Anne Siegel, Olivier Dameron, 2021 <b>RNA-Seq analysis with AskOmics Interactive Tool (Galaxy Training Materials)</b>. <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/tutorial.html">/training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Xavier Garnier, Anthony Bretaudeau, Anne Siegel, Olivier Dameron, Mateo Boudet, 2021 <b>RNA-Seq analysis with AskOmics Interactive Tool (Galaxy Training Materials)</b>. <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/tutorial.html">/training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1339,11 +1350,11 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 
                     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{transcriptomics-rna-seq-analysis-with-askomics-it,
-    author = "Xavier Garnier and Anthony Bretaudeau and Anne Siegel and Olivier Dameron",
+    author = "Xavier Garnier and Anthony Bretaudeau and Anne Siegel and Olivier Dameron and Mateo Boudet",
     title = "RNA-Seq analysis with AskOmics Interactive Tool (Galaxy Training Materials)",
     year = "2021",
-    month = "03",
-    day = "12"
+    month = "05",
+    day = "21"
     url = "\url{/training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
@@ -1390,7 +1401,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
         <p>
             This material is the result of a collaborative work. Thanks to the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Xavier Garnier, Anthony Bretaudeau, Anne Siegel, Olivier Dameron)!
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Xavier Garnier, Anthony Bretaudeau, Anne Siegel, Olivier Dameron, Mateo Boudet)!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
