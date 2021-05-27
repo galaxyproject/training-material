@@ -196,9 +196,9 @@ Now that a table has been generated, we will query the table to find the runs of
 > 3. Click `table options`,
 >    * for `specify name for table` enter `SARS_contigs`,
 >    * for `Specify Column Names` enter:
+>
 >    ```markdown
 >    name,run,coverage,tax_id,hits,length,md5
->
 >    ```
 >
 > > ### {% icon tip %} Column Headers for the Other Metadata Tables
