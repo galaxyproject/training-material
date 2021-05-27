@@ -115,10 +115,10 @@ In this tutorial we have obtained some data from NCBI related to [*Escherichia c
 >
 > 5. From **Rules** menu select `Add / Modify Column Definitions`
 >
->    - Click `Add Definition` button and select `Name`
->      - *"Name"*: `B`
->    - Repeat this again and select `URL` instead.
+>    - Click `Add Definition` button and select `URL`
 >      - *"URL"*: `A`
+>    - Repeat this again and select `Name` instead.
+>      - *"Name"*: `B`
 >    - Repeat this again and select `Type` instead.
 >      - *"Type"*: `C`
 >    - Click `Apply`
