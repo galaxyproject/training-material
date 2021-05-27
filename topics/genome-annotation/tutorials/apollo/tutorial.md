@@ -94,7 +94,7 @@ In this tutorial we have obtained some data from NCBI related to [*Escherichia c
 > 3. Copy & Paste the following table into the Rule-based uploader textbox:
 >
 >    ```
->    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/augustus.gff3	Augustus genes	gff3
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/augustus.gff3	Augustus	gff3
 >    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/blastp_vs_swissprot_2018-01-22.blastxml	Blastp vs swissprot	blastxml
 >    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/BWA-MEM_K12_Coverage.bigwig	BWA-MEM K12 Coverage	bigwig
 >    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/BWA-MEM_K12_Mapping.bam	BWA-MEM K12 Mapping	bam
@@ -103,13 +103,12 @@ In this tutorial we have obtained some data from NCBI related to [*Escherichia c
 >    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/E._coli_str_K-12substr_MG1655_100kb_subset.fasta	Genome	fasta
 >    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/K12_Variants.vcf	K12 Variants	vcf
 >    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/NCBI_AnnotWriter_Genes.gff3	NCBI AnnotWriter Genes	gff3
->    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/NCBI_AnnotWriter_Proteins.fasta	NCBI AnnotWriter Proteins	fasta
->    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/O104_H4_LASTZ_Alignment.bed	O104 H4 LASTZ_Alignment	bed
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/O104_H4_LASTZ_Alignment.bed	O104 H4 LASTZ Alignment	bed
 >    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/O104_Variants.vcf	O104 Variants	vcf
 >    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/TopHat_SRR1927169_rep1.bam	TopHat SRR1927169 rep1	bam
->    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/TopHat_SRR1927169_rep1_Coverage.bigwig	TopHat SRR1927169 rep1_Coverage	bigwig
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/TopHat_SRR1927169_rep1_Coverage.bigwig	TopHat SRR1927169 rep1 Coverage	bigwig
 >    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/TopHat_SRR1927170_rep2.bam	TopHat SRR1927170 rep2	bam
->    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/TopHat_SRR1927170_rep2_Coverage.bigwig	TopHat SRR1927170 rep2_Coverage	bigwig
+>    https://zenodo.org/api/files/ee602d3b-4817-4b71-9985-3ecf39bae3c6/TopHat_SRR1927170_rep2_Coverage.bigwig	TopHat SRR1927170 rep2 Coverage	bigwig
 >    ```
 > 4. Click **Build**
 >
@@ -136,32 +135,35 @@ Refining genome annotations happens in multiple steps:
 - Refine the annotations
 - Export the refined genome annotations
 
-In this tutorial we will focus more on the practical portions than the theoretical part of genome annotation, that will be covered in other tutorials. When you've completed this tutorial you should be comfortable manipulating genomic data in Galaxy and Apollo.
+In this tutorial we will focus more on the practical portions than the theoretical part of genome annotation, that are covered in other tutorials. When you've completed this tutorial you should be comfortable manipulating genomic data in Galaxy and Apollo.
 
 > ### {% icon details %} Why bother?
 >
 > Automated annotation programs continue to improve, however a simple score may not provide evidence necessary to confirm an accurate prediction.
 > Therefore, it is necessary to both visually inspect the results and manually fix any issues with the predictions.
 >
-> Additionally, many times assemblies are less than perfect or read depth and quality may be insufficient.
+> Additionally, many times assemblies are less than perfect or read depth and quality may be insufficient, leading to imperfect automatic annotation.
 {: .details}
 
 ## Build the JBrowse Instance
 
+Let's begin by building a JBrowse instance with all the data we have for this genome.
+
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **JBrowse** {% icon tool %} with the following parameters:
+> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
->        - {% icon param-file %} *"Select the reference genome"*: Select the genome fasta file
->    - *"Genetic Code"*: `11. The Bacterial, Archael`
+>        - {% icon param-file %} *"Select the reference genome"*: Select the `Genome` fasta file
+>    - *"Genetic Code"*: `11. The Bacterial, Archael and Plant Plastid Code`
 >    - In *"Track Group"*:
 >        - {% icon param-repeat %} *"Insert Track Group"*
 >            - *"Track Category"*: `Gene Calls`
 >            - In *"Annotation Track"*:
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
->                    - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
+>                    - *"Track Type"*: `GFF/GFF3/BED Features`
 >                        - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: `Augustus` and `NCBI AnnotWriter Genes`
->                        - *"JBrowse Track Type [Advanced]"*: `Canvas Features`
+>                        - In *"JBrowse Styling Options [Advanced]"*
+>                            - *"JBrowse style.className"*: `transcript-CDS`
 >        - {% icon param-repeat %} *"Insert Track Group"*
 >            - *"Track Category"*: `Sequencing`
 >            - In *"Annotation Track"*:
@@ -173,7 +175,6 @@ In this tutorial we will focus more on the practical portions than the theoretic
 >                        - {% icon param-files %} *"BAM Track Data"*: Both of the BWA-MEM Coverage files (**not** the `(as bigwig)` files)
 >                        - *"Use XYPlot"*: `Yes`
 >                        - *"Show Variance Band"*: `Yes`
->                        - *"Track Scaling"*: `Autoscale (local)`
 >        - {% icon param-repeat %} *"Insert Track Group"*
 >            - *"Track Category"*: `RNA-Seq`
 >            - In *"Annotation Track"*:
@@ -182,26 +183,24 @@ In this tutorial we will focus more on the practical portions than the theoretic
 >                        - {% icon param-files %} *"BAM Track Data"*: Both TopHat Mappings
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `BigWig XY`
->                        - {% icon param-files %} *"BAM Track Data"*: Both of the `TopHat ... Coverage` files
+>                        - {% icon param-files %} *"BAM Track Data"*: Both of the `TopHat ... Coverage` files (**not** the `(as bigwig)` files)
 >                        - *"Use XYPlot"*: `Yes`
 >                        - *"Show Variance Band"*: `Yes`
->                        - *"Track Scaling"*: `Autoscale (local)`
 >        - {% icon param-repeat %} *"Insert Track Group"*
 >            - *"Track Category"*: `Variation`
 >            - In *"Annotation Track"*:
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `VCF SNPs`
->                        - {% icon param-files %} *"SNP Track Data"*: Both FreeBayes files
+>                        - {% icon param-files %} *"SNP Track Data"*: Both Variants files
 >        - {% icon param-repeat %} *"Insert Track Group"*
 >            - *"Track Category"*: `Similarity`
 >            - In *"Annotation Track"*:
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `GFF/GFF3/BED Features`
 >                        - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `O104:H4 LASTZ Alignments`
->                        - *"JBrowse Track Type [Advanced]"*: `Canvas Features`
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `Blast XML`
->                        - {% icon param-file %} *"Blast XML Track Data"*: The `blastp` results from swissprot
+>                        - {% icon param-file %} *"Blast XML Track Data"*: The `blastp` results from swissprot (`Blastp vs swissprot`)
 >                        - {% icon param-file %} *"Features used in Blast Search"*: The `NCBI AnnotWriter Genes` file
 >                        - *"Minimum Gap Size"*: `3`
 >                        - *"Is this a protein blast search?"*: `Yes`
@@ -220,23 +219,25 @@ This tool will take some time to run dependent on data size. All of the inputs n
 
 ## Sending data to Apollo
 
+Now that we have a good looking static JBrowse instance, it is time to load it into Apollo to turn it into a dynamic view where you can make modifications to the genes.
+
 > ### {% icon hands_on %} Import to Apollo
 >
-> 1. **Create or Update Organism** {% icon tool %} with the following parameters:
+> 1. {% tool [Create or Update Organism](toolshed.g2.bx.psu.edu/repos/gga/apollo_create_or_update/create_or_update/4.2.5) %} with the following parameters:
 >    - {% icon param-file %} *"JBrowse HTML Output"*: output of **JBrowse** {% icon tool %}
 >    - *"Organism Common Name Source"*: `Direct Entry`
 >        - *"Organism Common Name"*: `E. coli K12`
 >    - *"Genus"*: `Escherichia`
 >    - *"Species"*: `coli`
 >
-> 2. **Annotate** {% icon tool %}:
+> 2. {% tool [Annotate](toolshed.g2.bx.psu.edu/repos/gga/apollo_iframe/iframe/4.2.5) %} with the following parameters:
 >    - {% icon param-file %} *"Apollo Organism Listing"*: output of **Create or Update Organism** {% icon tool %}
 >
 > 3. View {% icon galaxy-eye %} the output of the Annotate tool, when it is ready.
 >
 {: .hands_on}
 
-Viewing the output will open a view into Apollo in the main panel. Here you can interact with your genome and make annotations. This "Annotate" output is a quick link to that specific genome, and while Apollo allows you to manage and annotate multiple genomes, this dataset will always take you back to that specific genome. You can additionally access the Apollo server outside of Galaxy. While the URL will be different for each Galaxy server that supports Apollo, UseGalaxy.eu's Apollo server it available at [https://usegalaxy.eu/apollo](https://usegalaxy.eu/apollo).
+Viewing the output will open a view into Apollo in the main panel. Here you can interact with your genome and make annotations. This "Annotate" output is a quick link to that specific genome, and while Apollo allows you to manage and annotate multiple genomes, this dataset will always take you back to that specific genome. You can additionally access the Apollo server outside of Galaxy. While the URL will be different for each Galaxy server that supports Apollo, UseGalaxy.eu's Apollo server is available at [https://usegalaxy.eu/apollo](https://usegalaxy.eu/apollo).
 {: .warnin}
 
 
@@ -269,7 +270,7 @@ Let's start by looking at the tracks available to us, and then turning on the ge
 >
 >    ![Track menu](../../images/apollo/tracks.png)
 >
-> 2. In the **Gene Calls** group, click the checkbox to the right.
+> 2. In the **Gene Calls** group, select the `Augustus` track.
 >
 >    You can either activate tracks in bulk, by clicking on the checkbox to the right of the group name ("Gene Calls"), or by clicking on the group name to expand the section, and then selecting individual tracks.
 >
@@ -283,11 +284,45 @@ Let's start by looking at the tracks available to us, and then turning on the ge
 >
 {: .hands_on}
 
-We can now see two evidence tracks: one is the set of [genes from NCBI](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=511145&lvl=3&lin=f&keep=1&srchmode=1&unlock), the other is the output of [AUGUSTUS](https://github.com/Gaius-Augustus/Augustus) {% cite Stanke_2008 %}. In a *de novo* annotation project, we probably will only have the outputs of various gene callers, and potentially some expression evidence like RNA-Seq.
+We can now see an evidence track: `Augustus` is the output of [AUGUSTUS](https://github.com/Gaius-Augustus/Augustus) {% cite Stanke_2008 %}. In a *de novo* annotation project, we probably will only have the outputs of various gene callers, and potentially some expression evidence like RNA-Seq.
 
-## Create refinements
+We will use the other track in the **Gene Calls** group later in this tutorial, leave it unchecked for now.
 
-View data at a particular position
+## Editing genes
+
+With the selected track, if you look along the genome, you will see many genes that were predicted by Augustus. Each of them as an unique name assigned by Augustus (e.g. `NC_000913.3.g7.t1`, which means `the 7th gene on the NC_000913.3 chromosome`). If you right click on gene, an select `View details`, you can get access to the coding sequence (CDS).
+
+> ### {% icon details %} Gene colors
+> Each gene color corresponds to an open reading frame on the genome. This allows to quickly see if two genes that are very close are on the same open reading frame, which could mean that they can be merged into a single gene, if other evidences support this.
+{: .details}
+
+What we want now is first to check that the structure of the genes predicted by Augustus are in good shape. To do this, we will display an additional evidence tracks
+
+> ### {% icon hands_on %} Display blastp vs swissport track
+>
+> 1. In the right hand panel at the top click on **Tracks** to open the track listing
+>
+> 2. In the **Similarity** group, select the `Blastp vs swissprot` track.
+>
+{: .hands_on}
+
+This new track represents the result of aligning sequences from the Swissprot databank along the genome, using Blastp. It should look like that:
+
+![JBrowse with blastp results](../../images/apollo/blastp.png)
+
+Each red box is the alignment of a protein from Swissprot on the genome. You can get more information on the aligned sequence by passing your mouse over the alignement, or clicking on it.
+
+Most of the genes predicted by Augustus look very similar to aligned Swissprot sequences, with the coordinates. Note that our example is an ideal situation that you will probably not see on other genomes: as E. coli is a very studied and well annotated genome, which means Swissprot contains many high quality sequences that can be aligned perfectly by Blastp.
+
+If you look at the region `55000..63000` you will notice however that 2 sequcens were aligned on the genome, but Augustus didn't predict any corresponding genes.
+
+![Genes not predicted by Augustus](../../images/apollo/missing_genes.png)
+
+The blastp alignment looks solid, and the sequences seem to correspond to real proteins references in the litterature. We want to add them to our final annotation, the first thing to do in Apollo, is to drag and drop the alignements to the **User-created Annotation** (yellow background).
+
+***TODO***: BlastView seems to be broken with newer Apollo!?
+
+***TODO***: modify gene coordinates, add GO terms, names, ...
 
 ### Search for a gene
 
@@ -377,6 +412,7 @@ There is various functional data.
 
 
 ***TODO***: *Add to workflow*
+***TODO***: verify changes with the reference annotation = the set of [genes from NCBI](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=511145&lvl=3&lin=f&keep=1&srchmode=1&unlock)
 
 
 # Conclusion
@@ -389,6 +425,6 @@ When refinement is sufficient an updated or new version of the genome may be exp
 
 # What's next?
 
-After generating your refined genome, you'll want to merge it back into the official gene sets.
+After generating your refined genome, you'll want to merge it back into the official gene sets. A future tutorial will show you how to do it within Galaxy.
 
-If a de novo set, you can export it as GFF3 and load it into a tool like [Tripal](http://tripal.info) to provide visualization.
+If a *de novo* set, you can export it as GFF3 and load it into a tool like [Tripal](http://tripal.info) to provide visualization.
