@@ -7,13 +7,24 @@ questions:
  - How can I implement new API functionality within Galaxy?
  - How can I extend the Galaxy user interface with VueJS components?
 objectives:
-time_estimation: "180M"
+time_estimation: "3H"
 contributors:
  - jmchilton
 key_points:
  - Galaxy database interactions are mitigated via SQL Alchemy code in lib/galaxy/model.
  - Galaxy API endpoints are implemented in lib/galaxy/webapps/galaxy, but generally defer to application logic in lib/galaxy/managers. 
  - Galaxy client code should do its best to separate API interaction logic from display components.
+requirements:
+  -
+    type: "internal"
+    topic_name: contributing
+    tutorials:
+        - github-command-line-contribution
+  -
+    type: "internal"
+    topic_name: dev
+    tutorials:
+        - architecture
 ---
 
 # Contributing to Galaxy Core 
@@ -46,7 +57,7 @@ The relational database tables consumed by Galaxy are defined in ``lib/galaxy/mo
 Implement the required changes ``mapping.py`` to add a mapping for
 the proposed ``user_favorite_extension`` table.
 
-{% include dev/tutorials/core-contributing/mapping.py_diff.md %}
+{% include topics/dev/tutorials/core-contributing/mapping.py_diff.md %}
 
 The Python model objects used by Galaxy corresponding to these tables are
 defined in ``lib/galaxy/model/__init__.py``.
