@@ -260,7 +260,7 @@ From the Apollo user manual:
 
 The first four steps are generally the process of structural annotation (the process of identifying the correct gene model), and the last includes functional annotation (the process of assigning a putative function to a gene in your annotations).
 
-## Structural Annotation
+## Evidence tracks
 
 Let's start by looking at the tracks available to us, and then turning on the gene call tracks so we can start exploring our data.
 
@@ -288,7 +288,7 @@ We can now see an evidence track: `Augustus` is the output of [AUGUSTUS](https:/
 
 We will use the other track in the **Gene Calls** group later in this tutorial, leave it unchecked for now.
 
-## Editing genes
+## Adding new genes
 
 With the selected track, if you look along the genome, you will see many genes that were predicted by Augustus. Each of them as an unique name assigned by Augustus (e.g. `NC_000913.3.g7.t1`, which means `the 7th gene on the NC_000913.3 chromosome`). If you right click on gene, an select `View details`, you can get access to the coding sequence (CDS).
 
@@ -318,102 +318,142 @@ If you look at the region `55000..63000` you will notice however that 2 sequcens
 
 ![Genes not predicted by Augustus](../../images/apollo/missing_genes.png)
 
-The blastp alignment looks solid, and the sequences seem to correspond to real proteins references in the litterature. We want to add them to our final annotation, the first thing to do in Apollo, is to drag and drop the alignements to the **User-created Annotation** (yellow background).
+The blastp alignment looks solid, and the sequences seem to correspond to real proteins references in the litterature. We want to add them to our final annotation, to do it, right click on each gene, and select **Create new annotation** > **gene**. They should appear shortly in the **User-created Annotation** track (yellow background, at the top).
 
-***TODO***: BlastView seems to be broken with newer Apollo!?
+![The two genes added to the User-created Annotation track](../../images/apollo/added_genes.png)
 
-***TODO***: modify gene coordinates, add GO terms, names, ...
+You can also see that they appear now in the list of genes in the right panel, at the gene and the mRNA level (as a gene can have multiple isoforms, in particular for eukaryotes).
 
-### Search for a gene
+![Gene list](../../images/apollo/gene_list.png)
 
-Enter the gene XXX into the gene box.
+The **User-created Annotation** track is where you can make modifications to genes, like changing their coordinates, or their name and functional annotation. If you right click on a gene in this track, you will see all the possibilities offered by apollo.
 
-Zoom in to the proper region.
+![Gene contextual menu](../../images/apollo/gene_menu.png)
 
-### Create structural edits
+Currently, the two genes we added have meaningless names. Let's improve that: right click on the leftmost gene, and click on **Open Annotation (alt-click)**.
 
-Drag annotation from evidence to HTML region.
+![Gene details](../../images/apollo/gene_details.png)
 
-Conversely, if you right-click you can any type of genome feature annotation.
+From the blast results, we know that this gene is similar to a Swissprot protein, named `Putative uncharacterized protein YabP`. Let's write this in the **Name** field (type it manually and select it from the drop down list), and `YabP` in the **Symbol** field.
 
-(SCREEN SHOT TO ADD of imperfection)
-![Alternative text](../../images/image_name "Legend of the image")
+> ### {% icon details %} Naming genes
+>
+> Giving a proper name to a gene is not always easy. Should it include "Putative" or not? What if multiple names can apply? Should it be lowercase or uppercase?
+> The important thing is to always use the same naming rules when working on a full annotation, and to agree on these rules with other collaborators.
+> Usually, big annotation consortiums have naming guidelines that you are supposed to follow.
+{: .details}
 
-Additional isoforms may be dragged up from the evidence.
+We have just edited the gene name, but Apollo allows to edit information at the mRNA level. Click on the **Sync name with transcript** button to copy the gene name to the mRNA name. It should now display in the **User-created Annotation** track. To check what you can edit at the mRNA level, just click on the corresponding mRNA in the list above:
 
-### Edit structure
+![mRNA selection](../../images/apollo/mrna_level.png)
 
-#### Update exon position
-Once isoforms have been created, the edges may be dragged to best match the biological evidence.
+You should see `Putative uncharacterized protein YabP` in the **Name** field.
 
-CDS's are automatically updated.
+You can do the same for the other gene you created, which is similar to `Uncharacterized protein YabQ` according to Blastp vs Swissprot.
 
-Conversely by selecting "choose the annotation" the individual code view is selected.
+## Editing a gene structure
 
-You will also notice that overlapping isoforms are highlighted.
+Apollo allows to edit the whole structure of a gene. If you zoom to the 5' end of `YabP`, you will notice, that a few nucleotides after the start codon, there is another one. Let's change the start of `YabP` to this alternate start codon (even if the blast result suggests that we shouldn't do it, it's an exercise!). To do it, all you need to do is click on the 5' limit of the gene and drag it to the desired position. You will notice that the structure of the gene will be shortly changed.
 
-(SCREEN SHOT of isoforms and dragging exons)
-![Alternative text](../../images/image_name "Legend of the image")
+![Modifying the 5' limit of a gene](../../images/apollo/change_start.gif)
 
-Genes will automatically be predicted based on CDS overlap.  This can be unassigned by deselecting on the right-click menu.
+This kind of modifications is very common when using Apollo, and you can perform it at the gene level, or (for eukaryotes) at the exon/intron level. To guide you doing these changes, you should look at all the tracks available for the genome you study. RNA-Seq track are very helpful to determine the limits of coding sequences on the genome, you can find 2 RNA-Seq libraries in the track list, they were aligned on the genome using TopHat. Other tracks can be helpful, like alignements of transcripts or proteins from closely related species (or even big databanks like Swissprot or NR).
 
-By right-clicking on the refined genome feature the details of the genome feature can be retrieved quite readily.
+## Viewing and reverting changes
 
-(SCREEN SHOT of right-click menu)
-![Alternative text](../../images/image_name "Legend of the image")
+Everything you do in Apollo is tracked in a database. If you right click on the `YabP` gene, and select **Show History**, you have access to the full list of all the actions that were performed on it.
 
-#### View structured data
+![History of changes on a gene](../../images/apollo/history.png)
 
-Selecting the features allows us to view the gene directly.
+When you click on one of the steps, you can see below the list a preview of how the gene looked at the time. And you can revert to a specific version of the gene by clicking on the arrow button on the right.
 
-(SCREEN SHOT of feature menu)
-![Alternative text](../../images/image_name "Legend of the image")
+## Adding more functional annotation
 
+Sometimes you'll want to modify a gene that was predicted by Augustus, just to add functional annotation to it. Navigate to position `3000..5700`, you will see an Augustus gene named **NC_000913.3.g3.t1**. At the same position, there are a few Blastp hits with high scores that correspond to `Threonine synthase`, meaning that the gene found by Augustus is probably an homolog. Let's add this Augustus gene to the **User-created Annotation** track: just drag and drop it there. Now, modify the Name (`Threonine synthase`) and Symbol (`TS`), just as we did earlier, for the gene and mRNA.
 
-#### Edit structured data
-
-There are various structured data options from the figure.
-
-All structured data
+If you look at the details of the blast hits, you will notice an identifier looking like that: `gi|11387170|sp|P57289.1|`. In this identifier, `P57289` is the id of an [UniProt record](https://www.uniprot.org/uniprot/P57289). Navigate to this UniProt page and you'll find a lot more details about the protein which was found to be very similar to the gene we are currently annotating. In particular, you can see that 3 [Gene Ontology (GO)](http://www.geneontology.org/) terms are associated with it, in the **GO - Molecular function** and **GO - Biological process** sections. Let's add these terms to our gene with Apollo.
 
 
-#### Editing and reverting history
+> ### {% icon comment %} Gene Ontology (GO) Consortium
+>
+> The [Gene Ontology Consortium](http://www.geneontology.org/) provides with its Ontology a framework for the model of biology.
+> The GO defines concepts/classes used to describe gene function, and relationships between these concepts. It classifies functions along three aspects:
+>
+>
+> - **molecular function**
+>
+>   - molecular activities of gene products
+>
+> - **cellular component**
+>
+>   - where gene products are active
+>
+> - **biological process**
+>
+>   - pathways and larger processes made up of the activities of multiple gene products.
+>
+> [more information](http://geneontology.org/page/ontology-documentation)
+>
+{: .comment}
 
+With the gene selected, click on the **GO** panel, then click on the **New** button. We will then follow the [GO annotation guidelines](http://geneontology.org/docs/go-annotations/), filling the form like this.
 
+![Adding a GO term](../../images/apollo/go_form.png)
 
-(SCREEN SHOT of history menu)
-![Alternative text](../../images/image_name "Legend of the image")
+This form means that our gene will be tagged with the **Go Term** `GO:0030170` (select it in the drop down list while typing `pyridoxal phosphate binding`) from the Molecular Function GO branch (`MF` in **Aspect**). This gene `enables` this `pyridoxal phosphate binding` activity, and we declare it based on the evidence code `ECO:0000250` which means `sequence similarity evidence used in manual assertion` (exactly what we are doing). This similarity is **With** the `UniProt:P57289` record, and we add a **Reference** to this record (we could add a pubmed id to reference a published result for example). Finally we add a **Note** saying that there's a strong similarity.
 
+Before saving, don't forget to click on the two **Add** buttons to save the **With** and **Note** fields.
 
-#### Edit functional data
+You can now do the same for the two other GO terms found on the UniProt page: `threonine synthase activity` and `threonine biosynthetic process`. Adding these terms this way allows to save the information in a computing-friendly way, which means other bioinformatics tools will be able to use make this information automatically.
 
-There is various functional data.
+Other tabs are available in the annotation panel, allowing to add **Comments**, external database references (**DbXref**) or **Attributes* to genes, to record more infortmation about them.
 
+## Sequence alterations
 
-#### Edit names, etc.
+Until now we have supposed that the quality of the genome sequence is perfect. But you might work on othr genomes where the sequence contains errors (substitutions, insertions, deletions) due to assembly problems for example. In this case, automatic annotation programs will have difficulties producing good looking gene models: there can be frame shifts within genes, or broken start/stop codons which are not detected. In this case, Apollo allows to edit the genome sequence itself.
 
+Navigate to position `42500..44500`, and show the `K12 Variants` track from the `Variation` track group. This track shows variants that were detected in this genome sequence after resequencing it. Drag the `NC_000913.3.g36.t1` gene to the **User-created Annotation** track. Now we will register in Apollo the SNP that was detected on position `43988` (C->T): zoom to this position until you see the 6 open reading frame and the sequence. Then right click on the `C` nucleotide and select **Create Genomic Insertion**.
 
-#### Add comments, keys, and values
+![Adding a sequence alteration](../../images/apollo/alteration_menu.png)
 
+Fill the form like this, and the SNP will be saved:
 
+![Adding a sequence alteration, continued](../../images/apollo/substitution.png)
 
-#### Show GO Annotations
+You can add other types of alterations like insertions or deletions.
 
+Once you have added some alterations, Apollo will automatically display the effect it has on the overlapping genes.
 
-## Executing the workflow
+## Exporting annotation
 
+You can continue improving annotation whenever you want, the Apollo server will keep your changes in a safe place for future use. However at some point you will want to export your work to perform other analyses base on it. This can be done from Galaxy:
 
-# Export refinements
+> ### {% icon hands_on %} Export data to Galaxy
+>
+> 1. {% tool [Retrieve Data from Apollo into Galaxy](toolshed.g2.bx.psu.edu/repos/gga/apollo_export/export/4.2.5) %} with the following parameters:
+>    - *"Organism Common Name Source"*: `Direct Entry`
+>        - *"Organism Common Name"*: `E. coli K12`
+>
+{: .hands_on}
 
+This tool will create new datasets in your history:
 
+* the whole content of the **User-created Annotation** track, in GFF3 format
+* the cDNA sequence of all the genes from this same track
+* the CDS sequence of all the genes from this same track
+* the peptide sequences of all the genes from this same track
+* sequence alterations
 
-# Add users to help with the refinement
+If you prefer, the same data can be downloaded directly from the Apollo right panel, in the **Ref Sequence** tab.
 
+Note that if you have inserted some sequence alterations, the fasta sequences will take them into account.
 
+## Collaborating with other users
 
-***TODO***: *Add to workflow*
+It is multiuser, live
+You can share access
+
 ***TODO***: verify changes with the reference annotation = the set of [genes from NCBI](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=511145&lvl=3&lin=f&keep=1&srchmode=1&unlock)
-
 
 # Conclusion
 {:.no_toc}
