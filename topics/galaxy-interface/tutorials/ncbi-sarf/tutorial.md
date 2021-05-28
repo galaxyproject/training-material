@@ -10,7 +10,9 @@ objectives:
 - Learn about SRA aligned read format and vcf files for Runs containing SARS-CoV-2 content
 - Understand how to search the metadata for these Runs to find your dataset of interest and then import that data in your preferred format
 time_estimation: "30m"
-key_points: []
+key_points:
+- NCBI Publishes datasets in the cloud that you can easily process with Galaxy
+- The Rule Based Uploader simplifies processing and downloading large numbers of files
 tags:
  - ncbi
  - covid19
