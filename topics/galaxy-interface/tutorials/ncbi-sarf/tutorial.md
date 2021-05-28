@@ -420,6 +420,10 @@ Metadata about these Runs, including submitted sample and library information, B
 >    - *"jq filter"*: `[.[]]`
 >    - *"Convert output to tabular"*: `yes`
 >
+>    > ### {% icon tip %} Tip: Slow step
+>    > This step can take ~30 minutes to run due to the ~8GB of JSON it needs to process.
+>    {: .tip}
+>
 > 5. Rename this file `variation.tsv`
 >
 > 6. **Query for VCFs of Interest**. Next we'll query this metadata using the `Query tabular` tool to get a list of all Runs containing a called `E484K` variant.
