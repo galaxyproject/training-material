@@ -463,7 +463,7 @@ Metadata about these Runs, including submitted sample and library information, B
 >    1. **Open** the `Rule-based` upload tab again, but this time:
 >       - *"Upload data as"*: `Collection(s)`
 >       - *"Load tabular data from"*: `History Dataset`
->       - *"Select dataset to load"*: `annotated_variations.filelist`
+>       - *"Select dataset to load"*: `vcf_list`
 >
 >    2. **Click** `Build` to bring up the rule builder.
 >
