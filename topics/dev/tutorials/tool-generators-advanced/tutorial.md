@@ -125,6 +125,11 @@ automated code generator in a tailored, readily deployed appliance.
 
 > ### {% icon hands_on %} Hands-on: Launching the Appliance
 >
+> > ### {% icon warning %} `Pull` the images first as shown below to save time.
+> >
+> > If they are not found locally the first time you run `docker-compose up`, docker will build them, taking much, much, much longer.
+> >
+> {: .warning}
 > 1. [Install Docker](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform.
 >
 > 2. Then, `pip3 install docker-compose`
@@ -151,13 +156,15 @@ automated code generator in a tailored, readily deployed appliance.
 >    > ### {% icon tip %} Appliance tips
 >    >
 >    >  - `pull` is only needed the first time, or if there is a newer version available of the base `docker-galaxy-stable` images or of the toolfactory-configurator.
->    >  - Add `-d` at the end of the `docker-compose` command to detach the terminal so you can keep working - but only after watching the process the first time please.
+>    >  - Add `-d` at the end of the `docker-compose` command to detach the terminal so you can keep working - but only after watching the process the first time.
 >    >      - It is important to wait until the server stops sending log messages before you first log in. That means everything is ready. The first startup is very complex and takes time.
->    >  - For the first time start, watching the startup process logs is highly recommended.
+>    >  - For the first time start, watching the startup process logs reveals a lot of interesting activity.
 >    >      - You will learn a lot about how a Galaxy server works and see when the Appliance is ready to use.
+>    >  - Expect a few minutes for the pull to complete.
+>    >  - Expect another 5 to 10 minutes to complete the first startup. Subsequent starts are much faster but a lot has to be done the first time.
 >    >  - The docker containers may not fit or run well on an underpowered machine. Multiple CPU cores, 8GB of RAM and fast disk are needed for an enjoyable appliance.
 >    >  - The demonstration history will only be available after logging in with the administrator credentials - `admin@galaxy.org` and password `password`. Check your histories if the smaller data-only history appears when you log in.
->    >  - Change your admin password and if anyone else has possible network access, the API key `fakekey` used for configuration.
+>    >  - Change your admin password.
 >    >  - It is important that your appliance is not accessible to any potential miscreants on the local or public internet.
 >    >  - It is recommended for use only as a private disposable desktop development environment.
 >    >    - The Appliance keeps no backup of any work.
