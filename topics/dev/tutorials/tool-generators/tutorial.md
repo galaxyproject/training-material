@@ -388,7 +388,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >    >     - Change your admin password
 >   {: .tip}
 >
-> 5. Your appliance should be running with a local Galaxy on [port 8080 of your workstation](http://localhost:8080) after a fair bit of activity.
+> 5. Your appliance should run a local Galaxy on [port 8080 of your workstation](http://localhost:8080) after about 5 minutes of activity on the logs.
 >
 >    - Login with the username `admin@galaxy.org` and the password `password`
 >    - This is obviously insecure but convenient and easily changed at first login.

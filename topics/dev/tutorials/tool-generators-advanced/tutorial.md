@@ -362,78 +362,105 @@ line will echo all the repeated parameters is shown in the example shown in the 
 > >
 > >
 > >```xml
-> >  <tool name="tool1" id="tool1" version="0.01">
-> >    <!--Source in git at: https://github.com/fubar2/toolfactory-->
-> >    <!--Created by planemo@galaxyproject.org at 07/04/2021 14:55:09 using the Galaxy Tool Factory.-->
-> >    <description>test repeats</description>
-> >    <expand macro="requirements"/>
-> >    <stdio>
-> >      <exit_code range="1:" level="fatal"/>
-> >    </stdio>
-> >    <expand macro="stdio"/>
-> >    <version_command><![CDATA[echo "0.01"]]></version_command>
-> >    <command><![CDATA[python
-> >  $runme
-> >   #for $rep in $R_repeat:
-> >  --repeat $rep.repeat
-> >  #end for
-> >  >
-> >  $rep_out]]></command>
-> >    <configfiles>
-> >      <configfile name="runme"><![CDATA[
-> >  import argparse
-> >  parser = argparse.ArgumentParser()
-> >  a = parser.add_argument
-> >  a('--repeat',default=[],action="append")
-> >  args = parser.parse_args()
-> >  s = ' and '.join(args.repeat)
-> >  print(s)
-> >  ]]></configfile>
-> >    </configfiles>
-> >    <inputs>
-> >      <repeat name="R_repeat" title="Add as many Things to pass as needed">
-> >        <param name="repeat" type="text" value="add lots of repeats" label="Things to pass" help=""/>
+> ><tool name="repeats_demo" id="repeats_demo" version="2.00">
+> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
+> >  <!--Created by admin@galaxy.org at 29/05/2021 07:46:08 using the Galaxy Tool Factory.-->
+> >  <description>Repeated parameter demonstration</description>
+> >  <requirements/>
+> >  <stdio>
+> >    <exit_code range="1:" level="fatal"/>
+> >  </stdio>
+> >  <version_command><![CDATA[echo "2.00"]]></version_command>
+> >  <command><![CDATA[python
+> >$runme
+> >#for $rep in $R_mi:
+> >--mi "$rep.mi"
+> >#end for
+> >#for $rep in $R_mp:
+> >--mp "$rep.mp"
+> >#end for
+> >>
+> >$repeats_out]]></command>
+> >  <configfiles>
+> >    <configfile name="runme"><![CDATA[#raw
+> >
+> >import argparse
+> >parser = argparse.ArgumentParser()
+> >a = parser.add_argument
+> >a("--mi", action="append")
+> >a("--mp", action="append")
+> >args = parser.parse_args()
+> >if args.mi:
+> >   print(" file and ".join(args.mi))
+> >if args.mp:
+> >   print(" string and ".join(args.mp))
+> >if not (args.mi or args.mp):
+> >   print('Nothing was selected')
+> >
+> >#end raw]]></configfile>
+> >  </configfiles>
+> >  <inputs>
+> >    <repeat name="R_mi" title="Add as many Multiple input files from your history - as many as you like as needed">
+> >      <param name="mi" type="data" optional="false" label="Multiple input files from your history - as many as you like" help="" format="html,txt,xml" multiple="false"/>
+> >    </repeat>
+> >    <repeat name="R_mp" title="Add as many Multiple user supplied text strings - as many different ones as you like as needed">
+> >      <param name="mp" type="text" value="Multiple user supplied text strings - as many different ones as you like" label="Multiple user supplied text strings - as many different ones as you like" help=""/>
+> >    </repeat>
+> >  </inputs>
+> >  <outputs>
+> >    <data name="repeats_out" format="txt" label="repeats_out" hidden="false"/>
+> >  </outputs>
+> >  <tests>
+> >    <test>
+> >      <output name="repeats_out" value="repeats_out_sample" compare="diff" lines_diff="6"/>
+> >      <repeat name="R_mi">
+> >        <param name="mi" value="mi_sample"/>
 > >      </repeat>
-> >    </inputs>
-> >    <outputs>
-> >      <data name="rep_out" format="txt" label="rep_out" hidden="false"/>
-> >    </outputs>
-> >    <tests>
-> >      <test>
-> >        <output name="rep_out" value="rep_out_sample" compare="diff" lines_diff="0"/>
-> >        <repeat name="R_repeat">
-> >          <param name="repeat" value="add lots of repeats"/>
-> >        </repeat>
-> >      </test>
-> >    </tests>
-> >    <help><![CDATA[
+> >      <repeat name="R_mp">
+> >        <param name="mp" value="Multiple user supplied text strings - as many different ones as you like"/>
+> >      </repeat>
+> >    </test>
+> >  </tests>
+> >  <help><![CDATA[
 > >
-> >  **What it Does**
+> >**What it Does**
+> >
+> >Simple python Argparse sample to echo repeated user selections - how to use repeated inputs and user parameters.
+> >
+> >Unpredictable or messy "repeated" outputs can use a collection if they are not useful downstream but otherwise require manual wrapping - see the GTN advanced tutorial.
 > >
 > >
 > >
-> >  ------
+> >------
 > >
 > >
-> >  Script::
+> >Script::
 > >
-> >      import argparse
-> >      parser = argparse.ArgumentParser()
-> >      a = parser.add_argument
-> >      a('--repeat',default=[],action="append")
-> >      args = parser.parse_args()
-> >      s = ' and '.join(args.repeat)
-> >      print(s)
+> >    import argparse
+> >    parser = argparse.ArgumentParser()
+> >    a = parser.add_argument
+> >    a("--mi", action="append")
+> >    a("--mp", action="append")
+> >    args = parser.parse_args()
+> >    if args.mi:
+> >       print(" file and ".join(args.mi))
+> >    if args.mp:
+> >       print(" string and ".join(args.mp))
+> >    if not (args.mi or args.mp):
+> >       print('Nothing was selected')
 > >
-> >  ]]></help>
-> >    <citations>
-> >      <citation type="doi">10.1093/bioinformatics/bts573</citation>
-> >    </citations>
-> >  </tool>
+> >]]></help>
+> >  <citations>
+> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
+> >  </citations>
+> ></tool>
+> >
+> >
 > >```
+> >
 > > - The user sees the following form after adding 3 repeats for each of the two available items
 > >
-> > ![Form to configure an additional parameter as a select](../../images/toolfactory_repeats_sample_form.png)
+> > ![User can add as many repeats as they want for repeated input file and parameter values](../../images/toolfactory_repeats_sample_form.png)
 {: .details}
 
 #### ToolFactory `collection` outputs are handy for hiding dozens of miscellaneous tool outputs in a single history item

@@ -8,12 +8,11 @@ zenodo_link: ""
 questions:
 
 objectives:
-  - "Learn whether the ToolFactory tutorial might be useful for your work in Galaxy"
+  - "This session introduces the ToolFactory and explains how it might be useful for programmers new to Galaxy"
 
 key_points:
   - "The ToolFactory is a specialised Galaxy tool for users who routinely write their own analysis code"
-  - "It can turn a simple, working command line script into a new tool"
-  - "Finalised tools are toolshed-ready, with a built-in test"
+  - "It turns useful, working command line scripts into shareable, toolshed-ready tools.
   - "A code generator is easy to learn but only simple requirements can be fully automated"
 
 contributors:
@@ -47,22 +46,21 @@ Scripts useful to other scientists can be widely shared through any toolshed.
 
 ???
 
-Programming skills are needed to make a new Galaxy tool.
-The ToolFactory automatically generates wrapper XML but does not write the script.
+Programming skills are needed to make any new Galaxy tool.
+The ToolFactory automatically generates wrapper code, but does not write the script.
 If you routinely create generalisable, working analysis code, the ToolFactory can help share your work as real Galaxy tools.
 
 ---
 
 # The ToolFactory needs a **working command line script** to be useful
 
-- Bash, Rscript, Python,...,Lisp...
-- Any interpreter available in Conda.
-- Parameter settings, data input file paths and output file paths are all passed on the **command line**.
+- Bash, Rscript, Python,...,Lisp. Any interpreter available in Conda.
+- Parameter settings, data input file paths and output file paths are passed to the script on the command line.
 - Argparse (named) or positional parameter passing can be used.
-- For example: `python3 mangiare.py --food x.pasta --cooked "al dente" --sauce "tomato, onion, garlic and basil"`
+- For example: `python mangiare.py --food zitti.pasta --cooked "al dente" --sauce "tomato+basil"`
    - `mangiare.py` is run as a Python script.
    - Argparse parameters are used
-   - It must deal correctly with a parameter `food` set to `x.pasta`, a parameter `cooked` set to "al dente" and so on.
+   - It must deal correctly with a parameter `food` set to `zitti.pasta`, a parameter `cooked` set to "al dente" and so on.
 - It **works** if you can run a command like the one above in a Linux shell and get useful, correct outputs.
 
 ???
@@ -78,7 +76,7 @@ Without a working script, it is about as useful as a chocolate teapot.
 # What does the developer need to do ?
 
 - Debug the script so it works correctly on the command line.
-- Upload the samples used into a new Galaxy history.
+- Upload the test data samples into a new Galaxy history.
 - Start the ToolFactory tool.
   - Paste the script
   - Describe the inputs, outputs and parameters.
@@ -89,7 +87,7 @@ Without a working script, it is about as useful as a chocolate teapot.
 ???
 
 The developer prepares a working script and input samples.
-The sample input files are uploaded to a Galaxy history
+The sample input files are uploaded to a Galaxy history.
 The completed ToolFactory form collects all the information needed to generate a new tool.
 The samples become the inputs for the built-in test.
 
@@ -98,7 +96,7 @@ The samples become the inputs for the built-in test.
 # What happens when the ToolFactory is executed?
 
 - The information from the form drives a code generator.
-- The Galaxyxml library generates the wrapper XML
+- The galaxyxml library generates the wrapper XML
 - A new XML wrapper is created in the history
 - The new tool is installed in the local Galaxy.
 
@@ -107,11 +105,11 @@ The samples become the inputs for the built-in test.
 An XML tool wrapper is generated in the history.
 The new tool is installed in the local server.
 It is ready to run locally.
-It looks and acts just like any other Galaxy tool.
+It looks and acts just like any manually prepared Galaxy tool.
 
 ---
 
-# What happens when a new tool is finalised with the `planemo_test` tool ?
+# What happens when a new tool is updated with the `planemo_test` tool ?
 
 - Planemo generates the tool test outputs and then tests the finalised tool.
 - Test reports and the updated toolshed archive are written to the history
@@ -120,7 +118,7 @@ It looks and acts just like any other Galaxy tool.
 ???
 
 The Planemo test and lint reports and a copy of the generated XML wrapper and a log file are returned.
-The tested toolshed archive is ready to share.
+The tested toolshed archive is ready to share if the tests and linting passed.
 
 ---
 
@@ -137,7 +135,7 @@ The tested toolshed archive is ready to share.
 
 Although a code generator is easy to learn to use, it is limited to relatively simple scripts.
 Many Conda packages require complexities that no code generator can provide. Hand written code is required.
-Scripts can sometimes be adapted to work around some of the limitations of the code generator.
+Scripts can sometimes be adapted to work around the many limitations of the code generator.
 
 ---
 
