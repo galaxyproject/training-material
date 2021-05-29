@@ -54,6 +54,10 @@ layout: base
                 {{ subtopic.description }} </br></br>
                 {% include _includes/tutorial_list.html sub=subtopic %}
               {% endfor %}
+
+              {% assign other_tutorials = topic_material | where: "subtopic",
+nil %}
+              {% unless other_tutorials.size == 0 %}
               <div id="tutorial_list">
               <h3> Other </h3>
               <div class="search_box">
@@ -63,10 +67,13 @@ layout: base
               </div></br>
               Assorted other tutorials </br></br>
               {% include _includes/tutorial_list.html sub="other" %}
+              </div>
+              {% endunless %}
+
             {% else %}
                {% include _includes/tutorial_list.html %}
+               </div>
             {% endif %}
-        </div>
 
         {% if topic.type == "use" %}
             <h2 id="docker_image">Galaxy instances</h2>
