@@ -39,6 +39,15 @@ contributors:
 
 ---
 
+> ### Agenda
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
+---
+
 ## The ToolFactory Appliance: A pop-up private Galaxy for scientists and developers who write command line scripts in their work.
 
 The ToolFactory automates much of the work needed to prepare a new Galaxy tool using information provided by the script writer
@@ -69,7 +78,7 @@ system is damaged, the Appliance can be rebuilt from scratch in a few minutes.
 >  - The Appliance is a flavour added to the base [docker-galaxy-stable](https://github.com/bgruening/docker-galaxy-stable/compose) infrastructure
 {: .tip}
 
-
+---
 
 ## Limits and scope
 
@@ -96,6 +105,7 @@ enough for the ToolFactory.
 automated code generator in a tailored, readily deployed appliance.
     - The cost of this convenience is that ToolFactory is limited to a subset of simple script and package wrappers.
 
+---
 
 # Getting your hands on a ToolFactory Appliance for some hands-on training.
 
@@ -105,12 +115,6 @@ automated code generator in a tailored, readily deployed appliance.
 - Tutorial material that follows **can only be completed with a working ToolFactory**.
 
 
-> ### Agenda
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
 
 ## Installation
 
@@ -121,6 +125,8 @@ automated code generator in a tailored, readily deployed appliance.
 >- Please install it locally as described below.
 >- For this reason, the training materials can't make use of existing public Galaxy infrastructure like most of the GTN material.
 {: .warning}
+
+---
 
 # Running the ToolFactory
 
@@ -231,7 +237,7 @@ automated code generator in a tailored, readily deployed appliance.
 >     - It is in `..compose/export/galaxy/testedTFtools/[tool name]` on your workstation because that is mounted as a volume into the container.
 {: .hands_on}
 
-----
+---
 
 ## ToolFactory functional documentation - the demonstration tools.
 

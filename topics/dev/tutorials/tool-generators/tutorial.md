@@ -107,8 +107,9 @@ specialised Galaxy tool for developers that generates tools from scripts.
 
 This tutorial introduces that unusual tool.
 
+---
 
-## The ToolFactory Appliance
+# The ToolFactory Appliance
 
 The ToolFactory is a specialised tool. It implements an automated, form driven code generator that installs newly generated tools so you can try them straight away
 in Galaxy. The ToolFactory is distributed as a Docker appliance and can be "popped up" and ready to run in a few minutes.
@@ -163,6 +164,8 @@ It introduces an automated way to convert any useful script into a toolshed read
 >        - Nothing else can be changed - just like with most Galaxy tools.
 > - Choose whichever one fits best for the task at hand.
 {: .tip }
+
+---
 
 # `Hello World!` with the ToolFactory Appliance
 
@@ -340,7 +343,9 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >       - *Please check the html report to make sure it passed* before sharing your new tool.
 {: .comment}
 
-## Installation
+---
+
+# Installation
 
 > ### {% icon hands_on %} Hands-on: Launching the Appliance
 >
@@ -423,8 +428,9 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
   - The new tool will be installed in the `ToolFactory Generated Tools` submenu.
 - If the tool name is not changed before re-generating a tool, the original installed tool will be updated with the new configuration.
 
+---
 
-## Hello World!
+# Hello World!
 
 > ### {% icon hands_on %} Hands-on: Building the Hello World example
 >
