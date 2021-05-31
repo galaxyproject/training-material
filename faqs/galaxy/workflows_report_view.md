@@ -6,7 +6,7 @@ box_type: tip
 layout: faq
 ---
 
-- Click on the **User** on the top menu bar of Galaxy.
+- Go to **User** on the top menu bar of Galaxy.
 - Click on **Workflow invocations**
   - Here you will find a list of all the workflows you have run
 - Click on the name of a workflow invocation to expand it
