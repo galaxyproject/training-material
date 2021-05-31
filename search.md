@@ -14,7 +14,7 @@ title: Search Tutorials
 <!-- Configuration -->
 <script>
 var tutorials = { {% for topic in site.data %}
-    {% unless topic[0] == 'contributors' %}
+    {% if topic[0] == 'use' or topic[0] == 'admin-dev' or topic[0]=='basics' %}
       {% assign topic_material = site.pages | topic_filter:topic[0] %}
       {% assign topic_title = topic[1].title %}
       {% for tutorial in topic_material %}
@@ -55,7 +55,7 @@ var tutorials = { {% for topic in site.data %}
       }{% unless forloop.last %},{% endunless %}
     {% endfor %}
     {% unless forloop.last %},{% endunless %}
-    {% endunless %}
+    {% endif %}
   {% endfor %}
 };
 
