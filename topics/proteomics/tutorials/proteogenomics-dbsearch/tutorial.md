@@ -97,7 +97,7 @@ For this, the sequence database-searching program called [SearchGUI](https://com
 
 > ### {% icon hands_on %} Hands-on: SearchGUI
 >
-> 1. **SearchGUI** {% icon tool %} with the following parameters:
+> 1. {% tool [Search GUI](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/3.3.10.1) %} with the following parameters:
 >    - {% icon param-file %} *"Protein Database"*: `Uniprot_cRAP_SAV_indel_translatedbed.FASTA` (Or however you named the `FASTA` file)
 >
 >        > ### {% icon comment %} Comment:
@@ -194,7 +194,7 @@ outputs.
 
 > ### {% icon hands_on %} Hands-on: PeptideShaker
 >
-> 1. **PeptideShaker** {% icon tool %} with the following parameters:
+> 1. {% tool [Peptide Shaker](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.16.36.3) %} with the following parameters:
 >   - {% icon param-file %} *"Compressed SearchGUI results"*: The SearchGUI archive file
 >   - {% icon param-select %} *"Specify Advanced PeptideShaker Processing Options"*: `Default Processing Options`
 >   - {% icon param-select %} *"Specify Advanced Filtering Options"*: `Default Filtering Options`
@@ -224,7 +224,7 @@ The mzidentml output from the Peptide shaker is converted into an sqlite databas
 >
 > This tool extracts mzidentml and its associated proteomics datasets into a sqlite db
 >
-> 1. **mz to sqlite** {% icon tool %} with the following parameters:
+> 1. {% tool [mz to sqlite](toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Proteomics identification files"*: `PeptideShaker_mzidentml`
 >    - {% icon param-file %} *"Proteomics Spectrum files"*: `Mo_Tai_MGFs`
 >    - {% icon param-file %} *"Proteomics Search Database Fasta"*: `Uniprot_cRAP_SAV_indel_translatedbed.FASTA`
@@ -395,4 +395,3 @@ This workflow was developed by the Galaxy-P team at the University of Minnesota.
 
 
 {: .comment}
-
