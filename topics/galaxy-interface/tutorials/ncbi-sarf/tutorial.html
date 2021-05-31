@@ -1,0 +1,1318 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>SRA Aligned Read Formats to Speed Up SARS-CoV-2 data Analysis</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="A collection of microtutorials explaining various feature..." />
+        <meta property="og:title" content="Galaxy Training: SRA Aligned Read Formats to Speed Up SARS-CoV-2 data Anal..." />
+        <meta property="og:description" content="A collection of microtutorials explaining various feature..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/galaxy-interface" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Using Galaxy and Managing your Data
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/galaxy-interface/faqs/" title="Check our FAQs for the Using Galaxy and Managing your Data topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/galaxy-interface/tutorials/ncbi-sarf/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/galaxy-interface/tutorials/ncbi-sarf/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/ncbi-sarf/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/ncbi-sarf/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/ncbi-sarf/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/ncbi-sarf/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/ncbi-sarf/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-interface%2Ftutorials%2Fncbi-sarf%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/galaxy-interface/tutorials/ncbi-sarf/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                    -->
+
+                     <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "SRA Aligned Read Formats to Speed Up SARS-CoV-2 data Analysis",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/main/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Using Galaxy and Managing your Data",
+    "description": "A collection of microtutorials explaining various features of the Galaxy user interface and manipulating data within Galaxy.",
+    "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/"
+  },
+  "courseCode": "galaxy-interface / ncbi-sarf / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'SRA Aligned Read Formats to Speed Up SARS-CoV-2 data Analysis' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/tutorials/ncbi-sarf/tutorial.html",
+  "timeRequired": "PT30M",
+  "keywords": "ncbi, covid19",
+  "description": "The questions this  addresses are:\n - How can I search SRA SARS-CoV-2 metadata from within Galaxy?\n - How can I import SRA aligned read files and extract the data in my format of choice?\n - How can I import vcf files into Galaxy that have been generated for these Runs?\n\n\\nThe objectives are:\n - Learn about SRA aligned read format and vcf files for Runs containing SARS-CoV-2 content\n - Understand how to search the metadata for these Runs to find your dataset of interest and then import that data in your preferred format\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html",
+      "name": "Rule Based Uploader",
+      "description": "Hands-on for 'Rule Based Uploader' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Jon Trow"
+    },
+    {
+      "@type": "Person",
+      "name": "Adelaide Rhodes"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Jon Trow"
+    },
+    {
+      "@type": "Person",
+      "name": "Adelaide Rhodes"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Using Galaxy and Managing your Data",
+      "description": "A collection of microtutorials explaining various features of the Galaxy user interface and manipulating data within Galaxy.",
+      "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>SRA Aligned Read Formats to Speed Up SARS-CoV-2 data Analysis</h1>
+        
+
+        <div class="contributors-line">By: 
+
+ <a href="/training-material/hall-of-fame/jontrow/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/jontrow" alt="Jon Trow">Jon Trow</a> <a href="/training-material/hall-of-fame/adelaiderhodes/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/adelaiderhodes" alt="Adelaide Rhodes">Adelaide Rhodes</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How can I search SRA SARS-CoV-2 metadata from within Galaxy?</p>
+</li>
+            
+            <li><p>How can I import SRA aligned read files and extract the data in my format of choice?</p>
+</li>
+            
+            <li><p>How can I import vcf files into Galaxy that have been generated for these Runs?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Learn about SRA aligned read format and vcf files for Runs containing SARS-CoV-2 content</p>
+</li>
+            
+            <li><p>Understand how to search the metadata for these Runs to find your dataset of interest and then import that data in your preferred format</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/galaxy-interface">Using Galaxy and Managing your Data</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Rule Based Uploader:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 30 minutes</div>
+            
+
+            
+
+            
+            
+
+            
+
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 28, 2021 </div>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 id="background">Background</h1>
+
+<p>Traditionally, after a list of run accessions has been filtered on the NCBI website, the accessions are used to download and extract fastq using the SRA toolkit to enter into the next steps of the <span class="notranslate">workflow</span>. A newer compressed data type, generated from raw submitted data containing SARS-CoV-2 sequence, is also accessible to <span class="notranslate">Galaxy</span> users from SRA in the Cloud.</p>
+
+<p>SRA Aligned Read Format (SARF) provides further output options beyond basic fastq format, for example:</p>
+
+<ol>
+  <li>contigs created from the raw <span class="notranslate">reads</span> in the run</li>
+  <li><span class="notranslate">reads</span> aligned back to the contigs</li>
+  <li><span class="notranslate">reads</span> with placeholder quality scores</li>
+  <li>VCF files can also be downloaded for these records relative to the SARS-CoV-2 RefSeq record</li>
+</ol>
+
+<ul>
+  <li>These formats can speed up workflows such as assembly and variant calling.</li>
+  <li>This data format is still referenced by the Run accession and accessed using the sra toolkit.</li>
+  <li>This workshop describes the SARF data objects along with associated searchable metadata, and demonstrates a few ways to enter them into traditional workflows.</li>
+</ul>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#background" id="markdown-toc-background">Background</a></li>
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a>    <ol>
+      <li><a href="#sra-aligned-read-format" id="markdown-toc-sra-aligned-read-format">SRA Aligned Read Format</a></li>
+    </ol>
+  </li>
+  <li><a href="#finding-runs-of-interest-for-sars-cov-2-submissions-to-sra" id="markdown-toc-finding-runs-of-interest-for-sars-cov-2-submissions-to-sra">Finding Runs of Interest for SARS-CoV-2 Submissions to SRA</a></li>
+  <li><a href="#query-sarf-metadata" id="markdown-toc-query-sarf-metadata">Query SARF Metadata</a></li>
+  <li><a href="#importing-sarfs-of-interest" id="markdown-toc-importing-sarfs-of-interest">Importing SARFs of Interest</a></li>
+  <li><a href="#finding-vcfs-for-sars-cov-2-runs" id="markdown-toc-finding-vcfs-for-sars-cov-2-runs">Finding VCFs for SARS-Cov-2 Runs</a></li>
+  <li><a href="#other-ncbi-resources" id="markdown-toc-other-ncbi-resources">Other NCBI Resources</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>The aim of this tutorial is to introduce you to some of SRA’s new SARS-CoV-2 cloud resources and data formats, then show you how to filter for Runs of interest to you and access that data in your format of choice in <span class="notranslate">Galaxy</span> to use in your analysis pipeline.</p>
+
+<h2 id="sra-aligned-read-format">SRA Aligned Read Format</h2>
+
+<p>All data submitted to SRA is scanned with our SARS-CoV-2 Detection Tool which uses a Kmer-based approach to identify Runs with Coronaviridae content. The initial scope of the project is limited to those runs deposited in SRA with at least 100 hits for SARS-CoV-2 via the SARS-CoV-2 Detection Tool, a read length of at least 75, and generated using the Illumina platform.</p>
+
+<ol>
+  <li>
+    <p>For these Runs, Saute was used to assemble contigs via guided assembly, with the SARS-CoV-2 refseq genomic sequence (NC_045512.2) used as the guide.</p>
+  </li>
+  <li>
+    <p>If contigs were successfully assembled, <span class="notranslate">reads</span> were mapped back to the contigs and coverage calculated. These contigs with the <span class="notranslate">reads</span> mapped back and with quality scores removed (to keep the object size small) are the aligned read format files.</p>
+  </li>
+  <li>
+    <p>The SRA toolkit can be used to dump just the contigs in fasta format, the <span class="notranslate">reads</span> aligned to the contigs in sam format or the raw <span class="notranslate">reads</span> in fastq format with placeholder quality scores.</p>
+  </li>
+  <li>
+    <p>The contigs were also assessed via megablast against the nucleotide blast database and the results made available for search.</p>
+  </li>
+  <li>
+    <p>In addition, to support investigation of viral evolution during the pandemic and after the introduction of vaccines, variants are identified relative to the SARS-CoV-2 RefSeq record for each processed run using BCFTools.</p>
+  </li>
+</ol>
+
+<p>The SRA aligned <span class="notranslate">reads</span>, the VCF files, the results of these analyses (such as BLAST and VIGOR3 annotation), and the associated BioSample and sequencing library metadata are available for free access from cloud providers.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+  <p>These data can be dumped in <code class="language-plaintext highlighter-rouge">sam</code> format using the <code class="language-plaintext highlighter-rouge">sam-dump</code> tool in the SRA Toolkit, but this function doesn’t work within <span class="notranslate">Galaxy</span> yet.
+We hope to include that functionality in a future update.</p>
+
+</blockquote>
+
+<h1 id="finding-runs-of-interest-for-sars-cov-2-submissions-to-sra">Finding Runs of Interest for SARS-CoV-2 Submissions to SRA</h1>
+
+<p>Metadata for SARS-CoV-2 submissions to the SRA includes submitted sample and library information, BLAST results, descriptive contig statistics, and variation and annotation information.  These metadata are updated daily and made available to query in the cloud using <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-bigquery/">Google’s BigQuery</a> or <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-athena/">Amazon’s Athena</a> services. However, the raw underlying information is also provided as a group of json files that can be <strong>downloaded for free from the Open Data Platform</strong> without logging in to the cloud. These json files can be imported to <span class="notranslate">Galaxy</span> and queried there to find <strong>Runs of interest</strong>.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+  <p>Some of these tables include complex data fields (array of values) that don’t have a clean analogue in a classic SQL database or table and these can’t be easily queried in <span class="notranslate">Galaxy</span> currently. If you require access to <a href="https://www.ncbi.nlm.nih.gov/sra/docs/aligned-metadata-tables/">cloud tables</a> or fields not available in <span class="notranslate">Galaxy</span> we recommend accessing those natively in <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-bigquery/">BigQuery</a> or <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-athena/">Athena</a>.</p>
+
+</blockquote>
+
+<p>We will import the JSON files into <span class="notranslate">Galaxy</span> to query them directory, however the files are split up for efficient querying in the cloud and updated daily, so we first need to get the most up-to-date list of files so we can import those to <span class="notranslate">Galaxy</span>. We’ll just be using a couple of tables in this training, but the other tables can be imported in the same way, using the index files below.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+  <p>These metadata files are updated daily around 5:30pm EST. If you try to access the data around this time but encounter an error, trying again a short while later should resolve the issue. <a href="https://www.thetimezoneconverter.com">Time Zone Converter</a></p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-loading-sra-aligned-read-format-sarf-object-metadata-urls-into-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Loading SRA Aligned Read Format (SARF) Object Metadata URLs into <span class="notranslate">Galaxy</span></h3>
+
+  <p>This step needs to be repeated at the beginning of an analysis to refresh the metadata to the latest daily version.</p>
+
+  <ol>
+    <li>
+      <p>Go to your <span class="notranslate">Galaxy</span> instance of choice such as one of the <a href="https://usegalaxy.org/">use<span class="notranslate">galaxy</span>.org</a>, <a href="https://usegalaxy.eu">use<span class="notranslate">galaxy</span>.eu</a>, <a href="https://usegalaxy.org.au">use<span class="notranslate">galaxy</span>.org.au</a> or any other.</p>
+    </li>
+    <li>
+      <p>Create a new history</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panelIf the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>    <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>    <li>Select the option <strong>Create New</strong> from the menu</li>  </ol></blockquote>
+    </li>
+    <li>
+      <p>Rename your history, <em>e.g.</em> “NCBI SARF”</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history</h3>  <ol>    <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>    <li>Type the new name</li>    <li>Press <kbd>Enter</kbd></li>  </ol></blockquote>
+    </li>
+    <li>
+      <p><strong>Click</strong> the upload icon toward the top left corner.</p>
+
+      <p>By default the familiar simple upload dialog should appear. This dialog has more advanced options as different tabs across the top of this dialog though.</p>
+    </li>
+    <li>
+      <p><strong>Click</strong> <code class="language-plaintext highlighter-rouge">Rule-based</code> as shown below.</p>
+
+      <figure id="figure-1"><img src="../../images/rules/rules_example_1_1_rules_landing.png" alt="screenshot of the rule based uploader modal, it is empty" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Be sure that you are uploading data as Datasets, and that it will be loaded from a 'Pasted Table'</figcaption></figure>
+
+      <ol>
+        <li>
+          <p>Copy/<strong>paste</strong> the URLs into the provided box:</p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/contigs.filelist
+https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/annotated_variations.filelist
+https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/blastn.filelist
+https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/metadata.filelist
+https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/peptides.filelist
+https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/tax_analysis.filelist
+https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/variations.filelist
+</code></pre></div>          </div>
+        </li>
+        <li>
+          <p>Click <strong>Build</strong></p>
+        </li>
+        <li>From <strong>Column</strong> menu select <code class="language-plaintext highlighter-rouge">Basename of Path of URL</code>
+          <ul>
+            <li><em>“From Column?”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
+          </ul>
+        </li>
+        <li>From <strong>Rules</strong> menu select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
+          <ul>
+            <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">URL</code>
+              <ul>
+                <li><em>“URL”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
+              </ul>
+            </li>
+            <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Name</code> (not name tag!)
+              <ul>
+                <li><em>“Name”</em>: <code class="language-plaintext highlighter-rouge">B</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <p><strong>Click</strong> <code class="language-plaintext highlighter-rouge">Apply</code>. You should see a table with two columns, the left being the URL column, and the right being the Name column with just the filename.</p>
+
+          <p>You are now ready to start the upload.</p>
+        </li>
+        <li><strong>Click</strong> the <code class="language-plaintext highlighter-rouge">Upload</code> button</li>
+      </ol>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>With that you should have 7 different files in your history. If you examine the files you’ll see that they each have a list of filenames like the following table, with either today or yesterday’s date in the filename, depending on your timezone offset from NCBI’s offices.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2021-05-27.000000000000.json.gz
+2021-05-27.000000000001.json.gz
+2021-05-27.000000000002.json.gz
+2021-05-27.000000000003.json.gz
+2021-05-27.000000000004.json.gz
+2021-05-27.000000000005.json.gz
+2021-05-27.000000000006.json.gz
+2021-05-27.000000000007.json.gz
+</code></pre></div></div>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-loading-sra-aligned-read-format-sarf-contig-metadata-into-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Loading SRA Aligned Read Format (SARF) Contig Metadata into <span class="notranslate">Galaxy</span></h3>
+
+  <p>Next we will convert this list of filenames to the HTTP URLs for easy import into <span class="notranslate">Galaxy</span>.</p>
+
+  <ol>
+    <li><strong>Open</strong> the <code class="language-plaintext highlighter-rouge">Rule-based</code> upload tab again, but this time:
+      <ol>
+        <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
+        <li><em>“Load tabular data from”</em>: <code class="language-plaintext highlighter-rouge">History Dataset</code></li>
+        <li>
+          <p><em>“Select dataset to load”</em>: <code class="language-plaintext highlighter-rouge">contigs.json.list</code></p>
+        </li>
+        <li>
+          <p><strong>Click</strong> <code class="language-plaintext highlighter-rouge">Build</code> to bring up the rule builder.</p>
+        </li>
+        <li>
+          <p>Make the following changes in the Rule Builder</p>
+
+          <ul>
+            <li>From <strong>Column</strong> menu select <code class="language-plaintext highlighter-rouge">Fixed Value</code>
+              <ul>
+                <li><em>“Value”</em>: <code class="language-plaintext highlighter-rouge">https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/contigs/</code></li>
+                <li>Apply</li>
+              </ul>
+            </li>
+            <li>From <strong>Column</strong> menu select <code class="language-plaintext highlighter-rouge">Concatenate Columns</code>
+              <ul>
+                <li><em>“From Column”</em>: <code class="language-plaintext highlighter-rouge">B</code></li>
+                <li><em>“From Column”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
+                <li>Apply</li>
+              </ul>
+            </li>
+            <li>From <strong>Rules</strong> menu, select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
+              <ul>
+                <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">URL</code>, Select Column <code class="language-plaintext highlighter-rouge">C</code></li>
+                <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">List Identifier(s)</code>, Column <code class="language-plaintext highlighter-rouge">A</code></li>
+                <li>Apply</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <p>Give the collection a name like ‘Contigs’</p>
+        </li>
+        <li>Click the <code class="language-plaintext highlighter-rouge">upload</code> button.</li>
+      </ol>
+
+      <p><strong>Once those download jobs have all turned green in the history list, we’ll concatenate these into a single file.</strong></p>
+    </li>
+    <li>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0</span></span>  tail to head (cat) files with the following parameters:</p>
+
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Datasets to Concatenate”</em>: <code class="language-plaintext highlighter-rouge">contigs</code> collection</li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename this history item to <code class="language-plaintext highlighter-rouge">contigs.json</code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">contigs.json</code></li>    <li>Click the <strong>Save</strong> button</li>  </ul></blockquote>
+    </li>
+    <li>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jq/jq/1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jq/jq/1.0"><strong>JQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jq/jq/1.0</span></span>  process JSON files with the following parameters:</p>
+
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“JSON Input”</em>: <code class="language-plaintext highlighter-rouge">contigs.json</code></li>
+        <li><em>“jq filter”</em>: <code class="language-plaintext highlighter-rouge">[.[]]</code></li>
+        <li><em>“Convert output to tabular”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename this file <code class="language-plaintext highlighter-rouge">contigs.tsv</code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">contigs.tsv</code></li>    <li>Click the <strong>Save</strong> button</li>  </ul></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="query-sarf-metadata">Query SARF Metadata</h1>
+
+<p>Now that a table has been generated, we will query the table to find the runs of interest.  It is a good idea to save the table for future queries on the same dataset.  Rerunning the import steps above without filtration will provide a different set of metadata each day.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-query-the-sra-metadata-table-using-sqlite"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Query the SRA Metadata Table using SQLite</h3>
+
+  <p>Next we’ll query this metadata using the <code class="language-plaintext highlighter-rouge">Query tabular</code> tool to get a list of all Runs containing contigs of greater than 20,000 nucleotides and average coverage of at least 100X.</p>
+
+  <ol>
+    <li>
+      <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0"><strong>Query Tabular using sqlite sql</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0</span></span>  with the following parameters:</p>
+
+      <blockquote class="tip">
+        <h3 id="tip-cant-find-it"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Can’t find it?</h3>
+        <p>If you’re not using the <a href="https://docs.galaxyproject.org/en/latest/admin/special_topics/gtn.html">GTN-in-<span class="notranslate">Galaxy</span> view</a>, you can search for ‘sql’ to find it.</p>
+      </blockquote>
+
+      <ul>
+        <li>In <em>“Database Table”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Database Table”</em>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset for Table”</em>: <code class="language-plaintext highlighter-rouge">contigs.tsv</code></li>
+                <li>In <em>“Table Options”</em>
+                  <ul>
+                    <li>In <em>“Table Options”</em>
+                      <ul>
+                        <li><em>“specify name for table”</em>: <code class="language-plaintext highlighter-rouge">SARS_contigs</code></li>
+                        <li><em>“Specify Column Names”</em>: <code class="language-plaintext highlighter-rouge">name,run,coverage,tax_id,hits,length,md5</code></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <p><em>“SQL Query to generate tabular output”</em>:</p>
+
+          <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="n">run</span>
+ <span class="k">FROM</span> <span class="n">SARS_contigs</span>
+ <span class="k">WHERE</span> <span class="k">length</span> <span class="o">&gt;</span> <span class="mi">20000</span> <span class="k">AND</span> <span class="n">coverage</span> <span class="o">&gt;</span> <span class="mi">100</span> <span class="k">AND</span> <span class="n">run</span> <span class="k">like</span> <span class="s1">'%SRR%'</span>
+ <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">run</span> <span class="k">ASC</span>
+ <span class="k">LIMIT</span> <span class="mi">10</span>
+</code></pre></div>          </div>
+        </li>
+        <li><em>“include query result column headers”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Click <strong>execute</strong> and rename the output file to <code class="language-plaintext highlighter-rouge">Run_list</code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Run_list</code></li>    <li>Click the <strong>Save</strong> button</li>  </ul></blockquote>
+
+      <blockquote class="tip">
+        <h3 id="tip-column-headers-for-the-other-metadata-tables"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Column Headers for the Other Metadata Tables</h3>
+        <p>We are not going to bring in the other metadata tables in this tutorial. Here is a list of column headers for contigs and the other tables.
+You can find full definitions for these columns here:</p>
+
+        <p><a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-cloud-based-examples/">https://www.ncbi.nlm.nih.gov/sra/docs/sra-cloud-based-examples/</a></p>
+
+        <p><a href="https://www.ncbi.nlm.nih.gov/sra/docs/aligned-metadata-tables/">https://www.ncbi.nlm.nih.gov/sra/docs/aligned-metadata-tables/</a></p>
+
+        <p><strong>contigs</strong></p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name,run,coverage,tax_id,hits,length,md5
+</code></pre></div>        </div>
+        <p><strong>annotated_variations</strong></p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>run,chrom,pos,id,ref,alt,qual,filter,info,format,sample_a,ac,an,bqb,dp,dp4,dp4_1,dp4_2,dp4_3,dp4_4,idv,imf,mq,mq0f,mqb,mqsb,rpb,sgb,vdb,g_gt,g_pl,g_pl_1,g_pl_2,g_dp,g_ad,g_ad_1,g_ad_2,protein_position,ref_codon,alt_codon,ref_aa,alt_aa,protein_name,protein_length,variation
+</code></pre></div>        </div>
+        <p><strong>blastn</strong></p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>acc,qacc,staxid,sacc,slen,length,bitscore,score,pident,sskingdom,evalue,ssciname
+</code></pre></div>        </div>
+        <p><strong>metadata</strong></p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>acc,assay_type,center_name,consent,experiment,sample_name,instrument,librarylayout,libraryselection,librarysource,platform,sample_acc,biosample,organism,sra_study,releasedate,bioproject,mbytes,loaddate,avgspotlen,mbases,insertsize,library_name,biosamplemodel_sam,collection_date_sam,geo_loc_name_country_calc,geo_loc_name_country_continent_calc,ena_first_public_run,ena_last_update_run,sample_name_sam,datastore_filetype,datastore_provider,datastore_region,attributes,jattr
+</code></pre></div>        </div>
+        <p><strong>peptides</strong></p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name,contig,mat_peptide,run,location,gene,product,ref_db,ref_id,sequence
+</code></pre></div>        </div>
+        <p><strong>tax_analysis</strong></p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>run,contig,tax_id,rank,name,total_count,self_count,ilevel,ileft,iright
+</code></pre></div>        </div>
+        <p><strong>variations</strong></p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>run,chrom,pos,id,ref,alt,qual,filter,info
+</code></pre></div>        </div>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-download-fastq-with-quality-scores"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Download Fastq with Quality Scores</h3>
+  <p>If you would like to dump the raw, underlying data in fastq format with the original quality scores, you can stop here and use the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.11.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.11.0+galaxy0"><strong>Faster Download and Extract <span class="notranslate">Reads</span> in FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.11.0+<span class="notranslate">galaxy</span>0</span></span>  tool with the following parameters:</p>
+
+  <ul>
+    <li><em>“input type”</em>: <code class="language-plaintext highlighter-rouge">list of SRA accessions, one per line</code></li>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“sra accession list”</em>: <code class="language-plaintext highlighter-rouge">Run_list</code></li>
+  </ul>
+
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-importing-a-list-of-srr-from-athena-or-bigquery"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Importing a list of SRR from Athena or BigQuery</h3>
+  <p>If you opted to conduct your metadata search in the cloud using AWS Athena or GCP BigQuery instead of importing the json file to <span class="notranslate">Galaxy</span>, you can save a list of your Run accessions from that search result and import that file as the ‘Run_list’ to proceed with the rest of this tutorial.</p>
+</blockquote>
+
+<h1 id="importing-sarfs-of-interest">Importing SARFs of Interest</h1>
+
+<p>Now that we have assembled a list of Runs that have contigs we are interested in, we’ll construct the path to the <strong>SARFS</strong> in the cloud and import those to <span class="notranslate">Galaxy</span> so we can work with them.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-importing-sarfs-of-interest"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Importing SARFs of Interest</h3>
+
+  <ol>
+    <li>
+      <p>Upload Data</p>
+
+      <ol>
+        <li><strong>Open</strong> the <code class="language-plaintext highlighter-rouge">Rule-based</code> upload tab again, but this time:
+          <ul>
+            <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
+            <li><em>“Load tabular data from”</em>: <code class="language-plaintext highlighter-rouge">History Dataset</code></li>
+            <li><em>“Select dataset to load”</em>: <code class="language-plaintext highlighter-rouge">Run_list</code></li>
+          </ul>
+        </li>
+        <li>
+          <p><strong>Click</strong> <code class="language-plaintext highlighter-rouge">Build</code> to bring up the rule builder.</p>
+        </li>
+        <li>
+          <p>Make the following changes in the Rule Builder</p>
+
+          <ul>
+            <li>From <strong>Column</strong> menu select <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
+              <ul>
+                <li>Check <em>“Create column from <span class="notranslate">expression</span> replacement”</em></li>
+                <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">(.*)</code></li>
+                <li><em>“Replacement <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">https://sra-pub-sars-cov2.s3.amazonaws.com/RAO/\1/\1.realign</code></li>
+                <li>Apply</li>
+              </ul>
+            </li>
+            <li>From <strong>Rules</strong> menu select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
+              <ul>
+                <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">URL</code>
+                  <ul>
+                    <li><em>“URL”</em>: <code class="language-plaintext highlighter-rouge">B</code></li>
+                    <li>Click Apply</li>
+                  </ul>
+                </li>
+                <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">List Identifier</code>
+                  <ul>
+                    <li><em>“List Identifier”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
+                    <li>Click Apply</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <p>Name the output collection <code class="language-plaintext highlighter-rouge">sarf_path</code> before clicking <strong>Upload</strong></p>
+
+          <blockquote class="comment">
+            <h3 id="comment-comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+            <p>Please note that there can be some lag in availability of SARF/VCF files in the cloud (particularly for newly submitted data). So it’s possible to get a download error for a file that isn’t yet present in the cloud. In these cases waiting ~24 hours will generally resolve the issue and allow you to access the file.</p>
+
+          </blockquote>
+        </li>
+      </ol>
+    </li>
+    <li>
+      <p><strong>Finally we will use the SRA toolkit to dump the contigs in fasta format.</strong></p>
+
+      <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fastq_dump/2.11.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fastq_dump/2.11.0+galaxy0"><strong>Download and Extract <span class="notranslate">Reads</span> in FASTA/Q format from NCBI SRA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/sra_tools/fastq_dump/2.11.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:</p>
+
+      <ul>
+        <li><em>“Select input type”</em>: <code class="language-plaintext highlighter-rouge">SRA Archive in current history</code></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span><em>“sra archive”</em>: <code class="language-plaintext highlighter-rouge">sarf_path</code></li>
+        <li>In “Advanced Options”:
+          <ul>
+            <li><em>“Table name within cSRA object”</em>: <code class="language-plaintext highlighter-rouge">REFERENCE</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>The resulting dataset includes the contigs generated from these Runs.</p>
+
+      <blockquote class="tip">
+        <h3 id="tip-fastq-format-option"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Fastq format option</h3>
+        <p>If you prefer to dump the raw <span class="notranslate">reads</span> in fastq format with placeholder quality scores, leave the <code class="language-plaintext highlighter-rouge">Table name within cSRA object</code> field blank.</p>
+
+        <p>This will generate fastq with quality placeholders <code class="language-plaintext highlighter-rouge">?</code>, as SARFs do not contain quality scores.</p>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="finding-vcfs-for-sars-cov-2-runs">Finding VCFs for SARS-Cov-2 Runs</h1>
+
+<p>Metadata about these Runs, including submitted sample and library information, BLAST results, descriptive contig statistics, and variation and annotation information are available to query in the cloud using  <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-bigquery/">Google’s BigQuery</a> or <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-athena/">Amazon’s Athena</a> services. However, the raw underlying information is also provided as a group of json files that can be <strong>downloaded for free from the Open Data Platform</strong> without logging in to the cloud. The VCF metadata can be imported to <span class="notranslate">Galaxy</span> and queried there to find VCFs of interest.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-comment-4"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+  <p>Some of these tables include complex data fields (array of values) that don’t have a clean analogue in a classic SQL database or table and these can’t be easily queried in <span class="notranslate">Galaxy</span> currently. If you require access to <a href="https://www.ncbi.nlm.nih.gov/sra/docs/aligned-metadata-tables/">cloud tables</a> or fields not available in <span class="notranslate">Galaxy</span> recommend accessing those natively in <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-bigquery/">BigQuery</a> or <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-athena/">Athena</a>.</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-importing-vcfs-of-interest"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Importing VCFs of Interest</h3>
+
+  <ol>
+    <li>
+      <p>Upload Data</p>
+
+      <ol>
+        <li><strong>Open</strong> the <code class="language-plaintext highlighter-rouge">Rule-based</code> upload tab again, but this time:
+          <ul>
+            <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
+            <li><em>“Load tabular data from”</em>: <code class="language-plaintext highlighter-rouge">History Dataset</code></li>
+            <li><em>“Select dataset to load”</em>: <code class="language-plaintext highlighter-rouge">annotated_variations.filelist</code></li>
+          </ul>
+        </li>
+        <li>
+          <p><strong>Click</strong> <code class="language-plaintext highlighter-rouge">Build</code> to bring up the rule builder.</p>
+        </li>
+        <li>
+          <p>Make the following changes in the Rule Builder</p>
+
+          <ul>
+            <li>From <strong>Column</strong> menu select <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
+              <ul>
+                <li>Check <em>“Create column from <span class="notranslate">expression</span> replacement”</em></li>
+                <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">(.*)</code></li>
+                <li><em>“Replacement <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/annotated_variations/\1</code></li>
+                <li>Apply</li>
+              </ul>
+            </li>
+            <li>From <strong>Rules</strong> menu select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
+              <ul>
+                <li><em>“URL”</em>: <code class="language-plaintext highlighter-rouge">B</code></li>
+                <li><em>“List Identifier”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <p>Name the output collection <code class="language-plaintext highlighter-rouge">variations</code> before clicking <strong>Upload</strong></p>
+
+          <blockquote class="comment">
+            <h3 id="comment-comment-5"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+            <p>Please note that there can be some lag in availability of SARF/VCF files in the cloud (particularly for newly submitted data). So it’s possible to get a download error for a file that isn’t yet present in the cloud. In these cases waiting ~24 hours will generally resolve the issue and allow you to access the file.</p>
+
+          </blockquote>
+        </li>
+      </ol>
+    </li>
+    <li>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0</span></span>  tail to head (cat) files with the following parameters:</p>
+
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Datasets to Concatenate”</em>: <code class="language-plaintext highlighter-rouge">variations</code> collection</li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the output to <code class="language-plaintext highlighter-rouge">variation.json</code></p>
+    </li>
+    <li>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jq/jq/1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jq/jq/1.0"><strong>JQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jq/jq/1.0</span></span>  process JSON files with the following parameters:</p>
+
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“JSON Input”</em>: <code class="language-plaintext highlighter-rouge">variation.json</code></li>
+        <li><em>“jq filter”</em>: <code class="language-plaintext highlighter-rouge">[.[]]</code></li>
+        <li><em>“Convert output to tabular”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
+      </ul>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-slow-step"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Slow step</h3>
+        <p>This step can take ~30 minutes to run due to the ~8GB of JSON it needs to process.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Rename this file <code class="language-plaintext highlighter-rouge">variation.tsv</code></p>
+    </li>
+    <li>
+      <p><strong>Query for VCFs of Interest</strong>. Next we’ll query this metadata using the <code class="language-plaintext highlighter-rouge">Query tabular</code> tool to get a list of all Runs containing a called <code class="language-plaintext highlighter-rouge">E484K</code> variant.</p>
+
+      <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0"><strong>Query Tabular using sqlite sql</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0</span></span>  with the following parameters:</p>
+
+      <ul>
+        <li>In <em>“Database Table”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Database Table”</em>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset for Table”</em>: <code class="language-plaintext highlighter-rouge">variation.tsv</code></li>
+                <li>In <em>“Table Options”</em>
+                  <ul>
+                    <li>In <em>“Table Options”</em>
+                      <ul>
+                        <li><em>“specify name for table”</em>: <code class="language-plaintext highlighter-rouge">sars_variation</code></li>
+                        <li>
+                          <p><em>“Specify Column Names”</em>:</p>
+
+                          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>run,chrom,pos,id,ref,alt,qual,filter,info,format,sample_a,ac,an,bqb,dp,dp4,dp4_1,dp4_2,dp4_3,dp4_4,idv,imf,mq,mq0f,mqb,mqsb,rpb,sgb,vdb,g_gt,g_pl,g_pl_1,g_pl_2,g_dp,g_ad,g_ad_1,g_ad_2,protein_position,ref_codon,alt_codon,ref_aa,alt_aa,protein_name,protein_length,variation
+</code></pre></div>                          </div>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <p><em>“SQL Query to generate tabular output”</em>:</p>
+
+          <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="n">run</span>
+<span class="k">FROM</span> <span class="n">sars_variation</span>
+<span class="k">WHERE</span> <span class="n">variation</span> <span class="o">=</span> <span class="nv">`E484K`</span> <span class="k">AND</span> <span class="n">run</span> <span class="k">LIKE</span> <span class="nv">`%SRR%`</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">run</span> <span class="k">ASC</span>
+<span class="k">LIMIT</span> <span class="mi">10</span>
+</code></pre></div>          </div>
+        </li>
+        <li><em>“include query result column headers”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Click the <strong>execute</strong> button and rename the output file to <code class="language-plaintext highlighter-rouge">vcf_list</code></p>
+
+      <p>Now that we have assembled a list of Runs that have VCFs we are interested in, we’ll construct the path to the VCF files in the cloud and import those to <span class="notranslate">Galaxy</span> so we can work with them.</p>
+    </li>
+    <li>
+      <p>Upload Data</p>
+
+      <ol>
+        <li><strong>Open</strong> the <code class="language-plaintext highlighter-rouge">Rule-based</code> upload tab again, but this time:
+          <ul>
+            <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
+            <li><em>“Load tabular data from”</em>: <code class="language-plaintext highlighter-rouge">History Dataset</code></li>
+            <li><em>“Select dataset to load”</em>: <code class="language-plaintext highlighter-rouge">vcf_list</code></li>
+          </ul>
+        </li>
+        <li>
+          <p><strong>Click</strong> <code class="language-plaintext highlighter-rouge">Build</code> to bring up the rule builder.</p>
+        </li>
+        <li>
+          <p>Make the following changes in the Rule Builder</p>
+
+          <ul>
+            <li>From <strong>Column</strong> menu select <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
+              <ul>
+                <li>Check <em>“Create column from <span class="notranslate">expression</span> replacement”</em></li>
+                <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">(.*)</code> <!-- .* --></li>
+                <li><em>“Replacement <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">https://sra-pub-sars-cov2.s3.amazonaws.com/VCF/\1/\1.vcf</code></li>
+                <li>Apply</li>
+              </ul>
+            </li>
+            <li>From <strong>Rules</strong> menu select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
+              <ul>
+                <li><em>“URL”</em>: <code class="language-plaintext highlighter-rouge">B</code></li>
+                <li><em>“List Identifier”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>Name your collection <code class="language-plaintext highlighter-rouge">VCFs</code> and click <strong>Upload</strong></li>
+      </ol>
+    </li>
+    <li>
+      <p><strong>Use VCFs in Another <span class="notranslate">Galaxy</span> Tool</strong>. Once you have imported the VCF files, you can use them in your standard pipeline- here we will annotate them with SnpEff.</p>
+
+      <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19"><strong>SnpEff eff: annotate variants for SARS-CoV-2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19</span></span>   with the following parameters:</p>
+
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Sequence changes (SNPs, MNPs, InDels)”</em>: the <code class="language-plaintext highlighter-rouge">VCFs</code> collection we just created</li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-6"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>Please note that there are 2 Snepff tools, please choose the one for SARS-CoV-2</p>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="other-ncbi-resources">Other NCBI Resources</h1>
+<ul>
+  <li><a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-cloud/">Getting started with SRA in the Cloud</a></li>
+  <li><a href="https://www.ncbi.nlm.nih.gov/sars-cov-2/">NCBI SARS-CoV-2 Resources</a></li>
+  <li><a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-taxonomy-analysis-tool/">STAT tool</a></li>
+  <li><a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-aligned-read-format/">SRA Aligned Read Format</a></li>
+  <li><a href="https://www.ncbi.nlm.nih.gov/sra/docs/sars-cov-2-variant-calling/">VCF generation</a></li>
+</ul>
+
+<p>If you have questions or feedback you can email the SRA helpdesk: <a href="mailto:sra@ncbi.nlm.nih.gov">sra@ncbi.nlm.nih.gov</a></p>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>NCBI Publishes datasets in the cloud that you can easily process with Galaxy</p>
+</li>
+                            
+                            <li><p>The Rule Based Uploader simplifies processing and downloading large numbers of files</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/galaxy-interface/faqs/">FAQ page for the Using Galaxy and Managing your Data topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                    
+
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=SRA Aligned Read Formats to Speed Up SARS-CoV-2 data Analysis (Using Galaxy and Managing your Data)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Jon Trow, Adelaide Rhodes, 2021 <b>SRA Aligned Read Formats to Speed Up SARS-CoV-2 data Analysis (Galaxy Training Materials)</b>. <a href="/training-material/topics/galaxy-interface/tutorials/ncbi-sarf/tutorial.html">/training-material/topics/galaxy-interface/tutorials/ncbi-sarf/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{galaxy-interface-ncbi-sarf,
+    author = "Jon Trow and Adelaide Rhodes",
+    title = "SRA Aligned Read Formats to Speed Up SARS-CoV-2 data Analysis (Galaxy Training Materials)",
+    year = "2021",
+    month = "05",
+    day = "28"
+    url = "\url{/training-material/topics/galaxy-interface/tutorials/ncbi-sarf/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Jon Trow, Adelaide Rhodes)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/galaxy-interface/tutorials/ncbi-sarf/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
