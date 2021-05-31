@@ -339,7 +339,7 @@ dataset has 723 training examples, and our test dataset has 242 test examples. I
 
 > ### {% icon hands_on %} Hands-on: Model config
 >
-> - {% tool [Create a deep learning model architecture](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0) %}
+> - {% tool [Create a deep learning model architecture](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.4.2) %}
 >    - *"Select keras model type"*: `sequential`
 >    - *"input_shape"*: `(5,)`
 >    - In *"LAYER"*:
@@ -366,7 +366,7 @@ layers use ReLU activation function. The model config can be downloaded as a JSO
 
 > ### {% icon hands_on %} Hands-on: Model builder (Optimizer, loss function, and fit parameters)
 >
-> - {% tool [Create deep learning model](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0) %}
+> - {% tool [Create deep learning model](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.4.2) %}
 >    - *"Choose a building mode"*: `Build a training model`
 >    - *"Select the dataset containing model configuration"*: Select the *Keras Model Config* from the previous step.
 >    - *"Do classification or regression?"*: `KerasGRegressor`
