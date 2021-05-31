@@ -27,6 +27,8 @@ contributors:
   - jraysajulga
   - jj-umn
   - pravs3683
+subtopic: multi-omics
+tags: [proteogenomics]
 ---
 
 # Introduction

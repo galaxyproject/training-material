@@ -30,7 +30,8 @@ follow_up_training:
         tutorials:
             - metaproteomics
 
-
+subtopic: multi-omics
+tags: [microbiome]
 ---
 
 

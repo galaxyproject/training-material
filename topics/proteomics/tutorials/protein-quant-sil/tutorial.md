@@ -29,6 +29,8 @@ contributors:
   - stortebecker
   - bgruening
   - matthias313
+subtopic: id-quant
+tags: [DDA, SILAC]
 ---
 
 # Introduction
@@ -150,7 +152,7 @@ The OpenMS suite provides several tools (FeatureFinders) for MS1 feature detecti
 >
 > 1. Run {% tool [FeatureFinderMultiplex](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_featurefindermultiplex/FeatureFinderMultiplex/2.6+galaxy0) %} with
 >    - {% icon param-file %} *"LC-MS dataset in centroid or profile mode"*: mzML file
->    - In *"algorithmic parameters"* 
+>    - In *"algorithmic parameters"*
 >      - *"Labels used for labelling the samples"*: `[ ][Arg6,Lys6]`
 >      - *"m/z tolerance for search of peak patterns"*: `10`
 >      - *"Maximum number of missed cleavages due to incomplete digestion"*: `1`
@@ -183,7 +185,7 @@ Finally, the correctly mapped peptides will be combined into protein quantificat
 >    - {% icon param-file %} *"Feature map/consensus map file"*: output of **FeatureFinderMultiplex**
 >    - *"RT tolerance (in seconds) for the matching of peptide identifications and (consensus) features"*: `20`
 >    - *"m/z tolerance (in ppm or Da) for matching of peptide identifications and (consensus) features"*: `10`
->    - In *"Additional options for consensusXML input"* 
+>    - In *"Additional options for consensusXML input"*
 >      - *"Match using RT and m/z of sub-features instead of consensus RT and m/z"*: `Yes`
 >      - *"Store the map index of the sub-feature in the peptide ID"*: `Yes`
 >

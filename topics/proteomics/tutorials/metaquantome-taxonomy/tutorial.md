@@ -34,6 +34,8 @@ requirements:
      tutorials:
        - metaquantome-data-creation
 
+subtopic: multi-omics
+tags: [microbiome]
 ---
 
 
