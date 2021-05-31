@@ -31,6 +31,8 @@ contributors:
   - jraysajulga
   - jj-umn
   - pravs3683
+subtopic: multi-omics
+tags: [proteogenomics]
 ---
 
 # Introduction
@@ -85,7 +87,7 @@ For this, the sequence database-searching program called [SearchGUI](https://com
 
 ### {% icon comment %} Comment: Tool Versions
 >
-> The tools are subjected to changes while being upgraded. Here we have used an older version of SearchGUI (v3.3.10.1)-Peptide Shaker (v1.16.36.3). 
+> The tools are subjected to changes while being upgraded. Here we have used an older version of SearchGUI (v3.3.10.1)-Peptide Shaker (v1.16.36.3).
 > The new versions are available in Galaxy.
 >
 {: .comment}
@@ -99,7 +101,7 @@ For this, the sequence database-searching program called [SearchGUI](https://com
 >    - {% icon param-file %} *"Protein Database"*: `Uniprot_cRAP_SAV_indel_translatedbed.FASTA` (Or however you named the `FASTA` file)
 >
 >        > ### {% icon comment %} Comment:
->        >    The "Uniprot_cRAP_SAV_indel_translatedbed" FASTA database is obtained when you run the first proteogenomics workflow. 
+>        >    The "Uniprot_cRAP_SAV_indel_translatedbed" FASTA database is obtained when you run the first proteogenomics workflow.
 >        >    Please make sure to run the 1st workflow.
 >        {: .comment}
 >
@@ -386,7 +388,7 @@ The output FASTA file is going to be subjected to BLAST-P analysis.
 # **Conclusion**
 {:.no_toc}
 
-This completes the walkthrough of the proteogenomics database search workflow. This tutorial is a guide to perform database searching with mass spectronetry files and have peptides ready for Blast-P analysis, you can perform follow up analysis using the next GTN "Proteogenomics Novel Peptide Analysis". 
+This completes the walkthrough of the proteogenomics database search workflow. This tutorial is a guide to perform database searching with mass spectronetry files and have peptides ready for Blast-P analysis, you can perform follow up analysis using the next GTN "Proteogenomics Novel Peptide Analysis".
 Researchers can use this workflow with their data also, please note that the tool parameters, reference genomes and the workflow will be needed to be modified accordingly.
 
 This workflow was developed by the Galaxy-P team at the University of Minnesota. For more information about Galaxy-P or our ongoing work, please visit us at [galaxyp.org](https://galaxyp.org)
