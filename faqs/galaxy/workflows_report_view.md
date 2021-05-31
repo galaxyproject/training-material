@@ -10,7 +10,7 @@ layout: faq
 - Click on **Workflow invocations**
   - Here you will find a list of all the workflows you have run
 - Click on the name of a workflow invocation to expand it
-  ![workflow invocations list](images/workflow_invocations_menu.png)
+  ![workflow invocations list]({{site.baseurl}}/faqs/galaxy/images/workflow_invocations_menu.png)
 - Click on **View Report** to go to the workflow report page
 - **Note:** The report can also be downloaded in PDF format by clicking on the {% icon galaxy-wf-report-download %} icon.
 
