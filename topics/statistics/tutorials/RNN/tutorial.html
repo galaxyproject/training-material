@@ -530,6 +530,10 @@
             <ul>
                 <div class="supporting_material">
                 
+                    <li class="btn btn-default"><a href="/training-material/topics/statistics/tutorials/RNN/slides.html" title="Slides for this tutorial">
+                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides
+                    </a></li>
+                
 
                 
                     <li class="btn btn-default supporting_material">
@@ -699,6 +703,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -745,7 +751,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 6, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 21, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -804,8 +810,8 @@ describe various RNN architectures and solve a sentiment analysis problem using 
 
 <p>In feedforward neural networks (FNN) a single training example is presented to the network,
 after which the the network generates an output. For example, a lung X-ray image is passed
-to a FNN, and the network predicts tumor or no tumor. By contrast, in RNN a sequence of
-training examples are presented to the network one at a time. For example, a sequence of
+to a FNN, and the network predicts tumor or no tumor. By contrast, in RNN a training example
+is a sequence, which is presented to the network one at a time. For example, a sequence of
 English words is passed to a RNN, one at a time, and the network generates a sequence of
 Persian words, one at a time. RNN handle sequential data, whether its temporal or ordinal.</p>
 
@@ -859,7 +865,7 @@ direction of the gradient, to find the local minimum.</p>
 <h2 id="possible-rnn-inputsoutputs">Possible RNN inputs/outputs</h2>
 
 <p>There are 4 possible input/output combinations for RNN and each have a specific application. One-to-one is basically a FNN. One-to-many,
-where we have one input and a variable number of output. One example application is image captioning, where a single image is provided
+where we have one input and a variable number of outputs. One example application is image captioning, where a single image is provided
 as input and a variable number of words (which caption the image) is returned as output (See Figure 7).</p>
 
 <figure id="figure-7"><img src="../../images/RNN_1_to_n.png" alt="Neurons forming a one-to-many recurrent neural network" /><figcaption><span class="figcaption-prefix">Figure 7:</span> One-to-many RNN</figcaption></figure>
@@ -880,14 +886,15 @@ we pass in n words in English and get m words in Italian (See Figure 9).</p>
 
 <p>Mainly, there are three types of RNN: 1) Vanilla RNN, 2) LSTM (<a class="citation" href="#hochreiter1997long">Hochreiter and Schmidhuber 1997</a>), and 3) GRU (<a class="citation" href="#cho-etal-2014-learning">Cho <i>et al.</i> 2014</a>).
 A Vanilla RNN, simply combines the state information from the previous timestamp with the input from the current timestamp to generate the
-state information for current timestamp. The problem with Vanilla RNN is that training deep RNN networks is impossible due to the
-<strong>vanishing gradient</strong> problem. Basically, starting from the output layer, in order to determine weights/biases updates, we need to calculate
-the derivative of the loss function relative to the layers input, which is usually a small number. This is not a problem for the output layer,
-but for the previous layers, this process must be repeated recursively, resulting in very small updates to weights/biases of the initial layers
-of the RNN, halting the learning process.</p>
+state information and output for current timestamp. The problem with Vanilla RNN is that training deep RNN networks is impossible due to the
+<strong>vanishing gradient</strong> problem. Basically, weights/biases are updated according to the gradient of the loss functions relative to 
+the weights/biases. The gradients are calculated recursively from the output layer towards the input layer (Hence, the name <em>backpropagation</em>).
+The gradient of the input layer is the product of the gradient of the subsequent layers. If those gradients are small, the gradient of the input
+layer (which is the product of multiple small values) will very small, resulting in very small updates to weights/biases of the initial layers
+of the RNN, effectively halting the learning process.</p>
 
 <p>LSTM and GRU are two RNN architectures that address vanishing gradient problem. Full description of LSTM/GRU is beyond the scope of this
-tutorial (Please refer to ref1 and ref2), but in a nutshell both LSTM and GRU use <strong>gates</strong> such that the weights/biases updates in previous
+tutorial (Please refer to <a class="citation" href="#hochreiter1997long">Hochreiter and Schmidhuber 1997</a> and <a class="citation" href="#cho-etal-2014-learning">Cho <i>et al.</i> 2014</a>), but in a nutshell both LSTM and GRU use <strong>gates</strong> such that the weights/biases updates in previous
 layers are calculated via a series of additions (not multiplications). Hence, these architectures can learn even when the RNN has hundreds or
 thousands of layers.</p>
 
@@ -912,7 +919,7 @@ the next 10,000 words in our dataset. Reviews are limited to 500 words. They are
 
 <h2 id="bag-of-words-and-tf-idf">Bag of words and TF-IDF</h2>
 
-<p>If you don’t care about the order of the words in a document, you can use bag of words (BoW) or text frequency inverse document frequency (TF-IDF).
+<p>If you don’t care about the order of the words in a document, you can use bag of words (BoW) or term frequency inverse document frequency (TF-IDF).
 In these models we have a 2 dimensional array. The rows represent the documents (in our example, the movie reviews) and the columns
 represent the words in our vocabulary (all the unique words in all the documents). If a word is not present in a document, we have a zero
 at the corresponding row and column as the entry. If a word is present in the document, we have a one as the entry – Alte<span class="notranslate">rna</span>tively, we could use
@@ -926,7 +933,7 @@ representation of these documents is given in Figure 10.</p>
 <p>BoW’s advantage is its simplicity, yet it does not take into account the rarity of a word across documents, which unlike common words are
 important for document classification.</p>
 
-<p>In TF-IDF, similar to BoW we have an entry for each document-word pair. In TD-IDF, the entry is the product of 1) Text frequency, the
+<p>In TF-IDF, similar to BoW we have an entry for each document-word pair. In TD-IDF, the entry is the product of 1) Term frequency, the
 frequency of a word in a document, and 2) Inverse document frequency, the inverse of the number of documents that have the word divided
 by the total number of documents (we usually use logarithm of the IDF).</p>
 
@@ -1192,7 +1199,7 @@ to use the <strong>F score</strong>, which is the harmonic mean of precision and
 class labels (we have 10,397 + 2,103 = 12,500 reviews with negative sentiment). The second row represents the <em>true</em> 1 (or positive sentiment) class labels
 (Again, we have 1,281 + 11,219 = 12,500 reviews with positive sentiment). The left column represents the <em>predicted</em> negative sentiment class labels (Our RNN
 predicted 10,397 + 1,281 = 11,678 reviews as having a negative sentiment). The right column represents the <em>predicted</em> positive class labels (Our RNN
-predicted 11,219 + 2,103 = 13,322 reviews as having a positive sentiment).Looking at the bottom right cell, we seethat our RNN has correctly predicted 11,219
+predicted 11,219 + 2,103 = 13,322 reviews as having a positive sentiment).Looking at the bottom right cell, we see that our RNN has correctly predicted 11,219
 reviews as having a positive sentiment (True positives). Looking at the top right cell, we see that our RNN has incorrectly predicted 2,103 reviews as having
 a positive (False positives). Similarly, looking at the top left cell, we see that our RNN has correctly predicted 10,397 reviews as having negative sentiment
 (True negative). Finally, looking at the bottom left cell, we see that our RNN has incorrectly predicted 1,281 reviews as negative (False negative). Given
@@ -1407,8 +1414,8 @@ classification problem using RNN on IMDB movie reviews dataset.</p>
     author = "Kaivan Kamali",
     title = "Deep Learning (Part 2) - Recurrent neural networks (RNN) (Galaxy Training Materials)",
     year = "2021",
-    month = "04",
-    day = "06"
+    month = "05",
+    day = "21"
     url = "\url{/training-material/topics/statistics/tutorials/RNN/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
