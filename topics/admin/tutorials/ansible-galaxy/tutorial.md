@@ -1724,6 +1724,9 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 > If you encounter this situation you just have to be mindful of the fact, and remember to manually restart the handler. There is no general solution to this problem unfortunately. This applies mostly to development setups. In production you're probably running that playbook somewhat regularly and do not expect failures as everything is quite stable.
 >
 {: .details}
+<!-- test
+0-galaxy-up.sh
+-->
 
 ## NGINX
 
