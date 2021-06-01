@@ -74,6 +74,7 @@ jobs:
           gem install bundler
           sed -i s"|^baseurl: .*|baseurl: '/archive/${SOURCE_TAG}'|g" _config.yml
           sed -i s"|^github_repository_branch: .*|github_repository_branch: '${SOURCE_TAG}'|g" _config.yml
+          sed -i s"|^title: .*|github_repository_branch: 'GTN Archive ${SOURCE_TAG}'|g" _config.yml
           npm install
           make rebuild-search-index ACTIVATE_ENV=pwd
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
