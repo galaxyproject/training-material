@@ -1724,9 +1724,12 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 > If you encounter this situation you just have to be mindful of the fact, and remember to manually restart the handler. There is no general solution to this problem unfortunately. This applies mostly to development setups. In production you're probably running that playbook somewhat regularly and do not expect failures as everything is quite stable.
 >
 {: .details}
-<!-- test
-0-galaxy-up.sh
--->
+
+> ```bash
+> 0-galaxy-up.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
 
 ## NGINX
 
@@ -2031,9 +2034,12 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >  `usegalaxy_eu.galaxy_systemd`| This requires Galaxy to be configured + functional, or it will fail to start the handler. Additionally there are a couple of Galaxy variables used in the group vars.
 >  `galaxyproject.nginx`        | This requires Galaxy variables to find the static assets.
 {: .comment}
-<!-- test
-1-galaxy-up.sh
--->
+
+> ```bash
+> 1-galaxy-up.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
 
 ## Log in to Galaxy
 

@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import shutil
 import os
 import argparse
 import re
@@ -24,6 +25,7 @@ fn_tutorial = fnparts[fnparts.index('tutorials') + 1]
 diffs = []
 current = None
 currentCmd = None
+currentTest = None
 for line, text in enumerate(args.tutorial.read().split("\n")):
     m = re.match(knit.BOXES, text)
     if m:
@@ -36,6 +38,8 @@ for line, text in enumerate(args.tutorial.read().split("\n")):
     m2 = re.match(knit.BOX_CLOSE, unprefixed)
     c1 = re.match(knit.CMD_OPEN, unprefixed)
     c2 = re.match(knit.CMD_CLOSE, unprefixed)
+    t1 = re.match(knit.TEST_OPEN, unprefixed)
+    t2 = re.match(knit.TEST_CLOSE, unprefixed)
 
     if m1:
         if current is not None:
@@ -51,11 +55,29 @@ for line, text in enumerate(args.tutorial.read().split("\n")):
     elif currentCmd is not None:
         currentCmd.append(unprefixed)
 
+    if t1:
+        if currentTest is not None:
+            diffs.append(currentTest)
+        currentTest = []
+    elif currentTest is not None:
+        currentTest.append(unprefixed)
+
     if current and len(current) > 2 and current[-2].strip() == "```" and not m2:
         current = None
 
-    if currentCmd and len(currentCmd) > 1 and currentCmd[-2].strip() == "```" and not c2:
+    if currentCmd and len(currentCmd) > 2 and currentCmd[-2].strip() == "```" and not c2:
         currentCmd = None
+
+    if currentTest and len(currentTest) > 2 and currentTest[-2].strip() == "```" and not t2:
+        currentTest = None
+
+    # Tests are known short, same with commands. If we haven't exited by now, it's an issue..
+    if currentTest and len(currentTest) > 4:
+        currentTest = None
+
+    # interesting = (t1, t2, currentCmd, currentTest)
+    # if any([x is not None for x in interesting]):
+        # print(*interesting)
 
     if m2:
         diffs.append(current)
@@ -65,13 +87,21 @@ for line, text in enumerate(args.tutorial.read().split("\n")):
         diffs.append(currentCmd)
         currentCmd = None
 
+    if t2:
+        diffs.append(currentTest)
+        currentTest = None
+
 postfix = ["--", "2.25.1", "", ""]
 
 # import sys; sys.exit()
 
 
-cmdhandle = open(f"{args.prefix.replace('git-gat/', 'git-gat/.scripts/')}-run.sh", 'w')
+GITGAT = os.path.dirname(args.prefix)
+BASE = os.path.basename(args.prefix)
+
+cmdhandle = open(f"{GITGAT}/.scripts/{BASE}-run.sh", 'w')
 cmdhandle.write("#!/bin/bash\n")
+cmdhandle.write("set -e\n\n")
 
 lastCommit = None
 for idx, diff in enumerate(diffs):
@@ -101,9 +131,28 @@ for idx, diff in enumerate(diffs):
         with open(fn, "w") as handle:
             print(fn)
             handle.write("\n".join(prefix + diff + postfix))
-    else:
+    elif 'data-cmd' in diff[-1]:
+        cmdhandle.write("\nt# CMD\n")
         if lastCommit is not None:
-            cmdhandle.write(f'# Checkout\ngit checkout $(git log main --pretty=oneline | grep "{lastCommit}" | cut -c1-40)\n')
+            cmdhandle.write(f'## Checkout\ngit checkout $(git log main --pretty=oneline | grep "{lastCommit}" | cut -c1-40)\n')
         for line in diff[0:-2]:
-            cmdhandle.write("# Run command\n")
+            cmdhandle.write("## Run command\n")
             cmdhandle.write(line.strip() + "\n")
+    elif 'data-test' in diff[-1]:
+        cmdhandle.write("\n# TEST\n")
+        if lastCommit is not None:
+            cmdhandle.write(f'## Checkout\ngit checkout $(git log main --pretty=oneline | grep "{lastCommit}" | cut -c1-40)\n')
+        for line in diff[0:-2]:
+            testdir = f"topics/{fn_topic}/tutorials/{fn_tutorial}/tests"
+            gittestdir = f"{GITGAT}/.scripts/{BASE}-test"
+            if os.path.exists(testdir) and not os.path.exists(gittestdir):
+                shutil.copytree(testdir, gittestdir)
+
+            cmdhandle.write("## Install test dependencies\n")
+            if os.path.exists(f"{gittestdir}/requirements.txt"):
+                cmdhandle.write(f"pip install -r {gittestdir}/requirements.txt\n")
+
+            cmdhandle.write("## Run test case\n")
+            cmdhandle.write(f"bash {gittestdir}/{line.strip()}\n")
+    else:
+        print("Unknown!")

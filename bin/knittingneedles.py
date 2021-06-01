@@ -11,6 +11,9 @@ WHITESPACE = r"^(\s*)"
 CMD_OPEN = r"\s*```bash"
 CMD_CLOSE = r'\s*{: data-cmd="true"([^}]*)}'
 
+TEST_OPEN = r"\s*```bash"
+TEST_CLOSE = r'\s*{: data-test="true"([^}]*)}'
+
 
 def stripN(line, count):
     c = copy.copy(line)
