@@ -83,7 +83,7 @@ The main tool we will use in this tutorial is [Planemo](https://planemo.readthed
 > Planemo provides a more detailed tutorial on the `planemo run` functionality [here](https://planemo.readthedocs.io/en/latest/running.html). The pages on '[Best Practices for Maintaining Galaxy Workflows](https://planemo.readthedocs.io/en/latest/best_practices_workflows.html)' and '[Test Format](https://planemo.readthedocs.io/en/latest/test_format.html)' also contain a lot of useful information.
 {:.comment}
 
-For the purposes of this tutorial, we assume you have a recent version of Planemo installed in a virtual environment. If you don't, please follow the [installation instructions](https://planemo.readthedocs.io/en/latest/installation.html#pip).
+For the purposes of this tutorial, we assume you have a recent version of Planemo (0.74.4 or later) installed in a virtual environment. If you don't, please follow the [installation instructions](https://planemo.readthedocs.io/en/latest/installation.html#pip).
 
 ## Get the workflow and prepare the job file
 
