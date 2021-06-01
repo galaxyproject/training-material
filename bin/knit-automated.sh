@@ -3,7 +3,7 @@ DIR=/tmp/git-gat
 op="$1"
 
 declare -a tutorials
-tutorials=(ansible-galaxy singularity cvmfs data-library connect-to-compute-cluster job-destinations pulsar)
+tutorials=(ansible-galaxy singularity tool-management cvmfs data-library connect-to-compute-cluster job-destinations pulsar)
 
 #echo "${tutorials[0]}"
 #exit 1;
