@@ -77,6 +77,7 @@ elif [[ "$op" == "deploy" ]]; then
 	cd ${DIR} || exit
 	git init && \
 		git am -3 -- *.patch && \
+		git add .scripts/
 		git remote add origin git@github.com:hexylena/git-gat.git && \
 		git push -f origin
 else
