@@ -8,6 +8,9 @@ BOX_CLOSE = r'\s*{: data-commit="([^"]*)"([^}]*)}'
 BOX_CLOSE_ALL = r'\s*{:\s*(.spoken|data-commit|.code-in\s*data-cmd).*}'
 WHITESPACE = r"^(\s*)"
 
+CMD_OPEN = r"\s*```bash"
+CMD_CLOSE = r'\s*{: data-cmd="true"([^}]*)}'
+
 
 def stripN(line, count):
     c = copy.copy(line)

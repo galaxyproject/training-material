@@ -132,10 +132,11 @@ be taken into consideration when choosing where to run jobs and what parameters 
 > 5. Run the playbook
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 {: .hands_on}
 
@@ -326,10 +327,11 @@ Above Slurm in the stack is slurm-drmaa, a library that provides a translational
 > 2. Run the playbook (`ansible-playbook galaxy.yml`)
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 {: .hands_on}
 
@@ -393,10 +395,11 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 > 4. Run your Galaxy playbook
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 > 5. Watch the logs to check that everything loads correctly
 >

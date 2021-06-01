@@ -93,10 +93,11 @@ Ephemeris can take care of this process. Let's practice this on a real worfklow.
 > 1. Download the mapping workflow:
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > wget {{ site.url }}{% link topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga %}
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 > 2. Use the Ephemeris [`workflow-to-tools`](https://ephemeris.readthedocs.io/en/latest/commands/workflow-to-tools.html) command to extract the tool list from this workflow into a file named `workflow_tools.yml`.
 >
@@ -105,10 +106,11 @@ Ephemeris can take care of this process. Let's practice this on a real worfklow.
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > > ### {% icon code-in %} Input: Bash
->    > > > ```
+>    > > > ```bash
 >    > > > workflow-to-tools -w mapping.ga -o workflow_tools.yml -l Mapping
 >    > > > ```
->    > > {: .code-in data-cmd="true"}
+>    > > > {: data-cmd="true"}
+>    > > {: .code-in}
 >    > {: .solution }
 >    {: .question}
 >
@@ -246,10 +248,11 @@ Sometimes a user might ask you to install all the tools they were previously usi
 >    > > This command does not require authentication and can be used to obtain the tool list from any public Galaxy server:
 >    > >
 >    > > > ### {% icon code-in %} Input: Bash
->    > > > ```
+>    > > > ```bash
 >    > > > get-tool-list -g "https://usegalaxy.eu" -o "eu_tool_list.yaml"
 >    > > > ```
->    > > {: .code-in data-cmd="true"}
+>    > > > {: data-cmd="true"}
+>    > > {: .code-in}
 >    > {: .solution}
 >    {: .question}
 {: .hands_on}

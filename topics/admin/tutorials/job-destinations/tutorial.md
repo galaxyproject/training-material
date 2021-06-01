@@ -101,10 +101,11 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 > 3. Run the Galaxy playbook.
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 > 4. Reload Galaxy in your browser and the new tool should now appear in the tool panel. If you have not already created a dataset in your history, upload a random text dataset. Once you have a dataset, click the tool's name in the tool panel, then click Execute.
 >
@@ -166,10 +167,11 @@ We want our tool to run with more than one core. To do this, we need to instruct
 > 3. Run the Galaxy playbook. Because we modified `job_conf.xml`, Galaxy will be restarted to reread its config files.
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 > 4. Click the rerun button on the last history item, or click **Testing Tool** in the tool panel, and then click the tool's Execute button.
 >
@@ -288,10 +290,11 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 > 5. Run the Galaxy playbook.
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 > 6. Try running the tool as both an admin user and a non-admin user, non-admins should not be able to run it. You can start a private browsing session to test as a non-admin, anonymous user. Anonymous users were enabled in your Galaxy configuration.
 >
@@ -392,10 +395,11 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 > 4. Run the Galaxy playbook.
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 {: .hands_on}
 
@@ -629,10 +633,11 @@ Lastly, we need to write the rule that will read the value of the job resource p
 > 3. Run the Galaxy playbook.
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 > 4. Run the **Testing Tool** with various resource parameter selections
 >

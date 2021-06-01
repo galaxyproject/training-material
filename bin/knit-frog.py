@@ -22,6 +22,7 @@ fn_tutorial = fnparts[fnparts.index('tutorials') + 1]
 
 diffs = []
 current = None
+currentCmd = None
 for line, text in enumerate(args.tutorial.read().split("\n")):
     m = re.match(knit.BOXES, text)
     if m:
@@ -32,6 +33,8 @@ for line, text in enumerate(args.tutorial.read().split("\n")):
     (unprefixed, prefix) = knit.stripN(text, depth)
     m1 = re.match(knit.BOX_OPEN, unprefixed)
     m2 = re.match(knit.BOX_CLOSE, unprefixed)
+    c1 = re.match(knit.CMD_OPEN, unprefixed)
+    c2 = re.match(knit.CMD_CLOSE, unprefixed)
 
     if m1:
         if current is not None:
@@ -40,39 +43,65 @@ for line, text in enumerate(args.tutorial.read().split("\n")):
     elif current is not None:
         current.append(unprefixed)
 
+    if c1:
+        if currentCmd is not None:
+            diffs.append(currentCmd)
+        currentCmd = []
+    elif currentCmd is not None:
+        currentCmd.append(unprefixed)
+
     if current and len(current) > 2 and current[-2].strip() == "```" and not m2:
         current = None
+
+    if currentCmd and len(currentCmd) > 1 and currentCmd[-2].strip() == "```" and not c2:
+        currentCmd = None
 
     if m2:
         diffs.append(current)
         current = None
+
+    if c2:
+        diffs.append(currentCmd)
+        currentCmd = None
 
 postfix = ["--", "2.25.1", "", ""]
 
 # import sys; sys.exit()
 
 
+cmdhandle = open(f"{args.prefix}-run.sh", 'w')
+cmdhandle.write("#!/bin/bash\n")
+
+lastCommit = None
 for idx, diff in enumerate(diffs):
-    commit_msg = knit.extractCommitMsg(diff)
-    safe_commit = re.sub("[^a-z0-9-]", "-", commit_msg.lower())
+    if 'data-commit' in diff[-1]:
+        commit_msg = knit.extractCommitMsg(diff)
+        safe_commit = re.sub("[^a-z0-9-]", "-", commit_msg.lower())
 
-    prefix = [
-        "From: The Galaxy Training Network <galaxytrainingnetwork@gmail.com>",
-        "Date: Mon, 15 Feb 2021 14:06:56 +0100",
-        f"Subject: {fn_topic}/{fn_tutorial}/{idx:04d}: {commit_msg}",
-        "",
-        "",
-    ]
+        prefix = [
+            "From: The Galaxy Training Network <galaxytrainingnetwork@gmail.com>",
+            "Date: Mon, 15 Feb 2021 14:06:56 +0100",
+            f"Subject: {fn_topic}/{fn_tutorial}/{idx:04d}: {commit_msg}",
+            "",
+            "",
+        ]
 
-    (_, diff) = knit.removeWhitespacePrefix(diff)
+        lastCommit = f"{fn_topic}/{fn_tutorial}/{idx:04d}"
 
-    patch_id = diff[-1]
-    # Remove patch id, ```
-    diff = diff[0:-2]
-    if diff[-1] == "{% endraw %}":
-        diff = diff[0:-1]
+        (_, diff) = knit.removeWhitespacePrefix(diff)
 
-    fn = f"{args.prefix}-commit-{idx:04d}-{safe_commit}.patch"
-    with open(fn, "w") as handle:
-        print(fn)
-        handle.write("\n".join(prefix + diff + postfix))
+        patch_id = diff[-1]
+        # Remove patch id, ```
+        diff = diff[0:-2]
+        if diff[-1] == "{% endraw %}":
+            diff = diff[0:-1]
+
+        fn = f"{args.prefix}-commit-{idx:04d}-{safe_commit}.patch"
+        with open(fn, "w") as handle:
+            print(fn)
+            handle.write("\n".join(prefix + diff + postfix))
+    else:
+        cmdhandle.write(f'# Checkout\ngit checkout $(git log --pretty=oneline | grep "{lastCommit}" | cut -c1-40)\n')
+        for line in diff[0:-2]:
+            cmdhandle.write("# Run command\n")
+            cmdhandle.write(line.strip() + "\n")

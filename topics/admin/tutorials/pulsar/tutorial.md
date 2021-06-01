@@ -154,10 +154,11 @@ Firstly we will add and configure another *role* to our Galaxy playbook - we mai
 > 2. Now install it with:
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 {: .hands_on}
 
@@ -339,10 +340,11 @@ More information about the rabbitmq ansible role can be found [in the repository
 > 4. Run the playbook.
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 > The rabbitmq server daemon will have been installed on your Galaxy VM. Check that it's running now:
 >
@@ -598,10 +600,11 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 > 1. Run the playbook.
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook pulsar.yml
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 >    After the script has run, pulsar will be installed on the remote machines!
 >
@@ -758,7 +761,7 @@ How awesome is that? Pulsar in another continent with reference data automatical
 
 # Retries of the staging actions
 
-When the staging actions are carried out by the Pulsar server itself (like in the case when driving Pulsar by message queue), there are some parameters that can be tweaked to ensure reliable communication between the Galaxy server and the remote Pulsar server. 
+When the staging actions are carried out by the Pulsar server itself (like in the case when driving Pulsar by message queue), there are some parameters that can be tweaked to ensure reliable communication between the Galaxy server and the remote Pulsar server.
 The aim of these parameters is to control the retrying of staging actions in the event of a failure.
 
 For each action (preprocess/input or postprocess/output), you can specify:

@@ -93,10 +93,11 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 > 5. Run the playbook:
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 {: .hands_on}
 

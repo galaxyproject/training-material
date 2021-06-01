@@ -277,10 +277,11 @@ We have codified all of the dependencies you will need into a YAML file that `an
 > 3. In the same directory, run:
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 >    This will install all of the required modules for this training into the `roles/` folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.
 >
@@ -472,10 +473,11 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 > 3. Run the playbook:
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 >    > ### {% icon code-out %} Output: Bash
 >    >
@@ -924,10 +926,11 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 > 5. Let's set up our vault to store the secrets for these tutorials.
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > openssl rand -base64 24 > .vault-password.txt
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 > 6. Tell Ansible where to find the decryption key. Edit your file `ansible.cfg` and add the `vault_password_file` variable.
 >
@@ -1001,10 +1004,11 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 > 9. Run the playbook.
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 >    > ### {% icon code-out %} Output: Bash
 >    >
@@ -1646,10 +1650,11 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 > 4. Run the playbook
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 > 5. Log in and check the status with `sudo systemctl status galaxy`
 >
@@ -1970,10 +1975,11 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 > 6. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
 >
 >    > > ### {% icon code-in %} Input: Bash
->    > > ```
+>    > > ```bash
 >    > > ansible-playbook galaxy.yml
 >    > > ```
->    > {: .code-in data-cmd="true"}
+>    > > {: data-cmd="true"}
+>    > {: .code-in}
 >    > > ### {% icon code-in %} Output
 >    > > ```
 >    > > ...
@@ -2077,9 +2083,10 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 > 1. If the folder does not exist, create `templates/galaxy/config` next to your `galaxy.yml` playbook.
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > mkdir -p templates/galaxy/config/
 >    > ```
+>    > {: data-cmd="true"}
 >    {: .code-in}
 >
 > 2. Create `templates/galaxy/config/job_conf.xml.j2` with the following contents (note that we have changed the names of the plugin and destination from the basic sample file to provide a bit more clarity):
@@ -2150,10 +2157,11 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 > 4. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
 >
 >    > > ### {% icon code-in %} Input: Bash
->    > > ```
+>    > > ```bash
 >    > > ansible-playbook galaxy.yml
 >    > > ```
->    > {: .code-in data-cmd="true"}
+>    > > {: data-cmd="true"}
+>    > {: .code-in}
 >    > > ### {% icon code-in %} Output
 >    > > ```
 >    > > ...
@@ -2275,10 +2283,11 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 > 3. Run the playbook
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 {: .hands_on}
 
@@ -2312,10 +2321,11 @@ But not you! You spent the day writing this Ansible playbook that describes your
 > 1. Run the playbook
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 > 2. Get a hot beverage of your choice while it rebuilds.
 >

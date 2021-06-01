@@ -194,7 +194,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 > 2. Install the role with:
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
 >    > {: data-cmd="true" data-ref="req-install"}
@@ -314,7 +314,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 > 5. Run the playbook
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
 >    > {: data-cmd="true" data-ref="run-pb1"}
@@ -517,7 +517,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 > 2. Re-run the playbook
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
 >    > {: data-cmd="true" data-ref="pb-run2"}

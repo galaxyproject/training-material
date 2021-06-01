@@ -81,10 +81,11 @@ First, we will install Singularity using Ansible. On most operating systems ther
 > 2. Install the requirements with `ansible-galaxy`:
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 > 4. Specify which version of Singularity you want to install, in `group_vars/galaxyservers.yml`:
 >
@@ -128,10 +129,11 @@ First, we will install Singularity using Ansible. On most operating systems ther
 > 5. Run the playbook
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 > 6. Singularity should now be installed on your Galaxy server. You can test this by connecting
 > to your server and run the following command:
@@ -204,9 +206,10 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 > 2. Create the `files/galaxy/config` directory if it doesn't exist:
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > mkdir -p files/galaxy/config
 >    > ```
+>    > {: data-cmd="true"}
 >    {: .code-in}
 >
 > 3. Create the new file `files/galaxy/config/dependency_resolvers_conf.xml`. This will not enable any dependency resolvers like the legacy toolshed packages or Galaxy packages, and instead everything will be resolved through Singularity.
@@ -271,10 +274,11 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 > 4. Re-run the playbook
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in data-cmd="true"}
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 > 5. In your Galaxy admin interface, install the minimap2 tool.
 >
