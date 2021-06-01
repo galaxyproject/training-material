@@ -149,6 +149,11 @@ In this tutorial we will focus more on the practical portions than the theoretic
 
 Let's begin by building a JBrowse instance with all the data we have for this genome.
 
+> ### {% icon comment %} Why bother?
+>
+> To reduce the size of the data, in this tutorial we will only work on a portion of the *Escherichia coli K12 str. MG1655* genome.
+{: .comment}
+
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} with the following parameters:
@@ -296,7 +301,7 @@ With the selected track, if you look along the genome, you will see many genes t
 > Each gene color corresponds to an open reading frame on the genome. This allows to quickly see if two genes that are very close are on the same open reading frame, which could mean that they can be merged into a single gene, if other evidences support this.
 {: .details}
 
-What we want now is first to check that the structure of the genes predicted by Augustus are in good shape. To do this, we will display an additional evidence tracks
+What we want now is first to check that the structure of the genes predicted by Augustus are in good shape. To do this, we will display an additional evidence tracks.
 
 > ### {% icon hands_on %} Display blastp vs swissport track
 >
@@ -350,6 +355,11 @@ We have just edited the gene name, but Apollo allows to edit information at the 
 You should see `Putative uncharacterized protein YabP` in the **Name** field.
 
 You can do the same for the other gene you created, which is similar to `Uncharacterized protein YabQ` according to Blastp vs Swissprot.
+
+> ### {% icon comment %} Saving your work
+>
+> You do not need to do anything specific to *Save* your work in Apollo. Just as "Google Docs", each modification is immediately saved, and any other user working on the same genome will instantly see the changes you make.
+{: .comment}
 
 ## Editing a gene structure
 
@@ -408,6 +418,20 @@ You can now do the same for the two other GO terms found on the UniProt page: `t
 
 Other tabs are available in the annotation panel, allowing to add **Comments**, external database references (**DbXref**) or **Attributes* to genes, to record more infortmation about them.
 
+## Comparing with the official annotation
+
+In this tutorial we are lucky as we are studying a very well known reference organism. It means we have a [very good quality reference annotation](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=511145&lvl=3&lin=f&keep=1&srchmode=1&unlock) provided by NCBI. You can display it in Apollo by enabling the corresponding track:
+
+> ### {% icon hands_on %} Display NCBI annotation track
+>
+> 1. In the right hand panel at the top click on **Tracks** to open the track listing
+>
+> 2. In the **Gene Calls** group, select the `NCBI AnnotWrite Genes` track.
+>
+{: .hands_on}
+
+Now navigate along the genome, and notice the differences between the Augustus annotation, the changes you made in the **User-created Annotation** track, and the reference annotation. This illustrates what happens in real life: you start with an automatic annotation which is not perfect, and using Apollo you improve it and add functional annotation, which allows in the end to release a better annotation to the community.
+
 ## Sequence alterations
 
 Until now we have supposed that the quality of the genome sequence is perfect. But you might work on othr genomes where the sequence contains errors (substitutions, insertions, deletions) due to assembly problems for example. In this case, automatic annotation programs will have difficulties producing good looking gene models: there can be frame shifts within genes, or broken start/stop codons which are not detected. In this case, Apollo allows to edit the genome sequence itself.
@@ -444,16 +468,17 @@ This tool will create new datasets in your history:
 * the peptide sequences of all the genes from this same track
 * sequence alterations
 
+You can then do any other analysis using normal Galaxy tools.
+
 If you prefer, the same data can be downloaded directly from the Apollo right panel, in the **Ref Sequence** tab.
 
 Note that if you have inserted some sequence alterations, the fasta sequences will take them into account.
 
-## Collaborating with other users
+# Collaborating with other annotators
 
-It is multiuser, live
-You can share access
+As explained at the beginning of this tutorial, Apollo is a collaborative annotation tool, which means you can work with other people from anywhere in the world.
 
-***TODO***: verify changes with the reference annotation = the set of [genes from NCBI](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=511145&lvl=3&lin=f&keep=1&srchmode=1&unlock)
+***TODO***
 
 # Conclusion
 {:.no_toc}
