@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import os
 import argparse
 import re
 import sys
@@ -69,7 +70,7 @@ postfix = ["--", "2.25.1", "", ""]
 # import sys; sys.exit()
 
 
-cmdhandle = open(f"{args.prefix}-run.sh", 'w')
+cmdhandle = open(f"{args.prefix.replace('git-gat/', 'git-gat/.scripts/')}-run.sh", 'w')
 cmdhandle.write("#!/bin/bash\n")
 
 lastCommit = None

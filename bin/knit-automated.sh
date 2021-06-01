@@ -9,6 +9,7 @@ tutorials=(ansible-galaxy singularity tool-management cvmfs data-library connect
 #exit 1;
 if [[ "$op" == "export" ]]; then
 	mkdir -p ${DIR}
+	mkdir -p ${DIR}/.scripts
 
 	# Setup readme as the root commit
 
