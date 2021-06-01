@@ -70,5 +70,21 @@
             </div>
 
         </div>
+
+        <div class="dropdown-item">
+            <div>
+                {% icon galaxy-rulebuilder-history %} Previous Versions
+            </div>
+
+            {% assign taglist = site.git_tags | sort | reverse | slice: 0, 3 %}
+            <div id="archive-selector">
+            {% for tag in taglist %}
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/{{tag}}{{ page.url }}" title="Version {{tag}}">{{ tag }}</a>
+            {% endfor %}
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
     </div>
 </li>
