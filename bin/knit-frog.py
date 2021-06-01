@@ -103,7 +103,7 @@ for idx, diff in enumerate(diffs):
             handle.write("\n".join(prefix + diff + postfix))
     else:
         if lastCommit is not None:
-            cmdhandle.write(f'# Checkout\ngit checkout $(git log --pretty=oneline | grep "{lastCommit}" | cut -c1-40)\n')
+            cmdhandle.write(f'# Checkout\ngit checkout $(git log main --pretty=oneline | grep "{lastCommit}" | cut -c1-40)\n')
         for line in diff[0:-2]:
             cmdhandle.write("# Run command\n")
             cmdhandle.write(line.strip() + "\n")
