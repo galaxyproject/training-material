@@ -132,7 +132,7 @@ for idx, diff in enumerate(diffs):
             print(fn)
             handle.write("\n".join(prefix + diff + postfix))
     elif 'data-cmd' in diff[-1]:
-        cmdhandle.write("\nt# CMD\n")
+        cmdhandle.write("\n# CMD\n")
         if lastCommit is not None:
             cmdhandle.write(f'## Checkout\ngit checkout $(git log main --pretty=oneline | grep "{lastCommit}" | cut -c1-40)\n')
         for line in diff[0:-2]:
