@@ -2031,6 +2031,9 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >  `usegalaxy_eu.galaxy_systemd`| This requires Galaxy to be configured + functional, or it will fail to start the handler. Additionally there are a couple of Galaxy variables used in the group vars.
 >  `galaxyproject.nginx`        | This requires Galaxy variables to find the static assets.
 {: .comment}
+<!-- test
+1-galaxy-up.sh
+-->
 
 ## Log in to Galaxy
 
