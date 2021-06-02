@@ -137,7 +137,11 @@ for idx, diff in enumerate(diffs):
             cmdhandle.write(f'## Checkout\ngit checkout $(git log main --pretty=oneline | grep "{lastCommit}" | cut -c1-40)\n')
         for line in diff[0:-2]:
             cmdhandle.write("## Run command\n")
-            cmdhandle.write(line.strip() + "\n")
+            if 'openssl rand' in line and 'vault-password' in line:
+                cmdhandle.write("## The students should use a random password, we override with 'password' for reproducibility\n")
+                cmdhandle.write("echo 'password' > .vault-password.txt;\n")
+            else:
+                cmdhandle.write(line.strip() + "\n")
     elif 'data-test' in diff[-1]:
         cmdhandle.write("\n# TEST\n")
         if lastCommit is not None:
