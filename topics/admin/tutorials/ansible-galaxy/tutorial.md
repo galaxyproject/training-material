@@ -192,20 +192,31 @@ With the necessary background in place, you are ready to install Galaxy with Ans
 
 To proceed from here it is expected that:
 
-1. You have [Ansible installed](https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html) on the machine where you will install Galaxy
-
-   > ### {% icon comment %} Comment: Running Ansible on remote machine
-   > It is possible to have Ansible installed on your laptop/local machine and run it against some remote hosts as well. We will **not** do that in this training.
-   {: .comment}
-
-2. Your `ansible` version is `>=2.7`, you can check this by running `ansible --version`
-3. You have an [inventory file](../ansible/tutorial.html#inventory-file) with the VM or host specified where you will deploy Galaxy. We will refer to this group of hosts as "galaxyservers."
-4. Your VM has a public DNS name: this tutorial sets up SSL certificates from the start and as an integral part of the tutorial.
-5. Your VM has `python3` installed.
-
-   If you follow the official Ansible instructions to install Ansible on a blank machine, you will probably end up with py2 installed. You will need to install python3 in addition.
-
-6. In your inventory file, you have written the full DNS hostname that has been provided, and **not** `localhost`, as we will be requesting SSL certificates.
+> ### {% icon comment %} Requirements for Running This Tutorial
+>
+> 1. You have [Ansible installed](https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html) on the machine where you will install Galaxy
+>
+>    > ### {% icon comment %} Comment: Running Ansible on remote machine
+>    > It is possible to have Ansible installed on your laptop/local machine and run it against some remote hosts as well. We will **not** do that in this training.
+>    {: .comment}
+>
+> 2. Your `ansible` version is `>=2.7`, you can check this by running `ansible --version`
+> 3. You have an [inventory file](../ansible/tutorial.html#inventory-file) with the VM or host specified where you will deploy Galaxy. We will refer to this group of hosts as "galaxyservers."
+> 4. Your VM has a public DNS name: this tutorial sets up SSL certificates from the start and as an integral part of the tutorial.
+> 5. Your VM has `python3` installed.
+>
+>    If you follow the official Ansible instructions to install Ansible on a blank machine, you will probably end up with py2 installed. You will need to install python3 in addition.
+>
+> 6. In your inventory file, you have written the full DNS hostname that has been provided, and **not** `localhost`, as we will be requesting SSL certificates.
+>
+> 7. You have the following ports exposed:
+>
+>    - 22 for SSH, this can be a different port or via VPN or similar.
+>    - 80 for HTTP, this needs to be available to the world if you want to follow the LetsEncrypt portion of the tutorial.
+>    - 443 for HTTPs, this needs to be available to the world if you want to follow the LetsEncrypt portion of the tutorial.
+>    - 5671 for AMQP for Pulsar, needed if you plan to setup Pulsar for remote job running.
+>
+{: .comment}
 
 
 > ### {% icon comment %} Ubuntu or Debian, CentOS or RHEL?
