@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>Feedforward neural networks (FNN) 
+ Deep Learning - Part 1</title>
+    
+        <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="Statistical Analyses for omics data and machine learning ..." />
+    <meta property="og:title" content="Galaxy Training: Feedforward neural networks (FNN) 
+ Deep Learning - Part 1" />
+    <meta property="og:description" content="Statistical Analyses for omics data and machine learning ..." />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    <script type="application/ld+json">
+      
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Feedforward neural networks (FNN) \n Deep Learning - Part 1",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/main/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Statistics and machine learning",
+    "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+    "url": "https://training.galaxyproject.org//training-material/topics/statistics/"
+  },
+  "courseCode": "statistics / FNN / slides",
+  "learningResourceType": "slides",
+  "name": "Slides for 'Feedforward neural networks (FNN) \n Deep Learning - Part 1' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/statistics/tutorials/FNN/slides.html",
+  "description": "The questions this  addresses are:\n - What is a feedforward neural network (FNN)?\n - What are some applications of FNN?\n\n\\nThe objectives are:\n - Understand the inspiration for neural networks\n - Learn activation functions & various problems solved by neural networks\n - Discuss various loss/cost functions and backpropagation algorithm\n - Learn how to create a neural network using Galaxy’s deep learning tools\n - Solve a sample regression problem via FNN in Galaxy\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/statistics/tutorials/intro_deep_learning/tutorial.html",
+      "name": "Introduction to deep learning",
+      "description": "Hands-on for 'Introduction to deep learning' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Kaivan Kamali"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Kaivan Kamali"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Statistics and machine learning",
+      "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+      "url": "https://training.galaxyproject.org//training-material/topics/statistics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2269",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2269",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_2269"
+    }
+  ]
+}
+    </script>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/statistics" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/FNN/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+
+# Feedforward neural networks (FNN) 
+ Deep Learning - Part 1
+
+
+<div class="contributors-line">
+
+
+ <a href="/training-material/hall-of-fame/kxk302/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/kxk302" alt="Kaivan Kamali">Kaivan Kamali</a>
+
+
+</div>
+
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+
+
+    
+        
+        
+            
+        
+- [Statistics and machine learning](/training-material/topics/statistics)
+    - Introduction to deep learning: [<i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on](/training-material/topics/statistics/tutorials/intro_deep_learning/tutorial.html)
+    
+
+
+
+
+.footnote[Tip: press `P` to view the presenter notes]
+
+???
+Presenter notes contain extra information which might be useful if you
+intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other. Useful when presenting.
+
+---
+
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- What is a feedforward neural network (FNN)?
+
+- What are some applications of FNN?
+
+
+---
+
+
+
+### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
+
+
+- Understand the inspiration for neural networks
+
+- Learn activation functions &amp; various problems solved by neural networks
+
+- Discuss various loss/cost functions and backpropagation algorithm
+
+- Learn how to create a neural network using Galaxy’s deep learning tools
+
+- Solve a sample regression problem via FNN in Galaxy
+
+
+---
+
+
+# What is an artificial neural network?
+
+???
+
+What is an artificial neural network?
+
+---
+
+# Artificial Neural Networks
+
+- ML discipline roughly inspired by how neurons in a human brain work
+- Huge resurgence due to availability of data and computing capacity
+- Various types of neural networks (Feedforward, Recurrent, Convolutional)
+- FNN applied to classification, clustering, regression, and association 
+
+---
+
+# Inspiration for neural networks
+
+- Neuron a special biological cell with information processing ability 
+	- Receives signals from other neurons through its *dendrites*
+	- If the signals received exceeds a threshold, the neuron fires
+	- Transmits signals to other neurons via its *axon*
+- *Synapse*: contact between axon of a neuron and denderite of another
+	- Synapse either enhances/inhibits the signal that passes through it 
+	- Learning occurs by changing the effectiveness of synapse
+
+![Sketch of a biological neuron and its components](/training-material/topics/statistics/images/FNN_bio_neuron.png) &lt;!-- https://pixy.org/3013900/ CC0 license--&gt;
+
+---
+
+# Celebral cortex
+
+- Outter most layer of brain, 2 to 3 mm thick, surface area of 2,200 sq. cm
+- Has about 10^11 neurons
+	- Each neuron connected to 10^3 to 10^4 neurons 
+	- Human brain has 10^14 to 10^15 connections 
+
+---
+
+# Celebral cortex
+
+- Neurons communicate by signals ms in duration
+	- Signal transmission frequency up to several hundred Hertz
+	- Millions of times slower than an electronic circuit
+	- Complex tasks like face recognition done within a few hundred ms
+	- Computation involved cannot take more than 100 serial steps
+- The information sent from one neuron to another is very small 
+	- Critical information not transmitted
+	- But captured by the interconnections
+- Distributed computation/representation of the brain
+	- Allows slow computing elements to perform complex tasks quickly
+
+---
+
+
+# Perceptron
+
+![Neurons forming the input and output layers of a single layer feedforward neural network](/training-material/topics/statistics/images/FFNN_no_hidden.png) &lt;!-- https://pixy.org/3013900/ CC0 license--&gt;
+
+---
+
+# Learning in Perceptron
+
+- Given a set of input-output pairs (called *training set*)
+- Learning algorithm iteratively adjusts model parameters 
+	- Weights and biases
+- So the model can accurately map inputs to outputs
+- Perceptron learning algorithm
+
+---
+
+# Limitations of Perceptron
+
+- Single layer FNN cannot solve problems in which data is not linearly separable
+	- E.g., the XOR problem
+- Adding one (or more) hidden layers enables FNN to represent any function
+	- *Universal Approximation Theorem*
+- Perceptron learning algorithm could not extend to  multi-layer FNN
+	- AI winter
+- *Backpropagation* algorithm in 80's enabled learning in multi-layer FNN
+
+---
+
+# Multi-layer FNN
+
+![Neurons forming the input, output, and hidden layers of a multi-layer feedforward neural network](/training-material/topics/statistics/images/FFNN.png) &lt;!-- https://pixy.org/3013900/ CC0 license--&gt;
+
+- More hidden layers (and more neurons in each hidden layer)
+	- Can estimate more complex functions
+	- More parameters increases training time
+	- More likelihood of *overfitting* 
+
+---
+
+# Activation functions
+
+![Table showing the formula, graph, derivative, and range of common activation functions](/training-material/topics/statistics/images/FNN_activation_functions.png) &lt;!-- https://pixy.org/3013900/ CC0 license--&gt;
+
+---
+
+# Supervised learning
+
+ 
+- Training set of size *m*: { (x^1,y^1),(x^2,y^2),...,(x^m,y^m) }
+	- Each pair (x^i,y^i) is called a *training example*
+	- x^i is called *feature vector*
+	- Each element of feature vector is called a *feature*
+	- Each x^i corresponds to a *label* y^i 
+- We assume an unknown function y=f(x) maps feature vectors to labels
+- The goal is to use the training set to learn or estimate f
+	- We want the estimate to be close to f(x) not only for training set
+	- But for training examples not in training set 
+
+---
+
+# Classification problems
+
+![Three images illustrating binary, multiclass, and multilabel classifications and their label representation](/training-material/topics/statistics/images/FNN_output_encoding.png) &lt;!-- https://pixy.org/3013900/ CC0 license--&gt;
+
+---
+
+# Output layer
+
+- Binary classification
+	- Single neuron in output layer
+	- Sigmoid activation function
+	- Activation &gt; 0.5, output 1
+	- Activation &lt;= 0.5, output 0
+- Multilabel classification
+	- As many neurons in output layer as number of classes
+	- Sigmoid activation function
+	- Activation &gt; 0.5, output 1
+	- Activation &lt;= 0.5, output 0
+---
+
+# Output layer (Continued)
+
+- Multiclass classification
+	- As many neurons in output layer as number of classes
+	- *Softmax* activation function
+	- Takes input to neurons in output layer 
+	- Creates a probability distribution, sum of outputs adds up to 1 
+	- The neuron with the highest proability is the predicted label
+- Regression problem
+	- Single neuron in output layer
+	- Linear activation function
+
+---
+
+# Loss/Cost functions
+
+- During training, for each training example (x^i,y^i), we present x^i to neural network
+	- Compare predicted output with label y^1 
+	- Need loss function to measure difference between predicted &amp; expected output
+- Use *Cross entropy* loss function for classification problems 
+- And *Quadratic* loss function for regression problems
+	- Quadratic cost function is also called *Mean Squared Error (MSE)* 
+
+---
+
+# Cross Entropy Loss/Cost functions
+
+![Cross Entropy loss function](/training-material/topics/statistics/images/FNN_Cross_Entropy_Loss.png) &lt;!-- https://pixy.org/3013900/ CC0 license--&gt;
+
+![Cross Entropy cost function](/training-material/topics/statistics/images/FNN_Cross_Entropy_Cost.png) &lt;!-- https://pixy.org/3013900/ CC0 license--&gt;
+
+---
+
+# Quadratic Loss/Cost functions
+
+![Quadratic loss function](/training-material/topics/statistics/images/FNN_Quadratic_Loss.png) &lt;!-- https://pixy.org/3013900/ CC0 license--&gt;
+
+![Quadratic cost function](/training-material/topics/statistics/images/FNN_Quadratic_Cost.png) &lt;!-- https://pixy.org/3013900/ CC0 license--&gt;
+
+---
+
+# Backpropagation (BP) learning algorithm
+
+- A *gradient descent* technique
+	- Find local minimum of a function by iteratively moving in opposite direction of gradient of function at current point 
+- Goal of learning is to minimize cost function given training set 
+	- Cost function is a function of network weights &amp; biases of all neurons in all layers 
+	- Backpropagation iteratively computes gradient of cost function relative to each weight and bias
+	- Updates weights and biases in the opposite direction of gradient 
+	- Gradients (partial derivatives) are used to update weights and biases
+	- To find a local minimum
+
+---
+
+# Backpropagation error
+
+![Backpropagation error](/training-material/topics/statistics/images/FNN_BP_Error.png) &lt;!-- https://pixy.org/3013900/ CC0 license--&gt;
+
+---
+
+# Backpropagation formulas
+
+![Backpropagation formulas](/training-material/topics/statistics/images/FNN_BP.png) &lt;!-- https://pixy.org/3013900/ CC0 license--&gt;
+
+---
+
+# Types of Gradient Descent
+
+- *Batch* gradient descent
+	- Calculate gradient for each weight/bias for *all* samples
+	- Average gradients and update weights/biases
+	- Slow, if we have too many samples  
+
+- *Stochastic* gradient descent
+	- Update weights/biases based on gradient of *each* sample
+	- Fast. Not accurate if sample gradient not representiative
+
+- *Mini-batch* gradient descent
+	- Middle ground solution
+	- Calculate gradient for each weight/bias for all samples in *batch*
+		- batch size is much smaller than training set size
+	- Average batch gradients and update weights/biases
+
+---
+
+# Vanishing gradient problem
+
+- Second BP equation is recursive 
+	- We have derivative of activation function
+	- Calc. error in layer prior to output: 1 mult. by derivative value 
+	- Calc. error in two layers prior output: 2 mult. by derivative values
+ 
+- If derivative values are small (e.g. for Sigmoid), product of multiple small values will be a very small value
+	- Since error values decide updates for biases/weights 
+	- Update to biases/weights in first layers will be very small 
+		- Slowing the learning algorithm to a halt 
+	- The reason Sigmoid not used in deep networks 
+		- Why ReLU is popular in deep networks
+
+---
+
+# Car purchase price prediction
+
+- Given 5 features of an individual (age, gender, miles driven per day, personal debt, and monthly income)
+	- And, money they spent buying a car
+	- Learn a FNN to predict how much someone will spend buying a car
+- We evaluate FNN on test dataset and plot graphs to assess the model’s performance
+	- Training dataset has 723 training examples
+	- Test dataset has 242 test examples
+	- Input features scaled to be in 0 to 1 range
+
+---
+
+# For references, please see tutorial's References section
+
+---
+
+- Galaxy Training Materials ([training.galaxyproject.org](https://training.galaxyproject.org))
+
+![](/training-material/topics/introduction/images/gtn_stats.png)
+
+???
+
+- If you would like to learn more about Galaxy, there are a large number of tutorials available.
+- These tutorials cover a wide range of scientific domains.
+
+---
+
+# Getting Help
+
+- **Help Forum** ([help.galaxyproject.org](https://help.galaxyproject.org))
+
+
+  ![Galaxy Help](/training-material/topics/introduction/images/galaxy_help.png)
+
+
+- **Gitter Chat**
+    - [Main Chat](https://gitter.im/galaxyproject/Lobby)
+    - [Galaxy Training Chat](https://gitter.im/Galaxy-Training-Network/Lobby)
+    - Many more channels (scientific domains, developers, admins)
+
+???
+
+- If you get stuck, there are ways to get help.
+- You can ask your questions on the help forum.
+- Or you can chat with the community on Gitter.
+
+---
+
+# Join an event
+
+- Many Galaxy events across the globe
+- Event Horizon: [galaxyproject.org/events](https://galaxyproject.org/events)
+
+![Event schedule](/training-material/topics/introduction/images/event_horizon.png)
+
+???
+
+- There are frequent Galaxy events all around the world.
+- You can find upcoming events on the Galaxy Event Horizon.
+
+
+
+
+
+
+
+
+
+---
+
+## Thank you!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors!
+
+
+<div class="contributors-line">
+
+
+ <a href="/training-material/hall-of-fame/kxk302/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/kxk302" alt="Kaivan Kamali">Kaivan Kamali</a>
+
+
+</div>
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false,}});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+
+  </body>
+</html>
