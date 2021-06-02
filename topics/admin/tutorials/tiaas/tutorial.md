@@ -61,7 +61,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >
 >    ```yml
 >    - src: usegalaxy_eu.tiaas2
->      version: 0.0.1
+>      version: 0.0.6
 >    ```
 >
 >    And run the install step:
