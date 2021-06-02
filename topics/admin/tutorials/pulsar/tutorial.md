@@ -270,7 +270,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 >    +
 >    +# RabbitMQ
->    +rabbitmq_version: 3.8.9-1
+>    +rabbitmq_version: 3.8.16-1
 >    +rabbitmq_plugins: rabbitmq_management
 >    +
 >    +rabbitmq_config:
