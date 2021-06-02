@@ -214,7 +214,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >
 >    +# RabbitMQ
 >    +rabbitmq_admin_password: a-different-long-password
->    +rabbitmq_version: 3.8.9-1
+>    +rabbitmq_version: 3.8.16-1
 >    +rabbitmq_plugins: rabbitmq_management
 >    +
 >    +rabbitmq_config:
