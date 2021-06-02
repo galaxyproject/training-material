@@ -37,6 +37,12 @@ jobs:
             git config --global user.email "galaxytrainingnetwork@gmail.com"
             git config --global user.name "The Galaxy Training Network"
             git init
+            # Update the origin early
+            git remote add origin git@github.com:hexylena/git-gat
+            git fetch origin
+            # Wipe out the tags that do exist
+            git tag -l | xargs git tag -d
+
             for i in {0..9}; do
                 # Commit those patches
                 git am $i-*.patch || true;
@@ -47,7 +53,6 @@ jobs:
             git commit -m "admin/final/0000: Add scripts directory"
             rm -f *.patch
             ls -al
-            git remote add origin git@github.com:hexylena/git-gat
 
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
