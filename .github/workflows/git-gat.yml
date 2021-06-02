@@ -46,12 +46,9 @@ jobs:
             git init
             # Update the origin early
             git remote add origin git@github.com:hexylena/git-gat.git
-            git fetch origin
-            git fetch --tags
+            git fetch origin --tags
             # Wipe out the tags that do exist
-            git tag -l | xargs git tag -d
-            # Push them, because apparently that's necessary
-            git push --delete --tags
+            git tag -l | xargs git push --delete origin
 
             for i in {0..9}; do
                 # Commit those patches
