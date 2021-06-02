@@ -2391,3 +2391,5 @@ It may seem daunting to use ansible, but you don't have to do everything in ansi
 If you've been following along you should have a production-ready Galaxy, secured, everything ready to go.
 
 If you missed any steps, you can compare against the [reference files]({{ site.github_repository }}/tree/{{ site.github_repository_branch }}/topics/admin/tutorials/ansible-galaxy).
+
+![diagram of galaxy setup with postgres, galaxy, nginx, uwsgi, storage, and compute shown attached to each other.](../../images/ansible-galaxy-intro-2.png "This approximately represents what you have setup today, NGINX proxies requests to uWSGI which runs the Galaxy App. That talks to Postgres, and Storage, and the Compute handlers which interact with the storage. As we setup mules, the compute handlers are the same processes which respond to web requests for nginx.")
