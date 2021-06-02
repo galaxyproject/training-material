@@ -39,7 +39,7 @@ jobs:
             git init
             for i in {0..9}; do
                 # Commit those patches
-                git am $i-*.patch;
+                git am $i-*.patch || true;
                 # And tag it
                 git tag "step-$i";
             done
