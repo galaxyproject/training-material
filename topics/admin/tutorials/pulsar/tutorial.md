@@ -478,7 +478,7 @@ Some of the other options we will be using are:
 >    --- /dev/null
 >    +++ b/group_vars/pulsarservers.yml
 >    @@ -0,0 +1,51 @@
->    +galaxy_server_url: # Important!!!
+>    +galaxy_server_hostname: # Important!!!
 >    +# Put your Galaxy server's fully qualified domain name (FQDN) (or the FQDN of the RabbitMQ server) above.
 >    +
 >    +pulsar_root: /mnt/pulsar
@@ -512,7 +512,7 @@ Some of the other options we will be using are:
 >    +  persistence_directory: "{{ pulsar_persistence_dir }}"
 >    +  tool_dependency_dir: "{{ pulsar_dependencies_dir }}"
 >    +  # The following are the settings for the pulsar server to contact the message queue with related timeouts etc.
->    +  message_queue_url: "pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@{{ galaxy_server_url }}:5671//pulsar/galaxy_au?ssl=1"
+>    +  message_queue_url: "pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@{{ galaxy_server_hostname }}:5671//pulsar/galaxy_au?ssl=1"
 >    +  min_polling_interval: 0.5
 >    +  amqp_publish_retry: True
 >    +  amqp_publish_retry_max_retries: 5
