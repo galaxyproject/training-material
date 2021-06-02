@@ -91,9 +91,6 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    +galaxy_local_tools:
 >    +- testing.xml
 >    +
->     # systemd
->     galaxy_systemd_mode: mule
->     galaxy_zergpool_listen_addr: 127.0.0.1:5000
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy testing tool"}

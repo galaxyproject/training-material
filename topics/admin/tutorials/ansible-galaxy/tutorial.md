@@ -246,7 +246,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    +++ b/requirements.yml
 >    @@ -0,0 +1,16 @@
 >    +- src: galaxyproject.galaxy
->    +  version: 0.9.7
+>    +  version: 04234ce6b7ead36f63db45880bf48c16f8b61f80
 >    +- src: galaxyproject.nginx
 >    +  version: 0.6.4
 >    +- src: galaxyproject.postgresql
@@ -257,8 +257,6 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    +  version: 2.0.0
 >    +- src: uchida.miniconda
 >    +  version: 0.3.0
->    +- src: usegalaxy_eu.galaxy_systemd
->    +  version: 0.1.4
 >    +- src: usegalaxy_eu.certbot
 >    +  version: 0.1.5
 >    {% endraw %}
@@ -276,7 +274,6 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    >  |`natefoo.postgresql_objects` | Creates users and databases within PostgreSQL|
 >    >  |`geerlingguy.pip` | Ensures that pip is available|
 >    >  |`uchida.miniconda` | Installs miniconda, which is used by Galaxy|
->    >  |`usegalaxy_eu.galaxy_systemd` | Supplies systemd service units for Galaxy|
 >    >  |`usegalaxy_eu.certbot` | Installs certbot and requests SSL certificates|
 >    {: .details}
 >
@@ -458,10 +455,9 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > > >     ├── geerlingguy.pip
 >    > > >     ├── natefoo.postgresql_objects
 >    > > >     ├── uchida.miniconda
->    > > >     ├── usegalaxy_eu.certbot
->    > > >     └── usegalaxy_eu.galaxy_systemd
+>    > > >     └── usegalaxy_eu.certbot
 >    > > >
->    > > > 10 directories, 5 files
+>    > > > 9 directories, 5 files
 >    > > > ```
 >    > > {: .code-out.code-max-300}
 >    > >
@@ -1592,30 +1588,11 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 {: .hands_on}
 
-Galaxy is now configured with an admin user, a database, and a place to store data. Additionally we've immediately configured the mules for production Galaxy serving. So we're ready to set up systemd which will manage the Galaxy processes!. Get back to your user with which you have ran ansible-playbook. First by deactivating virtual environment with `deactivate` and then with `exit` leave galaxy user.
-
-## systemd
-
-Launching Galaxy by hand is not a good use of your time, so we will immediately switch to a process manager for that, [systemd](https://freedesktop.org/wiki/Software/systemd/).
+Galaxy is now configured with an admin user, a database, and a place to store data. Additionally we've immediately configured the mules for production Galaxy serving. So we're ready to set up systemd which will manage the Galaxy processes! Launching Galaxy by hand is not a good use of your time, so we will immediately switch to a process manager for that, [systemd](https://freedesktop.org/wiki/Software/systemd/).
 
 > ### {% icon hands_on %} Hands-on: systemd
 >
-> 1. Add the role `usegalaxy_eu.galaxy_systemd` to your playbook. This should run **after** all of the roles we have already added so far.
->
->    {% raw %}
->    ```diff
->    --- a/galaxy.yml
->    +++ b/galaxy.yml
->    @@ -18,3 +18,4 @@
->         - role: uchida.miniconda
->           become: true
->           become_user: "{{ galaxy_user.name }}"
->    +    - usegalaxy_eu.galaxy_systemd
->    {% endraw %}
->    ```
->    {: data-commit="Add systemd"}
->
-> 2. Configure the role in `group_vars/galaxyservers.yml` file:
+> 1. Configure systemd in `group_vars/galaxyservers.yml` file:
 >
 >    {% raw %}
 >    ```diff
@@ -1627,38 +1604,12 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >         farm: job-handlers:1,2
 >    +
 >    +# systemd
->    +galaxy_systemd_mode: mule
->    +galaxy_zergpool_listen_addr: 127.0.0.1:5000
->    +galaxy_restart_handler_name: "Restart Galaxy"
+>    +galaxy_manage_systemd: yes
 >    {% endraw %}
 >    ```
 >    {: data-commit="Setup systemd variables"}
 >
->    The last variable, `galaxy_restart_handler_name`, informs the `galaxyproject.galaxy` role that it should look for a handler with that name, and trigger it whenever changes are made to Galaxy's configuration. Now we'll define the handler:
->
-> 3. Now that we have defined a process manager for Galaxy, we can also instruct `galaxyproject.galaxy` to use systemd to restart it when Galaxy is upgraded or other configuration changes are made. To do so, open the `galaxy.yml` playbook and add a `handlers:` section at the same level as `pre_tasks:` and `roles:`, and add a handler to restart Galaxy using the [systemd Ansible module](https://docs.ansible.com/ansible/2.9/modules/systemd_module.html). Handlers are structured just like tasks:
->
->    {% raw %}
->    ```diff
->    --- a/galaxy.yml
->    +++ b/galaxy.yml
->    @@ -8,6 +8,11 @@
->         - name: Install Dependencies
->           package:
->             name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
->    +  handlers:
->    +    - name: Restart Galaxy
->    +      systemd:
->    +        name: galaxy
->    +        state: restarted
->       roles:
->         - galaxyproject.postgresql
->         - role: natefoo.postgresql_objects
->    {% endraw %}
->    ```
->    {: data-commit="Add handler to restart Galaxy"}
->
-> 4. Run the playbook
+> 2. Run the playbook
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
@@ -1667,7 +1618,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
-> 5. Log in and check the status with `sudo systemctl status galaxy`
+> 3. Log in and check the status with `sudo systemctl status galaxy`
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
@@ -1704,17 +1655,6 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    > Jul 08 12:55:22 gat-0 uwsgi[30426]: galaxy.datatypes.registry DEBUG 2020-07-08 12:55:22,682 [p:30741,w:0,m:2] [MainThread] Retrieved datatype module galaxy.datatypes.binary:Anndata from the datatype registry for extension h5ad.
 >    > ```
 >    {: .code-out.code-max-300}
->
->    > ### {% icon tip %} Unit galaxy.service could not be found.
->    > If you see this message:
->    >
->    > ```
->    > $ systemctl status galaxy
->    > Unit galaxy.service could not be found.
->    > ```
->    >
->    > when running `systemctl status galaxy`, it means you didn't install the `galaxy_systemd` role, or forgot to re-run the playbook after adding it. Double check the first step of this hands-on section.
->    {: .tip}
 >
 > 6. Some things to note:
 >
@@ -1764,7 +1704,6 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    @@ -24,3 +24,4 @@
 >           become: true
 >           become_user: "{{ galaxy_user.name }}"
->         - usegalaxy_eu.galaxy_systemd
 >    +    - galaxyproject.nginx
 >    {% endraw %}
 >    ```
@@ -1778,9 +1717,6 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -67,3 +67,33 @@ galaxy_config:
->     galaxy_systemd_mode: mule
->     galaxy_zergpool_listen_addr: 127.0.0.1:5000
->     galaxy_restart_handler_name: "Restart Galaxy"
 >    +
 >    +# Certbot
 >    +certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
@@ -1934,7 +1870,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +    # The most important location block, by default all requests are sent to uWSGI
 >    +    location / {
 >    +        # This is the backend to send the requests to.
->    +        uwsgi_pass 127.0.0.1:5000;
+>    +        uwsgi_pass {{ uwsgi.socket }};
 >    +        uwsgi_param UWSGI_SCHEME $scheme;
 >    +        include uwsgi_params;
 >    +    }
@@ -2042,7 +1978,6 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >  `geerlingguy.pip`            | None
 >  `galaxyproject.galaxy`       | None
 >  `uchida.miniconda`           | In our group variables, we define the path to {% raw %}`{{ galaxy_tool_dependency_dir }}/_conda`{% endraw %}, so Galaxy needs to have set those variables
->  `usegalaxy_eu.galaxy_systemd`| This requires Galaxy to be configured + functional, or it will fail to start the handler. Additionally there are a couple of Galaxy variables used in the group vars.
 >  `galaxyproject.nginx`        | This requires Galaxy variables to find the static assets.
 {: .comment}
 
@@ -2170,9 +2105,6 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    +    dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    +
 >    +
->     # systemd
->     galaxy_systemd_mode: mule
->     galaxy_zergpool_listen_addr: 127.0.0.1:5000
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy job conf to config dir"}

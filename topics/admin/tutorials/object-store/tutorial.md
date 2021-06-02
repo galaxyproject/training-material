@@ -329,9 +329,6 @@ This tutorial will help you setup the connection between Galaxy and Dropbox, all
 >    +  - src: files/galaxy/config/file_sources_conf.yml
 >    +    dest: "{{ galaxy_config.galaxy.file_sources_config_file }}"
 >    +
->     # systemd
->     galaxy_systemd_mode: mule
->     galaxy_zergpool_listen_addr: 127.0.0.1:5000
 >    ```
 >    {% endraw %}
 >
