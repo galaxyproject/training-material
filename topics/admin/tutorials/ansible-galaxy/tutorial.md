@@ -244,7 +244,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    ```diff
 >    --- /dev/null
 >    +++ b/requirements.yml
->    @@ -0,0 +1,16 @@
+>    @@ -0,0 +1,14 @@
 >    +- src: galaxyproject.galaxy
 >    +  version: 04234ce6b7ead36f63db45880bf48c16f8b61f80
 >    +- src: galaxyproject.nginx
@@ -1598,7 +1598,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -62,3 +62,8 @@ galaxy_config:
+>    @@ -62,3 +62,6 @@ galaxy_config:
 >           - lib/galaxy/main.py
 >           - lib/galaxy/main.py
 >         farm: job-handlers:1,2
@@ -1701,7 +1701,8 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -24,3 +24,4 @@
+>    @@ -18,3 +18,4 @@
+>         - role: uchida.miniconda
 >           become: true
 >           become_user: "{{ galaxy_user.name }}"
 >    +    - galaxyproject.nginx
@@ -1716,7 +1717,10 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -67,3 +67,33 @@ galaxy_config:
+>    @@ -65,3 +65,33 @@ galaxy_config:
+>
+>     # systemd
+>     galaxy_manage_systemd: yes
 >    +
 >    +# Certbot
 >    +certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
@@ -2096,7 +2100,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -64,6 +64,11 @@ galaxy_config:
+>    @@ -64,6 +64,10 @@ galaxy_config:
 >           - lib/galaxy/main.py
 >         farm: job-handlers:1,2
 >
@@ -2104,7 +2108,9 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    +  - src: templates/galaxy/config/job_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    +
->    +
+>     # systemd
+>     galaxy_manage_systemd: yes
+>
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy job conf to config dir"}

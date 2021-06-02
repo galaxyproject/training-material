@@ -64,9 +64,9 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    +    - git:
 >    +        repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
 >    +        dest: /libraries/
->       handlers:
->         - name: Restart Galaxy
->           systemd:
+>       roles:
+>         - galaxyproject.postgresql
+>         - role: natefoo.postgresql_objects
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add the git repository to the pre-tasks"}

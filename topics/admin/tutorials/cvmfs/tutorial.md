@@ -176,7 +176,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -18,3 +18,5 @@
+>    @@ -16,3 +16,5 @@
 >       version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
 >     - src: gantsign.golang
 >       version: 2.6.3
@@ -296,9 +296,9 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -27,3 +27,4 @@
+>    @@ -21,3 +21,4 @@
+>           become: true
 >           become_user: "{{ galaxy_user.name }}"
->         - usegalaxy_eu.galaxy_systemd
 >         - galaxyproject.nginx
 >    +    - galaxyproject.cvmfs
 >    {% endraw %}

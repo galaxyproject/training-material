@@ -66,7 +66,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -20,3 +20,7 @@
+>    @@ -18,3 +18,7 @@
 >       version: 2.6.3
 >     - src: galaxyproject.cvmfs
 >       version: 0.2.13
@@ -92,9 +92,9 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -17,6 +17,8 @@
->             name: galaxy
->             state: restarted
+>    @@ -12,6 +12,8 @@
+>             repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
+>             dest: /libraries/
 >       roles:
 >    +    - galaxyproject.repos
 >    +    - galaxyproject.slurm
@@ -111,7 +111,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -141,3 +141,13 @@ golang_gopath: '/opt/workspace-go'
+>    @@ -139,3 +139,13 @@ golang_gopath: '/opt/workspace-go'
 >     # Singularity target version
 >     singularity_version: "3.7.0"
 >     singularity_go_path: "{{ golang_install_dir }}"
@@ -317,9 +317,9 @@ Above Slurm in the stack is slurm-drmaa, a library that provides a translational
 >    +    - name: Install slurm-drmaa
 >    +      package:
 >    +        name: slurm-drmaa1
->       handlers:
->         - name: Restart Galaxy
->           systemd:
+>       roles:
+>         - galaxyproject.repos
+>         - galaxyproject.slurm
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add post task to install slurm-drmaa"}
@@ -350,11 +350,11 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -105,6 +105,7 @@ galaxy_config_files:
->     galaxy_systemd_mode: mule
->     galaxy_zergpool_listen_addr: 127.0.0.1:5000
->     galaxy_restart_handler_name: "Restart Galaxy"
->    +galaxy_systemd_zergling_env: DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"
+>    @@ -103,6 +103,7 @@ galaxy_config_files:
+>
+>     # systemd
+>     galaxy_manage_systemd: yes
+>    +galaxy_systemd.env: DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"
 >
 >     # Certbot
 >     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"

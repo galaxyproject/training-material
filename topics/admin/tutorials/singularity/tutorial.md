@@ -66,8 +66,8 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -14,3 +14,7 @@
->       version: 0.1.4
+>    @@ -12,3 +12,7 @@
+>       version: 0.3.0
 >     - src: usegalaxy_eu.certbot
 >       version: 0.1.5
 >    +- src: cyverse-ansible.singularity
@@ -93,7 +93,7 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -125,3 +125,9 @@ nginx_conf_http:
+>    @@ -122,3 +122,9 @@ nginx_conf_http:
 >     nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
@@ -113,7 +113,7 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -19,6 +19,8 @@
+>    @@ -14,6 +14,8 @@
 >           become: true
 >           become_user: postgres
 >         - geerlingguy.pip
@@ -186,19 +186,19 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >         brand: "🧬🔬🚀"
 >         admin_users: admin@example.org
 >         database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
->    @@ -89,7 +91,12 @@ galaxy_config:
+>    @@ -89,6 +91,12 @@ galaxy_config:
 >     galaxy_config_templates:
 >       - src: templates/galaxy/config/job_conf.xml.j2
 >         dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    +  - src: templates/galaxy/config/container_resolvers_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
->
+>    +
 >    +galaxy_config_files:
 >    +- src: files/galaxy/config/dependency_resolvers_conf.xml
 >    +  dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >
 >     # systemd
->     galaxy_systemd_mode: mule
+>     galaxy_manage_systemd: yes
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure the container and dependency resolvers"}
