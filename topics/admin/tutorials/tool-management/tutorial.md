@@ -131,7 +131,7 @@ There are two ways to install tools, depending on how you specify the tools to i
 
 > ### {% icon hands_on %} Hands-on: Installing a single tool
 >
-> 1. Use the Ephemeris [`shed-tools`](https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html) command to install the tool `pilon`, owned by `iuc` into a section named `Assembly`
+> 1. Use the Ephemeris [`shed-tools`](https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html) command to install the tool `bwa`, owned by `devteam` into a section named `Mapping`
 >
 >    > ### {% icon question %} Question
 >    > What did your command look like?
@@ -140,7 +140,7 @@ There are two ways to install tools, depending on how you specify the tools to i
 >    > > Use your Galaxy URL and API key in the example command below:
 >    > >
 >    > > ```console
->    > > shed-tools install -g https://your-galaxy -a <api-key> --name pilon --owner iuc --section_label Assembly
+>    > > shed-tools install -g https://your-galaxy -a <api-key> --name bwa --owner devteam --section_label Mapping
 >    > > ```
 >    > {: .solution}
 >    {: .question}
@@ -216,7 +216,7 @@ Having the tools installed is a good first step, but your users will expect that
 
 > ### {% icon hands_on %} Hands-on: Test the installed tools
 >
-> 1. Use the Ephemeris [`shed-tools`](https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html) command to test the `pilon` tool on your Galaxy.
+> 1. Use the Ephemeris [`shed-tools`](https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html) command to test the `bamtools_filter` tool on your Galaxy.
 >
 >    > ### {% icon question %} Question
 >    > What did your command look like?
@@ -225,7 +225,7 @@ Having the tools installed is a good first step, but your users will expect that
 >    > > Use your Galaxy URL and API key in the example command below:
 >    > >
 >    > > ```console
->    > > shed-tools test -g https://your-galaxy -a <api-key> --name pilon --owner iuc
+>    > > shed-tools test -g https://your-galaxy -a <api-key> --name bamtools_filter --owner devteam
 >    > > ```
 >    > {: .solution}
 >    {: .question}
