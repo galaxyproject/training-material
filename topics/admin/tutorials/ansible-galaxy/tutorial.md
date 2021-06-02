@@ -248,7 +248,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    +- src: galaxyproject.galaxy
 >    +  version: 04234ce6b7ead36f63db45880bf48c16f8b61f80
 >    +- src: galaxyproject.nginx
->    +  version: 0.6.4
+>    +  version: 0.7.0
 >    +- src: galaxyproject.postgresql
 >    +  version: 1.0.3
 >    +- src: natefoo.postgresql_objects
