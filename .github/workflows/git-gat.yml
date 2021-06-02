@@ -38,7 +38,7 @@ jobs:
             git config --global user.name "The Galaxy Training Network"
             git init
             # Update the origin early
-            git remote add origin git@github.com:hexylena/git-gat
+            git remote add origin https://github.com/hexylena/git-gat
             git fetch origin
             # Wipe out the tags that do exist
             git tag -l | xargs git tag -d
@@ -64,5 +64,6 @@ jobs:
       - name: Push
         run: |
             cd /tmp/git-gat/
+            git remote set-url origin git@github.com:hexylena/git-gat.git
             git push -f -u origin main
             git push --tags
