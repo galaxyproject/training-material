@@ -535,6 +535,10 @@ After the job has been purged from the active jobs database, a bit of informatio
 > - `galaxy_venv_dir`
 {: .tip}
 
+> ### {% icon comment %} Got lost along the way?
+> If you missed any steps, you can compare against the [reference files](https://github.com/hexylena/git-gat/tree/step-6).
+{: .comment}
+
 ## Further Reading
 
 - [Galaxy's cluster documentation](https://docs.galaxyproject.org/en/latest/admin/cluster.html) describes in detail alternative cluster configurations.

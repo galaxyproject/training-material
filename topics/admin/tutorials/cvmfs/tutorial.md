@@ -578,6 +578,10 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >  simple.
 {: .spoken data-visual="galaxy" data-target="s2id_field-uid-12_select a" data-action="click"}
 
+> ### {% icon comment %} Got lost along the way?
+> If you missed any steps, you can compare against the [reference files](https://github.com/hexylena/git-gat/tree/step-4).
+{: .comment}
+
 # Common Production Questions
 
 > ### {% icon question %} For the most used datasets (for ex. hg38) could we have a local copy, or would that be irrelevant?
@@ -646,3 +650,4 @@ If you are working with plants, you can find separate reference data here: [fred
 > hope you enjoyed it and hopefully I'll get to meet some of you in person one
 > day soon at a Galaxy conference. Thank you and goodbye.
 {: .spoken data-visual="gtn" data-target="#feedback"}
+

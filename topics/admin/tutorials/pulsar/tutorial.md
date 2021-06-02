@@ -759,6 +759,11 @@ You'll notice that the Pulsar server has received the job (all the way in Austra
 
 How awesome is that? Pulsar in another continent with reference data automatically from CVMFS :)
 
+
+> ### {% icon comment %} Got lost along the way?
+> If you missed any steps, you can compare against the [reference files](https://github.com/hexylena/git-gat/tree/step-8).
+{: .comment}
+
 # Retries of the staging actions
 
 When the staging actions are carried out by the Pulsar server itself (like in the case when driving Pulsar by message queue), there are some parameters that can be tweaked to ensure reliable communication between the Galaxy server and the remote Pulsar server.

@@ -380,3 +380,7 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
 {: .hands_on}
 
 -->
+
+> ### {% icon comment %} Got lost along the way?
+> If you missed any steps, you can compare against the [reference files](https://github.com/hexylena/git-gat/tree/step-2).
+{: .comment}
