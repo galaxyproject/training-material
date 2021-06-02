@@ -689,9 +689,7 @@ The cores parameter can be verified from the output of the tool. The walltime ca
 > ```
 {: .code-out}
 
-> ### {% icon comment %} Got lost along the way?
-> If you missed any steps, you can compare against the [reference files](https://github.com/hexylena/git-gat/tree/step-7).
-{: .comment}
+{% snippet topics/admin/faqs/missed-something.md step=7 %}
 
 ## Further Reading
 

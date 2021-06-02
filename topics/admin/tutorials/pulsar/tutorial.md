@@ -759,10 +759,7 @@ You'll notice that the Pulsar server has received the job (all the way in Austra
 
 How awesome is that? Pulsar in another continent with reference data automatically from CVMFS :)
 
-
-> ### {% icon comment %} Got lost along the way?
-> If you missed any steps, you can compare against the [reference files](https://github.com/hexylena/git-gat/tree/step-8).
-{: .comment}
+{% snippet topics/admin/faqs/missed-something.md step=8 %}
 
 # Retries of the staging actions
 

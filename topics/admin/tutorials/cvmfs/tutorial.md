@@ -578,9 +578,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >  simple.
 {: .spoken data-visual="galaxy" data-target="s2id_field-uid-12_select a" data-action="click"}
 
-> ### {% icon comment %} Got lost along the way?
-> If you missed any steps, you can compare against the [reference files](https://github.com/hexylena/git-gat/tree/step-4).
-{: .comment}
+{% snippet topics/admin/faqs/missed-something.md step=4 %}
 
 # Common Production Questions
 

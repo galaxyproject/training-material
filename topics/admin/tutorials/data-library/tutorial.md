@@ -249,9 +249,7 @@ Let's try setting that up in our Galaxy!
 
 That's it! You should be able to see your newly created data library in your Galaxy.
 
-> ### {% icon comment %} Got lost along the way?
-> If you missed any steps, you can compare against the [reference files](https://github.com/hexylena/git-gat/tree/step-5).
-{: .comment}
+{% snippet topics/admin/faqs/missed-something.md step=5 %}
 
 Note that we've used some special flags here, `--training` and `--legacy`. Training sets some defaults that make sense for the GTN (mostly around library descriptions / etc.)
 
