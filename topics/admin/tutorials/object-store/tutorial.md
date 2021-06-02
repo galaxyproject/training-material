@@ -26,6 +26,10 @@ requirements:
      - ansible-galaxy
 ---
 
+> ### {% icon warning %} Warning: switching object store types will cause issues
+> Do not run this tutorial on your production instance! We will switch between object stores during this tutorial which has serious implications for production servers.
+{: .warning}
+
 # Expanding Storage
 
 {:.no_toc}
