@@ -48,7 +48,7 @@ jobs:
             git remote add origin git@github.com:hexylena/git-gat.git
             git fetch origin --tags
             # Wipe out the tags that do exist
-            git tag -l | xargs git push --delete origin
+            git tag -l | xargs --no-run-if-empty git push --delete origin
 
             for i in {0..9}; do
                 # Commit those patches
