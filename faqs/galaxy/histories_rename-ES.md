@@ -1,0 +1,10 @@
+---
+title: Cambiando el nombre de un historial
+area: histories
+box_type: tip
+layout: faq
+---
+
+1. Haz clic sobre  **Unnamed history** (o el nombre que tenga el historial sobre el que estás trabajando) (**Haz clic para cambiar nombre del historial**) en la parte superior de tu panel de historial
+2. Escribe el nombre nuevo
+3. Pulsa <kbd>Enter</kbd>
