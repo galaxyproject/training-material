@@ -37,7 +37,12 @@ jobs:
             git config --global user.email "galaxytrainingnetwork@gmail.com"
             git config --global user.name "The Galaxy Training Network"
             git init
-            git am *.patch
+            for i in {0..9}; do
+                # Commit those patches
+                git am $i-*.patch;
+                # And tag it
+                git tag "step-$i";
+            done
             git add .scripts/
             git commit -m "admin/final/0000: Add scripts directory"
             rm -f *.patch
