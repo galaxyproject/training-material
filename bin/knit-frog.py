@@ -102,6 +102,10 @@ BASE = os.path.basename(args.prefix)
 cmdhandle = open(f"{GITGAT}/.scripts/{BASE}-run.sh", 'w')
 cmdhandle.write("#!/bin/bash\n")
 cmdhandle.write("set -ex\n\n")
+cmdhandle.write("# Install dependencies before changing commits\n")
+cmdhandle.write(f"find .scripts -name requirements.txt | xargs -n 1 pip install -r\n")
+
+
 
 lastCommit = None
 for idx, diff in enumerate(diffs):
@@ -152,11 +156,9 @@ for idx, diff in enumerate(diffs):
             if os.path.exists(testdir) and not os.path.exists(gittestdir):
                 shutil.copytree(testdir, gittestdir)
 
-            cmdhandle.write("## Install test dependencies\n")
-            if os.path.exists(f"{gittestdir}/requirements.txt"):
-                cmdhandle.write(f"pip install -r {gittestdir}/requirements.txt\n")
-
             cmdhandle.write("## Run test case\n")
-            cmdhandle.write(f"bash {gittestdir}/{line.strip()}\n")
+            cmdhandle.write(f"{line.strip()}\n")
     else:
         print("Unknown!")
+
+cmdhandle.write("# Done!\ngit checkout main\n")

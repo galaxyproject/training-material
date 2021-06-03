@@ -1677,7 +1677,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 {: .details}
 
 > ```bash
-> 0-galaxy-up.sh
+> systemctl status galaxy
 > ```
 > {: data-test="true"}
 {: .hidden}
@@ -1986,7 +1986,8 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 {: .comment}
 
 > ```bash
-> 1-galaxy-up.sh
+> sleep 20;
+> curl -k https://localhost/api/version
 > ```
 > {: data-test="true"}
 {: .hidden}
