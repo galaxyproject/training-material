@@ -129,18 +129,18 @@ layout: base
             {% if topic.requirements or page.requirements %}
             <strong>{% icon requirements %} Requirements</strong>
             <ul>
-            {% include snippets/display_extra_training.md extra_trainings=topic.requirements %}
-            {% include snippets/display_extra_training.md extra_trainings=page.requirements %}
+            {% include _includes/display_extra_training.md extra_trainings=topic.requirements %}
+            {% include _includes/display_extra_training.md extra_trainings=page.requirements %}
             </ul>
             {% endif %}
 
             {% if page.time_estimation %}
-            <p><strong>{% icon time %} Time estimation:</strong> {{ page.time_estimation | duration_to_human }}</p>
+            <div><strong>{% icon time %} Time estimation:</strong> {{ page.time_estimation | duration_to_human }}</div>
             {% endif %}
 
             {% if page.level %}
-            <p><strong>{% icon level %} Level: </strong>
-            {% include _includes/difficulty-indicator.html level=page.level textlabel=true %}</p>
+            <div><strong>{% icon level %} Level: </strong>
+            {% include _includes/difficulty-indicator.html level=page.level textlabel=true %}</div>
             {% endif %}
 
             {% if instances[topic.name].supported or topic.docker_image %}
@@ -153,7 +153,7 @@ layout: base
             {% endif %}
 
             {% if associated_slides or intro_link or tuto_has_zenodo or own_material.workflows or own_material.tours or tuto_has_docker %}
-            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
             <ul>
                 <div class="supporting_material">
                 {% if associated_slides %}
@@ -178,6 +178,12 @@ layout: base
                     <li class="btn btn-default supporting_material">{% include _includes/resource-tours.html material=own_material topic=topic.name label=true %}</li>
                 {% endif %}
 
+                {% assign faqpage = page.dir | append: 'faqs/index.md' | remove_first: '/' %}
+                {% capture hasfaq %}{% file_exists {{faqpage}} %}{% endcapture %}
+                {% if hasfaq == "true" %}
+                   {% include _includes/resource-faqs.html material=own_material topic=topic.name %}
+                {% endif %}
+
                 {% if tuto_has_docker and topic.name != 'admin' %}
                     <li class="btn btn-default supporting_material">{% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=own_material.tutorial_name docker=topic.docker_image label=true %}</li>
                 {% endif %}
@@ -185,7 +191,7 @@ layout: base
             </ul>
             {% endif %}
 
-            <p><strong> {% icon last_modification %} Last modification:</strong> {{ page.last_modified_at | date: "%b %-d, %Y"}} </p>
+            <div><strong> {% icon last_modification %} Last modification:</strong> {{ page.last_modified_at | date: "%b %-d, %Y"}} </div>
         </blockquote>
 
         <div class="container">
@@ -209,6 +215,11 @@ layout: base
                         </ul>
                     </blockquote>
                     {% endif %}
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the {% if hasfaq == "true" %}<a href="faqs/">tutorial FAQ page</a> or the {% endif %} <a href="{{site.baseurl}}/topics/{{topic.name}}/faqs/">FAQ page for the {{topic.title}} topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="{{site.gitter_url}}">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
                     {% if topic.references %}
                     <h1 data-toc-skip>Useful literature</h1>
@@ -338,7 +349,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
         <blockquote class="agenda follow-up">
             <strong class="follow-up">{% icon curriculum %} Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
             <ul>
-                {% include snippets/display_extra_training.md extra_trainings=page.follow_up_training %}
+                {% include _includes/display_extra_training.md extra_trainings=page.follow_up_training %}
             </ul>
         </blockquote>
         {% endif %}

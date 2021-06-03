@@ -189,7 +189,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    rabbitmq_password_galaxy_au: areallylongpasswordhere
 >    ```
 >
->    This is going in a special file because both of our services, Galaxy and Pulsar, need it. Both Galaxy in the job configuration, and Pulsar in its configuration. The `group_vars/all.yml` is included for every playbook run, no matter which group a machine belong to.
+>    This is going in a special file because both of our services, Galaxy and Pulsar, need it. Both Galaxy in the job configuration, and Pulsar in its configuration. The `group_vars/all.yml` is included for every playbook run, no matter which group a machine belongs to.
 >
 >    Replace `areallylongpasswordhere` with a long randomish (or not) string.
 >
@@ -214,7 +214,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >
 >    +# RabbitMQ
 >    +rabbitmq_admin_password: a-different-long-password
->    +rabbitmq_version: 3.8.9-1
+>    +rabbitmq_version: 3.8.16-1
 >    +rabbitmq_plugins: rabbitmq_management
 >    +
 >    +rabbitmq_config:
@@ -590,7 +590,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >
 > 2. Install the BWA and BWA-MEM tools, if needed.
 >
->    {% snippet snippets/install_tool.md query="bwa" name="Map with BWA-MEM" section="Mapping" %}
+>    {% snippet topics/admin/faqs/install_tool.md query="bwa" name="Map with BWA-MEM" section="Mapping" %}
 >
 > 3. We now need to tell Galaxy to send BWA and BWA-MEM jobs to the `pulsar` destination. We specify this in the `<tools>` section of the `job_conf.xml` file.
 >

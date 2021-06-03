@@ -19,6 +19,8 @@ key_points:
 contributors:
   - stortebecker
   - bgruening
+subtopic: id-quant
+tags: [DDA]
 ---
 
 # Introduction
@@ -69,7 +71,7 @@ If your data were generated on a low resolution mass spectrometer, use ***PeakPi
 >
 > 1. Create a new history for this Peptide and Protein ID exercise.
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Load the example dataset into your history from Zenodo: [raw](https://zenodo.org/record/892005/files/qExactive01819.raw) [mzML](https://zenodo.org/record/892005/files/qExactive01819_profile.mzml)
 > 3. Rename the dataset to something meaningful.

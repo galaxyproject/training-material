@@ -32,8 +32,11 @@ Grouping datasets in this way has numerous advantages:
 
 While collections can be split in any way, doing so for multi-factor analysis
 quickly becomes cumbersome and messy. An alternative is to label collection
-elements with special group tags. These tags can be displayed in the Tool form,
-allowing users to select subsets of collections.
+elements with special group tags, i.e. tags prefixed by the string `group:`.
+Note that group tags currently do not propagate, i.e. they are not inherited
+to datasets resulting from analyses. These tags can be displayed in the Tool
+form, allowing users to select subsets
+of collections.
 
 This tutorial outlines how to set and use group tags with the DESeq2 tool.
 For a more detailed description and background for differential expression
@@ -51,13 +54,16 @@ testing see the [Reference-based RNA-Seq data analysis]({{ site.baseurl }}/topic
 
 # Setting group tags using the apply rules tool
 
-There are three ways to set group tags:
-  - Using the rule builder / apply_rules tool
+There are several ways to set group tags:
+  - Using the Rule Based Uploader
   - Using the "Tag elements from file" tool
+  - Using the "Apply Rules" tool
   - Manually adding dataset tags with the prefix `group:`
 
 We will use the first two methods in this tutorial.
-The second method works at any step during the analysis.
+The second and third methods work at any step during the analysis.
+Note that the function of the "Apply Rules" tool is (nearly) identical
+to the Rule Based Uploader. 
 
 ## Set group tags during upload
 
@@ -65,7 +71,7 @@ The second method works at any step during the analysis.
 >
 > 1. Create a new history for this tutorial
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Open the Galaxy Upload Manager ({% icon galaxy-upload %} on the top-right of the tool panel)
 > 3. Click on **Rule-based** on the top
@@ -99,9 +105,9 @@ The second method works at any step during the analysis.
 >
 >    - Click on **Rules** and then **Add / Modify Column Definitions**
 >    - Click on **Add Definition** and select:
->      - *"URL"*: Column A
+>      - *"URL"*: Column A (Note that this option is absent when using the "Apply rules tool")
 >      - *"List Identifiers"*: Column B
->      - *"Group Tags"*: Columns C and D
+>      - *"Group Tags"*: Columns C and D (Select Column C first and then add D by clicking on *"... Add another column"*)
 >    - Click **Apply**
 >    - Enter a name for the new collection
 >    - Click **Upload**
@@ -130,7 +136,7 @@ We now want to add group tags using the "Tag elements from file" tool.
 >    https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Click on the {% icon galaxy-selector %} icon (**Operations on multiple datasets**)
 > 4. Check all new datasets
@@ -156,7 +162,7 @@ We will do the latter.
 >
 > 3. Change the datatype to `tabular`
 >
->    {% snippet snippets/change_datatype.md datatype="tabular" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
 > 4. **Tag elements from file** {% icon tool %}
 >      - {% icon param-collection %} *"Input Collection"*: created collection

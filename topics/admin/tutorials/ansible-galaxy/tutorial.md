@@ -49,7 +49,7 @@ We want to give you a comprehensive understanding of how the Galaxy installation
 >
 {: .agenda}
 
-{% snippet snippets/admin-testing.md %}
+{% snippet topics/admin/faqs/admin-testing.md %}
 
 # Playbook Overview
 
@@ -1512,8 +1512,8 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 > 3. Now that we have defined a process manager for Galaxy, we can also instruct `galaxyproject.galaxy` to use systemd to restart it when Galaxy is upgraded or other configuration changes are made. To do so, open the `galaxy.yml` playbook and add a `handlers:` section at the same level as `pre_tasks:` and `roles:`, and add a handler to restart Galaxy using the [systemd Ansible module](https://docs.ansible.com/ansible/2.9/modules/systemd_module.html). Handlers are structured just like tasks:
 >
 >    ```diff
->    --- galaxy.yml
->    +++ galaxy.yml
+>    --- a/galaxy.yml
+>    +++ b/galaxy.yml
 >    @@ -5,6 +5,11 @@
 >         - name: Install Dependencies
 >           package:

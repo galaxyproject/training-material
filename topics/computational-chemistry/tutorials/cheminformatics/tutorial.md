@@ -65,7 +65,7 @@ For this exercise, we need two datasets: a protein structure and a library of co
 > 3. Rename the dataset to 'Hsp90 structure'
 > 4. Check that the datatype is correct (PDB file).
 >
->    {% snippet snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 {: .hands_on}
 
@@ -140,7 +140,7 @@ We will generate our compound library by searching ChEMBL for compounds which ha
 >    - {% icon param-file %} *"SMILES input type"*: File
 >    - {% icon param-file %} *"Input file"*: 'Ligand SMILES' file
 >    - {% icon param-file %} *"Search type"*: `Similarity`
->    - {% icon param-file %} *"Tanimoto cutoff score"*: `80`
+>    - {% icon param-file %} *"Tanimoto cutoff score"*: `60`
 >    - {% icon param-file %} *"Filter for Lipinski's Rule of Five"*: `Yes`
 >    - All other parameters can be left as their defaults.
 >
@@ -156,10 +156,66 @@ We will generate our compound library by searching ChEMBL for compounds which ha
 >    Optional: experiment with different combinations of options - adding different filters, adjusting the Tanimoto coefficient.
 > 4. Check that the datatype is correct (smi). This step is essential, as Galaxy does not automatically detect the datatype for SMILES files.
 >
->    {% snippet snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 > 5. Rename dataset **'Compound library'**.
 >
 {: .hands_on}
+
+> ### {% icon tip %} Tip: Problems using the ChEMBL tool?
+> A number of users encounter issues with the ChEMBL tool - sometimes the tool fails, or the output is returned successfully but is empty. If this happens to you, try the following:
+> > Rerun the tool - if a transient error on the ChEMBL server was at fault, this might be enough to fix it.
+> > Try modifying some of the parameters. For example, reducing the Tanimoto coefficient should increase the number of compounds returned.
+> > If all else fails, you can use the following list of SMILES:
+```
+Cc1n[nH]c(c2ccc(O)c(Cl)c2)c1c3ccc4OCCOc4c3	CHEMBL187670
+COc1ccc(cc1)c2c(C)[nH]nc2c3ccc(O)cc3O	CHEMBL192894
+COc1ccc(c(O)c1)c2onc(C)c2c3ccc4OCCOc4c3	CHEMBL1541585
+CCOc1ccc(c(O)c1)c2[nH]nc(C)c2c3ccccc3OC	CHEMBL1504505
+CN(CCc1c(C)n[nH]c1C)Cc2cn(C)nc2c3ccc4OCCOc4c3	CHEMBL1560480
+COc1ccc(c(O)c1)c2[nH]nc(C)c2c3ccc4OCCCOc4c3	CHEMBL362893
+CCCc1c(OCCCOc2cc(O)c(cc2CC)c3cc[nH]n3)ccc4CCC(Oc14)C(=O)O	CHEMBL81401
+Cc1cccc(n1)c2[nH]nc(C)c2c3ccnc4ccccc34	CHEMBL129153
+COc1ccc(cc1OC)c2c(C)n[nH]c2c3ccc(O)cc3O	CHEMBL1595327
+COc1ccc(c(O)c1)c2noc(C)c2c3ccc4ccccc4n3	CHEMBL1486235
+CCc1cc(c(O)cc1O)c2[nH]nc(C)c2c3ccc4OCCOc4c3	CHEMBL399530
+Cc1[nH]nc(c2cc(Cl)c(O)cc2O)c1c3ccc4OCCOc4c3	CHEMBL191074
+COc1ccc(c(O)c1)c2[nH]ncc2c3ccc4OCCOc4c3	CHEMBL1415374
+Cc1n[nH]c(c2cc(Cl)ccc2O)c1c3ccc4OCCOc4c3	CHEMBL187678
+Cc1noc(c2ccc(O)cc2O)c1c3ccc4OCCOc4c3	CHEMBL582320
+CCOC(=O)c1oc(cc1)c2c(C)[nH]nc2c3cc(CC)c(O)cc3O	CHEMBL3932805
+NC(=O)c1ccc2[nH]nc(c3ccc4OCCOc4c3)c2c1	CHEMBL3900406
+COc1ccc(cc1OC)c2cc([nH]n2)c3c(O)c(OC)c4occc4c3OC	CHEMBL1351838
+CCCc1cc(c(O)cc1OC)c2[nH]ncc2c3ccc4OCCCOc4c3	CHEMBL1443258
+Oc1cc(O)c(cc1Cl)c2[nH]ncc2c3ccc4OCCOc4c3	CHEMBL191228
+CCc1cc(c(O)cc1O)c2n[nH]cc2c3ccc4OCCOc4c3	CHEMBL3187010
+Oc1ccccc1c2cc([nH]n2)c3ccc4OCCOc4c3	CHEMBL1567097
+CCCc1cc(c(O)cc1O)c2[nH]ncc2c3ccc4OCCCOc4c3	CHEMBL1578064
+COc1ccc(c(O)c1)c2[nH]nc(C)c2c3ccc(OC)c(OC)c3	CHEMBL1335688
+COc1ccc(cc1)c2c(N)n[nH]c2c3cc(OC)c4OCCOc4c3	CHEMBL2408971
+CCC(C)c1cc(c(O)cc1O)c2[nH]ncc2c3ccc4OCOc4c3	CHEMBL187674
+Cc1noc(c2ccc(O)cc2O)c1c3ccc4OCCCOc4c3	CHEMBL587334
+OCc1cn(nc1c2ccc3OCCOc3c2)c4ccccc4	CHEMBL1549407
+Oc1ccc(c(O)c1)c2[nH]ncc2c3cccc4cccnc34	CHEMBL1305951
+Cc1n[nH]c(c2ccc(O)cc2O)c1c3ccc4OCCOc4c3	CHEMBL188965
+Cc1[nH]nc(c2ccc3OCC(=O)Nc3c2)c1c4ccc(F)cc4	CHEMBL3337723
+CCOc1ccc(c(O)c1)c2n[nH]c(C)c2c3ccc(OC)cc3	CHEMBL1698243
+COc1ccc(cc1)c2cc([nH]n2)c3c(O)c(OC)c4occc4c3OC	CHEMBL1402615
+CCc1cc(c(O)cc1O)c2[nH]ncc2c3ccc4OCOc4c3	CHEMBL1412538
+CCOc1cc(O)c(cc1CC)c2nc(N)ncc2c3ccc4OCCOc4c3	CHEMBL547662
+COc1ccc(cc1)c2c(N)onc2c3cc(OC)c4OCCOc4c3	CHEMBL3113121
+CCCc1cc(c(O)cc1O)c2n[nH]cc2c3ccc4OCCOc4c3	CHEMBL3956397
+CCC(C)c1cc(c(O)cc1O)c2[nH]nc(C)c2c3ccc4OCCOc4c3	CHEMBL190919
+CCC(C)c1cc(c(O)cc1OC)c2[nH]ncc2c3ccc4OCCOc4c3	CHEMBL435501
+Cn1cc(CNCc2c[nH]nc2c3ccc(F)cc3)c(n1)c4ccc5OCCOc5c4	CHEMBL1537178
+Oc1ccc(F)cc1c2cc([nH]n2)c3ccc4OCCOc4c3	CHEMBL1451528
+CCc1cc(c(O)cc1OCC(=O)O)c2n[nH]c(C)c2c3ccc4OCCCOc4c3	CHEMBL3952001
+Cc1[nH]nc(c2ccc(O)c(O)c2O)c1c3ccc(Cl)cc3	CHEMBL1092945
+COc1cc(cc(OC)c1OC)c2n[nH]nc2c3ccc4OCCOc4c3	CHEMBL3740841
+Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
+```
+> Don't worry if you can't get it to work - successfully generating this list is a very minor part of the tutorial!
+{: .tip}
+
 
 There are some other tools available, which will not be used in this tutorial, which help to develop a more focused compound library. For example, the 'Natural product likeness calculator' and 'Drug-likeness' tools assign a score to compounds based on how similar they are to typical natural products and drugs respectively, which could then be used to filter the library. If you are interested, you can try testing them out on the library just generated.
 
@@ -322,7 +378,7 @@ From our collection of SD-files, we first extract all stored values into tabular
 >    - {% icon param-file %} *"Keep one header line"*: `Yes` 
 >    - {% icon param-file %} *"Append File name"*: `No` 
 >
->    {% snippet snippets/select_collection.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/tools_select_collection.md datatype="datatypes" %}
 >
 > 3. **Compound conversion** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Molecular input file"*: choose one of the SD-files from the collection generated by the docking step.

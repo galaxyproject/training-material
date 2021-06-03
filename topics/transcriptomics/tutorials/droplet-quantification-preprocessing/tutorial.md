@@ -1,9 +1,9 @@
 ---
 layout: tutorial_hands_on
 
-title: "Generating a cell matrix using Alevin"
-subtopic: single-cell
-priority: 9
+title: "Generating a single cell matrix using Alevin"
+subtopic: single-cell-CS
+priority: 1
 
 zenodo_link: 'https://zenodo.org/record/4574153'
 
@@ -25,6 +25,7 @@ key_points:
 tags:
   - single-cell
   - 10x
+  - paper-replication
 
 contributors:
   - nomadscientist
@@ -69,15 +70,15 @@ Droplet-based data consists of three components: cell barcodes, unique molecular
 
 This used to be a complex process involving multiple algorithms, or was performed with technology-specific methods (such as 10X's 'Cellranger' tool)  but is now much simpler thanks to the advent of a few new methods. When selecting methodology for your own work you should consider:
 
- * [STARsolo](https://github.com/alexdobin/STAR) - a dscRNA-seq-specific variant of the popular genome alignment method STAR. Produces results very close to those of Cellranger (which itself uses STAR under the hood).
+ * [STARsolo](https://github.com/alexdobin/STAR) - a droplet-based scRNA-seq-specific variant of the popular genome alignment method STAR. Produces results very close to those of Cellranger (which itself uses STAR under the hood).
  * [Kallisto/ bustools](https://www.kallistobus.tools/) - developed by the originators of the transcriptome quantification method, Kallisto.
- * [Alevin](https://salmon.readthedocs.io/en/latest/alevin.html) - another transcriptome method developed by the authors of the Salmon tool.
+ * [Alevin](https://salmon.readthedocs.io/en/latest/alevin.html) - another transcriptome analysis method developed by the authors of the Salmon tool.
 
 We're going to use Alevin {% cite article-Alevin %} for demonstration purposes, but we do not endorse one method over another.
 
 ## Get Data
 
-We've provided you with some example data to play with, a small subset of the reads in a mouse dataset of fetal growth restriction (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). This is a study using the Drop-seq chemistry, however this tutorial is almost identical to a 10x chemistry. We will point out the one tool parameter change you will need to run 10x samples. This data is not carefully curated, standard tutorial data - it's real, it's messy, it desperately needs filtering, it has background RNA running around, and most of all it will give you a chance to practice your analysis as if this data were yours.
+We've provided you with some example data to play with, a small subset of the reads in a mouse dataset of fetal growth restriction {% cite Bacon2018 %} (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). This is a study using the Drop-seq chemistry, however this tutorial is almost identical to a 10x chemistry. We will point out the one tool parameter change you will need to run 10x samples. This data is not carefully curated, standard tutorial data - it's real, it's messy, it desperately needs filtering, it has background RNA running around, and most of all it will give you a chance to practice your analysis as if this data were yours.
 
 Down-sampled reads and some associated annotation can be downloaded from Zenodo below, or you can import this [example input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/input---pre-processing-with-alevin). How did I downsample these FASTQ files? Check out [this history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-1---how-to-downsample) to find out!
 Additionally, to map your reads, you will need a transcriptome to align against (a FASTA) as well as the gene information for each transcript (a gtf) file. You can download these for your species of interest from Ensembl [here](https://www.ensembl.org/info/data/ftp/index.html). Additionally, these files are available in the above history as well as the Zenodo links below. Keep in mind, these are big files, so they may take a bit to import!
@@ -95,9 +96,7 @@ Additionally, to map your reads, you will need a transcriptome to align against 
 >    {{ page.zenodo_link }}/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.fastq
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
->
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Rename {% icon galaxy-pencil %} the datasets
 >
@@ -121,7 +120,7 @@ Additionally, to map your reads, you will need a transcriptome to align against 
 
 ## Generate a transcript to gene map
 
-Gene-level, rather than transcript-level, quantification is standard in scRNA-seq, which means that that the expression level of alternatively spliced RNA molecules are combined to create gene-level values. Droplet-based scRNA-seq techniques only sample one end each transcript, so lack the full-molecule coverage that would be required to accurately quantify different transcript isoforms.
+Gene-level, rather than transcript-level, quantification is standard in scRNA-seq, which means that the expression level of alternatively spliced RNA molecules are combined to create gene-level values. Droplet-based scRNA-seq techniques only sample one end each transcript, so lack the full-molecule coverage that would be required to accurately quantify different transcript isoforms.
 
 To generate gene-level quantifications based on transcriptome quantification, Alevin and similar tools require a conversion between transcript and gene identifiers. We can derive a transcript-gene conversion from the gene annotations available in genome resources such as Ensembl. The transcripts in such a list need to match the ones we will use later to build a binary transcriptome index. If you were using spike-ins, you'd need to add these to the transcriptome and the transcript-gene mapping.
 
@@ -179,7 +178,7 @@ We now have:
 * transcript/ gene mapping
 * filtered FASTA
 
-We can now run Alevin. In some public instances, Alevin won't show up if you search for it. Instead, you have to click the Single Cell tab at the left and scroll down to the Alevin tool. Tip: If you click the tools from the tutorial option within Galaxy, you'll always have the correct version of the tool! In this case, it is: (Galaxy Version 0.14.1.2+galaxy1) - it should be default. If not, click 'Versions' and choose that version.
+We can now run Alevin. In some public instances, Alevin won't show up if you search for it. Instead, you have to click the Single Cell tab at the left and scroll down to the Alevin tool. Tip: If you click the tools from the tutorial option within Galaxy, you'll always have the correct version of the tool! In this case, it is: (Galaxy Version 1.3.0+galaxy2) - it should be default. If not, click 'Versions' and choose that version.
 
 ![Tutorial option in Galaxy](../../images/wab-tutorial-in-galaxy.png "Tutorial option at the top right in Galaxy")
 
@@ -313,11 +312,11 @@ To use emptyDrops effectively, we need to go back and re-run Alevin, stopping it
 
 > ### {% icon hands_on %} Hands-on: Stopping Alevin from thresholding
 > 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2) %} (Click re-run on the last Alevin output)
->   - *"Optional commands"*
->   - *"keepCBFraction"*: '1' - i.e. keep them all!
->   - *"freqThreshold"*: '3' - This will only remove cell barcodes with a frequency of less than 3, a low bar to pass but useful way of avoiding processing a bunch of almost certainly empty barcodes
+>    - *"Optional commands"*
+>    - *"keepCBFraction"*: '1' - i.e. keep them all!
+>    - *"freqThreshold"*: '3' - This will only remove cell barcodes with a frequency of less than 3, a low bar to pass but useful way of avoiding processing a bunch of almost certainly empty barcodes
 >
->   {% snippet snippets/rerun_tool.md %}
+> {% snippet faqs/galaxy/tools_rerun.md %}
 {: .hands_on}
 
 > ### {% icon question %} Question
@@ -502,12 +501,13 @@ You should now have `111` barcodes! You now have an annotated expression matrix 
 >
 {: .hands_on}
 
-{% icon congratulations %} Congrats! Your object is ready to for the scanpy pipeline! However, it may be that you want to combine this object with others like it, for instance, maybe you ran 5 samples, and you are starting with 10 FASTQ files...
+{% icon congratulations %} Congrats! Your object is ready to for the scanpy pipeline! You can can check your work against the [example history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-1---answer-key).
+
+However, it may be that you want to combine this object with others like it, for instance, maybe you ran 5 samples, and you are starting with 10 FASTQ files...
 
 # Combining FASTQ files
 
 This sample was originally one of seven. So to run the other [12 downsampled FASTQ files](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/alevin-tutorial---all-samples---400k), you can use a [workflow](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/pre-processing-with-alevin---part-1-imported-from-uploaded-file)! Note - the N705 subsample is unluckily largely junk reads, so emptyDrops doesn't work. Instead, I processed it with Alevin. The total sample runs fine on emptyDrops of course. All these samples are going to take a while, so go and have several cups of tea... Or, better yet, I have [run them myself](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---input-generation), and plopped them in a [new clean history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---input) for you to import as a fresh history. Alternatively, you can get data with zenodo.
-
 
 ## Data
 
@@ -518,22 +518,23 @@ This sample was originally one of seven. So to run the other [12 downsampled FAS
 >
 >    ```
 >    {{ page.zenodo_link }}/files/Experimental_Design.tabular
->    {{ page.zenodo_link }}/files/N701-400k-AnnData-h5ad
->    {{ page.zenodo_link }}/files/N702-400k-AnnData-h5ad
->    {{ page.zenodo_link }}/files/N703-400k-AnnData-h5ad
->    {{ page.zenodo_link }}/files/N704-400k-AnnData-h5ad
->    {{ page.zenodo_link }}/files/N705-400k-AnnData-h5ad
->    {{ page.zenodo_link }}/files/N706-400k-AnnData-h5ad
->    {{ page.zenodo_link }}/files/N707-400k-AnnData-h5ad
+>    {{ page.zenodo_link }}/files/N701-400k-AnnData.h5ad
+>    {{ page.zenodo_link }}/files/N702-400k-AnnData.h5ad
+>    {{ page.zenodo_link }}/files/N703-400k-AnnData.h5ad
+>    {{ page.zenodo_link }}/files/N704-400k-AnnData.h5ad
+>    {{ page.zenodo_link }}/files/N705-400k-AnnData.h5ad
+>    {{ page.zenodo_link }}/files/N706-400k-AnnData.h5ad
+>    {{ page.zenodo_link }}/files/N707-400k-AnnData.h5ad
 >    ```
 >
->    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets
 > 4. Check that the datatype is `h5ad`, otherwise you will need to change each file to `h5ad`!
 >
->    {% snippet snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 {: .hands_on}
 
@@ -762,3 +763,6 @@ We have:
  * Deployed barcode rank plots as a way of quickly assessing the signal present in droplet datasets.
  * Applied the necessary conversion to pass these data to downstream processes.
  * Retrieved partially analysed data from the Single Cell Expression Atlas
+
+ To discuss with like-minded scientists, join our Gitter channel for all things Galaxy-single cell!
+ [![Gitter](https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg)](https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)

@@ -9,7 +9,7 @@ PDF_HOST?=127.0.0.1
 SITE_URL=http://${PDF_HOST}:${PORT}/training-material
 PDF_DIR=_pdf
 REPO=$(shell echo "$${ORIGIN_REPO:-galaxyproject/training-material}")
-BRANCH=$(shell echo "$${ORIGIN_BRANCH:-master}")
+BRANCH=$(shell echo "$${ORIGIN_BRANCH:-main}")
 MINICONDA_URL=https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 SHELL=bash
 RUBY_VERSION=2.4.4
@@ -83,8 +83,8 @@ _check-html: # Internal
 	      	--assume-extension \
 	      	--http-status-ignore 405,503,999 \
 	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
-	      	--url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
-	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
+	      	--url-swap "github.com/galaxyproject/training-material/tree/main:github.com/${REPO}/tree/${BRANCH}" \
+	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/","/\/tutorials\/.*\/docker\//" \
 	      	--allow-hash-href \
 	      	./_site
 .PHONY: _check-html
@@ -106,9 +106,9 @@ _check-html-internal: # Internal
 		htmlproofer \
 	      	--assume-extension \
 	      	--http-status-ignore 405,503,999 \
-	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#/" \
-	      	--url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
-	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
+	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#/","/#embedded_jbrowse/","/.*videos.*.mp4.png/" \
+	      	--url-swap "github.com/galaxyproject/training-material/tree/main:github.com/${REPO}/tree/${BRANCH}" \
+	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/","/\/tutorials\/.*\/docker\//" \
 	      	--disable-external \
 	      	--allow-hash-href \
 	      	./_site
@@ -160,7 +160,7 @@ check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
 			--assume-extension \
 			--http-status-ignore 405,503,999 \
 			--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
-			--file-ignore "/.*\/files\/.*/" \
+			--file-ignore "/.*\/files\/.*/","/\/tutorials\/.*\/docker\//" \
 			--allow-hash-href \
 			. && \
 		find . -path "**/slides*.html" \
@@ -222,6 +222,9 @@ annotate: ## annotate the tutorials with usable Galaxy instances and generate ba
 	python bin/add_galaxy_instance_annotations.py && \
 	python bin/add_galaxy_instance_badges.py
 .PHONY: annotate
+
+rebuild-search-index: ## Rebuild search index
+	node bin/lunr-index.js > search.json
 
 clean: ## clean up junk files
 	@rm -rf _site

@@ -85,7 +85,7 @@ First, note that your Galaxy datasets have been created thus far in the director
 >    </object_store>
 >    ```
 >
-> 4. Add a `pre_task` to create the `/data2` folder [using the file module](https://docs.ansible.com/ansible/2.9/modules/file_module.html).
+> 4. Add a `pre_task` in your playbook `galaxy.yml` file to create the `/data2` folder [using the file module](https://docs.ansible.com/ansible/2.9/modules/file_module.html).
 >
 >    ```
 >        - name: Create the second storage directory
@@ -101,7 +101,7 @@ First, note that your Galaxy datasets have been created thus far in the director
 >
 > 5. Run the playbook and restart Galaxy
 >
-> 6. Run a couple of jobs after Galaxy has restarted, run a couple of jobs.
+> 6. Run a couple of jobs after Galaxy has restarted.
 >
 >    > ### {% icon question %} Question
 >    >
@@ -194,7 +194,7 @@ we will set up a local S3-compatible object store, and then talk to the API of t
 >      version: v1.1.0
 >    ```
 >
-> 2. `ansible-galaxy install -p roles -r requirements.yml`
+> 2. ```ansible-galaxy install -p roles -r requirements.yml```
 >
 > 3. Edit your group variables to configure the object store:
 >
@@ -281,7 +281,7 @@ This tutorial will help you setup the connection between Galaxy and Dropbox, all
 >      id: dropbox
 >      label: Your Dropbox Files
 >      doc: Your Dropbox files - configure an access token via the user preferences
->      accessToken: ${user.preferences['dropbox|access_token']}
+>      accessToken: ${user.preferences.get('dropbox|access_token', '') if $user.preferences else ''}
 >    ```
 > 3. Create `files/galaxy/config/user_preferences_extra_conf.yml` with the following contents:
 >

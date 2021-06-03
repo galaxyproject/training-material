@@ -49,8 +49,8 @@ The data for today is a sample of *M. tuberculosis* [collected](https://www.ncbi
 >https://zenodo.org/record/3960260/files/Mycobacterium_tuberculosis_h37rv.ASM19595v2.45.chromosome.Chromosome.gff3
 >```
 >
->    {% snippet snippets/import_via_link.md %}
->    {% snippet snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
 
@@ -75,7 +75,7 @@ tutorial on ["Quality control"]({% link topics/sequence-analysis/tutorials/quali
 >
 >       - {% icon param-files %} *"Short read data from your current history"*: select both FASTQ datasets.
 >
->    {% snippet snippets/select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
 >    The **FastQC** {% icon tool %} input form looks like this. You only need to pay attention to the top part
 >    where *Short read data from your current history* is selected. Leave all the other parameters at their default
@@ -265,7 +265,7 @@ Now that we have a collection of *high quality variants* we can search them agai
 
 Finally, TB Variant Report use the COMBAT-TB [eXplorer](https://explorer.sanbi.ac.za) [database](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btz658/5554700) of *M. tuberculosis* genome annotation to annotate variants in Mtb. It also takes the output of *TB Profiler* and produces a neat report that is easy to browse and search.
 
-> ### {% icon hands_on %} Hands-on: Run TB Profiler
+> ### {% icon hands_on %} Hands-on: Run TB Profiler and TB Variant Report
 > 1. {% tool [TB-Profiler profile](toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/2.8.4+galaxy1) %}: {% icon tool %} with the following parameters
 >   - *"Input File Type"*: `BAM`
 >       - *"Bam"*: `snippy on data XX, data XX, and data X mapped reads (bam)`
@@ -277,10 +277,11 @@ Finally, TB Variant Report use the COMBAT-TB [eXplorer](https://explorer.sanbi.a
 >
 >     {% tool [Text transformation with sed](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1) %}: {% icon tool %} with the following parameters:
 >
+>       - *"File to process"*: `TB Variant Filter on data XX`
 >       - *"SED Program"*: `s/GENE_//g`
 > 
 > 3. {% tool [TB Variant Report](toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/0.1.7+galaxy0) %}: {% icon tool %} with the following parameters
->   - *"Input SnpEff annotated M.tuberculosis VCF(s)"*: `TB-Profiler Profile VCF on data XX`
+>   - *"Input SnpEff annotated M.tuberculosis VCF(s)"*: `Text transformation on data XX`
 >   - *"TBProfiler Drug Resistance Report (Optional)"*: `TB-Profiler Profile on data XX: Results.json`
 >
 > 3. Open the drug resistance and variant report html files.

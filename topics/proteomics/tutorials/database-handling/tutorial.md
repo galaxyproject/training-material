@@ -21,6 +21,8 @@ key_points:
 contributors:
   - stortebecker
   - bgruening
+subtopic: id-quant
+tags: [DDA]
 ---
 
 # Introduction
@@ -52,7 +54,7 @@ In this tutorial, we will explore **Protein Database Downloader** {% icon tool %
 >
 > 1. Create a new history for this Database Handling exercise.
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Open {% tool [Protein Database Downloader](toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.1) %}
 > 3. Select in the drop-down menues  *"Taxonomy"*: `Homo sapiens (Human)` and `reviewed`: "UniprotKB/Swiss-Prot (reviewed only)".
@@ -92,7 +94,7 @@ A widely used database for common contaminants is the **c**ommon **R**epository 
 >
 > 1. Run {% tool [FASTA-to-Tabular](toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1) %} on your crap database.
 > 2. Run {% tool [Add column](addValue) %} on the new output. In the field `Add this value` enter "CONTAMINANT" and execute.
-> 3. Run {% tool [Tabular-to-FASTA](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1) %} . 
+> 3. Run {% tool [Tabular-to-FASTA](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1) %} .
 >    - *"Title column"*: `Column 1` and `Column 3`
 >    - *"Sequence column"*: `Column 2`
 > 4. Rename the new fasta file to `Tagged cRAP database`.
@@ -131,7 +133,7 @@ Depending on the search algorithm in use,  you might need to merge all FASTA ent
 > ### {% icon hands_on %} Hands-on: Merging databases
 >
 > 1. Run {% tool [FASTA Merge Files and Filter Unique Sequences](toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0) %} on the main database and the tagged cRAP database.
->    - In *"Input FASTA File(s)"*: 
+>    - In *"Input FASTA File(s)"*:
 >    - {% icon param-repeat %} Click on *"Insert Input FASTA File(s)"*
 >       - In *"Input FASTA File(s)"*
 >          - *"FASTA file"*: `tagged cRAP database`

@@ -21,6 +21,8 @@ contributors:
   - jj-umn
   - blankclemens
   - subinamehta
+subtopic: multi-omics
+tags: [microbiome]
 ---
 
 # Introduction
@@ -61,12 +63,12 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 >
 > 1. Create a new history and name it something meaningful (e.g. *Metaproteomics tutorial*)
 >
->    {% snippet snippets/create_new_history.md %}
->    {% snippet snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the three MGF MS/MS files and the FASTA sequence file from Zenodo.
 >
->    {% snippet snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >    As default, Galaxy takes the link as name.
 >
@@ -76,7 +78,7 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 >
 > 3. Build a **Dataset list** for the three MGF files
 >
->    {% snippet snippets/build_list_collection.md %}
+>    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 {: .hands_on}
 
@@ -330,7 +332,7 @@ Therefore we can search the database for the peptides and count the occurrence w
 >          GROUP BY sequence
 >
 >          ORDER BY sequence
-> 
+>
 >
 > 2. Click **Execute**. The resulting file should have two columns, one with the distinct peptides, the other with the count number of PSMs.
 >

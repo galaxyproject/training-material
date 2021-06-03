@@ -22,7 +22,8 @@ requirements:
     topic_name: proteomics
     tutorials:
       - maxquant-label-free
-
+subtopic: id-quant
+tags: [label-free]
 ---
 
 
@@ -54,7 +55,7 @@ The annotation file, group comparison file and FASTA file for this training is d
 >
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
->    {% snippet snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the FASTA database, annotation file and comparison matrix from [Zenodo](https://zenodo.org/record/4896554)
 >
@@ -66,7 +67,7 @@ The annotation file, group comparison file and FASTA file for this training is d
 >    {% snippet snippets/import_via_link.md %}
 >
 > 3. Once the files are green, rename the fasta file into 'protein database', the annotation file into 'annotation file' and the comparison matrix file into 'comparison matrix'.
->    {% snippet snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 4. Steps 4 to 7 can be skipped to save time and storage capacity by not running MaxQuant. To run MaxQuant, import the raw data from [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD006914).
 >
@@ -93,15 +94,15 @@ The annotation file, group comparison file and FASTA file for this training is d
 >
 >    ```
 > 5. Rename the raw datasets into 'metast_cSCC1.raw', 'metast_cSCC2.raw', etc.. The naming for the raw files have to be exactly this way to later match the file names provided in the MSstats annotation file. 
->    {% snippet snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 6. Control that the data type of the raw files is 'thermo.raw' otherwise change the datatype into 'thermo.raw'
 >
->    {% snippet snippets/change_datatype.md datatype="thermo.raw" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="thermo.raw" %}
 >
 > 7. Generate a collection for all raw files and name it 'raw_files', hide the individual raw files
 >
->    {% snippet snippets/build_list_collection.md %}
+>    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 {: .hands_on}
 
@@ -347,7 +348,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
 >    - *"With following condition"*: `c3>0.58`
 >    - *"Number of header lines to skip"*: `1`
 > 4. Add a tag `#metastasized` to the filtered file and rename it into `metastasized filtered`
->      {% snippet snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 > 5. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `significant proteins` (output of the first **Filter** {% icon tool %})

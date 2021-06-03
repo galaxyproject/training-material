@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Visualizations: generic plugins"
+title: "Generic plugins"
 questions:
   - "How can visualization plugins benefit science?"
 objectives:
@@ -17,6 +17,7 @@ key_points:
   - "Interactivity is what makes visualizations different from static tools"
   - "Requires understanding of both the Galaxy ecosystem as well as HTML5/JS"
   - "Performance is more important than for static Galaxy tools"
+subtopic: viz
 contributors:
   - shiltemann
   - yhoogstrate
