@@ -116,7 +116,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -139,3 +139,13 @@ golang_gopath: '/opt/workspace-go'
 >     # Singularity target version
->     singularity_version: "3.7.0"
+>     singularity_version: "3.7.4"
 >     singularity_go_path: "{{ golang_install_dir }}"
 >    +
 >    +# Slurm

@@ -82,8 +82,16 @@ elif [[ "$op" == "deploy" ]]; then
 		git add .scripts/
 		git remote add origin git@github.com:hexylena/git-gat.git && \
 		git push -f origin
+elif [[ "$op" == "roundtrip" ]]; then
+	rm -rf ${DIR}
+	bash $0 export
+	cd ${DIR} || exit
+	git init && \
+		git am -3 -- *.patch
+	cd -
+	bash $0 import
 else
-	echo "$0 <import|export|deploy>"
+	echo "$0 <import|export|deploy|roundtrip>"
 	exit 1;
 fi
 
