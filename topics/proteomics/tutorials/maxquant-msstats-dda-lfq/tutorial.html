@@ -522,6 +522,14 @@
                 
                 
                 
+                     <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+    </a>
+  </li>
+
+
+                
 
                 
                     <li class="btn btn-default supporting_material">
@@ -709,7 +717,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 31, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 3, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -740,7 +748,6 @@ The training dataset consists of a skin cancer cohort of 19 patients, which is a
   </li>
   <li><a href="#follow-up-on-msstats-results" id="markdown-toc-follow-up-on-msstats-results">Follow up on MSstats results</a></li>
   <li><a href="#filtering-msstats-results" id="markdown-toc-filtering-msstats-results">Filtering MSstats results</a></li>
-  <li><a href="#follow-up-on-proteins-that-are-missing-in-one-condition" id="markdown-toc-follow-up-on-proteins-that-are-missing-in-one-condition">Follow up on proteins that are missing in one condition</a></li>
   <li><a href="#finding-differentially-abundant-proteins" id="markdown-toc-finding-differentially-abundant-proteins">Finding differentially abundant proteins</a></li>
   <li><a href="#follow-up-on-differentially-abundant-proteins" id="markdown-toc-follow-up-on-differentially-abundant-proteins">Follow up on differentially abundant proteins</a></li>
 </ol>
@@ -749,7 +756,7 @@ The training dataset consists of a skin cancer cohort of 19 patients, which is a
 
 <h1 id="get-data">Get data</h1>
 
-<p>The raw data is available via the <a href="https://www.ebi.ac.uk/pride/archive/projects/PXD006914">PRIDE repository</a>. The annotation file, group comparison file and FASTA file for this training is deposited at <a href="https://zenodo.org/record/4544529">Zenodo</a>. It is of course possible to use another FASTA file with human proteome sequences, but to ensure that the results are compatible we recommend to use the provided FASTA file. MaxQuant not only adds known contaminants to the FASTA file, but also generates the “decoy” hits for false discovery rate estimation itself, therefore the FASTA file is not allowed to have decoy entries. To learn more about FASTA files, have a look at <a href="/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">Protein FASTA Database Handling tutorial</a>.</p>
+<p>The annotation file, group comparison file and FASTA file for this training is deposited at <a href="https://zenodo.org/record/4896554">Zenodo</a>. It is of course possible to use another FASTA file with human proteome sequences, but to ensure that the results are compatible we recommend to use the provided FASTA file. MaxQuant not only adds known contaminants to the FASTA file, but also generates the “decoy” hits for false discovery rate estimation itself, therefore the FASTA file is not allowed to have decoy entries. To learn more about FASTA files, have a look at <a href="/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">Protein FASTA Database Handling tutorial</a>. The raw data is available via the <a href="https://www.ebi.ac.uk/pride/archive/projects/PXD006914">PRIDE repository</a>. As this is a real life study, the raw data sizes are large and computation time in MaxQuant is long. To save time and storage capacity, you can skip downloading the raw data and the MaxQuant run and instead continue with the MaxQuant outputs which we provide later on. In this case skip the data upload steps 5-8 which are only necessary for the MaxQuant run.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
@@ -762,18 +769,21 @@ The training dataset consists of a skin cancer cohort of 19 patients, which is a
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panelIf the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>    <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>    <li>Select the option <strong>Create New</strong> from the menu</li>  </ol></blockquote>
     </li>
     <li>
-      <p>Import the FASTA database, annotation file and comparison matrix from <a href="https://zenodo.org/record/4544529">Zenodo</a></p>
+      <p>Import the FASTA database, annotation file and comparison matrix from <a href="https://zenodo.org/record/4896554">Zenodo</a></p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4544529/files/input_protein_database.fasta
-https://zenodo.org/record/4544529/files/input_annotation_file.tabular
-https://zenodo.org/record/4544529/files/input_comparison_matrix.tabular
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4896554/files/input_protein_database.fasta
+https://zenodo.org/record/4896554/files/input_annotation_file.tabular
+https://zenodo.org/record/4896554/files/input_comparison_matrix.tabular
 </code></pre></div>      </div>
-
       <!--SNIPPET-->
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>    <li>Copy the link location</li>    <li>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</li>    <li>Select <strong>Paste/Fetch Data</strong></li>    <li>Paste the link into the text field</li>    <li>Press <strong>Start</strong></li>    <li><strong>Close</strong> the windowBy default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li>  </ul></blockquote>
     </li>
     <li>
-      <p>Import the raw data from <a href="https://www.ebi.ac.uk/pride/archive/projects/PXD006914">PRIDE</a></p>
+      <p>Once the files are green, rename the fasta file into ‘protein database’, the annotation file into ‘annotation file’ and the comparison matrix file into ‘comparison matrix’.
+<!--SNIPPET-->&lt;blockquote class="tip"&gt;  &lt;h3 data-toc-skip id="-tip-renaming-a-dataset"&gt;<i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset&lt;/h3&gt;  &lt;ul&gt;    &lt;li&gt;Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes&lt;/li&gt;    &lt;li&gt;In the central panel, change the <strong>Name</strong> field&lt;/li&gt;    &lt;li&gt;Click the <strong>Save</strong> button&lt;/li&gt;  &lt;/ul&gt;&lt;/blockquote&gt;</p>
+    </li>
+    <li>
+      <p>Steps 4 to 7 can be skipped to save time and storage capacity by not running MaxQuant. To run MaxQuant, import the raw data from <a href="https://www.ebi.ac.uk/pride/archive/projects/PXD006914">PRIDE</a>.</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment105_metast_cSCC1.raw
 ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment106_metast_cSCC2.raw
@@ -798,10 +808,8 @@ ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment115_RDE
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Once the files are green, rename the raw datasets into ‘metast_cSCC1’ etc., the fasta file into ‘protein database’, the annotation file into ‘annotation file’ and the comparison matrix file into ‘comparison matrix’.</p>
-
-      <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, change the <strong>Name</strong> field</li>    <li>Click the <strong>Save</strong> button</li>  </ul></blockquote>
+      <p>Rename the raw datasets into ‘metast_cSCC1.raw’, ‘metast_cSCC2.raw’, etc.. The naming for the raw files have to be exactly this way to later match the file names provided in the MSstats annotation file. 
+<!--SNIPPET-->&lt;blockquote class="tip"&gt;  &lt;h3 data-toc-skip id="-tip-renaming-a-dataset"&gt;<i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset&lt;/h3&gt;  &lt;ul&gt;    &lt;li&gt;Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes&lt;/li&gt;    &lt;li&gt;In the central panel, change the <strong>Name</strong> field&lt;/li&gt;    &lt;li&gt;Click the <strong>Save</strong> button&lt;/li&gt;  &lt;/ul&gt;&lt;/blockquote&gt;</p>
     </li>
     <li>
       <p>Control that the data type of the raw files is ‘thermo.raw’ otherwise change the datatype into ‘thermo.raw’</p>
@@ -834,6 +842,9 @@ ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment115_RDE
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA files”</em>: <code class="language-plaintext highlighter-rouge">protein database</code></li>
           </ul>
         </li>
+        <li>In <em>“Search Options”</em>:</li>
+        <li><em>“minimum unique peptides”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><em>“Match between runs”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
         <li>In <em>“Parameter Group”</em>:
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Parameter Group”</em>
@@ -846,7 +857,7 @@ ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment115_RDE
         <li><em>“Generate PTXQC (proteomics quality control pipeline) report?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li>In <em>“Output Options”</em>:
           <ul>
-            <li><em>“Select the desired outputs.”</em>: <code class="language-plaintext highlighter-rouge">Protein Groups</code> <code class="language-plaintext highlighter-rouge">Evidence</code> <code class="language-plaintext highlighter-rouge">mqpar.xml</code></li>
+            <li><em>“Select the desired outputs.”</em>: <code class="language-plaintext highlighter-rouge">Protein Groups</code> <code class="language-plaintext highlighter-rouge">Evidence</code></li>
           </ul>
         </li>
       </ul>
@@ -856,12 +867,12 @@ ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment115_RDE
 
         <p>Because the MaxQuant run takes really long, we recommend to download the MaxQuant results from Zenodo and continue with the tutorial</p>
         <ol>
-          <li>Import the files from <a href="https://zenodo.org/record/4544529">Zenodo</a></li>
+          <li>Import the files from <a href="https://zenodo.org/record/4896554">Zenodo</a></li>
         </ol>
 
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4544529/files/Evidence.tabular
-https://zenodo.org/record/4544529/files/protein_groups.tabular
-https://zenodo.org/record/4544529/files/PTXQC_report.pdf
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4896554/files/MaxQuant_Evidence.tabular
+https://zenodo.org/record/4896554/files/MaxQuant_proteingroups.tabular
+https://zenodo.org/record/4896554/files/PTXQC_report.pdf
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -881,8 +892,8 @@ https://zenodo.org/record/4544529/files/PTXQC_report.pdf
     <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>2634 protein groups and ~150000 features were found in total (number of lines of protein group and evidence files)</li>
-      <li>Up to 60% of the samples intensities derive from potential contaminants (PTXQC plots page 6)</li>
+      <li>2622 protein groups and ~240000 features were found in total (number of lines of protein group and evidence files)</li>
+      <li>Up to 60% of the samples intensities derive from potential contaminants (PTXQC plots page 7)</li>
     </ol>
 
   </blockquote>
@@ -891,7 +902,7 @@ https://zenodo.org/record/4544529/files/PTXQC_report.pdf
 
 <h1 id="msstats-analysis">MSstats analysis</h1>
 
-<p>The protein groups and evidence files of MaxQuant can directly be input into MSstats. MSstats automatically removes all proteins that are labelled as contaminants (‘+’ sign in the column ‘potential contaminant’ of both MaxQuant outputs). However, in this skin dataset we expect that the skin proteins are part of the sample and not a contamination. Therefore, we keep all human contaminants by first removing non human proteins and then removing (replacing with ‘’) the ‘+’ sigin in the ‘potential contaminant’ column.</p>
+<p>The protein groups and evidence files of MaxQuant can directly be input into MSstats. MSstats automatically removes all proteins that are labelled as contaminants (‘+’ sign in the column ‘potential contaminant’ of both MaxQuant outputs). However, in this skin dataset we expect that the skin proteins are part of the sample and not a contamination. Therefore, we keep all human contaminants by first removing non human proteins (by selecting only lines that contain the word ‘HUMAN’ or a word from the header line) and then for the human potential contaminants remove the ‘+’ (replacing ‘+’ with ‘‘(empty field) in the ‘potential contaminant’ column) to keep them for the analysis.</p>
 
 <p>We use the modified MaxQuant protein groups and evidence files as input in MSstats. In addition, an annotation file that describes the experimental design and a comparison matrix is needed. Please start the MSstats run first and while it is running you can find more details on its parameters below.</p>
 
@@ -917,6 +928,7 @@ https://zenodo.org/record/4544529/files/PTXQC_report.pdf
         <li>In <em>“Replacement”</em>:
       - <em>“in column”</em>: <code class="language-plaintext highlighter-rouge">c118</code>
       - <em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">+</code></li>
+        <li>Once finished, rename the file into <code class="language-plaintext highlighter-rouge">protein groups input for MSstats</code></li>
       </ul>
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</span></span>  with the following parameters:
@@ -925,14 +937,15 @@ https://zenodo.org/record/4544529/files/PTXQC_report.pdf
         <li>In <em>“Replacement”</em>:
       - <em>“in column”</em>: <code class="language-plaintext highlighter-rouge">c54</code>
       - <em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">+</code></li>
+        <li>Once finished, rename the file into <code class="language-plaintext highlighter-rouge">evidence input for MSstats</code></li>
       </ul>
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.22.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.22.0.0"><strong>MSstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/msstats/msstats/3.22.0.0</span></span>   with the following parameters:
       <ul>
         <li><em>“input source”</em>: <code class="language-plaintext highlighter-rouge">MaxQuant</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“evidence.txt - feature-level data”</em>: <code class="language-plaintext highlighter-rouge">selected Evidence</code> (output of <strong>Select</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“proteinGroups.txt - protein-level data”</em>: <code class="language-plaintext highlighter-rouge">selected Protein Groups</code> (output of <strong>Select</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“evidence.txt - feature-level data”</em>: <code class="language-plaintext highlighter-rouge">evidence input for MSstats</code> (output of <strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“proteinGroups.txt - protein-level data”</em>: <code class="language-plaintext highlighter-rouge">protein groups input for MSstats</code> (output of <strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“annotation file”</em>: <code class="language-plaintext highlighter-rouge">annotation file</code></li>
             <li><em>“Select Protein ID in evidence.txt”</em>: <code class="language-plaintext highlighter-rouge">Leading razor protein column</code></li>
             <li>In <em>“MaxQtoMSstatsFormat Options”</em>:
@@ -942,12 +955,14 @@ https://zenodo.org/record/4544529/files/PTXQC_report.pdf
             </li>
           </ul>
         </li>
-        <li><em>“Select outputs”</em>: <code class="language-plaintext highlighter-rouge">MSstats log</code> <code class="language-plaintext highlighter-rouge">MSstats ProcessedData</code> <code class="language-plaintext highlighter-rouge">MSstats QCPlot</code> <code class="language-plaintext highlighter-rouge">RunlevelData</code> <code class="language-plaintext highlighter-rouge">Group Quantification Matrix Table</code> <code class="language-plaintext highlighter-rouge">Sample Quantification Matrix Table</code></li>
+        <li><em>“Select outputs”</em>: <code class="language-plaintext highlighter-rouge">MSstats log</code> <code class="language-plaintext highlighter-rouge">MSstats ProcessedData</code> <code class="language-plaintext highlighter-rouge">RunlevelData</code> <code class="language-plaintext highlighter-rouge">Group Quantification Matrix Table</code> <code class="language-plaintext highlighter-rouge">Sample Quantification Matrix Table</code></li>
         <li>In <em>“DataProcess Plot Options”</em>:
           <ul>
-            <li><em>“Angle of labels represented each condition at the top of graph”</em>: <code class="language-plaintext highlighter-rouge">0</code>
+            <li><em>“Select visualization outputs”</em>: <code class="language-plaintext highlighter-rouge">QCPlot</code>
               <ul>
                 <li><em>“Select protein IDs to draw plots”</em>: <code class="language-plaintext highlighter-rouge">Option for QC plot: "allonly" will generate one QC plot with all proteins</code></li>
+                <li>In <em>“Advanced visualization parameters”</em>:</li>
+                <li><em>“Angle of labels represented each condition at the top of graph”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
               </ul>
             </li>
           </ul>
@@ -955,11 +970,13 @@ https://zenodo.org/record/4544529/files/PTXQC_report.pdf
         <li><em>“Compare Groups”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Comparison Matrix”</em>: <code class="language-plaintext highlighter-rouge">comparison matrix</code></li>
-            <li><em>“Select outputs”</em>: <code class="language-plaintext highlighter-rouge">MSstats ComparisonResult</code> <code class="language-plaintext highlighter-rouge">MSstats VolcanoPlot</code></li>
+            <li><em>“Select outputs”</em>: <code class="language-plaintext highlighter-rouge">MSstats ComparisonResult</code></li>
           </ul>
         </li>
-        <li>In <em>“Comparison Plot Options”</em>:
+        <li>In <em>“Comparison Visualization Options”</em>:
           <ul>
+            <li><em>“Select visualization outputs”</em>: <code class="language-plaintext highlighter-rouge">MSstats VolcanoPlot</code></li>
+            <li>In <em>“Advanced visualization parameters”</em>:</li>
             <li><em>“Involve fold change cutoff or not for volcano plot or heatmap.”</em>: <code class="language-plaintext highlighter-rouge">1.5</code></li>
             <li><em>“Display protein names in Volcano Plot.”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
           </ul>
@@ -982,8 +999,8 @@ https://zenodo.org/record/4544529/files/PTXQC_report.pdf
     <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>29 (2635 lines in protein group file minus 2606 lines after select)</li>
-      <li>1296 (MSstats log)</li>
+      <li>28 (2622 lines in protein group file minus 2594 lines after select)</li>
+      <li>2289 (MSstats log)</li>
     </ol>
 
   </blockquote>
@@ -995,9 +1012,37 @@ https://zenodo.org/record/4544529/files/PTXQC_report.pdf
 <p>MSstats  is designed for statistical modelling of mass spectrometry based proteomic data <a href="https://doi.org/10.1093/bioinformatics/btu305">Choi 2014</a>.
 Proteomic data analysis requires statistical approaches that reduce bias and inefficiencies and distinguish systematic variation from random artifacts <a href="https://doi.org/10.1371/journal.pcbi.1002277">Käll and Vitek 2011</a>.</p>
 
-<p>MSstats is directly compatible with the output of several quantitative proteomics software. In addition to the results of the proteomics software an annotation file is needed as input. The annotation file describes the experimental design such as the conditions, biological and technical replicates. To be compatible with MaxQuant results, an additional column with the label type is needed, which only contains L (light) in DDA experiments.</p>
+<p>MSstats is directly compatible with the output of several quantitative proteomics software. In addition to the results of the proteomics software an annotation file is needed as input. The annotation file describes the experimental design such as the conditions, biological and technical replicates. To be compatible with MaxQuant results, an additional column with the label type is needed, which only contains L (light) in DDA experiments. A wrong setup of the annotation file is the most common source of errors in MSstats, thus we collected more information in the box below to allow you to adjust the annotation file when analyzing your own experiments.</p>
 
-<p>First, the input data is converted into an MSstats compatible table. For this step several parameters to filter and adjust the input data can be selected. We keep the default parameters and only change one parameter in order to remove proteins which have only a single peptide measurement.
+<blockquote class="tip">
+  <h3 id="tip-tip-generating-the-msstats-annotation-file"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Generating the MSstats annotation file</h3>
+
+  <p>For label-free MaxQuant data, the annotation file should have 5 columns with exactly these headers: Raw.file, Condition, BioReplicate, Run; IsotopeLabelType</p>
+  <ol>
+    <li>Raw.file: The names must match exactly to the file names in the MaxQuant evidence.txt “Raw file” column. (e.g. “file1.raw.thermo”).</li>
+    <li>Condition: The conditions which will be compared in the statistical modelling. They are not allowed to start with a number or contain any special characters except for ‘_’.</li>
+    <li>BioReplicate: This column should contain a unique identifier for each biological replicate in the experiment. For example, in a clinical proteomic investigation this should be a unique patient id. If technical replicates are present, all samples from the same biological replicate should have the same id but different run ids. MSstats automatically detects the presence of technical replicates and accounts for them in the model-based analysis.</li>
+    <li>Run: This column contains the identifier of a mass spectrometry run. Each mass spectrometry run should have a unique identifier (number or name), regardless of the origin of the biological sample.</li>
+    <li>IsotopeLabelType: This is L (light) for all MaxQuant DDA experiments.</li>
+  </ol>
+
+</blockquote>
+
+<p>MSstats will compare all conditions that are indicated in the comparison matrix. The comparison matrix has to be setup correctly to avoid errors and wrong statistical modelling. It contains a first column that gives the comparisons a name and one column per condition. This matrix is filled with 1 and -1 to specify the conditions that are compared in each comparison and with 0 for conditions that are not part of the comparison.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-generating-the-msstats-comparison-matrix"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Generating the MSstats comparison matrix</h3>
+
+  <ol>
+    <li>The first column of the comparison matrix contains the names of the comparisons and should have ‘names’ as header. These names will be used in all MSstats output files, therefore it is important that the names are meaningful and reflect the actual comparison (see below)</li>
+    <li>An additional column for each condition that is present in the data. This means each condition present in the annotation file has to be a separate column even when the condition will not be used for any comparison. The header should contain the condition name exactly as written in the annotation file.</li>
+    <li>Fill the matrix: Use 1 and -1 to indicate the conditions to compare and 0 for conditions that are not compared. Multiple groups can be combined by using 0.5.</li>
+    <li>Example: to compare condition1 with condition2: write 1 into the column of condition1 and write -1 in the column of condition2. In the first column of the matrix name this comparison condition1-condition2. The naming of the comparison should reflect the direction of the comparison and thus always have the condition that is set to 1 first and the condition that is set to -1 second (condition1-condition2 and NOT condition2-condition1).</li>
+  </ol>
+
+</blockquote>
+
+<p>The first analysis step in MSstats is the conversion of the input data into an MSstats compatible table. For this step several parameters to filter and adjust the input data can be selected. We keep the default parameters and only change one parameter in order to remove proteins which have only a single peptide measurement.
 Next, data processing optimizes the data for statistical modelling via log-transformation, and normalization of intensities, feature selection, missing value imputation, and run-level summarization.
 Log- transformation is performed to transform multiplicative signals to additive signals which are compatible with linear statistical models and bring the intensity distribution close to a normal distribution. Furthermore, it changes the dependence of variances from the intensity values: in the raw data larger intensities have larger variances but after log transformation lower intensities have larger variances.</p>
 
@@ -1027,6 +1072,12 @@ We’ll count and visualize the number of features per run and calculate the dis
   <h3 id="hands_on-hands-on-follow-up-on-msstats-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Follow up on MSstats results</h3>
 
   <ol>
+    <li><span class="tool" data-tool="Summary_Statistics1" title="Tested with Summary_Statistics1"><strong>Summary Statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Summary_Statistics1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Summary statistics on”</em>: <code class="language-plaintext highlighter-rouge">RunLevel data</code> (output of <strong>MSstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Column or <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">c4</code></li>
+      </ul>
+    </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/datamash_ops/1.0.6" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/datamash_ops/1.0.6"><strong>Datamash</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/datamash_ops/1.0.6</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">RunLevel data</code> (output of <strong>MSstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1054,12 +1105,6 @@ We’ll count and visualize the number of features per run and calculate the dis
         <li>Save <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> (file is saved under “User” –&gt; “Visualizations”)</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="Summary_Statistics1" title="Tested with Summary_Statistics1"><strong>Summary Statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Summary_Statistics1</span></span>  with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Summary statistics on”</em>: <code class="language-plaintext highlighter-rouge">RunLevel data</code> (output of <strong>MSstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Column or <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">c4</code></li>
-      </ul>
-    </li>
   </ol>
 
 </blockquote>
@@ -1076,8 +1121,11 @@ We’ll count and visualize the number of features per run and calculate the dis
     <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>RDEB cSCC4 <figure id="figure-3"><img src="../../images/maxquant-msstats-lfq/features_sample.png" alt="Number of features per sample" />&lt;figcaption&gt;<span class="figcaption-prefix">Figure 3:</span> Number of features per sample (run)&lt;/figcaption&gt;</figure></li>
-      <li>Around 5 features per protein.</li>
+      <li>RDEB cSCC4</li>
+    </ol>
+    <figure id="figure-3"><img src="../../images/maxquant-msstats-lfq/features_sample.png" alt="Number of features per sample" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Number of features per sample (run)</figcaption></figure>
+    <ol>
+      <li>Around 5 features per protein (mean in summary statistics).</li>
     </ol>
 
   </blockquote>
@@ -1086,7 +1134,7 @@ We’ll count and visualize the number of features per run and calculate the dis
 
 <h1 id="filtering-msstats-results">Filtering MSstats results</h1>
 
-<p>The comparison result table summarizes the statistical results per protein and comparison. First, we keep only the Uniprot ID in column 1 to make the ID less cluttered.
+<p>The comparison result table summarizes the statistical results per protein and comparison. First, we keep only the Uniprot ID in column 1 to make the ID less cluttered. This is done by deleting everything before the first pipe ‘|’ and everything after the second pipe ‘|’. 
 Then we keep only statistically significant proteins that means they have an adjusted p-value below 0.05.
 Next, we separate up- and down-regulated proteins by filtering for a positive and negative log2FC.
 The Sample Quantification Matrix Table contains the summarized intensities per protein and sample.
@@ -1115,32 +1163,31 @@ In order to make its IDs compatible with the ones from the comparison result at 
     </li>
     <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">replaced comparison result</code> (output of the last <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">replaced comparison result</code> (output of <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c8&lt;0.05</code></li>
         <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li>Once finished, rename the file into <code class="language-plaintext highlighter-rouge">significant proteins</code></li>
       </ul>
     </li>
     <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">filtered comparison result</code> (output of <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">significant proteins</code> (output of <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c3&gt;0.58</code></li>
         <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
       </ul>
     </li>
     <li>
-      <p>Add a tag <code class="language-plaintext highlighter-rouge">#metastasized</code> to the filtered file</p>
-
-      <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-adding-a-tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag</h3>  <ul>    <li>Click on the dataset</li>    <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>    <li>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code>  Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</li>    <li>Check that the tag is appearing below the dataset name</li>  </ul></blockquote>
+      <p>Add a tag <code class="language-plaintext highlighter-rouge">#metastasized</code> to the filtered file and rename it into <code class="language-plaintext highlighter-rouge">metastasized filtered</code>
+<!--SNIPPET-->&lt;blockquote class="tip"&gt;  &lt;h3 data-toc-skip id="-tip-adding-a-tag"&gt;<i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag&lt;/h3&gt;  &lt;ul&gt;    &lt;li&gt;Click on the dataset&lt;/li&gt;    &lt;li&gt;Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong>&lt;/li&gt;    &lt;li&gt;Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code>  Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.&lt;/li&gt;    &lt;li&gt;Check that the tag is appearing below the dataset name&lt;/li&gt;  &lt;/ul&gt;&lt;/blockquote&gt;</p>
     </li>
     <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">filtered comparison result</code> (output of the run before last <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">significant proteins</code> (output of the first <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c3&lt;-0.58</code></li>
         <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
       </ul>
     </li>
-    <li>Add a tag <code class="language-plaintext highlighter-rouge">#rdeb</code> to the filtered file</li>
+    <li>Add a tag <code class="language-plaintext highlighter-rouge">#rdeb</code> to the filtered file and rename it into <code class="language-plaintext highlighter-rouge">rdeb filtered</code></li>
   </ol>
 
 </blockquote>
@@ -1163,59 +1210,40 @@ In order to make its IDs compatible with the ones from the comparison result at 
 
 </blockquote>
 
-<h1 id="follow-up-on-proteins-that-are-missing-in-one-condition">Follow up on proteins that are missing in one condition</h1>
+<h1 id="finding-differentially-abundant-proteins">Finding differentially abundant proteins</h1>
 
-<p>For each group we separate the proteins that are missing in one condition (that means p-value is 0) from the other significant proteins.
-From all missing in one condition proteins we keep only the column with the Uniprot ID and combine the “upregulated” and “downregulated” ones into one file.
-We extract their average intensities per sample from the sample quantification matrix file and generate a heatmap on their intensities.</p>
+<p>For each condition we select only the significant proteins, which are proteins with a p-value above 0 and below 0.05. Thus we will discard proteins that are missing in one condition and therefore have a p-value of 0. We’ll keep only the column with the Uniprot ID and extract the average protein intensities per sample from the sample quantification matrix file and vizualize them at heatmap. We do the exact same steps for both conditions, therefore each time you start a tool you can use the multiple input file to start the step for the metastasized and rdeb files at the same time.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-filter-proteins-missing-in-one-condition"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter proteins missing in one condition</h3>
+  <h3 id="hands_on-hands-on-filter-differentially-abundant-proteins"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: filter differentially abundant proteins</h3>
 
   <ol>
     <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">metastasized filtered</code> (output of <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c8==0</code></li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c8&gt;0</code></li>
         <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li>Rename the file into <code class="language-plaintext highlighter-rouge">significant metastasized</code></li>
       </ul>
     </li>
     <li><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">metastasized filtered</code> (output of the last <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">significant metastasized </code> (output of last <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
     <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">rdeb filtered</code> (output of <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c8==0</code></li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c8&gt;0</code></li>
         <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li>Rename the file into <code class="language-plaintext highlighter-rouge">significant rdeb</code></li>
       </ul>
     </li>
     <li><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">rdeb filtered</code> (output of the last <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-      </ul>
-    </li>
-    <li><span class="tool" data-tool="Remove+beginning1" title="Tested with Remove+beginning1"><strong>Remove beginning</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Remove+beginning1</span></span>  with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: <code class="language-plaintext highlighter-rouge">cut rdeb</code> (output of the last <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-      </ul>
-    </li>
-    <li><span class="tool" data-tool="cat1" title="Tested with cat1"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: cat1</span></span>  with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Concatenate Dataset”</em>: <code class="language-plaintext highlighter-rouge">cut metastasized</code> (output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li>In <em>“Dataset”</em>:
-          <ul>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Dataset”</em>
-              <ul>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select”</em>: <code class="language-plaintext highlighter-rouge">remove beginning rdeb</code> (output of <strong>Remove beginning</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-              </ul>
-            </li>
-          </ul>
-        </li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">significant rdeb</code> (output of last <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</span></span>  with the following parameters:
@@ -1233,90 +1261,6 @@ We extract their average intensities per sample from the sample quantification m
             </li>
           </ul>
         </li>
-      </ul>
-    </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2"><strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2</span></span>  with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1st file”</em>: <code class="language-plaintext highlighter-rouge">replaced sample quantification matrix</code> (output of <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2nd File”</em>: <code class="language-plaintext highlighter-rouge">concatenated file</code> (output of <strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Column to use from 2nd file”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
-        <li><em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-      </ul>
-    </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap/ggplot2_heatmap/2.2.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap/ggplot2_heatmap/2.2.1"><strong>Heatmap w ggplot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap/ggplot2_heatmap/2.2.1</span></span>  with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select table”</em>: <code class="language-plaintext highlighter-rouge">joined file</code> (output of <strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Select input dataset options”</em>: <code class="language-plaintext highlighter-rouge">Dataset with header and row names</code>
-          <ul>
-            <li><em>“Select column, for row names”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
-          </ul>
-        </li>
-        <li>In <em>“Output Options”</em>:
-          <ul>
-            <li><em>“width of output”</em>: <code class="language-plaintext highlighter-rouge">15.0</code></li>
-            <li><em>“height of output”</em>: <code class="language-plaintext highlighter-rouge">10.0</code></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ol>
-
-</blockquote>
-
-<blockquote class="question">
-  <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
-
-  <ol>
-    <li>How many proteins have no intensity values in one condition?</li>
-    <li>Which protein is present in all samples of one condition and absent in all samples of the other condition?</li>
-  </ol>
-
-  <blockquote class="solution">
-    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-
-    <ol>
-      <li>80 (79 are missing in RDEB cSCC condition; 1 is missing in metastasizing cSCC condition)</li>
-      <li>Q02388 which is collagen VII (https://www.uniprot.org). Collagen VII is expected in all skin samples, but due to the genetic disease that hinders the production of functional collagen VII in RDEB patients. <figure id="figure-4"><img src="../../images/maxquant-msstats-lfq/heatmap_missing.png" alt="heatmap missing proteins" />&lt;figcaption&gt;<span class="figcaption-prefix">Figure 4:</span> Proteins missing in one condition&lt;/figcaption&gt;</figure></li>
-    </ol>
-
-  </blockquote>
-
-</blockquote>
-
-<h1 id="finding-differentially-abundant-proteins">Finding differentially abundant proteins</h1>
-
-<p>The same procedure is applied to the significant proteins that were not missing in one condition.
-To obtain them we filter the up- and downregulated proteins (p-value &lt;0.05) for p-values &gt; 0 to obtain all p-values larger than 0 but smaller than 0.05.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-filter-differentially-abundant-proteins"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: filter differentially abundant proteins</h3>
-
-  <ol>
-    <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">metastasized filtered</code> (output of <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, first file with the ‘metastasized’ tag)</li>
-        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c8&gt;0</code></li>
-        <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
-      </ul>
-    </li>
-    <li><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:
-      <ul>
-        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">metastasized filtered </code> (output of last <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-      </ul>
-    </li>
-    <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">rdeb filtered</code> (output of <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, first file with the ‘rdeb’ tag)</li>
-        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c8&gt;0</code></li>
-        <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
-      </ul>
-    </li>
-    <li><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:
-      <ul>
-        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">rdeb filtered</code> (output of last <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2"><strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2</span></span>  with the following parameters:
@@ -1358,18 +1302,16 @@ To obtain them we filter the up- and downregulated proteins (p-value &lt;0.05) f
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>How many proteins are differentially abundant?</li>
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <ol>
-      <li>42 (36 are upregulated in metastasized cSCC and 6 are upregulated in RDEB cSCC)</li>
-    </ol>
+    <p>1.80: 72 are upregulated in metastasized cSCC and 8 are upregulated in RDEB cSCC (number of lines minus 1)</p>
 
   </blockquote>
 
@@ -1413,10 +1355,9 @@ To obtain them we filter the up- and downregulated proteins (p-value &lt;0.05) f
 
 </blockquote>
 
-<p>Two of the differentially abundant proteins found here were also found and stained with antibodies in the original publication: Collagen XIV which is higher in RDEB cSCC than in metastasizing cSCC and Vitronectin which is higher in metastasizing cSCC than in RDEB cSCC. Vitronectin is an acute phase response protein and a marker of specific changes in the extracellular matrix organization.
-Collagen XIV is a fibril associated collagen which may have tissue stabilizing function in the dermis. The upregulation of collagen XIV could be a compensation effort due to the missing collagen VII in RDEB tissues.</p>
+<p>Two of the differentially abundant proteins found here were also found and stained with antibodies in the original publication: Collagen XIV which is higher in RDEB cSCC than in metastasizing cSCC and Serum amyloid P-component  which is higher in metastasizing cSCC than in RDEB cSCC. Serum amyloid P-component is an acute-phase inflammatory response protein, which <span class="notranslate">expression</span> is dependent on complement component C3 that has previously been linked to cSCC progression. Collagen XIV is a fibril associated collagen which may have tissue stabilizing function in the dermis. The upregulation of collagen XIV as well as other collagens in RDEB cSCC could be a compensation effort for the impaired collagen VII in RDEB tissues. Collagen VII is indeed only found in some RDEB samples and with such low intensities that it appears as upregulated in metastasized cSCC.</p>
 
-<figure id="figure-5"><img src="../../images/maxquant-msstats-lfq/col14_ihc.png" alt="col14 staining" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Immunoflourescence staining of collagen XIV in RDEB and metastasizing cSCC skin tissues</figcaption></figure>
+<figure id="figure-4"><img src="../../images/maxquant-msstats-lfq/col14_ihc.png" alt="col14 staining" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Immunoflourescence staining of collagen XIV in RDEB and metastasizing cSCC skin tissues</figcaption></figure>
 
 
                     
@@ -1435,7 +1376,7 @@ Collagen XIV is a fibril associated collagen which may have tissue stabilizing f
                     
 
                     <h1>Frequently Asked Questions</h1>
-                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/proteomics/faqs/">FAQ page for the Proteomics topic</a> to see if your question is listed there.
+                    Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/proteomics/faqs/">FAQ page for the Proteomics topic</a> to see if your question is listed there.
                     If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
                     <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
@@ -1500,8 +1441,8 @@ Collagen XIV is a fibril associated collagen which may have tissue stabilizing f
     author = "Melanie Föll and Matthias Fahrner",
     title = "MaxQuant and MSstats for the analysis of label-free data (Galaxy Training Materials)",
     year = "2021",
-    month = "05",
-    day = "31"
+    month = "06",
+    day = "03"
     url = "\url{/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
