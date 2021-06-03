@@ -578,6 +578,12 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >  simple.
 {: .spoken data-visual="galaxy" data-target="s2id_field-uid-12_select a" data-action="click"}
 
+> ```bash
+> curl  --silent https://$(hostname -f)/api/genomes | grep bosTau -o
+> ```
+> {: data-test="true"}
+{: .hidden}
+
 {% snippet topics/admin/faqs/missed-something.md step=4 %}
 
 # Common Production Questions
