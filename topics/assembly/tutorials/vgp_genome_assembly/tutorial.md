@@ -98,17 +98,17 @@ have fun!
 >
 >    ***TODO***: *Remove the useless files (if added)*
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}>    
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets
 > 4. Check that the datatype
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/change_datatype.md datatype="datatypes" %}
 >
 > 5. Add to each database a tag corresponding to ...
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/add_tag.md %}
 >
 {: .hands_on}
 
