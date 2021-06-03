@@ -139,9 +139,10 @@ There are two ways to install tools, depending on how you specify the tools to i
 >    > > ### {% icon solution %} Solution
 >    > > Use your Galaxy URL and API key in the example command below:
 >    > >
->    > > ```console
+>    > > ```bash
 >    > > shed-tools install -g https://your-galaxy -a <api-key> --name bwa --owner devteam --section_label Mapping
 >    > > ```
+>    > > {: data-cmd="true"}
 >    > {: .solution}
 >    {: .question}
 >
@@ -176,9 +177,10 @@ For that, you can install from a YAML file:
 >    > > ### {% icon solution %} Solution
 >    > > Use your Galaxy URL and API key in the example command below:
 >    > >
->    > > ```console
+>    > > ```bash
 >    > > shed-tools install -g https://your-galaxy -a <api-key> -t workflow_tools.yml
 >    > > ```
+>    > > {: data-cmd="true"}
 >    > {: .solution}
 >    {: .question}
 >
@@ -224,9 +226,10 @@ Having the tools installed is a good first step, but your users will expect that
 >    > > ### {% icon solution %} Solution
 >    > > Use your Galaxy URL and API key in the example command below:
 >    > >
->    > > ```console
+>    > > ```bash
 >    > > shed-tools test -g https://your-galaxy -a <api-key> --name bamtools_filter --owner devteam
 >    > > ```
+>    > > {: data-cmd="true"}
 >    > {: .solution}
 >    {: .question}
 {: .hands_on}

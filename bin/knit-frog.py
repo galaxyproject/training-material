@@ -155,7 +155,10 @@ for idx, diff in enumerate(diffs):
             if 'ansible-playbook' in line:
                 cmdhandle.write(line.strip() + " -i ~/.hosts --vault-password-file ~/.vault-password.txt\n")
             else:
-                cmdhandle.write(line.strip() + "\n")
+                line = line.strip()
+                line = line.replace('https://your-galaxy', 'https://$(hostname -f)')
+                line = line.replace('<api-key>', 'adminkey')
+                cmdhandle.write(line + "\n")
     elif 'data-test' in diff[-1]:
         cmdhandle.write("\n# TEST\n")
         if lastCommit is not None:
