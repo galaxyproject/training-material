@@ -94,7 +94,7 @@ Ephemeris can take care of this process. Let's practice this on a real worfklow.
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
->    > wget {{ site.url }}{% link topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga %}
+>    > wget https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
