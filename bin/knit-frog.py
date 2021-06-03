@@ -148,7 +148,7 @@ for idx, diff in enumerate(diffs):
         for line in diff[0:-2]:
             cmdhandle.write("## Run command\n")
             if 'ansible-playbook' in line:
-                cmdhandle.write(line.strip() + " -i ~/.hosts --vault-password-file ~/.vault-password.txt\n")
+                cmdhandle.write(line.strip() + " -i ~/.hosts --vault-password-file ~/.vault-password.txt -e galaxy_server_hostname=$(hostname -f)\n")
             else:
                 cmdhandle.write(line.strip() + "\n")
     elif 'data-test' in diff[-1]:

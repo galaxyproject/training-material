@@ -478,7 +478,7 @@ Some of the other options we will be using are:
 >    --- /dev/null
 >    +++ b/group_vars/pulsarservers.yml
 >    @@ -0,0 +1,51 @@
->    +galaxy_server_hostname: # Important!!!
+>    +galaxy_server_hostname: "" # Important!!!
 >    +# Put your Galaxy server's fully qualified domain name (FQDN) (or the FQDN of the RabbitMQ server) above.
 >    +
 >    +pulsar_root: /mnt/pulsar
