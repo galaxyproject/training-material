@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>Introduction to SRA Aligned Read Format and Cloud Metadata for SARS-CoV-2</title>
+    
+        <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="A collection of microtutorials explaining various feature..." />
+    <meta property="og:title" content="Galaxy Training: Introduction to SRA Aligned Read Format and Cloud Metadat..." />
+    <meta property="og:description" content="A collection of microtutorials explaining various feature..." />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    <script type="application/ld+json">
+      
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Introduction to SRA Aligned Read Format and Cloud Metadata for SARS-CoV-2",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/main/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Using Galaxy and Managing your Data",
+    "description": "A collection of microtutorials explaining various features of the Galaxy user interface and manipulating data within Galaxy.",
+    "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/"
+  },
+  "courseCode": "galaxy-interface / ncbi-sarf / slides",
+  "learningResourceType": "slides",
+  "name": "Slides for 'Introduction to SRA Aligned Read Format and Cloud Metadata for SARS-CoV-2' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/tutorials/ncbi-sarf/slides.html",
+  "timeRequired": "PT10M",
+  "keywords": "ncbi, covid19",
+  "description": "The questions this  addresses are:\n - What is the SRA Aligned Read Format\n - How can I use it?\n\n\\nThe objectives are:\n - Understand which data and metadata types are available for SARS-CoV-2 SRA runs in the cloud.\n - Understand what SRA Aligned Read Format is and what can you do with it.\n - Working knowledge of SRA Metadata available on the cloud, ways to access it, and some popular use cases.\n\n",
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Jon Trow"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Jon Trow"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Using Galaxy and Managing your Data",
+      "description": "A collection of microtutorials explaining various features of the Galaxy user interface and manipulating data within Galaxy.",
+      "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/"
+    }
+  ]
+}
+    </script>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/galaxy-interface" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/galaxy-interface/tutorials/ncbi-sarf/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+  
+<img src="/training-material/assets/images/ncbi.png" alt="page logo" style="height: 40px;"/>
+  
+
+</span></div>
+
+---
+
+
+  
+<img src="/training-material/assets/images/ncbi.png" alt="page logo" class="cover-logo" />
+  
+
+
+# Introduction to SRA Aligned Read Format and Cloud Metadata for SARS-CoV-2
+
+
+<div class="contributors-line">
+
+
+ <a href="/training-material/hall-of-fame/jontrow/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/jontrow" alt="Jon Trow">Jon Trow</a>
+
+
+</div>
+
+
+
+
+.footnote[Tip: press `P` to view the presenter notes]
+
+???
+Presenter notes contain extra information which might be useful if you
+intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other. Useful when presenting.
+
+---
+
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- What is the SRA Aligned Read Format
+
+- How can I use it?
+
+
+---
+
+
+
+### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
+
+
+- Understand which data and metadata types are available for SARS-CoV-2 SRA runs in the cloud.
+
+- Understand what SRA Aligned Read Format is and what can you do with it.
+
+- Working knowledge of SRA Metadata available on the cloud, ways to access it, and some popular use cases.
+
+
+---
+
+
+# Why have SRA data in the cloud?
+
+- SRA data archive format is over 18PB (**great!**)
+
+  ...but it's a lot of data that is hard to search (**not so great**)
+
+- Do you wish:
+  - It was easier to find SRA data based on organismal content?
+  - Searching SRA based on submitted BioProject and BioSample information was simpler?
+  - You could get a sense of what could be assembled out of an SRA dataset before downloading?
+  - You didn't need to do the assembly/variant calling yourself?
+
+
+---
+
+## What data is in scope for this training?
+
+- Public SRA data that contains SARS-CoV-2 sequence
+	- Illumina platform only
+	- Stay tuned for long-read data
+
+- How do we determine which runs contain SARS-CoV-2 data?
+	- SRA Taxonomy Analysis Tool (STAT)
+	- Preprint: [doi:10.1101/2021.02.16.431451v1](https://www.biorxiv.org/content/10.1101/2021.02.16.431451v1)
+---
+
+## Introduction to SRA aligned read format and associated metadata
+
+- Incoming SRA runs are scanned for *Coronaviridae* content
+- Contigs are created via guided assembly against SARS-CoV-2 RefSeq - fasta contigs
+- Reads are mapped back to the contigs - aligned sam, fasta/q reads
+- Taxonomy assessed
+	- STAT
+	- BLAST
+- Variants are called then annotated with VIGOR3 - VCF
+
+---
+
+## Using aligned read format
+
+.pull-left[
+- *Coronaviridae* contigs constructed from SRA data
+	- Compatible with SRA Toolkit
+	- Access to reads and contigs individually
+	- Ability to see which reads align to each contig
+	- Smaller size than standard SRA format- no quality scores
+]
+
+.pull-right[
+![graph with one large node of SRA aligned reads leading to three other nodes: FASTQ, SAM, Fasta contigs (new)](../../images/ncbi/sarf.png)
+]
+
+---
+
+## Accessing SRA metadata in the cloud
+
+- Cloud query services- BigQuery and Athena
+	- Analyze SRA metadata directly using standard SQL, allowing searches that are not possible in Entrez
+	- No need to manually transform the data for querying, so you can be up and running in just a few minutes
+	- Built in support for complex data fields
+	- You pay for the data scanned, though some free options exist
+- The underlying metadata files are available for download at no cost
+	- JSON format can be transformed according to your preferences
+	- These can be imported directly to Galaxy
+
+---
+
+## Available SRA metadata
+
+SRA aligned read metadata:
+
+- User submitted metadata
+	- Biological sample and sequencing library metadata supplied at the time of sequence submission
+- Contig metadata
+	- Contig stats including: coverage, taxonomy ID, contig length
+- Taxonomic content analysis of contigs
+	- Search for records based on kmer hits to tax level of interest
+- BLAST results for contigs
+	- Contig blast results including: hit accession, hit length, percent identity
+- Variant calls
+	- Variation and VIGOR3 annotation information
+- Peptides
+	- Details of annotated peptides, including sequence
+
+---
+
+## Popular use cases- what can you do with it?
+
+- Finding SARS-CoV-2 contigs with specific coverage and length
+- Filter SARS-CoV-2 contigs based on geographic location of sample collection
+- Find top SARS-CoV-2 BLAST hits for contigs from a specific geographic location
+- Filter for all variations called from samples collected in the United States after 02/01/2021
+- Filter for runs with the E484K mutation
+
+---
+
+## SRA data in the cloud
+
+.pull-left[
+- COVID-focused SRA datasets available in GCP and AWS
+	- Searchable metadata
+	- SRA aligned read files
+	- VCF files
+	- Full SRA runs
+	- Original format submitted files
+- Benefits
+	- Access large volume of COVID-19-related raw read data with no throttling, at no cost to you
+	- Can be imported into Galaxy for use in your existing workflows
+]
+
+.pull-right[
+.image-100[![screenshot of google cloud ncbi covid-19 project website](../../images/ncbi/covid-cloud.png)]
+.image-100[![screenshot of aws ncbi covid-19 project website](../../images/ncbi/covid-aws.png)]
+]
+
+
+
+
+---
+### &lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
+
+
+
+
+
+
+
+
+---
+
+## Thank you!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors!
+
+
+<div class="contributors-line">
+
+
+ <a href="/training-material/hall-of-fame/jontrow/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/jontrow" alt="Jon Trow">Jon Trow</a>
+
+
+</div>
+
+
+
+  
+<img src="/training-material/assets/images/ncbi.png" alt="page logo" style="height: 100px;"/>
+  
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false,}});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+
+  </body>
+</html>
