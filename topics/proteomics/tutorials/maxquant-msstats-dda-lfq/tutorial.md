@@ -64,7 +64,7 @@ The annotation file, group comparison file and FASTA file for this training is d
 >    https://zenodo.org/record/4896554/files/input_annotation_file.tabular
 >    https://zenodo.org/record/4896554/files/input_comparison_matrix.tabular
 >    ```
->    {% snippet snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Once the files are green, rename the fasta file into 'protein database', the annotation file into 'annotation file' and the comparison matrix file into 'comparison matrix'.
 >    {% snippet faqs/galaxy/datasets_rename.md %}
