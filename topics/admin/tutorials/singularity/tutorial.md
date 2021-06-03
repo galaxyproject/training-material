@@ -101,7 +101,7 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    +# Golang
 >    +golang_gopath: '/opt/workspace-go'
 >    +# Singularity target version
->    +singularity_version: "3.7.2"
+>    +singularity_version: "3.7.4"
 >    +singularity_go_path: "{{ golang_install_dir }}"
 >    {% endraw %}
 >    ```
