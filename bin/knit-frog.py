@@ -104,8 +104,8 @@ cmdhandle.write("#!/bin/bash\n")
 cmdhandle.write("set -ex\n\n")
 cmdhandle.write("# Install dependencies before changing commits\n")
 cmdhandle.write(f"find .scripts -name requirements.txt | xargs -n 1 pip install -r\n")
-
-
+cmdhandle.write(f"echo '[galaxyservers]' > ~/.hosts\n")
+cmdhandle.write(f'echo "$(hostname -f) ansible_connection=local ansible_user=$(whoami)"  >> ~/.hosts\n')
 
 lastCommit = None
 for idx, diff in enumerate(diffs):
@@ -144,6 +144,8 @@ for idx, diff in enumerate(diffs):
             if 'openssl rand' in line and 'vault-password' in line:
                 cmdhandle.write("## The students should use a random password, we override with 'password' for reproducibility\n")
                 cmdhandle.write("echo 'password' > .vault-password.txt;\n")
+            elif 'ansible-playbook' in line:
+                cmdhandle.write(line.strip() + " -i ~/.hosts\n")
             else:
                 cmdhandle.write(line.strip() + "\n")
     elif 'data-test' in diff[-1]:

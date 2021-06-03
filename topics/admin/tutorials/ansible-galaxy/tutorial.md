@@ -1677,7 +1677,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 {: .details}
 
 > ```bash
-> systemctl status galaxy
+> systemctl --no-pager status galaxy
 > ```
 > {: data-test="true"}
 {: .hidden}
