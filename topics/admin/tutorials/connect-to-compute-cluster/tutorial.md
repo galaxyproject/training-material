@@ -82,9 +82,12 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >
 > 2. In the same directory, run:
 >
->    ```
->    ansible-galaxy install -p roles -r requirements.yml
->    ```
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > ansible-galaxy install -p roles -r requirements.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 > 3. Add `galaxyproject.repos`, `galaxyproject.slurm` to the *beginning* of your roles section in your `galaxy.yml` playbook:
 >
