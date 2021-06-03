@@ -231,9 +231,10 @@ Let's try setting that up in our Galaxy!
 > 2. we'll use the `setup-data-libraries` command to install the data in this yaml file into a library in our galaxy.
 >
 >    > ### {% icon code-in %} input: bash
->    > ```
+>    > ```bash
 >    > setup-data-libraries -g https://your-galaxy -a <api-key> --training -i /libraries/example-library.yaml --legacy
 >    > ```
+>    > {: data-cmd="true"}
 >    {: .code-in}
 >
 >    > ### {% icon code-out %} output

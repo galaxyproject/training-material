@@ -98,6 +98,7 @@ postfix = ["--", "2.25.1", "", ""]
 
 GITGAT = os.path.dirname(args.prefix)
 BASE = os.path.basename(args.prefix)
+BASE_PARTS = BASE.split('-')
 
 cmdhandle = open(f"{GITGAT}/.scripts/{BASE}-run.sh", 'w')
 cmdhandle.write("#!/bin/bash\n")
@@ -112,6 +113,10 @@ cmdhandle.write("## The students should use a random password, we override with 
 cmdhandle.write("echo 'password' > ~/.vault-password.txt;\n")
 cmdhandle.write("## And one in this directory, it can contain garbage\n")
 cmdhandle.write("echo 'garbage' > ./.vault-password.txt;\n")
+# If it's after the ansible-galaxy tutorial
+if int(BASE_PARTS[0]) > 1:
+    cmdhandle.write("## Ensure the galaxy user is setup\n")
+    cmdhandle.write("sudo -u galaxy /srv/galaxy/venv/bin/python /usr/bin/galaxy-create-user -c /srv/galaxy/config/galaxy.yml --user admin@example.org --password password --key adminkey --username admin\n")
 
 lastCommit = None
 for idx, diff in enumerate(diffs):
