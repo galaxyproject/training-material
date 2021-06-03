@@ -101,7 +101,7 @@ BASE = os.path.basename(args.prefix)
 
 cmdhandle = open(f"{GITGAT}/.scripts/{BASE}-run.sh", 'w')
 cmdhandle.write("#!/bin/bash\n")
-cmdhandle.write("set -e\n\n")
+cmdhandle.write("set -ex\n\n")
 
 lastCommit = None
 for idx, diff in enumerate(diffs):
