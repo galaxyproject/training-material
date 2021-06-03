@@ -1874,7 +1874,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +    # The most important location block, by default all requests are sent to uWSGI
 >    +    location / {
 >    +        # This is the backend to send the requests to.
->    +        uwsgi_pass {{ uwsgi.socket }};
+>    +        uwsgi_pass {{ galaxy_config.uwsgi.socket }};
 >    +        uwsgi_param UWSGI_SCHEME $scheme;
 >    +        include uwsgi_params;
 >    +    }
