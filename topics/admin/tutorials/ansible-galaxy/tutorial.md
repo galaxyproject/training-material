@@ -1985,13 +1985,6 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >  `galaxyproject.nginx`        | This requires Galaxy variables to find the static assets.
 {: .comment}
 
-> ```bash
-> sleep 20;
-> curl -k https://localhost/api/version
-> ```
-> {: data-test="true"}
-{: .hidden}
-
 ## Log in to Galaxy
 
 Now that your production-ready Galaxy is running, try registering a new user and logging in!
@@ -2253,6 +2246,11 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >
 {: .hands_on}
 
+> ```bash
+> galaxy-wait --timeout 30 -g https://$(hostname -f) -v
+> ```
+> {: data-test="true"}
+{: .hidden}
 
 ## Disaster Strikes! (Optional)
 
