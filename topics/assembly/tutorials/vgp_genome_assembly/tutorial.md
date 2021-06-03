@@ -104,11 +104,11 @@ have fun!
 > 3. Rename the datasets
 > 4. Check that the datatype
 >
->    {% snippet faqs/galaxy/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 > 5. Add to each database a tag corresponding to ...
 >
->    {% snippet faqs/galaxy/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 
