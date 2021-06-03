@@ -131,25 +131,12 @@ The idea is to keep the theory description before quite simple to focus more on 
 A big step can have several subsections or sub steps:
 
 
-## Sub-step with **Cutadapt**
+## Sub-step with **Parse parameter value**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5) %} with the following parameters:
->    - *"Single-end or Paired-end reads?"*: `Single-end`
->        - {% icon param-collection %} *"FASTQ/A file"*: `output` (Input dataset collection)
->        - In *"Read 1 Options"*:
->            - In *"5' or 3' (Anywhere) Adapters"*:
->                - {% icon param-repeat %} *"Insert 5' or 3' (Anywhere) Adapters"*
->                    - *"Source"*: `Enter custom sequence`
->                        - *"Enter custom 5' or 3' adapter sequence"*: `ATCTCTCTCAACAACAACAACGGAGGAGGAGGAAAAGAGAGAGAT`
->                - {% icon param-repeat %} *"Insert 5' or 3' (Anywhere) Adapters"*
->                    - *"Source"*: `Enter custom sequence`
->                        - *"Enter custom 5' or 3' adapter sequence"*: `ATCTCTCTCTTTTCCTCCTCCTCCGTTGTTGTTGTTGAGAGAGAT`
->    - In *"Adapter Options"*:
->        - *"Match times"*: `3`
->    - In *"Filter Options"*:
->        - *"Discard Trimmed Reads"*: `Yes`
+> 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
+>    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (Input dataset)
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -178,12 +165,25 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **Parse parameter value**
+## Sub-step with **Cutadapt**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
->    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `output` (Input dataset)
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5) %} with the following parameters:
+>    - *"Single-end or Paired-end reads?"*: `Single-end`
+>        - {% icon param-collection %} *"FASTQ/A file"*: `output` (Input dataset collection)
+>        - In *"Read 1 Options"*:
+>            - In *"5' or 3' (Anywhere) Adapters"*:
+>                - {% icon param-repeat %} *"Insert 5' or 3' (Anywhere) Adapters"*
+>                    - *"Source"*: `Enter custom sequence`
+>                        - *"Enter custom 5' or 3' adapter sequence"*: `ATCTCTCTCAACAACAACAACGGAGGAGGAGGAAAAGAGAGAGAT`
+>                - {% icon param-repeat %} *"Insert 5' or 3' (Anywhere) Adapters"*
+>                    - *"Source"*: `Enter custom sequence`
+>                        - *"Enter custom 5' or 3' adapter sequence"*: `ATCTCTCTCTTTTCCTCCTCCTCCGTTGTTGTTGTTGAGAGAGAT`
+>    - In *"Adapter Options"*:
+>        - *"Match times"*: `3`
+>    - In *"Filter Options"*:
+>        - *"Discard Trimmed Reads"*: `Yes`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -464,6 +464,41 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
+## Sub-step with **Purge overlaps**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
+>    - *"Select the purge_dups function"*: `split FASTA file by 'N's`
+>        - {% icon param-file %} *"Base-level coverage file"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
 ## Sub-step with **Busco**
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -512,41 +547,6 @@ A big step can have several subsections or sub steps:
 >        - {% icon param-file %} *"K-mer counts database"*: `read_db` (output of **Meryl** {% icon tool %})
 >        - *"Number of assemblies"*: `One assembly (pseudo-haplotype or mixed-haplotype)`
 >            - {% icon param-file %} *"Genome assembly"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Purge overlaps**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
->    - *"Select the purge_dups function"*: `split FASTA file by 'N's`
->        - {% icon param-file %} *"Base-level coverage file"*: `out_fa` (output of **GFA to FASTA** {% icon tool %})
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -823,7 +823,8 @@ A big step can have several subsections or sub steps:
 > 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: `out_file1` (output of **Compute** {% icon tool %})
 >    - *"Cut by"*: `fields`
->        - *"List of Fields"*: `cc7`
+>        - *"List of Fields"*: `c8
+`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -859,8 +860,7 @@ A big step can have several subsections or sub steps:
 > 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: `out_file1` (output of **Compute** {% icon tool %})
 >    - *"Cut by"*: `fields`
->        - *"List of Fields"*: `c8
-`
+>        - *"List of Fields"*: `cc7`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -966,8 +966,8 @@ A big step can have several subsections or sub steps:
 > 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
 >    - *"Select the purge_dups function"*: `calculate coverage cutoffs`
 >        - {% icon param-file %} *"STAT input file"*: `pbcstat_stat` (output of **Purge overlaps** {% icon tool %})
->        - *"Transition between haploid and diploid"*: `{'id': 25, 'output_name': 'integer_param'}`
->        - *"Upper bound for read depth"*: `{'id': 26, 'output_name': 'integer_param'}`
+>        - *"Transition between haploid and diploid"*: `{'id': 26, 'output_name': 'integer_param'}`
+>        - *"Upper bound for read depth"*: `{'id': 25, 'output_name': 'integer_param'}`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -1409,17 +1409,17 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **Busco**
+## Sub-step with **Quast**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
->    - *"Mode"*: `Genome assemblies (DNA)`
->        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
->    - *"Lineage"*: `Vertebrata`
->    - In *"Advanced Options"*:
->        - *"Which outputs should be generated"*: ``
+> 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1) %} with the following parameters:
+>    - *"Use customized names for the input files?"*: `No, use dataset names`
+>        - {% icon param-file %} *"Contigs/scaffolds file"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
+>    - *"Type of assembly"*: `Genome`
+>        - *"Use a reference genome?"*: `No`
+>    - In *"Genes"*:
+>        - *"Tool for gene prediction"*: `Don't predict genes`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -1448,17 +1448,17 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **Quast**
+## Sub-step with **Busco**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1) %} with the following parameters:
->    - *"Use customized names for the input files?"*: `No, use dataset names`
->        - {% icon param-file %} *"Contigs/scaffolds file"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
->    - *"Type of assembly"*: `Genome`
->        - *"Use a reference genome?"*: `No`
->    - In *"Genes"*:
->        - *"Tool for gene prediction"*: `Don't predict genes`
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Sequences to analyse"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
+>    - *"Mode"*: `Genome assemblies (DNA)`
+>        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
+>    - *"Lineage"*: `Vertebrata`
+>    - In *"Advanced Options"*:
+>        - *"Which outputs should be generated"*: ``
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -1877,7 +1877,7 @@ A big step can have several subsections or sub steps:
 > 1. {% tool [SALSA](toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Initial assembly file"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
 >    - {% icon param-file %} *"Bed alignment"*: `out_file1` (output of **Sort** {% icon tool %})
->    - *"Restriction enzyme sequence(s)"*: `{'id': 6, 'output_name': 'text_param'}`
+>    - *"Restriction enzyme sequence(s)"*: `{'id': 5, 'output_name': 'text_param'}`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -2021,17 +2021,15 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **Busco**
+## Sub-step with **Merqury**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
->    - *"Mode"*: `Genome assemblies (DNA)`
->        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
->    - *"Lineage"*: `Vertebrata`
->    - In *"Advanced Options"*:
->        - *"Which outputs should be generated"*: ``
+> 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3) %} with the following parameters:
+>    - *"Evaluation mode"*: `Default mode`
+>        - {% icon param-file %} *"K-mer counts database"*: `read_db` (output of **Meryl** {% icon tool %})
+>        - *"Number of assemblies"*: `One assembly (pseudo-haplotype or mixed-haplotype)`
+>            - {% icon param-file %} *"Genome assembly"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -2060,15 +2058,17 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **Merqury**
+## Sub-step with **Busco**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3) %} with the following parameters:
->    - *"Evaluation mode"*: `Default mode`
->        - {% icon param-file %} *"K-mer counts database"*: `read_db` (output of **Meryl** {% icon tool %})
->        - *"Number of assemblies"*: `One assembly (pseudo-haplotype or mixed-haplotype)`
->            - {% icon param-file %} *"Genome assembly"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Sequences to analyse"*: `scaffolds_fasta` (output of **SALSA** {% icon tool %})
+>    - *"Mode"*: `Genome assemblies (DNA)`
+>        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
+>    - *"Lineage"*: `Vertebrata`
+>    - In *"Advanced Options"*:
+>        - *"Which outputs should be generated"*: ``
 >
 >    ***TODO***: *Check parameter descriptions*
 >
