@@ -129,6 +129,12 @@ There are multiple options for importing data from your server, we'll go through
 > {: .code-out}
 {: .code-2col}
 
+> ```bash
+> ls -al /libraries/
+> ```
+> {: data-test="true"}
+{: .hidden}
+
 We have a directory named `admin`, which will be available to all admin users (we set `library_import_dir: /libraries/admin` earlier.)
 
 Additionally we have a `user` directory, below the user directory are more directories with the user's email as they directory key. Data can be placed in here, and it will become accessible to those users (we set `user_library_import_dir: /libraries/user` for this.)
