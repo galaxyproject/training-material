@@ -84,7 +84,7 @@ _check-html: # Internal
 	      	--http-status-ignore 405,503,999 \
 	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
 	      	--url-swap "github.com/galaxyproject/training-material/tree/main:github.com/${REPO}/tree/${BRANCH}" \
-	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
+	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/","/\/tutorials\/.*\/docker\//" \
 	      	--allow-hash-href \
 	      	./_site
 .PHONY: _check-html
@@ -108,7 +108,7 @@ _check-html-internal: # Internal
 	      	--http-status-ignore 405,503,999 \
 	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#/","/#embedded_jbrowse/","/.*videos.*.mp4.png/" \
 	      	--url-swap "github.com/galaxyproject/training-material/tree/main:github.com/${REPO}/tree/${BRANCH}" \
-	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
+	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/","/\/tutorials\/.*\/docker\//" \
 	      	--disable-external \
 	      	--allow-hash-href \
 	      	./_site
@@ -160,7 +160,7 @@ check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
 			--assume-extension \
 			--http-status-ignore 405,503,999 \
 			--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
-			--file-ignore "/.*\/files\/.*/" \
+			--file-ignore "/.*\/files\/.*/","/\/tutorials\/.*\/docker\//" \
 			--allow-hash-href \
 			. && \
 		find . -path "**/slides*.html" \
@@ -222,6 +222,9 @@ annotate: ## annotate the tutorials with usable Galaxy instances and generate ba
 	python bin/add_galaxy_instance_annotations.py && \
 	python bin/add_galaxy_instance_badges.py
 .PHONY: annotate
+
+rebuild-search-index: ## Rebuild search index
+	node bin/lunr-index.js > search.json
 
 clean: ## clean up junk files
 	@rm -rf _site

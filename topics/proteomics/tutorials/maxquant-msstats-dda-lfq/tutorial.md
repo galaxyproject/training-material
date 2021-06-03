@@ -22,7 +22,8 @@ requirements:
     topic_name: proteomics
     tutorials:
       - maxquant-label-free
-
+subtopic: id-quant
+tags: [label-free]
 ---
 
 
