@@ -37,7 +37,7 @@ requirements:
       - annotation-with-prokka
 ---
 
-> {% icon warning %} Only works on UseGalaxy.eu
+> ### {% icon warning %} Only works on UseGalaxy.eu
 > Currently this tutorial requires an Apollo server to be deployed by the administrator. This will currently only work on UseGalaxy.eu, hopefully this list will expand in the future.
 {: .warning}
 
@@ -437,7 +437,7 @@ Now navigate along the genome, and notice the differences between the Augustus a
 
 Until now we have supposed that the quality of the genome sequence is perfect. But you might work on othr genomes where the sequence contains errors (substitutions, insertions, deletions) due to assembly problems for example. In this case, automatic annotation programs will have difficulties producing good looking gene models: there can be frame shifts within genes, or broken start/stop codons which are not detected. In this case, Apollo allows to edit the genome sequence itself.
 
-Navigate to position `42500..44500`, and show the `K12 Variants` track from the `Variation` track group. This track shows variants that were detected in this genome sequence after resequencing it. Drag the `NC_000913.3.g36.t1` gene to the **User-created Annotation** track. Now we will register in Apollo the SNP that was detected on position `43988` (C->T): zoom to this position until you see the 6 open reading frame and the sequence. Then right click on the `C` nucleotide and select **Create Genomic Insertion**.
+Navigate to position `42500..44500`, and show the `K12 Variants` track from the `Variation` track group. This track shows variants that were detected in this genome sequence after resequencing it. Drag the `NC_000913.3.g36.t1` gene to the **User-created Annotation** track. Now we will register in Apollo the SNP that was detected on position `43988` (C->T): zoom to this position until you see the 6 open reading frame and the sequence. Then right click on the `C` nucleotide and select **Create Genomic Substitution**.
 
 ![Adding a sequence alteration](../../images/apollo/alteration_menu.png)
 
