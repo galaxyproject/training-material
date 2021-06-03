@@ -59,7 +59,10 @@ jobs:
             cd /tmp/git-gat/
             for i in {0..9}; do
                 # Commit those patches
-                git am $i-*.patch;
+                patches=$(ls $i-*.patch 2>/dev/null| wc -c)
+                if (( patches > 0 )); then
+                    git am $i-*.patch;
+                fi
                 # And tag it
                 git tag -f "step-$i";
             done
