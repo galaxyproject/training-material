@@ -108,6 +108,8 @@ cmdhandle.write(f"echo '[galaxyservers]' > ~/.hosts\n")
 cmdhandle.write(f'echo "$(hostname -f) ansible_connection=local ansible_user=$(whoami)"  >> ~/.hosts\n')
 cmdhandle.write("## The students should use a random password, we override with 'password' for reproducibility\n")
 cmdhandle.write("echo 'password' > ~/.vault-password.txt;\n")
+cmdhandle.write("## And one in this directory, it can contain garbage\n")
+cmdhandle.write("echo 'garbage' > ./.vault-password.txt;\n")
 
 lastCommit = None
 for idx, diff in enumerate(diffs):
