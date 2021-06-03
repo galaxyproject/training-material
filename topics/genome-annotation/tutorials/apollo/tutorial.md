@@ -17,23 +17,24 @@ objectives:
   - Export refined genome annotations
 time_estimation: 3h
 key_points:
-  - Apollo allows a group to view and manually refine predicged genome annotations
+  - Apollo allows a group to view and manually refine predicted genome annotations
   - Use Apollo to edit annotations within your group.
   - Export manual annotations as GFF3.
 contributors:
   - abretaud
   - hexylena
   - nathandunn
+  - mboudet
 
 requirements:
   - type: "internal"
     topic_name: galaxy-interface
     tutorials:
       - upload-rules
-#- type: "internal"
-#  topic_name genome-annotation
-#  tutorials:
-#    -
+  - type: "internal"
+    topic_name: genome-annotation
+    tutorials:
+      - annotation-with-prokka
 ---
 
 > {% icon warning %} Only works on UseGalaxy.eu
@@ -476,20 +477,73 @@ Note that if you have inserted some sequence alterations, the fasta sequences wi
 
 # Collaborating with other annotators
 
-As explained at the beginning of this tutorial, Apollo is a collaborative annotation tool, which means you can work with other people from anywhere in the world.
+As explained at the beginning of this tutorial, Apollo is a collaborative annotation tool, which means you can work with other people from anywhere in the world. By default the organisms you create in Apollo are only accessible by yourself. But you can easily open the access to other people by creating a group of users on Apollo, and then allowing this group to access one or several of your organisms. This works for users hving an account on the same Galaxy  (most probably usegalaxy.eu).
 
-***TODO***
+Click on the **Sharing** tab in the Apollo right panel.
+
+![Access to the Sharing tab](../../images/apollo/sharing.png)
+
+You should see a screen like this:
+
+![Access to the Sharing tab](../../images/apollo/perm_home.png)
+
+It means that you are currently not in any group, and that, as its creator, you have the right to share access to one organism: `E. coli K12`.
+
+> ### {% icon hands_on %} Create a user group
+>
+> 1. Click on the **Group management** tab
+>
+> 2. Click on the **New** button
+>
+> 3. Give a name to your new group, and then click on the **Create group** button
+>
+> ![Group creation dialog](../../images/apollo/perm_group_create.png)
+>
+{: .hands_on}
+
+Now you should see a screen like this:
+
+![Group successfully created](../../images/apollo/perm_group_added.png)
+
+Let's add a colleague to our newly created group.
+
+> ### {% icon hands_on %} Adding a user in the group
+>
+> 1. Click on the **Group members** tab
+>
+> 2. Click on the **Add user** button
+>
+> 3. Enter the email address of a user you want to work with (the one used to register on the same Galaxy server)
+>
+> 4. Click on the **Add user** button
+>
+> ![](../../images/apollo/perm_add_user.png)
+>
+{: .hands_on}
+
+And now allow the user group to access our `E. coli K12` organism.
+
+> ### {% icon hands_on %} Giving access to an organism
+>
+> 1. Click on the **Organisms** tab (if not already selected)
+>
+> 2. Click on the **+** button next to the `E. coli K12` organism
+>
+> 3. Confirm that you want to give access
+>
+{: .hands_on}
+
+Now the other user should be able to access your organism, and make any modifications to the annotation (creating genes, structural changes, functional annotation, ...). In each gene history, Apollo keeps track of which user performed which operation, so you will always be able to know who did what on the annotation, and blame or credit them. Of course, using the same **Sharing** tab, you can stop at any time sharing an organism to a whole group or a specific users in a few clicks.
 
 # Conclusion
 {:.no_toc}
 
-Congratulations, you finished this tutorial! You learned how to manually refine predicted eukaryotic genomes using Apollo and export them to other forms.
+Congratulations, you finished this tutorial! By using Apollo and JBrowse, you learned how to manually refine predicted annotations and export them to Galaxy for future analyses. You also learn how to give access to your project at any other researcher, making it a real collaborative solution.
 
-By using Apollo and JBrowse you can inspect and refine genome annotations with other researchers.
-When refinement is sufficient an updated or new version of the genome may be exported as GFF3 as well as published as a new JBrowse directory for inspection.
+When refinement is sufficient an updated or new version of the annotation may be exported as GFF3 as well as published as a new JBrowse directory for inspection.
 
 # What's next?
 
-After generating your refined genome, you'll want to merge it back into the official gene sets. A future tutorial will show you how to do it within Galaxy.
+After generating your refined annotation, you'll want to merge it back into the official gene sets. A future tutorial will show you how to do it within Galaxy.
 
 If a *de novo* set, you can export it as GFF3 and load it into a tool like [Tripal](http://tripal.info) to provide visualization.
