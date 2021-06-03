@@ -41,12 +41,15 @@ The first step is to install the needed tools inside a conda environment. A cond
 
 This step has to be done once.
 
+We also need to make sure that a couple of other utilities and build requirements are present: **git**, **curl** & **make**. The easiest way to install these is with your package manager of choice - i.e. yum, apt, brew etc.
+
 > ### {% icon hands_on %} Hands-on: Install the requirements
 >
 > 1. Open a Terminal
-> 2. (If not done yet) Clone the training material GitHub repository: `git clone https://github.com/galaxyproject/training-material.git`
-> 2. Navigate to the `training-material/` folder with `cd`
-> 3. Set up the conda environment
+> 2. Use your package manager to install `git`, `curl` and `make`. For Debian/Ubuntu: `sudo apt update && sudo apt install git curl make`. For Fedora/CentOs/RedHat: `sudo yum install git curl make`.
+> 3. (If not done yet) Clone the training material GitHub repository: `git clone https://github.com/galaxyproject/training-material.git`
+> 4. Navigate to the `training-material/` folder with `cd`
+> 5. Set up the conda environment
 >
 >     It will install some needed tools (ruby, nodejs, etc) in a protected environment, without interfering with the existing tools or versions.
 >
@@ -54,7 +57,7 @@ This step has to be done once.
 >     2. (You may need to exit the terminal and re-open for conda to be recognised. Navigate back to the same place.)
 >     3. Create the `galaxy_training_material` conda environment: `make create-env`
 >
-> 4. Install Jekyll and related modules into the conda environment: `make install`
+> 6. Install Jekyll and related modules into the conda environment: `make install`
 {: .hands_on}
 
 > ### {% icon details %} Troubleshooting `libxml2` errors
