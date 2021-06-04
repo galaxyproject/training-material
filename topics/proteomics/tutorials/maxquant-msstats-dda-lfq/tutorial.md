@@ -67,6 +67,7 @@ The annotation file, group comparison file and FASTA file for this training is d
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Once the files are green, rename the fasta file into 'protein database', the annotation file into 'annotation file' and the comparison matrix file into 'comparison matrix'.
+>
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 4. Steps 4 to 7 can be skipped to save time and storage capacity by not running MaxQuant. To run MaxQuant, import the raw data from [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD006914).
@@ -108,7 +109,7 @@ The annotation file, group comparison file and FASTA file for this training is d
 
 # MaxQuant analysis
 
-The run time of **MaxQuant** {% icon tool %} depends on the number and size of the input files and on the chosen parameters. The run of the training datasets will take a few hours, but the training can be directly continued with the MaxQuant result files from Zenodo. We start the MaxQuant run with the default parameters, with a few adjustments. All peptides are used for quantification. A quality control report is generated with the [PTXQC functionality](https://pubs.acs.org/doi/10.1021/acs.jproteome.5b00780) that is directly implemented in the MaxQuant Galaxy tool. To continue with statistical analysis in MSstats, the Protein Groups and the Evidence files are needed from MaxQuant.
+The run time of **MaxQuant** {% icon tool %} depends on the number and size of the input files and on the chosen parameters. The run of the training datasets will take a few hours, but the training can be directly continued with the MaxQuant result files from Zenodo. We start the MaxQuant run with the default parameters, with a few adjustments. Protein level quantification parameters do not really matter here, because MSstats will use feature quantifications and perform protein summarization based on them. A quality control report is generated with the [PTXQC functionality](https://pubs.acs.org/doi/10.1021/acs.jproteome.5b00780) that is directly implemented in the MaxQuant Galaxy tool. To continue with statistical analysis in MSstats, the Protein Groups and the Evidence files are needed from MaxQuant.
 
 > ### {% icon hands_on %} Hands-on: MaxQuant analysis
 >
@@ -143,12 +144,14 @@ The run time of **MaxQuant** {% icon tool %} depends on the number and size of t
 > ### {% icon question %} Questions
 >
 > 1. How many proteins and features were identified in total?
-> 2. How large is the proportion of potential contaminants?
+> 2. In which columns (number) are the potential contaminants in the protein group and evidence file respectively? 
+> 3. How large is the proportion of potential contaminants?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. 2622 protein groups and ~240000 features were found in total (number of lines of protein group and evidence files)
-> > 2. Up to 60% of the samples intensities derive from potential contaminants (PTXQC plots page 7)
+> > 2. They are in column 118 (protein groups) and 54 (evidence)
+> > 3. Up to 60% of the samples intensities derive from potential contaminants (PTXQC plots page 7)
 > >
 > {: .solution}
 >
@@ -277,7 +280,7 @@ The volcano plot plots the statistical result as transformed p-values vs. the lo
 ![volcano plot](../../images/maxquant-msstats-lfq/volcano_plot.png "Volcano plot showing p-values and log2 fold changes for all proteins. Dashed line indicates p-value of 0.05 and log2 fold change of ± 0.58")
 
 The processed data file contains the transformed, normalized and imputed intensities for each peptide in each run. Run level data summarizes intensities per run and protein.
-We’ll count and visualize the number of features per run and calculate the distribution of peptides per protein and run.
+We’ll count and visualize the number of features per run and calculate the distribution of proteins per sample.
 
 > ### {% icon hands_on %} Hands-on: Follow up on MSstats results
 >
@@ -305,13 +308,13 @@ We’ll count and visualize the number of features per run and calculate the dis
 
 > ### {% icon question %} Questions
 >
-> 1. Which sample has the lowest amount of features?
+> 1. Which sample has the lowest amount of proteins after protein summarization?
 > 2. In the complete experiment, how many features has a protein on average?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. RDEB cSCC4 
-> > ![Number of features per sample](../../images/maxquant-msstats-lfq/features_sample.png "Number of features per sample (run)")
+> > ![Number of proteins per sample](../../images/maxquant-msstats-lfq/features_sample.png "Number of proteins per sample (run)")
 > > 2. Around 5 features per protein (mean in summary statistics). 
 > >
 > {: .solution}
@@ -348,6 +351,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
 >    - *"With following condition"*: `c3>0.58`
 >    - *"Number of header lines to skip"*: `1`
 > 4. Add a tag `#metastasized` to the filtered file and rename it into `metastasized filtered`
+>
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 > 5. {% tool [Filter](Filter1) %} with the following parameters:
@@ -432,7 +436,7 @@ For each condition we select only the significant proteins, which are proteins w
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1.80: 72 are upregulated in metastasized cSCC and 8 are upregulated in RDEB cSCC (number of lines minus 1)
+> > 1. 95: 84 are upregulated in metastasized cSCC and 11 are upregulated in RDEB cSCC (number of lines minus 1)
 > >
 > {: .solution}
 >
@@ -461,6 +465,6 @@ In addition we retrieve for each Uniprot ID the corresponding protein names from
 >
 {: .hands_on}
 
-Two of the differentially abundant proteins found here were also found and stained with antibodies in the original publication: Collagen XIV which is higher in RDEB cSCC than in metastasizing cSCC and Serum amyloid P-component  which is higher in metastasizing cSCC than in RDEB cSCC. Serum amyloid P-component is an acute-phase inflammatory response protein, which expression is dependent on complement component C3 that has previously been linked to cSCC progression. Collagen XIV is a fibril associated collagen which may have tissue stabilizing function in the dermis. The upregulation of collagen XIV as well as other collagens in RDEB cSCC could be a compensation effort for the impaired collagen VII in RDEB tissues. Collagen VII is indeed only found in some RDEB samples and with such low intensities that it appears as upregulated in metastasized cSCC. 
+Three of the differentially abundant proteins found here were also found and stained with antibodies in the original publication: Collagen XIV which is higher in RDEB cSCC than in metastasizing cSCC and Serum amyloid P-component as well as X-ray repair cross-complementing protein 6, which are both higher in metastasizing cSCC than in RDEB cSCC. Collagen XIV is a fibril associated collagen which may have tissue stabilizing function in the dermis. The upregulation of collagen XIV as well as other collagens in RDEB cSCC could be a compensation effort for the impaired collagen VII in RDEB tissues. Collagen VII is indeed only found in some RDEB samples and with such low intensities that it appears as upregulated in metastasized cSCC. 
 
 ![col14 staining](../../images/maxquant-msstats-lfq/col14_ihc.png "Immunoflourescence staining of collagen XIV in RDEB and metastasizing cSCC skin tissues")
