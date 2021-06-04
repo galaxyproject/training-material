@@ -2,8 +2,8 @@
 layout: tutorial_hands_on
 
 title: Filter, Plot and Explore Single-cell RNA-seq Data
-subtopic: single-cell
-priority: 10
+subtopic: single-cell-CS
+priority: 2
 zenodo_link: 'https://zenodo.org/record/4624461'
 questions:
 - Is my single cell dataset a quality dataset?
@@ -28,6 +28,7 @@ requirements:
 tags:
 - single-cell
 - 10x
+- paper-replication
 contributors:
 - nomadscientist
 
@@ -113,7 +114,7 @@ You have generated an annotated AnnData object from your raw scRNA-seq fastq fil
 
 {% icon time %} **Top time-saving advice** - turn the 3 **Inspect AnnData** outputs above into a workflow for quick access!
 
-{% snippet faqs/galaxy/workflows_create_new.md %}
+{% snippet faqs/galaxy/workflows_extract_from_history.md %}
 
 ## Generate QC Plots
 
@@ -282,7 +283,7 @@ Now that we've assessed the differences in our samples, we will look at the libr
 > {: .solution}
 {: .question}
 
-## Apply the Thresholds
+## Apply the thresholds
 
 It's now time to apply these thresholds to our data! First, a reminder of how many cells and genes are in your object: `25281 cells` and `35734 genes`. Let's see how that changes each time!
 
@@ -585,7 +586,7 @@ Two major visualisations for this data are tSNE and UMAP. We must calculate the 
 
 {% icon congratulations %} Congratulations! You have prepared your object and created neighborhood coordinates. We can now use those to call some clusters!
 
-# Cell Clusters & Gene Markers
+# Cell clusters & gene markers
 
 > ### {% icon question %} Question
 >
@@ -613,7 +614,7 @@ Finally, let's identify clusters! Unfortunately, it's not as majestic as biologi
 > ### {% icon hands_on %} Hands-on: FindClusters
 >
 > 1. {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.6.0+galaxy4) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy ComputeGraph** {% icon tool %})
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunUMAP** {% icon tool %})
 >    - *"Use programme defaults"*: {% icon history-share %} `No`
 >    - *"Resolution, high value for more and smaller clusters"*: `0.6`
 {: .hands_on}
@@ -650,12 +651,12 @@ Now, there's a small problem here, which is that if you {% icon galaxy-eye %} in
 > ### {% icon hands_on %} Hands-on: Adding in Gene Names
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Final matrix`
+>    - {% icon param-file %} *"Annotated data matrix"*: `Final object`
 >    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
 >
 > This gives us our table of all the possible genes with their names.
 >
-> 2. {% tool [Join two Datasets side by side on a specified field](tool_id=join1) %} with the following parameters:
+> 2. {% tool [Join two Datasets side by side on a specified field](join1) %} with the following parameters:
 >    - {% icon param-file %} *"Join"*: {% icon param-files %} Select multiple files: `Markers - cluster` and `Markers - genotype`
 >    - *"using column"*: `Column: 4`
 >    - {% icon param-file %} *"with"*: `var` (output of **Inspect AnnData** {% icon tool %})
@@ -667,7 +668,7 @@ Now, there's a small problem here, which is that if you {% icon galaxy-eye %} in
 >
 > We have lots of extra information we don't need in our marker gene tables, so...
 >
-> 3. {% tool [Cut columns from a table](tool_id=Cut1) %} with the following parameters:
+> 3. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1,c2,c3,c4,c11,c5,c6,c7,c8`
 >    - {% icon param-file %} *"From"*: {% icon param-files %} Select multiple files: `out_file1` and `output_file2` (outputs of **Join two Datasets** {% icon tool %})
 >
@@ -870,7 +871,7 @@ Before we leave you to explore the unknown, you might have noticed that the abov
 
 > ### {% icon hands_on %} Hands-on: Cellxgene
 >
-> 1. {% tool [Interactive CellXgene Environment](tool_id=interactive_tool_cellxgene) %} with the following parameters:
+> 1. {% tool [Interactive CellXgene Environment](interactive_tool_cellxgene) %} with the following parameters:
 >    - {% icon param-file %} *"Concatenate dataset"*: `Final cell annotated object`
 >
 > 2. When ready, you will see a message
@@ -899,7 +900,7 @@ Be warned - this visualisation tool is a powerful option for exploring your data
 > > 3. Feel free to explore any other similar histories
 {: .details}
 
-{% icon congratulations %} Congratulations! You've made it to the end! You might find this [example control history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/filter-plot-and-explore-single-cell-rna-seq-data---answer-key) helpful to compare with.
+{% icon congratulations %} Congratulations! You've made it to the end! You might find this [example control history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/filter-plot-and-explore-single-cell-rna-seq-data---answer-key) helpful to compare with, or this [workflow](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/filter-plot-and-explore-single-cell-rna-seq-data).
 
 In this tutorial, you moved from technical processing to biological exploration. By analysing real data - both the exciting and the messy! - you have, hopefully, experienced what it's like to analyse and question a dataset, potentially without clear cut-offs or clear answers. If you were working in a group, you each analysed the data in different ways, and most likely found similar insights. One of the biggest problems in analysing scRNA-seq is the lack of a clearly defined pathway or parameters. You have to make the best call you can as you move through your analysis, and ultimately, when in doubt, try it multiple ways and see what happens!
 

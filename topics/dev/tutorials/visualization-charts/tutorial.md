@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Visualizations: JavaScript plugins"
+title: "JavaScript plugins"
 questions:
   - "How can I make a custom visualization plugin for Galaxy?"
 objectives:
@@ -10,6 +10,7 @@ time_estimation: "1h"
 key_points:
   - "Demonstrating a pluggable extension system for JavaScript visualizations"
   - "With three primary files we can integrate any JavaScript visualization into Galaxy"
+subtopic: viz
 contributors:
   - shiltemann
   - yhoogstrate

@@ -4,6 +4,8 @@ layout: tutorial_hands_on
 title: "A short introduction to Galaxy"
 zenodo_link: "https://doi.org/10.5281/zenodo.582600"
 level: Introductory
+tags:
+  - español
 questions:
   - "How to get started in Galaxy"
 objectives:
@@ -22,6 +24,8 @@ key_points:
   - "View all your histories and move files between them. Switch to a different history."
   - "Log out of your Galaxy server. When you log back in (to the same server), your histories will all be there."
 subtopic: core
+translations:
+  - es
 contributors:
   - annasyme
 
