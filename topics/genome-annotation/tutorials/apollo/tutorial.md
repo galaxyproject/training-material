@@ -17,6 +17,7 @@ objectives:
   - Learn how to manually refine genome annotations within Apollo
   - Export refined genome annotations
 time_estimation: 3h
+level: Intermediate
 key_points:
   - Apollo is the Google Docs of the genome annotation world, real-time collaborative genome annotation.
   - Apollo allows a group to view and manually refine predicted genome annotations
