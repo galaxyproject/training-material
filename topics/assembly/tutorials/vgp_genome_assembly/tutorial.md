@@ -170,7 +170,7 @@ A big step can have several subsections or sub steps:
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5) %} with the following parameters:
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4) %} with the following parameters:
 >    - *"Single-end or Paired-end reads?"*: `Single-end`
 >        - {% icon param-collection %} *"FASTQ/A file"*: `output` (Input dataset collection)
 >        - In *"Read 1 Options"*:
@@ -183,6 +183,9 @@ A big step can have several subsections or sub steps:
 >                        - *"Enter custom 5' or 3' adapter sequence"*: `ATCTCTCTCTTTTCCTCCTCCTCCGTTGTTGTTGTTGAGAGAGAT`
 >    - In *"Adapter Options"*:
 >        - *"Match times"*: `3`
+>        - *"Maximum error rate"*: `0.1`
+>        - *"Minimum overlap length"*: `35`
+>        - *"Look for adapters in the reverse complement"*: `True`
 >    - In *"Filter Options"*:
 >        - *"Discard Trimmed Reads"*: `Yes`
 >
