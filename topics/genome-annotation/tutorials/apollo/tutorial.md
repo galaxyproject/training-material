@@ -9,6 +9,7 @@ questions:
   - How to visualize your genome after automated annotations have been performed?
   - How to manually annotate genome after automated annotations have been performed?
   - How to evaluate and visualize annotated genomic features?
+  - How do I collaborate when doing genome annotation?
 objectives:
   - Load genome into Galaxy
   - View annotations in JBrowse
@@ -17,6 +18,7 @@ objectives:
   - Export refined genome annotations
 time_estimation: 3h
 key_points:
+  - Apollo is the Google Docs of the genome annotation world, real-time collaborative genome annotation.
   - Apollo allows a group to view and manually refine predicted genome annotations
   - Use Apollo to edit annotations within your group.
   - Export manual annotations as GFF3.
@@ -244,13 +246,12 @@ Now that we have a good looking static JBrowse instance, it is time to load it i
 {: .hands_on}
 
 Viewing the output will open a view into Apollo in the main panel. Here you can interact with your genome and make annotations. This "Annotate" output is a quick link to that specific genome, and while Apollo allows you to manage and annotate multiple genomes, this dataset will always take you back to that specific genome. You can additionally access the Apollo server outside of Galaxy. While the URL will be different for each Galaxy server that supports Apollo, UseGalaxy.eu's Apollo server is available at [https://usegalaxy.eu/apollo](https://usegalaxy.eu/apollo).
-{: .warnin}
 
 
 # Apollo
 
 
-![Apollo in Galaxy](../../images/apollo/ui.png "This is the Apollo interface, when viewed from inside Galaxy. The Annotate tool produces a special output which acts like a link to the Apollo server. It is <b>not</b> sufficient to download this file to save a copy of your annotations, unlike other datasets in Galaxy. In the main panel Apollo is displayed, with two panels of its own: the Annotation Window (left), and the Annotator Panel (right). The annotation window is the main view into our genome and here we will see evidence, reconcile it, and make our annotations. The right panel allows us to show or hide individual evidence tracks, switch between organisms, and navigate around the genome.")
+![Screenshot of Apollo in Galaxy, apollo takes up most of the space in the center iframe with the history shown on the right.](../../images/apollo/ui.png "This is the Apollo interface, when viewed from inside Galaxy. The Annotate tool produces a special output which acts like a link to the Apollo server. It is <b>not</b> sufficient to download this file to save a copy of your annotations, unlike other datasets in Galaxy. In the main panel Apollo is displayed, with two panels of its own: the Annotation Window (left), and the Annotator Panel (right). The annotation window is the main view into our genome and here we will see evidence, reconcile it, and make our annotations. The right panel allows us to show or hide individual evidence tracks, switch between organisms, and navigate around the genome.")
 
 From the Apollo user manual:
 
@@ -274,7 +275,7 @@ Let's start by looking at the tracks available to us, and then turning on the ge
 >
 > 1. In the right hand panel at the top click on **Tracks** to open the track listing
 >
->    ![Track menu](../../images/apollo/tracks.png)
+>    ![Zoomed in screenshot of the track menu with the Gene Calls set of tracks expanded showing Augustus and NCBI AnnotWriter genes.](../../images/apollo/tracks.png)
 >
 > 2. In the **Gene Calls** group, select the `Augustus` track.
 >
@@ -286,7 +287,7 @@ Let's start by looking at the tracks available to us, and then turning on the ge
 >    2. Edit this and enter `1..10000`
 >    3. Press *Go* or use <kbd>Enter</kbd> on your keyboard.
 >
->    ![JBrowse Location Bar](../../images/apollo/location.png)
+>    ![Screenshot of Jbrowse header with the control panel with magnifying glasses and zoom location.](../../images/apollo/location.png)
 >
 {: .hands_on}
 
@@ -314,31 +315,31 @@ What we want now is first to check that the structure of the genes predicted by 
 
 This new track represents the result of aligning sequences from the Swissprot databank along the genome, using Blastp. It should look like that:
 
-![JBrowse with blastp results](../../images/apollo/blastp.png)
+![JBrowse with blastp results shown, genes appear as red green and blue stripes with a pointed end, blast results appear as stripes with portions missing where they don't align](../../images/apollo/blastp.png)
 
 Each red box is the alignment of a protein from Swissprot on the genome. You can get more information on the aligned sequence by passing your mouse over the alignement, or clicking on it.
 
 Most of the genes predicted by Augustus look very similar to aligned Swissprot sequences, with the coordinates. Note that our example is an ideal situation that you will probably not see on other genomes: as E. coli is a very studied and well annotated genome, which means Swissprot contains many high quality sequences that can be aligned perfectly by Blastp.
 
-If you look at the region `55000..63000` you will notice however that 2 sequcens were aligned on the genome, but Augustus didn't predict any corresponding genes.
+If you look at the region `55000..63000` you will notice however that 2 sequences were aligned on the genome, but Augustus didn't predict any corresponding genes.
 
-![Genes not predicted by Augustus](../../images/apollo/missing_genes.png)
+![JBrowse showing no genes on the Augustus track, and one blast hit.](../../images/apollo/missing_genes.png)
 
 The blastp alignment looks solid, and the sequences seem to correspond to real proteins references in the litterature. We want to add them to our final annotation, to do it, right click on each gene, and select **Create new annotation** > **gene**. They should appear shortly in the **User-created Annotation** track (yellow background, at the top).
 
-![The two genes added to the User-created Annotation track](../../images/apollo/added_genes.png)
+![The two genes are added to the User-created Annotation track](../../images/apollo/added_genes.png)
 
 You can also see that they appear now in the list of genes in the right panel, at the gene and the mRNA level (as a gene can have multiple isoforms, in particular for eukaryotes).
 
-![Gene list](../../images/apollo/gene_list.png)
+![Gene list showing genes b2g.56.0.0 and b2g.55.0.0 which is expanded to reveal a child mRNA](../../images/apollo/gene_list.png)
 
 The **User-created Annotation** track is where you can make modifications to genes, like changing their coordinates, or their name and functional annotation. If you right click on a gene in this track, you will see all the possibilities offered by apollo.
 
-![Gene contextual menu](../../images/apollo/gene_menu.png)
+![Gene contextual menu showing way too many options, the mouse hovers over Open Annotation (alt-click)](../../images/apollo/gene_menu.png)
 
 Currently, the two genes we added have meaningless names. Let's improve that: right click on the leftmost gene, and click on **Open Annotation (alt-click)**.
 
-![Gene details](../../images/apollo/gene_details.png)
+![Gene details menu in apollo showing type set to gene, the name field has been filled with b2g.55.0.0 and a number of other empty fields like symbol, aliases, description.](../../images/apollo/gene_details.png)
 
 From the blast results, we know that this gene is similar to a Swissprot protein, named `Putative uncharacterized protein YabP`. Let's write this in the **Name** field (type it manually and select it from the drop down list), and `YabP` in the **Symbol** field.
 
@@ -351,7 +352,7 @@ From the blast results, we know that this gene is similar to a Swissprot protein
 
 We have just edited the gene name, but Apollo allows to edit information at the mRNA level. Click on the **Sync name with transcript** button to copy the gene name to the mRNA name. It should now display in the **User-created Annotation** track. To check what you can edit at the mRNA level, just click on the corresponding mRNA in the list above:
 
-![mRNA selection](../../images/apollo/mrna_level.png)
+![very zoomed screenshot showing clicking on the transcript below the gene to open the mRNA info.](../../images/apollo/mrna_level.png)
 
 You should see `Putative uncharacterized protein YabP` in the **Name** field.
 
@@ -359,14 +360,14 @@ You can do the same for the other gene you created, which is similar to `Unchara
 
 > ### {% icon comment %} Saving your work
 >
-> You do not need to do anything specific to *Save* your work in Apollo. Just as "Google Docs", each modification is immediately saved, and any other user working on the same genome will instantly see the changes you make.
+> You do not need to do anything specific to *Save* your work in Apollo. Just like Google Docs, each modification is immediately saved, and any other user working on the same genome will instantly see the changes you make.
 {: .comment}
 
 ## Editing a gene structure
 
 Apollo allows to edit the whole structure of a gene. If you zoom to the 5' end of `YabP`, you will notice, that a few nucleotides after the start codon, there is another one. Let's change the start of `YabP` to this alternate start codon (even if the blast result suggests that we shouldn't do it, it's an exercise!). To do it, all you need to do is click on the 5' limit of the gene and drag it to the desired position. You will notice that the structure of the gene will be shortly changed.
 
-![Modifying the 5' limit of a gene](../../images/apollo/change_start.gif)
+![Gif showing modifying the 5' limit of a gene by dragging it downstream.](../../images/apollo/change_start.gif)
 
 This kind of modifications is very common when using Apollo, and you can perform it at the gene level, or (for eukaryotes) at the exon/intron level. To guide you doing these changes, you should look at all the tracks available for the genome you study. RNA-Seq track are very helpful to determine the limits of coding sequences on the genome, you can find 2 RNA-Seq libraries in the track list, they were aligned on the genome using TopHat. Other tracks can be helpful, like alignements of transcripts or proteins from closely related species (or even big databanks like Swissprot or NR).
 
@@ -374,7 +375,7 @@ This kind of modifications is very common when using Apollo, and you can perform
 
 Everything you do in Apollo is tracked in a database. If you right click on the `YabP` gene, and select **Show History**, you have access to the full list of all the actions that were performed on it.
 
-![History of changes on a gene](../../images/apollo/history.png)
+![History of changes on a gene showing many changes to Set Name and a final Set Exon Boundaries change](../../images/apollo/history.png)
 
 When you click on one of the steps, you can see below the list a preview of how the gene looked at the time. And you can revert to a specific version of the gene by clicking on the arrow button on the right.
 
@@ -391,25 +392,22 @@ If you look at the details of the blast hits, you will notice an identifier look
 > The GO defines concepts/classes used to describe gene function, and relationships between these concepts. It classifies functions along three aspects:
 >
 >
-> - **molecular function**
+> molecular function
+> :  molecular activities of gene products
 >
->   - molecular activities of gene products
+> cellular component
+> :  where gene products are active
 >
-> - **cellular component**
+> biological process
+> :  pathways and larger processes made up of the activities of multiple gene products.
 >
->   - where gene products are active
->
-> - **biological process**
->
->   - pathways and larger processes made up of the activities of multiple gene products.
->
-> [more information](http://geneontology.org/page/ontology-documentation)
+> [more information](http://geneontology.org/page/ontology-documentation) can be found in the GO website.
 >
 {: .comment}
 
 With the gene selected, click on the **GO** panel, then click on the **New** button. We will then follow the [GO annotation guidelines](http://geneontology.org/docs/go-annotations/), filling the form like this.
 
-![Adding a GO term](../../images/apollo/go_form.png)
+![Adding a GO term with a complex and confusing interface. Aspect is set to MF, all of the parameters are described in the following paragraph.](../../images/apollo/go_form.png)
 
 This form means that our gene will be tagged with the **Go Term** `GO:0030170` (select it in the drop down list while typing `pyridoxal phosphate binding`) from the Molecular Function GO branch (`MF` in **Aspect**). This gene `enables` this `pyridoxal phosphate binding` activity, and we declare it based on the evidence code `ECO:0000250` which means `sequence similarity evidence used in manual assertion` (exactly what we are doing). This similarity is **With** the `UniProt:P57289` record, and we add a **Reference** to this record (we could add a pubmed id to reference a published result for example). Finally we add a **Note** saying that there's a strong similarity.
 
@@ -427,7 +425,7 @@ In this tutorial we are lucky as we are studying a very well known reference org
 >
 > 1. In the right hand panel at the top click on **Tracks** to open the track listing
 >
-> 2. In the **Gene Calls** group, select the `NCBI AnnotWrite Genes` track.
+> 2. In the **Gene Calls** group, select the `NCBI AnnotWriter Genes` track.
 >
 {: .hands_on}
 
@@ -439,11 +437,11 @@ Until now we have supposed that the quality of the genome sequence is perfect. B
 
 Navigate to position `42500..44500`, and show the `K12 Variants` track from the `Variation` track group. This track shows variants that were detected in this genome sequence after resequencing it. Drag the `NC_000913.3.g36.t1` gene to the **User-created Annotation** track. Now we will register in Apollo the SNP that was detected on position `43988` (C->T): zoom to this position until you see the 6 open reading frame and the sequence. Then right click on the `C` nucleotide and select **Create Genomic Substitution**.
 
-![Adding a sequence alteration](../../images/apollo/alteration_menu.png)
+![Right click menu showing options to toggle strands and create genome insertions, deletions, and substitutions. The mouse hovers over substitution.](../../images/apollo/alteration_menu.png)
 
 Fill the form like this, and the SNP will be saved:
 
-![Adding a sequence alteration, continued](../../images/apollo/substitution.png)
+![SNP menu with +strand and -strand (seems to be auto-filled out), and a mandatory comment field set to SNP in K12](../../images/apollo/substitution.png)
 
 You can add other types of alterations like insertions or deletions.
 
@@ -481,11 +479,11 @@ As explained at the beginning of this tutorial, Apollo is a collaborative annota
 
 Click on the **Sharing** tab in the Apollo right panel.
 
-![Access to the Sharing tab](../../images/apollo/sharing.png)
+![Apollo right hand menu has a number of tabs, Annotations, Tracks, Ref Sequence, Sharing, and GGA are shown. Sharing is active.](../../images/apollo/sharing.png)
 
 You should see a screen like this:
 
-![Access to the Sharing tab](../../images/apollo/perm_home.png)
+![Screenshot of the sharing tab with a blue bar reading Your Permissions, with group management below. A large header reads "Shareable organisms" and lists organisms that can be shared. A "Group membership" section shows that they are not a member of any group.](../../images/apollo/perm_home.png)
 
 It means that you are currently not in any group, and that, as its creator, you have the right to share access to one organism: `E. coli K12`.
 
@@ -497,13 +495,13 @@ It means that you are currently not in any group, and that, as its creator, you 
 >
 > 3. Give a name to your new group, and then click on the **Create group** button
 >
-> ![Group creation dialog](../../images/apollo/perm_group_create.png)
+> ![Group creation dialog with one field, the group name set to 'my_friends'](../../images/apollo/perm_group_create.png)
 >
 {: .hands_on}
 
 Now you should see a screen like this:
 
-![Group successfully created](../../images/apollo/perm_group_added.png)
+![Screenshot of the group detail interface showing no allowed organisms, but one available organism that can be added to this group.](../../images/apollo/perm_group_added.png)
 
 Let's add a colleague to our newly created group.
 
@@ -517,7 +515,7 @@ Let's add a colleague to our newly created group.
 >
 > 4. Click on the **Add user** button
 >
-> ![Screenshot of adding a user in the permapol interface](../../images/apollo/perm_add_user.png)
+> ![Screenshot of adding a user in the permapol to the previous group, my_friends. The user email is filled out to an example value.](../../images/apollo/perm_add_user.png)
 >
 {: .hands_on}
 
