@@ -717,7 +717,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 3, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 4, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -779,8 +779,10 @@ https://zenodo.org/record/4896554/files/input_comparison_matrix.tabular
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>    <li>Copy the link location</li>    <li>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</li>    <li>Select <strong>Paste/Fetch Data</strong></li>    <li>Paste the link into the text field</li>    <li>Press <strong>Start</strong></li>    <li><strong>Close</strong> the windowBy default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li>  </ul></blockquote>
     </li>
     <li>
-      <p>Once the files are green, rename the fasta file into ‘protein database’, the annotation file into ‘annotation file’ and the comparison matrix file into ‘comparison matrix’.
-<!--SNIPPET-->&lt;blockquote class="tip"&gt;  &lt;h3 data-toc-skip id="-tip-renaming-a-dataset"&gt;<i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset&lt;/h3&gt;  &lt;ul&gt;    &lt;li&gt;Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes&lt;/li&gt;    &lt;li&gt;In the central panel, change the <strong>Name</strong> field&lt;/li&gt;    &lt;li&gt;Click the <strong>Save</strong> button&lt;/li&gt;  &lt;/ul&gt;&lt;/blockquote&gt;</p>
+      <p>Once the files are green, rename the fasta file into ‘protein database’, the annotation file into ‘annotation file’ and the comparison matrix file into ‘comparison matrix’.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, change the <strong>Name</strong> field</li>    <li>Click the <strong>Save</strong> button</li>  </ul></blockquote>
     </li>
     <li>
       <p>Steps 4 to 7 can be skipped to save time and storage capacity by not running MaxQuant. To run MaxQuant, import the raw data from <a href="https://www.ebi.ac.uk/pride/archive/projects/PXD006914">PRIDE</a>.</p>
@@ -829,7 +831,7 @@ ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment115_RDE
 
 <h1 id="maxquant-analysis">MaxQuant analysis</h1>
 
-<p>The run time of <strong>MaxQuant</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> depends on the number and size of the input files and on the chosen parameters. The run of the training datasets will take a few hours, but the training can be directly continued with the MaxQuant result files from Zenodo. We start the MaxQuant run with the default parameters, with a few adjustments. All peptides are used for quantification. A quality control report is generated with the <a href="https://pubs.acs.org/doi/10.1021/acs.jproteome.5b00780">PTXQC functionality</a> that is directly implemented in the MaxQuant <span class="notranslate">Galaxy</span> tool. To continue with statistical analysis in MSstats, the Protein Groups and the Evidence files are needed from MaxQuant.</p>
+<p>The run time of <strong>MaxQuant</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> depends on the number and size of the input files and on the chosen parameters. The run of the training datasets will take a few hours, but the training can be directly continued with the MaxQuant result files from Zenodo. We start the MaxQuant run with the default parameters, with a few adjustments. Protein level quantification parameters do not really matter here, because MSstats will use feature quantifications and perform protein summarization based on them. A quality control report is generated with the <a href="https://pubs.acs.org/doi/10.1021/acs.jproteome.5b00780">PTXQC functionality</a> that is directly implemented in the MaxQuant <span class="notranslate">Galaxy</span> tool. To continue with statistical analysis in MSstats, the Protein Groups and the Evidence files are needed from MaxQuant.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-maxquant-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: MaxQuant analysis</h3>
@@ -885,6 +887,7 @@ https://zenodo.org/record/4896554/files/PTXQC_report.pdf
 
   <ol>
     <li>How many proteins and features were identified in total?</li>
+    <li>In which columns (number) are the potential contaminants in the protein group and evidence file respectively?</li>
     <li>How large is the proportion of potential contaminants?</li>
   </ol>
 
@@ -893,6 +896,7 @@ https://zenodo.org/record/4896554/files/PTXQC_report.pdf
 
     <ol>
       <li>2622 protein groups and ~240000 features were found in total (number of lines of protein group and evidence files)</li>
+      <li>They are in column 118 (protein groups) and 54 (evidence)</li>
       <li>Up to 60% of the samples intensities derive from potential contaminants (PTXQC plots page 7)</li>
     </ol>
 
@@ -1066,7 +1070,7 @@ The volcano plot plots the statistical result as transformed p-values vs. the lo
 <figure id="figure-2"><img src="../../images/maxquant-msstats-lfq/volcano_plot.png" alt="volcano plot" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Volcano plot showing p-values and log2 fold changes for all proteins. Dashed line indicates p-value of 0.05 and log2 fold change of ± 0.58</figcaption></figure>
 
 <p>The processed data file contains the transformed, normalized and imputed intensities for each peptide in each run. Run level data summarizes intensities per run and protein.
-We’ll count and visualize the number of features per run and calculate the distribution of peptides per protein and run.</p>
+We’ll count and visualize the number of features per run and calculate the distribution of proteins per sample.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-follow-up-on-msstats-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Follow up on MSstats results</h3>
@@ -1113,7 +1117,7 @@ We’ll count and visualize the number of features per run and calculate the dis
   <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
-    <li>Which sample has the lowest amount of features?</li>
+    <li>Which sample has the lowest amount of proteins after protein summarization?</li>
     <li>In the complete experiment, how many features has a protein on average?</li>
   </ol>
 
@@ -1123,7 +1127,7 @@ We’ll count and visualize the number of features per run and calculate the dis
     <ol>
       <li>RDEB cSCC4</li>
     </ol>
-    <figure id="figure-3"><img src="../../images/maxquant-msstats-lfq/features_sample.png" alt="Number of features per sample" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Number of features per sample (run)</figcaption></figure>
+    <figure id="figure-3"><img src="../../images/maxquant-msstats-lfq/features_sample.png" alt="Number of proteins per sample" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Number of proteins per sample (run)</figcaption></figure>
     <ol>
       <li>Around 5 features per protein (mean in summary statistics).</li>
     </ol>
@@ -1177,8 +1181,10 @@ In order to make its IDs compatible with the ones from the comparison result at 
       </ul>
     </li>
     <li>
-      <p>Add a tag <code class="language-plaintext highlighter-rouge">#metastasized</code> to the filtered file and rename it into <code class="language-plaintext highlighter-rouge">metastasized filtered</code>
-<!--SNIPPET-->&lt;blockquote class="tip"&gt;  &lt;h3 data-toc-skip id="-tip-adding-a-tag"&gt;<i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag&lt;/h3&gt;  &lt;ul&gt;    &lt;li&gt;Click on the dataset&lt;/li&gt;    &lt;li&gt;Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong>&lt;/li&gt;    &lt;li&gt;Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code>  Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.&lt;/li&gt;    &lt;li&gt;Check that the tag is appearing below the dataset name&lt;/li&gt;  &lt;/ul&gt;&lt;/blockquote&gt;</p>
+      <p>Add a tag <code class="language-plaintext highlighter-rouge">#metastasized</code> to the filtered file and rename it into <code class="language-plaintext highlighter-rouge">metastasized filtered</code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-adding-a-tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag</h3>  <ul>    <li>Click on the dataset</li>    <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>    <li>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code>  Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</li>    <li>Check that the tag is appearing below the dataset name</li>  </ul></blockquote>
     </li>
     <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
       <ul>
@@ -1311,7 +1317,9 @@ In order to make its IDs compatible with the ones from the comparison result at 
   <blockquote class="solution">
     <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>1.80: 72 are upregulated in metastasized cSCC and 8 are upregulated in RDEB cSCC (number of lines minus 1)</p>
+    <ol>
+      <li>95: 84 are upregulated in metastasized cSCC and 11 are upregulated in RDEB cSCC (number of lines minus 1)</li>
+    </ol>
 
   </blockquote>
 
@@ -1355,7 +1363,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
 
 </blockquote>
 
-<p>Two of the differentially abundant proteins found here were also found and stained with antibodies in the original publication: Collagen XIV which is higher in RDEB cSCC than in metastasizing cSCC and Serum amyloid P-component  which is higher in metastasizing cSCC than in RDEB cSCC. Serum amyloid P-component is an acute-phase inflammatory response protein, which <span class="notranslate">expression</span> is dependent on complement component C3 that has previously been linked to cSCC progression. Collagen XIV is a fibril associated collagen which may have tissue stabilizing function in the dermis. The upregulation of collagen XIV as well as other collagens in RDEB cSCC could be a compensation effort for the impaired collagen VII in RDEB tissues. Collagen VII is indeed only found in some RDEB samples and with such low intensities that it appears as upregulated in metastasized cSCC.</p>
+<p>Three of the differentially abundant proteins found here were also found and stained with antibodies in the original publication: Collagen XIV which is higher in RDEB cSCC than in metastasizing cSCC and Serum amyloid P-component as well as X-ray repair cross-complementing protein 6, which are both higher in metastasizing cSCC than in RDEB cSCC. Collagen XIV is a fibril associated collagen which may have tissue stabilizing function in the dermis. The upregulation of collagen XIV as well as other collagens in RDEB cSCC could be a compensation effort for the impaired collagen VII in RDEB tissues. Collagen VII is indeed only found in some RDEB samples and with such low intensities that it appears as upregulated in metastasized cSCC.</p>
 
 <figure id="figure-4"><img src="../../images/maxquant-msstats-lfq/col14_ihc.png" alt="col14 staining" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Immunoflourescence staining of collagen XIV in RDEB and metastasizing cSCC skin tissues</figcaption></figure>
 
@@ -1442,7 +1450,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
     title = "MaxQuant and MSstats for the analysis of label-free data (Galaxy Training Materials)",
     year = "2021",
     month = "06",
-    day = "03"
+    day = "04"
     url = "\url{/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
