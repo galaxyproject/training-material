@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>Refining Genome Annotations with Apollo</title>
+    
+        <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="Genome annotation is a multi-level process that includes ..." />
+    <meta property="og:title" content="Galaxy Training: Refining Genome Annotations with Apollo" />
+    <meta property="og:description" content="Genome annotation is a multi-level process that includes ..." />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    <script type="application/ld+json">
+      
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Refining Genome Annotations with Apollo",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/main/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Genome Annotation",
+    "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+    "url": "https://training.galaxyproject.org//training-material/topics/genome-annotation/"
+  },
+  "courseCode": "genome-annotation / apollo / slides",
+  "learningResourceType": "slides",
+  "name": "Slides for 'Refining Genome Annotations with Apollo' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/genome-annotation/tutorials/apollo/slides.html",
+  "timeRequired": "PT5M",
+  "keywords": "prokaryote",
+  "description": "The questions this  addresses are:\n - How to visualize your genome after automated annotations have been performed?\n - How to manually annotate genome after automated annotations have been performed?\n - How to evaluate and visualize annotated genomic features?\n - How do I collaborate when doing genome annotation?\n\n\\nThe objectives are:\n - Load a genome into Galaxy\n - View annotations in JBrowse\n - Learn how to load JBrowse data into Apollo\n - Learn how to manually refine genome annotations within Apollo\n - Export refined genome annotations\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Anthony Bretaudeau"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": "Nathan Dunn"
+    },
+    {
+      "@type": "Person",
+      "name": "Mateo Boudet"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Anthony Bretaudeau"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": "Nathan Dunn"
+    },
+    {
+      "@type": "Person",
+      "name": "Mateo Boudet"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Genome Annotation",
+      "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+      "url": "https://training.galaxyproject.org//training-material/topics/genome-annotation/"
+    }
+  ]
+}
+    </script>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/genome-annotation" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/genome-annotation/tutorials/apollo/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+
+# Refining Genome Annotations with Apollo
+
+
+<div class="contributors-line">
+
+
+ <a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/abretaud" alt="Anthony Bretaudeau">Anthony Bretaudeau</a> <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Helena Rasche">Helena Rasche</a> <a href="/training-material/hall-of-fame/nathandunn/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nathandunn" alt="Nathan Dunn">Nathan Dunn</a> <a href="/training-material/hall-of-fame/mboudet/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mboudet" alt="Mateo Boudet">Mateo Boudet</a>
+
+
+</div>
+
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+
+
+
+
+
+.footnote[Tip: press `P` to view the presenter notes]
+
+???
+Presenter notes contain extra information which might be useful if you
+intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other. Useful when presenting.
+
+---
+
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- How to visualize your genome after automated annotations have been performed?
+
+- How to manually annotate genome after automated annotations have been performed?
+
+- How to evaluate and visualize annotated genomic features?
+
+- How do I collaborate when doing genome annotation?
+
+
+---
+
+
+
+### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
+
+
+- Load a genome into Galaxy
+
+- View annotations in JBrowse
+
+- Learn how to load JBrowse data into Apollo
+
+- Learn how to manually refine genome annotations within Apollo
+
+- Export refined genome annotations
+
+
+---
+
+
+### Genome annotation
+
+- Classifies and describes parts of the genome sequence
+
+- Focusing on genes: their positions, names and functions
+
+- Automatic methods to annotate a newly sequenced and assembled genome
+
+    - Prokaryotes: [Prokka](/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.html), Augustus
+    - Eukaryotes: [Maker](/training-material/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html), Braker2, Augustus
+
+.image-50[![JBrowse screenshot showing several genes aligned along a genome](../../images/intro-structural-annotation.png)]
+
+???
+
+- Annotating a genome means positioning features along the sequence of a genome.
+- Here we focus on genes.
+- We are interested in their positions, and functional annotation like their name of their function.
+- Many software tools and pipelines exist to automatically perform the annotation of a new genome sequence.
+- For example Prokka or Maker are widely used, and tutorials are available on the GTN to learn how to use them.
+
+---
+
+### Automatic annotations are not perfect
+
+.pull-left[
+- Assembly errors can cause fragmented annotations
+
+- Limited and/or noisy evidence coverage makes precise identification difficult
+]
+
+.pull-right[.image-40[![Apollo screenshot showing how RNASeq reads align mostly within some exons limits, but not perfectly](../../images/apollo/rnaseq_cov.png)]]
+
+???
+
+- Unfortunately, automatic annotations are rarely perfect.
+- Assembly errors can cause fragmented annotations.
+- Annotation tools have difficulties annotating genes when evidences like RNASeq are lacking or too noisy.
+
+---
+
+### Manual curation refines genome annotations
+
+- Make use of the researcher's expertise
+
+- Include additional analysis results
+
+- Integrate all underlying evidence
+
+- A Human finds problems algorithms can't
+
+.pull-left[.image-90[![Schema showing how automated annotation, experimental evidences (cDNAs, HMM domain searches, RNASeq, similarity with other species), and human analysis are used by Apollo to manually curate an annotation](../../images/apollo/apollo_workflow.png)]]
+
+.pull-right[.image-40[![Apollo screenshot showing how RNASeq reads align mostly within some exons limits, but not perfectly](../../images/apollo/rnaseq_cov.png)]]
+
+???
+
+- Performing a manual curation step after automatic annotation allows to improve annotation quality.
+- It is a way to make use of a researcher's expertise, and to integrate more knowledge to improve gene structures and functional annotation.
+
+---
+
+### Apollo
+
+&quot;Google Docs for Genome Annotation&quot;
+
+.image-50[![Screenshot of Apollo in Galaxy, apollo takes up most of the space in the center iframe with the history shown on the right.](../../images/apollo/ui.png)]
+
+Collaborative web application to edit annotation
+
+Both structural *and* functional annotation
+
+Based on JBrowse: JBrowse is for visualising only, Apollo allows to edit
+
+???
+
+- Apollo is a web application specifically designed for the manual curation of annotations.
+- You can see Apollo as the &quot;Google Docs&quot; of annotation.
+- It is a multi-user, real time, collaborative environment.
+- Users can easily change the structure of genes, and add functional annotation like gene names of Gene Ontology terms.
+- Is is based on JBrowse.
+- JBrowse is for visualising genomes, while Apollo adds the editing capabilities.
+
+---
+
+### Apollo
+
+- Modify gene structures (based on evidence tracks)
+
+- Add functional annotation
+
+.pull-left[.image-90[![Animation showing how the limit of an exon can be changed within Apollo by a simple drag-and-drop](../../images/apollo/exon_edit.gif)]]
+.pull-right[.image-90[![Screenshot of the Apollo form allowing to edit functional annotation](../../images/apollo/gene_details.png)]]
+
+???
+
+- Within Apollo, you can easily change the structure of genes, based on evidence tracks.
+- Apollo offers an interactive interface to help you add functional annotation.
+
+---
+
+### Apollo
+
+Multi user environment: users can login, and make/see changes in realtime
+
+Full history of changes, reverting is possible
+
+![Screenshot of the history panel, with a list of actions and possibility to revert](../../images/apollo/history.png)
+
+???
+
+- Apollo is a multi-user environment, which means multiple users can login at the same time, make changes, and see changes of other users in real time.
+- Apollo keep track of every action performed on each gene in a history. You can revert any change at any time.
+
+---
+
+### Apollo in Galaxy
+
+Integrate Apollo in your whole analysis project in Galaxy
+
+1. Run assembly
+2. Align evidences along the genome (RNASeq, CDS, proteins)
+3. Run automatic annotation pipeline
+4. Create a JBrowse instance
+5. Load the JBrowse instance into Apollo
+6. Use Apollo to manually curate annotation with collaborators
+7. Export back the curated annotation into Galaxy
+8. Continue analysing in Galaxy
+
+Available on [https://usegalaxy.eu](https://usegalaxy.eu)
+
+???
+
+- Apollo is now tightly integrated with Galaxy, which allow to integrate the manual curation process in a complete Galaxy-based analysis workflow.
+- Within Galaxy, you can start by assembling a new genome, then aligning as many evidence tracks as possible (like RNASeq data).
+- You can then continue with an automatic annotation step, with Prokka or Maker for example.
+- Then you can generate a JBrowse instance representing all the data you have generated, and load it into Apollo.
+- Apollo let's you perform the manual curation, in collaboration with any other colleague you invite to help you.
+- Finally when you are satisfied with your changes, you can export them to your Galaxy history, and continue other analyses.
+- At any time later you can come back to Apollo to continue improving the annotation, based on new experiment results.
+
+---
+
+### Apollo in Galaxy: collaborating
+
+Invite any other Galaxy user to your curation project
+
+![Screenshot of the dialog allowing to share the access to other users](../../images/apollo/perm_home.png)
+
+???
+
+- By default you are the only one having access to genomes you load into Apollo.
+- A specific module of the Apollo-Galaxy bridge allows you to open the access to a genome to any other Galaxy user.
+
+---
+
+### &lt;i class=&quot;fas fa-pencil-alt&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;hands_on&lt;/span&gt; Hands on!
+
+Time to follow the [Apollo tutorial](/training-material/topics/genome-annotation/tutorials/apollo/tutorial.html)!
+
+???
+
+- You can now follow the Apollo tutorial to learn how to use it in real life.
+
+
+
+
+---
+### &lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
+
+
+- Apollo is the Google Docs of the genome annotation world, real-time collaborative genome annotation.
+
+- Apollo allows a group to view and manually refine predicted genome annotations
+
+- Use Apollo to edit annotations within your group.
+
+- Export manual annotations as GFF3.
+
+
+
+
+
+
+
+---
+
+## Thank you!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors!
+
+
+<div class="contributors-line">
+
+
+ <a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/abretaud" alt="Anthony Bretaudeau">Anthony Bretaudeau</a> <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Helena Rasche">Helena Rasche</a> <a href="/training-material/hall-of-fame/nathandunn/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nathandunn" alt="Nathan Dunn">Nathan Dunn</a> <a href="/training-material/hall-of-fame/mboudet/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mboudet" alt="Mateo Boudet">Mateo Boudet</a>
+
+
+</div>
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false,}});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+
+  </body>
+</html>
