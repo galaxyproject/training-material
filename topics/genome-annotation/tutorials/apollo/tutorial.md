@@ -11,12 +11,13 @@ questions:
   - How to evaluate and visualize annotated genomic features?
   - How do I collaborate when doing genome annotation?
 objectives:
-  - Load genome into Galaxy
+  - Load a genome into Galaxy
   - View annotations in JBrowse
   - Learn how to load JBrowse data into Apollo
   - Learn how to manually refine genome annotations within Apollo
   - Export refined genome annotations
 time_estimation: 3h
+level: Intermediate
 key_points:
   - Apollo is the Google Docs of the genome annotation world, real-time collaborative genome annotation.
   - Apollo allows a group to view and manually refine predicted genome annotations
