@@ -39,6 +39,15 @@ contributors:
 
 ---
 
+> ### Agenda
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
+---
+
 ## The ToolFactory Appliance: A pop-up private Galaxy for scientists and developers who write command line scripts in their work.
 
 The ToolFactory automates much of the work needed to prepare a new Galaxy tool using information provided by the script writer
@@ -69,7 +78,7 @@ system is damaged, the Appliance can be rebuilt from scratch in a few minutes.
 >  - The Appliance is a flavour added to the base [docker-galaxy-stable](https://github.com/bgruening/docker-galaxy-stable/compose) infrastructure
 {: .tip}
 
-
+---
 
 ## Limits and scope
 
@@ -96,6 +105,7 @@ enough for the ToolFactory.
 automated code generator in a tailored, readily deployed appliance.
     - The cost of this convenience is that ToolFactory is limited to a subset of simple script and package wrappers.
 
+---
 
 # Getting your hands on a ToolFactory Appliance for some hands-on training.
 
@@ -105,12 +115,6 @@ automated code generator in a tailored, readily deployed appliance.
 - Tutorial material that follows **can only be completed with a working ToolFactory**.
 
 
-> ### Agenda
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
 
 ## Installation
 
@@ -122,10 +126,17 @@ automated code generator in a tailored, readily deployed appliance.
 >- For this reason, the training materials can't make use of existing public Galaxy infrastructure like most of the GTN material.
 {: .warning}
 
+---
+
 # Running the ToolFactory
 
 > ### {% icon hands_on %} Hands-on: Launching the Appliance
 >
+> > ### {% icon warning %} `Pull` the images first as shown below to save time.
+> >
+> > If they are not found locally the first time you run `docker-compose up`, docker will build them, taking much, much, much longer.
+> >
+> {: .warning}
 > 1. [Install Docker](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform.
 >
 > 2. Then, `pip3 install docker-compose`
@@ -135,6 +146,7 @@ automated code generator in a tailored, readily deployed appliance.
 >    ```bash
 >    git clone https://github.com/fubar2/toolfactory-galaxy-server
 >    cd toolfactory-galaxy-server/compose
+>    mkdir export
 >    docker-compose pull
 >    docker-compose up
 >    ```
@@ -144,6 +156,7 @@ automated code generator in a tailored, readily deployed appliance.
 >    > wget https://github.com/fubar2/toolfactory-galaxy-server/archive/refs/heads/main.zip
 >    > unzip main.zip
 >    > cd toolfactory-galaxy-server-main/compose
+>    > mkdir export
 >    > docker-compose pull
 >    > docker-compose up
 >    > ```
@@ -151,14 +164,16 @@ automated code generator in a tailored, readily deployed appliance.
 >
 >    > ### {% icon tip %} Appliance tips
 >    >
->    >  - `pull` is only needed the first time, or if there is a newer version available of the base `docker-galaxy-stable` images or of the toolfactory-configurator.
->    >  - Add `-d` at the end of the `docker-compose` command to detach the terminal so you can keep working - but only after watching the process the first time please.
+>    >  - `docker-compose pull` and making the local export directory *are only needed the first time*.
+>    >  - Add `-d` at the end of the `docker-compose up` command to detach the terminal so you can keep working - but only after watching the process the first time.
 >    >      - It is important to wait until the server stops sending log messages before you first log in. That means everything is ready. The first startup is very complex and takes time.
->    >  - For the first time start, watching the startup process logs is highly recommended.
+>    >  - For the first time start, watching the startup process logs reveals a lot of interesting activity.
 >    >      - You will learn a lot about how a Galaxy server works and see when the Appliance is ready to use.
+>    >  - Expect a few minutes for the pull to complete.
+>    >  - Expect another 5 to 10 minutes to complete the first startup. Subsequent starts are much faster but a lot has to be done the first time.
 >    >  - The docker containers may not fit or run well on an underpowered machine. Multiple CPU cores, 8GB of RAM and fast disk are needed for an enjoyable appliance.
 >    >  - The demonstration history will only be available after logging in with the administrator credentials - `admin@galaxy.org` and password `password`. Check your histories if the smaller data-only history appears when you log in.
->    >  - Change your admin password and if anyone else has possible network access, the API key `fakekey` used for configuration.
+>    >  - Change your admin password.
 >    >  - It is important that your appliance is not accessible to any potential miscreants on the local or public internet.
 >    >  - It is recommended for use only as a private disposable desktop development environment.
 >    >    - The Appliance keeps no backup of any work.
@@ -176,8 +191,9 @@ automated code generator in a tailored, readily deployed appliance.
 >
 >    > ### {% icon tip %} Tip: Demonstration tools are the functional documentation
 >    >
->    > - At first login you will find the demonstration history ready to explore if you waited for all the Conda activity to die down
->    > - It takes a minute or two to import because the dependencies for the ToolFactory must first be installed.
+>    > - At first login you will find the demonstration history ready to explore if you waited for all the first run installation activity to die down
+>    > - First run startup takes about 5 minutes. Subsequent starts take less than a minute.
+>    > - First planemo_test run takes about 5 minutes - subsequently more like 1 minute depending on Conda dependency install time
 >    > - Check the histories if a different one appears - two are loaded and there seems some randomness about which appears at login.
 >    > - If it's not there, you can import it manually from Zenodo as described in the Welcome page text.
 >    > - To explore an example, open the toolshed XML history item by clicking on the name, and select the {% icon galaxy-refresh %} `rerun` button from the expanded view
@@ -206,7 +222,7 @@ automated code generator in a tailored, readily deployed appliance.
 > ## Generating new tools - what happens when you press `execute` on a valid ToolFactory form?
 >
 > - The form is processed and a new tool generated.
-> - The new tool is installed to the Appliance.
+> - The new tool is installed to the Appliance in the `ToolFactory Generated Tools` tool menu
 >    - The tool generation process takes a few seconds.
 >    - The `Home` or `Analysis` tab should be selected so the screen is refreshed after building.
 >         - Otherwise the new tool menu will not be loaded so the newly generated tool will not be there
@@ -224,7 +240,7 @@ automated code generator in a tailored, readily deployed appliance.
 >     - It is in `..compose/export/galaxy/testedTFtools/[tool name]` on your workstation because that is mounted as a volume into the container.
 {: .hands_on}
 
-----
+---
 
 ## ToolFactory functional documentation - the demonstration tools.
 
@@ -355,78 +371,105 @@ line will echo all the repeated parameters is shown in the example shown in the 
 > >
 > >
 > >```xml
-> >  <tool name="tool1" id="tool1" version="0.01">
-> >    <!--Source in git at: https://github.com/fubar2/toolfactory-->
-> >    <!--Created by planemo@galaxyproject.org at 07/04/2021 14:55:09 using the Galaxy Tool Factory.-->
-> >    <description>test repeats</description>
-> >    <expand macro="requirements"/>
-> >    <stdio>
-> >      <exit_code range="1:" level="fatal"/>
-> >    </stdio>
-> >    <expand macro="stdio"/>
-> >    <version_command><![CDATA[echo "0.01"]]></version_command>
-> >    <command><![CDATA[python
-> >  $runme
-> >   #for $rep in $R_repeat:
-> >  --repeat $rep.repeat
-> >  #end for
-> >  >
-> >  $rep_out]]></command>
-> >    <configfiles>
-> >      <configfile name="runme"><![CDATA[
-> >  import argparse
-> >  parser = argparse.ArgumentParser()
-> >  a = parser.add_argument
-> >  a('--repeat',default=[],action="append")
-> >  args = parser.parse_args()
-> >  s = ' and '.join(args.repeat)
-> >  print(s)
-> >  ]]></configfile>
-> >    </configfiles>
-> >    <inputs>
-> >      <repeat name="R_repeat" title="Add as many Things to pass as needed">
-> >        <param name="repeat" type="text" value="add lots of repeats" label="Things to pass" help=""/>
+> ><tool name="repeats_demo" id="repeats_demo" version="2.00">
+> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
+> >  <!--Created by admin@galaxy.org at 29/05/2021 07:46:08 using the Galaxy Tool Factory.-->
+> >  <description>Repeated parameter demonstration</description>
+> >  <requirements/>
+> >  <stdio>
+> >    <exit_code range="1:" level="fatal"/>
+> >  </stdio>
+> >  <version_command><![CDATA[echo "2.00"]]></version_command>
+> >  <command><![CDATA[python
+> >$runme
+> >#for $rep in $R_mi:
+> >--mi "$rep.mi"
+> >#end for
+> >#for $rep in $R_mp:
+> >--mp "$rep.mp"
+> >#end for
+> >>
+> >$repeats_out]]></command>
+> >  <configfiles>
+> >    <configfile name="runme"><![CDATA[#raw
+> >
+> >import argparse
+> >parser = argparse.ArgumentParser()
+> >a = parser.add_argument
+> >a("--mi", action="append")
+> >a("--mp", action="append")
+> >args = parser.parse_args()
+> >if args.mi:
+> >   print(" file and ".join(args.mi))
+> >if args.mp:
+> >   print(" string and ".join(args.mp))
+> >if not (args.mi or args.mp):
+> >   print('Nothing was selected')
+> >
+> >#end raw]]></configfile>
+> >  </configfiles>
+> >  <inputs>
+> >    <repeat name="R_mi" title="Add as many Multiple input files from your history - as many as you like as needed">
+> >      <param name="mi" type="data" optional="false" label="Multiple input files from your history - as many as you like" help="" format="html,txt,xml" multiple="false"/>
+> >    </repeat>
+> >    <repeat name="R_mp" title="Add as many Multiple user supplied text strings - as many different ones as you like as needed">
+> >      <param name="mp" type="text" value="Multiple user supplied text strings - as many different ones as you like" label="Multiple user supplied text strings - as many different ones as you like" help=""/>
+> >    </repeat>
+> >  </inputs>
+> >  <outputs>
+> >    <data name="repeats_out" format="txt" label="repeats_out" hidden="false"/>
+> >  </outputs>
+> >  <tests>
+> >    <test>
+> >      <output name="repeats_out" value="repeats_out_sample" compare="diff" lines_diff="6"/>
+> >      <repeat name="R_mi">
+> >        <param name="mi" value="mi_sample"/>
 > >      </repeat>
-> >    </inputs>
-> >    <outputs>
-> >      <data name="rep_out" format="txt" label="rep_out" hidden="false"/>
-> >    </outputs>
-> >    <tests>
-> >      <test>
-> >        <output name="rep_out" value="rep_out_sample" compare="diff" lines_diff="0"/>
-> >        <repeat name="R_repeat">
-> >          <param name="repeat" value="add lots of repeats"/>
-> >        </repeat>
-> >      </test>
-> >    </tests>
-> >    <help><![CDATA[
+> >      <repeat name="R_mp">
+> >        <param name="mp" value="Multiple user supplied text strings - as many different ones as you like"/>
+> >      </repeat>
+> >    </test>
+> >  </tests>
+> >  <help><![CDATA[
 > >
-> >  **What it Does**
+> >**What it Does**
+> >
+> >Simple python Argparse sample to echo repeated user selections - how to use repeated inputs and user parameters.
+> >
+> >Unpredictable or messy "repeated" outputs can use a collection if they are not useful downstream but otherwise require manual wrapping - see the GTN advanced tutorial.
 > >
 > >
 > >
-> >  ------
+> >------
 > >
 > >
-> >  Script::
+> >Script::
 > >
-> >      import argparse
-> >      parser = argparse.ArgumentParser()
-> >      a = parser.add_argument
-> >      a('--repeat',default=[],action="append")
-> >      args = parser.parse_args()
-> >      s = ' and '.join(args.repeat)
-> >      print(s)
+> >    import argparse
+> >    parser = argparse.ArgumentParser()
+> >    a = parser.add_argument
+> >    a("--mi", action="append")
+> >    a("--mp", action="append")
+> >    args = parser.parse_args()
+> >    if args.mi:
+> >       print(" file and ".join(args.mi))
+> >    if args.mp:
+> >       print(" string and ".join(args.mp))
+> >    if not (args.mi or args.mp):
+> >       print('Nothing was selected')
 > >
-> >  ]]></help>
-> >    <citations>
-> >      <citation type="doi">10.1093/bioinformatics/bts573</citation>
-> >    </citations>
-> >  </tool>
+> >]]></help>
+> >  <citations>
+> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
+> >  </citations>
+> ></tool>
+> >
+> >
 > >```
+> >
 > > - The user sees the following form after adding 3 repeats for each of the two available items
 > >
-> > ![Form to configure an additional parameter as a select](../../images/toolfactory_repeats_sample_form.png)
+> > ![User can add as many repeats as they want for repeated input file and parameter values](../../images/toolfactory_repeats_sample_form.png)
 {: .details}
 
 #### ToolFactory `collection` outputs are handy for hiding dozens of miscellaneous tool outputs in a single history item
