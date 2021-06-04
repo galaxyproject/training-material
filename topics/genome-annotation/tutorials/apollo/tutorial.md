@@ -11,7 +11,7 @@ questions:
   - How to evaluate and visualize annotated genomic features?
   - How do I collaborate when doing genome annotation?
 objectives:
-  - Load genome into Galaxy
+  - Load a genome into Galaxy
   - View annotations in JBrowse
   - Learn how to load JBrowse data into Apollo
   - Learn how to manually refine genome annotations within Apollo
