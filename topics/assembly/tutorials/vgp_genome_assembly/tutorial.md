@@ -117,7 +117,7 @@ have fun!
 It comes first a description of the step: some background and some theory.
 Some image can be added there to support the theory explanation:
 
-![Alternative text](../../images/image_name "Legend of the image")
+![Alternative text](../../images/assembly_steps.png "Legend of the image")
 
 The idea is to keep the theory description before quite simple to focus more on the practical part.
 
