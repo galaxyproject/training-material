@@ -84,6 +84,16 @@ jobs:
         run: |
           python bin/mergeyaml.py --nondocker > /dev/null
 
+  lint-broken-symlinks:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Check for broken symlinks
+        run: |
+          bash bin/check-broken-symlinks.sh
+
   build-site:
     needs: setup
     runs-on: ubuntu-18.04
