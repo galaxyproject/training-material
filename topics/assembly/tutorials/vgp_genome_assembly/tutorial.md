@@ -92,13 +92,13 @@ have fun!
 >     -> `{{ page.title }}`):
 >
 >    ```
->    
+>
 >    ```
 >    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
 >
 >    ***TODO***: *Remove the useless files (if added)*
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}>    
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets
@@ -1659,7 +1659,7 @@ A big step can have several subsections or sub steps:
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [bellerophon](bellerophon) %} with the following parameters:
+> 1. {% tool [bellerophon](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0) %} with the following parameters:
 >
 >    ***TODO***: *Check parameter descriptions*
 >
