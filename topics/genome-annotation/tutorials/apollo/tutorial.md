@@ -517,7 +517,7 @@ Let's add a colleague to our newly created group.
 >
 > 4. Click on the **Add user** button
 >
-> ![](../../images/apollo/perm_add_user.png)
+> ![Screenshot of adding a user in the permapol interface](../../images/apollo/perm_add_user.png)
 >
 {: .hands_on}
 
