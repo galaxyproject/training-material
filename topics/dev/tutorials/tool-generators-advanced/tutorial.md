@@ -146,6 +146,7 @@ automated code generator in a tailored, readily deployed appliance.
 >    ```bash
 >    git clone https://github.com/fubar2/toolfactory-galaxy-server
 >    cd toolfactory-galaxy-server/compose
+>    mkdir export
 >    docker-compose pull
 >    docker-compose up
 >    ```
@@ -155,6 +156,7 @@ automated code generator in a tailored, readily deployed appliance.
 >    > wget https://github.com/fubar2/toolfactory-galaxy-server/archive/refs/heads/main.zip
 >    > unzip main.zip
 >    > cd toolfactory-galaxy-server-main/compose
+>    > mkdir export
 >    > docker-compose pull
 >    > docker-compose up
 >    > ```
@@ -162,8 +164,8 @@ automated code generator in a tailored, readily deployed appliance.
 >
 >    > ### {% icon tip %} Appliance tips
 >    >
->    >  - `pull` is only needed the first time, or if there is a newer version available of the base `docker-galaxy-stable` images or of the toolfactory-configurator.
->    >  - Add `-d` at the end of the `docker-compose` command to detach the terminal so you can keep working - but only after watching the process the first time.
+>    >  - `docker-compose pull` and making the local export directory *are only needed the first time*.
+>    >  - Add `-d` at the end of the `docker-compose up` command to detach the terminal so you can keep working - but only after watching the process the first time.
 >    >      - It is important to wait until the server stops sending log messages before you first log in. That means everything is ready. The first startup is very complex and takes time.
 >    >  - For the first time start, watching the startup process logs reveals a lot of interesting activity.
 >    >      - You will learn a lot about how a Galaxy server works and see when the Appliance is ready to use.
@@ -189,8 +191,9 @@ automated code generator in a tailored, readily deployed appliance.
 >
 >    > ### {% icon tip %} Tip: Demonstration tools are the functional documentation
 >    >
->    > - At first login you will find the demonstration history ready to explore if you waited for all the Conda activity to die down
->    > - It takes a minute or two to import because the dependencies for the ToolFactory must first be installed.
+>    > - At first login you will find the demonstration history ready to explore if you waited for all the first run installation activity to die down
+>    > - First run startup takes about 5 minutes. Subsequent starts take less than a minute.
+>    > - First planemo_test run takes about 5 minutes - subsequently more like 1 minute depending on Conda dependency install time
 >    > - Check the histories if a different one appears - two are loaded and there seems some randomness about which appears at login.
 >    > - If it's not there, you can import it manually from Zenodo as described in the Welcome page text.
 >    > - To explore an example, open the toolshed XML history item by clicking on the name, and select the {% icon galaxy-refresh %} `rerun` button from the expanded view
@@ -219,7 +222,7 @@ automated code generator in a tailored, readily deployed appliance.
 > ## Generating new tools - what happens when you press `execute` on a valid ToolFactory form?
 >
 > - The form is processed and a new tool generated.
-> - The new tool is installed to the Appliance.
+> - The new tool is installed to the Appliance in the `ToolFactory Generated Tools` tool menu
 >    - The tool generation process takes a few seconds.
 >    - The `Home` or `Analysis` tab should be selected so the screen is refreshed after building.
 >         - Otherwise the new tool menu will not be loaded so the newly generated tool will not be there

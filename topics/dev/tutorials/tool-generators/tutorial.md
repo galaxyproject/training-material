@@ -370,6 +370,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >    > wget https://github.com/fubar2/toolfactory-galaxy-server/archive/refs/heads/main.zip
 >    > unzip main.zip
 >    > cd toolfactory-galaxy-server-main/compose
+>    > mkdir export
 >    > docker-compose pull
 >    > docker-compose up
 >    > ```
@@ -377,18 +378,17 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >
 >    > ### {% icon tip %} Appliance tips
 >    >
->    >  - First time start takes 5-10 minutes.
+>    >  - First time start takes 5-10 minutes after the pull completes.
 >    >      - Watching the first startup process activity log is highly recommended.
->    >      - It exposes the layers that make a Galaxy server work.
->    >      - They show when the Appliance is ready to use, when all Conda activity ceases.
 >    >      - Subsequent starts will be much faster.
 >    >  - The docker containers may not fit or run well on an underpowered machine.
 >    >      - Multiple CPU cores, 8GB of RAM and fast disk are needed for an enjoyable appliance.
 >    >  - This Appliance is recommended for use *only as a private disposable desktop development environment*.
 >    >    - The Appliance keeps no backup of any work.
+>    >    - The `export` directory has most of the changeable parts of the Appliance.
 >    >    - The user can backup the export directory if desired.
->    >    - A professionally managed service is a much safer bet for preserving real research.
->    >    - This is disposable if development goes awry.
+>    >    - A professionally managed Galaxy server is a much safer bet for preserving real research.
+>    >    - The Appliance is disposable if development goes awry.
 >    >  - Even then, secure your Appliance against potential miscreants on the local or public internet.
 >    >     - Change your admin password
 >   {: .tip}
