@@ -20,7 +20,6 @@ key_points:
 contributors:
 - pvanheus
 - mudiboevans
-- asimeng
 
 ---
 
