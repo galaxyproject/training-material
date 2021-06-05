@@ -84,7 +84,7 @@ have fun!
 
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Data upload 
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
@@ -111,14 +111,17 @@ have fun!
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-> 5. Add to each database a tag corresponding to ...
+> 5. Add to each database a tag corresponding to the sample ID
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
-> 6. Convert the FASTQ datasets to a List Paired collection.
+> 6. Convert the FASTQ datasets to a [List Paired collection](topics/galaxy-interface/tutorials/collections/tutorial.html).
 >
 {: .hands_on}
 
+{% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/rbu.md %}
+
+{% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/fastp.md %}
 
 # Title of the section usually corresponding to a big step in the analysis
 
