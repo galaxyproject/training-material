@@ -4,7 +4,7 @@
 > Possible changes to file ``lib/galaxy/model/mapping.py``:
 > 
 > ```diff
-> index 5aaef76a03..3245355720 100644
+> index 5aaef76a03..0fdba0e4b7 100644
 > --- a/lib/galaxy/model/mapping.py
 > +++ b/lib/galaxy/model/mapping.py
 > @@ -1583,6 +1583,12 @@ model.UserPreference.table = Table(
@@ -28,13 +28,12 @@
 >  mapper_registry.map_imperatively(model.UserAction, model.UserAction.table, properties=dict(
 >      # user=relation( model.User.mapper )
 >      user=relation(model.User)
-> @@ -1928,6 +1935,9 @@ mapper_registry.map_imperatively(model.User, model.User.table, properties=dict(
+> @@ -1928,6 +1935,8 @@ mapper_registry.map_imperatively(model.User, model.User.table, properties=dict(
 >      _preferences=relation(model.UserPreference,
 >          backref="user",
 >          collection_class=attribute_mapped_collection('name')),
 > +    favorite_extensions=relation(model.UserFavoriteExtension,
-> +        backref="user"
-> +    ),
+> +        backref="user"),
 >      # addresses=relation( UserAddress,
 >      #     primaryjoin=( User.table.c.id == UserAddress.table.c.user_id ) ),
 >      values=relation(model.FormValues,

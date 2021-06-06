@@ -1,4 +1,4 @@
-From 64a67939c97c6a08999ffdcbe057f08e8b6aef3d Mon Sep 17 00:00:00 2001
+From e225e715232182a312682fc202d3432437654e9d Mon Sep 17 00:00:00 2001
 From: John Chilton <jmchilton@gmail.com>
 Date: Tue, 27 Apr 2021 17:23:52 -0400
 Subject: [PATCH] Add user favorite extensions.
@@ -11,12 +11,12 @@ Subject: [PATCH] Add user favorite extensions.
  client/src/layout/menu.js                     |  5 +
  lib/galaxy/managers/users.py                  | 17 ++++
  lib/galaxy/model/__init__.py                  |  5 +
- lib/galaxy/model/mapping.py                   | 10 ++
+ lib/galaxy/model/mapping.py                   |  9 ++
  .../0177_add_user_favorite_extensions.py      | 37 +++++++
- .../webapps/galaxy/api/user_favorites.py      | 74 ++++++++++++++
+ .../webapps/galaxy/api/user_favorites.py      | 66 +++++++++++++
  lib/galaxy/webapps/galaxy/buildapp.py         |  1 +
  lib/galaxy_test/api/test_users.py             | 27 ++++++
- 12 files changed, 362 insertions(+)
+ 12 files changed, 353 insertions(+)
  create mode 100644 client/src/components/User/FavoriteExtensions/List.test.js
  create mode 100644 client/src/components/User/FavoriteExtensions/List.vue
  create mode 100644 client/src/components/User/FavoriteExtensions/index.js
@@ -313,7 +313,7 @@ index 2c0b8a4dc4..69a74b0ad2 100644
      def __init__(self, id=None, create_time=None, user_id=None, session_id=None, action=None, params=None, context=None):
          self.id = id
 diff --git a/lib/galaxy/model/mapping.py b/lib/galaxy/model/mapping.py
-index 5aaef76a03..3245355720 100644
+index 5aaef76a03..0fdba0e4b7 100644
 --- a/lib/galaxy/model/mapping.py
 +++ b/lib/galaxy/model/mapping.py
 @@ -1583,6 +1583,12 @@ model.UserPreference.table = Table(
@@ -337,19 +337,18 @@ index 5aaef76a03..3245355720 100644
  mapper_registry.map_imperatively(model.UserAction, model.UserAction.table, properties=dict(
      # user=relation( model.User.mapper )
      user=relation(model.User)
-@@ -1928,6 +1935,9 @@ mapper_registry.map_imperatively(model.User, model.User.table, properties=dict(
+@@ -1928,6 +1935,8 @@ mapper_registry.map_imperatively(model.User, model.User.table, properties=dict(
      _preferences=relation(model.UserPreference,
          backref="user",
          collection_class=attribute_mapped_collection('name')),
 +    favorite_extensions=relation(model.UserFavoriteExtension,
-+        backref="user"
-+    ),
++        backref="user"),
      # addresses=relation( UserAddress,
      #     primaryjoin=( User.table.c.id == UserAddress.table.c.user_id ) ),
      values=relation(model.FormValues,
 diff --git a/lib/galaxy/model/migrate/versions/0177_add_user_favorite_extensions.py b/lib/galaxy/model/migrate/versions/0177_add_user_favorite_extensions.py
 new file mode 100644
-index 0000000000..c9f3715ac4
+index 0000000000..e0d1a4dded
 --- /dev/null
 +++ b/lib/galaxy/model/migrate/versions/0177_add_user_favorite_extensions.py
 @@ -0,0 +1,37 @@
@@ -357,19 +356,19 @@ index 0000000000..c9f3715ac4
 +Migration script to add the user_favorite_extension table.
 +"""
 +
-+import datetime
 +import logging
 +
-+from sqlalchemy import Column, DateTime, ForeignKey, Integer, MetaData, Table, Text
++from sqlalchemy import Column, ForeignKey, Integer, MetaData, Table, Text
 +
-+now = datetime.datetime.utcnow
 +log = logging.getLogger(__name__)
 +metadata = MetaData()
 +
-+APIKeys_table = Table("user_favorite_extension", metadata,
-+                      Column("id", Integer, primary_key=True),
-+                      Column("user_id", Integer, ForeignKey("galaxy_user.id"), index=True),
-+                      Column("value", Text, index=True, unique=True))
++UserFavoriteExtension_table = Table(
++    "user_favorite_extension", metadata,
++    Column("id", Integer, primary_key=True),
++    Column("user_id", Integer, ForeignKey("galaxy_user.id"), index=True),
++    Column("value", Text, index=True, unique=True)
++)
 +
 +
 +def upgrade(migrate_engine):
@@ -377,7 +376,7 @@ index 0000000000..c9f3715ac4
 +    print(__doc__)
 +    metadata.reflect()
 +    try:
-+        APIKeys_table.create()
++        UserFavoriteExtension_table.create()
 +    except Exception:
 +        log.exception("Creating user_favorite_extension table failed.")
 +
@@ -387,34 +386,26 @@ index 0000000000..c9f3715ac4
 +    # Load existing tables
 +    metadata.reflect()
 +    try:
-+        APIKeys_table.drop()
++        UserFavoriteExtension_table.drop()
 +    except Exception:
 +        log.exception("Dropping user_favorite_extension table failed.")
 diff --git a/lib/galaxy/webapps/galaxy/api/user_favorites.py b/lib/galaxy/webapps/galaxy/api/user_favorites.py
 new file mode 100644
-index 0000000000..ff01fb2db5
+index 0000000000..3587a9056e
 --- /dev/null
 +++ b/lib/galaxy/webapps/galaxy/api/user_favorites.py
-@@ -0,0 +1,74 @@
+@@ -0,0 +1,66 @@
 +"""
 +API operations allowing clients to determine datatype supported by Galaxy.
 +"""
 +import logging
-+from typing import (
-+    Dict,
-+    List,
-+    Optional,
-+    Union,
-+)
++from typing import List
 +
-+from fastapi import Path, Query
++from fastapi import Path
 +
 +from galaxy.managers.context import ProvidesUserContext
 +from galaxy.managers.users import UserManager
-+from galaxy.schema.fields import EncodedDatabaseIdField
-+from galaxy.util import asbool
 +from . import (
-+    BaseGalaxyAPIController,
 +    depends,
 +    DependsOnTrans,
 +    Router,
@@ -454,7 +445,7 @@ index 0000000000..ff01fb2db5
 +    )
 +    def create(
 +        self,
-+        extension: str=ExtensionPath,
++        extension: str = ExtensionPath,
 +        trans: ProvidesUserContext = DependsOnTrans,
 +    ) -> str:
 +        self.user_manager.add_favorite_extension(trans.user, extension)
@@ -466,7 +457,7 @@ index 0000000000..ff01fb2db5
 +    )
 +    def delete(
 +        self,
-+        extension: str=ExtensionPath,
++        extension: str = ExtensionPath,
 +        trans: ProvidesUserContext = DependsOnTrans,
 +    ) -> str:
 +        self.user_manager.delete_favorite_extension(trans.user, extension)

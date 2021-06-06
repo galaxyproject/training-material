@@ -5,29 +5,21 @@
 > 
 > ```diff
 > new file mode 100644
-> index 0000000000..ff01fb2db5
+> index 0000000000..3587a9056e
 > --- /dev/null
 > +++ b/lib/galaxy/webapps/galaxy/api/user_favorites.py
-> @@ -0,0 +1,74 @@
+> @@ -0,0 +1,66 @@
 > +"""
 > +API operations allowing clients to determine datatype supported by Galaxy.
 > +"""
 > +import logging
-> +from typing import (
-> +    Dict,
-> +    List,
-> +    Optional,
-> +    Union,
-> +)
+> +from typing import List
 > +
-> +from fastapi import Path, Query
+> +from fastapi import Path
 > +
 > +from galaxy.managers.context import ProvidesUserContext
 > +from galaxy.managers.users import UserManager
-> +from galaxy.schema.fields import EncodedDatabaseIdField
-> +from galaxy.util import asbool
 > +from . import (
-> +    BaseGalaxyAPIController,
 > +    depends,
 > +    DependsOnTrans,
 > +    Router,
@@ -67,7 +59,7 @@
 > +    )
 > +    def create(
 > +        self,
-> +        extension: str=ExtensionPath,
+> +        extension: str = ExtensionPath,
 > +        trans: ProvidesUserContext = DependsOnTrans,
 > +    ) -> str:
 > +        self.user_manager.add_favorite_extension(trans.user, extension)
@@ -79,7 +71,7 @@
 > +    )
 > +    def delete(
 > +        self,
-> +        extension: str=ExtensionPath,
+> +        extension: str = ExtensionPath,
 > +        trans: ProvidesUserContext = DependsOnTrans,
 > +    ) -> str:
 > +        self.user_manager.delete_favorite_extension(trans.user, extension)
