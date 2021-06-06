@@ -31,19 +31,19 @@ requirements:
 
 This tutorial walks you through an extension to Galaxy and how to contribute back to the core project.
 
-To setup the proposed extension imagine you're running a specialized Galaxy server and each of your users only use a few of Galaxy datatypes. You'd like to tailor the UI experience by allowing user's of Galaxy to select their favorite extensions for additional filtering in downstream applications, UI extensions, etc..
+To setup the proposed extension imagine you're running a specialized Galaxy server and each of your users only use a few of Galaxy datatypes. You'd like to tailor the UI experience by allowing users of Galaxy to select their favorite extensions for additional filtering in downstream applications, UI extensions, etc..
 
-Like many extensions to Galaxy, the proposed change requires persistent state. Galaxy stores most persistent state in its relational database. The Python layer that defines Galaxy data model is setup by defining SQL Alchemy models.
+Like many extensions to Galaxy, the proposed change requires persistent state. Galaxy stores most persistent state in a relational database. The Python layer that defines Galaxy data model is setup by defining SQLAlchemy models.
 
-The proposed extension could be implemented several different ways on Galaxy's backend and we will choose one for this example for its simplicity not for its correctness or cleverness, because our purpose here to demonstrate modifying and extending various layers of Galaxy.
+The proposed extension could be implemented in several different ways on Galaxy's backend. We will choose one for this example for its simplicity, not for its correctness or cleverness, because our purpose here is to demonstrate modifying and extending various layers of Galaxy.
 
-With simplicity in mind, we will implement our proposed extension to Galaxy by adding a single new table to Galaxy's data model called ``user_favorite_extension``. The concept of a favorite extension will be represented by a one-to-many relationship from the table that stores Galaxy's user records to this new table. The extension itself that will be favorited will be stored as a ``Text`` field in this new table. This table will also need to include a integer primary key named ``id`` to follow the example set by the rest of the Galaxy data model.
+With simplicity in mind, we will implement our proposed extension to Galaxy by adding a single new table to Galaxy's data model called ``user_favorite_extension``. The concept of a favorite extension will be represented by a one-to-many relationship from the table that stores Galaxy's user records to this new table. The extension itself that will be favorited will be stored as a ``Text`` field in this new table. This table will also need to include an integer primary key named ``id`` to follow the example set by the rest of the Galaxy data model.
 
 The relational database tables consumed by Galaxy are defined in ``lib/galaxy/model/mapping.py``.
 
 > ### {% icon question %} Questions about Mapping
 >
-> 1. What should the SQL Alchemy model named corresponding to the table ``user_favorite_extension`` based on other examples in the file.
+> 1. What should be the SQLAlchemy model named corresponding to the table ``user_favorite_extension`` based on other examples in the file?
 > 2. What table stores Galaxy's user records?
 > 3. What is another simple table with a relationship with the Galaxy's user table?
 >
@@ -54,7 +54,7 @@ The relational database tables consumed by Galaxy are defined in ``lib/galaxy/mo
 > {: .solution }
 {: .question }
 
-Implement the required changes ``mapping.py`` to add a mapping for
+Implement the required changes in ``mapping.py`` to add a mapping for
 the proposed ``user_favorite_extension`` table.
 
 {% include topics/dev/tutorials/core-contributing/mapping.py_diff.md %}
@@ -69,15 +69,15 @@ called ``UserFavoriteExtension`` as described above.
 
 There is one last database issue to consider before moving on to considering the API.
 Each successive release of Galaxy requires recipes for how to migrate old database schemes
-to updated ones. These recipes are called versions and currently implemented using SQL
-Alchemy migrate. These versions are stored in ``lib/galaxy/model/migrate``.
+to updated ones. These recipes are called versions and are currently implemented using SQLAlchemy
+ Migrate. These versions are stored in ``lib/galaxy/model/migrate``.
 
-Each of these versions is prefixed with a number 4 digit (e.g. ``0125``) to specify the linear
+Each of these versions is prefixed with a 4-digit number (e.g. ``0125``) to specify the linear
 order these migrations should be applied in.
 
-We've devloped a lot of abstractions around the underlying migration library we use, so it
+We've developed a lot of abstractions around the underlying migration library we use, so it
 is probably better to find existing examples inside of Galaxy for writing migrations than
-consulting the SQL Alchemy Migrate documentation.
+consulting the SQLAlchemy Migrate documentation.
 
 A good example for the table we need to construct for this example is again based on the existing
 user preferences concept in Galaxy.
@@ -97,17 +97,17 @@ Add a new file to ``lib/galaxy/model/migrate/versions/`` prefixed appropriately.
 {% include topics/dev/tutorials/core-contributing/0177_add_user_favorite_extensions.py_diff.md %}
 
 With the database model in place, we need to start adding the rest of
-the Python plubming required to implement this feature. We will do
+the Python plumbing required to implement this feature. We will do
 this with a test-driven approach and start by implementing an API test
 that exercises operations we would like to have available for favorite
 extensions.
 
 We will stick a test case for user extensions in
 ``lib/galaxy_test/api/test_users.py`` which is a relatively
-straight-forward file that contains tests for other user API
+straightforward file that contains tests for other user API
 endpoints.
 
-Various user centered operations have endpoints under
+Various user-centered operations have endpoints under
 ``api/user/<user_id>`` and ``api/user/current`` is sometimes
 substituable as the current user.
 
@@ -165,18 +165,18 @@ with ``add_favorite_extension`` before finishing with ``delete_favorite_extensio
 ./run_tests.sh -api lib/galaxy_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
 ```
 
-Once the API test is done, it is time to build a user interface for this addition to Galaxy. Lets get
+Once the API test is done, it is time to build a user interface for this addition to Galaxy. Let's get
 some of the plumbing out of the way right away. We'd like to have a URL for viewing the current user's
 favorite extensions in the UI. This URL needs to be registered as a client route in ``lib/galaxy/webapps/galaxy/buildapp.py``.
 
-Add ``/user/favorite/extensions`` as a route for the client in ``buildapp.py.
+Add ``/user/favorite/extensions`` as a route for the client in ``buildapp.py``.
 
 {% include topics/dev/tutorials/core-contributing/buildapp.py_diff.md %}
 
 Let's add the ability to navigate to this URL and future component to
 the "User" menu in the Galaxy masthead. The file ``client/src/layout/menu.js``
 contains the "model" data describing the masthead. Add a link to the route
-we described above to ``menu.js`` with a entry titled "Favorite Extensions".
+we described above to ``menu.js`` with an entry titled "Favorite Extensions".
 
 {% include topics/dev/tutorials/core-contributing/menu.js_diff.md %}
 
@@ -201,7 +201,7 @@ extensions based on it.
 
 {% include topics/dev/tutorials/core-contributing/List.test.js_diff.md %}
 
-Sketching out this unit test would take a lot of practice, this a step
+Sketching out this unit test would take a lot of practice, this is a step
 that might be best done just by copying the file over. Make sure the
 individual components make sense before continuing though.
 
