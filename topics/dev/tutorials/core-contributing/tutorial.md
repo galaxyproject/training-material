@@ -114,7 +114,7 @@ substituable as the current user.
 We will keep things very simple and only implement this functionality
 for the current user.
 
-We will implement three very API endpoints.
+We will implement three simple API endpoints.
 
 - ``GET <galaxy_root_url>/api/users/current/favorites/extensions``. This should return a list of favorited extensions for the current user.
 - ``POST <galaxy_root_url>/api/users/current/favorites/extensions/<extension>``. This should mark an extension as a favorite for the current user.
@@ -180,7 +180,7 @@ we described above to ``menu.js`` with an entry titled "Favorite Extensions".
 
 {% include topics/dev/tutorials/core-contributing/menu.js_diff.md %}
 
-The next piece of this plumbing is to respond to this route the
+The next piece of this plumbing is to respond to this route in the
 analysis router. The analysis router maps URLs to UI components to
 render.
 
