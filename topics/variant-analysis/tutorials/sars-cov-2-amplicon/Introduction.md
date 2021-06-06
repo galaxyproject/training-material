@@ -1,0 +1,3 @@
+## Introduction 
+> **Epidemiology**: Is the study of distribution and determinants of health-related outcomes in a particular population and application of of this study to control health problems. 
+> **Genomic epidemiology**: Is the  use of pathogen genomic data to determine the distribution and spread of an infectious diseases in a specified population and application of this information in the control of health problems. In the context of SARS-CoV-2 pandemic, the virus genome can be sequenced and this data used to monitor the emergence of important new variants, monitor the trends after an intervention. 
