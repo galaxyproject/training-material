@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} lib/galaxy_test/api/test_users.py
+> ### {% icon solution %} ``lib/galaxy_test/api/test_users.py``
 > 
 > Possible changes to file ``lib/galaxy_test/api/test_users.py``:
 > 
@@ -45,4 +45,4 @@
 > 2.30.1 (Apple Git-130)
 > 
 > ```
-{. :solution }
+{: .solution }

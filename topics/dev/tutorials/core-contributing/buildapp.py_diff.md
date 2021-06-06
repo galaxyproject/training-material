@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} lib/galaxy/webapps/galaxy/buildapp.py
+> ### {% icon solution %} ``lib/galaxy/webapps/galaxy/buildapp.py``
 > 
 > Possible changes to file ``lib/galaxy/webapps/galaxy/buildapp.py``:
 > 
@@ -16,4 +16,4 @@
 >      webapp.add_client_route('/visualizations/edit')
 >      webapp.add_client_route('/visualizations/sharing')
 > ```
-{. :solution }
+{: .solution }

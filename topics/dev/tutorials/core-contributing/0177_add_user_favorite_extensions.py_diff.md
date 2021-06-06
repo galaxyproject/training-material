@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} lib/galaxy/model/migrate/versions/0177_add_user_favorite_extensions.py
+> ### {% icon solution %} ``lib/galaxy/model/migrate/versions/0177_add_user_favorite_extensions.py``
 > 
 > Possible changes to file ``lib/galaxy/model/migrate/versions/0177_add_user_favorite_extensions.py``:
 > 
@@ -47,4 +47,4 @@
 > +    except Exception:
 > +        log.exception("Dropping user_favorite_extension table failed.")
 > ```
-{. :solution }
+{: .solution }

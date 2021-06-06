@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} lib/galaxy/managers/users.py
+> ### {% icon solution %} ``lib/galaxy/managers/users.py``
 > 
 > Possible changes to file ``lib/galaxy/managers/users.py``:
 > 
@@ -32,4 +32,4 @@
 >          user.active = True
 >          self.session().add(user)
 > ```
-{. :solution }
+{: .solution }

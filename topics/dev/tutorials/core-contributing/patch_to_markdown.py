@@ -19,14 +19,14 @@ def main():
         with open(f"{diff_of_basename}_diff.md", "w") as f:
             indented_block = "\n".join([f"> {line}" for line in diff_block.splitlines()])
             f.write(f"""
-> ### {{% icon solution %}} {diff_of_filename}
+> ### {{% icon solution %}} ``{diff_of_filename}``
 > 
 > Possible changes to file ``{diff_of_filename}``:
 > 
 > ```diff
 {indented_block}
 > ```
-{{. :solution }}
+{{: .solution }}
 """)
 
     for line in contents.splitlines():

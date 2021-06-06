@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} client/src/entry/analysis/AnalysisRouter.js
+> ### {% icon solution %} ``client/src/entry/analysis/AnalysisRouter.js``
 > 
 > Possible changes to file ``client/src/entry/analysis/AnalysisRouter.js``:
 > 
@@ -35,4 +35,4 @@
 >              this._display_vue_helper(InteractiveTools);
 >          },
 > ```
-{. :solution }
+{: .solution }

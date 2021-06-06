@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} lib/galaxy/model/mapping.py
+> ### {% icon solution %} ``lib/galaxy/model/mapping.py``
 > 
 > Possible changes to file ``lib/galaxy/model/mapping.py``:
 > 
@@ -38,4 +38,4 @@
 >      #     primaryjoin=( User.table.c.id == UserAddress.table.c.user_id ) ),
 >      values=relation(model.FormValues,
 > ```
-{. :solution }
+{: .solution }

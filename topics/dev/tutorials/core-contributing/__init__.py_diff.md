@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} lib/galaxy/model/__init__.py
+> ### {% icon solution %} ``lib/galaxy/model/__init__.py``
 > 
 > Possible changes to file ``lib/galaxy/model/__init__.py``:
 > 
@@ -20,4 +20,4 @@
 >      def __init__(self, id=None, create_time=None, user_id=None, session_id=None, action=None, params=None, context=None):
 >          self.id = id
 > ```
-{. :solution }
+{: .solution }

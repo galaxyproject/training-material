@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} client/src/layout/menu.js
+> ### {% icon solution %} ``client/src/layout/menu.js``
 > 
 > Possible changes to file ``client/src/layout/menu.js``:
 > 
@@ -20,4 +20,4 @@
 >          };
 >          if (Galaxy.config.visualizations_visible) {
 > ```
-{. :solution }
+{: .solution }

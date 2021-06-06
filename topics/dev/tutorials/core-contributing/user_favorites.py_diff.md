@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} lib/galaxy/webapps/galaxy/api/user_favorites.py
+> ### {% icon solution %} ``lib/galaxy/webapps/galaxy/api/user_favorites.py``
 > 
 > Possible changes to file ``lib/galaxy/webapps/galaxy/api/user_favorites.py``:
 > 
@@ -76,4 +76,4 @@
 > +    ) -> str:
 > +        self.user_manager.delete_favorite_extension(trans.user, extension)
 > ```
-{. :solution }
+{: .solution }

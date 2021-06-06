@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} client/src/components/User/FavoriteExtensions/List.vue
+> ### {% icon solution %} ``client/src/components/User/FavoriteExtensions/List.vue``
 > 
 > Possible changes to file ``client/src/components/User/FavoriteExtensions/List.vue``:
 > 
@@ -92,4 +92,4 @@
 > +};
 > +</script>
 > ```
-{. :solution }
+{: .solution }
