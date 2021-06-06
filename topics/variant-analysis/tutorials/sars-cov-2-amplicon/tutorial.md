@@ -122,6 +122,10 @@ have fun!
 
 {% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/fastp.md %}
 
+{% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/bwa_mem.md %}
+
+{% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/samtools_stats.md %}
+
 # Title of the section usually corresponding to a big step in the analysis
 
 It comes first a description of the step: some background and some theory.
