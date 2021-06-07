@@ -27,7 +27,7 @@ requirements:
 contributors:
 - simonbray
 - wm75
-level: Intermediate
+level: Advanced
 subtopic: analyse
 ---
 
@@ -36,7 +36,7 @@ subtopic: analyse
 
 Galaxy is well-known as a web-based data analysis platform which provides a graphical interface for executing common bioinformatics tools in a reproducible manner. However, Galaxy is not just a user-friendly interface for executing one tool at a time. It provides two very useful features which allow scaling data analyses up to a high-throughput level: dataset collections and workflows.
 
-* Dataset collections represents groups of similar datasets. This doesn't sound especially exciting, but it gets interesting when a tool is executed using a collection as input, where a single dataset would normally be created. In this case, Galaxy creates a new job for every dataset contained within the collection, and stores the tool outputs in a new collection (or collections, if there are multiple outputs) with the same size and structure as the input. This process is referred to as 'mapping over' the input collection.
+* Dataset collections represent groups of similar datasets. This doesn't sound especially exciting, but it gets interesting when a tool is executed using a collection as input, where a single dataset would normally be created. In this case, Galaxy creates a new job for every dataset contained within the collection, and stores the tool outputs in a new collection (or collections, if there are multiple outputs) with the same size and structure as the input. This process is referred to as 'mapping over' the input collection.
 
 * Workflows are pipelines made up of multiple Galaxy tools executed in sequence. When a workflow is executed, Galaxy schedules all the jobs which need to be run to produce the workflow outputs. They will remain scheduled (represented by the familiar grey color in the Galaxy history) until the required inputs become available. After they complete, they will make their outputs available, which allows the next set of jobs to begin.
 
@@ -70,9 +70,28 @@ Workflows and data for this tutorial are hosted on [GitHub](https://github.com/u
 > > ### {% icon code-in %} Input: git clone
 > > ```shell
 > > $ git clone https://github.com/usegalaxy-eu/workflow-automation-tutorial.git
-> > $ cd workflow-automation-tutorial
 > > ```
 > {: .code-in}
+>
+> Next, step into the cloned folder and take a look around.
+>
+> > ### {% icon code-in %} Input
+> > ```shell
+> > $ cd workflow-automation-tutorial
+> > $ ls
+> > ```
+> {: .code-in}
+>
+> > ### {% icon code-out %} Folder contents
+> > ```
+> > example  LICENSE  pangolin  README.md
+> > ```
+> {: .code-out}
+>
+> Of the two subfolders, `example/` contains just a toy workflow used in the following to guide you through the basics of running workflows from the command line.
+>
+> The `pangolin/` folder holds the workflow and other material you will use in the second part of the tutorial, in which you will be setting up an automated system for assigning batches of SARS-CoV-2 variant data to viral lineages.
+>
 {: .hands_on}
 
 # A short guide to Planemo
@@ -87,11 +106,26 @@ For the purposes of this tutorial, we assume you have a recent version of Planem
 
 ## Get the workflow and prepare the job file
 
-For this section, we will use a very simple workflow consisting of two text manipulation tools chained together. Move to the `example/` directory with `cd example/`. Running `ls` will show you a single file, `tutorial.ga`, which contains the workflow.
+For this section, we will use a very simple workflow consisting of two text manipulation tools chained together. 
 
-### Preparing the job file
+> ### {% icon hands_on %} Hands-on: Step into and explore the example folder
+>
+> > ### {% icon code-in %} Input
+> > ```shell
+> > $ cd example
+> > $ ls
+> > ```
+> {: .code-in}
+>
+> > ### {% icon code-out %} Folder contents
+> > ```
+> > tutorial.ga
+> > ```
+> {: .code-out}
+>
+{: .hands_on}
 
-We now have the file which defines the workflow in JSON format, `tutorial.ga`; if we are confident we have a functional workflow, we don't need to worry about its contents or modify it. However, we need a second file, the so-called 'job file', which specifies the particular dataset and parameter inputs which should be used to execute the workflow. We can create a template for this file using the `planemo workflow_job_init` subcommand.
+The `tutorial.ga` file defines the workflow in JSON format; if we are confident we have a functional workflow, we don't need to worry about its contents or modify it. However, we need a second file, the so-called 'job file', which specifies the particular dataset and parameter inputs which should be used to execute the workflow. We can create a template for this file using the `planemo workflow_job_init` subcommand.
 
 > ### {% icon hands_on %} Hands-on: Creating the job file
 >
@@ -158,7 +192,7 @@ Now we have a simple workflow, we can run it using `planemo run`. At this point 
 >
 >    > ### {% icon code-in %} Input: planemo run
 >    > ```shell
->    > $ planemo run tutorial.ga tutorial-init-job.yml --galaxy_url SERVER_URL --galaxy_user_key YOUR_API_KEY --history_name "Test Planemo WF" --tags "name:planemo-tutorial"
+>    > $ planemo run tutorial.ga tutorial-init-job.yml --galaxy_url <SERVER_URL> --galaxy_user_key <YOUR_API_KEY> --history_name "Test Planemo WF" --tags "planemo-tutorial"
 >    > ```
 >    {:.code-in}
 >
@@ -168,7 +202,7 @@ Now we have a simple workflow, we can run it using `planemo run`. At this point 
 > 3. Run the `planemo run` subcommand with the `--no_wait` flag.
 >    > ### {% icon code-in %} Input: planemo run
 >    > ```shell
->    > $ planemo run tutorial.ga tutorial-init-job.yml --galaxy_url SERVER_URL --galaxy_user_key YOUR_API_KEY --history_name "Test Planemo WF with no_wait" --tags "name:planemo-tutorial" --no_wait
+>    > $ planemo run tutorial.ga tutorial-init-job.yml --galaxy_url <SERVER_URL> --galaxy_user_key <YOUR_API_KEY> --history_name "Test Planemo WF with no_wait" --tags "planemo-tutorial" --no_wait
 >    > ```
 >    > This time you should see that the `planemo run` command exits as soon as the two datasets have been uploaded and the workflow has been scheduled.
 >    {:.code-in}
@@ -183,7 +217,7 @@ Every object associated with Galaxy, including workflows, datasets and dataset c
 > ### {% icon hands_on %} Hands-on: Running our workflow using dataset and workflow IDs
 >
 > 1. Navigate to one of the histories to get dataset IDs for the input datasets. For each one:
->    1. Click on the `View details` (`i`) icon on the dataset in the history.
+>    1. Click on the {% icon galaxy-info %} *View details* icon on the dataset in the history.
 >    2. Under the heading `Dataset Information`, find the row `History Content API ID` and copy the hexadecimal ID next to it.
 > 2. Modify `tutorial-init-job.yml` to look like the following:
 >    > ```yaml
@@ -194,7 +228,7 @@ Every object associated with Galaxy, including workflows, datasets and dataset c
 >    > Dataset 2:
 >    >   class: File
 >    >   # path: dataset2.txt
->    >   galaxy_id: <ID OF DATASET 1>
+>    >   galaxy_id: <ID OF DATASET 2>
 >    > Number of lines: 3
 >    > ```
 > 3. Now we need to get the workflow ID:
@@ -205,7 +239,7 @@ Every object associated with Galaxy, including workflows, datasets and dataset c
 >
 >    > ### {% icon code-in %} Input: planemo run
 >    > ```shell
->    > $ planemo run <WORKFLOW ID> tutorial-init-job.yml --galaxy_url SERVER_URL --galaxy_user_key YOUR_API_KEY --history_name "Test Planemo WF with Planemo" --tags "name:planemo-tutorial" --no_wait
+>    > $ planemo run <WORKFLOW ID> tutorial-init-job.yml --galaxy_url <SERVER_URL> --galaxy_user_key <YOUR_API_KEY> --history_name "Test Planemo WF with Planemo" --tags "planemo-tutorial" --no_wait
 >    > ```
 >    {:.code-in}
 {: .hands_on}
@@ -219,7 +253,7 @@ Planemo provides a useful profile feature which can help simplify long commands.
 > 1. Create a Planemo profile with the following command:
 >    > ### {% icon code-in %} Input: planemo run
 >    > ```shell
->    > $ planemo profile_create planemo-tutorial --galaxy_url SERVER_URL --galaxy_user_key YOUR_API_KEY
+>    > $ planemo profile_create planemo-tutorial --galaxy_url <SERVER_URL> --galaxy_user_key <YOUR_API_KEY>
 >    > ```
 >    {:.code-in}
 >
@@ -232,136 +266,153 @@ Planemo provides a useful profile feature which can help simplify long commands.
 > 2. Now we can run our workflow yet again using the profile we have created:
 >    > ### {% icon code-in %} Input: planemo run
 >    > ```shell
->    > $ planemo run <WORKFLOW ID> tutorial-init-job.yml --profile planemo-tutorial --history_name "Test Planemo WF with profile" --tags "name:planemo-tutorial"
+>    > $ planemo run <WORKFLOW ID> tutorial-init-job.yml --profile planemo-tutorial --history_name "Test Planemo WF with profile" --tags "planemo-tutorial"
 >    > ```
 >    > This invokes the workflow with all the parameters specified in the profile `planemo-tutorial`.
 >    {:.code-in}
 {: .hands_on}
 
-# Scientific background
+# Automated runs of a workflow for SARS-CoV-2 lineage assignment
+
+## Scientific background
 
 <!-- tba from wm75 -->
 
 ...
 
-# Setting up the bot
+## Setting up the bot
 
 Now it's time to apply our knowledge of Planemo to the task of automating the lineage assignment workflow just described.
 
-We will start by running the workflow on the VCF files in the `batch1/` directory.
+> ### {% icon hands_on %} Hands-on: Step into and explore the pangolin folder
+>
+> > ### {% icon code-in %} Input
+> > ```shell
+> > $ cd ../pangolin
+> > $ ls
+> > ```
+> {: .code-in}
+>
+> > ### {% icon code-out %} Folder contents
+> > ```
+> > data  solutions  vcf2lineage.ga
+> > ```
+> {: .code-out}
+>
+{: .hands_on}
+
+The file `vcf2lineage.ga` defines the workflow just described, while the `data/` folder holds the batches of VCF files we would, ultimately want to run the workflow on. As a start, lets get the workflow running on the first batch of files in the `data/batch1/` subfolder.
 
 > ### {% icon hands_on %} Hands-on: An initial workflow run
 >
 > 1. Create a template job file for the `vcf2lineage.ga` workflow.
->
-> > ### {% icon details %} Solution
-> > We need to run `workflow_job_init` on the `vcf2lineage.ga` workflow.
-> >    > ### {% icon code-in %} Input: workflow_job_init
-> >    > ```shell
-> >    > $ planemo workflow_job_init vcf2lineage.ga -o vcf2lineage-job.yml
-> >    > # Now let's view the contents
-> >    > $ cat vcf2lineage-job.yml
-> >    > ```
-> >    {:.code-in}
-> >
-> >    > ### {% icon code-out %} Output: File contents
-> >    > ```yaml
-> >    > Reference genome:
-> >    >   class: File
-> >    >   path: todo_test_data_path.ext
-> >    > Variant calls:
-> >    >   class: Collection
-> >    >   collection_type: list
-> >    >   elements:
-> >    >   - class: File
-> >    >     identifier: todo_element_name
-> >    >     path: todo_test_data_path.ext
-> >    > min-AF for consensus variant: todo_param_value
-> >    > ```
-> >    >
-> >    > The job file contains three inputs: the `Reference genome`, a collection of VCF files (`Variant calls`) and a float parameter for the minimum allele frequency (`min-AF for consensus variant`). Later, we will need to specify each element of the collection under `elements` - currently there is just a single placeholder element.
-> >    {:.code-out}
-> {: .details}
+>    > ### {% icon details %} Solution
+>    > We need to run `workflow_job_init` on the `vcf2lineage.ga` workflow.
+>    > > ### {% icon code-in %} Input: workflow_job_init
+>    > > ```shell
+>    > > $ planemo workflow_job_init vcf2lineage.ga -o vcf2lineage-job.yml
+>    > > # Now let's view the contents
+>    > > $ cat vcf2lineage-job.yml
+>    > > ```
+>    > {: .code-in}
+>    >
+>    > > ### {% icon code-out %} Output: File contents
+>    > > ```yaml
+>    > > Reference genome:
+>    > >   class: File
+>    > >   path: todo_test_data_path.ext
+>    > > Variant calls:
+>    > >   class: Collection
+>    > >   collection_type: list
+>    > >   elements:
+>    > >   - class: File
+>    > >     identifier: todo_element_name
+>    > >     path: todo_test_data_path.ext
+>    > > min-AF for consensus variant: todo_param_value
+>    > > ```
+>    > >
+>    > > The job file contains three inputs: the `Reference genome`, a collection of VCF files (`Variant calls`) and a float parameter for the minimum allele frequency (`min-AF for consensus variant`). Later, we will need to specify each element of the collection under `elements` - currently there is just a single placeholder element.
+>    > {: .code-out}
+>    {: .details}
 >
 > 2. Replace the placeholder values: `Reference genome` should point to `data/NC_045512.2_reference_sequence.fasta`, `Variant calls` should contain all the VCF files in `data/batch1`, and `min-AF for consensus variant` should be set to `0.7`.
 >
-> > ### {% icon tip %} Hint: Creating the `Variant calls` collection
-> > This is the trickiest part and you should consider writing a script to solve it. The entry in the job file should look something like this at the end:
-> >
-> > ```yaml
-> > Variant calls:
-> >   class: Collection
-> >   collection_type: list
-> >   elements:
-> >   - class: File
-> >     identifier: ERR5879218
-> >     path: data/batch1/ERR5879218.vcf
-> >   - class: File
-> >     identifier: ERR5879219
-> >     path: data/batch1/ERR5879219.vcf
-> >   - class: File
-> >     ...
-> > ```
-> > There should be one entry under `elements` for each of the 312 files under `data/batch1`.
-> {: .tip}
+>    > ### {% icon tip %} Hint: Creating the `Variant calls` collection
+>    > This is the trickiest part and you should consider writing a script to solve it. The entry in the job file should look something like this at the end:
+>    >
+>    > ```yaml
+>    > Variant calls:
+>    >   class: Collection
+>    >   collection_type: list
+>    >   elements:
+>    >   - class: File
+>    >     identifier: ERR5879218
+>    >     path: data/batch1/ERR5879218.vcf
+>    >   - class: File
+>    >     identifier: ERR5879219
+>    >     path: data/batch1/ERR5879219.vcf
+>    >   - class: File
+>    >     ...
+>    > ```
+>    > There should be one entry under `elements` for each of the 312 files under `data/batch1`.
+>    {: .tip}
 >
-> > ### {% icon details %} Solution
-> > Adding the `Reference genome` dataset and `min-AF for consensus variant` parameter is straightforward. Modify the `vcf2lineage-job.yml` file and save it:
-> >
-> > ```yaml
-> > Reference genome:
-> >   class: File
-> >   path: NC_045512.2_reference_sequence.fasta
-> > Variant calls:
-> >   class: Collection
-> >   collection_type: list
-> >   elements:
-> >   - class: File
-> >     identifier: todo_element_name
-> >     path: todo_test_data_path.ext
-> > min-AF for consensus variant: 0.7
-> > ```
-> >
-> > To add entries for every element of the `Variant calling ` collection we should write a script. There are many possible solutions; here is an example:
-> > ```python
-> > import sys
-> > from glob import glob
-> > from pathlib import Path
-> >
-> > import yaml
-> >
-> > job_file_path = sys.argv[1]
-> > batch_directory = sys.argv[2]
-> >
-> > with open(job_file_path) as f:
-> >     job = yaml.load(f, Loader=yaml.CLoader)
-> >
-> > vcf_paths = glob(f'{batch_directory}/*.vcf')
-> > elements = [{'class': 'File', 'identifier': Path(vcf_path).stem, 'path': vcf_path} for vcf_path in vcf_paths]
-> > job['Variant calls']['elements'] = elements
-> > 
-> > with open(job_file_path, 'w') as f:
-> >     yaml.dump(job, f)
-> > ```
-> >
-> > Save this as `create_job_file.py` and run it with `python create_job_file.py vcf2lineage-job.yml data/batch1`. This has the effect of updating the `vcf2lineage-job.yml` with all the VCF files in the `data/batch1` directory.
-> {: .details}
+>    > ### {% icon details %} Solution
+>    > Adding the `Reference genome` dataset and `min-AF for consensus variant` parameter is straightforward. Modify the `vcf2lineage-job.yml` file and save it:
+>    >
+>    > ```yaml
+>    > Reference genome:
+>    >   class: File
+>    >   path: data/NC_045512.2_reference_sequence.fasta
+>    > Variant calls:
+>    >   class: Collection
+>    >   collection_type: list
+>    >   elements:
+>    >   - class: File
+>    >     identifier: todo_element_name
+>    >     path: todo_test_data_path.ext
+>    > min-AF for consensus variant: 0.7
+>    > ```
+>    >
+>    > To add entries for every element of the `Variant calling ` collection we should write a script. There are many possible solutions; here is an example:
+>    > ```python
+>    > import sys
+>    > from glob import glob
+>    > from pathlib import Path
+>    >
+>    > import yaml
+>    >
+>    > job_file_path = sys.argv[1]
+>    > batch_directory = sys.argv[2]
+>    >
+>    > with open(job_file_path) as f:
+>    >     job = yaml.load(f, Loader=yaml.CLoader)
+>    >
+>    > vcf_paths = glob(f'{batch_directory}/*.vcf')
+>    > elements = [{'class': 'File', 'identifier': Path(vcf_path).stem, 'path': vcf_path} for vcf_path in vcf_paths]
+>    > job['Variant calls']['elements'] = elements
+>    >
+>    > with open(job_file_path, 'w') as f:
+>    >     yaml.dump(job, f)
+>    > ```
+>    >
+>    > Save this as `create_job_file.py` and run it with `python create_job_file.py vcf2lineage-job.yml data/batch1`. This has the effect of updating the `vcf2lineage-job.yml` with all the VCF files in the `data/batch1` directory.
+>    {: .details}
 >
 > 3. Now that we have a complete job file, let's run the workflow.
-> > ### {% icon details %} Solution
-> > We need to run `workflow_job_init` on the `vcf2lineage.ga` workflow.
-> >    > ### {% icon code-in %} Input: workflow_job_init
-> >    > ```shell
-> >    > $ planemo run vcf2lineage.ga vcf2lineage-job.yml --profile planemo-tutorial --history_name "vcf2lineage test"
-> >    > ```
-> >    {:.code-in}
-> > You should see the new invocation in the Galaxy interface.
-> {: .details}
+>    > ### {% icon details %} Solution
+>    > > ### {% icon code-in %} Input: workflow_job_init
+>    > > ```shell
+>    > > $ planemo run vcf2lineage.ga vcf2lineage-job.yml --profile planemo-tutorial --history_name "vcf2lineage test"
+>    > > ```
+>    > {: .code-in}
+>    > You should see the new invocation in the Galaxy interface.
+>    {: .details}
 {: .hands_on}
 
 We have now performed a test invocation of the vcf2lineage workflow. It was already more challenging than the first example; for the first time, we needed to resort to writing a script to achieve a task, in this case the construction of the job file.
 
-The next step is to automate this process so we can run the workflow on each of the 10 `batch*/` directories in the `data/` directories. We can imagine that these are newly produced data released at regular intervals, which need to be analysed.
+The next step is to automate this process so we can run the workflow on each of the 10 `batch*/` directories in the `data/` folder. We can imagine that these are newly produced data released at regular intervals, which need to be analysed.
 
 > ### {% icon hands_on %} Hands-on: Automating vcf2lineage execution
 >
@@ -369,75 +420,74 @@ The next step is to automate this process so we can run the workflow on each of 
 >
 > 2. Now let's create a template job file `vcf2lineage-job-template.yml` which we can modify at each invocation as necessary. We can start with the output of `workflow_job_init` and add the `Reference genome` dataset ID and set `min-AF for consensus variant` to `0.7` again.
 >
-> > ### {% icon details %} Solution
-> > We need to run `workflow_job_init` on the `vcf2lineage.ga` workflow.
-> >    > ### {% icon code-in %} Input: Original output of workflow_job_init
-> >    > ```yaml
-> >    > Reference genome:
-> >    >   class: File
-> >    >   path: todo_test_data_path.ext
-> >    > Variant calls:
-> >    >   class: Collection
-> >    >   collection_type: list
-> >    >   elements:
-> >    >   - class: File
-> >    >     identifier: todo_element_name
-> >    >     path: todo_test_data_path.ext
-> >    > min-AF for consensus variant: todo_param_value
-> >    > ```
-> >    {:.code-in}
-> >
-> >    > ### {% icon code-out %} Output: Prepared `vcf2lineage-job-template.yml` file contents
-> >    > ```yaml
-> >    > Reference genome:
-> >    >   class: File
-> >    >   galaxy_id: '1234567890abcdef' # replace with the ID you got from your own server
-> >    > Variant calls:
-> >    >   class: Collection
-> >    >   collection_type: list
-> >    >   elements:
-> >    >   - class: File
-> >    >     identifier: todo_element_name
-> >    >     path: todo_test_data_path.ext
-> >    > min-AF for consensus variant: 0.7
-> >    > ```
-> >    {:.code-out}
-> > We can copy and modify this new `vcf2lineage-job-template.yml` file iteratively to invoke the workflow on each of the data batches.
-> {: .details}
+>    > ### {% icon details %} Solution
+>    > We need to run `workflow_job_init` on the `vcf2lineage.ga` workflow.
+>    > > ### {% icon code-in %} Input: Original output of workflow_job_init
+>    > > ```yaml
+>    > > Reference genome:
+>    > >   class: File
+>    > >   path: todo_test_data_path.ext
+>    > > Variant calls:
+>    > >   class: Collection
+>    > >   collection_type: list
+>    > >   elements:
+>    > >   - class: File
+>    > >     identifier: todo_element_name
+>    > >     path: todo_test_data_path.ext
+>    > > min-AF for consensus variant: todo_param_value
+>    > > ```
+>    > {:.code-in}
+>    >
+>    > > ### {% icon code-out %} Output: Prepared `vcf2lineage-job-template.yml` file contents
+>    > > ```yaml
+>    > > Reference genome:
+>    > >   class: File
+>    > >   galaxy_id: '1234567890abcdef' # replace with the ID you got from your own server
+>    > > Variant calls:
+>    > >   class: Collection
+>    > >   collection_type: list
+>    > >   elements:
+>    > >   - class: File
+>    > >     identifier: todo_element_name
+>    > >     path: todo_test_data_path.ext
+>    > > min-AF for consensus variant: 0.7
+>    > > ```
+>    > {:.code-out}
+>    > We can copy and modify this new `vcf2lineage-job-template.yml` file iteratively to invoke the workflow on each of the data batches.
+>    {: .details}
 >
-> 3. Write a shell script to iterate over all the batches, create a job file and invoke with `planemo run`. After execution, copy the bath to `completed`.
+> 3. Write a shell script to iterate over all the batches, create a job file and invoke with `planemo run`. After execution, move the processed batch to `data/complete`.
 >
-> > ### {% icon details %} Solution
-> > Once again, there is no single exact solution. Here is one possibility:
-> >
-> > ```shell
-> > for batch in `ls -d data/batch*`; do
-> >     batch_name=`basename $batch`
-> >     cp vcf2lineage-job-template.yml vcf2lineage-${batch_name}-job.yml
-> >     python create_job_file.py vcf2lineage-${batch_name}-job.yml $batch
-> >     # replace with your own workflow ID below
-> >     planemo run f4b02af7e642e75b vcf2lineage-${batch_name}-job.yml --profile planemo-tutorial
-> >     sleep 300
-> >     mv $batch data/completed/
-> > done
-> > ```
-> >
-> > Save this as `run_vcf2lineage.sh`.
-> {: .details}
+>    > ### {% icon details %} Solution
+>    > Once again, there is no single exact solution. Here is one possibility:
+>    >
+>    > ```shell
+>    > for batch in `ls -d data/batch*`; do
+>    >     batch_name=`basename $batch`
+>    >     cp vcf2lineage-job-template.yml vcf2lineage-${batch_name}-job.yml
+>    >     python create_job_file.py vcf2lineage-${batch_name}-job.yml $batch
+>    >     # replace with your own workflow ID below
+>    >     planemo run f4b02af7e642e75b vcf2lineage-${batch_name}-job.yml --profile planemo-tutorial
+>    >     sleep 300
+>    >     mv $batch data/complete/
+>    > done
+>    > ```
+>    >
+>    > Save this as `run_vcf2lineage.sh`.
+>    {: .details}
 >
 > 4. Run your script. Do you notice any issues? What could be improved?
 >
-> > ### {% icon tip %} Upload problems
-> > Uploads can cause several issues:
-> > * The default planemo behavior is to upload datasets one at a time, which ensures the server cannot be overloaded, but is slow. To upload all datasets simultaneously, you could use the `--simultaneous_uploads` flag.
-> > * If one of the upload jobs fails, the workflow will by default not be invoked - Planemo will just upload the datasets and finish. To override this behavior and start a workflow even if one or more uploads fail, you can use the `--no_check_uploads_ok` flag.
-> > * For a more complex solution to the issue of failed uploads, see [this script](https://github.com/usegalaxy-eu/ena-cog-uk-wfs/blob/main/bioblend-scripts/ftp_links_to_yaml.py) from the `ena-cog-uk-wfs` repo.
-> {: .tip}
+>    > ### {% icon tip %} Upload problems
+>    > Uploads can cause several issues:
+>    > * The default planemo behavior is to upload datasets one at a time, which ensures the server cannot be overloaded, but is slow. To upload all datasets simultaneously, you could use the `--simultaneous_uploads` flag.
+>    > * If one of the upload jobs fails, the workflow will by default not be invoked - Planemo will just upload the datasets and finish. To override this behavior and start a workflow even if one or more uploads fail, you can use the `--no_check_uploads_ok` flag.
+>    > * For a more complex solution to the issue of failed uploads, see [this script](https://github.com/usegalaxy-eu/ena-cog-uk-wfs/blob/main/bioblend-scripts/ftp_links_to_yaml.py) from the `ena-cog-uk-wfs` repo.
+>    {: .tip}
 {: .hands_on}
 
-...
 
-# More advanced solutions
+## More advanced solutions
 
 This was a very basic example of a workflow. Perhaps for your case, you need a more customized solution. 
 
