@@ -326,6 +326,12 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >
 {: .hands_on}
 
+> ```bash
+> 1-run-minimap2.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
+
 > ### {% icon comment %} Manage dependencies menu
 > You can manually pull one or many containers for tools in the admin menu. Go to the admin menu, click Manage Dependencies and select the Containers tab. This will list all tools, their dependencies and whether containers are already pulled or can be pulled on demand.
 >
@@ -378,6 +384,12 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
 > 5. Rerun your minimap2 job from the previous section. This time it should use a container served by CVMFS.
 >
 {: .hands_on}
+
+> ```bash
+> 1-run-minimap2.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
 
 -->
 
