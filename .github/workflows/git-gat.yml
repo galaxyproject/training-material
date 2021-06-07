@@ -2,8 +2,6 @@ name: Build GIT-GAT
 
 on:
   pull_request:
-    branches:
-      - main
     paths:
       - 'topics/admin/**'
       - 'bin/knit*'
@@ -17,7 +15,43 @@ on:
       - 'bin/video*'
 
 jobs:
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
+
+      - name: Build git-gat repo
+        run: |
+            bin/knit-automated.sh export;
+          if_key_exists: ignore # replace / ignore / fail; optional (defaults to fail)
+
+      - name: Merge all of the commits
+        run: |
+            cd /tmp/git-gat/
+            git config --global init.defaultBranch main
+            git config --global user.email "galaxytrainingnetwork@gmail.com"
+            git config --global user.name "The Galaxy Training Network"
+            git init
+            cd /tmp/git-gat/
+            for i in {0..9}; do
+                # Commit those patches
+                patches=$(ls $i-*.patch 2>/dev/null| wc -c)
+                if (( patches > 0 )); then
+                    git am $i-*.patch;
+                fi
+                # And tag it
+                git tag -f "step-$i";
+            done
+
   deploy:
+    if: github.repository_owner == 'galaxyproject'
+    needs: test
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
