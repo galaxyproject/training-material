@@ -379,6 +379,20 @@
     },
     {
       "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/job-destinations/tutorial.html",
+      "name": "Mapping Jobs to Destinations",
+      "description": "Hands-on for 'Mapping Jobs to Destinations' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
       "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/pulsar/slides.html",
       "name": "Running Jobs on Remote Resources with Pulsar",
       "description": "Slides for 'Running Jobs on Remote Resources with Pulsar' tutorial",
@@ -440,7 +454,7 @@
 }
     </script>
 
-    <section class="tutorial">
+    <section class="tutorial topic-admin">
         <h1 data-toc-skip>Training Infrastructure as a Service (TIaaS)</h1>
         
 
@@ -814,6 +828,94 @@
                         
                     
                         
+                            
+                            <li> Mapping Jobs to Destinations:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/admin/tutorials/job-destinations/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
                     
                         
                     
@@ -893,7 +995,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 22, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 2, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -936,7 +1038,7 @@ resources, thus reducing queue times on the day of the training.</p>
       <p>In your <code class="language-plaintext highlighter-rouge">requirements.yml</code> add the TIaaS ansible role:</p>
 
       <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">use<span class="notranslate">galaxy</span>_eu.tiaas2</span>
-  <span class="na">version</span><span class="pi">:</span> <span class="s">0.0.1</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">0.0.6</span>
 </code></pre></div>      </div>
 
       <p>And run the install step:</p>
@@ -1212,7 +1314,7 @@ resources, thus reducing queue times on the day of the training.</p>
       </ul>
     </li>
     <li>
-      <p>We next need to configure this plugin in our job configuration (<code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_conf.xml</code>):</p>
+      <p>We next need to configure this plugin in our job configuration (<code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</code>):</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"sorting_hat"</span> <span class="na">runner=</span><span class="s">"dynamic"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"type"</span><span class="nt">&gt;</span>python<span class="nt">&lt;/param&gt;</span>
@@ -1220,10 +1322,10 @@ resources, thus reducing queue times on the day of the training.</p>
 <span class="nt">&lt;/destination&gt;</span>
 </code></pre></div>      </div>
 
-      <p>This is a <strong>Python function dynamic destination</strong>. <span class="notranslate">Galaxy</span> will load all python files in the <code class="language-plaintext highlighter-rouge">{{ <span class="notranslate">galaxy</span>_dynamic_rule_dir }}</code>, and all functions defined in those will be available to be used in the <code class="language-plaintext highlighter-rouge">job_conf.xml</code></p>
+      <p>This is a <strong>Python function dynamic destination</strong>. <span class="notranslate">Galaxy</span> will load all python files in the <code class="language-plaintext highlighter-rouge">{{ <span class="notranslate">galaxy</span>_dynamic_rule_dir }}</code>, and all functions defined in those will be available to be used in the <code class="language-plaintext highlighter-rouge">job_conf.xml.j2</code></p>
     </li>
     <li>
-      <p>Again In <code class="language-plaintext highlighter-rouge">job_conf.xml</code>, update the top level <code class="language-plaintext highlighter-rouge">&lt;destinations&gt;</code> definition and point it to the sorting hat:</p>
+      <p>Again In <code class="language-plaintext highlighter-rouge">job_conf.xml.j2</code>, update the top level <code class="language-plaintext highlighter-rouge">&lt;destinations&gt;</code> definition and point it to the sorting hat:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;destinations</span> <span class="na">default=</span><span class="s">"sorting_hat"</span><span class="nt">&gt;</span>
 ...
@@ -1330,8 +1432,8 @@ resources, thus reducing queue times on the day of the training.</p>
     author = "Helena Rasche and Saskia Hiltemann",
     title = "Training Infrastructure as a Service (TIaaS) (Galaxy Training Materials)",
     year = "2021",
-    month = "01",
-    day = "22"
+    month = "06",
+    day = "02"
     url = "\url{/training-material/topics/admin/tutorials/tiaas/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

@@ -392,7 +392,7 @@
 }
     </script>
 
-    <section class="tutorial">
+    <section class="tutorial topic-admin">
         <h1 data-toc-skip>Connecting Galaxy to a compute cluster</h1>
         
 
@@ -666,7 +666,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 12, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 7, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -723,10 +723,17 @@ be taken into consideration when choosing where to run jobs and what parameters 
     <li>
       <p>Edit your <code class="language-plaintext highlighter-rouge">requirements.yml</code> and include the following contents:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>project.repos</span>
-  <span class="na">version</span><span class="pi">:</span> <span class="s">0.0.2</span>
-<span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>project.slurm</span>
-  <span class="na">version</span><span class="pi">:</span> <span class="s">0.1.3</span>
+      <div data-commit="Add requirements" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
+</span><span class="gi">+++ b/requirements.yml
+</span><span class="p">@@ -18,3 +18,7 @@</span>
+   version: 2.6.3
+ - src: <span class="notranslate">galaxy</span>project.cvmfs
+   version: 0.2.13
+<span class="gi">+- src: <span class="notranslate">galaxy</span>project.repos
++  version: 0.0.2
++- src: <span class="notranslate">galaxy</span>project.slurm
++  version: 0.1.3
+</span>   
 </code></pre></div>      </div>
 
       <p>The <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.repos</code> role adds the <a href="https://depot.galaxyproject.org/yum/"><span class="notranslate">Galaxy</span> Packages for Enterprise Linux (GPEL)</a> repository for RedHat/CentOS, which provides both Slurm and Slurm-DRMAA (neither are available in standard repositories or EPEL). For Ubuntu versions 18.04 or newer, it adds the <a href="https://launchpad.net/~natefoo/+archive/ubuntu/slurm-drmaa">Slurm-DRMAA PPA</a> (Slurm-DRMAA was removed from Debian/Ubuntu in buster/bionic).</p>
@@ -734,36 +741,40 @@ be taken into consideration when choosing where to run jobs and what parameters 
     <li>
       <p>In the same directory, run:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> install -p roles -r requirements.yml
-</code></pre></div>      </div>
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
+</code></pre></div>        </div>
+      </blockquote>
     </li>
     <li>
       <p>Add <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.repos</code>, <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.slurm</code> to the <em>beginning</em> of your roles section in your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook:</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
+      <div data-commit="Add the repos and slurm roles" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
 </span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
-</span><span class="p">@@ -11,6 +11,8 @@</span>
-         name: <span class="notranslate">galaxy</span>
-         state: restarted
+</span><span class="p">@@ -12,6 +12,8 @@</span>
+         repo: 'https://github.com/use<span class="notranslate">galaxy</span>-eu/libraries-training-repo'
+         dest: /libraries/
    roles:
 <span class="gi">+    - <span class="notranslate">galaxy</span>project.repos
 +    - <span class="notranslate">galaxy</span>project.slurm
 </span>     - <span class="notranslate">galaxy</span>project.postgresql
      - role: natefoo.postgresql_objects
        become: true
+   
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Add the slurm variables to your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>:</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+      <div data-commit="Add slurm configuration" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -142,3 +142,14 @@</span> rabbitmq_users:
-   - user: <span class="notranslate">galaxy</span>_au
-     password: "{{ rabbitmq_password_<span class="notranslate">galaxy</span>_au }}"  #This password is set in group_vars/all.yml
-     vhost: /pulsar/<span class="notranslate">galaxy</span>_au
+</span><span class="p">@@ -139,3 +139,13 @@</span> golang_gopath: '/opt/workspace-go'
+ # Singularity target version
+ singularity_version: "3.7.4"
+ singularity_go_path: "{{ golang_install_dir }}"
 <span class="gi">+
-+# slurm
++# Slurm
 +slurm_roles: ['controller', 'exec'] # Which roles should the machine play? exec are execution hosts.
 +slurm_nodes:
 +- name: localhost # Name of our host
@@ -772,10 +783,17 @@ be taken into consideration when choosing where to run jobs and what parameters 
 +  SlurmdParameters: config_overrides   # Ignore errors if the host actually has cores != 2
 +  SelectType: select/cons_res
 +  SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
-</span></code></pre></div>      </div>
+</span>   
+</code></pre></div>      </div>
     </li>
     <li>
-      <p>Run the playbook (<code class="language-plaintext highlighter-rouge">ansible-playbook <span class="notranslate">galaxy</span>.yml</code>)</p>
+      <p>Run the playbook</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+</code></pre></div>        </div>
+      </blockquote>
     </li>
   </ol>
 
@@ -864,7 +882,7 @@ localhost      1    debug*        idle    1    2:1:1      1        0      1   (n
       <p>Use <a href="https://slurm.schedmd.com/srun.html"><code class="language-plaintext highlighter-rouge">srun</code></a> to run the command <code class="language-plaintext highlighter-rouge">uname -a</code></p>
 
       <blockquote class="code-in">
-        <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>srun uname -a
 </code></pre></div>        </div>
       </blockquote>
@@ -909,7 +927,7 @@ sleep </span>30
       <p>Make the script executable:</p>
 
       <blockquote class="code-in">
-        <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <h3 id="code-in-input-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod +x ~/sbatch-test.sh
 </code></pre></div>        </div>
       </blockquote>
@@ -933,7 +951,7 @@ sleep </span>30
       <p>Use <a href="https://slurm.schedmd.com/squeue.html"><code class="language-plaintext highlighter-rouge">squeue</code></a> to check the queue</p>
 
       <blockquote class="code-in">
-        <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <h3 id="code-in-input-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>squeue
 </code></pre></div>        </div>
       </blockquote>
@@ -963,24 +981,28 @@ sleep </span>30
     <li>
       <p>Add a <code class="language-plaintext highlighter-rouge">post_task</code> to your playbook to install <code class="language-plaintext highlighter-rouge">slurm-drmaa1</code> (Debian/Ubuntu) or <code class="language-plaintext highlighter-rouge">slurm-drmaa</code> (RedHat/CentOS).</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
+      <div data-commit="Add post task to install slurm-drmaa" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
 </span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
-</span><span class="p">@@ -26,3 +28,7 @@</span>
-     - use<span class="notranslate">galaxy</span>_eu.<span class="notranslate">galaxy</span>_systemd
-     - use<span class="notranslate">galaxy</span>_eu.rabbitmq
-     - <span class="notranslate">galaxy</span>project.nginx
+</span><span class="p">@@ -11,6 +11,10 @@</span>
+     - git:
+         repo: 'https://github.com/use<span class="notranslate">galaxy</span>-eu/libraries-training-repo'
+         dest: /libraries/
 <span class="gi">+  post_tasks:
 +    - name: Install slurm-drmaa
 +      package:
 +        name: slurm-drmaa1
-</span></code></pre></div>      </div>
+</span>   roles:
+     - <span class="notranslate">galaxy</span>project.repos
+     - <span class="notranslate">galaxy</span>project.slurm
+   
+</code></pre></div>      </div>
     </li>
     <li>
       <p>Run the playbook (<code class="language-plaintext highlighter-rouge">ansible-playbook <span class="notranslate">galaxy</span>.yml</code>)</p>
 
       <blockquote class="code-in">
-        <h3 id="code-in-input-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+        <h3 id="code-in-input-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -1001,16 +1023,17 @@ sleep </span>30
     <li>
       <p>Open your group variables and add the environment variable:</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+      <div data-commit="Configure DRMAA_LIBRARY_PATH" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -76,6 +76,7 @@</span> <span class="notranslate">galaxy</span>_config_files:
- <span class="notranslate">galaxy</span>_systemd_mode: mule
- <span class="notranslate">galaxy</span>_zergpool_listen_addr: 127.0.0.1:8080
- <span class="notranslate">galaxy</span>_restart_handler_name: "Restart <span class="notranslate">Galaxy</span>"
-<span class="gi">+<span class="notranslate">galaxy</span>_systemd_zergling_env: DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"
+</span><span class="p">@@ -103,6 +103,7 @@</span> <span class="notranslate">galaxy</span>_config_files:
+
+ # systemd
+ <span class="notranslate">galaxy</span>_manage_systemd: yes
+<span class="gi">+<span class="notranslate">galaxy</span>_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
 </span>
  # Certbot
  certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
+   
 </code></pre></div>      </div>
 
       <p>This environment variable will then be supplied to any web process (zerglings or mules).</p>
@@ -1018,37 +1041,35 @@ sleep </span>30
     <li>
       <p>Next, we need to configure the Slurm job runner. First, we instruct <span class="notranslate">Galaxy</span>’s job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have the <code class="language-plaintext highlighter-rouge">id</code>, <code class="language-plaintext highlighter-rouge">type</code>, and <code class="language-plaintext highlighter-rouge">load</code> attributes. Since we already have a good default destination that uses singularity, we will simply modify that to use the slurm runner. <span class="notranslate">Galaxy</span> will do the equivalent of submitting a job as <code class="language-plaintext highlighter-rouge">sbatch /path/to/job_script.sh</code>. <!-- Note that we also need to set a default destination now that more than one destination is defined. --> In a <code class="language-plaintext highlighter-rouge">&lt;destination&gt;</code> tag, the <code class="language-plaintext highlighter-rouge">id</code> attribute is a unique identifier for that destination and the <code class="language-plaintext highlighter-rouge">runner</code> attribute must match the <code class="language-plaintext highlighter-rouge">id</code> of a defined plugin:</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+      <div data-commit="Configure slurm destination" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
 </span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-</span><span class="p">@@ -1,6 +1,7 @@</span>
+</span><span class="p">@@ -1,9 +1,16 @@</span>
  &lt;job_conf&gt;
      &lt;plugins workers="4"&gt;
          &lt;plugin id="local_plugin" type="runner" load="<span class="notranslate">galaxy</span>.jobs.runners.local:LocalJobRunner"/&gt;
 <span class="gi">+        &lt;plugin id="slurm" type="runner" load="<span class="notranslate">galaxy</span>.jobs.runners.slurm:SlurmJobRunner"/&gt;
-</span>         &lt;plugin id="pulsar_runner" type="runner" load="<span class="notranslate">galaxy</span>.jobs.runners.pulsar:PulsarMQJobRunner" &gt;
-             &lt;!-- &lt;param id="amqp_url"&gt;pyamqp://<span class="notranslate">galaxy</span>_au:{{ rabbitmq_password_<span class="notranslate">galaxy</span>_au }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1&lt;/param&gt; --&gt;
-             &lt;param id="amqp_url"&gt;pyamqp://<span class="notranslate">galaxy</span>_au:{{ rabbitmq_password_<span class="notranslate">galaxy</span>_au }}@localhost:5672/{{ rabbitmq_vhosts[0] }}&lt;/param&gt;
-<span class="p">@@ -15,7 +16,7 @@</span>
-     &lt;/plugins&gt;
-<span class="gd">-    &lt;destinations default="local_destination"&gt;
+</span>     &lt;/plugins&gt;
+<span class="gd">-    &lt;destinations default="singularity"&gt;
 </span><span class="gi">+    &lt;destinations default="slurm"&gt;
-+        &lt;destination id="slurm" runner="slurm"&gt;
+</span>         &lt;destination id="local_destination" runner="local_plugin"/&gt;
+<span class="gi">+        &lt;destination id="slurm" runner="slurm"&gt;
 +            &lt;param id="singularity_enabled"&gt;true&lt;/param&gt;
 +            &lt;env id="LC_ALL"&gt;C&lt;/env&gt;
 +            &lt;env id="SINGULARITY_CACHEDIR"&gt;/tmp/singularity&lt;/env&gt;
 +            &lt;env id="SINGULARITY_TMPDIR"&gt;/tmp&lt;/env&gt;
 +        &lt;/destination&gt;
-</span>         &lt;destination id="local_destination" runner="local_plugin"&gt;
+</span>         &lt;destination id="singularity" runner="local_plugin"&gt;
              &lt;param id="singularity_enabled"&gt;true&lt;/param&gt;
              &lt;!-- Ensuring a consistent collation environment is good for reproducibility. --&gt;
+   
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Run your <span class="notranslate">Galaxy</span> playbook</p>
 
       <blockquote class="code-in">
-        <h3 id="code-in-input-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+        <h3 id="code-in-input-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -1056,7 +1077,7 @@ sleep </span>30
       <p>Watch the logs to check that everything loads correctly</p>
 
       <blockquote class="code-in">
-        <h3 id="code-in-input-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <h3 id="code-in-input-bash-7"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl -f -u <span class="notranslate">galaxy</span>
 </code></pre></div>        </div>
       </blockquote>
@@ -1085,7 +1106,7 @@ Jan 12 15:46:01 gat-1.oz.training.<span class="notranslate">galaxy</span>project
       <p>If you’re not still following the log files with <code class="language-plaintext highlighter-rouge">jou<span class="notranslate">rna</span>lctl</code>, do so now.</p>
 
       <blockquote class="code-in">
-        <h3 id="code-in-input-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <h3 id="code-in-input-bash-8"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl -f -u <span class="notranslate">galaxy</span>
 </code></pre></div>        </div>
       </blockquote>
@@ -1142,7 +1163,7 @@ Jan 12 15:46:01 gat-1.oz.training.<span class="notranslate">galaxy</span>project
 <p>Slurm allows us to query the exit state of jobs for a time period of the value of Slurm’s <code class="language-plaintext highlighter-rouge">MinJobAge</code> option, which defaults to 300 (seconds, == 5 minutes):</p>
 
 <blockquote class="code-in">
-  <h3 id="code-in-input-bash-7"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+  <h3 id="code-in-input-bash-9"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
   <p>Your job number is potentially different.</p>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scontrol show job 4
 </code></pre></div>  </div>
@@ -1195,6 +1216,9 @@ Jan 12 15:46:01 gat-1.oz.training.<span class="notranslate">galaxy</span>project
     <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_venv_dir</code></li>
   </ul>
 </blockquote>
+
+<!--SNIPPET-->
+<blockquote class="comment">  <h3 data-toc-skip="" id="-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Got lost along the way?</h3>  <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-6">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-5...step-6#files_bucket">the previous tutorial</a>.</p></blockquote>
 
 <h2 id="further-reading">Further Reading</h2>
 
@@ -1287,8 +1311,8 @@ Jan 12 15:46:01 gat-1.oz.training.<span class="notranslate">galaxy</span>project
     author = "Nate Coraor and Björn Grüning and Helena Rasche",
     title = "Connecting Galaxy to a compute cluster (Galaxy Training Materials)",
     year = "2021",
-    month = "03",
-    day = "12"
+    month = "06",
+    day = "07"
     url = "\url{/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

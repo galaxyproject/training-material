@@ -412,7 +412,7 @@
 }
     </script>
 
-    <section class="tutorial">
+    <section class="tutorial topic-admin">
         <h1 data-toc-skip>Data Libraries</h1>
         
 
@@ -783,7 +783,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 12, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 3, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -829,40 +829,44 @@ of a sequencing run or similar project to a group of users on the servers.</p>
     <li>
       <p>We will add a pre-task to clone <a href="https://github.com/usegalaxy-eu/libraries-training-repo">a data repository</a> into your machine. We will use this as the source for a library dataset.</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
+      <div data-commit="Add the git repository to the pre-tasks" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
 </span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
-</span><span class="p">@@ -5,6 +5,9 @@</span>
+</span><span class="p">@@ -8,6 +8,9 @@</span>
      - name: Install Dependencies
        package:
-         name: ['git', 'make', 'python3-psycopg2', 'virtualenv', 'tar', 'bzip2']
+         name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
 <span class="gi">+    - git:
 +        repo: 'https://github.com/use<span class="notranslate">galaxy</span>-eu/libraries-training-repo'
 +        dest: /libraries/
-</span>   handlers:
-     - name: Restart <span class="notranslate">Galaxy</span>
-       systemd:
+</span>   roles:
+     - <span class="notranslate">galaxy</span>project.postgresql
+     - role: natefoo.postgresql_objects
+   
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Edit the file <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> and set the following variables:</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+      <div data-commit="Configure the library import directories" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -28,6 +28,9 @@</span> miniconda_manage_dependencies: false
+</span><span class="p">@@ -29,6 +29,8 @@</span> miniconda_manage_dependencies: false
 
  <span class="notranslate">galaxy</span>_config:
    <span class="notranslate">galaxy</span>:
-     # ... existing <span class="notranslate">galaxy</span> configurations ...
 <span class="gi">+    library_import_dir: /libraries/admin
 +    user_library_import_dir: /libraries/user
-</span></code></pre></div>      </div>
+</span>     tool_data_table_config_path: /cvmfs/data.<span class="notranslate">galaxy</span>project.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.<span class="notranslate">galaxy</span>project.org/managed/location/tool_data_table_conf.xml
+     dependency_resolvers_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/dependency_resolvers_conf.xml"
+     containers_resolvers_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/container_resolvers_conf.xml"
+   
+</code></pre></div>      </div>
     </li>
     <li>
       <p>Run the playbook:</p>
 
       <blockquote class="code-in">
         <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -897,6 +901,11 @@ of a sequencing run or similar project to a group of users on the servers.</p>
 4 directories, 5 files
 </code></pre></div>    </div>
   </blockquote>
+</blockquote>
+
+<blockquote class="hidden">
+  <div data-test="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-al</span> /libraries/
+</code></pre></div>  </div>
 </blockquote>
 
 <p>We have a directory named <code class="language-plaintext highlighter-rouge">admin</code>, which will be available to all admin users (we set <code class="language-plaintext highlighter-rouge">library_import_dir: /libraries/admin</code> earlier.)</p>
@@ -1001,7 +1010,7 @@ pip <span class="nb">install </span>ephemeris
 
       <blockquote class="code-in">
         <h3 id="code-in-input-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> input: bash</h3>
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setup-data-libraries -g https://your-<span class="notranslate">galaxy</span> -a &lt;api-key&gt; --training -i /libraries/example-library.yaml --legacy
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setup-data-libraries <span class="nt">-g</span> https://your-<span class="notranslate">galaxy</span> <span class="nt">-a</span> &lt;api-key&gt; <span class="nt">--training</span> <span class="nt">-i</span> /libraries/example-library.yaml <span class="nt">--legacy</span>
 </code></pre></div>        </div>
       </blockquote>
 
@@ -1025,6 +1034,14 @@ library already exists! <span class="nb">id</span>: f597429621d6eb2b
 <p><img src="../../images/data/imported.png" alt="Screenshot of data libraries, we're in a library folder named &quot;Mouse sequencing project&quot; and a directory and single file are shown. The file has an ugly URL as its name" /></p>
 
 <p>That’s it! You should be able to see your newly created data library in your <span class="notranslate">Galaxy</span>.</p>
+
+<blockquote class="hidden">
+  <div data-test="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-H</span> <span class="s1">'x-api-key: adminkey'</span> <span class="nt">-k</span> https://localhost/api/libraries | <span class="nb">grep</span> <span class="s1">'Mouse sequencing project'</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<!--SNIPPET-->
+<blockquote class="comment">  <h3 data-toc-skip="" id="-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Got lost along the way?</h3>  <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-5">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-4...step-5#files_bucket">the previous tutorial</a>.</p></blockquote>
 
 <p>Note that we’ve used some special flags here, <code class="language-plaintext highlighter-rouge">--training</code> and <code class="language-plaintext highlighter-rouge">--legacy</code>. Training sets some defaults that make sense for the GTN (mostly around library descriptions / etc.)</p>
 
@@ -1132,8 +1149,8 @@ library already exists! <span class="nb">id</span>: f597429621d6eb2b
     author = "Helena Rasche and Saskia Hiltemann",
     title = "Data Libraries (Galaxy Training Materials)",
     year = "2021",
-    month = "03",
-    day = "12"
+    month = "06",
+    day = "03"
     url = "\url{/training-material/topics/admin/tutorials/data-library/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

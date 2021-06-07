@@ -334,7 +334,7 @@
 }
     </script>
 
-    <section class="tutorial">
+    <section class="tutorial topic-admin">
         <h1 data-toc-skip>Galaxy Tool Management with Ephemeris</h1>
         
 
@@ -407,7 +407,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 12, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 3, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -494,9 +494,14 @@ pip install ephemeris
   <h3 id="hands_on-hands-on-extracting-a-list-of-tools-from-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extracting a list of tools from a <span class="notranslate">workflow</span></h3>
 
   <ol>
-    <li>Download the <span class="notranslate">mapping</span> <span class="notranslate">workflow</span>:
-      <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">wget https://training.<span class="notranslate">galaxy</span>project.org/training-material/topics/sequence-analysis/tutorials/<span class="notranslate">mapping</span>/workflows/<span class="notranslate">mapping</span>.ga
-</span></code></pre></div>      </div>
+    <li>
+      <p>Download the <span class="notranslate">mapping</span> <span class="notranslate">workflow</span>:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://training.<span class="notranslate">galaxy</span>project.org/training-material/topics/sequence-analysis/tutorials/<span class="notranslate">mapping</span>/workflows/<span class="notranslate">mapping</span>.ga
+</code></pre></div>        </div>
+      </blockquote>
     </li>
     <li>
       <p>Use the Ephemeris <a href="https://ephemeris.readthedocs.io/en/latest/commands/workflow-to-tools.html"><code class="language-plaintext highlighter-rouge"><span class="notranslate">workflow</span>-to-tools</code></a> command to extract the tool list from this <span class="notranslate">workflow</span> into a file named <code class="language-plaintext highlighter-rouge">workflow_tools.yml</code>.</p>
@@ -507,12 +512,17 @@ pip install ephemeris
 
         <blockquote class="solution">
           <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-          <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go"><span class="notranslate">workflow</span>-to-tools -w <span class="notranslate">mapping</span>.ga -o workflow_tools.yml -l <span class="notranslate">Mapping</span>
-</span></code></pre></div>          </div>
+          <blockquote class="code-in">
+            <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+            <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="notranslate">workflow</span>-to-tools <span class="nt">-w</span> <span class="notranslate">mapping</span>.ga <span class="nt">-o</span> workflow_tools.yml <span class="nt">-l</span> <span class="notranslate">Mapping</span>
+</code></pre></div>            </div>
+          </blockquote>
         </blockquote>
       </blockquote>
     </li>
-    <li>Inspect the <code class="language-plaintext highlighter-rouge">workflow_tools.yml</code> file, which contains a tool list in YAML format.</li>
+    <li>
+      <p>Inspect the <code class="language-plaintext highlighter-rouge">workflow_tools.yml</code> file, which contains a tool list in YAML format.</p>
+    </li>
   </ol>
 
 </blockquote>
@@ -536,7 +546,7 @@ pip install ephemeris
 
   <ol>
     <li>
-      <p>Use the Ephemeris <a href="https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html"><code class="language-plaintext highlighter-rouge">shed-tools</code></a> command to install the tool <code class="language-plaintext highlighter-rouge">pilon</code>, owned by <code class="language-plaintext highlighter-rouge">iuc</code> into a section named <code class="language-plaintext highlighter-rouge">Assembly</code></p>
+      <p>Use the Ephemeris <a href="https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html"><code class="language-plaintext highlighter-rouge">shed-tools</code></a> command to install the tool <code class="language-plaintext highlighter-rouge">bwa</code>, owned by <code class="language-plaintext highlighter-rouge">devteam</code> into a section named <code class="language-plaintext highlighter-rouge"><span class="notranslate">Mapping</span></code></p>
 
       <blockquote class="question">
         <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -546,7 +556,7 @@ pip install ephemeris
           <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <p>Use your <span class="notranslate">Galaxy</span> URL and API key in the example command below:</p>
 
-          <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">shed-tools install -g https://your-<span class="notranslate">galaxy</span> -a &lt;api-key&gt;</span><span class="w"> </span><span class="nt">--name</span> pilon <span class="nt">--owner</span> iuc <span class="nt">--section_label</span> Assembly
+          <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>shed-tools <span class="nb">install</span> <span class="nt">-g</span> https://your-<span class="notranslate">galaxy</span> <span class="nt">-a</span> &lt;api-key&gt; <span class="nt">--name</span> bwa <span class="nt">--owner</span> devteam <span class="nt">--section_label</span> <span class="notranslate">Mapping</span>
 </code></pre></div>          </div>
         </blockquote>
       </blockquote>
@@ -592,7 +602,7 @@ For that, you can install from a YAML file:</p>
           <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <p>Use your <span class="notranslate">Galaxy</span> URL and API key in the example command below:</p>
 
-          <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">shed-tools install -g https://your-<span class="notranslate">galaxy</span> -a &lt;api-key&gt;</span><span class="w"> </span><span class="nt">-t</span> workflow_tools.yml
+          <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>shed-tools <span class="nb">install</span> <span class="nt">-g</span> https://your-<span class="notranslate">galaxy</span> <span class="nt">-a</span> &lt;api-key&gt; <span class="nt">-t</span> workflow_tools.yml
 </code></pre></div>          </div>
         </blockquote>
       </blockquote>
@@ -640,7 +650,7 @@ For that, you can install from a YAML file:</p>
 
   <ol>
     <li>
-      <p>Use the Ephemeris <a href="https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html"><code class="language-plaintext highlighter-rouge">shed-tools</code></a> command to test the <code class="language-plaintext highlighter-rouge">pilon</code> tool on your <span class="notranslate">Galaxy</span>.</p>
+      <p>Use the Ephemeris <a href="https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html"><code class="language-plaintext highlighter-rouge">shed-tools</code></a> command to test the <code class="language-plaintext highlighter-rouge">bamtools_filter</code> tool on your <span class="notranslate">Galaxy</span>.</p>
 
       <blockquote class="question">
         <h3 id="question-question-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -650,7 +660,7 @@ For that, you can install from a YAML file:</p>
           <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <p>Use your <span class="notranslate">Galaxy</span> URL and API key in the example command below:</p>
 
-          <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">shed-tools test -g https://your-<span class="notranslate">galaxy</span> -a &lt;api-key&gt;</span><span class="w"> </span><span class="nt">--name</span> pilon <span class="nt">--owner</span> iuc
+          <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>shed-tools <span class="nb">test</span> <span class="nt">-g</span> https://your-<span class="notranslate">galaxy</span> <span class="nt">-a</span> &lt;api-key&gt; <span class="nt">--name</span> bamtools_filter <span class="nt">--owner</span> devteam
 </code></pre></div>          </div>
         </blockquote>
       </blockquote>
@@ -679,8 +689,11 @@ For that, you can install from a YAML file:</p>
           <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <p>This command does not require authentication and can be used to obtain the tool list from any public <span class="notranslate">Galaxy</span> server:</p>
 
-          <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">get-tool-list -g "https://use<span class="notranslate">galaxy</span>.eu" -o "eu_tool_list.yaml"
-</span></code></pre></div>          </div>
+          <blockquote class="code-in">
+            <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+            <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>get-tool-list <span class="nt">-g</span> <span class="s2">"https://use<span class="notranslate">galaxy</span>.eu"</span> <span class="nt">-o</span> <span class="s2">"eu_tool_list.yaml"</span>
+</code></pre></div>            </div>
+          </blockquote>
         </blockquote>
       </blockquote>
     </li>
@@ -810,8 +823,8 @@ We cannot (and would not recommend) setting that certificate on your local machi
     author = "Martin Čech and Helena Rasche and Nicola Soranzo",
     title = "Galaxy Tool Management with Ephemeris (Galaxy Training Materials)",
     year = "2021",
-    month = "03",
-    day = "12"
+    month = "06",
+    day = "03"
     url = "\url{/training-material/topics/admin/tutorials/tool-management/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

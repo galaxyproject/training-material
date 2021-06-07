@@ -420,7 +420,7 @@
 }
     </script>
 
-    <section class="tutorial">
+    <section class="tutorial topic-admin">
         <h1 data-toc-skip>Mapping Jobs to Destinations</h1>
         
 
@@ -797,7 +797,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 12, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 7, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -854,33 +854,39 @@
     <li>
       <p>Create the directory <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/tools/</code> if it doesn’t exist and edit a new file in <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/tools/testing.xml</code> with the following contents:</p>
 
-      <div class="language-xml question highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"testing"</span> <span class="na">name=</span><span class="s">"Testing Tool"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;command&gt;</span>
-        <span class="cp">&lt;![CDATA[echo "Running with '\${<span class="notranslate">GALAXY</span>_SLOTS:-1}' th<span class="notranslate">reads</span>" &gt; "$output1"]]&gt;</span>
-    <span class="nt">&lt;/command&gt;</span>
-    <span class="nt">&lt;inputs&gt;</span>
-        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"input1"</span> <span class="na">type=</span><span class="s">"data"</span> <span class="na">format=</span><span class="s">"txt"</span> <span class="na">label=</span><span class="s">"Input Dataset"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/inputs&gt;</span>
-    <span class="nt">&lt;outputs&gt;</span>
-        <span class="nt">&lt;data</span> <span class="na">name=</span><span class="s">"output1"</span> <span class="na">format=</span><span class="s">"txt"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/outputs&gt;</span>
-<span class="nt">&lt;/tool&gt;</span>
+      <div data-commit="Add testing tool" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/files/<span class="notranslate">galaxy</span>/tools/testing.xml
+</span><span class="p">@@ -0,0 +1,11 @@</span>
+<span class="gi">+&lt;tool id="testing" name="Testing Tool"&gt;
++    &lt;command&gt;
++        &lt;![CDATA[echo "Running with '\${<span class="notranslate">GALAXY</span>_SLOTS:-1}' th<span class="notranslate">reads</span>" &gt; "$output1"]]&gt;
++    &lt;/command&gt;
++    &lt;inputs&gt;
++        &lt;param name="input1" type="data" format="txt" label="Input Dataset"/&gt;
++    &lt;/inputs&gt;
++    &lt;outputs&gt;
++        &lt;data name="output1" format="txt" /&gt;
++    &lt;/outputs&gt;
++&lt;/tool&gt;
+</span>   
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Add the tool to the <span class="notranslate">Galaxy</span> group variables under the new item <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_local_tools</code> :</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+      <div data-commit="Deploy testing tool" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -71,6 +71,8 @@</span> <span class="notranslate">galaxy</span>_config_files:
+</span><span class="p">@@ -101,6 +101,9 @@</span> <span class="notranslate">galaxy</span>_config_files:
  - src: files/<span class="notranslate">galaxy</span>/config/dependency_resolvers_conf.xml
-   dest: ""
+   dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.dependency_resolvers_config_file }}"
 
 +<span class="notranslate">galaxy</span>_local_tools:
 <span class="gi">+- testing.xml
-</span>
- # systemd
- <span class="notranslate">galaxy</span>_systemd_mode: mule
++
+</span> # systemd
+ <span class="notranslate">galaxy</span>_manage_systemd: yes
+ <span class="notranslate">galaxy</span>_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
+   
 </code></pre></div>      </div>
     </li>
     <li>
@@ -888,7 +894,7 @@
 
       <blockquote class="code-in">
         <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -926,10 +932,10 @@
     <li>
       <p>Edit your <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</code> and add the following destination. Then, map the new tool to the new destination using the tool ID (<code class="language-plaintext highlighter-rouge">&lt;tool id="testing"&gt;</code>) and destination id (<code class="language-plaintext highlighter-rouge">&lt;destination id="slurm-2c"&gt;</code>) by adding a new section to the job config, <code class="language-plaintext highlighter-rouge">&lt;tools&gt;</code>, below the destinations:</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+      <div data-commit="Configure testing tool in job conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
 </span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-</span><span class="p">@@ -25,6 +25,13 @@</span>
-             &lt;!-- Singularity uses a temporary directory to build the squashfs filesystem. --&gt;
+</span><span class="p">@@ -11,6 +11,13 @@</span>
+             &lt;env id="SINGULARITY_CACHEDIR"&gt;/tmp/singularity&lt;/env&gt;
              &lt;env id="SINGULARITY_TMPDIR"&gt;/tmp&lt;/env&gt;
          &lt;/destination&gt;
 <span class="gi">+        &lt;destination id="slurm-2c" runner="slurm"&gt;
@@ -939,20 +945,17 @@
 +            &lt;env id="SINGULARITY_CACHEDIR"&gt;/tmp/singularity&lt;/env&gt;
 +            &lt;env id="SINGULARITY_TMPDIR"&gt;/tmp&lt;/env&gt;
 +        &lt;/destination&gt;
-</span>         &lt;destination id="pulsar" runner="pulsar_runner" &gt;
-             &lt;param id="default_file_action"&gt;remote_transfer&lt;/param&gt;
-             &lt;param id="dependency_resolution"&gt;remote&lt;/param&gt;
-<span class="p">@@ -34,10 +41,10 @@</span>
-             &lt;param id="rewrite_parameters"&gt;True&lt;/param&gt;
-             &lt;param id="transport"&gt;curl&lt;/param&gt;
+</span>         &lt;destination id="singularity" runner="local_plugin"&gt;
+             &lt;param id="singularity_enabled"&gt;true&lt;/param&gt;
+             &lt;!-- Ensuring a consistent collation environment is good for reproducibility. --&gt;
+<span class="p">@@ -22,5 +29,6 @@</span>
          &lt;/destination&gt;
      &lt;/destinations&gt;
      &lt;tools&gt;
-         &lt;tool id="bwa" destination="pulsar"/&gt;
-         &lt;tool id="bwa_mem" destination="pulsar"/&gt;
 <span class="gi">+        &lt;tool id="testing" destination="slurm-2c"/&gt;
 </span>     &lt;/tools&gt;
  &lt;/job_conf&gt;
+   
 </code></pre></div>      </div>
     </li>
     <li>
@@ -960,7 +963,7 @@
 
       <blockquote class="code-in">
         <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -997,16 +1000,20 @@
     <li>
       <p>Create and open <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/dynamic_job_rules/my_rules.py</code></p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn"><span class="notranslate">galaxy</span>.jobs</span> <span class="kn">import</span> <span class="n">JobDestination</span>
-<span class="kn">from</span> <span class="nn"><span class="notranslate">galaxy</span>.jobs.mapper</span> <span class="kn">import</span> <span class="n">Job<span class="notranslate">Mapping</span>Exception</span>
-<span class="kn">import</span> <span class="nn">os</span>
-
-<span class="k">def</span> <span class="nf">admin_only</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">user_email</span><span class="p">):</span>
-    <span class="c1"># Only allow the tool to be executed if the user is an admin
-</span>    <span class="n">admin_users</span> <span class="o">=</span> <span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">get</span><span class="p">(</span> <span class="s">"admin_users"</span><span class="p">,</span> <span class="s">""</span> <span class="p">).</span><span class="n">split</span><span class="p">(</span> <span class="s">","</span> <span class="p">)</span>
-    <span class="k">if</span> <span class="n">user_email</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">admin_users</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">Job<span class="notranslate">Mapping</span>Exception</span><span class="p">(</span><span class="s">"Unauthorized."</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">JobDestination</span><span class="p">(</span><span class="n">runner</span><span class="o">=</span><span class="s">"slurm"</span><span class="p">)</span>
+      <div data-commit="Add my rules python script" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/files/<span class="notranslate">galaxy</span>/dynamic_job_rules/my_rules.py
+</span><span class="p">@@ -0,0 +1,10 @@</span>
+<span class="gi">+from <span class="notranslate">galaxy</span>.jobs import JobDestination
++from <span class="notranslate">galaxy</span>.jobs.mapper import Job<span class="notranslate">Mapping</span>Exception
++import os
++
++def admin_only(app, user_email):
++    # Only allow the tool to be executed if the user is an admin
++    admin_users = app.config.get( "admin_users", "" ).split( "," )
++    if user_email not in admin_users:
++        raise Job<span class="notranslate">Mapping</span>Exception("Unauthorized.")
++    return JobDestination(runner="slurm")
+</span>   
 </code></pre></div>      </div>
 
       <p>This destination will check that the <code class="language-plaintext highlighter-rouge">user_email</code> is in the set of <code class="language-plaintext highlighter-rouge">admin_users</code> from your config file.</p>
@@ -1021,9 +1028,9 @@
 
       <p>Edit your group variables file and add the following:</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+      <div data-commit="Deploy my_rules dynamic rule" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -73,6 +73,8 @@</span> <span class="notranslate">galaxy</span>_config_files:
+</span><span class="p">@@ -103,6 +103,8 @@</span> <span class="notranslate">galaxy</span>_config_files:
 
  <span class="notranslate">galaxy</span>_local_tools:
  - testing.xml
@@ -1031,17 +1038,18 @@
 +- my_rules.py
 </span>
  # systemd
- <span class="notranslate">galaxy</span>_systemd_mode: mule
+ <span class="notranslate">galaxy</span>_manage_systemd: yes
+   
 </code></pre></div>      </div>
     </li>
     <li>
       <p>We next need to configure this plugin in our job configuration:</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+      <div data-commit="Add dynamic admin only destination" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
 </span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-</span><span class="p">@@ -41,10 +41,15 @@</span>
-             &lt;param id="rewrite_parameters"&gt;True&lt;/param&gt;
-             &lt;param id="transport"&gt;curl&lt;/param&gt;
+</span><span class="p">@@ -27,6 +27,10 @@</span>
+             &lt;!-- Singularity uses a temporary directory to build the squashfs filesystem. --&gt;
+             &lt;env id="SINGULARITY_TMPDIR"&gt;/tmp&lt;/env&gt;
          &lt;/destination&gt;
 <span class="gi">+        &lt;destination id="dynamic_admin_only" runner="dynamic"&gt;
 +            &lt;param id="type"&gt;python&lt;/param&gt;
@@ -1049,6 +1057,8 @@
 +        &lt;/destination&gt;
 </span>     &lt;/destinations&gt;
      &lt;tools&gt;
+         &lt;tool id="testing" destination="slurm-2c"/&gt;
+   
 </code></pre></div>      </div>
 
       <p>This is a <strong>Python function dynamic destination</strong>. <span class="notranslate">Galaxy</span> will load all python files in the <code class="language-plaintext highlighter-rouge">{{ <span class="notranslate">galaxy</span>_dynamic_rule_dir }}</code>, and all functions defined in those will be available <code class="language-plaintext highlighter-rouge">my_rules.py</code> to be used in the <code class="language-plaintext highlighter-rouge">job_conf.xml</code></p>
@@ -1056,16 +1066,17 @@
     <li>
       <p>Finally, in <code class="language-plaintext highlighter-rouge">job_conf.xml</code>, update the <code class="language-plaintext highlighter-rouge">&lt;tool&gt;</code> definition and point it to this destination:</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+      <div data-commit="Send testing tool to the dynamic admin only destination." class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
 </span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-</span><span class="p">@@ -49,7 +52,6 @@</span>
+</span><span class="p">@@ -33,6 +33,6 @@</span>
+         &lt;/destination&gt;
+     &lt;/destinations&gt;
      &lt;tools&gt;
-         &lt;tool id="bwa" destination="pulsar"/&gt;
-         &lt;tool id="bwa_mem" destination="pulsar"/&gt;
 <span class="gd">-        &lt;tool id="testing" destination="slurm-2c"/&gt;
 </span><span class="gi">+        &lt;tool id="testing" destination="dynamic_admin_only" /&gt;
 </span>     &lt;/tools&gt;
  &lt;/job_conf&gt;
+   
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1073,7 +1084,7 @@
 
       <blockquote class="code-in">
         <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -1101,17 +1112,21 @@
     <li>
       <p>Dynamic tool destinations are configured via a YAML file. As before, we’ll use a fake example but this is extremely useful in real-life scenarios. Create the file <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/tool_destinations.yml</code> with the following contents:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
-<span class="na">tools</span><span class="pi">:</span>
-  <span class="na">testing</span><span class="pi">:</span>
-    <span class="na">rules</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">rule_type</span><span class="pi">:</span> <span class="s">file_size</span>
-        <span class="na">lower_bound</span><span class="pi">:</span> <span class="m">16</span>
-        <span class="na">upper_bound</span><span class="pi">:</span> <span class="s">Infinity</span>
-        <span class="na">destination</span><span class="pi">:</span> <span class="s">slurm-2c</span>
-    <span class="na">default_destination</span><span class="pi">:</span> <span class="s">slurm</span>
-<span class="na">default_destination</span><span class="pi">:</span> <span class="s">slurm</span>
-<span class="na">verbose</span><span class="pi">:</span> <span class="s">True</span>
+      <div data-commit="Add tool destinations conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/files/<span class="notranslate">galaxy</span>/config/tool_destinations.yml
+</span><span class="p">@@ -0,0 +1,11 @@</span>
+<span class="gi">+---
++tools:
++  testing:
++    rules:
++      - rule_type: file_size
++        lower_bound: 16
++        upper_bound: Infinity
++        destination: slurm-2c
++    default_destination: slurm
++default_destination: slurm
++verbose: True
+</span>   
 </code></pre></div>      </div>
 
       <p>The rule says:</p>
@@ -1128,33 +1143,35 @@
     <li>
       <p>We also need to inform <span class="notranslate">Galaxy</span> of the path to the file we’ve just created, which is done using the <code class="language-plaintext highlighter-rouge">tool_destinations_config_file</code> in <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> &gt; <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code>. Additionally we need to add a <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> entry to ensure it is deployed.</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+      <div data-commit="Deploy tool destinations config file" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -28,6 +28,7 @@</span> miniconda_manage_dependencies: false
+</span><span class="p">@@ -29,6 +29,7 @@</span> miniconda_manage_dependencies: false
 
  <span class="notranslate">galaxy</span>_config:
    <span class="notranslate">galaxy</span>:
 <span class="gi">+    tool_destinations_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/tool_destinations.yml"
-</span>     dependency_resolvers_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/dependency_resolvers_conf.xml"
-     brand: "🧬🔬🚀"
-     admin_users: admin@example.org,admin@example.com
-<span class="p">@@ -68,6 +69,8 @@</span> <span class="notranslate">galaxy</span>_config_templates:
-     dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file }}"
+</span>     library_import_dir: /libraries/admin
+     user_library_import_dir: /libraries/user
+     tool_data_table_config_path: /cvmfs/data.<span class="notranslate">galaxy</span>project.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.<span class="notranslate">galaxy</span>project.org/managed/location/tool_data_table_conf.xml
+<span class="p">@@ -98,6 +99,8 @@</span> <span class="notranslate">galaxy</span>_config_templates:
+     dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.containers_resolvers_config_file }}"
 
  <span class="notranslate">galaxy</span>_config_files:
 <span class="gi">+- src: files/<span class="notranslate">galaxy</span>/config/tool_destinations.yml
 +  dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.tool_destinations_config_file }}"
 </span> - src: files/<span class="notranslate">galaxy</span>/config/dependency_resolvers_conf.xml
    dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.dependency_resolvers_config_file }}"
+
+   
 </code></pre></div>      </div>
     </li>
     <li>
       <p>We need to update <span class="notranslate">Galaxy</span>’s job configuration to use this rule. Open <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</code> and add a DTD destination.
 Also, comment out or remove the previous <code class="language-plaintext highlighter-rouge">&lt;tool&gt;</code> definition for the <code class="language-plaintext highlighter-rouge">testing</code> tool, and replace it with a <span class="notranslate">mapping</span> to the dtd destination like so:</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+      <div data-commit="Configure dtd in job conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
 </span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-</span><span class="p">@@ -45,10 +45,13 @@</span>
+</span><span class="p">@@ -31,8 +31,11 @@</span>
              &lt;param id="type"&gt;python&lt;/param&gt;
              &lt;param id="function"&gt;admin_only&lt;/param&gt;
          &lt;/destination&gt;
@@ -1163,12 +1180,11 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
 +        &lt;/destination&gt;
 </span>     &lt;/destinations&gt;
      &lt;tools&gt;
-         &lt;tool id="bwa" destination="pulsar"/&gt;
-         &lt;tool id="bwa_mem" destination="pulsar"/&gt;
 <span class="gd">-        &lt;tool id="testing" destination="dynamic_admin_only" /&gt;
 </span><span class="gi">+        &lt;tool id="testing" destination="dtd" /&gt;
 </span>     &lt;/tools&gt;
  &lt;/job_conf&gt;
+   
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1176,7 +1192,7 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
 
       <blockquote class="code-in">
         <h3 id="code-in-input-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -1220,13 +1236,17 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
     <li>
       <p>Create and open <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_resource_params_conf.xml.j2</code></p>
 
-      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;parameters&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">label=</span><span class="s">"Cores"</span> <span class="na">name=</span><span class="s">"cores"</span> <span class="na">type=</span><span class="s">"select"</span> <span class="na">help=</span><span class="s">"Number of cores to run job on."</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>1 (default)<span class="nt">&lt;/option&gt;</span>
-        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"2"</span><span class="nt">&gt;</span>2<span class="nt">&lt;/option&gt;</span>
-    <span class="nt">&lt;/param&gt;</span>
-  <span class="nt">&lt;param</span> <span class="na">label=</span><span class="s">"Time"</span> <span class="na">name=</span><span class="s">"time"</span> <span class="na">type=</span><span class="s">"integer"</span> <span class="na">size=</span><span class="s">"3"</span> <span class="na">min=</span><span class="s">"1"</span> <span class="na">max=</span><span class="s">"24"</span> <span class="na">value=</span><span class="s">"1"</span> <span class="na">help=</span><span class="s">"Maximum job time in hours, 'walltime' value (1-24). Leave blank to use default value."</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;/parameters&gt;</span>
+      <div data-commit="Add job resource params configuration" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_resource_params_conf.xml.j2
+</span><span class="p">@@ -0,0 +1,7 @@</span>
+<span class="gi">+&lt;parameters&gt;
++    &lt;param label="Cores" name="cores" type="select" help="Number of cores to run job on."&gt;
++        &lt;option value="1"&gt;1 (default)&lt;/option&gt;
++        &lt;option value="2"&gt;2&lt;/option&gt;
++    &lt;/param&gt;
++  &lt;param label="Time" name="time" type="integer" size="3" min="1" max="24" value="1" help="Maximum job time in hours, 'walltime' value (1-24). Leave blank to use default value." /&gt;
++&lt;/parameters&gt;
+</span>   
 </code></pre></div>      </div>
 
       <p>This defines two resource fields, a select box where users can choose between 1 and 2 cores, and a text entry field where users can input an integer value from 1-24 to set the walltime for a job.</p>
@@ -1234,32 +1254,26 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
     <li>
       <p>As usual, we need to instruct <span class="notranslate">Galaxy</span> of where to find this file:</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+      <div data-commit="Deploy job resource params configuration" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -28,6 +28,7 @@</span> miniconda_manage_dependencies: false
-
- <span class="notranslate">galaxy</span>_config:
-   <span class="notranslate">galaxy</span>:
-<span class="gi">+    job_resource_params_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/job_resource_params_conf.xml"
-</span>     tool_destinations_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/tool_destinations.yml"
-     dependency_resolvers_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/dependency_resolvers_conf.xml"
-     brand: "🧬🔬🚀"
-<span class="p">@@ -65,6 +66,8 @@</span> <span class="notranslate">galaxy</span>_config:
+</span><span class="p">@@ -93,6 +93,8 @@</span> <span class="notranslate">galaxy</span>_config:
      farm: job-handlers:1,2
 
  <span class="notranslate">galaxy</span>_config_templates:
-<span class="gi">+- src: templates/<span class="notranslate">galaxy</span>/config/job_resource_params_conf.xml.j2
-+  dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_resource_params_file }}"
-</span> - src: templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-   dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file }}"
+<span class="gi">+  - src: templates/<span class="notranslate">galaxy</span>/config/job_resource_params_conf.xml.j2
++    dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_resource_params_file }}"
+</span>   - src: templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+     dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file }}"
+   - src: templates/<span class="notranslate">galaxy</span>/config/container_resolvers_conf.xml.j2
+   
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Next, we define a new section in <code class="language-plaintext highlighter-rouge">job_conf.xml</code>: <code class="language-plaintext highlighter-rouge">&lt;resources&gt;</code>. This groups together parameters that should appear together on a tool form. Add the following section to your <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</code>:</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+      <div data-commit="Configure resources in job conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
 </span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-</span><span class="p">@@ -55,6 +55,9 @@</span>
+</span><span class="p">@@ -35,6 +35,9 @@</span>
              &lt;param id="type"&gt;dtd&lt;/param&gt;
          &lt;/destination&gt;
      &lt;/destinations&gt;
@@ -1267,8 +1281,9 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
 +        &lt;group id="testing"&gt;cores,time&lt;/group&gt;
 +    &lt;/resources&gt;
 </span>     &lt;tools&gt;
-         &lt;tool id="bwa" destination="pulsar"/&gt;
-         &lt;tool id="bwa_mem" destination="pulsar"/&gt;
+         &lt;tool id="testing" destination="dtd" /&gt;
+     &lt;/tools&gt;
+   
 </code></pre></div>      </div>
 
       <p>The group ID will be used to map a tool to job resource parameters, and the text value of the <code class="language-plaintext highlighter-rouge">&lt;group&gt;</code> tag is a comma-separated list of <code class="language-plaintext highlighter-rouge">name</code>s from <code class="language-plaintext highlighter-rouge">job_resource_params_conf.xml</code> to include on the form of any tool that is mapped to the defined <code class="language-plaintext highlighter-rouge">&lt;group&gt;</code>.</p>
@@ -1276,24 +1291,25 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
     <li>
       <p>Finally, in <code class="language-plaintext highlighter-rouge">job_conf.xml</code>, move the previous <code class="language-plaintext highlighter-rouge">&lt;tool&gt;</code> definition for the <code class="language-plaintext highlighter-rouge">testing</code> tool into the comment and define a new <code class="language-plaintext highlighter-rouge">&lt;tool&gt;</code> that defines the <code class="language-plaintext highlighter-rouge">resources</code> for the tool:</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+      <div data-commit="Configure resources in job conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
 </span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-</span><span class="p">@@ -61,6 +61,6 @@</span>
+</span><span class="p">@@ -39,6 +39,6 @@</span>
+         &lt;group id="testing"&gt;cores,time&lt;/group&gt;
+     &lt;/resources&gt;
      &lt;tools&gt;
-         &lt;tool id="bwa" destination="pulsar"/&gt;
-         &lt;tool id="bwa_mem" destination="pulsar"/&gt;
 <span class="gd">-        &lt;tool id="testing" destination="dtd" /&gt;
-</span><span class="gi">+        &lt;tool id="testing" destination="dynamic_cores_time" resources="testing"/&gt;
+</span><span class="gi">+        &lt;tool id="testing" destination="dynamic_cores_time" resources="testing" /&gt;
 </span>     &lt;/tools&gt;
  &lt;/job_conf&gt;
+   
 </code></pre></div>      </div>
     </li>
     <li>
       <p>We have assigned the <code class="language-plaintext highlighter-rouge">testing</code> tool to a new destination: <code class="language-plaintext highlighter-rouge">dynamic_cores_time</code>, but this destination does not exist. We need to create it. Add the following destination in your job conf:</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+      <div data-commit="Add dynamic_cores_time destination" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
 </span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-</span><span class="p">@@ -54,6 +54,10 @@</span>
+</span><span class="p">@@ -34,6 +34,10 @@</span>
          &lt;destination id="dtd" runner="dynamic"&gt;
              &lt;param id="type"&gt;dtd&lt;/param&gt;
          &lt;/destination&gt;
@@ -1304,6 +1320,7 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
 </span>     &lt;/destinations&gt;
      &lt;resources&gt;
          &lt;group id="testing"&gt;cores,time&lt;/group&gt;
+   
 </code></pre></div>      </div>
 
       <p>This will be another dynamic destination. <span class="notranslate">Galaxy</span> will load all python files in the <code class="language-plaintext highlighter-rouge">{{ <span class="notranslate">galaxy</span>_dynamic_rule_dir }}</code>, and all functions defined in those will be available <code class="language-plaintext highlighter-rouge">dynamic_cores_time</code> to be used in the <code class="language-plaintext highlighter-rouge">job_conf.xml</code></p>
@@ -1338,48 +1355,52 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
     <li>
       <p>Create and edit <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/dynamic_job_rules/map_resources.py</code>. Create it with the following contents:</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">from</span> <span class="nn"><span class="notranslate">galaxy</span>.jobs.mapper</span> <span class="kn">import</span> <span class="n">Job<span class="notranslate">Mapping</span>Exception</span>
-
-<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="p">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
-
-<span class="n">DESTINATION_IDS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="mi">1</span> <span class="p">:</span> <span class="s">'slurm'</span><span class="p">,</span>
-    <span class="mi">2</span> <span class="p">:</span> <span class="s">'slurm-2c'</span>
-<span class="p">}</span>
-<span class="n">FAILURE_MESSAGE</span> <span class="o">=</span> <span class="s">'This tool could not be run because of a misconfiguration in the <span class="notranslate">Galaxy</span> job running system, please report this error'</span>
-
-
-<span class="k">def</span> <span class="nf">dynamic_cores_time</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">tool</span><span class="p">,</span> <span class="n">job</span><span class="p">,</span> <span class="n">user_email</span><span class="p">):</span>
-    <span class="n">destination</span> <span class="o">=</span> <span class="bp">None</span>
-    <span class="n">destination_id</span> <span class="o">=</span> <span class="s">'slurm'</span>
-
-    <span class="c1"># build the param dictionary
-</span>    <span class="n">param_dict</span> <span class="o">=</span> <span class="n">job</span><span class="p">.</span><span class="n">get_param_values</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">param_dict</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'__job_resource'</span><span class="p">,</span> <span class="p">{}).</span><span class="n">get</span><span class="p">(</span><span class="s">'__job_resource__select'</span><span class="p">)</span> <span class="o">!=</span> <span class="s">'yes'</span><span class="p">:</span>
-        <span class="n">log</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="s">"Job resource parameters not seleted, returning default destination"</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">destination_id</span>
-
-    <span class="c1"># handle job resource parameters
-</span>    <span class="k">try</span><span class="p">:</span>
-        <span class="c1"># validate params
-</span>        <span class="n">cores</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">param_dict</span><span class="p">[</span><span class="s">'__job_resource'</span><span class="p">][</span><span class="s">'cores'</span><span class="p">])</span>
-        <span class="n">time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">param_dict</span><span class="p">[</span><span class="s">'__job_resource'</span><span class="p">][</span><span class="s">'time'</span><span class="p">])</span>
-        <span class="n">destination_id</span> <span class="o">=</span> <span class="n">DESTINATION_IDS</span><span class="p">[</span><span class="n">cores</span><span class="p">]</span>
-        <span class="n">destination</span> <span class="o">=</span> <span class="n">app</span><span class="p">.</span><span class="n">job_config</span><span class="p">.</span><span class="n">get_destination</span><span class="p">(</span><span class="n">destination_id</span><span class="p">)</span>
-        <span class="c1"># set walltime
-</span>        <span class="k">if</span> <span class="s">'nativeSpecification'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">destination</span><span class="p">.</span><span class="n">params</span><span class="p">:</span>
-            <span class="n">destination</span><span class="p">.</span><span class="n">params</span><span class="p">[</span><span class="s">'nativeSpecification'</span><span class="p">]</span> <span class="o">=</span> <span class="s">''</span>
-        <span class="n">destination</span><span class="p">.</span><span class="n">params</span><span class="p">[</span><span class="s">'nativeSpecification'</span><span class="p">]</span> <span class="o">+=</span> <span class="s">' --time=%s:00:00'</span> <span class="o">%</span> <span class="n">time</span>
-    <span class="k">except</span><span class="p">:</span>
-        <span class="c1"># resource param selector not sent with tool form, job_conf.xml misconfigured
-</span>        <span class="n">log</span><span class="p">.</span><span class="n">warning</span><span class="p">(</span><span class="s">'(%s) error, keys were: %s'</span><span class="p">,</span> <span class="n">job</span><span class="p">.</span><span class="nb">id</span><span class="p">,</span> <span class="n">param_dict</span><span class="p">.</span><span class="n">keys</span><span class="p">())</span>
-        <span class="k">raise</span> <span class="n">Job<span class="notranslate">Mapping</span>Exception</span><span class="p">(</span><span class="n">FAILURE_MESSAGE</span><span class="p">)</span>
-
-    <span class="n">log</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="s">'returning destination: %s'</span><span class="p">,</span> <span class="n">destination_id</span><span class="p">)</span>
-    <span class="n">log</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="s">'native specification: %s'</span><span class="p">,</span> <span class="n">destination</span><span class="p">.</span><span class="n">params</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'nativeSpecification'</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">destination</span> <span class="ow">or</span> <span class="n">destination_id</span>
+      <div data-commit="Add map_resources python" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/files/<span class="notranslate">galaxy</span>/dynamic_job_rules/map_resources.py
+</span><span class="p">@@ -0,0 +1,42 @@</span>
+<span class="gi">+import logging
++from <span class="notranslate">galaxy</span>.jobs.mapper import Job<span class="notranslate">Mapping</span>Exception
++
++log = logging.getLogger(__name__)
++
++DESTINATION_IDS = {
++    1 : 'slurm',
++    2 : 'slurm-2c'
++}
++FAILURE_MESSAGE = 'This tool could not be run because of a misconfiguration in the <span class="notranslate">Galaxy</span> job running system, please report this error'
++
++
++def dynamic_cores_time(app, tool, job, user_email):
++    destination = None
++    destination_id = 'slurm'
++
++    # build the param dictionary
++    param_dict = job.get_param_values(app)
++
++    if param_dict.get('__job_resource', {}).get('__job_resource__select') != 'yes':
++        log.info("Job resource parameters not seleted, returning default destination")
++        return destination_id
++
++    # handle job resource parameters
++    try:
++        # validate params
++        cores = int(param_dict['__job_resource']['cores'])
++        time = int(param_dict['__job_resource']['time'])
++        destination_id = DESTINATION_IDS[cores]
++        destination = app.job_config.get_destination(destination_id)
++        # set walltime
++        if 'nativeSpecification' not in destination.params:
++            destination.params['nativeSpecification'] = ''
++        destination.params['nativeSpecification'] += ' --time=%s:00:00' % time
++    except:
++        # resource param selector not sent with tool form, job_conf.xml misconfigured
++        log.warning('(%s) error, keys were: %s', job.id, param_dict.keys())
++        raise Job<span class="notranslate">Mapping</span>Exception(FAILURE_MESSAGE)
++
++    log.info('returning destination: %s', destination_id)
++    log.info('native specification: %s', destination.params.get('nativeSpecification'))
++    return destination or destination_id
+</span>   
 </code></pre></div>      </div>
 
       <p>It is important to note that <strong>you are responsible for parameter validation, including the job resource selector</strong>. This function only handles the job resource parameter fields, but it could do many other things - examine inputs, job queues, other tool parameters, etc.</p>
@@ -1387,16 +1408,25 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
     <li>
       <p>As usual, we need to instruct <span class="notranslate">Galaxy</span> of where to find this file:</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+      <div data-commit="Deploy map_resources.py" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -81,6 +81,7 @@</span> <span class="notranslate">galaxy</span>_local_tools:
+</span><span class="p">@@ -29,6 +29,7 @@</span> miniconda_manage_dependencies: false
+
+ <span class="notranslate">galaxy</span>_config:
+   <span class="notranslate">galaxy</span>:
+<span class="gi">+    job_resource_params_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/job_resource_params_conf.xml"
+</span>     tool_destinations_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/tool_destinations.yml"
+     library_import_dir: /libraries/admin
+     user_library_import_dir: /libraries/user
+<span class="p">@@ -110,6 +111,7 @@</span> <span class="notranslate">galaxy</span>_local_tools:
  - testing.xml
  <span class="notranslate">galaxy</span>_dynamic_job_rules:
  - my_rules.py
 <span class="gi">+- map_resources.py
 </span>
  # systemd
- <span class="notranslate">galaxy</span>_systemd_mode: mule
+ <span class="notranslate">galaxy</span>_manage_systemd: yes
+   
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1404,7 +1434,7 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
 
       <blockquote class="code-in">
         <h3 id="code-in-input-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -1465,6 +1495,9 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
    Power= SICP=0
 </span></code></pre></div>  </div>
 </blockquote>
+
+<!--SNIPPET-->
+<blockquote class="comment">  <h3 data-toc-skip="" id="-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Got lost along the way?</h3>  <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-7">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-6...step-7#files_bucket">the previous tutorial</a>.</p></blockquote>
 
 <h2 id="further-reading">Further Reading</h2>
 
@@ -1555,8 +1588,8 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
     author = "Nate Coraor and Björn Grüning and Helena Rasche",
     title = "Mapping Jobs to Destinations (Galaxy Training Materials)",
     year = "2021",
-    month = "03",
-    day = "12"
+    month = "06",
+    day = "07"
     url = "\url{/training-material/topics/admin/tutorials/job-destinations/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

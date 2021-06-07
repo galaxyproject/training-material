@@ -392,7 +392,7 @@
 }
     </script>
 
-    <section class="tutorial">
+    <section class="tutorial topic-admin">
         <h1 data-toc-skip>Distributed Object Storage</h1>
         
 
@@ -660,7 +660,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 23, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 2, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -670,7 +670,12 @@
                     <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
                 </div>
                 <div class="col-sm-10">
-                    <h1 id="expanding-storage">Expanding Storage</h1>
+                    <blockquote class="warning">
+  <h3 id="warning-warning-switching-object-store-types-will-cause-issues"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Warning: switching object store types will cause issues</h3>
+  <p>Do not run this tutorial on your production instance! We will switch between object stores during this tutorial which has serious implications for production servers.</p>
+</blockquote>
+
+<h1 id="expanding-storage">Expanding Storage</h1>
 
 <p class="no_toc">You may find that your <span class="notranslate">Galaxy</span> files directory has run out of space, but you don’t want to move all of the files from one filesystem to another. One solution to this problem is to use <span class="notranslate">Galaxy</span>’s hierarchical object store to add an additional file space for <span class="notranslate">Galaxy</span>.</p>
 
@@ -704,19 +709,19 @@
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
   <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
-    <span class="na">object_store_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/object_store_conf.xml"</span>
+    <span class="na">object_store_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/object_store_conf.xml.j2"</span>
 </code></pre></div>      </div>
     </li>
     <li>
       <p>In your group variables file, add it to the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_templates</code> section:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config_templates</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/object_store_conf.xml</span>
+  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/object_store_conf.xml.j2</span>
     <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.object_store_config_file</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Create and edit <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/object_store_conf.xml</code> with the following contents:</p>
+      <p>Create and edit <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/object_store_conf.xml.j2</code> with the following contents:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
 <span class="nt">&lt;object_store</span> <span class="na">type=</span><span class="s">"hierarchical"</span><span class="nt">&gt;</span>
@@ -780,7 +785,7 @@
 
   <ol>
     <li>
-      <p>Edit your <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/object_store_conf.xml</code> file and replace the contents with:</p>
+      <p>Edit your <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/object_store_conf.xml.j2</code> file and replace the contents with:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
 <span class="nt">&lt;object_store</span> <span class="na">type=</span><span class="s">"distributed"</span><span class="nt">&gt;</span>
@@ -829,7 +834,7 @@ some example code, and we can include this as a training module for everyone.</p
 </blockquote>
 
 <blockquote class="warning">
-  <h3 id="warning-warning-switching-object-store-types-will-cause-issues"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Warning: switching object store types will cause issues</h3>
+  <h3 id="warning-warning-switching-object-store-types-will-cause-issues-1"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Warning: switching object store types will cause issues</h3>
   <p>We have switched between two different object stores here, but this is not supported. If you need to do this, you will need to update datasets in <span class="notranslate">Galaxy</span>’s database. Any datasets that were created as hierarchical will lack the <code class="language-plaintext highlighter-rouge">object_store_id</code>, and you will need to supply the correct one. Do not just blindly copy these instructions, please understand what they do before running them and talk to us on <a href="http://gitter.im/galaxyproject/Lobby">Gitter</a> for more help</p>
 
   <ol>
@@ -931,7 +936,7 @@ dataset_24.dat
 
 <h1 id="dropbox">Dropbox</h1>
 
-<p>Dropbox is a well-known cloud storage service where you can store and share files with anyone. 
+<p>Dropbox is a well-known cloud storage service where you can store and share files with anyone.
 As of <a href="https://github.com/galaxyproject/galaxy/pull/9888">20.09</a>, <span class="notranslate">Galaxy</span> has support for a couple of different file storage backends, including NextCloud (via webdavfs) and Dropbox.</p>
 
 <p>This tutorial will help you setup the connection between <span class="notranslate">Galaxy</span> and Dropbox, allowing your users to add their account details and then access their Dropbox data within <span class="notranslate">Galaxy</span></p>
@@ -984,7 +989,7 @@ As of <a href="https://github.com/galaxyproject/galaxy/pull/9888">20.09</a>, <sp
 <span class="gi">+    file_sources_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/file_sources_conf.yml"
 +    user_preferences_extra_conf_path: "{{ <span class="notranslate">galaxy</span>_config_dir }}/user_preferences_extra_conf.yml"
 </span>   uwsgi:
-     socket: 127.0.0.1:8080
+     socket: 127.0.0.1:5000
      buffer-size: 16384
 </code></pre></div>      </div>
     </li>
@@ -1003,10 +1008,7 @@ As of <a href="https://github.com/galaxyproject/galaxy/pull/9888">20.09</a>, <sp
 +  - src: files/<span class="notranslate">galaxy</span>/config/file_sources_conf.yml
 +    dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.file_sources_config_file }}"
 +
-</span> # systemd
- <span class="notranslate">galaxy</span>_systemd_mode: mule
- <span class="notranslate">galaxy</span>_zergpool_listen_addr: 127.0.0.1:8080
-</code></pre></div>      </div>
+</span></code></pre></div>      </div>
     </li>
     <li>
       <p>Run the playbook. At the very end, you should see output like the following indicating that <span class="notranslate">Galaxy</span> has been restarted:</p>
@@ -1132,8 +1134,8 @@ You will have a new “Choose remote files” button that will open the remote f
     author = "Nate Coraor and Helena Rasche and Gianmauro Cuccuru",
     title = "Distributed Object Storage (Galaxy Training Materials)",
     year = "2021",
-    month = "05",
-    day = "23"
+    month = "06",
+    day = "02"
     url = "\url{/training-material/topics/admin/tutorials/object-store/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

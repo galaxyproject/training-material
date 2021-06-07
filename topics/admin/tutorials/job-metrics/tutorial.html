@@ -375,6 +375,20 @@
         "name": "Galaxy Training Network",
         "url": "https://galaxyproject.org/teach/gtn/"
       }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/job-destinations/tutorial.html",
+      "name": "Mapping Jobs to Destinations",
+      "description": "Hands-on for 'Mapping Jobs to Destinations' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
     }
   ],
   "hasPart": [
@@ -403,7 +417,7 @@
 }
     </script>
 
-    <section class="tutorial">
+    <section class="tutorial topic-admin">
         <h1 data-toc-skip>Recording Job Metrics</h1>
         
 
@@ -720,6 +734,94 @@
                         
                     
                 
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Mapping Jobs to Destinations:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/admin/tutorials/job-destinations/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
             </ul>
         
     
@@ -762,7 +864,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 24, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 26, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -800,6 +902,9 @@
 
   <p>Job metrics are only visible to <span class="notranslate">Galaxy</span> <em>admin users</em>, unless you set <code class="language-plaintext highlighter-rouge">expose_potentially_sensitive_job_metrics: true</code>, like Use<span class="notranslate">Galaxy</span>.eu does. EU’s intention with this is to empower users and make everything as transparent as possible.</p>
 
+  <p>This is the only option controlling which metrics general users see. Admins see all metrics collected, and by default general users see none.
+However most of the metrics exposed by this setting are quite safe (e.g. cgroups information on resource consumption, walltime, etc.)</p>
+
 </blockquote>
 
 <h2 id="setting-up-galaxy">Setting up <span class="notranslate">Galaxy</span></h2>
@@ -833,6 +938,16 @@
     </li>
     <li>
       <p>Edit your playbook to install the package named <code class="language-plaintext highlighter-rouge">cgroup-tools</code> in a pre-task (with git/make/etc). This package is required to use <code class="language-plaintext highlighter-rouge">cgget</code> which is used in metrics collection.</p>
+
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
+</span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
+</span><span class="p">@@ -4,9 +4,14 @@</span>
+   pre_tasks:
+     - name: Install Dependencies
+       package:
+<span class="gd">-        name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
+</span><span class="gi">+        name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv', 'cgroup-tools']
+</span></code></pre></div>      </div>
     </li>
     <li>
       <p>Edit the group variables file, <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>:</p>
@@ -979,7 +1094,7 @@
     title = "Recording Job Metrics (Galaxy Training Materials)",
     year = "2021",
     month = "05",
-    day = "24"
+    day = "26"
     url = "\url{/training-material/topics/admin/tutorials/job-metrics/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

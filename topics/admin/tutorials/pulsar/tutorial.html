@@ -379,6 +379,20 @@
     },
     {
       "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/job-destinations/tutorial.html",
+      "name": "Mapping Jobs to Destinations",
+      "description": "Hands-on for 'Mapping Jobs to Destinations' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
       "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/cvmfs/slides.html",
       "name": "Reference Data with CVMFS",
       "description": "Slides for 'Reference Data with CVMFS' tutorial",
@@ -465,7 +479,7 @@
 }
     </script>
 
-    <section class="tutorial">
+    <section class="tutorial topic-admin">
         <h1 data-toc-skip>Running Jobs on Remote Resources with Pulsar</h1>
         
 
@@ -845,6 +859,94 @@
                         
                     
                         
+                            
+                            <li> Mapping Jobs to Destinations:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/admin/tutorials/job-destinations/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
                     
                         
                     
@@ -930,7 +1032,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 2, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 3, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -988,12 +1090,18 @@
 
 </blockquote>
 
-<p>This tutorial assumes that you have:</p>
+<p><strong>This tutorial assumes that:</strong></p>
 
 <ul>
-  <li>A VM or machine where you will install Pulsar, and a directory in which the installation will be done. This tutorial assumes it is <code class="language-plaintext highlighter-rouge">/mnt</code></li>
-  <li>That you have completed the “<span class="notranslate">Galaxy</span> Installation with Ansible” and CVMFS tutorials (Job configuration tutorial is optional) and have access to the VM/computer where it is installed.</li>
+  <li>You have a VM or machine where you will install Pulsar, and a directory in which the installation will be done. This tutorial assumes it is <code class="language-plaintext highlighter-rouge">/mnt</code></li>
+  <li>You have completed the “<span class="notranslate">Galaxy</span> Installation with Ansible”, “Connecting <span class="notranslate">Galaxy</span> to a Compute Cluster”, and the “CVMFS” tutorials</li>
+  <li>You have access to the VM/computer where it is installed.</li>
 </ul>
+
+<blockquote class="tip">
+  <h3 id="tip-this-is-not-intended-as-a-standalone-pulsar-guide"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> This is NOT intended as a standalone Pulsar guide</h3>
+  <p>This tutorial is not intended to be a standalone Pulsar setup guide. If you read carefully and understand Ansible, it is likely you can figure out which portions are required to just setup Pulsar.</p>
+</blockquote>
 
 <h1 id="overview-1">Overview</h1>
 
@@ -1074,10 +1182,17 @@
     <li>
       <p>From your ansible working directory, edit the <code class="language-plaintext highlighter-rouge">requirements.yml</code> file and add the following lines:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">use<span class="notranslate">galaxy</span>_eu.rabbitmq</span>
-  <span class="na">version</span><span class="pi">:</span> <span class="s">0.1.0</span>
-<span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>project.pulsar</span>
-  <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.6</span>
+      <div data-commit="Add requirements" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
+</span><span class="gi">+++ b/requirements.yml
+</span><span class="p">@@ -22,3 +22,7 @@</span>
+   version: 0.0.2
+ - src: <span class="notranslate">galaxy</span>project.slurm
+   version: 0.1.3
+<span class="gi">+- name: use<span class="notranslate">galaxy</span>_eu.rabbitmq
++  version: 0.1.0
++- src: <span class="notranslate">galaxy</span>project.pulsar
++  version: 1.0.6
+</span>   
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1085,7 +1200,7 @@
 
       <blockquote class="code-in">
         <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
-        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -1131,21 +1246,60 @@
 
   <ol>
     <li>
-      <p>Create or edit the file <code class="language-plaintext highlighter-rouge">group_vars/all.yml</code> and set your private token:</p>
+      <p>Edit your <code class="language-plaintext highlighter-rouge">group_vars/secret.yml</code> and define some random passwords:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">rabbitmq_password_<span class="notranslate">galaxy</span>_au</span><span class="pi">:</span> <span class="s">areallylongpasswordhere</span>
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-vault edit group_vars/secret.yml
+</code></pre></div>        </div>
+      </blockquote>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">vault_rabbitmq_password_vhost</span><span class="pi">:</span> <span class="s2">"</span><span class="s">a-really-long-password-here"</span>
+<span class="na">vault_rabbitmq_admin_password</span><span class="pi">:</span> <span class="s2">"</span><span class="s">a-different-really-long-password"</span>
 </code></pre></div>      </div>
 
-      <p>This is going in a special file because both of our services, <span class="notranslate">Galaxy</span> and Pulsar, need it. Both <span class="notranslate">Galaxy</span> in the job configuration, and Pulsar in its configuration. The <code class="language-plaintext highlighter-rouge">group_vars/all.yml</code> is included for every playbook run, no matter which group a machine belongs to.</p>
+      <!-- Ignore this, just for the gat-automation. Vaults are ugly to work with :(
 
-      <p>Replace <code class="language-plaintext highlighter-rouge">areallylongpasswordhere</code> with a long randomish (or not) string.</p>
+   
+```diff
+--- a/group_vars/secret.yml
++++ b/group_vars/secret.yml
+@@ -1,7 +1,13 @@
+ $ANSIBLE_VAULT;1.1;AES256
+-32653961383866636531396135663630386630346237333333653633313436663439643535323964
+-6363626330336430363332643638646262316338313937320a666566306539373462386266383166
+-30326165393863633463353234613561393939326164376432633732316264636464313061383161
+-3532373937656138320a616361343664353264613332616236623231326137316635323465623562
+-66656539346130353639623736633034653932373438663330646436656336666637313933666264
+-3636313438626533633831323239373461373538646635613637
++62346261323266656232393034396134316636376533376139666437363535393562663838613938
++6336666266633563346337623265353935646361326337610a393834333233313461346439376438
++63383338346530656561636631666134373238366364363164313166346461383736613162653237
++3461363334323431370a656132303965653262386130353332623937376261396530393761353834
++38336565666437666436643163363831633331333766653266356163613138393734656465323634
++39366362383433366437353534663134313330316337393335383962613961386665633261616237
++35366635373063313631323939396164336330356361393464326636353037336461323531336434
++35613933303333623031353936393265636130363335376533393335663266313863376135383338
++36613464373231623938373434306266373234633036343636633963353361356631363533353066
++39323064336237646432323530313065303331326636353334343862373330313133326363363063
++38383564636161396435666164643334656435393533643163393434623434656238633631633939
++33353232666432376661
+   
+```
+{: data-commit="Add rabbitmq passwords to the vault"}
+
+-->
+
+      <p>This is going in the vault as they are secrets we need to set. Both of our services, <span class="notranslate">Galaxy</span> and Pulsar, need these variables, so we’ll need to make sure they’re in both playbooks. Both <span class="notranslate">Galaxy</span> in the job configuration, and Pulsar in its configuration.</p>
+
+      <p>Replace both with long random (or not) string.</p>
     </li>
     <li>
       <p>From your ansible working directory, edit the <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file and add make the following changes.</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+      <div data-commit="Configure RabbitMQ" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -81,6 +81,7 @@</span> certbot_environment: staging
+</span><span class="p">@@ -128,8 +128,10 @@</span> certbot_environment: staging
  certbot_well_known_root: /srv/nginx/_well-known_root
  certbot_share_key_users:
    - nginx
@@ -1154,12 +1308,14 @@
      systemctl restart nginx || true
 <span class="gi">+    systemctl restart rabbitmq-server || true
 </span> certbot_domains:
-<span class="p">@@ -100,3 +101,29 @@</span> nginx_ssl_role: use<span class="notranslate">galaxy</span>_eu.certbot
- nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
- nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
-
+  - "{{ inventory_hostname }}"
+ certbot_agree_tos: --agree-tos
+<span class="p">@@ -162,3 +164,31 @@</span> slurm_config:
+   SlurmdParameters: config_overrides   # Ignore errors if the host actually has cores != 2
+   SelectType: select/cons_res
+   SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
+<span class="gi">+
 +# RabbitMQ
-<span class="gi">+rabbitmq_admin_password: a-different-long-password
 +rabbitmq_version: 3.8.16-1
 +rabbitmq_plugins: rabbitmq_management
 +
@@ -1180,23 +1336,28 @@
 +
 +rabbitmq_users:
 +  - user: admin
-+    password: "{{ rabbitmq_admin_password }}"
++    password: "{{ vault_rabbitmq_admin_password }}"
 +    tags: administrator
 +    vhost: /
 +  - user: <span class="notranslate">galaxy</span>_au
-+    password: "{{ rabbitmq_password_<span class="notranslate">galaxy</span>_au }}"  #This password is set in group_vars/all.yml
++    password: "{{ vault_rabbitmq_password_vhost }}"
 +    vhost: /pulsar/<span class="notranslate">galaxy</span>_au
-</span></code></pre></div>      </div>
+</span>   
+</code></pre></div>      </div>
     </li>
     <li>
       <p>Update the <span class="notranslate">Galaxy</span> playbook to include the <em>use<span class="notranslate">galaxy</span>_eu.rabbitmq</em> role.</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
+      <div data-commit="Add role" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
 </span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
-</span><span class="p">@@ -25,4 +26,3 @@</span>
-     - use<span class="notranslate">galaxy</span>_eu.<span class="notranslate">galaxy</span>_systemd
+</span><span class="p">@@ -29,5 +29,6 @@</span>
+     - role: uchida.miniconda
+       become: true
+       become_user: "{{ <span class="notranslate">galaxy</span>_user.name }}"
 <span class="gi">+    - use<span class="notranslate">galaxy</span>_eu.rabbitmq
 </span>     - <span class="notranslate">galaxy</span>project.nginx
+     - <span class="notranslate">galaxy</span>project.cvmfs
+   
 </code></pre></div>      </div>
 
       <blockquote class="tip">
@@ -1249,8 +1410,8 @@
       <p>Run the playbook.</p>
 
       <blockquote class="code-in">
-        <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
-        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+        <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -1259,7 +1420,7 @@
   <p>The rabbitmq server daemon will have been installed on your <span class="notranslate">Galaxy</span> VM. Check that it’s running now:</p>
 
   <blockquote class="code-in">
-    <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+    <h3 id="code-in-input-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl status rabbitmq-server
 </code></pre></div>    </div>
   </blockquote>
@@ -1302,7 +1463,7 @@
    <code class="language-plaintext highlighter-rouge">tcp/5672</code>) so be sure to check that everything is OK before continuing.</p>
 
   <blockquote class="code-in">
-    <h3 id="code-in-input-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+    <h3 id="code-in-input-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>rabbitmq-diagnostics status
 </code></pre></div>    </div>
   </blockquote>
@@ -1324,7 +1485,7 @@
   <p>But wait! There are more ways it can go wrong. To be extra sure, run a quick <code class="language-plaintext highlighter-rouge">curl</code> command.</p>
 
   <blockquote class="code-in">
-    <h3 id="code-in-input-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+    <h3 id="code-in-input-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://localhost:5672
 curl <span class="nt">-k</span> https://localhost:5671
 </code></pre></div>    </div>
@@ -1428,57 +1589,61 @@ curl <span class="nt">-k</span> https://localhost:5671
     <li>
       <p>Create a new file in <code class="language-plaintext highlighter-rouge">group_vars</code> called <code class="language-plaintext highlighter-rouge">pulsarservers.yml</code> and set some of the above variables as well as some others.</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_server_url</span><span class="pi">:</span> <span class="c1"># Important!!!</span>
-<span class="c1"># Put your <span class="notranslate">Galaxy</span> server's fully qualified domain name (FQDN) (or the FQDN of the RabbitMQ server) above.</span>
-
-<span class="na">pulsar_root</span><span class="pi">:</span> <span class="s">/mnt/pulsar</span>
-
-<span class="na">pulsar_pip_install</span><span class="pi">:</span> <span class="no">true</span>
-<span class="na">pulsar_pycurl_ssl_library</span><span class="pi">:</span> <span class="s">openssl</span>
-<span class="na">pulsar_systemd</span><span class="pi">:</span> <span class="no">true</span>
-<span class="na">pulsar_systemd_runner</span><span class="pi">:</span> <span class="s">webless</span>
-
-<span class="na">pulsar_create_user</span><span class="pi">:</span> <span class="no">true</span>
-<span class="na">pulsar_user</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">name</span><span class="pi">:</span> <span class="nv">pulsar</span><span class="pi">,</span> <span class="nv">shell</span><span class="pi">:</span> <span class="nv">/bin/bash</span><span class="pi">}</span>
-
-<span class="na">pulsar_optional_dependencies</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s">pyOpenSSL</span>
-  <span class="c1"># For remote transfers initiated on the Pulsar end rather than the <span class="notranslate">Galaxy</span> end</span>
-  <span class="pi">-</span> <span class="s">pycurl</span>
-  <span class="c1"># drmaa required if connecting to an exte<span class="notranslate">rna</span>l DRM using it.</span>
-  <span class="pi">-</span> <span class="s">drmaa</span>
-  <span class="c1"># kombu needed if using a message queue</span>
-  <span class="pi">-</span> <span class="s">kombu</span>
-  <span class="c1"># amqp 5.0.3 changes behaviour in an unexpected way, pin for now.</span>
-  <span class="pi">-</span> <span class="s1">'</span><span class="s">amqp==5.0.2'</span>
-  <span class="c1"># psutil and pylockfile are optional dependencies but can make Pulsar</span>
-  <span class="c1"># more robust in small ways.</span>
-  <span class="pi">-</span> <span class="s">psutil</span>
-
-<span class="na">pulsar_yaml_config</span><span class="pi">:</span>
-  <span class="na">conda_auto_init</span><span class="pi">:</span> <span class="s">True</span>
-  <span class="na">conda_auto_install</span><span class="pi">:</span> <span class="s">True</span>
-  <span class="na">staging_directory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">pulsar_staging_dir</span><span class="nv"> </span><span class="s">}}"</span>
-  <span class="na">persistence_directory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">pulsar_persistence_dir</span><span class="nv"> </span><span class="s">}}"</span>
-  <span class="na">tool_dependency_dir</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">pulsar_dependencies_dir</span><span class="nv"> </span><span class="s">}}"</span>
-  <span class="c1"># The following are the settings for the pulsar server to contact the message queue with related timeouts etc.</span>
-  <span class="na">message_queue_url</span><span class="pi">:</span> <span class="s2">"</span><span class="s">pyamqp://<span class="notranslate">galaxy</span>_au:{{</span><span class="nv"> </span><span class="s">rabbitmq_password_<span class="notranslate">galaxy</span>_au</span><span class="nv"> </span><span class="s">}}@{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_server_url</span><span class="nv"> </span><span class="s">}}:5671//pulsar/<span class="notranslate">galaxy</span>_au?ssl=1"</span>
-  <span class="na">min_polling_interval</span><span class="pi">:</span> <span class="m">0.5</span>
-  <span class="na">amqp_publish_retry</span><span class="pi">:</span> <span class="s">True</span>
-  <span class="na">amqp_publish_retry_max_retries</span><span class="pi">:</span> <span class="m">5</span>
-  <span class="na">amqp_publish_retry_interval_start</span><span class="pi">:</span> <span class="m">10</span>
-  <span class="na">amqp_publish_retry_interval_step</span><span class="pi">:</span> <span class="m">10</span>
-  <span class="na">amqp_publish_retry_interval_max</span><span class="pi">:</span> <span class="m">60</span>
-
-<span class="c1"># We also need to create the dependency resolver file so pulsar knows how to</span>
-<span class="c1"># find and install dependencies for the tools we ask it to run. The simplest</span>
-<span class="c1"># method which covers 99% of the use cases is to use conda auto installs similar</span>
-<span class="c1"># to how <span class="notranslate">Galaxy</span> works.</span>
-<span class="na">pulsar_dependency_resolvers</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">conda</span>
-    <span class="na">args</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">auto_init</span>
-        <span class="na">value</span><span class="pi">:</span> <span class="no">true</span>
+      <div data-commit="Add pulsar group variables" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/group_vars/pulsarservers.yml
+</span><span class="p">@@ -0,0 +1,51 @@</span>
+<span class="gi">+<span class="notranslate">galaxy</span>_server_hostname: "" # Important!!!
++# Put your <span class="notranslate">Galaxy</span> server's fully qualified domain name (FQDN) (or the FQDN of the RabbitMQ server) above.
++
++pulsar_root: /mnt/pulsar
++
++pulsar_pip_install: true
++pulsar_pycurl_ssl_library: openssl
++pulsar_systemd: true
++pulsar_systemd_runner: webless
++
++pulsar_create_user: true
++pulsar_user: {name: pulsar, shell: /bin/bash}
++
++pulsar_optional_dependencies:
++  - pyOpenSSL
++  # For remote transfers initiated on the Pulsar end rather than the <span class="notranslate">Galaxy</span> end
++  - pycurl
++  # drmaa required if connecting to an exte<span class="notranslate">rna</span>l DRM using it.
++  - drmaa
++  # kombu needed if using a message queue
++  - kombu
++  # amqp 5.0.3 changes behaviour in an unexpected way, pin for now.
++  - 'amqp==5.0.2'
++  # psutil and pylockfile are optional dependencies but can make Pulsar
++  # more robust in small ways.
++  - psutil
++
++pulsar_yaml_config:
++  conda_auto_init: True
++  conda_auto_install: True
++  staging_directory: "{{ pulsar_staging_dir }}"
++  persistence_directory: "{{ pulsar_persistence_dir }}"
++  tool_dependency_dir: "{{ pulsar_dependencies_dir }}"
++  # The following are the settings for the pulsar server to contact the message queue with related timeouts etc.
++  message_queue_url: "pyamqp://<span class="notranslate">galaxy</span>_au:{{ vault_rabbitmq_password_vhost }}@{{ <span class="notranslate">galaxy</span>_server_hostname }}:5671//pulsar/<span class="notranslate">galaxy</span>_au?ssl=1"
++  min_polling_interval: 0.5
++  amqp_publish_retry: True
++  amqp_publish_retry_max_retries: 5
++  amqp_publish_retry_interval_start: 10
++  amqp_publish_retry_interval_step: 10
++  amqp_publish_retry_interval_max: 60
++
++# We also need to create the dependency resolver file so pulsar knows how to
++# find and install dependencies for the tools we ask it to run. The simplest
++# method which covers 99% of the use cases is to use conda auto installs similar
++# to how <span class="notranslate">Galaxy</span> works.
++pulsar_dependency_resolvers:
++  - name: conda
++    args:
++      - name: auto_init
++        value: true
+</span>   
 </code></pre></div>      </div>
 
       <blockquote class="details">
@@ -1489,8 +1654,14 @@ curl <span class="nt">-k</span> https://localhost:5671
     <li>
       <p>Add the following lines to your <code class="language-plaintext highlighter-rouge">hosts</code> file:</p>
 
-      <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[pulsarservers]</span>
-<span class="err">&lt;ip_address</span> <span class="err">or</span> <span class="err">fqdn</span> <span class="err">of</span> <span class="err">your</span> <span class="err">pulsar</span> <span class="err">server&gt;</span> <span class="py">ansible_user</span><span class="p">=</span><span class="s">&lt;use<span class="notranslate">rna</span>me to login with&gt;</span>
+      <div data-commit="Add pulsar host" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/hosts
+</span><span class="gi">+++ b/hosts
+</span><span class="p">@@ -1,2 +1,4 @@</span>
+ [<span class="notranslate">galaxy</span>servers]
+ gat-0.eu.training.<span class="notranslate">galaxy</span>project.eu ansible_connection=local ansible_user=ubuntu
+<span class="gi">+[<span class="notranslate">galaxy</span>servers]
++gat-0.au.training.<span class="notranslate">galaxy</span>project.eu ansible_user=ubuntu
+</span>   
 </code></pre></div>      </div>
     </li>
   </ol>
@@ -1508,24 +1679,30 @@ curl <span class="nt">-k</span> https://localhost:5671
     <li>
       <p>Create a <code class="language-plaintext highlighter-rouge">pulsar.yml</code> file with the following contents:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">pulsarservers</span>
-  <span class="na">pre_tasks</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install some packages</span>
-      <span class="na">package</span><span class="pi">:</span>
-        <span class="na">name</span><span class="pi">:</span>
-          <span class="pi">-</span> <span class="s">build-essential</span>
-          <span class="pi">-</span> <span class="s">git</span>
-          <span class="pi">-</span> <span class="s">python3-dev</span>
-          <span class="pi">-</span> <span class="s">libcurl4-openssl-dev</span>
-          <span class="pi">-</span> <span class="s">libssl-dev</span>
-          <span class="pi">-</span> <span class="s">virtualenv</span>
-        <span class="na">state</span><span class="pi">:</span> <span class="s">present</span>
-        <span class="na">update_cache</span><span class="pi">:</span> <span class="s">yes</span>
-      <span class="na">become</span><span class="pi">:</span> <span class="s">yes</span>
-  <span class="na">roles</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">role</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>project.cvmfs</span>
-      <span class="na">become</span><span class="pi">:</span> <span class="s">yes</span>
-    <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.pulsar</span>
+      <div data-commit="Add pulsar playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/pulsar.yml
+</span><span class="p">@@ -0,0 +1,20 @@</span>
+<span class="gi">+- hosts: pulsarservers
++  vars_files:
++    - group_vars/secret.yml
++  pre_tasks:
++    - name: Install some packages
++      package:
++        name:
++          - build-essential
++          - git
++          - python3-dev
++          - libcurl4-openssl-dev
++          - libssl-dev
++          - virtualenv
++        state: present
++        update_cache: yes
++      become: yes
++  roles:
++    - role: <span class="notranslate">galaxy</span>project.cvmfs
++      become: yes
++    - <span class="notranslate">galaxy</span>project.pulsar
+</span>   
 </code></pre></div>      </div>
 
       <p>There are a couple of <em>pre-tasks</em> here. This is because we need to install some base packages on these very vanilla ubuntu instances as well as give ourselves ownership of the directory we are installing into.</p>
@@ -1542,8 +1719,8 @@ curl <span class="nt">-k</span> https://localhost:5671
       <p>Run the playbook.</p>
 
       <blockquote class="code-in">
-        <h3 id="code-in-input-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
-        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook pulsar.yml
+        <h3 id="code-in-input-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook pulsar.yml
 </code></pre></div>        </div>
       </blockquote>
 
@@ -1589,29 +1766,49 @@ curl <span class="nt">-k</span> https://localhost:5671
     <li>
       <p>In your <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</code> file add the following job runner to the <code class="language-plaintext highlighter-rouge">&lt;plugins&gt;</code> section:</p>
 
-      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"pulsar_runner"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"<span class="notranslate">galaxy</span>.jobs.runners.pulsar:PulsarMQJobRunner"</span> <span class="nt">&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"amqp_url"</span><span class="nt">&gt;</span>pyamqp://<span class="notranslate">galaxy</span>_au:{{ rabbitmq_password_<span class="notranslate">galaxy</span>_au }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1<span class="nt">&lt;/param&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"amqp_ack_republish_time"</span><span class="nt">&gt;</span>1200<span class="nt">&lt;/param&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"amqp_acknowledge"</span><span class="nt">&gt;</span>True<span class="nt">&lt;/param&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"amqp_consumer_timeout"</span><span class="nt">&gt;</span>2.0<span class="nt">&lt;/param&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"amqp_publish_retry"</span><span class="nt">&gt;</span>True<span class="nt">&lt;/param&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"amqp_publish_retry_max_retries"</span><span class="nt">&gt;</span>60<span class="nt">&lt;/param&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"<span class="notranslate">galaxy</span>_url"</span><span class="nt">&gt;</span>https://{{ inventory_hostname }}<span class="nt">&lt;/param&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"manager"</span><span class="nt">&gt;</span>_default_<span class="nt">&lt;/param&gt;</span>
-<span class="nt">&lt;/plugin&gt;</span>
+      <div data-commit="Add pulsar plugin" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+</span><span class="p">@@ -2,6 +2,16 @@</span>
+     &lt;plugins workers="4"&gt;
+         &lt;plugin id="local_plugin" type="runner" load="<span class="notranslate">galaxy</span>.jobs.runners.local:LocalJobRunner"/&gt;
+         &lt;plugin id="slurm" type="runner" load="<span class="notranslate">galaxy</span>.jobs.runners.slurm:SlurmJobRunner"/&gt;
+<span class="gi">+        &lt;plugin id="pulsar_runner" type="runner" load="<span class="notranslate">galaxy</span>.jobs.runners.pulsar:PulsarMQJobRunner" &gt;
++            &lt;param id="amqp_url"&gt;pyamqp://<span class="notranslate">galaxy</span>_au:{{ vault_rabbitmq_password_vhost }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1&lt;/param&gt;
++            &lt;param id="amqp_ack_republish_time"&gt;1200&lt;/param&gt;
++            &lt;param id="amqp_acknowledge"&gt;True&lt;/param&gt;
++            &lt;param id="amqp_consumer_timeout"&gt;2.0&lt;/param&gt;
++            &lt;param id="amqp_publish_retry"&gt;True&lt;/param&gt;
++            &lt;param id="amqp_publish_retry_max_retries"&gt;60&lt;/param&gt;
++            &lt;param id="<span class="notranslate">galaxy</span>_url"&gt;https://{{ inventory_hostname }}&lt;/param&gt;
++            &lt;param id="manager"&gt;_default_&lt;/param&gt;
++        &lt;/plugin&gt;
+</span>     &lt;/plugins&gt;
+     &lt;destinations default="slurm"&gt;
+         &lt;destination id="local_destination" runner="local_plugin"/&gt;
+   
 </code></pre></div>      </div>
 
       <p>Add the following to the <code class="language-plaintext highlighter-rouge">&lt;destinations&gt;</code> section of your <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file:</p>
 
-      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"pulsar"</span> <span class="na">runner=</span><span class="s">"pulsar_runner"</span> <span class="nt">&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"default_file_action"</span><span class="nt">&gt;</span>remote_transfer<span class="nt">&lt;/param&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"dependency_resolution"</span><span class="nt">&gt;</span>remote<span class="nt">&lt;/param&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"jobs_directory"</span><span class="nt">&gt;</span>/mnt/pulsar/files/staging<span class="nt">&lt;/param&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"persistence_directory"</span><span class="nt">&gt;</span>/mnt/pulsar/files/persisted_data<span class="nt">&lt;/param&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"remote_metadata"</span><span class="nt">&gt;</span>False<span class="nt">&lt;/param&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"rewrite_parameters"</span><span class="nt">&gt;</span>True<span class="nt">&lt;/param&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"transport"</span><span class="nt">&gt;</span>curl<span class="nt">&lt;/param&gt;</span>
-<span class="nt">&lt;/destination&gt;</span>
+      <div data-commit="Add pulsar destination" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+</span><span class="p">@@ -15,6 +15,15 @@</span>
+     &lt;/plugins&gt;
+     &lt;destinations default="slurm"&gt;
+         &lt;destination id="local_destination" runner="local_plugin"/&gt;
+<span class="gi">+        &lt;destination id="pulsar" runner="pulsar_runner" &gt;
++            &lt;param id="default_file_action"&gt;remote_transfer&lt;/param&gt;
++            &lt;param id="dependency_resolution"&gt;remote&lt;/param&gt;
++            &lt;param id="jobs_directory"&gt;/mnt/pulsar/files/staging&lt;/param&gt;
++            &lt;param id="persistence_directory"&gt;/mnt/pulsar/files/persisted_data&lt;/param&gt;
++            &lt;param id="remote_metadata"&gt;False&lt;/param&gt;
++            &lt;param id="rewrite_parameters"&gt;True&lt;/param&gt;
++            &lt;param id="transport"&gt;curl&lt;/param&gt;
++        &lt;/destination&gt;
+</span>         &lt;destination id="slurm" runner="slurm"&gt;
+             &lt;param id="singularity_enabled"&gt;true&lt;/param&gt;
+             &lt;env id="LC_ALL"&gt;C&lt;/env&gt;
+   
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1625,16 +1822,17 @@ curl <span class="nt">-k</span> https://localhost:5671
 
       <p>Add the following to the end of the <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file (inside the <code class="language-plaintext highlighter-rouge">&lt;tools&gt;</code> section if it exists or create it if it doesn’t.)</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+      <div data-commit="Send bwa and bwa-mem to pulsar" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
 </span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-</span><span class="p">@@ -35,6 +35,7 @@</span>
-
-     &lt;/destinations&gt;
+</span><span class="p">@@ -63,5 +63,7 @@</span>
+     &lt;/resources&gt;
      &lt;tools&gt;
+         &lt;tool id="testing" destination="dynamic_cores_time" resources="testing" /&gt;
 <span class="gi">+        &lt;tool id="bwa" destination="pulsar"/&gt;
 +        &lt;tool id="bwa_mem" destination="pulsar"/&gt;
 </span>     &lt;/tools&gt;
  &lt;/job_conf&gt;
+   
 </code></pre></div>      </div>
 
       <p>Note that here we are using the short tool IDs. If you want to run only a specific version of a tool in Pulsar, you have to use the full tool ID (e.g. <code class="language-plaintext highlighter-rouge"><span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4</code>) instead. The full tool ID can be found inside the <code class="language-plaintext highlighter-rouge">integrated_tool_panel.xml</code> file in the <code class="language-plaintext highlighter-rouge">mutable-config</code> directory.</p>
@@ -1687,11 +1885,19 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
 
 <p>You’ll notice that the Pulsar server has received the job (all the way in Australia!) and now should be installing bwa-mem via conda. Once this is complete (which may take a while - first time only) the job will run. When it starts running it will realise it needs the <em>E. coli</em> genome from CVMFS and fetch that, and then results will be returned to <span class="notranslate">Galaxy</span>!</p>
 
+<blockquote class="hidden">
+  <div data-test="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl <span class="nt">--no-pager</span> status pulsar
+</code></pre></div>  </div>
+</blockquote>
+
 <p>How awesome is that? Pulsar in another continent with reference data automatically from CVMFS :)</p>
+
+<!--SNIPPET-->
+<blockquote class="comment">  <h3 data-toc-skip="" id="-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Got lost along the way?</h3>  <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-8">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-7...step-8#files_bucket">the previous tutorial</a>.</p></blockquote>
 
 <h1 id="retries-of-the-staging-actions">Retries of the staging actions</h1>
 
-<p>When the staging actions are carried out by the Pulsar server itself (like in the case when driving Pulsar by message queue), there are some parameters that can be tweaked to ensure reliable communication between the <span class="notranslate">Galaxy</span> server and the remote Pulsar server. 
+<p>When the staging actions are carried out by the Pulsar server itself (like in the case when driving Pulsar by message queue), there are some parameters that can be tweaked to ensure reliable communication between the <span class="notranslate">Galaxy</span> server and the remote Pulsar server.
 The aim of these parameters is to control the retrying of staging actions in the event of a failure.</p>
 
 <p>For each action (preprocess/input or postprocess/output), you can specify:</p>
@@ -1838,7 +2044,7 @@ The aim of these parameters is to control the retrying of staging actions in the
     title = "Running Jobs on Remote Resources with Pulsar (Galaxy Training Materials)",
     year = "2021",
     month = "06",
-    day = "02"
+    day = "03"
     url = "\url{/training-material/topics/admin/tutorials/pulsar/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

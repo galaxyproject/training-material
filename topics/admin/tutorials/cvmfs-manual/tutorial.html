@@ -325,7 +325,7 @@
 }
     </script>
 
-    <section class="tutorial">
+    <section class="tutorial topic-admin">
         <h1 data-toc-skip>Reference Data with CVMFS without Ansible</h1>
         
 
@@ -392,7 +392,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 28, 2020 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 4, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -573,14 +573,36 @@ owIDAQAB
 
         <blockquote class="solution">
           <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-          <p>You should see nothing, as CVMFS uses <code class="language-plaintext highlighter-rouge">autofs</code> in order to mount paths only upon request. Once you <code class="language-plaintext highlighter-rouge">cd</code> into the directory, autofs will automatically mount the repository and files will be listed.</p>
+          <p>You should see nothing, as CVMFS uses <code class="language-plaintext highlighter-rouge">autofs</code> in order to mount paths only upon request.</p>
 
         </blockquote>
 
       </blockquote>
     </li>
     <li>
-      <p>Change directory into <code class="language-plaintext highlighter-rouge">/cvmfs/data.<span class="notranslate">galaxy</span>project.org/</code>. Have a browse through the contents. You’ll see <code class="language-plaintext highlighter-rouge">.loc</code> files, genomes and indices.</p>
+      <p>Change directory into <code class="language-plaintext highlighter-rouge">/cvmfs/data.<span class="notranslate">galaxy</span>project.org/</code>.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /cvmfs/data.<span class="notranslate">galaxy</span>project.org/
+ls
+ls byhand
+ls managed
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="question">
+        <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>What do you see now?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p>You’ll see <code class="language-plaintext highlighter-rouge">.loc</code> files, genomes and indices.
+AutoFS only mounts the files when they’re accessed, so it appears like there is no folder there.</p>
+        </blockquote>
+
+      </blockquote>
 
       <p>And just like that we all have access to all the reference genomes and associated tool indices thanks to the <span class="notranslate">Galaxy</span> Project, IDC, and Nate’s hard work!</p>
 
@@ -646,7 +668,7 @@ owIDAQAB
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Simon Gladman, Helena Rasche, 2020 <b>Reference Data with CVMFS without Ansible (Galaxy Training Materials)</b>. <a href="/training-material/topics/admin/tutorials/cvmfs-manual/tutorial.html">/training-material/topics/admin/tutorials/cvmfs-manual/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Simon Gladman, Helena Rasche, 2021 <b>Reference Data with CVMFS without Ansible (Galaxy Training Materials)</b>. <a href="/training-material/topics/admin/tutorials/cvmfs-manual/tutorial.html">/training-material/topics/admin/tutorials/cvmfs-manual/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -663,9 +685,9 @@ owIDAQAB
 <code id="citation-code">@misc{admin-cvmfs-manual,
     author = "Simon Gladman and Helena Rasche",
     title = "Reference Data with CVMFS without Ansible (Galaxy Training Materials)",
-    year = "2020",
-    month = "09",
-    day = "28"
+    year = "2021",
+    month = "05",
+    day = "04"
     url = "\url{/training-material/topics/admin/tutorials/cvmfs-manual/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
