@@ -681,21 +681,26 @@ $ make client-lint
 
 ### mypy and Python Types
 
-Starting with release 21.01, we are experimenting with adding type annotations to our Python
-code. We are not enforcing typing for imported library code and [mypy](https://mypy.readthedocs.io/en/stable/) does a fair job inferring
-types in most situations, so this process should be relatively transparent to contributors.
+Starting with release 21.01, portions of the Galaxy backend have
+Python 3 type annotations and static checking is performed as part of
+CI. Imported library types are not enforcing and
+[mypy](https://mypy.readthedocs.io/en/stable/) does a fair job
+inferring types in most situations, so this process should be
+relatively transparent to contributors.
 
-If there are problems with typing, the CI should produce fairly explicit output about how to
-correct problems. These problems generally just require a single type annotation - feel free
-to request help on a pull request for what that should look like.
+If there are problems with typing, the CI produces explicit output
+about how to correct problems. These problems generally just require a
+single type annotation. Feel free to request help on a pull request
+for what that should look like.
 
-To run a subset of the python type checking locally, `tox` again can be used:
+To run a subset of the python type checking locally, `tox` again can
+be used:
 
 ```
 $ tox -e mypy
 ```
 
-A quick overview about why one might want to add type annotation to Python code and how to use
+A quick overview about why to add type annotations to Python code and how to use
 them can be found on this [blog post](https://dev.to/dstarner/using-pythons-type-annotations-4cfe).
 Additional useful resources include [this cheat sheet from mypy](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html)
 and the Python docs for the [typing module](https://docs.python.org/3/library/typing.html).
@@ -717,7 +722,7 @@ However, Marius has assembled some documentation on debugging the [Galaxy server
 ![docs.galaxyproject.org](../../images/core_docs.png)
 
 All these documents as well as versions code and deployment documentation and release notes
-can be found at docs.galaxyproject.org.
+can be found at [docs.galaxyproject.org](https://docs.galaxyproject.org).
 
 ---
 
@@ -893,6 +898,361 @@ Expanding the right side of that diagram. We will move through the component lef
 
 ---
 
+class: enlarge120
+template: left-aligned
+
+### ASGI - Application
+
+Spirtual successor to
+[WSGI](https://www.python.org/dev/peps/pep-0333/). An ASGI application
+is a async callable that takes in a `scope` (`dict` describing the
+connection), `send` (an async callable to respond to events via),
+and `receive` (an async callable to receive messages).
+
+```python
+async def application(scope, receive, send):
+    event = await receive()
+    ...
+    await send({&quot;type&quot;: &quot;http.response.body&quot;, ...})
+```
+
+Checkout [ASGI documentaiton](https://asgi.readthedocs.io/) for more details.
+
+---
+
+template: left-aligned
+
+### ASGI &amp; Starlette Low-level Example
+
+We will talk about a lot about Galaxy and FastAPI - but much of its
+plubming is just aliases for starlette ASGI handling.
+
+```python
+from starlette.responses import PlainTextResponse
+
+async def app(scope, receive, send):
+    assert scope['type'] == &quot;http&quot;
+    response = PlainTextResponse('Hello, world!')
+    await response(scope, receive, send)
+```
+
+If this is placed in a file called `example.py` with Starlette on
+the Python path, the application server uvicorn can then host this
+application with the following shell command:
+
+```
+$ uvicorn example:app
+INFO: Started server process [11509]
+INFO: Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+```
+
+Example from [starlette.io](https://www.starlette.io/).
+
+---
+
+template: left-aligned
+
+### ASGI - Starlette High-level Example
+
+Building a higher-level `example.py` with Starlette.
+
+
+```python
+from starlette.applications import Starlette
+from starlette.responses import JSONResponse
+from starlette.routing import Route
+
+
+async def homepage(request):
+    return JSONResponse({'hello': 'world'})
+
+
+app = Starlette(debug=True, routes=[
+    Route('/', homepage),
+])
+```
+
+A small framework for building web applications.
+
+---
+
+template: left-aligned
+
+### ASGI - FastAPI
+
+From https://github.com/tiangolo/fastapi/blob/master/fastapi/applications.py
+
+```python
+...
+from starlette.applications import Starlette
+...
+
+class FastAPI(Starlette):
+    ...
+```
+
+FastAPI (the library and the application base) extends starlette framework with features for building APIs. These include data
+validation, serialization, documentation generation.
+
+---
+
+![Processing requests on the server](../../images/asgi_app.plantuml.svg)
+
+---
+
+template: left-aligned
+
+### FastAPI `__call__`
+
+https://github.com/tiangolo/fastapi/blob/master/fastapi/applications.py
+
+```python
+async def __call__(self, scope: Scope, receive: Receive, send: Send) -&gt; None:
+    if self.root_path:
+        scope[&quot;root_path&quot;] = self.root_path
+    if AsyncExitStack:
+        async with AsyncExitStack() as stack:
+             scope[&quot;fastapi_astack&quot;] = stack
+             await super().__call__(scope, receive, send)
+    else:
+        await super().__call__(scope, receive, send)  # pragma: no cover
+```
+
+A light wrapper around Starlette's call entry point.
+
+---
+
+template: left-aligned
+
+### Starlette `__call__`
+
+https://github.com/encode/starlette/blob/master/starlette/applications.py
+
+```python
+async def __call__(self, scope: Scope, receive: Receive, send: Send) -&gt; None:
+   scope[&quot;app&quot;] = self
+   await self.middleware_stack(scope, receive, send)
+```
+
+Walks through Starlette middleware.
+
+---
+
+template: left-aligned
+
+### Starlette `build_middleware_stack`
+
+https://github.com/encode/starlette/blob/master/starlette/applications.py
+
+```python
+def build_middleware_stack(self) -&gt; ASGIApp:
+    ...
+
+    app = self.router
+    for cls, options in reversed(middleware):
+        app = cls(app=app, **options)
+    return app
+```
+
+Start with the router and surrond it with each layer of configured middleware.
+
+---
+
+template: left-aligned
+class: has-quote, enlarge150
+
+### ASGI Middleware
+
+&gt; It is possible to have ASGI “middleware” - code that plays the role of both server and application, taking in a scope and the send/receive awaitable callables, potentially modifying them, and then calling an inner application.
+
+https://asgi.readthedocs.io/en/latest/specs/main.html#middleware
+
+---
+
+template: left-aligned
+class: has-quote, enlarge150
+
+### Starlette Middleware
+
+&gt; Starlette includes several middleware classes for adding behavior that is applied across your entire application. These are all implemented as standard ASGI middleware classes, and can be applied either to Starlette or to any other ASGI application.
+
+https://www.starlette.io/middleware/
+
+---
+
+template: left-aligned
+
+### FastAPI Router Initialization
+
+https://github.com/tiangolo/fastapi/blob/master/fastapi/applications.py
+
+```python
+class FastAPI(Starlette):
+    def __init__(self, ...):
+        self.router: routing.APIRouter = routing.APIRouter(
+            routes=routes,
+        )
+```
+
+---
+
+### FastAPI Router
+
+```python
+from starlette import routing
+
+class APIRouter(routing.Router):
+   ...
+```
+
+---
+
+### Starlette Router
+
+https://github.com/encode/starlette/blob/master/starlette/routing.py
+
+```python
+async def __call__(self, scope: Scope, receive: Receive, send: Send) -&gt; None:
+   ...
+   for route in self.routes:
+       # Determine if any route matches the incoming scope,
+       # and hand over to the matching route if found.
+       match, child_scope = route.matches(scope)
+       if match == Match.FULL:
+           scope.update(child_scope)
+           await route.handle(scope, receive, send)
+           return
+       ...
+```
+
+https://www.starlette.io/routing/
+
+---
+
+### FastAPI Factory
+
+`lib/galaxy/webapps/galaxy/fast_factory.py`
+
+```python
+def factory():
+    props = WebappSetupProps(
+        app_name='galaxy',
+        default_section_name=DEFAULT_CONFIG_SECTION,
+        env_config_file='GALAXY_CONFIG_FILE',
+        env_config_section='GALAXY_CONFIG_SECTION',
+        check_galaxy_root=True
+    )
+    config_provider = WebappConfigResolver(props)
+    config = config_provider.resolve_config()
+    gx_webapp, gx_app = app_pair(
+        global_conf=config.global_conf,
+        load_app_kwds=config.load_app_kwds,
+        wsgi_preflight=config.wsgi_preflight
+    )
+    return initialize_fast_app(gx_webapp, gx_app)
+```
+
+---
+
+### FastAPI Application
+
+`lib/galaxy/webapps/galaxy/fast_app.py`
+
+```python
+def initialize_fast_app(gx_webapp, gx_app):
+    app = FastAPI(
+        title=&quot;Galaxy API&quot;,
+        docs_url=&quot;/api/docs&quot;,
+        openapi_tags=api_tags_metadata,
+    )
+    add_exception_handler(app)
+    add_galaxy_middleware(app, gx_app)
+    add_request_id_middleware(app)
+    include_all_package_routers(app, 'galaxy.webapps.galaxy.api')
+    wsgi_handler = WSGIMiddleware(gx_webapp)
+    app.mount('/', wsgi_handler)
+    return app
+```
+
+---
+
+### Finding API Routers
+
+Following this line:
+
+`include_all_package_routers(app, 'galaxy.webapps.galaxy.api')`
+
+to the file 
+
+`lib/galaxy/webapps/base/api.py`
+
+```python
+def include_all_package_routers(app: FastAPI, package_name: str):
+    for _, module in walk_controller_modules(package_name):
+        router = getattr(module, &quot;router&quot;, None)
+        if router:
+            app.include_router(router)
+```
+
+---
+
+![Router Class Diagram](../../images/routers.plantuml.svg)
+
+- https://www.starlette.io/routing/
+- https://fastapi.tiangolo.com/tutorial/bigger-applications/#apirouter
+- https://fastapi-utils.davidmontague.xyz/user-guide/inferring-router/
+
+---
+
+class: reduce70
+
+### Routing inside the Application
+
+```python
+router = Router(tags=['tags'])
+
+
+@router.cbv
+class FastAPITags:
+    manager: TagsManager = depends(TagsManager)
+
+    @router.put(
+        '/api/tags',
+        summary=&quot;Apply a new set of tags to an item.&quot;,
+        status_code=status.HTTP_204_NO_CONTENT,
+    )
+    def update(
+        self,
+        trans: ProvidesUserContext = DependsOnTrans,
+        payload: ItemTagsPayload = Body(
+            ...,  # Required
+            title=&quot;Payload&quot;,
+            description=&quot;Request body containing the item and the tags to be assigned.&quot;,
+        ),
+    ):
+        &quot;&quot;&quot;Replaces the tags associated with an item with the new ones specified in the payload.
+
+        - The previous tags will be __deleted__.
+        - If no tags are provided in the request body, the currently associated tags will also be __deleted__.
+        &quot;&quot;&quot;
+        self.manager.update(trans, payload)
+```
+
+---
+
+### WSGI Fallback
+
+Back to `initialize_fast_app`, two of the final lines were as follows:
+
+```python
+wsgi_handler = WSGIMiddleware(gx_webapp)
+app.mount('/', wsgi_handler)
+```
+
+This effectively provies a fallback to our legacy WSGI application.
+
+---
+
 ### WSGI
 
 - Python interface for web servers defined by PEP 333 - https://www.python.org/dev/peps/pep-0333/.
@@ -938,19 +1298,19 @@ Middleware configured in `galaxy.webapps.galaxy.buildapp#wrap_in_middleware`.
 
 ---
 
-![Processing requests on the server](../../images/wsgi_app.plantuml.svg)
-
----
-
-### Classes
-
-![GalaxyWebApplication class diagram](../../images/webapp_classes.plantuml.svg)
+![Processing requests on the server (WSGI)](../../images/wsgi_app.plantuml.svg)
 
 ---
 
 ### Instances
 
 ![webapp](../../images/webapp.plantuml.svg)
+
+---
+
+### Classes
+
+![GalaxyWebApplication class diagram](../../images/webapp_classes.plantuml.svg)
 
 ---
 
@@ -1012,29 +1372,159 @@ def handle_request(self, environ, start_response):
 
 class: enlarge150
 
-### Why not just Django?
+### Controllers
 
-We do build on many of the same standards, concepts, and libraries - the entire stack isn't custom code but there is a non-trivial web framework defined in &quot;Galaxy&quot;.
+Three varieties
 
-The Galaxy community likes Django and uses it to build newer webapps, Galaxy simply predates it and has evolved its own framework.
+1. FastAPI ASGI API controllers
+2. WSGI API controllers
+3. Legacy WSGI web controllers.
 
----
-
-class: enlarge150
-
-### API Controllers
-
-- `lib/galaxy/webapps/galaxy/controllers/api/`
-- Exposed method take `trans` and request parameters and return a JSON response.
-- Ideally these are *thin*
-  - Focused on &quot;web things&quot; - adapting parameters and responses and move
-    &quot;business logic&quot; to components not bound to web functionality.
+Ideally each of these are *thin*. Focused on &quot;web things&quot; - adapting parameters and responses and move
+&quot;business logic&quot; to components not bound to web functionality.
 
 ---
 
 class: enlarge150
 
-### Legacy Controllers
+### FastAPI Controllers
+
+- Found in `lib/galaxy/webapps/galaxy/controllers/api/`.
+- Consume and produce typed data using Python 3 type annotations, FastAPI helpers, and Pydantic models.
+- Router specifies HTTP verb (GET, POST, PUT, etc..) and how to parse path.
+
+---
+
+class: reduce70
+
+### FastAPI Controller Example
+
+`lib/galaxy/webapps/galaxy/controllers/api/roles.py`
+
+```python
+@router.cbv
+class FastAPIRoles:
+    role_manager: RoleManager = depends(RoleManager)
+
+    @router.get('/api/roles')
+    def index(self, trans: ProvidesUserContext = DependsOnTrans) -&gt; RoleListModel:
+        roles = self.role_manager.list_displayable_roles(trans)
+        return RoleListModel(__root__=[role_to_model(trans, r) for r in roles])
+
+    @router.get('/api/roles/{id}')
+    def show(self, id: EncodedDatabaseIdField, trans: ProvidesUserContext = DependsOnTrans) -&gt; RoleModel:
+        role_id = trans.app.security.decode_id(id)
+        role = self.role_manager.get(trans, role_id)
+        return role_to_model(trans, role)
+
+    @router.post(&quot;/api/roles&quot;, require_admin=True)
+    def create(self, trans: ProvidesUserContext = DependsOnTrans, role_definition_model: RoleDefinitionModel = Body(...)) -&gt; RoleModel:
+        role = self.role_manager.create_role(trans, role_definition_model)
+        return role_to_model(trans, role)    
+```
+
+---
+
+class: reduce70
+
+### FastAPI and Pydantic
+
+```python
+RoleIdField = Field(title=&quot;ID&quot;, description=&quot;Encoded ID of the role&quot;)
+RoleNameField = Field(title=&quot;Name&quot;, description=&quot;Name of the role&quot;)
+RoleDescriptionField = Field(title=&quot;Description&quot;, description=&quot;Description of the role&quot;)
+
+
+class BasicRoleModel(BaseModel):
+    id: EncodedDatabaseIdField = RoleIdField
+    name: str = RoleNameField
+    type: str = Field(title=&quot;Type&quot;, description=&quot;Type or category of the role&quot;)
+
+
+class RoleModel(BasicRoleModel):
+    description: str = RoleDescriptionField
+    url: str = Field(title=&quot;URL&quot;, description=&quot;URL for the role&quot;)
+    model_class: str = Field(title=&quot;Model class&quot;, description=&quot;Database model class (Role)&quot;)
+
+
+class RoleDefinitionModel(BaseModel):
+    name: str = RoleNameField
+    description: str = RoleDescriptionField
+    user_ids: Optional[List[EncodedDatabaseIdField]] = Field(title=&quot;User IDs&quot;, default=[])
+    group_ids: Optional[List[EncodedDatabaseIdField]] = Field(title=&quot;Group IDs&quot;, default=[])
+```
+
+---
+
+### FastAPI and OpenAPI
+
+`FastAPI(title=&quot;Galaxy API&quot;, docs_url=&quot;/api/docs&quot;, ...)`
+
+![OpenAPI Docs from FastAPI at api/docs](../../images/core_api_docs.png)
+
+---
+
+![OpenAPI Docs from FastAPI at api/docs for roles](../../images/core_api_docs_roles.png)
+
+---
+
+class: enlarge150
+
+### WSGI API Controllers
+
+- Also in `lib/galaxy/webapps/galaxy/controllers/api/`
+- Mirroring FastAPI controllers until FastAPI required (likely 21.09)
+- Exposed method take `trans` and request parameters and return a JSON response (possibly including Pydantic objects)
+
+---
+
+class: reduce70
+
+### WSGI API Controller Example
+
+`lib/galaxy/webapps/galaxy/controllers/api/roles.py`
+
+```python
+class RoleAPIController(BaseGalaxyAPIController):
+    role_manager: RoleManager = depends(RoleManager)
+
+    @web.expose_api
+    def index(self, trans: ProvidesUserContext, **kwd):
+        &quot;&quot;&quot;
+        GET /api/roles
+        Displays a collection (list) of roles.
+        &quot;&quot;&quot;
+        roles = self.role_manager.list_displayable_roles(trans)
+        return RoleListModel(__root__=[role_to_model(trans, r) for r in roles])
+
+    @web.expose_api
+    def show(self, trans: ProvidesUserContext, id: str, **kwd):
+        &quot;&quot;&quot;
+        GET /api/roles/{encoded_role_id}
+        Displays information about a role.
+        &quot;&quot;&quot;
+        role_id = decode_id(self.app, id)
+        role = self.role_manager.get(trans, role_id)
+        return role_to_model(trans, role)
+
+    @web.expose_api
+    @web.require_admin
+    def create(self, trans: ProvidesUserContext, payload, **kwd):
+        &quot;&quot;&quot;
+        POST /api/roles
+        Creates a new role.
+        &quot;&quot;&quot;
+        expand_json_keys(payload, [&quot;user_ids&quot;, &quot;group_ids&quot;])
+        role_definition_model = RoleDefinitionModel(**payload)
+        role = self.role_manager.create_role(trans, role_definition_model)
+        return role_to_model(trans, role)    
+```
+
+---
+
+class: enlarge150
+
+### Legacy WSGI Controllers
 
 - `lib/galaxy/webapps/galaxy/controllers/`
 - Return arbitrary content - JSON, HTML, etc...
@@ -2232,6 +2722,16 @@ Admin things, Reports and Tool Shed Web app
 ![WSGI Application](../../images/wsgi_app.svg)
 
 ### Galaxy WSGI
+
+---
+
+class: enlarge150
+
+### Why not just Django?
+
+We do build on many of the same standards, concepts, and libraries - the entire stack isn't custom code but there is a non-trivial web framework defined in &quot;Galaxy&quot;.
+
+The Galaxy community likes Django and uses it to build newer webapps, Galaxy simply predates it and has evolved its own framework.
 
 ---
 
