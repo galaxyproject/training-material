@@ -654,4 +654,3 @@ If you are working with plants, you can find separate reference data here: [fred
 > hope you enjoyed it and hopefully I'll get to meet some of you in person one
 > day soon at a Galaxy conference. Thank you and goodbye.
 {: .spoken data-visual="gtn" data-target="#feedback"}
-
