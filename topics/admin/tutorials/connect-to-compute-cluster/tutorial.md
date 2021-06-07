@@ -357,7 +357,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >
 >     # systemd
 >     galaxy_manage_systemd: yes
->    +galaxy_systemd.env: DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"
+>    +galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
 >
 >     # Certbot
 >     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
