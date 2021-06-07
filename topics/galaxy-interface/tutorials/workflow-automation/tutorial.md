@@ -274,15 +274,31 @@ Planemo provides a useful profile feature which can help simplify long commands.
 
 # Automated runs of a workflow for SARS-CoV-2 lineage assignment
 
+It's now time to apply your newly acquired knowledge of workflow execution with Planemo to a relevant scientific problem.
+
 ## Scientific background
 
-<!-- tba from wm75 -->
+The SARS-CoV-2 pandemic has been accompanied by unprecedented world-wide sequencing efforts. One of the accepted goals behind sequencing hundreds of thousands of individual viral isolates is to monitor the evolution and spreading of viral lineages in as close as real time as possible. Viral lineages are characterized by defining patterns of mutations that make them different from each other and from the original virus that started the pandemic at the beginning of 2020. Examples of viral lineages are B.1.1.7, first observed in the UK in the fall of 2020 and now termed *variant of concern (VOC) alpha* according to the WHO's classification system, and B.1.617.2, first seen in India at the beginning of 2021 and now recognized as *VOC delta*.
 
-...
+[Pangolin](https://cov-lineages.org/pangolin.html) is a widely used tool for assigning newly sequenced viral isolates to established viral lineages, and in this final section of this tutorial you are going to run a workflow that:
+
+1. takes a collection of variant datasets in the *variant call format* VCF,
+
+   where you can think of a collection as representing a batch of freshly sequenced viral isolates with each of its VCF datasets listing the nucleotide differences between one sample and the sequence of an original SARS-CoV-2 reference isolate
+
+2. reconstructs the viral genome sequence of each sample by incorporating its variants into the reference isolate's sequence
+
+3. uses Pangolin to classify the resulting collection of genome sequences in FASTA format and to create a report of lineage assignments for all samples.
+
+Like in a real world situation you will receive VCF files for several batches of samples and you will be facing the challenge of uploading the files from each batch as a collection into Galaxy and of triggering a run of the workflow for each of them.
 
 ## Setting up the bot
 
-Now it's time to apply our knowledge of Planemo to the task of automating the lineage assignment workflow just described.
+Unlike for the previous toy example you will not get complete step-by-step instructions, but you are supposed to try yourself to transfer the knowledge from part 1 to this new, more complex task.
+
+Every step along the way comes with solutions, which you can expand at any time, but you're encouraged to give each problem some thought first.
+
+As a very first step, however, let's look at how the material for this part is arranged.
 
 > ### {% icon hands_on %} Hands-on: Step into and explore the pangolin folder
 >
@@ -301,7 +317,9 @@ Now it's time to apply our knowledge of Planemo to the task of automating the li
 >
 {: .hands_on}
 
-The file `vcf2lineage.ga` defines the workflow just described, while the `data/` folder holds the batches of VCF files we would, ultimately want to run the workflow on. As a start, lets get the workflow running on the first batch of files in the `data/batch1/` subfolder.
+The file `vcf2lineage.ga` defines the workflow just described, while the `data/` folder holds the batches of VCF files we would, ultimately, like to run the workflow on.
+
+Now, as a start, let's get the workflow running on the first batch of files in the `data/batch1/` subfolder.
 
 > ### {% icon hands_on %} Hands-on: An initial workflow run
 >
@@ -330,9 +348,9 @@ The file `vcf2lineage.ga` defines the workflow just described, while the `data/`
 >    > >     path: todo_test_data_path.ext
 >    > > min-AF for consensus variant: todo_param_value
 >    > > ```
->    > >
->    > > The job file contains three inputs: the `Reference genome`, a collection of VCF files (`Variant calls`) and a float parameter for the minimum allele frequency (`min-AF for consensus variant`). Later, we will need to specify each element of the collection under `elements` - currently there is just a single placeholder element.
 >    > {: .code-out}
+>    >
+>    > The job file contains three inputs: the `Reference genome`, a collection of VCF files (`Variant calls`) and a float parameter for the minimum allele frequency (`min-AF for consensus variant`). Later, we will need to specify each element of the collection under `elements` - currently there is just a single placeholder element.
 >    {: .details}
 >
 > 2. Replace the placeholder values: `Reference genome` should point to `data/NC_045512.2_reference_sequence.fasta`, `Variant calls` should contain all the VCF files in `data/batch1`, and `min-AF for consensus variant` should be set to `0.7`.
