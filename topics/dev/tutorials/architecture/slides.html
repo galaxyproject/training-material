@@ -1328,6 +1328,330 @@ class: enlarge150
 
 ---
 
+## Dependency Injection
+
+*The architecture of connecting Galaxy components.*
+
+---
+
+![Big Interconnected App Python 2](../../images/app_py2.plantuml.svg)
+
+---
+
+class: reduce90
+
+### Design Problems with Handling Dependencies Directly
+
+Using app to construct a manager for dealing with dataset collections.
+
+```python
+class DatasetCollectionManager:
+ 
+     def __init__(self, app):
+        self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
+        self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
+        self.model = app.model
+        self.security = app.security
+ 
+        self.hda_manager = hdas.HDAManager(app)
+        self.history_manager = histories.HistoryManager(app)
+        self.tag_handler = tags.GalaxyTagHandler(app.model.context)
+        self.ldda_manager = lddas.LDDAManager(app)
+```
+
+- DatasetCollectionManager needs to know how to construct all the other managers it is using, not just their interface.
+- `app` has a instance of this class and `app` is used to construct and instance of this class - this circular dependency
+  chain results in brittleness and complexity in how to construct `app`.
+- `app` is very big and we're depending on a lot of it but not a large percent it. This makes typing less than ideal.
+
+---
+
+class: reduce90
+
+### Testing Problems with Handling Dependencies Directly
+
+```python
+class DatasetCollectionManager:
+ 
+     def __init__(self, app):
+        self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
+        self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
+        self.model = app.model
+        self.security = app.security
+ 
+        self.hda_manager = hdas.HDAManager(app)
+        self.history_manager = histories.HistoryManager(app)
+        self.tag_handler = tags.GalaxyTagHandler(app.model.context)
+        self.ldda_manager = lddas.LDDAManager(app)
+```
+
+- Difficult to unit test properly
+  - What parts of app are being used?
+  - How do we construct a smaller app with just those pieces?
+  - How do we stub out classes cleanly when we're creating the dependent objects internally.
+
+---
+
+class: reduce90
+
+### Adding Typing
+
+.code[```python
+class DatasetCollectionManager:
+    def __init__(
+        self,
+        model: GalaxyModelMapping,
+        security: IdEncodingHelper,
+        hda_manager: HDAManager,
+        history_manager: HistoryManager,
+        tag_handler: GalaxyTagHandler,
+        ldda_manager: LDDAManager,
+    ):
+        self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
+        self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
+        self.model = model
+        self.security = security
+ 
+        self.hda_manager = hda_manager
+        self.history_manager = history_manager
+        self.tag_handler = tag_handler
+        self.ldda_manager = ldda_manager
+```]
+
+- mypy provides robust typing!
+- IDE can provide hints to make developing this code easier.
+
+---
+
+class: reduce90
+
+### Design Benefits of Typing
+
+.code[```python
+class DatasetCollectionManager:
+    def __init__(
+        self,
+        model: GalaxyModelMapping,
+        security: IdEncodingHelper,
+        hda_manager: HDAManager,
+        history_manager: HistoryManager,
+        tag_handler: GalaxyTagHandler,
+        ldda_manager: LDDAManager,
+    ):
+        self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
+        self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
+        self.model = model
+        self.security = security
+ 
+        self.hda_manager = hda_manager
+        self.history_manager = history_manager
+        self.tag_handler = tag_handler
+        self.ldda_manager = ldda_manager
+```]
+
+- We're no longer depending on `app`.
+- The type signature very clearly delinates what dependencies are required.
+- Unit testing can inject percise dependencies supplying only the behavior needed.
+
+---
+
+### Constructing the Object Is Still Brittle
+
+```python
+DatasetCollectionManager(
+    self.model,
+    self.security,
+    HDAManager(self),
+    HistoryManager(self),
+    GalaxyTagHandler(self.model.context),
+    LDDAManager(self)
+)
+```
+
+- The complexity in ordering of construction of `app` is still challenging.
+- The constructing code of this object still needs to know how to construct each dependency of the object.
+- The constructing code of this object needs to explicitly import all the types.
+
+---
+
+class: enlarge150
+
+### What is Type-based Dependency Injection?
+
+A dependency injection **container** keeps tracks of singleons or recipes for how to construct each type. By
+default when it goes to construct an object, it can just ask the container for each dependency based on the
+type signature of the class being constructed.
+
+If an object declares it consumes a dependency of type `X` (e.g. `HDAManager`), just query the container
+recursively for an object of type `X`.
+
+---
+
+### What happens to object construction?
+
+Once all the dependencies have been type annotated properly and the needed singletons have been configured.
+
+```python
+dcm = DatasetCollectionManager(
+    self.model,
+    self.security,
+    HDAManager(self),
+    HistoryManager(self),
+    GalaxyTagHandler(self.model.context),
+    LDDAManager(self)
+)
+```
+
+becomes
+
+```python
+dcm = container[DatasetCollectionManager]
+```
+
+---
+
+class: enlarge150
+
+### Picking a Library
+
+Many of the existing DI libraries for Python predate widespread Python 3 and don't readily infer things based on types.
+The benefits of typing and DI are both enhanced by the other - so it was important to pick one that could do type-based
+injection.
+
+We went with Lagom, but we've built abstractions that would make it very easy to switch.
+
+---
+
+### Lagom
+
+![Lagom Website](../../images/lagom_ss.png)
+
+https://lagom-di.readthedocs.io/en/latest/
+
+---
+
+### DI and Controllers - FastAPI
+
+FastAPI controllers allowed some basic dependency injection.
+
+```python
+def get_tags_manager() -> TagsManager:
+    return TagsManager()
+
+
+@cbv(router)
+class FastAPITags:
+    manager: TagsManager = Depends(get_tags_manager)
+    ...
+```
+
+Dependency injection allows for type checking but doesn't use type inference (requires factory functions, etc..)
+
+https://fastapi.tiangolo.com/tutorial/dependencies/
+
+---
+
+### DI and Controllers - FastAPI Limitations
+
+Also we have two different controller styles and only the new FastAPI allowed dependency injection.
+
+```python
+def get_tags_manager() -> TagsManager:
+    return TagsManager()
+
+
+@cbv(router)
+class FastAPITags:
+    manager: TagsManager = Depends(get_tags_manager)
+    ...
+
+class TagsController(BaseAPIController):
+
+    def __init__(self, app):
+        super().__init__(app)
+        self.manager = TagsManager()
+```
+
+---
+
+class: reduce90
+
+### DI and Controllers - Unified Approach
+
+```diff
+-def get_tags_manager() -> TagsManager:
+-    return TagsManager()
+-
+-
+ @cbv(router)
+ class FastAPITags:
+-    manager: TagsManager = Depends(get_tags_manager)
++    manager: TagsManager = depends(TagsManager)
+ 
+     @router.put(
+         '/api/tags',
+@@ -58,11 +54,8 @@ def update(
+         self.manager.update(trans, payload)
+ 
+ 
+-class TagsController(BaseAPIController):
+-
+-    def __init__(self, app):
+-        super().__init__(app)
+-        self.manager = TagsManager()
++class TagsController(BaseGalaxyAPIController):
++    manager: TagsManager = depends(TagsManager)
+```
+
+Building dependency injection into our application and not relying on FastAPI allows for dependency injection that is *less verbose*, available uniformly across the application, 
+*works for the legacy controllers identically*.
+
+---
+
+### DI and Tasks - Framework
+
+From `lib/galaxy/celery/tasks.py`
+
+```python
+from lagom import magic_bind_to_container
+...
+
+def galaxy_task(func):
+    CELERY_TASKS.append(func.__name__)
+    app = get_galaxy_app()
+    if app:
+        return magic_bind_to_container(app)(func)
+    return func
+```
+
+`magic_bind_to_container` to binds function parameters to a specified Lagom DI container automatically.
+
+---
+
+### DI and Tasks - Examples
+
+From `lib/galaxy/celery/tasks.py`
+
+```python
+@celery_app.task(ignore_result=True)
+@galaxy_task
+def purge_hda(hda_manager: HDAManager, hda_id):
+    hda = hda_manager.by_id(hda_id)
+    hda_manager._purge(hda)
+
+
+@celery_app.task
+@galaxy_task
+def set_metadata(hda_manager: HDAManager, ldda_manager: LDDAManager, dataset_id, model_class='HistoryDatasetAssociation'):
+    if model_class == 'HistoryDatasetAssociation':
+        dataset = hda_manager.by_id(dataset_id)
+    elif model_class == 'LibraryDatasetDatasetAssociation':
+        dataset = ldda_manager.by_id(dataset_id)
+    dataset.datatype.set_meta(dataset)
+```
+
+---
+
 ## Application Components - Models and Managers
 
 *The architecture surrounding Galaxy components.*
