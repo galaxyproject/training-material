@@ -407,7 +407,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 3, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 7, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -449,6 +449,8 @@
 
 <p>To run this tutorial, you will need to <a href="https://ephemeris.readthedocs.io/en/latest/installation.html">install Ephemeris</a>. You would normally install it on your workstation, but during training courses we recommend to install it on the same virtual machine used for the <span class="notranslate">Galaxy</span> server.</p>
 
+<p>If you are running this tutorial as part of a training course it is possible that ephemeris is already globally installed on your virtual machine.  Check for this by running the command <code class="language-plaintext highlighter-rouge">pip show ephemeris</code>.  If you see <code class="language-plaintext highlighter-rouge">WARNING: Package(s) not found: ephemeris</code>, then follow the instructions to install ephemeris in a virtual environment.</p>
+
 <blockquote class="tip">
   <h3 id="tip-installing-ephemeris-in-a-python-virtual-environment"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Installing Ephemeris in a Python virtual environment</h3>
 
@@ -488,7 +490,7 @@ pip install ephemeris
   <span class="na">tool_shed_url</span><span class="pi">:</span> <span class="s">https://<span class="notranslate">toolshed</span>.g2.bx.psu.edu</span>
 </code></pre></div></div>
 
-<p>Ephemeris can take care of this process. Let’s practice this on a real worfklow.</p>
+<p>Ephemeris can take care of this process. Let’s practice this on a real <span class="notranslate">workflow</span>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-extracting-a-list-of-tools-from-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extracting a list of tools from a <span class="notranslate">workflow</span></h3>
@@ -611,7 +613,14 @@ For that, you can install from a YAML file:</p>
       <p>Open your <span class="notranslate">Galaxy</span>’s admin interface and check that the tools have been installed.</p>
     </li>
     <li>
-      <p>Using the UI import the <span class="notranslate">workflow</span> file that you used, <a href="/training-material/topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga"><span class="notranslate">mapping</span>.ga</a> .</p>
+      <p>Using the UI import the <span class="notranslate">workflow</span> file that you used, <a href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga"><span class="notranslate">mapping</span>.ga</a>.</p>
+      <blockquote>
+        <blockquote>
+          <p>(i) Right-click or Ctrl-click on the link above and copy the link address</p>
+
+          <p>(ii) On your <span class="notranslate">Galaxy</span> instance click on <code class="language-plaintext highlighter-rouge"><span class="notranslate">Workflow</span></code>, then <code class="language-plaintext highlighter-rouge">Import</code>.  Paste the URL into the <code class="language-plaintext highlighter-rouge">Import Archived URL</code> field.</p>
+        </blockquote>
+      </blockquote>
     </li>
   </ol>
 </blockquote>
@@ -650,7 +659,7 @@ For that, you can install from a YAML file:</p>
 
   <ol>
     <li>
-      <p>Use the Ephemeris <a href="https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html"><code class="language-plaintext highlighter-rouge">shed-tools</code></a> command to test the <code class="language-plaintext highlighter-rouge">bamtools_filter</code> tool on your <span class="notranslate">Galaxy</span>.</p>
+      <p>Use the Ephemeris <a href="https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html#test"><code class="language-plaintext highlighter-rouge">shed-tools</code></a> command to test the <code class="language-plaintext highlighter-rouge">bamtools_filter</code> tool on your <span class="notranslate">Galaxy</span>.</p>
 
       <blockquote class="question">
         <h3 id="question-question-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -665,10 +674,18 @@ For that, you can install from a YAML file:</p>
         </blockquote>
       </blockquote>
     </li>
+    <li>
+      <p>Shed-tools test outputs a file with details of <code class="language-plaintext highlighter-rouge">tool_test_output.json</code> with details of jobs that have run.  Have a look at this file.</p>
+    </li>
   </ol>
 </blockquote>
 
 <p>This can give you some more confidence that things are working correctly. Oftentimes, users provide workflows for biological domains that we are not familiar with, so knowing how we can test these tools is impossible for us as admins. Leveraging the built-in tool test cases can give you reassurance that things are functional before you inform your users of the new tools.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tool-test-reports"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tool test reports</h3>
+  <p>The ephemeris <code class="language-plaintext highlighter-rouge">shed-tools test</code> command produces an output file <code class="language-plaintext highlighter-rouge">tool_test_output.json</code> with information about the test jobs that have run. <span class="notranslate">Galaxy</span>project’s <a href="https://github.com/galaxyproject/planemo">Planemo</a> can be used to generate <a href="https://planemo.readthedocs.io/en/latest/commands/test_reports.html?highlight=test_reports#test-reports-command">test reports</a> from tool_test_output.json in HTML and other formats.</p>
+</blockquote>
 
 <h1 id="obtaining-a-tool-list">Obtaining a Tool List</h1>
 
@@ -697,6 +714,9 @@ For that, you can install from a YAML file:</p>
         </blockquote>
       </blockquote>
     </li>
+    <li>
+      <p>Inpect the first few lines of tool list: Run <code class="language-plaintext highlighter-rouge">head -n 20 eu_tool_list.yaml</code>.</p>
+    </li>
   </ol>
 </blockquote>
 
@@ -713,12 +733,12 @@ For that, you can install from a YAML file:</p>
 
 <p>Interestingly, Use<span class="notranslate">Galaxy</span>.eu and Use<span class="notranslate">Galaxy</span>.org.au have different approaches:</p>
 <ul>
-  <li>AU maintains <a href="https://github.com/usegalaxy-au/usegalaxy-au-tools/tree/master/usegalaxy.org.au">a separate YAML file per tool panel section</a>, which allows to easily identify where tools should be added or found to add new revisions. They follow a cycle of adding the tool to their YAML file, triggering installation, and then updating the YAML files from the current server status.</li>
   <li>EU maintains <a href="https://github.com/usegalaxy-eu/usegalaxy-eu-tools">YAML files roughly per domain</a>, it is not as clear of an ordering. They maintain a YAML file where humans add the tools which should be installed in a given category, and lock files are automatically generated from these with the latest revision if it is missing. They follow a cycle of updating the lock files with the latest available revisions of tools, and then installing from these lock files any missing revisions. They use a <a href="https://build.galaxyproject.eu/job/usegalaxy-eu/job/install-tools/">Jenkins server</a> to automatically run tool installation weekly.</li>
+  <li>AU maintains <a href="https://github.com/usegalaxy-au/usegalaxy-au-tools/tree/master/usegalaxy.org.au">a separate YAML file per tool panel section</a> as a record of all installed tools on the server.  They accept tool requests as pull requests and a Jenkins server is notified when a pull request is merged so that the tool can be automatically installed and tested. Like EU, they run automatic updates of installed tools once a week.</li>
   <li>Together, <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>.*</code> are working on a collaborative approach at <a href="https://github.com/galaxyproject/usegalaxy-tools"><span class="notranslate">galaxy</span>project/use<span class="notranslate">galaxy</span>-tools</a> but this is not consumption ready yet.</li>
 </ul>
 
-<p>If running ephemeris directly is not your preference, there is also an Ansible <a href="https://github.com/galaxyproject/ansible-galaxy-tools">role</a> and a sample <a href="https://github.com/afgane/galaxy-tools-playbook">playbook</a> that can help automate some tasks.</p>
+<p>If running ephemeris directly is not your preference, there is an Ansible <a href="https://github.com/galaxyproject/ansible-galaxy-tools">role</a> and a sample <a href="https://github.com/afgane/galaxy-tools-playbook">playbook</a> that can help automate some tasks.</p>
 
 <blockquote class="tip">
   <h3 id="tip-what-if-environments-are-not-working"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> What if environments are not working</h3>
@@ -727,7 +747,7 @@ For that, you can install from a YAML file:</p>
 
 <blockquote class="tip">
   <h3 id="tip-can-you-install-multiple-tools-simultaneously"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Can you install multiple tools simultaneously?</h3>
-  <p>Previous experience with this is not good, there was a lot of unsafe code that would do things simultaneously that would destroy config files. But now it’s conda, so you may destroy conda environments. A solution for this is like how <a href="https://github.com/usegalaxy-eu/usegalaxy-eu-tools">Use<span class="notranslate">Galaxy</span>.eu does it</a>, where we keep the full list of tools we want to install, and then a CI server (Jenkins) installs them. In this way we can enforce that only a single install process is running at any time.</p>
+  <p>Previous experience with this is not good, there was a lot of unsafe code that would do things simultaneously that would destroy config files. With conda this is not recommended either, as this can corrupt conda environments. A solution for this is how <a href="https://github.com/usegalaxy-eu/usegalaxy-eu-tools">Use<span class="notranslate">Galaxy</span>.eu does it</a>, where they keep the full list of tools they want to install, and then a CI server (Jenkins) installs them. In this way they can enforce that only a single install process is running at any time.</p>
 </blockquote>
 
 <blockquote class="tip">
@@ -738,7 +758,7 @@ We cannot (and would not recommend) setting that certificate on your local machi
 
 <blockquote class="tip">
   <h3 id="tip-uninstalling-tools"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Uninstalling tools</h3>
-  <p>While there is a function to accomplish this in BioBlend, it has not been <a href="https://github.com/galaxyproject/ephemeris/issues/83">included in Ephemeris yet.</a> If you’re looking for a way to contribute to <span class="notranslate">Galaxy</span>, this would be great :)</p>
+  <p>While there is a function to accomplish this in <a href="https://github.com/galaxyproject/bioblend">BioBlend</a>, it has not been <a href="https://github.com/galaxyproject/ephemeris/issues/83">included in Ephemeris yet.</a> If you’re looking for a way to contribute to <span class="notranslate">Galaxy</span>, this would be great :)</p>
 </blockquote>
 
 
@@ -824,7 +844,7 @@ We cannot (and would not recommend) setting that certificate on your local machi
     title = "Galaxy Tool Management with Ephemeris (Galaxy Training Materials)",
     year = "2021",
     month = "06",
-    day = "03"
+    day = "07"
     url = "\url{/training-material/topics/admin/tutorials/tool-management/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
