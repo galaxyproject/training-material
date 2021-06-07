@@ -450,7 +450,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 27, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 7, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -466,7 +466,7 @@
 
 <p><span class="notranslate">Galaxy</span> is a data analysis platform for accessible, reproducible and transparent computational research. It includes a web interface through which users can design and perform tasks in a visual and interactive manner. The <span class="notranslate">Galaxy</span> server also exposes this functionality through its REST-based Application Programming Interface (API).</p>
 
-<p>Computer programs can communicate with the <span class="notranslate">Galaxy</span> server through this API and perform similar tasks as can be achieved manually via the web interface. The program sends a network request to a URL of an API endpoint. The server then computes the result for this request and sends back a response to the program.</p>
+<p>Computer programs can communicate with the <span class="notranslate">Galaxy</span> server through this <abbr title="Application Programming Interface">API</abbr> and perform similar tasks as can be achieved manually via the web interface. The program sends a network request to a URL of an <abbr title="Application Programming Interface">API</abbr> endpoint. The server then computes the result for this request and sends back a response to the program.</p>
 
 <p>BioBlend provides classes and methods that handle the specific details of this communication for Python programs. Similar libraries also exist for interacting with <span class="notranslate">Galaxy</span> via other programming languages:</p>
 
@@ -522,7 +522,7 @@
 
 <p>To contribute to BioBlend, a GitHub account is required.</p>
 
-<p>Changes are proposed via a pull request (PR). This allows the project maintainers to review the changes and suggest improvements.</p>
+<p>Changes are proposed via a Pull Request (PR). This allows the project maintainers to review the changes and suggest improvements.</p>
 
 <p>The general steps are as follows:</p>
 
@@ -532,11 +532,11 @@
   <li>Open a pull request for this branch in the <span class="notranslate">upstream</span> BioBlend repository</li>
 </ol>
 
-<p>It is generally a good idea to enable the “Allow edits and access to secrets by maintainers” option for the PR. Enabling this option gives maintainers more freedom to help out.</p>
+<p>It is generally a good idea to enable the “Allow edits and access to secrets by maintainers” option for the <abbr title="Pull Request">PR</abbr>. Enabling this option gives maintainers more freedom to help out.</p>
 
 <h1 id="downloading-galaxy-and-bioblend">Downloading <span class="notranslate">Galaxy</span> and BioBlend</h1>
 
-<p>Now we are ready to set up our development environment! Since BioBlend communicates with the <span class="notranslate">Galaxy</span> API, we must also set up a local <span class="notranslate">Galaxy</span> server in order to test BioBlend functionality.
+<p>Now we are ready to set up our development environment! Since BioBlend communicates with the <span class="notranslate">Galaxy</span> <abbr title="Application Programming Interface">API</abbr>, we must also set up a local <span class="notranslate">Galaxy</span> server in order to test BioBlend functionality.
 We use the <a href="https://git-scm.com">git</a> versioning tool to download the repositories.</p>
 
 <p>For this we require a public SSH key associated with our GitHub account. It makes sense to set this up now, since pushing changes to GitHub without a public key will prompt for credentials every time. See the <a href="https://docs.github.com/en/github-ae@latest/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">GitHub Docs</a> for information on setting up an SSH key.</p>
@@ -560,7 +560,7 @@ We use the <a href="https://git-scm.com">git</a> versioning tool to download the
 
 <h2 id="structure-of-the-galaxy-api">Structure of the <span class="notranslate">Galaxy</span> API</h2>
 
-<p>The source code for the API endpoints is contained in various files under <a href="https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/webapps/galaxy/api">lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api/</a> in the <span class="notranslate">Galaxy</span> source code. Each of these files contains a controller which exposes functionality for a specific entity. For example, the dataset-related functionality is contained in the <code class="language-plaintext highlighter-rouge">DatasetsController</code> class in the <a href="https://github.com/galaxyproject/galaxy/blob/v21.01/lib/galaxy/webapps/galaxy/api/datasets.py#L33">datasets.py</a> file.</p>
+<p>The source code for the <abbr title="Application Programming Interface">API</abbr> endpoints is contained in various files under <a href="https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/webapps/galaxy/api">lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api/</a> in the <span class="notranslate">Galaxy</span> source code. Each of these files contains a controller which exposes functionality for a specific entity. For example, the dataset-related functionality is contained in the <code class="language-plaintext highlighter-rouge">DatasetsController</code> class in the <a href="https://github.com/galaxyproject/galaxy/blob/v21.01/lib/galaxy/webapps/galaxy/api/datasets.py#L33">datasets.py</a> file.</p>
 
 <p>Additionally, the <a href="https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/webapps/galaxy/buildapp.py">buildapp.py</a> file contains a complete listing of all the endpoints.</p>
 
@@ -571,9 +571,9 @@ We use the <a href="https://git-scm.com">git</a> versioning tool to download the
 
 <blockquote class="tip">
   <h3 id="tip-going-deeper-into-the-galaxy-back-end-code"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Going deeper into the <span class="notranslate">Galaxy</span> back-end code</h3>
-  <p>The various <span class="notranslate">Galaxy</span> API methods that are exposed to the outside are contained in controller classes. These contain the endpoint methods corresponding to the URLs of the <span class="notranslate">Galaxy</span> API. These endpoint methods handle the incoming requests from BioBlend.</p>
+  <p>The various <span class="notranslate">Galaxy</span> <abbr title="Application Programming Interface">API</abbr> methods that are exposed to the outside are contained in controller classes. These contain the endpoint methods corresponding to the URLs of the <span class="notranslate">Galaxy</span> <abbr title="Application Programming Interface">API</abbr>. These endpoint methods handle the incoming requests from BioBlend.</p>
 
-  <p>A focus for development of the <span class="notranslate">Galaxy</span> API is to make these controllers as “terse” as possible. This basically means that any logic not strictly required by the API endpoint method is moved to a corresponding manager class. This approach separates the API more cleanly from inte<span class="notranslate">rna</span>l functionality. The manager classes should contain as much of the functionality as possible. An example is the <a href="https://github.com/galaxyproject/galaxy/blob/v21.01/lib/galaxy/managers/datasets.py#L26"><code class="language-plaintext highlighter-rouge">DatasetManager</code></a>, referenced to regularly by the <code class="language-plaintext highlighter-rouge">DatasetsController</code> which is exposed directly to the API.</p>
+  <p>A focus for development of the <span class="notranslate">Galaxy</span> <abbr title="Application Programming Interface">API</abbr> is to make these controllers as “terse” as possible. This basically means that any logic not strictly required by the <abbr title="Application Programming Interface">API</abbr> endpoint method is moved to a corresponding manager class. This approach separates the <abbr title="Application Programming Interface">API</abbr> more cleanly from inte<span class="notranslate">rna</span>l functionality. The manager classes should contain as much of the functionality as possible. An example is the <a href="https://github.com/galaxyproject/galaxy/blob/v21.01/lib/galaxy/managers/datasets.py#L26"><code class="language-plaintext highlighter-rouge">DatasetManager</code></a>, referenced to regularly by the <code class="language-plaintext highlighter-rouge">DatasetsController</code> which is exposed directly to the <abbr title="Application Programming Interface">API</abbr>.</p>
 
   <p>At the time of writing this transition is ongoing. Therefore, source code of methods for one controller might look and function differently than those of another controller. This might be encountered when debugging a failing request in BioBlend.</p>
 
@@ -591,7 +591,7 @@ We use the <a href="https://git-scm.com">git</a> versioning tool to download the
   <dt>Tool</dt>
   <dd>A <span class="notranslate">Galaxy</span> tool packages a particular piece of scientific software, keeping track of its required dependencies. It also contains additional metadata such as the BibTex references to the associated research paper(s). Tools generally take datasets and/or dataset collections as inputs and produce new datasets and/or collections as outputs.</dd>
   <dt>Dataset</dt>
-  <dd>A dataset represents digital data that can serve as input for a job. It can be associated with (contained in) a history or a library. A dataset can be shared between users. Each time a dataset is copied between histories or libraries, a new History Dataset Association (HDA) or Library Dataset Association (LDA) is created. This naming scheme is used inte<span class="notranslate">rna</span>lly by the <span class="notranslate">Galaxy</span> relational database, but the terms might be encountered during BioBlend development as well.</dd>
+  <dd>A dataset represents digital data that can serve as input for a job. It can be associated with (contained in) a history or a library. A dataset can be shared between users. Each time a dataset is copied between histories or libraries, a new History Dataset Association (HDA) or Library Dataset Association (LDA) is created. <abbr title="Library Dataset Association">LDA</abbr> This naming scheme is used inte<span class="notranslate">rna</span>lly by the <span class="notranslate">Galaxy</span> relational database, but the terms might be encountered during BioBlend development as well.</dd>
   <dt>Dataset Collection</dt>
   <dd>A dataset collection represents a group of related datasets. Like a dataset, it can be associated with a history or a library. Each time it is copied or shared, a new History Dataset Collection Association (HDCA) or a Library Dataset Collection Association (LDCA) is created.<br /><br />There are two kinds of dataset collections, <code class="language-plaintext highlighter-rouge">list</code> and <code class="language-plaintext highlighter-rouge">paired</code>. The former is a simple list of elements. The latter has a particular application in bioinformatics; it contains only two elements, corresponding to the <code class="language-plaintext highlighter-rouge">forward</code> and <code class="language-plaintext highlighter-rouge">reverse</code> strands of a piece of <span class="notranslate">DNA</span>.<br /><br /> Collection elements can be other collections; in other words, collections can be nested. These are designated (for example) as <code class="language-plaintext highlighter-rouge">list:list</code> or <code class="language-plaintext highlighter-rouge">list:paired</code>.</dd>
   <dt>Job</dt>
@@ -1409,6 +1409,32 @@ pytest <span class="nt">--override-ini</span> <span class="nv">log_cli_level</sp
 </li></ol>
                     
 
+                    
+                    <h1 data-toc-skip>Glossary</h1>
+                    <dl>
+                        
+                        
+                        <dt>API</dt>
+                        <dd>Application Programming Interface</dd>
+                        
+                        <dt>HDA</dt>
+                        <dd>History Dataset Association</dd>
+                        
+                        <dt>HDCA</dt>
+                        <dd>History Dataset Collection Association</dd>
+                        
+                        <dt>LDA</dt>
+                        <dd>Library Dataset Association</dd>
+                        
+                        <dt>LDCA</dt>
+                        <dd>Library Dataset Collection Association</dd>
+                        
+                        <dt>PR</dt>
+                        <dd>Pull Request</dd>
+                        
+                    </dl>
+                    
+
                     <h1>Feedback</h1>
                     <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
@@ -1463,9 +1489,9 @@ pytest <span class="nt">--override-ini</span> <span class="nv">log_cli_level</sp
     author = "Erik Schill and Simon Bray",
     title = "Contributing to BioBlend as a developer (Galaxy Training Materials)",
     year = "2021",
-    month = "05",
-    day = "27"
-    url = "\url{/training-material/topics/dev/tutorials/bioblend-dev/tutorial.html}",
+    month = "06",
+    day = "07"
+    url = "\url{https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-dev/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
 @article{Batut_2018,
@@ -1493,15 +1519,15 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
+                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+                    
+
+                    
+
                 </div>
             </div>
         </div>
-
-        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
-
-        
-
-        
     </section>
 </div>
 
