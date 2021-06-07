@@ -91,9 +91,13 @@ Ephemeris can take care of this process. Let's practice this on a real worfklow.
 > ### {% icon hands_on %} Hands-on: Extracting a list of tools from a workflow
 >
 > 1. Download the mapping workflow:
->    ```console
->    wget {{ site.url }}{% link topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga %}
->    ```
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > wget https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 > 2. Use the Ephemeris [`workflow-to-tools`](https://ephemeris.readthedocs.io/en/latest/commands/workflow-to-tools.html) command to extract the tool list from this workflow into a file named `workflow_tools.yml`.
 >
@@ -101,9 +105,12 @@ Ephemeris can take care of this process. Let's practice this on a real worfklow.
 >    > What did your command look like?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > ```console
->    > > workflow-to-tools -w mapping.ga -o workflow_tools.yml -l Mapping
->    > > ```
+>    > > > ### {% icon code-in %} Input: Bash
+>    > > > ```bash
+>    > > > workflow-to-tools -w mapping.ga -o workflow_tools.yml -l Mapping
+>    > > > ```
+>    > > > {: data-cmd="true"}
+>    > > {: .code-in}
 >    > {: .solution }
 >    {: .question}
 >
@@ -124,7 +131,7 @@ There are two ways to install tools, depending on how you specify the tools to i
 
 > ### {% icon hands_on %} Hands-on: Installing a single tool
 >
-> 1. Use the Ephemeris [`shed-tools`](https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html) command to install the tool `pilon`, owned by `iuc` into a section named `Assembly`
+> 1. Use the Ephemeris [`shed-tools`](https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html) command to install the tool `bwa`, owned by `devteam` into a section named `Mapping`
 >
 >    > ### {% icon question %} Question
 >    > What did your command look like?
@@ -132,9 +139,10 @@ There are two ways to install tools, depending on how you specify the tools to i
 >    > > ### {% icon solution %} Solution
 >    > > Use your Galaxy URL and API key in the example command below:
 >    > >
->    > > ```console
->    > > shed-tools install -g https://your-galaxy -a <api-key> --name pilon --owner iuc --section_label Assembly
+>    > > ```bash
+>    > > shed-tools install -g https://your-galaxy -a <api-key> --name bwa --owner devteam --section_label Mapping
 >    > > ```
+>    > > {: data-cmd="true"}
 >    > {: .solution}
 >    {: .question}
 >
@@ -169,9 +177,10 @@ For that, you can install from a YAML file:
 >    > > ### {% icon solution %} Solution
 >    > > Use your Galaxy URL and API key in the example command below:
 >    > >
->    > > ```console
+>    > > ```bash
 >    > > shed-tools install -g https://your-galaxy -a <api-key> -t workflow_tools.yml
 >    > > ```
+>    > > {: data-cmd="true"}
 >    > {: .solution}
 >    {: .question}
 >
@@ -209,7 +218,7 @@ Having the tools installed is a good first step, but your users will expect that
 
 > ### {% icon hands_on %} Hands-on: Test the installed tools
 >
-> 1. Use the Ephemeris [`shed-tools`](https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html) command to test the `pilon` tool on your Galaxy.
+> 1. Use the Ephemeris [`shed-tools`](https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html) command to test the `bamtools_filter` tool on your Galaxy.
 >
 >    > ### {% icon question %} Question
 >    > What did your command look like?
@@ -217,9 +226,10 @@ Having the tools installed is a good first step, but your users will expect that
 >    > > ### {% icon solution %} Solution
 >    > > Use your Galaxy URL and API key in the example command below:
 >    > >
->    > > ```console
->    > > shed-tools test -g https://your-galaxy -a <api-key> --name pilon --owner iuc
+>    > > ```bash
+>    > > shed-tools test -g https://your-galaxy -a <api-key> --name bamtools_filter --owner devteam
 >    > > ```
+>    > > {: data-cmd="true"}
 >    > {: .solution}
 >    {: .question}
 {: .hands_on}
@@ -240,9 +250,12 @@ Sometimes a user might ask you to install all the tools they were previously usi
 >    > > ### {% icon solution %} Solution
 >    > > This command does not require authentication and can be used to obtain the tool list from any public Galaxy server:
 >    > >
->    > > ```console
->    > > get-tool-list -g "https://usegalaxy.eu" -o "eu_tool_list.yaml"
->    > > ```
+>    > > > ### {% icon code-in %} Input: Bash
+>    > > > ```bash
+>    > > > get-tool-list -g "https://usegalaxy.eu" -o "eu_tool_list.yaml"
+>    > > > ```
+>    > > > {: data-cmd="true"}
+>    > > {: .code-in}
 >    > {: .solution}
 >    {: .question}
 {: .hands_on}

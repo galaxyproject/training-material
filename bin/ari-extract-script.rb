@@ -14,7 +14,6 @@ WORD_MAP = {}
 YAML.load_file(ARI_MAP).each_pair do |k,v|
  WORD_MAP.merge!({k.downcase => v})
 end
-PUNCTUATION = ['-', '--', '@', '%', '‘', '’', ',', '!', '(', ')', '.', "'", '"', '[', ']', ';', ':']
 
 # Do we have these slides? Yes or no.
 m_qs = metadata.fetch('questions', [])
@@ -106,7 +105,7 @@ def translate(word)
   m = /([^A-Za-z0-9]*)([A-Za-z0-9]+)([^A-Za-z0-9]*)(.*)/.match(word)
 
   if ! m then
-    STDERR.puts "Error: #{word}"
+    puts "Error: #{word}"
     return word
   end
 
@@ -145,22 +144,4 @@ blocks = blocks.map{ |block|
 
 #out_subs.write(blocks.map{ |line| line.join(" ") }.join("\n"))
 
-blocks2 = blocks.map { |block|
-  # Translate specific words as needed
-  s = block.map{ |line|
-    # First we try and catch the things we can directly replace (esp usegalaxy.*)
-    line = line.strip.split(' ').map{ |w|
-      translate(w)
-    }.join(' ')
-
-    # Now we do more fancy replacements
-    line = line.strip.split(/([ ‘’,'".:;!`()])/).reject(&:empty?).compact.map{ |w|
-      translate(w)
-    }.join('')
-    line
-  }
-  s
-}
-
-final = blocks.zip(blocks2)
-print JSON.pretty_generate(final)
+print JSON.pretty_generate(blocks)

@@ -19,6 +19,7 @@ requirements:
       - ansible
       - ansible-galaxy
       - connect-to-compute-cluster
+      - job-destinations
 ---
 
 # Overview
@@ -40,6 +41,9 @@ Galaxy includes a built-in framework to collect job metrics and store these in i
 > ### {% icon comment %} Note
 >
 > Job metrics are only visible to Galaxy *admin users*, unless you set `expose_potentially_sensitive_job_metrics: true`, like UseGalaxy.eu does. EU's intention with this is to empower users and make everything as transparent as possible.
+>
+> This is the only option controlling which metrics general users see. Admins see all metrics collected, and by default general users see none.
+> However most of the metrics exposed by this setting are quite safe (e.g. cgroups information on resource consumption, walltime, etc.)
 >
 {: .comment}
 
@@ -71,6 +75,17 @@ These include very basic submission parameters. We want more information!
 >    You can see the [sample file](https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/config/sample/job_metrics_conf.xml.sample) for further options regarding metrics.
 >
 > 2. Edit your playbook to install the package named `cgroup-tools` in a pre-task (with git/make/etc). This package is required to use `cgget` which is used in metrics collection.
+>
+>    ```diff
+>    --- a/galaxy.yml
+>    +++ b/galaxy.yml
+>    @@ -4,9 +4,14 @@
+>       pre_tasks:
+>         - name: Install Dependencies
+>           package:
+>    -        name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
+>    +        name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv', 'cgroup-tools']
+>    ```
 >
 > 3. Edit the group variables file, `group_vars/galaxyservers.yml`:
 >

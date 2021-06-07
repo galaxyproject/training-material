@@ -62,36 +62,51 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >
 > 1. Edit your `requirements.yml` and include the following contents:
 >
->    ```yaml
->    - src: galaxyproject.repos
->      version: 0.0.2
->    - src: galaxyproject.slurm
->      version: 0.1.3
+>    {% raw %}
+>    ```diff
+>    --- a/requirements.yml
+>    +++ b/requirements.yml
+>    @@ -18,3 +18,7 @@
+>       version: 2.6.3
+>     - src: galaxyproject.cvmfs
+>       version: 0.2.13
+>    +- src: galaxyproject.repos
+>    +  version: 0.0.2
+>    +- src: galaxyproject.slurm
+>    +  version: 0.1.3
+>    {% endraw %}
 >    ```
+>    {: data-commit="Add requirements"}
 >
 >    The `galaxyproject.repos` role adds the [Galaxy Packages for Enterprise Linux (GPEL)](https://depot.galaxyproject.org/yum/) repository for RedHat/CentOS, which provides both Slurm and Slurm-DRMAA (neither are available in standard repositories or EPEL). For Ubuntu versions 18.04 or newer, it adds the [Slurm-DRMAA PPA](https://launchpad.net/~natefoo/+archive/ubuntu/slurm-drmaa) (Slurm-DRMAA was removed from Debian/Ubuntu in buster/bionic).
 >
 > 2. In the same directory, run:
 >
->    ```
->    ansible-galaxy install -p roles -r requirements.yml
->    ```
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > ansible-galaxy install -p roles -r requirements.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 > 3. Add `galaxyproject.repos`, `galaxyproject.slurm` to the *beginning* of your roles section in your `galaxy.yml` playbook:
 >
+>    {% raw %}
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -11,6 +11,8 @@
->             name: galaxy
->             state: restarted
+>    @@ -12,6 +12,8 @@
+>             repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
+>             dest: /libraries/
 >       roles:
 >    +    - galaxyproject.repos
 >    +    - galaxyproject.slurm
 >         - galaxyproject.postgresql
 >         - role: natefoo.postgresql_objects
 >           become: true
+>    {% endraw %}
 >    ```
+>    {: data-commit="Add the repos and slurm roles"}
 >
 > 4. Add the slurm variables to your `group_vars/galaxyservers.yml`:
 >
@@ -99,12 +114,12 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -142,3 +142,14 @@ rabbitmq_users:
->       - user: galaxy_au
->         password: "{{ rabbitmq_password_galaxy_au }}"  #This password is set in group_vars/all.yml
->         vhost: /pulsar/galaxy_au
+>    @@ -139,3 +139,13 @@ golang_gopath: '/opt/workspace-go'
+>     # Singularity target version
+>     singularity_version: "3.7.4"
+>     singularity_go_path: "{{ golang_install_dir }}"
 >    +
->    +# slurm
+>    +# Slurm
 >    +slurm_roles: ['controller', 'exec'] # Which roles should the machine play? exec are execution hosts.
 >    +slurm_nodes:
 >    +- name: localhost # Name of our host
@@ -113,10 +128,18 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    +  SlurmdParameters: config_overrides   # Ignore errors if the host actually has cores != 2
 >    +  SelectType: select/cons_res
 >    +  SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
->    ```
 >    {% endraw %}
+>    ```
+>    {: data-commit="Add slurm configuration"}
 >
-> 5. Run the playbook (`ansible-playbook galaxy.yml`)
+> 5. Run the playbook
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 {: .hands_on}
 
@@ -285,25 +308,32 @@ Above Slurm in the stack is slurm-drmaa, a library that provides a translational
 >
 > 1. Add a `post_task` to your playbook to install `slurm-drmaa1` (Debian/Ubuntu) or `slurm-drmaa` (RedHat/CentOS).
 >
+>    {% raw %}
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -26,3 +28,7 @@
->         - usegalaxy_eu.galaxy_systemd
->         - usegalaxy_eu.rabbitmq
->         - galaxyproject.nginx
+>    @@ -11,6 +11,10 @@
+>         - git:
+>             repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
+>             dest: /libraries/
 >    +  post_tasks:
 >    +    - name: Install slurm-drmaa
 >    +      package:
 >    +        name: slurm-drmaa1
+>       roles:
+>         - galaxyproject.repos
+>         - galaxyproject.slurm
+>    {% endraw %}
 >    ```
+>    {: data-commit="Add post task to install slurm-drmaa"}
 >
 > 2. Run the playbook (`ansible-playbook galaxy.yml`)
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
+>    > {: data-cmd="true"}
 >    {: .code-in}
 >
 {: .hands_on}
@@ -323,16 +353,17 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -76,6 +76,7 @@ galaxy_config_files:
->     galaxy_systemd_mode: mule
->     galaxy_zergpool_listen_addr: 127.0.0.1:8080
->     galaxy_restart_handler_name: "Restart Galaxy"
->    +galaxy_systemd_zergling_env: DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"
+>    @@ -103,6 +103,7 @@ galaxy_config_files:
+>
+>     # systemd
+>     galaxy_manage_systemd: yes
+>    +galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
 >
 >     # Certbot
 >     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
->    ```
 >    {% endraw %}
+>    ```
+>    {: data-commit="Configure DRMAA_LIBRARY_PATH"}
 >
 >    This environment variable will then be supplied to any web process (zerglings or mules).
 >
@@ -342,38 +373,36 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.xml.j2
 >    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -1,6 +1,7 @@
+>    @@ -1,9 +1,16 @@
 >     <job_conf>
 >         <plugins workers="4">
 >             <plugin id="local_plugin" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
 >    +        <plugin id="slurm" type="runner" load="galaxy.jobs.runners.slurm:SlurmJobRunner"/>
->             <plugin id="pulsar_runner" type="runner" load="galaxy.jobs.runners.pulsar:PulsarMQJobRunner" >
->                 <!-- <param id="amqp_url">pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1</param> -->
->                 <param id="amqp_url">pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@localhost:5672/{{ rabbitmq_vhosts[0] }}</param>
->    @@ -15,7 +16,7 @@
 >         </plugins>
->    -    <destinations default="local_destination">
+>    -    <destinations default="singularity">
 >    +    <destinations default="slurm">
+>             <destination id="local_destination" runner="local_plugin"/>
 >    +        <destination id="slurm" runner="slurm">
 >    +            <param id="singularity_enabled">true</param>
 >    +            <env id="LC_ALL">C</env>
 >    +            <env id="SINGULARITY_CACHEDIR">/tmp/singularity</env>
 >    +            <env id="SINGULARITY_TMPDIR">/tmp</env>
 >    +        </destination>
->             <destination id="local_destination" runner="local_plugin">
+>             <destination id="singularity" runner="local_plugin">
 >                 <param id="singularity_enabled">true</param>
 >                 <!-- Ensuring a consistent collation environment is good for reproducibility. -->
->    ```
 >    {% endraw %}
+>    ```
+>    {: data-commit="Configure slurm destination"}
 >
 > 4. Run your Galaxy playbook
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
+>    > {: data-cmd="true"}
 >    {: .code-in}
->
 >
 > 5. Watch the logs to check that everything loads correctly
 >
@@ -508,6 +537,8 @@ After the job has been purged from the active jobs database, a bit of informatio
 > - `galaxy_server_dir`
 > - `galaxy_venv_dir`
 {: .tip}
+
+{% snippet topics/admin/faqs/missed-something.md step=6 %}
 
 ## Further Reading
 
