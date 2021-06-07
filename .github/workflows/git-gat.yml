@@ -67,6 +67,12 @@ jobs:
             bin/knit-automated.sh export;
           if_key_exists: ignore # replace / ignore / fail; optional (defaults to fail)
 
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.GIT_GAT_SSH_KEY }}
+          known_hosts: "github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=="
+
       - name: Setup git-gat repo
         run: |
             cd /tmp/git-gat/
@@ -75,7 +81,7 @@ jobs:
             git config --global user.name "The Galaxy Training Network"
             git init
             # Update the origin early
-            git remote add origin https://github.com/hexylena/git-gat
+            git remote add origin git@github.com:hexylena/git-gat
             git fetch origin --tags
 
       - name: Merge the commits into a full git history
@@ -95,16 +101,9 @@ jobs:
             rm -f *.patch
             ls -al
 
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.GIT_GAT_SSH_KEY }}
-          known_hosts: "github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=="
-
       - name: Push the results
         run: |
             cd /tmp/git-gat/
-            git remote set-url origin git@github.com:hexylena/git-gat
             # Push the results
             git push -f -u origin main
             git push -f --tags
