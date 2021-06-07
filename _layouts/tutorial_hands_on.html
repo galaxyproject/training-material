@@ -231,6 +231,17 @@ layout: base
                     {% bibliography --cited %}
                     {% endif %}
 
+                    {% if page.abbreviations %}
+                    <h1 data-toc-skip>Glossary</h1>
+                    <dl>
+                        {% assign sorted_abbrs = page.abbreviations | sort %}
+                        {% for abbr in sorted_abbrs %}
+                        <dt>{{ abbr[0] }}</dt>
+                        <dd>{{ abbr[1] }}</dd>
+                        {% endfor %}
+                    </dl>
+                    {% endif %}
+
                     <h1>Feedback</h1>
                     <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
@@ -288,7 +299,7 @@ layout: base
     year = "{{ page.last_modified_at | date: "%Y"}}",
     month = "{{ page.last_modified_at | date: "%m"}}",
     day = "{{ page.last_modified_at | date: "%d" }}"
-    url = "{% raw %}\url{{% endraw %}{{ site.baseurl }}{{page.url}}{% raw %}}{% endraw %}",
+    url = "{% raw %}\url{{% endraw %}{{ site.url }}{{ site.baseurl }}{{page.url}}{% raw %}}{% endraw %}",
     note = "[Online; accessed TODAY]"
 }
 @article{Batut_2018,
@@ -316,43 +327,43 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
+                    <h3>{% icon congratulations %} Congratulations on successfully completing this tutorial!</h3>
+
+                    {% if topic.name == "contributing" %}
+                    <blockquote class="agenda">
+                        <h3>Developing GTN training material</h3>
+                        This tutorial is part of a series to develop GTN training material, feel free to also look at:
+                        {% assign topic = site.data[page.topic_name] %}
+                        <ol>
+                        {% for material in topic_material %}
+                            {% if material.enable != "false" %}
+                                {% if material.type == "introduction" %}
+                        <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html">{{ material.title }}</a></li>
+                                {% elsif material.type == "tutorial" %}
+                                    {% if material.hands_on %}
+                        <li><a href="{{ site.baseurl }}/topics/{{ topic.name  }}/tutorials/{{ material.tutorial_name }}/tutorial.html">{{ material.title }}</a></li>
+                                    {% elsif material.slides %}
+                        <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/slides.html">{{ material.title }}</a></li>
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        </ol>
+                    </blockquote>
+                    {% endif %}
+
+                    {% if page.follow_up_training %}
+                    <blockquote class="agenda follow-up">
+                        <strong class="follow-up">{% icon curriculum %} Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                        <ul>
+                            {% include _includes/display_extra_training.md extra_trainings=page.follow_up_training %}
+                        </ul>
+                    </blockquote>
+                    {% endif %}
+
                 </div>
             </div>
         </div>
-
-        <h3>{% icon congratulations %} Congratulations on successfully completing this tutorial!</h3>
-
-        {% if topic.name == "contributing" %}
-        <blockquote class="agenda">
-            <h3>Developing GTN training material</h3>
-            This tutorial is part of a series to develop GTN training material, feel free to also look at:
-            {% assign topic = site.data[page.topic_name] %}
-            <ol>
-            {% for material in topic_material %}
-                {% if material.enable != "false" %}
-                    {% if material.type == "introduction" %}
-            <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html">{{ material.title }}</a></li>
-                    {% elsif material.type == "tutorial" %}
-                        {% if material.hands_on %}
-            <li><a href="{{ site.baseurl }}/topics/{{ topic.name  }}/tutorials/{{ material.tutorial_name }}/tutorial.html">{{ material.title }}</a></li>
-                        {% elsif material.slides %}
-            <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/slides.html">{{ material.title }}</a></li>
-                        {% endif %}
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
-            </ol>
-        </blockquote>
-        {% endif %}
-
-        {% if page.follow_up_training %}
-        <blockquote class="agenda follow-up">
-            <strong class="follow-up">{% icon curriculum %} Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
-            <ul>
-                {% include _includes/display_extra_training.md extra_trainings=page.follow_up_training %}
-            </ul>
-        </blockquote>
-        {% endif %}
     </section>
 </div>
 
