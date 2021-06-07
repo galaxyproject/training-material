@@ -93,7 +93,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    +
 >     # systemd
 >     galaxy_manage_systemd: yes
->     galaxy_systemd.env: DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"
+>     galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy testing tool"}
