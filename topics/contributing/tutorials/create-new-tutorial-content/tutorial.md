@@ -900,6 +900,21 @@ area_order: [introduction, learners, instructors, contributors, other]
 
 If a tutorial-level FAQ page exists (`topics/<topic>/tutorials/<tutorial>/faqs/index.md`) it will be automatically linked to from the overview box at the top of the tutorial, and at the end of the tutorial. Have a look at this tutorial to see it in action.
 
+## Footnotes
+
+> > ### {% icon code-in %} Input: Markdown
+> >
+> > ```
+> > Footnotes[^1] can be used to insert more content or explanation as reference material to your content. You can use the same footnote reference multiple time, and the footnote will include backlinks to return to the correct place in the text.[^1]
+> > ```
+> > {: .pre-break-lines}
+> {: .code-in}
+>
+> > ### {% icon code-out %} Output
+> > Footnotes[^1] can be used to insert more content or explanation as reference material to your content. You can use the same footnote reference multiple time, and the footnote will include backlinks to return to the correct place in the text.[^1]
+> {: .code-out}
+{: .code-2col}
+
 
 ## Icons
 
@@ -1003,5 +1018,12 @@ A bibliography will automatically be appended to the end of your tutorial (scrol
 {: .tip}
 
 
+
+
 # Conclusion
 {:.no_toc}
+
+
+## Footnotes (Rendered)
+
+[^1]: The wikipedia definition of a footnote is: "A note is a string of text placed at the bottom of a page in a book or document or at the end of a chapter, volume or the whole text. The note can provide an author's comments on the main text or citations of a reference work in support of the text. Footnotes are notes at the foot of the page while endnotes are collected under a separate heading at the end of a chapter, volume, or entire work. Unlike footnotes, endnotes have the advantage of not affecting the layout of the main text, but may cause inconvenience to readers who have to move back and forth between the main text and the endnotes."
