@@ -483,6 +483,11 @@ You should now be able to run a Galaxy job through Slurm. The simplest way to te
 >
 {: .hands_on}
 
+> ```bash
+> 1-test-cat1.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
 
 Slurm allows us to query the exit state of jobs for a time period of the value of Slurm's `MinJobAge` option, which defaults to 300 (seconds, == 5 minutes):
 
