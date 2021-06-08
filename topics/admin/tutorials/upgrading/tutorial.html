@@ -1,0 +1,1097 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Upgrading Galaxy</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Upgrading Galaxy" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxyproject/admins'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/admin" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Galaxy Server administration
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/upgrading/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/upgrading/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/upgrading/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/upgrading/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/upgrading/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/upgrading/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/upgrading/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fupgrading%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/upgrading/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                    -->
+
+                     <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Upgrading Galaxy",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/main/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Galaxy Server administration",
+    "description": "Resources related to configuration and maintenance of Galaxy servers",
+    "url": "https://training.galaxyproject.org//training-material/topics/admin/"
+  },
+  "courseCode": "admin / upgrading / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Upgrading Galaxy' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/upgrading/tutorial.html",
+  "timeRequired": "PT1H",
+  "keywords": "ansible",
+  "description": "The questions this  addresses are:\n - How can I find which version of Galaxy I'm running?\n - How do I upgrade the Galaxy server to the latest version?\n\n\\nThe objectives are:\n - Understand how to find the current Galaxy server version you are using\n - How to find the latest release version\n - How to backup the Galaxy server database and why it's a good idea\n - How to upgrade the Galaxy server to a new version\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible/slides.html",
+      "name": "Ansible",
+      "description": "Slides for 'Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible/tutorial.html",
+      "name": "Ansible",
+      "description": "Hands-on for 'Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible-galaxy/slides.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Slides for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Hands-on for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Simon Gladman"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Simon Gladman"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Server administration",
+      "description": "Resources related to configuration and maintenance of Galaxy servers",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial topic-admin">
+        <h1 data-toc-skip>Upgrading Galaxy</h1>
+        
+
+        <div class="contributors-line">By: 
+
+ <a href="/training-material/hall-of-fame/slugger70/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/slugger70" alt="Simon Gladman">Simon Gladman</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How can I find which version of Galaxy I’m running?</p>
+</li>
+            
+            <li><p>How do I upgrade the Galaxy server to the latest version?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Understand how to find the current Galaxy server version you are using</p>
+</li>
+            
+            <li><p>How to find the latest release version</p>
+</li>
+            
+            <li><p>How to backup the Galaxy server database and why it’s a good idea</p>
+</li>
+            
+            <li><p>How to upgrade the Galaxy server to a new version</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/admin">Galaxy Server administration</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Ansible:
+                            
+                                <a href="/training-material/topics/admin/tutorials/ansible/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Galaxy Installation with Ansible:
+                            
+                                <a href="/training-material/topics/admin/tutorials/ansible-galaxy/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1 hour</div>
+            
+
+            
+
+            
+            
+
+            
+            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/admin/slides/introduction.html" title="Topic Overview slides">
+                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Topic Overview slides
+                    </a></li>
+                
+
+                
+
+                
+
+                
+
+                
+                
+                
+
+                
+                </div>
+            </ul>
+            
+
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 8, 2021 </div>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="overview">Overview</h1>
+
+<p>One of the most important and recurring tasks for a <span class="notranslate">Galaxy</span> server admin is to keep the server up to date with security patches, minor fixes and major version upgrades.</p>
+
+<p>Luckily for us, by using the best practice Ansible installation method that we have used throughout these tutorials, keeping our <span class="notranslate">Galaxy</span> server up to date is extremely easy.</p>
+
+<p>We can get all the latest patches and fixes for our currently installed version of <span class="notranslate">Galaxy</span> by just re-running the Ansible playbook on a regular basis.</p>
+
+<p>We can upgrade our <span class="notranslate">Galaxy</span> version by modifying the Ansible var files and re-running the playbook. It’s that simple.</p>
+
+<p>This tutorial will show you how and discuss some of the things you need to keep in mind whenever you are updating or upgrading your <span class="notranslate">Galaxy</span> server.</p>
+
+<p><strong>Some notes on <span class="notranslate">Galaxy</span> versioning and releases.</strong></p>
+
+<ul>
+  <li>As at June 2021, <span class="notranslate">Galaxy</span> has three new version releases per year - in each of January, May and September. The versions are denominated by the year and month - <code class="language-plaintext highlighter-rouge">YY.MM</code>. i.e. January 2021’s <span class="notranslate">Galaxy</span> release is version <em>21.01</em>.</li>
+  <li>Official <span class="notranslate">Galaxy</span> versions are tagged on the <a href="https://github.com/galaxyproject/galaxy/releases"><span class="notranslate">Galaxy</span> Project’s GitHub releases page</a> as <code class="language-plaintext highlighter-rouge">vYY.MM</code>. e.g. <em>v21.01</em></li>
+  <li>Each version also has an official branch in the GitHub repo named <code class="language-plaintext highlighter-rouge">release_YY.MM</code>. e.g. <em>release_21.01</em></li>
+  <li><span class="notranslate">Galaxy</span> versions will be supported with security fixes, bug patches and other improvements for <a href="https://github.com/galaxyproject/galaxy/blob/dev/SECURITY_POLICY.md#supported-versions">one year</a> from the time of release at which time they will become “End of Life” and will no longer be supported.</li>
+</ul>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+<ol id="markdown-toc">
+  <li><a href="#find-your-current-galaxy-server-version" id="markdown-toc-find-your-current-galaxy-server-version">Find your current <span class="notranslate">Galaxy</span> server version</a></li>
+  <li><a href="#finding-the-latest-release-version" id="markdown-toc-finding-the-latest-release-version">Finding the latest release version</a>    <ol>
+      <li><a href="#the-importance-of-the-release-notes" id="markdown-toc-the-importance-of-the-release-notes">The importance of the release notes</a></li>
+    </ol>
+  </li>
+  <li><a href="#back-up-the-galaxy-database" id="markdown-toc-back-up-the-galaxy-database">Back up the <span class="notranslate">Galaxy</span> database</a></li>
+  <li><a href="#upgrading-galaxy-to-a-new-version" id="markdown-toc-upgrading-galaxy-to-a-new-version">Upgrading <span class="notranslate">Galaxy</span> to a new version</a></li>
+  <li><a href="#ongoing-maintenance" id="markdown-toc-ongoing-maintenance">Ongoing maintenance</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<p><strong>This tutorial assumes that:</strong></p>
+
+<ul>
+  <li>You have a VM or machine where you you have <span class="notranslate">Galaxy</span> installed.</li>
+  <li>You have completed at least the “<span class="notranslate">Galaxy</span> Installation with Ansible” tutorial.</li>
+  <li>You have command line and sudo access to the VM/computer where it is installed.</li>
+</ul>
+
+<blockquote class="tip">
+  <h3 id="tip-galaxy-server-version-installed-by-the-tutorials"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> <span class="notranslate">Galaxy</span> server version installed by the tutorials</h3>
+  <p>At the time of writing, the version of <span class="notranslate">Galaxy</span> that was installed with the “<span class="notranslate">Galaxy</span> Installation with Ansible” tutorial is <em>20.09</em>. This tutorial is designed to upgrade the server to <em>21.01</em>. If you already have a version equal to or higher than <em>21.01</em> running on your server, never fear! The process outlined below can still be used to upgrade to the latest version of <span class="notranslate">Galaxy</span> - just swap out <em>21.01</em> used below for the current latest version.</p>
+</blockquote>
+
+<h1 id="find-your-current-galaxy-server-version">Find your current <span class="notranslate">Galaxy</span> server version</h1>
+
+<p>The first thing we will do in this tutorial is find the current installed version of the <span class="notranslate">Galaxy</span>. There are a few methods for determining this - You can find it in the GUI if you are an admin user or you can get it via the server API.</p>
+
+<p>Once we know what our current version is, we can compare it with the latest available version</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-get-the-current-server-version"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get the current server version</h3>
+
+  <p><strong>Method 1: Via the Admin UI page</strong>
+The currently installed version of <span class="notranslate">Galaxy</span> is shown on the <span class="notranslate">Galaxy</span> server’s Admin UI page.</p>
+  <ol>
+    <li>
+      <p>Click on the <strong>Admin</strong> menu item to bring up the Admin UI.</p>
+    </li>
+    <li>
+      <p>The version of <span class="notranslate">Galaxy</span> currently running is displayed in the top left corner of the screen.</p>
+    </li>
+  </ol>
+
+  <figure id="figure-1"><img src="../../images/admin_page_version.png" alt="Screenshot of the Admin UI page showing the Galaxy server version" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Screenshot of the Admin UI page showing the <span class="notranslate">Galaxy</span> server version.</figcaption></figure>
+
+  <p><strong>Method 2: Via the API</strong></p>
+
+  <ol>
+    <li>
+      <p>In your browser - go to the following URL: <code class="language-plaintext highlighter-rouge">https://your-<span class="notranslate">galaxy</span>/api/version</code>. The version will be displayed as follows:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://your-<span class="notranslate">galaxy</span>/api/version
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <h3 id="code-out-output-browser-window"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Browser window</h3>
+        <pre><code class="language-JSON">{
+  "version_major": "20.09",
+  "extra": {}
+}
+</code></pre>
+      </blockquote>
+    </li>
+  </ol>
+
+  <p>Both methods above show the version of <span class="notranslate">Galaxy</span> that has been installed. At the time of writing, on this server it’s <em>20.09</em>. Your version may differ depending on which version you installed initially.</p>
+</blockquote>
+
+<h1 id="finding-the-latest-release-version">Finding the latest release version</h1>
+
+<p>So, we have found out which version we are running on our server. But what is the current latest version of <span class="notranslate">Galaxy</span> that is available? There are quite a few ways of finding out.</p>
+
+<ul>
+  <li><span class="notranslate">Galaxy</span> is released 3 times per year. If the time of year is around January/February, April/May or September/October there may be a new release about to be announced.</li>
+  <li>You can check the <span class="notranslate">Galaxy</span> Project Newsletter and home page <a href="https://galaxyproject.org">https://<span class="notranslate">galaxy</span>project.org</a></li>
+</ul>
+
+<p>Probably the easiest way of finding the version number of the latest release is via the extensive <span class="notranslate">Galaxy</span> Documentation Website located at: <a href="https://docs.galaxyproject.org">https://docs.<span class="notranslate">galaxy</span>project.org</a>.</p>
+
+<p>This site shows all of the release notes of all the available <span class="notranslate">Galaxy</span> versions and always has the latest release at the top of the list.</p>
+
+<figure id="figure-2"><img src="../../images/galaxy_doc_releases.png" alt="Screenshot of the Galaxy documentation webpage showing the release versions" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Screenshot of the <span class="notranslate">Galaxy</span> documentation webpage (<a href="https://docs.galaxyproject.org">https://docs.<span class="notranslate">galaxy</span>project.org</a>) showing the release versions. The latest version is at the top of the 'Releases' list.</figcaption></figure>
+
+<p>We can see from this page that the latest release version of <span class="notranslate">Galaxy</span> is <em>21.01</em> (at the time of writing.)</p>
+
+<blockquote class="question">
+  <h3 id="question-question-what-is-the-current-latest-version"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: What is the current latest version?</h3>
+  <p>As previously mentioned, the current latest release of <span class="notranslate">Galaxy</span> may not be <em>21.01</em>. What version is the latest that you can see?</p>
+</blockquote>
+
+<h2 id="the-importance-of-the-release-notes">The importance of the release notes</h2>
+
+<p>Each release of <span class="notranslate">Galaxy</span> is accompanied by extensive release notes in two different “flavours.”</p>
+
+<ul>
+  <li>“Full release notes” which have extensive detail about all changes made since the last release. This version of the release notes is targetted to Administrators who may need to know about minor fixes, configuration details, security issues, new features and other things found in the latest version.</li>
+  <li>“User facing” release notes which provide an visual and interactive summary of the release highlights, additions and new features targetted towards end users, trainers and funders etc.</li>
+</ul>
+
+<p>Before upgrading your <span class="notranslate">Galaxy</span> server to the latest version (or even a new version for that matter) - It is <strong>HIGHLY recommended</strong> that you read the release notes for that version. The notes are <em>very extensive</em> and may contain important information on any new features, links  and how to configure them for your server.</p>
+
+<figure id="figure-3"><img src="../../images/release_notes_2101.png" alt="Example section of release notes for release 21.01" /><figcaption><span class="figcaption-prefix">Figure 3:</span> An example selection from the release notes for <span class="notranslate">Galaxy</span> version 21.01 showing details on enhancements made with their associated Pull Requests in the GitHub repository.</figcaption></figure>
+
+<h1 id="back-up-the-galaxy-database">Back up the <span class="notranslate">Galaxy</span> database</h1>
+
+<p>At the heart of every <span class="notranslate">Galaxy</span> server beats its database. The database is the most important part of the <span class="notranslate">Galaxy</span> server as it contains all of the metadata required for the server to operate and records details of all users, jobs, datasets etc since the server was started.</p>
+
+<p>Sometimes new versions of <span class="notranslate">Galaxy</span> make changes to the database schema that require a database upgrade.</p>
+
+<p>It is highly important that we back it up before making any substantial changes to the <span class="notranslate">Galaxy</span> server as things sometimes go wrong (inopportune power failures, disk crashes etc) and losing or corrupting the database is possible during an upgrade operation.</p>
+
+<p>In a production environment it is really important to make regular backups of the database in any case. The <strong>use<span class="notranslate">galaxy</span>.*</strong> servers all perform at least daily backups of their respective databases and even have replicate database servers <em>just in case.</em></p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-back-up-the-galaxy-database"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Back up the <span class="notranslate">Galaxy</span> database</h3>
+
+  <p>We will be using the PostgreSQL <code class="language-plaintext highlighter-rouge">pg_dump</code> command to dump the complete contents of the <span class="notranslate">Galaxy</span> database to a file. From the usage text of the command:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  pg_dump --help
+  pg_dump dumps a database as a text file or to other formats.
+
+  Usage:
+    pg_dump [OPTION]... [DBNAME]
+</code></pre></div>  </div>
+
+  <p>We will use <code class="language-plaintext highlighter-rouge">pg_dump</code> and pipe its output through <code class="language-plaintext highlighter-rouge">gzip</code> to an output file to create a compressed text (SQL) representation of the database. We will need to do this as the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code> user. It’s a good idea to create the backup file name with a sensible name and then copy it somewhere else like a cloud service.</p>
+
+  <p>From your terminal -</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+    <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>su <span class="nt">-l</span> <span class="notranslate">galaxy</span>
+pg_dump <span class="notranslate">galaxy</span> | <span class="nb">gzip</span> <span class="o">&gt;</span> <span class="notranslate">galaxy</span>_database-2009-1.sql.gz
+<span class="nb">ls</span> <span class="nt">-lah</span> <span class="notranslate">galaxy</span>_database<span class="k">*</span>
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-out">
+    <h3 id="code-out-output-bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-rw-rw-r--</span> 1 <span class="notranslate">galaxy</span> <span class="notranslate">galaxy</span> 94K Jun  8 04:12 <span class="notranslate">galaxy</span>_database_2009-1.sql.gz
+</code></pre></div>    </div>
+  </blockquote>
+
+  <p>As you can see, the database on our server isn’t currently huge though this will changes as your server gets more users, runs more jobs and stores more data. The current size for <span class="notranslate">Galaxy</span> Australia’s compressed database backup is ~11GB and growing.</p>
+</blockquote>
+
+<p>Now that we have backed up our database we can move on to upgrading our <span class="notranslate">Galaxy</span> server to the latest version. For the sake of this tutorial, we will assume that the installed version is different to the latest version (at the time of writing - <em>20.09</em> vs <em>21.01</em>). If that is not the case for you, then you can instead use this tutorial as a reference in the future.</p>
+
+<h1 id="upgrading-galaxy-to-a-new-version">Upgrading <span class="notranslate">Galaxy</span> to a new version</h1>
+
+<p>If you’ve been following best practices and using Ansible to install and configure your <span class="notranslate">Galaxy</span> server then you’re in luck - this step is going to be very easy! We just need to adjust the <span class="notranslate">Galaxy</span> version number in our <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file and re-run the playbook. If you haven’t been using Ansible then there are some notes on performing an upgrade located at: <a href="https://galaxyproject.org/admin/maintenance/">https://<span class="notranslate">galaxy</span>project.org/admin/maintenance/</a>. The Ansible method is much preferred and simple!</p>
+
+<p>There are however a few things to consider before doing the actual upgrade, especially in a production environment.</p>
+
+<ul>
+  <li><span class="notranslate">Galaxy</span> will be restarted.
+    <ul>
+      <li>Is this an appropriate time for that to happen?</li>
+      <li>Does it need to be scheduled with your users?</li>
+    </ul>
+  </li>
+  <li>The database schema may change
+    <ul>
+      <li>Have you backed up the database?</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Once you’ve made sure of these things, it’s time to do it!</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-back-up-the-galaxy-database-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Back up the <span class="notranslate">Galaxy</span> database</h3>
+
+  <p>In this tutorial we will upgrade the server to version <em>21.01</em>. This may be different for you. Please use the latest version instead.</p>
+
+  <ol>
+    <li>
+      <p>Edit the <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file and change the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_commit_id</code> to the latest version. Use the form <code class="language-plaintext highlighter-rouge">release_YY.MM</code> or in this case <code class="language-plaintext highlighter-rouge">release_21.01</code>.</p>
+
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -21,7 +21,7 @@</span> <span class="notranslate">galaxy</span>_manage_paths: true
+ <span class="notranslate">galaxy</span>_layout: root-dir
+ <span class="notranslate">galaxy</span>_root: /srv/<span class="notranslate">galaxy</span>
+ <span class="notranslate">galaxy</span>_user: {name: <span class="notranslate">galaxy</span>, shell: /bin/bash}
+<span class="gd">-<span class="notranslate">galaxy</span>_commit_id: release_20.09
+</span><span class="gi">+<span class="notranslate">galaxy</span>_commit_id: release_21.01
+</span> <span class="notranslate">galaxy</span>_force_checkout: true
+ miniconda_prefix: "{{ <span class="notranslate">galaxy</span>_tool_dependency_dir }}/_conda"
+ miniconda_version: 4.7.12
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Now run the playbook!</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>You should see in the Ansible output that <span class="notranslate">Galaxy</span> had to rebuild the client, update the database, rebuild its virtual environment and restart. If you weren’t using Ansible, these steps would all be manual and important not to get wrong. Ansible makes the entire process super simple for us.</p>
+
+<p>Congratulations, you’re <span class="notranslate">Galaxy</span> server should now be updated to the latest version. You can check this by going to the Admin UI page or by using the API as described above.</p>
+
+<h1 id="ongoing-maintenance">Ongoing maintenance</h1>
+
+<p>The <span class="notranslate">Galaxy</span> development community continually support release versions of <span class="notranslate">Galaxy</span> <a href="https://github.com/galaxyproject/galaxy/blob/dev/SECURITY_POLICY.md#supported-versions">for 1 year.</a> They regularly update releases with bug fixes, patches and security enhancements. Therefore it is important that we as administrators keep our <span class="notranslate">Galaxy</span> servers up to date regardless of which release we are running.</p>
+
+<p>The easiest way to do this is to regularly re-run the Ansible playbook. It will check with GitHub and grab any new changes to <span class="notranslate">Galaxy</span> since the last time you ran it and automatically keep everything up to date. The large <strong>use<span class="notranslate">galaxy</span>.*</strong> servers all re-run the playbook on a regular schedule for this purpose.</p>
+
+<p>Regular running of the playbook also encourages you and your team members to make changes to the Ansible scripts not the live system (as live changes will be overwritten). This leads to a much more robust and consistent production <span class="notranslate">Galaxy</span> server for your users.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>This tutorial has shown you how to keep your <span class="notranslate">Galaxy</span> server up to date with the latest version painlessly and simply following current best practice. We hope you enjoyed this tutorial and got something out of it.</p>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>Using Ansible to keep your server up to date is the best practice method</p>
+</li>
+                            
+                            <li><p>Always backup the database before you do an upgrade in case anything goes wrong</p>
+</li>
+                            
+                            <li><p>Re-run the playbook from time to time to keep your Galaxy server up to date with any minor changes and patches</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/admin/faqs/">FAQ page for the Galaxy Server administration topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                    
+
+                    
+
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Upgrading Galaxy (Galaxy Server administration)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Simon Gladman, 2021 <b>Upgrading Galaxy (Galaxy Training Materials)</b>. <a href="/training-material/topics/admin/tutorials/upgrading/tutorial.html">/training-material/topics/admin/tutorials/upgrading/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{admin-upgrading,
+    author = "Simon Gladman",
+    title = "Upgrading Galaxy (Galaxy Training Materials)",
+    year = "2021",
+    month = "06",
+    day = "08"
+    url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/upgrading/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+                    
+
+                    
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Simon Gladman)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/admin/tutorials/upgrading/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
