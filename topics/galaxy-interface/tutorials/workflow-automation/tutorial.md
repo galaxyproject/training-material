@@ -27,7 +27,6 @@ requirements:
 contributors:
 - simonbray
 - wm75
-level: Advanced
 subtopic: analyse
 ---
 
@@ -158,8 +157,8 @@ The `tutorial.ga` file defines the workflow in JSON format; if we are confident 
 >
 >    > ### {% icon code-in %} Input: Creating the input files
 >    > ```shell
->    > $ echo "hello\nworld" > dataset1.txt
->    > $ echo "hello\nuniverse!" > dataset2.txt
+>    > $ printf "hello\nworld" > dataset1.txt
+>    > $ printf "hello\nuniverse!" > dataset2.txt
 >    > ls
 >    > dataset1.txt  dataset2.txt  tutorial.ga  tutorial-init-job.yml
 >    > ```
@@ -290,7 +289,7 @@ The SARS-CoV-2 pandemic has been accompanied by unprecedented world-wide sequenc
 
 3. uses Pangolin to classify the resulting collection of genome sequences in FASTA format and to create a report of lineage assignments for all samples.
 
-Like in a real world situation you will receive VCF files for several batches of samples and you will be facing the challenge of uploading the files from each batch as a collection into Galaxy and of triggering a run of the workflow for each of them.
+Just like in a real world situation, you will receive VCF files for several batches of samples and you will face the challenge of uploading the files from each batch as a collection into Galaxy and of triggering a run of the workflow for each of them.
 
 ## Setting up the bot
 
