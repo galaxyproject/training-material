@@ -37,7 +37,7 @@ Luckily for us, by using the best practice Ansible installation method that we h
 
 We can get all the latest patches and fixes for our currently installed version of Galaxy by just re-running the Ansible playbook on a regular basis.
 
-We can upgrade our Galaxy version by modifying the Ansible var files and re-running the playbook. It's that simple. 
+We can upgrade our Galaxy version by modifying the Ansible var files and re-running the playbook. It's that simple.
 
 This tutorial will show you how and discuss some of the things you need to keep in mind whenever you are updating or upgrading your Galaxy server.
 
@@ -46,7 +46,7 @@ This tutorial will show you how and discuss some of the things you need to keep 
 * As at June 2021, Galaxy has three new version releases per year - in each of January, May and September. The versions are denominated by the year and month - `YY.MM`. i.e. January 2021's Galaxy release is version *21.01*.
 * Official Galaxy versions are tagged on the [Galaxy Project's GitHub releases page](https://github.com/galaxyproject/galaxy/releases) as `vYY.MM`. e.g. *v21.01*
 * Each version also has an official branch in the GitHub repo named `release_YY.MM`. e.g. *release_21.01*
-* Galaxy versions will be supported with security fixes, bug patches and other improvements for **XXX** years from the time of release at which time they will become "End of Life" and will no longer be supported. 
+* Galaxy versions will be supported with security fixes, bug patches and other improvements for **XXX** years from the time of release at which time they will become "End of Life" and will no longer be supported.
 
 > ### Agenda
 >
@@ -130,7 +130,7 @@ Before upgrading your Galaxy server to the latest version (or even a new version
 
 # Back up the Galaxy database
 
-At the heart of every Galaxy server beats its database. The database is the most important part of the Galaxy server as it contains all of the metadata required for the server to operate and records details of all users, jobs, datasets etc since the server was started. 
+At the heart of every Galaxy server beats its database. The database is the most important part of the Galaxy server as it contains all of the metadata required for the server to operate and records details of all users, jobs, datasets etc since the server was started.
 
 Sometimes new versions of Galaxy make changes to the database schema that require a database upgrade.
 
@@ -139,7 +139,7 @@ It is highly important that we back it up before making any substantial changes 
 In a production environment it is really important to make regular backups of the database in any case. The **usegalaxy.\*** servers all perform at least daily backups of their respective databases and even have replicate database servers *just in case.*
 
 > ### {% icon hands_on %} Hands-on: Back up the Galaxy database
-> 
+>
 > We will be using the PostgreSQL `pg_dump` command to dump the complete contents of the Galaxy database to a file. From the usage text of the command:
 >
 >   {% raw %}
@@ -152,7 +152,7 @@ In a production environment it is really important to make regular backups of th
 >   ```
 >   {% endraw %}
 >
-> We will use `pg_dump` and pipe its output through `gzip` to an output file to create a compressed text (SQL) representation of the database. We will need to do this as the `galaxy` user. It's a good idea to create the backup file name with a sensible name and then copy it somewhere else like a cloud service. 
+> We will use `pg_dump` and pipe its output through `gzip` to an output file to create a compressed text (SQL) representation of the database. We will need to do this as the `galaxy` user. It's a good idea to create the backup file name with a sensible name and then copy it somewhere else like a cloud service.
 >
 > From your terminal -
 >
@@ -191,7 +191,7 @@ There are however a few things to consider before doing the actual upgrade, espe
 Once you've made sure of these things, it's time to do it!
 
 > ### {% icon hands_on %} Hands-on: Back up the Galaxy database
-> 
+>
 > In this tutorial we will upgrade the server to version *21.01*. This may be different for you. Please use the latest version instead.
 >
 > 1. Edit the `group_vars/galaxyservers.yml` file and change the `galaxy_commit_id` to the latest version. Use the form `release_YY.MM` or in this case `release_21.01`.
@@ -220,7 +220,7 @@ Once you've made sure of these things, it's time to do it!
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
->   
+>
 {: .hands_on}
 
 You should see in the Ansible output that Galaxy had to rebuild the client, update the database, rebuild its virtual environment and restart. If you weren't using Ansible, these steps would all be manual and important not to get wrong. Ansible makes the entire process super simple for us.
@@ -231,9 +231,9 @@ Congratulations, you're Galaxy server should now be updated to the latest versio
 
 The Galaxy development community continually support release versions of Galaxy for **XXX** years. They regularly update releases with bug fixes, patches and security enhancements. Therefore it is important that we as administrators keep our Galaxy servers up to date regardless of which release we are running.
 
-The easiest way to do this is to regularly re-run the Ansible playbook. It will check with GitHub and grab any new changes to Galaxy since the last time you ran it and automatically keep everything up to date. The large **usegalaxy.\*** servers all re-run the playbook on a regular schedule for this purpose. 
+The easiest way to do this is to regularly re-run the Ansible playbook. It will check with GitHub and grab any new changes to Galaxy since the last time you ran it and automatically keep everything up to date. The large **usegalaxy.\*** servers all re-run the playbook on a regular schedule for this purpose.
 
-Regular running of the playbook also encourages you and your team members to make changes to the Ansible scripts not the live system (as live changes will be overwritten). This leads to a much more robust and consistent production Galaxy server for your users. 
+Regular running of the playbook also encourages you and your team members to make changes to the Ansible scripts not the live system (as live changes will be overwritten). This leads to a much more robust and consistent production Galaxy server for your users.
 
 # Conclusion
 
