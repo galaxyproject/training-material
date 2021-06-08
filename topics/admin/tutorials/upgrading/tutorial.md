@@ -91,7 +91,7 @@ Once we know what our current version is, we can compare it with the latest avai
 >    > curl https://your-galaxy/api/version
 >    > ```
 >    > {: data-cmd="true"}
->    {: .code-out}
+>    {: .code-in}
 >
 >    > ### {% icon code-out %} Output: Browser window
 >    > ```JSON
