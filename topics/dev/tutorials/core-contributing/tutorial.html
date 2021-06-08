@@ -1,0 +1,1551 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Contributing to Galaxy Core</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta property="og:title" content="Galaxy Training: Contributing to Galaxy Core" />
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxyproject/dev'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/dev" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Development in Galaxy
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/dev/faqs/" title="Check our FAQs for the Development in Galaxy topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/core-contributing/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/dev/tutorials/core-contributing/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/core-contributing/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/core-contributing/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/core-contributing/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/core-contributing/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/core-contributing/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fdev%2Ftutorials%2Fcore-contributing%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/core-contributing/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                    -->
+
+                     <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Contributing to Galaxy Core",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/main/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Development in Galaxy",
+    "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+    "url": "https://training.galaxyproject.org//training-material/topics/dev/"
+  },
+  "courseCode": "dev / core-contributing / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Contributing to Galaxy Core' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/dev/tutorials/core-contributing/tutorial.html",
+  "timeRequired": "PT3H",
+  "description": "The questions this  addresses are:\n - How can I develop extensions to Galaxy data model?\n - How can I implement new API functionality within Galaxy?\n - How can I extend the Galaxy user interface with VueJS components?\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/contributing/tutorials/github-command-line-contribution/slides.html",
+      "name": "Contributing with GitHub via command-line",
+      "description": "Slides for 'Contributing with GitHub via command-line' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html",
+      "name": "Contributing with GitHub via command-line",
+      "description": "Hands-on for 'Contributing with GitHub via command-line' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/dev/tutorials/architecture/slides.html",
+      "name": "Galaxy Code Architecture",
+      "description": "Slides for 'Galaxy Code Architecture' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Chilton"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "John Chilton"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Development in Galaxy",
+      "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+      "url": "https://training.galaxyproject.org//training-material/topics/dev/"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial topic-dev">
+        <h1 data-toc-skip>Contributing to Galaxy Core</h1>
+        
+
+        <div class="contributors-line">By: 
+
+ <a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/jmchilton" alt="John Chilton">John Chilton</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How can I develop extensions to Galaxy data model?</p>
+</li>
+            
+            <li><p>How can I implement new API functionality within Galaxy?</p>
+</li>
+            
+            <li><p>How can I extend the Galaxy user interface with VueJS components?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/contributing">Contributing to the Galaxy Training Material</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Contributing with GitHub via command-line:
+                            
+                                <a href="/training-material/topics/contributing/tutorials/github-command-line-contribution/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/dev">Development in Galaxy</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Galaxy Code Architecture:
+                            
+                                <a href="/training-material/topics/dev/tutorials/architecture/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 3 hours</div>
+            
+
+            
+
+            
+            
+
+            
+            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/dev/slides/introduction.html" title="Topic Overview slides">
+                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Topic Overview slides
+                    </a></li>
+                
+
+                
+
+                
+
+                
+
+                
+                
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/dev/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 8, 2021 </div>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 id="contributing-to-galaxy-core">Contributing to <span class="notranslate">Galaxy</span> Core</h1>
+
+<p>This tutorial walks you through an extension to <span class="notranslate">Galaxy</span> and how to contribute back to the core project.</p>
+
+<p>To setup the proposed extension imagine you’re running a specialized <span class="notranslate">Galaxy</span> server and each of your users only use a few of <span class="notranslate">Galaxy</span> datatypes. You’d like to tailor the UI experience by allowing users of <span class="notranslate">Galaxy</span> to select their favorite extensions for additional filtering in <span class="notranslate">downstream</span> applications, UI extensions, etc..</p>
+
+<p>Like many extensions to <span class="notranslate">Galaxy</span>, the proposed change requires persistent state. <span class="notranslate">Galaxy</span> stores most persistent state in a relational database. The Python layer that defines <span class="notranslate">Galaxy</span> data model is setup by defining SQLAlchemy models.</p>
+
+<p>The proposed extension could be implemented in several different ways on <span class="notranslate">Galaxy</span>’s backend. We will choose one for this example for its simplicity, not for its correctness or cleverness, because our purpose here is to demonstrate modifying and extending various layers of <span class="notranslate">Galaxy</span>.</p>
+
+<p>With simplicity in mind, we will implement our proposed extension to <span class="notranslate">Galaxy</span> by adding a single new table to <span class="notranslate">Galaxy</span>’s data model called <code class="language-plaintext highlighter-rouge">user_favorite_extension</code>. The concept of a favorite extension will be represented by a one-to-many relationship from the table that stores <span class="notranslate">Galaxy</span>’s user records to this new table. The extension itself that will be favorited will be stored as a <code class="language-plaintext highlighter-rouge">Text</code> field in this new table. This table will also need to include an integer primary key named <code class="language-plaintext highlighter-rouge">id</code> to follow the example set by the rest of the <span class="notranslate">Galaxy</span> data model.</p>
+
+<h2 id="models">Models</h2>
+
+<p>The relational database tables consumed by <span class="notranslate">Galaxy</span> are defined in <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/model/<span class="notranslate">mapping</span>.py</code>.</p>
+
+<blockquote class="question">
+  <h3 id="question-questions-about-mapping"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions about <span class="notranslate">Mapping</span></h3>
+
+  <ol>
+    <li>What should be the SQLAlchemy model named corresponding to the table <code class="language-plaintext highlighter-rouge">user_favorite_extension</code> based on <a href="https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/model/mapping.py">other examples in the <span class="notranslate">mapping</span> file</a>?</li>
+    <li>What table stores <span class="notranslate">Galaxy</span>’s user records?</li>
+    <li>What is another simple table with a relationship with the <span class="notranslate">Galaxy</span>’s user table?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">UserFavoriteExtension</code></li>
+      <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_user</code></li>
+      <li>An example table might be the <code class="language-plaintext highlighter-rouge">user_preference</code> table.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<p>Implement the required changes in <code class="language-plaintext highlighter-rouge"><span class="notranslate">mapping</span>.py</code> to add a <span class="notranslate">mapping</span> for
+the proposed <code class="language-plaintext highlighter-rouge">user_favorite_extension</code> table.</p>
+
+<blockquote class="solution">
+  <h3 id="solution-libgalaxymodelmappingpy"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/model/<span class="notranslate">mapping</span>.py</code></h3>
+
+  <p>Possible changes to file <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/model/<span class="notranslate">mapping</span>.py</code>:</p>
+
+  <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">index 5aaef76a03..0fdba0e4b7 100644
+</span><span class="gd">--- a/lib/<span class="notranslate">galaxy</span>/model/<span class="notranslate">mapping</span>.py
+</span><span class="gi">+++ b/lib/<span class="notranslate">galaxy</span>/model/<span class="notranslate">mapping</span>.py
+</span><span class="p">@@ -1583,6 +1583,12 @@</span> model.UserPreference.table = Table(
+     Column("name", Unicode(255), index=True),
+     Column("value", Text))
+ 
+<span class="gi">+model.UserFavoriteExtension.table = Table(
++    "user_favorite_extension", metadata,
++    Column("id", Integer, primary_key=True),
++    Column("user_id", Integer, ForeignKey("<span class="notranslate">galaxy</span>_user.id"), index=True),
++    Column("value", Text))
++
+</span> model.UserAction.table = Table(
+     "user_action", metadata,
+     Column("id", Integer, primary_key=True),
+<span class="p">@@ -1671,6 +1677,7 @@</span> simple_<span class="notranslate">mapping</span>(model.WorkerProcess)
+ 
+ # User tables.
+ mapper_registry.map_imperatively(model.UserPreference, model.UserPreference.table, properties={})
+<span class="gi">+mapper_registry.map_imperatively(model.UserFavoriteExtension, model.UserFavoriteExtension.table, properties={})
+</span> mapper_registry.map_imperatively(model.UserAction, model.UserAction.table, properties=dict(
+     # user=relation( model.User.mapper )
+     user=relation(model.User)
+<span class="p">@@ -1928,6 +1935,8 @@</span> mapper_registry.map_imperatively(model.User, model.User.table, properties=dict(
+     _preferences=relation(model.UserPreference,
+         backref="user",
+         collection_class=attribute_mapped_collection('name')),
+<span class="gi">+    favorite_extensions=relation(model.UserFavoriteExtension,
++        backref="user"),
+</span>     # addresses=relation( UserAddress,
+     #     primaryjoin=( User.table.c.id == UserAddress.table.c.user_id ) ),
+     values=relation(model.FormValues,
+</code></pre></div>  </div>
+</blockquote>
+
+<p>The Python model objects used by <span class="notranslate">Galaxy</span> corresponding to these tables are
+defined in <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/model/__init__.py</code>.</p>
+
+<p>Modify <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/model/__init__.py</code> to add a model class
+called <code class="language-plaintext highlighter-rouge">UserFavoriteExtension</code> as described above.</p>
+
+<blockquote class="solution">
+  <h3 id="solution-libgalaxymodel__init__py"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/model/__init__.py</code></h3>
+
+  <p>Possible changes to file <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/model/__init__.py</code>:</p>
+
+  <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">index 2c0b8a4dc4..69a74b0ad2 100644
+</span><span class="gd">--- a/lib/<span class="notranslate">galaxy</span>/model/__init__.py
+</span><span class="gi">+++ b/lib/<span class="notranslate">galaxy</span>/model/__init__.py
+</span><span class="p">@@ -6617,6 +6617,11 @@</span> class UserPreference(RepresentById):
+         self.value = value
+ 
+ 
+<span class="gi">+class UserFavoriteExtension(RepresentById):
++    def __init__(self, value=None):
++        self.value = value
++
++
+</span> class UserAction(RepresentById):
+     def __init__(self, id=None, create_time=None, user_id=None, session_id=None, action=None, params=None, context=None):
+         self.id = id
+</code></pre></div>  </div>
+</blockquote>
+
+<h2 id="migrations">Migrations</h2>
+
+<p>There is one last database issue to consider before moving on to considering the API.
+Each successive release of <span class="notranslate">Galaxy</span> requires recipes for how to migrate old database schemes
+to updated ones. These recipes are called versions and are currently implemented using SQLAlchemy
+ Migrate. These versions are stored in <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/model/migrate</code>.</p>
+
+<p>Each of these versions is prefixed with a 4-digit number (e.g. <code class="language-plaintext highlighter-rouge">0125</code>) to specify the linear
+order these migrations should be applied in.</p>
+
+<p>We’ve developed a lot of abstractions around the underlying migration library we use, so it
+is probably better to find existing examples inside of <span class="notranslate">Galaxy</span> for writing migrations than
+consulting the SQLAlchemy Migrate documentation.</p>
+
+<p>A good example for the table we need to construct for this example is again based on the existing
+user preferences concept in <span class="notranslate">Galaxy</span>.</p>
+
+<blockquote class="question">
+  <h3 id="question-questions-about-migrations"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions about Migrations</h3>
+
+  <p>What existing <span class="notranslate">Galaxy</span> migration added the concept of user preferences to the <span class="notranslate">Galaxy</span> codebase?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p><a href="https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/model/migrate/versions/0021_user_prefs.py"><code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/model/migrate/versions/0021_user_prefs.py</code></a></p>
+  </blockquote>
+</blockquote>
+
+<p>Add a new file to <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/model/migrate/versions/</code> prefixed appropriately.</p>
+
+<blockquote class="solution">
+  <h3 id="solution-libgalaxymodelmigrateversions0177_add_user_favorite_extensionspy"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/model/migrate/versions/0177_add_user_favorite_extensions.py</code></h3>
+
+  <p>Possible changes to file <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/model/migrate/versions/0177_add_user_favorite_extensions.py</code>:</p>
+
+  <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">new file mode 100644
+</span><span class="gh">index 0000000000..e0d1a4dded
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/lib/<span class="notranslate">galaxy</span>/model/migrate/versions/0177_add_user_favorite_extensions.py
+</span><span class="p">@@ -0,0 +1,37 @@</span>
+<span class="gi">+"""
++Migration script to add the user_favorite_extension table.
++"""
++
++import logging
++
++from sqlalchemy import Column, ForeignKey, Integer, MetaData, Table, Text
++
++log = logging.getLogger(__name__)
++metadata = MetaData()
++
++UserFavoriteExtension_table = Table(
++    "user_favorite_extension", metadata,
++    Column("id", Integer, primary_key=True),
++    Column("user_id", Integer, ForeignKey("<span class="notranslate">galaxy</span>_user.id"), index=True),
++    Column("value", Text, index=True, unique=True)
++)
++
++
++def upgrade(migrate_engine):
++    metadata.bind = migrate_engine
++    print(__doc__)
++    metadata.reflect()
++    try:
++        UserFavoriteExtension_table.create()
++    except Exception:
++        log.exception("Creating user_favorite_extension table failed.")
++
++
++def downgrade(migrate_engine):
++    metadata.bind = migrate_engine
++    # Load existing tables
++    metadata.reflect()
++    try:
++        UserFavoriteExtension_table.drop()
++    except Exception:
++        log.exception("Dropping user_favorite_extension table failed.")
+</span></code></pre></div>  </div>
+</blockquote>
+
+<h2 id="test-driven-development">Test Driven Development</h2>
+
+<p>With the database model in place, we need to start adding the rest of
+the Python plumbing required to implement this feature. We will do
+this with a test-driven approach and start by implementing an API test
+that exercises operations we would like to have available for favorite
+extensions.</p>
+
+<p>We will stick a test case for user extensions in
+<code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>_test/api/test_users.py</code> which is a relatively
+straightforward file that contains tests for other user API
+endpoints.</p>
+
+<p>Various user-centered operations have endpoints under
+<code class="language-plaintext highlighter-rouge">api/user/&lt;user_id&gt;</code> and <code class="language-plaintext highlighter-rouge">api/user/current</code> is sometimes
+substituable as the current user.</p>
+
+<p>We will keep things very simple and only implement this functionality
+for the current user.</p>
+
+<p>We will implement three simple API endpoints.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Route</th>
+      <th>Definition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">GET</code></td>
+      <td><code class="language-plaintext highlighter-rouge">&lt;<span class="notranslate">galaxy</span>_root_url&gt;/api/users/current/favorites/extensions</code></td>
+      <td>This should return a list of favorited extensions for the current user.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">POST</code></td>
+      <td><code class="language-plaintext highlighter-rouge">&lt;<span class="notranslate">galaxy</span>_root_url&gt;/api/users/current/favorites/extensions/&lt;extension&gt;</code></td>
+      <td>This should mark an extension as a favorite for the current user.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">DELETE</code></td>
+      <td><code class="language-plaintext highlighter-rouge">&lt;<span class="notranslate">galaxy</span>_root_url&gt;/api/users/current/favorites/extensions/&lt;extension&gt;</code></td>
+      <td>This should unmark an extension as a favorite for the current user.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Please review <code class="language-plaintext highlighter-rouge">test_users.py</code> and attempt to write a test case that:</p>
+
+<ul>
+  <li>Verifies the test user’s initially favorited extensions is an empty list.</li>
+  <li>Verifies that a <code class="language-plaintext highlighter-rouge">POST</code> to <code class="language-plaintext highlighter-rouge">&lt;<span class="notranslate">galaxy</span>_root_url&gt;/api/users/current/favorites/extensions/fasta</code> returns a 200 status code indicating success.</li>
+  <li>Verifies that after this <code class="language-plaintext highlighter-rouge">POST</code> the list of user favorited extensions contains <code class="language-plaintext highlighter-rouge">fasta</code> and is of size 1.</li>
+  <li>Verifies that a <code class="language-plaintext highlighter-rouge">DELETE</code> to <code class="language-plaintext highlighter-rouge">&lt;<span class="notranslate">galaxy</span>_root_url&gt;/api/users/current/favorites/extensions/fasta</code> succeeds.</li>
+  <li>Verifies that after this <code class="language-plaintext highlighter-rouge">DELETE</code> the favorited extensions list is again empty.</li>
+</ul>
+
+<blockquote class="solution">
+  <h3 id="solution-libgalaxy_testapitest_userspy"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>_test/api/test_users.py</code></h3>
+
+  <p>Possible changes to file <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>_test/api/test_users.py</code>:</p>
+
+  <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">index e6fbfec6ee..7dc82d7179 100644
+</span><span class="gd">--- a/lib/<span class="notranslate">galaxy</span>_test/api/test_users.py
+</span><span class="gi">+++ b/lib/<span class="notranslate">galaxy</span>_test/api/test_users.py
+</span><span class="p">@@ -171,6 +171,33 @@</span> class UsersApiTestCase(ApiTestCase):
+         search_response = get(url).json()
+         assert "cat1" in search_response
+ 
+<span class="gi">+    def test_favorite_extensions(self):
++        index_response = self._get("users/current/favorites/extensions")
++        index_response.raise_for_status()
++        index = index_response.json()
++        assert isinstance(index, list)
++        assert len(index) == 0
++
++        create_response = self._post("users/current/favorites/extensions/fasta")
++        create_response.raise_for_status()
++
++        index_response = self._get("users/current/favorites/extensions")
++        index_response.raise_for_status()
++        index = index_response.json()
++        assert isinstance(index, list)
++        assert len(index) == 1
++
++        assert "fasta" in index
++
++        delete_response = self._delete("users/current/favorites/extensions/fasta")
++        delete_response.raise_for_status()
++
++        index_response = self._get("users/current/favorites/extensions")
++        index_response.raise_for_status()
++        index = index_response.json()
++        assert isinstance(index, list)
++        assert len(index) == 0
++
+</span>     def __url(self, action, user):
+         return self._api_url(f"users/{user['id']}/{action}", params=dict(key=self.master_api_key))
+ 
+<span class="gd">-- 
+</span><span class="p">2.30.1 (Apple Git-130)
+</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<h2 id="run-the-tests">Run the Tests</h2>
+
+<p>Verify this test fails when running stand-alone.</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./run_tests.sh <span class="nt">-api</span> lib/<span class="notranslate">galaxy</span>_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
+</code></pre></div>  </div>
+</blockquote>
+
+<h2 id="implementing-the-api">Implementing the API</h2>
+
+<p>Add a new API implementation file to
+<code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api/</code> called <code class="language-plaintext highlighter-rouge">user_favorites.py</code> with
+an API implementation of the endpoints we just outlined.</p>
+
+<p>To implement the API itself, add three methods to the user manager in
+<code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/managers/users.py</code>.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">get_favorite_extensions(user)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">add_favorite_extension(user, extension)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">delete_favorite_extension(user, extension)</code></li>
+</ul>
+
+<blockquote class="solution">
+  <h3 id="solution-libgalaxywebappsgalaxyapiuser_favoritespy"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api/user_favorites.py</code></h3>
+
+  <p>Possible changes to file <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api/user_favorites.py</code>:</p>
+
+  <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">new file mode 100644
+</span><span class="gh">index 0000000000..3587a9056e
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api/user_favorites.py
+</span><span class="p">@@ -0,0 +1,66 @@</span>
+<span class="gi">+"""
++API operations allowing clients to determine datatype supported by <span class="notranslate">Galaxy</span>.
++"""
++import logging
++from typing import List
++
++from fastapi import Path
++
++from <span class="notranslate">galaxy</span>.managers.context import ProvidesUserContext
++from <span class="notranslate">galaxy</span>.managers.users import UserManager
++from . import (
++    depends,
++    DependsOnTrans,
++    Router,
++)
++
++log = logging.getLogger(__name__)
++
++router = Router(tags=['user_favorites'])
++
++ExtensionPath: str = Path(
++    ...,  # Mark this Path parameter as required
++    title="Extension",
++    description="Target file extension for target operation."
++)
++
++
++@router.cbv
++class FastAPIUserFavorites:
++    user_manager: UserManager = depends(UserManager)
++
++    @router.get(
++        '/api/users/current/favorites/extensions',
++        summary="List user favroite data types",
++        response_description="List of data types",
++    )
++    def index(
++        self,
++        trans: ProvidesUserContext = DependsOnTrans,
++    ) -&gt; List[str]:
++        """Gets the list of user's favorite data types."""
++        return self.user_manager.get_favorite_extensions(trans.user)
++
++    @router.post(
++        '/api/users/current/favorites/extensions/{extension}',
++        summary="Mark an extension as the current user's favorite.",
++        response_description="The extension.",
++    )
++    def create(
++        self,
++        extension: str = ExtensionPath,
++        trans: ProvidesUserContext = DependsOnTrans,
++    ) -&gt; str:
++        self.user_manager.add_favorite_extension(trans.user, extension)
++        return extension
++
++    @router.delete(
++        '/api/users/current/favorites/extensions/{extension}',
++        summary="Unmark an extension as the current user's favorite.",
++    )
++    def delete(
++        self,
++        extension: str = ExtensionPath,
++        trans: ProvidesUserContext = DependsOnTrans,
++    ) -&gt; str:
++        self.user_manager.delete_favorite_extension(trans.user, extension)
+</span></code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="solution">
+  <h3 id="solution-libgalaxymanagersuserspy"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/managers/users.py</code></h3>
+
+  <p>Possible changes to file <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/managers/users.py</code>:</p>
+
+  <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">index 3407a6bd75..f15bb4c5d6 100644
+</span><span class="gd">--- a/lib/<span class="notranslate">galaxy</span>/managers/users.py
+</span><span class="gi">+++ b/lib/<span class="notranslate">galaxy</span>/managers/users.py
+</span><span class="p">@@ -590,6 +590,23 @@</span> class UserManager(base.ModelManager, deletable.PurgableManagerMixin):
+                 log.exception('Subscribing to the mailing list has failed.')
+                 return "Subscribing to the mailing list has failed."
+ 
+<span class="gi">+    def get_favorite_extensions(self, user):
++        return [fe.value for fe in user.favorite_extensions]
++
++    def add_favorite_extension(self, user, extension):
++        fe = model.UserFavoriteExtension(value=extension)
++        user.favorite_extensions.append(fe)
++        self.session().add(user)
++        self.session().flush()
++
++    def delete_favorite_extension(self, user, extension):
++        fes = [fe for fe in user.favorite_extensions if fe.value == extension]
++        if len(fes) == 0:
++            raise exceptions.RequestParameterInvalidException("Attempted to unfavorite extension not marked as a favorite.")
++        fe = fes[0]
++        self.session().delete(fe)
++        self.session().flush()
++
+</span>     def activate(self, user):
+         user.active = True
+         self.session().add(user)
+</code></pre></div>  </div>
+</blockquote>
+
+<p>This part is relatively challenging and takes time to really become an
+expert at - it requires greping around the backend to find similar examples,
+lots of trial and error, debugging the test case and the implementation in unison,
+etc..</p>
+
+<p>Ideally, you’d start at the top of test case - make sure it fails on the first API request,
+implement <code class="language-plaintext highlighter-rouge">get_favorite_extensions</code> on the manager and the API code to wire it up, and continue
+with <code class="language-plaintext highlighter-rouge">add_favorite_extension</code> before finishing with <code class="language-plaintext highlighter-rouge">delete_favorite_extension</code>.</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./run_tests.sh <span class="nt">-api</span> lib/<span class="notranslate">galaxy</span>_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
+</code></pre></div>  </div>
+</blockquote>
+
+<h2 id="building-the-ui">Building the UI</h2>
+
+<p>Once the API test is done, it is time to build a user interface for this addition to <span class="notranslate">Galaxy</span>. Let’s get
+some of the plumbing out of the way right away. We’d like to have a URL for viewing the current user’s
+favorite extensions in the UI. This URL needs to be registered as a client route in <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/buildapp.py</code>.</p>
+
+<p>Add <code class="language-plaintext highlighter-rouge">/user/favorite/extensions</code> as a route for the client in <code class="language-plaintext highlighter-rouge">buildapp.py</code>.</p>
+
+<blockquote class="solution">
+  <h3 id="solution-libgalaxywebappsgalaxybuildapppy"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/buildapp.py</code></h3>
+
+  <p>Possible changes to file <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/buildapp.py</code>:</p>
+
+  <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">index 7fbe248c66..76fe7cd819 100644
+</span><span class="gd">--- a/lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/buildapp.py
+</span><span class="gi">+++ b/lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/buildapp.py
+</span><span class="p">@@ -155,6 +155,7 @@</span> def app_pair(global_conf, load_app_kwds=None, wsgi_preflight=True, **kwargs):
+     webapp.add_client_route('/tours/{tour_id}')
+     webapp.add_client_route('/user')
+     webapp.add_client_route('/user/{form_id}')
+<span class="gi">+    webapp.add_client_route('/user/favorite/extensions')
+</span>     webapp.add_client_route('/visualizations')
+     webapp.add_client_route('/visualizations/edit')
+     webapp.add_client_route('/visualizations/sharing')
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Let’s add the ability to navigate to this URL and future component to
+the “User” menu in the <span class="notranslate">Galaxy</span> masthead. The file <code class="language-plaintext highlighter-rouge">client/src/layout/menu.js</code>
+contains the “model” data describing the masthead. Add a link to the route
+we described above to <code class="language-plaintext highlighter-rouge">menu.js</code> with an entry titled “Favorite Extensions”.</p>
+
+<blockquote class="solution">
+  <h3 id="solution-clientsrclayoutmenujs"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> <code class="language-plaintext highlighter-rouge">client/src/layout/menu.js</code></h3>
+
+  <p>Possible changes to file <code class="language-plaintext highlighter-rouge">client/src/layout/menu.js</code>:</p>
+
+  <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">index 062191b492..de91d9670c 100644
+</span><span class="gd">--- a/client/src/layout/menu.js
+</span><span class="gi">+++ b/client/src/layout/menu.js
+</span><span class="p">@@ -314,6 +314,11 @@</span> export function fetchMenu(options = {}) {
+                     url: "workflows/invocations",
+                     target: "__use_router__",
+                 },
+<span class="gi">+                {
++                    title: _l("Favorite Extensions"),
++                    url: "/user/favorite/extensions",
++                    target: "__use_router__",
++                },
+</span>             ],
+         };
+         if (<span class="notranslate">Galaxy</span>.config.visualizations_visible) {
+</code></pre></div>  </div>
+</blockquote>
+
+<p>The next piece of this plumbing is to respond to this route in the
+analysis router. The analysis router maps URLs to UI components to
+render.</p>
+
+<p>Assume a VueJS component will be available called
+<code class="language-plaintext highlighter-rouge">FavoriteExtensions</code> in the file
+<code class="language-plaintext highlighter-rouge">components/User/FavoriteExtensions/index.js</code>.  In
+<code class="language-plaintext highlighter-rouge">client/src/entry/analysis/AnalysisRouter.js</code> respond to the route
+added above in <code class="language-plaintext highlighter-rouge">buildapp.py</code> and render the fictious VueJS component
+<code class="language-plaintext highlighter-rouge">FavoriteExtensions</code>.</p>
+
+<blockquote class="solution">
+  <h3 id="solution-clientsrcentryanalysisanalysisrouterjs"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> <code class="language-plaintext highlighter-rouge">client/src/entry/analysis/AnalysisRouter.js</code></h3>
+
+  <p>Possible changes to file <code class="language-plaintext highlighter-rouge">client/src/entry/analysis/AnalysisRouter.js</code>:</p>
+
+  <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">index b409c8374f..61b01f85fa 100644
+</span><span class="gd">--- a/client/src/entry/analysis/AnalysisRouter.js
+</span><span class="gi">+++ b/client/src/entry/analysis/AnalysisRouter.js
+</span><span class="p">@@ -32,6 +32,7 @@</span> import InteractiveTools from "components/InteractiveTools/InteractiveTools.vue";
+ import WorkflowList from "components/<span class="notranslate">Workflow</span>/WorkflowList.vue";
+ import HistoryImport from "components/HistoryImport.vue";
+ import { HistoryExport } from "components/HistoryExport/index";
+<span class="gi">+import { FavoriteExtensions } from "components/User/FavoriteExtensions/index";
+</span> import HistoryView from "components/HistoryView.vue";
+ import WorkflowInvocationReport from "components/<span class="notranslate">Workflow</span>/InvocationReport.vue";
+ import WorkflowRun from "components/<span class="notranslate">Workflow</span>/Run/WorkflowRun.vue";
+<span class="p">@@ -67,6 +68,7 @@</span> export const getAnalysisRouter = (<span class="notranslate">Galaxy</span>) =&gt; {
+             "(/)user(/)cloud_auth": "show_cloud_auth",
+             "(/)user(/)exte<span class="notranslate">rna</span>l_ids": "show_exte<span class="notranslate">rna</span>l_ids",
+             "(/)user(/)(:form_id)": "show_user_form",
+<span class="gi">+            "(/)user(/)favorite(/)extensions": "show_user_favorite_extensions",
+</span>             "(/)pages(/)create(/)": "show_pages_create",
+             "(/)pages(/)edit(/)": "show_pages_edit",
+             "(/)pages(/)sharing(/)": "show_pages_sharing",
+<span class="p">@@ -157,6 +159,10 @@</span> export const getAnalysisRouter = (<span class="notranslate">Galaxy</span>) =&gt; {
+             this.page.display(new FormWrapper.View(_.extend(model[form_id], { active_tab: "user" })));
+         },
+ 
+<span class="gi">+        show_user_favorite_extensions: function () {
++            this._display_vue_helper(FavoriteExtensions, {});
++        },
++
+</span>         show_interactivetool_list: function () {
+             this._display_vue_helper(InteractiveTools);
+         },
+</code></pre></div>  </div>
+</blockquote>
+
+<p>There are many ways to perform the next steps, but like the API entry-point lets
+start with a test case describing the UI component we want to write. Below is a
+Jest unit test for a VueJS component that mocks out some API calls to <code class="language-plaintext highlighter-rouge">/api/datatypes</code>
+and the API entry points we implemented earlier and renders an editable list of
+extensions based on it.</p>
+
+<blockquote class="solution">
+  <h3 id="solution-clientsrccomponentsuserfavoriteextensionslisttestjs"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> <code class="language-plaintext highlighter-rouge">client/src/components/User/FavoriteExtensions/List.test.js</code></h3>
+
+  <p>Possible changes to file <code class="language-plaintext highlighter-rouge">client/src/components/User/FavoriteExtensions/List.test.js</code>:</p>
+
+  <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">new file mode 100644
+</span><span class="gh">index 0000000000..7efa1c76ec
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/client/src/components/User/FavoriteExtensions/List.test.js
+</span><span class="p">@@ -0,0 +1,97 @@</span>
+<span class="gi">+import axios from "axios";
++import MockAdapter from "axios-mock-adapter";
++import { mount } from "@vue/test-utils";
++import { getLocalVue } from "jest/helpers";
++import List from "./List";
++import flushPromises from "flush-promises";
++
++jest.mock("app");
++
++const localVue = getLocalVue();
++const propsData = {};
++
++describe("User/FavoriteExtensions/List.vue", () =&gt; {
++    let wrapper;
++    let axiosMock;
++
++    beforeEach(() =&gt; {
++        axiosMock = new MockAdapter(axios);
++        axiosMock.onGet("api/datatypes").reply(200, ["fasta", "fastq"]);
++        axiosMock.onGet("api/users/current/favorites/extensions").reply(200, ["fasta"]);
++    });
++
++    afterEach(() =&gt; {
++        axiosMock.restore();
++    });
++
++    it("should start loading and then render list", async () =&gt; {
++        wrapper = mount(List, {
++            propsData,
++            localVue,
++        });
++        expect(wrapper.vm.loading).toBeTruthy();
++        await flushPromises();
++        expect(wrapper.vm.loading).toBeFalsy();
++        const el = wrapper.find("#favorite-extensions");
++        expect(el.exists()).toBe(true);
++        expect(el.find("[data-extension-target]").exists()).toBe(true);
++    });
++
++    it("should mark favorite and not favorite with different links", async () =&gt; {
++        wrapper = mount(List, {
++            propsData,
++            localVue,
++        });
++        await flushPromises();
++        const el = wrapper.find("#favorite-extensions");
++        const els = el.findAll("[data-extension-target]");
++        expect(els.length).toBe(2);
++        const fastaEntry = els.at(0);
++        expect(fastaEntry.attributes("data-extension-target")).toBe("fasta");
++        expect(fastaEntry.find(".unmark-favorite").exists()).toBe(true);
++        expect(fastaEntry.find(".mark-favorite").exists()).toBe(false);
++
++        const fastqEntry = els.at(1);
++        expect(fastqEntry.attributes("data-extension-target")).toBe("fastq");
++        expect(fastqEntry.find(".mark-favorite").exists()).toBe(true);
++        expect(fastqEntry.find(".unmark-favorite").exists()).toBe(false);
++    });
++
++    it("should post to mark favorites", async () =&gt; {
++        wrapper = mount(List, {
++            propsData,
++            localVue,
++        });
++        await flushPromises();
++        const el = wrapper.find("#favorite-extensions");
++        const els = el.findAll("[data-extension-target]");
++        const fastqEntry = els.at(1);
++        const markFastq = fastqEntry.find(".mark-favorite a");
++        expect(markFastq.exists()).toBe(true);
++
++        axiosMock.onPost("api/users/current/favorites/extensions/fastq").reply(200, "fastq");
++        axiosMock.onGet("api/users/current/favorites/extensions").reply(200, ["fasta", "fastq"]);
++        markFastq.trigger("click");
++        await flushPromises();
++        expect(wrapper.vm.favoriteExtensions.indexOf("fastq") &gt;= 0).toBe(true);
++    });
++
++    it("should delete to unmark favorites", async () =&gt; {
++        wrapper = mount(List, {
++            propsData,
++            localVue,
++        });
++        await flushPromises();
++        const el = wrapper.find("#favorite-extensions");
++        const els = el.findAll("[data-extension-target]");
++        const fastaEntry = els.at(0);
++        const unmarkFasta = fastaEntry.find(".unmark-favorite a");
++        expect(unmarkFasta.exists()).toBe(true);
++
++        axiosMock.onDelete("api/users/current/favorites/extensions/fasta").reply(200);
++        axiosMock.onGet("api/users/current/favorites/extensions").reply(200, []);
++        unmarkFasta.trigger("click");
++        await flushPromises();
++        expect(wrapper.vm.favoriteExtensions.indexOf("fasta") &lt; 0).toBe(true);
++    });
++});
+</span></code></pre></div>  </div>
+</blockquote>
+
+<p>Sketching out this unit test would take a lot of practice, this is a step
+that might be best done just by copying the file over. Make sure the
+individual components make sense before continuing though.</p>
+
+<p>Next implement a VueJS component in that same directory called
+<code class="language-plaintext highlighter-rouge">List.vue</code> that fullfills the contract described by the unit test.</p>
+
+<blockquote class="solution">
+  <h3 id="solution-clientsrccomponentsuserfavoriteextensionslistvue"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> <code class="language-plaintext highlighter-rouge">client/src/components/User/FavoriteExtensions/List.vue</code></h3>
+
+  <p>Possible changes to file <code class="language-plaintext highlighter-rouge">client/src/components/User/FavoriteExtensions/List.vue</code>:</p>
+
+  <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">new file mode 100644
+</span><span class="gh">index 0000000000..e5e7d07ab2
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/client/src/components/User/FavoriteExtensions/List.vue
+</span><span class="p">@@ -0,0 +1,82 @@</span>
+<span class="gi">+&lt;template&gt;
++    &lt;div class="favorite-extensions-card"&gt;
++        &lt;b-alert variant="error" show v-if="errorMessage"&gt;
++            
++        &lt;/b-alert&gt;
++        &lt;loading-span v-if="loading" message="Loading favorite extensions" /&gt;
++        &lt;ul id="favorite-extensions" v-else&gt;
++            &lt;li v-for="extension in extensions" :key="extension" :data-extension-target="extension"&gt;
++                &lt;span
++                    class="favorite-link unmark-favorite"
++                    v-if="favoriteExtensions.indexOf(extension) &gt;= 0"
++                    title="Unmark as favorite"
++                &gt;
++                    &lt;a href="#" @click="unmarkAsFavorite(extension)"&gt;(X)&lt;/a&gt;
++                &lt;/span&gt;
++                &lt;span class="favorite-link mark-favorite" v-else title="Mark as favorite"&gt;
++                    &lt;a href="#" @click="markAsFavorite(extension)"&gt;(+)&lt;/a&gt;
++                &lt;/span&gt;
++                
++            &lt;/li&gt;
++        &lt;/ul&gt;
++    &lt;/div&gt;
++&lt;/template&gt;
++
++&lt;script&gt;
++import axios from "axios";
++import { get<span class="notranslate">Galaxy</span>Instance } from "app";
++import LoadingSpan from "components/LoadingSpan";
++import { errorMessageAsString } from "utils/simple-error";
++
++export default {
++    components: {
++        LoadingSpan,
++    },
++    data() {
++        const <span class="notranslate">Galaxy</span> = get<span class="notranslate">Galaxy</span>Instance();
++        return {
++            datatypesUrl: `${<span class="notranslate">Galaxy</span>.root}api/datatypes`,
++            favoriteExtensionsUrl: `${<span class="notranslate">Galaxy</span>.root}api/users/current/favorites/extensions`,
++            extensions: null,
++            favoriteExtensions: null,
++            errorMessage: null,
++        };
++    },
++    created() {
++        this.loadDatatypes();
++        this.loadFavorites();
++    },
++    computed: {
++        loading() {
++            return this.extensions == null || this.favoriteExtensions == null;
++        },
++    },
++    methods: {
++        loadDatatypes() {
++            axios
++                .get(this.datatypesUrl)
++                .then((response) =&gt; {
++                    this.extensions = response.data;
++                })
++                .catch(this.handleError);
++        },
++        loadFavorites() {
++            axios
++                .get(this.favoriteExtensionsUrl)
++                .then((response) =&gt; {
++                    this.favoriteExtensions = response.data;
++                })
++                .catch(this.handleError);
++        },
++        markAsFavorite(extension) {
++            axios.post(`${this.favoriteExtensionsUrl}/${extension}`).then(this.loadFavorites).catch(this.handleError);
++        },
++        unmarkAsFavorite(extension) {
++            axios.delete(`${this.favoriteExtensionsUrl}/${extension}`).then(this.loadFavorites).catch(this.handleError);
++        },
++        handleError(error) {
++            this.errorMessage = errorMessageAsString(error);
++        },
++    },
++};
++&lt;/script&gt;
+</span></code></pre></div>  </div>
+</blockquote>
+
+<p>Finally, we added a level of indirection when we utilized this
+component from the analysis router above by importing it from
+<code class="language-plaintext highlighter-rouge">index.js</code>. Let’s setup that file and import the component from
+<code class="language-plaintext highlighter-rouge">List.vue</code> and export as a component called
+<code class="language-plaintext highlighter-rouge">FavoriteExtensions</code>.</p>
+
+<blockquote class="solution">
+  <h3 id="solution-clientsrccomponentsuserfavoriteextensionsindexjs"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> <code class="language-plaintext highlighter-rouge">client/src/components/User/FavoriteExtensions/index.js</code></h3>
+
+  <p>Possible changes to file <code class="language-plaintext highlighter-rouge">client/src/components/User/FavoriteExtensions/index.js</code>:</p>
+
+  <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">new file mode 100644
+</span><span class="gh">index 0000000000..c897f34a3b
+</span><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/client/src/components/User/FavoriteExtensions/index.js
+</span><span class="p">@@ -0,0 +1 @@</span>
+<span class="gi">+export { default as FavoriteExtensions } from "./List.vue";
+</span></code></pre></div>  </div>
+</blockquote>
+
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>Galaxy database interactions are mitigated via SQL Alchemy code in lib/galaxy/model.</p>
+</li>
+                            
+                            <li><p>Galaxy API endpoints are implemented in lib/galaxy/webapps/galaxy, but generally defer to application logic in lib/galaxy/managers.</p>
+</li>
+                            
+                            <li><p>Galaxy client code should do its best to separate API interaction logic from display components.</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/dev/faqs/">FAQ page for the Development in Galaxy topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                    
+
+                    
+
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Contributing to Galaxy Core (Development in Galaxy)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">John Chilton, 2021 <b>Contributing to Galaxy Core (Galaxy Training Materials)</b>. <a href="/training-material/topics/dev/tutorials/core-contributing/tutorial.html">/training-material/topics/dev/tutorials/core-contributing/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{dev-core-contributing,
+    author = "John Chilton",
+    title = "Contributing to Galaxy Core (Galaxy Training Materials)",
+    year = "2021",
+    month = "06",
+    day = "08"
+    url = "\url{https://training.galaxyproject.org/training-material/topics/dev/tutorials/core-contributing/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+                    
+
+                    
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (John Chilton)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/dev/tutorials/core-contributing/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
