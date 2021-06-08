@@ -1,0 +1,1345 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Automating Galaxy workflows using the command line</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="A collection of microtutorials explaining various feature..." />
+        <meta property="og:title" content="Galaxy Training: Automating Galaxy workflows using the command line" />
+        <meta property="og:description" content="A collection of microtutorials explaining various feature..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/galaxy-interface" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Using Galaxy and Managing your Data
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/galaxy-interface/faqs/" title="Check our FAQs for the Using Galaxy and Managing your Data topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/galaxy-interface/tutorials/workflow-automation/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-interface%2Ftutorials%2Fworkflow-automation%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/galaxy-interface/tutorials/workflow-automation/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                    -->
+
+                     <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Automating Galaxy workflows using the command line",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/main/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Using Galaxy and Managing your Data",
+    "description": "A collection of microtutorials explaining various features of the Galaxy user interface and manipulating data within Galaxy.",
+    "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/"
+  },
+  "courseCode": "galaxy-interface / workflow-automation / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Automating Galaxy workflows using the command line' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html",
+  "timeRequired": "PT2H",
+  "keywords": "workflows, variant-analysis, covid19",
+  "description": "The questions this  addresses are:\n - How can I schedule and run tens or hundreds of Galaxy workflows easily?\n - How can I automate my analyses when large amounts of data are being produced daily?\n\n\\nThe objectives are:\n - Learn to use the `planemo run` subcommand to run workflows from the command line.\n - Be able to write simple shell scripts for running multiple workflows concurrently or sequentially.\n - Learn how to use Pangolin to assign annotated variants to lineages.\n\n",
+  "coursePrerequisites": [
+    "Familiarity with Galaxy and basic associated concepts, in particular workflows",
+    "Basic knowledge of the command line"
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Simon Bray"
+    },
+    {
+      "@type": "Person",
+      "name": "Wolfgang Maier"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Simon Bray"
+    },
+    {
+      "@type": "Person",
+      "name": "Wolfgang Maier"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Using Galaxy and Managing your Data",
+      "description": "A collection of microtutorials explaining various features of the Galaxy user interface and manipulating data within Galaxy.",
+      "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial topic-galaxy-interface">
+        <h1 data-toc-skip>Automating Galaxy workflows using the command line</h1>
+        
+
+        <div class="contributors-line">By: 
+
+ <a href="/training-material/hall-of-fame/simonbray/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/simonbray" alt="Simon Bray">Simon Bray</a> <a href="/training-material/hall-of-fame/wm75/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/wm75" alt="Wolfgang Maier">Wolfgang Maier</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How can I schedule and run tens or hundreds of Galaxy workflows easily?</p>
+</li>
+            
+            <li><p>How can I automate my analyses when large amounts of data are being produced daily?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Learn to use the <code class="language-plaintext highlighter-rouge">planemo run</code> subcommand to run workflows from the command line.</p>
+</li>
+            
+            <li><p>Be able to write simple shell scripts for running multiple workflows concurrently or sequentially.</p>
+</li>
+            
+            <li><p>Learn how to use Pangolin to assign annotated variants to lineages.</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+            
+    <li>
+    
+        Familiarity with Galaxy and basic associated concepts, in particular workflows
+    
+    </li>
+
+    <li>
+    
+        Basic knowledge of the command line
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours</div>
+            
+
+            
+
+            
+            
+
+            
+            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+            <ul>
+                <div class="supporting_material">
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/galaxy-interface/tutorials/workflow-automation/workflows/" title="Workflows" alt="Automating Galaxy workflows using the command line workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+</li>
+                
+
+                
+
+                
+                
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
+            Galaxy Africa
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 8, 2021 </div>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p><span class="notranslate">Galaxy</span> is well-known as a web-based data analysis platform which provides a graphical interface for executing common bioinformatics tools in a reproducible manner. However, <span class="notranslate">Galaxy</span> is not just a user-friendly interface for executing one tool at a time. It provides two very useful features which allow scaling data analyses up to a high-throughput level: dataset collections and workflows.</p>
+
+<ul>
+  <li>
+    <p>Dataset collections represent groups of similar datasets. This doesn’t sound especially exciting, but it gets interesting when a tool is executed using a collection as input, where a single dataset would normally be created. In this case, <span class="notranslate">Galaxy</span> creates a new job for every dataset contained within the collection, and stores the tool outputs in a new collection (or collections, if there are multiple outputs) with the same size and structure as the input. This process is referred to as ‘<span class="notranslate">mapping</span> over’ the input collection.</p>
+  </li>
+  <li>
+    <p>Workflows are pipelines made up of multiple <span class="notranslate">Galaxy</span> tools executed in sequence. When a <span class="notranslate">workflow</span> is executed, <span class="notranslate">Galaxy</span> schedules all the jobs which need to be run to produce the <span class="notranslate">workflow</span> outputs. They will remain scheduled (represented by the familiar grey color in the <span class="notranslate">Galaxy</span> history) until the required inputs become available. After they complete, they will make their outputs available, which allows the next set of jobs to begin.</p>
+  </li>
+</ul>
+
+<p>Between them, collections and workflows make it possible to scale-up from running a single tool on a single dataset to running multiple tools on multiple datasets.</p>
+
+<h2 id="why-use-the-command-line">Why use the command line?</h2>
+
+<p>All the functionality described so far is available through the graphical interface. So why use the command line? Let’s consider a couple of scenarios:</p>
+
+<ol>
+  <li>
+    <p>You want to run some molecular dynamics simulations to perform free energy calculations for protein-ligand binding. You have a compound library of 1000 ligands and would like to run an ensemble of 10 simulations for each. You would like to have the analysis for each ligand in a separate history, with the ensembles represented as dataset collections, which means you need to invoke your <span class="notranslate">workflow</span> 1000 times - theoretically possible to do in the graphical interface, but you probably want to avoid it if possible.</p>
+  </li>
+  <li>
+    <p>You are conducting research on a virus which is responsible for a deadly pandemic. New genomic data from the virus is being produced constantly, and you have a variant calling <span class="notranslate">workflow</span> which will tell you if a particular sample contains new mutations. You would like to run this <span class="notranslate">workflow</span> as soon as the data appears - every day perhaps, or even every hour. This will be quite tough if you have to click a button each time yourself.</p>
+  </li>
+</ol>
+
+<p>If you are encountering similar problems as these in your research with <span class="notranslate">Galaxy</span>, this tutorial is for you! We will explain how to trigger <span class="notranslate">workflow</span> execution via the command line using Planemo, and provide some tips on how to write scripts to automate the process. The result will be a bot which takes care of the the whole analysis process for you.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+<ol id="markdown-toc">
+  <li><a href="#why-use-the-command-line" id="markdown-toc-why-use-the-command-line">Why use the command line?</a></li>
+  <li><a href="#get-workflows-and-data" id="markdown-toc-get-workflows-and-data">Get workflows and data</a></li>
+  <li><a href="#a-short-guide-to-planemo" id="markdown-toc-a-short-guide-to-planemo">A short guide to Planemo</a>    <ol>
+      <li><a href="#get-the-workflow-and-prepare-the-job-file" id="markdown-toc-get-the-workflow-and-prepare-the-job-file">Get the <span class="notranslate">workflow</span> and prepare the job file</a></li>
+      <li><a href="#running-the-workflow" id="markdown-toc-running-the-workflow">Running the <span class="notranslate">workflow</span></a></li>
+      <li><a href="#using-galaxy-workflow-and-dataset-ids" id="markdown-toc-using-galaxy-workflow-and-dataset-ids">Using <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span> and dataset IDs</a></li>
+      <li><a href="#using-planemo-profiles" id="markdown-toc-using-planemo-profiles">Using Planemo profiles</a></li>
+    </ol>
+  </li>
+  <li><a href="#automated-runs-of-a-workflow-for-sars-cov-2-lineage-assignment" id="markdown-toc-automated-runs-of-a-workflow-for-sars-cov-2-lineage-assignment">Automated runs of a <span class="notranslate">workflow</span> for SARS-CoV-2 lineage assignment</a>    <ol>
+      <li><a href="#scientific-background" id="markdown-toc-scientific-background">Scientific background</a></li>
+      <li><a href="#setting-up-the-bot" id="markdown-toc-setting-up-the-bot">Setting up the bot</a></li>
+      <li><a href="#more-advanced-solutions" id="markdown-toc-more-advanced-solutions">More advanced solutions</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="get-workflows-and-data">Get workflows and data</h1>
+
+<p>Workflows and data for this tutorial are hosted on <a href="https://github.com/usegalaxy-eu/workflow-automation-tutorial">GitHub</a>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-download-workflow-and-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Download <span class="notranslate">workflow</span> and data</h3>
+  <p>Download the workflows and data for this tutorial using <code class="language-plaintext highlighter-rouge">git clone</code>.</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-input-git-clone"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: git clone</h3>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/use<span class="notranslate">galaxy</span>-eu/<span class="notranslate">workflow</span>-automation-tutorial.git
+</code></pre></div>    </div>
+  </blockquote>
+
+  <p>Next, step into the cloned folder and take a look around.</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-input"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input</h3>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span><span class="notranslate">workflow</span>-automation-tutorial
+<span class="nb">ls</span>
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-out">
+    <h3 id="code-out-folder-contents"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Folder contents</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>example  LICENSE  pangolin  README.md
+</code></pre></div>    </div>
+  </blockquote>
+
+  <p>Of the two subfolders, <code class="language-plaintext highlighter-rouge">example/</code> contains just a toy <span class="notranslate">workflow</span> used in the following to guide you through the basics of running workflows from the command line.</p>
+
+  <p>The <code class="language-plaintext highlighter-rouge">pangolin/</code> folder holds the <span class="notranslate">workflow</span> and other material you will use in the second part of the tutorial, in which you will be setting up an automated system for assigning batches of SARS-CoV-2 variant data to viral lineages.</p>
+
+</blockquote>
+
+<h1 id="a-short-guide-to-planemo">A short guide to Planemo</h1>
+
+<p>The main tool we will use in this tutorial is <a href="https://planemo.readthedocs.io/en/latest/readme.html">Planemo</a>, a command-line tool with a very wide range of functionality. If you ever developed a <span class="notranslate">Galaxy</span> tool, you probably encountered the <code class="language-plaintext highlighter-rouge">planemo test</code>, <code class="language-plaintext highlighter-rouge">planemo serve</code> and <code class="language-plaintext highlighter-rouge">planemo lint</code> subcommands. In this tutorial we will be using a different subcommand: <code class="language-plaintext highlighter-rouge">planemo run</code>.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-note"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note</h3>
+  <p>Planemo provides a more detailed tutorial on the <code class="language-plaintext highlighter-rouge">planemo run</code> functionality <a href="https://planemo.readthedocs.io/en/latest/running.html">here</a>. The pages on ‘<a href="https://planemo.readthedocs.io/en/latest/best_practices_workflows.html">Best Practices for Maintaining <span class="notranslate">Galaxy</span> Workflows</a>’ and ‘<a href="https://planemo.readthedocs.io/en/latest/test_format.html">Test Format</a>’ also contain a lot of useful information.</p>
+</blockquote>
+
+<p>For the purposes of this tutorial, we assume you have a recent version of Planemo (0.74.4 or later) installed in a virtual environment. If you don’t, please follow the <a href="https://planemo.readthedocs.io/en/latest/installation.html#pip">installation instructions</a>.</p>
+
+<h2 id="get-the-workflow-and-prepare-the-job-file">Get the <span class="notranslate">workflow</span> and prepare the job file</h2>
+
+<p>For this section, we will use a very simple <span class="notranslate">workflow</span> consisting of two text manipulation tools chained together.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-step-into-and-explore-the-example-folder"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Step into and explore the example folder</h3>
+
+  <blockquote class="code-2col">
+    <blockquote class="code-in">
+      <h3 id="code-in-input-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input</h3>
+      <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>example
+<span class="nb">ls</span>
+</code></pre></div>      </div>
+    </blockquote>
+
+    <blockquote class="code-out">
+      <h3 id="code-out-folder-contents-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Folder contents</h3>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tutorial.ga
+</code></pre></div>      </div>
+    </blockquote>
+  </blockquote>
+
+</blockquote>
+
+<p>The <code class="language-plaintext highlighter-rouge">tutorial.ga</code> file defines the <span class="notranslate">workflow</span> in JSON format; if we are confident we have a functional <span class="notranslate">workflow</span>, we don’t need to worry about its contents or modify it. However, we need a second file, the so-called ‘job file’, which specifies the particular dataset and parameter inputs which should be used to execute the <span class="notranslate">workflow</span>. We can create a template for this file using the <code class="language-plaintext highlighter-rouge">planemo workflow_job_init</code> subcommand.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-creating-the-job-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating the job file</h3>
+
+  <ol>
+    <li>
+      <p>Run the <code class="language-plaintext highlighter-rouge">planemo workflow_job_init</code> subcommand.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-workflow_job_init"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: workflow_job_init</h3>
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>planemo workflow_job_init tutorial.ga <span class="nt">-o</span> tutorial-init-job.yml
+<span class="c"># Now let's view the contents</span>
+<span class="nb">cat </span>tutorial-init-job.yml
+</code></pre></div>        </div>
+        <p>The <code class="language-plaintext highlighter-rouge">planemo workflow_job_init</code> command identifies the inputs of the <span class="notranslate">workflow</span> provided and creates a template job file with placeholder values for each.</p>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <h3 id="code-out-output-file-contents"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: File contents</h3>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">Dataset 1</span><span class="pi">:</span>
+  <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
+  <span class="na">path</span><span class="pi">:</span> <span class="s">todo_test_data_path.ext</span>
+<span class="na">Dataset 2</span><span class="pi">:</span>
+  <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
+  <span class="na">path</span><span class="pi">:</span> <span class="s">todo_test_data_path.ext</span>
+<span class="na">Number of lines</span><span class="pi">:</span> <span class="s">todo_param_value</span>
+</code></pre></div>        </div>
+
+        <p>The job file contains three inputs: two dataset inputs and one integer (parameter input).</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Create two files which can be used as inputs:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-creating-the-input-files"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Creating the input files</h3>
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">printf</span> <span class="s2">"hello</span><span class="se">\n</span><span class="s2">world"</span> <span class="o">&gt;</span> dataset1.txt
+<span class="nb">printf</span> <span class="s2">"hello</span><span class="se">\n</span><span class="s2">universe!"</span> <span class="o">&gt;</span> dataset2.txt
+<span class="nb">ls</span>
+</code></pre></div>        </div>
+
+      </blockquote>
+
+      <blockquote class="code-out">
+        <h3 id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dataset1.txt  dataset2.txt  tutorial.ga  tutorial-init-job.yml
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Replace the placeholder values in the job file, so that it looks like the following:</p>
+
+      <blockquote>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">Dataset 1</span><span class="pi">:</span>
+  <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
+  <span class="na">path</span><span class="pi">:</span> <span class="s">dataset1.txt</span>
+<span class="na">Dataset 2</span><span class="pi">:</span>
+  <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
+  <span class="na">path</span><span class="pi">:</span> <span class="s">dataset2.txt</span>
+<span class="na">Number of lines</span><span class="pi">:</span> <span class="m">3</span>
+</code></pre></div>        </div>
+        <p>Now we are ready to execute the <span class="notranslate">workflow</span> with our chosen parameters!</p>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="running-the-workflow">Running the <span class="notranslate">workflow</span></h2>
+
+<p>Now we have a simple <span class="notranslate">workflow</span>, we can run it using <code class="language-plaintext highlighter-rouge">planemo run</code>. At this point you need to choose a <span class="notranslate">Galaxy</span> server on which you want the <span class="notranslate">workflow</span> to run. One of the big public servers would be a possible choice. You could also use a local <span class="notranslate">Galaxy</span> instance. Either way, once you’ve chosen a server, the next step is to get your API key.</p>
+
+<!--SNIPPET-->
+<blockquote class="tip">  <h3 data-toc-skip="" id="-tip-getting-your-api-key"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Getting your API key</h3>  <p>A quick way to get an API key is to create a new user on our local <span class="notranslate">Galaxy</span> server. Navigate to the <span class="notranslate">Galaxy</span> base directory and execute the <a href="https://github.com/galaxyproject/galaxy/blob/dev/run.sh">run.sh</a> script. This starts the <span class="notranslate">Galaxy</span> server.</p>  <ol>    <li>In your browser, open your <span class="notranslate">Galaxy</span> homepage</li>    <li>Log in, or register a new account, if it’s the first time you’re logging in</li>    <li>Go to <code class="language-plaintext highlighter-rouge">User -&gt; Preferences</code> in the top menu bar, then click on <code class="language-plaintext highlighter-rouge">Manage API key</code></li>    <li>If there is no current API key available, click on <code class="language-plaintext highlighter-rouge">Create a new key</code> to generate it</li>    <li>Copy your API key to somewhere convenient, you will need it throughout this tutorial</li>  </ol></blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-running-our-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Running our <span class="notranslate">workflow</span></h3>
+
+  <ol>
+    <li>
+      <p>Run the <code class="language-plaintext highlighter-rouge">planemo run</code> subcommand.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-planemo-run"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: planemo run</h3>
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>planemo run tutorial.ga tutorial-init-job.yml <span class="nt">--<span class="notranslate">galaxy</span>_url</span> &lt;SERVER_URL&gt; <span class="nt">--<span class="notranslate">galaxy</span>_user_key</span> &lt;YOUR_API_KEY&gt; <span class="nt">--history_name</span> <span class="s2">"Test Planemo WF"</span> <span class="nt">--tags</span> <span class="s2">"planemo-tutorial"</span>
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Navigate to the web browser - you should be able to see a new history has been created with the chosen name and tag.<br />One potential disadvantage of the previous command is that it waits until the invoked <span class="notranslate">workflow</span> has fully completed. For our very small example, this doesn’t matter, but for a <span class="notranslate">workflow</span> which takes hours or days to finish, it might be undesirable. Fortunately, <code class="language-plaintext highlighter-rouge">planemo run</code> provides a <code class="language-plaintext highlighter-rouge">--no_wait</code> flag which exits as soon as the <span class="notranslate">workflow</span> has been successfully scheduled.</p>
+    </li>
+    <li>
+      <p>Run the <code class="language-plaintext highlighter-rouge">planemo run</code> subcommand with the <code class="language-plaintext highlighter-rouge">--no_wait</code> flag.</p>
+      <blockquote class="code-in">
+        <h3 id="code-in-input-planemo-run-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: planemo run</h3>
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>planemo run tutorial.ga tutorial-init-job.yml <span class="nt">--<span class="notranslate">galaxy</span>_url</span> &lt;SERVER_URL&gt; <span class="nt">--<span class="notranslate">galaxy</span>_user_key</span> &lt;YOUR_API_KEY&gt; <span class="nt">--history_name</span> <span class="s2">"Test Planemo WF with no_wait"</span> <span class="nt">--tags</span> <span class="s2">"planemo-tutorial"</span> <span class="nt">--no_wait</span>
+</code></pre></div>        </div>
+        <p>This time you should see that the <code class="language-plaintext highlighter-rouge">planemo run</code> command exits as soon as the two datasets have been uploaded and the <span class="notranslate">workflow</span> has been scheduled.</p>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="using-galaxy-workflow-and-dataset-ids">Using <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span> and dataset IDs</h2>
+
+<p>We’ve now executed the same <span class="notranslate">workflow</span> twice. If you inspect your histories and workflows through the <span class="notranslate">Galaxy</span> web interface, you will see that a new <span class="notranslate">workflow</span> was created on the server for each invocation, and both <code class="language-plaintext highlighter-rouge">Dataset 1</code> and <code class="language-plaintext highlighter-rouge">Dataset 2</code> were uploaded twice. This is undesirable - we are creating a lot of clutter and the uploads are creating additional unnecessary work for the <span class="notranslate">Galaxy</span> server.</p>
+
+<p>Every object associated with <span class="notranslate">Galaxy</span>, including workflows, datasets and dataset collections, have hexadecimal IDs associated with them, which look something like <code class="language-plaintext highlighter-rouge">6b15dfc0393f172c</code>. Once the datasets and workflows we need have been uploaded to <span class="notranslate">Galaxy</span> once, we can use these IDs in our subsequent <span class="notranslate">workflow</span> invocations.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-running-our-workflow-using-dataset-and-workflow-ids"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Running our <span class="notranslate">workflow</span> using dataset and <span class="notranslate">workflow</span> IDs</h3>
+
+  <ol>
+    <li>Navigate to one of the histories to get dataset IDs for the input datasets. For each one:
+      <ol>
+        <li>Click on the <i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-info</span> <em>View details</em> icon on the dataset in the history.</li>
+        <li>Under the heading <code class="language-plaintext highlighter-rouge">Dataset Information</code>, find the row <code class="language-plaintext highlighter-rouge">History Content API ID</code> and copy the hexadecimal ID next to it.</li>
+      </ol>
+    </li>
+    <li>Modify <code class="language-plaintext highlighter-rouge">tutorial-init-job.yml</code> to look like the following:
+      <blockquote>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">Dataset 1</span><span class="pi">:</span>
+  <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
+  <span class="c1"># path: dataset1.txt</span>
+  <span class="na"><span class="notranslate">galaxy</span>_id</span><span class="pi">:</span> <span class="s">&lt;ID OF DATASET 1&gt;</span>
+<span class="na">Dataset 2</span><span class="pi">:</span>
+  <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
+  <span class="c1"># path: dataset2.txt</span>
+  <span class="na"><span class="notranslate">galaxy</span>_id</span><span class="pi">:</span> <span class="s">&lt;ID OF DATASET 2&gt;</span>
+<span class="na">Number of lines</span><span class="pi">:</span> <span class="m">3</span>
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>Now we need to get the <span class="notranslate">workflow</span> ID:
+      <ol>
+        <li>Go to the workflows panel in <span class="notranslate">Galaxy</span> and find one of the workflows that have just been uploaded.</li>
+        <li>From the dropdown menu, select <code class="language-plaintext highlighter-rouge">Edit</code>, to take you to the <span class="notranslate">workflow</span> editing interface.</li>
+        <li>The URL in your browser will look something like <code class="language-plaintext highlighter-rouge">https://use<span class="notranslate">galaxy</span>.eu/<span class="notranslate">workflow</span>/editor?id=34d18f081b73cb15</code>. Copy the part after <code class="language-plaintext highlighter-rouge">?id=</code> - this is the <span class="notranslate">workflow</span> ID.</li>
+      </ol>
+    </li>
+    <li>
+      <p>Run the <code class="language-plaintext highlighter-rouge">planemo run</code> subcommand using the new <span class="notranslate">workflow</span> ID.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-planemo-run-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: planemo run</h3>
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>planemo run &lt;<span class="notranslate">WORKFLOW</span> ID&gt; tutorial-init-job.yml <span class="nt">--<span class="notranslate">galaxy</span>_url</span> &lt;SERVER_URL&gt; <span class="nt">--<span class="notranslate">galaxy</span>_user_key</span> &lt;YOUR_API_KEY&gt; <span class="nt">--history_name</span> <span class="s2">"Test Planemo WF with Planemo"</span> <span class="nt">--tags</span> <span class="s2">"planemo-tutorial"</span> <span class="nt">--no_wait</span>
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="using-planemo-profiles">Using Planemo profiles</h2>
+
+<p>Planemo provides a useful profile feature which can help simplify long commands. The idea is that flags which need to be used multiple times in different invocations can be combined together and run as a single profile. Let’s see how this works below.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-creating-and-using-planemo-profiles"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating and using Planemo profiles</h3>
+
+  <ol>
+    <li>Create a Planemo profile with the following command:
+      <blockquote class="code-in">
+        <h3 id="code-in-input-planemo-run-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: planemo run</h3>
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>planemo profile_create planemo-tutorial <span class="nt">--<span class="notranslate">galaxy</span>_url</span> &lt;SERVER_URL&gt; <span class="nt">--<span class="notranslate">galaxy</span>_user_key</span> &lt;YOUR_API_KEY&gt;
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <h3 id="code-out-output-terminal"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Terminal</h3>
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Profile <span class="o">[</span>planemo-tutorial] created.
+</code></pre></div>        </div>
+        <p>You can view and delete existing profiles using the <code class="language-plaintext highlighter-rouge">profile_list</code> and <code class="language-plaintext highlighter-rouge">profile_delete</code> subcommands.</p>
+      </blockquote>
+    </li>
+    <li>Now we can run our <span class="notranslate">workflow</span> yet again using the profile we have created:
+      <blockquote class="code-in">
+        <h3 id="code-in-input-planemo-run-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: planemo run</h3>
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>planemo run &lt;<span class="notranslate">WORKFLOW</span> ID&gt; tutorial-init-job.yml <span class="nt">--profile</span> planemo-tutorial <span class="nt">--history_name</span> <span class="s2">"Test Planemo WF with profile"</span> <span class="nt">--tags</span> <span class="s2">"planemo-tutorial"</span>
+</code></pre></div>        </div>
+        <p>This invokes the <span class="notranslate">workflow</span> with all the parameters specified in the profile <code class="language-plaintext highlighter-rouge">planemo-tutorial</code>.</p>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="automated-runs-of-a-workflow-for-sars-cov-2-lineage-assignment">Automated runs of a <span class="notranslate">workflow</span> for SARS-CoV-2 lineage assignment</h1>
+
+<p>It’s now time to apply your newly acquired knowledge of <span class="notranslate">workflow</span> execution with Planemo to a relevant scientific problem.</p>
+
+<h2 id="scientific-background">Scientific background</h2>
+
+<p>The SARS-CoV-2 pandemic has been accompanied by unprecedented world-wide sequencing efforts. One of the accepted goals behind sequencing hundreds of thousands of individual viral isolates is to monitor the evolution and spreading of viral lineages in as close as real time as possible. Viral lineages are characterized by defining patterns of mutations that make them different from each other and from the original virus that started the pandemic at the beginning of 2020. Examples of viral lineages are B.1.1.7, first observed in the UK in the fall of 2020 and now termed <em>variant of concern (VOC) alpha</em> according to the WHO’s classification system, and B.1.617.2, first seen in India at the beginning of 2021 and now recognized as <em>VOC delta</em>.</p>
+
+<p><a href="https://cov-lineages.org/pangolin.html">Pangolin</a> is a widely used tool for assigning newly sequenced viral isolates to established viral lineages, and in this final section of this tutorial you are going to run a <span class="notranslate">workflow</span> that:</p>
+
+<ol>
+  <li>
+    <p>takes a collection of variant datasets in the <em>variant call format</em> VCF,</p>
+
+    <p>where you can think of a collection as representing a batch of freshly sequenced viral isolates with each of its VCF datasets listing the nucleotide differences between one sample and the sequence of an original SARS-CoV-2 reference isolate</p>
+  </li>
+  <li>
+    <p>reconstructs the viral genome sequence of each sample by incorporating its variants into the reference isolate’s sequence</p>
+  </li>
+  <li>
+    <p>uses Pangolin to classify the resulting collection of genome sequences in FASTA format and to create a report of lineage assignments for all samples.</p>
+  </li>
+</ol>
+
+<p>Just like in a real world situation, you will receive VCF files for several batches of samples and you will face the challenge of uploading the files from each batch as a collection into <span class="notranslate">Galaxy</span> and of triggering a run of the <span class="notranslate">workflow</span> for each of them.</p>
+
+<h2 id="setting-up-the-bot">Setting up the bot</h2>
+
+<p>Unlike for the previous toy example you will not get complete step-by-step instructions, but you are supposed to try yourself to transfer the knowledge from part 1 to this new, more complex task.</p>
+
+<p>Every step along the way comes with solutions, which you can expand at any time, but you’re encouraged to give each problem some thought first.</p>
+
+<p>As a very first step, however, let’s look at how the material for this part is arranged.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-step-into-and-explore-the-pangolin-folder"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Step into and explore the pangolin folder</h3>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-input-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input</h3>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ../pangolin
+<span class="nb">ls</span>
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-out">
+    <h3 id="code-out-folder-contents-2"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Folder contents</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data  solutions  vcf2lineage.ga
+</code></pre></div>    </div>
+  </blockquote>
+
+</blockquote>
+
+<p>The file <code class="language-plaintext highlighter-rouge">vcf2lineage.ga</code> defines the <span class="notranslate">workflow</span> just described, while the <code class="language-plaintext highlighter-rouge">data/</code> folder holds the batches of VCF files we would, ultimately, like to run the <span class="notranslate">workflow</span> on.</p>
+
+<p>Now, as a start, let’s get the <span class="notranslate">workflow</span> running on the first batch of files in the <code class="language-plaintext highlighter-rouge">data/batch1/</code> subfolder.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-an-initial-workflow-run"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: An initial <span class="notranslate">workflow</span> run</h3>
+
+  <ol>
+    <li>Create a template job file for the <code class="language-plaintext highlighter-rouge">vcf2lineage.ga</code> <span class="notranslate">workflow</span>.
+      <blockquote class="details">
+        <h3 id="details-solution"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Solution</h3>
+        <p>We need to run <code class="language-plaintext highlighter-rouge">workflow_job_init</code> on the <code class="language-plaintext highlighter-rouge">vcf2lineage.ga</code> <span class="notranslate">workflow</span>.</p>
+        <blockquote class="code-in">
+          <h3 id="code-in-input-workflow_job_init-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: workflow_job_init</h3>
+          <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>planemo workflow_job_init vcf2lineage.ga <span class="nt">-o</span> vcf2lineage-job.yml
+<span class="c"># Now let's view the contents</span>
+<span class="nb">cat </span>vcf2lineage-job.yml
+</code></pre></div>          </div>
+        </blockquote>
+
+        <blockquote class="code-out">
+          <h3 id="code-out-output-file-contents-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: File contents</h3>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">Reference genome</span><span class="pi">:</span>
+  <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
+  <span class="na">path</span><span class="pi">:</span> <span class="s">todo_test_data_path.ext</span>
+<span class="na">Variant calls</span><span class="pi">:</span>
+  <span class="na">class</span><span class="pi">:</span> <span class="s">Collection</span>
+  <span class="na">collection_type</span><span class="pi">:</span> <span class="s">list</span>
+  <span class="na">elements</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
+    <span class="na">identifier</span><span class="pi">:</span> <span class="s">todo_element_name</span>
+    <span class="na">path</span><span class="pi">:</span> <span class="s">todo_test_data_path.ext</span>
+<span class="na">min-AF for consensus variant</span><span class="pi">:</span> <span class="s">todo_param_value</span>
+</code></pre></div>          </div>
+        </blockquote>
+
+        <p>The job file contains three inputs: the <code class="language-plaintext highlighter-rouge">Reference genome</code>, a collection of VCF files (<code class="language-plaintext highlighter-rouge">Variant calls</code>) and a float parameter for the minimum allele frequency (<code class="language-plaintext highlighter-rouge">min-AF for consensus variant</code>). Later, we will need to specify each element of the collection under <code class="language-plaintext highlighter-rouge">elements</code> - currently there is just a single placeholder element.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Replace the placeholder values: <code class="language-plaintext highlighter-rouge">Reference genome</code> should point to <code class="language-plaintext highlighter-rouge">data/NC_045512.2_reference_sequence.fasta</code>, <code class="language-plaintext highlighter-rouge">Variant calls</code> should contain all the VCF files in <code class="language-plaintext highlighter-rouge">data/batch1</code>, and <code class="language-plaintext highlighter-rouge">min-AF for consensus variant</code> should be set to <code class="language-plaintext highlighter-rouge">0.7</code>.</p>
+
+      <blockquote class="tip">
+        <h3 id="tip-hint-creating-the-variant-calls-collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Hint: Creating the <code class="language-plaintext highlighter-rouge">Variant calls</code> collection</h3>
+        <p>This is the trickiest part and you should consider writing a script to solve it. The entry in the job file should look something like this at the end:</p>
+
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">Variant calls</span><span class="pi">:</span>
+  <span class="na">class</span><span class="pi">:</span> <span class="s">Collection</span>
+  <span class="na">collection_type</span><span class="pi">:</span> <span class="s">list</span>
+  <span class="na">elements</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
+    <span class="na">identifier</span><span class="pi">:</span> <span class="s">ERR5879218</span>
+    <span class="na">path</span><span class="pi">:</span> <span class="s">data/batch1/ERR5879218.vcf</span>
+  <span class="pi">-</span> <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
+    <span class="na">identifier</span><span class="pi">:</span> <span class="s">ERR5879219</span>
+    <span class="na">path</span><span class="pi">:</span> <span class="s">data/batch1/ERR5879219.vcf</span>
+  <span class="pi">-</span> <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
+    <span class="s">...</span>
+</code></pre></div>        </div>
+        <p>There should be one entry under <code class="language-plaintext highlighter-rouge">elements</code> for each of the 312 files under <code class="language-plaintext highlighter-rouge">data/batch1</code>.</p>
+      </blockquote>
+
+      <blockquote class="details">
+        <h3 id="details-solution-1"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Solution</h3>
+        <p>Adding the <code class="language-plaintext highlighter-rouge">Reference genome</code> dataset and <code class="language-plaintext highlighter-rouge">min-AF for consensus variant</code> parameter is straightforward. Modify the <code class="language-plaintext highlighter-rouge">vcf2lineage-job.yml</code> file and save it:</p>
+
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">Reference genome</span><span class="pi">:</span>
+  <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
+  <span class="na">path</span><span class="pi">:</span> <span class="s">data/NC_045512.2_reference_sequence.fasta</span>
+<span class="na">Variant calls</span><span class="pi">:</span>
+  <span class="na">class</span><span class="pi">:</span> <span class="s">Collection</span>
+  <span class="na">collection_type</span><span class="pi">:</span> <span class="s">list</span>
+  <span class="na">elements</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
+    <span class="na">identifier</span><span class="pi">:</span> <span class="s">todo_element_name</span>
+    <span class="na">path</span><span class="pi">:</span> <span class="s">todo_test_data_path.ext</span>
+<span class="na">min-AF for consensus variant</span><span class="pi">:</span> <span class="m">0.7</span>
+</code></pre></div>        </div>
+
+        <p>To add entries for every element of the <code class="language-plaintext highlighter-rouge">Variant calling </code> collection we should write a script. There are many possible solutions; here is an example:</p>
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">yaml</span>
+
+<span class="n">job_file_path</span> <span class="o">=</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">batch_directory</span> <span class="o">=</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">job_file_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">job</span> <span class="o">=</span> <span class="n">yaml</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="p">.</span><span class="n">CLoader</span><span class="p">)</span>
+
+<span class="n">vcf_paths</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="s">f'</span><span class="si">{</span><span class="n">batch_directory</span><span class="si">}</span><span class="s">/*.vcf'</span><span class="p">)</span>
+<span class="n">elements</span> <span class="o">=</span> <span class="p">[{</span><span class="s">'class'</span><span class="p">:</span> <span class="s">'File'</span><span class="p">,</span> <span class="s">'identifier'</span><span class="p">:</span> <span class="n">Path</span><span class="p">(</span><span class="n">vcf_path</span><span class="p">).</span><span class="n">stem</span><span class="p">,</span> <span class="s">'path'</span><span class="p">:</span> <span class="n">vcf_path</span><span class="p">}</span> <span class="k">for</span> <span class="n">vcf_path</span> <span class="ow">in</span> <span class="n">vcf_paths</span><span class="p">]</span>
+<span class="n">job</span><span class="p">[</span><span class="s">'Variant calls'</span><span class="p">][</span><span class="s">'elements'</span><span class="p">]</span> <span class="o">=</span> <span class="n">elements</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">job_file_path</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">yaml</span><span class="p">.</span><span class="n">dump</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</code></pre></div>        </div>
+
+        <p>Save this as <code class="language-plaintext highlighter-rouge">create_job_file.py</code> and run it with <code class="language-plaintext highlighter-rouge">python create_job_file.py vcf2lineage-job.yml data/batch1</code>. This has the effect of updating the <code class="language-plaintext highlighter-rouge">vcf2lineage-job.yml</code> with all the VCF files in the <code class="language-plaintext highlighter-rouge">data/batch1</code> directory.</p>
+      </blockquote>
+    </li>
+    <li>Now that we have a complete job file, let’s run the <span class="notranslate">workflow</span>.
+      <blockquote class="details">
+        <h3 id="details-solution-2"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Solution</h3>
+        <blockquote class="code-in">
+          <h3 id="code-in-input-workflow_job_init-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: workflow_job_init</h3>
+          <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>planemo run vcf2lineage.ga vcf2lineage-job.yml <span class="nt">--profile</span> planemo-tutorial <span class="nt">--history_name</span> <span class="s2">"vcf2lineage test"</span>
+</code></pre></div>          </div>
+        </blockquote>
+        <p>You should see the new invocation in the <span class="notranslate">Galaxy</span> interface.</p>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>We have now performed a test invocation of the vcf2lineage <span class="notranslate">workflow</span>. It was already more challenging than the first example; for the first time, we needed to resort to writing a script to achieve a task, in this case the construction of the job file.</p>
+
+<p>The next step is to automate this process so we can run the <span class="notranslate">workflow</span> on each of the 10 <code class="language-plaintext highlighter-rouge">batch*/</code> directories in the <code class="language-plaintext highlighter-rouge">data/</code> folder. We can imagine that these are newly produced data released at regular intervals, which need to be analysed.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-automating-vcf2lineage-execution"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Automating vcf2lineage execution</h3>
+
+  <ol>
+    <li>
+      <p>If we want to execute the <span class="notranslate">workflow</span> multiple times, we will once again encounter the issue that the datasets and <span class="notranslate">workflow</span> will be reuploaded each time. To avoid this, let’s obtain the dataset ID for the <code class="language-plaintext highlighter-rouge">Reference genome</code> (which stays the same for each invocation) and the <span class="notranslate">workflow</span> ID for the <code class="language-plaintext highlighter-rouge">vcf2lineage.ga</code> <span class="notranslate">workflow</span>.</p>
+    </li>
+    <li>
+      <p>Now let’s create a template job file <code class="language-plaintext highlighter-rouge">vcf2lineage-job-template.yml</code> which we can modify at each invocation as necessary. We can start with the output of <code class="language-plaintext highlighter-rouge">workflow_job_init</code> and add the <code class="language-plaintext highlighter-rouge">Reference genome</code> dataset ID and set <code class="language-plaintext highlighter-rouge">min-AF for consensus variant</code> to <code class="language-plaintext highlighter-rouge">0.7</code> again.</p>
+
+      <blockquote class="details">
+        <h3 id="details-solution-3"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Solution</h3>
+        <p>We need to run <code class="language-plaintext highlighter-rouge">workflow_job_init</code> on the <code class="language-plaintext highlighter-rouge">vcf2lineage.ga</code> <span class="notranslate">workflow</span>.</p>
+        <blockquote class="code-in">
+          <h3 id="code-in-input-original-output-of-workflow_job_init"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Original output of workflow_job_init</h3>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">Reference genome</span><span class="pi">:</span>
+  <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
+  <span class="na">path</span><span class="pi">:</span> <span class="s">todo_test_data_path.ext</span>
+<span class="na">Variant calls</span><span class="pi">:</span>
+  <span class="na">class</span><span class="pi">:</span> <span class="s">Collection</span>
+  <span class="na">collection_type</span><span class="pi">:</span> <span class="s">list</span>
+  <span class="na">elements</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
+    <span class="na">identifier</span><span class="pi">:</span> <span class="s">todo_element_name</span>
+    <span class="na">path</span><span class="pi">:</span> <span class="s">todo_test_data_path.ext</span>
+<span class="na">min-AF for consensus variant</span><span class="pi">:</span> <span class="s">todo_param_value</span>
+</code></pre></div>          </div>
+        </blockquote>
+
+        <blockquote class="code-out">
+          <h3 id="code-out-output-prepared-vcf2lineage-job-templateyml-file-contents"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Prepared <code class="language-plaintext highlighter-rouge">vcf2lineage-job-template.yml</code> file contents</h3>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">Reference genome</span><span class="pi">:</span>
+  <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
+  <span class="na"><span class="notranslate">galaxy</span>_id</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1234567890abcdef'</span> <span class="c1"># replace with the ID you got from your own server</span>
+<span class="na">Variant calls</span><span class="pi">:</span>
+  <span class="na">class</span><span class="pi">:</span> <span class="s">Collection</span>
+  <span class="na">collection_type</span><span class="pi">:</span> <span class="s">list</span>
+  <span class="na">elements</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
+    <span class="na">identifier</span><span class="pi">:</span> <span class="s">todo_element_name</span>
+    <span class="na">path</span><span class="pi">:</span> <span class="s">todo_test_data_path.ext</span>
+<span class="na">min-AF for consensus variant</span><span class="pi">:</span> <span class="m">0.7</span>
+</code></pre></div>          </div>
+        </blockquote>
+        <p>We can copy and modify this new <code class="language-plaintext highlighter-rouge">vcf2lineage-job-template.yml</code> file iteratively to invoke the <span class="notranslate">workflow</span> on each of the data batches.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Write a shell script to iterate over all the batches, create a job file and invoke with <code class="language-plaintext highlighter-rouge">planemo run</code>. After execution, move the processed batch to <code class="language-plaintext highlighter-rouge">data/complete</code>.</p>
+
+      <blockquote class="details">
+        <h3 id="details-solution-4"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Solution</h3>
+        <p>Once again, there is no single exact solution. Here is one possibility:</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>batch <span class="k">in</span> <span class="sb">`</span><span class="nb">ls</span> <span class="nt">-d</span> data/batch<span class="k">*</span><span class="sb">`</span><span class="p">;</span> <span class="k">do
+    </span><span class="nv">batch_name</span><span class="o">=</span><span class="sb">`</span><span class="nb">basename</span> <span class="nv">$batch</span><span class="sb">`</span>
+    <span class="nb">cp </span>vcf2lineage-job-template.yml vcf2lineage-<span class="k">${</span><span class="nv">batch_name</span><span class="k">}</span><span class="nt">-job</span>.yml
+    python create_job_file.py vcf2lineage-<span class="k">${</span><span class="nv">batch_name</span><span class="k">}</span><span class="nt">-job</span>.yml <span class="nv">$batch</span>
+    <span class="c"># replace with your own <span class="notranslate">workflow</span> ID below</span>
+    planemo run f4b02af7e642e75b vcf2lineage-<span class="k">${</span><span class="nv">batch_name</span><span class="k">}</span><span class="nt">-job</span>.yml <span class="nt">--profile</span> planemo-tutorial
+    <span class="nb">sleep </span>300
+    <span class="nb">mv</span> <span class="nv">$batch</span> data/complete/
+<span class="k">done</span>
+</code></pre></div>        </div>
+
+        <p>Save this as <code class="language-plaintext highlighter-rouge">run_vcf2lineage.sh</code>.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Run your script. Do you notice any issues? What could be improved?</p>
+
+      <blockquote class="tip">
+        <h3 id="tip-upload-problems"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Upload problems</h3>
+        <p>Uploads can cause several issues:</p>
+        <ul>
+          <li>The default planemo behavior is to upload datasets one at a time, which ensures the server cannot be overloaded, but is slow. To upload all datasets simultaneously, you could use the <code class="language-plaintext highlighter-rouge">--simultaneous_uploads</code> flag.</li>
+          <li>If one of the upload jobs fails, the <span class="notranslate">workflow</span> will by default not be invoked - Planemo will just upload the datasets and finish. To override this behavior and start a <span class="notranslate">workflow</span> even if one or more uploads fail, you can use the <code class="language-plaintext highlighter-rouge">--no_check_uploads_ok</code> flag.</li>
+          <li>For a more complex solution to the issue of failed uploads, see <a href="https://github.com/usegalaxy-eu/ena-cog-uk-wfs/blob/main/bioblend-scripts/ftp_links_to_yaml.py">this script</a> from the <code class="language-plaintext highlighter-rouge">ena-cog-uk-wfs</code> repo.</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="more-advanced-solutions">More advanced solutions</h2>
+
+<p>This was a very basic example of a <span class="notranslate">workflow</span>. Perhaps for your case, you need a more customized solution.</p>
+
+<p>For example, it might be the case that you want to run multiple different workflows, one after another. In this case you would need to implement some sort of check to verify if one invocation had finished, before beginning with the next one. Planemo will probably not be enough for a task like this; you will need to resort to using the lower-level <a href="https://bioblend.readthedocs.io/">BioBlend</a> library to interact directly with the <span class="notranslate">Galaxy</span> API.</p>
+
+<p>The <a href="https://github.com/usegalaxy-eu/ena-cog-uk-wfs/"><span class="notranslate">Galaxy</span> SARS-CoV-2 genome surveillance bot</a> provides an example of a more advanced customized <span class="notranslate">workflow</span> execution solution, combining Planemo commands, custom BioBlend scripts and bash scripts, which then get run automatically via continuous integration (CI) on a Jenkins server.</p>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>You should now have a better idea about how to run <span class="notranslate">Galaxy</span> workflows from the command line and how to apply the ideas you have learnt to your own project.</p>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>Workflows can be executed not only through the web browser, but also via the command line.</p>
+</li>
+                            
+                            <li><p>Executing workflows programmatically allows automation of analyses.</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/galaxy-interface/faqs/">FAQ page for the Using Galaxy and Managing your Data topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                    
+
+                    
+
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Automating Galaxy workflows using the command line (Using Galaxy and Managing your Data)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Simon Bray, Wolfgang Maier, 2021 <b>Automating Galaxy workflows using the command line (Galaxy Training Materials)</b>. <a href="/training-material/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html">/training-material/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{galaxy-interface-workflow-automation,
+    author = "Simon Bray and Wolfgang Maier",
+    title = "Automating Galaxy workflows using the command line (Galaxy Training Materials)",
+    year = "2021",
+    month = "06",
+    day = "08"
+    url = "\url{https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+                    
+
+                    
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Simon Bray, Wolfgang Maier)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/galaxy-interface/tutorials/workflow-automation/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
