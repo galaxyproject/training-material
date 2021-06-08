@@ -14,6 +14,7 @@ key_points:
  - Galaxy database interactions are mitigated via SQL Alchemy code in lib/galaxy/model.
  - Galaxy API endpoints are implemented in lib/galaxy/webapps/galaxy, but generally defer to application logic in lib/galaxy/managers.
  - Galaxy client code should do its best to separate API interaction logic from display components.
+subtopic: core
 requirements:
   -
     type: "internal"
