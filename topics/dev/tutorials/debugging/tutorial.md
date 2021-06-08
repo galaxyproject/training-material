@@ -87,7 +87,7 @@ Good news! All of the failing tests are on the same Galaxy branch! That means yo
 > 1. Use GitHub UI to fork Galaxy's repository at `galaxyproject/galaxy`. 
 > 2. Clone your forked repository to a local path, further referred to as GALAXY_ROOT and `cd` into GALAXY_ROOT. Note that we specify the tutorial branch with the `-b` option:
 > ```shell
-> $ git clone -b training_dev_debugging https://github.com/galaxyproject/galaxy GALAXY_ROOT
+> $ git clone -b training https://github.com/galaxyproject/galaxy GALAXY_ROOT
 > $ cd GALAXY_ROOT
 > ```
 > Note: In the future, when you contribute to Galaxy, you'll need to clone the `dev` branch, which is the default, so you don't need to specify the `-b` option in the `git clone` command).
@@ -115,7 +115,7 @@ Good news! All of the failing tests are on the same Galaxy branch! That means yo
 > ```
 > Now when you run `git branch` you'll see that your new branch is activated:
 > ```shell
->   training_dev_debugging
+>   training
 > * my-training
 > ```
 > Note: `my-training` is just an example; you can call your new branch anything you like.
@@ -129,7 +129,7 @@ Most of Galaxy unit tests are designed to test a separate component or function,
 > 
 > 1. __Finding the failing test on GitHub__
 >    > 
->    > Head over to the [Galaxy repository on GitHub](https://github.com/galaxyproject/galaxy) and in the branch drop-down select the "training_dev_debugging" branch. Click the red "x" next to the last commit, you'll get a drop-down listing of workflow results; find "Unit tests / Test (3..." and click "Details". This will display a detailed report that includes information about the failed tests. Try to find the failed tests.
+>    > Head over to the [Galaxy repository on GitHub](https://github.com/galaxyproject/galaxy) and in the branch drop-down select the "training" branch. Click the red "x" next to the last commit, you'll get a drop-down listing of workflow results; find "Unit tests / Test (3..." and click "Details". This will display a detailed report that includes information about the failed tests. Try to find the failed tests.
 >    > 
 >    >  > ### {% icon solution %} Solution
 >    >  > 
