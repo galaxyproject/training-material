@@ -124,6 +124,12 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    {: .question}
 {: .hands_on}
 
+> ```bash
+> GALAXY_URL=https://"${GALAXY_HOSTNAME}" GALAXY_API_KEY=adminkey python run_test.py
+> ```
+> {: data-test="true"}
+{: .hidden}
+
 Of course, this tool doesn't actually *use* the allocated number of cores. In a real tool, you would call the tools's underlying command with whatever flag that tool provides to control the number of threads or processes it starts, such as `samtools sort -@ \${GALAXY_SLOTS:-1}`.
 
 ## Running with more resources
@@ -190,6 +196,13 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    {: .question}
 >
 {: .hands_on}
+
+> ```bash
+> GALAXY_URL=https://"${GALAXY_HOSTNAME}" GALAXY_API_KEY=adminkey N_THREADS=2 python run_test.py
+> ```
+> {: data-test="true"}
+{: .hidden}
+
 
 
 # Dynamic Job Destinations
@@ -417,6 +430,13 @@ Our rule specified that any invocation of the `testing` tool with an input datas
 >
 {: .hands_on}
 
+> ```bash
+> GALAXY_URL=https://"${GALAXY_HOSTNAME}" GALAXY_API_KEY=adminkey N_CHARS=15 N_THREADS=1 python run_test.py
+> GALAXY_URL=https://"${GALAXY_HOSTNAME}" GALAXY_API_KEY=adminkey N_CHARS=17 N_THREADS=2 python run_test.py
+> ```
+> {: data-test="true"}
+{: .hidden}
+
 You can imagine using this to run large blast jobs on compute hardware with more resources, or giving them more CPU cores. Some tools require more memory as job inputs increase, you can use this to run tools with a larger memory limit, if you know it will need it to process a certain size of inputs.
 
 # Job Resource Selectors
@@ -536,7 +556,7 @@ This will set everything up to use the function. We have:
 
 - A set of "job resources" defined which will let the user select the number of cores and walltime.
 - A job configuration which says:
-    -  that our testing tool should allow selection of the cores and time parameters
+    - that our testing tool should allow selection of the cores and time parameters
     - directs it to use a new, `dynamic_cores_time` destination
     - and a has a new destination, `dynamic_cores_time`, which is defined as a dynamic destination which will call a python function we will load.
 
