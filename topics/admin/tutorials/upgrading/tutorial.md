@@ -47,7 +47,7 @@ This tutorial will show you how and discuss some of the things you need to keep 
 * As at June 2021, Galaxy has three new version releases per year - in each of January, May and September. The versions are denominated by the year and month - `YY.MM`. i.e. January 2021's Galaxy release is version *21.01*.
 * Official Galaxy versions are tagged on the [Galaxy Project's GitHub releases page](https://github.com/galaxyproject/galaxy/releases) as `vYY.MM`. e.g. *v21.01*
 * Each version also has an official branch in the GitHub repo named `release_YY.MM`. e.g. *release_21.01*
-* Galaxy versions will be supported with security fixes, bug patches and other improvements for **XXX** years from the time of release at which time they will become "End of Life" and will no longer be supported.
+* Galaxy versions will be supported with security fixes, bug patches and other improvements for [one year](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY_POLICY.md#supported-versions) from the time of release at which time they will become "End of Life" and will no longer be supported.
 
 > ### Agenda
 >
@@ -237,7 +237,7 @@ Congratulations, you're Galaxy server should now be updated to the latest versio
 
 # Ongoing maintenance
 
-The Galaxy development community continually support release versions of Galaxy for **XXX** years. They regularly update releases with bug fixes, patches and security enhancements. Therefore it is important that we as administrators keep our Galaxy servers up to date regardless of which release we are running.
+The Galaxy development community continually support release versions of Galaxy [for 1 year.](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY_POLICY.md#supported-versions) They regularly update releases with bug fixes, patches and security enhancements. Therefore it is important that we as administrators keep our Galaxy servers up to date regardless of which release we are running.
 
 The easiest way to do this is to regularly re-run the Ansible playbook. It will check with GitHub and grab any new changes to Galaxy since the last time you ran it and automatically keep everything up to date. The large **usegalaxy.\*** servers all re-run the playbook on a regular schedule for this purpose.
 
