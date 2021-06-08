@@ -170,7 +170,7 @@ for idx, diff in enumerate(diffs):
                 shutil.copytree(testdir, gittestdir)
 
             cmdhandle.write("## Run test case\n")
-            cmdhandle.write(f"{line.strip()}\n")
+            cmdhandle.write(f"./.scripts/{BASE}-test/{line.strip()}\n")
     else:
         print("Unknown!")
 

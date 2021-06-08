@@ -1,2 +1,2 @@
 # assumes letsencript staging certificate is preconfigured on VM
-galaxy-wait -g https://"${GALAXY_IP}"
+galaxy-wait --timeout 30 -g https://$(hostname -f) -v

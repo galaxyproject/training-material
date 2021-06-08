@@ -1677,7 +1677,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 {: .details}
 
 > ```bash
-> systemctl --no-pager status galaxy
+> 0-galaxy-up.sh
 > ```
 > {: data-test="true"}
 {: .hidden}
@@ -2247,7 +2247,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 {: .hands_on}
 
 > ```bash
-> galaxy-wait --timeout 30 -g https://$(hostname -f) -v
+> 1-galaxy-up.sh
 > ```
 > {: data-test="true"}
 {: .hidden}

@@ -188,7 +188,7 @@ For that, you can install from a YAML file:
 >
 > 5. Using the UI import the workflow file that you used, [mapping.ga](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga).
 >    >> (i) Right-click or Ctrl-click on the link above and copy the link address
->    >> 
+>    >>
 >    >> (ii) On your Galaxy instance click on `Workflow`, then `Import`.  Paste the URL into the `Import Archived URL` field.
 {: .hands_on}
 
