@@ -12,7 +12,7 @@ contributors:
  - jmchilton
 key_points:
  - Galaxy database interactions are mitigated via SQL Alchemy code in lib/galaxy/model.
- - Galaxy API endpoints are implemented in lib/galaxy/webapps/galaxy, but generally defer to application logic in lib/galaxy/managers. 
+ - Galaxy API endpoints are implemented in lib/galaxy/webapps/galaxy, but generally defer to application logic in lib/galaxy/managers.
  - Galaxy client code should do its best to separate API interaction logic from display components.
 requirements:
   -
@@ -27,7 +27,7 @@ requirements:
         - architecture
 ---
 
-# Contributing to Galaxy Core 
+# Contributing to Galaxy Core
 
 This tutorial walks you through an extension to Galaxy and how to contribute back to the core project.
 
@@ -39,16 +39,18 @@ The proposed extension could be implemented in several different ways on Galaxy'
 
 With simplicity in mind, we will implement our proposed extension to Galaxy by adding a single new table to Galaxy's data model called ``user_favorite_extension``. The concept of a favorite extension will be represented by a one-to-many relationship from the table that stores Galaxy's user records to this new table. The extension itself that will be favorited will be stored as a ``Text`` field in this new table. This table will also need to include an integer primary key named ``id`` to follow the example set by the rest of the Galaxy data model.
 
+## Models
+
 The relational database tables consumed by Galaxy are defined in ``lib/galaxy/model/mapping.py``.
 
 > ### {% icon question %} Questions about Mapping
 >
-> 1. What should be the SQLAlchemy model named corresponding to the table ``user_favorite_extension`` based on other examples in the file?
+> 1. What should be the SQLAlchemy model named corresponding to the table ``user_favorite_extension`` based on [other examples in the mapping file](https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/model/mapping.py)?
 > 2. What table stores Galaxy's user records?
 > 3. What is another simple table with a relationship with the Galaxy's user table?
 >
 > > ### {% icon solution %} Solution
-> > 1. ``UserFavoriteExtension`` 
+> > 1. ``UserFavoriteExtension``
 > > 2. ``galaxy_user``
 > > 3. An example table might be the ``user_preference`` table.
 > {: .solution }
@@ -67,6 +69,8 @@ called ``UserFavoriteExtension`` as described above.
 
 {% include topics/dev/tutorials/core-contributing/__init__.py_diff.md %}
 
+## Migrations
+
 There is one last database issue to consider before moving on to considering the API.
 Each successive release of Galaxy requires recipes for how to migrate old database schemes
 to updated ones. These recipes are called versions and are currently implemented using SQLAlchemy
@@ -84,17 +88,18 @@ user preferences concept in Galaxy.
 
 > ### {% icon question %} Questions about Migrations
 >
-> 1. What existing Galaxy migration added the concept of user preferences to the Galaxy codebase?
+> What existing Galaxy migration added the concept of user preferences to the Galaxy codebase?
 >
 > > ### {% icon solution %} Solution
-> > 1. ``lib/galaxy/model/migrate/versions/0021_user_prefs.py``
+> > [``lib/galaxy/model/migrate/versions/0021_user_prefs.py``](https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/model/migrate/versions/0021_user_prefs.py)
 > {: .solution }
 {: .question }
-
 
 Add a new file to ``lib/galaxy/model/migrate/versions/`` prefixed appropriately.
 
 {% include topics/dev/tutorials/core-contributing/0177_add_user_favorite_extensions.py_diff.md %}
+
+## Test Driven Development
 
 With the database model in place, we need to start adding the rest of
 the Python plumbing required to implement this feature. We will do
@@ -116,9 +121,11 @@ for the current user.
 
 We will implement three simple API endpoints.
 
-- ``GET <galaxy_root_url>/api/users/current/favorites/extensions``. This should return a list of favorited extensions for the current user.
-- ``POST <galaxy_root_url>/api/users/current/favorites/extensions/<extension>``. This should mark an extension as a favorite for the current user.
-- ``DELETE <galaxy_root_url>/api/users/current/favorites/extensions/<extension>``. This should unmark an extension as a favorite for the current user.
+Method   | Route                                                                  | Definition
+------   | -----                                                                  | ---
+`GET`    | `<galaxy_root_url>/api/users/current/favorites/extensions`             | This should return a list of favorited extensions for the current user.
+`POST`   | `<galaxy_root_url>/api/users/current/favorites/extensions/<extension>` | This should mark an extension as a favorite for the current user.
+`DELETE` | `<galaxy_root_url>/api/users/current/favorites/extensions/<extension>` | This should unmark an extension as a favorite for the current user.
 
 Please review ``test_users.py`` and attempt to write a test case that:
 
@@ -130,11 +137,17 @@ Please review ``test_users.py`` and attempt to write a test case that:
 
 {% include topics/dev/tutorials/core-contributing/test_users.py_diff.md %}
 
+## Run the Tests
+
 Verify this test fails when running stand-alone.
 
-```
-./run_tests.sh -api lib/galaxy_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
-```
+> ### {% icon code-in %} Input: Bash
+> ```bash
+> ./run_tests.sh -api lib/galaxy_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
+> ```
+{: .code-in}
+
+## Implementing the API
 
 Add a new API implementation file to
 ``lib/galaxy/webapps/galaxy/api/`` called ``user_favorites.py`` with
@@ -160,10 +173,13 @@ Ideally, you'd start at the top of test case - make sure it fails on the first A
 implement ``get_favorite_extensions`` on the manager and the API code to wire it up, and continue
 with ``add_favorite_extension`` before finishing with ``delete_favorite_extension``.
 
+> ### {% icon code-in %} Input: Bash
+> ```bash
+> ./run_tests.sh -api lib/galaxy_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
+> ```
+{: .code-in}
 
-```
-./run_tests.sh -api lib/galaxy_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
-```
+## Building the UI
 
 Once the API test is done, it is time to build a user interface for this addition to Galaxy. Let's get
 some of the plumbing out of the way right away. We'd like to have a URL for viewing the current user's
