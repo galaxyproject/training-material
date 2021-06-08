@@ -18,6 +18,7 @@ key_points:
   - Re-run the playbook from time to time to keep your Galaxy server up to date with any minor changes and patches
 contributors:
   - slugger70
+subtopic: features
 tags:
   - ansible
 requirements:
@@ -83,7 +84,14 @@ Once we know what our current version is, we can compare it with the latest avai
 >
 > **Method 2: Via the API**
 >
-> 1. In your browser - go to the following URL: `https://<your-galaxy-server-fqdn-or-ip>/api/version`. The version will be displayed as follows:
+> 1. In your browser - go to the following URL: `https://your-galaxy/api/version`. The version will be displayed as follows:
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```shell
+>    > curl https://your-galaxy/api/version
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-out}
 >
 >    > ### {% icon code-out %} Output: Browser window
 >    > ```JSON
@@ -109,7 +117,7 @@ Probably the easiest way of finding the version number of the latest release is 
 
 This site shows all of the release notes of all the available Galaxy versions and always has the latest release at the top of the list.
 
-![Screenshot of the Galaxy documentation webpage showing the release versions](../../images/galaxy_doc_releases.png "Screenshot of the Galaxy documentation webpage (https://docs.galaxyproject.org) showing the release versions. The latest version is at the top of the 'Releases' list.")
+![Screenshot of the Galaxy documentation webpage showing the release versions](../../images/galaxy_doc_releases.png "Screenshot of the Galaxy documentation webpage (<a href="https://docs.galaxyproject.org">https://docs.galaxyproject.org</a>) showing the release versions. The latest version is at the top of the 'Releases' list.")
 
 We can see from this page that the latest release version of Galaxy is *21.01* (at the time of writing.)
 
@@ -158,7 +166,7 @@ In a production environment it is really important to make regular backups of th
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
->    > sudo su galaxy
+>    > sudo su -l galaxy
 >    > pg_dump galaxy | gzip > galaxy_database-2009-1.sql.gz
 >    > ls -lah galaxy_database*
 >    > ```
@@ -196,23 +204,23 @@ Once you've made sure of these things, it's time to do it!
 >
 > 1. Edit the `group_vars/galaxyservers.yml` file and change the `galaxy_commit_id` to the latest version. Use the form `release_YY.MM` or in this case `release_21.01`.
 >
->   {% raw %}
->   ```diff
->   --- a/group_vars/galaxyservers.yml
->   +++ b/group_vars/galaxyservers.yml
->   @@ -21,7 +21,7 @@ galaxy_manage_paths: true
->    galaxy_layout: root-dir
->    galaxy_root: /srv/galaxy
->    galaxy_user: {name: galaxy, shell: /bin/bash}
->   -galaxy_commit_id: release_20.09
->   +galaxy_commit_id: release_21.01
->    galaxy_force_checkout: true
->    miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
->    miniconda_version: 4.7.12
->   ```
->   {% endraw %}
+>    {% raw %}
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -21,7 +21,7 @@ galaxy_manage_paths: true
+>     galaxy_layout: root-dir
+>     galaxy_root: /srv/galaxy
+>     galaxy_user: {name: galaxy, shell: /bin/bash}
+>    -galaxy_commit_id: release_20.09
+>    +galaxy_commit_id: release_21.01
+>     galaxy_force_checkout: true
+>     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
+>     miniconda_version: 4.7.12
+>    ```
+>    {% endraw %}
 >
->   2. Now run the playbook!
+> 2. Now run the playbook!
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
