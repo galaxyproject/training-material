@@ -484,7 +484,7 @@ You should now be able to run a Galaxy job through Slurm. The simplest way to te
 {: .hands_on}
 
 > ```bash
-> galaxy-tool-test --galaxy-url https://"${GALAXY_HOSTNAME}" --key adminkey --tool-id cat1 --test-index 0
+> 1-test-cat1.sh
 > ```
 > {: data-test="true"}
 {: .hidden}

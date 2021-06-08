@@ -125,7 +125,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 {: .hands_on}
 
 > ```bash
-> GALAXY_URL=https://"${GALAXY_HOSTNAME}" GALAXY_API_KEY=adminkey python run_test.py
+> 1.sh
 > ```
 > {: data-test="true"}
 {: .hidden}
@@ -198,7 +198,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 {: .hands_on}
 
 > ```bash
-> GALAXY_URL=https://"${GALAXY_HOSTNAME}" GALAXY_API_KEY=adminkey N_THREADS=2 python run_test.py
+> 2.sh
 > ```
 > {: data-test="true"}
 {: .hidden}
@@ -431,8 +431,7 @@ Our rule specified that any invocation of the `testing` tool with an input datas
 {: .hands_on}
 
 > ```bash
-> GALAXY_URL=https://"${GALAXY_HOSTNAME}" GALAXY_API_KEY=adminkey N_CHARS=15 N_THREADS=1 python run_test.py
-> GALAXY_URL=https://"${GALAXY_HOSTNAME}" GALAXY_API_KEY=adminkey N_CHARS=17 N_THREADS=2 python run_test.py
+> 3.sh
 > ```
 > {: data-test="true"}
 {: .hidden}
