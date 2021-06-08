@@ -78,8 +78,9 @@ elif [[ "$op" == "deploy" ]]; then
 
 	cd ${DIR} || exit
 	git init && \
-		git am -3 -- *.patch && \
 		git add .scripts/
+		git commit -a -m 'Add scripts directory'
+		git am -3 -- *.patch && \
 		git remote add origin git@github.com:hexylena/git-gat.git && \
 		git push -f origin
 elif [[ "$op" == "roundtrip" ]]; then
