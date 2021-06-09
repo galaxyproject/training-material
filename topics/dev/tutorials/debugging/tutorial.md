@@ -11,7 +11,7 @@ objectives:
   - "Fix errors identified by failing tests"
   - "Debug simple runtime errors using the Python debugger"
   - "Write tests exposing the identified bug"
-time_estimation: "2h"
+time_estimation: "4h"
 key_points:
   - "TODO Unit Tests"
   - "TODO API Tests"
