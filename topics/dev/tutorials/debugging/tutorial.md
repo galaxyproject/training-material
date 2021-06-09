@@ -224,7 +224,7 @@ API test various aspects of the Galaxy API, as well as general backend aspects o
 >    > 
 >    > Let's run the failed test:
 >    > ```shell
->    > ./run_tests.sh -api lib/galaxy_test/test_licenses.py
+>    > ./run_tests.sh -api lib/galaxy_test/api/test_licenses.py
 >    > ```
 >    > Two tests are failing. Do you see the error messages?
 >    > 
