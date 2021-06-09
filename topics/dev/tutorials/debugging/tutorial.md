@@ -143,7 +143,7 @@ Most of Galaxy unit tests are designed to test a separate component or function,
 >    >  
 > 2. __Running the test locally__
 >    > 
->    > An essential requirement for productive development is a fast feedback loop: we want to make a change, run a test, and get immediate feedback. If we push our edits to the remote fork (or submit a pull request to the upstream repository) and wait for the the tests to run remotely, it could take hours before we get any feedback, which is very inneficient (and detrimental to sustaining the joy of programming).
+>    > An essential requirement for productive development is a fast feedback loop: we want to make a change, run a test, and get immediate feedback. If we push our edits to the remote fork (or submit a pull request to the upstream repository) and wait for the the tests to run remotely, it could take hours before we get any feedback, which is very inefficient (and detrimental to sustaining the joy of programming).
 >    > 
 >    > Instead, we will run the tests locally. Furthermore, we will run a specific test that we know is failing: this will give us the instant feedback we need.
 >    > 
@@ -253,7 +253,7 @@ API test various aspects of the Galaxy API, as well as general backend aspects o
 >    > 
 >    > Our next step is to examine the controller for this endpoint. For that, we head over to `lib/galaxy/webapps/galaxy/api/licenses.py`.
 >    > 
->    > There are 2 controllers (a legacy controller and a FastAPI controller) that have identical functionality; we can use either one. If you look at the FastAPI controller, you'll see the `get` method that is responsible for fetching the data in response to a `GET` HTTP request received at the licenses/{licenseId}` endpoint:
+>    > There are 2 controllers (a legacy controller and a FastAPI controller) that have identical functionality; we can use either one. If you look at the FastAPI controller, you'll see the `get` method that is responsible for fetching the data in response to a `GET` HTTP request received at the `licenses/{licenseId}` endpoint:
 >    > 
 >    > ```python
 >    >     @router.get('/api/licenses/{id}',
@@ -265,13 +265,17 @@ API test various aspects of the Galaxy API, as well as general backend aspects o
 >    >         return self.licenses_manager.get_license_by_id(id)
 >    > ```
 >    > 
->    > The only thing in this method that matters to us is the last line: `return self.licenses_manager.get_license_by_id(id)` (Why? Because despite all this syntax, the method simply redirects the request to `self.licenses_manager`). If we read the code, we'll quickly see that this variable holds an instance of `LicencesManager`, which (look at the import statements at the top of the file) is located in `lib/galaxy/managers/licenses`. Which is where we should look next.
+>    > The only thing in this method that matters to us is the last line:
+>    > ```python
+>    > return self.licenses_manager.get_license_by_id(id)
+>    > ```
+>    > Why? Because despite all this syntax, the method simply redirects the request to `self.licenses_manager`. If we read the code, we'll quickly see that this variable holds an instance of `LicencesManager`, which (look at the import statements at the top of the file) is located in `lib/galaxy/managers/licenses.py`. Which is where we should look next.
 >    > 
 >    > If we carefully trace the code in `LicensesManager`, we'll find the error. Do you see it?
 >    > 
 >    >  > ### {% icon solution %} Solution
 >    >  > 
->    >  > The `get_licenses_by_id()` method raises an `ObjectNotFound` error (which results in the 404 status code we see in the test result). This error is a direct result of the `get` method called on the previous line - take a look at that method: 
+>    >  > The `get_license_by_id()` method raises an `ObjectNotFound` error (which results in the 404 status code we see in the test result). This error is a direct result of the `get` method called on the previous line - take a look at that method: 
 >    >  > 
 >    >  > ```python
 >    >  >     def get(self, uri):
@@ -468,7 +472,256 @@ Selenium is the end-to-end or integration testing framework that we use; so thes
 
 # Runtime error
 
-TODO
+Our last error happens at runtime, which means we don't have a failing test; instead we have a bug report describing the error. Our goal is to fix the error. Our steps are as follows:
+
+1. Reproduce the error
+2. Locate the error
+3. Identify the problem
+4. Write a test exposing the bug. The test must fail.
+5. Fix the error.
+6. Ensure the error no longer occurs.
+
+> ### {% icon hands_on %} Hands-on: Fixing a runtime error
+> 
+> 1. __Reproduce the error__
+>    >
+>    > Here's the bug report:
+>    > > In the User menu, clicking the Datasets option causes an error message to be displayed on the page: "Uncaught exception in exposed API method".
+>    > 
+>    > First, start your local Galaxy:
+>    > 
+>    > ```shell
+>    > $ ./run.sh
+>    > ```
+>    > 
+>    > The first startup may take a few minutes. Eventually, you'll see the following output (the PID will be different):
+>    > 
+>    > ```
+>    > Starting server in PID 1583948.
+>    > serving on http://127.0.0.1:8080
+>    > ```
+>    > 
+>    > Now you can access your Galaxy instance from the browser at `http://127.0.0.1:8080`.
+>    > 
+>    > To reproduce this error, we need to access the User menu. For this, we need to be logged in to Galaxy:
+>    > 
+>    > 1. Click on "Login or Register:
+>    > 2. At the bottom of the form, click "Register here"
+>    > 3. Fill out the form. You may use any data, as long as the email you provide is a valid email format and the password is at least 6 characters long. For this exercise, it doesn't matter what email, name or password you use.
+>    > 4. Click "Create"
+>    > 
+>    > Now the User menu is available to us. Click "User", then select "Datasets" from the dropdown menu. You should be able to see the error message displayed on the page: "Uncaught exception in exposed API method".
+>    > 
+>    > Being able to reproduce a bug is good: this means you're on your way to fixing it, and you know what to look for! In a real scenario, it is not uncommon that a bug is not easily reproduceable, which makes fixing it a much more complicated task.
+> 
+> 2. __Locate the problem__
+>    >
+>    > To figure out what's happening, our best bet is to look at the Galaxy log (look at the terminal window from which you launched Galaxy). Can you see the error message?
+>    > 
+>    >  > ### {% icon solution %} Solution
+>    >  > 
+>    >  > You should see something like this:
+>    >  > 
+>    >  > ```
+>    >  > galaxy.web.framework.decorators ERROR 2021-06-08 17:52:08,350 [pN:main.web.1,p:1583948,w:1,m:0,tN:uWSGIWorker1Core1] Uncaught exception in exposed API method:
+>    >  > Traceback (most recent call last):
+>    >  >   File "lib/galaxy/web/framework/decorators.py", line 312, in decorator
+>    >  >     rval = func(self, trans, *args, **kwargs)
+>    >  >   File "lib/galaxy/webapps/galaxy/api/datasets.py", line 129, in index
+>    >  >     raise Exception('This should not happen!')
+>    >  > Exception: This should not happen!
+>    >  > ```
+>    >  > 
+>    >  > From this error log, we can easily tell that the error happens in the `lib/galaxy/webapps/galaxy/api/datasets.py` file on line 129. The specific error message doesn't tell us much - which is often what happens in the wild.
+>    > {: .solution }
+>    > 
+>    > Let's head over to the `datasets'py` file, line 129:
+>    > 
+>    > ```python
+>    > 126         if str_as_bool(trans.app.config.get('show_datasets', 'True')):
+>    > 127             return [self.serializer_by_type[content.history_content_type].serialize_to_view(content, user=trans.user, trans=trans, view=view) for content in contents]
+>    > 128         else:
+>    > 129             raise Exception('This should not happen!')
+>    > ```
+>    > 
+>    > The good news is that the error happens inside an `if/else` block, which narrows down our search to line 126: that line evaluates to `False`, causing the `else` clause to execute. The bad news is that we have no idea what causes that line to evaluate to `False`.
+>    >
+> 3. __Identify the problem__
+>    >
+>    > We will investigate using pdb - our trusted Python debugger!
+>    > 
+>    > pdb offers a wide range of functionality and is exceptionally useful for debugging at runtime. We encourage you to read its [documentation](https://docs.python.org/3/library/pdb.html); however for this exercise we will only use the built-in [breakpoint()](https://docs.python.org/3/library/functions.html#breakpoint) function, that drops us into pdb.
+>    > 
+>    > Add a `breakpoint()` statement to your code, right above the `if/else` block.
+>    > 
+>    >  > ### {% icon solution %} Solution
+>    >  >  
+>    >  > ```python
+>    >  > 126         breakpoint()
+>    >  > 127         if str_as_bool(trans.app.config.get('show_datasets', 'True')):
+>    >  > 128             return [self.serializer_by_type[content.history_content_type].serialize_to_view(content, user=trans.user, trans=trans, view=view) for content in contents]
+>    >  > 129         else:
+>    >  > 130             raise Exception('This should not happen!')
+>    >  > ```
+>    >  >
+>    > {: .solution }
+>    > 
+>    > Now we need to restart Galaxy. However, to use pdb, we need to enable Galaxy's debug configuration option. In general, it may be a good idea to enable this in your `galaxy.yml` configuration file (just copy or rename `config/galaxy.yml.sample` and uncomment the option you want to set). However, for the purposes of this exercise, it's enough to set the `GALAXY_CONFIG_DEBUG` environment variable when running Galaxy:
+>    > 
+>    > ```shell
+>    > $ GALAXY_CONFIG_DEBUG=1 ./run.sh
+>    > ```
+>    > 
+>    >  > ### {% icon comment %} Why we set the debug option
+>    >  > The reason for setting the `debug` option is quite esoteric: among other things, it prevents uWSGI from remapping `stdin` to `dev/null` which would prevent tools like pdb from running.
+>    >  {: .comment}
+>    > 
+>    > Now your Galaxy is running in debug mode. Repeat your steps that reproduced the error. When you click "Datasets", head over to your terminal. At the bottom of the log you'll see something like this:
+>    > 
+>    > ```
+>    > > /home/sergey/2sandbox/galaxy/dev_training/lib/galaxy/webapps/galaxy/api/datasets.py(127)index()
+>    > -> if str_as_bool(trans.app.config.get('show_datasets', 'True')):
+>    > (Pdb)
+>    > ```
+>    > 
+>    > You're at the pdb prompt. From here you can execute Python code interactively. So, let's explore what's happening in the next line:
+>    > 
+>    > ```
+>    > (Pdb) trans
+>    > <galaxy.webapps.base.webapp.GalaxyWebTransaction object at 0x7f3664eee2b0>
+>    > (Pdb) trans.app
+>    > <galaxy.app.UniverseApplication object at 0x7f36ccc18790>
+>    > (Pdb) trans.app.config
+>    > <galaxy.config.GalaxyAppConfiguration object at 0x7f369addcac0>
+>    > (Pdb) trans.app.config.get
+>    > <bound method CommonConfigurationMixin.get of <galaxy.config.GalaxyAppConfiguration object at 0x7f369addcac0>>
+>    > (Pdb)
+>    > ```
+>    > 
+>    > We could have just typed `trans.app.config.get`, of course; the steps above give us some additional context.
+>    > 
+>    > Now let's take a look at the definition of the `get` method. We need to find `CommonConfigurationMixin` which is used by `galaxy.config.GalaxyAppConfiguration`.
+>    > 
+>    > Head over to `lib/galaxy/config/__init__.py` and look for the class `CommonConfigurationMixin`. Once you find it, look for the definition of its `get` method. When you find it, look at the method signature. What is the meaning of the argument `'True'` that is passed to this method in `datasets.py` on line 127?
+>    > 
+>    >  > ### {% icon solution %} Solution
+>    >  >
+>    >  > ```python
+>    >  > 480     def get(self, key, default=None):
+>    >  > 481         # Warning: the value of self.config_dict['foo'] may be different from self.foo
+>    >  > 482         return self.config_dict.get(key, default)
+>    >  > ```
+>    >  >
+>    > The argument `True` corresponds to the parameter `default`. In the method's body, we see that this value will be passed to `self.config_dict.get()`; `self.config_dict` is a Python dictionary, so the second argument to `get()` is the default value that will be retuned if `key` is not in `self.config_dict`.
+>    > {: .solution }
+>    > 
+>    > Back to `datasets.py`, line 127. Now we know that `True` is the default value that will be returned if the key `show_datasets` does not exist in the `config_dict` dictionary. Moving on:
+>    > 
+>    > ```
+>    > (Pdb) trans.app.config.get('show_datasets')
+>    > (Pdb) trans.app.config.get('show_datasets', 'True')
+>    > 'True'
+>    > ```
+>    > 
+>    > So, we see that `show_datasets` does not exist and we get the default value, which is the string `'True'`.
+>    > 
+>    > Next step: `str_to_bool`. First, let's pass it the value `'True'`:
+>    > 
+>    > ```
+>    > (Pdb) str_as_bool('True')
+>    > False
+>    > ```
+>    > 
+>    > That doesn't look right! Exit the debugger (type in `q`, then `Enter`, then `CTRL-C	` to exit Galaxy.
+>    > Head over to the function's definition (you can tell from the import statement at the top of the file that it's in `lib/galaxy/util/__init__.py`) and try to figure out if there is an error.
+>    > 
+>    >  > ### {% icon solution %} Solution
+>    >  >
+>    >  > ```python
+>    >  > 103 def str_as_bool(string):
+>    >  > 104     """ This is for training only."""
+>    >  > 105     if str(string) in ('true', 'yes', 'on', '1'):
+>    >  > 106         return True
+>    >  > 107     else:
+>    >  > 108         return False
+>    >  > ```
+>    >  >
+>    >  > At first glance, everything seems right. But think of what value we are passing: `'True'` - it is *not* in the `('true', 'yes', 'on', '1')` tuple! Aparently, the developer did not account for upper vs. lower case!
+>    >  >
+>    >  > Do NOT fix the error just yet.
+>    > {: .solution }
+>    > 
+> 4. __Write a test exposing the bug__
+>    >
+>    > Before you fix code that was not covered by a test, write the test to expose the bug! In this case we have a simple, completely isolated function - a simple unit test should do. Your test should go into this module: `test/unit/util/test_utils.py`.
+>    > 
+>    > Start with a blank test function. Then call the funtion under test (`str_as_bool`) and assert that when you pass it the value `'True'`, it returns `True`. Can you think of more cases to test?
+>    > 
+>    >  > ### {% icon solution %} Solution
+>    >  > Your first step could be something like this:
+>    >  > 
+>    >  > ```python
+>    >  > def test_str_as_bool():
+>    >  >     assert util.str_as_bool('True')
+>    >  > ```
+>    >  > 
+>    >  > However, keep in mind that there may be other cases of mixed or uppercase values. You should also test for lowercase values - to make sure that while fixing the bug you don't break the current functionality. And remember to test for the `False` cases as well.
+>    >  > 
+>    >  > There are many ways to implement this, feel free to write your own. Here's one option:
+>    >  > 
+>    >  > ```python
+>    >  > def test_str_as_bool():
+>    >  >     for value in ('true', 'yes', 'on', '1', 'True', 'Yes', 'On','TRUE', 'YES', 'ON'):
+>    >  >         assert util.str_as_bool(value)
+>    >  >     for value in ('false', '0', 'something else'):
+>    >  >         assert not util.str_as_bool(value)
+>    >  > ```
+>    > {: .solution }
+>    > 
+>    > Run your test. Does it fail? Good! Now it's time to fix the error.
+>    >
+> 5. __Fix the error__
+>    >
+>    > Can you think of a simple way to fix the function so that our test passes?
+>    > 
+>    >  > ### {% icon solution %} Solution
+>    >  > One way to do it is to simply convert the input value to lowercase:
+>    >  > 
+>    >  > ```python
+>    >  > 103 def str_as_bool(string):
+>    >  > 104     """ This is for training only."""
+>    >  > 105     if str(string).lower() in ('true', 'yes', 'on', '1'):
+>    >  > 106         return True
+>    >  > 107     else:
+>    >  > 108         return False
+>    >  > ```
+>    >  > 
+>    >  > In fact, that's exactly what the real function does! Check line 966 - you'll see almost the exact same function, named `string_as_bool`: we didn't modify it because that might have broken other parts of Galaxy which would have been a distraction from the core aspects of the exercise.
+>    > {: .solution }
+>    > 
+>    > Run the test - now it should pass!
+>    > 
+> 6. __Ensure the error no longer occurs__
+>    > 
+>    > Now that we have the `str_as_bool` function covered by test, as a bonus, we can safely do some minor refactoring: the test will prevent us from breaking things. Can you simplify the function's code?
+>    > 
+>    >  > ### {% icon solution %} Solution
+>    >  > ```python
+>    >  > 103 def str_as_bool(string):
+>    >  > 104     """ This is for training only."""
+>    >  > 105     return str(string).lower() in ('true', 'yes', 'on', '1')
+>    >  > ```
+>    >  >  
+>    >  > Much better!
+>    > {: .solution }
+>    > 
+>    > Finally, head back to your local Galaxy and verify that the runtime error no longer occurs:
+>    > 
+>    > 1. Remove the `breakpoint()` statement you added to `lib/galaxy/webapps/galaxy/api/datasets.py`.
+>    > 2. Start Galaxy and repeat the steps from the bug report (select "User" > "Datasets"). You should see the Datasets page now - no more error message!
+>    > 
+>    > Congratulations - you've completed the last and, possibly, most challenging section of this tutorial!
+{: .hands_on}
 
 # Conclusion
 
