@@ -210,7 +210,7 @@ API test various aspects of the Galaxy API, as well as general backend aspects o
 >    > 
 >    >  > ### {% icon solution %} Solution
 >    >  > 
->    >  > The log lists 2 relevant failed tests:
+>    >  > The log lists multiple failed tests. Some of them were caused by bugs you'll be fixing in later sections of this tutorial. For this exercise, we care about these two failed tests:
 >    >  > ```
 >    >  > FAILED lib/galaxy_test/api/test_licenses.py::LicensesApiTestCase::test_404_on_unknown_license
 >    >  > FAILED lib/galaxy_test/api/test_licenses.py::LicensesApiTestCase::test_get_license
@@ -409,7 +409,7 @@ Selenium is the end-to-end or integration testing framework that we use; so thes
 > 
 > 1. __Finding the failing test on GitHub__
 >    >  
->    >  There are actually a few failing Selenium tests, but the good new is, they are the result of only one little error. One of the failing tests on GitHub says "Selenium Test 3.7, 0" and "Selenium Test 3.7, 1". When you click on the details of this one, it's not always very clear which test is causing the failure, but if you download the artifacts, it's very clear which tests have failed.
+>    >  There may be actually a few failing Selenium tests, but the good new is, they are the result of only one little error. The failing tests on GitHub says "Selenium Test 3.7, 2". When you click on the details of this one, it's not always very clear which test is causing the failure, but if you download the artifacts, it's very clear which tests have failed.
 >    >  
 >    >  Try to identify which tests are failing based on artifacts you downloaded.
 >    >  
