@@ -151,7 +151,7 @@ Most of Galaxy unit tests are designed to test a separate component or function,
 >    > 
 >    > The simplest way to run the failing test locally is using pytest directly:
 >    > ```shell
->    > $ pytest test/unit/util/test_uril.py
+>    > $ pytest test/unit/util/test_utils.py
 >    > ```
 >    > Do you see the error message?
 >    > 
