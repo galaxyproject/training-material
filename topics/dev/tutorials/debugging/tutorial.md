@@ -171,7 +171,7 @@ Most of Galaxy unit tests are designed to test a separate component or function,
 >    > 
 >    > Our next step is to open the test file and see what part of the codebase (i.e., what module, class + method or function) is failing to provide the expected result. 
 >    > 
->    > The failing test is calling the `strip_control_characters` function in the `util` module. That function, apparently, is not producing the expected output. Let's head over to `lib/galaxy/utl/__init__.py`, where we'll find the function definition:
+>    > The failing test is calling the `strip_control_characters` function in the `util` module. That function, apparently, is not producing the expected output. Let's head over to `lib/galaxy/util/__init__.py`, where we'll find the function definition:
 >    > 
 >    > ```python
 >    > def strip_control_characters(s):
