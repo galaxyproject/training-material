@@ -310,7 +310,7 @@ Galaxy tool wrapper xml files are made up of several sections:
 - Citations
 - Help
 
-While many of those are present in the wrapper by default, others will need to be added.
+While many of those are present in the wrapper by default, others need to be added.
 
 ### Tool section
 
@@ -353,7 +353,7 @@ bellerophon: chimeric reads from Arima Genomics
 ### Macros section
 
 The macros section serves two functions -- to create meta-variables for inside both the xml text and the command text, called
-tokens, and xml sections that can be slotted in repeadely. Although this tool will only use the tokens, the xml macros are very
+tokens, and xml sections that can be slotted in repeatedly. Although this tool will only use the tokens, the xml macros are very
 useful for tools which have multiple options/modes that reuse parameters.
 
 The @TOOL_VERSION@ and @VERSION_SUFFIX@ used in the Tool line are defined here. Each need their own 'token' line, resulting in
@@ -366,8 +366,8 @@ The @TOOL_VERSION@ and @VERSION_SUFFIX@ used in the Tool line are defined here. 
 ```
 
 This will cause the version string at the beginning to read "1.0+galaxy0", and set the conda package that is pulled to be bellerophon version 1.0.
-As versions are incremented, this will change. Any updates to the galaxy wrapper should iterate @VERSION_SUFFIX@, while any changes to the version
-of the requirement would change the value for @TOOL_VERSION@.
+As versions are incremented, this will change. Any updates to the galaxy wrapper should iterate `@VERSION_SUFFIX@`, while any changes to the version
+of the requirement would change the value for `@TOOL_VERSION@` (and reset the `@VERSION_SUFFIX@` to 0).
 
 A basic example of the xml macros would look like this
 
@@ -450,9 +450,9 @@ The param tag sets the value of variables, and has several attributes associated
 #### *Conditional*
 
 Conditionals are used alongside param tags to change available options based on what has been selected and is used with select-type params. Writing
-conditionals, then, is a three-tag or four-tag process -- the `<conditional/>` tag, the `<param/>` of the either boolean or select type, and the `<when/>` tag,
-used to specify the new paramaters available only on the selection of certain options. When the param is of type "select", a tag `<option/>` is used to specify
-each possible value, as opposed to the "truevalue" and "falsevalue" attributes of a boolean param. A very generic select-type conditional might look like this:
+conditionals, then, is a three-tag or four-tag process -- the `<conditional/>` tag, the `<param/>` of select type, and the `<when/>` tag,
+used to specify the new paramaters available only on the selection of certain options. The param is of type "select", a tag `<option/>` is used to specify
+each possible value. A very generic select-type conditional might look like this:
 
 ```xml
 <conditional name="example_conditional">
@@ -686,7 +686,7 @@ The bellerophon command section would, based on the variables set previously, wo
 ```
 
 inputs the variables set in the inputs and output sections to generate a full command to be run inside the Galaxy environment. When inside a conditional or
-section, the heirarchy is preserved using a period. For example
+section, the hierarchy is preserved using a period. For example
 
 ```txt
 '$example.forward'
@@ -724,7 +724,7 @@ As all parameters in bellerophon are accessible at once, and do not contradict o
     </tests>
 ```
 
-This runs the tool with the files forward.bam and reverse.bam from a folder named test-data in the tool's directory. Since no quality parameter was specified, it uses the default of 20. The parameter ccn also be manually set with the same param tag and value attribute, just inputting an applicable value such as "21". It then
+This runs the tool with the files forward.bam and reverse.bam from a folder named test-data in the tool's directory. Since no quality parameter was specified, it uses the default of 20. The parameter can also be manually set with the same param tag and value attribute, just inputting an applicable value such as "21". It then
 compares the defined output called "outfile" from the outputs section against a file called "merged-out.bam" in the same test-data directory. It also
 double checks that Galaxy only finds one output to put in the history with the "expect_num_outputs" attribute. This is very useful for tests on tools
 that have filtered outputs or that use 'discover_datasets'.
@@ -980,6 +980,11 @@ It can be very useful to check how Galaxy renders a tool and if this meets the e
 > `Planemo` will again start a Galaxy instance that contains your tool. Note that starting the ad-hoc Galaxy might need longer than for `planemo test` since JavaScript components need to be initialized as well.
 > 
 {: .hands_on}
+
+> ### {% icon tip %} Usefull parameters for `planemo test`
+>
+> In order to stop `planemo serve` just press `Ctrl + C`
+{: .tip}
 
 # Publishing Galaxy tools
 
