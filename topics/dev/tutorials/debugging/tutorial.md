@@ -378,7 +378,7 @@ Client tests are tests written by developers to test front-end code. In the case
 >    >  
 >    >  > ### {% icon solution %} Solution
 >    >  >
->    >  > The failure is only happening on the disabled test case, so take a look in the template of `SavedRuleSelector` where the conditions for adding disabled are defined.  
+>    >  > The failure is only happening on the disabled test case, so take a look in the template of `SavedRulesSelector` where the conditions for adding disabled are defined.  
 >    >  > The way it's worded in the test (and the way one could think about it logically), is that if there is no history, the button should be disabled, but the code says 
 >    >  > ```javascript
 >    >  > :class="{ disabled: numOfSavedRules == 1 }"
