@@ -597,12 +597,14 @@ Expand your knowledge further with the [Advanced ToolFactory tutorial]({% link t
 
 # Acknowledgements
 
-This tutorial is based on the work of thousands of contributers to the Galaxy project over the last 15 years or so. Thanks all!
+This tutorial is based on the work of thousands of individual contributers to the Galaxy project over the last 15 years or so.
+Thanks all! It has been a lot of fun.
 
-Special thanks are owed to:
+Special thanks to:
 
-- {% include _includes/contributor-badge.html id="mvdbeek" %} for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.
 - {% include _includes/contributor-badge.html id="hexylena" %} for
     - review and contribution to the tutorial and associated code.
-    - the idea of instant installation of generated tools for feedback.
+    - the vision of instant installation of generated tools for developer feedback.
     - elegantly generated lint-free XML provided by [galaxyml code](https://github.com/hexylena/galaxyxml)
+- {% include _includes/contributor-badge.html id="bgruening" %} for making it easy to pop-up and flavour [docker-galaxy-stable](https://github.com/bgruening/docker-galaxy-stable)
+- {% include _includes/contributor-badge.html id="mvdbeek" %} for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.

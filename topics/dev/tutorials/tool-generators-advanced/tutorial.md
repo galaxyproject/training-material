@@ -980,7 +980,7 @@ runs planemo lint on the inferred tool path. STDOUT is captured with the linter 
 
 - There is another sample bwa_test tool that achieves the same results using a bash script.
 - It does not need a command over-ride but is more typing because three positional parameters are named for readability.
-- Bash is probably more familiar to many ToolFactory users than mako templating.
+- Bash is probably more familiar to many ToolFactory users than mako/cheetah templating.
 - The effects of templating the command line can usually be achieved using bash or Python at the expense of needing to script the handling of parameters.
 
 > ### {% icon details %} `bwa_test_toolfactory_positional_bash` sample alternative.
@@ -1009,31 +1009,69 @@ runs planemo lint on the inferred tool path. STDOUT is captured with the linter 
 
 - The ToolFactory is an automated, form based code generator.
 - A generator can replace manual editing by a skilled developer only in relatively constrained, simple cases.
-- These are common enough in the daily work of most data intensive scientific fields to make a tool generator potentially worth keeping handy.
+- These are common enough in the daily work of most data intensive scientific fields to make a tool generator worth keeping handy.
 - For simple scripts and appropriate Conda packages, it's potentially very useful.
 - It is not hard to imagine using a Python wrapper to finesse more complex tools just as bash was used in the `planemo lint` example.
 - The ToolFactory appliance is a convenient and efficient way to create and maintain Galaxy tools from working scripts.
-- Tools can have command-override and test-override pasted in as in one of the BWA samples. This can solve some of the limitations. However, if the package requires that kind of complexity, it might be better to prepare the wrapper manually.
+- Tools can have command-override and test-override pasted in as in one of the BWA samples.
+  - This can work around some of the current limitations on automation.
+  - If the package requires that kind of complexity, it might be better to prepare the wrapper manually.
 
+## Food for thought and beer.
+
+- Uptake of Galaxy in new quantitative scientific fields requiring complex computing for analyses is arguably rate-limited early on by the availability of domain specific tools.
+   - many scientists routinely write their own analysis code in quantitative disciplines - probably more commonly than in biological domains where Galaxy started.
+   - lowering the barriers to those scientists generating their own new tools may speed up adoption of Galaxy in their domains.
+- Galaxy tool wrapping has a well established and growing range of project supported infrastructure.
+- Complex Galaxy tool logic is nearly always implemented using `mako` templates embedded in the tool document namespace.
+  - Being in the namespace saves substantial effort compared to the alternative of writing that same logic in a script, as provided by the ToolFactory.
+    - That extra effort is needed to pass those parameters on the command line and then to parse them in the script so the logic can be implemented.
+  - As a result, manual templating is far more efficient of developer time and effort, particularly as conditional parameter and tool complexities grow.
+    - It is widely preferred by dedicated developers.
+    - It requires some getting used to for newcomers.
+    - Syntax errors are not always pleasant or convenient to debug.
+- The ToolFactory may make it easier for some developers new to Galaxy to begin creating the tools needed for scientists from their new domain.
+  - some may prefer a GUI tool form.
+  - some may prefer the persistent IDE aspect.
+  - some may feel more at home in their favourite scripting language.
+  - any scripting language should be capable of implementing equivalent logic.
+- Negatives include limited complexity and lower time efficiency for complex tools.
+  - Increasingly unwieldy as tool forms grow to many parameters and files.
+- May be a convenient way to learn by building simple tools before diving into the project supported infrastructure.
+- It extends the range of options available for creating new tools for new scientific domains.
+- Developers can choose the method that suits them best for each new task.
+  - For simple tools, the ToolFactory provides a convenient, pop-up, persistent but easily disposable integrated development environment.
+
+## Notes on the methods implemented in the Appliance.
+
+For private desktop applications like the ToolFactory, it is sometimes convenient to be able to do things that normal Galaxy security does not permit, such
+as allowing a tool to update a configuration file to install a new tool. The Appliance uses a readily adaptable model for private desktop applications that
+allow tools to call exposed `rpyc` python functions in a companion container. These could, for example, offload calculation to GPU or other hardware and services.
+Please see the documentation on the [Appliance's embedded `rpyc` server](https://github.com/fubar2/toolfactory-galaxy-server/tree/main/compose#readme). The
+model is powerful and requires explicit security bypasses. These are manageable in a private development environment, but mitigate
+strongly against deployment exposed to the public internet.
 
 ## Notes on some commonly reported issues
 
-#### First Appliance job I submitted container remains grey or running for a long time - is it broken?
+#### First job I submitted remains grey or running for a long time - is it broken?
 
 - Check with `top` or your system monitor - if Conda is running, things are working but it's slow the first time a dependency is installed.
 - The first run generally takes a while to install all the needed dependencies.
-- Subsequent runs should start immediately
-- Installing new Conda dependencies also takes time so tools that have new Conda packages will take longer to generate as they must be installed before the tool can be tested.
-- In general, a complete ToolFactory job usually takes less than a minute - planemo has to build and tear down a new Galaxy for generating test results and then
-again for testing properly. Longer if the tool has Conda dependencies....
+- Subsequent runs should start immediately with all dependencies already in place.
+- Installing new Conda dependencies just takes time so tools that have new Conda packages will take longer to run the first time if they must be installed.
+- In general, a `planemo_test` job usually takes around a minute - planemo has to build and tear down a new Galaxy for generating test results and then
+again for testing properly. Longer if the tool has Conda dependencies.
+- The very first test in a fresh appliance may take 5 minutes so be patient.
 
 #### My Rscript generates a strange R error on STDOUT about an invalid operation on a closure called 'args' ?
 
-- Does your code create the args vector at the start of the script with something like `args = commandArgs(trailingOnly=TRUE)` before Rscript tries to access args[1] ?
+- Did your code declare the `args vector` with something like `args = commandArgs(trailingOnly=TRUE)` before it tried to access args[1] ?
+- See the plotter tool for a sample
 
 #### I want to use a collection for outputs but it always passes the test even when the script fails. What gives?
 
-- Unfortunately, collections are tricky to generate automated tests for. The contents are never known until the tool has been run.
+- Collections are tricky for generating tests.
+  - The contents appear only after the tool has been run and even then may vary with settings.
 - A manual test override is currently the only way to test collections properly.
 - Automation is hard. If you can help, pull requests are welcomed.
 - Until it's automated, please take a look at the plotter sample.
@@ -1057,12 +1095,34 @@ or more of the file names you expect to see after the collection is filled by yo
 interfering with it's own independent repository update. The result is not pretty.
 - Allowing two tests to run at once has proven to be unstable so the Appliance is currently limited to one.
 
+#### pip hangs inside the Docker container when I have my VPN turned on
+
+- This affects Ross with a Private Internet Access client running. Other VPNs may be similarly affected. If the VPN is running, docker containers will
+fail to download dependencies with timeouts on the pip web site. No idea why - some strange DNS problem - but I turn mine off and that solves the problem for me.
+Toolfactory timeouts, particularly test timeouts may be related - check your logs carefully or just try turning your VPN off.
+Your mileage may vary...
+
+---
+
 # Your turn! Please help improve this community resource!
 - tell Ross ([ross.lazarus@gmail.com](mailto:ross.lazarus@gmail.com)) what went well and what could be improved for the benefit of future students
 - This tutorial has had almost no testing yet.
-- It is in pre-review.
-- A PR will soon appear once we get the showstoppers sorted.
 - Please use the fork at [fubar2/training-material](https://github.com/fubar2/training-material) for issues and pull requests for the nonce.
 - The ToolFactory has had little testing in the present form so expect many bugs
 - If the ToolFactory works well for you, please tell your friends.
 - If you find bugs, please tell me by raising an issue at [fubar2/toolfactory](https://github.com/fubar2/toolfactory), or better, a pull request with the fix :)
+
+
+# Acknowledgements
+
+This tutorial is based on the work of thousands of individual contributers to the Galaxy project over the last 15 years or so.
+Thanks all! It has been a lot of fun.
+
+Special thanks to:
+
+- {% include _includes/contributor-badge.html id="hexylena" %} for
+    - review and contribution to the tutorial and associated code.
+    - the vision of instant installation of generated tools for developer feedback.
+    - elegantly generated lint-free XML provided by [galaxyml code](https://github.com/hexylena/galaxyxml)
+- {% include _includes/contributor-badge.html id="bgruening" %} for making it easy to pop-up and flavour [docker-galaxy-stable](https://github.com/bgruening/docker-galaxy-stable)
+- {% include _includes/contributor-badge.html id="mvdbeek" %} for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.
