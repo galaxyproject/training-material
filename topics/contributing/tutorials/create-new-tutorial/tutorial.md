@@ -27,7 +27,7 @@ contributors:
 
 Galaxy is a great solution to train bioinformatics concepts:
 
-- numerous bioinformatics tools are available (almost 6,000 in the ToolShed)
+- numerous bioinformatics tools are available (over 8,000 in the ToolShed)
 - it can be used by people without any computer science skills
 - it trains to use technology, outlining available resources and efforts that have made them accessible to researchers
 - it is scalable
@@ -55,9 +55,9 @@ Here you will learn how to create a new tutorial by developing a small tutorial 
 
 # Define the topic
 
-The first question we need to answer is in which topic to place our new tutorial. This can be tricky. When we structured the repository, we decided that each training material should be related to a topic. 
+The first question we need to answer is in which topic to place our new tutorial. This can be tricky. When we structured the GTN, we decided that each training material should be related to a topic.
 
-We decided use the categories that are used in the [ToolShed](https://toolshed.g2.bx.psu.edu/) as our initial list of topics. Since every tool uploaded to the ToolShed must be in at least one category, you can look at the main tools in your tutorial and see which categories they are placed in within the ToolShed. This can provide a guide for where you might put your new tutorial. For example, this tutorial will rely on the NCBI Blast+ tool:
+We decided to use the categories from the [ToolShed](https://toolshed.g2.bx.psu.edu/) as our initial list of topics. Since every tool uploaded to the ToolShed must be in at least one category, you can look at the main tools in your tutorial and see which categories they are placed in within the ToolShed. This can provide a guide for where you might put your new tutorial. For example, if your tutorial will rely on the NCBI Blast+ tool:
 
 > ### {% icon hands_on %} Hands-on: Defining the topic for the tutorial
 >
@@ -82,7 +82,7 @@ We decided use the categories that are used in the [ToolShed](https://toolshed.g
 
 # Store a tutorial
 
-All training materials (slides, tutorials, ...) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to transcriptomics analysis). Each topic have the following structure:
+All training materials (slides, tutorials, ...) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to transcriptomics analysis). Each topic has the following structure:
 
 ```
 ├── README.md
@@ -115,9 +115,9 @@ The most important file is the `tutorial.md` where the content of the tutorial i
 
 Our tutorials try to follow the "learn by doing" approach; they combine both theoretical and practical sections done on Galaxy.
 
-Most of tutorials explain step-by-step a data analysis by running the tools. The steps taken in the tutorial can be represented as a workflow.
+Most tutorials explain step-by-step a data analysis by running the tools. The steps taken in the tutorial can be represented as a workflow.
 
-Before writing the tutorial, it is a good practice to get a workflow with the different steps that will be run with the tutorial. The workflow does not have to be the final one but at least the major steps. It helps to get a direction for the tutorial but also to generate a skeleton of the tutorial as we will see later.
+Before writing the tutorial, it is a good practice to get a workflow with the different steps that will be run during the tutorial. The workflow does not have to be the final one but at least the major steps. It helps to get a direction for the tutorial but also to generate a skeleton of the tutorial as we will see later.
 
 > ### {% icon comment %} Use tools that are available on the ToolShed
 > We recommmend you to use in your workflows, specially for training, tools that are available on the Galaxy ToolShed.
@@ -196,7 +196,7 @@ We would then develop the tutorial and test it on this toy dataset. Once we were
 
 Once we have the workflows and toy dataset (optionally already on Zenodo), we can generate the tutorial folder, including the `tutorial.md`.
 
-Writing the tutorial while adding the different tools and their parameters and following good formatting can be quite cumbersome. To help in that process, we developed a training development kit available with [Planemo](https://planemo.readthedocs.io/en/latest/index.html). The tool has several commands. But the main one can be used to create the skeleton of a tutorial (folder, well located, with good structure). It can also take a workflow as input, add it to the `workflows` folder. But more interesting, the tool can extract from the workflow and add in the `tutorial.md` file the different steps with tool to run and the parameters to select. If a Zenodo URL is provided, it also created the `data-library.yaml` file.
+Writing the tutorial while adding the different tools and their parameters and following good formatting can be quite cumbersome. To help in that process, we developed a training development kit available with [Planemo](https://planemo.readthedocs.io/en/latest/index.html). The tool has several commands. But the main one can be used to create the skeleton of a tutorial (folder, well located, with good structure). It can also take a workflow as input, add it to the `workflows` folder. But more interestingly, the tool can extract from the workflow and add in the `tutorial.md` file the different steps with which tools to run and which parameters to select. If a Zenodo URL is provided, it also creates the `data-library.yaml` file.
 
 This tool can be used via the command-line but also via a [webserver](https://ptdk.herokuapp.com/). The webserver can take a public workflow that is avialable on [usegalaxy.org](https://usegalaxy.org), [usegalaxy.eu](https://usegalaxy.eu) or [usegalaxy.org.au](https://usegalaxy.org.au).
 
@@ -215,20 +215,20 @@ This tool can be used via the command-line but also via a [webserver](https://pt
 >    - Id of the workflow
 >    - (Not mandatory) Zenodo URL with the input data
 > 5. Click on **Submit**
-> 6. Download the generated archive 
-> 
+> 6. Download the generated archive
+>
 >    This archive constains the tutorial skeleton including:
 >    - tutorial content, tutorial.md file, filled with all steps from the workflow and their parameters
 >    - its workflow (workflow folder)
 >    - a data_library.yaml file if Zenodo link was provided
 >     Create a GitHub account
-> 
+>
 > 7. Add the new material to Galaxy Training Material by unzip the downloaded archive in the tutorials folder of the topic for the new tutorial
 >
 >    > ### {% icon comment %} Using the GitHub interface
 >    >
 >    > Prefer to use the GitHub interface?
->    > 
+>    >
 >    > 1. Unzip the downloaded archive
 >    > 2. Edit the content of the `tutorial.md` (as explained below)
 >    > 3. Go to the GitHub repository of the Training Material
@@ -251,8 +251,8 @@ This tool can be used via the command-line but also via a [webserver](https://pt
 If the workflow is not available on one of the previously listed Galaxy servers, we recommend you to run the tool via the command line:
 
 > ### {% icon hands_on %} Hands-on: Create the skeleton of a tutorial via the command line
-> 
-> 1. Get the workflow id 
+>
+> 1. Get the workflow id
 >
 >    The id can be found on URL when running, editing or sharing the workflow (after `?id=`)
 >
@@ -266,7 +266,7 @@ If the workflow is not available on one of the previously listed Galaxy servers,
 >     2. Navigate to the `training-material/` folder with `cd`
 >
 > 4. Get planemo
-> 
+>
 >     - Option 1: Using Conda:
 >       1. Set up the conda environment
 >
@@ -275,7 +275,7 @@ If the workflow is not available on one of the previously listed Galaxy servers,
 >          1. Install conda (if not already installed): `make install-conda`
 >          2. (You may need to exit the terminal and re-open for conda to be recognised. Navigate back to the same place.)
 >          3. Create the `galaxy_training_material` conda environment: `make create-env`
->       
+>
 >       2. Activate the conda environment with `conda activate galaxy_training_material`
 >
 >     -  Option 2: Using pip by running `pip install planemo`
@@ -372,5 +372,5 @@ For the next times, you can make it quicker.
 >    > ### {% icon comment %} Serving the website locally
 >    > Want to learn how to see the change on the website locally? [Check out our dedicated tutorial]({% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
 >    {: .comment}
->    
+>
 {: .hands_on}
