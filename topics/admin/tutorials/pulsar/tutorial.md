@@ -669,7 +669,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.xml.j2
 >    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -15,6 +15,15 @@
+>    @@ -15,6 +15,16 @@
 >         </plugins>
 >         <destinations default="slurm">
 >             <destination id="local_destination" runner="local_plugin"/>
@@ -681,6 +681,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    +            <param id="remote_metadata">False</param>
 >    +            <param id="rewrite_parameters">True</param>
 >    +            <param id="transport">curl</param>
+>    +            <param id="outputs_to_working_directory">False</param>
 >    +        </destination>
 >             <destination id="slurm" runner="slurm">
 >                 <param id="singularity_enabled">true</param>
@@ -688,6 +689,10 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add pulsar destination"}
+>
+>    You'll notice we need to know a lot about the configuration of the remote end, this is an unfortunate requirement with pulsar. Changes to e.g. the staging directory need to be coordinated between Pulsar and Galaxy. That's fine if both are under your administration, but for a completely remote Pulsar it can be difficult.
+>
+>    Notably we also override `outputs_to_working_directory`, as this option is incompatible with running Pulsar, and, unnecessary. Pulsar already provides the same job isolation and safety that we request when we set that option by default in Galaxy's configuration.
 >
 > 2. Install the BWA and BWA-MEM tools, if needed.
 >
@@ -701,7 +706,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.xml.j2
 >    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -63,5 +63,7 @@
+>    @@ -64,5 +64,7 @@
 >         </resources>
 >         <tools>
 >             <tool id="testing" destination="dynamic_cores_time" resources="testing" />
@@ -717,13 +722,25 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >
 > 4. Finally run the Galaxy playbook in order to deploy the updated job configuration, and to restart Galaxy.
 >
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > ansible-playbook pulsar.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
 {: .hands_on}
+
+> ```bash
+> 1-pulsar.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
 
 
 # Testing Pulsar
 
 Now we will upload a small set of data to run bwa-mem with.
-
 
 > ### {% icon hands_on %} Hands-on: Testing the Pulsar destination
 >
@@ -755,13 +772,13 @@ Now we will upload a small set of data to run bwa-mem with.
 >
 {: .hands_on}
 
-You'll notice that the Pulsar server has received the job (all the way in Australia!) and now should be installing bwa-mem via conda. Once this is complete (which may take a while - first time only) the job will run. When it starts running it will realise it needs the *E. coli* genome from CVMFS and fetch that, and then results will be returned to Galaxy!
-
 > ```bash
-> systemctl --no-pager status pulsar
+> 2-run-job.sh
 > ```
 > {: data-test="true"}
 {: .hidden}
+
+You'll notice that the Pulsar server has received the job (all the way in Australia!) and now should be installing bwa-mem via conda. Once this is complete (which may take a while - first time only) the job will run. When it starts running it will realise it needs the *E. coli* genome from CVMFS and fetch that, and then results will be returned to Galaxy!
 
 How awesome is that? Pulsar in another continent with reference data automatically from CVMFS :)
 

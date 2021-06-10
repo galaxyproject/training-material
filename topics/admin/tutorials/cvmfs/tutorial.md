@@ -579,7 +579,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 {: .spoken data-visual="galaxy" data-target="s2id_field-uid-12_select a" data-action="click"}
 
 > ```bash
-> curl  --silent https://$(hostname -f)/api/genomes | grep bosTau -o
+> 1.sh
 > ```
 > {: data-test="true"}
 {: .hidden}

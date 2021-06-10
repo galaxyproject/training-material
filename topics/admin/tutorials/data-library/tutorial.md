@@ -130,7 +130,7 @@ There are multiple options for importing data from your server, we'll go through
 {: .code-2col}
 
 > ```bash
-> ls -al /libraries/
+> 1.sh
 > ```
 > {: data-test="true"}
 {: .hidden}
@@ -257,7 +257,7 @@ Let's try setting that up in our Galaxy!
 That's it! You should be able to see your newly created data library in your Galaxy.
 
 > ```bash
-> curl -H 'x-api-key: adminkey' -k https://localhost/api/libraries | grep 'Mouse sequencing project'
+> 2.sh
 > ```
 > {: data-test="true"}
 {: .hidden}
