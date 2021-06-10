@@ -465,7 +465,7 @@ Selenium is the end-to-end or integration testing framework that we use; so thes
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > The problem is that the tests are expecting a different HID than what is being made available to them. Since all the failing tests have to do with Lists, you might want to check out the ListCollectionCreator.
+>    > > The problem is that the tests are expecting a different HID (history identifier) than what is being made available to them. Since all the failing tests have to do with Lists, you might want to check out the ListCollectionCreator.
 >    > >
 >    > > For comparisons sake, open one of the other CollectionCreators, as well and see if you can spot anything that is amiss.
 >    > >
