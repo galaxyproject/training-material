@@ -478,7 +478,7 @@ Selenium is the end-to-end or integration testing framework that we use; so thes
 >    >
 >    > If you think you've got it, try running the tests locally again to be sure. In this simulated case, you can get by with just running one of the tests, but in reality, you should probably run all three Selenium tests to be sure that it's totally fixed.
 > 4. **Finishing up**
->    > Excellent! If you're here, you've found the problem, ran it locally, fixed the problem, ran it locally again without errors, and are ready to commit your change. Write a useful commit message like `Fix logic error in ListCollectionCreatory` or something similar, making sure it is clear what you've done.
+>    > Excellent! If you're here, you've found the problem, ran it locally, fixed the problem, ran it locally again without errors, and are ready to commit your change. Write a useful commit message like `Fix logic error in ListCollectionCreator` or something similar, making sure it is clear what you've done.
 >    > (See [Galaxy's contributor's guide](https://github.com/galaxyproject/galaxy/blob/dev/CONTRIBUTING.md#how-to-contribute) for details on how to write a useful and properly formatted commit message.)
 >    >
 >    > Selenium tests are in the bag!
