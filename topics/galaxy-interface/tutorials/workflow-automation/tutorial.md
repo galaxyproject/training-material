@@ -189,7 +189,7 @@ The `tutorial.ga` file defines the workflow in JSON format; if we are confident 
 
 Now we have a simple workflow, we can run it using `planemo run`. At this point you need to choose a Galaxy server on which you want the workflow to run. One of the big public servers would be a possible choice. You could also use a local Galaxy instance. Either way, once you've chosen a server, the next step is to get your API key.
 
-{% snippet faqs/galaxy/preferences_admin_api_key.md dev=true %}
+{% snippet faqs/galaxy/preferences_admin_api_key.md %}
 
 > ### {% icon hands_on %} Hands-on: Running our workflow
 >
