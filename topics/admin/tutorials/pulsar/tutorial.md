@@ -758,7 +758,7 @@ Now we will upload a small set of data to run bwa-mem with.
 You'll notice that the Pulsar server has received the job (all the way in Australia!) and now should be installing bwa-mem via conda. Once this is complete (which may take a while - first time only) the job will run. When it starts running it will realise it needs the *E. coli* genome from CVMFS and fetch that, and then results will be returned to Galaxy!
 
 > ```bash
-> systemctl --no-pager status pulsar
+> 1-pulsar.sh
 > ```
 > {: data-test="true"}
 {: .hidden}
