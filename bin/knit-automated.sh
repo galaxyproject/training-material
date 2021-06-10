@@ -3,7 +3,7 @@ DIR=/tmp/git-gat
 op="$1"
 
 declare -a tutorials
-tutorials=(ansible-galaxy singularity tool-management cvmfs data-library connect-to-compute-cluster job-destinations pulsar)
+tutorials=(ansible-galaxy singularity tool-management cvmfs data-library connect-to-compute-cluster job-destinations pulsar gxadmin monitoring tiaas reports)
 
 #echo "${tutorials[0]}"
 #exit 1;
@@ -40,6 +40,7 @@ if [[ "$op" == "export" ]]; then
 
 	# Then do the rest
 	for idx in "${!tutorials[@]}"; do
+		echo "Processing ${tutorials[$idx]}"
 		python3 bin/knit-frog.py \
 			topics/admin/tutorials/${tutorials[$idx]}/tutorial.md \
 			${DIR}/$(( idx + 1 ))-${tutorials[$idx]};
