@@ -2186,6 +2186,25 @@ node-deps: ## Install NodeJS and dependencies.
 
 ---
 
+### Automatically Reloading During Development
+
+The following command rebuilds the application on each change.
+
+```
+make client-watch
+```
+
+This is still a relatively slow process, an extra client development server can be started that proxies non-client requests
+to your Galaxy server and selectively reloads only what is needed during active development (hot module replacement or HMR).
+
+```
+make client-dev-server
+```
+
+Make sure to open Galaxy at http://localhost:8081 instead to point at the client proxy.
+
+---
+
 class: white
 ![What is Webpack](../../images/what-is-webpack.svg)
 
@@ -2227,6 +2246,65 @@ class: white
 ### Source Files
 
 ![Client Build Files](../../images/core_files_client_sources.plantuml.svg)
+
+---
+
+### ES6
+
+The client is built from JavaScript source files. We use ES6 JavaScript.
+
+A tutorial to help learn JavaScript generally might be https://www.w3schools.com/js/.
+
+For someone familiar with JavaScript but that wants a primer on the new language features in ES6, 
+https://www.w3schools.com/js/js_es6.asp may be more appropriate.
+
+---
+
+### Vue
+
+Vue.js is a reactive framework for building web client applications.
+
+We chose Vue.js over React initially because of its focus on allowing developers to incrementally or progressively replace pieces of complex existing applications.
+
+The idea behind Vue.js is fairly simple to pick up and there is a lot of great tutorials and videos available. https://vuejs.org/v2/guide/ is a really good jumping off point.
+
+---
+
+### Vuex
+
+> Vuex is a state management pattern + library for Vue.js applications. It serves as a centralized store for all the components in an application, with rules ensuring that the state can only be mutated in a predictable fashion.
+
+https://vuex.vuejs.org/
+
+---
+
+### Client Unit Tests
+
+https://jestjs.io/
+
+Configured in `client/src/jest/jest.config.js`.
+
+Vue tests are placed beside components in `client/src`, more tests in `client/test/qunit/tests` and `client/test/jest/standalone/`.
+
+---
+
+### Vue Test Utils
+
+> Vue Test Utils is the official unit testing utility library for Vue.js.
+
+https://vue-test-utils.vuejs.org/
+
+Really nice reference library documentation. A lot of helpers and concepts to unit test Vue components.
+
+---
+
+### Client Unit Test Design Tips
+
+https://github.com/galaxyproject/galaxy/tree/dev/client/docs/src/component-design/unit-testing
+
+- Clearly document the intent of your test
+- Implement logic in pure functions when possible
+- Wrap native browser resources in a function so they can be easily mocked
 
 ---
 
