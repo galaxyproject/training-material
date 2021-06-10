@@ -258,7 +258,7 @@ If the workflow is not available on one of the previously listed Galaxy servers,
 >
 > 2. Get your API key on the Galaxy instance
 >
->    {% snippet faqs/galaxy/user_get_api_key.md %}
+>    {% snippet faqs/galaxy/preferences_admin_api_key.md %}
 >
 > 3. (If not done yet) Get the Galaxy Training Material repository locally and move in it
 >
@@ -351,7 +351,7 @@ For the next times, you can make it quicker.
 > 4. Create a Zenodo record with the input data
 > 5. Generate the skeleton of your tutorial
 >
->    - Option 1: from the [PTDK webserver](https://ptdk.herokuapp.com/)
+>    - Option 1: from the [PTDK webserver](https://ptdk.herokuapp.com/) and get the skeleton in the training material
 >    - Option 2: from a workflow located on a Galaxy
 >
 >      ```
