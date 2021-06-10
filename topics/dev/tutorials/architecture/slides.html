@@ -2145,7 +2145,8 @@ template: left-aligned
 
 ### Client Directories
 
-- Source stylesheets and JavaScript (ES6) in `client/galaxy/{style|scripts}`
+- Source JavaScript for the client is in `client/src`.
+- Source stylesheets are in `client/src/style`.
 - "Packed" bundles served by Galaxy stored in `static/dist`
   - `run.sh` uses `git diff` to try to determine if client needs to be built before starting Galaxy
   - webpack builds these "compiled" artifacts
@@ -2172,11 +2173,13 @@ client-watch: node-deps ## Rebuild client on each change.
 client-format: node-deps ## Reformat client code
   cd client && yarn run prettier
 
-client-eslint: node-deps # Run client linting
-  cd client && yarn run eslint
+client-lint: client-eslint client-format-check ## ES lint and check format of client
 
-client-test: node-deps  ## Run JS unit tests via Karma
+client-test: node-deps  ## Run JS unit tests
   cd client && yarn run test
+
+client-test-watch: client ## Watch and run all client unit tests on changes
+  cd client && yarn run jest-watch
 
 node-deps: ## Install NodeJS and dependencies.
 ```
@@ -2207,11 +2210,11 @@ class: white
 
 ### Stylesheets
 
-- Galaxy stylesheets are generally defined using the SCSS syntax
+- Galaxy shared stylesheets are generally defined using the SCSS syntax
 - SCSS is a high-level superset of CSS - https://sass-lang.com/documentation/syntax
 - `sass` is leveraged by webpack to convert these styles to native CSS at client build time
 - Rebuild style with `make style`
-- Galaxy's SCSS files can be found in `client/galaxy/style/scss/`
+- Galaxy's SCSS files can be found in `client/src/style/scss/`
 
 ---
 
