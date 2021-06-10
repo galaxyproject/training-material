@@ -854,7 +854,7 @@ Start with the router and surrond it with each layer of configured middleware.
 ---
 
 template: left-aligned
-class: has-quote, enlarge150
+class: enlarge150
 
 ### ASGI Middleware
 
@@ -865,7 +865,7 @@ https://asgi.readthedocs.io/en/latest/specs/main.html#middleware
 ---
 
 template: left-aligned
-class: has-quote, enlarge150
+class: enlarge150
 
 ### Starlette Middleware
 
@@ -977,7 +977,7 @@ Following this line:
 
 `include_all_package_routers(app, 'galaxy.webapps.galaxy.api')`
 
-to the file 
+to the file
 
 `lib/galaxy/webapps/base/api.py`
 
@@ -1215,7 +1215,7 @@ class FastAPIRoles:
     @router.post("/api/roles", require_admin=True)
     def create(self, trans: ProvidesUserContext = DependsOnTrans, role_definition_model: RoleDefinitionModel = Body(...)) -> RoleModel:
         role = self.role_manager.create_role(trans, role_definition_model)
-        return role_to_model(trans, role)    
+        return role_to_model(trans, role)
 ```
 
 ---
@@ -1312,7 +1312,7 @@ class RoleAPIController(BaseGalaxyAPIController):
         expand_json_keys(payload, ["user_ids", "group_ids"])
         role_definition_model = RoleDefinitionModel(**payload)
         role = self.role_manager.create_role(trans, role_definition_model)
-        return role_to_model(trans, role)    
+        return role_to_model(trans, role)
 ```
 
 ---
@@ -1352,13 +1352,13 @@ Not only does `app` know and do too much, it is also used way too many places. E
 
 ```python
 class DatasetCollectionManager:
- 
+
      def __init__(self, app):
         self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
         self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
         self.model = app.model
         self.security = app.security
- 
+
         self.hda_manager = hdas.HDAManager(app)
         self.history_manager = histories.HistoryManager(app)
         self.tag_handler = tags.GalaxyTagHandler(app.model.context)
@@ -1375,13 +1375,13 @@ class DatasetCollectionManager:
 
 ```python
 class DatasetCollectionManager:
- 
+
      def __init__(self, app: UniverseApplication):
         self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
         self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
         self.model = app.model
         self.security = app.security
- 
+
         self.hda_manager = hdas.HDAManager(app)
         self.history_manager = histories.HistoryManager(app)
         self.tag_handler = tags.GalaxyTagHandler(app.model.context)
@@ -1409,13 +1409,13 @@ Dependencies now closer to a DAG - `DatasetCollectionManager` no longer annotate
 
 ```python
 class DatasetCollectionManager:
- 
+
      def __init__(self, app: StructuredApp):
         self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
         self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
         self.model = app.model
         self.security = app.security
- 
+
         self.hda_manager = hdas.HDAManager(app)
         self.history_manager = histories.HistoryManager(app)
         self.tag_handler = tags.GalaxyTagHandler(app.model.context)
@@ -1435,13 +1435,13 @@ Using app to construct a manager for dealing with dataset collections.
 
 ```python
 class DatasetCollectionManager:
- 
+
      def __init__(self, app: StructuredApp):
         self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
         self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
         self.model = app.model
         self.security = app.security
- 
+
         self.hda_manager = hdas.HDAManager(app)
         self.history_manager = histories.HistoryManager(app)
         self.tag_handler = tags.GalaxyTagHandler(app.model.context)
@@ -1461,13 +1461,13 @@ class: reduce90
 
 ```python
 class DatasetCollectionManager:
- 
+
      def __init__(self, app: StructuredApp):
         self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
         self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
         self.model = app.model
         self.security = app.security
- 
+
         self.hda_manager = hdas.HDAManager(app)
         self.history_manager = histories.HistoryManager(app)
         self.tag_handler = tags.GalaxyTagHandler(app.model.context)
@@ -1500,7 +1500,7 @@ class DatasetCollectionManager:
         self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
         self.model = model
         self.security = security
- 
+
         self.hda_manager = hda_manager
         self.history_manager = history_manager
         self.tag_handler = tag_handler
@@ -1645,13 +1645,13 @@ class: reduce90
  class FastAPITags:
 -    manager: TagsManager = Depends(get_tags_manager)
 +    manager: TagsManager = depends(TagsManager)
- 
+
      @router.put(
          '/api/tags',
 @@ -58,11 +54,8 @@ def update(
          self.manager.update(trans, payload)
- 
- 
+
+
 -class TagsController(BaseAPIController):
 -
 -    def __init__(self, app):
@@ -1661,7 +1661,7 @@ class: reduce90
 +    manager: TagsManager = depends(TagsManager)
 ```
 
-Building dependency injection into our application and not relying on FastAPI allows for dependency injection that is *less verbose*, available uniformly across the application, 
+Building dependency injection into our application and not relying on FastAPI allows for dependency injection that is *less verbose*, available uniformly across the application,
 *works for the legacy controllers identically*.
 
 ---
