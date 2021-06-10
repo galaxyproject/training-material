@@ -690,6 +690,10 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    ```
 >    {: data-commit="Add pulsar destination"}
 >
+>    You'll notice we need to know a lot about the configuration of the remote end, this is an unfortunate requirement with pulsar. Changes to e.g. the staging directory need to be coordinated between Pulsar and Galaxy. That's fine if both are under your administration, but for a completely remote Pulsar it can be difficult.
+>
+>    Notably we also override `outputs_to_working_directory`, as this option is incompatible with running Pulsar, and, unnecessary. Pulsar already provides the same job isolation and safety that we request when we set that option by default in Galaxy's configuration.
+>
 > 2. Install the BWA and BWA-MEM tools, if needed.
 >
 >    {% snippet topics/admin/faqs/install_tool.md query="bwa" name="Map with BWA-MEM" section="Mapping" %}
