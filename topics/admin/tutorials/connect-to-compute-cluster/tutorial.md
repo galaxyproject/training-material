@@ -2,6 +2,8 @@
 layout: tutorial_hands_on
 
 title: "Connecting Galaxy to a compute cluster"
+redirect_from:
+- /topics/admin/tutorials/job-metrics/tutorial
 questions:
   - How to connect Galaxy to a compute cluster?
   - What are job metrics?
