@@ -4,11 +4,15 @@ layout: tutorial_hands_on
 title: "Connecting Galaxy to a compute cluster"
 questions:
   - How to connect Galaxy to a compute cluster?
+  - What are job metrics?
+  - What sort of information can I collect?
+  - Where can I find this information?
 objectives:
   - Be familiar with the basics of installing, configuring, and using Slurm
   - Understand all components of the Galaxy job running stack
   - Understand how the `job_conf.xml` file controls Galaxy's jobs subsystem
   - Have a strong understanding of Galaxy job destinations
+  - Understand the purpose and function of Galaxy job metrics
 time_estimation: "1h"
 key_points:
   - Galaxy supports a variety of different DRMs.
@@ -543,6 +547,124 @@ After the job has been purged from the active jobs database, a bit of informatio
 > - `galaxy_venv_dir`
 {: .tip}
 
+# Recording Job Metrics
+
+Job metrics record properties of the jobs that are executed, information that can help you plan for trainings or plan capacity for further expansions of your Galaxy server. These properties include details such as the number of slots (cores) assigned to a job, the amount of memory available, details about the node on which the job executed, environment variables that were set at execution time, and more.
+
+Galaxy collects and records very few job metrics by default, enabling more metrics plugins is recommended for any cluster-enabled Galaxy deployment. The metrics are stored in the Galaxy database, which can be queried externally to generate reports and debug job problems.
+
+Some work has been done to try to analyse job runtime metrics to optimise cluster allocation based on job inputs, and enhance job submission ({% cite Tyryshkina_2019 %}). More work will be done in this area.
+
+> ### {% icon comment %} Note
+>
+> Job metrics are only visible to Galaxy *admin users*, unless you set `expose_potentially_sensitive_job_metrics: true`, like UseGalaxy.eu does. EU's intention with this is to empower users and make everything as transparent as possible.
+>
+> This is the only option controlling which metrics general users see. Admins see all metrics collected, and by default general users see none.
+> However most of the metrics exposed by this setting are quite safe (e.g. cgroups information on resource consumption, walltime, etc.)
+>
+{: .comment}
+
+## Setting up Galaxy
+
+By default, Galaxy enables the `core` metrics:
+
+![screenshot of galaxy metrics](../../images/job-metrics-basic.png)
+
+These include very basic submission parameters. We want more information!
+
+> ### {% icon hands_on %} Hands-on: Setting up the job metrics plugin configuration
+>
+> 1. Edit the **global** (for all hosts) group variables file, `group_vars/all.yml`:
+>
+>    > ### {% icon details %} Why are we editing "all" instead of "galaxyservers" vars?
+>    > Both Galaxy and Pulsar use job metrics plugins, and when we configure Pulsar later, we will want it to have the same metrics plugin configuration as Galaxy. Putting this variable in `all.yml` will allow us to refer to it later when setting the corresponding variable for Pulsar.
+>    {: .details}
+>
+>    The variable we'll set is named `galaxy_job_metrics_plugins`:
+>
+>    {% raw %}
+>    ```diff
+>    --- a/group_vars/all.yml
+>    +++ b/group_vars/all.yml
+>    @@ -2,3 +2,13 @@
+>     cvmfs_role: client
+>     galaxy_cvmfs_repos_enabled: config-repo
+>     cvmfs_quota_limit: 500
+>    +
+>    +# Galaxy vars that will be reused by Pulsar
+>    +galaxy_job_metrics_plugins:
+>    +  - type: core
+>    +  - type: cpuinfo
+>    +  - type: meminfo
+>    +  - type: uname
+>    +  - type: env
+>    +  - type: cgroup
+>    +  - type: hostname
+>    {% endraw %}
+>    ```
+>    {: data-commit="Configure job metrics plugins"}
+>
+> 2. Run your Galaxy playbook
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
+{: .hands_on}
+
+Currently, the job metrics plugin configuration is stored in a separate configuration file from Galaxy's main configuration file (`galaxy.yml`). By setting `galaxy_job_metrics_plugins`, we instructed the `galaxyproject.galaxy` role to create this file, and update the option (`job_metrics_config_file`) in `galaxy.yml` that sets the path to this file. You can inspect the contents of the new config file on your Galaxy server:
+
+> ### {% icon code-in %} Input: Bash
+> ```bash
+> cat /srv/galaxy/config/job_metrics_conf.yml
+> ```
+{: .code-in}
+
+> ### {% icon code-out %} Output: Bash
+> ```yaml
+> ---
+> ##
+> ## This file is managed by Ansible.  ALL CHANGES WILL BE OVERWRITTEN.
+> ##
+> -   type: core
+> -   type: cpuinfo
+> -   type: meminfo
+> -   type: uname
+> -   type: env
+> -   type: cgroup
+> -   type: hostname
+> ```
+{: .code-out.code-max-300}
+
+
+## Generating Metrics
+
+With this, the job metrics collection and recording should be set up. Now when you run a job, you will see many more metrics:
+
+> ### {% icon hands_on %} Hands-on: Generate some metrics
+>
+> 1. Run a job (any tool is fine, even upload)
+>
+> 2. View the information of the output dataset ({% icon galaxy-info %})
+>
+{: .hands_on}
+
+![advanced metrics](../../images/job-metrics-advanced.png)
+
+
+## What should I collect?
+
+There is not a good rule we can tell you, just choose what you think is useful or will be. Numeric parameters are "cheaper" than the text parameters (like uname to store), eventually you may find yourself wanting to remove old job metrics if you decide to collect the environment variables or similar.
+
+
+## Accessing the data
+
+You can access the data via BioBlend ([`JobsClient.get_metrics`](https://bioblend.readthedocs.io/en/latest/api_docs/galaxy/all.html#bioblend.galaxy.jobs.JobsClient.get_metrics)), or via SQL with [`gxadmin`](https://usegalaxy-eu.github.io/gxadmin/#/README.query?id=query-tool-metrics).
+
+
 {% snippet topics/admin/faqs/missed-something.md step=6 %}
 
 ## Further Reading
@@ -552,5 +674,5 @@ After the job has been purged from the active jobs database, a bit of informatio
 - The [Distributed Resource Management Application API (DRMAA)](https://www.drmaa.org/) page contains the DRMAA specification as well as documentation for various implementations. It also includes a list of DRMs supporting DRMAA.
 - The [Slurm documentation](http://slurm.schedmd.com/) is extensive and covers all the features and myriad of ways in which you can configure slurm.
 - [PSNC slurm-drmaa](http://apps.man.poznan.pl/trac/slurm-drmaa)'s page includes documentation and the SVN repository, which has a few minor fixes since the last released version. PSNC also wrote the initial implementations of the DRMAA libraries for PBSPro and LSF, so all three are similar.
-- [Our own fork of slurm-drmaa](http://github.com/natefoo/slurm-drmaa) includes support for Slurms `-M`/`--clusters` multi-cluster functionality.
+- [Our own fork of slurm-drmaa](http://github.com/natefoo/slurm-drmaa) includes support for Slurms `-M`/`--clusters` multi-cluster functionality and newer versions of Slurm.
 - [Slurm Accounting documentation](http://slurm.schedmd.com/accounting.html) explains how to set up SlurmDBD.
