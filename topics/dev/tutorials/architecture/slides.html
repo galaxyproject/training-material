@@ -1059,7 +1059,7 @@ Start with the router and surrond it with each layer of configured middleware.
 ---
 
 template: left-aligned
-class: has-quote, enlarge150
+class: enlarge150
 
 ### ASGI Middleware
 
@@ -1070,7 +1070,7 @@ https://asgi.readthedocs.io/en/latest/specs/main.html#middleware
 ---
 
 template: left-aligned
-class: has-quote, enlarge150
+class: enlarge150
 
 ### Starlette Middleware
 
@@ -1182,7 +1182,7 @@ Following this line:
 
 `include_all_package_routers(app, 'galaxy.webapps.galaxy.api')`
 
-to the file 
+to the file
 
 `lib/galaxy/webapps/base/api.py`
 
@@ -1420,7 +1420,7 @@ class FastAPIRoles:
     @router.post(&quot;/api/roles&quot;, require_admin=True)
     def create(self, trans: ProvidesUserContext = DependsOnTrans, role_definition_model: RoleDefinitionModel = Body(...)) -&gt; RoleModel:
         role = self.role_manager.create_role(trans, role_definition_model)
-        return role_to_model(trans, role)    
+        return role_to_model(trans, role)
 ```
 
 ---
@@ -1517,7 +1517,7 @@ class RoleAPIController(BaseGalaxyAPIController):
         expand_json_keys(payload, [&quot;user_ids&quot;, &quot;group_ids&quot;])
         role_definition_model = RoleDefinitionModel(**payload)
         role = self.role_manager.create_role(trans, role_definition_model)
-        return role_to_model(trans, role)    
+        return role_to_model(trans, role)
 ```
 
 ---
@@ -1533,13 +1533,102 @@ class: enlarge150
 
 ---
 
-## Dependency Injection
+## `app` and Dependency Injection
 
 *The architecture of connecting Galaxy components.*
 
 ---
 
 ![Big Interconnected App Python 2](../../images/app_py2.plantuml.svg)
+
+---
+
+### A God object
+
+&gt; &quot;a God object is an object that knows too much or does too much. The God object is an example of an anti-pattern and a code smell.&quot;
+
+https://en.wikipedia.org/wiki/God_object
+
+Not only does `app` know and do too much, it is also used way too many places. Every interesting component, every controller, the web transaction, etc.. has a reference to `app`.
+
+---
+
+### A Typical Usage
+
+```python
+class DatasetCollectionManager:
+
+     def __init__(self, app):
+        self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
+        self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
+        self.model = app.model
+        self.security = app.security
+
+        self.hda_manager = hdas.HDAManager(app)
+        self.history_manager = histories.HistoryManager(app)
+        self.tag_handler = tags.GalaxyTagHandler(app.model.context)
+        self.ldda_manager = lddas.LDDAManager(app)
+```
+
+---
+
+![Big Interconnected App Python 3 - no right](../../images/app_types_no_interface.plantuml.svg)
+
+---
+
+## Problematic Dependnecy Graph
+
+```python
+class DatasetCollectionManager:
+
+     def __init__(self, app: UniverseApplication):
+        self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
+        self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
+        self.model = app.model
+        self.security = app.security
+
+        self.hda_manager = hdas.HDAManager(app)
+        self.history_manager = histories.HistoryManager(app)
+        self.tag_handler = tags.GalaxyTagHandler(app.model.context)
+        self.ldda_manager = lddas.LDDAManager(app)
+```
+
+`UniverseApplication` creates a `DatasetCollectionManager` for the application and `DatasetCollectionManager` imports and annotates
+the `UniverseApplication` as a requirement. This creates an unfortunate dependency loop.
+
+**Dependencies should form a DAG (directed acyclic graph)**.
+
+---
+
+![Big Interconnected App with Python 3 Types](../../images/app_types.plantuml.svg)
+
+---
+
+## Why an Interface?
+
+Dependencies now closer to a DAG - `DatasetCollectionManager` no longer annotated with the type `UniverseApplication`! Imports are cleaner.
+
+---
+
+## Benefits of Typing
+
+```python
+class DatasetCollectionManager:
+
+     def __init__(self, app: StructuredApp):
+        self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
+        self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
+        self.model = app.model
+        self.security = app.security
+
+        self.hda_manager = hdas.HDAManager(app)
+        self.history_manager = histories.HistoryManager(app)
+        self.tag_handler = tags.GalaxyTagHandler(app.model.context)
+        self.ldda_manager = lddas.LDDAManager(app)
+```
+
+- mypy provides robust type checking.
+- IDE can provide hints to make developing this class and usage of this class easier.
 
 ---
 
@@ -1551,13 +1640,13 @@ Using app to construct a manager for dealing with dataset collections.
 
 ```python
 class DatasetCollectionManager:
- 
-     def __init__(self, app):
+
+     def __init__(self, app: StructuredApp):
         self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
         self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
         self.model = app.model
         self.security = app.security
- 
+
         self.hda_manager = hdas.HDAManager(app)
         self.history_manager = histories.HistoryManager(app)
         self.tag_handler = tags.GalaxyTagHandler(app.model.context)
@@ -1577,13 +1666,13 @@ class: reduce90
 
 ```python
 class DatasetCollectionManager:
- 
-     def __init__(self, app):
+
+     def __init__(self, app: StructuredApp):
         self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
         self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
         self.model = app.model
         self.security = app.security
- 
+
         self.hda_manager = hdas.HDAManager(app)
         self.history_manager = histories.HistoryManager(app)
         self.tag_handler = tags.GalaxyTagHandler(app.model.context)
@@ -1594,37 +1683,6 @@ class DatasetCollectionManager:
   - What parts of app are being used?
   - How do we construct a smaller app with just those pieces?
   - How do we stub out classes cleanly when we're creating the dependent objects internally.
-
----
-
-class: reduce90
-
-### Adding Typing
-
-.code[```python
-class DatasetCollectionManager:
-    def __init__(
-        self,
-        model: GalaxyModelMapping,
-        security: IdEncodingHelper,
-        hda_manager: HDAManager,
-        history_manager: HistoryManager,
-        tag_handler: GalaxyTagHandler,
-        ldda_manager: LDDAManager,
-    ):
-        self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
-        self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
-        self.model = model
-        self.security = security
- 
-        self.hda_manager = hda_manager
-        self.history_manager = history_manager
-        self.tag_handler = tag_handler
-        self.ldda_manager = ldda_manager
-```]
-
-- mypy provides robust typing!
-- IDE can provide hints to make developing this code easier.
 
 ---
 
@@ -1647,7 +1705,7 @@ class DatasetCollectionManager:
         self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
         self.model = model
         self.security = security
- 
+
         self.hda_manager = hda_manager
         self.history_manager = history_manager
         self.tag_handler = tag_handler
@@ -1792,13 +1850,13 @@ class: reduce90
  class FastAPITags:
 -    manager: TagsManager = Depends(get_tags_manager)
 +    manager: TagsManager = depends(TagsManager)
- 
+
      @router.put(
          '/api/tags',
 @@ -58,11 +54,8 @@ def update(
          self.manager.update(trans, payload)
- 
- 
+
+
 -class TagsController(BaseAPIController):
 -
 -    def __init__(self, app):
@@ -1808,7 +1866,7 @@ class: reduce90
 +    manager: TagsManager = depends(TagsManager)
 ```
 
-Building dependency injection into our application and not relying on FastAPI allows for dependency injection that is *less verbose*, available uniformly across the application, 
+Building dependency injection into our application and not relying on FastAPI allows for dependency injection that is *less verbose*, available uniformly across the application,
 *works for the legacy controllers identically*.
 
 ---
@@ -1854,6 +1912,19 @@ def set_metadata(hda_manager: HDAManager, ldda_manager: LDDAManager, dataset_id,
         dataset = ldda_manager.by_id(dataset_id)
     dataset.datatype.set_meta(dataset)
 ```
+
+---
+
+![Decomposed App](../../images/app_decomposed.plantuml.svg)
+
+---
+
+### Tips for Designing New Galaxy Backend components
+
+- Consume only the related components you need to - avoid `app` when possible.
+- Annotate inputs to the component with Python types.
+- Use interface types to shield consumers from implementation details.
+- Rely on Galaxy's dependency injection to construct the component and provide it to consumers.
 
 ---
 
