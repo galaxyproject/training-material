@@ -421,7 +421,7 @@ Selenium is the end-to-end or integration testing framework that we use; so thes
 > ### {% icon hands_on %} Hands-on: Fixing a failing Selenium test
 >
 > 1. **Finding the failing test on GitHub**
->    > There may be actually a few failing Selenium tests, but the good new is, they are the result of only one little error. The failing tests on GitHub says "Selenium Test 3.7, 2". When you click on the details of this one, it's not always very clear which test is causing the failure, but if you download the artifacts, it's very clear which tests have failed.
+>    > There may be actually a few failing Selenium tests, but the good news is, they are the result of only one little error. The failing tests on GitHub says "Selenium Test 3.7, 2". When you click on the details of this one, it's not always very clear which test is causing the failure, but if you download the artifacts, it's very clear which tests have failed.
 >    >
 >    > Try to identify which tests are failing based on artifacts you downloaded.
 >    >
