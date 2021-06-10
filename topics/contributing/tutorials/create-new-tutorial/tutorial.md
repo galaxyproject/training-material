@@ -55,7 +55,9 @@ Here you will learn how to create a new tutorial by developing a small tutorial 
 
 # Define the topic
 
-The first question we need to answer is in which topic to place our new tutorial. This can be tricky. When we structured the repository, we decided to use the categories that are used in the [ToolShed](https://toolshed.g2.bx.psu.edu/) as our initial list of topics. Since every tool uploaded to the ToolShed must be in at least one category, you can look at the main tools in your tutorial and see which categories they are placed in within the ToolShed. This can provide a guide for where you might put your new tutorial. For example, this tutorial will rely on the NCBI Blast+ tool:
+The first question we need to answer is in which topic to place our new tutorial. This can be tricky. When we structured the repository, we decided that each training material should be related to a topic. 
+
+We decided use the categories that are used in the [ToolShed](https://toolshed.g2.bx.psu.edu/) as our initial list of topics. Since every tool uploaded to the ToolShed must be in at least one category, you can look at the main tools in your tutorial and see which categories they are placed in within the ToolShed. This can provide a guide for where you might put your new tutorial. For example, this tutorial will rely on the NCBI Blast+ tool:
 
 > ### {% icon hands_on %} Hands-on: Defining the topic for the tutorial
 >
@@ -78,21 +80,9 @@ The first question we need to answer is in which topic to place our new tutorial
 > Want to create a new topic? [Check out our tutorial to create a new topic]({% link topics/contributing/tutorials/create-new-topic/tutorial.md %})
 {: .comment}
 
-# Keep track of the changes
+# Store a tutorial
 
-The material is stored in a [GitHub repository]({{ site.github_repository }}), a code hosting platform for version control and collaboration. So to develop training material, we are following the [GitHub flow](https://guides.github.com/introduction/flow/), which is based on fork, branches, and pull requests.
-
-This can be done online via the GitHub interface or locally on your computer via command-line.
-
-> ### {% icon comment %} Learning how to contribute
-> Want to learn how to contribute? Check our tutorials:
-> - [Contributing with GitHub via its interface]({% link topics/contributing/tutorials/github-interface-contribution/tutorial.md %})
-> - [Contributing with GitHub via command-line]({% link topics/contributing/tutorials/github-command-line-contribution/tutorial.md %})
-{: .comment}
-
-# Create the directory for the tutorial
-
-Each training material is related to a topic. All training materials (slides, tutorials, ...) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to exome sequencing analysis). Each topic have the following structure:
+All training materials (slides, tutorials, ...) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to transcriptomics analysis). Each topic have the following structure:
 
 ```
 ├── README.md
@@ -113,42 +103,43 @@ Each training material is related to a topic. All training materials (slides, tu
 │   │   │   ├── tour.yaml
 ```
 
-Once the topic has been chosen and you set up your contribution environment, you can create the tutorial. An ideal tutorial in the Galaxy Training Network contains:
+Once the topic has been chosen, we can create the tutorial. An ideal tutorial in the Galaxy Training Network contains:
 - a tutorial file `tutorial.md` written in Markdown with hands-on
 - an optional slides file `slides.md` in Markdown with slides to support the tutorial
-- a directory `tours` with Galaxy Interactive Tours to reproduce the tutorial
 - a directory `workflows` with workflows extracted from the tutorial
 - a YAML file `data-library.yaml`  with the links to the input data needed for the tutorial
 
-The most important file is the `tutorial.md` where the content of the tutorial is. The other files are there to support the tutorial and make it robust and usable across many environments.
+The most important file is the `tutorial.md` where the content of the tutorial is. The other files are not mandatory. They are there to support the tutorial and make it robust and usable across many environments. But they can help a lot in the development of new tutorial.
 
-> ### {% icon hands_on %} Hands-on: Create all the required files and folders structures automatically
+# Create the workflow
+
+Our tutorials try to follow the "learn by doing" approach; they combine both theoretical and practical sections done on Galaxy.
+
+Most of tutorials explain step-by-step a data analysis by running the tools. The steps taken in the tutorial can be represented as a workflow.
+
+Before writing the tutorial, it is a good practice to get a workflow with the different steps that will be run with the tutorial. The workflow does not have to be the final one but at least the major steps. It helps to get a direction for the tutorial but also to generate a skeleton of the tutorial as we will see later.
+
+> ### {% icon comment %} Use tools that are available on the ToolShed
+> We recommmend you to use in your workflows, specially for training, tools that are available on the Galaxy ToolShed.
+{: .comment}
+
+
+> ### {% icon hands_on %} Hands-on: Defining the topic for the tutorial
 >
-> 1. Run (by adapting the information between the quotes)
+> 1. Go to your favorite Galaxy server
+> 2. Create a workflow with the different steps (tools) of your tutorial either from scratch or from an existing history
 >
->    ```
->    $ planemo training_init \
->             --topic_name "my-topic" \
->             --tutorial_name "my-new-tutorial" \
->             --tutorial_title "Title of the tutorial" \
->             --hands_on
->    ```
+>    {% snippet faqs/galaxy/workflows_create_new.md %}
 >
-> 2. Check that a new directory (with your tutorial name) has been generated in the topic folder
-> 3. Make sure that Jekyll is running
+>    {% snippet faqs/galaxy/workflows_extract_from_history.md %}
 >
->    > ### {% icon comment %} Jekyll
->    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
->    {: .comment}
->
-> 2. Check if the tutorial has been correctly added at [http://localhost:4000/training-material/](http://localhost:4000/training-material/)
+> 3. Add the topic name as a Tag and the tutorial title as Annotation/Notes to the workflow using the workflow editor
 {: .hands_on}
 
-# A toy dataset
 
-Our tutorials try to follow the "learn by doing" approach; they combine both theoretical and practical sections. The practical sections (or hands-on) are supposed to be done on Galaxy.
+# Get a toy dataset
 
-The first task is to select some data to use for the Hands-on sections. The selected data must be informative enough to illustrate the meaning of using a tool or a given technique, but not too big to require long waiting times for processing during a workshop. Upload and download of files into and out of Galaxy is usually quick, but the time taken for a tool to run can be long. Tool run times of no more than 10-15 mins are recommended. Typically, the selected data should be the informative subset of a full real-life dataset.
+To run the different steps, the tutorial needs some data. The selected data must be informative enough to illustrate the meaning of using a tool or a given technique, but not too big to require long waiting times for processing during a workshop. Upload and download of files into and out of Galaxy is usually quick, but the time taken for a tool to run can be long. Tool run times of no more than 10-15 mins are recommended. Typically, the selected data should be the informative subset of a full real-life dataset.
 
 Below we describe two examples of how toy datasets were generated for tutorials:
 
@@ -201,6 +192,110 @@ We would then develop the tutorial and test it on this toy dataset. Once we were
 > 15. Paste the link in `zenodo_link` in the tutorial header
 {: .hands_on}
 
+# Create the skeleton of the tutorial
+
+Once we have the workflows and toy dataset (optionally already on Zenodo), we can generate the tutorial folder, including the `tutorial.md`.
+
+Writing the tutorial while adding the different tools and their parameters and following good formatting can be quite cumbersome. To help in that process, we developed a training development kit available with [Planemo](https://planemo.readthedocs.io/en/latest/index.html). The tool has several commands. But the main one can be used to create the skeleton of a tutorial (folder, well located, with good structure). It can also take a workflow as input, add it to the `workflows` folder. But more interesting, the tool can extract from the workflow and add in the `tutorial.md` file the different steps with tool to run and the parameters to select. If a Zenodo URL is provided, it also created the `data-library.yaml` file.
+
+This tool can be used via the command-line but also via a [webserver](https://ptdk.herokuapp.com/). The webserver can take a public workflow that is avialable on [usegalaxy.org](https://usegalaxy.org), [usegalaxy.eu](https://usegalaxy.eu) or [usegalaxy.org.au](https://usegalaxy.org.au).
+
+> ### {% icon hands_on %} Hands-on: Create the skeleton of a tutorial using the webserver
+>
+> 1. Make the workflow public
+>
+>    {% snippet faqs/galaxy/workflows_publish.md %}
+>
+> 2. Copy the workflow id that can be found in the URL of the current page (after `?id=`)
+> 3. Open the [PTDK webserver](https://ptdk.herokuapp.com/)
+> 4. Fill in the information
+>    - Tutorial name, the name will be the name of the folder of the tutorial
+>    - Tutorial title
+>    - Galaxy instance with the public workflow
+>    - Id of the workflow
+>    - (Not mandatory) Zenodo URL with the input data
+> 5. Click on **Submit**
+> 6. Download the generated archive 
+> 
+>    This archive constains the tutorial skeleton including:
+>    - tutorial content, tutorial.md file, filled with all steps from the workflow and their parameters
+>    - its workflow (workflow folder)
+>    - a data_library.yaml file if Zenodo link was provided
+>     Create a GitHub account
+> 
+> 7. Add the new material to Galaxy Training Material by unzip the downloaded archive in the tutorials folder of the topic for the new tutorial
+>
+>    > ### {% icon comment %} Using the GitHub interface
+>    >
+>    > Prefer to use the GitHub interface?
+>    > 
+>    > 1. Unzip the downloaded archive
+>    > 2. Edit the content of the `tutorial.md` (as explained below)
+>    > 3. Go to the GitHub repository of the Training Material
+>    > 4. Fork the GitHub repository
+>    > 5. Click on `topics`
+>    > 6. Select the topic for the new tutorial
+>    > 7. Go to `tutorials`
+>    > 8. Click on **Create new file**
+>    > 9. Type `name/tutorial.md`, replacing "name" by the name of your tutorial (not the title)
+>    > 10. Copy the content of downloaded and edited `tutorial.md` file there
+>    > 11. Fill the **Commit new file** form
+>    > 12. Create a new branch using the name of the tutorial
+>    > 13. Click on **Propose new file**
+>    > 14. Open a Pull Request, as explained in our tutorial
+>    > 15. Add the workflow file (in `workflow` folder) by updating the Pull Request
+>    {: .comment}
+>
+{: .hands_on}
+
+If the workflow is not available on one of the previously listed Galaxy servers, we recommend you to run the tool via the command line:
+
+> ### {% icon hands_on %} Hands-on: Create the skeleton of a tutorial via the command line
+> 
+> 1. Get the workflow id 
+>
+>    The id can be found on URL when running, editing or sharing the workflow (after `?id=`)
+>
+> 2. Get your API key on the Galaxy instance
+>
+>    {% snippet faqs/galaxy/user_get_api_key.md %}
+>
+> 3. (If not done yet) Get the Galaxy Training Material repository locally and move in it
+>
+>     1. (If not done yet) Clone the training material GitHub repository: `git clone https://github.com/galaxyproject/training-material.git`
+>     2. Navigate to the `training-material/` folder with `cd`
+>
+> 4. Get planemo
+> 
+>     - Option 1: Using Conda:
+>       1. Set up the conda environment
+>
+>          It will install some needed tools (ruby, nodejs, etc) in a protected environment, without interfering with the existing tools or versions.
+>
+>          1. Install conda (if not already installed): `make install-conda`
+>          2. (You may need to exit the terminal and re-open for conda to be recognised. Navigate back to the same place.)
+>          3. Create the `galaxy_training_material` conda environment: `make create-env`
+>       
+>       2. Activate the conda environment with `conda activate galaxy_training_material`
+>
+>     -  Option 2: Using pip by running `pip install planemo`
+>
+> 6. Generate the skeleton of your tutorial (by adapting the information between the quotes)
+>
+>      ```
+>      $ planemo training_init \
+>             --topic_name "my-topic" \
+>             --tutorial_name "my-new-tutorial" \
+>             --tutorial_title "Title of the tutorial" \
+>             --galaxy_url "URL to Galaxy instance in which you created the workflow" \
+>             --galaxy_api_key "Your API key on the Galaxy instance" \
+>             --workflow_id "ID of the workflow on the Galaxy instance" \
+>             --zenodo_link "URL to the Zenodo record"
+>      ```
+>
+> 4. Check that a new directory (with your tutorial name) has been generated in the topic folder
+{: .hands_on}
+
 # Write the tutorial
 
 Now that you have the structure in place, you can then fill the tutorial per se.
@@ -212,25 +307,17 @@ Now that you have the structure in place, you can then fill the tutorial per se.
 > 2. (Optional) Build the website locally and check that the tutorial is there by following the [Jekyll tutorial]({% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
 {: .hands_on}
 
-# Add some technical support (recommended)
+# Keep track of the changes
 
-To be able to run the tutorial, we need a Galaxy instance where the needed tools and the data are available. We need then to describe the required technical infrastructure. Tools are installed based on the workflows in the `workflows` directory.
+The material is stored in a [GitHub repository]({{ site.github_repository }}), a code hosting platform for version control and collaboration. So to develop training material, we are following the [GitHub flow](https://guides.github.com/introduction/flow/), which is based on fork, branches, and pull requests.
 
-This description will be used to automatically set up a Docker Galaxy flavour, to set up an existing Galaxy instance and also to test if a public Galaxy instance is able to run the tool.
+This can be done online via the GitHub interface or locally on your computer via command-line.
 
-The technical support are different files:
-
-- workflow file(s) in the `workflows` directory
-- the `data-library.yaml` file with the links to the input data needed for the tutorial
-- interactive tour file in the directory `tours` directory
-
-> ### {% icon hands_on %} Hands-on: Add technical support for the tutorial
->
-> 1. Add some technical support for the tutorial following the [tutorial]({% link topics/contributing/tutorials/create-new-tutorial-technical/tutorial.md %})
->    - Add the workflow
->    - (Recommended) Generate the `data-library.yaml`
->    - (Optional) Create an interactive tour
-{: .hands_on}
+> ### {% icon comment %} Learning how to contribute
+> Want to learn how to contribute? Check our tutorials:
+> - [Contributing with GitHub via its interface]({% link topics/contributing/tutorials/github-interface-contribution/tutorial.md %})
+> - [Contributing with GitHub via command-line]({% link topics/contributing/tutorials/github-command-line-contribution/tutorial.md %})
+{: .comment}
 
 # Add slides (optional)
 
@@ -247,11 +334,11 @@ Sometimes, you may want to have slides to support a tutorial and introduce it du
 To develop a new tutorial:
 
 1. Determine the topic
-2. Create the directory for the tutorial
-3. Add some metadata
+2. Create a workflow
 4. Find a good toy dataset and upload it to Zenodo
+2. Create the skeleton for the tutorial
+3. Add some metadata
 5. Write the tutorial
-6. Add some technical support (recommended)
 7. Add slides (optional)
 
 For the next times, you can make it quicker.
@@ -260,10 +347,13 @@ For the next times, you can make it quicker.
 >
 > 1. Determine the topic
 > 2. Create your workflow on a running Galaxy instance
-> 3. Add the topic name as a Tag and the tutorial title as Annotation/Notes to the workflow using the workflow editor.
+> 3. Add the topic name as a Tag and the tutorial title as Annotation/Notes to the workflow using the workflow editor
 > 4. Create a Zenodo record with the input data
 > 5. Generate the skeleton of your tutorial
->    - option 1: from a workflow located on a Galaxy
+>
+>    - Option 1: from the [PTDK webserver](https://ptdk.herokuapp.com/)
+>    - Option 2: from a workflow located on a Galaxy
+>
 >      ```
 >      $ planemo training_init \
 >             --topic_name "my-topic" \
@@ -274,20 +364,13 @@ For the next times, you can make it quicker.
 >             --workflow_id "ID of the workflow on the Galaxy instance" \
 >             --zenodo_link "URL to the Zenodo record"
 >      ```
->    - option 2: from a local workflow file (`.ga`) (use only if your workflow is composed of tools from the main ToolShed)
->
->      ```
->      $ planemo training_init \
->             --topic_name "my-topic" \
->             --tutorial_name "my-new-tutorial" \
->             --tutorial_title "Title of the tutorial" \
->             --workflow "path/to/workflow" \
->             --zenodo_link "URL to the Zenodo record"
->      ```
->      You can use the example workflow file located at `topics/contributing/tutorials/create-new-tutorial/workflows/example-workflow.ga` if
->      you do not have a workflow of your own. This is the workflow belonging to the *Galaxy 101* introduction tutorial.
 >
 > 6. Fill the remaining metadata in the `tutorial.md`
 > 7. Fill the content of the `tutorial.md`
-> 8. Check it using Jekyll
+> 8. Check it by serving the website locally
+>
+>    > ### {% icon comment %} Serving the website locally
+>    > Want to learn how to see the change on the website locally? [Check out our dedicated tutorial]({% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
+>    {: .comment}
+>    
 {: .hands_on}
