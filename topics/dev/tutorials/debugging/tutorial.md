@@ -347,6 +347,8 @@ Client Linting is important to reduce errors, improve quality of the codebase, a
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > In the file `client/src/components/RuleBuilder/RuleComponent`, there is an unused import. Simply delete the line that says `import Vue from "vue";`
+>    > >
+>    > > Alternatively, you can run `yarn eslint --fix`.
 >    > {: .solution }
 >    >
 >    > If you think you've got it, try running the test locally again to be sure.
