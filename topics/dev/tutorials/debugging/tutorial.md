@@ -85,7 +85,7 @@ Good news! All of the failing tests are on the same Galaxy branch! That means yo
 > ### {% icon hands_on %} Hands-on: Setup your local Galaxy instance
 >
 > 1. Use GitHub UI to fork Galaxy's repository at `galaxyproject/galaxy`.
-> 2. Clone your forked repository to a local path, further referred to as GALAXY_ROOT and `cd` into GALAXY_ROOT. Note that we specify the tutorial branch with the `-b` option:
+> 2. Clone your forked repository to a local path, further referred to as `GALAXY_ROOT` and `cd` into `GALAXY_ROOT`. Note that we specify the tutorial branch with the `-b` option:
 >
 > ```shell
 > $ git clone -b training https://github.com/galaxyproject/galaxy GALAXY_ROOT
@@ -159,7 +159,7 @@ Most of Galaxy unit tests are designed to test a separate component or function,
 >    >
 >    > Instead, we will run the tests locally. Furthermore, we will run a specific test that we know is failing: this will give us the instant feedback we need.
 >    >
->    > Make sure your virtual environment is activated. If not, activate it: `. .venv/bin/activate`
+>    > Make sure you are in `GALAXY_ROOT` and your virtual environment is activated. If not, activate it: `. .venv/bin/activate`
 >    >
 >    > The simplest way to run the failing test locally is using pytest directly:
 >    >
@@ -235,6 +235,7 @@ API test various aspects of the Galaxy API, as well as general backend aspects o
 > 2. **Running the test locally**
 >    > Again, we will run the individual test locally. While it is possible to run the test directly with pytest, in this case we will use Galaxy's script `run_tests.sh`. The script optimizes test runs by sharing the same instance of Galaxy across multiple tests; without the script a new Galaxy will be started for each TestCase class. There are other reasons to run the script; for more information check the documentation block at the top of the script.
 >    >
+>    > Make sure you are in `GALAXY_ROOT` (if your virtual environment is not activated, the script will do it for you).
 >    > Let's run the failed test:
 >    >
 >    > ```shell
@@ -338,7 +339,7 @@ Client Linting is important to reduce errors, improve quality of the codebase, a
 > 2. **Running the linter locally**
 >    > Alright, so we've seen the failure, but we want to verify it locally now. For this, you'll need to open up a terminal.
 >    >
->    > Make sure your virtual environment is activated. If not, activate it: `. .venv/bin/activate`
+>    > Make sure you are in `GALAXY_ROOT` and your virtual environment is activated. If not, activate it: `. .venv/bin/activate`
 >    >
 >    > Then you've got two options. You can run the same exact command that CircleCI uses `cd client && yarn run eslint` or `make client-lint`, which does `cd client && yarn run eslint && yarn run prettier-check`. This will also make sure your code conforms to formatting standards.
 >    >
@@ -346,7 +347,8 @@ Client Linting is important to reduce errors, improve quality of the codebase, a
 > 3. **Finding and fixing the issue**
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > In the file `client/src/components/RuleBuilder/RuleComponent`, there is an unused import. Simply delete the line that says `import Vue from "vue";`
+>    > > You are currently in `GALAXY_ROOT/client`.
+>    > > In the file `src/components/RuleBuilder/RuleComponent.vue`, there is an unused import. Simply delete the line that says `import Vue from "vue";`
 >    > >
 >    > > Alternatively, you can run `yarn eslint --fix`.
 >    > {: .solution }
@@ -373,7 +375,8 @@ Client tests are tests written by developers to test front-end code. In the case
 >    > > The failing test file is `src/components/RuleBuilder/SavedRulesSelector.test.js`, and the failing test in that file is `SavedRulesSelector › disables history icon if there is no history`.
 >    > {: .solution }
 > 2. **Running the test locally**
->    > Make sure your virtual environment is activated. If not, activate it: `. .venv/bin/activate`
+>    >
+>    > Make sure you are in `GALAXY_ROOT` and your virtual environment is activated. If not, activate it: `. .venv/bin/activate`
 >    >
 >    > To run the client tests locally, you must be in the client directory; if you're just in the galaxy directory, `cd client` should take you to the right place.
 >    >
@@ -433,7 +436,8 @@ Selenium is the end-to-end or integration testing framework that we use; so thes
 >    > > - `test_upload_pair_specify_extension`
 >    > {: .solution }
 > 2. **Running the tests locally**
->
+>    > Make sure you are in `GALAXY_ROOT`.
+>    >
 >    > We do not want to run the full suite of Selenium tests here - that would take a lot of time and we already know that most of them passed.
 >    >
 >    > Instead, we can build our commands to only run a subset of the tests. Here's an example: `./run_tests.sh -selenium lib/galaxy_test/selenium/test_sign_out.py`
@@ -501,9 +505,9 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 >
 >    > Here's the bug report:
 >    >
->    > > In the User menu, clicking the Datasets option causes an error message to be displayed on the page: "Uncaught exception in exposed API method".
+>    > ```In the User menu, clicking the Datasets option causes an error message to be displayed on the page: "Uncaught exception in exposed API method".```
 >    >
->    > First, start your local Galaxy:
+>    > Make sure you are in `GALAXY_ROOT`. Then start your local Galaxy:
 >    >
 >    > ```shell
 >    > $ ./run.sh
