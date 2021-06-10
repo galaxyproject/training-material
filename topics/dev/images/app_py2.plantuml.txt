@@ -2,34 +2,40 @@
 
 !include plantuml_options.txt
 
-package "galaxy.app" {
-
-class UniverseApplication {
+class galaxy.app.UniverseApplication {
     name
-    is_webapp
     config
-    object_store
+    auth_manager
+    model
     toolbox
-    tag_handler
+    security_agent
+    quota_agent
     datatypes_registry
-    tool_shed_registry
-    job_metrics
-    job_config
-    execution_timer_factory
-    user_manager
-    hda_manager
+    is_webapp
+    new_installation
+    tag_handler
+    install_model
+    host_security_agent
+    file_sources
+    genome_builds
     history_manager
-    dataset_collections_service
-    workflow_manager
+    hda_manager
     workflow_contents_manager
     library_folder_manager
     library_manager
     role_manager
+    installed_repository_manager
+    user_manager
+    object_store
+    job_metrics
+    job_config
+    execution_timer_factory
+    workflow_manager
     job_manager
     queue_worker
     dependency_resolvers_view
-    installed_repository_manager
     api_keys_manager
 }
+
 @enduml
 
