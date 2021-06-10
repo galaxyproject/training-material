@@ -834,7 +834,7 @@ Among many other tasks it can:
 2. Test tools, i.e. executing the tool with the tests described in the tool's test section.
 3. Serve tools, i.e. crate an ad-hoc Galaxy server running the tool.
 
-For more information on `planemo` see its extensive [documentation](planemo.readthedocs.io/).
+For more information on `planemo` see its extensive [documentation](https://planemo.readthedocs.io/).
 
 In this part of the tutorial we will start with installing `planemo` and then
 see it in action linting, testing, and serving the tool.
