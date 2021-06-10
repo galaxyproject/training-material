@@ -669,7 +669,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.xml.j2
 >    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -15,6 +15,15 @@
+>    @@ -15,6 +15,16 @@
 >         </plugins>
 >         <destinations default="slurm">
 >             <destination id="local_destination" runner="local_plugin"/>
@@ -681,6 +681,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    +            <param id="remote_metadata">False</param>
 >    +            <param id="rewrite_parameters">True</param>
 >    +            <param id="transport">curl</param>
+>    +            <param id="outputs_to_working_directory">False</param>
 >    +        </destination>
 >             <destination id="slurm" runner="slurm">
 >                 <param id="singularity_enabled">true</param>
@@ -701,7 +702,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.xml.j2
 >    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -63,5 +63,7 @@
+>    @@ -64,5 +64,7 @@
 >         </resources>
 >         <tools>
 >             <tool id="testing" destination="dynamic_cores_time" resources="testing" />
