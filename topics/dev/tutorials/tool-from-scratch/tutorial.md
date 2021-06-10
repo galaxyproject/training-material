@@ -236,7 +236,7 @@ git status
 
 The output of that command should look something like this
 
-![Git status](images/git_status.png "Expected output of the `git status` command")
+![Git status](../../images/git_status.png "Expected output of the `git status` command")
 
 ```bash
 git add recipes/bellerophon
