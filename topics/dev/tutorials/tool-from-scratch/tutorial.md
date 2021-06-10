@@ -82,7 +82,7 @@ conda-build preinstalled, and a folder for the meta.yaml file.
 
 2. Next we determine the SHA-256 checksum of the source tarball and create the meta.yaml file where we'll then define the
 parameters that tell conda-build how to build this package, starting with variables for the name, version, and checksum.
-With these definitions, bioconda's automatic version updater should recognize when a new version has been released and 
+With these definitions, bioconda's automatic version updater should recognize when a new version has been released and
 create a pull request to update the bioconda package.
 
 ```bash
@@ -94,11 +94,13 @@ vim recipes/bellerophon/meta.yaml # vim can of course be replaced with any other
 ![SHA-256](../../images/sha256sum.png "Expected output of the `sha256sum` command")
 
 
+{% raw %}
 ```yaml
 {% set name = "bellerophon" %}
 {% set version = "1.0" %}
 {% set sha256 = "036c5e23f53ed5b612525d3a32095acca073a9c8d2bf73883deb852c89f40dcf" %}
 ```
+{% endraw %}
 
 3. Now we define the conda package metadata. This will be shown as bellerophon-1.0 in anaconda and `conda search`. We
 plug in the relevant variables from the top of the file, lowering the name since conda package names should always be
@@ -112,7 +114,7 @@ lowercase.
     ```
     {% endraw %}
 
-4. Of course conda-build needs to know where to get the source code for bellerophon. Since the recipe we are creating is on 
+4. Of course conda-build needs to know where to get the source code for bellerophon. Since the recipe we are creating is on
 github, updates can be automated with the variables we defined in the second step, while the SHA-256 checksum ensures
 that conda-build is getting the right source code every time.
 
@@ -168,7 +170,7 @@ the source archive.
         - bellerophon --version
     ```
 
-8. Finally, we add information about the software, such as code's is license type, the program's 
+8. Finally, we add information about the software, such as code's is license type, the program's
 homepage, and optionally the github username of the person responsible for maintaining the recipe.
 
 ```yaml
@@ -183,7 +185,6 @@ about:
 Putting all these parts together, we end up with a complete conda recipe for version 1.0 of bellerophon.
 
 {% raw %}
-
 ```yaml
 {% set name = "bellerophon" %}
 {% set version = "1.0" %}
@@ -221,7 +222,6 @@ about:
   summary: "Filter reads that span a mapping junction, retaining the 5'-side."
 
 ```
-
 {% endraw %}
 
 ## Creating a Pull Request
@@ -257,7 +257,7 @@ Once on the github pull request page, we can write a short description of the re
 
 ## Deploying a Conda Package
 
-Once our new recipe has been merged, installing the package should be fairly painless. Galaxy, if configured to do so, 
+Once our new recipe has been merged, installing the package should be fairly painless. Galaxy, if configured to do so,
 will automatically install any conda dependencies a tool asks for, whereas manual installation can be as easy as using
 the `conda create` command to install python, bellerophon, and pysam into a conda environment named `bellerophon`. The
 `-y` flag tells conda not to ask for confirmation before installing the software and its dependencies into the named
@@ -337,7 +337,7 @@ The @TOOL_VERSION@ and @VERSION_SUFFIX@ are what are referred to as "tokens", an
 
 ### Description section
 
-This section adds help text to easily identify the tool. It is not intended as in-depth help, which should be in the `help` section. 
+This section adds help text to easily identify the tool. It is not intended as in-depth help, which should be in the `help` section.
 The description is simply presented as plaintext between the tags. Bellerophon's would look like this:
 
 ```xml
@@ -390,7 +390,7 @@ This would add both of the `<param/>` tags at that location. Though inputs are u
 
 ### Requirements section
 
-The requirement section is where conda packages and docker/singularity containers are set. As this is a very basic tutorial, 
+The requirement section is where conda packages and docker/singularity containers are set. As this is a very basic tutorial,
 the container requirements will not be discussed here.
 
 For each conda package added to the environment in which the tool will run, a `<requirement/>` tag needs to be included in the `<requirements/>` section.
@@ -415,7 +415,7 @@ This uses the macro token for @TOOL_VERSION@ for the bioconda package version to
 ### Input section
 
 Although the next section in the tool script is actually be the command section, the input section will be discussed first, as it sets variables that are used in the command.
-The input section has three possible xml tags at the highest level -- `<conditional/>`, ` <section/>`, and `<param/>`. Param will set any variable, conditional allows different available 
+The input section has three possible xml tags at the highest level -- `<conditional/>`, ` <section/>`, and `<param/>`. Param will set any variable, conditional allows different available
 parameters based on previous selections, and section simply breaks up the GUI into multiple parts that can be viewed or hidden at the user's discression.
 
 #### *Param*
@@ -562,7 +562,7 @@ Meaning that file only appears in the history if the user specified the "advance
 
 #### *Output collections*
 
-Collections are also useful for groups of output files, or simply data meant to be kept together like paired-end files. 
+Collections are also useful for groups of output files, or simply data meant to be kept together like paired-end files.
 In this case, the data to be grouped in the history like this.
 
 ```xml
@@ -579,7 +579,7 @@ paired-end data respectively.
 
 Datasets can also be found automatically, in the case where the number of output files is unknown.
 
-```xml   
+```xml
 <data format="tsv" name="sample">
     <discover_datasets pattern="__name_and_ext__" directory="outputs"/>>
 </data>
@@ -671,7 +671,7 @@ The bellerophon command section would, based on the variables set previously, wo
         #if $reverse.is_of_type("sam"):
             #set $reverse_input = 'reverse_input.sam'
             ln -s '${reverse}' '$reverse_input' &&
-        #else: 
+        #else:
             #set $reverse_input = 'reverse_input.bam'
             ln -s '${reverse}' '$reverse_input' &&
         #end if
@@ -697,8 +697,8 @@ would look for the variable 'forward' within the section or conditional named 'e
 This command will run, assuming two sam input files, as:
 
 ```bash
-ln -s `<forward input sam file>` '$forward_input' && 
-ln -s `<reverse input sam file>` '$reverse_input' &&         
+ln -s `<forward input sam file>` '$forward_input' &&
+ln -s `<reverse input sam file>` '$reverse_input' &&
 bellerophon --forward $forward_input --reverse $reverse_input --quality $quality --output 'merged_out.bam'
 && samtools sort --no-PG -O BAM -o `<outfile name generated by Galaxy>` -@ `<number of threads allocated>` merged_out.bam
 ```
@@ -832,7 +832,7 @@ Among many other tasks it can:
 
 1. Lint the tool source errors and conformance to best practices.
 2. Test tools, i.e. executing the tool with the tests described in the tool's test section.
-3. Serve tools, i.e. crate an ad-hoc Galaxy server running the tool. 
+3. Serve tools, i.e. crate an ad-hoc Galaxy server running the tool.
 
 For more information on `planemo` see its extensive [documentation](planemo.readthedocs.io/).
 
@@ -847,7 +847,7 @@ If you not have conda installed we suggest to use `pip` for installing `planemo`
 > ### {% icon hands_on %} Hands-on: Installing `planemo` via pip
 >
 > It is advised to install `planemo` in a virtual environment (step 1-2).
-> 
+>
 > 1. Create a virtual environment: `virtualenv -p python3 ~/.venv/`. Here `~/.venv/` is the path where the virtual environment should be crated and you may adapt the path to your needs. With `-p python3` we make sure that a `python` intepreter version 3 is used.
 > 2. Activate the virtual environment: `. ~/.venv/bin/activate`
 > 3. Install `planemo` `pip install planemo`
@@ -864,17 +864,17 @@ Note that for using `planemo`from a new shell you will need to activate the pyth
 
 > ### {% icon hands_on %} Hands-on: Testing `planemo` and getting help
 >
-> 1. In order to test if the installation worked execute: `planemo --version` 
-> 
-> This should output the version of `planemo`, e.g. `0.74.3`. 
-> 
+> 1. In order to test if the installation worked execute: `planemo --version`
+>
+> This should output the version of `planemo`, e.g. `0.74.3`.
+>
 > 2. `planemo --help` will show the available commands with a short desctiption (lint, test, and serve will be part of this tutorial)
 > 3. `planemo SUBCOMMAND --help` will show the usage information for the corresponding subcommand. Try to obtain the information for the `lint` subcommand.
 {: .hands_on}
 
 ## Using `planemo` to lint tools
 
-When linting a Galaxy tool `planemo` checks the sources for common errors and violations of best practice rules. Examples are: 
+When linting a Galaxy tool `planemo` checks the sources for common errors and violations of best practice rules. Examples are:
 
 - Presence to "TODO" in the help section
 - Absence of tests or citations
@@ -906,27 +906,27 @@ In order to do so `planemo` will:
 
 > ### {% icon hands_on %} Hands-on: Test a tool with `planemo`
 >
-> 1. Change into the directory containing the tool 
+> 1. Change into the directory containing the tool
 > 2. Run `planemo test` (as with `planemo lint` you can also specify a path to a tool explicitly as extra argument)
-> 
+>
 > The most important output of `planemo` is found at the end and looks like:
-> 
+>
 > ```
 > Testing complete. HTML report is in "PATH/tool_test_output.html".
 > All X test(s) executed passed.
 > TOOL_NAME (Test #1): passed
 > TOOL_NAME (Test #2): passed
-> ... 
+> ...
 > ```
-> 
+>
 > The last part lists for each test if it failed or passed. In case of a failure you can open the file `tool_test_output.html` (the path to this file is in the output) with a browser to get more information.
-> 
-> 3. Open the HTML report `firefox PATH/tool_test_output.html` (replace the PATH as in `planemo`'s output). 
-> 
+>
+> 3. Open the HTML report `firefox PATH/tool_test_output.html` (replace the PATH as in `planemo`'s output).
+>
 > The HTML report contains a table on the top giving the number of executed, successful, and failed tests:
-> 
+>
 > ![Planemo HTML report](images/planemo_html.png "Planemo HTML report")
-> 
+>
 > If there are passed or failed tests you will find the text `Passed tests`, `Failed tests`, resp., below the table.
 > Clicking on this text will unfold the list of passed or failed tests, resp. Clicking again on one of the tests
 > Will show additional information like stdout, stderr and the executed command line. In most cases this is sufficient
@@ -945,7 +945,7 @@ In order to do so `planemo` will:
 > ### {% icon details %} Understanding `planemo`'s output in more detail
 >
 > Sometimes it can be helpful to understand the `planemo` output in more detail.
-> 
+>
 > - The first lines show some `git` commands that create a local clone of the Galaxy sources (by default the `master` branch) and the command to start Galaxy. The end of the part is marked by the line `Activated a virtualenv for Galaxy`.
 > - Then the python virtual environment used to run Galaxy is created and the requirements are installed
 > - Then the worker threads and the Galaxy database are initialized, look for lines containing `Initializing main Galaxy Queue Worker on` and `Install database targetting Galaxy's database configuration`. The completion of the startup of Galaxy is indicated by the line `INFO:     Application startup complete.`
@@ -953,18 +953,18 @@ In order to do so `planemo` will:
 > The first two steps can take a while on the first run of `planemo test` (in particular on slow internet connections). Subsequent runs will be faster since the Galaxy sources as well as the virtual environment are cached in your home directory (`~/.planemo/`).
 >
 > - After this `planemo` will execute one test after the other. The start of a test is indicted by a line `( TOOL_ID ) > Test-TEST_NUMBER`
-> - For each test a number of Galaxy jobs are triggered (one upload job for each input dataset and the actual tool execution). Each job is indicated by a line `Built script [JOB_WORKING_DIR/tool_script.sh] for tool command [COMMAND_LINE]` which tell you the working directory of the job and the executed command line. 
-> - Suceccful tests will be marked with a line containing the text `ok`. Otherwise stdout and stderr and potentially a description of the test problem is shown. 
-> 
+> - For each test a number of Galaxy jobs are triggered (one upload job for each input dataset and the actual tool execution). Each job is indicated by a line `Built script [JOB_WORKING_DIR/tool_script.sh] for tool command [COMMAND_LINE]` which tell you the working directory of the job and the executed command line.
+> - Suceccful tests will be marked with a line containing the text `ok`. Otherwise stdout and stderr and potentially a description of the test problem is shown.
+>
 > Note that the first execution of the tool job can take longer since also the conda environment containing the requirements of the tool is created.
-> 
+>
 > As an exercise
-> 
-> - Start `planemo test` with the extra parameter `--no_cleanup` (this will prevent the deletion of the Galaxy clone and its job working directories after `planemo` finished). 
+>
+> - Start `planemo test` with the extra parameter `--no_cleanup` (this will prevent the deletion of the Galaxy clone and its job working directories after `planemo` finished).
 > - Change into one job working directory (not an upload job)
 > - Inspect `tool_script.sh` and find the command to activate the conda environment for the job and the executed command line.
 > - Execute these commands from within the `working` dir in the jobs working dir (You may need to remove all files that are already existing there).
-> 
+>
 > This procedure can be really helpful for debugging Galaxy tools.
 {: .details}
 
@@ -974,11 +974,11 @@ It can be very useful to check how Galaxy renders a tool and if this meets the e
 
 > ### {% icon hands_on %} Hands-on: Serve a tool with `planemo`
 >
-> 1. Change into the directory containing the tool 
+> 1. Change into the directory containing the tool
 > 2. Run `planemo serve` (as with `lint` and test you can also specify a path to a tool explicitly as extra argument)
-> 
+>
 > `Planemo` will again start a Galaxy instance that contains your tool. Note that starting the ad-hoc Galaxy might need longer than for `planemo test` since JavaScript components need to be initialized as well.
-> 
+>
 {: .hands_on}
 
 > ### {% icon tip %} Usefull parameters for `planemo test`
@@ -988,7 +988,7 @@ It can be very useful to check how Galaxy renders a tool and if this meets the e
 
 # Publishing Galaxy tools
 
-Galaxy tools are installed from the [Galaxy toolshed](https://toolshed.g2.bx.psu.edu/). With the help of `planemo` tools can be added to the toolshed ([documentation](https://planemo.readthedocs.io/en/latest/publishing.html)). But usually the sources of the tools are maintained in public source code repositories, for instance: 
+Galaxy tools are installed from the [Galaxy toolshed](https://toolshed.g2.bx.psu.edu/). With the help of `planemo` tools can be added to the toolshed ([documentation](https://planemo.readthedocs.io/en/latest/publishing.html)). But usually the sources of the tools are maintained in public source code repositories, for instance:
 
 - [IUC](https://github.com/galaxyproject/tools-iuc/)
 - [devteam](https://github.com/galaxyproject/tools-devteam/)
@@ -1003,7 +1003,7 @@ These tool source repositories have continuous integration workflows:
 - and publish tools to the toolshed
 
 In addition the repositories run weekly workflows testing all tools in order to keep them working.
-Another advantage of these repositories is that new tools and improvements to tools are subject to review of experienced tool developers. 
+Another advantage of these repositories is that new tools and improvements to tools are subject to review of experienced tool developers.
 
 The repository is structured as follows:
 
@@ -1011,7 +1011,7 @@ The repository is structured as follows:
 - `tool_collections/` and `suites/`: Like `tools/` but reserved for larger collections of tools like `samtools` or `bedtools`.
 - `data_managers/`: a directory containing data managers. These need to be in a separate directory since tool tests with `planemo` need to be ececuted slightly different from tests of normal tools.
 - `deprecated/`: deprecated tools. Tools in this directory are excluded from weekly CI.
-- `macros/`: macros that can be used by multiple tools. 
+- `macros/`: macros that can be used by multiple tools.
 
 In addition there are some important directories containing configurarion:
 
@@ -1026,33 +1026,33 @@ The workflow to add or update a tool in such a repository to open a pull request
 
 ## Fork and clone the github repository
 
-For the following we will use a sandbox tool repository and not one of the main repositories. 
+For the following we will use a sandbox tool repository and not one of the main repositories.
 But, the steps can be adapted easily by exchanging the repository URLs. Note that for some repositories
 the development branch may have the name `master` instead of `main`.
 
 > ### {% icon hands_on %} Hands-on: Fork and clone the IUC github repository
 >
-> 0. If you don't have an account on github you need to sign up at first. 
-> 1. Open the [Sandbox tool repository](https://github.com/mvdbeek/galaxy-tools-mvdbeek/) in a browser. 
-> 
->   - Click the `fork` button on the top right 
+> 0. If you don't have an account on github you need to sign up at first.
+> 1. Open the [Sandbox tool repository](https://github.com/mvdbeek/galaxy-tools-mvdbeek/) in a browser.
+>
+>   - Click the `fork` button on the top right
 >     ![IUC github repository](images/iuc-github.png "IUC github repository")
 >   - In the following dialog select your account
 >   - After a short while you will be redirected to your fork of the sandbox repository
 >     (i.e. a 1:1 copy of the original repository)
-> 
+>
 > 2. In order to obtain a clone (i.e. a local copy of your fork) click the green button with text "Code" and copy the link. And execute the following commands on your computer
-> 
+>
 > ```bash
 > cd A_DIR_WHERE_YOU_WANT_TO_CREATE_THE_CLONE
 > git clone LINK_TO_YOUR_FORK
 > cd tools-iuc/
 > git remote add upstream https://github.com/mvdbeek/galaxy-tools-mvdbeek.git
 > ```
-> 
-> The first command creates the clone in the current working dir, i.e. it will create a directory `galaxy-tools-mvdbeek` containing the copy. 
+>
+> The first command creates the clone in the current working dir, i.e. it will create a directory `galaxy-tools-mvdbeek` containing the copy.
 > The last command will add the original sandbox repository as a remote with the name `upstream`. This is necessary in order to keep your fork of the repository in sync with the original repository.
-> 
+>
 > 4. Check that `git remote -v` lists your fork under the name `origin` and the original repository unter the name `upstream`.
 {: .hands_on}
 
@@ -1060,7 +1060,7 @@ the development branch may have the name `master` instead of `main`.
 > ### {% icon hands_on %} Hands-on: Keeping your fork in sync
 >
 > You should execute the following steps always before creating a new branch:
-> 
+>
 > 1. `git checkout main`: change to the main branch
 > 2. `git pull upstream main`: get the most recent changes from the `upstream` repository to your local clone
 > 3. `git push origin main`: publish the most recent changes from your local clone to your fork, i.e. `origin`
@@ -1068,7 +1068,7 @@ the development branch may have the name `master` instead of `main`.
 
 ## Create a pull request for a new tool
 
-> ### {% icon hands_on %} Hands-on: Create a pull request 
+> ### {% icon hands_on %} Hands-on: Create a pull request
 > 1. `git checkout main`
 > 2. `git checkout -b NAME_OF_THE_BRANCH`: create a new feature branch and change to this branch. The branch name should not contain names and should be short and if possible descriptive, e.g. the tool name.
 > 3. Introduce changes, e.g. created a directory under `tools/`, add the tool XML file, the `.shed.yml` file, and the `test-data` directory with the files needed for the test.
@@ -1080,9 +1080,9 @@ the development branch may have the name `master` instead of `main`.
 
 After you created a PR your changes will be reviewed and improvements will be requested. You can add changes to the PR as follows.
 
-> ### {% icon hands_on %} Hands-on: Adding changes to a PR 
+> ### {% icon hands_on %} Hands-on: Adding changes to a PR
 > 1. `git checkout NAME_OF_THE_BRANCH`
-> 2. Make changes as requested. 
+> 2. Make changes as requested.
 > 3. `git add SPACE_SEPARATED_LIST_OF_CHANGED_FILES`
 > 4. `git commit -m 'COMMIT MESSAGE'`
 > 5. `git push origin NAME_OF_THE_BRANCH`
@@ -1117,7 +1117,7 @@ The image above shows the CI page for a PR:
 
 - Green box: clicking this brings you to an overview page showing the CI workflow and listing errors and produced artifacts below.
 - Red box: the executed CI jobs. Clicking a job will show the outputs of the CI steps in the main (gray panel). The outputs of each step can be show by clicking on the corresponding step.
-- Blue box: direct link to the artifacts. This is currently the output of the "Combine tool test results" job: "All tool test results" (and the outputs of the separate tool test jobs which are a technical necessity and usually not relevant). Clicking "All tool test results" will trigger the download of a zip file that contains the `planemo test` html output. If the linting jobs have found errors then also their output will be provided as additional output. 
+- Blue box: direct link to the artifacts. This is currently the output of the "Combine tool test results" job: "All tool test results" (and the outputs of the separate tool test jobs which are a technical necessity and usually not relevant). Clicking "All tool test results" will trigger the download of a zip file that contains the `planemo test` html output. If the linting jobs have found errors then also their output will be provided as additional output.
 
 Most of the steps executed in the jobs are boilerplate and only one/two steps in each stop are really relevant for the users:
 
@@ -1129,7 +1129,7 @@ Test tools: planemo test -- contains the output of `planemo test`.
 
 ## Create your own IUC style tool repository
 
-It is also easy to setup a github tool repository on your own that has the same structure and functionality as the IUC repository. This allows you to maintain the tools that you are developing on your own, but keep in mind the advantages of having tools in one of the community driven repositories (like long term support). 
+It is also easy to setup a github tool repository on your own that has the same structure and functionality as the IUC repository. This allows you to maintain the tools that you are developing on your own, but keep in mind the advantages of having tools in one of the community driven repositories (like long term support).
 
 In order to setup your own tool repository the Galaxy community created a [template repository](https://github.com/bernt-matthias/galaxy-tool-repository-template). By clicking `Use this template` and follow the instructions in the README file you get you own tool repository.
 
