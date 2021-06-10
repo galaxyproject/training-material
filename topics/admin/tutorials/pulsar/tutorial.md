@@ -146,7 +146,7 @@ Firstly we will add and configure another *role* to our Galaxy playbook - we mai
 >    +- name: usegalaxy_eu.rabbitmq
 >    +  version: 0.1.0
 >    +- src: galaxyproject.pulsar
->    +  version: 1.0.6
+>    +  version: 1.0.7
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirements"}
@@ -506,8 +506,6 @@ Some of the other options we will be using are:
 >    +  - psutil
 >    +
 >    +pulsar_yaml_config:
->    +  conda_auto_init: True
->    +  conda_auto_install: True
 >    +  staging_directory: "{{ pulsar_staging_dir }}"
 >    +  persistence_directory: "{{ pulsar_persistence_dir }}"
 >    +  tool_dependency_dir: "{{ pulsar_dependencies_dir }}"
@@ -519,16 +517,18 @@ Some of the other options we will be using are:
 >    +  amqp_publish_retry_interval_start: 10
 >    +  amqp_publish_retry_interval_step: 10
 >    +  amqp_publish_retry_interval_max: 60
+>    +  # We also need to create the dependency resolvers configuration so pulsar knows how to find and install dependencies
+>    +  # for the tools we ask it to run. The simplest method which covers 99% of the use cases is to use conda auto installs
+>    +  # similar to how Galaxy works.
+>    +  dependency_resolution:
+>    +    resolvers:
+>    +      - type: conda
+>    +        auto_init: true
+>    +        auto_install: true
 >    +
->    +# We also need to create the dependency resolver file so pulsar knows how to
->    +# find and install dependencies for the tools we ask it to run. The simplest
->    +# method which covers 99% of the use cases is to use conda auto installs similar
->    +# to how Galaxy works.
->    +pulsar_dependency_resolvers:
->    +  - name: conda
->    +    args:
->    +      - name: auto_init
->    +        value: true
+>    +# Pulsar should use the same job metrics plugins as Galaxy. This will automatically set `job_metrics_config_file` in
+>    +# `pulsar_yaml_config` and create `{{ pulsar_config_dir }}/job_metrics_conf.yml`.
+>    +pulsar_job_metrics_plugins: "{{ galaxy_job_metrics_plugins }}"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add pulsar group variables"}
@@ -546,7 +546,7 @@ Some of the other options we will be using are:
 >    @@ -1,2 +1,4 @@
 >     [galaxyservers]
 >     gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
->    +[galaxyservers]
+>    +[pulsarservers]
 >    +gat-0.au.training.galaxyproject.eu ansible_user=ubuntu
 >    {% endraw %}
 >    ```
