@@ -717,13 +717,25 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >
 > 4. Finally run the Galaxy playbook in order to deploy the updated job configuration, and to restart Galaxy.
 >
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > ansible-playbook pulsar.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
 {: .hands_on}
+
+> ```bash
+> 1-pulsar.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
 
 
 # Testing Pulsar
 
 Now we will upload a small set of data to run bwa-mem with.
-
 
 > ### {% icon hands_on %} Hands-on: Testing the Pulsar destination
 >
@@ -755,13 +767,13 @@ Now we will upload a small set of data to run bwa-mem with.
 >
 {: .hands_on}
 
-You'll notice that the Pulsar server has received the job (all the way in Australia!) and now should be installing bwa-mem via conda. Once this is complete (which may take a while - first time only) the job will run. When it starts running it will realise it needs the *E. coli* genome from CVMFS and fetch that, and then results will be returned to Galaxy!
-
 > ```bash
-> 1-pulsar.sh
+> 2-run-job.sh
 > ```
 > {: data-test="true"}
 {: .hidden}
+
+You'll notice that the Pulsar server has received the job (all the way in Australia!) and now should be installing bwa-mem via conda. Once this is complete (which may take a while - first time only) the job will run. When it starts running it will realise it needs the *E. coli* genome from CVMFS and fetch that, and then results will be returned to Galaxy!
 
 How awesome is that? Pulsar in another continent with reference data automatically from CVMFS :)
 
