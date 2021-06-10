@@ -545,6 +545,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
             UseGalaxy.be
         </a>
@@ -573,7 +575,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Dec 14, 2020 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 10, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -588,7 +590,7 @@
 <p><span class="notranslate">Galaxy</span> is a great solution to train bioinformatics concepts:</p>
 
 <ul>
-  <li>numerous bioinformatics tools are available (almost 6,000 in the <span class="notranslate">ToolShed</span>)</li>
+  <li>numerous bioinformatics tools are available (over 8,000 in the <span class="notranslate">ToolShed</span>)</li>
   <li>it can be used by people without any computer science skills</li>
   <li>it trains to use technology, outlining available resources and efforts that have made them accessible to researchers</li>
   <li>it is scalable</li>
@@ -608,11 +610,12 @@ We decided on a structure focusing on tutorials with hands-on activities; fittin
 
 <ol id="markdown-toc">
   <li><a href="#define-the-topic" id="markdown-toc-define-the-topic">Define the topic</a></li>
-  <li><a href="#keep-track-of-the-changes" id="markdown-toc-keep-track-of-the-changes">Keep track of the changes</a></li>
-  <li><a href="#create-the-directory-for-the-tutorial" id="markdown-toc-create-the-directory-for-the-tutorial">Create the directory for the tutorial</a></li>
-  <li><a href="#a-toy-dataset" id="markdown-toc-a-toy-dataset">A toy dataset</a></li>
+  <li><a href="#store-a-tutorial" id="markdown-toc-store-a-tutorial">Store a tutorial</a></li>
+  <li><a href="#create-the-workflow" id="markdown-toc-create-the-workflow">Create the <span class="notranslate">workflow</span></a></li>
+  <li><a href="#get-a-toy-dataset" id="markdown-toc-get-a-toy-dataset">Get a toy dataset</a></li>
+  <li><a href="#create-the-skeleton-of-the-tutorial" id="markdown-toc-create-the-skeleton-of-the-tutorial">Create the skeleton of the tutorial</a></li>
   <li><a href="#write-the-tutorial" id="markdown-toc-write-the-tutorial">Write the tutorial</a></li>
-  <li><a href="#add-some-technical-support-recommended" id="markdown-toc-add-some-technical-support-recommended">Add some technical support (recommended)</a></li>
+  <li><a href="#keep-track-of-the-changes" id="markdown-toc-keep-track-of-the-changes">Keep track of the changes</a></li>
   <li><a href="#add-slides-optional" id="markdown-toc-add-slides-optional">Add slides (optional)</a></li>
 </ol>
 
@@ -626,7 +629,9 @@ It may require some knowledge that you may not have or do not have the time to l
 
 <h1 id="define-the-topic">Define the topic</h1>
 
-<p>The first question we need to answer is in which topic to place our new tutorial. This can be tricky. When we structured the repository, we decided to use the categories that are used in the <a href="https://toolshed.g2.bx.psu.edu/"><span class="notranslate">ToolShed</span></a> as our initial list of topics. Since every tool uploaded to the <span class="notranslate">ToolShed</span> must be in at least one category, you can look at the main tools in your tutorial and see which categories they are placed in within the <span class="notranslate">ToolShed</span>. This can provide a guide for where you might put your new tutorial. For example, this tutorial will rely on the NCBI Blast+ tool:</p>
+<p>The first question we need to answer is in which topic to place our new tutorial. This can be tricky. When we structured the GTN, we decided that each training material should be related to a topic.</p>
+
+<p>We decided to use the categories from the <a href="https://toolshed.g2.bx.psu.edu/"><span class="notranslate">ToolShed</span></a> as our initial list of topics. Since every tool uploaded to the <span class="notranslate">ToolShed</span> must be in at least one category, you can look at the main tools in your tutorial and see which categories they are placed in within the <span class="notranslate">ToolShed</span>. This can provide a guide for where you might put your new tutorial. For example, if your tutorial will rely on the NCBI Blast+ tool:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-defining-the-topic-for-the-tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Defining the topic for the tutorial</h3>
@@ -656,24 +661,9 @@ It may require some knowledge that you may not have or do not have the time to l
   <p>Want to create a new topic? <a href="/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html">Check out our tutorial to create a new topic</a></p>
 </blockquote>
 
-<h1 id="keep-track-of-the-changes">Keep track of the changes</h1>
+<h1 id="store-a-tutorial">Store a tutorial</h1>
 
-<p>The material is stored in a <a href="https://github.com/galaxyproject/training-material">GitHub repository</a>, a code hosting platform for version control and collaboration. So to develop training material, we are following the <a href="https://guides.github.com/introduction/flow/">GitHub flow</a>, which is based on fork, branches, and pull requests.</p>
-
-<p>This can be done online via the GitHub interface or locally on your computer via command-line.</p>
-
-<blockquote class="comment">
-  <h3 id="comment-learning-how-to-contribute"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Learning how to contribute</h3>
-  <p>Want to learn how to contribute? Check our tutorials:</p>
-  <ul>
-    <li><a href="/training-material/topics/contributing/tutorials/github-interface-contribution/tutorial.html">Contributing with GitHub via its interface</a></li>
-    <li><a href="/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html">Contributing with GitHub via command-line</a></li>
-  </ul>
-</blockquote>
-
-<h1 id="create-the-directory-for-the-tutorial">Create the directory for the tutorial</h1>
-
-<p>Each training material is related to a topic. All training materials (slides, tutorials, …) related to a topic are found in a dedicated directory (<em>e.g.</em> <code class="language-plaintext highlighter-rouge">transcriptomics</code> directory contains the material related to exome sequencing analysis). Each topic have the following structure:</p>
+<p>All training materials (slides, tutorials, …) related to a topic are found in a dedicated directory (<em>e.g.</em> <code class="language-plaintext highlighter-rouge">transcriptomics</code> directory contains the material related to transcriptomics analysis). Each topic has the following structure:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── README.md
 ├── metadata.yaml
@@ -693,49 +683,50 @@ It may require some knowledge that you may not have or do not have the time to l
 │   │   │   ├── tour.yaml
 </code></pre></div></div>
 
-<p>Once the topic has been chosen and you set up your contribution environment, you can create the tutorial. An ideal tutorial in the <span class="notranslate">Galaxy</span> Training Network contains:</p>
+<p>Once the topic has been chosen, we can create the tutorial. An ideal tutorial in the <span class="notranslate">Galaxy</span> Training Network contains:</p>
 <ul>
   <li>a tutorial file <code class="language-plaintext highlighter-rouge">tutorial.md</code> written in Markdown with hands-on</li>
   <li>an optional slides file <code class="language-plaintext highlighter-rouge">slides.md</code> in Markdown with slides to support the tutorial</li>
-  <li>a directory <code class="language-plaintext highlighter-rouge">tours</code> with <span class="notranslate">Galaxy</span> Interactive Tours to reproduce the tutorial</li>
   <li>a directory <code class="language-plaintext highlighter-rouge">workflows</code> with workflows extracted from the tutorial</li>
   <li>a YAML file <code class="language-plaintext highlighter-rouge">data-library.yaml</code>  with the links to the input data needed for the tutorial</li>
 </ul>
 
-<p>The most important file is the <code class="language-plaintext highlighter-rouge">tutorial.md</code> where the content of the tutorial is. The other files are there to support the tutorial and make it robust and usable across many environments.</p>
+<p>The most important file is the <code class="language-plaintext highlighter-rouge">tutorial.md</code> where the content of the tutorial is. The other files are not mandatory. They are there to support the tutorial and make it robust and usable across many environments. But they can help a lot in the development of new tutorial.</p>
+
+<h1 id="create-the-workflow">Create the <span class="notranslate">workflow</span></h1>
+
+<p>Our tutorials try to follow the “learn by doing” approach; they combine both theoretical and practical sections done on <span class="notranslate">Galaxy</span>.</p>
+
+<p>Most tutorials explain step-by-step a data analysis by running the tools. The steps taken in the tutorial can be represented as a <span class="notranslate">workflow</span>.</p>
+
+<p>Before writing the tutorial, it is a good practice to get a <span class="notranslate">workflow</span> with the different steps that will be run during the tutorial. The <span class="notranslate">workflow</span> does not have to be the final one but at least the major steps. It helps to get a direction for the tutorial but also to generate a skeleton of the tutorial as we will see later.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-use-tools-that-are-available-on-the-toolshed"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Use tools that are available on the <span class="notranslate">ToolShed</span></h3>
+  <p>We recommmend you to use in your workflows, specially for training, tools that are available on the <span class="notranslate">Galaxy</span> <span class="notranslate">ToolShed</span>.</p>
+</blockquote>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-create-all-the-required-files-and-folders-structures-automatically"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create all the required files and folders structures automatically</h3>
+  <h3 id="hands_on-hands-on-defining-the-topic-for-the-tutorial-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Defining the topic for the tutorial</h3>
 
   <ol>
+    <li>Go to your favorite <span class="notranslate">Galaxy</span> server</li>
     <li>
-      <p>Run (by adapting the information between the quotes)</p>
+      <p>Create a <span class="notranslate">workflow</span> with the different steps (tools) of your tutorial either from scratch or from an existing history</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ planemo training_init \
-         --topic_name "my-topic" \
-         --tutorial_name "my-new-tutorial" \
-         --tutorial_title "Title of the tutorial" \
-         --hands_on
-</code></pre></div>      </div>
-    </li>
-    <li>Check that a new directory (with your tutorial name) has been generated in the topic folder</li>
-    <li>
-      <p>Make sure that Jekyll is running</p>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new <span class="notranslate">workflow</span></h3>  <ol>    <li>Click <strong><span class="notranslate">Workflow</span></strong> on the top bar</li>    <li>Click the new <span class="notranslate">workflow</span> <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-wf-new</span> button</li>    <li>Give it a clear and memorable name</li>    <li>Clicking <strong>Save</strong> will take you directly into the <span class="notranslate">workflow</span> editor for that <span class="notranslate">workflow</span></li>    <li>Need more help? Please see the <em>How to make a <span class="notranslate">workflow</span> subsection</em> <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">here</a></li>  </ol></blockquote>
 
-      <blockquote class="comment">
-        <h3 id="comment-jekyll"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Jekyll</h3>
-        <p>Want to learn how to start Jekyll? <a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Check out our tutorial to serve the website locally</a></p>
-      </blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-extracting-a-workflow-from-your-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Extracting a <span class="notranslate">workflow</span> from your history</h3>  <ol>    <li>Remove any failed or unwanted jobs from your history.</li>    <li>Click on <strong>History options</strong> (gear icon <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span>) at the top of your history panel.</li>    <li>Select <strong>Extract <span class="notranslate">workflow</span></strong></li>    <li>Check the steps, enter a name for your <span class="notranslate">workflow</span>, and press the <strong>Create <span class="notranslate">Workflow</span></strong> button.</li>  </ol></blockquote>
     </li>
-    <li>Check if the tutorial has been correctly added at <a href="http://localhost:4000/training-material/">http://localhost:4000/training-material/</a></li>
+    <li>Add the topic name as a Tag and the tutorial title as Annotation/Notes to the <span class="notranslate">workflow</span> using the <span class="notranslate">workflow</span> editor</li>
   </ol>
 </blockquote>
 
-<h1 id="a-toy-dataset">A toy dataset</h1>
+<h1 id="get-a-toy-dataset">Get a toy dataset</h1>
 
-<p>Our tutorials try to follow the “learn by doing” approach; they combine both theoretical and practical sections. The practical sections (or hands-on) are supposed to be done on <span class="notranslate">Galaxy</span>.</p>
-
-<p>The first task is to select some data to use for the Hands-on sections. The selected data must be informative enough to illustrate the meaning of using a tool or a given technique, but not too big to require long waiting times for processing during a workshop. Upload and download of files into and out of <span class="notranslate">Galaxy</span> is usually quick, but the time taken for a tool to run can be long. Tool run times of no more than 10-15 mins are recommended. Typically, the selected data should be the informative subset of a full real-life dataset.</p>
+<p>To run the different steps, the tutorial needs some data. The selected data must be informative enough to illustrate the meaning of using a tool or a given technique, but not too big to require long waiting times for processing during a workshop. Upload and download of files into and out of <span class="notranslate">Galaxy</span> is usually quick, but the time taken for a tool to run can be long. Tool run times of no more than 10-15 mins are recommended. Typically, the selected data should be the informative subset of a full real-life dataset.</p>
 
 <p>Below we describe two examples of how toy datasets were generated for tutorials:</p>
 
@@ -810,6 +801,147 @@ So be careful when you start your upload that all your needed files are ready.</
   </ol>
 </blockquote>
 
+<h1 id="create-the-skeleton-of-the-tutorial">Create the skeleton of the tutorial</h1>
+
+<p>Once we have the workflows and toy dataset (optionally already on Zenodo), we can generate the tutorial folder, including the <code class="language-plaintext highlighter-rouge">tutorial.md</code>.</p>
+
+<p>Writing the tutorial while adding the different tools and their parameters and following good formatting can be quite cumbersome. To help in that process, we developed a training development kit available with <a href="https://planemo.readthedocs.io/en/latest/index.html">Planemo</a>. The tool has several commands. But the main one can be used to create the skeleton of a tutorial (folder, well located, with good structure). It can also take a <span class="notranslate">workflow</span> as input, add it to the <code class="language-plaintext highlighter-rouge">workflows</code> folder. But more interestingly, the tool can extract from the <span class="notranslate">workflow</span> and add in the <code class="language-plaintext highlighter-rouge">tutorial.md</code> file the different steps with which tools to run and which parameters to select. If a Zenodo URL is provided, it also creates the <code class="language-plaintext highlighter-rouge">data-library.yaml</code> file.</p>
+
+<p>This tool can be used via the command-line but also via a <a href="https://ptdk.herokuapp.com/">webserver</a>. The webserver can take a public <span class="notranslate">workflow</span> that is avialable on <a href="https://usegalaxy.org">use<span class="notranslate">galaxy</span>.org</a>, <a href="https://usegalaxy.eu">use<span class="notranslate">galaxy</span>.eu</a> or <a href="https://usegalaxy.org.au">use<span class="notranslate">galaxy</span>.org.au</a>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-create-the-skeleton-of-a-tutorial-using-the-webserver"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create the skeleton of a tutorial using the webserver</h3>
+
+  <ol>
+    <li>
+      <p>Make the <span class="notranslate">workflow</span> public</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-make-a-workflow-public"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Make a <span class="notranslate">workflow</span> public</h3>  <ul>    <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows</li>    <li>Click on the interesting <span class="notranslate">workflow</span></li>    <li>Click on <strong>Share</strong></li>    <li>Clik on *Make <span class="notranslate">Workflow</span> Accessible and Publish**</li>  </ul></blockquote>
+    </li>
+    <li>Copy the <span class="notranslate">workflow</span> id that can be found in the URL of the current page (after <code class="language-plaintext highlighter-rouge">?id=</code>)</li>
+    <li>Open the <a href="https://ptdk.herokuapp.com/">PTDK webserver</a></li>
+    <li>Fill in the information
+      <ul>
+        <li>Tutorial name, the name will be the name of the folder of the tutorial</li>
+        <li>Tutorial title</li>
+        <li><span class="notranslate">Galaxy</span> instance with the public <span class="notranslate">workflow</span></li>
+        <li>Id of the <span class="notranslate">workflow</span></li>
+        <li>(Not mandatory) Zenodo URL with the input data</li>
+      </ul>
+    </li>
+    <li>Click on <strong>Submit</strong></li>
+    <li>
+      <p>Download the generated archive</p>
+
+      <p>This archive constains the tutorial skeleton including:</p>
+      <ul>
+        <li>tutorial content, tutorial.md file, filled with all steps from the <span class="notranslate">workflow</span> and their parameters</li>
+        <li>its <span class="notranslate">workflow</span> (<span class="notranslate">workflow</span> folder)</li>
+        <li>a data_library.yaml file if Zenodo link was provided
+ Create a GitHub account</li>
+      </ul>
+    </li>
+    <li>
+      <p>Add the new material to <span class="notranslate">Galaxy</span> Training Material by unzip the downloaded archive in the tutorials folder of the topic for the new tutorial</p>
+
+      <blockquote class="comment">
+        <h3 id="comment-using-the-github-interface"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Using the GitHub interface</h3>
+
+        <p>Prefer to use the GitHub interface?</p>
+
+        <ol>
+          <li>Unzip the downloaded archive</li>
+          <li>Edit the content of the <code class="language-plaintext highlighter-rouge">tutorial.md</code> (as explained below)</li>
+          <li>Go to the GitHub repository of the Training Material</li>
+          <li>Fork the GitHub repository</li>
+          <li>Click on <code class="language-plaintext highlighter-rouge">topics</code></li>
+          <li>Select the topic for the new tutorial</li>
+          <li>Go to <code class="language-plaintext highlighter-rouge">tutorials</code></li>
+          <li>Click on <strong>Create new file</strong></li>
+          <li>Type <code class="language-plaintext highlighter-rouge">name/tutorial.md</code>, replacing “name” by the name of your tutorial (not the title)</li>
+          <li>Copy the content of downloaded and edited <code class="language-plaintext highlighter-rouge">tutorial.md</code> file there</li>
+          <li>Fill the <strong>Commit new file</strong> form</li>
+          <li>Create a new branch using the name of the tutorial</li>
+          <li>Click on <strong>Propose new file</strong></li>
+          <li>Open a Pull Request, as explained in our tutorial</li>
+          <li>Add the <span class="notranslate">workflow</span> file (in <code class="language-plaintext highlighter-rouge"><span class="notranslate">workflow</span></code> folder) by updating the Pull Request</li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>If the <span class="notranslate">workflow</span> is not available on one of the previously listed <span class="notranslate">Galaxy</span> servers, we recommend you to run the tool via the command line:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-create-the-skeleton-of-a-tutorial-via-the-command-line"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create the skeleton of a tutorial via the command line</h3>
+
+  <ol>
+    <li>
+      <p>Get the <span class="notranslate">workflow</span> id</p>
+
+      <p>The id can be found on URL when running, editing or sharing the <span class="notranslate">workflow</span> (after <code class="language-plaintext highlighter-rouge">?id=</code>)</p>
+    </li>
+    <li>
+      <p>Get your API key on the <span class="notranslate">Galaxy</span> instance</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-getting-your-api-key"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Getting your API key</h3>  <ol>    <li>In your browser, open your <span class="notranslate">Galaxy</span> homepage</li>    <li>Log in, or register a new account, if it’s the first time you’re logging in</li>    <li>Go to <code class="language-plaintext highlighter-rouge">User -&gt; Preferences</code> in the top menu bar, then click on <code class="language-plaintext highlighter-rouge">Manage API key</code></li>    <li>If there is no current API key available, click on <code class="language-plaintext highlighter-rouge">Create a new key</code> to generate it</li>    <li>Copy your API key to somewhere convenient, you will need it throughout this tutorial</li>  </ol></blockquote>
+    </li>
+    <li>
+      <p>(If not done yet) Get the <span class="notranslate">Galaxy</span> Training Material repository locally and move in it</p>
+
+      <ol>
+        <li>(If not done yet) Clone the training material GitHub repository: <code class="language-plaintext highlighter-rouge">git clone https://github.com/<span class="notranslate">galaxy</span>project/training-material.git</code></li>
+        <li>Navigate to the <code class="language-plaintext highlighter-rouge">training-material/</code> folder with <code class="language-plaintext highlighter-rouge">cd</code></li>
+      </ol>
+    </li>
+    <li>
+      <p>Get planemo</p>
+
+      <ul>
+        <li>Option 1: Using Conda:
+          <ol>
+            <li>
+              <p>Set up the conda environment</p>
+
+              <p>It will install some needed tools (ruby, nodejs, etc) in a protected environment, without interfering with the existing tools or versions.</p>
+
+              <ol>
+                <li>Install conda (if not already installed): <code class="language-plaintext highlighter-rouge">make install-conda</code></li>
+                <li>(You may need to exit the terminal and re-open for conda to be recognised. Navigate back to the same place.)</li>
+                <li>Create the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_training_material</code> conda environment: <code class="language-plaintext highlighter-rouge">make create-env</code></li>
+              </ol>
+            </li>
+            <li>
+              <p>Activate the conda environment with <code class="language-plaintext highlighter-rouge">conda activate <span class="notranslate">galaxy</span>_training_material</code></p>
+            </li>
+          </ol>
+        </li>
+        <li>Option 2: Using pip by running <code class="language-plaintext highlighter-rouge">pip install planemo</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Generate the skeleton of your tutorial (by adapting the information between the quotes)</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  $ planemo training_init \
+         --topic_name "my-topic" \
+         --tutorial_name "my-new-tutorial" \
+         --tutorial_title "Title of the tutorial" \
+         --<span class="notranslate">galaxy</span>_url "URL to <span class="notranslate">Galaxy</span> instance in which you created the <span class="notranslate">workflow</span>" \
+         --<span class="notranslate">galaxy</span>_api_key "Your API key on the <span class="notranslate">Galaxy</span> instance" \
+         --workflow_id "ID of the <span class="notranslate">workflow</span> on the <span class="notranslate">Galaxy</span> instance" \
+         --zenodo_link "URL to the Zenodo record"
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Check that a new directory (with your tutorial name) has been generated in the topic folder</p>
+    </li>
+  </ol>
+</blockquote>
+
 <h1 id="write-the-tutorial">Write the tutorial</h1>
 
 <p>Now that you have the structure in place, you can then fill the tutorial per se.</p>
@@ -824,32 +956,19 @@ So be careful when you start your upload that all your needed files are ready.</
   </ol>
 </blockquote>
 
-<h1 id="add-some-technical-support-recommended">Add some technical support (recommended)</h1>
+<h1 id="keep-track-of-the-changes">Keep track of the changes</h1>
 
-<p>To be able to run the tutorial, we need a <span class="notranslate">Galaxy</span> instance where the needed tools and the data are available. We need then to describe the required technical infrastructure. Tools are installed based on the workflows in the <code class="language-plaintext highlighter-rouge">workflows</code> directory.</p>
+<p>The material is stored in a <a href="https://github.com/galaxyproject/training-material">GitHub repository</a>, a code hosting platform for version control and collaboration. So to develop training material, we are following the <a href="https://guides.github.com/introduction/flow/">GitHub flow</a>, which is based on fork, branches, and pull requests.</p>
 
-<p>This description will be used to automatically set up a Docker <span class="notranslate">Galaxy</span> flavour, to set up an existing <span class="notranslate">Galaxy</span> instance and also to test if a public <span class="notranslate">Galaxy</span> instance is able to run the tool.</p>
+<p>This can be done online via the GitHub interface or locally on your computer via command-line.</p>
 
-<p>The technical support are different files:</p>
-
-<ul>
-  <li><span class="notranslate">workflow</span> file(s) in the <code class="language-plaintext highlighter-rouge">workflows</code> directory</li>
-  <li>the <code class="language-plaintext highlighter-rouge">data-library.yaml</code> file with the links to the input data needed for the tutorial</li>
-  <li>interactive tour file in the directory <code class="language-plaintext highlighter-rouge">tours</code> directory</li>
-</ul>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-add-technical-support-for-the-tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add technical support for the tutorial</h3>
-
-  <ol>
-    <li>Add some technical support for the tutorial following the <a href="/training-material/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html">tutorial</a>
-      <ul>
-        <li>Add the <span class="notranslate">workflow</span></li>
-        <li>(Recommended) Generate the <code class="language-plaintext highlighter-rouge">data-library.yaml</code></li>
-        <li>(Optional) Create an interactive tour</li>
-      </ul>
-    </li>
-  </ol>
+<blockquote class="comment">
+  <h3 id="comment-learning-how-to-contribute"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Learning how to contribute</h3>
+  <p>Want to learn how to contribute? Check our tutorials:</p>
+  <ul>
+    <li><a href="/training-material/topics/contributing/tutorials/github-interface-contribution/tutorial.html">Contributing with GitHub via its interface</a></li>
+    <li><a href="/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html">Contributing with GitHub via command-line</a></li>
+  </ul>
 </blockquote>
 
 <h1 id="add-slides-optional">Add slides (optional)</h1>
@@ -870,11 +989,11 @@ So be careful when you start your upload that all your needed files are ready.</
 
 <ol>
   <li>Determine the topic</li>
-  <li>Create the directory for the tutorial</li>
-  <li>Add some metadata</li>
+  <li>Create a <span class="notranslate">workflow</span></li>
   <li>Find a good toy dataset and upload it to Zenodo</li>
+  <li>Create the skeleton for the tutorial</li>
+  <li>Add some metadata</li>
   <li>Write the tutorial</li>
-  <li>Add some technical support (recommended)</li>
   <li>Add slides (optional)</li>
 </ol>
 
@@ -886,11 +1005,16 @@ So be careful when you start your upload that all your needed files are ready.</
   <ol>
     <li>Determine the topic</li>
     <li>Create your <span class="notranslate">workflow</span> on a running <span class="notranslate">Galaxy</span> instance</li>
-    <li>Add the topic name as a Tag and the tutorial title as Annotation/Notes to the <span class="notranslate">workflow</span> using the <span class="notranslate">workflow</span> editor.</li>
+    <li>Add the topic name as a Tag and the tutorial title as Annotation/Notes to the <span class="notranslate">workflow</span> using the <span class="notranslate">workflow</span> editor</li>
     <li>Create a Zenodo record with the input data</li>
-    <li>Generate the skeleton of your tutorial
+    <li>
+      <p>Generate the skeleton of your tutorial</p>
+
       <ul>
-        <li>option 1: from a <span class="notranslate">workflow</span> located on a <span class="notranslate">Galaxy</span>
+        <li>Option 1: from the <a href="https://ptdk.herokuapp.com/">PTDK webserver</a> and get the skeleton in the training material</li>
+        <li>
+          <p>Option 2: from a <span class="notranslate">workflow</span> located on a <span class="notranslate">Galaxy</span></p>
+
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ planemo training_init \
        --topic_name "my-topic" \
        --tutorial_name "my-new-tutorial" \
@@ -901,25 +1025,20 @@ So be careful when you start your upload that all your needed files are ready.</
        --zenodo_link "URL to the Zenodo record"
 </code></pre></div>          </div>
         </li>
-        <li>
-          <p>option 2: from a local <span class="notranslate">workflow</span> file (<code class="language-plaintext highlighter-rouge">.ga</code>) (use only if your <span class="notranslate">workflow</span> is composed of tools from the main <span class="notranslate">ToolShed</span>)</p>
-
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ planemo training_init \
-       --topic_name "my-topic" \
-       --tutorial_name "my-new-tutorial" \
-       --tutorial_title "Title of the tutorial" \
-       --<span class="notranslate">workflow</span> "path/to/<span class="notranslate">workflow</span>" \
-       --zenodo_link "URL to the Zenodo record"
-</code></pre></div>          </div>
-          <p>You can use the example <span class="notranslate">workflow</span> file located at <code class="language-plaintext highlighter-rouge">topics/contributing/tutorials/create-new-tutorial/workflows/example-<span class="notranslate">workflow</span>.ga</code> if
-you do not have a <span class="notranslate">workflow</span> of your own. This is the <span class="notranslate">workflow</span> belonging to the <em><span class="notranslate">Galaxy</span> 101</em> introduction tutorial.</p>
-        </li>
       </ul>
     </li>
     <li>Fill the remaining metadata in the <code class="language-plaintext highlighter-rouge">tutorial.md</code></li>
     <li>Fill the content of the <code class="language-plaintext highlighter-rouge">tutorial.md</code></li>
-    <li>Check it using Jekyll</li>
+    <li>
+      <p>Check it by serving the website locally</p>
+
+      <blockquote class="comment">
+        <h3 id="comment-serving-the-website-locally"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Serving the website locally</h3>
+        <p>Want to learn how to see the change on the website locally? <a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Check out our dedicated tutorial</a></p>
+      </blockquote>
+    </li>
   </ol>
+
 </blockquote>
 
 
@@ -985,7 +1104,7 @@ you do not have a <span class="notranslate">workflow</span> of your own. This is
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Bérénice Batut, Helena Rasche, Saskia Hiltemann, Lucille Delisle, 2020 <b>Creating a new tutorial (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html">https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Bérénice Batut, Helena Rasche, Saskia Hiltemann, Lucille Delisle, 2021 <b>Creating a new tutorial (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html">https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1002,9 +1121,9 @@ you do not have a <span class="notranslate">workflow</span> of your own. This is
 <code id="citation-code">@misc{contributing-create-new-tutorial,
     author = "Bérénice Batut and Helena Rasche and Saskia Hiltemann and Lucille Delisle",
     title = "Creating a new tutorial (Galaxy Training Materials)",
-    year = "2020",
-    month = "12",
-    day = "14"
+    year = "2021",
+    month = "06",
+    day = "10"
     url = "\url{https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
