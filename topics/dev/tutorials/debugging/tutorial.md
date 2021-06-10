@@ -56,7 +56,7 @@ With the skills from this tutorial, it is our hope that you will feel more prepa
 
 For almost every type of error you encounter, there will be a relatively similar process:
 
-1. Locate failing test or error on GitHub workflows
+1. Locate failing test or error on GitHub Actions
 2. Run failing test locally
 3. Identify issue causing failure
 4. Develop a solution
