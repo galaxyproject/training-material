@@ -291,7 +291,7 @@
   "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html",
   "timeRequired": "PT1H",
   "keywords": "jobs",
-  "description": "The questions this  addresses are:\n - How to connect Galaxy to a compute cluster?\n\n\\nThe objectives are:\n - Be familiar with the basics of installing, configuring, and using Slurm\n - Understand all components of the Galaxy job running stack\n - Understand how the `job_conf.xml` file controls Galaxy's jobs subsystem\n - Have a strong understanding of Galaxy job destinations\n\n",
+  "description": "The questions this  addresses are:\n - How to connect Galaxy to a compute cluster?\n - What are job metrics?\n - What sort of information can I collect?\n - Where can I find this information?\n\n\\nThe objectives are:\n - Be familiar with the basics of installing, configuring, and using Slurm\n - Understand all components of the Galaxy job running stack\n - Understand how the `job_conf.xml` file controls Galaxy's jobs subsystem\n - Have a strong understanding of Galaxy job destinations\n - Understand the purpose and function of Galaxy job metrics\n\n",
   "coursePrerequisites": [
     {
       "@type": "Course",
@@ -410,6 +410,15 @@
             <li><p>How to connect Galaxy to a compute cluster?</p>
 </li>
             
+            <li><p>What are job metrics?</p>
+</li>
+            
+            <li><p>What sort of information can I collect?</p>
+</li>
+            
+            <li><p>Where can I find this information?</p>
+</li>
+            
             </ul>
 
             <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
@@ -425,6 +434,9 @@
 </li>
             
             <li><p>Have a strong understanding of Galaxy job destinations</p>
+</li>
+            
+            <li><p>Understand the purpose and function of Galaxy job metrics</p>
 </li>
             
             </ul>
@@ -460,8 +472,6 @@
                                 
                             
                             </li>
-                        
-                    
                         
                     
                         
@@ -621,8 +631,6 @@
                     
                         
                     
-                        
-                    
                 
             </ul>
         
@@ -666,7 +674,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 8, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 10, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -697,6 +705,13 @@ be taken into consideration when choosing where to run jobs and what parameters 
   </li>
   <li><a href="#galaxy-and-slurm" id="markdown-toc-galaxy-and-slurm"><span class="notranslate">Galaxy</span> and Slurm</a>    <ol>
       <li><a href="#running-a-job" id="markdown-toc-running-a-job">Running a Job</a></li>
+    </ol>
+  </li>
+  <li><a href="#recording-job-metrics" id="markdown-toc-recording-job-metrics">Recording Job Metrics</a>    <ol>
+      <li><a href="#setting-up-galaxy" id="markdown-toc-setting-up-galaxy">Setting up <span class="notranslate">Galaxy</span></a></li>
+      <li><a href="#generating-metrics" id="markdown-toc-generating-metrics">Generating Metrics</a></li>
+      <li><a href="#what-should-i-collect" id="markdown-toc-what-should-i-collect">What should I collect?</a></li>
+      <li><a href="#accessing-the-data" id="markdown-toc-accessing-the-data">Accessing the data</a></li>
       <li><a href="#further-reading" id="markdown-toc-further-reading">Further Reading</a></li>
     </ol>
   </li>
@@ -1222,6 +1237,130 @@ Jan 12 15:46:01 gat-1.oz.training.<span class="notranslate">galaxy</span>project
   </ul>
 </blockquote>
 
+<h1 id="recording-job-metrics">Recording Job Metrics</h1>
+
+<p>Job metrics record properties of the jobs that are executed, information that can help you plan for trainings or plan capacity for further expansions of your <span class="notranslate">Galaxy</span> server. These properties include details such as the number of slots (cores) assigned to a job, the amount of memory available, details about the node on which the job executed, environment variables that were set at execution time, and more.</p>
+
+<p><span class="notranslate">Galaxy</span> collects and records very few job metrics by default, enabling more metrics plugins is recommended for any cluster-enabled <span class="notranslate">Galaxy</span> deployment. The metrics are stored in the <span class="notranslate">Galaxy</span> database, which can be queried exte<span class="notranslate">rna</span>lly to generate reports and debug job problems.</p>
+
+<p>Some work has been done to try to analyse job runtime metrics to optimise cluster allocation based on job inputs, and enhance job submission (<a class="citation" href="#Tyryshkina_2019">Tyryshkina <i>et al.</i> 2019</a>). More work will be done in this area.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-note"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note</h3>
+
+  <p>Job metrics are only visible to <span class="notranslate">Galaxy</span> <em>admin users</em>, unless you set <code class="language-plaintext highlighter-rouge">expose_potentially_sensitive_job_metrics: true</code>, like Use<span class="notranslate">Galaxy</span>.eu does. EU’s intention with this is to empower users and make everything as transparent as possible.</p>
+
+  <p>This is the only option controlling which metrics general users see. Admins see all metrics collected, and by default general users see none.
+However most of the metrics exposed by this setting are quite safe (e.g. cgroups information on resource consumption, walltime, etc.)</p>
+
+</blockquote>
+
+<h2 id="setting-up-galaxy">Setting up <span class="notranslate">Galaxy</span></h2>
+
+<p>By default, <span class="notranslate">Galaxy</span> enables the <code class="language-plaintext highlighter-rouge">core</code> metrics:</p>
+
+<p><img src="../../images/job-metrics-basic.png" alt="screenshot of galaxy metrics" /></p>
+
+<p>These include very basic submission parameters. We want more information!</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-setting-up-the-job-metrics-plugin-configuration"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Setting up the job metrics plugin configuration</h3>
+
+  <ol>
+    <li>
+      <p>Edit the <strong>global</strong> (for all hosts) group variables file, <code class="language-plaintext highlighter-rouge">group_vars/all.yml</code>:</p>
+
+      <blockquote class="details">
+        <h3 id="details-why-are-we-editing-all-instead-of-galaxyservers-vars"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Why are we editing “all” instead of “<span class="notranslate">galaxy</span>servers” vars?</h3>
+        <p>Both <span class="notranslate">Galaxy</span> and Pulsar use job metrics plugins, and when we configure Pulsar later, we will want it to have the same metrics plugin configuration as <span class="notranslate">Galaxy</span>. Putting this variable in <code class="language-plaintext highlighter-rouge">all.yml</code> will allow us to refer to it later when setting the corresponding variable for Pulsar.</p>
+      </blockquote>
+
+      <p>The variable we’ll set is named <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_job_metrics_plugins</code>:</p>
+
+      <div data-commit="Configure job metrics plugins" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/all.yml
+</span><span class="gi">+++ b/group_vars/all.yml
+</span><span class="p">@@ -2,3 +2,13 @@</span>
+ cvmfs_role: client
+ <span class="notranslate">galaxy</span>_cvmfs_repos_enabled: config-repo
+ cvmfs_quota_limit: 500
+<span class="gi">+
++# <span class="notranslate">Galaxy</span> vars that will be reused by Pulsar
++<span class="notranslate">galaxy</span>_job_metrics_plugins:
++  - type: core
++  - type: cpuinfo
++  - type: meminfo
++  - type: uname
++  - type: env
++  - type: cgroup
++  - type: hostname
+</span>   
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run your <span class="notranslate">Galaxy</span> playbook</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-10"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Currently, the job metrics plugin configuration is stored in a separate configuration file from <span class="notranslate">Galaxy</span>’s main configuration file (<code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>). By setting <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_job_metrics_plugins</code>, we instructed the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role to create this file, and update the option (<code class="language-plaintext highlighter-rouge">job_metrics_config_file</code>) in <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> that sets the path to this file. You can inspect the contents of the new config file on your <span class="notranslate">Galaxy</span> server:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-input-bash-11"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /srv/<span class="notranslate">galaxy</span>/config/job_metrics_conf.yml
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out code-max-300">
+  <h3 id="code-out-output-bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+  <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="c1">##</span>
+<span class="c1">## This file is managed by Ansible.  ALL CHANGES WILL BE OVERWRITTEN.</span>
+<span class="c1">##</span>
+<span class="pi">-</span>   <span class="na">type</span><span class="pi">:</span> <span class="s">core</span>
+<span class="pi">-</span>   <span class="na">type</span><span class="pi">:</span> <span class="s">cpuinfo</span>
+<span class="pi">-</span>   <span class="na">type</span><span class="pi">:</span> <span class="s">meminfo</span>
+<span class="pi">-</span>   <span class="na">type</span><span class="pi">:</span> <span class="s">uname</span>
+<span class="pi">-</span>   <span class="na">type</span><span class="pi">:</span> <span class="s">env</span>
+<span class="pi">-</span>   <span class="na">type</span><span class="pi">:</span> <span class="s">cgroup</span>
+<span class="pi">-</span>   <span class="na">type</span><span class="pi">:</span> <span class="s">hostname</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<h2 id="generating-metrics">Generating Metrics</h2>
+
+<p>With this, the job metrics collection and recording should be set up. Now when you run a job, you will see many more metrics:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-generate-some-metrics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate some metrics</h3>
+
+  <ol>
+    <li>
+      <p>Run a job (any tool is fine, even upload)</p>
+    </li>
+    <li>
+      <p>View the information of the output dataset (<i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-info</span>)</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img src="../../images/job-metrics-advanced.png" alt="advanced metrics" /></p>
+
+<h2 id="what-should-i-collect">What should I collect?</h2>
+
+<p>There is not a good rule we can tell you, just choose what you think is useful or will be. Numeric parameters are “cheaper” than the text parameters (like uname to store), eventually you may find yourself wanting to remove old job metrics if you decide to collect the environment variables or similar.</p>
+
+<h2 id="accessing-the-data">Accessing the data</h2>
+
+<p>You can access the data via BioBlend (<a href="https://bioblend.readthedocs.io/en/latest/api_docs/galaxy/all.html#bioblend.galaxy.jobs.JobsClient.get_metrics"><code class="language-plaintext highlighter-rouge">JobsClient.get_metrics</code></a>), or via SQL with <a href="https://usegalaxy-eu.github.io/gxadmin/#/README.query?id=query-tool-metrics"><code class="language-plaintext highlighter-rouge">gxadmin</code></a>.</p>
+
 <!--SNIPPET-->
 <blockquote class="comment">  <h3 data-toc-skip="" id="-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Got lost along the way?</h3>  <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-6">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-5...step-6#files_bucket">the previous tutorial</a>.</p></blockquote>
 
@@ -1233,7 +1372,7 @@ Jan 12 15:46:01 gat-1.oz.training.<span class="notranslate">galaxy</span>project
   <li>The <a href="https://www.drmaa.org/">Distributed Resource Management Application API (DRMAA)</a> page contains the DRMAA specification as well as documentation for various implementations. It also includes a list of DRMs supporting DRMAA.</li>
   <li>The <a href="http://slurm.schedmd.com/">Slurm documentation</a> is extensive and covers all the features and myriad of ways in which you can configure slurm.</li>
   <li><a href="http://apps.man.poznan.pl/trac/slurm-drmaa">PSNC slurm-drmaa</a>’s page includes documentation and the SVN repository, which has a few minor fixes since the last released version. PSNC also wrote the initial implementations of the DRMAA libraries for PBSPro and LSF, so all three are similar.</li>
-  <li><a href="http://github.com/natefoo/slurm-drmaa">Our own fork of slurm-drmaa</a> includes support for Slurms <code class="language-plaintext highlighter-rouge">-M</code>/<code class="language-plaintext highlighter-rouge">--clusters</code> multi-cluster functionality.</li>
+  <li><a href="http://github.com/natefoo/slurm-drmaa">Our own fork of slurm-drmaa</a> includes support for Slurms <code class="language-plaintext highlighter-rouge">-M</code>/<code class="language-plaintext highlighter-rouge">--clusters</code> multi-cluster functionality and newer versions of Slurm.</li>
   <li><a href="http://slurm.schedmd.com/accounting.html">Slurm Accounting documentation</a> explains how to set up SlurmDBD.</li>
 </ul>
 
@@ -1260,6 +1399,19 @@ Jan 12 15:46:01 gat-1.oz.training.<span class="notranslate">galaxy</span>project
 
                     
 
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="Tyryshkina_2019">Tyryshkina, A., N. Coraor, and A. Nekrutenko, 2019 <b>Predicting runtimes of bioinformatics tools based on historical data: five years of Galaxy usage</b> (J. Wren, Ed.). Bioinformatics 35: 3453–3460.</span>
+    
+    
+    <a href="https://doi.org/10.1093/bioinformatics/btz054">10.1093/bioinformatics/btz054</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li></ol>
                     
 
                     
@@ -1319,7 +1471,7 @@ Jan 12 15:46:01 gat-1.oz.training.<span class="notranslate">galaxy</span>project
     title = "Connecting Galaxy to a compute cluster (Galaxy Training Materials)",
     year = "2021",
     month = "06",
-    day = "08"
+    day = "10"
     url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
@@ -1428,8 +1580,6 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                                 
                             
                             </li>
-                        
-                    
                         
                     
                         
