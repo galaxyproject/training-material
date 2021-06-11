@@ -118,6 +118,10 @@
     {
       "@type": "Person",
       "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": "Nicola Soranzo"
     }
   ],
   "contributor": [
@@ -128,6 +132,10 @@
     {
       "@type": "Person",
       "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": "Nicola Soranzo"
     }
   ],
   "about": [
@@ -173,7 +181,7 @@ class: center, middle, inverse
 <div class="contributors-line">
 
 
- <a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a> <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Helena Rasche">Helena Rasche</a>
+ <a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a> <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Helena Rasche">Helena Rasche</a> <a href="/training-material/hall-of-fame/nsoranzo/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nsoranzo" alt="Nicola Soranzo">Nicola Soranzo</a>
 
 
 </div>
@@ -261,12 +269,12 @@ What is Galaxy?
 
 # Why use Galaxy?
 
-- It is **easy**!
+- It's **easy**!
     - No installation, all you need is a browser.
     - No complex commands, just point and click!
 
 
-- It is **reproducible**
+- Makes your research **reproducible**
     - Galaxy keeps track of all analysis details
 
 
@@ -278,8 +286,9 @@ What is Galaxy?
 
 - Data analysis can be very complex.
 - It often requires specialized programming knowledge or command line skills.
-- Galaxy makes this a lot easier by providing a graphical user interface to popular data analysis tools.
-- Galaxy is web based. This means you don't have to install anything, just open your browser and go to Galaxy.
+- Galaxy makes this a lot easier by providing a web-based user interface to popular data analysis tools.
+- This means you don't have to install anything, just open your browser and go to Galaxy.
+- Galaxy also helps you make your research reproducible by keeping track of your analysis steps.
 - Galaxy supports many different scientific domains.
 
 ---
@@ -300,16 +309,16 @@ What is Galaxy?
 
 
 - Many other smaller, often domain-specific Galaxies available (125+)
- - List of all Galaxies: [galaxyproject.org/use](https://galaxyproject.org/use/)
+ - List of all public Galaxies: [galaxyproject.org/use](https://galaxyproject.org/use/)
 
 ???
 
-- There are three main Galaxy servers. Galaxy Main, Galaxy Europe, and Galaxy Australia.
+- There are three main Galaxy servers: Galaxy Main, Galaxy Europe, and Galaxy Australia.
 - These three Galaxies have the biggest teams behind them, and offer the most tools and resources.
 - You can register an account for free on any of these servers.
-- In addition, there are many smaller galaxy servers to choose from.
-- Many of these are domain specific. For example, Galaxy proteomics focuses on proteomics tools and workflows.
-
+- In addition, there are many smaller Galaxy servers to choose from.
+- Many of these are domain specific. For example, Galaxy Proteomics focuses on proteomics tools and workflows.
+- A lot of universities and other institutions have local private servers.
 
 ---
 
@@ -355,7 +364,7 @@ What is Galaxy?
 - The first step of an analysis is to get your data into Galaxy.
 - This can be done in several ways.
 - You can upload files from your computer.
-- Or you can enter a URL, and Galaxy will download the data for you.
+- Or you can enter an Internet URL, and Galaxy will download the data for you.
 - Furthermore, Galaxy can import data directly from many online data stores such as UCSC, NCBI, and many more.
 
 ---
@@ -363,7 +372,7 @@ What is Galaxy?
 # History
 
 .pull-left[
-- Files appear in your **history**
+- The **history** collects all the files of your analysis
 
 
 - Three buttons
@@ -449,14 +458,15 @@ What is Galaxy?
 
 - When you click on a tool, it will show up in the middle panel.
 - Here you can select your input files and set the parameters for the tool.
-- Then you can hit the execute button to start the tool.
+- Then you can hit the Execute button to start the tool.
+- Older versions of a tool are usually kept available to ensure reproducibility.
 
 ---
 
 # Analysis Results
 
 .pull-left[
-- Tool outputs are added to history
+- Tool outputs are added to the history
 
 
 - Different dataset states
@@ -506,8 +516,8 @@ What is Galaxy?
 
 ???
 
-- Galaxy also has many options to visualize your datasets.
-- Depending on the data type, there will be different visualisation options.
+- Galaxy offers several ways to visualize your datasets depending on their format.
+- For example, protein PDB data can be seen in a 3D viewer.
 
 ---
 
@@ -515,16 +525,17 @@ What is Galaxy?
 
 - Starting a new analysis? Create a new history &lt;i class=&quot;fas fa-plus&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;new-history&lt;/span&gt;
 - You can have as many histories as you want
-- You can switch back and forth between histories &lt;i class=&quot;fas fa-columns&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;galaxy-history&lt;/span&gt;
-- Giving your histories good names will help to keep track of your analyses
+- Overview of all your histories &lt;i class=&quot;fas fa-columns&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;galaxy-history&lt;/span&gt;
+- Good names for your histories help to keep track of your analyses
 
 ![multiple history view](/training-material/topics/introduction/images/galaxy_interface_multiple_histories.png)
 
 ???
 
-- When you want to start a new analysis, you can create a new history using the plus icon at the top of the history panel.
-- You can have as many histories as you want.
-- You can easily switch back and forth between histories.
+- When you want to start a new analysis, create a new history using the plus icon at the top of the history panel.
+- You can always go back to an old history, and there is no limit on the number of histories you can create.
+- An overview of your histories is available where you can easily copy files around.
+- Copying datasets instead of re-uploading them let you save on your quota.
 - Giving your histories good names will help you keep track of your analyses'
 
 ---
@@ -545,7 +556,7 @@ What is Galaxy?
 - There are multiple ways to create a workflow.
 - Workflows can be automatically extracted from a history.
 - This means you perform the analysis manually once, and then can easily repeat it on different input data.
-- You can also build workflows by hand using the workflow editor.
+- You can also build workflows by hand using the workflow editor to connect the tools.
 - Or you can import a workflow somebody else has shared with you.
 
 
@@ -653,7 +664,7 @@ This material is the result of a collaborative work. Thanks to the [Galaxy Train
 <div class="contributors-line">
 
 
- <a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a> <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Helena Rasche">Helena Rasche</a>
+ <a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a> <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Helena Rasche">Helena Rasche</a> <a href="/training-material/hall-of-fame/nsoranzo/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nsoranzo" alt="Nicola Soranzo">Nicola Soranzo</a>
 
 
 </div>
