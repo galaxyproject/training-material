@@ -29,6 +29,8 @@ contributors:
 
 <!-- This is a comment. -->
 
+{% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/Introduction.md %}
+
 General introduction about the topic and then an introduction of the
 tutorial (the questions and the objectives). It is nice also to have a
 scheme to sum up the pipeline used during the tutorial. The idea is to
@@ -125,6 +127,14 @@ have fun!
 {% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/bwa_mem.md %}
 
 {% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/samtools_stats.md %}
+
+{% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/ivar_trim.md %}
+
+{% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/Variant_annotation.md %}
+
+{% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/Consensus_genome_characterization.md %}
+
+{% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/Lineage_designation.md %}
 
 # Title of the section usually corresponding to a big step in the analysis
 
