@@ -37,7 +37,7 @@ In 2016, the Galaxy Training Network decide to set up a new infrastructure for e
 We took inspiration from [Software Carpentry](https://software-carpentry.org) and collected everything on a GitHub repository: [https://github.com/galaxyproject/training-material](https://github.com/galaxyproject/training-material).
 We decided on a structure focusing on tutorials with hands-on activities; fitting both for online self-training but also for workshops. Each tutorial follows the same structure and comes with a virtualised instance allowing you to run the training anywhere you have resources available.
 
-Here you will learn how to create a new tutorial by developing a small tutorial that explains how to use BLAST.
+Here you will learn how to create a new tutorial by developing a small tutorial explaining how to retrieve climate data from Copernicus (using **Copernicus Climate Data Store** tool).
 
 > ### Agenda
 >
@@ -55,26 +55,31 @@ Here you will learn how to create a new tutorial by developing a small tutorial 
 
 # Define the topic
 
-The first question we need to answer is in which topic to place our new tutorial. This can be tricky. When we structured the GTN, we decided that each training material should be related to a topic.
+The first step we need to do is to identify in which topic to place our new tutorial. This can be tricky. When we structured the GTN, we decided that each training material should be related to a topic.
 
-We decided to use the categories from the [ToolShed](https://toolshed.g2.bx.psu.edu/) as our initial list of topics. Since every tool uploaded to the ToolShed must be in at least one category, you can look at the main tools in your tutorial and see which categories they are placed in within the ToolShed. This can provide a guide for where you might put your new tutorial. For example, if your tutorial will rely on the NCBI Blast+ tool:
+We decided to use the categories from the [ToolShed](https://toolshed.g2.bx.psu.edu/) as our initial list of topics. Since every tool uploaded to the ToolShed must be in at least one category, you can look at the main tools in your tutorial and see which categories they are placed in within the ToolShed. This can provide a guide for where you might put your new tutorial. For example, if your tutorial will rely on the **Copernicus** tool:
 
 > ### {% icon hands_on %} Hands-on: Defining the topic for the tutorial
 >
-> 1. Search for NCBI Blast+ on the [ToolShed](https://toolshed.g2.bx.psu.edu/)
+> 1. Search for **Copernicus** on the [ToolShed](https://toolshed.g2.bx.psu.edu/)
 > 2. Check in which category it has been placed
 >
 > > ### {% icon solution %} Solution
 > > There are a couple steps to reaching the answer:
-> > 1. Search for `ncbi blast+`
+> > 1. Search for `Copernicus`
 > > 2. Press the <kbd>Enter</kbd> key to search
-> > 3. Click on the result named `ncbi_blast_plus`
+> > 3. Click on the result named `c3s`
 > > 4. At the bottom of this page there is a box labelled "Categories"
 > >
-> > It is placed in two categories, "Next Gen Mappers" and "Sequence Analysis"
+> > It is placed in one category: "Climate Analysis"
 > {: .solution}
 >
+> 3. Look if the categories fit to existing topics in the Galaxy Training Material
 {: .hands_on}
+
+> ### {% icon comment %} No fitting topic for the tools in your tutorial?
+> If the categories in ToolShed do not fit to any existing topics, we recommend to use your better judgment to identify in which topic your tutorial should go. You can also ask us on [Gitter]({{ site.gitter }}) or raise an issue on [GitHub]({{ site.github }}) explaining the aim of the tutorial. We will be happy to help you there.
+{: .comment}
 
 > ### {% icon comment %} Creating a new topic
 > Want to create a new topic? [Check out our tutorial to create a new topic]({% link topics/contributing/tutorials/create-new-topic/tutorial.md %})
@@ -82,7 +87,7 @@ We decided to use the categories from the [ToolShed](https://toolshed.g2.bx.psu.
 
 # Store a tutorial
 
-All training materials (slides, tutorials, ...) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to transcriptomics analysis). Each topic has the following structure:
+All training materials (slides, tutorials, ...) related to a topic are found in a dedicated directory (*e.g.* `climate` directory contains the material related to Climate analyses). Each topic has the following structure:
 
 ```
 ├── README.md
@@ -105,7 +110,7 @@ All training materials (slides, tutorials, ...) related to a topic are found in 
 
 Once the topic has been chosen, we can create the tutorial. An ideal tutorial in the Galaxy Training Network contains:
 - a tutorial file `tutorial.md` written in Markdown with hands-on
-- an optional slides file `slides.md` in Markdown with slides to support the tutorial
+- an optional slides file `slides.html` in Markdown with slides to support the tutorial
 - a directory `workflows` with workflows extracted from the tutorial
 - a YAML file `data-library.yaml`  with the links to the input data needed for the tutorial
 
@@ -124,7 +129,7 @@ Before writing the tutorial, it is a good practice to get a workflow with the di
 {: .comment}
 
 
-> ### {% icon hands_on %} Hands-on: Defining the topic for the tutorial
+> ### {% icon hands_on %} Hands-on: Prepare the workflow for the training
 >
 > 1. Go to your favorite Galaxy server
 > 2. Create a workflow with the different steps (tools) of your tutorial either from scratch or from an existing history
@@ -133,7 +138,21 @@ Before writing the tutorial, it is a good practice to get a workflow with the di
 >
 >    {% snippet faqs/galaxy/workflows_extract_from_history.md %}
 >
+>    For the Copernicus tutorial:
+>    1. Add an **Input Dataset**
+>    2. Add **Copernicus Climate Data Store**
+>    3. Link the **Input Dataset** to **Copernicus Climate Data Store** on `API Request filename`
+>    4. Rename **Input Dataset** to `API Request file`
+>    5. Save the workflow
+>
 > 3. Add the topic name as a Tag and the tutorial title as Annotation/Notes to the workflow using the workflow editor
+>
+>    {% snippet faqs/galaxy/workflows_annotate.md %}
+>
+>    For the Copernicus tutorial:
+>    - **Annotation**: `Retrieve climate data from Copernicus`
+>    - **Tag**: `climate`
+>     
 {: .hands_on}
 
 
@@ -180,16 +199,16 @@ We would then develop the tutorial and test it on this toy dataset. Once we were
 >     > The metadata can be changed after publication.
 >     {: .comment}
 >
-> 6. Search for and Select *Galaxy training network* in **Communities**
+> 6. Search for and Select *Galaxy Training Network* in **Communities**
 > 7. Select *Dataset* in **Upload type**
 > 8. Use the title of your tutorial and mention also Galaxy Training Material
 > 9. Add all the persons who contributed to the tutorial as authors
 > 10. Add a short description of the tutorial and a link to the training material website
 > 11. Keep *Open Access* as **Access right** and *Creative Commons Attribution 4.0* as **License**
 > 12. Fill out any remaining information
-> 13. Click on **Publish**
-> 14. Copy the DOI link in the new page
-> 15. Paste the link in `zenodo_link` in the tutorial header
+> 13. Click on **Save**
+> 14. Click on **Publish**
+> 15. Copy the DOI link in the new page
 {: .hands_on}
 
 # Create the skeleton of the tutorial
@@ -209,19 +228,25 @@ This tool can be used via the command-line but also via a [webserver](https://pt
 > 2. Copy the workflow id that can be found in the URL of the current page (after `?id=`)
 > 3. Open the [PTDK webserver](https://ptdk.herokuapp.com/)
 > 4. Fill in the information
->    - Tutorial name, the name will be the name of the folder of the tutorial
+>    - Tutorial name (the name will be the name of the folder of the tutorial)
 >    - Tutorial title
 >    - Galaxy instance with the public workflow
 >    - Id of the workflow
 >    - (Not mandatory) Zenodo URL with the input data
+>
+>    For the Copernicus tutorial:
+>    - **Tutorial name** (the name will be the name of the folder of the tutorial): `climate-data-retrieval-copernicus`
+>    - **Tutorial title**: `Retrieve climate data from Copernicus`
+>    - **Galaxy instance with the public workflow**: `usegalaxy.eu`
+>    - **Id of the workflow**: `ac5b66c42681e7a8`
+>
 > 5. Click on **Submit**
 > 6. Download the generated archive
 >
->    This archive constains the tutorial skeleton including:
->    - tutorial content, tutorial.md file, filled with all steps from the workflow and their parameters
->    - its workflow (workflow folder)
->    - a data_library.yaml file if Zenodo link was provided
->     Create a GitHub account
+>    This archive contains the tutorial skeleton including:
+>    - tutorial content, `tutorial.md` file, filled with all steps from the workflow and their parameters
+>    - its workflow (`workflow` folder)
+>    - a `data_library.yaml` file if Zenodo link was provided
 >
 > 7. Add the new material to Galaxy Training Material by unzip the downloaded archive in the tutorials folder of the topic for the new tutorial
 >
@@ -304,7 +329,17 @@ Now that you have the structure in place, you can then fill the tutorial per se.
 >
 > 1. Open the `tutorial.md` file with your favorite text editor
 > 2. Fill out the tutorial by following the [dedicated tutorial]({% link topics/contributing/tutorials/create-new-tutorial-content/tutorial.md %})
-> 2. (Optional) Build the website locally and check that the tutorial is there by following the [Jekyll tutorial]({% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
+>    
+>    1. Add metadata on the top of the tutorial
+>    2. Add a proper introduction
+>    3. Organize the tutorial in different sections
+>    4. Introduce the different concepts and the different steps of the analysis
+>    5. Check the hands-on boxes
+>    6. Comment on the outputs of the different steps
+>    7. Add some question/solution boxes for assessment
+>    8. Add a conclusion
+>
+> 3. (Optional) Build the website locally and check that the tutorial is there by following the [Jekyll tutorial]({% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
 {: .hands_on}
 
 # Keep track of the changes
@@ -335,11 +370,13 @@ To develop a new tutorial:
 
 1. Determine the topic
 2. Create a workflow
-4. Find a good toy dataset and upload it to Zenodo
-2. Create the skeleton for the tutorial
-3. Add some metadata
-5. Write the tutorial
-7. Add slides (optional)
+3. Find a good toy dataset and upload it to Zenodo
+4. Create the skeleton for the tutorial
+5. Add the skeleton to the training material
+6. Write the tutorial
+7. Keep track of the changes
+8. Add slides (optional)
+9. Submit as a Pull Request to GitHub
 
 For the next times, you can make it quicker.
 
@@ -372,5 +409,6 @@ For the next times, you can make it quicker.
 >    > ### {% icon comment %} Serving the website locally
 >    > Want to learn how to see the change on the website locally? [Check out our dedicated tutorial]({% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
 >    {: .comment}
->
+> 
+> 9. Submit it to GitHub
 {: .hands_on}
