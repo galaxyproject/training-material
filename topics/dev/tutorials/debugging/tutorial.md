@@ -87,51 +87,61 @@ Good news! All of the failing tests are on the same Galaxy branch! That means yo
 > 1. Use GitHub UI to fork Galaxy's repository at `galaxyproject/galaxy`.
 > 2. Clone your forked repository to a local path, further referred to as `GALAXY_ROOT` and `cd` into `GALAXY_ROOT`. Note that we specify the tutorial branch with the `-b` option:
 >
-> ```shell
-> $ git clone -b training https://github.com/galaxyproject/galaxy GALAXY_ROOT
-> $ cd GALAXY_ROOT
-> ```
+>    ```shell
+>    git clone -b training https://github.com/<your-username>/galaxy GALAXY_ROOT
+>    cd GALAXY_ROOT
+>    ```
 >
-> Note: In the future, when you contribute to Galaxy, you'll need to clone the `dev` branch, which is the default, so you don't need to specify the `-b` option in the `git clone` command).
+>    Note: In the future, when you contribute to Galaxy, you'll need to clone the `dev` branch, which is the default, so you don't need to specify the `-b` option in the `git clone` command).
 >
 > 3. Before we can use Galaxy, we need to create a virtual environment and install the required dependencies. First, let's create a virtual environment:
 >
-> ```shell
-> $ virtualenv .venv
-> ```
+>    ```shell
+>    virtualenv .venv
+>    ```
 >
-> Make sure your Python version is at least 3.6 (you can check your Python version with `python --version`). If your system uses an older version, you may specify an alternative Python interpreter using the `-p` option:
+>    Make sure your Python version is at least 3.6 (you can check your Python version with `python --version`). If your system uses an older version, you may specify an alternative Python interpreter using the `-p` option:
 >
-> ```shell
-> $ virtualenv -p PATH-TO-PYTHON-INTERPETER .venv
-> ```
+>    ```shell
+>    virtualenv -p PATH-TO-PYTHON-INTERPETER .venv
+>    ```
 >
 > 4. Activate your new virtual environment:
 >
-> ```shell
-> . .venv/bin/activate
-> ```
+>    ```shell
+>    . .venv/bin/activate
+>    ```
 >
-> Once activated, you'll see the name of the virtual environment prepended to your shell prompt: `(.venv)$`. 5. Now you are ready to install the dependencies. Since you wil be doing development, you need to install the dependencies listed in `lib/galaxy/dependencies/dev-requirements.txt`:
+>    Once activated, you'll see the name of the virtual environment prepended to your shell prompt: `(.venv)$`. 5. Now you are ready to install the dependencies. Since you wil be doing development, you need to install the dependencies listed in `lib/galaxy/dependencies/dev-requirements.txt`:
 >
-> ```shell
-> $ pip install -r lib/galaxy/dependencies/dev-requirements.txt
-> ```
+>    ```shell
+>    pip install -r lib/galaxy/dependencies/dev-requirements.txt
+>    ```
 >
 > 6. Finally, let's create a new branch for your edits:
 >
-> ```shell
-> $ git checkout -b my-training
-> ```
+>    ```shell
+>    git checkout -b my-training
+>    ```
 >
-> Now when you run `git branch` you'll see that your new branch is activated:
+>    Now when you run `git branch` you'll see that your new branch is activated:
 >
-> ```shell
->   training
-> * my-training
-> ```
+>    > > ### {% icon code-in %} Input: Bash
+>    > > ```bash
+>    > > git branch
+>    > > ```
+>    > {: .code-in}
+>    >
+>    > > ### {% icon code-out %} Output
+>    > >
+>    > > ```shell
+>    > >   training
+>    > > * my-training
+>    > > ```
+>    > {: .code-out}
+>    {: .code-2col}
 >
-> Note: `my-training` is just an example; you can call your new branch anything you like.
+>    Note: `my-training` is just an example; you can call your new branch anything you like.
 {: .hands_on}
 
 # Unit test failure
@@ -141,6 +151,8 @@ Most of Galaxy unit tests are designed to test a separate component or function,
 > ### {% icon hands_on %} Hands-on: Fixing a failing unit test
 >
 > 1. **Finding the failing test on GitHub**
+>
+>    > ### {% icon question %} Which test is failing?
 >    > Head over to the [Galaxy repository on GitHub](https://github.com/galaxyproject/galaxy) and in the branch drop-down select the "training" branch. Click the red "x" next to the last commit, you'll get a drop-down listing of workflow results; find "Unit tests / Test (3..." and click "Details". This will display a detailed report that includes information about the failed tests. Try to find the failed tests.
 >    >
 >    > > ### {% icon solution %} Solution
@@ -154,6 +166,8 @@ Most of Galaxy unit tests are designed to test a separate component or function,
 >    > >
 >    > > The first is a doctest. While it will provide us with hints on what may have caused the error, the unit test is generally more helpful.
 >    > {: .solution }
+>    {: .question}
+>
 > 2. **Running the test locally**
 >    > An essential requirement for productive development is a fast feedback loop: we want to make a change, run a test, and get immediate feedback. If we push our edits to the remote fork (or submit a pull request to the upstream repository) and wait for the the tests to run remotely, it could take hours before we get any feedback, which is very inefficient (and detrimental to sustaining the joy of programming).
 >    >
@@ -394,7 +408,7 @@ Client tests are tests written by developers to test front-end code. In the case
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > The failure is only happening on the disabled test case, so take a look in the template of `SavedRulesSelector` where the conditions for adding disabled are defined.  
+>    > > The failure is only happening on the disabled test case, so take a look in the template of `SavedRulesSelector` where the conditions for adding disabled are defined.
 >    > > The way it's worded in the test (and the way one could think about it logically), is that if there is no history, the button should be disabled, but the code says
 >    > >
 >    > > ```javascript
@@ -408,7 +422,7 @@ Client tests are tests written by developers to test front-end code. In the case
 >    >
 >    > > ### {% icon comment %} Running fewer client tests
 >    > >
->    > > If you don't want to run the whole suite of client tests, you can add keywords that match the test path/name. For example both `yarn run jest rule` and `yarn jest selector` will work, but the former will run other tests with rule in the path/module name.  
+>    > > If you don't want to run the whole suite of client tests, you can add keywords that match the test path/name. For example both `yarn run jest rule` and `yarn jest selector` will work, but the former will run other tests with rule in the path/module name.
 >    > {: .comment}
 > 4. **Finishing up**
 >    > Nice Job! If you're here, you've found the problem, ran it locally, fixed the problem, ran it locally again without errors, and are ready to commit your change. Write a useful commit message like `Fix logic error in SavedRuleSelector` or something similar, making sure it is clear what you've done.
