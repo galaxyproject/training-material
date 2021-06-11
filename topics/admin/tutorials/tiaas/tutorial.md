@@ -59,20 +59,36 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >
 > 1. In your `requirements.yml` add the TIaaS ansible role:
 >
->    ```yml
+>    {% raw %}
+>    ```diff
+>    --- a/requirements.yml
+>    +++ b/requirements.yml
+>    @@ -30,3 +30,5 @@
+>       version: 0.0.3
+>     - src: usegalaxy_eu.influxdb
+>       version: v6.0.7
 >    - src: usegalaxy_eu.tiaas2
 >      version: 0.0.6
+>    {% endraw %}
 >    ```
+>    {: data-commit="Add grafana requirement"}
 >
 >    And run the install step:
 >
->    ```
->    ansible-galaxy install -p roles -r requirements.yml
->    ```
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > ansible-galaxy install -p roles -r requirements.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 > 2. In your `galaxyservers` group variables file, add the following:
 >
->    ```yml
+>    {% raw %}
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -192,3 +192,12 @@ rabbitmq_users:
 >    # TIaaS setup
 >    tiaas_dir: /opt/tiaas
 >    tiaas_user: tiaas
@@ -80,11 +96,17 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    tiaas_version: master
 >    tiaas_admin_user: admin
 >    tiaas_admin_pass: changeme
+>    {% endraw %}
 >    ```
+>    {: data-commit="Configure tiaas"}
 >
 > 2. In the `galaxyservers` group variables file, we also need to set the database permissions correctly for TIaaS. It needs to be able to access some Galaxy tables, and we will carefully define only the ones we really need:
 >
+>    {% raw %}
 >    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -192,3 +192,12 @@ rabbitmq_users:
 >    +++ group_vars/galaxyservers.yml
 >     postgresql_objects_users:
 >       - name: galaxy
@@ -110,14 +132,32 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    +  objs: role_id_seq,galaxy_group_id_seq,group_role_association_id_seq,user_group_association_id_seq
 >    +  type: sequence
 >    +  privs: USAGE,SELECT
+>    {% endraw %}
 >    ```
+>    {: data-commit="Add database privileges for TIaaS"}
 >
 >
 > 3. We need to add the `usegalaxy_eu.tiaas2` role to the end of the playbook (`galaxy.yml`)
+>    {% raw %}
+>    ```diff
+>    --- a/galaxy.yml
+>    +++ b/monitoring.yml
+>    @@ -2,3 +2,4 @@
+>       become: true
+>       roles:
+>         - usegalaxy_eu.influxdb
+>    +    - usegalaxy_eu.tiaas2
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add TIaaS role to the Galaxy playbook"}
 >
 > 4. Lastly we should add the routes for TIaaS to the NGINX template for Galaxy:
 >
->    ```nginx
+>    {% raw %}
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -192,3 +192,12 @@ rabbitmq_users:
 >        location /tiaas {
 >            uwsgi_pass 127.0.0.1:5000;
 >            uwsgi_param UWSGI_SCHEME $scheme;
@@ -133,14 +173,17 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >            uwsgi_param UWSGI_SCHEME $scheme;
 >            include uwsgi_params;
 >        }
+>    {% endraw %}
 >    ```
+>    {: data-commit="Add nginx routes for TIaaS"}
 >
 > 5. Run the playbook
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
+>    > {: data-cmd="true"}
 >    {: .code-in}
 >
 {: .hands_on}
@@ -234,7 +277,11 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >
 > 1. Create and open `files/galaxy/dynamic_job_rules/hogwarts.py`
 >
->    ```python
+>    {% raw %}
+>    ```diff
+>    --- a/files/galaxy/dynamic_job_rules/hogwarts.py
+>    +++ b/files/galaxy/dynamic_job_rules/hogwarts.py
+>    @@ -192,3 +192,12 @@ rabbitmq_users:
 >    from galaxy.jobs import JobDestination
 >    from galaxy.jobs.mapper import JobMappingException
 >    import os
@@ -254,49 +301,58 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >            return app.job_config.get_destination('slurm-2c') # or pulsar, if available
 >
 >        return app.job_config.get_destination('slurm')
+>    {% endraw %}
 >    ```
+>    {: data-commit="Setup sorting hat for jobs"}
 >
 >    This destination will check that the `user_email` is in a training group (role starting with `training-`).
 >
-> 2. As usual, we need to instruct Galaxy of where to find this file:
+> 2. As usual, we need to instruct Galaxy of where to find this file. Edit your group variables file and add the following:
 >
->    - Edit your group variables file and add the following:
->
->      ```diff
->       galaxy_dynamic_job_rules:
->         - my_rules.py
->      +  - hogwarts.py
->      ```
+>    {% raw %}
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -192,3 +192,12 @@ rabbitmq_users:
+>     galaxy_dynamic_job_rules:
+>       - my_rules.py
+>    +  - hogwarts.py
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add to list of deployed rules"}
 >
 > 3. We next need to configure this plugin in our job configuration (`files/galaxy/config/job_conf.xml.j2`):
 >
->    ```xml
+>    {% raw %}
+>    ```diff
+>    --- a/jobconf
+>    +++ b/jobconf
+>    @@ -192,3 +192,12 @@ rabbitmq_users:
+>    <destinations default="sorting_hat">
+>    ...
+>    </destinations>
 >    <destination id="sorting_hat" runner="dynamic">
 >        <param id="type">python</param>
 >        <param id="function">sorting_hat</param>
 >    </destination>
->    ```
->
->    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available to be used in the `job_conf.xml.j2`
->
-> 4. Again In `job_conf.xml.j2`, update the top level `<destinations>` definition and point it to the sorting hat:
->
->    ```xml
->    <destinations default="sorting_hat">
->    ...
->    </destinations>
->    ```
->
-> 5. Finally, upload jobs *must* stay local, the input files are a bit special, so we just send those to the local slurm cluster:
->
->    ```xml
 >        <tools>
 >            ...
 >            <tool id="upload1" destination="slurm"/>
 >        </tools>
+>    {% endraw %}
 >    ```
+>    {: data-commit="Setup job conf"}
+>
+>    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available to be used in the `job_conf.xml.j2`. Additionally it will send all jobs through the sorting hat, but we want upload jobs to stay local. They should always run locally.
 >
 > 6. Run the playbook
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 > 7. Ensure your user is joined to a training
 >
