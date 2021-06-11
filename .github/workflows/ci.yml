@@ -129,3 +129,9 @@ jobs:
             --allow-hash-href \
             --disable-external \
             ./_site
+      - name: Scan for accessibility issues
+        uses: microsoft/accessibility-insights-action@v2
+        with:
+            repo-token: ${{ secrets.GITHUB_TOKEN }}
+            site-dir: ${{ github.workspace }}/_site/
+            scan-url-relative-path: / # use // if windows agent
