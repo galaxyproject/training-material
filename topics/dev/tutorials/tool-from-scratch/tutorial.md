@@ -246,12 +246,12 @@ git push origin -u bellerophon_bioconda
 
 Git will give you a url for creating the pull request, which can be clicked to be taken to github.
 
-![Git push](images/git_push.png "Expected output of the `git push` command")
+![Git push](../../images/git_push.png "Expected output of the `git push` command")
 
 
 Once on the github pull request page, we can write a short description of the recipe we want to merge, and click the button.
 
-![Github PR](images/create_pr.png "An open pull request for the bellerophon conda recipe")
+![Github PR](../../images/create_pr.png "An open pull request for the bellerophon conda recipe")
 
 
 
@@ -293,7 +293,7 @@ Initializing a tool wrapper to be run in Galaxy is simple
     ```
 
 4. You can now open the new xml file that has been generated to begin the wrapping. It should look something like this:
-![Bellerophon initial wrapper](images/tool_init.png "Initial tool wrapper after running planemo tool_init")
+![Bellerophon initial wrapper](../../images/tool_init.png "Initial tool wrapper after running planemo tool_init")
 
 ## Galaxy Tool Wrappers
 
@@ -925,7 +925,7 @@ In order to do so `planemo` will:
 >
 > The HTML report contains a table on the top giving the number of executed, successful, and failed tests:
 >
-> ![Planemo HTML report](images/planemo_html.png "Planemo HTML report")
+> ![Planemo HTML report](../../images/planemo_html.png "Planemo HTML report")
 >
 > If there are passed or failed tests you will find the text `Passed tests`, `Failed tests`, resp., below the table.
 > Clicking on this text will unfold the list of passed or failed tests, resp. Clicking again on one of the tests
@@ -1036,7 +1036,7 @@ the development branch may have the name `master` instead of `main`.
 > 1. Open the [Sandbox tool repository](https://github.com/mvdbeek/galaxy-tools-mvdbeek/) in a browser.
 >
 >   - Click the `fork` button on the top right
->     ![IUC github repository](images/iuc-github.png "IUC github repository")
+>     ![IUC github repository](../../images/iuc-github.png "IUC github repository")
 >   - In the following dialog select your account
 >   - After a short while you will be redirected to your fork of the sandbox repository
 >     (i.e. a 1:1 copy of the original repository)
@@ -1111,7 +1111,7 @@ The CI jobs are listed on the bottom of the PR. Colored icons indicate the state
 
 The link "Details" on the right of the job brings you to a page showing the detailed output of the jobs (Alternatively the "Checks" tab on top of the PR page brings you to the CI output page.)
 
-![IUC output of the CI workflow](images/iuc-ci.png "output of the CI workflow")
+![IUC output of the CI workflow](../../images/iuc-ci.png "output of the CI workflow")
 
 The image above shows the CI page for a PR:
 
