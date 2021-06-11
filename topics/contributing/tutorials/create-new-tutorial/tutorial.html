@@ -547,10 +547,6 @@
         
     
         
-        <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
-            UseGalaxy.be
-        </a>
-        
     
         
     
@@ -575,7 +571,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 10, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 11, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -601,7 +597,7 @@
 <p>We took inspiration from <a href="https://software-carpentry.org">Software Carpentry</a> and collected everything on a GitHub repository: <a href="https://github.com/galaxyproject/training-material">https://github.com/<span class="notranslate">galaxy</span>project/training-material</a>.
 We decided on a structure focusing on tutorials with hands-on activities; fitting both for online self-training but also for workshops. Each tutorial follows the same structure and comes with a virtualised instance allowing you to run the training anywhere you have resources available.</p>
 
-<p>Here you will learn how to create a new tutorial by developing a small tutorial that explains how to use BLAST.</p>
+<p>Here you will learn how to create a new tutorial by developing a small tutorial explaining how to retrieve climate data from Copernicus (using <strong>Copernicus Climate Data Store</strong> tool).</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -629,15 +625,15 @@ It may require some knowledge that you may not have or do not have the time to l
 
 <h1 id="define-the-topic">Define the topic</h1>
 
-<p>The first question we need to answer is in which topic to place our new tutorial. This can be tricky. When we structured the GTN, we decided that each training material should be related to a topic.</p>
+<p>The first step we need to do is to identify in which topic to place our new tutorial. This can be tricky. When we structured the GTN, we decided that each training material should be related to a topic.</p>
 
-<p>We decided to use the categories from the <a href="https://toolshed.g2.bx.psu.edu/"><span class="notranslate">ToolShed</span></a> as our initial list of topics. Since every tool uploaded to the <span class="notranslate">ToolShed</span> must be in at least one category, you can look at the main tools in your tutorial and see which categories they are placed in within the <span class="notranslate">ToolShed</span>. This can provide a guide for where you might put your new tutorial. For example, if your tutorial will rely on the NCBI Blast+ tool:</p>
+<p>We decided to use the categories from the <a href="https://toolshed.g2.bx.psu.edu/"><span class="notranslate">ToolShed</span></a> as our initial list of topics. Since every tool uploaded to the <span class="notranslate">ToolShed</span> must be in at least one category, you can look at the main tools in your tutorial and see which categories they are placed in within the <span class="notranslate">ToolShed</span>. This can provide a guide for where you might put your new tutorial. For example, if your tutorial will rely on the <strong>Copernicus</strong> tool:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-defining-the-topic-for-the-tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Defining the topic for the tutorial</h3>
 
   <ol>
-    <li>Search for NCBI Blast+ on the <a href="https://toolshed.g2.bx.psu.edu/"><span class="notranslate">ToolShed</span></a></li>
+    <li>Search for <strong>Copernicus</strong> on the <a href="https://toolshed.g2.bx.psu.edu/"><span class="notranslate">ToolShed</span></a></li>
     <li>Check in which category it has been placed</li>
   </ol>
 
@@ -645,15 +641,23 @@ It may require some knowledge that you may not have or do not have the time to l
     <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <p>There are a couple steps to reaching the answer:</p>
     <ol>
-      <li>Search for <code class="language-plaintext highlighter-rouge">ncbi blast+</code></li>
+      <li>Search for <code class="language-plaintext highlighter-rouge">Copernicus</code></li>
       <li>Press the <kbd>Enter</kbd> key to search</li>
-      <li>Click on the result named <code class="language-plaintext highlighter-rouge">ncbi_blast_plus</code></li>
+      <li>Click on the result named <code class="language-plaintext highlighter-rouge">c3s</code></li>
       <li>At the bottom of this page there is a box labelled “Categories”</li>
     </ol>
 
-    <p>It is placed in two categories, “Next Gen Mappers” and “Sequence Analysis”</p>
+    <p>It is placed in one category: “Climate Analysis”</p>
   </blockquote>
 
+  <ol>
+    <li>Look if the categories fit to existing topics in the <span class="notranslate">Galaxy</span> Training Material</li>
+  </ol>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-no-fitting-topic-for-the-tools-in-your-tutorial"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> No fitting topic for the tools in your tutorial?</h3>
+  <p>If the categories in <span class="notranslate">ToolShed</span> do not fit to any existing topics, we recommend to use your better judgment to identify in which topic your tutorial should go. You can also ask us on <a href="">Gitter</a> or raise an issue on <a href="">GitHub</a> explaining the aim of the tutorial. We will be happy to help you there.</p>
 </blockquote>
 
 <blockquote class="comment">
@@ -663,7 +667,7 @@ It may require some knowledge that you may not have or do not have the time to l
 
 <h1 id="store-a-tutorial">Store a tutorial</h1>
 
-<p>All training materials (slides, tutorials, …) related to a topic are found in a dedicated directory (<em>e.g.</em> <code class="language-plaintext highlighter-rouge">transcriptomics</code> directory contains the material related to transcriptomics analysis). Each topic has the following structure:</p>
+<p>All training materials (slides, tutorials, …) related to a topic are found in a dedicated directory (<em>e.g.</em> <code class="language-plaintext highlighter-rouge">climate</code> directory contains the material related to Climate analyses). Each topic has the following structure:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── README.md
 ├── metadata.yaml
@@ -686,7 +690,7 @@ It may require some knowledge that you may not have or do not have the time to l
 <p>Once the topic has been chosen, we can create the tutorial. An ideal tutorial in the <span class="notranslate">Galaxy</span> Training Network contains:</p>
 <ul>
   <li>a tutorial file <code class="language-plaintext highlighter-rouge">tutorial.md</code> written in Markdown with hands-on</li>
-  <li>an optional slides file <code class="language-plaintext highlighter-rouge">slides.md</code> in Markdown with slides to support the tutorial</li>
+  <li>an optional slides file <code class="language-plaintext highlighter-rouge">slides.html</code> in Markdown with slides to support the tutorial</li>
   <li>a directory <code class="language-plaintext highlighter-rouge">workflows</code> with workflows extracted from the tutorial</li>
   <li>a YAML file <code class="language-plaintext highlighter-rouge">data-library.yaml</code>  with the links to the input data needed for the tutorial</li>
 </ul>
@@ -707,7 +711,7 @@ It may require some knowledge that you may not have or do not have the time to l
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-defining-the-topic-for-the-tutorial-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Defining the topic for the tutorial</h3>
+  <h3 id="hands_on-hands-on-prepare-the-workflow-for-the-training"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Prepare the <span class="notranslate">workflow</span> for the training</h3>
 
   <ol>
     <li>Go to your favorite <span class="notranslate">Galaxy</span> server</li>
@@ -719,9 +723,30 @@ It may require some knowledge that you may not have or do not have the time to l
 
       <!--SNIPPET-->
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-extracting-a-workflow-from-your-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Extracting a <span class="notranslate">workflow</span> from your history</h3>  <ol>    <li>Remove any failed or unwanted jobs from your history.</li>    <li>Click on <strong>History options</strong> (gear icon <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span>) at the top of your history panel.</li>    <li>Select <strong>Extract <span class="notranslate">workflow</span></strong></li>    <li>Check the steps, enter a name for your <span class="notranslate">workflow</span>, and press the <strong>Create <span class="notranslate">Workflow</span></strong> button.</li>  </ol></blockquote>
+
+      <p>For the Copernicus tutorial:</p>
+      <ol>
+        <li>Add an <strong>Input Dataset</strong></li>
+        <li>Add <strong>Copernicus Climate Data Store</strong></li>
+        <li>Link the <strong>Input Dataset</strong> to <strong>Copernicus Climate Data Store</strong> on <code class="language-plaintext highlighter-rouge">API Request filename</code></li>
+        <li>Rename <strong>Input Dataset</strong> to <code class="language-plaintext highlighter-rouge">API Request file</code></li>
+        <li>Save the <span class="notranslate">workflow</span></li>
+      </ol>
     </li>
-    <li>Add the topic name as a Tag and the tutorial title as Annotation/Notes to the <span class="notranslate">workflow</span> using the <span class="notranslate">workflow</span> editor</li>
+    <li>
+      <p>Add the topic name as a Tag and the tutorial title as Annotation/Notes to the <span class="notranslate">workflow</span> using the <span class="notranslate">workflow</span> editor</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-annotate-a-workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Annotate a <span class="notranslate">workflow</span></h3>  <ul>    <li>Open the <span class="notranslate">workflow</span> editor for the <span class="notranslate">workflow</span></li>    <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>Edit Attributes</strong> on the top right</li>    <li>Write a description of the worklow in the <strong>Annotation</strong> box</li>    <li>Add a tag (which will help to search for the <span class="notranslate">workflow</span>) in the <strong>Tags</strong> section</li>  </ul></blockquote>
+
+      <p>For the Copernicus tutorial:</p>
+      <ul>
+        <li><strong>Annotation</strong>: <code class="language-plaintext highlighter-rouge">Retrieve climate data from Copernicus</code></li>
+        <li><strong>Tag</strong>: <code class="language-plaintext highlighter-rouge">climate</code></li>
+      </ul>
+    </li>
   </ol>
+
 </blockquote>
 
 <h1 id="get-a-toy-dataset">Get a toy dataset</h1>
@@ -788,16 +813,16 @@ So be careful when you start your upload that all your needed files are ready.</
         <p>The metadata can be changed after publication.</p>
       </blockquote>
     </li>
-    <li>Search for and Select <em><span class="notranslate">Galaxy</span> training network</em> in <strong>Communities</strong></li>
+    <li>Search for and Select <em><span class="notranslate">Galaxy</span> Training Network</em> in <strong>Communities</strong></li>
     <li>Select <em>Dataset</em> in <strong>Upload type</strong></li>
     <li>Use the title of your tutorial and mention also <span class="notranslate">Galaxy</span> Training Material</li>
     <li>Add all the persons who contributed to the tutorial as authors</li>
     <li>Add a short description of the tutorial and a link to the training material website</li>
     <li>Keep <em>Open Access</em> as <strong>Access right</strong> and <em>Creative Commons Attribution 4.0</em> as <strong>License</strong></li>
     <li>Fill out any remaining information</li>
+    <li>Click on <strong>Save</strong></li>
     <li>Click on <strong>Publish</strong></li>
     <li>Copy the DOI link in the new page</li>
-    <li>Paste the link in <code class="language-plaintext highlighter-rouge">zenodo_link</code> in the tutorial header</li>
   </ol>
 </blockquote>
 
@@ -823,23 +848,30 @@ So be careful when you start your upload that all your needed files are ready.</
     <li>Open the <a href="https://ptdk.herokuapp.com/">PTDK webserver</a></li>
     <li>Fill in the information
       <ul>
-        <li>Tutorial name, the name will be the name of the folder of the tutorial</li>
+        <li>Tutorial name (the name will be the name of the folder of the tutorial)</li>
         <li>Tutorial title</li>
         <li><span class="notranslate">Galaxy</span> instance with the public <span class="notranslate">workflow</span></li>
         <li>Id of the <span class="notranslate">workflow</span></li>
         <li>(Not mandatory) Zenodo URL with the input data</li>
+      </ul>
+
+      <p>For the Copernicus tutorial:</p>
+      <ul>
+        <li><strong>Tutorial name</strong> (the name will be the name of the folder of the tutorial): <code class="language-plaintext highlighter-rouge">climate-data-retrieval-copernicus</code></li>
+        <li><strong>Tutorial title</strong>: <code class="language-plaintext highlighter-rouge">Retrieve climate data from Copernicus</code></li>
+        <li><strong><span class="notranslate">Galaxy</span> instance with the public <span class="notranslate">workflow</span></strong>: <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>.eu</code></li>
+        <li><strong>Id of the <span class="notranslate">workflow</span></strong>: <code class="language-plaintext highlighter-rouge">ac5b66c42681e7a8</code></li>
       </ul>
     </li>
     <li>Click on <strong>Submit</strong></li>
     <li>
       <p>Download the generated archive</p>
 
-      <p>This archive constains the tutorial skeleton including:</p>
+      <p>This archive contains the tutorial skeleton including:</p>
       <ul>
-        <li>tutorial content, tutorial.md file, filled with all steps from the <span class="notranslate">workflow</span> and their parameters</li>
-        <li>its <span class="notranslate">workflow</span> (<span class="notranslate">workflow</span> folder)</li>
-        <li>a data_library.yaml file if Zenodo link was provided
- Create a GitHub account</li>
+        <li>tutorial content, <code class="language-plaintext highlighter-rouge">tutorial.md</code> file, filled with all steps from the <span class="notranslate">workflow</span> and their parameters</li>
+        <li>its <span class="notranslate">workflow</span> (<code class="language-plaintext highlighter-rouge"><span class="notranslate">workflow</span></code> folder)</li>
+        <li>a <code class="language-plaintext highlighter-rouge">data_library.yaml</code> file if Zenodo link was provided</li>
       </ul>
     </li>
     <li>
@@ -951,7 +983,20 @@ So be careful when you start your upload that all your needed files are ready.</
 
   <ol>
     <li>Open the <code class="language-plaintext highlighter-rouge">tutorial.md</code> file with your favorite text editor</li>
-    <li>Fill out the tutorial by following the <a href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">dedicated tutorial</a></li>
+    <li>
+      <p>Fill out the tutorial by following the <a href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">dedicated tutorial</a></p>
+
+      <ol>
+        <li>Add metadata on the top of the tutorial</li>
+        <li>Add a proper introduction</li>
+        <li>Organize the tutorial in different sections</li>
+        <li>Introduce the different concepts and the different steps of the analysis</li>
+        <li>Check the hands-on boxes</li>
+        <li>Comment on the outputs of the different steps</li>
+        <li>Add some question/solution boxes for assessment</li>
+        <li>Add a conclusion</li>
+      </ol>
+    </li>
     <li>(Optional) Build the website locally and check that the tutorial is there by following the <a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Jekyll tutorial</a></li>
   </ol>
 </blockquote>
@@ -992,9 +1037,11 @@ So be careful when you start your upload that all your needed files are ready.</
   <li>Create a <span class="notranslate">workflow</span></li>
   <li>Find a good toy dataset and upload it to Zenodo</li>
   <li>Create the skeleton for the tutorial</li>
-  <li>Add some metadata</li>
+  <li>Add the skeleton to the training material</li>
   <li>Write the tutorial</li>
+  <li>Keep track of the changes</li>
   <li>Add slides (optional)</li>
+  <li>Submit as a Pull Request to GitHub</li>
 </ol>
 
 <p>For the next times, you can make it quicker.</p>
@@ -1037,8 +1084,8 @@ So be careful when you start your upload that all your needed files are ready.</
         <p>Want to learn how to see the change on the website locally? <a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Check out our dedicated tutorial</a></p>
       </blockquote>
     </li>
+    <li>Submit it to GitHub</li>
   </ol>
-
 </blockquote>
 
 
@@ -1123,7 +1170,7 @@ So be careful when you start your upload that all your needed files are ready.</
     title = "Creating a new tutorial (Galaxy Training Materials)",
     year = "2021",
     month = "06",
-    day = "10"
+    day = "11"
     url = "\url{https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
