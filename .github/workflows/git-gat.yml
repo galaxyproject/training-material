@@ -51,14 +51,8 @@ jobs:
             cd /tmp/git-gat/
             git add .scripts/
             git commit -m "admin/init/0000: Add scripts directory"
+            git am 0-commit-0000-root-commit.patch
             ls -al
-
-      #- name: Archive production artifacts
-        #uses: actions/upload-artifact@v2
-        #with:
-          #name: git-gat-repo
-          #path: |
-            #/tmp/git-gat/
 
       - name: Commit the rounds of patches
         run: |
