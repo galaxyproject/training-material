@@ -38,7 +38,7 @@ jobs:
             git config --global user.name "The Galaxy Training Network"
             git init
             cd /tmp/git-gat/
-            for i in {0..9}; do
+            for i in {10..50}; do
                 # Commit those patches
                 patches=$(ls $i-*.patch 2>/dev/null| wc -c)
                 if (( patches > 0 )); then
@@ -88,7 +88,7 @@ jobs:
             cd /tmp/git-gat/
             git add .scripts/
             git commit -m "admin/init/0000: Add scripts directory"
-            for i in {0..9}; do
+            for i in {10..50}; do
                 # Commit those patches
                 patches=$(ls $i-*.patch 2>/dev/null| wc -c)
                 if (( patches > 0 )); then
