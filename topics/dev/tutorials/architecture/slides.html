@@ -745,7 +745,7 @@ mako templates to generate HTML, lower-level jQuery, and lots of Backbone legacy
 
 ![Processing requests on the server](../../images/asgi_app.plantuml.svg)
 
-Expanding the right side of that diagram. We will move through the component left to right.
+Expanding the right side of that diagram. We will move through the components left to right.
 
 ---
 
@@ -933,6 +933,26 @@ https://www.starlette.io/middleware/
 
 template: left-aligned
 
+### Starlette `build_middleware_stack`
+
+https://github.com/encode/starlette/blob/master/starlette/applications.py
+
+```python
+def build_middleware_stack(self) -> ASGIApp:
+    ...
+
+    app = self.router
+    for cls, options in reversed(middleware):
+        app = cls(app=app, **options)
+    return app
+```
+
+Notice the inner most layer is the router.
+
+---
+
+template: left-aligned
+
 ### FastAPI Router Initialization
 
 https://github.com/tiangolo/fastapi/blob/master/fastapi/applications.py
@@ -977,6 +997,22 @@ async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
 ```
 
 https://www.starlette.io/routing/
+
+---
+
+![Router Class Diagram](../../images/routers.plantuml.svg)
+
+- https://www.starlette.io/routing/
+- https://fastapi.tiangolo.com/tutorial/bigger-applications/#apirouter
+- https://fastapi-utils.davidmontague.xyz/user-guide/inferring-router/
+
+---
+
+class: enlarge200
+
+In order to understand how the routing classes are setup within Galaxy,
+lets step back and and look really quickly at how Galaxy's FastAPI
+application (ASGI endpoint) is constructed.
 
 ---
 
@@ -1047,14 +1083,6 @@ def include_all_package_routers(app: FastAPI, package_name: str):
 
 ---
 
-![Router Class Diagram](../../images/routers.plantuml.svg)
-
-- https://www.starlette.io/routing/
-- https://fastapi.tiangolo.com/tutorial/bigger-applications/#apirouter
-- https://fastapi-utils.davidmontague.xyz/user-guide/inferring-router/
-
----
-
 class: reduce70
 
 ### Routing inside the Application
@@ -1088,6 +1116,15 @@ class FastAPITags:
         """
         self.manager.update(trans, payload)
 ```
+
+---
+
+![Router Class Diagram](../../images/routers.plantuml.svg)
+
+- https://www.starlette.io/routing/
+- https://fastapi.tiangolo.com/tutorial/bigger-applications/#apirouter
+- https://fastapi-utils.davidmontague.xyz/user-guide/inferring-router/
+
 
 ---
 
