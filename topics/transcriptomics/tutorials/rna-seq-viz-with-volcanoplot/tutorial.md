@@ -23,7 +23,7 @@ follow_up_training:
         type: "internal"
         topic_name: transcriptomics
         tutorials:
-            - rna-seq-viz-with-volcanoplot-r
+          - rna-seq-viz-with-volcanoplot-r
 ---
 
 
@@ -34,7 +34,7 @@ Volcano plots are commonly used to display the results of RNA-seq or other omics
 
 To generate a volcano plot of RNA-seq results, we need a file of differentially expressed results which is provided for you here. To generate this file yourself, see the [RNA-seq counts to genes]({% link topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.md %}) tutorial. The file used here was generated from limma-voom but you could use a file from any RNA-seq differential expression tool, such as edgeR or DESeq2, as long as it has the required columns (see below).
 
-The data for this tutorial comes from a Nature Cell Biology paper, [EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival](https://www.ncbi.nlm.nih.gov/pubmed/25730472)), Fu et al. 2015. This study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Here we will visualize the results of the luminal pregnant vs lactating comparison.
+The data for this tutorial comes from {% cite Fu2015 %}. This study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Here we will visualize the results of the luminal pregnant vs lactating comparison.
 
 
 > ### Agenda
@@ -80,14 +80,15 @@ We will use two files for this analysis:
 >
 >    - Select *"Type"*: `tabular`
 >
-> 2. Add a tag `#de-results` (differential expression results) to the luminal file and one called `#goi` (genes of interest) to the volcano file.
->
-> {% snippet faqs/galaxy/datasets_add_tag.md type="name" %}
->
 > 3. Check that the datatype is `tabular`.
 >    If the datatype is not `tabular`, please change the file type to `tabular`.
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}>
+>
+> 4. Add a tag `#de-results` (differential expression results) to the luminal file and one called `#goi` (genes of interest) to the volcano file.
+>
+>    {% snippet faqs/galaxy/datasets_add_tag.md type="name" %}
+>
 {: .hands_on}
 
 Click on the {% icon galaxy-eye %} (eye) icon and take a look at the `de-results` file. It should look like below, with 8 columns.
@@ -100,7 +101,7 @@ First we will create a volcano plot highlighting all significant genes. We will 
 
 > ### {% icon hands_on %} Hands-on: Create a Volcano plot
 >
-> 1. **Volcano Plot** {% icon tool %} to create a volcano plot
+> 1. {% tool [Volcano Plot](toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5) %} to create a volcano plot
 >    - {% icon param-file %} *"Specify an input file"*: `de-results`
 >    - {% icon param-select %} *"FDR (adjusted P value)"*: `Column 8`
 >    - {% icon param-select %} *"P value (raw)"*: `Column 7`
@@ -111,7 +112,7 @@ First we will create a volcano plot highlighting all significant genes. We will 
 >    - {% icon param-select %} *"Points to label"*: `None`
 {: .hands_on}
 
-![Volcano plot highlighting significant genes](../../images/rna-seq-viz-with-volcanoplot/volcanoplot.png "Volcano plot highlighting significant genes")
+![Volcano plot highlighting significant genes](../../images/rna-seq-viz-with-volcanoplot/volcanoplot.png){: width="60%"}
 
 In the plot above the genes are coloured if they pass the thresholds for FDR and Log Fold Change, red if they are upregulated and blue if they are downregulated. You can see in this plot that there are many (hundreds) of significant genes in this dataset.
 
@@ -137,7 +138,7 @@ You can also choose to show the labels (e.g. Gene Symbols) for the significant g
 {: .hands_on}
 
 
-![Volcano plot labelling top significant genes](../../images/rna-seq-viz-with-volcanoplot/volcanoplot_top10.png "Volcano plot labelling top significant genes")
+![Volcano plot labelling top significant genes](../../images/rna-seq-viz-with-volcanoplot/volcanoplot_top10.png){: width="60%"}
 
 As in the previous plot, genes are coloured if they pass the thresholds for FDR and Log Fold Change, (red for upregulated and blue for downregulated) and the top genes by P value are labelled. Note that in the plot above we can now easily see what the top genes are by P value and also which of them have bigger fold changes.
 
@@ -156,7 +157,7 @@ As in the previous plot, genes are coloured if they pass the thresholds for FDR 
 
 We can also label one or more genes of interest in a volcano plot. This enables us to visualize where these genes are in terms of significance and in comparison to the other genes. In the original paper using this dataset, there is a heatmap of 31 genes in Figure 6b (see the tutorial [here]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.md %}) if you would like to see how to generate the heatmap). These genes are a set of 30 cytokines/growth factor identified as differentially expressed, and the authors' main gene of interest, Mcl1. These genes are provided in the `goi` file and shown below. We will label these genes in the volcano plot. We'll add boxes around the labels to highlight the gene names.
 
-![Volcano genes](../../images/rna-seq-viz-with-volcanoplot/volcano_genes.png "Volcano genes"){: height="30%"}
+![Volcano genes](../../images/rna-seq-viz-with-volcanoplot/volcano_genes.png){: height="25%"}
 
 > ### {% icon hands_on %} Hands-on: Create a Volcano plot labelling genes of interest
 > 1. Use the **Rerun** {% icon galaxy-refresh %} button in the History to rerun **Volcano Plot** {% icon tool %} with the same parameters as before except:
@@ -166,7 +167,7 @@ We can also label one or more genes of interest in a volcano plot. This enables 
 >     - {% icon param-check %} *"Label Boxes"*: `Yes`
 {: .hands_on}
 
-![Volcano plot labelling genes of interest](../../images/rna-seq-viz-with-volcanoplot/volcanoplot_custom_genes.png "Volcano plot labelling genes of interest")
+![Volcano plot labelling genes of interest](../../images/rna-seq-viz-with-volcanoplot/volcanoplot_custom_genes.png){: width="60%"}
 
 > ### {% icon question %} Question
 >
@@ -182,11 +183,11 @@ We can also label one or more genes of interest in a volcano plot. This enables 
 {: .question}
 
 
-As in the previous plots, genes are coloured if they pass the thresholds for FDR and Log Fold Change. Here all the genes of interest are significant (red or blue) except for two genes, Mcl1 and Gmfg. Gmfg, has an FDR just very slightly outside the significance threshold we used of 0.01 (0.0105). Mcl1 is the authors' gene of interest and they showed that it's expression did increase at the protein level but not at the transcription level, as we can see here, suggesting it is regulated post-transcriptionally. 
+As in the previous plots, genes are coloured if they pass the thresholds for FDR and Log Fold Change. Here all the genes of interest are significant (red or blue) except for two genes, Mcl1 and Gmfg. Gmfg, has an FDR just very slightly outside the significance threshold we used of 0.01 (0.0105). Mcl1 is the authors' gene of interest and they showed that while it's expression did increase at the protein level, it did not increase at the transcription level, as we can see here, suggesting it is regulated post-transcriptionally. 
 
 > ### {% icon tip %} Tip: R code
 >
-> You can get the R code used to generate the plot under *Output Options* in the tool form. You can edit this code in R if you want to customise the plot. See the ({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.md %}) tutorial for an example of how to do this.
+> You can get the R code used to generate the plot under *Output Options* in the tool form. You can edit this code in R if you want to customise the plot. See the [Visualization of RNA-Seq results with Volcano Plot in R]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.md %}) tutorial for how to do this.
 >
 {: .tip}
 

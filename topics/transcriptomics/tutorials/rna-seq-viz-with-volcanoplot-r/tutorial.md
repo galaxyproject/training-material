@@ -6,7 +6,7 @@ zenodo_link: "https://zenodo.org/record/2529117"
 questions:
   - "How to customise Volcano plot output in R?"
 objectives:
-  - "Learn how to use R to edit Volcano plot colours, points, labels, categories and legend"
+  - "Learn how to use R to edit Volcano plot colours, points, labels and categories"
 time_estimation: "30m"
 key_points:
   - "R can be used to customise Volcano Plot output"
@@ -342,7 +342,7 @@ We'll make the font size of the labels a bit smaller.
 
 ## Change categories
 
-We can change the categories of points we're using to colour the plot. For example, we could change the genes we colour to be those showing large fold changes, FDR < 0.01 and log2 fold change of 2 (fold change of 4). And instead of using separate colours for upregulated and downregulated, we could just colour significant and not significant.
+We can change the categories of points we're colouring in the plot. For example, instead of using separate categories for upregulated, downregulated we could just use a single category for significant. This time we'll categorise signficant genes as those with FDR < 0.01 and log2 fold change of 2 (fold change of 4).
 
 > ### {% icon hands_on %} Hands-on: Change categories
 >
@@ -386,38 +386,31 @@ We can change the categories of points we're using to colour the plot. For examp
 >    colours <- setNames(c("grey", "red"), c(notsignif, signif))
 >    ```
 >
-> 3. Highlight the code in the script and click Run
+> 4. Highlight the code in the script and click Run
 >
->   ![Legend removed](../../images/rna-seq-viz-with-volcanoplot-r/volcano_categories.png)
->
-{: .hands_on}
-
-
-## Remove legend
-
-We'll remove the legend from the plot to demonstrate how you can do this.
-
-> ### {% icon hands_on %} Hands-on: Remove legend
->
-> 1. Edit the line below in the script
->
->    ```R
->    # change the line
->    p <- p + theme(legend.title = element_blank())
->
->    # to
->    p <- p + theme(legend.position = "none")
->
->    ```
->
-> 2. Highlight the code in the script and click Run
->
->   ![Legend removed](../../images/rna-seq-viz-with-volcanoplot-r/volcano_no_legend.png)
+>   ![Categories changed](../../images/rna-seq-viz-with-volcanoplot-r/volcano_categories.png)
 >
 {: .hands_on}
 
 
-> ### {% icon tip %} Tip: Other options
+> ### {% icon question %} Question
+>
+> How would you remove the legend from the plot? You can use Google.
+>
+>    > ### {% icon solution %} Solution
+>    >
+>    > If you google `remove legend ggplot2` you may find a few ways it can be done. One way is
+>    >
+>    > ```R
+>    > p <- p + theme(legend.position = "none")
+>    >
+>    > ```
+>    >
+>    {: .solution}
+{: .question}
+
+
+> ### {% icon tip %} Tip: More plot options
 >
 > If you enter values in the Volcano Plot Galaxy tool form for Plot options, such as plot title, x and y axis labels or limits, they'll be output in the script. This is one way you could see how to customise these options in the plot.
 >
