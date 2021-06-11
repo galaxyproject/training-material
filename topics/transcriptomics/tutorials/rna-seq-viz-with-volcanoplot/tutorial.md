@@ -7,11 +7,23 @@ questions:
   - "How to generate a volcano plot from RNA-seq data?"
 objectives:
   - "Create a volcano plot of RNA-seq data to visualize significant genes"
-time_estimation: "1h"
+time_estimation: "30m"
 key_points:
   - "A volcano plot can be used to quickly visualize significant genes in RNA-seq results"
 contributors:
   - mblue9
+requirements:
+    -
+        type: "internal"
+        topic_name: transcriptomics
+        tutorials:
+          - rna-seq-counts-to-genes
+follow_up_training:
+    -
+        type: "internal"
+        topic_name: transcriptomics
+        tutorials:
+            - rna-seq-viz-with-volcanoplot-r
 ---
 
 
@@ -45,7 +57,7 @@ We will use two files for this analysis:
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this RNA-seq exercise e.g. `RNA-seq volcano plot`
+> 1. Create a new history for this RNA-seq exercise e.g. `Volcano plot`
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >    {% snippet faqs/galaxy/histories_rename.md %}
@@ -66,18 +78,21 @@ We will use two files for this analysis:
 >      https://zenodo.org/record/2529117/files/volcano_genes
 >      ```
 >
->    - Select *"Genome"*: `mm10`
+>    - Select *"Type"*: `tabular`
 >
-> 2. Name the limma-voom_luminalpregnant-luminallactate file `DE results` and the volcano genes file `volcano genes` using the {% icon galaxy-pencil %} (pencil) icon.
+> 2. Add a tag `#de-results` (differential expression results) to the luminal file and one called `#goi` (genes of interest) to the volcano file.
+>
+> {% snippet faqs/galaxy/datasets_add_tag.md type="name" %}
+>
 > 3. Check that the datatype is `tabular`.
 >    If the datatype is not `tabular`, please change the file type to `tabular`.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 {: .hands_on}
 
-Click on the {% icon galaxy-eye %} (eye) icon and take a look at the `DE results` file. It should look like below, with 8 columns.
+Click on the {% icon galaxy-eye %} (eye) icon and take a look at the `de-results` file. It should look like below, with 8 columns.
 
-![DE results file](../../images/rna-seq-viz-with-volcanoplot/DE_results.png "DE results")
+![de-results file](../../images/rna-seq-viz-with-volcanoplot/DE_results.png "de-results")
 
 ## Create volcano plot highlighting significant genes
 
@@ -86,7 +101,7 @@ First we will create a volcano plot highlighting all significant genes. We will 
 > ### {% icon hands_on %} Hands-on: Create a Volcano plot
 >
 > 1. **Volcano Plot** {% icon tool %} to create a volcano plot
->    - {% icon param-file %} *"Specify an input file"*: `DE results`
+>    - {% icon param-file %} *"Specify an input file"*: `de-results`
 >    - {% icon param-select %} *"FDR (adjusted P value)"*: `Column 8`
 >    - {% icon param-select %} *"P value (raw)"*: `Column 7`
 >    - {% icon param-select %} *"Log Fold Change"*: `Column 4`
@@ -113,16 +128,16 @@ In the plot above the genes are coloured if they pass the thresholds for FDR and
 
 ## Create volcano plot labelling top significant genes
 
-You can also choose to show the labels (e.g. Gene Symbols) for the significant genes with this volcano plot tool. You can select to label all significant or just the top genes. The top genes are those that pass the FDR and logFC thresholds that have the smallest P values. As there are hundreds of significant genes here, too many to sensibly label, let's label the top 20 genes.
+You can also choose to show the labels (e.g. Gene Symbols) for the significant genes with this volcano plot tool. You can select to label all significant or just the top genes. The top genes are those that pass the FDR and logFC thresholds that have the smallest P values. As there are hundreds of significant genes here, too many to sensibly label, let's label the top 10 genes.
 
 > ### {% icon hands_on %} Hands-on: Create a Volcano plot labelling top genes
-> 1. **Volcano Plot** {% icon tool %} rerun with the same parameters as before except:
+> 1. Use the **Rerun** {% icon galaxy-refresh %} button in the History to rerun **Volcano Plot** {% icon tool %} with the same parameters as before except:
 >    - {% icon param-select %} *"Points to label"*: `Significant`
->        - {% icon param-text %} *"Only label top most significant"*: `20`
+>        - {% icon param-text %} *"Only label top most significant"*: `10`
 {: .hands_on}
 
 
-![Volcano plot labelling top significant genes](../../images/rna-seq-viz-with-volcanoplot/volcanoplot_top20.png "Volcano plot labelling top significant genes")
+![Volcano plot labelling top significant genes](../../images/rna-seq-viz-with-volcanoplot/volcanoplot_top10.png "Volcano plot labelling top significant genes")
 
 As in the previous plot, genes are coloured if they pass the thresholds for FDR and Log Fold Change, (red for upregulated and blue for downregulated) and the top genes by P value are labelled. Note that in the plot above we can now easily see what the top genes are by P value and also which of them have bigger fold changes.
 
@@ -139,14 +154,16 @@ As in the previous plot, genes are coloured if they pass the thresholds for FDR 
 
 ## Create volcano plot labelling genes of interest
 
-We can also label one or more genes of interest in a volcano plot. This enables us to visualize where these genes are in terms of significance and in comparison to the other genes. In the original paper using this dataset, there is a heatmap of 31 genes in Figure 6b (see the tutorial [here]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.md %}) if you would like to see how to generate the heatmap). These genes are a set of 30 cytokines/growth factor identified as differentially expressed, and the authors' main gene of interest, Mcl1. These genes are provided in the `volcano genes` file and shown below. We will label these genes in the volcano plot.
+We can also label one or more genes of interest in a volcano plot. This enables us to visualize where these genes are in terms of significance and in comparison to the other genes. In the original paper using this dataset, there is a heatmap of 31 genes in Figure 6b (see the tutorial [here]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.md %}) if you would like to see how to generate the heatmap). These genes are a set of 30 cytokines/growth factor identified as differentially expressed, and the authors' main gene of interest, Mcl1. These genes are provided in the `goi` file and shown below. We will label these genes in the volcano plot. We'll add boxes around the labels to highlight the gene names.
 
 ![Volcano genes](../../images/rna-seq-viz-with-volcanoplot/volcano_genes.png "Volcano genes"){: height="30%"}
 
 > ### {% icon hands_on %} Hands-on: Create a Volcano plot labelling genes of interest
-> 1. **Volcano Plot** {% icon tool %} rerun with the same parameters as before except:
+> 1. Use the **Rerun** {% icon galaxy-refresh %} button in the History to rerun **Volcano Plot** {% icon tool %} with the same parameters as before except:
 >    - {% icon param-select %} *"Points to label"*: `Input from file`
->        - {% icon param-file %} *"File of labels"*: `volcano genes`
+>        - {% icon param-file %} *"File of labels"*: `goi`
+>    - In *"Plot Options"*:
+>     - {% icon param-check %} *"Label Boxes"*: `Yes`
 {: .hands_on}
 
 ![Volcano plot labelling genes of interest](../../images/rna-seq-viz-with-volcanoplot/volcanoplot_custom_genes.png "Volcano plot labelling genes of interest")
@@ -158,13 +175,20 @@ We can also label one or more genes of interest in a volcano plot. This enables 
 >
 >    > ### {% icon solution %} Solution
 >    >
->    > 1. 29/31 are significant, the genes with the red and blue labels.
+>    > 1. 29/31 are significant, the genes not in the grey area. 
 >    > 2. The Egf gene is the most statistically significant as it is nearest the top of the plot.
 >    >
 >    {: .solution}
 {: .question}
 
-As in the previous plots, genes are coloured if they pass the thresholds for FDR and Log Fold Change. The genes of interest in the file we supplied are labelled and also coloured red or blue if they pass the thresholds. Here all the genes of interest are significant (red or blue) except for two genes. One is the authors' gene of interest, Mcl1, and this result is expected, as they showed it's expression did change, but it was not significant at the transcription level. The other gene Gmfg, has an FDR just very slightly outside the significance threshold we used of 0.01 (0.0105).
+
+As in the previous plots, genes are coloured if they pass the thresholds for FDR and Log Fold Change. Here all the genes of interest are significant (red or blue) except for two genes, Mcl1 and Gmfg. Gmfg, has an FDR just very slightly outside the significance threshold we used of 0.01 (0.0105). Mcl1 is the authors' gene of interest and they showed that it's expression did increase at the protein level but not at the transcription level, as we can see here, suggesting it is regulated post-transcriptionally. 
+
+> ### {% icon tip %} Tip: R code
+>
+> You can get the R code used to generate the plot under *Output Options* in the tool form. You can edit this code in R if you want to customise the plot. See the ({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.md %}) tutorial for an example of how to do this.
+>
+{: .tip}
 
 # Conclusion
 {:.no_toc}
