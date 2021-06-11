@@ -63,12 +63,12 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -30,3 +30,5 @@
->       version: 0.0.3
->     - src: usegalaxy_eu.influxdb
->       version: v6.0.7
->    - src: usegalaxy_eu.tiaas2
->      version: 0.0.6
+>    @@ -34,3 +34,5 @@
+>       version: 0.14.2
+>     - src: dj-wasabi.telegraf
+>       version: 0.12.0
+>    +- src: usegalaxy_eu.tiaas2
+>    +  version: 0.0.6
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add grafana requirement"}
@@ -88,14 +88,18 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -192,3 +192,12 @@ rabbitmq_users:
->    # TIaaS setup
->    tiaas_dir: /opt/tiaas
->    tiaas_user: tiaas
->    tiaas_group: tiaas
->    tiaas_version: master
->    tiaas_admin_user: admin
->    tiaas_admin_pass: changeme
+>    @@ -216,3 +216,11 @@ telegraf_plugins_extra:
+>           - timeout = "10s"
+>           - data_format = "influx"
+>           - interval = "15s"
+>    +
+>    +# TIaaS setup
+>    +tiaas_dir: /opt/tiaas
+>    +tiaas_user: tiaas
+>    +tiaas_group: tiaas
+>    +tiaas_version: master
+>    +tiaas_admin_user: admin
+>    +tiaas_admin_pass: changeme
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure tiaas"}
@@ -106,32 +110,37 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -192,3 +192,12 @@ rabbitmq_users:
->    +++ group_vars/galaxyservers.yml
+>    @@ -8,6 +8,7 @@ pip_package: python3-pip                               # geerlingguy.pip
 >     postgresql_objects_users:
 >       - name: galaxy
->         password: null
+>       - name: telegraf
 >    +  - name: tiaas
->    +    password: null
 >     postgresql_objects_databases:
 >       - name: galaxy
 >         owner: galaxy
->    +postgresql_objects_privileges:
->    +- database: galaxy
->    +  roles: tiaas
->    +  objs: galaxy_user,galaxy_session,job,history,workflow,workflow_invocation
->    +  type: table
->    +  privs: SELECT
->    +- database: galaxy
->    +  roles: tiaas
->    +  objs: user_group_association,galaxy_group,role,group_role_association
->    +  type: table
->    +  privs: SELECT,INSERT
->    +- database: galaxy
->    +  roles: tiaas
->    +  objs: role_id_seq,galaxy_group_id_seq,group_role_association_id_seq,user_group_association_id_seq
->    +  type: sequence
->    +  privs: USAGE,SELECT
+>    @@ -16,6 +17,22 @@ postgresql_objects_privileges:
+>         roles: telegraf
+>         privs: SELECT
+>         objs: ALL_IN_SCHEMA
+>    +  - database: galaxy
+>    +    roles: tiaas
+>    +    objs: galaxy_user,galaxy_session,job,history,workflow,workflow_invocation
+>    +    type: table
+>    +    privs: SELECT
+>    +  - database: galaxy
+>    +    roles: tiaas
+>    +    objs: user_group_association,galaxy_group,role,group_role_association
+>    +    type: table
+>    +    privs: SELECT,INSERT
+>    +  - database: galaxy
+>    +    roles: tiaas
+>    +    objs: role_id_seq,galaxy_group_id_seq,group_role_association_id_seq,user_group_association_id_seq
+>    +    type: sequence
+>    +    privs: USAGE,SELECT
+>    +
+>     # PostgreSQL Backups
+>     postgresql_backup_dir: /data/backups
+>     postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add database privileges for TIaaS"}
@@ -141,11 +150,11 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    {% raw %}
 >    ```diff
 >    --- a/galaxy.yml
->    +++ b/monitoring.yml
->    @@ -2,3 +2,4 @@
->       become: true
->       roles:
->         - usegalaxy_eu.influxdb
+>    +++ b/galaxy.yml
+>    @@ -34,3 +34,4 @@
+>         - galaxyproject.cvmfs
+>         - usegalaxy_eu.gxadmin
+>         - dj-wasabi.telegraf
 >    +    - usegalaxy_eu.tiaas2
 >    {% endraw %}
 >    ```
@@ -155,24 +164,28 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >
 >    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -192,3 +192,12 @@ rabbitmq_users:
->        location /tiaas {
->            uwsgi_pass 127.0.0.1:5000;
->            uwsgi_param UWSGI_SCHEME $scheme;
->            include uwsgi_params;
->        }
+>    --- a/templates/nginx/galaxy.j2
+>    +++ b/templates/nginx/galaxy.j2
+>    @@ -61,4 +61,19 @@ server {
+>             proxy_pass http://127.0.0.1:3000/;
+>         }
 >
->        location /tiaas/static {
->            alias /opt/tiaas/static;
->        }
->
->        location /join-training {
->            uwsgi_pass 127.0.0.1:5000;
->            uwsgi_param UWSGI_SCHEME $scheme;
->            include uwsgi_params;
->        }
+>    +    location /tiaas {
+>    +        uwsgi_pass 127.0.0.1:5000;
+>    +        uwsgi_param UWSGI_SCHEME $scheme;
+>    +        include uwsgi_params;
+>    +    }
+>    +
+>    +    location /tiaas/static {
+>    +        alias /opt/tiaas/static;
+>    +    }
+>    +
+>    +    location /join-training {
+>    +        uwsgi_pass 127.0.0.1:5000;
+>    +        uwsgi_param UWSGI_SCHEME $scheme;
+>    +        include uwsgi_params;
+>    +    }
+>     }
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add nginx routes for TIaaS"}
@@ -279,28 +292,28 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >
 >    {% raw %}
 >    ```diff
->    --- a/files/galaxy/dynamic_job_rules/hogwarts.py
+>    --- /dev/null
 >    +++ b/files/galaxy/dynamic_job_rules/hogwarts.py
->    @@ -192,3 +192,12 @@ rabbitmq_users:
->    from galaxy.jobs import JobDestination
->    from galaxy.jobs.mapper import JobMappingException
->    import os
->
->    def sorting_hat(app, user):
->        # Check that the user is not anonymous
->        if not user:
->            return app.job_config.get_destination('slurm')
->
->        # Collect the user's roles
->        user_roles = [role.name for role in user.all_roles() if not role.deleted]
->
->        # If any of these are prefixed with 'training-'
->        if any([role.startswith('training-') for role in user_roles]):
->            # Then they are a training user, we will send their jobs to pulsar,
->            # Or give them extra resources
->            return app.job_config.get_destination('slurm-2c') # or pulsar, if available
->
->        return app.job_config.get_destination('slurm')
+>    @@ -0,0 +1,19 @@
+>    +from galaxy.jobs import JobDestination
+>    +from galaxy.jobs.mapper import JobMappingException
+>    +import os
+>    +
+>    +def sorting_hat(app, user):
+>    +    # Check that the user is not anonymous
+>    +    if not user:
+>    +        return app.job_config.get_destination('slurm')
+>    +
+>    +    # Collect the user's roles
+>    +    user_roles = [role.name for role in user.all_roles() if not role.deleted]
+>    +
+>    +    # If any of these are prefixed with 'training-'
+>    +    if any([role.startswith('training-') for role in user_roles]):
+>    +        # Then they are a training user, we will send their jobs to pulsar,
+>    +        # Or give them extra resources
+>    +        return app.job_config.get_destination('slurm-2c') # or pulsar, if available
+>    +
+>    +    return app.job_config.get_destination('slurm')
 >    {% endraw %}
 >    ```
 >    {: data-commit="Setup sorting hat for jobs"}
@@ -313,10 +326,14 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -192,3 +192,12 @@ rabbitmq_users:
+>    @@ -137,6 +137,7 @@ galaxy_local_tools:
 >     galaxy_dynamic_job_rules:
->       - my_rules.py
->    +  - hogwarts.py
+>     - my_rules.py
+>     - map_resources.py
+>    +- hogwarts.py
+>
+>     # systemd
+>     galaxy_manage_systemd: yes
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add to list of deployed rules"}
@@ -325,20 +342,36 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >
 >    {% raw %}
 >    ```diff
->    --- a/jobconf
->    +++ b/jobconf
->    @@ -192,3 +192,12 @@ rabbitmq_users:
->    <destinations default="sorting_hat">
->    ...
->    </destinations>
->    <destination id="sorting_hat" runner="dynamic">
->        <param id="type">python</param>
->        <param id="function">sorting_hat</param>
->    </destination>
->        <tools>
->            ...
->            <tool id="upload1" destination="slurm"/>
->        </tools>
+>    --- a/templates/galaxy/config/job_conf.xml.j2
+>    +++ b/templates/galaxy/config/job_conf.xml.j2
+>    @@ -13,7 +13,7 @@
+>                 <param id="manager">_default_</param>
+>             </plugin>
+>         </plugins>
+>    -    <destinations default="slurm">
+>    +    <destinations default="sorting_hat">
+>             <destination id="local_destination" runner="local_plugin"/>
+>             <destination id="pulsar" runner="pulsar_runner" >
+>                 <param id="default_file_action">remote_transfer</param>
+>    @@ -25,6 +25,10 @@
+>                 <param id="transport">curl</param>
+>                 <param id="outputs_to_working_directory">False</param>
+>             </destination>
+>    +        <destination id="sorting_hat" runner="dynamic">
+>    +            <param id="type">python</param>
+>    +            <param id="function">sorting_hat</param>
+>    +        </destination>
+>             <destination id="slurm" runner="slurm">
+>                 <param id="singularity_enabled">true</param>
+>                 <env id="LC_ALL">C</env>
+>    @@ -63,6 +67,7 @@
+>             <group id="testing">cores,time</group>
+>         </resources>
+>         <tools>
+>    +        <tool id="upload1" destination="slurm"/>
+>             <tool id="testing" destination="dynamic_cores_time" resources="testing" />
+>             <tool id="bwa" destination="pulsar"/>
+>             <tool id="bwa_mem" destination="pulsar"/>
 >    {% endraw %}
 >    ```
 >    {: data-commit="Setup job conf"}
