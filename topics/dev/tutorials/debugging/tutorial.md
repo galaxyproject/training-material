@@ -372,6 +372,10 @@ Client Linting is important to reduce errors, improve quality of the codebase, a
 >    > Whoo-hoo! If you're here, you've identified the error, ran the appropriate command locally, found the problem, fixed it, confirmed that the command runs without errors, and are ready to commit your change. Write a useful commit message like `Fix a client linting issue in RuleComponent` or something similar, making sure it is clear what you've done.
 >    > (See [Galaxy's contributor's guide](https://github.com/galaxyproject/galaxy/blob/dev/CONTRIBUTING.md#how-to-contribute) for details on how to write a useful and properly formatted commit message.)
 >    >
+>    > > ### {% icon tip %} Tip
+>    > > You also can auto-fix your linting problems with `yarn run prettier` and `yarn eslint --fix`
+>    > {: .tip}
+>    >
 >    > Awesome work - you now understand how to solve client linting issues!
 {: .hands_on}
 
