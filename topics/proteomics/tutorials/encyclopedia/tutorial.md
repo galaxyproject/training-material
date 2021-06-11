@@ -11,7 +11,7 @@ objectives:
 - Performing quantitative analysis using DIA data
 - Understand the purpose and benefits of using a Chromatogram Library for detection of peptides
 - You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: 3H
+time_estimation: 6H
 key_points:
 - With SearchToLib, Chromatogram Libraries can be created
 - Learning conversion of file types using msconvert
@@ -109,7 +109,7 @@ In a typical the DIA-MS experiment, the precursor scan usually ranges between 40
 
 # Conversion of file types
 
-msconvert is the first tool in this EncyclopeDIA workflow as before analysis of DIA data may begin, the data files must be converted to the correct file-type (mzML) from the raw data. Conversion from raw to mzML is important because the SearchToLib tool (responsible for generation of the Chromatogram Library), as well as the EncyclopeDIA tool (responsible for analysis of DIA data) require mzmL inputs. As msconvert exists on the Galaxy platform, conversion of files to the necessary type is straightforward, and can be incorporated into the workflow itself as opposed to a separate precursor. Both the GPF DIA raw data and the Experimental DIA raw data are run through msconvert for conversion to mzML for the following steps, creation of the Chromatogram Library and analysis of DIA data through EncyclopeDIA.
+msconvert is the first tool in this EncyclopeDIA workflow as before analysis of DIA data may begin, the data files (.RAW format) must be converted to the correct file-type (mzML) from the MS/MS data. Conversion from .raw to .mzML is important because the SearchToLib tool (responsible for generation of the Chromatogram Library), as well as the EncyclopeDIA tool (responsible for analysis of DIA data) require mzmL inputs. As msconvert exists on the Galaxy platform, conversion of files to the necessary type is straightforward, and can be incorporated into the workflow itself as opposed to a separate precursor. Both the GPF DIA raw data and the Experimental DIA raw data are run through msconvert for conversion to mzML for the following steps, creation of the Chromatogram Library and analysis of DIA data through EncyclopeDIA.
 
 In this workflow, msconvert uses dataset collections. The tool will convert each of the data files in the collection from a raw file-type to a mzML file-type. Then, a dataset collection containing the mzML files will be generated as the output from msconvert. msconvert will run twice, as both the GPF raw DIA data as well as the Experimental DIA raw data need to be converted to mzML file-type. Therefore, two outputs will be generated:
 
@@ -371,7 +371,7 @@ Sample output of the Protein Quantitation Output:
 > ### {% icon details %} EncyclopeDIA Inputs and Ouputs
 > Inputs required for EncyclopeDIA:
 >
-> - Chromatogram Library
+> - Chromatogram Library (.dlib)
 >
 > - Background Proteome FASTA file
 >
@@ -394,7 +394,7 @@ Sample output of the Protein Quantitation Output:
 > ### {% icon comment %} Comment: Tool Versions
 >
 > The tools are subjected to changes while being upgraded.
-> Thus, running the workflow provided with the tutorial, the user might need to make sure they are using the latest version including updating the parameters.
+> Thus, running the workflow provided with the tutorial, the user might need to make sure they are using the latest version including the updated parameters.
 >
 {: .comment}
 
