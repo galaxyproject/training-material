@@ -39,7 +39,7 @@ jobs:
       - name: Setup the repo
         run: |
             cd /tmp/git-gat/
-            git config --global init.defaultBranch $(date -I)
+            git config --global init.defaultBranch main
             git init
             git config user.email "galaxytrainingnetwork@gmail.com"
             git config user.name "The Galaxy Training Network"
@@ -53,12 +53,12 @@ jobs:
             git commit -m "admin/init/0000: Add scripts directory"
             ls -al
 
-      - name: Archive production artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: git-gat-repo
-          path: |
-            /tmp/git-gat/
+      #- name: Archive production artifacts
+        #uses: actions/upload-artifact@v2
+        #with:
+          #name: git-gat-repo
+          #path: |
+            #/tmp/git-gat/
 
       - name: Commit the rounds of patches
         run: |
@@ -80,7 +80,9 @@ jobs:
         run: |
             cd /tmp/git-gat/
             # Push the results
-            git push -f -u origin $(date -I)
             git push -f -u origin main
+            today=$(date -I)
+            git checkout -b $today
+            git push --set-upstream origin $today
             git push -f --tags
         if: github.repository_owner == 'galaxyproject'

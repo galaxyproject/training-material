@@ -77,7 +77,7 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -28,3 +28,5 @@
->       version: 1.0.6
+>       version: 1.0.7
 >     - src: usegalaxy_eu.gxadmin
 >       version: 0.0.3
 >    +- src: usegalaxy_eu.influxdb
@@ -120,7 +120,7 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    +++ b/hosts
 >    @@ -2,3 +2,5 @@
 >     gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
->     [galaxyservers]
+>     [pulsarservers]
 >     gat-0.au.training.galaxyproject.eu ansible_user=ubuntu
 >    +[monitoring]
 >    +gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
@@ -437,10 +437,10 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/all.yml
 >    +++ b/group_vars/all.yml
->    @@ -2,3 +2,29 @@
->     cvmfs_role: client
->     galaxy_cvmfs_repos_enabled: config-repo
->     cvmfs_quota_limit: 500
+>    @@ -12,3 +12,28 @@ galaxy_job_metrics_plugins:
+>       - type: env
+>       - type: cgroup
+>       - type: hostname
 >    +
 >    +# Telegraf
 >    +telegraf_agent_package_state: latest
@@ -466,7 +466,6 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    +  - plugin: swap
 >    +  - plugin: net
 >    +  - plugin: netstat
->    +
 >    {% endraw %}
 >    ```
 >    {: data-commit="Setup telegraf's variables"}
