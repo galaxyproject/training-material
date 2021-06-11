@@ -6,7 +6,7 @@ zenodo_link: "https://zenodo.org/record/2529117"
 questions:
   - "How to customise Volcano plot output in R?"
 objectives:
-  - "Learn how to use R to edit Volcano plot colours, points, labels and legend"
+  - "Learn how to use R to edit Volcano plot colours, points, labels, categories and legend"
 time_estimation: "30m"
 key_points:
   - "R can be used to customise Volcano Plot output"
@@ -36,7 +36,7 @@ requirements:
 # Introduction
 {:.no_toc}
 
-The [Volcano plot]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %}) tutorial, introduced volcano plots and showed how they can be generated with the Galaxy Volcano plot tool. In this tutorial we show how you can customise the volcano plot using the R script output from the tool. 
+The [Volcano plot]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %}) tutorial, introduced volcano plots and showed how they can be generated with the Galaxy Volcano plot tool. In this tutorial we show how you can customise a plot using the R script output from the tool. 
 
 > ### Agenda
 >
@@ -79,8 +79,6 @@ We will use one file for this analysis:
 >      https://zenodo.org/record/2529117/files/limma-voom_luminalpregnant-luminallactate
 >      ```
 >
->    - Select *"Type"*: `tabular`
->
 > 3. Check that the datatype is `tabular`.
 >    If the datatype is not `tabular`, please change the file type to `tabular`.
 >
@@ -93,7 +91,7 @@ Click on the {% icon galaxy-eye %} (eye) icon and take a look at the `DE results
 
 ## Create volcano plot
 
-We will create a volcano plot colouring all significant genes. We will call genes significant here if they have FDR < 0.01 and a log fold change of 0.58 (equivalent to a fold-change of 1.5). These were the values used in the original paper for this dataset. We will also label the top 10 most significant genes with their gene names. We will select to output the Rscript file which we will then use to edit the plot in R.
+We will create a volcano plot colouring all significant genes. We will call genes significant here if they have FDR < 0.01 and a log2 fold change of 0.58 (equivalent to a fold-change of 1.5). These were the values used in the original paper for this dataset. We will also label the top 10 most significant genes with their gene names. We will select to output the Rscript file which we will then use to edit the plot in R.
 
 > ### {% icon hands_on %} Hands-on: Create a Volcano plot
 >
@@ -109,12 +107,12 @@ We will create a volcano plot colouring all significant genes. We will call gene
 >    - {% icon param-select %} *"Points to label"*: `Significant`
 >        - {% icon param-text %} *"Only label top most significant"*: `10`
 >    - In *"Output Options"*:
->    - {% icon param-check %} *"Output Rscript?"*: `Yes`
+>        - {% icon param-select %} *"Output Rscript?"*: `Yes`
 {: .hands_on}
 
-In the PDF you should see a plot like below.
+Click on the PDF file name to check that you see a plot like below.
 
-![Volcano plot labelling top significant genes](../../images/rna-seq-viz-with-volcanoplot/volcanoplot_top10.png "Volcano plot labelling top significant genes")
+![Volcano plot labelling top significant genes](../../images/rna-seq-viz-with-volcanoplot/volcanoplot_top10.png){: width="60%"}
 
 Now we will customise the plot by editing the R code in RStudio. You can use Galaxy RStudio if available or another R such as RStudio Cloud or RStudio installed on your computer.
 
@@ -146,7 +144,26 @@ We'll have a look at the script.
 
 ## Set up script
 
-The lines from "# Galaxy settings start" to "# Galaxy settings end" are settings needed to run the Volcano plot tool in Galaxy. We can ignore them.
+The lines from "# Galaxy settings start" to "# Galaxy settings end" are settings needed to run the Volcano plot tool in Galaxy. We don't need them to run the script in R so we will delete them. If we don't delete the error handling line, the R session will crash if we encounter any error in the code. It's ok as it will resume again where we were but better to not have this happen. 
+
+> ### {% icon hands_on %} Hands-on: Delete unneeded lines
+>
+> Delete these lines from the top of the script.
+>
+>    ```R
+>    # Galaxy settings start ---------------------------------------------------
+>
+>    # setup R error handling to go to stderr
+>    options(show.error.messages = F, error = function() {cat(geterrmessage(), file = stderr()); q("no", 1, F)})
+>
+>    # we need that to not crash galaxy with an UTF8 error on German LC settings.
+>    loc <- Sys.setlocale("LC_MESSAGES", "en_US.UTF-8")
+>
+>    # Galaxy settings end -----------------------------------------------------
+>
+>    ```
+>
+{: .hands_on}
 
 We'll check if we have the packages the script needs. We can see the packages used in the lines that have `library(package)` 
 
@@ -156,21 +173,22 @@ We'll check if we have the packages the script needs. We can see the packages us
 >    library(ggrepel)
 >    ```
 
-When we launched Galaxy RStudio there was information in the Console letting us know that ggplot2 and dplyr are already installed in this Galaxy. In this Galaxy there is a yellow warning banner across the top of the script saying "Package ggrepel required is not installed. Install. Don't Show Again". 
-So we just need to install the ggrepel package. 
+When we launched Galaxy RStudio there was information in the Console letting us know that some packages are pre-installed. These packages include `ggplot2` and `dplyr`. In this Galaxy there is a yellow warning banner across the top of the script saying `Package ggrepel required is not installed. Install. Don't Show Again`. 
+So we just need to install the `ggrepel` package. 
 
-> > ### {% icon hands_on %} Hands-on: Install package
+> ### {% icon hands_on %} Hands-on: Install package
 >
 > Either click on "Install" in the yellow warning banner if present, or in the Console type
 >
 >    ```R
 >    install.packages('ggrepel')
 >    ```
+>
 {: .hands_on}
 
-We need to change the path of the differentially expressed file in the script. My path in the script is `/data/dnb03/galaxy_db/files/4/6/c/dataset_46c498bc-060e-492f-9b42-51908a55e354.dat`. This is a temporary location where the Galaxy Volcano plot tool copied my input file in order to run it. Your path will be different. In the script change this path to `de-results.tsv` like below.
+We need to change the path of the differentially expressed file in the script. The path in the script is `/data/dnb03/galaxy_db/files/4/6/c/dataset_46c498bc-060e-492f-9b42-51908a55e354.dat`. This is a temporary location where the Galaxy Volcano plot tool copied the input file in order to use it, the file no longer exists there. Your path will be different. In the script change this path to `de-results.tsv` like below.
 
-> > ### {% icon hands_on %} Hands-on: Run script
+> ### {% icon hands_on %} Hands-on: Run script
 >
 > 1. Change the input file path in script
 >
@@ -186,11 +204,11 @@ We need to change the path of the differentially expressed file in the script. M
 >
 {: .hands_on}
 
-You should see a file called volcano_plot.pdf appear in the Files pane. Click on it to open it and you should see a PDF with the same plot as what we generated with the Volcano Plot tool in Galaxy.
+You should see a file called `volcano_plot.pdf` appear in the Files pane. Click on it to open it and you should see a plot that looks the same as the one we generated with the Volcano Plot tool in Galaxy.
 
 We'll delete the lines below that save the plot to a PDF file. The plots will then be produced in the Plots pane and we can more easily see the different plots we're going to make, without having to keep opening the PDF file.
 
-> > ### {% icon hands_on %} Hands-on: Produce plots in Plots pane
+> ### {% icon hands_on %} Hands-on: Produce plots in Plots pane
 >
 > 1. Delete the lines below that save the plot to a PDF file
 >
@@ -212,6 +230,8 @@ We'll delete the lines below that save the plot to a PDF file. The plots will th
 
 You should now see the plot produced in the Plots pane. 
 
+# Customising the plot
+
 ## Change points colours
 
 We'll demonstate how you can change the colours. We'll change the colour of the downregulated genes from cornflowerblue to purple. We'll change the upregulated genes from firebrick to orange.
@@ -221,7 +241,7 @@ We'll demonstate how you can change the colours. We'll change the colour of the 
 > 1. Edit the line below in the script
 >
 >    ```R
-1.   # change the line
+>    # change the line
 >    colours <- setNames(c("cornflowerblue", "grey", "firebrick"), c(down, notsig, up))
 >
 >    # to
@@ -266,6 +286,21 @@ We'll make the points a bit smaller. We'll change to 0.5.
 {: .hands_on}
 
 
+> ### {% icon question %} Question
+>
+> How could we change the transparency of the points?
+>
+>    > ### {% icon solution %} Solution
+>    >
+>    > We could use `alpha =`. For example
+>    ```R
+>    geom_point(aes(colour = sig), alpha = 0.5)
+>    ```
+>    >
+>    {: .solution}
+{: .question}
+
+
 ## Change labels size
 
 We'll make the font size of the labels a bit smaller.
@@ -285,6 +320,75 @@ We'll make the font size of the labels a bit smaller.
 > 2. Highlight the code in the script and click Run
 >
 >   ![Smaller labels](../../images/rna-seq-viz-with-volcanoplot-r/volcano_labels_size.png)
+>
+{: .hands_on}
+
+
+> ### {% icon question %} Question
+>
+> How could we change the number of genes labelled from 10 to 20?
+>
+>    > ### {% icon solution %} Solution
+>    >
+>    > We could change the 10 to 20 here
+>    ```R
+>    top <- slice_min(results, order_by = pvalue, n = 20)
+>    ```
+>    >
+>    {: .solution}
+{: .question}
+
+
+
+## Change categories
+
+We can change the categories of points we're using to colour the plot. For example, we could change the genes we colour to be those showing large fold changes, FDR < 0.01 and log2 fold change of 2 (fold change of 4). And instead of using separate colours for upregulated and downregulated, we could just colour significant and not significant.
+
+> ### {% icon hands_on %} Hands-on: Change categories
+>
+> 1. Change the category names to signif and notsignif
+>
+>    ```R
+>    # change
+>    down <- unlist(strsplit('Down,Not Sig,Up', split = ","))[1]
+>    notsig <- unlist(strsplit('Down,Not Sig,Up', split = ","))[2]
+>    up <- unlist(strsplit('Down,Not Sig,Up', split = ","))[3]
+>
+>    # to 
+>    signif <- "Significant"
+>    notsignif <- "Not significant"
+>    ```
+>
+> 2. Specify which genes are signif and notsignif
+>
+>    ```R
+>    # change
+>    results <- mutate(results, sig = case_when(
+>                                fdr < 0.01 & logfc > 0.58 ~ up, 
+>                                fdr < 0.01 & logfc < -0.58 ~ down, 
+>                                TRUE ~ notsig))
+>
+>    # to 
+>    results <- mutate(results, sig = case_when(
+>                                fdr < 0.01 & abs(logfc) > 2 ~ signif, # abs() will give us absolute values i.e. all > 2 and < -2
+>                                TRUE ~ notsignif))
+>
+>
+>    ```
+>
+> 3. Specify the colours for signif and notsignif
+>
+>    ```R
+>    # change
+>    colours <- setNames(c("purple", "grey", "orange"), c(down, notsig, up))
+>
+>    # to 
+>    colours <- setNames(c("grey", "red"), c(notsignif, signif))
+>    ```
+>
+> 3. Highlight the code in the script and click Run
+>
+>   ![Legend removed](../../images/rna-seq-viz-with-volcanoplot-r/volcano_categories.png)
 >
 {: .hands_on}
 
@@ -313,7 +417,14 @@ We'll remove the legend from the plot to demonstrate how you can do this.
 {: .hands_on}
 
 
+> ### {% icon tip %} Tip: Other options
+>
+> If you enter values in the Volcano Plot Galaxy tool form for Plot options, such as plot title, x and y axis labels or limits, they'll be output in the script. This is one way you could see how to customise these options in the plot.
+>
+{: .tip}
+
+
 # Conclusion
 {:.no_toc}
 
-In this tutorial we have seen how a volcano plot can be generated and customised using Galaxy and R. You can see more possible customisations in the help pages for the functions used, by typing in R `?geom_point` and `?geom_text_repel`.
+In this tutorial we have seen how a volcano plot can be generated and customised using Galaxy and R. You can see more possible customisations in the help pages for the functions used, by typing in R `?geom_point` and `?geom_text_repel` or at the [ggrepel website](https://ggrepel.slowkow.com/index.html).
