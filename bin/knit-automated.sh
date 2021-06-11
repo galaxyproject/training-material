@@ -8,8 +8,9 @@ tutorials=(ansible-galaxy singularity tool-management cvmfs data-library connect
 #echo "${tutorials[0]}"
 #exit 1;
 if [[ "$op" == "export" ]]; then
-	mkdir -p ${DIR}
-	mkdir -p ${DIR}/.scripts
+	rm -rf "${DIR}"
+	mkdir -p "${DIR}"
+	mkdir -p "${DIR}/.scripts"
 
 	# Setup readme as the root commit
 
@@ -43,7 +44,7 @@ if [[ "$op" == "export" ]]; then
 		echo "Processing ${tutorials[$idx]}"
 		python3 bin/knit-frog.py \
 			topics/admin/tutorials/${tutorials[$idx]}/tutorial.md \
-			${DIR}/$(( idx + 1 ))-${tutorials[$idx]};
+			${DIR}/$(( idx + 10 ))-${tutorials[$idx]};
 	done
 elif [[ "$op" == "import" ]]; then
 	if [[ ! -d "${DIR}" ]]; then
