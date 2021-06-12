@@ -51,17 +51,28 @@ contributors:
   - hexylena
 ---
 
-This tutorial is for developers and researchers routinely developing their own analysis scripts using bash, Python, Perl, Rscript or other scripting languages.
-It shows a convenient way to bridge the gap between a working command line script and installing a real tool that "wraps" that script as a tool in Galaxy.
-The ToolFactory is a Galaxy tool, run in the usual Galaxy tool interface. It is distributed as the ToolFactory Appliance, ready to run on a local linux workstation or high end laptop using Docker.
+The Toolfactory and these tutorials are for developers and researchers learning about Galaxy, who routinely develop their own analysis scripts using
+bash, Python, Perl, Rscript or other common scientific scripting languages. The tutorials show a convenient way to bridge the gap between a
+working command line script and a new tool that "wraps" that script so users can use it like any other tool in Galaxy.
 
-This first tutorial is an introduction. It shows how ToolFactory generates a `Hello World!` Galaxy tool and how the Appliance can be installed locally.
+The ToolFactory is a Galaxy tool. Tools are constructed through the normal Galaxy interface when it is run. It is distributed as the ToolFactory Appliance,
+ready to run on a developer linux workstation using Docker. Generated tools are *immediately installed* and ready to run so you can see
+what the end user will see. Jobs can be re-run to edit and update generated tools, so Galaxy becomes an integrated development environment for Galaxy tools.
+
+A[`Hello Galaxy!` using the ToolFactory demonstration](https://youtu.be//DK1eKz5TRs4) is available if you'd like to see a walk-through of some of
+the hands-on material in this tutorial. You can see whether it looks useful for your work before you start the detailed material below.
+
+This first tutorial is a slow introduction. For some developers, it may be too slow and the second tutorial may be a better place to start.
+ This one steps in some detail through the process of using the ToolFactory
+to generate `Hello World!` style simple demonstration Galaxy tools, and how the Appliance can be installed locally.
+
 The reader will soon learn if it might be adapted to their work. If so, an [Advanced ToolFactory tutorial]({% link topics/dev/tutorials/tool-generators-advanced/tutorial.md %}) is
 available if the material here is relevant to your needs and you would like to learn more details about the different kinds of tools and features the ToolFactory offers.
 
 Experienced galaxy tool developers already have specialised tools and training to suit their needs so may not gain much from this material.
 Users new to Galaxy from other scientific disciplines not yet familiar with the manual tool development process,
 may find the ToolFactory appliance useful for familiarising themselves with tool development in Galaxy.
+
 
 > ### Agenda
 >
@@ -72,15 +83,17 @@ may find the ToolFactory appliance useful for familiarising themselves with tool
 
 # Tools, tool wrappers and the ToolFactory in Galaxy.
 
-Tools are the fundamental building blocks for analyses in Galaxy. Thousands are available in the project tool library from many different kinds of science. Galaxy
+Tools are the fundamental building blocks for analyses in Galaxy. Thousands are available in the [project tool library](https://toolshed.g2.bx.psu.edu) from
+many different kinds of science. Galaxy
 tools can be created from almost any Linux command line software packages or interpreter scripts. What happens
 at tool execution is decoupled from the framework itself, so the framework is agnostic to scientific discipline or coding language.
-This is one reason for rapid uptake in new data intensive scientific areas. All it takes is a set of discipline specific tools to bring a whole new community
-of scientists into Galaxy.
+This is one reason for rapid uptake in new data intensive scientific areas. In many cases, sets of discipline specific tools are being developed and these
+are attracting whole new communities of scientists into Galaxy.
 
-Tool execution is tightly constrained and secured. User supplied parameters and data inputs exposed on the tool form are the only things that can be changed
+Tool execution is tightly constrained and secured. Tool form exposed user controlled parameters and data inputs are the only things that can be changed
 before execution. Everything else is fixed. This is ideal for non-programmer Galaxy users who rely on prepared tools for their work. Tools are
-utterly predictable to the point of being as reproducible as any complex computing component can be and this is one of the strengths of the Galaxy framework.
+utterly predictable to the point of being about as reproducible as any useful complex computing component is likely to be.
+This is one of the strengths of the Galaxy framework for users requiring reproducible and shareable scientific analyses.
 
 ## Galaxy Interactive Tools and Interactive Environments (GxIT/GIE)
 
@@ -100,10 +113,10 @@ without using Galaxy.
 
 The Galaxy developers support extensive software infrastructure for manually creating new tools including Planemo and the new Galaxy language server.
 These are complex and powerful with substantial
-learning curves but can be used to turn almost any command line software package into a tool.
+learning curves but can be used to turn almost any software package into a tool.
 
-For those new to Galaxy, in many simple cases, it may be possible to generate a new tool "wrapping" that script in a few minutes, using a
-specialised Galaxy tool for developers that generates tools from scripts.
+For those new to Galaxy, in many simple cases, it may be possible to generate a new tool "wrapping" a script in a few minutes, using a
+specialised Galaxy tool for developers that generates tools.
 
 This tutorial introduces that unusual tool.
 
@@ -128,6 +141,8 @@ and for developing new tools for new kinds of scientists using Galaxy.
 >    - Usefulness will depend on sufficient hardware. Plenty of cores, RAM and disk storage are needed.
 >    - On a modern workstation or well-endowed laptop, it will perform well out of the box.
 >    - It will struggle on older consumer hardware with limited RAM and CPU capacity.
+>    - It is suitable only for development in a private deployment.
+>    - Production is best done on a professionally maintained service, but please, not a public one.
 {: .tip }
 
 The Appliance was developed for skilled programmers who need new Galaxy tools for their own use or for users they support. Any user comfortable with scientific or general
@@ -226,9 +241,6 @@ more useful tasks. This is the simplest case of a very useful generic model for 
 Bash is used here but any scripting language available in Conda could probably be used.
 
 ### Putting the plan into action using the ToolFactory
-
-Watch a 6 minute [`Hello world` demonstration video](https://drive.google.com/file/d/1xpkcVGQ0jRdG78Kt-qLwqeFpE3RnSRsK/view?usp=sharing)
-(Apologies for the poor quality - will try to make a shorter one.)
 
 The form collects all the information needed for a new Galaxy tool. It is long and complex as a result, particularly with many repeated form elements for more complex tools.
 Much of what is collected is used to construct a command line for the script when the generated tool runs.
@@ -589,6 +601,8 @@ that a user might want to be able to easily view if they want without cluttering
 and are not widely available, particularly in scientific fields coming to Galaxy.
 - Tools can have command-override and test-override pasted in as in one of the BWA samples.
    - This can solve some of the limitations but if it is needed, it might be better to prepare the wrapper manually if a skilled developer is available.
+   - Any logic in the `<command>` section can probably always be replaced by equivalent code in a script at the cost of time and effort compared to templating.
+   - Other aspects of tool logic such as output filters based on other parameter values can only be implemented in the wrapper document, not in a tool script.
 - The ToolFactory can help new scientists and developers to quickly get some simple tools working for their colleagues while awaiting help with the complex ones.
 
 # Next Steps
