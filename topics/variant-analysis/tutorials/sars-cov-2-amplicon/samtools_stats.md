@@ -1,4 +1,4 @@
-### Mapping statistics with `samtools stats`
+#### Mapping statistics with `samtools stats`
 
 As we do our analysis we should keep an eye on results to spot any errors that might occur. For mapping,
 we can use {% tool [samtools stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2)}
@@ -6,8 +6,8 @@ to get a summary of how well the mapping step worked.
 
 To check the quality of the alignment using `samtools stats`
 > ### {% icon hands_on %} Evaluating mapping with `samtools stats`
-> 1. Find the {% tool [samtools stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2)} tool from the tool bar
-> 2. For the input `BAM file` you need to select the *Dataset collection* option {% icon param-collection %}. This will allow you to select the "Map with BWA-MEM on collection XX (mapped reads in BAM format)" collection.
+> 1. Find the {% tool [samtools stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2) %} tool from the tool bar
+> 2. For the input `BAM file` you need to select the {% icon param-collection %} *Dataset collection* option. This will allow you to select the "Map with BWA-MEM on collection XX (mapped reads in BAM format)" collection.
 > 3. Leave the rest of the parameters at their default values, scroll to the bottom and click the *Execute* button.
 > 4. When the tool has finished running, click the name of the *Samtools stats* collection. This will open the collection so that you can see the individual datasets within it.
 {: .hands_on}

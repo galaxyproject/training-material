@@ -128,6 +128,10 @@ have fun!
 
 {% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/samtools_stats.md %}
 
+{% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/bam_filter.md %}
+
+{% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/bamqc.md %}
+
 {% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/ivar_trim.md %}
 
 {% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/Variant_annotation.md %}

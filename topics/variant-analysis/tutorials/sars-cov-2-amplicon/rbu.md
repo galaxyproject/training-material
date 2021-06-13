@@ -1,4 +1,4 @@
-## Advanced Topic: Using the Rule Based Uploader
+#### Advanced Topic: Using the Rule Based Uploader
 
 Galaxy has a tool, the Rule Based Uploader (RBU), that makes it easier to organise and upload many datasets. We can use this tool in two steps:
 
@@ -8,7 +8,7 @@ Galaxy has a tool, the Rule Based Uploader (RBU), that makes it easier to organi
 
 Let us see how to do the *Data Upload* this way.
 
-> ### {% icon hands_on %} Hands-on: Data upload and organisation using the Rule Based Uploader 
+> #### {% icon hands_on %} Hands-on: Data upload and organisation using the Rule Based Uploader 
 > 
 > 1. Create a new history
 > 2. Open the Upload Data {% icon tool %} tool and select the *Rule-based* tab. Paste the data URLs into the text box
