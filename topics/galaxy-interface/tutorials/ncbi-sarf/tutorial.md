@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "SRA Aligned Read Formats to Speed Up SARS-CoV-2 data Analysis"
+title: "SRA Aligned Read Format to Speed Up SARS-CoV-2 data Analysis"
 questions:
 - How can I search SRA SARS-CoV-2 metadata from within Galaxy?
 - How can I import SRA aligned read files and extract the data in my format of choice?
