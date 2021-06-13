@@ -111,6 +111,7 @@ div#theme-selector,div#lang-selector {
 	flex-wrap: wrap;
 	width: 200px;
 	justify-content: flex-start;
+    margin-left: 1em;
 
 	label.btn,a.btn {
 		margin: 0.1em;
@@ -523,6 +524,15 @@ nav input.nicer {
         }
     }
 
+	div.container blockquote {
+		ul, p, li > p:last-child {
+			margin-bottom: 0.5rem;
+		}
+		p:last-child {
+			margin-bottom: 0;
+		}
+	}
+
     // tutorial boxes
     blockquote {
         ul,
@@ -595,6 +605,14 @@ nav input.nicer {
             padding-left: 1em;
         }
 
+        &.spoken {
+            display: none;
+        }
+
+        &.hidden {
+            display: none;
+        }
+
         &.matrix {
             @include matrix-table();
         }
@@ -603,6 +621,10 @@ nav input.nicer {
             @include tutorial-box($feedback-color, $text-color);
         }
     }
+
+	.pre-break-lines code {
+		white-space: pre-wrap;
+	}
 
     .fold-unfold {
         margin-left: $tutorial-box-spacing;
@@ -1097,4 +1119,11 @@ video::cue {
         padding-right: 1em;
         color: #555;
     }
+}
+
+abbr {
+	// Based on https://developer.mozilla.org/en-US/docs/Web/HTML/Element/abbr#default_styling
+	text-decoration: underline dotted;
+	cursor: help;
+	font-variant: none;
 }

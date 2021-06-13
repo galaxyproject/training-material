@@ -1,0 +1,108 @@
+name: Build GIT-GAT
+
+on:
+  pull_request:
+    paths:
+      - 'topics/admin/**'
+      - 'bin/knit*'
+      - 'bin/video*'
+  push:
+    branches:
+      - main
+    paths:
+      - 'topics/admin/**'
+      - 'bin/knit*'
+      - 'bin/video*'
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
+
+      - name: Build git-gat repo
+        run: |
+            bin/knit-automated.sh export;
+
+      - name: Merge all of the commits
+        run: |
+            cd /tmp/git-gat/
+            git config --global init.defaultBranch main
+            git config --global user.email "galaxytrainingnetwork@gmail.com"
+            git config --global user.name "The Galaxy Training Network"
+            git init
+            cd /tmp/git-gat/
+            for i in {0..9}; do
+                # Commit those patches
+                patches=$(ls $i-*.patch 2>/dev/null| wc -c)
+                if (( patches > 0 )); then
+                    git am $i-*.patch;
+                fi
+                # And tag it
+                git tag -f "step-$i";
+            done
+
+  deploy:
+    if: github.repository_owner == 'galaxyproject'
+    needs: test
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
+
+      - name: Build git-gat repo
+        run: |
+            bin/knit-automated.sh export;
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.GIT_GAT_SSH_KEY }}
+          known_hosts: "github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=="
+          if_key_exists: ignore # replace / ignore / fail; optional (defaults to fail)
+
+      - name: Setup git-gat repo
+        run: |
+            cd /tmp/git-gat/
+            git config --global init.defaultBranch main
+            git config --global user.email "galaxytrainingnetwork@gmail.com"
+            git config --global user.name "The Galaxy Training Network"
+            git init
+            # Update the origin early
+            git remote add origin git@github.com:hexylena/git-gat
+            git fetch origin --tags
+
+      - name: Merge the commits into a full git history
+        run: |
+            cd /tmp/git-gat/
+            git add .scripts/
+            git commit -m "admin/init/0000: Add scripts directory"
+            for i in {0..9}; do
+                # Commit those patches
+                patches=$(ls $i-*.patch 2>/dev/null| wc -c)
+                if (( patches > 0 )); then
+                    git am $i-*.patch;
+                fi
+                # And tag it
+                git tag -f "step-$i";
+            done
+            rm -f *.patch
+            ls -al
+
+      - name: Push the results
+        run: |
+            cd /tmp/git-gat/
+            # Push the results
+            git push -f -u origin main
+            git push -f --tags

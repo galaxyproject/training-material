@@ -34,9 +34,9 @@ What is a convolutional neural network (CNN)?
 
 # Convolutional Neural Network (CNN)
 
-- Increasing popularity of social media in past decade 
-	- Image and video processing tasks have become very important 
-- FNN could not scale up to image and video processing tasks 
+- Increasing popularity of social media in past decade
+	- Image and video processing tasks have become very important
+- FNN could not scale up to image and video processing tasks
 - CNN specifically tailored for image and video processing tasks
 
 ---
@@ -44,7 +44,7 @@ What is a convolutional neural network (CNN)?
 # Feedforward neural networks (FNN)
 
 - In FNN all nodes in a layer connected to all nodes in next layer
-	- Each connection has a weight, must be learned by learning algorithm 
+	- Each connection has a weight, must be learned by learning algorithm
 
 ![Neurons forming the input, output, and hidden layers of a multi-layer feedforward neural network]({{site.baseurl}}/topics/statistics/images/FFNN.png) <!-- https://pixy.org/3013900/ CC0 license-->
 
@@ -52,31 +52,31 @@ What is a convolutional neural network (CNN)?
 
 # Limitations of FNN
 
-- If input is 64 pixel by 64 pixel grayscale image 
+- If input is 64 pixel by 64 pixel grayscale image
 	- Each grayscale pixel represented by 1 value, usually between 0 to 255
-	- Where 0 is black, 255 is white, and values in between are shades of gray 
-- Since each grayscale pixel represented by 1 value, we say *channel* size is 1 
+	- Where 0 is black, 255 is white, and values in between are shades of gray
+- Since each grayscale pixel represented by 1 value, we say *channel* size is 1
 - Image represented by 64 x 64 x 1 = 4,096 values (rows x columns x channels)
 	- Hence, input layer of FNN has 4096 nodes
 - Lets assume next layer has 500 nodes
-	- Since FNN fully connected, we have 4,096 x 500 = 2,048,000 weights 
+	- Since FNN fully connected, we have 4,096 x 500 = 2,048,000 weights
 
 ---
 
 # Limitations of FNN
 
 - For complex problems, we need multiple hidden layers in our FNN
-	- Compunds the problem of having many weights 
-- Having too many weights 
+	- Compunds the problem of having many weights
+- Having too many weights
 	- Makes learning more difficult as dimension of search space is increased
-	- Makes training more time/resource consuming 
-	- Increases the likelihood of overfitting 
+	- Makes training more time/resource consuming
+	- Increases the likelihood of overfitting
 
-- Problem is further compunded for color images 
+- Problem is further compunded for color images
 	- Each pixel in color image represented by 3 values (RGB color mode)
 	- Since each pixel represented by 3 values, we say *channel* size is 3
 	- Image represented by 64 x 64 x 3 = 12,288 values (rows x columns x channels)
-	- Number of weights is now 12,288 x 500 = 6,144,000 
+	- Number of weights is now 12,288 x 500 = 6,144,000
 
 ---
 
@@ -84,7 +84,7 @@ What is a convolutional neural network (CNN)?
 
 - Clear that FNN cannot scale to larger images (Too many weights)
 - Another problem with FNN
-	- 2D image represented as 1D vector in input layer 
+	- 2D image represented as 1D vector in input layer
 	- Any spatial relationship in the data is ignored
 
 ---
@@ -92,7 +92,7 @@ What is a convolutional neural network (CNN)?
 # Inspiration for CNN
 
 - In 1959 Hubel & Wiesel did an experiment to understand how visual cortex of brain processes visual info
-	- Recorded activity of neurons in visual cortex of a cat 
+	- Recorded activity of neurons in visual cortex of a cat
 	- While moving a bright line in front of the cat
 - Some cells fired when bright line is shown at a particular angle/location
 	- Called these *simple* cells
@@ -136,7 +136,7 @@ What is a convolutional neural network (CNN)?
 # Input layer
 
 - Example input a 28 pixel by 28 pixel grayscale image
-- Unlike FNN, we do not “flatten” the input to a 1D vector 
+- Unlike FNN, we do not “flatten” the input to a 1D vector
 	- input is presented to network in 2D as 28 x 28 matrix
 	- This makes capturing spatial relationships easier
 
@@ -145,13 +145,13 @@ What is a convolutional neural network (CNN)?
 # Convolution layer
 
 - Composed of multiple filters (kernels)
-- Filters for 2D image are also 2D 
+- Filters for 2D image are also 2D
 - Suppose we have a 3 by 3 filter (9 values in total)
 	- Values are randomly set to 0 or 1
 - Convolution: placing 3 by 3 filter on the top left corner of image
 	- Multiply filter values by pixel values, add the results
-	- Move filter to right one pixel at a time, and repeat this process 
-	- When at top right corner, move filter down one pixel and repeat process 
+	- Move filter to right one pixel at a time, and repeat this process
+	- When at top right corner, move filter down one pixel and repeat process
 	- Process ends when we get to bottom right corner of image
 
 ---
@@ -175,7 +175,7 @@ What is a convolutional neural network (CNN)?
 # Filter size
 
 - Filter size can be 5 by 5, 3 by 3, and so on
-- Larger filter sizes should be avoided 
+- Larger filter sizes should be avoided
 	- As learning algorithm needs to learn filter values (weights)
 - Odd sized filters are preferred to even sized filters
 	- Nice geometric property of all input pixels being around output pixel
@@ -186,9 +186,9 @@ What is a convolutional neural network (CNN)?
 
 - After applying 3 by 3 filter to 4 by 4 image, we get a 2 by 2 image
 	– Size of the image has gone down
-- If we want to keep image size the same, we can use padding 
+- If we want to keep image size the same, we can use padding
 	- We pad input in every direction with 0’s before applying filter
-	- If padding is 1 by 1, then we add 1 zero in evey direction 
+	- If padding is 1 by 1, then we add 1 zero in evey direction
 	- If padding is 2 by 2, then we add 2 zeros in every direction, and so on
 
 ---
@@ -199,7 +199,7 @@ What is a convolutional neural network (CNN)?
 
 ---
 
-# Stride 
+# Stride
 
 - How many pixels we move filter to the right/down is stride
 - Stride 1: move filter one pixel to the right/down
@@ -231,7 +231,7 @@ What is a convolutional neural network (CNN)?
 
 - After filter applied to whole image, apply activation function to output to introduce non-linearlity
 - Preferred activation function in CNN is ReLU
-- ReLU leaves outputs with positive values as is, replaces negative values with 0 
+- ReLU leaves outputs with positive values as is, replaces negative values with 0
 
 ---
 
@@ -272,13 +272,13 @@ What is a convolutional neural network (CNN)?
 
 # Pooling layer
 
-- Pooling layer performs down sampling to reduce spatial dimensionality of input 
+- Pooling layer performs down sampling to reduce spatial dimensionality of input
 - This decreases number of parameters
-	- Reduces learning time/computation 
+	- Reduces learning time/computation
 	- Reduces likelihood of overfitting
 - Most popular type is *max* pooling
 	- Usually a 2 x 2 filter with a stride of 2 
-	- Returns maximum value as it slides over input data 
+	- Returns maximum value as it slides over input data
 
 ---
 
@@ -311,13 +311,13 @@ What is a convolutional neural network (CNN)?
 
 # MNIST dataset
 
-- MNIST dataset of handwritten digits 
+- MNIST dataset of handwritten digits
 	- Composed of training set of 60,000 and test set of 10,000 images
 - Digits have been size-normalized/centered in a fixed-size image (28 by 28 pixels)
-- Images are grayscale 
-	- Each pixel is represented by a number between 0 and 255 
+- Images are grayscale
+	- Each pixel is represented by a number between 0 and 255
 	- 0 for black, 255 for white, and other values for shades of gray
-- MNIST dataset is a standard image classification dataset 
+- MNIST dataset is a standard image classification dataset
 	- Used to compare various Machine Learning techniques
 ---
 

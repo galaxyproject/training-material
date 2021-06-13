@@ -31,6 +31,7 @@ requirements:
       - ansible
       - ansible-galaxy
       - connect-to-compute-cluster
+      - job-destinations
 ---
 
 > ### {% icon warning %} Evolving Topic

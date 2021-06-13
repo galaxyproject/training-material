@@ -74,10 +74,10 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >
 >    ```yaml
 >    - src: usegalaxy_eu.influxdb
->      version: v6.0.3
+>      version: v6.0.7
 >    ```
 >
-> 2. `ansible-galaxy install -p roles -r requirements.yml`
+> 2. ```ansible-galaxy install -p roles -r requirements.yml```
 >
 > 3. Create a new playbook, `monitoring.yml` with the following:
 >
@@ -364,7 +364,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >
 > 5. Now with the generic configuration applied to all of our hosts, we will apply some specific configuration to the Galaxy server.
 >
->    Open your `group_vars/galaxyservers.yml` file, and add the following variables:
+>    Open your `group_vars/galaxyservers.yml` file, and add the following variables at the end not under any category:
 >
 >    ```yaml
 >    telegraf_plugins_extra:
