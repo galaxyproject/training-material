@@ -823,7 +823,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 11, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 24, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -886,13 +886,13 @@ for finding spatial relationships in the image data.</p>
 
 <h2 id="inspiration-for-convolutional-neural-networks">Inspiration for convolutional neural networks</h2>
 
-<p>In 1959 Hubel and Wiesel conducted an experiment to understand how the visual cortex of the brain processes visual information <a class="citation" href="#HubelWiesel">Hubel and Wiesel 1959</a>.
+<p>In 1959 Hubel and Wiesel conducted an experiment to understand how the visual cortex of the brain processes visual information (<a class="citation" href="#HubelWiesel">Hubel and Wiesel 1959</a>).
 They recorded the activity of the neurons in the visual cortex of a cat while moving a bright line in front of the cat. They noticed that some cells fire
 when the bright line is shown at a particular angle and a particular location (They called these <strong>simple</strong> cells). Other neurons fired when the bright
 line was shown regardless of the angle/location and seemed to detect movement (They called these <strong>complex</strong> cells). It seemed complex cells receive
 inputs from multiple simple cells and have an hierarchical structure. Hubel and Wiesel won the Noble prize for their findings in 1981.</p>
 
-<p>In 1980, inspired by hierarchical structure of complex and simple cells, Fukushima proposed Neocognitron (<a class="citation" href="#Fukishima">Fukushima 1988</a>), a hierarchical neural
+<p>In 1980, inspired by hierarchical structure of complex and simple cells, Fukushima proposed <em>Neocognitron</em> (<a class="citation" href="#Fukishima">Fukushima 1988</a>), a hierarchical neural
 network used for handwritten Japanese character recognition. Neocognitron was the first CNN, and had its own training algorithm. In 1989, LeCun et. al.
 (<a class="citation" href="#LeCunEtAl">LeCun <i>et al.</i> 1989</a>) proposed a CNN that could be trained by backpropagation algorithm. CNN gained immense popularity when they outperformed other
 models at ILSVRC (ImageNet Large Scale Visual Recognition Challenge). ILSVRC is a competition in object classification and detection on hundreds of
@@ -979,11 +979,7 @@ output.</p>
 
 <p>Figure 7 illustrates the calculations for a convolution operation, via a 3 by 3 filter on a single channel 5 by 5 input vector (5 x 5 x 1). Figure 8
 illustrates the calculations when the input vector has 3 channels (5 x 5 x 3). To show this in 2 dimensions, we are displaying each channel in input
-vector and filter separately. Figure 9 shows a sample multi-channel 2D convolution in 3 dimensions. As Figures 8 and 9 show the output of a multi-channel
-2 dimensional filter is a single channel 2 dimensional image. Applying <em>multiple</em> filters to the input image results in a multi-channel 2 dimensional
-image for the output. For example, if the input image is 28 by 28 by 3 (rows x columns x channels), and we apply a 3 by 3 filter with 1 by 1 padding,
-we would get a 28 by 28 by 1 image. If we apply 15 filters to the input image, our output would be 28 by 28 by 15. Hence, the number of filters in a
-convolution layer allows us to increase or decrease the channel size.</p>
+vector and filter separately. Figure 9 shows a sample multi-channel 2D convolution in 3 dimensions.</p>
 
 <figure id="figure-8"><img src="../../images/Conv_multiple_input_channel.png" alt="Three matrices representing an input vector and another three matrices representing a filter, along with calculation for multiple input channel two dimensional convolution operation " /><figcaption><span class="figcaption-prefix">Figure 8:</span> Illustration of multiple input channel two dimensional convolution</figcaption></figure>
 
@@ -992,13 +988,18 @@ input image results in a multi-channel 2 dimensional image for the output. For e
 and we apply a 3 by 3 filter with 1 by 1 padding, we would get a 28 by 28 by 1 image. If we apply 15 filters to the input image, our output would be 28
 by 28 by 15. Hence, the number of filters in a convolution layer allows us to increase or decrease the channel size.</p>
 
-<figure id="figure-9"><img src="../../images/Conv_multiple_channel_3d.gif" alt="Multiple cubes representing input vector, filter, and output in a 3 channel 2 dimensional convolution operation" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Three dimensional illustration of 3 input channel 2D convolution operation (Source: https://thomelane.github.io/convolutions/2DConvRGB.html)</figcaption></figure>
+<figure id="figure-9"><img src="../../images/Conv_multiple_channel_3d.gif" alt="Multiple cubes representing input vector, filter, and output in a 3 channel 2 dimensional convolution operation" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Three dimensional illustration of multiple input channel two dimensional convolution (Source: https://thomelane.github.io/convolutions/2DConvRGB.html)</figcaption></figure>
 
 <h3 id="pooling-layer">Pooling layer</h3>
 
 <p>The pooling layer performs down sampling to reduce the spatial dimensionality of the input. This decreases the number of parameters, which in turn
 reduces the learning time and computation, and the likelihood of overfitting. The most popular type of pooling is <em>max pooling</em>. Its usually a 2 by 2
 filter with a stride of 2 that returns the maximum value as it slides over the input data (similar to convolution filters).</p>
+
+<h3 id="fully-connected-layer">Fully connected layer</h3>
+
+<p>The last layer in a CNN is a fully connected layer. We connect all the nodes from the previous layer to this fully connected layer, which is responsible
+for classification of the image.</p>
 
 <figure id="figure-10"><img src="../../images/Conv_CNN.png" alt="A convolutional neural network with 3 convolution layers followed by 3 pooling layers" /><figcaption><span class="figcaption-prefix">Figure 10:</span> A convolutional neural network with 3 convolution layers followed by 3 pooling layers (<a class="citation" href="#OSheaEtAl">O’Shea and Nash 2015</a>)</figcaption></figure>
 
@@ -1007,11 +1008,6 @@ for feature extraction at a different level of abstraction. For example, the fil
 edges. The filters in the next layer could detect shapes, and the filters in the last layer could detect collection of shapes. Filter values are randomly
 initialized and are learned by the learning algorithm. This makes CNN very powerful as they not only do classification, but can also automatically do
 feature extraction. This distinguishes CNN from other classification techniques (like Support Vector Machines), which cannot do feature extraction.</p>
-
-<h3 id="fully-connected-layer">Fully connected layer</h3>
-
-<p>The last layer in a CNN is a fully connected layer. We connect all the nodes from the previous layer to this fully connected layer, which is responsible
-for classification of the image.</p>
 
 <h2 id="mnist-dataset">MNIST dataset</h2>
 
@@ -1532,7 +1528,7 @@ operator and its parameters. We then used <span class="notranslate">Galaxy</span
     title = "Deep Learning (Part 3) - Convolutional neural networks (CNN) (Galaxy Training Materials)",
     year = "2021",
     month = "05",
-    day = "11"
+    day = "24"
     url = "\url{https://training.galaxyproject.org/training-material/topics/statistics/tutorials/CNN/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
