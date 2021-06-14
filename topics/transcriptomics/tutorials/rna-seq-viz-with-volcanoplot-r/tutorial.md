@@ -11,6 +11,7 @@ objectives:
 time_estimation: "1H"
 key_points:
   - "R can be used to customise Volcano Plot output"
+  - "The RStudio interactive tool can be used to run R inside Galaxy"
 contributors:
   - mblue9
 requirements:
@@ -37,7 +38,7 @@ requirements:
 # Introduction
 {:.no_toc}
 
-The [Volcano plot]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %}) tutorial, introduced volcano plots and showed how they can be generated with the Galaxy Volcano plot tool. In this tutorial we show how you can customise a plot using the R script output from the tool. 
+The [Volcano plot]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %}) tutorial, introduced volcano plots and showed how they can be generated with the Galaxy Volcano plot tool. In this tutorial we show how you can customise a plot using the R script output from the tool.
 
 > ### Agenda
 >
@@ -52,7 +53,7 @@ The [Volcano plot]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-vol
 
 We will use one file for this analysis:
 
- * **Differentially expressed results file** (genes in rows, and 4 required columns: raw P values, adjusted P values (FDR), log fold change and gene labels). 
+ * **Differentially expressed results file** (genes in rows, and 4 required columns: raw P values, adjusted P values (FDR), log fold change and gene labels).
 
  If you are following on from the [Volcano plot]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %}) tutorial, you already have this file in your History so you can skip to the **Create volcano plot** step below.
 
@@ -122,30 +123,30 @@ Now we will customise the plot by editing the R code in RStudio. You can use Gal
 We'll import the differentially expressed results input file and the RScript into R.
 
 > ### {% icon hands_on %} Hands-on: Using datasets from Galaxy
-> 
+>
 > 1. Note the history IDs of 1) the differentially expressed results and 2) the RScript in your Galaxy history
-> 
-> 2. {% tool [RStudio](interactive_tool_rstudio) %} in Galaxy provides some special functions such as `gx_get` to import and export files from your history. 
+>
+> 2. {% tool [RStudio](interactive_tool_rstudio) %} in Galaxy provides some special functions such as `gx_get` to import and export files from your history.
 >
 >    {% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
 >
 > 3. Copy the files we need into our workspace so we can see them in the Files pane.
-> 
+>
 >    ```R
 >    file.copy(gx_get(1), "de-results.tsv") # will copy dataset number 1 from your history, use the correct ID for your differentially expressed results dataset.
 >    file.copy(gx_get(3), "volcano.R") # will copy dataset number 3 from your history, use the correct ID for your Rscript dataset.
 >    ```
 >
 > 4. Click on `volcano.R` in the Files pane to open it in the Editor pane.
-> 
-> {: .hands_on}
+>
+{: .hands_on}
 
 
-We'll have a look at the script. 
+We'll have a look at the script.
 
 ## Set up script
 
-The first few lines from `# Galaxy settings start` to `# Galaxy settings end` are settings needed to run the Volcano plot tool in Galaxy. We don't need them to run the script in R so we will delete them. If we don't delete the error handling line, the R session will crash if we encounter any error in the code. It's ok as it will resume again where we were but better to not have this happen. 
+The first few lines from `# Galaxy settings start` to `# Galaxy settings end` are settings needed to run the Volcano plot tool in Galaxy. We don't need them to run the script in R so we will delete them. If we don't delete the error handling line, the R session will crash if we encounter any error in the code. It's ok as it will resume again where we were but better to not have this happen.
 
 > ### {% icon hands_on %} Hands-on: Delete unneeded lines
 >
@@ -165,16 +166,16 @@ The first few lines from `# Galaxy settings start` to `# Galaxy settings end` ar
 >
 {: .hands_on}
 
-We'll check if we have the packages the script needs. We can see the packages used in the lines that have `library(package)` 
+We'll check if we have the packages the script needs. We can see the packages used in the lines that have `library(package)`
 
-> ```R
-> library(dplyr)
-> library(ggplot2)
-> library(ggrepel)
-> ```
+```R
+library(dplyr)
+library(ggplot2)
+library(ggrepel)
+```
 
-When we launched Galaxy RStudio there was information in the Console letting us know that some packages are pre-installed. These packages include `ggplot2` and `dplyr`. In this Galaxy there is a yellow warning banner across the top of the script saying `Package ggrepel required is not installed. Install. Don't Show Again`. 
-So we just need to install the `ggrepel` package. 
+When we launched Galaxy RStudio there was information in the Console letting us know that some packages are pre-installed. These packages include `ggplot2` and `dplyr`. In this Galaxy there is a yellow warning banner across the top of the script saying `Package ggrepel required is not installed. Install. Don't Show Again`.
+So we just need to install the `ggrepel` package.
 
 > ### {% icon hands_on %} Hands-on: Install package
 >
@@ -201,7 +202,7 @@ We need to change the path of the differentially expressed file in the script. T
 >    ```
 >
 > 2. Highlight the code in the script and run
-> 
+>
 >    > ### {% icon tip %} Tip: Highlight all code and run shortcuts
 >    > - To highlight all code type <kbd>CTRL</kbd>+<kbd>a</kbd> (or <kbd>CMD</kbd>+<kbd>a</kbd>)
 >    > - To run type <kbd>CTRL</kbd>+<kbd>Enter</kbd> (or <kbd>CMD</kbd>+<kbd>Enter</kbd>)
@@ -226,12 +227,12 @@ We'll delete the lines below that save the plot to a PDF file. The plots will th
 >    # Close PDF graphics device
 >    dev.off()
 >    ```
-> 
+>
 > 2. Highlight the code in the script and run
 >
 {: .hands_on}
 
-You should now see the plot produced in the Plots pane. 
+You should now see the plot produced in the Plots pane.
 
 # Customising the plot
 
@@ -276,7 +277,7 @@ We'll make the points a bit smaller. We'll change to 0.5.
 >    ```R
 >    # change the line
 >    geom_point(aes(colour = sig)) +
->    
+>
 >    # to
 >    geom_point(aes(colour = sig), size = 0.5) +
 >    ```
@@ -314,7 +315,7 @@ We'll make the font size of the labels a bit smaller.
 >    ```R
 >    # change the line
 >    geom_text_repel(data = filter(results, labels != ""), aes(label = labels),
->    
+>
 >    # to
 >    geom_text_repel(data = filter(results, labels != ""), aes(label = labels), size = 3,
 >    ```
@@ -344,7 +345,7 @@ We'll make the font size of the labels a bit smaller.
 
 ## Change categories
 
-We can change the categories of points we're colouring in the plot. For example, instead of using separate categories for upregulated, downregulated we could just use a single category for significant. 
+We can change the categories of points we're colouring in the plot. For example, instead of using separate categories for upregulated, downregulated we could just use a single category for significant.
 
 > ### {% icon hands_on %} Hands-on: Change categories
 >
@@ -356,7 +357,7 @@ We can change the categories of points we're colouring in the plot. For example,
 >    notsig <- unlist(strsplit('Down,Not Sig,Up', split = ","))[2]
 >    up <- unlist(strsplit('Down,Not Sig,Up', split = ","))[3]
 >
->    # to 
+>    # to
 >    signif <- "Significant"
 >    notsignif <- "Not significant"
 >    ```
@@ -366,11 +367,11 @@ We can change the categories of points we're colouring in the plot. For example,
 >    ```R
 >    # change
 >    results <- mutate(results, sig = case_when(
->                                fdr < 0.01 & logfc > 0.58 ~ up, 
->                                fdr < 0.01 & logfc < -0.58 ~ down, 
+>                                fdr < 0.01 & logfc > 0.58 ~ up,
+>                                fdr < 0.01 & logfc < -0.58 ~ down,
 >                                TRUE ~ notsig))
 >
->    # to 
+>    # to
 >    results <- mutate(results, sig = case_when(
 >                                fdr < 0.01 & abs(logfc) > 0.58 ~ signif, # abs() will give us absolute values i.e. all > 0.58 and < -0.58
 >                                TRUE ~ notsignif))
@@ -382,11 +383,11 @@ We can change the categories of points we're colouring in the plot. For example,
 >    # change
 >    colours <- setNames(c("purple", "grey", "orange"), c(down, notsig, up))
 >
->    # to 
+>    # to
 >    colours <- setNames(c("grey", "red"), c(notsignif, signif))
 >    ```
 >
-> 4. runHighlight the code in the script and 
+> 4. runHighlight the code in the script and
 >
 >   ![Categories changed](../../images/rna-seq-viz-with-volcanoplot-r/volcano_categories.png)
 >
