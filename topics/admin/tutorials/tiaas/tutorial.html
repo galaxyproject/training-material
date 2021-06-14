@@ -985,7 +985,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 2, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 14, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -1027,91 +1027,141 @@ resources, thus reducing queue times on the day of the training.</p>
     <li>
       <p>In your <code class="language-plaintext highlighter-rouge">requirements.yml</code> add the TIaaS ansible role:</p>
 
-      <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">use<span class="notranslate">galaxy</span>_eu.tiaas2</span>
-  <span class="na">version</span><span class="pi">:</span> <span class="s">0.0.6</span>
+      <div data-commit="Add grafana requirement" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
+</span><span class="gi">+++ b/requirements.yml
+</span><span class="p">@@ -34,3 +34,5 @@</span>
+   version: 0.14.2
+ - src: dj-wasabi.telegraf
+   version: 0.12.0
+<span class="gi">+- src: use<span class="notranslate">galaxy</span>_eu.tiaas2
++  version: 0.0.6
+</span>   
 </code></pre></div>      </div>
 
       <p>And run the install step:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> install -p roles -r requirements.yml
-</code></pre></div>      </div>
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
+</code></pre></div>        </div>
+      </blockquote>
     </li>
     <li>
       <p>In your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file, add the following:</p>
 
-      <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># TIaaS setup</span>
-<span class="na">tiaas_dir</span><span class="pi">:</span> <span class="s">/opt/tiaas</span>
-<span class="na">tiaas_user</span><span class="pi">:</span> <span class="s">tiaas</span>
-<span class="na">tiaas_group</span><span class="pi">:</span> <span class="s">tiaas</span>
-<span class="na">tiaas_version</span><span class="pi">:</span> <span class="s">master</span>
-<span class="na">tiaas_admin_user</span><span class="pi">:</span> <span class="s">admin</span>
-<span class="na">tiaas_admin_pass</span><span class="pi">:</span> <span class="s">changeme</span>
+      <div data-commit="Configure tiaas" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -216,3 +216,11 @@</span> telegraf_plugins_extra:
+       - timeout = "10s"
+       - data_format = "influx"
+       - interval = "15s"
+<span class="gi">+
++# TIaaS setup
++tiaas_dir: /opt/tiaas
++tiaas_user: tiaas
++tiaas_group: tiaas
++tiaas_version: master
++tiaas_admin_user: admin
++tiaas_admin_pass: changeme
+</span>   
 </code></pre></div>      </div>
     </li>
     <li>
       <p>In the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file, we also need to set the database permissions correctly for TIaaS. It needs to be able to access some <span class="notranslate">Galaxy</span> tables, and we will carefully define only the ones we really need:</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gi">+++ group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span> postgresql_objects_users:
+      <div data-commit="Add database privileges for TIaaS" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -8,6 +8,7 @@</span> pip_package: python3-pip                               # geerlingguy.pip
+ postgresql_objects_users:
    - name: <span class="notranslate">galaxy</span>
-     password: null
+   - name: telegraf
 <span class="gi">+  - name: tiaas
-+    password: null
 </span> postgresql_objects_databases:
    - name: <span class="notranslate">galaxy</span>
      owner: <span class="notranslate">galaxy</span>
-<span class="gi">+postgresql_objects_privileges:
-+- database: <span class="notranslate">galaxy</span>
-+  roles: tiaas
-+  objs: <span class="notranslate">galaxy</span>_user,<span class="notranslate">galaxy</span>_session,job,history,<span class="notranslate">workflow</span>,workflow_invocation
-+  type: table
-+  privs: SELECT
-+- database: <span class="notranslate">galaxy</span>
-+  roles: tiaas
-+  objs: user_group_association,<span class="notranslate">galaxy</span>_group,role,group_role_association
-+  type: table
-+  privs: SELECT,INSERT
-+- database: <span class="notranslate">galaxy</span>
-+  roles: tiaas
-+  objs: role_id_seq,<span class="notranslate">galaxy</span>_group_id_seq,group_role_association_id_seq,user_group_association_id_seq
-+  type: sequence
-+  privs: USAGE,SELECT
-</span></code></pre></div>      </div>
+<span class="p">@@ -16,6 +17,22 @@</span> postgresql_objects_privileges:
+     roles: telegraf
+     privs: SELECT
+     objs: ALL_IN_SCHEMA
+<span class="gi">+  - database: <span class="notranslate">galaxy</span>
++    roles: tiaas
++    objs: <span class="notranslate">galaxy</span>_user,<span class="notranslate">galaxy</span>_session,job,history,<span class="notranslate">workflow</span>,workflow_invocation
++    type: table
++    privs: SELECT
++  - database: <span class="notranslate">galaxy</span>
++    roles: tiaas
++    objs: user_group_association,<span class="notranslate">galaxy</span>_group,role,group_role_association
++    type: table
++    privs: SELECT,INSERT
++  - database: <span class="notranslate">galaxy</span>
++    roles: tiaas
++    objs: role_id_seq,<span class="notranslate">galaxy</span>_group_id_seq,group_role_association_id_seq,user_group_association_id_seq
++    type: sequence
++    privs: USAGE,SELECT
++
+</span> # PostgreSQL Backups
+ postgresql_backup_dir: /data/backups
+ postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
+   
+</code></pre></div>      </div>
     </li>
     <li>
       <p>We need to add the <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>_eu.tiaas2</code> role to the end of the playbook (<code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>)</p>
+
+      <div data-commit="Add TIaaS role to the Galaxy playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
+</span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
+</span><span class="p">@@ -34,3 +34,4 @@</span>
+     - <span class="notranslate">galaxy</span>project.cvmfs
+     - use<span class="notranslate">galaxy</span>_eu.gxadmin
+     - dj-wasabi.telegraf
+<span class="gi">+    - use<span class="notranslate">galaxy</span>_eu.tiaas2
+</span>   
+</code></pre></div>      </div>
     </li>
     <li>
       <p>Lastly we should add the routes for TIaaS to the NGINX template for <span class="notranslate">Galaxy</span>:</p>
 
-      <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">location</span> <span class="n">/tiaas</span> <span class="p">{</span>
-        <span class="kn">uwsgi_pass</span> <span class="nf">127.0.0.1</span><span class="p">:</span><span class="mi">5000</span><span class="p">;</span>
-        <span class="kn">uwsgi_param</span> <span class="s">UWSGI_SCHEME</span> <span class="nv">$scheme</span><span class="p">;</span>
-        <span class="kn">include</span> <span class="s">uwsgi_params</span><span class="p">;</span>
-    <span class="p">}</span>
+      <div data-commit="Add nginx routes for TIaaS" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/nginx/<span class="notranslate">galaxy</span>.j2
+</span><span class="gi">+++ b/templates/nginx/<span class="notranslate">galaxy</span>.j2
+</span><span class="p">@@ -61,4 +61,19 @@</span> server {
+         proxy_pass http://127.0.0.1:3000/;
+     }
 
-    <span class="k">location</span> <span class="n">/tiaas/static</span> <span class="p">{</span>
-        <span class="kn">alias</span> <span class="n">/opt/tiaas/static</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="k">location</span> <span class="n">/join-training</span> <span class="p">{</span>
-        <span class="kn">uwsgi_pass</span> <span class="nf">127.0.0.1</span><span class="p">:</span><span class="mi">5000</span><span class="p">;</span>
-        <span class="kn">uwsgi_param</span> <span class="s">UWSGI_SCHEME</span> <span class="nv">$scheme</span><span class="p">;</span>
-        <span class="kn">include</span> <span class="s">uwsgi_params</span><span class="p">;</span>
-    <span class="p">}</span>
++    location /tiaas {
+<span class="gi">+        uwsgi_pass 127.0.0.1:5000;
++        uwsgi_param UWSGI_SCHEME $scheme;
++        include uwsgi_params;
++    }
++
++    location /tiaas/static {
++        alias /opt/tiaas/static;
++    }
++
++    location /join-training {
++        uwsgi_pass 127.0.0.1:5000;
++        uwsgi_param UWSGI_SCHEME $scheme;
++        include uwsgi_params;
++    }
+</span> }
+   
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Run the playbook</p>
 
       <blockquote class="code-in">
-        <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+        <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>        </div>
       </blockquote>
     </li>
   </ol>
 
+</blockquote>
+
+<blockquote class="hidden">
+  <div data-test="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.sh
+</code></pre></div>  </div>
 </blockquote>
 
 <p>TIaaS should be available now! The following routes on your server are now configured (we will run through these in the next section)</p>
@@ -1266,73 +1316,95 @@ resources, thus reducing queue times on the day of the training.</p>
     <li>
       <p>Create and open <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/dynamic_job_rules/hogwarts.py</code></p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn"><span class="notranslate">galaxy</span>.jobs</span> <span class="kn">import</span> <span class="n">JobDestination</span>
-<span class="kn">from</span> <span class="nn"><span class="notranslate">galaxy</span>.jobs.mapper</span> <span class="kn">import</span> <span class="n">Job<span class="notranslate">Mapping</span>Exception</span>
-<span class="kn">import</span> <span class="nn">os</span>
-
-<span class="k">def</span> <span class="nf">sorting_hat</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
-    <span class="c1"># Check that the user is not anonymous
-</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">app</span><span class="p">.</span><span class="n">job_config</span><span class="p">.</span><span class="n">get_destination</span><span class="p">(</span><span class="s">'slurm'</span><span class="p">)</span>
-
-    <span class="c1"># Collect the user's roles
-</span>    <span class="n">user_roles</span> <span class="o">=</span> <span class="p">[</span><span class="n">role</span><span class="p">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">user</span><span class="p">.</span><span class="n">all_roles</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">role</span><span class="p">.</span><span class="n">deleted</span><span class="p">]</span>
-
-    <span class="c1"># If any of these are prefixed with 'training-'
-</span>    <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">role</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">'training-'</span><span class="p">)</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">user_roles</span><span class="p">]):</span>
-        <span class="c1"># Then they are a training user, we will send their jobs to pulsar,
-</span>        <span class="c1"># Or give them extra resources
-</span>        <span class="k">return</span> <span class="n">app</span><span class="p">.</span><span class="n">job_config</span><span class="p">.</span><span class="n">get_destination</span><span class="p">(</span><span class="s">'slurm-2c'</span><span class="p">)</span> <span class="c1"># or pulsar, if available
-</span>
-    <span class="k">return</span> <span class="n">app</span><span class="p">.</span><span class="n">job_config</span><span class="p">.</span><span class="n">get_destination</span><span class="p">(</span><span class="s">'slurm'</span><span class="p">)</span>
+      <div data-commit="Setup sorting hat for jobs" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/files/<span class="notranslate">galaxy</span>/dynamic_job_rules/hogwarts.py
+</span><span class="p">@@ -0,0 +1,19 @@</span>
+<span class="gi">+from <span class="notranslate">galaxy</span>.jobs import JobDestination
++from <span class="notranslate">galaxy</span>.jobs.mapper import Job<span class="notranslate">Mapping</span>Exception
++import os
++
++def sorting_hat(app, user):
++    # Check that the user is not anonymous
++    if not user:
++        return app.job_config.get_destination('slurm')
++
++    # Collect the user's roles
++    user_roles = [role.name for role in user.all_roles() if not role.deleted]
++
++    # If any of these are prefixed with 'training-'
++    if any([role.startswith('training-') for role in user_roles]):
++        # Then they are a training user, we will send their jobs to pulsar,
++        # Or give them extra resources
++        return app.job_config.get_destination('slurm-2c') # or pulsar, if available
++
++    return app.job_config.get_destination('slurm')
+</span>   
 </code></pre></div>      </div>
 
       <p>This destination will check that the <code class="language-plaintext highlighter-rouge">user_email</code> is in a training group (role starting with <code class="language-plaintext highlighter-rouge">training-</code>).</p>
     </li>
     <li>
-      <p>As usual, we need to instruct <span class="notranslate">Galaxy</span> of where to find this file:</p>
+      <p>As usual, we need to instruct <span class="notranslate">Galaxy</span> of where to find this file. Edit your group variables file and add the following:</p>
 
-      <ul>
-        <li>
-          <p>Edit your group variables file and add the following:</p>
-
-          <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="notranslate">galaxy</span>_dynamic_job_rules:
-   - my_rules.py
-<span class="gi">+  - hogwarts.py
-</span></code></pre></div>          </div>
-        </li>
-      </ul>
+      <div data-commit="Add to list of deployed rules" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -137,6 +137,7 @@</span> <span class="notranslate">galaxy</span>_local_tools:
+ <span class="notranslate">galaxy</span>_dynamic_job_rules:
+ - my_rules.py
+ - map_resources.py
+<span class="gi">+- hogwarts.py
+</span>
+ # systemd
+ <span class="notranslate">galaxy</span>_manage_systemd: yes
+   
+</code></pre></div>      </div>
     </li>
     <li>
       <p>We next need to configure this plugin in our job configuration (<code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</code>):</p>
 
-      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"sorting_hat"</span> <span class="na">runner=</span><span class="s">"dynamic"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"type"</span><span class="nt">&gt;</span>python<span class="nt">&lt;/param&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"function"</span><span class="nt">&gt;</span>sorting_hat<span class="nt">&lt;/param&gt;</span>
-<span class="nt">&lt;/destination&gt;</span>
+      <div data-commit="Setup job conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+</span><span class="p">@@ -13,7 +13,7 @@</span>
+             &lt;param id="manager"&gt;_default_&lt;/param&gt;
+         &lt;/plugin&gt;
+     &lt;/plugins&gt;
+<span class="gd">-    &lt;destinations default="slurm"&gt;
+</span><span class="gi">+    &lt;destinations default="sorting_hat"&gt;
+</span>         &lt;destination id="local_destination" runner="local_plugin"/&gt;
+         &lt;destination id="pulsar" runner="pulsar_runner" &gt;
+             &lt;param id="default_file_action"&gt;remote_transfer&lt;/param&gt;
+<span class="p">@@ -25,6 +25,10 @@</span>
+             &lt;param id="transport"&gt;curl&lt;/param&gt;
+             &lt;param id="outputs_to_working_directory"&gt;False&lt;/param&gt;
+         &lt;/destination&gt;
+<span class="gi">+        &lt;destination id="sorting_hat" runner="dynamic"&gt;
++            &lt;param id="type"&gt;python&lt;/param&gt;
++            &lt;param id="function"&gt;sorting_hat&lt;/param&gt;
++        &lt;/destination&gt;
+</span>         &lt;destination id="slurm" runner="slurm"&gt;
+             &lt;param id="singularity_enabled"&gt;true&lt;/param&gt;
+             &lt;env id="LC_ALL"&gt;C&lt;/env&gt;
+<span class="p">@@ -63,6 +67,7 @@</span>
+         &lt;group id="testing"&gt;cores,time&lt;/group&gt;
+     &lt;/resources&gt;
+     &lt;tools&gt;
+<span class="gi">+        &lt;tool id="upload1" destination="slurm"/&gt;
+</span>         &lt;tool id="testing" destination="dynamic_cores_time" resources="testing" /&gt;
+         &lt;tool id="bwa" destination="pulsar"/&gt;
+         &lt;tool id="bwa_mem" destination="pulsar"/&gt;
+   
 </code></pre></div>      </div>
 
-      <p>This is a <strong>Python function dynamic destination</strong>. <span class="notranslate">Galaxy</span> will load all python files in the <code class="language-plaintext highlighter-rouge">{{ <span class="notranslate">galaxy</span>_dynamic_rule_dir }}</code>, and all functions defined in those will be available to be used in the <code class="language-plaintext highlighter-rouge">job_conf.xml.j2</code></p>
-    </li>
-    <li>
-      <p>Again In <code class="language-plaintext highlighter-rouge">job_conf.xml.j2</code>, update the top level <code class="language-plaintext highlighter-rouge">&lt;destinations&gt;</code> definition and point it to the sorting hat:</p>
-
-      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;destinations</span> <span class="na">default=</span><span class="s">"sorting_hat"</span><span class="nt">&gt;</span>
-...
-<span class="nt">&lt;/destinations&gt;</span>
-</code></pre></div>      </div>
-    </li>
-    <li>
-      <p>Finally, upload jobs <em>must</em> stay local, the input files are a bit special, so we just send those to the local slurm cluster:</p>
-
-      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;tools&gt;</span>
-        ...
-        <span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"upload1"</span> <span class="na">destination=</span><span class="s">"slurm"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/tools&gt;</span>
-</code></pre></div>      </div>
+      <p>This is a <strong>Python function dynamic destination</strong>. <span class="notranslate">Galaxy</span> will load all python files in the <code class="language-plaintext highlighter-rouge">{{ <span class="notranslate">galaxy</span>_dynamic_rule_dir }}</code>, and all functions defined in those will be available to be used in the <code class="language-plaintext highlighter-rouge">job_conf.xml.j2</code>. Additionally it will send all jobs through the sorting hat, but we want upload jobs to stay local. They should always run locally.</p>
     </li>
     <li>
       <p>Run the playbook</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+</code></pre></div>        </div>
+      </blockquote>
     </li>
     <li>
       <p>Ensure your user is joined to a training</p>
@@ -1345,6 +1417,11 @@ resources, thus reducing queue times on the day of the training.</p>
 </blockquote>
 
 <p>Congratulations! you have now set up TIaaS on your <span class="notranslate">Galaxy</span> server.</p>
+
+<blockquote class="hidden">
+  <div data-test="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2.sh
+</code></pre></div>  </div>
+</blockquote>
 
 
                     
@@ -1425,7 +1502,7 @@ resources, thus reducing queue times on the day of the training.</p>
     title = "Training Infrastructure as a Service (TIaaS) (Galaxy Training Materials)",
     year = "2021",
     month = "06",
-    day = "02"
+    day = "14"
     url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/tiaas/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

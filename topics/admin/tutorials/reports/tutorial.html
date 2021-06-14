@@ -661,7 +661,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 2, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 14, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -671,9 +671,7 @@
                     <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
                 </div>
                 <div class="col-sm-10">
-                    <h1 class="no_toc" id="overview">Overview</h1>
-
-<p>The reports application gives some pre-configured analytics screens.</p>
+                    <p>The reports application gives some pre-configured analytics screens. These are very easy to setup and can help with debugging issues in <span class="notranslate">Galaxy</span>.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -695,68 +693,108 @@
     <li>
       <p>First we add a basic configuration of the Reports app to the playbook templates. Create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/</code> folder, if it doesn’t exist, and create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/reports.yml</code> with the following contents:</p>
 
-      <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">uwsgi</span><span class="pi">:</span>
-    <span class="na">socket</span><span class="pi">:</span> <span class="s">127.0.0.1:9001</span>
-    <span class="na">buffer-size</span><span class="pi">:</span> <span class="m">16384</span>
-    <span class="na">processes</span><span class="pi">:</span> <span class="m">1</span>
-    <span class="na">th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="m">4</span>
-    <span class="na">offload-th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="m">2</span>
-    <span class="na">static-map</span><span class="pi">:</span> <span class="s">/static/style={{ <span class="notranslate">galaxy</span>_server_dir }}/static/style/blue</span>
-    <span class="na">static-map</span><span class="pi">:</span> <span class="s">/static={{ <span class="notranslate">galaxy</span>_server_dir }}/static</span>
-    <span class="na">static-map</span><span class="pi">:</span> <span class="s">/favicon.ico=static/favicon.ico</span>
-    <span class="na">master</span><span class="pi">:</span> <span class="no">true</span>
-    <span class="na">virtualenv</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv"><span class="notranslate">galaxy</span>_venv_dir</span> <span class="pi">}}</span>
-    <span class="na">pythonpath</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv"><span class="notranslate">galaxy</span>_server_dir</span> <span class="pi">}}</span><span class="s">/lib</span>
-    <span class="na">mount</span><span class="pi">:</span> <span class="s">/reports=<span class="notranslate">galaxy</span>.webapps.reports.buildapp:uwsgi_app()</span>
-    <span class="na">manage-script-name</span><span class="pi">:</span> <span class="no">true</span>
-    <span class="na">thunder-lock</span><span class="pi">:</span> <span class="no">false</span>
-    <span class="na">die-on-term</span><span class="pi">:</span> <span class="no">true</span>
-    <span class="na">hook-master-start</span><span class="pi">:</span> <span class="s">unix_signal:2 gracefully_kill_them_all</span>
-    <span class="na">hook-master-start</span><span class="pi">:</span> <span class="s">unix_signal:15 gracefully_kill_them_all</span>
-    <span class="na">py-call-osafterfork</span><span class="pi">:</span> <span class="no">true</span>
-    <span class="na">enable-th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="no">true</span>
-<span class="na">reports</span><span class="pi">:</span>
-    <span class="na">cookie-path</span><span class="pi">:</span> <span class="s">/reports</span>
-    <span class="na">database_connection</span><span class="pi">:</span> <span class="s2">"</span><span class="s">postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql"</span>
-    <span class="na">file_path</span><span class="pi">:</span> <span class="s">/data</span>
-    <span class="na">filter-with</span><span class="pi">:</span> <span class="s">proxy-prefix</span>
-    <span class="na">template_cache_path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_mutable_data_dir</span><span class="nv"> </span><span class="s">}}/compiled_templates"</span>
+      <div data-commit="Setup reports config file" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/reports.yml
+</span><span class="p">@@ -0,0 +1,26 @@</span>
+<span class="gi">+uwsgi:
++    socket: 127.0.0.1:9001
++    buffer-size: 16384
++    processes: 1
++    th<span class="notranslate">reads</span>: 4
++    offload-th<span class="notranslate">reads</span>: 2
++    static-map: /static/style={{ <span class="notranslate">galaxy</span>_server_dir }}/static/style/blue
++    static-map: /static={{ <span class="notranslate">galaxy</span>_server_dir }}/static
++    static-map: /favicon.ico=static/favicon.ico
++    master: true
++    virtualenv: {{ <span class="notranslate">galaxy</span>_venv_dir }}
++    pythonpath: {{ <span class="notranslate">galaxy</span>_server_dir }}/lib
++    mount: /reports=<span class="notranslate">galaxy</span>.webapps.reports.buildapp:uwsgi_app()
++    manage-script-name: true
++    thunder-lock: false
++    die-on-term: true
++    hook-master-start: unix_signal:2 gracefully_kill_them_all
++    hook-master-start: unix_signal:15 gracefully_kill_them_all
++    py-call-osafterfork: true
++    enable-th<span class="notranslate">reads</span>: true
++reports:
++    cookie-path: /reports
++    database_connection: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.database_connection }}"
++    file_path: /data
++    filter-with: proxy-prefix
++    template_cache_path: "{{ <span class="notranslate">galaxy</span>_mutable_data_dir }}/compiled_templates"
+</span>   
 </code></pre></div>      </div>
     </li>
     <li>
       <p>In your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file, tell the playbook to deploy the reports configuration file:</p>
 
-      <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config_templates</span><span class="pi">:</span>
-<span class="nn">...</span>
-  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/reports.yml</span>
-    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/reports.yml"</span>
+      <div data-commit="Deploy reports config to the config directory" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -125,6 +125,8 @@</span> <span class="notranslate">galaxy</span>_config_templates:
+     dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file }}"
+   - src: templates/<span class="notranslate">galaxy</span>/config/container_resolvers_conf.xml.j2
+     dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.containers_resolvers_config_file }}"
+<span class="gi">+  - src: templates/<span class="notranslate">galaxy</span>/config/reports.yml
++    dest: "{{ <span class="notranslate">galaxy</span>_config_dir }}/reports.yml"
+</span>
+ <span class="notranslate">galaxy</span>_config_files:
+ - src: files/<span class="notranslate">galaxy</span>/config/tool_destinations.yml
+   
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Similar to <span class="notranslate">Galaxy</span> we will again use systemd to manage the Reports process.</p>
 
-      <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># systemd</span>
-<span class="na"><span class="notranslate">galaxy</span>_systemd_reports</span><span class="pi">:</span> <span class="no">true</span>
-  <span class="s">....</span>
+      <div data-commit="Enable the reports systemd unit" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -143,6 +143,7 @@</span> <span class="notranslate">galaxy</span>_dynamic_job_rules:
+
+ # systemd
+ <span class="notranslate">galaxy</span>_manage_systemd: yes
+<span class="gi">+<span class="notranslate">galaxy</span>_manage_systemd_reports: yes
+</span> <span class="notranslate">galaxy</span>_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
+
+ # Certbot
+   
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Then we need to tell NGINX it should serve our Reports app under <code class="language-plaintext highlighter-rouge">&lt;server_url&gt;/reports</code> url. Edit your <code class="language-plaintext highlighter-rouge">templates/nginx/<span class="notranslate">galaxy</span>.j2</code> file, and within the server block, add a block for proxying the reports application. It should look like:</p>
 
-      <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">location</span> <span class="n">/reports/</span> <span class="p">{</span>
-    <span class="kn">uwsgi_pass</span>           <span class="nf">127.0.0.1</span><span class="p">:</span><span class="mi">9001</span><span class="p">;</span>
-    <span class="kn">uwsgi_param</span>          <span class="s">UWSGI_SCHEME</span> <span class="nv">$scheme</span><span class="p">;</span>
-    <span class="kn">include</span>              <span class="s">uwsgi_params</span><span class="p">;</span>
-<span class="p">}</span>
+      <div data-commit="Configure a location block for Reports in NGINX" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/nginx/<span class="notranslate">galaxy</span>.j2
+</span><span class="gi">+++ b/templates/nginx/<span class="notranslate">galaxy</span>.j2
+</span><span class="p">@@ -76,4 +76,10 @@</span> server {
+         uwsgi_param UWSGI_SCHEME $scheme;
+         include uwsgi_params;
+     }
+<span class="gi">+
++    location /reports/ {
++        uwsgi_pass           127.0.0.1:9001;
++        uwsgi_param          UWSGI_SCHEME $scheme;
++        include              uwsgi_params;
++    }
+</span> }
+   
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run the playbook</p>
+      <p>Run the playbook:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+</code></pre></div>        </div>
+      </blockquote>
     </li>
     <li>
       <p>The reports application should be available, under <code class="language-plaintext highlighter-rouge">&lt;server_url&gt;/reports/</code>.&gt;</p>
     </li>
   </ol>
+</blockquote>
+
+<blockquote class="hidden">
+  <div data-test="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.sh
+</code></pre></div>  </div>
 </blockquote>
 
 <blockquote class="comment">
@@ -846,7 +884,7 @@
     title = "Galaxy Monitoring with Reports (Galaxy Training Materials)",
     year = "2021",
     month = "06",
-    day = "02"
+    day = "14"
     url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/reports/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

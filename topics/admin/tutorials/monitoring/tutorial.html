@@ -772,7 +772,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 26, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 14, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -841,21 +841,37 @@
     <li>
       <p>Edit your <code class="language-plaintext highlighter-rouge">requirements.yml</code> and add the following:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">use<span class="notranslate">galaxy</span>_eu.influxdb</span>
-  <span class="na">version</span><span class="pi">:</span> <span class="s">v6.0.7</span>
+      <div data-commit="Add requirement" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
+</span><span class="gi">+++ b/requirements.yml
+</span><span class="p">@@ -28,3 +28,5 @@</span>
+   version: 1.0.7
+ - src: use<span class="notranslate">galaxy</span>_eu.gxadmin
+   version: 0.0.3
+<span class="gi">+- src: use<span class="notranslate">galaxy</span>_eu.influxdb
++  version: v6.0.7
+</span>   
 </code></pre></div>      </div>
     </li>
     <li>
-      <p><code class="language-plaintext highlighter-rouge">ansible-<span class="notranslate">galaxy</span> install -p roles -r requirements.yml</code></p>
+      <p>Install the role</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
+</code></pre></div>        </div>
+      </blockquote>
     </li>
     <li>
       <p>Create a new playbook, <code class="language-plaintext highlighter-rouge">monitoring.yml</code> with the following:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
-<span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">monitoring</span>
-  <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
-  <span class="na">roles</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">use<span class="notranslate">galaxy</span>_eu.influxdb</span>
+      <div data-commit="Setup the monitoring playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/monitoring.yml
+</span><span class="p">@@ -0,0 +1,4 @@</span>
+<span class="gi">+- hosts: monitoring
++  become: true
++  roles:
++    - use<span class="notranslate">galaxy</span>_eu.influxdb
+</span>   
 </code></pre></div>      </div>
 
       <p>During this tutorial we will install everything on the same host, but often one keeps the monitoring infrastructure (Grafana, InfluxDB) on a separate host.</p>
@@ -863,8 +879,15 @@
     <li>
       <p>Edit the inventory file (<code class="language-plaintext highlighter-rouge">hosts</code>) an add a group for monitoring like:</p>
 
-      <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[monitoring]</span>
-<span class="err">training-0.example.org</span> <span class="py">ansible_connection</span><span class="p">=</span><span class="s">local</span>
+      <div data-commit="Add the monitoring host" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/hosts
+</span><span class="gi">+++ b/hosts
+</span><span class="p">@@ -2,3 +2,5 @@</span>
+ gat-0.eu.training.<span class="notranslate">galaxy</span>project.eu ansible_connection=local ansible_user=ubuntu
+ [pulsarservers]
+ gat-0.au.training.<span class="notranslate">galaxy</span>project.eu ansible_user=ubuntu
+<span class="gi">+[monitoring]
++gat-0.eu.training.<span class="notranslate">galaxy</span>project.eu ansible_connection=local ansible_user=ubuntu
+</span>   
 </code></pre></div>      </div>
 
       <p><strong>Ensure that the hostname is the full hostname of your machine.</strong></p>
@@ -872,11 +895,19 @@
     <li>
       <p>Run the playbook:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook monitoring.yml
-</code></pre></div>      </div>
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+</code></pre></div>        </div>
+      </blockquote>
     </li>
   </ol>
 
+</blockquote>
+
+<blockquote class="hidden">
+  <div data-test="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.sh
+</code></pre></div>  </div>
 </blockquote>
 
 <p>This will setup an InfluxDB server listening on port <code class="language-plaintext highlighter-rouge">:8086</code>. The service is currently unauthenticated but it is only listening on <code class="language-plaintext highlighter-rouge">localhost</code> so it is less of a concern. The service can be authenticated and SSL configured quite easily but that is outside the scope of this tutorial.</p>
@@ -931,51 +962,90 @@
     <li>
       <p>Edit your <code class="language-plaintext highlighter-rouge">requirements.yml</code> and add the following:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">cloudalchemy.grafana</span>
-  <span class="na">version</span><span class="pi">:</span> <span class="s">0.14.2</span>
+      <div data-commit="Add grafana requirement" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
+</span><span class="gi">+++ b/requirements.yml
+</span><span class="p">@@ -30,3 +30,5 @@</span>
+   version: 0.0.3
+ - src: use<span class="notranslate">galaxy</span>_eu.influxdb
+   version: v6.0.7
+<span class="gi">+- src: cloudalchemy.grafana
++  version: 0.14.2
+</span>   
 </code></pre></div>      </div>
     </li>
     <li>
-      <p><code class="language-plaintext highlighter-rouge">ansible-<span class="notranslate">galaxy</span> install -p roles -r requirements.yml</code></p>
+      <p>Install the role</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
+</code></pre></div>        </div>
+      </blockquote>
     </li>
     <li>
-      <p>Add <code class="language-plaintext highlighter-rouge">cloudalchemy.grafana</code> to your <code class="language-plaintext highlighter-rouge">monitoring.yml</code> playbook</p>
+      <p>Add <code class="language-plaintext highlighter-rouge">cloudalchemy.grafana</code> to your <code class="language-plaintext highlighter-rouge">monitoring.yml</code> playbook:</p>
+
+      <div data-commit="Add grafana to monitoring playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/monitoring.yml
+</span><span class="gi">+++ b/monitoring.yml
+</span><span class="p">@@ -2,3 +2,4 @@</span>
+   become: true
+   roles:
+     - use<span class="notranslate">galaxy</span>_eu.influxdb
+<span class="gi">+    - cloudalchemy.grafana
+</span>   
+</code></pre></div>      </div>
     </li>
     <li>
       <p>Edit the file <code class="language-plaintext highlighter-rouge">group_vars/monitoring.yml</code> and set the following variables:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">grafana_url</span><span class="pi">:</span> <span class="s2">"</span><span class="s">https://{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}/grafana/"</span>
-
-<span class="na">grafana_security</span><span class="pi">:</span>
-    <span class="c1"># Please change at least the password to something more suitable</span>
-    <span class="na">admin_user</span><span class="pi">:</span> <span class="s">admin</span>
-    <span class="na">admin_password</span><span class="pi">:</span> <span class="s">password</span>
-
-<span class="c1"># These datasources will be automatically included into Grafana</span>
-<span class="na">grafana_datasources</span><span class="pi">:</span>
- <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s"><span class="notranslate">Galaxy</span></span>
-   <span class="na">type</span><span class="pi">:</span> <span class="s">influxdb</span>
-   <span class="na">access</span><span class="pi">:</span> <span class="s">proxy</span>
-   <span class="na">url</span><span class="pi">:</span> <span class="s">http://127.0.0.1:8086</span>
-   <span class="na">isDefault</span><span class="pi">:</span> <span class="no">true</span>
-   <span class="na">version</span><span class="pi">:</span> <span class="m">1</span>
-   <span class="na">editable</span><span class="pi">:</span> <span class="no">false</span>
-   <span class="na">database</span><span class="pi">:</span> <span class="s">telegraf</span>
+      <div data-commit="Configure Grafana" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/group_vars/monitoring.yml
+</span><span class="p">@@ -0,0 +1,17 @@</span>
+<span class="gi">+grafana_url: "https://{{ inventory_hostname }}/grafana/"
++
++grafana_security:
++    # Please change at least the password to something more suitable
++    admin_user: admin
++    admin_password: password
++
++# These datasources will be automatically included into Grafana
++grafana_datasources:
++ - name: <span class="notranslate">Galaxy</span>
++   type: influxdb
++   access: proxy
++   url: http://127.0.0.1:8086
++   isDefault: true
++   version: 1
++   editable: false
++   database: telegraf
+</span>   
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run the playbook:</p>
+      <p>Run the monitoring playbook:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook monitoring.yml
-</code></pre></div>      </div>
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook monitoring.yml
+</code></pre></div>        </div>
+      </blockquote>
     </li>
     <li>
       <p>Update the nginx configuration in <code class="language-plaintext highlighter-rouge">templates/nginx/<span class="notranslate">galaxy</span>.j2</code> to include the following at the end, before the last curly brace</p>
 
-      <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">...</span>
-    <span class="s">location</span> <span class="n">/grafana/</span> <span class="p">{</span>
-        <span class="kn">proxy_pass</span> <span class="s">http://127.0.0.1:3000/</span><span class="p">;</span>
-    <span class="p">}</span>
+      <div data-commit="Setup nginx location for grafana" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/nginx/<span class="notranslate">galaxy</span>.j2
+</span><span class="gi">+++ b/templates/nginx/<span class="notranslate">galaxy</span>.j2
+</span><span class="p">@@ -56,4 +56,9 @@</span> server {
+     location /training-material/ {
+         proxy_pass https://training.<span class="notranslate">galaxy</span>project.org/training-material/;
+     }
+<span class="gi">+
++    location /grafana/ {
++        proxy_pass http://127.0.0.1:3000/;
++    }
++
+</span> }
+   
 </code></pre></div>      </div>
 
       <p>Since we will setup everything on the same host, we will re-use the Nginx server we setup for <span class="notranslate">Galaxy</span>. If you had planned to run the Grafana and InfluxDB servers on a separate host, you would need to setup Nginx for this host separately.</p>
@@ -983,14 +1053,22 @@
     <li>
       <p>Run the <span class="notranslate">Galaxy</span> playbook which includes Nginx:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
-</code></pre></div>      </div>
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+</code></pre></div>        </div>
+      </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
 <p>This has now deployed Grafana on your domain under <code class="language-plaintext highlighter-rouge">/grafana/</code>, with the use<span class="notranslate">rna</span>me and password you set. The datasource, from which Grafana obtains data, is preconfigured. The Grafana web application will now be available, but currently there is no data available to it. We will return to Grafana shortly in the tutorial to configure dashboards once data is present.</p>
+
+<blockquote class="hidden">
+  <div data-test="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2.sh
+</code></pre></div>  </div>
+</blockquote>
 
 <h2 id="telegraf">Telegraf</h2>
 
@@ -1080,52 +1158,75 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
     <li>
       <p>Edit your <code class="language-plaintext highlighter-rouge">requirements.yml</code> and add the following:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">dj-wasabi.telegraf</span>
-  <span class="na">version</span><span class="pi">:</span> <span class="s">0.12.0</span>
+      <div data-commit="Add Telegraf requirement" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
+</span><span class="gi">+++ b/requirements.yml
+</span><span class="p">@@ -32,3 +32,5 @@</span>
+   version: v6.0.7
+ - src: cloudalchemy.grafana
+   version: 0.14.2
+<span class="gi">+- src: dj-wasabi.telegraf
++  version: 0.12.0
+</span>   
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Install the requirements</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> install -p roles -r requirements.yml
-</code></pre></div>      </div>
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
+</code></pre></div>        </div>
+      </blockquote>
     </li>
     <li>
       <p>Add an entry to the <em>end</em> of your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook under <code class="language-plaintext highlighter-rouge">roles:</code></p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="s">dj-wasabi.telegraf</span>
+      <div data-commit="Add telegraf to the monitoring playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
+</span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
+</span><span class="p">@@ -33,3 +33,4 @@</span>
+     - <span class="notranslate">galaxy</span>project.nginx
+     - <span class="notranslate">galaxy</span>project.cvmfs
+     - use<span class="notranslate">galaxy</span>_eu.gxadmin
+<span class="gi">+    - dj-wasabi.telegraf
+</span>   
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Create and edit <code class="language-plaintext highlighter-rouge">group_vars/all.yml</code> and add the following variables:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Install the latest version</span>
-<span class="na">telegraf_agent_package_state</span><span class="pi">:</span> <span class="s">latest</span>
-
-<span class="c1"># Configure the output to point to an InfluxDB</span>
-<span class="c1"># running on localhost, and # place data in the</span>
-<span class="c1"># database "telegraf" which will be created if need be.</span>
-<span class="na">telegraf_agent_output</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">influxdb</span>
-    <span class="na">config</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">urls = ["http://127.0.0.1:8086"]</span>
-    <span class="pi">-</span> <span class="s">database = "telegraf"</span>
-
-<span class="c1"># The default plugins, applied to any telegraf-configured host</span>
-<span class="na">telegraf_plugins_default</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">plugin</span><span class="pi">:</span> <span class="s">cpu</span>
-  <span class="pi">-</span> <span class="na">plugin</span><span class="pi">:</span> <span class="s">disk</span>
-  <span class="pi">-</span> <span class="na">plugin</span><span class="pi">:</span> <span class="s">kernel</span>
-  <span class="pi">-</span> <span class="na">plugin</span><span class="pi">:</span> <span class="s">processes</span>
-  <span class="pi">-</span> <span class="na">plugin</span><span class="pi">:</span> <span class="s">io</span>
-  <span class="pi">-</span> <span class="na">plugin</span><span class="pi">:</span> <span class="s">mem</span>
-  <span class="pi">-</span> <span class="na">plugin</span><span class="pi">:</span> <span class="s">system</span>
-  <span class="pi">-</span> <span class="na">plugin</span><span class="pi">:</span> <span class="s">swap</span>
-  <span class="pi">-</span> <span class="na">plugin</span><span class="pi">:</span> <span class="s">net</span>
-  <span class="pi">-</span> <span class="na">plugin</span><span class="pi">:</span> <span class="s">netstat</span>
+      <div data-commit="Setup telegraf's variables" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/all.yml
+</span><span class="gi">+++ b/group_vars/all.yml
+</span><span class="p">@@ -12,3 +12,28 @@</span> <span class="notranslate">galaxy</span>_job_metrics_plugins:
+   - type: env
+   - type: cgroup
+   - type: hostname
+<span class="gi">+
++# Telegraf
++telegraf_agent_package_state: latest
++
++# Configure the output to point to an InfluxDB
++# running on localhost, and # place data in the
++# database "telegraf" which will be created if need be.
++telegraf_agent_output:
++  - type: influxdb
++    config:
++    - urls = ["http://127.0.0.1:8086"]
++    - database = "telegraf"
++
++# The default plugins, applied to any telegraf-configured host
++telegraf_plugins_default:
++  - plugin: cpu
++  - plugin: disk
++  - plugin: kernel
++  - plugin: processes
++  - plugin: io
++  - plugin: mem
++  - plugin: system
++  - plugin: swap
++  - plugin: net
++  - plugin: netstat
+</span>   
 </code></pre></div>      </div>
-
-      <p>We have not previously used the <code class="language-plaintext highlighter-rouge">all</code> variables file. Any variables placed here apply to <em>all</em> groups known to Ansible, whenever you run a playbook, the variables from this file will be added to those of any more specific group. Variables specified in a named group (e.g. <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>) will take precedence over those in the <code class="language-plaintext highlighter-rouge">group_vars/all.yml</code> file.</p>
 
       <p>This configures telegraf to output to the configured influxdb server in the <code class="language-plaintext highlighter-rouge">telegraf</code> database. A number of plugins are enabled as <code class="language-plaintext highlighter-rouge">defaults</code> like cpu or disk or memory, all of which is generically interesting to observe, across every host.</p>
 
@@ -1136,13 +1237,22 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 
       <p>Open your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file, and add the following variables at the end not under any category:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">telegraf_plugins_extra</span><span class="pi">:</span>
-  <span class="na">listen_<span class="notranslate">galaxy</span>_routes</span><span class="pi">:</span>
-    <span class="na">plugin</span><span class="pi">:</span> <span class="s2">"</span><span class="s">statsd"</span>
-    <span class="na">config</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s">service_address = ":8125"</span>
-      <span class="pi">-</span> <span class="s">metric_separator = "."</span>
-      <span class="pi">-</span> <span class="s">allowed_pending_messages = </span><span class="m">10000</span>
+      <div data-commit="Add extra monitoring for Galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -192,3 +192,12 @@</span> rabbitmq_users:
+   - user: <span class="notranslate">galaxy</span>_au
+     password: "{{ vault_rabbitmq_password_vhost }}"
+     vhost: /pulsar/<span class="notranslate">galaxy</span>_au
+<span class="gi">+
++# Telegraf
++telegraf_plugins_extra:
++  listen_<span class="notranslate">galaxy</span>_routes:
++    plugin: "statsd"
++    config:
++      - service_address = ":8125"
++      - metric_separator = "."
++      - allowed_pending_messages = 10000
+</span>   
 </code></pre></div>      </div>
 
       <p>We have configured the <code class="language-plaintext highlighter-rouge">statsd</code> plugin for telegraf, as we will use it to receive <span class="notranslate">Galaxy</span> timing data. <a href="https://github.com/statsd/statsd">StatsD</a> was an earlier time series database and had an associated line protocol with a different format. Telegraf supports data sent in this format, allowing us to reuse the long-present <span class="notranslate">Galaxy</span> support for this with our newer Telegraf/InfluxDB setup. Telegraf parses the data and converts it into a format that InfluxDB can understand.</p>
@@ -1152,12 +1262,18 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 
       <p>In <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>, edit the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> block, and add <code class="language-plaintext highlighter-rouge">statsd_host: localhost</code> and <code class="language-plaintext highlighter-rouge">statsd_influxdb: true</code> under the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code> subsection. It should look like:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
-  <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
-    <span class="s">...</span>
-    <span class="s">statsd_host</span><span class="pi">:</span> <span class="s">localhost</span>
-    <span class="na">statsd_influxdb</span><span class="pi">:</span> <span class="no">true</span>
-    <span class="s">...</span>
+      <div data-commit="Add extra monitoring for Galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -29,6 +29,8 @@</span> miniconda_manage_dependencies: false
+
+ <span class="notranslate">galaxy</span>_config:
+   <span class="notranslate">galaxy</span>:
+<span class="gi">+    statsd_host: localhost
++    statsd_influxdb: true
+</span>     job_resource_params_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/job_resource_params_conf.xml"
+     tool_destinations_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/tool_destinations.yml"
+     library_import_dir: /libraries/admin
+   
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1165,6 +1281,11 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
     </li>
   </ol>
 
+</blockquote>
+
+<blockquote class="hidden">
+  <div data-test="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3.sh
+</code></pre></div>  </div>
 </blockquote>
 
 <h1 id="monitoring-with-grafana">Monitoring with Grafana</h1>
@@ -1468,20 +1589,25 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
     <li>
       <p>Edit the <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>, we need to add some additional permissions to permit Telegraf to run <code class="language-plaintext highlighter-rouge">gxadmin</code>:</p>
 
-      <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># This should already exist!</span>
-<span class="na">postgresql_objects_users</span><span class="pi">:</span>
-  <span class="s">...</span>
-  <span class="s"># Add this to create a telegraf user</span>
-  <span class="s">- name</span><span class="pi">:</span> <span class="s">telegraf</span>
-    <span class="s">password</span><span class="pi">:</span> <span class="no">null</span>
-
-<span class="c1"># And this to grant telegraf privileges to</span>
-<span class="c1"># SELECT values from the <span class="notranslate">Galaxy</span> database</span>
-<span class="na">postgresql_objects_privileges</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">database</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
-    <span class="na">roles</span><span class="pi">:</span> <span class="s">telegraf</span>
-    <span class="na">privs</span><span class="pi">:</span> <span class="s">SELECT</span>
-    <span class="na">objs</span><span class="pi">:</span> <span class="s">ALL_IN_SCHEMA</span>
+      <div data-commit="Configure database permissions for Telegraf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -7,9 +7,15 @@</span> pip_package: python3-pip                               # geerlingguy.pip
+ # PostgreSQL
+ postgresql_objects_users:
+   - name: <span class="notranslate">galaxy</span>
+<span class="gi">+  - name: telegraf
+</span> postgresql_objects_databases:
+   - name: <span class="notranslate">galaxy</span>
+     owner: <span class="notranslate">galaxy</span>
+<span class="gi">+postgresql_objects_privileges:
++  - database: <span class="notranslate">galaxy</span>
++    roles: telegraf
++    privs: SELECT
++    objs: ALL_IN_SCHEMA
+</span> # PostgreSQL Backups
+ postgresql_backup_dir: /data/backups
+ postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
+   
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1489,15 +1615,20 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 
       <p>Under <code class="language-plaintext highlighter-rouge">telegraf_plugins_extra</code>, where we already have set a <span class="notranslate">Galaxy</span> StatsD listener, add a stanza to monitor the <span class="notranslate">Galaxy</span> queue</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">telegraf_plugins_extra</span><span class="pi">:</span>
-  <span class="s">...</span>
-  <span class="s">monitor_<span class="notranslate">galaxy</span>_queue</span><span class="pi">:</span>
-    <span class="na">plugin</span><span class="pi">:</span> <span class="s2">"</span><span class="s">exec"</span>
-    <span class="na">config</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s">commands = ["/usr/bin/env PGDATABASE=<span class="notranslate">galaxy</span> /usr/local/bin/gxadmin iquery queue-overview --short-tool-id"]</span>
-      <span class="pi">-</span> <span class="s">timeout = "10s"</span>
-      <span class="pi">-</span> <span class="s">data_format = "influx"</span>
-      <span class="pi">-</span> <span class="s">interval = "15s"</span>
+      <div data-commit="Add extra monitoring for Galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -209,3 +209,10 @@</span> telegraf_plugins_extra:
+       - service_address = ":8125"
+       - metric_separator = "."
+       - allowed_pending_messages = 10000
+<span class="gi">+  monitor_<span class="notranslate">galaxy</span>_queue:
++    plugin: "exec"
++    config:
++      - commands = ["/usr/bin/env PGDATABASE=<span class="notranslate">galaxy</span> /usr/local/bin/gxadmin iquery queue-overview --short-tool-id"]
++      - timeout = "10s"
++      - data_format = "influx"
++      - interval = "15s"
+</span>   
 </code></pre></div>      </div>
 
       <p>This one is slightly more complex in the configuration. The command block does several things:</p>
@@ -1726,8 +1857,8 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
     author = "Helena Rasche",
     title = "Galaxy Monitoring with Telegraf and Grafana (Galaxy Training Materials)",
     year = "2021",
-    month = "05",
-    day = "26"
+    month = "06",
+    day = "14"
     url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

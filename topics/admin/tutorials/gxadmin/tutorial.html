@@ -391,7 +391,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 3, 2020 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 14, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -440,21 +440,83 @@
     <li>
       <p>Edit your <code class="language-plaintext highlighter-rouge">requirements.yml</code> and add the following:</p>
 
-      <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">use<span class="notranslate">galaxy</span>_eu.gxadmin</span>
-  <span class="na">version</span><span class="pi">:</span> <span class="s">0.0.3</span>
+      <div data-commit="Add requirement" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
+</span><span class="gi">+++ b/requirements.yml
+</span><span class="p">@@ -26,3 +26,5 @@</span>
+   version: 0.1.0
+ - src: <span class="notranslate">galaxy</span>project.pulsar
+   version: 1.0.7
+<span class="gi">+- src: use<span class="notranslate">galaxy</span>_eu.gxadmin
++  version: 0.0.3
+</span>   
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Install the role with <code class="language-plaintext highlighter-rouge">ansible-<span class="notranslate">galaxy</span> install -p roles -r requirements.yml</code></p>
+      <p>Install the role with:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
+</code></pre></div>        </div>
+      </blockquote>
     </li>
     <li>
-      <p>Add the role to your playbook, it should run as root</p>
+      <p>Add the role to your playbook:</p>
+
+      <div data-commit="Add the gxadmin role" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
+</span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
+</span><span class="p">@@ -32,3 +32,4 @@</span>
+     - use<span class="notranslate">galaxy</span>_eu.rabbitmq
+     - <span class="notranslate">galaxy</span>project.nginx
+     - <span class="notranslate">galaxy</span>project.cvmfs
+<span class="gi">+    - use<span class="notranslate">galaxy</span>_eu.gxadmin
+</span>   
+</code></pre></div>      </div>
     </li>
     <li>
       <p>Run the playbook</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+</code></pre></div>        </div>
+      </blockquote>
     </li>
   </ol>
 
+</blockquote>
+
+<p>With that, <code class="language-plaintext highlighter-rouge">gxadmin</code> should be installed! Now, test it out:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-test-out-gxadmin"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Test out gxadmin</h3>
+
+  <ol>
+    <li>
+      <p>Run <code class="language-plaintext highlighter-rouge">gxadmin</code> as the <span class="notranslate">galaxy</span> user and list recently registered users:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo</span> <span class="nt">-u</span> <span class="notranslate">galaxy</span> gxadmin query latest-users
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-output"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Output</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">id</span> |          create_time          | disk_usage | use<span class="notranslate">rna</span>me |       email        | <span class="nb">groups</span> | active
+<span class="nt">----</span>+-------------------------------+------------+----------+--------------------+--------+--------
+  1 | 2021-06-09 12:25:59.299651+00 | 218 kB     | admin    | admin@example.org  |        | f
+<span class="o">(</span>1 rows<span class="o">)</span>
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="hidden">
+  <div data-test="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.sh
+</code></pre></div>  </div>
 </blockquote>
 
 <h2 id="configuration">Configuration</h2>
@@ -1184,7 +1246,7 @@ Greets you
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Helena Rasche, 2020 <b>Galaxy Monitoring with gxadmin (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/gxadmin/tutorial.html">https://training.galaxyproject.org/training-material/topics/admin/tutorials/gxadmin/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Helena Rasche, 2021 <b>Galaxy Monitoring with gxadmin (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/gxadmin/tutorial.html">https://training.galaxyproject.org/training-material/topics/admin/tutorials/gxadmin/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1201,9 +1263,9 @@ Greets you
 <code id="citation-code">@misc{admin-gxadmin,
     author = "Helena Rasche",
     title = "Galaxy Monitoring with gxadmin (Galaxy Training Materials)",
-    year = "2020",
-    month = "09",
-    day = "03"
+    year = "2021",
+    month = "06",
+    day = "14"
     url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/gxadmin/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
