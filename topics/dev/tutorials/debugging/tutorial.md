@@ -355,6 +355,10 @@ Client Linting is important to reduce errors, improve quality of the codebase, a
 >
 > 1. **Finding the failing test on GitHub**
 >
+>    With this error, one of the failing test workflows on GitHub would normally be “get_code_and_test”. However, since we are working on a branch that contains multiple bugs by design, some of the test failures overlap, as a result of which the “get_code_and_test” workflow has been skipped in the last commit. 
+>
+>    Therefore, for this section, [you'll need to use the results from this commit](https://github.com/galaxyproject/galaxy/runs/2780158706) to find the failing test.
+>
 >    One of the failing tests on GitHub says "get_code_and_test". Clicking on the word "Details" assocated with this failure will open a brief view of the CircleCI Checks, with a list of tests that are run as part of that command. You'll see that the one that is failing is js_lint. And if you click that, you'll be navigated to the CicleCI app, where you can see much more information about the failures.
 >    
 >    Here you can see the exact command that ran to lint our codebase:
