@@ -348,7 +348,7 @@
 
         <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/jontrow/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/jontrow" alt="Jon Trow">Jon Trow</a> <a href="/training-material/hall-of-fame/adelaiderhodes/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/adelaiderhodes" alt="Adelaide Rhodes">Adelaide Rhodes</a>
+ <a href="/training-material/hall-of-fame/jontrow/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/jontrow" alt="Jon Trow">Jon Trow</a> <a href="/training-material/hall-of-fame/Arhodes-NCBI/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/Arhodes-NCBI" alt="Adelaide Rhodes">Adelaide Rhodes</a>
 
 </div>
 
@@ -484,7 +484,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 11, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 14, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -509,7 +509,7 @@
 
 <ul>
   <li>These formats can speed up workflows such as assembly and variant calling.</li>
-  <li>This data format is still referenced by the Run accession and accessed using the sra toolkit.</li>
+  <li>This data format is still referenced by the Run accession and accessed using the SRA toolkit.</li>
   <li>This workshop describes the SARF data objects along with associated searchable metadata, and demonstrates a few ways to enter them into traditional workflows.</li>
 </ul>
 
@@ -524,11 +524,14 @@
       <li><a href="#sra-aligned-read-format" id="markdown-toc-sra-aligned-read-format">SRA Aligned Read Format</a></li>
     </ol>
   </li>
-  <li><a href="#finding-runs-of-interest-for-sars-cov-2-submissions-to-sra" id="markdown-toc-finding-runs-of-interest-for-sars-cov-2-submissions-to-sra">Finding Runs of Interest for SARS-CoV-2 Submissions to SRA</a></li>
+  <li><a href="#finding-sra-sars-cov-2-runs-of-interest" id="markdown-toc-finding-sra-sars-cov-2-runs-of-interest">Finding SRA SARS-CoV-2 Runs of Interest</a></li>
   <li><a href="#query-sarf-metadata" id="markdown-toc-query-sarf-metadata">Query SARF Metadata</a></li>
   <li><a href="#importing-sarfs-of-interest" id="markdown-toc-importing-sarfs-of-interest">Importing SARFs of Interest</a></li>
-  <li><a href="#finding-vcfs-for-sars-cov-2-runs" id="markdown-toc-finding-vcfs-for-sars-cov-2-runs">Finding VCFs for SARS-Cov-2 Runs</a></li>
+  <li><a href="#importing-vcfs-for-sars-cov-2-runs" id="markdown-toc-importing-vcfs-for-sars-cov-2-runs">Importing VCFs for SARS-Cov-2 Runs</a></li>
+  <li><a href="#feedback-for-ncbi" id="markdown-toc-feedback-for-ncbi">Feedback for NCBI</a></li>
   <li><a href="#other-ncbi-resources" id="markdown-toc-other-ncbi-resources">Other NCBI Resources</a></li>
+  <li><a href="#acknowledgements" id="markdown-toc-acknowledgements">Acknowledgements</a></li>
+  <li><a href="#affiliations" id="markdown-toc-affiliations">Affiliations</a></li>
 </ol>
 
 </blockquote>
@@ -569,7 +572,7 @@ We hope to include that functionality in a future update.</p>
 
 </blockquote>
 
-<h1 id="finding-runs-of-interest-for-sars-cov-2-submissions-to-sra">Finding Runs of Interest for SARS-CoV-2 Submissions to SRA</h1>
+<h1 id="finding-sra-sars-cov-2-runs-of-interest">Finding SRA SARS-CoV-2 Runs of Interest</h1>
 
 <p>Metadata for SARS-CoV-2 submissions to the SRA includes submitted sample and library information, BLAST results, descriptive contig statistics, and variation and annotation information.  These metadata are updated daily and made available to query in the cloud using <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-bigquery/">Google’s BigQuery</a> or <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-athena/">Amazon’s Athena</a> services. However, the raw underlying information is also provided as a group of json files that can be <strong>downloaded for free from the Open Data Platform</strong> without logging in to the cloud. These json files can be imported to <span class="notranslate">Galaxy</span> and queried there to find <strong>Runs of interest</strong>.</p>
 
@@ -667,7 +670,7 @@ https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/variations.f
 
 </blockquote>
 
-<p>With that you should have 7 different files in your history. If you examine the files you’ll see that they each have a list of filenames like the following table, with either today or yesterday’s date in the filename, depending on your timezone offset from NCBI’s offices.</p>
+<p>With that you should have 7 different files in your history. If you examine the files you’ll see that they each have a list of filenames like the following table, with either today or yesterday’s date in the filename, depending on your timezone offset from NCBI’s offices. [Time zone converter](</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2021-05-27.000000000000.json.gz
 2021-05-27.000000000001.json.gz
@@ -690,7 +693,7 @@ https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/variations.f
         <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
         <li><em>“Load tabular data from”</em>: <code class="language-plaintext highlighter-rouge">History Dataset</code></li>
         <li>
-          <p><em>“Select dataset to load”</em>: <code class="language-plaintext highlighter-rouge">contigs.json.list</code></p>
+          <p><em>“Select dataset to load”</em>: <code class="language-plaintext highlighter-rouge">contigs.filelist</code></p>
         </li>
         <li>
           <p><strong>Click</strong> <code class="language-plaintext highlighter-rouge">Build</code> to bring up the rule builder.</p>
@@ -722,9 +725,9 @@ https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/variations.f
           </ul>
         </li>
         <li>
-          <p>Give the collection a name like ‘Contigs’</p>
+          <p>Name the collection <code class="language-plaintext highlighter-rouge">contigs.json</code></p>
         </li>
-        <li>Click the <code class="language-plaintext highlighter-rouge">upload</code> button.</li>
+        <li>Click the <code class="language-plaintext highlighter-rouge">Upload</code> button.</li>
       </ol>
 
       <p><strong>Once those download jobs have all turned green in the history list, we’ll concatenate these into a single file.</strong></p>
@@ -733,22 +736,24 @@ https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/variations.f
       <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0</span></span>  tail to head (cat) files with the following parameters:</p>
 
       <ul>
-        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Datasets to Concatenate”</em>: <code class="language-plaintext highlighter-rouge">contigs</code> collection</li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Datasets to Concatenate”</em>: <code class="language-plaintext highlighter-rouge">contigs.json</code> collection</li>
+        <li>Click Execute</li>
       </ul>
     </li>
     <li>
-      <p>Rename this history item to <code class="language-plaintext highlighter-rouge">contigs.json</code></p>
+      <p>Rename this history item to <code class="language-plaintext highlighter-rouge">contigs.single.json</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">contigs.json</code></li>    <li>Click the <strong>Save</strong> button</li>  </ul></blockquote>
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">contigs.single.json</code></li>    <li>Click the <strong>Save</strong> button</li>  </ul></blockquote>
     </li>
     <li>
       <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jq/jq/1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jq/jq/1.0"><strong>JQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jq/jq/1.0</span></span>  process JSON files with the following parameters:</p>
 
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“JSON Input”</em>: <code class="language-plaintext highlighter-rouge">contigs.json</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“JSON Input”</em>: <code class="language-plaintext highlighter-rouge">contigs.single.json</code></li>
         <li><em>“jq filter”</em>: <code class="language-plaintext highlighter-rouge">[.[]]</code></li>
         <li><em>“Convert output to tabular”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
+        <li>Click Execute</li>
       </ul>
     </li>
     <li>
@@ -758,6 +763,13 @@ https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/variations.f
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">contigs.tsv</code></li>    <li>Click the <strong>Save</strong> button</li>  </ul></blockquote>
     </li>
   </ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+  <p>The conversion of the json files to tabular format takes some time, this is a good time to go make some tea.</p>
 
 </blockquote>
 
@@ -811,12 +823,28 @@ https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/variations.f
         </li>
         <li><em>“include query result column headers”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
       </ul>
+
+      <blockquote class="tip">
+        <h3 id="tip-save-sqlite-database-for-future-queries"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Save SQlite Database for future queries</h3>
+
+        <p>If you plan to do multiple queries on the same SQL database or want to skip preprocessing the metadata for future work, it may be useful to set</p>
+
+        <ul>
+          <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Save the sqlite database in your history”</em> to <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        </ul>
+
+      </blockquote>
     </li>
     <li>
-      <p>Click <strong>execute</strong> and rename the output file to <code class="language-plaintext highlighter-rouge">Run_list</code></p>
+      <p>Click <strong>Execute</strong> and rename the output file to <code class="language-plaintext highlighter-rouge">Run_list</code></p>
 
       <!--SNIPPET-->
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Run_list</code></li>    <li>Click the <strong>Save</strong> button</li>  </ul></blockquote>
+
+      <blockquote class="tip">
+        <h3 id="tip-need-fastq"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Need fastq?</h3>
+        <p>Use <code class="language-plaintext highlighter-rouge">Run_list</code> to bring in Fastq files with Submitted Quality Scores (+BQS format)</p>
+      </blockquote>
 
       <blockquote class="tip">
         <h3 id="tip-column-headers-for-the-other-metadata-tables"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Column Headers for the Other Metadata Tables</h3>
@@ -857,6 +885,7 @@ You can find full definitions for these columns here:</p>
 
 <blockquote class="tip">
   <h3 id="tip-download-fastq-with-quality-scores"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Download Fastq with Quality Scores</h3>
+
   <p>If you would like to dump the raw, underlying data in fastq format with the original quality scores, you can stop here and use the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.11.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.11.0+galaxy0"><strong>Faster Download and Extract <span class="notranslate">Reads</span> in FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.11.0+<span class="notranslate">galaxy</span>0</span></span>  tool with the following parameters:</p>
 
   <ul>
@@ -868,7 +897,8 @@ You can find full definitions for these columns here:</p>
 
 <blockquote class="tip">
   <h3 id="tip-importing-a-list-of-srr-from-athena-or-bigquery"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Importing a list of SRR from Athena or BigQuery</h3>
-  <p>If you opted to conduct your metadata search in the cloud using AWS Athena or GCP BigQuery instead of importing the json file to <span class="notranslate">Galaxy</span>, you can save a list of your Run accessions from that search result and import that file as the ‘Run_list’ to proceed with the rest of this tutorial.</p>
+
+  <p>If you opted to conduct your metadata search in the cloud using AWS Athena or GCP BigQuery instead of importing the json file to <span class="notranslate">Galaxy</span>, you can save a list of your Run accessions from that search result and import that file as the <code class="language-plaintext highlighter-rouge">Run_list</code> to proceed with the rest of this tutorial.</p>
 </blockquote>
 
 <h1 id="importing-sarfs-of-interest">Importing SARFs of Interest</h1>
@@ -910,13 +940,12 @@ You can find full definitions for these columns here:</p>
                 <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">URL</code>
                   <ul>
                     <li><em>“URL”</em>: <code class="language-plaintext highlighter-rouge">B</code></li>
-                    <li>Click Apply</li>
                   </ul>
                 </li>
                 <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">List Identifier</code>
                   <ul>
                     <li><em>“List Identifier”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
-                    <li>Click Apply</li>
+                    <li>Apply</li>
                   </ul>
                 </li>
               </ul>
@@ -927,7 +956,7 @@ You can find full definitions for these columns here:</p>
           <p>Name the output collection <code class="language-plaintext highlighter-rouge">sarf_path</code> before clicking <strong>Upload</strong></p>
 
           <blockquote class="comment">
-            <h3 id="comment-comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+            <h3 id="comment-comment-4"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
             <p>Please note that there can be some lag in availability of SARF/VCF files in the cloud (particularly for newly submitted data). So it’s possible to get a download error for a file that isn’t yet present in the cloud. In these cases waiting ~24 hours will generally resolve the issue and allow you to access the file.</p>
 
@@ -936,7 +965,7 @@ You can find full definitions for these columns here:</p>
       </ol>
     </li>
     <li>
-      <p><strong>Finally we will use the SRA toolkit to dump the contigs in fasta format.</strong></p>
+      <p><strong>Now we will use the SRA toolkit to retrieve the contigs in fasta format</strong></p>
 
       <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fastq_dump/2.11.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fastq_dump/2.11.0+galaxy0"><strong>Download and Extract <span class="notranslate">Reads</span> in FASTA/Q format from NCBI SRA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/sra_tools/fastq_dump/2.11.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:</p>
 
@@ -948,30 +977,38 @@ You can find full definitions for these columns here:</p>
             <li><em>“Table name within cSRA object”</em>: <code class="language-plaintext highlighter-rouge">REFERENCE</code></li>
           </ul>
         </li>
+        <li>Click Execute</li>
       </ul>
 
-      <p>The resulting dataset includes the contigs generated from these Runs.</p>
+      <p>The resulting dataset includes the contigs generated from these runs with placeholder <code class="language-plaintext highlighter-rouge">?</code> for quality scores</p>
+
+      <ul>
+        <li>Rename this collection to <code class="language-plaintext highlighter-rouge">sarf_contigs</code></li>
+      </ul>
+
+      <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqtofasta/fastq_to_fasta_python/1.1.5" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqtofasta/fastq_to_fasta_python/1.1.5"><strong>Fastq to Fasta converter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqtofasta/fastq_to_fasta_python/1.1.5</span></span></p>
+
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span><em>“FASTQ file to convert”</em>: <code class="language-plaintext highlighter-rouge">sarf_contigs</code> (note: in the video this did not get renamed)</li>
+        <li>Click Execute</li>
+      </ul>
+
+      <p>The resulting dataset includes the contigs generated from these Runs in fasta format</p>
 
       <blockquote class="tip">
         <h3 id="tip-fastq-format-option"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Fastq format option</h3>
         <p>If you prefer to dump the raw <span class="notranslate">reads</span> in fastq format with placeholder quality scores, leave the <code class="language-plaintext highlighter-rouge">Table name within cSRA object</code> field blank.</p>
 
-        <p>This will generate fastq with quality placeholders <code class="language-plaintext highlighter-rouge">?</code>, as SARFs do not contain quality scores.</p>
       </blockquote>
     </li>
   </ol>
 </blockquote>
 
-<h1 id="finding-vcfs-for-sars-cov-2-runs">Finding VCFs for SARS-Cov-2 Runs</h1>
+<h1 id="importing-vcfs-for-sars-cov-2-runs">Importing VCFs for SARS-Cov-2 Runs</h1>
 
-<p>Metadata about these Runs, including submitted sample and library information, BLAST results, descriptive contig statistics, and variation and annotation information are available to query in the cloud using  <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-bigquery/">Google’s BigQuery</a> or <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-athena/">Amazon’s Athena</a> services. However, the raw underlying information is also provided as a group of json files that can be <strong>downloaded for free from the Open Data Platform</strong> without logging in to the cloud. The VCF metadata can be imported to <span class="notranslate">Galaxy</span> and queried there to find VCFs of interest.</p>
+<p>This example starts with the same <code class="language-plaintext highlighter-rouge">Run_list</code> generated for importing SARFs.</p>
 
-<blockquote class="comment">
-  <h3 id="comment-comment-4"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-  <p>Some of these tables include complex data fields (array of values) that don’t have a clean analogue in a classic SQL database or table and these can’t be easily queried in <span class="notranslate">Galaxy</span> currently. If you require access to <a href="https://www.ncbi.nlm.nih.gov/sra/docs/aligned-metadata-tables/">cloud tables</a> or fields not available in <span class="notranslate">Galaxy</span> recommend accessing those natively in <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-bigquery/">BigQuery</a> or <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-athena/">Athena</a>.</p>
-
-</blockquote>
+<p>A <code class="language-plaintext highlighter-rouge">Run_list</code> could also be imported after querying metadata in the cloud using  <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-bigquery/">Google’s BigQuery</a> or <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-athena/">Amazon’s Athena</a> services. Metadata about these runs includes submitted sample and library information, BLAST results, descriptive contig statistics, and variation and annotations. See the tutorial video for a short demo on how to search and download <code class="language-plaintext highlighter-rouge">Run_list</code> from the cloud.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-importing-vcfs-of-interest"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Importing VCFs of Interest</h3>
@@ -985,7 +1022,7 @@ You can find full definitions for these columns here:</p>
           <ul>
             <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
             <li><em>“Load tabular data from”</em>: <code class="language-plaintext highlighter-rouge">History Dataset</code></li>
-            <li><em>“Select dataset to load”</em>: <code class="language-plaintext highlighter-rouge">annotated_variations.filelist</code></li>
+            <li><em>“Select dataset to load”</em>: <code class="language-plaintext highlighter-rouge">Run_list</code></li>
           </ul>
         </li>
         <li>
@@ -999,127 +1036,6 @@ You can find full definitions for these columns here:</p>
               <ul>
                 <li>Check <em>“Create column from <span class="notranslate">expression</span> replacement”</em></li>
                 <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">(.*)</code></li>
-                <li><em>“Replacement <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/annotated_variations/\1</code></li>
-                <li>Apply</li>
-              </ul>
-            </li>
-            <li>From <strong>Rules</strong> menu select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
-              <ul>
-                <li><em>“URL”</em>: <code class="language-plaintext highlighter-rouge">B</code></li>
-                <li><em>“List Identifier”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <p>Name the output collection <code class="language-plaintext highlighter-rouge">variations</code> before clicking <strong>Upload</strong></p>
-
-          <blockquote class="comment">
-            <h3 id="comment-comment-5"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-            <p>Please note that there can be some lag in availability of SARF/VCF files in the cloud (particularly for newly submitted data). So it’s possible to get a download error for a file that isn’t yet present in the cloud. In these cases waiting ~24 hours will generally resolve the issue and allow you to access the file.</p>
-
-          </blockquote>
-        </li>
-      </ol>
-    </li>
-    <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0</span></span>  tail to head (cat) files with the following parameters:</p>
-
-      <ul>
-        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Datasets to Concatenate”</em>: <code class="language-plaintext highlighter-rouge">variations</code> collection</li>
-      </ul>
-    </li>
-    <li>
-      <p>Rename the output to <code class="language-plaintext highlighter-rouge">variation.json</code></p>
-    </li>
-    <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jq/jq/1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jq/jq/1.0"><strong>JQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jq/jq/1.0</span></span>  process JSON files with the following parameters:</p>
-
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“JSON Input”</em>: <code class="language-plaintext highlighter-rouge">variation.json</code></li>
-        <li><em>“jq filter”</em>: <code class="language-plaintext highlighter-rouge">[.[]]</code></li>
-        <li><em>“Convert output to tabular”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
-      </ul>
-
-      <blockquote class="tip">
-        <h3 id="tip-tip-slow-step"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Slow step</h3>
-        <p>This step can take ~30 minutes to run due to the ~8GB of JSON it needs to process.</p>
-      </blockquote>
-    </li>
-    <li>
-      <p>Rename this file <code class="language-plaintext highlighter-rouge">variation.tsv</code></p>
-    </li>
-    <li>
-      <p><strong>Query for VCFs of Interest</strong>. Next we’ll query this metadata using the <code class="language-plaintext highlighter-rouge">Query tabular</code> tool to get a list of all Runs containing a called <code class="language-plaintext highlighter-rouge">E484K</code> variant.</p>
-
-      <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0"><strong>Query Tabular using sqlite sql</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0</span></span>  with the following parameters:</p>
-
-      <ul>
-        <li>In <em>“Database Table”</em>:
-          <ul>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Database Table”</em>
-              <ul>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset for Table”</em>: <code class="language-plaintext highlighter-rouge">variation.tsv</code></li>
-                <li>In <em>“Table Options”</em>
-                  <ul>
-                    <li>In <em>“Table Options”</em>
-                      <ul>
-                        <li><em>“specify name for table”</em>: <code class="language-plaintext highlighter-rouge">sars_variation</code></li>
-                        <li>
-                          <p><em>“Specify Column Names”</em>:</p>
-
-                          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>run,chrom,pos,id,ref,alt,qual,filter,info,format,sample_a,ac,an,bqb,dp,dp4,dp4_1,dp4_2,dp4_3,dp4_4,idv,imf,mq,mq0f,mqb,mqsb,rpb,sgb,vdb,g_gt,g_pl,g_pl_1,g_pl_2,g_dp,g_ad,g_ad_1,g_ad_2,protein_position,ref_codon,alt_codon,ref_aa,alt_aa,protein_name,protein_length,variation
-</code></pre></div>                          </div>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <p><em>“SQL Query to generate tabular output”</em>:</p>
-
-          <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="n">run</span>
-<span class="k">FROM</span> <span class="n">sars_variation</span>
-<span class="k">WHERE</span> <span class="n">variation</span> <span class="o">=</span> <span class="nv">`E484K`</span> <span class="k">AND</span> <span class="n">run</span> <span class="k">LIKE</span> <span class="nv">`%SRR%`</span>
-<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">run</span> <span class="k">ASC</span>
-<span class="k">LIMIT</span> <span class="mi">10</span>
-</code></pre></div>          </div>
-        </li>
-        <li><em>“include query result column headers”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
-      </ul>
-    </li>
-    <li>
-      <p>Click the <strong>execute</strong> button and rename the output file to <code class="language-plaintext highlighter-rouge">vcf_list</code></p>
-
-      <p>Now that we have assembled a list of Runs that have VCFs we are interested in, we’ll construct the path to the VCF files in the cloud and import those to <span class="notranslate">Galaxy</span> so we can work with them.</p>
-    </li>
-    <li>
-      <p>Upload Data</p>
-
-      <ol>
-        <li><strong>Open</strong> the <code class="language-plaintext highlighter-rouge">Rule-based</code> upload tab again, but this time:
-          <ul>
-            <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
-            <li><em>“Load tabular data from”</em>: <code class="language-plaintext highlighter-rouge">History Dataset</code></li>
-            <li><em>“Select dataset to load”</em>: <code class="language-plaintext highlighter-rouge">vcf_list</code></li>
-          </ul>
-        </li>
-        <li>
-          <p><strong>Click</strong> <code class="language-plaintext highlighter-rouge">Build</code> to bring up the rule builder.</p>
-        </li>
-        <li>
-          <p>Make the following changes in the Rule Builder</p>
-
-          <ul>
-            <li>From <strong>Column</strong> menu select <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
-              <ul>
-                <li>Check <em>“Create column from <span class="notranslate">expression</span> replacement”</em></li>
-                <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">(.*)</code> <!-- .* --></li>
                 <li><em>“Replacement <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">https://sra-pub-sars-cov2.s3.amazonaws.com/VCF/\1/\1.vcf</code></li>
                 <li>Apply</li>
               </ul>
@@ -1128,11 +1044,21 @@ You can find full definitions for these columns here:</p>
               <ul>
                 <li><em>“URL”</em>: <code class="language-plaintext highlighter-rouge">B</code></li>
                 <li><em>“List Identifier”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
+                <li>Apply</li>
               </ul>
             </li>
           </ul>
         </li>
-        <li>Name your collection <code class="language-plaintext highlighter-rouge">VCFs</code> and click <strong>Upload</strong></li>
+        <li>
+          <p>Name the output collection <code class="language-plaintext highlighter-rouge">VCFs</code> before clicking <strong>Upload</strong></p>
+
+          <blockquote class="comment">
+            <h3 id="comment-comment-5"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+            <p>Please note that there can be some lag in availability of SARF/VCF files in the cloud (particularly for newly submitted data). So it’s possible to get a download error for a file that isn’t yet present in the cloud. In these cases waiting ~24 hours will generally resolve the issue and allow you to access the file.</p>
+
+          </blockquote>
+        </li>
       </ol>
     </li>
     <li>
@@ -1155,6 +1081,14 @@ You can find full definitions for these columns here:</p>
 
 </blockquote>
 
+<h1 id="feedback-for-ncbi">Feedback for NCBI</h1>
+
+<p>If you enjoyed this tutorial, please consider filling out this feedback link for NCBI: <a href="https://nlmenterprise.co1.qualtrics.com/jfe/form/SV_0jQct4IQOgfYYaq">https://nlmenterprise.co1.qualtrics.com/jfe/form/SV_0jQct4IQOgfYYaq</a></p>
+
+<p>Note: the survey will stay open until July 31, 2021 (it may say it expires June 30, but we will extend the deadline at the end of the month)</p>
+
+<p>(There is another survey link below for <span class="notranslate">Galaxy</span>).</p>
+
 <h1 id="other-ncbi-resources">Other NCBI Resources</h1>
 <ul>
   <li><a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-cloud/">Getting started with SRA in the Cloud</a></li>
@@ -1165,6 +1099,14 @@ You can find full definitions for these columns here:</p>
 </ul>
 
 <p>If you have questions or feedback you can email the SRA helpdesk: <a href="mailto:sra@ncbi.nlm.nih.gov">sra@ncbi.nlm.nih.gov</a></p>
+
+<h1 id="acknowledgements">Acknowledgements</h1>
+
+<p>The authors would like to acknowledge the SRA Product Team at NCBI and the Community Outreach staff at <span class="notranslate">Galaxy</span> for their assistance on this tutorial.</p>
+
+<h1 id="affiliations">Affiliations</h1>
+
+<p>Adelaide Rhodes &amp; Jon Trow - Computercraft assigned to NCBI/NLM/NIH</p>
 
 
                     
@@ -1248,7 +1190,7 @@ You can find full definitions for these columns here:</p>
     title = "SRA Aligned Read Format to Speed Up SARS-CoV-2 data Analysis (Galaxy Training Materials)",
     year = "2021",
     month = "06",
-    day = "11"
+    day = "14"
     url = "\url{https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/ncbi-sarf/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
