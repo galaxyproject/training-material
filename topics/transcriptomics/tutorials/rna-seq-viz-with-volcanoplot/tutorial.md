@@ -1,6 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Visualization of RNA-Seq results with Volcano Plot
+level: Introductory
 subtopic: visualisation
 zenodo_link: "https://zenodo.org/record/2529117"
 questions:
