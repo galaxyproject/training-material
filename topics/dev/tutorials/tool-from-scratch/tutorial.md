@@ -70,188 +70,233 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 - test
 - about
 
-1. The first thing we should do is prepare our workspace. We create a branch in git, a conda environment with pip and
-conda-build preinstalled, and a folder for the meta.yaml file.
-
-    ```bash
-    git checkout -b bellerophon_bioconda
-    conda create -y --name bellerophon_bioconda pip python conda-build
-    conda activate bellerophon_bioconda
-    mkdir recipes/bellerophon
-    ```
-
-2. Next we determine the SHA-256 checksum of the source tarball and create the meta.yaml file where we'll then define the
-parameters that tell conda-build how to build this package, starting with variables for the name, version, and checksum.
-With these definitions, bioconda's automatic version updater should recognize when a new version has been released and
-create a pull request to update the bioconda package.
-
-```bash
-wget -O bellerophon.tar.gz https://github.com/davebx/bellerophon/archive/1.0.tar.gz
-sha256sum bellerophon.tar.gz # Copy the 64-character hexadecimal number that this outputs.
-vim recipes/bellerophon/meta.yaml # vim can of course be replaced with any other editor.
-```
-
-![SHA-256](../../images/sha256sum.png "Expected output of the `sha256sum` command")
-
-
-{% raw %}
-```yaml
-{% set name = "bellerophon" %}
-{% set version = "1.0" %}
-{% set sha256 = "036c5e23f53ed5b612525d3a32095acca073a9c8d2bf73883deb852c89f40dcf" %}
-```
-{% endraw %}
-
-3. Now we define the conda package metadata. This will be shown as bellerophon-1.0 in anaconda and `conda search`. We
-plug in the relevant variables from the top of the file, lowering the name since conda package names should always be
-lowercase.
-
-    {% raw %}
-    ```yaml
-    package:
-      name: {{ name|lower }}
-      version: {{ version }}
-    ```
-    {% endraw %}
-
-4. Of course conda-build needs to know where to get the source code for bellerophon. Since the recipe we are creating is on
-github, updates can be automated with the variables we defined in the second step, while the SHA-256 checksum ensures
-that conda-build is getting the right source code every time.
-
-    {% raw %}
-
-    ```yaml
-    source:
-      url: https://github.com/davebx/{{ name }}/archive/{{ version }}.tar.gz
-      sha256: {{ sha256 }}
-    ```
-
-    {% endraw %}
-
-5. Next, we move on to the build metadata. Since this is the first version of the conda recipe, the build number is 0.
-We use the externally defined `{{ PYTHON }}` variable, which defines which python conda-build is using, to install it
-to the build prefix. The --no-deps and --ignore-installed flags are needed to ensure that conda-build only packages
-bellerophon itself. In this section, if necessary, we can also define patches that should be applied to the source code,
-with the `patches:` token under `build:`, and specify that the package should not be built for a given architecture with
-the `skip:` directive.
-
-```yaml
-build:
-  noarch: python
-  number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv
-  #patches: /dev/null # Not used in this tutorial
-  #skip: True [osx] # Not used in this tutorial
-```
-
-6. After the build metadata has been defined, we need to specify dependencies for at least building and running, with
-build-time dependencies specified in the `host:` section, and runtime dependencies in the `run:` section. With
-bellerophon, we know that it's a python package that uses pysam to operate on SAM/BAM files, so the only runtime
-dependencies we need are python and pysam.
-
-```yaml
-requirements:
-  host:
-    - python
-    - pip
-  run:
-    - python
-    - pysam
-```
-
-7. No recipe is complete without tests, and this recipe is no exception. Normally, it's sufficient to confirm that the
-program actually runs, e.g. with a `--version` command. Some software also has a self-test flag or parameter, though
-bellerophon is not among them, and we could even define a test script that uses test data either from the recipe or from
-the source archive.
-
-    ```yaml
-    test:
-      commands:
-        - bellerophon --version
-    ```
-
-8. Finally, we add information about the software, such as code's is license type, the program's
-homepage, and optionally the github username of the person responsible for maintaining the recipe.
-
-```yaml
-about:
-  home: https://github.com/davebx/bellerophon/
-  license: MIT
-  license_file: LICENSE
-  summary: "Filter reads that span a mapping junction, retaining the 5'-side."
-  maintainer: davebx # Optional
-```
-
-Putting all these parts together, we end up with a complete conda recipe for version 1.0 of bellerophon.
-
-{% raw %}
-```yaml
-{% set name = "bellerophon" %}
-{% set version = "1.0" %}
-{% set sha256 = "036c5e23f53ed5b612525d3a32095acca073a9c8d2bf73883deb852c89f40dcf" %}
-
-package:
-  name: {{ name|lower }}
-  version: {{ version }}
-
-source:
-  url: https://github.com/davebx/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: {{ sha256 }}
-
-build:
-  noarch: python
-  number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv
-
-requirements:
-  host:
-    - python
-    - pip
-  run:
-    - python
-    - pysam
-
-test:
-  commands:
-    - bellerophon --version
-
-about:
-  home: https://github.com/davebx/bellerophon/
-  license: MIT
-  license_file: LICENSE
-  summary: "Filter reads that span a mapping junction, retaining the 5'-side."
-
-```
-{% endraw %}
+> ### {% icon hands_on %} Hands-on: Writing a Bioconda Recipe
+>
+> 1. The first thing we should do is prepare our workspace. We create a branch in git, a conda environment with pip and
+> conda-build preinstalled, and a folder for the meta.yaml file.
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > git checkout -b bellerophon_bioconda
+>    > conda create -y --name bellerophon_bioconda pip python conda-build
+>    > conda activate bellerophon_bioconda
+>    > mkdir recipes/bellerophon
+>    > ```
+>    {: .code-in}
+>
+> 2. Next we determine the SHA-256 checksum of the source tarball.
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > wget -O bellerophon.tar.gz https://github.com/davebx/bellerophon/archive/1.0.tar.gz
+>    > sha256sum bellerophon.tar.gz # Copy the 64-character hexadecimal number that this outputs.
+>    > ```
+>    {: .code-in}
+>
+>    > ### {% icon code-in %} Output
+>    > ```bash
+>    > 036c5e23f53ed5b612525d3a32095acca073a9c8d2bf73883deb852c89f40dcf  bellerophon.tar.gz
+>    > ```
+>    {: .code-in}
+>
+> 3. Using the above information, we create the meta.yaml file where we'll then define the
+> parameters that tell conda-build how to build this package, starting with variables for the name, version, and checksum.
+> With these definitions, bioconda's automatic version updater should recognize when a new version has been released and
+> create a pull request to update the bioconda package.
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > vim recipes/bellerophon/meta.yaml # vim can of course be replaced with any other editor.
+>    > ```
+>    {: .code-in}
+>
+>    and set the following content:
+>
+>    {% raw %}
+>    ```yaml
+>    {% set name = "bellerophon" %}
+>    {% set version = "1.0" %}
+>    {% set sha256 = "036c5e23f53ed5b612525d3a32095acca073a9c8d2bf73883deb852c89f40dcf" %}
+>    ```
+>    {% endraw %}
+>
+> 3. Now we define the conda package metadata. This will be shown as bellerophon-1.0 in anaconda and `conda search`. We
+> plug in the relevant variables from the top of the file, lowering the name since conda package names should always be
+> lowercase.
+>
+>     {% raw %}
+>     ```yaml
+>     package:
+>       name: {{ name|lower }}
+>       version: {{ version }}
+>     ```
+>     {% endraw %}
+>
+> 4. Of course conda-build needs to know where to get the source code for bellerophon. Since the recipe we are creating is on
+> github, updates can be automated with the variables we defined in the second step, while the SHA-256 checksum ensures
+> that conda-build is getting the right source code every time.
+>
+>     {% raw %}
+>
+>     ```yaml
+>     source:
+>       url: https://github.com/davebx/{{ name }}/archive/{{ version }}.tar.gz
+>       sha256: {{ sha256 }}
+>     ```
+>
+>     {% endraw %}
+>
+> 5. Next, we move on to the build metadata. Since this is the first version of the conda recipe, the build number is 0.
+> We use the externally defined `{{ PYTHON }}` variable, which defines which python conda-build is using, to install it
+> to the build prefix. The --no-deps and --ignore-installed flags are needed to ensure that conda-build only packages
+> bellerophon itself. In this section, if necessary, we can also define patches that should be applied to the source code,
+> with the `patches:` token under `build:`, and specify that the package should not be built for a given architecture with
+> the `skip:` directive.
+>
+>    ```yaml
+>    build:
+>      noarch: python
+>      number: 0
+>      script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv
+>      #patches: /dev/null # Not used in this tutorial
+>      #skip: True [osx] # Not used in this tutorial
+>    ```
+>
+> 6. After the build metadata has been defined, we need to specify dependencies for at least building and running, with
+> build-time dependencies specified in the `host:` section, and runtime dependencies in the `run:` section. With
+> bellerophon, we know that it's a python package that uses pysam to operate on SAM/BAM files, so the only runtime
+> dependencies we need are python and pysam.
+>
+>    ```yaml
+>    requirements:
+>      host:
+>        - python
+>        - pip
+>      run:
+>        - python
+>        - pysam
+>    ```
+>
+> 7. No recipe is complete without tests, and this recipe is no exception. Normally, it's sufficient to confirm that the
+> program actually runs, e.g. with a `--version` command. Some software also has a self-test flag or parameter, though
+> bellerophon is not among them, and we could even define a test script that uses test data either from the recipe or from
+> the source archive.
+>
+>    ```yaml
+>    test:
+>      commands:
+>        - bellerophon --version
+>    ```
+>
+> 8. Finally, we add information about the software, such as code's is license type, the program's
+> homepage, and optionally the github username of the person responsible for maintaining the recipe.
+>
+>    ```yaml
+>    about:
+>      home: https://github.com/davebx/bellerophon/
+>      license: MIT
+>      license_file: LICENSE
+>      summary: "Filter reads that span a mapping junction, retaining the 5'-side."
+>      maintainer: davebx # Optional
+>    ```
+>
+> Putting all these parts together, we end up with a complete conda recipe for version 1.0 of bellerophon.
+>
+> > ### {% icon question %} Question
+> >
+> > What does your final file look like?
+> >
+> > > ### {% icon solution %} Solution
+> > >
+> > > {% raw %}
+> > > ```yaml
+> > > {% set name = "bellerophon" %}
+> > > {% set version = "1.0" %}
+> > > {% set sha256 = "036c5e23f53ed5b612525d3a32095acca073a9c8d2bf73883deb852c89f40dcf" %}
+> > >
+> > > package:
+> > >   name: {{ name|lower }}
+> > >   version: {{ version }}
+> > >
+> > > source:
+> > >   url: https://github.com/davebx/{{ name }}/archive/{{ version }}.tar.gz
+> > >   sha256: {{ sha256 }}
+> > >
+> > > build:
+> > >   noarch: python
+> > >   number: 0
+> > >   script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv
+> > >
+> > > requirements:
+> > >   host:
+> > >     - python
+> > >     - pip
+> > >   run:
+> > >     - python
+> > >     - pysam
+> > >
+> > > test:
+> > >   commands:
+> > >     - bellerophon --version
+> > >
+> > > about:
+> > >   home: https://github.com/davebx/bellerophon/
+> > >   license: MIT
+> > >   license_file: LICENSE
+> > >   summary: "Filter reads that span a mapping junction, retaining the 5'-side."
+> > >
+> > > ```
+> > > {% endraw %}
+> > {: .solution}
+> {: .question}
+{: .hands_on}
 
 ## Creating a Pull Request
 
 After the recipe is complete, we can commit and push to our fork, so that the recipe can eventually be integrated into bioconda.
 
-We start by making sure we're on a branch, and that `recipes/bellerophon/meta.yaml` is the only modified file.
 
-```bash
-git status
-```
-
-The output of that command should look something like this
-
-![Git status](../../images/git_status.png "Expected output of the `git status` command")
-
-```bash
-git add recipes/bellerophon
-git commit -m 'Add recipe for bellerophon 1.0'
-git push origin -u bellerophon_bioconda
-```
-
-Git will give you a url for creating the pull request, which can be clicked to be taken to github.
-
-![Git push](../../images/git_push.png "Expected output of the `git push` command")
-
-
-Once on the github pull request page, we can write a short description of the recipe we want to merge, and click the button.
-
-![Github PR](../../images/create_pr.png "An open pull request for the bellerophon conda recipe")
+> ### {% icon hands_on %} Hands-on: Creating the PR
+>
+> 1. We start by making sure we're on a branch, and that `recipes/bellerophon/meta.yaml` is the only modified file.
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > git status
+>    > ```
+>    {: .code-in}
+>
+>    > ### {% icon code-out %} Output
+>    >
+>    > ```
+>    > On branch bellerophon_bioconda
+>    > Untracked files:
+>    >   (use "git add <file>..." to include in what will be committed)
+>    >
+>    > 	recipes/bellerophon/
+>    >
+>    > no changes added to commit (use "git add" and/or "git commit -a")
+>    > ```
+>    {: .code-out}
+>
+> 2. Add your recipes folder, commit, and push it.
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > git add recipes/bellerophon
+>    > git commit -m 'Add recipe for bellerophon 1.0'
+>    > git push origin -u bellerophon_bioconda
+>    > ```
+>    {: .code-in}
+>
+>    Git will give you a url for creating the pull request, which can be clicked to be taken to github.
+>
+>    ![Git push](../../images/git_push.png "Expected output of the `git push` command")
+>
+> Once on the github pull request page, we can write a short description of the recipe we want to merge, and click the button.
+>
+> ![Github PR](../../images/create_pr.png "An open pull request for the bellerophon conda recipe")
+{: .hands_on}
 
 
 
