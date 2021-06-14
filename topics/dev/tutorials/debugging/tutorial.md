@@ -13,12 +13,14 @@ objectives:
   - "Write tests exposing the identified bug"
 time_estimation: "4h"
 key_points:
-  - "TODO Unit Tests"
-  - "TODO API Tests"
-  - "TODO Client Linting Failures"
-  - "TODO Client Tests"
-  - "TODO Selenium Tests"
-  - "TODO Runtime Errors"
+  - "Always run individual failing tests locally to minimize the feedback loop."
+  - "To fix a bug, start by looking for the precise location in the code where the unexpected result is being produced, starting from the failing test or the error message in the log. Once the location is identified, finding and correcting the error is often trivial."
+  - "When debugging an API test failure, first determine what endpoint is being utilized; then look in `lib/galaxy/webapps/galaxy/api/` to locate the controller that handles that enpoint. The controller will point you to a manager module, which is where you're most likely to find the bug."
+  - "To locate the probable cause of a Selenium test failure, run Selenium with `GALAXY_TEST_SELENIUM_HEADLESS=false` to watch the browser step through the test."
+  - "When debugging a runtime error, use pdb or any other interactive Python debugger to step through the code to identify the location of the error. Remember to use `GALAXY_CONFIG_DEBUG=1` to enable debugging."
+  - "If you find a bug in a code block that is not covered by a test, before you fix the bug, write a test exposing the bug; run the test to ensure it fails; then fix the bug; then run the test again to ensure it passes."
+  - "Write useful and property formatted commit messages."
+  - "Pdb is your friend."
 contributors:
   - assuntad23
   - ic4f
