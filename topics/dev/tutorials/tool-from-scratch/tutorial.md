@@ -30,6 +30,8 @@ contributors:
 # Introduction
 {:.no_toc}
 
+> <div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/2wW3yqEclko" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
 Tools wrappers allow any command line runnable code or programs to be run inside a galaxy environment.
 Although Galaxy has thousands of tools readily available, new software and packages will always be useful.
 This tutorial is designed to allow anyone to create, run, and deploy new tools in a Galaxy environment.
@@ -57,6 +59,8 @@ with many command line tools, other times, there may be several. The first part 
 the creation and deployment of these packages, making them available for Galaxy to retrieve.
 
 ## Writing a Bioconda Recipe
+
+> <div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/UtNErGKw8SI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 Bioconda is a repository of conda packages for software and tools relevant to the life sciences. Using conda
 packages ensures better reproducibility, since each conda package is usually immutable, an exception being
@@ -209,6 +213,7 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 > > > ### {% icon solution %} Solution
 > > >
 > > > {% raw %}
+> > >
 > > > ```yaml
 > > > {% set name = "bellerophon" %}
 > > > {% set version = "1.0" %}
@@ -246,6 +251,7 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 > > >   summary: "Filter reads that span a mapping junction, retaining the 5'-side."
 > > >
 > > > ```
+> > >
 > > > {% endraw %}
 > > {: .solution}
 > {: .question}
@@ -254,7 +260,6 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 ## Creating a Pull Request
 
 After the recipe is complete, we can commit and push to our fork, so that the recipe can eventually be integrated into bioconda.
-
 
 > ### {% icon hands_on %} Hands-on: Creating the PR
 >
@@ -298,8 +303,6 @@ After the recipe is complete, we can commit and push to our fork, so that the re
 > ![Github PR](../../images/create_pr.png "An open pull request for the bellerophon conda recipe")
 {: .hands_on}
 
-
-
 ## Deploying a Conda Package
 
 Once our new recipe has been merged, installing the package should be fairly painless. Galaxy, if configured to do so,
@@ -307,6 +310,7 @@ will automatically install any conda dependencies a tool asks for, whereas manua
 the `conda create` command to install python, bellerophon, and pysam into a conda environment named `bellerophon`. The
 `-y` flag tells conda not to ask for confirmation before installing the software and its dependencies into the named
 environment.
+
 
 ```bash
 conda create -y --name bellerophon bellerophon=1.0 -c conda-forge -c bioconda
@@ -321,26 +325,47 @@ anyone wrapping a tool, a more complete list is available in [the Galaxy tool do
 
 ## Initializing a Tool Wrapper
 
+> <div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/a6XZgEy6hlg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
 Initializing a tool wrapper to be run in Galaxy is simple
 
-1. Go to the "tools" directory in your Galaxy instance.
-2. Make a new directory for tools you will be wrapping.
-3. Use `planemo` to initialize a new tool wrapper with basic formatting.
-    - Here we will be using bellerophon, but the parameters can be set for any tool.
-    - The tool ID is the internal reference id for the tool, and may contain no spaces or capitalized letters
-    - The tool name is the text that will be visible to the user.
-
-    ```bash
-    cd galaxy/tools
-    mkdir -p myTools/bellerophon
-    cd myTools/bellerophon
-    planemo tool_init --id bellerophon --name bellerophon
-    ```
-
-4. You can now open the new xml file that has been generated to begin the wrapping. It should look something like this:
-![Bellerophon initial wrapper](../../images/tool_init.png "Initial tool wrapper after running planemo tool_init")
+> ### {% icon hands_on %}  Hands-on: Creating a Tool Wrapper Skeleton
+> 1. Go to the "tools" directory in your Galaxy instance.
+> 2. Make a new directory for tools you will be wrapping.
+> 3. Use `planemo` to initialize a new tool wrapper with basic formatting.
+>     - Here we will be using bellerophon, but the parameters can be set for any tool.
+>     - The tool ID is the internal reference id for the tool, and may contain no spaces or capitalized letters
+>     - The tool name is the text that will be visible to the user.
+>
+>     ```bash
+>     cd galaxy/tools
+>     mkdir -p myTools/bellerophon
+>     cd myTools/bellerophon
+>     planemo tool_init --id bellerophon --name bellerophon
+>     ```
+>
+> 4. You can now open the new xml file that has been generated to begin the wrapping. It should look something like this:
+>
+>   ```xml
+>   <tool id="bellerophon" name="bellerophon" version="0.1.0" python_template_version="3.5">
+>       <requirements>
+>       </requirements>
+>       <command detect_errors="exit_code"><![CDATA[
+>           TODO: Fill in command template.
+>       ]]></command>
+>       <inputs>
+>       </inputs>
+>       <outputs>
+>       </outputs>
+>       <help><![CDATA[
+>           TODO: Fill in help.
+>       ]]></help>
+>   </tool>
+>   ```
 
 ## Galaxy Tool Wrappers
+
+> <div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/FdtD8vBLK5k" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 Galaxy tool wrapper xml files are made up of several sections:
 
@@ -456,6 +481,21 @@ In the case of bellerophon, which requires two dependencies, bellerophon and sam
 ```
 
 This uses the macro token for @TOOL_VERSION@ for the bioconda package version to retrieve the version number for bellerophon, while samtools' version is set manually.
+
+> ### {% icon question %} Question
+>
+> If you wanted to add a requirement for the Seurat package of version 3.2, what would that look like?
+>
+> > ### {% icon solution %} Solution
+> >
+> > ```xml
+> >   <requirements>
+> >         <requirement type="package" version="3.2">seurat</requirement>
+> >   </requirements>
+> > ```
+> >
+> > {: .solution}
+> {: .question}
 
 ### Input section
 
@@ -837,6 +877,8 @@ With all sections complete, the final wrapper for bellerophon can be found [here
 
 ## Toolshed file
 
+> <div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/WFSQE8bq5qI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
 The .shed.yml file is placed in the same directory as the tool's xml file and saves metadata for the tool. It enables
 toolshed organization and search by using tags and descriptions.
 
@@ -875,6 +917,8 @@ In the case where the directory represents a group of tools or a 'suite', there 
 For more information on how to write automatic tool suites, visit the [Galaxy docs](https://galaxy-iuc-standards.readthedocs.io/en/latest/best_practices/shed_yml.html).
 
 # Testing Galaxy tool with `planemo`
+
+> <div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/19mKUENz_i0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 `planemo` is a command line utility that helps developing Galaxy tools.
 Among many other tasks it can:
@@ -983,7 +1027,7 @@ In order to do so `planemo` will:
 {: .hands_on}
 
 
-> ### {% icon tip %} Usefull parameters for `planemo test`
+> ### {% icon tip %} Useful parameters for `planemo test`
 >
 > * `--failed` Will make `planemo` rerun only the tests that failed in the previous execution.
 > * `--update_test_data` If there are differences to output files defined in the tests these will be updated (and the tests will run again).
@@ -1030,12 +1074,14 @@ It can be very useful to check how Galaxy renders a tool and if this meets the e
 >
 {: .hands_on}
 
-> ### {% icon tip %} Usefull parameters for `planemo test`
+> ### {% icon tip %} Useful parameters for `planemo test`
 >
 > In order to stop `planemo serve` just press `Ctrl + C`
 {: .tip}
 
 # Publishing Galaxy tools
+
+> <div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/hg0YreA8W1I" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 Galaxy tools are installed from the [Galaxy toolshed](https://toolshed.g2.bx.psu.edu/). With the help of `planemo` tools can be added to the toolshed ([documentation](https://planemo.readthedocs.io/en/latest/publishing.html)). But usually the sources of the tools are maintained in public source code repositories, for instance:
 
