@@ -840,14 +840,16 @@ toolshed organization and search by using tags and descriptions.
 
 It is made up of the following sections:
 
-- Name: the tool's name
-- Owner: username of the person who wrapped the tool to be represented in the Galaxy Toolshed. If submitted through the Intergalactic Utilities Comission (IUC), can be set to `iuc`.
-- Description: short help text for the tool/package.
-- Homepage URL: URL of the tool's website. Can also just be the Github repository for the tool.
-- Long Description: longer, more in-depth help section.
-- Remote Reposity URL: link to the repository for the tool's files.
-- Type: kind of files in the directory. Can be set as unrestricted (tool), tool_dependency_definition, or repository_suite_definition.
-- Categories: toolshed categories that are relevant to the tool or package.
+Field               | YAML key                | Description
+-----               | --------                | -----------
+Name                | `name`                  | the tool's name
+Owner               | `owner`                 | username of the person who wrapped the tool to be represented in the Galaxy Toolshed. If submitted through the Intergalactic Utilities Comission (IUC), can be set to `iuc`.
+Description         | `description`           | short help text for the tool/package.
+Homepage URL        | `homepage_url`          | URL of the tool's website. Can also just be the Github repository for the tool.
+Long Description    | `long_description`      | longer, more in-depth help section.
+Remote Reposity URL | `remote_repository_url` | link to the repository for the tool's files.
+Type                | `type`                  | kind of files in the directory. Can be set as unrestricted (tool), tool_dependency_definition, or repository_suite_definition.
+Categories          | `categories`            | toolshed categories that are relevant to the tool or package.
 
 For Bellerophon, the .shed.yml file would be:
 
@@ -868,7 +870,7 @@ In the case where the directory represents a group of tools or a 'suite', there 
 - Auto Tool Repositories
 - Suite
 
-For more inromation on how to write automatic tool suites, visit the [Galaxy docs](https://galaxy-iuc-standards.readthedocs.io/en/latest/best_practices/shed_yml.html).
+For more information on how to write automatic tool suites, visit the [Galaxy docs](https://galaxy-iuc-standards.readthedocs.io/en/latest/best_practices/shed_yml.html).
 
 # Testing Galaxy tool with `planemo`
 
@@ -954,28 +956,28 @@ In order to do so `planemo` will:
 > 1. Change into the directory containing the tool
 > 2. Run `planemo test` (as with `planemo lint` you can also specify a path to a tool explicitly as extra argument)
 >
-> The most important output of `planemo` is found at the end and looks like:
+>    The most important output of `planemo` is found at the end and looks like:
 >
-> ```
-> Testing complete. HTML report is in "PATH/tool_test_output.html".
-> All X test(s) executed passed.
-> TOOL_NAME (Test #1): passed
-> TOOL_NAME (Test #2): passed
-> ...
-> ```
+>    ```
+>    Testing complete. HTML report is in "PATH/tool_test_output.html".
+>    All X test(s) executed passed.
+>    TOOL_NAME (Test #1): passed
+>    TOOL_NAME (Test #2): passed
+>    ...
+>    ```
 >
-> The last part lists for each test if it failed or passed. In case of a failure you can open the file `tool_test_output.html` (the path to this file is in the output) with a browser to get more information.
+>    The last part lists for each test if it failed or passed. In case of a failure you can open the file `tool_test_output.html` (the path to this file is in the output) with a browser to get more information.
 >
 > 3. Open the HTML report `firefox PATH/tool_test_output.html` (replace the PATH as in `planemo`'s output).
 >
-> The HTML report contains a table on the top giving the number of executed, successful, and failed tests:
+>    The HTML report contains a table on the top giving the number of executed, successful, and failed tests:
 >
-> ![Planemo HTML report](../../images/planemo_html.png "Planemo HTML report")
+>    ![Planemo HTML report](../../images/planemo_html.png "Planemo HTML report")
 >
-> If there are passed or failed tests you will find the text `Passed tests`, `Failed tests`, resp., below the table.
-> Clicking on this text will unfold the list of passed or failed tests, resp. Clicking again on one of the tests
-> Will show additional information like stdout, stderr and the executed command line. In most cases this is sufficient
-> to determine the source of the test failure.
+>    If there are passed or failed tests you will find the text `Passed tests`, `Failed tests`, resp., below the table.
+>    Clicking on this text will unfold the list of passed or failed tests, resp. Clicking again on one of the tests
+>    Will show additional information like stdout, stderr and the executed command line. In most cases this is sufficient
+>    to determine the source of the test failure.
 {: .hands_on}
 
 
@@ -1022,7 +1024,7 @@ It can be very useful to check how Galaxy renders a tool and if this meets the e
 > 1. Change into the directory containing the tool
 > 2. Run `planemo serve` (as with `lint` and test you can also specify a path to a tool explicitly as extra argument)
 >
-> `Planemo` will again start a Galaxy instance that contains your tool. Note that starting the ad-hoc Galaxy might need longer than for `planemo test` since JavaScript components need to be initialized as well.
+>    `Planemo` will again start a Galaxy instance that contains your tool. Note that starting the ad-hoc Galaxy might need longer than for `planemo test` since JavaScript components need to be initialized as well.
 >
 {: .hands_on}
 
@@ -1088,15 +1090,15 @@ the development branch may have the name `master` instead of `main`.
 >
 > 2. In order to obtain a clone (i.e. a local copy of your fork) click the green button with text "Code" and copy the link. And execute the following commands on your computer
 >
-> ```bash
-> cd A_DIR_WHERE_YOU_WANT_TO_CREATE_THE_CLONE
-> git clone LINK_TO_YOUR_FORK
-> cd tools-iuc/
-> git remote add upstream https://github.com/mvdbeek/galaxy-tools-mvdbeek.git
-> ```
+>    ```bash
+>    cd A_DIR_WHERE_YOU_WANT_TO_CREATE_THE_CLONE
+>    git clone LINK_TO_YOUR_FORK
+>    cd tools-iuc/
+>    git remote add upstream https://github.com/mvdbeek/galaxy-tools-mvdbeek.git
+>    ```
 >
-> The first command creates the clone in the current working dir, i.e. it will create a directory `galaxy-tools-mvdbeek` containing the copy.
-> The last command will add the original sandbox repository as a remote with the name `upstream`. This is necessary in order to keep your fork of the repository in sync with the original repository.
+>    The first command creates the clone in the current working dir, i.e. it will create a directory `galaxy-tools-mvdbeek` containing the copy.
+>    The last command will add the original sandbox repository as a remote with the name `upstream`. This is necessary in order to keep your fork of the repository in sync with the original repository.
 >
 > 4. Check that `git remote -v` lists your fork under the name `origin` and the original repository unter the name `upstream`.
 {: .hands_on}
