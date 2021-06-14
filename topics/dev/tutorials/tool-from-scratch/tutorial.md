@@ -809,6 +809,7 @@ DOI:
 
 and Bibtex:
 
+{% raw %}
 ```xml
 <citations>
     <citation type="bibtex">@article{Butler2018,
@@ -826,6 +827,7 @@ and Bibtex:
     }</citation>
 </citations>
 ```
+{% endraw %}
 
 Multiple citations can be added by using additional citation tags.
 
