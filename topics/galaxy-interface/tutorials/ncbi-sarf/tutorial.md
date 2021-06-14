@@ -272,9 +272,10 @@ Now that a table has been generated, we will query the table to find the runs of
 >
 >    {% snippet faqs/galaxy/datasets_rename.md name="Run_list" %}
 >
->    > ### {% icon tip %} Use `Run_list` to bring in Fastq files with Submitted Quality Scores (+BQS format)
->    >
->    >
+>    > ### {% icon tip %} Need fastq?
+>    > Use `Run_list` to bring in Fastq files with Submitted Quality Scores (+BQS format)
+>    {: .tip}
+>
 >    > ### {% icon tip %} Column Headers for the Other Metadata Tables
 >    > We are not going to bring in the other metadata tables in this tutorial. Here is a list of column headers for contigs and the other tables.
 >    > You can find full definitions for these columns here:
