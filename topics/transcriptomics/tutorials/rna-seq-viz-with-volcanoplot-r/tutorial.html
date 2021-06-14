@@ -1,0 +1,1592 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Visualization of RNA-Seq results with Volcano Plot in R</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:title" content="Galaxy Training: Visualization of RNA-Seq results with Volcano Plot in R" />
+        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/transcriptomics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Transcriptomics
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/transcriptomics/faqs/" title="Check our FAQs for the Transcriptomics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-viz-with-volcanoplot-r%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                    -->
+
+                     <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Visualization of RNA-Seq results with Volcano Plot in R",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/main/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Transcriptomics",
+    "description": "Training material for all kinds of transcriptomics analysis.",
+    "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/"
+  },
+  "courseCode": "transcriptomics / rna-seq-viz-with-volcanoplot-r / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Visualization of RNA-Seq results with Volcano Plot in R' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html",
+  "timeRequired": "PT1H",
+  "description": "The questions this  addresses are:\n - How to customise Volcano plot output in R?\n\n\\nThe objectives are:\n - Learn how to use R to edit Volcano plot colours, points, labels and categories\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
+      "name": "Mapping",
+      "description": "Hands-on for 'Mapping' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/tutorials/rstudio/tutorial.html",
+      "name": "RStudio in Galaxy",
+      "description": "Hands-on for 'RStudio in Galaxy' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/tutorials/r-basics/tutorial.html",
+      "name": "R basics in Galaxy",
+      "description": "Hands-on for 'R basics in Galaxy' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/tutorials/r-advanced/tutorial.html",
+      "name": "Advanced R in Galaxy",
+      "description": "Hands-on for 'Advanced R in Galaxy' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html",
+      "name": "Visualization of RNA-Seq results with Volcano Plot",
+      "description": "Hands-on for 'Visualization of RNA-Seq results with Volcano Plot' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-viz-in-r/tutorial.html",
+      "name": "RNA Seq Counts to Viz in R",
+      "description": "Hands-on for 'RNA Seq Counts to Viz in R' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Maria Doyle"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Maria Doyle"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Transcriptomics",
+      "description": "Training material for all kinds of transcriptomics analysis.",
+      "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3308",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3308",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3308"
+    }
+  ],
+  "skillLevel": "Intermediate"
+}
+    </script>
+
+    <section class="tutorial topic-transcriptomics">
+        <h1 data-toc-skip>Visualization of RNA-Seq results with Volcano Plot in R</h1>
+        
+
+        <div class="contributors-line">By: 
+
+ <a href="/training-material/hall-of-fame/mblue9/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mblue9" alt="Maria Doyle">Maria Doyle</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How to customise Volcano plot output in R?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Learn how to use R to edit Volcano plot colours, points, labels and categories</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/sequence-analysis">Sequence analysis</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Quality Control:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                
+                    
+                        
+                            
+                            <li> Mapping:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/mapping/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/galaxy-interface">Using Galaxy and Managing your Data</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> RStudio in Galaxy:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/galaxy-interface/tutorials/rstudio/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> R basics in Galaxy:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/introduction/tutorials/r-basics/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Advanced R in Galaxy:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/introduction/tutorials/r-advanced/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/transcriptomics">Transcriptomics</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Visualization of RNA-Seq results with Volcano Plot:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> RNA Seq Counts to Viz in R:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-viz-in-r/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1 hour</div>
+            
+
+            
+            <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
+             Intermediate 
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+</span>
+
+</div>
+            
+
+            
+            
+
+            
+            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/transcriptomics/slides/introduction.html" title="Topic Overview slides">
+                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Topic Overview slides
+                    </a></li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://zenodo.org/record/2529117">
+    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+</li>
+                
+
+                
+
+                
+
+                
+                
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/transcriptomics/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 14, 2021 </div>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>The <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html">Volcano plot</a> tutorial, introduced volcano plots and showed how they can be generated with the <span class="notranslate">Galaxy</span> Volcano plot tool. In this tutorial we show how you can customise a plot using the R script output from the tool.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#preparing-the-inputs" id="markdown-toc-preparing-the-inputs">Preparing the inputs</a>    <ol>
+      <li><a href="#import-data" id="markdown-toc-import-data">Import data</a></li>
+      <li><a href="#create-volcano-plot" id="markdown-toc-create-volcano-plot">Create volcano plot</a></li>
+      <li><a href="#import-files-into-r" id="markdown-toc-import-files-into-r">Import files into R</a></li>
+      <li><a href="#set-up-script" id="markdown-toc-set-up-script">Set up script</a></li>
+    </ol>
+  </li>
+  <li><a href="#customising-the-plot" id="markdown-toc-customising-the-plot">Customising the plot</a>    <ol>
+      <li><a href="#change-points-colours" id="markdown-toc-change-points-colours">Change points colours</a></li>
+      <li><a href="#change-points-size" id="markdown-toc-change-points-size">Change points size</a></li>
+      <li><a href="#change-labels-size" id="markdown-toc-change-labels-size">Change labels size</a></li>
+      <li><a href="#change-categories" id="markdown-toc-change-categories">Change categories</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="preparing-the-inputs">Preparing the inputs</h1>
+
+<p>We will use one file for this analysis:</p>
+
+<ul>
+  <li><strong>Differentially expressed results file</strong> (genes in rows, and 4 required columns: raw P values, adjusted P values (FDR), log fold change and gene labels).</li>
+</ul>
+
+<p>If you are following on from the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html">Volcano plot</a> tutorial, you already have this file in your History so you can skip to the <strong>Create volcano plot</strong> step below.</p>
+
+<h2 id="import-data">Import data</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>
+      <p>Create a new history for this exercise e.g. <code class="language-plaintext highlighter-rouge">Volcano plot R</code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>    <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>    <li>Select the option <strong>Create New</strong> from the menu</li>  </ol></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history</h3>  <ol>    <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>    <li>Type the new name</li>    <li>Press <kbd>Enter</kbd></li>  </ol></blockquote>
+    </li>
+    <li>
+      <p>Import the differentially results table.</p>
+
+      <p>To import the file, there are two options:</p>
+      <ul>
+        <li>Option 1: From a shared data library if available (ask your instructor)</li>
+        <li>Option 2: From <a href="https://zenodo.org/record/2529117">Zenodo</a></li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>    <li>Copy the link location</li>    <li>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</li>    <li>Select <strong>Paste/Fetch Data</strong></li>    <li>Paste the link into the text field</li>    <li>Press <strong>Start</strong></li>    <li><strong>Close</strong> the windowBy default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li>  </ul></blockquote>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>    <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>    <li>Find the correct folder (ask your instructor)</li>    <li>Select the desired files</li>    <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>    <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>    <li>Click on <strong>Import</strong></li>  </ul></blockquote>
+
+      <ul>
+        <li>
+          <p>You can paste the link below into the <strong>Paste/Fetch</strong> box:</p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2529117/files/limma-voom_luminalpregnant-luminallactate
+</code></pre></div>          </div>
+
+          <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">tabular</code>.
+If the datatype is not <code class="language-plaintext highlighter-rouge">tabular</code>, please change the file type to <code class="language-plaintext highlighter-rouge">tabular</code>.</p>
+
+          <!--SNIPPET-->
+          <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>    <li>Select <code class="language-plaintext highlighter-rouge">tabular</code></li>    <li>Click the <strong>Change datatype</strong> button</li>  </ul></blockquote>
+        </li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon and take a look at the <code class="language-plaintext highlighter-rouge">DE results</code> file. It should look like below, with 8 columns.</p>
+
+<p><img src="../../images/rna-seq-viz-with-volcanoplot/DE_results.png" alt="DE results file" /></p>
+
+<h2 id="create-volcano-plot">Create volcano plot</h2>
+
+<p>We will create a volcano plot colouring all significant genes. We will call genes significant here if they have FDR &lt; 0.01 and a log2 fold change of 0.58 (equivalent to a fold-change of 1.5). These were the values used in the original paper for this dataset. We will also label the top 10 most significant genes with their gene names. We will select to output the Rscript file which we will then use to edit the plot in R.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-create-a-volcano-plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create a Volcano plot</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5"><strong>Volcano Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5</span></span>  to create a volcano plot
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Specify an input file”</em>: the de results file</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File has header?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“FDR (adjusted P value)”</em>: <code class="language-plaintext highlighter-rouge">Column 8</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“P value (raw)”</em>: <code class="language-plaintext highlighter-rouge">Column 7</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Log Fold Change”</em>: <code class="language-plaintext highlighter-rouge">Column 4</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Labels”</em>: <code class="language-plaintext highlighter-rouge">Column 2</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Significance threshold”</em>: <code class="language-plaintext highlighter-rouge">0.01</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“LogFC threshold to colour”</em>: <code class="language-plaintext highlighter-rouge">0.58</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Points to label”</em>: <code class="language-plaintext highlighter-rouge">Significant</code>
+          <ul>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Only label top most significant”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Output Options”</em>:
+          <ul>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Output Rscript?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Click on the PDF file name to check that you see a plot like below.</p>
+
+<p><img src="../../images/rna-seq-viz-with-volcanoplot/volcanoplot_top10.png" alt="Volcano plot labelling top significant genes" width="60%" /></p>
+
+<p>Now we will customise the plot by editing the R code in RStudio. You can use <span class="notranslate">Galaxy</span> RStudio if available or another R such as RStudio Cloud or RStudio installed on your computer.</p>
+
+<h2 id="import-files-into-r">Import files into R</h2>
+
+<p>We’ll import the differentially expressed results input file and the RScript into R.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-using-datasets-from-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Using datasets from <span class="notranslate">Galaxy</span></h3>
+
+  <ol>
+    <li>
+      <p>Note the history IDs of 1) the differentially expressed results and 2) the RScript in your <span class="notranslate">Galaxy</span> history</p>
+    </li>
+    <li>
+      <p><span class="tool" data-tool="interactive_tool_rstudio" title="Tested with interactive_tool_rstudio"><strong>RStudio</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_rstudio</span></span>  in <span class="notranslate">Galaxy</span> provides some special functions such as <code class="language-plaintext highlighter-rouge">gx_get</code> to import and export files from your history.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="notranslate hands_on">  <h3 data-toc-skip="" id="-hands-on-launch-rstudio"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launch RStudio</h3>  <p>Depending on which server you are using, you may be able to run RStudio directly in <span class="notranslate">Galaxy</span>. If that is not available, RStudio Cloud can be an alte<span class="notranslate">rna</span>tive.</p>  <blockquote class="tip">    <h3 data-toc-skip="" id="tip-tip-launch-rstudio-in-galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Launch RStudio in <span class="notranslate">Galaxy</span></h3>    <p>Currently RStudio in <span class="notranslate">Galaxy</span> is only available on <a href="https://usegalaxy.eu">Use<span class="notranslate">Galaxy</span>.eu</a> and <a href="https://usegalaxy.org">Use<span class="notranslate">Galaxy</span>.org</a></p>    <ol>      <li>Open the Rstudio tool <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> by clicking <a href="https://usegalaxy.eu/?tool_id=interactive_tool_rstudio">here</a></li>      <li>Click Execute</li>      <li>The tool will start running and will stay running permanently</li>      <li>Click on the “User” menu at the top and go to “Active InteractiveTools” and locate the RStudio instance you started.</li>    </ol>  </blockquote>  <blockquote class="tip">    <h3 data-toc-skip="" id="tip-tip-launch-rstudio-cloud-if-not-available-on-galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Launch RStudio Cloud if not available on <span class="notranslate">Galaxy</span></h3>    <p>If RStudio is not available on the <span class="notranslate">Galaxy</span> instance:</p>    <ol>      <li>Register for <a href="https://client.login.rstudio.cloud/oauth/login?show_auth=0&amp;show_login=1&amp;show_setup=1">RStudio Cloud</a>, or login if you already have an account</li>      <li>Create a new project</li>    </ol>  </blockquote></blockquote>
+    </li>
+    <li>
+      <p>Copy the files we need into our workspace so we can see them in the Files pane.</p>
+
+      <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">file.copy</span><span class="p">(</span><span class="n">gx_get</span><span class="p">(</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="s2">"de-results.tsv"</span><span class="p">)</span><span class="w"> </span><span class="c1"># will copy dataset number 1 from your history, use the correct ID for your differentially expressed results dataset.</span><span class="w">
+</span><span class="n">file.copy</span><span class="p">(</span><span class="n">gx_get</span><span class="p">(</span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="s2">"volcano.R"</span><span class="p">)</span><span class="w"> </span><span class="c1"># will copy dataset number 3 from your history, use the correct ID for your Rscript dataset.</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Click on <code class="language-plaintext highlighter-rouge">volcano.R</code> in the Files pane to open it in the Editor pane.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>We’ll have a look at the script.</p>
+
+<h2 id="set-up-script">Set up script</h2>
+
+<p>The first few lines from <code class="language-plaintext highlighter-rouge"># <span class="notranslate">Galaxy</span> settings start</code> to <code class="language-plaintext highlighter-rouge"># <span class="notranslate">Galaxy</span> settings end</code> are settings needed to run the Volcano plot tool in <span class="notranslate">Galaxy</span>. We don’t need them to run the script in R so we will delete them. If we don’t delete the error handling line, the R session will crash if we encounter any error in the code. It’s ok as it will resume again where we were but better to not have this happen.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-delete-unneeded-lines"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Delete unneeded lines</h3>
+
+  <p>Delete these lines from the top of the script.</p>
+
+  <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">   </span><span class="c1"># <span class="notranslate">Galaxy</span> settings start ---------------------------------------------------</span><span class="w">
+
+   </span><span class="c1"># setup R error handling to go to stderr</span><span class="w">
+   </span><span class="n">options</span><span class="p">(</span><span class="n">show.error.messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">F</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="n">cat</span><span class="p">(</span><span class="n">geterrmessage</span><span class="p">(),</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stderr</span><span class="p">());</span><span class="w"> </span><span class="n">q</span><span class="p">(</span><span class="s2">"no"</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="nb">F</span><span class="p">)})</span><span class="w">
+
+   </span><span class="c1"># we need that to not crash <span class="notranslate">galaxy</span> with an UTF8 error on German LC settings.</span><span class="w">
+   </span><span class="n">loc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Sys.setlocale</span><span class="p">(</span><span class="s2">"LC_MESSAGES"</span><span class="p">,</span><span class="w"> </span><span class="s2">"en_US.UTF-8"</span><span class="p">)</span><span class="w">
+
+   </span><span class="c1"># <span class="notranslate">Galaxy</span> settings end -----------------------------------------------------</span><span class="w">
+</span></code></pre></div>  </div>
+
+</blockquote>
+
+<p>We’ll check if we have the packages the script needs. We can see the packages used in the lines that have <code class="language-plaintext highlighter-rouge">library(package)</code></p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggrepel</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>When we launched <span class="notranslate">Galaxy</span> RStudio there was information in the Console letting us know that some packages are pre-installed. These packages include <code class="language-plaintext highlighter-rouge">ggplot2</code> and <code class="language-plaintext highlighter-rouge">dplyr</code>. In this <span class="notranslate">Galaxy</span> there is a yellow warning banner across the top of the script saying <code class="language-plaintext highlighter-rouge">Package ggrepel required is not installed. Install. Don't Show Again</code>.
+So we just need to install the <code class="language-plaintext highlighter-rouge">ggrepel</code> package.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-install-package"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Install package</h3>
+
+  <p>Either click on “Install” in the yellow warning banner if present, or in the Console type</p>
+
+  <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="s1">'ggrepel'</span><span class="p">)</span><span class="w">
+</span></code></pre></div>  </div>
+
+</blockquote>
+
+<p>We need to change the path of the differentially expressed file in the script. The path in the script is <code class="language-plaintext highlighter-rouge">/data/dnb03/<span class="notranslate">galaxy</span>_db/files/4/6/c/dataset_46c498bc-060e-492f-9b42-51908a55e354.dat</code>. This is a temporary location where the <span class="notranslate">Galaxy</span> Volcano plot tool copied the input file in order to use it, the file no longer exists there. Your path will be different. In the script change this path to <code class="language-plaintext highlighter-rouge">de-results.tsv</code> like below.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-run-script"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run script</h3>
+
+  <ol>
+    <li>
+      <p>Change the input file path in script</p>
+
+      <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># change the line</span><span class="w">
+</span><span class="n">results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.delim</span><span class="p">(</span><span class="s1">'/data/dnb03/<span class="notranslate">galaxy</span>_db/files/4/6/c/dataset_46c498bc-060e-492f-9b42-51908a55e354.dat'</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># to</span><span class="w">
+</span><span class="n">results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.delim</span><span class="p">(</span><span class="s1">'de-results.tsv'</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Highlight the code in the script and run</p>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-highlight-all-code-and-run-shortcuts"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Highlight all code and run shortcuts</h3>
+        <ul>
+          <li>To highlight all code type <kbd>CTRL</kbd>+<kbd>a</kbd> (or <kbd>CMD</kbd>+<kbd>a</kbd>)</li>
+          <li>To run type <kbd>CTRL</kbd>+<kbd>Enter</kbd> (or <kbd>CMD</kbd>+<kbd>Enter</kbd>)</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>You should see a file called <code class="language-plaintext highlighter-rouge">volcano_plot.pdf</code> appear in the Files pane. Click on it to open it and you should see a plot that looks the same as the one we generated with the Volcano Plot tool in <span class="notranslate">Galaxy</span>.</p>
+
+<p>We’ll delete the lines below that save the plot to a PDF file. The plots will then be produced in the Plots pane so we can more easily see the different plots we’re going to make, without having to keep opening the PDF file.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-produce-plots-in-plots-pane"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Produce plots in Plots pane</h3>
+
+  <ol>
+    <li>
+      <p>Delete the lines below that save the plot to a PDF file</p>
+
+      <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Open PDF graphics device</span><span class="w">
+</span><span class="n">pdf</span><span class="p">(</span><span class="s2">"volcano_plot.pdf"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># keep the lines in between as they produce the plot</span><span class="w">
+
+</span><span class="c1"># Close PDF graphics device</span><span class="w">
+</span><span class="n">dev.off</span><span class="p">()</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Highlight the code in the script and run</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>You should now see the plot produced in the Plots pane.</p>
+
+<h1 id="customising-the-plot">Customising the plot</h1>
+
+<h2 id="change-points-colours">Change points colours</h2>
+
+<p>We’ll demonstate how you can change the colours. We’ll change the colour of the downregulated genes from cornflowerblue to purple. We’ll change the upregulated genes from firebrick to orange.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-change-colours"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Change colours</h3>
+
+  <ol>
+    <li>
+      <p>Edit the line below in the script</p>
+
+      <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># change the line</span><span class="w">
+</span><span class="n">colours</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">setNames</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"cornflowerblue"</span><span class="p">,</span><span class="w"> </span><span class="s2">"grey"</span><span class="p">,</span><span class="w"> </span><span class="s2">"firebrick"</span><span class="p">),</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">down</span><span class="p">,</span><span class="w"> </span><span class="n">notsig</span><span class="p">,</span><span class="w"> </span><span class="n">up</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># to</span><span class="w">
+</span><span class="n">colours</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">setNames</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"purple"</span><span class="p">,</span><span class="w"> </span><span class="s2">"grey"</span><span class="p">,</span><span class="w"> </span><span class="s2">"orange"</span><span class="p">),</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">down</span><span class="p">,</span><span class="w"> </span><span class="n">notsig</span><span class="p">,</span><span class="w"> </span><span class="n">up</span><span class="p">))</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Highlight the code in the script and run</p>
+    </li>
+  </ol>
+
+  <p><img src="../../images/rna-seq-viz-with-volcanoplot-r/volcano_points_colours.png" alt="Smaller points" /></p>
+
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-r-colours"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: R colours</h3>
+
+  <p>If you want to use other colours you can see the built-in R colours with their names in <a href="https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf">this cheatsheet</a>.</p>
+
+</blockquote>
+
+<h2 id="change-points-size">Change points size</h2>
+
+<p>We’ll make the points a bit smaller. We’ll change to 0.5.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-change-points-size"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Change points size</h3>
+
+  <ol>
+    <li>
+      <p>Edit the line below in the script</p>
+
+      <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># change the line</span><span class="w">
+</span><span class="n">geom_point</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sig</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+
+</span><span class="c1"># to</span><span class="w">
+</span><span class="n">geom_point</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sig</span><span class="p">),</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Highlight the code in the script and run</p>
+    </li>
+  </ol>
+
+  <p><img src="../../images/rna-seq-viz-with-volcanoplot-r/volcano_points_size.png" alt="Smaller points" /></p>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>How could we change the transparency of the points?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>We could use <code class="language-plaintext highlighter-rouge">alpha =</code>. For example</p>
+    <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">   </span><span class="n">geom_point</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sig</span><span class="p">),</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w">
+</span></code></pre></div>    </div>
+
+  </blockquote>
+</blockquote>
+
+<h2 id="change-labels-size">Change labels size</h2>
+
+<p>We’ll make the font size of the labels a bit smaller.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-change-labels-text-size"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Change labels text size</h3>
+
+  <ol>
+    <li>
+      <p>Edit the line below in the script</p>
+
+      <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># change the line</span><span class="w">
+</span><span class="n">geom_text_repel</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">results</span><span class="p">,</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">""</span><span class="p">),</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">labels</span><span class="p">),</span><span class="w">
+
+</span><span class="c1"># to</span><span class="w">
+</span><span class="n">geom_text_repel</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">results</span><span class="p">,</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">""</span><span class="p">),</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">labels</span><span class="p">),</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Highlight the code in the script and run</p>
+    </li>
+  </ol>
+
+  <p><img src="../../images/rna-seq-viz-with-volcanoplot-r/volcano_labels_size.png" alt="Smaller labels" /></p>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>How could we change the number of genes labelled from 10 to 20?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>We could change the 10 to 20 here</p>
+    <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">   </span><span class="n">top</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">slice_min</span><span class="p">(</span><span class="n">results</span><span class="p">,</span><span class="w"> </span><span class="n">order_by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pvalue</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">)</span><span class="w">
+</span></code></pre></div>    </div>
+
+  </blockquote>
+</blockquote>
+
+<h2 id="change-categories">Change categories</h2>
+
+<p>We can change the categories of points we’re colouring in the plot. For example, instead of using separate categories for upregulated, downregulated we could just use a single category for significant.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-change-categories"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Change categories</h3>
+
+  <ol>
+    <li>
+      <p>Change the category names to signif and notsignif</p>
+
+      <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># change</span><span class="w">
+</span><span class="n">down</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unlist</span><span class="p">(</span><span class="n">strsplit</span><span class="p">(</span><span class="s1">'Down,Not Sig,Up'</span><span class="p">,</span><span class="w"> </span><span class="n">split</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">","</span><span class="p">))[</span><span class="m">1</span><span class="p">]</span><span class="w">
+</span><span class="n">notsig</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unlist</span><span class="p">(</span><span class="n">strsplit</span><span class="p">(</span><span class="s1">'Down,Not Sig,Up'</span><span class="p">,</span><span class="w"> </span><span class="n">split</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">","</span><span class="p">))[</span><span class="m">2</span><span class="p">]</span><span class="w">
+</span><span class="n">up</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unlist</span><span class="p">(</span><span class="n">strsplit</span><span class="p">(</span><span class="s1">'Down,Not Sig,Up'</span><span class="p">,</span><span class="w"> </span><span class="n">split</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">","</span><span class="p">))[</span><span class="m">3</span><span class="p">]</span><span class="w">
+
+</span><span class="c1"># to</span><span class="w">
+</span><span class="n">signif</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"Significant"</span><span class="w">
+</span><span class="n">notsignif</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"Not significant"</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Specify which genes are signif and notsignif</p>
+
+      <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># change</span><span class="w">
+</span><span class="n">results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mutate</span><span class="p">(</span><span class="n">results</span><span class="p">,</span><span class="w"> </span><span class="n">sig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">case_when</span><span class="p">(</span><span class="w">
+                            </span><span class="n">fdr</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0.01</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">logfc</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0.58</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">up</span><span class="p">,</span><span class="w">
+                            </span><span class="n">fdr</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0.01</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">logfc</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">-0.58</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">down</span><span class="p">,</span><span class="w">
+                            </span><span class="kc">TRUE</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">notsig</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># to</span><span class="w">
+</span><span class="n">results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mutate</span><span class="p">(</span><span class="n">results</span><span class="p">,</span><span class="w"> </span><span class="n">sig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">case_when</span><span class="p">(</span><span class="w">
+                            </span><span class="n">fdr</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0.01</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nf">abs</span><span class="p">(</span><span class="n">logfc</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0.58</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">signif</span><span class="p">,</span><span class="w"> </span><span class="c1"># abs() will give us absolute values i.e. all &gt; 0.58 and &lt; -0.58</span><span class="w">
+                            </span><span class="kc">TRUE</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">notsignif</span><span class="p">))</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Specify the colours for signif and notsignif</p>
+
+      <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># change</span><span class="w">
+</span><span class="n">colours</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">setNames</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"purple"</span><span class="p">,</span><span class="w"> </span><span class="s2">"grey"</span><span class="p">,</span><span class="w"> </span><span class="s2">"orange"</span><span class="p">),</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">down</span><span class="p">,</span><span class="w"> </span><span class="n">notsig</span><span class="p">,</span><span class="w"> </span><span class="n">up</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># to</span><span class="w">
+</span><span class="n">colours</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">setNames</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"grey"</span><span class="p">,</span><span class="w"> </span><span class="s2">"red"</span><span class="p">),</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">notsignif</span><span class="p">,</span><span class="w"> </span><span class="n">signif</span><span class="p">))</span><span class="w">
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>runHighlight the code in the script and</p>
+    </li>
+  </ol>
+
+  <p><img src="../../images/rna-seq-viz-with-volcanoplot-r/volcano_categories.png" alt="Categories changed" /></p>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>How would you remove the legend from the plot? You can use Google.</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>If you Google <code class="language-plaintext highlighter-rouge">remove legend ggplot2</code> you may find a few ways it can be done. One way is</p>
+
+    <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"none"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>    </div>
+
+  </blockquote>
+</blockquote>
+
+<p>You can save the edited script by clicking the <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> icon at the top of the script in RStudio or through File &gt; Save. You can download from <span class="notranslate">Galaxy</span> RStudio from the Files pane by ticking the box beside the script name, then More &gt; Export &gt; Download.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-more-plot-options"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: More plot options</h3>
+
+  <p>If you enter values in the Volcano Plot <span class="notranslate">Galaxy</span> tool form for Plot options, such as plot title, x and y axis labels or limits, they’ll be output in the script. This is one way you could see how to customise these options in the plot.</p>
+
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>In this tutorial we have seen how a volcano plot can be generated and customised using <span class="notranslate">Galaxy</span> and R. You can see some more possible customisations in the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html"><span class="notranslate">RNA</span> Seq Counts to Viz in R</a> tutorial and at the <a href="https://ggrepel.slowkow.com/index.html">ggrepel website</a>.</p>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>R can be used to customise Volcano Plot output</p>
+</li>
+                            
+                            <li><p>The RStudio interactive tool can be used to run R inside Galaxy</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/transcriptomics/faqs/">FAQ page for the Transcriptomics topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                    
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
+                    
+
+                    
+
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Visualization of RNA-Seq results with Volcano Plot in R (Transcriptomics)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Maria Doyle, 2021 <b>Visualization of RNA-Seq results with Volcano Plot in R (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{transcriptomics-rna-seq-viz-with-volcanoplot-r,
+    author = "Maria Doyle",
+    title = "Visualization of RNA-Seq results with Volcano Plot in R (Galaxy Training Materials)",
+    year = "2021",
+    month = "06",
+    day = "14"
+    url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+                    
+
+                    
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Maria Doyle)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

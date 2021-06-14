@@ -289,7 +289,7 @@
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on for 'Visualization of RNA-Seq results with Volcano Plot' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html",
-  "timeRequired": "PT1H",
+  "timeRequired": "PT30M",
   "description": "The questions this  addresses are:\n - How to generate a volcano plot from RNA-seq data?\n\n\\nThe objectives are:\n - Create a volcano plot of RNA-seq data to visualize significant genes\n\n",
   "coursePrerequisites": [
     {
@@ -359,6 +359,20 @@
         "name": "Galaxy Training Network",
         "url": "https://galaxyproject.org/teach/gtn/"
       }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html",
+      "name": "2: RNA-seq counts to genes",
+      "description": "Hands-on for '2: RNA-seq counts to genes' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
     }
   ],
   "hasPart": [
@@ -390,7 +404,8 @@
       "termCode": "topic_3308",
       "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3308"
     }
-  ]
+  ],
+  "skillLevel": "Introductory"
 }
     </script>
 
@@ -487,13 +502,108 @@
     </li>
 
             
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/transcriptomics">Transcriptomics</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> 2: RNA-seq counts to genes:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
             </ul>
             
 
             
-            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1 hour</div>
+            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 30 minutes</div>
             
 
+            
+            <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
+             Introductory 
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+</span>
+
+</div>
             
 
             
@@ -679,8 +789,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -759,7 +867,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 12, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 14, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -771,11 +879,11 @@
                 <div class="col-sm-10">
                     <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>Volcano plots are commonly used to display the results of <span class="notranslate">RNA</span>-seq or other omics experiments. A volcano plot is a type of scatterplot that shows statistical significance (P value) versus magnitude of change (fold change). It enables quick visual identification of genes with large fold changes that are also statistically significant. These may be the most biologically significant genes. In a volcano plot, the most upregulated genes are towards the right, the most downregulated genes are towards the left, and the most statistically significant genes are towards the top.</p>
+<p><img src="../../images/rna-seq-viz-with-volcanoplot/volcanoplot.png" alt="Volcano plot highlighting significant genes" width="60%" style="float:right" /> Volcano plots are commonly used to display the results of <span class="notranslate">RNA</span>-seq or other omics experiments. A volcano plot is a type of scatterplot that shows statistical significance (P value) versus magnitude of change (fold change). It enables quick visual identification of genes with large fold changes that are also statistically significant. These may be the most biologically significant genes. In a volcano plot, the most upregulated genes are towards the right, the most downregulated genes are towards the left, and the most statistically significant genes are towards the top.</p>
 
 <p>To generate a volcano plot of <span class="notranslate">RNA</span>-seq results, we need a file of differentially expressed results which is provided for you here. To generate this file yourself, see the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html"><span class="notranslate">RNA</span>-seq counts to genes</a> tutorial. The file used here was generated from limma-voom but you could use a file from any <span class="notranslate">RNA</span>-seq differential <span class="notranslate">expression</span> tool, such as edgeR or DESeq2, as long as it has the required columns (see below).</p>
 
-<p>The data for this tutorial comes from a Nature Cell Biology paper, <a href="https://www.ncbi.nlm.nih.gov/pubmed/25730472">EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival</a>), Fu et al. 2015. This study examined the <span class="notranslate">expression</span> profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Here we will visualize the results of the luminal pregnant vs lactating comparison.</p>
+<p>The data for this tutorial comes from <a class="citation" href="#Fu2015">Fu <i>et al.</i> 2015</a>. This study examined the <span class="notranslate">expression</span> profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Here we will visualize the results of the luminal pregnant vs lactating comparison.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -810,7 +918,7 @@
 
   <ol>
     <li>
-      <p>Create a new history for this <span class="notranslate">RNA</span>-seq exercise e.g. <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span>-seq volcano plot</code></p>
+      <p>Create a new history for this <span class="notranslate">RNA</span>-seq exercise e.g. <code class="language-plaintext highlighter-rouge">Volcano plot</code></p>
 
       <!--SNIPPET-->
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>    <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>    <li>Select the option <strong>Create New</strong> from the menu</li>  </ol></blockquote>
@@ -840,24 +948,26 @@ https://zenodo.org/record/2529117/files/volcano_genes
 </code></pre></div>          </div>
         </li>
         <li>
-          <p>Select <em>“Genome”</em>: <code class="language-plaintext highlighter-rouge">mm10</code></p>
+          <p>Select <em>“Type”</em>: <code class="language-plaintext highlighter-rouge">tabular</code></p>
         </li>
       </ul>
-    </li>
-    <li>Name the limma-voom_luminalpregnant-luminallactate file <code class="language-plaintext highlighter-rouge">DE results</code> and the volcano genes file <code class="language-plaintext highlighter-rouge">volcano genes</code> using the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (pencil) icon.</li>
-    <li>
-      <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">tabular</code>.
+
+      <p>After the files import, check that the datatype is <code class="language-plaintext highlighter-rouge">tabular</code>.
 If the datatype is not <code class="language-plaintext highlighter-rouge">tabular</code>, please change the file type to <code class="language-plaintext highlighter-rouge">tabular</code>.</p>
 
       <!--SNIPPET-->
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype</h3>  <ul>    <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>    <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>    <li>Select <code class="language-plaintext highlighter-rouge">tabular</code></li>    <li>Click the <strong>Change datatype</strong> button</li>  </ul></blockquote>
+      <blockquote>
+
+      </blockquote>
     </li>
   </ol>
+
 </blockquote>
 
-<p>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon and take a look at the <code class="language-plaintext highlighter-rouge">DE results</code> file. It should look like below, with 8 columns.</p>
+<p>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon and take a look at the limma-voom file. It should look like below, with 8 columns.</p>
 
-<figure id="figure-1"><img src="../../images/rna-seq-viz-with-volcanoplot/DE_results.png" alt="DE results file" /><figcaption><span class="figcaption-prefix">Figure 1:</span> DE results</figcaption></figure>
+<p><img src="../../images/rna-seq-viz-with-volcanoplot/DE_results.png" alt="luminal file" /></p>
 
 <h2 id="create-volcano-plot-highlighting-significant-genes">Create volcano plot highlighting significant genes</h2>
 
@@ -867,9 +977,9 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
   <h3 id="hands_on-hands-on-create-a-volcano-plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create a Volcano plot</h3>
 
   <ol>
-    <li><strong>Volcano Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to create a volcano plot
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5"><strong>Volcano Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5</span></span>  to create a volcano plot
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Specify an input file”</em>: <code class="language-plaintext highlighter-rouge">DE results</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Specify an input file”</em>: limma-voom file</li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“FDR (adjusted P value)”</em>: <code class="language-plaintext highlighter-rouge">Column 8</code></li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“P value (raw)”</em>: <code class="language-plaintext highlighter-rouge">Column 7</code></li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Log Fold Change”</em>: <code class="language-plaintext highlighter-rouge">Column 4</code></li>
@@ -882,7 +992,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
   </ol>
 </blockquote>
 
-<figure id="figure-2"><img src="../../images/rna-seq-viz-with-volcanoplot/volcanoplot.png" alt="Volcano plot highlighting significant genes" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Volcano plot highlighting significant genes</figcaption></figure>
+<p><img src="../../images/rna-seq-viz-with-volcanoplot/volcanoplot.png" alt="Volcano plot highlighting significant genes" width="60%" /></p>
 
 <p>In the plot above the genes are coloured if they pass the thresholds for FDR and Log Fold Change, red if they are upregulated and blue if they are downregulated. You can see in this plot that there are many (hundreds) of significant genes in this dataset.</p>
 
@@ -901,16 +1011,16 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 
 <h2 id="create-volcano-plot-labelling-top-significant-genes">Create volcano plot labelling top significant genes</h2>
 
-<p>You can also choose to show the labels (e.g. Gene Symbols) for the significant genes with this volcano plot tool. You can select to label all significant or just the top genes. The top genes are those that pass the FDR and logFC thresholds that have the smallest P values. As there are hundreds of significant genes here, too many to sensibly label, let’s label the top 20 genes.</p>
+<p>You can also choose to show the labels (e.g. Gene Symbols) for the significant genes with this volcano plot tool. You can select to label all significant or just the top genes. The top genes are those that pass the FDR and logFC thresholds that have the smallest P values. As there are hundreds of significant genes here, too many to sensibly label, let’s label the top 10 genes.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-create-a-volcano-plot-labelling-top-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create a Volcano plot labelling top genes</h3>
   <ol>
-    <li><strong>Volcano Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> rerun with the same parameters as before except:
+    <li>Use the <strong>Rerun</strong> <i class="fas fa-sync-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> button in the History to rerun <strong>Volcano Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the same parameters as before except:
       <ul>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Points to label”</em>: <code class="language-plaintext highlighter-rouge">Significant</code>
           <ul>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Only label top most significant”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Only label top most significant”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
           </ul>
         </li>
       </ul>
@@ -918,7 +1028,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
   </ol>
 </blockquote>
 
-<figure id="figure-3"><img src="../../images/rna-seq-viz-with-volcanoplot/volcanoplot_top20.png" alt="Volcano plot labelling top significant genes" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Volcano plot labelling top significant genes</figcaption></figure>
+<p><img src="../../images/rna-seq-viz-with-volcanoplot/volcanoplot_top10.png" alt="Volcano plot labelling top significant genes" width="60%" /></p>
 
 <p>As in the previous plot, genes are coloured if they pass the thresholds for FDR and Log Fold Change, (red for upregulated and blue for downregulated) and the top genes by P value are labelled. Note that in the plot above we can now easily see what the top genes are by P value and also which of them have bigger fold changes.</p>
 
@@ -937,26 +1047,28 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 
 <h2 id="create-volcano-plot-labelling-genes-of-interest">Create volcano plot labelling genes of interest</h2>
 
-<p>We can also label one or more genes of interest in a volcano plot. This enables us to visualize where these genes are in terms of significance and in comparison to the other genes. In the original paper using this dataset, there is a heatmap of 31 genes in Figure 6b (see the tutorial <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.html">here</a> if you would like to see how to generate the heatmap). These genes are a set of 30 cytokines/growth factor identified as differentially expressed, and the authors’ main gene of interest, Mcl1. These genes are provided in the <code class="language-plaintext highlighter-rouge">volcano genes</code> file and shown below. We will label these genes in the volcano plot.</p>
+<p>We can also label one or more genes of interest in a volcano plot. This enables us to visualize where these genes are in terms of significance and in comparison to the other genes. In the original paper using this dataset, there is a heatmap of 31 genes in Figure 6b (see the tutorial <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.html">here</a> if you would like to see how to generate the heatmap). These genes are a set of 30 cytokines/growth factor identified as differentially expressed, and the authors’ main gene of interest, Mcl1. These genes are provided in the <code class="language-plaintext highlighter-rouge">volcano_genes</code> file and shown below. We will label these genes in the volcano plot. We’ll add boxes around the labels to highlight the gene names.</p>
 
-<figure id="figure-4"><img src="../../images/rna-seq-viz-with-volcanoplot/volcano_genes.png" alt="Volcano genes" height="30%" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Volcano genes</figcaption></figure>
+<p><img src="../../images/rna-seq-viz-with-volcanoplot/volcano_genes.png" alt="Volcano genes" height="25%" /></p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-create-a-volcano-plot-labelling-genes-of-interest"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create a Volcano plot labelling genes of interest</h3>
   <ol>
-    <li><strong>Volcano Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> rerun with the same parameters as before except:
+    <li>Use the <strong>Rerun</strong> <i class="fas fa-sync-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> button in the History to rerun <strong>Volcano Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the same parameters as before except:
       <ul>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Points to label”</em>: <code class="language-plaintext highlighter-rouge">Input from file</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File of labels”</em>: <code class="language-plaintext highlighter-rouge">volcano genes</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File of labels”</em>: volcano genes file</li>
           </ul>
         </li>
+        <li>In <em>“Plot Options”</em>:</li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Label Boxes”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
 </blockquote>
 
-<figure id="figure-5"><img src="../../images/rna-seq-viz-with-volcanoplot/volcanoplot_custom_genes.png" alt="Volcano plot labelling genes of interest" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Volcano plot labelling genes of interest</figcaption></figure>
+<p><img src="../../images/rna-seq-viz-with-volcanoplot/volcanoplot_custom_genes.png" alt="Volcano plot labelling genes of interest" width="60%" /></p>
 
 <blockquote class="question">
   <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -970,7 +1082,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
         <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
         <ol>
-          <li>29/31 are significant, the genes with the red and blue labels.</li>
+          <li>29/31 are significant, the genes not in the grey area.</li>
           <li>The Egf gene is the most statistically significant as it is nearest the top of the plot.</li>
         </ol>
 
@@ -979,7 +1091,14 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
   </ol>
 </blockquote>
 
-<p>As in the previous plots, genes are coloured if they pass the thresholds for FDR and Log Fold Change. The genes of interest in the file we supplied are labelled and also coloured red or blue if they pass the thresholds. Here all the genes of interest are significant (red or blue) except for two genes. One is the authors’ gene of interest, Mcl1, and this result is expected, as they showed it’s <span class="notranslate">expression</span> did change, but it was not significant at the transcription level. The other gene Gmfg, has an FDR just very slightly outside the significance threshold we used of 0.01 (0.0105).</p>
+<p>As in the previous plots, genes are coloured if they pass the thresholds for FDR and Log Fold Change. Here all the genes of interest are significant (red or blue) except for two genes, Mcl1 and Gmfg. Gmfg, has an FDR just very slightly outside the significance threshold we used of 0.01 (0.0105). Mcl1 is the authors’ gene of interest and they showed that while it’s <span class="notranslate">expression</span> did increase at the protein level, it did not increase at the transcription level, as we can see here, suggesting it is regulated post-transcriptionally.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-r-code"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: R code</h3>
+
+  <p>You can get the R code used to generate the plot under <em>Output Options</em> in the tool form. You can edit this code in R if you want to customise the plot. See the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html">Visualization of <span class="notranslate">RNA</span>-Seq results with Volcano Plot in R</a> tutorial for how to do this.</p>
+
+</blockquote>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
@@ -1008,6 +1127,19 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
                     <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
                     
 
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="Fu2015">Fu, N. Y., A. C. Rios, B. Pal, R. Soetanto, A. T. L. Lun <i>et al.</i>, 2015 <b>EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival</b>. Nature Cell Biology 17: 365–375.</span>
+    
+    
+    <a href="https://doi.org/10.1038/ncb3117">10.1038/ncb3117</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li></ol>
                     
 
                     
@@ -1066,8 +1198,8 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
     author = "Maria Doyle",
     title = "Visualization of RNA-Seq results with Volcano Plot (Galaxy Training Materials)",
     year = "2021",
-    month = "03",
-    day = "12"
+    month = "06",
+    day = "14"
     url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
@@ -1100,6 +1232,100 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
 
                     
 
+                    
+                    <blockquote class="agenda follow-up">
+                        <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                        <ul>
+                            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/transcriptomics">Transcriptomics</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Visualization of RNA-Seq results with Volcano Plot in R:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+                        </ul>
+                    </blockquote>
                     
 
                 </div>
