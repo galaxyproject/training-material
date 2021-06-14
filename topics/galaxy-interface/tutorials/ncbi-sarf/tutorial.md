@@ -19,7 +19,7 @@ tags:
 subtopic: upload
 contributors:
   - jontrow
-  - adelaiderhodes 
+  - Arhodes-NCBI
 requirements:
   -
     type: "internal"
@@ -261,19 +261,19 @@ Now that a table has been generated, we will query the table to find the runs of
 >    - *"include query result column headers"*: `no`
 >
 >    > ### {% icon tip %} Save SQlite Database for future queries
->    > 
+>    >
 >    > If you plan to do multiple queries on the same SQL database or want to skip preprocessing the metadata for future work, it may be useful to set
->    > 
+>    >
 >    >  - {% icon param-repeat %} *"Save the sqlite database in your history"* to `Yes`
->    > 
+>    >
 >    {: .tip}
 >
 > 2. Click **Execute** and rename the output file to `Run_list`
 >
 >    {% snippet faqs/galaxy/datasets_rename.md name="Run_list" %}
->    >
+>
 >    > ### {% icon tip %} Use `Run_list` to bring in Fastq files with Submitted Quality Scores (+BQS format)
->    > 
+>    >
 >    >
 >    > ### {% icon tip %} Column Headers for the Other Metadata Tables
 >    > We are not going to bring in the other metadata tables in this tutorial. Here is a list of column headers for contigs and the other tables.
@@ -318,7 +318,7 @@ Now that a table has been generated, we will query the table to find the runs of
 {: .hands_on}
 
 > ### {% icon tip %} Download Fastq with Quality Scores
-> 
+>
 > If you would like to dump the raw, underlying data in fastq format with the original quality scores, you can stop here and use the {% tool [Faster Download and Extract Reads in FASTQ](toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.11.0+galaxy0) %} tool with the following parameters:
 >
 > - *"input type"*: `list of SRA accessions, one per line`
@@ -327,7 +327,7 @@ Now that a table has been generated, we will query the table to find the runs of
 {: .tip}
 
 > ### {% icon tip %} Importing a list of SRR from Athena or BigQuery
-> 
+>
 > If you opted to conduct your metadata search in the cloud using AWS Athena or GCP BigQuery instead of importing the json file to Galaxy, you can save a list of your Run accessions from that search result and import that file as the `Run_list` to proceed with the rest of this tutorial.
 {: .tip}
 
@@ -379,7 +379,7 @@ Now that we have assembled a list of Runs that have contigs we are interested in
 >    - Click Execute
 >
 >    The resulting dataset includes the contigs generated from these runs with placeholder `?` for quality scores
->    
+>
 >    - Rename this collection to `sarf_contigs`
 >
 >    Run {% tool [Fastq to Fasta converter](toolshed.g2.bx.psu.edu/repos/devteam/fastqtofasta/fastq_to_fasta_python/1.1.5) %}
@@ -388,7 +388,7 @@ Now that we have assembled a list of Runs that have contigs we are interested in
 >    - Click Execute
 >
 >    The resulting dataset includes the contigs generated from these Runs in fasta format
-
+>
 >    > ### {% icon tip %} Fastq format option
 >    > If you prefer to dump the raw reads in fastq format with placeholder quality scores, leave the `Table name within cSRA object` field blank.
 >    >
@@ -449,7 +449,7 @@ A `Run_list` could also be imported after querying metadata in the cloud using  
 
 # Feedback for NCBI
 
-If you enjoyed this tutorial, please consider filling out this feedback link for NCBI: https://nlmenterprise.co1.qualtrics.com/jfe/form/SV_0jQct4IQOgfYYaq
+If you enjoyed this tutorial, please consider filling out this feedback link for NCBI: [https://nlmenterprise.co1.qualtrics.com/jfe/form/SV_0jQct4IQOgfYYaq](https://nlmenterprise.co1.qualtrics.com/jfe/form/SV_0jQct4IQOgfYYaq)
 
 Note: the survey will stay open until July 31, 2021 (it may say it expires June 30, but we will extend the deadline at the end of the month)
 
