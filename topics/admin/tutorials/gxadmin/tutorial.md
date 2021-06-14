@@ -119,6 +119,12 @@ With that, `gxadmin` should be installed! Now, test it out:
 >
 {: .hands_on}
 
+> ```bash
+> 1.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
+
 ## Configuration
 
 If `psql` runs without any additional arguments, and permits you to access your galaxy database then you do not need to do any more configuration for gxadmin.

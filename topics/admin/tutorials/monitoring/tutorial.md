@@ -141,6 +141,12 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >
 {: .hands_on}
 
+> ```bash
+> 1.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
+
 This will setup an InfluxDB server listening on port `:8086`. The service is currently unauthenticated but it is only listening on `localhost` so it is less of a concern. The service can be authenticated and SSL configured quite easily but that is outside the scope of this tutorial.
 
 You can access the InfluxDB service by running the command `influx`.
@@ -298,6 +304,12 @@ There are some nice examples of dashboards available from the public Galaxies, w
 {: .hands_on}
 
 This has now deployed Grafana on your domain under `/grafana/`, with the username and password you set. The datasource, from which Grafana obtains data, is preconfigured. The Grafana web application will now be available, but currently there is no data available to it. We will return to Grafana shortly in the tutorial to configure dashboards once data is present.
+
+> ```bash
+> 2.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
 
 ## Telegraf
 
@@ -525,6 +537,12 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 > 6. Run the `galaxy.yml` playbook
 >
 {: .hands_on}
+
+> ```bash
+> 3.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
 
 # Monitoring with Grafana
 

@@ -201,6 +201,12 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >
 {: .hands_on}
 
+> ```bash
+> 1.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
+
 
 TIaaS should be available now! The following routes on your server are now configured (we will run through these in the next section)
 
@@ -394,3 +400,9 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 {: .hands_on}
 
 Congratulations! you have now set up TIaaS on your Galaxy server.
+
+> ```bash
+> 2.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
