@@ -7,7 +7,7 @@ questions:
   - "How to customise Volcano plot output in R?"
 objectives:
   - "Learn how to use R to edit Volcano plot colours, points, labels and categories"
-time_estimation: "30m"
+time_estimation: "1H"
 key_points:
   - "R can be used to customise Volcano Plot output"
 contributors:
@@ -79,15 +79,15 @@ We will use one file for this analysis:
 >      https://zenodo.org/record/2529117/files/limma-voom_luminalpregnant-luminallactate
 >      ```
 >
-> 3. Check that the datatype is `tabular`.
->    If the datatype is not `tabular`, please change the file type to `tabular`.
+>      Check that the datatype is `tabular`.
+>      If the datatype is not `tabular`, please change the file type to `tabular`.
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
+>      {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 {: .hands_on}
 
 Click on the {% icon galaxy-eye %} (eye) icon and take a look at the `DE results` file. It should look like below, with 8 columns.
 
-![DE results file](../../images/rna-seq-viz-with-volcanoplot/DE_results.png "DE results")
+![DE results file](../../images/rna-seq-viz-with-volcanoplot/DE_results.png)
 
 ## Create volcano plot
 
@@ -144,7 +144,7 @@ We'll have a look at the script.
 
 ## Set up script
 
-The lines from "# Galaxy settings start" to "# Galaxy settings end" are settings needed to run the Volcano plot tool in Galaxy. We don't need them to run the script in R so we will delete them. If we don't delete the error handling line, the R session will crash if we encounter any error in the code. It's ok as it will resume again where we were but better to not have this happen. 
+The first few lines from `# Galaxy settings start` to `# Galaxy settings end` are settings needed to run the Volcano plot tool in Galaxy. We don't need them to run the script in R so we will delete them. If we don't delete the error handling line, the R session will crash if we encounter any error in the code. It's ok as it will resume again where we were but better to not have this happen. 
 
 > ### {% icon hands_on %} Hands-on: Delete unneeded lines
 >
@@ -160,18 +160,17 @@ The lines from "# Galaxy settings start" to "# Galaxy settings end" are settings
 >    loc <- Sys.setlocale("LC_MESSAGES", "en_US.UTF-8")
 >
 >    # Galaxy settings end -----------------------------------------------------
->
 >    ```
 >
 {: .hands_on}
 
 We'll check if we have the packages the script needs. We can see the packages used in the lines that have `library(package)` 
 
->    ```R
->    library(dplyr)
->    library(ggplot2)
->    library(ggrepel)
->    ```
+> ```R
+> library(dplyr)
+> library(ggplot2)
+> library(ggrepel)
+> ```
 
 When we launched Galaxy RStudio there was information in the Console letting us know that some packages are pre-installed. These packages include `ggplot2` and `dplyr`. In this Galaxy there is a yellow warning banner across the top of the script saying `Package ggrepel required is not installed. Install. Don't Show Again`. 
 So we just need to install the `ggrepel` package. 
@@ -180,9 +179,9 @@ So we just need to install the `ggrepel` package.
 >
 > Either click on "Install" in the yellow warning banner if present, or in the Console type
 >
->    ```R
->    install.packages('ggrepel')
->    ```
+> ```R
+> install.packages('ggrepel')
+> ```
 >
 {: .hands_on}
 
@@ -200,31 +199,34 @@ We need to change the path of the differentially expressed file in the script. T
 >    results <- read.delim('de-results.tsv', header = TRUE)
 >    ```
 >
-> 2. Highlight the code in the script and click Run
+> 2. Highlight the code in the script and run
+> 
+>    > ### {% icon tip %} Tip: Highlight all code and run shortcuts
+>    > - To highlight all code type <kbd>CTRL</kbd>+<kbd>a</kbd> (or <kbd>CMD</kbd>+<kbd>a</kbd>)
+>    > - To run type <kbd>CTRL</kbd>+<kbd>Enter</kbd> (or <kbd>CMD</kbd>+<kbd>Enter</kbd>)
+>    {: .tip}
 >
 {: .hands_on}
 
 You should see a file called `volcano_plot.pdf` appear in the Files pane. Click on it to open it and you should see a plot that looks the same as the one we generated with the Volcano Plot tool in Galaxy.
 
-We'll delete the lines below that save the plot to a PDF file. The plots will then be produced in the Plots pane and we can more easily see the different plots we're going to make, without having to keep opening the PDF file.
+We'll delete the lines below that save the plot to a PDF file. The plots will then be produced in the Plots pane so we can more easily see the different plots we're going to make, without having to keep opening the PDF file.
 
 > ### {% icon hands_on %} Hands-on: Produce plots in Plots pane
 >
 > 1. Delete the lines below that save the plot to a PDF file
 >
 >    ```R
->
 >    # Open PDF graphics device
 >    pdf("volcano_plot.pdf")
 >
->    (keep the lines in between as they produce the plot)
+>    # keep the lines in between as they produce the plot
 >
 >    # Close PDF graphics device
 >    dev.off()
->
 >    ```
 > 
-> 2. Highlight the code in the script and click Run
+> 2. Highlight the code in the script and run
 >
 {: .hands_on}
 
@@ -248,17 +250,16 @@ We'll demonstate how you can change the colours. We'll change the colour of the 
 >    colours <- setNames(c("purple", "grey", "orange"), c(down, notsig, up))
 >    ```
 >
-> 2. Highlight the code in the script and click Run
+> 2. Highlight the code in the script and run
 >
 >   ![Smaller points](../../images/rna-seq-viz-with-volcanoplot-r/volcano_points_colours.png)
 >
 {: .hands_on}
 
-You could try changing to other colours to see how it looks. 
 
 > ### {% icon tip %} Tip: R colours
 >
-> You can see the built-in R colours with their names in [this cheatsheet](https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf).
+> If you want to use other colours you can see the built-in R colours with their names in [this cheatsheet](https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf).
 >
 {: .tip}
 
@@ -279,7 +280,7 @@ We'll make the points a bit smaller. We'll change to 0.5.
 >    geom_point(aes(colour = sig), size = 0.5) +
 >    ```
 >
-> 2. Highlight the code in the script and click Run
+> 2. Highlight the code in the script and run
 >
 >   ![Smaller points](../../images/rna-seq-viz-with-volcanoplot-r/volcano_points_size.png)
 >
@@ -317,7 +318,7 @@ We'll make the font size of the labels a bit smaller.
 >    geom_text_repel(data = filter(results, labels != ""), aes(label = labels), size = 3,
 >    ```
 >
-> 2. Highlight the code in the script and click Run
+> 2. Highlight the code in the script and run
 >
 >   ![Smaller labels](../../images/rna-seq-viz-with-volcanoplot-r/volcano_labels_size.png)
 >
@@ -342,7 +343,7 @@ We'll make the font size of the labels a bit smaller.
 
 ## Change categories
 
-We can change the categories of points we're colouring in the plot. For example, instead of using separate categories for upregulated, downregulated we could just use a single category for significant. This time we'll categorise signficant genes as those with FDR < 0.01 and log2 fold change of 2 (fold change of 4).
+We can change the categories of points we're colouring in the plot. For example, instead of using separate categories for upregulated, downregulated we could just use a single category for significant. 
 
 > ### {% icon hands_on %} Hands-on: Change categories
 >
@@ -370,10 +371,8 @@ We can change the categories of points we're colouring in the plot. For example,
 >
 >    # to 
 >    results <- mutate(results, sig = case_when(
->                                fdr < 0.01 & abs(logfc) > 2 ~ signif, # abs() will give us absolute values i.e. all > 2 and < -2
+>                                fdr < 0.01 & abs(logfc) > 0.58 ~ signif, # abs() will give us absolute values i.e. all > 0.58 and < -0.58
 >                                TRUE ~ notsignif))
->
->
 >    ```
 >
 > 3. Specify the colours for signif and notsignif
@@ -386,7 +385,7 @@ We can change the categories of points we're colouring in the plot. For example,
 >    colours <- setNames(c("grey", "red"), c(notsignif, signif))
 >    ```
 >
-> 4. Highlight the code in the script and click Run
+> 4. runHighlight the code in the script and 
 >
 >   ![Categories changed](../../images/rna-seq-viz-with-volcanoplot-r/volcano_categories.png)
 >
@@ -399,16 +398,16 @@ We can change the categories of points we're colouring in the plot. For example,
 >
 >    > ### {% icon solution %} Solution
 >    >
->    > If you google `remove legend ggplot2` you may find a few ways it can be done. One way is
+>    > If you Google `remove legend ggplot2` you may find a few ways it can be done. One way is
 >    >
 >    > ```R
 >    > p <- p + theme(legend.position = "none")
->    >
 >    > ```
 >    >
 >    {: .solution}
 {: .question}
 
+You can save the edited script by clicking the {% icon galaxy-save %} icon at the top of the script in RStudio or through File > Save. You can download from Galaxy RStudio from the Files pane by ticking the box beside the script name, then More > Export > Download.
 
 > ### {% icon tip %} Tip: More plot options
 >
@@ -420,4 +419,4 @@ We can change the categories of points we're colouring in the plot. For example,
 # Conclusion
 {:.no_toc}
 
-In this tutorial we have seen how a volcano plot can be generated and customised using Galaxy and R. You can see more possible customisations in the help pages for the functions used, by typing in R `?geom_point` and `?geom_text_repel` or at the [ggrepel website](https://ggrepel.slowkow.com/index.html).
+In this tutorial we have seen how a volcano plot can be generated and customised using Galaxy and R. You can see some more possible customisations in the [RNA Seq Counts to Viz in R]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %}) tutorial and at the [ggrepel website](https://ggrepel.slowkow.com/index.html).
