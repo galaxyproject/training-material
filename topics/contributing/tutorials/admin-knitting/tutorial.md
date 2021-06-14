@@ -368,3 +368,137 @@ The above shows commands with outputs, the rest will be more abbreviated
 >
 > 9. Done!
 {: .hands_on}
+
+## I want to add a new commit
+
+> ### {% icon hands_on %} Hands-on: Make the change you want to see in the GAT
+>
+> 1. Add your commit where it belongs in the tutorial
+>
+>    <pre>
+>    {% raw %}
+>    { raw }
+>    ```diff
+>    --- a/requirements.yml
+>    +++ b/requirements.yml
+>    @@ -22,3 +22,7 @@
+>       version: 0.0.2
+>     - src: galaxyproject.slurm
+>       version: 0.1.3
+>    +- name: usegalaxy_eu.rabbitmq
+>    +  version: 0.1.0
+>    +- src: galaxyproject.pulsar
+>    +  version: 1.0.7
+>    { endraw }
+>    ```
+>    {: data-commit="Add requirements"}
+>    {% endraw %}
+>    </pre>
+>
+>    Use your imagination to pretend the raw/endraw tags are correct with the missing percent signs.
+>
+> 2. Now in the above diff we've written some --- and +++ and more metadata we don't really have. So: just make it up, the commit will fail to apply, and we'll go fix it. You can really write *anything* here you want, and the diff will fail which is what we want.
+>
+> 3. Now, go apply the commits
+>
+>    ```
+>    $ ./bin/knit-automated.sh export
+>    $ cd /tmp/git-gat/
+>    $ git am -3 *.patch # Resolve any conflicts
+>    ```
+>
+> 4. This will fail. Here's how to fix it:
+>
+>    1. Run `git am --show-current-patch` to see the above diff you've inserted (or the otherwise incorrect diff that's a downstream result of your new change).
+>    2. Make the correct change to the file on disk.
+>    3. `git add <path>`
+>    3. `git am --continue`
+>
+> 5. You'll probably have to do this quite a few more times, diffs have a habit of affecting downstream diffs (e.g. changing a version number or being included in the diff context.)
+>
+> 6. Once you've finished all of them, you'll just `./bin/knit-automated.sh import` and commit the resulting changes!
+{: .hands_on}
+
+The alternative to the above approach is
+
+1. Export
+2. git rebase and make the corresponding change in the history
+3. Let the rebase finish
+4. Insert a 'dummy' diff (raw/open code+diff/endraw/close code/data-commit tag) without any content and then run `import` which should insert it in the correct place.
+
+# Errors that can occur and how to fix them
+
+
+## sha1 information is lacking or useless
+
+This is because there's a mismatch in the commits you're trying to apply and what the merge commit is seeing. Usually you won't notice. **fix by rebasing, and roundtripping the commits.**
+
+```
+Applying: admin/pulsar/0012: Send bwa and bwa-mem to pulsar
+Tagging step-17
+Committing 18-gxadmin-commit-0000-add-requirement.patch
+18-gxadmin-commit-0002-add-the-gxadmin-role.patch
+Applying: admin/gxadmin/0000: Add requirement
+error: sha1 information is lacking or useless (requirements.yml).
+error: could not build fake ancestor
+Patch failed at 0001 admin/gxadmin/0000: Add requirement
+hint: Use 'git am --show-current-patch' to see the failed patch
+When you have resolved this problem, run "git am --continue".
+If you prefer to skip this patch, run "git am --skip" instead.
+To restore the original branch and stop patching, run "git am --abort".
+```
+
+Here you grumble at how picky it is.
+
+```
+$ git am --show-current-patch
+From: The Galaxy Training Network <galaxytrainingnetwork@gmail.com>
+Date: Mon, 15 Feb 2021 14:06:56 +0100
+Subject: admin/gxadmin/0000: Add requirement
+
+
+--- a/requirements.yml
++++ b/requirements.yml
+@@ -26,3 +26,5 @@
+   version: 0.1.0
+ - src: galaxyproject.pulsar
+   version: 1.0.6
++- src: usegalaxy_eu.gxadmin
++  version: 0.0.3
+--
+2.25.1
+```
+
+That looks right, doesn't it? But if we grep we'll see
+
+```
+$ ag -Q '1.0.6' topics/admin
+topics/admin/tutorials/gxadmin/tutorial.md
+55:>       version: 1.0.6
+
+topics/admin/tutorials/monitoring/tutorial.md
+80:>       version: 1.0.6
+
+topics/admin/tutorials/pulsar/tutorial.md
+149:>    +  version: 1.0.6
+```
+
+again right, but is it? No. Github is testing the merge commit. Rebase your commits, and now you'll see:
+
+
+```
+$ ag -Q '1.0.6' topics/admin
+topics/admin/tutorials/gxadmin/tutorial.md
+55:>       version: 1.0.6
+
+topics/admin/tutorials/monitoring/tutorial.md
+80:>       version: 1.0.6
+
+$ ag -Q '1.0.7' topics/admin
+topics/admin/tutorials/pulsar/tutorial.md
+149:>    +  version: 1.0.7
+```
+
+Aha, two different version. This is what breaks the hashes (hence the error message.)
+
+Roundtripping the commits and fixing up everywhere there was a single character difference in the diff context (UGH) will fix it.
