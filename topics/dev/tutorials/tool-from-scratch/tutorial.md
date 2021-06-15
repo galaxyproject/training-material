@@ -636,8 +636,8 @@ but not exposed to the user.
 > > >
 > > > ```xml
 > > > <inputs>
-> > >     <param argument="--forward" type="data" format="sam" label="First set of reads" help="This is usually the forward reads in your experiment." />
-> > >     <param argument="--reverse" type="data" format="sam" label="Second set of reads" help="This is usually the reverse reads in your experiment." />
+> > >     <param argument="--forward" type="data" format="qname_sorted.bam,sam" label="First set of reads" help="This is usually the forward reads in your experiment." />
+> > >     <param argument="--reverse" type="data" format="qname_sorted.bam,sam" label="Second set of reads" help="This is usually the reverse reads in your experiment." />
 > > >     <param argument="--quality" type="integer" value="20" min="0" label="Minimum mapping quality"/>
 > > > </inputs>
 > > > ```
