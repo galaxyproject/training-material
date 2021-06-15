@@ -297,7 +297,19 @@ After the recipe is complete, we can commit and push to our fork, so that the re
 >
 >    Git will give you a url for creating the pull request, which can be clicked to be taken to github.
 >
->    ![Git push](../../images/git_push.png "Expected output of the `git push` command")
+>    > ### {% icon code-out %} Output
+>    > ```bash
+>    > $ git push origin -u bellerophon_bioconda
+>    > Total 0 (delta 0), reused 0 (delta 0)
+>    > remote:
+>    > remote: Create a pull request for 'bellerophon_bioconda' on GitHub by visiting:
+>    > remote:      https://github.com/davebx/bioconda-recipes/pull/new/bellerophon_bioconda
+>    > remote:
+>    > To ssh://github.com/davebx/bioconda-recipes.git
+>    >  * [new branch]      bellerophon_bioconda -> bellerophon_bioconda
+>    > Branch bellerophon_bioconda set up to track remote branch bellerophon_bioconda from origin.
+>    > ```
+>    {: .code-out}
 >
 > Once on the github pull request page, we can write a short description of the recipe we want to merge, and click the button.
 >
