@@ -1,0 +1,2099 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Creating Galaxy tools from Conda Through Deployment</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta property="og:title" content="Galaxy Training: Creating Galaxy tools from Conda Through Deployment" />
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxyproject/dev'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/dev" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Development in Galaxy
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/dev/faqs/" title="Check our FAQs for the Development in Galaxy topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/tool-from-scratch/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/dev/tutorials/tool-from-scratch/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/tool-from-scratch/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/tool-from-scratch/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/tool-from-scratch/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/tool-from-scratch/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/tool-from-scratch/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fdev%2Ftutorials%2Ftool-from-scratch%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/tool-from-scratch/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                    -->
+
+                     <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Creating Galaxy tools from Conda Through Deployment",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/main/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Development in Galaxy",
+    "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+    "url": "https://training.galaxyproject.org//training-material/topics/dev/"
+  },
+  "courseCode": "dev / tool-from-scratch / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Creating Galaxy tools from Conda Through Deployment' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/dev/tutorials/tool-from-scratch/tutorial.html",
+  "timeRequired": "PT3H",
+  "description": "The questions this  addresses are:\n - How do you create a conda package used as a dependency in a Galaxy tool wrapper?\n - How do you create a Galaxy tool wrapper and all of its requirements?\n - How do you test a Galaxy tool wrapper after it's written?\n - How do you deploy a Galaxy tool wrapper?\n - How to do you make a Galaxy tool wrapper publicly available?\n\n\\nThe objectives are:\n - Learn how to make and deploy a conda package\n - Understand how to write a Galaxy tool wrapper\n - Be able to use a tool wrapper locally\n - Be able to test the tool wrapper\n - Learn how to add tools to the Galaxy toolshed and make them available to any user\n\n",
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Alex Ostrovsky"
+    },
+    {
+      "@type": "Person",
+      "name": "Dave B."
+    },
+    {
+      "@type": "Person",
+      "name": "Matthias Bernt"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Alex Ostrovsky"
+    },
+    {
+      "@type": "Person",
+      "name": "Dave B."
+    },
+    {
+      "@type": "Person",
+      "name": "Matthias Bernt"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Development in Galaxy",
+      "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+      "url": "https://training.galaxyproject.org//training-material/topics/dev/"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial topic-dev">
+        <h1 data-toc-skip>Creating Galaxy tools from Conda Through Deployment</h1>
+        
+
+        <div class="contributors-line">By: 
+
+ <a href="/training-material/hall-of-fame/astrovsky01/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/astrovsky01" alt="Alex Ostrovsky">Alex Ostrovsky</a> <a href="/training-material/hall-of-fame/davebx/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/davebx" alt="Dave B.">Dave B.</a> <a href="/training-material/hall-of-fame/bernt-matthias/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bernt-matthias" alt="Matthias Bernt">Matthias Bernt</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How do you create a conda package used as a dependency in a Galaxy tool wrapper?</p>
+</li>
+            
+            <li><p>How do you create a Galaxy tool wrapper and all of its requirements?</p>
+</li>
+            
+            <li><p>How do you test a Galaxy tool wrapper after it’s written?</p>
+</li>
+            
+            <li><p>How do you deploy a Galaxy tool wrapper?</p>
+</li>
+            
+            <li><p>How to do you make a Galaxy tool wrapper publicly available?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Learn how to make and deploy a conda package</p>
+</li>
+            
+            <li><p>Understand how to write a Galaxy tool wrapper</p>
+</li>
+            
+            <li><p>Be able to use a tool wrapper locally</p>
+</li>
+            
+            <li><p>Be able to test the tool wrapper</p>
+</li>
+            
+            <li><p>Learn how to add tools to the Galaxy toolshed and make them available to any user</p>
+</li>
+            
+            </ul>
+
+            
+
+            
+            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 3 hours</div>
+            
+
+            
+
+            
+            
+
+            
+            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/dev/slides/introduction.html" title="Topic Overview slides">
+                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Topic Overview slides
+                    </a></li>
+                
+
+                
+
+                
+
+                
+
+                
+                
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/dev/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 15, 2021 </div>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/2wW3yqEclko" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+
+<p>Tools wrappers allow any command line runnable code or programs to be run inside a <span class="notranslate">galaxy</span> environment.
+Although <span class="notranslate">Galaxy</span> has thousands of tools readily available, new software and packages will always be useful.
+This tutorial is designed to allow anyone to create, run, and deploy new tools in a <span class="notranslate">Galaxy</span> environment.</p>
+
+<p>This tutorial is intended to instruct the reader in the full process of integrating a tool into <span class="notranslate">Galaxy</span>.
+In three parts, it will cover the creation of a bioconda recipe for a new tool, writing a <span class="notranslate">Galaxy</span> tool
+wrapper, and finally the testing and deployment of this tool into both a local and public <span class="notranslate">Galaxy</span> environment.
+Although this will include specific tools, the training is generalizable.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#galaxy-tools-and-conda" id="markdown-toc-galaxy-tools-and-conda"><span class="notranslate">Galaxy</span> Tools and Conda</a>    <ol>
+      <li><a href="#writing-a-bioconda-recipe" id="markdown-toc-writing-a-bioconda-recipe">Writing a Bioconda Recipe</a></li>
+      <li><a href="#creating-a-pull-request" id="markdown-toc-creating-a-pull-request">Creating a Pull Request</a></li>
+      <li><a href="#deploying-a-conda-package" id="markdown-toc-deploying-a-conda-package">Deploying a Conda Package</a></li>
+    </ol>
+  </li>
+  <li><a href="#galaxy-tool-wrappers" id="markdown-toc-galaxy-tool-wrappers"><span class="notranslate">Galaxy</span> Tool Wrappers</a>    <ol>
+      <li><a href="#initializing-a-tool-wrapper" id="markdown-toc-initializing-a-tool-wrapper">Initializing a Tool Wrapper</a></li>
+      <li><a href="#galaxy-tool-wrappers-1" id="markdown-toc-galaxy-tool-wrappers-1"><span class="notranslate">Galaxy</span> Tool Wrappers</a></li>
+      <li><a href="#final-wrapper" id="markdown-toc-final-wrapper">Final wrapper</a></li>
+      <li><a href="#toolshed-file" id="markdown-toc-toolshed-file"><span class="notranslate">Toolshed</span> file</a></li>
+    </ol>
+  </li>
+  <li><a href="#testing-galaxy-tool-with-planemo" id="markdown-toc-testing-galaxy-tool-with-planemo">Testing <span class="notranslate">Galaxy</span> tool with <code class="language-plaintext highlighter-rouge">planemo</code></a>    <ol>
+      <li><a href="#installing-planemo" id="markdown-toc-installing-planemo">Installing <code class="language-plaintext highlighter-rouge">planemo</code></a></li>
+      <li><a href="#using-planemo-to-lint-tools" id="markdown-toc-using-planemo-to-lint-tools">Using <code class="language-plaintext highlighter-rouge">planemo</code> to lint tools</a></li>
+      <li><a href="#using-planemo-to-test-tools" id="markdown-toc-using-planemo-to-test-tools">Using <code class="language-plaintext highlighter-rouge">planemo</code> to test tools</a></li>
+      <li><a href="#using-planemo-to-serve-tools" id="markdown-toc-using-planemo-to-serve-tools">Using <code class="language-plaintext highlighter-rouge">planemo</code> to serve tools</a></li>
+    </ol>
+  </li>
+  <li><a href="#publishing-galaxy-tools" id="markdown-toc-publishing-galaxy-tools">Publishing <span class="notranslate">Galaxy</span> tools</a>    <ol>
+      <li><a href="#fork-and-clone-the-github-repository" id="markdown-toc-fork-and-clone-the-github-repository">Fork and clone the github repository</a></li>
+      <li><a href="#create-a-pull-request-for-a-new-tool" id="markdown-toc-create-a-pull-request-for-a-new-tool">Create a pull request for a new tool</a></li>
+      <li><a href="#the-iuc-style-continuous-integration-workflows" id="markdown-toc-the-iuc-style-continuous-integration-workflows">The IUC style continuous integration workflows</a></li>
+      <li><a href="#create-your-own-iuc-style-tool-repository" id="markdown-toc-create-your-own-iuc-style-tool-repository">Create your own IUC style tool repository</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="galaxy-tools-and-conda"><span class="notranslate">Galaxy</span> Tools and Conda</h1>
+
+<p><span class="notranslate">Galaxy</span> tools run within a conda environment, and are able to run any tool capable of running inside
+that type of environment. The wrapper includes a set of conda packages available from either bioconda
+or conda forge, and retrieves them on tool installation. Sometimes this may be a single package, as
+with many command line tools, other times, there may be several. The first part of this tutorial discusses
+the creation and deployment of these packages, making them available for <span class="notranslate">Galaxy</span> to retrieve.</p>
+
+<h2 id="writing-a-bioconda-recipe">Writing a Bioconda Recipe</h2>
+
+<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/UtNErGKw8SI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+
+<p>Bioconda is a repository of conda packages for software and tools relevant to the life sciences. Using conda
+packages ensures better reproducibility, since each conda package is usually immutable, an exception being
+if it is later discovered that the software in the package had always been non-functional and should be replaced.
+Recipes should always define the following 6 sections in the <code class="language-plaintext highlighter-rouge">meta.yaml</code> file:</p>
+
+<ul>
+  <li>package</li>
+  <li>source</li>
+  <li>build</li>
+  <li>requirements</li>
+  <li>test</li>
+  <li>about</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-writing-a-bioconda-recipe"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Writing a Bioconda Recipe</h3>
+
+  <ol>
+    <li>
+      <p>The first thing we should do is prepare our workspace. We create a branch in git, a conda environment with pip and
+conda-build preinstalled, and a folder for the meta.yaml file.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout <span class="nt">-b</span> bellerophon_bioconda
+conda create <span class="nt">-y</span> <span class="nt">--name</span> bellerophon_bioconda pip python conda-build
+conda activate bellerophon_bioconda
+<span class="nb">mkdir </span>recipes/bellerophon
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Next we determine the SHA-256 checksum of the source tarball.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget <span class="nt">-O</span> bellerophon.tar.gz https://github.com/davebx/bellerophon/archive/1.0.tar.gz
+<span class="nb">sha256sum </span>bellerophon.tar.gz <span class="c"># Copy the 64-character hexadecimal number that this outputs.</span>
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <h3 id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>036c5e23f53ed5b612525d3a32095acca073a9c8d2bf73883deb852c89f40dcf  bellerophon.tar.gz
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Using the above information, we create the meta.yaml file where we’ll then define the
+parameters that tell conda-build how to build this package, starting with variables for the name, version, and checksum.
+With these definitions, bioconda’s automatic version updater should recognize when a new version has been released and
+create a pull request to update the bioconda package.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim recipes/bellerophon/meta.yaml <span class="c"># vim can of course be replaced with any other editor.</span>
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>and set the following content:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span><span class="err">%</span> <span class="nv">set name = "bellerophon" %</span><span class="pi">}</span>
+<span class="pi">{</span><span class="err">%</span> <span class="nv">set version = "1.0" %</span><span class="pi">}</span>
+<span class="pi">{</span><span class="err">%</span> <span class="nv">set sha256 = "036c5e23f53ed5b612525d3a32095acca073a9c8d2bf73883deb852c89f40dcf" %</span><span class="pi">}</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Now we define the conda package metadata. This will be shown as bellerophon-1.0 in anaconda and <code class="language-plaintext highlighter-rouge">conda search</code>. We
+plug in the relevant variables from the top of the file, lowering the name since conda package names should always be
+lowercase.</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="na">package</span><span class="pi">:</span>
+   <span class="na">name</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv">name|lower</span> <span class="pi">}}</span>
+   <span class="na">version</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv">version</span> <span class="pi">}}</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Of course conda-build needs to know where to get the source code for bellerophon. Since the recipe we are creating is on
+github, updates can be automated with the variables we defined in the second step, while the SHA-256 checksum ensures
+that conda-build is getting the right source code every time.</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="na">source</span><span class="pi">:</span>
+   <span class="na">url</span><span class="pi">:</span> <span class="s">https://github.com/davebx/{{ name }}/archive/{{ version }}.tar.gz</span>
+   <span class="na">sha256</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv">sha256</span> <span class="pi">}}</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Next, we move on to the build metadata. Since this is the first version of the conda recipe, the build number is 0.
+We use the exte<span class="notranslate">rna</span>lly defined `` variable, which defines which python conda-build is using, to install it
+to the build prefix. The –no-deps and –ignore-installed flags are needed to ensure that conda-build only packages
+bellerophon itself. In this section, if necessary, we can also define patches that should be applied to the source code,
+with the <code class="language-plaintext highlighter-rouge">patches:</code> token under <code class="language-plaintext highlighter-rouge">build:</code>, and specify that the package should not be built for a given architecture with
+the <code class="language-plaintext highlighter-rouge">skip:</code> directive.</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">noarch</span><span class="pi">:</span> <span class="s">python</span>
+  <span class="na">number</span><span class="pi">:</span> <span class="m">0</span>
+  <span class="na">script</span><span class="pi">:</span>  <span class="s">-m pip install . --no-deps --ignore-installed -vv</span>
+  <span class="c1">#patches: /dev/null # Not used in this tutorial</span>
+  <span class="c1">#skip: True [osx] # Not used in this tutorial</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>After the build metadata has been defined, we need to specify dependencies for at least building and running, with
+build-time dependencies specified in the <code class="language-plaintext highlighter-rouge">host:</code> section, and runtime dependencies in the <code class="language-plaintext highlighter-rouge">run:</code> section. With
+bellerophon, we know that it’s a python package that uses pysam to operate on SAM/BAM files, so the only runtime
+dependencies we need are python and pysam.</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">requirements</span><span class="pi">:</span>
+  <span class="na">host</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">python</span>
+    <span class="pi">-</span> <span class="s">pip</span>
+  <span class="na">run</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">python</span>
+    <span class="pi">-</span> <span class="s">pysam</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>No recipe is complete without tests, and this recipe is no exception. Normally, it’s sufficient to confirm that the
+program actually runs, e.g. with a <code class="language-plaintext highlighter-rouge">--version</code> command. Some software also has a self-test flag or parameter, though
+bellerophon is not among them, and we could even define a test script that uses test data either from the recipe or from
+the source archive.</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">test</span><span class="pi">:</span>
+  <span class="na">commands</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">bellerophon --version</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Finally, we add information about the software, such as code’s is license type, the program’s
+homepage, and optionally the github use<span class="notranslate">rna</span>me of the person responsible for maintaining the recipe.</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">about</span><span class="pi">:</span>
+  <span class="na">home</span><span class="pi">:</span> <span class="s">https://github.com/davebx/bellerophon/</span>
+  <span class="na">license</span><span class="pi">:</span> <span class="s">MIT</span>
+  <span class="na">license_file</span><span class="pi">:</span> <span class="s">LICENSE</span>
+  <span class="na">summary</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Filter</span><span class="nv"> </span><span class="s"><span class="notranslate">reads</span></span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">span</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s"><span class="notranslate">mapping</span></span><span class="nv"> </span><span class="s">junction,</span><span class="nv"> </span><span class="s">retaining</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">5'-side."</span>
+  <span class="na">maintainer</span><span class="pi">:</span> <span class="s">davebx</span> <span class="c1"># Optional</span>
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+  <p>Putting all these parts together, we end up with a complete conda recipe for version 1.0 of bellerophon.</p>
+
+  <blockquote class="question">
+    <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+    <p>What does your final file look like?</p>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span><span class="err">%</span> <span class="nv">set name = "bellerophon" %</span><span class="pi">}</span>
+<span class="pi">{</span><span class="err">%</span> <span class="nv">set version = "1.0" %</span><span class="pi">}</span>
+<span class="pi">{</span><span class="err">%</span> <span class="nv">set sha256 = "036c5e23f53ed5b612525d3a32095acca073a9c8d2bf73883deb852c89f40dcf" %</span><span class="pi">}</span>
+
+<span class="na">package</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv">name|lower</span> <span class="pi">}}</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv">version</span> <span class="pi">}}</span>
+
+<span class="na">source</span><span class="pi">:</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s">https://github.com/davebx/{{ name }}/archive/{{ version }}.tar.gz</span>
+  <span class="na">sha256</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv">sha256</span> <span class="pi">}}</span>
+
+<span class="na">build</span><span class="pi">:</span>
+  <span class="na">noarch</span><span class="pi">:</span> <span class="s">python</span>
+  <span class="na">number</span><span class="pi">:</span> <span class="m">0</span>
+  <span class="na">script</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv">PYTHON</span> <span class="pi">}}</span> <span class="s">-m pip install . --no-deps --ignore-installed -vv</span>
+
+<span class="na">requirements</span><span class="pi">:</span>
+  <span class="na">host</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">python</span>
+    <span class="pi">-</span> <span class="s">pip</span>
+  <span class="na">run</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">python</span>
+    <span class="pi">-</span> <span class="s">pysam</span>
+
+<span class="na">test</span><span class="pi">:</span>
+  <span class="na">commands</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">bellerophon --version</span>
+
+<span class="na">about</span><span class="pi">:</span>
+  <span class="na">home</span><span class="pi">:</span> <span class="s">https://github.com/davebx/bellerophon/</span>
+  <span class="na">license</span><span class="pi">:</span> <span class="s">MIT</span>
+  <span class="na">license_file</span><span class="pi">:</span> <span class="s">LICENSE</span>
+  <span class="na">summary</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Filter</span><span class="nv"> </span><span class="s"><span class="notranslate">reads</span></span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">span</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s"><span class="notranslate">mapping</span></span><span class="nv"> </span><span class="s">junction,</span><span class="nv"> </span><span class="s">retaining</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">5'-side."</span>
+
+</code></pre></div>      </div>
+
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<h2 id="creating-a-pull-request">Creating a Pull Request</h2>
+
+<p>After the recipe is complete, we can commit and push to our fork, so that the recipe can eventually be integrated into bioconda.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-creating-the-pr"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating the PR</h3>
+
+  <ol>
+    <li>
+      <p>We start by making sure we’re on a branch, and that <code class="language-plaintext highlighter-rouge">recipes/bellerophon/meta.yaml</code> is the only modified file.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <h3 id="code-out-output-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>On branch bellerophon_bioconda
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+
+	recipes/bellerophon/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Add your recipes folder, commit, and push it.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add recipes/bellerophon
+git commit <span class="nt">-m</span> <span class="s1">'Add recipe for bellerophon 1.0'</span>
+git push origin <span class="nt">-u</span> bellerophon_bioconda
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>Git will give you a url for creating the pull request, which can be clicked to be taken to github.</p>
+
+      <blockquote class="code-out">
+        <h3 id="code-out-output-2"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git push origin <span class="nt">-u</span> bellerophon_bioconda
+Total 0 <span class="o">(</span>delta 0<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>
+remote:
+remote: Create a pull request <span class="k">for</span> <span class="s1">'bellerophon_bioconda'</span> on GitHub by visiting:
+remote:      https://github.com/davebx/bioconda-recipes/pull/new/bellerophon_bioconda
+remote:
+To ssh://github.com/davebx/bioconda-recipes.git
+ <span class="k">*</span> <span class="o">[</span>new branch]      bellerophon_bioconda -&gt; bellerophon_bioconda
+Branch bellerophon_bioconda <span class="nb">set </span>up to track remote branch bellerophon_bioconda from origin.
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+  <p>Once on the github pull request page, we can write a short description of the recipe we want to merge, and click the button.</p>
+
+  <figure id="figure-1"><img src="../../images/create_pr.png" alt="Github PR" /><figcaption><span class="figcaption-prefix">Figure 1:</span> An open pull request for the bellerophon conda recipe</figcaption></figure>
+</blockquote>
+
+<h2 id="deploying-a-conda-package">Deploying a Conda Package</h2>
+
+<p>Once our new recipe has been merged, installing the package should be fairly painless. <span class="notranslate">Galaxy</span>, if configured to do so,
+will automatically install any conda dependencies a tool asks for, whereas manual installation can be as easy as using
+the <code class="language-plaintext highlighter-rouge">conda create</code> command to install python, bellerophon, and pysam into a conda environment named <code class="language-plaintext highlighter-rouge">bellerophon</code>. The
+<code class="language-plaintext highlighter-rouge">-y</code> flag tells conda not to ask for confirmation before installing the software and its dependencies into the named
+environment.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda create <span class="nt">-y</span> <span class="nt">--name</span> bellerophon <span class="nv">bellerophon</span><span class="o">=</span>1.0 <span class="nt">-c</span> conda-forge <span class="nt">-c</span> bioconda
+</code></pre></div></div>
+
+<h1 id="galaxy-tool-wrappers"><span class="notranslate">Galaxy</span> Tool Wrappers</h1>
+
+<p><span class="notranslate">Galaxy</span> tool wrappers convert the available command line inputs and parameters of a given tool into a grapical
+user interface, then translate the user’s selections back into the command to be run. This section will focus
+on writing a wrapper. Although this section will cover the full process and many of the options available to
+anyone wrapping a tool, a more complete list is available in <a href="https://docs.galaxyproject.org/en/latest/dev/schema.html">the <span class="notranslate">Galaxy</span> tool docs</a>.</p>
+
+<h2 id="initializing-a-tool-wrapper">Initializing a Tool Wrapper</h2>
+
+<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/a6XZgEy6hlg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+
+<p>Initializing a tool wrapper to be run in <span class="notranslate">Galaxy</span> is simple</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on--hands-on-creating-a-tool-wrapper-skeleton"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span>  Hands-on: Creating a Tool Wrapper Skeleton</h3>
+  <ol>
+    <li>Go to the “tools” directory in your <span class="notranslate">Galaxy</span> instance.</li>
+    <li>Make a new directory for tools you will be wrapping.</li>
+    <li>Use <code class="language-plaintext highlighter-rouge">planemo</code> to initialize a new tool wrapper with basic formatting.
+      <ul>
+        <li>Here we will be using bellerophon, but the parameters can be set for any tool.</li>
+        <li>The tool ID is the inte<span class="notranslate">rna</span>l reference id for the tool, and may contain no spaces or capitalized letters</li>
+        <li>The tool name is the text that will be visible to the user.</li>
+      </ul>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cd </span><span class="notranslate">galaxy</span>/tools
+ <span class="nb">mkdir</span> <span class="nt">-p</span> myTools/bellerophon
+ <span class="nb">cd </span>myTools/bellerophon
+ planemo tool_init <span class="nt">--id</span> bellerophon <span class="nt">--name</span> bellerophon
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>You can now open the new xml file that has been generated to begin the wrapping. It should look something like this:</p>
+
+      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"bellerophon"</span> <span class="na">name=</span><span class="s">"bellerophon"</span> <span class="na">version=</span><span class="s">"0.1.0"</span> <span class="na">python_template_version=</span><span class="s">"3.5"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;requirements&gt;</span>
+    <span class="nt">&lt;/requirements&gt;</span>
+    <span class="nt">&lt;command</span> <span class="na">detect_errors=</span><span class="s">"exit_code"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[
+        TODO: Fill in command template.
+    ]]&gt;</span><span class="nt">&lt;/command&gt;</span>
+    <span class="nt">&lt;inputs&gt;</span>
+    <span class="nt">&lt;/inputs&gt;</span>
+    <span class="nt">&lt;outputs&gt;</span>
+    <span class="nt">&lt;/outputs&gt;</span>
+    <span class="nt">&lt;help&gt;</span><span class="cp">&lt;![CDATA[
+        TODO: Fill in help.
+    ]]&gt;</span><span class="nt">&lt;/help&gt;</span>
+<span class="nt">&lt;/tool&gt;</span>
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="galaxy-tool-wrappers-1"><span class="notranslate">Galaxy</span> Tool Wrappers</h2>
+
+<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/FdtD8vBLK5k" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+
+<p><span class="notranslate">Galaxy</span> tool wrapper xml files are made up of several sections:</p>
+
+<ul>
+  <li>Tool</li>
+  <li>Description</li>
+  <li>Requirements</li>
+  <li>Macros</li>
+  <li>Command</li>
+  <li>Inputs</li>
+  <li>Outputs</li>
+  <li>Tests</li>
+  <li>Citations</li>
+  <li>Help</li>
+</ul>
+
+<p>While many of those are present in the wrapper by default, others need to be added.</p>
+
+<h3 id="tool-section">Tool section</h3>
+
+<p>The tool section at the head of the file defines several key pieces of information for both the user and <span class="notranslate">Galaxy</span>.
+The tool ID and name are defined here as well as which minimum version of <span class="notranslate">Galaxy</span> is required to run it.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-defining-the-tool-section"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Defining the tool section:</h3>
+  <p>For this section, the following is necessary:</p>
+
+  <ul>
+    <li>Tool ID</li>
+    <li>Tool name</li>
+    <li>Version (Version of the <span class="notranslate">Galaxy</span> wrapper)
+      <ul>
+        <li>This is set as <code class="language-plaintext highlighter-rouge">'&lt;Conda wrapper version&gt;'+'<span class="notranslate">galaxy</span>&lt;<span class="notranslate">galaxy</span> wrapper version&gt;'</code></li>
+      </ul>
+    </li>
+    <li>Profile
+      <ul>
+        <li>This is the minimum version of <span class="notranslate">Galaxy</span> required to run the tool</li>
+      </ul>
+    </li>
+    <li>Unset python_template version</li>
+  </ul>
+
+  <p>when complete, the line should appear as follows:</p>
+
+  <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">ID=</span><span class="s">"bellerophon"</span> <span class="na">name=</span><span class="s">"bellerophon"</span> <span class="na">version=</span><span class="s">"@TOOL_VERSION@+<span class="notranslate">galaxy</span>@VERSION_SUFFIX@"</span> <span class="na">profile=</span><span class="s">"20.01"</span><span class="nt">&gt;</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<p>The @TOOL_VERSION@ and @VERSION_SUFFIX@ are what are referred to as “tokens”, and will be furter discussed in the “Macros” section.</p>
+
+<h3 id="description-section">Description section</h3>
+
+<p>This section adds help text to easily identify the tool. It is not intended as in-depth help, which should be in the <code class="language-plaintext highlighter-rouge">help</code> section.
+The description is simply presented as plaintext between the tags. Bellerophon’s would look like this:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-adding-a-description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Adding a description</h3>
+  <p>Add the following description to your tool</p>
+  <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;description&gt;</span>chimeric <span class="notranslate">reads</span> from Arima Genomics<span class="nt">&lt;/description&gt;</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Which would present the tool’s in the toolbar and at the top of the tool form as</p>
+
+<pre><code class="language-txt">bellerophon: chimeric <span class="notranslate">reads</span> from Arima Genomics
+</code></pre>
+
+<h3 id="macros-section">Macros section</h3>
+
+<p>The macros section serves two functions – to create meta-variables for inside both the xml text and the command text, called
+tokens, and xml sections that can be slotted in repeatedly. Although this tool will only use the tokens, the xml macros are very
+useful for tools which have multiple options/modes that reuse parameters.</p>
+
+<p>The @TOOL_VERSION@ and @VERSION_SUFFIX@ used in the Tool line are defined here. Each need their own ‘token’ line, resulting in</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-macros"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Macros</h3>
+  <p>Add the following macros section to your tool:</p>
+  <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;macros&gt;</span>
+    <span class="nt">&lt;token</span> <span class="na">name=</span><span class="s">"@TOOL_VERSION@"</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/token&gt;</span>
+    <span class="nt">&lt;token</span> <span class="na">name=</span><span class="s">"@VERSION_SUFFIX@"</span><span class="nt">&gt;</span>0<span class="nt">&lt;/token&gt;</span>
+<span class="nt">&lt;/macros&gt;</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<p>This will cause the version string at the beginning to read “1.0+<span class="notranslate">galaxy</span>0”, and set the conda package that is pulled to be bellerophon version 1.0.
+As versions are incremented, this will change. Any updates to the <span class="notranslate">galaxy</span> wrapper should iterate <code class="language-plaintext highlighter-rouge">@VERSION_SUFFIX@</code>, while any changes to the version
+of the requirement would change the value for <code class="language-plaintext highlighter-rouge">@TOOL_VERSION@</code> (and reset the <code class="language-plaintext highlighter-rouge">@VERSION_SUFFIX@</code> to 0).</p>
+
+<p>A basic example of the xml macros would look like this</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;macros&gt;</span>
+    <span class="nt">&lt;xml</span> <span class="na">name=</span><span class="s">"example_parameter"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"ex_1"</span> <span class="na">type=</span><span class="s">"integer"</span> <span class="na">label=</span><span class="s">"Example help text"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"ex_2"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">label=</span><span class="s">"Example help text"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/xml&gt;</span>
+<span class="nt">&lt;/macros&gt;</span>
+</code></pre></div></div>
+
+<p>One would then use that macro at any point in the xml it is relevant using the <code class="language-plaintext highlighter-rouge">&lt;expand/&gt;</code> tag like so:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;expand</span> <span class="na">macro=</span><span class="s">"example_parameter"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>This would add both of the <code class="language-plaintext highlighter-rouge">&lt;param/&gt;</code> tags at that location. Though inputs are used as an example macro here, any tag or group of tags can be made into a macro.</p>
+
+<h3 id="requirements-section">Requirements section</h3>
+
+<p>The requirement section is where conda packages and docker/singularity containers are set. As this is a very basic tutorial,
+the container requirements will not be discussed here.</p>
+
+<p>For each conda package added to the environment in which the tool will run, a <code class="language-plaintext highlighter-rouge">&lt;requirement/&gt;</code> tag needs to be included in the <code class="language-plaintext highlighter-rouge">&lt;requirements/&gt;</code> section.
+This specifies the</p>
+
+<ul>
+  <li>Bioconda or Conda Forge package ID
+    <ul>
+      <li>This is set as plain text betweeh the <code class="language-plaintext highlighter-rouge">&lt;requirement/&gt;</code> tags</li>
+    </ul>
+  </li>
+  <li>Specific Bioconda/Conda Forge package version
+    <ul>
+      <li>This does not have to be the most recent version</li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-adding-requirements"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Adding requirements</h3>
+  <p>In the case of bellerophon, which requires two dependencies, bellerophon and samtools, the requirements section appears like so. Add them to your tool XML.</p>
+
+  <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;requirements&gt;</span>
+        <span class="nt">&lt;requirement</span> <span class="na">type=</span><span class="s">"package"</span> <span class="na">version=</span><span class="s">"@TOOL_VERSION@"</span><span class="nt">&gt;</span>bellerophon<span class="nt">&lt;/requirement&gt;</span>
+        <span class="nt">&lt;requirement</span> <span class="na">type=</span><span class="s">"package"</span> <span class="na">version=</span><span class="s">"1.12"</span><span class="nt">&gt;</span>samtools<span class="nt">&lt;/requirement&gt;</span>
+  <span class="nt">&lt;/requirements&gt;</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<p>This uses the macro token for @TOOL_VERSION@ for the bioconda package version to retrieve the version number for bellerophon, while samtools’ version is set manually.</p>
+
+<blockquote class="question">
+  <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>If you wanted to add a requirement for the Seurat package of version 3.2, what would that look like?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;requirements&gt;</span>
+        <span class="nt">&lt;requirement</span> <span class="na">type=</span><span class="s">"package"</span> <span class="na">version=</span><span class="s">"3.2"</span><span class="nt">&gt;</span>seurat<span class="nt">&lt;/requirement&gt;</span>
+  <span class="nt">&lt;/requirements&gt;</span>
+</code></pre></div>    </div>
+
+  </blockquote>
+</blockquote>
+
+<h3 id="input-section">Input section</h3>
+
+<p>Although the next section in the tool script is actually be the command section, the input section will be discussed first, as it sets variables that are used in the command.
+The input section has three possible xml tags at the highest level – <code class="language-plaintext highlighter-rouge">&lt;conditional/&gt;</code>, ` &lt;section/&gt;<code class="language-plaintext highlighter-rouge">, and </code><param />`. Param will set any variable, conditional allows different available
+parameters based on previous selections, and section simply breaks up the GUI into multiple parts that can be viewed or hidden at the user’s discression.</p>
+
+<h4 id="param"><em>Param</em></h4>
+
+<p>The param tag sets the value of variables, and has several attributes associated with it:</p>
+
+<ul>
+  <li>Name
+    <ul>
+      <li>The name of the variable to be used in the command. Cannot include spaces.</li>
+    </ul>
+  </li>
+  <li>Argument
+    <ul>
+      <li>The actual flag being set in the tool. If the name and the flag is the same as what the name attribute would be, only Argument needs to be set.</li>
+    </ul>
+  </li>
+  <li>Label
+    <ul>
+      <li>The name of the parameter as shown to the user. Can include spaces.</li>
+    </ul>
+  </li>
+  <li>Type
+    <ul>
+      <li>Sets the variable type. Available options are:
+        <ul>
+          <li>Text
+            <ul>
+              <li>A string input with a built-in sanitizer.</li>
+            </ul>
+          </li>
+          <li>Integer
+            <ul>
+              <li>Also allows for a minimum and maximum value to be set.</li>
+            </ul>
+          </li>
+          <li>Float
+            <ul>
+              <li>Like integer, also allows for a minimum and maximum value to be set.</li>
+            </ul>
+          </li>
+          <li>Select
+            <ul>
+              <li>Allows the user to choose from a pre-set list of options.</li>
+            </ul>
+          </li>
+          <li>Boolean
+            <ul>
+              <li>Allows the user to select between two options, not simply True or False.</li>
+            </ul>
+          </li>
+          <li>Data
+            <ul>
+              <li>Input file, with required file format specified.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Help
+    <ul>
+      <li>Help text shown below the input for the parameter (optional).</li>
+    </ul>
+  </li>
+  <li>Optional
+    <ul>
+      <li>Boolean flag that allows the user to leave the parameter blank to either use the default value or to not use the parameter at all (optional).</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="conditional"><em>Conditional</em></h4>
+
+<p>Conditionals are used alongside param tags to change available options based on what has been selected and is used with select-type params. Writing
+conditionals, then, is a three-tag or four-tag process – the <code class="language-plaintext highlighter-rouge">&lt;conditional/&gt;</code> tag, the <code class="language-plaintext highlighter-rouge">&lt;param/&gt;</code> of select type, and the <code class="language-plaintext highlighter-rouge">&lt;when/&gt;</code> tag,
+used to specify the new paramaters available only on the selection of certain options. The param is of type “select”, a tag <code class="language-plaintext highlighter-rouge">&lt;option/&gt;</code> is used to specify
+each possible value. A very generic select-type conditional might look like this:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;conditional</span> <span class="na">name=</span><span class="s">"example_conditional"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"example_select"</span> <span class="na">label=</span><span class="s">"Example Select"</span> <span class="na">type=</span><span class="s">"select"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"ex1"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"ex2"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/param&gt;</span>
+    <span class="nt">&lt;when</span> <span class="na">value=</span><span class="s">"ex1"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"example_input"</span> <span class="na">label=</span><span class="s">"Example input"</span> <span class="na">type=</span><span class="s">"integer"</span> <span class="na">min=</span><span class="s">"0"</span> <span class="na">help=</span><span class="s">"Example help text"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/when&gt;</span>
+    <span class="nt">&lt;when</span> <span class="na">value=</span><span class="s">"ex2"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"example_input2"</span> <span class="na">label=</span><span class="s">"Example input 2"</span> <span class="na">type=</span><span class="s">"boolean"</span> <span class="na">truevalue=</span><span class="s">"--flag"</span> <span class="na">falsevalue=</span><span class="s">"--otherflag"</span> <span class="na">help=</span><span class="s">"Example help text"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/when&gt;</span>
+<span class="nt">&lt;/conditional&gt;</span>
+</code></pre></div></div>
+
+<h4 id="section"><em>Section</em></h4>
+
+<p>Section tags are useful for visually separating the parameters. They can make a long tool with many parameters more simple to navigate by breaking it into
+groups of parameters with similar functions. Alte<span class="notranslate">rna</span>tively, it can hide “advanced” or optional parameters, so that the user doesn’t have to deal with
+otherwise-irrelevant parameters if they don’t need to. There are only 4 attributes:</p>
+
+<ul>
+  <li>Name
+    <ul>
+      <li>Sets the inte<span class="notranslate">rna</span>l reference name for the section. Cannot contain spaces.</li>
+    </ul>
+  </li>
+  <li>Title
+    <ul>
+      <li>Sets the visible name of the section for the user. Can contain spaces.</li>
+    </ul>
+  </li>
+  <li>Expanded
+    <ul>
+      <li>A boolean value that sets the default starting position of the section. If false, the section will begin collapsed, and only the title will be visible by default.</li>
+    </ul>
+  </li>
+  <li>Help
+    <ul>
+      <li>Help text visible to the user that explains the purpose of the section.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="inputs-section-in-practice"><em>Inputs Section in Practice</em></h4>
+
+<p>The bellerophon tool’s help section <span class="notranslate">reads</span></p>
+
+<pre><code class="language-txt">optional arguments:
+  -h, --help            show this help message and exit
+  --forward FORWARD, -f FORWARD
+                        SAM/BAM/CRAM file with the first set of <span class="notranslate">reads</span>.
+  --reverse REVERSE, -r REVERSE
+                        SAM/BAM/CRAM file with the second set of <span class="notranslate">reads</span>.
+  --output OUTPUT, -o OUTPUT
+                        Output BAM file for filtered and paired <span class="notranslate">reads</span>.
+  --quality QUALITY, -q QUALITY
+                        Minimum <span class="notranslate">mapping</span> quality.
+  --th<span class="notranslate">reads</span> TH<span class="notranslate">READS</span>, -t TH<span class="notranslate">READS</span>
+                        Th<span class="notranslate">reads</span>.
+  --log-level {CRITICAL,ERROR,WARNING,INFO,DEBUG}, -l {CRITICAL,ERROR,WARNING,INFO,DEBUG}
+                        Log level.
+  --version             show program's version number and exit
+</code></pre>
+
+<p>This means that there are 6 total functional flags, –forward, –reverse, –output, –quality, –th<span class="notranslate">reads</span> and –log-level.
+Among these flags, two are file inputs, or ‘data’ type params, one is an integer type param, and three are parameters not
+necessary for the user to have direct access to. As <span class="notranslate">Galaxy</span> uses specific file names or patterns to find output files, the
+output file names need to be specific to the wrapper, not the actual running step. Since the user doesn’t know the capability
+of the resources on which the tool will be running, they should not be given access to the th<span class="notranslate">reads</span> flag. And since the log level
+goes to the stderr instead of an output file, this can also be skipped. All three of these flags can be coded in the command,
+but not exposed to the user.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-adding-parameters-to-your-tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Adding parameters to your tool</h3>
+  <ol>
+    <li>Using information in the above sections, add parameters for the forward, reverse, and quality flags to your tool xml.</li>
+  </ol>
+
+  <blockquote class="question">
+    <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+    <p>What does your <code class="language-plaintext highlighter-rouge">&lt;inputs/&gt;</code> section look like?</p>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <p>To include all of the necessary parameters, then, the inputs section would appear like this</p>
+
+      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;inputs&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">argument=</span><span class="s">"--forward"</span> <span class="na">type=</span><span class="s">"data"</span> <span class="na">format=</span><span class="s">"qname_sorted.bam,sam"</span> <span class="na">label=</span><span class="s">"First set of <span class="notranslate">reads</span>"</span> <span class="na">help=</span><span class="s">"This is usually the forward <span class="notranslate">reads</span> in your experiment."</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">argument=</span><span class="s">"--reverse"</span> <span class="na">type=</span><span class="s">"data"</span> <span class="na">format=</span><span class="s">"qname_sorted.bam,sam"</span> <span class="na">label=</span><span class="s">"Second set of <span class="notranslate">reads</span>"</span> <span class="na">help=</span><span class="s">"This is usually the reverse <span class="notranslate">reads</span> in your experiment."</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">argument=</span><span class="s">"--quality"</span> <span class="na">type=</span><span class="s">"integer"</span> <span class="na">value=</span><span class="s">"20"</span> <span class="na">min=</span><span class="s">"0"</span> <span class="na">label=</span><span class="s">"Minimum <span class="notranslate">mapping</span> quality"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/inputs&gt;</span>
+</code></pre></div>      </div>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<p>This makes the variables “forward”, “reverse” and “quality” available in the command section and lets the users set them in the <span class="notranslate">Galaxy</span> interface. The “min” attribute prevents
+a user from inputting a value below a specified number. Here, the quality flag cannot be set below 0.</p>
+
+<h3 id="outputs-section">Outputs section</h3>
+
+<p>The outputs section defines the files that <span class="notranslate">Galaxy</span> makes available in the history after running a tool using the <code class="language-plaintext highlighter-rouge">&lt;data/&gt;</code> and
+<code class="language-plaintext highlighter-rouge">&lt;collection/&gt;</code> tags. In general, it tells <span class="notranslate">Galaxy</span> to look for a specific file after the job completes, and return it to the user.
+It also defines the format of that file and the name shown to the user in the history.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-adding-your-outputs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Adding your outputs</h3>
+  <p>As Bellerophon has a single output file, add the following outputs section to your tool:</p>
+
+  <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;outputs&gt;</span>
+    <span class="nt">&lt;data</span> <span class="na">name=</span><span class="s">"outfile"</span> <span class="na">label=</span><span class="s">"${tool.name} on ${on_string}"</span> <span class="na">format=</span><span class="s">"bam"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/outputs&gt;</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<p>This generates a history item called “bellerophon on <code class="language-plaintext highlighter-rouge">&lt;input file name&gt;</code>”, as the ${tool.name} and ${on_string} are reserved values
+for the tool’s label and the input file labels.</p>
+
+<p>As the name is hard-set using the output flag, and is output into the working directoy, the name attribute can be used for the file
+search. Alte<span class="notranslate">rna</span>tively, the attribute “from_work_dir” allows a lower directory to be specified.</p>
+
+<h4 id="filtering-the-output"><em>Filtering the output</em></h4>
+
+<p>In the case where a certain output only appears when certain parameters are set, the <code class="language-plaintext highlighter-rouge">&lt;filter/&gt;</code> flag can help. Though not used in this
+tool, a user might have a boolean or select that generate new output files. In this case, the data tag would appear like this</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="nt">&lt;data</span> <span class="na">format=</span><span class="s">"bam"</span> <span class="na">label=</span><span class="s">"example"</span> <span class="na">name=</span><span class="s">"output_bam"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;filter&gt;</span>options['selection_mode'] == 'advanced' and options['bam_output']<span class="nt">&lt;/filter&gt;</span>
+      <span class="nt">&lt;/data&gt;</span>
+</code></pre></div></div>
+
+<p>Meaning that file only appears in the history if the user specified the “advanced” mode of the tool, and requested a bam output file.</p>
+
+<h4 id="output-collections"><em>Output collections</em></h4>
+
+<p>Collections are also useful for groups of output files, or simply data meant to be kept together like paired-end files.
+In this case, the data to be grouped in the history like this.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;collection</span> <span class="na">name=</span><span class="s">"paired_output"</span> <span class="na">type=</span><span class="s">"paired"</span> <span class="na">label=</span><span class="s">"Split Pair"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;data</span> <span class="na">name=</span><span class="s">"forward"</span> <span class="na">format=</span><span class="s">"txt"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;data</span> <span class="na">name=</span><span class="s">"reverse"</span> <span class="na">format_source=</span><span class="s">"txt"</span> <span class="na">from_work_dir=</span><span class="s">"reverse.txt"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/collection&gt;</span>
+</code></pre></div></div>
+
+<p>Though paired-end data is used here, the type can also be ‘list’ or ‘paired list’, specifying a larger group of data, or a group of
+paired-end data respectively.</p>
+
+<h4 id="discover-datasets"><em>Discover datasets</em></h4>
+
+<p>Datasets can also be found automatically, in the case where the number of output files is unknown.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;data</span> <span class="na">format=</span><span class="s">"tsv"</span> <span class="na">name=</span><span class="s">"sample"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;discover_datasets</span> <span class="na">pattern=</span><span class="s">"__name_and_ext__"</span> <span class="na">directory=</span><span class="s">"outputs"</span><span class="nt">/&gt;</span>&gt;
+<span class="nt">&lt;/data&gt;</span>
+</code></pre></div></div>
+
+<p>This, for example finds a tabuar dataset in a directory named “outputs” that follows the naming convention of “<code class="language-plaintext highlighter-rouge">&lt;filename&gt;.&lt;extension&gt;</code>”,
+where the extension is .tsv. This method is also able to be used in a collection, where the same function would find all datasets that
+fit the pattern in the specified directory.</p>
+
+<h3 id="command-section">Command section</h3>
+
+<p>Returning to before the inputs section, the command section is written in bash with a built-in python interpreter called Cheetah. Because of that, the command section is, for the most part,
+a list of bash commands connected by ‘&amp;&amp;’, with the conda packages listed in the requirement available to run.</p>
+
+<h4 id="cheetah-commands"><em>Cheetah commands</em></h4>
+
+<p>Cheetah allows loops, logic gates, and assignments of variables in a command section. Creation of a logic gate is as simple as this</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#if ${parameter} == "value":</span>
+  &lt;<span class="nb">command</span><span class="o">&gt;</span>
+<span class="c">#end if</span>
+</code></pre></div></div>
+
+<p>For an “else”:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#if ${parameter} == "value":</span>
+    &lt;<span class="nb">command</span><span class="o">&gt;</span>
+<span class="c">#else:</span>
+    &lt;command_2&gt;
+<span class="c">#end if</span>
+</code></pre></div></div>
+
+<p>For an “else if”:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#if ${parameter} == "value":</span>
+    &lt;<span class="nb">command</span><span class="o">&gt;</span>
+<span class="c">#else if ${parameter} == "other value":</span>
+    &lt;command_2&gt;
+<span class="c">#else:</span>
+    &lt;command_3&gt;
+<span class="c">#end if</span>
+</code></pre></div></div>
+
+<p>Similarly, loops would appear as</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#for value in ${param}</span>
+    &lt;Loop commands&gt;
+<span class="c">#end for</span>
+</code></pre></div></div>
+
+<p>For all open loops and gates, an “#end” must be used to close.</p>
+
+<p>Finally, to define a variable within the command section, use</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#set $variable = value</span>
+</code></pre></div></div>
+
+<h4 id="using-other-scripts"><em>Using other scripts</em></h4>
+
+<p>In the case where languages other than bash are necessary, such as R or python, by listing the languages in the requirements,
+they can be called in this section. Any scripts present in the tools folder can also be called.
+For example</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python helloworld.py <span class="o">&amp;&amp;</span>
+<span class="nb">echo</span> <span class="k">${</span><span class="nv">variable</span><span class="k">}</span>
+</code></pre></div></div>
+
+<p>runs the helloworld.py script present in the same folder as the tool xml, then echoes the value of the param named “variable” from the input section.</p>
+
+<h4 id="in-practice"><em>In practice</em></h4>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-writing-the-command-block"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Writing the command block</h3>
+
+  <p>The bellerophon command section would, based on the variables set previously, would be as follows. Add it to your tool XML.</p>
+
+  <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;command</span> <span class="na">detect_errors=</span><span class="s">"exit_code"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[
+        #if $forward.is_of_type("sam"):
+            #set $forward_input = 'forward_input.sam'
+            ln -s '${forward}' '$forward_input' &amp;&amp;
+        #else:
+            #set $forward_input = 'forward_input.bam'
+            ln -s '${forward}' '$forward_input' &amp;&amp;
+        #end if
+        #if $reverse.is_of_type("sam"):
+            #set $reverse_input = 'reverse_input.sam'
+            ln -s '${reverse}' '$reverse_input' &amp;&amp;
+        #else:
+            #set $reverse_input = 'reverse_input.bam'
+            ln -s '${reverse}' '$reverse_input' &amp;&amp;
+        #end if
+        bellerophon
+        --forward $forward_input
+        --reverse $reverse_input
+        --quality $quality
+        --output 'merged_out.bam'
+        &amp;&amp; samtools sort --no-PG -O BAM -o '$outfile' -@ \${<span class="notranslate">GALAXY</span>_SLOTS:-1} merged_out.bam
+        ]]&gt;</span>
+    <span class="nt">&lt;/command&gt;</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<p>inputs the variables set in the inputs and output sections to generate a full command to be run inside the <span class="notranslate">Galaxy</span> environment. When inside a conditional or
+section, the hierarchy is preserved using a period. For example</p>
+
+<pre><code class="language-txt">'$example.forward'
+</code></pre>
+
+<p>would look for the variable ‘forward’ within the section or conditional named ‘example’.</p>
+
+<p>This command will run, assuming two sam input files, as:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ln</span> <span class="nt">-s</span> <span class="sb">`</span>&lt;forward input sam file&gt;<span class="sb">`</span> <span class="s1">'$forward_input'</span> <span class="o">&amp;&amp;</span>
+<span class="nb">ln</span> <span class="nt">-s</span> <span class="sb">`</span>&lt;reverse input sam file&gt;<span class="sb">`</span> <span class="s1">'$reverse_input'</span> <span class="o">&amp;&amp;</span>
+bellerophon <span class="nt">--forward</span> <span class="nv">$forward_input</span> <span class="nt">--reverse</span> <span class="nv">$reverse_input</span> <span class="nt">--quality</span> <span class="nv">$quality</span> <span class="nt">--output</span> <span class="s1">'merged_out.bam'</span>
+<span class="o">&amp;&amp;</span> samtools <span class="nb">sort</span> <span class="nt">--no-PG</span> <span class="nt">-O</span> BAM <span class="nt">-o</span> <span class="sb">`</span>&lt;outfile name generated by <span class="notranslate">Galaxy</span>&gt;<span class="sb">`</span> -@ <span class="sb">`</span>&lt;number of th<span class="notranslate">reads</span> allocated&gt;<span class="sb">`</span> merged_out.bam
+</code></pre></div></div>
+
+<h3 id="test-section">Test section</h3>
+
+<p>The test section is an easy way to ensure your tool wrapper functions as intended. It runs the tool and compares the output <span class="notranslate">Galaxy</span> returns against a
+specified output. The output can be a specific file, a check against the stdout/err, or simply a search to see if the output contains specific
+text. There can be any number of tests for a given tool, and it is preferred that all parameters are tested at some point in these tests.</p>
+
+<p>When writing a test, the <code class="language-plaintext highlighter-rouge">&lt;param&gt;</code> tag functions slightly differently. It finds the variable with the same name, and then provides a value to be input
+for the test. These params can also be placed inside a conditional, simulating the same conditional present in the inputs section.</p>
+
+<p>As all parameters in bellerophon are accessible at once, and do not contradict one another, only one test is necessary.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-adding-a-test"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Adding a test</h3>
+  <p>Add the following test case to your tool:</p>
+  <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;tests&gt;</span>
+        <span class="nt">&lt;test</span> <span class="na">expect_num_outputs=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"forward"</span> <span class="na">value=</span><span class="s">"forward.bam"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"reverse"</span> <span class="na">value=</span><span class="s">"reverse.bam"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;output</span> <span class="na">name=</span><span class="s">"outfile"</span> <span class="na">file=</span><span class="s">"merged-out.bam"</span> <span class="na">ftype=</span><span class="s">"bam"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/test&gt;</span>
+    <span class="nt">&lt;/tests&gt;</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<p>This runs the tool with the files forward.bam and reverse.bam from a folder named test-data in the tool’s directory. Since no quality parameter was specified, it uses the default of 20. The parameter can also be manually set with the same param tag and value attribute, just inputting an applicable value such as “21”. It then
+compares the defined output called “outfile” from the outputs section against a file called “merged-out.bam” in the same test-data directory. It also
+double checks that <span class="notranslate">Galaxy</span> only finds one output to put in the history with the “expect_num_outputs” attribute. This is very useful for tests on tools
+that have filtered outputs or that use ‘discover_datasets’.</p>
+
+<h4 id="collections-and-sections-in-tests"><em>Collections and sections in tests</em></h4>
+
+<p>Though not used in this example, the sections and conditionals from the input section are used in tests as well. For example</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;conditional</span> <span class="na">name=</span><span class="s">"example_conditional"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"select_example"</span> <span class="na">value=</span><span class="s">"first"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"when_first"</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/conditional&gt;</span>
+</code></pre></div></div>
+
+<p>simulates the selection of value 1 inside of a conditional when the initial select parameter is set to “first”.</p>
+
+<h3 id="help-section">Help section</h3>
+
+<p>This is help text to be shown at the bottom of the tool form. It uses standard markdown format.</p>
+
+<h3 id="citations-section">Citations section</h3>
+
+<p>The citation section gives proper credit to the tool’s writers. Here, using either DOI format or a bibtex citation, the tool form will automatically
+link out to the relevant papers/repositories. The format in this section is simple, and as bellerophon was written by a <span class="notranslate">Galaxy</span> team member as a translation
+of an Arima Genomics tool in association with the Vertebrate Genomes project, that is the paper that will be cited.</p>
+
+<p>There are two ways to write this section</p>
+
+<p>DOI:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;citations&gt;</span>
+    <span class="nt">&lt;citation</span> <span class="na">type=</span><span class="s">"doi"</span><span class="nt">&gt;</span>10.1038/s41586-021-03451-0<span class="nt">&lt;/citation&gt;</span>
+<span class="nt">&lt;/citations&gt;</span>
+</code></pre></div></div>
+
+<p>and Bibtex:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;citations&gt;</span>
+    <span class="nt">&lt;citation</span> <span class="na">type=</span><span class="s">"bibtex"</span><span class="nt">&gt;</span>@article{Butler2018,
+    abstract = {A new computational approach enables integrative analysis of disparate <span class="notranslate">single-cell</span> <span class="notranslate">RNA</span>–sequencing data sets by identifying shared patterns of variation between cell subpopulations.},
+    author = {Butler, Andrew and Hoffman, Paul and Smibert, Peter and Papalexi, Efthymia and Satija, Rahul},
+    doi = {10.1038/nbt.4096},
+    issn = {1546-1696},
+    jou<span class="notranslate">rna</span>l = {Nature Biotechnology},
+    number = {5},
+    pages = {411--420},
+    title = {{Integrating <span class="notranslate">single-cell</span> transcriptomic data across different conditions, technologies, and species}},
+    url = {https://doi.org/10.1038/nbt.4096},
+    volume = {36},
+    year = {2018}
+    }<span class="nt">&lt;/citation&gt;</span>
+<span class="nt">&lt;/citations&gt;</span>
+</code></pre></div></div>
+
+<p>Multiple citations can be added by using additional citation tags.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-adding-a-citation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Adding a citation</h3>
+  <p>Add the citation above using either method (but not both!)</p>
+</blockquote>
+
+<h2 id="final-wrapper">Final wrapper</h2>
+
+<p>With all sections complete, the final wrapper for bellerophon can be found <a href="https://github.com/galaxyproject/tools-iuc/blob/master/tools/bellerophon/bellerophon.xml">here</a>.</p>
+
+<h2 id="toolshed-file"><span class="notranslate">Toolshed</span> file</h2>
+
+<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/WFSQE8bq5qI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+
+<p>The .shed.yml file is placed in the same directory as the tool’s xml file and saves metadata for the tool. It enables
+<span class="notranslate">toolshed</span> organization and search by using tags and descriptions.</p>
+
+<p>It is made up of the following sections:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>YAML key</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td><code class="language-plaintext highlighter-rouge">name</code></td>
+      <td>the tool’s name</td>
+    </tr>
+    <tr>
+      <td>Owner</td>
+      <td><code class="language-plaintext highlighter-rouge">owner</code></td>
+      <td>use<span class="notranslate">rna</span>me of the person who wrapped the tool to be represented in the <span class="notranslate">Galaxy</span> <span class="notranslate">Toolshed</span>. If submitted through the Intergalactic Utilities Comission (IUC), can be set to <code class="language-plaintext highlighter-rouge">iuc</code>.</td>
+    </tr>
+    <tr>
+      <td>Description</td>
+      <td><code class="language-plaintext highlighter-rouge">description</code></td>
+      <td>short help text for the tool/package.</td>
+    </tr>
+    <tr>
+      <td>Homepage URL</td>
+      <td><code class="language-plaintext highlighter-rouge">homepage_url</code></td>
+      <td>URL of the tool’s website. Can also just be the Github repository for the tool.</td>
+    </tr>
+    <tr>
+      <td>Long Description</td>
+      <td><code class="language-plaintext highlighter-rouge">long_description</code></td>
+      <td>longer, more in-depth help section.</td>
+    </tr>
+    <tr>
+      <td>Remote Reposity URL</td>
+      <td><code class="language-plaintext highlighter-rouge">remote_repository_url</code></td>
+      <td>link to the repository for the tool’s files.</td>
+    </tr>
+    <tr>
+      <td>Type</td>
+      <td><code class="language-plaintext highlighter-rouge">type</code></td>
+      <td>kind of files in the directory. Can be set as unrestricted (tool), tool_dependency_definition, or repository_suite_definition.</td>
+    </tr>
+    <tr>
+      <td>Categories</td>
+      <td><code class="language-plaintext highlighter-rouge">categories</code></td>
+      <td><span class="notranslate">toolshed</span> categories that are relevant to the tool or package.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>For Bellerophon, the .shed.yml file would be:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">bellerophon</span>
+<span class="na">owner</span><span class="pi">:</span> <span class="s">iuc</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s">Filter mapped <span class="notranslate">reads</span> where the <span class="notranslate">mapping</span> spans a junction, retaining the 5-prime read.</span>
+<span class="na">homepage_url</span><span class="pi">:</span> <span class="s">https://github.com/davebx/bellerophon</span>
+<span class="na">long_description</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">Filter mapped <span class="notranslate">reads</span> where the <span class="notranslate">mapping</span> spans a junction, retaining the 5-prime read.</span>
+<span class="na">remote_repository_url</span><span class="pi">:</span> <span class="s">https://github.com/davebx/bellerophon</span>
+<span class="na">categories</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">Sequence Analysis</span>
+</code></pre></div></div>
+
+<p>In the case where the directory represents a group of tools or a ‘suite’, there are additional overarching sections into which the above tags fall:</p>
+
+<ul>
+  <li>Auto Tool Repositories</li>
+  <li>Suite</li>
+</ul>
+
+<p>For more information on how to write automatic tool suites, visit the <a href="https://galaxy-iuc-standards.readthedocs.io/en/latest/best_practices/shed_yml.html"><span class="notranslate">Galaxy</span> docs</a>.</p>
+
+<h1 id="testing-galaxy-tool-with-planemo">Testing <span class="notranslate">Galaxy</span> tool with <code class="language-plaintext highlighter-rouge">planemo</code></h1>
+
+<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/19mKUENz_i0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+
+<p><code class="language-plaintext highlighter-rouge">planemo</code> is a command line utility that helps developing <span class="notranslate">Galaxy</span> tools.
+Among many other tasks it can:</p>
+
+<ol>
+  <li>Lint the tool source errors and conformance to best practices.</li>
+  <li>Test tools, i.e. executing the tool with the tests described in the tool’s test section.</li>
+  <li>Serve tools, i.e. crate an ad-hoc <span class="notranslate">Galaxy</span> server running the tool.</li>
+</ol>
+
+<p>For more information on <code class="language-plaintext highlighter-rouge">planemo</code> see its extensive <a href="https://planemo.readthedocs.io/">documentation</a>.</p>
+
+<p>In this part of the tutorial we will start with installing <code class="language-plaintext highlighter-rouge">planemo</code> and then
+see it in action linting, testing, and serving the tool.</p>
+
+<h2 id="installing-planemo">Installing <code class="language-plaintext highlighter-rouge">planemo</code></h2>
+
+<p><code class="language-plaintext highlighter-rouge">planemo</code> is available via the python package manager <code class="language-plaintext highlighter-rouge">pip</code> and <code class="language-plaintext highlighter-rouge">conda</code>.
+If you not have conda installed we suggest to use <code class="language-plaintext highlighter-rouge">pip</code> for installing <code class="language-plaintext highlighter-rouge">planemo</code>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-installing-planemo-via-pip"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing <code class="language-plaintext highlighter-rouge">planemo</code> via pip</h3>
+
+  <p>It is advised to install <code class="language-plaintext highlighter-rouge">planemo</code> in a virtual environment (step 1-2).</p>
+
+  <ol>
+    <li>Create a virtual environment: <code class="language-plaintext highlighter-rouge">virtualenv -p python3 ~/.venv/</code>. Here <code class="language-plaintext highlighter-rouge">~/.venv/</code> is the path where the virtual environment should be crated and you may adapt the path to your needs. With <code class="language-plaintext highlighter-rouge">-p python3</code> we make sure that a <code class="language-plaintext highlighter-rouge">python</code> intepreter version 3 is used.</li>
+    <li>Activate the virtual environment: <code class="language-plaintext highlighter-rouge">. ~/.venv/bin/activate</code></li>
+    <li>Install <code class="language-plaintext highlighter-rouge">planemo</code> <code class="language-plaintext highlighter-rouge">pip install planemo</code></li>
+  </ol>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-installing-planemo-via-conda"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing <code class="language-plaintext highlighter-rouge">planemo</code> via conda</h3>
+
+  <ol>
+    <li>Install <a href="https://conda.io/projects/conda/en/latest/user-guide/install/index.html">miniconda</a></li>
+    <li>Create a conda environment with <code class="language-plaintext highlighter-rouge">planemo</code> installed <code class="language-plaintext highlighter-rouge">conda create -c conda-forge -c bioconda -n planemo planemo</code></li>
+    <li>Activate the conda environment <code class="language-plaintext highlighter-rouge">conda activate planemo</code></li>
+  </ol>
+</blockquote>
+
+<p>Note that for using <code class="language-plaintext highlighter-rouge">planemo</code>from a new shell you will need to activate the python/conda environment again.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-testing-planemo-and-getting-help"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Testing <code class="language-plaintext highlighter-rouge">planemo</code> and getting help</h3>
+
+  <ol>
+    <li>
+      <p>In order to test if the installation worked execute</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>planemo <span class="nt">--version</span>
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <h3 id="code-out-output-3"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+        <p>This should output the version of <code class="language-plaintext highlighter-rouge">planemo</code>, e.g.</p>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>planemo, version 0.74.3
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li><code class="language-plaintext highlighter-rouge">planemo --help</code> will show the available commands with a short desctiption (lint, test, and serve will be part of this tutorial)</li>
+    <li><code class="language-plaintext highlighter-rouge">planemo SUBCOMMAND --help</code> will show the usage information for the corresponding subcommand. Try to obtain the information for the <code class="language-plaintext highlighter-rouge">lint</code> subcommand.</li>
+  </ol>
+</blockquote>
+
+<h2 id="using-planemo-to-lint-tools">Using <code class="language-plaintext highlighter-rouge">planemo</code> to lint tools</h2>
+
+<p>When linting a <span class="notranslate">Galaxy</span> tool <code class="language-plaintext highlighter-rouge">planemo</code> checks the sources for common errors and violations of best practice rules. Examples are:</p>
+
+<ul>
+  <li>Presence to “TODO” in the help section</li>
+  <li>Absence of tests or citations</li>
+  <li>Missing when clauses in conditionals or the use of a boolean parameter as the selector in a conditional</li>
+</ul>
+
+<p>If <code class="language-plaintext highlighter-rouge">planemo</code> finds a problem it outputs warnings or errors depending on the severity of the problem.
+By default <code class="language-plaintext highlighter-rouge">planemo</code> will fail if any warning or error is found, i.e. return a non-zero exit code.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-lint-a-tool-with-planemo"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Lint a tool with <code class="language-plaintext highlighter-rouge">planemo</code></h3>
+
+  <ol>
+    <li>Change into the directory containing the tool</li>
+    <li>Run <code class="language-plaintext highlighter-rouge">planemo lint</code></li>
+    <li>Inspect the output for any warnings or errors</li>
+    <li>Fix the problem(s) and rerun from step 2 until all problems are solved</li>
+  </ol>
+</blockquote>
+
+<p>By default <code class="language-plaintext highlighter-rouge">planemo</code> will lint all tools contained in the current working directory (including subdirectories).
+You can also specify a directory or a tool by giving its path as additional argument.</p>
+
+<h2 id="using-planemo-to-test-tools">Using <code class="language-plaintext highlighter-rouge">planemo</code> to test tools</h2>
+
+<p>Using <code class="language-plaintext highlighter-rouge">planemo</code> to execute the tests defined in a tool is probably the most frequently used feature.
+In order to do so <code class="language-plaintext highlighter-rouge">planemo</code> will:</p>
+
+<ul>
+  <li>Start a local <span class="notranslate">Galaxy</span> instance</li>
+  <li>Stage all input data defined in the tests</li>
+  <li>Run the tool using the datasets and parameters defined in the tests (this also involves the installation of all requirements which is done with conda by default)</li>
+  <li>Check if the test assumptions are met, e.g. non-zero exit code, equivalence of the output files, number of outputs, …</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-test-a-tool-with-planemo"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Test a tool with <code class="language-plaintext highlighter-rouge">planemo</code></h3>
+
+  <ol>
+    <li>Change into the directory containing the tool</li>
+    <li>
+      <p>Run <code class="language-plaintext highlighter-rouge">planemo test</code> (as with <code class="language-plaintext highlighter-rouge">planemo lint</code> you can also specify a path to a tool explicitly as extra argument)</p>
+
+      <p>The most important output of <code class="language-plaintext highlighter-rouge">planemo</code> is found at the end and looks like:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Testing complete. HTML report is in "PATH/tool_test_output.html".
+All X test(s) executed passed.
+TOOL_NAME (Test #1): passed
+TOOL_NAME (Test #2): passed
+...
+</code></pre></div>      </div>
+
+      <p>The last part lists for each test if it failed or passed. In case of a failure you can open the file <code class="language-plaintext highlighter-rouge">tool_test_output.html</code> (the path to this file is in the output) with a browser to get more information.</p>
+    </li>
+    <li>
+      <p>Open the HTML report <code class="language-plaintext highlighter-rouge">firefox PATH/tool_test_output.html</code> (replace the PATH as in <code class="language-plaintext highlighter-rouge">planemo</code>’s output).</p>
+
+      <p>The HTML report contains a table on the top giving the number of executed, successful, and failed tests:</p>
+
+      <figure id="figure-2"><img src="../../images/planemo_html.png" alt="Planemo HTML report" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Planemo HTML report</figcaption></figure>
+
+      <p>If there are passed or failed tests you will find the text <code class="language-plaintext highlighter-rouge">Passed tests</code>, <code class="language-plaintext highlighter-rouge">Failed tests</code>, resp., below the table.
+Clicking on this text will unfold the list of passed or failed tests, resp. Clicking again on one of the tests
+Will show additional information like stdout, stderr and the executed command line. In most cases this is sufficient
+to determine the source of the test failure.</p>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-useful-parameters-for-planemo-test"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Useful parameters for <code class="language-plaintext highlighter-rouge">planemo test</code></h3>
+
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">--failed</code> Will make <code class="language-plaintext highlighter-rouge">planemo</code> rerun only the tests that failed in the previous execution.</li>
+    <li><code class="language-plaintext highlighter-rouge">--update_test_data</code> If there are differences to output files defined in the tests these will be updated (and the tests will run again).</li>
+    <li><code class="language-plaintext highlighter-rouge">--no_cleanup</code> <code class="language-plaintext highlighter-rouge">Planemo</code> will not cleanup the created <span class="notranslate">Galaxy</span> clone or the job working dir (see the details box below).</li>
+  </ul>
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-understanding-planemos-output-in-more-detail"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Understanding <code class="language-plaintext highlighter-rouge">planemo</code>’s output in more detail</h3>
+
+  <p>Sometimes it can be helpful to understand the <code class="language-plaintext highlighter-rouge">planemo</code> output in more detail.</p>
+
+  <ul>
+    <li>The first lines show some <code class="language-plaintext highlighter-rouge">git</code> commands that create a local clone of the <span class="notranslate">Galaxy</span> sources (by default the <code class="language-plaintext highlighter-rouge">master</code> branch) and the command to start <span class="notranslate">Galaxy</span>. The end of the part is marked by the line <code class="language-plaintext highlighter-rouge">Activated a virtualenv for <span class="notranslate">Galaxy</span></code>.</li>
+    <li>Then the python virtual environment used to run <span class="notranslate">Galaxy</span> is created and the requirements are installed</li>
+    <li>Then the worker th<span class="notranslate">reads</span> and the <span class="notranslate">Galaxy</span> database are initialized, look for lines containing <code class="language-plaintext highlighter-rouge">Initializing main <span class="notranslate">Galaxy</span> Queue Worker on</code> and <code class="language-plaintext highlighter-rouge">Install database targetting <span class="notranslate">Galaxy</span>'s database configuration</code>. The completion of the startup of <span class="notranslate">Galaxy</span> is indicated by the line <code class="language-plaintext highlighter-rouge">INFO:     Application startup complete.</code></li>
+  </ul>
+
+  <p>The first two steps can take a while on the first run of <code class="language-plaintext highlighter-rouge">planemo test</code> (in particular on slow internet connections). Subsequent runs will be faster since the <span class="notranslate">Galaxy</span> sources as well as the virtual environment are cached in your home directory (<code class="language-plaintext highlighter-rouge">~/.planemo/</code>).</p>
+
+  <ul>
+    <li>After this <code class="language-plaintext highlighter-rouge">planemo</code> will execute one test after the other. The start of a test is indicted by a line <code class="language-plaintext highlighter-rouge">( TOOL_ID ) &gt; Test-TEST_NUMBER</code></li>
+    <li>For each test a number of <span class="notranslate">Galaxy</span> jobs are triggered (one upload job for each input dataset and the actual tool execution). Each job is indicated by a line <code class="language-plaintext highlighter-rouge">Built script [JOB_WORKING_DIR/tool_script.sh] for tool command [COMMAND_LINE]</code> which tell you the working directory of the job and the executed command line.</li>
+    <li>Suceccful tests will be marked with a line containing the text <code class="language-plaintext highlighter-rouge">ok</code>. Otherwise stdout and stderr and potentially a description of the test problem is shown.</li>
+  </ul>
+
+  <p>Note that the first execution of the tool job can take longer since also the conda environment containing the requirements of the tool is created.</p>
+
+  <p>As an exercise</p>
+
+  <ul>
+    <li>Start <code class="language-plaintext highlighter-rouge">planemo test</code> with the extra parameter <code class="language-plaintext highlighter-rouge">--no_cleanup</code> (this will prevent the deletion of the <span class="notranslate">Galaxy</span> clone and its job working directories after <code class="language-plaintext highlighter-rouge">planemo</code> finished).</li>
+    <li>Change into one job working directory (not an upload job)</li>
+    <li>Inspect <code class="language-plaintext highlighter-rouge">tool_script.sh</code> and find the command to activate the conda environment for the job and the executed command line.</li>
+    <li>Execute these commands from within the <code class="language-plaintext highlighter-rouge">working</code> dir in the jobs working dir (You may need to remove all files that are already existing there).</li>
+  </ul>
+
+  <p>This procedure can be really helpful for debugging <span class="notranslate">Galaxy</span> tools.</p>
+</blockquote>
+
+<h2 id="using-planemo-to-serve-tools">Using <code class="language-plaintext highlighter-rouge">planemo</code> to serve tools</h2>
+
+<p>It can be very useful to check how <span class="notranslate">Galaxy</span> renders a tool and if this meets the expectations of the developer. For instance this is the best way to check if the help section is rendered as expected.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-serve-a-tool-with-planemo"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Serve a tool with <code class="language-plaintext highlighter-rouge">planemo</code></h3>
+
+  <ol>
+    <li>Change into the directory containing the tool</li>
+    <li>
+      <p>Run <code class="language-plaintext highlighter-rouge">planemo serve</code> (as with <code class="language-plaintext highlighter-rouge">lint</code> and test you can also specify a path to a tool explicitly as extra argument)</p>
+
+      <p><code class="language-plaintext highlighter-rouge">Planemo</code> will again start a <span class="notranslate">Galaxy</span> instance that contains your tool. Note that starting the ad-hoc <span class="notranslate">Galaxy</span> might need longer than for <code class="language-plaintext highlighter-rouge">planemo test</code> since JavaScript components need to be initialized as well.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-useful-parameters-for-planemo-test-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Useful parameters for <code class="language-plaintext highlighter-rouge">planemo test</code></h3>
+
+  <p>In order to stop <code class="language-plaintext highlighter-rouge">planemo serve</code> just press <kbd>Ctrl-C</kbd></p>
+</blockquote>
+
+<h1 id="publishing-galaxy-tools">Publishing <span class="notranslate">Galaxy</span> tools</h1>
+
+<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/hg0YreA8W1I" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+
+<p><span class="notranslate">Galaxy</span> tools are installed from the <a href="https://toolshed.g2.bx.psu.edu/"><span class="notranslate">Galaxy</span> <span class="notranslate">toolshed</span></a>. With the help of <code class="language-plaintext highlighter-rouge">planemo</code> tools can be added to the <span class="notranslate">toolshed</span> (<a href="https://planemo.readthedocs.io/en/latest/publishing.html">documentation</a>). But usually the sources of the tools are maintained in public source code repositories, for instance:</p>
+
+<ul>
+  <li><a href="https://github.com/galaxyproject/tools-iuc/">IUC</a></li>
+  <li><a href="https://github.com/galaxyproject/tools-devteam/">devteam</a></li>
+  <li><a href="https://github.com/bgruening/galaxytools">Bjoern Gruenings repo</a></li>
+  <li><a href="https://github.com/galaxyproteomics/tools-galaxyp/"><span class="notranslate">Galaxy</span>P</a> for proteomics tools</li>
+  <li><a href="https://github.com/workflow4metabolomics/">W4M</a> for metabolomics tools</li>
+</ul>
+
+<p>These tool source repositories have continuous integration workflows:</p>
+
+<ul>
+  <li>lint and test tools</li>
+  <li>lint supplementary python and R scripts</li>
+  <li>and publish tools to the <span class="notranslate">toolshed</span></li>
+</ul>
+
+<p>In addition the repositories run weekly workflows testing all tools in order to keep them working.
+Another advantage of these repositories is that new tools and improvements to tools are subject to review of experienced tool developers.</p>
+
+<p>The repository is structured as follows:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">tools/</code>: the main directory of the repository containing the tool descriptions. One directory for a tool repository (a directory with a <code class="language-plaintext highlighter-rouge">.shed.yaml</code> file that describes the tools) which can contain one or more set of tools.</li>
+  <li><code class="language-plaintext highlighter-rouge">tool_collections/</code> and <code class="language-plaintext highlighter-rouge">suites/</code>: Like <code class="language-plaintext highlighter-rouge">tools/</code> but reserved for larger collections of tools like <code class="language-plaintext highlighter-rouge">samtools</code> or <code class="language-plaintext highlighter-rouge"><span class="notranslate">bed</span>tools</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">data_managers/</code>: a directory containing data managers. These need to be in a separate directory since tool tests with <code class="language-plaintext highlighter-rouge">planemo</code> need to be ececuted slightly different from tests of normal tools.</li>
+  <li><code class="language-plaintext highlighter-rouge">deprecated/</code>: deprecated tools. Tools in this directory are excluded from weekly CI.</li>
+  <li><code class="language-plaintext highlighter-rouge">macros/</code>: macros that can be used by multiple tools.</li>
+</ul>
+
+<p>In addition there are some important directories containing configurarion:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">.github/</code>: contains the CI workflows and other documents for the maintenance of the repository.</li>
+  <li><code class="language-plaintext highlighter-rouge">.tt_skip</code>: a text file containing a list of tool repositories that are excluded from weekly CI as well as CI running in PR.</li>
+  <li><code class="language-plaintext highlighter-rouge">.tt_biocontainer_skip</code>: a text file containing a list of tool repositories that should not be tested with containerized tool tests but use <code class="language-plaintext highlighter-rouge">conda</code> for resolving tool requirements.</li>
+  <li><code class="language-plaintext highlighter-rouge">setup.cfg</code>: configuration for <code class="language-plaintext highlighter-rouge">flake8</code> python linting in CI.</li>
+</ul>
+
+<p>Furthermore there are <code class="language-plaintext highlighter-rouge">README.md</code>, <code class="language-plaintext highlighter-rouge">CONTRIBUTING.md</code>, and <code class="language-plaintext highlighter-rouge">LICENSE</code> that might be worth considering as contributor or adapting if you use the repository as template.</p>
+
+<p>The <span class="notranslate">workflow</span> to add or update a tool in such a repository to open a pull request (PR) from a branch of a personal fork of the repository. In the following it will be demonstrated how this is done for the IUC repository</p>
+
+<h2 id="fork-and-clone-the-github-repository">Fork and clone the github repository</h2>
+
+<p>For the following we will use a sandbox tool repository and not one of the main repositories.
+But, the steps can be adapted easily by exchanging the repository URLs. Note that for some repositories
+the development branch may have the name <code class="language-plaintext highlighter-rouge">master</code> instead of <code class="language-plaintext highlighter-rouge">main</code>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-fork-and-clone-the-iuc-github-repository"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Fork and clone the IUC github repository</h3>
+
+  <ol>
+    <li>If you don’t have an account on github you need to sign up at first.</li>
+    <li>Open the <a href="https://github.com/mvdbeek/galaxy-tools-mvdbeek/">Sandbox tool repository</a> in a browser.</li>
+  </ol>
+
+  <ul>
+    <li>Click the <code class="language-plaintext highlighter-rouge">fork</code> button on the top right
+      <figure id="figure-3"><img src="../../images/iuc-github.png" alt="IUC github repository" /><figcaption><span class="figcaption-prefix">Figure 3:</span> IUC github repository</figcaption></figure>
+    </li>
+    <li>In the following dialog select your account</li>
+    <li>After a short while you will be redirected to your fork of the sandbox repository
+(i.e. a 1:1 copy of the original repository)</li>
+  </ul>
+
+  <ol>
+    <li>
+      <p>In order to obtain a clone (i.e. a local copy of your fork) click the green button with text “Code” and copy the link. And execute the following commands on your computer</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>A_DIR_WHERE_YOU_WANT_TO_CREATE_THE_CLONE
+git clone LINK_TO_YOUR_FORK
+<span class="nb">cd </span>tools-iuc/
+git remote add <span class="notranslate">upstream</span> https://github.com/mvdbeek/<span class="notranslate">galaxy</span>-tools-mvdbeek.git
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>The first command creates the clone in the current working dir, i.e. it will create a directory <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>-tools-mvdbeek</code> containing the copy.
+The last command will add the original sandbox repository as a remote with the name <code class="language-plaintext highlighter-rouge"><span class="notranslate">upstream</span></code>. This is necessary in order to keep your fork of the repository in sync with the original repository.</p>
+    </li>
+    <li>
+      <p>Check that <code class="language-plaintext highlighter-rouge">git remote -v</code> lists your fork under the name <code class="language-plaintext highlighter-rouge">origin</code> and the original repository unter the name <code class="language-plaintext highlighter-rouge"><span class="notranslate">upstream</span></code>.</p>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-keeping-your-fork-in-sync"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Keeping your fork in sync</h3>
+
+  <p>You should execute the following steps always before creating a new branch:</p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">git checkout main</code>: change to the main branch</li>
+    <li><code class="language-plaintext highlighter-rouge">git pull <span class="notranslate">upstream</span> main</code>: get the most recent changes from the <code class="language-plaintext highlighter-rouge"><span class="notranslate">upstream</span></code> repository to your local clone</li>
+    <li><code class="language-plaintext highlighter-rouge">git push origin main</code>: publish the most recent changes from your local clone to your fork, i.e. <code class="language-plaintext highlighter-rouge">origin</code></li>
+  </ol>
+</blockquote>
+
+<h2 id="create-a-pull-request-for-a-new-tool">Create a pull request for a new tool</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-create-a-pull-request"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create a pull request</h3>
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">git checkout main</code></li>
+    <li><code class="language-plaintext highlighter-rouge">git checkout -b NAME_OF_THE_BRANCH</code>: create a new feature branch and change to this branch. The branch name should not contain names and should be short and if possible descriptive, e.g. the tool name.</li>
+    <li>Introduce changes, e.g. created a directory under <code class="language-plaintext highlighter-rouge">tools/</code>, add the tool XML file, the <code class="language-plaintext highlighter-rouge">.shed.yml</code> file, and the <code class="language-plaintext highlighter-rouge">test-data</code> directory with the files needed for the test.</li>
+    <li><code class="language-plaintext highlighter-rouge">git add TOOL_DIRECTORY</code> add all files in <code class="language-plaintext highlighter-rouge">TOOL_DIRECTORY</code> under version control</li>
+    <li><code class="language-plaintext highlighter-rouge">git commit -m 'COMMIT MESSAGE'</code> commit the changes. The commit message should contain a short description of the changes. You can also use multiple lines: ommit the final quote and continue after pressing enter – finish by adding the single quote again and press enter.</li>
+    <li>Push to your fork <code class="language-plaintext highlighter-rouge">git push --set-<span class="notranslate">upstream</span> origin NAME_OF_THE_BRANCH</code></li>
+    <li>Create a Pull Request (PR): in the output of the previous command you will find an URL that you can copy paste to your browser. Add a suitable title to you PR and describe the changes. The PR will be created after you click the button “Create pull request”</li>
+  </ol>
+</blockquote>
+
+<p>After you created a PR your changes will be reviewed and improvements will be requested. You can add changes to the PR as follows.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-adding-changes-to-a-pr"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Adding changes to a PR</h3>
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">git checkout NAME_OF_THE_BRANCH</code></li>
+    <li>Make changes as requested.</li>
+    <li><code class="language-plaintext highlighter-rouge">git add SPACE_SEPARATED_LIST_OF_CHANGED_FILES</code></li>
+    <li><code class="language-plaintext highlighter-rouge">git commit -m 'COMMIT MESSAGE'</code></li>
+    <li><code class="language-plaintext highlighter-rouge">git push origin NAME_OF_THE_BRANCH</code></li>
+  </ol>
+</blockquote>
+
+<h2 id="the-iuc-style-continuous-integration-workflows">The IUC style continuous integration workflows</h2>
+
+<p>When a new PR is created or new commits are added to the PR the <a href="https://github.com/bernt-matthias/galaxy-tool-repository-template/blob/main/.github/workflows/pr.yaml">continuous integration <span class="notranslate">workflow</span></a> starts and executes the following steps:</p>
+
+<ol>
+  <li>Setup: this mainly determines the list of changed tools and repositories (here repository refers to a set of tools with <code class="language-plaintext highlighter-rouge">.shed.yaml</code>). In addition some caches for <code class="language-plaintext highlighter-rouge">pip</code> and <code class="language-plaintext highlighter-rouge">planemo</code> are setup that are reused in the following jobs are maintained.</li>
+  <li>Tool linting: this essentially runs <code class="language-plaintext highlighter-rouge">planemo shed_lint</code> which does the same as <code class="language-plaintext highlighter-rouge">planemo lint</code> plus additional checks.</li>
+  <li>Python linting: run <code class="language-plaintext highlighter-rouge">flake8</code> linting on all python scripts contained in changed repositories</li>
+  <li>R linting: run <code class="language-plaintext highlighter-rouge">lintr</code> linting on all R scripts contained in changed repositories</li>
+  <li>Tool testing: this runs <code class="language-plaintext highlighter-rouge">planemo test</code> on all tested repositories using containerized tests, i.e. docker containers are used to execute the tool tests instead of <code class="language-plaintext highlighter-rouge">conda</code> environments. Depending on the number of changed tools up to four parallel jobs execute the tool tests. Note that these jobs will always be reported as sucessful even if tool tests failed. Tool test failures will be reported in the subsequent job. The same version of these tests can be run locally by adding <code class="language-plaintext highlighter-rouge">--docker</code> to the planemo test command.</li>
+  <li>Combine tool test results: the results of the parallel tool test jobs are merged.</li>
+  <li>Determine success of the steps: this is just an auxilliary step needed for PR that do not change tools, but the framework (e.g. the worflows).</li>
+</ol>
+
+<p>The same <span class="notranslate">workflow</span> runs once again when the PR is merged. In addition another job runs which deploys the tool(s) to the <span class="notranslate">toolshed</span> (and test<span class="notranslate">toolshed</span>).</p>
+
+<p>The CI jobs are listed on the bottom of the PR. Colored icons indicate the state of the jobs:</p>
+
+<ul>
+  <li>yellow circle: running</li>
+  <li>grey circled /: skipped</li>
+  <li>red x: failed job</li>
+  <li>green checkmark: successful job</li>
+</ul>
+
+<p>The link “Details” on the right of the job brings you to a page showing the detailed output of the jobs (Alte<span class="notranslate">rna</span>tively the “Checks” tab on top of the PR page brings you to the CI output page.)</p>
+
+<figure id="figure-4"><img src="../../images/iuc-ci.png" alt="IUC output of the CI workflow" /><figcaption><span class="figcaption-prefix">Figure 4:</span> output of the CI <span class="notranslate">workflow</span></figcaption></figure>
+
+<p>The image above shows the CI page for a PR:</p>
+
+<ul>
+  <li>Green box: clicking this brings you to an overview page showing the CI <span class="notranslate">workflow</span> and listing errors and produced artifacts below.</li>
+  <li>Red box: the executed CI jobs. Clicking a job will show the outputs of the CI steps in the main (gray panel). The outputs of each step can be show by clicking on the corresponding step.</li>
+  <li>Blue box: direct link to the artifacts. This is currently the output of the “Combine tool test results” job: “All tool test results” (and the outputs of the separate tool test jobs which are a technical necessity and usually not relevant). Clicking “All tool test results” will trigger the download of a zip file that contains the <code class="language-plaintext highlighter-rouge">planemo test</code> html output. If the linting jobs have found errors then also their output will be provided as additional output.</li>
+</ul>
+
+<p>Most of the steps executed in the jobs are boilerplate and only one/two steps in each stop are really relevant for the users:</p>
+
+<ul>
+  <li>Setup: show repository list – show tool list: here you can check if all repositories and tools that are changed in the PR are listed.
+Lint tool-list: planemo lint – this contains the linter output of <code class="language-plaintext highlighter-rouge">planemo test</code>. Check here for non critical warning that would be good to fix.
+Lint python scripts: flake8 – contains the output of the python linter <code class="language-plaintext highlighter-rouge">flake8</code>.
+Lint R scripts: lintr – contains the output of the python linter <code class="language-plaintext highlighter-rouge">lintr</code>.
+Test tools: planemo test – contains the output of <code class="language-plaintext highlighter-rouge">planemo test</code>.</li>
+</ul>
+
+<h2 id="create-your-own-iuc-style-tool-repository">Create your own IUC style tool repository</h2>
+
+<p>It is also easy to setup a github tool repository on your own that has the same structure and functionality as the IUC repository. This allows you to maintain the tools that you are developing on your own, but keep in mind the advantages of having tools in one of the community driven repositories (like long term support).</p>
+
+<p>In order to setup your own tool repository the <span class="notranslate">Galaxy</span> community created a <a href="https://github.com/bernt-matthias/galaxy-tool-repository-template">template repository</a>. By clicking <code class="language-plaintext highlighter-rouge">Use this template</code> and follow the instructions in the README file you get you own tool repository.</p>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>Galaxy tools are made in 3 parts – Conda, tool wrappers, and planemo</p>
+</li>
+                            
+                            <li><p>Anyone can write and deploy a tool wrapper!</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/dev/faqs/">FAQ page for the Development in Galaxy topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                    
+
+                    
+
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Creating Galaxy tools from Conda Through Deployment (Development in Galaxy)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Alex Ostrovsky, Dave B., Matthias Bernt, 2021 <b>Creating Galaxy tools from Conda Through Deployment (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-from-scratch/tutorial.html">https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-from-scratch/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{dev-tool-from-scratch,
+    author = "Alex Ostrovsky and Dave B. and Matthias Bernt",
+    title = "Creating Galaxy tools from Conda Through Deployment (Galaxy Training Materials)",
+    year = "2021",
+    month = "06",
+    day = "15"
+    url = "\url{https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-from-scratch/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+                    
+
+                    
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Alex Ostrovsky, Dave B., Matthias Bernt)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/dev/tutorials/tool-from-scratch/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
