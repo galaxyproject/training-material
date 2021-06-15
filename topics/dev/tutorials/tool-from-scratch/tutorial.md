@@ -17,8 +17,9 @@ objectives:
   - Learn how to add tools to the Galaxy toolshed and make them available to any user
 time_estimation: 3H
 key_points:
-- Galaxy tools are made in 3 parts -- Conda, tool wrappers, and planemo
+  - Galaxy tools are made in 3 parts -- Conda, tool wrappers, and planemo
   - Anyone can write and deploy a tool wrapper!
+subtopics: tooldev
 contributors:
   - astrovsky01
   - davebx
@@ -30,7 +31,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-> <div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/2wW3yqEclko" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/2wW3yqEclko" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 Tools wrappers allow any command line runnable code or programs to be run inside a galaxy environment.
 Although Galaxy has thousands of tools readily available, new software and packages will always be useful.
@@ -60,7 +61,7 @@ the creation and deployment of these packages, making them available for Galaxy 
 
 ## Writing a Bioconda Recipe
 
-> <div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/UtNErGKw8SI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/UtNErGKw8SI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 Bioconda is a repository of conda packages for software and tools relevant to the life sciences. Using conda
 packages ensures better reproducibility, since each conda package is usually immutable, an exception being
@@ -97,11 +98,11 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-in %} Output
+>    > ### {% icon code-out %} Output
 >    > ```bash
 >    > 036c5e23f53ed5b612525d3a32095acca073a9c8d2bf73883deb852c89f40dcf  bellerophon.tar.gz
 >    > ```
->    {: .code-in}
+>    {: .code-out}
 >
 > 3. Using the above information, we create the meta.yaml file where we'll then define the
 > parameters that tell conda-build how to build this package, starting with variables for the name, version, and checksum.
@@ -325,7 +326,7 @@ anyone wrapping a tool, a more complete list is available in [the Galaxy tool do
 
 ## Initializing a Tool Wrapper
 
-> <div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/a6XZgEy6hlg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/a6XZgEy6hlg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 Initializing a tool wrapper to be run in Galaxy is simple
 
@@ -346,26 +347,28 @@ Initializing a tool wrapper to be run in Galaxy is simple
 >
 > 4. You can now open the new xml file that has been generated to begin the wrapping. It should look something like this:
 >
->   ```xml
->   <tool id="bellerophon" name="bellerophon" version="0.1.0" python_template_version="3.5">
->       <requirements>
->       </requirements>
->       <command detect_errors="exit_code"><![CDATA[
->           TODO: Fill in command template.
->       ]]></command>
->       <inputs>
->       </inputs>
->       <outputs>
->       </outputs>
->       <help><![CDATA[
->           TODO: Fill in help.
->       ]]></help>
->   </tool>
->   ```
+>    ```xml
+>    <tool id="bellerophon" name="bellerophon" version="0.1.0" python_template_version="3.5">
+>        <requirements>
+>        </requirements>
+>        <command detect_errors="exit_code"><![CDATA[
+>            TODO: Fill in command template.
+>        ]]></command>
+>        <inputs>
+>        </inputs>
+>        <outputs>
+>        </outputs>
+>        <help><![CDATA[
+>            TODO: Fill in help.
+>        ]]></help>
+>    </tool>
+>    ```
+>
+{: .hands_on}
 
 ## Galaxy Tool Wrappers
 
-> <div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/FdtD8vBLK5k" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/FdtD8vBLK5k" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 Galaxy tool wrapper xml files are made up of several sections:
 
@@ -387,21 +390,23 @@ While many of those are present in the wrapper by default, others need to be add
 The tool section at the head of the file defines several key pieces of information for both the user and Galaxy.
 The tool ID and name are defined here as well as which minimum version of Galaxy is required to run it.
 
-For this section, the following is necessary:
-
-- Tool ID
-- Tool name
-- Version (Version of the Galaxy wrapper)
-  - This is set as `'<Conda wrapper version>'+'galaxy<galaxy wrapper version>'`
-- Profile
-  - This is the minimum version of Galaxy required to run the tool
-- Unset python_template version
-
-when complete, the line should appear as follows:
-
-```xml
-<tool ID="bellerophon" name="bellerophon" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="20.01">
-```
+> ### {% icon hands_on %} Hands-on: Defining the tool section:
+> For this section, the following is necessary:
+>
+> - Tool ID
+> - Tool name
+> - Version (Version of the Galaxy wrapper)
+>   - This is set as `'<Conda wrapper version>'+'galaxy<galaxy wrapper version>'`
+> - Profile
+>   - This is the minimum version of Galaxy required to run the tool
+> - Unset python_template version
+>
+> when complete, the line should appear as follows:
+>
+> ```xml
+> <tool ID="bellerophon" name="bellerophon" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="20.01">
+> ```
+{: .hands_on}
 
 The @TOOL_VERSION@ and @VERSION_SUFFIX@ are what are referred to as "tokens", and will be furter discussed in the "Macros" section.
 
@@ -410,9 +415,12 @@ The @TOOL_VERSION@ and @VERSION_SUFFIX@ are what are referred to as "tokens", an
 This section adds help text to easily identify the tool. It is not intended as in-depth help, which should be in the `help` section.
 The description is simply presented as plaintext between the tags. Bellerophon's would look like this:
 
-```xml
-<description>chimeric reads from Arima Genomics</description>
-```
+> ### {% icon hands_on %} Hands-on: Adding a description
+> Add the following description to your tool
+> ```xml
+> <description>chimeric reads from Arima Genomics</description>
+> ```
+{: .hands_on}
 
 Which would present the tool's in the toolbar and at the top of the tool form as
 
@@ -428,12 +436,15 @@ useful for tools which have multiple options/modes that reuse parameters.
 
 The @TOOL_VERSION@ and @VERSION_SUFFIX@ used in the Tool line are defined here. Each need their own 'token' line, resulting in
 
-```xml
-<macros>
-    <token name="@TOOL_VERSION@">1.0</token>
-    <token name="@VERSION_SUFFIX@">0</token>
-</macros>
-```
+> ### {% icon hands_on %} Hands-on: Macros
+> Add the following macros section to your tool:
+> ```xml
+> <macros>
+>     <token name="@TOOL_VERSION@">1.0</token>
+>     <token name="@VERSION_SUFFIX@">0</token>
+> </macros>
+> ```
+{: .hands_on}
 
 This will cause the version string at the beginning to read "1.0+galaxy0", and set the conda package that is pulled to be bellerophon version 1.0.
 As versions are incremented, this will change. Any updates to the galaxy wrapper should iterate `@VERSION_SUFFIX@`, while any changes to the version
@@ -471,14 +482,16 @@ This specifies the
 - Specific Bioconda/Conda Forge package version
   - This does not have to be the most recent version
 
-In the case of bellerophon, which requires two dependencies, bellerophon and samtools, the requirements section appears like so:
-
-```xml
-  <requirements>
-        <requirement type="package" version="@TOOL_VERSION@">bellerophon</requirement>
-        <requirement type="package" version="1.12">samtools</requirement>
-  </requirements>
-```
+> ### {% icon hands_on %} Hands-on: Adding requirements
+> In the case of bellerophon, which requires two dependencies, bellerophon and samtools, the requirements section appears like so. Add them to your tool XML.
+>
+> ```xml
+>   <requirements>
+>         <requirement type="package" version="@TOOL_VERSION@">bellerophon</requirement>
+>         <requirement type="package" version="1.12">samtools</requirement>
+>   </requirements>
+> ```
+{: .hands_on}
 
 This uses the macro token for @TOOL_VERSION@ for the bioconda package version to retrieve the version number for bellerophon, while samtools' version is set manually.
 
@@ -494,8 +507,8 @@ This uses the macro token for @TOOL_VERSION@ for the bioconda package version to
 > >   </requirements>
 > > ```
 > >
-> > {: .solution}
-> {: .question}
+> {: .solution}
+{: .question}
 
 ### Input section
 
@@ -599,15 +612,26 @@ of the resources on which the tool will be running, they should not be given acc
 goes to the stderr instead of an output file, this can also be skipped. All three of these flags can be coded in the command,
 but not exposed to the user.
 
-To include all of the necessary parameters, then, the inputs section would appear like this
-
-```xml
-<inputs>
-    <param argument="--forward" type="data" format="sam" label="First set of reads" help="This is usually the forward reads in your experiment." />
-    <param argument="--reverse" type="data" format="sam" label="Second set of reads" help="This is usually the reverse reads in your experiment." />
-    <param argument="--quality" type="integer" value="20" min="0" label="Minimum mapping quality"/>
-</inputs>
-```
+> ### {% icon hands_on %} Hands-on: Adding parameters to your tool
+> 1. Using information in the above sections, add parameters for the forward, reverse, and quality flags to your tool xml.
+>
+> > ### {% icon question %} Question
+> >
+> > What does your `<inputs/>` section look like?
+> >
+> > > ### {% icon solution %} Solution
+> > > To include all of the necessary parameters, then, the inputs section would appear like this
+> > >
+> > > ```xml
+> > > <inputs>
+> > >     <param argument="--forward" type="data" format="sam" label="First set of reads" help="This is usually the forward reads in your experiment." />
+> > >     <param argument="--reverse" type="data" format="sam" label="Second set of reads" help="This is usually the reverse reads in your experiment." />
+> > >     <param argument="--quality" type="integer" value="20" min="0" label="Minimum mapping quality"/>
+> > > </inputs>
+> > > ```
+> > {: .solution}
+> {: .question}
+{: .hands_on}
 
 This makes the variables "forward", "reverse" and "quality" available in the command section and lets the users set them in the Galaxy interface. The "min" attribute prevents
 a user from inputting a value below a specified number. Here, the quality flag cannot be set below 0.
@@ -618,13 +642,15 @@ The outputs section defines the files that Galaxy makes available in the history
 `<collection/>` tags. In general, it tells Galaxy to look for a specific file after the job completes, and return it to the user.
 It also defines the format of that file and the name shown to the user in the history.
 
-As Bellerophon has a single output file, the section would appear like this
-
-```xml
-<outputs>
-    <data name="outfile" label="${tool.name} on ${on_string}" format="bam">
-</outputs>
-```
+> ### {% icon hands_on %} Hands-on: Adding your outputs
+> As Bellerophon has a single output file, add the following outputs section to your tool:
+>
+> ```xml
+> <outputs>
+>     <data name="outfile" label="${tool.name} on ${on_string}" format="bam">
+> </outputs>
+> ```
+{: .hands_on}
 
 This generates a history item called "bellerophon on `<input file name>`", as the ${tool.name} and ${on_string} are reserved values
 for the tool's label and the input file labels.
@@ -742,33 +768,36 @@ runs the helloworld.py script present in the same folder as the tool xml, then e
 
 #### *In practice*
 
-The bellerophon command section would, based on the variables set previously, would be
-
-```xml
-    <command detect_errors="exit_code"><![CDATA[
-        #if $forward.is_of_type("sam"):
-            #set $forward_input = 'forward_input.sam'
-            ln -s '${forward}' '$forward_input' &&
-        #else:
-            #set $forward_input = 'forward_input.bam'
-            ln -s '${forward}' '$forward_input' &&
-        #end if
-        #if $reverse.is_of_type("sam"):
-            #set $reverse_input = 'reverse_input.sam'
-            ln -s '${reverse}' '$reverse_input' &&
-        #else:
-            #set $reverse_input = 'reverse_input.bam'
-            ln -s '${reverse}' '$reverse_input' &&
-        #end if
-        bellerophon
-        --forward $forward_input
-        --reverse $reverse_input
-        --quality $quality
-        --output 'merged_out.bam'
-        && samtools sort --no-PG -O BAM -o '$outfile' -@ \${GALAXY_SLOTS:-1} merged_out.bam
-        ]]>
-    </command>
-```
+> ### {% icon hands_on %} Hands-on: Writing the command block
+>
+> The bellerophon command section would, based on the variables set previously, would be as follows. Add it to your tool XML.
+>
+> ```xml
+>     <command detect_errors="exit_code"><![CDATA[
+>         #if $forward.is_of_type("sam"):
+>             #set $forward_input = 'forward_input.sam'
+>             ln -s '${forward}' '$forward_input' &&
+>         #else:
+>             #set $forward_input = 'forward_input.bam'
+>             ln -s '${forward}' '$forward_input' &&
+>         #end if
+>         #if $reverse.is_of_type("sam"):
+>             #set $reverse_input = 'reverse_input.sam'
+>             ln -s '${reverse}' '$reverse_input' &&
+>         #else:
+>             #set $reverse_input = 'reverse_input.bam'
+>             ln -s '${reverse}' '$reverse_input' &&
+>         #end if
+>         bellerophon
+>         --forward $forward_input
+>         --reverse $reverse_input
+>         --quality $quality
+>         --output 'merged_out.bam'
+>         && samtools sort --no-PG -O BAM -o '$outfile' -@ \${GALAXY_SLOTS:-1} merged_out.bam
+>         ]]>
+>     </command>
+> ```
+{: .hands_on}
 
 inputs the variables set in the inputs and output sections to generate a full command to be run inside the Galaxy environment. When inside a conditional or
 section, the hierarchy is preserved using a period. For example
@@ -799,15 +828,18 @@ for the test. These params can also be placed inside a conditional, simulating t
 
 As all parameters in bellerophon are accessible at once, and do not contradict one another, only one test is necessary.
 
-```xml
-    <tests>
-        <test expect_num_outputs="1">
-            <param name="forward" value="forward.bam" />
-            <param name="reverse" value="reverse.bam" />
-            <output name="outfile" file="merged-out.bam" ftype="bam" />
-        </test>
-    </tests>
-```
+> ### {% icon hands_on %} Hands-on: Adding a test
+> Add the following test case to your tool:
+> ```xml
+>     <tests>
+>         <test expect_num_outputs="1">
+>             <param name="forward" value="forward.bam" />
+>             <param name="reverse" value="reverse.bam" />
+>             <output name="outfile" file="merged-out.bam" ftype="bam" />
+>         </test>
+>     </tests>
+> ```
+{: .hands_on}
 
 This runs the tool with the files forward.bam and reverse.bam from a folder named test-data in the tool's directory. Since no quality parameter was specified, it uses the default of 20. The parameter can also be manually set with the same param tag and value attribute, just inputting an applicable value such as "21". It then
 compares the defined output called "outfile" from the outputs section against a file called "merged-out.bam" in the same test-data directory. It also
@@ -871,13 +903,17 @@ and Bibtex:
 
 Multiple citations can be added by using additional citation tags.
 
+> ### {% icon hands_on %} Hands-on: Adding a citation
+> Add the citation above using either method (but not both!)
+{: .hands_on}
+
 ## Final wrapper
 
-With all sections complete, the final wrapper for bellerophon can be found [here:](https://github.com/galaxyproject/tools-iuc/blob/master/tools/bellerophon/bellerophon.xml).
+With all sections complete, the final wrapper for bellerophon can be found [here](https://github.com/galaxyproject/tools-iuc/blob/master/tools/bellerophon/bellerophon.xml).
 
 ## Toolshed file
 
-> <div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/WFSQE8bq5qI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/WFSQE8bq5qI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 The .shed.yml file is placed in the same directory as the tool's xml file and saves metadata for the tool. It enables
 toolshed organization and search by using tags and descriptions.
@@ -918,7 +954,7 @@ For more information on how to write automatic tool suites, visit the [Galaxy do
 
 # Testing Galaxy tool with `planemo`
 
-> <div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/19mKUENz_i0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/19mKUENz_i0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 `planemo` is a command line utility that helps developing Galaxy tools.
 Among many other tasks it can:
@@ -957,9 +993,20 @@ Note that for using `planemo`from a new shell you will need to activate the pyth
 
 > ### {% icon hands_on %} Hands-on: Testing `planemo` and getting help
 >
-> 1. In order to test if the installation worked execute: `planemo --version`
+> 1. In order to test if the installation worked execute
 >
-> This should output the version of `planemo`, e.g. `0.74.3`.
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > planemo --version
+>    > ```
+>    {: .code-in}
+>
+>    > ### {% icon code-out %} Output
+>    > This should output the version of `planemo`, e.g.
+>    > ```bash
+>    > planemo, version 0.74.3
+>    > ```
+>    {: .code-out}
 >
 > 2. `planemo --help` will show the available commands with a short desctiption (lint, test, and serve will be part of this tutorial)
 > 3. `planemo SUBCOMMAND --help` will show the usage information for the corresponding subcommand. Try to obtain the information for the `lint` subcommand.
@@ -1076,12 +1123,12 @@ It can be very useful to check how Galaxy renders a tool and if this meets the e
 
 > ### {% icon tip %} Useful parameters for `planemo test`
 >
-> In order to stop `planemo serve` just press `Ctrl + C`
+> In order to stop `planemo serve` just press <kbd>Ctrl-C</kbd>
 {: .tip}
 
 # Publishing Galaxy tools
 
-> <div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/hg0YreA8W1I" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/hg0YreA8W1I" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 Galaxy tools are installed from the [Galaxy toolshed](https://toolshed.g2.bx.psu.edu/). With the help of `planemo` tools can be added to the toolshed ([documentation](https://planemo.readthedocs.io/en/latest/publishing.html)). But usually the sources of the tools are maintained in public source code repositories, for instance:
 
@@ -1138,12 +1185,14 @@ the development branch may have the name `master` instead of `main`.
 >
 > 2. In order to obtain a clone (i.e. a local copy of your fork) click the green button with text "Code" and copy the link. And execute the following commands on your computer
 >
->    ```bash
->    cd A_DIR_WHERE_YOU_WANT_TO_CREATE_THE_CLONE
->    git clone LINK_TO_YOUR_FORK
->    cd tools-iuc/
->    git remote add upstream https://github.com/mvdbeek/galaxy-tools-mvdbeek.git
->    ```
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > cd A_DIR_WHERE_YOU_WANT_TO_CREATE_THE_CLONE
+>    > git clone LINK_TO_YOUR_FORK
+>    > cd tools-iuc/
+>    > git remote add upstream https://github.com/mvdbeek/galaxy-tools-mvdbeek.git
+>    > ```
+>    {: .code-in}
 >
 >    The first command creates the clone in the current working dir, i.e. it will create a directory `galaxy-tools-mvdbeek` containing the copy.
 >    The last command will add the original sandbox repository as a remote with the name `upstream`. This is necessary in order to keep your fork of the repository in sync with the original repository.
