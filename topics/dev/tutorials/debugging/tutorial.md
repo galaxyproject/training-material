@@ -166,7 +166,7 @@ Most of Galaxy unit tests are designed to test a separate component or function,
 > 1. **Finding the failing test on GitHub**
 >
 >    Head over to the [Galaxy repository on GitHub](https://github.com/galaxyproject/galaxy) and in the branch drop-down select the "training" branch. Click the red "x" next to the last commit, you'll get a drop-down listing of workflow results; find "Unit tests / Test (3..." and click "Details". This will display a detailed report that includes information about the failed tests. Try to find the failed tests.
->    
+>
 >    > ### {% icon solution %} Solution
 >    > The log lists 2 failed tests:
 >    > ```
@@ -179,18 +179,18 @@ Most of Galaxy unit tests are designed to test a separate component or function,
 > 2. **Running the test locally**
 >
 >    An essential requirement for productive development is a fast feedback loop: we want to make a change, run a test, and get immediate feedback. If we push our edits to the remote fork (or submit a pull request to the upstream repository) and wait for the the tests to run remotely, it could take hours before we get any feedback, which is very inefficient (and detrimental to sustaining the joy of programming).
->    
+>
 >    Instead, we will run the tests locally. Furthermore, we will run a specific test that we know is failing: this will give us the instant feedback we need.
->    
+>
 >    > ### {% icon code-in %} Input: Bash
 >    > Make sure you are in `GALAXY_ROOT` and your virtual environment is activated. If not, activate it:
 >    > ```bash
 >    > . .venv/bin/activate
 >    > ```
 >    {: .code-in}
->    
+>
 >    The simplest way to run the failing test locally is using pytest directly:
->    
+>
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
 >    > pytest test/unit/util/test_utils.py
@@ -198,7 +198,7 @@ Most of Galaxy unit tests are designed to test a separate component or function,
 >    {: .code-in}
 >
 >    Do you see the error message?
->    
+>
 >    > ### {% icon solution %} Solution
 >    > The test gives us a very specific error message:
 >    > ```
@@ -209,23 +209,23 @@ Most of Galaxy unit tests are designed to test a separate component or function,
 >    > ```
 >    > This means that instead of the expected `bla` we got `b l a` (with spaces).
 >    {: .solution }
->    
+>
 > 3. **Finding and fixing the issue**
 >
 >    Our next step is to open the test file and see what part of the codebase (i.e., what module, class + method or function) is failing to provide the expected result.
->    
+>
 >    The failing test is calling the `strip_control_characters` function in the `util` module. That function, apparently, is not producing the expected output. Let's head over to `lib/galaxy/util/__init__.py`, where we'll find the function definition:
->    
+>
 >    ```python
 >    def strip_control_characters(s):
 >        """Strip unicode control characters from a string."""
 >        return " ".join(c for c in unicodify(s) if unicodedata.category(c) != "Cc")
 >    ```
->    
+>
 >    The function takes a string as input, and, in theory, returns a copy of that string with certain characters stripped away (it doesn't really matter what characters are stripped away). However, from the test we see that the string is modified in a different way: spaces have been added between the characters.
 >
 >    Can you see what's causing this behavior?
->    
+>
 >    > > ### {% icon solution %} Solution
 >    > > The genexp is evaluated and subsequently joined using a space as a delimiter. The space is, obviously, a typo: we don't want to _add_ anything to the string, so the delimiter should be the empty string instead:
 >    > > ```python
@@ -251,7 +251,7 @@ API test various aspects of the Galaxy API, as well as general backend aspects o
 > 1. **Finding the failing test on GitHub**
 >
 >    We'll follow the same process we used in the unit test section. On GitHub, click the same red "x" and select the "API tests / Test (3..." workflow and click "Details". Try to find the failed tests.
->    
+>
 >    > ### {% icon solution %} Solution
 >    > The log lists multiple failed tests. Some of them were caused by bugs you'll be fixing in later sections of this tutorial. For this exercise, we care about these two failed tests:
 >    > ```
@@ -264,7 +264,7 @@ API test various aspects of the Galaxy API, as well as general backend aspects o
 > 2. **Running the test locally**
 >
 >    Again, we will run the individual test locally. While it is possible to run the test directly with pytest, in this case we will use Galaxy's script `run_tests.sh`. The script optimizes test runs by sharing the same instance of Galaxy across multiple tests; without the script a new Galaxy will be started for each TestCase class. There are other reasons to run the script; for more information check the documentation block at the top of the script.
->    
+>
 >    Make sure you are in `GALAXY_ROOT` (if your virtual environment is not activated, the script will do it for you).
 >
 >    Let's run the failed test:
@@ -276,7 +276,7 @@ API test various aspects of the Galaxy API, as well as general backend aspects o
 >    {: .code-in}
 >
 >    Two tests are failing. Do you see the error messages?
->    
+>
 >    > ### {% icon solution %} Solution
 >    > We see the following error messages:
 >    > ```
@@ -289,7 +289,7 @@ API test various aspects of the Galaxy API, as well as general backend aspects o
 > 3. **Finding and fixing the issue**
 >
 >    We can use either one of the failing tests to start debugging. Let's use `test_get_license`. As with the unit test, first let's take a look at the test function definition (located in `lib/galaxy_test/api/test_licenses.py`):
->    
+>
 >    ```python
 >    def test_get_license(self):
 >        licenseId = "Apache-2.0"
@@ -297,13 +297,13 @@ API test various aspects of the Galaxy API, as well as general backend aspects o
 >        self._assert_status_code_is(response, 200)
 >        self._assert_matches_license_id(licenseId, response.json())
 >    ```
->    
+>
 >    The important line here is line 3: it tells us what API endpoint is called: `licenses/{licenseId}`.
->    
+>
 >    Our next step is to examine the controller for this endpoint. For that, we head over to `lib/galaxy/webapps/galaxy/api/licenses.py`.
->    
+>
 >    There are 2 controllers (a legacy controller and a FastAPI controller) that have identical functionality; we can use either one. If you look at the FastAPI controller, you'll see the `get` method that is responsible for fetching the data in response to a `GET` HTTP request received at the `licenses/{licenseId}` endpoint:
->    
+>
 >    ```python
 >        @router.get('/api/licenses/{id}',
 >            summary="Gets the SPDX license metadata associated with the short identifier",
@@ -313,17 +313,17 @@ API test various aspects of the Galaxy API, as well as general backend aspects o
 >            [SPDX license short ID](https://spdx.github.io/spdx-spec/appendix-I-SPDX-license-list/)."""
 >            return self.licenses_manager.get_license_by_id(id)
 >    ```
->    
+>
 >    The only thing in this method that matters to us is the last line:
->    
+>
 >    ```python
 >    return self.licenses_manager.get_license_by_id(id)
 >    ```
->    
+>
 >    Why? Because despite all this syntax, the method simply redirects the request to `self.licenses_manager`. If we read the code, we'll quickly see that this variable holds an instance of `LicencesManager`, which (look at the import statements at the top of the file) is located in `lib/galaxy/managers/licenses.py`. Which is where we should look next.
->    
+>
 >    If we carefully trace the code in `LicensesManager`, we'll find the error. Do you see it?
->    
+>
 >    > ### {% icon solution %} Solution
 >    > The `get_license_by_id()` method raises an `ObjectNotFound` error (which results in the 404 status code we see in the test result). This error is a direct result of the `get` method called on the previous line - take a look at that method:
 >    > ```python
@@ -357,33 +357,33 @@ Client Linting is important to reduce errors, improve quality of the codebase, a
 >
 > 1. **Finding the failing test on GitHub**
 >
->    With this error, one of the failing test workflows on GitHub would normally be “get_code_and_test”. However, since we are working on a branch that contains multiple bugs by design, some of the test failures overlap, as a result of which the “get_code_and_test” workflow has been skipped in the last commit. 
+>    With this error, one of the failing test workflows on GitHub would normally be “get_code_and_test”. However, since we are working on a branch that contains multiple bugs by design, some of the test failures overlap, as a result of which the “get_code_and_test” workflow has been skipped in the last commit.
 >
 >    Therefore, for this section, [you'll need to use the results from this commit](https://github.com/galaxyproject/galaxy/runs/2780158706) to find the failing test.
 >
 >    One of the failing tests on GitHub says "get_code_and_test". Clicking on the word "Details" assocated with this failure will open a brief view of the CircleCI Checks, with a list of tests that are run as part of that command. You'll see that the one that is failing is js_lint. And if you click that, you'll be navigated to the CicleCI app, where you can see much more information about the failures.
->    
+>
 >    Here you can see the exact command that ran to lint our codebase:
 >
 >    ```
 >    cd client && yarn run eslint
 >    ```
->    
+>
 >    We can also see that it has found 1 error, where that error is located, and a description of the problem.
 >
 > 2. **Running the linter locally**
 >
 >    Alright, so we've seen the failure, but we want to verify it locally now. For this, you'll need to open up a terminal.
->    
+>
 >    > ### {% icon code-in %} Input: Bash
 >    > Make sure you are in `GALAXY_ROOT` and your virtual environment is activated. If not, activate it:
 >    > ```bash
 >    > . .venv/bin/activate
 >    > ```
 >    {: .code-in}
->    
+>
 >    Then you've got two options. You can run the same exact command that CircleCI uses, `cd client && yarn run eslint` or `make client-lint`, which does `cd client && yarn run eslint && yarn run prettier-check`. This will also make sure your code conforms to formatting standards.
->    
+>
 >    After running that, you should see the same linting error from CircleCI; you should know where it is and how to fix it too!
 >
 > 3. **Finding and fixing the issue**
@@ -395,14 +395,14 @@ Client Linting is important to reduce errors, improve quality of the codebase, a
 >    >
 >    > Alternatively, you can run `yarn eslint --fix` or `yarn run prettier`.
 >    {: .solution }
->    
+>
 >    If you think you've got it, try running the test locally again to be sure.
 >
 > 4. **Finishing up**
 >
 >    Whoo-hoo! If you're here, you've identified the error, ran the appropriate command locally, found the problem, fixed it, confirmed that the command runs without errors, and are ready to commit your change. Write a useful commit message like `Fix a client linting issue in RuleComponent` or something similar, making sure it is clear what you've done.
 >    (See [Galaxy's contributor's guide](https://github.com/galaxyproject/galaxy/blob/dev/CONTRIBUTING.md#how-to-contribute) for details on how to write a useful and properly formatted commit message.)
->    
+>
 >    Awesome work - you now understand how to solve client linting issues!
 {: .hands_on}
 
@@ -414,7 +414,7 @@ Client tests are tests written by developers to test front-end code. In the case
 >
 > 1. **Finding the failing test on GitHub**
 >    One of the failing tests on GitHub says "Client Unit Testing / jest". Clicking on Details beside that failure, will open up a the terminal output from that test. Here you should be able to see what test is failing.
->    
+>
 >    > ### {% icon solution %} Solution
 >    >
 >    > The failing test file is `src/components/RuleBuilder/SavedRulesSelector.test.js`, and the failing test in that file is `SavedRulesSelector › disables history icon if there is no history`.
@@ -430,21 +430,21 @@ Client tests are tests written by developers to test front-end code. In the case
 >    {: .code-in}
 >
 >    To run the client tests locally, you must be in the client directory; if you're just in the galaxy directory, `cd client` should take you to the right place.
->    
+>
 >    Next, type `yarn run test` or `yarn jest` to run all the client tests.
->    
+>
 >    The output should match what you found on Github.
->    
+>
 > 3. **Finding and fixing the issue**
 >
 >    Next up, finding the error. Here are some tips:
->    
+>
 >    - Take a look at the failing test and the imports to find out which Vue component the test correlates to.
 >    - Look at the test to see what it does. Is there an error in the test?
 >    - Look at the Vue component where the failure seems to be taking place. Is the error located there?
->    
+>
 >    The solution is hidden below, but try your hand at fixing it first:
->    
+>
 >    > ### {% icon solution %} Solution
 >    > The failure is only happening on the disabled test case, so take a look in the template of `SavedRulesSelector` where the conditions for adding disabled are defined.
 >    >
@@ -456,19 +456,19 @@ Client tests are tests written by developers to test front-end code. In the case
 >    >
 >    > -- whoops! A very silly off by one error. On that very same line, change the 1 to a 0, and run the test again.
 >    {: .solution }
->    
+>
 >    If you think you've got it, try running the test locally again to be sure.
->    
+>
 >    > ### {% icon comment %} Running fewer client tests
 >    > If you don't want to run the whole suite of client tests, you can add keywords that match the test path/name. For example both `yarn run jest rule` and `yarn jest selector` will work, but the former will run other tests with rule in the path/module name.
 >    {: .comment}
->    
+>
 > 4. **Finishing up**
->    
+>
 >    Nice Job! If you're here, you've found the problem, ran it locally, fixed the problem, ran it locally again without errors, and are ready to commit your change. Write a useful commit message like `Fix logic error in SavedRuleSelector` or something similar, making sure it is clear what you've done.
 >
 >    (See [Galaxy's contributor's guide](https://github.com/galaxyproject/galaxy/blob/dev/CONTRIBUTING.md#how-to-contribute) for details on how to write a useful and properly formatted commit message.)
->    
+>
 >    Awesome work - you now understand how to solve client linting issues!- you now have a handle on client tests!
 {: .hands_on}
 
@@ -481,9 +481,9 @@ Selenium is the end-to-end or integration testing framework that we use; so thes
 > 1. **Finding the failing test on GitHub**
 >
 >    There may be actually a few failing Selenium tests, but the good news is, they are the result of only one little error. The failing tests on GitHub are in the "Selenium Test 3.7,0" and "Selenium Test 3.7,1" workflows. When you click on the details of this one, it's not always very clear which test is causing the failure, but if you download the artifacts, it's very clear which tests have failed.
->    
+>
 >    Try to identify which tests are failing based on artifacts you downloaded.
->    
+>
 >    > ### {% icon solution %} Solution
 >    >
 >    > The failing tests are:
@@ -495,13 +495,13 @@ Selenium is the end-to-end or integration testing framework that we use; so thes
 > 2. **Running the tests locally**
 >
 >    Make sure you are in `GALAXY_ROOT` (if your virtual environment is not activated, the script will do it for you).
->    
+>
 >    We do not want to run the full suite of Selenium tests here - that would take a lot of time and we already know that most of them passed.
->    
+>
 >    Instead, we can build our commands to only run a subset of the tests. Here's an example: `./run_tests.sh -selenium lib/galaxy_test/selenium/test_sign_out.py`
->    
+>
 >    A command like that will still run all of the tests defined in that python file, so we need to find out where the tests that failed are defined. Try seaching the baseline for our three failing Selenium tests; what files are they in?
->    
+>
 >    > ### {% icon solution %} Solution
 >    >
 >    > The failing tests are defined in these files:
@@ -509,7 +509,7 @@ Selenium is the end-to-end or integration testing framework that we use; so thes
 >    > - `lib/galaxy_test/selenium/test_collection_builders.py`
 >    > - `lib/galaxy_test/selenium/test_uploads.py`
 >    {: .solution }
->    
+>
 >    Now that we have the files, we can run the selenium tests. The command to do this should be very similar to `./run_tests.sh -selenium lib/galaxy_test/selenium/test_sign_out.py`. The only difference should be the python file where the tests are defined. Try it yourself, before checking out the solution.
 >
 >    > ### {% icon solution %} Solution
@@ -538,7 +538,7 @@ Selenium is the end-to-end or integration testing framework that we use; so thes
 >    Re-run the selenium test to watch the headless browser step through the test.
 >
 >    Looking at the test run in the headless browser, alongside the definition for the test should help you understand what might be going wrong. Try and figure out where the problem is on your own, before looking at the solution.
->    
+>
 >    > ### {% icon solution %} Solution
 >    >
 >    > The problem is that the tests are expecting a different HID (history identifier) than what is being made available to them. Since all the failing tests have to do with Lists, you might want to check out the ListCollectionCreator.
@@ -549,16 +549,16 @@ Selenium is the end-to-end or integration testing framework that we use; so thes
 >    >
 >    > Here you should notice that in the PairCollectionCreator or in the PairedListCollectionCreator, `:hide-source-items="hideSourceItems"` instead of `:hide-source-items="!hideSourceItems"`. It's a little change, just flipping the boolean, but it makes a big difference!
 >    {: .solution }
->    
+>
 >    Awesome! If you're here, you've found and fixed the problem, at least, in theory.
->    
+>
 >    If you think you've got it, try running the tests locally again to be sure. In this simulated case, you can get by with just running one of the tests, but in reality, you should probably run all three Selenium tests to be sure that it's totally fixed.
 >
 > 4. **Finishing up**
 >
 >    Excellent! If you're here, you've found the problem, ran it locally, fixed the problem, ran it locally again without errors, and are ready to commit your change. Write a useful commit message like `Fix logic error in ListCollectionCreator` or something similar, making sure it is clear what you've done.
 >    (See [Galaxy's contributor's guide](https://github.com/galaxyproject/galaxy/blob/dev/CONTRIBUTING.md#how-to-contribute) for details on how to write a useful and properly formatted commit message.)
->    
+>
 >    Selenium tests are in the bag!
 {: .hands_on}
 
@@ -578,41 +578,44 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 > 1. **Reproduce the error**
 >
 >    Here's the bug report:
->    
+>
 >    ```In the User menu, clicking the Datasets option causes an error message to be displayed on the page: "Uncaught exception in exposed API method".```
->    
+>
 >    Make sure you are in `GALAXY_ROOT`. Then start your local Galaxy:
->    
->    > ### {% icon code-in %} Input: Bash
->    > ```bash
->    > ./run.sh
->    > ```
->    {: .code-in}
->    
->    The first startup may take a few minutes. Eventually, you'll see the following output (the PID will be different):
->    
->    ```
->    Starting server in PID 1583948.
->    serving on http://127.0.0.1:8080
->    ```
->    
->    Now you can access your Galaxy instance from the browser at `http://127.0.0.1:8080`.
->    
+>
+>    > > ### {% icon code-in %} Input: Bash
+>    > > ```bash
+>    > > ./run.sh
+>    > > ```
+>    > {: .code-in}
+>    >
+>    > > ### {% icon code-out %} Output
+>    > > The first startup may take a few minutes. Eventually, you'll see the following output (the PID will be different):
+>    > >
+>    > > ```
+>    > > Starting server in PID 1583948.
+>    > > serving on http://127.0.0.1:8080
+>    > > ```
+>    > {: .code-out}
+>    {: .code-2col}
+>
+>    Now you can access your Galaxy instance from the browser at [`http://127.0.0.1:8080`](http://127.0.0.1:8080).
+>
 >    To reproduce this error, we need to access the User menu. For this, we need to be logged in to Galaxy:
->    
+>
 >    1. Click on "Login or Register:
 >    2. At the bottom of the form, click "Register here"
 >    3. Fill out the form. You may use any data, as long as the email you provide is a valid email format and the password is at least 6 characters long. For this exercise, it doesn't matter what email, name or password you use.
 >    4. Click "Create"
->    
+>
 >    Now the User menu is available to us. Click "User", then select "Datasets" from the dropdown menu. You should be able to see the error message displayed on the page: "Uncaught exception in exposed API method".
->    
+>
 >    Being able to reproduce a bug is good: this means you're on your way to fixing it, and you know what to look for! In a real scenario, it is not uncommon that a bug is not easily reproduceable, which makes fixing it a much more complicated task.
 >
 > 2. **Locate the problem**
 >
 >    To figure out what's happening, our best bet is to look at the Galaxy log (look at the terminal window from which you launched Galaxy). Can you see the error message?
->    
+>
 >    > ### {% icon solution %} Solution
 >    >
 >    > You should see something like this:
@@ -629,26 +632,26 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 >    >
 >    > From this error log, we can easily tell that the error happens in the `lib/galaxy/webapps/galaxy/api/datasets.py` file on line 129. The specific error message doesn't tell us much - which is often what happens in the wild.
 >    {: .solution }
->    
+>
 >    Let's head over to the `datasets'py` file, line 129:
->    
+>
 >    ```python
 >    126         if str_as_bool(trans.app.config.get('show_datasets', 'True')):
 >    127             return [self.serializer_by_type[content.history_content_type].serialize_to_view(content, user=trans.user, trans=trans, view=view) for content in contents]
 >    128         else:
 >    129             raise Exception('This should not happen!')
 >    ```
->    
+>
 >    The good news is that the error happens inside an `if/else` block, which narrows down our search to line 126: that line evaluates to `False`, causing the `else` clause to execute. The bad news is that we have no idea what causes that line to evaluate to `False`.
 >
 > 3. **Identify the problem**
 >
 >    We will investigate using pdb - our trusted Python debugger!
->    
+>
 >    pdb offers a wide range of functionality and is exceptionally useful for debugging at runtime. We encourage you to read its [documentation](https://docs.python.org/3/library/pdb.html); however for this exercise we will only use the built-in [breakpoint()](https://docs.python.org/3/library/functions.html#breakpoint) function, that drops us into pdb.
->    
+>
 >    Add a `breakpoint()` statement to your code, right above the `if/else` block.
->    
+>
 >    > ### {% icon solution %} Solution
 >    >
 >    > ```python
@@ -660,30 +663,30 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 >    > ```
 >    >
 >    {: .solution }
->    
+>
 >    Now we need to restart Galaxy. However, to use pdb, we need to enable Galaxy's debug configuration option. In general, it may be a good idea to enable this in your `galaxy.yml` configuration file (just copy or rename `config/galaxy.yml.sample` and uncomment the option you want to set). However, for the purposes of this exercise, it's enough to set the `GALAXY_CONFIG_DEBUG` environment variable when running Galaxy:
->    
+>
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
 >    > GALAXY_CONFIG_DEBUG=1 ./run.sh
 >    > ```
 >    {: .code-in}
->    
+>
 >    > ### {% icon comment %} Why we set the debug option
 >    >
 >    > The reason for setting the `debug` option is quite esoteric: among other things, it prevents uWSGI from remapping `stdin` to `dev/null` which would prevent tools like pdb from running.
 >    {: .comment}
->    
+>
 >    Now your Galaxy is running in debug mode. Repeat your steps that reproduced the error. When you click "Datasets", head over to your terminal. At the bottom of the log you'll see something like this:
->    
+>
 >    ```
 >    > /home/sergey/2sandbox/galaxy/dev_training/lib/galaxy/webapps/galaxy/api/datasets.py(127)index()
 >    -> if str_as_bool(trans.app.config.get('show_datasets', 'True')):
 >    (Pdb)
 >    ```
->    
+>
 >    You're at the pdb prompt. From here you can execute Python code interactively. So, let's explore what's happening in the next line:
->    
+>
 >    > ### {% icon code-in %} Input: Pdb
 >    > ```
 >    > (Pdb) trans
@@ -697,13 +700,13 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 >    > (Pdb)
 >    > ```
 >    {: .code-in}
->    
+>
 >    We could have just typed `trans.app.config.get`, of course; the steps above give us some additional context.
->    
+>
 >    Now let's take a look at the definition of the `get` method. We need to find `CommonConfigurationMixin` which is used by `galaxy.config.GalaxyAppConfiguration`.
->    
+>
 >    Head over to `lib/galaxy/config/__init__.py` and look for the class `CommonConfigurationMixin`. Once you find it, look for the definition of its `get` method. When you find it, look at the method signature. What is the meaning of the argument `'True'` that is passed to this method in `datasets.py` on line 127?
->    
+>
 >    > ### {% icon solution %} Solution
 >    >
 >    > ```python
@@ -714,9 +717,9 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 >    >
 >    > The argument `True` corresponds to the parameter `default`. In the method's body, we see that this value will be passed to `self.config_dict.get()`; `self.config_dict` is a Python dictionary, so the second argument to `get()` is the default value that will be retuned if `key` is not in `self.config_dict`.
 >    {: .solution }
->    
+>
 >    Back to `datasets.py`, line 127. Now we know that `True` is the default value that will be returned if the key `show_datasets` does not exist in the `config_dict` dictionary. Moving on:
->    
+>
 >    > ### {% icon code-in %} Input: Pdb
 >    > ```
 >    > (Pdb) trans.app.config.get('show_datasets')
@@ -724,21 +727,21 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 >    > 'True'
 >    > ```
 >    {: .code-in}
->    
+>
 >    So, we see that `show_datasets` does not exist and we get the default value, which is the string `'True'`.
->    
+>
 >    Next step: `str_to_bool`. First, let's pass it the value `'True'`:
->    
+>
 >    > ### {% icon code-in %} Input: Pdb
 >    > ```
 >    (Pdb) str_as_bool('True')
 >    False
 >    ```
 >    {: .code-in}
->    
+>
 >    That doesn't look right! Exit the debugger (type in `q`, then `Enter`, then `CTRL-C ` to exit Galaxy.
 >    Head over to the function's definition (you can tell from the import statement at the top of the file that it's in `lib/galaxy/util/__init__.py`) and try to figure out if there is an error.
->    
+>
 >    > ### {% icon solution %} Solution
 >    >
 >    > ```python
@@ -758,9 +761,9 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 > 4. **Write a test exposing the bug**
 >
 >    Before you fix code that was not covered by a test, write the test to expose the bug! In this case we have a simple, completely isolated function - a simple unit test should do. Your test should go into this module: `test/unit/util/test_utils.py`.
->    
+>
 >    Start with a blank test function. Then call the funtion under test (`str_as_bool`) and assert that when you pass it the value `'True'`, it returns `True`. Can you think of more cases to test?
->    
+>
 >    > ### {% icon solution %} Solution
 >    >
 >    > Your first step could be something like this:
@@ -783,13 +786,13 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 >    > ```
 >    >
 >    {: .solution }
->    
+>
 >    Run your test. Does it fail? Good! Now it's time to fix the error.
 >
 > 5. **Fix the error**
 >
 >    Can you think of a simple way to fix the function so that our test passes?
->    
+>
 >    > ### {% icon solution %} Solution
 >    >
 >    > One way to do it is to simply convert the input value to lowercase:
@@ -805,13 +808,13 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 >    >
 >    > In fact, that's exactly what the real function does! Check line 966 - you'll see almost the exact same function, named `string_as_bool`: we didn't modify it because that might have broken other parts of Galaxy which would have been a distraction from the core aspects of the exercise.
 >    {: .solution }
->    
+>
 >    Run the test - now it should pass!
 >
 > 6. **Ensure the error no longer occurs**
 >
 >    Now that we have the `str_as_bool` function covered by test, as a bonus, we can safely do some minor refactoring: the test will prevent us from breaking things. Can you simplify the function's code?
->    
+>
 >    > ### {% icon solution %} Solution
 >    >
 >    > ```python
@@ -822,12 +825,12 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 >    >
 >    > Much better!
 >    {: .solution }
->    
+>
 >    Finally, head back to your local Galaxy and verify that the runtime error no longer occurs:
->    
+>
 >    1. Remove the `breakpoint()` statement you added to `lib/galaxy/webapps/galaxy/api/datasets.py`.
 >    2. Start Galaxy and repeat the steps from the bug report (select "User" > "Datasets"). You should see the Datasets page now - no more error message!
->    
+>
 >    Congratulations - you've completed the last and, possibly, most challenging section of this tutorial!
 {: .hands_on}
 
