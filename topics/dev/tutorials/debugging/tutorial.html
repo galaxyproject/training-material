@@ -1,0 +1,1635 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Debugging Galaxy</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta property="og:title" content="Galaxy Training: Debugging Galaxy" />
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxyproject/dev'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/dev" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Development in Galaxy
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/dev/faqs/" title="Check our FAQs for the Development in Galaxy topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/debugging/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/dev/tutorials/debugging/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/debugging/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/debugging/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/debugging/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/debugging/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/debugging/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fdev%2Ftutorials%2Fdebugging%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/debugging/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                    -->
+
+                     <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Debugging Galaxy",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/main/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Development in Galaxy",
+    "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+    "url": "https://training.galaxyproject.org//training-material/topics/dev/"
+  },
+  "courseCode": "dev / debugging / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Debugging Galaxy' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/dev/tutorials/debugging/tutorial.html",
+  "timeRequired": "PT4H",
+  "description": "The questions this  addresses are:\n - How do I debug Galaxy?\n\n\\nThe objectives are:\n - Fix a broken branch\n - Interpret the results of failed tests on GitHub\n - Run individual tests locally\n - Fix errors identified by failing tests\n - Debug simple runtime errors using the Python debugger\n - Write tests exposing the identified bug\n\n",
+  "coursePrerequisites": [
+    "Familiarity with basic Git commands",
+    "Basic knowledge of Python and JavaScript",
+    "Mac OS or Linux that can run Galaxy & your favorite IDE or editor",
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/dev/tutorials/architecture/slides.html",
+      "name": "Galaxy Code Architecture",
+      "description": "Slides for 'Galaxy Code Architecture' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Assunta DeSanto"
+    },
+    {
+      "@type": "Person",
+      "name": "Sergey Golitsynskiy"
+    },
+    {
+      "@type": "Person",
+      "name": "John Chilton"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Assunta DeSanto"
+    },
+    {
+      "@type": "Person",
+      "name": "Sergey Golitsynskiy"
+    },
+    {
+      "@type": "Person",
+      "name": "John Chilton"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Development in Galaxy",
+      "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+      "url": "https://training.galaxyproject.org//training-material/topics/dev/"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial topic-dev">
+        <h1 data-toc-skip>Debugging Galaxy</h1>
+        
+
+        <div class="contributors-line">By: 
+
+ <a href="/training-material/hall-of-fame/assuntad23/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/assuntad23" alt="Assunta DeSanto">Assunta DeSanto</a> <a href="/training-material/hall-of-fame/ic4f/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/ic4f" alt="Sergey Golitsynskiy">Sergey Golitsynskiy</a> <a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/jmchilton" alt="John Chilton">John Chilton</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How do I debug Galaxy?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Fix a broken branch</p>
+</li>
+            
+            <li><p>Interpret the results of failed tests on GitHub</p>
+</li>
+            
+            <li><p>Run individual tests locally</p>
+</li>
+            
+            <li><p>Fix errors identified by failing tests</p>
+</li>
+            
+            <li><p>Debug simple runtime errors using the Python debugger</p>
+</li>
+            
+            <li><p>Write tests exposing the identified bug</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+            
+    <li>
+    
+        Familiarity with basic Git commands
+    
+    </li>
+
+    <li>
+    
+        Basic knowledge of Python and JavaScript
+    
+    </li>
+
+    <li>
+    
+        Mac OS or Linux that can run Galaxy & your favorite IDE or editor
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/dev">Development in Galaxy</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Galaxy Code Architecture:
+                            
+                                <a href="/training-material/topics/dev/tutorials/architecture/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 4 hours</div>
+            
+
+            
+
+            
+            
+
+            
+            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/dev/slides/introduction.html" title="Topic Overview slides">
+                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Topic Overview slides
+                    </a></li>
+                
+
+                
+
+                
+
+                
+
+                
+                
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/dev/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 15, 2021 </div>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>In this tutorial we will demonstrate how to find and fix common types of bugs you may encounter as a contributor to <span class="notranslate">Galaxy</span>. We will step you through the process of finding and fixing a bug - from locating specific errors in the logs of <span class="notranslate">Galaxy</span>’s GitHub Actions, to identifying their cause, developing a solution and committing your edits</p>
+
+<p>With the skills from this tutorial, it is our hope that you will feel more prepared to develop solutions for <span class="notranslate">Galaxy</span> and more confidently navigate any obstacles along the way.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+<ol id="markdown-toc">
+  <li><a href="#local-development-environment-setup" id="markdown-toc-local-development-environment-setup">Local development environment setup</a>    <ol>
+      <li><a href="#contributing-to-galaxy" id="markdown-toc-contributing-to-galaxy">Contributing to <span class="notranslate">Galaxy</span></a></li>
+      <li><a href="#getting-started-pulling-the-buggy-branch" id="markdown-toc-getting-started-pulling-the-buggy-branch">Getting started: Pulling the buggy branch</a></li>
+    </ol>
+  </li>
+  <li><a href="#unit-test-failure" id="markdown-toc-unit-test-failure">Unit test failure</a></li>
+  <li><a href="#api-test-failure" id="markdown-toc-api-test-failure">API test failure</a></li>
+  <li><a href="#client-linting-error" id="markdown-toc-client-linting-error">Client linting error</a></li>
+  <li><a href="#client-unit-test-failure" id="markdown-toc-client-unit-test-failure">Client unit test failure</a></li>
+  <li><a href="#selenium-test-failure" id="markdown-toc-selenium-test-failure">Selenium test failure</a></li>
+  <li><a href="#runtime-error" id="markdown-toc-runtime-error">Runtime error</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="local-development-environment-setup">Local development environment setup</h1>
+
+<p>For almost every type of error you encounter, there will be a relatively similar process:</p>
+
+<ol>
+  <li>Locate failing test or error on GitHub Actions</li>
+  <li>Run failing test locally</li>
+  <li>Identify issue causing failure</li>
+  <li>Develop a solution</li>
+  <li>Ensure test passes locally</li>
+  <li>Commit and push fixed branch to local fork</li>
+</ol>
+
+<p>The process for dealing with runtime errors will be somewhat different, since there will be no failed test to review initially. However, in either case, the first step is to setup your local development environment.</p>
+
+<h2 id="contributing-to-galaxy">Contributing to <span class="notranslate">Galaxy</span></h2>
+
+<p>To contribute to <span class="notranslate">galaxy</span>, a GitHub account is required. Changes are proposed via a <a href="https://docs.github.com/en/github/collaborating-with-pull-requests">pull request</a>. This allows the project maintainers to review the changes and suggest improvements.</p>
+
+<p>The general steps are as follows:</p>
+
+<ol>
+  <li>Fork the <span class="notranslate">Galaxy</span> repository</li>
+  <li>Clone your fork</li>
+  <li>Make changes in a new branch</li>
+  <li>Commit your changes, push branch to your fork</li>
+  <li>Open a pull request for this branch in the <span class="notranslate">upstream</span> <span class="notranslate">Galaxy</span> repository</li>
+</ol>
+
+<p>In this tutorial, instead of cloning <span class="notranslate">Galaxy</span>’s default branch, we will clone a branch that has been created for this tutorial and contains several bugs that you’ll need to identify and fix. Also, we won’t be opening a pull request in the <span class="notranslate">upstream</span> <span class="notranslate">Galaxy</span> repository.</p>
+
+<h2 id="getting-started-pulling-the-buggy-branch">Getting started: Pulling the buggy branch</h2>
+
+<p>Good news! All of the failing tests are on the same <span class="notranslate">Galaxy</span> branch! That means you only need to download and work off of one branch. The downside is that this is one buggy branch with issues all over the place. We have no doubts that you can solve them though!</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-setup-your-local-galaxy-instance"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Setup your local <span class="notranslate">Galaxy</span> instance</h3>
+
+  <ol>
+    <li>Use GitHub UI to fork <span class="notranslate">Galaxy</span>’s repository at <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project/<span class="notranslate">galaxy</span></code>.</li>
+    <li>
+      <p>Clone your forked repository to a local path, further referred to as <code class="language-plaintext highlighter-rouge"><span class="notranslate">GALAXY</span>_ROOT</code> and <code class="language-plaintext highlighter-rouge">cd</code> into <code class="language-plaintext highlighter-rouge"><span class="notranslate">GALAXY</span>_ROOT</code>. Note that we specify the tutorial branch with the <code class="language-plaintext highlighter-rouge">-b</code> option:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">-b</span> training https://github.com/&lt;your-use<span class="notranslate">rna</span>me&gt;/<span class="notranslate">galaxy</span> <span class="notranslate">GALAXY</span>_ROOT
+<span class="nb">cd </span><span class="notranslate">GALAXY</span>_ROOT
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>Note: In the future, when you contribute to <span class="notranslate">Galaxy</span>, you’ll need to clone the <code class="language-plaintext highlighter-rouge">dev</code> branch, which is the default, so you don’t need to specify the <code class="language-plaintext highlighter-rouge">-b</code> option in the <code class="language-plaintext highlighter-rouge">git clone</code> command).</p>
+    </li>
+    <li>
+      <p>Before we can use <span class="notranslate">Galaxy</span>, we need to create a virtual environment and install the required dependencies. First, let’s create a virtual environment:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>virtualenv .venv
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>Make sure your Python version is at least 3.6 (you can check your Python version with <code class="language-plaintext highlighter-rouge">python --version</code>). If your system uses an older version, you may specify an alte<span class="notranslate">rna</span>tive Python interpreter using the <code class="language-plaintext highlighter-rouge">-p</code> option:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>virtualenv <span class="nt">-p</span> PATH-TO-PYTHON-INTERPETER .venv
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Activate your new virtual environment:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">.</span> .venv/bin/activate
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>Once activated, you’ll see the name of the virtual environment prepended to your shell prompt: <code class="language-plaintext highlighter-rouge">(.venv)$</code>. 5. Now you are ready to install the dependencies. Since you wil be doing development, you need to install the dependencies listed in <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/dependencies/dev-requirements.txt</code>:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install</span> <span class="nt">-r</span> lib/<span class="notranslate">galaxy</span>/dependencies/dev-requirements.txt
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Finally, let’s create a new branch for your edits:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout <span class="nt">-b</span> my-training
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>Now when you run <code class="language-plaintext highlighter-rouge">git branch</code> you’ll see that your new branch is activated:</p>
+
+      <blockquote class="code-2col">
+        <blockquote class="code-in">
+          <h3 id="code-in-input-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch
+</code></pre></div>          </div>
+        </blockquote>
+
+        <blockquote class="code-out">
+          <h3 id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  training
+<span class="k">*</span> my-training
+</code></pre></div>          </div>
+        </blockquote>
+      </blockquote>
+
+      <p>Note: <code class="language-plaintext highlighter-rouge">my-training</code> is just an example; you can call your new branch anything you like.</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="unit-test-failure">Unit test failure</h1>
+
+<p>Most of <span class="notranslate">Galaxy</span> unit tests are designed to test a separate component or function, are very fast, and do not require a running <span class="notranslate">Galaxy</span> instance. Finding the issue causing a unit test to fail is relatively straightforward.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-fixing-a-failing-unit-test"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Fixing a failing unit test</h3>
+
+  <ol>
+    <li>
+      <p><strong>Finding the failing test on GitHub</strong></p>
+
+      <p>Head over to the <a href="https://github.com/galaxyproject/galaxy"><span class="notranslate">Galaxy</span> repository on GitHub</a> and in the branch drop-down select the “training” branch. Click the red “x” next to the last commit, you’ll get a drop-down listing of <span class="notranslate">workflow</span> results; find “Unit tests / Test (3…” and click “Details”. This will display a detailed report that includes information about the failed tests. Try to find the failed tests.</p>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+        <p>The log lists 2 failed tests:</p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- FAILED lib/<span class="notranslate">galaxy</span>/model/tags.py::<span class="notranslate">galaxy</span>.model.tags.TagHandler.parse_tags
+- FAILED test/unit/util/test_utils.py::test_strip_control_characters
+</code></pre></div>        </div>
+        <p>The first is a doctest. While it will provide us with hints on what may have caused the error, the unit test is generally more helpful.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Running the test locally</strong></p>
+
+      <p>An essential requirement for productive development is a fast feedback loop: we want to make a change, run a test, and get immediate feedback. If we push our edits to the remote fork (or submit a pull request to the <span class="notranslate">upstream</span> repository) and wait for the the tests to run remotely, it could take hours before we get any feedback, which is very inefficient (and detrimental to sustaining the joy of programming).</p>
+
+      <p>Instead, we will run the tests locally. Furthermore, we will run a specific test that we know is failing: this will give us the instant feedback we need.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-7"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <p>Make sure you are in <code class="language-plaintext highlighter-rouge"><span class="notranslate">GALAXY</span>_ROOT</code> and your virtual environment is activated. If not, activate it:</p>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">.</span> .venv/bin/activate
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>The simplest way to run the failing test locally is using pytest directly:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-8"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pytest <span class="nb">test</span>/unit/util/test_utils.py
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>Do you see the error message?</p>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+        <p>The test gives us a very specific error message:</p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AssertionError: assert 'b l a' == 'bla'
+- bla
++ b l a
+?  + +
+</code></pre></div>        </div>
+        <p>This means that instead of the expected <code class="language-plaintext highlighter-rouge">bla</code> we got <code class="language-plaintext highlighter-rouge">b l a</code> (with spaces).</p>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Finding and fixing the issue</strong></p>
+
+      <p>Our next step is to open the test file and see what part of the codebase (i.e., what module, class + method or function) is failing to provide the expected result.</p>
+
+      <p>The failing test is calling the <code class="language-plaintext highlighter-rouge">strip_control_characters</code> function in the <code class="language-plaintext highlighter-rouge">util</code> module. That function, apparently, is not producing the expected output. Let’s head over to <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/util/__init__.py</code>, where we’ll find the function definition:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">strip_control_characters</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="s">"""Strip unicode control characters from a string."""</span>
+    <span class="k">return</span> <span class="s">" "</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">unicodify</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">if</span> <span class="n">unicodedata</span><span class="p">.</span><span class="n">category</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">!=</span> <span class="s">"Cc"</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>The function takes a string as input, and, in theory, returns a copy of that string with certain characters stripped away (it doesn’t really matter what characters are stripped away). However, from the test we see that the string is modified in a different way: spaces have been added between the characters.</p>
+
+      <p>Can you see what’s causing this behavior?</p>
+
+      <blockquote>
+        <blockquote class="solution">
+          <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p>The genexp is evaluated and subsequently joined using a space as a delimiter. The space is, obviously, a typo: we don’t want to <em>add</em> anything to the string, so the delimiter should be the empty string instead:</p>
+          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="s">""</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">unicodify</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">if</span> <span class="n">unicodedata</span><span class="p">.</span><span class="n">category</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">!=</span> <span class="s">"Cc"</span><span class="p">)</span>
+</code></pre></div>          </div>
+        </blockquote>
+      </blockquote>
+
+      <blockquote>
+        <p>Make the change, save the file, run the same test. Now it should pass.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Finishing up</strong></p>
+
+      <p>Now you are ready to commit your edits and push the branch to your fork. So, <code class="language-plaintext highlighter-rouge">git add [your modified files]</code> and <code class="language-plaintext highlighter-rouge">git commit -m "[insert your commit message here]"</code>. Please consult <a href="https://github.com/galaxyproject/galaxy/blob/dev/CONTRIBUTING.md#how-to-contribute"><span class="notranslate">Galaxy</span>’s contributor’s guide</a> for details on how to write a useful and properly formatted commit message, and why it matters.</p>
+
+      <p>Congratulations - you found and fixed a unit test failure!</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="api-test-failure">API test failure</h1>
+
+<p>API test various aspects of the <span class="notranslate">Galaxy</span> API, as well as general backend aspects of <span class="notranslate">Galaxy</span> using the API. These tests require a <span class="notranslate">Galaxy</span> instance.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-fixing-a-failing-api-test"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Fixing a failing API test</h3>
+
+  <ol>
+    <li>
+      <p><strong>Finding the failing test on GitHub</strong></p>
+
+      <p>We’ll follow the same process we used in the unit test section. On GitHub, click the same red “x” and select the “API tests / Test (3…” <span class="notranslate">workflow</span> and click “Details”. Try to find the failed tests.</p>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+        <p>The log lists multiple failed tests. Some of them were caused by bugs you’ll be fixing in later sections of this tutorial. For this exercise, we care about these two failed tests:</p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FAILED lib/<span class="notranslate">galaxy</span>_test/api/test_licenses.py::LicensesApiTestCase::test_404_on_unknown_license
+FAILED lib/<span class="notranslate">galaxy</span>_test/api/test_licenses.py::LicensesApiTestCase::test_get_license
+</code></pre></div>        </div>
+        <p>Note: occasionally, there could be more failing tests; however, for the purposes of this exercise we are concerned with the licenses tests.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Running the test locally</strong></p>
+
+      <p>Again, we will run the individual test locally. While it is possible to run the test directly with pytest, in this case we will use <span class="notranslate">Galaxy</span>’s script <code class="language-plaintext highlighter-rouge">run_tests.sh</code>. The script optimizes test runs by sharing the same instance of <span class="notranslate">Galaxy</span> across multiple tests; without the script a new <span class="notranslate">Galaxy</span> will be started for each TestCase class. There are other reasons to run the script; for more information check the documentation block at the top of the script.</p>
+
+      <p>Make sure you are in <code class="language-plaintext highlighter-rouge"><span class="notranslate">GALAXY</span>_ROOT</code> (if your virtual environment is not activated, the script will do it for you).</p>
+
+      <p>Let’s run the failed test:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-9"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./run_tests.sh <span class="nt">-api</span> lib/<span class="notranslate">galaxy</span>_test/api/test_licenses.py
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>Two tests are failing. Do you see the error messages?</p>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+        <p>We see the following error messages:</p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FAILED lib/<span class="notranslate">galaxy</span>_test/api/test_licenses.py::LicensesApiTestCase::test_404_on_unknown_license - AssertionError: Request status code (500) was not expected value 404. Body was INVALID JSON RESPONSE &lt;Inte<span class="notranslate">rna</span>l Server Error&gt;
+FAILED lib/<span class="notranslate">galaxy</span>_test/api/test_licenses.py::LicensesApiTestCase::test_get_license - AssertionError: Request status code (404) was not expected value 200. Body was {'err_msg': "License 'Apache-2.0' not found", 'err_code': 404001}
+</code></pre></div>        </div>
+        <p>This means that instead of HTTP status code 200 (OK/success) we got a 500 (server error) and 404 (resource not found). Sometimes multiple test failures may be caused by the same error; this is the case here.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Finding and fixing the issue</strong></p>
+
+      <p>We can use either one of the failing tests to start debugging. Let’s use <code class="language-plaintext highlighter-rouge">test_get_license</code>. As with the unit test, first let’s take a look at the test function definition (located in <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>_test/api/test_licenses.py</code>):</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_get_license</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">licenseId</span> <span class="o">=</span> <span class="s">"Apache-2.0"</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_get</span><span class="p">(</span><span class="s">f"licenses/</span><span class="si">{</span><span class="n">licenseId</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">_assert_status_code_is</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">_assert_matches_license_id</span><span class="p">(</span><span class="n">licenseId</span><span class="p">,</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+</code></pre></div>      </div>
+
+      <p>The important line here is line 3: it tells us what API endpoint is called: <code class="language-plaintext highlighter-rouge">licenses/{licenseId}</code>.</p>
+
+      <p>Our next step is to examine the controller for this endpoint. For that, we head over to <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api/licenses.py</code>.</p>
+
+      <p>There are 2 controllers (a legacy controller and a FastAPI controller) that have identical functionality; we can use either one. If you look at the FastAPI controller, you’ll see the <code class="language-plaintext highlighter-rouge">get</code> method that is responsible for fetching the data in response to a <code class="language-plaintext highlighter-rouge">GET</code> HTTP request received at the <code class="language-plaintext highlighter-rouge">licenses/{licenseId}</code> endpoint:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="o">@</span><span class="n">router</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/api/licenses/{id}'</span><span class="p">,</span>
+        <span class="n">summary</span><span class="o">=</span><span class="s">"Gets the SPDX license metadata associated with the short identifier"</span><span class="p">,</span>
+        <span class="n">response_description</span><span class="o">=</span><span class="s">"SPDX license metadata"</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">LicenseIdPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LicenseMetadataModel</span><span class="p">:</span>
+        <span class="s">"""Returns the license metadata associated with the given
+        [SPDX license short ID](https://spdx.github.io/spdx-spec/appendix-I-SPDX-license-list/)."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">licenses_manager</span><span class="p">.</span><span class="n">get_license_by_id</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>The only thing in this method that matters to us is the last line:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">licenses_manager</span><span class="p">.</span><span class="n">get_license_by_id</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>Why? Because despite all this syntax, the method simply redirects the request to <code class="language-plaintext highlighter-rouge">self.licenses_manager</code>. If we read the code, we’ll quickly see that this variable holds an instance of <code class="language-plaintext highlighter-rouge">LicencesManager</code>, which (look at the import statements at the top of the file) is located in <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/managers/licenses.py</code>. Which is where we should look next.</p>
+
+      <p>If we carefully trace the code in <code class="language-plaintext highlighter-rouge">LicensesManager</code>, we’ll find the error. Do you see it?</p>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+        <p>The <code class="language-plaintext highlighter-rouge">get_license_by_id()</code> method raises an <code class="language-plaintext highlighter-rouge">ObjectNotFound</code> error (which results in the 404 status code we see in the test result). This error is a direct result of the <code class="language-plaintext highlighter-rouge">get</code> method called on the previous line - take a look at that method:</p>
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">uri</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">_by_index</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">_by_index</span><span class="p">[</span><span class="n">uri</span><span class="p">]</span>
+            <span class="p">...</span>
+</code></pre></div>        </div>
+        <p>Let’s rewrite the first clause in pseudo code to expose the problem:</p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if key not in dictionary:
+    return dictionary[key]
+</code></pre></div>        </div>
+        <p>Well, that makes no sense whatsoever! It should be the opposite: if key <strong>is</strong> in dictionary, then get the item with that key. The <code class="language-plaintext highlighter-rouge">not</code> is clearly a typo (or, more accurately, a wicked edit made for the purpose of setting up a learning experience). Remove this negation and rerun the test.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Finishing up</strong></p>
+
+      <p>Well, that was fun. Congratulations! Now commit your edit (don’t forget to supply a useful commit message), and move on to client errors.</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="client-linting-error">Client linting error</h1>
+
+<p>Client Linting is important to reduce errors, improve quality of the codebase, and enforce common rules. These rules are defined by the eslinter defined with Vue best practices, primarily. On Github, the command <code class="language-plaintext highlighter-rouge">eslint</code> is run to start the process for linting code on the client side.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-python-linting"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Python Linting</h3>
+  <p>For backend consistency, we also have a Python linter. While we won’t be running you through that exercise today, you may encounter a Python linting issue in the future. The way to diagnose and treat these is very similar to the way to do it for the front end.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-fixing-client-linting-error"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Fixing client linting error</h3>
+
+  <ol>
+    <li>
+      <p><strong>Finding the failing test on GitHub</strong></p>
+
+      <p>With this error, one of the failing test workflows on GitHub would normally be “get_code_and_test”. However, since we are working on a branch that contains multiple bugs by design, some of the test failures overlap, as a result of which the “get_code_and_test” <span class="notranslate">workflow</span> has been skipped in the last commit.</p>
+
+      <p>Therefore, for this section, <a href="https://github.com/galaxyproject/galaxy/runs/2780158706">you’ll need to use the results from this commit</a> to find the failing test.</p>
+
+      <p>One of the failing tests on GitHub says “get_code_and_test”. Clicking on the word “Details” assocated with this failure will open a brief view of the CircleCI Checks, with a list of tests that are run as part of that command. You’ll see that the one that is failing is js_lint. And if you click that, you’ll be navigated to the CicleCI app, where you can see much more information about the failures.</p>
+
+      <p>Here you can see the exact command that ran to lint our codebase:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd client &amp;&amp; yarn run eslint
+</code></pre></div>      </div>
+
+      <p>We can also see that it has found 1 error, where that error is located, and a description of the problem.</p>
+    </li>
+    <li>
+      <p><strong>Running the linter locally</strong></p>
+
+      <p>Alright, so we’ve seen the failure, but we want to verify it locally now. For this, you’ll need to open up a terminal.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-10"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <p>Make sure you are in <code class="language-plaintext highlighter-rouge"><span class="notranslate">GALAXY</span>_ROOT</code> and your virtual environment is activated. If not, activate it:</p>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">.</span> .venv/bin/activate
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>Then you’ve got two options. You can run the same exact command that CircleCI uses, <code class="language-plaintext highlighter-rouge">cd client &amp;&amp; yarn run eslint</code> or <code class="language-plaintext highlighter-rouge">make client-lint</code>, which does <code class="language-plaintext highlighter-rouge">cd client &amp;&amp; yarn run eslint &amp;&amp; yarn run prettier-check</code>. This will also make sure your code conforms to formatting standards.</p>
+
+      <p>After running that, you should see the same linting error from CircleCI; you should know where it is and how to fix it too!</p>
+    </li>
+    <li>
+      <p><strong>Finding and fixing the issue</strong></p>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+        <p>You are currently in <code class="language-plaintext highlighter-rouge"><span class="notranslate">GALAXY</span>_ROOT/client</code>.
+In the file <code class="language-plaintext highlighter-rouge">src/components/RuleBuilder/RuleComponent.vue</code>, there is an unused import. Simply delete the line that says <code class="language-plaintext highlighter-rouge">import Vue from "vue";</code></p>
+
+        <p>Alte<span class="notranslate">rna</span>tively, you can run <code class="language-plaintext highlighter-rouge">yarn eslint --fix</code> or <code class="language-plaintext highlighter-rouge">yarn run prettier</code>.</p>
+      </blockquote>
+
+      <p>If you think you’ve got it, try running the test locally again to be sure.</p>
+    </li>
+    <li>
+      <p><strong>Finishing up</strong></p>
+
+      <p>Whoo-hoo! If you’re here, you’ve identified the error, ran the appropriate command locally, found the problem, fixed it, confirmed that the command runs without errors, and are ready to commit your change. Write a useful commit message like <code class="language-plaintext highlighter-rouge">Fix a client linting issue in RuleComponent</code> or something similar, making sure it is clear what you’ve done.
+(See <a href="https://github.com/galaxyproject/galaxy/blob/dev/CONTRIBUTING.md#how-to-contribute"><span class="notranslate">Galaxy</span>’s contributor’s guide</a> for details on how to write a useful and properly formatted commit message.)</p>
+
+      <p>Awesome work - you now understand how to solve client linting issues!</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="client-unit-test-failure">Client unit test failure</h1>
+
+<p>Client tests are tests written by developers to test front-end code. In the case of the test we’re going to walk through right now, we’re looking at a Vue test failure, which means the component that it’s testing is definitely a Vue component.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-fixing-a-failing-client-unit-test"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Fixing a failing client unit test</h3>
+
+  <ol>
+    <li>
+      <p><strong>Finding the failing test on GitHub</strong>
+One of the failing tests on GitHub says “Client Unit Testing / jest”. Clicking on Details beside that failure, will open up a the terminal output from that test. Here you should be able to see what test is failing.</p>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+        <p>The failing test file is <code class="language-plaintext highlighter-rouge">src/components/RuleBuilder/SavedRulesSelector.test.js</code>, and the failing test in that file is <code class="language-plaintext highlighter-rouge">SavedRulesSelector › disables history icon if there is no history</code>.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Running the test locally</strong></p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-11"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <p>Make sure you are in <code class="language-plaintext highlighter-rouge"><span class="notranslate">GALAXY</span>_ROOT</code> and your virtual environment is activated. If not, activate it:</p>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">.</span> .venv/bin/activate
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>To run the client tests locally, you must be in the client directory; if you’re just in the <span class="notranslate">galaxy</span> directory, <code class="language-plaintext highlighter-rouge">cd client</code> should take you to the right place.</p>
+
+      <p>Next, type <code class="language-plaintext highlighter-rouge">yarn run test</code> or <code class="language-plaintext highlighter-rouge">yarn jest</code> to run all the client tests.</p>
+
+      <p>The output should match what you found on Github.</p>
+    </li>
+    <li>
+      <p><strong>Finding and fixing the issue</strong></p>
+
+      <p>Next up, finding the error. Here are some tips:</p>
+
+      <ul>
+        <li>Take a look at the failing test and the imports to find out which Vue component the test correlates to.</li>
+        <li>Look at the test to see what it does. Is there an error in the test?</li>
+        <li>Look at the Vue component where the failure seems to be taking place. Is the error located there?</li>
+      </ul>
+
+      <p>The solution is hidden below, but try your hand at fixing it first:</p>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+        <p>The failure is only happening on the disabled test case, so take a look in the template of <code class="language-plaintext highlighter-rouge">SavedRulesSelector</code> where the conditions for adding disabled are defined.</p>
+
+        <p>The way it’s worded in the test (and the way one could think about it logically), is that if there is no history, the button should be disabled, but the code says</p>
+
+        <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">:</span><span class="kd">class</span><span class="o">=</span><span class="dl">"</span><span class="s2">{ disabled: numOfSavedRules == 1 }</span><span class="dl">"</span>
+</code></pre></div>        </div>
+
+        <p>– whoops! A very silly off by one error. On that very same line, change the 1 to a 0, and run the test again.</p>
+      </blockquote>
+
+      <p>If you think you’ve got it, try running the test locally again to be sure.</p>
+
+      <blockquote class="comment">
+        <h3 id="comment-running-fewer-client-tests"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Running fewer client tests</h3>
+        <p>If you don’t want to run the whole suite of client tests, you can add keywords that match the test path/name. For example both <code class="language-plaintext highlighter-rouge">yarn run jest rule</code> and <code class="language-plaintext highlighter-rouge">yarn jest selector</code> will work, but the former will run other tests with rule in the path/module name.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Finishing up</strong></p>
+
+      <p>Nice Job! If you’re here, you’ve found the problem, ran it locally, fixed the problem, ran it locally again without errors, and are ready to commit your change. Write a useful commit message like <code class="language-plaintext highlighter-rouge">Fix logic error in SavedRuleSelector</code> or something similar, making sure it is clear what you’ve done.</p>
+
+      <p>(See <a href="https://github.com/galaxyproject/galaxy/blob/dev/CONTRIBUTING.md#how-to-contribute"><span class="notranslate">Galaxy</span>’s contributor’s guide</a> for details on how to write a useful and properly formatted commit message.)</p>
+
+      <p>Awesome work - you now understand how to solve client linting issues!- you now have a handle on client tests!</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="selenium-test-failure">Selenium test failure</h1>
+
+<p>Selenium is the end-to-end or integration testing framework that we use; so these tests often are designed to test both frontend and backend code. This makes fixing them a little difficult, but we are sure you can do it!</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-fixing-a-failing-selenium-test"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Fixing a failing Selenium test</h3>
+
+  <ol>
+    <li>
+      <p><strong>Finding the failing test on GitHub</strong></p>
+
+      <p>There may be actually a few failing Selenium tests, but the good news is, they are the result of only one little error. The failing tests on GitHub are in the “Selenium Test 3.7,0” and “Selenium Test 3.7,1” workflows. When you click on the details of this one, it’s not always very clear which test is causing the failure, but if you download the artifacts, it’s very clear which tests have failed.</p>
+
+      <p>Try to identify which tests are failing based on artifacts you downloaded.</p>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-9"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+        <p>The failing tests are:</p>
+
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">test_build_list_and_show_items</code></li>
+          <li><code class="language-plaintext highlighter-rouge">test_upload_pair_specify_extension</code></li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Running the tests locally</strong></p>
+
+      <p>Make sure you are in <code class="language-plaintext highlighter-rouge"><span class="notranslate">GALAXY</span>_ROOT</code> (if your virtual environment is not activated, the script will do it for you).</p>
+
+      <p>We do not want to run the full suite of Selenium tests here - that would take a lot of time and we already know that most of them passed.</p>
+
+      <p>Instead, we can build our commands to only run a subset of the tests. Here’s an example: <code class="language-plaintext highlighter-rouge">./run_tests.sh -selenium lib/<span class="notranslate">galaxy</span>_test/selenium/test_sign_out.py</code></p>
+
+      <p>A command like that will still run all of the tests defined in that python file, so we need to find out where the tests that failed are defined. Try seaching the baseline for our three failing Selenium tests; what files are they in?</p>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-10"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+        <p>The failing tests are defined in these files:</p>
+
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>_test/selenium/test_collection_builders.py</code></li>
+          <li><code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>_test/selenium/test_uploads.py</code></li>
+        </ul>
+      </blockquote>
+
+      <p>Now that we have the files, we can run the selenium tests. The command to do this should be very similar to <code class="language-plaintext highlighter-rouge">./run_tests.sh -selenium lib/<span class="notranslate">galaxy</span>_test/selenium/test_sign_out.py</code>. The only difference should be the python file where the tests are defined. Try it yourself, before checking out the solution.</p>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-11"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+        <p>Either of these two commands will work:</p>
+
+        <blockquote class="code-in">
+          <h3 id="code-in-input-bash-12"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./run_tests.sh <span class="nt">-selenium</span> lib/<span class="notranslate">galaxy</span>_test/selenium/test_collection_builders.py
+</code></pre></div>          </div>
+          <p>or</p>
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./run_tests.sh <span class="nt">-selenium</span> lib/<span class="notranslate">galaxy</span>_test/selenium/test_uploads.py
+</code></pre></div>          </div>
+        </blockquote>
+      </blockquote>
+
+      <p>Running any of these tests will show us that the tests are still failing on our local machine. So, you should see a failing test that matches one of the three we identified from the downloaded artifacts. Onward to fixing them!</p>
+    </li>
+    <li>
+      <p><strong>Finding and fixing the issue</strong></p>
+
+      <p>Good news - there’s an easy way to figure out what’s going wrong with a selenium test!</p>
+
+      <p>In your terminal type <code class="language-plaintext highlighter-rouge">export <span class="notranslate">GALAXY</span>_TEST_SELENIUM_HEADLESS=false</code>. This will allow you to see the test running in real time.</p>
+
+      <p>Re-run the selenium test to watch the headless browser step through the test.</p>
+
+      <p>Looking at the test run in the headless browser, alongside the definition for the test should help you understand what might be going wrong. Try and figure out where the problem is on your own, before looking at the solution.</p>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-12"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+        <p>The problem is that the tests are expecting a different HID (history identifier) than what is being made available to them. Since all the failing tests have to do with Lists, you might want to check out the ListCollectionCreator.</p>
+
+        <p>For comparisons sake, open one of the other CollectionCreators, as well and see if you can spot anything that is amiss.</p>
+
+        <p>Pay careful attention in the template to the <collection-creator> props.</collection-creator></p>
+
+        <p>Here you should notice that in the PairCollectionCreator or in the PairedListCollectionCreator, <code class="language-plaintext highlighter-rouge">:hide-source-items="hideSourceItems"</code> instead of <code class="language-plaintext highlighter-rouge">:hide-source-items="!hideSourceItems"</code>. It’s a little change, just flipping the boolean, but it makes a big difference!</p>
+      </blockquote>
+
+      <p>Awesome! If you’re here, you’ve found and fixed the problem, at least, in theory.</p>
+
+      <p>If you think you’ve got it, try running the tests locally again to be sure. In this simulated case, you can get by with just running one of the tests, but in reality, you should probably run all three Selenium tests to be sure that it’s totally fixed.</p>
+    </li>
+    <li>
+      <p><strong>Finishing up</strong></p>
+
+      <p>Excellent! If you’re here, you’ve found the problem, ran it locally, fixed the problem, ran it locally again without errors, and are ready to commit your change. Write a useful commit message like <code class="language-plaintext highlighter-rouge">Fix logic error in ListCollectionCreator</code> or something similar, making sure it is clear what you’ve done.
+(See <a href="https://github.com/galaxyproject/galaxy/blob/dev/CONTRIBUTING.md#how-to-contribute"><span class="notranslate">Galaxy</span>’s contributor’s guide</a> for details on how to write a useful and properly formatted commit message.)</p>
+
+      <p>Selenium tests are in the bag!</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="runtime-error">Runtime error</h1>
+
+<p>Our last error happens at runtime, which means we don’t have a failing test; instead we have a bug report describing the error. Our goal is to fix the error. Our steps are as follows:</p>
+
+<ol>
+  <li>Reproduce the error</li>
+  <li>Locate the error</li>
+  <li>Identify the problem</li>
+  <li>Write a test exposing the bug. The test must fail.</li>
+  <li>Fix the error.</li>
+  <li>Ensure the error no longer occurs.</li>
+</ol>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-fixing-a-runtime-error"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Fixing a runtime error</h3>
+
+  <ol>
+    <li>
+      <p><strong>Reproduce the error</strong></p>
+
+      <p>Here’s the bug report:</p>
+
+      <p><code class="language-plaintext highlighter-rouge">In the User menu, clicking the Datasets option causes an error message to be displayed on the page: "Uncaught exception in exposed API method".</code></p>
+
+      <p>Make sure you are in <code class="language-plaintext highlighter-rouge"><span class="notranslate">GALAXY</span>_ROOT</code>. Then start your local <span class="notranslate">Galaxy</span>:</p>
+
+      <blockquote class="code-2col">
+        <blockquote class="code-in">
+          <h3 id="code-in-input-bash-13"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./run.sh
+</code></pre></div>          </div>
+        </blockquote>
+
+        <blockquote class="code-out">
+          <h3 id="code-out-output-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+          <p>The first startup may take a few minutes. Eventually, you’ll see the following output (the PID will be different):</p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Starting server in PID 1583948.
+serving on http://127.0.0.1:8080
+</code></pre></div>          </div>
+        </blockquote>
+      </blockquote>
+
+      <p>Now you can access your <span class="notranslate">Galaxy</span> instance from the browser at <a href="http://127.0.0.1:8080"><code class="language-plaintext highlighter-rouge">http://127.0.0.1:8080</code></a>.</p>
+
+      <p>To reproduce this error, we need to access the User menu. For this, we need to be logged in to <span class="notranslate">Galaxy</span>:</p>
+
+      <ol>
+        <li>Click on “Login or Register:</li>
+        <li>At the bottom of the form, click “Register here”</li>
+        <li>Fill out the form. You may use any data, as long as the email you provide is a valid email format and the password is at least 6 characters long. For this exercise, it doesn’t matter what email, name or password you use.</li>
+        <li>Click “Create”</li>
+      </ol>
+
+      <p>Now the User menu is available to us. Click “User”, then select “Datasets” from the dropdown menu. You should be able to see the error message displayed on the page: “Uncaught exception in exposed API method”.</p>
+
+      <p>Being able to reproduce a bug is good: this means you’re on your way to fixing it, and you know what to look for! In a real scenario, it is not uncommon that a bug is not easily reproduceable, which makes fixing it a much more complicated task.</p>
+    </li>
+    <li>
+      <p><strong>Locate the problem</strong></p>
+
+      <p>To figure out what’s happening, our best bet is to look at the <span class="notranslate">Galaxy</span> log (look at the terminal window from which you launched <span class="notranslate">Galaxy</span>). Can you see the error message?</p>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-13"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+        <p>You should see something like this:</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="notranslate">galaxy</span>.web.framework.decorators ERROR 2021-06-08 17:52:08,350 [pN:main.web.1,p:1583948,w:1,m:0,tN:uWSGIWorker1Core1] Uncaught exception in exposed API method:
+Traceback (most recent call last):
+  File "lib/<span class="notranslate">galaxy</span>/web/framework/decorators.py", line 312, in decorator
+    rval = func(self, trans, *args, **kwargs)
+  File "lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api/datasets.py", line 129, in index
+    raise Exception('This should not happen!')
+Exception: This should not happen!
+</code></pre></div>        </div>
+
+        <p>From this error log, we can easily tell that the error happens in the <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api/datasets.py</code> file on line 129. The specific error message doesn’t tell us much - which is often what happens in the wild.</p>
+      </blockquote>
+
+      <p>Let’s head over to the <code class="language-plaintext highlighter-rouge">datasets'py</code> file, line 129:</p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">126</span>         <span class="k">if</span> <span class="n">str_as_bool</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'show_datasets'</span><span class="p">,</span> <span class="s">'True'</span><span class="p">)):</span>
+<span class="mi">127</span>             <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="p">.</span><span class="n">serializer_by_type</span><span class="p">[</span><span class="n">content</span><span class="p">.</span><span class="n">history_content_type</span><span class="p">].</span><span class="n">serialize_to_view</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">trans</span><span class="p">.</span><span class="n">user</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">view</span><span class="o">=</span><span class="n">view</span><span class="p">)</span> <span class="k">for</span> <span class="n">content</span> <span class="ow">in</span> <span class="n">contents</span><span class="p">]</span>
+<span class="mi">128</span>         <span class="k">else</span><span class="p">:</span>
+<span class="mi">129</span>             <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">'This should not happen!'</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>The good news is that the error happens inside an <code class="language-plaintext highlighter-rouge">if/else</code> block, which narrows down our search to line 126: that line evaluates to <code class="language-plaintext highlighter-rouge">False</code>, causing the <code class="language-plaintext highlighter-rouge">else</code> clause to execute. The bad news is that we have no idea what causes that line to evaluate to <code class="language-plaintext highlighter-rouge">False</code>.</p>
+    </li>
+    <li>
+      <p><strong>Identify the problem</strong></p>
+
+      <p>We will investigate using pdb - our trusted Python debugger!</p>
+
+      <p>pdb offers a wide range of functionality and is exceptionally useful for debugging at runtime. We encourage you to read its <a href="https://docs.python.org/3/library/pdb.html">documentation</a>; however for this exercise we will only use the built-in <a href="https://docs.python.org/3/library/functions.html#breakpoint">breakpoint()</a> function, that drops us into pdb.</p>
+
+      <p>Add a <code class="language-plaintext highlighter-rouge">breakpoint()</code> statement to your code, right above the <code class="language-plaintext highlighter-rouge">if/else</code> block.</p>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-14"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">126</span>         <span class="n">breakpoint</span><span class="p">()</span>
+<span class="mi">127</span>         <span class="k">if</span> <span class="n">str_as_bool</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'show_datasets'</span><span class="p">,</span> <span class="s">'True'</span><span class="p">)):</span>
+<span class="mi">128</span>             <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="p">.</span><span class="n">serializer_by_type</span><span class="p">[</span><span class="n">content</span><span class="p">.</span><span class="n">history_content_type</span><span class="p">].</span><span class="n">serialize_to_view</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">trans</span><span class="p">.</span><span class="n">user</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">view</span><span class="o">=</span><span class="n">view</span><span class="p">)</span> <span class="k">for</span> <span class="n">content</span> <span class="ow">in</span> <span class="n">contents</span><span class="p">]</span>
+<span class="mi">129</span>         <span class="k">else</span><span class="p">:</span>
+<span class="mi">130</span>             <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">'This should not happen!'</span><span class="p">)</span>
+</code></pre></div>        </div>
+
+      </blockquote>
+
+      <p>Now we need to restart <span class="notranslate">Galaxy</span>. However, to use pdb, we need to enable <span class="notranslate">Galaxy</span>’s debug configuration option. In general, it may be a good idea to enable this in your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> configuration file (just copy or rename <code class="language-plaintext highlighter-rouge">config/<span class="notranslate">galaxy</span>.yml.sample</code> and uncomment the option you want to set). However, for the purposes of this exercise, it’s enough to set the <code class="language-plaintext highlighter-rouge"><span class="notranslate">GALAXY</span>_CONFIG_DEBUG</code> environment variable when running <span class="notranslate">Galaxy</span>:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-14"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv"><span class="notranslate">GALAXY</span>_CONFIG_DEBUG</span><span class="o">=</span>1 ./run.sh
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="comment">
+        <h3 id="comment-why-we-set-the-debug-option"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Why we set the debug option</h3>
+
+        <p>The reason for setting the <code class="language-plaintext highlighter-rouge">debug</code> option is quite esoteric: among other things, it prevents uWSGI from re<span class="notranslate">mapping</span> <code class="language-plaintext highlighter-rouge">stdin</code> to <code class="language-plaintext highlighter-rouge">dev/null</code> which would prevent tools like pdb from running.</p>
+      </blockquote>
+
+      <p>Now your <span class="notranslate">Galaxy</span> is running in debug mode. Repeat your steps that reproduced the error. When you click “Datasets”, head over to your terminal. At the bottom of the log you’ll see something like this:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; /home/sergey/2sandbox/<span class="notranslate">galaxy</span>/dev_training/lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api/datasets.py(127)index()
+-&gt; if str_as_bool(trans.app.config.get('show_datasets', 'True')):
+(Pdb)
+</code></pre></div>      </div>
+
+      <p>You’re at the pdb prompt. From here you can execute Python code interactively. So, let’s explore what’s happening in the next line:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-pdb"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Pdb</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(Pdb) trans
+&lt;<span class="notranslate">galaxy</span>.webapps.base.webapp.<span class="notranslate">Galaxy</span>WebTransaction object at 0x7f3664eee2b0&gt;
+(Pdb) trans.app
+&lt;<span class="notranslate">galaxy</span>.app.UniverseApplication object at 0x7f36ccc18790&gt;
+(Pdb) trans.app.config
+&lt;<span class="notranslate">galaxy</span>.config.<span class="notranslate">Galaxy</span>AppConfiguration object at 0x7f369addcac0&gt;
+(Pdb) trans.app.config.get
+&lt;bound method CommonConfigurationMixin.get of &lt;<span class="notranslate">galaxy</span>.config.<span class="notranslate">Galaxy</span>AppConfiguration object at 0x7f369addcac0&gt;&gt;
+(Pdb)
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>We could have just typed <code class="language-plaintext highlighter-rouge">trans.app.config.get</code>, of course; the steps above give us some additional context.</p>
+
+      <p>Now let’s take a look at the definition of the <code class="language-plaintext highlighter-rouge">get</code> method. We need to find <code class="language-plaintext highlighter-rouge">CommonConfigurationMixin</code> which is used by <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.config.<span class="notranslate">Galaxy</span>AppConfiguration</code>.</p>
+
+      <p>Head over to <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/config/__init__.py</code> and look for the class <code class="language-plaintext highlighter-rouge">CommonConfigurationMixin</code>. Once you find it, look for the definition of its <code class="language-plaintext highlighter-rouge">get</code> method. When you find it, look at the method signature. What is the meaning of the argument <code class="language-plaintext highlighter-rouge">'True'</code> that is passed to this method in <code class="language-plaintext highlighter-rouge">datasets.py</code> on line 127?</p>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-15"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">480</span>     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<span class="mi">481</span>         <span class="c1"># Warning: the value of self.config_dict['foo'] may be different from self.foo
+</span><span class="mi">482</span>         <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">config_dict</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+</code></pre></div>        </div>
+
+        <p>The argument <code class="language-plaintext highlighter-rouge">True</code> corresponds to the parameter <code class="language-plaintext highlighter-rouge">default</code>. In the method’s body, we see that this value will be passed to <code class="language-plaintext highlighter-rouge">self.config_dict.get()</code>; <code class="language-plaintext highlighter-rouge">self.config_dict</code> is a Python dictionary, so the second argument to <code class="language-plaintext highlighter-rouge">get()</code> is the default value that will be retuned if <code class="language-plaintext highlighter-rouge">key</code> is not in <code class="language-plaintext highlighter-rouge">self.config_dict</code>.</p>
+      </blockquote>
+
+      <p>Back to <code class="language-plaintext highlighter-rouge">datasets.py</code>, line 127. Now we know that <code class="language-plaintext highlighter-rouge">True</code> is the default value that will be returned if the key <code class="language-plaintext highlighter-rouge">show_datasets</code> does not exist in the <code class="language-plaintext highlighter-rouge">config_dict</code> dictionary. Moving on:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-pdb-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Pdb</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(Pdb) trans.app.config.get('show_datasets')
+(Pdb) trans.app.config.get('show_datasets', 'True')
+'True'
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>So, we see that <code class="language-plaintext highlighter-rouge">show_datasets</code> does not exist and we get the default value, which is the string <code class="language-plaintext highlighter-rouge">'True'</code>.</p>
+
+      <p>Next step: <code class="language-plaintext highlighter-rouge">str_to_bool</code>. First, let’s pass it the value <code class="language-plaintext highlighter-rouge">'True'</code>:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-pdb-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Pdb</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(Pdb) str_as_bool('True')
+False
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>That doesn’t look right! Exit the debugger (type in <code class="language-plaintext highlighter-rouge">q</code>, then <code class="language-plaintext highlighter-rouge">Enter</code>, then <code class="language-plaintext highlighter-rouge">CTRL-C </code> to exit <span class="notranslate">Galaxy</span>.
+Head over to the function’s definition (you can tell from the import statement at the top of the file that it’s in <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/util/__init__.py</code>) and try to figure out if there is an error.</p>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-16"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">103</span> <span class="k">def</span> <span class="nf">str_as_bool</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+<span class="mi">104</span>     <span class="s">""" This is for training only."""</span>
+<span class="mi">105</span>     <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="s">'true'</span><span class="p">,</span> <span class="s">'yes'</span><span class="p">,</span> <span class="s">'on'</span><span class="p">,</span> <span class="s">'1'</span><span class="p">):</span>
+<span class="mi">106</span>         <span class="k">return</span> <span class="bp">True</span>
+<span class="mi">107</span>     <span class="k">else</span><span class="p">:</span>
+<span class="mi">108</span>         <span class="k">return</span> <span class="bp">False</span>
+</code></pre></div>        </div>
+
+        <p>At first glance, everything seems right. But think of what value we are passing: <code class="language-plaintext highlighter-rouge">'True'</code> - it is <em>not</em> in the <code class="language-plaintext highlighter-rouge">('true', 'yes', 'on', '1')</code> tuple! Aparently, the developer did not account for upper vs. lower case!</p>
+
+        <p>Do NOT fix the error just yet.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Write a test exposing the bug</strong></p>
+
+      <p>Before you fix code that was not covered by a test, write the test to expose the bug! In this case we have a simple, completely isolated function - a simple unit test should do. Your test should go into this module: <code class="language-plaintext highlighter-rouge">test/unit/util/test_utils.py</code>.</p>
+
+      <p>Start with a blank test function. Then call the funtion under test (<code class="language-plaintext highlighter-rouge">str_as_bool</code>) and assert that when you pass it the value <code class="language-plaintext highlighter-rouge">'True'</code>, it returns <code class="language-plaintext highlighter-rouge">True</code>. Can you think of more cases to test?</p>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-17"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+        <p>Your first step could be something like this:</p>
+
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_str_as_bool</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">util</span><span class="p">.</span><span class="n">str_as_bool</span><span class="p">(</span><span class="s">'True'</span><span class="p">)</span>
+</code></pre></div>        </div>
+
+        <p>However, keep in mind that there may be other cases of mixed or uppercase values. You should also test for lowercase values - to make sure that while fixing the bug you don’t break the current functionality. And remember to test for the <code class="language-plaintext highlighter-rouge">False</code> cases as well.</p>
+
+        <p>There are many ways to implement this, feel free to write your own. Here’s one option:</p>
+
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_str_as_bool</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">(</span><span class="s">'true'</span><span class="p">,</span> <span class="s">'yes'</span><span class="p">,</span> <span class="s">'on'</span><span class="p">,</span> <span class="s">'1'</span><span class="p">,</span> <span class="s">'True'</span><span class="p">,</span> <span class="s">'Yes'</span><span class="p">,</span> <span class="s">'On'</span><span class="p">,</span><span class="s">'TRUE'</span><span class="p">,</span> <span class="s">'YES'</span><span class="p">,</span> <span class="s">'ON'</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">util</span><span class="p">.</span><span class="n">str_as_bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">(</span><span class="s">'false'</span><span class="p">,</span> <span class="s">'0'</span><span class="p">,</span> <span class="s">'something else'</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="ow">not</span> <span class="n">util</span><span class="p">.</span><span class="n">str_as_bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</code></pre></div>        </div>
+
+      </blockquote>
+
+      <p>Run your test. Does it fail? Good! Now it’s time to fix the error.</p>
+    </li>
+    <li>
+      <p><strong>Fix the error</strong></p>
+
+      <p>Can you think of a simple way to fix the function so that our test passes?</p>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-18"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+        <p>One way to do it is to simply convert the input value to lowercase:</p>
+
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">103</span> <span class="k">def</span> <span class="nf">str_as_bool</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+<span class="mi">104</span>     <span class="s">""" This is for training only."""</span>
+<span class="mi">105</span>     <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">string</span><span class="p">).</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s">'true'</span><span class="p">,</span> <span class="s">'yes'</span><span class="p">,</span> <span class="s">'on'</span><span class="p">,</span> <span class="s">'1'</span><span class="p">):</span>
+<span class="mi">106</span>         <span class="k">return</span> <span class="bp">True</span>
+<span class="mi">107</span>     <span class="k">else</span><span class="p">:</span>
+<span class="mi">108</span>         <span class="k">return</span> <span class="bp">False</span>
+</code></pre></div>        </div>
+
+        <p>In fact, that’s exactly what the real function does! Check line 966 - you’ll see almost the exact same function, named <code class="language-plaintext highlighter-rouge">string_as_bool</code>: we didn’t modify it because that might have broken other parts of <span class="notranslate">Galaxy</span> which would have been a distraction from the core aspects of the exercise.</p>
+      </blockquote>
+
+      <p>Run the test - now it should pass!</p>
+    </li>
+    <li>
+      <p><strong>Ensure the error no longer occurs</strong></p>
+
+      <p>Now that we have the <code class="language-plaintext highlighter-rouge">str_as_bool</code> function covered by test, as a bonus, we can safely do some minor refactoring: the test will prevent us from breaking things. Can you simplify the function’s code?</p>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-19"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">103</span> <span class="k">def</span> <span class="nf">str_as_bool</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+<span class="mi">104</span>     <span class="s">""" This is for training only."""</span>
+<span class="mi">105</span>     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">string</span><span class="p">).</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s">'true'</span><span class="p">,</span> <span class="s">'yes'</span><span class="p">,</span> <span class="s">'on'</span><span class="p">,</span> <span class="s">'1'</span><span class="p">)</span>
+</code></pre></div>        </div>
+
+        <p>Much better!</p>
+      </blockquote>
+
+      <p>Finally, head back to your local <span class="notranslate">Galaxy</span> and verify that the runtime error no longer occurs:</p>
+
+      <ol>
+        <li>Remove the <code class="language-plaintext highlighter-rouge">breakpoint()</code> statement you added to <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api/datasets.py</code>.</li>
+        <li>Start <span class="notranslate">Galaxy</span> and repeat the steps from the bug report (select “User” &gt; “Datasets”). You should see the Datasets page now - no more error message!</li>
+      </ol>
+
+      <p>Congratulations - you’ve completed the last and, possibly, most challenging section of this tutorial!</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Finally, we’re back in the Green - all tests pass!</p>
+
+<p>First of all, thank you for completing this tutorial. We hope you feel more confident debugging <span class="notranslate">Galaxy</span> code and understanding how to navigate the testing frameworks we utilize. Of course, we are always available to help answer questions and support you!</p>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>Always run individual failing tests locally to minimize the feedback loop.</p>
+</li>
+                            
+                            <li><p>To fix a bug, start by looking for the precise location in the code where the unexpected result is being produced, starting from the failing test or the error message in the log. Once the location is identified, finding and correcting the error is often trivial.</p>
+</li>
+                            
+                            <li><p>When debugging an API test failure, first determine what endpoint is being utilized; then look in <code class="language-plaintext highlighter-rouge">lib/galaxy/webapps/galaxy/api/</code> to locate the controller that handles that enpoint. The controller will point you to a manager module, which is where you’re most likely to find the bug.</p>
+</li>
+                            
+                            <li><p>To locate the probable cause of a Selenium test failure, run Selenium with <code class="language-plaintext highlighter-rouge">GALAXY_TEST_SELENIUM_HEADLESS=false</code> to watch the browser step through the test.</p>
+</li>
+                            
+                            <li><p>When debugging a runtime error, use pdb or any other interactive Python debugger to step through the code to identify the location of the error. Remember to use <code class="language-plaintext highlighter-rouge">GALAXY_CONFIG_DEBUG=1</code> to enable debugging.</p>
+</li>
+                            
+                            <li><p>If you find a bug in a code block that is not covered by a test, before you fix the bug, write a test exposing the bug; run the test to ensure it fails; then fix the bug; then run the test again to ensure it passes.</p>
+</li>
+                            
+                            <li><p>Write useful and property formatted commit messages.</p>
+</li>
+                            
+                            <li><p>Pdb is your friend.</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/dev/faqs/">FAQ page for the Development in Galaxy topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                    
+
+                    
+
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Debugging Galaxy (Development in Galaxy)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Assunta DeSanto, Sergey Golitsynskiy, John Chilton, 2021 <b>Debugging Galaxy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/debugging/tutorial.html">https://training.galaxyproject.org/training-material/topics/dev/tutorials/debugging/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{dev-debugging,
+    author = "Assunta DeSanto and Sergey Golitsynskiy and John Chilton",
+    title = "Debugging Galaxy (Galaxy Training Materials)",
+    year = "2021",
+    month = "06",
+    day = "15"
+    url = "\url{https://training.galaxyproject.org/training-material/topics/dev/tutorials/debugging/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+                    
+
+                    
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Assunta DeSanto, Sergey Golitsynskiy, John Chilton)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/dev/tutorials/debugging/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
