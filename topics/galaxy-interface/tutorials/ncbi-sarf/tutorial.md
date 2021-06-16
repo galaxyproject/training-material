@@ -83,7 +83,7 @@ The SRA aligned reads, the VCF files, the results of these analyses (such as BLA
 
 # Workflow Diagram
 
-![Workflow Diagram for this Tutorial](../..//images/SARF_Workflow_Overview.png “Workflow Diagram for this Tutorial“)
+![Workflow Diagram for this Tutorial](../../images/SARF_Workflow_Overview.png "Workflow Diagram for this Tutorial")
 
 
 # Finding SRA SARS-CoV-2 Runs of Interest
