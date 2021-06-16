@@ -174,7 +174,7 @@ The client lives in the Galaxy code under the [client/](https://github.com/galax
 
 ## Handlers
 
-A number of the tasks that are executed will trigger a restart of Galaxy. Currently there is no auto-magic implementation of this, and you will have to do something that fits for your setup. The role provides a way to reference your own [handler](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_intro.html#handlers-running-operations-on-change), which we will do in this exercise. As Galaxy continues to standardise on setup, something will be implemented directly in the role to automatically restart the correct processes.
+A number of the tasks that are executed will trigger a restart of Galaxy. Currently the only auto-magic implementation of this restart [handler](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_intro.html#handlers-running-operations-on-change) is when Galaxy is started and run using systemd. Thankfully, this tutorial uses systemd, but if systemd is not an option wherever you're deploying Galaxy, you will have to do something custom that fits for your setup. If this is the case for you, the role provides a way to reference your own handler by setting `galaxy_restart_handler_name`.
 
 ## Defaults
 
