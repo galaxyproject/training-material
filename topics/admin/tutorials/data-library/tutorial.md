@@ -145,7 +145,7 @@ Additionally we have a `user` directory, below the user directory are more direc
 
 This is by far the easiest and most convenient option for small datasets, or datasets that are just already in a history
 
-![A select box is shown listing files in the user's history](../../images/data/import-admin.png)
+![A select box is shown listing files in the user's history](../../images/data/import-history.png)
 
 You can easily select multiple files and quickly import them.
 
