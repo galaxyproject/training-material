@@ -164,6 +164,14 @@ The [database management tasks](https://github.com/galaxyproject/ansible-galaxy/
 
 As an administrator who often forgot to run the upgrade, and would only notice it once Galaxy crashed during startup, having this process completely automated is extremely nice.
 
+### Building the Client
+
+Galaxy is a modern web application that includes both a server (written in Python) and a client (written in Javascript). After the server is installed and its database prepared, the next step is to build the client application. This means fetching its dependencies, bundling components, creating minified copies of static content, etc. This process ensures that the smallest possible amount of data is transferred to the user when accessing Galaxy over the web, which is important for the performance of the website.
+
+This process can be lengthy and resource intensive. Future plans for Galaxy include pre-building the client so that the build process is not necessary as long as you run "release" versions of Galaxy.
+
+The client lives in the Galaxy code under the [client/](https://github.com/galaxyproject/galaxy/blob/dev/client/) directory, and the build process deploys it to the [static/](https://github.com/galaxyproject/galaxy/tree/dev/static/) directory, which we will configure NGINX to serve in this tutorial.
+
 ## Handlers
 
 A number of the tasks that are executed will trigger a restart of Galaxy. Currently there is no auto-magic implementation of this, and you will have to do something that fits for your setup. The role provides a way to reference your own [handler](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_intro.html#handlers-running-operations-on-change), which we will do in this exercise. As Galaxy continues to standardise on setup, something will be implemented directly in the role to automatically restart the correct processes.
@@ -181,6 +189,7 @@ Installation of Galaxy with the playbook follows generally the steps you would e
 - Configuration files are installed
 - Any missing dependencies are installed
 - Any database updates are applied
+- The client application is built and deployed
 
 It would not be difficult to write a role that does this yourself, but by using
 the `galaxyproject.galaxy` role, you know that you're getting all of the Galaxy
@@ -359,7 +368,7 @@ Galaxy is capable of talking to multiple databases through SQLAlchemy drivers. S
 
 PostgreSQL maintains its own user database apart from the system user database. By default, PostgreSQL uses the "peer" authentication method which allows access for system users with matching PostgreSQL usernames (other authentication mechanisms are available, see the [PostgreSQL Client Authentication documentation](https://www.postgresql.org/docs/current/static/client-authentication.html).
 
-For this tutorial, we will use the default "peer" authentication, so we need to create a PostgreSQL user matching the system user under which Galaxy will be running, i.e. `galaxy`. This is normally done with the PostgreSQL `createuser` command, and it must be run as the `postgres` user. In our case, we will use the `natefoo.postgresql_objects` role to handle this step. Additionally we're setting a couple of variables to control the automatic backups, they'll be placed in the /data/backups folder next to our user uploaded Galaxy data.
+For this tutorial, we will use the default "peer" authentication, so we need to create a PostgreSQL user matching the system user under which Galaxy will be running, i.e. `galaxy`. This is normally done with the PostgreSQL `createuser` command, and it must be run as the `postgres` user. In our case, we will use the `natefoo.postgresql_objects` role to handle this step. Additionally we're setting a couple of variables to control the automatic backups, they'll be placed in the `/data/backups` folder next to our user uploaded Galaxy data.
 
 > ### {% icon hands_on %} Hands-on: Installing PostgreSQL
 >
@@ -1658,9 +1667,10 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >
 > 6. Some things to note:
 >
->    1. Refreshing the page before Galaxy has restarted will hang until the process is ready, a nice feature of uWSGI
+>    1. Later, after NGINX is set up and we're ready to connect to Galaxy, refreshing the page while Galaxy is restarting will wait (spin) until the process is ready rather than produce an error message, a nice feature of uWSGI
 >    2. Although the playbook will restart Galaxy upon config changes, you will sometimes need to restart it by hand, which can be done with `systemctl restart galaxy`
 >    3. You can use `journalctl -fu galaxy` to see the logs of Galaxy
+>    4. You may have noticed after setting up Galaxy in the previous section, that Ansible printed the message "RESTARTER NOT IMPLEMENTED - Please restart Galaxy manually. You can define your own handler and enable it with `galaxy_restart_handler_name`." You should no longer see this message on future playbook runs, as enabling systemd has automatically set `galaxy_restart_handler_name` for us - the role now knows how to restart Galaxy!
 >
 {: .hands_on}
 
@@ -1672,7 +1682,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >
 > The next time you run the playbook, Ansible will not observe any configuration files changing (because they were changed in the last run.) And so the `Restart Galaxy` handler will not run.
 >
-> If you encounter this situation you just have to be mindful of the fact, and remember to manually restart the handler. There is no general solution to this problem unfortunately. This applies mostly to development setups. In production you're probably running that playbook somewhat regularly and do not expect failures as everything is quite stable.
+> If you encounter this situation you just have to be mindful of the fact, and remember to manually run the handler. There is no general solution to this problem unfortunately. This applies mostly to development setups. In production you're probably running that playbook somewhat regularly and do not expect failures as everything is quite stable.
 >
 {: .details}
 
@@ -1689,9 +1699,9 @@ With this we have:
 - PostgreSQL running
 - Galaxy running (managed by systemd)
 
-By moving to NGINX or another reverse proxy, it can automatically compress selected content, we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at `/` and Galaxy at `/galaxy`. Lastly, it can provide authentication as well, as noted in the [External Authentication]({{ site.baseurl }}/topics/admin/tutorials/external-auth/tutorial.html) tutorial.
+Although uWSGI can server HTTP for us directly, by moving to NGINX (or another reverse proxy), it can automatically compress selected content, and we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at `/` and Galaxy at `/galaxy`. Lastly, it can provide authentication as well, as noted in the [External Authentication]({{ site.baseurl }}/topics/admin/tutorials/external-auth/tutorial.html) tutorial.
 
-For this, we will use NGINX. It is possible to configure Galaxy with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache. [Google's PageSpeed Tools](https://developers.google.com/speed/pagespeed/insights/) can identify any compression or caching improvements you can make.
+For this, we will use NGINX. It is possible to configure Galaxy with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache.
 
 > ### {% icon hands_on %} Hands-on: NGINX
 >
@@ -1913,6 +1923,8 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure nginx vhost for galaxy"}
+>
+>    You'll notice that we have set a 24 hour cache timeout on static content served by NGINX. [Google's PageSpeed Tools](https://developers.google.com/speed/pagespeed/insights/) can identify any additional compression or caching improvements you can make.
 >
 >    > ### {% icon details %} Running this tutorial *without* SSL
 >    >
