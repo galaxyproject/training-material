@@ -35,7 +35,7 @@ The EncyclopeDIA {% cite Searle2020 %} workflow described in this tutorial conta
 
 **An Overview of the EncyclopeDIA Standard Workflow:**
 
-![EncyclopeDIA workflow](../../images/EncyclopeDIA_Workflow_LTR.png)
+![EncyclopeDIA workflow](../../images/EncyclopeDIA_Workflow_LTR.png "EncyclopeDIA Workflow")
 
 **About the data:** In this tutorial, we will be analyzing the dataset provided by the iPRG.
 
@@ -60,17 +60,17 @@ Data Independent Acquisition (DIA) Mass Spectrometry is a promising alternative 
 
 In DDA-MS method, the instrument selects specific precursor ions for fragmentation based on their measured abundance in MS1 (Figure 1). Once selected, MS2 data is collected for these m/z time points and used to determine the sequences of the peptides that are present. Additionally, when integrated with the information given with the precursor peak, the quantity of peptide can be calculated.
 
-![DDA-MS method](../../images/EncyclopeDIA_Figure1.png)
+![DDA-MS method](../../images/EncyclopeDIA_Figure1.png "DDA precursor data selection with resultant MS2 results")
 
 On the other hand, in the DIA-MS method, the mass spectrometer fragments analytes within a specified m/z range (Figure 2). The MS2 data contribute to analyte identification and provide relative quantification. Compared to DDA that selects for a specific time point corresponding to a specific peptide, DIA scans across a time range resulting in multiplexed and complex MS2 data containing peak information from multiple peptides.
 
-![DIA-MS method](../../images/EncyclopeDIA_Figure2.png)
+![DIA-MS method](../../images/EncyclopeDIA_Figure2.png "DIA precursor data selection with resultant MS1 ranges and MS2 results")
 
 ## What does a typical DIA experiment look like?
 
 In a typical the DIA-MS experiment, the precursor scan usually ranges between 400-1000 m/z as opposed to 400-1600 m/z typically associated with DDA experiments. Multiple precursor scans are selected, each containing several fragment scans spanning across the entire 400-1000 m/z range (Figure 3A). Specific corresponding fragment ion scans can then be condensed and each combined fragment ion scan containing a small m/z range and its peaks can be examined and its peptide content can then be analyzed (Figure 3B).
 
-![Precursor and Fragment scans in DIA](../../images/EncyclopeDIA_Figure3.png)
+![Precursor and Fragment scans in DIA](../../images/EncyclopeDIA_Figure3.png "Precursor and Fragment ion scans in DIA experiment")
 
 > ### {% icon details %} Advantages of DIA over DDA
 >
@@ -222,11 +222,11 @@ As mentioned, there are challenges associated with the use of DDA libraries to a
 
 Libraries generated using DIA data can bypass several issues, including lowering the overall labor required to produce the library, as well as increasing the accuracy of the library concerning the sample that is being analyzed. To generate libraries using DIA data, Gas Phase Fractionation (GPF) is used. In DDA library generation, typically one injection is performed over the precursor scan, with multiple (24) ion fraction windows contained over the scan. However, using GPF, multiple acquisitions are used for each precursor scan to make up the range of 400-1000 m/z. For example, if six injections are performed over this m/z range, each containing the same number of windows like that of the injection in DDA library generation, then each window will be far smaller (Figure 4). 
 
-![Gas-Phase fractionation](../../images/EncyclopeDIA_Figure4.png)
+![Gas-Phase fractionation](../../images/EncyclopeDIA_Figure4.png "Gas-Phase fractionation Summary")
 
 As shown in Figure 4, GPF and its multiple injections allows for a far richer and more in-depth understanding of the peptide content within the sample making it a useful tool in library generation. In addition to producing a more comprehensive picture of the sample, the GPF method can be used on pooled DIA quantitative samples (Figure 5). Therefore, the pooled sample generates a thorough library through GPF while incorporating a spectrum library to create an “On-column Chromatogram Library” from DIA sample data.
 
-![Chromatogram Library generation](../../images/EncyclopeDIA_Figure5.png)
+![Chromatogram Library generation](../../images/EncyclopeDIA_Figure5.png "Chromatogram Library generation")
 
 SearchToLib is the tool responsible for the generation of the Chromatogram Library in this EncyclopeDIA workflow. A library is generated using the GPF DIA dataset collection converted previously, a background proteome FASTA file, as well as a DLIB Spectral Library. Outputs from this tool include the Chromatogram Library in [ELIB format](https://support.proteomesoftware.com/hc/en-us/articles/360022979832-Reference-Libraries-Used-in-Scaffold-DIA), as well as a text log file.
 
@@ -300,7 +300,7 @@ SearchToLib is the tool responsible for the generation of the Chromatogram Libra
 
 DIA data analysis with EncyclopeDIA is still possible without a Spectral library. Although a Spectral library is a required input for SearchToLib in the Standard EncyclopeDIA workflow, WALNUT (another form of the EncyclopeDIA workflow) can be used. When using the WALNUT workflow, the Background Proteome FASTA file is important, as this will be the primary file SearchToLib will search against in formation of the Chromatogram Library. Otherwise, the WALNUT EncyclopeDIA workflow works similarly to the Standard EncyclopeDIA workflow:
 
-![EncyclopeDIA WALNUT workflow](../../images/EncyclopeDIA_WALNUT_Workflow.png)
+![EncyclopeDIA WALNUT workflow](../../images/EncyclopeDIA_WALNUT_Workflow.png "EncyclopeDIA WALNUT workflow overview")
 
 ## **Walnut**
 
@@ -382,10 +382,10 @@ EncyclopeDIA is the tool used for DIA data analysis through searching peptides a
 As mentioned, EncyclopeDIA generates quantitative information on both peptides and proteins. 
 
 Sample ouput of the Peptide Quantitation Ouput:
-![Peptide Quantitation Output](../../images/EncyclopeDIA_PeptideQuantitation_Output.png)
+![Peptide Quantitation Output](../../images/EncyclopeDIA_PeptideQuantitation_Output.png "Peptide Quantitation Output Summary")
 
 Sample output of the Protein Quantitation Output:
-![Protein Quantitation Output](../../images/EncyclopeDIA_ProteinQuantitation_Output.png)
+![Protein Quantitation Output](../../images/EncyclopeDIA_ProteinQuantitation_Output.png "Protein Quantitation Output Summary")
 
 > ### {% icon details %} EncyclopeDIA Inputs and Ouputs
 > Inputs required for EncyclopeDIA:
@@ -422,7 +422,7 @@ Sample output of the Protein Quantitation Output:
 
 This completes the walkthrough of the EncyclopeDIA Standard workflow. 
 
-![EncyclopeDIA overview](../../images/EncyclopeDIA_Workflow.png)
+![EncyclopeDIA overview](../../images/EncyclopeDIA_Workflow.png "EncyclopeDIA overview")
 
 This tutorial is a guide to converting DIA data to the required input format, generation of a Chromatogram Library, and analysis of experimental DIA data using the EncyclopeDIA tool, developed by Brian Searle. This tutorial and workflow are available for use bt researchers with their data; however, please note that the tool parameters and the workflow will be needed to be modified accordingly.
 
