@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: EncyclopeDIA
-zenodo_link: ''
+zenodo_link: 'http://doi.org/10.5281/zenodo.4926594'
 questions:
 - How to perform quantitative analysis using DIA data with the help of EncyclopeDIA?
 - How to perform quantitation with or without Chromatogram Libraries?
@@ -37,7 +37,7 @@ The EncyclopeDIA {% cite Searle2020 %} workflow described in this tutorial conta
 
 ![Alternative text](../../images/EncyclopeDIA_Workflow_LTR.png)
 
-**About the data:** In this tutorial, we will be using **__ sample data acquired by ___ method by ___. **
+**About the data:** In this tutorial, we will be analyzing the dataset provided by the iPRG.
 
 > ### Agenda
 >
@@ -90,21 +90,40 @@ In a typical the DIA-MS experiment, the precursor scan usually ranges between 40
 >     -> `{{ page.title }}`):
 >
 >    ```
->    
+>    https://zenodo.org/record/4926594/files/Experimental_DIA_Dataset_Collection__191023JAT03_1_Mix_2_1ug_pOT_30k_390_1010_12%20.raw.raw?download=1
+>    https://zenodo.org/record/4926594/files/Experimental_DIA_Dataset_Collection__191023JAT10_2_Mix_4_1ug_pOT_30k_390_1010_12%20.raw.raw?download=1
+>    https://zenodo.org/record/4926594/files/Experimental_DIA_Dataset_Collection__191023JAT11_3_Mix_1_1ug_pOT_30k_390_1010_12%20.raw.raw?download=1
+>    https://zenodo.org/record/4926594/files/Experimental_DIA_Dataset_Collection__191023JAT12_4_Mix_3_1ug_pOT_30k_390_1010_12%20.raw.raw?download=1
+>    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT04_P_1ug_395_505_4%20.raw.raw?download=1
+>    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT05_P_1ug_495_605_4%20.raw.raw?download=1
+>    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT06_P_1ug_595_705_4%20.raw.raw?download=1
+>    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT07_P_1ug_695_805_4%20.raw.raw?download=1
+>    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT08_P_1ug_795_905_4%20.raw.raw?download=1
+>    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT09_P_1ug_895_1005_4%20.raw.raw?download=1
+>    https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_BS_191102.fasta?download=1
+>    https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_trypsin_z2_nce33_BS_191102.dlib?download=1
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. Rename the datasets
+> 3. For all the datasets that you have just uploaded, please rename them as follows:
+>> - The GPF files should be renamed as follows: "**GPF_DIA_Dataset_Collection__191023JAT06_P_1ug_595_705_4%20.raw.raw?download=1**" &rarr; "**191023JAT06_P_1ug_595_705_4.raw**". Notice that the "%20" characters were removed.
+>> - The Experimental design files should be renamed as follows: "**Experimental_DIA_Dataset_Collection__191023JAT12_4_Mix_3_1ug_pOT_30k_390_1010_12%20.raw.raw?download=1**" &rarr; "**191023JAT12_4_Mix_3_1ug_pOT_30k_390_1010_12.raw**". Again, the "%20" characters were removed.
+>> - The Background FASTA file will be renamed similarly: "**T4_Salmonella_Ecoli_Bacillus_BS_191102.fasta?download=1**" &rarr; "**T4_Salmonella_Ecoli_Bacillus_BS_191102.fasta**".
+>> - Lastly, the DLIB library is renamed: "**T4_Salmonella_Ecoli_Bacillus_fasta_trypsin_z2_nce33_BS_191102.dlib?download=1**" &rarr; "**T4_Salmonella_Ecoli_Bacillus_fasta_trypsin_z2_nce33_BS_191102.dlib**".
 > 4. Check that the datatype
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
-> 5. Add to each database a tag corresponding to ...
+> 5. Add to each dataset a tag corresponding to file-type, i.e. GPF datasets can be labeled as "GPF", Experimental DIA datasets as "Experimental".
 >
 >    {% include snippets/add_tag.md %}
->
+>    
+> 6. Please create a dataset collection for both the GPF files and the Experimental Design files. 
+> 
+>    {% snippet faqs/galaxy/collections_build_list.md %}
+>     
 {: .hands_on}
 
 # Conversion of file types
