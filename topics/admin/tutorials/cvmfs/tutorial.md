@@ -448,7 +448,7 @@ Examples of data include:
 
 * twoBit (`.2bit`) and FASTA (`.fa`) sequence files
 * Bowtie 2 and BWA indexes
-* Mutation Annotation Format (`.maf`) files
+* Multiple Alignment Format (`.maf`) files
 * SAMTools FASTA indexes (`.fai`)
 
 Now all we need to do is tell Galaxy how to find it! This tutorial assumes that you have run the tutorial in the requirements, [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}). The hands-on below will use the Galaxy Project Ansible role to configure everything.
