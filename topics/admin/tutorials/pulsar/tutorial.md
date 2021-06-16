@@ -724,7 +724,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
->    > ansible-playbook pulsar.yml
+>    > ansible-playbook galaxy.yml
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
