@@ -46,7 +46,7 @@ We will introduce additional benefits of using JupyterLab as you cover the lesso
 
 # JupyterLab
 
-## Opening up JupyterLab
+Opening up {% tool [JupyterLab](interactive_tool_jupyter_notebook) %} is quite easy:
 
 {% snippet faqs/galaxy/interactive_tools_jupyter_launch.md %}
 

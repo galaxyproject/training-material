@@ -211,21 +211,23 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the ve
 >
 >  [Panoply](https://www.giss.nasa.gov/tools/panoply/) plots geo-referenced and other arrays from netCDF and is available as a Galaxy interactive environment and may not be available on all Galaxy servers.
 >
-> > ### {% icon tip %} Tip: Launch Panoply in Galaxy
+> > ### {% icon tip %} Tip: Only on UseGalaxy.eu
 > > Currently Panoply in Galaxy is available on useGalaxy.eu instance, on the "Interactive tools" tool panel section or,
-> > as all interactive tools, from the dedicated useGalaxy.eu subdomain: [Live.useGalaxy.eu](https://live.usegalaxy.eu).
-> > You may have to login again to [Live.usrGalaxy.eu](https://live.usegalaxy.eu) (use the same username and password than on other useGalaxy.eu subdomains)
+> > as all interactive tools, from the dedicated useGalaxy.eu subdomain: [live.useGalaxy.eu](https://live.usegalaxy.eu).
+> > You may have to login again to [live.usegalaxy.eu](https://live.usegalaxy.eu) (use the same username and password than on other useGalaxy.eu subdomains)
 > > and switch to the correct history.
 > >
-> > 1. Open the Panoply tool {% icon tool %} by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply){:target="_blank"}
-> > 2. Check **ALP1_exp.nc** dataset selected in the netcdf input field
-> > 3. Click Execute
-> > 4. The tool will start running and will stay running permanently
-> > 5. Click on the "User" menu at the top and go to "Active Interactive Tools" and locate the Panoply instance you started.
-> > 6. Click on your Panoply instance
-> >    ![Panoply dataset selection](../../images/select_dataset.png "Select dataset")
-> > 7. Click on **ALP1_exp.nc** dataset
+> > You can access the tool by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply){:target="_blank"}
 > {: .tip}
+>
+> 1. Open the {% tool [Panoply](interactive_tool_panoply) %}
+> 2. Check **ALP1_exp.nc** dataset selected in the netcdf input field
+> 3. Click Execute
+> 4. The tool will start running and will stay running permanently
+> 5. Click on the "User" menu at the top and go to "Active Interactive Tools" and locate the Panoply instance you started.
+> 6. Click on your Panoply instance
+>    ![Panoply dataset selection](../../images/select_dataset.png "Select dataset")
+> 7. Click on **ALP1_exp.nc** dataset
 {: .hands_on}
 
 ## Inspect metadata
