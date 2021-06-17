@@ -60,4 +60,8 @@ for line in sys.stdin.readlines():
                 print(f'::error file="{fn}",line="{lineNo}",col={m.start()}::Unknown short tool ID {toolid}. If this is correct, please add to bin/check-broken-tool-links.py')
                 WROTE = 1
 
+        if '://' in toolid or '?' in toolid or '#' in toolid:
+            print(f'::error file="{fn}",line="{lineNo}",col={m.start()}::Broken tool link, {toolid} seems to include part of a URL which is incorrect. It should just be the tool ID.')
+            WROTE = 1
+
 sys.exit(WROTE)
