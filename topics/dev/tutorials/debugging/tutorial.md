@@ -244,7 +244,7 @@ Most of Galaxy unit tests are designed to test a separate component or function,
 
 # API test failure
 
-API test various aspects of the Galaxy API, as well as general backend aspects of Galaxy using the API. These tests require a Galaxy instance.
+API tests test various aspects of the Galaxy API, as well as general backend aspects of Galaxy using the API. These tests require a Galaxy instance.
 
 > ### {% icon hands_on %} Hands-on: Fixing a failing API test
 >
