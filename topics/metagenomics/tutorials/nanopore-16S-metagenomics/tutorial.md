@@ -313,7 +313,7 @@ Once we have assigned the corresponding taxa to each sequence, the next step is 
 >            - *"Find pattern"*: `\|`
 >            - *"Replace with"*: `\t`
 >
-> 3. {% tool [Remove beginning](Remove+beginning1) %} with the following parameters:
+> 3. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
 >    - {% icon param-collection %} *"Dataset collection"*: `Replace Text on collection`
 >
 {: .hands_on}

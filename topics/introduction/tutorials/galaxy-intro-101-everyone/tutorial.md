@@ -200,7 +200,7 @@ Now it is time to run your first tool! We saw in the previous step that our file
 
 > ### {% icon hands_on %} Hands-on: Removing header
 >
-> 1. {% tool [Remove Beginning](Remove+beginning1) %} with the following parameters:
+> 1. {% tool [Remove Beginning](Remove beginning1) %} with the following parameters:
 >    - *Remove first*: `1` (to remove the first line only)
 >    - {% icon param-file %} *"from"*: select the **iris tabular** file from your history
 >    - Click **Execute**
