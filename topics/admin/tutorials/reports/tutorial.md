@@ -86,12 +86,20 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -125,6 +125,8 @@ galaxy_config_templates:
+>    @@ -46,6 +46,7 @@ galaxy_root: /srv/galaxy
+>     galaxy_user: {name: galaxy, shell: /bin/bash}
+>     galaxy_commit_id: release_20.09
+>     galaxy_force_checkout: true
+>    +galaxy_reports_path: "{{ galaxy_config_dir }}/reports.yml"
+>     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
+>     miniconda_version: 4.7.12
+>     miniconda_manage_dependencies: false
+>    @@ -125,6 +126,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >       - src: templates/galaxy/config/container_resolvers_conf.xml.j2
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >    +  - src: templates/galaxy/config/reports.yml
->    +    dest: "{{ galaxy_config_dir }}/reports.yml"
+>    +    dest: "{{ galaxy_reports_path }}"
 >
 >     galaxy_config_files:
 >     - src: files/galaxy/config/tool_destinations.yml
@@ -106,7 +114,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -143,6 +143,7 @@ galaxy_dynamic_job_rules:
+>    @@ -144,6 +144,7 @@ galaxy_dynamic_job_rules:
 >
 >     # systemd
 >     galaxy_manage_systemd: yes

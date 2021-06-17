@@ -34,7 +34,7 @@ jobs:
           key: ${{ secrets.GIT_GAT_SSH_KEY }}
           known_hosts: "github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=="
           if_key_exists: ignore # replace / ignore / fail; optional (defaults to fail)
-        if: github.event.pull_request.head.repo.owner == 'galaxyproject'
+        if: github.event.pull_request.head.repo.full_name == 'galaxyproject/training-material' && github.event.pull_request.base.repo.full_name == 'galaxyproject/training-material'
 
       - name: Setup the repo
         run: |
@@ -48,13 +48,13 @@ jobs:
         run: |
             cd /tmp/git-gat/
             git remote add origin https://github.com/hexylena/git-gat
-        if: github.event.pull_request.head.repo.owner != 'galaxyproject'
+        if: github.event.pull_request.head.repo.full_name != 'galaxyproject/training-material' || github.event.pull_request.base.repo.full_name != 'galaxyproject/training-material'
 
       - name: Setup the origin (branch)
         run: |
             cd /tmp/git-gat/
             git remote add origin git@github.com:hexylena/git-gat
-        if: github.event.pull_request.head.repo.owner == 'galaxyproject'
+        if: github.event.pull_request.head.repo.full_name == 'galaxyproject/training-material' && github.event.pull_request.base.repo.full_name == 'galaxyproject/training-material'
 
       - name: Add scripts directory
         run: |
@@ -72,7 +72,7 @@ jobs:
                 # Commit those patches
                 patches=$(ls $i-*.patch 2>/dev/null| wc -c)
                 if (( patches > 0 )); then
-                    git am -3 $i-*.patch;
+                    git am -3 -C2 $i-*.patch;
 
                     # And tag it
                     git tag -f "step-$(( i - 9 ))";
@@ -90,4 +90,4 @@ jobs:
             git checkout -b $today
             git push -f --set-upstream origin $today
             git push -f --tags
-        if: github.event.pull_request.head.repo.owner == 'galaxyproject'
+        if: github.event.pull_request.head.repo.full_name == 'galaxyproject/training-material' && github.event.pull_request.base.repo.full_name == 'galaxyproject/training-material'
