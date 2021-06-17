@@ -54,9 +54,9 @@ The EncyclopeDIA {% cite Searle2020 %} workflow described in this tutorial conta
 >
 {: .agenda}
 
-# DDA, DIA, and their differences 
+# DDA, DIA, and their differences
 
-Data Independent Acquisition (DIA) Mass Spectrometry is a promising alternative to Data Dependent Acquisition (DDA) Mass Spectrometry for protein quantitation. 
+Data Independent Acquisition (DIA) Mass Spectrometry is a promising alternative to Data Dependent Acquisition (DDA) Mass Spectrometry for protein quantitation.
 
 In DDA-MS method, the instrument selects specific precursor ions for fragmentation based on their measured abundance in MS1 (Figure 1). Once selected, MS2 data is collected for these m/z time points and used to determine the sequences of the peptides that are present. Additionally, when integrated with the information given with the precursor peak, the quantity of peptide can be calculated.
 
@@ -90,40 +90,48 @@ In a typical the DIA-MS experiment, the precursor scan usually ranges between 40
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/record/4926594/files/Experimental_DIA_Dataset_Collection__191023JAT03_1_Mix_2_1ug_pOT_30k_390_1010_12%20.raw.raw?download=1
->    https://zenodo.org/record/4926594/files/Experimental_DIA_Dataset_Collection__191023JAT10_2_Mix_4_1ug_pOT_30k_390_1010_12%20.raw.raw?download=1
->    https://zenodo.org/record/4926594/files/Experimental_DIA_Dataset_Collection__191023JAT11_3_Mix_1_1ug_pOT_30k_390_1010_12%20.raw.raw?download=1
->    https://zenodo.org/record/4926594/files/Experimental_DIA_Dataset_Collection__191023JAT12_4_Mix_3_1ug_pOT_30k_390_1010_12%20.raw.raw?download=1
->    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT04_P_1ug_395_505_4%20.raw.raw?download=1
->    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT05_P_1ug_495_605_4%20.raw.raw?download=1
->    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT06_P_1ug_595_705_4%20.raw.raw?download=1
->    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT07_P_1ug_695_805_4%20.raw.raw?download=1
->    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT08_P_1ug_795_905_4%20.raw.raw?download=1
->    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT09_P_1ug_895_1005_4%20.raw.raw?download=1
->    https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_BS_191102.fasta?download=1
->    https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_trypsin_z2_nce33_BS_191102.dlib?download=1
+>    https://zenodo.org/record/4926594/files/Experimental_DIA_Dataset_Collection__191023JAT03_1_Mix_2_1ug_pOT_30k_390_1010_12%20.raw.raw
+>    https://zenodo.org/record/4926594/files/Experimental_DIA_Dataset_Collection__191023JAT10_2_Mix_4_1ug_pOT_30k_390_1010_12%20.raw.raw
+>    https://zenodo.org/record/4926594/files/Experimental_DIA_Dataset_Collection__191023JAT11_3_Mix_1_1ug_pOT_30k_390_1010_12%20.raw.raw
+>    https://zenodo.org/record/4926594/files/Experimental_DIA_Dataset_Collection__191023JAT12_4_Mix_3_1ug_pOT_30k_390_1010_12%20.raw.raw
+>    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT04_P_1ug_395_505_4%20.raw.raw
+>    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT05_P_1ug_495_605_4%20.raw.raw
+>    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT06_P_1ug_595_705_4%20.raw.raw
+>    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT07_P_1ug_695_805_4%20.raw.raw
+>    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT08_P_1ug_795_905_4%20.raw.raw
+>    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT09_P_1ug_895_1005_4%20.raw.raw
+>    https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_BS_191102.fasta
+>    https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_trypsin_z2_nce33_BS_191102.dlib
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. For all the datasets that you have just uploaded, please rename them as follows:
->> - The GPF files should be renamed as follows: "**GPF_DIA_Dataset_Collection__191023JAT06_P_1ug_595_705_4%20.raw.raw?download=1**" &rarr; "**191023JAT06_P_1ug_595_705_4.raw**". Notice that the "%20" characters were removed.
->> - The Experimental design files should be renamed as follows: "**Experimental_DIA_Dataset_Collection__191023JAT12_4_Mix_3_1ug_pOT_30k_390_1010_12%20.raw.raw?download=1**" &rarr; "**191023JAT12_4_Mix_3_1ug_pOT_30k_390_1010_12.raw**". Again, the "%20" characters were removed.
->> - The Background FASTA file will be renamed similarly: "**T4_Salmonella_Ecoli_Bacillus_BS_191102.fasta?download=1**" &rarr; "**T4_Salmonella_Ecoli_Bacillus_BS_191102.fasta**".
->> - Lastly, the DLIB library is renamed: "**T4_Salmonella_Ecoli_Bacillus_fasta_trypsin_z2_nce33_BS_191102.dlib?download=1**" &rarr; "**T4_Salmonella_Ecoli_Bacillus_fasta_trypsin_z2_nce33_BS_191102.dlib**".
+>     - The GPF files should be renamed as follows:
+>       - From: "**GPF_DIA_Dataset_Collection__191023JAT06_P_1ug_595_705_4%20.raw.raw**"
+>       - To: "**191023JAT06_P_1ug_595_705_4.raw**" (Note that the "%20" characters were removed).
+>     - The Experimental design files should be renamed as follows:
+>       - From: "**Experimental_DIA_Dataset_Collection__191023JAT12_4_Mix_3_1ug_pOT_30k_390_1010_12%20.raw.raw**"
+>       - To: "**191023JAT12_4_Mix_3_1ug_pOT_30k_390_1010_12.raw**". (Again, the "%20" characters were removed)
+>     - The Background FASTA file will be renamed similarly:
+>       - From: "**T4_Salmonella_Ecoli_Bacillus_BS_191102.fasta**"
+>       - To: "**T4_Salmonella_Ecoli_Bacillus_BS_191102.fasta**".
+>     - Lastly, the DLIB library is renamed:
+>       - From: "**T4_Salmonella_Ecoli_Bacillus_fasta_trypsin_z2_nce33_BS_191102.dlib"
+>       - To: "**T4_Salmonella_Ecoli_Bacillus_fasta_trypsin_z2_nce33_BS_191102.dlib**".
 > 4. Check that the datatype
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 > 5. Add to each dataset a tag corresponding to file-type, i.e. GPF datasets can be labeled as "GPF", Experimental DIA datasets as "Experimental".
 >
->    {% include snippets/add_tag.md %}
->    
-> 6. Please create a dataset collection for both the GPF files and the Experimental Design files. 
-> 
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
+>
+> 6. Please create a dataset collection for both the GPF files and the Experimental Design files.
+>
 >    {% snippet faqs/galaxy/collections_build_list.md %}
->     
+>
 {: .hands_on}
 
 # Conversion of file types
@@ -177,7 +185,7 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. SearchToLib and EncyclopeDIA require mzML file inputs. Failing to convert the experimental DIA data and the GPF DIA data from raw files would mean that SearchToLib and EncyclopeDIA would not run successfully. 
+> > 1. SearchToLib and EncyclopeDIA require mzML file inputs. Failing to convert the experimental DIA data and the GPF DIA data from raw files would mean that SearchToLib and EncyclopeDIA would not run successfully.
 > > 2. msconvert is specifically used in this workflow as it specializes in conversion of mass spectrometry data, and can therefore be applied to the DIA data that requires conversion to be analyzed in this workflow. However, there is an option to convert from raw to mzML using a command line-based tool.
 > >
 > {: .solution}
@@ -216,11 +224,11 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 
 # Chromatogram Library Generation
 
-Libraries used in DIA data analysis are often constructed from DDA data assuming that assuming that DDA data is a reasonable substitute or reasonable representation of DIA data, which is not always the case {% cite PinoLK2020 %}. However, researchers began postulating that libraries could be generated using DIA data, and formed methods of generating DIA data libraries as well as libraries generated through other methods. 
+Libraries used in DIA data analysis are often constructed from DDA data assuming that assuming that DDA data is a reasonable substitute or reasonable representation of DIA data, which is not always the case {% cite PinoLK2020 %}. However, researchers began postulating that libraries could be generated using DIA data, and formed methods of generating DIA data libraries as well as libraries generated through other methods.
 
 As mentioned, there are challenges associated with the use of DDA libraries to analyze DIA data. The main challenge is that the difference in the method of data generation causes inconvenient variance between the DDA library and the DIA data to be analyzed, making accurate investigation of data difficult. One significant difference that arises between DDA libraries and DIA data is retention time. Dependent on how the protein elutes off the column as well as changes caused by coelution in the environment, retention time varies between DDA and DIA methods. Additionally, DDA libraries can be cumbersome to generate when examining DIA data due to differences in methods of fractionation. For example, SCX fractionation provides a vastly different profile compared to high pH reverse phase fractionation. Thus, to generate a comprehensive profile with a DDA library, multiple fractionation methods must be completed. So, while DDA libraries can be used to analyze DIA data, their use significantly increases the required labor and the quantity of data required to generate a library.
 
-Libraries generated using DIA data can bypass several issues, including lowering the overall labor required to produce the library, as well as increasing the accuracy of the library concerning the sample that is being analyzed. To generate libraries using DIA data, Gas Phase Fractionation (GPF) is used. In DDA library generation, typically one injection is performed over the precursor scan, with multiple (24) ion fraction windows contained over the scan. However, using GPF, multiple acquisitions are used for each precursor scan to make up the range of 400-1000 m/z. For example, if six injections are performed over this m/z range, each containing the same number of windows like that of the injection in DDA library generation, then each window will be far smaller (Figure 4). 
+Libraries generated using DIA data can bypass several issues, including lowering the overall labor required to produce the library, as well as increasing the accuracy of the library concerning the sample that is being analyzed. To generate libraries using DIA data, Gas Phase Fractionation (GPF) is used. In DDA library generation, typically one injection is performed over the precursor scan, with multiple (24) ion fraction windows contained over the scan. However, using GPF, multiple acquisitions are used for each precursor scan to make up the range of 400-1000 m/z. For example, if six injections are performed over this m/z range, each containing the same number of windows like that of the injection in DDA library generation, then each window will be far smaller (Figure 4).
 
 ![Gas-Phase fractionation](../../images/EncyclopeDIA_Figure4.png "Gas-Phase fractionation Summary")
 
@@ -250,7 +258,7 @@ SearchToLib is the tool responsible for the generation of the Chromatogram Libra
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > Chromatogram Library generation using SearchToLib is the step that takes the most time in this workflow. With larger datasets, more time is required to generate the Chromatogram Library and SearchToLib may take up to several days to complete. 
+>    > Chromatogram Library generation using SearchToLib is the step that takes the most time in this workflow. With larger datasets, more time is required to generate the Chromatogram Library and SearchToLib may take up to several days to complete.
 >    {: .comment}
 >
 {: .hands_on}
@@ -291,7 +299,7 @@ SearchToLib is the tool responsible for the generation of the Chromatogram Libra
 >  This file is not visualized in the workflow output as it contains the progress of the workings of SearchToLib.
 >
 > - Chromatogram Library in ELIB format
->  
+>
 >  As the Chromatogram Library is generated using an ELIB format, it contains additional quantification data on retention time, peak intensity, and m/z ratios compared to DDA library files, typically generated using a DLIB format. This file will serve as the Chromatogram Library ELIB File input when running EncyclopeDIA.
 >
 {: .details}
@@ -308,7 +316,7 @@ DIA data analysis with EncyclopeDIA is still possible without a Spectral library
 >
 > 1. {% tool [SearchToLib](toolshed.g2.bx.psu.edu/repos/galaxyp/encyclopedia_searchtolib/encyclopedia_searchtolib/0.9.5.0) %} with the following parameters:
 >    - {% icon param-file %} *"Spectrum files in  mzML format"*: `output` (output of **msconvert** {% icon tool %})
->    - {% icon param-file %} *"Library: Chromatagram .ELIB or Spectrum .DLIB"*: `Nothing selected` 
+>    - {% icon param-file %} *"Library: Chromatagram .ELIB or Spectrum .DLIB"*: `Nothing selected`
 >    - {% icon param-file %} *"Background proteome protein fasta database"*: `output` (Input dataset)
 >    - In *"Parameter Settings"*:
 >        - *"Set Acquisition Options"*: `No - use default options`
@@ -331,14 +339,14 @@ DIA data analysis with EncyclopeDIA is still possible without a Spectral library
 > However, there are situations in which DIA data is analyzed without the use of DIA data generated libraries (Chromatogram Libraries) or DDA libraries. There are a few different methods and tools that can be used in cases where neither a Chromatogram library nor a DDA library can be generated.
 >
 > Predicted libraries are being studied in their use in DIA experiments. Specifically, PROSIT is a tool that is used for predicted library generation and it functions by entering peptide sequences through its neural network where it estimates the fragmentation patterns as well as the retention times for the peptide {% cite Searle2020 %}. As PROSIT generates estimates on peptide inputs, it generates a predicted library that can be used in DIA data analysis. This predicted library requires neither DIA sample data nor DDA sample data and is, therefore, a low labor tool in library generation. Predicted libraries are still being studied in their application to DIA data analysis. Predicted libraries generally underperform compared to DDA generated libraries; however, these libraries do significantly increase the quality of results compared to forgoing the use of a library altogether. This fact combined with their non-laborious nature means that predicted libraries can be useful in analyzing DIA data.
-> 
+>
 > In the case in which a predicted library cannot be generated, DIA-Umpire is another tool that is involved in DIA data analysis in which pseudo-spectra are generated {% cite TsouCC2015 %}. This tool extracts information on coeluting fragment ions that are associated with a specific peptide. This information is used to generate a pseudo-spectrum examining the monoisotopic peak as well as its precursor signals and fragment ions that coelute. Once this information is combined and the pseudo-spectrum is generated with DIA-Umpire, this spectrum can be used relatively normally as if it were a DDA generated library. This method of generating pseudo-spectra is relatively robust; however, it does rely on the ability to detect monoisotopic precursor peaks.
 >
 {: .details}
 
 # Analysis of DIA data through EncyclopeDIA
 
-EncyclopeDIA is the tool used for DIA data analysis through searching peptides against the generated Chromatogram Library. Utilizing the generated Chromatogram library, as well as the experimental DIA data (mzML format), and the background protein database used previously, EncyclopeDIA searches the experimental DIA data against these libraries. Generated are a log .txt file and two quantitation outputs for both proteins and peptides. 
+EncyclopeDIA is the tool used for DIA data analysis through searching peptides against the generated Chromatogram Library. Utilizing the generated Chromatogram library, as well as the experimental DIA data (mzML format), and the background protein database used previously, EncyclopeDIA searches the experimental DIA data against these libraries. Generated are a log .txt file and two quantitation outputs for both proteins and peptides.
 
 ## **EncyclopeDIA Quantify**
 
@@ -379,7 +387,7 @@ EncyclopeDIA is the tool used for DIA data analysis through searching peptides a
 >
 {: .question}
 
-As mentioned, EncyclopeDIA generates quantitative information on both peptides and proteins. 
+As mentioned, EncyclopeDIA generates quantitative information on both peptides and proteins.
 
 Sample ouput of the Peptide Quantitation Ouput:
 ![Peptide Quantitation Output](../../images/EncyclopeDIA_PeptideQuantitation_Output.png "Peptide Quantitation Output Summary")
@@ -420,7 +428,7 @@ Sample output of the Protein Quantitation Output:
 # **Conclusion**
 {:.no_toc}
 
-This completes the walkthrough of the EncyclopeDIA Standard workflow. 
+This completes the walkthrough of the EncyclopeDIA Standard workflow.
 
 ![EncyclopeDIA overview](../../images/EncyclopeDIA_Workflow.png "EncyclopeDIA overview")
 
