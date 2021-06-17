@@ -200,7 +200,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -30,3 +30,5 @@
->       version: 0.0.3
+>       version: 0.0.8
 >     - src: usegalaxy_eu.influxdb
 >       version: v6.0.7
 >    +- src: cloudalchemy.grafana
