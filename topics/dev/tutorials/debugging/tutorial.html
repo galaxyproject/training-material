@@ -538,7 +538,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 15, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 17, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -789,7 +789,7 @@
 
 <h1 id="api-test-failure">API test failure</h1>
 
-<p>API test various aspects of the <span class="notranslate">Galaxy</span> API, as well as general backend aspects of <span class="notranslate">Galaxy</span> using the API. These tests require a <span class="notranslate">Galaxy</span> instance.</p>
+<p>API tests test various aspects of the <span class="notranslate">Galaxy</span> API, as well as general backend aspects of <span class="notranslate">Galaxy</span> using the API. These tests require a <span class="notranslate">Galaxy</span> instance.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-fixing-a-failing-api-test"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Fixing a failing API test</h3>
@@ -873,7 +873,7 @@ FAILED lib/<span class="notranslate">galaxy</span>_test/api/test_licenses.py::Li
 
       <blockquote class="solution">
         <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-        <p>The <code class="language-plaintext highlighter-rouge">get_license_by_id()</code> method raises an <code class="language-plaintext highlighter-rouge">ObjectNotFound</code> error (which results in the 404 status code we see in the test result). This error is a direct result of the <code class="language-plaintext highlighter-rouge">get</code> method called on the previous line - take a look at that method:</p>
+        <p>The <code class="language-plaintext highlighter-rouge">get_license_by_id()</code> method raises an <code class="language-plaintext highlighter-rouge">ObjectNotFound</code> error (which results in the 404 status code we see in the test result). This error is a direct result of the LicensesManager <code class="language-plaintext highlighter-rouge">get</code> method called on the previous line (<code class="language-plaintext highlighter-rouge">license = self.get(id)</code>) - take a look at that method:</p>
         <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">uri</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">_by_index</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">_by_index</span><span class="p">[</span><span class="n">uri</span><span class="p">]</span>
@@ -1540,7 +1540,7 @@ Head over to the function’s definition (you can tell from the import statement
     title = "Debugging Galaxy (Galaxy Training Materials)",
     year = "2021",
     month = "06",
-    day = "15"
+    day = "17"
     url = "\url{https://training.galaxyproject.org/training-material/topics/dev/tutorials/debugging/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
