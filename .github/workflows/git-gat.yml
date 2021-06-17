@@ -46,11 +46,13 @@ jobs:
 
       - name: Setup the origin (fork)
         run: |
+            cd /tmp/git-gat/
             git remote add origin https://github.com/hexylena/git-gat
         if: github.event.pull_request.head.repo.owner != 'galaxyproject'
 
       - name: Setup the origin (branch)
         run: |
+            cd /tmp/git-gat/
             git remote add origin git@github.com:hexylena/git-gat
         if: github.event.pull_request.head.repo.owner == 'galaxyproject'
 
