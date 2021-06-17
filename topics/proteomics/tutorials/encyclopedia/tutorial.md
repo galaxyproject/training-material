@@ -72,9 +72,7 @@ In a typical the DIA-MS experiment, the precursor scan usually ranges between 40
 >
 {: .details}
 
-# Hands-on Sections
-
-## Get data
+# Import data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -103,22 +101,26 @@ In a typical the DIA-MS experiment, the precursor scan usually ranges between 40
 >
 > 3. For all the datasets that you have just uploaded, please rename them as follows:
 >     - The GPF files should be renamed as follows:
->       - From: "**GPF_DIA_Dataset_Collection__191023JAT06_P_1ug_595_705_4%20.raw.raw**"
->       - To: "**191023JAT06_P_1ug_595_705_4.raw**" (Note that the "%20" characters were removed).
+>       - From: **GPF_DIA_Dataset_Collection__191023JAT06_P_1ug_595_705_4%20.raw.raw**
+>       - To: **191023JAT06_P_1ug_595_705_4.raw**
+>       - Note that the "%20" characters were removed.
 >     - The Experimental design files should be renamed as follows:
->       - From: "**Experimental_DIA_Dataset_Collection__191023JAT12_4_Mix_3_1ug_pOT_30k_390_1010_12%20.raw.raw**"
->       - To: "**191023JAT12_4_Mix_3_1ug_pOT_30k_390_1010_12.raw**". (Again, the "%20" characters were removed)
+>       - From: **Experimental_DIA_Dataset_Collection__191023JAT12_4_Mix_3_1ug_pOT_30k_390_1010_12%20.raw.raw**
+>       - To: **191023JAT12_4_Mix_3_1ug_pOT_30k_390_1010_12.raw**
+>       - Again, the "%20" characters were removed
 >     - The Background FASTA file will be renamed similarly:
->       - From: "**T4_Salmonella_Ecoli_Bacillus_BS_191102.fasta**"
->       - To: "**T4_Salmonella_Ecoli_Bacillus_BS_191102.fasta**".
+>       - From: **T4_Salmonella_Ecoli_Bacillus_BS_191102.fasta**
+>       - To: **T4_Salmonella_Ecoli_Bacillus_BS_191102.fasta**
 >     - Lastly, the DLIB library is renamed:
->       - From: "**T4_Salmonella_Ecoli_Bacillus_fasta_trypsin_z2_nce33_BS_191102.dlib"
->       - To: "**T4_Salmonella_Ecoli_Bacillus_fasta_trypsin_z2_nce33_BS_191102.dlib**".
+>       - From: **T4_Salmonella_Ecoli_Bacillus_fasta_trypsin_z2_nce33_BS_191102.dlib**
+>       - To: **T4_Salmonella_Ecoli_Bacillus_fasta_trypsin_z2_nce33_BS_191102.dlib**
 > 4. Check that the datatype
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-> 5. Add to each dataset a tag corresponding to file-type, i.e. GPF datasets can be labeled as "GPF", Experimental DIA datasets as "Experimental".
+> 5. Add to each dataset a tag corresponding to file-type, i.e.
+>    - GPF datasets can be labeled as `#gpf`
+>    - Experimental DIA datasets as `#experimental`
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
@@ -230,7 +232,6 @@ As shown in Figure 4, GPF and its multiple injections allows for a far richer an
 
 SearchToLib is the tool responsible for the generation of the Chromatogram Library in this EncyclopeDIA workflow. A library is generated using the GPF DIA dataset collection converted previously, a background proteome FASTA file, as well as a DLIB Spectral Library. Outputs from this tool include the Chromatogram Library in [ELIB format](https://support.proteomesoftware.com/hc/en-us/articles/360022979832-Reference-Libraries-Used-in-Scaffold-DIA), as well as a text log file.
 
-## **SearchToLib**
 
 > ### {% icon hands_on %} Hands-on: Building a Chromatogram Library with DIA MS/MS data.
 >
@@ -302,7 +303,6 @@ DIA data analysis with EncyclopeDIA is still possible without a Spectral library
 
 ![EncyclopeDIA WALNUT workflow](../../images/EncyclopeDIA_WALNUT_Workflow.png "EncyclopeDIA WALNUT workflow overview")
 
-## **Walnut**
 
 > ### {% icon hands_on %} Hands-on: Chromatogram Library generation using WALNUT variation.
 >
@@ -340,7 +340,6 @@ DIA data analysis with EncyclopeDIA is still possible without a Spectral library
 
 EncyclopeDIA is the tool used for DIA data analysis through searching peptides against the generated Chromatogram Library. Utilizing the generated Chromatogram library, as well as the experimental DIA data (mzML format), and the background protein database used previously, EncyclopeDIA searches the experimental DIA data against these libraries. Generated are a log .txt file and two quantitation outputs for both proteins and peptides.
 
-## **EncyclopeDIA Quantify**
 
 > ### {% icon hands_on %} Hands-on: Library searching directly from DIA MS/MS data.
 >
