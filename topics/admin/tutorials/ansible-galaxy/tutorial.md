@@ -2382,12 +2382,14 @@ If you need to run on a cluster with a shared file system, you will need to expo
 - `galaxy_server_dir`
 - `galaxy_venv_dir`
 
-Some of these can be worked around, by running the portions of the roles that deploy these directories on the shared filesystem. Then Galaxy and the shared filesystem can run off of two different copies of them, if that is better for performance:
+But this isn't strictly true, not every one of these directories needs to be exported over the network. Instead, there are a couple of those directories that can be recreated in different locations (e.g. locally to nodes) using playbook tasks or simply by copying them to the relevant locations. Sometimes admins choose to do this for performance reasons when NFS can be slow or simply unnecessary:
 
 - `galaxy_server_dir`
 - `galaxy_venv_dir`
 
-Most of us use NFS, those who are using something more exotic (ceph, gluster, etc) have some reason for that like "my uni provided it" or "we really wanted to try something shiny". But NFS in most cases is decent and well tested and can be used.
+Both of those directories can be re-created by running parts of the `galaxyproject.galaxy` role on different machines. As neither of these directories is written to during system operations, it is fine for them to be copies living on different machines, rather coming from a single source of truth like an NFS server. For the other directories (e.g. job working directory or tools directory) these need to be written to, and read from, simultaneously from different machines, and should be consistent across the network.
+
+Most of us use NFS, those who are using something more exotic (ceph, gluster, etc) have some reason for that like "my uni provided it" or "we really wanted to try something shiny". But NFS in most cases is decent and well tested and can be used. For larger deployments, a single NFS node may be insufficient, but at these scales it is common that your university or organisation provides some managed NFS service, e.g. Isilon which has load balancing built into its NFS service.
 
 ## Other software
 
