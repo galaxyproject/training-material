@@ -565,7 +565,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 10, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 17, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -747,9 +747,17 @@
 
 <p>As an administrator who often forgot to run the upgrade, and would only notice it once <span class="notranslate">Galaxy</span> crashed during startup, having this process completely automated is extremely nice.</p>
 
+<h3 id="building-the-client">Building the Client</h3>
+
+<p><span class="notranslate">Galaxy</span> is a modern web application that includes both a server (written in Python) and a client (written in Javascript). After the server is installed and its database prepared, the next step is to build the client application. This means fetching its dependencies, bundling components, creating minified copies of static content, etc. This process ensures that the smallest possible amount of data is transferred to the user when accessing <span class="notranslate">Galaxy</span> over the web, which is important for the performance of the website.</p>
+
+<p>This process can be lengthy and resource intensive. Future plans for <span class="notranslate">Galaxy</span> include pre-building the client so that the build process is not necessary as long as you run “release” versions of <span class="notranslate">Galaxy</span>.</p>
+
+<p>The client lives in the <span class="notranslate">Galaxy</span> code under the <a href="https://github.com/galaxyproject/galaxy/blob/dev/client/">client/</a> directory, and the build process deploys it to the <a href="https://github.com/galaxyproject/galaxy/tree/dev/static/">static/</a> directory, which we will configure NGINX to serve in this tutorial.</p>
+
 <h2 id="handlers">Handlers</h2>
 
-<p>A number of the tasks that are executed will trigger a restart of <span class="notranslate">Galaxy</span>. Currently there is no auto-magic implementation of this, and you will have to do something that fits for your setup. The role provides a way to reference your own <a href="https://docs.ansible.com/ansible/2.9/user_guide/playbooks_intro.html#handlers-running-operations-on-change">handler</a>, which we will do in this exercise. As <span class="notranslate">Galaxy</span> continues to standardise on setup, something will be implemented directly in the role to automatically restart the correct processes.</p>
+<p>A number of the tasks that are executed will trigger a restart of <span class="notranslate">Galaxy</span>. Currently the only auto-magic implementation of this restart <a href="https://docs.ansible.com/ansible/2.9/user_guide/playbooks_intro.html#handlers-running-operations-on-change">handler</a> is when <span class="notranslate">Galaxy</span> is started and run using systemd. Thankfully, this tutorial uses systemd, but if systemd is not an option wherever you’re deploying <span class="notranslate">Galaxy</span>, you will have to do something custom that fits for your setup. If this is the case for you, the role provides a way to reference your own handler by setting <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_restart_handler_name</code>.</p>
 
 <h2 id="defaults">Defaults</h2>
 
@@ -765,6 +773,7 @@
   <li>Configuration files are installed</li>
   <li>Any missing dependencies are installed</li>
   <li>Any database updates are applied</li>
+  <li>The client application is built and deployed</li>
 </ul>
 
 <p>It would not be difficult to write a role that does this yourself, but by using
@@ -991,7 +1000,7 @@ A: They  are correlated (because generally new <span class="notranslate">Galaxy<
 
 <p>PostgreSQL maintains its own user database apart from the system user database. By default, PostgreSQL uses the “peer” authentication method which allows access for system users with matching PostgreSQL use<span class="notranslate">rna</span>mes (other authentication mechanisms are available, see the <a href="https://www.postgresql.org/docs/current/static/client-authentication.html">PostgreSQL Client Authentication documentation</a>.</p>
 
-<p>For this tutorial, we will use the default “peer” authentication, so we need to create a PostgreSQL user matching the system user under which <span class="notranslate">Galaxy</span> will be running, i.e. <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code>. This is normally done with the PostgreSQL <code class="language-plaintext highlighter-rouge">createuser</code> command, and it must be run as the <code class="language-plaintext highlighter-rouge">postgres</code> user. In our case, we will use the <code class="language-plaintext highlighter-rouge">natefoo.postgresql_objects</code> role to handle this step. Additionally we’re setting a couple of variables to control the automatic backups, they’ll be placed in the /data/backups folder next to our user uploaded <span class="notranslate">Galaxy</span> data.</p>
+<p>For this tutorial, we will use the default “peer” authentication, so we need to create a PostgreSQL user matching the system user under which <span class="notranslate">Galaxy</span> will be running, i.e. <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code>. This is normally done with the PostgreSQL <code class="language-plaintext highlighter-rouge">createuser</code> command, and it must be run as the <code class="language-plaintext highlighter-rouge">postgres</code> user. In our case, we will use the <code class="language-plaintext highlighter-rouge">natefoo.postgresql_objects</code> role to handle this step. Additionally we’re setting a couple of variables to control the automatic backups, they’ll be placed in the <code class="language-plaintext highlighter-rouge">/data/backups</code> folder next to our user uploaded <span class="notranslate">Galaxy</span> data.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-installing-postgresql"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing PostgreSQL</h3>
@@ -1481,7 +1490,7 @@ We’ll start by assuming you’re running the command</p>
 
       <blockquote class="tip">
         <h3 id="tip-different-galaxy-releases"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Different <span class="notranslate">Galaxy</span> Releases!</h3>
-        <p>In the time between this tutorial was last updated (2021-06-10), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
+        <p>In the time between this tutorial was last updated (2021-06-17), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
 
         <p>If you wish to use a different version of <span class="notranslate">Galaxy</span> than the one listed, you can do so, but there is no guarantee this tutorial will work without modifications.</p>
 
@@ -2377,9 +2386,10 @@ The client is only re-built when there are changes in the files needed for the <
       <p>Some things to note:</p>
 
       <ol>
-        <li>Refreshing the page before <span class="notranslate">Galaxy</span> has restarted will hang until the process is ready, a nice feature of uWSGI</li>
+        <li>Later, after NGINX is set up and we’re ready to connect to <span class="notranslate">Galaxy</span>, refreshing the page while <span class="notranslate">Galaxy</span> is restarting will wait (spin) until the process is ready rather than produce an error message, a nice feature of uWSGI</li>
         <li>Although the playbook will restart <span class="notranslate">Galaxy</span> upon config changes, you will sometimes need to restart it by hand, which can be done with <code class="language-plaintext highlighter-rouge">systemctl restart <span class="notranslate">galaxy</span></code></li>
         <li>You can use <code class="language-plaintext highlighter-rouge">jou<span class="notranslate">rna</span>lctl -fu <span class="notranslate">galaxy</span></code> to see the logs of <span class="notranslate">Galaxy</span></li>
+        <li>You may have noticed after setting up <span class="notranslate">Galaxy</span> in the previous section, that Ansible printed the message “RESTARTER NOT IMPLEMENTED - Please restart <span class="notranslate">Galaxy</span> manually. You can define your own handler and enable it with <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_restart_handler_name</code>.” You should no longer see this message on future playbook runs, as enabling systemd has automatically set <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_restart_handler_name</code> for us - the role now knows how to restart <span class="notranslate">Galaxy</span>!</li>
       </ol>
     </li>
   </ol>
@@ -2395,7 +2405,7 @@ The client is only re-built when there are changes in the files needed for the <
 
   <p>The next time you run the playbook, Ansible will not observe any configuration files changing (because they were changed in the last run.) And so the <code class="language-plaintext highlighter-rouge">Restart <span class="notranslate">Galaxy</span></code> handler will not run.</p>
 
-  <p>If you encounter this situation you just have to be mindful of the fact, and remember to manually restart the handler. There is no general solution to this problem unfortunately. This applies mostly to development setups. In production you’re probably running that playbook somewhat regularly and do not expect failures as everything is quite stable.</p>
+  <p>If you encounter this situation you just have to be mindful of the fact, and remember to manually run the handler. There is no general solution to this problem unfortunately. This applies mostly to development setups. In production you’re probably running that playbook somewhat regularly and do not expect failures as everything is quite stable.</p>
 
 </blockquote>
 
@@ -2413,9 +2423,9 @@ The client is only re-built when there are changes in the files needed for the <
   <li><span class="notranslate">Galaxy</span> running (managed by systemd)</li>
 </ul>
 
-<p>By moving to NGINX or another reverse proxy, it can automatically compress selected content, we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at <code class="language-plaintext highlighter-rouge">/</code> and <span class="notranslate">Galaxy</span> at <code class="language-plaintext highlighter-rouge">/<span class="notranslate">galaxy</span></code>. Lastly, it can provide authentication as well, as noted in the <a href="/training-material/topics/admin/tutorials/external-auth/tutorial.html">Exte<span class="notranslate">rna</span>l Authentication</a> tutorial.</p>
+<p>Although uWSGI can server HTTP for us directly, by moving to NGINX (or another reverse proxy), it can automatically compress selected content, and we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at <code class="language-plaintext highlighter-rouge">/</code> and <span class="notranslate">Galaxy</span> at <code class="language-plaintext highlighter-rouge">/<span class="notranslate">galaxy</span></code>. Lastly, it can provide authentication as well, as noted in the <a href="/training-material/topics/admin/tutorials/external-auth/tutorial.html">Exte<span class="notranslate">rna</span>l Authentication</a> tutorial.</p>
 
-<p>For this, we will use NGINX. It is possible to configure <span class="notranslate">Galaxy</span> with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache. <a href="https://developers.google.com/speed/pagespeed/insights/">Google’s PageSpeed Tools</a> can identify any compression or caching improvements you can make.</p>
+<p>For this, we will use NGINX. It is possible to configure <span class="notranslate">Galaxy</span> with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-nginx"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: NGINX</h3>
@@ -2638,6 +2648,8 @@ The client is only re-built when there are changes in the files needed for the <
 +}
 </span>   
 </code></pre></div>      </div>
+
+      <p>You’ll notice that we have set a 24 hour cache timeout on static content served by NGINX. <a href="https://developers.google.com/speed/pagespeed/insights/">Google’s PageSpeed Tools</a> can identify any additional compression or caching improvements you can make.</p>
 
       <blockquote class="details">
         <h3 id="details-running-this-tutorial-without-ssl-1"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Running this tutorial <em>without</em> SSL</h3>
@@ -3146,14 +3158,16 @@ Additionally you can automatically send failing job error reports, even if users
   <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_venv_dir</code></li>
 </ul>
 
-<p>Some of these can be worked around, by running the portions of the roles that deploy these directories on the shared filesystem. Then <span class="notranslate">Galaxy</span> and the shared filesystem can run off of two different copies of them, if that is better for performance:</p>
+<p>But this isn’t strictly true, not every one of these directories needs to be exported over the network. Instead, there are a couple of those directories that can be recreated in different locations (e.g. locally to nodes) using playbook tasks or simply by copying them to the relevant locations. Sometimes admins choose to do this for performance reasons when NFS can be slow or simply unnecessary:</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_server_dir</code></li>
   <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_venv_dir</code></li>
 </ul>
 
-<p>Most of us use NFS, those who are using something more exotic (ceph, gluster, etc) have some reason for that like “my uni provided it” or “we really wanted to try something shiny”. But NFS in most cases is decent and well tested and can be used.</p>
+<p>Both of those directories can be re-created by running parts of the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role on different machines. As neither of these directories is written to during system operations, it is fine for them to be copies living on different machines, rather coming from a single source of truth like an NFS server. For the other directories (e.g. job working directory or tools directory) these need to be written to, and read from, simultaneously from different machines, and should be consistent across the network.</p>
+
+<p>Most of us use NFS, those who are using something more exotic (ceph, gluster, etc) have some reason for that like “my uni provided it” or “we really wanted to try something shiny”. But NFS in most cases is decent and well tested and can be used. For larger deployments, a single NFS node may be insufficient, but at these scales it is common that your university or organisation provides some managed NFS service, e.g. Isilon which has load balancing built into its NFS service.</p>
 
 <h2 id="other-software">Other software</h2>
 
@@ -3254,7 +3268,7 @@ Additionally you can automatically send failing job error reports, even if users
     title = "Galaxy Installation with Ansible (Galaxy Training Materials)",
     year = "2021",
     month = "06",
-    day = "10"
+    day = "17"
     url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
