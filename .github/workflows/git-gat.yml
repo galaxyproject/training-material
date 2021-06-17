@@ -34,7 +34,7 @@ jobs:
           key: ${{ secrets.GIT_GAT_SSH_KEY }}
           known_hosts: "github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=="
           if_key_exists: ignore # replace / ignore / fail; optional (defaults to fail)
-        if: github.repository_owner == 'galaxyproject'
+        if: github.event.pull_request.head.repo.owner == 'galaxyproject'
 
       - name: Setup the repo
         run: |
@@ -43,12 +43,23 @@ jobs:
             git init
             git config user.email "galaxytrainingnetwork@gmail.com"
             git config user.name "The Galaxy Training Network"
+
+      - name: Setup the origin (fork)
+        run: |
+            cd /tmp/git-gat/
+            git remote add origin https://github.com/hexylena/git-gat
+        if: github.event.pull_request.head.repo.owner != 'galaxyproject'
+
+      - name: Setup the origin (branch)
+        run: |
+            cd /tmp/git-gat/
             git remote add origin git@github.com:hexylena/git-gat
-            git fetch origin --tags
+        if: github.event.pull_request.head.repo.owner == 'galaxyproject'
 
       - name: Add scripts directory
         run: |
             cd /tmp/git-gat/
+            git fetch origin --tags
             git add .scripts/
             git commit -m "admin/init/0000: Add scripts directory"
             git am 0-commit-0000-root-commit.patch
@@ -79,4 +90,4 @@ jobs:
             git checkout -b $today
             git push -f --set-upstream origin $today
             git push -f --tags
-        if: github.repository_owner == 'galaxyproject'
+        if: github.event.pull_request.head.repo.owner == 'galaxyproject'
