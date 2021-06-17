@@ -43,19 +43,21 @@ jobs:
             git init
             git config user.email "galaxytrainingnetwork@gmail.com"
             git config user.name "The Galaxy Training Network"
-            if [[ "$UPSTREAM_REPO" == "galaxyproject" ]]; then
-                git remote add origin git@github.com:hexylena/git-gat
-            else
-                git remote add origin https://github.com/hexylena/git-gat
-            fi
-            git fetch origin --tags
-        env:
-            UPSTREAM_REPO: "${{ github.event.pull_request.head.repo.owner }}"
 
+      - name: Setup the origin (fork)
+        run: |
+            git remote add origin https://github.com/hexylena/git-gat
+        if: github.event.pull_request.head.repo.owner != 'galaxyproject'
+
+      - name: Setup the origin (branch)
+        run: |
+            git remote add origin git@github.com:hexylena/git-gat
+        if: github.event.pull_request.head.repo.owner == 'galaxyproject'
 
       - name: Add scripts directory
         run: |
             cd /tmp/git-gat/
+            git fetch origin --tags
             git add .scripts/
             git commit -m "admin/init/0000: Add scripts directory"
             git am 0-commit-0000-root-commit.patch
