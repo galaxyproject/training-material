@@ -3,13 +3,17 @@ layout: tutorial_hands_on
 
 title: "Chloroplast genome assembly"
 zenodo_link: "http://doi.org/10.5281/zenodo.3567224"
+tags:
+  - plants
+  - nanopore
 questions:
   - "How can we assemble a chloroplast genome?"
 objectives:
   - "Assemble a chloroplast genome from long reads"
   - "Polish the assembly with short reads"
+  - "Annotate the assembly and view"
   - "Map reads to the assembly and view"
-  - "View an annotated assembly"
+
 time_estimation: "2h"
 key_points:
   - "A chloroplast genome can be assembled with long reads and polished with short reads"
@@ -46,8 +50,8 @@ Let's start with uploading the data.
 > ### {% icon hands_on %} Hands-on: Import the data
 > 1. Create a new history for this tutorial and give it a proper name
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import from [Zenodo](https://zenodo.org/record/3567224) or a data library (ask your instructor):
 >   - FASTQ file with illumina reads: `sweet-potato-chloroplast-illumina-reduced.fastq`
@@ -58,8 +62,8 @@ Let's start with uploading the data.
 >    https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduced.fastq
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 {: .hands_on}
 
 # Check read quality
@@ -100,14 +104,14 @@ We will look at the quality of the nanopore reads.
 We will assemble the long nanopore reads.
 
 > ### {% icon hands_on %} Hands-on: Assemble reads
-> 1. {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.3.7) %}:
+> 1. {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.6+galaxy0) %}:
 >    - *"Input reads"*: `sweet-potato-chloroplast-nanopore-reduced.fastq`
 >    - *"Estimated genome size"*: `160000`
 >    - *Leave other settings as default*
 >
 > 2. Re-name the `consensus` output file to `flye-assembly.fasta`
 >
->    {% include snippets/rename_dataset.md name="flye-assembly.fasta" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="flye-assembly.fasta" %}
 >
 > 3. **View output**:
 >    * There are five output files.
@@ -131,6 +135,8 @@ Your assembly graph may look like this:
 
 ![assembly graph](../../images/sweet-potato-assembly-graph.png "Assembly graph of the nanopore reads, for the sweet potato chloroplast genome. In your image, some of the labels may be truncated; this is a known bug under investigation.")
 
+*Note: a newer version of the Flye assembly tool now resolves this assembly into a single circle.*
+
 > ### {% icon question %} Question
 > What is your interpretation of this assembly graph?
 > > ### {% icon solution %} Solution
@@ -138,9 +144,11 @@ Your assembly graph may look like this:
 > {: .solution}
 {: .question}
 
-*Optional further steps:*
-* Repeat the Flye assembly with different parameters, and/or a filtered read set.
-* Try an alternative assembly tool, such as Canu or Unicycler.
+> ### {% icon comment %} Further Learning
+> * Repeat the Flye assembly with different parameters, and/or a filtered read set.
+> * You can also try repeating the Flye assembly with an earlier version of the tool, to see the difference it makes. In the tool panel for Flye, click on the 'Versions' button at the top to change.
+> * Try an alternative assembly tool, such as Canu or Unicycler.
+{: .comment}
 
 # Polish assembly
 
@@ -172,14 +180,13 @@ Next, we will compare the short reads to the assembly, and create a polished (co
 >    - *"Variant calling mode"*: `No`
 >    - *"Create changes file"*: `Yes`
 >
->  2. Rename the fasta output to `polished-assembly.fasta`
->
->    {% include snippets/rename_dataset.md name="polished-assembly.fasta" %}
->
-> 3. **View output**:
+> 2. **View output**:
 >   * What is in the `changes` file?
+>   * Rename the fasta output to `polished-assembly.fasta`
 >
-> 4. {% tool [Fasta Statistics](toolshed.g2.bx.psu.edu/repos/simon-gladman/fasta_stats/fasta-stats/1.0.0) %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="polished-assembly.fasta" %}
+>
+> 3. {% tool [Fasta Statistics](toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.1) %}
 >    - Find and run the tool called "Fasta statistics" on both the original flye assembly and the polished version.
 {: .hands_on}
 
@@ -193,6 +200,62 @@ Next, we will compare the short reads to the assembly, and create a polished (co
 *Optional further steps:*
 * Run a second round (or more) of Pilon polishing. Keep track of file naming; you will need to generate a new bam file first before each round of Pilon.
 * Run an alternative polishing tool, such as Racon. This uses the long reads themselves to correct the long-read (Flye) assembly. It would be better to run this tool on the Flye assembly before running Pilon, rather than after Pilon.
+
+# Annotate the assembly
+
+We can now annotate our assembled genome with information about genomic features.
+
+* A chloroplast genome annotation tool is not yet available in Galaxy; for an approximation, here we can use the tool for bacterial genome annotation, Prokka.
+
+> ### {% icon hands_on %} Hands-on: Annotate with Prokka
+>
+> 1. {% tool [Prokka](toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0) %} with the following parameters (leave everything else unchanged)
+>    - {% icon param-file %} *"contigs to annotate"*: `polished-assembly.fasta`
+> 2. **View output**:
+>    * The GFF and GBK files contain all of the information about the features annotated (in different formats.)
+>    * The .txt file contains a summary of the number of features annotated.
+>    * The .faa file contains the protein sequences of the genes annotated.
+>    * The .ffn file contains the nucleotide sequences of the genes annotated.
+{: .hands_on}
+
+
+Alternatively, you might want to use a web-based tool designed for chloroplast genomes.
+
+* One option is the GeSeq tool, described here. Skip this step if you have already used Prokka above.
+
+> ### {% icon hands_on %} Hands-on: Annotate with GeSeq
+> * Download `polished-assembly.fasta` to your computer (click on the file in your history; then click on the disk icon).
+> * In a new broswer tab, go to [Chlorobox](https://chlorobox.mpimp-golm.mpg.de/geseq.html) where we will use the GeSeq tool ({% cite Tillich_2017 %}) to annotate our sequence.
+> * Upload the `fasta` file there. Information about how to use the tool is available on the page.
+> * Once the annotation is completed, download the required files.
+> * In Galaxy, import the annotation `GFF3` file.
+{: .hands_on}
+
+Now make a JBrowse file to view the annotations (the GFF3 file - produced from either Prokka or GeSeq) under the assembly (the polished-assembly.fasta file).
+
+> ### {% icon hands_on %} Hands-on: View annotations
+> 1. {% tool [JBrowse genome browser](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3) %}:
+>    - *"Reference genome to display"*: `Use a genome from history`
+>        - *"Select a reference genome"*: `polished-assembly.fasta`
+>    - *"Produce Standalone Instance"*: `Yes`
+>    - *"Genetic Code"*: `11. The Bacterial, Archaeal and Plant Plastid Code`
+>    - *"JBrowse-in-Galaxy Action"*: `New JBrowse instance`
+>    - *"Insert Track Group"*
+>        - *"Insert Annotation Track"*
+>            - *"Track Type"*: `GFF/GFF3/BED Features`
+>            - *"GFF/GFF3/BED Track Data"*: the `GFF3` file
+>            - *Leave the other track features as default*
+> 2. **Re-name output file**:
+>    - JBrowse may take a few minutes to run. There is one output file: re-name it `view-annotations`
+> 3. **View output**:
+>    * Click on the eye icon to view the annotations file.
+>    * Select the right contig to view, in the drop down box.
+>    * Zoom out (with the minus button) until annotations are visible.
+{: .hands_on}
+
+Here is an embedded snippet showing JBrowse and the annotations:
+
+{% snippet topics/visualisation/faqs/visualizations_jbrowse.html datadir="data2" %}
 
 # View reads
 
@@ -244,7 +307,7 @@ We will look at the original sequencing reads mapped to the genome assembly. In 
 
 Here is an embedded snippet showing JBrowse and the mapped reads:
 
-{% include snippets/jbrowse.html datadir="data" %}
+{% snippet topics/visualisation/faqs/visualizations_jbrowse.html datadir="data" %}
 
 
 > ### {% icon question %} Questions
@@ -260,54 +323,6 @@ Here is an embedded snippet showing JBrowse and the mapped reads:
 
 * To learn more about JBrowse and its features, see the [Genomic Data Visualisation with JBrowse tutorial]({{site.baseurl}}/topics/visualisation/tutorials/jbrowse/tutorial.html)
 
-# Annotate the assembly
-
-We can now annotate our assembled genome with information about genomic features.
-* A chloroplast genome annotation tool is not yet available in Galaxy, although for an approximation we could use the tool for bacterial genome annotation, Prokka.
-* However here we will use a web-based tool designed for chloroplast genomes to annotate our assembly (or, you can upload an example annotation).
-
-Follow these steps to annotate your assembly, or upload an example annotation file from this [Zenodo link](http://doi.org/10.5281/zenodo.4267171) to your current Galaxy history, and skip to the next step.
-
-> ### {% icon hands_on %} Hands-on: Annotate with GeSeq
-> * Download `polished.fasta` to your computer (click on the file in your history; then click on the disk icon).
-> * In a new broswer tab, go to [Chlorobox](https://chlorobox.mpimp-golm.mpg.de/geseq.html) where we will use the GeSeq tool {% cite Tillich_2017 %} to annotate our sequence.
-> * Upload the `fasta` file there. Information about how to use the tool is available on the page.
-> * Once the annotation is completed, download the required files.
-> * In Galaxy, import the annotation `GFF3` file.
-{: .hands_on}
-
-Make a JBrowse file to view the annotations (the GFF3 file) under the assembly (the polished.fasta file).
-
-> ### {% icon hands_on %} Hands-on: View annotations
-> 1. {% tool [JBrowse genome browser](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3) %}:
->        - *"Reference genome to display"*: `Use a genome from history`
->    - *"Select a reference genome"*: `polished-assembly.fasta`
->    - *"Produce Standalone Instance"*: `Yes`
->    - *"Genetic Code"*: `11. The Bacterial, Archaeal and Plant Plastid Code`
->    - *"JBrowse-in-Galaxy Action"*: `New JBrowse instance`
->    - *"Insert Track Group"*
->        - *"Insert Annotation Track"*
->            - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
->            - *"GFF/GFF3/BED Track Data"*: the `GFF3` file
->            - *Leave the other track features as default*
-> 2. **Re-name output file**:
->    - JBrowse may take a few minutes to run. There is one output file: re-name it `view-annotations`
-> 3. **View output**:
->    * Click on the eye icon to view the annotations file.
->    * Select the right contig to view, in the drop down box.
->    * Zoom out (with the minus button) until annotations are visible.
-{: .hands_on}
-
-Here is an embedded snippet showing JBrowse and the annotations:
-
-{% include snippets/jbrowse.html datadir="data2" %}
-
-> ### {% icon question %} Question
-> Why might there be several annotations over the same genome region?
-> > ### {% icon solution %} Solution
-> > One reason is that these are predictions from different tools - such as BLAT or HMMER.
-> {: .solution}
-{: .question}
 
 # Repeat with new data
 
@@ -320,8 +335,8 @@ We can assemble another chloroplast genome using sequence data from a different 
 > * Check reads: Run Nanoplot on the nanopore reads.
 > * Assemble: Use Flye to assemble the nanopore reads, then get Fasta statistics *Note: this may take several hours.*
 > * Polish assembly: Use Pilon to polish the assembly with short Illumina reads. *Note: Don't forget to map these Illumina reads to the assembly first using bwa-mem, then use the resulting `bam` file as input to Pilon.*
-> * Annotate: Use the GeSeq tool at [Chlorobox](https://chlorobox.mpimp-golm.mpg.de/geseq.html).
-> * View annotations:Use <ss>JBrowse to view the assembled, annotated genome.
+> * Annotate: Use the GeSeq tool at [Chlorobox](https://chlorobox.mpimp-golm.mpg.de/geseq.html) or the Prokka tool within Galaxy.
+> * View annotations:Use JBrowse to view the assembled, annotated genome.
 {: .hands_on}
 
 # Conclusion

@@ -1,7 +1,6 @@
 ---
 layout: tutorial_hands_on
 title: Functionally Assembled Terrestrial Ecosystem Simulator (FATES)
-enable: false
 zenodo_link: 'https://doi.org/10.5281/zenodo.4108341'
 requirements:
   -
@@ -9,6 +8,11 @@ requirements:
     topic_name: climate
     tutorials:
         - panoply
+  -
+    type: "internal"
+    topic_name: galaxy-interface
+    tutorials:
+        - history-to-workflow
 
 questions:
 - How to run CLM-FATES with the CLM-FATES Galaxy tool?
@@ -26,11 +30,12 @@ objectives:
 - Composing, executing and publishing CML-FATES workflow.
 time_estimation: 4H
 key_points:
-- CLM-FATES
-- Quick visualization of your results with Panoply
-- Create multi-case simulations with a Galaxy workflow
+- CLM-FATES is a numerical terrestrial ecosystem model used in climate models
+- Panoply is a quick visualization tools for plotting your results
+- Multi-case simulations can be easily developed and shared with a Galaxy workflow
 contributors:
 - annefou
+- huitang-earth
 
 ---
 
@@ -38,9 +43,8 @@ contributors:
 # Introduction
 {:.no_toc}
 
-
-The practical aims at familiarizing you with running CLM-FATES in Galaxy and analyzing the model results.
-It will also teach you on how to create Galaxy workflow for your CLM-FATES simulations to make your research fully reproducible.
+Terrestrial ecosystem models have been widely used to study the impact of climate changes on vegetation and terrestrial biogeochemical cycles in climate modelling community. They are also more and more applied in ecological studies to help ecologists to better understand the processes. But the technical challenges are still too high for most of the ecologists to use them. This practical aims at familiarizing you (especially ecologists) with running a terrestrial ecosystem model (i.e., CLM-FATES) at site-level in Galaxy and analyzing the model results.
+It will also teach you on how to create Galaxy workflow for your site-level CLM-FATES simulations to make your research fully reproducible. We hope this tutorial will promote the use of CLM-FATES and other terrestrial ecosystem models by a broader community.
 
 > ### Agenda
 >
@@ -53,18 +57,18 @@ It will also teach you on how to create Galaxy workflow for your CLM-FATES simul
 
 > ### {% icon comment %} Background
 >
-> FATES is the “Functionally Assembled Terrestrial Ecosystem Simulator”.
+> FATES is the “Functionally Assembled Terrestrial Ecosystem Simulator”, which is a vegetation demographic model ({% cite Fisher2017 %}).
 > FATES needs what we call a "Host Land Model" (HLM) to run and in this tutorial
 > we will be using the [Community Land Model](http://www.cesm.ucar.edu/models/clm/)
 > of the [Community Terrestrial Systems Model](https://github.com/ESCOMP/CTSM) (CLM-CTSM).
 > FATES was derived from the CLM Ecosystem Demography model (CLM(ED)), which was documented in
-> {% cite Fisher2015 %}.
+> {% cite Fisher2015 %} and {% cite Koven2020 %}.
 > And this technical note was first published as an appendix to [that paper](https://pdfs.semanticscholar.org/396c/b9f172cb681421ed78325a2237bfb428eece.pdf).
 > The [FATES documentation](https://fates-docs.readthedocs.io/en/latest/index.html) will provide some more insight on FATES too.
 >
 {:  .comment}
 
-## Step 1: Get CLM-FATES input data
+# Get CLM-FATES input data
 
 Preparing CLM-FATES input data is out of scope for this tutorial. We assume the input data tarball contains the following folders:
 
@@ -72,47 +76,45 @@ Preparing CLM-FATES input data is out of scope for this tutorial. We assume the 
 atm   cpl   lnd   share
 ```
 
-Each sub-folder will then contain all the necessary inputs for running your CLM-FATES case.
-For the purpose of this tutorial, input data for a single point location ALP1 (61.0243N, 8.12343E) has been prepared and is ready to use.
+Each sub-folder will then contain all the necessary inputs for running your CLM-FATES case. For instance, 'atm' contains all the meteorological forcing data for running CLM-FATES. 'lnd' contains the data required to describe surface conditions (e.g., soil depth) for the model. More details about the model inputdata can be found in [CLM and FATES documentation](https://escomp.github.io/ctsm-docs/versions/master/html/tech_note/Ecosystem/CLM50_Tech_Note_Ecosystem.html#model-input-requirements).
+For the purpose of this tutorial, input data for a single point location (ALP1) on the Norwegian alpine tundra ecosystem (Latitude: 61.0243N, Longitude: 8.12343E, Elevation: 1208 m) has been prepared and is ready to use. This is a site included in the modelling platform developed under [EMERALD project] (https://www.mn.uio.no/geo/english/research/projects/emerald/). More details about the sites can be found in {% cite Klanderud2015 %} and  {% cite Vigdis2020 %}
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial. If you are not inspired, you can name it *fates*.
->    {% include snippets/create_new_history.md %}
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 > 2. Import the [input data](https://doi.org/10.5281/zenodo.4108341) and the [restart dataset from Zenodo](https://doi.org/10.5281/zenodo.4126404)
->    or from the shared data library
+>    or from the shared data library. Restart dataset will be used if you want to initialize the model from exisiting experiments rather than running the model from a cold start to shorten spin-up time needed for the model.
 >
 >    ```
 >    https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar
 >    https://zenodo.org/record/4126404/files/CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Check the datatype (for both files) is **tar**
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-> 4. Rename datasets as
+> 4. Rename {% icon galaxy-pencil %} datasets
+>      - Dataset names are the full URL, but this is not very nice to work with, and can even give errors for some tools
+>      - It is good practice to change the dataset names to something more meaningful and without any special characters
+>        -  E.g. by stripping off the beginning of the URL
+>      - Example: rename `https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar` to `inputdata_version2.0.0_ALP1.tar`
+>      - Do the same for the other dataset
 >
->    As `https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar` and `https://zenodo.org/record/4126404/files/CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar`
->    are not beautiful names and can give errors for some tools,
->    it is a good practice to change the dataset names by something more meaningful. For example by removing
->    `https://zenodo.org/record/4108341/files/` and `https://zenodo.org/record/4126404/files/` to obtain `inputdata_version2.0.0_ALP1.tar`
->    and `CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar`, respectively.
->
->    {% include snippets/rename_dataset.md %}
->
-> 5. Add a tag to the dataset corresponding to `fates`
->
->    {% include snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 
-# Step 2: Setting up a CLM-FATES simulation
+# Setting up a CLM-FATES simulation
 
-We will be using the CTSM/FATES-EMERALD Galaxy tool.
+We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the version of [CLM-FATES](https://github.com/NordicESMhub/ctsm/tree/fates_emerald_api) that have been adapted to run at the sites included in the EMERALD project. More details about this model version can be found in [README_fates_emerald_api](https://github.com/NordicESMhub/ctsm/blob/fates_emerald_api/README_fates_emerald_api)
 
 > ### {% icon comment %} Tip: Finding your tool
 >
@@ -122,27 +124,29 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >
 {: .comment}
 
+> ### {% icon comment %} Tip: Pre-selected tool parameters
+>
+> When selecting a tool, Galaxy will pre-fill the tool parameters, selecting the first dataset with the corresponding type in your history.
+> Be aware that very often, the default pre-selection is incorrect and do not correspond to the required dataset.
+> So always check and update accordingly the tool parameters!
+>
+{: .comment}
+
 > ### {% icon hands_on %} Hands-on: Creating a new CTSM/FATES-EMERALD case
 >
 > 1. {% tool [CTSM/FATES-EMERALD](toolshed.g2.bx.psu.edu/repos/climate/ctsm_fates/ctsm_fates/2.0.1) %} with the following parameters:
->    - {% icon param-file %} *"inputdata for running FATES EMERALD"*: select the **inputdata_version2.0.0_ALP1.tar** file from your history
->    - *Name of your case*: ALP1_exp
->    - Expand *'Customize the model run period'* to change the default values:
->        - **Determines the model run initialization type**: select **hybrid**
->        - **Reference case for hybrid or branch runs**: ALP1_refcase
->        - **Reference date for hybrid or branch runs (yyyy-mm-dd)**: 2300-01-01
->        - **Run start date (yyyy-mm-dd). Only used for startup or hybrid runs**: 0001-01-01
->        - **Restart for running FATES EMERALD**: CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar
->        - **Provides a numerical count for STOP_OPTION**: 5
->        - **Sets the run length along with STOP_N and STOP_DATE**: nyears
->    - Click **Execute**
+>    - {% icon param-file %} *"inputdata for running FATES EMERALD"*: `inputdata_version2.0.0_ALP1.tar` file from your history
+>    - *"Name of your case"*: ALP1_exp
+>    - In section *"Customize the model run period"*:
+>        - {% icon param-select %} *"Determines the model run initialization type:*: `hybrid`
+>          - *"Reference case for hybrid or branch runs"*: `ALP1_refcase`
+>          - *"Reference date for hybrid or branch runs (yyyy-mm-dd)"*: `2300-01-01`
+>          - *"Run start date (yyyy-mm-dd). Only used for startup or hybrid runs"*: `0001-01-01`
+>          - {% icon param-file %} *"Restart for running FATES EMERALD"*: `CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar`
+>        - *"Provides a numerical count for STOP_OPTION"*: `5`
+>        - *"Sets the run length along with STOP_N and STOP_DATE"*: `nyears`
 >
->    > ### {% icon comment %} Tip: search for the tool
->    >
->    > Use the **tools search box** at the top of the tool panel to find **Remove beginning** {% icon tool %}.
->    {: .tip}
->
->    > ## {% icon comment %} startup versus hybrid
+>    > ### {% icon comment %} Startup versus Hybrid
 >    >
 >    >  When using **startup**, the FATES model will start from some arbitrary baseline state that is not linked to any previous run.
 >    > Startup runs are typically initialized using a start date of 0001-01-01 except if you change it (start date option).
@@ -153,15 +157,24 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >    >
 >    {: .comment}
 >
-> 2. Check that the datatype of your outputs (history file) is **netcdf**
+> 2. Check that the datatype {% icon galaxy-pencil %} of your outputs (history file) is **[netcdf](https://en.wikipedia.org/wiki/NetCDF)**
+>      - If this is not the case, please change the datatype now
 >
->    All the history files contain gridded data values written at specified times during the model run.
->    Depending on the length of your simulation, you may have one or more history files that you can recognize from their names:
->    `ALP1_exp.clm2.h0.yyyy-mm-dd-sssss.nc` (for non-monthly history files).
->    Datatypes are, by default, automatically guessed. Here, as the prefix is `.nc`, the format is not always recognized as `netcdf` files.
->    To cope with that, one can change the datatype manually, as shown below.
+>    > ### {% icon comment %} About CLM-FATES history files
+>    > All the CLM-FATES history files are organized in a collection.
+>    >
+>    {: .comment}
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    > ### {% icon comment %} About datatypes
+>    >
+>    > All the history files contain gridded data values written at specified times during the model run.
+>    > Depending on the length of your simulation, you may have one or more history files that you can recognize from their names:
+>    >`ALP1_exp.clm2.h0.yyyy-mm-dd-sssss.nc` (for non-monthly history files).
+>    > Datatypes are, by default, automatically guessed. Here, as the prefix is `.nc`, the format is not always recognized as `netcdf` files.
+>    > To cope with that, one can change the datatype manually, as shown below.
+>    {: .comment}
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 > 3. **Rename** {% icon galaxy-pencil %} the output dataset (history file) to `ALP1_exp.nc`
 >
@@ -169,15 +182,13 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >    to rename all netCDF files so that they do not contain any special characters or dots (except for the file extension) or slashes. Some tools, in
 >    particular Panoply, won't be able to recognize your file if not named properly.
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
-> 4. Getting metadata information for CLM-FATES netCDF outputs
+> 4. {% tool [NetCDF xarray Metadata Info](toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1) %}  to get metadata information for CLM-FATES netCDF outputs:
+>      - {% icon param-file %} *"Netcdf file"*: `ALP1_exp.nc`
 >
->    {% tool [NetCDF xarray Metadata Info](toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1) %}  with the following parameters:
->    - **Netcdf file**: ALP1_exp.nc
->    - Click **Execute**
->
->    Inspect the generated output files and identify which variables would provide you some insights about canopy transpiration.
+> 5. **Inspect** {% icon galaxy-eye %} the generated output files
+>      - Identify which variables would provide you some insights about canopy transpiration.
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -192,13 +203,13 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >
 {: .hands_on}
 
-# Step 3: Quick visualization with Panoply
+# Quick visualization with Panoply
 
 ## Opening up Panoply
 
 > ### {% icon hands_on %} Hands-on: Launch Panoply
 >
->  Panoply is available as a Galaxy interactive environment and may not be available on all Galaxy servers.
+>  [Panoply](https://www.giss.nasa.gov/tools/panoply/) plots geo-referenced and other arrays from netCDF and is available as a Galaxy interactive environment and may not be available on all Galaxy servers.
 >
 > > ### {% icon tip %} Tip: Launch Panoply in Galaxy
 > > Currently Panoply in Galaxy is available on useGalaxy.eu instance, on the "Interactive tools" tool panel section or,
@@ -231,7 +242,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >    > 2. What is its physical unit?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. Rate of total mortality per PFT
+>    > > 1. Rate of total mortality per PFT (Plat functional types)
 >    > > 2. indiv/ha/yr
 >    > {: .solution}
 >    {: .question}
@@ -253,84 +264,80 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >
 > 3. Plot the rate of total mortality per PFT (MORTALITY)
 >
->    Select a 2D plot with time as x-axis and colored by the rate of total mortality per PFT.
+>    Select a 2D plot with time as x-axis and colored by the rate of total mortality per PFT (Plant functional type).
 >    Make sure to adjust the y-axis and save your plots in the output folder (as png file).
 >    > ### {% icon question %} Question
 >    > 1. Can you observe any pattern? Does it make any sense?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. We can clearly see a seasonal cycle.
+>    > > 1. We can clearly see a seasonal cycle of PFT2.
 >    > > ![Panoply MORTALITY per PFT](../../images/panoply_MORTALITY_ALP1_exp.png "total mortality per PFT")
 >    > {: .solution}
 >    {: .question}
 >
->    > ## {% icon comment %} Quit Panoply properly to save your plots!
+>    > ### {% icon comment %} Quit Panoply properly to save your plots!
 >    >
 >    > To make sure all your plots stored in **outputs** folder  get exported to Galaxy, you need to quit panoply: **File** --> **Quit Panoply**.
 >    {: .comment}
 {: .hands_on}
 
-# Step 4: Using Galaxy tools for analysing your CLM-FATES simulation
+# Using Galaxy tools for analysing your CLM-FATES simulation
 
 Panoply is a great tool for exploring the results of your simulations but what we would like is to automate the generation of the plots
 so that we can reuse it for any simulations.
 
 > ### {% icon hands_on %} Hands-on: Select and plot **LEAFC**
 >
-> 1. Select the total carbon in live plant leaves (**LEAFC**)
->    {% tool [NetCDF xarray Selection](toolshed.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1) %} with the following parameters:
->    - **Input netcdf file**: ALP1_exp.nc
->    - **Tabular of variables**: Metadata infos from ALP1_exp.nc
->    - **Choose the variable to extract**: LEAFC
->    - Click **Execute**
+> 1. {% tool [NetCDF xarray Selection](toolshed.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1) %} to select the total carbon in live plant leaves (**LEAFC**)
+>      - {% icon param-file %} *"Input netcdf file"*: ALP1_exp.nc
+>      - {% icon param-file %} *"Tabular of variables"*: Metadata info from `ALP1_exp.nc` (output of **NetCDF xarray Metadata Info** {% icon tool %})
+>      - {% icon param-select %} *"Choose the variable to extract"*: `LEAFC`
 >
-> 2. Rename Dataset to **NetCDF xarray Selection on ALP1_exp.nc**
+> 2. **Rename** {% icon galaxy-pencil %} dataset to `NetCDF xarray Selection on ALP1_exp.nc`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
-> 3. Clean date column for plotting
->    {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} with the following parameters:
->    - **File to process**: NetCDF xarray Selection on ALP1_exp.nc
->    - **Find pattern**:  00:00:00
->    - **Find-Pattern is a regular expression**: Select *No*
->    - **Replace all occurences of the pattern**: Select *Yes*
->    - **Case-Insensitive search**: Select *No*
->    - **Find whole-words**: Select *Yes*
->    - **Ignore first line**: Select *Yes*
->    - **Find and Replace text in**: Select *entire line*
->    - Click **Execute**
+> 3. {% tool [Replace parts of text ](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} to clean date column for plotting:
+>      - {% icon param-file %} *"File to process"*: NetCDF xarray Selection on ALP1_exp.nc
+>      - {% icon param-text %} *"Find pattern"*: `00:00:00`
+>      - *"Find-Pattern is a regular expression"*: `No`
+>      - *"Replace all occurences of the pattern"*: `Yes`
+>      - *"Case-Insensitive search"*: `No`
+>      - *"Find whole-words"*: `Yes`
+>      - *"Ignore first line"*: `Yes`
+>      - {% icon param-select %} *"Find and Replace text in"*: `entire line`
 >
-> 4. Rename Dataset to **LEAFC_clean.tabular**
+> 4. **Rename** {% icon galaxy-pencil %} dataset to `LEAFC_clean.tabular`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
-> 5. Plot the total carbon in live plant leaves (**LEAFC**)
+> 5. **Scatterplot w ggplot2**  {% icon tool %} to plot the total carbon in live plant leaves (**LEAFC**):
+>      - {% icon param-file %} *"Input in tabular format"*: `LEAFC_clean.tabular`
+>      - *"Column to plot on x-axis"*: 1
+>      - *"Column to plot on y-axis"*: 4
+>      - *"Plot title"*: `Total carbon in live plant leaves`
+>      - *"Label for x axis"*: `Time`
+>      - *"Label for y axis"*: `LEAFC (kgC ha-1)`
+>      - In `Advanced Options`
+>          - {% icon param-select %} *"Type of plot"*: `Points and Lines`
+>      - In `Output options`
+>          - *"width of output"*:`19.0`
+>          - *"height of output"*: `5.0`
 >
-> To make a plot, you can use **Scatterplot w ggplot2**  {% icon tool %} with the following parameters:
->    - *"Input in tabular format"*: `LEAFC_clean.tabular`
->    - *"Column to plot on x-axis"*: 1
->    - *"Column to plot on y-axis"*: 4
->    - *"Plot title"*: Total carbon in live plant leaves
->    - *"Label for x axis"*: Time
->    - *"Label for y axis"*: LEAFC (kgC ha-1)
->    - In `Advanced Options` change `Type of plot` to **Points and Lines**.
->    - And finally in `Output options` set `width of output` to **19.0 and `height of output`* to 5.0*.
 >
-> 6. Click on **Execute**.
->
-> 7. **View** {% icon galaxy-eye%} the resulting plot:
+> 6. **View** {% icon galaxy-eye%} the resulting plot:
 >
 >    ![LEAFC](../../images/LEAFC_ALP1_exp_ggplot.png)
 >
 {: .hands_on}
 
-# Step 5: Convert your analysis history into a Galaxy workflow
+# Convert your analysis history into a Galaxy workflow
 
 > ### {% icon hands_on %} Hands-on: Extract workflow
 >
 > 1. Go to the **History Options menu**  {% icon galaxy-gear %} menu
 >    - Select the **Extract Workflow** option.
->    - Remove any unwanted steps
+>    - Remove any unwanted steps, in particular all steps with Panoply as we do not want to have interactive tools in our automated workflow..
 >
 > 2. **Rename** the workflow to something descriptive
 >    - For example: `CLM-FATES_ ALP1 simulation (5 years)`.
@@ -342,19 +349,27 @@ so that we can reuse it for any simulations.
 >
 {: .hands_on}
 
-# Step 6: Change your CLM-FATES case and rerun your workflow
+# Change your CLM-FATES case and rerun your workflow
 
 We would like to run a CLM-FATES case where the atmospheric Carbon Dioxyde Concentration (CO2) is increased by a factor of 4.
 
 > ### {% icon hands_on %} Hands-on: Compare the two simulations
 >
->    Using the results from your two CLM-FATES simulations and the generated plots, assess the impact
->    of an increase in the atmosperhic CO2 on the outputs of the model.
->    1. Edit your workflow and customize it to run your new CO2 experiment. For this you would need to
->       add an extra step to extract the first history file from the history collection and generate the
->       corresponding plot. The final workflow would be similar to the one shown below:
+>  Using the results from your two CLM-FATES simulations and the generated plots, assess the impact
+>  of an increase in the atmosperhic CO2 on the outputs of the model.
 >
->  ![FATES workflow](../../images/fates_workflow.png "FATES workflow")
+> 1. Open the **workflow editor**
+>
+>    {% snippet faqs/galaxy/workflows_edit.md %}
+>
+> 2. Edit your workflow and customize it to run your new CO2 experiment. For this you would need to:
+>      - In "Advanced customization", change "Atmospheric CO2 molar ratio (by volume) only used when co2_type==constant (umol/mol)" from 367.0 to 1468.0.
+>      - Add an extra step to extract the first history file from the history collection: {% tool [Extract Dataset](__EXTRACT_DATASET__) %}
+>        and make sure to select "netcdf" in the change datatype field.
+>      - Generate the corresponding plot.
+>    The final workflow would be similar to the one shown below:
+>
+>    ![FATES workflow](../../images/fates_workflow.png "FATES workflow")
 >
 >    > ### {% icon question %} Question
 >    > 1. Is the model response to this significant increase of atmospheric CO2 what you expected?

@@ -1,6 +1,6 @@
 ---
-layout: base_slides
-logo: "GTN"
+layout: tutorial_slides
+logo: assets/images/gat.png
 redirect_from:
 - /topics/admin/tutorials/heterogeneous-compute/slides
 
@@ -77,7 +77,9 @@ Galaxy's remote job management system
 
 * Galaxy Pulsar job runner is Pulsar client
 
-* Transport is HTTP or AMQP, language is JSON
+* Communication is via HTTP or AMQP, language is JSON
+
+* File transport is dependent on communication method
 
 ---
 # Pulsar - Architecture
@@ -89,7 +91,7 @@ Galaxy's remote job management system
 
 Pulsar server listens over HTTP(S)
 
-Pulsar client initiates connections to server
+Pulsar client (Galaxy) initiates connections to Pulsar server
 
 Good for:
 - Environments where firewall, open ports are not concerns

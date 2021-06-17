@@ -1,5 +1,28 @@
 ---
-layout: base
+title: GTN Videos
+layout: page
+redirect_from:
+  - /topics/admin/videos/index
+  - /topics/assembly/videos/index
+  - /topics/climate/videos/index
+  - /topics/computational-chemistry/videos/index
+  - /topics/contributing/videos/index
+  - /topics/dev/videos/index
+  - /topics/ecology/videos/index
+  - /topics/epigenetics/videos/index
+  - /topics/galaxy-interface/videos/index
+  - /topics/genome-annotation/videos/index
+  - /topics/imaging/videos/index
+  - /topics/instructors/videos/index
+  - /topics/introduction/videos/index
+  - /topics/metabolomics/videos/index
+  - /topics/metagenomics/videos/index
+  - /topics/proteomics/videos/index
+  - /topics/sequence-analysis/videos/index
+  - /topics/statistics/videos/index
+  - /topics/transcriptomics/videos/index
+  - /topics/variant-analysis/videos/index
+  - /topics/visualisation/videos/index
 ---
 
 {% assign sorted_topics = "" | split: "," %}
@@ -13,41 +36,38 @@ layout: base
     {% endif %}
 {% endfor %}
 
-{% include _includes/default-header.html %}
+The GTN now generates videos for selected slide decks. Click on a topic below to jump to the video page for that topic!
 
+{% for topic in sorted_topics %}
+{% assign topic_id = topic[0] %}
+{% assign t = site.data[topic_id] %}
 
-<style type="text/css">
-::cue {
-   color:#333;
-}
-</style>
-<div class="container main-content">
-	<section>
-		<h1>Videos</h1>
+	{% assign has_video = false %}
+	{% assign topic_material = site.pages | topic_filter:topic[0] %}
+	{% for material in topic_material %}
+		{% if material.video %}
+			{% assign has_video = true %}
+		{% endif %}
+	{% endfor %}
 
-		{% for topic in sorted_topics %}
-
-			{% assign t = site.data[topic[0]] %}
-			{% assign topic_material = site.pages | topic_filter:topic[0] %}
-
-			{% for material in topic_material %}
-				{% if material.video %}
-					<h2 id="video-{{ material.topic_name }}-{{ material.tutorial_name }}">{{ topic[1].title }} / {{ material.title }}</h2>
-					<video controls preload="metadata" width="800">
-						<source
-							src="https://galaxy-training.s3.amazonaws.com/videos/topics/{{ material.topic_name }}/tutorials/{{ material.tutorial_name }}/slides.mp4"
-							type="video/mp4">
-						<track label="English" kind="captions" srclang="en"
-							src="https://training.galaxyproject.org/videos/topics/{{ material.topic_name }}/tutorials/{{ material.tutorial_name }}/slides.en.vtt" default>
-					</video>
-
-				{% endif %}
-			{% endfor %}
-
-		{% endfor %}
-
-
-	</section>
+{% if has_video == true %}
+<h2>{{ t.title }}</h2>
+<div id="playlist">
+	{% for material in topic_material %}
+		{% if material.video %}
+			{% capture vid %}{{ topic_id }}/{% if material.type == "introduction" %}slides/introduction{% else %}tutorials/{{ material.tutorial_name }}/slides{% endif %}{% endcapture %}
+			<div class="pl-item">
+				<a href="watch.html?v={{ vid }}">
+					<div class="cover">
+						<img src="https://training.galaxyproject.org/videos/topics/{{ vid }}.mp4.png" width="200px"/>
+					</div>
+					<div>
+						<div class="title">{{ material.title }}</div>
+					</div>
+				</a>
+			</div>
+		{% endif %}
+	{% endfor %}
 </div>
-
-{% include _includes/default-footer.html %}
+{% endif %}
+{% endfor %}

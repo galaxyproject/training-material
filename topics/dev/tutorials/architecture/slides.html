@@ -18,6 +18,7 @@ key_points:
   - "Running Galaxy in production requires configuration."
   - "The architecture is designed to be pluggable and extensible."
   - "Learn more about different Galaxy aspects in our [development section](/topics/dev/)."
+subtopic: core
 contributors:
   - jmchilton
   - bgruening
@@ -91,6 +92,8 @@ More links we'll mention as we go through the slides:
 - https://gitter.im/biocontainers/Lobby
 - https://gitter.im/bioconda/Lobby
 
+Working group chats linked at https://galaxyproject.org/community/wg/.
+
 ---
 
 class: enlarge200
@@ -123,7 +126,7 @@ class: enlarge150
 
 [galaxyproject/**training-material** ](https://github.com/galaxyproject/training-material)
 
-![logo](/assets/images/GTNLogo1000.png)
+![logo]({{ site.baseurl }}/assets/images/GTNLogo1000.png)
 
 Galaxy training material for scientists, developers, and admins. Powers *https://training.galaxyproject.org/*.
 
@@ -225,11 +228,19 @@ Other repositories with high quality tools:
 
 ---
 
+[galaxyproject/**iwc** ](https://github.com/galaxyproject/iwc)
+
+Intergalactic Workflow Commission. Hosting workflows and defining best practices for publishing workflows.
+
+https://gitter.im/galaxyproject/iwc
+
+---
+
 class: enlarge150
 
 [galaxyproject/**planemo** ](https://github.com/galaxyproject/planemo)
 
-Command-line utilities to assist in the development of Galaxy tools.
+Command-line utilities to assist in the development of Galaxy tools and workflows.
 Linting, testing, deploying to ToolSheds...
 
 *The best practice approach for Galaxy tool development!*
@@ -241,6 +252,16 @@ container, virtual machines, Google compute images
 
 ---
 
+[galaxyproject/**galaxy-language-server** ](https://github.com/galaxyproject/galaxy-language-server)
+
+![Galaxy Language Server](https://github.com/galaxyproject/galaxy-language-server/raw/assets/snippets.gif)
+
+Language server implementation for Galaxy tools. Visual Studio Code extension for tool development.
+
+Test execution, code completion, best practices, documentaiton tooltips, etc..
+
+---
+
 class: enlarge150
 
 [galaxyproject/**starforge** ](https://github.com/galaxyproject/starforge)
@@ -248,6 +269,16 @@ class: enlarge150
 ![StarForge logo](https://raw.githubusercontent.com/galaxyproject/starforge/master/docs/starforge_logo.png)
 
 Build Galaxy framework dependencies as Python wheels when needed.
+
+---
+
+class: enlarge150
+
+[galaxyproject/**cargo-port** ](https://github.com/galaxyproject/cargo-port)
+
+![Cargo Port Logo](https://raw.githubusercontent.com/galaxyproject/cargo-port/master/media/cpc-plain-small.png)
+
+Provides stable URLs and caching for application links, etc.. An important layer for reproducibility but largely transparent.
 
 ---
 
@@ -267,6 +298,14 @@ usegalaxy-eu/**{ansible-\*, \*-playbook}**
 Ansible is an advanced configuration management system
 
 These playbooks are used to maintain Galaxy main, cloud and Docker images, virtual machines, ...
+
+---
+
+class: enlarge150
+
+[galaxyproject/**galaxy-helm** ](https://github.com/galaxyproject/galaxy-helm)
+
+Kubernetes helm chart for deploying Galaxy. Leveraged by cloudlaunch and CloudMan but usable standalone.
 
 ---
 
@@ -309,6 +348,16 @@ class: enlarge150
 ### ephemeris vs gxadmin
 
 Ephemeris generally talks to the Galaxy API and is a pure Python project, gxadmin talks directly to the Galaxy database and relevant files.
+
+---
+
+class: enlarge150
+
+[**usegalaxy-eu/tiaas2 **](https://github.com/usegalaxy-eu/tiaas2)
+
+![TIAAS Logo](https://raw.githubusercontent.com/usegalaxy-eu/tiaas2/master/images/tiaas-logo.png)
+
+Django-based infrastructure for creating pools of users, etc.. for training events and connecting them to Galaxy.
 
 ---
 
@@ -397,6 +446,16 @@ All repository goverance is done in the open on GitHub via Pull Requests and vot
 
 ---
 
+class: enlarge150
+
+### Working Groups
+
+https://galaxyproject.org/community/wg/
+
+> "Galaxy has grown a lot over the years, going from a project at one university in 2005 to the global community it is today. Several parts of the Galaxy ecosystem have become avowedly and obviously community driven during that time, including tools, code, training, and several other international efforts. Galaxy Working Groups push this global model to other areas of Galaxy as well."
+
+---
+
 class: enlarge200
 
 ### Code of Conduct (CODE_OF_CONDUCT.md)
@@ -414,7 +473,9 @@ class: enlarge150
 New large releases are issued roughly every 4 months. The process is guided by an auto-created
 self documenting release issue.
 
-Check out the [20.05 release issue](https://github.com/galaxyproject/galaxy/issues/9636) as an example.
+Check out the [21.05 release issue](https://github.com/galaxyproject/galaxy/issues/11770) as an example.
+
+Working groups create roadmaps aligned with each release and coordinated with project leadership.
 
 ---
 
@@ -437,6 +498,58 @@ If you get Red Xs - take a second to ponder whether they make sense and don't be
 
 ---
 
+### Linting and Code Formatting
+
+Part of the Galaxy CI process includes linting both the backend Python and frontend ES 6 code.
+This linting process captures many common problems as well as enforcing a common code style.
+
+The output reports from the CI process are relatively straightforward, but it is a good process
+to lint changes before opening pull requests for them. The Python linter can be run using `tox`
+as follows.
+
+```
+$ tox -e lint
+```
+
+The client code formatting guidelines are much more strict but as a result can be applied
+automatically for very consistent code. Execute the `client-format` make command to format
+the code and then the `client-lint` command to check the result.
+
+```
+$ make client-format
+$ make client-lint
+```
+
+---
+
+### mypy and Python Types
+
+Starting with release 21.01, portions of the Galaxy backend have
+Python 3 type annotations and static checking is performed as part of
+CI. Imported library types are not enforcing and
+[mypy](https://mypy.readthedocs.io/en/stable/) does a fair job
+inferring types in most situations, so this process should be
+relatively transparent to contributors.
+
+If there are problems with typing, the CI produces explicit output
+about how to correct problems. These problems generally just require a
+single type annotation. Feel free to request help on a pull request
+for what that should look like.
+
+To run a subset of the python type checking locally, `tox` again can
+be used:
+
+```
+$ tox -e mypy
+```
+
+A quick overview about why to add type annotations to Python code and how to use
+them can be found on this [blog post](https://dev.to/dstarner/using-pythons-type-annotations-4cfe).
+Additional useful resources include [this cheat sheet from mypy](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html)
+and the Python docs for the [typing module](https://docs.python.org/3/library/typing.html).
+
+---
+
 class: enlarge200
 
 ### Development Environments
@@ -447,12 +560,18 @@ However, Marius has assembled some documentation on debugging the [Galaxy server
 
 ---
 
+### Development Environment - Gitpod
+
+Galaxy does have a Gitpod configuration that is enabled to allow editing and testing PRs https://www.gitpod.io/.
+
+---
+
 ### docs.galaxyproject.org
 
 ![docs.galaxyproject.org](../../images/core_docs.png)
 
 All these documents as well as versions code and deployment documentation and release notes
-can be found at docs.galaxyproject.org.
+can be found at [docs.galaxyproject.org](https://docs.galaxyproject.org).
 
 ---
 
@@ -500,7 +619,7 @@ can be adapted to many different technologies.
 - SQLAlchemy allows using SQLite, PostgreSQL, or MySQL (sort of) for your database.
 - Many different cluster backends or job managers are supported.
 - Different frontend proxies (e.g. nginx) are supported as well as web
-  application containers (e.g. uWSGI).
+  application containers (e.g. uWSGI, gunicorn).
 - Different storage strategies and technologies are supported (e.g. S3, iRODS).
 - Tool definitions, job metrics, stat middleware, tool dependency resolution, workflow modules,
   datatype definitions are all plugin driven.
@@ -526,6 +645,8 @@ So by default Galaxy does not require:
  - A web proxy or external Python web server.
 
 ---
+
+class: enlarge200
 
 ### In other words...
 
@@ -622,9 +743,364 @@ mako templates to generate HTML, lower-level jQuery, and lots of Backbone legacy
 
 ---
 
-![Processing requests on the server](../../images/wsgi_app.plantuml.svg)
+![Processing requests on the server](../../images/asgi_app.plantuml.svg)
 
 Expanding the right side of that diagram. We will move through the component left to right.
+
+---
+
+class: enlarge120
+template: left-aligned
+
+### ASGI - Application
+
+Spirtual successor to
+[WSGI](https://www.python.org/dev/peps/pep-0333/). An ASGI application
+is a async callable that takes in a `scope` (`dict` describing the
+connection), `send` (an async callable to respond to events via),
+and `receive` (an async callable to receive messages).
+
+```python
+async def application(scope, receive, send):
+    event = await receive()
+    ...
+    await send({"type": "http.response.body", ...})
+```
+
+Checkout [ASGI documentaiton](https://asgi.readthedocs.io/) for more details.
+
+---
+
+template: left-aligned
+
+### ASGI & Starlette Low-level Example
+
+We will talk about a lot about Galaxy and FastAPI - but much of its
+plubming is just aliases for starlette ASGI handling.
+
+```python
+from starlette.responses import PlainTextResponse
+
+async def app(scope, receive, send):
+    assert scope['type'] == "http"
+    response = PlainTextResponse('Hello, world!')
+    await response(scope, receive, send)
+```
+
+If this is placed in a file called `example.py` with Starlette on
+the Python path, the application server uvicorn can then host this
+application with the following shell command:
+
+```
+$ uvicorn example:app
+INFO: Started server process [11509]
+INFO: Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+```
+
+Example from [starlette.io](https://www.starlette.io/).
+
+---
+
+template: left-aligned
+
+### ASGI - Starlette High-level Example
+
+Building a higher-level `example.py` with Starlette.
+
+
+```python
+from starlette.applications import Starlette
+from starlette.responses import JSONResponse
+from starlette.routing import Route
+
+
+async def homepage(request):
+    return JSONResponse({'hello': 'world'})
+
+
+app = Starlette(debug=True, routes=[
+    Route('/', homepage),
+])
+```
+
+A small framework for building web applications.
+
+---
+
+template: left-aligned
+
+### ASGI - FastAPI
+
+From https://github.com/tiangolo/fastapi/blob/master/fastapi/applications.py
+
+```python
+...
+from starlette.applications import Starlette
+...
+
+class FastAPI(Starlette):
+    ...
+```
+
+FastAPI (the library and the application base) extends starlette framework with features for building APIs. These include data
+validation, serialization, documentation generation.
+
+---
+
+![Processing requests on the server](../../images/asgi_app.plantuml.svg)
+
+---
+
+template: left-aligned
+
+### FastAPI `__call__`
+
+https://github.com/tiangolo/fastapi/blob/master/fastapi/applications.py
+
+```python
+async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+    if self.root_path:
+        scope["root_path"] = self.root_path
+    if AsyncExitStack:
+        async with AsyncExitStack() as stack:
+             scope["fastapi_astack"] = stack
+             await super().__call__(scope, receive, send)
+    else:
+        await super().__call__(scope, receive, send)  # pragma: no cover
+```
+
+A light wrapper around Starlette's call entry point.
+
+---
+
+template: left-aligned
+
+### Starlette `__call__`
+
+https://github.com/encode/starlette/blob/master/starlette/applications.py
+
+```python
+async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+   scope["app"] = self
+   await self.middleware_stack(scope, receive, send)
+```
+
+Walks through Starlette middleware.
+
+---
+
+template: left-aligned
+
+### Starlette `build_middleware_stack`
+
+https://github.com/encode/starlette/blob/master/starlette/applications.py
+
+```python
+def build_middleware_stack(self) -> ASGIApp:
+    ...
+
+    app = self.router
+    for cls, options in reversed(middleware):
+        app = cls(app=app, **options)
+    return app
+```
+
+Start with the router and surrond it with each layer of configured middleware.
+
+---
+
+template: left-aligned
+class: enlarge150
+
+### ASGI Middleware
+
+> It is possible to have ASGI “middleware” - code that plays the role of both server and application, taking in a scope and the send/receive awaitable callables, potentially modifying them, and then calling an inner application.
+
+https://asgi.readthedocs.io/en/latest/specs/main.html#middleware
+
+---
+
+template: left-aligned
+class: enlarge150
+
+### Starlette Middleware
+
+> Starlette includes several middleware classes for adding behavior that is applied across your entire application. These are all implemented as standard ASGI middleware classes, and can be applied either to Starlette or to any other ASGI application.
+
+https://www.starlette.io/middleware/
+
+---
+
+template: left-aligned
+
+### FastAPI Router Initialization
+
+https://github.com/tiangolo/fastapi/blob/master/fastapi/applications.py
+
+```python
+class FastAPI(Starlette):
+    def __init__(self, ...):
+        self.router: routing.APIRouter = routing.APIRouter(
+            routes=routes,
+        )
+```
+
+---
+
+### FastAPI Router
+
+```python
+from starlette import routing
+
+class APIRouter(routing.Router):
+   ...
+```
+
+---
+
+### Starlette Router
+
+https://github.com/encode/starlette/blob/master/starlette/routing.py
+
+```python
+async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+   ...
+   for route in self.routes:
+       # Determine if any route matches the incoming scope,
+       # and hand over to the matching route if found.
+       match, child_scope = route.matches(scope)
+       if match == Match.FULL:
+           scope.update(child_scope)
+           await route.handle(scope, receive, send)
+           return
+       ...
+```
+
+https://www.starlette.io/routing/
+
+---
+
+### FastAPI Factory
+
+`lib/galaxy/webapps/galaxy/fast_factory.py`
+
+```python
+def factory():
+    props = WebappSetupProps(
+        app_name='galaxy',
+        default_section_name=DEFAULT_CONFIG_SECTION,
+        env_config_file='GALAXY_CONFIG_FILE',
+        env_config_section='GALAXY_CONFIG_SECTION',
+        check_galaxy_root=True
+    )
+    config_provider = WebappConfigResolver(props)
+    config = config_provider.resolve_config()
+    gx_webapp, gx_app = app_pair(
+        global_conf=config.global_conf,
+        load_app_kwds=config.load_app_kwds,
+        wsgi_preflight=config.wsgi_preflight
+    )
+    return initialize_fast_app(gx_webapp, gx_app)
+```
+
+---
+
+### FastAPI Application
+
+`lib/galaxy/webapps/galaxy/fast_app.py`
+
+```python
+def initialize_fast_app(gx_webapp, gx_app):
+    app = FastAPI(
+        title="Galaxy API",
+        docs_url="/api/docs",
+        openapi_tags=api_tags_metadata,
+    )
+    add_exception_handler(app)
+    add_galaxy_middleware(app, gx_app)
+    add_request_id_middleware(app)
+    include_all_package_routers(app, 'galaxy.webapps.galaxy.api')
+    wsgi_handler = WSGIMiddleware(gx_webapp)
+    app.mount('/', wsgi_handler)
+    return app
+```
+
+---
+
+### Finding API Routers
+
+Following this line:
+
+`include_all_package_routers(app, 'galaxy.webapps.galaxy.api')`
+
+to the file
+
+`lib/galaxy/webapps/base/api.py`
+
+```python
+def include_all_package_routers(app: FastAPI, package_name: str):
+    for _, module in walk_controller_modules(package_name):
+        router = getattr(module, "router", None)
+        if router:
+            app.include_router(router)
+```
+
+---
+
+![Router Class Diagram](../../images/routers.plantuml.svg)
+
+- https://www.starlette.io/routing/
+- https://fastapi.tiangolo.com/tutorial/bigger-applications/#apirouter
+- https://fastapi-utils.davidmontague.xyz/user-guide/inferring-router/
+
+---
+
+class: reduce70
+
+### Routing inside the Application
+
+```python
+router = Router(tags=['tags'])
+
+
+@router.cbv
+class FastAPITags:
+    manager: TagsManager = depends(TagsManager)
+
+    @router.put(
+        '/api/tags',
+        summary="Apply a new set of tags to an item.",
+        status_code=status.HTTP_204_NO_CONTENT,
+    )
+    def update(
+        self,
+        trans: ProvidesUserContext = DependsOnTrans,
+        payload: ItemTagsPayload = Body(
+            ...,  # Required
+            title="Payload",
+            description="Request body containing the item and the tags to be assigned.",
+        ),
+    ):
+        """Replaces the tags associated with an item with the new ones specified in the payload.
+
+        - The previous tags will be __deleted__.
+        - If no tags are provided in the request body, the currently associated tags will also be __deleted__.
+        """
+        self.manager.update(trans, payload)
+```
+
+---
+
+### WSGI Fallback
+
+Back to `initialize_fast_app`, two of the final lines were as follows:
+
+```python
+wsgi_handler = WSGIMiddleware(gx_webapp)
+app.mount('/', wsgi_handler)
+```
+
+This effectively provies a fallback to our legacy WSGI application.
 
 ---
 
@@ -673,19 +1149,19 @@ Middleware configured in `galaxy.webapps.galaxy.buildapp#wrap_in_middleware`.
 
 ---
 
-![Processing requests on the server](../../images/wsgi_app.plantuml.svg)
-
----
-
-### Classes
-
-![GalaxyWebApplication class diagram](../../images/webapp_classes.plantuml.svg)
+![Processing requests on the server (WSGI)](../../images/wsgi_app.plantuml.svg)
 
 ---
 
 ### Instances
 
 ![webapp](../../images/webapp.plantuml.svg)
+
+---
+
+### Classes
+
+![GalaxyWebApplication class diagram](../../images/webapp_classes.plantuml.svg)
 
 ---
 
@@ -747,34 +1223,559 @@ def handle_request(self, environ, start_response):
 
 class: enlarge150
 
-### Why not just Django?
+### Controllers
 
-We do build on many of the same standards, concepts, and libraries - the entire stack isn't custom code but there is a non-trivial web framework defined in "Galaxy".
+Three varieties
 
-The Galaxy community likes Django and uses it to build newer webapps, Galaxy simply predates it and has evolved its own framework.
+1. FastAPI ASGI API controllers
+2. WSGI API controllers
+3. Legacy WSGI web controllers.
 
----
-
-class: enlarge150
-
-### API Controllers
-
-- `lib/galaxy/webapps/galaxy/controllers/api/`
-- Exposed method take `trans` and request parameters and return a JSON response.
-- Ideally these are *thin*
-  - Focused on "web things" - adapting parameters and responses and move
-    "business logic" to components not bound to web functionality.
+Ideally each of these are *thin*. Focused on "web things" - adapting parameters and responses and move
+"business logic" to components not bound to web functionality.
 
 ---
 
 class: enlarge150
 
-### Legacy Controllers
+### FastAPI Controllers
+
+- Found in `lib/galaxy/webapps/galaxy/controllers/api/`.
+- Consume and produce typed data using Python 3 type annotations, FastAPI helpers, and Pydantic models.
+- Router specifies HTTP verb (GET, POST, PUT, etc..) and how to parse path.
+
+---
+
+class: reduce70
+
+### FastAPI Controller Example
+
+`lib/galaxy/webapps/galaxy/controllers/api/roles.py`
+
+```python
+@router.cbv
+class FastAPIRoles:
+    role_manager: RoleManager = depends(RoleManager)
+
+    @router.get('/api/roles')
+    def index(self, trans: ProvidesUserContext = DependsOnTrans) -> RoleListModel:
+        roles = self.role_manager.list_displayable_roles(trans)
+        return RoleListModel(__root__=[role_to_model(trans, r) for r in roles])
+
+    @router.get('/api/roles/{id}')
+    def show(self, id: EncodedDatabaseIdField, trans: ProvidesUserContext = DependsOnTrans) -> RoleModel:
+        role_id = trans.app.security.decode_id(id)
+        role = self.role_manager.get(trans, role_id)
+        return role_to_model(trans, role)
+
+    @router.post("/api/roles", require_admin=True)
+    def create(self, trans: ProvidesUserContext = DependsOnTrans, role_definition_model: RoleDefinitionModel = Body(...)) -> RoleModel:
+        role = self.role_manager.create_role(trans, role_definition_model)
+        return role_to_model(trans, role)
+```
+
+---
+
+class: reduce70
+
+### FastAPI and Pydantic
+
+```python
+RoleIdField = Field(title="ID", description="Encoded ID of the role")
+RoleNameField = Field(title="Name", description="Name of the role")
+RoleDescriptionField = Field(title="Description", description="Description of the role")
+
+
+class BasicRoleModel(BaseModel):
+    id: EncodedDatabaseIdField = RoleIdField
+    name: str = RoleNameField
+    type: str = Field(title="Type", description="Type or category of the role")
+
+
+class RoleModel(BasicRoleModel):
+    description: str = RoleDescriptionField
+    url: str = Field(title="URL", description="URL for the role")
+    model_class: str = Field(title="Model class", description="Database model class (Role)")
+
+
+class RoleDefinitionModel(BaseModel):
+    name: str = RoleNameField
+    description: str = RoleDescriptionField
+    user_ids: Optional[List[EncodedDatabaseIdField]] = Field(title="User IDs", default=[])
+    group_ids: Optional[List[EncodedDatabaseIdField]] = Field(title="Group IDs", default=[])
+```
+
+---
+
+### FastAPI and OpenAPI
+
+`FastAPI(title="Galaxy API", docs_url="/api/docs", ...)`
+
+![OpenAPI Docs from FastAPI at api/docs](../../images/core_api_docs.png)
+
+---
+
+![OpenAPI Docs from FastAPI at api/docs for roles](../../images/core_api_docs_roles.png)
+
+---
+
+class: enlarge150
+
+### WSGI API Controllers
+
+- Also in `lib/galaxy/webapps/galaxy/controllers/api/`
+- Mirroring FastAPI controllers until FastAPI required (likely 21.09)
+- Exposed method take `trans` and request parameters and return a JSON response (possibly including Pydantic objects)
+
+---
+
+class: reduce70
+
+### WSGI API Controller Example
+
+`lib/galaxy/webapps/galaxy/controllers/api/roles.py`
+
+```python
+class RoleAPIController(BaseGalaxyAPIController):
+    role_manager: RoleManager = depends(RoleManager)
+
+    @web.expose_api
+    def index(self, trans: ProvidesUserContext, **kwd):
+        """
+        GET /api/roles
+        Displays a collection (list) of roles.
+        """
+        roles = self.role_manager.list_displayable_roles(trans)
+        return RoleListModel(__root__=[role_to_model(trans, r) for r in roles])
+
+    @web.expose_api
+    def show(self, trans: ProvidesUserContext, id: str, **kwd):
+        """
+        GET /api/roles/{encoded_role_id}
+        Displays information about a role.
+        """
+        role_id = decode_id(self.app, id)
+        role = self.role_manager.get(trans, role_id)
+        return role_to_model(trans, role)
+
+    @web.expose_api
+    @web.require_admin
+    def create(self, trans: ProvidesUserContext, payload, **kwd):
+        """
+        POST /api/roles
+        Creates a new role.
+        """
+        expand_json_keys(payload, ["user_ids", "group_ids"])
+        role_definition_model = RoleDefinitionModel(**payload)
+        role = self.role_manager.create_role(trans, role_definition_model)
+        return role_to_model(trans, role)
+```
+
+---
+
+class: enlarge150
+
+### Legacy WSGI Controllers
 
 - `lib/galaxy/webapps/galaxy/controllers/`
 - Return arbitrary content - JSON, HTML, etc...
 - Render HTML components using [mako](http://www.makotemplates.org/) templates (see `templates/`)
 - The usage of these should continue to decrease over time.
+
+---
+
+## `app` and Dependency Injection
+
+*The architecture of connecting Galaxy components.*
+
+---
+
+![Big Interconnected App Python 2](../../images/app_py2.plantuml.svg)
+
+---
+
+### A God object
+
+> "a God object is an object that knows too much or does too much. The God object is an example of an anti-pattern and a code smell."
+
+https://en.wikipedia.org/wiki/God_object
+
+Not only does `app` know and do too much, it is also used way too many places. Every interesting component, every controller, the web transaction, etc.. has a reference to `app`.
+
+---
+
+### A Typical Usage
+
+```python
+class DatasetCollectionManager:
+
+     def __init__(self, app):
+        self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
+        self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
+        self.model = app.model
+        self.security = app.security
+
+        self.hda_manager = hdas.HDAManager(app)
+        self.history_manager = histories.HistoryManager(app)
+        self.tag_handler = tags.GalaxyTagHandler(app.model.context)
+        self.ldda_manager = lddas.LDDAManager(app)
+```
+
+---
+
+![Big Interconnected App Python 3 - no right](../../images/app_types_no_interface.plantuml.svg)
+
+---
+
+## Problematic Dependnecy Graph
+
+```python
+class DatasetCollectionManager:
+
+     def __init__(self, app: UniverseApplication):
+        self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
+        self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
+        self.model = app.model
+        self.security = app.security
+
+        self.hda_manager = hdas.HDAManager(app)
+        self.history_manager = histories.HistoryManager(app)
+        self.tag_handler = tags.GalaxyTagHandler(app.model.context)
+        self.ldda_manager = lddas.LDDAManager(app)
+```
+
+`UniverseApplication` creates a `DatasetCollectionManager` for the application and `DatasetCollectionManager` imports and annotates
+the `UniverseApplication` as a requirement. This creates an unfortunate dependency loop.
+
+**Dependencies should form a DAG (directed acyclic graph)**.
+
+---
+
+![Big Interconnected App with Python 3 Types](../../images/app_types.plantuml.svg)
+
+---
+
+## Why an Interface?
+
+Dependencies now closer to a DAG - `DatasetCollectionManager` no longer annotated with the type `UniverseApplication`! Imports are cleaner.
+
+---
+
+## Benefits of Typing
+
+```python
+class DatasetCollectionManager:
+
+     def __init__(self, app: StructuredApp):
+        self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
+        self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
+        self.model = app.model
+        self.security = app.security
+
+        self.hda_manager = hdas.HDAManager(app)
+        self.history_manager = histories.HistoryManager(app)
+        self.tag_handler = tags.GalaxyTagHandler(app.model.context)
+        self.ldda_manager = lddas.LDDAManager(app)
+```
+
+- mypy provides robust type checking.
+- IDE can provide hints to make developing this class and usage of this class easier.
+
+---
+
+class: reduce90
+
+### Design Problems with Handling Dependencies Directly
+
+Using app to construct a manager for dealing with dataset collections.
+
+```python
+class DatasetCollectionManager:
+
+     def __init__(self, app: StructuredApp):
+        self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
+        self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
+        self.model = app.model
+        self.security = app.security
+
+        self.hda_manager = hdas.HDAManager(app)
+        self.history_manager = histories.HistoryManager(app)
+        self.tag_handler = tags.GalaxyTagHandler(app.model.context)
+        self.ldda_manager = lddas.LDDAManager(app)
+```
+
+- DatasetCollectionManager needs to know how to construct all the other managers it is using, not just their interface.
+- `app` has a instance of this class and `app` is used to construct and instance of this class - this circular dependency
+  chain results in brittleness and complexity in how to construct `app`.
+- `app` is very big and we're depending on a lot of it but not a large percent it. This makes typing less than ideal.
+
+---
+
+class: reduce90
+
+### Testing Problems with Handling Dependencies Directly
+
+```python
+class DatasetCollectionManager:
+
+     def __init__(self, app: StructuredApp):
+        self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
+        self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
+        self.model = app.model
+        self.security = app.security
+
+        self.hda_manager = hdas.HDAManager(app)
+        self.history_manager = histories.HistoryManager(app)
+        self.tag_handler = tags.GalaxyTagHandler(app.model.context)
+        self.ldda_manager = lddas.LDDAManager(app)
+```
+
+- Difficult to unit test properly
+  - What parts of app are being used?
+  - How do we construct a smaller app with just those pieces?
+  - How do we stub out classes cleanly when we're creating the dependent objects internally.
+
+---
+
+class: reduce90
+
+### Design Benefits of Typing
+
+.code[```python
+class DatasetCollectionManager:
+    def __init__(
+        self,
+        model: GalaxyModelMapping,
+        security: IdEncodingHelper,
+        hda_manager: HDAManager,
+        history_manager: HistoryManager,
+        tag_handler: GalaxyTagHandler,
+        ldda_manager: LDDAManager,
+    ):
+        self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
+        self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
+        self.model = model
+        self.security = security
+
+        self.hda_manager = hda_manager
+        self.history_manager = history_manager
+        self.tag_handler = tag_handler
+        self.ldda_manager = ldda_manager
+```]
+
+- We're no longer depending on `app`.
+- The type signature very clearly delinates what dependencies are required.
+- Unit testing can inject percise dependencies supplying only the behavior needed.
+
+---
+
+### Constructing the Object Is Still Brittle
+
+```python
+DatasetCollectionManager(
+    self.model,
+    self.security,
+    HDAManager(self),
+    HistoryManager(self),
+    GalaxyTagHandler(self.model.context),
+    LDDAManager(self)
+)
+```
+
+- The complexity in ordering of construction of `app` is still challenging.
+- The constructing code of this object still needs to know how to construct each dependency of the object.
+- The constructing code of this object needs to explicitly import all the types.
+
+---
+
+class: enlarge150
+
+### What is Type-based Dependency Injection?
+
+A dependency injection **container** keeps tracks of singleons or recipes for how to construct each type. By
+default when it goes to construct an object, it can just ask the container for each dependency based on the
+type signature of the class being constructed.
+
+If an object declares it consumes a dependency of type `X` (e.g. `HDAManager`), just query the container
+recursively for an object of type `X`.
+
+---
+
+### What happens to object construction?
+
+Once all the dependencies have been type annotated properly and the needed singletons have been configured.
+
+```python
+dcm = DatasetCollectionManager(
+    self.model,
+    self.security,
+    HDAManager(self),
+    HistoryManager(self),
+    GalaxyTagHandler(self.model.context),
+    LDDAManager(self)
+)
+```
+
+becomes
+
+```python
+dcm = container[DatasetCollectionManager]
+```
+
+---
+
+class: enlarge150
+
+### Picking a Library
+
+Many of the existing DI libraries for Python predate widespread Python 3 and don't readily infer things based on types.
+The benefits of typing and DI are both enhanced by the other - so it was important to pick one that could do type-based
+injection.
+
+We went with Lagom, but we've built abstractions that would make it very easy to switch.
+
+---
+
+### Lagom
+
+![Lagom Website](../../images/lagom_ss.png)
+
+https://lagom-di.readthedocs.io/en/latest/
+
+---
+
+### DI and Controllers - FastAPI
+
+FastAPI controllers allowed some basic dependency injection.
+
+```python
+def get_tags_manager() -> TagsManager:
+    return TagsManager()
+
+
+@cbv(router)
+class FastAPITags:
+    manager: TagsManager = Depends(get_tags_manager)
+    ...
+```
+
+Dependency injection allows for type checking but doesn't use type inference (requires factory functions, etc..)
+
+https://fastapi.tiangolo.com/tutorial/dependencies/
+
+---
+
+### DI and Controllers - FastAPI Limitations
+
+Also we have two different controller styles and only the new FastAPI allowed dependency injection.
+
+```python
+def get_tags_manager() -> TagsManager:
+    return TagsManager()
+
+
+@cbv(router)
+class FastAPITags:
+    manager: TagsManager = Depends(get_tags_manager)
+    ...
+
+class TagsController(BaseAPIController):
+
+    def __init__(self, app):
+        super().__init__(app)
+        self.manager = TagsManager()
+```
+
+---
+
+class: reduce90
+
+### DI and Controllers - Unified Approach
+
+```diff
+-def get_tags_manager() -> TagsManager:
+-    return TagsManager()
+-
+-
+ @cbv(router)
+ class FastAPITags:
+-    manager: TagsManager = Depends(get_tags_manager)
++    manager: TagsManager = depends(TagsManager)
+
+     @router.put(
+         '/api/tags',
+@@ -58,11 +54,8 @@ def update(
+         self.manager.update(trans, payload)
+
+
+-class TagsController(BaseAPIController):
+-
+-    def __init__(self, app):
+-        super().__init__(app)
+-        self.manager = TagsManager()
++class TagsController(BaseGalaxyAPIController):
++    manager: TagsManager = depends(TagsManager)
+```
+
+Building dependency injection into our application and not relying on FastAPI allows for dependency injection that is *less verbose*, available uniformly across the application,
+*works for the legacy controllers identically*.
+
+---
+
+### DI and Tasks - Framework
+
+From `lib/galaxy/celery/tasks.py`
+
+```python
+from lagom import magic_bind_to_container
+...
+
+def galaxy_task(func):
+    CELERY_TASKS.append(func.__name__)
+    app = get_galaxy_app()
+    if app:
+        return magic_bind_to_container(app)(func)
+    return func
+```
+
+`magic_bind_to_container` to binds function parameters to a specified Lagom DI container automatically.
+
+---
+
+### DI and Tasks - Examples
+
+From `lib/galaxy/celery/tasks.py`
+
+```python
+@celery_app.task(ignore_result=True)
+@galaxy_task
+def purge_hda(hda_manager: HDAManager, hda_id):
+    hda = hda_manager.by_id(hda_id)
+    hda_manager._purge(hda)
+
+
+@celery_app.task
+@galaxy_task
+def set_metadata(hda_manager: HDAManager, ldda_manager: LDDAManager, dataset_id, model_class='HistoryDatasetAssociation'):
+    if model_class == 'HistoryDatasetAssociation':
+        dataset = hda_manager.by_id(dataset_id)
+    elif model_class == 'LibraryDatasetDatasetAssociation':
+        dataset = ldda_manager.by_id(dataset_id)
+    dataset.datatype.set_meta(dataset)
+```
+
+---
+
+![Decomposed App](../../images/app_decomposed.plantuml.svg)
+
+---
+
+### Tips for Designing New Galaxy Backend components
+
+- Consume only the related components you need to - avoid `app` when possible.
+- Annotate inputs to the component with Python types.
+- Use interface types to shield consumers from implementation details.
+- Rely on Galaxy's dependency injection to construct the component and provide it to consumers.
 
 ---
 
@@ -1200,7 +2201,8 @@ template: left-aligned
 
 ### Client Directories
 
-- Source stylesheets and JavaScript (ES6) in `client/galaxy/{style|scripts}`
+- Source JavaScript for the client is in `client/src`.
+- Source stylesheets are in `client/src/style`.
 - "Packed" bundles served by Galaxy stored in `static/dist`
   - `run.sh` uses `git diff` to try to determine if client needs to be built before starting Galaxy
   - webpack builds these "compiled" artifacts
@@ -1227,14 +2229,35 @@ client-watch: node-deps ## Rebuild client on each change.
 client-format: node-deps ## Reformat client code
   cd client && yarn run prettier
 
-client-eslint: node-deps # Run client linting
-  cd client && yarn run eslint
+client-lint: client-eslint client-format-check ## ES lint and check format of client
 
-client-test: node-deps  ## Run JS unit tests via Karma
+client-test: node-deps  ## Run JS unit tests
   cd client && yarn run test
+
+client-test-watch: client ## Watch and run all client unit tests on changes
+  cd client && yarn run jest-watch
 
 node-deps: ## Install NodeJS and dependencies.
 ```
+
+---
+
+### Automatically Reloading During Development
+
+The following command rebuilds the application on each change.
+
+```
+make client-watch
+```
+
+This is still a relatively slow process, an extra client development server can be started that proxies non-client requests
+to your Galaxy server and selectively reloads only what is needed during active development (hot module replacement or HMR).
+
+```
+make client-dev-server
+```
+
+Make sure to open Galaxy at http://localhost:8081 instead to point at the client proxy.
 
 ---
 
@@ -1262,11 +2285,11 @@ class: white
 
 ### Stylesheets
 
-- Galaxy stylesheets are generally defined using the SCSS syntax
+- Galaxy shared stylesheets are generally defined using the SCSS syntax
 - SCSS is a high-level superset of CSS - https://sass-lang.com/documentation/syntax
 - `sass` is leveraged by webpack to convert these styles to native CSS at client build time
 - Rebuild style with `make style`
-- Galaxy's SCSS files can be found in `client/galaxy/style/scss/`
+- Galaxy's SCSS files can be found in `client/src/style/scss/`
 
 ---
 
@@ -1279,6 +2302,65 @@ class: white
 ### Source Files
 
 ![Client Build Files](../../images/core_files_client_sources.plantuml.svg)
+
+---
+
+### ES6
+
+The client is built from JavaScript source files. We use ES6 JavaScript.
+
+A tutorial to help learn JavaScript generally might be https://www.w3schools.com/js/.
+
+For someone familiar with JavaScript but that wants a primer on the new language features in ES6, 
+https://www.w3schools.com/js/js_es6.asp may be more appropriate.
+
+---
+
+### Vue
+
+Vue.js is a reactive framework for building web client applications.
+
+We chose Vue.js over React initially because of its focus on allowing developers to incrementally or progressively replace pieces of complex existing applications.
+
+The idea behind Vue.js is fairly simple to pick up and there is a lot of great tutorials and videos available. https://vuejs.org/v2/guide/ is a really good jumping off point.
+
+---
+
+### Vuex
+
+> Vuex is a state management pattern + library for Vue.js applications. It serves as a centralized store for all the components in an application, with rules ensuring that the state can only be mutated in a predictable fashion.
+
+https://vuex.vuejs.org/
+
+---
+
+### Client Unit Tests
+
+https://jestjs.io/
+
+Configured in `client/src/jest/jest.config.js`.
+
+Vue tests are placed beside components in `client/src`, more tests in `client/test/qunit/tests` and `client/test/jest/standalone/`.
+
+---
+
+### Vue Test Utils
+
+> Vue Test Utils is the official unit testing utility library for Vue.js.
+
+https://vue-test-utils.vuejs.org/
+
+Really nice reference library documentation. A lot of helpers and concepts to unit test Vue components.
+
+---
+
+### Client Unit Test Design Tips
+
+https://github.com/galaxyproject/galaxy/tree/dev/client/docs/src/component-design/unit-testing
+
+- Clearly document the intent of your test
+- Implement logic in pure functions when possible
+- Wrap native browser resources in a function so they can be easily mocked
 
 ---
 
@@ -1967,5 +3049,15 @@ Admin things, Reports and Tool Shed Web app
 ![WSGI Application](../../images/wsgi_app.svg)
 
 ### Galaxy WSGI
+
+---
+
+class: enlarge150
+
+### Why not just Django?
+
+We do build on many of the same standards, concepts, and libraries - the entire stack isn't custom code but there is a non-trivial web framework defined in "Galaxy".
+
+The Galaxy community likes Django and uses it to build newer webapps, Galaxy simply predates it and has evolved its own framework.
 
 ---

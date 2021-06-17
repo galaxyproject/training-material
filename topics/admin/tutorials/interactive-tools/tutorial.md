@@ -31,6 +31,7 @@ requirements:
       - ansible
       - ansible-galaxy
       - connect-to-compute-cluster
+      - job-destinations
 ---
 
 > ### {% icon warning %} Evolving Topic
@@ -363,9 +364,15 @@ As explained in the previous section, we will proxy the Interactive Tools Proxy 
 
 During the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, we acquired an SSL certificate for our Galaxy server from [Let's Encrypt][lets-encrypt]. This certificate was issued for the hostname of your Galaxy server (e.g. `galaxy.example.org`). SSL certificates are valid *only for the name to which they were issued*. This presents a problem for us due to the way that Galaxy Interactive Tools work.
 
-In order to ensure each Interactive Tool's cookies are unique, and to provide each tool with a unique entry point, they are served from a subdomain of your Galaxy server (e.g. `<unique-id>.interactivetoolentrypoint.interactivetool.galaxy.example.org`). Your SSL cert is not valid for this subdomain. Further, in order to support the random `<unique-id>` in the hostname, we need a *wildcard certificate* for `*.interactivetoolentrypoint.interactivetool.galaxy.example.org`. Let's Encrypt wildcard certificates [can only be generated using the DNS-01 challenge method][lets-encrypt-faq], which works by issuing a [dynamic DNS][ddns] update to set the requested domain's `TXT` record. As a result, this process is highly dependent on your site; specifically, your SSL certificate vendor, and your DNS server software or cloud provider.
+In order to ensure each Interactive Tool's cookies are unique, and to provide each tool with a unique entry point, they are served from a subdomain of your Galaxy server (e.g. `<unique-id>.interactivetoolentrypoint.interactivetool.galaxy.example.org`). Your SSL cert is not valid for this subdomain. Further, in order to support the random `<unique-id>` in the hostname, we need a *wildcard certificate* for `*.interactivetoolentrypoint.interactivetool.galaxy.example.org`.
 
-If you are completing this tutorial as part of a [Galaxy Admin Training][gat] course, we have precreated a dynamic DNS server that you will use for this step. The *TSIG key* that allows you to perform dynamic DNS updates will be provided to you. Your instructor will also tell you which option to follow (1 or 2), depending on the DNS provider that was chosen for this course.
+This process is highly dependent on your site; specifically, your SSL certificate vendor, and your DNS server software or cloud provider.
+
+Let's Encrypt, the SSL certificate vendor we use in our tutorials, [can only generate wildcard certificates using the DNS-01 challenge method][lets-encrypt-faq], which works by issuing a [dynamic DNS][ddns] update to set the requested domain's `TXT` record.
+
+If you are completing this tutorial as part of a [Galaxy Admin Training][gat] course, we might have precreated a dynamic DNS server that you will use for this step. The *TSIG key* that allows you to perform dynamic DNS updates will be provided to you. Your instructor will also tell you which option to follow (1 or 2), depending on the DNS provider that was chosen for this course.
+
+As we use Let's Encrypt in staging mode, the wildcard certificates generated with either option 1 or 2 will still be invalid, and you will still see a warning in your web browser when accessing an Interactive Tool. If this warning is not a problem for you, you can just skip this section of the tutorial, and move on to "Enabling Interactive Tools in Galaxy".
 
 > ### {% icon hands_on %} Hands-on: Requesting a Wildcard Certificate with Certbot using Ansible - Option 1 (rfc2136)
 >

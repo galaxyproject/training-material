@@ -1,0 +1,116 @@
+---
+layout: base_slides
+logo: assets/images/gat.png
+video: true
+
+title: "Storage Management"
+questions:
+- How does Galaxy locate data?
+- How can I have Galaxy use multiple storage locations?
+objectives:
+- Setup Galaxy with both the Hierarachical and Distributed Object Storages
+key_points:
+- The distributed object store configuration allows you to easily expand that storage that is attached to your Galaxy.
+- You can move data around without affecting users.
+contributors:
+  - natefoo
+  - martenson
+  - hexylena
+  - shiltemann
+---
+
+# Data Libraries
+
+- Provide a convenient way to share datasets with users
+- Great for commonly used datasets (e.g. reference data, GTN tutorial data)
+
+.image-75[![data libraries screenshot]({{site.baseurl}}/topics/admin/images/data/data-library-screenshot.png)]
+
+???
+
+- Data libraries provide a convenient way for Galaxy administrators to share datasets with users.
+- This is ideal for commonly used datasets such as reference data, or data for GTN tutorials.
+
+---
+
+# Data Libraries
+
+- Access to library datasets:
+  - **Shared Data** menu, browse data and import into history
+  - Directly from tool form
+
+.pull-left[
+.image-50[![data library access from tool form]({{site.baseurl}}/topics/admin/images/data/select-from-lib0.png)]
+
+]
+
+.pull-right[
+
+.image-90[![data library access from tool form]({{site.baseurl}}/topics/admin/images/data/select-from-lib3.png)]
+
+]
+
+???
+
+- Users can browse these data libraries and import datasets directly into their histories.
+- Additionally, these datasets can also be selected directly from the tool form.
+
+---
+
+# Advantages of data libraries
+
+- **Avoid duplication** of data
+- Does not count towards user's **quota**
+- Libraries can be shared with all users, or specific groups
+- **Manage permissions** on library/dataset level using roles and groups.
+  - Admins can *create* libraries.
+  - Ordinary users can be granted permission to *manage* libraries
+
+
+![library permissions]({{site.baseurl}}/topics/admin/images/data/library-permissions.png)
+
+
+???
+
+- Every dataset in the library is stored only once, no matter how many users are using it in their histories.
+- The data in data libraries does not count against user quotas.
+- Management of libraries can be delegated to users.
+- And lastly, libraries can be public, restricted to individuals, or to groups.
+
+---
+
+# Importing Data
+
+- There are multiple ways to add data to libraries:
+  - From history
+  - From user directory
+  - From import directory (admins only)
+  - From remote source
+
+![import menu]({{site.baseurl}}/topics/admin/images/data/import-menu.png)
+
+???
+
+- Galaxy provides many options for importing data.
+- You can import data from a history, or from disk.
+- Importing data on disk is convenient, as Galaxy can recreate the folder structure that is on disk.
+- Additionally Galaxy can store library data as a symlink.
+- This prevents needing to copy large shared datasets into Galaxy's own data store.
+
+---
+
+# Configuration
+
+In `galaxy.yml`:
+
+* `user_library_import_dir`
+  * Allows authorized non-administrators to upload a directory of files.
+  * Directory must contain sub-directories named the same as user's email.
+  * Works well in combination with `ftp_upload_dir`.
+* `allow_path_paste`
+  * Admin-only, allows importing from any path that the Galaxy's user has access to.
+
+???
+
+- If you use old library interface you can also set library_import_dir.
+- It specifies which folder admins may browse and import from.

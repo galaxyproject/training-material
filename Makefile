@@ -9,7 +9,7 @@ PDF_HOST?=127.0.0.1
 SITE_URL=http://${PDF_HOST}:${PORT}/training-material
 PDF_DIR=_pdf
 REPO=$(shell echo "$${ORIGIN_REPO:-galaxyproject/training-material}")
-BRANCH=$(shell echo "$${ORIGIN_BRANCH:-master}")
+BRANCH=$(shell echo "$${ORIGIN_BRANCH:-main}")
 MINICONDA_URL=https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 SHELL=bash
 RUBY_VERSION=2.4.4
@@ -44,9 +44,13 @@ ACTIVATE_ENV = source $(shell dirname $(dir $(CONDA)))/bin/activate $(CONDA_ENV)
 
 install: clean create-env ## install dependencies
 	$(ACTIVATE_ENV) && \
-		gem update --system && \
-		gem install addressable:'2.5.2' jekyll jekyll-feed jekyll-scholar jekyll-redirect-from jekyll-last-modified-at csl-styles awesome_bot html-proofer pkg-config kwalify
+		gem update --no-document --system && \
+		ICONV_LIBS="-L${CONDA_PREFIX}/lib/ -liconv" gem install --no-document addressable:'2.5.2' jekyll jekyll-feed jekyll-scholar jekyll-redirect-from jekyll-last-modified-at csl-styles awesome_bot html-proofer pkg-config kwalify jekyll-sitemap
 .PHONY: install
+
+bundle-install: clean  ## install gems if Ruby is already present (e.g. on gitpod.io)
+	bundle install
+.PHONE: bundle-install
 
 serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
 	@echo "Tip: Want faster builds? Use 'serve-quick' in place of 'serve'."
@@ -64,6 +68,10 @@ serve-quick: ## run a local server (faster, some plugins disabled for speed)
 		mv Gemfile.lock Gemfile.lock.backup || true && \
 		${JEKYLL} serve --strict_front_matter -d _site/training-material --incremental --config _config.yml,_config-dev.yml -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve-quick
+
+serve-gitpod: bundle-install  ## run a server on a gitpod.io environment
+	bundle exec jekyll serve --config _config.yml,_config-dev.yml --incremental
+.PHONY: serve-gitpod
 
 build: clean ## build files but do not run a server (You can specify FLAGS= to pass additional flags to Jekyll)
 	$(ACTIVATE_ENV) && \
@@ -83,8 +91,8 @@ _check-html: # Internal
 	      	--assume-extension \
 	      	--http-status-ignore 405,503,999 \
 	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
-	      	--url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
-	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
+	      	--url-swap "github.com/galaxyproject/training-material/tree/main:github.com/${REPO}/tree/${BRANCH}" \
+	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/","/\/tutorials\/.*\/docker\//" \
 	      	--allow-hash-href \
 	      	./_site
 .PHONY: _check-html
@@ -106,9 +114,9 @@ _check-html-internal: # Internal
 		htmlproofer \
 	      	--assume-extension \
 	      	--http-status-ignore 405,503,999 \
-	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#/" \
-	      	--url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
-	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
+	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#/","/#embedded_jbrowse/","/.*videos.*.mp4.png/" \
+	      	--url-swap "github.com/galaxyproject/training-material/tree/main:github.com/${REPO}/tree/${BRANCH}" \
+	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/","/\/tutorials\/.*\/docker\//" \
 	      	--disable-external \
 	      	--allow-hash-href \
 	      	./_site
@@ -139,10 +147,6 @@ check-tool-links: ## lint tool links
 	@bash ./bin/check-broken-tool-links.sh
 .PHONY: check-tool-links
 
-check-snippets: ## lint snippets
-	./bin/check-for-trailing-newline
-.PHONY: check-snippets
-
 check-framework:
 	$(ACTIVATE_ENV) && \
 		ruby _plugins/jekyll-notranslate.rb
@@ -155,7 +159,7 @@ check-broken-boxes: build ## List tutorials containing broken boxes
 check: check-html-internal check-html check-broken-boxes check-slides ## run checks which require compiled HTML
 .PHONY: check
 
-lint: check-frontmatter check-workflows check-snippets check-tool-links ## run linting checks which do not require a built site
+lint: check-frontmatter check-workflows check-tool-links ## run linting checks which do not require a built site
 .PHONY: lint
 
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
@@ -164,7 +168,7 @@ check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
 			--assume-extension \
 			--http-status-ignore 405,503,999 \
 			--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
-			--file-ignore "/.*\/files\/.*/" \
+			--file-ignore "/.*\/files\/.*/","/\/tutorials\/.*\/docker\//" \
 			--allow-hash-href \
 			. && \
 		find . -path "**/slides*.html" \
@@ -195,7 +199,7 @@ _site/%/tutorial.pdf: _site/%/tutorial.html
 			- $@; \
 	fi
 
-_site/%.pdf: _site/%.html
+_site/%/introduction.pdf: _site/%/introduction.html
 	if ! grep 'http-equiv="refresh"' $< --quiet; then \
 		$(ACTIVATE_ENV) && \
 		sed "s|/training-material/|$(shell pwd)/_site/training-material/|g" $< | \
@@ -206,12 +210,19 @@ _site/%.pdf: _site/%.html
 			- $@; \
 	fi
 
-AWS_UPLOAD?=""
-VIDEOS := $(shell find topics -name 'slides.html' | xargs ./bin/filter-has-videos)
-video: $(VIDEOS:topics/%.html=_site/training-material/topics/%.mp4) ## Build videos where possible
+_site/%/slides.pdf: _site/%/slides.html
+	if ! grep 'http-equiv="refresh"' $< --quiet; then \
+		$(ACTIVATE_ENV) && \
+		sed "s|/training-material/|$(shell pwd)/_site/training-material/|g" $< | \
+		sed "s|<head>|<head><base href=\"file://$(shell pwd)/$(<:_site/training/material%=%)\">|" | \
+		wkhtmltopdf \
+		    --enable-javascript --javascript-delay 3000 --page-width 700px --page-height 530px -B 5px -L 5px -R 5px -T 5px \
+			--user-style-sheet bin/slides-fix.css \
+			- $@; \
+	fi
 
-_site/training-material/%/slides.mp4: _site/training-material/%/slides.pdf %/slides.html
-	./bin/ari.sh $^ $@ $(AWS_UPLOAD)
+video: ## Build all videos
+	bash bin/ari-make.sh
 
 annotate: ## annotate the tutorials with usable Galaxy instances and generate badges
 	${ACTIVATE_ENV} && \
@@ -220,13 +231,15 @@ annotate: ## annotate the tutorials with usable Galaxy instances and generate ba
 	python bin/add_galaxy_instance_badges.py
 .PHONY: annotate
 
+rebuild-search-index: ## Rebuild search index
+	node bin/lunr-index.js > search.json
+
 clean: ## clean up junk files
 	@rm -rf _site
 	@rm -rf .sass-cache
 	@rm -rf .bundle
 	@rm -rf vendor
 	@rm -rf node_modules
-	@rm -rf .jekyll-cache
 	@rm -rf .jekyll-metadata
 	@find . -name .DS_Store -exec rm {} \;
 	@find . -name '*~' -exec rm {} \;

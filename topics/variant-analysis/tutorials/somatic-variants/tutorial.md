@@ -97,8 +97,8 @@ downsampled though to include only the reads from human chromosomes 5, 12 and
 >
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the following four files from
 >    [Zenodo](https://zenodo.org/record/2582555):
@@ -117,14 +117,14 @@ downsampled though to include only the reads from human chromosomes 5, 12 and
 >    through a shared data library (your instructor may tell you so), in which
 >    case you may prefer to import the data directly from there.
 >
->    {% include snippets/import_via_link.md format="fastqsanger.gz" %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md format="fastqsanger.gz" %}
 >
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Check that all newly created datasets in your history have their datatypes assigned 
 >    correctly, and fix any missing or wrong datatype assignment
 >
->    {% include snippets/change_datatype.md datatype="fastqsanger.gz" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastqsanger.gz" %}
 >
 > 4. Rename the datasets and add appropriate tags to them
 >
@@ -132,7 +132,7 @@ downsampled though to include only the reads from human chromosomes 5, 12 and
 >    address as the dataset name, which you will likely want to shorten to
 >    just the file names.
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 >    Large parts of the analysis in this tutorial will consist of
 >    identical steps performed on the normal and on the tumor tissue data
@@ -144,7 +144,7 @@ downsampled though to include only the reads from human chromosomes 5, 12 and
 >    dataset, that tag will automatically propagate to any new dataset
 >    derived from the tagged dataset.
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 >    Before starting our analysis it is, thus, a good idea to tag the two
 >    fastq datasets representing the normal tissue with, *e.g.*, `#normal`
@@ -208,7 +208,7 @@ a read provide evidence for is, of course, a prerequisite for variant calling.
 > 1. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} on each of your four fastq datasets
 >       - {% icon param-files %} *"Short read data from your current history"*: all 4 FASTQ  datasets selected with **Multiple datasets**
 >
->    {% include snippets/select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
 >    When you start this job, eight new datasets (one with the calculated raw
 >    data, another one with an html report of the findings for each input

@@ -52,10 +52,11 @@ In this tutorial we begin with a new genome assembly just produced in the [Unicy
 >    https://zenodo.org/record/3382053/files/genomes_proks.txt
 >    ```
 >
->    {% include snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 2. And skip ahead to [comparing the most related genomes](#comparing-genome-architectures).
 {: .comment}
+
 
 ## Getting complete *E. coli* genomes into Galaxy
 
@@ -71,42 +72,48 @@ Our initial objective is to compare our assembly against all complete *E. coli* 
 >    https://zenodo.org/record/3382053/files/genomes_proks.txt
 >    ```
 >
->    > ### {% icon question %} Getting the data directly from NCBI
->    >
->    > For this tutorial we made this dataset available from Zenodo, but it is of course also possible to obtain the data directly from NCBI.
->    > Note that the format of the files on NCBI may change, which means some of the parameter settings of tools in this tutorial will need
->    > to be altered (e.g. column numbers) when using data directly from NCBI.
->    >
->    > Below we describe how you could obtain this data from NCBI.
->    >
->    > 1. Open [the NCBI list of of *E. coli* genomes](https://www.ncbi.nlm.nih.gov/genome/genomes/167) in a new window
->    >
->    > 2. Click on "Filters" at the top right:
->    >
->    >    ![Filter menu button](../../images/ecoli-list-filter.png)
->    >
->    > 3. Select only the "Complete" genomes with the filter at the top
->    >
->    >    ![Filter settings, only "complete" is checked](../../images/ecoli-list.png)
->    >
->    > 3. At the top right, click "Download"
->    >
->    > 4. Upload this table to Galaxy
->    >
->    > 4. As this file is a CSV file, we need to convert it to TSV before Galaxy can use it.
->    >
->    >    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
->    >
->    > 5. Rename this file to `genomes.tsv`
->    >
->    >    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
->    >
->    {: .question}
+{: .hands_on}
+
+
+> ### {% icon details %} Getting the data directly from NCBI
 >
-> 2. {% tool [Cut](Cut1) %}   columns from a table:
+> For this tutorial we made this dataset available from Zenodo, but it is of course also possible to obtain the data directly from NCBI.
+> Note that the format of the files on NCBI may change, which means some of the parameter settings of tools in this tutorial will need
+> to be altered (e.g. column numbers) when using data directly from NCBI.
+>
+> Below we describe how you could obtain this data from NCBI.
+>
+> 1. Open [the NCBI list of of *E. coli* genomes](https://www.ncbi.nlm.nih.gov/genome/genomes/167) in a new window
+>
+> 2. Click on "Filters" at the top right:
+>
+>    ![Filter menu button](../../images/ecoli-list-filter.png)
+>
+> 3. Select only the "Complete" genomes with the filter at the top
+>
+>    ![Filter settings, only "complete" is checked](../../images/ecoli-list.png)
+>
+> 3. At the top right, click "Download"
+>
+> 4. Upload this table to Galaxy
+>
+> 5. As this file is a CSV file, we need to convert it to TSV before Galaxy can use it.
+>
+>    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="Convert CSV to Tabular" %}
+>
+> 6. Rename this file to `genomes.tsv`
+>
+>    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="Convert CSV to Tabular" %}
+>
+{: .details}
+
+
+> ### {% icon hands_on %} Hands-on: Preparing a list of all complete *E. coli* genomes
+>
+> 1. {% tool [Cut](Cut1) %}   columns from a table:
 >
 >    - *"Cut columns"*: `c8,c20`
->    - *"From"*: the tabular version of the file.
+>    - *"From"*: `genome_proks.txt`
 >
 > > ### {% icon question %} Questions
 > >
@@ -234,39 +241,39 @@ Because phiX173 is around 5,000bp, we can remove those sequences by setting a mi
 >
 >
 > 2. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %} in entire line:
->   - *"File to process"*: the output of the Filter sequences by length {% icon tool %}
->   - *"1: Replacement"*
->     - *"Find Pattern"*: `^>1.*`
->     - *"Replace with"*: `>Ecoli_C`
+>    - *"File to process"*: the output of the Filter sequences by length {% icon tool %}
+>    - *"1: Replacement"*
+>      - *"Find Pattern"*: `^>1.*`
+>      - *"Replace with"*: `>Ecoli_C`
 >
->   {% include snippets/rename_dataset.md name="E. coli C" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="E. coli C" %}
 >
->   > ### {% icon tip %} Regular Expressions
->   >
->   > The program we just entered is a so-called [Regular Expression](https://en.wikipedia.org/wiki/Regular_expression)
->   >
->   > The expression `^>1.*` contains several pieces that you need to understand. Let's write it top-to-bottom and explain:
->   >
->   > - `^` - says start looking at *the beginning* of each line
->   > - `>` - is the first character we want to match. Remember that name of the sequence in FASTA files starts with `>`
->   > - `1` - is the number present is our old name (`>1 length=4576293 depth=1.00x circular=true` to `>Ecoli_C`)
->   > - `.` - dot has a special meaning. It signifies *any* character
->   > - `*` - is a *quantifier*. From [Wikipedia](https://en.wikipedia.org/wiki/Regular_expression): "The asterisk indicates zero or more occurrences of the preceding element. For example, ab*c matches `ac`, `abc`, `abbc`, `abbbc`, and so on."
->   >
->   >So in short we are replacing `>1 length=4576293 depth=1.00x circular=true` with `>Ecoli_C`. The *Regular expression* `^>1.*` is used here to represent `>1 length=4576293 depth=1.00x circular=true`.<br>
->   >Detailed description of regular expressions is outside of the scope of this tutorial, but there are other great resources. Start with [Software Carpentry Regular Expressions tutorial](http://v4.software-carpentry.org/regexp/index.html).
->   {: .tip}
+>    > ### {% icon tip %} Regular Expressions
+>    >
+>    > The program we just entered is a so-called [Regular Expression](https://en.wikipedia.org/wiki/Regular_expression)
+>    >
+>    > The expression `^>1.*` contains several pieces that you need to understand. Let's write it top-to-bottom and explain:
+>    >
+>    > - `^` - says start looking at *the beginning* of each line
+>    > - `>` - is the first character we want to match. Remember that name of the sequence in FASTA files starts with `>`
+>    > - `1` - is the number present is our old name (`>1 length=4576293 depth=1.00x circular=true` to `>Ecoli_C`)
+>    > - `.` - dot has a special meaning. It signifies *any* character
+>    > - `*` - is a *quantifier*. From [Wikipedia](https://en.wikipedia.org/wiki/Regular_expression): "The asterisk indicates zero or more occurrences of the preceding element. For example, ab*c matches `ac`, `abc`, `abbc`, `abbbc`, and so on."
+>    >
+>    >So in short we are replacing `>1 length=4576293 depth=1.00x circular=true` with `>Ecoli_C`. The *Regular expression* `^>1.*` is used here to represent `>1 length=4576293 depth=1.00x circular=true`.<br>
+>    >Detailed description of regular expressions is outside of the scope of this tutorial, but there are other great resources. Start with [Software Carpentry Regular Expressions tutorial](http://v4.software-carpentry.org/regexp/index.html).
+>    {: .tip}
 >
->   > ### {% icon question %} Questions
->   >
->   > 1. What is the meaning of `^` character is SED expression?
->   >
->   > > ### {% icon solution %} Solution
->   > >
->   > > 1. It tells SED to start matching from the beginning of the string.
->   > >
->   > {: .solution}
->   {: .question}
+> > ### {% icon question %} Questions
+> >
+> > 1. What is the meaning of `^` character is SED expression?
+> >
+> > > ### {% icon solution %} Solution
+> > >
+> > > 1. It tells SED to start matching from the beginning of the string.
+> > >
+> > {: .solution}
+> {: .question}
 >
 {: .hands_on}
 
@@ -454,6 +461,12 @@ Now that we know the three genomes most closely related to ours, let's take a cl
 > ### {% icon hands_on %} Hands-on: Uploading sequences and annotations
 > Using the three accession listed above we will fetch necessary data from NCBI. We will use the spreadsheet we uploaded at the start to accomplish this.
 >
+> 1. {% tool [Upload](upload1) %} the *E. coli* C genome if you have not done so already:
+>   - Click **Paste/Fetch data** button (Bottom of the interface box)
+>   - **Paste** `https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna` into the box.
+>   - *"Type"*: `fasta`
+>   - Click **Start**
+>
 > 1. {% tool [Select lines that match an expression](Grep1) %} with the following parameters:
 >   - *"Select lines from"*: the `genomes.tsv` you uploaded earlier
 >   - *"the pattern"*: `LT906474|CP024090|CP020543`
@@ -487,7 +500,7 @@ Now that we know the three genomes most closely related to ours, let's take a cl
 >       > This step is quite long and potentially error prone. If you want to skip those steps, you can copy and paste this bit of text:
 >       >
 >       > ```json
->       > {"rules":[{"type":"add_column_regex","target_column":1,"expression":".*(\\/GCA.*$)","group_count":1},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":2},{"type":"remove_columns","target_columns":[1,2]},{"type":"add_column_value","value":"_feature_table.txt.gz"},{"type":"add_column_value","value":"_genomic.fna.gz"},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":2},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":3},{"type":"remove_columns","target_columns":[1,2,3]},{"type":"add_column_value","value":"Genes"},{"type":"add_column_value","value":"DNA"},{"type":"add_column_regex","target_column":0,"expression":".*\\/(.*)","group_count":1},{"type":"swap_columns","target_column_0":0,"target_column_1":5},{"type":"remove_columns","target_columns":[5]},{"type":"split_columns","target_columns_0":[1,3],"target_columns_1":[2,4]}],"mapping":[{"type":"list_identifiers","columns":[0],"editing":false},{"type":"url","columns":[1]},{"type":"collection_name","columns":[2]}]}
+>       > {"rules":[{"type":"add_column_regex","target_column":1,"expression":".*(\\/GCA.*$)","group_count":1},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":2},{"type":"remove_columns","target_columns":[1,2]},{"type":"add_column_value","value":"_feature_table.txt.gz"},{"type":"add_column_value","value":"_genomic.fna.gz"},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":2},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":3},{"type":"remove_columns","target_columns":[1,2,3]},{"type":"add_column_value","value":"Genes"},{"type":"add_column_value","value":"DNA"},{"type":"add_column_regex","target_column":1,"expression":".*\\/(.*)","group_count":1},{"type":"swap_columns","target_column_0":0,"target_column_1":5},{"type":"remove_columns","target_columns":[5]},{"type":"split_columns","target_columns_0":[1,3],"target_columns_1":[2,4]}],"mapping":[{"type":"list_identifiers","columns":[0],"editing":false},{"type":"url","columns":[1]},{"type":"collection_name","columns":[2]}]}
 >       > ```
 >       >
 >       > You can click the {% icon tool %} next to the header **Rules** {% icon tool %}, and paste the contents there, before clicking **Apply**, checking "Add nametag for name" and then **Upload**.
@@ -530,7 +543,7 @@ Now that we know the three genomes most closely related to ours, let's take a cl
 >       - *"Value"*: `DNA`
 >       - Click `Apply`
 >    3. From **Column**, select `Using a Regular Expression`
->       - *"From Column"*: `A`
+>       - *"From Column"*: `B`
 >       - Select `Create columns matching expression groups`
 >       - *"Regular Expression"*: `.*\/(.*)`
 >       - *"Number of Groups"*: `1`
@@ -592,7 +605,7 @@ Now we will perform alignments between our assembly and the three most closely r
 >
 > 2. Rename the `LASTZ on collection... mapped reads` something more memorable like `LASTZ Alignments`
 >
->    {% include snippets/rename_collection.md name="LASTZ Alignments" %}
+>    {% snippet faqs/galaxy/collections_rename.md name="LASTZ Alignments" %}
 >
 {: .hands_on}
 
@@ -626,7 +639,7 @@ The first step will be collapsing the collection containing the three genomes in
 >
 > 2. Convert the datatype of this output to uncompress it
 >
->    {% include snippets/convert_datatype.md conversion="Convert compressed to uncompressed" %}
+>    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="Convert compressed to uncompressed" %}
 >
 > 3. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0) %} tail-to-head (cat):
 >    - *"Datasets to concatenate"*: `Collapse collection ... uncompressed`, the output from the uncompression step.
@@ -635,7 +648,7 @@ The first step will be collapsing the collection containing the three genomes in
 >
 > 4. Rename the output to `DNA (E. coli C + Relatives)`
 >
->    {% include snippets/rename_dataset.md name="DNA (E. coli C + Relatives)" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="DNA (E. coli C + Relatives)" %}
 {: .hands_on}
 
 The resulting dataset contains four sequences: three genomes plus our assembly.
@@ -696,7 +709,7 @@ Column 13 of the fields chosen by us for [LASTZ run](#hands_on-hands-on-aligning
 >
 > 4. We will reuse this file later so let's rename it `Unprocessed Alignments`
 >
->    {% include snippets/rename_dataset.md name="Unprocessed Alignments" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="Unprocessed Alignments" %}
 >
 > 4. {% tool [Cut](Cut1) %} columns from a table:
 >
@@ -737,7 +750,7 @@ Column 13 of the fields chosen by us for [LASTZ run](#hands_on-hands-on-aligning
 >
 > 5. Rename this "Target Alignments"
 >
->    {% include snippets/rename_dataset.md name="Target Alignments" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="Target Alignments" %}
 >
 > 6. {% tool [Cut columns from a table](Cut1) %} with the following parameters
 >    - *"Cut columns"*: `c7,c9,c10,c14,c12,c8` (look at the data shown above and the definition of BED to see why we make these choices.)
@@ -745,7 +758,7 @@ Column 13 of the fields chosen by us for [LASTZ run](#hands_on-hands-on-aligning
 >
 > 5. Rename this "Query Alignments"
 >
->    {% include snippets/rename_dataset.md name="Query Alignments" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="Query Alignments" %}
 >
 > 6. {% tool [Concatenate datasets tail-to-head](cat1) %}
 >    - *"Concatenate Dataset"*: `Query Alignments`
@@ -754,9 +767,9 @@ Column 13 of the fields chosen by us for [LASTZ run](#hands_on-hands-on-aligning
 >
 > 7. Change the datatype of the output to BED and rename the output "Target & Query Alignments"
 >
->    {% include snippets/change_datatype.md datatype="bed" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="bed" %}
 >
->    {% include snippets/rename_dataset.md name="Target & Query Alignments" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="Target & Query Alignments" %}
 >
 {: .hands_on}
 
@@ -856,9 +869,9 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 >
 > 6. Change the datatype of the collection to `bed` and rename it to `Genes (E. coli Relatives)`
 >
->   {% include snippets/change_datatype.md datatype="bed" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="bed" %}
 >
->   {% include snippets/rename_dataset.md name="Genes (E. coli Relatives)" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="Genes (E. coli Relatives)" %}
 >
 >    > ### {% icon question %} Question
 >    > How does your output look?
@@ -900,9 +913,9 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 >
 > 3. Change the datatype of the collection to `bed` and rename it to `Genes (E. coli Relatives) with Symbol Name`
 >
->   {% include snippets/change_datatype.md datatype="bed" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="bed" %}
 >
->   {% include snippets/rename_dataset.md name="Genes (E. coli Relatives) with Symbol Name" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="Genes (E. coli Relatives) with Symbol Name" %}
 >
 {: .hands_on}
 
@@ -1000,7 +1013,7 @@ You will notice that all three genomes have a region starting past 3,200,000 and
 >
 > 2. Rename this dataset `Gaps`
 >
->    {% include snippets/rename_dataset.md name="Gaps" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="Gaps" %}
 {: .hands_on}
 
 
@@ -1017,12 +1030,12 @@ JBrowse is an interactive genome browser, which has been integrated into Galaxy 
 >    - *"Genetic code"*: `11. The Bacterial, Archael and Plant Plastid Code`
 >    - {% icon param-repeat %} Insert Track Group
 >        - {% icon param-repeat %} Insert Annotation Track
->            - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
->            - {% icon param-file %} *"GFF/GFF3/BED/GBK Track Data"*: `Genes (E. coli Relatives)` from **Collapse Collection** {% icon tool %}
+>            - *"Track Type"*: `GFF/GFF3/BED Features`
+>            - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `Genes (E. coli Relatives)` from **Collapse Collection** {% icon tool %}
 >            - *"JBrowse Track Type"*: `Canvas Features`
 >        - {% icon param-repeat %} Insert Annotation Track
->            - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
->            - {% icon param-file %} *"GFF/GFF3/BED/GBK Track Data"*: `Target & Query Alignments`
+>            - *"Track Type"*: `GFF/GFF3/BED Features`
+>            - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `Target & Query Alignments`
 >            - *"JBrowse Track Type"*: `Canvas Features`
 >            - *"JBrowse Feature Score Scaling & Colouring Options"*
 >                - *"Color Score Algorithm"*: `Based on score`
@@ -1030,24 +1043,24 @@ JBrowse is an interactive genome browser, which has been integrated into Galaxy 
 >                - *"Minimum expected score"*: `0`
 >                - *"Maximum expected score"*: `100`
 >        - {% icon param-repeat %} Insert Annotation Track
->            - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
->            - {% icon param-file %} *"GFF/GFF3/BED/GBK Track Data"*: `Gaps`
+>            - *"Track Type"*: `GFF/GFF3/BED Features`
+>            - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `Gaps`
 >
 {: .hands_on}
 
 We have embedded a copy of the resulting JBrowse here, if something went wrong during one of the steps you can always just check this output:
 
 
-{% include snippets/jbrowse.html datadir="data" %}
+{% snippet topics/visualisation/faqs/visualizations_jbrowse.html datadir="data" %}
 
 Let's start by looking at the gaps in our alignments. The deletion from our assembly is easy to see. It looks like a gap in alignments because target genomes are longer than our assembly by the amount equal to the length of the deletion. Clicking on the following links to jump to the right locations in the genome browser above:
 
 {% capture jbtracks %}DNA%2C45ccd03761795e5db829b6ab104c6a5a_0%2C0b4cc6e1931ece5bd0f487148c40ba37_0%2C36c31c84288257f526dbf55dc63fac9e_0{% endcapture %}
 
 <ul>
-  <li>{% include snippets/jbrowse-link.html datadir="data" loc="LT906474.1:3238836..3318993" tracks=jbtracks %}</li>
-  <li>{% include snippets/jbrowse-link.html datadir="data" loc="CP020543.1:3246920..3310052" tracks=jbtracks %}</li>
-  <li>{% include snippets/jbrowse-link.html datadir="data" loc="CP024090.1:3221116..3295268" tracks=jbtracks %}</li>
+  <li>{% snippet topics/visualisation/faqs/visualizations_jbrowse_link.html datadir="data" loc="LT906474.1:3238836..3318993" tracks=jbtracks %}</li>
+  <li>{% snippet topics/visualisation/faqs/visualizations_jbrowse_link.html datadir="data" loc="CP020543.1:3246920..3310052" tracks=jbtracks %}</li>
+  <li>{% snippet topics/visualisation/faqs/visualizations_jbrowse_link.html datadir="data" loc="CP024090.1:3221116..3295268" tracks=jbtracks %}</li>
 </ul>
 
 Close ups of deleted region (this region is deleted from our assembly and looks like a gap when our assembly is aligned to genomic sequences shown here). In CP0205543 and LT906474 the continuity of the region is interrupted by a small aligned region that has relatively low identity (~72%). This is a spurious alignment and can be ignored.
@@ -1162,7 +1175,7 @@ Goodall et al. have recently published a list of essential genes for *E. coli* K
 >    https://zenodo.org/record/3382053/files/inline-supplementary-material-7.tsv
 >    ```
 >
->    {% include snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 {: .hands_on}
 

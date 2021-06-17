@@ -105,14 +105,15 @@ body {
 
 @import "assets/css/syntax_highlighting-dark.scss";
 
-div#theme-selector {
+div#theme-selector,div#lang-selector {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	width: 200px;
 	justify-content: flex-start;
+    margin-left: 1em;
 
-	label.btn {
+	label.btn,a.btn {
 		margin: 0.1em;
 	}
 }
@@ -310,14 +311,36 @@ body.theme-halloween {
 
 }
 
+
+body.downunder {
+	transform:rotate(180deg);
+}
+
+body.theme-straya {
+	h1::before {
+		content: "🇳🇿 ";
+	}
+	h1::after {
+		content: " 🇳🇿";
+	}
+	h2::before {
+		content: "🦘 ";
+	}
+	h2::after {
+		content: " 🐨";
+		display: inline-block;
+		transform: scale(-1, 1) translateX(-1rem);
+	}
+}
+
 body.theme-rainbow {
 	h1::before {
 		content: "🌈 "
 	}
 	h1::after {
 		content: " 🌈 ";
-        display: inline-block;
-        transform: scale(-1, 1) translateX(-1rem);
+		display: inline-block;
+		transform: scale(-1, 1) translateX(-1rem);
 	}
 	header {
 		nav.navbar {
@@ -462,6 +485,20 @@ nav input.nicer {
     margin: 0 auto;
 }
 
+.faqs{
+  h3.faq-area{
+    color: #888888;
+    i {
+     font-size: 0.5em;
+    }
+  }
+  h2{
+   a{
+     color: black;
+    }
+  }
+}
+
 .tutorial {
     & > h1:first-child {
         margin-bottom: 1rem;
@@ -487,6 +524,15 @@ nav input.nicer {
         }
     }
 
+	div.container blockquote {
+		ul, p, li > p:last-child {
+			margin-bottom: 0.5rem;
+		}
+		p:last-child {
+			margin-bottom: 0;
+		}
+	}
+
     // tutorial boxes
     blockquote {
         ul,
@@ -494,6 +540,10 @@ nav input.nicer {
         & > blockquote,
         p {
             margin-bottom: 0px;
+        }
+
+        img {
+            display: block;
         }
 
         &.agenda {
@@ -555,6 +605,14 @@ nav input.nicer {
             padding-left: 1em;
         }
 
+        &.spoken {
+            display: none;
+        }
+
+        &.hidden {
+            display: none;
+        }
+
         &.matrix {
             @include matrix-table();
         }
@@ -563,6 +621,10 @@ nav input.nicer {
             @include tutorial-box($feedback-color, $text-color);
         }
     }
+
+	.pre-break-lines code {
+		white-space: pre-wrap;
+	}
 
     .fold-unfold {
         margin-left: $tutorial-box-spacing;
@@ -573,6 +635,56 @@ nav input.nicer {
         height: 1100px;
         border: 0;
     }
+}
+
+.newslist {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+
+    .newsitem {
+      width: 100%;
+    }
+    .newscover {
+        width: 100%;
+        object-fit: cover;
+        margin-top: auto;
+        margin-bottom: auto;
+        background-color: white;
+        border-radius: 2rem;;
+        //border: 1px solid $light-gray;
+        padding: 1rem;
+        -webkit-transition: border 0.2s ease-in-out;
+        -o-transition: border 0.2s ease-in-out;
+        transition: border 0.2s ease-in-out;
+    }
+    h3 {
+        margin-top: 1rem;
+    }
+    .contributors-line{
+        margin-bottom: 1rem;
+    }
+}
+
+.newsitem{
+ .contributors-line{
+        margin-bottom: 1rem;
+    }
+}
+
+.newstable{
+  h5 {
+    margin-top: 0px;
+    color: $text-color !important;
+  }
+  a.newstitle{
+    font-color: $text-color;
+  }
+  p {
+    margin: 0px;
+  }
 }
 
 .contributors {
@@ -963,4 +1075,55 @@ span.tool {
  .container {
   max-width: unset;
  }
+}
+
+// Videos
+
+video::cue {
+  background: #000000cc;
+  color: white;
+}
+
+#playlist {
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+
+    &.vertical {
+        flex-direction: column;
+    }
+
+    .pl-item a {
+        display: flex;
+        flex-direction: column;
+
+        .title {
+            font-weight: 700;
+        }
+        .topic {
+            font-style: italic;
+        }
+
+        .cover {
+            width: 200px;
+        }
+    }
+}
+
+
+#transcript {
+    height: 400px;
+    overflow-y: scroll;
+
+    tr td:nth-child(1) {
+        padding-right: 1em;
+        color: #555;
+    }
+}
+
+abbr {
+	// Based on https://developer.mozilla.org/en-US/docs/Web/HTML/Element/abbr#default_styling
+	text-decoration: underline dotted;
+	cursor: help;
+	font-variant: none;
 }

@@ -49,8 +49,8 @@ Due to the large size of the original sRNA-seq datasets, we have downsampled the
 >
 > 1. Create a new history and name it something meaningful (*e.g.* sRNA-seq tutorial)
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the 3 `Blank_RNAi_sRNA-seq` and 3 `Symp_RNAi_sRNA-seq` FASTQ files from [Zenodo](https://zenodo.org/record/1324070) or from the data library (ask your instructor)
 >
@@ -63,15 +63,15 @@ https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep2_downsampled.fastq
 https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep3_downsampled.fastqsanger.gz
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    Set the datatype of the read (.fastqsanger) files to **fastq**
 >    As default, Galaxy takes the link as name, so rename them.
 >
 > 2. Build a dataset list for both sets (`Blank` and `Symp`) of replicate FASTQ files
 >
->    {% include snippets/build_list_collection.md %}
+>    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 >    ![History section with all the loaded datasets](../../images/sRNA/Fig3_dataset_lists_made.png)
 > 
@@ -99,7 +99,7 @@ Read quality scores (phred scores) in FASTQ-formatted data can be encoded by one
 > 1. Run **FastQC** {% icon tool %} on the `Blank` collection
 >    - {% icon param-collection %} *"Short read data from your current history"*: `Blank` collection
 >
->    {% include snippets/select_collection.md %}
+>    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
 > 2. Run **FastQC** {% icon tool %} for the *Symplekin* RNAi dataset collection
 > 3. Inspect the **FastQC** {% icon tool %} reports
@@ -136,7 +136,7 @@ Read quality scores (phred scores) in FASTQ-formatted data can be encoded by one
 > If your data are already in **Sanger / Illumina 1.9 format**:
 > 1. Change the datatype to `fastqsanger`
 >
->    {% include snippets/change_datatype.md datatype="fastqsanger" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastqsanger" %}
 >
 {: .hands_on}
 

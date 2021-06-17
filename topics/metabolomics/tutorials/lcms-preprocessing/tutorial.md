@@ -35,7 +35,7 @@ It focuses on studying the very small molecules which are called *metabolites*, 
 One of the three main technologies used to perform metabolomic analyses is **Liquid-Chromatography Mass Spectrometry** (LC-MS). Data analysis
 for this technology requires a large variety of steps, ranging from extracting information from the raw data to statistical analysis and annotation.
 To be able to perform a complete LC-MS analysis in a single environment, the [Wokflow4Metabolomics](http://workflow4metabolomics.org/)
-team provides Galaxy tools dedicated to metabolomics. This tutorial details the steps involved in the first part of untargeted LC-MS 
+team provides Galaxy tools dedicated to metabolomics. This tutorial details the steps involved in the first part of untargeted LC-MS
 data processing: extracting information from raw data to obtain what is called a peak table. This step is commonly refered to as
 the preprocessing step. This tutorial will show you how to perform such a step using the Galaxy implementation of the XCMS software.
 
@@ -117,7 +117,7 @@ having to launch jobs manually for each sample. You can start using the dataset 
 >
 > 1. Create a new history for this tutorial
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the 12 `mzXML` files into a collection named `mzML`
 >    - Option 1: from a shared data library (ask your instructor)
@@ -139,13 +139,14 @@ having to launch jobs manually for each sample. You can start using the dataset 
 >    https://zenodo.org/record/3757956/files/QC1_014.mzML
 >    ```
 >
->    {% include snippets/import_via_link.md collection=true format="mzml" collection_name="mzML" renaming=false %}
->    {% include snippets/import_from_data_library.md astype="as a Collection" %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md collection=true format="mzml" collection_name="mzML" renaming=false %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md astype="as a Collection" %}
 >
 > 3. Make sure your data is in a **collection**. Make sure it is named `mzML`
 >    - If you forgot to select the collection option during import, you can create the collection now:
 >
->    {% include snippets/build_list_collection.md %}
+>    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 > > ### {% icon tip %} Comment to W4M users
 > >
@@ -171,10 +172,10 @@ This first step is only meant to read your `mzXML` file and generate an object u
 
 > ### {% icon hands_on %} Hands-on: MSnbase readMSData
 >
-> Run **MSnbase readMSData** {% icon tool %} with the following parameters:
->   - *"File(s) from your history containing your chromatograms"*: the `mzML` dataset collection
+> 1. Run **MSnbase readMSData** {% icon tool %} with the following parameters:
+>    - *"File(s) from your history containing your chromatograms"*: the `mzML` dataset collection
 >
->   {% include snippets/select_collection.md %}
+>    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
 >  > ### {% icon tip %} Comment to W4M users
 >  >
@@ -226,7 +227,7 @@ Note that you can either:
 
 > ### {% icon tip %} Optional: Generate the right template with **xcms get a sampleMetadata file** {% icon tool %}
 >
-> In the case of this tutorial, we already prepared a *sampleMetadata* file with all the necessary information. 
+> In the case of this tutorial, we already prepared a *sampleMetadata* file with all the necessary information.
 Below is an optional hands-on explaining how to get a template to fill, with the two following advantages:
 >   1. You will have the exact list of the samples you used in Galaxy, with the exact identifiers (*i.e.* exact sample names)
 >   2. You will have a file with the right format (tabulation-separated text file) that only needs to be filled with the information you want.
@@ -344,26 +345,27 @@ be uploaded into Galaxy.
 >    https://zenodo.org/record/3757956/files/sampleMetadata_12samp_completed.tsv
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 2. Check the data type of your imported files.
->   - The datatype should be `tabular`, if this is not the case, please change the datatype now.
+>    - The datatype should be `tabular`, if this is not the case, please change the datatype now.
 >
->     {% include snippets/change_datatype.md %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md %}
 >
->     > ### {% icon comment %} Comment
->     >
->     > Here we provided the sampleMetadata file so we know that the upload led to a 'tabular' file. But from experience we also know that
+>    > ### {% icon comment %} Comment
+>    >
+>    > Here we provided the sampleMetadata file so we know that the upload led to a 'tabular' file. But from experience we also know that
 it can happen that, when uploading a sampleMetadata table, user obtained other inappropriate types of data. This is generally due to the file
 not following all the requirements about the format (*e.g.* wrong separator, or lines with different numbers of columns).
->     > Thus, we highly recommend that you always take a second to check the data type after the upload. This way you can handle the problem
+>    > Thus, we highly recommend that you always take a second to check the data type after the upload. This way you can handle the problem
 right away if you appear to get one of these obvious issues.
->     {: .comment}
+>    {: .comment}
 >
 > 3. Rename your sampleMetadata file with a shorter name 'sampleMetadata_completed.tsv'
 >
->     {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > > ### {% icon tip %} Comment to W4M users
 > >
@@ -399,7 +401,7 @@ You can use the *sampleMedata* file we previously uploaded to add some group col
 The tool automatically takes the second column as colour groups when a file is provided.
 
 Note that you can also check the chromatograms at any moment during the workflow, in particular at the following steps:
- - After **MSnbase readMSData** {% icon tool %} to help you to define retention time ranges that you may want to discard from the very beginning 
+ - After **MSnbase readMSData** {% icon tool %} to help you to define retention time ranges that you may want to discard from the very beginning
 (*"Spectra Filters"* section in **xcms findChromPeaks (xcmsSet)** {% icon tool %} parameters)
  - After **adjustRtime** {% icon tool %} to check the result of the correction (and potentially rerun *adjustRtime* with other settings)
 
@@ -429,11 +431,11 @@ one with colours based on provided groups, one with one colour per sample.
 ![Base Peak Intensity Chromatograms](../../images/lcmspreproc_BPC12samp.png)
 
 How BPIs and TICs look like is dependant of the kind of data you have: LC-MS technology used, study design, type of samples, events that may have occured during the analysis...
-It can vary a lot from one experiment to another due to these characteristics. 
+It can vary a lot from one experiment to another due to these characteristics.
 Sometimes you can see (un)expected effects on these plots as retention time variations accros samples, overall sample intensity differences due to analytical or biological
 matters, specific peak areas... Generally, it is recommended to first focus on QC pooled samples if you have some, since they are not supposed to be affected by
 biological variabilities: it helps you to focus on aspects uncorrelated to individual sample effects. Evaluation of blank samples (if any) can also be a good start:
-"Are all blanks globally less intense than real samples?" is a question that can generally be raised. 
+"Are all blanks globally less intense than real samples?" is a question that can generally be raised.
 
 # First XCMS step: *peak picking*
 
@@ -541,7 +543,7 @@ The first peak picking step gave us lists of ions for each sample. However, what
 To obtain such a table, we need to determine, among the individual ion lists, which ions are the same. This is the aim of the present step, called
 'grouping'.
 
-Various methods are available to proceed to the grouping step. In this tutorial, we will focus on the 'PeakDensity' method 
+Various methods are available to proceed to the grouping step. In this tutorial, we will focus on the 'PeakDensity' method
 that performs peak grouping based on time dimension peak densities.
 
 [Check the next 8 slides](../../tutorials/lcms-preprocessing/slides.html#groupchrompeaks),
@@ -578,17 +580,17 @@ than a given number of samples. Either a percentage of the total number of sampl
 > > The way to define what kind of classes would be relevant is not straightforward. It is a somehow complex combination of your study objectives,
 > > the kind of biological matrix you analyse, assumptions you may have on the presence or absence of some compounds...
 > > What could typically be considered is whether you have radically different kind of samples (distinct parts of an organism, distinct kind of
-> > sample preparation...) and whether you expect huge composition differences between specific biological groups of individuals. 
+> > sample preparation...) and whether you expect huge composition differences between specific biological groups of individuals.
 > > For example, if you study human blood samples in order to distinguish specificities between women and men, even if most of the metabolites
 > > present may be expected to be find in both groups (at various levels but always present), some may be specific to one such as hormones.
 > > Thus, you may consider putting men and women samples in distinct classes.
 > >
 > > In the Sacurine study, no specific a priori groups were defined. Thus, no specific assumption was taken into consideration regarding biological
-> > classes. Thus, in this tutorial we considered only three classes: one for samples, one for pools and one for blanks. 
+> > classes. Thus, in this tutorial we considered only three classes: one for samples, one for pools and one for blanks.
 > > Since pools are a mix of all biological samples,
 > > we may want to consider an ion only if it is found in every pools. Thus, we may consider setting the 'Minimum fraction of samples' parameter to 1.
 > > Considering that it sometimes happens that one sample can be a little out of the box for various reasons (pools do not make exception),
-> > we may consider to lower a little this threshold, for example using a proportion of 0.9. 
+> > we may consider to lower a little this threshold, for example using a proportion of 0.9.
 > >
 > > Please note that in our example, since the dataset contains only 3 pools, this would make no difference to 1.0 concerning the 'pools' class.
 > {: .comment}
@@ -697,9 +699,9 @@ the datasets number 62 and 63.
 >
 {: .tip}
 
-When looking back at the plots from plotChromPeakDensity.pdf, we can notice that in some cases there seems to be a small drift of retention time for some samples. 
-This phenomenon is well known with LC-MS techniques. To be able to attribute correct groups for peaks, it may be needed to perform some retention time 
-correction accross samples. Thus, the idea is (when needed) to apply a retention time strategy on the output of your grouping step, then to perform 
+When looking back at the plots from plotChromPeakDensity.pdf, we can notice that in some cases there seems to be a small drift of retention time for some samples.
+This phenomenon is well known with LC-MS techniques. To be able to attribute correct groups for peaks, it may be needed to perform some retention time
+correction accross samples. Thus, the idea is (when needed) to apply a retention time strategy on the output of your grouping step, then to perform
 a second grouping step on the corrected data.
 
 # Optional XCMS step: *retention time correction*
@@ -707,12 +709,12 @@ a second grouping step on the corrected data.
 Sometimes with LC-MS techniques, a deviation in retention time occurs from a sample to another. In particular, this is likely to be observed when you
 inject large sequences of samples.
 
-This optional step aims at correcting retention time drift for each peak among samples. The XCMS package provides two algorithms to do so. 
+This optional step aims at correcting retention time drift for each peak among samples. The XCMS package provides two algorithms to do so.
 [Check the next 4 slides](../../tutorials/lcms-preprocessing/slides.html#adjustrtime),
 you will find additional material to help you understand the retention time correction algorithms.
-In this training material we will focus on the "PeakGroups" method. 
+In this training material we will focus on the "PeakGroups" method.
 
-This correction is based on what is called *well behaved peaks*. 
+This correction is based on what is called *well behaved peaks*.
 One characteristic of these peaks is that they are found in all samples or at least in most of the samples.
 Sometimes it is difficult to find enough peaks present in all samples. The user can define a percentage of the total number of samples in which
 a peak should be found to be considered a well behaved peak. This parameter is called *minimum required fraction of samples*.
@@ -738,7 +740,7 @@ The algorithm uses statistical smoothing methods. You can choose between linear 
 >    > If you have a very large number of samples (*e.g.* a thousand), it might be impossible to find peaks that are present in 100% of your samples.
 If that is the case and you still set a very high value for the minimum required fraction of samples, the tool can not complete successfully the retention
 time correction.
-A special attention should also be given to this parameter when you expect a large number of peaks not to be present in part of your samples 
+A special attention should also be given to this parameter when you expect a large number of peaks not to be present in part of your samples
 (*e.g.* when dealing with some blank samples).
 >    {: .comment}
 >
@@ -981,12 +983,12 @@ the dataset number 77.
 >
 {: .hands_on}
 
-At this step, you get all the data needed to proceed to any appropriate data processing and analysis using the 3 tables you obtained from 
+At this step, you get all the data needed to proceed to any appropriate data processing and analysis using the 3 tables you obtained from
 this pre-processing workflow.
 
 > ### {% icon tip %} Tip: Switch your identifiers with **ID choice** {% icon tool %}
 >
-> You may have noticed the option provided in XCMS modules to specify a number of decimal places for m/z and RT values reported in 
+> You may have noticed the option provided in XCMS modules to specify a number of decimal places for m/z and RT values reported in
 ions' identifiers. This option, available for modules generating variableMetadata files, creates an additional column named *namecustom*.
 You can use this column to switch automatic ion IDs to these customised ones, using the **ID choice** {% icon tool %} tool.
 >
@@ -1011,17 +1013,17 @@ the raw files (used to determine sample IDs in XCMS) have automatically-generate
 >
 {: .tip}
 
-The pre-processing part of a metabolomic analysis corresponds to quite a few number of steps, depending of your analysis. 
-It can generate several versions of your 3 tables, with only one of interest for each at the end of the extraction process. 
-We highly recommend, at this step of a metabolomic workflow, to split your analysis by beginning a new Galaxy history with only 
+The pre-processing part of a metabolomic analysis corresponds to quite a few number of steps, depending of your analysis.
+It can generate several versions of your 3 tables, with only one of interest for each at the end of the extraction process.
+We highly recommend, at this step of a metabolomic workflow, to split your analysis by beginning a new Galaxy history with only
 the 3 tables you need. This will help you in limiting selecting the wrong datasets in further analyses, and bring a little tidiness
 for future review of your analysis process.
 
-We also recommend you to rename your 3 tables before proceeding with further data processing and analysis. 
-Indeed, you may have notice that the XCMS tools generate output names that contain the different XCMS steps you used, 
-enabling easy traceability while browsing your history. However, knowing that the next steps of analysis are also going to extend 
-the 3 tables’ names, if you keep the original names it will become very long and thus may reduce the names’ readability. 
-Hence, we highly recommend you to rename them with something short, e.g. ‘sampleMetadata’, ‘variableMetadata’ and ‘dataMatrix’, 
+We also recommend you to rename your 3 tables before proceeding with further data processing and analysis.
+Indeed, you may have notice that the XCMS tools generate output names that contain the different XCMS steps you used,
+enabling easy traceability while browsing your history. However, knowing that the next steps of analysis are also going to extend
+the 3 tables’ names, if you keep the original names it will become very long and thus may reduce the names’ readability.
+Hence, we highly recommend you to rename them with something short, e.g. ‘sampleMetadata’, ‘variableMetadata’ and ‘dataMatrix’,
 or anything not too long that you may find convenient.
 
 

@@ -16,6 +16,8 @@ key_points:
 - We preprocessed Nanopore sequences in order to improve their quality
 contributors:
 - gallardoalba
+tags:
+  - nanopore
 
 ---
 
@@ -97,8 +99,8 @@ In this example, we will use a dataset originally hosted in the __NCBI SRA datab
 >     ```
 >     - Assign a name to the new collection: `soil collection`
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
 {: .hands_on}

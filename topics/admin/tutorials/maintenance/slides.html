@@ -1,6 +1,7 @@
 ---
 layout: tutorial_slides
-logo: "GTN"
+logo: assets/images/gat.png
+video: true
 
 title: "Server Maintenance and Backups"
 zenodo_link: ""
@@ -24,7 +25,12 @@ contributors:
 
 # Server Maintenance
 
+???
+
+- Server Maintenance
+
 ---
+
 ## Dataset Cleanup
 
 Can only delete (or purge) dataset when all 'associations' pointing at it have been marked `deleted`.
@@ -34,6 +40,13 @@ Can only delete (or purge) dataset when all 'associations' pointing at it have b
 | `scripts/cleanup_datasets/pgcleanup.py` | PostgreSQL-optimized fast cleanup script |
 | `scripts/cleanup_datasets/cleanup_datasets.py` | General cleanup script |
 | `gxadmin cleanup <days>` | calls pgcleanup |
+
+???
+
+- One of the important admimn tasks is to keep an eye on the storage consumption.
+- Every instance should have a data rention policy defined and shared with users.
+- Codebase contains scripts that can assist with cleaning up and reclaiming space.
+- The gxadmin tool can assist with invoking these scripts.
 
 ---
 class: reduce70
@@ -78,6 +91,11 @@ optional arguments:
                         Log file directory
 ```
 
+???
+
+- Cleanup scripts provide various options for filtering on which datasets to take action.
+- Use the dry run option to verify what datasets you are about to affect.
+
 ---
 class: reduce70
 
@@ -90,6 +108,12 @@ class: reduce70
 | `purge_deleted_users` | <ul><li>Mark purged all users that are older than the specified number of days.</li><li>Mark purged all Histories whose user_ids are purged in this step.</li><li>Mark purged all HistoryDatasetAssociations whose history_ids are purged in this step.</li><li>Delete all UserGroupAssociations whose user_ids are purged in this step.</li><li>Delete all UserRoleAssociations whose user_ids are purged in this step EXCEPT FOR THE PRIVATE ROLE.</li><li>Delete all UserAddresses whose user_ids are purged in this step.</li></ul> |
 | `purge_deleted_histories` | <ul><li>Mark purged all Histories marked deleted that are older than the specified number of days.</li><li>Mark purged all HistoryDatasetAssociations in Histories marked purged in this step (if not already purged).</li></ul> |
 | `purge_deleted_hdas` | <ul><li>Mark purged all HistoryDatasetAssociations currently marked deleted that are older than the specified number of days.</li><li>Mark deleted all MetadataFiles whose hda_id is purged in this step.</li><li>Mark deleted all ImplicitlyConvertedDatasetAssociations whose hda_parent_id is purged in this step.</li><li>Mark purged all HistoryDatasetAssociations for which an ImplicitlyConvertedDatasetAssociation with matching hda_id is deleted in this step.</li></ul> |
+
+???
+
+- Some available actions are safer than others, for example "delete userless histories".
+- In Galaxy, when something is marked deleted, it still exists with a deleted flag.
+- Once purged the file is gone.
 
 ---
 class: reduce70
@@ -104,6 +128,11 @@ class: reduce70
 | `delete_datasets` | <ul><li>Mark deleted all Datasets whose associations are all marked as deleted (LDDA) or purged (HDA) that are older than the specified number of days.</li><li>JobExportHistoryArchives have no deleted column, so the datasets for these will simply be deleted after the specified number of days.</li></ul> |
 | `purge_datasets` | <ul><li>Mark purged all Datasets marked deleted that are older than the specified number of days.</li></ul> |
 
+???
+
+- Be wary about aggressive storage reclamation. It can aggravate users.
+- Well-defined and updated data retention policy brings benefits.
+
 ---
 # Additional cleaning scripts
 
@@ -112,8 +141,12 @@ class: reduce70
   * Has email templated notification (can also be used to just send info without deleting).
   * Can be restricted to a tool.
 
+???
+
+- One of the included scripts can send templated email to the affected users.
+- Take advantage of this to give your users some time to backup their data before you reclaim the space.
+
 ---
-class: left
 
 ## Other disk space cleanups
 
@@ -122,10 +155,18 @@ class: left
 - `tmpwatch` your `new_file_path`
   - `/usr/bin/tmpwatch -v --mtime --dirmtime 7d /srv/galaxy/var/tmp`
 
+???
+
+- Galaxy generates intermediate data as part of the job execution.
+- These should be automatically cleaned up unless you change the cleanup_job flag in galaxy's configuration.
+
 ---
-class: left, reduce90
 
 # Backups
+
+???
+
+- Backups
 
 ---
 class: left
@@ -148,6 +189,12 @@ If absolute reproducibility matters:
 | ---- | ---- |
 | Tool dependencies | `/srv/galaxy/var/dependencies` |
 | Data manager-installed reference data | `/srv/galaxy/var/tool-data` |
+
+???
+
+- Many parts of Galaxy are convenient to back up since they are straight folder hierarchies.
+- Use your system's recommended way to back up galaxy's database.
+- If you have local modifications to galaxy's code back up those as well.
 
 ---
 class: left
@@ -179,3 +226,9 @@ Recreatable at runtime:
 If lost *database* or *managed/mutable configs*, then **restore these first**
 
 Then run playbook
+
+???
+
+- In case of an incident do not rush even when pressure is piling.
+- Careful planning of the restoration procedure will save you from hasty recovery attempts with errors.
+- Consider running a recovery drill pretending that e.g. your galaxy machine was wiped.

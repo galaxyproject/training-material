@@ -1,6 +1,6 @@
 ---
 layout: tutorial_slides
-logo: "GTN"
+logo: assets/images/gat.png
 video: true
 
 title: "Ansible"
@@ -29,9 +29,8 @@ Specifies what software is installed, how it is configured
 
 ???
 
-Configuration management manages the configuration of machines.
-
-It specifies what software should be installed, and how it should be configured
+- Configuration management manages the configuration of machines.
+- It specifies what software should be installed, and how it should be configured
 
 ---
 
@@ -44,17 +43,12 @@ It specifies what software should be installed, and how it should be configured
 
 ???
 
-So why do you want CM?
-
-What do you do when things go wrong?
-
-What if your server dies?
-
-Did you backup your configuration?
-
-Did you back up your webserver configuration?
-
-Ansible provides an answer.
+- So why do you want configuration management?
+- What do you do when things go wrong?
+- What if your server dies?
+- Did you backup your configuration?
+- Did you back up your webserver configuration?
+- Ansible provides an answer.
 
 ---
 
@@ -68,7 +62,7 @@ Ansible provides an answer.
 
 ???
 
-The goals of using CM are reproducibility, uniformity, and recovery.
+- The goals of using CM are reproducibility, uniformity, and recovery.
 
 ---
 
@@ -86,13 +80,10 @@ The goals of using CM are reproducibility, uniformity, and recovery.
 
 ???
 
-Ansible is a very popular CM tool, sponsored by Red hat.
-
-There are several alternatives, but Galaxy Project uses Ansible.
-
-It uses an agent-less model. You SSH into machines and execute commands on them.
-
-It has many popular pre-existing roles for common tasks.
+- Ansible is a very popular CM tool, sponsored by RedHat.
+- There are several alternatives, but Galaxy Project uses Ansible.
+- It uses an agent-less model. You SSH into machines and execute commands on them.
+- It has many popular pre-existing roles for common tasks.
 
 ---
 
@@ -100,7 +91,7 @@ It has many popular pre-existing roles for common tasks.
 
 ???
 
-Some important terms you should know
+- Some important terms you should know
 
 ---
 
@@ -119,13 +110,13 @@ db_1.example.org ansible_user=root
 
 ???
 
-First is the Inventory File. This file lists all of your hosts.
-
-The group name is in square brackets. Group names are used to select a set of systems, on which Ansible should operate.
-
-It is possible to assign variables to hosts and groups.
-
-Here we override the ansible user variable on two hosts. This variable controls which user is used in login.
+- First is the Inventory File.
+- This file lists all of your hosts.
+- The group name is in square brackets.
+- Group names are used to select a set of systems, on which Ansible should operate.
+- It is possible to assign variables to hosts and groups.
+- Here we override the ansible user variable on two hosts.
+- This variable controls which user is used in login.
 
 ---
 
@@ -151,15 +142,11 @@ A **task** is an invocation of single module with its configuration.
 
 ???
 
-Here is an example of invoking the copy module and the package module.
-
-Copy copies a file from source, on the local host to destination, on the remote host.
-
-Then it sets some attributes about the file like the owner and mode.
-
-Next we see an example of the package module. This is a generic OS package manager module.
-
-It ensures that for the package named n t p date, its state is present, i.e. installed.
+- Here is an example of invoking the copy module and the package module.
+- Copy copies a file from source, on the local host to destination, on the remote host.
+- Then it sets some attributes about the file like the owner and mode.
+- Next we see an example of the package module. This is a generic OS package manager module.
+- It ensures that for the package named ntpdate, its state is present, i.e. installed.
 
 ---
 
@@ -206,17 +193,12 @@ with a predefined directory structure:
 
 ???
 
-A role is a collection of tasks, files, templates, variables, and handlers.
-
-Tasks are things to be executed, like a copy task to add files to a remote machine.
-
-Files have static, unchanging files that are used by the tasks.
-
-The templates are like files, but they contain variables which will be replaced, when ansible deploys the file.
-
-Variables contain definitions of variables for use in templates and tasks.
-
-Handlers manage services, restarting them when configuration changes.
+- A role is a collection of tasks, files, templates, variables, and handlers.
+- Tasks are things to be executed, like a copy task to add files to a remote machine.
+- Files have static, unchanging files that are used by the tasks.
+- The templates are like files, but they contain variables which will be replaced, when ansible deploys the file.
+- Variables contain definitions of variables for use in templates and tasks.
+- Handlers manage services, restarting them when configuration changes.
 
 ---
 
@@ -248,15 +230,11 @@ A YAML file listing a set of tasks and/or roles that should be applied to a grou
 
 ???
 
-This is an example playbook.
-
-We give it a name, in this case C V M F S.
-
-Then we select some hosts, i.e. all hosts known to our inventory file.
-
-We specify some additional variables.
-
-And then we invoke two roles.
+- This is an example playbook.
+- We give it a name, in this case CVMFS.
+- Then we select some hosts, i.e. all hosts known to our inventory file.
+- We specify some additional variables.
+- And then we invoke two roles.
 
 ---
 
@@ -276,11 +254,9 @@ $ANSIBLE_VAULT;1.1;AES256
 
 ???
 
-If you have secrets like API keys or passwords, you need to use Vault.
-
-Vault encrypts your secrets with a password, so you can include them in your playbooks.
-
-This lets you collaborate on playbooks and infrastructure publicly with git.
+- If you have secrets like API keys or passwords, you need to use Vault.
+- Vault encrypts your secrets with a password, so you can include them in your playbooks.
+- This lets you collaborate on playbooks and infrastructure publicly with git.
 
 ---
 
@@ -294,11 +270,9 @@ This lets you collaborate on playbooks and infrastructure publicly with git.
 
 ???
 
-There are multiple ways of designing playbooks, use one that fits your use case.
-
-Some prefer a playbook which does everything, so no step can be forgotten.
-
-Others prefer playbooks which do individual steps. These can be faster, and you can only run the ones that change.
+- There are multiple ways of designing playbooks, use one that fits your use case.
+- Some prefer a playbook which does everything, so no step can be forgotten.
+- Others prefer playbooks which do individual steps. These can be faster, and you can only run the ones that change.
 
 ---
 
@@ -312,8 +286,6 @@ Others prefer playbooks which do individual steps. These can be faster, and you 
 
 ???
 
-Ansible has a repository for public roles.
-
-There are a huge number of available roles for common tasks.
-
-It is called ansible Galaxy, but it is a different Galaxy.
+- Ansible has a repository for public roles.
+- There are a huge number of available roles for common tasks.
+- It is called Ansible Galaxy, but it is a different Galaxy.

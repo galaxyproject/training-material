@@ -1,6 +1,7 @@
 ---
 layout: tutorial_slides
-logo: "GTN"
+logo: assets/images/gat.png
+video: true
 
 title: "Galaxy Monitoring with gxadmin"
 questions:
@@ -31,6 +32,13 @@ Can be very useful for:
 
 But consider: [`gxadmin`](https://github.com/usegalaxy-eu/gxadmin) and sharing your SQL
 
+???
+
+- Admins often need to run database queries.
+- Debugging the live application in production is difficult, but running queries is easy.
+- Additionally running SQL queries is commonly used for debuggin and reporting and analytics.
+- The community collects queries we commonly use in a program called gxadmin.
+
 ---
 # Database Queries
 
@@ -51,6 +59,12 @@ HAVING date_trunc('month', j.create_time) >= '2016-09-01'
 AND date_trunc('month', j.create_time) < '2016-11-01'
 ORDER BY month, j.state;
 ```
+
+???
+
+- We often get requests like how many jobs were run in a time period, and did they finish successfully.
+- So we write some SQL like this.
+- As an admin, you'll want to understand SQL.
 
 ---
 # Database Queries
@@ -74,6 +88,25 @@ ORDER BY month, j.state;
  2016-10-01 00:00:00 | waiting |        17
 (14 rows)
 ```
+
+???
+
+- Here is the output of such a query.
+- SQL is very powerful for extracting data and graphs for reporting.
+
+---
+# gxadmin
+
+- It's unpleasant to write queries every time you need them.
+- So the community collects SQL in `gxadmin`.
+- It's a giant bash script full of SQL and some magic ✨
+- [github.com/usegalaxy-eu/gxadmin](https://github.com/usegalaxy-eu/gxadmin)
+
+???
+
+- We often re-run the same queries.
+- gxadmin makes it easier by storing the useful queries.
+- everyone is welcome to contribute to it.
 
 ---
 # Database Queries
@@ -99,6 +132,13 @@ ORDER BY r_count DESC
 LIMIT 12;
 ```
 
+???
+
+- However, some of these queries we run over and over.
+- And those we include in gxadmin.
+- This way every admin has access to all of the interesting queries we run.
+- And we don't get repetitive strain injury typing SQL.
+
 ---
 # Database Queries
 
@@ -119,6 +159,10 @@ LIMIT 12;
  iracooke                                 |      30
 (12 rows)
 ```
+
+???
+
+- Example output from the previous query.
 
 ---
 
@@ -150,6 +194,12 @@ request_cpus            |   `20`
 request_memory          |   `64G`
 ```
 
+???
+
+- Another extremely common query is: what is the status of this job?
+- There is a gxadmin command which aggregates information about jobs.
+- This can help you debug job failure to run issues.
+
 ---
 
 # Database Queries
@@ -174,6 +224,12 @@ FROM galaxy_user
 ORDER BY create_time desc
 LIMIT 40
 ```
+
+???
+
+- Another common query, who has recently joined our server?
+- This is an easy command to write, but it is also included in gxadmin.
+
 ---
 
 # Database Queries
@@ -199,6 +255,12 @@ LIMIT 40
  5567 | 2019-04-23 05:12:43+02 |            | xxx         | xxx         |              | t
 ```
 
+???
+
+- Example output of the previous query.
+- With SQL you can choose just the columns or data that is relevant to you.
+- This may not be so easily available in the interface.
+
 ---
 
 # Tabular Output
@@ -217,6 +279,12 @@ $ gxadmin tsvquery ...
 $ gxadmin csvquery ...
 ```
 
+???
+
+- However to reuse this data in other applications, the postgres format is not convenient.
+- There is special syntax you can use to output CSV.
+- gxadmin includes query variants to do this as well.
+
 ---
 
 # Monitoring
@@ -232,10 +300,8 @@ queue,tool_id=unicycler/0.4.7.0,state=running count=10
 queue,tool_id=hisat2/2.1.0+galaxy4,state=running count=9
 ```
 
----
+???
 
-# gxadmin
-
-- Many of these queries are interesting to most or all admins.
-- Most queries have versions already included in `gxadmin` with more detail than you might write.
-- Check first if [`gxadmin`](https://github.com/usegalaxy-eu/gxadmin/) already supports your query, and feel free to contribute back any changes or additions you might have.
+- For monitoring, many galaxy sites use Influx DB.
+- gxadmin supports exporting influx compatible format.
+- This makes it easy to add new data and graphs to your monitoring.

@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Creating a new tutorial - Defining the technical infrastructure"
+title: "Tools, Data, and Workflows for tutorials"
 questions:
   - "How can we define the technical infrastructure for a tutorial?"
   - "How to define the tools needed for a tutorial?"
@@ -15,6 +15,7 @@ objectives:
   - "Creating a Galaxy Docker flavor with the needed tools, data and workflows for a tutorial"
   - "Testing the Galaxy Docker flavor of a tutorial"
 time_estimation: "30m"
+subtopic: writing
 key_points:
   - "Tools, data and workflows can be easily integrated in a Docker flavor to have a useful technical support for a tutorial"
   - "A Galaxy Docker flavor is a great support for training"
