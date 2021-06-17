@@ -60,16 +60,16 @@ ready to run on a developer linux workstation using Docker. Generated tools are 
 what the end user will see. Jobs can be re-run to edit and update generated tools, so Galaxy becomes an integrated development environment for Galaxy tools.
 
 A[`Hello Galaxy!` using the ToolFactory demonstration](https://youtu.be//DK1eKz5TRs4) is available if you'd like to see a walk-through of some of
-the hands-on material in this tutorial. You can see whether it looks useful for your work before you start the detailed material below.
+the hands-on material in this tutorial. You can see whether it looks useful for your work and decide whether to read the material below.
 
-This first tutorial is a slow introduction. For some developers, it may be too slow and the second tutorial may be a better place to start.
- This one steps in some detail through the process of using the ToolFactory
-to generate `Hello World!` style simple demonstration Galaxy tools, and how the Appliance can be installed locally.
+This first tutorial is a slow introduction. For some developers, it may be too slow and the second tutorial may be a better place to start. This one steps
+in some detail through the process of using the ToolFactory
+to generate `Hello World!` style simple demonstration Galaxy tools.
 
 The reader will soon learn if it might be adapted to their work. If so, an [Advanced ToolFactory tutorial]({% link topics/dev/tutorials/tool-generators-advanced/tutorial.md %}) is
 available if the material here is relevant to your needs and you would like to learn more details about the different kinds of tools and features the ToolFactory offers.
 
-Experienced galaxy tool developers already have specialised tools and training to suit their needs so may not gain much from this material.
+Experienced galaxy tool developers already have specialised tools and training so may not gain much from this material.
 Users new to Galaxy from other scientific disciplines not yet familiar with the manual tool development process,
 may find the ToolFactory appliance useful for familiarising themselves with tool development in Galaxy.
 
@@ -86,13 +86,14 @@ may find the ToolFactory appliance useful for familiarising themselves with tool
 Tools are the fundamental building blocks for analyses in Galaxy. Thousands are available in the [project tool library](https://toolshed.g2.bx.psu.edu) from
 many different kinds of science. Galaxy
 tools can be created from almost any Linux command line software packages or interpreter scripts. What happens
-at tool execution is decoupled from the framework itself, so the framework is agnostic to scientific discipline or coding language.
-This is one reason for rapid uptake in new data intensive scientific areas. In many cases, sets of discipline specific tools are being developed and these
-are attracting whole new communities of scientists into Galaxy.
+at tool execution is decoupled from the framework itself, so the framework is indifferent to scientific discipline or coding language.
+This is one reason for rapid uptake in new data intensive scientific areas. In many cases, growing sets of discipline specific tools are attracting
+whole new communities of scientists into the Galaxy community.
 
-Tool execution is tightly constrained and secured. Tool form exposed user controlled parameters and data inputs are the only things that can be changed
-before execution. Everything else is fixed. This is ideal for non-programmer Galaxy users who rely on prepared tools for their work. Tools are
-utterly predictable to the point of being about as reproducible as any useful complex computing component is likely to be.
+Tool execution is tightly constrained and secured. The only things that can be changed
+before execution are tool form exposed user-controlled settings, and data input selections. Everything else is fixed.
+This is ideal for non-programmer Galaxy users who rely on prepared tools for their work. Tools are
+utterly predictable, to the point of being about as reproducible as any useful complex computing component is likely to be.
 This is one of the strengths of the Galaxy framework for users requiring reproducible and shareable scientific analyses.
 
 ## Galaxy Interactive Tools and Interactive Environments (GxIT/GIE)
@@ -124,14 +125,14 @@ This tutorial introduces that unusual tool.
 
 # The ToolFactory Appliance
 
-The ToolFactory is a specialised tool. It implements an automated, form driven code generator that installs newly generated tools so you can try them straight away
-in Galaxy. The ToolFactory is distributed as a Docker appliance and can be "popped up" and ready to run in a few minutes.
+The ToolFactory implements an automated, form driven wrapper code generator, and an installer for newly generated tools so you can try them straight away
+in Galaxy. The ToolFactory is distributed as a Docker appliance and can be "popped up" and ready to run in a few minutes - well, 5 or 10 perhaps.
 
 > ### {% icon tip %} The ToolFactory appliance provides a fully featured Galaxy server.
 > - It is a private local desktop Galaxy server, ideal for tinkering and experimentation, learning how the Galaxy server works
 and for developing new tools for new kinds of scientists using Galaxy.
 > - Any Galaxy tool from the toolshed can be installed and used.
-> - Any reasonably simple script can be generated as a tool.
+> - Any simple script can have a tool wrapper generated and installed as a new tool in the Appliance.
 > - Newly generated tools appear in the tool menu after a refresh, and can be viewed and used as the user will see them.
 > - Tool generation jobs can be rerun using the {% icon galaxy-refresh %} button on the history item after editing the form to make changes to the tool the user will see in Galaxy.
 > - The Appliance is a Toolfactory flavour of the [docker-galaxy-stable resource](https://github.com/bgruening/docker-galaxy-stable/tree/master/compose).
@@ -145,13 +146,14 @@ and for developing new tools for new kinds of scientists using Galaxy.
 >    - Production is best done on a professionally maintained service, but please, not a public one.
 {: .tip }
 
-The Appliance was developed for skilled programmers who need new Galaxy tools for their own use or for users they support. Any user comfortable with scientific or general
-scripting languages on a Linux command
-line may find it useful if they ever need a Galaxy tool that wraps a working script. Shell utilities and scripting language interpreters supported by Conda can be used.
+The Appliance was developed for programmers who need scripts they write turned in to new Galaxy tools for their own use and if sufficiently useful,
+for others to share. Any user comfortable with scientific or general scripting languages on a Linux command
+line may find it useful if they ever need a Galaxy tool that wraps a working script. Linux command line utilities and scripting language interpreters supported by Conda can be used.
+Some Conda packages can also be used without a script, but the focus is on scripts.
 
-Generated tools pass Planemo lint if they take an input, and are functionally indistinguishable from equivalent manually written tools. A second tool can be used to finalise
-ToolFactory untested archives. It uses Planemo. The tested toolshed archives contain a test based on the test data provided
-at tool generation.
+Generated tools pass Planemo lint (if they take an input - some of the test tools do not!), and are functionally indistinguishable from equivalent
+manually written tools. A second tool can be used to finalise ToolFactory untested archives. It uses Planemo.
+The tested toolshed archives contain a test based on the test data provided at tool generation.
 
 Working generated examples using bash, Python, Rscript, Lisp, Prolog, Perl and sed are provided and described below. Many demonstrate ToolFactory features.
 All can be updated and changed easily, supporting learning by experimenting. More useful tools can be developed and tested using more complex scripts and as many inputs, outputs
@@ -161,11 +163,13 @@ If you are a scientist/programmer or software developer new to Galaxy and new to
 It introduces an automated way to convert any useful script into a toolshed ready tool, quickly *inside* Galaxy.
 
 
-> ### {% icon tip %} Alternative ways to generate tools:
-> - The [Galaxy Language Server](https://github.com/galaxyproject/galaxy-language-server) is a rapidly developing specialised semi-automated tool building environment with VCS bindings.
-> - Planemo can [generate tool XML](https://planemo.readthedocs.io/en/latest/writing_standalone.html) with an optional test.
->    - Planemo is recommended for developers who will focus on Galaxy tools. Excellent documentation.
->    - Widely used by experienced developers. Requires relatively little time to figure out - Galaxy tool syntax takes longer.
+> ### {% icon tip %} Alternative ways to generate and see tools:
+> - The [Galaxy Language Server](https://github.com/galaxyproject/galaxy-language-server)
+>   - Undergoing rapid development.
+>   - Specialised semi-automated tool building environment with VCS bindings.
+> - Planemo can manually [generate and serve tool XML](https://planemo.readthedocs.io/en/latest/writing_standalone.html) with an optional test.
+>    - Planemo is recommended for developers who will focus on Galaxy tools on the command line. Outstanding documentation.
+>    - Widely used. Requires relatively little time to figure out - Galaxy tool syntax takes longer.
 >    - No GUI. Command line only. Can create archives with additional steps.
 >    - Need to pass all i/o and parameter details at once on the command line.
 >    - Takes longer to learn to use and less accessible to many users than a form driven GUI might be.
@@ -405,13 +409,23 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >    >     - Change your admin password
 >   {: .tip}
 >
+>    > ### {% icon tip %} Appliance disposal to free up desktop resources when no longer needed
+>    > - Save any useful generated material from the `export` directory or from the running Appliance.
+>    > - Delete the `...compose/export` directory - you will need `sudo rm -rf export/*` and perhaps `sudo rm -rf export/.d*`
+>    >   - Then you can delete the parent `toolfactory-galaxy-server` directory
+>    > - Use `docker system prune` and respond `y` to the prompt to clean up any damaged or dangling images and containers.
+>    > - Use `docker volume prune` and respond `y` to the prompt to remove the shared galaxy-central and /etc/galaxy volumes.
+>    > - Remove the 2 pulled `quay.io/fubar2/toolfactory*` docker images in the usual way.
+>   {: .tip}
+>
+>
 > 5. Your appliance should run a local Galaxy on [port 8080 of your workstation](http://localhost:8080) after about 5 minutes of activity on the logs.
 >
 >    - Login with the username `admin@galaxy.org` and the password `password`
 >    - This is obviously insecure but convenient and easily changed at first login.
 >    - The container `/export` directory is mounted locally at `compose/export` so you can find your generated and tested tools for sharing.
 >
->    > ### {% icon tip %} Tip: Demonstration tools are the functional documentation
+>    > ### {% icon tip %} Demonstration tools are the best functional documentation.
 >    >
 >    > - At first login you will find the demonstration history ready to explore if you waited for all the Conda activity to die down
 >    > - It takes a minute or two to import because the dependencies for the ToolFactory must first be installed.
