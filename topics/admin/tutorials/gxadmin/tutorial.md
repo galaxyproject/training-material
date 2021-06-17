@@ -53,7 +53,7 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 >       version: 0.1.0
 >     - src: galaxyproject.pulsar
 >       version: 1.0.7
->    +- src: usegalaxy_eu.gxadmin
+>    +- src: galaxyproject.gxadmin
 >    +  version: 0.0.8
 >    {% endraw %}
 >    ```
@@ -78,7 +78,7 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 >         - usegalaxy_eu.rabbitmq
 >         - galaxyproject.nginx
 >         - galaxyproject.cvmfs
->    +    - usegalaxy_eu.gxadmin
+>    +    - galaxyproject.gxadmin
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add the gxadmin role"}
