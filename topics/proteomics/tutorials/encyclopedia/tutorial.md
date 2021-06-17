@@ -43,13 +43,6 @@ The EncyclopeDIA {% cite Searle2020 %} workflow described in this tutorial conta
 >
 > In this tutorial, we will cover:
 >
-> 1. Basics of DIA and differences from DDA.
-> 2. Obtaining the data used in the tutorial.
-> 3. Data conversion with msconvert.
-> 4. Introduction to Chromatogram Libraries and their advantages.
-> 5. Chromatogram Library generation.
-> 6. How to approach DIA data analysis without a Spectral Library.
-> 7. Analysis of DIA data walkthrough with EncyclopeDIA.
 > {:toc}
 >
 {: .agenda}
