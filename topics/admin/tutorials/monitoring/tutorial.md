@@ -79,7 +79,7 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    @@ -28,3 +28,5 @@
 >       version: 1.0.7
 >     - src: usegalaxy_eu.gxadmin
->       version: 0.0.3
+>       version: 0.0.8
 >    +- src: usegalaxy_eu.influxdb
 >    +  version: v6.0.7
 >    {% endraw %}
@@ -735,7 +735,7 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 >
 >    ```yml
 >    - src: usegalaxy_eu.gxadmin
->      version: 0.0.3
+>      version: 0.0.8
 >    ```
 >
 > 2. Install the role with `ansible-galaxy install -p roles -r requirements.yml`

@@ -54,7 +54,7 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 >     - src: galaxyproject.pulsar
 >       version: 1.0.7
 >    +- src: usegalaxy_eu.gxadmin
->    +  version: 0.0.3
+>    +  version: 0.0.8
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirement"}
