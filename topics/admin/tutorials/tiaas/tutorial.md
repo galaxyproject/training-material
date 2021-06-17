@@ -153,7 +153,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    +++ b/galaxy.yml
 >    @@ -34,3 +34,4 @@
 >         - galaxyproject.cvmfs
->         - usegalaxy_eu.gxadmin
+>         - galaxyproject.gxadmin
 >         - dj-wasabi.telegraf
 >    +    - usegalaxy_eu.tiaas2
 >    {% endraw %}

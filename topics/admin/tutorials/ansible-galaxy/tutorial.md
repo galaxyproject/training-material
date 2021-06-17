@@ -78,6 +78,7 @@ As with every role, the entry point for execution is the `tasks/main.yml` file. 
 - [Fetching Dependencies](#dependencies)
 - [Managing Mutable Setup](#mutable-setup)
 - [Managing the Database](#managing-the-database)
+- [Building the Client](#building-the-client)
 
 The actions each set of tasks performs are described below.
 
