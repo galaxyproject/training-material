@@ -148,7 +148,6 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 
   This output will be the DIA data analyzed with EncyclopeDIA.
 
-## **_msconvert_**
 
 > ### {% icon hands_on %} Hands-on: Conversion of GPF DIA mass spectrometry raw data to mzML data-type.
 >
@@ -192,7 +191,6 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 >
 {: .question}
 
-## **_msconvert_**
 
 > ### {% icon hands_on %} Hands-on: Conversion of Experimental DIA mass spectrometry raw data to mzML data-type.
 >
