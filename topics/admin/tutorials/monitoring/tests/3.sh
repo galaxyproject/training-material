@@ -1,0 +1,1 @@
+telegraf --test | grep disk

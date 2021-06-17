@@ -45,18 +45,85 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 >
 > 1. Edit your `requirements.yml` and add the following:
 >
->    ```yml
->    - src: usegalaxy_eu.gxadmin
->      version: 0.0.3
+>    {% raw %}
+>    ```diff
+>    --- a/requirements.yml
+>    +++ b/requirements.yml
+>    @@ -26,3 +26,5 @@
+>       version: 0.1.0
+>     - src: galaxyproject.pulsar
+>       version: 1.0.7
+>    +- src: galaxyproject.gxadmin
+>    +  version: 0.0.8
+>    {% endraw %}
 >    ```
+>    {: data-commit="Add requirement"}
 >
-> 2. Install the role with `ansible-galaxy install -p roles -r requirements.yml`
+> 2. Install the role with:
 >
-> 3. Add the role to your playbook, it should run as root
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > ansible-galaxy install -p roles -r requirements.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
+> 3. Add the role to your playbook:
+>
+>    {% raw %}
+>    ```diff
+>    --- a/galaxy.yml
+>    +++ b/galaxy.yml
+>    @@ -32,3 +32,4 @@
+>         - usegalaxy_eu.rabbitmq
+>         - galaxyproject.nginx
+>         - galaxyproject.cvmfs
+>    +    - galaxyproject.gxadmin
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add the gxadmin role"}
 >
 > 4. Run the playbook
 >
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
 {: .hands_on}
+
+With that, `gxadmin` should be installed! Now, test it out:
+
+> ### {% icon hands_on %} Hands-on: Test out gxadmin
+>
+> 1. Run `gxadmin` as the galaxy user and list recently registered users:
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > sudo -u galaxy gxadmin query latest-users
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
+>    > ### {% icon code-in %} Output
+>    > ```bash
+>    >  id |          create_time          | disk_usage | username |       email        | groups | active
+>    > ----+-------------------------------+------------+----------+--------------------+--------+--------
+>    >   1 | 2021-06-09 12:25:59.299651+00 | 218 kB     | admin    | admin@example.org  |        | f
+>    > (1 rows)
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
+{: .hands_on}
+
+> ```bash
+> 1.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
 
 ## Configuration
 

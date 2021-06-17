@@ -34,7 +34,7 @@ questions:
 - How can a create a decision tree?
 - How can I assess a linear regression model?
 objectives:
-- Understand the ML taxonomy and the commonly used machine learning algorithms for analysing "omics" data
+- Understand the ML taxonomy and the commonly used machine learning algorithms for analysing -omics data
 - Understand differences between ML algorithms categories and to which kind of problem they can be applied
 - Understand different applications of ML in different -omics studies
 - Use some basic, widely used R packages for ML
@@ -127,7 +127,7 @@ Tip 4 in the "Ten quick tips for machine learning in computational biology" ({% 
 
 # Exploratory Data Analysis (EDA) and Unsupervised Learning
 
-Before diving in the tutorial, we need to open RStudio. If you do not know how or never interacted with RStudio, please follow the [dedicated tutorial]({% link topics/galaxy-interface/tutorials/rstudio/tutorial.md %}).
+Before diving in the tutorial, we need to open {% tool [RStudio](interactive_tool_rstudio) %}. If you do not know how or never interacted with RStudio, please follow the [dedicated tutorial]({% link topics/galaxy-interface/tutorials/rstudio/tutorial.md %}).
 
 {% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
 

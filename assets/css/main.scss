@@ -605,6 +605,14 @@ nav input.nicer {
             padding-left: 1em;
         }
 
+        &.spoken {
+            display: none;
+        }
+
+        &.hidden {
+            display: none;
+        }
+
         &.matrix {
             @include matrix-table();
         }
@@ -613,6 +621,10 @@ nav input.nicer {
             @include tutorial-box($feedback-color, $text-color);
         }
     }
+
+	.pre-break-lines code {
+		white-space: pre-wrap;
+	}
 
     .fold-unfold {
         margin-left: $tutorial-box-spacing;
@@ -1107,4 +1119,11 @@ video::cue {
         padding-right: 1em;
         color: #555;
     }
+}
+
+abbr {
+	// Based on https://developer.mozilla.org/en-US/docs/Web/HTML/Element/abbr#default_styling
+	text-decoration: underline dotted;
+	cursor: help;
+	font-variant: none;
 }

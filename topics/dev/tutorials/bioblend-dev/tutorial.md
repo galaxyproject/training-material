@@ -25,18 +25,27 @@ time_estimation: "3h"
 key_points:
     - "BioBlend is a Python library that provides methods for easy interaction with the Galaxy API."
     - "Implementing BioBlend methods is generally quite an easy process, making it well suited to beginners and a viable stepping stone into Galaxy development."
+subtopic: api
 contributors:
     - rikeshi
     - simonbray
+
+abbreviations:
+    LDA: Library Dataset Association
+    HDA: History Dataset Association
+    LDCA: Library Dataset Collection Association
+    HDCA: History Dataset Collection Association
+    API: Application Programming Interface
+    PR: Pull Request
 ---
 
 # Introduction
 
 BioBlend ({% cite Sloggett2013 %}) is a Python library to enable simple interaction with Galaxy ({% cite Afgan2018 %}) via the command line or scripts.
 
-Galaxy is a data analysis platform for accessible, reproducible and transparent computational research. It includes a web interface through which users can design and perform tasks in a visual and interactive manner. The Galaxy server also exposes this functionality through its REST-based Application Programming Interface (API).
+Galaxy is a data analysis platform for accessible, reproducible and transparent computational research. It includes a web interface through which users can design and perform tasks in a visual and interactive manner. The Galaxy server also exposes this functionality through its REST-based {API}.
 
-Computer programs can communicate with the Galaxy server through this API and perform similar tasks as can be achieved manually via the web interface. The program sends a network request to a URL of an API endpoint. The server then computes the result for this request and sends back a response to the program.
+Computer programs can communicate with the Galaxy server through this {API} and perform similar tasks as can be achieved manually via the web interface. The program sends a network request to a URL of an {API} endpoint. The server then computes the result for this request and sends back a response to the program.
 
 BioBlend provides classes and methods that handle the specific details of this communication for Python programs. Similar libraries also exist for interacting with Galaxy via other programming languages:
 
@@ -65,7 +74,7 @@ The GitHub repositories can be found at:
 
 To contribute to BioBlend, a GitHub account is required.
 
-Changes are proposed via a pull request (PR). This allows the project maintainers to review the changes and suggest improvements.
+Changes are proposed via a {PR}. This allows the project maintainers to review the changes and suggest improvements.
 
 The general steps are as follows:
 
@@ -73,11 +82,11 @@ The general steps are as follows:
 2. Make changes in a new branch
 3. Open a pull request for this branch in the upstream BioBlend repository
 
-It is generally a good idea to enable the “Allow edits and access to secrets by maintainers” option for the PR. Enabling this option gives maintainers more freedom to help out.
+It is generally a good idea to enable the “Allow edits and access to secrets by maintainers” option for the {PR}. Enabling this option gives maintainers more freedom to help out.
 
 # Downloading Galaxy and BioBlend
 
-Now we are ready to set up our development environment! Since BioBlend communicates with the Galaxy API, we must also set up a local Galaxy server in order to test BioBlend functionality.
+Now we are ready to set up our development environment! Since BioBlend communicates with the Galaxy {API}, we must also set up a local Galaxy server in order to test BioBlend functionality.
 We use the [git](https://git-scm.com) versioning tool to download the repositories.
 
 For this we require a public SSH key associated with our GitHub account. It makes sense to set this up now, since pushing changes to GitHub without a public key will prompt for credentials every time. See the [GitHub Docs](https://docs.github.com/en/github-ae@latest/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) for information on setting up an SSH key.
@@ -102,7 +111,7 @@ For this we require a public SSH key associated with our GitHub account. It make
 
 ## Structure of the Galaxy API
 
-The source code for the API endpoints is contained in various files under [lib/galaxy/webapps/galaxy/api/](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/webapps/galaxy/api) in the Galaxy source code. Each of these files contains a controller which exposes functionality for a specific entity. For example, the dataset-related functionality is contained in the `DatasetsController` class in the [datasets.py](https://github.com/galaxyproject/galaxy/blob/v21.01/lib/galaxy/webapps/galaxy/api/datasets.py#L33) file.
+The source code for the {API} endpoints is contained in various files under [lib/galaxy/webapps/galaxy/api/](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/webapps/galaxy/api) in the Galaxy source code. Each of these files contains a controller which exposes functionality for a specific entity. For example, the dataset-related functionality is contained in the `DatasetsController` class in the [datasets.py](https://github.com/galaxyproject/galaxy/blob/v21.01/lib/galaxy/webapps/galaxy/api/datasets.py#L33) file.
 
 Additionally, the [buildapp.py](https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/webapps/galaxy/buildapp.py) file contains a complete listing of all the endpoints.
 
@@ -112,9 +121,9 @@ Additionally, the [buildapp.py](https://github.com/galaxyproject/galaxy/blob/dev
 
 
 > ### {% icon tip %} Going deeper into the Galaxy back-end code
-> The various Galaxy API methods that are exposed to the outside are contained in controller classes. These contain the endpoint methods corresponding to the URLs of the Galaxy API. These endpoint methods handle the incoming requests from BioBlend.
+> The various Galaxy {API} methods that are exposed to the outside are contained in controller classes. These contain the endpoint methods corresponding to the URLs of the Galaxy {API}. These endpoint methods handle the incoming requests from BioBlend.
 >
-> A focus for development of the Galaxy API is to make these controllers as “terse” as possible. This basically means that any logic not strictly required by the API endpoint method is moved to a corresponding manager class. This approach separates the API more cleanly from internal functionality. The manager classes should contain as much of the functionality as possible. An example is the [`DatasetManager`](https://github.com/galaxyproject/galaxy/blob/v21.01/lib/galaxy/managers/datasets.py#L26), referenced to regularly by the `DatasetsController` which is exposed directly to the API.
+> A focus for development of the Galaxy {API} is to make these controllers as “terse” as possible. This basically means that any logic not strictly required by the {API} endpoint method is moved to a corresponding manager class. This approach separates the {API} more cleanly from internal functionality. The manager classes should contain as much of the functionality as possible. An example is the [`DatasetManager`](https://github.com/galaxyproject/galaxy/blob/v21.01/lib/galaxy/managers/datasets.py#L26), referenced to regularly by the `DatasetsController` which is exposed directly to the {API}.
 >
 > At the time of writing this transition is ongoing. Therefore, source code of methods for one controller might look and function differently than those of another controller. This might be encountered when debugging a failing request in BioBlend.
 >
@@ -134,10 +143,10 @@ Tool
 : A Galaxy tool packages a particular piece of scientific software, keeping track of its required dependencies. It also contains additional metadata such as the BibTex references to the associated research paper(s). Tools generally take datasets and/or dataset collections as inputs and produce new datasets and/or collections as outputs.
 
 Dataset
-: A dataset represents digital data that can serve as input for a job. It can be associated with (contained in) a history or a library. A dataset can be shared between users. Each time a dataset is copied between histories or libraries, a new History Dataset Association (HDA) or Library Dataset Association (LDA) is created. This naming scheme is used internally by the Galaxy relational database, but the terms might be encountered during BioBlend development as well.
+: A dataset represents digital data that can serve as input for a job. It can be associated with (contained in) a history or a library. A dataset can be shared between users. Each time a dataset is copied between histories or libraries, a new {HDA} or {LDA} is created. {LDA} This naming scheme is used internally by the Galaxy relational database, but the terms might be encountered during BioBlend development as well.
 
 Dataset Collection
-: A dataset collection represents a group of related datasets. Like a dataset, it can be associated with a history or a library. Each time it is copied or shared, a new History Dataset Collection Association (HDCA) or a Library Dataset Collection Association (LDCA) is created.<br><br>There are two kinds of dataset collections, `list` and `paired`. The former is a simple list of elements. The latter has a particular application in bioinformatics; it contains only two elements, corresponding to the `forward` and `reverse` strands of a piece of DNA.<br><br> Collection elements can be other collections; in other words, collections can be nested. These are designated (for example) as `list:list` or `list:paired`.
+: A dataset collection represents a group of related datasets. Like a dataset, it can be associated with a history or a library. Each time it is copied or shared, a new {HDCA} or a {LDCA} is created.<br><br>There are two kinds of dataset collections, `list` and `paired`. The former is a simple list of elements. The latter has a particular application in bioinformatics; it contains only two elements, corresponding to the `forward` and `reverse` strands of a piece of DNA.<br><br> Collection elements can be other collections; in other words, collections can be nested. These are designated (for example) as `list:list` or `list:paired`.
 
 Job
 : Jobs are associated with the execution of a tool on the Galaxy server. Each dataset is created by running a tool and therefore has an associated job. The computation of each step in a workflow has an associated job as well.<br><br>Jobs run as background processes on the Galaxy server. This is relevant because reading results before the appropriate jobs have finished can lead to missing data in the output. BioBlend methods must handle this by waiting for relevant jobs to finish before returning a response to the user.<br><br>Job creation can be different when dealing with dataset collections. If a tool input receives a collection instead of a dataset, it will create a separate job for each element, resulting in an output collection with the same structure as the input. This is referred to as 'mapping over' a collection.

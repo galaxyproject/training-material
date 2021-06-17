@@ -21,6 +21,8 @@ contributors:
   - jj-umn
   - blankclemens
   - subinamehta
+subtopic: multi-omics
+tags: [microbiome]
 ---
 
 # Introduction
@@ -330,7 +332,7 @@ Therefore we can search the database for the peptides and count the occurrence w
 >          GROUP BY sequence
 >
 >          ORDER BY sequence
-> 
+>
 >
 > 2. Click **Execute**. The resulting file should have two columns, one with the distinct peptides, the other with the count number of PSMs.
 >

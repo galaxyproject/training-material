@@ -287,7 +287,7 @@ module Jekyll
         contributors = material['contributors'].map{ |x|
           {
             "@type": "Person",
-            "name": "#{site['data']['contributors'][x]['name']}" #expand to use real names
+            "name": "#{site['data']['contributors'].fetch(x, {"name": x})['name']}" #expand to use real names
           }
         }
         data['author'] = contributors

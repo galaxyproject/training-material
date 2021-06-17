@@ -2,8 +2,8 @@
 layout: tutorial_hands_on
 
 title: "Generating a single cell matrix using Alevin"
-subtopic: single-cell
-priority: 9
+subtopic: single-cell-CS
+priority: 1
 
 zenodo_link: 'https://zenodo.org/record/4574153'
 
@@ -25,6 +25,7 @@ key_points:
 tags:
   - single-cell
   - 10x
+  - paper-replication
 
 contributors:
   - nomadscientist

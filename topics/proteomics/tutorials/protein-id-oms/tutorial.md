@@ -31,6 +31,8 @@ follow_up_training:
 contributors:
   - stortebecker
   - bgruening
+subtopic: id-quant
+tags: [DDA]
 ---
 
 # Introduction
@@ -216,7 +218,7 @@ To calculate FDRs, we first have to annotate the identified peptides to determin
 
 # Protein Inference
 In bottom-up proteomics, it is necessary to combine the identified peptides to proteins. This is not a trivial task, as proteins are redundant to some degree. Thus, not every peptide can be assigned to only one protein.
-The OpenMS suite implemented the [Fido](https://www.ncbi.nlm.nih.gov/pubmed/20712337) algorithm for protein inference. Fido uses a Bayesian probabilistic model to group and score proteins based on peptide-spectrum matches. Afterwards, we keep only proteins with 1% FDR. 
+The OpenMS suite implemented the [Fido](https://www.ncbi.nlm.nih.gov/pubmed/20712337) algorithm for protein inference. Fido uses a Bayesian probabilistic model to group and score proteins based on peptide-spectrum matches. Afterwards, we keep only proteins with 1% FDR.
 
 > ### {% icon hands_on %} Hands-On: Protein inference
 >
@@ -258,7 +260,7 @@ It also enables you to check for contaminations in your samples.
 > 1. Run {% tool [TextExporter](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.6+galaxy0) %} to convert the idXML output to a human-readable tabular file.
 >    - {% icon param-file %} *"Input file"*: **FalseDiscoveryRate** output
 >
-> 2. Run {% tool [Select lines that match an expression](Grep1) %} 
+> 2. Run {% tool [Select lines that match an expression](Grep1) %}
 >    - {% icon param-file %} *"Select lines from"*: **TextExporter**
 >    - *"that"*: `Matching`
 >    - *"the pattern"*: `CONTAMINANT`

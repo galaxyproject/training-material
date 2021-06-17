@@ -65,8 +65,12 @@ jobs:
           make check-workflows
 
   lint-tool-links:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+          architecture: 'x64'
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
@@ -83,6 +87,16 @@ jobs:
       - name: Check yaml are valid and can be merged
         run: |
           python bin/mergeyaml.py --nondocker > /dev/null
+
+  lint-broken-symlinks:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Check for broken symlinks
+        run: |
+          bash bin/check-broken-symlinks.sh
 
   build-site:
     needs: setup
@@ -115,7 +129,7 @@ jobs:
             --http-status-ignore 405,429,503,999 \
             --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#.*/,/#embedded_jbrowse/","/.*videos.*.mp4.png/" \
             --url-swap "github.com/galaxyproject/training-material/tree/main:github.com/${GITHUB_REPOSITORY}/tree/${GITHUB_HEAD_REF}" \
-            --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
+            --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/","/\/tutorials\/.*\/docker\//" \
             --allow-hash-href \
             --disable-external \
             ./_site
