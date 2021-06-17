@@ -43,6 +43,7 @@ The EncyclopeDIA {% cite Searle2020 %} workflow described in this tutorial conta
 >
 > In this tutorial, we will cover:
 >
+> 1. TOC
 > {:toc}
 >
 {: .agenda}
