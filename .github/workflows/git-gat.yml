@@ -72,7 +72,7 @@ jobs:
                 # Commit those patches
                 patches=$(ls $i-*.patch 2>/dev/null| wc -c)
                 if (( patches > 0 )); then
-                    git am -3 $i-*.patch;
+                    git am -3 -C2 $i-*.patch;
 
                     # And tag it
                     git tag -f "step-$(( i - 9 ))";
