@@ -27,10 +27,6 @@ jobs:
       - name: Export commits
         run: |
             bin/knit-automated.sh export;
-            env | sort
-        env:
-           TEST: "${{ github.event.pull_request.head.repo.full_name }}"
-
 
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
@@ -38,7 +34,7 @@ jobs:
           key: ${{ secrets.GIT_GAT_SSH_KEY }}
           known_hosts: "github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=="
           if_key_exists: ignore # replace / ignore / fail; optional (defaults to fail)
-        if: github.repository_owner == 'galaxyproject'
+        if: github.event.pull_request.head.repo.owner == 'galaxyproject'
 
       - name: Setup the repo
         run: |
@@ -47,8 +43,15 @@ jobs:
             git init
             git config user.email "galaxytrainingnetwork@gmail.com"
             git config user.name "The Galaxy Training Network"
-            git remote add origin git@github.com:hexylena/git-gat
+            if [[ "$UPSTREAM_REPO" == "galaxyproject" ]]; then
+                git remote add origin git@github.com:hexylena/git-gat
+            else
+                git remote add origin https://github.com/hexylena/git-gat
+            fi
             git fetch origin --tags
+        env:
+            UPSTREAM_REPO: "${{ github.event.pull_request.head.repo.owner }}"
+
 
       - name: Add scripts directory
         run: |
@@ -83,4 +86,4 @@ jobs:
             git checkout -b $today
             git push -f --set-upstream origin $today
             git push -f --tags
-        if: github.repository_owner == 'galaxyproject'
+        if: github.event.pull_request.head.repo.owner == "galaxyproject"
