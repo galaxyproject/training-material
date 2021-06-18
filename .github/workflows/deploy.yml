@@ -18,6 +18,9 @@ jobs:
       - uses: actions/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
       - uses: actions/setup-python@v2
         with:
           python-version: '3.7'
@@ -41,6 +44,8 @@ jobs:
           pip install requests ephemeris
           export PATH=/home/runner/.local/bin:$PATH
           make annotate ACTIVATE_ENV=pwd
+          npm install
+          make rebuild-search-index ACTIVATE_ENV=pwd
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
         env:
           GTN_FORK: ${{ github.repository_owner }}
