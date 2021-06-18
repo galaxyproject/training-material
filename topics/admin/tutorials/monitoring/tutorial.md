@@ -78,7 +78,7 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    +++ b/requirements.yml
 >    @@ -28,3 +28,5 @@
 >       version: 1.0.7
->     - src: usegalaxy_eu.gxadmin
+>     - src: galaxyproject.gxadmin
 >       version: 0.0.3
 >    +- src: usegalaxy_eu.influxdb
 >    +  version: v6.0.7
@@ -437,7 +437,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    @@ -33,3 +33,4 @@
 >         - galaxyproject.nginx
 >         - galaxyproject.cvmfs
->         - usegalaxy_eu.gxadmin
+>         - galaxyproject.gxadmin
 >    +    - dj-wasabi.telegraf
 >    {% endraw %}
 >    ```
@@ -734,7 +734,7 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 > 1. Edit your `requirements.yml` and add the following:
 >
 >    ```yml
->    - src: usegalaxy_eu.gxadmin
+>    - src: galaxyproject.gxadmin
 >      version: 0.0.3
 >    ```
 >

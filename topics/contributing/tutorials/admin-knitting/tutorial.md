@@ -463,7 +463,7 @@ Subject: admin/gxadmin/0000: Add requirement
    version: 0.1.0
  - src: galaxyproject.pulsar
    version: 1.0.6
-+- src: usegalaxy_eu.gxadmin
++- src: galaxyproject.gxadmin
 +  version: 0.0.3
 --
 2.25.1
