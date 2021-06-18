@@ -163,6 +163,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    {: data-commit="Add proftpd variables"}
 >
 > Here is a description of the set variables:
+>
 >    | Variable             | Description                                                                                                                                                                    |
 >    | ----------           | -------------                                                                                                                                                                  |
 >    | `proftpd_galaxy_auth`               | Attempt to authenticate users against a Galaxy database. |
@@ -176,7 +177,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    | `proftpd_conf_ssl_certificate_key`  | Path on the remote host where the SSL private key file is. |
 >    | `proftpd_global_options`            | Set arbitrary options in the <Global> context. We set here the PassivePorts range. |
 >    | `proftpd_use_mod_tls_shmcache`      | By default proftpd uses `mod_tls_shmcache` which is not installed on the server so we just disable it. |
->    | `proftpd_tls_options`               | Additional options for tls. We will use NoSessionReuseRequired |
+>    | `proftpd_tls_options`               | Additional options for tls. We will use `NoSessionReuseRequired` |
 >
 >    > ### {% icon tip %} Why NoSessionReuseRequired?
 >    > `mod_tls` only accepts SSL/TLS data connections that reuse the SSL session of the control connection, as a security measure. Unfortunately, there are some clients (e.g. curl/Filezilla) which do not reuse SSL sessions.
@@ -283,7 +284,38 @@ Congratulations, you've set up FTP for Galaxy.
 >    > Put a random file:
 >    > `put /srv/galaxy/server/CITATION`
 >    > Check it is there with `ls`.
+>    > Leave lftp with `quit`.
 >    {: .tip}
+>
+{: .hands_on}
+
+> ### {% icon hands_on %} Hands-on: Check where the file has been uploaded
+>
+> 1. SSH into your machine
+>
+> 4. Check the directory `/uploads/`.
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```
+>    > sudo tree /uploads/
+>    > ```
+>    {: .code-in}
+>
+>    > ### {% icon question %} Question
+>    >
+>    > What do you see?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > As I uploaded a file called `CITATION` with the admin@example.org user I see:
+>    > > ```
+>    > > /uploads/
+>    > > └── admin@example.org
+>    > >     └── CITATION
+>    > > ```
+>    > >
+>    > {: .solution }
+>    >
+>    {: .question}
 >
 {: .hands_on}
 
