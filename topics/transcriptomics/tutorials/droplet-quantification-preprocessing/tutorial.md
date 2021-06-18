@@ -32,6 +32,7 @@ contributors:
   - pinin4fjords
 
 requirements:
+  - type: "internal"
     topic_name: transcriptomics
     tutorials:
         - scrna-intro
