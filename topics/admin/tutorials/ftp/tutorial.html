@@ -1,0 +1,1320 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Enable upload via FTP</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Enable upload via FTP" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxyproject/admins'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/admin" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Galaxy Server administration
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/ftp/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/ftp/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/ftp/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/ftp/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/ftp/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/ftp/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/ftp/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fftp%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/ftp/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                    -->
+
+                     <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Enable upload via FTP",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/main/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Galaxy Server administration",
+    "description": "Resources related to configuration and maintenance of Galaxy servers",
+    "url": "https://training.galaxyproject.org//training-material/topics/admin/"
+  },
+  "courseCode": "admin / ftp / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Enable upload via FTP' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ftp/tutorial.html",
+  "timeRequired": "PT1H",
+  "description": "The questions this  addresses are:\n - How can I setup FTP to be easy for my users?\n - Can I authenticate ftp users with Galaxy credentials?\n\n\\nThe objectives are:\n - Configure galaxy and install a FTP server.\n - Use an Ansible playbook for this.\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible/slides.html",
+      "name": "Ansible",
+      "description": "Slides for 'Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible/tutorial.html",
+      "name": "Ansible",
+      "description": "Hands-on for 'Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible-galaxy/slides.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Slides for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Hands-on for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Lucille Delisle"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Lucille Delisle"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Server administration",
+      "description": "Resources related to configuration and maintenance of Galaxy servers",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial topic-admin">
+        <h1 data-toc-skip>Enable upload via FTP</h1>
+        
+
+        <div class="contributors-line">By: 
+
+ <a href="/training-material/hall-of-fame/lldelisle/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/lldelisle" alt="Lucille Delisle">Lucille Delisle</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How can I setup FTP to be easy for my users?</p>
+</li>
+            
+            <li><p>Can I authenticate ftp users with Galaxy credentials?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Configure galaxy and install a FTP server.</p>
+</li>
+            
+            <li><p>Use an Ansible playbook for this.</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/admin">Galaxy Server administration</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Ansible:
+                            
+                                <a href="/training-material/topics/admin/tutorials/ansible/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Galaxy Installation with Ansible:
+                            
+                                <a href="/training-material/topics/admin/tutorials/ansible-galaxy/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1 hour</div>
+            
+
+            
+
+            
+            
+
+            
+            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/admin/slides/introduction.html" title="Topic Overview slides">
+                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Topic Overview slides
+                    </a></li>
+                
+
+                
+
+                
+
+                
+
+                
+                
+                
+
+                
+                </div>
+            </ul>
+            
+
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 18, 2021 </div>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="overview">Overview</h1>
+
+<p>This tutorial will guide you to setup an File Transfer Protocol (FTP) server so <span class="notranslate">galaxy</span> users can use it to upload large files. Indeed, as written on the <a href="https://galaxyproject.org/ftp-upload/"><span class="notranslate">galaxy</span> community hub</a>, uploading data directly from the browser can be unreliable and cumbersome. FTP will allow users to monitor the upload status as well as resume interrupted transfers.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+<ol id="markdown-toc">
+  <li><a href="#ftp" id="markdown-toc-ftp">FTP</a></li>
+  <li><a href="#ftp-and-galaxy" id="markdown-toc-ftp-and-galaxy">FTP and <span class="notranslate">Galaxy</span></a>    <ol>
+      <li><a href="#installing-and-configuring" id="markdown-toc-installing-and-configuring">Installing and Configuring</a></li>
+      <li><a href="#check-it-works" id="markdown-toc-check-it-works">Check it works</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="ftp">FTP</h1>
+
+<p><abbr title="File Transfer Protocol">FTP</abbr> is a very old and reliable communication protocol that has been around since 1971 <a class="citation" href="#rfc114">Bhushan 1971</a>. It requires a server (here our <span class="notranslate">galaxy</span> server) and a client (user’s computer). The FTP server requires to have at least 2 ports accessible from outside (one for the commands and one for the transfer). Usually the port for the command is 21.</p>
+
+<p>FTP supports two different modes: active, and passive. Active mode requires that the user’s computer be reachable from the internet, which in the age of Network Address Translation (NAT) and firewalls is usually unusable. So passive mode is the most commonly used. In passive mode, a client connects to the FTP server, and requests a channel for sending files. The server responds with an IP and port, from its range of “Passive Ports”.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-requirements-for-running-this-tutorial"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Requirements for Running This Tutorial</h3>
+
+  <p>Your VM or wherever you are installing <span class="notranslate">Galaxy</span> needs to have the following ports available:</p>
+
+  <ul>
+    <li>21</li>
+    <li>Some high range of ports not used by another service, e.g. 56k-60k</li>
+  </ul>
+
+  <p>You need to know which ports are open so you can use them for the transfer (PassivePorts). In this training we assume that 56k to 60k are open.</p>
+
+  <p>Which ports precisely is not important, and these numbers can differ between sites.</p>
+</blockquote>
+
+<h1 id="ftp-and-galaxy">FTP and <span class="notranslate">Galaxy</span></h1>
+
+<p>To allow your user to upload via FTP, you will need to:</p>
+
+<ul>
+  <li>configure <span class="notranslate">Galaxy</span> to know where the files are uploaded.</li>
+  <li>install a FTP server</li>
+  <li>allow your FTP server to read <span class="notranslate">Galaxy</span>’s database so users can use their credential and upload in the good directory.</li>
+</ul>
+
+<p>For secure transmission we will use SSL/TLS (FTPS), not the SSH File Transfer Protocol (SFTP) as the <span class="notranslate">Galaxy</span> users don’t correspond to users on the machine.</p>
+
+<h2 id="installing-and-configuring">Installing and Configuring</h2>
+
+<p>Luckily for us, there is an ansible role written by the <span class="notranslate">Galaxy</span> Project for this purpose. It will install proftpd. Firstly, we need to install the role and then update our playbook for using it.</p>
+
+<p>If the terms “Ansible”, “role” and “playbook” mean nothing to you, please checkout <a href="/training-material/topics/admin/tutorials/ansible/slides.html">the Ansible introduction slides</a> and <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html">the Ansible introduction tutorial</a></p>
+
+<!--SNIPPET-->
+<blockquote class="tip">  <h3 data-toc-skip="" id="-tip-running-ansible-on-your-remote-machine"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running Ansible on your remote machine</h3>  <p>It is possible to have ansible installed on the remote machine and run it there, not just from your local machine connecting to the remote machine.Your hosts file will need to use <code class="language-plaintext highlighter-rouge">localhost</code>,  and whenever you run playbooks with <code class="language-plaintext highlighter-rouge">ansible-playbook -i hosts playbook.yml</code>, you will need to add <code class="language-plaintext highlighter-rouge">-c local</code> to your command.Be <strong>certain</strong> that the playbook that you’re writing on the remote machine is stored somewhere safe, like your user home directory, or backed up on your local machine. The cloud can be unreliable and things can disappear at any time.</p></blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-setting-up-ftp-upload-with-ansible"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Setting up ftp upload with Ansible</h3>
+
+  <ol>
+    <li>
+      <p>In your playbook directory, add the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.proftpd</code> role to your <code class="language-plaintext highlighter-rouge">requirements.yml</code></p>
+
+      <div data-commit="Add requirement" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
+</span><span class="gi">+++ b/requirements.yml
+</span><span class="p">@@ -36,3 +36,5 @@</span>
+   version: 0.12.0
+ - src: use<span class="notranslate">galaxy</span>_eu.tiaas2
+   version: 0.0.6
+<span class="gi">+- src: <span class="notranslate">galaxy</span>project.proftpd
++  version: 0.3.1
+</span>   
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Install the role with:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>As in this training we are using certbot, we will ask for a private key for proftpd. Add the following line to your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>server.yml</code> file:</p>
+
+      <div data-commit="Add proftpd in certbot" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -159,9 +159,11 @@</span> certbot_well_known_root: /srv/nginx/_well-known_root
+ certbot_share_key_users:
+   - nginx
+   - rabbitmq
+<span class="gi">+  - proftpd
+</span> certbot_post_renewal: |
+     systemctl restart nginx || true
+     systemctl restart rabbitmq-server || true
+<span class="gi">+    systemctl restart proftpd || true
+</span> certbot_domains:
+  - "{{ inventory_hostname }}"
+ certbot_agree_tos: --agree-tos
+   
+</code></pre></div>      </div>
+
+      <p>This will make a copy of the current letsencrypt key available as <code class="language-plaintext highlighter-rouge">/etc/ssl/user/privkey-proftpd.pem</code>, and automatically restart proftpd every time the key is updated.</p>
+    </li>
+    <li>
+      <p>We will configure <span class="notranslate">Galaxy</span> to enable ftp file upload. Add the following line to your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>server.yml</code> file in the <span class="notranslate">galaxy</span>_config/<span class="notranslate">galaxy</span> section:</p>
+
+      <div data-commit="Add ftp vars in galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -93,6 +93,9 @@</span> <span class="notranslate">galaxy</span>_config:
+     allow_user_impersonation: true
+     # Tool security
+     outputs_to_working_directory: true
+<span class="gi">+    # FTP
++    ftp_upload_dir: /data/uploads
++    ftp_upload_site: "{{ inventory_hostname }}"
+</span>   uwsgi:
+     socket: 127.0.0.1:5000
+     buffer-size: 16384
+   
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+  <p>To check the other options for setting up ftp in <span class="notranslate">Galaxy</span>, please check the <a href="https://docs.galaxyproject.org/en/master/admin/galaxy_options.html?highlight=ftp_upload_site#ftp-upload-dir"><span class="notranslate">Galaxy</span> configuration documentation</a>.</p>
+
+  <ol>
+    <li>
+      <p>Then we will set the different variables for proftpd. Add the following lines to your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>server.yml</code> file. Please replace the PassivePorts below with the range of ports that are appropriate for your machine!</p>
+
+      <div data-commit="Add proftpd variables" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -228,6 +228,27 @@</span> rabbitmq_users:
+     password: "{{ vault_rabbitmq_password_vhost }}"
+     vhost: /pulsar/<span class="notranslate">galaxy</span>_au
+
++# Proftpd:
+<span class="gi">+proftpd_<span class="notranslate">galaxy</span>_auth: yes
++<span class="notranslate">galaxy</span>_ftp_upload_dir: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.ftp_upload_dir }}"
++proftpd_display_connect: |
++  {{ inventory_hostname }} FTP server
++
++  Unauthorized access is prohibited
++proftpd_create_ftp_upload_dir: yes
++proftpd_options:
++  - User: <span class="notranslate">galaxy</span>
++  - Group: <span class="notranslate">galaxy</span>
++  - Port: 21
++proftpd_sql_db: <span class="notranslate">galaxy</span>@/var/run/postgresql
++proftpd_sql_user: <span class="notranslate">galaxy</span>
++proftpd_conf_ssl_certificate: /etc/ssl/certs/cert.pem
++proftpd_conf_ssl_certificate_key: /etc/ssl/user/privkey-proftpd.pem
++proftpd_global_options:
++  - PassivePorts: 56000 60000
++proftpd_use_mod_tls_shmcache: false
++proftpd_tls_options: NoSessionReuseRequired
++
+</span> # Telegraf
+ telegraf_plugins_extra:
+   listen_<span class="notranslate">galaxy</span>_routes:
+   
+</code></pre></div>      </div>
+
+      <p>Here is a description of the set variables:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">proftpd_<span class="notranslate">galaxy</span>_auth</code></td>
+            <td>Attempt to authenticate users against a <span class="notranslate">Galaxy</span> database.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_ftp_upload_dir</code></td>
+            <td>Path to the <span class="notranslate">Galaxy</span> FTP upload directory, should match <code class="language-plaintext highlighter-rouge">ftp_upload_dir</code> in your <span class="notranslate">Galaxy</span> config.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">proftpd_display_connect</code></td>
+            <td>Message to display when users connect to the FTP server. This should be the message, not the path to a file.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">proftpd_create_ftp_upload_dir</code></td>
+            <td>Whether to allow the role to create this with owner <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_user</code>.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">proftpd_options</code></td>
+            <td>Any option for proftpd, we will just set up the user and group of the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_user</code>.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">proftpd_sql_db</code></td>
+            <td>Database name to connect to for authentication info.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">proftpd_sql_user</code></td>
+            <td>(default: the value of <span class="notranslate">galaxy</span>_user): Value of the use<span class="notranslate">rna</span>me parameter to SQLConnectInfo.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">proftpd_conf_ssl_certificate</code></td>
+            <td>Path on the remote host where the SSL certificate file is.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">proftpd_conf_ssl_certificate_key</code></td>
+            <td>Path on the remote host where the SSL private key file is.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">proftpd_global_options</code></td>
+            <td>Set arbitrary options in the <Global> context. We set here the PassivePorts range.</Global></td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">proftpd_use_mod_tls_shmcache</code></td>
+            <td>By default proftpd uses <code class="language-plaintext highlighter-rouge">mod_tls_shmcache</code> which is not installed on the server so we just disable it.</td>
+          </tr>
+          <tr>
+            <td><code class="language-plaintext highlighter-rouge">proftpd_tls_options</code></td>
+            <td>Additional options for tls. We will use <code class="language-plaintext highlighter-rouge">NoSessionReuseRequired</code></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <blockquote class="tip">
+        <h3 id="tip-why-nosessionreuserequired"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Why NoSessionReuseRequired?</h3>
+        <p><code class="language-plaintext highlighter-rouge">mod_tls</code> only accepts SSL/TLS data connections that reuse the SSL session of the control connection, as a security measure. Unfortunately, there are some clients (e.g. curl/Filezilla) which do not reuse SSL sessions.
+To relax the requirement that the SSL session from the control connection be reused for data connections we set <code class="language-plaintext highlighter-rouge">NoSessionReuseRequired</code>.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Add the new role to the list of roles under the <code class="language-plaintext highlighter-rouge">roles</code> key in your playbook, <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>:</p>
+
+      <div data-commit="Add role to playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
+</span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
+</span><span class="p">@@ -31,6 +31,7 @@</span>
+       become_user: "{{ <span class="notranslate">galaxy</span>_user.name }}"
+     - use<span class="notranslate">galaxy</span>_eu.rabbitmq
+     - <span class="notranslate">galaxy</span>project.nginx
+<span class="gi">+    - <span class="notranslate">galaxy</span>project.proftpd
+</span>     - <span class="notranslate">galaxy</span>project.cvmfs
+     - <span class="notranslate">galaxy</span>project.gxadmin
+     - dj-wasabi.telegraf
+   
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Congratulations, you’ve set up FTP for <span class="notranslate">Galaxy</span>.</p>
+
+<h2 id="check-it-works">Check it works</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-checking-proftpd-from-the-server"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Checking proftpd from the server</h3>
+
+  <ol>
+    <li>
+      <p>SSH into your machine</p>
+    </li>
+    <li>
+      <p>Check the active status of proftpd by <code class="language-plaintext highlighter-rouge">systemctl status proftpd</code>.</p>
+    </li>
+    <li>
+      <p>Check the port has been correctly attributed by <code class="language-plaintext highlighter-rouge">sudo lsof -i -P -n</code>.</p>
+
+      <blockquote class="question">
+        <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>What do you see?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p>You should see all the ports used by the server. What interests us is the line with proftpd.
+You should see TCP *:21 (LISTEN).</p>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+    <li>
+      <p>Check the directory <code class="language-plaintext highlighter-rouge">/data/uploads/</code> has been created and is empty.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo tree /data/uploads/
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="hidden">
+  <div data-test="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.sh
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-checking-galaxy-detected-the-ftp-possibility"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Checking <span class="notranslate">galaxy</span> detected the ftp possibility</h3>
+
+  <ol>
+    <li>
+      <p>Open your <span class="notranslate">galaxy</span> in a browser.</p>
+    </li>
+    <li>
+      <p>Log in with a user (FTP is only possible for authenticated sessions).</p>
+    </li>
+    <li>
+      <p>Click on the upload button. You should now see on the bottom “Choose FTP files”</p>
+    </li>
+    <li>
+      <p>Click on the Choose FTP files button. You should see a message “Your FTP directory does not contain any files.”</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>It’s working!</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-upload-your-first-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Upload your first file</h3>
+
+  <p>There are three options for uploading files, you can choose whichever is easiest for you.</p>
+
+  <ol>
+    <li>
+      <p><strong>FileZilla</strong></p>
+
+      <ol>
+        <li>Follow the <a href="https://galaxyproject.org/ftp-upload/">tutorial</a> to upload a file.</li>
+        <li>You will have a message which ask you to approve the certificate, approve it.</li>
+      </ol>
+    </li>
+    <li>
+      <p><strong>lftp</strong></p>
+
+      <p>You can use locally lftp to test the ftp.</p>
+
+      <ol class="tip">
+        <li>Install lftp with <code class="language-plaintext highlighter-rouge">sudo apt-get install lftp</code>.</li>
+        <li>Add the public certificate to the list of known certificates (only for LetsEncrypt Staging Certificates!):
+          <blockquote class="code-in">
+            <h3 id="code-in-input-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+            <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir .lftp
+echo "set ssl:ca-file \"/etc/ssl/certs/cert.pem\"" &gt; .lftp/rc
+</code></pre></div>            </div>
+          </blockquote>
+        </li>
+        <li>Connect to the server with for example the admin account:
+          <blockquote class="code-in">
+            <h3 id="code-in-input-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+            <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lftp admin@example.org@$HOSTNAME
+</code></pre></div>            </div>
+          </blockquote>
+        </li>
+        <li>Enter the password of the admin@example.org <span class="notranslate">galaxy</span> user.</li>
+        <li>
+          <p>Put a random file:</p>
+
+          <p><code class="language-plaintext highlighter-rouge">put /srv/<span class="notranslate">galaxy</span>/server/CITATION</code></p>
+        </li>
+        <li>Check it is there with <code class="language-plaintext highlighter-rouge">ls</code>.</li>
+        <li>Leave lftp with <code class="language-plaintext highlighter-rouge">quit</code>.</li>
+      </ol>
+    </li>
+    <li>
+      <p><strong>Curl</strong></p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -T {"/srv/<span class="notranslate">galaxy</span>/server/CITATION"} ftp://localhost --user admin@example.org:password --ssl -k
+</code></pre></div>        </div>
+        <p>Here <code class="language-plaintext highlighter-rouge">-T</code> says to upload a file, <code class="language-plaintext highlighter-rouge">--ssl</code> ensures that the FTP connection is SSL/TLS encrypted, and <code class="language-plaintext highlighter-rouge">-k</code> ignores any certificate issues as the hostname <code class="language-plaintext highlighter-rouge">localhost</code> will not match the certificate we have.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-check-where-the-file-has-been-uploaded"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check where the file has been uploaded</h3>
+
+  <ol>
+    <li>
+      <p>SSH into your machine</p>
+    </li>
+    <li>
+      <p>Check the directory <code class="language-plaintext highlighter-rouge">/uploads/</code>.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo tree /uploads/
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="question">
+        <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>What do you see?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p>As I uploaded a file called <code class="language-plaintext highlighter-rouge">CITATION</code> with the admin@example.org user I see:</p>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/uploads/
+└── admin@example.org
+    └── CITATION
+</code></pre></div>          </div>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-use-it-in-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Use it in <span class="notranslate">galaxy</span></h3>
+
+  <ol>
+    <li>
+      <p>Open your <span class="notranslate">galaxy</span> in a browser.</p>
+    </li>
+    <li>
+      <p>Log in with the user you used to upload the file.</p>
+    </li>
+    <li>
+      <p>Click on the upload button.</p>
+    </li>
+    <li>
+      <p>Click on the Choose FTP files button. You should see your file.</p>
+    </li>
+    <li>
+      <p>Click on it and click on Start to launch the upload. It should go to your history as a new dataset.</p>
+    </li>
+    <li>
+      <p>Click again on Choose FTP files button. Your file has disappeared. By default, the files are removed from the FTP at import.</p>
+
+      <blockquote class="tip">
+        <h3 id="tip-you-want-to-change-this-behaviour"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> You want to change this behaviour?</h3>
+        <p>You just need to add <code class="language-plaintext highlighter-rouge">ftp_upload_purge: false</code> to the <span class="notranslate">galaxy</span>_config/<span class="notranslate">galaxy</span> variables (next to <code class="language-plaintext highlighter-rouge">ftp_upload_dir</code>).</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Congratulations! Let your users know this is an option, many of them will prefer to start large uploads from an FTP client.</p>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>FTP is easy to deploy thanks to the role</p>
+</li>
+                            
+                            <li><p>Users can be authenticated with their Galaxy credentials simplifying the user management process significantly</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/admin/faqs/">FAQ page for the Galaxy Server administration topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="rfc114">Bhushan, A. K., 1971 <b>File Transfer Protocol</b>: RFC Editor RFC 114.</span>
+    
+    
+    
+
+</li></ol>
+                    
+
+                    
+                    <h1 data-toc-skip>Glossary</h1>
+                    <dl>
+                        
+                        
+                        <dt>FTP</dt>
+                        <dd>File Transfer Protocol</dd>
+                        
+                        <dt>NAT</dt>
+                        <dd>Network Address Translation</dd>
+                        
+                    </dl>
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Enable upload via FTP (Galaxy Server administration)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Lucille Delisle, 2021 <b>Enable upload via FTP (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ftp/tutorial.html">https://training.galaxyproject.org/training-material/topics/admin/tutorials/ftp/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{admin-ftp,
+    author = "Lucille Delisle",
+    title = "Enable upload via FTP (Galaxy Training Materials)",
+    year = "2021",
+    month = "06",
+    day = "18"
+    url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/ftp/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+                    
+
+                    
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Lucille Delisle)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/admin/tutorials/ftp/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
