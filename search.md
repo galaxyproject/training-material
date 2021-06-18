@@ -70,17 +70,21 @@ function search(idx, q){
         thereMap  = Object.assign({}, ...results_partial.map((x) => ({[x.ref]: x.score})));
 
         results_exact.forEach(x => {
-            if(thereMap[x.ref] !== undefined && thereMap[x.ref] < x.score){
-                    thereMap[x.ref] = x.score
+            if(thereMap[x.ref] !== undefined){
+                if(thereMap[x.ref] < x.score + 4){
+                    thereMap[x.ref] = x.score + 4
+                }
             } else {
-                    thereMap[x.ref] = x.score
+                    thereMap[x.ref] = x.score + 4
             }
         })
         results_fuzzy.forEach(x => {
-            if(thereMap[x.ref] !== undefined && thereMap[x.ref] < x.score){
-                    thereMap[x.ref] = x.score
+            if(thereMap[x.ref] !== undefined){
+                if(thereMap[x.ref] < x.score - 2){
+                    thereMap[x.ref] = x.score - 2
+                }
             } else {
-                    thereMap[x.ref] = x.score
+                    thereMap[x.ref] = x.score - 2
             }
         })
 
