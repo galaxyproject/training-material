@@ -122,7 +122,9 @@ Good news! All of the failing tests are on the same Galaxy branch! That means yo
 >    > ```
 >    {: .code-in}
 >
->    Once activated, you'll see the name of the virtual environment prepended to your shell prompt: `(.venv)$`. 5. Now you are ready to install the dependencies. Since you wil be doing development, you need to install the dependencies listed in `lib/galaxy/dependencies/dev-requirements.txt`:
+>    Once activated, you'll see the name of the virtual environment prepended to your shell prompt: `(.venv)$`. 
+>  
+> 5. Now you are ready to install the dependencies. Since you wil be doing development, you need to install the dependencies listed in `lib/galaxy/dependencies/dev-requirements.txt`:
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
