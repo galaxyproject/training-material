@@ -19,16 +19,18 @@ The {% tool [BamQC](toolshed.g2.bx.psu.edu/repos/iuc/qualimap_bamqc/qualimap_bam
 > In the *BamQC* output, examine the report for , pay special attention to the *Mean Coverage* (in section *Coverage*) and the *Coverage across reference*, *Coverage Histogram* and *Coverage Histogram (0-50X)* plots.
 >
 > 1. What was the mean coverage across the genome?
-> 2. How many reads were mapped?
-> 3. How many reads were mapped in a proper pair?
-> 4. How many bases mapped against the genome?
-> 5. Do you think the mapping was successful?
+> 2. Was the coverage even across the genome? Were there any dips in coverage?
+> 3. Did any parts of the genome have coverage below 10 bases?
+> 4. Each sequencing run should include a negative control. What do we expect the coverage across the reference to look like for the negative control sample?
+> 5. Each run should also include a positive control. What do we expect the coverage graph of the positive control to show?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The sample had 1393396 reads
-> > 2. 1393232 (almost all) of the reads mapped against the reference
-> > 3. 1391622 reads were in [proper pairs](https://www.biostars.org/p/8318/). This means that both ends of the paired end reads mapped and the insertion size in the reads was of an expected size.
-> > 4. A total of 191464525 mapped against the genome. The SARS-CoV-2 genome is approximately 30,000 bases long, so the sample contains approximately 6400 genomes worth of reads.
-> > 5. Yes, 99% of the reads mapped against the reference genome and almost all of them in proper pairs. This suggests that the reads represent SARS-CoV-2 sequence and give us some confidence that variant calling and genome consensus reconstruction will succeed.
-> {: .solutio
+> > 1. The mean coverage is 109.5857.
+> > 2. The coverage was approximately even but there was one dip to about depth 40X coverage. You can see this on the *Coverage across reference* graph: ![coverage over genome graph showing one area of lower coverage](../../images/sars_cov_2_amplicon_genome_coverage_across_reference.png).
+> > 3. There were a small number of places with depth below 10 bases. Careful examination of the coverage will show this is happening at the ends of the genome (start and end). You can see this from the *Coverage Histogram (0-50X)* graph: ![coverage histogram 0-50X graph showing small number of places with less than 10X coverage](../../images/sars_cov_2_amplicon_genome_coverage_0to50_histogram.png).
+> > 4. The negative control should show very low or no coverage across the genome. Since the negative control essentially involves sequencing water, we do not expect to find any reads that match the viral genome. If we *do* see higher coverage in the negative control sample it suggests that our run has been contaminated.
+> > 5. The positive control should be based on a known genomic sample and should show good coverage across the genome. If we have low coverage in the positive control sample, it means that something has gone wrong in our sequencing process: amplification has failed, or some other step in the sequencing workflow has not worked as expected.
+> {: .solution}
+>
+{: .question}

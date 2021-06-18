@@ -15,13 +15,14 @@ Let us see how to do the *Data Upload* this way.
 >
 >
 >    ```
->https://zenodo.org/record/4899860/files/ERR4970105_1.fastq.gz
->https://zenodo.org/record/4899860/files/ERR4970105_2.fastq.gz
->https://zenodo.org/record/4899860/files/ERR4970106_1.fastq.gz
->https://zenodo.org/record/4899860/files/ERR4970106_2.fastq.gz
->https://zenodo.org/record/4899860/files/ERR4970107_1.fastq.gz
->https://zenodo.org/record/4899860/files/ERR4970107_2.fastq.gz
->https://zenodo.org/record/4899860/files/MN908947_3_Wuhan-Hu-1.fasta
+>>https://zenodo.org/record/4944064/files/ERR4970105_1.fastq.gz
+>https://zenodo.org/record/4944064/files/ERR4970105_2.fastq.gz
+>https://zenodo.org/record/4944064/files/ERR4970106_1.fastq.gz
+>https://zenodo.org/record/4944064/files/ERR4970106_2.fastq.gz
+>https://zenodo.org/record/4944064/files/ERR4970107_1.fastq.gz
+>https://zenodo.org/record/4944064/files/ERR4970107_2.fastq.gz
+>https://zenodo.org/record/4944064/files/MN908947_3_Wuhan-Hu-1.fasta
+>https://zenodo.org/record/4944064/files/SARS-CoV-2-ARTICv3.bed
 >    ```
 >
 > 3. Leave the drop-down boxes on their default options: *Upload data as: Datasets* and *Load tabular data from: Pasted Table*. Click the *Build* button. You will now see the Rule Based Uploader (RBU) window, ready for you to start adding rules:
@@ -46,7 +47,7 @@ Let us see how to do the *Data Upload* this way.
 >
 > 7. Now that we have loaded the datasets we need into our history, we need to organise the FASTQ files into a collection so that they can be processed together. You can learn more about collections in [this tutorial](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html).
 >    
->    To build a collection from our FASTQ datasets, select the "Operations on multiple datasets" tick box. Then select all of the datasets except for the "MN908947_3_Wuhan-Hu-1.fasta" one. Select the "For all select.." button and you will see a menu which has a "Build Collection from Rules" option. It looks like this:
+>    To build a collection from our FASTQ datasets, select the "Operations on multiple datasets" tick box. Then select all of the datasets except for the "MN908947_3_Wuhan-Hu-1.fasta" and "SARS-CoV-2-ARTICv3.bed" ones. Select the "For all select.." button and you will see a menu which has a "Build Collection from Rules" option. It looks like this:
 >
 >    ![Rule Based Uploader ready to upload](../../images/sars_cov_2_amplicon_rbu5_build_collection.png)
 >

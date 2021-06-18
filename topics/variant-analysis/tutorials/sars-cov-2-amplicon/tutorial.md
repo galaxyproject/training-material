@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: SARS-CoV-2 ARTIC sequence analysis
-zenodo_link: 'https://zenodo.org/record/4899860'
+zenodo_link: 'https://zenodo.org/record/4944064'
 questions:
 - Which biological questions are addressed by the tutorial? Change this here
 - Which bioinformatics techniques are important to know for this type of data?
@@ -93,20 +93,21 @@ have fun!
 >     -> `{{ page.title }}`):
 >
 >    ```
->https://zenodo.org/record/4899860/files/ERR4970105_1.fastq.gz
->https://zenodo.org/record/4899860/files/ERR4970105_2.fastq.gz
->https://zenodo.org/record/4899860/files/ERR4970106_1.fastq.gz
->https://zenodo.org/record/4899860/files/ERR4970106_2.fastq.gz
->https://zenodo.org/record/4899860/files/ERR4970107_1.fastq.gz
->https://zenodo.org/record/4899860/files/ERR4970107_2.fastq.gz
->https://zenodo.org/record/4899860/files/MN908947_3_Wuhan-Hu-1.fasta
+>https://zenodo.org/record/4944064/files/ERR4970105_1.fastq.gz
+>https://zenodo.org/record/4944064/files/ERR4970105_2.fastq.gz
+>https://zenodo.org/record/4944064/files/ERR4970106_1.fastq.gz
+>https://zenodo.org/record/4944064/files/ERR4970106_2.fastq.gz
+>https://zenodo.org/record/4944064/files/ERR4970107_1.fastq.gz
+>https://zenodo.org/record/4944064/files/ERR4970107_2.fastq.gz
+>https://zenodo.org/record/4944064/files/MN908947_3_Wuhan-Hu-1.fasta
+>https://zenodo.org/record/4944064/files/SARS-CoV-2-ARTICv3.bed
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Rename the datasets (to get ride of the `http://zenodo.org...` prefix)
+> 3. Rename the datasets (to get rid of the `http://zenodo.org...` prefix)
 >
 > 4. Check that the datatype
 >
@@ -133,6 +134,12 @@ have fun!
 {% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/bamqc.md %}
 
 {% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/ivar_trim.md %}
+
+After mapping the reads, quality filtering the mapped reads and trimming primers we have now produce
+the final dataset of aligned reads for each of our samples. The next steps that we are going to take
+follow two paths: we need to identify the variation in the genome that is present in each sample,
+and we need to construct a consensus genome from which we can infer the viral lineage of the sample (and make the genome 
+available for deposit in a database or use in constructing a phylogeny).
 
 {% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/Variant_annotation.md %}
 
