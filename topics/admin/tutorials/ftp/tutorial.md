@@ -316,7 +316,7 @@ It's working!
 >    3. Connect to the server with for example the admin account:
 >       > ### {% icon code-in %} Input: Bash
 >       > ```
->       > lftp -p 55000 admin@example.org@$HOSTNAME
+>       > lftp admin@example.org@$HOSTNAME
 >       > ```
 >       {: .code-in}
 >
