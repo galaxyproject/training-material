@@ -4,11 +4,15 @@ layout: tutorial_hands_on
 title: "Enable upload via FTP"
 zenodo_link: ""
 questions:
+  - How can I setup FTP to be easy for my users?
+  - Can I authenticate ftp users with Galaxy credentials?
 objectives:
   - Configure galaxy and install a FTP server.
   - Use an Ansible playbook for this.
 time_estimation: "1h"
 key_points:
+  - FTP is easy to deploy thanks to the role
+  - Users can be authenticated with their Galaxy credentials simplifying the user management process significantly
 contributors:
   - lldelisle
 subtopic: features
@@ -18,12 +22,15 @@ requirements:
     tutorials:
       - ansible
       - ansible-galaxy
+abbreviations:
+  FTP: File Transfer Protocol
+  NAT: Network Address Translation
 ---
 
 # Overview
 {:.no_toc}
 
-This tutorial will guide you to setup a ftp server so galaxy user can use it to upload large files. Indeed, as written on the [galaxy community hub](https://galaxyproject.org/ftp-upload/), uploading data directly from the browser can be unreliable and cumbersome. FTP will allow you to monitor the upload status as well as resume interrupted transfers.
+This tutorial will guide you to setup an {FTP} server so galaxy users can use it to upload large files. Indeed, as written on the [galaxy community hub](https://galaxyproject.org/ftp-upload/), uploading data directly from the browser can be unreliable and cumbersome. FTP will allow users to monitor the upload status as well as resume interrupted transfers.
 
 > ### Agenda
 >
@@ -33,10 +40,22 @@ This tutorial will guide you to setup a ftp server so galaxy user can use it to 
 {: .agenda}
 
 # FTP
-FTP stands for File Transfer Protocol. It is a communication protocol. It requires a server (here our galaxy server) and a client (user computers). The FTP server requires to have at least 2 ports accessible from outside (one for the commands and one for the transfer). Usually the port for the command is 21. 
-% Possibly we will change it:
-Here we will use 55000 because the VM we use in the galaxy admin training does not have the port 21 open.
-You also need to know which are the other ports open so you can use them for the transfer (PassivePorts). In this training we consider that 56k to 60k are open.
+
+{FTP} is a very old and reliable communication protocol that has been around since 1971 {% cite rfc114 %}. It requires a server (here our galaxy server) and a client (user's computer). The FTP server requires to have at least 2 ports accessible from outside (one for the commands and one for the transfer). Usually the port for the command is 21.
+
+FTP supports two different modes: active, and passive. Active mode requires that the user's computer be reachable from the internet, which in the age of {NAT} and firewalls is usually unusable. So passive mode is the most commonly used. In passive mode, a client connects to the FTP server, and requests a channel for sending files. The server responds with an IP and port, from its range of "Passive Ports".
+
+> ### {% icon comment %} Requirements for Running This Tutorial
+>
+> Your VM or wherever you are installing Galaxy needs to have the following ports available:
+>
+> - 21
+> - Some high range of ports not used by another service, e.g. 56k-60k
+>
+> You need to know which ports are open so you can use them for the transfer (PassivePorts). In this training we assume that 56k to 60k are open.
+>
+> Which ports precisely is not important, and these numbers can differ between sites.
+{: .comment}
 
 # FTP and Galaxy
 
@@ -56,10 +75,9 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 
 {% snippet topics/admin/faqs/ansible_local.md %}
 
-> ### {% icon hands_on %} Hands-on: Setting the ftp upload with Ansible
+> ### {% icon hands_on %} Hands-on: Setting up ftp upload with Ansible
 >
-> 1. In your working directory, add the proftpd role to your `requirements.yml`
->
+> 1. In your playbook directory, add the `galaxyproject.proftpd` role to your `requirements.yml`
 >
 >    {% raw %}
 >    ```diff
@@ -84,13 +102,13 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
-> 3. As in this training we are using certbot, we ask a private key for proftpd. Add the following line to your `group_vars/galaxyserver.yml` file:
+> 3. As in this training we are using certbot, we will ask for a private key for proftpd. Add the following line to your `group_vars/galaxyserver.yml` file:
 >
 >    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -158,6 +158,7 @@ certbot_well_known_root: /srv/nginx/_well-known_root
+>    @@ -158,9 +158,11 @@ certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - nginx
 >       - rabbitmq
@@ -98,11 +116,17 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >     certbot_post_renewal: |
 >         systemctl restart nginx || true
 >         systemctl restart rabbitmq-server || true
+>    +    systemctl restart proftpd || true
+>     certbot_domains:
+>      - "{{ inventory_hostname }}"
+>     certbot_agree_tos: --agree-tos
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add proftpd in certbot"}
 >
-> 4. We will setup galaxy to specify that there are files uploaded by ftp. Add the following line to your `group_vars/galaxyserver.yml` file in the galaxy_config/galaxy section:
+>    This will make a copy of the current letsencrypt key available as `/etc/ssl/user/privkey-proftpd.pem`, and automatically restart proftpd every time the key is updated.
+>
+> 4. We will configure Galaxy to enable ftp file upload. Add the following line to your `group_vars/galaxyserver.yml` file in the galaxy_config/galaxy section:
 >
 >    {% raw %}
 >    ```diff
@@ -113,7 +137,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >         # Tool security
 >         outputs_to_working_directory: true
 >    +    # FTP
->    +    ftp_upload_dir: /uploads
+>    +    ftp_upload_dir: /data/uploads
 >    +    ftp_upload_site: "{{ inventory_hostname }}"
 >       uwsgi:
 >         socket: 127.0.0.1:5000
@@ -122,30 +146,30 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```
 >    {: data-commit="Add ftp vars in galaxy"}
 >
-> To check the other options for setting galaxy relative to ftp, please check the [galaxy options](https://docs.galaxyproject.org/en/master/admin/galaxy_options.html?highlight=ftp_upload_site#ftp-upload-dir).
+> To check the other options for setting up ftp in Galaxy, please check the [Galaxy configuration documentation](https://docs.galaxyproject.org/en/master/admin/galaxy_options.html?highlight=ftp_upload_site#ftp-upload-dir).
 >
-> 5. Then we will set the different variable for proftpd. Add the following line to your `group_vars/galaxyserver.yml` file:
+> 5. Then we will set the different variables for proftpd. Add the following lines to your `group_vars/galaxyserver.yml` file. Please replace the PassivePorts below with the range of ports that are appropriate for your machine!
 >
 >    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -226,6 +226,27 @@ rabbitmq_users:
+>    @@ -227,6 +227,27 @@ rabbitmq_users:
 >         password: "{{ vault_rabbitmq_password_vhost }}"
 >         vhost: /pulsar/galaxy_au
 >
 >    +# Proftpd:
 >    +proftpd_galaxy_auth: yes
->    +galaxy_ftp_upload_dir: /uploads
+>    +galaxy_ftp_upload_dir: "{{ galaxy_config.galaxy.ftp_upload_dir }}"
 >    +proftpd_display_connect: |
->    +  example.org FTP server
+>    +  {{ inventory_hostname }} FTP server
 >    +
 >    +  Unauthorized access is prohibited
 >    +proftpd_create_ftp_upload_dir: yes
 >    +proftpd_options:
 >    +  - User: galaxy
 >    +  - Group: galaxy
->    +  - Port: 55000
+>    +  - Port: 21
 >    +proftpd_sql_db: galaxy@/var/run/postgresql
 >    +proftpd_sql_user: galaxy
 >    +proftpd_conf_ssl_certificate: /etc/ssl/certs/cert.pem
@@ -162,22 +186,22 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```
 >    {: data-commit="Add proftpd variables"}
 >
-> Here is a description of the set variables:
+>    Here is a description of the set variables:
 >
->    | Variable             | Description                                                                                                                                                                    |
->    | ----------           | -------------                                                                                                                                                                  |
->    | `proftpd_galaxy_auth`               | Attempt to authenticate users against a Galaxy database. |
->    | `galaxy_ftp_upload_dir`             | Path to the Galaxy FTP upload directory, should match `ftp_upload_dir` in your Galaxy config.  |
->    | `proftpd_display_connect`           |  Message to display when users connect to the FTP server. This should be the message, not the path to a file.   |
->    | `proftpd_create_ftp_upload_dir`     | Whether to allow the role to create this with owner `galaxy_user`.  |
->    | `proftpd_options`                   | Any option for proftpd, we will just set up the user and group of the `galaxy_user`.  |
->    | `proftpd_sql_db`                    |  Database name to connect to for authentication info.                             |
->    | `proftpd_sql_user`                  |  (default: the value of galaxy_user): Value of the username parameter to SQLConnectInfo. |
->    | `proftpd_conf_ssl_certificate`      | Path on the remote host where the SSL certificate file is. |
->    | `proftpd_conf_ssl_certificate_key`  | Path on the remote host where the SSL private key file is. |
->    | `proftpd_global_options`            | Set arbitrary options in the <Global> context. We set here the PassivePorts range. |
->    | `proftpd_use_mod_tls_shmcache`      | By default proftpd uses `mod_tls_shmcache` which is not installed on the server so we just disable it. |
->    | `proftpd_tls_options`               | Additional options for tls. We will use `NoSessionReuseRequired` |
+>    | Variable                           | Description                                                                                                  |
+>    | ----------                         | -------------                                                                                                |
+>    | `proftpd_galaxy_auth`              | Attempt to authenticate users against a Galaxy database.                                                     |
+>    | `galaxy_ftp_upload_dir`            | Path to the Galaxy FTP upload directory, should match `ftp_upload_dir` in your Galaxy config.                |
+>    | `proftpd_display_connect`          | Message to display when users connect to the FTP server. This should be the message, not the path to a file. |
+>    | `proftpd_create_ftp_upload_dir`    | Whether to allow the role to create this with owner `galaxy_user`.                                           |
+>    | `proftpd_options`                  | Any option for proftpd, we will just set up the user and group of the `galaxy_user`.                         |
+>    | `proftpd_sql_db`                   | Database name to connect to for authentication info.                                                         |
+>    | `proftpd_sql_user`                 | (default: the value of galaxy_user): Value of the username parameter to SQLConnectInfo.                      |
+>    | `proftpd_conf_ssl_certificate`     | Path on the remote host where the SSL certificate file is.                                                   |
+>    | `proftpd_conf_ssl_certificate_key` | Path on the remote host where the SSL private key file is.                                                   |
+>    | `proftpd_global_options`           | Set arbitrary options in the <Global> context. We set here the PassivePorts range.                           |
+>    | `proftpd_use_mod_tls_shmcache`     | By default proftpd uses `mod_tls_shmcache` which is not installed on the server so we just disable it.       |
+>    | `proftpd_tls_options`              | Additional options for tls. We will use `NoSessionReuseRequired`                                             |
 >
 >    > ### {% icon tip %} Why NoSessionReuseRequired?
 >    > `mod_tls` only accepts SSL/TLS data connections that reuse the SSL session of the control connection, as a security measure. Unfortunately, there are some clients (e.g. curl/Filezilla) which do not reuse SSL sessions.
@@ -210,6 +234,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in }
+>
 {: .hands_on}
 
 Congratulations, you've set up FTP for Galaxy.
@@ -230,62 +255,88 @@ Congratulations, you've set up FTP for Galaxy.
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > You should see all the ports used by the server. What interests us is the line with proftpd.
->    > > You should see TCP *:55000 (LISTEN).
->    > > If you set up the port 55000.
+>    > > You should see TCP *:21 (LISTEN).
 >    > >
 >    > {: .solution }
 >    >
 >    {: .question}
 >
-> 4. Check the directory `/uploads/` has been created and is empty.
+> 4. Check the directory `/data/uploads/` has been created and is empty.
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```
->    > sudo tree /uploads/
+>    > sudo tree /data/uploads/
 >    > ```
 >    {: .code-in}
 >
 {: .hands_on}
 
+> ```bash
+> 1.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
+
 > ### {% icon hands_on %} Hands-on: Checking galaxy detected the ftp possibility
 >
 > 1. Open your galaxy in a browser.
 >
-> 2. Log in with a user (FTP is only possible for logged sessions).
+> 2. Log in with a user (FTP is only possible for authenticated sessions).
 >
-> 3. Click on the upload button.
-> You should now see on the bottom "Choose FTP files"
+> 3. Click on the upload button. You should now see on the bottom "Choose FTP files"
 >
-> 4. Click on the Choose FTP files button
-> You should see a message "Your FTP directory does not contain any files."
+> 4. Click on the Choose FTP files button. You should see a message "Your FTP directory does not contain any files."
 >
 {: .hands_on}
 
+It's working!
 
 > ### {% icon hands_on %} Hands-on: Upload your first file
 >
-> 1. Follow the [tutorial](https://galaxyproject.org/ftp-upload/) to upload a file.
-> Don't forget to specify the port to 55000.
-> You will have a message which ask you to approve the certificate, approve it.
+> There are three options for uploading files, you can choose whichever is easiest for you.
 >
->    > ### {% icon tip %} If you don't have a FTP client installed?
->    > You can use locally lftp to test the ftp.
->    > Install lftp with `sudo apt-get install lftp`.
->    > Add the public certificate to the list of known:
->    >    > ### {% icon code-in %} Input: Bash
->    >    > ```
->    >    > mkdir .lftp
->    >    > echo "set ssl:ca-file \"/etc/ssl/certs/cert.pem\"" > .lftp/rc
->    >    > ```
->    >    {: .code-in}
->    > Connect to the server with for example the admin account:
->    > `lftp -p 55000 admin@example.org@$HOSTNAME`
->    > Enter the password of the admin@example.org galaxy user.
->    > Put a random file:
->    > `put /srv/galaxy/server/CITATION`
->    > Check it is there with `ls`.
->    > Leave lftp with `quit`.
+> 1. **FileZilla**
+>
+>    1. Follow the [tutorial](https://galaxyproject.org/ftp-upload/) to upload a file.
+>    2. You will have a message which ask you to approve the certificate, approve it.
+>
+> 2. **lftp**
+>
+>    You can use locally lftp to test the ftp.
+>
+>    1. Install lftp with `sudo apt-get install lftp`.
+>    2. Add the public certificate to the list of known certificates (only for LetsEncrypt Staging Certificates!):
+>       > ### {% icon code-in %} Input: Bash
+>       > ```
+>       > mkdir .lftp
+>       > echo "set ssl:ca-file \"/etc/ssl/certs/cert.pem\"" > .lftp/rc
+>       > ```
+>       {: .code-in}
+>
+>    3. Connect to the server with for example the admin account:
+>       > ### {% icon code-in %} Input: Bash
+>       > ```
+>       > lftp -p 55000 admin@example.org@$HOSTNAME
+>       > ```
+>       {: .code-in}
+>
+>    4. Enter the password of the admin@example.org galaxy user.
+>    5. Put a random file:
+>
+>       `put /srv/galaxy/server/CITATION`
+>
+>    6. Check it is there with `ls`.
+>    7. Leave lftp with `quit`.
 >    {: .tip}
+>
+> 3. **Curl**
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```
+>    > curl -T {"/srv/galaxy/server/CITATION"} ftp://localhost --user admin@example.org:password --ssl -k
+>    > ```
+>    > Here `-T` says to upload a file, `--ssl` ensures that the FTP connection is SSL/TLS encrypted, and `-k` ignores any certificate issues as the hostname `localhost` will not match the certificate we have.
+>    {: .code-in}
 >
 {: .hands_on}
 
@@ -327,16 +378,16 @@ Congratulations, you've set up FTP for Galaxy.
 >
 > 3. Click on the upload button.
 >
-> 4. Click on the Choose FTP files button
-> You should see your file.
+> 4. Click on the Choose FTP files button. You should see your file.
 >
-> 5. Click on it and click on Start to launch the upload.
-> It should go to your history as a new dataset.
+> 5. Click on it and click on Start to launch the upload. It should go to your history as a new dataset.
 >
-> 6. Click again on Choose FTP files button.
-> Your file has disappeared. By default, the files are removed from the ftp at import.
+> 6. Click again on Choose FTP files button. Your file has disappeared. By default, the files are removed from the FTP at import.
 >
 >    > ### {% icon tip %} You want to change this behaviour?
 >    > You just need to add `ftp_upload_purge: false` to the galaxy_config/galaxy variables (next to `ftp_upload_dir`).
 >    {: .tip}
+>
 {: .hands_on}
+
+Congratulations! Let your users know this is an option, many of them will prefer to start large uploads from an FTP client.
