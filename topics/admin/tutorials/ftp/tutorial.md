@@ -196,7 +196,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >         - galaxyproject.nginx
 >    +    - galaxyproject.proftpd
 >         - galaxyproject.cvmfs
->         - usegalaxy_eu.gxadmin
+>         - galaxyproject.gxadmin
 >         - dj-wasabi.telegraf
 >    {% endraw %}
 >    ```
