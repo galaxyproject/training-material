@@ -7,10 +7,10 @@ questions:
 objectives:
   - Configure galaxy and install a FTP server.
   - Use an Ansible playbook for this.
-time_estimation: "TODO"
+time_estimation: "1h"
 key_points:
 contributors:
-  - ldelisle
+  - lldelisle
 subtopic: features
 requirements:
   - type: "internal"
