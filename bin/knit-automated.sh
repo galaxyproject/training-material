@@ -90,7 +90,7 @@ elif [[ "$op" == "roundtrip" ]]; then
 	bash $0 export
 	cd ${DIR} || exit
 	git init && \
-		git am -3 -- *.patch
+		git am -3 -C2 -- *.patch
 	cd -
 	bash $0 import
 else

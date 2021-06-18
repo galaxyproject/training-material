@@ -122,7 +122,9 @@ Good news! All of the failing tests are on the same Galaxy branch! That means yo
 >    > ```
 >    {: .code-in}
 >
->    Once activated, you'll see the name of the virtual environment prepended to your shell prompt: `(.venv)$`. 5. Now you are ready to install the dependencies. Since you wil be doing development, you need to install the dependencies listed in `lib/galaxy/dependencies/dev-requirements.txt`:
+>    Once activated, you'll see the name of the virtual environment prepended to your shell prompt: `(.venv)$`. 
+>  
+> 5. Now you are ready to install the dependencies. Since you wil be doing development, you need to install the dependencies listed in `lib/galaxy/dependencies/dev-requirements.txt`:
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
@@ -244,7 +246,7 @@ Most of Galaxy unit tests are designed to test a separate component or function,
 
 # API test failure
 
-API test various aspects of the Galaxy API, as well as general backend aspects of Galaxy using the API. These tests require a Galaxy instance.
+API tests test various aspects of the Galaxy API, as well as general backend aspects of Galaxy using the API. These tests require a Galaxy instance.
 
 > ### {% icon hands_on %} Hands-on: Fixing a failing API test
 >
@@ -325,7 +327,7 @@ API test various aspects of the Galaxy API, as well as general backend aspects o
 >    If we carefully trace the code in `LicensesManager`, we'll find the error. Do you see it?
 >
 >    > ### {% icon solution %} Solution
->    > The `get_license_by_id()` method raises an `ObjectNotFound` error (which results in the 404 status code we see in the test result). This error is a direct result of the `get` method called on the previous line - take a look at that method:
+>    > The `get_license_by_id()` method raises an `ObjectNotFound` error (which results in the 404 status code we see in the test result). This error is a direct result of the LicensesManager `get` method called on the previous line (`license = self.get(id)`) - take a look at that method:
 >    > ```python
 >    >     def get(self, uri):
 >    >         if uri not in self._by_index:

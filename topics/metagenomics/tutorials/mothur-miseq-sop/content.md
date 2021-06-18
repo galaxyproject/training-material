@@ -256,7 +256,7 @@ the reads for all the overlapping positions.
 
 > ### {% icon hands_on %} Hands-on: Combine forward and reverse reads into contigs
 >
-> - **Make.contigs** {% icon tool %} with the following parameters
+> -  {% tool [Make.contigs](toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_contigs/mothur_make_contigs/1.39.5.1) %} with the following parameters
 >   - {% icon param-select %} *"Way to provide files"*: `Multiple pairs - Combo mode`
 >   - {% icon param-collection %} *"Fastq pairs"*: the collection you just created
 >   - Leave all other parameters to the default settings
@@ -334,7 +334,7 @@ As the next step, we want to improve the quality of our data. But first, let's g
 
 > ### {% icon hands_on %} Hands-on: Summarize data
 >
-> - **Summary.seqs** {% icon tool %} with the following parameters
+> - {% tool [Summary.seqs](toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0) %} with the following parameters
 >   - {% icon param-file %} *"fasta"*: the `trim.contigs.fasta` file created by **Make.contigs** {% icon tool%}
 >   - *"Output logfile?"*: `yes`
 >
@@ -375,7 +375,7 @@ We do this data cleaning using the `Screen.seqs` tool, which removes
 
 > ### {% icon hands_on %} Hands-on: Filter reads based on quality and length
 >
-> - **Screen.seqs** {% icon tool %} with the following parameters
+> - {% tool [Screen.seqs](toolshed.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1) %} with the following parameters
 >   - {% icon param-file %} *"fasta"*: the `trim.contigs.fasta` file created by **Make.contigs** {% icon tool %}
 >   - {% icon param-file %} *"group"*: the group file created in the **Make.contigs** {% icon tool %} step
 >   - *"maxlength"*: `275`
@@ -406,7 +406,7 @@ the original dataset. We do this by using the **Unique.seqs** tool.
 
 > ### {% icon hands_on %} Hands-on: Remove duplicate sequences
 >
-> - **Unique.seqs** {% icon tool %} with the following parameters
+> - {% tool [Unique.seqs](toolshed.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0) %} with the following parameters
 >   - {% icon param-file %} *"fasta"*: the `good.fasta` output from **Screen.seqs** {% icon tool %}
 >   - *"output format"*: `Name File`
 >
@@ -451,7 +451,7 @@ the *group file* and the *names file* into a single *count table*.
 
 > ### {% icon hands_on %} Hands-on: Generate count table
 >
-> - **Count.seqs** {% icon tool %} with the following parameters
+> - {% tool [Count.seqs](toolshed.g2.bx.psu.edu/repos/iuc/mothur_count_seqs/mothur_count_seqs/1.39.5.0) %} with the following parameters
 >   - {% icon param-file %} *"name"*: the `names` output from **Unique.seqs** {% icon tool %}
 >   - *"Use a Group file"*: `yes`
 >   - {% icon param-file %} *"group"*: the `group file` we created using the **Screen.seqs** {% icon tool %}
@@ -494,7 +494,7 @@ step to improve the clustering of your OTUs {% cite Schloss2012 %}.
 
 > ### {% icon hands_on %} Hands-on: Align sequences
 >
-> 1. **Align.seqs** {% icon tool %} with the following parameters
+> 1. {% tool [Align.seqs](toolshed.g2.bx.psu.edu/repos/iuc/mothur_align_seqs/mothur_align_seqs/1.39.5.0) %} with the following parameters
 >   - {% icon param-file %} *"fasta"*: the `fasta` output from **Unique.seqs** {% icon tool %}
 >   - {% icon param-file %} *"reference"*: `silva.v4.fasta` reference file from your history
 > <br><br>
@@ -524,7 +524,7 @@ step to improve the clustering of your OTUs {% cite Schloss2012 %}.
 >     > {: .solution }
 >     {: .question}
 >
-> 2. **Summary.seqs** {% icon tool %} with the following parameters:
+> 2. {% tool [Summary.seqs](toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0) %} with the following parameters:
 >   - {% icon param-file %} *"fasta"*: the `align` output from **Align.seqs** {% icon tool %}
 >   - {% icon param-file %} *"count"*: `count_table` output from **Count.seqs** {% icon tool %}
 >   - *"Output logfile?"*: `yes`
@@ -574,7 +574,7 @@ To ensure that all our reads overlap our region of interest, we will:
 
 > ### {% icon hands_on %} Hands-on: Remove poorly aligned sequences
 >
-> 1. **Screen.seqs** {% icon tool %} with the following parameters
+> 1. {% tool [Screen.seqs](toolshed.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1) %} with the following parameters
 >   - {% icon param-file %} *"fasta"*: the aligned fasta file from **Align.seqs** {% icon tool %}
 >   - *"start"*: `1968`
 >   - *"end"*: `11550`
@@ -593,7 +593,7 @@ To ensure that all our reads overlap our region of interest, we will:
 >
 >     Next, we will remove any overhang on either side of the V4 region, and
 >
-> 2. **Filter.seqs** {% icon tool %} with the following parameters
+> 2. {% tool [Filter.seqs](toolshed.g2.bx.psu.edu/repos/iuc/mothur_filter_seqs/mothur_filter_seqs/1.39.5.0) %} with the following parameters
 >   - {% icon param-file %} *"fasta"*: `good.fasta` output from the latest **Screen.seqs** {% icon tool %}
 >   - *"vertical"*: `yes`
 >   - *"trump"*: `.`
@@ -633,7 +633,7 @@ the **Unique.seqs** tool:
 
 > ### {% icon hands_on %} Hands-on: Re-obtain unique sequences
 >
-> - **Unique.seqs** {% icon tool %} with the following parameters
+> - {% tool [Unique.seqs](toolshed.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0) %} with the following parameters
 >   - {% icon param-file %} *"fasta"*: the `filtered fasta` output from **Filter.seqs** {% icon tool %}
 >   - {% icon param-file %} *"name file or count table"*: the `count table` from the last **Screen.seqs** {% icon tool %}
 >
@@ -656,7 +656,7 @@ our contigs are ~250 bp long, we will set the threshold to 2 mismatches.
 
 > ### {% icon hands_on %} Hands-on: Perform preliminary clustering of sequences
 >
-> - **Pre.cluster** {% icon tool %} with the following parameters
+> - {% tool [Pre.cluster](toolshed.g2.bx.psu.edu/repos/iuc/mothur_pre_cluster/mothur_pre_cluster/1.39.5.0) %} with the following parameters
 >   - {% icon param-file %} *"fasta"*: the `fasta` output from the last **Unique.seqs** {% icon tool %} run
 >   - {% icon param-file %} *"name file or count table"*: the `count table` from the last **Unique.seqs** {% icon tool %}
 >   - *"diffs"*: `2`
@@ -743,7 +743,7 @@ way of doing this is to use the abundant sequences as our reference.
 
 > ### {% icon hands_on %} Hands-on: Remove chimeric sequences
 >
-> 1. **Chimera.vsearch** {% icon tool %} with the following parameters
+> 1. {% tool [Chimera.vsearch](toolshed.g2.bx.psu.edu/repos/iuc/mothur_chimera_vsearch/mothur_chimera_vsearch/1.39.5.1) %} with the following parameters
 >   - {% icon param-file %} *"fasta"*: the `fasta` output from **Pre.cluster** {% icon tool %}
 >   - {% icon param-select %} *"Select Reference Template from"*: `Self`
 >   - {% icon param-file %} *"count"*: the `count table` from the last **Pre.cluster** {% icon tool %}
@@ -752,7 +752,7 @@ way of doing this is to use the abundant sequences as our reference.
 >     Running **Chimera.vsearch** with the count file will remove the chimeric sequences from the count table, but we
 >     still need to remove those sequences from the fasta file as well. We do this using **Remove.seqs**:
 >
-> 2. **Remove.seqs** {% icon tool %} with the following parameters
+> 2. {% tool [Remove.seqs](toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_seqs/mothur_remove_seqs/1.39.5.0) %} with the following parameters
 >   - {% icon param-file %} *"accnos"*: the `vsearch.accnos` file from **Chimera.vsearch** {% icon tool %}
 >   - {% icon param-file %} *"fasta"*: the `fasta` output from **Pre.cluster** {% icon tool %}
 >   - {% icon param-file %} *"count"*: the `count table` from **Chimera.vsearch** {% icon tool %}
@@ -828,7 +828,7 @@ and want to remove them from our dataset.
 
 > ### {% icon hands_on %} Hands-on: Taxonomic Classification and Removal of undesired sequences
 >
-> 1. **Classify.seqs** {% icon tool %} with the following parameters
+> 1. {% tool [Classify.seqs](toolshed.g2.bx.psu.edu/repos/iuc/mothur_classify_seqs/mothur_classify_seqs/1.39.5.0) %} with the following parameters
 >   - {% icon param-file %} *"fasta"*: the `fasta` output from **Remove.seqs** {% icon tool %}
 >   - {% icon param-file %} *"reference"*: `trainset9032012.pds.fasta` from your history
 >   - {% icon param-file %} *"taxonomy"*: `trainset9032012.pds.tax` from your history
@@ -839,7 +839,7 @@ and want to remove them from our dataset.
 >     Now that everything is classified we want to remove our undesirables. We do this with the **Remove.lineage**
 >     tool:
 >
-> 2. **Remove.lineage** {% icon tool %} with the following parameters
+> 2. {% tool [Remove.lineage](toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_lineage/mothur_remove_lineage/1.39.5.0) %} with the following parameters
 >   - {% icon param-file %} *"taxonomy"*: the taxonomy output from **Classify.seqs** {% icon tool %}
 >   - {% icon param-text %} *"taxon - Manually select taxons for filtering"*: `Chloroplast-Mitochondria-unknown-Archaea-Eukaryota`
 >   - {% icon param-file %} *"fasta"*: the `fasta` output from **Remove.seqs** {% icon tool %}
@@ -932,7 +932,7 @@ First, let's extract the sequences belonging to our mock samples from our data:
 
 > ### {% icon hands_on %} Hands-on: extract mock sample from our dataset
 >
-> - **Get.groups** {% icon tool %} with the following parameters
+> - {% tool [Get.groups](toolshed.g2.bx.psu.edu/repos/iuc/mothur_get_groups/mothur_get_groups/1.39.5.0) %} with the following parameters
 >   - {% icon param-file %} *"group file or count table"*: the `count table` from **Remove.lineage** {% icon tool %}
 >   - {% icon param-select %} *"groups"*: `Mock`
 >   - {% icon param-file %} *"fasta"*: `fasta` output from **Remove.lineage** {% icon tool %}
@@ -953,7 +953,7 @@ The **Seq.error** tool measures the error rates using our mock reference. Here w
 the reads from our mock sample back to their known sequences, to see how many fail to match.
 
 > ### {% icon hands_on %} Hands-on: Assess error rates based on a mock community
-> - **Seq.error** {% icon tool %} with the following parameters
+> - {% tool [Seq.error](toolshed.g2.bx.psu.edu/repos/iuc/mothur_seq_error/mothur_seq_error/1.39.5.0) %} with the following parameters
 >   - {% icon param-file %} *"pick.fasta"*: the `fasta` output from **Get.groups** {% icon tool %}
 >   - {% icon param-file %} *"reference"*: `HMP_MOCK.v35.fasta` file from your history
 >   - {% icon param-file %} *"count"*: the `count table` from **Get.groups** {% icon tool %}
@@ -1006,26 +1006,26 @@ and comparing the results with the expected outcome.
 >
 > First we calculate the pairwise distances between our sequences
 >
-> 1. **Dist.seqs** {% icon tool %} with the following parameters
+> 1. {% tool [Dist.seqs](toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_seqs/mothur_dist_seqs/1.39.5.0) %} with the following parameters
 >   - {% icon param-file %} *"fasta"*: the `fasta` from **Get.groups** {% icon tool %}
 >   - *"cutoff"*: `0.20`
 >
 >     Next we group sequences into OTUs
 >
-> 2. **Cluster - Assign sequences to OTUs** {% icon tool %} with the following parameters
+> 2. {% tool [Cluster - Assign sequences to OTUs](toolshed.g2.bx.psu.edu/repos/iuc/mothur_cluster/mothur_cluster/1.39.5.0) %} with the following parameters
 >   - {% icon param-file %} *"column"*: the `dist` output from **Dist.seqs** {% icon tool %}
 >   - {% icon param-file %} *"count"*: the `count table` from **Get.groups** {% icon tool %}
 >
 >     Now we make a *shared* file that summarizes all our data into one handy table
 >
-> 3. **Make.shared** {% icon tool %} with the following parameters
+> 3. {% tool [Make.shared](toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_shared/mothur_make_shared/1.39.5.0) %} with the following parameters
 >   - {% icon param-file %} *"list"*: the `OTU list` from **Cluster** {% icon tool %}
 >   - {% icon param-file %} *"count"*: the `count table` from **Get.groups** {% icon tool %}
 >   - *"label"*: `0.03` (this indicates we are interested in the clustering at a 97% identity threshold)
 >
 >     And now we generate intra-sample rarefaction curves
 >
-> 4. **Rarefaction.single** {% icon tool %} with the following parameters
+> 4. {% tool [Rarefaction.single](toolshed.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0) %} with the following parameters
 >   - {% icon param-file %} *"shared"*: the `shared` file from **Make.shared** {% icon tool %}
 >
 > {% endif %}
@@ -1105,7 +1105,7 @@ the **Remove.groups** tool:
 
 > ### {% icon hands_on %} Hands-on: Remove Mock community from our dataset
 >
-> - **Remove.groups** {% icon tool %} with the following parameters
+> - {% tool [Remove.groups](toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_groups/mothur_remove_groups/1.39.5.0) %} with the following parameters
 >   - {% icon param-select %} *"Select input type"*: `fasta , name, taxonomy, or list with a group file or count table`
 >   - {% icon param-file %} *"group or count table"*: the `pick.count_table` output from **Remove.lineage** {% icon tool %}
 >   - {% icon param-select %} *"groups"*: `Mock`
@@ -1147,7 +1147,7 @@ We'll now use the **Cluster** tool, with `taxlevel` set to `4`, requesting that 
 >
 > {% else %}
 >
-> 1. **Cluster.split** {% icon tool %} with the following parameters
+> 1. {% tool [Cluster.split](toolshed.g2.bx.psu.edu/repos/iuc/mothur_cluster_split/mothur_cluster_split/1.39.5.0) %} with the following parameters
 >   - *"Split by"*: `Classification using fasta`
 >   - {% icon param-file %} *"fasta"*: the `fasta` output from **Remove.groups** {% icon tool %}
 >   - {% icon param-file %} *"taxonomy"*: the `taxonomy` output from **Remove.groups** {% icon tool %}
@@ -1158,7 +1158,7 @@ We'll now use the **Cluster** tool, with `taxlevel` set to `4`, requesting that 
 >    Next we want to know how many sequences are in each OTU from each group and we can do this using the
 >    **Make.shared** tool. Here we tell mothur that we're really only interested in the 0.03 cutoff level:
 >
-> 2. **Make.shared** {% icon tool %} with the following parameters
+> 2. {% tool [Make.shared](toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_shared/mothur_make_shared/1.39.5.0) %} with the following parameters
 >   - {% icon param-file %} *"list"*: the `list` output from **Cluster.split** {% icon tool %}
 >   - {% icon param-file %} *"count"*: the `count table` from **Remove.groups** {% icon tool %}
 >   - *"label"*: `0.03`
@@ -1166,7 +1166,7 @@ We'll now use the **Cluster** tool, with `taxlevel` set to `4`, requesting that 
 >    We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each
 >    OTU using the **Classify.otu** tool:
 >
-> 3. **Classify.otu** {% icon tool %} with the following parameters
+> 3. {% tool [Classify.otu](toolshed.g2.bx.psu.edu/repos/iuc/mothur_classify_otu/mothur_classify_otu/1.39.5.0) %} with the following parameters
 >   - {% icon param-file %} *"list"*: the `list` output from **Cluster.split** {% icon tool %}
 >   - {% icon param-file %} *"count"*: the `count table` from **Remove.groups** {% icon tool %}
 >   - {% icon param-file %} *"taxonomy"*: the `taxonomy` output from **Remove.groups** {% icon tool %}
@@ -1222,7 +1222,7 @@ dataset by subsampling.
 > First we want to see how many sequences we have in each sample. We'll do this with the
 > **Count.groups** tool:
 >
-> 1. **Count.groups** {% icon tool %} with the following parameters
+> 1. {% tool [Count.groups](toolshed.g2.bx.psu.edu/repos/iuc/mothur_count_groups/mothur_count_groups/1.39.5.0) %} with the following parameters
 >   - {% icon param-file %} *"shared"*: the `shared` file from **Make.shared** {% icon tool %}
 >
 >    > ### {% icon question %} Question
@@ -1232,7 +1232,7 @@ dataset by subsampling.
 >    > {: .solution}
 >    {: .question}
 >
-> 2. **Sub.sample** {% icon tool %} with the following parameters
+> 2. {% tool [Sub.sample](toolshed.g2.bx.psu.edu/repos/iuc/mothur_sub_sample/mothur_sub_sample/1.39.5.0) %} with the following parameters
 >   - *"Select type of data to subsample"*: `OTU Shared`
 >   - {% icon param-file %} *"shared"*: the `shared` file from **Make.shared** {% icon tool %}
 >   - *"size"*: `2389`
@@ -1341,7 +1341,7 @@ We will use a plotting tool to visualize the rarefaction curves, and use **Summa
 We calculate rarefaction curves with the **Rarefaction.single** {% icon tool %} tool:
 
 > ### {% icon hands_on %} Hands-on: Calculate Rarefaction
-> - **Rarefaction.single** {% icon tool %} with the following parameters
+> - {% tool [Rarefaction.single](toolshed.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0) %} with the following parameters
 >   - {% icon param-file %} *"shared"*: the `shared file` from **Make.shared** {% icon tool %}
 {: .hands_on}
 
@@ -1370,7 +1370,7 @@ Let's plot the rarefaction curve for a couple of our sequences:
 
 > ### {% icon hands_on %} Hands-on: Plot Rarefaction
 >
-> - **Plotting tool - for multiple series and graph types** {% icon tool %} with the following parameters
+> - {% tool [Plotting tool - for multiple series and graph types](toolshed.g2.bx.psu.edu/repos/devteam/xy_plot/XY_Plot_1/1.0.2) %} with the following parameters
 >   - *"Plot Title"*: `Rarefaction`
 >   - *"Label for x axis"*: `Number of Sequences`
 >   - *"Label for y axis"*: `Number of OTUs`
@@ -1398,7 +1398,7 @@ will randomly subsample down to 2389 sequences, repeat this process 1000 times, 
 
 > ### {% icon hands_on %} Hands-on: Summary.single
 >
-> - **Summary.single** {% icon tool %} with the following parameters
+> - {% tool [Summary.single](toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_single/mothur_summary_single/1.39.5.2) %} with the following parameters
 >   - {% icon param-file %} *"share"*: the `shared` file from **Make.shared** {% icon tool %}
 >   - *"calc"*: `nseqs,coverage,sobs,invsimpson`
 >   - *"size"*: `2389`
@@ -1484,14 +1484,14 @@ We calculate this with the **Dist.shared** tool, which will rarefy our data.
 
 > ### {% icon hands_on %} Hands-on: Beta diversity
 >
-> 1. **Dist.shared** {% icon tool %} with the following parameters
+> 1. {% tool [Dist.shared](toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_shared/mothur_dist_shared/1.39.5.0) %} with the following parameters
 >   - {% icon param-file %} *"shared"*: to the `shared` file from **Make.shared** {% icon tool %}
 >   - *"calc"*: `thetayc,jclass`
 >   - *"subsample"*: `2389`
 >
 >    Let's visualize our data in a Heatmap:
 >
-> 2. **Heatmap.sim** {% icon tool %} with the following parameters
+> 2. {% tool [Heatmap.sim](toolshed.g2.bx.psu.edu/repos/iuc/mothur_heatmap_sim/mothur_heatmap_sim/1.39.5.0) %} with the following parameters
 >   - *"Generate Heatmap for"*: `phylip`
 >   - {% icon param-collection %} *"phylip"*: the output of **Dist.shared** {% icon tool %} (this is a collection input)
 >
@@ -1519,7 +1519,7 @@ Let's take a look at the Venn diagrams for the first 4 time points of female 3 u
 
 > ### {% icon hands_on %} Hands-on: Venn diagram
 >
-> - **Venn** {% icon tool %} with the following parameters
+> - {% tool [Venn](toolshed.g2.bx.psu.edu/repos/iuc/mothur_venn/mothur_venn/1.39.5.0) %} with the following parameters
 >   - {% icon param-collection %} *"OTU Shared"*: output from **Sub.sample** {% icon tool %} (collection)
 >   - *"groups"*: `F3D0,F3D1,F3D2,F3D3`
 {: .hands_on}
@@ -1542,11 +1542,11 @@ dendrogram using the `jclass` and `thetayc` calculators within the **Tree.shared
 
 > ### {% icon hands_on %} Tree
 >
-> 1. **Tree.shared** {% icon tool %} with the following parameters
+> 1. {% tool [Tree.shared](toolshed.g2.bx.psu.edu/repos/iuc/mothur_tree_shared/mothur_tree_shared/1.39.5.0) %} with the following parameters
 >   - *"Select input format"*: `Phylip Distance Matrix`
 >   - {% icon param-collection %} *"phylip"*: the `distance files` output from **Dist.shared** {% icon tool%}
 >
-> 2. **Newick display** {% icon tool %} with the following parameters
+> 2. {% tool [Newick display](toolshed.g2.bx.psu.edu/repos/iuc/newick_utils/newick_display/1.6+galaxy1) %} with the following parameters
 >  - {% icon param-collection %} *"Newick file"*: output from **Tree.shared** {% icon tool %}
 {: .hands_on}
 
@@ -1575,10 +1575,10 @@ A tool we can use to visualize the composition of our community, is [Krona](http
 >
 >  First we convert our mothur taxonomy file to a format compatible with Krona
 >
-> 1. **Taxonomy-to-Krona** {% icon tool %} with the following parameters
+> 1. {% tool [Taxonomy-to-Krona](toolshed.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0) %} with the following parameters
 >   - {% icon param-collection %} *"Taxonomy file"*: the `taxonomy` output from **Classify.otu**
 >
-> 2. **Krona pie chart** {% icon tool %} with the following parameters
+> 2. {% tool [Krona pie chart](toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0) %} with the following parameters
 >   - *"Type of input"*: `Tabular`
 >   - {% icon param-collection %} *"Input file"*: the `taxonomy` output from **Taxonomy-to-Krona** {% icon tool %}
 {: .hands_on}
@@ -1636,10 +1636,10 @@ taxonomy files. In the following exercise, we will create a Krona plot with per-
 > >
 > >     <br> You should now have a collection with per-sample files <br><br>
 > >
-> > 2. **Taxonomy-to-Krona** {% icon tool %} with the following parameters
+> > 2. {% tool [Taxonomy-to-Krona](toolshed.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0) %} with the following parameters
 > >     - {% icon param-collection %} *"Taxonomy file"*: the `taxonomy` collection from **Classify.otu** {% icon tool%}
 > >
-> > 3. **Krona pie chart** {% icon tool %} with the following parameters
+> > 3. {% tool [Krona pie chart](toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0) %} with the following parameters
 > >   - *"Type of input"*: `Tabular`
 > >   - {% icon param-collection %} *"Input file"*: the collection from **Taxonomy-to-Krona** {% icon tool %}
 > >   - *"Combine data from multiple datasets?"*: `No`
@@ -1660,7 +1660,7 @@ view it in a platform like [Phinch](http://www.phinch.org/).
 
 > ### {% icon hands_on %} Hands-on: Phinch
 >
-> 1. **Make.biom** {% icon tool %} with the following parameters
+> 1. {% tool [Make.biom](toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_biom/mothur_make_biom/1.39.5.0) %} with the following parameters
 >   - {% icon param-collection %} *"shared"*: the output from **Sub.sample** {% icon tool %}
 >   - {% icon param-collection %} *"constaxonomy"*: the `taxonomy` output from **Classify.otu** {% icon tool %}
 >   - {% icon param-file %} *"metadata"*: the `mouse.dpw.metadata` file you uploaded at the start of this tutorial
