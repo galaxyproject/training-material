@@ -115,8 +115,14 @@ In a typical the DIA-MS experiment, the precursor scan usually ranges between 40
 >       - From: **T4_Salmonella_Ecoli_Bacillus_fasta_trypsin_z2_nce33_BS_191102.dlib**
 >       - To: **T4_Salmonella_Ecoli_Bacillus_fasta_trypsin_z2_nce33_BS_191102.dlib**
 > 4. Check that the datatype
->
+>    - For the Fasta file- datatype should be set as fasta
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fasta" %}
+>    
+>    - For the Library file- datatype should be set as fasta
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="dlib" %}
+>    
+>    - For the Raw file- datatype should be set as fasta
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="thermo.raw" %}
 >
 > 5. Add to each dataset a tag corresponding to file-type, i.e.
 >    - GPF datasets can be labeled as `#gpf`
