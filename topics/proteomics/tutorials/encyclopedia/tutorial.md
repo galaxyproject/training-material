@@ -124,7 +124,7 @@ In a typical the DIA-MS experiment, the precursor scan usually ranges between 40
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
-> 6. Please create a dataset collection for both the GPF files and the Experimental Design files.
+> 6. Please create a dataset collection for both the GPF files and the Experimental Design files. Name the dataset collection as "**GPF collection**" and "**Experimental Design collection**"
 >
 >    {% snippet faqs/galaxy/collections_build_list.md %}
 >
@@ -148,7 +148,7 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 > ### {% icon hands_on %} Hands-on: Conversion of GPF DIA mass spectrometry raw data to mzML data-type.
 >
 > 1. {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1) %} with the following parameters:
->    - {% icon param-collection %} *"Input unrefined MS data"*: `output` (Input dataset collection)
+>    - {% icon param-collection %} *"Input unrefined MS data"*: `GPF collection` (Input dataset collection)
 >    - *"Do you agree to the vendor licenses?"*: `Yes`
 >    - *"Output Type"*: `mzML`
 >    - In *"Data Processing Filters"*:
@@ -191,7 +191,7 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 > ### {% icon hands_on %} Hands-on: Conversion of Experimental DIA mass spectrometry raw data to mzML data-type.
 >
 > 1. {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1) %} with the following parameters:
->    - {% icon param-collection %} *"Input unrefined MS data"*: `output` (Input dataset collection)
+>    - {% icon param-collection %} *"Input unrefined MS data"*: `Experimental Design collection` (Input dataset collection)
 >    - *"Do you agree to the vendor licenses?"*: `Yes`
 >    - *"Output Type"*: `mzML`
 >    - In *"Data Processing Filters"*:
