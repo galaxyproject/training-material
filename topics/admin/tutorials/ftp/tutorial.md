@@ -90,7 +90,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -159,6 +162,7 @@ certbot_well_known_root: /srv/nginx/_well-known_root
+>    @@ -158,6 +158,7 @@ certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - nginx
 >       - rabbitmq
@@ -108,7 +108,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -93,6 +93,9 @@ galaxy_config:
+>    @@ -92,6 +92,9 @@ galaxy_config:
 >         allow_user_impersonation: true
 >         # Tool security
 >         outputs_to_working_directory: true
@@ -130,10 +130,10 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -223,6 +227,27 @@ rabbitmq_users:
+>    @@ -226,6 +226,27 @@ rabbitmq_users:
 >         password: "{{ vault_rabbitmq_password_vhost }}"
 >         vhost: /pulsar/galaxy_au
->     
+>
 >    +# Proftpd:
 >    +proftpd_galaxy_auth: yes
 >    +galaxy_ftp_upload_dir: /uploads
@@ -196,7 +196,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >         - galaxyproject.nginx
 >    +    - galaxyproject.proftpd
 >         - galaxyproject.cvmfs
->         - galaxyproject.gxadmin
+>         - usegalaxy_eu.gxadmin
 >         - dj-wasabi.telegraf
 >    {% endraw %}
 >    ```
