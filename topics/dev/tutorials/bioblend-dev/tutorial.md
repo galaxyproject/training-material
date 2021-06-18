@@ -605,9 +605,9 @@ As it turns out, a corresponding [`uninstall_dependencies()`](https://github.com
 >    In the end, our new method should look something like this:
 >
 >    ```python
->    def install_dependencies(self, tool_id: str) -> List[dict]:
+>    def uninstall_dependencies(self, tool_id: str) -> List[dict]:
 >        """
->        Install dependencies for a given tool via a resolver.
+>        Uninstall dependencies for a given tool via a resolver.
 >
 >        :type tool_id: str
 >        :param tool_id: id of the requested tool
@@ -615,7 +615,7 @@ As it turns out, a corresponding [`uninstall_dependencies()`](https://github.com
 >        :rtype: list of dicts
 >        :return: Tool requirement statuses
 >        """
->        url = self._make_url(tool_id) + '/install_dependencies'
+>        url = self._make_url(tool_id) + '/dependencies'
 >        return self._delete(payload={}, url=url)
 >    ```
 >
@@ -716,7 +716,7 @@ It makes sense to test our method against the most recent changes of Galaxy, so 
 > ```
 > And this command runs only the test named `test_get_jobs`:
 > ```shell
-> ./run_bioblend_tests \
+> ./run_bioblend_tests.sh \
 >     -g ../galaxy \
 >     -e py39 \
 >     -t tests/TestGalaxyJobs.py::TestGalaxyJobs::test_get_jobs
