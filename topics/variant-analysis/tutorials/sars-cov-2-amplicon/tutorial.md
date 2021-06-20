@@ -29,7 +29,7 @@ contributors:
 
 <!-- This is a comment. -->
 
-{% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/Introduction.md %}
+{% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/introduction.md %}
 
 General introduction about the topic and then an introduction of the
 tutorial (the questions and the objectives). It is nice also to have a
@@ -141,11 +141,11 @@ follow two paths: we need to identify the variation in the genome that is presen
 and we need to construct a consensus genome from which we can infer the viral lineage of the sample (and make the genome 
 available for deposit in a database or use in constructing a phylogeny).
 
-{% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/Variant_annotation.md %}
+{% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/variant_annotation.md %}
 
-{% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/Consensus_genome_characterization.md %}
+{% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/consensus_genome_characterization.md %}
 
-{% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/Lineage_designation.md %}
+{% include topics/variant-analysis/tutorials/sars-cov-2-amplicon/lineage_designation.md %}
 
 
 # Conclusion
