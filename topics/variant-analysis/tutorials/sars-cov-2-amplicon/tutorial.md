@@ -117,7 +117,7 @@ have fun!
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
-> 6. Convert the FASTQ datasets to a [List Paired collection](topics/galaxy-interface/tutorials/collections/tutorial.html).
+> 6. Convert the FASTQ datasets to a [List Paired collection]({{ site.baseurl }}/topics/galaxy-interface/tutorials/collections/tutorial.html).
 >
 {: .hands_on}
 
