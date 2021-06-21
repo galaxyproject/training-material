@@ -787,7 +787,7 @@ Si te interesa analizar datos de acceso público, particularmente del  [Single C
 >    - *"Cell metadata table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv`
 {: .hands_on}
 
-It's important to note that this matrix is processed somewhat through the SCXA pipeline, which is quite similar to this tutorial, and it contains any and all metadata provided by their pipeline as well as the authors (for instance, more cell or gene annotations).
+Es importante tener en cuenta que esta matriz es procesada de cierto modo por medio del pipeline SCXA, que es muy similar a este tutorial, y que contiene todos y cada uno de los metadatos proporcionados por su pipeline, así como sus autores (por ejemplo, más anotaciones celulares o de genes).
 
 # Conclusion
 {:.no_toc}
