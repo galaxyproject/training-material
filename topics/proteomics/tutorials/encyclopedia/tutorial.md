@@ -109,13 +109,10 @@ In a typical the DIA-MS experiment, the precursor scan usually ranges between 40
 >       - To: **191023JAT12_4_Mix_3_1ug_pOT_30k_390_1010_12.raw**
 >       - Again, the "%20" characters were removed
 > 4. Check that the datatype
->    - For the Fasta file- datatype should be set as fasta
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fasta" %}
->    
->    - For the Library file- datatype should be set as fasta
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="dlib" %}
->    
->    - For the Raw file- datatype should be set as fasta
+>    - For the FASTA file, the datatype should be set as `fasta`
+>    - For the Library files, the datatype should be set as `dlib`
+>    - For the Raw files, the datatype should be set as `thermo.raw`
+>
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="thermo.raw" %}
 >
 > 5. Add to each dataset a tag corresponding to file-type, i.e.
@@ -124,7 +121,8 @@ In a typical the DIA-MS experiment, the precursor scan usually ranges between 40
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
-> 6. Please create a dataset collection for both the GPF files and the Experimental Design files. Name the dataset collection as "**GPF collection**" and "**Experimental Design collection**"
+> 6. Please create a dataset collection for both the GPF files and the Experimental Design files.
+>    - Name the dataset collections as "**GPF collection**" and "**Experimental Design collection**"
 >
 >    {% snippet faqs/galaxy/collections_build_list.md %}
 >
