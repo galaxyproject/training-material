@@ -796,7 +796,7 @@ Es importante tener en cuenta que esta matriz es procesada de cierto modo por me
 
 ![Workflow Part 2](../../images/wab-alevin-part2workflow.png "Flujo de trabajo - Pasos 4-6")
 
-¡Has llegado al final de esta sesión! Quizá te interese darle un vistazo a un [ejemplo de un historial](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---answer-key-1) y a la [Parte 2 del flujo de trabajo](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/pre-processing-with-alevin---part-2). Nota que según la forma en que ejecutes el flujo de trabajo este requerirá que cambies la columna (`column`) que contiene el lote de metadatos. [Aquí](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---total-anndata-example). Puedes encontrar el objeto final que contiene todas las lecturas.
+¡Has llegado al final de esta sesión! Quizá te interese echarle un vistazo a un [ejemplo de un historial](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---answer-key-1) y a la [Parte 2 del flujo de trabajo](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/pre-processing-with-alevin---part-2). Nota que según la forma en que ejecutes el flujo de trabajo este requerirá que cambies la columna (`column`) que contiene el lote de metadatos. [Aquí](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---total-anndata-example) puedes encontrar el objeto final que contiene todas las lecturas.
 
 Hemos:
 
