@@ -1489,7 +1489,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    - Galaxy has been deployed to `/srv/galaxy/server`
 >    - The configuration lives in `/srv/galaxy/config/galaxy.yml` - be sure to look through it to see what options have been set for you
->    - Note the permissions of the contents of `/srv/galaxy`
+>    - Note the ownership and permissions of the contents of `/srv/galaxy`
 >    - Some config files that Galaxy maintains itself, such as `shed_tool_conf.xml`, which controls what tools that you have installed from the Tool Shed will be loaded, have been instantiated in `/srv/galaxy/var/config`
 >    - A Python virtualenv - an isolated Python environment - with all of the Galaxy framework's dependencies has been installed in `/srv/galaxy/venv`
 >
