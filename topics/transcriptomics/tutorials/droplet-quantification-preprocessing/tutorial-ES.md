@@ -19,7 +19,7 @@ objectives:
 time_estimation: 3H
 
 key_points:
-  - Partiendo de archivos FASTQ crear un objeto de AnnData que sea accesible con scanpy, incluir metadatos relevantes sobre células y genes
+  - Partiendo de archivos FASTQ crear un objeto AnnData que sea accesible con scanpy, incluir metadatos relevantes sobre células y genes
   - Combinar múltiples muestras y etiquetar según el diseño del estudio
 
 tags:
