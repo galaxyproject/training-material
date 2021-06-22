@@ -803,7 +803,7 @@ Hemos:
 * Tomado lecturas crudas, anotaciones y los archivos de entrada necesarios para cuantificación.
 * Ejecutado Alevin con dos distintas configuraciones de parámetros, ambas permitiendo que la herramienta tome sus propias decisiones sobre qué es lo que constituyen las gotas vacías y, hemos aplicado emptyDrops en su lugar.
 * Desplegado gráficos de rangos de códigos de barras para valorar de manera rápida las señales presentes en los conjuntos de datos generados por técnicas de goteo.
-* Aplicado las conversiones necesarias para pasar estos datos a los procesos subsecuentes
-* Obtenido datos con análisis parciales desde el Single Cell Expression Atlas
+* Aplicado las conversiones necesarias para pasar estos datos a los procesos subsecuentes.
+* Obtenido datos con análisis parciales desde el Single Cell Expression Atlas.
 
 ¡Únete a nuestro canal de Gitter de secuenciación de ARN de células únicas para tomar parte en discusiones con científicos con ideas afines a las tuyas! [![Gitter](https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg)](https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
