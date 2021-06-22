@@ -820,7 +820,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 8, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 22, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -902,9 +902,9 @@
 </span><span class="p">@@ -101,6 +101,9 @@</span> <span class="notranslate">galaxy</span>_config_files:
  - src: files/<span class="notranslate">galaxy</span>/config/dependency_resolvers_conf.xml
    dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.dependency_resolvers_config_file }}"
-
-+<span class="notranslate">galaxy</span>_local_tools:
-<span class="gi">+- testing.xml
+    
+<span class="gi">+<span class="notranslate">galaxy</span>_local_tools:
++- testing.xml
 +
 </span> # systemd
  <span class="notranslate">galaxy</span>_manage_systemd: yes
@@ -1064,12 +1064,12 @@
       <div data-commit="Deploy my_rules dynamic rule" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="p">@@ -103,6 +103,8 @@</span> <span class="notranslate">galaxy</span>_config_files:
-
+    
  <span class="notranslate">galaxy</span>_local_tools:
  - testing.xml
 <span class="gi">+<span class="notranslate">galaxy</span>_dynamic_job_rules:
 +- my_rules.py
-</span>
+</span>    
  # systemd
  <span class="notranslate">galaxy</span>_manage_systemd: yes
    
@@ -1179,7 +1179,7 @@
       <div data-commit="Deploy tool destinations config file" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="p">@@ -29,6 +29,7 @@</span> miniconda_manage_dependencies: false
-
+    
  <span class="notranslate">galaxy</span>_config:
    <span class="notranslate">galaxy</span>:
 <span class="gi">+    tool_destinations_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/tool_destinations.yml"
@@ -1188,13 +1188,13 @@
      tool_data_table_config_path: /cvmfs/data.<span class="notranslate">galaxy</span>project.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.<span class="notranslate">galaxy</span>project.org/managed/location/tool_data_table_conf.xml
 <span class="p">@@ -98,6 +99,8 @@</span> <span class="notranslate">galaxy</span>_config_templates:
      dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.containers_resolvers_config_file }}"
-
+    
  <span class="notranslate">galaxy</span>_config_files:
 <span class="gi">+- src: files/<span class="notranslate">galaxy</span>/config/tool_destinations.yml
 +  dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.tool_destinations_config_file }}"
 </span> - src: files/<span class="notranslate">galaxy</span>/config/dependency_resolvers_conf.xml
    dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.dependency_resolvers_config_file }}"
-
+    
    
 </code></pre></div>      </div>
     </li>
@@ -1296,7 +1296,7 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="p">@@ -93,6 +93,8 @@</span> <span class="notranslate">galaxy</span>_config:
      farm: job-handlers:1,2
-
+    
  <span class="notranslate">galaxy</span>_config_templates:
 <span class="gi">+  - src: templates/<span class="notranslate">galaxy</span>/config/job_resource_params_conf.xml.j2
 +    dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_resource_params_file }}"
@@ -1449,7 +1449,7 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
       <div data-commit="Deploy map_resources.py" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="p">@@ -29,6 +29,7 @@</span> miniconda_manage_dependencies: false
-
+    
  <span class="notranslate">galaxy</span>_config:
    <span class="notranslate">galaxy</span>:
 <span class="gi">+    job_resource_params_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/job_resource_params_conf.xml"
@@ -1461,7 +1461,7 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
  <span class="notranslate">galaxy</span>_dynamic_job_rules:
  - my_rules.py
 <span class="gi">+- map_resources.py
-</span>
+</span>    
  # systemd
  <span class="notranslate">galaxy</span>_manage_systemd: yes
    
@@ -1629,7 +1629,7 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
     title = "Mapping Jobs to Destinations (Galaxy Training Materials)",
     year = "2021",
     month = "06",
-    day = "08"
+    day = "22"
     url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/job-destinations/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

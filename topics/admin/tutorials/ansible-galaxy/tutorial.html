@@ -590,7 +590,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 17, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 22, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -1516,7 +1516,7 @@ We’ll start by assuming you’re running the command</p>
 
       <blockquote class="tip">
         <h3 id="tip-different-galaxy-releases"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Different <span class="notranslate">Galaxy</span> Releases!</h3>
-        <p>In the time between this tutorial was last updated (2021-06-17), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
+        <p>In the time between this tutorial was last updated (2021-06-22), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
 
         <p>If you wish to use a different version of <span class="notranslate">Galaxy</span> than the one listed, you can do so, but there is no guarantee this tutorial will work without modifications.</p>
 
@@ -2478,7 +2478,7 @@ The client is only re-built when there are changes in the files needed for the <
       <div data-commit="Configure nginx, certbot" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="p">@@ -65,3 +65,33 @@</span> <span class="notranslate">galaxy</span>_config:
-
+    
  # systemd
  <span class="notranslate">galaxy</span>_manage_systemd: yes
 <span class="gi">+
@@ -2889,14 +2889,14 @@ In a training setting there is no need to request certificates that will be trus
 </span><span class="p">@@ -64,6 +64,10 @@</span> <span class="notranslate">galaxy</span>_config:
        - lib/<span class="notranslate">galaxy</span>/main.py
      farm: job-handlers:1,2
-
-+<span class="notranslate">galaxy</span>_config_templates:
-<span class="gi">+  - src: templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+    
+<span class="gi">+<span class="notranslate">galaxy</span>_config_templates:
++  - src: templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
 +    dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file }}"
 +
 </span> # systemd
  <span class="notranslate">galaxy</span>_manage_systemd: yes
-
+    
    
 </code></pre></div>      </div>
     </li>
@@ -3137,7 +3137,7 @@ changed: [gat-88.training.<span class="notranslate">galaxy</span>project.eu]
 <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="p">@@ -345,7 +345,7 @@</span> <span class="notranslate">galaxy</span>_instance_hostname: use<span class="notranslate">galaxy</span>.eu
-
+ 
  <span class="notranslate">galaxy</span>_repo: 'https://github.com/use<span class="notranslate">galaxy</span>-eu/<span class="notranslate">galaxy</span>.git'
 <span class="gd">-<span class="notranslate">galaxy</span>_commit_id: 'release_19.05'
 </span><span class="gi">+<span class="notranslate">galaxy</span>_commit_id: 'release_19.09'
@@ -3294,7 +3294,7 @@ Additionally you can automatically send failing job error reports, even if users
     title = "Galaxy Installation with Ansible (Galaxy Training Materials)",
     year = "2021",
     month = "06",
-    day = "17"
+    day = "22"
     url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
