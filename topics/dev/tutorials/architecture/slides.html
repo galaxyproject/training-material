@@ -337,7 +337,7 @@ Layer on top of BioBlend building useful utilities for working with the Galaxy A
 
 class: enlarge150
 
-[**usegalaxy-eu/gxadmin **](https://github.com/usegalaxy-eu/gxadmin)
+[galaxyproject/**gxadmin** ](https://github.com/galaxyproject/gxadmin)
 
 Handy command-line utility for Galaxy administrators.
 
@@ -378,7 +378,7 @@ for more context.
 
 ???
 
-TODO: cover gxformat2, helmchart, cloudlaunch
+TODO: cover gxformat2
 
 ---
 
@@ -563,6 +563,8 @@ However, Marius has assembled some documentation on debugging the [Galaxy server
 ### Development Environment - Gitpod
 
 Galaxy does have a Gitpod configuration that is enabled to allow editing and testing PRs https://www.gitpod.io/.
+
+Video from Marius presenting Gitpod at the Galaxy Developer Roundtable (https://www.youtube.com/watch?v=3e71DFg3gsw#t=39m0s)
 
 ---
 
@@ -2114,6 +2116,23 @@ All in `config/plugins/interactive_environments`:
 ![Object Store](../../images/objectstore.plantuml.svg)
 
 These implementation are found below `lib/galaxy/objectstore/`.
+
+---
+
+![File Source Plugins](../../images/core_file_sources.plantuml.svg)
+
+---
+
+# FileSources vs ObjectStores
+
+ObjectStores provide datasets not files, the files are organized logically in a very flat way around a dataset.
+
+FilesSources instead provide files and directories, not datasets. A FilesSource is meant to be browsed in hierarchical fashion - and also has no concept of extra files, etc..
+The former is assumed to be persistent, the latter makes no such assumption.
+
+---
+
+More information about File source plugins can be found at http://bit.ly/gcc21files
 
 ---
 
