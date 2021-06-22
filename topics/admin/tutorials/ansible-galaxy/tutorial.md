@@ -2329,7 +2329,7 @@ The time required to maintain a production Galaxy instance depends on the number
 
 ## Keeping Galaxy Updated
 
-If you have set your `galaxy_commit_id` group variable to a branch name like `release_19.09`, then all you need to do to keep Galaxy up to date (e.g. for security and bug fixes) is to run the playbook regularly. The `git` module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.
+If you have set your `galaxy_commit_id` group variable to a branch name like `release_20.09`, then all you need to do to keep Galaxy up to date (e.g. for security and bug fixes) is to run the playbook regularly. The `git` module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.
 
 ## Upgrading Galaxy (Optional)
 
@@ -2341,8 +2341,8 @@ With Ansible, upgrading Galaxy to a new release is incredibly easy. Here is a co
 @@ -345,7 +345,7 @@ galaxy_instance_hostname: usegalaxy.eu
  
  galaxy_repo: 'https://github.com/usegalaxy-eu/galaxy.git'
--galaxy_commit_id: 'release_19.05'
-+galaxy_commit_id: 'release_19.09'
+-galaxy_commit_id: 'release_20.09'
++galaxy_commit_id: 'release_21.01'
  galaxy_force_checkout: true # discard any modified files
 ```
 
