@@ -770,7 +770,7 @@ Es posible que desees hacer esto con distintos tipos de metadatos - qué laborat
 
 # Extraer datos de secuenciación de ARN de células únicas desde bases de datos públicas
 
-Si te interesa analizar datos de acceso público, particularmente del  [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home), quizá te interese la herramienta {% cite Moreno2020.04.08.032698 %}, la cual más bien reduce estos pasos en uno. [Aquí](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads)  puedes encontrar el conjunto de datos para este tutorial, el cual tiene el número de identificación de experimento `E-MTAB-6945`.
+Si te interesa analizar datos de acceso público, particularmente del [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home), quizá te interese la herramienta {% cite Moreno2020.04.08.032698 %}, la cual más bien reduce estos pasos en uno. [Aquí](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads)  puedes encontrar el conjunto de datos para este tutorial, el cual tiene el número de identificación de experimento `E-MTAB-6945`.
 
 > ### {% icon hands_on %} Práctica: Obtener datos de el Atlas de Expresión de Células Únicas
 >
