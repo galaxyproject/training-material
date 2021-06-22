@@ -13,7 +13,7 @@ questions:
 objectives:
   - Repetir la generación de una matriz para datos de secuenciación de ARN de células únicas obtenidos a partir de técnicas de goteo
   - Aplicar combinación de datos y edición de metadatos en diseños experimentales específicos
-  - Interpretar gráficos de control de calidad (QC) para poder tomar decisiones  fundamentadas en umbrales de célula
+  - Interpretar gráficos de control de calidad (QC) para poder tomar decisiones fundamentadas en umbrales de célula
   - Encontrar información relevante en archivos GTF que esté asociada a las particularidades del estudio e incluirla en los metadatos de la matriz de datos
 
 time_estimation: 3H
