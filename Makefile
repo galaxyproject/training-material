@@ -143,6 +143,10 @@ check-yaml: ## lint yaml files
 	find . -name '*.yaml' | grep -v .github | xargs -L 1 -I '{}' sh -c "yamllint -c .yamllint {}"
 .PHONY: check-yaml
 
+check-diffs: ## lint diffs in tutorials
+	find ./topics -name '*.md' -type f -print0 | xargs -0 python bin/lint-diffs.py
+.PHONY: check-diffs
+
 check-tool-links: ## lint tool links
 	@bash ./bin/check-broken-tool-links.sh
 .PHONY: check-tool-links

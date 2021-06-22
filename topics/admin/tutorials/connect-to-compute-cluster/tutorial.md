@@ -360,11 +360,11 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -103,6 +103,7 @@ galaxy_config_files:
->
+>     
 >     # systemd
 >     galaxy_manage_systemd: yes
 >    +galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
->
+>     
 >     # Certbot
 >     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
 >    {% endraw %}

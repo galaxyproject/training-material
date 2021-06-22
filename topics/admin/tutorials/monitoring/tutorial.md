@@ -522,7 +522,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -29,6 +29,8 @@ miniconda_manage_dependencies: false
->
+>     
 >     galaxy_config:
 >       galaxy:
 >    +    statsd_host: localhost

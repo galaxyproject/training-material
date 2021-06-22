@@ -100,7 +100,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >    +  - src: templates/galaxy/config/reports.yml
 >    +    dest: "{{ galaxy_reports_path }}"
->
+>     
 >     galaxy_config_files:
 >     - src: files/galaxy/config/tool_destinations.yml
 >    {% endraw %}
@@ -115,12 +115,12 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -144,6 +144,7 @@ galaxy_dynamic_job_rules:
->
+>     
 >     # systemd
 >     galaxy_manage_systemd: yes
 >    +galaxy_manage_systemd_reports: yes
 >     galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
->
+>     
 >     # Certbot
 >    {% endraw %}
 >    ```
