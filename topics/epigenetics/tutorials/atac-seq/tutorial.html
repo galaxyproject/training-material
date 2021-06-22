@@ -767,7 +767,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 29, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 22, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -1619,6 +1619,22 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
 <h3 id="convert-bedgraph-from-macs2-to-bigwig">Convert <span class="notranslate">bed</span>graph from <strong>MACS2</strong> to bigwig</h3>
 <p>The <span class="notranslate">bed</span>graph format is easily readable for human but it can be very large and visualising a specific region is quite slow. We will change it to bigwig format which is a binary format, so we can visualise any region of the genome very quickly.</p>
 
+<blockquote class="tip">
+  <h3 id="tip-tip-speed-up-the-bedgraph-to-bigwig-conversion"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Speed-up the <span class="notranslate">bed</span>graph to bigwig conversion</h3>
+
+  <p>In this tutorial we focus on chr22, thus we could restrict our <span class="notranslate">bed</span>graph to chr22 before doing the conversion. This will both speed-up the conversion and decrease the amount of memory needed.</p>
+
+  <p>To do so, we will use <span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:</p>
+  <ul>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: Select the output of <strong>MACS2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<span class="notranslate">Bed</span>graph Treatment).</li>
+    <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c1=='chr22'</code></li>
+  </ul>
+
+  <p>This will decrease by half the size of the file.
+In the next step, choose the output of <strong>Filter</strong> instead of the output of <strong>MACS2</strong>.</p>
+
+</blockquote>
+
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-convert-bedgraphs-to-bigwig"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Convert <span class="notranslate">bed</span>graphs to bigWig.</h3>
 
@@ -2082,8 +2098,8 @@ map to the mitochondrial genome. We found open chromatin regions with <strong>MA
     author = "Lucille Delisle and Maria Doyle and Florian Heyl",
     title = "ATAC-Seq data analysis (Galaxy Training Materials)",
     year = "2021",
-    month = "04",
-    day = "29"
+    month = "06",
+    day = "22"
     url = "\url{https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
