@@ -157,7 +157,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    @@ -228,6 +228,27 @@ rabbitmq_users:
 >         password: "{{ vault_rabbitmq_password_vhost }}"
 >         vhost: /pulsar/galaxy_au
->
+>     
 >    +# Proftpd:
 >    +proftpd_galaxy_auth: yes
 >    +galaxy_ftp_upload_dir: "{{ galaxy_config.galaxy.ftp_upload_dir }}"
