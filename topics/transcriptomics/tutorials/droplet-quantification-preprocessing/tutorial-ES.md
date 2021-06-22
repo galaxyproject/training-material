@@ -8,7 +8,7 @@ priority: 1
 zenodo_link: 'https://zenodo.org/record/4574153'
 
 questions:
-  - Tengo algunos archivos FASTQ de secuenciación de ARN de células únicas los cuales quiero analizar. ¿Dónde inicio?
+  - Tengo algunos archivos FASTQ de secuenciación de ARN de células únicas los cuales quiero analizar. ¿Por dónde empiezo?
 
 objectives:
   - Repetir la generación de una matriz para datos de secuenciación de ARN de células únicas obtenidos a partir de técnicas de goteo
