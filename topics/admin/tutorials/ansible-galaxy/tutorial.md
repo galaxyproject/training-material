@@ -2006,7 +2006,7 @@ In order to be the administrator user, you will need to register an account with
 
 ## Job Configuration
 
-One of the most important configuration files for a large Galaxy server is the `job_conf.xml` file. This file tells Galaxy where to run all of the jobs that users execute. If Galaxy can't find a job conf file or none has been specified in the `galaxy.yml` file, it will use a default configuration, `job_conf.xml.sample_basic` file. This file is deployed to `/srv/galaxy/server/lib/galaxy/config/sample/job_conf.xml.sample_basic` (or see it [in the codebase](https://github.com/galaxyproject/galaxy/blob/release_20.09/lib/galaxy/config/sample/job_conf.xml.sample_basic)).
+One of the most important configuration files for a large Galaxy server is the `job_conf.xml` file. This file tells Galaxy where to run all of the jobs that users execute. If Galaxy can't find a job conf file or none has been specified in the `galaxy.yml` file, it will use a default configuration, `job_conf.xml.sample_basic` file. This file is deployed to `/srv/galaxy/server/lib/galaxy/config/sample/job_conf.xml.sample_basic` (or see it [in the codebase](https://github.com/galaxyproject/galaxy/blob/master/lib/galaxy/config/sample/job_conf.xml.sample_basic)).
 
 The job configuration file allows Galaxy to run jobs in multiple locations using a variety of different mechanisms. Some of these mechanisms include:
 
@@ -2210,7 +2210,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    {: data-commit="Add production facing vars"}
 >
 >    > ### {% icon tip %} What do these do?
->    > Check out the full details in the [Galaxy documentation](https://docs.galaxyproject.org/en/{{ galaxy_version }}/admin/config.html#configuration-options), but we'll discuss a couple briefly:
+>    > Check out the full details in the [Galaxy documentation](https://docs.galaxyproject.org/en/master/admin/config.html#configuration-options), but we'll discuss a couple briefly:
 >    > - `nginx_x_accel_redirect_base`: This is required to have NGINX serve user files. You don't want Galaxy to waste time reading a 100GB fastq file a user has asked for, so you offload that to NGINX. The request is passed through to Galaxy, so permissions checks still occur, but Galaxy instead replies to NGINX just the path to the file that it should send to the requesting user.
 >    > - `enable_quotas`: You definitely want to set a default quota for your users!
 >    > - `expose_user_name`: This exposes usernames in the history and dataset sharing forms which makes life easier for your users.
@@ -2245,7 +2245,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    {: data-commit="Add nginx x-accel-redir and g-i-g webhook config to nginx"}
 >
 >    > ### {% icon tip %} What do these do?
->    > The `_x_accel_redirect` is required for the NGINX file serving discussed above. For information on the GTN-in-Galaxy Webhook, see the [Galaxy Documentation](https://docs.galaxyproject.org/en/{{ galaxy_version }}/admin/special_topics/gtn.html?highlight=gtn%20galaxy). It's a very cool feature which helps your users access training materials directly in Galaxy.
+>    > The `_x_accel_redirect` is required for the NGINX file serving discussed above. For information on the GTN-in-Galaxy Webhook, see the [Galaxy Documentation](https://docs.galaxyproject.org/en/master/admin/special_topics/gtn.html?highlight=gtn%20galaxy). It's a very cool feature which helps your users access training materials directly in Galaxy.
 >    {: .tip}
 >
 > 3. Run the playbook
