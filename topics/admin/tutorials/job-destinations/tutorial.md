@@ -87,7 +87,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    @@ -101,6 +101,9 @@ galaxy_config_files:
 >     - src: files/galaxy/config/dependency_resolvers_conf.xml
 >       dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
->
+>     
 >    +galaxy_local_tools:
 >    +- testing.xml
 >    +
@@ -247,12 +247,12 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -103,6 +103,8 @@ galaxy_config_files:
->
+>     
 >     galaxy_local_tools:
 >     - testing.xml
 >    +galaxy_dynamic_job_rules:
 >    +- my_rules.py
->
+>     
 >     # systemd
 >     galaxy_manage_systemd: yes
 >    {% endraw %}
@@ -361,7 +361,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -29,6 +29,7 @@ miniconda_manage_dependencies: false
->
+>     
 >     galaxy_config:
 >       galaxy:
 >    +    tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
@@ -370,13 +370,13 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
 >    @@ -98,6 +99,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
->
+>     
 >     galaxy_config_files:
 >    +- src: files/galaxy/config/tool_destinations.yml
 >    +  dest: "{{ galaxy_config.galaxy.tool_destinations_config_file }}"
 >     - src: files/galaxy/config/dependency_resolvers_conf.xml
 >       dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
->
+>     
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy tool destinations config file"}
@@ -474,7 +474,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -93,6 +93,8 @@ galaxy_config:
 >         farm: job-handlers:1,2
->
+>     
 >     galaxy_config_templates:
 >    +  - src: templates/galaxy/config/job_resource_params_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
@@ -630,7 +630,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -29,6 +29,7 @@ miniconda_manage_dependencies: false
->
+>     
 >     galaxy_config:
 >       galaxy:
 >    +    job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
@@ -642,7 +642,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >     galaxy_dynamic_job_rules:
 >     - my_rules.py
 >    +- map_resources.py
->
+>     
 >     # systemd
 >     galaxy_manage_systemd: yes
 >    {% endraw %}

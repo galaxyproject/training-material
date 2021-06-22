@@ -169,7 +169,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    @@ -61,4 +61,19 @@ server {
 >             proxy_pass http://127.0.0.1:3000/;
 >         }
->
+>     
 >    +    location /tiaas {
 >    +        uwsgi_pass 127.0.0.1:5000;
 >    +        uwsgi_param UWSGI_SCHEME $scheme;
@@ -337,7 +337,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >     - my_rules.py
 >     - map_resources.py
 >    +- hogwarts.py
->
+>     
 >     # systemd
 >     galaxy_manage_systemd: yes
 >    {% endraw %}

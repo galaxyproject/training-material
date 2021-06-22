@@ -1729,7 +1729,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -65,3 +65,33 @@ galaxy_config:
->
+>     
 >     # systemd
 >     galaxy_manage_systemd: yes
 >    +
@@ -2110,14 +2110,14 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    @@ -64,6 +64,10 @@ galaxy_config:
 >           - lib/galaxy/main.py
 >         farm: job-handlers:1,2
->
+>     
 >    +galaxy_config_templates:
 >    +  - src: templates/galaxy/config/job_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    +
 >     # systemd
 >     galaxy_manage_systemd: yes
->
+>     
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy job conf to config dir"}
@@ -2339,7 +2339,7 @@ With Ansible, upgrading Galaxy to a new release is incredibly easy. Here is a co
 --- a/group_vars/galaxyservers.yml
 +++ b/group_vars/galaxyservers.yml
 @@ -345,7 +345,7 @@ galaxy_instance_hostname: usegalaxy.eu
-
+ 
  galaxy_repo: 'https://github.com/usegalaxy-eu/galaxy.git'
 -galaxy_commit_id: 'release_19.05'
 +galaxy_commit_id: 'release_19.09'

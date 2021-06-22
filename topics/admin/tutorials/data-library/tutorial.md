@@ -78,7 +78,7 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -29,6 +29,8 @@ miniconda_manage_dependencies: false
->
+>     
 >     galaxy_config:
 >       galaxy:
 >    +    library_import_dir: /libraries/admin
