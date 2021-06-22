@@ -756,7 +756,7 @@ Es posible que desees hacer esto con distintos tipos de metadatos - qué laborat
 > ### {% icon hands_on %} Práctica: Calculando el ARN mitocondrial en las células
 >
 > 1. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/0.0.3+galaxy1) %} con los siguientes parámetros:
->    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: la salida del herramiento **Manipulate AnnData - Rename categories** {% icon tool %}
+>    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: la salida de la herramienta **Manipulate AnnData - Rename categories** {% icon tool %}
 >    - *"Format of output object"*: `AnnData format`
 >    - *"Copy AnnData to .raw"*: `No`
 >    - *"Gene symbols field in AnnData"*: `NA.`
