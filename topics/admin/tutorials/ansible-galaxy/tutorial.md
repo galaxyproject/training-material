@@ -2198,7 +2198,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    +    # NFS workarounds
 >    +    retry_job_output_collection: 3
 >    +    # Debugging
->    +    cleanup_job: onerror
+>    +    cleanup_job: onsuccess
 >    +    allow_user_impersonation: true
 >    +    # Tool security
 >    +    outputs_to_working_directory: true
