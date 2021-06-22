@@ -7,7 +7,7 @@ priority: 1
 
 zenodo_link: 'https://zenodo.org/record/4574153'
 
-questinos:
+questions:
   - Tengo algunos archivos FASTQ de secuenciación de ARN de células únicas los cuales quiero analizar. ¿Dónde inicio?
 
 objectives:
