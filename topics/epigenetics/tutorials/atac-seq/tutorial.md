@@ -605,10 +605,12 @@ The bedgraph format is easily readable for human but it can be very large and vi
 > In this tutorial we focus on chr22, thus we could restrict our bedgraph to chr22 before doing the conversion. This will both speed-up the conversion and decrease the amount of memory needed.
 >
 > To do so, we will use {% tool [Filter data on any column using simple expressions](Filter1) %} with the following parameters:
->    - {% icon param-file %} *"Filter"*: Select the output of **MACS2** {% icon tool %} (Bedgraph Treatment).
->    - *"With following condition"*: `c1=='chr22'`
+> - {% icon param-file %} *"Filter"*: Select the output of **MACS2** {% icon tool %} (Bedgraph Treatment).
+> - *"With following condition"*: `c1=='chr22'`
+>
 > This will decrease by half the size of the file.
 > In the next step, choose the output of **Filter** instead of the output of **MACS2**.
+>
 {: .tip}
 
 > ### {% icon hands_on %} Hands-on: Convert bedgraphs to bigWig.
