@@ -2341,8 +2341,8 @@ With Ansible, upgrading Galaxy to a new release is incredibly easy. Here is a co
 @@ -345,7 +345,7 @@ galaxy_instance_hostname: usegalaxy.eu
  
  galaxy_repo: 'https://github.com/usegalaxy-eu/galaxy.git'
--galaxy_commit_id: 'release_20.09'
-+galaxy_commit_id: 'release_21.01'
+-galaxy_commit_id: 'release_19.05'
++galaxy_commit_id: 'release_19.09'
  galaxy_force_checkout: true # discard any modified files
 ```
 
