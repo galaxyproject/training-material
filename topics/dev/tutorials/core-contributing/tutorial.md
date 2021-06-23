@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Contributing to Galaxy Core"
+title: "Contributing a New Feature to Galaxy Core"
 questions:
  - How can I develop extensions to Galaxy data model?
  - How can I implement new API functionality within Galaxy?
@@ -28,7 +28,7 @@ requirements:
         - architecture
 ---
 
-# Contributing to Galaxy Core
+# Contributing a New Feature to Galaxy Core
 
 This tutorial walks you through an extension to Galaxy and how to contribute back to the core project.
 
@@ -39,6 +39,70 @@ Like many extensions to Galaxy, the proposed change requires persistent state. G
 The proposed extension could be implemented in several different ways on Galaxy's backend. We will choose one for this example for its simplicity, not for its correctness or cleverness, because our purpose here is to demonstrate modifying and extending various layers of Galaxy.
 
 With simplicity in mind, we will implement our proposed extension to Galaxy by adding a single new table to Galaxy's data model called ``user_favorite_extension``. The concept of a favorite extension will be represented by a one-to-many relationship from the table that stores Galaxy's user records to this new table. The extension itself that will be favorited will be stored as a ``Text`` field in this new table. This table will also need to include an integer primary key named ``id`` to follow the example set by the rest of the Galaxy data model.
+
+## Forking Galaxy
+
+{% include topics/dev/tutorials/core-contributing/contributing.md %}
+
+> ### {% icon hands_on %} Hands-on: Setup your local Galaxy instance
+>
+> 1. Use GitHub UI to fork Galaxy's repository at `galaxyproject/galaxy`.
+> 2. Clone your forked repository to a local path, further referred to as `GALAXY_ROOT` and `cd` into `GALAXY_ROOT`. Note that we specify the tutorial branch with the `-b` option:
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > git clone https://github.com/<your-username>/galaxy GALAXY_ROOT
+>    > cd GALAXY_ROOT
+>    > ```
+>    {: .code-in}
+>
+>
+> 3. Before we can use Galaxy, we need to create a virtual environment and install the required dependencies. This is generally done with the `common_startup.sh` script:
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > bash scripts/common_startup.sh --dev-wheels
+>    > ```
+>    {: .code-in}
+>
+>    Make sure your Python version is at least 3.6 (you can check your Python version with `python --version`). If your system uses an older version, you may specify an alternative Python interpreter using the `GALAXY_PYTHON` environment variable (`GALAXY_PYTHON=/path/to/alt/python bash scripts/common_startup.sh --dev-wheels`).
+>
+> 4. Activate your new virtual environment:
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > . .venv/bin/activate
+>    > ```
+>    {: .code-in}
+>
+>    Once activated, you'll see the name of the virtual environment prepended to your shell prompt: `(.venv)$`. 
+>
+> 5. Finally, let's create a new branch for your edits:
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > git checkout -b my-feature
+>    > ```
+>    {: .code-in}
+>
+>    Now when you run `git branch` you'll see that your new branch is activated:
+>
+>    > > ### {% icon code-in %} Input: Bash
+>    > > ```bash
+>    > > git branch
+>    > > ```
+>    > {: .code-in}
+>    >
+>    > > ### {% icon code-out %} Output
+>    > > ```bash
+>    > >   dev
+>    > > * my-feature
+>    > > ```
+>    > {: .code-out}
+>    {: .code-2col}
+>
+>    Note: `my-feature` is just an example; you can call your new branch anything you like.
+{: .hands_on}
 
 ## Models
 
