@@ -52,7 +52,7 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 >    @@ -26,3 +26,5 @@
 >       version: 0.1.0
 >     - src: galaxyproject.pulsar
->       version: 1.0.7
+>       version: 1.0.8
 >    +- src: galaxyproject.gxadmin
 >    +  version: 0.0.8
 >    {% endraw %}

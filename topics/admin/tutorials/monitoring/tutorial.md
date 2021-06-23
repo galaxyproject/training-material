@@ -77,7 +77,7 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -28,3 +28,5 @@
->       version: 1.0.7
+>       version: 1.0.8
 >     - src: galaxyproject.gxadmin
 >       version: 0.0.8
 >    +- src: usegalaxy_eu.influxdb
