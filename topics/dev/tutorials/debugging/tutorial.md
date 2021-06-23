@@ -98,21 +98,15 @@ Good news! All of the failing tests are on the same Galaxy branch! That means yo
 >
 >    Note: In the future, when you contribute to Galaxy, you'll need to clone the `dev` branch, which is the default, so you don't need to specify the `-b` option in the `git clone` command).
 >
-> 3. Before we can use Galaxy, we need to create a virtual environment and install the required dependencies. First, let's create a virtual environment:
+> 3. Before we can use Galaxy, we need to create a virtual environment and install the required dependencies. This is generally done with the `common_startup.sh` script:
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
->    > virtualenv .venv
+>    > bash scripts/common_startup.sh --dev-wheels
 >    > ```
 >    {: .code-in}
 >
->    Make sure your Python version is at least 3.6 (you can check your Python version with `python --version`). If your system uses an older version, you may specify an alternative Python interpreter using the `-p` option:
->
->    > ### {% icon code-in %} Input: Bash
->    > ```bash
->    > virtualenv -p PATH-TO-PYTHON-INTERPETER .venv
->    > ```
->    {: .code-in}
+>    Make sure your Python version is at least 3.6 (you can check your Python version with `python --version`). If your system uses an older version, you may specify an alternative Python interpreter using the `GALAXY_PYTHON` environment variable (`GALAXY_PYTHON=/path/to/alt/python bash scripts/common_startup.sh --dev-wheels`).
 >
 > 4. Activate your new virtual environment:
 >
@@ -123,16 +117,8 @@ Good news! All of the failing tests are on the same Galaxy branch! That means yo
 >    {: .code-in}
 >
 >    Once activated, you'll see the name of the virtual environment prepended to your shell prompt: `(.venv)$`. 
->  
-> 5. Now you are ready to install the dependencies. Since you wil be doing development, you need to install the dependencies listed in `lib/galaxy/dependencies/dev-requirements.txt`:
 >
->    > ### {% icon code-in %} Input: Bash
->    > ```bash
->    > pip install -r lib/galaxy/dependencies/dev-requirements.txt
->    > ```
->    {: .code-in}
->
-> 6. Finally, let's create a new branch for your edits:
+> 5. Finally, let's create a new branch for your edits:
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
