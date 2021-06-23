@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "SRA Aligned Read Formats to Speed Up SARS-CoV-2 data Analysis"
+title: "SRA Aligned Read Format to Speed Up SARS-CoV-2 data Analysis"
 questions:
 - How can I search SRA SARS-CoV-2 metadata from within Galaxy?
 - How can I import SRA aligned read files and extract the data in my format of choice?
@@ -19,7 +19,7 @@ tags:
 subtopic: upload
 contributors:
   - jontrow
-  - adelaiderhodes
+  - Arhodes-NCBI
 requirements:
   -
     type: "internal"
@@ -40,7 +40,7 @@ SRA Aligned Read Format (SARF) provides further output options beyond basic fast
 4. VCF files can also be downloaded for these records relative to the SARS-CoV-2 RefSeq record
 
 - These formats can speed up workflows such as assembly and variant calling.
-- This data format is still referenced by the Run accession and accessed using the sra toolkit.
+- This data format is still referenced by the Run accession and accessed using the SRA toolkit.
 - This workshop describes the SARF data objects along with associated searchable metadata, and demonstrates a few ways to enter them into traditional workflows.
 
 
@@ -81,8 +81,12 @@ The SRA aligned reads, the VCF files, the results of these analyses (such as BLA
 >
 {: .comment}
 
+# Workflow Diagram
 
-# Finding Runs of Interest for SARS-CoV-2 Submissions to SRA
+![Workflow Diagram for this Tutorial](../../images/SARF_Workflow_Overview.png "Workflow Diagram for this Tutorial")
+
+
+# Finding SRA SARS-CoV-2 Runs of Interest
 
 Metadata for SARS-CoV-2 submissions to the SRA includes submitted sample and library information, BLAST results, descriptive contig statistics, and variation and annotation information.  These metadata are updated daily and made available to query in the cloud using [Google's BigQuery](https://www.ncbi.nlm.nih.gov/sra/docs/sra-bigquery/) or [Amazon's Athena](https://www.ncbi.nlm.nih.gov/sra/docs/sra-athena/) services. However, the raw underlying information is also provided as a group of json files that can be **downloaded for free from the Open Data Platform** without logging in to the cloud. These json files can be imported to Galaxy and queried there to find **Runs of interest**.
 
@@ -156,7 +160,7 @@ We will import the JSON files into Galaxy to query them directory, however the f
 >
 {: .hands_on}
 
-With that you should have 7 different files in your history. If you examine the files you'll see that they each have a list of filenames like the following table, with either today or yesterday's date in the filename, depending on your timezone offset from NCBI's offices.
+With that you should have 7 different files in your history. If you examine the files you'll see that they each have a list of filenames like the following table, with either today or yesterday's date in the filename, depending on your timezone offset from NCBI's offices. [Time zone converter](
 
 ```
 2021-05-27.000000000000.json.gz
@@ -176,7 +180,7 @@ With that you should have 7 different files in your history. If you examine the 
 > 1. **Open** the `Rule-based` upload tab again, but this time:
 >    1. *"Upload data as"*: `Collection(s)`
 >    2. *"Load tabular data from"*: `History Dataset`
->    3. *"Select dataset to load"*: `contigs.json.list`
+>    3. *"Select dataset to load"*: `contigs.filelist`
 >
 >    4. **Click** `Build` to bring up the rule builder.
 >
@@ -194,25 +198,27 @@ With that you should have 7 different files in your history. If you examine the 
 >           - `Add Definition`, `List Identifier(s)`, Column `A`
 >           - Apply
 >
->    6. Give the collection a name like 'Contigs'
+>    6. Name the collection `contigs.json`
 >
->    7. Click the `upload` button.
+>    7. Click the `Upload` button.
 >
 >    **Once those download jobs have all turned green in the history list, we'll concatenate these into a single file.**
 >
 > 2. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0) %} tail to head (cat) files with the following parameters:
 >
->    - {% icon param-collection %} *"Datasets to Concatenate"*: `contigs` collection
+>    - {% icon param-collection %} *"Datasets to Concatenate"*: `contigs.json` collection
+>    - Click Execute
 >
-> 3. Rename this history item to `contigs.json`
+> 3. Rename this history item to `contigs.single.json`
 >
->    {% snippet faqs/galaxy/datasets_rename.md name="contigs.json" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="contigs.single.json" %}
 >
 > 4. {% tool [JQ](toolshed.g2.bx.psu.edu/repos/iuc/jq/jq/1.0) %} process JSON files with the following parameters:
 >
->    - {% icon param-file %} *"JSON Input"*: `contigs.json`
+>    - {% icon param-file %} *"JSON Input"*: `contigs.single.json`
 >    - *"jq filter"*: `[.[]]`
 >    - *"Convert output to tabular"*: `yes`
+>    - Click Execute
 >
 > 5. Rename this file `contigs.tsv`
 >
@@ -220,6 +226,11 @@ With that you should have 7 different files in your history. If you examine the 
 >
 {: .hands_on}
 
+> ### {% icon comment %} Comment
+>
+> The conversion of the json files to tabular format takes some time, this is a good time to go make some tea.
+>
+{: .comment}
 
 # Query SARF Metadata
 
@@ -253,9 +264,21 @@ Now that a table has been generated, we will query the table to find the runs of
 >       ```
 >    - *"include query result column headers"*: `no`
 >
-> 2. Click **execute** and rename the output file to `Run_list`
+>    > ### {% icon tip %} Save SQlite Database for future queries
+>    >
+>    > If you plan to do multiple queries on the same SQL database or want to skip preprocessing the metadata for future work, it may be useful to set
+>    >
+>    >  - {% icon param-repeat %} *"Save the sqlite database in your history"* to `Yes`
+>    >
+>    {: .tip}
+>
+> 2. Click **Execute** and rename the output file to `Run_list`
 >
 >    {% snippet faqs/galaxy/datasets_rename.md name="Run_list" %}
+>
+>    > ### {% icon tip %} Need fastq?
+>    > Use `Run_list` to bring in Fastq files with Submitted Quality Scores (+BQS format)
+>    {: .tip}
 >
 >    > ### {% icon tip %} Column Headers for the Other Metadata Tables
 >    > We are not going to bring in the other metadata tables in this tutorial. Here is a list of column headers for contigs and the other tables.
@@ -300,6 +323,7 @@ Now that a table has been generated, we will query the table to find the runs of
 {: .hands_on}
 
 > ### {% icon tip %} Download Fastq with Quality Scores
+>
 > If you would like to dump the raw, underlying data in fastq format with the original quality scores, you can stop here and use the {% tool [Faster Download and Extract Reads in FASTQ](toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.11.0+galaxy0) %} tool with the following parameters:
 >
 > - *"input type"*: `list of SRA accessions, one per line`
@@ -308,7 +332,8 @@ Now that a table has been generated, we will query the table to find the runs of
 {: .tip}
 
 > ### {% icon tip %} Importing a list of SRR from Athena or BigQuery
-> If you opted to conduct your metadata search in the cloud using AWS Athena or GCP BigQuery instead of importing the json file to Galaxy, you can save a list of your Run accessions from that search result and import that file as the 'Run_list' to proceed with the rest of this tutorial.
+>
+> If you opted to conduct your metadata search in the cloud using AWS Athena or GCP BigQuery instead of importing the json file to Galaxy, you can save a list of your Run accessions from that search result and import that file as the `Run_list` to proceed with the rest of this tutorial.
 {: .tip}
 
 # Importing SARFs of Interest
@@ -336,10 +361,9 @@ Now that we have assembled a list of Runs that have contigs we are interested in
 >       - From **Rules** menu select `Add / Modify Column Definitions`
 >          - Click `Add Definition` button and select `URL`
 >            - *"URL"*: `B`
->            - Click Apply
 >          - Click `Add Definition` button and select `List Identifier`
 >            - *"List Identifier"*: `A`
->            - Click Apply
+>            - Apply
 >
 >    4. Name the output collection `sarf_path` before clicking **Upload**
 >
@@ -349,7 +373,7 @@ Now that we have assembled a list of Runs that have contigs we are interested in
 >       >
 >       {: .comment}
 >
-> 2. **Finally we will use the SRA toolkit to dump the contigs in fasta format.**
+> 2. **Now we will use the SRA toolkit to retrieve the contigs in fasta format**
 >
 >    Run {% tool [Download and Extract Reads in FASTA/Q format from NCBI SRA](toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fastq_dump/2.11.0+galaxy0) %} with the following parameters:
 >
@@ -357,25 +381,30 @@ Now that we have assembled a list of Runs that have contigs we are interested in
 >    - {% icon param-collection %}*"sra archive"*: `sarf_path`
 >    - In "Advanced Options":
 >      - *"Table name within cSRA object"*: `REFERENCE`
+>    - Click Execute
 >
->    The resulting dataset includes the contigs generated from these Runs.
+>    The resulting dataset includes the contigs generated from these runs with placeholder `?` for quality scores
+>
+>    - Rename this collection to `sarf_contigs`
+>
+>    Run {% tool [Fastq to Fasta converter](toolshed.g2.bx.psu.edu/repos/devteam/fastqtofasta/fastq_to_fasta_python/1.1.5) %}
+>
+>    - {% icon param-collection %}*"FASTQ file to convert"*: `sarf_contigs` (note: in the video this did not get renamed)
+>    - Click Execute
+>
+>    The resulting dataset includes the contigs generated from these Runs in fasta format
 >
 >    > ### {% icon tip %} Fastq format option
 >    > If you prefer to dump the raw reads in fastq format with placeholder quality scores, leave the `Table name within cSRA object` field blank.
 >    >
->    > This will generate fastq with quality placeholders `?`, as SARFs do not contain quality scores.
 >    {: .tip}
 {: .hands_on}
 
-# Finding VCFs for SARS-Cov-2 Runs
+# Importing VCFs for SARS-Cov-2 Runs
 
-Metadata about these Runs, including submitted sample and library information, BLAST results, descriptive contig statistics, and variation and annotation information are available to query in the cloud using  [Google's BigQuery](https://www.ncbi.nlm.nih.gov/sra/docs/sra-bigquery/) or [Amazon's Athena](https://www.ncbi.nlm.nih.gov/sra/docs/sra-athena/) services. However, the raw underlying information is also provided as a group of json files that can be **downloaded for free from the Open Data Platform** without logging in to the cloud. The VCF metadata can be imported to Galaxy and queried there to find VCFs of interest.
+This example starts with the same `Run_list` generated for importing SARFs.
 
-> ### {% icon comment %} Comment
->
-> Some of these tables include complex data fields (array of values) that don't have a clean analogue in a classic SQL database or table and these can't be easily queried in Galaxy currently. If you require access to [cloud tables](https://www.ncbi.nlm.nih.gov/sra/docs/aligned-metadata-tables/) or fields not available in Galaxy recommend accessing those natively in [BigQuery](https://www.ncbi.nlm.nih.gov/sra/docs/sra-bigquery/) or [Athena](https://www.ncbi.nlm.nih.gov/sra/docs/sra-athena/).
->
-{: .comment}
+A `Run_list` could also be imported after querying metadata in the cloud using  [Google's BigQuery](https://www.ncbi.nlm.nih.gov/sra/docs/sra-bigquery/) or [Amazon's Athena](https://www.ncbi.nlm.nih.gov/sra/docs/sra-athena/) services. Metadata about these runs includes submitted sample and library information, BLAST results, descriptive contig statistics, and variation and annotations. See the tutorial video for a short demo on how to search and download `Run_list` from the cloud.
 
 
 > ### {% icon hands_on %} Importing VCFs of Interest
@@ -385,7 +414,7 @@ Metadata about these Runs, including submitted sample and library information, B
 >    1. **Open** the `Rule-based` upload tab again, but this time:
 >       - *"Upload data as"*: `Collection(s)`
 >       - *"Load tabular data from"*: `History Dataset`
->       - *"Select dataset to load"*: `annotated_variations.filelist`
+>       - *"Select dataset to load"*: `Run_list`
 >
 >    2. **Click** `Build` to bring up the rule builder.
 >
@@ -394,13 +423,14 @@ Metadata about these Runs, including submitted sample and library information, B
 >       - From **Column** menu select `Using a Regular Expression`
 >           - Check *"Create column from expression replacement"*
 >           - *"Regular Expression"*: `(.*)`
->           - *"Replacement Expression"*: `https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/annotated_variations/\1`
+>           - *"Replacement Expression"*: `https://sra-pub-sars-cov2.s3.amazonaws.com/VCF/\1/\1.vcf`
 >           - Apply
 >       - From **Rules** menu select `Add / Modify Column Definitions`
 >            - *"URL"*: `B`
 >            - *"List Identifier"*: `A`
+>            - Apply
 >
->    4. Name the output collection `variations` before clicking **Upload**
+>    4. Name the output collection `VCFs` before clicking **Upload**
 >
 >       > ### {% icon comment %} Comment
 >       >
@@ -408,79 +438,7 @@ Metadata about these Runs, including submitted sample and library information, B
 >       >
 >       {: .comment}
 >
-> 2. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0) %} tail to head (cat) files with the following parameters:
->
->    - {% icon param-collection %} *"Datasets to Concatenate"*: `variations` collection
->
-> 3. Rename the output to `variation.json`
->
-> 4. {% tool [JQ](toolshed.g2.bx.psu.edu/repos/iuc/jq/jq/1.0) %} process JSON files with the following parameters:
->
->    - {% icon param-file %} *"JSON Input"*: `variation.json`
->    - *"jq filter"*: `[.[]]`
->    - *"Convert output to tabular"*: `yes`
->
->    > ### {% icon tip %} Tip: Slow step
->    > This step can take ~30 minutes to run due to the ~8GB of JSON it needs to process.
->    {: .tip}
->
-> 5. Rename this file `variation.tsv`
->
-> 6. **Query for VCFs of Interest**. Next we'll query this metadata using the `Query tabular` tool to get a list of all Runs containing a called `E484K` variant.
->
->    Run {% tool [Query Tabular using sqlite sql](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %} with the following parameters:
->
->    - In *"Database Table"*:
->      - {% icon param-repeat %} *"Insert Database Table"*
->        - {% icon param-file %} *"Tabular Dataset for Table"*: `variation.tsv`
->        - In *"Table Options"*
->          - In *"Table Options"*
->             - *"specify name for table"*: `sars_variation`
->             - *"Specify Column Names"*:
->
->               ```
->               run,chrom,pos,id,ref,alt,qual,filter,info,format,sample_a,ac,an,bqb,dp,dp4,dp4_1,dp4_2,dp4_3,dp4_4,idv,imf,mq,mq0f,mqb,mqsb,rpb,sgb,vdb,g_gt,g_pl,g_pl_1,g_pl_2,g_dp,g_ad,g_ad_1,g_ad_2,protein_position,ref_codon,alt_codon,ref_aa,alt_aa,protein_name,protein_length,variation
->               ```
->
->    - *"SQL Query to generate tabular output"*:
->
->      ```sql
->      SELECT DISTINCT run
->      FROM sars_variation
->      WHERE variation = `E484K` AND run LIKE `%SRR%`
->      ORDER BY run ASC
->      LIMIT 10
->      ```
->
->    - *"include query result column headers"*: `no`
->
-> 7. Click the **execute** button and rename the output file to `vcf_list`
->
->    Now that we have assembled a list of Runs that have VCFs we are interested in, we'll construct the path to the VCF files in the cloud and import those to Galaxy so we can work with them.
->
-> 8. Upload Data
->
->    1. **Open** the `Rule-based` upload tab again, but this time:
->       - *"Upload data as"*: `Collection(s)`
->       - *"Load tabular data from"*: `History Dataset`
->       - *"Select dataset to load"*: `vcf_list`
->
->    2. **Click** `Build` to bring up the rule builder.
->
->    3. Make the following changes in the Rule Builder
->
->       - From **Column** menu select `Using a Regular Expression`
->           - Check *"Create column from expression replacement"*
->           - *"Regular Expression"*: `(.*)` <!-- .* -->
->           - *"Replacement Expression"*: `https://sra-pub-sars-cov2.s3.amazonaws.com/VCF/\1/\1.vcf`
->           - Apply
->       - From **Rules** menu select `Add / Modify Column Definitions`
->            - *"URL"*: `B`
->            - *"List Identifier"*: `A`
->
->    4. Name your collection `VCFs` and click **Upload**
->
-> 9. **Use VCFs in Another Galaxy Tool**. Once you have imported the VCF files, you can use them in your standard pipeline- here we will annotate them with SnpEff.
+> 2. **Use VCFs in Another Galaxy Tool**. Once you have imported the VCF files, you can use them in your standard pipeline- here we will annotate them with SnpEff.
 >
 >    Run {% tool [SnpEff eff: annotate variants for SARS-CoV-2](toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19) %}  with the following parameters:
 >
@@ -494,6 +452,13 @@ Metadata about these Runs, including submitted sample and library information, B
 >
 {: .hands_on}
 
+# Feedback for NCBI
+
+If you enjoyed this tutorial, please consider filling out this feedback link for NCBI: [https://nlmenterprise.co1.qualtrics.com/jfe/form/SV_0jQct4IQOgfYYaq](https://nlmenterprise.co1.qualtrics.com/jfe/form/SV_0jQct4IQOgfYYaq)
+
+Note: the survey will stay open until July 31, 2021 (it may say it expires June 30, but we will extend the deadline at the end of the month)
+
+(There is another survey link below for Galaxy).
 
 # Other NCBI Resources
 * [Getting started with SRA in the Cloud](https://www.ncbi.nlm.nih.gov/sra/docs/sra-cloud/)
@@ -503,3 +468,11 @@ Metadata about these Runs, including submitted sample and library information, B
 * [VCF generation](https://www.ncbi.nlm.nih.gov/sra/docs/sars-cov-2-variant-calling/)
 
 If you have questions or feedback you can email the SRA helpdesk: [sra@ncbi.nlm.nih.gov](mailto:sra@ncbi.nlm.nih.gov)
+
+# Acknowledgements
+
+ The authors would like to acknowledge the SRA Product Team at NCBI and the Community Outreach staff at Galaxy for their assistance on this tutorial.
+
+# Affiliations
+
+ Adelaide Rhodes & Jon Trow - Computercraft assigned to NCBI/NLM/NIH

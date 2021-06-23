@@ -60,6 +60,11 @@ mapping:
         sequence:
             - type: str
               required: true
+    abbreviations:
+        type: map
+        mapping:
+            "=":
+                type: str
     galaxy_version:
         type: float
         required: false
@@ -78,6 +83,40 @@ mapping:
         sequence:
             - type: str
         required: false
+    voice:
+        type: map
+        required: false
+        mapping:
+            # All neural English voices. Currently we don't have materials in
+            # other languages, once Spanish is added + this feature supports
+            # tutorials, we'll need to revisit this.
+            id:
+                type: str
+                required: true
+                enum:
+                    - Amy
+                    - Emma
+                    - Joanna
+                    - Joey
+                    - Kendra
+                    - Kimberly
+                    - Matthew
+                    - Olivia
+                    - Russell
+                    - Salli
+            lang:
+                type: str
+                required: false
+                enum:
+                    - en-AU
+                    - en-GB
+                    - en-US
+            # Right now we're only supporting neural voices to ensure the outputs sound as nice as possible.
+            neural:
+                type: bool
+                required: true
+                enum:
+                    - true
     follow_up_training:
         type: seq
         required: false

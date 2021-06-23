@@ -609,7 +609,7 @@ This is pretty close to the format expected by Circos for 2D data tracks (`chr -
 
 > ### {% icon hands_on %} Hands-on: Prepare CNV input file
 >
-> 1. {% tool [Remove beginning](Remove+beginning1) %} of a file with the following parameters:
+> 1. {% tool [Remove beginning](Remove beginning1) %} of a file with the following parameters:
 >    - *"Remove first"*: `1`
 >    - {% icon param-file %} *"from"*: `VCaP copy number.tsv`
 >
@@ -793,7 +793,7 @@ We will make another scatterplot, so our data should be in the same format as th
 
 > ### {% icon hands_on %} Hands-on: Prepare the B-allele frequency table
 >
-> 1. {% tool [Remove beginning](Remove+beginning1) %} with the following parameters:
+> 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
 >    - *"Remove first"*: `1`
 >    - {% icon param-file %} *"from"*: `VCaP_B-allele frequence.tsv`
 >

@@ -579,7 +579,7 @@ We need to generate a new BED file from the original peak file that contains the
 Now we cut out just the chromosome plus the start and end of the summit:
 
 > ### {% icon hands_on %} Hands-on: Cut out columns
-> 1. {% tool [Cut](cut1) %} columns from a table with the following settings:
+> 1. {% tool [Cut](Cut1) %} columns from a table with the following settings:
 >   - *"Cut columns"*: `c1,c8,c9`
 >   - *"Delimited by Tab"*: `Tab`
 >   - *"From"*: `Peak summit regions`

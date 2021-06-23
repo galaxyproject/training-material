@@ -44,9 +44,13 @@ ACTIVATE_ENV = source $(shell dirname $(dir $(CONDA)))/bin/activate $(CONDA_ENV)
 
 install: clean create-env ## install dependencies
 	$(ACTIVATE_ENV) && \
-		gem update --system && \
-		gem install addressable:'2.5.2' jekyll jekyll-feed jekyll-scholar jekyll-redirect-from jekyll-last-modified-at csl-styles awesome_bot html-proofer pkg-config kwalify jekyll-sitemap
+		gem update --no-document --system && \
+		ICONV_LIBS="-L${CONDA_PREFIX}/lib/ -liconv" gem install --no-document addressable:'2.5.2' jekyll jekyll-feed jekyll-scholar jekyll-redirect-from jekyll-last-modified-at csl-styles awesome_bot html-proofer pkg-config kwalify jekyll-sitemap
 .PHONY: install
+
+bundle-install: clean  ## install gems if Ruby is already present (e.g. on gitpod.io)
+	bundle install
+.PHONE: bundle-install
 
 serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
 	@echo "Tip: Want faster builds? Use 'serve-quick' in place of 'serve'."
@@ -64,6 +68,10 @@ serve-quick: ## run a local server (faster, some plugins disabled for speed)
 		mv Gemfile.lock Gemfile.lock.backup || true && \
 		${JEKYLL} serve --strict_front_matter -d _site/training-material --incremental --config _config.yml,_config-dev.yml -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve-quick
+
+serve-gitpod: bundle-install  ## run a server on a gitpod.io environment
+	bundle exec jekyll serve --config _config.yml,_config-dev.yml --incremental
+.PHONY: serve-gitpod
 
 build: clean ## build files but do not run a server (You can specify FLAGS= to pass additional flags to Jekyll)
 	$(ACTIVATE_ENV) && \
@@ -134,6 +142,10 @@ check-slides: build  ## check the markdown-formatted links in slides
 check-yaml: ## lint yaml files
 	find . -name '*.yaml' | grep -v .github | xargs -L 1 -I '{}' sh -c "yamllint -c .yamllint {}"
 .PHONY: check-yaml
+
+check-diffs: ## lint diffs in tutorials
+	find ./topics -name '*.md' -type f -print0 | xargs -0 python bin/lint-diffs.py
+.PHONY: check-diffs
 
 check-tool-links: ## lint tool links
 	@bash ./bin/check-broken-tool-links.sh

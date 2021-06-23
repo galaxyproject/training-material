@@ -98,7 +98,7 @@ def lint_file(fn)
 
   # If it's disabled, exit early
   if data.key?('enable') && (data['enable'] == false || data['enable'].downcase == 'false') then
-    puts "#{fn} skipped (disabled)"
+    #puts "#{fn} skipped (disabled)"
     return
   end
 
@@ -144,7 +144,7 @@ def lint_file(fn)
 
   # If we had no errors, validated successfully
   if errs.length == 0 then
-    puts "\e[38;5;40m#{fn} validated succesfully\e[m"
+    #puts "\e[38;5;40m#{fn} validated succesfully\e[m"
   else
     # Otherwise, print errors and exit non-zero
     puts "\e[48;5;09m#{fn} has errors\e[m"
