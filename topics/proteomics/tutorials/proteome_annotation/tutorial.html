@@ -602,8 +602,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="http://www.proteore.org/" title="ProteoRE">
             ProteoRE
         </a>
@@ -652,7 +650,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 31, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 24, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -675,7 +673,10 @@ A total of 229 unique proteins were identified in EBC among which 153 proteins w
   <li><a href="#get-input-datasets" id="markdown-toc-get-input-datasets">Get Input Datasets</a></li>
   <li><a href="#filtering-out-technical-contaminants" id="markdown-toc-filtering-out-technical-contaminants">Filtering out technical contaminants</a></li>
   <li><a href="#check-for-the-presence-of-biological-contaminants" id="markdown-toc-check-for-the-presence-of-biological-contaminants">Check for the presence of biological contaminants</a></li>
-  <li><a href="#functional-annotation-of-the-ebc-proteome-enrichment-analysis" id="markdown-toc-functional-annotation-of-the-ebc-proteome-enrichment-analysis">Functional annotation of the EBC proteome (enrichment analysis)</a></li>
+  <li><a href="#functional-annotation-of-the-ebc-proteome-enrichment-analysis" id="markdown-toc-functional-annotation-of-the-ebc-proteome-enrichment-analysis">Functional annotation of the EBC proteome (enrichment analysis)</a>    <ol>
+      <li><a href="#end-modif" id="markdown-toc-end-modif">End modif</a></li>
+    </ol>
+  </li>
   <li><a href="#visualize-ebc-proteome-on-biological-pathways-using-reactome" id="markdown-toc-visualize-ebc-proteome-on-biological-pathways-using-reactome">Visualize EBC proteome on biological pathways (using Reactome)</a></li>
   <li><a href="#comparison-with-other-proteomic-datasets-from-previous-studies" id="markdown-toc-comparison-with-other-proteomic-datasets-from-previous-studies">Comparison with other proteomic datasets from previous studies</a></li>
 </ol>
@@ -871,76 +872,9 @@ by filtering out the lines that contain the word <code class="language-plaintext
 
 <h1 id="functional-annotation-of-the-ebc-proteome-enrichment-analysis">Functional annotation of the EBC proteome (enrichment analysis)</h1>
 
-<p>The resulting list of 157 proteins identified in the two pooled EBC samples (excluding the 10 contaminants proteins) is now submitted to Gene Ontology (GO)-term enrichment analysis to determine functions that were significantly enriched in our EBC proteomic dataset compared to the lung proteome (corresponding to tissue-specific genes extracted from the Human Protein Atlas). To do so, we first build a lung reference proteome (that should be more representative of the studied sample rather than a full human proteome) that will be used for enrichment analysis performed with the ClusterProfiler tool (based on the R package clusterProfiler).</p>
+<p>The resulting list of 157 proteins identified in the two pooled EBC samples (excluding the 10 contaminants proteins) is now submitted to Gene Ontology (GO)-term enrichment analysis to determine functions that were significantly enriched in our EBC proteomic dataset. To do so, we’ll use the ClusterProfiler tool (based on the R package clusterProfiler) for functional annotation.</p>
 
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-build-a-lung-reference-proteome-as-a-background-for-go-terms-enrichment-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Build a lung reference proteome as a background for GO terms enrichment analysis</h3>
-
-  <ol>
-    <li><strong>Build tissue-specific <span class="notranslate">expression</span> dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Experimental data source (antibody- or <span class="notranslate">RNA</span>seq-based)”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">Expression</span> profiles based on immunohistochemistry</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select tissue”</em>: <code class="language-plaintext highlighter-rouge">Lung</code> and <code class="language-plaintext highlighter-rouge">Bronchus</code> (you can start typing to filter the list)</li>
-        <li><em>“<span class="notranslate">Expression</span> level”</em>:
-          <ul>
-            <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">High</code></li>
-            <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">Medium</code></li>
-            <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">Low</code></li>
-          </ul>
-        </li>
-        <li><em>“Reliability score”</em>:
-          <ul>
-            <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">Enhanced</code></li>
-            <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">Supported</code></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ol>
-
-  <blockquote class="comment">
-    <h3 id="output">Output</h3>
-    <ul>
-      <li><strong>Tissue-specific <span class="notranslate">expression</span> from IHC</strong>: List of the selected proteins.
-6 columns: ‘Gene’, ‘Gene name’ and the retrieved info from HPA.</li>
-    </ul>
-  </blockquote>
-</blockquote>
-
-<p>Note that <span class="notranslate">expression</span> information about respiratory cell types is retrieved (column 4; e.g. macrophages, pneumocytes, respiratory epithelial cells)
-that could be used for further refinement of your reference background.</p>
-
-<p>As the ClusterProfiler tool (which we will use for the enrichment analysis) does not consider ENSG (Ensembl gene) identifiers as input, we need to convert IDs into either entrez Gene ID or Uniprot accession number.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-convert-ensembl-id-to-uniprot-and-entrez-gene-id"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Convert Ensembl ID to Uniprot and Entrez Gene ID</h3>
-
-  <ol>
-    <li><strong>ID Converter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><em>“Enter IDs”</em>: <code class="language-plaintext highlighter-rouge">Input file containing IDs</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select your file”</em>: <code class="language-plaintext highlighter-rouge">Tissue-specific <span class="notranslate">expression</span> from IHC</code> from <strong>Build tissue-specific <span class="notranslate">expression</span> dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“Column number of IDs to map”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
-        <li><em>“Species”</em>: <code class="language-plaintext highlighter-rouge">Human (Homo sapiens)</code>
-          <ul>
-            <li><em>“Type/source of IDs”</em>: <code class="language-plaintext highlighter-rouge">Ensembl gene ID (e.g. ENSG00000166913)</code>
-              <ul>
-                <li><em>“Target type of IDs you would like to map to”</em>:</li>
-                <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">UniProt accession number (e.g. P31946)</code></li>
-                <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">Entrez gene ID (e.g. 7529)</code></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      </ul>
-
-      <blockquote class="comment">
-        <h3 id="comment-output-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Output</h3>
-        <p>In the output file, 2 new columns have been added with the ID retrieved thanks to the conversion.</p>
-      </blockquote>
-    </li>
-  </ol>
-</blockquote>
+<h2 id="end-modif">End modif</h2>
 
 <p>Now we can perform the GO terms analysis. Input list is the EBC proteome to be analyzed after technical and biological contaminants
 removal, which is the output of biological contaminants filter step.</p>
@@ -967,12 +901,8 @@ removal, which is the output of biological contaminants filter step.</p>
         <li><em>“Ontology level”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
         <li><em>“Perform GO categories enrichment analysis?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
           <ul>
-            <li><em>“Define your own background IDs?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+            <li><em>“Define your own background IDs?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
               <ul>
-                <li><em>“Enter your background IDs”</em>: <code class="language-plaintext highlighter-rouge">Input file containing your background IDs</code></li>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select file that contains your background IDs list”</em>: <code class="language-plaintext highlighter-rouge">ID converter on data ..</code> from lastest <strong>ID Converter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
-                <li><em>“Column number of IDs”</em>: <code class="language-plaintext highlighter-rouge">c7</code></li>
-                <li><em>“Select type of background IDs”</em>: <code class="language-plaintext highlighter-rouge">UniProt Accession number</code></li>
                 <li><em>“Graphical display”</em>:
                   <ul>
                     <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">dot-plot</code></li>
@@ -987,7 +917,7 @@ removal, which is the output of biological contaminants filter step.</p>
   </ol>
 
   <blockquote class="comment">
-    <h3 id="comment-output-2"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Output</h3>
+    <h3 id="comment-output-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Output</h3>
 
     <p>Results created in History panel are the following:</p>
     <ul>
@@ -998,12 +928,8 @@ removal, which is the output of biological contaminants filter step.</p>
 
     <p>The suffix “GGO” (GroupGO) corresponds to the results “GO categories representation analysis” option
   (performs a gene/protein classification based on GO distribution at a specific level). The suffix
-  “EGO” (EnrichGO) corresponds to the results from the enrichment analysis (based on an
-  over-representation test of GO terms against the lung reference background). Two types of graphical output are provided either
-  in the form of bar-plot or dot-plot.
-  According to this analysis, the main biological processes over-represented in EBC compared to
-  lung were some processes related to the immune system and exocytosis (see EGO.BP.dot.png, for Enriched
-  Biological Process GO terms dot-plot representation in png format).</p>
+  “EGO” (EnrichGO) corresponds to the results from the enrichment analysis. Two types of graphical output are provided either
+  in the form of bar-plot or dot-plot.</p>
   </blockquote>
 </blockquote>
 
@@ -1069,7 +995,7 @@ interpretation and analysis of pathway knowledge.</p>
   </ol>
 
   <blockquote class="comment">
-    <h3 id="comment-output-3"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Output</h3>
+    <h3 id="comment-output-2"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Output</h3>
 
     <p>The Venn diagram shows the number of proteins specific and in common between the 3 lists.
 <img src="../../images/ProteoreAnnot-Venn.png" alt="Graphical output of the Venn diagram" />.</p>
@@ -1219,8 +1145,8 @@ This allows the user to go deeper in the analysis of proteomics analyses results
     author = "Valentin Loux and Florence Combes and David Christiany and Yves Vandenbrouck",
     title = "Annotating a protein list identified by LC-MS/MS experiments (Galaxy Training Materials)",
     year = "2021",
-    month = "05",
-    day = "31"
+    month = "06",
+    day = "24"
     url = "\url{https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteome_annotation/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
