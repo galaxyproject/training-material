@@ -1,6 +1,5 @@
 ---
 layout: tutorial_hands_on
-
 title: Small Non-coding RNA Clustering using BlockClust
 zenodo_link: https://zenodo.org/record/1491876
 questions:
@@ -17,7 +16,6 @@ key_points:
 - Clusters of read profiles correlate with the ncRNA classes
 contributors:
 - pavanvidem
-
 ---
 
 

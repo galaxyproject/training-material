@@ -2,8 +2,7 @@
 layout: tutorial_hands_on
 title: "Downstream Single-cell RNA analysis with RaceID"
 subtopic: single-cell
-priority: 6
-
+priority: -5
 zenodo_link: 'https://zenodo.org/record/1511582'
 tags:
   - single-cell
@@ -26,15 +25,12 @@ requirements:
     topic_name: transcriptomics
     tutorials:
         - scrna-scater-qc
-
 follow_up_training:
   -
     type: "internal"
     topic_name: transcriptomics
     tutorials:
       - scrna-preprocessing-tenx
-
-
 time_estimation: 3H
 key_points:
   - Clustering single-cell RNA-seq data is often noisy
@@ -44,10 +40,7 @@ key_points:
 contributors:
   - mtekman
   - astrovsky01
-
 gitter: Galaxy-Training-Network/galaxy-single-cell
-
-
 ---
 
 <!-- TODO: Subset analysis to validate prior cell labelling -->

@@ -1,9 +1,8 @@
 ---
 layout: tutorial_hands_on
-
 title: Filter, Plot and Explore Single-cell RNA-seq Data
 subtopic: single-cell
-priority: 10
+priority: -9
 zenodo_link: 'https://zenodo.org/record/4624461'
 questions:
 - Is my single cell dataset a quality dataset?
@@ -30,7 +29,6 @@ tags:
 - 10x
 contributors:
 - nomadscientist
-
 ---
 
 

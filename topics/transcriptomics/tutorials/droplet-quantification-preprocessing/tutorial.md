@@ -1,44 +1,33 @@
 ---
 layout: tutorial_hands_on
-
 title: "Generating a single cell matrix using Alevin"
 subtopic: single-cell
-priority: 9
-
+priority: -8
 zenodo_link: 'https://zenodo.org/record/4574153'
-
 questions:
   - I have some single cell FASTQ files I want to analyse. Where do I start?
-
 objectives:
   - Repeat matrix generation for any droplet-based single cell sequencing data
   - Apply data combination and metadata editing for particular experimental designs
   - Interpret quality control (QC) plots to make informed decisions on cell thresholds
   - Find relevant information in GTF files for the particulars of their study, and include this in data matrix metadata
-
 time_estimation: 3H
-
 key_points:
   - Create a scanpy-accessible AnnData object from FASTQ files, including relevant cell and gene metadata
   - Combine multiple samples and label according to study design
-
 tags:
   - single-cell
   - 10x
-
 contributors:
   - nomadscientist
   - pinin4fjords
-
 requirements:
   - type: "internal"
     topic_name: transcriptomics
     tutorials:
         - scrna-intro
         - scrna-umis
-
 gitter: Galaxy-Training-Network/galaxy-single-cell
-
 ---
 
 # Introduction

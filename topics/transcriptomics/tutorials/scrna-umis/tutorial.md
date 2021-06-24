@@ -2,8 +2,7 @@
 layout: tutorial_hands_on
 title: "Understanding Barcodes"
 subtopic: single-cell
-priority: 3
-
+priority: -2
 zenodo_link: "https://zenodo.org/record/2573177"
 tags:
   - single-cell
@@ -25,20 +24,15 @@ requirements:
     topic_name: transcriptomics
     tutorials:
         - scrna-preprocessing
-
 follow_up_training:
   -
     type: "internal"
     topic_name: transcriptomics
     tutorials:
         - scrna-plates-batches-barcodes
-
-
 contributors:
   - mtekman
-
 gitter: Galaxy-Training-Network/galaxy-single-cell
-
 ---
 
 

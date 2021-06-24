@@ -2,11 +2,9 @@
 layout: tutorial_hands_on
 redirect_from:
   - /topics/transcriptomics/tutorials/scrna_preprocessing/tutorial
-
 title: "Pre-processing of Single-Cell RNA Data"
 subtopic: single-cell
-priority: 2
-
+priority: -1
 zenodo_link: "https://zenodo.org/record/3253142"
 tags:
   - single-cell
@@ -32,22 +30,18 @@ requirements:
     topic_name: transcriptomics
     tutorials:
         - scrna-intro
-
 follow_up_training:
   -
     type: "internal"
     topic_name: transcriptomics
     tutorials:
         - scrna-umis
-
 contributors:
   - mtekman
   - bebatut
   - erxleben
   - wm75
-
 gitter: Galaxy-Training-Network/galaxy-single-cell
-
 ---
 
 

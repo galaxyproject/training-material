@@ -1,10 +1,8 @@
 ---
 layout: tutorial_hands_on
-
 title: "Single-cell quality control with scater"
 subtopic: single-cell
-priority: 5
-
+priority: -4
 zenodo_link: 'https://zenodo.org/record/3386291'
 tags:
   - single-cell
@@ -27,7 +25,6 @@ follow_up_training:
     topic_name: transcriptomics
     tutorials:
       - scrna-raceid
-
 time_estimation: 1H
 key_points:
 - Single-cell RNA-seq data is often noisy
@@ -35,9 +32,7 @@ key_points:
 contributors:
 - ethering
 - nsoranzo
-
 gitter: Galaxy-Training-Network/galaxy-single-cell
-
 ---
 
 # Introduction

@@ -1,10 +1,8 @@
 ---
 layout: tutorial_hands_on
-
 title: "Reference-based RNA-Seq data analysis"
 subtopic: introduction
-priority: 2
-
+priority: 0
 tags:
     - bulk
     - rna-seq
@@ -29,6 +27,12 @@ time_estimation: 8h
 key_points:
     - A spliced mapping tool should be used on eukaryotic RNA-Seq data
     - Numerous factors should be taken into account when running a differential gene expression analysis
+requirements:
+    -
+        type: "internal"
+        topic_name: transcriptomics
+        tutorials:
+            - introduction
 follow_up_training:
     -
         type: "internal"
@@ -37,7 +41,6 @@ follow_up_training:
             - rna-seq-viz-with-heatmap2
             - rna-seq-viz-with-volcanoplot
             - rna-seq-genes-to-pathways
-
 contributors:
     - bebatut
     - malloryfreeberg

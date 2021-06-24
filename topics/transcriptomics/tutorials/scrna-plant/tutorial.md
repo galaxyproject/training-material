@@ -2,8 +2,7 @@
 layout: tutorial_hands_on
 title: "Analysis of plant scRNA-Seq Data with Scanpy"
 subtopic: single-cell
-priority: 11
-
+priority: -10
 zenodo_link: 'https://zenodo.org/record/4597857'
 tags:
   - single-cell
