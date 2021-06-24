@@ -4,7 +4,7 @@ area: contributors
 layout: faq
 ---
 
-Writing a bug reports is a good skill to have as bioinformaticians, and a key point is that you should include a lot of information from the first message, to help make the process of reporting an issue more efficient and a better experience for everyone.
+Writing bug reports is a good skill to have as bioinformaticians, and a key point is that you should include enough information from the first message to help the process of resolving your issue more efficient and a better experience for everyone.
 
 **What to include**
 
@@ -31,7 +31,7 @@ The people who provide support for Galaxy are largely volunteers in this communi
 > - This is the standard output/error of the tool that I found in the information page (insert it here)
 > - I have read it but I do not understand what X/Y means.
 > - The job ID from the output information page is 123123abdef.
-> - I tried re-running the job and changing paramter Z but it did not change the result.
+> - I tried re-running the job and changing parameter Z but it did not change the result.
 > 
 > Could you help me?
 {: .quote}
