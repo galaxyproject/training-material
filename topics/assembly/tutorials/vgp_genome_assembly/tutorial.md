@@ -112,25 +112,146 @@ have fun!
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
+# Genome size, repeat content, and heterozygosity estimations
 
-![Alternative text](../../images/assembly_steps.png "Legend of the image")
+An important step before starting a de novo genome assembly project is to proceed with the analysis of the genome profile. Determining these characteristics in advance has the potential to reveal whether an analysis is not reflecting the full complexity of the genome, for example, if the number of variants is underestimated or a significant fraction of the genome is not assembled (% cite Vurture2017 %}).
 
-The idea is to keep the theory description before quite simple to focus more on the practical part.
+Traditionally DNA flow citometry was considered the golded standart for estimating the genome size, one of the most important factors to determine the required coverage level. However, nowadays experimental methods have been replaced by computational approaches {% cite wang2020estimation %}. One of the most widely used procedures for undertaking genomic profiling is the analyis of k-mer frequencies. It allows to provide information not only about the genomic complexity, such as the genome size, levels of heterozygosity and repeat content, but also about the data quality. In addition, k-mer spectra analysis can be used in a reference-free manner for assessing genome assembly quality metrics ({% cite Rhie2020 %}).
 
-***TODO***: *Consider adding a detail box to expand the theory*
+In this tutorial we will use two basic tools to computationally estimate the genome features: Meryl and GenomeScope.
 
-> ### {% icon details %} More details about the theory
+## Generation of k-mer spectra with **Meryl**
+
+Meryl will allow us to perform the k-mer profiling by decomposing the sequencing data into k-lenght substrings and determining its frequency. The original version was developed for use in the Celera Assembler, and it comprises three modules: one for generating k-mer databases, one for filtering and combining databases, and one for searching databases. The k-mer database is stored in sorted order, similar to words in a dictionary ({% cite Rhie2020 %}).
+
+> ### {% icon comment %} K-mer size estimation
 >
-> But to describe more details, it is possible to use the detail boxes which are expandable
+> One of the important aspects is the size of the k-mer, which must be large enough to map  uniquely to the genome, but not too large, since it can lead to wasting computational resources. Given an estimated genome size (G) and a tolerable collision rate (p), an appropriate k can be computed as k = log4 (G(1 − p)/p).
 >
-{: .details}
+{: .comment}
 
-A big step can have several subsections or sub steps:
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy2) %} with the following parameters:
+>    - *"Operation type selector"*: `Count operations`
+>        - {% icon param-collection %} *"Input sequences"*: `output` (Input dataset collection)
+>        - *"K-mer size selector"*: `Estimate the best k-mer size`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
 
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Meryl**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy1) %} with the following parameters:
+>    - *"Operation type selector"*: `Operations on sets of k-mers`
+>        - *"Operations on sets of k-mers"*: `Union-sum: return k-mers that occur in any input, set the count to the sum of the counts`
+>        - {% icon param-file %} *"Input meryldb"*: `read_db` (output of **Meryl** {% icon tool %})
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **GenomeScope**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [GenomeScope](toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0) %} with the following parameters:
+>    - {% icon param-file %} *"Input histogram file"*: `read_db_hist` (output of **Meryl** {% icon tool %})
+>    - *"Add the model parameters to your history"*: `Yes`
+>    - *"Output a summary of the analysis"*: `Yes`
+>    - *"K-mer length used to calculate k-mer spectra"*: `31`
+>    - *"Create testing.tsv file with model parameters"*: `Yes`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
+## Re-arrange
+
+To create the template, each step of the workflow had its own subsection.
+
+***TODO***: *Re-arrange the generated subsections into sections or other subsections.
+Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+
+# Conclusion
+{:.no_toc}
+
+Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
+pipeline used.
 
 ## Sub-step with **Parse parameter value**
 
@@ -261,43 +382,6 @@ A big step can have several subsections or sub steps:
 >    - *"Advanced options"*: `Leave default`
 >    - *"Assembly options"*: `Leave default`
 >    - *"Options for purging duplicates"*: `Specify`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Meryl**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy0) %} with the following parameters:
->    - *"Operation type selector"*: `Count operations`
->        - {% icon param-file %} *"Input sequences"*: `output` (output of **Collapse Collection** {% icon tool %})
->        - *"K-mer size selector"*: `Estimate the best k-mer size`
->            - *"Genome size"*: `1050000000`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -621,43 +705,7 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **GenomeScope**
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [GenomeScope](toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0) %} with the following parameters:
->    - {% icon param-file %} *"Input histogram file"*: `read_db_hist` (output of **Meryl** {% icon tool %})
->    - *"Add the model parameters to your history"*: `Yes`
->    - *"Output a summary of the analysis"*: `Yes`
->    - *"K-mer length used to calculate k-mer spectra"*: `31`
->    - *"Create testing.tsv file with model parameters"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **Map with minimap2**
 
