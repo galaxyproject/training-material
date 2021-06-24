@@ -1,10 +1,10 @@
 ---
-title: What information should I include in a bug report?
+title: What information should I include when reporting a problem?
 area: contributors
 layout: faq
 ---
 
-Writing a bug report (either to teachers for help, or tool authors, or service providers, or ...) is a good skill to have as bioinformaticians, and a key point is that you should describe in detail what you tried.
+Writing a bug reports is a good skill to have as bioinformaticians, and a key point is that you should include a lot of information from the first message, to help make the process of reporting an issue more efficient and a better experience for everyone.
 
 **What to include**
 
@@ -30,7 +30,8 @@ The people who provide support for Galaxy are largely volunteers in this communi
 > - The dataset is green, the job did not fail
 > - This is the standard output/error of the tool that I found in the information page (insert it here)
 > - I have read it but I do not understand what X/Y means.
-> - The job ID from the output information page is 123123abdef
->
+> - The job ID from the output information page is 123123abdef.
+> - I tried re-running the job and changing paramter Z but it did not change the result.
+> 
 > Could you help me?
 {: .quote}
