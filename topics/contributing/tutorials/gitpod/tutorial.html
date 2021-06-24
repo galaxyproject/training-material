@@ -1,0 +1,1011 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Running the GTN website online using GitPod</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is a great solution to train the bioinformatics co..." />
+        <meta property="og:title" content="Galaxy Training: Running the GTN website online using GitPod" />
+        <meta property="og:description" content="Galaxy is a great solution to train the bioinformatics co..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/contributing" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Contributing to the Galaxy Training Material
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/contributing/faqs/" title="Check our FAQs for the Contributing to the Galaxy Training Material topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/contributing/tutorials/gitpod/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/contributing/tutorials/gitpod/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/contributing/tutorials/gitpod/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/contributing/tutorials/gitpod/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/contributing/tutorials/gitpod/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/contributing/tutorials/gitpod/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/contributing/tutorials/gitpod/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fcontributing%2Ftutorials%2Fgitpod%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/contributing/tutorials/gitpod/tutorial.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/contributing/tutorials/gitpod/tutorial.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-04-01/topics/contributing/tutorials/gitpod/tutorial.html" title="Version 2021-04-01">2021-04-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/contributing/tutorials/gitpod/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                    -->
+
+                     <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Running the GTN website online using GitPod",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/main/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Contributing to the Galaxy Training Material",
+    "description": "Galaxy is a great solution to train the bioinformatics concepts: numerous bioinformatics tools are available (more than 7,000 in the ToolShed), it can be used by people without amy computer science skills, it trains to use technology, outlining available resources and efforts that have made them accessible to researchers, it is scalable.<br> In 2016, the Galaxy Training Network decide to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.",
+    "url": "https://training.galaxyproject.org//training-material/topics/contributing/"
+  },
+  "courseCode": "contributing / gitpod / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Running the GTN website online using GitPod' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/contributing/tutorials/gitpod/tutorial.html",
+  "timeRequired": "PT15M",
+  "description": "The questions this  addresses are:\n - How can I get a preview of the GTN website using GitPod?\n\n\\nThe objectives are:\n - Preview the GTN website online via GitPod\n - Make changes to the GTN website and preview those changes\n\n",
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Saskia Hiltemann"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Saskia Hiltemann"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Contributing to the Galaxy Training Material",
+      "description": "Galaxy is a great solution to train the bioinformatics concepts: numerous bioinformatics tools are available (more than 7,000 in the ToolShed), it can be used by people without amy computer science skills, it trains to use technology, outlining available resources and efforts that have made them accessible to researchers, it is scalable.<br> In 2016, the Galaxy Training Network decide to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.",
+      "url": "https://training.galaxyproject.org//training-material/topics/contributing/"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial topic-contributing">
+        <h1 data-toc-skip>Running the GTN website online using GitPod</h1>
+        
+
+        <div class="contributors-line">By: 
+
+ <a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How can I get a preview of the GTN website using GitPod?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Preview the GTN website online via GitPod</p>
+</li>
+            
+            <li><p>Make changes to the GTN website and preview those changes</p>
+</li>
+            
+            </ul>
+
+            
+
+            
+            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 15 minutes</div>
+            
+
+            
+
+            
+            
+
+            
+            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/contributing/slides/introduction.html" title="Topic Overview slides">
+                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Topic Overview slides
+                    </a></li>
+                
+
+                
+
+                
+
+                
+
+                
+                
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/contributing/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 24, 2021 </div>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>If you are working on your own training materials and want preview them online without installing anything on your computer, you can do this using GitPod!</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, you will learn how to run a local instance of the GTN website:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#setting-up-gitpod" id="markdown-toc-setting-up-gitpod">Setting up Gitpod</a></li>
+  <li><a href="#the-gitpod-workspace" id="markdown-toc-the-gitpod-workspace">The GitPod Workspace</a></li>
+  <li><a href="#build-and-preview-the-gtn-website" id="markdown-toc-build-and-preview-the-gtn-website">Build and preview the GTN website</a></li>
+  <li><a href="#editing-training-materials-on-gitpod" id="markdown-toc-editing-training-materials-on-gitpod">Editing Training Materials on GitPod</a></li>
+  <li><a href="#saving-your-changes-back-to-github" id="markdown-toc-saving-your-changes-back-to-github">Saving your changes back to GitHub</a></li>
+  <li><a href="#closing-your-gitpod-workspace" id="markdown-toc-closing-your-gitpod-workspace">Closing your GitPod Workspace</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="setting-up-gitpod">Setting up Gitpod</h1>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-setting-up-gitpod"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Setting up GitPod</h3>
+
+  <ol>
+    <li><strong>Create a fork</strong> of the GTN GitHub repository
+      <ul>
+        <li>Go on the GitHub repository: <a href="https://github.com/galaxyproject/training-material" width="50%">github.com/<span class="notranslate">galaxy</span>project/training-material</a></li>
+        <li>Click on th Fork button (top-right corner of the page)
+<img src="../../images/PR_fork.jpg" alt="The fork button on GitHub" /></li>
+      </ul>
+
+      <blockquote class="tip">
+        <h3 id="tip-already-have-a-fork-of-the-gtn"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span>: Already have a fork of the GTN?</h3>
+        <p>If you already have a fork, fantastic! But a common issue is that the <code class="language-plaintext highlighter-rouge">main</code> branch gets outdated, or your fork was from before we renamed the <code class="language-plaintext highlighter-rouge">master</code> branch to <code class="language-plaintext highlighter-rouge">main</code>.</p>
+
+        <ul>
+          <li>Start by browsing to your fork in GitHub</li>
+          <li>Check the default branch that is shown? Does it say <code class="language-plaintext highlighter-rouge">master</code>? Then you need to update it.
+            <ol>
+              <li>Go to your fork’s settings</li>
+              <li>Find “Branches” on the left</li>
+              <li>If it says master you can click on the ⇆  icon to switch branches.</li>
+              <li>Select <code class="language-plaintext highlighter-rouge">main</code> (it may not be present).</li>
+              <li>If it isn’t present, use the pencil icon to rename <code class="language-plaintext highlighter-rouge">master</code> to <code class="language-plaintext highlighter-rouge">main</code>.</li>
+              <li>Now you can update it in the next step</li>
+            </ol>
+          </li>
+          <li>
+            <p>Is your fork using <code class="language-plaintext highlighter-rouge">main</code>? Fantastic, but you might need to update it. GitHub has a built in feature for this as shown below:</p>
+
+            <p><img src="../../images/github_update_fork.png" alt="Github with the top bar of a repository shown, the button for 'Fetch Upstream' has been clicked" /></p>
+          </li>
+        </ul>
+      </blockquote>
+    </li>
+    <li><strong>Open</strong> your browser and navigate to <a href="https://gitpod.io">gitpod.io</a></li>
+    <li><strong>Log in</strong> with GitHub
+<img src="../../images/gitpod/signin.png" alt="GitPod sign-in menu with various options, including GitHub" width="25%" /></li>
+    <li>Copy the link to your fork of the GTN, e.g. <code class="language-plaintext highlighter-rouge">https://github.com/shiltemann/training-material</code></li>
+    <li>
+      <p>In the browser’s address bar, prefix the entire URL with <code class="language-plaintext highlighter-rouge">gitpod.io/#</code> and press Enter.</p>
+
+      <p>For example, <code class="language-plaintext highlighter-rouge">gitpod.io/#https://github.com/&lt;your use<span class="notranslate">rna</span>me&gt;/training-material</code></p>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-make-this-even-easier-with-the-gitpod-browser-extension"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Make this even easier with the GitPod browser extension!</h3>
+        <ol>
+          <li>To make this even easier, you can install the GitPod browser extension
+            <ul>
+              <li><a href="https://addons.mozilla.org/en-GB/firefox/addon/gitpod/">Firefox</a></li>
+              <li><a href="https://chrome.google.com/webstore/detail/gitpod-online-ide/dodmmooeoklaejobgleioelladacbekii">Chrome or Edge</a></li>
+            </ul>
+          </li>
+          <li>Now it is just a single click to open any GitHub repository in GitPod
+<img src="../../images/gitpod/browser-extension.png" alt="screenshot of the button the GitPod browser extension adds to GitHub repository " /></li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>Gitpod will now configure your environment. This may take some time
+<img src="../../images/gitpod/setup.png" alt="progress indicator of GitPod first setup" /></li>
+    <li>Once the setup is finished, you should see a page something like this:
+<img src="../../images/gitpod/welcomepage.png" alt="GitPod welcome screen" /></li>
+  </ol>
+</blockquote>
+
+<h1 id="the-gitpod-workspace">The GitPod Workspace</h1>
+
+<p>Let’s have a closer look at the GitPod workspace:</p>
+
+<ul>
+  <li><strong>Left:</strong> Here you see all the files in the GTN repository</li>
+  <li><strong>Top:</strong> This is the main window where you can view and edit files</li>
+  <li><strong>Bottom:</strong> Terminal window. Here you can type commands (e.g. to build the website preview) and read output and error messages.</li>
+</ul>
+
+<p><img src="../../images/gitpod/welcomepage.png" alt="GitPod welcome screen" /></p>
+
+<h1 id="build-and-preview-the-gtn-website">Build and preview the GTN website</h1>
+
+<p>Before we start making any changes, let’s build the website and get a live preview.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-setting-up-gitpod-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Setting up GitPod</h3>
+
+  <ol>
+    <li>
+      <p>In the terminal window (bottom), type the following command:
+<code class="language-plaintext highlighter-rouge">make serve-gitpod</code></p>
+
+      <p><img src="../../images/gitpod/command.png" alt="output in the terminal after issuing the make serve-gitpod command" /></p>
+    </li>
+    <li>The first time you run this command, it will install some dependencies, so it may take a little bit of time (a few minutes)
+      <ul>
+        <li>Next times will be a lot faster! (~30 seconds)</li>
+      </ul>
+    </li>
+    <li>
+      <p>When the build process is finished, the terminal will show you a link, and a window should popup with a preview on the right.</p>
+
+      <ul>
+        <li>
+          <p>You may need to click ‘Try Again’ to load the GTN.</p>
+
+          <p><img src="../../images/gitpod_tryagain.png" alt="gitpod with the GTN open in the right panel, but saying &quot;Try again&quot;" /></p>
+        </li>
+        <li>
+          <p>Click on the link in the terminal to see the GTN in full-screen: <code class="language-plaintext highlighter-rouge">Server address: http://127.0.0.1:4000/training-material/</code></p>
+        </li>
+      </ul>
+
+      <p><img src="../../images/gitpod/ready.png" alt="output in the terminal after the build process has completed " /></p>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-not-opening"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Not opening?</h3>
+        <p><img src="../../images/gitpod_popup.png" alt="screenshot of firefox permissions dialog which shows blocked windows and an allow menu" />
+Some browsers block popups by default, you may need to allow GitPod to show popups in order to click links.</p>
+      </blockquote>
+    </li>
+    <li>This will take you to a preview of the GTN website
+      <ul>
+        <li><strong>Note:</strong> It will take you the 404 page because GitPod doesn’t know the location of the GTN homepage, but from here you can just click the homepage button.</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img src="../../images/gitpod.png" alt="screenshot of gitpod's code editor with a tutorial open, and the GTN preview on the right" /></p>
+
+<h1 id="editing-training-materials-on-gitpod">Editing Training Materials on GitPod</h1>
+
+<p>Now that you have the GitPod environment working and we have a live preview up, let’s make some changes to the GTN materials and get an instant preview.</p>
+
+<p><strong>Scenario:</strong> You have spotted a typo in one of the tutorials, and would like to fix this and see the resulting GTN webpage.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-make-and-view-changes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Make and view changes</h3>
+
+  <ol>
+    <li>In the preview of the GTN website, open the following tutorial:
+      <ul>
+        <li>Topic: “Introduction to <span class="notranslate">Galaxy</span> Analyses” topic</li>
+        <li>Tutorial: “A Short Introduction to <span class="notranslate">Galaxy</span>””</li>
+        <li>We will edit this tutorial and watch the live preview window for the effects</li>
+      </ul>
+    </li>
+    <li>
+      <p>On the file browser on the left, open the following file:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>topics/introduction/tutorials/<span class="notranslate">galaxy</span>-intro-short/tutorial.md
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-finding-files-faster"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Finding files faster?</h3>
+        <p>You can use the key combination <kbd>ctrl-p</kbd> to launch the file search dialog and simply enter the text <code class="language-plaintext highlighter-rouge">topics/introduction/tutorials/<span class="notranslate">galaxy</span>-intro-short/tutorial.md</code></p>
+      </blockquote>
+    </li>
+    <li>Change the title of the tutorial
+      <ul>
+        <li><strong>From:</strong> “A Short Introduction to <span class="notranslate">Galaxy</span>”</li>
+        <li><strong>To:</strong> “A Short and Cool Introduction to <span class="notranslate">Galaxy</span>”</li>
+        <li>You should immediately see a message in the terminal saying “regenerating”. GitPod has detected your changes and is rebuilding the website.
+<img src="../../images/gitpod/changes.png" alt="we changed the title of the tutorial in the text editor window" />
+<img src="../../images/gitpod/regenerating.png" alt="the terminal shows a message stating the website is being regenerated" /></li>
+      </ul>
+    </li>
+    <li>
+      <p>Move to the top right panel where the GTN is previewed and click the refresh icon</p>
+    </li>
+    <li>You should see the change you made:
+<img src="../../images/gitpod-changed.png" alt="The updated preview with our changed tutorial title" /></li>
+  </ol>
+
+</blockquote>
+
+<p>In this way you can edit files in the text editor, and see the effects in the website preview.</p>
+
+<h1 id="saving-your-changes-back-to-github">Saving your changes back to GitHub</h1>
+
+<p>When you have finished your changes, it all looks good in the preview, you want to save your changes back to GitHub so that you can either continue later, or make a Pull Request to the GTN to contribute your changes.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-save-changes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Save changes</h3>
+
+  <ol>
+    <li><strong>Option 1: via the terminal</strong>
+      <ul>
+        <li>Hit <kbd>ctrl+c</kbd> if your preview was still running to stop it</li>
+        <li>Create a new branch, commit your changes, push changes:</li>
+      </ul>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout <span class="nt">-b</span> fix-title
+git commit <span class="nt">-m</span> <span class="s2">"update tutorial title"</span> topics/introduction/tutorials/<span class="notranslate">galaxy</span>-intro-short/tutorial.md
+git push origin fix-title
+</code></pre></div>      </div>
+    </li>
+    <li><strong>Option 2: via the web interface</strong>
+      <ul>
+        <li>Create a new branch:
+          <ul>
+            <li>On the bottom-left, click on the branch logo (probably “master” or “main”)
+<img src="../../images/gitpod/branch-change.png" alt="button on the bottom of the page with the current branch" /></li>
+            <li>Enter <code class="language-plaintext highlighter-rouge">fix-title</code> as the name for your new branch (at top of window)</li>
+            <li>Choose “+ Create new branch…” from the dropdown</li>
+          </ul>
+        </li>
+        <li>Commit changes:
+          <ul>
+            <li>On the left menu, click on the “changed files” tab
+<img src="../../images/gitpod/changedfiles.png" alt="button on the left menu to show changed files" /></li>
+            <li>Click on the “+” icon next to the file we edited to <em>stage changes</em>
+<img src="../../images/gitpod/stagechanges.png" alt="stage changes button" /></li>
+            <li>Hit the checkmark icon at the top to commit the changes</li>
+            <li>Enter a commit message (top of window)
+     - Publish changes</li>
+          </ul>
+        </li>
+        <li>Click the cloud button at bottom left to publish your changes
+<img src="../../images/gitpod/publlish.png" alt="publish changes button" /></li>
+      </ul>
+    </li>
+    <li>Your changes are now saved to your fork, and you can make a PR via the GitHub interface.
+      <ul>
+        <li>If you used option 1 and want to do that right away, you can click on the link in the terminal:
+<img src="../../images/gitpod/push.png" alt="link in the terminal to open a PR" /></li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="tip">
+    <h3 id="note-gitpod-permissions">Note: GitPod Permissions</h3>
+    <p>If this is your first time using GitPod, you may need to grant permissions to let GitPod push to your GitHub fork
+<img src="../../images/gitpod/access.png" alt="prompt to changes permissions" />
+This will take you through a process to authorize GitPod, and set permissions
+<img src="../../images/gitpod/permissions.png" alt="permission settings for GitPod" />
+If it doesn’t take you to GitPod’s permission page because your browser blocks popups, you can set them <a href="https://gitpod.io/integrations">on this page</a>.</p>
+  </blockquote>
+</blockquote>
+
+<h1 id="closing-your-gitpod-workspace">Closing your GitPod Workspace</h1>
+
+<p>Everybody gets 50 hours per month for free on GitPod, so it is wise to close your GitPod workspace when you are finished with it, to conserver your quotum.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-shutting-down-your-gitpod-workspace"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Shutting down your GitPod workspace</h3>
+
+  <ol>
+    <li>Click on the menu button at the top left corner of the screen
+      <ul>
+        <li>Choose “Gitpod: Stop Workspace”</li>
+      </ul>
+
+      <p><img src="../../images/gitpod/stopworkspace.png" alt="stop workspace option in the main menu" /></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>GitPod can be used to serve the GTN training materials</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/contributing/faqs/">FAQ page for the Contributing to the Galaxy Training Material topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                    
+
+                    
+
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Running the GTN website online using GitPod (Contributing to the Galaxy Training Material)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Saskia Hiltemann, 2021 <b>Running the GTN website online using GitPod (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/gitpod/tutorial.html">https://training.galaxyproject.org/training-material/topics/contributing/tutorials/gitpod/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{contributing-gitpod,
+    author = "Saskia Hiltemann",
+    title = "Running the GTN website online using GitPod (Galaxy Training Materials)",
+    year = "2021",
+    month = "06",
+    day = "24"
+    url = "\url{https://training.galaxyproject.org/training-material/topics/contributing/tutorials/gitpod/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+                    
+                    <blockquote class="agenda">
+                        <h3>Developing GTN training material</h3>
+                        This tutorial is part of a series to develop GTN training material, feel free to also look at:
+                        
+                        <ol>
+                        
+                            
+                                
+                        <li><a href="/training-material/topics/contributing/slides/introduction.html">Overview of the Galaxy Training Material</a></li>
+                                
+                            
+                        
+                            
+                                
+                                    
+                        <li><a href="/training-material/topics/contributing/tutorials/slides-with-video/tutorial.html">Adding auto-generated video to your slides</a></li>
+                                    
+                                
+                            
+                        
+                            
+                                
+                                    
+                        <li><a href="/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html">Contributing with GitHub via command-line</a></li>
+                                    
+                                
+                            
+                        
+                            
+                                
+                                    
+                        <li><a href="/training-material/topics/contributing/tutorials/github-interface-contribution/tutorial.html">Contributing with GitHub via its interface</a></li>
+                                    
+                                
+                            
+                        
+                            
+                                
+                                    
+                        <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html">Creating a new tutorial</a></li>
+                                    
+                                
+                            
+                        
+                            
+                                
+                                    
+                        <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">Creating content in Markdown</a></li>
+                                    
+                                
+                            
+                        
+                            
+                                
+                                    
+                        <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.html">Creating Interactive Galaxy Tours</a></li>
+                                    
+                                
+                            
+                        
+                            
+                                
+                                    
+                        <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-slides/slides.html">Creating Slides</a></li>
+                                    
+                                
+                            
+                        
+                            
+                                
+                                    
+                        <li><a href="/training-material/topics/contributing/tutorials/generating-pdf/tutorial.html">Generating PDF artefacts of the website</a></li>
+                                    
+                                
+                            
+                        
+                            
+                                
+                                    
+                        <li><a href="/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html">Including a new topic</a></li>
+                                    
+                                
+                            
+                        
+                            
+                                
+                                    
+                        <li><a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Running the GTN website locally</a></li>
+                                    
+                                
+                            
+                        
+                            
+                                
+                                    
+                        <li><a href="/training-material/topics/contributing/tutorials/gitpod/tutorial.html">Running the GTN website online using GitPod</a></li>
+                                    
+                                
+                            
+                        
+                            
+                                
+                                    
+                        <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html">Tools, Data, and Workflows for tutorials</a></li>
+                                    
+                                
+                            
+                        
+                            
+                                
+                                    
+                        <li><a href="/training-material/topics/contributing/tutorials/admin-knitting/tutorial.html">Updating diffs in admin training</a></li>
+                                    
+                                
+                            
+                        
+                        </ol>
+                    </blockquote>
+                    
+
+                    
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Saskia Hiltemann)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/contributing/tutorials/gitpod/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
