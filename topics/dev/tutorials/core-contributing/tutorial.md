@@ -42,7 +42,7 @@ With simplicity in mind, we will implement our proposed extension to Galaxy by a
 
 ## Forking Galaxy
 
-{% include topics/dev/tutorials/core-contributing/contributing.md %}
+{% snippet topics/dev/faqs/contributing.md %}
 
 > ### {% icon hands_on %} Hands-on: Setup your local Galaxy instance
 >
@@ -75,7 +75,7 @@ With simplicity in mind, we will implement our proposed extension to Galaxy by a
 >    > ```
 >    {: .code-in}
 >
->    Once activated, you'll see the name of the virtual environment prepended to your shell prompt: `(.venv)$`. 
+>    Once activated, you'll see the name of the virtual environment prepended to your shell prompt: `(.venv)$`.
 >
 > 5. Finally, let's create a new branch for your edits:
 >

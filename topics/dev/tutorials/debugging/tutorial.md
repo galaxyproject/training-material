@@ -68,7 +68,7 @@ The process for dealing with runtime errors will be somewhat different, since th
 
 ## Contributing to Galaxy
 
-{% include topics/dev/tutorials/core-contributing/contributing.md %}
+{% snippet topics/dev/faqs/contributing.md %}
 
 In this tutorial, instead of cloning Galaxy's default branch, we will clone a branch that has been created for this tutorial and contains several bugs that you'll need to identify and fix. Also, we won't be opening a pull request in the upstream Galaxy repository.
 
@@ -108,7 +108,7 @@ Good news! All of the failing tests are on the same Galaxy branch! That means yo
 >    > ```
 >    {: .code-in}
 >
->    Once activated, you'll see the name of the virtual environment prepended to your shell prompt: `(.venv)$`. 
+>    Once activated, you'll see the name of the virtual environment prepended to your shell prompt: `(.venv)$`.
 >
 > 5. Finally, let's create a new branch for your edits:
 >
