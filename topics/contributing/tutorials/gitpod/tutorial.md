@@ -102,18 +102,23 @@ Before we start making any changes, let's build the website and get a live previ
 >
 >    ![output in the terminal after issuing the make serve-gitpod command](../../images/gitpod/command.png)
 >
+> 2. The first time you run this command, it will install some dependencies, so it may take a little bit of time (a few minutes)
+>    - Next times will be a lot faster! (~30 seconds)
+>
+> 3. When the build process is finished, the terminal will show you a link, and a window should popup with a preview on the right.
+>
+>    - You may need to click 'Try Again' to load the GTN.
+>
+>      ![gitpod with the GTN open in the right panel, but saying "Try again"](../../images/gitpod_tryagain.png)
+>
+>    - Click on the link in the terminal to see the GTN in full-screen: `Server address: http://127.0.0.1:4000/training-material/`
+>
+>    ![output in the terminal after the build process has completed ](../../images/gitpod/ready.png)
+>
 >    > ### {% icon tip %} Tip: Not opening?
 >    > ![screenshot of firefox permissions dialog which shows blocked windows and an allow menu](../../images/gitpod_popup.png)
 >    > Some browsers block popups by default, you may need to allow GitPod to show popups in order to click links.
 >    {: .tip}
->
-> 2. The first time you run this command, it will install some dependencies, so it may take a little bit of time (a few minutes)
->    - Next times will be a lot faster! (~30 seconds)
->
-> 3. When the build process is finished, the terminal will show you a link
->    - Click on the link in the terminal on the line: `Server address: http://127.0.0.1:4000/training-material/`
->
->    ![output in the terminal after the build process has completed ](../../images/gitpod/ready.png)
 >
 > 4. This will take you to a preview of the GTN website
 >    - **Note:** It will take you the 404 page because GitPod doesn't know the location of the GTN homepage, but from here you can just click the homepage button.
@@ -121,6 +126,7 @@ Before we start making any changes, let's build the website and get a live previ
 {: .hands_on}
 
 
+![screenshot of gitpod's code editor with a tutorial open, and the GTN preview on the right](../../images/gitpod.png)
 
 # Editing Training Materials on GitPod
 
@@ -155,10 +161,10 @@ Now that you have the GitPod environment working and we have a live preview up, 
 >    ![we changed the title of the tutorial in the text editor window](../../images/gitpod/changes.png)
 >    ![the terminal shows a message stating the website is being regenerated](../../images/gitpod/regenerating.png)
 >
-> 4. Open the tab in your browser that has the GTN preview open, and **refresh the page**.
+> 4. Move to the top right panel where the GTN is previewed and click the refresh icon
 >
 > 5. You should see the change you made:
->    ![The updated preview with our changed tutorial title](../../images/gitpod/updated.png)
+>    ![The updated preview with our changed tutorial title](../../images/gitpod-changed.png)
 >
 {: .hands_on}
 
