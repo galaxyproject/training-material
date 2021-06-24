@@ -7,7 +7,7 @@ layout: faq
 ---
 
 
-Click the {% icon new-history %} icon at the top of the history panel
+Click the {% icon new-history %} icon at the top of the history panel.
 
 If the {% icon new-history %} is missing:
 1. Click on the {% icon galaxy-gear %} icon (**History options**) on the top of the history panel

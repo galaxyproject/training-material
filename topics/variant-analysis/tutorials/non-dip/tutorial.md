@@ -115,7 +115,7 @@ Our reads are long (250 bp) so we will use BWA-MEM ({% cite Li2013 %}) to align 
 
 > ### {% icon comment %} More about selecting datasets
 >
-> By selecting datasets 1 and 3 as **Select the first set of reads** and datasets 2 and 4 as **Select the second set of reads**, Galaxy will automatically launch two BWA-MEM jobs using datasets 1,2 and 3,4 generating two resulting BAM files. 
+> By selecting datasets 1 and 3 as **Select the first set of reads** and datasets 2 and 4 as **Select the second set of reads**, Galaxy will automatically launch two BWA-MEM jobs using datasets 1,2 and 3,4 generating two resulting BAM files.
 > By setting **Set read groups information** to `Set read groups (SAM/BAM specifications)` and clicking **Auto-assign** we will ensure that the reads in the resulting BAM dataset are properly set.
 {: .comment}
 
@@ -141,7 +141,7 @@ Duplicates can be identified based on their outer alignment coordinates or using
 
 > ### {% icon details %} More about MarkDuplicates
 >
-> Duplicates are identified as read pairs having identical 5' positions (coordinate and strand) for both reads in a mate pair (and optionally, matching unique molecular identifier reads; see `BARCODE_TAG` option). Optical, or more broadly sequencing, duplicates are duplicates that appear clustered together spatially during sequencing and can arise from optical/imagine-processing artifacts or from biochemical processes during clonal amplification and sequencing; they are identified using the `READ_NAME_REGEX` and the `OPTICAL_DUPLICATE_PIXEL_DISTANCE` options. The tool's main output is a new SAM or BAM file in which duplicates have been identified in the SAM flags field, or optionally removed (see `REMOVE_DUPLICATE` and `REMOVE_SEQUENCING_DUPLICATES`), and optionally marked with a duplicate type in the 'DT' optional attribute. In addition, it also outputs a metrics file containing the numbers of `READ_PAIRS_EXAMINED`, `SECONDARY_OR_SUPPLEMENTARY_RDS`, `UNMAPPED_READS`, `UNPAIRED_READS`, `UNPAIRED_READ DUPLICATES`, `READ_PAIR_DUPLICATES`, and `READ_PAIR_OPTICAL_DUPLICATES`. 
+> Duplicates are identified as read pairs having identical 5' positions (coordinate and strand) for both reads in a mate pair (and optionally, matching unique molecular identifier reads; see `BARCODE_TAG` option). Optical, or more broadly sequencing, duplicates are duplicates that appear clustered together spatially during sequencing and can arise from optical/imagine-processing artifacts or from biochemical processes during clonal amplification and sequencing; they are identified using the `READ_NAME_REGEX` and the `OPTICAL_DUPLICATE_PIXEL_DISTANCE` options. The tool's main output is a new SAM or BAM file in which duplicates have been identified in the SAM flags field, or optionally removed (see `REMOVE_DUPLICATE` and `REMOVE_SEQUENCING_DUPLICATES`), and optionally marked with a duplicate type in the 'DT' optional attribute. In addition, it also outputs a metrics file containing the numbers of `READ_PAIRS_EXAMINED`, `SECONDARY_OR_SUPPLEMENTARY_RDS`, `UNMAPPED_READS`, `UNPAIRED_READS`, `UNPAIRED_READ DUPLICATES`, `READ_PAIR_DUPLICATES`, and `READ_PAIR_OPTICAL_DUPLICATES`.
 >
 > Usage example: `java -jar picard.jar MarkDuplicates I=input.bam O=marked_duplicates.bam M=marked_dup_metrics.txt`
 {: .details}
@@ -453,7 +453,7 @@ Visualizing VCF datasets is a good way to get an overall idea of the data, but i
 {: .question}
 
 ![VCFtoTab-delimited output](../../images/mt_tab.png "The columns in the above dataset represent INFO and Genotype fields on the original VCF dataset.")
- 
+
  Let's restrict ourselves to a few key columns:
 
 * 2 `POS` - position along mitochondrial genome
@@ -465,7 +465,7 @@ Visualizing VCF datasets is a good way to get an overall idea of the data, but i
 
 > ### {% icon hands_on %} Hands-on: Cut columns from a file
 >
-> 1. Use {% tool [Cut columns from a table](https://usegalaxy.eu/root?tool_id=Cut1) %} to select specific columns with the following parameters:
+> 1. Use {% tool [Cut columns from a table](Cut1) %} to select specific columns with the following parameters:
 >    - *"Cut columns"*: `c2,c4,c5,c52,c54,c55`
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: select the tabular dataset produced by **VCFtoTab-delimited** {% icon tool %}

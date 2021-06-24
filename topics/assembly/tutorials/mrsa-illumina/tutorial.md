@@ -181,7 +181,7 @@ and we will drop.
 
 > ### {% icon hands_on %} Hands-on: Assessing the data quality of the trimmed reads and comparing to the input reads
 >
-> 1. {% tool [Trimmomatic](toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic) %}  with the following parameters:
+> 1. {% tool [Trimmomatic](toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1) %}  with the following parameters:
 >    - *"Single-end or paired-end reads?"*: `Paired-end (two separate input files)`
 >        - {% icon param-file %} *"Input FASTQ file (R1/first of pair)"*: `DRR187559_1 uncompressed`
 >        - {% icon param-file %} *"Input FASTQ file (R2/second of pair)"*: `DRR187559_2 uncompressed`
@@ -260,7 +260,7 @@ improved to work faster and only for smaller (bacterial) genomes.
 
 > ### {% icon hands_on %} Hands-on: Assembly using Shovill
 >
-> 1. {% tool [Shovill](toolshed.g2.bx.psu.edu/repos/iuc/shovill) %} with the following parameters:
+> 1. {% tool [Shovill](toolshed.g2.bx.psu.edu/repos/iuc/shovill/shovill/1.1.0+galaxy0) %} with the following parameters:
 >    - *"Input reads type, collection or single library"*: `Paired End`
 >        - {% icon param-file %} *"Forward reads (R1)"*: `Trimmomatic on DRR187559_1 uncompressed (R1 paired)`
 >        - {% icon param-file %} *"Reverse reads (R2)"*: `Trimmomatic on DRR187559_2 uncompressed (R2 paired)`

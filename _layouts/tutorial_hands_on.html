@@ -98,7 +98,7 @@ layout: base
         {% include _includes/material.jsonld material=page topic=topic site=site %}
     </script>
 
-    <section class="tutorial">
+    <section class="tutorial topic-{{ page.topic_name }}">
         <h1 data-toc-skip>{{ page.title }}</h1>
         {% if page.enable == false or page.enable == "false" %}
         <div class="alert alert-warning" role="alert">
@@ -135,12 +135,12 @@ layout: base
             {% endif %}
 
             {% if page.time_estimation %}
-            <p><strong>{% icon time %} Time estimation:</strong> {{ page.time_estimation | duration_to_human }}</p>
+            <div><strong>{% icon time %} Time estimation:</strong> {{ page.time_estimation | duration_to_human }}</div>
             {% endif %}
 
             {% if page.level %}
-            <p><strong>{% icon level %} Level: </strong>
-            {% include _includes/difficulty-indicator.html level=page.level textlabel=true %}</p>
+            <div><strong>{% icon level %} Level: </strong>
+            {% include _includes/difficulty-indicator.html level=page.level textlabel=true %}</div>
             {% endif %}
 
             {% if instances[topic.name].supported or topic.docker_image %}
@@ -153,7 +153,7 @@ layout: base
             {% endif %}
 
             {% if associated_slides or intro_link or tuto_has_zenodo or own_material.workflows or own_material.tours or tuto_has_docker %}
-            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
             <ul>
                 <div class="supporting_material">
                 {% if associated_slides %}
@@ -191,7 +191,7 @@ layout: base
             </ul>
             {% endif %}
 
-            <p><strong> {% icon last_modification %} Last modification:</strong> {{ page.last_modified_at | date: "%b %-d, %Y"}} </p>
+            <div><strong> {% icon last_modification %} Last modification:</strong> {{ page.last_modified_at | date: "%b %-d, %Y"}} </div>
         </blockquote>
 
         <div class="container">
@@ -231,6 +231,17 @@ layout: base
                     {% bibliography --cited %}
                     {% endif %}
 
+                    {% if page.abbreviations %}
+                    <h1 data-toc-skip>Glossary</h1>
+                    <dl>
+                        {% assign sorted_abbrs = page.abbreviations | sort %}
+                        {% for abbr in sorted_abbrs %}
+                        <dt>{{ abbr[0] }}</dt>
+                        <dd>{{ abbr[1] }}</dd>
+                        {% endfor %}
+                    </dl>
+                    {% endif %}
+
                     <h1>Feedback</h1>
                     <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
@@ -268,7 +279,7 @@ layout: base
                     <p>
                         <ol>
                             <li id="citation-text">
-                            {%- include _includes/contributor-author-list-comma.html contributors=page.contributors -%}, {{ page.last_modified_at | date: "%Y" }} <b>{{ page.title }} (Galaxy Training Materials)</b>. <a href="{{ site.baseurl }}{{page.url}}">{{ site.baseurl }}{{page.url}}</a> Online; accessed TODAY
+                                {%- include _includes/contributor-author-list-comma.html contributors=page.contributors -%}, {{ page.last_modified_at | date: "%Y" }} <b>{{ page.title }} (Galaxy Training Materials)</b>. <a href="{{ site.url }}{{ site.baseurl }}{{page.url}}">{{ site.url }}{{ site.baseurl }}{{page.url}}</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -288,7 +299,7 @@ layout: base
     year = "{{ page.last_modified_at | date: "%Y"}}",
     month = "{{ page.last_modified_at | date: "%m"}}",
     day = "{{ page.last_modified_at | date: "%d" }}"
-    url = "{% raw %}\url{{% endraw %}{{ site.baseurl }}{{page.url}}{% raw %}}{% endraw %}",
+    url = "{% raw %}\url{{% endraw %}{{ site.url }}{{ site.baseurl }}{{page.url}}{% raw %}}{% endraw %}",
     note = "[Online; accessed TODAY]"
 }
 @article{Batut_2018,
@@ -316,43 +327,43 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
+                    <h3>{% icon congratulations %} Congratulations on successfully completing this tutorial!</h3>
+
+                    {% if topic.name == "contributing" %}
+                    <blockquote class="agenda">
+                        <h3>Developing GTN training material</h3>
+                        This tutorial is part of a series to develop GTN training material, feel free to also look at:
+                        {% assign topic = site.data[page.topic_name] %}
+                        <ol>
+                        {% for material in topic_material %}
+                            {% if material.enable != "false" %}
+                                {% if material.type == "introduction" %}
+                        <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html">{{ material.title }}</a></li>
+                                {% elsif material.type == "tutorial" %}
+                                    {% if material.hands_on %}
+                        <li><a href="{{ site.baseurl }}/topics/{{ topic.name  }}/tutorials/{{ material.tutorial_name }}/tutorial.html">{{ material.title }}</a></li>
+                                    {% elsif material.slides %}
+                        <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/slides.html">{{ material.title }}</a></li>
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        </ol>
+                    </blockquote>
+                    {% endif %}
+
+                    {% if page.follow_up_training %}
+                    <blockquote class="agenda follow-up">
+                        <strong class="follow-up">{% icon curriculum %} Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                        <ul>
+                            {% include _includes/display_extra_training.md extra_trainings=page.follow_up_training %}
+                        </ul>
+                    </blockquote>
+                    {% endif %}
+
                 </div>
             </div>
         </div>
-
-        <h3>{% icon congratulations %} Congratulations on successfully completing this tutorial!</h3>
-
-        {% if topic.name == "contributing" %}
-        <blockquote class="agenda">
-            <h3>Developing GTN training material</h3>
-            This tutorial is part of a series to develop GTN training material, feel free to also look at:
-            {% assign topic = site.data[page.topic_name] %}
-            <ol>
-            {% for material in topic_material %}
-                {% if material.enable != "false" %}
-                    {% if material.type == "introduction" %}
-            <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html">{{ material.title }}</a></li>
-                    {% elsif material.type == "tutorial" %}
-                        {% if material.hands_on %}
-            <li><a href="{{ site.baseurl }}/topics/{{ topic.name  }}/tutorials/{{ material.tutorial_name }}/tutorial.html">{{ material.title }}</a></li>
-                        {% elsif material.slides %}
-            <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/slides.html">{{ material.title }}</a></li>
-                        {% endif %}
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
-            </ol>
-        </blockquote>
-        {% endif %}
-
-        {% if page.follow_up_training %}
-        <blockquote class="agenda follow-up">
-            <strong class="follow-up">{% icon curriculum %} Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
-            <ul>
-                {% include _includes/display_extra_training.md extra_trainings=page.follow_up_training %}
-            </ul>
-        </blockquote>
-        {% endif %}
     </section>
 </div>
 

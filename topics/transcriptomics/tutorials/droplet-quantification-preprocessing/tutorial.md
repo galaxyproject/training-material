@@ -2,8 +2,8 @@
 layout: tutorial_hands_on
 
 title: "Generating a single cell matrix using Alevin"
-subtopic: single-cell
-priority: 9
+subtopic: single-cell-CS
+priority: 1
 
 zenodo_link: 'https://zenodo.org/record/4574153'
 
@@ -25,6 +25,7 @@ key_points:
 tags:
   - single-cell
   - 10x
+  - paper-replication
 
 contributors:
   - nomadscientist
@@ -69,9 +70,9 @@ Droplet-based data consists of three components: cell barcodes, unique molecular
 
 This used to be a complex process involving multiple algorithms, or was performed with technology-specific methods (such as 10X's 'Cellranger' tool)  but is now much simpler thanks to the advent of a few new methods. When selecting methodology for your own work you should consider:
 
- * [STARsolo](https://github.com/alexdobin/STAR) - a dscRNA-seq-specific variant of the popular genome alignment method STAR. Produces results very close to those of Cellranger (which itself uses STAR under the hood).
+ * [STARsolo](https://github.com/alexdobin/STAR) - a droplet-based scRNA-seq-specific variant of the popular genome alignment method STAR. Produces results very close to those of Cellranger (which itself uses STAR under the hood).
  * [Kallisto/ bustools](https://www.kallistobus.tools/) - developed by the originators of the transcriptome quantification method, Kallisto.
- * [Alevin](https://salmon.readthedocs.io/en/latest/alevin.html) - another transcriptome method developed by the authors of the Salmon tool.
+ * [Alevin](https://salmon.readthedocs.io/en/latest/alevin.html) - another transcriptome analysis method developed by the authors of the Salmon tool.
 
 We're going to use Alevin {% cite article-Alevin %} for demonstration purposes, but we do not endorse one method over another.
 
@@ -119,7 +120,7 @@ Additionally, to map your reads, you will need a transcriptome to align against 
 
 ## Generate a transcript to gene map
 
-Gene-level, rather than transcript-level, quantification is standard in scRNA-seq, which means that that the expression level of alternatively spliced RNA molecules are combined to create gene-level values. Droplet-based scRNA-seq techniques only sample one end each transcript, so lack the full-molecule coverage that would be required to accurately quantify different transcript isoforms.
+Gene-level, rather than transcript-level, quantification is standard in scRNA-seq, which means that the expression level of alternatively spliced RNA molecules are combined to create gene-level values. Droplet-based scRNA-seq techniques only sample one end each transcript, so lack the full-molecule coverage that would be required to accurately quantify different transcript isoforms.
 
 To generate gene-level quantifications based on transcriptome quantification, Alevin and similar tools require a conversion between transcript and gene identifiers. We can derive a transcript-gene conversion from the gene annotations available in genome resources such as Ensembl. The transcripts in such a list need to match the ones we will use later to build a binary transcriptome index. If you were using spike-ins, you'd need to add these to the transcriptome and the transcript-gene mapping.
 
@@ -453,14 +454,14 @@ Fantastic! Now that our matrix is combined into an object, specifically the Sing
 > How many cell barcodes remain after the emptyDrops treatment? Why might that be?
 >
 >   > ### {% icon tip %} Hint
->   > If you click on the `Stringent-Object` in the {% icon galaxy-history %} history, the text in that window says `22 barcodes`. Why is this so low??
+>   > If you click on the `Stringent-Object` in the {% icon galaxy-history %} history, the text in that window says `22 barcodes` or something similar to that. Why is this so low?? And why might the number be different?
 >   > Consider...is this a complete set of data?
 >   {: .tip}
 >
 >
 > > ### {% icon solution %} Solution
 > >
-> > Remember this is a subsampled dataset. If you look carefully at the parameters of emptyDrops, you'll see it set a minimum threshold at 100 UMI. If you look at the barcode plots above for the 400k read sample, you'll see this is far too stringent for this subsampled data! To satisfy your curiosity, this minimum threshold would yield `3011` barcodes for the total sample.
+> > Remember this is a subsampled dataset. If you look carefully at the parameters of emptyDrops, you'll see it set a minimum threshold at 100 UMI. If you look at the barcode plots above for the 400k read sample, you'll see this is far too stringent for this subsampled data! To satisfy your curiosity, this minimum threshold would yield `3011` barcodes for the total sample. Also, the number may vary slightly as the output depends on a large number of random iterations.
 > >
 > {: .solution}
 >
@@ -528,8 +529,6 @@ This sample was originally one of seven. So to run the other [12 downsampled FAS
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->
 > 3. Rename the datasets
 > 4. Check that the datatype is `h5ad`, otherwise you will need to change each file to `h5ad`!
 >
@@ -539,7 +538,7 @@ This sample was originally one of seven. So to run the other [12 downsampled FAS
 
 Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows you how each `N70X` corresponds to a sample, and whether that sample was from a male or female. This will be important metadata to add to our sample, which we will add very similarly to how you added the `gene_name` and `mito` metadata above!
 
-## Concatenating Objects
+## Concatenating objects
 > ### {% icon hands_on %} Hands-on: Concatenating AnnData objects
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0){% icon tool %} with the following parameters:
