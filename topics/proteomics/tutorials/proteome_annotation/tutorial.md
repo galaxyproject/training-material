@@ -176,49 +176,9 @@ by filtering out the lines that contain the word `salivary` in the column of RNA
 
 # Functional annotation of the EBC proteome (enrichment analysis)
 
-The resulting list of 157 proteins identified in the two pooled EBC samples (excluding the 10 contaminants proteins) is now submitted to Gene Ontology (GO)-term enrichment analysis to determine functions that were significantly enriched in our EBC proteomic dataset compared to the lung proteome (corresponding to tissue-specific genes extracted from the Human Protein Atlas). To do so, we first build a lung reference proteome (that should be more representative of the studied sample rather than a full human proteome) that will be used for enrichment analysis performed with the ClusterProfiler tool (based on the R package clusterProfiler).
+The resulting list of 157 proteins identified in the two pooled EBC samples (excluding the 10 contaminants proteins) is now submitted to Gene Ontology (GO)-term enrichment analysis to determine functions that were significantly enriched in our EBC proteomic dataset. To do so, we'll use the ClusterProfiler tool (based on the R package clusterProfiler) for functional annotation. 
 
-> ### {% icon hands_on %} Hands-on: Build a lung reference proteome as a background for GO terms enrichment analysis
->
-> 1. **Build tissue-specific expression dataset** {% icon tool %} with the following parameters:
->    - {% icon param-select %} *"Experimental data source (antibody- or RNAseq-based)"*: `Expression profiles based on immunohistochemistry`
->    - {% icon param-select %} *"Select tissue"*: `Lung` and `Bronchus` (you can start typing to filter the list)
->    - *"Expression level"*:
->      - {% icon param-check %} `High`
->      - {% icon param-check %} `Medium`
->      - {% icon param-check %} `Low`
->    - *"Reliability score"*:
->      - {% icon param-check %} `Enhanced`
->      - {% icon param-check %} `Supported`
->
->   > ### Output
->   > - **Tissue-specific expression from IHC**: List of the selected proteins.
->   > 6 columns: 'Gene', 'Gene name' and the retrieved info from HPA.
->   {: .comment}
-{: .hands_on}
-
-
-Note that expression information about respiratory cell types is retrieved (column 4; e.g. macrophages, pneumocytes, respiratory epithelial cells)
-that could be used for further refinement of your reference background.
-
-As the ClusterProfiler tool (which we will use for the enrichment analysis) does not consider ENSG (Ensembl gene) identifiers as input, we need to convert IDs into either entrez Gene ID or Uniprot accession number.
-
-> ### {% icon hands_on %} Hands-on: Convert Ensembl ID to Uniprot and Entrez Gene ID
->
-> 1. **ID Converter** {% icon tool %} with the following parameters:
->    - *"Enter IDs"*: `Input file containing IDs`
->    - {% icon param-file %} *"Select your file"*: `Tissue-specific expression from IHC` from **Build tissue-specific expression dataset** {% icon tool %}
->    - *"Column number of IDs to map"*: `c1`
->    - *"Species"*: `Human (Homo sapiens)`
->      - *"Type/source of IDs"*: `Ensembl gene ID (e.g. ENSG00000166913)`
-       - *"Target type of IDs you would like to map to"*:
->        - {% icon param-check %} `UniProt accession number (e.g. P31946)`
->        - {% icon param-check %} `Entrez gene ID (e.g. 7529)`
->
->    > ### {% icon comment %} Output
->    > In the output file, 2 new columns have been added with the ID retrieved thanks to the conversion.
->    {: .comment}
-{: .hands_on}
+## End modif
 
 Now we can perform the GO terms analysis. Input list is the EBC proteome to be analyzed after technical and biological contaminants
 removal, which is the output of biological contaminants filter step.
@@ -238,11 +198,7 @@ removal, which is the output of biological contaminants filter step.
 >    - *"Perform GO categories representation analysis?"*: `Yes`
 >    - *"Ontology level"*: `3`
 >    - *"Perform GO categories enrichment analysis?"*: `Yes`
->      - *"Define your own background IDs?"*: `Yes`
->        - *"Enter your background IDs"*: `Input file containing your background IDs`
->        - {% icon param-file %} *"Select file that contains your background IDs list"*: `ID converter on data ..` from lastest **ID Converter** {% icon tool %} run
->        - *"Column number of IDs"*: `c7`
->        - *"Select type of background IDs"*: `UniProt Accession number`
+>      - *"Define your own background IDs?"*: `No`
 >        - *"Graphical display"*:
 >          - {% icon param-check %} `dot-plot`
 >
@@ -255,12 +211,8 @@ removal, which is the output of biological contaminants filter step.
 >   >
 >   >   The suffix “GGO” (GroupGO) corresponds to the results “GO categories representation analysis” option
 >   >   (performs a gene/protein classification based on GO distribution at a specific level). The suffix
->   >   “EGO” (EnrichGO) corresponds to the results from the enrichment analysis (based on an
->   >   over-representation test of GO terms against the lung reference background). Two types of graphical output are provided either
+>   >   “EGO” (EnrichGO) corresponds to the results from the enrichment analysis. Two types of graphical output are provided either
 >   >   in the form of bar-plot or dot-plot.
->   >   According to this analysis, the main biological processes over-represented in EBC compared to
->   >   lung were some processes related to the immune system and exocytosis (see EGO.BP.dot.png, for Enriched
->   >   Biological Process GO terms dot-plot representation in png format).
 >   {: .comment}
 {: .hands_on}
 
