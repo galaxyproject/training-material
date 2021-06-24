@@ -42,6 +42,22 @@ If you are working on your own training materials and want preview them online w
 >    - Click on th Fork button (top-right corner of the page)
 >      ![The fork button on GitHub](../../images/PR_fork.jpg)
 >
+>    > ### {% icon tip %}: Already have a fork of the GTN?
+>    > If you already have a fork, fantastic! But a common issue is that the `main` branch gets outdated, or your fork was from before we renamed the `master` branch to `main`.
+>    >
+>    > - Start by browsing to your fork in GitHub
+>    > - Check the default branch that is shown? Does it say `master`? Then you need to update it.
+>    >     1. Go to your fork's settings
+>    >     2. Find "Branches" on the left
+>    >     3. If it says master you can click on the ⇆  icon to switch branches.
+>    >     4. Select `main` (it may not be present).
+>    >     5. If it isn't present, use the pencil icon to rename `master` to `main`.
+>    >     6. Now you can update it in the next step
+>    > - Is your fork using `main`? Fantastic, but you might need to update it. GitHub has a built in feature for this as shown below:
+>    >
+>    >   ![Github with the top bar of a repository shown, the button for 'Fetch Upstream' has been clicked](../../images/github_update_fork.png)
+>    {: .tip}
+>
 > 2. **Open** your browser and navigate to [gitpod.io](https://gitpod.io)
 > 3. **Log in** with GitHub
 >    ![GitPod sign-in menu with various options, including GitHub](../../images/gitpod/signin.png){: width="25%"}
@@ -86,6 +102,11 @@ Before we start making any changes, let's build the website and get a live previ
 >
 >    ![output in the terminal after issuing the make serve-gitpod command](../../images/gitpod/command.png)
 >
+>    > ### {% icon tip %} Tip: Not opening?
+>    > ![screenshot of firefox permissions dialog which shows blocked windows and an allow menu](../../images/gitpod_popup.png)
+>    > Some browsers block popups by default, you may need to allow GitPod to show popups in order to click links.
+>    {: .tip}
+>
 > 2. The first time you run this command, it will install some dependencies, so it may take a little bit of time (a few minutes)
 >    - Next times will be a lot faster! (~30 seconds)
 >
@@ -116,8 +137,16 @@ Now that you have the GitPod environment working and we have a live preview up, 
 >    - Tutorial: "A Short Introduction to Galaxy""
 >    - We will edit this tutorial and watch the live preview window for the effects
 >
+>
 > 2. On the file browser on the left, open the following file:
->    - `topics/introduction/tutorials/galaxy-short/tutorial.md`
+>
+>    ```
+>    topics/introduction/tutorials/galaxy-intro-short/tutorial.md
+>    ```
+>
+>    > ### {% icon tip %} Tip: Finding files faster?
+>    > You can use the key combination <kbd>ctrl-p</kbd> to launch the file search dialog and simply enter the text `topics/introduction/tutorials/galaxy-intro-short/tutorial.md`
+>    {: .tip}
 >
 > 3. Change the title of the tutorial
 >    - **From:** "A Short Introduction to Galaxy"
@@ -144,10 +173,10 @@ When you have finished your changes, it all looks good in the preview, you want 
 > ### {% icon hands_on %} Hands-on: Save changes
 >
 > 1. **Option 1: via the terminal**
->    - Hit CTRL+C if your preview was still running
+>    - Hit <kbd>ctrl+c</kbd> if your preview was still running to stop it
 >    - Create a new branch, commit your changes, push changes:
 >
->    ```basth
+>    ```bash
 >    git checkout -b fix-title
 >    git commit -m "update tutorial title" topics/introduction/tutorials/galaxy-intro-short/tutorial.md
 >    git push origin fix-title
@@ -180,9 +209,9 @@ When you have finished your changes, it all looks good in the preview, you want 
 > > ![prompt to changes permissions](../../images/gitpod/access.png)
 > > This will take you through a process to authorize GitPod, and set permissions
 > > ![permission settings for GitPod](../../images/gitpod/permissions.png)
+> > If it doesn't take you to GitPod's permission page because your browser blocks popups, you can set them [on this page](https://gitpod.io/integrations).
 > {: .tip}
 {: .hands_on}
-
 
 
 # Closing your GitPod Workspace
@@ -197,8 +226,3 @@ Everybody gets 50 hours per month for free on GitPod, so it is wise to close you
 >    ![stop workspace option in the main menu](../../images/gitpod/stopworkspace.png)
 >
 {: .hands_on}
-
-
-
-
-
