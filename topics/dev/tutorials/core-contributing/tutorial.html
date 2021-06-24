@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Contributing to Galaxy Core</title>
+        <title>Contributing a New Feature to Galaxy Core</title>
         
             <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
 
@@ -23,7 +23,7 @@
         
         
         <meta name="description" content="Galaxy is an open-source project. Everyone can contribute..." />
-        <meta property="og:title" content="Galaxy Training: Contributing to Galaxy Core" />
+        <meta property="og:title" content="Galaxy Training: Contributing a New Feature to Galaxy Core" />
         <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute..." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
@@ -275,7 +275,7 @@
     "url": "https://galaxyproject.org/teach/gtn/"
   },
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
-  "headline": "Contributing to Galaxy Core",
+  "headline": "Contributing a New Feature to Galaxy Core",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -310,7 +310,7 @@
   },
   "courseCode": "dev / core-contributing / hands-on",
   "learningResourceType": "hands-on tutorial",
-  "name": "Hands-on for 'Contributing to Galaxy Core' tutorial",
+  "name": "Hands-on for 'Contributing a New Feature to Galaxy Core' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/dev/tutorials/core-contributing/tutorial.html",
   "timeRequired": "PT3H",
   "description": "The questions this  addresses are:\n - How can I develop extensions to Galaxy data model?\n - How can I implement new API functionality within Galaxy?\n - How can I extend the Galaxy user interface with VueJS components?\n\n",
@@ -385,7 +385,7 @@
     </script>
 
     <section class="tutorial topic-dev">
-        <h1 data-toc-skip>Contributing to Galaxy Core</h1>
+        <h1 data-toc-skip>Contributing a New Feature to Galaxy Core</h1>
         
 
         <div class="contributors-line">By: 
@@ -594,7 +594,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 8, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 24, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -604,7 +604,7 @@
                     <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
                 </div>
                 <div class="col-sm-10">
-                    <h1 id="contributing-to-galaxy-core">Contributing to <span class="notranslate">Galaxy</span> Core</h1>
+                    <h1 id="contributing-a-new-feature-to-galaxy-core">Contributing a New Feature to <span class="notranslate">Galaxy</span> Core</h1>
 
 <p>This tutorial walks you through an extension to <span class="notranslate">Galaxy</span> and how to contribute back to the core project.</p>
 
@@ -615,6 +615,79 @@
 <p>The proposed extension could be implemented in several different ways on <span class="notranslate">Galaxy</span>’s backend. We will choose one for this example for its simplicity, not for its correctness or cleverness, because our purpose here is to demonstrate modifying and extending various layers of <span class="notranslate">Galaxy</span>.</p>
 
 <p>With simplicity in mind, we will implement our proposed extension to <span class="notranslate">Galaxy</span> by adding a single new table to <span class="notranslate">Galaxy</span>’s data model called <code class="language-plaintext highlighter-rouge">user_favorite_extension</code>. The concept of a favorite extension will be represented by a one-to-many relationship from the table that stores <span class="notranslate">Galaxy</span>’s user records to this new table. The extension itself that will be favorited will be stored as a <code class="language-plaintext highlighter-rouge">Text</code> field in this new table. This table will also need to include an integer primary key named <code class="language-plaintext highlighter-rouge">id</code> to follow the example set by the rest of the <span class="notranslate">Galaxy</span> data model.</p>
+
+<h2 id="forking-galaxy">Forking <span class="notranslate">Galaxy</span></h2>
+
+<!--SNIPPET-->
+<blockquote class="tip">  <h3 data-toc-skip="" id="-tip-how-to-contribute-to-galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How to Contribute to <span class="notranslate">Galaxy</span></h3>  <p>To contribute to <span class="notranslate">galaxy</span>, a GitHub account is required. Changes are proposed via a <a href="https://docs.github.com/en/github/collaborating-with-pull-requests">pull request</a>. This allows the project maintainers to review the changes and suggest improvements.</p>  <p>The general steps are as follows:</p>  <ol>  <li>Fork the <span class="notranslate">Galaxy</span> repository</li>  <li>Clone your fork</li>  <li>Make changes in a new branch</li>  <li>Commit your changes, push branch to your fork</li>  <li>Open a pull request for this branch in the <span class="notranslate">upstream</span> <span class="notranslate">Galaxy</span> repository</li></ol>  <blockquote class="details">  <h3 data-toc-skip="" id="details-git-github-and-galaxy-core"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Git, Github, and <span class="notranslate">Galaxy</span> Core</h3>  <p>For a lot more information about Git branching and managing a repository on Githubsee the <a href="/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html">Contributing with GitHub via command-line</a>tutorial.</p>  <p>The <a href="/training-material/topics/dev/tutorials/architecture/slides.html"><span class="notranslate">Galaxy</span> Core Architecture slides</a> have a lot of import <span class="notranslate">Galaxy</span> core related information related to branches,project management, and contributing to <span class="notranslate">Galaxy</span> - under the Project Management section of the slides.</p></blockquote></blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-setup-your-local-galaxy-instance"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Setup your local <span class="notranslate">Galaxy</span> instance</h3>
+
+  <ol>
+    <li>Use GitHub UI to fork <span class="notranslate">Galaxy</span>’s repository at <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project/<span class="notranslate">galaxy</span></code>.</li>
+    <li>
+      <p>Clone your forked repository to a local path, further referred to as <code class="language-plaintext highlighter-rouge"><span class="notranslate">GALAXY</span>_ROOT</code> and <code class="language-plaintext highlighter-rouge">cd</code> into <code class="language-plaintext highlighter-rouge"><span class="notranslate">GALAXY</span>_ROOT</code>. Note that we specify the tutorial branch with the <code class="language-plaintext highlighter-rouge">-b</code> option:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/&lt;your-use<span class="notranslate">rna</span>me&gt;/<span class="notranslate">galaxy</span> <span class="notranslate">GALAXY</span>_ROOT
+<span class="nb">cd </span><span class="notranslate">GALAXY</span>_ROOT
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Before we can use <span class="notranslate">Galaxy</span>, we need to create a virtual environment and install the required dependencies. This is generally done with the <code class="language-plaintext highlighter-rouge">common_startup.sh</code> script:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash scripts/common_startup.sh <span class="nt">--dev-wheels</span>
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>Make sure your Python version is at least 3.6 (you can check your Python version with <code class="language-plaintext highlighter-rouge">python --version</code>). If your system uses an older version, you may specify an alte<span class="notranslate">rna</span>tive Python interpreter using the <code class="language-plaintext highlighter-rouge"><span class="notranslate">GALAXY</span>_PYTHON</code> environment variable (<code class="language-plaintext highlighter-rouge"><span class="notranslate">GALAXY</span>_PYTHON=/path/to/alt/python bash scripts/common_startup.sh --dev-wheels</code>).</p>
+    </li>
+    <li>
+      <p>Activate your new virtual environment:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">.</span> .venv/bin/activate
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>Once activated, you’ll see the name of the virtual environment prepended to your shell prompt: <code class="language-plaintext highlighter-rouge">(.venv)$</code>.</p>
+    </li>
+    <li>
+      <p>Finally, let’s create a new branch for your edits:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout <span class="nt">-b</span> my-feature
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>Now when you run <code class="language-plaintext highlighter-rouge">git branch</code> you’ll see that your new branch is activated:</p>
+
+      <blockquote class="code-2col">
+        <blockquote class="code-in">
+          <h3 id="code-in-input-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch
+</code></pre></div>          </div>
+        </blockquote>
+
+        <blockquote class="code-out">
+          <h3 id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  dev
+<span class="k">*</span> my-feature
+</code></pre></div>          </div>
+        </blockquote>
+      </blockquote>
+
+      <p>Note: <code class="language-plaintext highlighter-rouge">my-feature</code> is just an example; you can call your new branch anything you like.</p>
+    </li>
+  </ol>
+</blockquote>
 
 <h2 id="models">Models</h2>
 
@@ -904,7 +977,7 @@ for the current user.</p>
 <p>Verify this test fails when running stand-alone.</p>
 
 <blockquote class="code-in">
-  <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+  <h3 id="code-in-input-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./run_tests.sh <span class="nt">-api</span> lib/<span class="notranslate">galaxy</span>_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
 </code></pre></div>  </div>
 </blockquote>
@@ -1048,7 +1121,7 @@ implement <code class="language-plaintext highlighter-rouge">get_favorite_extens
 with <code class="language-plaintext highlighter-rouge">add_favorite_extension</code> before finishing with <code class="language-plaintext highlighter-rouge">delete_favorite_extension</code>.</p>
 
 <blockquote class="code-in">
-  <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+  <h3 id="code-in-input-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./run_tests.sh <span class="nt">-api</span> lib/<span class="notranslate">galaxy</span>_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
 </code></pre></div>  </div>
 </blockquote>
@@ -1450,7 +1523,7 @@ component from the analysis router above by importing it from
                                     e.hide();
 
                                     $("#feedback-form").html(`
-                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Contributing to Galaxy Core (Development in Galaxy)">Loading...</iframe>
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Contributing a New Feature to Galaxy Core (Development in Galaxy)">Loading...</iframe>
                                     `)
                                 })
                             });
@@ -1462,7 +1535,7 @@ component from the analysis router above by importing it from
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">John Chilton, 2021 <b>Contributing to Galaxy Core (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/core-contributing/tutorial.html">https://training.galaxyproject.org/training-material/topics/dev/tutorials/core-contributing/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">John Chilton, 2021 <b>Contributing a New Feature to Galaxy Core (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/core-contributing/tutorial.html">https://training.galaxyproject.org/training-material/topics/dev/tutorials/core-contributing/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1478,10 +1551,10 @@ component from the analysis router above by importing it from
                     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{dev-core-contributing,
     author = "John Chilton",
-    title = "Contributing to Galaxy Core (Galaxy Training Materials)",
+    title = "Contributing a New Feature to Galaxy Core (Galaxy Training Materials)",
     year = "2021",
     month = "06",
-    day = "08"
+    day = "24"
     url = "\url{https://training.galaxyproject.org/training-material/topics/dev/tutorials/core-contributing/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
