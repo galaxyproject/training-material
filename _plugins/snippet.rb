@@ -69,12 +69,24 @@ module Jekyll
             end
           end
           y = x.gsub(/\A---(.|\n)*?---/, '')
+          #if y =~ /contribute/
+            #puts "=== step 1   ===\n#{y}\n\n"
+          #end
+          z = markdownify(y)
+          #if z =~ /contribute/
+            #puts "=== step 2   ===\n#{z}\n\n"
+          #end
           if box_start != ""
-             y = y.gsub(/\R+/,"\n> ")
+             z = z.gsub(/\R/,"\n> ")
              #puts box_start+y+box_end
           end
+          #if z =~ /contribute/
+            #puts "=== step 3   ===\n#{z}\n\n"
+            #puts "=== MARKDOWN ===\n#{box_start+z+box_end}\n\n"
+            #puts "=== RENDERED ===\n#{markdownify(box_start+z+box_end)}\n\n"
+          #end
 
-          '<!--SNIPPET-->' + markdownify(box_start+y+box_end).gsub(/\R+/, '').gsub('<h3','<h3 data-toc-skip')
+          '<!--SNIPPET-->' + markdownify(box_start+z+box_end).gsub(/\R+/, '').gsub('<h3','<h3 data-toc-skip')
         end
       end
 
