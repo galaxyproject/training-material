@@ -18,9 +18,9 @@ The general steps are as follows:
 
 > ### {% icon details %} Git, Github, and Galaxy Core
 > For a lot more information about Git branching and managing a repository on Github
-> see the [Contributing with GitHub via command-line](../../../contributing/tutorials/github-command-line-contribution/tutorial.html)
+> see the [Contributing with GitHub via command-line]({% link topics/contributing/tutorials/github-command-line-contribution/tutorial.md %})
 > tutorial.
 >
-> The [Galaxy Core Architecture slides](../architecture/slides.html) have a lot of import Galaxy core related information related to branches,
+> The [Galaxy Core Architecture slides]({% link topics/dev/tutorials/architecture/slides.html %}) have a lot of import Galaxy core related information related to branches,
 > project management, and contributing to Galaxy - under the Project Management section of the slides.
 {: .details}
