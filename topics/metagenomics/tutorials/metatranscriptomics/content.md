@@ -1070,7 +1070,7 @@ Although gene families and pathways, and their abundance may be related to a spe
 > 1. {% tool [Combine MetaPhlAn2 and HUMAnN2 outputs](toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.1.0) %}  with the following parameters:
 >   - {% icon param-file %} *"Input file corresponding to MetaPhlAN output"*: `Cut predicted taxon relative abundances table`
 >   - {% icon param-file %} *"Input file corresponding HUMAnN output"*: `Normalized gene families`
->   - *"Type of characteristics in HUMAnN2 file"*: `Gene families`
+>   - *"Type of characteristics in HUMAnN file"*: `Gene families`
 >
 > 2. Inspect the generated file
 {: .hands_on}
