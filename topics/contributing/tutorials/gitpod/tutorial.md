@@ -161,7 +161,10 @@ Now that you have the GitPod environment working and we have a live preview up, 
 >    ![we changed the title of the tutorial in the text editor window](../../images/gitpod/changes.png)
 >    ![the terminal shows a message stating the website is being regenerated](../../images/gitpod/regenerating.png)
 >
-> 4. Move to the top right panel where the GTN is previewed and click the refresh icon
+> 4. Move to the top right panel where the GTN is previewed and refresh the frame
+>    - Firefox: `right-click -> This Frame -> Reload Frame`
+>    - Chrome: `right-click -> Reload frame`
+>    - You can also open the preview in it's own brower tab, using the {% icon galaxy_instance %} button at the top-right corner of the preview window. Then you can reload the page the regular way (e.g. <kbd>F5</kbd> or <kbd>ctrl + r</kbd> or the reload button in the browser)
 >
 > 5. You should see the change you made:
 >    ![The updated preview with our changed tutorial title](../../images/gitpod-changed.png)
@@ -222,7 +225,7 @@ When you have finished your changes, it all looks good in the preview, you want 
 
 # Closing your GitPod Workspace
 
-Everybody gets 50 hours per month for free on GitPod, so it is wise to close your GitPod workspace when you are finished with it, to conserver your quotum.
+Everybody gets 50 hours per month for free on GitPod, so it is wise to close your GitPod workspace when you are finished with it, to conserve your quotum.
 
 > ### {% icon hands_on %} Hands-on: Shutting down your GitPod workspace
 >
