@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Title of the tutorial
 zenodo_link: ''
-enable: true
+enable: false
 questions:
 - Which biological questions are addressed by the tutorial?
 - Which bioinformatics techniques are important to know for this type of data?
@@ -127,7 +127,7 @@ Meryl will allow us to perform the k-mer profiling by decomposing the sequencing
 
 > ### {% icon comment %} K-mer size estimation
 >
-> One of the important aspects is the size of the k-mer, which must be large enough to map  uniquely to the genome, but not too large, since it can lead to wasting computational resources. Given an estimated genome size (G) and a tolerable collision rate (p), an appropriate k can be computed as k = log~4~ (G(1 − p)/p).
+> One of the important aspects is the size of the k-mer, which must be large enough to map  uniquely to the genome, but not too large, since it can lead to wasting computational resources. Given an estimated genome size (G) and a tolerable collision rate (p), an appropriate k can be computed as k = log4 (G(1 − p)/p).
 >
 {: .comment}
 
