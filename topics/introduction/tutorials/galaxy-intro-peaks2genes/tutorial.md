@@ -549,7 +549,7 @@ We again need our peak file, but we'd like to work in a clean history. Instead o
 >       You should see both of your histories side-by-side now
 >
 > 3. Drag and drop the edited peak file (`Peak regions`, after the replace steps), which contains the summit information, to your new history.
-> 4. Click on **Analyze Data** in the top menu bar to go back to your analysis window
+> 4. Click on the Home icon {% icon galaxy-home %} (or **Analyze Data** on older Galaxy versions) in the top menu bar to go back to your analysis window
 >
 {: .hands_on}
 
