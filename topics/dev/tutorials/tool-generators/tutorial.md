@@ -59,7 +59,7 @@ The ToolFactory is a Galaxy tool. Tools are constructed through the normal Galax
 ready to run on a developer linux workstation using Docker. Generated tools are *immediately installed* and ready to run so you can see
 what the end user will see. Jobs can be re-run to edit and update generated tools, so Galaxy becomes an integrated development environment for Galaxy tools.
 
-A[`Hello Galaxy!` using the ToolFactory demonstration](https://youtu.be//DK1eKz5TRs4) is available if you'd like to see a walk-through of some of
+A [`Hello Galaxy!` demonstration](https://youtu.be//DK1eKz5TRs4) using the ToolFactory is available if you'd like to see a walk-through of some of
 the hands-on material in this tutorial. You can see whether it looks useful for your work and decide whether to read the material below.
 
 This first tutorial is a slow introduction. For some developers, it may be too slow and the second tutorial may be a better place to start. This one steps
@@ -381,11 +381,10 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 > >
 > {: .warning}
 >
->    > ### {% icon code-in %} Input Bash: Prepare a local copy of the configuration for `docker-compose` to read.
+>    > ### {% icon code-in %} Input Bash: Installing the docker files, pulling and launching the Appliance
 >    > ```bash
->    > wget https://github.com/fubar2/toolfactory-galaxy-server/archive/refs/heads/main.zip
->    > unzip main.zip
->    > cd toolfactory-galaxy-server-main/compose
+>    > git clone https://github.com/fubar2/toolfactory-galaxy-server
+>    > cd toolfactory-galaxy-server/compose
 >    > mkdir export
 >    > docker-compose pull
 >    > docker-compose up
