@@ -1666,6 +1666,24 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >    > ```
 >    {: .code-out.code-max-300}
 >
+>    > ### {% icon tip %} Did this fail?
+>    > ```
+>    > ● galaxy.service - Galaxy
+>    >      Loaded: loaded (/etc/systemd/system/galaxy.service; enabled; vendor preset: enabl>
+>    >      Active: failed (Result: exit-code) since Mon 2021-06-28 17:07:58 CEST; 18min ago
+>    >     Process: 521705 ExecStart=/srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/gal>
+>    >    Main PID: 521705 (code=exited, status=1/FAILURE)
+>    >         CPU: 21ms
+>    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: galaxy.service: Schedu>
+>    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: Stopped Galaxy.
+>    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: galaxy.service: Start >
+>    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: galaxy.service: Failed>
+>    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: Failed to start Galaxy.
+>    > ```
+>    >
+>    > Check your /srv/galaxy/config/galaxy.yml and ensure that it lines up exactly with what you expect. One possible cause here is the `uwsgi` subsection of `galaxy_config` was omitted and instead it used the default port and failed.
+>    {: .tip}
+>
 > 6. Some things to note:
 >
 >    1. Later, after NGINX is set up and we're ready to connect to Galaxy, refreshing the page while Galaxy is restarting will wait (spin) until the process is ready rather than produce an error message, a nice feature of uWSGI

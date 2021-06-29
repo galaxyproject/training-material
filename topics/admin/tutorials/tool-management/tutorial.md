@@ -303,3 +303,16 @@ If running ephemeris directly is not your preference, there is an Ansible [role]
 > ### {% icon tip %} Uninstalling tools
 > While there is a function to accomplish this in [BioBlend](https://github.com/galaxyproject/bioblend), it has not been [included in Ephemeris yet.](https://github.com/galaxyproject/ephemeris/issues/83) If you're looking for a way to contribute to Galaxy, this would be great :)
 {: .tip}
+
+> ### {% icon tip %} "Recommended way" to install tools
+> There is no one recommended way. Different people like to do different things. Some of us install things through the GUI still, some of us use ephemeris just for the automation.
+>
+> EU and others try and force all tool installation to go through ephemeris to make sure that rebuilding a server in case of disaster is easy. Anything not managed through their files will be lost.
+>
+> Others do a more mixed approach:
+>
+> > typically use Ephemeris, when I have to re-deploy a Galaxy instance (and thus install all tools) or during a galaxy maintenance, when I want to update all installed toolshed tools I one go. Otherwise, When I need to install a specific version of one tool I use the GUI.
+> {: .quote}
+>
+> There is no one right answer
+{: .tip}
