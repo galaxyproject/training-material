@@ -36,14 +36,14 @@ Two sequencing platforms in combination with several established library prepara
 
 These workflows allow one to identify allelic variants (AVs) and lineages in SARS-CoV-2 genomes with variant allele frequencies ranging from 5% to 100% (i.e. they detect variants with intermediate frequencies as well).
 
-In this tutorial we will see how to run these workflows for the different types of input data:
+In this tutorial, we will see how to run these workflows for the different types of input data:
 
-- Single end data derived from Illumina-based RNAseq experiments
-- Paired end data derived from Illumina-based RNAseq experiments
+- Single-end data derived from Illumina-based RNAseq experiments
+- Paired-end data derived from Illumina-based RNAseq experiments
 - Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols
-- ONT fastq files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols
+- ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols
 
-More information about the worklows, including benchmarking, can be found at [covid19.galaxyproject.org](https://covid19.galaxyproject.org/).
+More information about the workflows, including benchmarking, can be found at [covid19.galaxyproject.org](https://covid19.galaxyproject.org/).
 
 > ### Agenda
 >
@@ -80,7 +80,7 @@ In addition, for raw data generated using the ARTIC protocol, we need 2 extra da
 
 > ### {% icon comment %} Not using the standard ARTIC primer set for amplification?
 > 
-> If the samples for amplification were not prepared with the standard ARTIC primer set, custom files will need to be provided: the BED with the primer scheme and tha tabular file describing the amplicon grouping of the primers in the primer scheme file.
+> If the samples for amplification were not prepared with the standard ARTIC primer set, custom files will need to be provided: the BED with the primer scheme and the tabular file describing the amplicon grouping of the primers in the primer scheme file.
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Import auxiliary datasets
@@ -115,7 +115,7 @@ In addition, for raw data generated using the ARTIC protocol, we need 2 extra da
 >
 >      {% snippet faqs/galaxy/histories_import.md %}
 >
->    For the example datasets, the 4 auxiliary datasets need to be imported
+>    For the example datasets, the 4 auxiliary datasets need to be imported.
 >
 {: .hands_on}
 
@@ -123,16 +123,16 @@ In addition, for raw data generated using the ARTIC protocol, we need 2 extra da
 
 Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ files with the sequenced viral RNA from different patients infected with SARS-COV-2. Several types of data are possible:
 
-- Single end data derived from Illumina-based RNAseq experiments
-- Paired end data derived from Illumina-based RNAseq experiments
+- Single-end data derived from Illumina-based RNAseq experiments
+- Paired-end data derived from Illumina-based RNAseq experiments
 - Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols
-- ONT fastq files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols
+- ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols
 
-We encourage you to use your own data there (with at least 2 samples). If you do not have any datasets available we provide some example datasets (paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols) from [COG-UK](https://www.cogconsortium.uk/), the COVID-19 Genomics UK Consortium.
+We encourage you to use your own data there (with at least 2 samples). If you do not have any datasets available, we provide some example datasets (paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols) from [COG-UK](https://www.cogconsortium.uk/), the COVID-19 Genomics UK Consortium.
 
 To upload the data, there are several possibilities depending of how many datasets and what their origin is:
 
-- Import datasets (locally, on a given URL or from a shared data library) and organize them as a dataset colletion
+- Import datasets (locally, on a given URL or from a shared data library) and organize them as a dataset collection.
 
   A dataset collection is a way to represent an arbitrarily large collection of samples as a singular entity within a user's workspace.
 
@@ -166,7 +166,7 @@ To upload the data, there are several possibilities depending of how many datase
 >
 >      {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->      For our example datasets, the datasets are stored on [Zenodo]({{ page.zenodo_link }}) and can be retrieved using the following URL:
+>      For our example datasets, the datasets are stored on [Zenodo]({{ page.zenodo_link }}) and can be retrieved using the following URLs:
 >
 >      ```
 >      {{ page.zenodo_link }}/ERR5931005_1.fastqsanger.gz
@@ -239,21 +239,21 @@ The tools and parameters used for these steps have been selected based on the in
 
 Workflow version 	| Input data | Read aligner | Variant caller
 --- | --- | --- | ---
-Illumina RNAseq SE | Single end data derived from RNAseq experiments | **bowtie2** {% cite Langmead_2012 %} | **lofreq** {% cite wilm_2012 %}
-Illumina RNAseq PE | Paired end data derived from RNAseq experiments | **bwa-mem** {% cite li_2010 %} | **lofreq** {% cite wilm_2012 %}
+Illumina RNAseq SE | Single-end data derived from RNAseq experiments | **bowtie2** {% cite Langmead_2012 %} | **lofreq** {% cite wilm_2012 %}
+Illumina RNAseq PE | Paired-end data derived from RNAseq experiments | **bwa-mem** {% cite li_2010 %} | **lofreq** {% cite wilm_2012 %}
 Illumina ARTIC | Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols | **bwa-mem** {% cite li_2010 %} | **lofreq** {% cite wilm_2012 %}
-ONT ARTIC | ONT fastq files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols | **minimap2** {% cite li_2018 %} | **medaka**
+ONT ARTIC | ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols | **minimap2** {% cite li_2018 %} | **medaka**
 
 > ### {% icon details %} About the workflows
 >
 >
-> - The two Illumina RNASeq workflows (Illumina RNAseq SE and Illumina RNAseq PE) perform read mapping with **bwa-mem** and **bowtie2**, respectively, followed by sensitive allelic-variant (AV) calling across a wide range of AFs with **lofreq**
+> - The two Illumina RNASeq workflows (Illumina RNAseq SE and Illumina RNAseq PE) perform read mapping with **bwa-mem** and **bowtie2**, respectively, followed by sensitive allelic-variant (AV) calling across a wide range of AFs with **lofreq**.
 > - The workflow for Illumina-based ARTIC data (Illumina ARTIC) builds on the RNASeq workflow for paired-end data using the same steps for mapping (**bwa-mem**) and AV calling (**lofreq**), but adds extra logic operators for trimming ARTIC primer sequences off reads with the **ivar** package. In addition, this workflow uses **ivar** also to identify amplicons affected by ARTIC primer-binding site mutations and excludes reads derived from such “tainted” amplicons when calculating alternative allele frequences (AFs) of other AVs.
 > - The workflow for ONT-sequenced ARTIC data (ONT ARTIC) is modeled after the alignment/AV-calling steps of the [ARTIC pipeline](https://artic.readthedocs.io/). It performs, essentially, the same steps as that pipeline’s minion command, i.e. read mapping with **minimap2** and AV calling with **medaka**. Like the Illumina ARTIC workflow it uses **ivar** for primer trimming. Since ONT-sequenced reads have a much higher error rate than Illumina-sequenced reads and are therefore plagued more by false-positive AV calls, this workflow makes no attempt to handle amplicons affected by potential primer-binding site mutations.
 >
 > All four workflows use **SnpEff**, specifically its 4.5covid19 version, for AV annotation.
 >
-> Workflows default to requiring an AF ≥ 0.05 and AV-supporting reads of ≥ 10 (these and all other parameters can be easily changed by the user). For an AV to be listed in the reports it must surpass these thresholds in at least one sample of the respective dataset. We estimate that for AV calls with an AF ≥ 0.05 our analyses have a false-positive rate of < 15% for both Illumina RNAseq and Illumina ARTIC data, while the true-positive rate of calling such low-frequency AVs is ~80% and approaches 100% for AVs with an AF ≥ 0.15. This estimate is based on an initial application of the Illumina RNAseq and Illumina ARTIC workflows to two samples for which data of both types had been obtained at the virology department of the University of Freiburg and the assumption that AVs supported by both sets of sequencing data are true AVs. The second threshold of 10 AV-supporting reads is applied to ensure that calculated AFs are sufficiently precise for all AVs.
+> Workflows default to requiring an AF ≥ 0.05 and AV-supporting reads of ≥ 10 (these and all other parameters can be easily changed by the user). For an AV to be listed in the reports, it must surpass these thresholds in at least one sample of the respective dataset. We estimate that for AV calls with an AF ≥ 0.05, our analyses have a false-positive rate of < 15% for both Illumina RNAseq and Illumina ARTIC data, while the true-positive rate of calling such low-frequency AVs is ~80% and approaches 100% for AVs with an AF ≥ 0.15. This estimate is based on an initial application of the Illumina RNAseq and Illumina ARTIC workflows to two samples for which data of both types had been obtained at the virology department of the University of Freiburg and the assumption that AVs supported by both sets of sequencing data are true AVs. The second threshold of 10 AV-supporting reads is applied to ensure that calculated AFs are sufficiently precise for all AVs.
 >
 > More details about the workflows, including benchmarking of the tools, can be found on [covid19.galaxyproject.org](https://covid19.galaxyproject.org/genomics/global_platform/#methods)
 {: .details}
@@ -264,7 +264,7 @@ ONT ARTIC | ONT fastq files generated with Oxford nanopore (ONT)-based Ampliconi
 >
 >    - Option 1: Use workflows directly on [usegalaxy.eu](https://usegalaxy.eu/) from [WorkflowHub](https://workflowhub.eu)
 >
->      - Open the workflow page on WokflowHub
+>      - Open the workflow page on the WorkflowHub
 >        - [Illumina ARTIC PE](https://workflowhub.eu/workflows/110) - The one to use for example datasets
 >        - [Illumina RNAseq SE](https://workflowhub.eu/workflows/112)
 >        - [Illumina RNAseq PE](https://workflowhub.eu/workflows/113)
@@ -324,7 +324,7 @@ The execution of the workflow takes some time. It is possible to launch the next
 
 # From annotated AVs per sample to AV summary
 
-Once the jobs of previous workflow are done, we identified AVs for each sample. We can run a "Reporting workflow" on them to generate a final AV summary. It  takes a table of AVs produced by any of the other four workflows and generates a list of AVs by Samples and by Variant. 
+Once the jobs of previous workflows are done, we identified AVs for each sample. We can run a "Reporting workflow" on them to generate a final AV summary. It takes a table of AVs produced by any of the other four workflows and generates a list of AVs by Samples and by Variant. 
 
 > ### {% icon hands_on %} Hands-on: From annotated AVs per sample to AV summary
 >
@@ -455,7 +455,7 @@ Both workflows generate several outputs. Most of them are collections with resul
    > ### {% icon question %} Questions
    > 
    > 1. How many AVs are found?
-   > 1. What are the different impacts of the AVs ?
+   > 1. What are the different impacts of the AVs?
    > 2. How many variants are found for each impact?
    > 3. What are the different effects for HIGH impact?
    > 4. Is there any AVs impacting all samples?
@@ -509,7 +509,7 @@ Both workflows generate several outputs. Most of them are collections with resul
 For the variant calls, we can now run a workflow which generates reliable consensus sequences according to transparent criteria that capture at least some of the complexity of variant calling:
 
 - Each consensus sequence is guaranteed to capture all called, filter-passing variants as defined in the VCF of its sample that reach a user-defined consensus allele frequency threshold.
-- Filter-failing variants and variants below a second user-defined minimal allele frequency threshold are be ignored.
+- Filter-failing variants and variants below a second user-defined minimal allele frequency threshold are ignored.
 - Genomic positions of filter-passing variants with an allele frequency in between the two thresholds are hard-masked (with N) in the consensus sequence of their sample.
 - Genomic positions with a coverage (calculated from the read alignments input) below another user-defined threshold are hard-masked, too, unless they are consensus variant sites.
 
@@ -567,8 +567,8 @@ The workflow takes a collection of VCFs and a collection of the corresponding al
 {: .hands_on}
 
 The main outputs of the workflow are:
-- a collection of viral consensus sequences
-- a multisample FASTA of all these sequences.
+- A collection of viral consensus sequences.
+- A multisample FASTA of all these sequences.
 
 The last one can be given as input for tools like **Pangolin** or **Nextclade**.
 
@@ -592,19 +592,19 @@ Pangolin generates a table file with taxon name and lineage assigned. Each line 
 
 Column | Field | Meaning
 --- | --- | ---
-1 | `taxon` | The name of an input query sequence, here the sample name
+1 | `taxon` | The name of an input query sequence, here the sample name.
 2 | `lineage` | The most likely lineage assigned to a given sequence based on the inference engine used and the SARS-CoV-2 diversity designated. This assignment may be is sensitive to missing data at key sites. [Lineage Description List](https://cov-lineages.org/lineage_description_list.html)
 3 | `conflict` | In the pangoLEARN decision tree model, a given sequence gets assigned to the most likely category based on known diversity. If a sequence can fit into more than one category, the conflict score will be greater than 0 and reflect the number of categories the sequence could fit into. If the conflict score is 0, this means that within the current decision tree there is only one category that the sequence could be assigned to.
-4 | `ambiguity_score` | This score is a function of the quantity of missing data in a sequence. It represents the proportion of relevant sites in a sequnece which were imputed to the reference values. A score of 1 indicates that no sites were imputed, while a score of 0 indicates that more sites were imputed than were not imputed. This score only includes sites which are used by the decision tree to classify a sequence.
+4 | `ambiguity_score` | This score is a function of the quantity of missing data in a sequence. It represents the proportion of relevant sites in a sequence which were imputed to the reference values. A score of 1 indicates that no sites were imputed, while a score of 0 indicates that more sites were imputed than were not imputed. This score only includes sites which are used by the decision tree to classify a sequence.
 5 | `scorpio_call` | If a query is assigned a constellation by scorpio this call is output in this column. The full set of constellations searched by default can be found at the constellations repository.
 6 | `scorpio_support` | The support score is the proportion of defining variants which have the alternative allele in the sequence.
-7 | `scorpio_conflict` | The conflict score is the proportion of defining variants which have the reference allele in the sequence. Ambiguous/other non-ref/alt bases at each of the variant positions contribute only to the denominators of these scores
-8 | `version` | A version number that represents both the pango-designation number and the inference engine used to assign the lineage
+7 | `scorpio_conflict` | The conflict score is the proportion of defining variants which have the reference allele in the sequence. Ambiguous/other non-ref/alt bases at each of the variant positions contribute only to the denominators of these scores.
+8 | `version` | A version number that represents both the pango-designation number and the inference engine used to assign the lineage.
 9 | `pangolin_version` | The version of pangolin software running.
-10 | `pangoLEARN_version` | The dated version of the pangoLEARN model installed
-11 | `pango_version` | The version of pango-designation lineages that this assignment is based on
-12 | `status` | Indicates whether the sequence passed the QC thresholds for minimum length and maximum N content
-13 | `note` | If any conflicts from the decision tree, this field will output the alternative assignments. If the sequence failed QC this field will describe why. If the sequence met the SNP thresholds for scorpio to call a constellation, it’ll describe the exact SNP counts of Alt, Ref and Amb (Alternative, reference and ambiguous) alleles for that call
+10 | `pangoLEARN_version` | The dated version of the pangoLEARN model installed.
+11 | `pango_version` | The version of pango-designation lineages that this assignment is based on.
+12 | `status` | Indicates whether the sequence passed the QC thresholds for minimum length and maximum N content.
+13 | `note` | If any conflicts from the decision tree, this field will output the alternative assignments. If the sequence failed QC this field will describe why. If the sequence met the SNP thresholds for scorpio to call a constellation, it’ll describe the exact SNP counts of Alt, Ref and Amb (Alternative, Reference and Ambiguous) alleles for that call.
 
 > ### {% icon question %} Questions
 > 
