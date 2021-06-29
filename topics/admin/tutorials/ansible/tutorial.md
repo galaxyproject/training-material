@@ -90,9 +90,7 @@ Additionally, playbooks are often stored in Git or other version control reposit
 if anything happens to the infrastructure you manage, you'll still have a copy of the information
 required to rebuild everything with Ansible.
 
-
-
-> ### {% icon details %} Ansible Inventory Documentation
+> ### {% icon details %} Ansible Inventory Documentation (Do you connect with a different user? Password? SSH key?)
 > For more advanced features of the inventory file, check out [the official documentation on this topic](https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html).
 {: .details}
 
@@ -295,6 +293,10 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >       > localhost ansible_connection=local ansible_user=ubuntu
 >       > ```
 >       {: .solution }
+>
+>       > ### {% icon details %} For your own infrastructure, do you connect with a different user? Password? SSH key?
+>       > For more advanced features of the inventory file, check out [the official documentation on this topic](https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html).
+>       {: .details}
 >
 > 5. Create the roles directory, your role, and the tasks folder: `mkdir -p roles/my-role/tasks/`
 >
