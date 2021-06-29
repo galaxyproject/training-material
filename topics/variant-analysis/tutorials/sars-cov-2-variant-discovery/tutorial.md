@@ -160,7 +160,7 @@ To upload the data, there are several possibilities depending of how many datase
 >
 >      {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
->      For our example datasets, the 28 `fastqsanger.gz` files in folder `GTN - Material` -> `Variant analysis` -> `Identification of allelic variants in SARS-CoV-2 from deep sequencing reads`
+>      For our example datasets, the 36 `fastqsanger.gz` files (representing 18 samples) in folder `GTN - Material` -> `Variant analysis` -> `Identification of allelic variants in SARS-CoV-2 from deep sequencing reads`
 >
 >    - Option 4: From an external server with URL
 >
@@ -274,7 +274,7 @@ ONT ARTIC | ONT fastq files generated with Oxford nanopore (ONT)-based Ampliconi
 >
 >    - Option 2: Import the workflows of IWC (Intergalactic Workflow Commission) from WorkflowHub using the workflow search
 >
->      {% snippet faqs/galaxy/workflows_import_search.md trs_server="workflowhub.eu" search_query='organization:"IWC Workflows"' %}
+>      {% snippet faqs/galaxy/workflows_import_search.md trs_server="Dockstore" search_query='organization:"iwc-workflows"' %}
 >
 >      For the example dataset: COVID-19-PE-ARTIC-ILLUMINA
 >
@@ -660,7 +660,7 @@ Column | Field | Meaning
 > > ### {% icon solution %} Solution
 > >
 > > To summarize the number of lineages and number of samples for  each lineage, we can run {% tool [Group data](Grouping1) %} with the following parameters:
-> >    - {% icon param-file %} *"Select data"*: output of **pangolin**
+> >    - {% icon param-file %} *"Select data"*: output of **Nextclade**
 > >    - *"Group by column"*: `Column: 2`
 > >    - In *"Operation"*:
 > >      - In *"1: Operation"*:
