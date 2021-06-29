@@ -254,6 +254,8 @@ The recommended mode is "union", which counts overlaps even if a read only share
 >    - *"Specify strand information"*: `Stranded (Forward)`
 >    - {% icon param-file %} *"Gene annotation file"*: `in your history`
 >       - *"Gene annotation file"*: `the annotated transcripts GTF file output by GFFCompare`
+>    - *"Options for paired-end reads"*
+>       - *"Count fragments instead of reads"*: `Enabled; fragments (or templates) wil be counted instead of reads`
 >    - *"Advanced options"*
 >       - *"GFF gene identifier"*: `transcript_id`
 >
