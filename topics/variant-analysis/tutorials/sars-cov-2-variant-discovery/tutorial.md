@@ -136,7 +136,13 @@ To upload the data, there are several possibilities depending of how many datase
 
   A dataset collection is a way to represent an arbitrarily large collection of samples as a singular entity within a user's workspace.
 
-- Import from [Sequence Read Archive (SRA) at NCBI](https://www.ncbi.nlm.nih.gov/sra)
+- Import from [NCBI's Sequence Read Archive (SRA) at NCBI](https://www.ncbi.nlm.nih.gov/sra)
+
+   > ### {% icon comment %} Getting data from SRA
+   >
+   > [A dedicated tutorial is available to explain how to find and import SARS-CoV-2 data from SRA]({% link topics/variant-analysis/tutorials/sars-cov-2/tutorial.md %}).
+   >
+   {: .comment} 
 
 > ### {% icon hands_on %} Hands-on: Import datasets
 >
@@ -219,46 +225,11 @@ To upload the data, there are several possibilities depending of how many datase
 >
 {: .hands_on}
 
-> ### {% icon comment %} Learning  Building collections automatically
+> ### {% icon comment %} Learning to build collections automatically
 >
 > It is possible to build collections from tabular data containing URLs, sample sheets, list of accessions or identifiers, etc. [A dedicated tutorial is available to explain the different possibilities]({% link topics/galaxy-interface/tutorials/upload-rules/tutorial.md %}).
 >
-{: .comment}
-
-Another possibility to get datasets is to import them directly from SRA.
-
-> ### {% icon hands_on %} Hands-on: Import datasets from SRA
->
-> 1. Create a new file with the SRA (or ENA) ids (one per line), e.g.:
-> 
->    ```
->    ERR5931005
->    ERR5931006
->    ERR5931007
->    ERR5931008
->    ERR5949456
->    ERR5949459
->    ERR5949457
->    ERR5949458
->    ERR5949460
->    ERR5949461
->    ERR5949462
->    ERR5949463
->    ERR5949464
->    ERR5949465
->    ERR5949466
->    ERR5949467
->    ERR5949468
->    ERR5949469
->    ```
->    <!-- not working with these ids -->
->
->    {% snippet faqs/galaxy/datasets_create_new_file.md %}
->    
-> 2. {% tool [Faster Download and Extract Reads in FASTQ](toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.11.0+galaxy0) %} with the following parameters:
->     - *"select input type"*: `List of SRA accession, one per line`
->       - {% icon param-files %} *"sra accession list"*: created file
-{: .hands_on}
+{: .comment} 
 
 # From FASTQ to annotated allelic variants
 
