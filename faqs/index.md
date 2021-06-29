@@ -7,6 +7,12 @@ layout: page
 
 Thanks for using the GTN! If you have any questions regarding the GTN, Galaxy, or any of the topics covered by the tutorials, you can check one of the FAQ pages below to see if your question is among them.
 
+
+## Quick start
+
+<a href="{{site.baseurl}}/faqs/galaxy/"><button type="button" class="btn btn-warning btn-info">Galaxy FAQs</button></a>
+<a href="{{site.baseurl}}/faqs/gtn/"><button type="button" class="btn btn-warning btn-info">GTN FAQs</button></a>
+
 ## GTN Questions
 
 Have questions about this website or the GTN in general? Please check the [GTN FAQs]({{site.baseurl}}/faqs/gtn/)

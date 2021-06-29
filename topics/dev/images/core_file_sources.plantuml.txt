@@ -1,0 +1,63 @@
+@startuml
+
+!include plantuml_options.txt
+
+package "galaxy.files.sources" {
+
+class FilesSource
+class BaseFilesSource
+class posix.PosixFileSource {
+    plugin_type: 'posix'
+}
+class s3.S3FilesSource {
+    plugin_type: 's3'
+    required_package: "fs-s3fs"
+}
+class _pyfilesystem2.PyFilesystem2FilesSource
+class ftp.FtpFilesSource {
+    plugin_type: 'ftp'
+    required_package: "fs.ftpfs"
+}
+class dropbox.DropboxFilesSource {
+    plugin_type: 'dropbox'
+    required_package: 'fs.dropboxfs'
+}
+class anvil.AnVILFilesSource {
+    plugin_type: 'anvil'
+    required_package: "fs.anvilfs"
+}
+class galaxy.UserFtpFilesSource {
+    plugin_type: 'gxftp'    
+}
+class galaxy.LibraryImportFilesSource {
+    plugin_type: 'gximport'    
+}
+class galaxy.UserLibraryImportFilesSource {
+    plugin_type: 'gxuserimport'
+}
+class s3fs.S3FsFilesSource {
+    plguin_type: 's3fs'    
+}
+class ssh.SshFilesSource {
+    plugin_type: "ssh"
+    required_package: "fs.sshfs"
+}
+class webdav.WebDavFilesSource {
+    plugin_type: 'webdav'
+    required_package: "fs.webdavfs"   
+}
+}
+FilesSource <|-- BaseFilesSource
+BaseFilesSource <|-- posix.PosixFileSource
+BaseFilesSource <|-- s3fs.S3FsFilesSource
+BaseFilesSource <|--- _pyfilesystem2.PyFilesystem2FilesSource
+_pyfilesystem2.PyFilesystem2FilesSource <|-- ftp.FtpFilesSource
+_pyfilesystem2.PyFilesystem2FilesSource <|-- dropbox.DropboxFilesSource
+_pyfilesystem2.PyFilesystem2FilesSource <|-- anvil.AnVILFilesSource
+_pyfilesystem2.PyFilesystem2FilesSource <|-- s3.S3FilesSource
+_pyfilesystem2.PyFilesystem2FilesSource <|-- ssh.SshFilesSource
+_pyfilesystem2.PyFilesystem2FilesSource <|-- webdav.WebDavFilesSource
+posix.PosixFileSource <|-- galaxy.UserFtpFilesSource
+posix.PosixFileSource <|-- galaxy.LibraryImportFilesSource
+posix.PosixFileSource <|-- galaxy.UserLibraryImportFilesSource
+@enduml

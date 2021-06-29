@@ -116,7 +116,7 @@ cmdhandle.write("echo 'password' > ~/.vault-password.txt;\n")
 cmdhandle.write("## And one in this directory, it can contain garbage\n")
 cmdhandle.write("echo 'garbage' > ./.vault-password.txt;\n")
 # If it's after the ansible-galaxy tutorial
-if int(BASE_PARTS[0]) > 1:
+if int(BASE_PARTS[0]) > 10:
     cmdhandle.write("## Ensure the galaxy user is setup\n")
     cmdhandle.write("sudo -u galaxy /srv/galaxy/venv/bin/python /usr/bin/galaxy-create-user -c /srv/galaxy/config/galaxy.yml --user admin@example.org --password password --key adminkey --username admin\n")
 

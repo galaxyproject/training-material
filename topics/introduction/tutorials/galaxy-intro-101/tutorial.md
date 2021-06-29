@@ -351,7 +351,7 @@ Let's say we want a list with just the top-5 exons with highest number of SNPs.
 
 > ### {% icon hands_on %} Hands-on: Select first
 >
-> 1. {% tool [Select first](Show+beginning1) %} lines from a dataset:
+> 1. {% tool [Select first](Show beginning1) %} lines from a dataset:
 >
 >    - *"Select first"*: `5`
 >    - *"from"*: The output from **Sort** {% icon tool %}
@@ -424,7 +424,7 @@ Here you can:
 - copy histories
 - copy datasets between histories (by dragging and dropping)
 
-You can always return to your analysis view by clicking on **Analyze Data** in the top menu bar.
+You can always return to your analysis view by clicking on Home icon {% icon galaxy-home %} (**Analyze Data** on older versions of Galaxy) in the top menu bar.
 
 ## Convert your analysis history into a workflow
 
@@ -498,7 +498,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >
 > 8. **Save your workflow** (important!) by clicking on the {% icon galaxy-save %} icon at the top right of the screen.
 >
-> 9. **Return** to the analysis view by clicking on **Analyze Data** at the top menu bar.
+> 9. **Return** to the analysis view by clicking on the Home icon {% icon galaxy-home %} (or **Analyze Data** on older versions of Galaxy) at the top menu bar.
 >
 {: .hands_on}
 
@@ -520,7 +520,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    ![Drag and drop of `Exons` dataset in the history overview](../../images/101_copydataset.png)
 >
-> 3. Click **Analyze Data** at the top to return to the main analysis window
+> 3. Click the Home icon {% icon galaxy-home %} (or **Analyze Data** on older Galaxy versions) at the top to return to the main analysis window
 >
 > 4. {% tool [Upload Data](upload1) %} the Repeats file from [Zenodo](https://doi.org/10.5281/zenodo.4104428)
 >

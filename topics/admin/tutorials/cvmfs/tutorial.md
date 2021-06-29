@@ -448,7 +448,7 @@ Examples of data include:
 
 * twoBit (`.2bit`) and FASTA (`.fa`) sequence files
 * Bowtie 2 and BWA indexes
-* Mutation Annotation Format (`.maf`) files
+* Multiple Alignment Format (`.maf`) files
 * SAMTools FASTA indexes (`.fai`)
 
 Now all we need to do is tell Galaxy how to find it! This tutorial assumes that you have run the tutorial in the requirements, [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}). The hands-on below will use the Galaxy Project Ansible role to configure everything.
@@ -491,7 +491,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -29,6 +29,7 @@ miniconda_manage_dependencies: false
->
+>     
 >     galaxy_config:
 >       galaxy:
 >    +    tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
@@ -579,7 +579,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 {: .spoken data-visual="galaxy" data-target="s2id_field-uid-12_select a" data-action="click"}
 
 > ```bash
-> curl  --silent https://$(hostname -f)/api/genomes | grep bosTau -o
+> 1.sh
 > ```
 > {: data-test="true"}
 {: .hidden}

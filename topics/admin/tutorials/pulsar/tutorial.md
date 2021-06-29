@@ -146,7 +146,7 @@ Firstly we will add and configure another *role* to our Galaxy playbook - we mai
 >    +- name: usegalaxy_eu.rabbitmq
 >    +  version: 0.1.0
 >    +- src: galaxyproject.pulsar
->    +  version: 1.0.6
+>    +  version: 1.0.8
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirements"}
@@ -506,8 +506,6 @@ Some of the other options we will be using are:
 >    +  - psutil
 >    +
 >    +pulsar_yaml_config:
->    +  conda_auto_init: True
->    +  conda_auto_install: True
 >    +  staging_directory: "{{ pulsar_staging_dir }}"
 >    +  persistence_directory: "{{ pulsar_persistence_dir }}"
 >    +  tool_dependency_dir: "{{ pulsar_dependencies_dir }}"
@@ -519,16 +517,18 @@ Some of the other options we will be using are:
 >    +  amqp_publish_retry_interval_start: 10
 >    +  amqp_publish_retry_interval_step: 10
 >    +  amqp_publish_retry_interval_max: 60
+>    +  # We also need to create the dependency resolvers configuration so pulsar knows how to find and install dependencies
+>    +  # for the tools we ask it to run. The simplest method which covers 99% of the use cases is to use conda auto installs
+>    +  # similar to how Galaxy works.
+>    +  dependency_resolution:
+>    +    resolvers:
+>    +      - type: conda
+>    +        auto_init: true
+>    +        auto_install: true
 >    +
->    +# We also need to create the dependency resolver file so pulsar knows how to
->    +# find and install dependencies for the tools we ask it to run. The simplest
->    +# method which covers 99% of the use cases is to use conda auto installs similar
->    +# to how Galaxy works.
->    +pulsar_dependency_resolvers:
->    +  - name: conda
->    +    args:
->    +      - name: auto_init
->    +        value: true
+>    +# Pulsar should use the same job metrics plugins as Galaxy. This will automatically set `job_metrics_config_file` in
+>    +# `pulsar_yaml_config` and create `{{ pulsar_config_dir }}/job_metrics_conf.yml`.
+>    +pulsar_job_metrics_plugins: "{{ galaxy_job_metrics_plugins }}"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add pulsar group variables"}
@@ -546,7 +546,7 @@ Some of the other options we will be using are:
 >    @@ -1,2 +1,4 @@
 >     [galaxyservers]
 >     gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
->    +[galaxyservers]
+>    +[pulsarservers]
 >    +gat-0.au.training.galaxyproject.eu ansible_user=ubuntu
 >    {% endraw %}
 >    ```
@@ -669,7 +669,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.xml.j2
 >    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -15,6 +15,15 @@
+>    @@ -15,6 +15,16 @@
 >         </plugins>
 >         <destinations default="slurm">
 >             <destination id="local_destination" runner="local_plugin"/>
@@ -681,6 +681,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    +            <param id="remote_metadata">False</param>
 >    +            <param id="rewrite_parameters">True</param>
 >    +            <param id="transport">curl</param>
+>    +            <param id="outputs_to_working_directory">False</param>
 >    +        </destination>
 >             <destination id="slurm" runner="slurm">
 >                 <param id="singularity_enabled">true</param>
@@ -688,6 +689,10 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add pulsar destination"}
+>
+>    You'll notice we need to know a lot about the configuration of the remote end, this is an unfortunate requirement with pulsar. Changes to e.g. the staging directory need to be coordinated between Pulsar and Galaxy. That's fine if both are under your administration, but for a completely remote Pulsar it can be difficult.
+>
+>    Notably we also override `outputs_to_working_directory`, as this option is incompatible with running Pulsar, and, unnecessary. Pulsar already provides the same job isolation and safety that we request when we set that option by default in Galaxy's configuration.
 >
 > 2. Install the BWA and BWA-MEM tools, if needed.
 >
@@ -701,7 +706,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.xml.j2
 >    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -63,5 +63,7 @@
+>    @@ -64,5 +64,7 @@
 >         </resources>
 >         <tools>
 >             <tool id="testing" destination="dynamic_cores_time" resources="testing" />
@@ -717,13 +722,25 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >
 > 4. Finally run the Galaxy playbook in order to deploy the updated job configuration, and to restart Galaxy.
 >
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
 {: .hands_on}
+
+> ```bash
+> 1-pulsar.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
 
 
 # Testing Pulsar
 
 Now we will upload a small set of data to run bwa-mem with.
-
 
 > ### {% icon hands_on %} Hands-on: Testing the Pulsar destination
 >
@@ -755,13 +772,13 @@ Now we will upload a small set of data to run bwa-mem with.
 >
 {: .hands_on}
 
-You'll notice that the Pulsar server has received the job (all the way in Australia!) and now should be installing bwa-mem via conda. Once this is complete (which may take a while - first time only) the job will run. When it starts running it will realise it needs the *E. coli* genome from CVMFS and fetch that, and then results will be returned to Galaxy!
-
 > ```bash
-> systemctl --no-pager status pulsar
+> 2-run-job.sh
 > ```
 > {: data-test="true"}
 {: .hidden}
+
+You'll notice that the Pulsar server has received the job (all the way in Australia!) and now should be installing bwa-mem via conda. Once this is complete (which may take a while - first time only) the job will run. When it starts running it will realise it needs the *E. coli* genome from CVMFS and fetch that, and then results will be returned to Galaxy!
 
 How awesome is that? Pulsar in another continent with reference data automatically from CVMFS :)
 

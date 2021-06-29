@@ -78,7 +78,7 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -29,6 +29,8 @@ miniconda_manage_dependencies: false
->
+>     
 >     galaxy_config:
 >       galaxy:
 >    +    library_import_dir: /libraries/admin
@@ -130,7 +130,7 @@ There are multiple options for importing data from your server, we'll go through
 {: .code-2col}
 
 > ```bash
-> ls -al /libraries/
+> 1.sh
 > ```
 > {: data-test="true"}
 {: .hidden}
@@ -145,7 +145,7 @@ Additionally we have a `user` directory, below the user directory are more direc
 
 This is by far the easiest and most convenient option for small datasets, or datasets that are just already in a history
 
-![A select box is shown listing files in the user's history](../../images/data/import-admin.png)
+![A select box is shown listing files in the user's history](../../images/data/import-history.png)
 
 You can easily select multiple files and quickly import them.
 
@@ -205,7 +205,7 @@ We've included this file in the example data libraries repository we cloned at t
 
 Let's try setting that up in our Galaxy!
 
-{% snippet faqs/galaxy/preferences_admin_api_key.md %}
+{% snippet faqs/galaxy/preferences_admin_api_key.md admin=true %}
 
 > ### {% icon hands_on %} hands-on: importing data library yaml.
 >
@@ -257,7 +257,7 @@ Let's try setting that up in our Galaxy!
 That's it! You should be able to see your newly created data library in your Galaxy.
 
 > ```bash
-> curl -H 'x-api-key: adminkey' -k https://localhost/api/libraries | grep 'Mouse sequencing project'
+> 2.sh
 > ```
 > {: data-test="true"}
 {: .hidden}

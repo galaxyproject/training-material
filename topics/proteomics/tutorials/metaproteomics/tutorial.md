@@ -96,7 +96,7 @@ The created dataset collection of the three *MGF files* in the history is used a
 
 > ### {% icon hands_on %} Hands-on: SearchGUI
 >
-> 1. **SearchGUI** {% icon tool %}: Run **SearchGUI** with:
+> 1. {% tool [Search GUI](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/3.3.10.1) %} with the following parameters:
 >    - **Protein Database**: `FASTA_Bering_Strait_Trimmed_metapeptides_cRAP.FASTA`(or however you named the `FASTA` file)
 >    - **Input Peak lists (mgf)**: `MGF files` dataset collection.
 >
@@ -180,7 +180,7 @@ outputs.
 
 > ### {% icon hands_on %} Hands-on: PeptideShaker
 >
-> 1. **PeptideShaker** {% icon tool %}: Run **PeptideShaker** with:
+> 1. {% tool [Peptide Shaker](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.16.36.3) %} with the following parameters:
 >   - **Compressed SearchGUI results**: The SearchGUI archive file
 >   - **Specify Advanced PeptideShaker Processing Options**: `Default Processing Options`
 >   - **Specify Advanced Filtering Options**: `Advanced Filtering Options`
@@ -245,7 +245,7 @@ As a tabular file is being read, line filters may be applied and an SQL query ca
 
 > ### {% icon hands_on %} Hands-on: Query Tabular
 >
-> 1. **Query Tabular** {% icon tool %}: Run **Query Tabular** with:
+> 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %} with the following parameters:
 >
 >    - **Database Table**: Click on `+ Insert Database Table`:
 >    - **Tabular Dataset for Table**: The PSM report
@@ -319,7 +319,7 @@ Therefore we can search the database for the peptides and count the occurrence w
 
 > ### {% icon hands_on %} Hands-on: SQLite to tabular
 >
-> 1. **SQLite to tabular** {% icon tool %}: Run **SQLite to tabular** with:
+> 1. {% tool [SQLite to tabular](toolshed.g2.bx.psu.edu/repos/iuc/sqlite_to_tabular/sqlite_to_tabular/2.0.0) %} with the following parameters:
 >
 >    - **SQL Query**:
 >
@@ -346,7 +346,7 @@ We do a taxonomy analysis using the UniPept pept2lca function to return the taxo
 
 > ### {% icon hands_on %} Hands-on: Unipept
 >
-> 1. **Unipept** {% icon tool %}: Run **Unipept** with:
+> 1. {% tool [Unipept](toolshed.g2.bx.psu.edu/repos/galaxyp/unipept/unipept/4.3.0) %} with the following parameters:
 >
 >    - **Unipept application**: `pept2lca: lowest common ancestor`
 >    - **Peptides input format**: `tabular`
@@ -381,7 +381,7 @@ once again used, aggregating the number of peptides and PSMs for each genus leve
 
 > ### {% icon hands_on %} Hands-on: Query Tabular
 >
-> 1. **Query Tabular** {% icon tool %}: Run **Query Tabular** with:
+> 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %} with the following parameters:
 >
 >    - **Database Table**: Click on `+ Insert Database Table`
 >    - **Tabular Dataset for Table**: The PSM report
@@ -515,7 +515,7 @@ for each protein.
 
 > ### {% icon hands_on %} Hands-on: Unipept
 >
-> 1. **Unipept** {% icon tool %}: Run **Unipept** with:
+> 1. {% tool [Unipept](toolshed.g2.bx.psu.edu/repos/galaxyp/unipept/unipept/4.3.0) %} with the following parameters:
 >
 >    - **Unipept application**: `pept2prot: UniProt entries containing a given tryptic peptide`
 >    - **retrieve extra information**: `Yes`
@@ -550,7 +550,7 @@ As a final step we will use **Query Tabular** in a more sophisticated way to com
 
 > ### {% icon hands_on %} Hands-on: Query Tabular
 >
-> 1. **Query Tabular** {% icon tool %}: Run **Query Tabular** with:
+> 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %} with the following parameters:
 >
 >    - **Database Table**: Click on `+ Insert Database Table`
 >    - **Tabular Dataset for Table**: The `Gene Ontology Terms` file
@@ -670,7 +670,7 @@ With this we have combined all the data into a single database which we can now 
 
 > ### {% icon hands_on %} Hands-on: SQLite to tabular
 >
-> 1. **SQLite to tabular** {% icon tool %}: Run **SQLite to tabular** with:
+> 1. {% tool [SQLite to tabular](toolshed.g2.bx.psu.edu/repos/iuc/sqlite_to_tabular/sqlite_to_tabular/2.0.0) %} with the following parameters:
 >
 >    - **SQLite Database**: The created SQLite database from the former step
 >    - **SQL Query**:

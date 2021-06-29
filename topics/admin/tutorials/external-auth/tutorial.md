@@ -61,7 +61,7 @@ For this exercise we will use a basic password file method for authenticating - 
 >    +        uwsgi_param          HTTP_REMOTE_USER $remote_user;
 >    +        uwsgi_param          HTTP_GX_SECRET SOME_SECRET_STRING;
 >         }
->
+>     
 >         # Static files can be more efficiently served by Nginx. Why send the
 >    ```
 
