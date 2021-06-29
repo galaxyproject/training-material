@@ -263,20 +263,36 @@ ONT ARTIC | ONT fastq files generated with Oxford nanopore (ONT)-based Ampliconi
 > 1. **Get the workflow** on Galaxy 
 >
 >    - Option 1: Use workflows directly on [usegalaxy.eu](https://usegalaxy.eu/) from [WorkflowHub](https://workflowhub.eu)
+>
 >      - Open the workflow page on WokflowHub
 >        - [Illumina ARTIC PE](https://workflowhub.eu/workflows/110) - The one to use for example datasets
 >        - [Illumina RNAseq SE](https://workflowhub.eu/workflows/112)
 >        - [Illumina RNAseq PE](https://workflowhub.eu/workflows/113)
 >        - [ONT ARTIC](https://workflowhub.eu/workflows/111)
+>
 >      - Click on `Run on usegalaxy.eu` on the top right of the page
 >      
 >        The browser will open a new tab with Galaxy's workflow invocation interface.
 >
->    - Option 2: Import the workflows of IWC (Intergalactic Workflow Commission) from WorkflowHub using the workflow search
+>    - Option 2: Import the workflows of IWC (Intergalactic Workflow Commission) from [Dockstore](https://dockstore.org/) using the workflow search
 >
 >      {% snippet faqs/galaxy/workflows_import_search.md trs_server="Dockstore" search_query='organization:"iwc-workflows"' %}
 >
->      For the example dataset: COVID-19-PE-ARTIC-ILLUMINA
+>      For the example dataset: `sars-cov-2-pe-illumina-artic-variant-calling/COVID-19-PE-ARTIC-ILLUMINA`
+>
+>    - Option 3: Import the workflow directly from IWC into Galaxy
+>
+>      - Open the workflow GitHub repository
+>        - [Illumina ARTIC PE](https://github.com/iwc-workflows/sars-cov-2-pe-illumina-artic-variant-calling) - The one to use for example datasets
+>        - [Illumina RNAseq SE](https://github.com/iwc-workflows/sars-cov-2-se-illumina-wgs-variant-calling)
+>        - [Illumina RNAseq PE](https://github.com/iwc-workflows/sars-cov-2-pe-illumina-wgs-variant-calling)
+>        - [ONT ARTIC](https://github.com/iwc-workflows/sars-cov-2-ont-artic-variant-calling)
+>      - Open the `.ga` file
+>      - Click on `Raw` on the top right of the file
+>      - Save the file or Copy the URL of the file
+>      - Import the workflow to Galaxy
+>
+>        {% snippet faqs/galaxy/workflows_import.md %}
 >
 > 2. Run **COVID-19: variation analysis on ...** {% icon workflow %} using the following parameters:
 >
@@ -320,9 +336,19 @@ Once the jobs of previous workflow are done, we identified AVs for each sample. 
 >      
 >        The browser will open a new tab with Galaxy's workflow invocation interface.
 >
->    - Option 2: Import the workflow of IWC (Intergalactic Workflow Commission) from WorkflowHub using the workflow search
+>    - Option 2: Import the workflow of IWC (Intergalactic Workflow Commission) from [Dockstore](https://dockstore.org/) using the workflow search
 >
->      {% snippet faqs/galaxy/workflows_import_search.md trs_server="workflowhub.eu" search_query='organization:"IWC Workflows"' workflow_name="COVID-19-VARIATION-REPORTING" %}
+>      {% snippet faqs/galaxy/workflows_import_search.md trs_server="Dockstore" search_query='organization:"iwc-workflows"' workflow_name="sars-cov-2-variation-reporting/COVID-19-VARIATION-REPORTING" %}
+>
+>    - Option 3: Import the workflow directly from IWC into Galaxy
+>
+>      - Open the [workflow GitHub repository](https://github.com/iwc-workflows/sars-cov-2-variation-reporting)
+>      - Open the `.ga` file
+>      - Click on `Raw` on the top right of the file
+>      - Save the file or Copy the URL of the file
+>      - Import the workflow to Galaxy
+>
+>        {% snippet faqs/galaxy/workflows_import.md %}
 >
 > 2. Run **COVID-19: variation analysis reporting** {% icon workflow %} using the following parameters:
 >
@@ -360,21 +386,20 @@ Both workflows generate several outputs. Most of them are collections with resul
    5 | `ALT` | Alternative base
    6 | `DP` | Sequencing depth
    7 | `AF` | Alternative allele frequency
-   8 | `SB` | Alternative allele frequency
-   9 | `SB` | Strand bias P-value from Fisher's exact test calculated by [`lofreq`](https://csb5.github.io/lofreq/)
-   10 |`DP4` | Depth for Forward Ref Counts, Reverse Ref Counts, Forward Alt Counts, Reverse Alt Counts
-   11 |`IMPACT` | Functional impact (from SNPEff)
-   12 |`FUNCLASS` | Funclass for change (from SNPEff)
-   13 |`EFFECT` | Effect of change (from SNPEff)
-   14 |`GENE` | Gene name
-   15 |`CODON` | Codon
-   16 |`AA` | Amino acid
-   17 |`TRID` | Short name for the gene
-   18 |`min(AF)` | Minimum Alternative Allele Freq across all samples containing this change
-   19 |`max(AF)` | Maximum Alternative Allele Freq across all samples containing this change
-   20 |`countunique(change)` | Number of distinct types of changes at this site across all samples
-   21 |`countunique(FUNCLASS)` | Number of distinct FUNCLASS values at this site across all samples
-   22 |`change` | Change at this site in this sample
+   8 | `SB` | Strand bias P-value from Fisher's exact test calculated by [`lofreq`](https://csb5.github.io/lofreq/)
+   9 |`DP4` | Depth for Forward Ref Counts, Reverse Ref Counts, Forward Alt Counts, Reverse Alt Counts
+   10 |`IMPACT` | Functional impact (from SNPEff)
+   11 |`FUNCLASS` | Funclass for change (from SNPEff)
+   12 |`EFFECT` | Effect of change (from SNPEff)
+   13 |`GENE` | Gene name
+   14 |`CODON` | Codon
+   15 |`AA` | Amino acid
+   16 |`TRID` | Short name for the gene
+   17 |`min(AF)` | Minimum Alternative Allele Freq across all samples containing this change
+   18 |`max(AF)` | Maximum Alternative Allele Freq across all samples containing this change
+   19 |`countunique(change)` | Number of distinct types of changes at this site across all samples
+   20 |`countunique(FUNCLASS)` | Number of distinct FUNCLASS values at this site across all samples
+   21 |`change` | Change at this site in this sample
 
    > ### {% icon question %} Questions
    > 
@@ -493,8 +518,18 @@ The workflow takes a collection of VCFs and a collection of the corresponding al
 > ### {% icon hands_on %} Hands-on: From AVs to consensus sequences
 >
 > 1. **Get the workflow** on Galaxy
->      - Copy the URL (e.g. via right-click) of [the workflow](https://raw.githubusercontent.com/galaxyproject/iwc/main/workflows/sars-cov-2-variant-calling/sars-cov-2-consensus-from-variation/consensus-from-variation.ga) or download it to your computer        
->      - Import the workflow into Galaxy
+>
+>    - Option 1: Import the workflow of IWC (Intergalactic Workflow Commission) from [Dockstore](https://dockstore.org/) using the workflow search
+>
+>      {% snippet faqs/galaxy/workflows_import_search.md trs_server="Dockstore" search_query='organization:"iwc-workflows"' workflow_name="sars-cov-2-consensus-from-variation/COVID-19-CONSENSUS-CONSTRUCTION" %}
+>
+>    - Option 2: Import the workflow directly from IWC into Galaxy
+>
+>      - Open the [workflow GitHub repository](https://github.com/iwc-workflows/sars-cov-2-consensus-from-variation)
+>      - Open the `.ga` file
+>      - Click on `Raw` on the top right of the file
+>      - Save the file or Copy the URL of the file
+>      - Import the workflow to Galaxy
 >
 >        {% snippet faqs/galaxy/workflows_import.md %}
 >
