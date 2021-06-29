@@ -823,7 +823,7 @@ runs the helloworld.py script present in the same folder as the tool xml, then e
 > ```
 {: .hands_on}
 
-The variables set in the inputs and output sections to generate a full command to be run inside the Galaxy environment. When inside a conditional or
+The variables set in the inputs and output sections generate a full command to be run inside the Galaxy environment. When inside a conditional or
 section, the hierarchy is preserved using a period. For example
 
 ```txt
