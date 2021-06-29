@@ -671,7 +671,11 @@ These are usually good proxies for quality, but do not treat them as strict rule
 
 Sometimes a role will accomplish 95% of what you need to do, but not everything. Once you have installed the role with `ansible-galaxy install`, you can edit it locally to make any changes. In an ideal world you would contribute this back, but this is not always a high priority. Many projects copy roles directly into their repositories, e.g. [galaxyproject](https://github.com/galaxyproject/infrastructure-playbook/tree/master/roles) and [usegalaxy.eu](https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master/roles)
 
-# (Optional) Ansible Vault
+> ### {% icon tip %} How do I know what I can do with a role? What variables are available?
+> You don't. There is no standard way for reporting this, but *most* people write all of the variables in the README file of the repository. Definitely check there first, but if they aren't there, then you'll need to read through `defaults/` and `tasks/` and `templates/` to figure out what the role does and how you can control and modify it to accomplish your goals.
+{: .tip}
+
+# Ansible Vault
 
 Now that you have a small role built up, you might start thinking about deploying larger and more complex services and infrastructure. One last common task we want to cover here is the inclusion of secrets. Ansible Vault is really useful to include encrypted secrets in your playbook repository.
 
