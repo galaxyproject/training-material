@@ -94,7 +94,7 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
 >    > wget -O bellerophon.tar.gz https://github.com/davebx/bellerophon/archive/1.0.tar.gz
->    > sha256sum bellerophon.tar.gz # Copy the 64-character hexadecimal number that this outputs.
+>    > shasum -a 256 bellerophon.tar.gz # Copy the 64-character hexadecimal number that this outputs.
 >    > ```
 >    {: .code-in}
 >
