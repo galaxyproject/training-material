@@ -162,7 +162,7 @@ a test dataset and run our workflow.
 
 > ### {% icon hands_on %} Hands-on: Running the workflow
 >
-> 1. Return to the analysis are by clicking *Analyze Data* on the top
+> 1. Return to the analysis are by clicking the Home button {% icon galaxy-home %} (or *Analyze Data* on older versions of Galaxy) on the top
 > 2. Upload a dataset using "Paste/Fetch data" with the contents
 >
 >    ```
@@ -222,7 +222,7 @@ We will now add tags to step outputs and label one of the 2 output datasets.
 
 > ### {% icon hands_on %} Hands-on: Running the workflow
 >
-> 1. Return to the analysis page by clicking *Analyze Data* on the top
+> 1. Return to the analysis page by clicking the Home button {% icon galaxy-home %} (or *Analyze Data* on older versions of Galaxy) on the top
 > 2. Create a dataset collection from the first 2 files in your history
 >
 >    {% snippet faqs/galaxy/collections_build_list.md %}
