@@ -2400,6 +2400,17 @@ You can write roles for that! Sometimes they are really ugly roles, but it at le
 
 It may seem daunting to use ansible, but you don't have to do everything in ansible! You can just do a little bit, for managing just Galaxy, and manage the rest of your stack separately. Whatever fits best for your deployment.
 
+# Loving Ansible? Convert your own servers!
+
+A common question we get is:
+
+> Is it possible to transform a galaxy cluster which was installed by hand, into an ansible-managed one?
+{: .quote}
+
+Because of the great variance between sites and deployments it is not really possible to produce a guide for doing so. However, if you back your current deployment up and set all of the variables that control paths appropriately, it can be done!
+
+It's very possible to do this piecemeal, taking one component at a time to ansibilise. nginx is a very easy place to start, the database is as well. Galaxy can be rebuilt in a new location, many of us ran a hand-managed galaxy setup somewhere like `/home/janedoe/work/projects/galaxy` that suddenly became a permanent project, this is a good chance to keep that but rebuild an identical one in `/srv/galaxy` or similar, and then switch over the traffic to that new, production Galaxy.
+
 # Final Notes
 
 If you've been following along you should have a production-ready Galaxy, secured, everything ready to go.
