@@ -339,6 +339,24 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 > ![Image of a table entry with minimap2 having requirements minimap2+singularity, a resolved column with a green checkmark next to via singularity, the resolver is mulled_singularity, and a container column with a path to /srv/galaxy/var/cache/singularity/mulled and some long hash.](../../images/singularity-resolved.png)
 {: .comment}
 
+> ### {% icon tip %} Singularity, Conda, something else?
+> We often hear
+>
+> > What would be the best practice, use conda or singularity?
+> {: .quote}
+>
+> Many of us are moving towards singularity. Conda environments can resolve differently if they were installed at different times which isn't great for reproducibility. Singularity images are never updated after generation which makes them fantastic. Also the isolation that's there by default is an incredible improvement for less-trustworthy binaries.
+{: .tip}
+
+> ### {% icon tip %} Does Singularity fix issues with Conda dependencies?
+> Yes and no. Singularity containers are built from conda environments. Only now you're no longer responsible for solving the conda environment, or ensuring that all of the dependencies are installed. The Galaxy project uses a system called "mulling" to bring together multiple conda dependencies together in a single environment, and singularity containers are produced for these dependencies as well. That said, complex or unresolvable conda environments are not solved by singularity, because singularity is really just packaging conda's environment into a single binary.
+{: .tip}
+
+
+
+
+
+
 
 <!--
 ## Use Singularity containers from CVMFS
