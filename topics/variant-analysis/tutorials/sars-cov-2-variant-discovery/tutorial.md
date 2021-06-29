@@ -1,12 +1,12 @@
 ---
 layout: tutorial_hands_on
 
-title: Identification of allelic variants in SARS-CoV-2 from deep sequencing reads
-level: Introductory
+title: Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data
+level: Intermediate
 zenodo_link: "https://zenodo.org/record/5036687"
 questions:
 - How can we extract annotated allelic variants in SARS-Cov-2 sequences in Galaxy?
-- Which tools can we use to identify SARS-CoV-2 clades in Galaxy?
+- Which tools and workflows can we use to identify SARS-CoV-2 lineages in Galaxy?
 objectives:
 - Repeat SARS-CoV-2 data preparation
 - Select and run workflow to extract annotated allelic variants from FASTQ files
@@ -16,9 +16,9 @@ objectives:
 - Select and run tools to assign clades/lineages
 time_estimation: 3H
 key_points:
-- 4 specilised variant calling workflows are availabe for the identification of annotated allelic variants from RAW data depending on the type of input
-- Many datasets can be processed in parallel using collections
-- Annotated allelic variants can be used to identify SARS-CoV-2 clades/lineages in each samples using consensus sequences
+- 4 specialized, best-practice variant calling workflows are available for the identification of annotated allelic variants from raw sequencing data depending on the exact type of input
+- Data from batches of samples can be processed in parallel using collections
+- Annotated allelic variants can be used to build consensus sequences for and assign each sample to known viral clades/lineages
 contributors:
 - wm75
 - bebatut
@@ -32,18 +32,23 @@ tags:
 
 Effectively monitoring global infectious disease crises, such as the COVID-19 pandemic, requires capacity to generate and analyze large volumes of sequencing data in near real time. These data have proven essential for monitoring the emergence and spread of new variants, and for understanding the evolutionary dynamics of the virus.
 
-Two sequencing platforms in combination with several established library preparation strategies are predominantly used to generate SARS-CoV-2 sequence data. However, data alone do not equal knowledge: they need to be analyzed. The Galaxy community developed analysis workflows to support the **identification of allelic variants (AVs) in SARS-CoV-2 from deep sequencing reads**. 
+Two sequencing platforms in combination with several established library preparation strategies are predominantly used to generate SARS-CoV-2 sequence data. However, data alone do not equal knowledge: they need to be analyzed. The Galaxy community has developed high-quality analysis workflows to support
 
-These workflows allow one to identify allelic variants (AVs) and lineages in SARS-CoV-2 genomes with variant allele frequencies ranging from 5% to 100% (i.e. they detect variants with intermediate frequencies as well).
+- sensitive identification of SARS-CoV-2 allelic variants (AVs) starting with allele frequencies as low as 5% from deep sequencing reads
+- generation of user-friendly reports for batches of results
+- reliable and configurable consensus genome generation from called variants
 
-In this tutorial, we will see how to run these workflows for the different types of input data:
+> ### {% icon details %} Further reading
+> More information about the workflows, including benchmarking, can be found at
+> [covid19.galaxyproject.org](https://covid19.galaxyproject.org/).
+{: .details}
+
+This tutorial will teach you how to obtain, run and combine these workflows appropriately for different types of input data, be it:
 
 - Single-end data derived from Illumina-based RNAseq experiments
 - Paired-end data derived from Illumina-based RNAseq experiments
-- Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols
+- Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols, or
 - ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols
-
-More information about the workflows, including benchmarking, can be found at [covid19.galaxyproject.org](https://covid19.galaxyproject.org/).
 
 > ### Agenda
 >
@@ -70,56 +75,7 @@ Any analysis should get their own Galaxy history. So let's start by creating a n
 >
 {: .hands_on}
 
-## Import auxiliary datasets
-
-For extracting the variants, we need to get the SARS-CoV-2 reference (a sequence-identical copy of [NC_045512.2](https://www.ncbi.nlm.nih.gov/nuccore/NC_045512.2?report=fasta)) and gene name aliases (to give gene regions easily recognizable names), i.e. a custom tabular file mapping NCBI RefSeq Protein identifiers as used by snpEff version 4.5covid19 to their commonly used names. 
-
-In addition, for raw data generated using the ARTIC protocol, we need 2 extra datasets:
-- a BED file with ARTIC network primer scheme
-- a custom tabular file describing the amplicon grouping of the primers in the primer scheme file
-
-> ### {% icon comment %} Not using the standard ARTIC primer set for amplification?
-> 
-> If the samples for amplification were not prepared with the standard ARTIC primer set, custom files will need to be provided: the BED with the primer scheme and the tabular file describing the amplicon grouping of the primers in the primer scheme file.
-{: .comment}
-
-> ### {% icon hands_on %} Hands-on: Import auxiliary datasets
->
-> 1. Import the auxiliary datasets:
->    - the SARS-CoV-2 reference (`NC_045512.2_reference.fasta`)
->    - gene name aliases (`NC_045512.2_feature_mapping.tsv`)
->    - (if ARTIC protocol has been used) ARTIC network primer scheme (`ARTIC_nCoV-2019_v3.bed`)
->    - (if ARTIC protocol has been used) ARTIC amplicon grouping of the primers (`ARTIC_amplicon_info_v3.tsv`)
->
->    Several options are possible to import these datasets:
->
->    - Option 1: From the shared data library (in folder `GTN - Material` -> `Variant analysis` -> `Identification of allelic variants in SARS-CoV-2 from deep sequencing reads`)
->
->      {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->
->    - Option 2: From [Zenodo]({{ page.zenodo_link }})
->
->      ```
->      {{ page.zenodo_link }}/NC_045512.2_feature_mapping.tsv
->      {{ page.zenodo_link }}/NC_045512.2_reference.fasta
->      {{ page.zenodo_link }}/ARTIC_nCoV-2019_v3.bed
->      {{ page.zenodo_link }}/ARTIC_amplicon_info_v3.tsv
->      ```
->
->      {% snippet faqs/galaxy/datasets_import_via_link.md %}
->
->    - Option 3: From a shared history:
->      - On [usegalaxy.org](https://usegalaxy.org/u/aun1/h/artic-v3)
->      - On [usegalaxy.eu](https://usegalaxy.eu/u/nekrut/h/artic-v3)
->      - On [usegalaxy.org.au](https://usegalaxy.org.au/u/nekrut/h/artic-v3)
->
->      {% snippet faqs/galaxy/histories_import.md %}
->
->    For the example datasets, the 4 auxiliary datasets need to be imported.
->
-{: .hands_on}
-
-## Get data
+## Get sequencing data
 
 Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ files with the sequenced viral RNA from different patients infected with SARS-COV-2. Several types of data are possible:
 
@@ -130,9 +86,9 @@ Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ
 
 We encourage you to use your own data there (with at least 2 samples). If you do not have any datasets available, we provide some example datasets (paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols) from [COG-UK](https://www.cogconsortium.uk/), the COVID-19 Genomics UK Consortium.
 
-To upload the data, there are several possibilities depending of how many datasets and what their origin is:
+There are several possibilities to upload the data depending on how many datasets you have and what their origin is:
 
-- Import datasets (locally, on a given URL or from a shared data library) and organize them as a dataset collection.
+- Import datasets (from your local file system, from a given URL or from a shared data library) and organize them as a dataset collection.
 
   A dataset collection is a way to represent an arbitrarily large collection of samples as a singular entity within a user's workspace.
 
@@ -148,11 +104,11 @@ To upload the data, there are several possibilities depending of how many datase
 >
 > 1. Import the datasets
 >
->    - Option 1: From your own local data using **Upload Data** (1-10 datasets)
+>    - Option 1: From your own local data using **Upload Data** (recommended for 1-10 datasets)
 >      
 >      {% snippet faqs/galaxy/datasets_upload.md %}
 >
->    - Option 2: From your own local data using **FTP** (>10 datasets)
+>    - Option 2: From your own local data using **FTP** (recommended for >10 datasets)
 >
 >      {% snippet faqs/galaxy/datasets_upload_ftp.md %}
 >
@@ -162,7 +118,7 @@ To upload the data, there are several possibilities depending of how many datase
 >
 >      For our example datasets, the 36 `fastqsanger.gz` files (representing 18 samples) in folder `GTN - Material` -> `Variant analysis` -> `Identification of allelic variants in SARS-CoV-2 from deep sequencing reads`
 >
->    - Option 4: From an external server with URL
+>    - Option 4: From an external server via URL
 >
 >      {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
@@ -231,11 +187,79 @@ To upload the data, there are several possibilities depending of how many datase
 >
 {: .comment} 
 
+## Import auxiliary datasets
+
+For calling variants and annotating them, we need at least two additional datasets:
+
+- the SARS-CoV-2 reference sequence [NC_045512.2](https://www.ncbi.nlm.nih.gov/nuccore/NC_045512.2?report=fasta) to align and compare our sequencing data against
+
+- a tabular dataset defining aliases for viral gene product names, which will let us translate NCBI RefSeq Protein identifiers (used by the snpEff annotation tool) to the commonly used names of coronavirus proteins and cleavage products.
+
+Another two datasets are needed for the analysis of ampliconic, e.g. ARTIC-amplified, input data :
+
+- a BED file specifying the primers used during amplification and their binding sites on the viral genome
+- a custom tabular file describing the amplicon grouping of the primers
+
+
+> ### {% icon hands_on %} Hands-on: Import auxiliary datasets
+>
+> 1. Import the auxiliary datasets:
+>    - the SARS-CoV-2 reference (`NC_045512.2_reference.fasta`)
+>    - gene product name aliases (`NC_045512.2_feature_mapping.tsv`)
+>    - ARTIC v3 primer scheme (`ARTIC_nCoV-2019_v3.bed`)
+>    - ARTIC v3 primer amplicon grouping info (`ARTIC_amplicon_info_v3.tsv`)
+>
+>    > ### {% icon comment %} Not using ARTIC v3 amplified sequencing data?
+>    >
+>    > The instructions here assume you will be analyzing the example samples
+>    > suggested above, which have been amplified using version 3 of the ARTIC
+>    > network's SARS-CoV-2 primer set. If you have decided to work through
+>    > this tutorial using your own samples of interest, and if those samples
+>    > have been amplified with a different primer set, you will have to upload
+>    > your own datasets with primer and amplicon information at this point.
+>    > If the primer set is from the ARTIC network, just not version 3, you
+>    > should be able to obtain the primer BED file from
+>    > [their SARS-CoV-2 github repo](https://github.com/artic-network/artic-ncov2019/tree/master/primer_schemes/nCoV-2019).
+>    > Look for a 6-column BED file structured like the version 3 one we suggest below.
+>    > For the tabular amplicon info file, you only need to combine all primer names from
+>    > the BED file that contribute to the same amplicon on a single tab-separated line.
+>    > The result should look similar to the ARTIC v3 amplicon grouping info file we
+>    >suggest to upload.
+>    {: .comment}
+>
+>    Several options exist to import these datasets:
+>
+>    - Option 1: From the shared data library (in folder `GTN - Material` -> `Variant analysis` -> `Identification of allelic variants in SARS-CoV-2 from deep sequencing reads`)
+>
+>      {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
+>    - Option 2: From [Zenodo]({{ page.zenodo_link }})
+>
+>      ```
+>      {{ page.zenodo_link }}/NC_045512.2_reference.fasta
+>      {{ page.zenodo_link }}/NC_045512.2_feature_mapping.tsv
+>      {{ page.zenodo_link }}/ARTIC_nCoV-2019_v3.bed
+>      {{ page.zenodo_link }}/ARTIC_amplicon_info_v3.tsv
+>      ```
+>
+>      {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    - Option 3: From a shared history:
+>      - On [usegalaxy.org](https://usegalaxy.org/u/aun1/h/artic-v3)
+>      - On [usegalaxy.eu](https://usegalaxy.eu/u/nekrut/h/artic-v3)
+>      - On [usegalaxy.org.au](https://usegalaxy.org.au/u/nekrut/h/artic-v3)
+>
+>      {% snippet faqs/galaxy/histories_import.md %}
+>
+>    For the example datasets, the 4 auxiliary datasets need to be imported.
+>
+{: .hands_on}
+
 # From FASTQ to annotated allelic variants
 
-To identify the SARS-CoV-2 allelic variants (AVs), a first workflow convert the FASTQ files to annotated AV through a series of steps that include quality control, trimming, mapping, deduplication, AV calling, and filtering.
+To identify the SARS-CoV-2 allelic variants (AVs), a first workflow converts the FASTQ files to annotated AVs through a series of steps that include quality control, trimming, mapping, deduplication, AV calling, and filtering.
 
-The tools and parameters used for these steps have been selected based on the input data and after extensive testing. 4 versions of the workflow are then available:
+Four versions of this workflow are available with their tools and parameters optimized for different types of input data as outlined in the following table:
 
 Workflow version 	| Input data | Read aligner | Variant caller
 --- | --- | --- | ---
@@ -245,7 +269,6 @@ Illumina ARTIC | Paired-end data generated with Illumina-based Ampliconic (ARTIC
 ONT ARTIC | ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols | **minimap2** {% cite li_2018 %} | **medaka**
 
 > ### {% icon details %} About the workflows
->
 >
 > - The two Illumina RNASeq workflows (Illumina RNAseq SE and Illumina RNAseq PE) perform read mapping with **bwa-mem** and **bowtie2**, respectively, followed by sensitive allelic-variant (AV) calling across a wide range of AFs with **lofreq**.
 > - The workflow for Illumina-based ARTIC data (Illumina ARTIC) builds on the RNASeq workflow for paired-end data using the same steps for mapping (**bwa-mem**) and AV calling (**lofreq**), but adds extra logic operators for trimming ARTIC primer sequences off reads with the **ivar** package. In addition, this workflow uses **ivar** also to identify amplicons affected by ARTIC primer-binding site mutations and excludes reads derived from such “tainted” amplicons when calculating alternative allele frequences (AFs) of other AVs.
@@ -572,7 +595,7 @@ The main outputs of the workflow are:
 
 The last one can be given as input for tools like **Pangolin** or **Nextclade**.
 
-# From consensus sequences to clade assignations
+# From consensus sequences to clade/lineage assignments
 
 To assign lineages to the different samples from their consensus sequences, 2 tools are available **Pangolin** or **Nextclade**
 
@@ -659,7 +682,7 @@ Column | Field | Meaning
 13 | `insertions` | Insertions relative to the reference Wuhan-Hu-1 (positions are 1-based)
 14 | `missing` | Intervals consisting of N characters
 15 | `nonACGTNs` | List of positions of non-ACGTN characters (for example ambiguous nucleotide codes)
-16 | `pcrPrimerChanges` | Number of mutations affecting user-specified PCR primer binding sites
+16 | `pcrPrimerChanges` | Number of user-specified PCR primer binding sites affected by mutations
 17 | `aaSubstitutions` | List of aminoacid changes
 18 | `totalAminoacidSubstitutions` | Number of aminoacid changes
 19 | `aaDeletions` | List of aminoacid deletions
