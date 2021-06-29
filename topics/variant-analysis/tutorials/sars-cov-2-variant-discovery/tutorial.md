@@ -9,14 +9,14 @@ questions:
 - Which tools can we use to identify SARS-CoV-2 clades in Galaxy?
 objectives:
 - Repeat SARS-CoV-2 data preparation
-- Select and execute workflow to extract annotated allelic variants from FASTQ files
-- Execute workflow to summarize annotated allelic variants
+- Select and run workflow to extract annotated allelic variants from FASTQ files
+- Run workflow to summarize and generate report for previously called allelic variants
 - Interpret summaries for annotated allelic variants
-- Execute workflow to extract consensus sequences
-- Execute tools to assign clades/lineages
+- Run workflow to extract consensus sequences
+- Select and run tools to assign clades/lineages
 time_estimation: 3H
 key_points:
-- 4 workflows are possible to extract annotated allelic variants from FASTQ files depending on the type of input
+- 4 specilised variant calling workflows are availabe for the identification of annotated allelic variants from RAW data depending on the type of input
 - Many datasets can be processed in parallel using collections
 - Annotated allelic variants can be used to identify SARS-CoV-2 clades/lineages in each samples using consensus sequences
 contributors:
@@ -34,7 +34,7 @@ Effectively monitoring global infectious disease crises, such as the COVID-19 pa
 
 Two sequencing platforms in combination with several established library preparation strategies are predominantly used to generate SARS-CoV-2 sequence data. However, data alone do not equal knowledge: they need to be analyzed. The Galaxy community developed analysis workflows to support the **identification of allelic variants (AVs) in SARS-CoV-2 from deep sequencing reads**. 
 
-These workflows allow one to identify AVs and lineages in SARS-CoV-2 genomes with variant allele frequencies ranging from 5% to 100% (i.e., they detect variants with intermediate frequencies as well.
+These workflows allow one to identify allelic variants (AVs) and lineages in SARS-CoV-2 genomes with variant allele frequencies ranging from 5% to 100% (i.e. they detect variants with intermediate frequencies as well).
 
 In this tutorial we will see how to run these workflows for the different types of input data:
 
@@ -43,6 +43,7 @@ In this tutorial we will see how to run these workflows for the different types 
 - Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols
 - ONT fastq files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols
 
+More information about the worklows, including benchmarking, can be found at [covid19.galaxyproject.org](https://covid19.galaxyproject.org/).
 
 > ### Agenda
 >
@@ -72,7 +73,10 @@ Any analysis should get their own Galaxy history. So let's start by creating a n
 ## Import auxiliary datasets
 
 For extracting the variants, we need to get the SARS-CoV-2 reference (a sequence-identical copy of [NC_045512.2](https://www.ncbi.nlm.nih.gov/nuccore/NC_045512.2?report=fasta)) and gene name aliases (to give gene regions easily recognizable names), i.e. a custom tabular file mapping NCBI RefSeq Protein identifiers as used by snpEff version 4.5covid19 to their commonly used names. 
-In addition, we need for datasets generated using ARTIC protocols 2 extra datasets: a BED file with ARTIC network primer scheme and a custom tabular file describing the amplicon grouping of the primers in the primer scheme file.
+
+In addition, for raw data generated using the ARTIC protocol, we need 2 extra datasets:
+- a BED file with ARTIC network primer scheme
+- a custom tabular file describing the amplicon grouping of the primers in the primer scheme file
 
 > ### {% icon comment %} Not using the standard ARTIC primer set for amplification?
 > 
@@ -111,6 +115,8 @@ In addition, we need for datasets generated using ARTIC protocols 2 extra datase
 >
 >      {% snippet faqs/galaxy/histories_import.md %}
 >
+>    For the example datasets, the 4 auxiliary datasets need to be imported
+>
 {: .hands_on}
 
 ## Get data
@@ -148,7 +154,7 @@ To upload the data, there are several possibilities depending of how many datase
 >
 >      {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
->      *For our example datasets, the 28 `fastqsanger.gz` files in folder `GTN - Material` -> `Variant analysis` -> `Identification of allelic variants in SARS-CoV-2 from deep sequencing reads`*
+>      For our example datasets, the 28 `fastqsanger.gz` files in folder `GTN - Material` -> `Variant analysis` -> `Identification of allelic variants in SARS-CoV-2 from deep sequencing reads`
 >
 >    - Option 4: From an external server with URL
 >
@@ -205,7 +211,11 @@ To upload the data, there are several possibilities depending of how many datase
 >
 >      {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
->      *To do for example datasets: the example datasets are paired-end data with datasets with `_1` contain the forward reads and datasets with `_2` the reverse reads.*
+>      For example datasets: 
+>      - As datasets with `_1` contain the forward reads and datasets with `_2` the reverse reads, we need to select:
+>        - text of unpaired forward: `_1`
+>        - text of unpaired forward: `_2`
+>      - We can remove `fastqsanger` if it appears in the names of the pairs
 >
 {: .hands_on}
 
@@ -265,6 +275,7 @@ ONT ARTIC | ONT fastq files generated with Oxford nanopore (ONT)-based Ampliconi
 
 > ### {% icon details %} About the workflows
 >
+>
 > - The two Illumina RNASeq workflows (Illumina RNAseq SE and Illumina RNAseq PE) perform read mapping with **bwa-mem** and **bowtie2**, respectively, followed by sensitive allelic-variant (AV) calling across a wide range of AFs with **lofreq**
 > - The workflow for Illumina-based ARTIC data (Illumina ARTIC) builds on the RNASeq workflow for paired-end data using the same steps for mapping (**bwa-mem**) and AV calling (**lofreq**), but adds extra logic operators for trimming ARTIC primer sequences off reads with the **ivar** package. In addition, this workflow uses **ivar** also to identify amplicons affected by ARTIC primer-binding site mutations and excludes reads derived from such “tainted” amplicons when calculating alternative allele frequences (AFs) of other AVs.
 > - The workflow for ONT-sequenced ARTIC data (ONT ARTIC) is modeled after the alignment/AV-calling steps of the [ARTIC pipeline](https://artic.readthedocs.io/). It performs, essentially, the same steps as that pipeline’s minion command, i.e. read mapping with **minimap2** and AV calling with **medaka**. Like the Illumina ARTIC workflow it uses **ivar** for primer trimming. Since ONT-sequenced reads have a much higher error rate than Illumina-sequenced reads and are therefore plagued more by false-positive AV calls, this workflow makes no attempt to handle amplicons affected by potential primer-binding site mutations.
@@ -273,36 +284,28 @@ ONT ARTIC | ONT fastq files generated with Oxford nanopore (ONT)-based Ampliconi
 >
 > Workflows default to requiring an AF ≥ 0.05 and AV-supporting reads of ≥ 10 (these and all other parameters can be easily changed by the user). For an AV to be listed in the reports it must surpass these thresholds in at least one sample of the respective dataset. We estimate that for AV calls with an AF ≥ 0.05 our analyses have a false-positive rate of < 15% for both Illumina RNAseq and Illumina ARTIC data, while the true-positive rate of calling such low-frequency AVs is ~80% and approaches 100% for AVs with an AF ≥ 0.15. This estimate is based on an initial application of the Illumina RNAseq and Illumina ARTIC workflows to two samples for which data of both types had been obtained at the virology department of the University of Freiburg and the assumption that AVs supported by both sets of sequencing data are true AVs. The second threshold of 10 AV-supporting reads is applied to ensure that calculated AFs are sufficiently precise for all AVs.
 >
+> More details about the workflows, including benchmarking of the tools, can be found on [covid19.galaxyproject.org](https://covid19.galaxyproject.org/genomics/global_platform/#methods)
 {: .details}
 
 > ### {% icon hands_on %} Hands-on: From FASTQ to annotated AVs
 >
-> 1. **Get the workflow** on Galaxy
->    
->    - Option 1: Use workflows available on [usegalaxy.org](https://usegalaxy.org/), [usegalaxy.eu](https://usegalaxy.eu/) or [usegalaxy.org.au](https://usegalaxy.org.au/)
+> 1. **Get the workflow** on Galaxy 
 >
->      Click on the appropriate workflow version (Illumina RNAseq PE for the example datasets)
+>    - Option 1: Use workflows directly on [usegalaxy.eu](https://usegalaxy.eu/) from [WorkflowHub](https://workflowhub.eu)
+>      - Open the workflow page on WokflowHub
+>        - [Illumina ARTIC PE](https://workflowhub.eu/workflows/110) - The one to use for example datasets
+>        - [Illumina RNAseq SE](https://workflowhub.eu/workflows/112)
+>        - [Illumina RNAseq PE](https://workflowhub.eu/workflows/113)
+>        - [ONT ARTIC](https://workflowhub.eu/workflows/111)
+>      - Click on `Run on usegalaxy.eu` on the top right of the page
+>      
+>        The browser will open a new tab with Galaxy's workflow invocation interface.
 >
->        &#8595; Type of data / Galaxy instance &#8594; | [usegalaxy.org](https://usegalaxy.org/) | [usegalaxy.eu](https://usegalaxy.eu/) | [usegalaxy.org.au](https://usegalaxy.org.au/)
->        --- | --- | --- | ---
->        Illumina ARTIC PE (*to use for example datasets*) | [{% icon workflow %}](https://usegalaxy.org/workflows/run?id=d4ea6cdd40522eb1) | [{% icon workflow %}](https://usegalaxy.eu/workflows/run?id=2f9fa06b1a927a07) | [{% icon workflow %}](https://usegalaxy.org.au/workflows/run?id=7fd58f5fc93f414e)
->        Illumina RNAseq PE | [{% icon workflow %}](https://usegalaxy.org/workflows/run?id=5a610d5a42d50cf3) | [{% icon workflow %}](https://usegalaxy.eu/workflows/run?id=e7ba6ca41d46baf2) | [{% icon workflow %}](https://usegalaxy.org.au/workflows/run?id=bd1cf22d47389742)
->        Illumina RNAseq SE | [{% icon workflow %}](https://usegalaxy.org/workflows/run?id=c092a3631d68ce38) | [{% icon workflow %}](https://usegalaxy.eu/workflows/run?id=6b41f7afbe14647d) | [{% icon workflow %}](https://usegalaxy.org.au/workflows/run?id=31dbd313e5c8160b)
->        ONT ARTIC | [{% icon workflow %}](https://usegalaxy.org/workflows/run?id=88d0b64011c3148c) | [{% icon workflow %}](https://usegalaxy.eu/workflows/run?id=17d7f9bddbc834f8) | [{% icon workflow %}](https://usegalaxy.org.au/workflows/run?id=0c6f7bfc826433c4)
+>    - Option 2: Import the workflows of IWC (Intergalactic Workflow Commission) from WorkflowHub using the workflow search
 >
->      The browser will open a new tab with Galaxy's workflow invocation interface.
+>      {% snippet faqs/galaxy/workflows_import_search.md trs_server="workflowhub.eu" search_query='organization:"IWC Workflows"' %}
 >
->    - Option 2: Import the workflow
->
->      - Copy the URL (e.g. via right-click) of the appropriate workflow version or download it to your computer:
->        - [Illumina ARTIC PE](https://raw.githubusercontent.com/galaxyproject/iwc/main/workflows/sars-cov-2-variant-calling/sars-cov-2-pe-illumina-artic-variant-calling/pe-artic-variation.ga) (*to use for example datasets*)
->        - [Illumina RNAseq SE](https://raw.githubusercontent.com/galaxyproject/iwc/main/workflows/sars-cov-2-variant-calling/sars-cov-2-pe-illumina-artic-variant-calling/illumina_rnaseq_se.ga)
->        - [Illumina RNAseq PE](https://raw.githubusercontent.com/galaxyproject/iwc/main/workflows/sars-cov-2-variant-calling/sars-cov-2-pe-illumina-artic-variant-calling/illumina_rnaseq_pe.ga)
->        - [ONT ARTIC](https://raw.githubusercontent.com/galaxyproject/iwc/main/workflows/sars-cov-2-variant-calling/sars-cov-2-pe-illumina-artic-variant-calling/ont_artic.ga)
->        
->      - Import the workflow into Galaxy
->
->        {% snippet faqs/galaxy/workflows_import.md %}
+>      For the example dataset: COVID-19-PE-ARTIC-ILLUMINA
 >
 > 2. Run **COVID-19: variation analysis on ...** {% icon workflow %} using the following parameters:
 >
@@ -340,17 +343,15 @@ Once the jobs of previous workflow are done, we identified AVs for each sample. 
 >
 > 1. **Get the workflow** on Galaxy
 >    
->    - Option 1: Use workflow available on
->      - [usegalaxy.org](https://usegalaxy.org/workflows/run?id=2967ef82911f2cca)
->      - [usegalaxy.eu](https://usegalaxy.eu/workflows/run?id=0d10c137a0f08bca)
->      - [usegalaxy.org.au](https://usegalaxy.org.au/workflows/run?id=8e2b94c6fbf44368)
+>    - Option 1: Use workflow directly on [usegalaxy.eu](https://usegalaxy.eu/) from [WorkflowHub](https://workflowhub.eu)
+>      - Open the [workflow page on WokflowHub](https://workflowhub.eu/workflows/109)
+>      - Click on `Run on usegalaxy.eu` on the top right of the page
+>      
+>        The browser will open a new tab with Galaxy's workflow invocation interface.
 >
->    - Option 2: Import the workflow
+>    - Option 2: Import the workflow of IWC (Intergalactic Workflow Commission) from WorkflowHub using the workflow search
 >
->      - Copy the URL (e.g. via right-click) of [the workflow](https://raw.githubusercontent.com/galaxyproject/iwc/main/workflows/sars-cov-2-variant-calling/sars-cov-2-variation-reporting/variation-reporting.ga) or download it to your computer        
->      - Import the workflow into Galaxy
->
->        {% snippet faqs/galaxy/workflows_import.md %}
+>      {% snippet faqs/galaxy/workflows_import_search.md trs_server="workflowhub.eu" search_query='organization:"IWC Workflows"' workflow_name="COVID-19-VARIATION-REPORTING" %}
 >
 > 2. Run **COVID-19: variation analysis reporting** {% icon workflow %} using the following parameters:
 >
