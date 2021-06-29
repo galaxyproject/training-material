@@ -653,13 +653,13 @@ Column | Field | Meaning
 7 | `totalMissing` | Number of N characters (missing data) 
 8 | `totalMutations` | Number of mutations. Mutations are called relative to the reference sequence Wuhan-Hu-1
 9 | `totalNonACGTNs` | Number of non-ACGTN characters
-10 | `totalPcrPrimerChanges` |
+10 | `totalPcrPrimerChanges` | Total number of mutations affecting user-specified PCR primer binding sites
 11 | `substitutions` | List of mutations
 12 | `deletions` | List of deletions (positions are 1-based)
 13 | `insertions` | Insertions relative to the reference Wuhan-Hu-1 (positions are 1-based)
 14 | `missing` | Intervals consisting of N characters
 15 | `nonACGTNs` | List of positions of non-ACGTN characters (for example ambiguous nucleotide codes)
-16 | `pcrPrimerChanges` |
+16 | `pcrPrimerChanges` | Number of mutations affecting user-specified PCR primer binding sites
 17 | `aaSubstitutions` | List of aminoacid changes
 18 | `totalAminoacidSubstitutions` | Number of aminoacid changes
 19 | `aaDeletions` | List of aminoacid deletions
