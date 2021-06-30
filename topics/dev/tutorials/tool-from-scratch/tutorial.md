@@ -338,15 +338,49 @@ anyone wrapping a tool, a more complete list is available in [the Galaxy tool do
 
 ## Installing Planemo
 
-Planemo is an important tool within the Galaxy development workflow. Although it will be covered in greater detail in the 
-next section of this tutorial, one of its functions is necessary for the tool wrapper development. To that end, before beginning
-this section, please install planemo locally by running
+Planemo is an important tool within the Galaxy development workflow. Although it will be covered in greater detail in the
+next section of this tutorial, one of its functions is necessary for the tool wrapper development. `planemo` is available
+via the python package manager `pip` and `conda`. If you not have conda installed we suggest to use `pip` for installing
+`planemo`. To that end, before beginning this section, please install planemo locally by running
 
-```bash
-pip install planemo
-```
+> ### {% icon hands_on %} Hands-on: Installing `planemo` via pip
+>
+> It is advised to install `planemo` in a virtual environment (step 1-2).
+>
+> 1. Create a virtual environment: `virtualenv -p python3 ~/.venv/`. Here `~/.venv/` is the path where the virtual environment should be crated and you may adapt the path to your needs. With `-p python3` we make sure that a `python` intepreter version 3 is used.
+> 2. Activate the virtual environment: `. ~/.venv/bin/activate`
+> 3. Install `planemo` `pip install planemo`
+{: .hands_on}
 
-in whatever environment you choose to wrap your tools.
+> ### {% icon hands_on %} Hands-on: Installing `planemo` via conda
+>
+> 1. Install [miniconda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html)
+> 2. Create a conda environment with `planemo` installed `conda create -c conda-forge -c bioconda -n planemo planemo`
+> 3. Activate the conda environment `conda activate planemo`
+{: .hands_on}
+
+Note that for using `planemo`from a new shell you will need to activate the python/conda environment again.
+
+> ### {% icon hands_on %} Hands-on: Testing `planemo` and getting help
+>
+> 1. In order to test if the installation worked execute
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > planemo --version
+>    > ```
+>    {: .code-in}
+>
+>    > ### {% icon code-out %} Output
+>    > This should output the version of `planemo`, e.g.
+>    > ```bash
+>    > planemo, version 0.74.3
+>    > ```
+>    {: .code-out}
+>
+> 2. `planemo --help` will show the available commands with a short desctiption (lint, test, and serve will be part of this tutorial)
+> 3. `planemo SUBCOMMAND --help` will show the usage information for the corresponding subcommand. Try to obtain the information for the `lint` subcommand.
+{: .hands_on}
 
 ## Initializing a Tool Wrapper
 
@@ -1003,52 +1037,8 @@ Among many other tasks it can:
 
 For more information on `planemo` see its extensive [documentation](https://planemo.readthedocs.io/).
 
-In this part of the tutorial we will start with installing `planemo` and then
+In this part of the tutorial we will be looking at `planemo` and
 see it in action linting, testing, and serving the tool.
-
-## Installing `planemo`
-
-`planemo` is available via the python package manager `pip` and `conda`.
-If you not have conda installed we suggest to use `pip` for installing `planemo`.
-
-> ### {% icon hands_on %} Hands-on: Installing `planemo` via pip
->
-> It is advised to install `planemo` in a virtual environment (step 1-2).
->
-> 1. Create a virtual environment: `virtualenv -p python3 ~/.venv/`. Here `~/.venv/` is the path where the virtual environment should be crated and you may adapt the path to your needs. With `-p python3` we make sure that a `python` intepreter version 3 is used.
-> 2. Activate the virtual environment: `. ~/.venv/bin/activate`
-> 3. Install `planemo` `pip install planemo`
-{: .hands_on}
-
-> ### {% icon hands_on %} Hands-on: Installing `planemo` via conda
->
-> 1. Install [miniconda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html)
-> 2. Create a conda environment with `planemo` installed `conda create -c conda-forge -c bioconda -n planemo planemo`
-> 3. Activate the conda environment `conda activate planemo`
-{: .hands_on}
-
-Note that for using `planemo`from a new shell you will need to activate the python/conda environment again.
-
-> ### {% icon hands_on %} Hands-on: Testing `planemo` and getting help
->
-> 1. In order to test if the installation worked execute
->
->    > ### {% icon code-in %} Input: Bash
->    > ```bash
->    > planemo --version
->    > ```
->    {: .code-in}
->
->    > ### {% icon code-out %} Output
->    > This should output the version of `planemo`, e.g.
->    > ```bash
->    > planemo, version 0.74.3
->    > ```
->    {: .code-out}
->
-> 2. `planemo --help` will show the available commands with a short desctiption (lint, test, and serve will be part of this tutorial)
-> 3. `planemo SUBCOMMAND --help` will show the usage information for the corresponding subcommand. Try to obtain the information for the `lint` subcommand.
-{: .hands_on}
 
 ## Using `planemo` to lint tools
 
