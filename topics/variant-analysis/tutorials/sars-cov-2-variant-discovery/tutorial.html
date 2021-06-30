@@ -1,0 +1,2299 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Genetic differences (variants) between healthy and diseas..." />
+        <meta property="og:title" content="Galaxy Training: Mutation calling, viral genome reconstruction and lineage..." />
+        <meta property="og:description" content="Genetic differences (variants) between healthy and diseas..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/variant-analysis" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Variant Analysis
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/variant-analysis/faqs/" title="Check our FAQs for the Variant Analysis topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fvariant-analysis%2Ftutorials%2Fsars-cov-2-variant-discovery%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-04-01/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html" title="Version 2021-04-01">2021-04-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                    -->
+
+                     <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/main/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Variant Analysis",
+    "description": "Genetic differences (variants) between healthy and diseased tissue,\nbetween individuals of a population, or between strains of an organism\ncan provide mechanistic insight into disease processes and the natural\nfunction of affected genes.\n\nThe tutorials in this section show how to detect evidence for\ngenetic variants in next-generation sequencing data, a process termed\nvariant calling.\n\nOf equal importance, they also demonstrate how you can interpret, for\na range of different organisms, the resulting sets of variants by\npredicting their molecular effects on genes and proteins, by\nannotating previously observed variants with published knowledge, and\nby trying to link phenotypes of the sequenced samples to their variant\ngenotypes.\n",
+    "url": "https://training.galaxyproject.org//training-material/topics/variant-analysis/"
+  },
+  "courseCode": "variant-analysis / sars-cov-2-variant-discovery / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html",
+  "timeRequired": "PT3H",
+  "keywords": "covid19",
+  "description": "The questions this  addresses are:\n - How can we extract annotated allelic variants in SARS-Cov-2 sequences in Galaxy?\n - Which tools and workflows can we use to identify SARS-CoV-2 lineages in Galaxy?\n\n\\nThe objectives are:\n - Repeat SARS-CoV-2 data preparation\n - Select and run workflow to extract annotated allelic variants from FASTQ files\n - Run workflow to summarize and generate report for previously called allelic variants\n - Interpret summaries for annotated allelic variants\n - Run workflow to extract consensus sequences\n - Select and run tools to assign clades/lineages\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
+      "name": "Mapping",
+      "description": "Hands-on for 'Mapping' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Wolfgang Maier"
+    },
+    {
+      "@type": "Person",
+      "name": "Bérénice Batut"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Wolfgang Maier"
+    },
+    {
+      "@type": "Person",
+      "name": "Bérénice Batut"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Variant Analysis",
+      "description": "Genetic differences (variants) between healthy and diseased tissue,\nbetween individuals of a population, or between strains of an organism\ncan provide mechanistic insight into disease processes and the natural\nfunction of affected genes.\n\nThe tutorials in this section show how to detect evidence for\ngenetic variants in next-generation sequencing data, a process termed\nvariant calling.\n\nOf equal importance, they also demonstrate how you can interpret, for\na range of different organisms, the resulting sets of variants by\npredicting their molecular effects on genes and proteins, by\nannotating previously observed variants with published knowledge, and\nby trying to link phenotypes of the sequenced samples to their variant\ngenotypes.\n",
+      "url": "https://training.galaxyproject.org//training-material/topics/variant-analysis/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0199",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0199",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0199"
+    }
+  ],
+  "skillLevel": "Intermediate"
+}
+    </script>
+
+    <section class="tutorial topic-variant-analysis">
+        <h1 data-toc-skip>Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data</h1>
+        
+
+        <div class="contributors-line">By: 
+
+ <a href="/training-material/hall-of-fame/wm75/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/wm75" alt="Wolfgang Maier">Wolfgang Maier</a> <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Bérénice Batut">Bérénice Batut</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How can we extract annotated allelic variants in SARS-Cov-2 sequences in Galaxy?</p>
+</li>
+            
+            <li><p>Which tools and workflows can we use to identify SARS-CoV-2 lineages in Galaxy?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Repeat SARS-CoV-2 data preparation</p>
+</li>
+            
+            <li><p>Select and run workflow to extract annotated allelic variants from FASTQ files</p>
+</li>
+            
+            <li><p>Run workflow to summarize and generate report for previously called allelic variants</p>
+</li>
+            
+            <li><p>Interpret summaries for annotated allelic variants</p>
+</li>
+            
+            <li><p>Run workflow to extract consensus sequences</p>
+</li>
+            
+            <li><p>Select and run tools to assign clades/lineages</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/sequence-analysis">Sequence analysis</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Quality Control:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                
+                    
+                        
+                            
+                            <li> Mapping:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/mapping/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 3 hours</div>
+            
+
+            
+            <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
+             Intermediate 
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+</span>
+
+</div>
+            
+
+            
+            
+
+            
+            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/variant-analysis/slides/introduction.html" title="Topic Overview slides">
+                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Topic Overview slides
+                    </a></li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://zenodo.org/record/5036687">
+    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+</li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/workflows/" title="Workflows" alt="Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+</li>
+                
+
+                
+
+                
+                
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/variant-analysis/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 30, 2021 </div>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Effectively monitoring global infectious disease crises, such as the COVID-19 pandemic, requires capacity to generate and analyze large volumes of sequencing data in near real time. These data have proven essential for monitoring the emergence and spread of new variants, and for understanding the evolutionary dynamics of the virus.</p>
+
+<p>Two sequencing platforms in combination with several established library preparation strategies are predominantly used to generate SARS-CoV-2 sequence data. However, data alone do not equal knowledge: they need to be analyzed. The <span class="notranslate">Galaxy</span> community has developed high-quality analysis workflows to support</p>
+
+<ul>
+  <li>sensitive identification of SARS-CoV-2 allelic variants (AVs) starting with allele frequencies as low as 5% from deep sequencing <span class="notranslate">reads</span></li>
+  <li>generation of user-friendly reports for batches of results</li>
+  <li>reliable and configurable consensus genome generation from called variants</li>
+</ul>
+
+<blockquote class="details">
+  <h3 id="details-further-reading"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Further reading</h3>
+  <p>More information about the workflows, including benchmarking, can be found at
+<a href="https://covid19.galaxyproject.org/">covid19.<span class="notranslate">galaxy</span>project.org</a>.</p>
+</blockquote>
+
+<p>This tutorial will teach you how to obtain, run and combine these workflows appropriately for different types of input data, be it:</p>
+
+<ul>
+  <li>Single-end data derived from Illumina-based <span class="notranslate">RNA</span>seq experiments</li>
+  <li>Paired-end data derived from Illumina-based <span class="notranslate">RNA</span>seq experiments</li>
+  <li>Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols, or</li>
+  <li>ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols</li>
+</ul>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#prepare-galaxy-and-data" id="markdown-toc-prepare-galaxy-and-data">Prepare <span class="notranslate">Galaxy</span> and data</a>    <ol>
+      <li><a href="#get-sequencing-data" id="markdown-toc-get-sequencing-data">Get sequencing data</a></li>
+      <li><a href="#import-auxiliary-datasets" id="markdown-toc-import-auxiliary-datasets">Import auxiliary datasets</a></li>
+    </ol>
+  </li>
+  <li><a href="#from-fastq-to-annotated-allelic-variants" id="markdown-toc-from-fastq-to-annotated-allelic-variants">From FASTQ to annotated allelic variants</a></li>
+  <li><a href="#from-annotated-avs-per-sample-to-av-summary" id="markdown-toc-from-annotated-avs-per-sample-to-av-summary">From annotated AVs per sample to AV summary</a></li>
+  <li><a href="#from-avs-to-consensus-sequences" id="markdown-toc-from-avs-to-consensus-sequences">From AVs to consensus sequences</a></li>
+  <li><a href="#from-consensus-sequences-to-cladelineage-assignments" id="markdown-toc-from-consensus-sequences-to-cladelineage-assignments">From consensus sequences to clade/lineage assignments</a>    <ol>
+      <li><a href="#with-pangolin" id="markdown-toc-with-pangolin">With Pangolin</a></li>
+      <li><a href="#with-nextclade" id="markdown-toc-with-nextclade">With Nextclade</a></li>
+      <li><a href="#comparison-between-pangolin-and-nextclade-clade-assignations" id="markdown-toc-comparison-between-pangolin-and-nextclade-clade-assignations">Comparison between Pangolin and Nextclade clade assignations</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="prepare-galaxy-and-data">Prepare <span class="notranslate">Galaxy</span> and data</h1>
+
+<p>Any analysis should get their own <span class="notranslate">Galaxy</span> history. So let’s start by creating a new one:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-prepare-the-galaxy-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Prepare the <span class="notranslate">Galaxy</span> history</h3>
+
+  <ol>
+    <li>
+      <p>Create a new history for this analysis</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>  <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>  <li>Select the option <strong>Create New</strong> from the menu</li></ol></blockquote>
+    </li>
+    <li>
+      <p>Rename the history</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history</h3>  <ol>  <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>  <li>Type the new name</li>  <li>Press <kbd>Enter</kbd></li></ol></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="get-sequencing-data">Get sequencing data</h2>
+
+<p>Before we can begin any <span class="notranslate">Galaxy</span> analysis, we need to upload the input data: FASTQ files with the sequenced viral <span class="notranslate">RNA</span> from different patients infected with SARS-COV-2. Several types of data are possible:</p>
+
+<ul>
+  <li>Single-end data derived from Illumina-based <span class="notranslate">RNA</span>seq experiments</li>
+  <li>Paired-end data derived from Illumina-based <span class="notranslate">RNA</span>seq experiments</li>
+  <li>Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols</li>
+  <li>ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols</li>
+</ul>
+
+<p>We encourage you to use your own data there (with at least 2 samples). If you do not have any datasets available, we provide some example datasets (paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols) from <a href="https://www.cogconsortium.uk/">COG-UK</a>, the COVID-19 Genomics UK Consortium.</p>
+
+<p>There are several possibilities to upload the data depending on how many datasets you have and what their origin is:</p>
+
+<ul>
+  <li>
+    <p>Import datasets (from your local file system, from a given URL or from a shared data library) and organize them as a dataset collection.</p>
+
+    <p>A dataset collection is a way to represent an arbitrarily large collection of samples as a singular entity within a user’s workspace.</p>
+  </li>
+  <li>
+    <p>Import from <a href="https://www.ncbi.nlm.nih.gov/sra">NCBI’s Sequence Read Archive (SRA) at NCBI</a></p>
+
+    <blockquote class="comment">
+      <h3 id="comment-getting-data-from-sra"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Getting data from SRA</h3>
+
+      <p><a href="/training-material/topics/variant-analysis/tutorials/sars-cov-2/tutorial.html">A dedicated tutorial is available to explain how to find and import SARS-CoV-2 data from SRA</a>.</p>
+
+    </blockquote>
+  </li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-import-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Import datasets</h3>
+
+  <ol>
+    <li>
+      <p>Import the datasets</p>
+
+      <ul>
+        <li>
+          <p>Option 1: From your own local data using <strong>Upload Data</strong> (recommended for 1-10 datasets)</p>
+
+          <!--SNIPPET-->
+          <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-upload-few-files-1-10"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Upload few files (1-10)</h3>  <ol>  <li>Click on <strong>Upload Data</strong> on the top of the left panel</li>  <li>Click on <strong>Choose local file</strong> and select the files or drop the files in the <strong>Drop files here</strong> part</li>  <li>Click on <strong>Start</strong></li>  <li>Click on <strong>Close</strong></li></ol></blockquote>
+        </li>
+        <li>
+          <p>Option 2: From your own local data using <strong>FTP</strong> (recommended for &gt;10 datasets)</p>
+
+          <!--SNIPPET-->
+          <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-upload-many-files-10-via-ftp"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Upload many files (&gt;10) via FTP</h3>  <ol>  <li>    <p>Make sure to have an FTP client installed</p>    <p>There are many options. We can recommend <a href="https://filezilla-project.org/">FileZilla</a>, a free FTP client that is available on Windows, MacOS, and Linux.</p>  </li>  <li>Establish FTP connection to the <span class="notranslate">Galaxy</span> server    <ol>      <li>Provide the <span class="notranslate">Galaxy</span> server’s FTP server name (e.g. <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>.org</code>, <code class="language-plaintext highlighter-rouge">ftp.use<span class="notranslate">galaxy</span>.eu</code>)</li>      <li>Provide the <strong>use<span class="notranslate">rna</span>me</strong> (usually the email address) and the <strong>password</strong> on the <span class="notranslate">Galaxy</span> server</li>      <li>Connect</li>    </ol>  </li>  <li>    <p>Add the files to the FTP server by dragging/dropping them or right clicking on them and uploading them</p>    <p>The FTP transfer will start. We need to wait until they are done.</p>  </li>  <li>Open the Upload menu on the <span class="notranslate">Galaxy</span> server</li>  <li>Click on <strong>Choose FTP file</strong> on the bottom</li>  <li>Select files to import into the history</li>  <li>Click on <strong>Start</strong></li></ol></blockquote>
+        </li>
+        <li>
+          <p>Option 3: From the shared data library</p>
+
+          <!--SNIPPET-->
+          <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>  <li>    <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>  </li>  <li>    <p>Find the correct folder (ask your instructor)</p>  </li>  <li>Select the desired files</li>  <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>  <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>  <li>Click on <strong>Import</strong></li></ul></blockquote>
+
+          <p>For our example datasets, the 36 <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> files (representing 18 samples) in folder <code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">Variant analysis</code> -&gt; <code class="language-plaintext highlighter-rouge">Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data</code></p>
+        </li>
+        <li>
+          <p>Option 4: From an exte<span class="notranslate">rna</span>l server via URL</p>
+
+          <!--SNIPPET-->
+          <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li>    <p><strong>Close</strong> the window</p>  </li>  <li>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li></ul></blockquote>
+
+          <p>For our example datasets, the datasets are stored on <a href="https://zenodo.org/record/5036687">Zenodo</a> and can be retrieved using the following URLs:</p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/5036687/ERR5931005_1.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5931005_2.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5931006_1.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5931006_2.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5931007_1.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5931007_2.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5931008_1.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5931008_2.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949456_1.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949456_2.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949457_1.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949457_2.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949458_1.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949458_2.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949459_1.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949459_2.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949460_1.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949460_2.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949461_1.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949461_2.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949462_1.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949462_2.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949463_1.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949463_2.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949464_1.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949464_2.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949465_1.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949465_2.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949466_1.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949466_2.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949467_1.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949467_2.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949468_1.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949468_2.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949469_1.fastqsanger.gz
+https://zenodo.org/record/5036687/ERR5949469_2.fastqsanger.gz
+</code></pre></div>          </div>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Create a collection to organize the data</p>
+
+      <ul>
+        <li>
+          <p>Option 1: Single-end data (Illumina or ONT data)</p>
+
+          <!--SNIPPET-->
+          <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-dataset-collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a dataset collection</h3>  <ul>  <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>  <li>Check all the datasets in your history you would like to include</li>  <li>    <p>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong></p>    <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>  </li>  <li>Enter a name for your collection</li>  <li>Click <strong>Create List</strong> to build your collection</li>  <li>Click on the checkmark icon at the top of your history again</li></ul></blockquote>
+        </li>
+        <li>
+          <p>Option 2: Paired-end data (Illumina data)</p>
+
+          <!--SNIPPET-->
+          <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-paired-collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a paired collection</h3>  <ul>  <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>  <li>Check all the datasets in your history you would like to include</li>  <li>    <p>Click <strong>For all selected..</strong> and choose <strong>Build List of Dataset Pairs</strong></p>  </li>  <li>Change the text of <em>unpaired forward</em> to a common selector for the forward <span class="notranslate">reads</span></li>  <li>Change the text of <em>unpaired reverse</em> to a common selector for the reverse <span class="notranslate">reads</span></li>  <li>Click <strong>Pair these datasets</strong> for each valid <em>forward</em> and <em>reverse</em> pair.</li>  <li>Enter a name for your collection</li>  <li>Click <strong>Create List</strong> to build your collection</li>  <li>Click on the checkmark icon at the top of your history again</li></ul></blockquote>
+
+          <p>For example datasets:</p>
+          <ul>
+            <li>As datasets with <code class="language-plaintext highlighter-rouge">_1</code> contain the forward <span class="notranslate">reads</span> and datasets with <code class="language-plaintext highlighter-rouge">_2</code> the reverse <span class="notranslate">reads</span>, we need to select:
+              <ul>
+                <li>text of unpaired forward: <code class="language-plaintext highlighter-rouge">_1</code></li>
+                <li>text of unpaired forward: <code class="language-plaintext highlighter-rouge">_2</code></li>
+              </ul>
+            </li>
+            <li>We can remove <code class="language-plaintext highlighter-rouge">fastqsanger</code> if it appears in the names of the pairs</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-learning-to-build-collections-automatically"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Learning to build collections automatically</h3>
+
+  <p>It is possible to build collections from tabular data containing URLs, sample sheets, list of accessions or identifiers, etc. <a href="/training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html">A dedicated tutorial is available to explain the different possibilities</a>.</p>
+
+</blockquote>
+
+<h2 id="import-auxiliary-datasets">Import auxiliary datasets</h2>
+
+<p>For calling variants and annotating them, we need at least two additional datasets:</p>
+
+<ul>
+  <li>
+    <p>the SARS-CoV-2 reference sequence <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_045512.2?report=fasta">NC_045512.2</a> to align and compare our sequencing data against</p>
+  </li>
+  <li>
+    <p>a tabular dataset defining aliases for viral gene product names, which will let us translate NCBI RefSeq Protein identifiers (used by the snpEff annotation tool) to the commonly used names of coronavirus proteins and cleavage products.</p>
+  </li>
+</ul>
+
+<p>Another two datasets are needed for the analysis of ampliconic, e.g. ARTIC-amplified, input data :</p>
+
+<ul>
+  <li>a <span class="notranslate">BED</span> file specifying the primers used during amplification and their binding sites on the viral genome</li>
+  <li>a custom tabular file describing the amplicon grouping of the primers</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-import-auxiliary-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Import auxiliary datasets</h3>
+
+  <ol>
+    <li>Import the auxiliary datasets:
+      <ul>
+        <li>the SARS-CoV-2 reference (<code class="language-plaintext highlighter-rouge">NC_045512.2_reference.fasta</code>)</li>
+        <li>gene product name aliases (<code class="language-plaintext highlighter-rouge">NC_045512.2_feature_<span class="notranslate">mapping</span>.tsv</code>)</li>
+        <li>ARTIC v3 primer scheme (<code class="language-plaintext highlighter-rouge">ARTIC_nCoV-2019_v3.<span class="notranslate">bed</span></code>)</li>
+        <li>ARTIC v3 primer amplicon grouping info (<code class="language-plaintext highlighter-rouge">ARTIC_amplicon_info_v3.tsv</code>)</li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-not-using-artic-v3-amplified-sequencing-data"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Not using ARTIC v3 amplified sequencing data?</h3>
+
+        <p>The instructions here assume you will be analyzing the example samples
+suggested above, which have been amplified using version 3 of the ARTIC
+network’s SARS-CoV-2 primer set. If you have decided to work through
+this tutorial using your own samples of interest, and if those samples
+have been amplified with a different primer set, you will have to upload
+your own datasets with primer and amplicon information at this point.
+If the primer set is from the ARTIC network, just not version 3, you
+should be able to obtain the primer <span class="notranslate">BED</span> file from
+<a href="https://github.com/artic-network/artic-ncov2019/tree/master/primer_schemes/nCoV-2019">their SARS-CoV-2 github repo</a>.
+Look for a 6-column <span class="notranslate">BED</span> file structured like the version 3 one we suggest below.
+For the tabular amplicon info file, you only need to combine all primer names from
+the <span class="notranslate">BED</span> file that contribute to the same amplicon on a single tab-separated line.
+The result should look similar to the ARTIC v3 amplicon grouping info file we
+suggest to upload.</p>
+      </blockquote>
+
+      <p>Several options exist to import these datasets:</p>
+
+      <ul>
+        <li>
+          <p>Option 1: From the shared data library (in folder <code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">Variant analysis</code> -&gt; <code class="language-plaintext highlighter-rouge">Identification of allelic variants in SARS-CoV-2 from deep sequencing <span class="notranslate">reads</span></code>)</p>
+
+          <!--SNIPPET-->
+          <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>  <li>    <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>  </li>  <li>    <p>Find the correct folder (ask your instructor)</p>  </li>  <li>Select the desired files</li>  <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>  <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>  <li>Click on <strong>Import</strong></li></ul></blockquote>
+        </li>
+        <li>
+          <p>Option 2: From <a href="https://zenodo.org/record/5036687">Zenodo</a></p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/5036687/NC_045512.2_reference.fasta
+https://zenodo.org/record/5036687/NC_045512.2_feature_<span class="notranslate">mapping</span>.tsv
+https://zenodo.org/record/5036687/ARTIC_nCoV-2019_v3.<span class="notranslate">bed</span>
+https://zenodo.org/record/5036687/ARTIC_amplicon_info_v3.tsv
+</code></pre></div>          </div>
+
+          <!--SNIPPET-->
+          <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li>    <p><strong>Close</strong> the window</p>  </li>  <li>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li></ul></blockquote>
+        </li>
+        <li>
+          <p>Option 3: From a shared history:</p>
+          <ul>
+            <li>On <a href="https://usegalaxy.org/u/aun1/h/artic-v3">use<span class="notranslate">galaxy</span>.org</a></li>
+            <li>On <a href="https://usegalaxy.eu/u/nekrut/h/artic-v3">use<span class="notranslate">galaxy</span>.eu</a></li>
+            <li>On <a href="https://usegalaxy.org.au/u/nekrut/h/artic-v3">use<span class="notranslate">galaxy</span>.org.au</a></li>
+          </ul>
+
+          <!--SNIPPET-->
+          <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-import-an-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Import an history</h3>  <ol>  <li>Open the link to the shared history</li>  <li>Click on the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> <em>Import history</em> button on the top right</li>  <li>Enter a title for the new history</li>  <li>Click on <strong>Import</strong></li></ol></blockquote>
+        </li>
+      </ul>
+
+      <p>For the example datasets, the 4 auxiliary datasets need to be imported.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="from-fastq-to-annotated-allelic-variants">From FASTQ to annotated allelic variants</h1>
+
+<p>To identify the SARS-CoV-2 allelic variants (AVs), a first <span class="notranslate">workflow</span> converts the FASTQ files to annotated AVs through a series of steps that include quality control, trimming, <span class="notranslate">mapping</span>, deduplication, AV calling, and filtering.</p>
+
+<p>Four versions of this <span class="notranslate">workflow</span> are available with their tools and parameters optimized for different types of input data as outlined in the following table:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><span class="notranslate">Workflow</span> version</th>
+      <th>Input data</th>
+      <th>Read aligner</th>
+      <th>Variant caller</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Illumina <span class="notranslate">RNA</span>seq SE</td>
+      <td>Single-end data derived from <span class="notranslate">RNA</span>seq experiments</td>
+      <td><strong>bowtie2</strong> (missing reference)</td>
+      <td><strong>lofreq</strong> <a class="citation" href="#wilm_2012">Wilm <i>et al.</i> 2012</a></td>
+    </tr>
+    <tr>
+      <td>Illumina <span class="notranslate">RNA</span>seq PE</td>
+      <td>Paired-end data derived from <span class="notranslate">RNA</span>seq experiments</td>
+      <td><strong>bwa-mem</strong> <a class="citation" href="#li_2010">Li and Durbin 2010</a></td>
+      <td><strong>lofreq</strong> <a class="citation" href="#wilm_2012">Wilm <i>et al.</i> 2012</a></td>
+    </tr>
+    <tr>
+      <td>Illumina ARTIC</td>
+      <td>Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols</td>
+      <td><strong>bwa-mem</strong> <a class="citation" href="#li_2010">Li and Durbin 2010</a></td>
+      <td><strong>lofreq</strong> <a class="citation" href="#wilm_2012">Wilm <i>et al.</i> 2012</a></td>
+    </tr>
+    <tr>
+      <td>ONT ARTIC</td>
+      <td>ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols</td>
+      <td><strong>minimap2</strong> <a class="citation" href="#li_2018">Li 2018</a></td>
+      <td><strong>medaka</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="details">
+  <h3 id="details-about-the-workflows"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> About the workflows</h3>
+
+  <ul>
+    <li>The two Illumina <span class="notranslate">RNA</span>Seq workflows (Illumina <span class="notranslate">RNA</span>seq SE and Illumina <span class="notranslate">RNA</span>seq PE) perform read <span class="notranslate">mapping</span> with <strong>bwa-mem</strong> and <strong>bowtie2</strong>, respectively, followed by sensitive allelic-variant (AV) calling across a wide range of AFs with <strong>lofreq</strong>.</li>
+    <li>The <span class="notranslate">workflow</span> for Illumina-based ARTIC data (Illumina ARTIC) builds on the <span class="notranslate">RNA</span>Seq <span class="notranslate">workflow</span> for paired-end data using the same steps for <span class="notranslate">mapping</span> (<strong>bwa-mem</strong>) and AV calling (<strong>lofreq</strong>), but adds extra logic operators for trimming ARTIC primer sequences off <span class="notranslate">reads</span> with the <strong>ivar</strong> package. In addition, this <span class="notranslate">workflow</span> uses <strong>ivar</strong> also to identify amplicons affected by ARTIC primer-binding site mutations and excludes <span class="notranslate">reads</span> derived from such “tainted” amplicons when calculating alte<span class="notranslate">rna</span>tive allele frequences (AFs) of other AVs.</li>
+    <li>The <span class="notranslate">workflow</span> for ONT-sequenced ARTIC data (ONT ARTIC) is modeled after the alignment/AV-calling steps of the <a href="https://artic.readthedocs.io/">ARTIC pipeline</a>. It performs, essentially, the same steps as that pipeline’s minion command, i.e. read <span class="notranslate">mapping</span> with <strong>minimap2</strong> and AV calling with <strong>medaka</strong>. Like the Illumina ARTIC <span class="notranslate">workflow</span> it uses <strong>ivar</strong> for primer trimming. Since ONT-sequenced <span class="notranslate">reads</span> have a much higher error rate than Illumina-sequenced <span class="notranslate">reads</span> and are therefore plagued more by false-positive AV calls, this <span class="notranslate">workflow</span> makes no attempt to handle amplicons affected by potential primer-binding site mutations.</li>
+  </ul>
+
+  <p>All four workflows use <strong>SnpEff</strong>, specifically its 4.5covid19 version, for AV annotation.</p>
+
+  <p>Workflows default to requiring an AF ≥ 0.05 and AV-supporting <span class="notranslate">reads</span> of ≥ 10 (these and all other parameters can be easily changed by the user). For an AV to be listed in the reports, it must surpass these thresholds in at least one sample of the respective dataset. We estimate that for AV calls with an AF ≥ 0.05, our analyses have a false-positive rate of &lt; 15% for both Illumina <span class="notranslate">RNA</span>seq and Illumina ARTIC data, while the true-positive rate of calling such low-frequency AVs is ~80% and approaches 100% for AVs with an AF ≥ 0.15. This estimate is based on an initial application of the Illumina <span class="notranslate">RNA</span>seq and Illumina ARTIC workflows to two samples for which data of both types had been obtained at the virology department of the University of Freiburg and the assumption that AVs supported by both sets of sequencing data are true AVs. The second threshold of 10 AV-supporting <span class="notranslate">reads</span> is applied to ensure that calculated AFs are sufficiently precise for all AVs.</p>
+
+  <p>More details about the workflows, including benchmarking of the tools, can be found on <a href="https://covid19.galaxyproject.org/genomics/global_platform/#methods">covid19.<span class="notranslate">galaxy</span>project.org</a></p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-from-fastq-to-annotated-avs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: From FASTQ to annotated AVs</h3>
+
+  <ol>
+    <li>
+      <p><strong>Get the <span class="notranslate">workflow</span></strong> on <span class="notranslate">Galaxy</span></p>
+
+      <ul>
+        <li>
+          <p>Option 1: Use workflows directly on <a href="https://usegalaxy.eu/">use<span class="notranslate">galaxy</span>.eu</a> from <a href="https://workflowhub.eu">WorkflowHub</a></p>
+
+          <ul>
+            <li>Open the <span class="notranslate">workflow</span> page on the WorkflowHub
+              <ul>
+                <li><a href="https://workflowhub.eu/workflows/110">Illumina ARTIC PE</a> - The one to use for example datasets</li>
+                <li><a href="https://workflowhub.eu/workflows/112">Illumina <span class="notranslate">RNA</span>seq SE</a></li>
+                <li><a href="https://workflowhub.eu/workflows/113">Illumina <span class="notranslate">RNA</span>seq PE</a></li>
+                <li><a href="https://workflowhub.eu/workflows/111">ONT ARTIC</a></li>
+              </ul>
+            </li>
+            <li>
+              <p>Click on <code class="language-plaintext highlighter-rouge">Run on use<span class="notranslate">galaxy</span>.eu</code> on the top right of the page</p>
+
+              <p>The browser will open a new tab with <span class="notranslate">Galaxy</span>’s <span class="notranslate">workflow</span> invocation interface.</p>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <p>Option 2: Import the workflows of IWC (Intergalactic <span class="notranslate">Workflow</span> Commission) from <a href="https://dockstore.org/">Dockstore</a> using the <span class="notranslate">workflow</span> search</p>
+
+          <!--SNIPPET-->
+          <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-a-workflow-using-the-search"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a <span class="notranslate">workflow</span> using the search</h3>  <ul>  <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>  <li>Click on the <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> <strong>Import</strong> icon at the top-right of the screen</li>  <li>    <p>Click on <strong>search form</strong> in <strong>Import a <span class="notranslate">Workflow</span> from Configured GA4GH Tool Registry Servers (e.g. Dockstore)</strong></p>  </li>  <li>    <p>Select <em>“TRS Server”</em>: <code class="language-plaintext highlighter-rouge">Dockstore</code></p>  </li>  <li>    <p>Type <code class="language-plaintext highlighter-rouge">organization:"iwc-workflows"</code> in the search query</p>  </li>  <li>    <p>Expand the correct <span class="notranslate">workflow</span></p>  </li>  <li>    <p>Click on the wanted version</p>    <p>The <span class="notranslate">workflow</span> will be imported in your workflows</p>  </li></ul></blockquote>
+
+          <p>For the example dataset: <code class="language-plaintext highlighter-rouge">sars-cov-2-pe-illumina-artic-variant-calling/COVID-19-PE-ARTIC-ILLUMINA</code></p>
+        </li>
+        <li>
+          <p>Option 3: Import the <span class="notranslate">workflow</span> directly from IWC into <span class="notranslate">Galaxy</span></p>
+
+          <ul>
+            <li>Open the <span class="notranslate">workflow</span> GitHub repository
+              <ul>
+                <li><a href="https://github.com/iwc-workflows/sars-cov-2-pe-illumina-artic-variant-calling">Illumina ARTIC PE</a> - The one to use for example datasets</li>
+                <li><a href="https://github.com/iwc-workflows/sars-cov-2-se-illumina-wgs-variant-calling">Illumina <span class="notranslate">RNA</span>seq SE</a></li>
+                <li><a href="https://github.com/iwc-workflows/sars-cov-2-pe-illumina-wgs-variant-calling">Illumina <span class="notranslate">RNA</span>seq PE</a></li>
+                <li><a href="https://github.com/iwc-workflows/sars-cov-2-ont-artic-variant-calling">ONT ARTIC</a></li>
+              </ul>
+            </li>
+            <li>Open the <code class="language-plaintext highlighter-rouge">.ga</code> file</li>
+            <li>Click on <code class="language-plaintext highlighter-rouge">Raw</code> on the top right of the file</li>
+            <li>Save the file or Copy the URL of the file</li>
+            <li>
+              <p>Import the <span class="notranslate">workflow</span> to <span class="notranslate">Galaxy</span></p>
+
+              <!--SNIPPET-->
+              <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-a-workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a <span class="notranslate">workflow</span></h3>  <ul>  <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>  <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> at the top-right of the screen</li>  <li>Provide your <span class="notranslate">workflow</span>    <ul>      <li>Option 1: Paste the URL of the <span class="notranslate">workflow</span> into the box labelled <em>“Archived <span class="notranslate">Workflow</span> URL”</em></li>      <li>Option 2: Upload the <span class="notranslate">workflow</span> file in the box labelled <em>“Archived <span class="notranslate">Workflow</span> File”</em></li>    </ul>  </li>  <li>Click the <strong>Import <span class="notranslate">workflow</span></strong> button</li></ul></blockquote>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Run <strong>COVID-19: variation analysis on …</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span></span> using the following parameters:</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-running-a-workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a <span class="notranslate">workflow</span></h3>  <ul>  <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>  <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> (<em>Run <span class="notranslate">workflow</span></em>) button next to your <span class="notranslate">workflow</span></li>  <li>Configure the <span class="notranslate">workflow</span> as needed</li>  <li>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen</li>  <li>You may have to refresh your history to see the queued jobs</li></ul></blockquote>
+
+      <ul>
+        <li>
+          <p><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></p>
+        </li>
+        <li>For <strong>Illumina ARTIC PE</strong> <span class="notranslate">workflow</span> (named <strong>COVID-19: variation analysis on ARTIC PE data</strong>),  <em>to use for example datasets</em>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: ARTIC primers to amplicon assignments”</em>: <code class="language-plaintext highlighter-rouge">ARTIC_amplicon_info_v3.tsv</code> or <code class="language-plaintext highlighter-rouge">ARTIC amplicon info v3</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2: ARTIC primer <span class="notranslate">BED</span>”</em>: <code class="language-plaintext highlighter-rouge">ARTIC_nCoV-2019_v3.<span class="notranslate">bed</span></code> or <code class="language-plaintext highlighter-rouge">ARTIC nCoV-2019 v3</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“3: FASTA sequence of SARS-CoV-2”</em>: <code class="language-plaintext highlighter-rouge">NC_045512.2_reference.fasta</code> or <code class="language-plaintext highlighter-rouge">NC_045512.2 reference sequence</code></li>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“4: Paired Collection (fastqsanger) - A paired collection of fastq datasets to call variant from”</em>: paired collection created for the input datasets</li>
+          </ul>
+        </li>
+        <li>For <strong>Illumina <span class="notranslate">RNA</span>seq PE</strong> <span class="notranslate">workflow</span> (named <strong>COVID-19: variation analysis on WGS PE data</strong>)
+          <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“1: Paired Collection (fastqsanger)”</em>: paired collection created for the input datasets</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2: NC_045512.2 FASTA sequence of SARS-CoV-2”</em>: <code class="language-plaintext highlighter-rouge">NC_045512.2_reference.fasta</code> or <code class="language-plaintext highlighter-rouge">NC_045512.2 reference sequence</code></li>
+          </ul>
+        </li>
+        <li>For <strong>Illumina <span class="notranslate">RNA</span>seq PE</strong> <span class="notranslate">workflow</span> (named <strong>COVID-19: variation analysis on WGS SE data</strong>)
+          <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“1: Input dataset collection”</em>: dataset collection created for the input datasets</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2: NC_045512.2 FASTA sequence of SARS-CoV-2”</em>: <code class="language-plaintext highlighter-rouge">NC_045512.2_reference.fasta</code> or <code class="language-plaintext highlighter-rouge">NC_045512.2 reference sequence</code></li>
+          </ul>
+        </li>
+        <li>For <strong>ONT ARTIC</strong> <span class="notranslate">workflow</span> (named <strong>COVID-19: variation analysis of ARTIC ONT data</strong>)
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: ARTIC primer <span class="notranslate">BED</span>”</em>: <code class="language-plaintext highlighter-rouge">ARTIC_nCoV-2019_v3.<span class="notranslate">bed</span></code> or <code class="language-plaintext highlighter-rouge">ARTIC nCoV-2019 v3</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2: FASTA sequence of SARS-CoV-2”</em>: <code class="language-plaintext highlighter-rouge">NC_045512.2_reference.fasta</code> or <code class="language-plaintext highlighter-rouge">NC_045512.2 reference sequence</code></li>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“3: Collection of ONT-sequenced <span class="notranslate">reads</span>”</em>: dataset collection created for the input datasets</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>The execution of the <span class="notranslate">workflow</span> takes some time. It is possible to launch the next step even if it is not done, as long as all steps are successfully scheduled.</p>
+
+<h1 id="from-annotated-avs-per-sample-to-av-summary">From annotated AVs per sample to AV summary</h1>
+
+<p>Once the jobs of previous workflows are done, we identified AVs for each sample. We can run a “Reporting <span class="notranslate">workflow</span>” on them to generate a final AV summary. It takes a table of AVs produced by any of the other four workflows and generates a list of AVs by Samples and by Variant.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-from-annotated-avs-per-sample-to-av-summary"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: From annotated AVs per sample to AV summary</h3>
+
+  <ol>
+    <li>
+      <p><strong>Get the <span class="notranslate">workflow</span></strong> on <span class="notranslate">Galaxy</span></p>
+
+      <ul>
+        <li>Option 1: Use <span class="notranslate">workflow</span> directly on <a href="https://usegalaxy.eu/">use<span class="notranslate">galaxy</span>.eu</a> from <a href="https://workflowhub.eu">WorkflowHub</a>
+          <ul>
+            <li>Open the <a href="https://workflowhub.eu/workflows/109"><span class="notranslate">workflow</span> page on WokflowHub</a></li>
+            <li>
+              <p>Click on <code class="language-plaintext highlighter-rouge">Run on use<span class="notranslate">galaxy</span>.eu</code> on the top right of the page</p>
+
+              <p>The browser will open a new tab with <span class="notranslate">Galaxy</span>’s <span class="notranslate">workflow</span> invocation interface.</p>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <p>Option 2: Import the <span class="notranslate">workflow</span> of IWC (Intergalactic <span class="notranslate">Workflow</span> Commission) from <a href="https://dockstore.org/">Dockstore</a> using the <span class="notranslate">workflow</span> search</p>
+
+          <!--SNIPPET-->
+          <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-a-workflow-using-the-search"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a <span class="notranslate">workflow</span> using the search</h3>  <ul>  <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>  <li>Click on the <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> <strong>Import</strong> icon at the top-right of the screen</li>  <li>    <p>Click on <strong>search form</strong> in <strong>Import a <span class="notranslate">Workflow</span> from Configured GA4GH Tool Registry Servers (e.g. Dockstore)</strong></p>  </li>  <li>    <p>Select <em>“TRS Server”</em>: <code class="language-plaintext highlighter-rouge">Dockstore</code></p>  </li>  <li>    <p>Type <code class="language-plaintext highlighter-rouge">organization:"iwc-workflows"</code> in the search query</p>  </li>  <li>    <p>Expand the <span class="notranslate">workflow</span> named <code class="language-plaintext highlighter-rouge">sars-cov-2-variation-reporting/COVID-19-VARIATION-REPORTING</code></p>  </li>  <li>    <p>Click on the wanted version</p>    <p>The <span class="notranslate">workflow</span> will be imported in your workflows</p>  </li></ul></blockquote>
+        </li>
+        <li>
+          <p>Option 3: Import the <span class="notranslate">workflow</span> directly from IWC into <span class="notranslate">Galaxy</span></p>
+
+          <ul>
+            <li>Open the <a href="https://github.com/iwc-workflows/sars-cov-2-variation-reporting"><span class="notranslate">workflow</span> GitHub repository</a></li>
+            <li>Open the <code class="language-plaintext highlighter-rouge">.ga</code> file</li>
+            <li>Click on <code class="language-plaintext highlighter-rouge">Raw</code> on the top right of the file</li>
+            <li>Save the file or Copy the URL of the file</li>
+            <li>
+              <p>Import the <span class="notranslate">workflow</span> to <span class="notranslate">Galaxy</span></p>
+
+              <!--SNIPPET-->
+              <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-a-workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a <span class="notranslate">workflow</span></h3>  <ul>  <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>  <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> at the top-right of the screen</li>  <li>Provide your <span class="notranslate">workflow</span>    <ul>      <li>Option 1: Paste the URL of the <span class="notranslate">workflow</span> into the box labelled <em>“Archived <span class="notranslate">Workflow</span> URL”</em></li>      <li>Option 2: Upload the <span class="notranslate">workflow</span> file in the box labelled <em>“Archived <span class="notranslate">Workflow</span> File”</em></li>    </ul>  </li>  <li>Click the <strong>Import <span class="notranslate">workflow</span></strong> button</li></ul></blockquote>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Run <strong>COVID-19: variation analysis reporting</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span></span> using the following parameters:</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-running-a-workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a <span class="notranslate">workflow</span></h3>  <ul>  <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>  <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> (<em>Run <span class="notranslate">workflow</span></em>) button next to your <span class="notranslate">workflow</span></li>  <li>Configure the <span class="notranslate">workflow</span> as needed</li>  <li>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen</li>  <li>You may have to refresh your history to see the queued jobs</li></ul></blockquote>
+
+      <ul>
+        <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li>
+          <p><em>“1: AF Filter - Allele Frequency Filter”</em>: <code class="language-plaintext highlighter-rouge">0.05</code></p>
+
+          <p>This number is the nminimum allele frequency required for variants to be included in the report.</p>
+        </li>
+        <li>
+          <p><em>“2: DP Filer</em>: <code class="language-plaintext highlighter-rouge">1</code></p>
+
+          <p>The minimum depth of all alignment at a variant site</p>
+        </li>
+        <li>
+          <p><em>“3: Variation data to report”</em>: <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants</code></p>
+
+          <p>The collection with variation data in VCF format: the output of the previous <span class="notranslate">workflow</span></p>
+        </li>
+        <li>
+          <p><em>“4: gene products translations”</em>: <code class="language-plaintext highlighter-rouge">NC_045512.2_feature_<span class="notranslate">mapping</span>.tsv</code> or <code class="language-plaintext highlighter-rouge">NC_045512.2 feature <span class="notranslate">mapping</span></code></p>
+
+          <p>The custom tabular file <span class="notranslate">mapping</span> NCBI RefSeq Protein identifiers (as used by snpEff version 4.5covid19) to their commonly used names, part of the auxillary data.</p>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Both workflows generate several outputs. Most of them are collections with results for each samples. There are also reports combining information for all samples.</p>
+
+<ol>
+  <li>
+    <p><strong>Combined Variant Report by Sample</strong>: table sumarize several information (columns) for each AVs in each sample (row)</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Column</th>
+          <th>Field</th>
+          <th>Meaning</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><code class="language-plaintext highlighter-rouge">Sample</code></td>
+          <td>SRA run ID</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><code class="language-plaintext highlighter-rouge">POS</code></td>
+          <td>Position in <a href="https://www.ncbi.nlm.nih.gov/nuccore/1798174254">NC_045512.2</a></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><code class="language-plaintext highlighter-rouge">FILTER</code></td>
+          <td><code class="language-plaintext highlighter-rouge">Filter</code> field from VCF</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><code class="language-plaintext highlighter-rouge">REF</code></td>
+          <td>Reference base</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><code class="language-plaintext highlighter-rouge">ALT</code></td>
+          <td>Alte<span class="notranslate">rna</span>tive base</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><code class="language-plaintext highlighter-rouge">DP</code></td>
+          <td>Sequencing depth</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><code class="language-plaintext highlighter-rouge">AF</code></td>
+          <td>Alte<span class="notranslate">rna</span>tive allele frequency</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><code class="language-plaintext highlighter-rouge">SB</code></td>
+          <td>Strand bias P-value from Fisher’s exact test calculated by <a href="https://csb5.github.io/lofreq/"><code class="language-plaintext highlighter-rouge">lofreq</code></a></td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td><code class="language-plaintext highlighter-rouge">DP4</code></td>
+          <td>Depth for Forward Ref Counts, Reverse Ref Counts, Forward Alt Counts, Reverse Alt Counts</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td><code class="language-plaintext highlighter-rouge">IMPACT</code></td>
+          <td>Functional impact (from SNPEff)</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td><code class="language-plaintext highlighter-rouge">FUNCLASS</code></td>
+          <td>Funclass for change (from SNPEff)</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td><code class="language-plaintext highlighter-rouge">EFFECT</code></td>
+          <td>Effect of change (from SNPEff)</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td><code class="language-plaintext highlighter-rouge">GENE</code></td>
+          <td>Gene name</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td><code class="language-plaintext highlighter-rouge">CODON</code></td>
+          <td>Codon</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td><code class="language-plaintext highlighter-rouge">AA</code></td>
+          <td>Amino acid</td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td><code class="language-plaintext highlighter-rouge">TRID</code></td>
+          <td>Short name for the gene</td>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td><code class="language-plaintext highlighter-rouge">min(AF)</code></td>
+          <td>Minimum Alte<span class="notranslate">rna</span>tive Allele Freq across all samples containing this change</td>
+        </tr>
+        <tr>
+          <td>18</td>
+          <td><code class="language-plaintext highlighter-rouge">max(AF)</code></td>
+          <td>Maximum Alte<span class="notranslate">rna</span>tive Allele Freq across all samples containing this change</td>
+        </tr>
+        <tr>
+          <td>19</td>
+          <td><code class="language-plaintext highlighter-rouge">countunique(change)</code></td>
+          <td>Number of distinct types of changes at this site across all samples</td>
+        </tr>
+        <tr>
+          <td>20</td>
+          <td><code class="language-plaintext highlighter-rouge">countunique(FUNCLASS)</code></td>
+          <td>Number of distinct FUNCLASS values at this site across all samples</td>
+        </tr>
+        <tr>
+          <td>21</td>
+          <td><code class="language-plaintext highlighter-rouge">change</code></td>
+          <td>Change at this site in this sample</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <blockquote class="question">
+      <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+      <ol>
+        <li>How many AVs are found for all samples?</li>
+        <li>How many AVs are found for the first sample in the document?</li>
+        <li>How many AVs are found for each sample?</li>
+      </ol>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+        <ol>
+          <li>
+            <p>By expanding the dataset in the history, we have the number of lines in the file. 853 lines for the example datasets. The first line is the header of the table. Then 852 AVs.</p>
+          </li>
+          <li>We can filter the table to get only the AVs for the first sample <span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter</em>”: <code class="language-plaintext highlighter-rouge">Combined Variant Report by Variant</code></li>
+              <li><em>“With following condition</em>”: <code class="language-plaintext highlighter-rouge">c1=='ERR5931005'</code> (to adapt with the sample name)</li>
+              <li><em>“Number of header lines to skip</em>”: <code class="language-plaintext highlighter-rouge">1</code></li>
+            </ul>
+
+            <p>We got then only the AVs for the selected sample (46 for ERR5931005).</p>
+          </li>
+          <li>To get the number of AVs for each sample, we can run <span class="tool" data-tool="Grouping1" title="Tested with Grouping1"><strong>Group data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grouping1</span></span>  with the following parameters:
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select data”</em>: <code class="language-plaintext highlighter-rouge">Combined Variant Report by Variant</code></li>
+              <li><em>“Group by column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+              <li>In <em>“Operation”</em>:
+                <ul>
+                  <li>In <em>“1: Operation”</em>:
+                    <ul>
+                      <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">Count</code></li>
+                      <li><em>“On column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+
+            <p>With our example datasets, it seems that samples have between 41 and 56 AVs.</p>
+          </li>
+        </ol>
+      </blockquote>
+    </blockquote>
+  </li>
+  <li>
+    <p><strong>Combined Variant Report by Variant</strong>: this table combine the information (column) for each AV (row)</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Column</th>
+          <th>Field</th>
+          <th>Meaning</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><code class="language-plaintext highlighter-rouge">POS</code></td>
+          <td>Position in <a href="https://www.ncbi.nlm.nih.gov/nuccore/1798174254">NC_045512.2</a></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><code class="language-plaintext highlighter-rouge">REF</code></td>
+          <td>Reference base</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><code class="language-plaintext highlighter-rouge">ALT</code></td>
+          <td>Alte<span class="notranslate">rna</span>tive base</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><code class="language-plaintext highlighter-rouge">IMPACT</code></td>
+          <td>Functional impact (from SNPEff)</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><code class="language-plaintext highlighter-rouge">FUNCLASS</code></td>
+          <td>Funclass for change (from SNPEff)</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><code class="language-plaintext highlighter-rouge">EFFECT</code></td>
+          <td>Effect of change (from SNPEff)</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><code class="language-plaintext highlighter-rouge">GENE</code></td>
+          <td>Gene</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><code class="language-plaintext highlighter-rouge">CODON</code></td>
+          <td>Codon</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td><code class="language-plaintext highlighter-rouge">AA</code></td>
+          <td>Amino acid</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td><code class="language-plaintext highlighter-rouge">TRID</code></td>
+          <td>Short name for the gene</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td><code class="language-plaintext highlighter-rouge">countunique(Sample)</code></td>
+          <td>Number of distinct samples containing this change</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td><code class="language-plaintext highlighter-rouge">min(AF)</code></td>
+          <td>Minimum Alte<span class="notranslate">rna</span>tive Allele Freq across all samples containing this change</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td><code class="language-plaintext highlighter-rouge">max(AF)</code></td>
+          <td>Maximum Alte<span class="notranslate">rna</span>tive Allele Freq across all samples containing this change</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td><code class="language-plaintext highlighter-rouge">SAMPLES(above-thresholds)</code></td>
+          <td>List of distinct samples where this change has frequency abobe threshold (5%)</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td><code class="language-plaintext highlighter-rouge">SAMPLES(all)</code></td>
+          <td>List of distinct samples containing this change at any frequency (including below threshold)</td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td><code class="language-plaintext highlighter-rouge">AFs(all)</code></td>
+          <td>List of all allele frequencies across all samples</td>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td><code class="language-plaintext highlighter-rouge">change</code></td>
+          <td>Change</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <blockquote class="question">
+      <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+      <ol>
+        <li>How many AVs are found?</li>
+        <li>What are the different impacts of the AVs?</li>
+        <li>How many variants are found for each impact?</li>
+        <li>What are the different effects for HIGH impact?</li>
+        <li>Is there any AVs impacting all samples?</li>
+      </ol>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+        <ol>
+          <li>
+            <p>By expanding the dataset in the history, we have the number of lines in the file. 191 lines for the example datasets. The first line is the header of the table. Then 190 AVs.</p>
+          </li>
+          <li>
+            <p>The different impacts of the AVs are HIGH, MODERATE and LOW.</p>
+          </li>
+          <li>To get the number of AVs for each impact levels, we can run <span class="tool" data-tool="Grouping1" title="Tested with Grouping1"><strong>Group data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grouping1</span></span>  with the following parameters:
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select data”</em>: <code class="language-plaintext highlighter-rouge">Combined Variant Report by Variant</code></li>
+              <li><em>“Group by column”</em>: <code class="language-plaintext highlighter-rouge">Column: 4</code></li>
+              <li>In <em>“Operation”</em>:
+                <ul>
+                  <li>In <em>“1: Operation”</em>:
+                    <ul>
+                      <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">Count</code></li>
+                      <li><em>“On column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+
+            <p>With our example datasets, we find:</p>
+            <ul>
+              <li>18 AVs with no impact</li>
+              <li>51 LOW AVs</li>
+              <li>118 MODERATE AVs</li>
+              <li>9 HIGH AVs</li>
+            </ul>
+          </li>
+          <li>We can filter the table to get only the AVs with HIGH impact by running <span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter</em>”: <code class="language-plaintext highlighter-rouge">Combined Variant Report by Variant</code></li>
+              <li><em>“With following condition</em>”: <code class="language-plaintext highlighter-rouge">c4=='HIGH'</code></li>
+              <li><em>“Number of header lines to skip</em>”: <code class="language-plaintext highlighter-rouge">1</code></li>
+            </ul>
+
+            <p>The different effects for the 9 HIGH AVs are STOP_GAINED and FRAME_SHIFT.</p>
+          </li>
+          <li>We can filter the table to get the AVs for which <code class="language-plaintext highlighter-rouge">countunique(Sample)</code> is equal the number of samples (18 in our example dataset): <span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter</em>”: <code class="language-plaintext highlighter-rouge">Combined Variant Report by Variant</code></li>
+              <li><em>“With following condition</em>”: <code class="language-plaintext highlighter-rouge">c11==18</code> (to adapt to the number of sample)</li>
+              <li><em>“Number of header lines to skip</em>”: <code class="language-plaintext highlighter-rouge">1</code></li>
+            </ul>
+
+            <p>For our example datasets, 4 AVs are found for all samples</p>
+          </li>
+        </ol>
+      </blockquote>
+    </blockquote>
+  </li>
+  <li>
+    <p><strong>Variant frequency</strong></p>
+
+    <p><img src="../../images/sars-cov-2-variant-discovery/variant-frequency.svg" alt="Variant frequency plot" /></p>
+
+    <p>This plot represents AFs (cell color) for the different AVs (columns) and the different samples (rows). The AVs are grouped by genes (different colors on the 1st row). Information about their effect is also represented on the 2nd row. The samples are clustered following the tree displayed on the left.</p>
+
+    <p>In the example datasets, the samples are clustered in 3 clusters (as we defined when running the <span class="notranslate">workflow</span>), that may represent different SARS-CoV-2 variants as the AVs profiles are different.</p>
+  </li>
+</ol>
+
+<h1 id="from-avs-to-consensus-sequences">From AVs to consensus sequences</h1>
+
+<p>For the variant calls, we can now run a <span class="notranslate">workflow</span> which generates reliable consensus sequences according to transparent criteria that capture at least some of the complexity of variant calling:</p>
+
+<ul>
+  <li>Each consensus sequence is guaranteed to capture all called, filter-passing variants as defined in the VCF of its sample that reach a user-defined consensus allele frequency threshold.</li>
+  <li>Filter-failing variants and variants below a second user-defined minimal allele frequency threshold are ignored.</li>
+  <li>Genomic positions of filter-passing variants with an allele frequency in between the two thresholds are hard-masked (with N) in the consensus sequence of their sample.</li>
+  <li>Genomic positions with a coverage (calculated from the read alignments input) below another user-defined threshold are hard-masked, too, unless they are consensus variant sites.</li>
+</ul>
+
+<p>The <span class="notranslate">workflow</span> takes a collection of VCFs and a collection of the corresponding aligned <span class="notranslate">reads</span> (for the purpose of calculating genome-wide coverage) such as produced by the first <span class="notranslate">workflow</span> we ran.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-from-avs-to-consensus-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: From AVs to consensus sequences</h3>
+
+  <ol>
+    <li>
+      <p><strong>Get the <span class="notranslate">workflow</span></strong> on <span class="notranslate">Galaxy</span></p>
+
+      <ul>
+        <li>
+          <p>Option 1: Import the <span class="notranslate">workflow</span> of IWC (Intergalactic <span class="notranslate">Workflow</span> Commission) from <a href="https://dockstore.org/">Dockstore</a> using the <span class="notranslate">workflow</span> search</p>
+
+          <!--SNIPPET-->
+          <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-a-workflow-using-the-search"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a <span class="notranslate">workflow</span> using the search</h3>  <ul>  <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>  <li>Click on the <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> <strong>Import</strong> icon at the top-right of the screen</li>  <li>    <p>Click on <strong>search form</strong> in <strong>Import a <span class="notranslate">Workflow</span> from Configured GA4GH Tool Registry Servers (e.g. Dockstore)</strong></p>  </li>  <li>    <p>Select <em>“TRS Server”</em>: <code class="language-plaintext highlighter-rouge">Dockstore</code></p>  </li>  <li>    <p>Type <code class="language-plaintext highlighter-rouge">organization:"iwc-workflows"</code> in the search query</p>  </li>  <li>    <p>Expand the <span class="notranslate">workflow</span> named <code class="language-plaintext highlighter-rouge">sars-cov-2-consensus-from-variation/COVID-19-CONSENSUS-CONSTRUCTION</code></p>  </li>  <li>    <p>Click on the wanted version</p>    <p>The <span class="notranslate">workflow</span> will be imported in your workflows</p>  </li></ul></blockquote>
+        </li>
+        <li>
+          <p>Option 2: Import the <span class="notranslate">workflow</span> directly from IWC into <span class="notranslate">Galaxy</span></p>
+
+          <ul>
+            <li>Open the <a href="https://github.com/iwc-workflows/sars-cov-2-consensus-from-variation"><span class="notranslate">workflow</span> GitHub repository</a></li>
+            <li>Open the <code class="language-plaintext highlighter-rouge">.ga</code> file</li>
+            <li>Click on <code class="language-plaintext highlighter-rouge">Raw</code> on the top right of the file</li>
+            <li>Save the file or Copy the URL of the file</li>
+            <li>
+              <p>Import the <span class="notranslate">workflow</span> to <span class="notranslate">Galaxy</span></p>
+
+              <!--SNIPPET-->
+              <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-a-workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a <span class="notranslate">workflow</span></h3>  <ul>  <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>  <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> at the top-right of the screen</li>  <li>Provide your <span class="notranslate">workflow</span>    <ul>      <li>Option 1: Paste the URL of the <span class="notranslate">workflow</span> into the box labelled <em>“Archived <span class="notranslate">Workflow</span> URL”</em></li>      <li>Option 2: Upload the <span class="notranslate">workflow</span> file in the box labelled <em>“Archived <span class="notranslate">Workflow</span> File”</em></li>    </ul>  </li>  <li>Click the <strong>Import <span class="notranslate">workflow</span></strong> button</li></ul></blockquote>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Run <strong>COVID-19: variation analysis reporting</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span></span> using the following parameters:</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-running-a-workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a <span class="notranslate">workflow</span></h3>  <ul>  <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>  <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> (<em>Run <span class="notranslate">workflow</span></em>) button next to your <span class="notranslate">workflow</span></li>  <li>Configure the <span class="notranslate">workflow</span> as needed</li>  <li>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen</li>  <li>You may have to refresh your history to see the queued jobs</li></ul></blockquote>
+
+      <ul>
+        <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li>
+          <p><em>“1: Variant calls”</em>: <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants</code></p>
+
+          <p>The collection with variation data in VCF format: the output of the first <span class="notranslate">workflow</span></p>
+        </li>
+        <li>
+          <p><em>“2: min-AF for consensus variants</em>: <code class="language-plaintext highlighter-rouge">0.7</code></p>
+
+          <p>Only variant calls with an AF greater than this value will be considered consensus variants.</p>
+        </li>
+        <li>
+          <p><em>“3: min-AF for failed variants”</em>: <code class="language-plaintext highlighter-rouge">0.25</code></p>
+
+          <p>Variant calls with an AF higher than this value, but lower than the AF threshold for consensus variants will be considered questionable and the respective sites be masked (with Ns) in the consensus sequence.</p>
+        </li>
+        <li>
+          <p><em>“4: aligned <span class="notranslate">reads</span> data for depth calculation”</em>: <code class="language-plaintext highlighter-rouge">Full processed <span class="notranslate">reads</span> for variant calling</code></p>
+
+          <p>Collection with fully processed BAMs generated by the first <span class="notranslate">workflow</span>.</p>
+
+          <p>For ARTIC data, the BAMs should NOT have undergone processing with <strong>ivar remove<span class="notranslate">reads</span></strong></p>
+        </li>
+        <li>
+          <p><em>“5: Depth-threshold for masking”</em>: <code class="language-plaintext highlighter-rouge">5</code></p>
+
+          <p>Sites in the viral genome covered by less than this number of <span class="notranslate">reads</span> are considered questionable and will be masked (with Ns) in the consensus sequence independent of whether a variant has been called at them or not.</p>
+        </li>
+        <li>
+          <p><em>“6: Reference genome</em>”: <code class="language-plaintext highlighter-rouge">NC_045512.2_reference.fasta</code> or <code class="language-plaintext highlighter-rouge">NC_045512.2 reference sequence</code></p>
+
+          <p>SARS-CoV-2 reference genome, as part of the auxillary data.</p>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The main outputs of the <span class="notranslate">workflow</span> are:</p>
+<ul>
+  <li>A collection of viral consensus sequences.</li>
+  <li>A multisample FASTA of all these sequences.</li>
+</ul>
+
+<p>The last one can be given as input for tools like <strong>Pangolin</strong> or <strong>Nextclade</strong>.</p>
+
+<h1 id="from-consensus-sequences-to-cladelineage-assignments">From consensus sequences to clade/lineage assignments</h1>
+
+<p>To assign lineages to the different samples from their consensus sequences, 2 tools are available <strong>Pangolin</strong> or <strong>Nextclade</strong></p>
+
+<h2 id="with-pangolin">With Pangolin</h2>
+
+<p>Pangolin (Phylogenetic Assignment of Named Global Outbreak LINeages) can be used to assign a SARS-CoV-2 genome sequence the most likely lineage based on the PANGO nomenclature system.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-from-consensus-sequences-to-clade-assignations-using-pangolin"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: From consensus sequences to clade assignations using Pangolin</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/3.1.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/3.1.4+galaxy0"><strong>Pangolin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/3.1.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTA File(s)”</em>: <code class="language-plaintext highlighter-rouge">Multisample consensus FASTA</code></li>
+      </ul>
+    </li>
+    <li>Inspect the generated output</li>
+  </ol>
+</blockquote>
+
+<p>Pangolin generates a table file with taxon name and lineage assigned. Each line corresponds to each sample in the input consensus FASTA file provided. The columns are:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Column</th>
+      <th>Field</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td><code class="language-plaintext highlighter-rouge">taxon</code></td>
+      <td>The name of an input query sequence, here the sample name.</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><code class="language-plaintext highlighter-rouge">lineage</code></td>
+      <td>The most likely lineage assigned to a given sequence based on the inference engine used and the SARS-CoV-2 diversity designated. This assignment may be is sensitive to missing data at key sites. <a href="https://cov-lineages.org/lineage_description_list.html">Lineage Description List</a></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><code class="language-plaintext highlighter-rouge">conflict</code></td>
+      <td>In the pangoLEARN decision tree model, a given sequence gets assigned to the most likely category based on known diversity. If a sequence can fit into more than one category, the conflict score will be greater than 0 and reflect the number of categories the sequence could fit into. If the conflict score is 0, this means that within the current decision tree there is only one category that the sequence could be assigned to.</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><code class="language-plaintext highlighter-rouge">ambiguity_score</code></td>
+      <td>This score is a function of the quantity of missing data in a sequence. It represents the proportion of relevant sites in a sequence which were imputed to the reference values. A score of 1 indicates that no sites were imputed, while a score of 0 indicates that more sites were imputed than were not imputed. This score only includes sites which are used by the decision tree to classify a sequence.</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><code class="language-plaintext highlighter-rouge">scorpio_call</code></td>
+      <td>If a query is assigned a constellation by scorpio this call is output in this column. The full set of constellations searched by default can be found at the constellations repository.</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td><code class="language-plaintext highlighter-rouge">scorpio_support</code></td>
+      <td>The support score is the proportion of defining variants which have the alte<span class="notranslate">rna</span>tive allele in the sequence.</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td><code class="language-plaintext highlighter-rouge">scorpio_conflict</code></td>
+      <td>The conflict score is the proportion of defining variants which have the reference allele in the sequence. Ambiguous/other non-ref/alt bases at each of the variant positions contribute only to the denominators of these scores.</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td><code class="language-plaintext highlighter-rouge">version</code></td>
+      <td>A version number that represents both the pango-designation number and the inference engine used to assign the lineage.</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td><code class="language-plaintext highlighter-rouge">pangolin_version</code></td>
+      <td>The version of pangolin software running.</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td><code class="language-plaintext highlighter-rouge">pangoLEARN_version</code></td>
+      <td>The dated version of the pangoLEARN model installed.</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td><code class="language-plaintext highlighter-rouge">pango_version</code></td>
+      <td>The version of pango-designation lineages that this assignment is based on.</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td><code class="language-plaintext highlighter-rouge">status</code></td>
+      <td>Indicates whether the sequence passed the QC thresholds for minimum length and maximum N content.</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td><code class="language-plaintext highlighter-rouge">note</code></td>
+      <td>If any conflicts from the decision tree, this field will output the alte<span class="notranslate">rna</span>tive assignments. If the sequence failed QC this field will describe why. If the sequence met the SNP thresholds for scorpio to call a constellation, it’ll describe the exact SNP counts of Alt, Ref and Amb (Alte<span class="notranslate">rna</span>tive, Reference and Ambiguous) alleles for that call.</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="question">
+  <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>How many different lineages have been found? How many samples for each lineage?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>To summarize the number of lineages and number of samples for  each lineage, we can run <span class="tool" data-tool="Grouping1" title="Tested with Grouping1"><strong>Group data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grouping1</span></span>  with the following parameters:</p>
+    <ul>
+      <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select data”</em>: output of <strong>pangolin</strong></li>
+      <li><em>“Group by column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+      <li>In <em>“Operation”</em>:
+        <ul>
+          <li>In <em>“1: Operation”</em>:
+            <ul>
+              <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">Count</code></li>
+              <li><em>“On column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <p>For our example datasets, we obtain then:</p>
+    <ul>
+      <li>13 samples B.1.1.7 / Alpha (B.1.1.7-like)</li>
+      <li>3 samples B.1.617.2 / Delta (B.1.617.2-like)</li>
+      <li>1 sample B.1.525</li>
+      <li>1 sample P.1</li>
+    </ul>
+
+  </blockquote>
+</blockquote>
+
+<h2 id="with-nextclade">With Nextclade</h2>
+
+<p>Nextclade assigns clades, calls mutations and performs sequence quality checks on SARS-CoV-2 genomes.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-from-consensus-sequences-to-clade-assignations-using-nextclade"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: From consensus sequences to clade assignations using Nextclade</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/nextclade/nextclade/0.14.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/nextclade/nextclade/0.14.4+galaxy0"><strong>Nextclade</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/nextclade/nextclade/0.14.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“SARS-CoV-2 consensus sequences (FASTA)”</em>: <code class="language-plaintext highlighter-rouge">Multisample consensus FASTA</code></li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Output options”</em>: <code class="language-plaintext highlighter-rouge">Tabular format report</code></li>
+      </ul>
+    </li>
+    <li>Inspect the generated output</li>
+  </ol>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th>Column</th>
+      <th>Field</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td><code class="language-plaintext highlighter-rouge">seqName</code></td>
+      <td>Name of the sequence in the source data, here the sample name</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><code class="language-plaintext highlighter-rouge">clade</code></td>
+      <td>The result of the clade assignment of a sequence, as defined by Nextstrain. Currently known clades are depicted in the schema below</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><code class="language-plaintext highlighter-rouge">qc.overallScore</code></td>
+      <td>Overall QC score</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><code class="language-plaintext highlighter-rouge">qc.overallStatus</code></td>
+      <td>Overall QC status</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><code class="language-plaintext highlighter-rouge">totalGaps</code></td>
+      <td>Number of - characters (gaps)</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td><code class="language-plaintext highlighter-rouge">totalInsertions</code></td>
+      <td>Total length of insertions</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td><code class="language-plaintext highlighter-rouge">totalMissing</code></td>
+      <td>Number of N characters (missing data)</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td><code class="language-plaintext highlighter-rouge">totalMutations</code></td>
+      <td>Number of mutations. Mutations are called relative to the reference sequence Wuhan-Hu-1</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td><code class="language-plaintext highlighter-rouge">totalNonACGTNs</code></td>
+      <td>Number of non-ACGTN characters</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td><code class="language-plaintext highlighter-rouge">totalPcrPrimerChanges</code></td>
+      <td>Total number of mutations affecting user-specified PCR primer binding sites</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td><code class="language-plaintext highlighter-rouge">substitutions</code></td>
+      <td>List of mutations</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td><code class="language-plaintext highlighter-rouge">deletions</code></td>
+      <td>List of deletions (positions are 1-based)</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td><code class="language-plaintext highlighter-rouge">insertions</code></td>
+      <td>Insertions relative to the reference Wuhan-Hu-1 (positions are 1-based)</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td><code class="language-plaintext highlighter-rouge">missing</code></td>
+      <td>Intervals consisting of N characters</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td><code class="language-plaintext highlighter-rouge">nonACGTNs</code></td>
+      <td>List of positions of non-ACGTN characters (for example ambiguous nucleotide codes)</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td><code class="language-plaintext highlighter-rouge">pcrPrimerChanges</code></td>
+      <td>Number of user-specified PCR primer binding sites affected by mutations</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td><code class="language-plaintext highlighter-rouge">aaSubstitutions</code></td>
+      <td>List of aminoacid changes</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td><code class="language-plaintext highlighter-rouge">totalAminoacidSubstitutions</code></td>
+      <td>Number of aminoacid changes</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td><code class="language-plaintext highlighter-rouge">aaDeletions</code></td>
+      <td>List of aminoacid deletions</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td><code class="language-plaintext highlighter-rouge">totalAminoacidDeletions</code></td>
+      <td>Number of aminoacid deletions</td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td><code class="language-plaintext highlighter-rouge">alignmentEnd</code></td>
+      <td>Position of end of alignment</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td><code class="language-plaintext highlighter-rouge">alignmentScore</code></td>
+      <td>Alignment score</td>
+    </tr>
+    <tr>
+      <td>23</td>
+      <td><code class="language-plaintext highlighter-rouge">alignmentStart</code></td>
+      <td>Position of beginning of alignment</td>
+    </tr>
+    <tr>
+      <td>24</td>
+      <td><code class="language-plaintext highlighter-rouge">qc.missingData.missingDataThreshold</code></td>
+      <td>Threshold for flagging sequences based on number of sites with Ns</td>
+    </tr>
+    <tr>
+      <td>25</td>
+      <td><code class="language-plaintext highlighter-rouge">qc.missingData.score</code></td>
+      <td>Score for missing data</td>
+    </tr>
+    <tr>
+      <td>26</td>
+      <td><code class="language-plaintext highlighter-rouge">qc.missingData.status</code></td>
+      <td>Status on missing data</td>
+    </tr>
+    <tr>
+      <td>27</td>
+      <td><code class="language-plaintext highlighter-rouge">qc.missingData.totalMissing</code></td>
+      <td>Number of sites with Ns</td>
+    </tr>
+    <tr>
+      <td>28</td>
+      <td><code class="language-plaintext highlighter-rouge">qc.mixedSites.mixedSitesThreshold</code></td>
+      <td>Threshold for flagging sequences based on number of mutations relative to the reference sequence</td>
+    </tr>
+    <tr>
+      <td>29</td>
+      <td><code class="language-plaintext highlighter-rouge">qc.mixedSites.score</code></td>
+      <td>Score for high divergence</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td><code class="language-plaintext highlighter-rouge">qc.mixedSites.status</code></td>
+      <td>Status for high divergence</td>
+    </tr>
+    <tr>
+      <td>31</td>
+      <td><code class="language-plaintext highlighter-rouge">qc.mixedSites.totalMixedSites</code></td>
+      <td>Number of sites with mutations</td>
+    </tr>
+    <tr>
+      <td>32</td>
+      <td><code class="language-plaintext highlighter-rouge">qc.privateMutations.cutoff</code></td>
+      <td>Threshold for the number of non-ACGTN characters for flagging sequences</td>
+    </tr>
+    <tr>
+      <td>33</td>
+      <td><code class="language-plaintext highlighter-rouge">qc.privateMutations.excess</code></td>
+      <td>Number of ambiguous nucleotides above the threshold</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td><code class="language-plaintext highlighter-rouge">qc.privateMutations.score</code></td>
+      <td>Score for ambiguous nucleotides</td>
+    </tr>
+    <tr>
+      <td>35</td>
+      <td><code class="language-plaintext highlighter-rouge">qc.privateMutations.status</code></td>
+      <td>Status for ambiguous nucleotides</td>
+    </tr>
+    <tr>
+      <td>36</td>
+      <td><code class="language-plaintext highlighter-rouge">qc.privateMutations.total</code></td>
+      <td>Number of ambiguous nucleotides</td>
+    </tr>
+    <tr>
+      <td>37</td>
+      <td><code class="language-plaintext highlighter-rouge">qc.snpClusters.clusteredSNPs</code></td>
+      <td>Clusters with 6 or more differences in 100 bases</td>
+    </tr>
+    <tr>
+      <td>38</td>
+      <td><code class="language-plaintext highlighter-rouge">qc.snpClusters.score</code></td>
+      <td>Score for clustered differences</td>
+    </tr>
+    <tr>
+      <td>39</td>
+      <td><code class="language-plaintext highlighter-rouge">qc.snpClusters.status</code></td>
+      <td>Status for clustered differences</td>
+    </tr>
+    <tr>
+      <td>40</td>
+      <td><code class="language-plaintext highlighter-rouge">qc.snpClusters.totalSNPs</code></td>
+      <td>Number of differences in clusters</td>
+    </tr>
+    <tr>
+      <td>41</td>
+      <td><code class="language-plaintext highlighter-rouge">errors</code></td>
+      <td>Other errors (e.g. sequences in which some of the major genes fail to translate because of frame shifting insertions or deletions)</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="question">
+  <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>How many different lineages have been found? How many samples for each lineage?</p>
+
+  <figure id="figure-1"><img src="../../images/sars-cov-2-variant-discovery/ncov_clades.png" alt="Illustration of phylogenetic relationship of clades, as used in Nextclade" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Illustration of phylogenetic relationship of clades, as used in Nextclade (Source: <a href="https://clades.nextstrain.org/">Nextclade</a>)</figcaption></figure>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>To summarize the number of lineages and number of samples for  each lineage, we can run <span class="tool" data-tool="Grouping1" title="Tested with Grouping1"><strong>Group data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grouping1</span></span>  with the following parameters:</p>
+    <ul>
+      <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select data”</em>: output of <strong>Nextclade</strong></li>
+      <li><em>“Group by column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+      <li>In <em>“Operation”</em>:
+        <ul>
+          <li>In <em>“1: Operation”</em>:
+            <ul>
+              <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">Count</code></li>
+              <li><em>“On column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <p>For our example datasets, we obtain then:</p>
+    <ul>
+      <li>10 samples 20I (Alpha, V1)</li>
+      <li>4 samples 20B (ancestor of 20I)</li>
+      <li>3 samples 21A (Delta)</li>
+      <li>1 sample 21D (Eta)</li>
+    </ul>
+
+  </blockquote>
+</blockquote>
+
+<h2 id="comparison-between-pangolin-and-nextclade-clade-assignations">Comparison between Pangolin and Nextclade clade assignations</h2>
+
+<p>We can compare <strong>Pangolin</strong> and <strong>Nextclade</strong> clade assignations by extracting the interesting columns and join them into one dataset using on sample ids.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-comparison-clade-assignations"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Comparison clade assignations</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c2</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Nextclade</strong></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c2,c5</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Pangolin</strong></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="join1" title="Tested with join1"><strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: join1</span></span>
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join</em>”: output of first <strong>cut</strong></li>
+        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“with</em>”: output of second <strong>cut</strong></li>
+        <li><em>“and column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+      </ul>
+    </li>
+    <li>Inspect the generated output</li>
+  </ol>
+</blockquote>
+
+<p>We can see that <strong>Pangolin</strong> and <strong>Nextclade</strong> are globally coherent despite differences in lineage nomenclature.</p>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, we used a collection of <span class="notranslate">Galaxy</span> workflows for the detection and interpretation of sequence variants in SARS-CoV-2:</p>
+
+<figure id="figure-2"><img src="../../images/sars-cov-2-variant-discovery/schema.png" alt="Analysis flow in the tutorial" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Analysis flow in the tutorial</figcaption></figure>
+
+<p>The workflows can be freely used and immediately accessed from the three global <span class="notranslate">Galaxy</span> instances. Each is capable of supporting thousands of users running hundreds of thousands of analyses per month.</p>
+
+<p>It is also possible to automate the <span class="notranslate">workflow</span> runs using the command line as explained in <a href="/training-material/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html">a dedicated tutorial</a>.</p>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>4 specialized, best-practice variant calling workflows are available for the identification of annotated allelic variants from raw sequencing data depending on the exact type of input</p>
+</li>
+                            
+                            <li><p>Data from batches of samples can be processed in parallel using collections</p>
+</li>
+                            
+                            <li><p>Annotated allelic variants can be used to build consensus sequences for and assign each sample to known viral clades/lineages</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    <h1>Frequently Asked Questions</h1>
+                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/variant-analysis/faqs/">FAQ page for the Variant Analysis topic</a> to see if your question is listed there.
+                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                    
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/variant-analysis#references">here</a>.</p>
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="li_2010">Li, H., and R. Durbin, 2010 <b>Fast and accurate long-read alignment with Burrows–Wheeler transform</b>. Bioinformatics 26: 589–595.</span>
+    
+    
+    <a href="https://doi.org/10.1093/bioinformatics/btp698">10.1093/bioinformatics/btp698</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="wilm_2012">Wilm, A., P. P. K. Aw, D. Bertrand, G. H. T. Yeo, S. H. Ong <i>et al.</i>, 2012 <b>LoFreq: a sequence-quality aware, ultra-sensitive variant caller for uncovering cell-population heterogeneity from high-throughput sequencing datasets</b>. Nucleic Acids Research 40: 11189–11201.</span>
+    
+    
+    <a href="https://doi.org/10.1093/nar/gks918">10.1093/nar/gks918</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="li_2018">Li, H., 2018 <b>Minimap2: pairwise alignment for nucleotide sequences</b>. Bioinformatics 34: 3094–3100.</span>
+    
+    
+    
+
+</li></ol>
+                    
+
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data (Variant Analysis)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Wolfgang Maier, Bérénice Batut, 2021 <b>Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html">https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{variant-analysis-sars-cov-2-variant-discovery,
+    author = "Wolfgang Maier and Bérénice Batut",
+    title = "Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data (Galaxy Training Materials)",
+    year = "2021",
+    month = "06",
+    day = "30"
+    url = "\url{https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+                    
+
+                    
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Wolfgang Maier, Bérénice Batut)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
