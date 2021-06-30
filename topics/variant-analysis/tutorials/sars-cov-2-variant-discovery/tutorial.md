@@ -32,7 +32,7 @@ tags:
 
 Effectively monitoring global infectious disease crises, such as the COVID-19 pandemic, requires capacity to generate and analyze large volumes of sequencing data in near real time. These data have proven essential for monitoring the emergence and spread of new variants, and for understanding the evolutionary dynamics of the virus.
 
-Two sequencing platforms in combination with several established library preparation strategies are predominantly used to generate SARS-CoV-2 sequence data. However, data alone do not equal knowledge: they need to be analyzed. The Galaxy community has developed high-quality analysis workflows to support
+Two sequencing platforms (Illumina and Oxford Nanopore) in combination with several established library preparation (Ampliconic and metatranscriptomic) strategies are predominantly used to generate SARS-CoV-2 sequence data. However, data alone do not equal knowledge: they need to be analyzed. The Galaxy community has developed high-quality analysis workflows to support
 
 - sensitive identification of SARS-CoV-2 allelic variants (AVs) starting with allele frequencies as low as 5% from deep sequencing reads
 - generation of user-friendly reports for batches of results
@@ -40,7 +40,8 @@ Two sequencing platforms in combination with several established library prepara
 
 > ### {% icon details %} Further reading
 > More information about the workflows, including benchmarking, can be found at
-> [covid19.galaxyproject.org](https://covid19.galaxyproject.org/).
+> - Galaxy COVID19 effort website: [covid19.galaxyproject.org](https://covid19.galaxyproject.org/)
+> - Our BioRxiv preprint: [Global platform for SARS-CoV-2 analysis](https://www.biorxiv.org/content/10.1101/2021.03.25.437046v1)
 {: .details}
 
 This tutorial will teach you how to obtain, run and combine these workflows appropriately for different types of input data, be it:
@@ -104,11 +105,11 @@ There are several possibilities to upload the data depending on how many dataset
 >
 > 1. Import the datasets
 >
->    - Option 1: From your own local data using **Upload Data** (recommended for 1-10 datasets)
->      
+>    - Option 1 [{% icon video %}](https://youtu.be/FFCDx1rMGAQ): From your own local data using **Upload Data** (recommended for 1-10 datasets). 
+>
 >      {% snippet faqs/galaxy/datasets_upload.md %}
 >
->    - Option 2: From your own local data using **FTP** (recommended for >10 datasets)
+>    - Option 2 [{% icon video %}](https://youtu.be/hC8KSuT_OP8): From your own local data using **FTP** (recommended for >10 datasets)
 >
 >      {% snippet faqs/galaxy/datasets_upload_ftp.md %}
 >
@@ -165,11 +166,11 @@ There are several possibilities to upload the data depending on how many dataset
 >
 > 2. Create a collection to organize the data
 >
->    - Option 1: Single-end data (Illumina or ONT data)
+>    - Option 1 [{% icon video %}](https://youtu.be/6ZU9hFjnRDo): Single-end data (Illumina or ONT data)
 >
 >      {% snippet faqs/galaxy/collections_build_list.md %}
 >
->    - Option 2: Paired-end data (Illumina data)
+>    - Option 2 [{% icon video %}](https://youtu.be/6toVj35q1r0): Paired-end data (Illumina data)
 >
 >      {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
@@ -734,9 +735,9 @@ Column | Field | Meaning
 > {: .solution}
 {: .question}
 
-## Comparison between Pangolin and Nextclade clade assignations
+## Comparison between Pangolin and Nextclade clade assignments
 
-We can compare **Pangolin** and **Nextclade** clade assignations by extracting the interesting columns and join them into one dataset using on sample ids.
+We can compare **Pangolin** and **Nextclade** clade assignments by extracting interesting columns and joining them into a single dataset using sample ids.
 
 > ### {% icon hands_on %} Hands-on: Comparison clade assignations
 >
