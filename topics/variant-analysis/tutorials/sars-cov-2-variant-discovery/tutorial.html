@@ -630,7 +630,7 @@
 
 <p>Effectively monitoring global infectious disease crises, such as the COVID-19 pandemic, requires capacity to generate and analyze large volumes of sequencing data in near real time. These data have proven essential for monitoring the emergence and spread of new variants, and for understanding the evolutionary dynamics of the virus.</p>
 
-<p>Two sequencing platforms in combination with several established library preparation strategies are predominantly used to generate SARS-CoV-2 sequence data. However, data alone do not equal knowledge: they need to be analyzed. The <span class="notranslate">Galaxy</span> community has developed high-quality analysis workflows to support</p>
+<p>Two sequencing platforms (Illumina and Oxford Nanopore) in combination with several established library preparation (Ampliconic and metatranscriptomic) strategies are predominantly used to generate SARS-CoV-2 sequence data. However, data alone do not equal knowledge: they need to be analyzed. The <span class="notranslate">Galaxy</span> community has developed high-quality analysis workflows to support</p>
 
 <ul>
   <li>sensitive identification of SARS-CoV-2 allelic variants (AVs) starting with allele frequencies as low as 5% from deep sequencing <span class="notranslate">reads</span></li>
@@ -640,8 +640,11 @@
 
 <blockquote class="details">
   <h3 id="details-further-reading"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Further reading</h3>
-  <p>More information about the workflows, including benchmarking, can be found at
-<a href="https://covid19.galaxyproject.org/">covid19.<span class="notranslate">galaxy</span>project.org</a>.</p>
+  <p>More information about the workflows, including benchmarking, can be found at</p>
+  <ul>
+    <li><span class="notranslate">Galaxy</span> COVID19 effort website: <a href="https://covid19.galaxyproject.org/">covid19.<span class="notranslate">galaxy</span>project.org</a></li>
+    <li>Our BioRxiv preprint: <a href="https://www.biorxiv.org/content/10.1101/2021.03.25.437046v1">Global platform for SARS-CoV-2 analysis</a></li>
+  </ul>
 </blockquote>
 
 <p>This tutorial will teach you how to obtain, run and combine these workflows appropriately for different types of input data, be it:</p>
@@ -670,7 +673,7 @@
   <li><a href="#from-consensus-sequences-to-cladelineage-assignments" id="markdown-toc-from-consensus-sequences-to-cladelineage-assignments">From consensus sequences to clade/lineage assignments</a>    <ol>
       <li><a href="#with-pangolin" id="markdown-toc-with-pangolin">With Pangolin</a></li>
       <li><a href="#with-nextclade" id="markdown-toc-with-nextclade">With Nextclade</a></li>
-      <li><a href="#comparison-between-pangolin-and-nextclade-clade-assignations" id="markdown-toc-comparison-between-pangolin-and-nextclade-clade-assignations">Comparison between Pangolin and Nextclade clade assignations</a></li>
+      <li><a href="#comparison-between-pangolin-and-nextclade-clade-assignments" id="markdown-toc-comparison-between-pangolin-and-nextclade-clade-assignments">Comparison between Pangolin and Nextclade clade assignments</a></li>
     </ol>
   </li>
 </ol>
@@ -743,13 +746,13 @@
 
       <ul>
         <li>
-          <p>Option 1: From your own local data using <strong>Upload Data</strong> (recommended for 1-10 datasets)</p>
+          <p>Option 1 <a href="https://youtu.be/FFCDx1rMGAQ"><i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span></a>: From your own local data using <strong>Upload Data</strong> (recommended for 1-10 datasets).</p>
 
           <!--SNIPPET-->
           <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-upload-few-files-1-10"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Upload few files (1-10)</h3>  <ol>  <li>Click on <strong>Upload Data</strong> on the top of the left panel</li>  <li>Click on <strong>Choose local file</strong> and select the files or drop the files in the <strong>Drop files here</strong> part</li>  <li>Click on <strong>Start</strong></li>  <li>Click on <strong>Close</strong></li></ol></blockquote>
         </li>
         <li>
-          <p>Option 2: From your own local data using <strong>FTP</strong> (recommended for &gt;10 datasets)</p>
+          <p>Option 2 <a href="https://youtu.be/hC8KSuT_OP8"><i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span></a>: From your own local data using <strong>FTP</strong> (recommended for &gt;10 datasets)</p>
 
           <!--SNIPPET-->
           <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-upload-many-files-10-via-ftp"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Upload many files (&gt;10) via FTP</h3>  <ol>  <li>    <p>Make sure to have an FTP client installed</p>    <p>There are many options. We can recommend <a href="https://filezilla-project.org/">FileZilla</a>, a free FTP client that is available on Windows, MacOS, and Linux.</p>  </li>  <li>Establish FTP connection to the <span class="notranslate">Galaxy</span> server    <ol>      <li>Provide the <span class="notranslate">Galaxy</span> server’s FTP server name (e.g. <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>.org</code>, <code class="language-plaintext highlighter-rouge">ftp.use<span class="notranslate">galaxy</span>.eu</code>)</li>      <li>Provide the <strong>use<span class="notranslate">rna</span>me</strong> (usually the email address) and the <strong>password</strong> on the <span class="notranslate">Galaxy</span> server</li>      <li>Connect</li>    </ol>  </li>  <li>    <p>Add the files to the FTP server by dragging/dropping them or right clicking on them and uploading them</p>    <p>The FTP transfer will start. We need to wait until they are done.</p>  </li>  <li>Open the Upload menu on the <span class="notranslate">Galaxy</span> server</li>  <li>Click on <strong>Choose FTP file</strong> on the bottom</li>  <li>Select files to import into the history</li>  <li>Click on <strong>Start</strong></li></ol></blockquote>
@@ -815,13 +818,13 @@ https://zenodo.org/record/5036687/ERR5949469_2.fastqsanger.gz
 
       <ul>
         <li>
-          <p>Option 1: Single-end data (Illumina or ONT data)</p>
+          <p>Option 1 <a href="https://youtu.be/6ZU9hFjnRDo"><i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span></a>: Single-end data (Illumina or ONT data)</p>
 
           <!--SNIPPET-->
           <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-dataset-collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a dataset collection</h3>  <ul>  <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>  <li>Check all the datasets in your history you would like to include</li>  <li>    <p>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong></p>    <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>  </li>  <li>Enter a name for your collection</li>  <li>Click <strong>Create List</strong> to build your collection</li>  <li>Click on the checkmark icon at the top of your history again</li></ul></blockquote>
         </li>
         <li>
-          <p>Option 2: Paired-end data (Illumina data)</p>
+          <p>Option 2 <a href="https://youtu.be/6toVj35q1r0"><i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span></a>: Paired-end data (Illumina data)</p>
 
           <!--SNIPPET-->
           <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-paired-collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a paired collection</h3>  <ul>  <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>  <li>Check all the datasets in your history you would like to include</li>  <li>    <p>Click <strong>For all selected..</strong> and choose <strong>Build List of Dataset Pairs</strong></p>  </li>  <li>Change the text of <em>unpaired forward</em> to a common selector for the forward <span class="notranslate">reads</span></li>  <li>Change the text of <em>unpaired reverse</em> to a common selector for the reverse <span class="notranslate">reads</span></li>  <li>Click <strong>Pair these datasets</strong> for each valid <em>forward</em> and <em>reverse</em> pair.</li>  <li>Enter a name for your collection</li>  <li>Click <strong>Create List</strong> to build your collection</li>  <li>Click on the checkmark icon at the top of your history again</li></ul></blockquote>
@@ -2038,9 +2041,9 @@ https://zenodo.org/record/5036687/ARTIC_amplicon_info_v3.tsv
   </blockquote>
 </blockquote>
 
-<h2 id="comparison-between-pangolin-and-nextclade-clade-assignations">Comparison between Pangolin and Nextclade clade assignations</h2>
+<h2 id="comparison-between-pangolin-and-nextclade-clade-assignments">Comparison between Pangolin and Nextclade clade assignments</h2>
 
-<p>We can compare <strong>Pangolin</strong> and <strong>Nextclade</strong> clade assignations by extracting the interesting columns and join them into one dataset using on sample ids.</p>
+<p>We can compare <strong>Pangolin</strong> and <strong>Nextclade</strong> clade assignments by extracting interesting columns and joining them into a single dataset using sample ids.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-comparison-clade-assignations"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Comparison clade assignations</h3>
