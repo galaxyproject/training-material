@@ -116,7 +116,7 @@ There are several possibilities to upload the data depending on how many dataset
 >
 >      {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
->      For our example datasets, the 36 `fastqsanger.gz` files (representing 18 samples) in folder `GTN - Material` -> `Variant analysis` -> `Identification of allelic variants in SARS-CoV-2 from deep sequencing reads`
+>      For our example datasets, the 36 `fastqsanger.gz` files (representing 18 samples) in folder `GTN - Material` -> `Variant analysis` -> `{{ page.title }}`
 >
 >    - Option 4: From an external server via URL
 >
