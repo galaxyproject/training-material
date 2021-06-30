@@ -4,7 +4,7 @@ tags: [new tutorial, variant-analysis, covid-19]
 contributors: [bebatut, wm75]
 tutorial: "topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html"
 cover: "topics/variant-analysis/images/sars-cov-2-variant-discovery/schema.png"
-coveralt: "Analysis flow in the 'Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data' tutorial. It teach how to obtain, run and combine workflows appropriately for 4 different types of input data. Image adapted from covid19.galaxyproject.org"
+coveralt: "Analysis flow in the 'Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data' tutorial. It teaches how to obtain, run and combine workflows appropriately for 4 different types of input data. Image adapted from covid19.galaxyproject.org"
 layout: news
 ---
 
