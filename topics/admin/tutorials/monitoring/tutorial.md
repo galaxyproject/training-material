@@ -134,7 +134,7 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
->    > ansible-playbook galaxy.yml
+>    > ansible-playbook monitoring.yml
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
