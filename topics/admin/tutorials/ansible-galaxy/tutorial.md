@@ -2427,7 +2427,7 @@ A common question we get is:
 
 Because of the great variance between sites and deployments it is not really possible to produce a guide for doing so. However, if you back your current deployment up and set all of the variables that control paths appropriately, it can be done!
 
-It's very possible to do this piecemeal, taking one component at a time to ansibilise. nginx is a very easy place to start, the database is as well. Galaxy can be rebuilt in a new location, many of us ran a hand-managed galaxy setup somewhere like `/home/janedoe/work/projects/galaxy` that suddenly became a permanent project, this is a good chance to keep that but rebuild an identical one in `/srv/galaxy` or similar, and then switch over the traffic to that new, production Galaxy.
+It's very possible to do this piecemeal, taking one component at a time to ansibilise. nginx is a very easy place to start, the database is as well. Galaxy can be rebuilt in a new location, many of us ran a hand-managed galaxy setup somewhere like `/home/janedoe/work/projects/galaxy` that suddenly became a permanent project, this is a good chance to keep that but rebuild an identical one in `/srv/galaxy` or similar, and then switch over the traffic to that new, production Galaxy. Relocating data is a bit tougher and can require rewriting entries in the database.
 
 # Final Notes
 
