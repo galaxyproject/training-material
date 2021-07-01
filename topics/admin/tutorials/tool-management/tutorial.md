@@ -311,7 +311,7 @@ If running ephemeris directly is not your preference, there is an Ansible [role]
 >
 > Others do a more mixed approach:
 >
-> > typically use Ephemeris, when I have to re-deploy a Galaxy instance (and thus install all tools) or during a galaxy maintenance, when I want to update all installed toolshed tools I one go. Otherwise, When I need to install a specific version of one tool I use the GUI.
+> > typically use Ephemeris, when I have to re-deploy a Galaxy instance (and thus install all tools) or during a Galaxy maintenance, when I want to update all installed toolshed tools in one go. Otherwise, when I need to install a specific version of one tool I use the GUI.
 > {: .quote}
 >
 > There is no one right answer
