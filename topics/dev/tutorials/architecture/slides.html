@@ -961,9 +961,9 @@ template: left-aligned
 
 ### ASGI - Application
 
-Spirtual successor to
+Spiritual successor to
 [WSGI](https://www.python.org/dev/peps/pep-0333/). An ASGI application
-is a async callable that takes in a `scope` (`dict` describing the
+is an async callable that takes in a `scope` (`dict` describing the
 connection), `send` (an async callable to respond to events via),
 and `receive` (an async callable to receive messages).
 
@@ -982,8 +982,8 @@ template: left-aligned
 
 ### ASGI &amp; Starlette Low-level Example
 
-We will talk about a lot about Galaxy and FastAPI - but much of its
-plubming is just aliases for starlette ASGI handling.
+We will talk a lot about Galaxy and FastAPI - but much of its
+plumbing is just aliases for starlette ASGI handling.
 
 ```python
 from starlette.responses import PlainTextResponse
@@ -1112,7 +1112,7 @@ def build_middleware_stack(self) -&gt; ASGIApp:
     return app
 ```
 
-Start with the router and surrond it with each layer of configured middleware.
+Start with the router and surround it with each layer of configured middleware.
 
 ---
 
@@ -1218,7 +1218,7 @@ https://www.starlette.io/routing/
 class: enlarge200
 
 In order to understand how the routing classes are setup within Galaxy,
-lets step back and and look really quickly at how Galaxy's FastAPI
+lets step back and look really quickly at how Galaxy's FastAPI
 application (ASGI endpoint) is constructed.
 
 ---
@@ -1344,7 +1344,7 @@ wsgi_handler = WSGIMiddleware(gx_webapp)
 app.mount('/', wsgi_handler)
 ```
 
-This effectively provies a fallback to our legacy WSGI application.
+This effectively provides a fallback to our legacy WSGI application.
 
 ---
 
@@ -1808,8 +1808,8 @@ class DatasetCollectionManager:
 ```]
 
 - We're no longer depending on `app`.
-- The type signature very clearly delinates what dependencies are required.
-- Unit testing can inject percise dependencies supplying only the behavior needed.
+- The type signature very clearly delineates what dependencies are required.
+- Unit testing can inject precise dependencies supplying only the behavior needed.
 
 ---
 
@@ -1836,7 +1836,7 @@ class: enlarge150
 
 ### What is Type-based Dependency Injection?
 
-A dependency injection **container** keeps tracks of singleons or recipes for how to construct each type. By
+A dependency injection **container** keeps tracks of singletons or recipes for how to construct each type. By
 default when it goes to construct an object, it can just ask the container for each dependency based on the
 type signature of the class being constructed.
 
@@ -2016,7 +2016,7 @@ def set_metadata(hda_manager: HDAManager, ldda_manager: LDDAManager, dataset_id,
 
 ### Tips for Designing New Galaxy Backend Components
 
-- Consume only the related components you need to - avoid `app` when possible.
+- Consume only the related components you need to avoid `app` when possible.
 - Annotate inputs to the component with Python types.
 - Use interface types to shield consumers from implementation details.
 - Rely on Galaxy's dependency injection to construct the component and provide it to consumers.
@@ -2033,7 +2033,7 @@ def set_metadata(hda_manager: HDAManager, ldda_manager: LDDAManager, dataset_id,
 
 ---
 
-The are many of ways to describe and visualize the Galaxy server architecture,
+There are many ways to describe and visualize the Galaxy server architecture,
 one is to imagine the Galaxy database as the ultimate source for Galaxy &quot;stuff&quot;
 and the API controllers as the ultimate sink.
 
@@ -2074,7 +2074,7 @@ in a manager instead of in the model.
 ### Galaxy Models
 
 - Database interactions powered by SQLAlchemy - https://www.sqlalchemy.org/.
-- Galaxy doesn't think in terms &quot;rows&quot; but &quot;objects&quot;.
+- Galaxy doesn't think in terms of &quot;rows&quot; but &quot;objects&quot;.
 - Classes for Galaxy model objects in `lib/galaxy/model/__init__.py`.
 - Classes mapped to tables in `lib/galaxy/model/mapping.py`
   - Describes table definitions and relationships.
@@ -3320,8 +3320,6 @@ class: enlarge150
 We do build on many of the same standards, concepts, and libraries - the entire stack isn't custom code but there is a non-trivial web framework defined in &quot;Galaxy&quot;.
 
 The Galaxy community likes Django and uses it to build newer webapps, Galaxy simply predates it and has evolved its own framework.
-
----
 
 
 
