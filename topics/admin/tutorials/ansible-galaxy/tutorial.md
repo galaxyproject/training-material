@@ -111,16 +111,16 @@ Using the [UseGalaxy.eu](https://github.com/usegalaxy-eu/infrastructure-playbook
 
 {% raw %}
 ```yaml
-galaxy_config_files:
-  - src: files/galaxy/config/builds.txt
+galaxy_config_templates:
+  - src: templates/galaxy/config/builds.txt
     dest: "{{ galaxy_config.galaxy.builds_file_path }}"
-  - src: files/galaxy/config/data_manager_conf.xml
+  - src: templates/galaxy/config/data_manager_conf.xml
     dest: "{{ galaxy_config.galaxy.data_manager_config_file }}"
-  - src: files/galaxy/config/datatypes_conf.xml
+  - src: templates/galaxy/config/datatypes_conf.xml
     dest: "{{ galaxy_config.galaxy.datatypes_config_file }}"
-  - src: files/galaxy/config/dependency_resolvers_conf.xml
+  - src: templates/galaxy/config/dependency_resolvers_conf.xml
     dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
-  - src: files/galaxy/config/disposable_email_blocklist.conf
+  - src: templates/galaxy/config/disposable_email_blocklist.conf
     dest: "{{ galaxy_config.galaxy.blocklist_file }}"
 ```
 {% endraw %}
@@ -136,7 +136,7 @@ galaxy_config:
 ```
 {% endraw %}
 
-So the references in `galaxy_config_files` to `galaxy_config` are done to ensure that the setting for e.g. "location of the datatypes config file" is the same between where we have configured Galaxy to looking for it, and where the file has been deployed, without requiring us to make variables changes in numerous places.
+So the references in `galaxy_config_templates` to `galaxy_config` are done to ensure that the setting for e.g. "location of the datatypes config file" is the same between where we have configured Galaxy to looking for it, and where the file has been deployed, without requiring us to make variables changes in numerous places.
 
 > ### {% icon tip %} Define once, reference many times
 > Using practices like those shown above helps to avoid problems caused when paths are defined differently in multiple places. The datatypes config file will be copied to the same path as Galaxy is configured to find it in, because that path is only defined in one place. Everything else is a reference to the original definition! If you ever need to update that definition, everything else will be updated accordingly.
@@ -2357,7 +2357,7 @@ With Ansible, upgrading Galaxy to a new release is incredibly easy. Here is a co
 --- a/group_vars/galaxyservers.yml
 +++ b/group_vars/galaxyservers.yml
 @@ -345,7 +345,7 @@ galaxy_instance_hostname: usegalaxy.eu
- 
+
  galaxy_repo: 'https://github.com/usegalaxy-eu/galaxy.git'
 -galaxy_commit_id: 'release_19.05'
 +galaxy_commit_id: 'release_19.09'

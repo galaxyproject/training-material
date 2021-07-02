@@ -88,7 +88,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -216,3 +216,12 @@ telegraf_plugins_extra:
+>    @@ -214,3 +214,12 @@ telegraf_plugins_extra:
 >           - timeout = "10s"
 >           - data_format = "influx"
 >           - interval = "15s"
@@ -295,12 +295,12 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 
 > ### {% icon hands_on %} Hands-on: Writing a dynamic job destination
 >
-> 1. Create and open `files/galaxy/dynamic_job_rules/hogwarts.py`
+> 1. Create and open `templates/galaxy/dynamic_job_rules/hogwarts.py`
 >
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/files/galaxy/dynamic_job_rules/hogwarts.py
+>    +++ b/templates/galaxy/dynamic_job_rules/hogwarts.py
 >    @@ -0,0 +1,19 @@
 >    +from galaxy.jobs import JobDestination
 >    +from galaxy.jobs.mapper import JobMappingException
@@ -333,7 +333,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -137,6 +137,7 @@ galaxy_local_tools:
+>    @@ -135,6 +135,7 @@ galaxy_local_tools:
 >     galaxy_dynamic_job_rules:
 >     - my_rules.py
 >     - map_resources.py
@@ -345,7 +345,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    ```
 >    {: data-commit="Add to list of deployed rules"}
 >
-> 3. We next need to configure this plugin in our job configuration (`files/galaxy/config/job_conf.xml.j2`):
+> 3. We next need to configure this plugin in our job configuration (`templates/galaxy/config/job_conf.xml.j2`):
 >
 >    {% raw %}
 >    ```diff
