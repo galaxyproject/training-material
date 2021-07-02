@@ -88,7 +88,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -216,3 +216,11 @@ telegraf_plugins_extra:
+>    @@ -216,3 +216,12 @@ telegraf_plugins_extra:
 >           - timeout = "10s"
 >           - data_format = "influx"
 >           - interval = "15s"
@@ -100,6 +100,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    +tiaas_version: master
 >    +tiaas_admin_user: admin
 >    +tiaas_admin_pass: changeme
+>    +tiaas_listen_url: "127.0.0.1:6000"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure tiaas"}
@@ -171,7 +172,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >         }
 >     
 >    +    location /tiaas {
->    +        uwsgi_pass 127.0.0.1:5000;
+>    +        uwsgi_pass {{ tiaas_listen_url }};
 >    +        uwsgi_param UWSGI_SCHEME $scheme;
 >    +        include uwsgi_params;
 >    +    }
@@ -181,7 +182,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    +    }
 >    +
 >    +    location /join-training {
->    +        uwsgi_pass 127.0.0.1:5000;
+>    +        uwsgi_pass {{ tiaas_listen_url }};
 >    +        uwsgi_param UWSGI_SCHEME $scheme;
 >    +        include uwsgi_params;
 >    +    }
