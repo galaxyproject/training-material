@@ -1,0 +1,305 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Find exons with the highest number of interactions",
+    "format-version": "0.1",
+    "name": "Find exons with the highest number of interactions",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "features"
+                }
+            ],
+            "label": "features",
+            "name": "features",
+            "outputs": [],
+            "position": {
+                "left": 200,
+                "top": 236
+            },
+            "tool_id": null,
+            "tool_state": "{\"name\": \"features\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "6487d791-7b18-41ab-915b-d7431c97c013",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "exons"
+                }
+            ],
+            "label": "exons",
+            "name": "exons",
+            "outputs": [],
+            "position": {
+                "left": 200,
+                "top": 356
+            },
+            "tool_id": null,
+            "tool_state": "{\"name\": \"exons\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "a570f545-efc2-4246-a1e9-e7a37f4653bd",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/join/gops_join_1/0.0.1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input1": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Join",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "interval"
+                }
+            ],
+            "position": {
+                "left": 461,
+                "top": 173
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/join/gops_join_1/0.0.1",
+            "tool_shed_repository": {
+                "changeset_revision": "e56b47dce68a",
+                "name": "join",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"bed\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/hg38.len\", \"fill\": \"none\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"input2\": {\"__class__\": \"ConnectedValue\"}, \"min\": \"1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.1",
+            "type": "tool",
+            "uuid": "449252c6-49a8-442e-ba13-b7df27078e26",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "Grouping1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input1": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Group",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 709,
+                "top": 170
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Grouping1",
+            "tool_state": "{\"__input_ext\": \"interval\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/hg38.len\", \"groupcol\": \"4\", \"ignorecase\": \"false\", \"ignorelines\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"operations\": [{\"__index__\": 0, \"optype\": \"length\", \"opcol\": \"4\", \"opround\": \"no\", \"opdefault\": \"\"}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.4",
+            "type": "tool",
+            "uuid": "b1fac1a9-642f-4399-abb4-6a9aec44c776",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "infile": {
+                    "id": 3,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Sort",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 967,
+                "top": 170
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutfile": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/hg38.len\", \"header\": \"0\", \"ignore_case\": \"false\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"sortkeys\": [{\"__index__\": 0, \"column\": \"2\", \"order\": \"r\", \"style\": \"n\"}], \"unique\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "abed9225-b944-41ec-8002-0538e3a3b094",
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "Show beginning1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Select first",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Select first",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1216,
+                "top": 171
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Top 5 exon IDs"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Show beginning1",
+            "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"lineNum\": \"5\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "2173aa50-7847-4716-bf6b-f47d63c7375b",
+            "workflow_outputs": [
+                {
+                    "label": "top_5",
+                    "output_name": "out_file1",
+                    "uuid": "542f9c05-cacc-4876-88db-240f55f725fe"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "comp1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input1": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 5,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Compare two Datasets",
+                    "name": "input1"
+                },
+                {
+                    "description": "runtime parameter for tool Compare two Datasets",
+                    "name": "input2"
+                }
+            ],
+            "label": null,
+            "name": "Compare two Datasets",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1472,
+                "top": 264
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Top 5 exons"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "comp1",
+            "tool_state": "{\"field1\": \"4\", \"field2\": \"1\", \"input1\": {\"__class__\": \"RuntimeValue\"}, \"input2\": {\"__class__\": \"RuntimeValue\"}, \"mode\": \"N\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "ce79976c-f009-429d-a980-cfeca6cd4352",
+            "workflow_outputs": [
+                {
+                    "label": "top_5_coords",
+                    "output_name": "out_file1",
+                    "uuid": "c9e2a6ba-e8ea-4c96-b0d4-9c237f51e249"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "introduction"
+    ],
+    "uuid": "3e7a9bf7-807f-4036-9e92-77e1d3fa023e",
+    "version": 2
+}

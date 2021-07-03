@@ -2,6 +2,9 @@
 layout: tutorial_hands_on
 
 title: "De novo transcriptome reconstruction with RNA-Seq"
+subtopic: introduction
+priority: 3
+
 zenodo_link: "https://zenodo.org/record/254485#.WKODmRIrKRu"
 questions:
   - "What genes are differentially expressed between G1E cells and megakaryocytes?"
@@ -46,8 +49,9 @@ Due to the large size of this dataset, we have downsampled it to only include re
 >
 > 1. Create a new history for this RNA-seq exercise
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Open the data upload manager (Get Data -> Upload file)
 > 3. Copy and paste the links for the reads and annotation file
@@ -61,21 +65,21 @@ Due to the large size of this dataset, we have downsampled it to only include re
 >
 > 10. Import the data from [Zenodo](https://zenodo.org/record/583140) [![DOI](https://zenodo.org/badge/DOI/10.123/GTNdenovoRNAseq.svg)](https://zenodo.org/record/583140)
 >
->    ```
->    https://zenodo.org/record/583140/files/G1E_rep1_forward_read_%28SRR549355_1%29
->    https://zenodo.org/record/583140/files/G1E_rep1_reverse_read_%28SRR549355_2%29
->    https://zenodo.org/record/583140/files/G1E_rep2_forward_read_%28SRR549356_1%29
->    https://zenodo.org/record/583140/files/G1E_rep2_reverse_read_%28SRR549356_2%29
->    https://zenodo.org/record/583140/files/Megakaryocyte_rep1_forward_read_%28SRR549357_1%29
->    https://zenodo.org/record/583140/files/Megakaryocyte_rep1_reverse_read_%28SRR549357_2%29
->    https://zenodo.org/record/583140/files/Megakaryocyte_rep2_forward_read_%28SRR549358_1%29
->    https://zenodo.org/record/583140/files/Megakaryocyte_rep2_reverse_read_%28SRR549358_2%29
->    https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
->    ```
+>     ```
+>     https://zenodo.org/record/583140/files/G1E_rep1_forward_read_%28SRR549355_1%29
+>     https://zenodo.org/record/583140/files/G1E_rep1_reverse_read_%28SRR549355_2%29
+>     https://zenodo.org/record/583140/files/G1E_rep2_forward_read_%28SRR549356_1%29
+>     https://zenodo.org/record/583140/files/G1E_rep2_reverse_read_%28SRR549356_2%29
+>     https://zenodo.org/record/583140/files/Megakaryocyte_rep1_forward_read_%28SRR549357_1%29
+>     https://zenodo.org/record/583140/files/Megakaryocyte_rep1_reverse_read_%28SRR549357_2%29
+>     https://zenodo.org/record/583140/files/Megakaryocyte_rep2_forward_read_%28SRR549358_1%29
+>     https://zenodo.org/record/583140/files/Megakaryocyte_rep2_reverse_read_%28SRR549358_2%29
+>     https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
+>     ```
 >
->    You will need to fetch the link to the annotation file yourself ;)
+>     You will need to fetch the link to the annotation file yourself ;)
 >
->    {% include snippets/import_via_link.md %}
+>     {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 {: .hands_on}
 
@@ -250,6 +254,8 @@ The recommended mode is "union", which counts overlaps even if a read only share
 >    - *"Specify strand information"*: `Stranded (Forward)`
 >    - {% icon param-file %} *"Gene annotation file"*: `in your history`
 >       - *"Gene annotation file"*: `the annotated transcripts GTF file output by GFFCompare`
+>    - *"Options for paired-end reads"*
+>       - *"Count fragments instead of reads"*: `Enabled; fragments (or templates) wil be counted instead of reads`
 >    - *"Advanced options"*
 >       - *"GFF gene identifier"*: `transcript_id`
 >

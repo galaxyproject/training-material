@@ -13,8 +13,11 @@ DRY_RUN = False
 def discover_trainings(topics_dir):
     """Auto-discover all topic metadata files."""
     for training_dir in glob.glob(os.path.join(topics_dir, '*')):
+        metadata_file = os.path.join(training_dir, 'metadata.yaml')
+        if not os.path.exists(metadata_file):
+            continue
 
-        with open(os.path.join(training_dir, 'metadata.yaml'), 'r') as handle:
+        with open(metadata_file, 'r') as handle:
             training_data = yaml.load(handle)
 
         training = {
@@ -89,7 +92,8 @@ def badge_it(label, value, color, CACHE_DIR, identifier_parts, output_dir):
 
     # Copy the badge to a per-instance named .svg file.
     up = ['..'] * (len(identifier_parts) - 1)
-    symlink_source = os.path.join(*up, real_badge_path[len('badges/'):])
+    total = up + [real_badge_path[len('badges/'):]]
+    symlink_source = os.path.join(*total)
     if not DRY_RUN:
         # Remove it if it exists, since this is easier than testing for
         # equality.

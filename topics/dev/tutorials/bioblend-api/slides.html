@@ -1,16 +1,13 @@
 ---
 layout: tutorial_slides
 logo: "GTN"
+video: true
 
 title: "Scripting Galaxy using the API and BioBlend"
 questions:
-  - "What is a RESTful API?"
-  - "How to interact with Galaxy in a script?"
-  - "Why and when should I use BioBlend?"
-objectives:
-  - "Describe the principles of RESTful APIs"
-  - "Select the most efficient way to work with Galaxy"
-  - "Use the API and BioBlend to interact with Galaxy"
+  - What is a REST API?
+  - How to interact with Galaxy programmatically?
+  - Why and when should I use BioBlend?
 requirements:
   -
     title: "IPython"
@@ -18,9 +15,10 @@ requirements:
     link: "https://ipython.org"
 time_estimation: "2h"
 key_points:
-  - "The API allows you to use Galaxy's capabilities programmatically"
-  - "BioBlend wraps the functionality of Galaxy and CloudMan APIs"
-  - "BioBlend.objects is an object-oriented interface for interacting with Galaxy"
+  - The API allows you to use Galaxy's capabilities programmatically.
+  - BioBlend makes using the Galaxy API from Python easier.
+  - BioBlend objects is an object-oriented interface for interacting with Galaxy.
+subtopic: api
 contributors:
   - odoppelt
   - fmareuil
@@ -37,7 +35,9 @@ contributors:
 
 ???
 
-The server providing the API becomes the program, and the URLs become the commands - all through the medium of the HTTP protocol.
+- An Application Programming Interface provides software developers with a definition of the methods to interact with a program or a library.
+- When the program is a remote web server like Galaxy, the methods are represented by URIs and the communication is through the HTTP protocol.
+- Nowadays, most of the Galaxy user interface makes use of the backend API to implement an asynchronous web application.
 
 ---
 
@@ -57,27 +57,20 @@ The server providing the API becomes the program, and the URLs become the comman
 
 ???
 
-The API allows you to use Galaxy's capabilities programmatically:
-- run a workflow over each file in a directory
-- run a second workflow only if the first passes some QA threshold
-- upload a FASTQ file when the sequencer finishes writing it.
-
-Additionally, the features that make Galaxy great are still applied when using the API:
-- histories still capture the exact steps of your experiments and reproducibility is maintained
-- jobs and compute resources are still managed for you
-- datasets and metadata persist and are centralized
-- your work is still sharable.
-
-It's also worth noting that all the work you did via the API is still accessible and modifiable when you return to the UI.
+- The Galaxy user interface is a better choice for explorative analysis, visualising data and drawing workflows.
+- The API instead allows you to automate tasks using Galaxy's capabilities programmatically.
+- A typical use case is to upload FASTQ files as soon as your sequencer finishes writing them, and running a quality control workflow.
+- Importantly, however you interact with Galaxy, you can equally benefit from features like reproducibility of the analysis and data sharing.
+- In fact, all the work done via the API is still accessible when you return to the UI.
 
 ---
 
 ## Galaxy API functionalities
 
 - Users can:
-  - manage histories and datasets
   - upload and download data
   - run tools and workflows, ...
+  - manage histories and datasets
 
 - Admins can also manage:
   - data libraries
@@ -88,11 +81,9 @@ It's also worth noting that all the work you did via the API is still accessible
 
 ???
 
-Admin examples:
-- upload files and start a workflow when new files are added to a directory on the server
-- automatically create libraries for new users
-- replicate the set of tools installed on another server
-- automatically assign users to the right group according to email domain
+- Most of the operations you would normally perform on the Galaxy UI are available via the API.
+- You can for example upload data, run tools and workflows, and manage your histories.
+- It is also possible to perform admin tasks, like manage data libraries and install tools.
 
 ---
 
@@ -100,34 +91,64 @@ Admin examples:
 
 .left[REpresentational State Transfer (REST) is the architectural style of the World Wide Web:]
 - client–server
-- stateless: no client context stored on the server between requests
-- cacheable by client
-- Uniform Resource Identifiers (URIs)
-- JSON media type
-- standard HTTP request methods (GET, POST, PUT, DELETE, PATCH) and status codes
+- API requests:
+  - standard HTTP request **methods** (GET, POST, PUT, DELETE,...) and status codes
+  - Uniform **Resource** Identifiers (URIs)
+  - Query and payload for parameters
 
 ???
 
-A common way to construct an API command is to view it as a simple (imperative) sentence: `<verb> <a resource>`
-- Examples of resources for the Galaxy API are: datasets, tools, jobs, histories, libraries, users... - essentially anything in Galaxy that is recorded in the database.
-- The HTTP verbs are GET (i.e. retrieve), POST (create), PUT (replace), DELETE, PATCH (partially modify). There are others but they don't apply (yet). These are [HTTP request methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods).
-  - GET calls should produce no side effects.
-  - PUT and DELETE should be idempotent, i.e. should produce the same result no matter how many times they are repeated.
-- Often additional options and parameters must be passed to specify how the command should take place.
+- The Galaxy API follows the REST model typical of web applications.
+- A REST API specifies a protocol for the interaction between a client and a server.
+- The client sends requests composed by an HTTP method and a resource.
+- The main HTTP methods are: GET (to retrieve a resource); POST (to create); PUT (to replace); and DELETE.
+- Resources are identified by Uniform Resource Identifiers.
+- Examples of resources in the Galaxy API are: datasets, tools, jobs, histories, libraries, users; essentially anything that is recorded in the Galaxy database.
+- The client often need to pass additional parameters or data to specify how a request should be carried out.
+- The server replies to the request with a status code (to indicate if there was an error) and usually some data.
 
 ---
 
-## Resources, URIs, and parameters
+## API requests
 
-- API call: **HTTP method + URI [+ payload]**
+- **HTTP method + URI [+ payload]**
 
-  - `GET https://usegalaxy.org/api/histories?order=name` -> ordered list of histories
-  - `POST /api/histories {"name": "New"}` -> create a history named "New"
-  - `PUT /api/histories/<id> {"published": true}` -> publish a history
-  - `DELETE /api/histories/<history_id>/contents/<id>` -> delete a history dataset
+  1. `GET https://usegalaxy.org/api/histories?order=name` -> ordered list of histories
 
-- URI parameters: ids in path, others in the *query* (`?name=value&...`)
+- URI parameters: IDs in path, others in the *query* (`?name=value&...`)
+
+???
+
+- Let's see some examples of possible API requests to a Galaxy server.
+- In the first example we use the GET method to retrieve a resource, in this case the list of histories.
+- The URI starts with the protocol and address of the server, followed by the resource we are interested in: the histories.
+- A URI may then include an optional query, preceded by a question mark, containing a sequence of request parameters specified as key-equal-value and separated by ampersands.
+- In this example, the query is used to ask that the list of histories is ordered by name.
+
+---
+
+## API requests
+
+- **HTTP method + URI [+ payload]**
+
+  1. `GET https://usegalaxy.org/api/histories?order=name` -> ordered list of histories
+  2. `POST /api/histories {"name": "New analysis"}` -> create a history named "New analysis"
+  3. `PUT /api/histories/<id> {"published": true}` -> publish a history
+  4. `DELETE /api/histories/<history_id>/contents/<id>` -> delete a history dataset
+
+- URI parameters: IDs in path, others in the *query* (`?name=value&...`)
 - POST/PUT payload as JSON
+
+???
+
+- In the second example, the POST method is used to create a resource on the server, in this case a new history.
+- Parameters for the POST request are passed as a payload in JSON format; more on this later.
+- In this example the payload contains the new name for the history to be created.
+- In the third example, we use the PUT method to update an existing resource, in this case to make a history public.
+- The history to modify is indentified by appending its ID to the histories URI.
+- The parameters for PUT requests are also passed in a payload.
+- In the fourth example, we use the DELETE method to remove a resource from the server.
+- In this case, we request the deletion of a particular dataset in a specific history, as indicated in the URI.
 
 ---
 
@@ -153,7 +174,10 @@ A common way to construct an API command is to view it as a simple (imperative) 
 
 ???
 
-Data returned from (and in some cases passed to) the Galaxy API is often described or formatted in JSON.
+- Request payloads passed to Galaxy and data returned by the API are encoded in the JSON format.
+- JSON is a standard format used to exchange text data and is supported in all major programming languages.
+- In JSON, strings are enclosed by double quotes, dictionaries by curly braces, and arrays by square brackets.
+- Dictionaries and arrays can be nested at will, as shown in the example.
 
 ---
 
@@ -165,14 +189,18 @@ Data returned from (and in some cases passed to) the Galaxy API is often describ
 - Galaxy error codes and messages: [`lib/galaxy/exceptions/`](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/exceptions)
   - Still a work in progress
 
+???
+
+- In REST APIs, the server should use the standardised HTTP status codes in its responses to indicate either a successful request or the type of error encountered.
+- In the Galaxy API, error status codes and messages are returned to the client by raising specific Python exceptions in the backend.
+
 ---
 
 ## How to access a REST API
 
 .left[With anything that can communicate over HTTP:]
 - Command line:
-  - `wget`: only GET
-  - `curl`: all methods
+  - `curl`
 - GUI:
   - Browsers: only GET
   - [RESTClient](https://addons.mozilla.org/firefox/addon/restclient/) add-on for Firefox
@@ -180,6 +208,18 @@ Data returned from (and in some cases passed to) the Galaxy API is often describ
 - Software libraries:
   - General HTTP libraries (e.g. *requests* for Python)
   - Service-specific libraries (e.g. *BioBlend* to access Galaxy using Python)
+
+???
+
+- A REST API can be accessed via the HTTP protocol. There are 3 main ways to do that.
+- On the command line, the curl tool can perform any type of HTTP request; look at its manual for details.
+- For graphical user interfaces, you can perform GET requests directly on your browser by simply entering the URI on the address bar.
+- For more complex requests, you can use the Advanced REST Client open source app.
+- The third and most common way is to write a program.
+- All programming languages have some general library to communicate over HTTP.
+- For Python, requests is probably the best library to do that.
+- Many web services provide dedicated higher-level libraries to access their REST API.
+- In particular, BioBlend is a Python library to interact with Galaxy that we will describe later.
 
 ---
 
@@ -190,7 +230,15 @@ Data returned from (and in some cases passed to) the Galaxy API is often describ
   - Other callers needs an **API key**: alphanumeric string (32 chars) identifying a registered user<br>
     Keep it secure, it’s the same as a username+password!
 - Always use HTTPS:
-  - **https**://localhost?key=foo is safer due to the encryption of the transmitted data
+  - **https**://example.org/api?key=foo is safer due to the encryption of the transmitted data
+
+???
+
+- A note about security.
+- When programmatically performing requests that require authentication, the client need to pass an API key.
+- An API key is an alphanumeric string uniquely identifying a user on a server.
+- Since it is equivalent to the combination of your username and password, keep it secure!
+- In particular, always use the HTTPS protocol to make requests, not HTTP which sends data unencrypted.
 
 ---
 
@@ -207,23 +255,58 @@ Data returned from (and in some cases passed to) the Galaxy API is often describ
 - Bootstrapping Galaxy
 
   ```yaml
-  # Master key that allows many API admin actions to be used without
-  # actually having a defined admin user in the database/config.  Only
-  # set this if you need to bootstrap Galaxy, you probably do not want
-  # to set this on public servers.
+  # API key that allows performing some admin actions without actually
+  # having a real admin user in the database and config. Only set this
+  # if you need to bootstrap Galaxy, in particular to create a real
+  # admin user account via API. You should probably not set this on a
+  # production server.
   master_api_key: MASTERLOCK
   ```
+
+???
+
+- There are 2 options in the Galaxy configuration file that are relevant for the API.
+- api_allow_run_as allows the specified user to impersonate any other user on the Galaxy instance.
+- master_api_key instead is an optional special API key that can be used to bootstrap a Galaxy instance, in particular to create an initial admin account.
+
+---
+
+## Galaxy API Modernization
+
+.left[Moving to [FastAPI](https://fastapi.tiangolo.com/)]
+
+- Main advantages:
+  - [Async requests](https://fastapi.tiangolo.com/async/)
+  - Subscriptions via [websockets](https://fastapi.tiangolo.com/advanced/websockets/)
+  - [OpenAPI](https://spec.openapis.org/oas/v3.1.0) interactive documentation
+  - Reduce maintenance burden
+- Challenges:
+  - Need to refactor over 200 endpoints
+
+???
+
+- The Galaxy API is currently in the process of migrating towards FastAPI, which is a modern framework for building REST APIs in Python with really interesting features.
+- For example, FastAPI can serve requests with better performances using asynchronous coroutines.
+- Another performance advantage is the ability to avoid inefficient polling by using WebSockets subscriptions.
+- In addition to the performance benefits, by using FastAPI in combination with type annotations, the Galaxy API can comply with the OpenAPI standard.
+- This standard can greatly enhance interoperability with other systems and reduce the maintenance burden of documentation and client code generation.
 
 ---
 
 ## Galaxy API pros and cons
 
 - Pros:
-  - Distributed with Galaxy
+  - Integrated with Galaxy
   - Well tested
   - Language agnostic
 - Cons:
   - Very low-level
+
+???
+
+- To summarise this first part, Galaxy has an extensive REST API that allows users and admins to interact programmatically with a server.
+- It can be accessed with any programming language, but it's also very low level.
+- For example, you need to construct complex URIs, encode payloads and decode returned data.
 
 ---
 
@@ -234,26 +317,39 @@ Data returned from (and in some cases passed to) the Galaxy API is often describ
 - Open source (MIT license)
 - Available via PyPI and from https://github.com/galaxyproject/bioblend
 
+???
+
+- A Python library called BioBlend was created in 2012 to make it easier to interact with the Galaxy API.
+- BioBlend is open source and developed by a community of contributors.
+- It is hosted on GitHub and can be installed via pip.
+
 ---
 
 ## BioBlend features
 
 - Stable procedural API
-- Supported under Python >=3.5
+- Supported under Python >=3.6
 - Wraps all main Galaxy API controllers
-- Extensive TravisCI testing:
+- Extensive Continuous Integration testing:
   - on Galaxy release_17.09 and later
-  - \>180 unit tests
+  - \>230 unit tests
 - Well-documented on https://bioblend.readthedocs.io
+
+???
+
+- BioBlend has a very stable procedural API and works on all supported Python versions.
+- It provides methods wrapping all the important Galaxy API endpoints.
+- The library uses Continuous Integration to perform a large number of tests on a wide range of Galaxy releases.
+- The documentation of BioBlend is very well curated and is often more accurate than the corresponding Galaxy API one.
 
 ---
 
 ## Tutorials - part 1
 
-Now it's a good time to try BioBlend! We have prepared
+We have prepared
 [some tutorials](https://github.com/nsoranzo/bioblend-tutorial/) as Jupyter
 notebooks, which can be executed online with Binder at
-https://mybinder.org/v2/gh/nsoranzo/bioblend-tutorial/master
+https://mybinder.org/v2/gh/nsoranzo/bioblend-tutorial/main
 
 Walk-throughs:
 - `galaxy_api_histories.ipynb`: interact with histories using the **Galaxy API**
@@ -263,6 +359,11 @@ Exercises:
 - `ex1_galaxy_api.ipynb`: launch a workflow using the **Galaxy API**
 - `ex1_bioblend.ipynb`: launch a workflow using **BioBlend**
 
+???
+
+- Now it's a good time to try the Galaxy API and BioBlend!
+- Follow the instructions on the slide to access the tutorials and exercises.
+
 ---
 
 ## BioBlend limitations
@@ -270,10 +371,19 @@ Exercises:
 - Python-only (but separate *blend4j* and *blend4php* exist)
 - Its methods just deserialize the JSON response
   - No isolation from changes in the Galaxy API
-  - Need to extract the entity id for further processing
+  - Need to extract the entity ID for further processing
 - No explicit modeling of Galaxy entities and their relationships
 - Complex operations still need many function calls
   - Need for higher-level functionality
+
+???
+
+- Although easier to use than the Galaxy API, BioBlend has some limitations.
+- First of all, it's only available for Python.
+- There are alternative libraries for Java and PHP, but they are less complete.
+- Another limitation of BioBlend is that it doesn't shield the caller from possible changes in responses from the Galaxy API.
+- It can also be annoying to have to constantly keep track of entity IDs.
+- This happens because BioBlend does not try to model Galaxy entities and how they are connected.
 
 ---
 
@@ -282,11 +392,23 @@ Exercises:
 - BioBlend.objects is an extra layer which adds an **object-oriented interface** for the Galaxy API
 - Started by Simone Leo, Luca Pireddu and Nicola Soranzo at CRS4 in 2013
 - Distributed with BioBlend
-- Presently limited to datasets, histories, jobs, libraries, tools and workflows
+- Presently limited to datasets, histories, invocations, jobs, libraries, tools and workflows
+
+???
+
+- To implement this modelling of Galaxy entities, some years ago an object-oriented interface was added on top of BioBlend: BioBlend objects
+- This is developed and distributed together with BioBlend itself.
+- When using this interface, methods will return objects encapsulating the dictionaries returned by the Galaxy API.
+- The user can then invoke further methods on these objects, for example the download method for a Dataset object.
+- Only a subset of BioBlend is available through the object interface, but most of the common user functionalities are included.
 
 ---
 
 ## Tutorials - part 2
+
+More [Jupyter notebooks](https://github.com/nsoranzo/bioblend-tutorial/) which
+can be executed online with Binder at
+https://mybinder.org/v2/gh/nsoranzo/bioblend-tutorial/main
 
 Walk-throughs:
 - `bioblend.objects_histories.ipynb`: interact with histories using **BioBlend.objects**
@@ -294,158 +416,23 @@ Walk-throughs:
 Exercises:
 - `ex1_bioblend.objects.ipynb`: launch a workflow using **BioBlend.objects**
 
+???
+
+- Now you can try BioBlend objects and see how it compares with BioBlend.
+- Follow the instructions on the slide to access the tutorials and exercises.
+
 ---
 
 ## References
 
-- https://docs.galaxyproject.org/
-- http://docs.python-requests.org/
-- https://bioblend.readthedocs.org/
+- Galaxy API docs: https://docs.galaxyproject.org/en/master/api_doc.html
+- BioBlend docs: https://bioblend.readthedocs.io/
+- BioBlend chat: https://matrix.to/#/#galaxyproject_bioblend:gitter.im
 - C. Sloggett, N. Goonasekera, E. Afgan. BioBlend: automating pipeline analyses within Galaxy and CloudMan. *Bioinformatics* 29(13), 1685-1686, 2013, doi:[10.1093/bioinformatics/btt199](https://doi.org/10.1093/bioinformatics/btt199)
-- S. Leo, L. Pireddu, G. Cuccuru, L. Lianas, N. Soranzo, E. Afgan, G. Zanetti. BioBlend.objects: metacomputing with Galaxy. *Bioinformatics* 30 (19), 2816-2817, 2014, [doi:10.1093/bioinformatics/btu386](https://doi.org/10.1093/bioinformatics/btu386)
+- S. Leo, L. Pireddu, G. Cuccuru, L. Lianas, N. Soranzo, E. Afgan, G. Zanetti. BioBlend.objects: metacomputing with Galaxy. *Bioinformatics* 30 (19), 2816-2817, 2014, doi:[10.1093/bioinformatics/btu386](https://doi.org/10.1093/bioinformatics/btu386)
 
----
+???
 
-## Before we start
-1. Get your Galaxy API key:
-   1. In your browser, open your Galaxy homepage (e.g. https://usegalaxy.org/ )
-   2. Log in, or create an account if you don't have one yet
-   3. Go to `User -> Preferences` in the top menu bar, then click on `Manage API key`
-   4. If there is no current API key available, click on `Create a new key` to generate it
-   5. Copy your API key to somewhere convenient, you will need it throughout this tutorial
-
-2. Install the tools and workflow on your Galaxy:
-	1. The tools:  Click on the Admin tab
-		* In the Tools and Tool Shed category, click on the line **Search Tool Shed**
-		* Select the **"Galaxy Main Tool Shed"**, and the **"Browse valid repositories"** line
-		* Search and install *bam_to_sam* from devteam and *samtools_sort* from IUC owner
-	2. Launch IPython on a terminal
-
----
-
-## Connect with Galaxy using IPython:
-
-* Import the GalaxyInstance object from BioBlend module:
-
-  ```python
-  from bioblend.galaxy import GalaxyInstance
-  ```
-
-* Create your GalaxyInstance instance object using your Galaxy URL and API key
-
-  ```python
-  gi = GalaxyInstance(url="http://localhost:8080", key="your key")
-  ```
-
-#### Why IPython:
-* Automatic completion, e.g. type *gi.* and then press the `Tab` key
-
-* To better understand BioBlend methods and classes, you can use `help(command), object?, object??`
-
----
-
-## Access BioBlend documentation
-
-* Let's look at the help for the **run_tool** method:
-  ```python
-  help(gi.tools.run_tool)
-  ```
-* The help should tell you that `run_tool` needs 3 inputs:
-  1. A *history_id*, where the input data is and where the output data will be
-  2. A *tool_id*, which will tell Galaxy which tool to execute
-  3. *tool_inputs*, a dictionary storing the data used to run the tool
-
----
-
-class: top
-
-## Tools Object (1/4)
-
-* Get the samtools sort tool id
-
-  ```python
-  list_tool = gi.tools.get_tools(name='sort')
-  ```
-
----
-
-## Tools Object (2/4)
-
-* The dictionary `tool_inputs` is needed to run a tool
-
-* It is a Python dictionary defined by specific methods from the `bioblend.galaxy.tools.inputs` class
-
-  ```python
-  from bioblend.galaxy.tools.inputs import inputs
-  ```
-
-* The `inputs` method instantiates a class called `InputsBuilder`:
-
-  ```python
-  help(inputs)
-  ```
-
-* Each input from the tool XML needs to be defined using the methods `set_param` or `set_dataset_param` from the `InputsBuilder` class
-==> If the input format is "data", the method to use is `set_dataset_param`
-
-* Here is an example:
-
-  ```python
-  myinputs = inputs().set_param("param1", 'value')
-        .set_dataset_param("data1", 'dataset_id', src="hda")
-  ```
-
-**To run the tool samtools sort, we need more information on the tool itself**
-
----
-
-class: top
-## Tools Object (3/4)
-
-* Get the details on the "samtool sort" tool
-
-  ```python
-  detail_tool = gi.tools.show_tool(list_tool[0]['id'], io_details=True)
-  ```
-
---
-
-```python
-detail_tool['inputs']
-[{u'argument': None,
-  u'edam_formats': [u'format_2572'],
-  u'extensions': [u'bam'],
-  ...
-  u'multiple': False,
-  u'name': u'input1', <---------------------------------------|
-  u'optional': False,                                         |
-  u'options': {u'hda': [], u'hdca': []},                      |
-  u'type': u'data'},                                          | Critical
-  {...                                                         | information
-  u'name': u'sort_mode', <------------------------------------|
-  u'optional': False,                                         |
-  u'options': [[u'Chromosomal coordinates', u'', True], <-----|
-    [u'Read names', u'-n', False]],
-  u'type': u'select',
-  u'value': u''}]
-```
-
----
-
-class: top
-## Tools Object (4/4)
-
-* Inputs information can be displayed with `detail_tool['inputs']`, use this to instantiate the inputs object
-
-  ```python
-  myinputs = inputs().set_dataset_param("input1", data_history['id'], src='hda') \
-      .set_param("sort_mode", "")
-  ```
-
---
-
-* Now you can launch `samtool sort`
-
-  ```python
-  gi.tools.run_tool(new_history['id'], detail_tool['id'], myinputs)
-  ```
+- Here you can find the links to the documentation of the Galaxy API and of BioBlend.
+- We have a dedicated Gitter channel to chat about BioBlend.
+- If you use BioBlend or BioBlend objects, please cite these papers.

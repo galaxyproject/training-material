@@ -21,6 +21,8 @@ key_points:
 contributors:
   - foellmelanie
   - bgruening
+subtopic: special
+tags: [mouse, imaging]
 ---
 
 # Introduction
@@ -35,7 +37,7 @@ Depending on the analyte of interest and the application, different mass spectro
 
 ![MSI measurement](../../images/MSI1_maldi_tof_imaging.png "MALDI TOF imaging of a mouse kidney")
 
-One common type of mass spectrometer for MSI is a MALDI Time-Of-Flight (MALDI-TOF) device. During MALDI ionization a laser shoots onto the sample that was covered with a special matrix which absorbs the laser energy and transfers it to the analytes. This process evaporizes and ionizes the analytes that due to their charge can then be accelerated in an electrical field towards the TOF tube. The time of flight through the tube to the detector is measured and as this correlates with the mass over charge (m/z) of the analyte, the flight time allows the calculation of m/z. During measurement complete mass spectra with hundreds of m/z - intensity pairs are acquired in thousands of sample plots leading to big and complex data. Each mass spectrum is annotated with coordinates (x,y) that define its location in the sample. This allows to visualize the intensity distribution of each m/z feature in the sample as a heatmap. Depending on the analyte of interest, the sample type and the mass spectrometer the sample preparation steps as well as the properties of the acquired data differ. 
+One common type of mass spectrometer for MSI is a MALDI Time-Of-Flight (MALDI-TOF) device. During MALDI ionization a laser shoots onto the sample that was covered with a special matrix which absorbs the laser energy and transfers it to the analytes. This process evaporizes and ionizes the analytes that due to their charge can then be accelerated in an electrical field towards the TOF tube. The time of flight through the tube to the detector is measured and as this correlates with the mass over charge (m/z) of the analyte, the flight time allows the calculation of m/z. During measurement complete mass spectra with hundreds of m/z - intensity pairs are acquired in thousands of sample plots leading to big and complex data. Each mass spectrum is annotated with coordinates (x,y) that define its location in the sample. This allows to visualize the intensity distribution of each m/z feature in the sample as a heatmap. Depending on the analyte of interest, the sample type and the mass spectrometer the sample preparation steps as well as the properties of the acquired data differ.
 
 This tutorial introduces the handling of the mass spectrometry imaging (MSI) file type imzML in Galaxy and some first steps to explore the data.
 The imzML file format was introduced to ease the exchange of MSI data between different instruments and data analysis software ([Schramm et al., Journal of Proteomics, 2012](https://doi.org/10.1016/j.jprot.2012.07.026)). More and more vendors provide an imzML export option and there are [software solutions](https://ms-imaging.org/wp/imzml/software-tools/) to convert proprietary files into imzML files. Before starting any analysis it is recommended to visualize all features of the data in different ways to better understand the data and to obtain an idea about it's quality and usefulness.
@@ -65,7 +67,7 @@ The data for this tutorial comes from MALDI-TOF imaging of peptides in a mouse k
 >
 > 1. **Create a new history** and give it a name.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Upload the data from [Zenodo](https://zenodo.org/record/1560646) via the **composite** option
 >
@@ -132,11 +134,11 @@ The mouse kidney dataset contains internal calibrants that were sprayed together
 >    1570.68    Fibrinopeptide_B
 >    2465.19    ACTH_18-39
 >    ```
->    {% include snippets/create_new_file.md convertspaces=true %}
+>    {% snippet faqs/galaxy/datasets_create_new_file.md convertspaces=true %}
 >
 > 2. **Rename dataset** to `Calibrants`
 >
->    {% include snippets/rename_dataset.md name="Calibrants" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="Calibrants" %}
 >
 > 3. Run the **MSI Qualitycontrol** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"MSI data"*: `mouse_kidney_cut imzML` will be automatically recognized as input file
@@ -185,7 +187,7 @@ The fold change plots are on page 4 and 5 of the pdf report. The first plot show
 
 #### Distribution images for Calibrants
 
-Have a look at the calibrant plots from page 6 on, especially regarding the distribution patterns. The colour code shows the intensity of the m/z value that is closest to the input m/z and if the ppm range contains several m/z features their intensities are averaged. The input m/z value and its name are printed on top of the image, the m/z number in the box shows the closest m/z value (that is 1296.68, as the m/z axis consists of mass bins slight differences are expected). Low *angiotensin* intensities occur at the boarder of the *bombesin* spot and at the boarder of the kidney tissue and on some spots in the kidney. In general calibrant intensities are higher in the matrix background than on the tissue due to ion suppression effects. *Substance P* shows also ion suppression in the *bombesin* spot. The heatmap shows no spatial intensity gradient what indicates that spraying of calibrants and matrix was homogeneous and that the MS performed stable during data acquisition. 
+Have a look at the calibrant plots from page 6 on, especially regarding the distribution patterns. The colour code shows the intensity of the m/z value that is closest to the input m/z and if the ppm range contains several m/z features their intensities are averaged. The input m/z value and its name are printed on top of the image, the m/z number in the box shows the closest m/z value (that is 1296.68, as the m/z axis consists of mass bins slight differences are expected). Low *angiotensin* intensities occur at the boarder of the *bombesin* spot and at the boarder of the kidney tissue and on some spots in the kidney. In general calibrant intensities are higher in the matrix background than on the tissue due to ion suppression effects. *Substance P* shows also ion suppression in the *bombesin* spot. The heatmap shows no spatial intensity gradient what indicates that spraying of calibrants and matrix was homogeneous and that the MS performed stable during data acquisition.
 
 ![Angiotensin heatmap](../../images/MSI1_angiotensin_image.png "Intensity distribution image of Angiotensin I")
 
@@ -250,7 +252,7 @@ The spectra data output can be filtered for certain spectra to obtain some spect
 >    - *"Flavor"*: `general numeric sort`
 >
 > 3. Run **Select lines that match an expression** {% icon tool %} from the 'filter and sort' category with the following parameters:
->    - {% icon param-file %} *"Sort Query"*: `Data exporter spectra` (output of **MSI data exporter** {% icon tool %})
+>    - {% icon param-file %} *"Select lines from"*: `Data exporter spectra` (output of **MSI data exporter** {% icon tool %})
 >    - *"the pattern"*: `(xy_40_40)|(xy_23_70)|(xy_20_73)`
 >
 {: .hands_on}
@@ -264,7 +266,7 @@ The spectra data output can be filtered for certain spectra to obtain some spect
 > > ### {% icon solution %} Solution
 > > 1. 1581 - Clicking on pixel output file name reveals that it has 1582 lines, every line contains the information of one spectrum, but the first line is a header line (click on dataset "MSI data exporter on data 1: spectra" in the history, the line number of the file is written below the dataset name)
 > > 2. 7 - The feature file has 8 columns and except for the mz_names, all columns contain numeric properties, that can be used for further calculations.
-> > 3. The top m/z values are around 1347.71 and its isotopes (+1 m/z). This m/z feature derives from the *substance P* internal calibrant (the m/z value is not accurate and ondolates a bit because the data was not yet binned or aligned). 
+> > 3. The top m/z values are around 1347.71 and its isotopes (+1 m/z). This m/z feature derives from the *substance P* internal calibrant (the m/z value is not accurate and ondolates a bit because the data was not yet binned or aligned).
 > {: .solution }
 {: .question}
 

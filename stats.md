@@ -117,8 +117,8 @@ layout: base
     {% assign new_members = site.data['contributors'] | most_recent_contributors: 10 %}
     <ul>
     {% for m in new_members %}
-        {% assign i = m[0] %}{% assign n = m[1].name %}
-        <li>{% include _includes/contributor-badge.html id=i name=n %}</li>
+        {% assign i = m[0] %}
+        <li>{% include _includes/contributor-badge.html id=i %}</li>
     {% endfor %}
     </ul>
     <p class="card-text">Thanks a lot for your contributions!</p>
@@ -162,6 +162,17 @@ layout: base
  </div>
 </div>
 
+
+<!-- Plausible Graphs -->
+<div class="col-md-12">
+ <div class="card">
+  <div class="card-body">
+   <h5 class="card-title">Analytics Data</h5>
+   <p class="card-text">You get to see the same data that we do! <a href="https://plausible.galaxyproject.eu/training.galaxyproject.org" target="_blank">Visit plausible.galaxyproject.eu</a>.</p>
+   <iframe src="https://plausible.galaxyproject.eu/training.galaxyproject.org" width="100%" height="1600px" frameBorder="0"></iframe>
+   </div>
+ </div>
+</div>
 
  <!-- end stats cards -->
 

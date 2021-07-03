@@ -16,7 +16,7 @@ key_points:
 contributors:
   - kpbioteam
   - kpoterlowicz
----  
+---
 > ### Agenda
 > In this tutorial we will do:
 > 1. TOC
@@ -62,11 +62,11 @@ The first step of the Infinium Human Methylation BeadChip array analysis is raw 
 
 > ### {% icon hands_on %} Hands-on: Data Loading
 >
-> Create a new history for this tutorial and give it a proper name
+> 1. Create a new history for this tutorial and give it a proper name
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> Import the following IDAT files from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) or from the data library (ask your instructor)
+> 2. Import the following IDAT files from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) or from the data library (ask your instructor)
 >    - `GSM1588704_8795207135_R01C02_Red.idat`
 >    - `GSM1588705_8795207119_R05C02_Red.idat`
 >    - `GSM1588706_8795207135_R02C02_Red.idat`
@@ -89,17 +89,17 @@ The first step of the Infinium Human Methylation BeadChip array analysis is raw 
 >    > ```
 >    {: .details}
 >
->    {% include snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> Run **Infinium Human Methylation BeadChip** {% icon tool %} with the following parameters:
+> 3. Run **Infinium Human Methylation BeadChip** {% icon tool %} with the following parameters:
 >    - {% icon param-files %} *"red channel files"*: all files ending in `_Red`
 >    - {% icon param-files %} *"green channel files"*: all files ending in `Grn`
 > ![Raw_intensity_data_loading](../../images/1Raw_intensity_data_loading.png)
 {: .hands_on}
 
-# .idat preprocessing 
+# .idat preprocessing
 
 Preprocessing and data quality assurance is an important step in Infinium Methylation Assay analysis. Idat dataset represents two colour data with a green and a red channel and can be converted into methylated and unmethylated signals or into Beta values. The Infinium Human Methylation BeadChip tool extracts and plots the quality control data frame with two columns mMed and uMed which are the medians of methylation signals (Meth and Unmeth). Comparing them against one another allows users to detect and remove low-quality samples.
 
@@ -110,10 +110,11 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 > ![idat_preprocessing](../../images/2idat_preprocessing.png)
 >
 {: .hands_on}
-> > ### {% icon comment %}(optional) Normalisation of the data
-> > If your files require normalisation, you might prefer to use one of the other preprocessing tools provided in Infinium Human Methylation BeadChip tool i.e. Preprocess Funnorm or Preprocess Quantile look for recommendation at {% cite Hansen %}.
-> >
-> {: .comment}
+
+> ### {% icon comment %}(optional) Normalisation of the data
+> If your files require normalisation, you might prefer to use one of the other preprocessing tools provided in Infinium Human Methylation BeadChip tool i.e. Preprocess Funnorm or Preprocess Quantile look for recommendation at {% cite Hansen %}.
+>
+{: .comment}
 
 # Differentially methylated regions and positions analysis
 
@@ -134,7 +135,7 @@ However, for the purpose of this tutorial we would like you to upload phenotype 
 >    In order to find segments that are positive, near zero, and negative. We need a cutoff which is one number in which case “near zero” default 0.1
 >
 > ![params](../../images/4parameters.png)
->    - *"Number of Resamples"*:`0` 
+>    - *"Number of Resamples"*:`0`
 > Default value 0 for permutation method apply selection of randomized cases with replacement from the original data while using 'bootstrap' method.
 >    - *"nullMethod"*:`permutation`
 > Method used to generate null candidate regions, must be one of ‘bootstrap’ or
@@ -144,9 +145,9 @@ However, for the purpose of this tutorial we would like you to upload phenotype 
 >
 > Search for `UCSC Main` in the tool search bar (top left)
 > ![params](../../images/5parameters.png)
->    - *"qCutoff Size"*:`0.5` 
+>    - *"qCutoff Size"*:`0.5`
 > Diffrentialy methylated positions with an FDR q-value greater than this value will not be returned.
->    - *"Variance Shrinkage"*:` TRUE` 
+>    - *"Variance Shrinkage"*:` TRUE`
 > Default TRUE as it is recommended when sample sizes are small <10
 >    - *"Genome Table"*: `wgEncodeHaibMethyl450 ... `
 > Click on `UCSC Main` {% icon tool %}. You will be taken to the **UCSC table browser**
@@ -167,12 +168,14 @@ However, for the purpose of this tutorial we would like you to upload phenotype 
 > We will now map the imported datasets against phenotype covariate and reference genome obtained from UCSC.
 > Click on the **Differentially_Methylated_Positions.bed** output in your history to expand it.
 > Set the database build of your dataset to `Human Feb. 2009 (GRCh37/hg19) (hg19)`(if it is not set automatically)
->    {% include snippets/change_dbkey.md dbkey="hg19" %}
+>
+> {% snippet faqs/galaxy/datasets_change_dbkey.md dbkey="hg19" %}
+>
 > Click on `display at UCSC` towards the bottom of the history item.
 > This will launch UCSC Genome Browser with your Custom Track
 {: .hands_on}
 
-> ![Display at UCSC](../../images/ucsc.png "UCSC genome track showing differentialy methylated regions located on chromosome 6")
+![Display at UCSC](../../images/ucsc.png "UCSC genome track showing differentialy methylated regions located on chromosome 6")
 
 > ### {% icon question %} Questions
 > How do we define phenotype covariate?

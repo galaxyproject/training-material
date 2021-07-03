@@ -101,13 +101,12 @@ having to launch jobs manually for each sample. You can start using the dataset 
 >
 > 1. Create a new history for this tutorial
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the 9 `mzXML` files into a collection named `sacurine`
 >    - Option 1: from a shared data library (ask your instructor)
 >    - Option 2: from Zenodo using the URLs given below
 >
->      [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3244991.svg)](https://doi.org/10.5281/zenodo.3244991)
 >    ```
 >    https://zenodo.org/record/3244991/files/HU_neg_048.mzML
 >    https://zenodo.org/record/3244991/files/HU_neg_090.mzML
@@ -120,13 +119,14 @@ having to launch jobs manually for each sample. You can start using the dataset 
 >    https://zenodo.org/record/3244991/files/QC1_014.mzML
 >    ```
 >
->    {% include snippets/import_via_link.md collection=true format="mzml" collection_name="sacurine" renaming=false %}
->    {% include snippets/import_from_data_library.md astype="as a Collection" %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md collection=true format="mzml" collection_name="sacurine" renaming=false %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md astype="as a Collection" %}
 >
 > 3. Make sure your data is in a **collection**. Make sure it is named `sacurine`
 >    - If you forgot to select the collection option during import, you can create the collection now:
 >
->    {% include snippets/create_dataset_collection.md %}
+>    {% snippet faqs/galaxy/collections_build_list.md %}
 {: .hands_on}
 
 You should have in your history a green Dataset collection (`sacurine`) with 9 datasets in mzml format.
@@ -142,9 +142,9 @@ This first step is only meant to read your `mzXML` file and generate an object u
 > ### {% icon hands_on %} Hands-on: MSnbase readMSData
 >
 > 1. **MSnbase readMSData** {% icon tool %} with the following parameters:
->   - *"File(s) from your history containing your chromatograms"*: the `sacurine` dataset collection
+>    - *"File(s) from your history containing your chromatograms"*: the `sacurine` dataset collection
 >
->   {% include snippets/select_collection.md %}
+>    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
 >
 >  > ### {% icon question %} Question
@@ -293,26 +293,27 @@ be uploaded into Galaxy.
 >    https://zenodo.org/record/3244991/files/sampleMetadata_completed.tsv
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 2. Check the data type of your imported files.
->   - The datatype should be `tabular`, if this is not the case, please change the datatype now
+>    - The datatype should be `tabular`, if this is not the case, please change the datatype now
 >
->     {% include snippets/change_datatype.md %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md %}
 >
->     > ### {% icon comment %} Comment
->     >
->     > Here we provided the sampleMetadata file so we know that the upload led to a 'tabular' file. But from experience we also know that
+>    > ### {% icon comment %} Comment
+>    >
+>    > Here we provided the sampleMetadata file so we know that the upload led to a 'tabular' file. But from experience we also know that
 it can happen that, when uploading a sampleMetadata table, a user obtains other inappropriate types of data. This is generally due to the file
 not following all the requirements about the format (*e.g.* wrong separator, or lines with different numbers of columns).
->     > Thus, we highly recommend that you always take a second to check the data type after the upload. This way you can handle the problem
+>    > Thus, we highly recommend that you always take a second to check the data type after the upload. This way you can handle the problem
 right away if you happen to get one of these obvious issues.
->     {: .comment}
+>    {: .comment}
 >
 > 3. Rename your sampleMetadata file with a shorter name 'sampleMetadata_completed.tsv'
 >
->     {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 
@@ -349,10 +350,10 @@ Note that you can also check the chromatograms at any moment during the workflow
 > ### {% icon hands_on %} Hands-on: xcms plot chromatogram
 >
 > 1. **xcms plot chromatogram** {% icon tool %} with the following parameters:
->   - *"RData file"*: `sacurine.raw.RData` (collection)
->   - *"Sample metadata file"*: `sampleMetadata_completed.tsv` you uploaded previously
+>    - *"RData file"*: `sacurine.raw.RData` (collection)
+>    - *"Sample metadata file"*: `sampleMetadata_completed.tsv` you uploaded previously
 >
->     {% include snippets/select_collection.md %}
+>    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -444,10 +445,10 @@ the Merger tool.
 > ### {% icon hands_on %} Hands-on: xcms findChromPeaks Merger
 >
 > 1. **xcms findChromPeaks Merger** {% icon tool %} with the following parameters:
->   - *"RData file"*: `sacurine.raw.xset.RData` (collection)
->   - *"Sample metadata file"*: `Nothing selected`
+>    - *"RData file"*: `sacurine.raw.xset.RData` (collection)
+>    - *"Sample metadata file"*: `Nothing selected`
 >
->     {% include snippets/select_collection.md %}
+>    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
 {: .hands_on}
 
@@ -511,9 +512,9 @@ previous peak group, thus not assigned to any peak group due to the 0.5 minimum 
 {: .question}
 
 When looking at the plots from plotChromPeakDensity.pdf, we can notice that in some cases there seems to be a small drift of retention time for some samples.
-This phenomenon is well known with LC-MS techniques. To be able to attribute correct groups for peaks, it may be needed to perform some retention time 
+This phenomenon is well known with LC-MS techniques. To be able to attribute correct groups for peaks, it may be needed to perform some retention time
 correction accross samples. Thus, the idea is (when needed) to apply a retention time strategy on the output of your grouping step, then to perform
-a second grouping step on the corrected data. 
+a second grouping step on the corrected data.
 
 ## Optional XCMS step: *retention time correction*
 
@@ -547,7 +548,7 @@ The algorithm uses statistical smoothing methods. You can choose between linear 
 >    > If you have a very large number of samples (*e.g.* a thousand), it might be impossible to find peaks that are present in 100% of your samples.
 If that is the case and you still set a very high value for the minimum required fraction of samples, the tool can not complete successfully the retention
 time correction. A special attention should also be given to this parameter when you expect a large number of peaks not to be present in part of your samples
-(*e.g.* when dealing with some blank samples).  
+(*e.g.* when dealing with some blank samples).
 >    {: .comment}
 >
 {: .hands_on}
@@ -579,7 +580,7 @@ correction by comparing the chromatogram you obtained previously to a new one ge
 
 The retention time correction step is not mandatory. However, when it is used retention time are modified.
 Consequently, applying this step on your data requires to complete it with an additional 'grouping' step using the
-**xcms groupChromPeaks (group)** {% icon tool %} tool again. 
+**xcms groupChromPeaks (group)** {% icon tool %} tool again.
 
 Parameters for this second group step are expected to be similar to the first group step. Nonetheless,
 since retention times are supposed to be less variable inside a same peak group now, in some cases it can be relevant to
@@ -686,7 +687,7 @@ There is a huge number of parameters that will not be detailed in this short tut
 for a first attempt to run this function. Nevertheless, a few parameters have to be set at each run:
  - The polarity has to be set since it affects annotation.
  - For statistical analysis, you have to define if you have two or more conditions to compare. These conditions had to be defined in the
- sample metadata uploaded previously and taken into account in the XCMS workflow. 
+ sample metadata uploaded previously and taken into account in the XCMS workflow.
  - You can define how many significant ions will be used for extracted ions chromatogram (EIC) plot. These plots will be included in a pdf file.
 
  Apart from the PDF file, the main three outcomes from **CAMERA.annotate** {% icon tool %} are three columns added in the variableMetadata file:
@@ -754,12 +755,14 @@ long and thus may reduce the names' readability. Hence, we highly recommend you 
 > ### {% icon hands_on %} Hands-on: Copying the 3 tables into a new history and renaming them
 >
 > 1. Create a new history with the 3 tables
->    {% include snippets/copy_dataset_in_new_history.md history_name="Sacurine Processing" %}
+>
+>    {% snippet faqs/galaxy/histories_copy_dataset.md history_name="Sacurine Processing" %}
+>
 > 2. Rename the 3 tables with shorter names:
 >    - `xset.merged.groupChromPeaks.adjustRtime.groupChromPeaks.fillpeaks.dataMatrix.tsv` -> **dataMatrix.tsv**
 >    - `xset.merged.groupChromPeaks.*.fillChromPeaks.annotate.variableMetadata.tsv` -> **variableMetadata.tsv**
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 
@@ -960,7 +963,7 @@ statistical analysis, and you do not need the pools anymore since they do not pa
 > >
 > > 1. The *0.3* value corresponds to the maximum value kept in the dataset ('Interval of values to remove: *upper*') regarding the
 *poolCV* column in your *Variable metadata* file. As mentioned previously in 'Step 1: global variability in the data' section,
-pool CV values are commonly considered as reflecting unstable ions when superior to 0.3. 
+pool CV values are commonly considered as reflecting unstable ions when superior to 0.3.
 Although the signal drift correction decreased the proportion of ions with pool CV > 30% from 74% to 53%, we still need to get
 rid of these remaining unstable ions for which sample comparisons would be difficult and at high risk of being unreliable.
 > > 2. The *1.0* value corresponds to the maximum value kept in the dataset ('Interval of values to remove: *upper*') regarding the
@@ -1013,7 +1016,7 @@ and the ions that we have in our dataset. For this calculation we can use the **
 based on a relevant statistical strategy (which would more likely be to *use* multiple testing correction). It is based on
 the fact that with only 6 biological samples in a dataset of 2706 ions it is almost impossible to settle for correlation
 coefficients significantly different from zero. Consequently, to illustrate better the filtering step that will follow,
-we chose not to apply the multiple testing correction, allowing us to obtain something that looks like 'significant' results 
+we chose not to apply the multiple testing correction, allowing us to obtain something that looks like 'significant' results
 regarding statistical indices.
 >    {: .comment}
 >
@@ -1102,7 +1105,7 @@ an adequate reference bank online. However, it is also possible that none of the
 case, you may need to construct your own database, to be able to search for relevant matches for your ions of interest.
 
 In this tutorial, we chose the 'easy' case of human urinary samples. Thus, one possibility we have is to use the online reference
-bank HMDB (The Human Metabolome Database). Let's try requesting directly into this widely used bank using the **HMDB MS search** 
+bank HMDB (The Human Metabolome Database). Let's try requesting directly into this widely used bank using the **HMDB MS search**
 {% icon tool %} tool.
 
 

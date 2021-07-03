@@ -7,7 +7,7 @@
 #    docker run -p "8080:80" -t computational-chemistry
 #    use -d to automatically dowload the datalibraries in the container
 
-FROM bgruening/galaxy-stable:19.01
+FROM quay.io/bgruening/galaxy:20.05
 
 MAINTAINER Galaxy Training Material
 

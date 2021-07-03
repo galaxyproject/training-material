@@ -81,7 +81,7 @@ In this tutorial, you will learn how to create a workflow that downloads a selec
 >
 > 1. If you are logged in, create a new history for this tutorial.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 > 2. **IDR Download** {% icon tool %} with the following parameters:
 >    - *"How would you like to specify the IDs of images to download?"*: `As text (comma-separated list of IDs or a valid IDR link)`
 >    -  *"Image IDs to download"*: `http://idr.openmicroscopy.org/webclient/?show=image-295900|image-295905|image-295910|image-295918|image-295928|image-295934`

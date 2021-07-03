@@ -53,7 +53,7 @@ For this exercise we will use a basic password file method for authenticating - 
 >
 >    ```diff
 >    @@ -14,6 +14,10 @@
->             uwsgi_pass 127.0.0.1:8080;
+>             uwsgi_pass 127.0.0.1:5000;
 >             uwsgi_param UWSGI_SCHEME $scheme;
 >             include uwsgi_params;
 >    +        auth_basic           galaxy;
@@ -61,9 +61,14 @@ For this exercise we will use a basic password file method for authenticating - 
 >    +        uwsgi_param          HTTP_REMOTE_USER $remote_user;
 >    +        uwsgi_param          HTTP_GX_SECRET SOME_SECRET_STRING;
 >         }
->
+>     
 >         # Static files can be more efficiently served by Nginx. Why send the
 >    ```
+
+>    > ### {% icon tip %} Running this tutorial *just* for Reports?
+>    > Add the `auth_basic` and `auth_basic_user_file` lines to your `location /reports/`
+>    {: .tip}
+>
 >
 >    `auth_basic` enables validation of username and password using the "HTTP Basic Authentication" protocol. Its value `galaxy` is used as a realm name to be displayed to the user when prompting for credentials.
 >    `auth_basic_user_file` specifies the file that keeps usernames and passwords.
@@ -76,7 +81,7 @@ For this exercise we will use a basic password file method for authenticating - 
 >    > This can happen mostly when some users have command line access to the Galaxy server, which is considered a bad practice.
 >    {: .tip}
 >
-> 2. Add a pre_task using the [`pip`](https://docs.ansible.com/ansible/latest/modules/pip_module.html) module which installs the library `passlib`, which is required for `htpasswd`.
+> 2. Add a pre_task using the [`pip`](https://docs.ansible.com/ansible/2.9/modules/pip_module.html) module which installs the library `passlib`, which is required for `htpasswd`.
 >
 >    Add a pre_task using the [`htpasswd`](https://docs.ansible.com/ansible/2.4/htpasswd_module.html) module which sets up a password file in `/etc/nginx/passwd`, with owner and group set to root, and a name and password, and a mode of 0640.
 >    > ### {% icon question %} Question
@@ -118,6 +123,10 @@ For this exercise we will use a basic password file method for authenticating - 
 >        remote_user_maildomain: "{% raw %}{{ inventory_hostname }}{% endraw %}"
 >        remote_user_secret: SOME_SECRET_STRING
 >    ```
+>
+>    > ### {% icon tip %} Running this tutorial *just* for Reports?
+>    > You don't need to make the above changes for Galaxy then.
+>    {: .tip}
 >
 >    Set the `remote_user_maildomain` option to the appropriate domain name for your site.
 >
@@ -163,7 +172,7 @@ location /api/ {
 
 > ### {% icon tip %} Notification of Registration
 > There is no built-in way to be notified if users are registered, with external authentication or built-in. However, you could automate this easily. There is a [gxadmin](https://github.com/usegalaxy-eu/gxadmin) command we use called `gxadmin query latest-users` which Björn uses often. Other sites have other methods, e.g. Nicola's [cron script](https://gist.github.com/nsoranzo/f023e26aa60024ef6a7e3a3fe5fb2e4f) which runs daily on his server, to add new users to a group according to their email domain name.
-{: tip}
+{: .tip}
 
 # Reverting
 

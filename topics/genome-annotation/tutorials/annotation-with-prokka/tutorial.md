@@ -13,6 +13,7 @@ objectives:
   - "Annotate genome with Prokka"
   - "View annotations in JBrowse"
 time_estimation: "1h"
+level: Introductory
 key_points:
   - "Prokka is a useful tool to annotate a bacterial genome."
   - "JBrowse can be used to inspect the annotation of a genome."
@@ -46,7 +47,7 @@ Prokka requires assembled contigs.
 >
 > 1. Make sure you have an empty analysis history. Give it a name.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the following files from [Zenodo](https://doi.org/10.5281/zenodo.1156405) or from the shared data library
 >
@@ -54,8 +55,8 @@ Prokka requires assembled contigs.
 >    https://zenodo.org/record/1156405/files/contigs.fasta
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
 
@@ -65,7 +66,7 @@ Now we will run the tool called Prokka.
 
 > ### {% icon hands_on %} Hands-on: Annotate genome
 >
-> 1. **Prokka** {% icon tool %} with the following parameters (leave everything else unchanged)
+> 1. {% tool [Prokka](toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0) %} with the following parameters (leave everything else unchanged)
 >    - {% icon param-file %} *"contigs to annotate"*: `contigs.fasta`
 {: .hands_on}
 
@@ -85,9 +86,9 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 
 > ### {% icon hands_on %} Hands-on: Visualize the annotation
 >
-> 1. **JBrowse** {% icon tool %} with the following parameters
+> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters
 >    - *"Reference genome to display"*: `Use a genome from history`
->       - {% icon param-file %} *"Select the reference genome"*: `fna` output of **Prokka** {% icon tool %}
+>       - {% icon param-file %} *"Select the reference genome"*: `fna` output of {% tool [Prokka](toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0) %}
 >
 >       This sequence will be the reference against which annotations are displayed
 >
@@ -99,10 +100,10 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 >      We will choose to display the annotations (the Prokka.gff file).
 >
 >      - In **1: Track Group**
->           - *"Track Cateogry"*: `gene annotations`
+>           - *"Track Category"*: `gene annotations`
 >           - Click on `Insert Annotation Track` and fill it with:
->               - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
->               - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `gff` output of **Prokka** {% icon tool %}
+>               - *"Track Type"*: `GFF/GFF3/BED Features`
+>               - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `gff` output of {% tool [Prokka](toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0) %}
 >
 >    A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view its contents and play with it
 >
@@ -121,3 +122,9 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 >      - you can download the FASTA sequence by clicking on the disk icon
 > ![JBrowse](../../images/jbrowse6.png)
 {: .hands_on}
+
+## What's Next
+
+After automatic annotation of prokaryotic genome, if inspection of predicted genes with JBrowse introduced mistakes, e.g. wrong exon/intron limits, splitted genes, or merged genes -- or simply if you wish to rename genes or provide additional functional (e.g., Gene Ontology) data, setting up a manual curation project using [Apollo](http://genomearchitect.org/) helps a lot to manually fix these errors.
+
+The [Apollo training]({% link topics/genome-annotation/tutorials/apollo/tutorial.md %}) should provide additional guidance.

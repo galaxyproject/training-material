@@ -90,7 +90,7 @@ tutorial offers two ways to access the sequenced reads input data:
 
 1. Direct download from the NCBI SRA based on accession numbers and using the
    dedicated **Faster Download** tool
-   
+
    Use this method if it works and is fast enough for you, and if you are
    interested in learning to obtain short-reads data directly from NCBI, in
    general.
@@ -101,7 +101,7 @@ tutorial offers two ways to access the sequenced reads input data:
    It also showcases **rule-based** uploads and demonstrates how they can be
    used to download several datasets and to arrange them into easy to handle
    data structures at the same time.
-   
+
    > ### {% icon details %} Rule-based uploads
    > In this tutorial you will only use the features of Galaxy's rule-based
    > uploader that are required to get the input data ready for our analysis,
@@ -115,7 +115,7 @@ tutorial offers two ways to access the sequenced reads input data:
    Use this method if the direct download from the NCBI SRA does not work, or
    is too slow for your time frame, or if you are interested in advanced use
    of Galaxy's data import functionality.
-   
+
 The corresponding two step-by-step instructions below have been crafted to
 produce identically arranged data structures in your history so all subsequent
 steps are independent of the data source you choose.
@@ -126,8 +126,8 @@ steps are independent of the data source you choose.
 >
 > 1. Create a new history for this tutorial and give it a proper name
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Create a new dataset listing the SRA accession numbers of the Illumina paired-end input data for this tutorial:
 >
@@ -139,7 +139,7 @@ steps are independent of the data source you choose.
 >
 >    call it, *e.g.*, `Illumina accessions` and set its datatype to `tabular`.
 >
->    {% include snippets/create_new_file.md format="tabular" %}
+>    {% snippet faqs/galaxy/datasets_create_new_file.md format="tabular" %}
 >
 > 3. Create another new dataset listing the SRA accession numbers of the Nanopore input data for this tutorial:
 >
@@ -169,7 +169,7 @@ steps are independent of the data source you choose.
 >    Name tags are meant to help you identify the origin of datasets quickly.
 >    Feel free to either use the suggested names above or choose ones you like.
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 > 4. Retrieve the Illumina reads data from NCBI:
 >
@@ -219,8 +219,8 @@ steps are independent of the data source you choose.
 >
 > 1. Create a new history for this tutorial and give it a proper name
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import Illumina-sequenced reads data from [Zenodo](https://zenodo.org/record/3732359)
 >
@@ -260,7 +260,7 @@ steps are independent of the data source you choose.
 >            - *"Paired-end Indicator"*: `C`
 >          - Click **Apply**
 >        - *"Type"*: `fastqsanger.gz`
->        - *"Name"*: `Illumnia PE data` (or similar)
+>        - *"Name"*: `Illumina PE data` (or similar)
 >        - *"Add nametag for name:"* {% icon param-check %}
 >
 >          > ### {% icon comment %} Name tags in the analysis
@@ -375,7 +375,7 @@ metrics for all samples before and after preprocessing.
 >          JSON-formatted reports, second collection produced by **fastp**
 >          {% icon tool %}
 >
->    This tool run generates a single output with the combined quality reports
+>    This tool run generates a single webpage output with the combined quality reports
 >    for all samples before and after processing with **fastp** {% icon tool %}.
 >
 {: .hands_on}
@@ -480,7 +480,7 @@ widely-used, well-tested tool here.
 >    > >    shows the lowest relative contamination with human reads, that
 >    > >    does not mean that all other reads are from SARS-CoV-2. They could
 >    > >    come from other species (*e.g.*, bacteria or other viruses)
->    > >    contained in this BALF sample. 
+>    > >    contained in this BALF sample.
 >    >  {: .solution }
 >    {: .question}
 >
@@ -502,7 +502,7 @@ aligner, which is particularly efficient for mapping long reads.
 >      - {% icon param-collection %} *"Select fastq dataset"*: the collection
 >        of Nanopore-sequenced reads as set up in the *Get Data* section
 >
->    - *"Select analysis mode (sets default)"*: `Oxford Nanopore read to reference mapping. ...`
+>    - *"Select a profile of preset options"*: `Oxford Nanopore read to reference mapping. ...`
 >
 >    This tool run produces one collection with the actual mapped reads for
 >    each Nanopore-sequenced sample. Unlike **Bowtie2** it does not have an
@@ -543,7 +543,7 @@ Nanopore-sequenced samples.
 Next, we are going to filter the data from both collections to retain only
 those reads that were *not* mapped to the human genome, *i.e* those of
 potential viral origin.
-   
+
 > ### {% icon hands_on %} Hands-on: Mapped reads filtering
 >
 > 1. **Samtools view** {% icon tool %} to filter the Illumina-sequenced reads mapped with Bowtie2:
@@ -588,10 +588,10 @@ potential viral origin.
 >    For the outputs of step 1 and step 2 above, reset the database/build
 >    (dbkey) to `unspecified (?)`.
 >
->    {% include snippets/change_dbkey.md dbkey="unspecified (?)" %}
+>    {% snippet faqs/galaxy/datasets_change_dbkey.md dbkey="unspecified (?)" %}
 >
 {: .hands_on}
-   
+
 
 # Format conversion of remaining reads
 
@@ -919,4 +919,3 @@ contigs is a challenging task, which Unicycler solved without major issues!
 Nevertheless, good quality assemblies still rely on proper preprocessing and
 filtering to reduce the number of misassembly events, ambiguous assemblies and
 of incorporation of sequencing errors into the final assembly.
-

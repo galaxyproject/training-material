@@ -2,6 +2,8 @@
 layout: tutorial_hands_on
 
 title: RNA Seq Counts to Viz in R
+subtopic: visualisation
+
 zenodo_link: "https://zenodo.org/record/3477564/"
 requirements:
   -
@@ -58,7 +60,7 @@ Sometimes we want to have some customizations on visualization, some complex tab
 > >
 > > 2. Note the history ID of the dataset in your Galaxy history
 > >
-> > 3. Rstudio in Galaxy provides some special functions to import and export from your history:
+> > 3. {% tool [RStudio](interactive_tool_rstudio) %} in Galaxy provides some special functions to import and export from your history:
 > >
 > >    ```R
 > >    annotatedDEgenes <- read.csv(gx_get(2), sep="\t") # will import dataset number 2 from your history, use the correct ID for your dataset.
@@ -90,7 +92,7 @@ In this tutorial, we will take the list of DE genes extracted from DESEq2's outp
 >
 {: .agenda}
 
-{% include snippets/launch_rstudio.md %}
+{% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
 
 # Visualization
 

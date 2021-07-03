@@ -17,15 +17,16 @@
 title: "Galaxy Training!"
 email: galaxytrainingnetwork@gmail.com
 description: A collection of tutorials generated and maintained by Galaxy Community Members across the world
-url: "https://galaxyproject.github.io/"
+url: "https://training.galaxyproject.org"
 baseurl: "/training-material"
 github_repository: "https://github.com/galaxyproject/training-material"
-github_repository_branch: "master"
+github_repository_branch: "main"
 gitter_url: "https://gitter.im/Galaxy-Training-Network/Lobby"
 logo: "assets/images/GTN.png"
 small_logo: "assets/images/GTN-60px.png"
 help_url: https://help.galaxyproject.org/
 other_languages: #"fr, ja, es, pt, ar"
+  en: English
   fr: Français
   ja: 日本語
   es: Español
@@ -65,6 +66,7 @@ kramdown:
   auto_ids: true
   toc_levels: 1..2
 
+
 # Figure plugin parameters
 figurify:
   skip_empty: true  # or false if you want to generate all figures, even those without any alt or title
@@ -74,6 +76,12 @@ figurify:
     - base_slides
   skip_titles:
     - Example of an image with a caption
+
+abbreviate:
+  skip_layouts:
+    - introduction_slides
+    - tutorial_slides
+    - base_slides
 
 # Scholar
 scholar:
@@ -85,8 +93,10 @@ scholar:
 
 # Icon tag config
 icon-tag:
+  announcement: fas fa-bullhorn
   code-in: far fa-keyboard
   code-out: fas fa-laptop-code
+  cofest: fas fa-users
   comment: far fa-comment-dots
   congratulations: far fa-thumbs-up
   curriculum: fas fa-graduation-cap
@@ -94,32 +104,43 @@ icon-tag:
   docker_image: fab fa-docker
   email: far fa-envelope
   exchange: fas fa-exchange-alt
+  event: far fa-calendar
   feedback: far fa-comments
   galaxy-barchart: fas fa-chart-bar
+  galaxy-bug: fas fa-bug
   galaxy-chart-select-data: fas fa-database
+  galaxy-clear: fas fa-times-circle
   galaxy-columns: fas fa-columns
   galaxy-cross: fas fa-times
   galaxy-dropdown: fas fa-caret-down
   galaxy-eye: far fa-eye
   galaxy-gear: fas fa-cog
   galaxy-history: fas fa-columns
+  galaxy-home: fas fa-home
   galaxy-info: fas fa-info-circle
   galaxy-library: far fa-folder
   galaxy-pencil: fas fa-pencil-alt
   galaxy-refresh: fas fa-sync-alt
+  galaxy-rulebuilder-history: fas fa-history
   galaxy-save: far fa-save
   galaxy-scratchbook: fas fa-th
   galaxy-selector: far fa-check-square
+  galaxy-star: far fa-star
   galaxy-tags: fas fa-tags
+  galaxy-toggle: fas fa-toggle-on
   galaxy-upload: fas fa-upload
   galaxy-wf-connection: fas fa-arrows-alt-h
   galaxy-wf-new: fas fa-plus
+  galaxy-wf-report-download: fas fa-print
   galaxy_instance: fas fa-external-link-alt
   github: fab fa-github
   gitter: fab fa-gitter
+  gtn-theme: fas fa-palette
   hall-of-fame: fas fa-users
   hands_on: fas fa-pencil-alt
   help: far fa-question-circle
+  history-annotate: fas fa-comment
+  history-share: fas fa-toggle-on
   instances: fas fa-globe
   interactive_tour: fas fa-magic
   keypoints: fas fa-key
@@ -155,6 +176,8 @@ icon-tag:
   wf-input: fas fa-chevron-circle-right
   workflow-runtime-toggle: far fa-caret-square-up
   workflow: fas fa-share-alt
+  workflow-run: fas fa-play
+  video: fas fa-video
   zenodo_link: far fa-copy
 
 # To exclude in _site
@@ -182,6 +205,14 @@ exclude:
   - vendor/
   - node_modules/
   - .jekyll-cache/
+  - snippets
+  - plantuml.jar
+  - "**/plantuml.jar"
+  - Procfile
+  - app.json
+  - .venv
+  # These are provided by an S3 proxy in production
+  - videos/topics/
 include:
   - .nojekyll
 
@@ -191,4 +222,12 @@ plugins:
   - jekyll-scholar
   - jekyll-redirect-from
   - jekyll-last-modified-at
+  - jekyll-sitemap
 
+# Sitemap Configuration
+defaults:
+  -
+    scope:
+      path:            "topics/*/images/**"
+    values:
+      sitemap:         false

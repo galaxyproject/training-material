@@ -21,46 +21,46 @@ contributors:
 ---
 
 # Introduction
+{:.no_toc}
 
-
-The majority of life on Earth is non-diploid and represented by prokaryotes, viruses, and their derivatives, such as our own mitochondria or plant's chloroplasts. In non-diploid systems, allele frequencies can range anywhere between 0 and 100% and there could be multiple (not just two) alleles per locus. The main challenge associated with non-diploid variant calling is the difficulty in distinguishing between the sequencing noise (abundant in all NGS platforms) and true low frequency variants. Some of the early attempts to do this well have been accomplished on human mitochondrial DNA although the same approaches will work equally good on viral and bacterial genomes:
-
-* 2014 - [Maternal age effect and severe germ-line bottleneck in the inheritance of human mitochondrial DNA](http://www.pnas.org/content/111/43/15474.abstract)
-* 2015 - [Extensive tissue-related and allele-related mtDNA heteroplasmy suggests positive selection for somatic mutations](http://www.pnas.org/content/112/8/2491.abstract).
+The majority of life on Earth is non-diploid and represented by prokaryotes, viruses, and their derivatives, such as our own mitochondria or plant's chloroplasts. In non-diploid systems, allele frequencies can range anywhere between 0 and 100% and there could be multiple (not just two) alleles per locus. The main challenge associated with non-diploid variant calling is the difficulty in distinguishing between the sequencing noise (abundant in all NGS platforms) and true low frequency variants. Some of the early attempts to do this well have been accomplished on human mitochondrial DNA although the same approaches will work equally good on viral and bacterial genomes ({% cite Rebolledo-Jaramillo2014 %}, {% cite Li2015 %}).
 
 As an example of non-diploid systems, we will be using human mitochondrial genome. However, this approach will also work for most bacterial and viral genomes.
 
 There are two ways one can call variants:
 
 1. By comparing reads against an existing genome assembly
-2. By assembling a genome first and then mapping against that assembly
+1. By assembling a genome first and then mapping against that assembly
 
-|                          |
-|--------------------------|
-| ![2 approaches](../../images/ref_vs_assembly.jpg) |
-| <small>This figure from a manuscript by [Olson:2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4493402/) contrasts the two approaches.</small> |
+![2 approaches](../../images/ref_vs_assembly.jpg "This figure from {% cite Olson2015 %} contrasts the two approaches.")
 
-In this tutorials we will take the *first* path, in which we map reads against an existing assembly. Later in the course (after we learn about assembly approaches) we will try the second approach as well.
+In this tutorial we will take the *first* path, in which we map reads against an existing assembly. Later in the course, after we learn about assembly approaches, we will try the second approach as well.
 
-The goal of this example is to detect heteroplasmies (variants within mitochondrial DNA). Mitochondria are transmitted maternally, and heteroplasmy frequencies may change dramatically and unpredictably during the transmission due to a germ-line bottleneck [Cree:2008](https://www.nature.com/ng/journal/v40/n2/abs/ng.2007.63.html). As we mentioned above, the procedure for finding variants in bacterial or viral genomes will be essentially the same.
+The goal of this example is to detect heteroplasmies - variants within mitochondrial DNA. Mitochondria are transmitted maternally, and heteroplasmy frequencies may change dramatically and unpredictably during the transmission due to a germ-line bottleneck ({% cite Cree2008 %}). As we mentioned above, the procedure for finding variants in bacterial or viral genomes will be essentially the same.
 
-Zenodo contains [datasets representing a child and a mother](https://doi.org/10.5281/zenodo.1251112). These datasets were obtained by paired-end Illumina sequencing of human genomic DNA enriched for mitochondria. The enrichment was performed using long-range PCR with two primer pairs that amplify the entire mitochondrial genome. Samples will therefore still contain a lot of DNA from the nuclear genome, which, in this case, is a contaminant.
+Datasets representing a child and a mother are available in [Zenodo](https://doi.org/10.5281/zenodo.1251112). These datasets were obtained by paired-end Illumina sequencing of human genomic DNA enriched for mitochondria. The enrichment was performed using long-range PCR with two primer pairs that amplify the entire mitochondrial genome. Samples will therefore still contain a lot of DNA from the nuclear genome, which, in this case, is a contaminant.
 
-# Importing example datasets
-
-For this tutorial we have prepared a subset of data previously [published](http://www.pnas.org/content/111/43/15474.abstract) by our group. Let's import these data into Galaxy. They are available from [this Galaxy Library](https://usegalaxy.org/library/list#folders/Fe4842bd0c37b03a7) or via [Zenodo](https://zenodo.org/record/582600)
-
-> ### {% icon hands_on %} Hands-on: Getting the data
-
-> ### Option 1: Data upload from a Galaxy Library
+> ### Agenda
 >
+> In this tutorial, we will cover:
 >
+> 1. TOC
+> {:toc}
 >
->  * Create and name a new history for this tutorial.
+{: .agenda}
+
+# Importing data
+
+For this tutorial we have prepared a subset of data previously by our group ({% cite Rebolledo-Jaramillo2014 %}). Let's import these data into Galaxy. They are available from [this Galaxy Library](https://usegalaxy.org/library/folders/Fe4842bd0c37b03a7) or via [Zenodo](https://zenodo.org/record/582600)
+
+> ### {% icon hands_on %} Hands-on: Get the data
 >
->    {% include snippets/create_new_history.md %}
+> 1. Create a new history for this tutorial and give it a meaningful name
 >
->  * Import from [Zenodo](https://zenodo.org/record/1251112) or from the data library the files:
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
+>
+> 1. Import files from [Zenodo](https://zenodo.org/record/1251112):
 >
 >    ```
 >    https://zenodo.org/record/1251112/files/raw_child-ds-1.fq
@@ -69,100 +69,101 @@ For this tutorial we have prepared a subset of data previously [published](http:
 >    https://zenodo.org/record/1251112/files/raw_mother-ds-2.fq
 >    ```
 >
-{: .hands_on}
-
-> ### Option 2: Data upload from a Galaxy Library
+> 1. Check that all newly created datasets in your history are assigned datatype
+>    `fastqsanger`, and fix any missing or wrong datatype assignment
 >
->
->
-> ![Data upload from a Galaxy Library](../../images/mt_lib.png)
->
->  * Go to this [this Galaxy library](https://usegalaxy.org/library/list#folders/Fe4842bd0c37b03a7)
->  * You will see screen like the one shown above
->  * Click **to History** button.
->  * Galaxy will prompt you to ask whether you want to import these data into already existing or new history.
->  * It is better to create a new history, so type some descriptive name within `or create new` text field
->  * Click **Import**
->  * A green message will appear once the import is done. Click on it and will see the history you have just created. It will be populated with the four datasets as shown below:
->
-> ![Imported data in history](../../images/mt_imported_data.png)
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastqsanger" %}
 >
 {: .hands_on}
 
+## Checking data quality
 
+Before proceeding with the analysis, we need to find out how good the data actually is. For this will use [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
 
-# QC'ing the data
-
-Before proceeding with the analysis, we need to find out how good the data actually is. For this will use `FastQC` tool that can be found in **NGS: QC and manipulation &#8594; FastQC** section of Galaxy tools:
-
-> ### Quality Control of the data
+> ### {% icon hands_on %} Hands-on: Assess quality of data
 >
+> 1. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} on each of the four FASTQ datasets with the following parameters:
+>       - {% icon param-files %} *"Short read data from your current history"*: all 4 FASTQ datasets selected with **Multiple datasets**
 >
-> ![FastQC input and dependencies](../../images/mt_qc.png)
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
->QC'ing reads using [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/). Note that we selected all four datasets at once by pressing the middle button ![Middle button](../../images/mt_middle_button.png) adjacent to the **Short read data from your current history** widget. Once `FastQC` job runs, you will be able to look at the HTML reports generated by this tool.
->
->The data have generally high quality in this example:
->
->![FastQC output plot](../../images/mt_qc_plot.png)
->
->FastQC plot for one of the mitochondrial datasets shows that qualities are acceptable for 250 bp reads (mostly in the green, which is at or above [phred score](https://en.wikipedia.org/wiki/Phred_quality_score) of 30).
 {: .hands_on}
 
+Once the FastQC jobs runs, you will be able to look at the HTML reports generated by this tool. The data have generally high quality in this example:
 
-# Mapping the reads
+![FastQC output plot](../../images/mt_qc_plot.png "FastQC plot for one of the mitochondrial datasets shows that qualities are acceptable for 250 bp reads (mostly in the green, which is at or above [Phred score](https://en.wikipedia.org/wiki/Phred_quality_score) of 30).")
 
-Our reads are long (250 bp) and as a result we will be using [bwa mem](https://arxiv.org/pdf/1303.3997v2.pdf) to align them against the reference genome as it has good mapping performance for longer reads (100bp and up).
+# Mapping reads to a reference
 
-> ### Mapping with `bwa mem`
+Our reads are long (250 bp) so we will use BWA-MEM ({% cite Li2013 %}) to align them against the reference genome as it has good mapping performance for longer reads (100bp and up).
+
+> ### {% icon hands_on %} Hands-on: Map reads
 >
->![bwa mem input and parameters](../../images/mt_bwa_mem.png)
+> 1. Use {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} to map the reads to the reference genome with the following parameters:
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a built-in genome index`
+>        - *"Using reference genome"*: `Human: hg38` (or a similarly named option)
+>    - *"Single or Paired-end reads"*: `Paired`
+>       - {% icon param-files %} *"Select first set of reads"*: select both `-1` datasets selected with **Multiple datasets**
+>       - {% icon param-files %} *"Select second set of reads"*: select both `-2` datasets selected with **Multiple datasets**
+>    - *"Set read groups information?"*: `Set read groups (SAM/BAM specification)`
+>      - *"Auto-assign"*: `Yes`
+>      - *"Auto-assign"*: `Yes`
+>      - *"Platform/technology used to produce the reads (PL)"*: `ILLUMINA`
+>      - *"Auto-assign"*: `Yes`
 >
->Running `bwa mem` on our datasets. Look **carefully** at parameter settings:
->
-> * We select `hg38` version of the human genome as the reference
-> * By using the middle button again ![middle button](../../images/mt_middle_button.png) we select datasets 1 and 3 as **Select the first set of reads** and datasets 2 and 4 as **Select the second set of reads**. Galaxy will automatically launch two bwa-mem jobs using datasets 1,2 and 3,4 generating two resulting BAM files.
-> * By setting **Set read groups information** to `Set read groups (SAM/BAM specifications)` and clicking **Auto-assign** we will ensure that the reads in the resulting BAM dataset are properly set.
 {: .hands_on}
 
-# Merging BAM datasets
+> ### {% icon comment %} More about selecting datasets
+>
+> By selecting datasets 1 and 3 as **Select the first set of reads** and datasets 2 and 4 as **Select the second set of reads**, Galaxy will automatically launch two BWA-MEM jobs using datasets 1,2 and 3,4 generating two resulting BAM files.
+> By setting **Set read groups information** to `Set read groups (SAM/BAM specifications)` and clicking **Auto-assign** we will ensure that the reads in the resulting BAM dataset are properly set.
+{: .comment}
+
+# Postprocessing mapped reads
+
+## Merging BAM datasets
 
 Because we have set read groups, we can now merge the two BAM dataset into one. This is because read groups label each read as belonging to either *mother* or *child*.
 
-We can BAM dataset using **NGS: Picard** &#8594; **MergeSAMFiles** tool:
-
-> ### Merging multiple datasets into one
+> ### {% icon hands_on %} Hands-on: Merge multiple datasets into one
 >
->![MergeSAMFiles input and parameters](../../images/mt_bam_merging.png)
+> 1. Use {% tool [MergeSAMFiles](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1) %} to merge the BAM datasets with the following parameters:
+>    - {% icon param-files %} *"Select SAM/BAM dataset or dataset collection"*: select both BAM datasets produced by **BWA-MEM** {% icon tool %}
+>    - *"Select validation stringency"*: `Lenient`
 >
->Merging two BAM datasets into one. Note that two inputs are highlighted.
 {: .hands_on}
 
 ## Removing duplicates
 
-Preparation of sequencing libraries (at least at the time of writing) for technologies such as Illumina (used in this example) involves PCR amplification. It is required to generate sufficient number of sequencing templates so that a reliable detection can be performed by base callers. Yet PCR has its own biases, which are especially profound in cases of multi-template PCR used for construction of sequencing libraries (Kanagawa et al. [2003](https://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Abstract&list_uids=16233530)).
+Preparation of sequencing libraries (at least at the time of writing) for technologies such as Illumina (used in this example) involves PCR amplification. It is required to generate sufficient number of sequencing templates so that a reliable detection can be performed by base callers. PCR has its own biases which are especially profound in cases of multi-template PCR used for construction of sequencing libraries ({% cite Kanagawa2003 %}).
 
-Duplicates can be identified based on their outer alignment coordinates or using sequence-based clustering. One of the common ways for identification of duplicate reads is the `MarkDuplicates` utility from [Picard](https://broadinstitute.github.io/picard/command-line-overview.html) package. It is designed to identify both PCR and optical duplicates (the following is an excerpt from Picard documentation):
+Duplicates can be identified based on their outer alignment coordinates or using sequence-based clustering. One of the common ways for identification of duplicate reads is the **MarkDuplicates** utility from [Picard](https://broadinstitute.github.io/picard/command-line-overview.html) package which is designed to identify both PCR and optical duplicates.
 
-*Duplicates are identified as read pairs having identical 5' positions (coordinate and strand) for both reads in a mate pair (and optionally, matching unique molecular identifier reads; see BARCODE_TAG option). Optical, or more broadly Sequencing, duplicates are duplicates that appear clustered together spatially during sequencing and can arise from optical/imagine-processing artifacts or from bio-chemical processes during clonal amplification and sequencing; they are identified using the READ_NAME_REGEX and the OPTICAL_DUPLICATE_PIXEL_DISTANCE options. The tool's main output is a new SAM or BAM file in which duplicates have been identified in the SAM flags field, or optionally removed (see REMOVE_DUPLICATE and REMOVE_SEQUENCING_DUPLICATES), and optionally marked with a duplicate type in the 'DT' optional attribute. In addition, it also outputs a metrics file containing the numbers of READ_PAIRS_EXAMINED, SECONDARY_OR_SUPPLEMENTARY_RDS, UNMAPPED_READS, UNPAIRED_READS, UNPAIRED_READ DUPLICATES, READ_PAIR_DUPLICATES, and READ_PAIR_OPTICAL_DUPLICATES. Usage example: java -jar picard.jar MarkDuplicates I=input.bam \ O=marked_duplicates.bam M=marked_dup_metrics.txt.*
-
-Let's use **NGS: Picard** &#8594; **MarkDuplicates** tool:
-
-> ### De-duplicating mapped data
+> ### {% icon details %} More about MarkDuplicates
 >
->![MarkDuplicates tool parameters](../../images/mt_dedup.png)
+> Duplicates are identified as read pairs having identical 5' positions (coordinate and strand) for both reads in a mate pair (and optionally, matching unique molecular identifier reads; see `BARCODE_TAG` option). Optical, or more broadly sequencing, duplicates are duplicates that appear clustered together spatially during sequencing and can arise from optical/imagine-processing artifacts or from biochemical processes during clonal amplification and sequencing; they are identified using the `READ_NAME_REGEX` and the `OPTICAL_DUPLICATE_PIXEL_DISTANCE` options. The tool's main output is a new SAM or BAM file in which duplicates have been identified in the SAM flags field, or optionally removed (see `REMOVE_DUPLICATE` and `REMOVE_SEQUENCING_DUPLICATES`), and optionally marked with a duplicate type in the 'DT' optional attribute. In addition, it also outputs a metrics file containing the numbers of `READ_PAIRS_EXAMINED`, `SECONDARY_OR_SUPPLEMENTARY_RDS`, `UNMAPPED_READS`, `UNPAIRED_READS`, `UNPAIRED_READ DUPLICATES`, `READ_PAIR_DUPLICATES`, and `READ_PAIR_OPTICAL_DUPLICATES`.
 >
->De-duplicating the merged BAM dataset
+> Usage example: `java -jar picard.jar MarkDuplicates I=input.bam O=marked_duplicates.bam M=marked_dup_metrics.txt`
+{: .details}
+
+> ### {% icon hands_on %} Hands-on: De-duplicate mapped data
+>
+> 1. Use {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2) %} to de-duplicate the merged BAM datasets with the following parameters:
+>    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: select the merged BAM dataset produced by **MergeSAMFiles** {% icon tool %}
+>    - *"The scoring strategy for choosing the non-duplicate among candidates"*: `SUM_OF_BASE_QUALITIES`
+>    - *"The maximum offset between two duplicate clusters in order to consider them optical duplicates"*: `100`
+>    - *"Select validation stringency"*: `Lenient`
+>
 {: .hands_on}
 
-**MarkDuplicates** produces a BAM dataset with duplicates removed and also a metrics file. Let's take a look at the metrics data:
+MarkDuplicates produces a BAM dataset with duplicates removed and also a metrics file. Let's take a look at the metrics data:
 
 ```
-raw_child-ds-	55	27551	849	55	50	1658	1	0.061026	219750
+raw_child-ds-	55	27551	849	55	50	1658	1	0.06103	219750
 raw_mother-ds-	95	54973	1951	95	89	4712	2	0.08645	302188
 ```
 
-where columns are:
+Column headers are:
 
 - LIBRARY (read group in our case)
 - UNPAIRED_READS_EXAMINED
@@ -175,12 +176,20 @@ where columns are:
 - PERCENT_DUPLICATION
 - ESTIMATED_LIBRARY_SIZE
 
-In other words the two datasets had ~6% and ~9% duplicates, respectively.
+> ### {% icon question %} Question
+>
+> 1. What percent of read duplication are found in each read group (child and mother)?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. The two datasets have ~6% and ~9% duplicates for child and mother, respectively.
+> >
+> {: .solution}
+{: .question}
 
-# Left-aligning indels
+## Left-aligning indels
 
-Left aligning of indels (a variant of re-aligning) is extremely important for obtaining accurate variant calls. This concept, while not difficult, requires some explanation. For illustrating how left-aligning works we expanded on an example provided by [Tan:2015](https://academic.oup.com/bioinformatics/article/31/13/2202/196142/Unified-representation-of-genetic-variants). Suppose you have a reference sequence and a sequencing read:
-
+Left aligning of indels (a variant of re-aligning) is extremely important for obtaining accurate variant calls. For illustrating how left-aligning works, we expanded on an example provided by {% cite Tan2015 %}. Suppose you have a reference sequence and a sequencing read:
 
 ```
 Reference GGGCACACACAGGG
@@ -202,165 +211,102 @@ GGGCACACACAGGG            Ref: GCA
 GGG--CACACAGGG            Alt: G
 ```
 
-The last of these is *left-aligned*. In this case gaps (dashes) as moved as far left as possible (for a formal definition of left-alignment and variant normalization see [Tan:2015](https://bioinformatics.oxfordjournals.org/content/31/13/2202.abstract)).
+The last of these is *left-aligned*. In this case gaps (represented by dashes) are moved as far left as possible. For a formal definition of left-alignment and variant normalization, see {% cite Tan2015 %}.
 
-Let's perform left alignment using **NGS: Variant Analysis** &#8594; **BamLeftAlign**:
-
-> ### Left-aligning indels
+> ### {% icon hands_on %} Hands-on: Left-align indels
 >
->![BamLeftAlign parameters](../../images/mt_left_align.png)
+> 1. Use {% tool [BamLeftAlign](toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.1) %} to perform left alignment with the following parameters:
+>    - *"Choose the source for the reference genome"*: `Locally cached`
+>    - {% icon param-file %} *"Select alignment file in BAM format"*: select the BAM dataset produced by **MarkDuplicates** {% icon tool %}
+>    - *"Using reference genome"*: `hg38`
+>    - *"Maximum number of iterations'*: `5`
 >
->Left-aligning a de-duplicated BAM dataset
 {: .hands_on}
 
-# Filtering reads
+## Filtering reads
 
-Remember that we are trying to call variants in mitochondrial genome. Let focus only on the reads derived from mitochondria genome by filtering everything else out. For this we will use **NGS: BamTools** &#8594; **Filter**:
+Remember that we are trying to call variants in mitochondrial genome. Let focus only on the reads derived from mitochondria genome by filtering everything else out.
 
-> ### Filtering BAM data
+> ### {% icon hands_on %} Hands-on: Filter BAM data
 >
->![Filtering BAM datasets tool parameters](../../images/mt_filtering.png)
+> 1. Use {% tool [Filter BAM datasets on a variety of attributes](toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1) %} with the following parameters:
+>    - {% icon param-file %} *"BAM dataset(s) to filter"*: select the BAM dataset produced by **BamLeftAlign** {% icon tool %}
+>    - In *"Condition"*:
+>      - In *"1: Condition"*:
+>        - In *"Filter"*:
+>          - In *"1: Filter"*:
+>            - *"Select BAM property to filter on"*: `mapQuality`
+>            - *"Filter on read mapping quality (phred scale)"*: `>=20`
+>          - In *"2: Filter"*:
+>            - *"Select BAM property to filter on"*: `isPaired`
+>            - *"Selected mapped reads"*: `Yes`
+>          - Click on *"Insert Filter"*
+>          - In *"3: Filter"*:
+>            - *"Select BAM property to filter on"*: `isProperPair`
+>            - *"Select reads with mapped mate"*: `Yes`
+>          - Click on *"Insert Filter"*
+>          - In *"4: Filter"*:
+>            - *"Select BAM property to filter on"*: `reference`
+>            - *"Select reads with mapped mate"*: `chrM`
 >
->Filtering reads. There are several important point to note here:
->
->- **mapQuality** is set to ≥20. Mapping quality reflects the probability that the read is placed *incorrectly*. It uses [phred scale](https://en.wikipedia.org/wiki/Phred_quality_score). Thus 20 is 1/100 or 1% chance that the read is incorrectly mapped. By setting this parameter to ≥20, we will keep all reads that have 1% or less probability of being mapped incorrectly.
->- *isPaired* will eliminate singleton (unpaired) reads (make sure **Yes** is clicked on)
->- *isProperPair* will only keep reads that map to the same chromosome and are properly placed (again, make sure **Yes** is clicked)
->- *reference* is set to *chrM*
+>    > ### {% icon comment %} Filtering reads
+>    > Further explanation of the filters used:
+>    > - *mapQuality* is set to ≥20. Mapping quality reflects the probability that the read is placed incorrectly using [phred scale](https://en.wikipedia.org/wiki/Phred_quality_score). Thus 20 is 1/100 or 1% chance that the read is incorrectly mapped. By setting this parameter to ≥20, we will keep all reads that have 1% or less probability of being mapped incorrectly.
+>    > - *isPaired* will eliminate singleton (unpaired) reads.
+>    > - *isProperPair* will only keep reads that map to the same chromosome and are properly placed.
+>    > - *reference* is set to the mitochondrial chromosome, chrM.
+>    {: .comment}
 {: .hands_on}
 
-# Calling non-diploid variants with FreeBayes
+# Calling non-diploid variants
 
-FreeBayes is widely used for calling variants in diploid systems. However, it can also be used for calling variants in pooled samples where the number of samples is not known. This is the exact scenario we have here: in our sample we have multiple mitochondrial (or bacterial or viral) genomes, but we do not know exactly how many. Thus we will use the `--pooled-continuous` option of FreeBayes to generate *frequency-based* variant calls as well as some other options highlighted below (the tool is in **NGS: Variant Analysis** &#8594; **FreeBayes**):
+FreeBayes is widely used for calling variants in diploid systems. However, it can also be used for calling variants in pooled samples where the number of samples is not known. This is the exact scenario we have here: in our sample we have multiple mitochondrial (or bacterial or viral) genomes, but we do not know exactly how many. Thus we will use the `--pooled-continuous` option of FreeBayes to generate frequency-based variant calls as well as some other options highlighted below.
 
-> ### Running `FreeBayes`
+> ### {% icon hands_on %} Hands-on: Calling variants
 >
->![FreeBayes parameters](../../images/mt_freebayes_genome.png)
+> 1. Use {% tool [FreeBayes](toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.3.1) %} to call variants with the following parameters:
+>    - *"Choose the source for the reference genome"*: `Locally cached`
+>    - *"Run in batch mode?"*: `Run individually`
+>    - {% icon param-file %} *"BAM dataset"*: select the BAM dataset produced by last **Filter** {% icon tool %} step
+>    - *"Using reference genome"*: `hg38`
+>    - *"Limit variant calling to a set of regions?"*: `Limit to region`
+>      - *"Region Chromosome"*: `chrM`
+>      - *"Region Start"*: `1`
+>      - *"Region End"*: `16000`
+>    - *"Choose parameter selection level"*: `5: Full list of options`
+>      - *"Population model options"*: `Set population model options`
+>        - *"The expected mutation rate or pairwise nucleotide diversity among the population under analysis"*: `0.001`
+>        - *"Set ploidy for the analysis"*: `1`
+>        - *"Assume that samples result from pooled sequencing"*: `Yes`
+>        - *"Output all alleles which pass input filters, regardless of genotyping outcome or model"*: `Yes`
 >
->Set genome to `hg38` (the latest version)
+>    > ### {% icon comment %} Population model options
+>    > The "Population model options" are one of the most important parameter choices to make when calling variants in non-diploid systems.
+>    {: .comment}
 >
->![Genome parameter](../../images/mt_freebayes_regions.png)
+>      - *"Allelic scope options"*: `Set allelic scope options`
+>        - *"Ignore SNP alleles"*: `No`
+>        - *"Ignore indels alleles"*: `No`
+>        - *"Ignore multi-nucleotide polymorphisms, MNPs"*: `Yes`
+>        - *"Ignore complex events (composites of other classes)"*: `Yes`
 >
->Set regions to `chrM` from `1` to `16000`. This will simply save us time since we are only interested in mitochondrial variants anyway
+>    > ### {% icon comment %} Allelic scope options
+>    > Mitochondria has a number of low complexity regions (mononucleotide repeats). Setting the allelic scope parameters as described above will decrease noise from these regions.
+>    {: .comment}
 >
->![regions parameter](../../images/mt_freebayes_alloptions.png)
+>      - *"Input filters"*: `Set input filters`
+>        - *"Exclude alignments from analysis if they have a mapping quality less than"*: `20`
+>        - *"Exclude alleles from analysis if their supporting base quality less than"*: `30`
 >
->Choose `Complete list of all samples` from **Choose parameter selection level** drop down.
->
->![Complete list of all samples](../../images/mt_freebayes_popmodel.png)
->
->This is one of the most important parameter choices one needs to make when calling variants in non-diploid systems. Here set **Set population model** to `Yes` and then:
->
->* Set **ploidy** to `1`
->* Set **Assume that samples result from pooled sequencing** to `Yes`
->* Set **Output all alleles which pass input filters, regardless of genotyping outcome or model** to `Yes`
->
->![Allelic scope parameter](../../images/mt_freebayes_allelic_scope.png)
->
->We will also set **Allelic scope** to `Yes` and restrict variant types to single nucleotide polymorphisms only by:
->
->* Keeping **Ignore SNP alleles** and **Ignore indels alleles** set to `No`
->* Setting **Ignore MNPs** and **Ignore complex events** to `Yes`
->
->Mitochondria has a number of low complexity regions (mononucleotide repeats). Setting these parameters as described above will decrease noise from these regions.
->
->![Additional parameters](../../images/mt_freebayes_inputfilters.png)
->
->Finally, let's set **Input filters** to `Yes` and set:
->
->* **Exclude alignments from analysis if they have a mapping quality less than** to `20` (phred score of 20). This will make FreeBayes to only consider reliably aligned reads.
->* **Exclude alleles from analysis if their supporting base quality less than** to `30` (phred score of 30). This will make FreeBayes to only consider high quality bases.
+>    > ### {% icon comment %} Filter options
+>    > Setting *Exclude alignments from analysis if they have a mapping quality less than* to `20` (phred score of 20) will make FreeBayes only consider reliably aligned reads.
+>    > Setting *Exclude alleles from analysis if their supporting base quality less than* to `30` (phred score of 30) will make FreeBayes only consider high quality bases.
+>    {: .comment}
 {: .hands_on}
 
-This will produce a [VCF dataset](https://samtools.github.io/hts-specs/VCFv4.2.pdf) shows below (you may need to scroll sideways to see it in full). It lists 25 sites of interest (everything starting with a `#` is a comment):
+FreeBayes will produce a [VCF](https://samtools.github.io/hts-specs/VCFv4.2.pdf) dataset similar to what is shown below (you may need to scroll sideways to see it in full). It lists 25 sites of interest. For brevity, the header lines have been removed:
 
 ```
-Chrom	Pos	ID	Ref	Alt	Qual	Filter	Info	Format	data
-##fileformat=VCFv4.2
-##fileDate=20200211
-##source=freeBayes v1.1.0-46-g8d2b3a0-dirty
-##reference=/galaxy/data/hg38/sam_index/hg38.fa
-##contig=<ID=chr1,length=248956422>
-##contig=<ID=chr2,length=242193529>
-##contig=<ID=chr3,length=198295559>
-##contig=<ID=chr4,length=190214555>
-##contig=<ID=chr5,length=181538259>
-##contig=<ID=chr6,length=170805979>
-##contig=<ID=chr7,length=159345973>
-##contig=<ID=chr8,length=145138636>
-##contig=<ID=chr9,length=138394717>
-##contig=<ID=chr10,length=133797422>
-##contig=<ID=chr11,length=135086622>
-##contig=<ID=chr12,length=133275309>
-##contig=<ID=chr13,length=114364328>
-##contig=<ID=chr14,length=107043718>
-##contig=<ID=chr15,length=101991189>
-##contig=<ID=chr16,length=90338345>
-##contig=<ID=chr17,length=83257441>
-##contig=<ID=chr18,length=80373285>
-##contig=<ID=chr19,length=58617616>
-##contig=<ID=chr20,length=64444167>
-##contig=<ID=chr21,length=46709983>
-##contig=<ID=chr22,length=50818468>
-##contig=<ID=chrX,length=156040895>
-##contig=<ID=chrY,length=57227415>
-##contig=<ID=chrM,length=16569>
-##phasing=none
-##commandline="freebayes --region chrM:1..16000 --bam b_0.bam --fasta-reference /galaxy/data/hg38/sam_index/hg38.fa --vcf ./vcf_output/part_chrM:1..16000.vcf --theta 0.001 --ploidy 1 -J -K -X -u -n 0 --haplotype-length 3 --min-repeat-size 5 --min-repeat-entropy 0 -m 20 -q 30 -R 0 -Y 0 -e 1000 -F 0.2 -C 2 -G 1 --min-coverage 0 --min-alternate-qsum 0"
-##INFO=<ID=NS,Number=1,Type=Integer,Description="Number of samples with data">
-##INFO=<ID=DP,Number=1,Type=Integer,Description="Total read depth at the locus">
-##INFO=<ID=DPB,Number=1,Type=Float,Description="Total read depth per bp at the locus; bases in reads overlapping / bases in haplotype">
-##INFO=<ID=AC,Number=A,Type=Integer,Description="Total number of alternate alleles in called genotypes">
-##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
-##INFO=<ID=AF,Number=A,Type=Float,Description="Estimated allele frequency in the range (0,1]">
-##INFO=<ID=RO,Number=1,Type=Integer,Description="Count of full observations of the reference haplotype.">
-##INFO=<ID=AO,Number=A,Type=Integer,Description="Count of full observations of this alternate haplotype.">
-##INFO=<ID=PRO,Number=1,Type=Float,Description="Reference allele observation count, with partial observations recorded fractionally">
-##INFO=<ID=PAO,Number=A,Type=Float,Description="Alternate allele observations, with partial observations recorded fractionally">
-##INFO=<ID=QR,Number=1,Type=Integer,Description="Reference allele quality sum in phred">
-##INFO=<ID=QA,Number=A,Type=Integer,Description="Alternate allele quality sum in phred">
-##INFO=<ID=PQR,Number=1,Type=Float,Description="Reference allele quality sum in phred for partial observations">
-##INFO=<ID=PQA,Number=A,Type=Float,Description="Alternate allele quality sum in phred for partial observations">
-##INFO=<ID=SRF,Number=1,Type=Integer,Description="Number of reference observations on the forward strand">
-##INFO=<ID=SRR,Number=1,Type=Integer,Description="Number of reference observations on the reverse strand">
-##INFO=<ID=SAF,Number=A,Type=Integer,Description="Number of alternate observations on the forward strand">
-##INFO=<ID=SAR,Number=A,Type=Integer,Description="Number of alternate observations on the reverse strand">
-##INFO=<ID=SRP,Number=1,Type=Float,Description="Strand balance probability for the reference allele: Phred-scaled upper-bounds estimate of the probability of observing the deviation between SRF and SRR given E(SRF/SRR) ~ 0.5, derived using Hoeffding's inequality">
-##INFO=<ID=SAP,Number=A,Type=Float,Description="Strand balance probability for the alternate allele: Phred-scaled upper-bounds estimate of the probability of observing the deviation between SAF and SAR given E(SAF/SAR) ~ 0.5, derived using Hoeffding's inequality">
-##INFO=<ID=AB,Number=A,Type=Float,Description="Allele balance at heterozygous sites: a number between 0 and 1 representing the ratio of reads showing the reference allele to all reads, considering only reads from individuals called as heterozygous">
-##INFO=<ID=ABP,Number=A,Type=Float,Description="Allele balance probability at heterozygous sites: Phred-scaled upper-bounds estimate of the probability of observing the deviation between ABR and ABA given E(ABR/ABA) ~ 0.5, derived using Hoeffding's inequality">
-##INFO=<ID=RUN,Number=A,Type=Integer,Description="Run length: the number of consecutive repeats of the alternate allele in the reference genome">
-##INFO=<ID=RPP,Number=A,Type=Float,Description="Read Placement Probability: Phred-scaled upper-bounds estimate of the probability of observing the deviation between RPL and RPR given E(RPL/RPR) ~ 0.5, derived using Hoeffding's inequality">
-##INFO=<ID=RPPR,Number=1,Type=Float,Description="Read Placement Probability for reference observations: Phred-scaled upper-bounds estimate of the probability of observing the deviation between RPL and RPR given E(RPL/RPR) ~ 0.5, derived using Hoeffding's inequality">
-##INFO=<ID=RPL,Number=A,Type=Float,Description="Reads Placed Left: number of reads supporting the alternate balanced to the left (5') of the alternate allele">
-##INFO=<ID=RPR,Number=A,Type=Float,Description="Reads Placed Right: number of reads supporting the alternate balanced to the right (3') of the alternate allele">
-##INFO=<ID=EPP,Number=A,Type=Float,Description="End Placement Probability: Phred-scaled upper-bounds estimate of the probability of observing the deviation between EL and ER given E(EL/ER) ~ 0.5, derived using Hoeffding's inequality">
-##INFO=<ID=EPPR,Number=1,Type=Float,Description="End Placement Probability for reference observations: Phred-scaled upper-bounds estimate of the probability of observing the deviation between EL and ER given E(EL/ER) ~ 0.5, derived using Hoeffding's inequality">
-##INFO=<ID=DPRA,Number=A,Type=Float,Description="Alternate allele depth ratio. Ratio between depth in samples with each called alternate allele and those without.">
-##INFO=<ID=ODDS,Number=1,Type=Float,Description="The log odds ratio of the best genotype combination to the second-best.">
-##INFO=<ID=GTI,Number=1,Type=Integer,Description="Number of genotyping iterations required to reach convergence or bailout.">
-##INFO=<ID=TYPE,Number=A,Type=String,Description="The	type	of	allele,	either	snp,	mnp,	ins,	del,	or	complex.">
-##INFO=<ID=CIGAR,Number=A,Type=String,Description="The extended CIGAR representation of each alternate allele, with the exception that '=' is replaced by 'M' to ease VCF parsing. Note that INDEL alleles do not have the first matched base (which is provided by default, per the spec) referred to by the CIGAR.">
-##INFO=<ID=NUMALT,Number=1,Type=Integer,Description="Number	of	unique	non-reference	alleles	in	called	genotypes	at	this	position.">
-##INFO=<ID=MEANALT,Number=A,Type=Float,Description="Mean number of unique non-reference allele observations per sample with the corresponding alternate alleles.">
-##INFO=<ID=LEN,Number=A,Type=Integer,Description="allele length">
-##INFO=<ID=MQM,Number=A,Type=Float,Description="Mean mapping quality of observed alternate alleles">
-##INFO=<ID=MQMR,Number=1,Type=Float,Description="Mean mapping quality of observed reference alleles">
-##INFO=<ID=PAIRED,Number=A,Type=Float,Description="Proportion of observed alternate alleles which are supported by properly paired read fragments">
-##INFO=<ID=PAIREDR,Number=1,Type=Float,Description="Proportion of observed reference alleles which are supported by properly paired read fragments">
-##INFO=<ID=MIN_DP,Number=1,Type=Integer,Description="Minimum depth in gVCF output block.">
-##INFO=<ID=END,Number=1,Type=Integer,Description="Last position (inclusive) in gVCF output record.">
-##INFO=<ID=technology.ILLUMINA,Number=A,Type=Float,Description="Fraction	of	observations	supporting	the	alternate	observed	in	reads	from	ILLUMINA">
-##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
-##FORMAT=<ID=GQ,Number=1,Type=Float,Description="Genotype Quality, the Phred-scaled marginal (or unconditional) probability of the called genotype">
-##FORMAT=<ID=GL,Number=G,Type=Float,Description="Genotype Likelihood, log10-scaled likelihoods of the data given the called genotype for each possible genotype generated from the reference and alternate alleles given the sample ploidy">
-##FORMAT=<ID=DP,Number=1,Type=Integer,Description="Read Depth">
-##FORMAT=<ID=AD,Number=R,Type=Integer,Description="Number of observation for each allele">
-##FORMAT=<ID=RO,Number=1,Type=Integer,Description="Reference allele observation count">
-##FORMAT=<ID=QR,Number=1,Type=Integer,Description="Sum of quality of the reference observations">
-##FORMAT=<ID=AO,Number=A,Type=Integer,Description="Alternate allele observation count">
-##FORMAT=<ID=QA,Number=A,Type=Integer,Description="Sum of quality of the alternate observations">
-##FORMAT=<ID=MIN_DP,Number=1,Type=Integer,Description="Minimum depth in gVCF output block.">
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	raw_child-ds-	raw_mother-ds-
 chrM	73	.	A	G	30438.6	.	AB=0;ABP=0;AC=2;AF=1;AN=2;AO=949;CIGAR=1X;DP=950;DPB=950;DPRA=0;EPP=144.879;EPPR=5.18177;GTI=0;LEN=1;MEANALT=1;MQM=55.8314;MQMR=60;NS=2;NUMALT=1;ODDS=2187.64;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=34948;QR=37;RO=1;RPL=322;RPP=215.867;RPPR=5.18177;RPR=627;RUN=1;SAF=421;SAP=29.2075;SAR=528;SRF=0;SRP=5.18177;SRR=1;TYPE=snp;technology.ILLUMINA=1	GT:DP:AD:RO:QR:AO:QA:GL	1:226:0,226:0:0:226:8314:-739.462,0	1:724:1,723:1:37:723:26634:-2346.86,0
 chrM	263	.	A	G	11603.3	.	AB=0;ABP=0;AC=2;AF=1;AN=2;AO=364;CIGAR=1X;DP=364;DPB=364;DPRA=0;EPP=16.755;EPPR=0;GTI=0;LEN=1;MEANALT=1;MQM=60;MQMR=0;NS=2;NUMALT=1;ODDS=982.556;PAIRED=1;PAIREDR=0;PAO=0;PQA=0;PQR=0;PRO=0;QA=13201;QR=0;RO=0;RPL=276;RPP=213.858;RPPR=0;RPR=88;RUN=1;SAF=172;SAP=5.39653;SAR=192;SRF=0;SRP=0;SRR=0;TYPE=snp;technology.ILLUMINA=1	GT:DP:AD:RO:QR:AO:QA:GL	1:108:0,108:0:0:108:3896:-350.812,0	1:256:0,256:0:0:256:9305:-837.344,0
@@ -387,105 +333,128 @@ chrM	14766	.	C	T	54363.3	.	AB=0;ABP=0;AC=2;AF=1;AN=2;AO=1633;CIGAR=1X;DP=1633;DP
 chrM	14793	.	A	G	52354.7	.	AB=0;ABP=0;AC=2;AF=1;AN=2;AO=1605;CIGAR=1X;DP=1605;DPB=1605;DPRA=0;EPP=123.965;EPPR=0;GTI=0;LEN=1;MEANALT=1;MQM=59.9688;MQMR=0;NS=2;NUMALT=1;ODDS=4357.82;PAIRED=1;PAIREDR=0;PAO=0;PQA=0;PQR=0;PRO=0;QA=58638;QR=0;RO=0;RPL=950;RPP=120.75;RPPR=0;RPR=655;RUN=1;SAF=940;SAP=105.327;SAR=665;SRF=0;SRP=0;SRR=0;TYPE=snp;technology.ILLUMINA=1	GT:DP:AD:RO:QR:AO:QA:GL	1:475:0,475:0:0:475:17313:-1557.59,0	1:1130:0,1130:0:0:1130:41325:-3717.26,0
 chrM	15301	.	G	A	67202.5	.	AB=0;ABP=0;AC=2;AF=1;AN=2;AO=2029;CIGAR=1X;DP=2036;DPB=2036;DPRA=0;EPP=73.6971;EPPR=4.45795;GTI=0;LEN=1;MEANALT=1.5;MQM=60;MQMR=60;NS=2;NUMALT=1;ODDS=5288.64;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=75132;QR=224;RO=6;RPL=962;RPP=14.8095;RPPR=3.0103;RPR=1067;RUN=1;SAF=1129;SAP=59.1336;SAR=900;SRF=1;SRP=8.80089;SRR=5;TYPE=snp;technology.ILLUMINA=1	GT:DP:AD:RO:QR:AO:QA:GL	1:563:2,561:2:75:561:20714:-1856.3,0	1:1473:4,1468:4:149:1468:54418:-4880.92,0
 chrM	15326	.	A	G	73749.6	.	AB=0;ABP=0;AC=2;AF=1;AN=2;AO=2200;CIGAR=1X;DP=2201;DPB=2201;DPRA=0;EPP=68.7112;EPPR=5.18177;GTI=0;LEN=1;MEANALT=1;MQM=60;MQMR=60;NS=2;NUMALT=1;ODDS=5718.37;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=82190;QR=38;RO=1;RPL=1013;RPP=32.8937;RPPR=5.18177;RPR=1187;RUN=1;SAF=1088;SAP=3.57883;SAR=1112;SRF=0;SRP=5.18177;SRR=1;TYPE=snp;technology.ILLUMINA=1	GT:DP:AD:RO:QR:AO:QA:GL	1:597:1,596:1:38:596:22276:-2000.05,0	1:1604:0,1604:0:0:1604:59914:-5388.94,0
-
 ```
 
-# Filtering VCF data
-After filtering the data with stringent input parameters (restricting base quality to a minimum of 30 and mapping quality to a minimum of 20) a considerable amount variants due to read-alignment bias exits. [Erik Garrison](https://github.com/ekg) has a beautiful illustration of various biases potentially affecting called variants (and making a locus sequence-able):
+## Filtering variants
 
+After filtering the data with stringent input parameters (restricting base quality to a minimum of 30 and mapping quality to a minimum of 20) a considerable amount of variants due to read-alignment bias exists. [Erik Garrison](https://github.com/ekg) has a beautiful illustration of various biases potentially affecting called variants and making a locus sequence-able.
 
-![Various biases potentially affecting called variants](../../images/mt_biases.png)
-<small>Here you can see that in an ideal case (indicated with a green star) a variant is evenly represent by different areas of sequencing reads (cycle and placement biases) and is balanced across the two strands (strand bias). Allele imbalance is not applicable in our case as it reflects significant deviation from the diploid (50/50) expectation (see [here](../../images/freebayes.pdf) for more details).</small>
+![Various biases potentially affecting called variants](../../images/mt_biases.png "Here you can see that in an ideal case (indicated with a green star) a variant is evenly represent by different areas of sequencing reads (cycle and placement biases) and is balanced across the two strands (strand bias). Allele imbalance is not applicable in our case as it reflects significant deviation from the diploid (50/50) expectation.")
 
 A robust tool set for processing VCF data is provided by [vcflib](https://github.com/vcflib/vcflib) developed by Erik Garrison, the author of FreeBayes. One way to filter VCF is using `INFO` fields of the VCF dataset. If you look at the VCF dataset shown above you will see all comment lines beginning with `##INFO`.  These are `INFO` fields. Each VCF record contains a list of `INFO` tags describing a wide range of properties for each VCF record. You will see that FreeBayes and NVC differ significantly in the number and types of `INFO` fields each of these caller generates. This why the two require different filtering strategies.
 
 Among numerous types of data generated by FreeBayes let's consider the following variant properties:
 
-* `##INFO=<ID=DP,Number=1,Type=Integer,Description="Total read depth at the locus">` This is simply the number of reads covering a given site.
-* `##INFO=<ID=SRP,Number=1,Type=Float,Description="Strand balance probability for the reference allele: Phred-scaled upper-bounds estimate of the probability of observing the deviation between SRF and SRR given E(SRF/SRR) ~ 0.5, derived using Hoeffding's inequality">` The higher this quantity the better the site as it diminishes the chances of the sites having significant strand bias.
-* `##INFO=<ID=SAP,Number=A,Type=Float,Description="Strand balance probability for the alternate allele: Phred-scaled upper-bounds estimate of the probability of observing the deviation between SAF and SAR given E(SAF/SAR) ~ 0.5, derived using Hoeffding's inequality">` The higher this quantity the better the site as it diminishes the chances of the sites having significant strand bias  (also see [here](https://groups.google.com/forum/#!topic/freebayes/fX4TOAqXJrA)).
-* `##INFO=<ID=EPP,Number=A,Type=Float,Description="End Placement Probability: Phred-scaled upper-bounds estimate of the probability of observing the deviation between EL and ER given E(EL/ER) ~ 0.5, derived using Hoeffding's inequality">` The higher this number the lower the chance of having significant placement bias.
+* `##INFO=<ID=DP,Number=1,Type=Integer,Description="Total read depth at the locus">` - This is the number of reads covering a given site.
+* `##INFO=<ID=SRP,Number=1,Type=Float,Description="Strand balance probability for the reference allele: Phred-scaled upper-bounds estimate of the probability of observing the deviation between SRF and SRR given E(SRF/SRR) ~ 0.5, derived using Hoeffding's inequality">` - The higher this quantity the better the site as it diminishes the chance of the site having significant strand bias.
+* `##INFO=<ID=SAP,Number=A,Type=Float,Description="Strand balance probability for the alternate allele: Phred-scaled upper-bounds estimate of the probability of observing the deviation between SAF and SAR given E(SAF/SAR) ~ 0.5, derived using Hoeffding's inequality">` - The higher this quantity the better the site as it diminishes the chance of the site having significant strand bias  (also see [here](https://groups.google.com/forum/#!topic/freebayes/fX4TOAqXJrA)).
+* `##INFO=<ID=EPP,Number=A,Type=Float,Description="End Placement Probability: Phred-scaled upper-bounds estimate of the probability of observing the deviation between EL and ER given E(EL/ER) ~ 0.5, derived using Hoeffding's inequality">` - The higher this number the lower the chance of having significant placement bias.
 * `QUAL` - phred scaled variant quality.
 
-To perform filtering we will use **NGS: VCF Manipulation** &#8594; **VCFfilter**):
-> ### Filtering VCF data
+> ### {% icon hands_on %} Hands-on: Filtering VCF data
 >
->![VCFfilter parameters](../../images/mt_vcffilter.png)
+> 1. Use {% tool [VCFfilter](toolshed.g2.bx.psu.edu/repos/devteam/vcffilter/vcffilter2/1.0.0_rc1+galaxy3) %} to filter the variants with the following parameters:
+>    - {% icon param-file %} *"VCF dataset to filter"*: select the VCF dataset produced by **FreeBayes** {% icon tool %}
+>    - In *"more filters"*:
+>      - In *"1: more filters"*:
+>        - *"Select the filter type"*: `Info filter (-f)`
+>        - *"Specify filtering value"*: `SRP > 20`
+>      - Insert more filters:
+>      - In *"2: more filters"*:
+>        - *"Select the filter type"*: `Info filter (-f)`
+>        - *"Specify filtering value"*: `SAP > 20`
+>      - Insert more filters:
+>      - In *"3: more filters"*:
+>        - *"Select the filter type"*: `Info filter (-f)`
+>        - *"Specify filtering value"*: `EPP > 20`
+>      - Insert more filters:
+>      - In *"4: more filters"*:
+>        - *"Select the filter type"*: `Info filter (-f)`
+>        - *"Specify filtering value"*: `QUAL > 20`
+>      - Insert more filters:
+>      - In *"5: more filters"*:
+>        - *"Select the filter type"*: `Info filter (-f)`
+>        - *"Specify filtering value"*: `DP > 20`
 >
->Filtering FreeBayes VCF for strand bias (`SPR` and `SAP`), placement bias (`EPP`), variant quality (`QUAL`), and depth of coverage (`DP`).
+>    > ### {% icon comment %} VCF filter options
+>    > Filtering FreeBayes VCF for strand bias (`SPR` and `SAP`), placement bias (`EPP`), variant quality (`QUAL`), and depth of coverage (`DP`).
+>    {: .comment}
 {: .hands_on}
 
-The resulting VCF only contains two variants (most comments fields are omitted here):
+> ### {% icon question %} Question
+>
+> 1. How many variants remain after filtering the VCF?
+>
+> > ### {% icon solution %} Solution
+> > 1. Two variants remain after filtering the VCF (your results might be different depending on the input and references you use):
+> > ```
+> > #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	raw_child-ds-	raw_mother-ds-
+> > chrM	3243	.	A	G	10397.4	.	AB=0;ABP=0;AC=1;AF=0.5;AN=2;AO=1365;CIGAR=1X;DP=3092;DPB=3092;DPRA=0;EPP=116.418;EPPR=46.9792;GTI=0;LEN=1;MEANALT=1;MQM=59.956;MQMR=59.8917;NS=2;NUMALT=1;ODDS=2394.09;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=49004;QR=63273;RO=1727;RPL=849;RPP=179.415;RPPR=105.14;RPR=516;RUN=1;SAF=443;SAP=368.01;SAR=922;SRF=637;SRP=261.033;SRR=1090;TYPE=snp;technology.ILLUMINA=1	GT:DP:AD:RO:QR:AO:QA:GL	1:1035:341,694:341:12439:694:24871:-1118.32,0	0:2057:1386,671:1386:50834:671:24133:0,-2399.65
+> > chrM	5539	.	A	G	3281.62	.	AB=0;ABP=0;AC=1;AF=0.5;AN=2;AO=379;CIGAR=1X;DP=787;DPB=787;DPRA=0;EPP=216.428;EPPR=224.5;GTI=0;LEN=1;MEANALT=1;MQM=54.1504;MQMR=53.777;NS=2;NUMALT=1;ODDS=755.62;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=13803;QR=15250;RO=408;RPL=74;RPP=308.741;RPPR=351.808;RPR=305;RUN=1;SAF=286;SAP=216.428;SAR=93;SRF=318;SRP=279.681;SRR=90;TYPE=snp;technology.ILLUMINA=1	GT:DP:AD:RO:QR:AO:QA:GL	0:299:221,78:221:8252:78:2824:0,-485.016	1:488:187,301:187:6998:301:10979:-358.012,0
+> > ```
+> {: .solution}
+{: .question}
 
-```
-#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	raw_child-ds-	raw_mother-ds-
-chrM	3243	.	A	G	10397.4	.	AB=0;ABP=0;AC=1;AF=0.5;AN=2;AO=1365;CIGAR=1X;DP=3092;DPB=3092;DPRA=0;EPP=116.418;EPPR=46.9792;GTI=0;LEN=1;MEANALT=1;MQM=59.956;MQMR=59.8917;NS=2;NUMALT=1;ODDS=2394.09;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=49004;QR=63273;RO=1727;RPL=849;RPP=179.415;RPPR=105.14;RPR=516;RUN=1;SAF=443;SAP=368.01;SAR=922;SRF=637;SRP=261.033;SRR=1090;TYPE=snp;technology.ILLUMINA=1	GT:DP:AD:RO:QR:AO:QA:GL	1:1035:341,694:341:12439:694:24871:-1118.32,0	0:2057:1386,671:1386:50834:671:24133:0,-2399.65
-chrM	5539	.	A	G	3281.62	.	AB=0;ABP=0;AC=1;AF=0.5;AN=2;AO=379;CIGAR=1X;DP=787;DPB=787;DPRA=0;EPP=216.428;EPPR=224.5;GTI=0;LEN=1;MEANALT=1;MQM=54.1504;MQMR=53.777;NS=2;NUMALT=1;ODDS=755.62;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=13803;QR=15250;RO=408;RPL=74;RPP=308.741;RPPR=351.808;RPR=305;RUN=1;SAF=286;SAP=216.428;SAR=93;SRF=318;SRP=279.681;SRR=90;TYPE=snp;technology.ILLUMINA=1	GT:DP:AD:RO:QR:AO:QA:GL	0:299:221,78:221:8252:78:2824:0,-485.016	1:488:187,301:187:6998:301:10979:-358.012,0
-```
-# Looking at the data
+# Examining the results
 
-For visualizing VCFs Galaxy relies on the two external tools.  The first is called [VCF.IOBIO](http://vcf.iobio.io/) and is developed by [Gabor Marth's group](http://marthlab.org/) at the University of Utah. The second is called [IGV](http://software.broadinstitute.org/software/igv/) developed by Broad Institute.
+For visualizing VCFs Galaxy has two external tool options. The first is called [VCF.IOBIO](http://vcf.iobio.io/) developed by [Gabor Marth's group](http://marthlab.org/) at the University of Utah. The second is called [IGV](http://software.broadinstitute.org/software/igv/) developed by Broad Institute.
 
-## VCF.IOBIO
+## Visualising with VCF.IOBIO
 
 VCF.IOBIO can be invoked by expanding a VCF dataset in Galaxy's history by clicking on it:
 
-> ### Displaying data in VCF.IOBIO
+> ### {% icon hands_on %} Hands-on: Display data in VCF.IOBIO
 >
->![VCFfilter output in history](../../images/mt_vcf_dataset_collapsed.png)
+>![Expanded output](../../images/mt_vcf_dataset_expanded.png "At the bottom there is a link 'display at vcf.iobio'. Clicking on this link will start indexing of VCF datasets, which is required to display them.")
 >
->Clicking on the dataset above will expand it as shown below:
->
->![Expanded output](../../images/mt_vcf_dataset_expanded.png)
->
->At the bottom there is a link "display at vcf.iobio"
->Clicking on this link will start indexing of VCF datasets, which is required to display them. After indexing VCF.IOBIO will open:
->
->![VCF.IOBIO overview](../../images/mt_vcfiobio.png)
->
->Of course there are not that many variants to look at in this example. Nevertheless there are helpful statistics such as Transition/Transversion (Ts/Tn) ratio.
+>![VCF.IOBIO overview](../../images/mt_vcfiobio.png "There are not that many variants to look at in this example. Nevertheless there are helpful statistics such as Transition/Transversion (Ts/Tn) ratio.")
 {: .hands_on}
 
-## IGV
+## Visualising with IGV
 
 Similarly to VCF.IOBIO expanding a history item representing a VCF dataset will reveal an IGV link:
 
-> ### Displaying data in IGV
+> ### {% icon hands_on %} Hands-on: Display data in IGV
 >
->![VCFfilter output expanded](../../images/mt_vcf_dataset_expanded.png)
+>![VCFfilter output expanded](../../images/mt_vcf_dataset_expanded.png "At the bottom there is a link 'display at IGV: local Human hg38'.")
 >
->At the bottom there is a link "display at IGV: local Human hg38"
->The difference between "local" and "Human hg38" links is explained in the following video:
+>The difference between 'local' and 'Human hg38' links is explained in the following video:
 >
 > <div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/123414437?portrait=0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 >
->Visualizing our FreeBayes dataset will produce this:
+> Visualizing our FreeBayes dataset will produce this:
 >
->![IGV interface](../../images/mt_igv.png)
->
->Here we focus on one particular variant at position 3,243 for reasons that will become apparent in the next section.
+>![IGV interface](../../images/mt_igv.png "Here we focus on one particular variant at position 3243 for reasons that will become apparent in the next section.")
 {: .hands_on}
 
-# Digging into the data
+## Comparing frequencies
 
-Visualizing VCF dataset may be a good way to get an overall idea of the data, but it does not tell a lot of details. For example, above we have visualized site 3,243 using IGV. It is interesting but we need to find out more. One thing we can do is to convert VCF dataset into a tab-delimited representation and with it play a bit more.
+Visualizing VCF datasets is a good way to get an overall idea of the data, but it does not tell a lot of details. For example, above we have visualized site 3243 using IGV. It is interesting but we need to find out more. One thing we can do is to convert VCF dataset into a tab-delimited representation and with it play a bit more.
 
-Using **NGS: VCF Manipulation** &#8594; **VCFtoTab-delimited** on the filtered VCF dataset:
-
-> ### From VCF to Tab-delimited data
+> ### {% icon hands_on %} Hands-on: Convert VCF to tab-delimited data
 >
->![VCFtoTab-delimited parameters window](../../images/mt_vcfToTab.png)
+> 1. Use {% tool [VCFtoTab-delimited](toolshed.g2.bx.psu.edu/repos/devteam/vcf2tsv/vcf2tsv/1.0.0_rc1+galaxy0) %} to filter the variants with the following parameters:
+>    - {% icon param-file %} *"Select VCF dataset to convert"*: select the VCF dataset produced by **VCFfilter** {% icon tool %}
+>    - *"Report data per sample"*: `Yes`
+>    - *"Fill empty fields with"*: `Nothing`
 >
->Make sure **Report data per sample** is set to `Yes`
->
->This will produce a dataset with *very* many columns:
->
->![VCFtoTab-delimited output](../../images/mt_tab.png)
->
->There are 62 columns in this dataset (not all are shown here).
 {: .hands_on}
 
-The columns in the above dataset represent INFO and Genotype fields on the original VCF dataset. Let's restrict ourselves to just a few:
+> ### {% icon question %} Question
+>
+> 1. Why are there four rows in the VCFtoTab-delimited {% icon tool %} output when the input VCF had only two rows?
+> 1. How many columns are in the VCFtoTab-delimited {% icon tool %} output?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Since *"Report data per sample"* was set to `Yes`, VCFtoTab-delimited {% icon tool %} produced two rows for each of the two variants, one row per sample (child and mother).
+> > 1. There are 62 (!) columns in the output of VCFtoTab-delimited {% icon tool %}.
+> {: .solution}
+{: .question}
+
+![VCFtoTab-delimited output](../../images/mt_tab.png "The columns in the above dataset represent INFO and Genotype fields on the original VCF dataset.")
+
+ Let's restrict ourselves to a few key columns:
 
 * 2 `POS` - position along mitochondrial genome
 * 4 `REF` - reference allele
@@ -494,27 +463,26 @@ The columns in the above dataset represent INFO and Genotype fields on the origi
 * 54 `AO` - number of alternative observations (how many times do we see the alternative allele at this position in this sample)
 * 55 `DP` - depth of coverage at this site for this sample
 
-To cut these columns out we will use **Text Manipulation** &#8594; **Cut**
-
-> ### Cutting columns from a file
+> ### {% icon hands_on %} Hands-on: Cut columns from a file
 >
->![Cut tool options](../../images/mt_cut.png)
->
->Note that column names are preceded with `c`
->
->This will generate the following dataset:
->
->```
->POS  REF ALT     SAMPLE       AO    DP
->--------------------------------------
->3243	A	G	raw_child-ds-	694	1035
->3243	A	G	raw_mother-ds-	671	2057
->5539	A	G	raw_child-ds-	78	299
->5539	A	G	raw_mother-ds-	301	488
->```
+> 1. Use {% tool [Cut columns from a table](Cut1) %} to select specific columns with the following parameters:
+>    - *"Cut columns"*: `c2,c4,c5,c52,c54,c55`
+>    - *"Delimited by"*: `Tab`
+>    - {% icon param-file %} *"From"*: select the tabular dataset produced by **VCFtoTab-delimited** {% icon tool %}
 {: .hands_on}
 
-Let's look at site 3,243. At this site Mother has 691 `G`s (since `G` is an alternative allele) and 1,035-2057=1386 `A`s. This child has 694 `G`s and 1,035-694=341 `A`s:
+Running Cut will generate the following dataset:
+
+```
+POS  REF ALT     SAMPLE       AO    DP
+--------------------------------------
+3243	A	G	raw_child-ds-	694	1035
+3243	A	G	raw_mother-ds-	671	2057
+5539	A	G	raw_child-ds-	78	299
+5539	A	G	raw_mother-ds-	301	488
+```
+
+Let's look at position 3243. At this site, the mother sample has 671 `G`s (since `G` is the alternative allele) and 2057-671=1386 `A`s. The child sample has 694 `G`s and 1035-694=341 `A`s:
 
 ```
 Allele     A     G
@@ -523,11 +491,18 @@ Mother  1386   691
 Child   341    694
 ```
 
-Thus the *major* allele in mother (`A`) becomes the *minor* allele in child -- a remarkable frequency change due to mitochondrial bottleneck!
+> ### {% icon question %} Question
+>
+> 1. What do you notice about the relative frequencies of the `A` and `G` alleles between mother and child?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. The *major* allele in the mother (`A`) becomes the *minor* allele in the child -- a remarkable frequency change due to mitochondrial bottleneck!
+> {: .solution}
+{: .question}
 
-# Take a look at the whole thing
+# Conclusion
 
 This entire analysis is available as a [Galaxy history](https://usegalaxy.org/u/aun1/h/non-diploid-freebayes) that you can import into your Galaxy account and play with.
-
 
 Now you know how to call variants in non-diploid system, so try it on bacteria, viruses, etc.

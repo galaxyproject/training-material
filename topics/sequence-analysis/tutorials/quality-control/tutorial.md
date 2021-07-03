@@ -58,8 +58,8 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >
 > 1. Create a new history for this tutorial and give it a proper name
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import `female_oral2.fastq-4143.gz` from [Zenodo](https://zenodo.org/record/3977236) or from the data library (ask your instructor)
 >
@@ -67,14 +67,14 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    https://zenodo.org/record/3977236/files/female_oral2.fastq-4143.gz
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >
 > 4. Rename the file to `reads`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="reads_1" %}
 >
 {: .hands_on}
 
@@ -692,7 +692,7 @@ The data we analyzed in the previous step was single-end data so we will import 
 >           - *"Type of FastQC output?"*: `Raw data`
 >           - {% icon param-files %} *"FastQC output"*: `Raw data` files (output of both **FastQC** {% icon tool %})
 >
->    {% include snippets/select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
 > 5. Inspect the webpage output from MultiQC
 >

@@ -1,6 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
 @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
-@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
 
 body {
   font-family: 'Droid Serif';
@@ -20,16 +19,16 @@ body.theme-night a {
 }
 
 
-body.theme-midnight div.remark-slide-content {
+body.theme-midnight div.remark-slide-content, body.theme-halloween div.remark-slide-content {
 	background-color: #000 !important;
 	color: orange !important;
 }
 
-body.theme-midnight .footnote {
+body.theme-midnight .footnote, body.theme-halloween .footnote {
 	color: #222;
 }
 
-body.theme-midnight a {
+body.theme-midnight a, body.theme-halloween a {
 	color: white;
 }
 
@@ -77,7 +76,7 @@ h3 {
 
 .remark-code,
 .remark-inline-code {
-  font-family: 'Ubuntu Mono', 'Courier';
+  font-family: 'Courier', monospace;
   text-align: left;
 }
 
@@ -100,6 +99,10 @@ img {
   border: 0 !important;
   box-shadow: none !important;
   background: none !important;
+}
+
+img.cover-logo {
+  max-height: 12em;
 }
 
 .image-05 img {
@@ -139,6 +142,10 @@ img {
 }
 
 .image-100 img {
+  width: 100%;
+}
+
+.table-100 table {
   width: 100%;
 }
 
@@ -263,6 +270,16 @@ th {
   float: right;
 }
 
+.left-column40 {
+  width: 40%;
+  float: left;
+}
+
+.right-column40 {
+  width: 40%;
+  float: right;
+}
+
 .left-column50 {
   width: 50%;
   float: left;
@@ -270,6 +287,16 @@ th {
 
 .right-column50 {
   width: 50%;
+  float: right;
+}
+
+.left-column60 {
+  width: 60%;
+  float: left;
+}
+
+.right-column60 {
+  width: 60%;
   float: right;
 }
 
@@ -345,6 +372,13 @@ th {
   text-decoration: line-through;
 }
 
+.pull-left-large {
+    /* this does not break compatibility with .pull-right */
+    float: left;
+    margin-left: -3em;
+    width: 60%;
+}
+
 .pull-left {
   float: left;
   width: 47%;
@@ -353,6 +387,11 @@ th {
 .pull-right {
   float: right;
   width: 47%;
+}
+
+.force-right {
+  position: absolute;
+  left: 47%;
 }
 
 .pull-right ~ p {
@@ -380,6 +419,10 @@ th {
 
 .me li a {
   margin-left: 15px;
+}
+
+blockquote {
+  font-style: italic;
 }
 
 /* for icons */
@@ -457,4 +500,8 @@ th {
 	opacity:1
 }
 
-
+/* via https://github.com/gnab/remark/issues/481#issuecomment-340313168 */
+.remark-slide-container:nth-last-child(1) .my-footer ,
+.remark-slide-container:nth-child(1) .my-footer {
+	display: none;
+}

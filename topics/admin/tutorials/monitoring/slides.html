@@ -1,6 +1,7 @@
 ---
 layout: tutorial_slides
-logo: "GTN"
+logo: assets/images/gat.png
+video: true
 
 title: "Galaxy Monitoring with Telegraf and Grafana"
 questions:
@@ -43,12 +44,12 @@ Dataflow:
 - InfluxDB which stores the data
 - And Grafana is used to visualise it
 
----
-# Infrastructure for Grafana
+???
 
-* Everything captured in Galaxy Ansible [infrastructure-playbook](https://github.com/galaxyproject/infrastructure-playbook/) repository.
-* Ansible [playbook](https://github.com/dj-wasabi/ansible-telegraf) to install Telegraf.
-* Ansible [tasks](https://github.com/galaxyproject/infrastructure-playbook/blob/master/roles/stats/tasks/redhat.yml) for installing InfluxDB and Grafana.
+- Monitoring in Galaxy is easy to setup.
+- Galaxy produces data, which is consumed by telegraf.
+- telegrafends data to Influx DB.
+- This data is visualized in Grafana.
 
 ---
 # Grafana showcase
@@ -58,3 +59,63 @@ Dataflow:
 * usegalaxy.org private server
 
 If you see a dashboard you can export its configuration and put it on your Grafana with your data. Copy away!
+
+???
+
+- We have several public Grafana servers.
+- If you like any of our graphs, you can copy them.
+
+---
+
+![galaxy dashboard showing route timings, user counts, job counts, etc.](../../images/grafana/galaxy.png)
+
+???
+
+- We have built numerous dashboards for monitoring Galaxy.
+- These include scripts and playbooks and configuration for everything.
+- Here is EU's galaxy dashboard showing active users, running and unscheduled jobs, etc.
+
+---
+
+![node detail dashboard with filesystem usage, process states, cpu, memory, load, network, etc.](../../images/grafana/node.png)
+
+???
+
+- However sometimes we notice something going wrong with our infrastructure.
+- We use the node detail dashboard to begin our investigation.
+- It gives us a very fast overview of the server.
+- This can help efficiently pinpoint isuses.
+
+---
+
+![DB dashboard showing transactions, tuples fetched/modified, and index sizes for each database](../../images/grafana/db.png)
+
+???
+
+- We also monitor the database heavily.
+- All of this monitoring is built into telegraf.
+- We need to be able to correlate latency with autovacuums or contention.
+- We monitor table size changes to check for anomalies.
+
+---
+
+![user statistics page for Eu with 23k users, 30k workflows, 400k histories, 13M jobs, and 30M datasets. Additional breakdowns provided for years of compute time on various clusters included 1k years on de.NBI cloud.](../../images/grafana/stats.png)
+
+???
+
+- Our staff often needs to report numbers for their grants.
+- We produced this user statistics dashboard to help them.
+- Now they can answer their own questions, and make their own graphs, without admin help.
+
+---
+
+![cvmfs dashboard showing which repos each server supports in green, and missing ones in white. ~90% of repos are supported](../../images/grafana/cvmfs.png)
+
+???
+
+- We don't just monitor Galaxy though.
+- We also monitor CVMFS, and the availability of repositories in each server.
+- This can give a good view of which repositories are replicated.
+
+
+

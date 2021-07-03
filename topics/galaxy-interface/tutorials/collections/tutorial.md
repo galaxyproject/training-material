@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 redirect_from:
   - /topics/galaxy-data-manipulation/tutorials/collections/tutorial
 
-title: "Using dataset collection"
+title: "Using dataset collections"
 tags:
 - collections
 zenodo_link: ""
@@ -27,7 +27,7 @@ subtopic: manage
 Here we will show Galaxy features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you've got hundreds - it becomes very annoying. In Galaxy we have introduced **Dataset collections** that allow you to combine numerous datasets in a single entity that can be easily manipulated.
 
 # Getting data
-[Here](https://usegalaxy.org/library/list#folders/Fab5f788f07073c11) is a library containing a few datasets we will be practicing with (as with any Galaxy tutorial, you can upload your own data and play with it instead of the provided datasets):
+[Here](https://usegalaxy.org/library/folders/Fab5f788f07073c11) is a library containing a few datasets we will be practicing with (as with any Galaxy tutorial, you can upload your own data and play with it instead of the provided datasets):
 
 - `M117-bl_1` - family 117, mother, 1-st (**F**) read from **blood**
 - `M117-bl_2` - family 117, mother, 2-nd (**R**) read from **blood**
@@ -42,7 +42,7 @@ These datasets represent genomic DNA (enriched for mitochondria via a long range
 
 ## Load data from Galaxy library
 
-Right click (or Ctrl-click) on [this link](https://usegalaxy.org/library/list#folders/Fab5f788f07073c11) to open a new browser window and position this window side-by-side with the window displaying this tutorial. You will see this:
+Right click (or Ctrl-click) on [this link](https://usegalaxy.org/library/folders/Fab5f788f07073c11) to open a new browser window and position this window side-by-side with the window displaying this tutorial. You will see this:
 
 ![Data in Galaxy library](../../images/grab_data.png)
 {: .img-responsive}

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: RNA-RNA interactome data analysis
-zenodo_link: https://zenodo.org/record/3696889
+zenodo_link: https://zenodo.org/record/3709188
 questions:
 - What are the difficulties in mapping chimeric reads from RNA interactome data?
 - How multi mapping is a big problem in these datasets?
@@ -13,6 +13,9 @@ objectives:
 - Quantification of the mapped loci
 - Visualization and filtering of results
 time_estimation: 2H
+key_points:
+- Choosing the correct alignment parameters is one of the imporatant factor in the analysis.
+- For poorly annotated organisms use reference genome instead of trascriptome.
 contributors:
 - pavanvidem
 
@@ -43,7 +46,7 @@ to match the read lengths and there needs to be a lot of post-processing to be d
 there is also an alignment tool called `CLAN` published to specifically map the chimeric reads from CLASH experiments.
 
 In this tutorial, we will learn the analysis of a CLEAR-CLIP data set using a tool suite called `ChiRA`. The data used
-is a random subsampling (100k reads) of a mouse cortex sample
+is from mouse cortex sample
 ([GSM1881541](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1881541)) prepared using CLEAR-CLIP protocol. It is
 a complete analysis framework that can be used starting from raw sequencing reads to analysis and visualization of
 results. `ChiRA` uses `BWA-MEM` or `CLAN` to map the reads. Subsequently, it also merges the overlappig alignments and
@@ -73,22 +76,22 @@ results. `ChiRA` uses `BWA-MEM` or `CLAN` to map the reads. Subsequently, it als
 >    ```
 >    https://zenodo.org/record/3709188/files/miRNA_mature.fa.gz
 >    https://zenodo.org/record/3709188/files/Mus_musculus.GRCm38.dna.fa.gz
->    https://zenodo.org/record/3709188/files/SRR2413302.100k.fastq.gz
+>    https://zenodo.org/record/3709188/files/SRR2413302.fastq.gz
 >    https://zenodo.org/record/3709188/files/transcriptome.fa.gz
 >    https://zenodo.org/record/3709188/files/whole_transcriptome.gff.gz
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets
 > 4. Check that the datatype
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 > 5. Add to each database a tag corresponding to ...
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 
@@ -103,7 +106,7 @@ adapters.
 First use `FastQC` to assess the read quality
 >
 > 1. **FastQC** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Short read data from your current history"*: `SRR2413302.100k.fastq.gz` (Input dataset)
+>    - {% icon param-file %} *"Short read data from your current history"*: `SRR2413302.fastq.gz` (Input dataset)
 >
 {: .hands_on}
 
@@ -130,16 +133,16 @@ standard Illumina adapters, we need to provide them manually.
 We use `cutadapt` to trim the adapter content
 >
 > 1. **cutadapt** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"FASTQ/A file"*: `SRR2413302.fastq` (Input dataset)
+>    - {% icon param-file %} *"FASTQ/A file"*: `SRR2413302.fastq.gz` (Input dataset)
 >    - In *"Read 1 Options"*
 >       - *"3' (End) Adapters"* -> *"Insert 3' (End) Adapters"*
 >           - *"Source"*: `Enter Custom sequence`
 >           - *"Enter custom 3' adapter sequence"*: `GTGTCAGTCACTTCCAGCGG`
 >       - *"5' (Front) Adapters"* -> *"Insert 5' (Front) Adapters"*
 >           - *"Source"*: `Enter Custom sequence`
->           - *"Enter custom 5' adapter sequence"*: `NNNNAGGGAGGACGATGCGG`
+>           - *"Enter custom 5' adapter sequence"*: `GCATAGGGAGGACGATGCGG`
 >    - In *"Filter Options"*
->        - *"Minimum length"*: `10`
+>        - *"Minimum length"*: `16`
 >
 {: .hands_on}
 
@@ -159,10 +162,11 @@ It is interesting to see whether our manually entered adapters were trimmed
 > > ### {% icon solution %} Solution
 > >
 > > 1. Normally yes, but in this case not. Always look at this plot in combination with "Sequence Length Distribution"
-plot. It looks like there is huge difference in base composition between 56th and 57th bases. But the number of
-sequences that constitute this is very important. From the sequence length distribution, almost all the sequences are of
- length of 55 bases. Hence the abnormality in the per base sequence content is just because it is from
- very few (if not only 1) sequence.
+plot. It looks like there is huge difference in base composition after 55th base. But the number of
+sequences that constitute this is very important. From the sequence length distribution, most of the sequences are
+ between 53 and 57 bases long. We see the abnormality in the per base sequence content because it is from
+ very few sequences.
+> ![FastQC sequence length distribution](../../images/rna-interactome/chira_fastqc_seq_length.png)
 > >
 > {: .solution}
 >
@@ -176,12 +180,14 @@ partners.
 ## Remove duplicate sequences
 
 First, we eliminate the duplicate sequences from the library to reduce the computational effort. This will also have an
-impact on the quantification of the loci because often these identical sequences might be PCR duplicates.
+impact on the quantification of the loci because often these identical sequences might be PCR duplicates. There is also
+a 5' degenerate linker of length 5 nucleotides present in the reads. Hence we have to strip that too.
 
 > ### {% icon hands_on %} Hands-on
 >
 > 1. **ChiRA collapse** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input FASTQ file"*: `Read 1 Output` (output of **cutadapt** {% icon tool %})
+>    - *"Length of the UMI if present at the 5' end of your reads"*: `5`
 >
 >    > ### {% icon tip %} Tip: Dealing with UMIs
 >    >
@@ -203,8 +209,8 @@ miRNA and target references.
 > 1. **ChiRA map** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input FASTA file"*: `fasta file` (output of **ChiRA collapse** {% icon tool %})
 >    - *"Single or split reference?"*: `Split reference`
->        - {% icon param-file %} *"Reference FASTA file"*: `miRNA_mature.fa` (Input dataset)
->        - {% icon param-file %} *"Second reference FASTA file"*: `transcriptome.fa` (Input dataset)
+>        - {% icon param-file %} *"Reference FASTA file"*: `miRNA_mature.fa.gz` (Input dataset)
+>        - {% icon param-file %} *"Second reference FASTA file"*: `transcriptome.fa.gz` (Input dataset)
 >    - *"aligner"*: `BWA-MEM`
 >
 {: .hands_on}
@@ -223,12 +229,18 @@ of read.
 >    - {% icon param-file %} *"Input BED file of alignments"*: `ChiRA aligned BED` (output of **ChiRA map** {% icon tool %})
 >    - *"Do you have an annotation in GTF format?"*: `Yes`
 >        - {% icon param-file %} *"Annotations in GTF format"*: `whole_transcriptome.gff.gz` (Input dataset)
+>    - *"Did you use single or split reference for alignment?"*: `Split reference`
+>        - {% icon param-file %} *"Reference FASTA file"*: `miRNA_mature.fa.gz` (Input dataset)
+>        - {% icon param-file %} *"Second reference FASTA file"*: `transcriptome.fa.gz` (Input dataset)
 >
->    > ### {% icon tip %} Tip: Parameters for interactome/structurome data like SPLASH, PARIS
+>    > ### {% icon tip %} Tip: Parameters for samples with high coverage.
 >    >
->    > * If you have data that contains large interaction regions, the default `Overlap based` merging may not capture whole interaction regions.
->    > * In that case use `blockbuster` merging mode and adjust the paramertes accordingly.
+>    > * In samples with a very high coverage, the likelihood of having overlapping alignments increases. Hence the
+default `Overlap based` merging may results in very long loci merged by some random alignments.
+>    > * Therefore, use the `blockbuster` merging mode and adjust the paramertes accordingly.
 >        - From *"Select the mode of merging"*: `Gaussian based (blockbuster)`
+>    > * Working with only the chimeric reads further reduces the computation time fr subsequent steps.
+>        - *"chimeric_only"*: `Yes`
 >    {: .tip}
 >
 {: .hands_on}
@@ -265,9 +277,10 @@ genomic fasta file the tool can hybridize the interacting loci sequences using `
 >        - *"Choose the source for the FASTA file"*: `History`
 >            - {% icon param-file %} *"FASTA file"*: `Mus_musculus.GRCm38.dna.fa.gz` (Input dataset)
 >    - *"Did you use single or split reference for alignment?"*: `Split reference`
->        - {% icon param-file %} *"Reference FASTA file"*: `miRNA_mature.fa` (Input dataset)
->        - {% icon param-file %} *"Second reference FASTA file"*: `transcriptome.da` (Input dataset)
->    - *"Hybridize"*: `Yes`
+>        - {% icon param-file %} *"Reference FASTA file"*: `miRNA_mature.fa.gz` (Input dataset)
+>        - {% icon param-file %} *"Second reference FASTA file"*: `transcriptome.fa.gz` (Input dataset)
+>    - *"Hybridize chimeric loci?"*: `Yes`
+>    - *"Summarize interactions at loci level?"*: `Yes`
 >
 {: .hands_on}
 
@@ -293,42 +306,68 @@ sqlite database from the `ChiRA` output.
 >
 > 2. Change the datatype to `chira.sqlite`
 >
->    {% include snippets/change_datatype.md datatype="chira.sqlite" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="chira.sqlite" %}
 >
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Visualize and chimeras
+> ### {% icon hands_on %} Hands-on: Visualize interactions
 >
 > 1. Please click on {% icon galaxy-barchart %} *"Visualize this data"*. Then click on the `ChiRAViz` visualization.
 > This loads the data into the visualization framework and shows some basic plots from the data.
 >   - The visualization split into two to show the left and the right arms information.
 >   - On home page pie charts of left and right chimeric arms, types of interactions and top 50 expressed RNAs are shown.
->![ChiRAViz home page](../../images/rna-interactome/chiraviz_home.png)
-> 2. Then choose the kind of interactions information you want to see. For example, choose the most abundant `miRNA` and `3_prime_UTR` and click on **"Get interactions"**.
+>![ChiRAViz home page](../../images/rna-interactome/chiraviz_view1.png)
+> 2. Now choose the bio types of interactions that you want to work with. Here we first get all available interactions,
+and then filter the interactions we are interested in next page. To get all interactions, choose `all` in both dropdowns
+ on the top and then click on **"Get interactions"**.
 >
 >![ChiRAViz selector](../../images/rna-interactome/chiraviz_choose.png)
 >
-> - **"Chimera"** panel in the middle depicts the mapping positions on the read with read length.
-> - **"Interacting partners"** panel shows the information on which transcripts the left and right arm are mapping to with their alignment positions on the transcripts.
-> - **"Alignment Information"** panel shows the alignment if present with a possibility to download the alignment.
->![ChiRAViz single interaction](../../images/rna-interactome/chiraviz_single.png)
+{: .hands_on}
+
+> ### {% icon hands_on %} Hands-on:  Filter and summarize interactions and export the results
+> `ChiRAViz` provides filters to search for keywords like gene symbols, sort interactions by score, filter by score or
+hybridization energy. Then the filtered interactions can be summarized or exported to a file. In this step, we filter
+the interactions that `mmu-miR-190a` involved in and consider those which have an `IntaRNA` predicted hybrid.
+>    - To search, type `mir-190a` in the search field and click on search icon or hit enter. Search is case insensitive
+and can search for sub-phrases too. This results in 27 records.
+>    - We now further filter the records that contain `IntaRNA` hybrid. If there is no hybrid predicted by `IntaRNA`,
+then the hybrid filed contains an `NA` value.
+>       - From **"--filter--"** dropdown choose `Hybrid`
+>       - From **"--operator--"** choose `<>`
+>       - Enter `NA` in the value field and hit the enter key.
+This filters out 10 more records and results in 17 records.
+>    - At this point, you can select individual interactions by clicking the individual checkboxes or by clicking **"Check
+all"**. Both the possibilities are highlighted in red color in the following figure.
+>    - Click on **Summary** to view the summary plots for the selected interactions.
+>    - Clicking on **Export** to export the selected interactions to a file.
+>![ChiRAViz filter page](../../images/rna-interactome/chiraviz_view2.png)
+{: .hands_on}
+
+> ### {% icon question %} Questions
+>
+> 1. Which strand of `mmu-miR-190a` is the most expressed?
+>
+> > ### {% icon solution %} Solution
+> >
+> > Both strands of `mmu-miR-190a` participated in the interactions, but `mmu-miR-190a-5p` is the most abundant strand between the two.
+> >
+> {: .solution}
+>
+{: .question}
 >
 {: .hands_on}
-
-> ### {% icon hands_on %} Hands-on:  Filter interactions and export results
-> `ChiRAViz` provides filters to search for keywords like gene symbols, sort interactions by score, filter by score or hybridization energy. Then the filtered interactions can be summarized or exported to a file. In this step, we filter the interactions with most abundant miRNA and consider those which have an `IntaRNA` predicted hybrid.
->    - Go to the home page by clicking **Home** on the top.
->    - Go to the bottom of the home page to the plot showing top 50 symbols based on their expression.
->    - Click on the most abundant miRNA `mmu-miR-466i-5p`. This will populate the left panel with all the interactions containing `mmu-miR-466i-5p`.
->    - Filter the entries that contain `IntaRNA` hybrid. If there is no hybrid predicted the value in that filed is `NA`
->       - From **"Filter by..."** choose `Hybrid`
->       - From **"Choose operator..."** choose `<>`
->       - Enter `NA` in the value field and hit the enter key.
->    - At this point, you can click on **Summary** to view the summary plots for this subset of interactions.
->    - Tick **"Check all"** on the bottom left corner and then click on **Export** to export the resulting interactions.
->    - This will export all the results to a file.
+>
+> ### {% icon hands_on %} Hands-on:  Viewing individual interaction information
+> - From the list of interactions in the left panel expand the interaction `mmu-miR-190a-5p:Myo5a` by clicking on "+" (highlighted in red). There are 4 sub-records
+corresponds to 4 different transcripts of the target gene `Myo5a`.
+> - Click on one of the records to view following information.
+>   - **"Chimera"** panel in the middle depicts the mapping positions on the read with read length.
+>   - **"Interacting partners"** panel shows the information on which transcripts the left and right arm are mapping to with their alignment positions on the transcripts.
+>   - **"Alignment Information"** panel shows the alignment if present with a possibility to download the alignment.
+>![ChiRAViz single interaction](../../images/rna-interactome/chiraviz_view3.png)
 {: .hands_on}
-
+>
 # Conclusion
 {:.no_toc}
 

@@ -44,9 +44,9 @@ subtopic: analyse
 
 # RStudio
 
-## Opening up RStudio
+Opening up {% tool [RStudio](interactive_tool_rstudio) %} in Galaxy is easy:
 
-{% include snippets/launch_rstudio.md %}
+{% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
 
 You should now be looking at a page with the RStudio interface:
 
@@ -357,7 +357,7 @@ RStudio will keep running until you stop it, so you can always come back to your
 you should save the work you did within RStudio by exporting any files you created back to your Galaxy history, as well as the log describing all the commands you ran.
 Then you can safely shut down RStudio.
 
-{% include snippets/stop_RStudio.md  %}
+{% snippet faqs/galaxy/interactive_tools_rstudio_stop.md  %}
 
 
 # Interaction between RStudio and Galaxy

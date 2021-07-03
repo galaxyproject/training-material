@@ -3,23 +3,34 @@
     {% icon tutorial %}
 </a>
 {% elsif include.material.hands_on == "github" %}
-<a href="{{ site.github_repository }}/tree/master/topics/{{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/tutorial.md">
+<a href="{{ site.github_repository }}/tree/main/topics/{{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/tutorial.md">
     {% icon tutorial %}
 </a>
 {% elsif include.material.hands_on %}
     <span class="btn-group">
-        <a href="{{ site.baseurl }}/topics/{{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/tutorial.html" class="btn btn-default" title="Where to run the tutorial">
+        <a href="{{ site.baseurl }}/topics/{{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/tutorial.html" class="btn btn-default" title="Follow the tutorial">
             {% icon tutorial %}
         </a>
-        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
             <span class="sr-only">Toggle Dropdown</span>
         </a>
         <ul class="dropdown-menu">
-        {% for lang in language %}
+        {% if material.translations %}
+          <div class="dropdown-item"><strong>Curated translations</strong></div>
+           {% for lang in material.translations %}
+            <a class="dropdown-item" href="{{ site.baseurl }}/topics/{{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/tutorial_{{lang | upcase }}.html" title="{{ lang }}">
+                {{language[lang]}}
+            </a>
+        {% endfor %}
+
+          <hr/>
+        {% endif %}
+         <div class="dropdown-item"><strong>Automatic translations</strong></div>
+        {% for lang in language %}{% unless lang[0] == 'en' %}
             <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl={{ lang[0] }}&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ include.topic }}%2Ftutorials%2F{{ include.material.tutorial_name }}%2Ftutorial.html&edit-text=&act=url" title="{{ inst[0] }}">
                 {{ lang[1] }}
             </a>
-        {% endfor %}
+        {% endunless %}{% endfor %}
         <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ include.topic }}%2Ftutorials%2F{{ include.material.tutorial_name }}%2Ftutorial.html&edit-text=&act=url" title="{{ inst[0] }}">
             And more!
         </a>

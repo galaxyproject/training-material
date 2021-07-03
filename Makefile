@@ -5,14 +5,11 @@ HOST?=0.0.0.0
 FLAGS?=""
 ENV?="development"
 CHROME=google-chrome-stable
-TUTORIALS=$(shell find _site/training-material -name 'tutorial.html' | sed 's/_site\/training-material\///')
-SLIDES=$(shell find _site/training-material -name 'slides.html' | sed 's/_site\/training-material\///')
-SLIDES+=$(shell find _site/training-material/*/*/slides/* | sed 's/_site\/training-material\///')
 PDF_HOST?=127.0.0.1
 SITE_URL=http://${PDF_HOST}:${PORT}/training-material
 PDF_DIR=_pdf
 REPO=$(shell echo "$${ORIGIN_REPO:-galaxyproject/training-material}")
-BRANCH=$(shell echo "$${ORIGIN_BRANCH:-master}")
+BRANCH=$(shell echo "$${ORIGIN_BRANCH:-main}")
 MINICONDA_URL=https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 SHELL=bash
 RUBY_VERSION=2.4.4
@@ -47,9 +44,13 @@ ACTIVATE_ENV = source $(shell dirname $(dir $(CONDA)))/bin/activate $(CONDA_ENV)
 
 install: clean create-env ## install dependencies
 	$(ACTIVATE_ENV) && \
-		gem update --system && \
-		gem install addressable:'2.5.2' jekyll jekyll-feed jekyll-scholar jekyll-redirect-from jekyll-last-modified-at csl-styles awesome_bot html-proofer pkg-config kwalify
+		gem update --no-document --system && \
+		ICONV_LIBS="-L${CONDA_PREFIX}/lib/ -liconv" gem install --no-document addressable:'2.5.2' jekyll jekyll-feed jekyll-scholar jekyll-redirect-from jekyll-last-modified-at csl-styles awesome_bot html-proofer pkg-config kwalify jekyll-sitemap
 .PHONY: install
+
+bundle-install: clean  ## install gems if Ruby is already present (e.g. on gitpod.io)
+	bundle install
+.PHONE: bundle-install
 
 serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
 	@echo "Tip: Want faster builds? Use 'serve-quick' in place of 'serve'."
@@ -68,12 +69,9 @@ serve-quick: ## run a local server (faster, some plugins disabled for speed)
 		${JEKYLL} serve --strict_front_matter -d _site/training-material --incremental --config _config.yml,_config-dev.yml -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve-quick
 
-detached-serve: ## run a local server in detached mode (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags to Jekyll)
-	$(ACTIVATE_ENV) && \
-		mv Gemfile Gemfile.backup || true && \
-		mv Gemfile.lock Gemfile.lock.backup || true && \
-		${JEKYLL} serve --strict_front_matter --detach -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS}
-.PHONY: detached-serve
+serve-gitpod: bundle-install  ## run a server on a gitpod.io environment
+	bundle exec jekyll serve --config _config.yml,_config-dev.yml --incremental
+.PHONY: serve-gitpod
 
 build: clean ## build files but do not run a server (You can specify FLAGS= to pass additional flags to Jekyll)
 	$(ACTIVATE_ENV) && \
@@ -84,44 +82,48 @@ build: clean ## build files but do not run a server (You can specify FLAGS= to p
 
 check-frontmatter: ## Validate the frontmatter
 	$(ACTIVATE_ENV) && \
-		find topics/ -name tutorial.md -or -name slides.html -or -name metadata.yaml | \
-	    xargs -n1 ruby bin/validate-frontmatter.rb
+		bundle exec ruby bin/validate-frontmatter.rb
 .PHONY: check-frontmatter
 
-check-html: build ## validate HTML
+_check-html: # Internal
 	$(ACTIVATE_ENV) && \
 	  	htmlproofer \
 	      	--assume-extension \
 	      	--http-status-ignore 405,503,999 \
 	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
-	      	--url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
-	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
+	      	--url-swap "github.com/galaxyproject/training-material/tree/main:github.com/${REPO}/tree/${BRANCH}" \
+	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/","/\/tutorials\/.*\/docker\//" \
 	      	--allow-hash-href \
 	      	./_site
+.PHONY: _check-html
+
+check-html: build ## validate HTML
+	$(MAKE) _check-html
 .PHONY: check-html
 
 check-workflows: ## validate Workflows
-	$(ACTIVATE_ENV) && \
-		bash bin/validate-json.sh && \
-		bash bin/validate-workflow-tags.sh
+	find topics -name '*.ga' | grep /workflows/ | xargs -P8 -n1 bash bin/validate-workflow.sh
 .PHONY: check-workflows
 
 check-references: build ## validate no missing references
-	$(ACTIVATE_ENV) && \
-		bash bin/validate-references.sh
+	bash bin/validate-references.sh
 .PHONY: check-references
 
-check-html-internal: build ## validate HTML (internal links only)
+_check-html-internal: # Internal
 	$(ACTIVATE_ENV) && \
 		htmlproofer \
 	      	--assume-extension \
 	      	--http-status-ignore 405,503,999 \
-	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
-	      	--url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
-	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
+	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#/","/#embedded_jbrowse/","/.*videos.*.mp4.png/" \
+	      	--url-swap "github.com/galaxyproject/training-material/tree/main:github.com/${REPO}/tree/${BRANCH}" \
+	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/","/\/tutorials\/.*\/docker\//" \
 	      	--disable-external \
 	      	--allow-hash-href \
 	      	./_site
+.PHONY: _check-html-internal
+
+check-html-internal: build ## validate HTML (internal links only)
+	$(MAKE) _check-html-internal
 .PHONY: check-html-internal
 
 check-slides: build  ## check the markdown-formatted links in slides
@@ -138,15 +140,16 @@ check-slides: build  ## check the markdown-formatted links in slides
 .PHONY: check-slides
 
 check-yaml: ## lint yaml files
-	$(ACTIVATE_ENV) && \
-		find . -name "*.yaml" | xargs -L 1 -I '{}' sh -c "yamllint {}" \
-		find topics -name '*.yml' | xargs -L 1 -I '{}' sh -c "yamllint {}" \
-		ruby bin/check-contributors.rb
+	find . -name '*.yaml' | grep -v .github | xargs -L 1 -I '{}' sh -c "yamllint -c .yamllint {}"
 .PHONY: check-yaml
 
-check-snippets: ## lint snippets
-	./bin/check-for-trailing-newline
-.PHONY: check-snippets
+check-diffs: ## lint diffs in tutorials
+	find ./topics -name '*.md' -type f -print0 | xargs -0 python bin/lint-diffs.py
+.PHONY: check-diffs
+
+check-tool-links: ## lint tool links
+	@bash ./bin/check-broken-tool-links.sh
+.PHONY: check-tool-links
 
 check-framework:
 	$(ACTIVATE_ENV) && \
@@ -157,15 +160,10 @@ check-broken-boxes: build ## List tutorials containing broken boxes
 	./bin/check-broken-boxes
 .PHONY: check-broken-boxes
 
-check: check-yaml check-frontmatter check-html-internal check-html check-slides check-workflows check-references check-snippets ## run all checks
+check: check-html-internal check-html check-broken-boxes check-slides ## run checks which require compiled HTML
 .PHONY: check
 
-lint: ## run all linting checks
-	$(MAKE) check-yaml
-	$(MAKE) check-frontmatter
-	$(MAKE) check-workflows
-	$(MAKE) check-references
-	$(MAKE) check-snippets
+lint: check-frontmatter check-workflows check-tool-links ## run linting checks which do not require a built site
 .PHONY: lint
 
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
@@ -174,7 +172,7 @@ check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
 			--assume-extension \
 			--http-status-ignore 405,503,999 \
 			--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
-			--file-ignore "/.*\/files\/.*/" \
+			--file-ignore "/.*\/files\/.*/","/\/tutorials\/.*\/docker\//" \
 			--allow-hash-href \
 			. && \
 		find . -path "**/slides*.html" \
@@ -188,32 +186,47 @@ check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
 				-f {}"
 .PHONY: check-links-gh-pages
 
+TUTORIAL_PDFS=$(shell find _site/training-material -name 'tutorial.html' | sed 's/html$$/pdf/g')
+SLIDE_PDFS=$(shell find _site/training-material -name 'slides.html' | sed 's/html$$/pdf/g')
+SLIDE_PDFS+=$(shell find _site/training-material/*/*/slides/* | sed 's/html$$/pdf/g')
 
-pdf: detached-serve ## generate the PDF of the tutorials and slides
-	npm install decktape
-	mkdir -p _pdf
-	@for t in $(TUTORIALS); do \
-		name="$(PDF_DIR)/$$(echo $$t | tr '/' '-' | sed -e 's/html/pdf/' -e 's/topics-//' -e 's/tutorials-//')"; \
-		${CHROME} \
-            --headless \
-            --disable-gpu \
-            --print-to-pdf="$$name" \
-            "$(SITE_URL)/$$t?with-answers" \
-            2> /dev/null ; \
-	done
-	@for s in $(SLIDES); do \
-		name="$(PDF_DIR)/$$(echo $$s | tr '/' '-' | sed -e 's/html/pdf/' -e 's/topics-//' -e 's/tutorials-//')"; \
-		$(ACTIVATE_ENV) ; \
-		echo $$name; \
-		echo "$(SITE_URL)/$$s"; \
-		echo `which npm`; \
-		`npm bin`/decktape \
-			automatic \
-			"$(SITE_URL)/$$s" \
-			"$$name" ; \
-	done
-	pkill -f jekyll
+pdf: $(SLIDE_PDFS) $(TUTORIAL_PDFS) ## generate the PDF of the tutorials and slides
 .PHONY: pdf
+
+_site/%/tutorial.pdf: _site/%/tutorial.html
+	if ! grep 'http-equiv="refresh"' $< --quiet; then \
+		$(ACTIVATE_ENV) && \
+		sed "s|/training-material/|$(shell pwd)/_site/training-material/|g" $< | \
+		sed "s|<head>|<head><base href=\"file://$(shell pwd)/$(<:_site/training/material%=%)\">|" | \
+		wkhtmltopdf \
+		    --enable-javascript --javascript-delay 1000 \
+			- $@; \
+	fi
+
+_site/%/introduction.pdf: _site/%/introduction.html
+	if ! grep 'http-equiv="refresh"' $< --quiet; then \
+		$(ACTIVATE_ENV) && \
+		sed "s|/training-material/|$(shell pwd)/_site/training-material/|g" $< | \
+		sed "s|<head>|<head><base href=\"file://$(shell pwd)/$(<:_site/training/material%=%)\">|" | \
+		wkhtmltopdf \
+		    --enable-javascript --javascript-delay 3000 --page-width 700px --page-height 530px -B 5px -L 5px -R 5px -T 5px \
+			--user-style-sheet bin/slides-fix.css \
+			- $@; \
+	fi
+
+_site/%/slides.pdf: _site/%/slides.html
+	if ! grep 'http-equiv="refresh"' $< --quiet; then \
+		$(ACTIVATE_ENV) && \
+		sed "s|/training-material/|$(shell pwd)/_site/training-material/|g" $< | \
+		sed "s|<head>|<head><base href=\"file://$(shell pwd)/$(<:_site/training/material%=%)\">|" | \
+		wkhtmltopdf \
+		    --enable-javascript --javascript-delay 3000 --page-width 700px --page-height 530px -B 5px -L 5px -R 5px -T 5px \
+			--user-style-sheet bin/slides-fix.css \
+			- $@; \
+	fi
+
+video: ## Build all videos
+	bash bin/ari-make.sh
 
 annotate: ## annotate the tutorials with usable Galaxy instances and generate badges
 	${ACTIVATE_ENV} && \
@@ -222,13 +235,15 @@ annotate: ## annotate the tutorials with usable Galaxy instances and generate ba
 	python bin/add_galaxy_instance_badges.py
 .PHONY: annotate
 
+rebuild-search-index: ## Rebuild search index
+	node bin/lunr-index.js > search.json
+
 clean: ## clean up junk files
 	@rm -rf _site
 	@rm -rf .sass-cache
 	@rm -rf .bundle
 	@rm -rf vendor
 	@rm -rf node_modules
-	@rm -rf .jekyll-cache
 	@rm -rf .jekyll-metadata
 	@find . -name .DS_Store -exec rm {} \;
 	@find . -name '*~' -exec rm {} \;

@@ -81,7 +81,7 @@ Repeat this for any other data file you want in this or other histories.
 
 ## Download multiple datasets
 
-Sometimes you may want to download multiple histories at once and doing them one by one can be a pain. Luckily, Galaxy has a mechanism for creating Collections. For more details about collections and how to create them, see [this tutorial](https://galaxyproject.github.io/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html) from the Galaxy Training Network.
+Sometimes you may want to download multiple datasets at once and doing them one by one can be a pain. Luckily, Galaxy has a mechanism for creating Collections. For more details about collections and how to create them, see [this tutorial](https://galaxyproject.github.io/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html) from the Galaxy Training Network.
 
 The concept is very simple however, we are just going to lump together our files of interest and download them all at once.
 

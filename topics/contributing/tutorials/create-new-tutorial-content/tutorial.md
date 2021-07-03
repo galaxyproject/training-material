@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Creating a new tutorial - Writing content in Markdown"
+title: "Creating content in Markdown"
 questions:
   - "How to write a tutorial with hands-on?"
   - "What are the different boxes?"
@@ -13,11 +13,15 @@ time_estimation: "15m"
 key_points:
   - "You can highlight questions, tools and hints with a special syntax"
   - "Self-learning can be done by questions and hidden answers"
+subtopic: writing
 contributors:
   - bebatut
   - bgruening
   - shiltemann
   - hexylena
+abbreviations:
+  API: Application Programming Interface
+  JSON: JavaScript Object Notation
 ---
 
 # Introduction
@@ -108,9 +112,9 @@ The `tutorial.md` needs to start with some metadata at the top:
 >
 {: .hands_on}
 
-This information is used to display the data from the topic and tutorial page. They are also used to check which information are missing for the tutorials.
+This information is used to display the data from the topic and tutorial page. They are also used to check which information is missing for the tutorials.
 
-We also define metadata related to the pedagogical content of the tutorial, which will appear in the top ("Overview" box) and bottom of the online tutorial:
+We also define metadata related to the pedagogical content of the tutorial, which will appear at the top ("Overview" box) and bottom of the online tutorial:
 
 - `requirements`: list of resources that the reader of the material should be familiar with before starting this training:
     - `type`: the type of link (`internal` or `external`)
@@ -144,7 +148,7 @@ We also define metadata related to the pedagogical content of the tutorial, whic
     - `title`: title of the external resource
     - `link`: URL to the external resource
 
-    They will be displayed at the end of a tutorial.
+    They will be displayed at the end of the tutorial.
 - `subtopic`: if the topic has [multiple subtopics defined]({{ site.baseurl }}/topics/contributing/tutorials/create-new-topic/tutorial.html#adapt-the-metadata-for-your-topic), you can assign your tutorial to one of those subtopics here. Without this, the tutorial will appear in the "Other tutorials" section on the topic page.
 
 For this category of metadata, we have taken inspiration from what Software Carpentry has done and particularly what they described in their [Instructor training](https://swcarpentry.github.io/instructor-training/).
@@ -244,6 +248,29 @@ The prefix "Figure 1." is automatically added before its caption. This is done w
 
 We can also cross-reference images inside our Markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (changing `nb` with the image's number).
 
+### Guidelines on Alt vs Figcaption Text
+
+> While both the alt attribute and the figcaption element provide a way to
+> describe images, the way we write for them is different. **`alt` descriptions
+> should be functional; `figcaption` descriptions should be editorial or
+> illustrative.**
+>
+> [*via thoughtbot.com*](https://thoughtbot.com/blog/alt-vs-figcaption)
+{: .quote}
+
+As an example for this image:
+
+![alt text]({{site.baseurl}}/topics/metagenomics/images/plasmid-metagenomics-nanopore/sequence_method.jpg "Example of an image with a caption ")
+
+
+```markdown
+![Alt text (shown when image cannot be displayed)](path/to/image.png "Example of an image with a caption")
+```
+
+Field          | Appropriate Contents
+----           | -----
+alt text       | Image of cell membrance with an embedded protein with central pore. DNA is shown splitting and entering the pore, an electrical signal comes out reading A C T or G.
+figure caption | Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: <a href="https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512">Nanopore sequencing: The advantages of long reads for genome assembly</a>)
 
 ## Writing mathematical expressions
 
@@ -335,7 +362,7 @@ This box at the top of each tutorial is automatically generated using the metada
 > **{% icon objectives %} Objectives**
 > - The learning objectives are the goals of the tutorial
 > - They will be informed by your audience and will communicate to them and to yourself what you should focus on during the course
-> - They are single sentences describing what a learner should be able to do once they have done completed tutorial
+> - They are single sentences describing what a learner should be able to do once they have completed the tutorial
 > - You can use Bloom's Taxonomy to write effective learning objectives
 >
 > {% icon requirements %} Requirements
@@ -411,7 +438,7 @@ We find that having users walk through the tutorial, doing all of the steps is i
 >
 >        This parameter should be length of reads - 1
 >
-> 2. **MultiQC** {% icon tool %}: Aggregate the STAR logs with
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}: Aggregate the STAR logs with
 >      - *"Which tool was used generate logs?"*: `STAR`
 >      - *"Type of FastQC output?"*: `Log`
 >      - *"STAR log output"*: the generated `log` files (multiple datasets)
@@ -443,7 +470,7 @@ This will be rendered like:
 >
 >        This parameter should be length of reads - 1
 >
-> 2. **MultiQC** {% icon tool %}: Aggregate the STAR logs with
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}: Aggregate the STAR logs with
 >      - *"Which tool was used generate logs?"*: `STAR`
 >      - *"Type of FastQC output?"*: `Log`
 >      - *"STAR log output"*: the generated `log` files (multiple datasets)
@@ -484,6 +511,45 @@ which, when rendered, look like:
 >      - *"param1"*: `42`
 {: .hands_on}
 
+## Tool Links
+
+With the new [GTN in Galaxy Webhook](https://github.com/galaxyproject/galaxy/pull/10024), trainees can view training directly within Galaxy. As part of this, we enable those trainees to click on tools, and have those tools directly activated in Galaxy, enabling for a seamless training experience for trainees.
+
+![GIF of a user using the GTN in Galaxy webhook.](../../images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif "A gif showing how the GTN in Galaxy webhook works. A student clicks the learning hat icon in the masthead of a Galaxy server, and an overlay is activated showing the GTN website. Within the GTN they can browse around and their place in tutorials is saved. While following a tutorial the student reches a step which instructs them to run a specific tool. Instead of the normal experience searching for a tool (quite difficult on large servers), they click a blue button and the tool is activated in Galaxy, and the overlay is closed. The student can reactivate the overlay at any time and return to their place in the tutorial.")
+
+To enable these in your tutorial you can use the following syntax:
+
+{% raw %}
+```
+- {% tool MultiQC %}
+- {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}
+- {% tool [Import some data](upload1) %}
+```
+{% endraw %}
+
+Which will be rendered as:
+
+- {% tool MultiQC %}
+- {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}
+- {% tool [Import some data](upload1) %}
+
+When viewed through Galaxy, students will see:
+
+<span data-tool="upload1" title="Tested with upload1" class="tool galaxy-proxy-active"><strong>Import some data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>
+
+### How to find these IDs?
+
+The easiest way is to use planemo to generate the training from a workflow. In recent versions of planemo, this is managed automatically.
+
+The alternative is to figure out the ID for the tool you want to use:
+
+1. Find your tool in Galaxy, and click to access the tool form.
+2. Click on Options at the top right
+3. Click on Share
+4. The URL shown will be something like `https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1`
+5. Keep only the part after the `=`, so `toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1` in this example
+
+![Finding the tool ID](../../images/tool-id.png)
 
 ## **Questions** and **solution** boxes
 
@@ -734,6 +800,171 @@ Rendered:
 > ```
 {: .code-out}
 
+
+## FAQs (snippets)
+
+Many common questions or instructions may be useful to share between different tutorials. For example instructions on how to start a new history or importing data. To make these types of snippets easier to re-use and avoid duplication, they are available in the form of *snippets*.
+
+### Finding snippets
+These are available in folders named `faqs`, either at the project level, topic level, or tutorial level.
+
+- **Project-level FAQs:** `faqs/`
+  - `faqs/galaxy/` for general Galaxy questions
+  - `faqs/gtn/` for questions regarding the GTN website itself
+
+- **Topic-level FAQs:** `topics/<topic>/faqs/`
+  - for questions pertaining to that specific topic
+
+- **Tutorial-level FAQs:** `topics/<topic>/tutorials/<tutorial>/faqs/`
+  - for questions pertaining to that specific tutorial
+  - if this is present, it is linked to from the tutorial overview box at the top, and from the end of the tutorial
+
+
+
+### Including FAQs/snippets in your tutorials
+
+To include one of these snippets in your tutorial, you can use the following syntax:
+
+```
+{% raw %}{% snippet faqs/galaxy/histories_create_new.md %}{% endraw %}
+```
+
+Which will be rendered as:
+
+{% snippet faqs/galaxy/histories_create_new.md %}
+
+The advantage of this approach is that when the Galaxy interface updates, we only have to update the snippet, rather than every tutorial. Please try to use snippets whenever you can!
+
+You could also specify the box type you want the snippet to be rendered in:
+
+```
+{% raw %}{% snippet faqs/galaxy/histories_create_new.md box_type="hands_on" %}{% endraw %}
+```
+
+{% snippet faqs/galaxy/histories_create_new.md box_type="hands_on" %}
+
+or without a box altogether:
+
+```
+{% raw %}{% snippet faqs/galaxy/histories_create_new.md box_type="none" %}{% endraw %}
+```
+
+{% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
+
+
+### Creating new FAQs/snippets
+
+Do you want to include something in your tutorial that you think might be useful in other tutorials as well? Or are you answering a frequently asked question? Consider creating a snippet for it
+
+Each snippet (question) is a separate file, with some metadata, residing in one of the `faqs` folders:
+
+```yaml
+---
+title: How do I run a workflow?
+area: workflows      # FAQs will be grouped by these areas on the FAQ page
+box_type: tip        # tip/comment/hands_on; optional, if you want the content to be in a box
+layout: faq          # if you set this the snippet will get its own page and be included in the FAQs page
+---
+
+Here you can write the snippet / answer to the FAQ in Markdown
+
+- Go to `Workflows` on the top menu bar
+- Click on ..
+- ..
+
+```
+
+### FAQ pages
+
+All FAQs will also be collected on their own page, this makes it easy for and teachers to prepare the session, and for participants to quickly find the answers to common questions.
+
+
+To do this, create a file named `index.md` inside the faq folder:
+
+```yaml
+---
+layout: faq-page
+---
+```
+
+If you would like to enforce an order of the faq areas, you can do so:
+
+```yaml
+---
+layout: faq-page
+area_order: [introduction, learners, instructors, contributors, other]
+---
+```
+
+(just make sure you list all existing areas in the folder)
+
+If a tutorial-level FAQ page exists (`topics/<topic>/tutorials/<tutorial>/faqs/index.md`) it will be automatically linked to from the overview box at the top of the tutorial, and at the end of the tutorial. Have a look at this tutorial to see it in action.
+
+## Footnotes
+
+> > ### {% icon code-in %} Input: Markdown
+> >
+> > ```
+> > Footnotes[^1] can be used to insert more content or explanation as reference material to your content. You can use the same footnote reference multiple time, and the footnote will include backlinks to return to the correct place in the text.[^1]
+> > ```
+> > {: .pre-break-lines}
+> {: .code-in}
+>
+> > ### {% icon code-out %} Output
+> > Footnotes[^1] can be used to insert more content or explanation as reference material to your content. You can use the same footnote reference multiple time, and the footnote will include backlinks to return to the correct place in the text.[^1]
+> {: .code-out}
+{: .code-2col}
+
+
+## Icons
+
+To use these icons, take the name of the icon, 'details' in this example, and write something like this in your tutorial:
+
+```markdown
+{% raw %}{% icon details %}{% endraw %}
+```
+
+<div class="row">
+{% for icon in site["icon-tag"] %}
+	<div class="col-md-2 col-sm-3" style="text-align: center">
+		<div style="font-size: 400%">{% icon_var icon[0] %}</div>
+		<div>{{ icon[0] }}</div>
+	</div>
+{% endfor %}
+</div>
+
+## Abbreviations
+
+Oftentimes there are terms you'll use over and over again where there is an acronym or abbreviation you'll use consistently. However for learners new to the material, they might need to scroll up to the first definition every time to remember what it meant. It would be annoying as an author to have to re-define it every time, so we've implemented some very simple syntax to allow you to create a list of definitions and then use those in the text.
+
+In your tutorial metadata you can add an abbreviations section like:
+
+```yaml
+---
+title: My awesome tutorial
+...
+abbreviations:
+  API: Application Programming Interface
+  JSON: JavaScript Object Notation
+---
+```
+
+And in your text you can use braces to refer to the term
+
+> > ### {% icon code-in %} Input: Markdown
+> > <code>
+> > The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call the &lbrace;API&rbrace; we'll get back this result &lbrace;JSON&rbrace;.
+> > </code>
+> {: .code-in}
+>
+> > ### {% icon code-out %} Output
+> >
+> > The `/jobs` {API} will return {JSON}. When we call the {API} we'll get back this result {JSON}.
+> >
+> {: .code-out}
+{: .code-2col}
+
+
 # Citations
 If you would like to cite any articles, books or websites in your tutorial, you can do so by adding a file called `tutorial.bib` next to your `tutorial.md` file. In this file you may enter [bibtex](http://www.bibtex.org/Using/) formatted citations. An example is given below:
 
@@ -755,6 +986,13 @@ If you would like to cite any articles, books or websites in your tutorial, you 
   url = {https://training.galaxyproject.org},
   note = {Accessed 2019-04-08},
   title = {Galaxy Training materials website}
+}
+
+@online{Galaxy-P_Metaproteomics,
+  author = {Galaxy-P Team},
+  title = {Galaxy-P Metaproteomics instance},
+  url = {https://proteomics.usegalaxy.eu/},
+  urldate = {2020-10-13}
 }
 ```
 {% endraw %}
@@ -780,5 +1018,12 @@ A bibliography will automatically be appended to the end of your tutorial (scrol
 {: .tip}
 
 
+
+
 # Conclusion
 {:.no_toc}
+
+
+## Footnotes (Rendered)
+
+[^1]: The wikipedia definition of a footnote is: "A note is a string of text placed at the bottom of a page in a book or document or at the end of a chapter, volume or the whole text. The note can provide an author's comments on the main text or citations of a reference work in support of the text. Footnotes are notes at the foot of the page while endnotes are collected under a separate heading at the end of a chapter, volume, or entire work. Unlike footnotes, endnotes have the advantage of not affecting the layout of the main text, but may cause inconvenience to readers who have to move back and forth between the main text and the endnotes."

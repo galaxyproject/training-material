@@ -30,17 +30,17 @@ Clustering is crucial in multiple research fields in BioInformatics such as anal
 
 We represent an observation/sample/data point as an n-dimensional vector and many such data points constitute a dataset. To show an example, let us assume that a dataset, shown in Figure 1, contains many samples and each sample has two dimensions each:
 
->    ![data](images/data_before_clustering.png "Sample data before clustering")
+![data](images/data_before_clustering.png "Sample data before clustering")
 
 Clustering reveals the following three groups, indicated by different colors:
 
->    ![data](images/data_after_clustering.png "Sample data after clustering")
+![data](images/data_after_clustering.png "Sample data after clustering")
 
 
 Clustering is divided into two subgroups based on the assignment of data points to clusters:
 
 - Hard: Each data point is assigned to exactly one cluster. One example is [k-means](https://en.wikipedia.org/wiki/K-means_clustering) clustering.
-	
+
 - Soft: Each data point is assigned a probability or likelihood of being in a cluster. One example is [expectation-maximization](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm) (EM) algorithm.
 
 > ### Agenda
@@ -55,7 +55,7 @@ Clustering is divided into two subgroups based on the assignment of data points 
 
 # Types of clustering algorithms
 
-There are many algorithms available for data clustering which use different ways to establish similarity between data points. The clustering algorithms can be broadly divided into many categories such as connectivity model, centroid model, density model, distribution model, group model, graph-based model and so on. Some of these are discussed below: 
+There are many algorithms available for data clustering which use different ways to establish similarity between data points. The clustering algorithms can be broadly divided into many categories such as connectivity model, centroid model, density model, distribution model, group model, graph-based model and so on. Some of these are discussed below:
 
  - Connectivity model: This model assigns higher similarity to data points which are closer in one or multi-dimensional space than those points which are farther away. There are two approaches - first, it categorises all data points into different clusters and then merges the data points in relation to the distances among them. Second, it categorises all data points into one single cluster and then partitions them into different clusters as the distance increases. This model is easy to understand but has problems in handling large datasets. One example is [hierarchical clustering](https://en.wikipedia.org/wiki/Hierarchical_clustering) and its variants.
 
@@ -77,19 +77,19 @@ The choice of a distance measure is crucial in clustering. It defines how the si
 ![Distances](images/raceid_distance.svg "Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)")
 
 
- > ### {% icon question %} Questions
- >
- > 1. Why are there zeroes along the diagonal of the above example distance matrix?
- > 1. Is there any symmetry in this matrix?
- >
- > > ### {% icon solution %} Solution
- > >
- > > 1. The distance between a point to itself is zero.
- > > 1. The distance between point *a* to point *b* is the same as the distance between point *b* to point *a* using the Euclidean distance metric.
- > >
- > {: .solution }
- >
- {: .question }
+> ### {% icon question %} Questions
+>
+> 1. Why are there zeroes along the diagonal of the above example distance matrix?
+> 1. Is there any symmetry in this matrix?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. The distance between a point to itself is zero.
+> > 1. The distance between point *a* to point *b* is the same as the distance between point *b* to point *a* using the Euclidean distance metric.
+> >
+> {: .solution }
+>
+{: .question }
 
 Other dissimilarity measures exist such as correlation-based distances, which are widely used for gene expression data analyses. Correlation-based distance considers two objects to be similar if their features are highly correlated, even though the observed values may be far apart in terms of euclidean distance. The distance between the two objects is 0 when they are perfectly correlated. [Pearson’s correlation](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient) is quite sensitive to outliers. This does not matter when clustering samples because the correlation is over thousands of genes. However, it is important to be aware of the possible impact of outliers. This can be mitigated by using [Spearman’s correlation](https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient) instead of Pearson’s correlation.
 
@@ -103,24 +103,24 @@ Following are the steps that are performed during hierarchical clustering:
 
 1. In the beginning, every data point in the dataset is treated as a cluster which means that we have `N` clusters at the beginning of the algorithm for a dataset of size `N`.
 
-2. The distance between all the points is calculated and two points closest to each other are merged together to form a new cluster. 
+2. The distance between all the points is calculated and two points closest to each other are merged together to form a new cluster.
 
 3. Next, the point which is closest to the cluster formed in step 2, will be merged to the cluster.
 
 4. Steps 2 and 3 are repeated until one large cluster is created.
 
-5. Finally, this large cluster is divided into K small clusters with the help of dendrograms. 
+5. Finally, this large cluster is divided into K small clusters with the help of dendrograms.
 
 Let’s now see how dendrograms help in hierarchical clustering.
 
->    ![data](images/Hierarchical_clustering_1.png "Hierarchical clustering")
+![data](images/Hierarchical_clustering_1.png "Hierarchical clustering")
 
 All data points are chosen at the bottom and each one is assigned to a separate cluster. Then, the two closest clusters are merged till just one cluster is left at the top. From the dendrogram thus formed, the distance between two clusters can be determined by computing the height at which two clusters are merged.
 
 By looking at the dendrogram, the clusters can be observed showing different groups in the best way. The optimal number of clusters is the number of vertical lines in the dendrogram cut by a horizontal line that can transverse maximum distance vertically without intersecting a cluster.
 
 In the above example, the best choice of the number of clusters will be 4 as the red horizontal line in the dendrogram below covers maximum vertical distance AB. For more details, please read [here](https://www.analyticsvidhya.com/blog/2016/11/an-introduction-to-clustering-and-different-methods-of-clustering/).
->    ![data](images/Hierarchical_clustering_2.png "Hierarchical clustering")
+![data](images/Hierarchical_clustering_2.png "Hierarchical clustering")
 
 
 This algorithm explained above uses the bottom-up approach. It is also possible to follow the top-down approach starting with all data points assigned in the same cluster and recursively performing splits till each data point is assigned a separate cluster. The decision of merging two clusters is taken based on the proximity of these clusters.
@@ -144,13 +144,13 @@ At the first step, we should upload the iris dataset and two other datasets whic
 >    https://zenodo.org/record/3813447/files/moon.csv
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
 > 2. **Rename** {% icon galaxy-pencil %} the datasets to `iris`, `circles` and `moon` respectively.
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 3. Check the **datatype**
 >    - Click on the history item to expand it to get more information.
@@ -159,8 +159,8 @@ At the first step, we should upload the iris dataset and two other datasets whic
 >      - Option 1: Datatypes can be **autodetected**
 >      - Option 2: Datatypes can be **manually set**
 >
->    {% include snippets/detect_datatype.md datatype="datatypes" %}
->    {% include snippets/change_datatype.md datatype="csv" %}
+>    {% snippet faqs/galaxy/datasets_detect_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="csv" %}
 >
 {: .hands_on}
 
@@ -173,10 +173,10 @@ In our dataset, we have the following features measured for each flower: [petal]
 
 Figure 7 shows the dendrogram of these data.
 
->    ![data](images/Hierarchical_iris.png "Iris data hierarchical clustering")
+![data](images/Hierarchical_iris.png "Iris data hierarchical clustering")
 
 
-We will apply hierarchical clustering to the iris dataset to find clusters based on two features (of flowers) - sepal length and width. 
+We will apply hierarchical clustering to the iris dataset to find clusters based on two features (of flowers) - sepal length and width.
 **Hint**: Please find the `Numeric Clustering` tool in the `Statistics` tool section.
 
 > ### {% icon hands_on %} Hands-on: Hierarchical clustering
@@ -188,11 +188,11 @@ We will apply hierarchical clustering to the iris dataset to find clusters based
 >        - {% icon param-select %} *"Choose how to select data by column"*: `All columns EXCLUDING some by column header name(s)`
 >            - {% icon param-text %} *"Type header name(s)"*: `Species`
 >        - {% icon param-select %} *"Clustering Algorithm"*: `Hierarchical Agglomerative Clustering`
->        - In *"Advanced options"*    
+>        - In *"Advanced options"*
 >            - {% icon param-text %} *"Number of clusters"*: `2`
 >            - {% icon param-select %} *"Affinity"*: `Euclidean`
 >            - {% icon param-select %} *"Linkage"*: `ward`
-> 
+>
 > 2. Rename the generated file to `Hierarchical clustering`
 {: .hands_on}
 
@@ -222,12 +222,12 @@ Let's visualize the clustering results to see how groups have been built. **Hint
 >        - {% icon param-text %} *"width of output"*: `7.0`
 >        - {% icon param-text %} *"height of output"*: `5.0`
 >        - {% icon param-text %} *"dpi of output"*: `175.0`
-> 
+>
 > 2. **View** {% icon galaxy-eye%} the resulting plot
 > 3. Rename to `Hierarchical scatter plot`
 {: .hands_on}
 
->    ![data](images/hierarchical_scatter.png "Hierarchical clustering scatter plot")
+![data](images/hierarchical_scatter.png "Hierarchical clustering scatter plot")
 
 
 ## K-means clustering
@@ -257,7 +257,7 @@ The parameters that minimize the cost function are learned through an iterative 
 >        - {% icon param-select %} *"Choose how to select data by column"*: `All columns EXCLUDING some by column header name(s)`
 >            - {% icon param-text %} *"Type header name(s)"*: `Species`
 >        - {% icon param-select %} *"Clustering Algorithm"*: `KMeans`
->        - In *"Advanced options"*    
+>        - In *"Advanced options"*
 >            - {% icon param-text %} *"Number of clusters"*: `2`
 > 2. Rename the generated file to `k-means clustering`
 {: .hands_on}
@@ -288,7 +288,7 @@ The parameters that minimize the cost function are learned through an iterative 
 > 3. Rename to `k-means scatter plot`
 {: .hands_on}
 
->    ![data](images/k_means_scatter.png "K-means clustering scatter plot")
+![data](images/k_means_scatter.png "K-means clustering scatter plot")
 
 
 > ### {% icon question %} Question
@@ -298,30 +298,30 @@ The parameters that minimize the cost function are learned through an iterative 
 >
 > > ### {% icon solution %} Solution
 > >
-> > Major difficulty found with k-means is the choice of the number of clusters. Different methods are proposed to solve this problem. 
+> > Major difficulty found with k-means is the choice of the number of clusters. Different methods are proposed to solve this problem.
 > > Here, we provide a simple solution. The idea is to compute k-means clustering using different values of clusters k. Next, the within sum of squares is drawn according to the number of clusters. The location of a bend (knee) in the plot is generally considered as an indicator of the appropriate number of clusters.
 > > ![data](images/number_of_clusters.png "Optimal number of clusters")
-> > The plot above represents the variance within the clusters. It decreases as k increases, but it can be seen as a bend (or “elbow”) at k = 4. This bend indicates that 
-> > additional clusters beyond the fourth have little value. 
+> > The plot above represents the variance within the clusters. It decreases as k increases, but it can be seen as a bend (or “elbow”) at k = 4. This bend indicates that
+> > additional clusters beyond the fourth have little value.
 > {: .solution}
 {: .question}
 
 
- > ### {% icon question %} Questions
- >
- > What are the differences between k-means and hierarchical clustering techniques
- >
- > > ### {% icon solution %} Solution
- > >
- > > 1. Hierarchical clustering has difficulties in handling large data well but k-means clustering can. This is because the time complexity (of Lloyd's variant) of k-means is linear (O(nkdi), n = number of data points, k = number clusters, d = data point dimensions and i = number of iterations) while the time-complexity of the optimal hierarchical clustering is quadratic (O(n2)).
- > >
- > > 2. K-means works well when the clusters are spherical (like circle in 2D, sphere in 3D) in shape. But, when the clusters are of arbitrary geometrical shapes, the performance suffers.
- > >
- > > 3. K-means clustering requires prior knowledge of the number of clusters. It does not learn the number of clusters from data. But, for the hierarchical clustering it is not necessary.
- > >
- > {: .solution }
- >
- {: .question }
+> ### {% icon question %} Questions
+>
+> What are the differences between k-means and hierarchical clustering techniques
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Hierarchical clustering has difficulties in handling large data well but k-means clustering can. This is because the time complexity (of Lloyd's variant) of k-means is linear (O(nkdi), n = number of data points, k = number clusters, d = data point dimensions and i = number of iterations) while the time-complexity of the optimal hierarchical clustering is quadratic (O(n2)).
+> >
+> > 2. K-means works well when the clusters are spherical (like circle in 2D, sphere in 3D) in shape. But, when the clusters are of arbitrary geometrical shapes, the performance suffers.
+> >
+> > 3. K-means clustering requires prior knowledge of the number of clusters. It does not learn the number of clusters from data. But, for the hierarchical clustering it is not necessary.
+> >
+> {: .solution }
+>
+{: .question }
 
 
 ## DBSCAN clustering
@@ -367,7 +367,7 @@ DBSCAN (Density-based spatial clustering of applications with noise) is a popula
 {: .hands_on}
 
 
->    ![data](images/dbscan_scatter.png "DBSCAN clustering scatter plot")
+![data](images/dbscan_scatter.png "DBSCAN clustering scatter plot")
 
 
 You will also notice that the green points (factor = -1) in the plot are not contained within any cluster. DBSCAN does not necessarily categorize every data point, and is therefore works very well with handling outliers in a dataset.
@@ -380,7 +380,7 @@ You will also notice that the green points (factor = -1) in the plot are not con
 > > ### {% icon solution %} Solution
 > >
 > > Clustering is an unsupervised learning algorithm; there are no labels or ground truth to compare with the clusters. However, we can still evaluate the performance of the algorithm using intrinsic measures.
-> > There is a performance measure for clustering evaluation which is called the [silhouette coefficient](https://en.wikipedia.org/wiki/Silhouette_(clustering)). It is a measure of the compactness and separation of the clusters. 
+> > There is a performance measure for clustering evaluation which is called the [silhouette coefficient](https://en.wikipedia.org/wiki/Silhouette_(clustering)). It is a measure of the compactness and separation of the clusters.
 > > It increases as the quality of the clusters increase; it is large for compact clusters that are far from each other and small for large, overlapping clusters. The silhouette coefficient is calculated per instance; for a set of instances, it is calculated as the mean of the individual sample score.
 > {: .solution}
 {: .question}
@@ -395,7 +395,7 @@ We can apply the same steps on the other datasets such `moon` and `circles` data
 >
 > 1. **Scatterplot with ggplot2** {% icon tool %} with the following parameters:
 >
->    {% include snippets/select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >    - {% icon param-file %} *"Input tabular dataset"*: `circles` and `moon` as **multiple datasets**
 >    - *"Column to plot on x-axis"*: `1`
 >    - *"Column to plot on y-axis"*: `2`
@@ -409,7 +409,7 @@ We can apply the same steps on the other datasets such `moon` and `circles` data
 > 2. **View** {% icon galaxy-eye%} the resulting plots
 {: .hands_on}
 
->    ![data](images/circles_moon_scatter.png "Scatter plot of circles and moon datasets")
+![data](images/circles_moon_scatter.png "Scatter plot of circles and moon datasets")
 
 
 ## Find clusters
@@ -420,13 +420,13 @@ Now you can find clusters in these datasets using the aforementioned algorithms.
 >
 > 1. **Numeric Clustering** {% icon tool %} with the following clustering parameters:
 >
->    {% include snippets/select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >    - *"Select the format of input data"*: `Tabular Format (tabular,txt)`
 >        - {% icon param-file %} *"Data file with numeric values"*: `circles` and `moon` as **multiple datasets**
 >        - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >        - {% icon param-select %} *"Choose how to select data by column"*: `All columns`
 >        - {% icon param-select %} *"Clustering Algorithm"*: `Hierarchical Agglomerative Clustering`
->        - In *"Advanced option"*    
+>        - In *"Advanced option"*
 >            - {% icon param-text %} *"Number of clusters"*: `2`
 >            - {% icon param-select %} *"Affinity"*: `Euclidean`
 >            - {% icon param-select %} *"Linkage"*: `ward`
@@ -441,7 +441,7 @@ Then, you can visualize the clustering results using the following steps:
 >
 > 1. **Scatterplot with ggplot2** {% icon tool %} with the following parameters:
 >
->    {% include snippets/select_multiple_datasets.md %}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >    - {% icon param-file %} *"Input tabular dataset"*: `circles hierarchical clustering` and `moon hierarchical clustering` as **multiple datasets**
 >    - *"Column to plot on x-axis"*: `1`
 >    - *"Column to plot on y-axis"*: `2`
@@ -464,9 +464,9 @@ Then, you can visualize the clustering results using the following steps:
 
 You can apply the other two algorithms (k-means and DBSCAN) to moon and circles datasets in the same way as explained above. In the k-means algorithm, please use `k=2` and for the DBSCAN algorithm, the parameters should not be the default ones as used earlier. They should be set as follows: for the circles dataset (`maximum neighborhood distance=0.2` and `minimal core point density=5`) and for the moon dataset (`maximum neighborhood distance=0.3` and `minimal core point density=4`). You can see the scatter plots of the clustering results for all three clustering algorithms in Figure 13 and 14.
 
->    ![data](images/circles_clustering.png "Plot of clustering algorithms on circles dataset")
+![data](images/circles_clustering.png "Plot of clustering algorithms on circles dataset")
 
->    ![data](images/moon_clustering.png "Plot of clustering algorithms on moon dataset")
+![data](images/moon_clustering.png "Plot of clustering algorithms on moon dataset")
 
 
 # Conclusion

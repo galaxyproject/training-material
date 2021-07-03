@@ -14,6 +14,7 @@ objectives:
   - "Create a pull request"
   - "Update a pull request"
 time_estimation: "30m"
+subtopic: contribute
 key_points:
   - "Work on your fork"
   - "1 branch = 1 feature"
@@ -28,7 +29,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Most of the content is written in [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/) with some metadata (or variables) found in [YAML](http://yaml.org/) files. Everything is stored on a [GitHub](https://github.com) repository: [{{ site.github_repository }}]({{ site.github.repository_url }}).
+Most of the content is written in [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/) with some metadata (or variables) found in [YAML](http://yaml.org/) files. Everything is stored on a [GitHub](https://github.com) repository: [{{ site.github_repository }}]({{ site.github_repository }}).
 
 The process of development of new content is open and transparent, using git and following the [GitHub flow](https://guides.github.com/introduction/flow/):
 
@@ -62,7 +63,7 @@ Forking a repository is a simple two-step process:
 
 > ### {% icon hands_on %} Hands-on: Fork the repository
 >
-> 1. Go on the GitHub repository: [{{ site.github_repository }}]({{ site.github.repository_url }})
+> 1. Go on the GitHub repository: [{{ site.github_repository }}]({{ site.github_repository }})
 > 2. Click on **Fork** (top-right corner of the page)
 >
 >    ![Fork](../../images/PR_fork.jpg)
@@ -82,9 +83,9 @@ To modify the content of the repository, you need a copy of it on your computer.
 > ### {% icon hands_on %} Hands-on: Clone the GitHub repository
 >
 > 1. Get the URL of your fork. You can find this on the main page of your fork under the green button:
->    1. Click on **Clone or download** (right)
+>    1. Click on **Code** (right)
 >
->       ![Get fork URL](../../images/PR_github_url.png)
+>       ![Get fork URL](../../images/clone_code_button.png)
 >
 >    2. Copy the URL
 >
@@ -298,7 +299,7 @@ One of the reviewers of your pull request asked you to add your name after your 
 
 # Check the automatic tests
 
-When a pull request is opened, some automated tests are automatically launched on [Travis](http://travis-ci.org/) to be sure that the changes do not break the website, the URL are valid, etc.
+When a pull request is opened, some automated tests are automatically launched on [Travis](http://travis-ci.com/) to be sure that the changes do not break the website, the URL are valid, etc.
 
 On the bottom of your pull request, you can see the status of the tests:
 
@@ -312,7 +313,7 @@ On the bottom of your pull request, you can see the status of the tests:
 
     ![Failed tests](../../images/PR_test_red.png)
 
-    When it is red, you can investigate why by clicking on **Details**. You will be redirected on [Travis](http://travis-ci.org/) where you can see the logs of the tests. Get in touch with us on [Gitter]({{ site.gitter_url }}) if you need help to understand the issue.
+    When it is red, you can investigate why by clicking on **Details**. You will be redirected on [Travis](http://travis-ci.com/) where you can see the logs of the tests. Get in touch with us on [Gitter]({{ site.gitter_url }}) if you need help to understand the issue.
 
 - Green (with tick)
 

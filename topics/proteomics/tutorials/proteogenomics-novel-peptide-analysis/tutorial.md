@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "Proteogenomics 3: Novel peptide analysis"
 zenodo_link: "https://doi.org/10.5281/zenodo.1489208"
+level: Intermediate
 questions:
   - "How to verify the spectra of novel proteoforms?"
   - "How to assign genomic allocation to these novel proteoforms?"
@@ -17,10 +18,6 @@ follow_up_training:
     topic_name: proteomics
     tutorials:
       - proteogenomics-dbcreation
-  -
-    type: "internal"
-    topic_name: proteomics
-    tutorials:
       - proteogenomics-dbsearch
 
 contributors:
@@ -30,12 +27,17 @@ contributors:
   - jraysajulga
   - jj-umn
   - pravs3683
+subtopic: multi-omics
+tags: [proteogenomics]
 ---
 
 # Introduction
 {: .no_toc}
 
 The third and the last workflow in the proteogenomics tutorial is to identifying the "**Novel peptides**" using BlastP and to localize the peptides to its genomic coordinates. Inputs from both workflow 1 and 2 will be used in this workflow.
+Please look at the following tutorials in this proteogenomics series before starting this tutorial:
+1. [Proteogenomics database creation]({% link topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.md %})
+2. [Proteogenomics database search]({% link topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.md %})
 
 ![Workflow](../../images/Third_workflow.png)
 
@@ -71,14 +73,46 @@ All the files to run this workflow can be obtained from the [second tutorial]({%
 {: .hands_on}
 
 
+
 # Peptide Selection
+
+[BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi) is a web based tool used to compare biological sequences. BlastP, matches protein sequences against a protein database. More specifically, it looks at the amino acid sequence of proteins and can detect and evaluate the amount of differences between say, an experimentally derived sequence and all known amino acid sequences from a database. It can then find the most similar sequences and allow for identification of known proteins or for identification of potential peptides associated with novel proteoforms.
+
+The first step in this tutorial is to perfrom BLAST-P analysis using the NCBI-NR database. The output from BLASTP will determine the identification of the novel peptides. The result is a tabular file with 25 columns containing all the information regarding the alignment of these peptides with the sequences in the NCBI-NR database.
+
+> ### {% icon hands_on %} Hands-on: NCBI BLAST+ blastp
+>
+> 1. {% tool [NCBI BLAST+ blastp](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/0.3.3) %} with the following parameters:
+>    - {% icon param-file %} **Protein query sequence(s)** - `Peptides for Blast-P analysis.tabular`
+>    - {% icon param-select %} **Subject database/sequences** - `Locally installed BLAST database`
+>      - {% icon param-select %} **Protein BLAST database** - `NCBI-NR(dated)`
+>    - {% icon param-select %} **Type of BLAST** - `blast-p short`
+>    - {% icon param-text %} **Set expectation value cutoff** - `200000.0`
+>    - {% icon param-select %} **Output format** - `Tabular format (25 columns)`
+>    - {% icon param-select %} **Advanced Options** - `show advanced options`
+>      - {% icon param-check %} **Filter out low complexity regions (with SEG)** - `No`
+>      - {% icon param-select %} **Scoring matrix and gap costs** - `PAM30`
+>         - {% icon param-select %} **Gap Costs** - `Extension:9 Extension:1`
+>      - {% icon param-text %} **Maximum hits to consider/show** - `1`
+>      - {% icon param-text %} **Maximum number of HSPs (alignments) to keep for any single query-subject pair** - `1`
+>      - {% icon param-text %} **Word size for wordfinder algorithm** - `2`
+>      - {% icon param-text %} **Multiple hits window size: use 0 to specify 1-hit algorithm, leave blank for default** - `40`
+>      - {% icon param-text %} **Minimum score to add a word to the BLAST lookup table** - `11`
+>      - {% icon param-select %} **Composition-based statistics** - `0: no composition-based statistics`
+>      - {% icon param-check %} **Should the query and subject defline(s) be parsed?** - `No`
+>      - {% icon param-select %} **Restrict search of database to a given set of ID's** - `No restriction, search the entire database`
+>      - {% icon param-check %} **Minimum query coverage per hsp (percentage, 0 to 100)?** - `0`
+>      - {% icon param-check %} **Compute locally optimal Smith-Waterman alignments** - `No`
+>  2. Click **Execute** and inspect the query results file after it turned green.
+>
+{: .hands_on}
 
 Once Blast-P search is performed, it provides a tabular output containing “**Novel peptides**”. Now this output is further processed by comparing the Novel Peptide output with the PSM report for selecting only distinct peptides which meet the criteria.
 
 
 > ### {% icon hands_on %} Hands-on: Query Tabular
 >
-> 1. **Query Tabular** {% icon tool %} with the following parameters:
+> 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %} with the following parameters:
 >    - {% icon param-repeat %} **Insert Database Table**
 >      - Section **Table Options**
 >        - *"Specify Name for Table"*: `blast`
@@ -88,7 +122,7 @@ Once Blast-P search is performed, it provides a tabular output containing “**N
 >        - *"Only load the columns you have named into database"*: `Yes`
 >        - {% icon param-repeat %} **Insert Table Index**
 >          - *"Table Index"*: `No`
->          - *"Index on Columns"*: `id`
+>          - *"Index on Columns"*: `qseqid`
 >
 >    - {% icon param-repeat %} **Insert Database Table**
 >      - Section **Filter Dataset Input**
@@ -119,6 +153,11 @@ Once Blast-P search is performed, it provides a tabular output containing “**N
 >      ORDER BY psm.Sequence, psm.ID
 >      ```
 >
+>       > ### {% icon comment %} Query information
+>       >
+>       > The query wants a tabular list of peptides in which the lenght of the PSM sequence is equal to the length of the Blast sequence, where in the pident (percentage identity) is less that 100 i.e. Peptide cannot be a 100% identical to the NCBI-nr reference database. Or it should fulfill the criteria that there should be atleast 1 gap present (blast.gapopen >= 1) or the length of the peptide in NCBI-nr should be less than the length of the query length. If the peptide follows all this then it is accepted as a "Novel" proteoform.
+>       >
+>       {: .comment}
 >    - *"Include query result column headers"*: `Yes`
 >
 >  2. Click **Execute** and inspect the query results file after it turned green.
@@ -129,7 +168,7 @@ Once this step is completed, a tabular output containing novel proteoforms are d
 
 > ### {% icon hands_on %} Hands-on: Query Tabular
 >
-> 1. **Query Tabular** {% icon tool %}: with the following parameters:
+> 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %}
 >    - {% icon param-repeat %} **Insert Database Table**
 >      - Section **Filter Dataset Input**
 >        - {% icon param-repeat %} **Insert Filter Tabular Input Lines**
@@ -154,7 +193,7 @@ Once this step is completed, a tabular output containing novel proteoforms are d
 
 # Multiomics Visualization Platform (MVP)
 
-The Multiomics Visualization Platform is a galaxy visualization plugin that allows the user to browse the selected proteomics data. It uses the SQlite database which allows the data to be filtered and aggregated in a user defined manner. It allows various features such as; the PSM can be displayed with a lorikeet spectral view, the selected peptide can be displayed in a protein view and an IGV browser is also available for the selected protein. The step by step guide shown below will provide a walkthrough on how to use this plugin.
+The Multiomics Visualization Platform is a Galaxy visualization plugin that allows the user to browse the selected proteomics data. It uses the SQlite database which allows the data to be filtered and aggregated in a user defined manner. It allows various features such as; the PSM can be displayed with a lorikeet spectral view, the selected peptide can be displayed in a protein view and an IGV browser is also available for the selected protein. The step by step guide shown below will provide a walkthrough on how to use this plugin (NOTE: the example shown below is a representative peptide which is subjected to change, so while you are running this tool please take a look at the "Novel Peptide" output from the previous steps).
 
 > ### {% icon hands_on %} Hands-on: Guide to MVP
 >
@@ -247,6 +286,7 @@ The next tool in the workflow is the Peptide genomic coordinate tool which takes
 
 
 
+
 # Obtain Peptide genomic Coordinates
 
 Gets genomic coordinate of peptides based on the information in mzsqlite and genomic mapping sqlite files. This program
@@ -255,7 +295,7 @@ peptides provided as input. This outputs bed file for peptides.
 
 > ### {% icon hands_on %} Hands-on: Peptide genomic Coordinate
 >
-> 1. Run **Peptide genomic Coordinate** {% icon tool %} with the following parameters:
+> 1. Run {% tool [Peptide genomic Coordinate](toolshed.g2.bx.psu.edu/repos/galaxyp/peptide_genomic_coordinate/peptide_genomic_coordinate/0.1.1) %} with the following parameters:
 >    - *"Input"*: `Peptide list file`, `mzsqlite sqlite DB file`, and `genomic mapping sqlite DB file`
 >    - *"Output"*: `Tabular BED file with all the columns`
 >
@@ -273,14 +313,14 @@ Given chromosomal locations of peptides in a BED file, PepPointer classifies the
 
 > ### {% icon hands_on %} Hands-on: Peppointer
 >
-> 1. **Peppointer** {% icon tool %} with the following parameters:
->   - {% icon param-select %} *"Choose the source of the GTF file"* - `Locally Installed`
->   - {% icon param-file %} *"GTF file with the genome of interest"* - `Mus_Musculus_GRCm38.90_Ensembl_GTF`
+> 1. {% tool [Peppointer](toolshed.g2.bx.psu.edu/repos/galaxyp/pep_pointer/pep_pointer/0.1.3) %} with the following parameters:
+>   - {% icon param-select %} *"Choose the source of the GTF file"* - `From History`
+>   - {% icon param-file %} *"GTF file with the genome of interest"* - `edited_Mus_Musculus_GRCm38.90_Ensembl_GTF`
 >   - {% icon param-file %} *"BED file with chromosomal coordinates of peptides"*: `Bed file from Peptide genomic coordinate tool`
 >
 > 2. Click **Execute** and inspect the query results file after it turned green.
 >
-> This tool provides a bed output with the classification of the genomic location of the peptides.
+> This tool provides a bed output with the classification of the genomic location of the peptides.The Mus-musculus GTF file will be in your history if you have completed the proteogenomics 1 tutorial.
 >
 > ![Output PP](../../images/Output_PP.png){:width="50%"}
 >
@@ -293,7 +333,7 @@ The final tool for this workflow generates a tabular output that summarizes the 
 
 > ### {% icon hands_on %} Hands-on: Query Tabular
 >
->  1. **Query Tabular** {% icon tool %} with the following parameters:
+>  1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %}
 >     - {% icon param-repeat %}  **Insert Database Table**
 >       - Section **Table Options**:
 >         - *"Specify Name for Table"*: `bed_pep_pointer`
@@ -338,15 +378,9 @@ The final tool for this workflow generates a tabular output that summarizes the 
 >
 {: .hands_on}
 
-### What's next?
+### Conclusion
 
-This completes the proteogenomics workflow analysis. This training workflow uses mouse data. For any other organism the data, tool paramters and the workflow will need to be modified accordingly.
-
-Please look at the following tutorials in this proteogenomics series:
-1. [Proteogenomics database creation]({% link topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.md %})
-2. [Proteogenomics database search]({% link topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.md %})
-
-This workflow is also available at [Proteogenomics gateway](http://galaxyp-proteogenomics.duckdns.org/).
+This completes the proteogenomics workflow analysis. This training workflow uses mouse data. For any other organism the data, tool paramters and the workflow will need to be modified accordingly.This workflow is also available at [usegalaxy.eu](https://usegalaxy.eu/).
 
 This workflow was developed by the Galaxy-P team at the University of Minnesota.
 For more information about Galaxy-P or our ongoing work, please visit us at [galaxyp.org](http://galaxyp.org)

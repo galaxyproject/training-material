@@ -77,7 +77,7 @@ This approach could be used to manipulate lists of uploads coming from many diff
 > PRJDA60709      | SAMD00016381     | DRX000479            | File 1
 > PRJDA60709      | SAMD00016382     | DRX000480            | File 1
 >
-> Download the resulting tabular data describing the files by clicking the "TEXT" link at the top of the page. Alternatively, the resulting sample sheet can be downloaded directly [here](https://www.ebi.ac.uk/ena/data/warehouse/filereport?accession=PRJDA60709&result=read_run&fields=study_accession,sample_accession,experiment_accession,fastq_ftp&download=txt). The number and size of the files for this example are relatively small for sequencing data but larger files and larger numbers of files should work as well - Galaxy will just need more time to download and process the files.
+> Download the resulting tabular data describing the files by clicking the "TEXT" link at the top of the page. Alternatively, the resulting sample sheet can be downloaded directly [here](https://www.ebi.ac.uk/ena/data/warehouse/filereport?accession=PRJDA60709&result=read_run&fields=study_accession,sample_accession,experiment_accession,fastq_ftp&download=true). The number and size of the files for this example are relatively small for sequencing data but larger files and larger numbers of files should work as well - Galaxy will just need more time to download and process the files.
 {: .hands_on}
 
 Unfortunately the ENA ftp server is not operational at this moment,
@@ -129,7 +129,7 @@ PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8
 
 At first glance, this may be feel like Excel or another spreadsheet program and you may feel the urge to start editing cells but we strongly encourage defining rules for manipulating the data instead. There are a few reasons for this:
 
-* **Manually modifying this metadata is not reproducible** - we will not belabor the point here but check out [Why not use excel for this?]({{ site.baseurl }}/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html#why-not-use-excel-for-this) for more context. Building up rules for modifying this metadata will allow Galaxy to track and report your manipulations (providing tracibility) and apply them to new sets of files (providing reproducibility).
+* **Manually modifying this metadata is not reproducible** - we will not belabor the point here but check out [Why not use excel for this?]({{ site.baseurl }}/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html#why-not-use-excel-for-this) for more context. Building up rules for modifying this metadata will allow Galaxy to track and report your manipulations (providing traceability) and apply them to new sets of files (providing reproducibility).
 * **Manually modifying this metadata is error prone** - we believe defining rules and treating the metadata in a systematic way minimizes the possibility to manual errors. These errors can be very hard to detect for large sets of data.
 * **Manually modifying data is not scalable** - this rule-based technique potentially scales to importing tens of thousands of datasets.
 

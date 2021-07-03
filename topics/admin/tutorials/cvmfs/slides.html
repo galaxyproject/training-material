@@ -1,6 +1,7 @@
 ---
-layout: base_slides
-logo: "GTN"
+layout: tutorial_slides
+logo: assets/images/gat.png
+video: true
 
 title: "Reference Data with CVMFS"
 objectives:
@@ -19,6 +20,13 @@ contributors:
 
 ![List_of_data.png](../../images/i06-List_of_data.png)
 
+???
+
+- Many tools need reference data
+- E.g. this BWA-MEM tool requires a reference genome
+- But where do you get this data?
+- And how do tools know where to find it?
+
 ---
 
 # Data, what data?
@@ -30,60 +38,47 @@ contributors:
 * Better to pre-build the indices.
 ]
 
+???
+
+- Much of this reference data requires calculation to generate it
+- For example, building dataset indexes
+- It is better to build them beforehand, so Galaxy has a concept of reference data
+
 ---
 
 # Data schematics in Galaxy
 
 ![schematic](../../images/data_managers_schematic_overview.png)
 
----
+???
 
-# Using reference data in a tool
-
-#### bwa.xml
-
-```xml
-<conditional name="reference_source">
-      <param name="reference_source_selector" type="select" label="Will you select a reference genome from your history or use a built-in index?" help="Built-ins were indexed using default options. See 'Indexes' section of help below">
-        <option value="cached">Use a built-in genome index</option>
-        <option value="history">Use a genome from history and build index</option>
-      </param>
-      <when value="cached">
-        <param name="ref_file" type="select" label="Using reference genome" help="Select genome from the list">
-          <options from_data_table="bwa_mem_indexes">
-            <filter type="sort_by" column="2" />
-            <validator type="no_options" message="No indexes are available" />
-          </options>
-          <validator type="no_options" message="A built-in reference genome is not available for the build associated with the selected input file"/>
-        </param>
-      </when>
-      <when value="history">
-
-```
+- Here is a more conrete example
+- A reference dataset is required as input
+- A tool (e.g. bwa) is used to build the index
+- The outputs are registered with Galaxy's data registry in a loc file
+- The tool data table xml file has a listing of all of the loc files
+- When a user runs the BWA tool, Galaxy knows where to find this reference data
 
 ---
 
-# Where are the data tables?
+# Index Generation with Data Manager
 
-#### tool_data_table_conf.xml
+- Allows for the **creation of built-in** (reference) data
+	- underlying data
+	- data tables
+	- \*.loc files
+- Specialized Galaxy tools that can only be accessed by an admin
+- Defined **locally** or installed from **ToolShed**
 
-(Usually located in `galaxy/config/`)
+???
 
-```xml
-  <tables>
-    <!-- Locations of indexes in the BWA mapper format -->
-    <table name="bwa_mem_indexes" comment_char="#" allow_duplicate_entries="False">
-      <columns>value, dbkey, name, path</columns>
-      <file path="tool-data/bwa_index.loc" />
-    </table>
-  </tables>
-```
+- Data managers are special tools in Galaxy
+- They create the reference data
+- And update the loc files
 
 ---
 
 # "loc" files - Short for location!
-
-bwa_index.loc
 
 ```text
 #
@@ -98,23 +93,79 @@ hg38    hg38    Human (hg38)    /genomes/hg38/bwa_mem_index/hg38/hg38.fa
 mm10    mm10    Mouse (mm10)    /genomes/mm10/bwa_mem_index/mm10/mm10.fa
 ```
 
+???
+
+- Here is an example loc file
+- They list all of the indexes of a specific type
+- Some of these indexes will be tool specific like this one, and some will be more general like a list of genomes
+- This file is updated by the data manager.
+
+---
+
+# Where are the data tables?
+
+(Usually located in `galaxy/config/tool_data_table_conf.xml`)
+
+```xml
+  <tables>
+    <!-- Locations of indexes in the BWA mapper format -->
+    <table name="bwa_mem_indexes" comment_char="#" allow_duplicate_entries="False">
+      <columns>value, dbkey, name, path</columns>
+      <file path="tool-data/bwa_index.loc" />
+    </table>
+  </tables>
+```
+
+???
+
+- The tool data table conf file lists table names, and their associated loc file
+- Additionally it defines the meaning of each column in the loc file
+
+---
+
+# Using reference data in a tool
+
+#### bwa.xml
+
+```xml
+<param name="ref_file" type="select" label="Using reference genome" help="Select genome from the list">
+  <options from_data_table="bwa_mem_indexes">
+    <filter type="sort_by" column="2" />
+    <validator type="no_options" message="No indexes are available" />
+  </options>
+  <validator type="no_options" message="A built-in reference genome is not available for the build associated with the selected input file"/>
+</param>
+
+```
+
+???
+
+- When a tool wants to use the data from those tables, it needs to declare which tables it wants to access (see previous slide)
+- A select type parameter is created for the user's selections
+- The tool knows that the options should come from a BWA-MEM indexes loc file
+- These reference datasets are sorted by column 2, the name
+- An some validators ensure a helpful message is shown if no data is available
+
 ---
 
 # Some Problems!
 
-.large[
-* Time consuming!
-  * ~30 minutes work just to add a new genome to 1 tool!
+- Super complex, right?
+- Time consuming!
+  - ~30 minutes work just to add a new genome to 1 tool!
+- Administrator needs to know:
+  - how to index **every** tool
+  - expected format of the reference data
+  - format of the .loc file
+- Some parts solved by Data Managers
+- **But there's an easier way!**
 
-* Administrator needs to know:
-  * how to index **every** tool
-  * expected format of the reference data
-  * format of the .loc file
+???
 
-* Some parts solved by Data Managers
-
-* But there's an easier way!
-]
+- This was a lot of information
+- And very genomics specific in some places
+- A lot of work to create and update the reference data
+- But there is a better way!
 
 ---
 
@@ -125,25 +176,46 @@ mm10    mm10    Mouse (mm10)    /genomes/mm10/bwa_mem_index/mm10/mm10.fa
 ]
 ![ref_data_prob_flow.png](../../images/ref_data_prob_flow.png)
 
+???
+
+- Imagine going through this process every time a user request comes in
+- It would be unpleasant
+
 ---
 
 # CernVM-FS to the rescue
 
-* Needed a method of sharing reference data across country efficiently
-* **CVMFS** is an efficient method for read only data sharing between systems
-    * Originally designed for distributed software installation at Cern
-    * Turns out it's really useful for read only data sets as well
-    * HTTP-based, firewall friendly
-* All nodes of Galaxy Main get their reference genomes and indices from CVMFS
-    * Shared via mirroring and caching across the country
-* It's also really useful to share data **globally**
-    * The **usegalaxy.*** initiative has taken full advantage of this.
+- Needed a method of sharing reference data across country efficiently
+- **CVMFS** is an efficient method for read only data sharing between systems
+    - Originally designed for distributed software installation at Cern
+    - Turns out it's really useful for read only data sets as well
+    - HTTP-based, firewall friendly
+- All nodes of Galaxy Main get their reference genomes and indices from CVMFS
+    - Shared via mirroring and caching across the country
+- It's also really useful to share data **globally**
+    - The **usegalaxy.\*** initiative has taken full advantage of this.
+
+???
+
+- CVMFS and the IDC solves these issues
+- CVMFS provides a global repository of reference data
+- Originally built by CERN for sharing software, we use it for data
+- It's an HTTP based protocol and very firewall friendly
+- All of the usegalaxy.* servers host a CVMFS repository
 
 ---
 
-.widen_image[
-![cvmfs_server_distribution.png](../../images/cvmfs_server_distribution.png)
-]
+# IDC
+
+- Group of admins working on the CVMFS data repository
+- Wish to automate the management of data and generation of new indicies
+- Come join us: [github.com/galaxyproject/idc](https://github.com/galaxyproject/idc)
+
+???
+
+- The IDC is the other half of the puzzle
+- CVMFS provides the storage, and the IDC provides the data
+- Join us on github if you are interested
 
 ---
 
@@ -152,3 +224,25 @@ mm10    mm10    Mouse (mm10)    /genomes/mm10/bwa_mem_index/mm10/mm10.fa
 .widen_image[
 ![cvmfs_global_structure.png](../../images/cvmfs_global_structure.png)
 ]
+
+???
+
+- CVMFS has a hierarchical structure
+- At the top is the stratum 0 server, the original copy of the datasets
+- This is replicated to the read-only stratum 1 servers
+- Anyone can connect to these stratum 1 servers
+- And whenever connections fail, CVMFS will fail over to another mirror
+- The mirror selection process is based on connection round trip times
+- As a result, the nearest mirror is usually selected.
+
+---
+
+.widen_image[
+![cvmfs_server_distribution.png](../../images/cvmfs_server_distribution.png)
+]
+
+???
+
+- There are CVMFS servers across the entire world
+- The primary mirrors are run by Galaxy project, Galaxy Europe, and Galaxy Australia
+- If one of these mirrors fails, you will still be able to use the reference data
