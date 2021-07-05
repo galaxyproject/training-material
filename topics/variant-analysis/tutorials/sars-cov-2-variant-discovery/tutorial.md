@@ -126,42 +126,42 @@ There are several possibilities to upload the data depending on how many dataset
 >      For our example datasets, the datasets are stored on [Zenodo]({{ page.zenodo_link }}) and can be retrieved using the following URLs:
 >
 >      ```
->      {{ page.zenodo_link }}/ERR5931005_1.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5931005_2.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5931006_1.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5931006_2.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5931007_1.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5931007_2.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5931008_1.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5931008_2.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949456_1.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949456_2.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949457_1.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949457_2.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949458_1.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949458_2.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949459_1.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949459_2.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949460_1.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949460_2.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949461_1.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949461_2.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949462_1.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949462_2.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949463_1.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949463_2.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949464_1.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949464_2.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949465_1.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949465_2.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949466_1.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949466_2.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949467_1.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949467_2.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949468_1.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949468_2.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949469_1.fastqsanger.gz
->      {{ page.zenodo_link }}/ERR5949469_2.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5931005_1.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5931005_2.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5931006_1.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5931006_2.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5931007_1.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5931007_2.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5931008_1.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5931008_2.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949456_1.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949456_2.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949457_1.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949457_2.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949458_1.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949458_2.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949459_1.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949459_2.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949460_1.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949460_2.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949461_1.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949461_2.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949462_1.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949462_2.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949463_1.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949463_2.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949464_1.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949464_2.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949465_1.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949465_2.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949466_1.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949466_2.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949467_1.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949467_2.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949468_1.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949468_2.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949469_1.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/ERR5949469_2.fastqsanger.gz
 >      ```
 >
 > 2. Create a collection to organize the data
@@ -237,10 +237,10 @@ Another two datasets are needed for the analysis of ampliconic, e.g. ARTIC-ampli
 >    - Option 2: From [Zenodo]({{ page.zenodo_link }})
 >
 >      ```
->      {{ page.zenodo_link }}/NC_045512.2_reference.fasta
->      {{ page.zenodo_link }}/NC_045512.2_feature_mapping.tsv
->      {{ page.zenodo_link }}/ARTIC_nCoV-2019_v3.bed
->      {{ page.zenodo_link }}/ARTIC_amplicon_info_v3.tsv
+>      {{ page.zenodo_link }}/files/NC_045512.2_reference.fasta
+>      {{ page.zenodo_link }}/files/NC_045512.2_feature_mapping.tsv
+>      {{ page.zenodo_link }}/files/ARTIC_nCoV-2019_v3.bed
+>      {{ page.zenodo_link }}/files/ARTIC_amplicon_info_v3.tsv
 >      ```
 >
 >      {% snippet faqs/galaxy/datasets_import_via_link.md %}
