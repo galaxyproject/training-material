@@ -276,6 +276,16 @@ We will not install all the tools from the EU Galaxy server as that server likel
 > The output of `get-tool-list` only includes ToolShed tools, not local non-TS tools.
 {: .tip}
 
+> ### {% icon tip %} But how many tools is it really?
+> If you've seen the [European Galaxy tools view](https://usegalaxy.eu/tools/view) (this is available on any galaxy! Just access `/tools/view`)
+> you'll notice they report somewhere over 2700 tools, however the `get-tool-list` output lists significantly fewer tools.
+>
+> This is for a couple reasons:
+> - That's the number of repositories that are installed, and some repositories include multiple tools (e.g. [`circos`](https://toolshed.g2.bx.psu.edu/view/iuc/circos/df7356989ac1) has quite a few)
+> - This only lists ToolShed tools, while EU also includes a number of non-TS tools
+> - There are a number of tools built into Galaxy (e.g. the Collection Operation tools)
+{: .tip}
+
 # Production Best Practices
 
 The servers which are part of the `usegalaxy.*` network use Ephemeris extensively to manage their large tool sets.
