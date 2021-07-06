@@ -317,20 +317,20 @@ This tutorial will help you setup the connection between Galaxy and Dropbox, all
 >    ```
 >    {% endraw %}
 >
-> 5. Deploy the new config files using the `galaxy_config_templates` var (also from the `galaxyproject.galaxy` role) in your group vars:
+> 5. Deploy the new config files using the `galaxy_config_files` var (also from the `galaxyproject.galaxy` role) in your group vars:
 >
 >    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -65,6 +67,12 @@ galaxy_config_files:
+>    @@ -65,6 +67,12 @@ galaxy_config_templates:
 >       - src: templates/galaxy/config/job_conf.xml.j2
 >         dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >
->    +galaxy_config_templates:
->    +  - src: templates/galaxy/config/user_preferences_extra_conf.yml
+>    +galaxy_config_files:
+>    +  - src: files/galaxy/config/user_preferences_extra_conf.yml
 >    +    dest: "{{ galaxy_config.galaxy.user_preferences_extra_conf_path }}"
->    +  - src: templates/galaxy/config/file_sources_conf.yml
+>    +  - src: files/galaxy/config/file_sources_conf.yml
 >    +    dest: "{{ galaxy_config.galaxy.file_sources_config_file }}"
 >    +
 >    ```
