@@ -326,7 +326,7 @@ This tutorial will help you setup the connection between Galaxy and Dropbox, all
 >    @@ -65,6 +67,12 @@ galaxy_config_templates:
 >       - src: templates/galaxy/config/job_conf.xml.j2
 >         dest: "{{ galaxy_config.galaxy.job_config_file }}"
->
+>     
 >    +galaxy_config_files:
 >    +  - src: files/galaxy/config/user_preferences_extra_conf.yml
 >    +    dest: "{{ galaxy_config.galaxy.user_preferences_extra_conf_path }}"
