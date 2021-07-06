@@ -166,5 +166,5 @@ The reports application is included with the Galaxy codebase and this tutorial a
 {: .hidden}
 
 > ### {% icon comment %} Insecure!
-> But notice that your Reports server is not secured! Check out the [External Authentication]({% link topics/admin/tutorials/reports/tutorial.md %}) tutorial for information on securing Reports.
+> But notice that your Reports server is not secured! Check out the [External Authentication]({% link topics/admin/tutorials/external-auth/tutorial.md %}) tutorial for information on securing Reports.
 {: .comment}
