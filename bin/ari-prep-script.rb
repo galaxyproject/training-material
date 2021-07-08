@@ -15,26 +15,25 @@ engine = ARGV[2]
 # For each line in the script, iterate
 # The spoken line is the one that's hashed. (2nd col)
 final_script = script.map.with_index{ |slide, idx|
-  paired = slide[0].zip(slide[1])
-  paired = paired.map{ |subtitle, spoken|
-    digest = Digest::MD5.hexdigest spoken
+  paired = slide.map{ |subtitle|
+    digest = Digest::MD5.hexdigest subtitle
 
     # Write out our script bits.
     handle = File.open(File.join(dir, digest + '.txt'), 'w')
-    handle.write(spoken)
+    handle.write(subtitle)
 
     handle = File.open(File.join(dir, digest + '-subtitle.txt'), 'w')
     handle.write(subtitle)
 
     # Synthesize and copy to the temp dir
-    mp3, json, duration = synthesize(spoken, engine)
-    puts "\tSynthesizing: #{spoken}"
+    mp3, json, duration = synthesize(subtitle, engine)
+    puts "\tSynthesizing: #{subtitle}"
     FileUtils.cp(mp3, File.join(dir, digest + '.mp3'))
     FileUtils.cp(json, File.join(dir, digest + '.json'))
 
     [
-      "file 'slides.%03d.png' # #{spoken}\nduration #{duration}\n" % idx,
-      "file '#{digest}.mp3' # #{spoken}\nduration #{duration}\n",
+      "file 'slides.%03d.png'\nduration #{duration}\n" % idx,
+      "file '#{digest}.mp3'\nduration #{duration}\n",
     ]
   }
   # Silence at the end of the slide

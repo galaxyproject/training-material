@@ -162,7 +162,7 @@ a test dataset and run our workflow.
 
 > ### {% icon hands_on %} Hands-on: Running the workflow
 >
-> 1. Return to the analysis are by clicking *Analyze Data* on the top
+> 1. Return to the analysis are by clicking the Home button {% icon galaxy-home %} (or *Analyze Data* on older versions of Galaxy) on the top
 > 2. Upload a dataset using "Paste/Fetch data" with the contents
 >
 >    ```
@@ -175,7 +175,7 @@ a test dataset and run our workflow.
 >    ```
 > 3. Run your workflow
 >
->    {% include snippets/run_workflow.md %}
+>    {% snippet faqs/galaxy/workflows_run.md %}
 >
 {: .hands_on}
 
@@ -222,12 +222,14 @@ We will now add tags to step outputs and label one of the 2 output datasets.
 
 > ### {% icon hands_on %} Hands-on: Running the workflow
 >
-> 1. Return to the analysis page by clicking *Analyze Data* on the top
+> 1. Return to the analysis page by clicking the Home button {% icon galaxy-home %} (or *Analyze Data* on older versions of Galaxy) on the top
 > 2. Create a dataset collection from the first 2 files in your history
->    {% include snippets/build_list_collection.md %}
+>
+>    {% snippet faqs/galaxy/collections_build_list.md %}
+>
 > 3. Run your workflow using the newly created collection input
 >
->    {% include snippets/run_workflow.md %}
+>    {% snippet faqs/galaxy/workflows_run.md %}
 >
 {: .hands_on}
 
@@ -261,7 +263,8 @@ of each workflow together.
 > 7. Insert **Paste two files side by side** {% icon tool %}
 > 8. Connect the 2 workflow outputs to the **Paste two files side by side** {% icon tool %} input
 > 9. Save {% icon galaxy-save %} your workflow using the save button on the top right
->    {% include snippets/run_workflow.md %}
+>
+>    {% snippet faqs/galaxy/workflows_run.md %}
 >
 {: .hands_on}
 

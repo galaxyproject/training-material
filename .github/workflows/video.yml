@@ -10,7 +10,7 @@ on:
 jobs:
   runner-job:
     if: github.repository_owner == 'galaxyproject'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     services:
       # Label used to access the service container
       mozillatts:
@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-ruby@v1
         with:
-          ruby-version: 2.5
+          ruby-version: "2.5"
       - uses: actions/setup-python@v2
         with:
           python-version: '3.7'
@@ -44,11 +44,11 @@ jobs:
       - name: Install wkhtmltopdf
         run: |
           sudo apt-get update
-          sudo apt-get install -y xvfb libfontconfig wkhtmltopdf ffmpeg sox libsox-fmt-mp3
+          sudo apt-get install -y xvfb libfontconfig wkhtmltopdf ffmpeg sox libsox-fmt-mp3 ghostscript
 
       - name: Change ImageMagick policy to allow pdf->png conversion.
         run: |
-          sudo sed -i 's/^.*policy.*none.*PDF.*//' /etc/ImageMagick-6/policy.xml
+          sudo rm /etc/ImageMagick-6/policy.xml
 
       - name: Build Site
         run: |

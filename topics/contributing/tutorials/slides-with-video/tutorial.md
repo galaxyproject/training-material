@@ -35,17 +35,20 @@ Based on the work by Delphine Larivière and James Taylor with their [COVID-19 L
 
 We wrote a short script which does the following:
 
+*Locally and in production*:
+
 - Extracts a 'script' from the slides. We extract every presenter comment in the slidedeck, and turn this into a text file.
-- Every line of this text file is then narrated by [Amazon Polly](https://aws.amazon.com/polly/)
-
-  - *NB*: this currently means it is non-free, and requires AWS credentials in order to build the videos locally, which is not an option for everyone. We do not have plans for integrating an open source voice engine but we would welcome it!
-
+- Every line of this text file is then narrated by [Amazon Polly](https://aws.amazon.com/polly/) (if you have money) or [MozillaTTS](https://github.com/synesthesiam/docker-mozillatts) (free).
 - The slide deck is converted to a PDF, and then each slide is extracted as a PNG.
 - Captions are extracted from the audio components.
 - The narration is stitched together into an mp3
 - The images are stitched together into an mp4 file
 - The video, audio, and captions are muxed together into a final mp4 file
-- This is uploaded to an S3 bucket
+
+*In production*
+
+- We use Amazon Polly, paid for by the Galaxyproject
+- The result is uploaded to an S3 bucket
 
 # Enabling Video
 
@@ -57,28 +60,21 @@ Every slide must have some narration in the presenter notes. It does not make se
 
 ### Sentence Structure
 
-Use short and uncomplex sentences whenever possible. Break up ideas into easy to digest bits. Students will be listening to this spoken and possibly reading the captions.
+Use simple and uncomplex sentences whenever possible. Break up ideas into easy to digest bits. Students will be listening to this spoken and possibly reading the captions.
 
-The captioning process is completely automated, but it means that for very long sentences, we do not currently break them up into multiple captions. So please keep your sentences under ~80 characters where possible.
+*2021-05-01* There used to be a limit of ~120 characters per sentence, but this is no longer an issue. We now break up sentences which are too long in the captions and show them over multiple timepoints. So if you need to write a really long sentence, you can, but we still advise to simplify sentences where possible.
 
-> > **Good**
-> > - Configuration management manages the configuration of machines.
-> > - It specifies what software should be installed, and how it should be configured.
-> {: .code-in}
->
-> > **Bad**
-> > Configuration management manages the configuration of machines; it specifies what software should be installed, and how it should be configured
-> {: .code-out}
-{: .code-2col}
+### Captions per Slide
 
+Every slide must have some speaker notes in this system, **NO exceptions**.
 
 ### Punctuation
 
-Every sentence must end with punctuation like `.` or `?` or even `!` if you're feeling excited. We merge all lines of the presenter notes before having them spoken by Polly. If you forget the punctuation it will be one long run-on sentence.
+Sentences should end with punctuation like `.` or `?` or even `!` if you're feeling excited.
 
 ### Abbreviations
 
-These are generally fine as-is. Make sure they are all caps though.
+These are generally fine as-is. (e.g. `e.g.`/`i.e.` is fine as-is, `RNA` is fine, etc.) Make sure abbreviations are all caps though.
 
 > **Good**
 > This role deploys CVMFS.

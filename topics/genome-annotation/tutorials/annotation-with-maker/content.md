@@ -62,7 +62,7 @@ To annotate a genome using Maker, you need the following files:
 >
 > 1. Create and name a new history for this tutorial.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the following files from [Zenodo](https://doi.org/10.5281/zenodo.4406623) or from the shared data library
 >
@@ -85,13 +85,13 @@ To annotate a genome using Maker, you need the following files:
 >    ```
 >    {% endif %}
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets
 > 4. Check that the datatype for {% unless include.short %}`augustus_training_1.tar.gz` and{% endunless %} `augustus_training_2.tar.gz` is set to `augustus`
 >
->    {% include snippets/change_datatype.md datatype="augustus" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="augustus" %}
 >
 {: .hands_on}
 
@@ -111,7 +111,7 @@ You have the following main datasets:
 >
 > 2. Rename the file you will use to `genome.fasta`. E.g. if you are using `S_pombe_chrIII.fasta`, rename it to `genome.fa`
 >
->    {% include snippets/rename_dataset.md name="genome.fa" %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="genome.fa" %}
 >
 {: .hands_on}
 {% endunless %}
@@ -693,4 +693,4 @@ Congratulations, you finished this tutorial! You learned how to annotate an euka
 
 After generating your annotation, you will probably want to automatically assign functional annotation to each predicted gene model. You can do it by using Blast, InterProScan, or Blast2GO for example.
 
-An automatic annotation of an eukaryotic genome is rarely perfect. If you inspect some predicted genes, you will probably find some mistakes made by Maker, e.g. wrong exon/intron limits, splitted genes, or merged genes. Setting up a manual curation project using [Apollo](http://genomearchitect.org/) helps a lot to manually fix these errors.
+An automatic annotation of an eukaryotic genome is rarely perfect. If you inspect some predicted genes, you will probably find some mistakes made by Maker, e.g. wrong exon/intron limits, splitted genes, or merged genes. Setting up a manual curation project using [Apollo](http://genomearchitect.org/) helps a lot to manually fix these errors. Check out the [Apollo tutorial]({% link topics/genome-annotation/tutorials/apollo/tutorial.md %}) for more details.

@@ -4,6 +4,9 @@ redirect_from:
   - /topics/transcriptomics/tutorials/scrna_preprocessing/tutorial
 
 title: "Pre-processing of Single-Cell RNA Data"
+subtopic: single-cell
+priority: 2
+
 zenodo_link: "https://zenodo.org/record/3253142"
 tags:
   - single-cell
@@ -23,19 +26,19 @@ key_points:
   - "Relocating barcodes into headers"
   - "Merging matrices from different batches together"
   - "Removing unwanted barcodes"
-# requirements:
-#   -
-#     type: "internal"
-#     topic_name: transcriptomics
-#     tutorials:
-#         - scrna-introduction
-#         - scrna-plates-batches-barcodes
-#         - scrna-umis
-#
-# follow_up_training:
-#   -
-#     type: "internal"
-#     topic_name: transcriptomics
+requirements:
+  -
+    type: "internal"
+    topic_name: transcriptomics
+    tutorials:
+        - scrna-intro
+
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: transcriptomics
+    tutorials:
+        - scrna-umis
 
 contributors:
   - mtekman
@@ -127,7 +130,7 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 >
 > 1. Create a new history and rename it (e.g. scRNA-seq single batch tutorial)
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 1. Import the subset FASTQ paired data from [`Zenodo`](https://zenodo.org/record/3253142) or from the data library (ask your instructor)
 >
@@ -136,7 +139,7 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 >    https://zenodo.org/record/3253142/files/SRR5683689_2.subset.fastq
 >    ```
 >
->    {% include snippets/import_via_link.md collection=true collection_type="Paired" collection_name_convention="`<name>_<plate>_<batch>` to preserve the sample names, sequencing plate number and batch number." collection_name="Here we will write `C57_P1_B1`" genome="GRCm38/mm10" pairswaptext="`SRR5683689_1` and `SRR5683689_2`" %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md collection=true collection_type="Paired" collection_name_convention="`<name>_<plate>_<batch>` to preserve the sample names, sequencing plate number and batch number." collection_name="Here we will write `C57_P1_B1`" genome="GRCm38/mm10" pairswaptext="`SRR5683689_1` and `SRR5683689_2`" %}
 >
 > 3. Import the Gene Annotations and Barcodes from [`Zenodo`](https://zenodo.org/record/3253142) or from the data library (ask your instructor)
 >
@@ -162,7 +165,7 @@ We will be demultiplexing our FASTQ batch data by performing barcode extraction 
 
 > ### {% icon hands_on %} Hands-on: Barcode Extraction
 >
-> 1. **UMI-tools extract** {% icon tool %} with the following parameters:
+> 1. {% tool [UMI-tools extract](toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_extract/umi_tools_extract/0.5.5.1) %} with the following parameters:
 >    - *"Library type"*: `Paired-end Dataset Collection`
 >        - {% icon param-collection %} *"Reads in FASTQ format"*: `C57_P1_B1` (Our paired set)
 >        - *"Barcode on both reads?"*: `Barcode on first read only`
@@ -207,14 +210,14 @@ For alignment, we will use RNA-STAR for performance and splice-awareness.
 
 > ### {% icon hands_on %} Hands-on: Performing the Alignment
 >
-> 1. **RNA-STAR** {%icon tool %} with the following parameters:
+> 1. {% tool [RNA-STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.7a) %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Single-end`
 >        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file"*: `Reads2` (output of **UMI-tools extract** {% icon tool %})
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
 >            - {% icon param-file %} *"Select reference genome"*: `Mus Musculus (mm10)` (Mouse)
 >            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq`
-> 1. **MultiQC** {%icon tool %} with the following parameters:
+> 1. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9) %} with the following parameters:
 >    - *"Results"*:
 >      - *"1: Results"*:
 >        - *"Which tool was used to generate logs?"*:`STAR`
@@ -275,7 +278,7 @@ We now have a BAM file of our aligned reads, with cell and UMI barcodes embedded
 >  2. There are many header lines that begin with `@` which we are not interested in.
 >  3. Look at 10th read directly below the header lines:
 >
->        SRR5683689.38437_GCATTC_CTTCGT	16	chr1	3439991	255	70M	*	0	0	CTTTGAATCTCTTCTTCCCAGCTAGTCATCTTCCTGCTTTTCTCTCTGTCTGTCTGTCTGTCTGTCTGTC	'0'<B<''B77<BFBBBBB7'FBFB0F7FBB<B'''<IFFBF<FBFB<FBBFBB0<BFFFBB0BBFFB<<	NH:i:1 HI:i:1 AS:i:66 nM:i:1
+>         SRR5683689.38437_GCATTC_CTTCGT	16	chr1	3439991	255	70M	*	0	0	CTTTGAATCTCTTCTTCCCAGCTAGTCATCTTCCTGCTTTTCTCTCTGTCTGTCTGTCTGTCTGTCTGTC	'0'<B<''B77<BFBBBBB7'FBFB0F7FBB<B'''<IFFBF<FBFB<FBBFBB0<BFFFBB0BBFFB<<	NH:i:1 HI:i:1 AS:i:66 nM:i:1
 >
 >
 {: .hands_on}
@@ -316,7 +319,7 @@ Another filtering measure we can apply is to keep reads that we are confident ab
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Filter BAM datasets on a variety of attributes** {% icon tool %} with the following parameters:
+> 1. {% tool [Filter BAM datasets on a variety of attributes](toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1) %} with the following parameters:
 >    - {% icon param-file %} *"BAM dataset(s) to filter"*: `output_bam` (output of **RNA STAR** {% icon tool %})
 >    - In *"Condition"*:
 >        - In *"1: Condition"*:
@@ -414,7 +417,7 @@ Let us annotate our BAM file with desired gene tags.
 
 > ### {% icon hands_on %} Hands-on: Quantification assist via FeatureCounts
 >
-> 1. **FeatureCounts** {%icon tool %} with the following parameters:
+> 1. {% tool [FeatureCounts](toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"Alignment file"*: `mapped_reads` (output of **Filter BAM** {% icon tool %})
 >    - *"Specify strand information"*:`Stranded (Forward)`
 >    - *"Gene annotation file"*: `in your history`
@@ -442,7 +445,7 @@ With all the relevant data now in our BAM file, we can actually perform the coun
 
 > ### {% icon hands_on %} Hands-on: Final Quantification
 >
-> 1. **UMI-tools counts** {% icon tool %} with the following parameters:
+> 1. {% tool [UMI-tools count](toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_count/umi_tools_count/0.5.5.1) %} with the following parameters:
 >    - {% icon param-file %} *"Sorted BAM file"*: `out_file1` (output of **FeatureCounts** {% icon tool %})
 >    - *"UMI Extract Method"*: `Barcodes are contained at the end of the read separated by a delimiter`
 >    - *"Bam is paired-end"*:`No`
@@ -552,8 +555,9 @@ Once again, file naming is important, and so we will rename our matrix files app
 >    https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 1. Rename a matrix
 >    - Click on {% icon galaxy-pencil %} of the *`P1_B1.tsv`* file
@@ -599,7 +603,8 @@ Let us now merge our matrices from different batches. In order to ensure that ou
 > ### {% icon hands_on %} Hands-on: Table Merge
 >
 > 1. **Create a Dataset List**
->    {% include snippets/build_list_collection.md %}
+>
+>    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 > 1. **Column Join on Collections** {% icon tool %} with the following parameters:
 >   - *"Tabular Files"*: (Select the Dataset Collection icon {% icon param-collection %}, and select the Collection from the previous step each of the matrices that you wish to join)
@@ -760,3 +765,5 @@ Factoid: We can convert the number of UMIs to the number of molecules using a tr
 In this tutorial we have learned the importance of barcoding; namely how to define, extract, and annotate them from our reads and into the read headers, in order to preserve them during mapping. We have discovered how these barcoded reads are transformed into counts, where the cell barcode and UMI barcode are used to denote individual cells and to correct against reads that are PCR duplicates. Finally, we have learned how to combine separate batch data as well as being able to check and correct against cross-contamination.
 
 ![Recap of workflow]({% link topics/transcriptomics/images/scrna_workflow.svg %} "A recap of the entire workflow")
+
+This tutorial is part of the https://singlecell.usegalaxy.eu portal ({% cite tekman2020single %}).

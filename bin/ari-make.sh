@@ -3,9 +3,9 @@ set -e
 
 # We have an old commit ID, so we need to figure out which slides to build.
 if [[ "${PREVIOUS_COMMIT_ID}" != "none" ]]; then
-	changed_slides="$(join <(find topics -name 'slides.html' | xargs ./bin/filter-has-videos | sort) <(git diff ${PREVIOUS_COMMIT_ID} --name-only | sort))"
+	changed_slides="$(join <(find topics -name 'slides.html' -or -name introduction.html | xargs ./bin/filter-has-videos | sort) <(git diff ${PREVIOUS_COMMIT_ID} --name-only | sort))"
 else
-	changed_slides="$(find topics -name 'slides.html' | xargs ./bin/filter-has-videos)"
+	changed_slides="$(find topics -name 'slides.html' -or -name introduction.html | xargs ./bin/filter-has-videos)"
 fi
 
 for slides in $changed_slides; do
@@ -31,4 +31,5 @@ for slides in $changed_slides; do
 done
 
 # Now we'll note our current, changed commit since this all went so well.
+mkdir -p videos/topics/
 git log -1 --format=%H > videos/topics/last-commit

@@ -1,0 +1,28 @@
+---
+layout: page
+---
+
+{% assign topic = site.data[page.topic_name] %}
+
+<div class="container main-content">
+
+    <section class="tutorial faqs">
+        <h1 data-toc-skip>Frequently Asked Questions</h1>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    {{ content
+                        | replace: '<blockquote class="hands_on">', '<blockquote class="notranslate hands_on">'
+                        | no_translate:site.words_to_not_translate }}
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+

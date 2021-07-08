@@ -49,7 +49,7 @@ We will now import the data that we will use for the tutorial.
 >
 > 1. Create and name a new history for this tutorial.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import from [Zenodo](https://doi.org/10.5281/zenodo.582600) or from the data library the files:
 >
@@ -73,7 +73,7 @@ We will now import the data that we will use for the tutorial.
 >
 >    As a default, Galaxy uses the link as the name of the new dataset. It also does not link the dataset to a database or a reference genome.
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 4. Inspect the content of a file.
 >

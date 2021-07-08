@@ -1,112 +1,29 @@
-name: Lint and Build GTN
+name: Lint Broken Links
 
 # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#example-using-a-list-of-events
-on: [pull_request]
+on:
+  pull_request:
+    paths:
+      - '**/*.md'
+      - '**/*.html'
+      - '*.yml'
+      - '*.yaml'
+      - 'metadata/*'
+      - 'topics/*/images/*'
+      - '_plugins/*'
+      - '_plugins_dev/*'
+      - '**/*.bib'
 
 jobs:
-  setup:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ruby: [2.5]
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-      - uses: actions/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby }}
-      - uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
-      - name: Install dependencies
-        run: |
-          gem install bundler
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
-
-  lint-frontmatter:
-    needs: setup
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ruby: [2.5]
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-      - uses: actions/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby }}
-      - uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
-      - name: Install dependencies
-        run: |
-          gem install bundler
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
-      - run: make check-frontmatter ACTIVATE_ENV=pwd
-
-  lint-workflows:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-      - name: Lint 🔍👁👁
-        run: |
-          make check-workflows
-
-  lint-snippets:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-      - name: Lint 🔍👁👁
-        run: |
-          make check-snippets
-
-  lint-tool-links:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-      - name: Lint 🔍👁👁
-        run: |
-          make check-tool-links
-
-  lint-data-lib-yaml:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-      - name: Check yaml are valid and can be merged
-        run: |
-          python bin/mergeyaml.py --nondocker > /dev/null
-
   build-site:
-    needs: setup
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ruby: [2.5]
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
       - uses: actions/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby }}
+          ruby-version: "2.5"
       - uses: actions/cache@v2
         with:
           path: vendor/bundle
@@ -123,9 +40,9 @@ jobs:
           bundle exec htmlproofer \
             --assume-extension \
             --http-status-ignore 405,429,503,999 \
-            --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#.*/" \
-            --url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${GITHUB_REPOSITORY}/tree/${GITHUB_HEAD_REF}" \
-            --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
+            --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#.*/,/#embedded_jbrowse/","/.*videos.*.mp4.png/" \
+            --url-swap "github.com/galaxyproject/training-material/tree/main:github.com/${GITHUB_REPOSITORY}/tree/${GITHUB_HEAD_REF}" \
+            --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/","/\/tutorials\/.*\/docker\//" \
             --allow-hash-href \
             --disable-external \
             ./_site

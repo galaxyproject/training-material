@@ -1,6 +1,7 @@
 ---
 layout: tutorial_hands_on
-title: RNA-Seq reads to counts
+title: "1: RNA-Seq reads to counts"
+subtopic: end-to-end
 zenodo_link: "https://zenodo.org/record/4249555"
 tags:
   - collections
@@ -78,7 +79,7 @@ This is a Galaxy tutorial based on material from the [COMBINE R RNAseq workshop]
 {: .agenda}
 
 
-{% include snippets/warning_results_may_vary.md %}
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 # Preparing the reads
 
@@ -86,7 +87,7 @@ This is a Galaxy tutorial based on material from the [COMBINE R RNAseq workshop]
 
 Read sequences are usually stored in compressed (gzipped) FASTQ files. Before the differential expression analysis can proceed, these reads must be aligned to the reference genome and counted into annotated genes. Mapping reads to the genome is a very important task, and many different aligners are available, such as HISAT2 ({% cite kim2015hisat %}), STAR ({% cite dobin2013star %}) and Subread ({% cite Liao2013 %}). Most mapping tasks require larger computers than an average laptop, so usually read mapping is done on a server in a linux-like environment, requiring some programming knowledge. However, Galaxy enables you to do this mapping without needing to know programming and if you don't have access to a server you can try to use one of the publically available Galaxies e.g. [usegalaxy.org](https://usegalaxy.org), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au/).
 
-The raw reads used in this tutorial were obtained from SRA from the link in GEO for the the mouse mammary gland dataset (e.g `ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP%2FSRP045%2FSRP045534`). For the purpose of this tutorial we are going to be working with a small part of the FASTQ files. We are only going to be mapping 1000 reads from each sample to enable running through all the steps quickly. If working with your own data you would use the full data and some results for the full mouse dataset will be shown for comparison. The small FASTQ files are available in [Zenodo](https://zenodo.org/record/4249555) and the links to the FASTQ files are provided below. 
+The raw reads used in this tutorial were obtained from SRA from the link in GEO for the the mouse mammary gland dataset (e.g `ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP%2FSRP045%2FSRP045534`). For the purpose of this tutorial we are going to be working with a small part of the FASTQ files. We are only going to be mapping 1000 reads from each sample to enable running through all the steps quickly. If working with your own data you would use the full data and some results for the full mouse dataset will be shown for comparison. The small FASTQ files are available in [Zenodo](https://zenodo.org/record/4249555) and the links to the FASTQ files are provided below.
 
 If you are sequencing your own data, the sequencing facility will almost always provide compressed FASTQ files which you can upload into Galaxy. For sequence data available through URLs, The [Galaxy Rule-based Uploader]({% link topics/galaxy-interface/tutorials/upload-rules/tutorial.md %}) can be used to import the files. It is much quicker than downloading FASTQs to your computer and uploading into Galaxy and also enables importing as a **Collection**. When you have more than a few files, using Galaxy Collections helps keep the datasets organised and tidy in the history. Collections also make it easier to maintain the sample names through tools and workflows. If you are not familiar with collections, you can take a look at the [Galaxy Collections tutorial]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}) for more details. The screenshots below show a comparison of what the FASTQ datasets for this tutorial would look like in the history if we imported them as datasets versus as a collection with the Rule-based Uploader.
 
@@ -96,13 +97,13 @@ Datasets | Collection
 
 
 > ### {% icon details %} Collections and sample names
-> 
+>
 > Collections can also help to maintain the original sample names on the files throughout the tools used. The screenshots below show what we would see in one of the MultiQC reports that we will generate if we used datasets versus a collection.
-> 
+>
 > Datasets | Collection
 > --- | ---
 > ![Sample names without collection](../../images/rna-seq-reads-to-counts/samplesnames_without_collection.png)| ![Sample names with collection](../../images/rna-seq-reads-to-counts/samplesnames_with_collection.png)
-> 
+>
 {: .details}
 
 
@@ -135,8 +136,8 @@ In order to get these files into Galaxy, we will want to do a few things:
 >
 > 1. Create a new history for this tutorial e.g. `RNA-seq reads to counts`
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the files from Zenodo using Galaxy's Rule-based Uploader.
 >    - Open the Galaxy Upload Manager
@@ -228,7 +229,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    - {% icon param-collection %} *"Short read data from your current history"*: `fastqs` (Input dataset collection)
 > 2. Inspect the `Webpage` output of **FastQC** {% icon tool %} for the `MCL1-DL` sample by clicking on the {% icon galaxy-eye %} (eye) icon
 >
-> {% include snippets/select_collection.md %}
+> {% snippet faqs/galaxy/tools_select_collection.md %}
 >
 {: .hands_on}
 
@@ -262,7 +263,7 @@ The FastQC report contains a lot of information and we can look at the report fo
 >           - {% icon param-collection %} *"FastQC output"*: `RawData` files (output of **FastQC** {% icon tool %} on trimmed reads)
 > 2. Add a tag `#fastqc-raw` to the `Webpage` output from MultiQC and inspect the webpage
 >
-> {% include snippets/add_tag.md type="name" %}
+> {% snippet faqs/galaxy/datasets_add_tag.md type="name" %}
 >
 {: .hands_on}
 
@@ -468,7 +469,7 @@ The counts files are currently in the format of one file per sample. However, it
 >
 {: .hands_on}
 
-Take a look at the output. The tutorial uses a small subset of the data ~ 1000 reads per sample to save on processing time. Most rows in that matrix will contain all zeros, there will be ~600 non-zero rows. The output for the full dataset is shown below. 
+Take a look at the output. The tutorial uses a small subset of the data ~ 1000 reads per sample to save on processing time. Most rows in that matrix will contain all zeros, there will be ~600 non-zero rows. The output for the full dataset is shown below.
 
 ![Count matrix](../../images/rna-seq-reads-to-counts/count_matrix.png "Count matrix")
 
@@ -476,7 +477,7 @@ Now it is easier to see the counts for a gene across all samples. The accompanyi
 
 # Generating a QC summary report
 
-There are several additional QCs we can perform to better understand the data, to see if it's good quality. These can also help determine if changes could be made in the lab to improve the quality of future datasets. 
+There are several additional QCs we can perform to better understand the data, to see if it's good quality. These can also help determine if changes could be made in the lab to improve the quality of future datasets.
 
 We'll use a prepared workflow to run the first few of the QCs below. This will also demonstrate how you can make use of Galaxy workflows to easily run and reuse multiple analysis steps. The workflow will run the first three tools: **Infer Experiment**, **MarkDuplicates** and **IdxStats** and generate a **MultiQC** report. You can then edit the workflow if you'd like to add other steps.
 
@@ -486,25 +487,25 @@ We'll use a prepared workflow to run the first few of the QCs below. This will a
 >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/qc_report.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
->    {% include snippets/import_workflow.md %}
+>    {% snippet faqs/galaxy/workflows_import.md %}
 >
-> 2. Import this file as type BED file: 
+> 2. Import this file as type BED file:
 >    ```
 >    https://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download
 >    ```
->    {% include snippets/import_via_link.md %} 
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Run **Workflow QC Report** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
 >    - {% icon param-file %} *"1: Reference genes"*: the imported RefSeq BED file
 >    - {% icon param-collection %} *"2: BAM files"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
 >
->    {% include snippets/run_workflow.md %}
+>    {% snippet faqs/galaxy/workflows_run.md %}
 > 4. Inspect the `Webpage` output from MultiQC
 {: .hands_on}
 
 
-**You do not need to run the hands-on steps below.** They are just to show how you could run the tools individually and what parameters to set. 
+**You do not need to run the hands-on steps below.** They are just to show how you could run the tools individually and what parameters to set.
 
 ## Strandness
 

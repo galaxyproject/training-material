@@ -4,6 +4,8 @@ layout: tutorial_hands_on
 title: "A short introduction to Galaxy"
 zenodo_link: "https://doi.org/10.5281/zenodo.582600"
 level: Introductory
+tags:
+  - español
 questions:
   - "How to get started in Galaxy"
 objectives:
@@ -22,6 +24,8 @@ key_points:
   - "View all your histories and move files between them. Switch to a different history."
   - "Log out of your Galaxy server. When you log back in (to the same server), your histories will all be there."
 subtopic: core
+translations:
+  - es
 contributors:
   - annasyme
 
@@ -266,11 +270,11 @@ Let's create a new history.
 > ### {% icon hands_on %} Hands-on: New history
 > 1. Create a new history
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Rename your history, *e.g.* "Next-analysis"
 >
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 {: .hands_on}
 
@@ -293,7 +297,7 @@ Where is your first history, called "my-analysis"?
 >
 >    This makes a copy of the dataset in the new history (without actually using additional disk space).
 >
-> 3. Click on **Analyze Data** in the top panel to go back to your analysis window
+> 3. Click on the Home icon {% icon galaxy-home %} (or **Analyze Data** on older versions of Galaxy) in the top panel to go back to your analysis window
 >
 > ![Copy a dataset between histories](../../images/copy-dataset.gif "Copy a dataset between histories by dragging it")
 >

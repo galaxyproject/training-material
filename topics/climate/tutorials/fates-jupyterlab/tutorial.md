@@ -53,7 +53,7 @@ contributors:
 {:.no_toc}
 
 
-The practical aims at familiarizing you with running CLM-FATES within Galaxy Climate JupyterLab. 
+The practical aims at familiarizing you with running CLM-FATES within Galaxy Climate JupyterLab.
 
 > ## Agenda
 >
@@ -70,7 +70,7 @@ The practical aims at familiarizing you with running CLM-FATES within Galaxy Cli
 > FATES needs what we call a "Host Land Model" (HLM) to run and in this tutorial
 > we will be using the [Community Land Model](http://www.cesm.ucar.edu/models/clm/)
 > of the [Community Terrestrial Systems Model](https://github.com/ESCOMP/CTSM) (CLM-CTSM).
-> FATES was derived from the CLM Ecosystem Demography model (CLM(ED)), which was documented in 
+> FATES was derived from the CLM Ecosystem Demography model (CLM(ED)), which was documented in
 > {% cite Fisher2015 %}.
 > and this technical note was first published as an appendix to [that paper](https://pdfs.semanticscholar.org/396c/b9f172cb681421ed78325a2237bfb428eece.pdf).
 > The [FATES documentation](https://fates-docs.readthedocs.io/en/latest/index.html) will provide some more insight on FATES too.
@@ -90,7 +90,7 @@ This platform is meant to be used for:
 - teaching purposes.
 
 The main advantage over the Galaxy CLM-FATES tool is that you can run any versions of FATES, including developments
-that are not released yet. However, it is not recommended to run more than a few decades of simulation time. 
+that are not released yet. However, it is not recommended to run more than a few decades of simulation time.
 In that particular case, we would suggest to use the Galaxy CLM-FATES Galaxy tool.
 
 > ### {% icon comment %} CML-FATES in JupyterLab versus CLM-FATES Galaxy tool
@@ -105,30 +105,33 @@ In that particular case, we would suggest to use the Galaxy CLM-FATES Galaxy too
 > ## {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial. If you are not inspired, you can name it *fates-jupyterlab*.
->    {% include snippets/create_new_history.md %}
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 > 2. Import the files from [Zenodo](https://doi.org/10.5281/zenodo.4108341) or from the shared data library
 >
 >    ```
 >    https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Check the datatype is **tar**
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 > 4. Rename Datasets
 >
 >    As "https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar" is not a beautiful name and can give errors for some tools,
 >    it is a good practice to change the dataset name by something more meaningfull. For example by removing `https://zenodo.org/record/4108341/files/` to obtain `inputdata_version2.0.0_ALP1.tar`, respectively.
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 5. Add a tag to the dataset corresponding to `fates-jupyterlab`
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 
@@ -139,8 +142,7 @@ In that particular case, we would suggest to use the Galaxy CLM-FATES Galaxy too
 > Currently JupyterLab for Ocean / Atmosphere / Land / Climate Python ecosystem in Galaxy is available on [Live.useGalaxy.eu](https://live.usegalaxy.eu) only. JupyterLab for Ocean / Atmosphere / Land / Climate Python ecosystem and not the default JupyterLab in Galaxy contains all the python packages and additional software we need for running Earth System Model, including Functionally Assembled Terrestrial Ecosystem Simulator (FATES). The default JupyterLab in Galaxy would not be sufficient for executing all the tasks in th
 is tutorial.
 >
-> 1. Open the JupyterLab tool {% icon tool %} by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_climate_notebook){:target="_blank"}​ with the following par
-ameters:
+> 1. Open the {% tool [JupyterLab](interactive_tool_jupyter_notebook) %} by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_climate_notebook){:target="_blank"}
 > 2. Click Execute
 > 3. The tool will start running and will stay running permanently
 > 4. Click on the "User" menu at the top and go to "Active Interactive Tools" and locate the JupyterLab instance you started.
@@ -175,7 +177,7 @@ In this part of the tutorial, we will be using the existing Jupyter Notebook cal
 >
 > By default code cells execute Python 3 code (default kernel) so to execute the Shell command lines
 > we will use `%%bash`.  In that case the cell runs with bash in a subprocess.
-> 
+>
 > Then untar this file:
 >
 > ```
@@ -205,7 +207,7 @@ In this part of the tutorial, we will be using the existing Jupyter Notebook cal
 ## Get CLM-FATES EMERALD release
 
 > ### {% icon hands_on %} Hands-on: Clone CLM-FATES for Nordic sites
-> 
+>
 > ```
 > %%bash
 > conda create --name fates -y fates-emerald=2.0.1
@@ -213,17 +215,17 @@ In this part of the tutorial, we will be using the existing Jupyter Notebook cal
 > The command above is required once only. It creates a new conda environment called **fates** and
 > install **fates-emerald** version 2.0.1 conda package. It is important to always specify the version of
 > CLM-FATES you would like to use as it needs to match your input dataset.
-> Now a new **fates** conda environment has been 
+> Now a new **fates** conda environment has been
 > created in your current JupyterLab session and can be use every time you activate it.
-> 
+>
 > Then to activate this new conda environment:
-> 
+>
 > ```
 > %%bash
 > source activate fates
 > ```
 > Please note that you would need to activate **fates** environment in every new code cell (because it starts a new Shell subprocess).
-> 
+>
 {: .hands_on}
 
 
@@ -265,7 +267,7 @@ The 4 main arguments of create_newcase are explained on the figure below: ![crea
     - **River runoff**:MOSART: MOdel for Scale Adaptive River Transport
     - **Land Ice**: SGLC Stub Glacier (land ice) component
     - **Wave**-   SWAV Stub wave component
-   The list of available component set is given [here](http://www.cesm.ucar.edu/models/cesm2/config/compsets.html). 
+   The list of available component set is given [here](http://www.cesm.ucar.edu/models/cesm2/config/compsets.html).
 - **mach**: specifies the machine where CLM-FATES will be compiled and run. We use `espresso` which is the local setup (see `$HOME/.cime/` folder).
 
 ## Setup, build and submit your first simulation
@@ -303,10 +305,10 @@ The 4 main arguments of create_newcase are explained on the figure below: ![crea
 > ### {% icon hands_on %} Hands-on: check your simulation
 >
 > 1. From a new code cell:
-> 
+>
 > ```
-> %%bash 
-> 
+> %%bash
+>
 > cd $HOME/work/fates_alp1
 > ls -la
 > ```
@@ -339,7 +341,7 @@ The 4 main arguments of create_newcase are explained on the figure below: ![crea
 >   - From the **File Menu** --> **New** --> **Notebook**:
 >      - Rename your notebook to **check_analysis.ipynb**
 >      - All the analysis of the 6 month FATES simulation will be done from this notebook
-> 
+>
 > 3. Get metadata
 > In a Code cell:
 >
@@ -351,12 +353,12 @@ The 4 main arguments of create_newcase are explained on the figure below: ![crea
 >
 > case = 'fates_alp1'
 > path = os.path.join(os.getenv('HOME'), 'archive', case, 'lnd', 'hist')
-> dset = xr.open_dataset(path + '/fates_alp1.clm2.h0.2000-01.nc')
+> dset = xr.open_mfdataset(path + '/*.nc', combine='by_coords')
 > dset
 > ```
-> As shown above, we are now using Python 3 for analyzing the results and [xarray](http://xarray.pydata.org/en/stable/) which 
+> As shown above, we are now using Python 3 for analyzing the results and [xarray](http://xarray.pydata.org/en/stable/) which
 > is a Python package that can easily handle [netCDF](https://en.wikipedia.org/wiki/NetCDF) files.
-> we opened the single history file and print metadata.
+> we opened all the history files we have produced and print metadata.
 >
 > 4. Plotting 1D variables (timeseries)
 >
@@ -384,13 +386,13 @@ The 4 main arguments of create_newcase are explained on the figure below: ![crea
 > source activate fates
 > cd $HOME/ctsm_cases/fates_alp1
 >
-> ./xmlchange RUN_STARTDATE=0001-01-01      # set up the starting date of your simulation 
+> ./xmlchange RUN_STARTDATE=0001-01-01      # set up the starting date of your simulation
 > ./xmlchange STOP_OPTION=nyears            # set the simulation periods to "years"
 > ./xmlchange STOP_N=5                      # set the length of simulation, i.e, how many years
 > ./xmlchange CONTINUE_RUN=TRUE             # if you want to continue your simulation from restart file, set it to TRUE
 > ./xmlchange RESUBMIT=1                    # set up how many times you want to resubmit your simulation.
->                                           # e.g, STOP_N=5, RESUBMIT=1, you will have simulation for 5+5*1=10 
-> ./xmlchange DATM_CLMNCEP_YR_START=1901    # set up the start year of the atmospheric forcing 
+>                                           # e.g, STOP_N=5, RESUBMIT=1, you will have simulation for 5+5*1=10
+> ./xmlchange DATM_CLMNCEP_YR_START=1901    # set up the start year of the atmospheric forcing
 > ./xmlchange DATM_CLMNCEP_YR_END=1910      # set up the end year of the atmospheric forcing
 > ./case.submit > case_submit_sontinue_run.out 2>&1
 > ```
@@ -472,7 +474,7 @@ p.fig.savefig('CANOPY_HEIGHT_DIST.png')
 > tar cvf archive_emerald_fates_test.tar archive
 > ```
 > Then you are now ready to put your dataset into Galaxy. As it can be large, we recommend to use FTP:
-> 
+>
 > ```
 > curl -T {"archive_emerald_fates_test.tar"} ftp://ftp.usegalaxy.eu --user USER:PASSWORD --ssl
 > ```
@@ -484,7 +486,7 @@ p.fig.savefig('CANOPY_HEIGHT_DIST.png')
 >  - Click on **Choose FTP files** and select `archive_emerald_fates_test.tar` to import it into your history.
 >
 > And make sure to save all your notebooks to your Galaxy history too:
-> 
+>
 > ```
 > %%bash
 > put -p ipython_galaxy_notebook.ipynb
@@ -525,7 +527,7 @@ To share a history, click on the {% icon galaxy-gear %} icon in the history pane
 
 
 > ### {% icon comment %} Clone CLM-FATES release for Nordic site from github (advanced)
-> 
+>
 > You may also get the CLM-FATES release 2.0.1 directly from github:
 >
 > ```
@@ -555,7 +557,7 @@ To share a history, click on the {% icon galaxy-gear %} icon in the history pane
 > ./cime/scripts/create_newcase --case $HOME/ctsm_cases/fates_alp1_local --compset 2000_DATM%1PTGSWP3_CLM50%FATES_SICE_SOCN_MOSART_SGLC_SWAV --res 1x1_ALP1 --machine espresso --run-unsupported
 >
 > ```
-> Finally, if you wish to make changes to the source code, we recommend first to add your changes in different folder and use the option `--user-mods-dir` when 
+> Finally, if you wish to make changes to the source code, we recommend first to add your changes in different folder and use the option `--user-mods-dir` when
 > creating your case. In addition, you should make sure to use version control to save your changes.
 > If you are not familiar with `git`, you could also save your changes in the corresponding Galaxy history.
 {:  .comment}

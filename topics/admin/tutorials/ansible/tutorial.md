@@ -37,7 +37,7 @@ This will be a very practical training with emphasis on looking at examples from
 >
 {: .agenda}
 
-{% include snippets/admin-testing.md %}
+{% snippet topics/admin/faqs/admin-testing.md %}
 
 # What is Ansible?
 
@@ -256,6 +256,19 @@ The above introduction was certainly not enough for you to feel confident in Ans
 {: .warning}
 
 
+> ### {% icon comment %} Requirements for Running This Tutorial
+>
+> 1. You have [Ansible installed](https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html) on the machine where you will install Galaxy
+>
+>    > ### {% icon comment %} Comment: Running Ansible on remote machine
+>    > It is possible to have Ansible installed on your laptop/local machine and run it against some remote hosts as well. We will **not** do that in this training.
+>    {: .comment}
+>
+> 2. Your `ansible` version is `>=2.7`, you can check this by running `ansible --version`
+>
+{: .comment}
+
+
 ## A Basic Role
 
 > ### {% icon hands_on %} Hands-on: Setting up our workspace
@@ -264,9 +277,9 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 >    All of the steps are the same, no matter which machine Ansible will manage and where you run it. The only difference is the connection setup
 >
-> 2. [Install Ansible.](https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html) where you will run it
+> 3. **Create a directory named `intro` and `cd` into it.**
 >
-> 3. Create a directory named `intro` and `cd` into it
+>    It's good practice to keep your deployments separated, and later on we'll be deploying Galaxy with ansible in a separate directory.
 >
 > 4. Create your inventory file (named `hosts`) in this folder
 >
@@ -308,7 +321,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 > 9. This is a complete role by itself and will copy the file `test.txt` from the `roles/my-role/files/` folder over to the target host and place it in `/tmp`.
 >
-> 10. Open `playbook.yml` for editing in the root folder. Place the following content in there:
+> 10. Create and open `playbook.yml` file for editing in the `intro` directory you created. Place the following content in there:
 >
 >     ```yaml
 >     ---

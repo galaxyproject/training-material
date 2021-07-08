@@ -1,6 +1,7 @@
 ---
 layout: tutorial_hands_on
-title: RNA-seq counts to genes
+title: "2: RNA-seq counts to genes"
+subtopic: end-to-end
 zenodo_link: "https://zenodo.org/record/4273218"
 tags:
   - limma-voom
@@ -77,7 +78,7 @@ This is a Galaxy tutorial based on material from the [COMBINE R RNAseq workshop]
 {: .agenda}
 
 
-{% include snippets/warning_results_may_vary.md %}
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 # Preparing the inputs
 
@@ -93,16 +94,17 @@ We will use three files for this analysis:
 >
 > 1. Create a new history for this RNA-seq exercise e.g. `RNA-seq with limma-voom`
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the mammary gland counts table and the associated sample information file.
 >
->     To import the files, there are two options:
+>    To import the files, there are two options:
 >     - Option 1: From a shared data library if available (`GTN - Material -> {{ page.topic_name }} -> {{ page.title }}`)
 >     - Option 2: From [Zenodo](https://zenodo.org/record/4273218)
 >
->     {% include snippets/import_via_link.md %}
+>       {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >     - You can paste both links below into the **Paste/Fetch** box:
 >
@@ -115,8 +117,7 @@ We will use three files for this analysis:
 > 3. Check that the datatype is `tabular`.
 >    If the datatype is not `tabular`, please change the file type to `tabular`.
 >
->
->    {% include snippets/change_datatype.md datatype="tabular" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
 {: .hands_on}
 
@@ -132,14 +133,14 @@ The `factordata` file contains basic information about the samples that we will 
 
 > ### {% icon details %} Formatting the data
 >
->The files above have been formatted for you. If you are interested to know how they were formatted the information is below. 
+>The files above have been formatted for you. If you are interested to know how they were formatted the information is below.
 >
 > The original files are available at
 >
 >     ```
 >     https://zenodo.org/record/4273218/files/GSE60450_Lactation-GenewiseCounts.txt
 >     https://zenodo.org/record/4273218/files/SampleInfo.txt
->     ``` 
+>     ```
 >
 >![seqdata file](../../images/rna-seq-counts-to-genes/seqdata.png "Count file (before formatting)")
 >
@@ -160,7 +161,7 @@ The `factordata` file contains basic information about the samples that we will 
 >>      - {% icon param-file %} *"File to process"*: output of **Replace Text** {% icon tool %}
 >>      - {% icon param-text %} *"Find pattern"*: `-`
 >>      - {% icon param-text %} *"Replace with"*: `.`
->> 4. Rename file as `countdata` using the {% icon galaxy-pencil %} (pencil) icon. 
+>> 4. Rename file as `countdata` using the {% icon galaxy-pencil %} (pencil) icon.
 >{: .hands_on}
 >
 >To create the file, `factordata`, that contains the groups information that we need for the limma-voom tool. We'll combine the cell type and mouse status to make 6 groups e.g. we'll combine the CellType `basal` with the Status `pregnant` for the group `basalpregnant`. We'll use the **Merge Columns** tool to combine the cell type and mouse status columns in the sample information file, making a column with the 6 group names.
@@ -368,7 +369,7 @@ We can also use box plots to check the distributions of counts in the samples. B
 {: .question}
 
 
-> ### {% icon details %} Normalization factors 
+> ### {% icon details %} Normalization factors
 >
 >The TMM normalization generates normalization factors, where the product of these factors and the library sizes defines the effective library size. TMM normalization (and most scaling normalization methods) scale relative to one sample. The normalization factors multiply to unity across all libraries. A normalization factor below one indicates that the library size will be scaled down, as there is more suppression (i.e., composition bias) in that library relative to the other libraries. This is also equivalent to scaling the counts upwards in that sample. Conversely, a factor above one scales up the library size and is equivalent to downscaling the counts. We can see the normalization factors for these samples in the `Library information` file if we select to output it with *"Output Library information file?"*: `Yes`. Click on the {% icon galaxy-eye %} (eye) icon to view.
 >
@@ -463,7 +464,7 @@ When there is a lot of differential expression, sometimes we may want to cut-off
 >          - {% icon param-check %} *"Test significance relative to a fold-change threshold (TREAT)"*: `Yes`
 > 2. Add a tag `#treat` to the `Report` output and inspect the report
 >
-> {% include snippets/add_tag.md type="name" %}
+> {% snippet faqs/galaxy/datasets_add_tag.md type="name" %}
 >
 {: .hands_on}
 
