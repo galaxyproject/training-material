@@ -157,6 +157,14 @@ If user directories are configured, as we did at the beginning of this tutorial,
 
 This will enable the option for everyone, any unprivileged user with a folder in the `user_library_import_dir` directory *and* permissions on a data library can import things from their import directory.
 
+> ### {% icon tip %} Tip: Do you not see a directory here?
+> It's likely you've used a different username for registering to Galaxy, than we included in the `/libraries/user` directory.
+> There we pre-created a directory for someone registered as `admin@example.org`, but if you're not logged in with an account registered with that email, you'll see nothing.
+>
+> You can fix this by going into /libraries/user and `ln -s admin@example.org whatever-email-you-used`
+> Then it should appear in Galaxy.
+{: .tip}
+
 ## from import Directory (Admins only)
 
 Similarly to the user import directories, there is the option to have an admin only import area. If one admin is responsible for creating the data libraries and importing data this can be a good option.

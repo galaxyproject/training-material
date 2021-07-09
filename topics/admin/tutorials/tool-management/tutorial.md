@@ -276,6 +276,16 @@ We will not install all the tools from the EU Galaxy server as that server likel
 > The output of `get-tool-list` only includes ToolShed tools, not local non-TS tools.
 {: .tip}
 
+> ### {% icon tip %} But how many tools is it really?
+> If you've seen the [European Galaxy tools view](https://usegalaxy.eu/tools/view) (this is available on any galaxy! Just access `/tools/view`)
+> you'll notice they report somewhere over 2700 tools, however the `get-tool-list` output lists significantly fewer tools.
+>
+> This is for a couple reasons:
+> - That's the number of repositories that are installed, and some repositories include multiple tools (e.g. [`circos`](https://toolshed.g2.bx.psu.edu/view/iuc/circos/df7356989ac1) has quite a few)
+> - This only lists ToolShed tools, while EU also includes a number of non-TS tools
+> - There are a number of tools built into Galaxy (e.g. the Collection Operation tools)
+{: .tip}
+
 # Production Best Practices
 
 The servers which are part of the `usegalaxy.*` network use Ephemeris extensively to manage their large tool sets.
@@ -302,4 +312,17 @@ If running ephemeris directly is not your preference, there is an Ansible [role]
 
 > ### {% icon tip %} Uninstalling tools
 > While there is a function to accomplish this in [BioBlend](https://github.com/galaxyproject/bioblend), it has not been [included in Ephemeris yet.](https://github.com/galaxyproject/ephemeris/issues/83) If you're looking for a way to contribute to Galaxy, this would be great :)
+{: .tip}
+
+> ### {% icon tip %} "Recommended way" to install tools
+> There is no one recommended way. Different people like to do different things. Some of us install things through the GUI still, some of us use ephemeris just for the automation.
+>
+> EU and others try and force all tool installation to go through ephemeris to make sure that rebuilding a server in case of disaster is easy. Anything not managed through their files will be lost.
+>
+> Others do a more mixed approach:
+>
+> > typically use Ephemeris, when I have to re-deploy a Galaxy instance (and thus install all tools) or during a Galaxy maintenance, when I want to update all installed toolshed tools in one go. Otherwise, when I need to install a specific version of one tool I use the GUI.
+> {: .quote}
+>
+> There is no one right answer
 {: .tip}
