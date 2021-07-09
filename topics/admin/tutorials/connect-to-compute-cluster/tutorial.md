@@ -2,13 +2,19 @@
 layout: tutorial_hands_on
 
 title: "Connecting Galaxy to a compute cluster"
+redirect_from:
+- /topics/admin/tutorials/job-metrics/tutorial
 questions:
   - How to connect Galaxy to a compute cluster?
+  - What are job metrics?
+  - What sort of information can I collect?
+  - Where can I find this information?
 objectives:
   - Be familiar with the basics of installing, configuring, and using Slurm
   - Understand all components of the Galaxy job running stack
   - Understand how the `job_conf.xml` file controls Galaxy's jobs subsystem
   - Have a strong understanding of Galaxy job destinations
+  - Understand the purpose and function of Galaxy job metrics
 time_estimation: "1h"
 key_points:
   - Galaxy supports a variety of different DRMs.
@@ -62,36 +68,51 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >
 > 1. Edit your `requirements.yml` and include the following contents:
 >
->    ```yaml
->    - src: galaxyproject.repos
->      version: 0.0.2
->    - src: galaxyproject.slurm
->      version: 0.1.3
+>    {% raw %}
+>    ```diff
+>    --- a/requirements.yml
+>    +++ b/requirements.yml
+>    @@ -18,3 +18,7 @@
+>       version: 2.6.3
+>     - src: galaxyproject.cvmfs
+>       version: 0.2.13
+>    +- src: galaxyproject.repos
+>    +  version: 0.0.2
+>    +- src: galaxyproject.slurm
+>    +  version: 0.1.3
+>    {% endraw %}
 >    ```
+>    {: data-commit="Add requirements"}
 >
 >    The `galaxyproject.repos` role adds the [Galaxy Packages for Enterprise Linux (GPEL)](https://depot.galaxyproject.org/yum/) repository for RedHat/CentOS, which provides both Slurm and Slurm-DRMAA (neither are available in standard repositories or EPEL). For Ubuntu versions 18.04 or newer, it adds the [Slurm-DRMAA PPA](https://launchpad.net/~natefoo/+archive/ubuntu/slurm-drmaa) (Slurm-DRMAA was removed from Debian/Ubuntu in buster/bionic).
 >
 > 2. In the same directory, run:
 >
->    ```
->    ansible-galaxy install -p roles -r requirements.yml
->    ```
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > ansible-galaxy install -p roles -r requirements.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 > 3. Add `galaxyproject.repos`, `galaxyproject.slurm` to the *beginning* of your roles section in your `galaxy.yml` playbook:
 >
+>    {% raw %}
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -11,6 +11,8 @@
->             name: galaxy
->             state: restarted
+>    @@ -12,6 +12,8 @@
+>             repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
+>             dest: /libraries/
 >       roles:
 >    +    - galaxyproject.repos
 >    +    - galaxyproject.slurm
 >         - galaxyproject.postgresql
 >         - role: natefoo.postgresql_objects
 >           become: true
+>    {% endraw %}
 >    ```
+>    {: data-commit="Add the repos and slurm roles"}
 >
 > 4. Add the slurm variables to your `group_vars/galaxyservers.yml`:
 >
@@ -99,12 +120,12 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -142,3 +142,14 @@ rabbitmq_users:
->       - user: galaxy_au
->         password: "{{ rabbitmq_password_galaxy_au }}"  #This password is set in group_vars/all.yml
->         vhost: /pulsar/galaxy_au
+>    @@ -139,3 +139,13 @@ golang_gopath: '/opt/workspace-go'
+>     # Singularity target version
+>     singularity_version: "3.7.4"
+>     singularity_go_path: "{{ golang_install_dir }}"
 >    +
->    +# slurm
+>    +# Slurm
 >    +slurm_roles: ['controller', 'exec'] # Which roles should the machine play? exec are execution hosts.
 >    +slurm_nodes:
 >    +- name: localhost # Name of our host
@@ -113,10 +134,18 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    +  SlurmdParameters: config_overrides   # Ignore errors if the host actually has cores != 2
 >    +  SelectType: select/cons_res
 >    +  SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
->    ```
 >    {% endraw %}
+>    ```
+>    {: data-commit="Add slurm configuration"}
 >
-> 5. Run the playbook (`ansible-playbook galaxy.yml`)
+> 5. Run the playbook
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 {: .hands_on}
 
@@ -285,25 +314,32 @@ Above Slurm in the stack is slurm-drmaa, a library that provides a translational
 >
 > 1. Add a `post_task` to your playbook to install `slurm-drmaa1` (Debian/Ubuntu) or `slurm-drmaa` (RedHat/CentOS).
 >
+>    {% raw %}
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -26,3 +28,7 @@
->         - usegalaxy_eu.galaxy_systemd
->         - usegalaxy_eu.rabbitmq
->         - galaxyproject.nginx
+>    @@ -11,6 +11,10 @@
+>         - git:
+>             repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
+>             dest: /libraries/
 >    +  post_tasks:
 >    +    - name: Install slurm-drmaa
 >    +      package:
 >    +        name: slurm-drmaa1
+>       roles:
+>         - galaxyproject.repos
+>         - galaxyproject.slurm
+>    {% endraw %}
 >    ```
+>    {: data-commit="Add post task to install slurm-drmaa"}
 >
 > 2. Run the playbook (`ansible-playbook galaxy.yml`)
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
+>    > {: data-cmd="true"}
 >    {: .code-in}
 >
 {: .hands_on}
@@ -323,16 +359,17 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -76,6 +76,7 @@ galaxy_config_files:
->     galaxy_systemd_mode: mule
->     galaxy_zergpool_listen_addr: 127.0.0.1:8080
->     galaxy_restart_handler_name: "Restart Galaxy"
->    +galaxy_systemd_zergling_env: DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"
->
+>    @@ -103,6 +103,7 @@ galaxy_config_files:
+>     
+>     # systemd
+>     galaxy_manage_systemd: yes
+>    +galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
+>     
 >     # Certbot
 >     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
->    ```
 >    {% endraw %}
+>    ```
+>    {: data-commit="Configure DRMAA_LIBRARY_PATH"}
 >
 >    This environment variable will then be supplied to any web process (zerglings or mules).
 >
@@ -342,38 +379,36 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.xml.j2
 >    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -1,6 +1,7 @@
+>    @@ -1,9 +1,16 @@
 >     <job_conf>
 >         <plugins workers="4">
 >             <plugin id="local_plugin" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
 >    +        <plugin id="slurm" type="runner" load="galaxy.jobs.runners.slurm:SlurmJobRunner"/>
->             <plugin id="pulsar_runner" type="runner" load="galaxy.jobs.runners.pulsar:PulsarMQJobRunner" >
->                 <!-- <param id="amqp_url">pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1</param> -->
->                 <param id="amqp_url">pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@localhost:5672/{{ rabbitmq_vhosts[0] }}</param>
->    @@ -15,7 +16,7 @@
 >         </plugins>
->    -    <destinations default="local_destination">
+>    -    <destinations default="singularity">
 >    +    <destinations default="slurm">
+>             <destination id="local_destination" runner="local_plugin"/>
 >    +        <destination id="slurm" runner="slurm">
 >    +            <param id="singularity_enabled">true</param>
 >    +            <env id="LC_ALL">C</env>
 >    +            <env id="SINGULARITY_CACHEDIR">/tmp/singularity</env>
 >    +            <env id="SINGULARITY_TMPDIR">/tmp</env>
 >    +        </destination>
->             <destination id="local_destination" runner="local_plugin">
+>             <destination id="singularity" runner="local_plugin">
 >                 <param id="singularity_enabled">true</param>
 >                 <!-- Ensuring a consistent collation environment is good for reproducibility. -->
->    ```
 >    {% endraw %}
+>    ```
+>    {: data-commit="Configure slurm destination"}
 >
 > 4. Run your Galaxy playbook
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
+>    > {: data-cmd="true"}
 >    {: .code-in}
->
 >
 > 5. Watch the logs to check that everything loads correctly
 >
@@ -454,6 +489,11 @@ You should now be able to run a Galaxy job through Slurm. The simplest way to te
 >
 {: .hands_on}
 
+> ```bash
+> 1-test-cat1.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
 
 Slurm allows us to query the exit state of jobs for a time period of the value of Slurm's `MinJobAge` option, which defaults to 300 (seconds, == 5 minutes):
 
@@ -509,6 +549,126 @@ After the job has been purged from the active jobs database, a bit of informatio
 > - `galaxy_venv_dir`
 {: .tip}
 
+# Recording Job Metrics
+
+Job metrics record properties of the jobs that are executed, information that can help you plan for trainings or plan capacity for further expansions of your Galaxy server. These properties include details such as the number of slots (cores) assigned to a job, the amount of memory available, details about the node on which the job executed, environment variables that were set at execution time, and more.
+
+Galaxy collects and records very few job metrics by default, enabling more metrics plugins is recommended for any cluster-enabled Galaxy deployment. The metrics are stored in the Galaxy database, which can be queried externally to generate reports and debug job problems.
+
+Some work has been done to try to analyse job runtime metrics to optimise cluster allocation based on job inputs, and enhance job submission ({% cite Tyryshkina_2019 %}). More work will be done in this area.
+
+> ### {% icon comment %} Note
+>
+> Job metrics are only visible to Galaxy *admin users*, unless you set `expose_potentially_sensitive_job_metrics: true`, like UseGalaxy.eu does. EU's intention with this is to empower users and make everything as transparent as possible.
+>
+> This is the only option controlling which metrics general users see. Admins see all metrics collected, and by default general users see none.
+> However most of the metrics exposed by this setting are quite safe (e.g. cgroups information on resource consumption, walltime, etc.)
+>
+{: .comment}
+
+## Setting up Galaxy
+
+By default, Galaxy enables the `core` metrics:
+
+![screenshot of galaxy metrics](../../images/job-metrics-basic.png)
+
+These include very basic submission parameters. We want more information!
+
+> ### {% icon hands_on %} Hands-on: Setting up the job metrics plugin configuration
+>
+> 1. Edit the **global** (for all hosts) group variables file, `group_vars/all.yml`:
+>
+>    > ### {% icon details %} Why are we editing "all" instead of "galaxyservers" vars?
+>    > Both Galaxy and Pulsar use job metrics plugins, and when we configure Pulsar later, we will want it to have the same metrics plugin configuration as Galaxy. Putting this variable in `all.yml` will allow us to refer to it later when setting the corresponding variable for Pulsar.
+>    {: .details}
+>
+>    The variable we'll set is named `galaxy_job_metrics_plugins`:
+>
+>    {% raw %}
+>    ```diff
+>    --- a/group_vars/all.yml
+>    +++ b/group_vars/all.yml
+>    @@ -2,3 +2,13 @@
+>     cvmfs_role: client
+>     galaxy_cvmfs_repos_enabled: config-repo
+>     cvmfs_quota_limit: 500
+>    +
+>    +# Galaxy vars that will be reused by Pulsar
+>    +galaxy_job_metrics_plugins:
+>    +  - type: core
+>    +  - type: cpuinfo
+>    +  - type: meminfo
+>    +  - type: uname
+>    +  - type: env
+>    +  - type: cgroup
+>    +  - type: hostname
+>    {% endraw %}
+>    ```
+>    {: data-commit="Configure job metrics plugins"}
+>
+> 2. Run your Galaxy playbook
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
+{: .hands_on}
+
+Currently, the job metrics plugin configuration is stored in a separate configuration file from Galaxy's main configuration file (`galaxy.yml`). By setting `galaxy_job_metrics_plugins`, we instructed the `galaxyproject.galaxy` role to create this file, and update the option (`job_metrics_config_file`) in `galaxy.yml` that sets the path to this file. You can inspect the contents of the new config file on your Galaxy server:
+
+> ### {% icon code-in %} Input: Bash
+> ```bash
+> cat /srv/galaxy/config/job_metrics_conf.yml
+> ```
+{: .code-in}
+
+> ### {% icon code-out %} Output: Bash
+> ```yaml
+> ---
+> ##
+> ## This file is managed by Ansible.  ALL CHANGES WILL BE OVERWRITTEN.
+> ##
+> -   type: core
+> -   type: cpuinfo
+> -   type: meminfo
+> -   type: uname
+> -   type: env
+> -   type: cgroup
+> -   type: hostname
+> ```
+{: .code-out.code-max-300}
+
+
+## Generating Metrics
+
+With this, the job metrics collection and recording should be set up. Now when you run a job, you will see many more metrics:
+
+> ### {% icon hands_on %} Hands-on: Generate some metrics
+>
+> 1. Run a job (any tool is fine, even upload)
+>
+> 2. View the information of the output dataset ({% icon galaxy-info %})
+>
+{: .hands_on}
+
+![advanced metrics](../../images/job-metrics-advanced.png)
+
+
+## What should I collect?
+
+There is not a good rule we can tell you, just choose what you think is useful or will be. Numeric parameters are "cheaper" than the text parameters (like uname to store), eventually you may find yourself wanting to remove old job metrics if you decide to collect the environment variables or similar.
+
+
+## Accessing the data
+
+You can access the data via BioBlend ([`JobsClient.get_metrics`](https://bioblend.readthedocs.io/en/latest/api_docs/galaxy/all.html#bioblend.galaxy.jobs.JobsClient.get_metrics)), or via SQL with [`gxadmin`](https://usegalaxy-eu.github.io/gxadmin/#/README.query?id=query-tool-metrics).
+
+
+{% snippet topics/admin/faqs/missed-something.md step=6 %}
+
 ## Further Reading
 
 - [Galaxy's cluster documentation](https://docs.galaxyproject.org/en/latest/admin/cluster.html) describes in detail alternative cluster configurations.
@@ -516,5 +676,5 @@ After the job has been purged from the active jobs database, a bit of informatio
 - The [Distributed Resource Management Application API (DRMAA)](https://www.drmaa.org/) page contains the DRMAA specification as well as documentation for various implementations. It also includes a list of DRMs supporting DRMAA.
 - The [Slurm documentation](http://slurm.schedmd.com/) is extensive and covers all the features and myriad of ways in which you can configure slurm.
 - [PSNC slurm-drmaa](http://apps.man.poznan.pl/trac/slurm-drmaa)'s page includes documentation and the SVN repository, which has a few minor fixes since the last released version. PSNC also wrote the initial implementations of the DRMAA libraries for PBSPro and LSF, so all three are similar.
-- [Our own fork of slurm-drmaa](http://github.com/natefoo/slurm-drmaa) includes support for Slurms `-M`/`--clusters` multi-cluster functionality.
+- [Our own fork of slurm-drmaa](http://github.com/natefoo/slurm-drmaa) includes support for Slurms `-M`/`--clusters` multi-cluster functionality and newer versions of Slurm.
 - [Slurm Accounting documentation](http://slurm.schedmd.com/accounting.html) explains how to set up SlurmDBD.

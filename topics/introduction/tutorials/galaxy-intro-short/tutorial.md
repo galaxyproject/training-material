@@ -297,7 +297,7 @@ Where is your first history, called "my-analysis"?
 >
 >    This makes a copy of the dataset in the new history (without actually using additional disk space).
 >
-> 3. Click on **Analyze Data** in the top panel to go back to your analysis window
+> 3. Click on the Home icon {% icon galaxy-home %} (or **Analyze Data** on older versions of Galaxy) in the top panel to go back to your analysis window
 >
 > ![Copy a dataset between histories](../../images/copy-dataset.gif "Copy a dataset between histories by dragging it")
 >

@@ -166,7 +166,7 @@ Next we will retrieve the remaining datasets.
 >
 > > ### {% icon hands_on %} Hands-on: Dataset subsampling
 > >
-> > 1. {% tool [Sub-sample sequences files ](toolshed.g2.bx.psu.edu/repos/peterjc/sample_seqs) %} with the following parameters:
+> > 1. {% tool [Sub-sample sequences files ](toolshed.g2.bx.psu.edu/repos/peterjc/sample_seqs/sample_seqs/0.2.5) %} with the following parameters:
 > >    - {% icon param-files %} *"Multiple datasets"*: Each of the fastq files
 > >    - *"Subsampling approach"*: `Take every N-th sequence (or pair e.g. every fifth sequence)`
 > >    - *"N"*: `100`

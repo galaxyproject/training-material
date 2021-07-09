@@ -19,6 +19,9 @@ contributors:
   - bgruening
   - shiltemann
   - hexylena
+abbreviations:
+  API: Application Programming Interface
+  JSON: JavaScript Object Notation
 ---
 
 # Introduction
@@ -897,6 +900,21 @@ area_order: [introduction, learners, instructors, contributors, other]
 
 If a tutorial-level FAQ page exists (`topics/<topic>/tutorials/<tutorial>/faqs/index.md`) it will be automatically linked to from the overview box at the top of the tutorial, and at the end of the tutorial. Have a look at this tutorial to see it in action.
 
+## Footnotes
+
+> > ### {% icon code-in %} Input: Markdown
+> >
+> > ```
+> > Footnotes[^1] can be used to insert more content or explanation as reference material to your content. You can use the same footnote reference multiple time, and the footnote will include backlinks to return to the correct place in the text.[^1]
+> > ```
+> > {: .pre-break-lines}
+> {: .code-in}
+>
+> > ### {% icon code-out %} Output
+> > Footnotes[^1] can be used to insert more content or explanation as reference material to your content. You can use the same footnote reference multiple time, and the footnote will include backlinks to return to the correct place in the text.[^1]
+> {: .code-out}
+{: .code-2col}
+
 
 ## Icons
 
@@ -914,6 +932,38 @@ To use these icons, take the name of the icon, 'details' in this example, and wr
 	</div>
 {% endfor %}
 </div>
+
+## Abbreviations
+
+Oftentimes there are terms you'll use over and over again where there is an acronym or abbreviation you'll use consistently. However for learners new to the material, they might need to scroll up to the first definition every time to remember what it meant. It would be annoying as an author to have to re-define it every time, so we've implemented some very simple syntax to allow you to create a list of definitions and then use those in the text.
+
+In your tutorial metadata you can add an abbreviations section like:
+
+```yaml
+---
+title: My awesome tutorial
+...
+abbreviations:
+  API: Application Programming Interface
+  JSON: JavaScript Object Notation
+---
+```
+
+And in your text you can use braces to refer to the term
+
+> > ### {% icon code-in %} Input: Markdown
+> > <code>
+> > The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call the &lbrace;API&rbrace; we'll get back this result &lbrace;JSON&rbrace;.
+> > </code>
+> {: .code-in}
+>
+> > ### {% icon code-out %} Output
+> >
+> > The `/jobs` {API} will return {JSON}. When we call the {API} we'll get back this result {JSON}.
+> >
+> {: .code-out}
+{: .code-2col}
+
 
 # Citations
 If you would like to cite any articles, books or websites in your tutorial, you can do so by adding a file called `tutorial.bib` next to your `tutorial.md` file. In this file you may enter [bibtex](http://www.bibtex.org/Using/) formatted citations. An example is given below:
@@ -968,5 +1018,12 @@ A bibliography will automatically be appended to the end of your tutorial (scrol
 {: .tip}
 
 
+
+
 # Conclusion
 {:.no_toc}
+
+
+## Footnotes (Rendered)
+
+[^1]: The wikipedia definition of a footnote is: "A note is a string of text placed at the bottom of a page in a book or document or at the end of a chapter, volume or the whole text. The note can provide an author's comments on the main text or citations of a reference work in support of the text. Footnotes are notes at the foot of the page while endnotes are collected under a separate heading at the end of a chapter, volume, or entire work. Unlike footnotes, endnotes have the advantage of not affecting the layout of the main text, but may cause inconvenience to readers who have to move back and forth between the main text and the endnotes."

@@ -549,7 +549,7 @@ We again need our peak file, but we'd like to work in a clean history. Instead o
 >       You should see both of your histories side-by-side now
 >
 > 3. Drag and drop the edited peak file (`Peak regions`, after the replace steps), which contains the summit information, to your new history.
-> 4. Click on **Analyze Data** in the top menu bar to go back to your analysis window
+> 4. Click on the Home icon {% icon galaxy-home %} (or **Analyze Data** on older Galaxy versions) in the top menu bar to go back to your analysis window
 >
 {: .hands_on}
 
@@ -579,7 +579,7 @@ We need to generate a new BED file from the original peak file that contains the
 Now we cut out just the chromosome plus the start and end of the summit:
 
 > ### {% icon hands_on %} Hands-on: Cut out columns
-> 1. {% tool [Cut](cut1) %} columns from a table with the following settings:
+> 1. {% tool [Cut](Cut1) %} columns from a table with the following settings:
 >   - *"Cut columns"*: `c1,c8,c9`
 >   - *"Delimited by Tab"*: `Tab`
 >   - *"From"*: `Peak summit regions`

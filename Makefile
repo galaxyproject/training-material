@@ -44,8 +44,8 @@ ACTIVATE_ENV = source $(shell dirname $(dir $(CONDA)))/bin/activate $(CONDA_ENV)
 
 install: clean create-env ## install dependencies
 	$(ACTIVATE_ENV) && \
-		gem update --system && \
-		gem install addressable:'2.5.2' jekyll jekyll-feed jekyll-scholar jekyll-redirect-from jekyll-last-modified-at csl-styles awesome_bot html-proofer pkg-config kwalify jekyll-sitemap
+		gem update --no-document --system && \
+		ICONV_LIBS="-L${CONDA_PREFIX}/lib/ -liconv" gem install --no-document addressable:'2.5.2' jekyll jekyll-feed jekyll-scholar jekyll-redirect-from jekyll-last-modified-at csl-styles awesome_bot html-proofer pkg-config kwalify jekyll-sitemap
 .PHONY: install
 
 bundle-install: clean  ## install gems if Ruby is already present (e.g. on gitpod.io)
@@ -142,6 +142,10 @@ check-slides: build  ## check the markdown-formatted links in slides
 check-yaml: ## lint yaml files
 	find . -name '*.yaml' | grep -v .github | xargs -L 1 -I '{}' sh -c "yamllint -c .yamllint {}"
 .PHONY: check-yaml
+
+check-diffs: ## lint diffs in tutorials
+	find ./topics -name '*.md' -type f -print0 | xargs -0 python bin/lint-diffs.py
+.PHONY: check-diffs
 
 check-tool-links: ## lint tool links
 	@bash ./bin/check-broken-tool-links.sh
