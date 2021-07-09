@@ -591,7 +591,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 23, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 6, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -642,6 +642,7 @@
       <li><a href="#other-software" id="markdown-toc-other-software">Other software</a></li>
     </ol>
   </li>
+  <li><a href="#loving-ansible-convert-your-own-servers" id="markdown-toc-loving-ansible-convert-your-own-servers">Loving Ansible? Convert your own servers!</a></li>
   <li><a href="#final-notes" id="markdown-toc-final-notes">Final Notes</a></li>
 </ol>
 
@@ -719,16 +720,16 @@
 
 <p>Using the <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/blob/02ca578211bfee45044facf36635d28208e5dbb3/group_vars/galaxy.yml#L578">Use<span class="notranslate">Galaxy</span>.eu</a> configuration as an example, we have something like:</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config_files</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">files/<span class="notranslate">galaxy</span>/config/builds.txt</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config_templates</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/builds.txt</span>
     <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.builds_file_path</span><span class="nv"> </span><span class="s">}}"</span>
-  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">files/<span class="notranslate">galaxy</span>/config/data_manager_conf.xml</span>
+  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/data_manager_conf.xml</span>
     <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.data_manager_config_file</span><span class="nv"> </span><span class="s">}}"</span>
-  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">files/<span class="notranslate">galaxy</span>/config/datatypes_conf.xml</span>
+  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/datatypes_conf.xml</span>
     <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.datatypes_config_file</span><span class="nv"> </span><span class="s">}}"</span>
-  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">files/<span class="notranslate">galaxy</span>/config/dependency_resolvers_conf.xml</span>
+  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/dependency_resolvers_conf.xml</span>
     <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.dependency_resolvers_config_file</span><span class="nv"> </span><span class="s">}}"</span>
-  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">files/<span class="notranslate">galaxy</span>/config/disposable_email_blocklist.conf</span>
+  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/disposable_email_blocklist.conf</span>
     <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.blocklist_file</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div></div>
 
@@ -740,7 +741,7 @@
     <span class="na">datatypes_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv">  </span><span class="s">}}/datatypes_conf.xml"</span>
 </code></pre></div></div>
 
-<p>So the references in <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> to <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> are done to ensure that the setting for e.g. “location of the datatypes config file” is the same between where we have configured <span class="notranslate">Galaxy</span> to looking for it, and where the file has been deployed, without requiring us to make variables changes in numerous places.</p>
+<p>So the references in <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_templates</code> to <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> are done to ensure that the setting for e.g. “location of the datatypes config file” is the same between where we have configured <span class="notranslate">Galaxy</span> to looking for it, and where the file has been deployed, without requiring us to make variables changes in numerous places.</p>
 
 <blockquote class="tip">
   <h3 id="tip-define-once-reference-many-times"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Define once, reference many times</h3>
@@ -1517,7 +1518,7 @@ We’ll start by assuming you’re running the command</p>
 
       <blockquote class="tip">
         <h3 id="tip-different-galaxy-releases"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Different <span class="notranslate">Galaxy</span> Releases!</h3>
-        <p>In the time between this tutorial was last updated (2021-06-23), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
+        <p>In the time between this tutorial was last updated (2021-07-06), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
 
         <p>If you wish to use a different version of <span class="notranslate">Galaxy</span> than the one listed, you can do so, but there is no guarantee this tutorial will work without modifications.</p>
 
@@ -2408,6 +2409,24 @@ The client is only re-built when there are changes in the files needed for the <
 <span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,682</span> <span class="nn">[p:30741,w:0,m:2]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.binary:Anndata</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err">h5ad.</span>
 </code></pre></div>        </div>
       </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="tip-did-this-fail"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Did this fail?</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>● <span class="notranslate">galaxy</span>.service - <span class="notranslate">Galaxy</span>
+     Loaded: loaded (/etc/systemd/system/<span class="notranslate">galaxy</span>.service; enabled; vendor preset: enabl&gt;
+     Active: failed (Result: exit-code) since Mon 2021-06-28 17:07:58 CEST; 18min ago
+    Process: 521705 ExecStart=/srv/<span class="notranslate">galaxy</span>/venv/bin/uwsgi --yaml /srv/<span class="notranslate">galaxy</span>/config/gal&gt;
+   Main PID: 521705 (code=exited, status=1/FAILURE)
+        CPU: 21ms
+Jun 28 17:07:58 gat-14.be.training.<span class="notranslate">galaxy</span>project.eu systemd[1]: <span class="notranslate">galaxy</span>.service: Schedu&gt;
+Jun 28 17:07:58 gat-14.be.training.<span class="notranslate">galaxy</span>project.eu systemd[1]: Stopped <span class="notranslate">Galaxy</span>.
+Jun 28 17:07:58 gat-14.be.training.<span class="notranslate">galaxy</span>project.eu systemd[1]: <span class="notranslate">galaxy</span>.service: Start &gt;
+Jun 28 17:07:58 gat-14.be.training.<span class="notranslate">galaxy</span>project.eu systemd[1]: <span class="notranslate">galaxy</span>.service: Failed&gt;
+Jun 28 17:07:58 gat-14.be.training.<span class="notranslate">galaxy</span>project.eu systemd[1]: Failed to start <span class="notranslate">Galaxy</span>.
+</code></pre></div>        </div>
+
+        <p>Check your /srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml and ensure that it lines up exactly with what you expect. One possible cause here is the <code class="language-plaintext highlighter-rouge">uwsgi</code> subsection of <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> was omitted and instead it used the default port and failed.</p>
+      </blockquote>
     </li>
     <li>
       <p>Some things to note:</p>
@@ -3204,6 +3223,18 @@ Additionally you can automatically send failing job error reports, even if users
 
 <p>It may seem daunting to use ansible, but you don’t have to do everything in ansible! You can just do a little bit, for managing just <span class="notranslate">Galaxy</span>, and manage the rest of your stack separately. Whatever fits best for your deployment.</p>
 
+<h1 id="loving-ansible-convert-your-own-servers">Loving Ansible? Convert your own servers!</h1>
+
+<p>A common question we get is:</p>
+
+<blockquote class="quote">
+  <p>Is it possible to transform a <span class="notranslate">galaxy</span> cluster which was installed by hand, into an ansible-managed one?</p>
+</blockquote>
+
+<p>Because of the great variance between sites and deployments it is not really possible to produce a guide for doing so. However, if you back your current deployment up and set all of the variables that control paths appropriately, it can be done!</p>
+
+<p>It’s very possible to do this piecemeal, taking one component at a time to ansibilise. nginx is a very easy place to start, the database is as well. <span class="notranslate">Galaxy</span> can be rebuilt in a new location, many of us ran a hand-managed <span class="notranslate">galaxy</span> setup somewhere like <code class="language-plaintext highlighter-rouge">/home/janedoe/work/projects/<span class="notranslate">galaxy</span></code> that suddenly became a permanent project, this is a good chance to keep that but rebuild an identical one in <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span></code> or similar, and then switch over the traffic to that new, production <span class="notranslate">Galaxy</span>. Relocating data is a bit tougher and can require rewriting entries in the database.</p>
+
 <h1 id="final-notes">Final Notes</h1>
 
 <p>If you’ve been following along you should have a production-ready <span class="notranslate">Galaxy</span>, secured, everything ready to go.</p>
@@ -3294,8 +3325,8 @@ Additionally you can automatically send failing job error reports, even if users
     author = "Helena Rasche and Nate Coraor and Simon Gladman and Saskia Hiltemann and Nicola Soranzo",
     title = "Galaxy Installation with Ansible (Galaxy Training Materials)",
     year = "2021",
-    month = "06",
-    day = "23"
+    month = "07",
+    day = "06"
     url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

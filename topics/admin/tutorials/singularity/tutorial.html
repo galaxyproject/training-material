@@ -686,7 +686,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 22, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 2, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -853,7 +853,7 @@ This message shows that your installation appears to be working correctly.
 
   <ol>
     <li>
-      <p>Edit the <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file and add a <code class="language-plaintext highlighter-rouge">dependency_resolvers_config_file</code> entry and a corresponding <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> entry:</p>
+      <p>Edit the <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file and add a <code class="language-plaintext highlighter-rouge">dependency_resolvers_config_file</code> entry and a corresponding <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_templatets</code> entry:</p>
 
       <div data-commit="Configure the container and dependency resolvers" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
@@ -866,16 +866,14 @@ This message shows that your installation appears to be working correctly.
 </span>     brand: "🧬🔬🚀"
      admin_users: admin@example.org
      database_connection: "postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql"
-<span class="p">@@ -89,6 +91,12 @@</span> <span class="notranslate">galaxy</span>_config:
+<span class="p">@@ -89,6 +91,10 @@</span> <span class="notranslate">galaxy</span>_config:
  <span class="notranslate">galaxy</span>_config_templates:
    - src: templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
      dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file }}"
 <span class="gi">+  - src: templates/<span class="notranslate">galaxy</span>/config/container_resolvers_conf.xml.j2
 +    dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.containers_resolvers_config_file }}"
-+
-+<span class="notranslate">galaxy</span>_config_files:
-+- src: files/<span class="notranslate">galaxy</span>/config/dependency_resolvers_conf.xml
-+  dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.dependency_resolvers_config_file }}"
++  - src: templates/<span class="notranslate">galaxy</span>/config/dependency_resolvers_conf.xml
++    dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.dependency_resolvers_config_file }}"
 </span>    
  # systemd
  <span class="notranslate">galaxy</span>_manage_systemd: yes
@@ -883,19 +881,19 @@ This message shows that your installation appears to be working correctly.
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Create the <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config</code> directory if it doesn’t exist:</p>
+      <p>Create the <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config</code> directory if it doesn’t exist:</p>
 
       <blockquote class="code-in">
         <h3 id="code-in-input-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
-        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> files/<span class="notranslate">galaxy</span>/config
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> templates/<span class="notranslate">galaxy</span>/config
 </code></pre></div>        </div>
       </blockquote>
     </li>
     <li>
-      <p>Create the new file <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/dependency_resolvers_conf.xml</code>. This will not enable any dependency resolvers like the legacy <span class="notranslate">toolshed</span> packages or <span class="notranslate">Galaxy</span> packages, and instead everything will be resolved through Singularity.</p>
+      <p>Create the new file <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/dependency_resolvers_conf.xml</code>. This will not enable any dependency resolvers like the legacy <span class="notranslate">toolshed</span> packages or <span class="notranslate">Galaxy</span> packages, and instead everything will be resolved through Singularity.</p>
 
       <div data-commit="Configure the dependency resolvers" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/files/<span class="notranslate">galaxy</span>/config/dependency_resolvers_conf.xml
+</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/dependency_resolvers_conf.xml
 </span><span class="p">@@ -0,0 +1,2 @@</span>
 <span class="gi">+&lt;dependency_resolvers&gt;
 +&lt;/dependency_resolvers&gt;
@@ -1023,6 +1021,22 @@ uwsgi[1190010]: cd working; SINGULARITYENV_<span class="notranslate">GALAXY</spa
 <img src="../../images/singularity-resolved.png" alt="Image of a table entry with minimap2 having requirements minimap2+singularity, a resolved column with a green checkmark next to via singularity, the resolver is mulled_singularity, and a container column with a path to /srv/galaxy/var/cache/singularity/mulled and some long hash." /></p>
 </blockquote>
 
+<blockquote class="tip">
+  <h3 id="tip-singularity-conda-something-else"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Singularity, Conda, something else?</h3>
+  <p>We often hear</p>
+
+  <blockquote class="quote">
+    <p>What would be the best practice, use conda or Singularity?</p>
+  </blockquote>
+
+  <p>Many of us are moving towards Singularity. Conda environments can resolve differently if they were installed at different times, which isn’t great for reproducibility. Singularity images are never updated after generation which makes them fantastic. Also the isolation that’s there by default is an incredible improvement for less-trustworthy binaries.</p>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-does-singularity-fix-issues-with-conda-dependencies-resolution"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Does Singularity fix issues with Conda dependencies resolution?</h3>
+  <p>Yes and no. Singularity images are built from conda environments. Only now you are no longer responsible for solving the conda environment, or ensuring that all of the dependencies are installed. The <span class="notranslate">Galaxy</span> project uses a system called “mulling” to bring together multiple conda dependencies together in a single environment, and Singularity images are produced for these dependencies as well. That said, complex or unresolvable conda environments are not solved by Singularity, because Singularity is really just packaging conda’s environment into a single binary file.</p>
+</blockquote>
+
 <!--
 ## Use Singularity containers from CVMFS
 
@@ -1147,8 +1161,8 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
     author = "Torfinn Nome and Marius van den Beek and Matthias Bernt and Helena Rasche",
     title = "Use Singularity containers for running Galaxy jobs (Galaxy Training Materials)",
     year = "2021",
-    month = "06",
-    day = "22"
+    month = "07",
+    day = "02"
     url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/singularity/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

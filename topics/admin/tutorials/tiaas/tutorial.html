@@ -1019,7 +1019,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 22, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 2, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -1085,7 +1085,7 @@ resources, thus reducing queue times on the day of the training.</p>
 
       <div data-commit="Configure tiaas" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -216,3 +216,11 @@</span> telegraf_plugins_extra:
+</span><span class="p">@@ -214,3 +214,12 @@</span> telegraf_plugins_extra:
        - timeout = "10s"
        - data_format = "influx"
        - interval = "15s"
@@ -1097,6 +1097,7 @@ resources, thus reducing queue times on the day of the training.</p>
 +tiaas_version: master
 +tiaas_admin_user: admin
 +tiaas_admin_pass: changeme
++tiaas_listen_url: "127.0.0.1:6000"
 </span>   
 </code></pre></div>      </div>
     </li>
@@ -1162,7 +1163,7 @@ resources, thus reducing queue times on the day of the training.</p>
      }
     
 <span class="gi">+    location /tiaas {
-+        uwsgi_pass 127.0.0.1:5000;
++        uwsgi_pass {{ tiaas_listen_url }};
 +        uwsgi_param UWSGI_SCHEME $scheme;
 +        include uwsgi_params;
 +    }
@@ -1172,7 +1173,7 @@ resources, thus reducing queue times on the day of the training.</p>
 +    }
 +
 +    location /join-training {
-+        uwsgi_pass 127.0.0.1:5000;
++        uwsgi_pass {{ tiaas_listen_url }};
 +        uwsgi_param UWSGI_SCHEME $scheme;
 +        include uwsgi_params;
 +    }
@@ -1348,10 +1349,10 @@ resources, thus reducing queue times on the day of the training.</p>
 
   <ol>
     <li>
-      <p>Create and open <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/dynamic_job_rules/hogwarts.py</code></p>
+      <p>Create and open <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/dynamic_job_rules/hogwarts.py</code></p>
 
       <div data-commit="Setup sorting hat for jobs" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/files/<span class="notranslate">galaxy</span>/dynamic_job_rules/hogwarts.py
+</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/dynamic_job_rules/hogwarts.py
 </span><span class="p">@@ -0,0 +1,19 @@</span>
 <span class="gi">+from <span class="notranslate">galaxy</span>.jobs import JobDestination
 +from <span class="notranslate">galaxy</span>.jobs.mapper import Job<span class="notranslate">Mapping</span>Exception
@@ -1382,7 +1383,7 @@ resources, thus reducing queue times on the day of the training.</p>
 
       <div data-commit="Add to list of deployed rules" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -137,6 +137,7 @@</span> <span class="notranslate">galaxy</span>_local_tools:
+</span><span class="p">@@ -135,6 +135,7 @@</span> <span class="notranslate">galaxy</span>_local_tools:
  <span class="notranslate">galaxy</span>_dynamic_job_rules:
  - my_rules.py
  - map_resources.py
@@ -1394,7 +1395,7 @@ resources, thus reducing queue times on the day of the training.</p>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>We next need to configure this plugin in our job configuration (<code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</code>):</p>
+      <p>We next need to configure this plugin in our job configuration (<code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</code>):</p>
 
       <div data-commit="Setup job conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
 </span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
@@ -1535,8 +1536,8 @@ resources, thus reducing queue times on the day of the training.</p>
     author = "Helena Rasche and Saskia Hiltemann",
     title = "Training Infrastructure as a Service (TIaaS) (Galaxy Training Materials)",
     year = "2021",
-    month = "06",
-    day = "22"
+    month = "07",
+    day = "02"
     url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/tiaas/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

@@ -821,7 +821,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 22, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 6, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -876,10 +876,10 @@
 
   <ol>
     <li>
-      <p>Create the directory <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/tools/</code> if it doesn’t exist and edit a new file in <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/tools/testing.xml</code> with the following contents:</p>
+      <p>Create the directory <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/tools/</code> if it doesn’t exist and edit a new file in <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/tools/testing.xml</code> with the following contents:</p>
 
       <div data-commit="Add testing tool" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/files/<span class="notranslate">galaxy</span>/tools/testing.xml
+</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/tools/testing.xml
 </span><span class="p">@@ -0,0 +1,11 @@</span>
 <span class="gi">+&lt;tool id="testing" name="Testing Tool"&gt;
 +    &lt;command&gt;
@@ -900,9 +900,9 @@
 
       <div data-commit="Deploy testing tool" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -101,6 +101,9 @@</span> <span class="notranslate">galaxy</span>_config_files:
- - src: files/<span class="notranslate">galaxy</span>/config/dependency_resolvers_conf.xml
-   dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.dependency_resolvers_config_file }}"
+</span><span class="p">@@ -99,6 +99,9 @@</span> <span class="notranslate">galaxy</span>_config_templates:
+   - src: templates/<span class="notranslate">galaxy</span>/config/dependency_resolvers_conf.xml
+     dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.dependency_resolvers_config_file }}"
     
 <span class="gi">+<span class="notranslate">galaxy</span>_local_tools:
 +- testing.xml
@@ -1032,10 +1032,10 @@
 
   <ol>
     <li>
-      <p>Create and open <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/dynamic_job_rules/my_rules.py</code></p>
+      <p>Create and open <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/dynamic_job_rules/my_rules.py</code></p>
 
       <div data-commit="Add my rules python script" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/files/<span class="notranslate">galaxy</span>/dynamic_job_rules/my_rules.py
+</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/dynamic_job_rules/my_rules.py
 </span><span class="p">@@ -0,0 +1,10 @@</span>
 <span class="gi">+from <span class="notranslate">galaxy</span>.jobs import JobDestination
 +from <span class="notranslate">galaxy</span>.jobs.mapper import Job<span class="notranslate">Mapping</span>Exception
@@ -1064,7 +1064,7 @@
 
       <div data-commit="Deploy my_rules dynamic rule" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -103,6 +103,8 @@</span> <span class="notranslate">galaxy</span>_config_files:
+</span><span class="p">@@ -101,6 +101,8 @@</span> <span class="notranslate">galaxy</span>_config_templates:
     
  <span class="notranslate">galaxy</span>_local_tools:
  - testing.xml
@@ -1144,10 +1144,10 @@
 
   <ol>
     <li>
-      <p>Dynamic tool destinations are configured via a YAML file. As before, we’ll use a fake example but this is extremely useful in real-life scenarios. Create the file <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/tool_destinations.yml</code> with the following contents:</p>
+      <p>Dynamic tool destinations are configured via a YAML file. As before, we’ll use a fake example but this is extremely useful in real-life scenarios. Create the file <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/tool_destinations.yml</code> with the following contents:</p>
 
       <div data-commit="Add tool destinations conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/files/<span class="notranslate">galaxy</span>/config/tool_destinations.yml
+</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/tool_destinations.yml
 </span><span class="p">@@ -0,0 +1,11 @@</span>
 <span class="gi">+---
 +tools:
@@ -1175,7 +1175,7 @@
       </ul>
     </li>
     <li>
-      <p>We also need to inform <span class="notranslate">Galaxy</span> of the path to the file we’ve just created, which is done using the <code class="language-plaintext highlighter-rouge">tool_destinations_config_file</code> in <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> &gt; <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code>. Additionally we need to add a <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> entry to ensure it is deployed.</p>
+      <p>We also need to inform <span class="notranslate">Galaxy</span> of the path to the file we’ve just created, which is done using the <code class="language-plaintext highlighter-rouge">tool_destinations_config_file</code> in <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> &gt; <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code>. Additionally we need to add a <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_templates</code> entry to ensure it is deployed.</p>
 
       <div data-commit="Deploy tool destinations config file" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
@@ -1189,13 +1189,13 @@
      tool_data_table_config_path: /cvmfs/data.<span class="notranslate">galaxy</span>project.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.<span class="notranslate">galaxy</span>project.org/managed/location/tool_data_table_conf.xml
 <span class="p">@@ -98,6 +99,8 @@</span> <span class="notranslate">galaxy</span>_config_templates:
      dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.containers_resolvers_config_file }}"
-    
- <span class="notranslate">galaxy</span>_config_files:
-<span class="gi">+- src: files/<span class="notranslate">galaxy</span>/config/tool_destinations.yml
-+  dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.tool_destinations_config_file }}"
-</span> - src: files/<span class="notranslate">galaxy</span>/config/dependency_resolvers_conf.xml
-   dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.dependency_resolvers_config_file }}"
-    
+   - src: templates/<span class="notranslate">galaxy</span>/config/dependency_resolvers_conf.xml
+     dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.dependency_resolvers_config_file }}"
+<span class="gi">+  - src: templates/<span class="notranslate">galaxy</span>/config/tool_destinations.yml
++    dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.tool_destinations_config_file }}"
+</span>    
+ <span class="notranslate">galaxy</span>_local_tools:
+ - testing.xml
    
 </code></pre></div>      </div>
     </li>
@@ -1392,10 +1392,10 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
 
   <ol>
     <li>
-      <p>Create and edit <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/dynamic_job_rules/map_resources.py</code>. Create it with the following contents:</p>
+      <p>Create and edit <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/dynamic_job_rules/map_resources.py</code>. Create it with the following contents:</p>
 
       <div data-commit="Add map_resources python" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/files/<span class="notranslate">galaxy</span>/dynamic_job_rules/map_resources.py
+</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/dynamic_job_rules/map_resources.py
 </span><span class="p">@@ -0,0 +1,42 @@</span>
 <span class="gi">+import logging
 +from <span class="notranslate">galaxy</span>.jobs.mapper import Job<span class="notranslate">Mapping</span>Exception
@@ -1457,7 +1457,7 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
 </span>     tool_destinations_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/tool_destinations.yml"
      library_import_dir: /libraries/admin
      user_library_import_dir: /libraries/user
-<span class="p">@@ -110,6 +111,7 @@</span> <span class="notranslate">galaxy</span>_local_tools:
+<span class="p">@@ -108,6 +109,7 @@</span> <span class="notranslate">galaxy</span>_local_tools:
  - testing.xml
  <span class="notranslate">galaxy</span>_dynamic_job_rules:
  - my_rules.py
@@ -1629,8 +1629,8 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
     author = "Nate Coraor and Björn Grüning and Helena Rasche",
     title = "Mapping Jobs to Destinations (Galaxy Training Materials)",
     year = "2021",
-    month = "06",
-    day = "22"
+    month = "07",
+    day = "06"
     url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/job-destinations/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

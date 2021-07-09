@@ -689,7 +689,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 22, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 6, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -766,15 +766,15 @@
 </span> miniconda_prefix: "{{ <span class="notranslate">galaxy</span>_tool_dependency_dir }}/_conda"
  miniconda_version: 4.7.12
  miniconda_manage_dependencies: false
-<span class="p">@@ -125,6 +126,8 @@</span> <span class="notranslate">galaxy</span>_config_templates:
-     dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file }}"
-   - src: templates/<span class="notranslate">galaxy</span>/config/container_resolvers_conf.xml.j2
-     dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.containers_resolvers_config_file }}"
+<span class="p">@@ -129,6 +130,8 @@</span> <span class="notranslate">galaxy</span>_config_templates:
+     dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.dependency_resolvers_config_file }}"
+   - src: templates/<span class="notranslate">galaxy</span>/config/tool_destinations.yml
+     dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.tool_destinations_config_file }}"
 <span class="gi">+  - src: templates/<span class="notranslate">galaxy</span>/config/reports.yml
 +    dest: "{{ <span class="notranslate">galaxy</span>_reports_path }}"
 </span>    
- <span class="notranslate">galaxy</span>_config_files:
- - src: files/<span class="notranslate">galaxy</span>/config/tool_destinations.yml
+ <span class="notranslate">galaxy</span>_local_tools:
+ - testing.xml
    
 </code></pre></div>      </div>
     </li>
@@ -783,7 +783,7 @@
 
       <div data-commit="Enable the reports systemd unit" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -144,6 +144,7 @@</span> <span class="notranslate">galaxy</span>_dynamic_job_rules:
+</span><span class="p">@@ -142,6 +142,7 @@</span> <span class="notranslate">galaxy</span>_dynamic_job_rules:
     
  # systemd
  <span class="notranslate">galaxy</span>_manage_systemd: yes
@@ -835,7 +835,7 @@
 
 <blockquote class="comment">
   <h3 id="comment-insecure"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Insecure!</h3>
-  <p>But notice that your Reports server is not secured! Check out the <a href="/training-material/topics/admin/tutorials/reports/tutorial.html">Exte<span class="notranslate">rna</span>l Authentication</a> tutorial for information on securing Reports.</p>
+  <p>But notice that your Reports server is not secured! Check out the <a href="/training-material/topics/admin/tutorials/external-auth/tutorial.html">Exte<span class="notranslate">rna</span>l Authentication</a> tutorial for information on securing Reports.</p>
 </blockquote>
 
 
@@ -919,8 +919,8 @@
     author = "Nate Coraor and Björn Grüning and Simon Gladman and Helena Rasche",
     title = "Galaxy Monitoring with Reports (Galaxy Training Materials)",
     year = "2021",
-    month = "06",
-    day = "22"
+    month = "07",
+    day = "06"
     url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/reports/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

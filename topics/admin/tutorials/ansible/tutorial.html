@@ -428,7 +428,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 2, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 29, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -467,7 +467,7 @@
       <li><a href="#choosing-a-role" id="markdown-toc-choosing-a-role">Choosing a Role</a></li>
     </ol>
   </li>
-  <li><a href="#optional-ansible-vault" id="markdown-toc-optional-ansible-vault">(Optional) Ansible Vault</a></li>
+  <li><a href="#ansible-vault" id="markdown-toc-ansible-vault">Ansible Vault</a></li>
   <li><a href="#other-stuff" id="markdown-toc-other-stuff">Other Stuff</a>    <ol>
       <li><a href="#with-items" id="markdown-toc-with-items">With Items</a></li>
       <li><a href="#when-changed" id="markdown-toc-when-changed">When Changed</a></li>
@@ -529,7 +529,7 @@ if anything happens to the infrastructure you manage, you’ll still have a copy
 required to rebuild everything with Ansible.</p>
 
 <blockquote class="details">
-  <h3 id="details-ansible-inventory-documentation"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Ansible Inventory Documentation</h3>
+  <h3 id="details-ansible-inventory-documentation-do-you-connect-with-a-different-user-password-ssh-key"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Ansible Inventory Documentation (Do you connect with a different user? Password? SSH key?)</h3>
   <p>For more advanced features of the inventory file, check out <a href="https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html">the official documentation on this topic</a>.</p>
 </blockquote>
 
@@ -787,6 +787,11 @@ Ansible provides some flags which can help you identify changes before they’re
             <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[my_hosts]</span>
 <span class="err">localhost</span> <span class="py">ansible_connection</span><span class="p">=</span><span class="s">local ansible_user=ubuntu</span>
 </code></pre></div>            </div>
+          </blockquote>
+
+          <blockquote class="details">
+            <h3 id="details-for-your-own-infrastructure-do-you-connect-with-a-different-user-password-ssh-key"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> For your own infrastructure, do you connect with a different user? Password? SSH key?</h3>
+            <p>For more advanced features of the inventory file, check out <a href="https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html">the official documentation on this topic</a>.</p>
           </blockquote>
         </li>
       </ol>
@@ -1230,7 +1235,12 @@ The solution to this is to set <code class="language-plaintext highlighter-rouge
 
 <p>Sometimes a role will accomplish 95% of what you need to do, but not everything. Once you have installed the role with <code class="language-plaintext highlighter-rouge">ansible-<span class="notranslate">galaxy</span> install</code>, you can edit it locally to make any changes. In an ideal world you would contribute this back, but this is not always a high priority. Many projects copy roles directly into their repositories, e.g. <a href="https://github.com/galaxyproject/infrastructure-playbook/tree/master/roles"><span class="notranslate">galaxy</span>project</a> and <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master/roles">use<span class="notranslate">galaxy</span>.eu</a></p>
 
-<h1 id="optional-ansible-vault">(Optional) Ansible Vault</h1>
+<blockquote class="tip">
+  <h3 id="tip-how-do-i-know-what-i-can-do-with-a-role-what-variables-are-available"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> How do I know what I can do with a role? What variables are available?</h3>
+  <p>You don’t. There is no standard way for reporting this, but <em>most</em> people write all of the variables in the README file of the repository. Definitely check there first, but if they aren’t there, then you’ll need to read through <code class="language-plaintext highlighter-rouge">defaults/</code> and <code class="language-plaintext highlighter-rouge">tasks/</code> and <code class="language-plaintext highlighter-rouge">templates/</code> to figure out what the role does and how you can control and modify it to accomplish your goals.</p>
+</blockquote>
+
+<h1 id="ansible-vault">Ansible Vault</h1>
 
 <p>Now that you have a small role built up, you might start thinking about deploying larger and more complex services and infrastructure. One last common task we want to cover here is the inclusion of secrets. Ansible Vault is really useful to include encrypted secrets in your playbook repository.</p>
 
@@ -1493,7 +1503,7 @@ Note that for this task one would normally list multiple packages in the <code c
     title = "Ansible (Galaxy Training Materials)",
     year = "2021",
     month = "06",
-    day = "02"
+    day = "29"
     url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
