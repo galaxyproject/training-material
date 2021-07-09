@@ -1,280 +1,324 @@
 {
-  "a_galaxy_workflow": "true",
-  "annotation": "16S Microbial Analysis with mothur (short)",
-  "format-version": "0.1",
-  "name": "Workflow 4: Mock OTU Clustering [Galaxy Training: 16S Microbial Analysis With Mothur]",
-  "steps": {
-    "0": {
-      "annotation": "",
-      "content_id": null,
-      "errors": null,
-      "id": 0,
-      "input_connections": {},
-      "inputs": [],
-      "label": "Mock Count Table",
-      "name": "Input dataset",
-      "outputs": [],
-      "position": {
-        "left": 299,
-        "top": 299
-      },
-      "tool_id": null,
-      "tool_state": "{}",
-      "tool_version": null,
-      "type": "data_input",
-      "uuid": "e8a0c8a9-bd75-4263-9c98-e9c31bf2f811",
-      "workflow_outputs": [
-        {
-          "label": null,
-          "output_name": "output",
-          "uuid": "9702868b-89f5-4016-a2ff-06096e86bbf3"
+    "a_galaxy_workflow": "true",
+    "annotation": "16S Microbial Analysis with mothur (short)",
+    "format-version": "0.1",
+    "name": "Workflow 4: Mock OTU Clustering [Galaxy Training: 16S Microbial Analysis With Mothur]",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Mock Count Table"
+                }
+            ],
+            "label": "Mock Count Table",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 214.1999969482422,
+                "height": 82.19999694824219,
+                "left": 87,
+                "right": 287,
+                "top": 132,
+                "width": 200,
+                "x": 87,
+                "y": 132
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "3c149509-370a-47f2-9f6d-a0fadcd7c1b6",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "f3b1e914-d44a-4f4e-8206-84c71d8d3111"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Mock Sequences"
+                }
+            ],
+            "label": "Mock Sequences",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 462.1999969482422,
+                "height": 82.19999694824219,
+                "left": 94,
+                "right": 294,
+                "top": 380,
+                "width": 200,
+                "x": 94,
+                "y": 380
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "c020d492-fb13-43c7-85e3-faa820866965",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "d84305b0-9a9e-4f12-ab31-9707b57bb31a"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_seqs/mothur_dist_seqs/1.39.5.0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "fasta": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Dist.seqs",
+            "outputs": [
+                {
+                    "name": "out_dist",
+                    "type": "mothur.pair.dist"
+                }
+            ],
+            "position": {
+                "bottom": 614.8000030517578,
+                "height": 174.8000030517578,
+                "left": 363,
+                "right": 563,
+                "top": 440,
+                "width": 200,
+                "x": 363,
+                "y": 440
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_seqs/mothur_dist_seqs/1.39.5.0",
+            "tool_shed_repository": {
+                "changeset_revision": "0554c9338ca0",
+                "name": "mothur_dist_seqs",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"calc\": \"\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"countends\": \"true\", \"cutoff\": \"0.2\", \"fasta\": null, \"output\": \"\", \"savelog\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.39.5.0",
+            "type": "tool",
+            "uuid": "925be8d7-7355-4a1d-b375-b27826e4cd2e",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_dist",
+                    "uuid": "28fe4e3d-5be8-47e8-9cd3-527e8657c391"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_cluster/mothur_cluster/1.39.5.0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "count": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "matrix|dist": {
+                    "id": 2,
+                    "output_name": "out_dist"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cluster",
+            "outputs": [
+                {
+                    "name": "rabund",
+                    "type": "mothur.rabund"
+                },
+                {
+                    "name": "sabund",
+                    "type": "mothur.sabund"
+                },
+                {
+                    "name": "otulist",
+                    "type": "mothur.list"
+                }
+            ],
+            "position": {
+                "bottom": 708.3999938964844,
+                "height": 398.3999938964844,
+                "left": 657,
+                "right": 857,
+                "top": 310,
+                "width": 200,
+                "x": 657,
+                "y": 310
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_cluster/mothur_cluster/1.39.5.0",
+            "tool_shed_repository": {
+                "changeset_revision": "528f950d1044",
+                "name": "mothur_cluster",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"count\": null, \"cutoff\": \"0.0\", \"matrix\": {\"format\": \"column\", \"__current_case__\": 0, \"dist\": {\"__class__\": \"ConnectedValue\"}, \"name\": null}, \"precision\": \"100\", \"savelog\": \"false\", \"select_method\": {\"method\": \"opti\", \"__current_case__\": 5, \"metric\": \"mcc\", \"initialize\": \"singleton\", \"delta\": \"0.0001\", \"iters\": \"100\"}, \"sim\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.39.5.0",
+            "type": "tool",
+            "uuid": "3f508523-34c1-420a-a0b6-2524b4d85b52",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "rabund",
+                    "uuid": "5f143144-eb84-4f88-9f57-87154dc29671"
+                },
+                {
+                    "label": null,
+                    "output_name": "otulist",
+                    "uuid": "3e79d92c-11c6-48f5-a0c2-cbf747690b2e"
+                },
+                {
+                    "label": null,
+                    "output_name": "sabund",
+                    "uuid": "a698d39c-c469-4867-9450-f9d80446d99f"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_shared/mothur_make_shared/1.39.5.0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "intype|group": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "intype|otu": {
+                    "id": 3,
+                    "output_name": "otulist"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Make.shared",
+            "outputs": [
+                {
+                    "name": "shared",
+                    "type": "mothur.shared"
+                },
+                {
+                    "name": "groupout",
+                    "type": "mothur.groups"
+                }
+            ],
+            "position": {
+                "bottom": 397.3999938964844,
+                "height": 276.3999938964844,
+                "left": 985,
+                "right": 1185,
+                "top": 121,
+                "width": 200,
+                "x": 985,
+                "y": 121
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_shared/mothur_make_shared/1.39.5.0",
+            "tool_shed_repository": {
+                "changeset_revision": "0851ae17c58e",
+                "name": "mothur_make_shared",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"intype\": {\"infile\": \"otulist\", \"__current_case__\": 0, \"otu\": {\"__class__\": \"ConnectedValue\"}, \"group\": null, \"label\": [\"0.03\"], \"groups\": null}, \"savelog\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.39.5.0",
+            "type": "tool",
+            "uuid": "72197339-b027-4c3e-85ba-edf401b82322",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "groupout",
+                    "uuid": "cc7aa273-608a-47b5-8da1-624b4a534035"
+                },
+                {
+                    "label": null,
+                    "output_name": "shared",
+                    "uuid": "1d80db8c-04f6-45a0-a523-f87c7a4b87cf"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "otu": {
+                    "id": 4,
+                    "output_name": "shared"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Rarefaction.single",
+            "outputs": [
+                {
+                    "name": "rarefactioncurves",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 506.8000030517578,
+                "height": 174.8000030517578,
+                "left": 1259,
+                "right": 1459,
+                "top": 332,
+                "width": 200,
+                "x": 1259,
+                "y": 332
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0",
+            "tool_shed_repository": {
+                "changeset_revision": "af521db77c56",
+                "name": "mothur_rarefaction_single",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"abund\": \"10\", \"calc\": [\"sobs\"], \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"freq\": \"100.0\", \"iters\": \"1000\", \"label\": null, \"otu\": {\"__class__\": \"ConnectedValue\"}, \"savelog\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.39.5.0",
+            "type": "tool",
+            "uuid": "6982780b-f8ac-4ff8-b862-29557494d9b4",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "rarefactioncurves",
+                    "uuid": "cbf4d013-fa83-4bd9-9f97-1e3632362b36"
+                }
+            ]
         }
-      ]
     },
-    "1": {
-      "annotation": "",
-      "content_id": null,
-      "errors": null,
-      "id": 1,
-      "input_connections": {},
-      "inputs": [],
-      "label": "Mock Sequences",
-      "name": "Input dataset",
-      "outputs": [],
-      "position": {
-        "left": 313,
-        "top": 396
-      },
-      "tool_id": null,
-      "tool_state": "{}",
-      "tool_version": null,
-      "type": "data_input",
-      "uuid": "96753f48-d23f-4743-b855-57c075b6fcdb",
-      "workflow_outputs": [
-        {
-          "label": null,
-          "output_name": "output",
-          "uuid": "d01408b1-d3f2-4c85-8ce7-1077789d7f13"
-        }
-      ]
-    },
-    "2": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_seqs/mothur_dist_seqs/1.39.5.0",
-      "errors": null,
-      "id": 2,
-      "input_connections": {
-        "fasta": {
-          "id": 1,
-          "output_name": "output"
-        }
-      },
-      "inputs": [],
-      "label": null,
-      "name": "Dist.seqs",
-      "outputs": [
-        {
-          "name": "out_dist",
-          "type": "mothur.pair.dist"
-        }
-      ],
-      "position": {
-        "left": 494,
-        "top": 528
-      },
-      "post_job_actions": {},
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_seqs/mothur_dist_seqs/1.39.5.0",
-      "tool_shed_repository": {
-        "changeset_revision": "dcbf475d7d60",
-        "name": "mothur_dist_seqs",
-        "owner": "iuc",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"cutoff\": \"\\\"0.2\\\"\", \"countends\": \"\\\"true\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"savelog\": \"\\\"false\\\"\", \"output\": \"\\\"\\\"\", \"fasta\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"calc\": \"\\\"\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
-      "tool_version": "1.39.5.0",
-      "type": "tool",
-      "uuid": "69c4fea4-c911-4f87-825a-68522c600b35",
-      "workflow_outputs": [
-        {
-          "label": null,
-          "output_name": "out_dist",
-          "uuid": "1f411a80-673a-4373-b5f5-b485f428df8f"
-        }
-      ]
-    },
-    "3": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_cluster/mothur_cluster/1.39.5.0",
-      "errors": null,
-      "id": 3,
-      "input_connections": {
-        "count": {
-          "id": 0,
-          "output_name": "output"
-        },
-        "matrix|dist": {
-          "id": 2,
-          "output_name": "out_dist"
-        }
-      },
-      "inputs": [],
-      "label": null,
-      "name": "Cluster",
-      "outputs": [
-        {
-          "name": "rabund",
-          "type": "mothur.rabund"
-        },
-        {
-          "name": "sabund",
-          "type": "mothur.sabund"
-        },
-        {
-          "name": "otulist",
-          "type": "mothur.list"
-        }
-      ],
-      "position": {
-        "left": 749,
-        "top": 255
-      },
-      "post_job_actions": {
-        "HideDatasetActionrabund": {
-          "action_arguments": {},
-          "action_type": "HideDatasetAction",
-          "output_name": "rabund"
-        },
-        "HideDatasetActionsabund": {
-          "action_arguments": {},
-          "action_type": "HideDatasetAction",
-          "output_name": "sabund"
-        }
-      },
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_cluster/mothur_cluster/1.39.5.0",
-      "tool_shed_repository": {
-        "changeset_revision": "c31bcc652db3",
-        "name": "mothur_cluster",
-        "owner": "iuc",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"count\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"cutoff\": \"\\\"0.0\\\"\", \"matrix\": \"{\\\"__current_case__\\\": 0, \\\"dist\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"format\\\": \\\"column\\\", \\\"name\\\": null}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"precision\": \"\\\"100\\\"\", \"select_method\": \"{\\\"__current_case__\\\": 5, \\\"delta\\\": \\\"0.0001\\\", \\\"initialize\\\": \\\"singleton\\\", \\\"iters\\\": \\\"100\\\", \\\"method\\\": \\\"opti\\\", \\\"metric\\\": \\\"mcc\\\"}\", \"savelog\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"sim\": \"\\\"false\\\"\"}",
-      "tool_version": "1.39.5.0",
-      "type": "tool",
-      "uuid": "4bb4fcb5-c6eb-4803-a788-78edeb0d11ca",
-      "workflow_outputs": [
-        {
-          "label": null,
-          "output_name": "otulist",
-          "uuid": "971273b8-83ba-4c38-9e27-fb5638a023d5"
-        }
-      ]
-    },
-    "4": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_shared/mothur_make_shared/1.39.5.0",
-      "errors": null,
-      "id": 4,
-      "input_connections": {
-        "intype|group": {
-          "id": 0,
-          "output_name": "output"
-        },
-        "intype|otu": {
-          "id": 3,
-          "output_name": "otulist"
-        }
-      },
-      "inputs": [],
-      "label": null,
-      "name": "Make.shared",
-      "outputs": [
-        {
-          "name": "shared",
-          "type": "mothur.shared"
-        },
-        {
-          "name": "groupout",
-          "type": "mothur.groups"
-        }
-      ],
-      "position": {
-        "left": 1024,
-        "top": 536
-      },
-      "post_job_actions": {
-        "HideDatasetActiongroupout": {
-          "action_arguments": {},
-          "action_type": "HideDatasetAction",
-          "output_name": "groupout"
-        }
-      },
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_shared/mothur_make_shared/1.39.5.0",
-      "tool_shed_repository": {
-        "changeset_revision": "f7a10f16aa99",
-        "name": "mothur_make_shared",
-        "owner": "iuc",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"intype\": \"{\\\"__current_case__\\\": 0, \\\"group\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"groups\\\": null, \\\"infile\\\": \\\"otulist\\\", \\\"label\\\": [\\\"0.03\\\"], \\\"otu\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}}\", \"savelog\": \"\\\"false\\\"\", \"__page__\": null}",
-      "tool_version": "1.39.5.0",
-      "type": "tool",
-      "uuid": "6160743f-af18-41d4-b368-5a3688c06161",
-      "workflow_outputs": [
-        {
-          "label": null,
-          "output_name": "shared",
-          "uuid": "1ae31a57-7d8d-48c2-8768-eb2258687bdf"
-        }
-      ]
-    },
-    "5": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0",
-      "errors": null,
-      "id": 5,
-      "input_connections": {
-        "otu": {
-          "id": 4,
-          "output_name": "shared"
-        }
-      },
-      "inputs": [],
-      "label": null,
-      "name": "Rarefaction.single",
-      "outputs": [
-        {
-          "name": "rarefactioncurves",
-          "type": "input"
-        }
-      ],
-      "position": {
-        "left": 1327,
-        "top": 451
-      },
-      "post_job_actions": {},
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0",
-      "tool_shed_repository": {
-        "changeset_revision": "5c2157147393",
-        "name": "mothur_rarefaction_single",
-        "owner": "iuc",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"__page__\": null, \"abund\": \"\\\"10\\\"\", \"iters\": \"\\\"1000\\\"\", \"__rerun_remap_job_id__\": null, \"label\": \"null\", \"savelog\": \"\\\"false\\\"\", \"freq\": \"\\\"100.0\\\"\", \"calc\": \"[\\\"sobs\\\"]\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"otu\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}",
-      "tool_version": "1.39.5.0",
-      "type": "tool",
-      "uuid": "9eb08bc3-56a2-4dc9-92bd-ee0870f90e32",
-      "workflow_outputs": [
-        {
-          "label": null,
-          "output_name": "rarefactioncurves",
-          "uuid": "c8817045-41f3-4512-9fa7-d4ef60595f99"
-        }
-      ]
-    }
-  },
-  "tags": [
-    "metagenomics"
-  ],
-  "uuid": "5d34279d-b926-4904-a629-5e338f31679e",
-  "version": 3
+    "tags": [
+        "metagenomics"
+    ],
+    "uuid": "5ff2c947-7bd3-4d56-8eeb-518e3cbb6f38",
+    "version": 1
 }

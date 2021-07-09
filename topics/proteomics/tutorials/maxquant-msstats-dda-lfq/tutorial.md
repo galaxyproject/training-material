@@ -47,7 +47,8 @@ The training dataset consists of a skin cancer cohort of 19 patients, which is a
 
 # Get data
 
-The raw data is available via the [PRIDE repository](https://www.ebi.ac.uk/pride/archive/projects/PXD006914). The annotation file, group comparison file and FASTA file for this training is deposited at [Zenodo](https://zenodo.org/record/4544529). It is of course possible to use another FASTA file with human proteome sequences, but to ensure that the results are compatible we recommend to use the provided FASTA file. MaxQuant not only adds known contaminants to the FASTA file, but also generates the “decoy” hits for false discovery rate estimation itself, therefore the FASTA file is not allowed to have decoy entries. To learn more about FASTA files, have a look at [Protein FASTA Database Handling tutorial]({{site.baseurl}}/topics/proteomics/tutorials/database-handling/tutorial.html).
+
+The annotation file, group comparison file and FASTA file for this training is deposited at [Zenodo](https://zenodo.org/record/4896554). It is of course possible to use another FASTA file with human proteome sequences, but to ensure that the results are compatible we recommend to use the provided FASTA file. MaxQuant not only adds known contaminants to the FASTA file, but also generates the “decoy” hits for false discovery rate estimation itself, therefore the FASTA file is not allowed to have decoy entries. To learn more about FASTA files, have a look at [Protein FASTA Database Handling tutorial]({{site.baseurl}}/topics/proteomics/tutorials/database-handling/tutorial.html). The raw data is available via the [PRIDE repository](https://www.ebi.ac.uk/pride/archive/projects/PXD006914). As this is a real life study, the raw data sizes are large and computation time in MaxQuant is long. To save time and storage capacity, you can skip downloading the raw data and the MaxQuant run and instead continue with the MaxQuant outputs which we provide later on. In this case skip the data upload steps 5-8 which are only necessary for the MaxQuant run.
 
 
 > ### {% icon hands_on %} Hands-on: Data upload
@@ -56,17 +57,20 @@ The raw data is available via the [PRIDE repository](https://www.ebi.ac.uk/pride
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the FASTA database, annotation file and comparison matrix from [Zenodo](https://zenodo.org/record/4544529)
+> 2. Import the FASTA database, annotation file and comparison matrix from [Zenodo](https://zenodo.org/record/4896554)
 >
 >    ```
->    https://zenodo.org/record/4544529/files/input_protein_database.fasta
->    https://zenodo.org/record/4544529/files/input_annotation_file.tabular
->    https://zenodo.org/record/4544529/files/input_comparison_matrix.tabular
+>    https://zenodo.org/record/4896554/files/input_protein_database.fasta
+>    https://zenodo.org/record/4896554/files/input_annotation_file.tabular
+>    https://zenodo.org/record/4896554/files/input_comparison_matrix.tabular
 >    ```
->
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
-> 3. Import the raw data from [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD006914)
+> 3. Once the files are green, rename the fasta file into 'protein database', the annotation file into 'annotation file' and the comparison matrix file into 'comparison matrix'.
+>
+>    {% snippet faqs/galaxy/datasets_rename.md %}
+>
+> 4. Steps 4 to 7 can be skipped to save time and storage capacity by not running MaxQuant. To run MaxQuant, import the raw data from [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD006914).
 >
 >    ```
 >    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment105_metast_cSCC1.raw
@@ -90,15 +94,14 @@ The raw data is available via the [PRIDE repository](https://www.ebi.ac.uk/pride
 >    ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2017/11/PXD006914/Experiment115_RDEB_cSCC6.raw
 >
 >    ```
-> 4. Once the files are green, rename the raw datasets into 'metast_cSCC1' etc., the fasta file into 'protein database', the annotation file into 'annotation file' and the comparison matrix file into 'comparison matrix'.
->
+> 5. Rename the raw datasets into 'metast_cSCC1.raw', 'metast_cSCC2.raw', etc.. The naming for the raw files have to be exactly this way to later match the file names provided in the MSstats annotation file. 
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
-> 5. Control that the data type of the raw files is 'thermo.raw' otherwise change the datatype into 'thermo.raw'
+> 6. Control that the data type of the raw files is 'thermo.raw' otherwise change the datatype into 'thermo.raw'
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="thermo.raw" %}
 >
-> 6. Generate a collection for all raw files and name it 'raw_files', hide the individual raw files
+> 7. Generate a collection for all raw files and name it 'raw_files', hide the individual raw files
 >
 >    {% snippet faqs/galaxy/collections_build_list.md %}
 >
@@ -106,29 +109,32 @@ The raw data is available via the [PRIDE repository](https://www.ebi.ac.uk/pride
 
 # MaxQuant analysis
 
-The run time of **MaxQuant** {% icon tool %} depends on the number and size of the input files and on the chosen parameters. The run of the training datasets will take a few hours, but the training can be directly continued with the MaxQuant result files from Zenodo. We start the MaxQuant run with the default parameters, with a few adjustments. All peptides are used for quantification. A quality control report is generated with the [PTXQC functionality](https://pubs.acs.org/doi/10.1021/acs.jproteome.5b00780) that is directly implemented in the MaxQuant Galaxy tool. To continue with statistical analysis in MSstats, the Protein Groups and the Evidence files are needed from MaxQuant.
+The run time of **MaxQuant** {% icon tool %} depends on the number and size of the input files and on the chosen parameters. The run of the training datasets will take a few hours, but the training can be directly continued with the MaxQuant result files from Zenodo. We start the MaxQuant run with the default parameters, with a few adjustments. Protein level quantification parameters do not really matter here, because MSstats will use feature quantifications and perform protein summarization based on them. A quality control report is generated with the [PTXQC functionality](https://pubs.acs.org/doi/10.1021/acs.jproteome.5b00780) that is directly implemented in the MaxQuant Galaxy tool. To continue with statistical analysis in MSstats, the Protein Groups and the Evidence files are needed from MaxQuant.
 
 > ### {% icon hands_on %} Hands-on: MaxQuant analysis
 >
 > 1. {% tool [MaxQuant](toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3) %} with the following parameters:
 >    - In *"Input Options"*:
 >        - {% icon param-file %} *"FASTA files"*: `protein database`
+>    - In *"Search Options"*:
+>    - *"minimum unique peptides"*: `1`
+>    - *"Match between runs"*: `yes`
 >    - In *"Parameter Group"*:
 >        - {% icon param-repeat %} *"Insert Parameter Group"*
 >            - {% icon param-collection %} *"Infiles"*: `raw_files`
 >    - *"Generate PTXQC (proteomics quality control pipeline) report?"*: `Yes`
 >    - In *"Output Options"*:
->        - *"Select the desired outputs."*: `Protein Groups` `Evidence` `mqpar.xml`
+>        - *"Select the desired outputs."*: `Protein Groups` `Evidence`
 >
 >    > ### {% icon tip %} Tip: Continue with results from Zenodo
 >    >
 >    > Because the MaxQuant run takes really long, we recommend to download the MaxQuant results from Zenodo and continue with the tutorial
->    > 1. Import the files from [Zenodo](https://zenodo.org/record/4544529)
+>    > 1. Import the files from [Zenodo](https://zenodo.org/record/4896554)
 >    >
 >    >  ```
->    > https://zenodo.org/record/4544529/files/Evidence.tabular
->    > https://zenodo.org/record/4544529/files/protein_groups.tabular
->    > https://zenodo.org/record/4544529/files/PTXQC_report.pdf
+>    > https://zenodo.org/record/4896554/files/MaxQuant_Evidence.tabular
+>    > https://zenodo.org/record/4896554/files/MaxQuant_proteingroups.tabular
+>    > https://zenodo.org/record/4896554/files/PTXQC_report.pdf
 >    > ```
 >    {: .tip}
 >
@@ -138,12 +144,14 @@ The run time of **MaxQuant** {% icon tool %} depends on the number and size of t
 > ### {% icon question %} Questions
 >
 > 1. How many proteins and features were identified in total?
-> 2. How large is the proportion of potential contaminants?
+> 2. In which columns (number) are the potential contaminants in the protein group and evidence file respectively? 
+> 3. How large is the proportion of potential contaminants?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. 2634 protein groups and ~150000 features were found in total (number of lines of protein group and evidence files)
-> > 2. Up to 60% of the samples intensities derive from potential contaminants (PTXQC plots page 6)
+> > 1. 2622 protein groups and ~240000 features were found in total (number of lines of protein group and evidence files)
+> > 2. They are in column 118 (protein groups) and 54 (evidence)
+> > 3. Up to 60% of the samples intensities derive from potential contaminants (PTXQC plots page 7)
 > >
 > {: .solution}
 >
@@ -152,7 +160,7 @@ The run time of **MaxQuant** {% icon tool %} depends on the number and size of t
 
 # MSstats analysis
 
-The protein groups and evidence files of MaxQuant can directly be input into MSstats. MSstats automatically removes all proteins that are labelled as contaminants ('+' sign in the column 'potential contaminant' of both MaxQuant outputs). However, in this skin dataset we expect that the skin proteins are part of the sample and not a contamination. Therefore, we keep all human contaminants by first removing non human proteins and then removing (replacing with '') the '+' sigin in the 'potential contaminant' column.
+The protein groups and evidence files of MaxQuant can directly be input into MSstats. MSstats automatically removes all proteins that are labelled as contaminants ('+' sign in the column 'potential contaminant' of both MaxQuant outputs). However, in this skin dataset we expect that the skin proteins are part of the sample and not a contamination. Therefore, we keep all human contaminants by first removing non human proteins (by selecting only lines that contain the word 'HUMAN' or a word from the header line) and then for the human potential contaminants remove the '+' (replacing '+' with ''(empty field) in the 'potential contaminant' column) to keep them for the analysis.
 
 We use the modified MaxQuant protein groups and evidence files as input in MSstats. In addition, an annotation file that describes the experimental design and a comparison matrix is needed. Please start the MSstats run first and while it is running you can find more details on its parameters below.
 
@@ -169,29 +177,35 @@ We use the modified MaxQuant protein groups and evidence files as input in MSsta
 >    - In *"Replacement"*:
 >            - *"in column"*: `c118`
 >            - *"Find pattern"*: `+`
+>    - Once finished, rename the file into `protein groups input for MSstats`
 > 4. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `select evidence` (output of **Select** {% icon tool %})
 >    - In *"Replacement"*:
 >            - *"in column"*: `c54`
 >            - *"Find pattern"*: `+`
+>    - Once finished, rename the file into `evidence input for MSstats`
 > 5. {% tool [MSstats](toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.22.0.0) %}  with the following parameters:
 >    - *"input source"*: `MaxQuant`
->        - {% icon param-file %} *"evidence.txt - feature-level data"*: `selected Evidence` (output of **Select** {% icon tool %})
->        - {% icon param-file %} *"proteinGroups.txt - protein-level data"*: `selected Protein Groups` (output of **Select** {% icon tool %})
+>        - {% icon param-file %} *"evidence.txt - feature-level data"*: `evidence input for MSstats` (output of **Replace** {% icon tool %})
+>        - {% icon param-file %} *"proteinGroups.txt - protein-level data"*: `protein groups input for MSstats` (output of **Replace** {% icon tool %})
 >        - {% icon param-file %} *"annotation file"*: `annotation file`
 >        - *"Select Protein ID in evidence.txt"*: `Leading razor protein column`
 >        - In *"MaxQtoMSstatsFormat Options"*:
 >            - *"Remove the proteins which have only 1 peptide and charge"*: `Yes`
->    - *"Select outputs"*: `MSstats log` `MSstats ProcessedData` `MSstats QCPlot` `RunlevelData` `Group Quantification Matrix Table` `Sample Quantification Matrix Table`
+>    - *"Select outputs"*: `MSstats log` `MSstats ProcessedData` `RunlevelData` `Group Quantification Matrix Table` `Sample Quantification Matrix Table`
 >    - In *"DataProcess Plot Options"*:
->	 - *"Angle of labels represented each condition at the top of graph"*: `0`
+>	 - *"Select visualization outputs"*: `QCPlot`
 >        - *"Select protein IDs to draw plots"*: `Option for QC plot: "allonly" will generate one QC plot with all proteins`
+>    	 - In *"Advanced visualization parameters"*:
+>	    - *"Angle of labels represented each condition at the top of graph"*: `0`
 >    - *"Compare Groups"*: `Yes`
 >        - {% icon param-file %} *"Comparison Matrix"*: `comparison matrix`
->        - *"Select outputs"*: `MSstats ComparisonResult` `MSstats VolcanoPlot`
->    - In *"Comparison Plot Options"*:
->	 - *"Involve fold change cutoff or not for volcano plot or heatmap."*: `1.5`
->	 - *"Display protein names in Volcano Plot."*: `No`
+>        - *"Select outputs"*: `MSstats ComparisonResult`
+>    - In *"Comparison Visualization Options"*:
+>        - *"Select visualization outputs"*: `MSstats VolcanoPlot`
+>    	 - In *"Advanced visualization parameters"*:
+>	    - *"Involve fold change cutoff or not for volcano plot or heatmap."*: `1.5`
+>	    - *"Display protein names in Volcano Plot."*: `No`
 >
 {: .hands_on}
 
@@ -203,8 +217,8 @@ We use the modified MaxQuant protein groups and evidence files as input in MSsta
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. 29 (2635 lines in protein group file minus 2606 lines after select)
-> > 2. 1296 (MSstats log)
+> > 1. 28 (2622 lines in protein group file minus 2594 lines after select)
+> > 2. 2289 (MSstats log)
 > >
 > {: .solution}
 >
@@ -217,9 +231,31 @@ We use the modified MaxQuant protein groups and evidence files as input in MSsta
 MSstats  is designed for statistical modelling of mass spectrometry based proteomic data [Choi 2014](https://doi.org/10.1093/bioinformatics/btu305 ).
 Proteomic data analysis requires statistical approaches that reduce bias and inefficiencies and distinguish systematic variation from random artifacts [Käll and Vitek 2011]( https://doi.org/10.1371/journal.pcbi.1002277).
 
-MSstats is directly compatible with the output of several quantitative proteomics software. In addition to the results of the proteomics software an annotation file is needed as input. The annotation file describes the experimental design such as the conditions, biological and technical replicates. To be compatible with MaxQuant results, an additional column with the label type is needed, which only contains L (light) in DDA experiments.
+MSstats is directly compatible with the output of several quantitative proteomics software. In addition to the results of the proteomics software an annotation file is needed as input. The annotation file describes the experimental design such as the conditions, biological and technical replicates. To be compatible with MaxQuant results, an additional column with the label type is needed, which only contains L (light) in DDA experiments. A wrong setup of the annotation file is the most common source of errors in MSstats, thus we collected more information in the box below to allow you to adjust the annotation file when analyzing your own experiments. 
 
-First, the input data is converted into an MSstats compatible table. For this step several parameters to filter and adjust the input data can be selected. We keep the default parameters and only change one parameter in order to remove proteins which have only a single peptide measurement.
+> ### {% icon tip %} Tip: Generating the MSstats annotation file
+>
+> For label-free MaxQuant data, the annotation file should have 5 columns with exactly these headers: Raw.file, Condition, BioReplicate, Run; IsotopeLabelType
+> 1. Raw.file: The names must match exactly to the file names in the MaxQuant evidence.txt "Raw file" column. (e.g. "file1.raw.thermo"). 
+> 2. Condition: The conditions which will be compared in the statistical modelling. They are not allowed to start with a number or contain any special characters except for '_'.
+> 3. BioReplicate: This column should contain a unique identifier for each biological replicate in the experiment. For example, in a clinical proteomic investigation this should be a unique patient id. If technical replicates are present, all samples from the same biological replicate should have the same id but different run ids. MSstats automatically detects the presence of technical replicates and accounts for them in the model-based analysis.
+> 4. Run: This column contains the identifier of a mass spectrometry run. Each mass spectrometry run should have a unique identifier (number or name), regardless of the origin of the biological sample. 
+> 5. IsotopeLabelType: This is L (light) for all MaxQuant DDA experiments.
+>
+{: .tip}
+
+MSstats will compare all conditions that are indicated in the comparison matrix. The comparison matrix has to be setup correctly to avoid errors and wrong statistical modelling. It contains a first column that gives the comparisons a name and one column per condition. This matrix is filled with 1 and -1 to specify the conditions that are compared in each comparison and with 0 for conditions that are not part of the comparison.
+
+> ### {% icon tip %} Tip: Generating the MSstats comparison matrix
+>
+> 1. The first column of the comparison matrix contains the names of the comparisons and should have 'names' as header. These names will be used in all MSstats output files, therefore it is important that the names are meaningful and reflect the actual comparison (see below)
+> 2. An additional column for each condition that is present in the data. This means each condition present in the annotation file has to be a separate column even when the condition will not be used for any comparison. The header should contain the condition name exactly as written in the annotation file. 
+> 3. Fill the matrix: Use 1 and -1 to indicate the conditions to compare and 0 for conditions that are not compared. Multiple groups can be combined by using 0.5. 
+> 4. Example: to compare condition1 with condition2: write 1 into the column of condition1 and write -1 in the column of condition2. In the first column of the matrix name this comparison condition1-condition2. The naming of the comparison should reflect the direction of the comparison and thus always have the condition that is set to 1 first and the condition that is set to -1 second (condition1-condition2 and NOT condition2-condition1). 
+>
+{: .tip}
+
+The first analysis step in MSstats is the conversion of the input data into an MSstats compatible table. For this step several parameters to filter and adjust the input data can be selected. We keep the default parameters and only change one parameter in order to remove proteins which have only a single peptide measurement.
 Next, data processing optimizes the data for statistical modelling via log-transformation, and normalization of intensities, feature selection, missing value imputation, and run-level summarization.
 Log- transformation is performed to transform multiplicative signals to additive signals which are compatible with linear statistical models and bring the intensity distribution close to a normal distribution. Furthermore, it changes the dependence of variances from the intensity values: in the raw data larger intensities have larger variances but after log transformation lower intensities have larger variances.
 
@@ -244,11 +280,14 @@ The volcano plot plots the statistical result as transformed p-values vs. the lo
 ![volcano plot](../../images/maxquant-msstats-lfq/volcano_plot.png "Volcano plot showing p-values and log2 fold changes for all proteins. Dashed line indicates p-value of 0.05 and log2 fold change of ± 0.58")
 
 The processed data file contains the transformed, normalized and imputed intensities for each peptide in each run. Run level data summarizes intensities per run and protein.
-We’ll count and visualize the number of features per run and calculate the distribution of peptides per protein and run.
+We’ll count and visualize the number of features per run and calculate the distribution of proteins per sample.
 
 > ### {% icon hands_on %} Hands-on: Follow up on MSstats results
 >
-> 1. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/datamash_ops/1.0.6) %} with the following parameters:
+> 1. {% tool [Summary Statistics](Summary_Statistics1) %} with the following parameters:
+>    - {% icon param-file %} *"Summary statistics on"*: `RunLevel data` (output of **MSstats** {% icon tool %})
+>    - *"Column or expression"*: `c4`
+> 2. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/datamash_ops/1.0.6) %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: `RunLevel data` (output of **MSstats** {% icon tool %})
 >    - *"Group by fields"*: `8`
 >    - *"Input file has a header line"*: `Yes`
@@ -257,28 +296,26 @@ We’ll count and visualize the number of features per run and calculate the dis
 >    - In *"Operation to perform on each group"*:
 >        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
 >            - *"On column"*: `c1`
-> 2. Click on {% icon galaxy-barchart %} “Visualize this data” on the **Datamash** {% icon tool %} result.
+> 3. Click on {% icon galaxy-barchart %} “Visualize this data” on the **Datamash** {% icon tool %} result.
 >   - Select `Bar diagram (NVD3)`
 >   - *"Provide a title"*: `Number of features per sample`
 >   - Click `Select data` {% icon galaxy-chart-select-data %}
 >   - *"Data point labels"*: `Column: 1`
 >   - Save {% icon galaxy-save %} (file is saved under "User" --> "Visualizations")
-> 2. {% tool [Summary Statistics](Summary_Statistics1) %} with the following parameters:
->    - {% icon param-file %} *"Summary statistics on"*: `RunLevel data` (output of **MSstats** {% icon tool %})
->    - *"Column or expression"*: `c4`
 >
 {: .hands_on}
 
 
 > ### {% icon question %} Questions
 >
-> 1. Which sample has the lowest amount of features?
+> 1. Which sample has the lowest amount of proteins after protein summarization?
 > 2. In the complete experiment, how many features has a protein on average?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. RDEB cSCC4 ![Number of features per sample](../../images/maxquant-msstats-lfq/features_sample.png "Number of features per sample (run)")
-> > 2. Around 5 features per protein.
+> > 1. RDEB cSCC4 
+> > ![Number of proteins per sample](../../images/maxquant-msstats-lfq/features_sample.png "Number of proteins per sample (run)")
+> > 2. Around 5 features per protein (mean in summary statistics). 
 > >
 > {: .solution}
 >
@@ -287,7 +324,7 @@ We’ll count and visualize the number of features per run and calculate the dis
 
 # Filtering MSstats results
 
-The comparison result table summarizes the statistical results per protein and comparison. First, we keep only the Uniprot ID in column 1 to make the ID less cluttered.
+The comparison result table summarizes the statistical results per protein and comparison. First, we keep only the Uniprot ID in column 1 to make the ID less cluttered. This is done by deleting everything before the first pipe '|' and everything after the second pipe '|'. 
 Then we keep only statistically significant proteins that means they have an adjusted p-value below 0.05.
 Next, we separate up- and down-regulated proteins by filtering for a positive and negative log2FC.
 The Sample Quantification Matrix Table contains the summarized intensities per protein and sample.
@@ -305,22 +342,23 @@ In order to make its IDs compatible with the ones from the comparison result at 
 >            - *"in column"*: `c1`
 >            - *"Find pattern"*: `\|.*`
 > 2. {% tool [Filter](Filter1) %} with the following parameters:
->    - {% icon param-file %} *"Filter"*: `replaced comparison result` (output of the last **Replace Text** {% icon tool %})
+>    - {% icon param-file %} *"Filter"*: `replaced comparison result` (output of **Replace Text** {% icon tool %})
 >    - *"With following condition"*: `c8<0.05`
 >    - *"Number of header lines to skip"*: `1`
+>    - Once finished, rename the file into `significant proteins`
 > 3. {% tool [Filter](Filter1) %} with the following parameters:
->    - {% icon param-file %} *"Filter"*: `filtered comparison result` (output of **Filter** {% icon tool %})
+>    - {% icon param-file %} *"Filter"*: `significant proteins` (output of **Filter** {% icon tool %})
 >    - *"With following condition"*: `c3>0.58`
 >    - *"Number of header lines to skip"*: `1`
-> 4. Add a tag `#metastasized` to the filtered file
+> 4. Add a tag `#metastasized` to the filtered file and rename it into `metastasized filtered`
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 > 5. {% tool [Filter](Filter1) %} with the following parameters:
->    - {% icon param-file %} *"Filter"*: `filtered comparison result` (output of the run before last **Filter** {% icon tool %})
+>    - {% icon param-file %} *"Filter"*: `significant proteins` (output of the first **Filter** {% icon tool %})
 >    - *"With following condition"*: `c3<-0.58`
 >    - *"Number of header lines to skip"*: `1`
-> 6. Add a tag `#rdeb` to the filtered file
+> 6. Add a tag `#rdeb` to the filtered file and rename it into `rdeb filtered`
 >
 {: .hands_on}
 
@@ -337,37 +375,29 @@ In order to make its IDs compatible with the ones from the comparison result at 
 >
 {: .question}
 
+# Finding differentially abundant proteins
 
-# Follow up on proteins that are missing in one condition
+For each condition we select only the significant proteins, which are proteins with a p-value above 0 and below 0.05. Thus we will discard proteins that are missing in one condition and therefore have a p-value of 0. We'll keep only the column with the Uniprot ID and extract the average protein intensities per sample from the sample quantification matrix file and vizualize them at heatmap. We do the exact same steps for both conditions, therefore each time you start a tool you can use the multiple input file to start the step for the metastasized and rdeb files at the same time. 
 
-For each group we separate the proteins that are missing in one condition (that means p-value is 0) from the other significant proteins.
-From all missing in one condition proteins we keep only the column with the Uniprot ID and combine the “upregulated” and “downregulated” ones into one file.
-We extract their average intensities per sample from the sample quantification matrix file and generate a heatmap on their intensities.
-
-> ### {% icon hands_on %} Hands-on: Filter proteins missing in one condition
+> ### {% icon hands_on %} Hands-on: filter differentially abundant proteins
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `metastasized filtered` (output of **Filter** {% icon tool %})
->    - *"With following condition"*: `c8==0`
+>    - *"With following condition"*: `c8>0`
 >    - *"Number of header lines to skip"*: `1`
+>    - Rename the file into `significant metastasized`
 > 2. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1`
->    - {% icon param-file %} *"From"*: `metastasized filtered` (output of the last **Filter** {% icon tool %})
+>    - {% icon param-file %} *"From"*: `significant metastasized ` (output of last **Filter** {% icon tool %})
 > 3. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `rdeb filtered` (output of **Filter** {% icon tool %})
->    - *"With following condition"*: `c8==0`
+>    - *"With following condition"*: `c8>0`
 >    - *"Number of header lines to skip"*: `1`
+>    - Rename the file into `significant rdeb`
 > 4. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1`
->    - {% icon param-file %} *"From"*: `rdeb filtered` (output of the last **Filter** {% icon tool %})
-> 5. {% tool [Remove beginning](Remove+beginning1) %} with the following parameters:
->    - {% icon param-file %} *"from"*: `cut rdeb` (output of the last **Cut** {% icon tool %})
-> 6. {% tool [Concatenate datasets](cat1) %} with the following parameters:
->    - {% icon param-file %} *"Concatenate Dataset"*: `cut metastasized` (output of **Cut** {% icon tool %})
->    - In *"Dataset"*:
->        - {% icon param-repeat %} *"Insert Dataset"*
->            - {% icon param-file %} *"Select"*: `remove beginning rdeb` (output of **Remove beginning** {% icon tool %})
-> 7. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
+>    - {% icon param-file %} *"From"*: `significant rdeb` (output of last **Filter** {% icon tool %})
+> 5. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `Sample Quantification Matrix Table` (output of **MSstats** {% icon tool %})
 >    - In *"Replacement"*:
 >            - *"in column"*: `c1`
@@ -375,76 +405,24 @@ We extract their average intensities per sample from the sample quantification m
 >        - {% icon param-repeat %} *"Insert Replacement"*
 >            - *"in column"*: `c1`
 >            - *"Find pattern"*: `\|.*`
-> 8. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2) %} with the following parameters:
->    - {% icon param-file %} *"1st file"*: `replaced sample quantification matrix` (output of **Replace Text** {% icon tool %})
->    - *"Column to use from 1st file"*: `c1`
->    - {% icon param-file %} *"2nd File"*: `concatenated file` (output of **Concatenate datasets** {% icon tool %})
->    - *"Column to use from 2nd file"*: `c1`
->    - *"First line is a header line"*: `Yes`
-> 9. {% tool [Heatmap w ggplot](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap/ggplot2_heatmap/2.2.1) %} with the following parameters:
->    - {% icon param-file %} *"Select table"*: `joined file` (output of **Join** {% icon tool %})
->    - *"Select input dataset options"*: `Dataset with header and row names`
->        - *"Select column, for row names"*: `c1`
->    - In *"Output Options"*:
->        - *"width of output"*: `15.0`
->        - *"height of output"*: `10.0`
->
-{: .hands_on}
-
-> ### {% icon question %} Questions
->
-> 1. How many proteins have no intensity values in one condition?
-> 2. Which protein is present in all samples of one condition and absent in all samples of the other condition?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. 80 (79 are missing in RDEB cSCC condition; 1 is missing in metastasizing cSCC condition)
-> > 2. Q02388 which is collagen VII (https://www.uniprot.org). Collagen VII is expected in all skin samples, but due to the genetic disease that hinders the production of functional collagen VII in RDEB patients. ![heatmap missing proteins](../../images/maxquant-msstats-lfq/heatmap_missing.png "Proteins missing in one condition")
-> >
-> {: .solution}
->
-{: .question}
-
-
-# Finding differentially abundant proteins
-
-The same procedure is applied to the significant proteins that were not missing in one condition.
-To obtain them we filter the up- and downregulated proteins (p-value <0.05) for p-values > 0 to obtain all p-values larger than 0 but smaller than 0.05.
-
-> ### {% icon hands_on %} Hands-on: filter differentially abundant proteins
->
-> 1. {% tool [Filter](Filter1) %} with the following parameters:
->    - {% icon param-file %} *"Filter"*: `metastasized filtered` (output of **Filter** {% icon tool %}, first file with the 'metastasized' tag)
->    - *"With following condition"*: `c8>0`
->    - *"Number of header lines to skip"*: `1`
-> 2. {% tool [Cut](Cut1) %} with the following parameters:
->    - *"Cut columns"*: `c1`
->    - {% icon param-file %} *"From"*: `metastasized filtered ` (output of last **Filter** {% icon tool %})
-> 3. {% tool [Filter](Filter1) %} with the following parameters:
->    - {% icon param-file %} *"Filter"*: `rdeb filtered` (output of **Filter** {% icon tool %}, first file with the 'rdeb' tag)
->    - *"With following condition"*: `c8>0`
->    - *"Number of header lines to skip"*: `1`
-> 4. {% tool [Cut](Cut1) %} with the following parameters:
->    - *"Cut columns"*: `c1`
->    - {% icon param-file %} *"From"*: `rdeb filtered` (output of last **Filter** {% icon tool %})
-> 5. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2) %} with the following parameters:
+> 6. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2) %} with the following parameters:
 >    - {% icon param-file %} *"1st file"*: `replaced sample quantification matrix` (output of **Replace text** {% icon tool %})
 >    - *"Column to use from 1st file"*: `c1`
 >    - {% icon param-file %} *"2nd File"*: `metastasized cut` (output of **Cut** {% icon tool %})
 >    - *"Column to use from 2nd file"*: `c1`
 >    - *"First line is a header line"*: `Yes`
-> 6. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2) %} with the following parameters:
+> 7. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2) %} with the following parameters:
 >    - {% icon param-file %} *"1st file"*: `replaced sample quantification matrix` (output of **Replace Text** {% icon tool %})
 >    - *"Column to use from 1st file"*: `c1`
 >    - {% icon param-file %} *"2nd File"*: `rdeb cut` (output of **Cut** {% icon tool %})
 >    - *"Column to use from 2nd file"*: `c1`
 >    - *"First line is a header line"*: `Yes`
-> 7. {% tool [Heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.0.1) %} with the following parameters:
+> 8. {% tool [Heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"Input should have column headers - these will be the columns that are plotted"*: `metastasized join` (output of **Join** {% icon tool %})
 >    - *"Plot title"*: `Upregulated proteins in metastasized cSCC`
 >    - *"Enable data clustering"*: `No`
 >    - *"Data scaling"*: `Scale my data by row`
-> 8. {% tool [Heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.0.1) %} with the following parameters:
+> 9. {% tool [Heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"Input should have column headers - these will be the columns that are plotted"*: `rdeb join` (output of **Join** {% icon tool %})
 >    - *"Plot title"*: `Upregulated proteins in RDEB cSCC`
 >    - *"Enable data clustering"*: `No`
@@ -458,7 +436,7 @@ To obtain them we filter the up- and downregulated proteins (p-value <0.05) for 
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. 42 (36 are upregulated in metastasized cSCC and 6 are upregulated in RDEB cSCC)
+> > 1. 95: 84 are upregulated in metastasized cSCC and 11 are upregulated in RDEB cSCC (number of lines minus 1)
 > >
 > {: .solution}
 >
@@ -487,7 +465,6 @@ In addition we retrieve for each Uniprot ID the corresponding protein names from
 >
 {: .hands_on}
 
-Two of the differentially abundant proteins found here were also found and stained with antibodies in the original publication: Collagen XIV which is higher in RDEB cSCC than in metastasizing cSCC and Vitronectin which is higher in metastasizing cSCC than in RDEB cSCC. Vitronectin is an acute phase response protein and a marker of specific changes in the extracellular matrix organization.
-Collagen XIV is a fibril associated collagen which may have tissue stabilizing function in the dermis. The upregulation of collagen XIV could be a compensation effort due to the missing collagen VII in RDEB tissues.
+Three of the differentially abundant proteins found here were also found and stained with antibodies in the original publication: Collagen XIV which is higher in RDEB cSCC than in metastasizing cSCC and Serum amyloid P-component as well as X-ray repair cross-complementing protein 6, which are both higher in metastasizing cSCC than in RDEB cSCC. Collagen XIV is a fibril associated collagen which may have tissue stabilizing function in the dermis. The upregulation of collagen XIV as well as other collagens in RDEB cSCC could be a compensation effort for the impaired collagen VII in RDEB tissues. Collagen VII is indeed only found in some RDEB samples and with such low intensities that it appears as upregulated in metastasized cSCC. 
 
 ![col14 staining](../../images/maxquant-msstats-lfq/col14_ihc.png "Immunoflourescence staining of collagen XIV in RDEB and metastasizing cSCC skin tissues")

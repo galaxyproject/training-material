@@ -108,7 +108,8 @@ We would to extraction the 4 columns previously cited and keep only occurrence r
 With this you can either upload file you've loaded earlier from Galaxy data or you can download data directly from Wallace. Let's use the data from your Galaxy history:
 
 > ### {% icon hands_on %} Hands-on: Launch Wallace
-> 1. Verify your current history is the history containing previous filtered occurences data, then go to https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_wallace and click on execute
+> 1. Verify your current history is the history containing previous filtered occurences data.
+> 2. Open {% tool [Wallace](interactive_tool_wallace) %} in Galaxy or click here to [open the tool](https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_wallace) and click on execute
 > 3. Go to User > Active InteractiveTools, then click on the active InteractiveTool named `Wallace visualisation`
 > 4. In Wallace
 >    0. Due to an issue related to last wallace Docker update, a manual fix is proposed waiting for a better solution. You first have to go to the **5 Partition Occs**, selecting *"Spatial Partition"* then for *"Options available"* selecting `Checkerboard 2 (k=4)` then click on the **Partition** button. This will fix the issue so now you have the *"Aggregation Factor"* displayed. Sorry for the inconvenience.

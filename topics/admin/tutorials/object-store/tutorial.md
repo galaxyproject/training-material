@@ -26,6 +26,10 @@ requirements:
      - ansible-galaxy
 ---
 
+> ### {% icon warning %} Warning: switching object store types will cause issues
+> Do not run this tutorial on your production instance! We will switch between object stores during this tutorial which has serious implications for production servers.
+{: .warning}
+
 # Expanding Storage
 
 {:.no_toc}
@@ -56,18 +60,18 @@ First, note that your Galaxy datasets have been created thus far in the director
 >    ```yaml
 >    galaxy_config:
 >      galaxy:
->        object_store_config_file: {% raw %}"{{ galaxy_config_dir }}/object_store_conf.xml"{% endraw %}
+>        object_store_config_file: {% raw %}"{{ galaxy_config_dir }}/object_store_conf.xml.j2"{% endraw %}
 >    ```
 >
 > 2. In your group variables file, add it to the `galaxy_config_templates` section:
 >
 >    ```yaml
 >    galaxy_config_templates:
->      - src: templates/galaxy/config/object_store_conf.xml
+>      - src: templates/galaxy/config/object_store_conf.xml.j2
 >        dest: {% raw %}"{{ galaxy_config.galaxy.object_store_config_file }}"{% endraw %}
 >    ```
 >
-> 3. Create and edit `templates/galaxy/config/object_store_conf.xml` with the following contents:
+> 3. Create and edit `templates/galaxy/config/object_store_conf.xml.j2` with the following contents:
 >
 >    ```xml
 >    <?xml version="1.0"?>
@@ -124,7 +128,7 @@ Rather than searching a hierarchy of object stores until the dataset is found, G
 
 > ### {% icon hands_on %} Hands-on: Distributed Object Store
 >
-> 1. Edit your `templates/galaxy/config/object_store_conf.xml` file and replace the contents with:
+> 1. Edit your `templates/galaxy/config/object_store_conf.xml.j2` file and replace the contents with:
 >
 >    ```xml
 >    <?xml version="1.0"?>
@@ -259,7 +263,7 @@ we will set up a local S3-compatible object store, and then talk to the API of t
 
 # Dropbox
 
-Dropbox is a well-known cloud storage service where you can store and share files with anyone. 
+Dropbox is a well-known cloud storage service where you can store and share files with anyone.
 As of [20.09](https://github.com/galaxyproject/galaxy/pull/9888), Galaxy has support for a couple of different file storage backends, including NextCloud (via webdavfs) and Dropbox.
 
 This tutorial will help you setup the connection between Galaxy and Dropbox, allowing your users to add their account details and then access their Dropbox data within Galaxy
@@ -308,7 +312,7 @@ This tutorial will help you setup the connection between Galaxy and Dropbox, all
 >    +    file_sources_config_file: "{{ galaxy_config_dir }}/file_sources_conf.yml"
 >    +    user_preferences_extra_conf_path: "{{ galaxy_config_dir }}/user_preferences_extra_conf.yml"
 >       uwsgi:
->         socket: 127.0.0.1:8080
+>         socket: 127.0.0.1:5000
 >         buffer-size: 16384
 >    ```
 >    {% endraw %}
@@ -322,16 +326,13 @@ This tutorial will help you setup the connection between Galaxy and Dropbox, all
 >    @@ -65,6 +67,12 @@ galaxy_config_templates:
 >       - src: templates/galaxy/config/job_conf.xml.j2
 >         dest: "{{ galaxy_config.galaxy.job_config_file }}"
->
+>     
 >    +galaxy_config_files:
 >    +  - src: files/galaxy/config/user_preferences_extra_conf.yml
 >    +    dest: "{{ galaxy_config.galaxy.user_preferences_extra_conf_path }}"
 >    +  - src: files/galaxy/config/file_sources_conf.yml
 >    +    dest: "{{ galaxy_config.galaxy.file_sources_config_file }}"
 >    +
->     # systemd
->     galaxy_systemd_mode: mule
->     galaxy_zergpool_listen_addr: 127.0.0.1:8080
 >    ```
 >    {% endraw %}
 >

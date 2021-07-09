@@ -693,4 +693,4 @@ Congratulations, you finished this tutorial! You learned how to annotate an euka
 
 After generating your annotation, you will probably want to automatically assign functional annotation to each predicted gene model. You can do it by using Blast, InterProScan, or Blast2GO for example.
 
-An automatic annotation of an eukaryotic genome is rarely perfect. If you inspect some predicted genes, you will probably find some mistakes made by Maker, e.g. wrong exon/intron limits, splitted genes, or merged genes. Setting up a manual curation project using [Apollo](http://genomearchitect.org/) helps a lot to manually fix these errors.
+An automatic annotation of an eukaryotic genome is rarely perfect. If you inspect some predicted genes, you will probably find some mistakes made by Maker, e.g. wrong exon/intron limits, splitted genes, or merged genes. Setting up a manual curation project using [Apollo](http://genomearchitect.org/) helps a lot to manually fix these errors. Check out the [Apollo tutorial]({% link topics/genome-annotation/tutorials/apollo/tutorial.md %}) for more details.

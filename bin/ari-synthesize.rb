@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require 'cgi'
 require 'json'
+require 'yaml'
 require 'optparse'
 require 'fileutils'
 require 'open3'
@@ -8,16 +9,73 @@ require 'tempfile'
 require 'digest'
 require 'tmpdir'
 
+PUNCTUATION = ['-', '--', '@', '%', '‘', '’', ',', '!', '(', ')', '.', "'", '"', '[', ']', ';', ':']
+ARI_MAP = File.expand_path(File.join(__dir__, 'ari-map.yml'))
+WORD_MAP = {}
+YAML.load_file(ARI_MAP).each_pair do |k,v|
+ WORD_MAP.merge!({k.downcase => v})
+end
+
 GTN_CACHE = File.expand_path(File.join(File.expand_path(__dir__), '..', '.jekyll-cache', 'speech'))
-AWS_PARAMS = ["--engine", "neural", "--language-code", "en-GB", "--voice-id", "Amy"]
 FileUtils.mkdir_p GTN_CACHE
 
-def call_engine(engine, line, mp3)
+def translate(word)
+  if /^\s+$/.match(word)
+    return word
+  end
+
+  if PUNCTUATION.find_index(word) then
+    return word
+  end
+
+  if WORD_MAP.key?(word) then
+    return WORD_MAP[word]
+  end
+
+  m = /([^A-Za-z0-9]*)([A-Za-z0-9]+)([^A-Za-z0-9]*)(.*)/.match(word)
+
+  if ! m then
+    puts "Error: #{word}"
+    return word
+  end
+
+  if m[2] then
+    fixed = WORD_MAP.fetch(m[2].downcase, m[2])
+  else
+    fixed = m[2]
+  end
+
+  #puts "#{m} ⇒ #{m[1] + fixed + m[3]}"
+  return m[1] + fixed + m[3] + m[4]
+end
+
+def correct(uncorrected_line)
+  # First we try and catch the things we can directly replace (esp usegalaxy.*)
+  line = uncorrected_line.strip.split(' ').map{ |w|
+    translate(w)
+  }.join(' ')
+
+  # Now we do more fancy replacements
+  line = line.strip.split(/([ ‘’,'".:;!`()])/).reject(&:empty?).compact.map{ |w|
+    translate(w)
+  }.join('')
+  line
+end
+
+def call_engine(engine, line, mp3, voice, lang, neural)
   if engine == "aws" then
+    if neural then
+      awseng = 'neural'
+    else
+      awseng = 'standard'
+    end
+
     # Synthesize
-    _, stderr, err = Open3.capture3('aws', 'polly', 'synthesize-speech', *AWS_PARAMS, '--output-format', 'mp3', '--text', line, mp3)
+    args = ['aws', 'polly', 'synthesize-speech', "--engine", awseng, "--language-code", lang, "--voice-id", voice, '--output-format', 'mp3', '--text', line, mp3]
+    _, stderr, err = Open3.capture3(*args)
     if err.exited? and err.exitstatus > 0
       puts "ERROR: #{stderr}"
+      puts "ERROR: #{err}"
       exit 1
     end
   elsif engine == "mozilla" then
@@ -43,17 +101,18 @@ def find_duration(mp3)
   return duration
 end
 
-def synthesize(line, engine)
-  digest = Digest::MD5.hexdigest line
-  mp3 = File.join(GTN_CACHE, "#{engine}-#{digest}.mp3")
-  json = File.join(GTN_CACHE, "#{engine}-#{digest}.json")
+def synthesize(uncorrected_line, engine, voice: "Amy", lang: "en-GB", neural: true)
+  line = correct(uncorrected_line)
+  digest = Digest::MD5.hexdigest uncorrected_line
+  mp3 = File.join(GTN_CACHE, "#{engine}-#{digest}-#{voice}.mp3")
+  json = File.join(GTN_CACHE, "#{engine}-#{digest}-#{voice}.json")
   if File.file?(mp3)
     duration = JSON.parse(File.open(json, 'r').read)['end']
     return mp3, json, duration.to_f
   end
 
   # Call our engine
-  call_engine(engine, line, mp3)
+  call_engine(engine, line, mp3, voice, lang, neural)
   duration = find_duration(mp3)
 
   if line.length < 200 && duration > 27
@@ -95,12 +154,28 @@ def parseOptions
   OptionParser.new do |opts|
     opts.banner = "Usage: ari-synthesize.rb [options]"
 
+    options[:neural] = true
+    options[:voice] = 'Amy'
+    options[:lang] = 'en-GB'
+
     opts.on("--aws", "Use AWS Polly") do |v|
       options[:aws] = v
     end
 
     opts.on("--mozilla", "Use MozillaTTS") do |v|
       options[:mozilla] = v
+    end
+
+    opts.on("--non-neural", "[AWS] Non-neural voice") do |v|
+      options[:neural] = false
+    end
+
+    opts.on("--voice=VOICE", "[AWS] Voice ID") do |n|
+      options[:voice] = n
+    end
+
+    opts.on("--lang=LANG", "[AWS] Language code") do |n|
+      options[:lang] = n
     end
 
     opts.on("-fFILE", "--file=FILE", "File containing line of text to speak") do |n|
@@ -129,11 +204,11 @@ def parseOptions
     engine = 'mozilla'
   end
 
-  return sentence, engine
+  return sentence, engine, options
 end
 
 if __FILE__ == $0
-  sentence, engine = parseOptions()
-  mp3, _ = synthesize(sentence, engine)
+  sentence, engine, options = parseOptions()
+  mp3, _ = synthesize(sentence, engine, voice: options[:voice], lang: options[:lang], neural: options[:neural])
   puts mp3
 end

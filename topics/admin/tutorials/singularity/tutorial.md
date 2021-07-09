@@ -62,36 +62,58 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >
 > 1. In your working directory, add the Singularity role to your `requirements.yml` file:
 >
->    ```yaml
->    - src: cyverse-ansible.singularity
->      version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
->    - src: gantsign.golang
->      version: 2.6.3
+>    {% raw %}
+>    ```diff
+>    --- a/requirements.yml
+>    +++ b/requirements.yml
+>    @@ -12,3 +12,7 @@
+>       version: 0.3.0
+>     - src: usegalaxy_eu.certbot
+>       version: 0.1.5
+>    +- src: cyverse-ansible.singularity
+>    +  version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
+>    +- src: gantsign.golang
+>    +  version: 2.6.3
+>    {% endraw %}
 >    ```
+>    {: data-commit="Add golang and singulary ansible roles"}
 >
 > 2. Install the requirements with `ansible-galaxy`:
 >
->    ```console
->    ansible-galaxy role install -p roles -r requirements.yml
->    ```
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > ansible-galaxy install -p roles -r requirements.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
 >
 > 4. Specify which version of Singularity you want to install, in `group_vars/galaxyservers.yml`:
 >
 >    {% raw %}
->    ```yaml
->    # Golang
->    golang_gopath: '/opt/workspace-go'
->    # Singularity target version
->    singularity_version: "3.7.0"
->    singularity_go_path: "{{ golang_install_dir }}"
->    ```
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -122,3 +122,9 @@ nginx_conf_http:
+>     nginx_ssl_role: usegalaxy_eu.certbot
+>     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
+>     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
+>    +
+>    +# Golang
+>    +golang_gopath: '/opt/workspace-go'
+>    +# Singularity target version
+>    +singularity_version: "3.7.4"
+>    +singularity_go_path: "{{ golang_install_dir }}"
 >    {% endraw %}
+>    ```
+>    {: data-commit="Configure golang and singularity"}
+>
 > 4. Add the new roles to your `galaxy.yml` playbook, before the Galaxy server itself. We'll do this bceause it's a dependency of Galaxy to run, so it needs to be there before Galaxy starts.
 >
+>    {% raw %}
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -16,6 +16,8 @@
+>    @@ -14,6 +14,8 @@
 >           become: true
 >           become_user: postgres
 >         - geerlingguy.pip
@@ -100,14 +122,17 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >         - galaxyproject.galaxy
 >         - role: uchida.miniconda
 >           become: true
+>    {% endraw %}
 >    ```
+>    {: data-commit="Add the roles to the playbook"}
 >
 > 5. Run the playbook
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
+>    > {: data-cmd="true"}
 >    {: .code-in}
 >
 > 6. Singularity should now be installed on your Galaxy server. You can test this by connecting
@@ -152,8 +177,8 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -28,6 +28,7 @@ miniconda_manage_dependencies: false
->
+>    @@ -29,6 +29,8 @@ miniconda_manage_dependencies: false
+>     
 >     galaxy_config:
 >       galaxy:
 >    +    dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
@@ -161,53 +186,71 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >         brand: "🧬🔬🚀"
 >         admin_users: admin@example.org
 >         database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
->    @@ -65,6 +66,11 @@ galaxy_config_templates:
+>    @@ -89,6 +91,12 @@ galaxy_config:
 >     galaxy_config_templates:
 >       - src: templates/galaxy/config/job_conf.xml.j2
 >         dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    +  - src: templates/galaxy/config/container_resolvers_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
->
+>    +
 >    +galaxy_config_files:
->    + - src: files/galaxy/config/dependency_resolvers_conf.xml
->    +   dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
->    ```
+>    +- src: files/galaxy/config/dependency_resolvers_conf.xml
+>    +  dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
+>     
+>     # systemd
+>     galaxy_manage_systemd: yes
 >    {% endraw %}
+>    ```
+>    {: data-commit="Configure the container and dependency resolvers"}
 >
 > 2. Create the `files/galaxy/config` directory if it doesn't exist:
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > mkdir -p files/galaxy/config
 >    > ```
+>    > {: data-cmd="true"}
 >    {: .code-in}
 >
 > 3. Create the new file `files/galaxy/config/dependency_resolvers_conf.xml`. This will not enable any dependency resolvers like the legacy toolshed packages or Galaxy packages, and instead everything will be resolved through Singularity.
 >
->    ```xml
->    <dependency_resolvers>
->    </dependency_resolvers>
+>    {% raw %}
+>    ```diff
+>    --- /dev/null
+>    +++ b/files/galaxy/config/dependency_resolvers_conf.xml
+>    @@ -0,0 +1,2 @@
+>    +<dependency_resolvers>
+>    +</dependency_resolvers>
+>    {% endraw %}
 >    ```
+>    {: data-commit="Configure the dependency resolvers"}
 >
 > 3. Create the new file `templates/galaxy/config/container_resolvers_conf.xml.j2`, this specifies the order in which to attempt container resolution.
 >
 >    {% raw %}
->    ```xml
->    <containers_resolvers>
->      <explicit_singularity />
->      <cached_mulled_singularity cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
->      <mulled_singularity auto_install="False" cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
->      <build_mulled_singularity auto_install="False" cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
->    </containers_resolvers>
->    ```
+>    ```diff
+>    --- /dev/null
+>    +++ b/templates/galaxy/config/container_resolvers_conf.xml.j2
+>    @@ -0,0 +1,6 @@
+>    +<containers_resolvers>
+>    +  <explicit_singularity />
+>    +  <cached_mulled_singularity cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
+>    +  <mulled_singularity auto_install="False" cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
+>    +  <build_mulled_singularity auto_install="False" cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
+>    +</containers_resolvers>
 >    {% endraw %}
+>    ```
+>    {: data-commit="Configure the container resolver"}
 >
 > 3. Now, we want to make Galaxy run jobs using Singularity. Modify the file `templates/galaxy/config/job_conf.xml.j2`, by adding the `singularity_enabled` parameter:
 >
+>    {% raw %}
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.xml.j2
 >    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -3,7 +3,9 @@
+>    @@ -2,8 +2,17 @@
+>         <plugins workers="4">
+>             <plugin id="local_plugin" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
 >         </plugins>
 >    -    <destinations default="local_destination">
 >    +    <destinations default="singularity">
@@ -224,14 +267,17 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >         </destinations>
 >         <tools>
 >         </tools>
+>    {% endraw %}
 >    ```
+>    {: data-commit="Update the job_conf.xml with singularity destination"}
 >
 > 4. Re-run the playbook
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
+>    > {: data-cmd="true"}
 >    {: .code-in}
 >
 > 5. In your Galaxy admin interface, install the minimap2 tool.
@@ -279,6 +325,12 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    {: .code-out.code-max-300}
 >
 {: .hands_on}
+
+> ```bash
+> 1-run-minimap2.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
 
 > ### {% icon comment %} Manage dependencies menu
 > You can manually pull one or many containers for tools in the admin menu. Go to the admin menu, click Manage Dependencies and select the Containers tab. This will list all tools, their dependencies and whether containers are already pulled or can be pulled on demand.
@@ -333,4 +385,12 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
 >
 {: .hands_on}
 
+> ```bash
+> 1-run-minimap2.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
+
 -->
+
+{% snippet topics/admin/faqs/missed-something.md step=2 %}

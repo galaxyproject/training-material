@@ -125,8 +125,6 @@ As per many of the tutorials, we will use Ansible to setup and manage our Jenkin
 >    - matrix-auth
 >    ```
 >
->    We need to set the port because it defaults to `8080` and Galaxy currently listens on port 8080.
->
 > 6. Run the build server playbook:
 >
 >    ```
@@ -358,7 +356,7 @@ Plugins also regularly receive updates due to security issues. You should either
 
 ```bash
 #!/bin/bash
-ARGS="-jar /opt/jenkins-cli.jar -s http://localhost:8080/ -auth user:password"
+ARGS="-jar /opt/jenkins-cli.jar -s http://localhost:4000/ -auth user:password"
 UPDATE_LIST=$(java $ARGS list-plugins | grep ')$' | awk '{print $1}')
 
 if [ ! -z "${UPDATE_LIST}" ]; then

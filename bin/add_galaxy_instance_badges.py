@@ -13,8 +13,11 @@ DRY_RUN = False
 def discover_trainings(topics_dir):
     """Auto-discover all topic metadata files."""
     for training_dir in glob.glob(os.path.join(topics_dir, '*')):
+        metadata_file = os.path.join(training_dir, 'metadata.yaml')
+        if not os.path.exists(metadata_file):
+            continue
 
-        with open(os.path.join(training_dir, 'metadata.yaml'), 'r') as handle:
+        with open(metadata_file, 'r') as handle:
             training_data = yaml.load(handle)
 
         training = {

@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Running the Galaxy Training material website locally"
+title: "Running the GTN website locally"
 questions:
   - "How to setup the infrastructure to build training webpages?"
 objectives:
@@ -46,7 +46,11 @@ We also need to make sure that a couple of other utilities and build requirement
 > ### {% icon hands_on %} Hands-on: Install the requirements
 >
 > 1. Open a Terminal
-> 2. Use your package manager to install `git`, `curl` and `make`. For Debian/Ubuntu: `sudo apt update && sudo apt install git curl make`. For Fedora/CentOs/RedHat: `sudo yum install git curl make`.
+> 2. Use your package manager to install `git`, `curl` and `make`
+>
+>    - For Debian/Ubuntu: `sudo apt update && sudo apt install git curl make`
+>    - For Fedora/CentOs/RedHat: `sudo yum install git curl make`
+>
 > 3. (If not done yet) Clone the training material GitHub repository: `git clone https://github.com/galaxyproject/training-material.git`
 > 4. Navigate to the `training-material/` folder with `cd`
 > 5. Set up the conda environment

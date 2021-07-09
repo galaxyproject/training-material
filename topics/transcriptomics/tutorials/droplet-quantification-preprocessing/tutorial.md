@@ -454,14 +454,14 @@ Fantastic! Now that our matrix is combined into an object, specifically the Sing
 > How many cell barcodes remain after the emptyDrops treatment? Why might that be?
 >
 >   > ### {% icon tip %} Hint
->   > If you click on the `Stringent-Object` in the {% icon galaxy-history %} history, the text in that window says `22 barcodes`. Why is this so low??
+>   > If you click on the `Stringent-Object` in the {% icon galaxy-history %} history, the text in that window says `22 barcodes` or something similar to that. Why is this so low?? And why might the number be different?
 >   > Consider...is this a complete set of data?
 >   {: .tip}
 >
 >
 > > ### {% icon solution %} Solution
 > >
-> > Remember this is a subsampled dataset. If you look carefully at the parameters of emptyDrops, you'll see it set a minimum threshold at 100 UMI. If you look at the barcode plots above for the 400k read sample, you'll see this is far too stringent for this subsampled data! To satisfy your curiosity, this minimum threshold would yield `3011` barcodes for the total sample.
+> > Remember this is a subsampled dataset. If you look carefully at the parameters of emptyDrops, you'll see it set a minimum threshold at 100 UMI. If you look at the barcode plots above for the 400k read sample, you'll see this is far too stringent for this subsampled data! To satisfy your curiosity, this minimum threshold would yield `3011` barcodes for the total sample. Also, the number may vary slightly as the output depends on a large number of random iterations.
 > >
 > {: .solution}
 >
@@ -529,8 +529,6 @@ This sample was originally one of seven. So to run the other [12 downsampled FAS
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->
 > 3. Rename the datasets
 > 4. Check that the datatype is `h5ad`, otherwise you will need to change each file to `h5ad`!
 >
@@ -540,7 +538,7 @@ This sample was originally one of seven. So to run the other [12 downsampled FAS
 
 Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows you how each `N70X` corresponds to a sample, and whether that sample was from a male or female. This will be important metadata to add to our sample, which we will add very similarly to how you added the `gene_name` and `mito` metadata above!
 
-## Concatenating Objects
+## Concatenating objects
 > ### {% icon hands_on %} Hands-on: Concatenating AnnData objects
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0){% icon tool %} with the following parameters:

@@ -294,7 +294,7 @@ Este nuevo historial todavía no tiene datos.
 >
 >	Esto generará una copia del conjunto de datos en tu historial nuevo (sin utilizar espacio de disco adicional)
 >
-> 3. Haz clic en **Analyze Data** en la parte superior para regresar a la ventana de análisis
+> 3. Haz clic en el icono {% icon galaxy-home %} (o en **Analyze Data** en versiones anteriores de Galaxy) en la parte superior para regresar a la ventana de análisis
 >
 > ![Copy a dataset between histories](../../images/copy-dataset.gif "Copia un conjunto de datos arrastrándolo de un historial a otro")
 >

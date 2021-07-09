@@ -44,7 +44,7 @@ subtopic: analyse
 
 # RStudio
 
-## Opening up RStudio
+Opening up {% tool [RStudio](interactive_tool_rstudio) %} in Galaxy is easy:
 
 {% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
 
