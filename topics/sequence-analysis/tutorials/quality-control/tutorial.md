@@ -545,7 +545,7 @@ We tried to explain here there different FastQC reports and some use cases. More
 {: .comment}
 
 
-## Trim and filter
+# Trim and filter
 
 The quality drops in the middle of these sequences. This could cause bias in downstream analyses with these potentially incorrectly called nucleotides. Sequences must be treated to reduce bias in downstream analysis. Trimming can help to increase the number of reads the aligner or assembler are able to succesfully use, reducing the number of reads that are unmapped or unassembled. In general, quality treatments include:
 
