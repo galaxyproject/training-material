@@ -520,7 +520,7 @@ The BAM file contains information for all our reads, making it difficult to insp
 > > 2. {% tool [Gene Body Coverage (BAM)](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3) %}:
 > >    - *"Run each sample separately, or combine mutiple samples into one plot"*: `Run each sample separately`
 > >      - {% icon param-files %} *"Input .bam file"*: `mapped.bam` files (outputs of **RNA STAR**)
-> >    - *"Reference gene model"*: BED12 file (output **Convert GTF to BED12**)
+> >    - *"Reference gene model"*: BED12 file (output of **Convert GTF to BED12**)
 > >
 > > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7) %} to aggregate the idxstats logs:
 > >    - In *"Results"*
@@ -651,12 +651,11 @@ Another option is to estimate these parameters with a tool called **Infer Experi
 
 > ### {% icon hands_on %} Hands-on: Determining the library strandness
 >
-> 1. {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} to convert the GTF file to BED:
->    - {% icon param-file %} *"GTF File to convert"*: `Drosophila_melanogaster.BDGP6.87.gtf`
+> We use the `BED12` file which we already converted from the `Drosophila_melanogaster.BDGP6.87.gtf` dataset earlier.
 >
-> 2. {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} to determine the library strandness with:
+> 1. {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} to determine the library strandness with:
 >    - {% icon param-files %} *"Input .bam file"*: `mapped.bam` files (outputs of **RNA STAR**)
->    - {% icon param-file %} *"Reference gene model"*: BED12 file (output **Convert GTF to BED12**)
+>    - {% icon param-file %} *"Reference gene model"*: BED12 file (output of the **Convert GTF to BED12** tool)
 >    - *"Number of reads sampled from SAM/BAM file (default = 200000)"*: `200000`
 >
 {: .hands_on}
@@ -1269,7 +1268,14 @@ correction for the variability due to the 2nd factor. In our current case, treat
 > {: .solution}
 {: .question}
 
-<!-- some more explanation of p-values would be nice - I think this is a really confusing topic, more so than PCA... -->
+> ### {% icon tip %} Tip: What are p-values and what are they used for?
+> The p-value is a measure often used to determine whether or not a particular observation possesses statistical significance. Strictly speaking, the p-value is the probability that the data could have arisen randomly, assuming that the null hypothesis is correct. In the concrete case of RNA-Seq, the null hypothesis is that there is no differential gene expression. So a p-value of 0.13 for a particular gene indicates that, for that gene, assuming it is not differentially expressed, there is a 13% chance that any apparent differential expression could simply be produced by random variation in the experimental data.
+>
+> 13% is still quite high, so we cannot really be confident differential gene expression is taking place. The most common way that scientists use p-values is to set a threshold (commonly 0.05, sometimes other values such as 0.01) and reject the null hypothesis only for p-values below this value. Thus, for genes with p-values less than 0.05, we can feel safe stating that differential gene expression plays a role. It should be noted that any such threshold is arbitrary and there is no meaningful difference between a p-value of 0.049 and 0.051, even if we only reject the null hypothesis in the first case.
+>
+> Unfortunately, p-values are often heavily misused in scientific research, enough so that Wikipedia provides a [dedicated article](https://en.wikipedia.org/wiki/Misuse_of_p-values) on the subject. See also [this article](https://fivethirtyeight.com/features/not-even-scientists-can-easily-explain-p-values/) (aimed at a general, non-scientific audience).
+{: .tip}
+
 
 ## Extraction and annotation of differentially expressed genes
 
@@ -1299,7 +1305,7 @@ Now we would like to extract the most differentially expressed genes due to the 
 >    > The file with the independently filtered results can be used for further downstream analysis as it excludes genes with only a few read counts, as these genes will not be considered as significantly differentially expressed.
 >    {: .comment}
 >
->    We will now select only the genes with an absolute fold change (FC) > 1.
+>    We will now select only the genes with an absolute fold change (FC) > 2. Note that the DESeq2 output file contains $$log_{2} FC$$, rather than FC itself, so we filter for $$abs(log_{2} FC) > 1$$ (which implies FC > 2).
 >
 > 3. {% tool [Filter](Filter1) %} to extract genes with an $$abs(log_{2} FC) > 1$$:
 >    - {% icon param-file %} *"Filter"*: `Genes with significant adj p-value`
@@ -1317,8 +1323,6 @@ Now we would like to extract the most differentially expressed genes due to the 
 >    {: .question}
 >
 {: .hands_on}
-
-<!-- FC > 1 or > 2? I assumed this was a mistake so changed it. If not, a sentence of explanation would be good -->
 
 We now have a table with 130 lines corresponding to the most differentially expressed genes. For each gene, we have its ID, its mean normalized counts (averaged over all samples from both conditions), its $$log_{2} FC$$ and other information.
 
@@ -1385,7 +1389,7 @@ The annotated table contains no column names, which makes it difficult to read. 
 >       - Click on {% icon param-repeat %} *"Insert Dataset"*
 >         - {% icon param-file %} *"select"*: output of **Annotate**
 >
-> 3. Rename the output to `Genes with significant adj p-value & abs(FC) > 1`
+> 3. Rename the output to `Genes with significant adj p-value & abs(FC) > 2`
 {: .hands_on}
 
 
