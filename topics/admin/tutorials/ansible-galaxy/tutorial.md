@@ -2422,7 +2422,7 @@ It may seem daunting to use ansible, but you don't have to do everything in ansi
 
 A common question we get is:
 
-> Is it possible to transform a galaxy cluster which was installed by hand, into an ansible-managed one?
+> Is it possible to transform a Galaxy server which was installed by hand, into an ansible-managed one?
 {: .quote}
 
 Because of the great variance between sites and deployments it is not really possible to produce a guide for doing so. However, if you back your current deployment up and set all of the variables that control paths appropriately, it can be done!
