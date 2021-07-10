@@ -94,15 +94,15 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >     miniconda_version: 4.7.12
 >     miniconda_manage_dependencies: false
->    @@ -125,6 +126,8 @@ galaxy_config_templates:
->         dest: "{{ galaxy_config.galaxy.job_config_file }}"
->       - src: templates/galaxy/config/container_resolvers_conf.xml.j2
->         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
+>    @@ -129,6 +130,8 @@ galaxy_config_templates:
+>         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
+>       - src: templates/galaxy/config/tool_destinations.yml
+>         dest: "{{ galaxy_config.galaxy.tool_destinations_config_file }}"
 >    +  - src: templates/galaxy/config/reports.yml
 >    +    dest: "{{ galaxy_reports_path }}"
 >     
->     galaxy_config_files:
->     - src: files/galaxy/config/tool_destinations.yml
+>     galaxy_local_tools:
+>     - testing.xml
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy reports config to the config directory"}
@@ -114,7 +114,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -144,6 +144,7 @@ galaxy_dynamic_job_rules:
+>    @@ -142,6 +142,7 @@ galaxy_dynamic_job_rules:
 >     
 >     # systemd
 >     galaxy_manage_systemd: yes
@@ -166,5 +166,5 @@ The reports application is included with the Galaxy codebase and this tutorial a
 {: .hidden}
 
 > ### {% icon comment %} Insecure!
-> But notice that your Reports server is not secured! Check out the [External Authentication]({% link topics/admin/tutorials/reports/tutorial.md %}) tutorial for information on securing Reports.
+> But notice that your Reports server is not secured! Check out the [External Authentication]({% link topics/admin/tutorials/external-auth/tutorial.md %}) tutorial for information on securing Reports.
 {: .comment}
