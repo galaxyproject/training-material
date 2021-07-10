@@ -128,7 +128,7 @@ Now, let's read the file with the annotated differentially expressed genes that 
 >    https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular
 >    ```
 > 2. Remember the dataset number (e.g. `2` in the example below)
->    ![](../../images/rna-seq-counts-to-viz-in-r/dataset_number.png)
+>    ![todo](../../images/rna-seq-counts-to-viz-in-r/dataset_number.png)
 >
 {: .hands_on}
 -->
