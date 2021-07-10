@@ -234,7 +234,7 @@ The generated tutorial is structured with:
 {: .hands_on}
 
 ## Adding images with captions
-To add an image in Markdown file, we need to use the markdown syntax for this: `![](../../images/image.png)`.
+To add an image in Markdown file, we need to use the markdown syntax for this: `![proper alt text describing the image for visually impaired learners](../../images/image.png)`.
 
 We have also added a small plugin to handle captions for each image:
 

@@ -17,10 +17,16 @@ layout: base
 			</div>
 			<div class="row">
 				<div class="col-sm-6">
-					<h3>Transcript</h3>
+					<b>Transcript</b>
 				</div>
-				<div class="col-sm-6" id="transcript-edit">
-					Edit
+				<div class="col-sm-2" id="transcript-edit">
+					Edit Source Slide
+				</div>
+				<div class="col-sm-2" id="source-slides">
+					View Slides
+				</div>
+				<div class="col-sm-2" id="transcript-plain">
+					View Plain Text
 				</div>
 			</div>
 			<div class="row" id="transcript">
@@ -57,7 +63,9 @@ player.innerHTML = `
 	<track label="English" kind="captions" srclang="en" src="${vtt}" default>
 `;
 
-document.getElementById("transcript-edit").innerHTML = `<a href="https://github.com/galaxyproject/training-material/edit/main/topics/${videoid}.html">Found a typo? Edit</a>`
+document.getElementById("transcript-edit").innerHTML = `<a href="https://github.com/galaxyproject/training-material/edit/main/topics/${videoid}.html">Edit Source Slide</a>`
+document.getElementById("source-slides").innerHTML = `<a href="https://training.galaxyproject.org/training-material/topics/${videoid}.html">View Slides</a>`
+document.getElementById("transcript-plain").innerHTML = `<a href="https://training.galaxyproject.org/training-material/topics/${videoid}-plain.html">View Plain Text</a>`
 
 if(seekTo !== null){
 	if(seekTo.indexOf(":") > -1){
