@@ -1,4 +1,4 @@
-> #### Advanced Topic: Using the Rule Based Uploader
+> ## Advanced Topic: Using the Rule Based Uploader
 > 
 > Galaxy has a tool, the Rule Based Uploader (RBU), that makes it easier to organise and upload many datasets. We can use this tool in two steps:
 > 

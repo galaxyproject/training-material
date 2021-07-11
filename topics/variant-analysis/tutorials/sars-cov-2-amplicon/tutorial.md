@@ -4,22 +4,43 @@ layout: tutorial_hands_on
 title: SARS-CoV-2 ARTIC sequence analysis
 zenodo_link: 'https://zenodo.org/record/4944064'
 questions:
-- Which biological questions are addressed by the tutorial? Change this here
-- Which bioinformatics techniques are important to know for this type of data?
+- What is genomic epidemiology and what can we discover from SARS-CoV-2 whole genome sequence (WGS) data?
+- What do we mean by genetic variation, and how do we find variations in SARS-CoV-2 genomic data?
+- What are SARS-CoV-2 clades and lineages, and how can we assign SARS-CoV-2 genomic samples to clades and lineage?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+- How to apply bioinformatics tools to identify variants from SARS-CoV-2 WGS data
+- Know what Nextstrain clades and PANGO lineages are in the context of SARS-CoV-2
+- Apply the nextclade and pangolin tools to assign SARS-CoV-2 lineages and clades
+- Understand how to identify the clades and lineages that SARS-CoV-2 WGS samples belong to
+- What quality control steps to apply when analysing SARS-CoV-2 WGS data
+keywords:
+-SARS-CoV-2, genome, variants
 time_estimation: 3H
+requirements:
+- 
+  type: "internal"
+  topic_name: "introduction"
+  tutorials:
+  - galaxy-intro-101
+-
+  type: "internal"
+  topic_name: sequence-analysis
+  tutorials:
+  - quality-control
+  - mapping
+-
+  type: "internal"
+  topic_name: galaxy-interface
+  tutorials:
+  - get-data
+  - collections
 key_points:
 - The take-home messages
 - They will appear at the end of the tutorial
 contributors:
 - pvanheus
 - mudiboevans
+- abright087 
 
 ---
 
@@ -40,27 +61,6 @@ contributors:
 > {:toc}
 >
 {: .agenda}
-
-# Title for your first section
-
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
-
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
-
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
 
 ## Get data
 
