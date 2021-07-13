@@ -270,15 +270,15 @@ This tutorial will help you setup the connection between Galaxy and Dropbox, all
 
 > ### {% icon hands_on %} Hands-on: Configure Galaxy to access the Dropbox service
 >
-> 1. If the folder does not exist, create `files/galaxy/config` next to your `galaxy.yml` playbook.
+> 1. If the folder does not exist, create `templates/galaxy/config` next to your `galaxy.yml` playbook.
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```
->    > mkdir -p files/galaxy/config
+>    > mkdir -p templates/galaxy/config
 >    > ```
 >    {: .code-in}
 >
-> 2. Create `files/galaxy/config/file_sources_conf.yml` with the following contents:
+> 2. Create `templates/galaxy/config/file_sources_conf.yml` with the following contents:
 >
 >    ```yaml
 >    - type: dropbox
@@ -287,7 +287,7 @@ This tutorial will help you setup the connection between Galaxy and Dropbox, all
 >      doc: Your Dropbox files - configure an access token via the user preferences
 >      accessToken: ${user.preferences.get('dropbox|access_token', '') if $user.preferences else ''}
 >    ```
-> 3. Create `files/galaxy/config/user_preferences_extra_conf.yml` with the following contents:
+> 3. Create `templates/galaxy/config/user_preferences_extra_conf.yml` with the following contents:
 >
 >    ```yaml
 >    preferences:
