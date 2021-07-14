@@ -12,7 +12,10 @@ objectives:
   - "Learn how histories can be used, published, and re-used."
 time_estimation: "1H"
 key_points:
-  - "TODO"
+  - "Galaxy provides an easy way to load published data into a Galaxy history"
+  - "Galaxy allows to re-run a published Galaxy workflow!
+  - "Galaxy provides an easy way to re-run tasks from histories"
+  - "Galaxy provides ways to use, publish and re-use Galaxy histories" 
 contributors:
   - foellmelanie
   - annefou
@@ -46,7 +49,7 @@ Many different Galaxy servers exist. Some are public, some are private, some foc
 
 > ### {% icon hands_on %} Hands-on: Log in or register
 > 1. Open your favorite browser (Chrome/Chromium, Safari or Firefox, but not Internet Explorer/Edge!)
-> 2. Browse to a [Galaxy instance](https://galaxyproject.org/use/) of your choice
+> 2. Browse to the [Galaxy Europe instance](https://usegalaxy.eu/) of your choice
 > 3. Choose *Login or Register* from the navigation bar at the top of the page
 > 4. If you have previously registered an account with this particular instance of Galaxy (user accounts are *not* shared between public servers!), proceed by logging in with your registered *public name*, or email address, and your password.
 >
@@ -127,27 +130,27 @@ Each analysis in Galaxy starts by creating a new analysis history and loading da
 > ### {% icon comment %} Different types of datasets
 > Some input datasets might need more specialized treatment than explained here. 
 > Collections contain several single dataset tied together. In case a workflow input requires a collection, you’ll need to build a collection out of your files after uploading them.
-> A specialized training explains how to use collections (https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html ). 
+> [A specialized training explains how to use collections](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html). 
 >
 > {% snippet faqs/galaxy/collections_build_list.md %}
 >
 > A few data files contain more than one subfile. These are uploaded via the composite data function. 
 > TODO: FAQ: Uploading composite data
-> In case you want to run a published Galaxy workflow on your own data, you can find explanations about the options to upload your own data here (https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/get-data/slides.html#1). 
+> In case you want to run a published Galaxy workflow on your own data, you can find explanations about the options to upload your own data [here](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/get-data/slides.html#1). 
 {: .comment}
 
 
 # Import and run a Galaxy workflow
 
-Galaxy workflows may be published either directly via the Galaxy server or on public workflow repositories such as WorkflowHub (https://workflowhub.eu/ ). The workflow may be present one of the three ways: 1) as a .ga file or url link, which needs to be imported into Galaxy, 2) as a link from a personal Galaxy server account that needs to be added to the own Galaxy account, 3) as a link that directly starts running the workflow in a specific Galaxy server. 
+Galaxy workflows may be published either directly via the Galaxy server or on public workflow repositories such as [WorkflowHub](https://workflowhub.eu/). The workflow may be present one of the three ways: 1) as a .ga file or url link, which needs to be imported into Galaxy, 2) as a link from a personal Galaxy server account that needs to be added to the own Galaxy account, 3) as a link that directly starts running the workflow in a specific Galaxy server. 
 
 
 > ### {% icon hands_on %} Import and run workflow available as .ga file or link
 >
-> 1. **Import** the workflow either via url directly from [Zenodo](TODO) or by uploading the .ga file
+> 1. **Import** the workflow either via url directly from [Zenodo](https://doi.org/10.5281/zenodo.5090049) or by uploading the .ga file
 >
 >    ```
->    TODO Zenodo link
+>    https://zenodo.org/record/5090049/files/main_workflow.ga
 >    ```
 >    {% snippet faqs/galaxy/workflows_import.md %}
 >
@@ -197,7 +200,7 @@ Each history item represents one dataset, except when collections are used. Hist
 >
 > 3. **Compare** the `Convert csv to tabular` file with the `Datamash` file side by side
 >
-> 4. **Track** how the `Datamash` results where obtained by clicking on the on the `Datamash` item in the history and then on its i icon (view details). The performed operations can be found in the section `Tool parameters`
+> 4. **Track** how the `Datamash` results where obtained by clicking on the `Datamash` item in the history and then on its `i` icon (view details). The performed operations can be found in the section `Tool parameters`
 >
 {: .hands_on}
 
@@ -206,7 +209,7 @@ Each history item represents one dataset, except when collections are used. Hist
 >
 > 1. What are the different Iris species?
 > 2. How many lines has the `Convert csv to tabular` file?
-> 3. Which column of the  `Remove beginning` file contains sepal length and which petal length?
+> 3. Which column of the `Remove beginning` file contains sepal length and which petal length?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -223,7 +226,7 @@ Each history item represents one dataset, except when collections are used. Hist
 
 # Manipulating the analysis
 
-Maybe you are interested in changing some of the original tool parameters and see how this changes the result. The parameter changes can be either done inside the workflow editor, which makes it easy to change many parameters at once (TODO link workflow training) or directly in the history. To repeat a single analysis step with new parameters this can be done directly in the Galaxy history with the `re-run` option. 
+Maybe you are interested in changing some of the original tool parameters and see how this changes the result. The parameter changes can be either done inside the workflow editor, which makes it easy to change many parameters at once (training on [Using Workflow Parameters](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-parameters/tutorial.html)) or directly in the history. To repeat a single analysis step with new parameters this can be done directly in the Galaxy history with the `re-run` option. 
 
 > ### {% icon hands_on %} Manipulate the analysis steps
 >
@@ -254,7 +257,30 @@ Often not only workflows and raw data are published but also the full Galaxy his
 > 
 {: .hands_on}
 
-TODO: Questions/tasks for this history
+
+> ### {% icon question %} Questions
+>
+> 1. What are the different Cut categories?
+> 2. How many lines has the `diamonds.csv` file?
+> 3. Is the color an important factor for the Diamond price?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1.  The 5 different Cut categories are:
+> >     - Fair
+> >     - Good
+> >     - Ideal
+> >     - Premium
+> >     - Very Good
+> > 
+> > 2. 53940 lines (by clicking on the file one can see the line count under its name)
+> > 
+> > 3. We can create a new scatter plot and use color as a factor. Then, holding carat weight constant, we see on 
+> > the scatter plot that color is linked to the price of the diamond. So color also explains a lot of the variance 
+> > found in price!
+>    {: .question}
+
+
 
 # Conclusion
 {:.no_toc}
