@@ -269,7 +269,7 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 Esta herramienta tomará algo de tiempo para ejecutarse. Alevin produce muchos archivos de salida, no utilizaremos todos estos archivos. Puedes consultar la [documentación de Alevin](https://salmon.readthedocs.io/en/latest/alevin.html) si deseas saber más sobre estos archivos, sin embargo los archivos que más nos interesan son:
 
 * La matriz generada (quants_mat.mtx.gz - el conteo de genes y células)
-* El renglón (célula/código de  barras) los identificadores (quants_mat_rows.txt), y
+* Los identificadores de fila `cell/ barcode` (quants_mat_rows.txt), y
 * La columna (gem) etiquetas (quants_mat_cols.txt).
 
 Este es el parámetro “matrix market” (MTX).
