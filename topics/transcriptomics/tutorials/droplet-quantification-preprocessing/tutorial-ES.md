@@ -82,7 +82,7 @@ Los datos provenientes de metodologías de goteo están constituidos por tres co
 
 
  * [STARsolo](https://github.com/alexdobin/STAR) - una variante del popular método de alineamiento de genoma ‘STAR’ que es específica para el análisis de datos de secuenciación de ARN de células únicas basados en técnicas de goteos (dscRNA-Seq). Produce resultados muy cercanos a los de Cellranger (que a su vez utiliza STAR en parte de sus procesos).
- * [Kallisto/ bustools](https://www.kallistobus.tools/) - desarrollado por los desarrolladores del método de cuantificación de transcriptoma, Kallisto.
+ * [Kallisto/ bustools](https://www.kallistobus.tools/) - desarrollado por los creadores del método de cuantificación de transcriptoma, Kallisto.
  * [Alevin](https://salmon.readthedocs.io/en/latest/alevin.html) - otro método de análisis de transcriptoma desarrollado por los autores de la herramienta ‘Salmon’.
 
 Utilizaremos Alevin {% cite article-Alevin %} con propósitos demostrativos, sin embargo no avalamos algún método en específico.
