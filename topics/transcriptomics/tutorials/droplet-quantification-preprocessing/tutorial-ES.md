@@ -169,7 +169,7 @@ Notarás en tus datos de ejemplo que la anotación de referencia murina se obtuv
 > {: .solution}
 {: .question}
 
-Ahora es tiempo de analizar el archivo GTF utilizando el paquete de R [rtracklayer](https://bioconductor.org/packages/release/bioc/html/rtracklayer.html). Este análisis proporcionará una tabla de conversión con un listado de identificadores de transcritos y sus genes correspondientes para hacer conteos. Adicionalmente, ya que generaremos nuestro propio índice binario (más sobre esto en secciones posteriores), también necesitaremos proporcionar nuestro archivo FASTA para que pueda ser filtrado y que al final solo contenga la información del transcriptoma que está contenida en el archivo GTF.
+Ahora es el momento de analizar el archivo GTF utilizando el paquete de R [rtracklayer](https://bioconductor.org/packages/release/bioc/html/rtracklayer.html). Este análisis proporcionará una tabla de conversión con un listado de identificadores de transcritos y sus genes correspondientes para hacer conteos. Adicionalmente, ya que generaremos nuestro propio índice binario (más sobre esto en secciones posteriores), también necesitaremos proporcionar nuestro archivo FASTA para que pueda ser filtrado y que al final solo contenga la información del transcriptoma que está contenida en el archivo GTF.
 
 > ### {% icon hands_on %} Práctica: Generar un archivo FASTA filtrado y un mapa de correspondencia de transcritos a genes
 >
