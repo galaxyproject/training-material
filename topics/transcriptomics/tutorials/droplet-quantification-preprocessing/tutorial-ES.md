@@ -225,7 +225,7 @@ Ahora podemos ejecutar Alevin. Esta herramienta no aparecerá en las búsquedas 
 >     >   > La documentación sobre ‘Tipos de bibliotecas de fragmentos’ (‘Fragment Library Types‘) de de la herramienta salmón, el ejecutar el comando de Alevin ([salmon.readthedocs.io/en/latest/library_type.html](https://salmon.readthedocs.io/en/latest/library_type.html]) y [salmon.readthedocs.io/en/latest/alevin.html](https://salmon.readthedocs.io/en/latest/alevin.html)) nos serán de ayuda en este caso; aunque ten en cuenta que la imagen ahí se dibuja con el ARN 5’ en la parte superior, mientras que en este protocolo de scRNA-Seq el segmento polyA es capturado por su extremo 3’, y, por lo tanto, efectivamente la hebra inferior o inversa.)
 >     >   {: .tip}
 >     >
->     >   > ### {% icon solution %} Solución: valores de parámetros
+>     >   > ### {% icon solution %} Solución: valores de los parámetros
 >     >   >    - *"Select a reference transcriptome from your history or use a built-in index?"*: `Use one from the history`
 >     >   >       - Vas a generar el índice binario utilizando tu archivo FASTA filtrado
 >     >   >    - {% icon param-file %} *"Transcripts FASTA file"*: `Filtered FASTA`
