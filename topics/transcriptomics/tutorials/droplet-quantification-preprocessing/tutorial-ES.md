@@ -218,7 +218,7 @@ Ahora podemos ejecutar Alevin. Esta herramienta no aparecerá en las búsquedas 
 >
 >     > ### {% icon question %} Preguntas
 >     >
->     > Intenta dar valores a los parámetros de Alevin utilizando lo que sabes al momento.
+>     > Intenta dar valores a los parámetros de Alevin utilizando lo que sabes por el momento.
 >     >
 >     >   > ### {% icon tip %} Tip: Sobre la direccionalidad de las cadenas de RNA (Strandness)
 >     >   >
