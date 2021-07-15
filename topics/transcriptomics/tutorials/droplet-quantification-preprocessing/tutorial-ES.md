@@ -136,7 +136,7 @@ Adicionalmente, necesitarás un transcriptoma (en formato FASTA) contra el cual 
 > >
 > > 1. La lectura 1 (SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k)  contiene el código de barras de la célula y el UMI ya que es significativamente más corta (¡solo 20pb!), en comparación con r_2 que es la lectura más larga de transcrito. Cambiaremos de nombre a estos archivos y los llamaremos N701-Read1 y N701-Read2 para hacer más claro el análisis.
 > > 2. Puedes ver que la lectura 1 solo tiene 20pb de longitud, ya que el código de barras de Drop-Seq es de 12pb de longitud y el UMI de 8pb. ¡Esto es correcto! Pero ten precaución, la tecnología 10x Chromiun (y muchas otras) cambian sus reactivos (y longitudes de cebadores y adaptadores) con el paso del tiempo. En particular, ten esto en cuenta cuando accedas a datos públicos, verifica y asegurate de que estés utilizando los números correctos.
-> > 3. El término ‘N701’ se refiere al índice de la lectura. Esta muestra se corrió junto con otras seis, cada una de ellas se denoto con un índice Nextera (N70X). Posteriormente, esto te proporcionará información del lote que fue corrido. Observa el archivo ‘Diseno experimental’ (‘Experimental design’), notarás que la muestra N701 proviene del timo de neonato macho tipo normal (‘wild-type’).
+> > 3. El término ‘N701’ se refiere al índice de la lectura. Esta muestra se tomó junto con otras seis, cada una de ellas se denotó con un índice Nextera (N70X). Posteriormente, esto te proporcionará información del lote del que provienen. Observa el archivo ‘Diseno experimental’ (‘Experimental design’), notarás que la muestra N701 proviene del timo de neonato macho tipo normal (‘wild-type’).
 > {: .solution}
 {: .question}
 
