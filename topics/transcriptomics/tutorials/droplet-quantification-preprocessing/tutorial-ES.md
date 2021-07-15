@@ -261,7 +261,7 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 > - * “Recobrar todos los archivos de salida”: `Sí``
 {: .comment}
 
-> ### {% icon comment %} ¿Qué sucede si estoy corriendo una muestra 10x??
+> ### {% icon comment %} ¿Qué sucede si estoy procesando una muestra 10x??
 >
 > En Alevin "Protocolo" es el parámetro principal que debe cambiarse para una muestra 10X Chromium. Sólo selecciona los reactivos correspondientes a la química de 10x en lugar de Drop-seq.
 {: .comment}
