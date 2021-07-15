@@ -78,7 +78,7 @@ Los datos provenientes de metodologías de goteo están constituidos por tres co
  * Mapear secuencias biológicas a su genoma o transcriptoma de referencia
  * Eliminar duplicados usando UMIs.
 
- Este solía ser un proceso complejo que involucraba múltiples algoritmos, o que se realizaba con métodos dedicados a tecnologías específicas (como la herramienta ‘Cellranger’ para 10X); pero ahora el proceso es más simple gracias al surgimiento de otros métodos. Al momento de seleccionar una metodología para tu proyecto podrías considerar las siguientes herramientas:
+ Este solía ser un proceso complejo que involucraba múltiples algoritmos, o que se realizaba con métodos dedicados a tecnologías específicas (como la herramienta ‘Cellranger’ para 10X); pero ahora el proceso es más simple gracias al surgimiento de otros métodos. En el momento de seleccionar una metodología para tu proyecto podrías considerar las siguientes herramientas:
 
 
  * [STARsolo](https://github.com/alexdobin/STAR) - una variante del popular método de alineamiento de genoma ‘STAR’ que es específica para el análisis de datos de secuenciación de ARN de células únicas basados en técnicas de goteos (dscRNA-Seq). Produce resultados muy cercanos a los de Cellranger (que a su vez utiliza STAR en parte de sus procesos).
