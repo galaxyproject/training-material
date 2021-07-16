@@ -528,9 +528,9 @@ Ejecutemos de nuevo y cambiemos parámetros; volvamos a ejecutar la herramienta 
 >    - *"UMI count lower bound"*: `5` - aquí puedes usar diversos valores y ver que sucede
 >    - *"Should barcodes estimated to have no cells be removed from the output object?"*: `Yes`
 >
-> 2. Cambiar el nombre {% icon galaxy-pencil %} de la salida `serialised SingleCellExperiment` a `<nombreaquí>UMI-Object`
+> 2. Cambiar el nombre {% icon galaxy-pencil %} de la salida `serialised SingleCellExperiment` a `<pon tu número aquí>UMI-Object`
 >
-> 3. Cambiar el nombre {% icon galaxy-pencil %} de la salida `tabular output` a `<nombreaquí>UMI-Tabular Output`
+> 3. Cambiar el nombre {% icon galaxy-pencil %} de la salida `tabular output` a `<pon tu número aquí>UMI-Tabular Output`
 {: .hands_on}
 
 ¡En este punto debes tener `111` códigos de barras! Ahora tienes una matriz de expresión anotada y lista para los procesos y análisis subsecuentes, ¡Bien hecho! Sin embargo, en los siguientes tutoriales nos vincularemos al uso de una herramienta llamada Scanpy. Por tanto, necesitarás convertir este objeto SingleCellExperiment a un formato llamado `annData`, el cual es una variante de un archivo que utiliza un formato llamado `hdf5`.
