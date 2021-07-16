@@ -311,7 +311,7 @@ La pregunta que buscamos contestar aquí es: “En su mayoría, ¿tenemos una so
 
 ![raw droplet barcode plots-400k](../../images/wab-raw_barcodes-400k.png "Subconjunto de datos crudos, 400k cadenas")
 
-La imagen aquí generada (4000k) no es muy informativa - pero ten en cuenta que tan solo estás manejando una fracción de las lecturas. Si corres la muestra completa (que involucra los mismos pasos mencionados en la parte superior, pero que tardaría mucho más tiempo) obtendrás la imagen siguiente.
+La imagen aquí generada (4000k) no es muy informativa - pero ten en cuenta que tan solo estás manejando una fracción de las lecturas. Si procesas la muestra completa (que involucra los mismos pasos mencionados en la parte superior, pero que tardaría mucho más tiempo) obtendrás la imagen siguiente.
 
 ![raw droplet barcode plots-total](../../images/wab-raw_barcodes-total.png "Muestra completa - 32,579,453 lecturas - datos crudos")
 
