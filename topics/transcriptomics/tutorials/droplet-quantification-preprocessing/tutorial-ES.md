@@ -272,7 +272,7 @@ Esta herramienta tomará algo de tiempo para ejecutarse. Alevin produce muchos a
 * Los identificadores de fila `cell/ barcode` (quants_mat_rows.txt), y
 * Las etiquetas en la columna `gene` (quants_mat_cols.txt).
 
-Este es el parámetro “matrix market” (MTX).
+Este es el formato “matrix market” (MTX).
 
 > ### {% icon question %} Preguntas
 >
