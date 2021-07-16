@@ -468,7 +468,7 @@ Inspecciona {% icon galaxy-eye %} tu tabla `Annotated Gene Table`. ¡Esto es má
 
 # emptyDrops
 
-La herramienta emptyDrops {% cite article-emptyDrops %}  trabaja con un tipo específico de objeto R llamado SingleCellExperiment. Necesitamos convertir nuestros archivos transformados MTX a este tipo de objetos, esto lo haremos utilizando la herramienta Read10x de DropletUtils:
+La herramienta emptyDrops {% cite article-emptyDrops %} trabaja con un tipo específico de objeto R llamado SingleCellExperiment. Necesitamos convertir nuestros archivos transformados MTX a este tipo de objetos, esto lo haremos utilizando la herramienta Read10x de DropletUtils:
 
 > ### {% icon hands_on %} Práctica: Convertir al formato SingleCellExperiment
 >
