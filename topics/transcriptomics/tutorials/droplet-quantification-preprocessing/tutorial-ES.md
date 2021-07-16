@@ -714,7 +714,7 @@ Estuvo divertido, ahora hagámoslo de nuevo pero para el genotipo.
 > 3. Cambiar el nombre {% icon galaxy-pencil %} de la salida a `Genotype metadata`
 {: .hands_on}
 
-Es posible que desees hacer esto con distintos tipos de metadatos - qué laboratorios manejaron las muestras, en qué día se corrieron, etc. Una vez que hayas agregado todas tus columnas de metadatos, podemos entonces adherirlas unas a otras antes de conectarlas al objeto AnnData.
+Es posible que desees hacer esto con distintos tipos de metadatos - qué laboratorios manejaron las muestras, en qué día se procesaron, etc. Una vez que hayas agregado todas tus columnas de metadatos, podemos entonces adherirlas unas a otras antes de conectarlas al objeto AnnData.
 
 > ### {% icon hands_on %} Práctica: Combinar las columnas de metadatos
 >
