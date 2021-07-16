@@ -675,7 +675,7 @@ Los dos metadatos más críticos en este experimento son `sex` y `genotype`. Pos
 > 2. {% tool [Cut columns from a table](Cut1) %} con los siguientes parámetros:
 >    - *"Cut columns"*: `c9`
 >    - *"Delimited by"*: `Tab`
->    - % icon param-file %} *"From"*: la salida del herramiento **Replace text** {% icon tool %}
+>    - % icon param-file %} *"From"*: la salida de la herramienta **Replace text** {% icon tool %}
 >
 > 3. Cambiar el nombre {% icon galaxy-pencil %} de la salida a `Sex metadata`
 {: .hands_on}
