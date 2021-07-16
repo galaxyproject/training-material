@@ -512,7 +512,7 @@ La herramienta emptyDrops {% cite article-emptyDrops %} trabaja con un tipo espe
 >
 {: .question}
 
-Ejecutemos de nuevo y cambiemos parámetros; volvamos a correr la herramienta con un umbral mínimo más laxo.
+Ejecutemos de nuevo y cambiemos parámetros; volvamos a ejecutar la herramienta con un umbral mínimo más laxo.
 
 > ### {% icon details %} ¿Estás trabajando en equipo? ¡Hora de tomar decisiones!
 > Si estás trabajando en equipo en este punto tienen la oportunidad de tomar diversas rutas, la primera utilizando un control y el resto variando números para que puedan comparar resultados a lo largo de los tutoriales.  
