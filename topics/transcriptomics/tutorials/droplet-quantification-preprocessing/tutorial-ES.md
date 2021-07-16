@@ -434,7 +434,7 @@ Ahora vamos a volver a ejecutar la herramienta que extrae información contenida
 >    - *"Append version to transcript identifiers?"*: `Yes`
 >    - *"Flag mitochondrial features?"*: `Yes` - nota, esto va a rellenar automáticamente campos con un montón de genes asociados a la mitocondria (que se encontraron en el archivo GTF). ¡Esto es bueno!
 >    - *"Filter a FASTA-format cDNA file to match annotations?"*: `No` - - no lo necesitamos, ¡hemos terminado con nuestro archivo FASTA!
-> 2. Verifica que el archivo de salida sea del tipo `tabular`. Si no lo es, cambia el tipo de archivo dando click sobre 'Editar atributos'{% icon galaxy-pencil %} que está en el historial del conjunto de datos (como si estuvieras cambiando el nombre al archivo). Después da click sobre `Datatypes` y teclea `tabular`. Da clic sobre `Change datatype`.)
+> 2. Verifica que el archivo de salida sea del tipo `tabular`. Si no lo es, cambia el tipo de archivo haciendo click sobre 'Editar atributos'{% icon galaxy-pencil %} que está en el historial del conjunto de datos (como si estuvieras cambiando el nombre al archivo). Después haz click sobre `Datatypes` y teclea `tabular`. Haz clic sobre `Change datatype`.)
 > 2. Cambiar el nombre {% icon galaxy-pencil %} de la tabla de anotación a `Gene Information`
 {: .hands_on}
 
