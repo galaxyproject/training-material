@@ -582,7 +582,7 @@ Esta muestra es una de siete iniciales. Entonces, puedes utilizar un [flujo de t
 >
 {: .hands_on}
 
-Inspecciona {% icon galaxy-eye %} el archivo de texto `Experimental Design`. Este muestra cómo es que cada `N70X`  corresponde a una muestra, y si dicha muestra proviene de un macho o hembra. Estos serán metadatos importantes para agregar a nuestra muestra, los cuales añadiremos de forma similar a la forma en que añadiste los metadatos `gene_name` y `mito` en secciones anteriores.
+Inspecciona {% icon galaxy-eye %} el archivo de texto `Experimental Design`. Este muestra cómo cada `N70X`  corresponde a una muestra, y si dicha muestra proviene de un macho o hembra. Estos serán metadatos importantes para agregar a nuestra muestra, los cuales añadiremos de forma similar a la forma en que añadiste los metadatos `gene_name` y `mito` en secciones anteriores.
 
 ## Concatenación de objetos
 > ### {% icon hands_on %} Práctica: Concatenación de objetos AnnData
