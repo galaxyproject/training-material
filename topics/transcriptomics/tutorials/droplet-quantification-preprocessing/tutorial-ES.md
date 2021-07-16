@@ -293,7 +293,7 @@ Este es el formato “matrix market” (MTX).
 > Asegurate de usar el archivo **quants_mat.mtx.gz**, NO EL ARCHIVO *quants_tier.mtx.gz*.
 {: .warning}
 
-{% icon congratulations %} Felicitaciones - ¡haz generado una matriz de expresión! Pudiéramos terminar en este punto, pero es necesario verificar la calidad de los archivos, y una de las cosas que podemos realizar es visualizar un gráfico de rangos de los códigos de barras.
+{% icon congratulations %} Felicidades - ¡has generado una matriz de expresión! Podríamos terminar en este punto, pero es necesario verificar la calidad de los datos, y una de las cosas que podemos hacer es visualizar un gráfico de rangos de los códigos de barras.
 
 # Control de calidad básico
 
