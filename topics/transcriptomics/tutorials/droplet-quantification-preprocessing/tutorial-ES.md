@@ -741,7 +741,7 @@ Es posible que desees hacer esto con distintos tipos de metadatos - qué laborat
 > ### {% icon hands_on %} Práctica:  Etiquetado de lotes
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} con los siguientes parámetros:
->    - {% icon param-file %} *"Annotated data matrix"*: la salida del herramiento **Manipulate AnnData - Add new annotations** {% icon tool %}
+>    - {% icon param-file %} *"Annotated data matrix"*: la salida de la herramienta **Manipulate AnnData - Add new annotations** {% icon tool %}
 >    - *"Function to manipulate the object"*: `Rename categories of annotation`
 >    - *"Key for observations or variables annotation"*: `batch`
 >    - *"Comma-separated list of new categories"*: `N701,N702,N703,N704,N705,N706,N707`
