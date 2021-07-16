@@ -548,7 +548,7 @@ Ejecutemos de nuevo y cambiemos parámetros; volvamos a ejecutar la herramienta 
 
 {% icon congratulations %} ¡Felicidades! Tu objeto está listo para el pipeline de scanpy. Ahora puedes verificar tu trabajo comparándolo con el mostrado en este [historial de ejemplo](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-1---answer-key).
 
-Sin embargo, quizá quieras combinar este objeto con otros parecidos a él. Por ejemplo, es posible que hayas corrido 5 muestras, y que estés iniciando a partir de 10 archivos FASTQ...
+Sin embargo, quizá quieras combinar este objeto con otros parecidos a él. Por ejemplo, es posible que hayas procesado 5 muestras, y que hayas empezado a partir de 10 archivos FASTQ...
 
 # Combinar archivos FASTQ
 
