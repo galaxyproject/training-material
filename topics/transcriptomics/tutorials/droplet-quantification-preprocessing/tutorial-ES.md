@@ -370,7 +370,7 @@ Para poder utilizar emptyDrops de manera efectiva, necesitamos regresar y volver
 >
 > > ### {% icon solution %} Solución
 > >
-> > 1. ¡Ahora hay `22539` células en quants_mat_rows! Muchas más que las `2163` que las que Alevin filtró. ¡Esto necesita ser filtrado en serio con emptyDrops!
+> > 1. ¡Ahora hay `22539` células en quants_mat_rows! Muchas más que las `2163` que Alevin filtró. ¡Esto necesita ser filtrado en serio con emptyDrops!
 > >
 > {: .solution}
 >
