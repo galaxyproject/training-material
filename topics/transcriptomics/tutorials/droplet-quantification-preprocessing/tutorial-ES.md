@@ -518,7 +518,7 @@ Ejecutemos de nuevo y cambiemos parámetros; volvamos a ejecutar la herramienta 
 > Si estáis trabajando en equipo en este punto tenéis la oportunidad de tomar diversas rutas, la primera utilizando un control y el resto variando números para que podáis comparar resultados a lo largo de los tutoriales.
 > - Variable: **UMI count lower bound**
 > - Control:  `5`
-> - Todos los demás: Tomen en consideración los gráficos de rangos de códigos de barras y seleccionen diversos límites inferiores.
+> - Todos los demás: Tomad en consideración los gráficos de rangos de códigos de barras y seleccionad diversos límites inferiores.
 {: .details}
 
 > ### {% icon hands_on %} Práctica: emptyDrops - ¡Intentemoslo de nuevo!
