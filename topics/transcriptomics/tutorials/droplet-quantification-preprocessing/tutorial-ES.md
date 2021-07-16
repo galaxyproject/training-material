@@ -459,7 +459,7 @@ Inspecciona {% icon galaxy-eye %} el objeto **Gene Information** del historial. 
 > 2.  {% tool [Cut columns from a table](Cut1) %} con los siguientes parámetros:
 >    - *"Cut columns"*: `c1,c4,c5`
 >    - *"Delimited by"*: `Tab`
->    - *"From"*: la salida del herramiento **Join two Datasets** {% icon tool %}
+>    - *"From"*: la salida de la herramienta **Join two Datasets** {% icon tool %}
 >
 > 3. Cambiar el nombre {% icon galaxy-pencil %} de la salida a `Annotated Gene Table`
 {: .hands_on}
