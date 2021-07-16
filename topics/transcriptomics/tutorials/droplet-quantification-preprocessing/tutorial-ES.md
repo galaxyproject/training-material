@@ -620,7 +620,7 @@ Ya hemos visualizado las tres salidas de {% icon tool %} **Inspect AnnData**.
 >
 > > ### {% icon solution %} Soluciones
 > >
-> > 1. Si verificas **General information** {% icon tool %} de salida, podrás ver que ahora tienes `4079 células`, ya que la matriz ahora tiene 4079 células y 35,734 genes. También puedes observar esto en los tamaños de los archivos obs (cells) y var (genes) **obs** {% icon tool %} (células) and **var** {% icon tool %} (genes).
+> > 1. Si verificas la salida **General information** {% icon tool %}, podrás ver que ahora tienes `4079 células`, ya que la matriz ahora tiene 4079 células y 35,734 genes. También puedes observar esto en los tamaños de los archivos **obs** {% icon tool %} (células) and **var** {% icon tool %} (genes).
 > > 2. En la anotación de observaciones indexadas por clave **Key-indexed observations annotation (obs)**. Las diferentes versiones de la herramienta ‘Manipulate’ colocarán las columnas del lote (`batch`) en diferentes ubicaciones. La versión de la herramienta utilizada en este curso asigna a la novena columna (`9`) en la posición de extrema derecha, la cual determina el ‘lote’ (`batch`). Lote (batch) se refiere al orden en que se agregaron las matrices. Los archivos se agregan desde la parte inferior del historial hacia arriba, ¡Así que ten cuidado en cómo configuras tus historiales al ejecutar esto!
 > {: .solution}
 >
