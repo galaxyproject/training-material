@@ -651,7 +651,7 @@ Los dos metadatos más críticos en este experimento son `sex` y `genotype`. Pos
 > ### {% icon hands_on %} Práctica: Etiquetas de sexo
 >
 > 1. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} con los siguientes parámetros:
->    - {% icon param-file %} *"File to process"*: la salida del herramiento **Inspect AnnData: Key-indexed observations annotation (obs)** {% icon tool %})
+>    - {% icon param-file %} *"File to process"*: la salida de la herramienta **Inspect AnnData: Key-indexed observations annotation (obs)** {% icon tool %})
 >    - *"1. Replacement"*
 >
 >         - *"in column"*: `Column: 9` - or whichever column `batch` is in
