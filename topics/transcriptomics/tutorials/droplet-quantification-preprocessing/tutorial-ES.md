@@ -385,9 +385,9 @@ Alevin da salida a un formato MTX, el cual puede ser la entrada del paquete drop
 > ### {% icon hands_on %} Práctica: Transformación de la matriz
 >
 > 1. {% tool [salmonKallistoMtxTo10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy5) %} con los siguientes parámetros:
->    - {% icon param-file %} *".mtx-format matrix"*: `quants_mat.mtx.gz` (la salida del herramiento **Alevin** {% icon tool %})
->    - {% icon param-file %} *"Tab-delimited genes file"*: `quants_mat_cols.txt` (la salida del herramiento **Alevin** {% icon tool %})
->    - {% icon param-file %} *"Tab-delimited barcodes file"*: `quants_mat_rows.txt` (la salida del herramiento **Alevin** {% icon tool %})
+>    - {% icon param-file %} *".mtx-format matrix"*: `quants_mat.mtx.gz` (la salida de la herramienta **Alevin** {% icon tool %})
+>    - {% icon param-file %} *"Tab-delimited genes file"*: `quants_mat_cols.txt` (la salida de la herramienta **Alevin** {% icon tool %})
+>    - {% icon param-file %} *"Tab-delimited barcodes file"*: `quants_mat_rows.txt` (la salida de la herramienta **Alevin** {% icon tool %})
 >
 > 2. Cambiar el nombre {% icon galaxy-pencil %} de 'salmonKallistoMtxTo10x....:genes' a `Gene table`
 > 3. Cambiar el nombre {% icon galaxy-pencil %} de 'salmonKallistoMtxTo10x....:barcodes' a `Barcode table`
