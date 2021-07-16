@@ -404,7 +404,7 @@ La salida es una matriz que contendrá la orientación correcta para poder ser u
 >
 > > ### {% icon solution %} Solución
 > >
-> > En nuestro viejo amigo, dentro de un archivo GTF.
+> > Dentro de un archivo GTF, nuestro viejo amigo.
 > >
 > {: .solution}
 >
