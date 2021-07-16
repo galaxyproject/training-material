@@ -376,7 +376,7 @@ Para poder utilizar emptyDrops de manera efectiva, necesitamos regresar y volver
 >
 {: .question}
 
-Alevin da salida a un formato MTX, el cual puede ser la entrada del paquete dropletUtils y correrse en emptyDrops. Desafortunadamente la matriz tiene una orientación equivocada. La matriz no puede ser procesada por herramientas cuya entrada son archivos como los que produce el software 10X. Necesitamos ‘transformar’ la matriz de tal forma que las células esten en columnas y los genes en renglones.
+Alevin da salida a un formato MTX, el cual puede ser la entrada del paquete dropletUtils y procesarse en emptyDrops. Desafortunadamente la matriz tiene una orientación equivocada. La matriz no puede ser procesada por herramientas cuya entrada son archivos como los que produce el software 10X. Necesitamos ‘transformar’ la matriz de tal forma que las células esten en columnas y los genes en filas.
 
 > ### {% icon warning %} ¡Precaucion!
 > ¡No mezcles los archivos de distintas corridas de Alevin! Utiliza la última corrida, la cual tiene los números más altos en el historial.
