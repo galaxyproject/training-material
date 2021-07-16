@@ -539,7 +539,7 @@ Ejecutemos de nuevo y cambiemos parámetros; volvamos a ejecutar la herramienta 
 >
 > 1. {% tool [SCEasy convert](toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1){% icon tool %} con los siguientes parámetros:
 >    - *"Direction of conversion"*: `SingleCellExperiment to AnnData`
->    - {% icon param-file %} *"Input object in SingleCellExperiment RDS format"*: `<yournumberhere>UMI-Object`
+>    - {% icon param-file %} *"Input object in SingleCellExperiment RDS format"*: `<pon tu número aquí>UMI-Object`
 >    - *"Name of the assay to be transferred as main layer"*: `counts`
 >
 > 2. Cambiar el nombre {% icon galaxy-pencil %} de la salida a `N701-400k-AnnData`
