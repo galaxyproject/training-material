@@ -601,13 +601,13 @@ Inspecciona {% icon galaxy-eye %} el archivo de texto `Experimental Design`. Est
 > ### {% icon hands_on %} Práctica: Inspección de objetos AnnData
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} con los siguiente parámetros:
->    - {% icon param-file %} *"Annotated data matrix"*: la salida del herramiento **Manipulate AnnData** {% icon tool %}
+>    - {% icon param-file %} *"Annotated data matrix"*: la salida de la herramienta **Manipulate AnnData** {% icon tool %}
 >    - *"What to inspect?"*: `General information about the object`
 > 2. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %}  con los siguiente parámetros:
->    - {% icon param-file %} *"Annotated data matrix"*: la salida del herramiento **Manipulate AnnData** {% icon tool %}
+>    - {% icon param-file %} *"Annotated data matrix"*: la salida de la herramienta **Manipulate AnnData** {% icon tool %}
 >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
 > 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %}  con los siguiente parámetros:
->    - {% icon param-file %} *"Annotated data matrix"*: la salida del herramiento **Manipulate AnnData** {% icon tool %}
+>    - {% icon param-file %} *"Annotated data matrix"*: la salida de la herramienta **Manipulate AnnData** {% icon tool %}
 >    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
 {: .hands_on}
 
