@@ -422,7 +422,7 @@ La salida es una matriz que contendrá la orientación correcta para poder ser u
 >
 {: .question}
 
-Ahora vamos a volver a correr la herramienta que extrae información contenida dentro de nuestro archivo GTF.
+Ahora vamos a volver a ejecutar la herramienta que extrae información contenida dentro de nuestro archivo GTF.
 
 > ### {% icon hands_on %} Práctica: Generar información de genes
 >
