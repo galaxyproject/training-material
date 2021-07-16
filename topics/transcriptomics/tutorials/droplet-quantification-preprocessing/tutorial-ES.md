@@ -496,7 +496,7 @@ La herramienta emptyDrops {% cite article-emptyDrops %} trabaja con un tipo espe
 
 > ### {% icon question %} Pregunta
 >
-> ¿Cuántos códigos de barras de células quedan después de correr emptyDrops? ¿Por qué será esto?
+> ¿Cuántos códigos de barras de células quedan después de procesar emptyDrops? ¿Por qué será esto?
 >
 >   > ### {% icon tip %} Pista
 >   > Si das clic sobre el `Stringent-Object` en el historial {% icon galaxy-history %}, el texto de la ventana dice `22 barcodes` o algo similar.  ¿Por qué es esto tan bajo?
