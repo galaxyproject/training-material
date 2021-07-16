@@ -277,7 +277,7 @@ Este es el formato “matrix market” (MTX).
 > ### {% icon question %} Preguntas
 >
 > Echa un vistazo a los diversos archivos generados después de ejecutar Alevin. ¿Puedes localizar las siguientes dos cosas?...
-> 1. La tasa de mapeo
+> 1. ¿Cuál es la tasa de mapeo?
 > 2. ¿Cuántas células están presentes en la matriz de salida?
 >
 > > ### {% icon solution %} Solución
