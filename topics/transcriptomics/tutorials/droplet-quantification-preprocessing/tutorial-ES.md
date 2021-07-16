@@ -646,7 +646,7 @@ Por tanto, cuando se concatenan, el lote (`batch`) aparece de la siguiente maner
 
 Puede ser que los índices no se hayan importado en orden si utilizaste Zenodo para importar tus archivos (por ejemplo, N701 a N707, ascendentes). En ese caso necesitarás manipular de forma apropiada los parámetros de las siguientes herramientas para etiquetar tus lotes correctamente.
 
-Los dos metadatos más criticos en este experimento son `sex` y `genotype`. Posteriormente vamos a colorear nuestros gráficos de células según los valores de estos parámetros, de tal modo que necesitamos añadirlos en este momento.
+Los dos metadatos más críticos en este experimento son `sex` y `genotype`. Posteriormente vamos a colorear nuestros gráficos de células según los valores de estos parámetros, de tal modo que necesitamos añadirlos en este momento.
 
 > ### {% icon hands_on %} Práctica: Etiquetas de sexo
 >
