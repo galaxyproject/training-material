@@ -438,7 +438,7 @@ Ahora vamos a volver a ejecutar la herramienta que extrae información contenida
 > 2. Cambiar el nombre {% icon galaxy-pencil %} de la tabla de anotación a `Gene Information`
 {: .hands_on}
 
-Inspecciona {% icon galaxy-eye %} el objetivo de **Gene Information** del historial. Ahora haz incluido un nuevo campo para gene_id, esto incluye el nombre de los genes y una columna para información mitocondrial (false = not mitochondrial, true = mitochondrial). Necesitamos añadir esta información a la tabla de salida 'Gene table' proveniente de la herramienta salmonKallistoMtxto10x. Sin embargo, necesitamos mantener la tabla 'Gene table' n el mismo orden, ya que se hace referencia a ella en los renglones de la tabla 'Matrix table'.
+Inspecciona {% icon galaxy-eye %} el objeto **Gene Information** del historial. Ahora has incluido un nuevo campo para gene_id, esto incluye el nombre de los genes y una columna para información mitocondrial (false = not mitochondrial, true = mitochondrial). Necesitamos añadir esta información a la tabla de salida 'Gene table' proveniente de la herramienta salmonKallistoMtxto10x. Sin embargo, necesitamos mantener la tabla 'Gene table' en el mismo orden, ya que se hace referencia a ella en las filas de la tabla 'Matrix table'.
 
 > ### {% icon hands_on %} Práctica: Combinar la tabla de genes MTX con la información de los genes
 >
