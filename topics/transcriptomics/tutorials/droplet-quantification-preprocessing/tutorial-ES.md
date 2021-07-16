@@ -730,7 +730,7 @@ Es posible que desees hacer esto con distintos tipos de metadatos - qué laborat
 > ### {% icon hands_on %} Práctica: Añadir los metadatos al objeto AnnData
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} con los siguientes parámetros:
->    - {% icon param-file %} *"Annotated data matrix"*: la salida del herramiento **Manipulate AnnData** {% icon tool %}
+>    - {% icon param-file %} *"Annotated data matrix"*: la salida de la herramienta **Manipulate AnnData** {% icon tool %}
 >    - *"Function to manipulate the object"*: `Add new annotation(s) for observations or variables`
 >    - *"What to annotate?"*: `Observations (obs)``
 >    - {% icon param-file %} *"Table with new annotations"*: `Cell Metadata`
