@@ -270,7 +270,7 @@ Esta herramienta tomará algo de tiempo para ejecutarse. Alevin produce muchos a
 
 * La matriz generada (quants_mat.mtx.gz - el conteo de genes y células)
 * Los identificadores de fila `cell/ barcode` (quants_mat_rows.txt), y
-* La columna (gem) etiquetas (quants_mat_cols.txt).
+* Las etiquetas en la columna `gene` (quants_mat_cols.txt).
 
 Este es el parámetro “matrix market” (MTX).
 
