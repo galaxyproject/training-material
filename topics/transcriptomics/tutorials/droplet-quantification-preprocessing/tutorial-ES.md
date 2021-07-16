@@ -266,7 +266,7 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 > En Alevin, "Protocol" (Protocolo) es el parámetro principal que debe cambiarse para una muestra 10X Chromium. Simplemente selecciona los reactivos correspondientes a la química de 10x en lugar de Drop-seq.
 {: .comment}
 
-Esta herramienta tomará algo de tiempo para ejecutarse. Alevin produce muchos archivos de salida, no utilizaremos todos estos archivos. Puedes consultar la [documentación de Alevin](https://salmon.readthedocs.io/en/latest/alevin.html) si deseas saber más sobre estos archivos, sin embargo los archivos que más nos interesan son:
+Esta herramienta tomará algo de tiempo para ejecutarse. Alevin produce muchos archivos de salida, no utilizaremos todos estos archivos. Puedes consultar la [documentación de Alevin](https://salmon.readthedocs.io/en/latest/alevin.html) si deseas saber más sobre estos archivos, sin embargo, los archivos que más nos interesan son:
 
 * La matriz generada (quants_mat.mtx.gz - el conteo de genes y células)
 * Los identificadores de fila `cell/ barcode` (quants_mat_rows.txt), y
