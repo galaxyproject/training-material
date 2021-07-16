@@ -515,7 +515,7 @@ La herramienta emptyDrops {% cite article-emptyDrops %} trabaja con un tipo espe
 Ejecutemos de nuevo y cambiemos parámetros; volvamos a ejecutar la herramienta con un umbral mínimo más laxo.
 
 > ### {% icon details %} ¿Estás trabajando en equipo? ¡Hora de tomar decisiones!
-> Si estás trabajando en equipo en este punto tienen la oportunidad de tomar diversas rutas, la primera utilizando un control y el resto variando números para que puedan comparar resultados a lo largo de los tutoriales.  
+> Si estáis trabajando en equipo en este punto tenéis la oportunidad de tomar diversas rutas, la primera utilizando un control y el resto variando números para que podáis comparar resultados a lo largo de los tutoriales.
 > - Variable: **UMI count lower bound**
 > - Control:  `5`
 > - Todos los demás: Tomen en consideración los gráficos de rangos de códigos de barras y seleccionen diversos límites inferiores.
