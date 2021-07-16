@@ -246,7 +246,7 @@ Ahora podemos ejecutar Alevin. Esta herramienta no aparecerá en las búsquedas 
 
 > ### {% icon comment %} Comentario
 > Notas sobre la traducción de algunos de los valores de los parámetros:
-En este tutorial manejaremos algunos términos en el idioma original ya que simplificará la búsqueda posterior de información sobre el tema. Estas notas aparecerán en estos cuadros y los términos están listados con la viñeta “•”.
+En este tutorial manejaremos algunos términos en el idioma original ya que simplificará la búsqueda posterior de información sobre el tema. Estas notas aparecerán en estos recuadros y los términos estarán listados con la viñeta “•”.
 > * “Select a reference transcriptome from your history or use a built-in index?”: Use one from the history
 > - * “¿Seleccionar un transcriptoma de referencia desde tu historial o utilizar un índice pre-integrado?”: `Utilizar uno del historial`
 > * “Transcripts FASTA file”: `Filtered FASTA`
