@@ -321,7 +321,7 @@ Esta es la formulación del gráfico de código de barras que basamos en una [di
 
 En este gráfico puedes ver más claramente una flexión tipo “rodilla”, mostrando el corte entre las gotas vacías y las gotas que contienen células.
 
-A la derecha encontramos los gráficos de densidad de la primera, y los umbrales son generados ya sea utilizando [dropletUtils](https://bioconductor.org/packages/release/bioc/html/DropletUtils.html) o por medio del método descrito en la discusión que se mencionó con anterioridad (en la parte superior). Podremos utilizar cualquiera de estos umbrales para seleccionar células, asumiendo que cualquier medición con conteos menores es una célula válida. Alevin hace algo similar por defecto, y podemos aprender algo de esto graficando únicamente los códigos de barras que retiene Alevin.
+A la derecha encontramos los gráficos de densidad de la primera, y los umbrales generados ya sea utilizando [dropletUtils](https://bioconductor.org/packages/release/bioc/html/DropletUtils.html) o por medio del método descrito en la discusión que se mencionó con anterioridad (en la parte superior). Podremos utilizar cualquiera de estos umbrales para seleccionar células, asumiendo que cualquier medición con conteos menores es una célula válida. Alevin hace algo similar por defecto, y podemos aprender algo de esto graficando únicamente los códigos de barras que retiene Alevin.
 
 > ### {% icon hands_on %} Práctica: Obtener el gráfico de código de barras de Alevin
 >
