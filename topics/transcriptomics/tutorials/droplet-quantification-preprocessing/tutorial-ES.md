@@ -359,7 +359,7 @@ Para poder utilizar emptyDrops de manera efectiva, necesitamos regresar y volver
 > 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2) %} (Haz clic sobre la última salida de Alevin para volver a ejecutar)
 >    - *"Optional commands"*
 >    - *"keepCBFraction"*: '1' - por ejemplo conservarlos todos
->    - *"freqThreshold"*: '3' - Esto solo removerá los códigos de barras celulares que tengan una frecuencia menor de 3, un criterio bajo de aceptación, pero es una forma útil de evitar procesar un monton de codigos de barras que es casi seguro que estan vacios.
+>    - *"freqThreshold"*: '3' - Esto solo eliminará los códigos de barras celulares que tengan una frecuencia menor de 3, un criterio bajo de aceptación, pero es una forma útil de evitar procesar un monton de códigos de barras que es casi seguro que estan vacíos.
 >
 > {% snippet faqs/galaxy/tools_rerun.md %}
 {: .hands_on}
