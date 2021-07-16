@@ -453,7 +453,7 @@ Inspecciona {% icon galaxy-eye %} el objeto **Gene Information** del historial. 
 >    - *"Keep the header lines"*: `No`
 >
 >
->    Si inspeccionas {% icon galaxy-eye %} el objeto, verás que hemos unido estas tablas y que ahora tiene algunos pocos gene_id repetidos. Removamos estas repeticiones manteniendo a su vez el orden original de la tabla 'Gene Table'.
+>    Si inspeccionas {% icon galaxy-eye %} el objeto, verás que hemos unido estas tablas y que ahora tiene algunos pocos gene_id repetidos. Eliminemos estas repeticiones manteniendo a su vez el orden original de la tabla 'Gene Table'.
 >
 >
 > 2.  {% tool [Cut columns from a table](Cut1) %} con los siguientes parámetros:
