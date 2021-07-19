@@ -199,7 +199,7 @@ layout: base
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Feedback over time</h5>
+                            <h5 class="card-title">{{ fdbk | size }} responses</h5>
                             {% assign chart_id = 'allFdbkOverMonthGraph' %}
                             <canvas id="{{ chart_id }}" width="400" height="400">
                                 <script>
@@ -236,7 +236,7 @@ layout: base
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Feedback over time</h5>
+                                <h5 class="card-title">{{ tn.items | size }} responses</h5>
                                 {% assign chart_id = topic_name | append: '-topic-fdbkOverMonthGraph' %}
                                 <canvas id="{{ chart_id }}" width="400" height="400">
                                     <script>
@@ -306,7 +306,7 @@ layout: base
                                         <div class="col-md-6">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">Feedback over time</h5>
+                                                    <h5 class="card-title">{{ tun.items | size }} responses</h5>
                                                     {% assign chart_id = tuto_name | append: '-tutorial-fdbkOverMonthGraph' %}
                                                     <canvas id="{{ chart_id }}" width="400" height="400">
                                                         <script>
