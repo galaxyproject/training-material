@@ -1,7 +1,5 @@
 ---
 layout: tutorial_hands_on
-enable: false
-
 title: DIA Analysis using OpenSwathWorkflow
 zenodo_link: 'https://zenodo.org/record/4301690'
 level: Intermediate
