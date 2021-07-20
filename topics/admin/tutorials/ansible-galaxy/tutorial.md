@@ -111,16 +111,16 @@ Using the [UseGalaxy.eu](https://github.com/usegalaxy-eu/infrastructure-playbook
 
 {% raw %}
 ```yaml
-galaxy_config_files:
-  - src: files/galaxy/config/builds.txt
+galaxy_config_templates:
+  - src: templates/galaxy/config/builds.txt
     dest: "{{ galaxy_config.galaxy.builds_file_path }}"
-  - src: files/galaxy/config/data_manager_conf.xml
+  - src: templates/galaxy/config/data_manager_conf.xml
     dest: "{{ galaxy_config.galaxy.data_manager_config_file }}"
-  - src: files/galaxy/config/datatypes_conf.xml
+  - src: templates/galaxy/config/datatypes_conf.xml
     dest: "{{ galaxy_config.galaxy.datatypes_config_file }}"
-  - src: files/galaxy/config/dependency_resolvers_conf.xml
+  - src: templates/galaxy/config/dependency_resolvers_conf.xml
     dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
-  - src: files/galaxy/config/disposable_email_blocklist.conf
+  - src: templates/galaxy/config/disposable_email_blocklist.conf
     dest: "{{ galaxy_config.galaxy.blocklist_file }}"
 ```
 {% endraw %}
@@ -136,7 +136,7 @@ galaxy_config:
 ```
 {% endraw %}
 
-So the references in `galaxy_config_files` to `galaxy_config` are done to ensure that the setting for e.g. "location of the datatypes config file" is the same between where we have configured Galaxy to looking for it, and where the file has been deployed, without requiring us to make variables changes in numerous places.
+So the references in `galaxy_config_templates` to `galaxy_config` are done to ensure that the setting for e.g. "location of the datatypes config file" is the same between where we have configured Galaxy to looking for it, and where the file has been deployed, without requiring us to make variables changes in numerous places.
 
 > ### {% icon tip %} Define once, reference many times
 > Using practices like those shown above helps to avoid problems caused when paths are defined differently in multiple places. The datatypes config file will be copied to the same path as Galaxy is configured to find it in, because that path is only defined in one place. Everything else is a reference to the original definition! If you ever need to update that definition, everything else will be updated accordingly.
@@ -1666,6 +1666,24 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >    > ```
 >    {: .code-out.code-max-300}
 >
+>    > ### {% icon tip %} Did this fail?
+>    > ```
+>    > ● galaxy.service - Galaxy
+>    >      Loaded: loaded (/etc/systemd/system/galaxy.service; enabled; vendor preset: enabl>
+>    >      Active: failed (Result: exit-code) since Mon 2021-06-28 17:07:58 CEST; 18min ago
+>    >     Process: 521705 ExecStart=/srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/gal>
+>    >    Main PID: 521705 (code=exited, status=1/FAILURE)
+>    >         CPU: 21ms
+>    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: galaxy.service: Schedu>
+>    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: Stopped Galaxy.
+>    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: galaxy.service: Start >
+>    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: galaxy.service: Failed>
+>    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: Failed to start Galaxy.
+>    > ```
+>    >
+>    > Check your /srv/galaxy/config/galaxy.yml and ensure that it lines up exactly with what you expect. One possible cause here is the `uwsgi` subsection of `galaxy_config` was omitted and instead it used the default port and failed.
+>    {: .tip}
+>
 > 6. Some things to note:
 >
 >    1. Later, after NGINX is set up and we're ready to connect to Galaxy, refreshing the page while Galaxy is restarting will wait (spin) until the process is ready rather than produce an error message, a nice feature of uWSGI
@@ -2399,6 +2417,17 @@ But what about your other software, things that are deployed along with Galaxy? 
 You can write roles for that! Sometimes they are really ugly roles, but it at least keeps it documented + in place. E.g. UseGalaxy.eu has a custom role for rewriting users and it’s ugly and untested and should not be used by anyone else in case it breaks their site. But it's one of these manual tricks or bits of glue code, but we can encapsulate it as ansible. You can include tarballs in your role to be deployed and so on.
 
 It may seem daunting to use ansible, but you don't have to do everything in ansible! You can just do a little bit, for managing just Galaxy, and manage the rest of your stack separately. Whatever fits best for your deployment.
+
+# Loving Ansible? Convert your own servers!
+
+A common question we get is:
+
+> Is it possible to transform a Galaxy server which was installed by hand, into an ansible-managed one?
+{: .quote}
+
+Because of the great variance between sites and deployments it is not really possible to produce a guide for doing so. However, if you back your current deployment up and set all of the variables that control paths appropriately, it can be done!
+
+It's very possible to do this piecemeal, taking one component at a time to ansibilise. nginx is a very easy place to start, the database is as well. Galaxy can be rebuilt in a new location, many of us ran a hand-managed galaxy setup somewhere like `/home/janedoe/work/projects/galaxy` that suddenly became a permanent project, this is a good chance to keep that but rebuild an identical one in `/srv/galaxy` or similar, and then switch over the traffic to that new, production Galaxy. Relocating data is a bit tougher and can require rewriting entries in the database.
 
 # Final Notes
 

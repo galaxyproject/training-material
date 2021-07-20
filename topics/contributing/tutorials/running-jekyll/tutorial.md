@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Running the Galaxy Training material website locally"
+title: "Running the GTN website locally"
 questions:
   - "How to setup the infrastructure to build training webpages?"
 objectives:

@@ -177,9 +177,6 @@ by filtering out the lines that contain the word `salivary` in the column of RNA
 # Functional annotation of the EBC proteome (enrichment analysis)
 
 The resulting list of 157 proteins identified in the two pooled EBC samples (excluding the 10 contaminants proteins) is now submitted to Gene Ontology (GO)-term enrichment analysis to determine functions that were significantly enriched in our EBC proteomic dataset. To do so, we'll use the ClusterProfiler tool (based on the R package clusterProfiler) for functional annotation. 
-
-## End modif
-
 Now we can perform the GO terms analysis. Input list is the EBC proteome to be analyzed after technical and biological contaminants
 removal, which is the output of biological contaminants filter step.
 
