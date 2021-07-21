@@ -84,7 +84,7 @@ The Galaxy interface consists of three main parts:
 3. Your analysis **HISTORY** is recorded on the right
 
 
-> ![Galaxy interface](../../images/galaxy_interface.svg "Galactic triptych: the three panels of Galaxy interface: TOOLS, CENTER PANEL, and HISTORY")
+> ![Galaxy interface](../../images/galaxy_interface.svg "Galactic triptych: the three panels of Galaxy interface: <em>Tools</em>, <em>Center Panel</em>, and <em>History</em>")
 {: .comment}
 
 When you start Galaxy for very first time, your history will be empty. Let's add some data to it.
