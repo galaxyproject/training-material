@@ -79,9 +79,9 @@ Browse to your favorite [Galaxy instance](https://galaxyproject.org/use/) and lo
 
 The Galaxy interface consists of three main parts:
 
-1. The available **TOOLS** are listed on the left
-2. The **CENTRAL PANEL** will let you run analyses and view outputs
-3. Your analysis **HISTORY** is recorded on the right
+1. The available **Tools** are listed on the left
+2. The **Central Panel** will let you run analyses and view outputs
+3. Your analysis **History** is recorded on the right
 
 
 > ![Galaxy interface](../../images/galaxy_interface.svg "Galactic triptych: the three panels of Galaxy interface: <em>Tools</em>, <em>Center Panel</em>, and <em>History</em>")
