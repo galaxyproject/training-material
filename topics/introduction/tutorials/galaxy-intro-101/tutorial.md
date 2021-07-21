@@ -133,7 +133,7 @@ For this tutorial, we made the input datasets available on Zenodo for you. Howev
 Below we describe how you can do this, but it is not necessary for this tutorial. Note that since the data in UCSC is updated frequently, you might get slightly different results in the rest of this tutorial if you use these files.
 
 > ### {% icon comment %} Comments
-> In order to get the datasets from the UCSC server, you need to have an account in a instance.
+> In order to get the datasets from the UCSC server, you need to have an account in an instance.
 {: .comment}
 
 
