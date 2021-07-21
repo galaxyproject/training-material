@@ -544,8 +544,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -565,10 +563,6 @@
         </a>
         
     
-        
-        <a class="dropdown-item" href="https://ecology.usegalaxy.eu/" title="Galaxy for Ecology">
-            Galaxy for Ecology
-        </a>
         
     
         
@@ -706,8 +700,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://virology.usegalaxy.eu/" title="Virology">
             Virology
         </a>
@@ -722,7 +714,7 @@
             </ul>
             
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 28, 2021 </div>
+            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 21, 2021 </div>
         </blockquote>
 
         <div class="container">
@@ -734,7 +726,7 @@
                 <div class="col-sm-10">
                     <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>This practical aims to familiarize you with the <span class="notranslate">Galaxy</span> user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.</p>
+<p>This tutorial aims to familiarize you with the <span class="notranslate">Galaxy</span> user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.</p>
 
 <!--SNIPPET-->
 <blockquote class="comment">  <h3 data-toc-skip="" id="-results-may-vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Results may vary</h3>  <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, exte<span class="notranslate">rna</span>l databases, or because of stochastic processes in the algorithms.</p></blockquote>
@@ -745,7 +737,7 @@
   <p>In this tutorial, we will:</p>
 
 <ol id="markdown-toc">
-  <li><a href="#pretreatments" id="markdown-toc-pretreatments">Pretreatments</a>    <ol>
+  <li><a href="#setting-the-stage-exons-and-snps" id="markdown-toc-setting-the-stage-exons-and-snps">Setting the stage: Exons and SNPs</a>    <ol>
       <li><a href="#locating-exons" id="markdown-toc-locating-exons">Locating Exons</a></li>
     </ol>
   </li>
@@ -769,7 +761,7 @@
 
 </blockquote>
 
-<h1 id="pretreatments">Pretreatments</h1>
+<h1 id="setting-the-stage-exons-and-snps">Setting the stage: Exons and SNPs</h1>
 
 <p>We start with the question: In human chromosome 22, which exon has the highest number of single nucleotide polymorphisms (SNPs)?</p>
 
@@ -783,26 +775,40 @@
     <li><strong>Features</strong> are regions of the chromosome that are interesting for one reason or another. Some examples of features include genes, terminators, transcription start sites, and repeat regions.</li>
     <li><strong>Genes</strong> are one kind of interesting feature, a region that will be <a href="https://en.wikipedia.org/wiki/Transcription_(biology)">transcribed</a> into <span class="notranslate">RNA</span> before being <a href="https://en.wikipedia.org/wiki/Translation_(biology)">translated</a> into proteins.</li>
     <li>
-      <p><strong>Exons</strong> are part of the <a href="https://en.wikipedia.org/wiki/Eukaryote">eukaryotic</a> gene <a href="https://en.wikipedia.org/wiki/Gene#Structure_and_function">model</a>. A gene is a complex structure with numerous segments that are removed before the the gene is transcribed into an <span class="notranslate">RNA</span>. The exons are the coding regions, the regions that will appear in the final protein product.</p>
+      <p><strong>Exons</strong> are fundamental components of <a href="https://en.wikipedia.org/wiki/Eukaryote">eukaryotic</a> <a href="https://en.wikipedia.org/wiki/Gene#Structure_and_function">genes</a>. A typical eukaryotic gene contains numerous <em>exons</em> separated by <em>introns</em>. An entire gene containing both exons and introns is transcribed into an pre-messenged <span class="notranslate">RNA</span> or pre-m<span class="notranslate">RNA</span>. During maturation introns are excised from the pre-m<span class="notranslate">RNA</span> in a process called <em><a href="https://www.nature.com/scitable/topicpage/rna-splicing-introns-exons-and-spliceosome-12375/">splicing</a></em>.  A mature messenges <span class="notranslate">RNA</span>, or simply m<span class="notranslate">RNA</span>, is then transcribed into protein during process of transcription.</p>
 
       <figure id="figure-1"><img src="../../images/DNA_exons_introns.png" alt="Eukaryotic gene model" /><figcaption><span class="figcaption-prefix">Figure 1:</span> An original piece of <span class="notranslate">DNA</span> containing introns and exons has the introns cut out before the exons are joined together to form the m<span class="notranslate">RNA</span>. (Image from <a href="https://commons.wikimedia.org/wiki/File:DNA_exons_introns.gif">WikiMedia</a>, under the Public Domain)</figcaption></figure>
     </li>
-    <li><strong>SNP</strong> stands for <a href="https://en.wikipedia.org/wiki/Single-nucleotide_polymorphism">single-nucleotide polymorphism</a> and is pronounced like the English word “snip”. SNPs are single nucleotide differences between a sequenced individual compared to some reference sequence; where one individual might have an A, another could have a C in that position. Databases of SNPs have been created for many organisms and they include any single nucleotide deviation from the reference sequence which appears in some percentage of the population (e.g. &gt;1%). These are often especially interesting to geneticists as the causes of certain inheritable diseases.</li>
   </ul>
+
+  <p><strong>SNP</strong> is an abbreviation for <a href="https://en.wikipedia.org/wiki/Single-nucleotide_polymorphism">single-nucleotide polymorphism</a>. It is pronounced as “snip”. SNPs are single nucleotide differences between a sequenced individual compared to some reference sequence; where one individual might have an A, another could have a C in that position. Databases of SNPs have been created for many organisms and they include any single nucleotide deviation from the reference sequence which appears in some percentage of the population (e.g. &gt;1%). These are often especially interesting to geneticists as the causes of certain inheritable diseases.</p>
 </blockquote>
 
 <p>You may be familiar with the <a href="https://genome.ucsc.edu/">UCSC Genome Browser</a> or another resource like it, and know that you can find the data there.
-But even with your data in hand, you stll have the question: “how do I actually compute this?” There is really a straightforward answer: <strong><span class="notranslate">Galaxy</span></strong>. So let’s try it…</p>
+But even with your data in hand, you still have the question: “how do I actually compute this?” There is really a straightforward answer: <strong><span class="notranslate">Galaxy</span></strong>. So let’s try it…</p>
 
-<p>Browse to your favourite <a href="https://galaxyproject.org/use/"><span class="notranslate">Galaxy</span> instance</a> and log in or register. The <span class="notranslate">Galaxy</span> interface consists of three main parts:</p>
+<p>The following video shows all steps of this tutorial:</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/D5HgJWdfOWw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+<p>Browse to your favorite <a href="https://galaxyproject.org/use/"><span class="notranslate">Galaxy</span> instance</a> and log in or register.</p>
+
+<!--SNIPPET-->
+<blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-an-account"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating an account</h3>  <p>To create an account:</p>  <ol>  <li>Click <strong>Login or Register</strong></li>  <li>At the bottom of the form click <strong>Register here</strong></li>  <li>Fill the form and click <strong>Create</strong></li></ol></blockquote>
+
+<p>The <span class="notranslate">Galaxy</span> interface consists of three main parts:</p>
 
 <ol>
-  <li>The available tools are listed on the left</li>
-  <li>Your analysis history is recorded on the right</li>
-  <li>The central panel will let you run analyses and view outputs</li>
+  <li>The available <strong>Tools</strong> are listed on the left</li>
+  <li>The <strong>Central Panel</strong> will let you run analyses and view outputs</li>
+  <li>Your analysis <strong>History</strong> is recorded on the right</li>
 </ol>
 
-<p><img src="../../images/galaxy_interface.png" alt="Galaxy interface" /></p>
+<blockquote class="comment">
+  <figure id="figure-2"><img src="../../images/galaxy_interface.svg" alt="Galaxy interface" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Galactic triptych: the three panels of <span class="notranslate">Galaxy</span> interface: <em>Tools</em>, <em>Center Panel</em>, and <em>History</em></figcaption></figure>
+</blockquote>
+
+<p>When you start <span class="notranslate">Galaxy</span> for very first time, your history will be empty. Let’s add some data to it.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-create-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create history</h3>
@@ -850,7 +856,7 @@ https://zenodo.org/record/4104428/files/UCSC-hg38-chr22-dbSNP153-Whole-Gene-SNPs
       <p>Click <strong>Start</strong>, and then <strong>Close</strong></p>
     </li>
     <li>
-      <p>When they’re ready, <strong>rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the datasets to <code class="language-plaintext highlighter-rouge">Exons</code> and <code class="language-plaintext highlighter-rouge">SNPs</code>, respectively.</p>
+      <p>When they are ready, <strong>rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the datasets to <code class="language-plaintext highlighter-rouge">Exons</code> and <code class="language-plaintext highlighter-rouge">SNPs</code>, respectively.</p>
 
       <!--SNIPPET-->
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, change the <strong>Name</strong> field</li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
@@ -864,7 +870,7 @@ Below we describe how you can do this, but it is not necessary for this tutorial
 
 <blockquote class="comment">
   <h3 id="comment-comments"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
-  <p>In order to get the datasets from the UCSC server, you need to have an account in the <a href="https://usegalaxy.org/">use<span class="notranslate">Galaxy</span>.org</a> instance.</p>
+  <p>In order to get the datasets from the UCSC server, you need to have an account in an instance.</p>
 </blockquote>
 
 <blockquote class="tip">
@@ -879,7 +885,7 @@ Below we describe how you can do this, but it is not necessary for this tutorial
       <li>
         <p><strong>UCSC Main</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> table browser:</p>
 
-        <p>In the tool menu, navigate to <code class="language-plaintext highlighter-rouge">Get Data -&gt; UCSC Main - table browser</code></p>
+        <p>In the tool menu, navigate to <code class="language-plaintext highlighter-rouge">Get Data -&gt; UCSC Main table browser</code></p>
 
         <p><img src="../../images/101_01.png" alt="`UCSC Main table browser` menu entry" /></p>
 
@@ -893,7 +899,7 @@ Below we describe how you can do this, but it is not necessary for this tutorial
           <li><em>“genome”</em>: <code class="language-plaintext highlighter-rouge">Human</code></li>
           <li><em>“assembly”</em>: <code class="language-plaintext highlighter-rouge">Dec. 2013 (GRCh38/hg38)</code></li>
           <li><em>“group”</em>: <code class="language-plaintext highlighter-rouge">Genes and Gene Predictions</code></li>
-          <li><em>“track”</em>: <code class="language-plaintext highlighter-rouge">GENCODE v32</code></li>
+          <li><em>“track”</em>: <code class="language-plaintext highlighter-rouge">GENCODE v36</code> (or a more recent version)</li>
           <li><em>“table”</em>: <code class="language-plaintext highlighter-rouge">knownGene</code></li>
           <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“region”</em> should be changed to <code class="language-plaintext highlighter-rouge">position</code> with value <code class="language-plaintext highlighter-rouge">chr22</code></li>
           <li><em>“output format”</em> should be changed to <code class="language-plaintext highlighter-rouge"><span class="notranslate">BED</span> - browser extensible data</code></li>
@@ -948,7 +954,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
   <blockquote class="notranslate hands_on">
     <h3 id="hands_on-hands-on-obtaining-snps-from-ucsc"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Obtaining SNPs from UCSC</h3>
-    <p>Again open the <code class="language-plaintext highlighter-rouge">UCSC Main - table browser</code> tool and set the following parameters</p>
+    <p>Again open the <code class="language-plaintext highlighter-rouge">UCSC Main table browser</code> tool and set the following parameters</p>
 
     <ol>
       <li><strong>UCSC Main</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> table browser:
@@ -960,7 +966,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
         <p><img src="../../images/101_06.png" alt="`UCSC table browser` tool, first screen for SNPs" /></p>
 
-        <p>The <em>“track”</em> setting shows the version of the SNP database to get. In this example it is version 153, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.</p>
+        <p>The <em>“track”</em> setting shows the version of the SNP database to get. In this example it is version 151, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.</p>
       </li>
       <li>
         <p>Click on the <strong>get output</strong> button to find a form similar to this:</p>
@@ -994,25 +1000,34 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-finding-exons"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Finding Exons</h3>
 
+  <p>To find intersection we will be using <code class="language-plaintext highlighter-rouge">intersect intervals</code> tool from <a href="https://bedtools.readthedocs.io/en/latest/content/overview.html"><span class="notranslate">BED</span>Tools</a> package.</p>
+
   <ol>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/join/gops_join_1/1.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/join/gops_join_1/1.0.0"><strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/join/gops_join_1/1.0.0</span></span>    the intervals of two datasets side-by-side:</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0"><strong><span class="notranslate">bed</span>tools intersect intervals</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/<span class="notranslate">bed</span>tools/<span class="notranslate">bed</span>tools_intersectbed/2.30.0</span></span>  the intervals of two datasets side-by-side:</p>
 
       <p>Enter the word <code class="language-plaintext highlighter-rouge">join</code> in the search bar of the tool panel, and select the
 tool named <code class="language-plaintext highlighter-rouge">Join - the intervals of two datasets side-by-side</code></p>
 
       <ul>
-        <li><em>“Join”</em>: Select <code class="language-plaintext highlighter-rouge">Exons</code></li>
-        <li><em>“With”</em>: Select <code class="language-plaintext highlighter-rouge">SNPs</code></li>
-        <li><em>“with min overlap”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
-        <li><em>“Return”</em>: <code class="language-plaintext highlighter-rouge">Only records that are joined (INNER JOIN)</code>, which means that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)</li>
+        <li><em>“File A to intersect with B”</em>: Select <code class="language-plaintext highlighter-rouge">Exons</code></li>
+        <li><em>“Combined or separate output files”</em>: Select <code class="language-plaintext highlighter-rouge">One output file per 'input B' file"</code></li>
+        <li><em>“File B to intersect with A”</em>: <code class="language-plaintext highlighter-rouge">SNPs</code></li>
+        <li><em>“What should be written to the output file?”</em>: <code class="language-plaintext highlighter-rouge">Write the original entry in B for each overlap...</code>, which means that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)</li>
       </ul>
-
-      <blockquote class="tip">
-        <h3 id="tip-how-do-i-use-this-tool"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> How do I use this tool?</h3>
-        <p>All <span class="notranslate">Galaxy</span> tools include documentation. If you scroll down on this page, you will find the help of the tool.</p>
-      </blockquote>
     </li>
+  </ol>
+
+  <p>The interface of the tool should look like this:</p>
+
+  <p><img src="../../images/101_bed_intersect_interface.png" alt="Contents of the `Join` output dataset" /></p>
+
+  <blockquote class="tip">
+    <h3 id="tip-how-do-i-use-this-tool"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> How do I use this tool?</h3>
+    <p>All <span class="notranslate">Galaxy</span> tools include documentation. If you scroll down on this page, you will find the help of the tool.</p>
+  </blockquote>
+
+  <ol>
     <li>Click <strong>Execute</strong></li>
     <li>Wait for the job to finish</li>
     <li>
@@ -1020,7 +1035,7 @@ tool named <code class="language-plaintext highlighter-rouge">Join - the interva
 
       <p><img src="../../images/101_joined.png" alt="Contents of the `Join` output dataset" /></p>
 
-      <p>Remember that variations are possible due to using different versions of UCSC databases: as long as you have similar looking columns you did everything right!</p>
+      <p>Here column 4 contains exon IDs (e.g., <code class="language-plaintext highlighter-rouge">ENST00000252835.5_cds_0_0_chr22_15528159_f</code>) and column 10 lists SNP IDs (e.g., <code class="language-plaintext highlighter-rouge">rs9617249</code>) Remember that variations are possible due to using different versions of UCSC databases: as long as you have similar looking columns you did everything right!</p>
     </li>
   </ol>
 
@@ -1075,32 +1090,35 @@ tool named <code class="language-plaintext highlighter-rouge">Join - the interva
 
 <h2 id="count-the-number-of-snps-per-exon">Count the number of SNPs per exon</h2>
 
-<p>Since each line in our file represents a single overlap between SNP and exon, we can find the total number of SNPs in an exon, simply by counting the number of lines that have the same exon ID. So let’s do this for all the exons in our file:</p>
+<p>Since each line in our file represents a single overlap between SNP and exon, we can find the total number of SNPs in an exon, simply by counting the number of lines that have the same exon ID. However, to be more “proper” we will instead count the number of unique SNP IDs per exon. So let’s do this for all the exons in our file:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-counting-snps"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Counting SNPs</h3>
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="Grouping1" title="Tested with Grouping1"><strong>Group</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grouping1</span></span>  data by a column and perform aggregate operation on other columns:</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0"><strong>Datamash</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0</span></span>  data by a column and perform aggregate operation on other columns:</p>
 
       <ul>
-        <li><em>“Select data”</em>: select the output dataset from <strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“Group by column”</em>: <code class="language-plaintext highlighter-rouge">Column: 4</code> (the column with the exon IDs)</li>
-        <li><em>“Insert Operation”</em>:
+        <li><em>“Input tabular dataset”</em>: select the output dataset from <strong><span class="notranslate">bed</span>tools intersect intervals</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Group by fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 4</code> (the column with the exon IDs)</li>
+      </ul>
+
+      <p><img src="../../images/101_datamash_1.png" alt="Contents of the `Group` output dataset" /></p>
+
+      <ul>
+        <li>Scroll tool interface down to <em>“Operation to perform on each group”</em>
           <ul>
-            <li>1: Operation
-              <ul>
-                <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">Count</code></li>
-                <li><em>“On column”</em>: <code class="language-plaintext highlighter-rouge">Column: 4</code></li>
-              </ul>
-            </li>
+            <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">Count Unique values</code></li>
+            <li><em>“On column”</em>: <code class="language-plaintext highlighter-rouge">Column: 10</code> (this column contains SNPs ids like <code class="language-plaintext highlighter-rouge">rs2236639</code>. This we will count occurrences of unique SNP ids for each exon)</li>
           </ul>
         </li>
       </ul>
+
+      <p><img src="../../images/101_datamash_2.png" alt="Contents of the `Group` output dataset" /></p>
     </li>
     <li>
-      <p>Click <strong>Execute</strong> to perform the grouping. Your new output dataset will look something like this:</p>
+      <p>Click <strong>Execute</strong>. Your new output dataset will look something like this:</p>
 
       <p><img src="../../images/101_14.png" alt="Contents of the `Group` output dataset" /></p>
     </li>
@@ -1116,7 +1134,7 @@ tool named <code class="language-plaintext highlighter-rouge">Join - the interva
 
   <blockquote class="solution">
     <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <p>Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above. The exact number you see for your dataset may be slightly different due to the updates to the exon and SNPs information in UCSC. In our case the dataset contains 4.242 lines, which is equal to the number of exons.</p>
+    <p>Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above. The exact number you see for your dataset may be slightly different due to the updates to the exon and SNPs information in UCSC. In our case the dataset contains 4,242 lines, which is equal to the number of exons.</p>
 
   </blockquote>
 </blockquote>
@@ -1130,21 +1148,13 @@ tool named <code class="language-plaintext highlighter-rouge">Join - the interva
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1</span></span>  data in ascending or descending order:</p>
+      <p><span class="tool" data-tool="sort1" title="Tested with sort1"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: sort1</span></span>  data in ascending or descending order:</p>
 
       <ul>
-        <li><em>“Sort Query”</em>: Output from <strong>Group</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“Column Selections”</em>:
-          <ul>
-            <li>1: Column Selections
-              <ul>
-                <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
-                <li><em>“in”</em>: <code class="language-plaintext highlighter-rouge">Descending order</code></li>
-                <li><em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">Fast numeric sort (-n)</code></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
+        <li><em>“Sort Dataset”</em>: Output from <strong>Group</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+        <li><em>“with flavor”</em>: <code class="language-plaintext highlighter-rouge">Numeric sort</code></li>
+        <li><em>“everythin in”</em>: <code class="language-plaintext highlighter-rouge">Descneding order</code></li>
       </ul>
     </li>
     <li>
@@ -1411,7 +1421,7 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
     <li>
       <p>We will need the list of exons again. We don’t have to get this from UCSC again, we can just <strong>copy</strong> it from our previous history. The easiest way to do this is to go to the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> history overview. Here you can just drag and drop datasets from one history to another.</p>
 
-      <p><img src="../../images/101_copydataset.png" alt="Drag and drop of `Exons` dataset in the history overview" /></p>
+      <p><img src="../../images/copying_data.gif" alt="Drag and drop of `Exons` dataset in the history overview" /></p>
     </li>
     <li>
       <p>Click the Home icon <i class="fas fa-home" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-home</span> (or <strong>Analyze Data</strong> on older <span class="notranslate">Galaxy</span> versions) at the top to return to the main analysis window</p>
@@ -1628,8 +1638,8 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
     author = "Saskia Hiltemann and Nicola Soranzo and Clemens Blank and Anton Nekrutenko and Björn Grüning and Anne Pajon and Helena Rasche",
     title = "Galaxy 101 (Galaxy Training Materials)",
     year = "2021",
-    month = "06",
-    day = "28"
+    month = "07",
+    day = "21"
     url = "\url{https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
