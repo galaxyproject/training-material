@@ -4,9 +4,9 @@ redirect_from:
   - /topics/galaxy-data-manipulation/tutorials/collections/tutorial
 
 title: "Using dataset collections"
+zenodo_link: "https://doi.org/10.5281/zenodo.5119008"
 tags:
 - collections
-zenodo_link: ""
 level: Intermediate
 questions:
   - "How to manipulate large numbers of datasets at once?"
@@ -27,6 +27,28 @@ subtopic: manage
 Here we will show Galaxy features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you've got hundreds - it becomes very annoying. In Galaxy we have introduced **Dataset collections** that allow you to combine numerous datasets in a single entity that can be easily manipulated.
 
 # Getting data
+
+First, we need to upload datasets. Cut and paste the following URLs to Galaxy upload tool:
+
+```
+https://zenodo.org/record/5119008/files/M117-bl_1.fq.gz
+https://zenodo.org/record/5119008/files/M117-bl_2.fq.gz
+https://zenodo.org/record/5119008/files/M117-ch_1.fq.gz
+https://zenodo.org/record/5119008/files/M117-ch_2.fq.gz
+https://zenodo.org/record/5119008/files/M117C1-bl_1.fq.gz
+https://zenodo.org/record/5119008/files/M117C1-bl_2.fq.gz
+https://zenodo.org/record/5119008/files/M117C1-ch_1.fq.gz
+https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
+```
+
+
+
+
+
+
+{% snippet faqs/galaxy/dataset_upload_fastqsanger_via_urls.md %}
+
+
 [Here](https://usegalaxy.org/library/folders/Fab5f788f07073c11) is a library containing a few datasets we will be practicing with (as with any Galaxy tutorial, you can upload your own data and play with it instead of the provided datasets):
 
 - `M117-bl_1` - family 117, mother, 1-st (**F**) read from **blood**
