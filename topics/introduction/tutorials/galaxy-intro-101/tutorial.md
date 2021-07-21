@@ -69,6 +69,10 @@ We start with the question: In human chromosome 22, which exon has the highest n
 You may be familiar with the [UCSC Genome Browser](https://genome.ucsc.edu/) or another resource like it, and know that you can find the data there.
 But even with your data in hand, you still have the question: "how do I actually compute this?" There is really a straightforward answer: **Galaxy**. So let's try it...
 
+The following video shows all steps of this tutorial:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/D5HgJWdfOWw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 Browse to your favorite [Galaxy instance](https://galaxyproject.org/use/) and log in or register. 
 
 {% snippet faqs/galaxy/creating_account.md %}
