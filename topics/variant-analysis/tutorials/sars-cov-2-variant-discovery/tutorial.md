@@ -14,7 +14,7 @@ objectives:
 - Interpret summaries for annotated allelic variants
 - Run workflow to extract consensus sequences
 - Select and run tools to assign clades/lineages
-time_estimation: 3H
+time_estimation: 8H
 key_points:
 - 4 specialized, best-practice variant calling workflows are available for the identification of annotated allelic variants from raw sequencing data depending on the exact type of input
 - Data from batches of samples can be processed in parallel using collections
