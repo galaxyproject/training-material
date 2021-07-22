@@ -28,7 +28,7 @@ Here we will show Galaxy features designed to help with the analysis of large nu
 
 # Getting data
 
-First, we need to upload datasets. Cut and paste the following URLs to Galaxy upload tool:
+First, we need to upload datasets. Cut and paste the following URLs to Galaxy upload tool (see a {% icon tip %} **Tip** on how to do this [below](#-tip-upload-fastqsanger-datasets-via-links)). 
 
 ```
 https://zenodo.org/record/5119008/files/M117-bl_1.fq.gz
@@ -41,81 +41,64 @@ https://zenodo.org/record/5119008/files/M117C1-ch_1.fq.gz
 https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 ```
 
+> ### {% icon details %} Set format to `fastqsanger.gz`
+> The above datasets are in `fastqsanger.gz` format. It is necessary to explicitly set format in Galaxy. The {% icon tip %} **Tip** section below explains how to upload these data and set the correct format. There is a variety of [fastq format flavors](https://en.wikipedia.org/wiki/FASTQ_format) and it is difficult to guess them automatically.  
+>
+> {% snippet faqs/galaxy/dataset_upload_fastqsanger_via_urls.md %}
+{: .warning}
 
+## About these datasets
 
+These datasets represent genomic DNA (enriched for mitochondria via a long range PCR) isolated from blood (`bl`) and cheek (buccal swab, `ch`) of mother (`M117`) and her child (`M117C1`) that was sequenced on an Illumina miSeq machine as paired-read library (250-bp reads; see our [2014](http://www.pnas.org/content/111/43/15474.abstract) manuscript for **Methods**):
 
-
-
-{% snippet faqs/galaxy/dataset_upload_fastqsanger_via_urls.md %}
-
-
-[Here](https://usegalaxy.org/library/folders/Fab5f788f07073c11) is a library containing a few datasets we will be practicing with (as with any Galaxy tutorial, you can upload your own data and play with it instead of the provided datasets):
-
-- `M117-bl_1` - family 117, mother, 1-st (**F**) read from **blood**
-- `M117-bl_2` - family 117, mother, 2-nd (**R**) read from **blood**
-- `M117-ch_1` - family 117, mother, 1-st (**F**) read from **cheek**
-- `M117-ch_1` - family 117, mother, 2-nd (**R**) read from **cheek**
-- `M117C1-bl_1`- family 117, child, 1-st (**F**) read from **blood**
-- `M117C1-bl_2`- family 117, child, 2-nd (**R**) read from **blood**
-- `M117C1-ch_1`- family 117, child, 1-st (**F**) read from **cheek**
-- `M117C1-ch_2`- family 117, child, 2-nd (**R**) read from **cheek**
-
-These datasets represent genomic DNA (enriched for mitochondria via a long range PCR) isolated from blood (`bl`) and cheek (buccal swab, `ch`) of mother (`M117`) and her child (`M117C1`) that was sequenced on an Illumina miSeq machine as paired-read library (250-bp reads; see our [2014](http://www.pnas.org/content/111/43/15474.abstract) manuscript for **Methods**).
-
-## Load data from Galaxy library
-
-Right click (or Ctrl-click) on [this link](https://usegalaxy.org/library/folders/Fab5f788f07073c11) to open a new browser window and position this window side-by-side with the window displaying this tutorial. You will see this:
-
-![Data in Galaxy library](../../images/grab_data.png)
-{: .img-responsive}
-
-Select all datasets, click **to History** button, and select **as Datasets**. In the pop-up window, either select a history or create a new one. This will import all datasets into a history. The screen will look like this:
-
-![manyDatasets](../../images/manyDatasets.png)
-{: .img-responsive}
+- `M117-bl_1` - family 117, mother, *forward* (**F**) reads from **blood**
+- `M117-bl_2` - family 117, mother, *reverse* (**R**) reads from **blood**
+- `M117-ch_1` - family 117, mother, *forward* (**F**) reads from **cheek**
+- `M117-ch_1` - family 117, mother, *reverse* (**R**) reads from **cheek**
+- `M117C1-bl_1`- family 117, child, *forward* (**F**) reads from **blood**
+- `M117C1-bl_2`- family 117, child, *reverse* (**R**) reads from **blood**
+- `M117C1-ch_1`- family 117, child, *forward* (**F**) reads from **cheek**
+- `M117C1-ch_2`- family 117, child, *reverse* (**R**) reads from **cheek**
 
 ## Creating a paired dataset collection
 
-Now click the checkbox in ![historyItemControls](../../images/historyItemControls.png) and you will see your history changing like this:
+You can see that there are eight datasets forming four pairs. Obviously, we can manipulate them one-by-one (e.g., start four mapping, jobs, call variants four times and so on), but this will unnecessarily tedious. Moreover, imagine if you have 100s or 1,000s of pairs: it will be impossible to process them individually. 
 
-![historyWithCheckboxes](../../images/historyWithCheckboxes.png)
-{: .img-responsive}
+This is exactly why we developed collections. Dataset collections allow combining multiple datasets into a single entity. Thus instead of dealing with four, a hundred, or a thousand of individual datasets you have only one item in Galaxy history to deal with. 
 
-Let's click **All**, which will select all datasets in the history, then click **For all selected...** and finally select **Build List of Dataset Pairs** from the following menu:
+Because our data is *paired* we need to create a hierarchical collection called **Paired Dataset Collection** or **Paired Collection**. In such collection there are two layers. The first layer corresponds to individual samples (e.g., `M117-bl`). The second layer represent `forward` and `reverse` reads corresponding to each sample:
 
-![buildPairs](../../images/buildPairs.png)
-{: .img-responsive}
+-----
 
-The following wizard will appear:
+![paired collection](../../images/collections/paired_collection.svg "The logic of Paired Collection. Here <em>N</em> datasets are bundled into a paired collection with two layers. The first layer corresponds to samples and the second to forward and reverse reads within each sample.")
 
-![collectionCreation](../../images/collectionCreation.png)
-{: .img-responsive}
+-----
 
-In this case Galaxy automatically assigned pairs using the `_1` and `_2` endings of dataset names. Let's however pretend that this did not happen. Click on **Unpair all** (highlighted in red in the figure above) link and then on **Clear** link (highlighted in blue in the figure above). The interface will change into its unpaired state:
+To begin creating a collection we need to select datasets we would like to bundle. This is done using checkbox button of Galaxy's history menu. Fig. 2 below shows this process.
 
-![collectionCreationClean](../../images/collectionCreationClean.png)
-{: .img-responsive}
+-----
 
-These datasets contain paired-end reads. Datasets containing the first (forward) and the second (reverse) read are differentiated by having `_1` and `_2` in the filename. We can use this feature in dataset collection wizard to pair our datasets.  Type `_1` in the left **Filter this list** text box and `_2` in the right:
+![selecting multiple datasets](../../images/collections/select_multiple_datasets.gif "Selecting multiple datasets and creating a paired collection.")
 
-![1and2](../../images/1and2.png)
-{: .img-responsive}
+-----
 
-You will see that the dataset collection wizard will automatically filter lists on each side of the interface:
+The above process ended with appearance of Galaxy collection wizard. In this case Galaxy automatically assigned pairs using the `_1` and `_2` endings of dataset names. Let's however pretend that this did not happen. Click on **Unpair all** (highlighted in red in the figure above) link and then on ** Filters** link (see anum,ation in Fig. 3). The interface will change into its unpaired state.
 
-![collectionPrefiltered](../../images/collectionPrefiltered.png)
-{: .img-responsive}
+Here datasets containing the first (forward) and the second (reverse) read are differentiated by having `_1` and `_2` in the filename. We can use this feature in dataset collection wizard to pair our datasets.  Type `_1` in the left **Filter text** text box and `_2` in the right. You will see that the dataset collection wizard will automatically filter lists on each side of the interface. Now you can either click **Auto pair** if pairs look good to you (proper combinations of datasets are listed in each line) or pair each forward/reverse group individually by pressing **Pair these datasets** button separating each pair.
 
-Now you can either click **Auto pair** if pairs look good to you (proper combinations of datasets are listed in each line) or pair each forward/reverse group individually by pressing **Pair these datasets** button separating each pair:
+Now it is time to name the collection: type `M117-collection` in **Name** text box and create the collection by clicking **Create collection**. A new item will appear in the history.
 
-![collectionCreation](../../images/collectionCreation.png)
-{: .img-responsive}
+------
 
-Now it is time to name the collection:
+![using collection wizard](../../images/collections/using_collection_wizard.gif "Working with collection wizard. Text above this figure explains each step.")
 
-![collectionNaming](../../images/collectionNaming.png)
+------
 
-and create the collection by clicking **Create list**. A new item will appear in the history as you can see on the panel **A** below. Clicking on collection will expand it to show four pairs it contains (panel **B**). Clicking individual pairs will expand them further to reveal **forward** and **reverse** datasets (panel **C**). Expanding these further will enable one to see individual datasets (panel **D**).
+
+
+
+
+ Clicking on collection will expand it to show four pairs it contains (panel **B**). Clicking individual pairs will expand them further to reveal **forward** and **reverse** datasets (panel **C**). Expanding these further will enable one to see individual datasets (panel **D**).
 
 ![collection_ABCD](../../images/collection_ABCD.png)
 {: .img-responsive}
