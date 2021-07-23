@@ -68,10 +68,10 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >     - src: dj-wasabi.telegraf
 >       version: 0.12.0
 >    +- src: usegalaxy_eu.tiaas2
->    +  version: 0.0.6
+>    +  version: 0.0.8
 >    {% endraw %}
 >    ```
->    {: data-commit="Add grafana requirement"}
+>    {: data-commit="Add tiaas2 requirement"}
 >
 >    And run the install step:
 >
@@ -119,7 +119,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >     postgresql_objects_databases:
 >       - name: galaxy
 >         owner: galaxy
->    @@ -16,6 +17,22 @@ postgresql_objects_privileges:
+>    @@ -16,6 +17,27 @@ postgresql_objects_privileges:
 >         roles: telegraf
 >         privs: SELECT
 >         objs: ALL_IN_SCHEMA
@@ -133,6 +133,11 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    +    objs: user_group_association,galaxy_group,role,group_role_association
 >    +    type: table
 >    +    privs: SELECT,INSERT
+>    +  - database: galaxy
+>    +    roles: tiaas
+>    +    objs: group_role_association
+>    +    type: table
+>    +    privs: DELETE
 >    +  - database: galaxy
 >    +    roles: tiaas
 >    +    objs: role_id_seq,galaxy_group_id_seq,group_role_association_id_seq,user_group_association_id_seq
@@ -333,7 +338,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -135,6 +135,7 @@ galaxy_local_tools:
+>    @@ -140,6 +140,7 @@ galaxy_local_tools:
 >     galaxy_dynamic_job_rules:
 >     - my_rules.py
 >     - map_resources.py
