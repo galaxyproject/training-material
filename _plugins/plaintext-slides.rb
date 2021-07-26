@@ -11,6 +11,11 @@ module Jekyll
         page2 = Jekyll::Page.new(site, site.source, dir, page.name)
         page2.data['layout'] = 'slides-plain'
         page2.basename = 'slides-plain'
+        page2.content = page2.content.gsub(/^name:\s*([^ ]+)\s*$/) {
+          anchor = $1
+
+          "<span id=\"#{anchor.strip}\"><i class=\"fas fa-link\" aria-hidden=\"true\"></i> #{anchor}</span>"
+        }
         site.pages << page2
       end
     end
