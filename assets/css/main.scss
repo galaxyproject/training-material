@@ -6,7 +6,7 @@ $tutorial-box-spacing: 1rem;
 
 // palette
 $white: #fff;
-$gray: #777;
+$gray: #555; // WCAG2 AA
 $light-gray: #ddd;
 $text-color: #292b2c;
 
@@ -119,7 +119,7 @@ div#theme-selector,div#lang-selector,div#archive-selector {
 }
 
 
-@mixin input-nicer($color, $active-color) {
+@mixin input-nicer($color) {
 	background: transparent;
 	color: $color;
 	border: none;
@@ -133,9 +133,10 @@ div#theme-selector,div#lang-selector,div#archive-selector {
 
 	&:focus,
 	&:active {
+		color: $color;
 		background: #fff2;
-		color: $active-color;
-		border-bottom: 2px solid $active-color;
+		border-bottom: 2px solid $color;
+		text-decoration: underline;
 	}
 }
 
@@ -182,7 +183,7 @@ body.theme-night {
 	}
 
 	#search-container input.nicer {
-		@include input-nicer(#ccc, #eee);
+		@include input-nicer(white);
 	}
 
 }
@@ -230,7 +231,7 @@ body.theme-midnight {
 	}
 
 	#search-container input.nicer {
-		@include input-nicer(#ccc, #eee);
+		@include input-nicer(white);
 	}
 
 }
@@ -306,7 +307,7 @@ body.theme-halloween {
 	}
 
 	#search-container input.nicer {
-		@include input-nicer(#ccc, #eee);
+		@include input-nicer(black);
 	}
 
 }
@@ -533,11 +534,11 @@ footer {
 
 
 nav input.nicer {
-	@include input-nicer(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.75));
+	@include input-nicer(white);
 }
 
 #search-container input.nicer {
-	@include input-nicer(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.75));
+	@include input-nicer(white);
 }
 
 #search-input {
@@ -1205,4 +1206,12 @@ abbr {
 	text-decoration: underline dotted;
 	cursor: help;
 	font-variant: none;
+}
+
+// Some a11y stuff
+.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
+	text-decoration: underline;
+}
+.navbar-dark .navbar-nav .nav-link {
+	color: white;
 }
