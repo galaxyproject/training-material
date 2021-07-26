@@ -1,6 +1,6 @@
 ---
 title: Cambiando el nombre de un historial
-area: histories
+area: historias
 box_type: tip
 layout: faq
 ---
