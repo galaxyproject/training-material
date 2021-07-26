@@ -37,6 +37,8 @@ layout: base
   {% assign gitter = site.gitter_url %}
 {% endif %}
 
+{% assign locale = site.data.lang[page.lang] %}
+
 <script>
   ((window.gitter = {}).chat = {}).options = {
   room: '{{ gitter | remove: "https://gitter.im/" }}'
@@ -111,15 +113,15 @@ layout: base
         <div class="contributors-line">By: {% include _includes/contributor-badge-list.html contributors=page.contributors %}</div>
 
         <blockquote class="overview">
-            <h3>Overview</h3>
-            <strong>{% icon question %} Questions</strong>
+            <h3>{{ locale['overview'] | default: "Overview"}}</h3>
+            <strong>{% icon question %} {{ locale['questions'] | default: "Questions" }}:</strong>
             <ul>
             {% for question in page.questions %}
             <li>{{ question | markdownify }}</li>
             {% endfor %}
             </ul>
 
-            <strong>{% icon objectives %} Objectives</strong>
+            <strong>{% icon objectives %} {{ locale['objectives'] | default: "Objectives" }}: </strong>
             <ul>
             {% for objective in page.objectives %}
             <li>{{ objective | markdownify }}</li>
@@ -127,7 +129,7 @@ layout: base
             </ul>
 
             {% if topic.requirements or page.requirements %}
-            <strong>{% icon requirements %} Requirements</strong>
+            <strong>{% icon requirements %} {{ locale['requirements'] | default: "Requirements"}}:</strong>
             <ul>
             {% include _includes/display_extra_training.md extra_trainings=topic.requirements %}
             {% include _includes/display_extra_training.md extra_trainings=page.requirements %}
@@ -135,11 +137,11 @@ layout: base
             {% endif %}
 
             {% if page.time_estimation %}
-            <div><strong>{% icon time %} Time estimation:</strong> {{ page.time_estimation | duration_to_human }}</div>
+            <div><strong>{% icon time %} {{ locale['time-estimation'] | default: "Time estimation"}}:</strong> {{ page.time_estimation | duration_to_human }}</div>
             {% endif %}
 
             {% if page.level %}
-            <div><strong>{% icon level %} Level: </strong>
+            <div><strong>{% icon level %} {{ locale['level'] | default: "Level"}}: </strong>
             {% include _includes/difficulty-indicator.html level=page.level textlabel=true %}</div>
             {% endif %}
 
@@ -153,12 +155,12 @@ layout: base
             {% endif %}
 
             {% if associated_slides or intro_link or tuto_has_zenodo or own_material.workflows or own_material.tours or tuto_has_docker %}
-            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> {{ locale['supporting-materials'] | default: "Supporting Materials" }}:</strong></div>
             <ul>
                 <div class="supporting_material">
                 {% if associated_slides %}
                     <li class="btn btn-default"><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html" title="Slides for this tutorial">
-                        {% icon slides %} Slides
+                        {% icon slides %} {{ locale['slides'] | default: "Slides"}}
                     </a></li>
                 {% elsif intro_link %}
                     <li class="btn btn-default supporting_material"><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ intro_target }}" title="Topic Overview slides">
@@ -191,7 +193,7 @@ layout: base
             </ul>
             {% endif %}
 
-            <div><strong> {% icon last_modification %} Last modification:</strong> {{ page.last_modified_at | date: "%b %-d, %Y"}} </div>
+            <div><strong> {% icon last_modification %} {{ locale['last-modification'] | default: "Last modification" }}:</strong> {{ page.last_modified_at | date: "%b %-d, %Y"}} </div>
         </blockquote>
 
         <div class="container">
@@ -207,7 +209,7 @@ layout: base
 
                     {% if page.key_points %}
                     <blockquote class="key_points">
-                        <h3>{% icon keypoints %} Key points</h3>
+                        <h3>{% icon keypoints %} {{locale['key-points'] | default: "Key points" }}</h3>
                         <ul>
                             {% for key_point in page.key_points %}
                             <li>{{ key_point | markdownify }}</li>
@@ -216,7 +218,7 @@ layout: base
                     </blockquote>
                     {% endif %}
 
-                    <h1>Frequently Asked Questions</h1>
+                    <h1>{{ locale['faqs'] | default: "Frequently Asked Questions" }}</h1>
                     Have questions about this tutorial? Check out the {% if hasfaq == "true" %}<a href="faqs/">tutorial FAQ page</a> or the {% endif %} <a href="{{site.baseurl}}/topics/{{topic.name}}/faqs/">FAQ page for the {{topic.title}} topic</a> to see if your question is listed there.
                     If not, please ask your question on the <a href="{{site.gitter_url}}">GTN Gitter Channel</a> or the
                     <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
@@ -227,7 +229,7 @@ layout: base
                     {% endif %}
 
                     {% if material.cited %}
-                    <h1 id="bibliography">References</h1>
+                    <h1 id="bibliography">{{locale['references']| default: "References" }}</h1>
                     {% bibliography --cited %}
                     {% endif %}
 
@@ -242,8 +244,8 @@ layout: base
                     </dl>
                     {% endif %}
 
-                    <h1>Feedback</h1>
-                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+                    <h1>{{locale['feedback'] | default: "Feedback" }}</h1>
+                    <p class="text-muted">{{ locale['feedback-text'] | default: "Did you use this material as an instructor? Feel free to give us feedback on"}} <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">locale['feedback-link-text'] | default: "how it went"}}</a>.</p>
 
                     <div id="feedback-button">
                         <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
@@ -275,7 +277,7 @@ layout: base
 
 
 
-                    <h1>Citing this Tutorial</h1>
+                    <h1>{{locale['citing-tutorial'] | default: "Citing this Tutorial"}}</h1>
                     <p>
                         <ol>
                             <li id="citation-text">
@@ -329,6 +331,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
 
                     <h3>{% icon congratulations %} Congratulations on successfully completing this tutorial!</h3>
 
+<<<<<<< HEAD
                     {% if topic.name == "contributing" %}
                     <blockquote class="agenda">
                         <h3>Developing GTN training material</h3>
@@ -350,6 +353,26 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                         {% endfor %}
                         </ol>
                     </blockquote>
+=======
+        <h3>{% icon congratulations %} {{locale['congrats'] | default: "Congratulations on successfully completing this tutorial!"}}</h3>
+
+        {% if topic.name == "contributing" %}
+        <blockquote class="agenda">
+            <h3>Developing GTN training material</h3>
+            This tutorial is part of a series to develop GTN training material, feel free to also look at:
+            {% assign topic = site.data[page.topic_name] %}
+            <ol>
+            {% for material in topic_material %}
+                {% if material.enable != "false" %}
+                    {% if material.type == "introduction" %}
+            <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html">{{ material.title }}</a></li>
+                    {% elsif material.type == "tutorial" %}
+                        {% if material.hands_on %}
+            <li><a href="{{ site.baseurl }}/topics/{{ topic.name  }}/tutorials/{{ material.tutorial_name }}/tutorial.html">{{ material.title }}</a></li>
+                        {% elsif material.slides %}
+            <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/slides.html">{{ material.title }}</a></li>
+                        {% endif %}
+>>>>>>> fdb0ef9188 (start to translate tutorial template)
                     {% endif %}
 
                     {% if page.follow_up_training %}
