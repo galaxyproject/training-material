@@ -38,7 +38,9 @@
         <div class="container main-content" role="main">
         {{ content }}
         </div>
-        {% include _includes/default-footer.html %}
+        {% if page.layout != "tutorial_hands_on" %}
+            {% include _includes/default-footer.html %}
+        {% endif %}
     </body>
     <script type="text/javascript" src="{{ "/assets/js/jquery.slim.min.js" | prepend: site.baseurl }}"></script>
     <script type="text/javascript" src="{{ "/assets/js/popper.min.js" | prepend: site.baseurl }}"></script>

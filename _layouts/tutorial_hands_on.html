@@ -1,5 +1,6 @@
 ---
 layout: base
+footer: no
 ---
 
 {% assign topic = site.data[page.topic_name] %}
@@ -62,6 +63,7 @@ layout: base
 
     <blockquote class="overview">
         <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
         <strong>{% icon question aria=false %} Questions</strong>
         <ul>
         {% for question in page.questions %}
@@ -140,6 +142,8 @@ layout: base
         {% endif %}
 
         <div><strong> {% icon last_modification aria=false %} Last modification:</strong> {{ page.last_modified_at | date: "%b %-d, %Y"}} </div>
+        <div><strong>{% icon license aria=false %} License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="{{ site.github_repository }}/blob/main/LICENSE.md">MIT</a></div>
+
     </blockquote>
 
     <div class="container">
@@ -313,3 +317,6 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
         </div>
     </div>
 </section>
+<br/>
+<br/>
+<br/>
