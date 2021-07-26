@@ -24,11 +24,11 @@ layout: base
     <div class="row">
         <div class="col">
             <h2>Galaxy for Scientists</h2>
-            <table class="table table-striped">
+            <table class="table table-striped" role="presentation">
                 <thead>
                     <tr>
                         <th>Topic</td>
-                        <th>Tutorials</td>
+                        <th role="presentation">Tutorials</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -160,14 +160,15 @@ layout: base
                 community contributors!
             </p>
 
-            <div class="container-fluid contributors">
-                <div id="contributors-carousel" class="carousel slide" data-ride="carousel" data-interval="3000">
-
                     {% assign ckeys = "" | split: ',' %}
                     {% for x in contributors %}
                          {% assign ckeys = ckeys | push: x[0] %}
                     {% endfor %}
                     {% assign ckeysN = ckeys | size %}
+                <div class="container-fluid contributors">
+                <span class="visually-hidden">The following element contains a carousel with the images of our {{ ckeysN }} contributors. This is more accessible via the hall of fame link which follows the carousel so we have hidden in from screenreaders so as to not annoy you.</span>
+                <div id="contributors-carousel" class="carousel slide" data-ride="carousel" data-interval="3000" aria-hidden="true">
+
                     {% assign shuffled_contributors = ckeys | sample: ckeysN %}
 
                     <div class="carousel-inner" role="listbox" title="Carousel">

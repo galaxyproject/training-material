@@ -25,15 +25,15 @@ layout: base
             {% unless contributors[username].halloffame == "no" %}
             <div class="hall-of-fame-hero" id="{{ username }}">
 
-                <a href="{{ site.baseurl }}/hall-of-fame/{{ username }}/" class="thumbnail">
+                <a href="{{ site.baseurl }}/hall-of-fame/{{ username }}/" class="thumbnail" title="{{ contributors[username].name | default: username }}">
                 {% if contributors[username].github != false %}
-                    <img src="https://avatars.githubusercontent.com/{{ username }}" alt="{{ username }}" loading="lazy">
+                    <img src="https://avatars.githubusercontent.com/{{ username }}" alt="avatar" loading="lazy" aria-hidden="true">
                 {% else %}
-                    <img src="https://avatars.githubusercontent.com/{{ username }}" alt="{{ username }}" loading="lazy">
+                    <img src="https://avatars.githubusercontent.com/{{ username }}" alt="avatar" loading="lazy" aria-hidden="true">
                 {% endif %}
                 </a>
 
-                <div class="name">
+                <div class="name" aria-hidden="true">
                     {{ contributors[username].name | default: username }}
                 </div>
 
