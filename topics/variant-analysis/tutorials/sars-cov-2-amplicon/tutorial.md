@@ -14,7 +14,7 @@ objectives:
 - Understand how to identify the clades and lineages that SARS-CoV-2 WGS samples belong to
 - What quality control steps to apply when analysing SARS-CoV-2 WGS data
 keywords:
--SARS-CoV-2, genome, variants
+- SARS-CoV-2, genome, variants
 time_estimation: 3H
 requirements:
 - 
