@@ -104,8 +104,7 @@ layout: base
 
         {% if associated_slides or intro_link or tuto_has_zenodo or own_material.workflows or own_material.tours or tuto_has_docker %}
         <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
-        <ul>
-            <div class="supporting_material">
+        <ul class="supporting_material">
             {% if associated_slides %}
                 <li class="btn btn-default"><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html">
                     {% icon slides aria=false %} Slides
@@ -137,7 +136,6 @@ layout: base
             {% if tuto_has_docker and topic.name != 'admin' %}
                 <li class="btn btn-default supporting_material">{% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=own_material.tutorial_name docker=topic.docker_image label=true %}</li>
             {% endif %}
-            </div>
         </ul>
         {% endif %}
 
@@ -148,7 +146,7 @@ layout: base
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
             <div class="col-sm-2">
-                <div id="toc" data-toggle="toc" class="sticky-top"></div>
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
                 {{ content
