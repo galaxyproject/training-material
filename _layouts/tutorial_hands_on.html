@@ -59,7 +59,7 @@ layout: base
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ site.baseurl }}/topics/{{ topic.name }}" title="Go back to list of tutorials">
-                            {% icon topic %} {{ topic.title }}
+                            {% icon topic aria=false %} {{ topic.title }}
                         </a>
                     </li>
 
@@ -69,7 +69,7 @@ layout: base
                     <!--
                     <li class="nav-item">
                         <a class="nav-link" href="{{ site.github_repository }}/edit/{{ site.github_repository_branch }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/tutorial.md">
-                            {% icon github %} Edit
+                            {% icon github aria=false %} Edit
                         </a>
                     </li>
                     -->
@@ -112,14 +112,14 @@ layout: base
 
         <blockquote class="overview">
             <h3>Overview</h3>
-            <strong>{% icon question %} Questions</strong>
+            <strong>{% icon question aria=false %} Questions</strong>
             <ul>
             {% for question in page.questions %}
             <li>{{ question | markdownify }}</li>
             {% endfor %}
             </ul>
 
-            <strong>{% icon objectives %} Objectives</strong>
+            <strong>{% icon objectives aria=false %} Objectives</strong>
             <ul>
             {% for objective in page.objectives %}
             <li>{{ objective | markdownify }}</li>
@@ -127,7 +127,7 @@ layout: base
             </ul>
 
             {% if topic.requirements or page.requirements %}
-            <strong>{% icon requirements %} Requirements</strong>
+            <strong>{% icon requirements aria=false %} Requirements</strong>
             <ul>
             {% include _includes/display_extra_training.md extra_trainings=topic.requirements %}
             {% include _includes/display_extra_training.md extra_trainings=page.requirements %}
@@ -135,11 +135,11 @@ layout: base
             {% endif %}
 
             {% if page.time_estimation %}
-            <div><strong>{% icon time %} Time estimation:</strong> {{ page.time_estimation | duration_to_human }}</div>
+            <div><strong>{% icon time aria=false %} Time estimation:</strong> {{ page.time_estimation | duration_to_human }}</div>
             {% endif %}
 
             {% if page.level %}
-            <div><strong>{% icon level %} Level: </strong>
+            <div><strong>{% icon level aria=false %} Level: </strong>
             {% include _includes/difficulty-indicator.html level=page.level textlabel=true %}</div>
             {% endif %}
 
@@ -157,12 +157,12 @@ layout: base
             <ul>
                 <div class="supporting_material">
                 {% if associated_slides %}
-                    <li class="btn btn-default"><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html" title="Slides for this tutorial">
-                        {% icon slides %} Slides
+                    <li class="btn btn-default"><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html">
+                        {% icon slides aria=false %} Slides
                     </a></li>
                 {% elsif intro_link %}
-                    <li class="btn btn-default supporting_material"><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ intro_target }}" title="Topic Overview slides">
-                        {% icon slides %} Topic Overview slides
+                    <li class="btn btn-default supporting_material"><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ intro_target }}">
+                        {% icon slides aria=false %} Topic Overview slides
                     </a></li>
                 {% endif %}
 
@@ -191,7 +191,7 @@ layout: base
             </ul>
             {% endif %}
 
-            <div><strong> {% icon last_modification %} Last modification:</strong> {{ page.last_modified_at | date: "%b %-d, %Y"}} </div>
+            <div><strong> {% icon last_modification aria=false %} Last modification:</strong> {{ page.last_modified_at | date: "%b %-d, %Y"}} </div>
         </blockquote>
 
         <div class="container">
@@ -207,7 +207,7 @@ layout: base
 
                     {% if page.key_points %}
                     <blockquote class="key_points">
-                        <h3>{% icon keypoints %} Key points</h3>
+                        <h3>{% icon keypoints aria=false %} Key points</h3>
                         <ul>
                             {% for key_point in page.key_points %}
                             <li>{{ key_point | markdownify }}</li>
@@ -327,7 +327,7 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                    <h3>{% icon congratulations %} Congratulations on successfully completing this tutorial!</h3>
+                    <h3>{% icon congratulations aria=false %} Congratulations on successfully completing this tutorial!</h3>
 
                     {% if topic.name == "contributing" %}
                     <blockquote class="agenda">
@@ -354,7 +354,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
 
                     {% if page.follow_up_training %}
                     <blockquote class="agenda follow-up">
-                        <strong class="follow-up">{% icon curriculum %} Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                        <strong class="follow-up">{% icon curriculum aria=false %} Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
                         <ul>
                             {% include _includes/display_extra_training.md extra_trainings=page.follow_up_training %}
                         </ul>
