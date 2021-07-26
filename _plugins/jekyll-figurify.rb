@@ -12,15 +12,15 @@ module Jekyll
     def generate(site)
       site.pages
         .select { |page| not skip_layout? page.data['layout'] }
-        .each { |page| figurify page }
+        .each { |page| figurify page,site }
       site.posts.docs
         .select { |post| not skip_layout? post.data['layout'] }
-        .each { |post| figurify post }
+        .each { |post| figurify post, site }
     end
 
     private
 
-    def figurify(page)
+    def figurify(page, site)
       num = 0
       page.content = page.content.gsub(/!\[([^\]]*)\]\((.+?)\s*(?:"(.*)")?\)({:(.*)})?/) {
         alt = $1
@@ -35,14 +35,20 @@ module Jekyll
 
           "<figure id=\"figure-#{num}\">" +
             "<img src=\"#{url}\" alt=\"#{alt}\" #{style}>" +
-            "<figcaption><span class=\"figcaption-prefix\">#{figcaption_prefix}#{num}:</span> #{title}</figcaption>" +
+            "<figcaption><span class=\"figcaption-prefix\">#{figcaption_prefix page,site}#{num}:</span> #{title}</figcaption>" +
           "</figure>"
         end
       }
     end
 
-    def figcaption_prefix
-      @config['prefix'] || 'Figure '
+    def figcaption_prefix(page, site)
+      fig = "Figure"
+      if page['lang']
+          lang = page['lang']
+          puts lang
+          fig = site.data["lang"][lang]["figure"]
+      end
+      @config['prefix'] || fig+' '
     end
 
     def skip_empty?
