@@ -600,6 +600,19 @@ As our training dataset is focused on chromosome 22 we will only use the CTCF pe
 ### Convert bedgraph from **MACS2** to bigwig
 The bedgraph format is easily readable for human but it can be very large and visualising a specific region is quite slow. We will change it to bigwig format which is a binary format, so we can visualise any region of the genome very quickly.
 
+> ### {% icon tip %} Tip: Speed-up the bedgraph to bigwig conversion
+>
+> In this tutorial we focus on chr22, thus we could restrict our bedgraph to chr22 before doing the conversion. This will both speed-up the conversion and decrease the amount of memory needed.
+>
+> To do so, we will use {% tool [Filter data on any column using simple expressions](Filter1) %} with the following parameters:
+> - {% icon param-file %} *"Filter"*: Select the output of **MACS2** {% icon tool %} (Bedgraph Treatment).
+> - *"With following condition"*: `c1=='chr22'`
+>
+> This will decrease by half the size of the file.
+> In the next step, choose the output of **Filter** instead of the output of **MACS2**.
+>
+{: .tip}
+
 > ### {% icon hands_on %} Hands-on: Convert bedgraphs to bigWig.
 >
 > 1. {% tool [Wig/BedGraph-to-bigWig](wig_to_bigWig) %} with the following parameters:

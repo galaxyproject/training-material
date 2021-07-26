@@ -53,7 +53,7 @@ For this exercise we will use a basic password file method for authenticating - 
 >
 >    ```diff
 >    @@ -14,6 +14,10 @@
->             uwsgi_pass 127.0.0.1:8080;
+>             uwsgi_pass 127.0.0.1:5000;
 >             uwsgi_param UWSGI_SCHEME $scheme;
 >             include uwsgi_params;
 >    +        auth_basic           galaxy;
@@ -61,9 +61,14 @@ For this exercise we will use a basic password file method for authenticating - 
 >    +        uwsgi_param          HTTP_REMOTE_USER $remote_user;
 >    +        uwsgi_param          HTTP_GX_SECRET SOME_SECRET_STRING;
 >         }
->
+>     
 >         # Static files can be more efficiently served by Nginx. Why send the
 >    ```
+
+>    > ### {% icon tip %} Running this tutorial *just* for Reports?
+>    > Add the `auth_basic` and `auth_basic_user_file` lines to your `location /reports/`
+>    {: .tip}
+>
 >
 >    `auth_basic` enables validation of username and password using the "HTTP Basic Authentication" protocol. Its value `galaxy` is used as a realm name to be displayed to the user when prompting for credentials.
 >    `auth_basic_user_file` specifies the file that keeps usernames and passwords.
@@ -118,6 +123,10 @@ For this exercise we will use a basic password file method for authenticating - 
 >        remote_user_maildomain: "{% raw %}{{ inventory_hostname }}{% endraw %}"
 >        remote_user_secret: SOME_SECRET_STRING
 >    ```
+>
+>    > ### {% icon tip %} Running this tutorial *just* for Reports?
+>    > You don't need to make the above changes for Galaxy then.
+>    {: .tip}
 >
 >    Set the `remote_user_maildomain` option to the appropriate domain name for your site.
 >

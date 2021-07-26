@@ -1,7 +1,5 @@
 ---
 layout: tutorial_hands_on
-enable: false
-
 title: Library Generation for DIA Analysis
 zenodo_link: 'https://zenodo.org/record/4293493'
 level: Intermediate
@@ -19,6 +17,8 @@ key_points:
 contributors:
 - matthias313
 - foellmelanie
+subtopic: id-quant
+tags: [DIA]
 
 ---
 

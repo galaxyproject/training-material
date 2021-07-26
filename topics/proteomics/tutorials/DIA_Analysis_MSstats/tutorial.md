@@ -1,7 +1,5 @@
 ---
 layout: tutorial_hands_on
-enable: false
-
 title: Statistical analysis of DIA data
 zenodo_link: 'https://zenodo.org/record/4302084'
 level: Intermediate
@@ -26,6 +24,8 @@ requirements:
 contributors:
 - matthias313
 - foellmelanie
+subtopic: post-process
+tags: [DIA]
 
 ---
 

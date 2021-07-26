@@ -200,7 +200,7 @@ Now it is time to run your first tool! We saw in the previous step that our file
 
 > ### {% icon hands_on %} Hands-on: Removing header
 >
-> 1. {% tool [Remove Beginning](Remove+beginning1) %} with the following parameters:
+> 1. {% tool [Remove Beginning](Remove beginning1) %} with the following parameters:
 >    - *Remove first*: `1` (to remove the first line only)
 >    - {% icon param-file %} *"from"*: select the **iris tabular** file from your history
 >    - Click **Execute**
@@ -606,7 +606,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 > 5. **Save your workflow** (important!) by clicking on the {% icon galaxy-save %} icon at the top right of the screen.
 >
 >
-> 6. **Return** to the analysis view by clicking on **Analyze Data** at the top menu bar.
+> 6. **Return** to the analysis view by clicking on the Home icon {% icon galaxy-home %} (or **Analyze Data** on older Galaxy versions) at the top menu bar.
 >
 {: .hands_on}
 

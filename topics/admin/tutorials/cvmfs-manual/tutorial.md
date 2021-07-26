@@ -159,14 +159,34 @@ Probe the connection.
 >    > What do you see?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > You should see nothing, as CVMFS uses `autofs` in order to mount paths only upon request. Once you `cd` into the directory, autofs will automatically mount the repository and files will be listed.
+>    > > You should see nothing, as CVMFS uses `autofs` in order to mount paths only upon request.
 >    > >
 >    > {: .solution }
 >    >
 >    {: .question}
 >
 >
-> 3. Change directory into `/cvmfs/data.galaxyproject.org/`. Have a browse through the contents. You'll see `.loc` files, genomes and indices.
+> 3. Change directory into `/cvmfs/data.galaxyproject.org/`.
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```
+>    > cd /cvmfs/data.galaxyproject.org/
+>    > ls
+>    > ls byhand
+>    > ls managed
+>    > ```
+>    {: .code-in}
+>
+>    > ### {% icon question %} Question
+>    >
+>    > What do you see now?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >  You'll see `.loc` files, genomes and indices.
+>    > > AutoFS only mounts the files when they're accessed, so it appears like there is no folder there.
+>    > {: .solution }
+>    >
+>    {: .question}
 >
 >    And just like that we all have access to all the reference genomes and associated tool indices thanks to the Galaxy Project, IDC, and Nate's hard work!
 >

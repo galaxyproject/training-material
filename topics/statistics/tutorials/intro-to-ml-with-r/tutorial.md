@@ -34,7 +34,7 @@ questions:
 - How can a create a decision tree?
 - How can I assess a linear regression model?
 objectives:
-- Understand the ML taxonomy and the commonly used machine learning algorithms for analysing "omics" data
+- Understand the ML taxonomy and the commonly used machine learning algorithms for analysing -omics data
 - Understand differences between ML algorithms categories and to which kind of problem they can be applied
 - Understand different applications of ML in different -omics studies
 - Use some basic, widely used R packages for ML
@@ -127,9 +127,38 @@ Tip 4 in the "Ten quick tips for machine learning in computational biology" ({% 
 
 # Exploratory Data Analysis (EDA) and Unsupervised Learning
 
-Before diving in the tutorial, we need to open RStudio. If you do not know how or never interacted with RStudio, please follow the [dedicated tutorial]({% link topics/galaxy-interface/tutorials/rstudio/tutorial.md %}).
+Before diving in the tutorial, we need to open {% tool [RStudio](interactive_tool_rstudio) %}. If you do not know how or never interacted with RStudio, please follow the [dedicated tutorial]({% link topics/galaxy-interface/tutorials/rstudio/tutorial.md %}).
 
 {% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
+
+> ### {% icon hands_on %} Hands-on: Installing Required Packages
+>
+> 1. Run the following code to install required packages
+>
+>    ```R
+>    ## To install needed CRAN packages:
+>    install.packages("tidyverse")
+>    install.packages("GGally")
+>    install.packages("caret")
+>    install.packages("gmodels")
+>    install.packages("rpart")
+>    install.packages("rpart.plot")
+>    install.packages("dendextend")
+>    install.packages("randomForest")
+>    install.packages("mlr3")
+>    install.packages("devtools")
+>
+>    ## To install needed Bioconductor packages:
+>    if (!requireNamespace("BiocManager", quietly = TRUE))
+>        install.packages("BiocManager")
+>    BiocManager::install()
+>    BiocManager::install(c("limma", "edgeR"))
+>
+>    # To install libraries from GitHub source
+>    library(devtools)
+>    install_github("vqv/ggbiplot")
+>    ```
+{: .hands_on}
 
 ## Loading and exploring data
 

@@ -18,6 +18,8 @@ key_points:
 contributors:
   - stortebecker
   - bgruening
+subtopic: special
+tags: []
 ---
 
 N-Tails is a special Proteomics technique to analyze peptide abundancy changes of protein N-termini. Prior to the MS measurement, N-Tails enriches unmodified, as well as acetylated N-termini. Both common and "unusual" N-termini are identified, where "unusual" means that the protein N-terminus was changes.
