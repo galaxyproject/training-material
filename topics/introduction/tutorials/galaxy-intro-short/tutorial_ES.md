@@ -268,11 +268,11 @@ Vamos a crear un historial nuevo.
 > ### {% icon hands_on %} Práctica: Nuevo historial
 > 1. Crear un nuevo historial
 >
->    {% snippet faqs/galaxy/ES/histories_create_new.md %}
+>    {% snippet faqs/galaxy-es/histories_create_new.md %}
 >
 > 2. Cambiar el nombre de tu historial, *e.g.* "Nuevo-Analisis"
 >
->    {% snippet faqs/galaxy/ES/histories_rename.md %}
+>    {% snippet faqs/galaxy-es/histories_rename.md %}
 >
 {: .hands_on}
 
