@@ -39,9 +39,9 @@ Two sequencing platforms (Illumina and Oxford Nanopore) in combination with seve
 - reliable and configurable consensus genome generation from called variants
 
 > ### {% icon details %} Further reading
-> More information about the workflows, including benchmarking, can be found at
-> - Galaxy COVID19 effort website: [covid19.galaxyproject.org](https://covid19.galaxyproject.org/)
-> - Our BioRxiv preprint: [Global platform for SARS-CoV-2 analysis](https://www.biorxiv.org/content/10.1101/2021.03.25.437046v1)
+> More information about the workflows, including benchmarking, can be found
+> - on the Galaxy Covid-19 effort website: [covid19.galaxyproject.org](https://covid19.galaxyproject.org/)
+> - as a BioRxiv preprint: [Global platform for SARS-CoV-2 analysis](https://www.biorxiv.org/content/10.1101/2021.03.25.437046v1)
 {: .details}
 
 This tutorial will teach you how to obtain, run and combine these workflows appropriately for different types of input data, be it:
@@ -62,7 +62,7 @@ This tutorial will teach you how to obtain, run and combine these workflows appr
 
 # Prepare Galaxy and data
 
-Any analysis should get their own Galaxy history. So let's start by creating a new one:
+Any analysis should get its own Galaxy history. So let's start by creating a new one:
 
 > ### {% icon hands_on %} Hands-on: Prepare the Galaxy history
 >
@@ -78,46 +78,54 @@ Any analysis should get their own Galaxy history. So let's start by creating a n
 
 ## Get sequencing data
 
-Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ files with the sequenced viral RNA from different patients infected with SARS-COV-2. Several types of data are possible:
+Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ files with the sequenced viral RNA from different patients infected with SARS-CoV-2. Several types of data are possible:
 
 - Single-end data derived from Illumina-based RNAseq experiments
 - Paired-end data derived from Illumina-based RNAseq experiments
 - Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols
 - ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols
 
-We encourage you to use your own data there (with at least 2 samples). If you do not have any datasets available, we provide some example datasets (paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols) from [COG-UK](https://www.cogconsortium.uk/), the COVID-19 Genomics UK Consortium.
+We encourage you to use your own data here (with at least 2 samples). If you do not have any datasets available, we provide some example datasets (paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols) from [COG-UK](https://www.cogconsortium.uk/), the COVID-19 Genomics UK Consortium.
 
 There are several possibilities to upload the data depending on how many datasets you have and what their origin is:
 
-- Import datasets (from your local file system, from a given URL or from a shared data library) and organize them as a dataset collection.
+- Import datasets
 
-  A dataset collection is a way to represent an arbitrarily large collection of samples as a singular entity within a user's workspace.
+  - from your local file system,
+  - from a given URL or
+  - from a shared data library on the Galaxy server you are working on
 
-- Import from [NCBI's Sequence Read Archive (SRA) at NCBI](https://www.ncbi.nlm.nih.gov/sra)
+  and organize the imported data as a dataset collection.
+
+  > ### {% icon comment %} Collections
+  >
+  > A dataset collection is a way to represent an arbitrarily large collection of samples as a singular entity within a user's workspace. For an in-depth introduction to the concept you can follow this [dedicated tutorial]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}).
+  >
+  {: .comment}
+
+- Import from [NCBI's Sequence Read Archive (SRA) at NCBI](https://www.ncbi.nlm.nih.gov/sra) with the help of a dedicated tool, which will organize the data into collections for you.
 
    > ### {% icon comment %} Getting data from SRA
    >
    > [A dedicated tutorial is available to explain how to find and import SARS-CoV-2 data from SRA]({% link topics/variant-analysis/tutorials/sars-cov-2/tutorial.md %}).
    >
-   {: .comment} 
+   {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Import datasets
 >
 > 1. Import the datasets
 >
->    - Option 1 [{% icon video %}](https://youtu.be/FFCDx1rMGAQ): From your own local data using **Upload Data** (recommended for 1-10 datasets). 
+>    - Option 1 [{% icon video %}](https://youtu.be/FFCDx1rMGAQ): Your own local data using **Upload Data** (recommended for 1-10 datasets). 
 >
 >      {% snippet faqs/galaxy/datasets_upload.md %}
 >
->    - Option 2 [{% icon video %}](https://youtu.be/hC8KSuT_OP8): From your own local data using **FTP** (recommended for >10 datasets)
+>    - Option 2 [{% icon video %}](https://youtu.be/hC8KSuT_OP8): Your own local data using **FTP** (recommended for >10 datasets)
 >
 >      {% snippet faqs/galaxy/datasets_upload_ftp.md %}
 >
 >    - Option 3: From the shared data library
 >
->      {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->
->      For our example datasets, the 36 `fastqsanger.gz` files (representing 18 samples) in folder `GTN - Material` -> `Variant analysis` -> `{{ page.title }}`
+>      {% snippet faqs/galaxy/datasets_import_from_data_library.md path="GTN - Material / Variant analysis / Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data / DOI: 10.5281/zenodo.5036686" %}
 >
 >    - Option 4: From an external server via URL
 >
@@ -174,29 +182,41 @@ There are several possibilities to upload the data depending on how many dataset
 >
 >      {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
->      For example datasets: 
->      - As datasets with `_1` contain the forward reads and datasets with `_2` the reverse reads, we need to select:
->        - text of unpaired forward: `_1`
->        - text of unpaired forward: `_2`
->      - We can remove `fastqsanger` if it appears in the names of the pairs
+>      For the example datasets:
+>      - Since the datasets carry `_1` and `_2` in their names, Galaxy may already have detected a possible pairing scheme for the data, in which case the datasets will appear in green in the lower half (the paired section) of the dialog.
+>
+>        You could accept this default pairing, but as shown in the middle column of the paired section, this would include the `.fastqsanger` suffix in the pair names (even with `Remove file extensions?` checked Galaxy would only remove the last suffix, `.gz`, from the dataset names.
+>
+>        It is better to undo the default pairing and specify exactly what we want:
+>        - at the top of the *paired section*: click `Unpair all`
+>
+>          This will move all input datasets into the *unpaired section* in the upper half of the dialog.
+>        - set the text of *unpaired forward* to: `_1.fastqsanger.gz`
+>        - set the text of *unpaired reverse* to: `_2.fastqsanger.gz`
+>        - click: `Auto-pair`
+>
+>        All datasets should be moved to the *paired section* again, but the middle column should now show that only the sample accession numbers will be used as the pair names.
+>
+>      - Make sure *Hide original elements* is checked to obtain a cleaned-up history after building the collection.
+>      - Click *Create Collection*
 >
 {: .hands_on}
 
 > ### {% icon comment %} Learning to build collections automatically
 >
-> It is possible to build collections from tabular data containing URLs, sample sheets, list of accessions or identifiers, etc. [A dedicated tutorial is available to explain the different possibilities]({% link topics/galaxy-interface/tutorials/upload-rules/tutorial.md %}).
+> It is possible to build collections from tabular data containing URLs, sample sheets, list of accessions or identifiers, etc., directly during upload of the data. [A dedicated tutorial is available to explain the different possibilities]({% link topics/galaxy-interface/tutorials/upload-rules/tutorial.md %}).
 >
-{: .comment} 
+{: .comment}
 
 ## Import auxiliary datasets
 
-For calling variants and annotating them, we need at least two additional datasets:
+Besides the sequenced reads data, we need at least two additional datasets for calling variants and annotating them:
 
 - the SARS-CoV-2 reference sequence [NC_045512.2](https://www.ncbi.nlm.nih.gov/nuccore/NC_045512.2?report=fasta) to align and compare our sequencing data against
 
-- a tabular dataset defining aliases for viral gene product names, which will let us translate NCBI RefSeq Protein identifiers (used by the snpEff annotation tool) to the commonly used names of coronavirus proteins and cleavage products.
+- a tabular dataset defining aliases for viral gene product names, which will let us translate NCBI RefSeq Protein identifiers (used by the SnpEff annotation tool) to the commonly used names of coronavirus proteins and cleavage products.
 
-Another two datasets are needed for the analysis of ampliconic, e.g. ARTIC-amplified, input data :
+Another two datasets are needed only for the analysis of ampliconic, e.g. ARTIC-amplified, input data:
 
 - a BED file specifying the primers used during amplification and their binding sites on the viral genome
 - a custom tabular file describing the amplicon grouping of the primers
@@ -210,7 +230,7 @@ Another two datasets are needed for the analysis of ampliconic, e.g. ARTIC-ampli
 >    - ARTIC v3 primer scheme (`ARTIC_nCoV-2019_v3.bed`)
 >    - ARTIC v3 primer amplicon grouping info (`ARTIC_amplicon_info_v3.tsv`)
 >
->    > ### {% icon comment %} Not using ARTIC v3 amplified sequencing data?
+>    > ### {% icon details %} Not using ARTIC v3 amplified sequencing data?
 >    >
 >    > The instructions here assume you will be analyzing the example samples
 >    > suggested above, which have been amplified using version 3 of the ARTIC
@@ -226,21 +246,21 @@ Another two datasets are needed for the analysis of ampliconic, e.g. ARTIC-ampli
 >    > the BED file that contribute to the same amplicon on a single tab-separated line.
 >    > The result should look similar to the ARTIC v3 amplicon grouping info file we
 >    >suggest to upload.
->    {: .comment}
+>    {: .details}
 >
 >    Several options exist to import these datasets:
 >
->    - Option 1: From the shared data library (in folder `GTN - Material` -> `Variant analysis` -> `Identification of allelic variants in SARS-CoV-2 from deep sequencing reads`)
+>    - Option 1: From the shared data library
 >
->      {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>      {% snippet faqs/galaxy/datasets_import_from_data_library.md path="GTN - Material / Variant analysis / Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data / DOI: 10.5281/zenodo.5036686" %}
 >
->    - Option 2: From [Zenodo]({{ page.zenodo_link }})
+>    - Option 2: From [Zenodo](https://zenodo.org/record/4555735)
 >
 >      ```
->      {{ page.zenodo_link }}/files/NC_045512.2_reference.fasta
->      {{ page.zenodo_link }}/files/NC_045512.2_feature_mapping.tsv
->      {{ page.zenodo_link }}/files/ARTIC_nCoV-2019_v3.bed
->      {{ page.zenodo_link }}/files/ARTIC_amplicon_info_v3.tsv
+>      https://zenodo.org/record/4555735/files/NC_045512.2_reference.fasta
+>      https://zenodo.org/record/4555735/files/NC_045512.2_feature_mapping.tsv
+>      https://zenodo.org/record/4555735/files/ARTIC_nCoV-2019_v3.bed
+>      https://zenodo.org/record/4555735/files/ARTIC_amplicon_info_v3.tsv
 >      ```
 >
 >      {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -252,7 +272,32 @@ Another two datasets are needed for the analysis of ampliconic, e.g. ARTIC-ampli
 >
 >      {% snippet faqs/galaxy/histories_import.md %}
 >
->    For the example datasets, the 4 auxiliary datasets need to be imported.
+>    For the example datasets, you will need to import all 4 auxiliary datasets.
+>
+> 2. Check and manually correct assigned datatypes
+>
+>    If you have imported the auxiliary datasets via their Zenodo links, Galaxy
+>    will have tried to autodetect the format of each imported dataset, but
+>    will not always be right with its guess. It's your task now to check and
+>    possibly correct the format assignments for each of the datasets!
+>
+>    - Expand the view of each of the uploaded auxiliary datasets and see if
+>      Galaxy shows the following `format` values:
+>      - for `NC_045512.2_reference.fasta`: `fasta`
+>      - for `NC_045512.2_feature_mapping.tabular`: `tabular`
+>      - for `ARTIC_nCoV-2019_v3.bed6`: `bed6` or `bed`
+>      - for `ARTIC_amplicon_info_v3.tabular`: `tabular`
+>
+>    - If any of the above assignments are not what they should be, then change
+>      the datatype of the corresponding dataset now to the intended format.
+>
+>      {% snippet faqs/galaxy/datasets_change_datatype.md %}
+>
+>    If you have imported the auxiliary datasets into your history from a
+>    shared data library or history, then the above steps are not necessary
+>    (though checking the datatypes of imported data is good practice in
+>    general) because the shared datasets have their format configured
+>    correctly already.
 >
 {: .hands_on}
 
@@ -284,9 +329,11 @@ ONT ARTIC | ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconi
 
 > ### {% icon hands_on %} Hands-on: From FASTQ to annotated AVs
 >
-> 1. **Get the workflow** on Galaxy 
+> 1. **Get the workflow** for your data into Galaxy 
 >
->    - Option 1: Use workflows directly on [usegalaxy.eu](https://usegalaxy.eu/) from [WorkflowHub](https://workflowhub.eu)
+>    - Option 1: Find workflows on the [WorkflowHub](https://workflowhub.eu) and run them directly on [usegalaxy.eu](https://usegalaxy.eu/)
+>
+>      Please note that this option currently works *only* with usegalaxy.eu!
 >
 >      - Open the workflow page on the WorkflowHub
 >        - [Illumina ARTIC PE](https://workflowhub.eu/workflows/110) - The one to use for example datasets
@@ -294,25 +341,25 @@ ONT ARTIC | ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconi
 >        - [Illumina RNAseq PE](https://workflowhub.eu/workflows/113)
 >        - [ONT ARTIC](https://workflowhub.eu/workflows/111)
 >
->      - Click on `Run on usegalaxy.eu` on the top right of the page
+>      - Click on `Run on usegalaxy.eu` at the top right of the page
 >      
 >        The browser will open a new tab with Galaxy's workflow invocation interface.
 >
->    - Option 2: Import the workflows of IWC (Intergalactic Workflow Commission) from [Dockstore](https://dockstore.org/) using the workflow search
+>    - Option 2: Import the workflow from [Dockstore](https://dockstore.org/) using Galaxy's workflow search
 >
 >      {% snippet faqs/galaxy/workflows_import_search.md trs_server="Dockstore" search_query='organization:"iwc-workflows"' %}
 >
 >      For the example dataset: `sars-cov-2-pe-illumina-artic-variant-calling/COVID-19-PE-ARTIC-ILLUMINA`
 >
->    - Option 3: Import the workflow directly from IWC into Galaxy
+>    - Option 3: Import the workflow via its github link
 >
->      - Open the workflow GitHub repository
+>      - Open the GitHub repository of your workflow
 >        - [Illumina ARTIC PE](https://github.com/iwc-workflows/sars-cov-2-pe-illumina-artic-variant-calling) - The one to use for example datasets
 >        - [Illumina RNAseq SE](https://github.com/iwc-workflows/sars-cov-2-se-illumina-wgs-variant-calling)
 >        - [Illumina RNAseq PE](https://github.com/iwc-workflows/sars-cov-2-pe-illumina-wgs-variant-calling)
 >        - [ONT ARTIC](https://github.com/iwc-workflows/sars-cov-2-ont-artic-variant-calling)
 >      - Open the `.ga` file
->      - Click on `Raw` on the top right of the file
+>      - Click on `Raw` at the top right of the file view
 >      - Save the file or Copy the URL of the file
 >      - Import the workflow to Galaxy
 >
@@ -352,19 +399,22 @@ Once the jobs of previous workflows are done, we identified AVs for each sample.
 
 > ### {% icon hands_on %} Hands-on: From annotated AVs per sample to AV summary
 >
-> 1. **Get the workflow** on Galaxy
+> 1. **Get the workflow** into Galaxy
 >    
->    - Option 1: Use workflow directly on [usegalaxy.eu](https://usegalaxy.eu/) from [WorkflowHub](https://workflowhub.eu)
+>    - Option 1: Find workflows on the [WorkflowHub](https://workflowhub.eu) and run them directly on [usegalaxy.eu](https://usegalaxy.eu/)
+>
+>      Please note that this option currently works *only* with usegalaxy.eu!
+>
 >      - Open the [workflow page on WokflowHub](https://workflowhub.eu/workflows/109)
 >      - Click on `Run on usegalaxy.eu` on the top right of the page
 >      
 >        The browser will open a new tab with Galaxy's workflow invocation interface.
 >
->    - Option 2: Import the workflow of IWC (Intergalactic Workflow Commission) from [Dockstore](https://dockstore.org/) using the workflow search
+>    - Option 2: Import the workflow from [Dockstore](https://dockstore.org/) using Galaxy's workflow search
 >
 >      {% snippet faqs/galaxy/workflows_import_search.md trs_server="Dockstore" search_query='organization:"iwc-workflows"' workflow_name="sars-cov-2-variation-reporting/COVID-19-VARIATION-REPORTING" %}
 >
->    - Option 3: Import the workflow directly from IWC into Galaxy
+>    - Option 3: Import the workflow via its github repo link
 >
 >      - Open the [workflow GitHub repository](https://github.com/iwc-workflows/sars-cov-2-variation-reporting)
 >      - Open the `.ga` file
@@ -381,25 +431,35 @@ Once the jobs of previous workflows are done, we identified AVs for each sample.
 >    - *"Send results to a new history"*: `No`
 >    - *"1: AF Filter - Allele Frequency Filter"*: `0.05`
 > 
->       This number is the nminimum allele frequency required for variants to be included in the report.
+>       This number is the minimum allele frequency required for variants to be included in the report.
 >
->    - *"2: DP Filer*: `1`
+>    - *"2: DP Filer"*: `1`
 >
->       The minimum depth of all alignment at a variant site
+>       The minimum depth of all alignments required at a variant site;
+>       the suggested value will, effectively, deactivate filtering on overall DP and will result in the DP_ALT Filter to be used as the only coverage-based filter.
 >
->    - *"3: Variation data to report"*: `Final (SnpEff-) annotated variants`
+>    - *"3: DP_ALT Filter"*: `10`
+>
+>       The minimum depth of alignments at a site that need to support the respective variant allele
+>
+>    - *"4: Variation data to report"*: `Final (SnpEff-) annotated variants`
 >
 >       The collection with variation data in VCF format: the output of the previous workflow
 >
+>
 >    - *"4: gene products translations"*: `NC_045512.2_feature_mapping.tsv` or `NC_045512.2 feature mapping`
 >
->       The custom tabular file mapping NCBI RefSeq Protein identifiers (as used by snpEff version 4.5covid19) to their commonly used names, part of the auxillary data.
+>       The custom tabular file mapping NCBI RefSeq Protein identifiers (as used by snpEff version 4.5covid19) to their commonly used names, part of the auxillary data; the names in the second column of this dataset are the ones that will appear in the reports generated by this workflow.
+>
+>    - *"5: Number of Clusters"*: `3`
+>
+>      The variant frequency plot generated by the workflow will separate the samples into this number of clusters.
 >
 {: .hands_on}
 
-Both workflows generate several outputs. Most of them are collections with results for each samples. There are also reports combining information for all samples.
+The three key results datasets produced by the Reporting workflow are:
 
-1. **Combined Variant Report by Sample**: table sumarize several information (columns) for each AVs in each sample (row)
+1. **Combined Variant Report by Sample**: This table combines the key statistics for each AV call in each sample. Each line in the dataset represents one AV detected in one specific sample
 
    Column | Field | Meaning
    --- | --- | ---
@@ -436,14 +496,14 @@ Both workflows generate several outputs. Most of them are collections with resul
    > > 1. By expanding the dataset in the history, we have the number of lines in the file. 853 lines for the example datasets. The first line is the header of the table. Then 852 AVs.
    > >
    > > 2. We can filter the table to get only the AVs for the first sample {% tool [Filter data on any column using simple expressions](Filter1) %} with the following parameters:
-   > >    - {% icon param-file %} *"Filter*": `Combined Variant Report by Variant`
+   > >    - {% icon param-file %} *"Filter*": `Combined Variant Report by Sample`
    > >    - *"With following condition*": `c1=='ERR5931005'` (to adapt with the sample name)
    > >    - *"Number of header lines to skip*": `1`
    > >
    > >    We got then only the AVs for the selected sample (46 for ERR5931005).
    > >
    > > 3. To get the number of AVs for each sample, we can run {% tool [Group data](Grouping1) %} with the following parameters:
-   > >    - {% icon param-file %} *"Select data"*: `Combined Variant Report by Variant`
+   > >    - {% icon param-file %} *"Select data"*: `Combined Variant Report by Sample`
    > >    - *"Group by column"*: `Column: 1`
    > >    - In *"Operation"*:
    > >      - In *"1: Operation"*:
@@ -454,20 +514,20 @@ Both workflows generate several outputs. Most of them are collections with resul
    > {: .solution}
    {: .question}
 
-2. **Combined Variant Report by Variant**: this table combine the information (column) for each AV (row)
+2. **Combined Variant Report by Variant**: This table combines the information about each AV *across* samples.
 
    Column | Field | Meaning
    --- | --- | ---
    1 | `POS` | Position in [NC_045512.2](https://www.ncbi.nlm.nih.gov/nuccore/1798174254)
    2 | `REF` | Reference base
    3 | `ALT` | Alternative base
-   4 | `IMPACT` | Functional impact (from SNPEff) 
-   5 | `FUNCLASS` | Funclass for change (from SNPEff)
-   6 | `EFFECT` | Effect of change (from SNPEff)
+   4 | `IMPACT` | Functional impact (from SnpEff) 
+   5 | `FUNCLASS` | Funclass for change (from SnpEff)
+   6 | `EFFECT` | Effect of change (from SnpEff)
    7 | `GENE` | Gene 
    8 | `CODON` | Codon 
    9 | `AA` | Amino acid 
-   10 |`TRID` | Short name for the gene 
+   10 |`TRID` | Short name for the gene (from the feature mapping dataset)
    11 |`countunique(Sample)` | Number of distinct samples containing this change 
    12 |`min(AF)` | Minimum Alternative Allele Freq across all samples containing this change 
    13 |`max(AF)` | Maximum Alternative Allele Freq across all samples containing this change 
@@ -481,8 +541,8 @@ Both workflows generate several outputs. Most of them are collections with resul
    > 1. How many AVs are found?
    > 1. What are the different impacts of the AVs?
    > 2. How many variants are found for each impact?
-   > 3. What are the different effects for HIGH impact?
-   > 4. Is there any AVs impacting all samples?
+   > 3. What are the different effects of HIGH impact?
+   > 4. Are there any AVs impacting all samples?
    >
    > > ### {% icon solution %} Solution
    > >
@@ -516,17 +576,17 @@ Both workflows generate several outputs. Most of them are collections with resul
    > >    - *"With following condition*": `c11==18` (to adapt to the number of sample)
    > >    - *"Number of header lines to skip*": `1`
    > >
-   > >    For our example datasets, 4 AVs are found for all samples
+   > >    For our example datasets, 4 AVs are found in all samples
    > {: .solution}
    {: .question}
 
-3. **Variant frequency**
+3. **Variant frequency plot**
 
    ![Variant frequency plot](../../images/sars-cov-2-variant-discovery/variant-frequency.svg)
 
    This plot represents AFs (cell color) for the different AVs (columns) and the different samples (rows). The AVs are grouped by genes (different colors on the 1st row). Information about their effect is also represented on the 2nd row. The samples are clustered following the tree displayed on the left.
 
-   In the example datasets, the samples are clustered in 3 clusters (as we defined when running the workflow), that may represent different SARS-CoV-2 variants as the AVs profiles are different.
+   In the example datasets, the samples are clustered in 3 clusters (as we defined when running the workflow), that may represent different SARS-CoV-2 lineages as the AVs profiles are different.
 
 # From AVs to consensus sequences
 
@@ -541,13 +601,22 @@ The workflow takes a collection of VCFs and a collection of the corresponding al
 
 > ### {% icon hands_on %} Hands-on: From AVs to consensus sequences
 >
-> 1. **Get the workflow** on Galaxy
+> 1. **Get the workflow** into Galaxy
 >
->    - Option 1: Import the workflow of IWC (Intergalactic Workflow Commission) from [Dockstore](https://dockstore.org/) using the workflow search
+>    - Option 1: Find workflows on the [WorkflowHub](https://workflowhub.eu) and run them directly on [usegalaxy.eu](https://usegalaxy.eu/)
+>
+>      Please note that this option currently works *only* with usegalaxy.eu!
+>
+>      - Open the [workflow page on WokflowHub](https://workflowhub.eu/workflows/138)
+>      - Click on `Run on usegalaxy.eu` on the top right of the page
+>      
+>        The browser will open a new tab with Galaxy's workflow invocation interface.
+>
+>    - Option 2: Import the workflow from [Dockstore](https://dockstore.org/) using Galaxy's workflow search
 >
 >      {% snippet faqs/galaxy/workflows_import_search.md trs_server="Dockstore" search_query='organization:"iwc-workflows"' workflow_name="sars-cov-2-consensus-from-variation/COVID-19-CONSENSUS-CONSTRUCTION" %}
 >
->    - Option 2: Import the workflow directly from IWC into Galaxy
+>    - Option 2: Import the workflow via its github repo link
 >
 >      - Open the [workflow GitHub repository](https://github.com/iwc-workflows/sars-cov-2-consensus-from-variation)
 >      - Open the `.ga` file
@@ -574,7 +643,7 @@ The workflow takes a collection of VCFs and a collection of the corresponding al
 >
 >       Variant calls with an AF higher than this value, but lower than the AF threshold for consensus variants will be considered questionable and the respective sites be masked (with Ns) in the consensus sequence.
 >
->    - *"4: aligned reads data for depth calculation"*: `Full processed reads for variant calling`
+>    - *"4: aligned reads data for depth calculation"*: `Fully processed reads for variant calling`
 >
 >       Collection with fully processed BAMs generated by the first workflow. 
 >
@@ -582,11 +651,11 @@ The workflow takes a collection of VCFs and a collection of the corresponding al
 >
 >    - *"5: Depth-threshold for masking"*: `5`
 >
->       Sites in the viral genome covered by less than this number of reads are considered questionable and will be masked (with Ns) in the consensus sequence independent of whether a variant has been called at them or not.
+>       Sites in the viral genome covered by less than this number of reads detection of variants is considered to become unreliable. Such sites will be masked (with Ns) in the consensus sequence unless there is a consensus variant call at the site.
 >
 >    - *"6: Reference genome*": `NC_045512.2_reference.fasta` or `NC_045512.2 reference sequence`
 >
->       SARS-CoV-2 reference genome, as part of the auxillary data.
+>       SARS-CoV-2 reference genome, part of the auxillary data.
 >
 {: .hands_on}
 
@@ -594,11 +663,11 @@ The main outputs of the workflow are:
 - A collection of viral consensus sequences.
 - A multisample FASTA of all these sequences.
 
-The last one can be given as input for tools like **Pangolin** or **Nextclade**.
+The last one can be used as input for tools like **Pangolin** or **Nextclade**.
 
 # From consensus sequences to clade/lineage assignments
 
-To assign lineages to the different samples from their consensus sequences, 2 tools are available **Pangolin** or **Nextclade**
+To assign lineages to the different samples from their consensus sequences, two tools are available: **Pangolin** and **Nextclade**.
 
 ## With Pangolin
 
