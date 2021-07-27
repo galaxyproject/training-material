@@ -16,10 +16,9 @@ layout: base
     <h1>Hall of Fame</h1>
 
     <p class="lead">
-        A big <em>Thank You!</em> to the <strong>{{ contributors| where_exp: "item", "item.halloffame != 'no'"| size }}</strong>
+        A big <em>Thank You!</em> in no particular order to the <strong>{{ contributors| where_exp: "item", "item.halloffame != 'no'"| size }}</strong>
         awesome contributors to the Galaxy training materials!
     </p>
-    <p class="text-muted">This list of contributors is not in alphabetical order, in order to decrease the bias in who is included in the screenshots of this page that are often used in slides.</p>
 
     <div class="hall-of-fame">
         {% for username in shuffled_contributors %}
