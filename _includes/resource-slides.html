@@ -15,6 +15,10 @@
         <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ include.topic }}%2Ftutorials%2F{{ include.material.tutorial_name }}%2Fslides.html&edit-text=&act=url" title="{{ inst[0] }}">
             And more!
         </a>
+
+	<a class="btn btn-default topic-icon" href="{{ site.baseurl }}/topics/{{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/slides-plain.html" aria-label="more accessible, plain text slides">
+		{% icon text-document aria=false %} Plain text slides
+	</a>
     </ul>
     {% endif %}
 {% if include.material.video %}
@@ -22,10 +26,4 @@
     {% icon video aria=false %}
 </a>
 {% endif %}
-{% if include.material.slides %}
-	<a class="btn btn-default topic-icon" href="{{ site.baseurl }}/topics/{{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/slides-plain.html" aria-label="more accessible, plain text slides">
-		{% icon text-document aria=false %}
-	</a>
-{% endif %}
     </span>
-
