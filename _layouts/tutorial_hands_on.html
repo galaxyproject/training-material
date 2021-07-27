@@ -144,7 +144,10 @@ footer: no
         {% endif %}
 
         <div><strong>{% icon last_modification aria=false %} {{ locale['last-modification'] | default: "Last modification" }}:</strong> {{ page.last_modified_at | date: "%b %-d, %Y"}} </div>
-        <div><strong>{% icon license aria=false %} License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="{{ site.github_repository }}/blob/main/LICENSE.md">MIT</a></div>
+        <div><strong>{% icon license aria=false %} {{ locale['license'] | default: "License" }}:</strong>
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">{{ locale['license-framework'] | default: "Tutorial Content is licensed under Creative Commons Attribution 4.0 International License" }}</a>
+            <a rel="license" href="{{ site.github_repository }}/blob/main/LICENSE.md">{{ locale['license-framework'] | default: "The GTN Framework is licensed under MIT" }}</a>
+        </div>
     </blockquote>
 
     <div class="container">
