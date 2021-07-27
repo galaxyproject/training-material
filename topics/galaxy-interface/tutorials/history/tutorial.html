@@ -29,30 +29,8 @@
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
-        
-
-
-
-
-
-
-
-
-
-
-
-<!-- Gitter -->
-
-
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
             <a class="navbar-brand" href="/training-material/">
                 <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
@@ -65,11 +43,12 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        
                         <a class="nav-link" href="/training-material/topics/galaxy-interface" title="Go back to list of tutorials">
-                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Using Galaxy and Managing your Data
+                            <i class="far fa-folder" aria-hidden="true"></i> Using Galaxy and Managing your Data
                         </a>
+                        
                     </li>
-
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
         <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
@@ -208,15 +187,8 @@
     </div>
 </li>
 
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/galaxy-interface/tutorials/history/tutorial.md">
-                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
-                        </a>
-                    </li>
-                    -->
 
-                     <!-- Search bar-->
+                    <!-- Search bar-->
                     <li class="nav-item">
                       <div id="navbarSupportedContent">
                         <!-- Search form -->
@@ -228,16 +200,37 @@
                         </form>
                       </div>
                     </li>
-
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 
-<div class="container main-content">
-    <script type="application/ld+json">
+        <div class="container main-content" role="main">
         
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
 
 
 {
@@ -355,60 +348,63 @@
     }
   ]
 }
-    </script>
+</script>
 
-    <section class="tutorial topic-galaxy-interface">
-        <h1 data-toc-skip>Understanding Galaxy history system</h1>
-        
+<section class="tutorial topic-galaxy-interface">
+    <h1 data-toc-skip>Understanding Galaxy history system</h1>
+    
 
-        <div class="contributors-line">By: 
+    <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nekrut" alt="Anton Nekrutenko">Anton Nekrutenko</a> <a href="/training-material/hall-of-fame/martenson/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/martenson" alt="Martin Čech">Martin Čech</a> <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Helena Rasche">Helena Rasche</a>
+ <a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nekrut" alt="Avatar">Anton Nekrutenko</a> <a href="/training-material/hall-of-fame/martenson/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/martenson" alt="Avatar">Martin Čech</a> <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Avatar">Helena Rasche</a>
 
 </div>
 
-        <blockquote class="overview">
-            <h3>Overview</h3>
-            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
-            <ul>
-            
-            <li><p>How do Galaxy histories work?</p>
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions</strong>
+        <ul>
+        
+        <li><p>How do Galaxy histories work?</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
-            <ul>
-            
-            <li><p>Gain understanding on navigating and manipulating histories</p>
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+        <ul>
+        
+        <li><p>Gain understanding on navigating and manipulating histories</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            
+        
 
-            
-            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 30 minutes</div>
-            
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 30 minutes</div>
+        
 
-            
+        
 
-            
-            
+        
+        
 
-            
+        
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Nov 18, 2020 </div>
-        </blockquote>
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 18, 2020 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
-        <div class="container">
-            <div class="row">
-                <!-- sidebar, which will move to the top on a small screen -->
-                <div class="col-sm-2">
-                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
-                </div>
-                <div class="col-sm-10">
-                    <p>When data is uploaded from your computer or analysis is done on existing data using <span class="notranslate">Galaxy</span>, each output from those steps
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                <p>When data is uploaded from your computer or analysis is done on existing data using <span class="notranslate">Galaxy</span>, each output from those steps
 generates a dataset. These datasets (and the output datasets from later analysis on them) are stored by <span class="notranslate">Galaxy</span> in
 <strong>Histories</strong>.</p>
 
@@ -418,7 +414,7 @@ generates a dataset. These datasets (and the output datasets from later analysis
 bioinformatics terms. Your current history is displayed in the right hand side of the main ‘Analyze Data’ <span class="notranslate">Galaxy</span> page in
 what is called the history panel.</p>
 
-<figure id="figure-1"><img src="../../images/history.png" alt="Current history buttons" /><figcaption><span class="figcaption-prefix">Figure 1:</span> <span class="notranslate">Galaxy</span> History is simply the right panel of the interface</figcaption></figure>
+<figure id="figure-1"><img src="../../images/history.png" alt="Current history buttons" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> <span class="notranslate">Galaxy</span> History is simply the right panel of the interface</figcaption></figure>
 
 <p>The history panel displays output datasets in the order in which they were created, with the oldest/first shown at the
 bottom. As new analyses are done and new output datasets are generated, the newest datasets are added to the top of the
@@ -436,7 +432,7 @@ clear you sessions - that history will be lost!</strong> We can not recover it f
 
 <h3 id="current-history-controls">Current history controls</h3>
 
-<figure id="figure-2"><img src="../../images/current-history-buttons.png" alt="Current history buttons" /><figcaption><span class="figcaption-prefix">Figure 2:</span> History Controls</figcaption></figure>
+<figure id="figure-2"><img src="../../images/current-history-buttons.png" alt="Current history buttons" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> History Controls</figcaption></figure>
 
 <p>Above the current history panel are three buttons: the refresh, history options, and ‘view all histories’ button.</p>
 
@@ -463,7 +459,7 @@ annotated.</p>
   <li>To cancel renaming, press <kbd>Esc</kbd> or click outside the input field.</li>
 </ol>
 
-<figure id="figure-3"><img src="../../images/renaming.png" alt="Renaiming history" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Renaming a history by clicking on its name and entering a new one</figcaption></figure>
+<figure id="figure-3"><img src="../../images/renaming.png" alt="Renaiming history" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Renaming a history by clicking on its name and entering a new one</figcaption></figure>
 
 <h3 id="tagging-a-history">Tagging a history</h3>
 
@@ -485,7 +481,7 @@ or ‘variants’. Or you may tag them according to data sources or some other m
   <li>To remove an existing tag, click the small ‘X’ on the tag or use the backspace key while in the input field.</li>
 </ol>
 
-<figure id="figure-4"><img src="../../images/tags.png" alt="Using tags" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Tagging a history will help searching for it later on.</figcaption></figure>
+<figure id="figure-4"><img src="../../images/tags.png" alt="Using tags" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Tagging a history will help searching for it later on.</figcaption></figure>
 
 <h3 id="annotating-a-history">Annotating a history</h3>
 
@@ -505,7 +501,7 @@ notes about the analysis.</p>
   <li>To save the annotation, click the ‘Done’ button.</li>
 </ol>
 
-<figure id="figure-5"><img src="../../images/annotations.png" alt="Annotations to history" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Annotating a history allows entering more information such as, for example, experimental details related to the analysis</figcaption></figure>
+<figure id="figure-5"><img src="../../images/annotations.png" alt="Annotations to history" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Annotating a history allows entering more information such as, for example, experimental details related to the analysis</figcaption></figure>
 
 <h3 id="history-size">History size</h3>
 
@@ -533,7 +529,7 @@ datasets and brought that total below the quota.</p>
   You can re-start/resume paused jobs using the options menu above the history panel and selecting ‘Resume Paused Jobs’.</li>
 </ol>
 
-<figure id="figure-6"><img src="../../images/states.png" alt="States in history" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Dataset states</figcaption></figure>
+<figure id="figure-6"><img src="../../images/states.png" alt="States in history" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Dataset states</figcaption></figure>
 
 <p>Datasets in the panel are initially shown in a ‘summary’ view, that only displays:</p>
 
@@ -548,7 +544,7 @@ datasets and brought that total below the quota.</p>
 <p class="alert alert-warning"><strong>Note:</strong> some of the buttons above may be disabled if the dataset is in a state that doesn’t allow the
 action. For example, the ‘edit’ button is disabled for datasets that are still queued or running.</p>
 
-<figure id="figure-7"><img src="../../images/summary.png" alt="Datasets as summary in history" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Controls for 'summary' (or collapsed) dataset view</figcaption></figure>
+<figure id="figure-7"><img src="../../images/summary.png" alt="Datasets as summary in history" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Controls for 'summary' (or collapsed) dataset view</figcaption></figure>
 
 <p>You can click the dataset name and the view will expand to show more details:</p>
 
@@ -561,7 +557,7 @@ action. For example, the ‘edit’ button is disabled for datasets that are sti
   <li>A <strong>peek</strong> of the data: a couple of rows of data with the column headers (if available).</li>
 </ol>
 
-<figure id="figure-8"><img src="../../images/details.png" alt="Details" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Controls for expanded dataset view.</figcaption></figure>
+<figure id="figure-8"><img src="../../images/details.png" alt="Details" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Controls for expanded dataset view.</figcaption></figure>
 
 <p class="alert alert-warning"><strong>Note:</strong> many of these details are only displayed if the dataset has finished running, is in the ‘ok’ state, and
 is not deleted. Otherwise, you may only see a shorter message describing the dataset’s state (e.g. ‘this dataset
@@ -578,7 +574,7 @@ your history has hidden datasets, the number will appear there (e.g. ‘3 hidden
 the hidden datasets are shown. Each hidden dataset has a link in the top of the summary view that allows you to unhide
 it. You can click that link again (which will now be ‘hide hidden’) to make them not shown again.</p>
 
-<figure id="figure-9"><img src="../../images/hide.png" alt="Hiding dataset" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Hiding and unhiding datasets. Left side shows a history with one hidden dataset. We know this because a link "1 hidden" appears under the history's name. Clicking this link will reveal the hidden dataset as shown on the right side of the figure.</figcaption></figure>
+<figure id="figure-9"><img src="../../images/hide.png" alt="Hiding dataset" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Hiding and unhiding datasets. Left side shows a history with one hidden dataset. We know this because a link "1 hidden" appears under the history's name. Clicking this link will reveal the hidden dataset as shown on the right side of the figure.</figcaption></figure>
 
 <h3 id="deleting-and-undeleting-datasets">Deleting and undeleting datasets</h3>
 
@@ -589,7 +585,7 @@ link. Clicking this link (e.g. ‘3 deleted’) will make the deleted datasets v
 link for manually undeleting it, above its title. You can click that link again (which will now be ‘hide deleted’) to
 make them not shown again.</p>
 
-<figure id="figure-10"><img src="../../images/delete.png" alt="Deleting dataset" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Deleting and undeleting datasets. The left side shows a history with one deleted dataset. We know this because a link '1 deleted' appears under the history's name. Clicking this link will reveal the deleted dataset as shown on the right side of the figure. From here it can be undeleted or deleted permanently.</figcaption></figure>
+<figure id="figure-10"><img src="../../images/delete.png" alt="Deleting dataset" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Deleting and undeleting datasets. The left side shows a history with one deleted dataset. We know this because a link '1 deleted' appears under the history's name. Clicking this link will reveal the deleted dataset as shown on the right side of the figure. From here it can be undeleted or deleted permanently.</figcaption></figure>
 
 <h3 id="purging-datasets-and-removing-them-permanently-from-galaxy">Purging datasets and removing them permanently from <span class="notranslate">Galaxy</span></h3>
 
@@ -608,11 +604,11 @@ find out the policy used.</p>
 
 <p>There are two types of tags that can be used as an additional level of labeling for datasets: <strong>standard tags</strong> and <strong>hashtags</strong> (also known as <strong>name tags</strong> or <strong>propagating tags</strong>). The standard tags work similarly to history tags described above - they add another level of description to datasets making them easier to find:</p>
 
-<figure id="figure-11"><img src="../../images/standard_tags.png" alt="Standard tags" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Standard tags provide an additional level of annotation for individual datasets. A. Tags are added by clicking on the tags icon <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> and entering a name. B. Here the tag is used to search the history. Entering 'microbiome' in the search box and pressing <kbd>Enter</kbd> shows the only dataset containing that tag.</figcaption></figure>
+<figure id="figure-11"><img src="../../images/standard_tags.png" alt="Standard tags" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Standard tags provide an additional level of annotation for individual datasets. A. Tags are added by clicking on the tags icon <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> and entering a name. B. Here the tag is used to search the history. Entering 'microbiome' in the search box and pressing <kbd>Enter</kbd> shows the only dataset containing that tag.</figcaption></figure>
 
 <p><strong>Hashtags</strong> are much more powerful as they are <strong>displayed</strong> in the history panel and <strong>propagate</strong> through the analysis:</p>
 
-<figure id="figure-12"><img src="../../images/name_tags.png" alt="Standard tags" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Hashtags allow you to more easily track datasets through the analysis. A. Hashtags are added similarly to standard tags but with one important difference: they are prepended with a hash '#' symbol. B. Here you see a history where four starting datasets were given name tags. As the analysis progresses hashtags stay with all datasets that are derived from the initial ones. For example, you can easily see which of the `bwa` and `MarkDuplicates` outputs are derived from, say, mother data.</figcaption></figure>
+<figure id="figure-12"><img src="../../images/name_tags.png" alt="Standard tags" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Hashtags allow you to more easily track datasets through the analysis. A. Hashtags are added similarly to standard tags but with one important difference: they are prepended with a hash '#' symbol. B. Here you see a history where four starting datasets were given name tags. As the analysis progresses hashtags stay with all datasets that are derived from the initial ones. For example, you can easily see which of the `bwa` and `MarkDuplicates` outputs are derived from, say, mother data.</figcaption></figure>
 
 <p>For more information on name tags, <a href="https://player.vimeo.com/video/216884518">a video is available</a> of their usage.</p>
 
@@ -632,7 +628,7 @@ find out the policy used.</p>
   <li>You can click the multi-select button again to hide the checkboxes again.</li>
 </ol>
 
-<figure id="figure-13"><img src="../../images/multiselect.png" alt="Multiselecting datasets" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Operating on multiple datasets can be enabled by clicking on the checkbox icon <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-selector</span></figcaption></figure>
+<figure id="figure-13"><img src="../../images/multiselect.png" alt="Multiselecting datasets" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Operating on multiple datasets can be enabled by clicking on the checkbox icon <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-selector</span></figcaption></figure>
 
 <!-- Including search to deduplicate -->
 <h1 id="basic-searching">Basic Searching</h1>
@@ -770,26 +766,26 @@ history method is presented here:</p>
 <p>Click the multi-history icon at the top right of the ‘Analyze Data’ (home) page. Note: you must be logged in to
 see the icon and use the multi-history page. You should see all the (non-deleted) histories that you’ve created.</p>
 
-<figure id="figure-14"><img src="../../images/undelete.multihistory-button.png" alt="Multi-history button" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Multi-history button</figcaption></figure>
+<figure id="figure-14"><img src="../../images/undelete.multihistory-button.png" alt="Multi-history button" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Multi-history button</figcaption></figure>
 
 <p>Click the ‘…’ icon button in the grey header at the top of the page. You should see a dialog that presents some options for viewing the histories. Click the ‘include deleted histories’ option.</p>
 
-<figure id="figure-15"><img src="../../images/undelete.multihistory-options.png" alt="Multihistory options" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Multi-history options</figcaption></figure>
+<figure id="figure-15"><img src="../../images/undelete.multihistory-options.png" alt="Multihistory options" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Multi-history options</figcaption></figure>
 
 <p>The page should reload and now both non-deleted and deleted histories will be displayed. Deleted histories will
 have a small message under their titles stating ‘This history has been deleted’.</p>
 
-<figure id="figure-16"><img src="../../images/undelete.thishasbeendeleted.png" alt="Deleted and non-deleted histories" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Deleted and non-deleted histories</figcaption></figure>
+<figure id="figure-16"><img src="../../images/undelete.thishasbeendeleted.png" alt="Deleted and non-deleted histories" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Deleted and non-deleted histories</figcaption></figure>
 
 <p>Now click the small button with the down arrow just above the deleted history you want to undelete. Then click
 the ‘Undelete’ option there. Your history should now be undeleted.</p>
 
-<figure id="figure-17"><img src="../../images/undelete.undelete-button.png" alt="Undelete button" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Undelete button</figcaption></figure>
+<figure id="figure-17"><img src="../../images/undelete.undelete-button.png" alt="Undelete button" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Undelete button</figcaption></figure>
 
 <p>Click the ‘Switch to’ button at the top of that history and then click ‘done’ at the very top left to return to
 the ‘Analyze Data’ page.</p>
 
-<figure id="figure-18"><img src="../../images/undelete.switchto.png" alt="Switch to history" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Switching histories</figcaption></figure>
+<figure id="figure-18"><img src="../../images/undelete.switchto.png" alt="Switch to history" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Switching histories</figcaption></figure>
 
 <h2 id="dataset-collections">Dataset Collections</h2>
 
@@ -825,7 +821,7 @@ the forward <span class="notranslate">reads</span> and one file contains the rev
 further simplify this by placing both files into on ‘Dataset Pair’ collection. Only two files will be added to the
 collection: forward and reverse.</p>
 
-<figure id="figure-19"><img src="../../images/pair.png" alt="Dataset pairs" /><figcaption><span class="figcaption-prefix">Figure 19:</span> Dataset pairs</figcaption></figure>
+<figure id="figure-19"><img src="../../images/pair.png" alt="Dataset pairs" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 19:</span> Dataset pairs</figcaption></figure>
 
 <h3 id="dataset-list">Dataset list</h3>
 
@@ -833,7 +829,7 @@ collection: forward and reverse.</p>
 analysis. The datasets in a dataset list must have unique names (e.g. you cannot have two datasets in a dataset list
 with the name ‘1.<span class="notranslate">bed</span>’).</p>
 
-<figure id="figure-20"><img src="../../images/list.png" alt="Dataset lists" /><figcaption><span class="figcaption-prefix">Figure 20:</span> Dataset lists</figcaption></figure>
+<figure id="figure-20"><img src="../../images/list.png" alt="Dataset lists" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 20:</span> Dataset lists</figcaption></figure>
 
 <h3 id="list-of-dataset-pairs">List of dataset pairs</h3>
 
@@ -842,125 +838,125 @@ to create this is currently the most flexible and potentially most complicated. 
 datasets sent to the interface based on the dataset names. You are free to select your own pairs, however, and change
 the order of the collection. Click the help text at the top of the interface to see more information.</p>
 
-<figure id="figure-21"><img src="../../images/list-pairs.png" alt="List of dataset pairs" /><figcaption><span class="figcaption-prefix">Figure 21:</span> List of pairs</figcaption></figure>
+<figure id="figure-21"><img src="../../images/list-pairs.png" alt="List of dataset pairs" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 21:</span> List of pairs</figcaption></figure>
 
 
-                    
-                    <blockquote class="key_points">
-                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
-                        <ul>
-                            
-                            <li><p>In Galaxy, data is stored in datasets and organized in histories</p>
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>In Galaxy, data is stored in datasets and organized in histories</p>
 </li>
-                            
-                            <li><p>The right pane shows the current history. It displays the name of the history, the tags and annotations assigned to it, and the size of the data in it</p>
+                        
+                        <li><p>The right pane shows the current history. It displays the name of the history, the tags and annotations assigned to it, and the size of the data in it</p>
 </li>
-                            
-                            <li><p>The datasets are shown differently depending on their status: queued, running, ok, error, or paused</p>
+                        
+                        <li><p>The datasets are shown differently depending on their status: queued, running, ok, error, or paused</p>
 </li>
-                            
-                            <li><p>The summary view for each dataset can be expanded to show additional information</p>
+                        
+                        <li><p>The summary view for each dataset can be expanded to show additional information</p>
 </li>
-                            
-                            <li><p>Datasets deleted are hidden from history. They can be restored to the history, or permanently deleted from the server, or purged. Purged files cannot be restored</p>
+                        
+                        <li><p>Datasets deleted are hidden from history. They can be restored to the history, or permanently deleted from the server, or purged. Purged files cannot be restored</p>
 </li>
-                            
-                            <li><p>Histories can also be deleted and purged, similar to datasets</p>
+                        
+                        <li><p>Histories can also be deleted and purged, similar to datasets</p>
 </li>
-                            
-                            <li><p>Datasets can be organized into collections within a history with search and multi-select. Jobs applied to collections use the same settings for each dataset in the collection</p>
+                        
+                        <li><p>Datasets can be organized into collections within a history with search and multi-select. Jobs applied to collections use the same settings for each dataset in the collection</p>
 </li>
-                            
-                        </ul>
-                    </blockquote>
-                    
+                        
+                    </ul>
+                </blockquote>
+                
 
-                    <h1>Frequently Asked Questions</h1>
-                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/galaxy-interface/faqs/">FAQ page for the Using Galaxy and Managing your Data topic</a> to see if your question is listed there.
-                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
-                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/galaxy-interface/faqs/">FAQ page for the Using Galaxy and Managing your Data topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
-                    
+                
 
-                    
+                
 
-                    
+                
 
-                    <h1>Feedback</h1>
-                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
-                    <div id="feedback-button">
-                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                    </div>
-                    <div id="feedback-form">
-                    </div>
-                    <script type="text/javascript">
-                        (function (window, document) {
-                            function onDocumentReady(fn) {
-                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                    fn();
-                                } else {
-                                    document.addEventListener('DOMContentLoaded', fn);
-                                }
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
                             }
+                        }
 
-                            onDocumentReady(function () {
-                                $("#feedback-button").click(function(evt){
-                                    var e = $(evt.target)
-                                    e.hide();
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
 
-                                    $("#feedback-form").html(`
-                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Understanding Galaxy history system (Using Galaxy and Managing your Data)">Loading...</iframe>
-                                    `)
-                                })
-                            });
-                        })(window, document);
-                    </script>
-
-
-
-                    <h1>Citing this Tutorial</h1>
-                    <p>
-                        <ol>
-                            <li id="citation-text">Anton Nekrutenko, Martin Čech, Helena Rasche, 2020 <b>Understanding Galaxy history system (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history/tutorial.html">https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history/tutorial.html</a> Online; accessed TODAY
-                            </li>
-                            <li>
-                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
-                            </li>
-                        </ol>
-                    </p>
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Understanding Galaxy history system (Using Galaxy and Managing your Data)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
 
 
-                    <blockquote class="details">
-                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
-                      <p style="display: none;">
 
-                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Anton Nekrutenko, Martin Čech, Helena Rasche, 2020 <b>Understanding Galaxy history system (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history/tutorial.html">https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{galaxy-interface-history,
-    author = "Anton Nekrutenko and Martin Čech and Helena Rasche",
-    title = "Understanding Galaxy history system (Galaxy Training Materials)",
-    year = "2020",
-    month = "11",
-    day = "18"
-    url = "\url{https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history/tutorial.html}",
-    note = "[Online; accessed TODAY]"
+author = "Anton Nekrutenko and Martin Čech and Helena Rasche",
+title = "Understanding Galaxy history system (Galaxy Training Materials)",
+year = "2020",
+month = "11",
+day = "18"
+url = "\url{https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history/tutorial.html}",
+note = "[Online; accessed TODAY]"
 }
 @article{Batut_2018,
-        doi = {10.1016/j.cels.2018.05.012},
-        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
-        year = 2018,
-        month = {jun},
-        publisher = {Elsevier {BV}},
-        volume = {6},
-        number = {6},
-        pages = {752--758.e1},
-        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
-        title = {Community-Driven Data Analysis Training for Biology},
-        journal = {Cell Systems}
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
 }</code>
-                    </pre></div></div>
-                    </p>
-                    </blockquote>
+                </pre></div></div>
+                </p>
+                </blockquote>
 
 
 <script type="text/javascript">
@@ -970,36 +966,22 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
-                    
+                
 
-                    
+                
 
-                </div>
             </div>
         </div>
-    </section>
-</div>
-
-
-<footer>
-    <div class="container">
-        <p>
-            This material is the result of a collaborative work. Thanks to the
-            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Anton Nekrutenko, Martin Čech, Helena Rasche)!
-        </p>
-        <p>
-            Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/galaxy-interface/tutorials/history/tutorial.md">GitHub</a>.
-        </p>
-        <p>
-    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-</p>
     </div>
-</footer>
+</section>
+<br/>
+<br/>
+<br/>
 
+        </div>
+        
     </body>
     <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>

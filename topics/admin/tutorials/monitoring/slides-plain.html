@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Monitoring with Telegraf and Grafana</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Galaxy Monitoring with Telegraf and Grafana" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/monitoring/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/monitoring/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/monitoring/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/monitoring/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/monitoring/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/monitoring/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/monitoring/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fmonitoring%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/admin/tutorials/monitoring/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/admin/tutorials/monitoring/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/admin/tutorials/monitoring/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/admin/tutorials/monitoring/slides.html">View markdown source on GitHub</a>
+	<h1>Galaxy Monitoring with Telegraf and Grafana</h1>
+		<h2>Contributors</h2>
+		Nate Coraor, Björn Grüning, Simon Gladman, Helena Rasche
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>How to monitor Galaxy with Telegraf</p>
+</li>
+		
+		<li><p>How do I set up InfluxDB</p>
+</li>
+		
+		<li><p>How can I make graphs in Grafana?</p>
+</li>
+		
+		<li><p>How can I best alert on important metrics?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Setup InfluxDB</p>
+</li>
+		
+		<li><p>Setup Telegraf</p>
+</li>
+		
+		<li><p>Setup Grafana</p>
+</li>
+		
+		<li><p>Create several charts</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 6, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="telegraf-influxdb-and-grafana">Telegraf, InfluxDB, and Grafana</h1>
+
+<p>General purpose tools for monitoring systems and services.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tool</th>
+      <th>Use</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://github.com/influxdata/telegraf">Telegraf</a></td>
+      <td>plugin-driven server agent for collecting &amp; reporting metrics</td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/influxdata/influxdb/">Influxdb</a></td>
+      <td>purpose built time series database</td>
+    </tr>
+    <tr>
+      <td><a href="https://grafana.com/">Grafana</a></td>
+      <td>dashboard for beautiful analytics and monitoring</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Dataflow:</p>
+
+<ul>
+  <li>Galaxy produces data</li>
+  <li>Telegraf consumes and buffers it, before sending it to</li>
+  <li>InfluxDB which stores the data</li>
+  <li>And Grafana is used to visualise it</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Monitoring in Galaxy is easy to setup.</li>
+  <li>Galaxy produces data, which is consumed by telegraf.</li>
+  <li>telegrafends data to Influx DB.</li>
+  <li>This data is visualized in Grafana.</li>
+</ul>
+
+<hr />
+<h1 id="grafana-showcase">Grafana showcase</h1>
+
+<ul>
+  <li>usegalaxy.eu <a href="https://stats.galaxyproject.eu">public server</a></li>
+  <li>usegalaxy.org.au <a href="https://stats.genome.edu.au">public server</a></li>
+  <li>usegalaxy.org private server</li>
+</ul>
+
+<p>If you see a dashboard you can export its configuration and put it on your Grafana with your data. Copy away!</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>We have several public Grafana servers.</li>
+  <li>If you like any of our graphs, you can copy them.</li>
+</ul>
+
+<hr />
+
+<p><img src="../../images/grafana/galaxy.png" alt="galaxy dashboard showing route timings, user counts, job counts, etc." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>We have built numerous dashboards for monitoring Galaxy.</li>
+  <li>These include scripts and playbooks and configuration for everything.</li>
+  <li>Here is EU’s galaxy dashboard showing active users, running and unscheduled jobs, etc.</li>
+</ul>
+
+<hr />
+
+<p><img src="../../images/grafana/node.png" alt="node detail dashboard with filesystem usage, process states, cpu, memory, load, network, etc." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>However sometimes we notice something going wrong with our infrastructure.</li>
+  <li>We use the node detail dashboard to begin our investigation.</li>
+  <li>It gives us a very fast overview of the server.</li>
+  <li>This can help efficiently pinpoint isuses.</li>
+</ul>
+
+<hr />
+
+<p><img src="../../images/grafana/db.png" alt="DB dashboard showing transactions, tuples fetched/modified, and index sizes for each database" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>We also monitor the database heavily.</li>
+  <li>All of this monitoring is built into telegraf.</li>
+  <li>We need to be able to correlate latency with autovacuums or contention.</li>
+  <li>We monitor table size changes to check for anomalies.</li>
+</ul>
+
+<hr />
+
+<p><img src="../../images/grafana/stats.png" alt="user statistics page for Eu with 23k users, 30k workflows, 400k histories, 13M jobs, and 30M datasets. Additional breakdowns provided for years of compute time on various clusters included 1k years on de.NBI cloud." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Our staff often needs to report numbers for their grants.</li>
+  <li>We produced this user statistics dashboard to help them.</li>
+  <li>Now they can answer their own questions, and make their own graphs, without admin help.</li>
+</ul>
+
+<hr />
+
+<p><img src="../../images/grafana/cvmfs.png" alt="cvmfs dashboard showing which repos each server supports in green, and missing ones in white. ~90% of repos are supported" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>We don’t just monitor Galaxy though.</li>
+  <li>We also monitor CVMFS, and the availability of repositories in each server.</li>
+  <li>This can give a good view of which repositories are replicated.</li>
+</ul>
+
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Telegraf provides an easy solution to monitor servers</li>
+
+<li>Galaxy can send metrics to Telegraf</li>
+
+<li>Telegraf can run arbitrary commands like `gxadmin`, which provides influx formatted output</li>
+
+<li>InfluxDB can collect metrics from Telegraf</li>
+
+<li>Use Grafana to visualise these metrics, and monitor their values</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+
+<img src="/training-material/assets/images/gat.png" alt="page logo" style="height: 100px;"/>
+
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

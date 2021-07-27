@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Prerequisites for building software/conda packages</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta property="og:title" content="Galaxy Training: Prerequisites for building software/conda packages" />
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/dev/faqs/" title="Check our FAQs for the Development in Galaxy topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/conda_sys/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/dev/tutorials/conda_sys/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/conda_sys/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/conda_sys/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/conda_sys/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/conda_sys/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/conda_sys/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fdev%2Ftutorials%2Fconda_sys%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/dev/tutorials/conda_sys/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/dev/tutorials/conda_sys/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/dev/tutorials/conda_sys/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/dev/tutorials/conda_sys/slides.html">View markdown source on GitHub</a>
+	<h1>Prerequisites for building software/conda packages</h1>
+		<h2>Contributors</h2>
+		Anthony Bretaudeau, Cyril Monjeaud
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What does ‘installing a software’ means on a Linux architecture?</p>
+</li>
+		
+		<li><p>Why my compilations always fail?</p>
+</li>
+		
+		<li><p>How to solve common compiling and installation issues?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Learn how to compile and install tools using standard procedures.</p>
+</li>
+		
+		<li><p>Learn needed tricks to write conda build.sh files.</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 27, 2021 </div>
+
+	<hr />
+
+
+	<p>class: left, enlarge120</p>
+
+<h3 id="environment-variables">Environment variables</h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ MY_NAME</span><span class="o">=</span><span class="s2">"Bobby"</span>
+<span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$MY_NAME</span>
+Bobby
+</code></pre></div></div>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ MY_DATE</span><span class="o">=</span><span class="si">$(</span><span class="nb">date</span><span class="si">)</span>
+<span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$MY_DATE</span>
+Wed Feb 14 12:12:21 CET 2018
+</code></pre></div></div>
+
+<p>Use export to make sure the variable is accessible to any script/program you run from the current shell.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">MY_DATE</span><span class="o">=</span><span class="si">$(</span><span class="nb">date</span><span class="si">)</span>
+<span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$MY_DATE</span>
+Wed Feb 14 12:12:21 CET 2018
+<span class="nv">$ </span>bash some_script.sh <span class="c"># some_script.sh will have access to $MY_DATE</span>
+</code></pre></div></div>
+
+<p>Many environment variables predefined in a shell: PATH, HOSTNAME, HOME, LANG, USER, …</p>
+
+<hr />
+
+<p>class: left, enlarge120</p>
+
+<h3 id="show-me-the-path">Show me the PATH</h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>the_binary <span class="nt">--help</span>
+</code></pre></div></div>
+
+<p>How does the system knows where to find the binary?</p>
+
+<p>PATH is an environment variable defining possible locations of binaries.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$PATH</span>
+/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin
+</code></pre></div></div>
+
+<p>Paths separated by <code class="language-plaintext highlighter-rouge">:</code>, ordered list (highest priority first).</p>
+
+<p>As all environment variable, you can redefine it:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"/opt/xxx/bin/:</span><span class="nv">$PATH</span><span class="s2">"</span>
+<span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$PATH</span>
+/opt/xxx/bin/:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin
+</code></pre></div></div>
+
+<hr />
+
+<p>class: left, enlarge120</p>
+
+<h3 id="show-me-the-path-1">Show me the PATH</h3>
+
+<p>The command <code class="language-plaintext highlighter-rouge">which</code> lets you know which binary will be used by your shell.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>which the_binary
+/opt/xxx/bin/the_binary
+</code></pre></div></div>
+
+<p>It throws an error if the binary is not “in the PATH”.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"/usr/bin/"</span>
+<span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$PATH</span>
+/usr/bin
+</code></pre></div></div>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>which the_binary
+/usr/bin/which: no the_binary <span class="k">in</span> <span class="o">(</span>/usr/bin<span class="o">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: left, enlarge120</p>
+
+<h3 id="thinking-outside-the-path">Thinking outside the PATH</h3>
+
+<p>What if you want to run a binary only located in the current working directory?</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls
+</span>my_binary
+<span class="nv">$ </span>my_binary <span class="nt">--help</span>
+bash: my_binary: <span class="nb">command </span>not found...
+</code></pre></div></div>
+
+<p>You need to add <code class="language-plaintext highlighter-rouge">./</code> to explicitly tell the shell to run the file from working directory:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./my_binary <span class="nt">--help</span>
+It works!
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">./</code> is just the relative path to <code class="language-plaintext highlighter-rouge">my_binary</code>, it could be a more complicated one, or an absolute path:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>../somewhere/my_binary <span class="nt">--help</span>
+It works!
+<span class="nv">$ </span>/home/someone/womewhere/my_binary <span class="nt">--help</span>
+It works!
+</code></pre></div></div>
+
+<hr />
+
+<p>class: left, enlarge120</p>
+
+<h3 id="installing-a-single-binary">Installing a single binary</h3>
+
+<p>Just a single executable file (binary, script).</p>
+
+<p>You only need to copy it to a <code class="language-plaintext highlighter-rouge">bin</code> directory and make sure permissions are set:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cp </span>the_binary /usr/local/bin
+<span class="nv">$ </span><span class="nb">chmod </span>a+x /usr/local/bin/the_binary
+</code></pre></div></div>
+
+<p>Other possible <code class="language-plaintext highlighter-rouge">bin</code> directories:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/bin            <span class="o">=</span> reserved <span class="k">for </span>system
+/usr/bin        <span class="o">=</span> installed by package manager <span class="o">(</span>apt, yum, ...<span class="o">)</span>
+/usr/local/bin  <span class="o">=</span> manually installed binaries
+/opt/xxx/bin    <span class="o">=</span> manually installed binaries <span class="o">(</span><span class="nv">xxx</span><span class="o">=</span>path<span class="o">)</span>
+/yyy/bin        <span class="o">=</span> a bin directory wherever you like <span class="o">(</span><span class="nv">yyy</span><span class="o">=</span>path<span class="o">)</span>
+</code></pre></div></div>
+
+<p>.center[.footnote[If you install a precompiled binary, make sure that it was compiled for the same architecture as your system (e.g. x86_64)]]</p>
+
+<hr />
+
+<p>class: left, enlarge120</p>
+
+<h3 id="compiling-a-single-binary">Compiling a single binary</h3>
+
+<p>In the following slides we consider a program written in <code class="language-plaintext highlighter-rouge">C</code>.</p>
+
+<p>Usually, compilation is done with <code class="language-plaintext highlighter-rouge">make</code>.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls
+</span>Makefile    my_program.c
+</code></pre></div></div>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>make
+</code></pre></div></div>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls
+</span>Makefile    my_program.c    my_binary
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">make</code> will read the instructions defined in the file <code class="language-plaintext highlighter-rouge">Makefile</code> and run the compiler automatically to produce the binary.</p>
+
+<p>You can then copy the binary to a bin dir.</p>
+
+<p>Some exotic tools come with other scripts or methods for compiling, read the README or INSTALL files.</p>
+
+<hr />
+
+<p>class: left, enlarge120</p>
+
+<h3 id="compiling-a-library">Compiling a library</h3>
+
+<p>Libraries are reusable chunks of code. They are not executable as is. They are compiled similarly as binaries.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls
+</span>Makefile    my_lib.c    my_lib.h
+</code></pre></div></div>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>make
+</code></pre></div></div>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls
+</span>Makefile    my_lib.c    my_lib.h    libmy.so.1.2.8
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">.h</code> files are code files defining which functions are provided by the library.</p>
+
+<p><code class="language-plaintext highlighter-rouge">.so</code> are compiled binary code. Their file name structure is important: <code class="language-plaintext highlighter-rouge">libXXXX.so.version</code>.</p>
+
+<hr />
+
+<p>class: left, enlarge120</p>
+
+<h3 id="installing-a-library">Installing a library</h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cp </span>libmy.so.1.2.8 /usr/local/lib/
+</code></pre></div></div>
+
+<p>Some symbolic links need to be created:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ln</span> <span class="nt">-s</span> /usr/local/lib/libmy.so.1.2.8 /usr/local/lib/libmy.so
+<span class="nv">$ </span><span class="nb">ln</span> <span class="nt">-s</span> /usr/local/lib/libmy.so.1.2.8 /usr/local/lib/libmy.so.1
+</code></pre></div></div>
+
+<p>You also need to install <code class="language-plaintext highlighter-rouge">headers</code> in a <code class="language-plaintext highlighter-rouge">include</code> dir:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cp </span>my_lib.h /usr/local/include/
+</code></pre></div></div>
+
+<p>Other possible <code class="language-plaintext highlighter-rouge">lib</code> (or <code class="language-plaintext highlighter-rouge">lib64</code>) directories (same principle for <code class="language-plaintext highlighter-rouge">include</code>):</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/lib<span class="o">(</span>64<span class="o">)</span>            <span class="o">=</span> reserved <span class="k">for </span>system
+/usr/lib<span class="o">(</span>64<span class="o">)</span>        <span class="o">=</span> installed by package manager <span class="o">(</span>apt, yum, ...<span class="o">)</span>
+/usr/local/lib<span class="o">(</span>64<span class="o">)</span>  <span class="o">=</span> manually installed
+/opt/xxx/lib<span class="o">(</span>64<span class="o">)</span>    <span class="o">=</span> manually installed <span class="o">(</span><span class="nv">xxx</span><span class="o">=</span>path<span class="o">)</span>
+/yyy/lib<span class="o">(</span>64<span class="o">)</span>        <span class="o">=</span> a lib directory wherever you like <span class="o">(</span><span class="nv">yyy</span><span class="o">=</span>path<span class="o">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: left, enlarge120</p>
+
+<h3 id="make-install">make install</h3>
+
+<p>Copying/symlinking manually each file is painful.</p>
+
+<p>Running <code class="language-plaintext highlighter-rouge">make install</code> usually install everything automatically for you.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>make
+<span class="nv">$ </span>make <span class="nb">install</span>
+</code></pre></div></div>
+
+<p>By default, installs to <code class="language-plaintext highlighter-rouge">/usr/local</code>. We will see how to change this later.</p>
+
+<hr />
+
+<p>class: left, enlarge120</p>
+
+<h3 id="compiling-a-binary-that-uses-an-external-library">Compiling a binary that uses an external library</h3>
+
+<p>For example, if your program relies on <code class="language-plaintext highlighter-rouge">zlib</code> to read or create gzipped files.</p>
+
+<p><code class="language-plaintext highlighter-rouge">make</code> needs to know where are the <code class="language-plaintext highlighter-rouge">.h</code> and <code class="language-plaintext highlighter-rouge">.so</code> files to compile your program properly.</p>
+
+<p>Usually, a script named ‘configure’ is distributed with the program sources.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls
+</span>configure   Makefile    my_program.c
+</code></pre></div></div>
+
+<p>This script explores the filesystem to find the needed <code class="language-plaintext highlighter-rouge">.h</code> and <code class="language-plaintext highlighter-rouge">.so</code> files. You can then run <code class="language-plaintext highlighter-rouge">make</code> and <code class="language-plaintext highlighter-rouge">make install</code> as usual.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./configure
+<span class="nv">$ </span>make
+<span class="nv">$ </span>make <span class="nb">install</span>
+</code></pre></div></div>
+
+<p>Sometimes, <code class="language-plaintext highlighter-rouge">configure</code> is replaced by another software like cmake.</p>
+
+<hr />
+
+<p>class: left, enlarge120</p>
+
+<h3 id="playing-with-configure">Playing with ./configure</h3>
+
+<p>You can pass many options to the <code class="language-plaintext highlighter-rouge">configure</code> script.</p>
+
+<p>A very common one is <code class="language-plaintext highlighter-rouge">--prefix</code> which allows to change the installation directory.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./configure <span class="nt">--prefix</span><span class="o">=</span>/home/somewhere
+<span class="nv">$ </span>make
+<span class="nv">$ </span>make <span class="nb">install</span>
+</code></pre></div></div>
+
+<p>The binary will be installed in <code class="language-plaintext highlighter-rouge">/home/somewhere/bin/</code></p>
+
+<p>If you are compiling a library, files will be installed in <code class="language-plaintext highlighter-rouge">/home/somewhere/include/</code> and <code class="language-plaintext highlighter-rouge">/home/somewhere/lib(64)/</code></p>
+
+<hr />
+
+<p>class: left, enlarge120</p>
+
+<h3 id="playing-with-configure-1">Playing with ./configure</h3>
+
+<p>You can pass many options to the <code class="language-plaintext highlighter-rouge">configure</code> script.</p>
+
+<p>You can often disable or enable some software features this way.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./configure <span class="nt">--disable-gpu</span> <span class="nt">--enable-greedy-algorithm</span>
+<span class="nv">$ </span>make
+<span class="nv">$ </span>make <span class="nb">install</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: left, enlarge120</p>
+
+<h3 id="playing-with-configure-2">Playing with ./configure</h3>
+
+<p>By default, <code class="language-plaintext highlighter-rouge">configure</code> only searches for <code class="language-plaintext highlighter-rouge">.h</code> and <code class="language-plaintext highlighter-rouge">.so</code> files in standard directories (<code class="language-plaintext highlighter-rouge">/usr/</code>, <code class="language-plaintext highlighter-rouge">/usr/local</code>).</p>
+
+<p>If your program depends on a library installed in an exotic location, you need to specify it.</p>
+
+<p>There might be a specific <code class="language-plaintext highlighter-rouge">configure</code> option.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./configure <span class="nt">--zlib-dir</span><span class="o">=</span>/home/somewhere/zlib/
+</code></pre></div></div>
+
+<p>Or, you can define some standard environment variables:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">"-I/home/somewhere/zlib/include </span><span class="nv">$CFLAGS</span><span class="s2">"</span>
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">LDFLAGS</span><span class="o">=</span><span class="s2">"-L/home/somewhere/zlib/lib </span><span class="nv">$LDFLAGS</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>In some cases, you might need to define additional variables:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">CPATH</span><span class="o">=</span><span class="s2">"/home/somewhere/zlib/include:</span><span class="nv">$CPATH</span><span class="s2">"</span>
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">LIBRARY_PATH</span><span class="o">=</span><span class="s2">"/home/somewhere/zlib/lib:</span><span class="nv">$LIBRARY_PATH</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: left, enlarge120</p>
+
+<h3 id="playing-with-configure-3">Playing with ./configure</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">CFLAGS</code> environment variable can also be used for other purposes like enabling some compiler optimisation, predefining some C macro or compiling with debugging symbols.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">"-I/home/somewhere/zlib/include -O2 -DDEBUG -g"</span>
+</code></pre></div></div>
+
+<p>When you are compiling C++ code, you need to use <code class="language-plaintext highlighter-rouge">CXXFLAGS</code> instead of <code class="language-plaintext highlighter-rouge">CFLAGS</code>.</p>
+
+<hr />
+
+<p>class: left, enlarge120</p>
+
+<h3 id="shebang">Shebang</h3>
+
+<p>The first line of script is called the <a href="https://en.wikipedia.org/wiki/Shebang_%28Unix%29">shebang</a>.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+</code></pre></div></div>
+
+<p>It determines how your script will be run when called in a shell.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>my_script.sh
+<span class="nv">$ </span><span class="c"># is interpreted as</span>
+<span class="nv">$ </span>/bin/bash /usr/bin/my_script.sh
+</code></pre></div></div>
+
+<hr />
+
+<p>class: left, enlarge120</p>
+
+<h3 id="shebang-1">Shebang</h3>
+
+<p>You need to write an absolute path in the shebang. But never do this:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/python</span>
+</code></pre></div></div>
+
+<p>Because you are not sure /usr/bin/python will always be at this location. Preferred solution:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/env python</span>
+</code></pre></div></div>
+
+<p>This will ensure to use the <code class="language-plaintext highlighter-rouge">python</code> found using the PATH environment variable.</p>
+
+<p><code class="language-plaintext highlighter-rouge">/bin/bash</code> or <code class="language-plaintext highlighter-rouge">/usr/bin/env</code> are considered to always be present.</p>
+
+<hr />
+
+<p>class: left, enlarge120</p>
+
+<h3 id="pythonperlr-packages">Python/Perl/R packages</h3>
+
+<p>Installing Python modules consists in placing the source files in the correct path inside the Python installation.</p>
+
+<p>For example BioPython code will be installed in <code class="language-plaintext highlighter-rouge">/usr/lib/python3.6/site-packages/Bio/</code></p>
+
+<p>Some Python modules consists both of Python code and C code that need to be compiled.</p>
+
+<p>Python modules are usually installed with specific setup mechanisms that take care of it all for you.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pip <span class="nb">install </span>my_module
+</code></pre></div></div>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd </span>my_module_src/
+<span class="nv">$ </span>python setup.py <span class="nb">install</span>
+</code></pre></div></div>
+
+<p>Perl or R modules are installed in similar ways.</p>
+
+<hr />
+
+<p>class: left, enlarge120</p>
+
+<h3 id="common-error-undefined-symbol">Common error: Undefined symbol</h3>
+
+<p>Symptom: you get an <code class="language-plaintext highlighter-rouge">Undefined symbol</code> while running an installed program.</p>
+
+<p>Cause: the program uses a library which is not available in the expected location.</p>
+
+<p>To list all the libraries needed by the program and identify the one causing the problem:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ldd <span class="sb">`</span>which nano<span class="sb">`</span>
+	linux-vdso.so.1 <span class="o">(</span>0x00007ffdfb48c000<span class="o">)</span>
+	libmagic.so.1 <span class="o">=&gt;</span> not found
+	libncursesw.so.6 <span class="o">=&gt;</span> /lib64/libncursesw.so.6 <span class="o">(</span>0x00007f16cbb54000<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Make sure the library is correctly installed. If it is installed in an exotic location, use the <code class="language-plaintext highlighter-rouge">LD_LIBRARY_PATH</code> environment.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">"/home/somewhere/magic/:</span><span class="nv">$LD_LIBRARY_PATH</span><span class="s2">"</span>
+<span class="nv">$ </span>ldd <span class="sb">`</span>which nano<span class="sb">`</span>
+	linux-vdso.so.1 <span class="o">(</span>0x00007ffdfb48c000<span class="o">)</span>
+	libmagic.so.1 <span class="o">=&gt;</span> /home/somewhere/magic/lib/libmagic.so.1
+	libncursesw.so.6 <span class="o">=&gt;</span> /lib64/libncursesw.so.6 <span class="o">(</span>0x00007f16cbb54000<span class="o">)</span>
+</code></pre></div></div>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>There is a common procedure to compile and install many tools: `./configure && make && make install`</li>
+
+<li>Some exotic tools require adjustements to compile or install properly</li>
+
+<li>Pay attention to INSTALL and README files, and to documentation</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

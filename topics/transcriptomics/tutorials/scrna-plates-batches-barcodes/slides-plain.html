@@ -1,0 +1,1079 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Plates, Batches, and Barcodes</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:title" content="Galaxy Training: Plates, Batches, and Barcodes" />
+        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/transcriptomics/faqs/" title="Check our FAQs for the Transcriptomics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Fscrna-plates-batches-barcodes%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html">View markdown source on GitHub</a>
+	<h1>Plates, Batches, and Barcodes</h1>
+		<h2>Contributors</h2>
+		Wendi Bacon, Mehmet Tekman, Alex Ostrovsky
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What is a batch when it comes to single cells?</p>
+</li>
+		
+		<li><p>What’s the difference between a barcode and an index?</p>
+</li>
+		
+		<li><p>What is batch effect and how do you prevent it?</p>
+</li>
+		
+		<li><p>What is a lane?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>How to set up plates to prevent batch effect</p>
+</li>
+		
+		<li><p>Proper naming conventions when dealing with scRNA-seq samples</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Requirements</h2>
+		<ul>
+		
+		
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/transcriptomics">Transcriptomics</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Understanding Barcodes:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/transcriptomics/tutorials/scrna-umis/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+		</ul>
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 12, 2021 </div>
+
+	<hr />
+
+
+	<h3 id="sorting-plates">Sorting Plates</h3>
+
+<p>.image-100[<img src="../../images/wab96wellplate.svg" alt="slide5" loading="lazy" />]</p>
+
+<p>.left[Plates are <em>N x M</em> arrays of wells that cells are sorted, to then be individually amplified and sequenced.]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Sorting plates are 2 dimensional arrays of wells that individual cells are placed into.</li>
+  <li>Each cell in each well is tagged with a unique barcode and then primed to then be amplified and sequenced</li>
+  <li>The method in which this is performed can yield significant pros and cons as we will see.</li>
+</ul>
+
+<hr />
+
+<h3 id="sorting-plates-1">Sorting Plates</h3>
+
+<p>.image-80[<img src="../../images/wabexampleplates.png" alt="slide6" loading="lazy" />]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Here we see 3 different sorting strategies with different advantages for same treatment sample.</li>
+  <li>In the top image: We see all wells are filled, to maximise the number of cells on a plate</li>
+  <li>In the middle image: We see only the inner wells are filled, to maintain a protective border during library preparation</li>
+  <li>In the bottom image: We see a striping pattern, which mitigates contamination of material from adjoining wells</li>
+</ul>
+
+<hr />
+
+<h3 id="setting-up-plates">Setting up Plates</h3>
+
+<p>.image-75[<img src="../../images/wabbatchproblems.png" alt="slide7" loading="lazy" />]</p>
+
+<p>.center[What is the problem with this plate setup?]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>However, if we consider different treatment samples, then we must consider different challenges.</li>
+  <li>What is the advantage of the top example, i.e. Several different treatments on one plate?</li>
+  <li>What is the advantage of the bottom example, i.e. One treatment on one plate?</li>
+</ul>
+
+<hr />
+
+<h3 id="setting-up-plates-1">Setting up Plates</h3>
+
+<p>.image-50[<img src="../../images/wabbatchproblems.png" alt="slide7" loading="lazy" />]</p>
+
+<p>.center[Batch effect (plate vs plate) cannot be separated from treatment effect in either scenario.]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Trick question!</li>
+  <li>In both examples, the treatment effect cannot be separated from any technical effect from the plate itself.</li>
+  <li>For example, the biological effect of the yellow cells might just be the technical confounding effect from Batch 1.</li>
+  <li>What can we do instead to reduce the effect of these technical confounding effects across treatments?</li>
+</ul>
+
+<hr />
+<h3 id="setting-up-plates-2">Setting up Plates</h3>
+
+<p>.image-50[<img src="../../images/wabbalancedbatches.png" alt="slide7" loading="lazy" />]</p>
+
+<p>.left[Either of these are better set-ups. Mixing columns is good, but not required. Ultimately, batch effect can now be separated from variable effect.]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>The answer is that we can balance the treatments across our plates better.</li>
+  <li>By ensuring the same treatment occurs in comparable amounts in different plates, we can reduce the effect that each plate would have on the treatment.</li>
+</ul>
+
+<hr />
+
+<h3 id="setting-up-plates-3">Setting up Plates</h3>
+
+<p>.image-90[<img src="../../images/wabreplicates.png" alt="slide7" loading="lazy" />]</p>
+
+<p>.center[Can’t mix samples on plates? Separate replicates evenly and process together.]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>If putting multiple treatments on the same plate is not an option, then having enough separated replicates will also allow for batch correction.</li>
+  <li>Here, you can assess the variation between replicates, and thus batches, as well as between treatments.</li>
+</ul>
+
+<hr />
+
+<h3 id="what-about-sequencing-lanes">What about sequencing lanes?</h3>
+
+<p>.center[So now it’s time to sequence our samples! How do we combine samples into sequencing lanes?]</p>
+
+<p>.image-90[<img src="../../images/wabseqlane.png" alt="slide7" loading="lazy" />]</p>
+
+<p>.center[This works well, but what if you have too many samples for one lane?]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>So now it’s time to sequence our samples! How do we combine samples into sequencing lanes?</li>
+  <li>In many cases, it is enough to sequence 1 or 2 plates together in a single sequencing lane.</li>
+  <li>But what if we wish to sequence 8 plates?</li>
+</ul>
+
+<hr />
+
+<h3 id="what-about-sequencing-lanes-1">What about sequencing lanes?</h3>
+
+<p>.center[So now it’s time to sequence our samples! How do we combine samples into sequencing lanes?]</p>
+
+<p>.image-90[<img src="../../images/wablanesbad.png" alt="slide7" loading="lazy" />]</p>
+
+<p>.center[Does this look ok?]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>In the example show, Treatment A would go to the first sequencing lane.</li>
+  <li>Treatment B would go to the second sequencing lane.</li>
+  <li>Is it okay to sequence different treatments across different sequencing lanes?</li>
+</ul>
+
+<p>–</p>
+
+<p>.center[No! You’ve turned each treatment (A &amp; B) into a batch!]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>No, because you’ve turned Treatment A and Treatment B into separate batches.</li>
+  <li>This gives us the same unbalanced design we saw with the sorting plates.</li>
+</ul>
+
+<hr />
+
+<h3 id="what-about-sequencing-lanes-2">What about sequencing lanes?</h3>
+
+<p>.image-75[<img src="../../images/wablanesgood.png" alt="slide7" loading="lazy" />]</p>
+
+<p>.center[This is the way to balance your batches at the lane-level.]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Instead we should balance the availability of each treatment across different sequencing lanes</li>
+  <li>This way, each treatment is sequenced at the same time as another treatment, reducing the technical effect from the sequencing on the treatment.</li>
+</ul>
+
+<hr />
+
+<h3 id="distinguishing-cells-in-a-plate">Distinguishing cells in a plate</h3>
+
+<p>.image-60[<img src="../../images/wabplate.png" alt="slide11" loading="lazy" />]</p>
+
+<ul>
+  <li>Cells are selected from a plate by their <em>barcodes</em></li>
+  <li>Barcodes must be unique
+    <ul>
+      <li>e.g. 96 wells in a plate, need 96 barcodes to sequence them together</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>How do we distinguish each cell in each well?</li>
+  <li>Do we remember the physical location of that cell on that well, or do we tag it somehow?</li>
+  <li>The answer is that each cell is given a unique barcode that distinguishes from other cells which have different cell barcodes.</li>
+</ul>
+
+<hr />
+
+<h3 id="what-are-cell-barcodes">What are Cell Barcodes?</h3>
+
+<p>.image-100[<img src="../../images/scrna_pbb_barcodes_add.svg" alt="Add Barcodes" loading="lazy" />]</p>
+
+<ul>
+  <li>Barcodes are added to <em>all</em> transcripts of a <em>specific</em> cell</li>
+  <li>Transcripts with different cell barcodes originate from different cells</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>What exactly are cell barcodes?</li>
+  <li>These are usually short nucleotide barcodes that are added to all transcripts of a specific cell</li>
+  <li>The idea is that transcripts with different cell barcodes originate from different cells.</li>
+</ul>
+
+<hr />
+
+<h3 id="what-are-cell-barcodes-1">What are Cell Barcodes?</h3>
+
+<p>.image-100[<img src="../../images/scrna_pbb_barcodes_overview.svg" alt="Barcodes in Plate" loading="lazy" />]</p>
+
+<ul>
+  <li>Many different cell barcodes are used across many different cells</li>
+  <li>Each well in a plate contains a cell, indexed by its cell barcode</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Within a plate, many different barcodes are used, and each cell is indexed by the cell barcode assigned to that well.</li>
+</ul>
+
+<hr />
+
+<h3 id="questions-about-cell-barcodes">Questions about Cell Barcodes</h3>
+
+<p>.image-50[<img src="../../images/wabplate.png" alt="slide14" loading="lazy" />]</p>
+
+<p>.left[Assuming you sequence one 96-well plate:]</p>
+
+<ol>
+  <li>
+    <p>How many cell barcodes are needed for a single lane?</p>
+  </li>
+  <li>
+    <p>How many cell barcodes are needed if you combine 10 plates into a single sequencing lane?</p>
+  </li>
+  <li>
+    <p>What would be the minimum length of the barcodes for each of the previous questions?</p>
+  </li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Consider a 12 by 8 plate with 96 wells.</li>
+  <li>How many cell barcodes are needed if you sequence a single plate?</li>
+  <li>How many cell barcodes are needed if you sequence 10 plates into a single sequencing lane?</li>
+  <li>What would be the minimum length of the barcodes for each of the previous questions?</li>
+</ul>
+
+<p>–</p>
+
+<p>.footnote[</p>
+<ol>
+  <li><em>96 unique barcodes per lane</em></li>
+  <li><em>96 x 10 = 960 unique barcodes per plate</em>
+]</li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>For one plate you would just need 96 unique barcodes</li>
+  <li>For 10 plates you would need 960 unique barcodes</li>
+</ul>
+
+<hr />
+
+<h3 id="questions-about-cell-barcodes-1">Questions about Cell Barcodes</h3>
+
+<p>.left[<small>3) What would be the minimum length of the barcodes for each of the previous questions?</small>]</p>
+
+<p>.pull-left[</p>
+
+<p>A single lane?</p>
+
+<ul>
+  <li>96 barcodes, 4 nucleotides for each base of a barcode</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Barcodes</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>\(4^2 =  16\)</td>
+      <td><small>No, 2 bases is not enough</small></td>
+    </tr>
+    <tr>
+      <td>\(4^3  = 64\)</td>
+      <td><small>No, 3 bases is not enough</small></td>
+    </tr>
+    <tr>
+      <td>\(4^4 = 256\)</td>
+      <td><small>Yes, 4 bases is enough to cover 96 barcodes (and more!)</small></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>To answer the third question, we need to make some assumptions about the barcodes.</li>
+  <li>If we assume a barcode is made up of a chain of 4 possible nucleotides, then we can solve the problem as a power of 4.</li>
+  <li>For a single lane with only 96 barcodes, we require our barcodes to be of at least 4 base pairs in length.</li>
+</ul>
+
+<p>–
+.pull-right[</p>
+
+<p>10 plates in a single lane?</p>
+
+<ul>
+  <li>960 barcodes, 4 nucleotides for each base of a barcode</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Barcodes</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>\(4^4 = 256\)</td>
+      <td><small>No, 4 bases is not enough</small></td>
+    </tr>
+    <tr>
+      <td>\(4^5 = 1024\)</td>
+      <td><small>Yes, 5 bases is enough to cover 960 barcodes (just barely!)</small></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>For 10 lanes with 960 barcodes, we require our barcodes to be of at least 5 base pairs in length.</li>
+  <li>However these calculations also make one serious assumption about the barcodes.</li>
+</ul>
+
+<hr />
+
+<h3 id="barcode-safeguarding">Barcode Safeguarding</h3>
+
+<p>.pull-left[</p>
+<ul>
+  <li>
+    <p>Is 5 nucleotides really enough to capture 960 cells?</p>
+  </li>
+  <li>
+    <p>What could go wrong if all barcodes are separated by 1 bp, as shown?
+]</p>
+  </li>
+</ul>
+
+<p>.pull-right[
+<small><em>Edit distance = 1bp</em></small></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AAAAA AAAAC AAAAG AAAAT AAACA AAAGA AAATA ····
+CCCCC CCCCA CCCCG CCCCT CCCAC CCCGC CCCTC ····
+                    ·
+                    ·
+                    · ]
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>For example, we assume that all our barcodes are at minimum separated by a single base pair.</li>
+  <li>This is known as an edit distance of 1.</li>
+  <li>If we assume that every barcode is separated from every other barcode by 1 base pair, then 5 nucleotides is indeed enough to delineate 960 cells.</li>
+  <li>However if there was even just one small sequencing error of 1 base pair on any barcode, it would immediately change that erronous barcode into another real barcode.</li>
+  <li>That is to say, we have no way of detecting sequencing errors if we use an edit distance of 1.</li>
+</ul>
+
+<hr />
+
+<h3 id="guarding-against-sequencing-errors">Guarding against Sequencing Errors</h3>
+
+<p>.pull-left[</p>
+<ul>
+  <li>
+    <p>Sequencing errors can change the cell barcode</p>
+  </li>
+  <li>
+    <p>To guard against a 1 bp sequencing error, need to space barcodes by 2 bp</p>
+  </li>
+  <li>
+    <p>How many barcodes for a cell barcode of length 5 bp (ED = 2)?
+]
+.pull-right[
+<small><em>Edit Distance = 2 bp</em></small></p>
+
+    <p>AAAAA AAACC AAAGG AAATT AACCA AAGGA AATTA ····
+  CCCCC CCCAA CCCGG CCCTT CCCAA CCGGC CCTTC ····
+                      ·
+                      ·
+                      ·</p>
+  </li>
+</ul>
+
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Let us try to rectify this by increasing the edit distance to 2.</li>
+  <li>In the example barcodes shown we see barcodes of length 5, separated by 2 base pairs.</li>
+  <li>How many unique cell barcodes can we make given these restrictions?</li>
+</ul>
+
+<p>–</p>
+
+\[4^{5-1} = 512\]
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>The answer is half the amount that we need.</li>
+</ul>
+
+<hr />
+
+<h3 id="edit-distance--general-principle">Edit Distance : General Principle</h3>
+
+<p>.pull-left[
+e.g. For barcodes of length N=3:</p>
+
+<ul>
+  <li>
+    <p>Edit Distance of E=1:
+.center[<code class="language-plaintext highlighter-rouge">AAA AAC AAG AAT ACA ACC</code> …]
+.center[<small>64 barcodes</small>]</p>
+  </li>
+  <li>
+    <p>Edit Distance of E=2:
+.center[<code class="language-plaintext highlighter-rouge">AAA ACC AGG ATT CAA CCC</code> …]
+.center[<small>16 barcodes</small>]</p>
+  </li>
+  <li>
+    <p>Edit Distance of E=3:
+.center[<code class="language-plaintext highlighter-rouge">AAA CCC GGG TTT</code>]
+.center[<small>4 barcodes</small>]
+]</p>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Let us explore this more explicitly.</li>
+  <li>Here we will be using barcodes only of length 3, and we will explore different edit distances of 1, 2, and 3.</li>
+  <li>These yield 64, 16, and 4 barcodes respectively.</li>
+</ul>
+
+<p>–
+.pull-right[
+Number of Barcodes :</p>
+
+\[4^{N-(E-1)}\]
+
+<p>.center[For barcodes of length <em>N</em>,
+and Edit Distance of <em>E</em>.]</p>
+
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>This can be summarized by the formula given, where the length of the barcodes, minus one minus the edit distance, gives the number of available barcodes.</li>
+</ul>
+
+<hr />
+
+<h3 id="how-many-available-barcodes-are-there">How many available barcodes are there?</h3>
+
+<p>.pull-left[</p>
+<ul>
+  <li>
+    <p>Barcodes typically limited to 4 main bases {A,C,T,G}.</p>
+  </li>
+  <li>
+    <p>Number of available barcodes depends on:</p>
+
+    <ol>
+      <li>
+        <p>The length of the barcode</p>
+      </li>
+      <li>
+        <p>The edit distance between adjacent barcodes</p>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <p>Must take sequencing errors into account</p>
+  </li>
+</ul>
+
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>To summarize, barcodes are typically limited to 4 nucleotides, and the number of available barcodes depends on the length and edit distance.</li>
+  <li>This is to ensure that sequencing errors are taken into account.</li>
+</ul>
+
+<p>–
+.pull-right[</p>
+<ul>
+  <li>
+    <p>Availability is balance between <em>barcode size</em> vs. <em>sequencing errors</em></p>
+  </li>
+  <li>
+    <p>Typically between 4-10 bases, range of cells that can be labelled:</p>
+
+\[[4^4, 4^{10}] = [256, 1048576]\]
+  </li>
+  <li>
+    <p>True range is lower due to edit distance.
+]</p>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>The availability of barcodes and the number of cells they can label is a design choice, where the technician must balance two opposing forces: barcode size vs sequencing errors.</li>
+  <li>For the size, this means that for a barcode N bases long, there will 4 to the N barcodes available.</li>
+  <li>Typically barcodes tend to span 4 to 10 bases, since longer barcodes tend to be more subjectable to sequencing errors.</li>
+  <li>The true number of barcodes used is smaller than 4 to the N, due to the countermeasures used to space barcodes apart from one another, in order to reduce sequencing errors.</li>
+</ul>
+
+<hr />
+
+<h3 id="design-factors-in-barcodes">Design Factors in Barcodes</h3>
+
+<p>Is it better to use Longer or Shorter Barcodes?</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Longer</th>
+      <th>Shorter</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Offer larger range of barcodes</td>
+      <td>Offer smaller range of barcodes</td>
+    </tr>
+    <tr>
+      <td>Prone to more sequencing errors</td>
+      <td>More robust against sequencing errors</td>
+    </tr>
+    <tr>
+      <td>Must increase edit distance significantly</td>
+      <td>A smaller edit distance is more acceptable</td>
+    </tr>
+    <tr>
+      <td>Can accommodate large edit distances</td>
+      <td><em>Cannot</em> accommodate large edit distances</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>To weigh the pros and cons of longer and shorter barcodes, we need to take into account the likelihood of sequencing errors for a given size, and the resulting barcode address space given by the edit distance.</li>
+</ul>
+
+<hr />
+
+<h3 id="cell-barcodes-summary">Cell Barcodes: Summary</h3>
+
+<p>.pull-left[</p>
+
+<ul>
+  <li>
+    <p>A single barcode sequence indexes a single cell</p>
+  </li>
+  <li>
+    <p>Every transcript in a specific cell has the same cell barcode</p>
+  </li>
+  <li>
+    <p>Barcodes are <em>designed</em> for smaller plate-based protocols, while for split-pool and similar techniques they are randomised.</p>
+  </li>
+  <li>
+    <p>Barcode use is <em>limited</em> by length and read depth</p>
+  </li>
+</ul>
+
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>To summarize cell barcodes, we should note the following</li>
+  <li>A single barcode sequence indexes a single cell</li>
+  <li>Every transcript in a specific cell has the same cell barcode</li>
+  <li>Barcodes are designed for smaller plate-based protocols, while for split-pool and similar techniques they are randomised</li>
+  <li>Barcode use is limited by length and read depth</li>
+</ul>
+
+<p>–</p>
+<hline>
+.pull-right[#### Need to balance:
+
+<small>
+
+  | | | |
+|-|-|-|
+| Edit Distance | vs. | Barcode Length |
+| Number of Barcodes | vs. | Plate and Lane Size |
+
+</small>
+]
+
+<span>Speaker Notes</span>
+- The number of reads wanted per cell determines how many cells you run in a sequencing lane, which in turn tells you how many barcodes you need.
+
+---
+
+# Summary
+
+.pull-left[
+
+* Cell Barcodes are sequences attached to transcripts to indicate what cell a transcript came from
+
+* Cell Barcodes are *designed* to the Plate/Lane setup
+
+]
+
+<span>Speaker Notes</span>
+- From the content shown here, you have learned the following.
+- Cell Barcodes are sequences attached to transcripts to indicate what cell a transcript came from
+- Cell Barcodes are designed for the Plate and Lane setup.
+
+
+--
+.pull-right[
+
+* Indicates what cell a transcript came from.
+
+* Reduce sequencing errors
+
+]
+
+<span>Speaker Notes</span>
+- Cell barcodes indicate what cell a transcript came from
+- They reduce sequencing errors when spaced appropriately
+
+</hline>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Balanced batches and replicates allow bioinformatic batch correction</li>
+
+<li>A sequencing lane often contains multiple batches, and is itself a batch effect!</li>
+
+</ul>
+
+
+
+
+<h2><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Do you want to extend your knowledge?</h2>
+Follow one of our recommended follow-up trainings:
+
+
+
+    
+        
+        
+            
+        
+- [Transcriptomics](/training-material/topics/transcriptomics)
+    - Single-cell quality control with scater: [<i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on](/training-material/topics/transcriptomics/tutorials/scrna-scater-qc/tutorial.html)
+    
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

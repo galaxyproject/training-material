@@ -29,30 +29,8 @@
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
-        
-
-
-
-
-
-
-
-
-
-
-
-<!-- Gitter -->
-
-
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
             <a class="navbar-brand" href="/training-material/">
                 <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
@@ -65,11 +43,12 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        
                         <a class="nav-link" href="/training-material/topics/transcriptomics" title="Go back to list of tutorials">
-                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Transcriptomics
+                            <i class="far fa-folder" aria-hidden="true"></i> Transcriptomics
                         </a>
+                        
                     </li>
-
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
         <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
@@ -208,15 +187,8 @@
     </div>
 </li>
 
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/ref-based/tutorial.md">
-                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
-                        </a>
-                    </li>
-                    -->
 
-                     <!-- Search bar-->
+                    <!-- Search bar-->
                     <li class="nav-item">
                       <div id="navbarSupportedContent">
                         <!-- Search form -->
@@ -228,16 +200,37 @@
                         </form>
                       </div>
                     </li>
-
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 
-<div class="container main-content">
-    <script type="application/ld+json">
+        <div class="container main-content" role="main">
         
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
 
 
 {
@@ -359,6 +352,20 @@
     },
     {
       "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
       "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
       "name": "Mapping",
       "description": "Slides for 'Mapping' tutorial",
@@ -377,6 +384,20 @@
       "name": "Mapping",
       "description": "Hands-on for 'Mapping' tutorial",
       "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -481,76 +502,77 @@
     }
   ]
 }
-    </script>
+</script>
 
-    <section class="tutorial topic-transcriptomics">
-        <h1 data-toc-skip>Reference-based RNA-Seq data analysis</h1>
-        
+<section class="tutorial topic-transcriptomics">
+    <h1 data-toc-skip>Reference-based RNA-Seq data analysis</h1>
+    
 
-        <div class="contributors-line">By: 
+    <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Bérénice Batut">Bérénice Batut</a> <a href="/training-material/hall-of-fame/malloryfreeberg/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/malloryfreeberg" alt="Mallory Freeberg">Mallory Freeberg</a> <a href="/training-material/hall-of-fame/moheydarian/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/moheydarian" alt="Mo Heydarian">Mo Heydarian</a> <a href="/training-material/hall-of-fame/erxleben/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/erxleben" alt="Anika Erxleben">Anika Erxleben</a> <a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pavanvidem" alt="Pavankumar Videm">Pavankumar Videm</a> <a href="/training-material/hall-of-fame/blankclemens/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/blankclemens" alt="Clemens Blank">Clemens Blank</a> <a href="/training-material/hall-of-fame/mblue9/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mblue9" alt="Maria Doyle">Maria Doyle</a> <a href="/training-material/hall-of-fame/nsoranzo/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nsoranzo" alt="Nicola Soranzo">Nicola Soranzo</a> <a href="/training-material/hall-of-fame/pvanheus/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pvanheus" alt="Peter van Heusden">Peter van Heusden</a>
+ <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Avatar">Bérénice Batut</a> <a href="/training-material/hall-of-fame/malloryfreeberg/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/malloryfreeberg" alt="Avatar">Mallory Freeberg</a> <a href="/training-material/hall-of-fame/moheydarian/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/moheydarian" alt="Avatar">Mo Heydarian</a> <a href="/training-material/hall-of-fame/erxleben/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/erxleben" alt="Avatar">Anika Erxleben</a> <a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pavanvidem" alt="Avatar">Pavankumar Videm</a> <a href="/training-material/hall-of-fame/blankclemens/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/blankclemens" alt="Avatar">Clemens Blank</a> <a href="/training-material/hall-of-fame/mblue9/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mblue9" alt="Avatar">Maria Doyle</a> <a href="/training-material/hall-of-fame/nsoranzo/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nsoranzo" alt="Avatar">Nicola Soranzo</a> <a href="/training-material/hall-of-fame/pvanheus/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pvanheus" alt="Avatar">Peter van Heusden</a>
 
 </div>
 
-        <blockquote class="overview">
-            <h3>Overview</h3>
-            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
-            <ul>
-            
-            <li><p>What are the steps to process RNA-Seq data?</p>
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions</strong>
+        <ul>
+        
+        <li><p>What are the steps to process RNA-Seq data?</p>
 </li>
-            
-            <li><p>How to identify differentially expressed genes across multiple experimental conditions?</p>
+        
+        <li><p>How to identify differentially expressed genes across multiple experimental conditions?</p>
 </li>
-            
-            <li><p>What are the biological functions impacted by the differential expression of genes?</p>
+        
+        <li><p>What are the biological functions impacted by the differential expression of genes?</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
-            <ul>
-            
-            <li><p>Check a sequence quality report generated by FastQC for RNA-Seq data</p>
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+        <ul>
+        
+        <li><p>Check a sequence quality report generated by FastQC for RNA-Seq data</p>
 </li>
-            
-            <li><p>Explain the principle and specificity of mapping of RNA-Seq data to an eukaryotic reference genome</p>
+        
+        <li><p>Explain the principle and specificity of mapping of RNA-Seq data to an eukaryotic reference genome</p>
 </li>
-            
-            <li><p>Select and run a state of the art mapping tool for RNA-Seq data</p>
+        
+        <li><p>Select and run a state of the art mapping tool for RNA-Seq data</p>
 </li>
-            
-            <li><p>Evaluate the quality of mapping results</p>
+        
+        <li><p>Evaluate the quality of mapping results</p>
 </li>
-            
-            <li><p>Describe the process to estimate the library strandness</p>
+        
+        <li><p>Describe the process to estimate the library strandness</p>
 </li>
-            
-            <li><p>Estimate the number of reads per genes</p>
+        
+        <li><p>Estimate the number of reads per genes</p>
 </li>
-            
-            <li><p>Explain the count normalization to perform before sample comparison</p>
+        
+        <li><p>Explain the count normalization to perform before sample comparison</p>
 </li>
-            
-            <li><p>Construct and run a differential gene expression analysis</p>
+        
+        <li><p>Construct and run a differential gene expression analysis</p>
 </li>
-            
-            <li><p>Analyze the DESeq2 output to identify, annotate and visualize differentially expressed genes</p>
+        
+        <li><p>Analyze the DESeq2 output to identify, annotate and visualize differentially expressed genes</p>
 </li>
-            
-            <li><p>Perform a gene ontology enrichment analysis</p>
+        
+        <li><p>Perform a gene ontology enrichment analysis</p>
 </li>
-            
-            <li><p>Perform and visualize an enrichment analysis for KEGG pathways</p>
+        
+        <li><p>Perform and visualize an enrichment analysis for KEGG pathways</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            
-            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
-            <ul>
-            
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+        <ul>
+        
     <li>
     
         
@@ -611,62 +633,61 @@
     
     </li>
 
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 8 hours</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+        <ul class="supporting_material">
             
-            </ul>
+                <li class="btn btn-default supporting_material"><a href="/training-material/topics/transcriptomics/slides/introduction.html">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Topic Overview slides
+                </a></li>
             
 
             
-            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 8 hours</div>
-            
-
-            
-
-            
-            
-
-            
-            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
-            <ul>
-                <div class="supporting_material">
-                
-                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/transcriptomics/slides/introduction.html" title="Topic Overview slides">
-                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Topic Overview slides
-                    </a></li>
-                
-
-                
-                    <li class="btn btn-default supporting_material">
+                <li class="btn btn-default supporting_material">
 <a class="topic-icon" href="https://zenodo.org/record/4541751">
-    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
 </a>
 
 </li>
-                
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
     <a class="topic-icon" href="/training-material/topics/transcriptomics/tutorials/ref-based/workflows/" title="Workflows" alt="Reference-based RNA-Seq data analysis workflows">
-        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
     </a>
 
 </li>
-                
+            
 
-                
-                    <li class="btn btn-default supporting_material">
-<a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/main/topics/transcriptomics/tutorials/ref-based/tours/">
-    <i class="fas fa-magic" aria-hidden="true"></i><span class="visually-hidden">interactive_tour</span> Tours
+            
+                <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/main/topics/transcriptomics/tutorials/ref-based/tours/" title="Galaxy interactive tour" >
+    <i class="fas fa-magic" aria-hidden="true"></i> Tours
 </a>
 
 </li>
-                
+            
 
-                
-                
-                
+            
+            
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
@@ -679,8 +700,6 @@
             </a>
         </li>
     
-    
-        
     
         
     
@@ -803,8 +822,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -872,22 +889,23 @@
 
 
 </li>
-                
-                </div>
-            </ul>
             
+        </ul>
+        
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 26, 2021 </div>
-        </blockquote>
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 26, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
-        <div class="container">
-            <div class="row">
-                <!-- sidebar, which will move to the top on a small screen -->
-                <div class="col-sm-2">
-                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
-                </div>
-                <div class="col-sm-10">
-                    <h1 class="no_toc" id="introduction">Introduction</h1>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <p>In recent years, <span class="notranslate">RNA</span> sequencing (in short <span class="notranslate">RNA</span>-Seq) has become a very widely used technology to analyze the continuously changing cellular transcriptome, i.e. the set of all <span class="notranslate">RNA</span> molecules in one cell or a population of cells. One of the most common aims of <span class="notranslate">RNA</span>-Seq is the profiling of gene <span class="notranslate">expression</span> by identifying genes or molecular pathways that are differentially expressed (DE) between two or more biological conditions. This tutorial demonstrates a computational <span class="notranslate">workflow</span> for the detection of DE genes and pathways from <span class="notranslate">RNA</span>-Seq data by providing a complete analysis of an <span class="notranslate">RNA</span>-Seq experiment profiling <em>Drosophila</em> cells after the depletion of a regulatory gene.</p>
 
@@ -1097,27 +1115,27 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
 
               <p>All files except <code class="language-plaintext highlighter-rouge">GSM461180_2</code> have a high proportion of duplicated <span class="notranslate">reads</span> (expected in <span class="notranslate">RNA</span>-Seq data)</p>
 
-              <figure id="figure-1"><img src="../../images/ref-based/fastqc_sequence_counts_plot.png" alt="Sequence Counts" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Sequence Counts</figcaption></figure>
+              <figure id="figure-1"><img src="../../images/ref-based/fastqc_sequence_counts_plot.png" alt="Sequence Counts" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Sequence Counts</figcaption></figure>
 
               <p>The “Per base sequence quality” is globally good with a slight decrease at the end of the sequences. For <code class="language-plaintext highlighter-rouge">GSM461180_2</code>, the decrease is quite large.</p>
 
-              <figure id="figure-2"><img src="../../images/ref-based/fastqc_per_base_sequence_quality_plot.png" alt="Sequence Quality" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Sequence Quality</figcaption></figure>
+              <figure id="figure-2"><img src="../../images/ref-based/fastqc_per_base_sequence_quality_plot.png" alt="Sequence Quality" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Sequence Quality</figcaption></figure>
 
               <p>The mean quality score over the <span class="notranslate">reads</span> is quite high, but the distribution is slightly different for <code class="language-plaintext highlighter-rouge">GSM461180_2</code></p>
 
-              <figure id="figure-3"><img src="../../images/ref-based/fastqc_per_sequence_quality_scores_plot.png" alt="Per Sequence Quality Scores" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Per Sequence Quality Scores</figcaption></figure>
+              <figure id="figure-3"><img src="../../images/ref-based/fastqc_per_sequence_quality_scores_plot.png" alt="Per Sequence Quality Scores" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Per Sequence Quality Scores</figcaption></figure>
 
               <p><span class="notranslate">Reads</span> are not really following a normal distribution of GC content, except <code class="language-plaintext highlighter-rouge">GSM461180_2</code></p>
 
-              <figure id="figure-4"><img src="../../images/ref-based/fastqc_per_sequence_gc_content_plot.png" alt="Per Sequence GC Content" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Per Sequence GC Content</figcaption></figure>
+              <figure id="figure-4"><img src="../../images/ref-based/fastqc_per_sequence_gc_content_plot.png" alt="Per Sequence GC Content" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Per Sequence GC Content</figcaption></figure>
 
               <p>Few N in the <span class="notranslate">reads</span></p>
 
-              <figure id="figure-5"><img src="../../images/ref-based/fastqc_per_base_n_content_plot.png" alt="Per base N content" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Per base N content</figcaption></figure>
+              <figure id="figure-5"><img src="../../images/ref-based/fastqc_per_base_n_content_plot.png" alt="Per base N content" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Per base N content</figcaption></figure>
 
               <p>Duplicated sequences: &gt;10 to &gt;500</p>
 
-              <figure id="figure-6"><img src="../../images/ref-based/fastqc_sequence_duplication_levels_plot.png" alt="Sequence Duplication Levels" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Sequence Duplication Levels</figcaption></figure>
+              <figure id="figure-6"><img src="../../images/ref-based/fastqc_sequence_duplication_levels_plot.png" alt="Sequence Duplication Levels" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Sequence Duplication Levels</figcaption></figure>
 
               <p>Almost no known adapters and overrepresented sequences</p>
             </li>
@@ -1277,11 +1295,11 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
 
 <p>With eukaryotic transcriptomes most <span class="notranslate">reads</span> originate from processed m<span class="notranslate">RNA</span>s lacking introns:</p>
 
-<figure id="figure-7"><img src="../../images/ref-based/rna-seq-reads.png" alt="Types of RNA-Seq reads" /><figcaption><span class="figcaption-prefix">Figure 7:</span> The types of <span class="notranslate">RNA</span>-seq <span class="notranslate">reads</span> (adaption of the Figure 1a from <a class="citation" href="#kim2015hisat">Kim <i>et al.</i> 2015</a>): <span class="notranslate">reads</span> that mapped entirely within an exon (in red), <span class="notranslate">reads</span> spanning over 2 exons (in blue), read spanning over more than 2 exons (in purple)</figcaption></figure>
+<figure id="figure-7"><img src="../../images/ref-based/rna-seq-reads.png" alt="Types of RNA-Seq reads" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> The types of <span class="notranslate">RNA</span>-seq <span class="notranslate">reads</span> (adaption of the Figure 1a from <a class="citation" href="#kim2015hisat">Kim <i>et al.</i> 2015</a>): <span class="notranslate">reads</span> that mapped entirely within an exon (in red), <span class="notranslate">reads</span> spanning over 2 exons (in blue), read spanning over more than 2 exons (in purple)</figcaption></figure>
 
 <p>Therefore they cannot be simply mapped back to the genome as we normally do for <span class="notranslate">DNA</span> data. Spliced-awared mappers have been developed to efficiently map transcript-derived <span class="notranslate">reads</span> against a reference genome:</p>
 
-<figure id="figure-8"><img src="../../images/splice_aware_alignment.png" alt="Splice-aware alignment" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Principle of spliced mappers: (1) identification of the <span class="notranslate">reads</span> spanning a single exon, (2) identification of the splicing junctions on the unmapped <span class="notranslate">reads</span></figcaption></figure>
+<figure id="figure-8"><img src="../../images/splice_aware_alignment.png" alt="Splice-aware alignment" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Principle of spliced mappers: (1) identification of the <span class="notranslate">reads</span> spanning a single exon, (2) identification of the splicing junctions on the unmapped <span class="notranslate">reads</span></figcaption></figure>
 
 <blockquote class="details">
   <h3 id="details-more-details-on-the-different-spliced-mappers"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> More details on the different spliced mappers</h3>
@@ -1290,21 +1308,21 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
 
   <p><a href="https://ccb.jhu.edu/software/tophat/index.shtml"><strong>TopHat</strong></a> (<a class="citation" href="#trapnell2009tophat">Trapnell <i>et al.</i> 2009</a>) was one of the first tools designed specifically to address this problem. In <strong>TopHat</strong> <span class="notranslate">reads</span> are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that are initially unmapped (IUM). “Piles” of <span class="notranslate">reads</span> representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions.</p>
 
-  <figure id="figure-9"><img src="../../images/tophat.png" alt="TopHat" /><figcaption><span class="figcaption-prefix">Figure 9:</span> TopHat (Figure 1 from <a class="citation" href="#trapnell2009tophat">Trapnell <i>et al.</i> 2009</a>)</figcaption></figure>
+  <figure id="figure-9"><img src="../../images/tophat.png" alt="TopHat" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> TopHat (Figure 1 from <a class="citation" href="#trapnell2009tophat">Trapnell <i>et al.</i> 2009</a>)</figcaption></figure>
 
   <p><strong>TopHat</strong> has been subsequently improved with the development of <strong>TopHat2</strong> (<a class="citation" href="#kim2013tophat2">Kim <i>et al.</i> 2013</a>):</p>
 
-  <figure id="figure-10"><img src="../../images/13059_2012_Article_3053_Fig6_HTML.jpg" alt="TopHat2" /><figcaption><span class="figcaption-prefix">Figure 10:</span> TopHat2 (Figure 6 from <a class="citation" href="#kim2013tophat2">Kim <i>et al.</i> 2013</a>)</figcaption></figure>
+  <figure id="figure-10"><img src="../../images/13059_2012_Article_3053_Fig6_HTML.jpg" alt="TopHat2" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> TopHat2 (Figure 6 from <a class="citation" href="#kim2013tophat2">Kim <i>et al.</i> 2013</a>)</figcaption></figure>
 
   <p>To further optimize and speed up spliced read alignment, <a href="https://ccb.jhu.edu/software/hisat2/index.shtml"><strong>HISAT2</strong></a> (<a class="citation" href="#kim2019graph">Kim <i>et al.</i> 2019</a>) was developed. It uses a hierarchical graph <a href="https://en.wikipedia.org/wiki/FM-index">FM</a> (HGFM) index, representing the entire genome and eventual variants, together with overlapping local indexes (each spanning ~57 kb) that collectively cover the genome and its variants. This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:</p>
 
-  <figure id="figure-11"><img src="../../images/hisat.png" alt="Hierarchical Graph FM index in HISAT/HISAT2" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Hierarchical Graph FM index in HISAT/HISAT2 (Figure S8 from <a class="citation" href="#kim2015hisat">Kim <i>et al.</i> 2015</a>)</figcaption></figure>
+  <figure id="figure-11"><img src="../../images/hisat.png" alt="Hierarchical Graph FM index in HISAT/HISAT2" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Hierarchical Graph FM index in HISAT/HISAT2 (Figure S8 from <a class="citation" href="#kim2015hisat">Kim <i>et al.</i> 2015</a>)</figcaption></figure>
 
   <p>A part of the read (blue arrow) is first mapped to the genome using the global FM index. <strong>HISAT2</strong> then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (<strong>a</strong>) it succeeds and this read is aligned as it completely resides within an exon. In (<strong>b</strong>) the extension hits a mismatch. Now <strong>HISAT2</strong> takes advantage of the local FM index overlapping this location to find the appropriate <span class="notranslate">mapping</span> for the remainder of this read (green arrow). The (<strong>c</strong>) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow).</p>
 
   <p><a href="https://github.com/alexdobin/STAR"><strong>STAR</strong> aligner</a> (<a class="citation" href="#dobin2013star">Dobin <i>et al.</i> 2013</a>) is a fast alte<span class="notranslate">rna</span>tive for <span class="notranslate">mapping</span> <span class="notranslate">RNA</span>-Seq <span class="notranslate">reads</span> against a reference genome utilizing an uncompressed <a href="https://en.wikipedia.org/wiki/Suffix_array">suffix array</a>. It operates in two stages. In the first stage it performs a seed search:</p>
 
-  <figure id="figure-12"><img src="../../images/star.png" alt="STAR's seed search" /><figcaption><span class="figcaption-prefix">Figure 12:</span> STAR's seed search (Figure 1 from <a class="citation" href="#dobin2013star">Dobin <i>et al.</i> 2013</a>)</figcaption></figure>
+  <figure id="figure-12"><img src="../../images/star.png" alt="STAR's seed search" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> STAR's seed search (Figure 1 from <a class="citation" href="#dobin2013star">Dobin <i>et al.</i> 2013</a>)</figcaption></figure>
 
   <p>Here a read is split between two consecutive exons. <strong>STAR</strong> starts to look for a maximum mappable prefix (MMP) from the beginning of the read until it can no longer match continuously. After this point it start to look for a MMP for the unmatched portion of the read (<strong>a</strong>). In the case of mismatches (<strong>b</strong>) and unalignable regions (<strong>c</strong>) MMPs serve as anchors from which to extend alignments.</p>
 
@@ -1394,7 +1412,7 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
             <li>
               <p>We also have access to the number and percentage of <span class="notranslate">reads</span> that are mapped at several location, mapped at too many different location, not mapped because too short.</p>
 
-              <figure id="figure-13"><img src="../../images/ref-based/star_alignment_plot.png" alt="STAR Alignment Scores" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Alignment scores</figcaption></figure>
+              <figure id="figure-13"><img src="../../images/ref-based/star_alignment_plot.png" alt="STAR Alignment Scores" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Alignment scores</figcaption></figure>
 
               <p>We could have been probably more strict in the minimal read length to avoid these unmapped <span class="notranslate">reads</span> because of length.</p>
             </li>
@@ -1556,7 +1574,7 @@ installed on your machine. However, the questions in this section can also be an
       <blockquote class="question">
         <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
-        <figure id="figure-14"><img src="../../images/junction_igv_screenshot.png" alt="Screenshot of the IGV view on Chromosome 4" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Screenshot of IGV on Chromosome 4</figcaption></figure>
+        <figure id="figure-14"><img src="../../images/junction_igv_screenshot.png" alt="Screenshot of the IGV view on Chromosome 4" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Screenshot of IGV on Chromosome 4</figcaption></figure>
 
         <ol>
           <li>What information appears at the top as grey peaks?</li>
@@ -1589,7 +1607,7 @@ installed on your machine. However, the questions in this section can also be an
       <blockquote class="question">
         <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
-        <figure id="figure-15"><img src="../../images/star_igv_sashimi.png" alt="Screenshot of a Sashimi plot of Chromosome 4" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Screenshot of a Sashimi plot of Chromosome 4</figcaption></figure>
+        <figure id="figure-15"><img src="../../images/star_igv_sashimi.png" alt="Screenshot of a Sashimi plot of Chromosome 4" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Screenshot of a Sashimi plot of Chromosome 4</figcaption></figure>
 
         <ol>
           <li>What does the vertical red bar graph represent? And the arcs with numbers?</li>
@@ -1630,7 +1648,7 @@ installed on your machine. However, the questions in this section can also be an
 
   <p>In the FastQC report, we saw that some <span class="notranslate">reads</span> are duplicated:</p>
 
-  <figure id="figure-16"><img src="../../images/ref-based/fastqc_sequence_duplication_levels_plot.png" alt="Sequence Duplication Levels" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Sequence Duplication Levels</figcaption></figure>
+  <figure id="figure-16"><img src="../../images/ref-based/fastqc_sequence_duplication_levels_plot.png" alt="Sequence Duplication Levels" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Sequence Duplication Levels</figcaption></figure>
 
   <p>Duplicate <span class="notranslate">reads</span> can come from highly-expressed genes, therefore they are usually kept in <span class="notranslate">RNA</span>-Seq differential <span class="notranslate">expression</span> analysis. But a high percentage of duplicates may indicate an issue, e.g. over amplification during PCR of low complexity library.</p>
 
@@ -1707,7 +1725,7 @@ installed on your machine. However, the questions in this section can also be an
         <blockquote class="question">
           <h3 id="question-questions-8"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-          <p><img src="../../images/ref-based/samtools-idxstats-mapped-reads-plot.png" alt="Samtools idxstats" /></p>
+          <p><img src="../../images/ref-based/samtools-idxstats-mapped-reads-plot.png" alt="Samtools idxstats" loading="lazy" /></p>
 
           <ol>
             <li>How many chromosomes does the <em>Drosophila</em> genome have?</li>
@@ -1723,7 +1741,7 @@ installed on your machine. However, the questions in this section can also be an
               <li>
                 <p>From the percentage of X+Y <span class="notranslate">reads</span>, most of the <span class="notranslate">reads</span> map to X and only few to Y. So only few genes may be on Y. So the samples are probably both female.</p>
 
-                <p><img src="../../images/ref-based/samtools-idxstats-xy-plot.png" alt="Samtools idxstats" /></p>
+                <p><img src="../../images/ref-based/samtools-idxstats-xy-plot.png" alt="Samtools idxstats" loading="lazy" /></p>
               </li>
             </ol>
           </blockquote>
@@ -1773,7 +1791,7 @@ installed on your machine. However, the questions in this section can also be an
         <blockquote class="question">
           <h3 id="question-question-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
-          <p><img src="../../images/ref-based/rseqc_gene_body_coverage_plot.png" alt="Gene body coverage" /></p>
+          <p><img src="../../images/ref-based/rseqc_gene_body_coverage_plot.png" alt="Gene body coverage" loading="lazy" /></p>
 
           <p>How are the coverage across gene bodies? Are the samples biased in 3’ or 5’?</p>
 
@@ -1821,7 +1839,7 @@ installed on your machine. However, the questions in this section can also be an
         <blockquote class="question">
           <h3 id="question-question-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
-          <p><img src="../../images/ref-based/rseqc_read_distribution_plot.png" alt="Samtools idxstats" /></p>
+          <p><img src="../../images/ref-based/rseqc_read_distribution_plot.png" alt="Samtools idxstats" loading="lazy" /></p>
 
           <p>What do you think of the read distribution?</p>
 
@@ -1852,7 +1870,7 @@ installed on your machine. However, the questions in this section can also be an
 
 <p>To compare the <span class="notranslate">expression</span> of single genes between different conditions (<em>e.g.</em> with or without PS depletion), an essential first step is to quantify the number of <span class="notranslate">reads</span> per gene, or more specifically the number of <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to the exons of each gene.</p>
 
-<figure id="figure-17"><img src="../../images/gene_counting.png" alt="Counting the number of reads per annotated gene" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Counting the number of <span class="notranslate">reads</span> per annotated gene</figcaption></figure>
+<figure id="figure-17"><img src="../../images/gene_counting.png" alt="Counting the number of reads per annotated gene" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Counting the number of <span class="notranslate">reads</span> per annotated gene</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-question-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -1917,7 +1935,7 @@ installed on your machine. However, the questions in this section can also be an
 
 <p><span class="notranslate">RNA</span>s that are typically targeted in <span class="notranslate">RNA</span>-Seq experiments are single stranded (<em>e.g.</em>, m<span class="notranslate">RNA</span>s) and thus have polarity (5’ and 3’ ends that are functionally distinct). During a typical <span class="notranslate">RNA</span>-Seq experiment the information about strandness is lost after both strands of c<span class="notranslate">DNA</span> are synthesized, size selected, and converted into a sequencing library. However, this information can be quite useful for the read counting step, especially for <span class="notranslate">reads</span> located on the overlap of 2 genes that are on different strands.</p>
 
-<figure id="figure-18"><img src="../../images/ref-based/strandness_why.png" alt="Why strandness?" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Read1 will be assigned to gene1 located on the forward strand but Read2 could be assigned to gene1 (forward strand) or gene2 (reverse strand) depending if the strandness information is conserved.</figcaption></figure>
+<figure id="figure-18"><img src="../../images/ref-based/strandness_why.png" alt="Why strandness?" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Read1 will be assigned to gene1 located on the forward strand but Read2 could be assigned to gene1 (forward strand) or gene2 (reverse strand) depending if the strandness information is conserved.</figcaption></figure>
 
 <p>Some library preparation protocols create so called <em>stranded</em> <span class="notranslate">RNA</span>-Seq libraries that preserve the strand information (an excellent overview in <a class="citation" href="#levin2010comprehensive">Levin <i>et al.</i> 2010</a>). In practice, with Illumina paired-end <span class="notranslate">RNA</span>-Seq protocols you are unlikely to encounter many of these possibilities. You will most likely deal with either:</p>
 
@@ -1929,22 +1947,22 @@ installed on your machine. However, the questions in this section can also be an
 <blockquote class="details">
   <h3 id="details-more-details-about-strandness"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> More details about strandness</h3>
 
-  <figure id="figure-19"><img src="../../images/dna_rna.png" alt="Relationship between DNA and RNA orientation" /><figcaption><span class="figcaption-prefix">Figure 19:</span> Relationship between <span class="notranslate">DNA</span> and <span class="notranslate">RNA</span> orientation</figcaption></figure>
+  <figure id="figure-19"><img src="../../images/dna_rna.png" alt="Relationship between DNA and RNA orientation" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 19:</span> Relationship between <span class="notranslate">DNA</span> and <span class="notranslate">RNA</span> orientation</figcaption></figure>
 
   <p>The implication of stranded <span class="notranslate">RNA</span>-Seq is that you can distinguish whether the <span class="notranslate">reads</span> are derived from forward or reverse-encoded transcripts:</p>
 
-  <figure id="figure-20"><img src="../../images/stranded_result.png" alt="Stranded RNA-Seq data look like this" /><figcaption><span class="figcaption-prefix">Figure 20:</span> Non-stranded vs. strand-specific <span class="notranslate">RNA</span>-Seq read alignment (Figure from GATC Biotech)</figcaption></figure>
+  <figure id="figure-20"><img src="../../images/stranded_result.png" alt="Stranded RNA-Seq data look like this" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 20:</span> Non-stranded vs. strand-specific <span class="notranslate">RNA</span>-Seq read alignment (Figure from GATC Biotech)</figcaption></figure>
 
   <p>Depending on the approach, and whether one performs single-end or paired-end sequencing, there are multiple possibilities on how to interpret the results of the <span class="notranslate">mapping</span> of these <span class="notranslate">reads</span> to the genome:</p>
 
-  <figure id="figure-21"><img src="../../images/rnaseq_library_type.png" alt="Effects of RNA-Seq library types" /><figcaption><span class="figcaption-prefix">Figure 21:</span> Effects of <span class="notranslate">RNA</span>-Seq library types (Figure adapted from Sailfish documentation)</figcaption></figure>
+  <figure id="figure-21"><img src="../../images/rnaseq_library_type.png" alt="Effects of RNA-Seq library types" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 21:</span> Effects of <span class="notranslate">RNA</span>-Seq library types (Figure adapted from Sailfish documentation)</figcaption></figure>
 </blockquote>
 
 <p>This information should be provided with your FASTQ files, ask your sequencing facility! If not, try to find it on the site where you downloaded the data or in the corresponding publication.</p>
 
 <p>Another option is to estimate these parameters with a tool called <strong>Infer Experiment</strong> from the RSeQC (<a class="citation" href="#wang2012rseqc">Wang <i>et al.</i> 2012</a>) tool suite. This tool takes the BAM files from the <span class="notranslate">mapping</span>, selects a subsample of the <span class="notranslate">reads</span> and compares their genome coordinates and strands with those of the reference gene model (from an annotation file). Based on the strand of the genes, it can gauge whether sequencing is strand-specific, and if so, how <span class="notranslate">reads</span> are stranded (forward or reverse):</p>
 
-<figure id="figure-22"><img src="../../images/ref-based/strandness_cases.png" alt="How to estimate the strandness?" /><figcaption><span class="figcaption-prefix">Figure 22:</span> In a stranded forward library, <span class="notranslate">reads</span> map mostly on the genes located on forward strand (here gene1). With stranded reverse library, <span class="notranslate">reads</span> map mostly on genes on the reverse strand (here gene2). With unstranded library, <span class="notranslate">reads</span> maps on genes on both strands.</figcaption></figure>
+<figure id="figure-22"><img src="../../images/ref-based/strandness_cases.png" alt="How to estimate the strandness?" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 22:</span> In a stranded forward library, <span class="notranslate">reads</span> map mostly on the genes located on forward strand (here gene1). With stranded reverse library, <span class="notranslate">reads</span> map mostly on genes on the reverse strand (here gene2). With unstranded library, <span class="notranslate">reads</span> maps on genes on both strands.</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-determining-the-library-strandness"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Determining the library strandness</h3>
@@ -2144,7 +2162,7 @@ Fraction of <span class="notranslate">reads</span> explained by "1+-,1-+,2++,2--
             <li>
               <p>Around 70% of the <span class="notranslate">reads</span> have been assigned to genes: this quantity is good enough.</p>
 
-              <figure id="figure-23"><img src="../../images/ref-based/featureCounts_assignment_plot.png" alt="featureCounts assignment" /><figcaption><span class="figcaption-prefix">Figure 23:</span> Assignments with featureCounts</figcaption></figure>
+              <figure id="figure-23"><img src="../../images/ref-based/featureCounts_assignment_plot.png" alt="featureCounts assignment" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 23:</span> Assignments with featureCounts</figcaption></figure>
 
               <p>Some <span class="notranslate">reads</span> are not assigned because multi-mapped and other assigned to no features or ambiguous ones.</p>
             </li>
@@ -2199,32 +2217,32 @@ Fraction of <span class="notranslate">reads</span> explained by "1+-,1-+,2++,2--
         <li>
           <p>The <strong>Scratchbook</strong> is enabled by clicking the nine-blocks icon seen on the right of the <span class="notranslate">Galaxy</span> top menubar:</p>
 
-          <figure id="figure-24"><img src="../../images/ref-based/menubarWithScratchbook.png" alt="scratchbook icon" /><figcaption><span class="figcaption-prefix">Figure 24:</span> Menu bar with Scratchbook icon</figcaption></figure>
+          <figure id="figure-24"><img src="../../images/ref-based/menubarWithScratchbook.png" alt="scratchbook icon" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 24:</span> Menu bar with Scratchbook icon</figcaption></figure>
         </li>
         <li>
           <p>When the Scratchbook is <strong>enabled</strong> datasets being viewed (by clicking the eye-icon) are added to the Scratchbook view:</p>
 
-          <figure id="figure-25"><img src="../../images/ref-based/menubarWithScratchbookEnabled.png" alt="Scratchbook icon enabled" /><figcaption><span class="figcaption-prefix">Figure 25:</span> Menu bar with Scratchbook icon enabled</figcaption></figure>
+          <figure id="figure-25"><img src="../../images/ref-based/menubarWithScratchbookEnabled.png" alt="Scratchbook icon enabled" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 25:</span> Menu bar with Scratchbook icon enabled</figcaption></figure>
         </li>
         <li>
           <p>Click the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon to view one of the <strong>sorted featureCounts</strong> files. Instead of occupying the entire middle bar the dataset view is now shown an overlay:</p>
 
-          <figure id="figure-26"><img src="../../images/ref-based/scratchbookOneDataset.png" alt="Scratchbook one dataset shown" /><figcaption><span class="figcaption-prefix">Figure 26:</span> Scratchbook showing one dataset overlay</figcaption></figure>
+          <figure id="figure-26"><img src="../../images/ref-based/scratchbookOneDataset.png" alt="Scratchbook one dataset shown" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 26:</span> Scratchbook showing one dataset overlay</figcaption></figure>
         </li>
         <li>
           <p>When a dataset is shown <strong>click in the main interface</strong> to prepare to select another dataset. The interface now shows that there is one saved view in the Scratchbook:</p>
 
-          <figure id="figure-27"><img src="../../images/ref-based/scratchbookOneSavedView.png" alt="scratchbook one saved view" /><figcaption><span class="figcaption-prefix">Figure 27:</span> Menu bar with one saved dataset view in Scratchbook</figcaption></figure>
+          <figure id="figure-27"><img src="../../images/ref-based/scratchbookOneSavedView.png" alt="scratchbook one saved view" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 27:</span> Menu bar with one saved dataset view in Scratchbook</figcaption></figure>
         </li>
         <li>
           <p>Next click the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon on the <strong>second sorted featureCounts</strong> file. The two datasets can now be seen side by side:</p>
 
-          <figure id="figure-28"><img src="../../images/ref-based/scratchbookTwoDatasetsShown.png" alt="Scratchbook two datasets shown" /><figcaption><span class="figcaption-prefix">Figure 28:</span> Scratchbook showing two side by side datasets</figcaption></figure>
+          <figure id="figure-28"><img src="../../images/ref-based/scratchbookTwoDatasetsShown.png" alt="Scratchbook two datasets shown" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 28:</span> Scratchbook showing two side by side datasets</figcaption></figure>
         </li>
         <li>
           <p>To <strong>leave</strong> Scratchbook selection mode, click on the <strong>Scratchbook icon</strong> again. Your saved view will still remain for future viewing:</p>
 
-          <figure id="figure-29"><img src="../../images/ref-based/scratchbookDisabledWithSavedDatasets.png" alt="Scratchbook disabled datasets saved" /><figcaption><span class="figcaption-prefix">Figure 29:</span> Scratchbook disabled with two datasets saved</figcaption></figure>
+          <figure id="figure-29"><img src="../../images/ref-based/scratchbookDisabledWithSavedDatasets.png" alt="Scratchbook disabled datasets saved" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 29:</span> Scratchbook disabled with two datasets saved</figcaption></figure>
         </li>
       </ol>
 
@@ -3212,7 +3230,7 @@ may be a lot of work. In these situations, <strong>group tags</strong> can make 
         <blockquote class="question">
           <h3 id="question-questions-9"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-          <figure id="figure-30"><img src="../../images/ref-based/deseq2_pca.png" alt="DESeq PCA" /><figcaption><span class="figcaption-prefix">Figure 30:</span> Principal component plot of the samples</figcaption></figure>
+          <figure id="figure-30"><img src="../../images/ref-based/deseq2_pca.png" alt="DESeq PCA" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 30:</span> Principal component plot of the samples</figcaption></figure>
 
           <ol>
             <li>What is the first dimension (PC1) separating?</li>
@@ -3239,7 +3257,7 @@ may be a lot of work. In these situations, <strong>group tags</strong> can make 
         <blockquote class="question">
           <h3 id="question-questions-10"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-          <figure id="figure-31"><img src="../../images/ref-based/deseq2_sample_sample_distance_heatmap.png" alt="Heatmap of the sample-to-sample distances" /><figcaption><span class="figcaption-prefix">Figure 31:</span> Heatmap of the sample-to-sample distances</figcaption></figure>
+          <figure id="figure-31"><img src="../../images/ref-based/deseq2_sample_sample_distance_heatmap.png" alt="Heatmap of the sample-to-sample distances" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 31:</span> Heatmap of the sample-to-sample distances</figcaption></figure>
 
           <p>How are the samples grouped?</p>
 
@@ -3545,7 +3563,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
 <p>You should obtain something similar to:</p>
 
-<figure id="figure-32"><img src="../../images/ref-based/heatmap2_normalized_counts.png" alt="Heatmap with the normalized counts for the most differentially expressed genes" /><figcaption><span class="figcaption-prefix">Figure 32:</span> Normalized counts for the most differentially expressed genes</figcaption></figure>
+<figure id="figure-32"><img src="../../images/ref-based/heatmap2_normalized_counts.png" alt="Heatmap with the normalized counts for the most differentially expressed genes" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 32:</span> Normalized counts for the most differentially expressed genes</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-13"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -3676,7 +3694,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
 <p>We would like now to plot a heatmap for the Z-scores:</p>
 
-<figure id="figure-33"><img src="../../images/ref-based/z-score-heatmap.png" alt="Heatmap with the Z-score counts for the most differentially expressed genes" /><figcaption><span class="figcaption-prefix">Figure 33:</span> Z-scores for the most differentially expressed genes</figcaption></figure>
+<figure id="figure-33"><img src="../../images/ref-based/z-score-heatmap.png" alt="Heatmap with the Z-score counts for the most differentially expressed genes" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 33:</span> Z-scores for the most differentially expressed genes</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-plot-the-z-score-of-the-most-differentially-expressed-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot the Z-score of the most differentially expressed genes</h3>
@@ -3842,7 +3860,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
     <blockquote class="question">
       <h3 id="question-questions-16"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-      <p><img src="../../images/ref-based/top_over-represented_go_terms.png" alt="Top over-represented GO terms" /></p>
+      <p><img src="../../images/ref-based/top_over-represented_go_terms.png" alt="Top over-represented GO terms" loading="lazy" /></p>
 
       <p>What is the x-axis? How is it computed?</p>
 
@@ -3871,7 +3889,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
 <p>For example, the pathway <code class="language-plaintext highlighter-rouge">dme00010</code> represents the Glycolysis process (conversion of glucose into pyruvate with generation of small amounts of ATP and NADH) for Drosophila melanogaster:</p>
 
-<p><img src="../../images/ref-based/dme00010_empty.png" alt="dme00010 KEGG pathway" /></p>
+<p><img src="../../images/ref-based/dme00010_empty.png" alt="dme00010 KEGG pathway" loading="lazy" /></p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-perform-go-analysis-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Perform GO analysis</h3>
@@ -4017,7 +4035,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
   <p><code class="language-plaintext highlighter-rouge">dme00010</code> KEGG pathway from <strong>Pathview</strong></p>
 
-  <p><img src="../../images/ref-based/dme00010.png" alt="KEGG pathway" /></p>
+  <p><img src="../../images/ref-based/dme00010.png" alt="KEGG pathway" loading="lazy" /></p>
 
   <ol>
     <li>What are the colored boxes?</li>
@@ -4039,37 +4057,37 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
 <p>In this tutorial, we have analyzed real <span class="notranslate">RNA</span> sequencing data to extract useful information, such as which genes are up or downregulated by depletion of the <em>Pasilla</em> gene, but also which GO terms or KEGG pathways they are involved in. To answer these questions, we analyzed <span class="notranslate">RNA</span> sequence datasets using a reference-based <span class="notranslate">RNA</span>-Seq data analysis approach. This approach can be summarized with the following scheme:</p>
 
-<figure id="figure-34"><img src="../../images/ref-based/tutorial-scheme.png" alt="Summary of the analysis pipeline used" /><figcaption><span class="figcaption-prefix">Figure 34:</span> Summary of the analysis pipeline used</figcaption></figure>
+<figure id="figure-34"><img src="../../images/ref-based/tutorial-scheme.png" alt="Summary of the analysis pipeline used" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 34:</span> Summary of the analysis pipeline used</figcaption></figure>
 
 
-                    
-                    <blockquote class="key_points">
-                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
-                        <ul>
-                            
-                            <li><p>A spliced mapping tool should be used on eukaryotic RNA-Seq data</p>
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>A spliced mapping tool should be used on eukaryotic RNA-Seq data</p>
 </li>
-                            
-                            <li><p>Numerous factors should be taken into account when running a differential gene expression analysis</p>
+                        
+                        <li><p>Numerous factors should be taken into account when running a differential gene expression analysis</p>
 </li>
-                            
-                        </ul>
-                    </blockquote>
-                    
+                        
+                    </ul>
+                </blockquote>
+                
 
-                    <h1>Frequently Asked Questions</h1>
-                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/transcriptomics/faqs/">FAQ page for the Transcriptomics topic</a> to see if your question is listed there.
-                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
-                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/transcriptomics/faqs/">FAQ page for the Transcriptomics topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
-                    
-                    <h1 data-toc-skip>Useful literature</h1>
-                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
-                    
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
+                
 
-                    
-                    <h1 id="bibliography">References</h1>
-                    <ol class="bibliography"><li><span id="trapnell2009tophat">Trapnell, C., L. Pachter, and S. L. Salzberg, 2009 <b>TopHat: discovering splice junctions with RNA-Seq</b>. Bioinformatics 25: 1105–1111.</span>
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li><span id="trapnell2009tophat">Trapnell, C., L. Pachter, and S. L. Salzberg, 2009 <b>TopHat: discovering splice junctions with RNA-Seq</b>. Bioinformatics 25: 1105–1111.</span>
     
     
     
@@ -4251,85 +4269,85 @@ correction for the variability due to the 2nd factor. In our current case, treat
     
 
 </li></ol>
-                    
+                
 
-                    
+                
 
-                    <h1>Feedback</h1>
-                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
-                    <div id="feedback-button">
-                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                    </div>
-                    <div id="feedback-form">
-                    </div>
-                    <script type="text/javascript">
-                        (function (window, document) {
-                            function onDocumentReady(fn) {
-                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                    fn();
-                                } else {
-                                    document.addEventListener('DOMContentLoaded', fn);
-                                }
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
                             }
+                        }
 
-                            onDocumentReady(function () {
-                                $("#feedback-button").click(function(evt){
-                                    var e = $(evt.target)
-                                    e.hide();
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
 
-                                    $("#feedback-form").html(`
-                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Reference-based RNA-Seq data analysis (Transcriptomics)">Loading...</iframe>
-                                    `)
-                                })
-                            });
-                        })(window, document);
-                    </script>
-
-
-
-                    <h1>Citing this Tutorial</h1>
-                    <p>
-                        <ol>
-                            <li id="citation-text">Bérénice Batut, Mallory Freeberg, Mo Heydarian, Anika Erxleben, Pavankumar Videm, Clemens Blank, Maria Doyle, Nicola Soranzo, Peter van Heusden, 2021 <b>Reference-based RNA-Seq data analysis (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html</a> Online; accessed TODAY
-                            </li>
-                            <li>
-                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
-                            </li>
-                        </ol>
-                    </p>
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Reference-based RNA-Seq data analysis (Transcriptomics)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
 
 
-                    <blockquote class="details">
-                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
-                      <p style="display: none;">
 
-                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Bérénice Batut, Mallory Freeberg, Mo Heydarian, Anika Erxleben, Pavankumar Videm, Clemens Blank, Maria Doyle, Nicola Soranzo, Peter van Heusden, 2021 <b>Reference-based RNA-Seq data analysis (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{transcriptomics-ref-based,
-    author = "Bérénice Batut and Mallory Freeberg and Mo Heydarian and Anika Erxleben and Pavankumar Videm and Clemens Blank and Maria Doyle and Nicola Soranzo and Peter van Heusden",
-    title = "Reference-based RNA-Seq data analysis (Galaxy Training Materials)",
-    year = "2021",
-    month = "05",
-    day = "26"
-    url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html}",
-    note = "[Online; accessed TODAY]"
+author = "Bérénice Batut and Mallory Freeberg and Mo Heydarian and Anika Erxleben and Pavankumar Videm and Clemens Blank and Maria Doyle and Nicola Soranzo and Peter van Heusden",
+title = "Reference-based RNA-Seq data analysis (Galaxy Training Materials)",
+year = "2021",
+month = "05",
+day = "26"
+url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html}",
+note = "[Online; accessed TODAY]"
 }
 @article{Batut_2018,
-        doi = {10.1016/j.cels.2018.05.012},
-        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
-        year = 2018,
-        month = {jun},
-        publisher = {Elsevier {BV}},
-        volume = {6},
-        number = {6},
-        pages = {752--758.e1},
-        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
-        title = {Community-Driven Data Analysis Training for Biology},
-        journal = {Cell Systems}
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
 }</code>
-                    </pre></div></div>
-                    </p>
-                    </blockquote>
+                </pre></div></div>
+                </p>
+                </blockquote>
 
 
 <script type="text/javascript">
@@ -4339,15 +4357,15 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
-                    
+                
 
-                    
-                    <blockquote class="agenda follow-up">
-                        <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
-                        <ul>
-                            
+                
+                <blockquote class="agenda follow-up">
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
     <li>
     
         
@@ -4583,34 +4601,20 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
     
     </li>
 
-                        </ul>
-                    </blockquote>
-                    
+                    </ul>
+                </blockquote>
+                
 
-                </div>
             </div>
         </div>
-    </section>
-</div>
-
-
-<footer>
-    <div class="container">
-        <p>
-            This material is the result of a collaborative work. Thanks to the
-            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Bérénice Batut, Mallory Freeberg, Mo Heydarian, Anika Erxleben, Pavankumar Videm, Clemens Blank, Maria Doyle, Nicola Soranzo, Peter van Heusden)!
-        </p>
-        <p>
-            Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/transcriptomics/tutorials/ref-based/tutorial.md">GitHub</a>.
-        </p>
-        <p>
-    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-</p>
     </div>
-</footer>
+</section>
+<br/>
+<br/>
+<br/>
 
+        </div>
+        
     </body>
     <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>

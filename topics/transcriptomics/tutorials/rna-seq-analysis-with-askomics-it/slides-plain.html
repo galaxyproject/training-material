@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Integrate and query local datasets and distant RDF data with AskOmics using Semantic Web technologies</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:title" content="Galaxy Training: Integrate and query local datasets and distant RDF data w..." />
+        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/transcriptomics/faqs/" title="Check our FAQs for the Transcriptomics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-analysis-with-askomics-it%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/slides.html">View markdown source on GitHub</a>
+	<h1>Integrate and query local datasets and distant RDF data with AskOmics using Semantic Web technologies</h1>
+		<h2>Contributors</h2>
+		Xavier Garnier, Anthony Bretaudeau, Anne Siegel, Olivier Dameron, Mateo Boudet
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What is the Semantic Web and how can it help integrating and querying data?</p>
+</li>
+		
+		<li><p>How can AskOmics help benefiting from Semantic Web technologies without having to write RDF or SPARQL code?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Understand the basics of RDF and SPARQL</p>
+</li>
+		
+		<li><p>Learn how input data must be structured to be integrated with AskOmics</p>
+</li>
+		
+		<li><p>Learn how to connect distant SPARQL endpoints to local data with AskOmics</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 26, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="how-to-explore-data">How to explore data</h1>
+
+<hr />
+<h2 id="requirements">Requirements</h2>
+
+<p>Study of biological mechanisms requires to:</p>
+
+<ul>
+  <li><strong>integrate</strong> multiple data sources (differential expression results, genome annotation, remote protein database)</li>
+  <li><strong>query</strong> them to answer a biological question (which genes are over-expressed in a condition, and what are the proteins coded by these genes)</li>
+</ul>
+
+<p>.image-00[ <img src="images/from_data_to_result.png" alt="Local data tables and remote data with gene and proteins is combined in data integration. Now a graph is produced with differential expression pointing to a gene which points to a protein. Next the data is queried and results produced." loading="lazy" />]</p>
+
+<hr />
+
+<h1 id="what-is-the-semantic-web">What is the Semantic Web?</h1>
+
+<hr />
+
+<h2 id="semantic-web">Semantic Web</h2>
+
+<p>Set of recommendations to <strong>integrate data</strong>, to <strong>integrate domain knowledge</strong> and to <strong>perform query</strong> and reasoning.</p>
+
+<ul>
+  <li>Resource Description Framework (RDF): annotate data</li>
+  <li>RDFS + OWL: represent knowledge (data description)</li>
+  <li>SPARQL Protocol and RDF Query Language (SPARQL): query data</li>
+</ul>
+
+<hr />
+
+<h2 id="rdf">RDF</h2>
+
+<ul>
+  <li>RDF is for describing <strong>resources</strong> (the R in RDF)
+    <ul>
+      <li>resources are identified by URIs (<code class="language-plaintext highlighter-rouge">nextprot:P01137</code>, <code class="language-plaintext highlighter-rouge">taxon:9606</code>)</li>
+    </ul>
+  </li>
+  <li><strong>describing</strong> (D in RDF) a resource is representing it explicitly
+    <ul>
+      <li>its attributes (<code class="language-plaintext highlighter-rouge">nextprot:P01137 :hasSequence "MPPSGLRLLL..."</code>)</li>
+      <li>its relations to other entities (<code class="language-plaintext highlighter-rouge">nextprot:P01137 :hasTaxon taxon:9606</code>)</li>
+      <li>its descriptions (aka classes) (<code class="language-plaintext highlighter-rouge">nextprot:P01137 :is nextprot:Protein</code>)</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="rdf-set-of-triples">RDF: Set of triples</h2>
+
+<ul>
+  <li>RDF is represented by triples (subject, predicate, object)
+    <ul>
+      <li><strong>Subject</strong>: the resource being described</li>
+      <li><strong>Predicate</strong>: the relation (from subject to object)</li>
+      <li><strong>Object</strong>: a value of the predicate for the subject</li>
+    </ul>
+  </li>
+</ul>
+
+<p>.image-01[ <img src="images/rdf_schema_1.png" alt="a small graph, subject points to object with an arrow labelled predicate." loading="lazy" />]</p>
+
+<div class="language-turtle highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">nextprot:</span><span class="n">P01137</span><span class="w"> </span><span class="nn">:</span><span class="n">hasTaxon</span><span class="w"> </span><span class="nn">taxon:</span><span class="mi">9606</span><span class="w"> </span><span class="p">.</span><span class="w">
+</span><span class="nn">nextprot:</span><span class="n">P01137</span><span class="w"> </span><span class="nn">:</span><span class="n">hasSequence</span><span class="w"> </span><span class="s">"MPPSGLRLLL"</span><span class="w"> </span><span class="p">.</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<h2 id="rdf-triples-form-a-labeled-directed-graph">RDF: triples form a labeled directed graph</h2>
+
+<div class="language-turtle highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Description</span><span class="w">
+</span><span class="nn">nextprot:</span><span class="n">P01137</span><span class="w"> </span><span class="nn">rdf:</span><span class="n">type</span><span class="w"> </span><span class="nn">nextprot:</span><span class="n">Protein</span><span class="w"> </span><span class="p">.</span><span class="w">
+</span><span class="nn">taxon:</span><span class="mi">9606</span><span class="w"> </span><span class="nn">rdf:</span><span class="n">type</span><span class="w"> </span><span class="nn">nextprot:</span><span class="n">Organism</span><span class="w"> </span><span class="p">.</span><span class="w">
+</span><span class="c1"># Data</span><span class="w">
+</span><span class="nn">nextprot:</span><span class="n">P01137</span><span class="w"> </span><span class="nn">:</span><span class="n">hasTaxon</span><span class="w"> </span><span class="nn">taxon:</span><span class="mi">9606</span><span class="w"> </span><span class="p">.</span><span class="w">
+</span><span class="nn">nextprot:</span><span class="n">P01137</span><span class="w"> </span><span class="nn">:</span><span class="n">hasSequence</span><span class="w"> </span><span class="s">"MPPSGLRLLL"</span><span class="w"> </span><span class="p">.</span><span class="w">
+</span></code></pre></div></div>
+
+<p>.image-02[ <img src="images/rdf_schema_2.png" alt="A graphic with two regions, data description and data. In the data is a circle labelled nextprot:P01137 which points to a sequence via a hasSequence arrow. The nextprot points to a taxon:9606 with a hasTaxon arrow. The taxon points to a nextprot:Organism in the data description region. The nextprot protein points to nextprot:Protein in the data description region via an rdf:type arrow." loading="lazy" />]</p>
+
+<hr />
+
+<h2 id="sparql">SPARQL</h2>
+
+<ul>
+  <li>The SPARQL language is a set of triple patterns with variables (<code class="language-plaintext highlighter-rouge">?variable_name</code>)</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT ?gene
+WHERE {
+    ?gene rdf:type :Gene .
+    ?gene :hasTaxon taxon:9606 .
+}
+</code></pre></div></div>
+
+<ul>
+  <li>All <code class="language-plaintext highlighter-rouge">?gene</code> with <code class="language-plaintext highlighter-rouge">rdf:type</code> <code class="language-plaintext highlighter-rouge">:Gene</code> <strong>and</strong> with <code class="language-plaintext highlighter-rouge">:hasTaxon</code> <code class="language-plaintext highlighter-rouge">taxon:9606</code></li>
+  <li>In other words, the query returns all the human genes</li>
+</ul>
+
+<hr />
+
+<h2 id="sparql-entity-matching-allow-federated-queries">SPARQL: entity matching allow federated queries</h2>
+
+<p>.pull-left[</p>
+<ul>
+  <li>
+    <p>Using the same identifier for the same entity (<strong>entity matching</strong>) across multiple datasets allows federated queries</p>
+  </li>
+  <li>
+    <p>Federated SPARQL queries provide unified querying capabilities over multiple datasets as if they were a single virtual graph</p>
+  </li>
+</ul>
+
+<p>]</p>
+
+<p>.pull-right[
+.image-03[ <img src="images/rdf_schema_3.png" alt="Dataset 1 and 2 are shown as two silos, each with different small graphs. Each has a red node. Those nodes are connected via a dashed line. A picture of a cloud points at the two datasets, and their individual graphs collapsed into one larger graph. A query is sent to this cloud which comes out as a result table." loading="lazy" />]
+]</p>
+
+<hr />
+
+<h1 id="what-is-askomics">What is AskOmics?</h1>
+
+<hr />
+
+<h2 id="askomics">AskOmics</h2>
+
+<p>Web software for <strong>data integration</strong> and <strong>query</strong> using Semantic Web. The main functionalities are:</p>
+
+<ul>
+  <li>Convert of <strong>multiple data formats</strong> into RDF triples and store them in a local triplestore</li>
+  <li>Generate <strong>complex SPARQL queries</strong> using a user-friendly interface</li>
+  <li>Support external SPARQL endpoint to <strong>cross-reference integrated data with remote data</strong></li>
+</ul>
+
+<p>AskOmics can be used as a standalone software, or <strong>with Galaxy</strong></p>
+
+<hr />
+
+<h1 id="data-integration-with-askomics">Data integration with AskOmics</h1>
+
+<hr />
+
+<h2 id="local-data-integration">Local data integration</h2>
+
+<ul>
+  <li>
+    <p>RDF and SPARQL are good infrastructures to describe and query biological datasets, but most of them are still stored on flat files like CSV/TSV and GFF.</p>
+  </li>
+  <li>
+    <p>AskOmics converts multiple structured data formats into RDF triples</p>
+    <ul>
+      <li>CSV/TSV</li>
+      <li>GFF</li>
+      <li>BED</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="askomics-generates-the-graph-of-data-and-the-abstraction">AskOmics generates the graph of data and the abstraction</h2>
+
+<p>AskOmics uses the file structure (<em>e.g.</em> header of TSV files) to generate the graph of data description: <strong>the abstraction</strong></p>
+
+<p>.image-04[ <img src="images/askomics_convertion.png" alt="Two tables are provided, pointing to RDF abstraction with a small graph of DE, Gene, and their attributes. And RDF data which has the same graph as abstraction, but with real identifiers." loading="lazy" />]</p>
+
+<p>The rest of the files is converted to RDF triples that correspond to the data.</p>
+
+<hr />
+
+<h2 id="distant-rdf-data-integration">Distant RDF data integration</h2>
+
+<ul>
+  <li>
+    <p>Some public databases (<em>e.g.</em> <a href="https://sparql.nextprot.org">neXtProt</a>) provide RDF data through a SPARQL endpoint (public access for RDF data)</p>
+  </li>
+  <li>To connect with a remote SPARQL endpoint, AskOmics needs its RDF abstraction</li>
+  <li>The abstraction can be generated with <a href="https://github.com/askomics/abstractor">abstractor</a></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 <span class="nb">install </span>abstractor
+abstractor <span class="nt">-s</span> https://sparql.nextprot.org/sparql <span class="nt">-o</span> nextprot_abstraction.ttl <span class="nt">-f</span> turtle
+</code></pre></div></div>
+
+<ul>
+  <li>This abstraction can then be uploaded into AskOmics as a standard file</li>
+</ul>
+
+<hr />
+
+<h1 id="query-multiple-data-sources-with-askomics">Query multiple data sources with AskOmics</h1>
+
+<hr />
+
+<h2 id="query-composition">Query composition</h2>
+
+<ul>
+  <li>Users navigate through the abstraction of local and remote data and create a path that represents a query</li>
+</ul>
+
+<p>.image-06[ <img src="images/askomics_query_builder.png" alt="A picture of an RDF graph with many nodes. On the right is a query interface of some sort." loading="lazy" />]</p>
+
+<ul>
+  <li>The query is converted to SPARQL code that is executed on the local and remote RDF data</li>
+  <li>Results are returned and can be downloaded</li>
+</ul>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>RDF and SPARQL are Semantic Web technologies that come useful for data integration and querying but the technical aspects may deter end-users</li>
+
+<li>AskOmics is a web platform for data integration and query using Semantic Web in a user-friendly way</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

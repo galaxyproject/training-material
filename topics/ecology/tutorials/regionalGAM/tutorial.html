@@ -29,30 +29,8 @@
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
-        
-
-
-
-
-
-
-
-
-
-
-
-<!-- Gitter -->
-
-
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
             <a class="navbar-brand" href="/training-material/">
                 <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
@@ -65,11 +43,12 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        
                         <a class="nav-link" href="/training-material/topics/ecology" title="Go back to list of tutorials">
-                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Ecology
+                            <i class="far fa-folder" aria-hidden="true"></i> Ecology
                         </a>
+                        
                     </li>
-
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
         <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
@@ -208,15 +187,8 @@
     </div>
 </li>
 
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/ecology/tutorials/regionalGAM/tutorial.md">
-                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
-                        </a>
-                    </li>
-                    -->
 
-                     <!-- Search bar-->
+                    <!-- Search bar-->
                     <li class="nav-item">
                       <div id="navbarSupportedContent">
                         <!-- Search form -->
@@ -228,16 +200,37 @@
                         </form>
                       </div>
                     </li>
-
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 
-<div class="container main-content">
-    <script type="application/ld+json">
+        <div class="container main-content" role="main">
         
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
 
 
 {
@@ -392,46 +385,47 @@
     }
   ]
 }
-    </script>
+</script>
 
-    <section class="tutorial topic-ecology">
-        <h1 data-toc-skip>Regional GAM</h1>
-        
+<section class="tutorial topic-ecology">
+    <h1 data-toc-skip>Regional GAM</h1>
+    
 
-        <div class="contributors-line">By: 
+    <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/claraurf/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/claraurf" alt="Clara Urfer">Clara Urfer</a> <a href="/training-material/hall-of-fame/emichn/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/emichn" alt="Elisa Michon">Elisa Michon</a> <a href="/training-material/hall-of-fame/yvanlebras/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/yvanlebras" alt="Yvan Le Bras">Yvan Le Bras</a> <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Bérénice Batut">Bérénice Batut</a> <a href="/training-material/hall-of-fame/sbenateau/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/sbenateau" alt="Simon Benateau">Simon Benateau</a>
+ <a href="/training-material/hall-of-fame/claraurf/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/claraurf" alt="Avatar">Clara Urfer</a> <a href="/training-material/hall-of-fame/emichn/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/emichn" alt="Avatar">Elisa Michon</a> <a href="/training-material/hall-of-fame/yvanlebras/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/yvanlebras" alt="Avatar">Yvan Le Bras</a> <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Avatar">Bérénice Batut</a> <a href="/training-material/hall-of-fame/sbenateau/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/sbenateau" alt="Avatar">Simon Benateau</a>
 
 </div>
 
-        <blockquote class="overview">
-            <h3>Overview</h3>
-            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
-            <ul>
-            
-            <li><p>What are abundance and trends of a butterfly species?</p>
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions</strong>
+        <ul>
+        
+        <li><p>What are abundance and trends of a butterfly species?</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
-            <ul>
-            
-            <li><p>Obtain and filter/manipulate occurrence data</p>
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+        <ul>
+        
+        <li><p>Obtain and filter/manipulate occurrence data</p>
 </li>
-            
-            <li><p>Compute and visualize phenology of a species through the years</p>
+        
+        <li><p>Compute and visualize phenology of a species through the years</p>
 </li>
-            
-            <li><p>Compute temporal abundance trends</p>
+        
+        <li><p>Compute temporal abundance trends</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            
-            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
-            <ul>
-            
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+        <ul>
+        
     <li>
     
         
@@ -441,51 +435,50 @@
     
     </li>
 
-            
-            </ul>
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours 30 minutes</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+        <ul class="supporting_material">
             
 
             
-            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours 30 minutes</div>
-            
-
-            
-
-            
-            
-
-            
-            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
-            <ul>
-                <div class="supporting_material">
-                
-
-                
-                    <li class="btn btn-default supporting_material">
+                <li class="btn btn-default supporting_material">
 <a class="topic-icon" href="https://zenodo.org/record/1324204#.W2BmRn7fNE4">
-    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
 </a>
 
 </li>
-                
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
     <a class="topic-icon" href="/training-material/topics/ecology/tutorials/regionalGAM/workflows/" title="Workflows" alt="Regional GAM workflows">
-        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
     </a>
 
 </li>
-                
+            
 
-                
+            
 
-                
-                
-                
+            
+            
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
@@ -498,8 +491,6 @@
             </a>
         </li>
     
-    
-        
     
         
     
@@ -622,8 +613,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
             UseGalaxy.be
         </a>
@@ -647,22 +636,23 @@
 
 
 </li>
-                
-                </div>
-            </ul>
             
+        </ul>
+        
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 23, 2021 </div>
-        </blockquote>
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 23, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
-        <div class="container">
-            <div class="row">
-                <!-- sidebar, which will move to the top on a small screen -->
-                <div class="col-sm-2">
-                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
-                </div>
-                <div class="col-sm-10">
-                    <h1 class="no_toc" id="introduction">Introduction</h1>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <p>This tutorial will show you how to study species abundance through the computation of a flight curve, abundance index, and trends. It will explain you how to use different <a href="https://github.com/RetoSchmucki/regionalGAM">regionalGAM</a> tools on <span class="notranslate">Galaxy</span> allowing you to deal with datasets containing abundance information for various species per site and per date through a couple of years.</p>
 
@@ -734,7 +724,7 @@
 
 <p>This dataset gathers years of records of the presence of butterfly species per site and per day. Columns indicates species names (“SPECIES”), observation site (“SITE”), date of the observation (“YEAR”,”MONTH”,”DAY”) and number of individuals (“COUNT”). It compiles counts for the Gatekeeper (Pironia tithonus) collected between 2003 and 2012 and extracted from five European BMSs (United Kingdom, Netherlands, France, Germany, and Catalonia-Spain). The Gatekeeper has one generation per year and feeds mainly on Poaceae. It is found in the Central and Southern Europe, North Africa Anatolia, and Caucasus.</p>
 
-<figure id="figure-1"><img src="../../images/regionalGAM/Gatekeeper-Pyronia_tithonus-male.jpg" alt="Gatekeeper (Pironia tithonus)" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Gatekeeper (Pironia tithonus) Charles J Sharp</figcaption></figure>
+<figure id="figure-1"><img src="../../images/regionalGAM/Gatekeeper-Pyronia_tithonus-male.jpg" alt="Gatekeeper (Pironia tithonus)" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Gatekeeper (Pironia tithonus) Charles J Sharp</figcaption></figure>
 
 <h2 id="prepare-the-data">Prepare the data</h2>
 
@@ -961,7 +951,7 @@ Warning: depending on the <span class="notranslate">Galaxy</span> instance your 
 
 </blockquote>
 
-<p><img src="../../images/regionalGAM/phenology_year.png" alt="Phenology chart" /></p>
+<p><img src="../../images/regionalGAM/phenology_year.png" alt="Phenology chart" loading="lazy" /></p>
 
 <p>This graph displays the modeled flight curve of <em>Pyronia tithonus</em> over the years. But the first year is “null”, probably a left-over of the 1st line with the header, and the week number is not shown.</p>
 
@@ -1051,7 +1041,7 @@ Warning: depending on the <span class="notranslate">Galaxy</span> instance your 
 
 </blockquote>
 
-<p><img src="../../images/regionalGAM/Pyronia_tithonus_phenology_explicit_ID.png" alt="Phenology chart" /></p>
+<p><img src="../../images/regionalGAM/Pyronia_tithonus_phenology_explicit_ID.png" alt="Phenology chart" loading="lazy" /></p>
 
 <p>This shows the abundance of <em>Pyronia tithonus</em>, over the weeks. We can see there is a peak every year as expected and we can notice some differences in the values between the weeks and years, but not how the weeks overlap between the years. We will plot a stalked version of this visualization to check if there are no unexpected changes and have an idea of the quality of the reconstructed phenology.</p>
 
@@ -1076,7 +1066,7 @@ Warning: depending on the <span class="notranslate">Galaxy</span> instance your 
 
 </blockquote>
 
-<p><img src="../../images/regionalGAM/Pyronia_tithonus_phenology_stacked_explicit_ID.png" alt="Stacked Phenology chart" /></p>
+<p><img src="../../images/regionalGAM/Pyronia_tithonus_phenology_stacked_explicit_ID.png" alt="Stacked Phenology chart" loading="lazy" /></p>
 
 <p>With this graph, we can see that <em>Pyronia tithonus</em> records are always around the same weeks every year. We can also see small differences between years but overall the phenology is quite stable and the results of this step seem good and allow us to continue with the calculation of the abundance index.</p>
 
@@ -1201,7 +1191,7 @@ Warning: depending on the <span class="notranslate">Galaxy</span> instance your 
   <li>
     <p>The graph like:</p>
 
-    <p><img src="../../images/regionalGAM/Expected_temporal_trend.png" alt="Expected temporal trend" /></p>
+    <p><img src="../../images/regionalGAM/Expected_temporal_trend.png" alt="Expected temporal trend" loading="lazy" /></p>
   </li>
   <li>
     <p>A table with values of “x”, the collated index value by year</p>
@@ -1240,7 +1230,7 @@ with \(Y_i\) = value of the dependent variable for the unit \(i\)
 
 <p>Have a look at the text file result. This is the output of the linear model.</p>
 
-<p><img src="../../images/regionalGAM/output-simple-linear-regression.png" alt="Output from the &quot;model temporal trend with simple linear regression&quot; tool " /></p>
+<p>&lt;img src=”../../images/regionalGAM/output-simple-linear-regression.png” alt=”Output from the “model temporal trend with simple linear regression” tool “  loading=”lazy”&gt;</p>
 
 <p>Details about the output from the tool</p>
 
@@ -1286,7 +1276,7 @@ with \(Y_i\) = value of the dependent variable for the unit \(i\)
   </ol>
 </blockquote>
 
-<p><img src="../../images/regionalGAM/Autocorrelation_test.png" alt="Autocorrelation test graph" /></p>
+<p><img src="../../images/regionalGAM/Autocorrelation_test.png" alt="Autocorrelation test graph" loading="lazy" /></p>
 
 <p>Have a look at this plot. We can see that one of the value is above the threshold (blue dashed line), therefore we observe autocorrelation in the data. We will now take into account the autocorrelation in the next model.</p>
 
@@ -1313,7 +1303,7 @@ https://use<span class="notranslate">galaxy</span>.org/tours/core.scratchbook</p
 
 </blockquote>
 
-<p><img src="../../images/regionalGAM/output-both-models.png" alt="Plot of temporal trend with trend line" /></p>
+<p><img src="../../images/regionalGAM/output-both-models.png" alt="Plot of temporal trend with trend line" loading="lazy" /></p>
 
 <p>Here you can compare the models using the AIC for Akaike information criterion. We can see that the AIC is lower in the model taking the autocorrelation into account. A lower AIC value is associated with less information loss.
 We will therefore, based on the AIC, select the model taking into account the autocorrelation.
@@ -1331,7 +1321,7 @@ We can now represent the data with the trend line from the model.</p>
   </ol>
 </blockquote>
 
-<p><img src="../../images/regionalGAM/trend_simple.png" alt="Plot of temporal trend with trend line" /></p>
+<p><img src="../../images/regionalGAM/trend_simple.png" alt="Plot of temporal trend with trend line" loading="lazy" /></p>
 
 <p>You can see the trends is an apparent decrease. Here results are statistically significant so we can say that there is a significant decrease of the abundance.</p>
 
@@ -1340,113 +1330,113 @@ We can now represent the data with the trend line from the model.</p>
 <p>In this tutorial, you have analyzed regional GAM data to extract useful information in order to be able to show different tendencies of a chosen species. Therefore, you are now able to treat the dataset so that it shows only the data for one specific species of your choice. From there, you can show the phenology of this species through the years first on a dataset and then on a visual chart. You have also learned how to represent on a single chart the phenology of various species. Afterwards, we have shown you how to create a dataset containing the information on the abundance of a species per year and per site. Based on which you can henceforth visually represent the annual abundance trend on a chart. Thereafter, you have the possibility of showing the expected temporal trend, based on which you will be able to assess the abundance of species. The last part of this tutorial has shown you how to calculate the linear regression allowing you to determinate whether the year has an influence on the abundance of a species or not.</p>
 
 
-                    
-                    <blockquote class="key_points">
-                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
-                        <ul>
-                            
-                            <li><p>We sequentially computed phenology, abundance index, trend and model this trend</p>
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>We sequentially computed phenology, abundance index, trend and model this trend</p>
 </li>
-                            
-                            <li><p>We learned how to interpret a trend using modeling and data visualization</p>
+                        
+                        <li><p>We learned how to interpret a trend using modeling and data visualization</p>
 </li>
-                            
-                            <li><p>This tool compute phenology in order to predict missing data, no definitive conclusion can be made on the phenology using this tool</p>
+                        
+                        <li><p>This tool compute phenology in order to predict missing data, no definitive conclusion can be made on the phenology using this tool</p>
 </li>
-                            
-                        </ul>
-                    </blockquote>
-                    
+                        
+                    </ul>
+                </blockquote>
+                
 
-                    <h1>Frequently Asked Questions</h1>
-                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/ecology/faqs/">FAQ page for the Ecology topic</a> to see if your question is listed there.
-                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
-                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/ecology/faqs/">FAQ page for the Ecology topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
-                    
-                    <h1 data-toc-skip>Useful literature</h1>
-                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/ecology#references">here</a>.</p>
-                    
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/ecology#references">here</a>.</p>
+                
 
-                    
+                
 
-                    
+                
 
-                    <h1>Feedback</h1>
-                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
-                    <div id="feedback-button">
-                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                    </div>
-                    <div id="feedback-form">
-                    </div>
-                    <script type="text/javascript">
-                        (function (window, document) {
-                            function onDocumentReady(fn) {
-                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                    fn();
-                                } else {
-                                    document.addEventListener('DOMContentLoaded', fn);
-                                }
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
                             }
+                        }
 
-                            onDocumentReady(function () {
-                                $("#feedback-button").click(function(evt){
-                                    var e = $(evt.target)
-                                    e.hide();
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
 
-                                    $("#feedback-form").html(`
-                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Regional GAM (Ecology)">Loading...</iframe>
-                                    `)
-                                })
-                            });
-                        })(window, document);
-                    </script>
-
-
-
-                    <h1>Citing this Tutorial</h1>
-                    <p>
-                        <ol>
-                            <li id="citation-text">Clara Urfer, Elisa Michon, Yvan Le Bras, Bérénice Batut, Simon Benateau, 2021 <b>Regional GAM (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/ecology/tutorials/regionalGAM/tutorial.html">https://training.galaxyproject.org/training-material/topics/ecology/tutorials/regionalGAM/tutorial.html</a> Online; accessed TODAY
-                            </li>
-                            <li>
-                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
-                            </li>
-                        </ol>
-                    </p>
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Regional GAM (Ecology)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
 
 
-                    <blockquote class="details">
-                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
-                      <p style="display: none;">
 
-                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Clara Urfer, Elisa Michon, Yvan Le Bras, Bérénice Batut, Simon Benateau, 2021 <b>Regional GAM (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/ecology/tutorials/regionalGAM/tutorial.html">https://training.galaxyproject.org/training-material/topics/ecology/tutorials/regionalGAM/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{ecology-regionalGAM,
-    author = "Clara Urfer and Elisa Michon and Yvan Le Bras and Bérénice Batut and Simon Benateau",
-    title = "Regional GAM (Galaxy Training Materials)",
-    year = "2021",
-    month = "03",
-    day = "23"
-    url = "\url{https://training.galaxyproject.org/training-material/topics/ecology/tutorials/regionalGAM/tutorial.html}",
-    note = "[Online; accessed TODAY]"
+author = "Clara Urfer and Elisa Michon and Yvan Le Bras and Bérénice Batut and Simon Benateau",
+title = "Regional GAM (Galaxy Training Materials)",
+year = "2021",
+month = "03",
+day = "23"
+url = "\url{https://training.galaxyproject.org/training-material/topics/ecology/tutorials/regionalGAM/tutorial.html}",
+note = "[Online; accessed TODAY]"
 }
 @article{Batut_2018,
-        doi = {10.1016/j.cels.2018.05.012},
-        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
-        year = 2018,
-        month = {jun},
-        publisher = {Elsevier {BV}},
-        volume = {6},
-        number = {6},
-        pages = {752--758.e1},
-        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
-        title = {Community-Driven Data Analysis Training for Biology},
-        journal = {Cell Systems}
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
 }</code>
-                    </pre></div></div>
-                    </p>
-                    </blockquote>
+                </pre></div></div>
+                </p>
+                </blockquote>
 
 
 <script type="text/javascript">
@@ -1456,36 +1446,22 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
-                    
+                
 
-                    
+                
 
-                </div>
             </div>
         </div>
-    </section>
-</div>
-
-
-<footer>
-    <div class="container">
-        <p>
-            This material is the result of a collaborative work. Thanks to the
-            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Clara Urfer, Elisa Michon, Yvan Le Bras, Bérénice Batut, Simon Benateau)!
-        </p>
-        <p>
-            Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/ecology/tutorials/regionalGAM/tutorial.md">GitHub</a>.
-        </p>
-        <p>
-    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-</p>
     </div>
-</footer>
+</section>
+<br/>
+<br/>
+<br/>
 
+        </div>
+        
     </body>
     <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>

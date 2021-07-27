@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Reference Genomes in Galaxy</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Reference Genomes in Galaxy" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/reference-genomes/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/reference-genomes/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/reference-genomes/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/reference-genomes/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/reference-genomes/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/reference-genomes/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/reference-genomes/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Freference-genomes%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/admin/tutorials/reference-genomes/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/admin/tutorials/reference-genomes/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/admin/tutorials/reference-genomes/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/admin/tutorials/reference-genomes/slides.html">View markdown source on GitHub</a>
+	<h1>Reference Genomes in Galaxy</h1>
+		<h2>Contributors</h2>
+		Daniel Blankenberg, Simon Gladman
+
+		
+
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 6, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="overview">Overview</h1>
+
+<p>.large[</p>
+<ul>
+  <li><strong>Intro to built in datasets</strong></li>
+  <li>Built in data hierarchy</li>
+  <li>Some problems</li>
+  <li>Data Managers</li>
+  <li>There’s just so much of it!
+]</li>
+</ul>
+
+<hr />
+
+<h1 id="built-in-data">Built in Data</h1>
+
+<p><img src="../../images/i06-List_of_data.png" alt="List_of_data.png" loading="lazy" /></p>
+
+<hr />
+
+<h1 id="data-what-data">Data, what data?</h1>
+
+<p>.large[</p>
+<ul>
+  <li>Some genomes are large! Human, Mouse, Coral</li>
+  <li>Some tools require indices of the genomes.</li>
+  <li>The indices take a long time to build!</li>
+  <li>Better to pre-build the indices.
+]</li>
+</ul>
+
+<hr />
+
+<h1 id="overview-1">Overview</h1>
+
+<p>.large[</p>
+<ul>
+  <li>Intro to built in datasets</li>
+  <li><strong>Built in data hierarchy</strong></li>
+  <li>Some problems</li>
+  <li>Data Managers</li>
+  <li>There’s just so much of it!
+]</li>
+</ul>
+
+<hr />
+
+<h1 id="data-schematics-in-galaxy">Data schematics in Galaxy</h1>
+
+<p><img src="../../images/data_managers_schematic_overview.png" alt="schematic" loading="lazy" /></p>
+
+<hr />
+
+<h1 id="using-reference-data-in-a-tool">Using reference data in a tool</h1>
+
+<h4 id="bwaxml">bwa.xml</h4>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;conditional</span> <span class="na">name=</span><span class="s">"reference_source"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"reference_source_selector"</span> <span class="na">type=</span><span class="s">"select"</span> <span class="na">label=</span><span class="s">"Will you select a reference genome from your history or use a built-in index?"</span> <span class="na">help=</span><span class="s">"Built-ins were indexed using default options. See 'Indexes' section of help below"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"cached"</span><span class="nt">&gt;</span>Use a built-in genome index<span class="nt">&lt;/option&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"history"</span><span class="nt">&gt;</span>Use a genome from history and build index<span class="nt">&lt;/option&gt;</span>
+      <span class="nt">&lt;/param&gt;</span>
+      <span class="nt">&lt;when</span> <span class="na">value=</span><span class="s">"cached"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"ref_file"</span> <span class="na">type=</span><span class="s">"select"</span> <span class="na">label=</span><span class="s">"Using reference genome"</span> <span class="na">help=</span><span class="s">"Select genome from the list"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;options</span> <span class="na">from_data_table=</span><span class="s">"bwa_mem_indexes"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;filter</span> <span class="na">type=</span><span class="s">"sort_by"</span> <span class="na">column=</span><span class="s">"2"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;validator</span> <span class="na">type=</span><span class="s">"no_options"</span> <span class="na">message=</span><span class="s">"No indexes are available"</span> <span class="nt">/&gt;</span>
+          <span class="nt">&lt;/options&gt;</span>
+          <span class="nt">&lt;validator</span> <span class="na">type=</span><span class="s">"no_options"</span> <span class="na">message=</span><span class="s">"A built-in reference genome is not available for the build associated with the selected input file"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/param&gt;</span>
+      <span class="nt">&lt;/when&gt;</span>
+      <span class="nt">&lt;when</span> <span class="na">value=</span><span class="s">"history"</span><span class="nt">&gt;</span>
+
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="where-are-the-data-tables">Where are the data tables?</h1>
+
+<h4 id="tool_data_table_confxml">tool_data_table_conf.xml</h4>
+
+<p>(Usually located in <code class="language-plaintext highlighter-rouge">galaxy/config/</code>)</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;tables&gt;</span>
+    <span class="c">&lt;!-- Locations of indexes in the BWA mapper format --&gt;</span>
+    <span class="nt">&lt;table</span> <span class="na">name=</span><span class="s">"bwa_mem_indexes"</span> <span class="na">comment_char=</span><span class="s">"#"</span> <span class="na">allow_duplicate_entries=</span><span class="s">"False"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;columns&gt;</span>value, dbkey, name, path<span class="nt">&lt;/columns&gt;</span>
+      <span class="nt">&lt;file</span> <span class="na">path=</span><span class="s">"tool-data/bwa_index.loc"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/table&gt;</span>
+  <span class="nt">&lt;/tables&gt;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="loc-files---short-for-location">“loc” files - Short for location!</h1>
+
+<p>bwa_index.loc</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#
+#&lt;unique_build_id&gt;   &lt;dbkey&gt;   &lt;display_name&gt;   &lt;file_path&gt;
+#
+bosTau7 bosTau7 Cow (bosTau7)   /genomes/bosTau7/bwa_mem_index/bosTau7/bosTau7.fa
+ce10    ce10    C. elegans (ce10)       /genomes/ce10/bwa_mem_index/ce10/ce10.fa
+danRer7 danRer7 Zebrafish (danRer7)     /genomes/danRer7/bwa_mem_index/danRer7/danRer7.fa
+dm3     dm3     D. melanogaster Apr. 2006 (BDGP R5/dm3) (dm3)   /genomes/dm3/bwa_mem_index/dm3/dm3.fa
+hg19    hg19    Human (hg19)    /genomes/hg19/bwa_mem_index/hg19/hg19.fa
+hg38    hg38    Human (hg38)    /genomes/hg38/bwa_mem_index/hg38/hg38.fa
+mm10    mm10    Mouse (mm10)    /genomes/mm10/bwa_mem_index/mm10/mm10.fa
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="overview-2">Overview</h1>
+
+<p>.large[</p>
+<ul>
+  <li>Intro to built in datasets</li>
+  <li>Built in data hierarchy</li>
+  <li><strong>Some problems</strong></li>
+  <li>Data Managers</li>
+  <li>There’s just so much of it!
+]</li>
+</ul>
+
+<hr />
+
+<h1 id="some-problems">Some Problems!</h1>
+
+<p>.large[</p>
+<ul>
+  <li>Time consuming!
+    <ul>
+      <li>~30 minutes work just to add a new genome to 1 tool!</li>
+    </ul>
+  </li>
+  <li>Administrator needs to know:
+    <ul>
+      <li>how to index <strong>every</strong> tool</li>
+      <li>expected format of the reference data</li>
+      <li>format of the .loc file
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="typical-conversation">Typical conversation</h1>
+
+<p>.middle[<img src="../../images/Ref-problem-1.png" alt="ref-problem-1.png" loading="lazy" />]</p>
+
+<hr />
+
+<h1 id="typical-conversation-1">Typical conversation</h1>
+
+<p>.middle[<img src="../../images/Ref-problem-2.png" alt="ref-problem-2.png" loading="lazy" />]</p>
+
+<hr />
+
+<h1 id="typical-conversation-2">Typical conversation</h1>
+
+<p>.middle[<img src="../../images/Ref-problem-3.png" alt="ref-problem-3.png" loading="lazy" />]</p>
+
+<hr />
+
+<h1 id="typical-conversation-3">Typical conversation</h1>
+
+<p>.middle[<img src="../../images/Ref-problem-4.png" alt="ref-problem-4.png" loading="lazy" />]</p>
+
+<hr />
+
+<h1 id="other-concerns">Other concerns</h1>
+
+<p>.large[</p>
+<ul>
+  <li><strong>Accessible?</strong>
+    <ul>
+      <li>Manually download genome FASTA files</li>
+      <li>Download, compile, run bwa index; which options?</li>
+    </ul>
+  </li>
+  <li><strong>Reproducible?</strong>
+    <ul>
+      <li>Only if the person performing manual steps keeps good notes</li>
+    </ul>
+  </li>
+  <li><strong>Transparent?</strong>
+    <ul>
+      <li>Send email to sysadmin asking for notes</li>
+      <li>Restart Galaxy server for new entries
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="overview-3">Overview</h1>
+
+<p>.large[</p>
+<ul>
+  <li>Intro to built in datasets</li>
+  <li>Built in data hierarchy</li>
+  <li>Some problems</li>
+  <li><strong>Data Managers</strong></li>
+  <li>There’s just so much of it!
+]</li>
+</ul>
+
+<hr />
+
+<h1 id="data-managers">Data Managers</h1>
+
+<p>.large[</p>
+<ul>
+  <li>Allows for the <strong>creation of built-in</strong> (reference) data
+    <ul>
+      <li>underlying data</li>
+      <li>data tables</li>
+      <li>*.loc files</li>
+    </ul>
+  </li>
+  <li>
+    <p>Specialized Galaxy tools that can only be accessed by an admin</p>
+  </li>
+  <li>Defined <strong>locally</strong> or installed from <strong>ToolShed</strong>
+]</li>
+</ul>
+
+<hr />
+
+<h1 id="data-managers-1">Data Managers</h1>
+
+<p>.large[</p>
+<ul>
+  <li><strong>Flexible</strong> framework
+    <ul>
+      <li>Not just genomic data</li>
+      <li>Run Data Managers through UI</li>
+      <li>Workflow compatible</li>
+      <li>API</li>
+    </ul>
+  </li>
+  <li>Examples
+    <ul>
+      <li>Adding new genome builds (dbkeys)</li>
+      <li>Fetching genome (fasta) sequences</li>
+      <li>Building short read mapper indices for genomes
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="special-class-of-galaxy-tool">Special class of Galaxy tool</h1>
+
+<p>Looks just like a normal Galaxy tool!</p>
+
+<p><img src="../../images/Data-manager-ui.png" alt="Data-manager-ui.png" loading="lazy" /></p>
+
+<hr />
+
+<h1 id="what-does-it-do">What does it do?</h1>
+
+<p>The output of the data manager is a JSON description of the new data table entry</p>
+
+<p><img src="../../images/data_table_JSON.png" alt="data_table_JSON.png" loading="lazy" /></p>
+
+<p>This gets turned into a new data table entry</p>
+
+<p><img src="../../images/data_table_entry.png" alt="data_table_entry.png" loading="lazy" /></p>
+
+<p>The index files themselves get placed in the appropriate location.</p>
+
+<hr />
+
+<h1 id="data-managers-admin">Data Managers Admin</h1>
+
+<p>.large[</p>
+<ul>
+  <li>Located on the Galaxy’s Admin Tab under <strong>Local Data</strong>
+]
+<img src="../../images/data_managers_tool_list.png" alt="data_managers_tool_list.png" loading="lazy" /></li>
+</ul>
+
+<hr />
+
+<h1 id="data-managers-admin-1">Data Managers Admin</h1>
+
+<p>.large[</p>
+<ul>
+  <li>UI tools to fetch reference genomes/build indices</li>
+  <li>View progress of index build jobs</li>
+  <li>View contents of tool data tables
+]
+<img src="../../images/data_table_ui.png" alt="data_table_ui.png" loading="lazy" /></li>
+</ul>
+
+<hr />
+
+<h1 id="resources--further-reading">Resources / further reading</h1>
+
+<p>.large[</p>
+<ul>
+  <li>Galaxy Wiki Page on Data Managers
+    <ul>
+      <li>Details</li>
+      <li>Building</li>
+      <li>Examples</li>
+    </ul>
+  </li>
+</ul>
+
+<p>https://galaxyproject.org/admin/tools/data-managers/
+]</p>
+
+<hr />
+
+<h1 id="exercise-time">Exercise Time!</h1>
+
+<hr />
+
+<h1 id="overview-4">Overview</h1>
+
+<p>.large[</p>
+<ul>
+  <li>Intro to built in datasets</li>
+  <li>Built in data hierarchy</li>
+  <li>Some problems</li>
+  <li>Data Managers</li>
+  <li><strong>There’s just so much of it!</strong>
+]</li>
+</ul>
+
+<hr />
+
+<h1 id="theres-a-lot-of-reference-data">There’s a lot of reference data</h1>
+
+<p>.large[
+(and it’s hard to keep up with)
+]
+<img src="../../images/ref_data_prob_flow.png" alt="ref_data_prob_flow.png" loading="lazy" /></p>
+
+<hr />
+
+<h1 id="cernvm-fs-to-the-rescue">CernVM-FS to the rescue</h1>
+
+<ul>
+  <li>Needed a method of sharing reference data across country efficiently</li>
+  <li><strong>CVMFS</strong> is an efficient method for read only data sharing between systems
+    <ul>
+      <li>Originally designed for distributed software installation at Cern</li>
+      <li>Turns out it’s really useful for read only data sets as well</li>
+      <li>HTTP-based, firewall friendly</li>
+    </ul>
+  </li>
+  <li>All nodes of Galaxy Main get their reference genomes and indices from CVMFS
+    <ul>
+      <li>Shared via mirroring and caching across the country</li>
+    </ul>
+  </li>
+  <li>It’s also really useful to share data <strong>globally</strong>
+    <ul>
+      <li>The <strong>usegalaxy.</strong>* initiative has taken full advantage of this.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<p>.widen_image[
+<img src="../../images/cvmfs_server_distribution.png" alt="cvmfs_server_distribution.png" loading="lazy" />
+]</p>
+
+<hr />
+
+<h1 id="cvm-fs-global-structure">CVM-FS Global Structure</h1>
+
+<p>.widen_image[
+<img src="../../images/cvmfs_global_structure.png" alt="cvmfs_global_structure.png" loading="lazy" />
+]</p>
+
+<hr />
+
+<h1 id="exercise-2">Exercise #2:</h1>
+
+<p>.large[
+<strong>Connect our instances to CVMFS for reference data</strong>
+]</p>
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+
+<img src="/training-material/assets/images/gat.png" alt="page logo" style="height: 100px;"/>
+
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

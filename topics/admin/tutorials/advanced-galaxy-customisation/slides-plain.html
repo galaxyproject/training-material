@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Advanced customisation of a Galaxy instance</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Advanced customisation of a Galaxy instance" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/advanced-galaxy-customisation/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/advanced-galaxy-customisation/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/advanced-galaxy-customisation/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/advanced-galaxy-customisation/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/advanced-galaxy-customisation/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/advanced-galaxy-customisation/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/advanced-galaxy-customisation/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fadvanced-galaxy-customisation%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/admin/tutorials/advanced-galaxy-customisation/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/admin/tutorials/advanced-galaxy-customisation/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/admin/tutorials/advanced-galaxy-customisation/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/admin/tutorials/advanced-galaxy-customisation/slides.html">View markdown source on GitHub</a>
+	<h1>Advanced customisation of a Galaxy instance</h1>
+		<h2>Contributors</h2>
+		Björn Grüning, Helena Rasche, Martin Čech
+
+		
+
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 6, 2021 </div>
+
+	<hr />
+
+
+	<h3 id="setup">Setup</h3>
+
+<p>We are going to use a prebuilt virtual machine image for this session.</p>
+
+<p>From the given USB stick, please:</p>
+
+<ul>
+  <li>Copy and install VirtualBox (or <a href="https://www.virtualbox.org/wiki/Downloads">download</a>) if you do not have it already.</li>
+  <li>Copy the Planemo machine image - file <code class="language-plaintext highlighter-rouge">latest.ova</code> or <a href="https://images.galaxyproject.org/planemo/">download</a>.</li>
+</ul>
+
+<hr />
+
+<h2 id="galaxys-frontend">Galaxy’s frontend</h2>
+
+<p>JavaScript sources and CSS sources are in the <code class="language-plaintext highlighter-rouge">$GALAXY_ROOT/client</code> folder.</p>
+
+<p>Whenever you make changes there, you will need to re-build Galaxy’s frontend with:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>
+<span class="gp">$</span><span class="w"> </span>make client
+</code></pre></div></div>
+
+<p>This requires <a href="https://nodejs.org/">Node</a>.</p>
+
+<hr />
+
+<h3 id="translation-and-localisation-12">Translation and localisation 1/2</h3>
+
+<p>The language for labels used in the JS source code is English, but can be wrapped in <code class="language-plaintext highlighter-rouge">l()</code> which makes it translatable.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">_l</span><span class="p">(</span> <span class="dl">'</span><span class="s1">Help</span><span class="dl">'</span> <span class="p">)</span>
+</code></pre></div></div>
+
+<p>–</p>
+
+<ul>
+  <li>There is a script <a href="https://github.com/galaxyproject/galaxy/blob/dev/client/galaxy/scripts/nls/locale.js">client/galaxy/scripts/nls/locale.js</a> that defines all translatable labels. By default without a translation.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="dl">"</span><span class="s2">Analyze Data</span><span class="dl">"</span> <span class="p">:</span>
+    <span class="kc">false</span><span class="p">,</span>
+</code></pre></div></div>
+
+<p>–</p>
+
+<ul>
+  <li>There is a folder <a href="https://github.com/galaxyproject/galaxy/tree/dev/client/galaxy/scripts/nls">client/galaxy/scripts/nls/</a> that contains all available localisations.
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"Analyze Data" :
+  "Analyse de données",
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="translation-and-localisation-22">Translation and localisation 2/2</h3>
+
+<p>When a user’s browser locale or language is set to a known translation, it will be used instead of the default. If a translation is not available for a string, it will appear in English.</p>
+
+<hr />
+
+<h3 id="how-to-modify-the-menu">How to modify the menu</h3>
+
+<p>Open the <a href="https://github.com/galaxyproject/galaxy/blob/dev/client/galaxy/scripts/layout/menu.js">client/galaxy/scripts/layout/menu.js</a></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">helpTab</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="na">id</span>              <span class="p">:</span> <span class="dl">'</span><span class="s1">help</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">title</span>           <span class="p">:</span> <span class="nx">_l</span><span class="p">(</span><span class="dl">'</span><span class="s1">Help</span><span class="dl">'</span><span class="p">),</span>
+          <span class="na">tooltip</span>         <span class="p">:</span> <span class="nx">_l</span><span class="p">(</span><span class="dl">'</span><span class="s1">Support, contact, and community</span><span class="dl">'</span><span class="p">),</span>
+          <span class="na">menu</span>            <span class="p">:</span> <span class="p">[{</span>
+                  <span class="na">title</span>   <span class="p">:</span> <span class="nx">_l</span><span class="p">(</span><span class="dl">'</span><span class="s1">Support</span><span class="dl">'</span><span class="p">),</span>
+                  <span class="na">url</span>     <span class="p">:</span> <span class="nx">options</span><span class="p">.</span><span class="nx">support_url</span><span class="p">,</span>
+                  <span class="na">target</span>  <span class="p">:</span> <span class="dl">'</span><span class="s1">_blank</span><span class="dl">'</span>
+              <span class="p">},{</span>
+                  <span class="na">title</span>   <span class="p">:</span> <span class="nx">_l</span><span class="p">(</span><span class="dl">'</span><span class="s1">Search</span><span class="dl">'</span><span class="p">),</span>
+                  <span class="na">url</span>     <span class="p">:</span> <span class="nx">options</span><span class="p">.</span><span class="nx">search_url</span><span class="p">,</span>
+                  <span class="na">target</span>  <span class="p">:</span> <span class="dl">'</span><span class="s1">_blank</span><span class="dl">'</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="configuration-tweaks">Configuration tweaks</h2>
+
+<p>Plenty of customisation can be achieved using settings in the main configuration file <a href="https://github.com/galaxyproject/galaxy/blob/dev/config/galaxy.yml.sample">galaxy.yml</a></p>
+
+<hr />
+
+<h3 id="tool-panel-configuration">Tool Panel configuration</h3>
+
+<ul>
+  <li>How the tool panel looks like is decided in a file called <code class="language-plaintext highlighter-rouge">integrated_tool_panel.xml</code>.</li>
+  <li>By default it resides in Galaxy’s root folder.</li>
+  <li>If missing it is generated from all other tool config files during startup.</li>
+  <li>Modify it if you want to reorder tools or move sections.</li>
+</ul>
+
+<hr />
+
+<h3 id="tool-panel-labels">Tool panel labels</h3>
+
+<p>You can add <code class="language-plaintext highlighter-rouge">&lt;tool labels="updated" /&gt;</code> to achieve:</p>
+
+<p><img src="../../images/toolpanel_labels.png" alt="tool panel labels" loading="lazy" /></p>
+
+<hr />
+
+<h3 id="tool-panel-search-configuration-12">Tool Panel search configuration 1/2</h3>
+
+<p>The tool panel search uses a pre-built index that is compiled during Galaxy
+boot. You can tweak tool panel search by configuring boosts in <code class="language-plaintext highlighter-rouge">galaxy.yml</code>.</p>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">tool_name_boost:</span> <span class="err">9</span>
+<span class="err">tool_section_boost:</span> <span class="err">3</span>
+<span class="err">tool_description_boost:</span> <span class="err">2</span>
+<span class="err">tool_label_boost:</span> <span class="err">1</span>
+<span class="err">tool_stub_boost:</span> <span class="err">5</span>
+<span class="err">tool_help_boost:</span> <span class="err">0.5</span>
+</code></pre></div></div>
+
+<p>You can also manipulate the number of tools returned for any query by changing
+the <code class="language-plaintext highlighter-rouge">tool_search_limit</code>. This will display more or fewer tools for any given
+query.</p>
+
+<hr />
+
+<h3 id="tool-panel-search-configuration-22">Tool Panel search configuration 2/2</h3>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Enable/ disable Ngram-search for tools. It makes tool
+# search results tolerant for spelling mistakes in the query
+# by dividing the query into multiple ngrams and search for
+# each ngram
+</span><span class="err">tool_enable_ngram_search:</span> <span class="err">true</span>
+
+<span class="c"># Set minimum and maximum sizes of ngrams
+</span><span class="err">tool_ngram_minsize:</span> <span class="err">3</span>
+<span class="err">tool_ngram_maxsize:</span> <span class="err">5</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="log-level-configuration">Log level configuration</h3>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Verbosity of console log messages.
+</span><span class="err">log_level:</span> <span class="err">DEBUG</span>
+</code></pre></div></div>
+
+<p>These are <a href="https://docs.python.org/2/library/logging.html#logging-levels">python logging levels</a>.</p>
+
+<p><img src="../../images/log_levels.png" alt="log levels" loading="lazy" /></p>
+
+<hr />
+
+<h3 id="help-menu">Help menu</h3>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># The URL linked by the "Wiki" link in the "Help" menu.
+</span><span class="err">wiki_url:</span> <span class="err">https://galaxyproject.org/</span>
+
+<span class="c"># The URL linked by the "Support" link in the "Help" menu.
+</span><span class="err">support_url:</span> <span class="err">https://galaxyproject.org/support</span>
+
+<span class="c"># The URL linked by the "How to Cite Galaxy" link in the "Help" menu.
+#citation_url: https://galaxyproject.org/citing-galaxy
+</span>
+<span class="c"># The URL linked by the "Search" link in the "Help" menu.
+#search_url: https://galaxyproject.org/search/
+</span>
+<span class="c"># The URL linked by the "Mailing Lists" link in the "Help" menu.
+#mailing_lists_url: https://galaxyproject.org/mailing-lists
+</span>
+<span class="c"># The URL linked by the "Videos" link in the "Help" menu.
+#screencasts_url: https://vimeo.com/galaxyproject
+</span>
+<span class="c"># The URL linked by the "Terms and Conditions" link in the "Help" menu, as well
+# as on the user registration and login forms and in the activation emails.
+#terms_url: None
+</span></code></pre></div></div>
+
+<hr />
+
+<h3 id="brand-and-welcome">Brand and welcome</h3>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Append "/{brand}" to the "Galaxy" text in the masthead.
+</span><span class="err">brand:</span> <span class="err">GenOuest</span>
+</code></pre></div></div>
+
+<p><img src="../../images/brand.png" alt="brand" loading="lazy" /></p>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># The URL linked by the "Galaxy/brand" text.
+</span><span class="err">logo_url:</span> <span class="err">/</span>
+
+<span class="c"># The URL of the page to display in Galaxy's middle pane when loaded.  This can
+# be an absolute or relative URL.
+</span><span class="err">welcome_url:</span> <span class="err">/static/welcome.html</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="email-configuration">Email configuration</h3>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">error_email_to:</span> <span class="err">marten+error@bx.psu.edu</span>
+<span class="err">activation_email:</span> <span class="err">marten+activation@bx.psu.edu</span>
+
+<span class="err">blacklist_file:</span> <span class="err">config/disposable_email_blacklist.conf</span>
+<span class="err">registration_warning_message:</span> <span class="err">Please</span> <span class="err">only</span> <span class="err">register</span> <span class="err">one</span> <span class="err">account</span>
+
+<span class="err">user_activation_on:</span> <span class="err">False</span>
+<span class="err">activation_grace_period:</span> <span class="err">6</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="galaxy-tours">Galaxy Tours</h3>
+
+<p>Have their own <a href="/training-material/topics/dev//tutorials/interactive-tours/slides.html#1">tutorial</a>.</p>
+
+<hr />
+
+<h3 id="galaxy-webhooks">Galaxy Webhooks</h3>
+
+<p>Have their own <a href="/training-material/topics/dev//tutorials/webhooks/slides.html#1">slides</a> and <a href="/training-material/topics/dev//tutorials/webhooks/tutorial.html">tutorial</a>.</p>
+
+<p>And also a <a href="https://docs.galaxyproject.org/en/master/admin/special_topics/webhooks.html">documentation</a></p>
+
+<hr />
+
+<h3 id="adjusting-styles">Adjusting styles</h3>
+
+<p>We use SCSS to build our CSS. Among other features it allows defining <a href="https://github.com/galaxyproject/galaxy/blob/release_19.01/client/galaxy/style/scss/theme/blue.scss">variables</a>.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/client/galaxy/style/scss/theme/blue.scss
+</span><span class="gi">+++ b/client/galaxy/style/scss/theme/blue.scss
+</span><span class="p">@@ -2,7 +2,7 @@</span>
+<span class="gd">-@base-color-1: #2c3143;
+</span><span class="gi">+@base-color-1: blue;
+</span></code></pre></div></div>
+
+<p><img src="../../images/blue_base.png" alt="blue base color" loading="lazy" /></p>
+
+<hr />
+
+<h2 id="dynamic-welcome-page">Dynamic Welcome Page</h2>
+
+<ul>
+  <li>Customizing the welcome page is quite easy, just edit <code class="language-plaintext highlighter-rouge">$GALAXY_ROOT/static/welcome.html</code></li>
+</ul>
+
+<p>–</p>
+
+<ul>
+  <li>Embedding <a href="https://publish.twitter.com">twitter feeds</a> is popular, e.g. <a href="https://usegalaxy.org">usegalaxy.org</a></li>
+</ul>
+
+<p>–</p>
+
+<ul>
+  <li>IFrame to embed a blog hosted on the same domain
+```html
+<!-- Header --></li>
+</ul>
+<h3>News</h3>
+<!-- Iframe contents go here -->
+<div id="test-rss">
+</div>
+<!-- Load JQuery -->
+<script src="https://fqdn/galaxy/static/scripts/libs/jquery/jquery.js">
+</script>
+
+<!-- Load contents into div -->
+<script type="text/javascript">
+	$('#test-rss').load('https://fqdn/category/dev/ #content');
+</script>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+---
+
+## Toolbox filtering
+
+</code></pre></div></div>
+<h1 id="-toolbox-filtering">– ToolBox filtering</h1>
+
+<h1 id="modules-from-libgalaxytoolstoolboxfilters-can-be-specified-in">Modules from lib/galaxy/tools/toolbox/filters/ can be specified in</h1>
+<h1 id="the-following-lines--tool_-filters-will-be-applied-for-all-users">the following lines.  tool_* filters will be applied for all users</h1>
+<h1 id="and-can-not-be-changed-by-them--user_tool_-filters-will-be-shown">and can not be changed by them.  user_tool_* filters will be shown</h1>
+<h1 id="under-user-preferences-and-can-be-toggled-on-and-off-at">under user preferences and can be toggled on and off at</h1>
+<h1 id="runtime--example-shown-below-are-not-real-defaults-no-custom">runtime.  Example shown below are not real defaults (no custom</h1>
+<h1 id="filters-are-applied-by-default-but-can-be-enabled-by-renaming-the">filters are applied by default), but can be enabled by renaming the</h1>
+<h1 id="examplespysample-in-the-filters-directory-to-examplespy">examples.py.sample in the filters directory to examples.py.</h1>
+
+<p>#tool_filters =
+#tool_label_filters =
+#tool_section_filters =
+#user_tool_filters: examples:restrict_upload_to_admins, examples:restrict_encode
+#user_tool_section_filters: examples:restrict_text
+#user_tool_label_filters: examples:restrict_upload_to_admins, examples:restrict_encode</p>
+
+<h1 id="the-base-modules-that-are-searched-for-modules-as-described-above">The base modules that are searched for modules as described above</h1>
+<h1 id="can-be-modified-and-modules-external-to-galaxy-can-be-searched-by">can be modified and modules external to Galaxy can be searched by</h1>
+<h1 id="modifying-the-following-option">modifying the following option.</h1>
+<p>#toolbox_filter_base_modules: galaxy.tools.toolbox.filters,galaxy.tools.filters
+```</p>
+
+<hr />
+
+<h2 id="quotas">Quotas</h2>
+
+<p>Used to control user disk usage.</p>
+
+<p>To turn on the use of quotas: In <code class="language-plaintext highlighter-rouge">galaxy.yml</code>:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">enable_quotas</code> Enable enforcement of quotas.  Quotas can be set from the Admin interface (under Data).</li>
+  <li>must create quotas in admin interface before any quota will be enforced, otherwise ‘unlimited’</li>
+</ul>
+
+<p>Amounts:</p>
+<ul>
+  <li>Examples: “10000MB”, “99 gb”, “0.2T”, “unlimited”</li>
+  <li>= / + / -</li>
+</ul>
+
+<p>Default for user class:</p>
+<ul>
+  <li>None (No)</li>
+  <li>Unregistered Users</li>
+  <li>Registered Users</li>
+</ul>
+
+<p>or associated with Groups or Users</p>
+
+<hr />
+
+<h2 id="exercise-creating-quotas">Exercise: Creating Quotas</h2>
+
+<ul>
+  <li>Create quotas for Unregistered (1b) and Registered Users (1mb)</li>
+  <li>Create a quota that adds 1GB</li>
+  <li>Create a quota that decreases by 1GB</li>
+  <li>Create a quota that grants unlimited</li>
+</ul>
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+
+<img src="/training-material/assets/images/gat.png" alt="page logo" style="height: 100px;"/>
+
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

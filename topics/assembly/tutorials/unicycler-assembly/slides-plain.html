@@ -1,0 +1,1310 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Unicycler Assembly</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="DNA sequence data has become an indispensable tool for Mo..." />
+        <meta property="og:title" content="Galaxy Training: Unicycler Assembly" />
+        <meta property="og:description" content="DNA sequence data has become an indispensable tool for Mo..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/assembly/faqs/" title="Check our FAQs for the Assembly topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/assembly/tutorials/unicycler-assembly/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/assembly/tutorials/unicycler-assembly/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/assembly/tutorials/unicycler-assembly/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/assembly/tutorials/unicycler-assembly/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/assembly/tutorials/unicycler-assembly/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/assembly/tutorials/unicycler-assembly/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/assembly/tutorials/unicycler-assembly/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fassembly%2Ftutorials%2Funicycler-assembly%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/assembly/tutorials/unicycler-assembly/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/assembly/tutorials/unicycler-assembly/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/assembly/tutorials/unicycler-assembly/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/assembly/tutorials/unicycler-assembly/slides.html">View markdown source on GitHub</a>
+	<h1>Unicycler Assembly</h1>
+		<h2>Contributors</h2>
+		Anton Nekrutenko, Delphine Lariviere, Simon Gladman
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>I have short reads and long reads. How do I assemble a genome?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Perform Quality Control on your reads</p>
+</li>
+		
+		<li><p>Perform a Small genome Assembly with Unicycler</p>
+</li>
+		
+		<li><p>Evaluate the Quality of the Assembly with Quast</p>
+</li>
+		
+		<li><p>Annotate the assembly with Prokka</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 9, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="small-genome-assembly-with-unicycler">Small Genome Assembly With Unicycler</h1>
+
+<hr />
+<p>.enlarge120[</p>
+
+<h1 id="introduction-to-genome-assembly"><strong>Introduction to Genome Assembly</strong></h1>
+
+<p>]</p>
+
+<p>To start on Genome assembly you can read the previous assembly tutorials:</p>
+<ul>
+  <li><a href="https://galaxyproject.github.io/training-material/topics/assembly/tutorials/general-introduction/slides.html#1">Introduction to Genome Assembly</a></li>
+  <li><a href="https://galaxyproject.github.io/training-material/topics/assembly/tutorials/debruijn-graph-assembly/slides.html#46">De Bruijn Graph Assembly</a></li>
+</ul>
+
+<hr />
+
+<p>.enlarge120[</p>
+
+<h1 id="assembly-basics--challenges-of-genome-and-transcriptome-assembly"><strong>Assembly basics : Challenges of genome (and transcriptome) assembly</strong></h1>
+
+<p>]</p>
+
+<p><a href="https://github.com/rrwick/Unicycler"><img src="../../images/illumina_graph_comparison.png" alt="Graphic shown three different assemblies, all tangled knots of sequences that will be very difficult to resolve." loading="lazy" /></a></p>
+
+<p>Genome assembly is a difficult task. In trying to explain it we will be relying on two highly regarded sources:</p>
+
+<ul>
+  <li><a href="http://www.langmead-lab.org/teaching-materials/">Ben Langmead’s Teaching Materials</a></li>
+  <li><a href="https://www.goodreads.com/book/show/22033056-bioinformatics-algorithms">Pevzner and Compeau Bioinformatics Book</a>.</li>
+</ul>
+
+<hr />
+
+<p>.enlarge120[</p>
+
+<h1 id="genomes-and-reads-strings-and-k-mers"><strong>Genomes and reads: Strings and <em>k</em>-mers</strong></h1>
+
+<p>]</p>
+
+<h2 id="k-mer-composition"><em>k</em>-mer composition</h2>
+
+<p>Genomes are strings of text. When we sequence genomes we use sequencing machines that generate reads. For now let’s assume that all reads have the same length <em>k</em> and every <em>k</em>-mer is sequenced only once. We will relax these assumptions later in this lecture. Thus sequencing a genome generates a large list of <em>k</em>-mers.</p>
+
+<p>Suppose we are dealing with a <em>very</em> short genome <code class="language-plaintext highlighter-rouge">TATGGGGTGC</code>. Its <em>k</em>-mer composition (note the subscript) <strong>Composition_k(Text)</strong> is the collection of all <em>k</em>-mer substrings (including repeated ones). When <em>k</em> = 3 we get (basically we split sequence into windows of length 3 sliding window by 1 base every time):</p>
+
+<p><samp>
+Composition_3(TATGGGGTGC)= ATG,GGG,GGG,GGT,GTG,TAT,TGC,TGG
+<samp></samp></samp></p>
+
+<hr />
+
+<p><samp>
+Composition_3(TATGGGGTGC)= ATG,GGG,GGG,GGT,GTG,TAT,TGC,TGG
+<samp></samp></samp></p>
+
+<p>Note that we have listed <em>k</em>-mers in lexicographic order (i.e., how they would appear in a dictionary) rather than in the order of their appearance in <code>TATGGGGTGC</code>. We have done this because the correct ordering of the reads is unknown when they are generated (i.e., a sequencing machine does not generate reads in any particular order).</p>
+
+<hr />
+
+<h2 id="assembly-by-overlap">Assembly by overlap</h2>
+
+<p>In the example above we know what the “genome” sequence is. In real life we don’t know that and our goal is to determine genome sequence given a scrambled collection of <em>k</em>-mers. Let’s consider the following collection of 3-mers representing a hypothetical genome:</p>
+
+<p><code> AAT ATG GTT TAA TGT </code></p>
+
+<p>Let’s “tile” k-mers if they overlap in k-1 nucleotides:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TAA
+ AAT
+  ATG
+   TGT
+    GTT
+-------
+TAATGTT
+</code></pre></div></div>
+
+<hr />
+
+<p>Now let’s apply it to slightly longer “genome” with the following 3-mer composition sorted in a lexicographic order:</p>
+
+<p><code>
+AAT ATG ATG ATG CAT CCA GAT GCC GGA GGG GTT TAA TGC TGG TGT
+</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">TAA</code> looks like a great beginning and we are continuing:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 TAA
+2  AAT
+3   ATG
+4    TGT
+5     GTT
+  -------
+  TAATGTT
+</code></pre></div></div>
+
+<p>There is nothing in the original 3-mer composition, which starts with <code class="language-plaintext highlighter-rouge">TT</code>.</p>
+
+<hr />
+
+<p>Let’s track back and instead of <code class="language-plaintext highlighter-rouge">TGT</code> in step 4 insert <code class="language-plaintext highlighter-rouge">TGC</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 1 TAA
+ 2  AAT
+ 3   ATG
+ 4    TGC
+ 5     GCC
+ 6      CCA
+ 7       CAT
+ 8        ATG
+ 9         TGG
+10          GGA
+11           GAT
+12            ATG
+13             TGT
+14              GTT
+   ----------------
+   TAATGCCATGGATGTT
+</code></pre></div></div>
+
+<p>We only used 14 3-mers from the total of 15, so our genome is shorter (we have extra parts!). This difficulty is related to the fact that there are three repeated <code class="language-plaintext highlighter-rouge">ATG</code> motifs in this genome and as a result each <code class="language-plaintext highlighter-rouge">ATG</code> can be extended by either <code class="language-plaintext highlighter-rouge">TGG</code>, <code class="language-plaintext highlighter-rouge">TGC</code>, or <code class="language-plaintext highlighter-rouge">TGT</code>.</p>
+
+<hr />
+
+<h2 id="the-concept-of-coverage">The concept of coverage</h2>
+
+<p><em>Coverage</em> is the number of reads covering a particular position in the genome. For example, in the following case:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TAA
+ AAT
+  ATG     &lt;- "reads" (15 bases total)
+   TGT
+    GTT
+-------
+TAATGTT   &lt;- "genome" (7 bases)
+-------
+0123456
+</code></pre></div></div>
+<p>The <em>Coverage</em> at positions 1 and 6 is <em>1</em>, at positions 1 and 5 is <em>2</em>, and at position 2, 3, and 4 is <em>3</em>. <br />The <em>Average Coverage</em> will be 15/7 ~ 2x</p>
+
+<hr />
+
+<p>Below is another, slightly more realistic example where average coverage is 177/35 ~ 7x:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                  CTAGGCCCTCAATTTTT
+                CTCTAGGCCCTCAATTTTT
+              GGCTCTAGGCCCTCATTTTTT
+           CTCGGCTCTAGCCCCTCATTTT
+        TATCTCGACTCTAGGCCCTCA         &lt;- 177 bases
+        TATCTCGACTCTAGGCC
+    TCTATATCTCGGCTCTAGG
+GGCGTCTATATCTCG
+GGCGTCGATATCT
+GGCGTCTATATCT
+-----------------------------------
+GGCGTCTATATCTCGGCTCTAGGCCCTCATTTTTT   &lt;- 35 bases
+-----------------------------------
+|         |         |         |   |
+0         10        20        30  34
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="the-first-and-the-second-laws-of-assembly">The First and the Second laws of assembly</h1>
+
+<p>The goal of assembly process is to reconstruct an unknown genome sequence given a collection of scrambled sequencing reads:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CTAGGCCCTCAATTTTT
+CTCTAGGCCCTCAATTTTT
+GGCTCTAGGCCCTCATTTTTT
+CTCGGCTCTAGCCCCTCATTTT
+TATCTCGACTCTAGGCCCTCA                 &lt;- Reads (Given)
+TATCTCGACTCTAGGCC
+TCTATATCTCGGCTCTAGG
+GGCGTCTATATCTCG
+GGCGTCGATATCT
+GGCGTCTATATCT
+-----------------------------------
+&lt;span&gt;Speaker Notes&lt;/span&gt;&lt;span&gt;Speaker Notes&lt;/span&gt;&lt;span&gt;Speaker Notes&lt;/span&gt;&lt;span&gt;Speaker Notes&lt;/span&gt;&lt;span&gt;Speaker Notes&lt;/span&gt;&lt;span&gt;Speaker Notes&lt;/span&gt;&lt;span&gt;Speaker Notes&lt;/span&gt;&lt;span&gt;Speaker Notes&lt;/span&gt;&lt;span&gt;Speaker Notes&lt;/span&gt;&lt;span&gt;Speaker Notes&lt;/span&gt;&lt;span&gt;Speaker Notes&lt;/span&gt;??   &lt;- Genome (Unknown)
+</code></pre></div></div>
+<blockquote>
+  <p><strong>The goal of assembly process</strong>. Given sequencing reads reconstruct underlying genome sequence.</p>
+</blockquote>
+
+<p>We’ve seen that this can (in principle) be accomplished by finding overlaps. We also discussed the concept of the coverage.  We can now formulate the two first assembly laws.</p>
+
+<hr />
+
+<h2 id="the-first-assembly-law-overlaps-imply-co-location">The First Assembly Law: Overlaps imply co-location</h2>
+
+<p>Let’s define terms <strong>Prefix</strong> and <strong>Suffix</strong> using string <code>TAA</code> as an example:</p>
+
+<ul>
+  <li><code>Prefix(TAA) = TA</code></li>
+  <li><code>Suffix(TAA) = AA</code></li>
+</ul>
+
+<hr />
+
+<p>The First law states that if a <em>suffix</em> of one read is similar to a <em>prefix</em> of another read…</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TCTATATCTCGGCTCTAGG    &lt;- read 1
+    ||||||| |||||||
+    TATCTCGACTCTAGGCC  &lt;- read 2
+</code></pre></div></div>
+
+<p>…then they may overlap (may be derived from the same location) within the genome.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      TCTATATCTCGGCTCTAGG                  &lt;- read 1
+ -------------------------------------
+ AGCGTTCTATATCTCGGCTCTAGGCCGTGCAGGACGT     &lt;- genome
+ -------------------------------------
+          TATCTCGACTCTAGGCC                &lt;- read 2
+</code></pre></div></div>
+
+<hr />
+
+<p>Note that in the above example suffix of the first read is <em>not</em> exactly identical to the prefix of the second read: they differ by a G-to-A substitution. Such differences are quite common in real life and may be caused by:</p>
+
+<ul>
+  <li><strong>sequencing errors</strong> - experimental or computational artifacts of DNA sequencing procedures.</li>
+  <li><strong>allelic differences</strong> - organisms such as human are diploid (and others, such as wheat are hexaploid) which maternal and paternal genomes being different at a number of genomic sites.</li>
+  <li><strong>polymorphic sites</strong> - DNA that is being sequenced is usually isolated from a large number of cells (e.g., white blood cells) or individuals (bacterial and viral cultures). Natural variation present in these cell (or viral particle) populations will manifest itself as these differences.</li>
+</ul>
+
+<hr />
+
+<h2 id="the-second-assembly-law-the-higher-the-coverage-the-better">The Second Assembly Law: The higher the coverage, the better</h2>
+
+<p>The Second law states that higher coverage leads to more frequent and longer overlaps:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                   CTAGGCCCTCAATTTTT
+         TATCTCGACTCTAGGCCCTCA         &lt;- Low coverage
+ GGCGTCTATATCT
+ -----------------------------------
+ GGCGTCTATATCTCGGCTCTAGGCCCTCATTTTTT   &lt;- Genome
+ -----------------------------------
+                   CTAGGCCCTCAATTTTT
+                 CTCTAGGCCCTCAATTTTT
+               GGCTCTAGGCCCTCATTTTTT
+            CTCGGCTCTAGCCCCTCATTTT
+         TATCTCGACTCTAGGCCCTCA         &lt;- Higher coverage
+         TATCTCGACTCTAGGCC
+     TCTATATCTCGGCTCTAGG
+ GGCGTCTATATCTCG
+ GGCGTCGATATCT
+ GGCGTCTATATCT
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="solving-assembly-problem-with-graphs">Solving assembly problem with graphs</h1>
+
+<p>We can solve assembly challenge using overlaps between sequencing reads. However, to solve this problem effectively we need to first represent all overlaps in a way that would facilitate further analysis. <em>Directed graphs</em> help achieving this.</p>
+
+<hr />
+
+<h2 id="directed-graphs">Directed graphs</h2>
+
+<p>Finding overlaps is identical to building a <em>directed graph</em> where directed <em>edges</em> connect <em>nodes</em> representing overlapping reads:
+<img src="../../images/dag.png" alt="Cartoons of two sequences aligned with nearly perfect matches. On the right are a list of nodes representing sequences. The two from the alignment are linked with an arrow and the text reads Suffix of source is similar to prefix of sink." loading="lazy" /></p>
+
+<blockquote>
+  <p><strong>Directed graph</strong> representing overlapping reads. (Image from <a href="http://www.cs.jhu.edu/~langmea/resources/lecture_notes/assembly_scs.pdf">Ben Langmead</a>).</p>
+</blockquote>
+
+<hr />
+
+<p>For example, the string reconstruction we have seen earlier (with the difference of inserting <code class="language-plaintext highlighter-rouge">GGG</code> in line 10):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 1 TAA
+ 2  AAT
+ 3   ATG
+ 4    TGC
+ 5     GCC
+ 6      CCA
+ 7       CAT
+ 8        ATG
+ 9         TGG
+10          GGG
+11           GGA
+12            GAT
+13             ATG
+14              TGT
+15               GTT
+   -----------------
+   TAATGCCATGGGATGTT
+</code></pre></div></div>
+
+<p>can be represented as a following directed graph (or genome path):</p>
+
+<p><img src="../../images/4.6.png" alt="Graph where each of the above 3-mers is a single node in a graph and they are linked together from left to right most 3-mer." loading="lazy" /></p>
+
+<p><strong>Genome path</strong>. Trimers composing the <code>TAATGCCATGGGATGTT</code> sequence represented as the “genome” path. (Fig. 4.6 from <a href="http://bioinformaticsalgorithms.com/">CP</a>). In this path a suffix of a 3-mer is equal to prefix of the next 3-mer.</p>
+
+<hr />
+
+<p><strong>However</strong>, we do not know the actual genome! All we have in real life is a collection of reads. Let’s first build an overlap graph by connecting two 3-mers if suffix of one is equal to the prefix of the other:</p>
+
+<blockquote>
+  <p><img src="../../images/4.7.png" alt="Th above graph is expanded to include a lot more connections between any nodes that share 2 base overlap." loading="lazy" /></p>
+
+  <p><strong>Overlap graph</strong>. All possible overlap connections for our 3-mer collection. (Fig. 4.7 from <a href="http://bioinformaticsalgorithms.com/">CP</a>)</p>
+</blockquote>
+
+<p>So to determine the sequence of the underlying genome we are looking a path in this graph that visits every node (3-mer) once. Such path is called <a href="https://en.wikipedia.org/wiki/Hamiltonian_path">Hamiltonian path</a> and it may not be unique.</p>
+
+<hr />
+
+<p>For example for our 3-mer collection there are two possible Hamiltonian paths:</p>
+
+<p><img src="../../images/4.9a.png" alt="The above graph is re-used but a single path is highlighted" loading="lazy" />
+<img src="../../images/4.9b.png" alt="The same graph with a different path highlighted." loading="lazy" /></p>
+
+<p><strong>Two Hamiltonian paths for the 15 3-mers</strong>. Edges spelling “genomes” <code>TAATGCCATGGGATGTT</code> and <code>TAATGGGATGCCATGTT</code> are highlighted in black. (Fig. 4.9. from <a href="http://bioinformaticsalgorithms.com/">[CP](http://bioinformaticsalgorithms.com/)</a>).</p>
+
+<hr />
+
+<p>The reason for this “duality” is the fact that we have a <em>repeat</em>: 3-mer <code>ATG</code> is present three times in our data (<font color="green">green</font>, <font color="red">red</font>, and <font color="blue">blue</font>). As we will see later repeats cause a lot of trouble in genome assembly.</p>
+
+<hr />
+
+<h2 id="finding-overlaps">Finding overlaps</h2>
+
+<p>In the example above we had a collection of 3-mers and were always looking for overlaps of length two. In real life things may not be so “regular”. Suppose we have two reads:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Read X CTCTAGGCC
+Read Y TAGGCCCTC
+</code></pre></div></div>
+<p>What is the overlap between these two reads? For now we will define overlap of <code>length - l</code> suffix of Read X matches <code>length - l</code> prefix of Read Y, where <code>l</code> is given. To find these overlap we look in Read Y for instances <code>length - l</code> suffix of Read X.</p>
+
+<hr />
+
+<p>We will start with some minimal match of length $k$. Once a match is found it will be extended to the left to verify that the entire prefix of Read Y matches:</p>
+
+<blockquote>
+  <p><img src="../../images/find_overlap.png" alt="Two sequences are shown X and Y. The X sequence ends with the string GCC. In Y they start looking from the end until they find a GCC. In this case we confirm a length-6 prefix of Y matches a suffix of X." loading="lazy" /></p>
+
+  <p><strong>Finding overlaps</strong> between Read X and Read Y (Image from <a href="http://www.cs.jhu.edu/~langmea/resources/lecture_notes/assembly_scs.pdf">Ben Langmead</a>).</p>
+</blockquote>
+
+<hr />
+
+<p>As a result we represent two reads are connected nodes:</p>
+<blockquote>
+
+  <p><img src="../../images/og1.png" alt="Node labelled with one sequence points to another. The sequences are the ones from above with the number 6 on the arrow between them." loading="lazy" /></p>
+
+  <p>Number above the edge shows the length of the overlap.</p>
+</blockquote>
+
+<p>While with just two reads the problem may seen quite straightforward. Let now consider a set of reads representing a very short genome <code>GTACGTACGAT</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GTACGT
+TACGTA
+CGTACG
+ACGTAC
+GTACGA
+TACGAT
+</code></pre></div></div>
+
+<hr />
+
+<p>Building an overlap graph with overlap of <code>length &gt;= 4</code> will give us the following:</p>
+
+<blockquote>
+  <p><img src="../../images/og2.png" alt="The overlap graph now has longer sequences and numbers annotating the length of the overlap" loading="lazy" /></p>
+
+  <p>You can see that there is a path through this graph that would spell out the original genome sequence <code>GTACGTACGAT</code> :</p>
+
+  <p><img src="../../images/og3.png" alt="The optimal, highest scoring path is represented through this graph" loading="lazy" /></p>
+
+  <p>Here we are lucky enough to have all nodes having a single outgoing edge with the highest number (the length of overlap).</p>
+</blockquote>
+
+<hr />
+
+<h2 id="the-shortest-common-superstring-problem">The Shortest Common Superstring Problem</h2>
+
+<p>The problem of reconstructing genome using the overlap graph that we have just illustrated can be initially formulated as the <em>Shortest Common Superstring (SCS)</em> problem. It states: <em>given a collection of strings S, find SCS(S), which is the shortest string that contains all strings from the set S as substrings</em>.</p>
+
+<p>For simplicity let’s suppose that we have the following set of strings <code>S</code>:</p>
+
+<p><samp>
+BAA AAB BBA ABA ABB BBB AAA BAB
+</samp></p>
+
+<p>One way of getting a string that would contain all of these as substrings will simply be concatenating them:</p>
+
+<p><samp>
+Concat(S): BAAAABBBAABAABBBBBAAABAB (length = 24)
+</samp></p>
+
+<p>This, however, is not the <em>shortest</em> superstring that contains all strings from $S$. Instead the SCS is (just trust us here):</p>
+
+<p><samp>
+SCS(S):: AAABBBABAA (length = 10)
+</samp></p>
+
+<hr />
+
+<p>It looks like finding SCS for a set of sequencing reads may just be what we need to produce a genome assembly. But how can this work in practice? One potential idea is to order the strings in some way and “reduce” them into a superstring (following examples are from Ben Langmead):</p>
+
+<blockquote>
+  <p><img src="../../images/scs1.png" alt="A sequence of As and Bs in groups of 3s is labelled order 1. Below the sequence is written AAA, the current superstring." loading="lazy" /></p>
+</blockquote>
+
+<blockquote>
+  <p>Let’s look at the first two strings. They can be “reduced” to <code class="language-plaintext highlighter-rouge">AAAB</code>:</p>
+
+  <p><img src="../../images/scs2.png" alt="Now AAAB is written below the sequence because of the overlap in the first two groups." loading="lazy" /></p>
+
+  <p>The next two add an <code class="language-plaintext highlighter-rouge">A</code>:</p>
+
+  <p><img src="../../images/scs3.png" alt="Now AAABA is written, due to overlap in the second and third groups" loading="lazy" /></p>
+
+  <p>Third and fourth add <code class="language-plaintext highlighter-rouge">BB</code>:</p>
+
+  <p><img src="../../images/scs4.png" alt="The extension process continues with another overlapping component extending it further." loading="lazy" /></p>
+</blockquote>
+
+<hr />
+
+<blockquote>
+  <p>Continuing this we will eventually get <code class="language-plaintext highlighter-rouge">AAABABBAABABBABB</code>:</p>
+
+  <p><img src="../../images/scs5.png" alt="Order 1 produces a longish superstring" loading="lazy" /></p>
+
+  <p>But <code class="language-plaintext highlighter-rouge">AAABABBAABABBABB</code> is the shortest only for this particular ordering. So let’s reorder and try again:</p>
+
+  <p><img src="../../images/scs6.png" alt="Order 2, a new ordering of the same sequences, produces a shorter superstring." loading="lazy" /></p>
+
+  <p>Now we did better, but maybe we can do even better.</p>
+</blockquote>
+
+<p>Ultimately we need to try all possible ordering and pick the shortest among all. Using this approach is we have <code>S</code> strings we will need to do <code>S!</code> tries. This can quickly get impossible. For our set of
+eight strings <code>8! = 40320</code>. If we get, say, a 1,000,000 reads from an Illumina machine then the factorial of a million is not going to be an attractive analysis option.</p>
+
+<hr />
+
+<h2 id="shortest-common-superstring-greedy-approach">Shortest common superstring: Greedy approach</h2>
+
+<p>As we’ve seen it will be impossible to assemble the genome using SCS logic. There is a simplification called <em>Greedy</em> approach to SCS problem. Let’s take the following set of “reads”:</p>
+
+<p><samp>
+AAA AAB ABB BBA BBB
+</samp></p>
+
+<p>and first build an overlap graph:</p>
+
+<blockquote>
+  <p><img src="../../images/greedy1.png" alt="Graph showing 5 nodes with various scores between them." loading="lazy" /></p>
+
+  <p><strong>An overlap graph</strong> for set <code>S: AAA AAB ABB BBA BBB</code>.</p>
+</blockquote>
+
+<hr />
+
+<p>Next, we start collapsing the nodes to maximize the overlap (and hence to decrease the length of the SCS we are trying to construct):</p>
+
+<blockquote>
+  <p>In the graph below there are multiple ties: nodes with outgoing edges of identical weights (e.g., edges pointing from <code class="language-plaintext highlighter-rouge">ABB</code> to both <code class="language-plaintext highlighter-rouge">BBA</code> and <code class="language-plaintext highlighter-rouge">BBB</code> have weight of two. Remember, that the weight is the length of overlap between two nodes’ labels). In this situation we will break ties by randomly picking an edge to traverse. Let’s pick <font color="red">`AAA` &#8594; `AAB`</font>:</p>
+</blockquote>
+
+<blockquote>
+  <p><img src="../../images/greedy2.png" alt="The above graph however the node AAA -&gt; 2 -&gt; AAB is highlighted in red." loading="lazy" /></p>
+</blockquote>
+
+<hr />
+
+<p>.pull-left[</p>
+<blockquote>
+  <p>We then merge <code class="language-plaintext highlighter-rouge">AAA</code> and <code class="language-plaintext highlighter-rouge">AAB</code> into an SCS containing both, which will be <code class="language-plaintext highlighter-rouge">AAAB</code>:</p>
+
+  <p><img src="../../images/greedy3.png" alt="The above graph however with 4 nodes, as AAA and AAB are merged" loading="lazy" />
+]
+–
+.pull-right[
+Now let’s pick edge <font color="red">`ABB` &#8594; `BBB`</font>:</p>
+</blockquote>
+
+<blockquote>
+  <p><img src="../../images/greedy4.png" alt="Another edge scoring 2 is highlighted, ABB to BBB (2)" loading="lazy" />
+]
+—</p>
+</blockquote>
+
+<p>.pull-left[</p>
+<blockquote>
+  <p>Collapse the nodes:</p>
+
+  <p><img src="../../images/greedy5.png" alt="They're collapsed, now with 3 nodes in the graph" loading="lazy" />
+]
+–
+.pull-right[
+Pick <font color="red">`ABBB` &#8594; `BBA`</font>:</p>
+
+  <p><img src="../../images/greedy6.png" alt="Same as before, another highlighted" loading="lazy" />
+]
+—
+.pull-left[
+Collapse the nodes:</p>
+
+  <p><img src="../../images/greedy7.png" alt="Same as before, down to 2 nodes with arrows going both directions between them. One scores 2, one scores 1." loading="lazy" />
+]
+–
+.pull-right[
+Pick <font color="red">`AAAB` &#8594; `ABBBA`</font>:</p>
+
+  <p><img src="../../images/greedy8.png" alt="The AAAB to ABBBA is highlighted, scoring 2." loading="lazy" />
+]
+—</p>
+</blockquote>
+
+<blockquote>
+  <p>Collapse again and now we are left with a superstring of length 7:</p>
+
+  <p><img src="../../images/greedy9.png" alt="A single node is left producing AAABBBA" loading="lazy" /></p>
+</blockquote>
+
+<p>The above procedure can be computed <em>very</em> quickly. But there is a catch: it does not guarantee that it will give us truly the shortest superstring. It really depends on how we choose edges.</p>
+
+<hr />
+
+<h2 id="below-is-another-example-of-using-the-same-dataset-in-which-we-traverse-graph-in-a-slightly-different-way-">Below is another example of using the same dataset in which we traverse graph in a slightly different way: <br /></h2>
+
+<p>.pull-left[</p>
+<blockquote>
+  <p>We start the same way as before by choosing <font color="red">`AAA` &#8594; `AAB`</font>:</p>
+
+  <p><img src="../../images/greedy2.png" alt="THe graph resets to 5 nodes" loading="lazy" />
+]
+–
+.pull-right[
+Merge <code class="language-plaintext highlighter-rouge">AAA</code> and <code class="language-plaintext highlighter-rouge">AAB</code>:</p>
+
+  <p><img src="../../images/greedy3.png" alt="The same initial step" loading="lazy" />
+]</p>
+</blockquote>
+
+<hr />
+<p>.pull-left[</p>
+<blockquote>
+  <p>But now we pick a different edge <font color="red">`ABB` &#8594; `BBA`</font>:</p>
+
+  <p><img src="../../images/greedy4_alt.png" alt="Now a different edge scoring 2 is picked, ABB to BBA" loading="lazy" />
+]
+–
+.pull-right[
+Collapsing these nodes dramatically changes the graph:</p>
+
+  <p><img src="../../images/greedy5_alt.png" alt="these are collapsed producing a three node graph. AAAB and ABBA have a score of 2, BBB is only connected to AAAB with a score of 1." loading="lazy" />
+]</p>
+</blockquote>
+
+<hr />
+<p>.pull-left[</p>
+<blockquote>
+  <p>Now we pick <font color="red">`AAAB` &#8594; `ABBA`</font> as this is the edge with the highest weight:</p>
+
+  <p><img src="../../images/greedy6_alt.png" alt="The highest scoring edge is picked" loading="lazy" />
+]
+–
+.pull-right[
+Collapsing it produces two nodes that are not connected to each other:</p>
+
+  <p><img src="../../images/greedy7_alt.png" alt="AAABBA and BBB are left, unconnected." loading="lazy" />
+]
+—</p>
+</blockquote>
+
+<p>And the SCS of these two will be a concatenation <code class="language-plaintext highlighter-rouge">AAABBABBB</code> of length 9. Thus a greedy approach may produce different answers. However, it is a sufficient approximation as the superstring yielded this way will not be more than ~2.5 times longer than the true SCS (<a href="https://www.goodreads.com/book/show/145058.Algorithms_on_Strings_Trees_and_Sequences">Gusfield</a> 16.17.1).</p>
+
+<hr />
+
+<h1 id="the-third-law-of-assembly-repeats-are-evil">The Third Law of Assembly: Repeats are Evil!</h1>
+
+<p>Let’s again apply Greedy SCS to a different “genome”. Suppose we want to reconstruct the phrase:</p>
+
+<p><samp>
+a_long_long_long_time
+</samp></p>
+
+<p>from all 6-mers that overlap by at least 3 characters. The list of 6-mers is:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ng_lon      _long_      a_long      long_l      ong_ti      ong_lo      long_t
+g_long      g_time      ng_tim
+</code></pre></div></div>
+
+<hr />
+
+<p>An overlap graph will look like this:</p>
+
+<blockquote>
+  <p><img src="../../images/long.png" alt="A large, messy graph with various portions fo the above sentence." loading="lazy" /></p>
+
+  <p><small><strong>An overlap graph</strong> for with overlap length <code> &gt;= 3<code>.&lt;/small&gt;</code></code></small></p>
+</blockquote>
+
+<hr />
+
+<p>If we proceed with Greedy SCS we will follow the following trajectory through the graph:</p>
+
+<blockquote>
+  <p><img src="../../images/long_opt.png" alt="A greedy path is highlighted, all scoring 5." loading="lazy" /></p>
+</blockquote>
+
+<hr />
+
+<p>To make things even clearer let’s isolate the path:</p>
+
+<p><img src="../../images/long_opt_focus.png" alt="Irrelevant edges are removed." loading="lazy" /></p>
+
+<hr />
+
+<p>The total overlap here (the sum of edge weights) is 4+5+5+5+5+5+5+5+5=44 but it gives us <code class="language-plaintext highlighter-rouge">a_long_long_time</code> as the shortest superstring:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a_long
+  long_l
+   ong_lo
+    ng_lon
+     g_long
+      _long_
+       long_t
+        ong_ti
+         ng_tim
+          g_time
+----------------
+a_long_long_time
+</code></pre></div></div>
+
+<hr />
+
+<p>We are missing one instance of ‘long’ in this string. The following graph shows the path that would return the <em>correct</em> string:</p>
+
+<blockquote>
+  <p><img src="../../images/long_corr.png" alt="A less optimal path is shown that recovers the duplicated long" loading="lazy" /></p>
+</blockquote>
+
+<hr />
+
+<p>A path yielding the correct string with three repeats. The total overlap here is 5+3+3+5+4+4+5+5+5=39, which is <em>worse</em> than the previous path if our goal is to find the shortest superstring:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a_long
+ _long_
+    ng_lon
+       long_l
+        ong_lo
+          g_long
+            long_t
+             ong_ti
+              ng_tim
+               g_time
+---------------------
+a_long_long_long_time
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="are-we-really-looking-for-the-shortest-superstring">Are we really looking for the shortest superstring?</h2>
+
+<p>As we’ve seen above the shortest common superstring (SCS) is:</p>
+
+<ol>
+  <li>
+    <p><strong>Difficult to obtain</strong> as Greedy SCS algorithm does not guarantee finding it. So the answer we get may be longer than the real genome we are trying to assemble.</p>
+  </li>
+  <li>
+    <p><strong>May be shorter than we want</strong> because if the genome contains repeats that are longer than the reads we are using, Greedy SCS will collapse them and make assembly shorter that the genome we are trying to get.</p>
+  </li>
+</ol>
+
+<p>Let’s talk about an alternative way to represent the relationship between <em>k</em>-mers that may give us a more efficient algorithm.</p>
+
+<hr />
+
+<h1 id="de-bruijn-graphs">de Bruijn graphs</h1>
+
+<p><a href="https://en.wikipedia.org/wiki/Nicolaas_Govert_de_Bruijn">Nicolaas de Bruijn</a> had a purely theoretical interest of constructing <em>k</em>-universal strings for an arbitrary value of <em>k</em>. A <em>k</em>-universal string contains every possible <em>k</em>-mer only once:</p>
+
+<blockquote>
+  <p><a href="http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html"><img src="../../images/deBruijn_txt.png" alt="Screenshot of a box from a textbook with illegible text and a similar graph to the ABBA ones shown above." loading="lazy" /></a></p>
+
+  <p><strong>de Bruijn graph</strong>. From <a href="http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html">Compeau:2011</a></p>
+</blockquote>
+
+<hr />
+
+<p>This problem is equivalent to a string reconstruction problem we have been talking about above: finding a <em>k</em>-universal string is equivalent to finding a Hamiltonian path in an overlap graph constructed from all <em>k</em>-mers. Yet finding a Hamiltonian path in a really large graph (representing a real genome) is not a tractable problem as we have seen. Instead de Bruijn decided to represent <em>k</em>-mer composition in a graph using a slightly different logic. Again, suppose we have a “genome” <ode>TAATGCCATGGGATGTT&lt;/code&gt; split in a collection of 3-mers:</ode></p>
+
+<p><samp>
+TAA AAT ATG TGC GCC CCA CAT ATG TGG GGG GGA GAT ATG TGT GTT
+</samp></p>
+
+<hr />
+
+<p>We will assign 3-mers to <em>edges</em> instead of <em>nodes</em>:</p>
+
+<p><img src="../../images/4.12.png" alt="A long string of 2-mer nodes linked together with 3-mers on edges." loading="lazy" /></p>
+
+<p><strong><em>k</em>-mers as edges</strong>. Edges represented by 3-mers connect nodes representing the overlaps. (Fig. 4.12 from <a href="http://bioinformaticsalgorithms.com/">CP</a>)</p>
+
+<p>This graph can be simplified by gluing identical nodes together:</p>
+
+<p><img src="../../images/4.13a.png" alt="The same graph" loading="lazy" /></p>
+
+<p><img src="../../images/4.13b.png" alt="Re-organised to collapse identical nodes, first the AT node is collapsed from three into one." loading="lazy" /></p>
+
+<hr />
+
+<p>Here the complexity of the graph is reduced by first gluing redundant <font color="red">`AT`</font> nodes</p>
+
+<p><img src="../../images/4.13c.png" alt="Now the 3 TG nodes are highlighted" loading="lazy" /></p>
+
+<p><img src="../../images/4.13d.png" alt="and collapsed into a single one, sharing the original's connections." loading="lazy" /></p>
+
+<hr />
+
+<p>Next, <font color="blue">`TG`</font> nodes are merged</p>
+
+<p><img src="../../images/4.13e.png" alt="2 GG nodes are highlighted" loading="lazy" /></p>
+
+<p><img src="../../images/4.13f.png" alt="and merged, including a self-link." loading="lazy" /></p>
+
+<hr />
+
+<p>And, finally the two <font color="green">`GG`</font> nodes are resolved. (Fig. 4.13 from <a href="http://bioinformaticsalgorithms.com/">CP</a>)</p>
+
+<p>Because we now represent <em>k</em>-mers as edges (rather than nodes), our problem has morphed into finding a path that visits every <em>edge</em> once, or an <a href="https://en.wikipedia.org/wiki/Eulerian_path">Eulerian Path</a>:</p>
+
+<p><img src="../../images/4.15.png" alt="The final graph, same as previous image but now edges are numbered as well." loading="lazy" /></p>
+
+<p><strong>Eulerian paths for the 15 3-mers</strong>. Numbering of edges provides a way to reconstruct the original “genome”. (Fig. 4.15 from <a href="http://bioinformaticsalgorithms.com/">CP</a>)</p>
+
+<hr />
+
+<h2 id="eulers-theorem">Euler’s Theorem</h2>
+
+<p>Some definitions:</p>
+
+<ul>
+  <li><strong>Balanced node</strong> - a node where the number of incoming edges is equal to the number of outgoing edges</li>
+  <li><strong>Balanced graph</strong> - a graph where all nodes are balanced</li>
+  <li><strong>Strongly connected graph</strong> - any node can be reached from any other node</li>
+</ul>
+
+<p><strong>Euler’s Theorem</strong>:</p>
+
+<blockquote>
+  <p>Every balanced, strongly connected directed graph is Eulerian.</p>
+</blockquote>
+
+<hr />
+
+<p>Let’s apply Euler’s Theorem to a classical problem: The bridges of Königsberg problem. Here the question is: <em>Can you walk through all of Königsberg traversing every bridge exactly one time?</em> In other words: <em>Is there a Eulerian path through the city of Königsberg?</em></p>
+
+<blockquote>
+  <p><img src="../../images/koninsberg.png" alt="Old map of Königsberg with dots on land portions and links between them. This is reduced into the same coloured nodes and bridges representing edges." loading="lazy" /></p>
+
+  <p><strong>Königsberg and Euler’s Theorem</strong>. (a) A map of old Königsberg, in which each area of the city is labeled with a different color point. (b) The Königsberg Bridge graph, formed by representing each of four land areas as a node and each of the city’s seven bridges as an edge. (From <a href="http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html#close">Campeau:2011</a>)</p>
+</blockquote>
+
+<p>By looking at this graph we can see that it is <em>unbalanced</em>. If one arrives to, say, the <font color="orange">orange</font> node from the <font color="blue">blue</font> node there are two ways to get out. Thus there is no way to see all of the city and traverse every bridge once!</p>
+
+<hr />
+
+<h2 id="repeats-are-still-a-challenge">Repeats are still a challenge</h2>
+
+<p>Let’s look at the de Bruijn graph from above again. But this time let’s drop edge numbering and pretend that the genome is now really known to us (as is usually the case in real life):</p>
+
+<blockquote>
+  <p><img src="../../images/dg1.png" alt="Similar graph as above but now edges are only labelled by sequences, no more numbers." loading="lazy" /></p>
+
+  <p><strong>Eulerian paths for the 15 3-mers</strong>.</p>
+</blockquote>
+
+<hr />
+
+<p>In the original sequence <code class="language-plaintext highlighter-rouge">TAATGCCATGGGATGTT</code> <em>k</em>-mer <font color="red">`AT`</font> is present 3 times and <em>k</em>-mer <font color="blue">`TG`</font> is found twice. Thus <em>multiple</em> Eulerian walks are now possible like this:</p>
+
+<blockquote>
+  <p><img src="../../images/dg2.png" alt="Following a direct path from the one node without incoming connections, to TG node, choosing one of the three outgoing connections we go 'up'" loading="lazy" /></p>
+
+  <p><strong>Possible path #1</strong>. Here after we reach <font color="blue">`TG`</font> node we turn <strong>up</strong>.</p>
+</blockquote>
+
+<hr />
+
+<p>The above path spells out:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TAA
+ AAT
+  ATG
+   TGC
+    GCC
+     CCA
+      CAT
+       ATG
+        TGG
+         GGG
+          GGA
+           GAT
+            ATG
+             TGT
+              GTT
+-----------------
+TAATGCCATGGGATGTT
+</code></pre></div></div>
+
+<hr />
+
+<p>Yet there is an alternative:</p>
+
+<blockquote>
+  <p><img src="../../images/dg3.png" alt="The same as above but this time going down to follow a different path" loading="lazy" /></p>
+
+  <p><strong>Possible path #2</strong>. Here after we reach <font color="blue">`TG`</font> node we turn <strong>dow</strong>.</p>
+</blockquote>
+
+<hr />
+
+<p>Which spells:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TAA
+ AAT
+  ATG
+   TGG
+    GGA
+     GAT
+      ATG
+       TGC
+        GCC
+         CCA
+          CAT
+           ATG
+            TGT
+             GTT
+----------------
+TAATGGATGCCATGTT
+</code></pre></div></div>
+
+<p>Note how different these are:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TAATGCCATGGGATGTT
+
+TAATGGATGCCATGTTT
+</code></pre></div></div>
+
+<p>and only one of them is correct. Repeats are evil!</p>
+
+<hr />
+
+<h2 id="k-mer-size-affects-repeat-resolution"><em>k</em>-mer size affects repeat resolution</h2>
+
+<p>In the above example we have used <em>k</em>-mer size of 3. But what if we try 4 or 5? Below are De Bruijn graphs for different values of <em>k</em>:</p>
+
+<h4 id="k--3"><em>k</em> = 3</h4>
+
+<blockquote>
+  <p><img src="../../images/k2.png" alt="The same graph as above, now in a different orientation. There are many connections" loading="lazy" /></p>
+</blockquote>
+
+<hr />
+
+<blockquote>
+  <p>This is our original graph</p>
+</blockquote>
+
+<h4 id="k--4"><em>k</em> = 4</h4>
+
+<blockquote>
+  <p><img src="../../images/k3.png" alt="There are now significantly fewer connections." loading="lazy" /></p>
+
+  <p>Here complexity is decreasing, but we still have the problem with having <code class="language-plaintext highlighter-rouge">ATG</code> twice.</p>
+</blockquote>
+
+<hr />
+
+<p>.pull-left[</p>
+<h4 id="k--5"><em>k</em> = 5</h4>
+<p>In this case there is only one path. This because our <em>k</em> is larger that the repeat size, so we can resolve it accurately.</p>
+
+<p>This is why technologies producing long sequencing reads stimulate so much enthusiasm - they will allow to resolve and produce accurate assembly of large genomes.
+]
+.pull-right[
+<img src="../../images/k4.png" alt="Graph with only a single route through the sequence." loading="lazy" />
+]</p>
+
+<hr />
+
+<h1 id="assembly-in-real-life">Assembly in real life</h1>
+
+<p>In this topic we’ve learned about two ways of representing the relationship between reads derived from a genome we are trying to assemble:</p>
+
+<ol>
+  <li><strong>Overlap graphs</strong> - nodes are reads, edges are overlaps between reads.</li>
+  <li><strong>De Bruijn graphs</strong> - nodes are overlaps, edges are reads.</li>
+</ol>
+
+<blockquote>
+  <p><img src="../../images/4.7.png" alt="Overlap: graph from before, nodes are 3-mers, unlabelled connections." loading="lazy" /></p>
+</blockquote>
+
+<hr />
+
+<p><strong>A</strong>.</p>
+
+<p><img src="../../images/4.13f.png" alt="De Bruijn: The 2-mer graph with 3-mer connections again." loading="lazy" /></p>
+
+<hr />
+
+<p><strong>B.</strong>
+An overlap (A) and De Bruijn (B) graphs for the same string.</p>
+
+<p>Whatever the representation will be it will be messy:</p>
+
+<p><img src="../../images/t12_mess.png" alt="A hypothetical real life graph with a huge number of nodes snaking all over the screen, and many many isolaed single and pairs of nodes unconnected to anything." loading="lazy" /></p>
+
+<p>A fragment of a very large De Bruijn graph (Image from <a href="https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf">BL</a>).</p>
+
+<hr />
+
+<p>There are multiple reasons for such messiness:</p>
+
+<p><strong>Sequence errors</strong></p>
+
+<p>Sequencing machines do not give perfect data. This results in spurious deviations on the graph. Some sequencing technologies such as Oxford Nanopore have very high error rate of ~15%.</p>
+
+<blockquote>
+  <p><img src="../../images/t12_errors.png" alt="An inset from the above. A red box highlights pairs of 2 and 3 node groups." loading="lazy" /></p>
+
+  <p>Graph components resulting from sequencing errors (Image from <a href="https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf">BL</a>).</p>
+</blockquote>
+
+<hr />
+
+<p><strong>Ploidy</strong></p>
+
+<p>As we discussed earlier humans are diploid and there are multiple differences between maternal and paternal genomes. This creates “bubbles” on assembly graphs:</p>
+
+<blockquote>
+  <p><img src="../../images/t12_bubble.png" alt="A bubble in the graph. there are a series of nodes which have 5-8 connections pointing from one to the next. Halfway through there is a single base deviation and the 5-mer nodes highlight this single base change. The change results in a split into two strands which shortly reconnect. One strand is labelled Maternal, the other Paternal." loading="lazy" /></p>
+
+  <p>Bubbles due to a heterozygous site  (Image from <a href="https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf">BL</a>).</p>
+</blockquote>
+
+<hr />
+
+<p><strong>Repeats</strong></p>
+
+<p>As we’ve seen the third law of assembly is unbeatable. As a result some regions of the genome simply cannot be resolved and are reported in segments called <em>contigs</em>:</p>
+
+<blockquote>
+  <p>&lt;img src=”../../images/t12_contigs.png” alt=”A sentence is represented “to everything turn”, “turn” (a repeat) and “turn there is a season”. The repeat makes the graph hard to solve into a single path.”  loading=”lazy”&gt;</p>
+
+  <p>The following “genomic” segment will be reported in three pieces corresponding to regions flanking the repeat and repeat itself (Image from <a href="https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf">BL</a>).</p>
+</blockquote>
+
+<hr />
+
+<p>.enlarge120[</p>
+
+<h1 id="how-to-perform-assembly-with-galaxy"><strong>How to perform Assembly with Galaxy?</strong></h1>
+
+<p>]</p>
+
+<hr />
+
+<p>See the tutorial accompanied by these slides!</p>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>We learned about the strategies used by assemblers for hybrid assemblies</li>
+
+<li>We performed an hybrid assembly of a bacterial genome and its annotation</li>
+
+<li>Unicycler is a pipeline bases on Spades and Pilon dedicated to hybrid assembly of Small genomes</li>
+
+<li>Combination of short and long reads helped us produce an almost perfect assembly</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

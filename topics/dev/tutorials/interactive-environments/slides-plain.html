@@ -1,0 +1,896 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Interactive Environments</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta property="og:title" content="Galaxy Training: Galaxy Interactive Environments" />
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/dev/faqs/" title="Check our FAQs for the Development in Galaxy topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/interactive-environments/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/dev/tutorials/interactive-environments/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/interactive-environments/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/interactive-environments/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/interactive-environments/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/interactive-environments/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/interactive-environments/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fdev%2Ftutorials%2Finteractive-environments%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/dev/tutorials/interactive-environments/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/dev/tutorials/interactive-environments/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/dev/tutorials/interactive-environments/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/dev/tutorials/interactive-environments/slides.html">View markdown source on GitHub</a>
+	<h1>Galaxy Interactive Environments</h1>
+		<h2>Contributors</h2>
+		Saskia Hiltemann, Björn Grüning, Helena Rasche
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What are Galaxy Interactive Environments (GIEs)?</p>
+</li>
+		
+		<li><p>How to enable GIEs in Galaxy?</p>
+</li>
+		
+		<li><p>How to develop your own GIE?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Implement a Hello-World Galaxy Interactive Environment</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Requirements</h2>
+		<ul>
+		
+		
+    <li>
+    
+        Docker basics
+    
+    </li>
+
+		</ul>
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 10, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="interactive-environments">Interactive Environments</h1>
+
+<hr />
+
+<h3 id="why-ies">Why IEs?</h3>
+
+<ul>
+  <li>Embedded access to third-party application inside of Galaxy</li>
+  <li>Interactively analyze data, access analysis products within Galaxy</li>
+</ul>
+
+<p><img src="../../images/vis_IE_ipython0.png" alt="Ipython is shown in the center pane of galaxy" loading="lazy" /></p>
+
+<ul>
+  <li>Bring external analysis platform to the data instead of vice-versa
+    <ul>
+      <li>no need to download/re-upload your data</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="who-should-use-ies">Who should use IEs?</h3>
+
+<ul>
+  <li>Everyone!</li>
+  <li>Programming Environments for Bioinformaticians and Data Scientists
+    <ul>
+      <li>Jupyter</li>
+      <li>Rstudio</li>
+    </ul>
+  </li>
+  <li>Visualization IEs are great for life scientists
+    <ul>
+      <li>IOBIO (bam/vcf visualizations)</li>
+      <li>Phinch (metagenomics visualizations)</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="types-of-visualizations-in-galaxy">Types of visualizations in Galaxy</h2>
+
+<p>GIE for visualization? Check that it is the right choice for your project</p>
+
+<ul>
+  <li><strong>Trackster</strong> - built-in genome browser</li>
+  <li><strong>Display applications</strong>
+    <ul>
+      <li>UCSC Genome Browser</li>
+      <li>IGV</li>
+    </ul>
+  </li>
+  <li><strong>Galaxy tools</strong>
+    <ul>
+      <li>JBrowse</li>
+      <li>Krona</li>
+    </ul>
+  </li>
+  <li><strong>Visualization plugins</strong>
+    <ul>
+      <li>Charts</li>
+      <li>Generic</li>
+    </ul>
+  </li>
+  <li><strong>Interactive Environments</strong>
+    <ul>
+      <li>Jupyter/Rstudio</li>
+      <li>IOBIO (bam/vcf visualizations)</li>
+      <li>Phinch (metagenomics visualizations)</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="which-should-i-use">Which should I use?</h2>
+
+<p><img src="../../images/which_viz_flowchart.png" alt="Flowchart. Only available on an external website? If yes use a display application. Does it need to be served (e.g. python), if yes use an interactive tool. Is it computationally intensive, then it needs to be a regular tool. Is it written in javascript? Then it shold be a generic plugin. If it passes all these tests it can be a charts plugin." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="how-to-launch-an-ie">How to launch an IE?</h3>
+
+<ul>
+  <li>Can be bound to specific datatypes
+    <ul>
+      <li>Available under the visualizations button on the dataset</li>
+    </ul>
+  </li>
+</ul>
+
+<p>.image-25[<img src="../../images/vis_IE_button.png" alt="visualisation button in galaxy is clicked on a dataset. Jupyter and Rstudio appear below charts." loading="lazy" />]</p>
+
+<ul>
+  <li>Or more general-purpose applications (Jupyter/Rstudio)</li>
+  <li>IE launcher</li>
+</ul>
+
+<h2 id="image-25">.image-25[<img src="../../images/vis_IE_launcher_menu.png" alt="A drop down menu from the masthead of galaxy shows interactive environments as well." loading="lazy" />]</h2>
+
+<h3 id="ie-launcher">IE Launcher</h3>
+
+<ul>
+  <li>Choose between different available docker images</li>
+  <li>Attach one or more datasets from history</li>
+</ul>
+
+<p>.image-75[<img src="../../images/vis_IE_launcher.png" alt="An IE launcher is shown with select boxes for the GIE, image, and datasets. Launch is shown below." loading="lazy" />]</p>
+
+<hr />
+
+<h3 id="how-does-it-work">How does it work?</h3>
+
+<ul>
+  <li>Docker Containers are launched on-demand by users..</li>
+  <li>..and killed automatically when users stop using them</li>
+</ul>
+
+<p><img src="../../images/vis_IE_infra.png" alt="schematic of request flow. A users requests an IE session with galaxy which connects to a docker host, launches the IE, and communicates this to a NodeJS proxy living next to galaxy. The user opens the connection through the proxy to access the container." loading="lazy" /></p>
+
+<p>.footnote[ Admin Docs: https://docs.galaxyproject.org/en/master/admin/interactive_environments.html ]</p>
+
+<hr />
+
+<h3 id="jupyter">Jupyter</h3>
+
+<ul>
+  <li>General purpose/ multi-dataset</li>
+  <li>Provides special functions to interact with the Galaxy history (get/put datasets)</li>
+  <li>Ability to save and load notebooks</li>
+</ul>
+
+<p>.image-75[<img src="../../images/vis_IE_ipython1.png" alt="jupyter seen in the main panel of galaxy" loading="lazy" />]</p>
+
+<hr />
+
+<h3 id="jupyter-1">Jupyter</h3>
+
+<p><img src="../../images/vis_IE_ipython2.png" alt="the above screenshot but they have scrolled to show embedded plots computed in jupyter in galaxy" loading="lazy" /></p>
+
+<hr />
+
+<h3 id="jupyter-2">Jupyter</h3>
+
+<p><img src="../../images/vis_IE_ipython3.png" alt="Another screenshot of jupyter in galaxy, this time fetching datasets from galaxy and running samtools." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="rstudio">Rstudio</h3>
+
+<ul>
+  <li>General purpose/ multi-dataset</li>
+  <li>Provides special functions to interact with the Galaxy history</li>
+  <li>Ability to save and load workbook and R history object</li>
+</ul>
+
+<p><img src="../../images/vis_IE_rstudio.png" alt="default rstudio in galaxy, multiple panes are visible for computing, values, and files." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="iobio">IOBIO</h3>
+
+<ul>
+  <li>Visualizes single dataset</li>
+  <li>Only available for datasets of specific formats</li>
+</ul>
+
+<p><img src="../../images/vis_IE_iobio.png" alt="IOBIO are dynamic javascript-y visualisations with lots of constantly updating graphs that are recalculated on the fly. They are shown in two scratchbooks in Galaxy" loading="lazy" /></p>
+
+<hr />
+
+<h3 id="iobio-1">IOBIO</h3>
+
+<p><img src="../../images/vis_IE_iobio2.png" alt="a close up of iobio with several graphs and illegible text." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="phinch">Phinch</h3>
+
+<p><img src="../../images/vis_IE_phinch.png" alt="Phinch is shown inside galaxy, another visually intensive graphing application for metagenomics data." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="admin">Admin</h3>
+
+<ul>
+  <li>Prerequisites: NodeJs (npm) and Docker; Galaxy user must be able to talk to the docker daemon</li>
+  <li>Enable IEs in <code class="language-plaintext highlighter-rouge">galaxy.yml</code>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interactive_environment_plugins_directory <span class="o">=</span> config/plugins/interactive_environments
+</code></pre></div>    </div>
+  </li>
+  <li>Install node proxy
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY</span>/lib/galaxy/web/proxy/js/
+<span class="nv">$ </span>npm <span class="nb">install</span> <span class="nb">.</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Can configure GIEs to run on another host</li>
+</ul>
+
+<p>.footnote[ Advanced configurations: https://docs.galaxyproject.org/en/master/admin/interactive_environments.html]</p>
+
+<hr />
+
+<h3 id="development">Development</h3>
+
+<ul>
+  <li>Not hard to build!</li>
+  <li>All the magic is in:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$GALAXY</span>/config/plugins/interactive_environments/<span class="nv">$ie_name</span>/
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>File</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Visualization Plugin Configuration</td>
+      <td>../config/${ie_name}.xml</td>
+    </tr>
+    <tr>
+      <td>IE specific Configuration</td>
+      <td>../config/${ie_name}.ini</td>
+    </tr>
+    <tr>
+      <td>Mako Template</td>
+      <td>../templates/${ie_name}.mako</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="development-1">Development</h3>
+
+<p><img src="../../images/vis_IE_ipython_components.png" alt="schematic of GIE with a box on the left labelled ipython.mako being invoked by a launch ipython notebook call. This has boxes for running a docker container and then proxying authentication. These point to a docker container with a config.yaml containing the history id, api key and password, the ipython galaxy notebook, and the ipython webservice which loops while the connection is active. This proxies the connection and points to a cartoon of ipython in galaxy's center panel." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="hello-world-example">Hello World Example</h3>
+
+<ul>
+  <li>All files in this example available from
+https://github.com/hexylena/hello-world-interactive-environment/</li>
+  <li>Create a GIE that shows the directory listing of <code class="language-plaintext highlighter-rouge">import</code> folder (datasets loaded into GIE by user)</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>tree <span class="nv">$GALAXY_ROOT</span>/config/plugins/interactive_environments/helloworld/
+config/plugins/interactive_environments/helloworld/
+├── config
+│   ├── helloworld.ini
+│   ├── helloworld.ini.sample
+│   └── helloworld.xml
+├── static
+│   └── js
+│       └── helloworld.js
+└── templates
+    └── helloworld.mako
+</code></pre></div></div>
+
+<hr />
+
+<p>Create GIE plugin XML file <code class="language-plaintext highlighter-rouge">config/helloworld.xml</code></p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE interactive_environment SYSTEM "../../interactive_environments.dtd"&gt;</span>
+<span class="c">&lt;!-- This is the name which will show up in the User's Browser --&gt;</span>
+<span class="nt">&lt;interactive_environment</span> <span class="na">name=</span><span class="s">"HelloWorld"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;data_sources&gt;</span>
+    <span class="nt">&lt;data_source&gt;</span>
+      <span class="nt">&lt;model_class&gt;</span>HistoryDatasetAssociation<span class="nt">&lt;/model_class&gt;</span>
+
+      <span class="c">&lt;!-- filter which types of datasets are appropriate for this GIE --&gt;</span>
+      <span class="nt">&lt;test</span> <span class="na">type=</span><span class="s">"isinstance"</span> <span class="na">test_attr=</span><span class="s">"datatype"</span>
+            <span class="na">result_type=</span><span class="s">"datatype"</span><span class="nt">&gt;</span>tabular.Tabular<span class="nt">&lt;/test&gt;</span>
+      <span class="nt">&lt;test</span> <span class="na">type=</span><span class="s">"isinstance"</span> <span class="na">test_attr=</span><span class="s">"datatype"</span>
+            <span class="na">result_type=</span><span class="s">"datatype"</span><span class="nt">&gt;</span>data.Text<span class="nt">&lt;/test&gt;</span>
+      <span class="nt">&lt;to_param</span> <span class="na">param_attr=</span><span class="s">"id"</span><span class="nt">&gt;</span>dataset_id<span class="nt">&lt;/to_param&gt;</span>
+    <span class="nt">&lt;/data_source&gt;</span>
+  <span class="nt">&lt;/data_sources&gt;</span>
+  <span class="nt">&lt;params&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">type=</span><span class="s">"dataset"</span> <span class="na">var_name_in_template=</span><span class="s">"hda"</span> <span class="na">required=</span><span class="s">"true"</span><span class="nt">&gt;</span>dataset_id<span class="nt">&lt;/param&gt;</span>
+  <span class="nt">&lt;/params&gt;</span>
+  <span class="c">&lt;!-- Be sure that your entrypoint name is correct! --&gt;</span>
+  <span class="nt">&lt;entry_point</span> <span class="na">entry_point_type=</span><span class="s">"mako"</span><span class="nt">&gt;</span>helloworld.mako<span class="nt">&lt;/entry_point&gt;</span>
+<span class="nt">&lt;/interactive_environment&gt;</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>Set up <code class="language-plaintext highlighter-rouge">.ini</code> file, which controls docker interaction <code class="language-plaintext highlighter-rouge">config/helloworld.ini.sample</code></p>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[main]</span>
+<span class="c"># Unused
+</span>
+<span class="nn">[docker]</span>
+<span class="c"># Command to execute docker. For example `sudo docker` or `docker-lxc`.
+#command = docker {docker_args}
+</span>
+<span class="c"># The docker image name that should be started.
+</span><span class="py">image</span> <span class="p">=</span> <span class="s">hello-ie</span>
+
+<span class="c"># Additional arguments that are passed to the `docker run` command.
+#command_inject = --sig-proxy=true -e DEBUG=false
+</span>
+<span class="c"># URL to access the Galaxy API with from the spawn Docker container, if empty
+# this falls back to galaxy.yml's galaxy_infrastructure_url and finally to the
+# Docker host of the spawned container if that is also not set.
+#galaxy_url =
+</span>
+<span class="c"># The Docker hostname. It can be useful to run the Docker daemon on a different
+# host than Galaxy.
+#docker_hostname = localhost
+</span>
+<span class="nn">[..]</span>
+</code></pre></div></div>
+
+<hr />
+
+<ul>
+  <li>Create mako template <code class="language-plaintext highlighter-rouge">templates/helloworld.mako</code>
+    <ul>
+      <li>Loads configuration from <code class="language-plaintext highlighter-rouge">ini</code> file</li>
+      <li>launches docker container,</li>
+      <li>builds a URL to the correct endpoint through Galaxy NodeJS proxy</li>
+      <li>set environment variable <code class="language-plaintext highlighter-rouge">CUSTOM</code> to be passed to container</li>
+      <li>attach dataset selected by user (<code class="language-plaintext highlighter-rouge">hda</code>)</li>
+    </ul>
+  </li>
+</ul>
+
+<pre><code class="language-mako">&lt;%namespace name="ie" file="ie.mako" /&gt;
+&lt;%
+# Sets ID and sets up a lot of other variables
+ie_request.load_deploy_config()
+
+# Define a volume that will be mounted into the container.
+# This is a useful way to provide access to large files in the container,
+# if the user knows ahead of time that they will need it.
+user_file = ie_request.volume(
+    hda.file_name, '/import/file.dat', how='ro')
+
+# Launch the IE. This builds and runs the docker command in the background.
+ie_request.launch(
+    volumes=[user_file],
+    env_override={
+        'custom': '42'
+    }
+)
+[..]
+</code></pre>
+
+<hr />
+
+<p>(continued)</p>
+
+<pre><code class="language-mako">[..]
+# Only once the container is launched can we template our URLs. The ie_request
+# doesn't have all of the information needed until the container is running.
+url = ie_request.url_template('${PROXY_URL}/helloworld/')
+%&gt;
+
+&lt;html&gt;
+&lt;head&gt;
+${ ie.load_default_js() }
+&lt;/head&gt;
+&lt;body&gt;
+&lt;script type="text/javascript"&gt;
+${ ie.default_javascript_variables() }
+var url = '${ url }';
+${ ie.plugin_require_config() }
+requirejs(['interactive_environments', 'plugin/helloworld'], function(){
+    load_notebook(url);
+});
+&lt;/script&gt;
+&lt;div id="main" width="100%" height="100%"&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<hr />
+<p>Lastly we must write the <code class="language-plaintext highlighter-rouge">load_notebook</code> function, <code class="language-plaintext highlighter-rouge">static/js/helloworld.js</code></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">load_notebook</span><span class="p">(</span><span class="nx">url</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">(</span> <span class="nb">document</span> <span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">test_ie_availability</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+            <span class="nx">append_notebook</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="hello-world-example-1">Hello World Example</h3>
+
+<ul>
+  <li>The only thing missing now is the GIE (Docker) container itself</li>
+  <li>Container typically consists of:
+    <ul>
+      <li>Dockerfile</li>
+      <li>Proxy configuration (e.g. nginx)</li>
+      <li>Custom startup script/entrypoint</li>
+      <li>Script to monitor traffic and kill unused containers</li>
+      <li>The actual application for the users (here: simple python process which serves
+directory contents of <code class="language-plaintext highlighter-rouge">/import</code> folder of container)</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ubuntu:14.04</span>
+<span class="c"># These environment variables are passed from Galaxy to the container</span>
+<span class="c"># and help you enable connectivity to Galaxy from within the container.</span>
+<span class="c"># This means your user can import/export data from/to Galaxy.</span>
+<span class="k">ENV</span><span class="s"> DEBIAN_FRONTEND=noninteractive \</span>
+    API_KEY=none \
+    DEBUG=false \
+    PROXY_PREFIX=none \
+    GALAXY_URL=none \
+    GALAXY_WEB_PORT=10000 \
+    HISTORY_ID=none \
+    REMOTE_HOST=none
+
+<span class="k">RUN </span>apt-get <span class="nt">-qq</span> update <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    apt-get <span class="nb">install</span> <span class="nt">--no-install-recommends</span> <span class="nt">-y</span> <span class="se">\
+</span>    wget procps nginx python python-pip net-tools nginx
+
+<span class="c"># Our very important scripts. Make sure you've run `chmod +x startup.sh</span>
+<span class="c"># monitor_traffic.sh` outside of the container!</span>
+<span class="k">ADD</span><span class="s"> ./startup.sh /startup.sh</span>
+<span class="k">ADD</span><span class="s"> ./monitor_traffic.sh /monitor_traffic.sh</span>
+
+<span class="c"># /import will be the universal mount-point for IPython</span>
+<span class="c"># The Galaxy instance can copy in data that needs to be present to the</span>
+<span class="c"># container</span>
+<span class="k">RUN </span><span class="nb">mkdir</span> /import
+
+[..]
+</code></pre></div></div>
+
+<hr />
+
+<p>(continued)</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[..]
+# Nginx configuration
+<span class="k">COPY</span><span class="s"> ./proxy.conf /proxy.conf</span>
+
+<span class="k">VOLUME</span><span class="s"> ["/import"]</span>
+<span class="k">WORKDIR</span><span class="s"> /import/</span>
+
+<span class="c"># EXTREMELY IMPORTANT! You must expose a SINGLE port on your container.</span>
+<span class="k">EXPOSE</span><span class="s"> 80</span>
+<span class="k">CMD</span><span class="s"> /startup.sh</span>
+</code></pre></div></div>
+
+<hr />
+
+<ul>
+  <li>Proxy configuration (nginx)
+    <ul>
+      <li>reverse proxy our directory listing process running on port 8000</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">server</span> <span class="p">{</span>
+    <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+    <span class="kn">server_name</span> <span class="s">localhost</span><span class="p">;</span>
+    <span class="kn">access_log</span> <span class="n">/var/log/nginx/localhost.access.log</span><span class="p">;</span>
+
+    <span class="c1"># Note the trailing slash used everywhere!</span>
+    <span class="kn">location</span> <span class="s">PROXY_PREFIX/helloworld/</span> <span class="p">{</span>
+        <span class="kn">proxy_buffering</span> <span class="no">off</span><span class="p">;</span>
+        <span class="kn">proxy_pass</span>         <span class="s">http://127.0.0.1:8000/</span><span class="p">;</span>
+        <span class="kn">proxy_redirect</span>     <span class="s">http://127.0.0.1:8000/</span> <span class="s">PROXY_PREFIX/helloworld/</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<ul>
+  <li>Create the <code class="language-plaintext highlighter-rouge">startup.sh</code> file which starts our directory listing service</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c"># First, replace the PROXY_PREFIX value in /proxy.conf with the value from</span>
+<span class="c"># the environment variable.</span>
+<span class="nb">sed</span> <span class="nt">-i</span> <span class="s2">"s|PROXY_PREFIX|</span><span class="k">${</span><span class="nv">PROXY_PREFIX</span><span class="k">}</span><span class="s2">|"</span> /proxy.conf<span class="p">;</span>
+<span class="c"># Then copy into the default location for ubuntu+nginx</span>
+<span class="nb">cp</span> /proxy.conf /etc/nginx/sites-enabled/default<span class="p">;</span>
+
+<span class="c"># Here you would normally start whatever service you want to start. In our</span>
+<span class="c"># example we start a simple directory listing service on port 8000</span>
+<span class="nb">cd</span> /import/ <span class="o">&amp;&amp;</span> python <span class="nt">-mSimpleHTTPServer</span> &amp;
+
+<span class="c"># Launch traffic monitor which will automatically kill the container if</span>
+<span class="c"># traffic stops</span>
+/monitor_traffic.sh &amp;
+<span class="c"># And finally launch nginx in foreground mode. This will make debugging</span>
+<span class="c"># easier as logs will be available from `docker logs ...`</span>
+nginx <span class="nt">-g</span> <span class="s1">'daemon off;'</span>
+</code></pre></div></div>
+
+<hr />
+
+<ul>
+  <li>Lastly, the script to monitor traffic and shut down if user is no longer connected, <code class="language-plaintext highlighter-rouge">monitor_traffic.sh</code></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="k">while </span><span class="nb">true</span><span class="p">;</span> <span class="k">do
+    </span><span class="nb">sleep </span>60
+    <span class="k">if</span> <span class="o">[</span> <span class="sb">`</span>netstat <span class="nt">-t</span> | <span class="nb">grep</span> <span class="nt">-v</span> CLOSE_WAIT | <span class="nb">grep</span> <span class="s1">':80'</span> | <span class="nb">wc</span> <span class="nt">-l</span><span class="sb">`</span> <span class="nt">-lt</span> 3 <span class="o">]</span>
+    <span class="k">then
+        </span>pkill nginx
+    <span class="k">fi
+done</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="hello-world-example-2">Hello World Example</h3>
+
+<ul>
+  <li>We are now ready to build our container, and try out our new GIE!</li>
+  <li>If the container is hosted on a service like Dockerhub or quay.io, it will be automatically
+fetched on first run.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd </span>hello-ie
+<span class="nv">$ </span>docker build <span class="nt">-t</span> hello-ie <span class="nb">.</span>
+</code></pre></div></div>
+
+<p><img src="../../images/vis_IE_helloworld.png" alt="A directory listing is shown in the center panel." loading="lazy" /></p>
+
+<p>.footnote[Try it yourself: https://github.com/hexylena/hello-world-interactive-environment]</p>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Interactive Environments offer access to third-party applications within Galaxy</li>
+
+<li>Interactive Environments run in a docker images for sandboxing and easy dependency management</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

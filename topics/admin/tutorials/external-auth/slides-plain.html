@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>External Authentication</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: External Authentication" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/external-auth/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/external-auth/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/external-auth/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/external-auth/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/external-auth/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/external-auth/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/external-auth/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fexternal-auth%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/admin/tutorials/external-auth/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/admin/tutorials/external-auth/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/admin/tutorials/external-auth/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/admin/tutorials/external-auth/slides.html">View markdown source on GitHub</a>
+	<h1>External Authentication</h1>
+		<h2>Contributors</h2>
+		Martin Čech, Nicola Soranzo
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>How can I connect Galaxy with CAS, SAML, etc.</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>be familiar with configuring Galaxy to use an upstream (proxy) authentication provider</p>
+</li>
+		
+		<li><p>be able to log in to your Galaxy server with a file-configured user.</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 6, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="auth-mechanisms-supported">Auth Mechanisms supported</h1>
+
+<ul>
+  <li>Galaxy-specific account database</li>
+  <li>HTTP remote user provided by a reverse proxy server</li>
+  <li>Galaxy authentication framework (LDAP/AD, PAM)</li>
+</ul>
+
+<hr />
+<h1 id="galaxy-account">Galaxy account</h1>
+
+<ul>
+  <li>Stored in the Galaxy DB
+    <ul>
+      <li>Unique in both email and username</li>
+      <li>Passwords hashed and salted, using PBKDF2 (default)</li>
+      <li>Table <code class="language-plaintext highlighter-rouge">galaxy_user</code></li>
+      <li>Abstracted as <code class="language-plaintext highlighter-rouge">User</code> in <code class="language-plaintext highlighter-rouge">lib/galaxy/model/mapping.py</code></li>
+    </ul>
+  </li>
+  <li>Session cookie expires after 3 months
+    <ul>
+      <li>Configurable with <code class="language-plaintext highlighter-rouge">session_duration</code></li>
+    </ul>
+  </li>
+  <li>Password reset uses ‘visit-link’ mechanism</li>
+  <li><code class="language-plaintext highlighter-rouge">require_login</code> can be set to disable anonymous access</li>
+</ul>
+
+<hr />
+<h1 id="authentication-tweaks">Authentication tweaks</h1>
+
+<p>In <code class="language-plaintext highlighter-rouge">galaxy.yml</code>:</p>
+<ul>
+  <li>Activation
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">user_activation_on</code> will prevent accounts from running jobs until they visit activation link</li>
+      <li><code class="language-plaintext highlighter-rouge">activation_grace_period</code> gives users some time before their jobs are ignored</li>
+      <li><code class="language-plaintext highlighter-rouge">inactivity_box_content</code> defines the message shown to inactive users</li>
+    </ul>
+  </li>
+  <li>Expiration
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">password_expiration_period</code> forces users to change password</li>
+    </ul>
+  </li>
+  <li>Disposable domain blacklist
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">blacklist_file</code> defines domains (e.g. <code class="language-plaintext highlighter-rouge">example.org</code>) that will be rejected as user emails</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span>
+https://github.com/martenson/disposable-email-domains</p>
+
+<hr />
+<h1 id="reverse-proxy">Reverse proxy</h1>
+
+<p>In <code class="language-plaintext highlighter-rouge">galaxy.yml</code>:</p>
+<ul>
+  <li>Set <code class="language-plaintext highlighter-rouge">use_remote_user: true</code> to delegate authentication to the upstream proxy server
+    <ul>
+      <li>The proxy server should set the <code class="language-plaintext highlighter-rouge">REMOTE_USER</code> HTTP header</li>
+      <li>Disables regular logins</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Dedicated Galaxy external auth <a href="https://docs.galaxyproject.org/en/master/admin/authentication.html#remote-user-authentication">documentation</a>.</p>
+
+<hr />
+<h1 id="general-configuration">General configuration</h1>
+
+<ul>
+  <li>If the proxy server returns only usernames, set <code class="language-plaintext highlighter-rouge">remote_user_maildomain</code> to a default mail domain to be appended</li>
+  <li>If a client can bypass the proxy, it can impersonate any user by forging the <code class="language-plaintext highlighter-rouge">REMOTE_USER</code> HTTP header:
+    <ul>
+      <li>Configure the proxy server to define a <code class="language-plaintext highlighter-rouge">GX_SECRET</code> header and set <code class="language-plaintext highlighter-rouge">remote_user_secret</code> to the same value</li>
+    </ul>
+  </li>
+  <li>Set <code class="language-plaintext highlighter-rouge">remote_user_logout_href</code> to point to your logout URL</li>
+</ul>
+
+<hr />
+<h1 id="nginx">Nginx</h1>
+
+<ul>
+  <li>Modules exist for PAM, Kerberos and LDAP.</li>
+  <li>Most likely you’ll need to recompile Nginx as none of them are included by default.</li>
+</ul>
+
+<hr />
+<h1 id="example-pam-stack">Example PAM stack</h1>
+
+<ul>
+  <li>You need to set up your system’s PAM stack (very site-specific)</li>
+  <li>A PAM configuration that would be suitable for authentication with Kerberos (placed in <code class="language-plaintext highlighter-rouge">/etc/pam.d/nginx</code>) might look like:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>auth  [success=1 default=ignore]  pam_krb5.so minimum_uid=1000 ignore_k5login
+auth  requisite                   pam_deny.so
+auth  required                    pam_permit.so
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<hr />
+<h1 id="example-nginxconf">Example nginx.conf</h1>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">location</span> <span class="err">/</span> <span class="err">{</span>
+    <span class="err">auth_pam</span> <span class="err">"Basic</span> <span class="err">Auth</span> <span class="err">Realm</span> <span class="err">Name"</span><span class="c">;
+</span>    <span class="err">auth_pam_service_name</span> <span class="err">"nginx"</span><span class="c">;
+</span>    <span class="err">...</span>
+    <span class="err">proxy_set_header</span> <span class="err">REMOTE_USER</span> <span class="err">$remote_user</span><span class="c">; # if using Paste
+</span>    <span class="err">uwsgi_param</span> <span class="err">HTTP_REMOTE_USER</span> <span class="err">$remote_user</span><span class="c">; # if using uWSGI
+</span><span class="err">}</span>
+</code></pre></div></div>
+
+<p>The value of <code class="language-plaintext highlighter-rouge">auth_pam_service_name</code> must match the filename of the pam configuration you created in <code class="language-plaintext highlighter-rouge">/etc/pam.d/</code> .</p>
+
+<p>Dedicated Galaxy with Nginx <a href="https://galaxyproject.org/admin/config/nginx-external-user-auth/">documentation</a>.</p>
+
+<hr />
+<h1 id="apache-httpd">Apache httpd</h1>
+
+<p>The authentication module (basic authentication, <code class="language-plaintext highlighter-rouge">mod_auth_kerb</code>, <code class="language-plaintext highlighter-rouge">mod_authnz_ldap</code>, <code class="language-plaintext highlighter-rouge">mod_auth_cas</code>, <code class="language-plaintext highlighter-rouge">Cosign</code>, etc.) is responsible for providing a username, which we will pass through the proxy to Galaxy as <code class="language-plaintext highlighter-rouge">$REMOTE_USER</code>.</p>
+
+<p>In addition to the modules above, <code class="language-plaintext highlighter-rouge">mod_headers</code> must be enabled in the Apache config, for some types of authentication.</p>
+
+<p>Dedicated Galaxy with Apache <a href="https://galaxyproject.org/admin/config/apache-external-user-auth/">documentation</a>.</p>
+
+<hr />
+<h1 id="galaxy-authentication-framework">Galaxy Authentication Framework</h1>
+
+<p>Authenticate to external services directly in Galaxy</p>
+
+<p>Available <a href="https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/auth/providers">provider modules</a> for:</p>
+<ul>
+  <li>Local Galaxy DB (default)</li>
+  <li>LDAP/Active Directory</li>
+  <li><a href="http://www.linux-pam.org/">System (Linux) PAM</a></li>
+</ul>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Remote auth is not complex to set up and can help you meet institutional requirements</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+
+<img src="/training-material/assets/images/gat.png" alt="page logo" style="height: 100px;"/>
+
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

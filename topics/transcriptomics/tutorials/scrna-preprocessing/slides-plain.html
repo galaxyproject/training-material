@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Dealing with Cross-Contamination in Fixed Barcode Protocols</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:title" content="Galaxy Training: Dealing with Cross-Contamination in Fixed Barcode Protocols" />
+        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/transcriptomics/faqs/" title="Check our FAQs for the Transcriptomics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/scrna-preprocessing/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/transcriptomics/tutorials/scrna-preprocessing/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/scrna-preprocessing/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/scrna-preprocessing/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/scrna-preprocessing/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/scrna-preprocessing/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/scrna-preprocessing/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Fscrna-preprocessing%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/transcriptomics/tutorials/scrna-preprocessing/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/transcriptomics/tutorials/scrna-preprocessing/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/transcriptomics/tutorials/scrna-preprocessing/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/transcriptomics/tutorials/scrna-preprocessing/slides.html">View markdown source on GitHub</a>
+	<h1>Dealing with Cross-Contamination in Fixed Barcode Protocols</h1>
+		<h2>Contributors</h2>
+		Mehmet Tekman, Alex Ostrovsky
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What is cross-contamination?</p>
+</li>
+		
+		<li><p>What are fixed barcodes?</p>
+</li>
+		
+		<li><p>Why are plating setups important to know?</p>
+</li>
+		
+		<li><p>Is it necessary to check barcodes that don’t exist in a batch?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>How to describe a plating setup</p>
+</li>
+		
+		<li><p>Proper naming conventions when dealing with multiple batches</p>
+</li>
+		
+		<li><p>Checking for false positives across batches</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Requirements</h2>
+		<ul>
+		
+		
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/transcriptomics">Transcriptomics</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Plates, Batches, and Barcodes:
+                            
+                                <a href="/training-material/topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+		</ul>
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 17, 2020 </div>
+
+	<hr />
+
+
+	<h3 id="fixed-barcode-protocols-and-multiplexing">Fixed Barcode Protocols and Multiplexing</h3>
+
+<p>The main contending questions are:</p>
+
+<ol>
+  <li>How large is each batch?</li>
+</ol>
+
+<p><span>Speaker Notes</span>
+How many slots in a batch that we need to barcode for</p>
+
+<p>–</p>
+
+<ol>
+  <li>How many batches on a plate?</li>
+</ol>
+
+<p>–</p>
+
+<ol>
+  <li>Should each batch use the same barcodes?</li>
+</ol>
+
+<p>–</p>
+
+<ol>
+  <li>What <strong>constraints</strong> are there on the plate?</li>
+</ol>
+
+<p><span>Speaker Notes</span>
+A technician always has to balance quality against cost, and this is illustrated in the following examples:</p>
+
+<hr />
+
+<h3 id="example-setup">Example Setup</h3>
+
+<p>.pull-left[</p>
+<ul>
+  <li>Barcodes:
+    <ul>
+      <li>
+        <p>24 unique barcodes, with an edit distance of E=2:</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     AAA ACC AGG TTT TAA TCC
+     ATT CCC CAA TGG NAA NCC
+     CGG CTT GGG NGG NTT ANN
+     GAA GCC GTT CNN GNN TNN
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2>]</h2>
+<p>.pull-right[</p>
+<ul>
+  <li>Plates and Batches:
+    <ul>
+      <li>12 slots per lane (3x4)</li>
+      <li>4 batches per plate</li>
+    </ul>
+  </li>
+  <li>Constraints
+    <ul>
+      <li>Only 2 batches sequenced at the same time
+        <ul>
+          <li>i.e. half the plate is sequenced at the same time
+]</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span>
+Here we use N as an extra base just for example purposes, but you do sometimes see this in other barcodes.
+2 batches at a time, only half</p>
+
+<hr />
+
+<h3 id="example-1-single-plate-with-a-single-lane">Example 1: Single Plate with a Single Lane</h3>
+
+<p>.bottom-info-box[
+Available Barcodes</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AAA ACC AGG TTT TAA TCC
+ATT CCC CAA TGG NAA NCC
+CGG CTT GGG NGG NTT ANN
+GAA GCC GTT CNN GNN TNN
+</code></pre></div></div>
+
+<h2 id="-1">]</h2>
+
+<p>.image-75[<img src="../../images/scrna-plates-batches-barcodes_slide36.svg" alt="slide36" loading="lazy" />]</p>
+
+<p>.pull-left[</p>
+<ul>
+  <li>
+    <p>12 total slots in Plate 1</p>
+  </li>
+  <li>
+    <p>12 slots in Lane 1</p>
+  </li>
+  <li>
+    <p>All slots filled
+]</p>
+  </li>
+</ul>
+
+<p>–
+.pull-right[</p>
+<ul>
+  <li>
+    <p>We only need to use half of our barcodes</p>
+  </li>
+  <li>
+    <p>Why is this wasteful?
+]</p>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Half of the barcodes used for that lane, and the other half we can ignore.</li>
+  <li>Wasteful because we are not getting full use of our 24 barcodes in a single sequencing run</li>
+</ul>
+
+<hr />
+
+<h3 id="example-2-single-plate-with-2-batches">Example 2: Single Plate with 2 Batches</h3>
+
+<p>.bottom-info-box[
+Available Barcodes</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AAA ACC AGG TTT TAA TCC
+ATT CCC CAA TGG NAA NCC
+CGG CTT GGG NGG NTT ANN
+GAA GCC GTT CNN GNN TNN
+</code></pre></div></div>
+
+<p>]</p>
+
+<ul>
+  <li>24 total slots in Plate 1</li>
+  <li>12 slots in Lane 1, and 12 slots in Lane 2</li>
+  <li>All slots filled</li>
+</ul>
+
+<p>.image-75[<img src="../../images/scrna-plates-batches-barcodes_slide38.svg" alt="slide38" loading="lazy" />]</p>
+
+<p>–</p>
+<ul>
+  <li>We can use all of our barcodes</li>
+  <li>Maximum number of cells can be sequenced in a single run</li>
+  <li>Why might this be too optimal?</li>
+</ul>
+
+<p><span>Speaker Notes</span>
+Here we use all barcodes since these batches will be sequenced at the same time
+Let’s look at one final example to see why using all our barcodes on a plate might not be optimal.</p>
+
+<hr />
+
+<h3 id="example-3-single-plate-with-2-batches-only-1-active">Example 3: Single Plate with 2 Batches, only 1 active</h3>
+
+<p>.bottom-info-box[
+Available Barcodes</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AAA ACC AGG TTT TAA TCC
+ATT CCC CAA TGG NAA NCC
+CGG CTT GGG NGG NTT ANN
+GAA GCC GTT CNN GNN TNN
+</code></pre></div></div>
+
+<p>]</p>
+
+<ul>
+  <li>24 total slots in Plate 1</li>
+  <li>12 slots in Lane 1, and 12 slots in Lane 2</li>
+  <li>Only slots in Lane 1 filled</li>
+</ul>
+
+<p>.image-75[<img src="../../images/scrna-plates-batches-barcodes_slide40.svg" alt="slide40" loading="lazy" />]</p>
+
+<p>–</p>
+<ul>
+  <li>Why are we still using all barcodes?</li>
+  <li>Why have we not filled in Lane 2?</li>
+</ul>
+
+<p><span>Speaker Notes</span>
+All barcodes used, why leave one lane empty?</p>
+
+<hr />
+
+<h3 id="example-3-single-plate-with-2-batches-only-1-active-1">Example 3: Single Plate with 2 Batches, only 1 active</h3>
+
+<p>.bottom-info-box[
+Available Barcodes</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AAA ACC AGG TTT TAA TCC
+ATT CCC CAA TGG NAA NCC
+CGG CTT GGG NGG NTT ANN
+GAA GCC GTT CNN GNN TNN
+</code></pre></div></div>
+
+<p>]</p>
+
+<ul>
+  <li>What would it mean if we sequenced reads with {TTT,TAA,…,TNN} as their Cell Barcodes?</li>
+</ul>
+
+<p>.image-75[<img src="../../images/scrna-plates-batches-barcodes_slide40.svg" alt="slide40" loading="lazy" />]</p>
+
+<p>–</p>
+<ul>
+  <li><strong>Cross-Contamination</strong>
+    <ul>
+      <li>There should be <em>no cells in that lane</em>!</li>
+      <li>These are contaminants from Lane 1</li>
+      <li>We can ignore these reads and select for the {AAA,ACC,…,GTT}</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span>
+If we see any reads in the Plate which contain barcodes {TTT,TAA,TCC, etc} then we know that some contamination has occurred <em>because there should be no cells there</em>. One reason is that the second lane was not completely cleaned before being used.</p>
+
+<hr />
+
+<h3 id="example-4-2-plates-with-2-batches-only-1-active-alternate">Example 4: 2 Plates with 2 Batches, only 1 active (alternate)</h3>
+
+<p>.bottom-info-box[
+Available Barcodes</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AAA ACC AGG TTT TAA TCC
+ATT CCC CAA TGG NAA NCC
+CGG CTT GGG NGG NTT ANN
+GAA GCC GTT CNN GNN TNN
+</code></pre></div></div>
+
+<p>]</p>
+
+<ul>
+  <li>Same as before but extra plate. A single lane used to check for contaminants.</li>
+  <li>Alternate barcodes used for each plate</li>
+</ul>
+
+<p>.image-50[<img src="../../images/scrna-plates-batches-barcodes_slide44.svg" alt="slide44" loading="lazy" />]</p>
+
+<p><small></small></p>
+<ul>
+  <li>Why alternate active batches across plates?
+&lt;/small&gt;</li>
+</ul>
+
+<p>–
+<small></small></p>
+<ul>
+  <li>Plate 1 and Plate 2 are sometimes the <em>same plate</em></li>
+  <li>Contaminants might carry over <em>undetected</em> if same lane is used!
+&lt;/small&gt;</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>
+    <p>Here we have repeated previous example, but with an extra plate. In the first plate, the first half of the barcodes are used, and in the second plate, the second half of the barcodes are used.</p>
+  </li>
+  <li>
+    <p>Why alternate the barcodes between plates? The full set of barcodes does not change, so why not keep the same format?</p>
+  </li>
+  <li>
+    <p>Loaded at different times, washed clean, re-used.</p>
+  </li>
+  <li>
+    <p>Again, the answer is to reduce cross-contamination. Plate2 will be loaded after Plate1 (and perhaps Plate2 and Plate1 will use the same plate!) If we see any reads in Plate2 that should not be there, we can now surmise where they came from. We also have the added benefit of protecting the cells in Plate2 from those that may have been used in Plate1, since they are in completely different positions across plates.</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="example-5-1-plate-with-2-batches-both-active">Example 5: 1 Plate with 2 Batches, both active</h3>
+
+<p>.bottom-info-box[
+Available Barcodes</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AAA ACC AGG TTT TAA TCC
+ATT CCC CAA TGG NAA NCC
+CGG CTT GGG NGG NTT ANN
+GAA GCC GTT CNN GNN TNN
+</code></pre></div></div>
+
+<p>]</p>
+
+<ul>
+  <li>Both batches filled. <em>All barcodes</em> are applied individually to <em>each</em> lane</li>
+</ul>
+
+<p>.image-100[<img src="../../images/scrna-plates-batches-barcodes_slide46.svg" alt="slide46" loading="lazy" />]</p>
+
+<p>.pull-left[</p>
+
+<ul>
+  <li>
+    <p>Why check all barcodes against each lane?</p>
+  </li>
+  <li>
+    <p>Why not separate batches across different plates?</p>
+  </li>
+</ul>
+
+<h2 id="-2">]</h2>
+<p>.pull-right[</p>
+<ul>
+  <li>
+    <p>If <small>{TTT,TAA,…,TNN}</small> is detected in Lane 1, or vice versa → <strong>Contamination!</strong></p>
+  </li>
+  <li>
+    <p><em>Benefit of</em> <strong>detecting cross-contamination</strong> <em>whilst still</em> <strong>maximising plate usage</strong>
+]
+<span>Speaker Notes</span></p>
+    <ol>
+      <li>Why apply the full set of barcodes to each lane, when only half will actually label?</li>
+      <li>What benefit does this serve, instead of separating them over different plates as in the previous example?</li>
+    </ol>
+  </li>
+</ul>
+
+<p>A1. This setup is actually the same as example 4, but with the two plates merged. Here we can check for cross-contamination in each lane by measuring the real cell labels against the false barcodes. If in lane 1, we detect a significant number of reads with cell barcodes of <code class="language-plaintext highlighter-rouge">TAA</code> or <code class="language-plaintext highlighter-rouge">ANN</code>, we can assume that some cross-contamination has occurred since we should not be able to detect these barcodes in that lane. The converse is also true of lane 2.</p>
+
+<p>A2. We have the benefit of detecting cross-contamination with the same advantages as example 4, but with the cost advantage of sequencing two batches at the same time.</p>
+
+<hr />
+
+<h1 id="summary">Summary</h1>
+
+<ul>
+  <li>
+    <p>Barcodes are often reused across batches if there is a fixed and limited number of them</p>
+  </li>
+  <li>
+    <p>Intelligent plating strategies reduce sequencing errors</p>
+  </li>
+  <li>
+    <p>Cross contamination can be detected by examining false positives across plates</p>
+  </li>
+</ul>
+
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Eliminating false positives</li>
+
+<li>Intelligent plating strategies can guard against cross-contamination</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

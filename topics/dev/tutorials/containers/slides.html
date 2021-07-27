@@ -128,6 +128,26 @@
       "url": "http://planemo.readthedocs.io/en/latest/writing_standalone.html",
       "learningResourceType": "hands-on tutorial",
       "interactivityType": "expositive"
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/dev/tutorials/tool-integration/slides.html",
+      "name": "Tool development and integration into Galaxy",
+      "description": "Slides for 'Tool development and integration into Galaxy' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "http://planemo.readthedocs.io/en/latest/writing_standalone.html",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive"
     }
   ],
   "hasPart": [
@@ -196,11 +216,25 @@ class: center, middle, inverse
 <div class="contributors-line">
 
 
- <a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/jmchilton" alt="John Chilton">John Chilton</a> <a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bgruening" alt="Björn Grüning">Björn Grüning</a>
+ <a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/jmchilton" alt="Avatar">John Chilton</a> <a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bgruening" alt="Avatar">Björn Grüning</a>
 
 
 </div>
 
+
+<div class="footnote" style="bottom: 3em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: Jul 10, 2021</div>
+<div class="footnote" style="bottom: 2em;">Or view the <a href="slides-plain.html">plain-text slides without JS</a></div>
+<div class="footnote" style="bottom: 1em;">Tip: press <kbd>P</kbd> to view the presenter notes</div>
+
+???
+Presenter notes contain extra information which might be useful if you
+intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other. Useful when presenting.
 
 
 
@@ -225,18 +259,6 @@ Before diving into this slide deck, we recommend you to have a look at:
 
 
 
-
-.footnote[Tip: press `P` to view the presenter notes]
-
-???
-Presenter notes contain extra information which might be useful if you
-intend to use these slides for teaching.
-
-Press `P` again to switch presenter notes off
-
-Press `C` to create a new window where the same presentation will be displayed.
-This window is linked to the main window. Changing slides on one will cause the
-slide to change on the other. Useful when presenting.
 
 ---
 
@@ -280,7 +302,7 @@ These slides mirror the section on &quot;Dependencies and Docker&quot; in the [P
 
 ## Generic Containers are Good Slide
 
-.image-75[![](../../images/containers.png)]
+.image-75[![A cartoon comparing containers vs VMs. On the left the VMs are presented as a layer of server, host os, and hypervisor (type 2) followed by several tall pillars of guest OS, bin/libs and finally their respective apps. Everything is siloed. On the right is containers where the layers are server, host os, and docker engine. Above those are very short pillars of each different app, and when duplicate apps are run, the bin/libs are shown as shared. Text reads: containers are isolated but share OS and where appropriate, bins/libraries.](../../images/containers.png)]
 
 * Isolation and Security\*
 * Reproducibility
@@ -294,7 +316,7 @@ These slides mirror the section on &quot;Dependencies and Docker&quot; in the [P
 
 ## Galaxy in Containers?
 
-.image-75[![](../../images/docker-galaxy-stable-github.png)]
+.image-75[![Screenshot of docker-galaxy-stable readme showing the scheme with a lot of different galaxy container flavours shown as layers atop one another.](../../images/docker-galaxy-stable-github.png)]
 
 ???
 
@@ -452,7 +474,7 @@ And the good news is that now it is (mostly)!
 
 class: left
 
-### .image-10[![](../../images/biocontainers.png)] BioContainers - The Magic
+### .image-10[![biocontainers logo](../../images/biocontainers.png)] BioContainers - The Magic
 
 Galaxy can now automatically find or build containers for best practice tools.
 
@@ -473,7 +495,7 @@ But we didn't do anything - where did this magic seqtk container come from.
 
 ## The Mystery quay.io/biocontainers/seqtk Container
 
-![](../../images/quayioseqtk.png)
+![screenshot of quay.io showing the repository tags for the seqtk repo](../../images/quayioseqtk.png)
 
 ???
 
@@ -483,11 +505,13 @@ I swear Planemo did not just create that with `tool_init` or `lint`, maybe we sh
 
 class: left
 
-### .image-05[![](../../images/biocontainers.png)] BioContainers - Using the Container
+### .image-05[![biocontainers logo](../../images/biocontainers.png)] BioContainers - Using the Container
 
 Run Planemo `test` or `serve` with `--biocontainers` to try mystery container.
 
-.reduce70[```
+.reduce70[
+
+```
 $ planemo test --biocontainers seqtk_seq.xml
 ...
 [galaxy.tools.actions] Setup for job Job[unflushed,tool_id=seqtk_seq] complete, ready to flush (20.380 ms)
@@ -505,15 +529,16 @@ XML: /private/tmp/tmpw8_UQm/xunit.xml
 ----------------------------------------------------------------------
 Ran 1 test in 11.926s
 OK
-```]
+```
+]
 
 The important line here is - `Checking with container resolver [MulledDockerContainerResolver[namespace=biocontainers]] found description [ContainerDescription[identifier=quay.io/biocontainers/seqtk:1.2--1,type=docker]]`.
 
 ---
 
-### .image-05[![](../../images/biocontainers.png)] BioContainers - The Community
+### .image-05[![biocontainers logos](../../images/biocontainers.png)] BioContainers - The Community
 
-![](../../images/biocontainers_org.png)
+![screenshot of biocontainers github page](../../images/biocontainers_org.png)
 
 ???
 
@@ -526,7 +551,7 @@ BioConda for Containers.
 
 ---
 
-### .image-10[![](../../images/biocontainers.png)] BioContainers - Bioconda for Containers
+### .image-10[![biocontainers logo](../../images/biocontainers.png)] BioContainers - Bioconda for Containers
 
 All Bioconda packages are built into minimal containers.
 
@@ -537,9 +562,9 @@ Over 4,000 containers already published.
 
 ---
 
-### .image-05[![](../../images/biocontainers.png)] BioContainers - Lots of Containers
+### .image-05[![biocontainers logo](../../images/biocontainers.png)] BioContainers - Lots of Containers
 
-![](../../images/quay_list.png)
+![screenshot of biocontainers on quay.io with lots of containers](../../images/quay_list.png)
 
 ???
 
@@ -547,7 +572,7 @@ TODO: Zoom in on the image a bit more ideally.
 
 ---
 
-### .image-05[![](../../images/biocontainers.png)] BioContainers - On Demand Creation
+### .image-05[![biocontainers logo](../../images/biocontainers.png)] BioContainers - On Demand Creation
 
 Galaxy can be configured to attempt to build containers on demand for containers that haven't
 been published to the BioContainers namespace on quay.io.
@@ -571,7 +596,7 @@ We're done this time now right?
 
 ## Revisiting Galaxy Requirements
 
-![](../../images/galaxy_instance.png)
+![schematic of a galaxy server with dependency resolution via requirement tags at the top. On the left is the tool box with a number of xml files listed like seqtk_seq and seqtk_subseq. On the right is applications &amp; libraries showing only a few tools like seqtk, all of the 3 multipoe subtools were collapsed](../../images/galaxy_instance.png)
 
 Many tools have multiple requirements, these need containers also!
 
@@ -583,7 +608,8 @@ Many tools have multiple requirements, these need containers also!
 
 The BWA tool is an example of one such tool that has multiple requirements - because samtools is used to sort BAMs after mapping. The Planemo `conda_testing` project is distributed with a simple tool to simulate this containing both `bwa` and `samtools` requirements.
 
-.reduce90[```
+.reduce90[
+```
 $ planemo project_init --template=conda_testing conda_testing
 $ cd conda_testing/
 $ grep -r require bwa_and_samtools.xml
@@ -591,7 +617,8 @@ bwa_and_samtools.xml:    &lt;requirements&gt;
 bwa_and_samtools.xml:        &lt;requirement type=&quot;package&quot; version=&quot;0.7.15&quot;&gt;bwa&lt;/requirement&gt;
 bwa_and_samtools.xml:        &lt;requirement type=&quot;package&quot; version=&quot;1.3.1&quot;&gt;samtools&lt;/requirement&gt;
 bwa_and_samtools.xml:    &lt;/requirements&gt;
-```]
+```
+]
 
 ---
 
@@ -644,7 +671,7 @@ Explain the different parts.
 
 ## Exploring Mulled Hashes - by Evgeny Anatskiy
 
-![](../../images/multi-package-containers.png)
+![Screenshot of biocontainers page showing an information page for multi-package containers](../../images/multi-package-containers.png)
 
 ???
 
@@ -749,7 +776,7 @@ bwa_and_samtools[0]: passed
 
 ### &lt;i class=&quot;fas fa-pencil-alt&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;hands_on&lt;/span&gt; Hands-on
 
-![](../../images/exercise.png)
+![cartoon of two people jumping](../../images/exercise.png)
 
 ---
 
@@ -782,7 +809,7 @@ $ planemo test --biocontainers bwa_and_samtools.xml
 
 ### Publishing Multi-Package Containers
 
-![](../../images/multi-package-repo.png)
+![screenshot of a mulled biocontainer in quay.io. Nothing useful is depicted.](../../images/multi-package-repo.png)
 
 ???
 
@@ -793,7 +820,7 @@ daily for package combinations to publish.
 
 ### Publishing **Your** Multi-Package Containers
 
-![](../../images/planemo-monitor.png)
+![Screenshot of the text editor in github, editing monitor.sh in galaxyproject/planemo-monitor](../../images/planemo-monitor.png)
 
 
 
@@ -820,13 +847,13 @@ daily for package combinations to publish.
 
 ## Thank you!
 
-This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors!
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
 
 
 <div class="contributors-line">
 
 
- <a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/jmchilton" alt="John Chilton">John Chilton</a> <a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bgruening" alt="Björn Grüning">Björn Grüning</a>
+ <a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/jmchilton" alt="Avatar">John Chilton</a> <a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bgruening" alt="Avatar">Björn Grüning</a>
 
 
 </div>

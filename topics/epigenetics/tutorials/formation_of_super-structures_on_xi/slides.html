@@ -151,6 +151,20 @@
     },
     {
       "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
       "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
       "name": "Mapping",
       "description": "Slides for 'Mapping' tutorial",
@@ -169,6 +183,20 @@
       "name": "Mapping",
       "description": "Hands-on for 'Mapping' tutorial",
       "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -251,11 +279,25 @@ class: center, middle, inverse
 <div class="contributors-line">
 
 
- <a href="/training-material/hall-of-fame/LeilyR/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/LeilyR" alt="Leily Rabbani">Leily Rabbani</a> <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Bérénice Batut">Bérénice Batut</a>
+ <a href="/training-material/hall-of-fame/LeilyR/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/LeilyR" alt="Avatar">Leily Rabbani</a> <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Avatar">Bérénice Batut</a>
 
 
 </div>
 
+
+<div class="footnote" style="bottom: 3em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: Jul 26, 2021</div>
+<div class="footnote" style="bottom: 2em;">Or view the <a href="slides-plain.html">plain-text slides without JS</a></div>
+<div class="footnote" style="bottom: 1em;">Tip: press <kbd>P</kbd> to view the presenter notes</div>
+
+???
+Presenter notes contain extra information which might be useful if you
+intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other. Useful when presenting.
 
 
 
@@ -289,18 +331,6 @@ Before diving into this slide deck, we recommend you to have a look at:
 
 
 
-
-.footnote[Tip: press `P` to view the presenter notes]
-
-???
-Presenter notes contain extra information which might be useful if you
-intend to use these slides for teaching.
-
-Press `P` again to switch presenter notes off
-
-Press `C` to create a new window where the same presentation will be displayed.
-This window is linked to the main window. Changing slides on one will cause the
-slide to change on the other. Useful when presenting.
 
 ---
 
@@ -338,13 +368,13 @@ slide to change on the other. Useful when presenting.
     - ChIP data
     - Input data
 
-.image-75[![](../../images/formation_of_super-structures_on_xi/chipseq.png)]
+.image-75[![A complicated figure showing a set of nucleosomes at the top with the following regions appearing to be exposed to sequencing: enhancer, promoter, gene, and tss regions. several charts appear below, chromatin accessibility showing broad peaks around the enhancer, promoter, and gene. the transcription factor chart shows peaks around enhancer and promoter. A line labelled TFBS shows sequences in repressive state (the nucleosome regions), enhancer, and promoter. The PollI track shows peaks below promoter and gene. Then several organisms labelled things like H3K4me1, H3K36me3 show various peaks along the regions of repressive state, enhancer, promoter, transcribed state (the gene) and poised state (the transcription start site.).](../../images/formation_of_super-structures_on_xi/chipseq.png)]
 
 ---
 
-## Generating ChIP-seq data 
+## Generating ChIP-seq data
 
-![](../../images/formation_of_super-structures_on_xi/chipseq_generation.png)
+![A diagram illustrating the principles of Chromatin Immunoprecipitation Sequencing (ChIP-sequencing), where the location of binding by a specific protein to DNA is investigated. DNA from the nucleus is taken, and cross-linked to protein DNA. This is then sheared by sonication, and the cells are lysed. Bead-attached antibodies are added to immunoprecipitate the target protein. A large red callout says input data is NOT going through the Immunoprecipitation step. The resulting beads with bound protein are sequenced and mapped to the genome. Another bred text says millions of reads to map.](../../images/formation_of_super-structures_on_xi/chipseq_generation.png)
 
 &lt;small&gt;
 Source: [Wikipedia](https://en.wikipedia.org/wiki/ChIP-sequencing
@@ -353,13 +383,13 @@ Source: [Wikipedia](https://en.wikipedia.org/wiki/ChIP-sequencing
 
 ---
 
-## ChIP vs Input 
+## ChIP vs Input
 
-![](../../images/formation_of_super-structures_on_xi/chip_vs_input.png)
+![A cartoon of sequencing shows a line labelled genome. Input reads shown below map along the entire genome. ChIP reads map in broad peaks, along only specific regions.](../../images/formation_of_super-structures_on_xi/chip_vs_input.png)
 
 ---
 
-![](../../images/formation_of_super-structures_on_xi/chipseq_pipeline.png)
+![Graphic labelled Pipeline overview. Reads go through QC, mapping to a reference, ChIP QC, Visualisation, and Peak Calling.](../../images/formation_of_super-structures_on_xi/chipseq_pipeline.png)
 
 ---
 
@@ -367,12 +397,12 @@ Source: [Wikipedia](https://en.wikipedia.org/wiki/ChIP-sequencing
 
 SCHMD1 in known to have an effect on gene expression in X chromosome
 
-![](../../images/formation_of_super-structures_on_xi/SCHMD1.png)
+![12 different sets of line graphs are shown showing various peaks along the genome. Genes are shown below the genome, some, but not all, lining up with the peaks. Below is a graphic of two line charts comparing two genomes. One has a region with no reads mapping which is circled.](../../images/formation_of_super-structures_on_xi/SCHMD1.png)
 
 Chen-Yu Wang et al. 2018; Vivek Bhardwaj, Steffen Heyne et al. 2018
 
 ???
-We probe a potential architectural role for SMCHD1 and investigate the mechanism by which it shapes the Xi and represses gene expression 
+We probe a potential architectural role for SMCHD1 and investigate the mechanism by which it shapes the Xi and represses gene expression
 
 
 
@@ -394,13 +424,13 @@ We probe a potential architectural role for SMCHD1 and investigate the mechanism
 
 ## Thank you!
 
-This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors!
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
 
 
 <div class="contributors-line">
 
 
- <a href="/training-material/hall-of-fame/LeilyR/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/LeilyR" alt="Leily Rabbani">Leily Rabbani</a> <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Bérénice Batut">Bérénice Batut</a>
+ <a href="/training-material/hall-of-fame/LeilyR/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/LeilyR" alt="Avatar">Leily Rabbani</a> <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Avatar">Bérénice Batut</a>
 
 
 </div>

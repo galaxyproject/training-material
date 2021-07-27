@@ -29,30 +29,8 @@
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
-        
-
-
-
-
-
-
-
-
-
-
-
-<!-- Gitter -->
-
-
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
             <a class="navbar-brand" href="/training-material/">
                 <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
@@ -65,11 +43,12 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        
                         <a class="nav-link" href="/training-material/topics/variant-analysis" title="Go back to list of tutorials">
-                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Variant Analysis
+                            <i class="far fa-folder" aria-hidden="true"></i> Variant Analysis
                         </a>
+                        
                     </li>
-
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
         <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
@@ -208,15 +187,8 @@
     </div>
 </li>
 
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/variant-analysis/tutorials/non-dip/tutorial.md">
-                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
-                        </a>
-                    </li>
-                    -->
 
-                     <!-- Search bar-->
+                    <!-- Search bar-->
                     <li class="nav-item">
                       <div id="navbarSupportedContent">
                         <!-- Search form -->
@@ -228,16 +200,37 @@
                         </form>
                       </div>
                     </li>
-
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 
-<div class="container main-content">
-    <script type="application/ld+json">
+        <div class="container main-content" role="main">
         
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
 
 
 {
@@ -359,6 +352,20 @@
     },
     {
       "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
       "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
       "name": "Mapping",
       "description": "Slides for 'Mapping' tutorial",
@@ -377,6 +384,20 @@
       "name": "Mapping",
       "description": "Hands-on for 'Mapping' tutorial",
       "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -425,40 +446,41 @@
     }
   ]
 }
-    </script>
+</script>
 
-    <section class="tutorial topic-variant-analysis">
-        <h1 data-toc-skip>Calling variants in non-diploid systems</h1>
-        
+<section class="tutorial topic-variant-analysis">
+    <h1 data-toc-skip>Calling variants in non-diploid systems</h1>
+    
 
-        <div class="contributors-line">By: 
+    <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nekrut" alt="Anton Nekrutenko">Anton Nekrutenko</a> <a href="/training-material/hall-of-fame/astrovsky01/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/astrovsky01" alt="Alex Ostrovsky">Alex Ostrovsky</a>
+ <a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nekrut" alt="Avatar">Anton Nekrutenko</a> <a href="/training-material/hall-of-fame/astrovsky01/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/astrovsky01" alt="Avatar">Alex Ostrovsky</a>
 
 </div>
 
-        <blockquote class="overview">
-            <h3>Overview</h3>
-            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
-            <ul>
-            
-            <li><p>How does frequency of mitochondrial polymorphisms change from mother to child?</p>
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions</strong>
+        <ul>
+        
+        <li><p>How does frequency of mitochondrial polymorphisms change from mother to child?</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
-            <ul>
-            
-            <li><p>Using Galaxy’s main site we will see how to call variants in bacteria, viruses, and organelles.</p>
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+        <ul>
+        
+        <li><p>Using Galaxy’s main site we will see how to call variants in bacteria, viruses, and organelles.</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            
-            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
-            <ul>
-            
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+        <ul>
+        
     <li>
     
         
@@ -519,62 +541,61 @@
     
     </li>
 
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour 30 minutes</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+        <ul class="supporting_material">
             
-            </ul>
+                <li class="btn btn-default supporting_material"><a href="/training-material/topics/variant-analysis/slides/introduction.html">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Topic Overview slides
+                </a></li>
             
 
             
-            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1 hour 30 minutes</div>
-            
-
-            
-
-            
-            
-
-            
-            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
-            <ul>
-                <div class="supporting_material">
-                
-                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/variant-analysis/slides/introduction.html" title="Topic Overview slides">
-                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Topic Overview slides
-                    </a></li>
-                
-
-                
-                    <li class="btn btn-default supporting_material">
+                <li class="btn btn-default supporting_material">
 <a class="topic-icon" href="https://doi.org/10.5281/zenodo.1251112">
-    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
 </a>
 
 </li>
-                
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
     <a class="topic-icon" href="/training-material/topics/variant-analysis/tutorials/non-dip/workflows/" title="Workflows" alt="Calling variants in non-diploid systems workflows">
-        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
     </a>
 
 </li>
-                
+            
 
-                
-                    <li class="btn btn-default supporting_material">
-<a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/main/topics/variant-analysis/tutorials/non-dip/tours/">
-    <i class="fas fa-magic" aria-hidden="true"></i><span class="visually-hidden">interactive_tour</span> Tours
+            
+                <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/main/topics/variant-analysis/tutorials/non-dip/tours/" title="Galaxy interactive tour" >
+    <i class="fas fa-magic" aria-hidden="true"></i> Tours
 </a>
 
 </li>
-                
+            
 
-                
-                
-                
+            
+            
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
@@ -587,8 +608,6 @@
             </a>
         </li>
     
-    
-        
     
         
     
@@ -719,8 +738,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -772,22 +789,23 @@
 
 
 </li>
-                
-                </div>
-            </ul>
             
+        </ul>
+        
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 17, 2021 </div>
-        </blockquote>
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 17, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
-        <div class="container">
-            <div class="row">
-                <!-- sidebar, which will move to the top on a small screen -->
-                <div class="col-sm-2">
-                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
-                </div>
-                <div class="col-sm-10">
-                    <h1 class="no_toc" id="introduction">Introduction</h1>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <p>The majority of life on Earth is non-diploid and represented by prokaryotes, viruses, and their derivatives, such as our own mitochondria or plant’s chloroplasts. In non-diploid systems, allele frequencies can range anywhere between 0 and 100% and there could be multiple (not just two) alleles per locus. The main challenge associated with non-diploid variant calling is the difficulty in distinguishing between the sequencing noise (abundant in all NGS platforms) and true low frequency variants. Some of the early attempts to do this well have been accomplished on human mitochondrial <span class="notranslate">DNA</span> although the same approaches will work equally good on viral and bacterial genomes (<a class="citation" href="#Rebolledo-Jaramillo2014">Rebolledo-Jaramillo <i>et al.</i> 2014</a>, <a class="citation" href="#Li2015">Li <i>et al.</i> 2015</a>).</p>
 
@@ -800,7 +818,7 @@
   <li>By assembling a genome first and then <span class="notranslate">mapping</span> against that assembly</li>
 </ol>
 
-<figure id="figure-1"><img src="../../images/ref_vs_assembly.jpg" alt="2 approaches" /><figcaption><span class="figcaption-prefix">Figure 1:</span> This figure from <a class="citation" href="#Olson2015">Olson <i>et al.</i> 2015</a> contrasts the two approaches.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/ref_vs_assembly.jpg" alt="2 approaches" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> This figure from <a class="citation" href="#Olson2015">Olson <i>et al.</i> 2015</a> contrasts the two approaches.</figcaption></figure>
 
 <p>In this tutorial we will take the <em>first</em> path, in which we map <span class="notranslate">reads</span> against an existing assembly. Later in the course, after we learn about assembly approaches, we will try the second approach as well.</p>
 
@@ -899,7 +917,7 @@ https://zenodo.org/record/1251112/files/raw_mother-ds-2.fq
 
 <p>Once the FastQC jobs runs, you will be able to look at the HTML reports generated by this tool. The data have generally high quality in this example:</p>
 
-<figure id="figure-2"><img src="../../images/mt_qc_plot.png" alt="FastQC output plot" /><figcaption><span class="figcaption-prefix">Figure 2:</span> FastQC plot for one of the mitochondrial datasets shows that qualities are acceptable for 250 bp <span class="notranslate">reads</span> (mostly in the green, which is at or above [Phred score](https://en.wikipedia.org/wiki/Phred_quality_score) of 30).</figcaption></figure>
+<figure id="figure-2"><img src="../../images/mt_qc_plot.png" alt="FastQC output plot" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> FastQC plot for one of the mitochondrial datasets shows that qualities are acceptable for 250 bp <span class="notranslate">reads</span> (mostly in the green, which is at or above [Phred score](https://en.wikipedia.org/wiki/Phred_quality_score) of 30).</figcaption></figure>
 
 <h1 id="mapping-reads-to-a-reference"><span class="notranslate">Mapping</span> <span class="notranslate">reads</span> to a reference</h1>
 
@@ -1244,7 +1262,7 @@ chrM	15326	.	A	G	73749.6	.	AB=0;ABP=0;AC=2;AF=1;AN=2;AO=2200;CIGAR=1X;DP=2201;DP
 
 <p>After filtering the data with stringent input parameters (restricting base quality to a minimum of 30 and <span class="notranslate">mapping</span> quality to a minimum of 20) a considerable amount of variants due to read-alignment bias exists. <a href="https://github.com/ekg">Erik Garrison</a> has a beautiful illustration of various biases potentially affecting called variants and making a locus sequence-able.</p>
 
-<figure id="figure-3"><img src="../../images/mt_biases.png" alt="Various biases potentially affecting called variants" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Here you can see that in an ideal case (indicated with a green star) a variant is evenly represent by different areas of sequencing <span class="notranslate">reads</span> (cycle and placement biases) and is balanced across the two strands (strand bias). Allele imbalance is not applicable in our case as it reflects significant deviation from the diploid (50/50) expectation.</figcaption></figure>
+<figure id="figure-3"><img src="../../images/mt_biases.png" alt="Various biases potentially affecting called variants" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Here you can see that in an ideal case (indicated with a green star) a variant is evenly represent by different areas of sequencing <span class="notranslate">reads</span> (cycle and placement biases) and is balanced across the two strands (strand bias). Allele imbalance is not applicable in our case as it reflects significant deviation from the diploid (50/50) expectation.</figcaption></figure>
 
 <p>A robust tool set for processing VCF data is provided by <a href="https://github.com/vcflib/vcflib">vcflib</a> developed by Erik Garrison, the author of FreeBayes. One way to filter VCF is using <code class="language-plaintext highlighter-rouge">INFO</code> fields of the VCF dataset. If you look at the VCF dataset shown above you will see all comment lines beginning with <code class="language-plaintext highlighter-rouge">##INFO</code>.  These are <code class="language-plaintext highlighter-rouge">INFO</code> fields. Each VCF record contains a list of <code class="language-plaintext highlighter-rouge">INFO</code> tags describing a wide range of properties for each VCF record. You will see that FreeBayes and NVC differ significantly in the number and types of <code class="language-plaintext highlighter-rouge">INFO</code> fields each of these caller generates. This why the two require different filtering strategies.</p>
 
@@ -1344,9 +1362,9 @@ chrM	5539	.	A	G	3281.62	.	AB=0;ABP=0;AC=1;AF=0.5;AN=2;AO=379;CIGAR=1X;DP=787;DPB
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-display-data-in-vcfiobio"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Display data in VCF.IOBIO</h3>
 
-  <figure id="figure-4"><img src="../../images/mt_vcf_dataset_expanded.png" alt="Expanded output" /><figcaption><span class="figcaption-prefix">Figure 4:</span> At the bottom there is a link 'display at vcf.iobio'. Clicking on this link will start indexing of VCF datasets, which is required to display them.</figcaption></figure>
+  <figure id="figure-4"><img src="../../images/mt_vcf_dataset_expanded.png" alt="Expanded output" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> At the bottom there is a link 'display at vcf.iobio'. Clicking on this link will start indexing of VCF datasets, which is required to display them.</figcaption></figure>
 
-  <figure id="figure-5"><img src="../../images/mt_vcfiobio.png" alt="VCF.IOBIO overview" /><figcaption><span class="figcaption-prefix">Figure 5:</span> There are not that many variants to look at in this example. Nevertheless there are helpful statistics such as Transition/Transversion (Ts/Tn) ratio.</figcaption></figure>
+  <figure id="figure-5"><img src="../../images/mt_vcfiobio.png" alt="VCF.IOBIO overview" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> There are not that many variants to look at in this example. Nevertheless there are helpful statistics such as Transition/Transversion (Ts/Tn) ratio.</figcaption></figure>
 </blockquote>
 
 <h2 id="visualising-with-igv">Visualising with IGV</h2>
@@ -1356,7 +1374,7 @@ chrM	5539	.	A	G	3281.62	.	AB=0;ABP=0;AC=1;AF=0.5;AN=2;AO=379;CIGAR=1X;DP=787;DPB
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-display-data-in-igv"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Display data in IGV</h3>
 
-  <figure id="figure-6"><img src="../../images/mt_vcf_dataset_expanded.png" alt="VCFfilter output expanded" /><figcaption><span class="figcaption-prefix">Figure 6:</span> At the bottom there is a link 'display at IGV: local Human hg38'.</figcaption></figure>
+  <figure id="figure-6"><img src="../../images/mt_vcf_dataset_expanded.png" alt="VCFfilter output expanded" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> At the bottom there is a link 'display at IGV: local Human hg38'.</figcaption></figure>
 
   <p>The difference between ‘local’ and ‘Human hg38’ links is explained in the following video:</p>
 
@@ -1364,7 +1382,7 @@ chrM	5539	.	A	G	3281.62	.	AB=0;ABP=0;AC=1;AF=0.5;AN=2;AO=379;CIGAR=1X;DP=787;DPB
 
   <p>Visualizing our FreeBayes dataset will produce this:</p>
 
-  <figure id="figure-7"><img src="../../images/mt_igv.png" alt="IGV interface" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Here we focus on one particular variant at position 3243 for reasons that will become apparent in the next section.</figcaption></figure>
+  <figure id="figure-7"><img src="../../images/mt_igv.png" alt="IGV interface" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Here we focus on one particular variant at position 3243 for reasons that will become apparent in the next section.</figcaption></figure>
 </blockquote>
 
 <h2 id="comparing-frequencies">Comparing frequencies</h2>
@@ -1404,7 +1422,7 @@ chrM	5539	.	A	G	3281.62	.	AB=0;ABP=0;AC=1;AF=0.5;AN=2;AO=379;CIGAR=1X;DP=787;DPB
   </blockquote>
 </blockquote>
 
-<figure id="figure-8"><img src="../../images/mt_tab.png" alt="VCFtoTab-delimited output" /><figcaption><span class="figcaption-prefix">Figure 8:</span> The columns in the above dataset represent INFO and Genotype fields on the original VCF dataset.</figcaption></figure>
+<figure id="figure-8"><img src="../../images/mt_tab.png" alt="VCFtoTab-delimited output" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> The columns in the above dataset represent INFO and Genotype fields on the original VCF dataset.</figcaption></figure>
 
 <p>Let’s restrict ourselves to a few key columns:</p>
 
@@ -1472,40 +1490,40 @@ Child   341    694
 <p>Now you know how to call variants in non-diploid system, so try it on bacteria, viruses, etc.</p>
 
 
-                    
-                    <blockquote class="key_points">
-                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
-                        <ul>
-                            
-                            <li><p>Variation in human mitochondria is a proxy for other haploid systems.</p>
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Variation in human mitochondria is a proxy for other haploid systems.</p>
 </li>
-                            
-                            <li><p>Nucleotide variants in haploid systems may have any frequency between 0 and 1.</p>
+                        
+                        <li><p>Nucleotide variants in haploid systems may have any frequency between 0 and 1.</p>
 </li>
-                            
-                            <li><p>Distinguishing true variants from noise is not easy and requires accounting <br /> for strand bias and read placement bias.</p>
+                        
+                        <li><p>Distinguishing true variants from noise is not easy and requires accounting <br /> for strand bias and read placement bias.</p>
 </li>
-                            
-                            <li><p>FreeBayes can be effectively used to call variants in haploid systems.</p>
+                        
+                        <li><p>FreeBayes can be effectively used to call variants in haploid systems.</p>
 </li>
-                            
-                        </ul>
-                    </blockquote>
-                    
+                        
+                    </ul>
+                </blockquote>
+                
 
-                    <h1>Frequently Asked Questions</h1>
-                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/variant-analysis/faqs/">FAQ page for the Variant Analysis topic</a> to see if your question is listed there.
-                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
-                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/variant-analysis/faqs/">FAQ page for the Variant Analysis topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
-                    
-                    <h1 data-toc-skip>Useful literature</h1>
-                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/variant-analysis#references">here</a>.</p>
-                    
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/variant-analysis#references">here</a>.</p>
+                
 
-                    
-                    <h1 id="bibliography">References</h1>
-                    <ol class="bibliography"><li><span id="Kanagawa2003">Kanagawa, T., 2003 <b>Bias and artifacts in multitemplate polymerase chain reactions (PCR)</b>. Journal of Bioscience and Bioengineering 96: 317–323.</span>
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li><span id="Kanagawa2003">Kanagawa, T., 2003 <b>Bias and artifacts in multitemplate polymerase chain reactions (PCR)</b>. Journal of Bioscience and Bioengineering 96: 317–323.</span>
     
     
     <a href="https://doi.org/https://doi.org/10.1016/S1389-1723(03)90130-7">https://doi.org/10.1016/S1389-1723(03)90130-7</a>
@@ -1581,85 +1599,85 @@ Child   341    694
     
 
 </li></ol>
-                    
+                
 
-                    
+                
 
-                    <h1>Feedback</h1>
-                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
-                    <div id="feedback-button">
-                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                    </div>
-                    <div id="feedback-form">
-                    </div>
-                    <script type="text/javascript">
-                        (function (window, document) {
-                            function onDocumentReady(fn) {
-                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                    fn();
-                                } else {
-                                    document.addEventListener('DOMContentLoaded', fn);
-                                }
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
                             }
+                        }
 
-                            onDocumentReady(function () {
-                                $("#feedback-button").click(function(evt){
-                                    var e = $(evt.target)
-                                    e.hide();
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
 
-                                    $("#feedback-form").html(`
-                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Calling variants in non-diploid systems (Variant Analysis)">Loading...</iframe>
-                                    `)
-                                })
-                            });
-                        })(window, document);
-                    </script>
-
-
-
-                    <h1>Citing this Tutorial</h1>
-                    <p>
-                        <ol>
-                            <li id="citation-text">Anton Nekrutenko, Alex Ostrovsky, 2021 <b>Calling variants in non-diploid systems (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/non-dip/tutorial.html">https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/non-dip/tutorial.html</a> Online; accessed TODAY
-                            </li>
-                            <li>
-                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
-                            </li>
-                        </ol>
-                    </p>
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Calling variants in non-diploid systems (Variant Analysis)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
 
 
-                    <blockquote class="details">
-                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
-                      <p style="display: none;">
 
-                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Anton Nekrutenko, Alex Ostrovsky, 2021 <b>Calling variants in non-diploid systems (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/non-dip/tutorial.html">https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/non-dip/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{variant-analysis-non-dip,
-    author = "Anton Nekrutenko and Alex Ostrovsky",
-    title = "Calling variants in non-diploid systems (Galaxy Training Materials)",
-    year = "2021",
-    month = "06",
-    day = "17"
-    url = "\url{https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/non-dip/tutorial.html}",
-    note = "[Online; accessed TODAY]"
+author = "Anton Nekrutenko and Alex Ostrovsky",
+title = "Calling variants in non-diploid systems (Galaxy Training Materials)",
+year = "2021",
+month = "06",
+day = "17"
+url = "\url{https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/non-dip/tutorial.html}",
+note = "[Online; accessed TODAY]"
 }
 @article{Batut_2018,
-        doi = {10.1016/j.cels.2018.05.012},
-        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
-        year = 2018,
-        month = {jun},
-        publisher = {Elsevier {BV}},
-        volume = {6},
-        number = {6},
-        pages = {752--758.e1},
-        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
-        title = {Community-Driven Data Analysis Training for Biology},
-        journal = {Cell Systems}
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
 }</code>
-                    </pre></div></div>
-                    </p>
-                    </blockquote>
+                </pre></div></div>
+                </p>
+                </blockquote>
 
 
 <script type="text/javascript">
@@ -1669,36 +1687,22 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
-                    
+                
 
-                    
+                
 
-                </div>
             </div>
         </div>
-    </section>
-</div>
-
-
-<footer>
-    <div class="container">
-        <p>
-            This material is the result of a collaborative work. Thanks to the
-            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Anton Nekrutenko, Alex Ostrovsky)!
-        </p>
-        <p>
-            Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/variant-analysis/tutorials/non-dip/tutorial.md">GitHub</a>.
-        </p>
-        <p>
-    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-</p>
     </div>
-</footer>
+</section>
+<br/>
+<br/>
+<br/>
 
+        </div>
+        
     </body>
     <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>

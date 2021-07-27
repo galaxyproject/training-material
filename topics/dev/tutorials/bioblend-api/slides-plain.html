@@ -1,0 +1,902 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Scripting Galaxy using the API and BioBlend</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta property="og:title" content="Galaxy Training: Scripting Galaxy using the API and BioBlend" />
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/dev/faqs/" title="Check our FAQs for the Development in Galaxy topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/bioblend-api/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/dev/tutorials/bioblend-api/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/bioblend-api/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/bioblend-api/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/bioblend-api/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/bioblend-api/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/bioblend-api/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fdev%2Ftutorials%2Fbioblend-api%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/dev/tutorials/bioblend-api/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/dev/tutorials/bioblend-api/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/dev/tutorials/bioblend-api/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/dev/tutorials/bioblend-api/slides.html">View markdown source on GitHub</a>
+	<h1>Scripting Galaxy using the API and BioBlend</h1>
+		<h2>Contributors</h2>
+		Olivia Doppelt-Azeroual, Fabien Mareuil, Nicola Soranzo, Dannon Baker
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What is a REST API?</p>
+</li>
+		
+		<li><p>How to interact with Galaxy programmatically?</p>
+</li>
+		
+		<li><p>Why and when should I use BioBlend?</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		
+		<h2>Requirements</h2>
+		<ul>
+		
+		
+    <li>
+    
+        <a href="https://ipython.org">IPython</a>
+    
+    </li>
+
+		</ul>
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 27, 2021 </div>
+
+	<hr />
+
+
+	<h2 id="galaxy-api">Galaxy API</h2>
+
+<ul>
+  <li><strong>Application Programming Interface (API)</strong>: the protocol defined by a software for how it can be controlled by an external program</li>
+  <li>Galaxy provides a rich API:
+    <ul>
+      <li>Over the HTTP protocol</li>
+      <li>The Galaxy UI is being migrated on top of the Galaxy API</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>An Application Programming Interface provides software developers with a definition of the methods to interact with a program or a library.</li>
+  <li>When the program is a remote web server like Galaxy, the methods are represented by URIs and the communication is through the HTTP protocol.</li>
+  <li>Nowadays, most of the Galaxy user interface makes use of the backend API to implement an asynchronous web application.</li>
+</ul>
+
+<hr />
+
+<h2 id="interacting-with-galaxy-ui-vs-api">Interacting with Galaxy: UI vs. API</h2>
+
+<ul>
+  <li>The Galaxy UI is good for:
+    <ul>
+      <li>exploring and visualizing data</li>
+      <li>experimenting</li>
+      <li>graphically designing workflows</li>
+      <li>people not comfortable with command line</li>
+    </ul>
+  </li>
+  <li>The Galaxy API is good for:
+    <ul>
+      <li>interact programmatically with the server
+        <ul>
+          <li>complex control: <strong>branching</strong> and <strong>looping</strong> (not possible in workflows)</li>
+        </ul>
+      </li>
+      <li>automate repetitive tasks</li>
+      <li>integration with external resources</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The Galaxy user interface is a better choice for explorative analysis, visualising data and drawing workflows.</li>
+  <li>The API instead allows you to automate tasks using Galaxy’s capabilities programmatically.</li>
+  <li>A typical use case is to upload FASTQ files as soon as your sequencer finishes writing them, and running a quality control workflow.</li>
+  <li>Importantly, however you interact with Galaxy, you can equally benefit from features like reproducibility of the analysis and data sharing.</li>
+  <li>In fact, all the work done via the API is still accessible when you return to the UI.</li>
+</ul>
+
+<hr />
+
+<h2 id="galaxy-api-functionalities">Galaxy API functionalities</h2>
+
+<ul>
+  <li>Users can:
+    <ul>
+      <li>upload and download data</li>
+      <li>run tools and workflows, …</li>
+      <li>manage histories and datasets</li>
+    </ul>
+  </li>
+  <li>Admins can also manage:
+    <ul>
+      <li>data libraries</li>
+      <li>Tool Shed repositories</li>
+      <li>users, quotas, roles…</li>
+    </ul>
+  </li>
+  <li>Source code lives at https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/webapps/galaxy/api/</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Most of the operations you would normally perform on the Galaxy UI are available via the API.</li>
+  <li>You can for example upload data, run tools and workflows, and manage your histories.</li>
+  <li>It is also possible to perform admin tasks, like manage data libraries and install tools.</li>
+</ul>
+
+<hr />
+
+<h2 id="restful-api">RESTful API</h2>
+
+<p>.left[REpresentational State Transfer (REST) is the architectural style of the World Wide Web:]</p>
+<ul>
+  <li>client–server</li>
+  <li>API requests:
+    <ul>
+      <li>standard HTTP request <strong>methods</strong> (GET, POST, PUT, DELETE,…) and status codes</li>
+      <li>Uniform <strong>Resource</strong> Identifiers (URIs)</li>
+      <li>Query and payload for parameters</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The Galaxy API follows the REST model typical of web applications.</li>
+  <li>A REST API specifies a protocol for the interaction between a client and a server.</li>
+  <li>The client sends requests composed by an HTTP method and a resource.</li>
+  <li>The main HTTP methods are: GET (to retrieve a resource); POST (to create); PUT (to replace); and DELETE.</li>
+  <li>Resources are identified by Uniform Resource Identifiers.</li>
+  <li>Examples of resources in the Galaxy API are: datasets, tools, jobs, histories, libraries, users; essentially anything that is recorded in the Galaxy database.</li>
+  <li>The client often need to pass additional parameters or data to specify how a request should be carried out.</li>
+  <li>The server replies to the request with a status code (to indicate if there was an error) and usually some data.</li>
+</ul>
+
+<hr />
+
+<h2 id="api-requests">API requests</h2>
+
+<ul>
+  <li>
+    <p><strong>HTTP method + URI [+ payload]</strong></p>
+
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">GET https://usegalaxy.org/api/histories?order=name</code> -&gt; ordered list of histories</li>
+    </ol>
+  </li>
+  <li>
+    <p>URI parameters: IDs in path, others in the <em>query</em> (<code class="language-plaintext highlighter-rouge">?name=value&amp;...</code>)</p>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Let’s see some examples of possible API requests to a Galaxy server.</li>
+  <li>In the first example we use the GET method to retrieve a resource, in this case the list of histories.</li>
+  <li>The URI starts with the protocol and address of the server, followed by the resource we are interested in: the histories.</li>
+  <li>A URI may then include an optional query, preceded by a question mark, containing a sequence of request parameters specified as key-equal-value and separated by ampersands.</li>
+  <li>In this example, the query is used to ask that the list of histories is ordered by name.</li>
+</ul>
+
+<hr />
+
+<h2 id="api-requests-1">API requests</h2>
+
+<ul>
+  <li>
+    <p><strong>HTTP method + URI [+ payload]</strong></p>
+
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">GET https://usegalaxy.org/api/histories?order=name</code> -&gt; ordered list of histories</li>
+      <li><code class="language-plaintext highlighter-rouge">POST /api/histories {"name": "New analysis"}</code> -&gt; create a history named “New analysis”</li>
+      <li><code class="language-plaintext highlighter-rouge">PUT /api/histories/&lt;id&gt; {"published": true}</code> -&gt; publish a history</li>
+      <li><code class="language-plaintext highlighter-rouge">DELETE /api/histories/&lt;history_id&gt;/contents/&lt;id&gt;</code> -&gt; delete a history dataset</li>
+    </ol>
+  </li>
+  <li>URI parameters: IDs in path, others in the <em>query</em> (<code class="language-plaintext highlighter-rouge">?name=value&amp;...</code>)</li>
+  <li>POST/PUT payload as JSON</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>In the second example, the POST method is used to create a resource on the server, in this case a new history.</li>
+  <li>Parameters for the POST request are passed as a payload in JSON format; more on this later.</li>
+  <li>In this example the payload contains the new name for the history to be created.</li>
+  <li>In the third example, we use the PUT method to update an existing resource, in this case to make a history public.</li>
+  <li>The history to modify is indentified by appending its ID to the histories URI.</li>
+  <li>The parameters for PUT requests are also passed in a payload.</li>
+  <li>In the fourth example, we use the DELETE method to remove a resource from the server.</li>
+  <li>In this case, we request the deletion of a particular dataset in a specific history, as indicated in the URI.</li>
+</ul>
+
+<hr />
+
+<h2 id="json-format">JSON format</h2>
+
+<p>.left[JavaScript Object Notation https://www.json.org/] <img style="float: right;" height="80" width="80" alt="JSON logo" src="../../images/json160.gif" /></p>
+<ul>
+  <li>Lightweight data-interchange text format</li>
+  <li>Easy to read/write for both humans and machines</li>
+  <li>ECMA-404 open standard (2013), <a href="https://tools.ietf.org/html/rfc8259">RFC 8259</a> (2017)</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">"history_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b5731bb49a17bf50"</span><span class="p">,</span><span class="w">
+ </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"df06cc665d85b6ea"</span><span class="p">,</span><span class="w">
+ </span><span class="nl">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"0"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bbd44e69cb8906b51528b5d606d1fdd0"</span><span class="p">,</span><span class="w">
+                  </span><span class="nl">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hda"</span><span class="p">}},</span><span class="w">
+ </span><span class="nl">"model_class"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WorkflowInvocation"</span><span class="p">,</span><span class="w">
+ </span><span class="nl">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"bbd44e69cb8906b528819eaaff340ecd"</span><span class="p">,</span><span class="w">
+             </span><span class="s2">"0ff30b4e2a4bed9e"</span><span class="p">],</span><span class="w">
+ </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="p">,</span><span class="w">
+ </span><span class="nl">"update_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-03T19:28:39.544574"</span><span class="p">,</span><span class="w">
+ </span><span class="nl">"workflow_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56482e194d798eb6"</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Request payloads passed to Galaxy and data returned by the API are encoded in the JSON format.</li>
+  <li>JSON is a standard format used to exchange text data and is supported in all major programming languages.</li>
+  <li>In JSON, strings are enclosed by double quotes, dictionaries by curly braces, and arrays by square brackets.</li>
+  <li>Dictionaries and arrays can be nested at will, as shown in the example.</li>
+</ul>
+
+<hr />
+
+<h2 id="status-codes-and-errors">Status codes and errors</h2>
+
+<ul>
+  <li>HTTP status codes:
+    <ul>
+      <li>200 OK, 400 your error, 500 server error, …<br />
+https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml</li>
+    </ul>
+  </li>
+  <li>Galaxy error codes and messages: <a href="https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/exceptions"><code class="language-plaintext highlighter-rouge">lib/galaxy/exceptions/</code></a>
+    <ul>
+      <li>Still a work in progress</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>In REST APIs, the server should use the standardised HTTP status codes in its responses to indicate either a successful request or the type of error encountered.</li>
+  <li>In the Galaxy API, error status codes and messages are returned to the client by raising specific Python exceptions in the backend.</li>
+</ul>
+
+<hr />
+
+<h2 id="how-to-access-a-rest-api">How to access a REST API</h2>
+
+<p>.left[With anything that can communicate over HTTP:]</p>
+<ul>
+  <li>Command line:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">curl</code></li>
+    </ul>
+  </li>
+  <li>GUI:
+    <ul>
+      <li>Browsers: only GET</li>
+      <li><a href="https://addons.mozilla.org/firefox/addon/restclient/">RESTClient</a> add-on for Firefox</li>
+      <li><a href="https://advancedrestclient.com/">Advanced REST Client</a></li>
+    </ul>
+  </li>
+  <li>Software libraries:
+    <ul>
+      <li>General HTTP libraries (e.g. <em>requests</em> for Python)</li>
+      <li>Service-specific libraries (e.g. <em>BioBlend</em> to access Galaxy using Python)</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>A REST API can be accessed via the HTTP protocol. There are 3 main ways to do that.</li>
+  <li>On the command line, the curl tool can perform any type of HTTP request; look at its manual for details.</li>
+  <li>For graphical user interfaces, you can perform GET requests directly on your browser by simply entering the URI on the address bar.</li>
+  <li>For more complex requests, you can use the Advanced REST Client open source app.</li>
+  <li>The third and most common way is to write a program.</li>
+  <li>All programming languages have some general library to communicate over HTTP.</li>
+  <li>For Python, requests is probably the best library to do that.</li>
+  <li>Many web services provide dedicated higher-level libraries to access their REST API.</li>
+  <li>In particular, BioBlend is a Python library to interact with Galaxy that we will describe later.</li>
+</ul>
+
+<hr />
+
+<h2 id="security">Security</h2>
+
+<ul>
+  <li>Most API calls require authentication
+    <ul>
+      <li>When the UI accesses the API, session auth is used</li>
+      <li>Other callers needs an <strong>API key</strong>: alphanumeric string (32 chars) identifying a registered user<br />
+Keep it secure, it’s the same as a username+password!</li>
+    </ul>
+  </li>
+  <li>Always use HTTPS:
+    <ul>
+      <li><strong>https</strong>://example.org/api?key=foo is safer due to the encryption of the transmitted data</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>A note about security.</li>
+  <li>When programmatically performing requests that require authentication, the client need to pass an API key.</li>
+  <li>An API key is an alphanumeric string uniquely identifying a user on a server.</li>
+  <li>Since it is equivalent to the combination of your username and password, keep it secure!</li>
+  <li>In particular, always use the HTTPS protocol to make requests, not HTTP which sends data unencrypted.</li>
+</ul>
+
+<hr />
+
+<h2 id="advanced-galaxy-api-config">Advanced Galaxy API config</h2>
+
+<p>.left[Options in <code class="language-plaintext highlighter-rouge">config/galaxy.yml</code>:]</p>
+<ul>
+  <li>User impersonation by adding <code class="language-plaintext highlighter-rouge">run_as</code> in the payload
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Optional list of email addresses of API users who can make calls on</span>
+<span class="c1"># behalf of other users.</span>
+<span class="na">api_allow_run_as</span><span class="pi">:</span> <span class="s">foo@foo.com</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Bootstrapping Galaxy</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># API key that allows performing some admin actions without actually</span>
+<span class="c1"># having a real admin user in the database and config. Only set this</span>
+<span class="c1"># if you need to bootstrap Galaxy, in particular to create a real</span>
+<span class="c1"># admin user account via API. You should probably not set this on a</span>
+<span class="c1"># production server.</span>
+<span class="na">master_api_key</span><span class="pi">:</span> <span class="s">MASTERLOCK</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>There are 2 options in the Galaxy configuration file that are relevant for the API.</li>
+  <li>api_allow_run_as allows the specified user to impersonate any other user on the Galaxy instance.</li>
+  <li>master_api_key instead is an optional special API key that can be used to bootstrap a Galaxy instance, in particular to create an initial admin account.</li>
+</ul>
+
+<hr />
+
+<h2 id="galaxy-api-modernization">Galaxy API Modernization</h2>
+
+<p>.left[Moving to <a href="https://fastapi.tiangolo.com/">FastAPI</a>]</p>
+
+<ul>
+  <li>Main advantages:
+    <ul>
+      <li><a href="https://fastapi.tiangolo.com/async/">Async requests</a></li>
+      <li>Subscriptions via <a href="https://fastapi.tiangolo.com/advanced/websockets/">websockets</a></li>
+      <li><a href="https://spec.openapis.org/oas/v3.1.0">OpenAPI</a> interactive documentation</li>
+      <li>Reduce maintenance burden</li>
+    </ul>
+  </li>
+  <li>Challenges:
+    <ul>
+      <li>Need to refactor over 200 endpoints</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The Galaxy API is currently in the process of migrating towards FastAPI, which is a modern framework for building REST APIs in Python with really interesting features.</li>
+  <li>For example, FastAPI can serve requests with better performances using asynchronous coroutines.</li>
+  <li>Another performance advantage is the ability to avoid inefficient polling by using WebSockets subscriptions.</li>
+  <li>In addition to the performance benefits, by using FastAPI in combination with type annotations, the Galaxy API can comply with the OpenAPI standard.</li>
+  <li>This standard can greatly enhance interoperability with other systems and reduce the maintenance burden of documentation and client code generation.</li>
+</ul>
+
+<hr />
+
+<h2 id="galaxy-api-pros-and-cons">Galaxy API pros and cons</h2>
+
+<ul>
+  <li>Pros:
+    <ul>
+      <li>Integrated with Galaxy</li>
+      <li>Well tested</li>
+      <li>Language agnostic</li>
+    </ul>
+  </li>
+  <li>Cons:
+    <ul>
+      <li>Very low-level</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>To summarise this first part, Galaxy has an extensive REST API that allows users and admins to interact programmatically with a server.</li>
+  <li>It can be accessed with any programming language, but it’s also very low level.</li>
+  <li>For example, you need to construct complex URIs, encode payloads and decode returned data.</li>
+</ul>
+
+<hr />
+
+<h2 id="bioblend">BioBlend</h2>
+
+<ul>
+  <li>BioBlend is a <strong>Python library</strong> that wraps the functionality of Galaxy and CloudMan APIs</li>
+  <li>Started by Enis Afgan, Nuwan Goonasekera and Clare Sloggett in 2012. Contributions by the Galaxy Team and the community</li>
+  <li>Open source (MIT license)</li>
+  <li>Available via PyPI and from https://github.com/galaxyproject/bioblend</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>A Python library called BioBlend was created in 2012 to make it easier to interact with the Galaxy API.</li>
+  <li>BioBlend is open source and developed by a community of contributors.</li>
+  <li>It is hosted on GitHub and can be installed via pip.</li>
+</ul>
+
+<hr />
+
+<h2 id="bioblend-features">BioBlend features</h2>
+
+<ul>
+  <li>Stable procedural API</li>
+  <li>Supported under Python &gt;=3.6</li>
+  <li>Wraps all main Galaxy API controllers</li>
+  <li>Extensive Continuous Integration testing:
+    <ul>
+      <li>on Galaxy release_17.09 and later</li>
+      <li>&gt;230 unit tests</li>
+    </ul>
+  </li>
+  <li>Well-documented on https://bioblend.readthedocs.io</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>BioBlend has a very stable procedural API and works on all supported Python versions.</li>
+  <li>It provides methods wrapping all the important Galaxy API endpoints.</li>
+  <li>The library uses Continuous Integration to perform a large number of tests on a wide range of Galaxy releases.</li>
+  <li>The documentation of BioBlend is very well curated and is often more accurate than the corresponding Galaxy API one.</li>
+</ul>
+
+<hr />
+
+<h2 id="tutorials---part-1">Tutorials - part 1</h2>
+
+<p>We have prepared
+<a href="https://github.com/nsoranzo/bioblend-tutorial/">some tutorials</a> as Jupyter
+notebooks, which can be executed online with Binder at
+https://mybinder.org/v2/gh/nsoranzo/bioblend-tutorial/main</p>
+
+<p>Walk-throughs:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">galaxy_api_histories.ipynb</code>: interact with histories using the <strong>Galaxy API</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">bioblend_histories.ipynb</code>: interact with histories using <strong>BioBlend</strong></li>
+</ul>
+
+<p>Exercises:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ex1_galaxy_api.ipynb</code>: launch a workflow using the <strong>Galaxy API</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">ex1_bioblend.ipynb</code>: launch a workflow using <strong>BioBlend</strong></li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Now it’s a good time to try the Galaxy API and BioBlend!</li>
+  <li>Follow the instructions on the slide to access the tutorials and exercises.</li>
+</ul>
+
+<hr />
+
+<h2 id="bioblend-limitations">BioBlend limitations</h2>
+
+<ul>
+  <li>Python-only (but separate <em>blend4j</em> and <em>blend4php</em> exist)</li>
+  <li>Its methods just deserialize the JSON response
+    <ul>
+      <li>No isolation from changes in the Galaxy API</li>
+      <li>Need to extract the entity ID for further processing</li>
+    </ul>
+  </li>
+  <li>No explicit modeling of Galaxy entities and their relationships</li>
+  <li>Complex operations still need many function calls
+    <ul>
+      <li>Need for higher-level functionality</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Although easier to use than the Galaxy API, BioBlend has some limitations.</li>
+  <li>First of all, it’s only available for Python.</li>
+  <li>There are alternative libraries for Java and PHP, but they are less complete.</li>
+  <li>Another limitation of BioBlend is that it doesn’t shield the caller from possible changes in responses from the Galaxy API.</li>
+  <li>It can also be annoying to have to constantly keep track of entity IDs.</li>
+  <li>This happens because BioBlend does not try to model Galaxy entities and how they are connected.</li>
+</ul>
+
+<hr />
+
+<h2 id="bioblendobjects">BioBlend.objects</h2>
+
+<ul>
+  <li>BioBlend.objects is an extra layer which adds an <strong>object-oriented interface</strong> for the Galaxy API</li>
+  <li>Started by Simone Leo, Luca Pireddu and Nicola Soranzo at CRS4 in 2013</li>
+  <li>Distributed with BioBlend</li>
+  <li>Presently limited to datasets, histories, invocations, jobs, libraries, tools and workflows</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>To implement this modelling of Galaxy entities, some years ago an object-oriented interface was added on top of BioBlend: BioBlend objects</li>
+  <li>This is developed and distributed together with BioBlend itself.</li>
+  <li>When using this interface, methods will return objects encapsulating the dictionaries returned by the Galaxy API.</li>
+  <li>The user can then invoke further methods on these objects, for example the download method for a Dataset object.</li>
+  <li>Only a subset of BioBlend is available through the object interface, but most of the common user functionalities are included.</li>
+</ul>
+
+<hr />
+
+<h2 id="tutorials---part-2">Tutorials - part 2</h2>
+
+<p>More <a href="https://github.com/nsoranzo/bioblend-tutorial/">Jupyter notebooks</a> which
+can be executed online with Binder at
+https://mybinder.org/v2/gh/nsoranzo/bioblend-tutorial/main</p>
+
+<p>Walk-throughs:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">bioblend.objects_histories.ipynb</code>: interact with histories using <strong>BioBlend.objects</strong></li>
+</ul>
+
+<p>Exercises:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ex1_bioblend.objects.ipynb</code>: launch a workflow using <strong>BioBlend.objects</strong></li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Now you can try BioBlend objects and see how it compares with BioBlend.</li>
+  <li>Follow the instructions on the slide to access the tutorials and exercises.</li>
+</ul>
+
+<hr />
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li>Galaxy API docs: https://docs.galaxyproject.org/en/master/api_doc.html</li>
+  <li>BioBlend docs: https://bioblend.readthedocs.io/</li>
+  <li>BioBlend chat: https://matrix.to/#/#galaxyproject_bioblend:gitter.im</li>
+  <li>C. Sloggett, N. Goonasekera, E. Afgan. BioBlend: automating pipeline analyses within Galaxy and CloudMan. <em>Bioinformatics</em> 29(13), 1685-1686, 2013, doi:<a href="https://doi.org/10.1093/bioinformatics/btt199">10.1093/bioinformatics/btt199</a></li>
+  <li>S. Leo, L. Pireddu, G. Cuccuru, L. Lianas, N. Soranzo, E. Afgan, G. Zanetti. BioBlend.objects: metacomputing with Galaxy. <em>Bioinformatics</em> 30 (19), 2816-2817, 2014, doi:<a href="https://doi.org/10.1093/bioinformatics/btu386">10.1093/bioinformatics/btu386</a></li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Here you can find the links to the documentation of the Galaxy API and of BioBlend.</li>
+  <li>We have a dedicated Gitter channel to chat about BioBlend.</li>
+  <li>If you use BioBlend or BioBlend objects, please cite these papers.</li>
+</ul>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>The API allows you to use Galaxy's capabilities programmatically.</li>
+
+<li>BioBlend makes using the Galaxy API from Python easier.</li>
+
+<li>BioBlend objects is an object-oriented interface for interacting with Galaxy.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

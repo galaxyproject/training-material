@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Recurrent neural networks (RNN) 
+ Deep Learning - Part 2</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Statistical Analyses for omics data and machine learning ..." />
+        <meta property="og:title" content="Galaxy Training: Recurrent neural networks (RNN) 
+ Deep Learning - Part 2" />
+        <meta property="og:description" content="Statistical Analyses for omics data and machine learning ..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/statistics/faqs/" title="Check our FAQs for the Statistics and machine learning topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/RNN/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/statistics/tutorials/RNN/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/statistics/tutorials/RNN/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/statistics/tutorials/RNN/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/statistics/tutorials/RNN/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/statistics/tutorials/RNN/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/statistics/tutorials/RNN/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fstatistics%2Ftutorials%2FRNN%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/statistics/tutorials/RNN/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/statistics/tutorials/RNN/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/statistics/tutorials/RNN/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/statistics/tutorials/RNN/slides.html">View markdown source on GitHub</a>
+	<h1>Recurrent neural networks (RNN) 
+ Deep Learning - Part 2</h1>
+		<h2>Contributors</h2>
+		Kaivan Kamali
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What is a recurrent neural network (RNN)?</p>
+</li>
+		
+		<li><p>What are some applications of RNN?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Understand the difference between feedforward neural networks (FNN) and RNN</p>
+</li>
+		
+		<li><p>Learn various RNN types and architectures</p>
+</li>
+		
+		<li><p>Learn how to create a neural network using Galaxy’s deep learning tools</p>
+</li>
+		
+		<li><p>Solve a sentiment analysis problem on IMDB movie review dataset using RNN in Galaxy</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Requirements</h2>
+		<ul>
+		
+		
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/statistics">Statistics and machine learning</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Introduction to deep learning:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/statistics/tutorials/intro_deep_learning/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Deep Learning (Part 1) - Feedforward neural networks (FNN):
+                            
+                                <a href="/training-material/topics/statistics/tutorials/FNN/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/statistics/tutorials/FNN/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+		</ul>
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 27, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="what-is-a-recurrent-neural-network-rnn">What is a recurrent neural network (RNN)?</h1>
+
+<p><span>Speaker Notes</span></p>
+
+<p>What is a recurrent neural network (RNN)?</p>
+
+<hr />
+
+<h1 id="recurrent-neural-network-rnn">Recurrent Neural Network (RNN)</h1>
+
+<ul>
+  <li>RNN models sequential data (temporal/ordinal)</li>
+  <li>In RNN, training example is a sequence, which is presented to RNN one at a time
+    <ul>
+      <li>E.g., sequence of English words is passed to RNN, one at a time</li>
+      <li>And, RNN generates a sequence of Persian words, one at a time</li>
+    </ul>
+  </li>
+  <li>In RNN, output of network at time <em>t</em> is used as input at time <em>t+1</em></li>
+  <li>RNN applied to image description, machine translation, sentiment analysis, etc.</li>
+</ul>
+
+<hr />
+
+<h1 id="one-to-many-rnn">One-to-many RNN</h1>
+
+<p><img src="/training-material/topics/statistics/images/RNN_1_to_n.png" alt="Neurons forming a one-to-many recurrent neural network" loading="lazy" /> <!-- https://pixy.org/3013900/ CC0 license--></p>
+
+<hr />
+
+<h1 id="many-to-one-rnn">Many-to-one RNN</h1>
+
+<p><img src="/training-material/topics/statistics/images/RNN_n_to_1.png" alt="Neurons forming a many-to-one recurrent neural network" loading="lazy" /> <!-- https://pixy.org/3013900/ CC0 license--></p>
+
+<hr />
+
+<h1 id="many-to-many-rnn">Many-to-many RNN</h1>
+
+<p><img src="/training-material/topics/statistics/images/RNN_n_to_m.png" alt="Neurons forming a many-to-many recurrent neural network" loading="lazy" /> <!-- https://pixy.org/3013900/ CC0 license--></p>
+
+<hr />
+
+<h1 id="rnn-architectures">RNN architectures</h1>
+
+<ul>
+  <li>Vanilla RNN
+    <ul>
+      <li>Suffers from <em>vanishing gradient</em> problem</li>
+    </ul>
+  </li>
+  <li>LSTM and GRU
+    <ul>
+      <li>Uses <em>gates</em> to avoid vanishing gradient problem</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="sentiment-analysis">Sentiment analysis</h1>
+
+<ul>
+  <li>We perform sentiment analysis on IMDB movie reviews dataset</li>
+  <li>Train RNN on training dataset (25000 positive/negative movie reviews)</li>
+  <li>Test RNN on test set (25000 positive/negative movie reviews)</li>
+  <li>Training and test sets have no overlap</li>
+  <li>Since dealing with text data, good to review mechanisms for representing text data</li>
+</ul>
+
+<hr />
+
+<h1 id="text-preprocessing">Text preprocessing</h1>
+
+<ul>
+  <li>Tokenize a document, i.e., break it down into words</li>
+  <li>Remove punctuations, URLs, and stop words (‘a’, ‘of’, ‘the’, etc.)</li>
+  <li>Normalize the text, e.g., replace ‘brb’ with ‘Be right back’, etc</li>
+  <li>Run the spell checker to fix typos</li>
+  <li>Make all words lowercase</li>
+</ul>
+
+<hr />
+
+<h1 id="text-preprocessing-1">Text preprocessing</h1>
+
+<ul>
+  <li>Perform stemming/lemmatization
+    <ul>
+      <li>If we have words like ‘organizer’, ‘organize’, and ‘organized’
+        <ul>
+          <li>Want to reduce all of them to a single word</li>
+        </ul>
+      </li>
+      <li>Stemming cuts end of these words for a single root
+        <ul>
+          <li>E.g., ‘organiz’.  May not be an actual word</li>
+        </ul>
+      </li>
+      <li>Lemmatization reduces to a root that is actually a word
+        <ul>
+          <li>E.g., ‘organize’</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="bag-of-words-bow">Bag of words (BoW)</h1>
+
+<ul>
+  <li>If you don’t care about the order of the words in a document</li>
+  <li>2D array. Rows represent documents. Columns represent words in vocabulary
+    <ul>
+      <li>All unique words in all documents</li>
+    </ul>
+  </li>
+  <li>If a word not present in a document, we have a zero at row and column entry</li>
+  <li>If a word is present in a document, we have a one at row and colum entry
+    <ul>
+      <li>Or, we could use the word count or frequency</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="bag-of-words-bow-1">Bag of words (BoW)</h1>
+
+<ul>
+  <li>Document 1: Magic passed the basketball to Kareem</li>
+  <li>Document 2: Lebron stole the basketball from Curry</li>
+</ul>
+
+<p><img src="/training-material/topics/statistics/images/BoW.png" alt="Table showing a bag-of-words representation of sample documents" loading="lazy" /> <!-- https://pixy.org/3013900/ CC0 license--></p>
+
+<ul>
+  <li>BoW is simple, but does not consider rarity of words across documents
+    <ul>
+      <li>Important for document classification</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="term-frequency-inverse-document-frequency-tf-idf">Term frequency inverse document frequency (TF-IDF)</h1>
+
+<ul>
+  <li>If you don’t care about the order of the words in a document</li>
+  <li>Similar to BoW, we have an entry for each document-word pair</li>
+  <li>Entry is product of
+    <ul>
+      <li>Term frequency, frequency of a word in a document, and</li>
+      <li>Inverse document frequency, total number of documents divided by number of documents that have word
+        <ul>
+          <li>Usually use logarithm of the IDF</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>TF-IDF takes into account rarity of a word across documents</li>
+</ul>
+
+<hr />
+
+<h1 id="one-hot-encoding-ohe">One-hot encoding (OHE)</h1>
+
+<ul>
+  <li>Technique to convert categorical variables such as words into a vector</li>
+  <li>Suppose our vocabulary has 3 words: orange, apple, banana</li>
+  <li>Each word is represented by a vector of size 3</li>
+</ul>
+
+<p><img src="/training-material/topics/statistics/images/OHE.gif" alt="Mathematical vectors representing one-hot-encoding representation of words orange, apple, and banana" loading="lazy" /> <!-- https://pixy.org/3013900/ CC0 license--></p>
+
+<ul>
+  <li>OHE problems
+    <ul>
+      <li>For very large vocabulary sizes requires tremendous amount of storage</li>
+      <li>Also, no concept of word similarity</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="word2vec">Word2Vec</h1>
+
+<ul>
+  <li>Each word represented as an <em>n</em> dimensional vector
+    <ul>
+      <li><em>n</em> much smaller than vocabulary size</li>
+    </ul>
+  </li>
+  <li>Words that have similar meanings are close in vector space</li>
+  <li>Words considered similar if they co-occur often in documents</li>
+  <li>Two Word2Vec architectures
+    <ul>
+      <li>Continuous BoW
+        <ul>
+          <li>predicts probability of a word given the surrounding words</li>
+        </ul>
+      </li>
+      <li>Continuous skip-gram
+        <ul>
+          <li>given a word predicts probability of the surrounding words</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="sentiment-analysis-1">Sentiment analysis</h1>
+
+<ul>
+  <li>Sentiment classification of IMDB movie reviews with RNN</li>
+  <li>Train RNN using IMDB movie reviews</li>
+  <li>Goal is to learn a model such that given a review we predict whether review is positive/negative</li>
+  <li>We evaluate the trained RNN on test dataset and plot confusion matrix</li>
+</ul>
+
+<hr />
+
+<h1 id="for-references-please-see-tutorials-references-section">For references, please see tutorial’s References section</h1>
+
+<hr />
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

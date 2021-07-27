@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Server Maintenance and Backups</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Server Maintenance and Backups" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/maintenance/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/maintenance/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/maintenance/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/maintenance/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/maintenance/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/maintenance/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/maintenance/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fmaintenance%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/admin/tutorials/maintenance/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/admin/tutorials/maintenance/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/admin/tutorials/maintenance/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/admin/tutorials/maintenance/slides.html">View markdown source on GitHub</a>
+	<h1>Server Maintenance and Backups</h1>
+		<h2>Contributors</h2>
+		Nate Coraor, Björn Grüning, Simon Gladman, Helena Rasche
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>How do I maintain a Galaxy server?</p>
+</li>
+		
+		<li><p>What happens if I lose everything?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Learn about different maintenance steps</p>
+</li>
+		
+		<li><p>Learn what to back up and how to recover</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 6, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="server-maintenance">Server Maintenance</h1>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Server Maintenance</li>
+</ul>
+
+<hr />
+
+<h2 id="dataset-cleanup">Dataset Cleanup</h2>
+
+<p>Can only delete (or purge) dataset when all ‘associations’ pointing at it have been marked <code class="language-plaintext highlighter-rouge">deleted</code>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>method</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">scripts/cleanup_datasets/pgcleanup.py</code></td>
+      <td>PostgreSQL-optimized fast cleanup script</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">scripts/cleanup_datasets/cleanup_datasets.py</code></td>
+      <td>General cleanup script</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gxadmin cleanup &lt;days&gt;</code></td>
+      <td>calls pgcleanup</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>One of the important admimn tasks is to keep an eye on the storage consumption.</li>
+  <li>Every instance should have a data rention policy defined and shared with users.</li>
+  <li>Codebase contains scripts that can assist with cleaning up and reclaiming space.</li>
+  <li>The gxadmin tool can assist with invoking these scripts.</li>
+</ul>
+
+<hr />
+<p>class: reduce70</p>
+
+<h2 id="pgcleanup-invocation">pgcleanup invocation</h2>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>./scripts/cleanup_datasets/pgcleanup.py <span class="nt">--help</span>
+<span class="go">usage: pgcleanup.py [-h] [-c CONFIG_FILE] [-d] [--dry-run] [--force-retry]
+                    [-o DAYS] [-U] [-s SEQUENCE] [-w WORK_MEM] [-l LOG_DIR]
+                    [ACTION [ACTION ...]]
+
+positional arguments:
+  ACTION                Action(s) to perform, chosen from: delete_datasets,
+                        delete_exported_histories, delete_inactive_users,
+                        delete_userless_histories, purge_datasets,
+                        purge_deleted_hdas, purge_deleted_histories,
+                        purge_deleted_users, purge_error_hdas,
+                        purge_hdas_of_purged_histories,
+                        purge_historyless_hdas, update_hda_purged_flag
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -c CONFIG_FILE, --config-file CONFIG_FILE, --config CONFIG_FILE
+                        Galaxy config file (defaults to
+</span><span class="gp">                        $</span>GALAXY_ROOT/config/galaxy.yml <span class="k">if </span>that file exists or
+<span class="go">                        else to ./config/galaxy.ini if that exists). If this
+                        isn't set on the command line it can be set with the
+                        environment variable GALAXY_CONFIG_FILE.
+  -d, --debug           Enable debug logging (SQL queries)
+  --dry-run             Dry run (rollback all transactions)
+  --force-retry         Retry file removals (on applicable actions)
+  -o DAYS, --older-than DAYS
+                        Only perform action(s) on objects that have not been
+                        updated since the specified number of days
+  -U, --no-update-time  Don't set update_time on updated objects
+  -s SEQUENCE, --sequence SEQUENCE
+                        DEPRECATED: Comma-separated sequence of actions
+  -w WORK_MEM, --work-mem WORK_MEM
+                        Set PostgreSQL work_mem for this connection
+  -l LOG_DIR, --log-dir LOG_DIR
+                        Log file directory
+</span></code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Cleanup scripts provide various options for filtering on which datasets to take action.</li>
+  <li>Use the dry run option to verify what datasets you are about to affect.</li>
+</ul>
+
+<hr />
+<p>class: reduce70</p>
+
+<h2 id="pgcleanup-actions">pgcleanup actions</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>action</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">delete_userless_histories</code></td>
+      <td>&lt;ul&gt;&lt;li&gt;Mark deleted all “anonymous” Histories (not owned by a registered user) that are older than the specified number of days.&lt;/li&gt;&lt;/ul&gt;</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">delete_exported_histories</code></td>
+      <td>&lt;ul&gt;&lt;li&gt;Mark deleted all Datasets that are derivative of JobExportHistoryArchives that are older than the specified number of days.&lt;/li&gt;&lt;/ul&gt;</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">purge_deleted_users</code></td>
+      <td>&lt;ul&gt;&lt;li&gt;Mark purged all users that are older than the specified number of days.&lt;/li&gt;&lt;li&gt;Mark purged all Histories whose user_ids are purged in this step.&lt;/li&gt;&lt;li&gt;Mark purged all HistoryDatasetAssociations whose history_ids are purged in this step.&lt;/li&gt;&lt;li&gt;Delete all UserGroupAssociations whose user_ids are purged in this step.&lt;/li&gt;&lt;li&gt;Delete all UserRoleAssociations whose user_ids are purged in this step EXCEPT FOR THE PRIVATE ROLE.&lt;/li&gt;&lt;li&gt;Delete all UserAddresses whose user_ids are purged in this step.&lt;/li&gt;&lt;/ul&gt;</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">purge_deleted_histories</code></td>
+      <td>&lt;ul&gt;&lt;li&gt;Mark purged all Histories marked deleted that are older than the specified number of days.&lt;/li&gt;&lt;li&gt;Mark purged all HistoryDatasetAssociations in Histories marked purged in this step (if not already purged).&lt;/li&gt;&lt;/ul&gt;</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">purge_deleted_hdas</code></td>
+      <td>&lt;ul&gt;&lt;li&gt;Mark purged all HistoryDatasetAssociations currently marked deleted that are older than the specified number of days.&lt;/li&gt;&lt;li&gt;Mark deleted all MetadataFiles whose hda_id is purged in this step.&lt;/li&gt;&lt;li&gt;Mark deleted all ImplicitlyConvertedDatasetAssociations whose hda_parent_id is purged in this step.&lt;/li&gt;&lt;li&gt;Mark purged all HistoryDatasetAssociations for which an ImplicitlyConvertedDatasetAssociation with matching hda_id is deleted in this step.&lt;/li&gt;&lt;/ul&gt;</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Some available actions are safer than others, for example “delete userless histories”.</li>
+  <li>In Galaxy, when something is marked deleted, it still exists with a deleted flag.</li>
+  <li>Once purged the file is gone.</li>
+</ul>
+
+<hr />
+<p>class: reduce70</p>
+
+<h2 id="more-pgcleanup-actions">More pgcleanup actions</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>action</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">purge_historyless_hdas</code></td>
+      <td>&lt;ul&gt;&lt;li&gt;Mark purged all HistoryDatasetAssociations whose history_id is null.&lt;/li&gt;&lt;/ul&gt;</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">purge_error_hdas</code></td>
+      <td>&lt;ul&gt;&lt;li&gt;Mark purged all HistoryDatasetAssociations whose dataset_id is state = ‘error’ that are older than the specified number of days.&lt;/li&gt;&lt;/ul&gt;</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">purge_hdas_of_purged_histories</code></td>
+      <td>&lt;ul&gt;&lt;li&gt;Mark purged all HistoryDatasetAssociations in histories that are purged and older than the specified number of days.&lt;/li&gt;&lt;/ul&gt;</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">delete_datasets</code></td>
+      <td>&lt;ul&gt;&lt;li&gt;Mark deleted all Datasets whose associations are all marked as deleted (LDDA) or purged (HDA) that are older than the specified number of days.&lt;/li&gt;&lt;li&gt;JobExportHistoryArchives have no deleted column, so the datasets for these will simply be deleted after the specified number of days.&lt;/li&gt;&lt;/ul&gt;</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">purge_datasets</code></td>
+      <td>&lt;ul&gt;&lt;li&gt;Mark purged all Datasets marked deleted that are older than the specified number of days.&lt;/li&gt;&lt;/ul&gt;</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Be wary about aggressive storage reclamation. It can aggravate users.</li>
+  <li>Well-defined and updated data retention policy brings benefits.</li>
+</ul>
+
+<hr />
+<h1 id="additional-cleaning-scripts">Additional cleaning scripts</h1>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">admin_cleanup_datasets.py</code>
+    <ul>
+      <li>Mark datasets as deleted that are older than specified cutoff.</li>
+      <li>Has email templated notification (can also be used to just send info without deleting).</li>
+      <li>Can be restricted to a tool.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>One of the included scripts can send templated email to the affected users.</li>
+  <li>Take advantage of this to give your users some time to backup their data before you reclaim the space.</li>
+</ul>
+
+<hr />
+
+<h2 id="other-disk-space-cleanups">Other disk space cleanups</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">tmpwatch</code> (<code class="language-plaintext highlighter-rouge">tmpreaper</code> on Debian-based distros) your job working directory
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">cleanup_job</code> in <code class="language-plaintext highlighter-rouge">galaxy.yml</code> (defaults to <code class="language-plaintext highlighter-rouge">always</code> though)</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">tmpwatch</code> your <code class="language-plaintext highlighter-rouge">new_file_path</code>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">/usr/bin/tmpwatch -v --mtime --dirmtime 7d /srv/galaxy/var/tmp</code></li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Galaxy generates intermediate data as part of the job execution.</li>
+  <li>These should be automatically cleaned up unless you change the cleanup_job flag in galaxy’s configuration.</li>
+</ul>
+
+<hr />
+
+<h1 id="backups">Backups</h1>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Backups</li>
+</ul>
+
+<hr />
+<p>class: left</p>
+
+<h2 id="what-to-backup">What to backup</h2>
+
+<p><strong>Must</strong> be backed up:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>item</th>
+      <th>path (from tutorials)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Database (<a href="https://www.postgresql.org/docs/current/continuous-archiving.html">PITR</a>, enable in <a href="https://github.com/galaxyproject/ansible-postgresql">galaxyproject.postgresql</a>)</td>
+      <td>system dependent</td>
+    </tr>
+    <tr>
+      <td>Installed shed tools</td>
+      <td><code class="language-plaintext highlighter-rouge">/srv/galaxy/var/shed_tools</code></td>
+    </tr>
+    <tr>
+      <td><em>Managed</em> (aka <em>mutable</em>) configs</td>
+      <td><code class="language-plaintext highlighter-rouge">/srv/galaxy/var/config</code></td>
+    </tr>
+    <tr>
+      <td>Logs (if you like…)</td>
+      <td><code class="language-plaintext highlighter-rouge">systemd-journald</code></td>
+    </tr>
+    <tr>
+      <td>Datasets (if you can…)</td>
+      <td><code class="language-plaintext highlighter-rouge">/data</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If absolute reproducibility matters:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>item</th>
+      <th>path (from tutorials)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Tool dependencies</td>
+      <td><code class="language-plaintext highlighter-rouge">/srv/galaxy/var/dependencies</code></td>
+    </tr>
+    <tr>
+      <td>Data manager-installed reference data</td>
+      <td><code class="language-plaintext highlighter-rouge">/srv/galaxy/var/tool-data</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Many parts of Galaxy are convenient to back up since they are straight folder hierarchies.</li>
+  <li>Use your system’s recommended way to back up galaxy’s database.</li>
+  <li>If you have local modifications to galaxy’s code back up those as well.</li>
+</ul>
+
+<hr />
+<p>class: left</p>
+
+<h2 id="what-not-to-back-up">What not to back up</h2>
+
+<p>Restorable from Ansible Playbook:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>item</th>
+      <th>path (from tutorials)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Galaxy</td>
+      <td><code class="language-plaintext highlighter-rouge">/srv/galaxy/server</code></td>
+    </tr>
+    <tr>
+      <td>Virtualenv</td>
+      <td><code class="language-plaintext highlighter-rouge">/srv/galaxy/venv</code></td>
+    </tr>
+    <tr>
+      <td><em>Static</em> configs</td>
+      <td><code class="language-plaintext highlighter-rouge">/srv/galaxy/config</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Recreatable at runtime:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>item</th>
+      <th>path (from tutorials)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Anything in <em>managed/mutable data dir</em> not previously mentioned</td>
+      <td><code class="language-plaintext highlighter-rouge">/srv/galaxy/var</code></td>
+    </tr>
+    <tr>
+      <td>Job working directories</td>
+      <td><code class="language-plaintext highlighter-rouge">/srv/galaxy/jobs</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="restoring-from-backups">Restoring from backups</h2>
+
+<p>If lost <em>database</em> or <em>managed/mutable configs</em>, then <strong>restore these first</strong></p>
+
+<p>Then run playbook</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>In case of an incident do not rush even when pressure is piling.</li>
+  <li>Careful planning of the restoration procedure will save you from hasty recovery attempts with errors.</li>
+  <li>Consider running a recovery drill pretending that e.g. your galaxy machine was wiped.</li>
+</ul>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Use configuration management (e.g. Ansible)</li>
+
+<li>Store configuration management in git</li>
+
+<li>Back up the parts of Galaxy that can't be recreated</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+
+<img src="/training-material/assets/images/gat.png" alt="page logo" style="height: 100px;"/>
+
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

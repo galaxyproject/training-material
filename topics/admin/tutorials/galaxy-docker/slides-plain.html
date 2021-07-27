@@ -1,0 +1,1165 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Docker and Galaxy</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Docker and Galaxy" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/galaxy-docker/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/galaxy-docker/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/galaxy-docker/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/galaxy-docker/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/galaxy-docker/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/galaxy-docker/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/galaxy-docker/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fgalaxy-docker%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/admin/tutorials/galaxy-docker/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/admin/tutorials/galaxy-docker/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/admin/tutorials/galaxy-docker/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/admin/tutorials/galaxy-docker/slides.html">View markdown source on GitHub</a>
+	<h1>Docker and Galaxy</h1>
+		<h2>Contributors</h2>
+		Bérénice Batut, Björn Grüning
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>Why Docker? What is it?</p>
+</li>
+		
+		<li><p>How to use Docker?</p>
+</li>
+		
+		<li><p>How to integrate Galaxy in Docker to facilitate its deployment?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Docker basics</p>
+</li>
+		
+		<li><p>Galaxy Docker image (usage)</p>
+</li>
+		
+		<li><p>Galaxy Docker (internals)</p>
+</li>
+		
+		<li><p>Galaxy flavours</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 26, 2021 </div>
+
+	<hr />
+
+
+	<h3 id="preparing-admin-training-vms">Preparing Admin Training VMs</h3>
+
+<p>If you’re falling along on Galaxy Admin Training VMs, you will need to setup Docker.</p>
+
+<p>You can modify your Ansible setup to configure this as described at <a href="http://bit.ly/gxadmin-docker-playbook">bit.ly/gxadmin-docker-playbook</a>.</p>
+
+<p>You will also need to stop Galaxy running on the VM so that you can run Galaxy in a container.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo supervisorctl stop galaxy
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<p>TODO: Remove this slide after the training, it isn’t general.</p>
+
+<hr />
+
+<h3 id="preparation">Preparation</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker pull bgruening/galaxy-stable:18.05
+$ git clone https://github.com/bgruening/docker-galaxy-stable.git
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Here you will learn the internals of the Docker Galaxy Image.
+We will show you tips and tricks on how to run the Galaxy Docker
+Image successfully in production, how to manage updates and how
+to bind the container to a cluster scheduler. Moreover,
+you will learn how to create your own Galaxy flavour mixing a
+variety of different tools and visualisations</p>
+
+<hr />
+
+<h2 id="why-docker-what-is-it">Why Docker? <br />What is it?</h2>
+
+<p><img src="../../images/docker_whale.png" alt="Image of a blue whale with containers on its back." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="deployment-issues-of-bioinformatics-tools">Deployment issues of bioinformatics tools</h3>
+
+<ul>
+  <li>Different environments</li>
+  <li>Different OS</li>
+  <li>Different packaging</li>
+  <li>Conflict between tools or versions</li>
+</ul>
+
+<p><i class="fa fa-long-arrow-right"></i> Impact on usability and reproducibility</p>
+
+<hr />
+
+<h3 id="deployment-issue">Deployment issue</h3>
+
+<p><img src="../../images/deployment_issue.svg" alt="Galaxy is a box with many dependencies like node, java, nginx, python, uwsgi, anaconda. On the right knime is another box with java and eclipse dependencies. Lines show the multiplicity of tools and dependencies trying to run on multiple environments with windows/osx/linux desktops, servers, and the cloud." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="deployment-issue-1">Deployment issue</h3>
+
+<p>Matrix from Hell</p>
+
+<p><img src="../../images/deployment_issue_matrix.svg" alt="Galaxy and knime form the y axis of a table with a lot of question marks about which environments support them." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="transport-pre-1960">Transport Pre 1960</h3>
+
+<p><img src="../../images/cargo_transport_issue.svg" alt="Icons for multiple types of goods shown multiple methods for transport and storing." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="transport-pre-1960-1">Transport Pre 1960</h3>
+
+<p>Matrix from Hell</p>
+
+<p><img src="../../images/cargo_transport_matrix.svg" alt="A similar table full of question marks between goods and shipment methods is shown." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="intermodal-shipping-container">Intermodal shipping container</h3>
+
+<p><img src="../../images/cargo_transport_solution.svg" alt="A blue shipping container is shown solving the transport problem by being a one size container to fit all sorts of goods, on all sorts of transports." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>A standard container</p>
+<ul>
+  <li>Virtually loading any goods</li>
+  <li>Sealed until it reaches final delivery</li>
+  <li>Can be
+    <ul>
+      <li>loaded and unloaded</li>
+      <li>stacked</li>
+      <li>transported efficiently over long distances</li>
+      <li>transferred from one mode of transport to another</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="docker">Docker</h3>
+
+<p><img src="../../images/deployment_solution.svg" alt="Docker logo on a blue shipping container solves the galaxy/knime deployment problem across environments." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Docker = An engine that encapsulated any tools as a</p>
+<ul>
+  <li>lightweight</li>
+  <li>portable</li>
+  <li>self sufficient container</li>
+  <li>manipulated using standard operations</li>
+  <li>run consistently on virtually any hardware platform</li>
+</ul>
+
+<hr />
+
+<h3 id="a-docker-container">A Docker container?</h3>
+
+<p><img src="../../images/WhatIsDocker_1_kernal-2_1.png" alt="A schematic with the kernal below and two containers is shown, each container has different stacks." loading="lazy" /></p>
+
+<p>Lightweight and Open</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>lightweight: same OS kernel, instant start, less RAM use</li>
+  <li>open: open standard, run on all major unix distributions and windows</li>
+</ul>
+
+<hr />
+
+<h3 id="virtual-machines-vs-containers">Virtual machines vs Containers</h3>
+
+<p><img src="../../images/container_vs_vm.svg" alt="A cartoon comparing containers vs VMs. On the left the VMs are presented as a layer of server, host os, and hypervisor (type 2) followed by several tall pillars of guest OS, bin/libs and finally their respective apps. Everything is siloed. On the right is containers where the layers are server, host os, and docker engine. Above those are very short pillars of each different app, and when duplicate apps are run, the bin/libs are shown as shared. Text reads: containers are isolated but share OS and where appropriate, bins/libraries." loading="lazy" /></p>
+
+<p>Containers more portable and efficient</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Similar resource isolation and allocation benefits</p>
+
+<p><em>but</em> a different architectural approach</p>
+
+<ul>
+  <li>VM: application +  necessary binaries and libraries + entire guest operating system
+    <ul>
+      <li>All of which can amount to tens of GBs</li>
+    </ul>
+  </li>
+  <li>Container: application and all of its dependencies
+    <ul>
+      <li>Share the kernel with other containers</li>
+      <li>Running as isolated processes in user space on the host operating system</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="how-to-use-docker">How to use Docker?</h2>
+
+<p><img src="../../images/docker-usage.jpg" alt="A cartoon of a whale with shipping containers atop it." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="the-client">The client</h3>
+
+<p><img src="../../images/docker_command.png" alt="A command line is explained, docker is the program you're using, run is the subcommand that creates and runs a container, and hello-world is the image you want to load." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Docker Engine = the core Docker technology on your computer</p>
+
+<p>Client: to talk with Docker</p>
+
+<p><code class="language-plaintext highlighter-rouge">docker --help</code></p>
+
+<hr />
+
+<h3 id="containers-images">Containers? Images?</h3>
+
+<p><img src="../../images/docker_concept_image_container.png" alt="A single container labelled galaxy with postgres, nginx, and python inside is shown pointing to three other galaxy containers." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Image:</p>
+<ul>
+  <li>recipe that tell how to build your container</li>
+  <li>A filesystem and parameters to use at runtime</li>
+  <li>snapshot of the content of a container: it doesn’t have state and never changes once built</li>
+</ul>
+
+<p>Container</p>
+<ul>
+  <li>a running instance of an image</li>
+  <li>you can execute several time the same recipe and if you follow every time the same recipe, you will have the same meal several time. Same for containers</li>
+</ul>
+
+<hr />
+
+<h3 id="how-to-get-images">How to get images?</h3>
+
+<p><img src="../../images/docker_concept_pull.png" alt="Images are stored in an image registry which are downloaded with docker pull onto a docker host, where you can run multiple instances of galaxy." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Docker Registry:</p>
+
+<ul>
+  <li>stateless</li>
+  <li>highly scalable server side application</li>
+</ul>
+
+<p>to stores and distribute Docker images</p>
+
+<p>Example: docker hub, quay.io</p>
+
+<hr />
+
+<h3 id="docker-pull"><code class="language-plaintext highlighter-rouge">docker pull</code></h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker pull hello-world
+Using default tag: latest
+latest: Pulling from library/hello-world
+c04b14da8d14: Pull <span class="nb">complete
+</span>Digest: sha256:0256e8a36e2070f7bf2d0b0763dbabdd67798512411de4cdcf9431a1feb60fd9
+Status: Downloaded newer image <span class="k">for </span>hello-world:latest
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="creation-of-containers">Creation of containers</h3>
+
+<p><img src="../../images/docker_concept_run.png" alt="Images are stored in an image registry which are downloaded with docker pull onto a docker host, where you can run multiple instances of galaxy." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="docker-run"><code class="language-plaintext highlighter-rouge">docker run</code></h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run hello-world
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the <span class="s2">"hello-world"</span> image from the Docker Hub.
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ <span class="nv">$ </span>docker run <span class="nt">-it</span> ubuntu bash
+
+Share images, automate workflows, and more with a free Docker Hub account:
+ https://hub.docker.com
+
+For more examples and ideas, visit:
+ https://docs.docker.com/engine/userguide/
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="docker-run-1"><code class="language-plaintext highlighter-rouge">docker run</code></h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run docker/whalesay cowsay Galaxy
+Unable to find image <span class="s1">'docker/whalesay:latest'</span> locally
+latest: Pulling from docker/whalesay
+e190868d63f8: Pull <span class="nb">complete
+</span>909cd34c6fd7: Pull <span class="nb">complete
+</span>0b9bfabab7c1: Pull <span class="nb">complete
+</span>a3ed95caeb02: Pull <span class="nb">complete
+</span>00bf65475aba: Pull <span class="nb">complete
+</span>c57b6bcc83e3: Pull <span class="nb">complete
+</span>8978f6879e2f: Pull <span class="nb">complete
+</span>8eed3712d2cf: Pull <span class="nb">complete
+</span>Digest: sha256:178598e51a26abbc958b8a2e48825c90bc22e641de3d31e18aaf55f3258ba93b
+Status: Downloaded newer image <span class="k">for </span>docker/whalesay:latest
+ ________
+&lt; Galaxy <span class="o">&gt;</span>
+ <span class="nt">--------</span>
+    <span class="se">\</span>
+     <span class="se">\</span>
+      <span class="se">\</span>
+                    <span class="c">##        .</span>
+              <span class="c">## ## ##       ==</span>
+           <span class="c">## ## ## ##      ===</span>
+       /<span class="s2">""""""""""""""""</span>___/ <span class="o">===</span>
+  ~~~ <span class="o">{</span>~~ ~~~~ ~~~ ~~~~ ~~ ~ /  <span class="o">===</span>- ~~~
+       <span class="se">\_</span>_____ o          __/
+        <span class="se">\ </span>   <span class="se">\ </span>       __/
+          <span class="se">\_</span>___<span class="se">\_</span>_____/
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Automatic <code class="language-plaintext highlighter-rouge">pull</code> if image not findable</li>
+  <li>Interaction with the container to say something</li>
+</ul>
+
+<hr />
+
+<h3 id="docker-run-2"><code class="language-plaintext highlighter-rouge">docker run</code></h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--help</span>
+
+Usage:  docker run <span class="o">[</span>OPTIONS] IMAGE <span class="o">[</span>COMMAND] <span class="o">[</span>ARG...]
+
+Run a <span class="nb">command </span><span class="k">in </span>a new container
+
+  <span class="nt">-a</span>, <span class="nt">--attach</span><span class="o">=[]</span>                 Attach to STDIN, STDOUT or STDERR
+  <span class="nt">--add-host</span><span class="o">=[]</span>                   Add a custom host-to-IP mapping <span class="o">(</span>host:ip<span class="o">)</span>
+  <span class="nt">--cpu-shares</span>                    CPU shares <span class="o">(</span>relative weight<span class="o">)</span>
+  ...
+  <span class="nt">-d</span>, <span class="nt">--detach</span>                    Run container <span class="k">in </span>background and print container ID
+  <span class="nt">-e</span>, <span class="nt">--env</span><span class="o">=[]</span>                    Set environment variables
+  <span class="nt">--entrypoint</span>                    Overwrite the default ENTRYPOINT of the image
+  <span class="nt">--env-file</span><span class="o">=[]</span>                   Read <span class="k">in </span>a file of environment variables
+  ...
+  <span class="nt">-h</span>, <span class="nt">--hostname</span>                  Container host name
+  <span class="nt">-i</span>, <span class="nt">--interactive</span>               Keep STDIN open even <span class="k">if </span>not attached
+  <span class="nt">--name</span>                          Assign a name to the container
+  <span class="nt">--net</span><span class="o">=</span>default                   Connect a container to a network
+  ...
+  <span class="nt">-P</span>, <span class="nt">--publish-all</span>               Publish all exposed ports to random ports
+  <span class="nt">-p</span>, <span class="nt">--publish</span><span class="o">=[]</span>                Publish a container<span class="s1">'s port(s) to the host
+  --privileged                    Give extended privileges to this container
+  --rm                            Automatically remove the container when it exits
+  -t, --tty                       Allocate a pseudo-TTY
+  -v, --volume=[]                 Bind mount a volume
+  ...
+</span></code></pre></div></div>
+
+<hr />
+
+<h3 id="run-an-interactive-container">Run an interactive container</h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-t</span> <span class="nt">-i</span> docker/whalesay
+root@7de97f8dd5eb:/cowsay#
+root@7de97f8dd5eb:/cowsay# cowsay Galaxy
+ ________
+&lt; Galaxy <span class="o">&gt;</span>
+ <span class="nt">--------</span>
+    <span class="se">\</span>
+     <span class="se">\</span>
+      <span class="se">\</span>
+                    <span class="c">##        .</span>
+              <span class="c">## ## ##       ==</span>
+           <span class="c">## ## ## ##      ===</span>
+       /<span class="s2">""""""""""""""""</span>___/ <span class="o">===</span>
+  ~~~ <span class="o">{</span>~~ ~~~~ ~~~ ~~~~ ~~ ~ /  <span class="o">===</span>- ~~~
+       <span class="se">\_</span>_____ o          __/
+        <span class="se">\ </span>   <span class="se">\ </span>       __/
+          <span class="se">\_</span>___<span class="se">\_</span>_____/
+root@7de97f8dd5eb:/cowsay#
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="control-during-startup">Control during startup</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -i -t
+    -p 8080:80 -p 8021:21 -p 9002:9002
+    --privileged=true
+    -e "NONUSE=reports"
+    -e "GALAXY_CONFIG_ADMIN_USERS=albert@einstein.gov"
+    -e "GALAXY_CONFIG_MASTER_API_KEY=83D4jaba7330aDKHkakjGa937"
+    -e "GALAXY_CONFIG_BRAND='My own Galaxy flavour'"
+    -e "GALAXY_LOGGING=full"
+
+    bgruening/galaxy-stable:18.05
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<p>possibility to add many different parameters to control the container when starting it</p>
+
+<hr />
+
+<h3 id="management-of-data">Management of data</h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>data
+<span class="nv">$ </span>docker run docker/whalesay cowsay Galaxy <span class="o">&gt;</span> data/cowsay
+<span class="nv">$ </span>more data/cowsay
+ ________
+&lt; Galaxy <span class="o">&gt;</span>
+ <span class="nt">--------</span>
+    <span class="se">\</span>
+     <span class="se">\</span>
+      <span class="se">\</span>
+                    <span class="c">##        .</span>
+              <span class="c">## ## ##       ==</span>
+           <span class="c">## ## ## ##      ===</span>
+       /<span class="s2">""""""""""""""""</span>___/ <span class="o">===</span>
+  ~~~ <span class="o">{</span>~~ ~~~~ ~~~ ~~~~ ~~ ~ /  <span class="o">===</span>- ~~~
+       <span class="se">\_</span>_____ o          __/
+        <span class="se">\ </span>   <span class="se">\ </span>       __/
+          <span class="se">\_</span>___<span class="se">\_</span>_____/
+<span class="nv">$ </span>docker run <span class="nt">-t</span> <span class="nt">-i</span> docker/whalesay
+root@f4fa8ed32ef8:/cowsay# <span class="nb">ls
+</span>ChangeLog  INSTALL  LICENSE  MANIFEST  README  Wrap.pm.diff  cows  cowsay  cowsay.1  install.pl  install.sh  pgp_public_key.txt
+root@f4fa8ed32ef8:/cowsay# cowsay Hello Galaxy <span class="o">&gt;</span> cowsay2
+</code></pre></div></div>
+
+<p>Can we access the <code class="language-plaintext highlighter-rouge">cowsay</code> file inside the container? <br />And the <code class="language-plaintext highlighter-rouge">cowsay2</code> file outside the container?</p>
+
+<hr />
+
+<h3 id="management-of-data-1">Management of data</h3>
+
+<p><img src="../../images/docker_volume_closed.png" alt="A container is shown with an arrow pointing to data and a big x over it." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>A container is closed</p>
+
+<hr />
+
+<h3 id="management-of-data-2">Management of data</h3>
+
+<p><img src="../../images/docker_volume_open.png" alt="The same as before, but inside the container it wants to create a new file in that same folder but it cannot." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>A container is closed</p>
+
+<hr />
+
+<h3 id="data-volume">Data volume</h3>
+
+<p><img src="../../images/docker_volume.png" alt="A data volume with two files is shown as a folder, now this is moutned inside two containers." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Data volume</p>
+<ul>
+  <li>a specially-designated directory</li>
+  <li>within one or more containers</li>
+  <li>bypasses the Union File System</li>
+</ul>
+
+<p>Data volumes designed to persist data, independent of the container’s life cycle:</p>
+<ul>
+  <li>Initialisation when a container is created</li>
+  <li>Possibility of sharing and reusing among containers</li>
+  <li>Direct changes to a data volume</li>
+  <li>Persistence of data volumes even if the container itself is deleted</li>
+</ul>
+
+<hr />
+
+<h3 id="data-volume-1">Data volume</h3>
+
+<p><img src="../../images/docker_run_volume.png" alt="Another command line explained, now docker run -v host_dir:container_dir ..., where host_dir is the absolute path or data volume name, and container_dir is where it should be mounted." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>How to get a data volume?</p>
+
+<hr />
+
+<h3 id="data-volume-2">Data volume</h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls </span>data/
+cowsay_Galaxy
+<span class="nv">$ </span>docker run <span class="nt">-t</span> <span class="nt">-i</span> <span class="nt">-v</span> <span class="nv">$PWD</span>/data:/data docker/whalesay
+root@f4fa8ed32ef8:/cowsay# <span class="nb">ls</span> /data
+cowsay_Galaxy
+root@f4fa8ed32ef8:/cowsay# cowsay Galaxy2 <span class="o">&gt;</span> /data/cowsay_Galaxy2
+root@f4fa8ed32ef8:/cowsay# <span class="nb">ls</span> /data
+cowsay_Galaxy  cowsay_Galaxy2
+root@f4fa8ed32ef8:/cowsay# <span class="nb">exit</span>
+<span class="nv">$ </span><span class="nb">ls </span>data/
+cowsay_Galaxy   cowsay_Galaxy2
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="execution-of-commands-inside-a-running-container">Execution of commands <br />inside a running container</h3>
+
+<p><img src="../../images/docker_concept_exec.png" alt="The schematic of a docker host with three galaxies is running, docker exec points to one of the galaxy containers." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Run a command in a running container</p>
+
+<hr />
+
+<h3 id="docker-exec"><code class="language-plaintext highlighter-rouge">docker exec</code></h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> docker/whalesay /bin/sh <span class="nt">-c</span> <span class="s2">"while true; do sleep 1; done"</span>
+7179e85085ef14634f8b50f908a255707743dec0a5d1fd7fb3cd9036334d5177
+<span class="nv">$ </span>docker <span class="nb">exec </span>7179e85085ef14634f8b50f908a255707743dec0a5d1fd7fb3cd9036334d5177 <span class="se">\</span>
+cowsay Galaxy
+ ________
+&lt; Galaxy <span class="o">&gt;</span>
+ <span class="nt">--------</span>
+    <span class="se">\</span>
+     <span class="se">\</span>
+      <span class="se">\</span>
+                    <span class="c">##        .</span>
+              <span class="c">## ## ##       ==</span>
+           <span class="c">## ## ## ##      ===</span>
+       /<span class="s2">""""""""""""""""</span>___/ <span class="o">===</span>
+  ~~~ <span class="o">{</span>~~ ~~~~ ~~~ ~~~~ ~~ ~ /  <span class="o">===</span>- ~~~
+       <span class="se">\_</span>_____ o          __/
+        <span class="se">\ </span>   <span class="se">\ </span>       __/
+          <span class="se">\_</span>___<span class="se">\_</span>_____/
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="stopstart-containers">Stop/Start containers</h3>
+
+<p><img src="../../images/docker_concept_start_stop.png" alt="Again the same graphic, but now one of the galaxy containers becomes stopped through the docker stop command and turns grey. Docker start brings it back to running." loading="lazy" /></p>
+
+<p>Note: Sending SIGTERM and then SIGKILL after a grace period</p>
+
+<hr />
+
+<h3 id="docker-stop--docker-start"><code class="language-plaintext highlighter-rouge">docker stop</code> &amp; <code class="language-plaintext highlighter-rouge">docker start</code></h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker stop 7179e85085ef14634f8b50f908a255707743dec0a5d1fd7fb3cd9036334d5177
+7179e85085ef14634f8b50f908a255707743dec0a5d1fd7fb3cd9036334d5177
+<span class="err">$</span>
+<span class="nv">$ </span>docker <span class="nb">exec </span>7179e85085ef14634f8b50f908a255707743dec0a5d1fd7fb3cd9036334d5177 <span class="se">\</span>
+cowsay Galaxy
+Error response from daemon: Container 7179e85085ef14634f8b50f908a255707743dec0a5d1fd7fb3cd9036334d5177 <span class="se">\</span>
+is not running
+<span class="err">$</span>
+<span class="nv">$ </span>docker start 7179e85085ef14634f8b50f908a255707743dec0a5d1fd7fb3cd9036334d5177
+7179e85085ef14634f8b50f908a255707743dec0a5d1fd7fb3cd9036334d5177
+<span class="err">$</span>
+<span class="nv">$ </span>docker <span class="nb">exec </span>7179e85085ef14634f8b50f908a255707743dec0a5d1fd7fb3cd9036334d5177 <span class="se">\</span>
+cowsay Galaxy
+ ________
+&lt; Galaxy <span class="o">&gt;</span>
+ <span class="nt">--------</span>
+    <span class="se">\</span>
+     <span class="se">\</span>
+      <span class="se">\</span>
+                    <span class="c">##        .</span>
+              <span class="c">## ## ##       ==</span>
+           <span class="c">## ## ## ##      ===</span>
+       /<span class="s2">""""""""""""""""</span>___/ <span class="o">===</span>
+  ~~~ <span class="o">{</span>~~ ~~~~ ~~~ ~~~~ ~~ ~ /  <span class="o">===</span>- ~~~
+       <span class="se">\_</span>_____ o          __/
+        <span class="se">\ </span>   <span class="se">\ </span>       __/
+          <span class="se">\_</span>___<span class="se">\_</span>_____/
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="view-all-containers">View all containers</h3>
+
+<p><img src="../../images/docker_concept_ps.png" alt="docker ps shows a box around the previous graphic and shows running and stopped container." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="docker-ps"><code class="language-plaintext highlighter-rouge">docker ps</code></h3>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
+7179e85085ef        docker/whalesay     <span class="s2">"/bin/sh -c 'while tr"</span>   12 minutes ago      Up 2 seconds                            agitated_lovelace
+<span class="err">$</span>
+<span class="nv">$ </span>docker ps <span class="nt">-a</span>
+CONTAINER ID        IMAGE                  COMMAND                  CREATED             STATUS                        PORTS               NAMES
+7de97f8dd5eb        docker/whalesay        <span class="s2">"/bin/bash"</span>              4 minutes ago       Exited <span class="o">(</span>0<span class="o">)</span> About a minute ago                       trusting_swanson
+9218bbee9c48        docker/whalesay        <span class="s2">"/bin/bash"</span>              5 minutes ago       Exited <span class="o">(</span>0<span class="o">)</span> 4 minutes ago                            evil_swirles
+7179e85085ef        docker/whalesay        <span class="s2">"/bin/sh -c 'while tr"</span>   13 minutes ago      Up 55 seconds                                       agitated_lovelace
+ad275579c454        ubuntu                 <span class="s2">"/bin/sh -c 'while tr"</span>   15 minutes ago      Exited <span class="o">(</span>137<span class="o">)</span> 13 minutes ago                         condescending_mestorf
+66179c4d16da        ubuntu                 <span class="s2">"/bin/bash"</span>              About an hour ago   Exited <span class="o">(</span>130<span class="o">)</span> 15 minutes ago                         determined_pasteur
+27386c8b69b3        ubuntu                 <span class="s2">"/bin/sh"</span>                About an hour ago   Exited <span class="o">(</span>0<span class="o">)</span> About an hour ago                        lonely_ramanujan
+4cfefa19e6fa        docker/whalesay        <span class="s2">"/bin/bash"</span>              About an hour ago   Exited <span class="o">(</span>0<span class="o">)</span> About an hour ago                        thirsty_chandrasekhar
+82687eb94ab9        docker/whalesay        <span class="s2">"cowsay Galaxy"</span>          2 hours ago         Exited <span class="o">(</span>0<span class="o">)</span> 2 hours ago                              fervent_babbage
+6dbabb9384ad        tmp-bioconda-builder   <span class="s2">"/usr/local/bin/tini "</span>   8 days ago          Exited <span class="o">(</span>0<span class="o">)</span> 7 days ago                               tender_bhaskara
+5d6f09b94727        tmp-bioconda-builder   <span class="s2">"/usr/local/bin/tini "</span>   8 days ago          Exited <span class="o">(</span>0<span class="o">)</span> 8 days ago                               jolly_brattain
+4e6f38b4c34c        tmp-bioconda-builder   <span class="s2">"/usr/local/bin/tini "</span>   8 days ago          Created                                             angry_colden
+b3e6c7412a75        tmp-bioconda-builder   <span class="s2">"/usr/local/bin/tini "</span>   8 days ago          Created                                             desperate_visvesvaraya
+1ec56c9e37f8        tmp-bioconda-builder   <span class="s2">"/usr/local/bin/tini "</span>   8 days ago          Created                                             hopeful_khorana
+2b129d00eb10        tmp-bioconda-builder   <span class="s2">"/usr/local/bin/tini "</span>   8 days ago          Created                                             gigantic_ptolemy
+da45ab698f58        fb77c13d04c0           <span class="s2">"/usr/local/bin/tini "</span>   13 days ago         Exited <span class="o">(</span>0<span class="o">)</span> 13 days ago                              jovial_yalow
+48dc3ed4e173        fb77c13d04c0           <span class="s2">"/usr/local/bin/tini "</span>   13 days ago         Created                                             focused_ritchie
+e9195b6512dd        a2107450fdf2           <span class="s2">"/usr/local/bin/tini "</span>   2 weeks ago         Created                                             thirsty_bardeen
+</code></pre></div></div>
+
+<p>Note: Name of containers and id</p>
+
+<hr />
+
+<h3 id="creation-of-a-new-image">Creation of a new image</h3>
+
+<p><img src="../../images/docker_concept_build.png" alt="A dockerfile built with docker build builds a new container on the local docker host." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Need a Dockerfile. I will describe it later. Here it is just to give you a broad overview of the principles</p>
+
+<hr />
+
+<h3 id="view-all-images">View all images</h3>
+
+<p><img src="../../images/docker_concept_image.png" alt="Docker image shows a list of all the images on the docker host that can be run." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="push-your-image-on-a-registry">Push your image on a registry</h3>
+
+<p><img src="../../images/docker_concept_push.png" alt="Docker push is shown pushing the locally built container to the image registry." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="hands_on-hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands on! (1)</h3>
+
+<p>Play with <code class="language-plaintext highlighter-rouge">quay.io/biocontainers/samtools:1.3--1</code></p>
+
+<ol>
+  <li>Get the image</li>
+  <li>Launch <code class="language-plaintext highlighter-rouge">samtools</code> container interactively</li>
+  <li>Print the help page for <code class="language-plaintext highlighter-rouge">samtools</code></li>
+  <li>Launch a <code class="language-plaintext highlighter-rouge">samtools</code> container in detach mode</li>
+  <li>Check if it exists and find its name</li>
+  <li>Stop it and restart it</li>
+  <li>Print the help page using this container</li>
+</ol>
+
+<hr />
+
+<h3 id="hands_on-hands-on-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands on! (2)</h3>
+
+<p>Play with <code class="language-plaintext highlighter-rouge">quay.io/biocontainers/samtools:1.3--1</code></p>
+
+<ol>
+  <li>Create a local <code class="language-plaintext highlighter-rouge">samtool_dir</code> directory</li>
+  <li>Launch an interactive container with a volume pointing at the <code class="language-plaintext highlighter-rouge">samtool_dir</code> directory</li>
+  <li>Add a <a href="https://raw.githubusercontent.com/samtools/samtools/develop/examples/toy.sam">toy sam file</a> into the local <code class="language-plaintext highlighter-rouge">samtool_dir</code> directory</li>
+  <li>Check if the existence of the file from inside the container</li>
+  <li>Visualize the content of the toy file with <code class="language-plaintext highlighter-rouge">samtools view</code> commands</li>
+  <li>Generate stats of the toy file into a <code class="language-plaintext highlighter-rouge">toy_stat</code> file into the local <code class="language-plaintext highlighter-rouge">samtool_dir</code> directory</li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+
+<p>data volume is the way to make your tool connecting</p>
+
+<hr />
+
+<h2 id="how-to-containerize-your-tools">How to containerize your tools?</h2>
+
+<p><img src="../../images/docker-container.jpg" alt="Cartoon of a docker container" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Now I am sure all of you want to containerize his tool :)</p>
+
+<hr />
+
+<h3 id="how-to-create-your-image">How to create your image?</h3>
+
+<p><img src="../../images/docker_build.svg" alt="Cartoon showing a dockerfile building a container with docker build." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="a-dockerfile">A Dockerfile?</h3>
+
+<p>A text document that contains all the commands a user could call on the command line to assemble an image</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Comment</span>
+INSTRUCTION arguments
+</code></pre></div></div>
+
+<p>.footnote[<a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/">Best practices</a>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The paper describing the recipe for you container</p>
+
+<p>Review of the commands</p>
+
+<hr />
+
+<h3 id="dockerfile--layers">Dockerfile &amp; Layers</h3>
+
+<p><img src="../../images/dockerfile_layers.svg" alt="dockerfile with steps like run and add and set user and command are shown inverted as the layers of an image, each building on the last." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="but-dont-do-it-manually-use-biocontainers">But Don’t Do it Manually, Use Biocontainers</h3>
+
+<p><a href="/training-material/topics/dev/tutorials/containers/slides.html">Tool Dependencies and Containers</a></p>
+
+<hr />
+
+<h2 id="how-to-integrate-galaxy-inside-docker-container">How to integrate Galaxy inside Docker Container?</h2>
+
+<hr />
+
+<h3 id="galaxy-docker-container">Galaxy Docker Container</h3>
+
+<p>A Docker launching a Galaxy instance and</p>
+
+<ul>
+  <li>FTP-Server</li>
+  <li>Webserver</li>
+  <li>Scheduler</li>
+  <li>Process control UI</li>
+  <li>ToolShed ready</li>
+  <li>Interactive Environment ready</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -i -t -p 8080:80 bgruening/galaxy-stable:18.05
+</code></pre></div></div>
+
+<p>Visit your machine on port 8080 to see Galaxy running.</p>
+
+<p>https://github.com/bgruening/docker-galaxy-stable</p>
+
+<hr />
+
+<h3 id="hands_on-hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands on!</h3>
+
+<p>Launch a Galaxy Docker Container and try to</p>
+
+<ul>
+  <li>Add Data</li>
+  <li>Become an Admin</li>
+  <li>Restart Galaxy</li>
+  <li>Use export mounts (persistent data)</li>
+  <li>Trouble shooting (logging)</li>
+  <li>Install tools</li>
+  <li>…</li>
+</ul>
+
+<hr />
+
+<h3 id="galaxy--slurm--">Galaxy + SLURM = <i class="fa fa-heart" aria-hidden="true"></i></h3>
+
+<p>https://github.com/bgruening/docker-galaxy-stable/tree/dev/docs/Running_jobs_outside_of_the_container.md</p>
+
+<hr />
+
+<h3 id="docker-flavours">Docker flavours</h3>
+
+<p><img src="../../images/rna-workbench-chart.png" alt="Schematic of multiple docker containers and how they layer upon one another. ubuntu forms the base, and requirements builds on that, then galaxy-stable on top of that." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="galactic-flavours">Galactic Flavours</h3>
+
+<ul>
+  <li><a href="https://github.com/bgruening/docker-galaxy-blast">NCBI-Blast</a></li>
+  <li><a href="https://github.com/bgruening/docker-galaxy-chemicaltoolbox">ChemicalToolBox</a></li>
+  <li><a href="https://github.com/anhi/docker-scripts/tree/master/ballaxy">ballaxy</a></li>
+  <li><a href="https://github.com/bgruening/docker-recipes/blob/master/galaxy-deeptools">NGS-deepTools</a></li>
+  <li><a href="https://github.com/gregvonkuster/docker-galaxy-ChIP-exo">Galaxy ChIP-exo</a></li>
+  <li><a href="https://github.com/bgruening/docker-galaxyp">Galaxy Proteomics</a></li>
+  <li><a href="https://github.com/bgruening/docker-galaxy-imaging">Imaging</a></li>
+  <li><a href="https://github.com/gregvonkuster/docker-galaxy-csg">Constructive Solid Geometry</a></li>
+  <li><a href="https://github.com/bgruening/galaxy-metagenomics">Galaxy for metagenomics</a></li>
+  <li><a href="https://github.com/lappsgrid-incubator">Galaxy with the Language Application Grid tools</a></li>
+  <li><a href="https://github.com/gianlucacorrado/galaxy-RNAcommender">RNAcommender</a></li>
+  <li><a href="https://github.com/bgruening/galaxy-open-molecule-generator">OpenMoleculeGenerator</a></li>
+</ul>
+
+<hr />
+
+<h3 id="create-your-own-flavour">Create your own Flavour</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Galaxy - My own flavour
+#
+# VERSION       0.1
+
+FROM bgruening/galaxy-stable:18.05
+
+MAINTAINER Björn A. Grüning, bjoern.gruening@gmail.com
+
+ENV GALAXY_CONFIG_BRAND deepTools
+
+# Adding the tool definitions to the container
+ADD my_tool_list.yml $GALAXY_ROOT/my_tool_list.yml
+
+# Install deepTools
+RUN install-tools $GALAXY_ROOT/my_tool_list.yml
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="the-tools-file">The tools file</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>galaxy_instance: http://localhost:8080
+tools:
+- name: fastqc
+  owner: devteam
+  tool_panel_section_id: cshl_library_information
+  tool_shed_url: https://toolshed.g2.bx.psu.edu
+  #revisions:
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="hands_on-hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands on!</h3>
+
+<p>Create a Galaxy Flavour</p>
+
+<hr />
+
+<h3 id="galaxy-flavor-generator">Galaxy Flavor Generator</h3>
+
+<p><img src="../../images/galaxy_flavour_generator.png" alt="Website used to build custom flavours of galaxy docker containers" loading="lazy" /></p>
+
+<p>https://github.com/galaxyFlavorsGenerators/galaxyFlavorGenerator</p>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Use Docker</li>
+
+<li>Integrate your tools into Galaxy</li>
+
+<li>Use Galaxy inside Docker to have a flavoured Galaxy instance</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+
+<img src="/training-material/assets/images/gat.png" alt="page logo" style="height: 100px;"/>
+
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

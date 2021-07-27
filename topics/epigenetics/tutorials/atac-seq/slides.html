@@ -151,6 +151,20 @@
     },
     {
       "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
       "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
       "name": "Mapping",
       "description": "Slides for 'Mapping' tutorial",
@@ -169,6 +183,20 @@
       "name": "Mapping",
       "description": "Hands-on for 'Mapping' tutorial",
       "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -251,11 +279,25 @@ class: center, middle, inverse
 <div class="contributors-line">
 
 
- <a href="/training-material/hall-of-fame/heylf/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/heylf" alt="Florian Heyl">Florian Heyl</a> <a href="/training-material/hall-of-fame/lldelisle/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/lldelisle" alt="Lucille Delisle">Lucille Delisle</a>
+ <a href="/training-material/hall-of-fame/heylf/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/heylf" alt="Avatar">Florian Heyl</a> <a href="/training-material/hall-of-fame/lldelisle/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/lldelisle" alt="Avatar">Lucille Delisle</a>
 
 
 </div>
 
+
+<div class="footnote" style="bottom: 3em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: Jul 26, 2021</div>
+<div class="footnote" style="bottom: 2em;">Or view the <a href="slides-plain.html">plain-text slides without JS</a></div>
+<div class="footnote" style="bottom: 1em;">Tip: press <kbd>P</kbd> to view the presenter notes</div>
+
+???
+Presenter notes contain extra information which might be useful if you
+intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other. Useful when presenting.
 
 
 
@@ -289,18 +331,6 @@ Before diving into this slide deck, we recommend you to have a look at:
 
 
 
-
-.footnote[Tip: press `P` to view the presenter notes]
-
-???
-Presenter notes contain extra information which might be useful if you
-intend to use these slides for teaching.
-
-Press `P` again to switch presenter notes off
-
-Press `C` to create a new window where the same presentation will be displayed.
-This window is linked to the main window. Changing slides on one will cause the
-slide to change on the other. Useful when presenting.
 
 ---
 
@@ -338,7 +368,7 @@ slide to change on the other. Useful when presenting.
 
 ### Where does my data come from?
 
-![](../../images/atac-seq/atac.jpg)
+![Low resolution image from a paper with two subfigures a and b. In A closed and open chromatin exists, then tn5 transposase attaches to open chromatin regions. these fragments are amplifiable and become amplified and sequenced. In subfigure B open chromatin is shown as two strands in black, with a common end in grey on both strands' both ends. Adapter 1 and 2 are attached to 5' ends. this is extended at 72° for 5 minutes, PCR'd using barcoded primers, and then the final product is created for sequencing which has open chromatin regions, surrounded by a common end, and then the adapters with a barcode on adapter 2.](../../images/atac-seq/atac.jpg)
 
 &lt;small&gt;
 [*Buenrostro et al. 2013 Nat Methods*](https://doi.org/10.1002/0471142727.mb2129s109)
@@ -390,7 +420,7 @@ slide to change on the other. Useful when presenting.
 ### Check the Insert Size
 
 .image-50[
-  ![](../../images/atac-seq/Screenshot_sizeDistribution.png)
+  ![A bar chart mapping frequency to insert size in base pairs. The graph data starts at insert size 20, there is a large sharp peak around 50 to 2000 frequency, and this rapidly decreases to ~200 frequency. There are additional small and broad peaks at insert size 200, 400, and 600 but the graph steadily decreases.](../../images/atac-seq/Screenshot_sizeDistribution.png)
 ]
 
 - Typical insert size of 50-300 bp.
@@ -407,7 +437,7 @@ slide to change on the other. Useful when presenting.
 
 ## Do not worry about a nucleotide bias
 
-![](../../images/atac-seq/per_base_sequence_content.png)
+![Fastqc plot showing sequence content as percent of the four bases, A C T G as a function of their position in the read. Below position 17, the lines are extremely jagged showing widely varying distribution of nucleotides that changes base by base. After position 17 in the read this stabilises to ~22% CG/~28% AT.](../../images/atac-seq/per_base_sequence_content.png)
 
 - Your experiment might have a nucelotide bias because of the transposase treatment ([Brian Green et. al. 2012](https://doi.org/10.1186/1759-8753-3-3))
 
@@ -437,7 +467,7 @@ slide to change on the other. Useful when presenting.
 ## Peak Calling
 
 .image-50[
-  ![](../../images/atac-seq/schemeWithLegend.jpg)
+  ![Cartoon of nucleosomes shown as large spheres with dna sequence wrapped aroud them and connecting them like lights on a string. Tn5 is binding to the DNA connecting the nucleosomes, and transcription factor is bound to the Tn5 molecules. Reads are shown as arrows pointing towards each other, below the Tn5 molecules.](../../images/atac-seq/schemeWithLegend.jpg)
 ]
 
 - When Tn5 cuts an accessible chromatin locus it inserts adapters separated by 9 basepairs [Kia et al. 2017](https://doi.org/10.1186/s12896-016-0326-1).
@@ -457,7 +487,7 @@ slide to change on the other. Useful when presenting.
 
 ## Overview
 
-![](../../images/atac-seq/ATACWF.svg)
+![Schematic of the ATAC-Seq workflow. dataset R1 and R2 are run through FastQC which points to a cloud labelled &quot;QC Measures&quot;. The two datasets also go through cutadapt to produce trimmed r1 and r2. This goes to bowtie2 which produces alignments, and another cloud labelled QC measures. The alignments output goes to bamtools filter to produce filtered alignments, which then goes to mark duplicates to produce a filtered without duplicate alignments file. This is sent to MACS2 which produces coverage and peaks outputs. Those, in combination with annotations for the genome are sent to deepTools for heatmaps summarizing multiple regions, and pyGenomeTracks for tracks displaying a specific region.](../../images/atac-seq/ATACWF.svg)
 
 - This is an overview of ATAC-Seq data analysis.
 
@@ -482,13 +512,13 @@ slide to change on the other. Useful when presenting.
 
 ## Thank you!
 
-This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors!
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
 
 
 <div class="contributors-line">
 
 
- <a href="/training-material/hall-of-fame/heylf/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/heylf" alt="Florian Heyl">Florian Heyl</a> <a href="/training-material/hall-of-fame/lldelisle/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/lldelisle" alt="Lucille Delisle">Lucille Delisle</a>
+ <a href="/training-material/hall-of-fame/heylf/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/heylf" alt="Avatar">Florian Heyl</a> <a href="/training-material/hall-of-fame/lldelisle/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/lldelisle" alt="Avatar">Lucille Delisle</a>
 
 
 </div>

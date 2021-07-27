@@ -1,0 +1,1590 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Tool Dependencies and Conda</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta property="og:title" content="Galaxy Training: Tool Dependencies and Conda" />
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/dev/faqs/" title="Check our FAQs for the Development in Galaxy topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/conda/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/dev/tutorials/conda/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/conda/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/conda/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/conda/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/conda/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/conda/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fdev%2Ftutorials%2Fconda%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/dev/tutorials/conda/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/dev/tutorials/conda/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/dev/tutorials/conda/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/dev/tutorials/conda/slides.html">View markdown source on GitHub</a>
+	<h1>Tool Dependencies and Conda</h1>
+		<h2>Contributors</h2>
+		Nicola Soranzo, John Chilton, Björn Grüning, Hervé Ménager
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>How can I connect tools to applications and libraries?</p>
+</li>
+		
+		<li><p>What are the advantages of declaring dependencies for my tool?</p>
+</li>
+		
+		<li><p>What are Conda and Bioconda?</p>
+</li>
+		
+		<li><p>What are Conda recipes and environments?</p>
+</li>
+		
+		<li><p>How do I find and use existing Conda recipes?</p>
+</li>
+		
+		<li><p>How do I develop Conda recipes for use within Galaxy tools?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Learn to use existing Conda recipes to enable best practice tool dependency management in Galaxy.</p>
+</li>
+		
+		<li><p>Learn the basics of building Conda recipes and contributing to Bioconda.</p>
+</li>
+		
+		<li><p>Learn to use Planemo to assist in developing Galaxy tools from existing and new Conda recipes.</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Requirements</h2>
+		<ul>
+		
+		
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/dev">Development in Galaxy</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Tool development and integration into Galaxy:
+                            
+                                <a href="/training-material/topics/dev/tutorials/tool-integration/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="http://planemo.readthedocs.io/en/latest/writing_standalone.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Prerequisites for building software/conda packages:
+                            
+                                <a href="/training-material/topics/dev/tutorials/conda_sys/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+		</ul>
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 26, 2021 </div>
+
+	<hr />
+
+
+	<h2 id="planemo">Planemo</h2>
+
+<p>These slides mirror the section on “Dependencies and Conda” in the <a href="https://planemo.readthedocs.io/en/latest/writing_advanced.html#dependencies-and-conda">Planemo Documentation</a>.</p>
+
+<hr />
+
+<h2 id="galaxy-dependencies">Galaxy Dependencies</h2>
+
+<hr />
+
+<p>class: left, enlarge120</p>
+
+<h3 id="example-tool-1--2">Example Tool (1 / 2)</h3>
+
+<p>From Planemo docs - the following example builds a tool for the <code class="language-plaintext highlighter-rouge">seqtk seq</code> command.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>planemo tool_init <span class="nt">--force</span> <span class="se">\</span>
+                    <span class="nt">--id</span> <span class="s1">'seqtk_seq'</span> <span class="se">\</span>
+                    <span class="nt">--name</span> <span class="s1">'Convert to FASTA (seqtk)'</span> <span class="se">\</span>
+                    <span class="nt">--requirement</span> seqtk@1.2 <span class="se">\</span>
+                    <span class="nt">--example_command</span> <span class="s1">'seqtk seq -a 2.fastq &gt; 2.fasta'</span> <span class="se">\</span>
+                    <span class="nt">--example_input</span> 2.fastq <span class="se">\</span>
+                    <span class="nt">--example_output</span> 2.fasta <span class="se">\</span>
+                    <span class="nt">--test_case</span> <span class="se">\</span>
+                    <span class="nt">--cite_url</span> <span class="s1">'https://github.com/lh3/seqtk'</span> <span class="se">\</span>
+                    <span class="nt">--help_from_command</span> <span class="s1">'seqtk seq'</span>
+</code></pre></div></div>
+
+<p>Notice the <code class="language-plaintext highlighter-rouge">--requirement seqtk@1.2</code>.</p>
+
+<hr />
+
+<p>class: left, enlarge120</p>
+
+<h3 id="example-tool-2--2">Example Tool (2 / 2)</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">--requirement seqtk@1.2</code> gets translated into the following Galaxy tool XML:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;requirements&gt;</span>
+    <span class="nt">&lt;requirement</span> <span class="na">type=</span><span class="s">"package"</span> <span class="na">version=</span><span class="s">"1.2"</span><span class="nt">&gt;</span>seqtk<span class="nt">&lt;/requirement&gt;</span>
+<span class="nt">&lt;/requirements&gt;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="dependency-resolution">Dependency Resolution</h2>
+
+<p><img src="../../images/galaxy_instance.png" alt="schematic of a galaxy server with dependency resolution via requirement tags at the top. On the left is the tool box with a number of xml files listed like seqtk_seq and seqtk_subseq. On the right is applications &amp; libraries showing only a few tools like seqtk, all of the 3 multipoe subtools were collapsed" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Notice that multiple tools may be mapped to the same requirements and
+any tools may use multiple Conda recipes.</li>
+  <li>There are few different ways to populate Applications and Libraries
+on the right - we will talk about Conda which is what we consider the
+“community best practice”.</li>
+</ul>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<p><img src="../../../../shared/images/conda_logo.png" alt="Conda logo" loading="lazy" /></p>
+
+<p>Package, dependency and environment management</p>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<p>###.image-25[<img src="../../../../shared/images/conda_logo.png" alt="Conda logo" loading="lazy" />] <br /> Conda Terminology</p>
+
+<p>Conda <strong>recipes</strong> build <strong>packages</strong> that are published to <strong>channels</strong>.</p>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="image-25--conda-key-features-for-galaxy">.image-25[<img src="../../../../shared/images/conda_logo.png" alt="Conda logo" loading="lazy" />] <br /> Conda Key Features for Galaxy</h3>
+
+<ul>
+  <li>
+    <p>No compilation at install time - <em>binaries</em> with their dependencies, libraries…</p>
+  </li>
+  <li>
+    <p>Support for all operating systems Galaxy targets</p>
+  </li>
+  <li>
+    <p>Easy to manage <em>multiple versions</em> of the same recipe</p>
+  </li>
+  <li>
+    <p>HPC-ready: no root privileges needed</p>
+  </li>
+  <li>
+    <p>Easy-to-write YAML recipes</p>
+  </li>
+  <li>
+    <p>Vibrant Communities</p>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Recipes: independent of the programming language in which software is written</li>
+  <li>Support for multiple versions at the same time is needed for reproducibility</li>
+</ul>
+
+<p>Compared with the Tool Shed dependency management (<code class="language-plaintext highlighter-rouge">tool_dependencies.xml</code>), BioConda is:</p>
+
+<ul>
+  <li>More popular!</li>
+  <li>Easier to develop.</li>
+  <li>Easier to install and test.</li>
+</ul>
+
+<hr />
+
+<p>###.image-25[<img src="../../../../shared/images/conda_logo.png" alt="Conda logo" loading="lazy" />] <br /> Conda Distributions</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+
+</code></pre></div></div>
+<p><img src="../../images/miniconda_vs_anaconda.png" alt="Schematic showing conda as a small circle, miniconda encompasses it and adds python and base packages. Anaconda encompasses all of it, adding 150 high quality packages." loading="lazy" /></p>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<p>###.image-25[<img src="../../../../shared/images/conda_logo.png" alt="conda logo" loading="lazy" />] <br /> Best Practice Channels</p>
+
+<ul>
+  <li>
+    <p>Packages through channels within Continuum.</p>
+  </li>
+  <li>
+    <p>Conda channels searched by Galaxy for packages</p>
+    <ul>
+      <li>iuc (legacy)</li>
+      <li>conda-forge</li>
+      <li>bioconda</li>
+      <li>defaults</li>
+    </ul>
+  </li>
+</ul>
+
+<p>.footnote[If you are interested in Natural Language Processing or Cheminformatics you may be asking if these channels can still work for your tools. Despite the name <a href="https://bioconda.github.io/">Bioconda</a> - it is really more about community and a set of best practices than about bioinformatics purity - many diverse packages have been integrated.]</p>
+
+<hr />
+
+<p>class: left, enlarge120</p>
+
+<p>###.image-25[<img src="../../../../shared/images/conda_logo.png" alt="conda logo" loading="lazy" />] <br /> Install and Configure</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>planemo conda_init
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:~/miniconda3/bin
+<span class="nv">$ </span>which conda
+/Users/john/miniconda3/bin/conda
+</code></pre></div></div>
+
+<p>Planemo installs Conda using miniconda and configured defaults designed to easy development.</p>
+
+<p>This has already been done on <a href="https://github.com/galaxyproject/planemo-machine">Planemo machine</a>.</p>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<p>###.image-25[<img src="../../../../shared/images/conda_logo.png" alt="conda logo" loading="lazy" />] <br /> Quickstart</p>
+<h4 id="using-conda-outside-planemo">Using Conda outside Planemo</h4>
+
+<ul>
+  <li>Install some packages within an isolated environment</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>conda create <span class="nt">-n</span> yaml pyyaml
+<span class="nv">$ </span>conda <span class="nb">env </span>list
+base        <span class="k">*</span>  ~/miniconda3
+yaml           ~/miniconda3/envs/yaml
+<span class="nv">$ </span>conda activate yaml
+<span class="o">(</span>yaml<span class="o">)</span> <span class="err">$</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Install a package in the current environment</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>conda <span class="nb">install </span>pyyaml
+</code></pre></div></div>
+
+<hr />
+
+<p>class: enlarge150</p>
+
+<h2 id="conda-and-galaxy">Conda and Galaxy</h2>
+
+<p>Galaxy now automatically installs Conda when first launched and will use <a href="https://bioconda.github.io/">Bioconda</a> and other channels for package resolution.</p>
+
+<hr />
+
+<h3 id="installing-tools-with-conda">Installing Tools with Conda</h3>
+
+<p><img src="../../images/tool_install.png" alt="Screnshot of tool installation menu" loading="lazy" /></p>
+
+<hr />
+
+<h3 id="managing-tool-dependencies">Managing Tool Dependencies</h3>
+
+<p><img src="../../images/dependency_manage.png" alt="Screenshot of the galaxy page for managing tool dependencies" loading="lazy" /></p>
+
+<hr />
+
+<p>class: enlarge150</p>
+
+<h2 id="conda-and-planemo">Conda and Planemo</h2>
+
+<p>Using Conda directly is generally package-centric, Planemo provides abstractions that are tool-centric.</p>
+
+<hr />
+
+<p>class: left, enlarge120</p>
+
+<p>The next few slides will use the seqtk example from Planemo’s documentation - this can be downloaded to
+follow along using the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>planemo project_init <span class="nt">--template</span><span class="o">=</span>seqtk_complete seqtk_example
+<span class="nv">$ </span><span class="nb">cd </span>seqtk_example
+</code></pre></div></div>
+
+<hr />
+
+<p>class: left</p>
+
+<h3 id="linting-conda-dependencies">Linting Conda Dependencies</h3>
+
+<p>.enlarge120[Planemo can check if the requirements of a tool are available in best practice Conda channels using the <code class="language-plaintext highlighter-rouge">--conda_requirements</code> flag of <code class="language-plaintext highlighter-rouge">planemo lint</code>.]</p>
+
+<p><br /></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>planemo lint <span class="nt">--conda_requirements</span> seqtk_seq.xml
+Linting tool /Users/john/workspace/planemo/docs/writing/seqtk_seq_v6.xml
+  ...
+Applying linter requirements_in_conda... CHECK
+.. INFO: Requirement <span class="o">[</span>seqtk@1.2] matches target <span class="k">in </span>best practice Conda channel <span class="o">[</span>bioconda].
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>.enlarge120[<em>Notice Planemo indicates this tool is available and shows the channel it is available in.</em>]</p>
+
+<hr />
+
+<p>class: left</p>
+
+<h3 id="the-planemo-conda_install-command">The Planemo <code class="language-plaintext highlighter-rouge">conda_install</code> command</h3>
+
+<p>.reduce70[```sh
+$ planemo conda_install seqtk_seq.xml
+Install conda target CondaTarget[seqtk,version=1.2]
+/home/john/miniconda3/bin/conda create -y –name __seqtk@1.2 seqtk=1.2
+Fetching package metadata ……………
+Solving package specifications: ……….
+Package plan for installation in environment /home/john/miniconda3/envs/__seqtk@1.2:
+The following packages will be downloaded:
+    package                    |            build
+    —————————|—————–
+    seqtk-1.2                  |                0          29 KB  bioconda
+The following NEW packages will be INSTALLED:
+    seqtk: 1.2-0   bioconda
+    zlib:  1.2.8-3
+Fetching packages …
+….
+#</p>
+<h1 id="to-deactivate-this-environment-use">To deactivate this environment, use:</h1>
+<h1 id="-source-deactivate-__seqtk12">&gt; source deactivate __seqtk@1.2</h1>
+<p>#
+$ which seqtk
+seqtk not found</p>
+<pre><code class="language-]">
+Notice seqtk hasn't been placed on the `PATH`, an environment has been setup that Galaxy (when
+used through Planemo) can leverage.
+
+---
+
+class: enlarge120
+
+### The Planemo `conda_env` command
+
+.reduce70[```sh
+$ . &lt;(planemo conda_env seqtk_seq.xml)
+Deactivate environment with conda_env_deactivate
+(seqtk_seq) $ which seqtk
+/home/planemo/miniconda2/envs/jobdepsiJClEUfecc6d406196737781ff4456ec60975c137e04884e4f4b05dc68192f7cec4656/bin/seqtk
+(seqtk_seq) $ seqtk seq
+
+Usage:   seqtk seq [options] &lt;in.fq&gt;|&lt;in.fa&gt;
+
+Options: -q INT    mask bases with quality lower than INT [0]
+         -X INT    mask bases with quality higher than INT [255]
+         -n CHAR   masked bases converted to CHAR; 0 for lowercase [0]
+         -l INT    number of residues per line; 0 for 2^32-1 [0]
+...
+         -V        shift quality by '(-Q) - 33'
+         -U        convert all bases to uppercases
+         -S        strip of white spaces in sequences
+(seqtk_seq) $ conda_env_deactivate
+$
+```]
+
+---
+
+## Using the Tool Environment
+
+Now that we have verified the Conda environment setup with `conda_install` works properly on the
+command-line, we can use our tool!
+
+`planemo test` and `planemo serve` will use this environment by default now for this tool.
+
+---
+
+class: left
+
+### Planemo `test`
+
+.reduce70[```sh
+$ planemo test seqtk_seq.xml
+...
+INFO  [galaxy.tools.actions] Handled output named output1 for tool seqtk_seq (20.136 ms)
+INFO  [galaxy.tools.actions] Added output datasets to history (12.782 ms)
+INFO  [galaxy.tools.actions] Verified access to datasets for Job[unflushed,tool_id=seqtk_seq] (10.954 ms)
+INFO  [galaxy.tools.actions] Setup for job Job[unflushed,tool_id=seqtk_seq] complete, ready to flush (21.053 ms)
+INFO  [galaxy.tools.actions] Flushed transaction for job Job[id=2,tool_id=seqtk_seq] (26.510 ms)
+INFO  [galaxy.jobs.handler] (2) Job dispatched
+DEBUG [galaxy.tools.deps] Using dependency seqtk version 1.2 of type conda
+DEBUG [galaxy.tools.deps] Using dependency seqtk version 1.2 of type conda
+INFO  [galaxy.jobs.command_factory] Built script [/tmp/tmpLvKwta/job_working_directory/000/2/tool_script.sh] for tool command [[ "$CONDA_DEFAULT_ENV" = "/Users/john/miniconda2/envs/__seqtk@1.2" ] || . /Users/john/miniconda2/bin/activate '/Users/john/miniconda2/envs/__seqtk@1.2' &gt;conda_activate.log 2&gt;&amp;1 ; seqtk seq -a '/tmp/tmpLvKwta/files/000/dataset_1.dat' &gt; '/tmp/tmpLvKwta/files/000/dataset_2.dat']
+DEBUG [galaxy.tools.deps] Using dependency samtools version None of type conda
+DEBUG [galaxy.tools.deps] Using dependency samtools version None of type conda
+ok
+
+----------------------------------------------------------------------
+XML: /private/tmp/tmpLvKwta/xunit.xml
+----------------------------------------------------------------------
+Ran 1 test in 15.936s
+
+OK
+```]
+
+.enlarge120[
+The following line indicates the seqtk package was found:
+
+</code></pre>
+<p>[galaxy.tools.deps] Using dependency seqtk version 1.2 of type conda</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>]
+
+---
+
+### &lt;i class="fas fa-pencil-alt" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;hands_on&lt;/span&gt; Hands-on
+
+&lt;img src="../../images/exercise.png" alt="Cartoon of people jumping."  loading="lazy"&gt;
+
+---
+
+### &lt;i class="fas fa-pencil-alt" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;hands_on&lt;/span&gt; Hands-on
+
+#### The Goal
+- Use the Planemo commands `conda_install`, `conda_env`, and `test` to practice the Galaxy tool dependency development lifecycle.
+
+---
+
+### &lt;i class="fas fa-pencil-alt" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;hands_on&lt;/span&gt; Hands-on
+
+#### Steps
+
+Run the following commands to practice working with Galaxy tools, Planemo, and Conda.
+
+
+```bash
+$ planemo project_init --template=seqtk_complete seqtk_example
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd </span>seqtk_example
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>planemo conda_install seqtk_seq.xml
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">.</span> &amp;lt<span class="p">;</span><span class="o">(</span>planemo conda_env seqtk_seq.xml<span class="o">)</span>
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>planemo <span class="nb">test </span>seqtk_seq.xml
+</code></pre></div></div>
+<hr />
+
+<p>class: enlarge120</p>
+
+<h2 id="finding-the-correct-requirements--packages">Finding the Correct Requirements &amp; Packages</h2>
+
+<p>The previous example worked because a published Bioconda recipe named <code class="language-plaintext highlighter-rouge">seqtk</code> at version <code class="language-plaintext highlighter-rouge">1.2</code>
+was previously published, but how can these be found?</p>
+
+<p>Two easy approaches are using <code class="language-plaintext highlighter-rouge">planemo conda_search</code> and using the Anaconda web search.</p>
+
+<hr />
+
+<p>class: left</p>
+
+<h3 id="using-the-planemo-conda_search-command">Using the Planemo <code class="language-plaintext highlighter-rouge">conda_search</code> Command</h3>
+
+<p>The Planemo <code class="language-plaintext highlighter-rouge">conda_search</code> command is a shortcut around <code class="language-plaintext highlighter-rouge">conda search</code> that searches best
+practice channels that Galaxy is configured to work with:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>planemo conda_search seqt
+Fetching package metadata ...............
+seqtk                        r75                           0  bioconda
+                             r82                           0  bioconda
+                             r93                           0  bioconda
+                             1.2                           0  bioconda
+</code></pre></div></div>
+
+<p>Alternatively, <code class="language-plaintext highlighter-rouge">conda</code> can be used directly:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ $HOME</span>/miniconda3/bin/conda search <span class="nt">-c</span> iuc <span class="nt">-c</span> conda-forge <span class="nt">-c</span> bioconda seqtk
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="using-anaconda-search---httpsanacondaorg">Using Anaconda Search - https://anaconda.org</h3>
+
+<p><img src="../../images/anaconda_landing.png" alt="screensho of the anaconda homepage" loading="lazy" /></p>
+
+<hr />
+
+<h3 id="using-anaconda-search---httpsanacondaorg-1">Using Anaconda Search - https://anaconda.org</h3>
+
+<p><img src="../../images/anaconda_result.png" alt="Screenshot of an anaconda search for the term seqtk" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Notice that only one of these results is a best practice channel and so that is the
+only one that will be used by Galaxy by default.</p>
+
+<hr />
+
+<h3 id="hands_on-hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+<p><img src="../../images/exercise.png" alt="Cartoon of people jumping." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="hands_on-hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+<h4 id="the-goal">The Goal</h4>
+<ul>
+  <li>Find the correct package and version for a tool in a best practice channel.</li>
+  <li>Add a requirement to a tool to allow Galaxy to find, install, and use a Conda package.</li>
+</ul>
+
+<hr />
+
+<h3 id="hands_on-hands-on-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+<h4 id="steps">Steps</h4>
+
+<ol>
+  <li>Run the following commands to download an example tool to modify.
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>planemo project_init <span class="nt">--template</span> conda_exercises conda_exercises
+<span class="nv">$ </span><span class="nb">cd </span>conda_exercises/exercise1
+<span class="nv">$ </span><span class="nb">ls
+</span>pear.xml              test-data
+</code></pre></div>    </div>
+  </li>
+  <li>Run <code class="language-plaintext highlighter-rouge">planemo test pear.xml</code> to verify the tool does not function without dependencies defined.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">--conda_requirements</code> flag with <code class="language-plaintext highlighter-rouge">planemo lint</code> to verify it does indeed lack requirements.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">planemo conda_search</code> or the <a href="https://anaconda.org/">Anaconda</a> website to search for the correct package and version in a best practice channel.</li>
+  <li>Update pear.xml with the correct requirement tags.</li>
+  <li>Re-run the <code class="language-plaintext highlighter-rouge">lint</code> command from above to verify the tool now has the correct dependency definition.</li>
+  <li>Re-run the <code class="language-plaintext highlighter-rouge">test</code> command from above to verify the tool test now works properly.</li>
+</ol>
+
+<hr />
+
+<h2 id="writing-a-conda-recipe">Writing a Conda recipe</h2>
+
+<ul>
+  <li>
+    <p>If searching best practice channels fails, you may need to build a Conda recipe.</p>
+  </li>
+  <li>
+    <p>A Conda recipe is defined by a directory, the two most important files in this directory are:</p>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">meta.yaml</code>: contains all the metadata of the recipe</li>
+      <li><code class="language-plaintext highlighter-rouge">build.sh</code>: the (optional) Unix script that installs the files</li>
+    </ul>
+  </li>
+</ul>
+
+<p>.footnote[<a href="https://conda.io/projects/conda-build/en/latest/user-guide/index.html">conda-build user guide</a> <br /> <a href="https://bioconda.github.io/contributor/index.html">Bioconda guidelines</a>]</p>
+
+<hr />
+
+<p>class: left</p>
+
+<h2 id="metayaml"><code class="language-plaintext highlighter-rouge">meta.yaml</code></h2>
+
+<p><code class="language-plaintext highlighter-rouge">meta.yaml</code> contains basic metadata about the recipe.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span><span class="err">%</span> <span class="nv">set version = "0.7.17" %</span><span class="pi">}</span>
+<span class="pi">{</span><span class="err">%</span> <span class="nv">set sha256 = "980b9591b61c60042c4a39b9e31ccaad8d17ff179d44d347997825da3fdf47fd" %</span><span class="pi">}</span>
+
+<span class="na">package</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">bwa</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv">version</span> <span class="pi">}}</span>
+<span class="na">source</span><span class="pi">:</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s">https://github.com/lh3/bwa/archive/v{{ version }}.tar.gz</span>
+  <span class="na">sha256</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv">sha256</span> <span class="pi">}}</span>
+  <span class="na">patches</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">Makefile.patch</span>
+<span class="na">build</span><span class="pi">:</span>
+  <span class="na">number</span><span class="pi">:</span> <span class="m">7</span>
+<span class="na">about</span><span class="pi">:</span>
+  <span class="na">home</span><span class="pi">:</span> <span class="s">https://github.com/lh3/bwa</span>
+  <span class="na">license</span><span class="pi">:</span> <span class="s">GPL3</span>
+  <span class="na">license_file</span><span class="pi">:</span> <span class="s">COPYING</span>
+  <span class="na">summary</span><span class="pi">:</span> <span class="s">The BWA read mapper.</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="metayaml--requirements"><code class="language-plaintext highlighter-rouge">meta.yaml</code> &gt; <code class="language-plaintext highlighter-rouge">requirements</code></h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">requirements</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="pi">{{</span> <span class="nv">compiler('c')</span> <span class="pi">}}</span>
+  <span class="na">host</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">zlib</span>
+  <span class="na">run</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">zlib</span>
+    <span class="pi">-</span> <span class="s">perl</span>
+
+</code></pre></div></div>
+<p><small></small></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">build</code>: requirements needed to perform the compilation (if any)</li>
+  <li><code class="language-plaintext highlighter-rouge">host</code>: requirements needed during the build step (here compilation)</li>
+  <li><code class="language-plaintext highlighter-rouge">run</code>: requirements needed at runtime
+&lt;/small&gt;</li>
+</ul>
+
+<hr />
+
+<h2 id="preprocessing-selectors">Preprocessing Selectors</h2>
+
+<ul>
+  <li>Common selectors include <code class="language-plaintext highlighter-rouge">linux</code>, <code class="language-plaintext highlighter-rouge">osx</code>, <code class="language-plaintext highlighter-rouge">py2k</code>, <code class="language-plaintext highlighter-rouge">py3k</code>.</li>
+  <li>Evaluated as Python expressions - feel free to use <code class="language-plaintext highlighter-rouge">and</code>, <code class="language-plaintext highlighter-rouge">or</code>, etc.</li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">requirements</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">bz2file</span>  <span class="c1"># [py &lt; 33]</span>
+    <span class="pi">-</span> <span class="s">typing</span>  <span class="c1"># [py27 or py34]</span>
+
+</code></pre></div></div>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">skip</span><span class="pi">:</span> <span class="s">True</span>  <span class="c1"># [osx]</span>
+</code></pre></div></div>
+
+<p>.footer[.center[https://conda.io/projects/conda-build/en/latest/source/define-metadata.html#preprocessing-selectors ]]</p>
+
+<hr />
+
+<p>class: left</p>
+
+<h2 id="tests">Tests</h2>
+
+<p><code class="language-plaintext highlighter-rouge">meta.yaml</code> should contain simple tests. These are commands executed at the end of <code class="language-plaintext highlighter-rouge">conda build</code> and expected to return <code class="language-plaintext highlighter-rouge">0</code> on success.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">test</span><span class="pi">:</span>
+  <span class="na">commands</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">bowtie2 --version</span>
+</code></pre></div></div>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">test</span><span class="pi">:</span>
+  <span class="na">commands</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">bwa 2&gt;&amp;1 | grep 'index sequences in the'</span>
+</code></pre></div></div>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">test</span><span class="pi">:</span>
+  <span class="na">commands</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s1">'</span><span class="s">$R</span><span class="nv"> </span><span class="s">-e</span><span class="nv"> </span><span class="s">"library('</span><span class="s1">'</span><span class="s">xcms'</span><span class="s1">'</span><span class="s">)"'</span>
+</code></pre></div></div>
+
+<p>Please note that the Conda tests run inside the runtime environment and not in the build environment.</p>
+
+<p>.footnote[.center[https://conda.io/projects/conda-build/en/latest/source/define-metadata.html#test-section ]]</p>
+
+<hr />
+
+<p>From the <a href="https://bioconda.github.io/contributor/guidelines.html">Bioconda Guidelines</a>:</p>
+
+<blockquote>
+  <p>An adequate test must be included in the recipe. An “adequate” test depends on the recipe, but must be able to detect a successful installation. While many packages may ship their own test suite (unit tests or otherwise), including these in the recipe is not recommended since it may timeout the build system on CircleCI. We especially want to avoid including any kind of test data in the repository.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="buildsh"><code class="language-plaintext highlighter-rouge">build.sh</code></h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+./configure <span class="nt">--prefix</span><span class="o">=</span><span class="nv">$PREFIX</span>
+make
+make <span class="nb">install</span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nv">$PREFIX</span>/bin
+<span class="nb">cp</span> <span class="k">*</span>.py <span class="nv">$PREFIX</span>/bin
+</code></pre></div></div>
+<p><small></small></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">$PREFIX</code> is a variable defined by conda when building the package.</li>
+  <li><code class="language-plaintext highlighter-rouge">$PREFIX</code> usually contains <code class="language-plaintext highlighter-rouge">bin/</code>, <code class="language-plaintext highlighter-rouge">lib/</code>, and <code class="language-plaintext highlighter-rouge">include/</code> that are filled with the package files.</li>
+  <li><code class="language-plaintext highlighter-rouge">$PREFIX</code> will be loaded in the user environment at runtime: <code class="language-plaintext highlighter-rouge">PATH</code>, <code class="language-plaintext highlighter-rouge">LD_LIBRARY_PATH</code>, <code class="language-plaintext highlighter-rouge">PYTHONPATH</code>, …
+&lt;/small&gt;</li>
+</ul>
+
+<p>.footnote[<a href="/training-material/topics/dev/tutorials/conda_sys/slides.html">http://training.galaxyproject.org/training-material/topics/dev/tutorials/conda_sys/slides.html</a>]</p>
+
+<hr />
+
+<h2 id="skeletons">Skeletons</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>conda skeleton pypi &lt;packagename&gt;
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>conda skeleton cran &lt;packagename&gt;
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bioconductor_skeleton.py &lt;packagename&gt;
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>conda skeleton cpan &lt;packagename&gt;<span class="sb">`</span>
+</code></pre></div></div>
+
+<p>These generate pre-filled recipes <small>(not guaranteed to work out of the box)</small> for specific programming environments.</p>
+
+<p>.footnote[<a href="https://docs.conda.io/projects/conda-build/en/latest/user-guide/tutorials/build-pkgs-skeleton.html">Building conda packages with conda skeleton</a>]</p>
+
+<hr />
+
+<h2 id="building">Building</h2>
+
+<p>Once the recipe is ready to go, the <code class="language-plaintext highlighter-rouge">conda build</code> command can be used to build it.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ $HOME</span>/miniconda3/bin/conda build <span class="nb">.</span>
+</code></pre></div></div>
+
+<ol>
+  <li>BUILD START: Builds/Compiles the package</li>
+  <li>BUILD START: Provides a .tar.bz2</li>
+  <li>TEST START: Installs the .tar.bz2 previously generated</li>
+  <li>TEST START: Launches the functional tests</li>
+  <li>(Provides the .tar.bz2 path)</li>
+</ol>
+
+<p>.footnote[If miniconda wasn’t configured with <code class="language-plaintext highlighter-rouge">planemo conda_init</code>, you may have <br /> to run <code class="language-plaintext highlighter-rouge">conda install conda-build</code> before using the above command.]</p>
+
+<hr />
+
+<p>.image-75[<img src="../../../../shared/images/bioconda_logo.png" alt="bioconda logo" loading="lazy" />]</p>
+
+<ul>
+  <li>A channel dedicated to bioinformatics (and other informatics) packages</li>
+  <li>https://bioconda.github.io</li>
+  <li>https://anaconda.org/bioconda</li>
+  <li>Open to <a href="https://bioconda.github.io/contributing.html">contribution</a></li>
+  <li>GitHub repository: https://github.com/bioconda/bioconda-recipes</li>
+</ul>
+
+<hr />
+
+<p>###.image-25[<img src="../../../../shared/images/bioconda_logo.png" alt="bioconda logo" loading="lazy" />] contributing 1/2</p>
+
+<ul>
+  <li>Fork <a href="https://github.com/bioconda/bioconda-recipes/fork">Bioconda</a>.</li>
+  <li>
+    <p>Clone your fork:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone https://github.com/ &lt;myuser&gt; /bioconda-recipes
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Create a new branch <code class="language-plaintext highlighter-rouge">package</code></p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout <span class="nt">-b</span> package
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Fill two files <code class="language-plaintext highlighter-rouge">meta.yaml</code> and <code class="language-plaintext highlighter-rouge">build.sh</code> in a new recipe directory</p>
+  </li>
+  <li>Build your new package and test it using <code class="language-plaintext highlighter-rouge">conda build</code></li>
+</ul>
+
+<hr />
+
+<p>###.image-25[<img src="../../../../shared/images/bioconda_logo.png" alt="bioconda logo" loading="lazy" />] contributing 2/2</p>
+
+<ul>
+  <li>
+    <p>Commit and push to GitHub</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add recipe
+</code></pre></div>    </div>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s1">'my recipe description'</span>
+</code></pre></div>    </div>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git push origin package
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Create a <a href="https://github.com/bioconda/bioconda-recipes">Pull Request</a></p>
+  </li>
+  <li>
+    <p>After the PR is merged, wait for the functional tests to pass on the master branch</p>
+  </li>
+  <li>
+    <p>Enjoy your new Conda package at https://anaconda.org/bioconda</p>
+  </li>
+</ul>
+
+<p>See <a href="/training-material/topics/contributing/tutorials/github-command-line-contribution/slides.html">Contributing with GitHub</a>.</p>
+
+<hr />
+
+<h3 id="planemo-and---conda_use_local">Planemo and <code class="language-plaintext highlighter-rouge">--conda_use_local</code></h3>
+
+<p>By default, Galaxy and Planemo will ignore locally built packages.</p>
+
+<p>Simply pass <code class="language-plaintext highlighter-rouge">--conda_use_local</code> to various Planemo commands (e.g. <code class="language-plaintext highlighter-rouge">test</code>, <code class="language-plaintext highlighter-rouge">conda_install</code>, or <code class="language-plaintext highlighter-rouge">serve</code>) to use the local package
+cache.</p>
+
+<p><em>Enables developing Galaxy tools and Conda recipes in parallel.</em></p>
+
+<hr />
+
+<h3 id="hands_on-hands-on-3"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+<p><img src="../../images/exercise.png" alt="Cartoon of people jumping." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="hands_on-hands-on-4"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+<h4 id="the-goal-1">The Goal</h4>
+<ul>
+  <li>Implement and test a local Conda recipe.</li>
+  <li>Use Planemo and Galaxy with a locally built package.</li>
+</ul>
+
+<hr />
+
+<p>class: left</p>
+
+<h3 id="hands_on-hands-on-5"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+<h4 id="before">Before</h4>
+
+<p>If you have completed <code class="language-plaintext highlighter-rouge">exercise1</code>, open <code class="language-plaintext highlighter-rouge">exercise2</code>.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> ../exercise2
+<span class="nv">$ </span><span class="nb">ls
+</span>fleeqtk_seq.xml              test-data
+</code></pre></div></div>
+
+<p>This directory contains the outline of a tool for <a href="https://github.com/jmchilton/fleeqtk">fleeqtk</a>. fleeqtk is a fork of the project seqtk that many Planemo tutorials are built around and the example tool <code class="language-plaintext highlighter-rouge">fleeqtk_seq.xml</code> should be fairly familiar.</p>
+
+<hr />
+
+<p>class: left</p>
+
+<h3 id="hands_on-hands-on-6"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+<h4 id="steps-1">Steps</h4>
+
+<ol>
+  <li>Clone and branch Bioconda (https://github.com/bioconda/bioconda-recipes)</li>
+  <li>Build a recipe for fleeqtk version 1.3. You may wish to use conda skeleton, start from scratch, or copy the recipe of seqtk and work from there - any of these strategies should work
+    <ul>
+      <li>fleeqtk 1.3 can be downloaded using the URL https://github.com/jmchilton/fleeqtk/archive/v1.3.tar.gz</li>
+      <li>fleeqtk can be built using <code class="language-plaintext highlighter-rouge">make</code> and installed with <code class="language-plaintext highlighter-rouge">make install</code></li>
+    </ul>
+  </li>
+  <li>Use <code class="language-plaintext highlighter-rouge">conda build</code> to build the recipe</li>
+  <li>Add a <code class="language-plaintext highlighter-rouge">requirement</code> for this new package in the example tool.</li>
+  <li>Run <code class="language-plaintext highlighter-rouge">planemo conda_install --conda_use_local fleeqtk_seq.xml</code> to install the package for Galaxy</li>
+  <li>Run <code class="language-plaintext highlighter-rouge">planemo test fleeqtk_seq.xml</code> to verify the tool and package work together</li>
+</ol>
+
+<hr />
+
+<h1 id="advanced-topics-in-conda-development">Advanced Topics in Conda Development</h1>
+
+<hr />
+
+<h2 id="jinja-templating">Jinja Templating</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span><span class="err">%</span> <span class="nv">set name = "seqtk" %</span><span class="pi">}</span>
+<span class="pi">{</span><span class="err">%</span> <span class="nv">set version = "1.15.1" %</span><span class="pi">}</span>
+
+<span class="na">package</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv">name</span> <span class="pi">}}</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv">version</span> <span class="pi">}}</span>
+
+<span class="na">source</span><span class="pi">:</span>
+    <span class="na">url</span><span class="pi">:</span> <span class="s">http://coolsoftware.com/{{ name }}/{{ version }}/{{ name }}-{{ version }}.zip</span>
+</code></pre></div></div>
+
+<p>https://conda.io/projects/conda-build/en/latest/source/define-metadata.html#templating-with-jinja</p>
+
+<hr />
+
+<p>class: left</p>
+
+<h2 id="stable-urls">Stable URLs</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">source</span><span class="pi">:</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s">https://github.com/lh3/bwa/archive/v0.7.15.tar.gz</span>
+  <span class="na">md5</span><span class="pi">:</span> <span class="s">54fdee953c5c256d36885a1c5c6b118c</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>While supported by Conda, <code class="language-plaintext highlighter-rouge">git_url</code> and <code class="language-plaintext highlighter-rouge">git_rev</code> are not as stable as a git tarball. Ideally a github repo should have tagged releases that are accessible as tarballs from the “releases” section of the github repo. In addition tarballs can be easily mirrored and Bioconda is saving a copy of every tarball so the recipe can be rebuild at any time.</p>
+</blockquote>
+
+<hr />
+
+<p>class: left</p>
+
+<h2 id="python">Python</h2>
+
+<p>For PyPI packages</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda skeleton pypi &lt;package_name&gt;
+</code></pre></div></div>
+
+<ul>
+  <li>Builds likely correct <code class="language-plaintext highlighter-rouge">build.sh</code> and <code class="language-plaintext highlighter-rouge">meta.yaml</code>.</li>
+  <li>The test automatically added is probably sufficient for library, may need to write extra tests for command-line tools.</li>
+  <li>Recipes requiring <code class="language-plaintext highlighter-rouge">python</code> should build on Python 2.7, 3.5, and 3.6 by default, preprocessing selectors can be used with <code class="language-plaintext highlighter-rouge">build: skip</code> to skip targets.</li>
+</ul>
+
+<hr />
+
+<h2 id="python---pysams-buildsh">Python - pysam’s <code class="language-plaintext highlighter-rouge">build.sh</code></h2>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c"># Remove gcc statements that do not work on older compilers for CentOS5</span>
+<span class="c"># support</span>
+<span class="nb">sed</span> <span class="nt">-i</span><span class="s1">''</span> <span class="nt">-e</span> <span class="s1">'s/"-Wno-error=declaration-after-statement",//g'</span> setup.py
+<span class="nb">sed</span> <span class="nt">-i</span><span class="s1">''</span> <span class="nt">-e</span> <span class="s1">'s/"-Wno-error=declaration-after-statement"//g'</span> setup.py
+<span class="c"># linking htslib, see:</span>
+<span class="c"># https://pysam.readthedocs.org/en/latest/installation.html#external</span>
+<span class="c"># https://github.com/pysam-developers/pysam/blob/v0.9.0/setup.py#L79</span>
+<span class="nb">export </span><span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">"-I</span><span class="nv">$PREFIX</span><span class="s2">/include"</span>
+<span class="nb">export </span><span class="nv">CPPFLAGS</span><span class="o">=</span><span class="s2">"-I</span><span class="nv">$PREFIX</span><span class="s2">/include"</span>
+<span class="nb">export </span><span class="nv">LDFLAGS</span><span class="o">=</span><span class="s2">"-L</span><span class="nv">$PREFIX</span><span class="s2">/lib"</span>
+
+<span class="nb">export </span><span class="nv">HTSLIB_LIBRARY_DIR</span><span class="o">=</span><span class="nv">$PREFIX</span>/lib
+<span class="nb">export </span><span class="nv">HTSLIB_INCLUDE_DIR</span><span class="o">=</span><span class="nv">$PREFIX</span>/include
+<span class="nv">$PYTHON</span> setup.py <span class="nb">install</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="python---pysams-metayaml">Python - pysam’s <code class="language-plaintext highlighter-rouge">meta.yaml</code></h2>
+
+<p>.reduce50[</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span><span class="err">%</span> <span class="nv">set version = "0.15.2" %</span><span class="pi">}</span>
+<span class="pi">{</span><span class="err">%</span> <span class="nv">set samtools_version = "1.9" %</span><span class="pi">}</span>
+<span class="pi">{</span><span class="err">%</span> <span class="nv">set bcftools_version = "1.9" %</span><span class="pi">}</span>
+
+<span class="na">package</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">pysam</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">{{</span><span class="nv"> </span><span class="s">version</span><span class="nv"> </span><span class="s">}}'</span>
+
+<span class="na">source</span><span class="pi">:</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s">https://github.com/pysam-developers/pysam/archive/v{{ version }}.tar.gz</span>
+  <span class="na">sha256</span><span class="pi">:</span> <span class="s">8cb3dd70f0d825086ac059ec2445ebd2ec5f14af73e7f1f4bd358966aaee5ed3</span>
+
+<span class="na">build</span><span class="pi">:</span>
+  <span class="na">number</span><span class="pi">:</span> <span class="m">3</span>
+  <span class="na">binary_relocation</span><span class="pi">:</span> <span class="s">False</span> <span class="c1"># [linux]</span>
+
+<span class="na">requirements</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="pi">{{</span> <span class="nv">compiler('c')</span> <span class="pi">}}</span>
+  <span class="na">host</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">htslib</span>
+    <span class="pi">-</span> <span class="s">samtools {{ samtools_version }}</span>
+    <span class="pi">-</span> <span class="s">bcftools {{ bcftools_version }}</span>
+    <span class="pi">-</span> <span class="s">cython</span>
+    <span class="pi">-</span> <span class="s">python</span>
+    <span class="pi">-</span> <span class="s">setuptools</span>
+    <span class="pi">-</span> <span class="s">zlib</span>
+    <span class="pi">-</span> <span class="s">curl</span>
+    <span class="pi">-</span> <span class="s">libdeflate</span>
+  <span class="na">run</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">samtools {{ samtools_version }}</span>
+    <span class="pi">-</span> <span class="s">bcftools {{ bcftools_version }}</span>
+    <span class="pi">-</span> <span class="s">python</span>
+    <span class="pi">-</span> <span class="s">curl</span>
+    <span class="pi">-</span> <span class="s">libdeflate</span>
+
+<span class="na">test</span><span class="pi">:</span>
+  <span class="na">imports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">pysam</span>
+<span class="err">```]</span>
+
+<span class="nn">---</span>
+
+<span class="c1">## R</span>
+
+<span class="s">For CRAN packages</span>
+
+<span class="err">```</span><span class="s">sh</span>
+<span class="s">conda skeleton cran &lt;packagename&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Builds likely correct <code class="language-plaintext highlighter-rouge">build.sh</code> and <code class="language-plaintext highlighter-rouge">meta.yaml</code>.</li>
+  <li>The recipe name will have an <code class="language-plaintext highlighter-rouge">r-</code> prefix and will be converted to lowercase.</li>
+</ul>
+
+<p><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> <em>The majority of R packages on CRAN are generic and should therefore be submitted at Conda-Forge.
+Exceptions are r-* packages that depends on bioconductor-* packages.</em></p>
+
+<p><a href="https://conda-forge.org/docs/maintainer/adding_pkgs.html">Conda-Forge contribution guidelines</a></p>
+
+<hr />
+
+<h2 id="java">Java</h2>
+
+<ul>
+  <li>Recipes should use the <code class="language-plaintext highlighter-rouge">openjdk</code> package from <a href="https://github.com/conda-forge/openjdk-feedstock">conda-forge</a>.</li>
+  <li>Add a wrapper script if the software is typically called via <code class="language-plaintext highlighter-rouge">java -jar</code>.</li>
+  <li>JAR files should go in <code class="language-plaintext highlighter-rouge">$PREFIX/share/$PKG_NAME-$PKG_VERSION-$PKG_BUILDNUM</code></li>
+  <li>A wrapper script should be placed here as well, and symlinked to $PREFIX/bin.</li>
+</ul>
+
+<p>https://bioconda.github.io/guidelines.html#java</p>
+
+<hr />
+
+<h2 id="java---peptideshakers-buildsh">Java - PeptideShaker’s <code class="language-plaintext highlighter-rouge">build.sh</code></h2>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="nb">set</span> <span class="nt">-eu</span> <span class="nt">-o</span> pipefail
+
+<span class="nv">outdir</span><span class="o">=</span><span class="nv">$PREFIX</span>/share/<span class="nv">$PKG_NAME</span>-<span class="nv">$PKG_VERSION</span>-<span class="nv">$PKG_BUILDNUM</span>
+<span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nv">$outdir</span>
+<span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nv">$PREFIX</span>/bin
+<span class="nb">cp</span> <span class="nt">-R</span> <span class="k">*</span> <span class="nv">$outdir</span>/
+<span class="nb">cp</span> <span class="nv">$RECIPE_DIR</span>/peptide-shaker.py <span class="nv">$outdir</span>/peptide-shaker
+<span class="nb">ls</span> <span class="nt">-l</span> <span class="nv">$outdir</span>
+<span class="nb">ln</span> <span class="nt">-s</span> <span class="nv">$outdir</span>/peptide-shaker <span class="nv">$PREFIX</span>/bin
+<span class="nb">chmod </span>0755 <span class="s2">"</span><span class="k">${</span><span class="nv">PREFIX</span><span class="k">}</span><span class="s2">/bin/peptide-shaker"</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: reduce70</p>
+
+<h2 id="java---peptideshakers-metayaml">Java - PeptideShaker’s <code class="language-plaintext highlighter-rouge">meta.yaml</code></h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">...</span>
+
+<span class="na">source</span><span class="pi">:</span>
+    <span class="na">url</span><span class="pi">:</span> <span class="s">http://genesis.ugent.be/maven2/eu/isas/peptideshaker/{{ name }}/{{ version }}/{{ name }}-{{ version }}.zip</span>
+    <span class="na">md5</span><span class="pi">:</span> <span class="s">14a48413e28a25614f5fda2b381d7197</span>
+
+<span class="na">requirements</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span>
+  <span class="na">run</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">openjdk &gt;=6</span>
+    <span class="pi">-</span> <span class="s">python</span>
+
+<span class="na">test</span><span class="pi">:</span>
+    <span class="na">commands</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">peptide-shaker eu.isas.peptideshaker.cmd.PeptideShakerCLI</span>
+      <span class="pi">-</span> <span class="s">peptide-shaker eu.isas.peptideshaker.cmd.PeptideShakerCLI -Xms512m -Xmx1g</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="perl">Perl</h2>
+
+<p>For CPAN packages</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda skeleton cpan &lt;packagename&gt;
+</code></pre></div></div>
+
+<ul>
+  <li>Builds likely correct <code class="language-plaintext highlighter-rouge">build.sh</code> and <code class="language-plaintext highlighter-rouge">meta.yaml</code>.</li>
+  <li>The recipe will have the <code class="language-plaintext highlighter-rouge">perl-</code> prefix.</li>
+</ul>
+
+<hr />
+
+<p>class: reduce70</p>
+
+<h2 id="perl---module-build">Perl - Module-Build</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">package</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">perl-module-build</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">0.4214"</span>
+
+<span class="na">source</span><span class="pi">:</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s">https://cpan.metacpan.org/authors/id/L/LE/LEONT/Module-Build-0.4214.tar.gz</span>
+  <span class="na">md5</span><span class="pi">:</span> <span class="s">7b7ca5a47bef48c50c8b5906ca3ac7fb</span>
+
+<span class="na">build</span><span class="pi">:</span>
+  <span class="na">number</span><span class="pi">:</span> <span class="m">0</span>
+
+<span class="na">requirements</span><span class="pi">:</span>
+  <span class="na">host</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">perl</span>
+    <span class="pi">-</span> <span class="s">perl-cpan-meta-yaml</span>
+    <span class="pi">-</span> <span class="s">perl-extutils-parsexs</span>
+    <span class="pi">-</span> <span class="s">perl-data-dumper</span>
+    <span class="c1"># [...]</span>
+  <span class="na">run</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">perl</span>
+    <span class="pi">-</span> <span class="s">perl-text-parsewords</span>
+    <span class="pi">-</span> <span class="s">perl-cpan-meta</span>
+    <span class="pi">-</span> <span class="s">perl-version</span>
+    <span class="c1"># [...]</span>
+
+<span class="na">test</span><span class="pi">:</span>
+  <span class="c1"># Perl 'use' tests</span>
+  <span class="na">imports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">Module::Build</span>
+    <span class="pi">-</span> <span class="s">Module::Build::Base</span>
+    <span class="pi">-</span> <span class="s">Module::Build::Compat</span>
+    <span class="pi">-</span> <span class="s">Module::Build::Config</span>
+    <span class="c1"># [...]</span>
+
+<span class="na">about</span><span class="pi">:</span>
+  <span class="na">home</span><span class="pi">:</span> <span class="s">https://metacpan.org/pod/Module::Build</span>
+  <span class="na">license</span><span class="pi">:</span> <span class="s">perl_5</span>
+  <span class="na">summary</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Build</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">install</span><span class="nv"> </span><span class="s">Perl</span><span class="nv"> </span><span class="s">modules</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: left</p>
+
+<h2 id="metapackages">Metapackages</h2>
+
+<blockquote>
+  <p>Metapackages tie together other packages. All they do is define dependencies. For example, the hubward-all metapackage specifies the various other conda packages needed to get full hubward installation running just by installing one package.</p>
+</blockquote>
+
+<blockquote>
+  <p>Other metapackages might tie together conda packages with a theme. For example, all UCSC utilities related to bigBed files, or a set of packages useful for variant calling.</p>
+</blockquote>
+
+<p>https://bioconda.github.io/guidelines.html#metapackages</p>
+
+<hr />
+
+<p>class: left</p>
+
+<h2 id="circleci-continuous-building">CircleCI Continuous Building</h2>
+
+<p>.image-70[<img src="../../images/circleci-logo.png" alt="circle ci logo" loading="lazy" />]</p>
+
+<ul>
+  <li>Lint recipes.</li>
+  <li>Build and run tests.</li>
+  <li>Build and publish Docker container.</li>
+  <li>Publish to anaconda.org.</li>
+</ul>
+
+<hr />
+
+<h2 id="circleci-command-line-interface-cli">CircleCI Command Line Interface (CLI)</h2>
+
+<ul>
+  <li>Installation:</li>
+</ul>
+
+<p>.reduce70[<code class="language-plaintext highlighter-rouge">bash
+$ curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci
+</code>]</p>
+
+<p>.reduce70[<code class="language-plaintext highlighter-rouge">bash
+$ chmod +x /usr/local/bin/circleci
+</code>]</p>
+
+<ul>
+  <li>
+    <p>The extended building and testing done by CircleCI can be executed locally using the CircleCI CLI in the root directory of Bioconda</p>
+  </li>
+  <li>
+    <p>It should be run from the top-level dir of the repo.</p>
+  </li>
+  <li>
+    <p>Build and test recipes:</p>
+  </li>
+</ul>
+
+<p>.reduce70[<code class="language-plaintext highlighter-rouge">bash
+$ circleci build
+</code>]</p>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Conda and Bioconda are Galaxy best practices for connecting Galaxy tools to underlying applications and libraries.</li>
+
+<li>Leveraging Conda allows easy installation of your tool's dependencies by Galaxy deployers.</li>
+
+<li>The Planemo commands `conda_search`, `conda_init`, `conda_install`, `lint`, `test`, and `serve` make it easy to search and use existing Conda recipes when developing tools.</li>
+
+<li>Conda recipe skeletons, `conda build`, and with `planemo conda_install --conda_use_local` allow easy development of new Conda recipes at the same time as Galaxy tools that wrap them.</li>
+
+<li>Bioconda is a Galaxy best practice Conda channel for recipe publication.</li>
+
+<li>Bioconda has easy to follow contribution guidelines and is very welcoming to new contributors.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

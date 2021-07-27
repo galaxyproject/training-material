@@ -1,0 +1,988 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Convolutional neural networks (CNN) 
+ Deep Learning - Part 3</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Statistical Analyses for omics data and machine learning ..." />
+        <meta property="og:title" content="Galaxy Training: Convolutional neural networks (CNN) 
+ Deep Learning - Part 3" />
+        <meta property="og:description" content="Statistical Analyses for omics data and machine learning ..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/statistics/faqs/" title="Check our FAQs for the Statistics and machine learning topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/CNN/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/statistics/tutorials/CNN/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/statistics/tutorials/CNN/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/statistics/tutorials/CNN/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/statistics/tutorials/CNN/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/statistics/tutorials/CNN/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/statistics/tutorials/CNN/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fstatistics%2Ftutorials%2FCNN%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/statistics/tutorials/CNN/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/statistics/tutorials/CNN/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/statistics/tutorials/CNN/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/statistics/tutorials/CNN/slides.html">View markdown source on GitHub</a>
+	<h1>Convolutional neural networks (CNN) 
+ Deep Learning - Part 3</h1>
+		<h2>Contributors</h2>
+		Kaivan Kamali
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What is a convolutional neural network (CNN)?</p>
+</li>
+		
+		<li><p>What are some applications of CNN?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Understand the inspiration behind CNN and learn the CNN architecture</p>
+</li>
+		
+		<li><p>Learn the convolution operation and its parameters</p>
+</li>
+		
+		<li><p>Learn how to create a CNN using Galaxy’s deep learning tools</p>
+</li>
+		
+		<li><p>Solve an image classification problem on MNIST digit classification dataset using CNN in Galaxy</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Requirements</h2>
+		<ul>
+		
+		
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/statistics">Statistics and machine learning</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Introduction to deep learning:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/statistics/tutorials/intro_deep_learning/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Deep Learning (Part 1) - Feedforward neural networks (FNN):
+                            
+                                <a href="/training-material/topics/statistics/tutorials/FNN/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/statistics/tutorials/FNN/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Deep Learning (Part 2) - Recurrent neural networks (RNN):
+                            
+                                <a href="/training-material/topics/statistics/tutorials/RNN/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/statistics/tutorials/RNN/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+		</ul>
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 9, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="what-is-a-convolutional-neural-network-cnn">What is a convolutional neural network (CNN)?</h1>
+
+<p><span>Speaker Notes</span></p>
+
+<p>What is a convolutional neural network (CNN)?</p>
+
+<hr />
+
+<h1 id="convolutional-neural-network-cnn">Convolutional Neural Network (CNN)</h1>
+
+<ul>
+  <li>Increasing popularity of social media in past decade
+    <ul>
+      <li>Image and video processing tasks have become very important</li>
+    </ul>
+  </li>
+  <li>FNN could not scale up to image and video processing tasks</li>
+  <li>CNN specifically tailored for image and video processing tasks</li>
+</ul>
+
+<hr />
+
+<h1 id="feedforward-neural-networks-fnn">Feedforward neural networks (FNN)</h1>
+
+<ul>
+  <li>In FNN all nodes in a layer connected to all nodes in next layer
+    <ul>
+      <li>Each connection has a weight, must be learned by learning algorithm</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/training-material/topics/statistics/images/FFNN.png" alt="Neurons forming the input, output, and hidden layers of a multi-layer feedforward neural network" loading="lazy" /> <!-- https://pixy.org/3013900/ CC0 license--></p>
+
+<hr />
+
+<h1 id="limitations-of-fnn">Limitations of FNN</h1>
+
+<ul>
+  <li>If input is 64 pixel by 64 pixel grayscale image
+    <ul>
+      <li>Each grayscale pixel represented by 1 value, usually between 0 to 255</li>
+      <li>Where 0 is black, 255 is white, and values in between are shades of gray</li>
+    </ul>
+  </li>
+  <li>Since each grayscale pixel represented by 1 value, we say <em>channel</em> size is 1</li>
+  <li>Image represented by 64 x 64 x 1 = 4,096 values (rows x columns x channels)
+    <ul>
+      <li>Hence, input layer of FNN has 4096 nodes</li>
+    </ul>
+  </li>
+  <li>Lets assume next layer has 500 nodes
+    <ul>
+      <li>Since FNN fully connected, we have 4,096 x 500 = 2,048,000 weights</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="limitations-of-fnn-1">Limitations of FNN</h1>
+
+<ul>
+  <li>For complex problems, we need multiple hidden layers in our FNN
+    <ul>
+      <li>Compunds the problem of having many weights</li>
+    </ul>
+  </li>
+  <li>Having too many weights
+    <ul>
+      <li>Makes learning more difficult as dimension of search space is increased</li>
+      <li>Makes training more time/resource consuming</li>
+      <li>Increases the likelihood of overfitting</li>
+    </ul>
+  </li>
+  <li>Problem is further compunded for color images
+    <ul>
+      <li>Each pixel in color image represented by 3 values (RGB color mode)</li>
+      <li>Since each pixel represented by 3 values, we say <em>channel</em> size is 3</li>
+      <li>Image represented by 64 x 64 x 3 = 12,288 values (rows x columns x channels)</li>
+      <li>Number of weights is now 12,288 x 500 = 6,144,000</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="limitations-of-fnn-2">Limitations of FNN</h1>
+
+<ul>
+  <li>Clear that FNN cannot scale to larger images (Too many weights)</li>
+  <li>Another problem with FNN
+    <ul>
+      <li>2D image represented as 1D vector in input layer</li>
+      <li>Any spatial relationship in the data is ignored</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="inspiration-for-cnn">Inspiration for CNN</h1>
+
+<ul>
+  <li>In 1959 Hubel &amp; Wiesel did an experiment to understand how visual cortex of brain processes visual info
+    <ul>
+      <li>Recorded activity of neurons in visual cortex of a cat</li>
+      <li>While moving a bright line in front of the cat</li>
+    </ul>
+  </li>
+  <li>Some cells fired when bright line is shown at a particular angle/location
+    <ul>
+      <li>Called these <em>simple</em> cells</li>
+    </ul>
+  </li>
+  <li>Other cells fired when bright line was shown regardless of angle/location
+    <ul>
+      <li>Seemed to detect movement</li>
+      <li>Called these <em>complex</em> cells</li>
+    </ul>
+  </li>
+  <li>Seemed complex cells receive inputs from multiple simple cells
+    <ul>
+      <li>Have an hierarchical structure</li>
+    </ul>
+  </li>
+  <li>Hubel and Wiesel won Noble prize in 1981</li>
+</ul>
+
+<hr />
+
+<h1 id="inspiration-for-cnn-1">Inspiration for CNN</h1>
+
+<ul>
+  <li>Inspired by complex/simple cells, Fukushima proposed <em>Neocognitron</em> (1980)
+    <ul>
+      <li>Hierarchical neural network used for handwritten Japanese character recognition</li>
+      <li>First CNN, had its own training algorithm</li>
+    </ul>
+  </li>
+  <li>In 1989, LeCun proposed CNN that was trained by backpropagation</li>
+  <li>CNN got popular when outperformed other models at ImageNet Challenge
+    <ul>
+      <li>Competition in object classification/detection</li>
+      <li>On hundreds of object categories and millions of images</li>
+      <li>Run annually from 2010 to present</li>
+    </ul>
+  </li>
+  <li>Notable CNN architectures that won ImageNet challenge
+    <ul>
+      <li>AlexNet (2012), ZFNet (2013), GoogLeNet &amp; VGG (2014), ResNet (2015)</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="architecture-of-cnn">Architecture of CNN</h1>
+
+<ul>
+  <li>A typical CNN has 4 layers
+    <ul>
+      <li>Input layer</li>
+      <li>Convolution layer</li>
+      <li>Pooling layer</li>
+      <li>Fully connected layer</li>
+    </ul>
+  </li>
+  <li>We will explain a 2D CNN here
+    <ul>
+      <li>Same concepts apply to a 1 (or 3) dimensional CNN</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="input-layer">Input layer</h1>
+
+<ul>
+  <li>Example input a 28 pixel by 28 pixel grayscale image</li>
+  <li>Unlike FNN, we do not “flatten” the input to a 1D vector
+    <ul>
+      <li>input is presented to network in 2D as 28 x 28 matrix</li>
+      <li>This makes capturing spatial relationships easier</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="convolution-layer">Convolution layer</h1>
+
+<ul>
+  <li>Composed of multiple filters (kernels)</li>
+  <li>Filters for 2D image are also 2D</li>
+  <li>Suppose we have a 3 by 3 filter (9 values in total)
+    <ul>
+      <li>Values are randomly set to 0 or 1</li>
+    </ul>
+  </li>
+  <li>Convolution: placing 3 by 3 filter on the top left corner of image
+    <ul>
+      <li>Multiply filter values by pixel values, add the results</li>
+      <li>Move filter to right one pixel at a time, and repeat this process</li>
+      <li>When at top right corner, move filter down one pixel and repeat process</li>
+      <li>Process ends when we get to bottom right corner of image</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="3-by-3-filter">3 by 3 Filter</h1>
+
+<p><img src="/training-material/topics/statistics/images/Conv_no_padding_no_strides.gif" alt="A 3 by 3 filter applied to a 4 by 4 image, resulting in a 2 by 2 image" loading="lazy" /> <!-- https://pixy.org/3013900/ CC0 license--></p>
+
+<hr />
+
+<h1 id="covolution-operator-parameters">Covolution operator parameters</h1>
+
+<ul>
+  <li>Filter size</li>
+  <li>Padding</li>
+  <li>Stride</li>
+  <li>Dilation</li>
+  <li>Activation function</li>
+</ul>
+
+<hr />
+
+<h1 id="filter-size">Filter size</h1>
+
+<ul>
+  <li>Filter size can be 5 by 5, 3 by 3, and so on</li>
+  <li>Larger filter sizes should be avoided
+    <ul>
+      <li>As learning algorithm needs to learn filter values (weights)</li>
+    </ul>
+  </li>
+  <li>Odd sized filters are preferred to even sized filters
+    <ul>
+      <li>Nice geometric property of all input pixels being around output pixel</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="padding">Padding</h1>
+
+<ul>
+  <li>After applying 3 by 3 filter to 4 by 4 image, we get a 2 by 2 image
+  – Size of the image has gone down</li>
+  <li>If we want to keep image size the same, we can use padding
+    <ul>
+      <li>We pad input in every direction with 0’s before applying filter</li>
+      <li>If padding is 1 by 1, then we add 1 zero in evey direction</li>
+      <li>If padding is 2 by 2, then we add 2 zeros in every direction, and so on</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="3-by-3-filter-with-padding-of-1">3 by 3 filter with padding of 1</h1>
+
+<p><img src="/training-material/topics/statistics/images/Conv_same_padding_no_strides.gif" alt="A 3 by 3 filter applied to a 5 by 5 image, with padding of 1, resulting in a 5 by 5 image" loading="lazy" /> <!-- https://pixy.org/3013900/ CC0 license--></p>
+
+<hr />
+
+<h1 id="stride">Stride</h1>
+
+<ul>
+  <li>How many pixels we move filter to the right/down is stride</li>
+  <li>Stride 1: move filter one pixel to the right/down</li>
+  <li>Stride 2: move filter two pixels to the right/down</li>
+</ul>
+
+<hr />
+
+<h1 id="3-by-3-filter-with-stride-of-2">3 by 3 filter with stride of 2</h1>
+
+<p><img src="/training-material/topics/statistics/images/Conv_no_padding_strides.gif" alt="A 3 by 3 filter applied to a 5 by 5 image, with stride of 2, resulting in a 2 by 2 image" loading="lazy" /> <!-- https://pixy.org/3013900/ CC0 license--></p>
+
+<hr />
+
+<h1 id="dilation">Dilation</h1>
+
+<ul>
+  <li>When we apply 3 by 3 filter, output affected by pixels in 3 by 3 subset of image</li>
+  <li>Dilation: To have a larger receptive field (portion of image affecting filter’s output)</li>
+  <li>If dilation set to 2, instead of contiguous 3 by 3 subset of image, every other pixel of a 5 by 5 subset of image affects output</li>
+</ul>
+
+<hr />
+
+<h1 id="3-by-3-filter-with-dilation-of-2">3 by 3 filter with dilation of 2</h1>
+
+<p><img src="/training-material/topics/statistics/images/Conv_dilation.gif" alt="A 3 by 3 filter applied to a 7 by 7 image, with dilation of 2, resulting in a 3 by 3 image" loading="lazy" /> <!-- https://pixy.org/3013900/ CC0 license--></p>
+
+<hr />
+
+<h1 id="activation-function">Activation function</h1>
+
+<ul>
+  <li>After filter applied to whole image, apply activation function to output to introduce non-linearlity</li>
+  <li>Preferred activation function in CNN is ReLU</li>
+  <li>ReLU leaves outputs with positive values as is, replaces negative values with 0</li>
+</ul>
+
+<hr />
+
+<h1 id="relu-activation-function">Relu activation function</h1>
+
+<p><img src="/training-material/topics/statistics/images/Conv_ReLU.png" alt="Two matrices representing filter output before and after ReLU activation function is applied" loading="lazy" /> <!-- https://pixy.org/3013900/ CC0 license--></p>
+
+<hr />
+
+<h1 id="single-channel-2d-convolution">Single channel 2D convolution</h1>
+
+<p><img src="/training-material/topics/statistics/images/Conv_single_input_channel.png" alt="One matrix representing an input vector and another matrix representing a filter, along with calculation for single input channel two dimensional convolution operation" loading="lazy" /> <!-- https://pixy.org/3013900/ CC0 license--></p>
+
+<hr />
+
+<h1 id="triple-channel-2d-convolution">Triple channel 2D convolution</h1>
+
+<p><img src="/training-material/topics/statistics/images/Conv_multiple_input_channel.png" alt="Three matrices representing an input vector and another three matrices representing a filter, along with calculation for multiple input channel two dimensional convolution operation" loading="lazy" /> <!-- https://pixy.org/3013900/ CC0 license--></p>
+
+<hr />
+
+<h1 id="triple-channel-2d-convolution-in-3d">Triple channel 2D convolution in 3D</h1>
+
+<p><img src="/training-material/topics/statistics/images/Conv_multiple_channel_3d.gif" alt="Multiple cubes representing input vector, filter, and output in a 3 channel 2 dimensional convolution operation" loading="lazy" /> <!-- https://pixy.org/3013900/ CC0 license--></p>
+
+<hr />
+
+<h1 id="change-channel-size">Change channel size</h1>
+
+<ul>
+  <li>Output of a multi-channel 2D filter is a single channel 2D image</li>
+  <li>Applying <em>multiple</em> filters results in a multi-channel 2D image</li>
+  <li>E.g., if input image is 28 x 28 x 3 (rows x columns x channels)
+    <ul>
+      <li>We apply a 3 x 3 filter with 1 x 1 padding, we get a 28 x 28 x 1 image</li>
+      <li>If we apply 15 such filters, we get a 28 x 28 x 15</li>
+    </ul>
+  </li>
+  <li>Number of filters allows us to increase or decrease channel size</li>
+</ul>
+
+<hr />
+
+<h1 id="pooling-layer">Pooling layer</h1>
+
+<ul>
+  <li>Pooling layer performs down sampling to reduce spatial dimensionality of input</li>
+  <li>This decreases number of parameters
+    <ul>
+      <li>Reduces learning time/computation</li>
+      <li>Reduces likelihood of overfitting</li>
+    </ul>
+  </li>
+  <li>Most popular type is <em>max</em> pooling
+    <ul>
+      <li>Usually a 2 x 2 filter with a stride of 2</li>
+      <li>Returns maximum value as it slides over input data</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="fully-connected-layer">Fully connected layer</h1>
+
+<ul>
+  <li>Last layer in a CNN</li>
+  <li>Connect all nodes from previous layer to this fully connected layer
+    <ul>
+      <li>Which is responsible for classification of the image</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="an-example-cnn">An example CNN</h1>
+
+<p><img src="/training-material/topics/statistics/images/Conv_CNN.png" alt="A convolutional neural network with 3 convolution layers followed by 3 pooling layers" loading="lazy" /> <!-- https://pixy.org/3013900/ CC0 license--></p>
+
+<hr />
+
+<h1 id="an-example-cnn-1">An example CNN</h1>
+
+<ul>
+  <li>A typical CNN has several convolution plus pooling layers
+    <ul>
+      <li>Each responsible for feature extraction at different levels of abstraction</li>
+      <li>E.g., filters in first layer detect horizental, vertical, and diagonal edges</li>
+      <li>Filters in the next layer detect shapes</li>
+      <li>Filters in the last layer detect collection of shapes</li>
+    </ul>
+  </li>
+  <li>Filter values randomly initialized, learned by learning algorithm</li>
+  <li>CNN not only do classification, but can also automatically do feature extraction
+    <ul>
+      <li>Distinguishes CNN from other classification techniques (like Support Vector Machines)</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="mnist-dataset">MNIST dataset</h1>
+
+<ul>
+  <li>MNIST dataset of handwritten digits
+    <ul>
+      <li>Composed of training set of 60,000 and test set of 10,000 images</li>
+    </ul>
+  </li>
+  <li>Digits have been size-normalized/centered in a fixed-size image (28 by 28 pixels)</li>
+  <li>Images are grayscale
+    <ul>
+      <li>Each pixel is represented by a number between 0 and 255</li>
+      <li>0 for black, 255 for white, and other values for shades of gray</li>
+    </ul>
+  </li>
+  <li>MNIST dataset is a standard image classification dataset
+    <ul>
+      <li>
+        <h2 id="used-to-compare-various-machine-learning-techniques">Used to compare various Machine Learning techniques</h2>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="classification-of-mnist-images-with-cnn">Classification of MNIST images with CNN</h1>
+
+<ul>
+  <li>We define a CNN and train it using MNIST dataset training data</li>
+  <li>Goal is to learn a model such that given image of a digit we predict the digit (0 to 9)</li>
+  <li>We then evaluate the trained CNN on test dataset and plot the confusion matrix</li>
+</ul>
+
+<hr />
+
+<h1 id="for-references-please-see-tutorials-references-section">For references, please see tutorial’s References section</h1>
+
+<hr />
+
+<ul>
+  <li>Galaxy Training Materials (<a href="https://training.galaxyproject.org">training.galaxyproject.org</a>)</li>
+</ul>
+
+<p><img src="/training-material/topics/introduction/images/gtn_stats.png" alt="Screenshot of the gtn stats page with 21 topics, 170 tutorials, 159 contributors, 16 scientific topics, and a growing community" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>If you would like to learn more about Galaxy, there are a large number of tutorials available.</li>
+  <li>These tutorials cover a wide range of scientific domains.</li>
+</ul>
+
+<hr />
+
+<h1 id="getting-help">Getting Help</h1>
+
+<ul>
+  <li>
+    <p><strong>Help Forum</strong> (<a href="https://help.galaxyproject.org">help.galaxyproject.org</a>)</p>
+
+    <p><img src="/training-material/topics/introduction/images/galaxy_help.png" alt="Galaxy Help" loading="lazy" /></p>
+  </li>
+  <li>
+    <p><strong>Gitter Chat</strong></p>
+    <ul>
+      <li><a href="https://gitter.im/galaxyproject/Lobby">Main Chat</a></li>
+      <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">Galaxy Training Chat</a></li>
+      <li>Many more channels (scientific domains, developers, admins)</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>If you get stuck, there are ways to get help.</li>
+  <li>You can ask your questions on the help forum.</li>
+  <li>Or you can chat with the community on Gitter.</li>
+</ul>
+
+<hr />
+
+<h1 id="join-an-event">Join an event</h1>
+
+<ul>
+  <li>Many Galaxy events across the globe</li>
+  <li>Event Horizon: <a href="https://galaxyproject.org/events">galaxyproject.org/events</a></li>
+</ul>
+
+<p><img src="/training-material/topics/introduction/images/event_horizon.png" alt="Event schedule" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>There are frequent Galaxy events all around the world.</li>
+  <li>You can find upcoming events on the Galaxy Event Horizon.</li>
+</ul>
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

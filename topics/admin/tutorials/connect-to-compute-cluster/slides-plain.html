@@ -1,0 +1,858 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Connecting Galaxy to a compute cluster</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Connecting Galaxy to a compute cluster" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/connect-to-compute-cluster/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/connect-to-compute-cluster/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/connect-to-compute-cluster/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/connect-to-compute-cluster/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/connect-to-compute-cluster/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/connect-to-compute-cluster/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/connect-to-compute-cluster/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fconnect-to-compute-cluster%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/admin/tutorials/connect-to-compute-cluster/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/admin/tutorials/connect-to-compute-cluster/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/admin/tutorials/connect-to-compute-cluster/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/admin/tutorials/connect-to-compute-cluster/slides.html">View markdown source on GitHub</a>
+	<h1>Connecting Galaxy to a compute cluster</h1>
+		<h2>Contributors</h2>
+		Nate Coraor, Björn Grüning, Nicola Soranzo, Helena Rasche
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>How to connect Galaxy to a compute cluster?</p>
+</li>
+		
+		<li><p>How can I configure job dependent resources, like cores, memory for my DRM?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Understand all components of the Galaxy job running stack</p>
+</li>
+		
+		<li><p>Understand how the <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file controls Galaxy’s jobs subsystem</p>
+</li>
+		
+		<li><p>Know how to map tools to job destinations</p>
+</li>
+		
+		<li><p>The various ways in which tools can be mapped to destinations, both statically and dynamically</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 6, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="galaxy-job-configuration">Galaxy Job Configuration</h1>
+
+<ul>
+  <li>Configured in <code class="language-plaintext highlighter-rouge">config/job_conf.xml</code></li>
+  <li>XML format with macro support</li>
+  <li>Major components:
+    <ul>
+      <li><strong>Plugins</strong>: distributed resource manager (DRM) modules to load</li>
+      <li><strong>Handlers</strong>: job handler processes managing the lifecycle of jobs</li>
+      <li><strong>Destinations</strong>: where to send jobs, and what parameters to run those jobs with</li>
+      <li><strong>Tool</strong> to destination/handler mappings</li>
+      <li><strong>Resource</strong> selection mappings: give users job execution options on the tool form</li>
+      <li><strong>Limits</strong>: job runtime limits, e.g. the max number of concurrent jobs</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The job_conf file is a very powerul galaxy configuration piece critical to smooth cluster operation.</li>
+  <li>Written in XML it connects your server with the available cluster resources.</li>
+  <li>You can configure it in myriad ways.</li>
+  <li>Study the advanced sample provided with codebase once you get a basic understanding.</li>
+  <li>There are several major components of the job conf file.</li>
+  <li>Plugins, handlers, destinations, tools, resources, and limits.</li>
+  <li>We’ll go into detail on each of these in the tutorial.</li>
+</ul>
+
+<hr />
+
+<h1 id="why-cluster">Why cluster?</h1>
+
+<p>Running jobs on the Galaxy server negatively impacts Galaxy UI performance</p>
+
+<p>Even adding one other host helps</p>
+
+<p>Can restart Galaxy without interrupting jobs</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Galaxy itself is not resource hungry, but the jobs often are.</li>
+  <li>Offloading the jobs to different machines is a more sustainable and reliable setup.</li>
+  <li>This can prevent user jobs from making Galaxy unresponsive.</li>
+</ul>
+
+<hr />
+
+<h1 id="plugins">Plugins</h1>
+
+<p>Correspond to job runner plugins in <a href="https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/jobs/runners">lib/galaxy/jobs/runners</a></p>
+
+<p>.left[Plugins for:]</p>
+<ul>
+  <li>local</li>
+  <li>Slurm (DRMAA subclass)</li>
+  <li>DRMAA: SGE, PBS Pro, LSF, Torque</li>
+  <li>HTCondor</li>
+  <li>Torque: Using the <code class="language-plaintext highlighter-rouge">pbs_python</code> library</li>
+  <li>Pulsar: Galaxy’s own remote job management system</li>
+  <li>Command Line Interface (CLI) via SSH</li>
+  <li>Kubernetes</li>
+  <li>Go-Docker</li>
+  <li>Chronos</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Galaxy supports plugins for various job runners covering most of the popular DRMs.</li>
+  <li>The Galaxy community also maintains its own job management system called Pulsar.</li>
+  <li>If the scheduler you use is missing, talk to us!</li>
+</ul>
+
+<hr />
+
+<h1 id="cluster-library-stack-drmaa">Cluster library stack (DRMAA)</h1>
+
+<p><img src="../../images/cluster_lib_stack.png" alt="Cluster library stack" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The cluster library stack we use in this tutorial will use DRMAA.</li>
+  <li>DRMAA is an interface that many distributed resource managers provide.</li>
+  <li>Galaxy can use DRMAA to interact with these in an agnostic manner.</li>
+  <li>However, there are more underlying technologies that you are going to depend on.</li>
+  <li>You don’t need to have an in-depth understanding to run cluster deployment correctly.</li>
+</ul>
+
+<hr />
+
+<h1 id="handlers">Handlers</h1>
+
+<p>Define which Galaxy processes are job handlers</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">id</code> attribute should match the <code class="language-plaintext highlighter-rouge">--server-name</code> param value of a process</li>
+  <li>Dedicated handlers can be reserved, e.g. for small, high throughput jobs</li>
+  <li>The list of plugins that are loaded by a job handler can be limited using <code class="language-plaintext highlighter-rouge">&lt;plugin&gt;</code> subelements (e.g. when the DRMAA plugin needs to be loaded with different library paths)</li>
+  <li>Not defined in <code class="language-plaintext highlighter-rouge">job_conf.xml</code> when using <em>job handler mules</em></li>
+  <li>Defines how jobs are assigned to individual processes (use <code class="language-plaintext highlighter-rouge">db-skip-locked</code> !)</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Handlers are the Galaxy processes which interact with the cluster.</li>
+  <li>You can define dedicated handlers for different types of jobs, or to interact with different clusters.</li>
+  <li>Additionally, handlers definition in the job configuration controls how jobs are assigned to individual processes.</li>
+  <li>There are many options for the assignment process, all are discussed in the advanced sample job configuration.</li>
+  <li>db-skip-locked is the best choice for most cases, it enables handlers to grab multiple jobs to work on at once.</li>
+</ul>
+
+<hr />
+
+<h1 id="destinations">Destinations</h1>
+
+<p>Define <em>how</em> jobs should be run</p>
+
+<ul>
+  <li>Which plugin? (Slurm, Condor, Pulsar, etc?)</li>
+  <li>In a Docker container? Which one?</li>
+  <li><strong>DRM params</strong> (queue, cores, memory, walltime)?</li>
+  <li>Environment (variables e.g. <code class="language-plaintext highlighter-rouge">$PATH</code>, source an env file, run a command)?</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The destination section of the job configuration file is a map that defines which jobs go where.</li>
+  <li>Jobs from any destination, can be processed by any plugin.</li>
+  <li>Every job will find a path through this configuration and eventually get dispatched to the matching runner.</li>
+  <li>These destinations can specify things like environment variables or resource requirements.</li>
+</ul>
+
+<hr />
+
+<h1 id="the-default-job-configuration">The default job configuration</h1>
+
+<p>.left[<code class="language-plaintext highlighter-rouge">config/job_conf.xml.sample_basic</code>:]</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;job_conf&gt;</span>
+    <span class="nt">&lt;plugins&gt;</span>
+        <span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"local"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"galaxy.jobs.runners.local:LocalJobRunner"</span> <span class="na">workers=</span><span class="s">"4"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/plugins&gt;</span>
+    <span class="nt">&lt;destinations&gt;</span>
+        <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"local"</span> <span class="na">runner=</span><span class="s">"local"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/destinations&gt;</span>
+<span class="nt">&lt;/job_conf&gt;</span>
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>This is the default job configuration.</li>
+  <li>It uses a local runner with 4 workers, or processes to process jobs.</li>
+  <li>As a result if you restart Galaxy, jobs will be lost.</li>
+</ul>
+
+<hr />
+
+<h1 id="job-config---tags">Job Config - Tags</h1>
+
+<p>Both destinations and handlers can be grouped by <strong>tags</strong></p>
+
+<ul>
+  <li>Allows random selection from multiple resources</li>
+  <li>Allows concurrency limits at the destination group level</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Tags can be applied to both destinations and handlers.</li>
+  <li>This permits selecting randomly amongst the handlers or destinations.</li>
+  <li>Tags can help the load distribution.</li>
+</ul>
+
+<hr />
+
+<h1 id="job-environment">Job Environment</h1>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;env&gt;</code> tag in destinations: configure the job exec environment</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>tag syntax</th>
+      <th>function</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">&lt;env id="NAME"&gt;VALUE&lt;/env&gt;</code></td>
+      <td>Set <code class="language-plaintext highlighter-rouge">$NAME</code> to <code class="language-plaintext highlighter-rouge">VALUE</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">&lt;env file="/path/to/file" /&gt;</code></td>
+      <td>Source shell file at <code class="language-plaintext highlighter-rouge">/path/to/file</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">&lt;env exec="CMD" /&gt;</code></td>
+      <td>Execute <code class="language-plaintext highlighter-rouge">CMD</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Source and command execution will be handled on the remote destination, don’t need to work on the Galaxy server</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>You can specify environment variables on the destination.</li>
+  <li>Galaxy will ensure these are executed in the same environment and ahead of the job.</li>
+</ul>
+
+<hr />
+
+<h1 id="limits">Limits</h1>
+
+<p>Available limits</p>
+
+<ul>
+  <li>Walltime (if not available with your DRM)</li>
+  <li>Output size (if <em>any</em> tool output grows larger than this limit)</li>
+  <li>Concurrency: Number of “active” (queued or running) jobs</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Configuration of job limits is best acommplished using both the DRM provided limits and the ones from Galaxy.</li>
+  <li>Walltime is best set in your DRM, while output size is only possible through Galaxy.</li>
+  <li>We recommend you set these at the DRM level which is better equipped to terminate misbehaving jobs.</li>
+  <li>The most important limit however is usually concurrency.</li>
+</ul>
+
+<hr />
+
+<h1 id="concurrency-limits">Concurrency Limits</h1>
+
+<p>Available limits</p>
+
+<ul>
+  <li>Number of active jobs per registered user</li>
+  <li>Number of active jobs per unregistered user</li>
+  <li>Number of active jobs per registered user in a specified destination or destination tag</li>
+  <li>Number of total active jobs in a specified destination or destination tag</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Using concurrency limits lets you ensure quality of service for everyone.</li>
+  <li>By limiting jobs per user, you can prevent a single user from overwhelming the server, and ensure everyone can run jobs.</li>
+  <li>Additionally with concurrency limits you can balance your instance between internal and external users.</li>
+</ul>
+
+<hr />
+
+<h1 id="shared-filesystem">Shared Filesystem</h1>
+
+<p>Most job plugins require a <strong>shared filesystem</strong> between the Galaxy server and compute.</p>
+
+<p>The exception is <strong>Pulsar</strong>. More on this in <em>Using heterogeneous compute resources</em></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Most DRMs require a shared filesystem to ensure datasets are available to the jobs.</li>
+  <li>Galaxy’s Pulsar does not, and can be used in situations where no shared filesystem is available.</li>
+</ul>
+
+<hr />
+
+<h1 id="shared-filesystem-1">Shared Filesystem</h1>
+
+<p>Our simple example works because of two important principles:</p>
+
+<ol>
+  <li>Some things are located <em>at the same path</em> on Galaxy server and node(s)
+    <ul>
+      <li>Galaxy application (<code class="language-plaintext highlighter-rouge">/srv/galaxy/server</code>)</li>
+      <li>Tool dependencies</li>
+    </ul>
+  </li>
+  <li>Some things <em>are the same</em> on Galaxy server and node(s)
+    <ul>
+      <li>Job working directory</li>
+      <li>Input and output datasets</li>
+    </ul>
+  </li>
+</ol>
+
+<p>The first can be worked around with symlinks or Pulsar embedded (later)</p>
+
+<p>The second can be worked around with Pulsar REST/MQ (with a performance/throughput penalty)</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>For the DRMs which require a shared filesystem there are additional requirements.</li>
+  <li>First, Galaxy and the tool dependencies are at the same location on the head and compute nodes.</li>
+  <li>Job directories must be in a shared location on both head and compute nodes.</li>
+  <li>This is mentioned in more detail in the tutorial.</li>
+</ul>
+
+<hr />
+
+<h1 id="multiprocessing">Multiprocessing</h1>
+
+<p>Some tools can greatly improve performance by using multiple cores</p>
+
+<p>Galaxy automatically sets <code class="language-plaintext highlighter-rouge">$GALAXY_SLOTS</code> to the CPU/core count you specify when submitting, for example, 4:</p>
+<ul>
+  <li>Slurm: <code class="language-plaintext highlighter-rouge">sbatch --ntasks=4</code></li>
+  <li>SGE: <code class="language-plaintext highlighter-rouge">qsub -pe threads 4</code></li>
+  <li>Torque/PBS Pro: <code class="language-plaintext highlighter-rouge">qsub -l nodes=1:ppn=4</code></li>
+  <li>Condor: <code class="language-plaintext highlighter-rouge">request_cpus: 4</code></li>
+</ul>
+
+<p>Tool configs: Consume <code class="language-plaintext highlighter-rouge">\${GALAXY_SLOTS:-4}</code></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>For multiprocessing to be available both the tool and the Galaxy tool wrapper need to support it.</li>
+  <li>You need to understand what tools are being run and set destinations for them with the appropriate specification.</li>
+  <li>You’ll need to check for presence of GALAXY_SLOTS in the tool wrappers and tool macros to see if the tool supports multiple threads.</li>
+</ul>
+
+<hr />
+
+<h1 id="memory-requirements">Memory requirements</h1>
+
+<p>For <strong>Slurm only</strong>, Galaxy will set <code class="language-plaintext highlighter-rouge">$GALAXY_MEMORY_MB</code> and <code class="language-plaintext highlighter-rouge">$GALAXY_MEMORY_MB_PER_SLOT</code> as integers.</p>
+
+<p><strong>Other DRMs:</strong> Please PR the <a href="https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/jobs/runners/util/job_script/MEMORY_STATEMENT.sh">appropriate code</a>.</p>
+
+<p>For Java tools, be sure to set <code class="language-plaintext highlighter-rouge">-Xmx</code>, e.g.:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"foo"</span> <span class="err">...</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;env</span> <span class="na">id=</span><span class="s">"_JAVA_OPTIONS"</span><span class="nt">&gt;</span>-Xmx4096m<span class="nt">&lt;/env&gt;</span>
+<span class="nt">&lt;/destination&gt;</span>
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Memory requirements can be set as well.</li>
+  <li>For some tools, you’ll need to additionally provide environment variables to specify memory limits.</li>
+  <li>This is different per DRM.</li>
+</ul>
+
+<hr />
+
+<h1 id="run-jobs-as-the-real-user">Run jobs as the “real” user</h1>
+
+<p>If your Galaxy users == System users:</p>
+<ul>
+  <li>Submit jobs to cluster as the actual user</li>
+  <li>Configurable callout scripts before/after job to change ownership</li>
+  <li>Probably requires limited sudo for Galaxy user</li>
+</ul>
+
+<p>See: <a href="https://wiki.galaxyproject.org/Admin/Config/Performance/Cluster">Cluster documentation</a></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>If you galaxy users map to the system users you can have Galaxy run the jobs with the account of those users.</li>
+  <li>This allows proper resource accounting, but comes at some additional configuration complexities.</li>
+</ul>
+
+<hr />
+
+<h2 id="job-config---mapping-tools-to-destinations">Job Config - Mapping Tools to Destinations</h2>
+
+<p>Problem: Tool A uses single core, Tool B uses multiple</p>
+<ul>
+  <li>Both submit to the same cluster</li>
+  <li>Need different submit parameters (<code class="language-plaintext highlighter-rouge">--ntasks=1</code> vs. <code class="language-plaintext highlighter-rouge">--ntasks=4</code> in Slurm)</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Mapping tools to destinations is the heart of the job configuration.</li>
+  <li>This permits you to define which tools go to which destinations, and what resources they need.</li>
+</ul>
+
+<hr />
+
+<h2 id="job-config---mapping-tools-to-destinations-1">Job Config - Mapping Tools to Destinations</h2>
+
+<p>Solution:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;destinations</span> <span class="na">default=</span><span class="s">"single"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"single"</span> <span class="na">runner=</span><span class="s">"slurm"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"multi"</span> <span class="na">runner=</span><span class="s">"slurm"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"nativeSpecification"</span><span class="nt">&gt;</span>--ntasks=4<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;/destination&gt;</span>
+    <span class="nt">&lt;/destinations&gt;</span>
+    <span class="nt">&lt;tools&gt;</span>
+        <span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"hisat2"</span> <span class="na">destination=</span><span class="s">"multi"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/tools&gt;</span>
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Here is an example mapping the hisat2 tool to a definition named multi.</li>
+  <li>The multi destination specifies that 4 cores should be allocated for each job, and uses the slurm plugin.</li>
+</ul>
+
+<hr />
+
+<h1 id="the-dynamic-job-runner">The Dynamic Job Runner</h1>
+
+<p>For when basic tool-to-destination mapping isn’t enough</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>However this static mapping sometimes isn’t sufficient.</li>
+  <li>Here a dynamic mapping can be used instead.</li>
+  <li>Galaxy has several different methods for accomplishing this.</li>
+</ul>
+
+<hr />
+
+<h2 id="the-dynamic-job-runner-1">The Dynamic Job Runner</h2>
+
+<p>A special built-in job runner plugin</p>
+
+<p>Map jobs to destinations on more than just tool IDs</p>
+
+<p>.left[Two types:]</p>
+<ul>
+  <li>Dynamic Tool Destinations</li>
+  <li>Python function</li>
+</ul>
+
+<p>See: <a href="https://docs.galaxyproject.org/en/master/admin/jobs.html#dynamic-destination-mapping">Dynamic Destination Mapping</a></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>There are two built in ways to do this: dynamic tool destinations, and custom Python functions.</li>
+  <li>We will cover both of these in the tutorial.</li>
+</ul>
+
+<hr />
+
+<h2 id="dynamic-tool-destinations">Dynamic Tool Destinations</h2>
+
+<p>.left[Configurable mappings without programming:]</p>
+<ul>
+  <li>YAML format config file <code class="language-plaintext highlighter-rouge">tool_destinations.yml</code></li>
+  <li>Map based on tool ID plus:
+    <ul>
+      <li>Input dataset size(s)</li>
+      <li>Input dataset number of records</li>
+      <li>User</li>
+    </ul>
+  </li>
+  <li>Maps to static destinations defined in job config</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The Dynamic Tool Destinations are written as a yaml file.</li>
+  <li>You can easily write rules based on file input sizes or number of inputs or user information.</li>
+  <li>This can be used to determine memory and cpu allocations.</li>
+</ul>
+
+<hr />
+
+<h2 id="arbitrary-python-functions">Arbitrary Python Functions</h2>
+
+<p>.left[Programmable mappings:]</p>
+<ul>
+  <li>Written as Python function in <code class="language-plaintext highlighter-rouge">lib/galaxy/jobs/rules/</code></li>
+  <li>Map based on:
+    <ul>
+      <li>Tool ID</li>
+      <li>User email or username</li>
+      <li>Inputs</li>
+      <li>Tool Parameters</li>
+      <li>Defined “helper” functions based on DB contents</li>
+      <li>Anything else discoverable
+        <ul>
+          <li>Cluster queue depth?</li>
+          <li>…?</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Can dynamically modify destinations in job config (i.e. <code class="language-plaintext highlighter-rouge">sbatch</code> params)</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>If Dynamic Tool Destinations are insufficiently flexible, then custom Python functions can be written.</li>
+  <li>These can use any arbitrary information you want.</li>
+  <li>They have full access to submitter information, job parameters, and any other resource you might want.</li>
+  <li>They can dynamically modify destination parameters during runtime.</li>
+  <li>If you need flexibility, these are what you want.</li>
+</ul>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Galaxy supports a variety of different DRMs.</li>
+
+<li>Dynamic Tool Destinations are a convenient way to map</li>
+
+<li>Job resource parameters can allow you to give your users control over job resource requirements, if they are knowledgeable about the tools and compute resources available to them.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+
+<img src="/training-material/assets/images/gat.png" alt="page logo" style="height: 100px;"/>
+
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

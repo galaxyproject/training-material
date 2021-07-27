@@ -202,11 +202,25 @@ class: center, middle, inverse
 <div class="contributors-line">
 
 
- <a href="/training-material/hall-of-fame/subinamehta/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/subinamehta" alt="Subina Mehta">Subina Mehta</a> <a href="/training-material/hall-of-fame/pratikdjagtap/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pratikdjagtap" alt="Pratik Jagtap">Pratik Jagtap</a> <a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a>
+ <a href="/training-material/hall-of-fame/subinamehta/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/subinamehta" alt="Avatar">Subina Mehta</a> <a href="/training-material/hall-of-fame/pratikdjagtap/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pratikdjagtap" alt="Avatar">Pratik Jagtap</a> <a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Avatar">Saskia Hiltemann</a>
 
 
 </div>
 
+
+<div class="footnote" style="bottom: 3em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: Jul 9, 2021</div>
+<div class="footnote" style="bottom: 2em;">Or view the <a href="slides-plain.html">plain-text slides without JS</a></div>
+<div class="footnote" style="bottom: 1em;">Tip: press <kbd>P</kbd> to view the presenter notes</div>
+
+???
+Presenter notes contain extra information which might be useful if you
+intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other. Useful when presenting.
 
 
 
@@ -230,18 +244,6 @@ Before diving into this slide deck, we recommend you to have a look at:
 
 
 
-
-.footnote[Tip: press `P` to view the presenter notes]
-
-???
-Presenter notes contain extra information which might be useful if you
-intend to use these slides for teaching.
-
-Press `P` again to switch presenter notes off
-
-Press `C` to create a new window where the same presentation will be displayed.
-This window is linked to the main window. Changing slides on one will cause the
-slide to change on the other. Useful when presenting.
 
 ---
 
@@ -277,7 +279,7 @@ slide to change on the other. Useful when presenting.
 ]
 .pull-right[
 
-.image-100[ ![](../../images/human_microbiome.png) ]
+.image-100[ ![Image of a human with various pie charts pointing to various regions of the body where microbe populations live](../../images/human_microbiome.png) ]
 
 ]
 
@@ -295,7 +297,7 @@ slide to change on the other. Useful when presenting.
   - Microbes in the soil affect plants and animals
   - Improve agriculture
 
-.image-75[ ![](../../images/environmentalstudies.png) ]
+.image-75[ ![Rhizodeposition: image of a tree converting sun and co2 into fixed carbon used as food for soil microbes.](../../images/environmentalstudies.png) ]
 
 
 ---
@@ -343,7 +345,7 @@ the workflows should be far enough along to start showing the results
 
 ## Input: Cellulose Degradation in a Biogas Reactor
 
-![](../../images/metatranscriptomics/experimental_setup.png)
+![Workflow graph showing biogas reactor extract being transferred to cellulose and incubated. Time series samples are taken and run through a mass spectrometer and genomic sequencer.](../../images/metatranscriptomics/experimental_setup.png)
 
 
 
@@ -361,7 +363,7 @@ Three bottles were collected at 9 different time points (0, 8, 13, 18, 23, 28, 3
 
 - Four lines per read
 
-![](../../../sequence-analysis/images/quality-control/fastq_fig.jpg)
+![Image of a fastq file with label on the first line, sequence on the second, + on the third, and quality scores on the fourth as ascii chars. A callout shows that Base=T, quality=colon, and that means a score of 25.](../../../sequence-analysis/images/quality-control/fastq_fig.jpg)
 
 ???
 
@@ -379,7 +381,7 @@ Segue: so what do the quality chars mean?
 
 - Each character denotes a different Phred score
 
-  ![](../../../sequence-analysis/images/quality_score_encoding.png)
+  ![Encoding of the quality score with ASCII characters for different Phred encoding. The ascii code sequence is shown at the top with symbols for 33 to 64, upper case letters, more symbols, and then lowercase letters. Sanger maps from 33 to 73 while solexa is shifted, starting at 59 and going to 104. Illumina 1.3 starts at 54 and goes to 104, Illumina 1.5 is shifted three scores to the right but still ends at 104. Illumina 1.8+ goes back to the Sanger except one single score wider. Illumina](../../../sequence-analysis/images/quality_score_encoding.png)
 
 - Phred scores are logarithmic
 
@@ -430,7 +432,7 @@ In this tutorial we start with some preprocessing steps
 
 - Generate a web report with quality metrics of your FastQ file
 
-![](../../../sequence-analysis/images/fastqc-report.png)
+![Screenshot of FastQC report, showing the table of contents with green checks on nearly every result, and the base statistics and per-base sequence quality graphs shown.](../../../sequence-analysis/images/fastqc-report.png)
 
 .footnote[see also our [dedicated QC tutorial](/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html)  ]
 
@@ -441,7 +443,7 @@ In this tutorial we start with some preprocessing steps
 - Many different QC plots
 - Example: Per-base sequence Quality plot
 
-![](../../../sequence-analysis/images/per_base_sequence_quality_good.png)
+![Fastqc quality score plot, most results are in the green region but the box portion of the box and whisker plot start to dip into the yellow, medium quality (less than 30) region near 34+ base position in read. The whiskers begin extending to the red region (less than 20) by base 31 and get progressively worse.](../../../sequence-analysis/images/per_base_sequence_quality_good.png)
 
 
 .footnote[explanation of different plots: [dedicated QC tutorial](/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html)  ]
@@ -458,7 +460,7 @@ In this tutorial we start with some preprocessing steps
 - Many more plots
 - See [QC tutorial](/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html) for more information
 
-![](../../../sequence-analysis/images/quality-control/all_plots.png)
+![Montage of several different fastq reports showing sequence quality graphs, and a numb er of other line graphs.](../../../sequence-analysis/images/quality-control/all_plots.png)
 
 
 ---
@@ -474,7 +476,7 @@ In this tutorial we start with some preprocessing steps
 ]
 
 .pull-right[
-![](../../images/metatranscriptomics/multiqc.png)
+![Multiqc's report showing an aggregation of multiple samples. An overview at the top provides context for the 4 samples, and a sequence quality histogram shows 4 samples with similarly behaving quality scores](../../images/metatranscriptomics/multiqc.png)
 ]
 
 ---
@@ -543,7 +545,7 @@ forward and reverse files are 'zipped' together into a single file
 
 - We want to identify which organisms are present in our sample, and their relative abundances
 
-![](../../images/microbial-community.png)
+![Cartoon of several differently coloured and shaped microbes in a circle.](../../images/microbial-community.png)
 
 - **MetaPhlan2** &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tool&lt;/span&gt; for identification
 - **Krona** &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tool&lt;/span&gt; and **Graphlan** &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tool&lt;/span&gt; for visualisation
@@ -578,7 +580,7 @@ About the caveat: The theoretical problem is that we quantify species abundance 
 
 - *Cladogram* visualisation
 
-![](../../images/metatranscriptomics/graphlan_general.png)
+![Colourful cladogram which begins from the center and expands outward with the lineage of the samples. Each sector of the chart is coloured differently for each group of genus and spieces. E.g. streptococcus streptococcaceae has three different leafs of the cladogram tree.](../../images/metatranscriptomics/graphlan_general.png)
 
 ---
 
@@ -587,7 +589,7 @@ About the caveat: The theoretical problem is that we quantify species abundance 
 - Tutorial: one timepoint
 - Over multiple timepoints:
 
-![](../../images/metatranscriptomics/genus_abundance.png)
+![stacked bar chart with timepoints along the x axis and genus abundance as a percentage along the y axis. Each of the 7 time samples consists mostly of Coprothermobacter and Clostridium.](../../images/metatranscriptomics/genus_abundance.png)
 
 ---
 
@@ -652,7 +654,7 @@ class: top
 ]
 
 .right-column30[
-.image-60[![](../../images/metatranscriptomics/humann2_tiered1.png)]
+.image-60[![Cartoon of several reads coloured into four groups, Species 1, Species 2, Unclassified, Novel.](../../images/metatranscriptomics/humann2_tiered1.png)]
 ]
 
 --
@@ -668,7 +670,7 @@ class: top
 ]
 
 .right-column30[
-.image-60[![](../../images/metatranscriptomics/humann2_tiered2.png)]
+.image-60[![Four bins labelled 1 (red), 2 (blue), 3, 4 with reads from the top cartoon show piles of 1 an 2 with NO signs over 3 and 4.](../../images/metatranscriptomics/humann2_tiered2.png)]
 ]
 
 --
@@ -681,7 +683,7 @@ class: top
 ]
 
 .right-column30[
-.image-60[![](../../images/metatranscriptomics/humann2_tiered3.png)]
+.image-60[![Regions x 1 y in red and x 2 y in blue are shown, the pangenomes of each of the red and blue species are shown. Reads map to most segments of the pangenome.](../../images/metatranscriptomics/humann2_tiered3.png)]
 ]
 
 --
@@ -693,7 +695,7 @@ class: top
 ]
 
 .right-column30[
-.image-75[![](../../images/metatranscriptomics/humann2_tiered4.png)]
+.image-75[![Reads are shown matching against portions of protein sequences of X, Y, Z](../../images/metatranscriptomics/humann2_tiered4.png)]
 ]
 
 ???
@@ -706,13 +708,13 @@ the protein hits are tehn combined with gene hits and metacyc to give the output
 
 **Result:** Gene family and pathway abundances
 
-.image-40[![](../../images/metatranscriptomics/humann2_tiered5.png)]
+.image-40[![A table with two columns, Feature on left and RPK on right. GeneX has an RPK of 8. GeneX|Species1 has an RPK of 2, species2 and unclassified are listed with an RPK of 3.](../../images/metatranscriptomics/humann2_tiered5.png)]
 
 ---
 
 ## Gene Families Abundances
 
-![](../../images/metatranscriptomics/gene_family_abundance.png)
+![Screenshot of a table in Galaxy with Gene Family on left and humann2 abundance RPKs on right.](../../images/metatranscriptomics/gene_family_abundance.png)
 
 RPK (reads per kilobase) = sum of alignment scores
 
@@ -728,7 +730,7 @@ UNINTEGRATED: no pathway detected.
 
 ## Gene Families to Functional Annotation
 
-![](../../images/metatranscriptomics/results_functional_annotation.png)
+![Humann2 regroup table is the left node in a flow chart with UniRef50. Multiple lines are drawn to an unlabelled right node that lists metacyc, kegg, pfam, EC, GO, informative GO, slim GO.](../../images/metatranscriptomics/results_functional_annotation.png)
 
 ???
 Gene familes are too large depending on the complexity thus to simplify users can regroup gene families using grouping tool, can download mapping files.
@@ -738,7 +740,7 @@ HUMAnN2 regroups Uniref 50/90 values to Go terms to get a broad overview.
 
 ## Group Abundances
 
-![](../../images/metatranscriptomics/results_group_abundances.png)
+![humann2 regroup table, lines from uniref50 to GO. group humann2 to GO slim terms shows a similar graphic, lines from uniref50 to slim GO.](../../images/metatranscriptomics/results_group_abundances.png)
 
 
 ???
@@ -749,11 +751,11 @@ Group abundances converts GO terms to Go slim (subset of GO terms) into Mol func
 ## Gene Families to Functional Annotation
 
 
-![](../../images/metatranscriptomics/results_gene_family.png)
+![Table from Galaxy shown with gene family and RPK](../../images/metatranscriptomics/results_gene_family.png)
 
-![](../../images/metatranscriptomics/results_gene_family_function.png)
+![group Human2 to GO slim terms with lines from uniref50 to slim GO and boxes of Molecular Function, biological process, and cellular component below Slim GO](../../images/metatranscriptomics/results_gene_family_function.png)
 
-![](../../images/metatranscriptomics/results_go.png)
+![Another galaxy table screenshot with GO id, GO name, and abundance.](../../images/metatranscriptomics/results_go.png)
 
 ---
 class: top
@@ -767,12 +769,12 @@ Molecular Function
 ]
 
 .right-column70[
-.image-90[![](../../images/metatranscriptomics/results_molecular_function.png)]
+.image-90[![Table in Galaxy with GO ID, name, abundance.](../../images/metatranscriptomics/results_molecular_function.png)]
 ]
 --
 
 .left-column70[
-.image-90[![](../../images/metatranscriptomics/results_biological_process.png)]
+.image-90[![Basically the same table as above.](../../images/metatranscriptomics/results_biological_process.png)]
 ]
 
 .right-column30[
@@ -786,7 +788,7 @@ Biological Process
 
 
 .right-column70[
-.image-90[![](../../images/metatranscriptomics/results_cellular_component.png)]
+.image-90[![Again the same columns in a table. None of the specific data is legible or important.](../../images/metatranscriptomics/results_cellular_component.png)]
 ]
 
 .left-column30[
@@ -814,7 +816,7 @@ s is species level
 
 - Quantitative analysis of gene family outputs from HUMAnN2 shows upregulation of cellulase
 
-.image-75[![results](../../images/metatranscriptomics/results_cellulose_degradation.png)]
+.image-75[![line chart shown cellulase abundance decreasing from 80 copies per million to 40 as time goes from 13 to 43. Cellulose 1,4 beta cellobiosidase starts at 140 cpm and dps at hour 23 to 120 before increasing to 200 by the end of the graph](../../images/metatranscriptomics/results_cellulose_degradation.png)]
 
 ???
 explain about datasets first
@@ -826,7 +828,7 @@ increase during cellulose degradation.
 
 ## Functions associated with a selected taxon
 
-.image-75[![results](../../images/metatranscriptomics/results_functions_taxon.png)]
+.image-75[![Stacked bar chart with a lot of organisms as left axis (abundance, copies per million) and time on the bottom. It is labelled Coprothermobacter: Functional Pathways](../../images/metatranscriptomics/results_functions_taxon.png)]
 
 ???
 In gene abundance, Coprothermobacter and Clostridium were observed to be the
@@ -838,7 +840,7 @@ Coprothermobacter
 
 ## Taxa associated with a selected function
 
-.image-75[![results](../../images/metatranscriptomics/results_taxa_function.png)]
+.image-75[![Bar chart titled Adenosine ribonucleotides de novo biosynthesis with time in hours as x axis, and Genus abundance (copies per million). Coprothermobacter and Clostridium decrease from ~2000 combined copies per million to ~800, in approximately equal amounts.](../../images/metatranscriptomics/results_taxa_function.png)]
 
 ???
 This figure shows the contribution of genera to adenosine ribonucleotides denovo biosynthesis across time points.
@@ -873,13 +875,13 @@ it shows during ATP synthesis, we see clostridium and coprothermobacter in abund
 
 ## Thank you!
 
-This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors!
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
 
 
 <div class="contributors-line">
 
 
- <a href="/training-material/hall-of-fame/subinamehta/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/subinamehta" alt="Subina Mehta">Subina Mehta</a> <a href="/training-material/hall-of-fame/pratikdjagtap/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pratikdjagtap" alt="Pratik Jagtap">Pratik Jagtap</a> <a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a>
+ <a href="/training-material/hall-of-fame/subinamehta/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/subinamehta" alt="Avatar">Subina Mehta</a> <a href="/training-material/hall-of-fame/pratikdjagtap/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pratikdjagtap" alt="Avatar">Pratik Jagtap</a> <a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Avatar">Saskia Hiltemann</a>
 
 
 </div>

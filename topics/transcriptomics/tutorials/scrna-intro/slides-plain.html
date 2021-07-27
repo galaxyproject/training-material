@@ -1,0 +1,2018 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>An introduction to scRNA-seq data analysis</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:title" content="Galaxy Training: An introduction to scRNA-seq data analysis" />
+        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/transcriptomics/faqs/" title="Check our FAQs for the Transcriptomics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/scrna-intro/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/transcriptomics/tutorials/scrna-intro/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/scrna-intro/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/scrna-intro/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/scrna-intro/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/scrna-intro/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/scrna-intro/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Fscrna-intro%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/transcriptomics/tutorials/scrna-intro/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/transcriptomics/tutorials/scrna-intro/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/transcriptomics/tutorials/scrna-intro/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/transcriptomics/tutorials/scrna-intro/slides.html">View markdown source on GitHub</a>
+	<h1>An introduction to scRNA-seq data analysis</h1>
+		<h2>Contributors</h2>
+		Mehmet Tekman
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>How are samples compared?</p>
+</li>
+		
+		<li><p>How are cells captured?</p>
+</li>
+		
+		<li><p>How does bulk RNA-seq differ from scRNA-seq?</p>
+</li>
+		
+		<li><p>Why is clustering important?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>To understand the pitfalls in scRNA-seq sequencing and amplification, and how they are overcome.</p>
+</li>
+		
+		<li><p>Know the types of variation in an analysis and how to control for them.</p>
+</li>
+		
+		<li><p>Grasp what dimension reduction is, and how it might be performed.</p>
+</li>
+		
+		<li><p>Be familiarised with the main types of clustering techniques and when to use them.</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 26, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="single-cell-rna-seq">Single-cell RNA-seq</h1>
+
+<p>An introduction to scRNA-seq data analysis</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Greetings everybody and welcome to the Galaxy single cell RNA-seq analysis workshop.</li>
+  <li>Here we will walk you through some of the basics and concepts when dealing with single cell data.</li>
+</ul>
+
+<hr />
+
+<h2 id="bulk-rna-seq">Bulk RNA-Seq</h2>
+
+<p>.pull-left-large[<img src="../../images/scrna-intro/rna_cells_bulkrez.svg" alt="Two blobs labelled tissue A and tissue B are shown, on the right they are summarised into tables of Gene A, B, and X and their different average expression per tissue." loading="lazy" />]</p>
+
+<p>.pull-right[
+.reduce90[</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">Attribute</th>
+      <th style="text-align: left">Summary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">Resolution</td>
+      <td style="text-align: left">Entire tissues</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">Signal</td>
+      <td style="text-align: left">Average gene expression per tissue</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">Differential Expression</td>
+      <td style="text-align: left">Difference between average gene expression between tissues</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>]
+]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Let’s start with what the differences are between Bulk RNA-seq and single cell RNA seq data.</li>
+  <li>With Bulk RNA-seq we compare two tissues by looking at the average expression of each gene detected across each of the tissues.</li>
+  <li>Due to the number of RNA molecules being considered, the sequencing depth and the strength of the analysis is reasonably high.</li>
+  <li>The differential expression is then measured as the relative expression of a given gene between one tissue and another.</li>
+</ul>
+
+<hr />
+
+<h2 id="single-cell-rna-seq-1">Single Cell RNA-Seq</h2>
+
+<p>.pull-left-large[<img src="../../images/scrna-intro/rna_cells_singlerez.svg" alt="Red and blue clusters of cells are shown resembling the tissue blob from the previous slide. Now the graphs on the right for expression in Genes A, B, X are shown per cell instead of per tissue." loading="lazy" />]</p>
+
+<p>.pull-right[
+.reduce90[</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">Attribute</th>
+      <th style="text-align: left">Summary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">Resolution</td>
+      <td style="text-align: left">Individual cells within tissues</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">Signal</td>
+      <td style="text-align: left">Individual gene expression per cell</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">Differential Expression</td>
+      <td style="text-align: left">Some cells express the same set of genes in the same way; comparing one set of cells against another</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>]
+]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>With single cell RNA-seq analysis, the stage shifts away from measuring the average expression of a tissue.</li>
+  <li>And towards measuring the specific gene expression of individual cells within those tissues.</li>
+  <li>Here we are no longer comparing tissue against tissue, but cell against cell.</li>
+  <li>Each cell is assigned a gene profile which describes the relative abundance of genes detected within it.</li>
+  <li>Many cells share the same gene profile, where a gene profile ideally describes a cell type.</li>
+  <li>Sometimes we need to compare single-cell datasets across tissues, and we see that many cells across tissues share the same cell type.</li>
+  <li>For example, look at the purple and green gene profiles which are shared across both tissues.</li>
+</ul>
+
+<hr />
+
+<h1 id="from-bulk-rna-to-single-cell-rna">From Bulk RNA to Single Cell RNA</h1>
+
+<p>.image-50[<img src="../../images/scrna-intro/rna_cells_bulk2single.svg" alt="Tissue A and B from the first slide are shown as the collections of cells from the second slide." loading="lazy" />]</p>
+
+<p>.reduce90[</p>
+<ul>
+  <li>In order to quantify RNA at the level of individual cells:
+    <ul>
+      <li>New methods of library preparation</li>
+      <li>New methods of sequencing</li>
+      <li>New methods of quality control</li>
+      <li>New methods of analysis
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>New technologies means new methods and techniques to harness the new features that come with them.</li>
+  <li>Single-cell RNA-seq data requires different means of library preparation, sequencing, quality control and analysis.</li>
+</ul>
+
+<hr />
+
+<h1 id="cell-capture-and-replicates">Cell Capture and Replicates</h1>
+
+<p>.center[<em>How do we prepare samples for sequencing?</em>]</p>
+
+<p><span>Speaker Notes</span>
+For example, how are cells captured and sequenced?</p>
+
+<p>–</p>
+
+<p>.pull-left[
+.reduce90[</p>
+
+<p><strong>Bulk RNA-seq</strong></p>
+
+<ol>
+  <li>Cut a thin slice of a tissue</li>
+  <li>Add enzyme to break down cell walls</li>
+  <li>Rinse out the unwanted DNA / RNA material</li>
+  <li>Perform sequencing on leftover goop</li>
+</ol>
+
+<p>]
+]</p>
+
+<p><span>Speaker Notes</span>
+In bulk RNA-seq analysis, the process involves taking a sample, removing unwanted molecules and sequencing everything else.</p>
+
+<p>–</p>
+
+<p>.pull-left[
+.reduce90[</p>
+
+<p><strong>Single-cell RNA-seq</strong></p>
+
+<ol>
+  <li>Cut a thin slice of a tissue</li>
+  <li>Breakdown a tissue into cells</li>
+  <li>Isolate each cell
+    <ul>
+      <li>Add enzyme to break down cell walls</li>
+      <li>Perform barcoding</li>
+    </ul>
+  </li>
+  <li>Perform sequencing in a common pool</li>
+</ol>
+
+<p>]
+]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>For single cell analysis, the process is much the same, except that each sample is a cell.</li>
+  <li>And must therefore be sequenced separately from other cells.</li>
+  <li>Once isolated, unique barcodes are added to each cell, and then sequenced.</li>
+</ul>
+
+<p>–</p>
+
+<p><strong>Biological Replicates</strong></p>
+
+<p>.center[
+.reduce90[</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">Type</th>
+      <th style="text-align: left">Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right"><strong>Bulk RNA-seq</strong></td>
+      <td style="text-align: left">Each tissue slice is a sample, can take another slice</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>Single-cell RNA-seq</strong></td>
+      <td style="text-align: left">Each cell is sample, cannot directly replicate because unique</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>]
+]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>The level of resolution in single-cell is at the cell level, and each cell is unique.</li>
+  <li>Therefore, the concept biological replicates is not quite the same as that in bulk RNA-seq.</li>
+</ul>
+
+<hr />
+
+<h1 id="capture--sorting">Capture / Sorting:</h1>
+
+<p><em>How are cells isolated?</em></p>
+
+<p><span>Speaker Notes</span>
+Cell isolation can be performed in different ways.</p>
+
+<p>–</p>
+
+<p>.pull-right[.image-90[<img src="../../images/scrna-intro/mouthpipette.jpg" alt="A black and white image of a woman in the lab using her mouth to pipette cells from one test tube to another." loading="lazy" />]]</p>
+
+<p>.pull-left[
+.reduce90[</p>
+<ul>
+  <li>Manual pipette:
+    <ul>
+      <li>Use a thin glass tube to suction up a cell</li>
+      <li>Maintain pressure in tube</li>
+      <li>Transport to new environment</li>
+      <li>Release pressure in tube
+]
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span>
+One method is manual pipetting, where wet lab scientists suction up individual cells using a long thin tube.</p>
+
+<p>–</p>
+
+<p>.pull-left[
+.reduce90[</p>
+<ul>
+  <li>Repeat 1000 times to isolate 1000 cells
+    <ul>
+      <li>Error-prone
+]
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span>
+They can do this hundreds of times to isolate hundreds of cells, but it is error-prone, and often multiple cells are isolated together.</p>
+
+<p>–</p>
+
+<p>.pull-left[
+.reduce90[</p>
+<ul>
+  <li>Automatic pipette:
+    <ul>
+      <li>Flow cytometry
+]
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span>
+Another method is flow cytometry, which reduces the human-error component of this stage.</p>
+
+<hr />
+
+<h1 id="capture--sorting-flow-cytometry">Capture / Sorting: Flow Cytometry</h1>
+
+<p>.pull-right[<img src="../../images/scrna-intro/opticssystem.png" alt="Cartoon of a fluidics system with two lasers pointing through the fluidics system and filters and detectors detecting the amount of light reflected out of the system with an optics system. This goes through a detector to an electronics system." loading="lazy" />]</p>
+
+<p>.pull-left[
+.reduce90[</p>
+<ul>
+  <li>Stream cells along a liquid through a narrow tube
+    <ul>
+      <li>Narrow to permit one cell at a time</li>
+      <li>Fluid enough to allow high-throughput.
+]
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p>.pull-left[
+.reduce90[</p>
+<ul>
+  <li>Screen each cell with a laser to probe properties:
+    <ul>
+      <li>Cell Size and Type
+        <ul>
+          <li>Front scatter vs Side scatter</li>
+        </ul>
+      </li>
+      <li>Cell Type by Fluorescent Labelling
+        <ul>
+          <li>Cell Surface Markers (CDs)</li>
+          <li>Fluorescent Labelling
+]
+]</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>.pull-left[
+.reduce90[</p>
+<ul>
+  <li>Isolate a cell into its own sequencing environment
+]
+]</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Flow cytometry floats cells in a shallow liquid bath and streams them along a narrow channel, just narrow for one cell to pass through.</li>
+  <li>Cells can be screened by a variety of properties this way, such as by their light scatter properties, and from fluorescent cell labelling.</li>
+  <li>Cells can be tagged and isolated in this manner.</li>
+</ul>
+
+<hr />
+
+<h1 id="capture--sorting-size-and-type">Capture / Sorting: Size and Type</h1>
+
+<p>.pull-right[
+  <img src="../../images/scrna-intro/opticssystem.png" alt="The same cartoon as previously" loading="lazy" />
+]</p>
+
+<p>.pull-left[
+<em>Optical Scatter</em></p>
+<ul>
+  <li>Ratio of Cell Size:Wavelength</li>
+  <li>If Cell Size &lt; Laser Wavelength (~400nm)
+    <ul>
+      <li>Low intensity and high inconsistency scatter</li>
+    </ul>
+  </li>
+  <li>Measured in terms of:
+    <ul>
+      <li>Forward Scatter (FSC)</li>
+      <li>Side Scatter (SSC)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Optical scatter properties can be used to probe size and consistency of the cell, where cells with a smaller size than the laser wavelength yield lower intensities and more inconsistent scatter patterns.</li>
+  <li>There are two main types of optical scatter: Forward scatter, and Side scatter.</li>
+</ul>
+
+<hr />
+
+<h1 id="capture--sorting-size-and-type-1">Capture / Sorting: Size and Type</h1>
+
+<p>.pull-left[
+.reduce90[
+<em>Forward Scatter (FSC)</em></p>
+<ul>
+  <li>Measures along the path of the laser</li>
+  <li>FSC intensity proportional to diameter of cell</li>
+  <li>Good for distinguishing between immune cells
+]
+]</li>
+</ul>
+
+<p>.image-75[.pull-right[<img src="../../images/scrna-intro/FlowJo_Layouts__01-Mar-2017.jpg" alt="A coloured scatter plot showing two clumps of points labelled monocytes and lymphocytes." loading="lazy" />]]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Forward scatter is aligned with the main laser and measures the diameter of cell, which is ideal for distinguishing different cells by their size profiles.</li>
+  <li>For example monocytes, which are typically larger than lymphocytes, as seen on the X-axis of the example image.</li>
+</ul>
+
+<p>–</p>
+
+<p>.pull-left[
+.reduce90[
+<br /></p>
+
+<p><em>Side Scatter (SSC)</em></p>
+<ul>
+  <li>Measures 90° to laser, along path of cells</li>
+  <li>Much weaker intensities than FSC</li>
+  <li>Refraction/reflection proportional to granularity of cell
+]
+]</li>
+</ul>
+
+<p>.image-75[.pull-right[<img src="../../images/scrna-intro/Granulocytes_vs_Monocytes_scatter.jpg" alt="The same scatter plot but now monocytes and graunlocytes are shown as blobs." loading="lazy" />]]</p>
+
+<p><span>Speaker Notes</span>
+Side scatter is perpendicular to the main laser, and measures the granularity of the cell, ideal for distinguishing cells with less defined internal structures, such as the granulocytes on the Y-axis of the example image.</p>
+
+<hr />
+
+<h1 id="capture--sorting-facs">Capture / Sorting: FACS</h1>
+
+<p>.pull-left[
+<img src="../../images/scrna-intro/CD8vsCD3.png" alt="A scatter plot cut into four regions of CD4+/- and CD8+/-" loading="lazy" />
+.footnote[.reduce70[Image from BD Biosciences]]
+]</p>
+
+<p>.pull-right[
+.reduce90[
+<em>Fluorescence-Activated Cell Sorting (FACS)</em></p>
+<ul>
+  <li>Cell surface markers
+    <ul>
+      <li>Fluorescent Markers for each cell</li>
+    </ul>
+  </li>
+  <li>Positive and Negative
+    <ul>
+      <li>Whether cell activated for that CD or not.</li>
+    </ul>
+  </li>
+  <li>Plot different CD markers against each other
+    <ul>
+      <li>Isolate cell populations</li>
+    </ul>
+  </li>
+  <li>Can set gating thresholds to isolate analysis to enriched subset of cells</li>
+</ul>
+
+<p>]
+]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Cells can also be gated and characterised by their cell surface markers via FACS.</li>
+  <li>By plotting different surface marker intensities against one another, cells can be separated, gated, and labelled based on these fluorescent properties.</li>
+</ul>
+
+<hr />
+
+<h1 id="barcoding-cells">Barcoding Cells</h1>
+
+<p>.center[<img src="../../images/scrna-intro/scrna_pbb_barcodes_add.svg" alt="Groups of GGG and TCT are added to two different cells to label them." loading="lazy" />]</p>
+
+<p>.footnote[Add unique barcodes to every transcript in a cell]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Once isolated, cells can be barcoded.</li>
+  <li>Barcodes are unique sequences that are added to each RNA molecule.</li>
+  <li>They are not unique to the molecule, but unique to the cell such that any two RNA molecules will be tagged by the same cell barcode, should they exist in the same cell.</li>
+  <li>RNA molecules from different cells will have different cell barcodes.</li>
+</ul>
+
+<hr />
+
+<h1 id="barcoding-cells-1">Barcoding Cells</h1>
+
+<p>.footnote[Place cells into sequencing plate]</p>
+
+<p>.pull-left-large[<img src="../../images/scrna-intro/scrna_pbb_barcodes_overview.svg" alt="Cells with barcodes are plated into individual wells based on their barcode." loading="lazy" />]</p>
+
+<p>.pull-right[
+.reduce90[</p>
+<ul>
+  <li>
+    <p>From a pool of many <em>many</em> different tissue samples / cells:</p>
+
+    <ul>
+      <li>Cell Barcodes tell us which cell the transcript from</li>
+      <li>UMIs can tell us how much the transcript was amplified, by comparing it with other transcripts from the same gene with the same UMI tag.
+]
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span>
+Once the RNA molecules have been tagged by cell barcodes, they can be amplified, either separately or pooled together, where the amplified products share the same cell barcodes as their original counterparts.</p>
+
+<hr />
+
+<h3 id="sequencing-issues-amplification">Sequencing Issues: Amplification</h3>
+
+<p>.center[.image-75[<img src="../../images/scrna-intro/amplification_errors.svg" alt="A cartoon of a cell with a red and blue strand. The red strand amplifies well, the blue does not." loading="lazy" />]]</p>
+
+<p>.reduce90[</p>
+<ul>
+  <li>Polymerase Chain Reaction (PCR)
+    <ul>
+      <li>Takes a single-stranded read and duplicates it</li>
+      <li>Works well when enough reads are present in pool</li>
+    </ul>
+  </li>
+  <li>Low coverage
+    <ul>
+      <li>When reads in sequencing pool are low, many will be missed</li>
+      <li>Can lead to one-sided amplification
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>PCR amplifies the gene products to make them more easily detectable during sequencing.</li>
+  <li>When there is a lot of gene product to amplify, as is the case for bulk RNA-seq, PCR works quite well in amplifying all products in a reasonably well-represented manner.</li>
+  <li>However, in the case of single-cell products, the amount to amplify is very small, and many unique reads might be missed during this phase whereas others may be over amplified, as shown in the blue and red transcripts in the example.</li>
+</ul>
+
+<hr />
+
+<h3 id="sequencing-issues-amp--umis">Sequencing Issues: Amp. + UMIs</h3>
+
+<p>.pull-left-large[<img src="../../images/scrna-intro/scrna_amplif_errors_umis.svg" alt="The same cartoon but now red and blue strands are labelled with pink and grey adapters. The red and blue both amplify but at different rates." loading="lazy" />]</p>
+
+<p>.pull-right[
+.reduce90[</p>
+<ul>
+  <li>
+    <p>How many red transcripts in the cell?</p>
+  </li>
+  <li>
+    <p>After PCR amplification?</p>
+  </li>
+  <li>
+    <p>What do the little coloured tags at the start of each transcript do?</p>
+  </li>
+  <li>
+    <p>Unique Molecular Identifiers (UMIs)</p>
+  </li>
+  <li>
+    <p>Added to help mitigate bias from amplification.
+]
+]</p>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>To guard against this type of amplification bias, we can add a random element to the barcoding.</li>
+  <li>These random barcodes known as UMIs, uniquely tag transcripts such that any two transcripts of the same gene are likely to have different random barcodes.</li>
+</ul>
+
+<hr />
+
+<h3 id="sequencing-issues-amp--umis-1">Sequencing Issues: Amp. + UMIs</h3>
+
+<p>.pull-left-large[<img src="../../images/scrna-intro/scrna_amplif_errors_umis.svg" alt="The same cartoon, red and blue amplify at different rates." loading="lazy" />]</p>
+
+<p>.pull-right[</p>
+
+<p>.center[Counting Reads</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: center">Reads</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right"><strong>Red</strong></td>
+      <td style="text-align: center">6</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>Blue</strong></td>
+      <td style="text-align: center">3</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>]
+]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Let us consider the example to the left: we have 2 red transcripts and 2 blue transcripts inside the cell, which after amplification equate to 6 red transcripts and 3 blue transcripts.</li>
+  <li>If we were to compare the differential gene expression between the red and blue transcripts, just by looking at the amplified reads, we would come to the false conclusion that the red transcripts are expressed twice more than the blue.</li>
+</ul>
+
+<p>–</p>
+
+<p>.pull-left-large[</p>
+
+<p>.center[Grouping Reads by Gene and UMI</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: center"><strong>UMIs</strong></th>
+      <th style="text-align: center"><strong>Reads</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right"><strong>Red</strong></td>
+      <td style="text-align: center">Pink</td>
+      <td style="text-align: center">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"> </td>
+      <td style="text-align: center">Cyan</td>
+      <td style="text-align: center">4</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>Blue</strong></td>
+      <td style="text-align: center">Pink</td>
+      <td style="text-align: center">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"> </td>
+      <td style="text-align: center">Green</td>
+      <td style="text-align: center">2</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>]
+]</p>
+
+<p>.pull-right[</p>
+
+<p>.center[Counting de-duplicated Reads</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: center"><strong>UMIs (Grouped)</strong></th>
+      <th style="text-align: center"><strong># UMIs</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right"><strong>Red</strong></td>
+      <td style="text-align: center">{Pink, Cyan}</td>
+      <td style="text-align: center">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>Blue</strong></td>
+      <td style="text-align: center">{Pink, Green}</td>
+      <td style="text-align: center">2</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>]
+]</p>
+
+<p><span>Speaker Notes</span>
+However if we group the reads by their UMIs, and then count only the number of unique UMIs per transcript, de-duplicating the reads which share the same transcript and UMI, we arrive at 2 red reads and 2 blue reads which better represents the true number of transcripts.</p>
+
+<hr />
+
+<h3 id="sequencing-issues-unique-umis">Sequencing Issues: Unique UMIs?</h3>
+
+<p>.pull-left-large[<img src="../../images/scrna-intro/scrna_amplif_errors_umis.svg" alt="The same cartoon, red and blue amplify at different rates." loading="lazy" />]
+.pull-right[</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: center"><strong>UMIs</strong></th>
+      <th style="text-align: center"><strong>#Reads</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right"><strong>Red</strong></td>
+      <td style="text-align: center">{Pink, Cyan}</td>
+      <td style="text-align: center">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>Blue</strong></td>
+      <td style="text-align: center">{Pink, Green}</td>
+      <td style="text-align: center">2</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>.reduce90[</p>
+<ul>
+  <li>Pink appears twice in different genes.</li>
+  <li>In what context are UMIs unique?
+]</li>
+</ul>
+
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>UMIs are relatively random, but not truly random.</li>
+  <li>Notice that the pink UMI appears twice: once in the blue transcript and once in the pink transcript.</li>
+</ul>
+
+<p>–</p>
+
+<p><br /></p>
+
+<p>.reduce90[</p>
+<ul>
+  <li>
+    <p>Can every transcript in a cell have its own UMI?</p>
+  </li>
+  <li>Number of mRNA transcripts in a cell?
+    <ul>
+      <li>~ 10⁵ to 10⁶ in a mammalian cell.</li>
+    </ul>
+  </li>
+  <li>Require at minimum barcodes of length <em>N</em>, where 4ᴺ = 10⁵
+]</li>
+</ul>
+
+<p><span>Speaker Notes</span>
+This is due to there being often more transcripts than available UMIs, both which are dependent on the number of transcripts in a cell, and the length of the barcode.</p>
+
+<hr />
+
+<h1 id="sequencing-issues-unique-umis-1">Sequencing Issues: Unique UMIs?</h1>
+
+<p>.center[Barcodes of length <em>N</em> with Edit Distance of <em>B</em>:]</p>
+
+<p>.pull-left[</p>
+
+<p>.center[<em>N = 5</em> and <em>B = 1</em>]</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AAAAA AAAAC AAAAG AAAAT AAACA ····
+CCCCC CCCCA CCCCG CCCCT CCCAC ····
+              ·
+              ·
+              ·
+</code></pre></div></div>
+
+<p>.center[<em>4⁵ = 1024</em> barcodes]</p>
+
+<p>]</p>
+
+<p>.pull-right[</p>
+
+<p>.center[<em>N = 5</em> and <em>B = 2</em>]</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AAAAA AAACC AAAGG AAATT AACCA ····
+CCCCC CCCAA CCCGG CCCTT CCCAA ····
+              ·
+              ·
+              ·
+</code></pre></div></div>
+
+<p>.center[<em>4⁵⁻¹ = 512</em> barcodes]</p>
+
+<p>]</p>
+
+<p>.footnote[</p>
+
+<p>Edit distances guard against <strong>sequencing errors.</strong></p>
+
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Consider a set of barcodes of length 5 with an edit distance of 1 between adjacent barcodes, and another set with an edit distance of 2.</li>
+  <li>The former is not robust against common sequencing errors of 1 base pair, but the latter only allows for half the number of barcodes.</li>
+  <li>This trade-off between the number of available barcodes and guarding against sequencing errors is instrumental in the design of cell barcodes and UMIs.</li>
+</ul>
+
+<hr />
+
+<h1 id="sequencing-issues-unique-umis-2">Sequencing Issues: Unique UMIs?</h1>
+
+<p>.pull-left-large[<img src="../../images/scrna-intro/scrna_amplif_errors_umis.svg" alt="The same cartoon, red and blue amplify at different rates." loading="lazy" />]
+.pull-right[</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: center"><strong>UMIs</strong></th>
+      <th style="text-align: center"><strong># Reads</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right"><strong>Red</strong></td>
+      <td style="text-align: center">{Pink, Cyan}</td>
+      <td style="text-align: center">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><strong>Blue</strong></td>
+      <td style="text-align: center">{Pink, Green}</td>
+      <td style="text-align: center">2</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>.reduce90[</p>
+<ul>
+  <li>Pink appears twice in different genes.</li>
+  <li>In what context are UMIs unique?</li>
+</ul>
+
+<p><br />
+<br /></p>
+
+<p>]</p>
+
+<p>]</p>
+
+<p>.reduce90[
+<em>In what context are UMIs unique?</em></p>
+<ul>
+  <li>UMIs are “random salt”
+    <ul>
+      <li>‘Unique enough’ at the transcript level</li>
+    </ul>
+  </li>
+  <li>We wish to count transcripts only
+    <ul>
+      <li>De-duplication of UMIs at transcript level</li>
+      <li>Good estimation of true transcript abundance
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span>
+In the context of amplification, UMIs do not need to be unique, they just need to be random enough to deduplicate transcripts in order to give a more accurate estimate of the number of transcripts within a cell.</p>
+
+<hr />
+
+<h1 id="cell-barcodes-and-umis-recap">Cell Barcodes and UMIs (Recap)</h1>
+
+<p>For Each Cell:</p>
+
+<ol>
+  <li>Add Cell Barcodes to Cells
+<img src="../../images/scrna-intro/scrna_pbb_barcodes_add.svg" alt="Groups of GGG and TCT are added to two different cells to label them." loading="lazy" /></li>
+</ol>
+
+<p><span>Speaker Notes</span>
+So let’s just recap what we’ve learned: First each cell has cell barcodes added to each RNA molecule in each cell.</p>
+
+<hr />
+
+<h1 id="cell-barcodes-and-umis-recap-1">Cell Barcodes and UMIs (Recap)</h1>
+
+<p>For Each Cell:</p>
+
+<ol>
+  <li>Add Cell Barcodes to Cells</li>
+  <li>Add UMIs to Cell Barcoded Cells
+<img src="../../images/scrna-intro/scrna_umi_add.svg" alt="Random mixtures of three letter barcodes are shown, in addition to the two cells from the last cartoon which had GGG in one and TCT labelled reads in the other cell. Now they all have random prefixes before the GGG in one cell and TCT in the other." loading="lazy" /></li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Then we add random UMIs to all transcripts, which further tag the molecules.</li>
+  <li>These can then be used deduplicate the transcripts after amplification.</li>
+  <li>After amplification we need to perform some quality control.</li>
+</ul>
+
+<hr />
+
+<h1 id="qc-overcoming-background-noise">QC: Overcoming Background Noise</h1>
+
+<p>.center[<img src="../../images/scrna-intro/raceid_libsize.svg" alt="A matrix of Genes 1, 2, 3 and cells per column is changed into two matrices, one with counts of genes detected per cell, and counts of cells detected per gene" loading="lazy" />]</p>
+
+<ul>
+  <li>Num. features per cell, and library size should follow a normal curve.</li>
+  <li>Min-Max filtering helps clip off the fat-tails of a distribution.</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>One way to do this is to set thresholds on the limits of detectability for genes and for cells.</li>
+  <li>Consider an analysis governed only by 3 genes (G1, G2 and G3), and 5 cells (A, B, C, D and E).</li>
+  <li>The first row of the top table defines the library size, which is total number of messenger RNAs across all genes in each cell.</li>
+  <li>The subsequent rows are the thresholds of gene detectability, displaying how many genes are detected in each cell for genes greater than the threshold amounts of 0 to 4.</li>
+  <li>We see that even a threshold of greater than 3 transcripts detected in a given cell  still keeps 3 cells in the analysis: B, C, and E. In the lower table, the opposite is represented, with the total number of transcripts across all cells for each gene.</li>
+  <li>By setting thresholds of detectability, we can see how many cells are described by the gene for that threshold.</li>
+  <li>In both cases, we can see that if we set the thresholds too low, then we risk keeping low quality genes or cells, but if we set the thresholds of detectability too high, then we risk losing too many.</li>
+</ul>
+
+<hr />
+
+<h1 id="normalisation-bulk-vs-single-cell">Normalisation: Bulk vs Single-Cell</h1>
+
+<p>.pull-left-large[</p>
+
+<p><em>Bulk RNA-seq</em>: High Coverage</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"> </th>
+      <th style="text-align: right">T1</th>
+      <th style="text-align: right">T2</th>
+      <th>T3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>GeneA</strong></td>
+      <td style="text-align: right">100</td>
+      <td style="text-align: right">80</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>GeneB</strong></td>
+      <td style="text-align: right">45</td>
+      <td style="text-align: right">30</td>
+      <td>40</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>.reduce70[* Median Gene Expression is high]</p>
+
+<p><br /></p>
+
+<p><em>scRNA-seq</em>: Very Low Sequencing Depth</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"> </th>
+      <th style="text-align: right">C1</th>
+      <th style="text-align: right">C2</th>
+      <th style="text-align: right">C3</th>
+      <th style="text-align: right">C4</th>
+      <th style="text-align: right">C5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>GeneA</strong></td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">2</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>GeneB</strong></td>
+      <td style="text-align: right">2</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">15</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: right">0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>.reduce70[* Median Gene Expression is zero]</p>
+
+<p>]</p>
+
+<p>.pull-right[</p>
+
+<p><strong>Why is this a problem?</strong></p>
+
+<p>.center[
+\(R(s,g) = \frac{X\_{sg}}{(\prod\_{s} X\_{s})^{\frac{1}{n}}}\)</p>
+
+\[DESeq(s,g) = \frac{X\_{sg}}{Med(R\_{s})}\]
+
+<p>]
+]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Filtering can be a luxury however, as many single-cell RNA-seq datasets have typically low sequencing depth compared to bulk RNA-seq.</li>
+  <li>During the process of normalisation, samples are scaled against one another to make them more comparable.</li>
+  <li>This is normally performed by using median values. For example, for DE-Seq normalisation, the geometric mean count for a cell is taken, and each gene value in that cell is divided by it and by the median value of all geometric means of all cells.</li>
+  <li>If median gene expression is high, then this normalisation method works quite well.</li>
+</ul>
+
+<p>–</p>
+
+<p>.pull-right[
+Can’t divide by zero!
+]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>But if the median gene expression is zero, as is often the case with single-cell data, then we have the problem of dividing by zero.</li>
+  <li>There are methods to get around these zero counts.</li>
+</ul>
+
+<hr />
+
+<h1 id="normalisation-scran-method">Normalisation: SCRAN method</h1>
+
+<p>.footnote[.small[<a href="https://doi.org/10.1186/s13059-016-0947-7"><em>Pooling across cells to normalize single-cell RNA sequencing data with many zero counts</em>, Lun et al., 2016</a>]]</p>
+
+<p>.pull-left[<img src="../../images/scrna-intro/scran_pooling_left.svg" alt="Blue and red bubbles are mixed, then separated into two groups, and then arranged around a circle, red going from small to large around the right half, blue from small to large around the left. The bottom of the circle is labelled 6, the top is labelled 12." loading="lazy" />]</p>
+
+<p>.pull-right[
+.reduce90[</p>
+<ol>
+  <li>
+    <p>Calculate the library sizes of all cells</p>
+  </li>
+  <li>
+    <p>Calculate the library size of a pseudo reference cell (average)</p>
+  </li>
+  <li>
+    <p>Separate odd sizes (red) and even sizes (blue) into two groups</p>
+  </li>
+  <li>
+    <p>Sort each group by library size and place on opposite sides of a “ring”
+]
+]</p>
+  </li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>One such method is the SCRAN method which works by creating overlapping pools of cells such that any individual cell is characterized by cells of similar library sizes.</li>
+  <li>The method involves splitting all cells into an odd and even group by their library size, and arranging them onto a ring structure where neighbouring cells on the ring have similar sizes.</li>
+</ul>
+
+<hr />
+
+<h1 id="normalisation-scran-method-1">Normalisation: SCRAN method</h1>
+
+<p>.footnote[.small[<a href="https://doi.org/10.1186/s13059-016-0947-7"><em>Pooling across cells to normalize single-cell RNA sequencing data with many zero counts</em>, Lun et al., 2016</a>]]</p>
+
+<p>.pull-right[<img src="../../images/scrna-intro/scran_pooling_right.svg" alt="The same final graph with blue and red circles of increasing size with an arrow pointing to a large number of formulas that overlap." loading="lazy" />]</p>
+
+<p>.pull-left[
+.reduce90[</p>
+<ol>
+  <li>
+    <p>Define overlapping pools of adjacent cells of size <em>k</em></p>
+  </li>
+  <li>For each pool
+    <ol>
+      <li>Sum the library sizes of all cells within</li>
+      <li>Derive a size factor by dividing by the reference cell</li>
+    </ol>
+  </li>
+  <li>For each cell
+    <ol>
+      <li>Find which pools it belongs to</li>
+      <li>Build a linear model using these size factors</li>
+      <li>Estimate the size factor of the cell on this linear model
+]
+]</li>
+    </ol>
+  </li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Overlapping pools of fixed sizes are defined, resulting in each cell being defined by multiple pools.</li>
+  <li>A linear model for that cell can then be built by the pools it occurs within, and normalisation factors for all cells can be determined this way.</li>
+</ul>
+
+<hr />
+
+<h1 id="normalisation-scran-method-2">Normalisation: SCRAN method</h1>
+
+<p>.footnote[.small[<a href="https://doi.org/10.1186/s13059-016-0947-7"><em>Pooling across cells to normalize single-cell RNA sequencing data with many zero counts</em>, Lun et al., 2016</a>]]</p>
+
+<p>.center[<img src="../../images/scrna-intro/scran_pooling.svg" alt="The two previous graphs now in one graph." loading="lazy" />]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>By this method, the issue of low sequence coverage is worked around by turning cells with low library sizes into useful components of a size factor that can be applied to similar cells.</li>
+  <li>Such novel normalization methods were commonplace a few years ago, but as sequencing technologies have improved, the issue of many zero counts in a matrix becomes less important, and normalisation size factors can be derived using bulk RNA-seq methods once again.</li>
+</ul>
+
+<hr />
+
+<h1 id="wanted-vs-unwanted-variation">Wanted vs Unwanted Variation</h1>
+
+<p>.pull-right[<img src="../../images/scrna-intro/variance.svg" alt="Three overlapping line graphs mapping contributing variance to density. Top N genes is shown increasing in density as contributing variance increases, which genes per cell, transcripts, and batch source decrease." loading="lazy" />]</p>
+
+<p>.pull-left[
+.reduce90[
+<em>Wanted Variation</em></p>
+<ul>
+  <li>Expression from the top most differentially expressed genes</li>
+</ul>
+
+<p><em>Unwanted Variation</em></p>
+<ul>
+  <li>“Confounders”</li>
+  <li>Technical Variation
+    <ul>
+      <li>Batch source</li>
+      <li>Library Size</li>
+    </ul>
+  </li>
+  <li>Biological Variation
+    <ul>
+      <li>Intrinsic cell noise
+]
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Other factors that we need to take into account during a single cell RNA analysis are the unwanted factors that can confound the analysis.</li>
+  <li>Ideally we wish to see the gene profiles that separate different types of cells are driven by biological variance.</li>
+  <li>There is however confounding variation from both technical and biological sources that are not useful to the analysis but do contribute to the variance.</li>
+</ul>
+
+<hr />
+
+<h1 id="confounding-variation-biological">Confounding Variation: Biological</h1>
+
+<p>.center[<img src="../../images/scrna-intro/raceid_cellcycle.svg" alt="A cartoon on the left shows a question mark with arrows to nothing and to transcripts shown. On the right are the cell cycle phases and different amounts of transcripts in each phase." loading="lazy" />]</p>
+
+<p>.pull-left[
+.reduce90[
+.center[<em>Transcription Bursting</em>]</p>
+<ul>
+  <li>Transcription not continuous, occurs in “bursts”</li>
+  <li>Phenomenon hidden in bulk RNA-seq
+]
+]</li>
+</ul>
+
+<p>.pull-right[
+.reduce90[
+.center[<em>Cell Cycle</em>]</p>
+<ul>
+  <li>Cells of the same type have twice the amount of mRNA at M-phase than G1-phase
+]
+]</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Confounding biological variance appears in two forms: Transcriptional bursting, and Cell cycle variation.</li>
+  <li>Transcriptional bursting is a phenomenon that occurs in cells in which transcription occurs in discrete states of active and inactive, where the interval between these states is hard to model.</li>
+  <li>In bulk RNA-seq, this phenomenon is unnoticeable as the effects are averaged out over many cells. But in single cell, two cells of the same type may exhibit different gene profiles simply because one cell was actively transcribing and the other was not.</li>
+  <li>This is not something we can control for in the analysis, but it is something we should be aware of when understanding why cell clusters can be noisy.</li>
+  <li>Cell cycle variation on the other hand is a much more well understood process, where the amount of RNA in a cell is approximately double that from a cell of the same type due to one being in the early G1 phase and the other being in the M-phase during the cell cycle.</li>
+  <li>There are genes which are known to covary with the cell cycle, and so by regressing the effect of these genes, we can control against the cell cycle.</li>
+</ul>
+
+<hr />
+
+<h1 id="confounding-variation-technical">Confounding Variation: Technical</h1>
+
+<p>.center[<img src="../../images/scrna-intro/raceid_technical_variation.svg" alt="Library size variation points to two cells with red and blue transcripts in identical numbers. However during amplification in one cell it produces results, while in the other blue is dropped." loading="lazy" />]</p>
+
+<p>.pull-left[
+.reduce90[
+<em>Amplification Bias</em></p>
+<ul>
+  <li>Different transcripts are amplified more than others</li>
+  <li>Mitigated via UMIs
+]
+]</li>
+</ul>
+
+<p>.pull-left[
+.reduce90[
+<em>Dropout Events</em></p>
+<ul>
+  <li>Some genes are falsely not detected in cells</li>
+  <li>Mitigated via better capture methods and normalisation
+]
+]</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Confounding technical variance appears in a three forms: Amplification bias, Dropout events, and Library size variation.</li>
+  <li>Amplification bias can be mitigated by UMIs as demonstrated before.</li>
+  <li>Dropout events give rise to the prevalent zeroes in the count matrices, and their effect can be reduced by using clever normalisation techniques such as the pooling method shown previously, as well as by using better sequencing methods.</li>
+</ul>
+
+<hr />
+
+<h1 id="confounding-variation-technical-1">Confounding Variation: Technical</h1>
+
+<p>.center[<img src="../../images/scrna-intro/raceid_technical_variation.svg" alt="Library size variation points to two cells with red and blue transcripts in identical numbers. However during amplification in one cell it produces results, while in the other blue is dropped." loading="lazy" />]</p>
+
+<p><em>Library Size Variation</em></p>
+<ul>
+  <li>Cells have different transcription rates and capture rates</li>
+  <li>Mitigated via normalisation</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Library size variation arises for a variety of different reasons, but is the main source of variation within an analysis.</li>
+  <li>Like bulk RNA-seq, this is reduced with good normalisation methods.</li>
+</ul>
+
+<hr />
+
+<h1 id="relationships-between-cells">Relationships Between Cells</h1>
+
+<p>Consider:</p>
+<ul>
+  <li>1,000s of Cells</li>
+  <li>10,000s of Genes</li>
+  <li>10k dimensional dataset, with 1k observations</li>
+</ul>
+
+<p>Aim:</p>
+<ul>
+  <li>Find groupings of Cells in a subset of these Genes</li>
+</ul>
+
+<p>Note:</p>
+<ul>
+  <li>Some cells can have very similar expression in one gene, and very far different expression in all others.</li>
+  <li>How to represent this?</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Once we have removed unwanted confounders from the analysis we have the issue of quantifying the relationships between cells.</li>
+  <li>From a data analysis standpoint, we treat each cell as an observation, and each gene as a variable.</li>
+  <li>For large genomes this means extremely high dimensional datasets. Cells exist as points in this extremely sparsely populated high dimensional space, making it difficult to see the natural groupings.</li>
+  <li>The high dimensional space can be reduced a lot by simply filtering out genes that do not appear to be differentially expressed across all cells.</li>
+  <li>To find the relationships between these cells however, we need to define the distances between cells.</li>
+</ul>
+
+<hr />
+
+<h1 id="distance-matrix">Distance Matrix</h1>
+
+<p><img src="../../images/scrna-intro/raceid_distance.svg" alt="A count matrix of genes vs cells is plotted in N-dimensional space with each gene representing the different axes. A distance formula for 3 dimensions is shown, and then a final table is shown from the count matrix with the distances between each of the cells. based on their genes." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>A distance matrix does just this, defining the distance between any two cells by a single score.</li>
+  <li>Here we use the Euclidean distance on a 3 dimensional dataset of 3 genes (G1, G2 and G3), and 3 cells (R, P and V).</li>
+  <li>The distance between any two cells can be calculated as the sum of squares of the difference in gene values.</li>
+  <li>Note how the distance matrix is symmetrical along the diagonal, confirming that for example the distance from cells R to V is the distance from V to R as expected.</li>
+</ul>
+
+<hr />
+
+<h1 id="relatedness-of-cells-knn">Relatedness of Cells: KNN</h1>
+
+<p><img src="../../images/scrna-intro/scrna_knn.svg" alt="A plot of cells across three genes is shown with the label high dimensional dataset of cells. This produces a distance matrix (symmetric), and then via KNN with k=2, a non-symmetric matrix. This is then plotted again in the gene-dimensional space to show connections between cells." loading="lazy" /></p>
+
+<ul>
+  <li>Perform <em>K-nearest neighbours</em> to connect edges to cell vertices.</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Once a distance matrix is generated, we can perform K-nearest neighbours upon the distance matrix where directed edges are generated between cells.</li>
+  <li>For each row of the distance matrix, K of the cells with the smallest distance values are selected representing the nearest neighbour that current row’s cell has to the selected column cells.</li>
+  <li>If the edges are mutually shared between neighbouring cells, then this is called a shared nearest neighbour approach.</li>
+</ul>
+
+<hr />
+
+<h1 id="dimensional-reduction">Dimensional Reduction</h1>
+
+<p><img src="../../images/scrna-intro/raceid_dimred.svg" alt="Matrix of genes vs cells is plotted in gene-dimensions, and then reduced into 2 dimensions." loading="lazy" /></p>
+
+<p>.pull-left[
+.reduce90[
+<em>Aim:</em></p>
+<ul>
+  <li>Take a high-dimensional dataset and reduce it into a lower dimension that we can understand.
+    <ul>
+      <li>e.g. 10000-D → 2D
+]
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p>.pull-right[
+.reduce90[
+<em>Constraint</em></p>
+<ul>
+  <li>Preserve the high dimensional topology in a low dimensional space.
+    <ul>
+      <li>e.g. if Cell A is far from Cell D yet close to Cell B in 3D, it should replicate those relationships in 2D.
+]
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>We can represent this 3 dimensional space easily as 3 independent axes with points that denote the cells.</li>
+  <li>Extrapolating this relatively low dimensional example set to a real dataset which thousands of dimensions is beyond the scope of human possibility.</li>
+  <li>Dimensional reduction is a type of technique that takes a high dimensional dataset and produces a low dimensional representation, usually 2 dimensional, that tries to preserve the distances between the data points.</li>
+  <li>Here the relative differences between cells is maintained in both the high and low dimensional representations.</li>
+  <li>There are  many different kinds of dimension reduction techniques, each with their own strengths and weaknesses dependent on the type and the dimensionality of the data.</li>
+</ul>
+
+<hr />
+
+<h3 id="clustering">Clustering</h3>
+
+<p>.pull-left-large[.image-100[<img src="../../images/scrna-intro/singlecellplot3.png" alt="A scatter plot with many groups of cells labelled by different colours. The cells are largely clustered well, with few outlying cells." loading="lazy" />]]</p>
+
+<p>.pull-right[
+.reduce90[</p>
+<ol>
+  <li>2D Projection
+    <ul>
+      <li>Each dot is a cell</li>
+      <li>Clustering colours the dots, where different coloured cells belong to different clusters</li>
+      <li>Different clusters represent different cell types
+]
+]</li>
+    </ul>
+  </li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Once the number of variables of the dataset have been sufficiently reduced via filtering and dimensional reduction, clustering can be performed more easily.</li>
+  <li>Here in this 2D projection, each circle is a cell, and the unique colours depict the clusters they have been assigned to.</li>
+  <li>The physical distances between the groups of coloured cells tell us how good the clustering is for this projection.</li>
+</ul>
+
+<hr />
+
+<h3 id="clustering-1">Clustering</h3>
+
+<p>.pull-left-large[.image-100[<img src="../../images/scrna-intro/singlecellplot4.png" alt="Same scatter plot with clustering as before, but now the clusters are labelled things like Neurons, NSC, Glial Prog., Astrocytes, etc." loading="lazy" />]]</p>
+
+<p>.pull-right[
+.reduce90[</p>
+<ol>
+  <li>2D Projection</li>
+  <li>Discrete Cell Types
+    <ul>
+      <li>Each cluster should represent a different type</li>
+      <li>Look for the most DE genes in each cluster</li>
+    </ul>
+    <ul>
+      <li>Find the marker genes → Cell Type
+]
+]</li>
+    </ul>
+  </li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>By inspecting the top differentially expressed genes in each cluster against all other clusters, clues to the type of cell that the cluster describes can be found.</li>
+  <li>Cell types are often characterized by the expression of specific marker genes, and the presence of these genes are strong indicators of type.</li>
+  <li>Marker gene discovery can then be used to annotate the clusters.</li>
+</ul>
+
+<hr />
+
+<h3 id="clustering-2">Clustering</h3>
+
+<p>.pull-left-large[.image-100[<img src="../../images/scrna-intro/singlecellplot6.png" alt="The same labelled graph, but now arrows connect the next nearest groups of cell types." loading="lazy" />]]</p>
+
+<p>.pull-right[
+.reduce90[</p>
+<ol>
+  <li>2D Projection</li>
+  <li>Discrete Cell Types</li>
+  <li>Relationships infer Lineage
+    <ul>
+      <li>Neural Stem Cells differentiate into mature cell types</li>
+      <li>Lineage trees are constructed by taking into account</li>
+    </ul>
+    <ul>
+      <li>Entropy of cluster</li>
+      <li>Proximity of cluster
+]
+]</li>
+    </ul>
+  </li>
+</ol>
+
+<p><span>Speaker Notes</span>
+We can also further derive the relationships between these clusters by computing lineage trees based on the amount of noise in each cluster, with the expectation that stem cells have noisy expression profiles yielding broader clusters, and mature cells have very clear expression profiles yielding tighter clusters.</p>
+
+<hr />
+
+<h2 id="clustering-hard-vs-soft">Clustering: Hard vs Soft</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>.image-100[<img src="../../images/scrna-intro/singlecellplot3.png" alt="Same set of distinct clusters with very clear separation" loading="lazy" />]</td>
+      <td>.image-100[<img src="../../images/scrna-intro/10xdata.png" alt="Clusters now bleed into one another, and the separate is not clear." loading="lazy" />]</td>
+    </tr>
+    <tr>
+      <td>.center[<strong>Hard</strong>]</td>
+      <td>.center[<strong>Soft</strong>]</td>
+    </tr>
+    <tr>
+      <td>Big spaces between clusters</td>
+      <td>Clusters bleed into one another</td>
+    </tr>
+    <tr>
+      <td>Cell types are well defined and the clustering reflects that</td>
+      <td>Cell types seem to intermingle with one another.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>The types of clustering you are likely to encounter in an analysis is dependent on the input datasets, where cells taken from late stage samples are less likely to be bunched together and are more likely to yield large visible gaps known as hard clusters that clearly defined different types.</li>
+  <li>Earlier stage datasets are more likely to yield softer clusters, where neighbouring clusters share soft boundaries as clusters intermingle slightly with one another.</li>
+</ul>
+
+<hr />
+
+<h1 id="continuous-phenotypes">Continuous Phenotypes:</h1>
+
+<p>.center[<img src="../../images/scrna-intro/raceid_contpheno.svg" alt="The graph charts development time of reticulocytes as they pass through an intermediate or rare cell phase, into their final form: red blood cells." loading="lazy" />]
+.reduce90[</p>
+<ul>
+  <li>Cells aren’t discrete, they transition</li>
+  <li>Continuously changing over time from a less mature type to more mature type
+]</li>
+</ul>
+
+<p><span>Speaker Notes</span>
+Soft clustering is to be expected, since although clustering is a statistical method for discretely partitioning data, the underlying cell biology of the data is a continuous process, where cells transition from one well-defined state to another through intermediate stages which are represented in-between two cluster centres.</p>
+
+<hr />
+
+<h2 id="performing-clustering">Performing Clustering</h2>
+
+<p>.pull-left-large[
+<img src="../../images/scrna-intro/raceid_mountains.svg" alt="Discrete expression profiles: Three mountains are shown with clouds, we just see three peaks. Cells in red, green, and blue are shown at the peaks. Continuous expression landscape: the clouds are removed and we see the mountains are actually connected and there are cells in between in various intermediate colours." loading="lazy" />
+]</p>
+
+<p>.pull-right[
+.reduce90[
+<em>Dynamic datasets with continuously dynamic clusters</em></p>
+<ul>
+  <li>single-cell datasets</li>
+  <li>PCA is too discrete in partitioning data</li>
+  <li>Manifold learning algorithms, learn the landscape</li>
+</ul>
+
+<p><em>Variety of different clustering methods</em></p>
+
+<ul>
+  <li>K-means</li>
+  <li>K-medians</li>
+  <li>Hierarchical Clustering</li>
+  <li>Community Clustering
+]
+]</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Because of the continuous nature of these single-cell datasets and the extremely high dimensionality of the data, discrete partitioning is often a poor model for partitioning the data.</li>
+  <li>If we instead assume that cell clusters are related to one another via transitional cells which would naturally lie in-between clusters, then manifold learning techniques are better suited.</li>
+  <li>These techniques derive an expression landscape that can not only be used to relate clusters to one another, but also can be used to infer lineage and hierarchy.</li>
+  <li>To actually perform the clustering there are three commonly-used methods: K-means, hierarchical and community clustering.</li>
+</ul>
+
+<hr />
+
+<h3 id="performing-clustering-k-means">Performing Clustering: K-means</h3>
+
+<p>.pull-right[<img src="../../images/scrna-intro/kmeans.gif" alt="An animated figure showing several iteration of an algorithm that is optimising a 3-way split between a scatter plot of cells. There is no clear boundary making the final result appear only marginally better." loading="lazy" />]</p>
+
+<p>.pull-left[
+.reduce90[
+<em>K-means</em></p>
+<ol>
+  <li>Initialise <em>k</em> random positions</li>
+  <li>Iteration Step:
+    <ol>
+      <li>Calculate distance from each cell to each <em>k</em> position</li>
+      <li>Assign each cell to it’s nearest <em>k</em></li>
+      <li>Set new <em>k</em> positions to the mean position of all cells in that group</li>
+    </ol>
+  </li>
+</ol>
+
+<p><em>K-medians</em></p>
+<ul>
+  <li>Same as above, but use median position instead</li>
+  <li>Less influenced by outliers</li>
+</ul>
+
+<p>]
+]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>K-means and K-medians follow the same method: the number of clusters are defined before hand, and initialised in random positions.</li>
+  <li>The positions are then updated by the contribution of the cells more closer to it than to other positions.</li>
+  <li>This process occurs multiples times until the positions no longer significantly change or until a set number of iterations have been achieved.</li>
+  <li>The final assignment of each cell then becomes the cluster assignment.</li>
+</ul>
+
+<hr />
+
+<h2 id="performing-clustering-hierarchical">Performing Clustering: Hierarchical</h2>
+
+<p>.pull-left-large[&lt;img src=”../../images/scrna-intro/hierarchal1.png” alt=”A many-step figure starting with a number of individual dots. The text reads “identify the two clusters that are closest” and “merge the two most similar clusters.” The process repeats a number of times until all clusters are absorbed into the one large blob.”  loading=”lazy”&gt;]</p>
+
+<p>.pull-right[
+.reduce90[</p>
+<ul>
+  <li>Use the distance matrix to find the two closest points</li>
+  <li>
+    <p>Merge and repeat</p>
+  </li>
+  <li>Yields a dendrogram
+    <ul>
+      <li>Hierarchy of clusters:
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p>.image-90[<img src="../../images/scrna-intro/hierarchal2.png" alt="Several points in a square are labelled A through F, on the right a dendogram is shown with lengths indicating how close each letter is to each other." loading="lazy" />]
+]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Hierarchical clustering is more flexible and does not need an initial parameter to define the number of resulting clusters.</li>
+  <li>Here the two closest points in a distance matrix are joined into a single group, distances are recalculated, and the two closest points are once again joined.</li>
+  <li>This process repeats until all data has been consumed into one.</li>
+  <li>By tracing the process backwards, a hierarchy can be established that is represented by a dendrogram.</li>
+</ul>
+
+<hr />
+
+<h2 id="community-clustering-louvain">Community Clustering: Louvain</h2>
+
+<p>.center[<img src="../../images/scrna-intro/commgraph1.svg" alt="A graph is shown with dots connected by lines. Below, those dots have expanded and pink touches orange and nearly touches purple. It asks pink by iteself? And notes 4 external links and 0 internal links. Two hypothetical options are shown, if pink absorbs purple, we see 5 external connections and 1 internal, so, it's added new connections. An X suggests this is wrong. Below is the pink absorbs orange option, where we see 3 external and 1 internal connection, so one connection has become internal, and no new nodes are connected. A check mark indicates this was right." loading="lazy" />]</p>
+
+<p>.reduce90[
+Aim: Maximise internal links and minimise external links
+]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Louvain clustering is a widely used type of community clustering for single cell data.</li>
+  <li>Here each cell is assigned a neighbourhood of its own and the number of internal and external links between neighbourhoods are counted.</li>
+  <li>For each iteration, a random cell is selected and brought within the neighbourhood of another cell, and the internal and external links are once again counted.</li>
+  <li>If the new configuration has reduced the number of external links in favour of more internal links, then the configuration is kept.</li>
+</ul>
+
+<hr />
+
+<h2 id="community-clustering-louvain-1">Community Clustering: Louvain</h2>
+
+<p>.center[<img src="../../images/scrna-intro/commgraph2.svg" alt="Same Graph as previously, but now there are more, larger clusters. Blue and purple were absorbed, yellow and red were absorbed, and we see a simplified 4 node graph." loading="lazy" />]</p>
+
+<p>.reduce90[</p>
+<ul>
+  <li>Randomly pick a cell and try to place it in a neighbour’s cluster
+    <ul>
+      <li>Accept if Internal:External increases</li>
+      <li>Reject and pick another
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span>
+If the new configuration has instead increased the number of external links, then the configuration is rejected and another cell is picked and tested. By performing this multiple times, a community structure of cells is built to whichever degree of specificity the user desires.</p>
+
+<hr />
+
+<h1 id="summary">Summary</h1>
+
+<p>.pull-left-large[<img src="../../images/scrna-intro/rna_cells_singlerez.svg" alt="Red and blue clusters of cells are shown resembling the tissue blobs. Graphs on the right for expression in Genes A, B, X are shown per cell" loading="lazy" />]</p>
+
+<p>.pull-right[
+.reduce90[</p>
+<ul>
+  <li>
+    <p>Single-cell datasets are vast and sparsely populated</p>
+  </li>
+  <li>
+    <p>Quality filtering and normalisation are required</p>
+  </li>
+  <li>
+    <p>Feature selection and dimension reduction reduce the complexity</p>
+  </li>
+  <li>
+    <p>Clustering denotes cell types and cell relationships</p>
+  </li>
+  <li>
+    <p>scRNA-seq is a statistically driven field</p>
+  </li>
+  <li>Many ways to analyse the data</li>
+  <li>Play with it!
+]
+]</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Single cell analysis is non-trivial, and each stage, from the filtering to the normalisation to the dimension reduction and the clustering can drastically affect the outcome of the analysis.</li>
+  <li>Due to the variability in the analysis, one should not panic when faced with uncertainty.</li>
+  <li>The goal is to play around with the data until it begins to reflect the biology.</li>
+  <li>This can take many many tries to achieve, and it may never be perfect, but the idea is to try as many different ways as possible to see what robust conclusions you can come to.</li>
+</ul>
+
+<hr />
+
+<h3 id="further-scrna-seq-data-analysis">Further scRNA-seq Data Analysis</h3>
+
+<p><img src="../../images/scrna-intro/training_single_cell.png" alt="Screenshot of the galaxy training materials that cover single cell" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>In this regard, the vast UseGalaxy resources can be put to good use by testing out the many different paths of the analysis, and the Galaxy Training Network provides tutorials and hands-on trainings to assist you in this regard.</li>
+  <li>Please explore them to better develop your understanding.</li>
+</ul>
+
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>scRNA-seq requires much pre-processing before analysis can be performed.</li>
+
+<li>Groups of similarly profiled-cells are compared against other groups.</li>
+
+<li>Detectability issues requires careful consideration at all stages.</li>
+
+<li>Clustering is an integral part of an analysis.</li>
+
+</ul>
+
+
+
+
+<h2><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Do you want to extend your knowledge?</h2>
+Follow one of our recommended follow-up trainings:
+
+
+
+    
+        
+        
+            
+        
+- [Transcriptomics](/training-material/topics/transcriptomics)
+    - Pre-processing of Single-Cell RNA Data: [<i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides](/training-material/topics/transcriptomics/tutorials/scrna-preprocessing/slides.html) - [<i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on](/training-material/topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.html)
+    
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

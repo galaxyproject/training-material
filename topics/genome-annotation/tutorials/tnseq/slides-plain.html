@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Essential genes detection with Transposon insertion sequencing</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Genome annotation is a multi-level process that includes ..." />
+        <meta property="og:title" content="Galaxy Training: Essential genes detection with Transposon insertion seque..." />
+        <meta property="og:description" content="Genome annotation is a multi-level process that includes ..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/genome-annotation/faqs/" title="Check our FAQs for the Genome Annotation topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/genome-annotation/tutorials/tnseq/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/genome-annotation/tutorials/tnseq/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/tnseq/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/tnseq/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/tnseq/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/tnseq/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/tnseq/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Ftnseq%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/genome-annotation/tutorials/tnseq/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/genome-annotation/tutorials/tnseq/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/genome-annotation/tutorials/tnseq/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/genome-annotation/tutorials/tnseq/slides.html">View markdown source on GitHub</a>
+	<h1>Essential genes detection with Transposon insertion sequencing</h1>
+		<h2>Contributors</h2>
+		Delphine Lariviere
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What is Transposon insertion Sequencing?</p>
+</li>
+		
+		<li><p>How to get TA sites Coverage ?</p>
+</li>
+		
+		<li><p>How to predict essential genes ?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Understand the read structure of TnSeq analyses</p>
+</li>
+		
+		<li><p>Predict Essential genes with Transit</p>
+</li>
+		
+		<li><p>Compare gene essentiality in control sample and an different experimental condition</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 26, 2019 </div>
+
+	<hr />
+
+
+	<!--
+To show speaker notes during a presentation:
+press c to clone the slides (opens a new window)
+on one window, press p to show speaker notes
+display the other window
+-->
+
+<h2 id="motivation">Motivation</h2>
+
+<p>Transposon insertion sequencing is a technique used to functionally annotate bacterial genomes. The genome is saturated by transposon insertions. The insertion of a transposon being disruptive for the region, the analysis of insertion frequency provides information on how the bacteria fitness change due to this disruption :</p>
+<ul>
+  <li>An insertion mutant with lower fitness decrease frequency in the population</li>
+  <li>An increased fitness lead to increased frequency in the population</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Identifying the impact of mutations on bacterial fitness allows to classify certain gene as essential for the bacteria in different conditions.</p>
+
+<hr />
+
+<h1 id="transposon-insertion-sequencing-method">Transposon insertion sequencing method</h1>
+
+<hr />
+
+<h3 id="data-production">Data production</h3>
+
+<p>.center[<img name="method" src="../../images/tnseq/principle_tnseq_part1.png" width="80%" alt="Description of tnseq method" /></p>
+
+<p>From <a href="http://www.doi.org/10.1038/nrmicro.2015.7">Chao et al.</a>]</p>
+
+<p><span>Speaker Notes</span>
+The initial population genomes are mutated so that the genome is saturated with transposon insertions.  A library is <em>saturated</em> if in the genomes across the whole population of bacteria, each potential insertion site has at least one insertion. The population is then divided into several media containing different growth conditions. After growth, the regions flanking the insertion are amplified and sequenced, allowing to determine the location of the insertion.</p>
+
+<hr />
+
+<h3 id="analysis">Analysis</h3>
+
+<p>.center[
+<img name="method" src="../../images/tnseq/principle_tnseq_part2.png" width="80%" alt="Description of tnseq method" /></p>
+
+<p>From <a href="http://www.doi.org/10.1038/nrmicro.2015.7">Chao et al.</a>
+]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>After alignement to the reference genome, the resulting data will show a discrete repartition of reads on each TA site. If a gene present several insertions, like the two leftmost genes in <em>Condition A</em>, it means that its disruption has little or no impact to the bacterial growth. On the other hand, when a gene shows no insertions at all, like the rightmost gene in <em>Condition A</em>, is means that any disruption in this gene killed the bacteria, meaning its a gene essential to bacteria survival. If the library is sufficiently saturated, there is a clear threshold between essential and non-essential genes when you analyze the insertion rate per gene.</p>
+
+<hr />
+
+<h3 id="note">Note:</h3>
+
+<p>.left[</p>
+<ul>
+  <li>Gene disruption, where we analyze only the disruptions. (The object of this tutorial)</li>
+  <li>Regulatory element insertion, where different promoters are inserted by the transposon, and we analyze the change in gene expression in addition to the disruption. (Will be the subject or another tutorial)
+]</li>
+</ul>
+
+<hr />
+
+<h1 id="experiment-parameters">Experiment parameters</h1>
+
+<hr />
+
+<h3 id="types-of-transposon">Types of transposon</h3>
+
+<ul>
+  <li>
+    <h2 id="randomly-pooled-tranposon-">Randomly pooled tranposon :</h2>
+
+    <ul>
+      <li>Mariner-based transposons, which target TA dinucleotides
+        <ul>
+          <li>The TA are distributed relatively evenly along genome, which allows to impact statistically every gene</li>
+          <li>There is in average more than 30 insertions site per kb</li>
+          <li>The local variations means less loci and less statistical power</li>
+          <li>
+            <h2 id="advantages-low-insertion-bias-easy-to-build-saturated-libraries">Advantages: low insertion bias, easy to build saturated libraries</h2>
+          </li>
+        </ul>
+      </li>
+      <li>Tn5-based vectors, which insert at random sites
+        <ul>
+          <li>Require no target sequences</li>
+          <li>It has a preference for high GC content, causing insertion bias</li>
+          <li>
+            <h2 id="useful-for-specie-where-it-is-difficult-to-build-mariner-based-transposons">Useful for specie where it is difficult to build mariner based transposons</h2>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Defined sequence transposon
+    <ul>
+      <li>Can be used to study interactions in pathways of interest</li>
+      <li>More precise targeting (small genes, pathways) for specific analyses</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>In this tutorial, we are using mariner transposon, that target TA sequences.</p>
+
+<hr />
+
+<h3 id="library-complexity">Library complexity</h3>
+
+<ul>
+  <li>Large complexity means multiple insertion in every potential locus.</li>
+  <li>The higher density of insertion you have, the greater precision  you have in identifying limits of regions of interest</li>
+  <li>If the density of the library is too low, some genes might not be disrupted by chance and mistaken for essential</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The advantage of a target specific transposon, like the mariner, in opposition of a Tn5-based transposon inserting randomly, it that the limited number of insertion sites makes it easier to build high complexity libraries.</p>
+
+<hr />
+
+<h1 id="structure-of-the-tranposon-constructs">Structure of the tranposon constructs</h1>
+
+<hr />
+
+<h3 id="desired-properties-of-the-constructs">Desired Properties of the constructs</h3>
+
+<ul>
+  <li>
+    <p>It needs to allow insertion site amplification and sequencing.</p>
+  </li>
+  <li>
+    <p>Uneven fragment size could instroduce amplification biases. To avoid this problem, we can introduce a Type I restriction site to cleave DNA downstream of transposon for uniform fragment sizes</p>
+  </li>
+  <li>
+    <p>A minimum red length of 16 bp is necessary for precise mapping on the genome (<a href="http://doi.org/10.1007/s00253-015-7037-8">Kwon and al. 2016</a>). We can therefore use the MmeI restriction site (21pb) but not BsmFI (11 to 12 bp).</p>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>It needs to allow insertion site amplification and sequencing to get a library representative of the tranposon insertion.</li>
+  <li>Uneven fragment size could instroduce amplification biases. To avoid this problem, we can introduce a Type I restriction site to cleave DNA downstream of transposon for uniform fragment sizes</li>
+  <li>A minimum red length of 16 bp is necessary for precise mapping on the genome (<a href="http://doi.org/10.1007/s00253-015-7037-8">Kwon and al. 2016</a>). We can therefore use the MmeI restriction site (21pb) but not BsmFI (11 to 12 bp). It is not important in that case to have longer reads as we do not care to have a good coverage on the entire genome, the only information we need is the Ta site affected by an insertion, to do that we only need the location of the start of the reads.</li>
+</ul>
+
+<hr />
+
+<h3 id="structure-of-the-modified-mariner-transposon-himar1">Structure of the modified mariner transposon Himar1</h3>
+
+<p>.center[
+<img name="TranspStructure" src="../../images/tnseq/tranposon_structure.png" width="50%" alt="Structure of the transpson construct, containing several barcodes and adapters" /></p>
+
+<p>From <a href="http://www.doi.org/10.1186/s12864-015-1361-3">Santiago et al.</a>
+]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>ITR junctions : Insertion sites.</li>
+  <li>Mme1 restriction site (cut 21 bp upstream from the restriction site) and NotI restriction sites are the 5’ and 3’ limits to the genomic DNA we want to sequence.</li>
+  <li><strong>A. Sequence flanking genomic regions</strong> After digestion by NotI restriction enzyme, the fragments are attached to biotinylated adaptors that link to NotI restriction site. The attached fragment are then digested by MMeI at a site upstream , where an Illumina primer is then linked. The sequencing is then done, adding Illumina adaptors and an additional barcode to the read for multiplexed sequencing.</li>
+  <li><strong>B. Removing incorrect fragments</strong> An insertion can sometimes be composed of one or more copies of the transposon (multimer). There is therefore a risk to select plasmid backbone sequence. To solve this problem, an additional NotI has been add in the backbone to create different length construct, that can later be filtrated (D).</li>
+  <li><strong>D.</strong>  Different promoters are added to the construct along with an additional 3 bp barcode</li>
+</ul>
+
+<p>Note:
+Because of this complex tranposon structure, the reads obtained after sequencing contain a large portion of tranposon sequence for a 16-17 bp genomic sequence. This will necessitate several step of pre-processing to extract this genomic sequence.</p>
+
+<hr />
+
+<h1 id="tnseq-analysis">Tnseq analysis</h1>
+
+<p><span>Speaker Notes</span>
+With the count of insertions at every insertion site, there is several methods existing to identify essential genes of regions. They can be divided in two major categories :</p>
+<ol>
+  <li>Annotation dependent : The read counts and/or insertion frequency are calculated across defined regions (genes, promoters … )</li>
+  <li>Annotation independent : The read counts and/or disrupted sites are considered across the whole genome, independently of defined structures.</li>
+</ol>
+
+<hr />
+
+<h3 id="methods-of-analysis">Methods of Analysis</h3>
+
+<p>.center[
+<img name="AnalysesMethods" src="../../images/tnseq/type_of_analyses.png" width="70%" alt="Different types of TnSeq Analyses methods" /></p>
+
+<p>From <a href="http://www.doi.org/10.1038/nrmicro.2015.7">Chao et al.</a>
+]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p><strong>Annotation dependent method</strong> The total read count an/or percentage of disrupted site are computed per annotated regions. The values are then compared to the rest of the genome to classify the genes into the categories <em>essential</em> or <em>non-essential</em>. <strong>Annotation independent method</strong> The total read count and/or disrupted sites are computed independently of annotated regions. One of these methods is using a sliding window. Each window is then classified into the categories <em>essential</em> or <em>non-essential</em>. After the windows have been classified, they are linked annotations, and the genes/regions can be classified as <em>essential</em>, <em>non-essential</em>, or <em>domain essential</em> according to the classification of the windows they cover. The same classification can be done using HMM based methods instead of sliding windows. In that case, each insertion site will be predicted as <em>essential</em> or <em>non essential</em>. From <a href="http://www.doi.org/10.1038/nrmicro.2015.7">Chao et al.</a></p>
+
+<hr />
+
+<h3 id="transit-tool">TRANSIT Tool</h3>
+
+<p>.left[</p>
+<ul>
+  <li>Tool for Essentiality Prediction</li>
+  <li>From TA sites read counts</li>
+  <li>Different analysis methods :
+    <ul>
+      <li>Gumbel : Gene Level Prediction</li>
+      <li>HMM : Region level prediction</li>
+      <li>Re-Sampling : Gene Level Prediction, Sample Comparison
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p>From <a href="https://doi.org/10.1093/bioinformatics/btt043">DeJesus et al.</a></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>We are presenting only the Himar1 methods, other tn5 specific methods existing</p>
+
+<p>Gumbel
+The Gumbel can be used to determine which genes are essential in a single condition. It does a gene-by-gene analysis of the insertions at TA sites with each gene, makes a call based on the longest consecutive sequence of TA sites without insertion in the genes, calculates the probability of this using a Bayesian model.</p>
+
+<p>HMM
+The HMM method can be used to determine the essentiality of the entire genome, as opposed to gene-level analysis of the other methods. It is capable of identifying regions that have unusually high or unusually low read counts (i.e. growth advantage or growth defect regions), in addition to the more common categories of essential and non-essential.</p>
+
+<p>Re-sampling
+The re-sampling method is a comparative analysis the allows that can be used to determine conditional essentiality of genes. It is based on a permutation test, and is capable of determining read-counts that are significantly different across conditions.</p>
+
+<hr />
+
+<h1 id="workflow-of-analysis-of-tnseq-data">Workflow of Analysis of Tnseq Data</h1>
+
+<hr />
+
+<h3 id="agenda--from-reads-to-essential-genes-annotations">Agenda : From reads to essential genes annotations</h3>
+
+<ol>
+  <li>Removing all non genomic sequences from the sequenced reads
+    <ol>
+      <li>Data Structure</li>
+      <li>Separating reads from different experimental conditions</li>
+      <li>Removing Adapter sequence</li>
+      <li>Separate reads from different transposon constructs</li>
+      <li>Removing remaining transposon sequence.</li>
+    </ol>
+  </li>
+  <li>Counting the number of insertion per TA sites
+    <ol>
+      <li>Aligning the reads to a reference genome</li>
+      <li>Getting coverage of the genome</li>
+      <li>Getting TA sites positions</li>
+      <li>Merging overall coverage and TA sites to get the coverage of each TA sites</li>
+    </ol>
+  </li>
+  <li>Predicting Essential Genes with Transit
+    <ol>
+      <li>Predict the essentiality of genes</li>
+      <li>Understand the output</li>
+    </ol>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="1--removing-all-non-genomic-sequences-from-the-sequenced-reads">1.  Removing all non genomic sequences from the sequenced reads</h3>
+
+<p>.left[#### 1. Data Structure]</p>
+
+<p><img src="../../images/tnseq/preprocessing.png" width="90%" alt="Workflow for preprocessing the read before alignment" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The experimental design of transposon insertion sequencing produces raw reads containing a lot of adapters and foreign sequences that has been used to insert and target the transposon. In order to obtain the core reads that contain only genomic sequence, we have a number of steps to do to remove them and divide the reads per experimental condition and type of transposon.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>The pre-processing of the data will be done through several steps of Cutadapt software, first we sill separate the reads of each experimental condition based on a 8 bp barcode at the beginning of the read (Illumina demultiplexing). The tail of each set of read is then removed. It immediately follows the 3bp barcode specific to transposon constructs, and contains illumina adapter sequence and downstream. To be sure all our reads have been trimmed correctly we filter out the reads too large. We then separate the reads per transposon construct and then remove the remaining transposon sequence containing MmeI.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="1--removing-all-non-genomic-sequences-from-the-sequenced-reads-1">1.  Removing all non genomic sequences from the sequenced reads</h3>
+
+<h4 id="2-separating-reads-from-different-experimental-conditions">2. Separating reads from different experimental conditions</h4>
+
+<p>We start by dividing the initial data set by experimental conditions thanks to a 8bp barcode added by the Illumina multiplexing protocol.
+ To do that we use Cutadapt with the fastq faile containing the reads and a fasta file containing the barcodes for each condition :</p>
+
+<p>.center[
+ Barcode data:</p>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt"> &gt;control</span>
+ ^CTCAGAAG
+<span class="gt"> &gt;condition</span>
+ ^GACGTCAT
+</code></pre></div></div>
+<p>]</p>
+
+<p>The ‘^’ at the beginning of the sequence means we want to anchor the barcode at the beginning of the read. To know more about the symbols used by cutadapt, see cutadapt <a href="https://cutadapt.readthedocs.io/en/stable/guide.html#adapter-types">manual</a></p>
+
+<p><span>Speaker Notes</span>
+ The output is a collection of the different conditions dataset, here control and condition, and a report text file.
+ You can look at the report and see that 100% of the reads has been trimmed.</p>
+
+<hr />
+<h3 id="1--removing-all-non-genomic-sequences-from-the-sequenced-reads-2">1.  Removing all non genomic sequences from the sequenced reads</h3>
+
+<h4 id="3-removing-adapter-sequence">3. Removing Adapter sequence</h4>
+
+<ul>
+  <li>Trimming the tail containing the illumina adapter. To remove the adapter and everything downstream, we use the end adapter option of cutadapt and don’t anchor the sequence anywhere.</li>
+  <li>Filter the reads by size</li>
+</ul>
+
+<h4 id="4-removing-adapter-sequence">4. Removing Adapter sequence</h4>
+
+<ul>
+  <li>The constructs used in this experiment contain different strengths and directions of promoters. This constructs are marked by 3bp barcodes. (The separated set of reads will be use as replicate here)</li>
+</ul>
+
+<h4 id="5-removing-remaining-transposon-sequence">5. Removing remaining transposon sequence</h4>
+
+<ul>
+  <li>Removal of the linker containing the MmeI restriction site.</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>To remove the reads that might not have been trimmed because of too many mismatches or other reasons, we will then filter the reads by size. Because we know the approximate size of the remaining sequences, we can filter the reads based on this estimation.</p>
+
+<p>4.</p>
+
+<p>We have now removed the transposon sequences that was outside of the 3 bp barcode specific to the type of construct. The constructs used in this experiment contain different strengths and directions of promoters. It means that in addition of disrupting a gene at the location of the insertion, it will modify the expression of either upstream or downstream regions. The analysis of this modification will be studied in another training material, but for now we will consider it does not impact the essentiality analysis and we will use the different constructs as replicates.
+We therefore need to separate the reads based on the construct specific 3bp barcodes.</p>
+
+<p>All these steps are performed with the Cutadapt tool</p>
+
+<hr />
+
+<h3 id="2-counting-the-number-of-insertion-per-ta-sites">2. Counting the number of insertion per TA sites</h3>
+
+<h4 id="1-aligning-the-reads-to-a-reference-genome">1. Aligning the reads to a reference genome</h4>
+
+<ul>
+  <li>
+    <p>The first step is to map our read to the reference genome. We are using the tool Bowtie. We could also use Bowtie2 with an end-to-end option, but Bowtie is more suitable for very short reads like ours (16-17 bp).</p>
+  </li>
+  <li>
+    <p>We are strictly enforcing a no mismatch mapping in the bowtie parameters :</p>
+    <ul>
+      <li>Our reads being very short, the smallest size allowing precise mapping, allowing even one mismatch would risk having reads mapping in wrong positions.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="2-counting-the-number-of-insertion-per-ta-sites-1">2. Counting the number of insertion per TA sites</h3>
+
+<h4 id="2-getting-coverage-of-the-genome">2. Getting coverage of the genome</h4>
+
+<ul>
+  <li>Now that we have mapped the reads on the reference genome, we need to calculate the coverage of the genome to later cross them with our TA sites position.</li>
+</ul>
+
+<p>.center[
+<img name="method" src="../../images/tnseq/Map_cov.png" width="90%" alt="The read align to the genome with its 3' end covering half of the TA site" />
+]</p>
+
+<ul>
+  <li>We are using the tool BamCoverage with an offset of <code class="language-plaintext highlighter-rouge">-1</code></li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>In our case, the reads cover the flanking region on one side of the TA site where the transposon inserted. That means we do not want to have the coverage across the whole reads, as it could cover several TA sites, but only the coverage at the end of the read.</p>
+
+<p>The sequenced read cover the 5’ region flanking the site of insertion. To assign the read to its correct insertion, we need to compute the coverage at the 3’ end of the read.</p>
+
+<hr />
+
+<h3 id="2-counting-the-number-of-insertion-per-ta-sites-2">2. Counting the number of insertion per TA sites</h3>
+
+<h4 id="3-getting-ta-sites-positions">3. Getting TA sites positions</h4>
+
+<ul>
+  <li>
+    <p>We are considering both strands together and therefore reporting all counts to the leftmost position of the TA sites.</p>
+  </li>
+  <li>The first step is to get the TA sites coordinates using  Wordmatch, wich provides us with three outputs:
+    <ul>
+      <li>A file containing the locations where the TA sites maps on the Genome</li>
+      <li>A file containing the locations where the Genome maps on the TA site</li>
+      <li>A report file</li>
+    </ul>
+  </li>
+  <li>We use a succession of small operations using the Cut and Compute tools to extract two files :
+    <ul>
+      <li>A file with the 5’ coordinate of each TA site of the Forward Strand</li>
+      <li>A file with the 5’ coordinate of each TA site of the Reverse Strand</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>As we are not considering strand separately in this analyses, we will consider both count as attached to the leftmost base of the TA site. To do that we will create two list of TA site positions, listing the 5’ end of each TA site for forward and reverse strand, and then merge them to get a global count per TA site.</p>
+
+<p>In order to get the coverage on each TA site we need to prepare a file containing the position of each TA site. Depending on the direction of insertion the coverage will be counted on the leftmost position of the TA site or on the rightmost. As we are not considering strand separately in this analyses, we will consider both count as attached to the leftmost base of the TA site. To do that we will create two list of TA site positions, listing the 5’ end of each TA site for forward and reverse strand, and then merge them to get a global count per TA site.</p>
+
+<p>The coordinates provided by wordmatch are based on count 1. Meaning the first nucleotide is counted as number 1. However, bamCoverage count the first nucleotide as nucleotide number 0. To be able to compare the two results, we need to shift the TA site positions by 1.</p>
+
+<hr />
+
+<h3 id="2-counting-the-number-of-insertion-per-ta-sites-3">2. Counting the number of insertion per TA sites</h3>
+
+<h4 id="4-merging-overall-coverage-and-ta-sites-to-get-the-coverage-of-each-ta-sites">4. Merging overall coverage and TA sites to get the coverage of each TA sites</h4>
+
+<ul>
+  <li>We use the Join tool to join the coverage and the TA sites coordinates on the genomic positions. We then get :
+    <ul>
+      <li>The coverage of TA sites on the Forward Strand reported on the leftmost base</li>
+      <li>The coverage of TA sites on the Forward Strand reported on the rightmost base</li>
+    </ul>
+  </li>
+  <li>We add the counts of both strand and report the total on the leftmost position of the TA site :
+    <ul>
+      <li>We know have a count of insertions at every single site.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Now that have the files containing the coordinates of our TA sites for both strands. We will cross them with the coverage files to get the coverage on both sides of each TA site.</p>
+
+<p>We now have a read count for each nucleotides of the TA sites. The insertions counted in the forward strand files are in a different direction than those counted on the reverse strand file. In our case, we are only interested in studying the gene disruption, and therefore we do not want to consider the directions separately. We will add the forward and reverse count together to get a total count per TA site. In order to do that we need to assign the count of both strand to the same nucleotide. We will do that by shifting by one position the count on the reverse strand.</p>
+
+<hr />
+
+<h3 id="3-predicting-essential-genes-with-transit">3. Predicting Essential Genes with Transit</h3>
+
+<h4 id="1-predict-the-essentiality-of-genes-with-transit">1. Predict the essentiality of genes with Transit</h4>
+
+<p>The output of Transit is a tabulated file containing the following collumns (you can find more information on <a href="https://transit.readthedocs.io/en/latest/transit_methods.html">Transit manual page</a>):</p>
+<ul>
+  <li>Gene ID</li>
+  <li>Name of the gene</li>
+  <li>Gene description</li>
+  <li>Number of Transposon Insertions Observed within the Gene</li>
+  <li>Total Number of TA sites within the Gene</li>
+  <li>Length of the Maximum Run of Non-Insertions observed (in number of TA sites)</li>
+  <li>Span of nucleotides for the Maximum Run of Non-Insertions</li>
+  <li>Posterior Probability of Essentiality</li>
+  <li>Essentiality call for the gene : E=Essential, U=Uncertain, NE=Non-Essential, S=too short</li>
+</ul>
+
+<p>We can obtain the list of genes predicted as essential by filtering on the essentiality call.</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Now that we have the counts of insertions per TA site, we can use them to predict gene esssentiality with Transit. In order to do that, we need to create a an annotation file in the <code class="language-plaintext highlighter-rouge">prot_table</code> format, specifique to the Transit tool. You can create this file from a gff3 from GenBank.</p>
+
+<p>Now that we have prepared the annotation file, we can use the count per TA site to predict essential genes using Transit tool.  We will modify a couple parameters from the default settings :</p>
+<ul>
+  <li>We want to ignore counts lower than 2, in order to reduce the number of sites presenting a single read, which could be artefactual.</li>
+  <li>We want to ignore insertion near the extremities of the genes. A disrupted site that would be very close to the border of the gene may not actually disturb the gene function, and therefore not be an actual signal of disruption.</li>
+</ul>
+
+<hr />
+
+<h3 id="3-predicting-essential-genes-with-transit-1">3. Predicting Essential Genes with Transit</h3>
+
+<h4 id="2-understand-the-output">2. Understand the output</h4>
+
+<p>.left[</p>
+
+<ul>
+  <li>FDR Corrected thresholds: 0.992500, 0.055350</li>
+  <li>MH Acceptance-Rate:    38.48%</li>
+  <li>Total Iterations Performed:    20999</li>
+  <li>Sample Size:   20000</li>
+  <li>phi estimate:  0.481177</li>
+  <li>Time: 584.757580996</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Orf</th>
+      <th>Name</th>
+      <th>Desc</th>
+      <th>k</th>
+      <th>n</th>
+      <th>r</th>
+      <th>s</th>
+      <th>zbar</th>
+      <th>Call</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SAOUHSC_00002</td>
+      <td>-</td>
+      <td>DNA polymerase III subunit</td>
+      <td>2</td>
+      <td>96</td>
+      <td>94</td>
+      <td>1102</td>
+      <td>1.000000</td>
+      <td>E</td>
+    </tr>
+    <tr>
+      <td>SAOUHSC_00008</td>
+      <td>-</td>
+      <td>histidine ammonia-</td>
+      <td>54</td>
+      <td>128</td>
+      <td>8</td>
+      <td>95</td>
+      <td>0.000000</td>
+      <td>NE</td>
+    </tr>
+    <tr>
+      <td>SAOUHSC_00028</td>
+      <td>-</td>
+      <td>hypothetical protein</td>
+      <td>8</td>
+      <td>18</td>
+      <td>4</td>
+      <td>24</td>
+      <td>-1.000000</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <td>SAOUHSC_00227</td>
+      <td>-</td>
+      <td>hypothetical protein</td>
+      <td>21</td>
+      <td>162</td>
+      <td>24</td>
+      <td>267</td>
+      <td>0.970900</td>
+      <td>U</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>ORF	Gene ID.</p>
+
+<p>Name	Name of the gene.</p>
+
+<p>Description	Gene description.</p>
+
+<p>k	Number of Transposon Insertions Observed within the ORF.</p>
+
+<p>n	Total Number of TA dinucleotides within the ORF.</p>
+
+<p>r	Length of the Maximum Run of Non-Insertions observed.</p>
+
+<p>s	Span of nucleotides for the Maximum Run of Non-Insertions.</p>
+
+<p>zbar	Posterior Probability of Essentiality.</p>
+
+<p>Call	Essentiality call for the gene. Depends on FDR corrected thresholds. E=Essential U=Uncertain, NE=Non-Essential, S=too short</p>
+
+<p>Note: Technically, Bayesian models are used to calculate posterior probabilities, not p-values (which is a concept associated with the frequentist framework). However, we have implemented a method for computing the approximate false-discovery rate (FDR) that serves a similar purpose. This determines a threshold for significance on the posterior probabilities that is corrected for multiple tests. The actual thresholds used are reported in the headers of the output file (and are near 1 for essentials and near 0 for non-essentials). There can be many genes that score between the two thresholds (t1 &lt; zbar &lt; t2). This reflects intrinsic uncertainty associated with either low read counts, sparse insertion density, or small genes. If the insertion_density is too low (&lt; ~30%), the method may not work as well, and might indicate an unusually large number of Uncertain or Essential genes.</p>
+
+<hr />
+
+<h3 id="take-home">Take Home</h3>
+
+<ul>
+  <li>TnSeq use Tranposon insertion to identify Gene essential in different conditions</li>
+  <li>Based on insertion sites count. Whole genome coverage is not important.</li>
+  <li>Be aware of your library saturation: A saturation too low will give you a lot of false essential Genes</li>
+  <li>Do not Accept Mismatches in your alignements when working with very short reads</li>
+  <li>Be careful when you use different tools based on genomic positions, some tools start at position 1, or 0</li>
+</ul>
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

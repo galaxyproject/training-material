@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Functionally Assembled Terrestrial Ecosystem Simulator (FATES)</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Learn to analyze climate data through Galaxy." />
+        <meta property="og:title" content="Galaxy Training: Functionally Assembled Terrestrial Ecosystem Simulator (F..." />
+        <meta property="og:description" content="Learn to analyze climate data through Galaxy." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/climate/faqs/" title="Check our FAQs for the Climate topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/climate/tutorials/fates/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/climate/tutorials/fates/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/fates/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/fates/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/fates/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/fates/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/climate/tutorials/fates/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fclimate%2Ftutorials%2Ffates%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/climate/tutorials/fates/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/climate/tutorials/fates/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/climate/tutorials/fates/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/climate/tutorials/fates/slides.html">View markdown source on GitHub</a>
+	<h1>Functionally Assembled Terrestrial Ecosystem Simulator (FATES)</h1>
+		<h2>Contributors</h2>
+		Rosie Fisher, Anne Fouilloux
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What is FATES?</p>
+</li>
+		
+		<li><p>How can I use FATES?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Have an understanding of what FATES is and how it works</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Requirements</h2>
+		<ul>
+		
+		
+    <li>
+    
+        <a href="https://training.galaxyproject.org/training-material/topics/climate/slides/introduction.html#1">introduction to climate data</a>
+    
+    </li>
+
+		</ul>
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 27, 2021 </div>
+
+	<hr />
+
+
+	<h2 id="evolution-of-land-surface-models">Evolution of land surface models</h2>
+
+<p><img src="../../images/lsm_evolution.png" alt="Evolution of land surface models" loading="lazy" /></p>
+
+<p><em>reference</em>: Fisher R.A. &amp; Koven C.D.  JAMES, 2020</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Land Surface Models have significantly evolved through time.</li>
+  <li>For instance, representations of numerous processes that are known to impact the dynamics of systems have been incrementally added to Land Surface Models.</li>
+  <li>They have been expanded from their initial simple biophysical configurations.</li>
+  <li>This includes representations of soil moisture dynamics, stomatal functioning, land surface heterogeneity and surface hydrological processes.</li>
+  <li>And plant and soil carbon cycling, dynamic vegetation distributions, fire, urban environments, land cover and management, nitrogen cycling and crops.</li>
+  <li>and latterly plant demographic processes, phosphorus cycling, and plant hydraulics.</li>
+</ul>
+
+<hr />
+
+<h2 id="evolution-of-land-surface-models-1">Evolution of land surface models</h2>
+
+<p><img src="../../images/lsm_evolution_cb.png" alt="Global Carbon budget" loading="lazy" /></p>
+
+<p><em>reference</em>: Fisher R.A. &amp; Koven C.D.  JAMES, 2020</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The global carbon budget averaged over the last half-century is shown on this figure.</li>
+  <li>For this time period, 82 percent of the total emissions were caused by fossil CO2 emissions and 18 percent by land use change.</li>
+  <li>The total emissions were partitioned among the atmosphere (45 perceent), ocean (24 percent), and land (29 percent), with an unattributed budget imbalance (2 percent).</li>
+  <li>All components except land use change emissions have significantly grown since 1959.</li>
+</ul>
+
+<hr />
+
+<h2 id="evolution-of-land-surface-models-2">Evolution of land surface models</h2>
+
+<p><img src="../../images/lsm_evolution_climate_feedback.png" alt="Climate feedback" loading="lazy" /></p>
+
+<p><em>reference</em>: Fisher R.A. &amp; Koven C.D.  JAMES, 2020</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The processes that govern carbon cycle feedbacks are highly affected by both biophysical feedbacks in the Earth system and by land use decisions that are in turn affected by climate impacts on human societies.</li>
+</ul>
+
+<hr />
+
+<p><img src="../../images/surface_processes.png" alt="Surface processes" loading="lazy" /></p>
+
+<p>Surface processes play a key role in <strong>extreme events</strong> (heat waves, fires, crop failures, floods, droughts).</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Surface processes play a key role in extreme events, such as heat waves, fires, crop failures, floods, droughts.</li>
+</ul>
+
+<hr />
+
+<h2 id="evolution-of-land-surface-models-3">Evolution of land surface models</h2>
+
+<p><img src="../../images/lsm_evolution_climate_impacts.png" alt="Climate impact" loading="lazy" /></p>
+
+<p><em>reference</em>: Fisher R.A. &amp; Koven C.D.  JAMES, 2020</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Climate change impacts such as drought and fire are mediated by plant biophysical responses to elevated CO2, which are themselves impacted by limitations imposed by nutrient limitations on growth.</li>
+</ul>
+
+<hr />
+
+<h2 id="problems-with-the-status-quo">Problems with the status quo</h2>
+
+<p><img src="../../images/lsm_status_quo.png" alt="Status quo" loading="lazy" /></p>
+
+<ol>
+  <li>Perpetual increase in complexity</li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Developing Land Surface Models by adding complexity in already complex codes is not manageable anymore.</li>
+  <li>To face this perpetual increase in complexity, the community needs to better organize code developments.</li>
+</ul>
+
+<hr />
+
+<h2 id="land-surface-modelling-in-the-world">Land surface modelling in the world</h2>
+
+<p><img src="../../images/lsm_teams.png" alt="LSM teams" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>One major issue is that there are few Land Surface Models code developers.</li>
+  <li>And Land surface modeling teams are typically not large enough to be able to tackle all of the interacting processes in a modern Land Surface Model.</li>
+  <li>A wider collaborative approach is required.</li>
+</ul>
+
+<hr />
+<h2 id="problems-with-the-status-quo-1">Problems with the status quo</h2>
+
+<p><img src="../../images/lsm_status_quo.png" alt="Status quo" loading="lazy" /></p>
+
+<ol>
+  <li>Perpetual increase in complexity</li>
+  <li>Sub-critical development efforts</li>
+  <li>Over-simplified representation of ecosystems</li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>So to summarize, we have 3 major problems to solve:</li>
+  <li>First, the perpetual increase in complexity.</li>
+  <li>Second, the sub-critical development efforts.</li>
+  <li>Third, the over-simplified representation of ecosystems.</li>
+</ul>
+
+<hr />
+
+<h2 id="ecological-processes-in-land-surface-models">Ecological processes in land surface models</h2>
+
+<p><img src="../../images/ecological_processes.png" alt="Ecological processes" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>On this slide, we show 3 different ways to represent ecological processes in Land Surface Models:</li>
+  <li>On the left, we have the Big Leaf Model which is the kind of default Land Surface Model used in Climate models.</li>
+  <li>Big Leaf models are over simplified and the different types of vegetation do not compete with each other for light or resources.</li>
+  <li>The forst tree community has been typically using a complete opposite approach with Stochastic individual models where you model individual trees with specific location and space.</li>
+  <li>Stochastic aspect comes from the fact that the location of the trees are random and where the plants die is semi-random.</li>
+  <li>These models are great but very expensive.</li>
+  <li>So the cohort model is a compromize between the two approaches.</li>
+</ul>
+
+<hr />
+
+<h2 id="solutions">Solutions</h2>
+
+<p><img src="../../images/lsm_status_quo.png" alt="Status quo" loading="lazy" /></p>
+
+<ol>
+  <li>Perpetual increase in complexity
+    <ul>
+      <li>Complexity management</li>
+    </ul>
+  </li>
+  <li>Sub-critical development efforts
+    <ul>
+      <li>Open-source community development</li>
+    </ul>
+  </li>
+  <li>Over-simplified representation of ecosystems
+    <ul>
+      <li>Balanced ecological realism</li>
+    </ul>
+  </li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>To develop these kind of models and achieve our final goal which is to improve climate models and better assess the impact of climate changes on our societies, we need:</li>
+  <li>to find a way to manage the complexity of the codes by using a modular approach.</li>
+  <li>make all our development open source and available to all the community.</li>
+  <li>To make compromize and balance ecological realism.</li>
+</ul>
+
+<hr />
+<h1 id="what-is-fates">What is FATES?</h1>
+
+<p>FATES stands for the <strong>Functionally Assembled Terrestrial Ecosystem Simulator</strong> and
+is a module with fully <strong>open-source</strong> development:</p>
+
+<p><img src="../../images/FATES_NGEET.png" alt="FATES" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>FATES stands for the Functionally Assembled Terrestrial Ecosystem Simulator.</li>
+  <li>It is fully open source.</li>
+</ul>
+
+<hr />
+
+<h2 id="fates-open-source">FATES open-source</h2>
+
+<ul>
+  <li>Available on GitHub: <a href="https://github.com/NGEET/fates">https://github.com/NGEET/fates</a></li>
+</ul>
+
+<p>It is designed to operate in a <strong>“host”</strong> land surface model, which simulates:</p>
+<ul>
+  <li>plant physiology,</li>
+  <li>competitive processes,</li>
+  <li>ecosystem assembly
+and</li>
+  <li>vegetation distribution</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>It is available on github.</li>
+  <li>It is designed to operate with a host land surface model.</li>
+  <li>FATES simulates plant physiology, competitive processes, ecosystem assembly and vegetation distribution.</li>
+</ul>
+
+<hr />
+
+<h2 id="cohort-model">Cohort model</h2>
+
+<p><img src="../../images/cohort_concept.png" alt="Concept of Cohort model" loading="lazy" /></p>
+
+<p><em>reference</em>: Benchmarking and parameter sensitivity of physiological and vegetation dynamics using the Functionally Assembled Terrestrial Ecosystem Simulator (FATES) at Barro Colorado Island, Panama
+Charles D. Koven et al., 2020.</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>With FATES, trees have a height and compete for light.</li>
+</ul>
+
+<hr />
+
+<h2 id="balanced-ecological-realism">Balanced ecological realism</h2>
+
+<p>What are the advances allowed by a demographic model?</p>
+
+<ul>
+  <li>Representation of light competition &amp; ecosystem assembly.</li>
+  <li>Prediction of the distribution of plants based on their <strong>functional traits</strong>.</li>
+  <li><strong>Lags</strong> between climate and vegetation change and growth after <strong>disturbances</strong>.</li>
+  <li>Better representation of <strong>physiological processes</strong> (hydraulics, fire, nutrients).</li>
+</ul>
+
+<p><img src="../../images/ecological_realism.png" alt="Ecological realism" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The following advances are enabled with a demongraphic model:</li>
+  <li>A better representation of light competition and ecosystem assembly.</li>
+  <li>The prediction of the distribution of plants based on their functional traits.</li>
+  <li>The lags between climate and vegetation change and growth after disturbances.</li>
+  <li>The better representation of physiological processes such as hydraulics, fire and nutrients.</li>
+</ul>
+
+<hr />
+
+<p><img src="../../images/FATES_development.png" alt="development" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>On this slide, we show how the code developments are taking place.</li>
+  <li>The approach is modular and each component can be developed separately.</li>
+  <li>
+    <h2 id="this-approach-significantly-speed-up-developments">This approach significantly speed-up developments.</h2>
+  </li>
+</ul>
+
+<p><img src="../../images/FATES_development_cluster.png" alt="development cluster" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Thanks to this modular approach, new groups joined our community and contribute to develop new modules.</li>
+</ul>
+
+<hr />
+
+<h1 id="open-source-community-development">Open source, community development</h1>
+
+<p><strong>Growth in participation in FATES</strong></p>
+
+<p><img src="../../images/FATES_community.png" alt="FATES community" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Many new developments have been added to FATES and we see an increasing number of developers contributing to the code.</li>
+</ul>
+
+<hr />
+<h1 id="fates-development">FATES development</h1>
+<ul>
+  <li>About 39 funded researchers.</li>
+  <li>6 countries, 26+ institutions.</li>
+  <li>130 participants at the recent planning meeting.</li>
+  <li>3 Earth System Modelling Centres.</li>
+  <li>More than 11 proposal funded (2020). Many more ongoing.</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>There are about 39 funded researchers working on the FATES code.</li>
+  <li>These developers are spread in about 6 different countries and more than 26 different institutions.</li>
+  <li>We had more than 130 participants at the recent planning meeting in 2020.</li>
+  <li>About 3 Earth Systemo Modelling Centres are using FATES.</li>
+  <li>And more than 11 proposal funded in 2020 for further developing FATES.</li>
+</ul>
+
+<hr />
+
+<h1 id="code-complexity-management">Code complexity management</h1>
+
+<ul>
+  <li>Modular complexity: a strategy to manage the proliferation of processes</li>
+</ul>
+
+<p><img src="../../images/FATES_code_complexity.png" alt="FATES code complexity" loading="lazy" /></p>
+
+<p><strong>Reference</strong>: Fisher R.A. &amp; Koven C.D.  “Perspectives on the Future of Land Surface Models and the Challenges of Representing Complex Terrestrial Systems” AGU Perspective article. JAMES, 2020</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The code is fully modular and easy to update.</li>
+</ul>
+
+<hr />
+
+<h2 id="fates-reduced-complexity-modes">FATES reduced complexity modes</h2>
+
+<p><img src="../../images/FATES_reduced_complexity.png" alt="FATES reduced complexity" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>To help code developers, a number of reduced complexity modes were made available.</li>
+</ul>
+
+<hr />
+
+<h1 id="but-thats-not-all">But that’s not all…</h1>
+
+<p>FATES (in common with all land surface models that are part of ESMs) remains technically challenging to run.</p>
+<ul>
+  <li>Scripting environment is complicated.</li>
+  <li>Porting model to a new supercomputer is incredibly hard.</li>
+  <li>Running at single sites or regions is more cumbersome than running globally.</li>
+  <li>Tools developed on one platform often do not work on another.</li>
+  <li>Workflows are complicated by computing architecture.</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>However, we know that more needs to be done for simplifying the usage of FATES and reduce the learning curve.</li>
+  <li>Running FATES remains technically challenging.</li>
+  <li>The scripting environment is complicated,</li>
+  <li>porting the model to new platforms can be incredibly hard,</li>
+  <li>running at single sites or regions is more cumbersome than running the code globally,</li>
+  <li>and workflows are complicated to put in place.</li>
+</ul>
+
+<hr />
+
+<h1 id="but-thats-not-all-1">But that’s not all…</h1>
+
+<p><strong>Interesting science</strong> is at the interface of the input parameters, model processes and emergent outcomes.</p>
+
+<p><img src="../../images/FATES_learning_curve.png" alt="Learning curve" loading="lazy" /></p>
+
+<p><strong>Reference</strong>: Eva Lieungh, Sonya Geange, Hui Tang</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Interesting science is at the interface of the input parameters, model processes and emergent outcomes.</li>
+  <li>We know it takes a very long time for a new researcher to run successfully a simple FATES test simulation. In general it takes several months and it is very frustating.</li>
+  <li>However, once researchers manage to run FATES, they usually can contribute and improve the model.</li>
+  <li>
+    <h2 id="fates-in-galaxy-aims-at-reducing-the-learning-curve-and-help-researchers-to-quickly-produce-scientific-results">FATES in Galaxy aims at reducing the learning curve and help researchers to quickly produce scientific results.</h2>
+  </li>
+</ul>
+
+<h1 id="how-can-i-use-fates-in-galaxy">How can I use FATES in Galaxy?</h1>
+
+<ul>
+  <li>With CLM-FATES <a href="https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/climate/ctsm_fates/ctsm_fates/2.0.1">Galaxy tool</a> for running operational and long simulations.</li>
+  <li><a href="https://live.usegalaxy.eu/?tool_id=interactive_tool_climate_notebook">Galaxy climate JupyterLab</a>
+for learning, developing the model, setting up simulations and visualizing results.</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>There are two ways to run CLM-FATES in Galaxy and we suggest new users to start with the FATES Galaxy Tool.</li>
+  <li>For more advanced users and if you are willing to develop the FATES model, use the Galaxy Climate JupyterLab where you can develop new features, set up simple test simulations and visualize your results.</li>
+  <li>The Galaxy FATES tool can then be used to run operational and long simulations.</li>
+</ul>
+
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>FATES is a numerical terrestrial ecosystem model used in climate models</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Introduction to SRA Aligned Read Format and Cloud Metadata for SARS-CoV-2</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="A collection of microtutorials explaining various feature..." />
+        <meta property="og:title" content="Galaxy Training: Introduction to SRA Aligned Read Format and Cloud Metadat..." />
+        <meta property="og:description" content="A collection of microtutorials explaining various feature..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/galaxy-interface/faqs/" title="Check our FAQs for the Using Galaxy and Managing your Data topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/galaxy-interface/tutorials/ncbi-sarf/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/galaxy-interface/tutorials/ncbi-sarf/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/ncbi-sarf/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/ncbi-sarf/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/ncbi-sarf/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/ncbi-sarf/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/ncbi-sarf/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-interface%2Ftutorials%2Fncbi-sarf%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/galaxy-interface/tutorials/ncbi-sarf/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/galaxy-interface/tutorials/ncbi-sarf/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/galaxy-interface/tutorials/ncbi-sarf/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/galaxy-interface/tutorials/ncbi-sarf/slides.html">View markdown source on GitHub</a>
+	<h1>Introduction to SRA Aligned Read Format and Cloud Metadata for SARS-CoV-2</h1>
+		<h2>Contributors</h2>
+		Jon Trow
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What is the SRA Aligned Read Format</p>
+</li>
+		
+		<li><p>How can I use it?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Understand which data and metadata types are available for SARS-CoV-2 SRA runs in the cloud.</p>
+</li>
+		
+		<li><p>Understand what SRA Aligned Read Format is and what can you do with it.</p>
+</li>
+		
+		<li><p>Working knowledge of SRA Metadata available on the cloud, ways to access it, and some popular use cases.</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 2, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="why-have-sra-data-in-the-cloud">Why have SRA data in the cloud?</h1>
+
+<ul>
+  <li>
+    <p>SRA data archive format is over 18PB (<strong>great!</strong>)</p>
+
+    <p>…but it’s a lot of data that is hard to search (<strong>not so great</strong>)</p>
+  </li>
+  <li>
+    <p>Do you wish:</p>
+    <ul>
+      <li>It was easier to find SRA data based on organismal content?</li>
+      <li>Searching SRA based on submitted BioProject and BioSample information was simpler?</li>
+      <li>You could get a sense of what could be assembled out of an SRA dataset before downloading?</li>
+      <li>You didn’t need to do the assembly/variant calling yourself?</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="what-data-is-in-scope-for-this-training">What data is in scope for this training?</h2>
+
+<ul>
+  <li>Public SRA data that contains SARS-CoV-2 sequence
+    <ul>
+      <li>Illumina platform only</li>
+      <li>Stay tuned for long-read data</li>
+    </ul>
+  </li>
+  <li>How do we determine which runs contain SARS-CoV-2 data?
+    <ul>
+      <li>SRA Taxonomy Analysis Tool (STAT)</li>
+      <li>
+        <h2 id="preprint-doi10110120210216431451v1">Preprint: <a href="https://www.biorxiv.org/content/10.1101/2021.02.16.431451v1">doi:10.1101/2021.02.16.431451v1</a></h2>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="introduction-to-sra-aligned-read-format-and-associated-metadata">Introduction to SRA aligned read format and associated metadata</h2>
+
+<ul>
+  <li>Incoming SRA runs are scanned for <em>Coronaviridae</em> content</li>
+  <li>Contigs are created via guided assembly against SARS-CoV-2 RefSeq - fasta contigs</li>
+  <li>Reads are mapped back to the contigs - aligned sam, fasta/q reads</li>
+  <li>Taxonomy assessed
+    <ul>
+      <li>STAT</li>
+      <li>BLAST</li>
+    </ul>
+  </li>
+  <li>Variants are called then annotated with VIGOR3 - VCF</li>
+</ul>
+
+<hr />
+
+<h2 id="using-aligned-read-format">Using aligned read format</h2>
+
+<p>.pull-left[</p>
+<ul>
+  <li><em>Coronaviridae</em> contigs constructed from SRA data
+    <ul>
+      <li>Compatible with SRA Toolkit</li>
+      <li>Access to reads and contigs individually</li>
+      <li>Ability to see which reads align to each contig</li>
+      <li>Smaller size than standard SRA format- no quality scores
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p>.pull-right[
+<img src="../../images/ncbi/sarf.png" alt="graph with one large node of SRA aligned reads leading to three other nodes: FASTQ, SAM, Fasta contigs (new)" loading="lazy" />
+]</p>
+
+<hr />
+
+<h2 id="accessing-sra-metadata-in-the-cloud">Accessing SRA metadata in the cloud</h2>
+
+<ul>
+  <li>Cloud query services- BigQuery and Athena
+    <ul>
+      <li>Analyze SRA metadata directly using standard SQL, allowing searches that are not possible in Entrez</li>
+      <li>No need to manually transform the data for querying, so you can be up and running in just a few minutes</li>
+      <li>Built in support for complex data fields</li>
+      <li>You pay for the data scanned, though some free options exist</li>
+    </ul>
+  </li>
+  <li>The underlying metadata files are available for download at no cost
+    <ul>
+      <li>JSON format can be transformed according to your preferences</li>
+      <li>These can be imported directly to Galaxy</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="available-sra-metadata">Available SRA metadata</h2>
+
+<p>SRA aligned read metadata:</p>
+
+<ul>
+  <li>User submitted metadata
+    <ul>
+      <li>Biological sample and sequencing library metadata supplied at the time of sequence submission</li>
+    </ul>
+  </li>
+  <li>Contig metadata
+    <ul>
+      <li>Contig stats including: coverage, taxonomy ID, contig length</li>
+    </ul>
+  </li>
+  <li>Taxonomic content analysis of contigs
+    <ul>
+      <li>Search for records based on kmer hits to tax level of interest</li>
+    </ul>
+  </li>
+  <li>BLAST results for contigs
+    <ul>
+      <li>Contig blast results including: hit accession, hit length, percent identity</li>
+    </ul>
+  </li>
+  <li>Variant calls
+    <ul>
+      <li>Variation and VIGOR3 annotation information</li>
+    </ul>
+  </li>
+  <li>Peptides
+    <ul>
+      <li>Details of annotated peptides, including sequence</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="popular-use-cases--what-can-you-do-with-it">Popular use cases- what can you do with it?</h2>
+
+<ul>
+  <li>Finding SARS-CoV-2 contigs with specific coverage and length</li>
+  <li>Filter SARS-CoV-2 contigs based on geographic location of sample collection</li>
+  <li>Find top SARS-CoV-2 BLAST hits for contigs from a specific geographic location</li>
+  <li>Filter for all variations called from samples collected in the United States after 02/01/2021</li>
+  <li>Filter for runs with the E484K mutation</li>
+</ul>
+
+<hr />
+
+<h2 id="sra-data-in-the-cloud">SRA data in the cloud</h2>
+
+<p>.pull-left[</p>
+<ul>
+  <li>COVID-focused SRA datasets available in GCP and AWS
+    <ul>
+      <li>Searchable metadata</li>
+      <li>SRA aligned read files</li>
+      <li>VCF files</li>
+      <li>Full SRA runs</li>
+      <li>Original format submitted files</li>
+    </ul>
+  </li>
+  <li>Benefits
+    <ul>
+      <li>Access large volume of COVID-19-related raw read data with no throttling, at no cost to you</li>
+      <li>Can be imported into Galaxy for use in your existing workflows
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p>.pull-right[
+.image-100[<img src="../../images/ncbi/covid-cloud.png" alt="screenshot of google cloud ncbi covid-19 project website" loading="lazy" />]
+.image-100[<img src="../../images/ncbi/covid-aws.png" alt="screenshot of aws ncbi covid-19 project website" loading="lazy" />]
+]</p>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+
+<img src="/training-material/assets/images/ncbi.png" alt="page logo" style="height: 100px;"/>
+
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

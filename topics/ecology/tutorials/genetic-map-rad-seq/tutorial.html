@@ -29,30 +29,8 @@
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
-        
-
-
-
-
-
-
-
-
-
-
-
-<!-- Gitter -->
-
-
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
             <a class="navbar-brand" href="/training-material/">
                 <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
@@ -65,11 +43,12 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        
                         <a class="nav-link" href="/training-material/topics/ecology" title="Go back to list of tutorials">
-                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Ecology
+                            <i class="far fa-folder" aria-hidden="true"></i> Ecology
                         </a>
+                        
                     </li>
-
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
         <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
@@ -208,15 +187,8 @@
     </div>
 </li>
 
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/ecology/tutorials/genetic-map-rad-seq/tutorial.md">
-                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
-                        </a>
-                    </li>
-                    -->
 
-                     <!-- Search bar-->
+                    <!-- Search bar-->
                     <li class="nav-item">
                       <div id="navbarSupportedContent">
                         <!-- Search form -->
@@ -228,16 +200,37 @@
                         </form>
                       </div>
                     </li>
-
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 
-<div class="container main-content">
-    <script type="application/ld+json">
+        <div class="container main-content" role="main">
         
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
 
 
 {
@@ -361,46 +354,47 @@
     }
   ]
 }
-    </script>
+</script>
 
-    <section class="tutorial topic-ecology">
-        <h1 data-toc-skip>RAD-Seq to construct genetic maps</h1>
-        
+<section class="tutorial topic-ecology">
+    <h1 data-toc-skip>RAD-Seq to construct genetic maps</h1>
+    
 
-        <div class="contributors-line">By: 
+    <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/yvanlebras/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/yvanlebras" alt="Yvan Le Bras">Yvan Le Bras</a>
+ <a href="/training-material/hall-of-fame/yvanlebras/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/yvanlebras" alt="Avatar">Yvan Le Bras</a>
 
 </div>
 
-        <blockquote class="overview">
-            <h3>Overview</h3>
-            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
-            <ul>
-            
-            <li><p>How to analyze RAD sequencing data for a genetic map study?</p>
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions</strong>
+        <ul>
+        
+        <li><p>How to analyze RAD sequencing data for a genetic map study?</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
-            <ul>
-            
-            <li><p>SNP calling from RAD sequencing data</p>
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+        <ul>
+        
+        <li><p>SNP calling from RAD sequencing data</p>
 </li>
-            
-            <li><p>Find and correct haplotypes</p>
+        
+        <li><p>Find and correct haplotypes</p>
 </li>
-            
-            <li><p>Create input files for genetic map building software</p>
+        
+        <li><p>Create input files for genetic map building software</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            
-            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
-            <ul>
-            
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+        <ul>
+        
     <li>
     
         
@@ -410,58 +404,57 @@
     
     </li>
 
-            
-            </ul>
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 8 hours</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+        <ul class="supporting_material">
             
 
             
-            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 8 hours</div>
-            
-
-            
-
-            
-            
-
-            
-            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
-            <ul>
-                <div class="supporting_material">
-                
-
-                
-                    <li class="btn btn-default supporting_material">
+                <li class="btn btn-default supporting_material">
 <a class="topic-icon" href="https://doi.org/10.5281/zenodo.1219888">
-    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
 </a>
 
 </li>
-                
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
     <a class="topic-icon" href="/training-material/topics/ecology/tutorials/genetic-map-rad-seq/workflows/" title="Workflows" alt="RAD-Seq to construct genetic maps workflows">
-        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
     </a>
 
 </li>
-                
+            
 
-                
-                    <li class="btn btn-default supporting_material">
-<a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/main/topics/ecology/tutorials/genetic-map-rad-seq/tours/">
-    <i class="fas fa-magic" aria-hidden="true"></i><span class="visually-hidden">interactive_tour</span> Tours
+            
+                <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/main/topics/ecology/tutorials/genetic-map-rad-seq/tours/" title="Galaxy interactive tour" >
+    <i class="fas fa-magic" aria-hidden="true"></i> Tours
 </a>
 
 </li>
-                
+            
 
-                
-                
-                
+            
+            
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
@@ -474,8 +467,6 @@
             </a>
         </li>
     
-    
-        
     
         
     
@@ -606,8 +597,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -651,22 +640,23 @@
 
 
 </li>
-                
-                </div>
-            </ul>
             
+        </ul>
+        
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 12, 2021 </div>
-        </blockquote>
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 12, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
-        <div class="container">
-            <div class="row">
-                <!-- sidebar, which will move to the top on a small screen -->
-                <div class="col-sm-2">
-                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
-                </div>
-                <div class="col-sm-10">
-                    <h1 class="no_toc" id="introduction">Introduction</h1>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <p>This tutorial is based on the analysis described in <a href="http://www.genetics.org/content/188/4/799">publication</a>.
 Further information about the pipeline is available from <a href="http://catchenlab.life.illinois.edu/stacks">the official STACKS website</a>.
@@ -781,23 +771,23 @@ https://zenodo.org/record/1219888/files/progeny_20
 
       <p>Once Stacks has completed running, you will see 5 new data collections and 8 datasets.</p>
 
-      <p><img src="../../images/RAD2_Genetic_Map/denovomap_out.png" alt="The output of de novo map" /></p>
+      <p><img src="../../images/RAD2_Genetic_Map/denovomap_out.png" alt="The output of de novo map" loading="lazy" /></p>
 
       <p>Investigate the output files: <code class="language-plaintext highlighter-rouge">result.log</code> and <code class="language-plaintext highlighter-rouge">catalog.*</code> (snps, alleles and tags).</p>
 
       <p>Looking at the first file, <code class="language-plaintext highlighter-rouge">denovo_map.log</code>, you can see the command line used and the start as end execution time.</p>
 
-      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_top.png" alt="De novo map log file" /></p>
+      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_top.png" alt="De novo map log file" loading="lazy" /></p>
 
       <p>Then are the different STACKS steps:</p>
 
       <p><code class="language-plaintext highlighter-rouge">ustacks</code></p>
 
-      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_ustacks.png" alt="De novo map:ustacks log" /></p>
+      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_ustacks.png" alt="De novo map:ustacks log" loading="lazy" /></p>
 
       <p><code class="language-plaintext highlighter-rouge">cstacks</code></p>
 
-      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_cstacks.png" alt="De novo map: cstacks" /></p>
+      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_cstacks.png" alt="De novo map: cstacks" loading="lazy" /></p>
 
       <blockquote class="question">
         <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -817,15 +807,15 @@ https://zenodo.org/record/1219888/files/progeny_20
       </blockquote>
       <p><code class="language-plaintext highlighter-rouge">sstacks</code></p>
 
-      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_sstacks.png" alt="De novo map: sstacks log" /></p>
+      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_sstacks.png" alt="De novo map: sstacks log" loading="lazy" /></p>
 
       <p>Lastly, <code class="language-plaintext highlighter-rouge">genotypes</code> is executed. It searches for markers identified on the parents and the associate progenies’ haplotypes. If the first parent have a GA (ex: aatggtgtGgtccctcgtAc) and AC (ex: aatggtgtAgtccctcgtCc) haplotypes, and the second parent only a GA (ex: aatggtgtGgtccctcgtAc) haplotype, STACKS declares an ab/aa marker for this locus. Genotypes program then associate GA to a and AC to b and then scan progeny to determine which haplotype is found on each of them.</p>
 
-      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_genotypes1.png" alt="De novo map: genotypes log" /></p>
+      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_genotypes1.png" alt="De novo map: genotypes log" loading="lazy" /></p>
 
-      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_genotypes2.png" alt="De novo map: genotypes log" /></p>
+      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_genotypes2.png" alt="De novo map: genotypes log" loading="lazy" /></p>
 
-      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_end.png" alt="De novo map: genotypes log" /></p>
+      <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_end.png" alt="De novo map: genotypes log" loading="lazy" /></p>
 
       <p>Finally, 447 loci, markers, are kept to generate the <code class="language-plaintext highlighter-rouge">batch_1.genotypess_1.tsv</code> file. 459 loci are stored on the observed haplotype file <code class="language-plaintext highlighter-rouge">batch_1.haplotypes_1.tsv</code>.</p>
     </li>
@@ -837,29 +827,29 @@ https://zenodo.org/record/1219888/files/progeny_20
 
 <p>Here are <code class="language-plaintext highlighter-rouge">sample1.snps</code> (left) and <code class="language-plaintext highlighter-rouge">sample2.snps</code> (right)</p>
 
-<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches1.PNG" alt="De novo map matches files" /></p>
+<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches1.PNG" alt="De novo map matches files" loading="lazy" /></p>
 
 <p>Catalog_ID (= catalog Stacks_ID) is composed by the <code class="language-plaintext highlighter-rouge">Stack_ID</code> from the “reference” individual, here sample1, but number is different from sample2 <code class="language-plaintext highlighter-rouge">Stack_ID</code>. Thus, in the <code class="language-plaintext highlighter-rouge">catalog.alleles.tsv</code>, the <code class="language-plaintext highlighter-rouge">Stack_ID</code> number 3 corresponds to the <code class="language-plaintext highlighter-rouge">Stack_ID</code> number 16 from sample2!</p>
 
 <p>You can inspect the matches files (you maybe have to change the tsv datatype to a tabular one to correctly display the datasets).</p>
 
-<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches2.png" alt="Male and female matches files" /></p>
+<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches2.png" alt="Male and female matches files" loading="lazy" /></p>
 
 <p>Consider catalog SNPs 27 &amp; 28, on the 302 catalog locus:</p>
 
-<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches_snps.png" alt="De novo map matches considering catalog SNPs" /></p>
+<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches_snps.png" alt="De novo map matches considering catalog SNPs" loading="lazy" /></p>
 
 <p>nd the corresponding catalog haplotypes, 3 on the 4 possible (AA, AT, GT but no GA):</p>
 
-<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches_alleles_haplotypes.png" alt="De novo map matches considering catalog haplotypes" /></p>
+<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches_alleles_haplotypes.png" alt="De novo map matches considering catalog haplotypes" loading="lazy" /></p>
 
 <p>heterozygosity is observed on each parent (one ab, the other ac) and there are 19 genotypes for the 22 individuals.</p>
 
-<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches_markers.png" alt="De novo map macthes: markers" /></p>
+<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches_markers.png" alt="De novo map macthes: markers" loading="lazy" /></p>
 
 <p>We can then see that Stack_ID 330 for female corresponds to the 39 for male:</p>
 
-<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches_alleles_male_female.png" alt="De novo map matches: male and female" /></p>
+<p><img src="../../images/RAD2_Genetic_Map/denovo_map_matches_alleles_male_female.png" alt="De novo map matches: male and female" loading="lazy" /></p>
 
 <h1 id="genotypes-determination">Genotypes determination</h1>
 
@@ -871,7 +861,7 @@ https://zenodo.org/record/1219888/files/progeny_20
     <li>
       <p>The genetic map type (ie F1, F2 (left figure, F1xF1), Double Haploid, Back Cross (F1xF0), Cross Pollination (right figure, F1 or F2 but resulting from the cross of pure homozygous parents))</p>
 
-      <p><img src="../../images/RAD2_Genetic_Map/Genetic_map_F2.png" alt="The genetic map type F2" />    <img src="../../images/RAD2_Genetic_Map/Genetic_map_CrossPollination.png" alt="The genetic map CrossPollination" /></p>
+      <p><img src="../../images/RAD2_Genetic_Map/Genetic_map_F2.png" alt="The genetic map type F2" loading="lazy" />    <img src="../../images/RAD2_Genetic_Map/Genetic_map_CrossPollination.png" alt="The genetic map CrossPollination" loading="lazy" /></p>
     </li>
     <li>
       <p>Genotyping options output file type for input in genetic mapper tools (ie JoinMap, R/qtl, …). Observe that the R/qtl format for an F2 cross type can be an input for MapMaker or Carthagene.</p>
@@ -886,7 +876,7 @@ https://zenodo.org/record/1219888/files/progeny_20
 
   <p>Here is an example of a locus originally marked as homozygous before automatic correction because an allele is supported by less than 5 <span class="notranslate">reads</span>. After correction, this locus is marked as heterozygous.</p>
 
-  <p><img src="../../images/RAD2_Genetic_Map/genotypes_automatic_correction.png" alt="Automatic correction of genotypes" /></p>
+  <p><img src="../../images/RAD2_Genetic_Map/genotypes_automatic_correction.png" alt="Automatic correction of genotypes" loading="lazy" /></p>
 
   <p>You can re-run <strong>Stacks: genotypes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: modifying the number of genotyped progeny to consider a marker and thus be more or less stringent. Compare results.</p>
 
@@ -896,19 +886,19 @@ https://zenodo.org/record/1219888/files/progeny_20
 
 <p>One line by locus, one column by individual (aa, ab, AB if automatic correction applied, bb, bc, …) with observed genotype for each locus:</p>
 
-<p><img src="../../images/RAD2_Genetic_Map/genotypes_tsv.png" alt="Genotypes.tsv file overview" /></p>
+<p><img src="../../images/RAD2_Genetic_Map/genotypes_tsv.png" alt="Genotypes.tsv file overview" loading="lazy" /></p>
 
 <h3 id="genotypestxt-files">Genotypes.txt files</h3>
 
 <p>One line by individual, and for each individual, for each catalog locus, genotype:</p>
 
-<p><img src="../../images/RAD2_Genetic_Map/genotypes_txt.png" alt="Genotypes.txt file overview" /></p>
+<p><img src="../../images/RAD2_Genetic_Map/genotypes_txt.png" alt="Genotypes.txt file overview" loading="lazy" /></p>
 
 <h3 id="haplotypestsv-files">Haplotypes.tsv files</h3>
 
 <p>One line by locus, one column by individual (aa, ab, AB if automatic correction applied, bb, bc, …) with observed genotype for each locus:</p>
 
-<p><img src="../../images/RAD2_Genetic_Map/haplotypes_tsv.png" alt="Haplotypes.tsv file overview" /></p>
+<p><img src="../../images/RAD2_Genetic_Map/haplotypes_tsv.png" alt="Haplotypes.tsv file overview" loading="lazy" /></p>
 
 <blockquote class="question">
   <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -931,100 +921,100 @@ https://zenodo.org/record/1219888/files/progeny_20
 
 <p>In this tutorial, we have analyzed real RAD sequencing data to extract useful information, such as genotypes and haplotypes to generate input files for <span class="notranslate">downstream</span> genetic map creation. This approach can be summarized with the following scheme:</p>
 
-<p><img src="../../images/genetic_map_workflow.PNG" alt="The genetic map tutorial workflow" /></p>
+<p><img src="../../images/genetic_map_workflow.PNG" alt="The genetic map tutorial workflow" loading="lazy" /></p>
 
 
-                    
+                
 
-                    <h1>Frequently Asked Questions</h1>
-                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/ecology/faqs/">FAQ page for the Ecology topic</a> to see if your question is listed there.
-                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
-                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/ecology/faqs/">FAQ page for the Ecology topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
-                    
-                    <h1 data-toc-skip>Useful literature</h1>
-                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/ecology#references">here</a>.</p>
-                    
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/ecology#references">here</a>.</p>
+                
 
-                    
+                
 
-                    
+                
 
-                    <h1>Feedback</h1>
-                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
-                    <div id="feedback-button">
-                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                    </div>
-                    <div id="feedback-form">
-                    </div>
-                    <script type="text/javascript">
-                        (function (window, document) {
-                            function onDocumentReady(fn) {
-                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                    fn();
-                                } else {
-                                    document.addEventListener('DOMContentLoaded', fn);
-                                }
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
                             }
+                        }
 
-                            onDocumentReady(function () {
-                                $("#feedback-button").click(function(evt){
-                                    var e = $(evt.target)
-                                    e.hide();
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
 
-                                    $("#feedback-form").html(`
-                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=RAD-Seq to construct genetic maps (Ecology)">Loading...</iframe>
-                                    `)
-                                })
-                            });
-                        })(window, document);
-                    </script>
-
-
-
-                    <h1>Citing this Tutorial</h1>
-                    <p>
-                        <ol>
-                            <li id="citation-text">Yvan Le Bras, 2021 <b>RAD-Seq to construct genetic maps (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/ecology/tutorials/genetic-map-rad-seq/tutorial.html">https://training.galaxyproject.org/training-material/topics/ecology/tutorials/genetic-map-rad-seq/tutorial.html</a> Online; accessed TODAY
-                            </li>
-                            <li>
-                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
-                            </li>
-                        </ol>
-                    </p>
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=RAD-Seq to construct genetic maps (Ecology)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
 
 
-                    <blockquote class="details">
-                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
-                      <p style="display: none;">
 
-                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Yvan Le Bras, 2021 <b>RAD-Seq to construct genetic maps (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/ecology/tutorials/genetic-map-rad-seq/tutorial.html">https://training.galaxyproject.org/training-material/topics/ecology/tutorials/genetic-map-rad-seq/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{ecology-genetic-map-rad-seq,
-    author = "Yvan Le Bras",
-    title = "RAD-Seq to construct genetic maps (Galaxy Training Materials)",
-    year = "2021",
-    month = "03",
-    day = "12"
-    url = "\url{https://training.galaxyproject.org/training-material/topics/ecology/tutorials/genetic-map-rad-seq/tutorial.html}",
-    note = "[Online; accessed TODAY]"
+author = "Yvan Le Bras",
+title = "RAD-Seq to construct genetic maps (Galaxy Training Materials)",
+year = "2021",
+month = "03",
+day = "12"
+url = "\url{https://training.galaxyproject.org/training-material/topics/ecology/tutorials/genetic-map-rad-seq/tutorial.html}",
+note = "[Online; accessed TODAY]"
 }
 @article{Batut_2018,
-        doi = {10.1016/j.cels.2018.05.012},
-        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
-        year = 2018,
-        month = {jun},
-        publisher = {Elsevier {BV}},
-        volume = {6},
-        number = {6},
-        pages = {752--758.e1},
-        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
-        title = {Community-Driven Data Analysis Training for Biology},
-        journal = {Cell Systems}
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
 }</code>
-                    </pre></div></div>
-                    </p>
-                    </blockquote>
+                </pre></div></div>
+                </p>
+                </blockquote>
 
 
 <script type="text/javascript">
@@ -1034,36 +1024,22 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
-                    
+                
 
-                    
+                
 
-                </div>
             </div>
         </div>
-    </section>
-</div>
-
-
-<footer>
-    <div class="container">
-        <p>
-            This material is the result of a collaborative work. Thanks to the
-            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Yvan Le Bras)!
-        </p>
-        <p>
-            Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/ecology/tutorials/genetic-map-rad-seq/tutorial.md">GitHub</a>.
-        </p>
-        <p>
-    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-</p>
     </div>
-</footer>
+</section>
+<br/>
+<br/>
+<br/>
 
+        </div>
+        
     </body>
     <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>

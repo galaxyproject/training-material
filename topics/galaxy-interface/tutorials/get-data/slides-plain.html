@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Getting data into Galaxy</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="A collection of microtutorials explaining various feature..." />
+        <meta property="og:title" content="Galaxy Training: Getting data into Galaxy" />
+        <meta property="og:description" content="A collection of microtutorials explaining various feature..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/galaxy-interface/faqs/" title="Check our FAQs for the Using Galaxy and Managing your Data topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/galaxy-interface/tutorials/get-data/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/galaxy-interface/tutorials/get-data/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/get-data/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/get-data/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/get-data/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/get-data/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/galaxy-interface/tutorials/get-data/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-interface%2Ftutorials%2Fget-data%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/galaxy-interface/tutorials/get-data/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/galaxy-interface/tutorials/get-data/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/galaxy-interface/tutorials/get-data/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/galaxy-interface/tutorials/get-data/slides.html">View markdown source on GitHub</a>
+	<h1>Getting data into Galaxy</h1>
+		<h2>Contributors</h2>
+		Anne Pajon, Dave Clements, Maria Doyle, Saskia Hiltemann
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>How do I get my data into Galaxy?</p>
+</li>
+		
+		<li><p>How do I get public data into Galaxy?</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 9, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="getting-data-into-galaxy">Getting data into Galaxy</h1>
+
+<p><span>Speaker Notes</span></p>
+
+<p>-&gt; Pressing <strong>P</strong> will toggle presenter mode.</p>
+
+<hr />
+
+<h2 id="many-ways-to-get-data-into-your-workspace">Many ways to get data into your workspace</h2>
+
+<ol>
+  <li>Import using <strong>Get Data</strong> sources e.g. UCSC, SRA</li>
+  <li>Import from a Galaxy <strong>Data Library</strong></li>
+  <li>Import using <strong>Upload File</strong>
+    <ul>
+      <li>Import from your computer</li>
+      <li>Directly enter text</li>
+      <li>Import from a URL</li>
+      <li>Import using FTP</li>
+      <li>Import directly into Collection</li>
+      <li>Import using Rule Builder</li>
+    </ul>
+  </li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>To do analysis in Galaxy you first need data to work on.</li>
+  <li>There are many ways and sources for getting data into your history.</li>
+  <li>This tutorial will cover all of the techniques listed here.</li>
+</ul>
+
+<hr />
+
+<h3 id="best-method-depends-on-where-the-data-is-and-how-big-it-is">Best method depends on where the data is, and how big it is</h3>
+
+<p><img src="../../images/get_data_upload_logic.png" alt="flowchart for getting data into galaxy. SRA datasets should use the upload tool, if you have many or big datasets use FTP, if they're from the web use the URL upload." loading="lazy" /></p>
+
+<p>.footnote[<a href="https://galaxyproject.org/tutorials/upload/">Source: Galaxy Community Hub</a>]</p>
+
+<hr />
+
+<h1 id="1-the-get-data-toolbox-section">1. The <strong><em>Get Data</em></strong> toolbox section</h1>
+
+<hr />
+
+<ul>
+  <li><em>Click</em> on the <strong>Get Data</strong> toolbox in the toolbox (the left panel)</li>
+</ul>
+
+<p><img src="../../images/get_data_boxed.png" alt="Click on Get Data to expand it" loading="lazy" /></p>
+
+<hr />
+
+<p>.pull-right[.image-75[<img src="../../images/get_data_expanded.png" alt="A typical list of data sources" loading="lazy" />]]</p>
+
+<ul>
+  <li>Expands to show data sources
+    <ul>
+      <li>E.g. UCSC, NCBI, Uniprot, ..</li>
+      <li>The specific data sources available on your Galaxy instance are determine by the server’s administrator</li>
+    </ul>
+  </li>
+  <li>All of these data sources can bring datasets (files) into your Galaxy workspace (history)</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>This shows the list of data sources that were available on usegalaxy.org in mid 2017.</p>
+
+<hr />
+
+<p>Two large data sources you can access through Galaxy are UCSC and SRA</p>
+
+<p>.pull-right[<img src="../../images/get_data_ucsc.png" alt="Screenshot of toolbox with ucsc entered in search" loading="lazy" />]
+.pull-left[<img src="../../images/get_data_sra.png" alt="galaxy toolbox with sra entered in search box." loading="lazy" />]</p>
+
+<hr />
+
+<h1 id="2-import-from-shared-data-library">2. Import from Shared Data Library</h1>
+
+<hr />
+
+<p>.pull-left[</p>
+
+<ul>
+  <li>
+    <p>Top menu bar -&gt; Shared Data -&gt; Data Libraries</p>
+  </li>
+  <li>
+    <p>Configured by a Galaxy Administator</p>
+  </li>
+  <li>
+    <p>Can be imported directly into your history</p>
+  </li>
+  <li>
+    <p>Example: all GTN tutorial data]</p>
+  </li>
+</ul>
+
+<p>.pull-right[<img src="../../images/get_data_data_libraries.png" alt="galaxy top menu dropdown shared data, showing Data Libraries" loading="lazy" />]</p>
+
+<hr />
+
+<p>You can select the files you want and send to History as datasets or collection</p>
+
+<p>.image-75[<img src="../../images/get_data_import_library.png" alt="data library screenshot with a number of datasets selected and export to history menu open" loading="lazy" />]</p>
+
+<hr />
+
+<h1 id="3-upload-from-your-computer">3. Upload from your computer</h1>
+
+<hr />
+
+<p>.image-50[<img src="../../images/upload_button.png" alt="click on upload button" loading="lazy" />]</p>
+
+<p><img src="../../images/upload_file_form_empty.png" alt="Upload file form" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The <strong>Upload File</strong> data source can import data:
+    <ul>
+      <li>from your computer</li>
+      <li>by directly entering text</li>
+      <li>using a URL</li>
+      <li>and via FTP</li>
+    </ul>
+  </li>
+</ul>
+
+<p>This is probably the most commonly used tool for bringing data into Galaxy, and it is installed on almost every Galaxy server.</p>
+
+<hr />
+
+<h1 id="choose-files">Choose files</h1>
+
+<p><img src="../../images/upload_file_form_empty_local_choices.png" alt="Options for importing files from your laptop" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Drag and drop is supported</li>
+  <li>as is the standard file selection using your browser.</li>
+</ul>
+
+<hr />
+
+<h1 id="set-metadata">Set Metadata</h1>
+
+<ul>
+  <li><strong>Datatype</strong> (e.g. FastQ, VCF, BAM, tabular, ..)
+    <ul>
+      <li>Galaxy will autodetect by default (sometimes guesses wrong)</li>
+    </ul>
+  </li>
+  <li><strong>Genome Build</strong> (e.g. hg19, mm9, ..)
+    <ul>
+      <li>must be set manually (can be done later as well)</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="../../images/upload_file_file_list.png" alt="upload dialog from galaxy with a number of files queued." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Here we have imported 13 files
+    <ul>
+      <li>one with genome annotation in GTF format</li>
+      <li>12 paired end read files from an RNA-Seq experiment*</li>
+      <li>
+        <p>could import them now and have Galaxy guess at their file types.</p>
+      </li>
+      <li>From UC Davis Training Material.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<ul>
+  <li>Can be set for all files at once:</li>
+</ul>
+
+<p><img src="../../images/upload_file_set_all_datatype.png" alt="Set datatype for all imported datasets" loading="lazy" /></p>
+
+<hr />
+
+<ul>
+  <li>Or per file:</li>
+</ul>
+
+<p><img src="../../images/upload_file_set_individual_file_type.png" alt="Manually set datatype for one dataset" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Here we are manually setting the first dataset’s datatype to GTF, a common genome annotation format.</li>
+</ul>
+
+<hr />
+
+<h1 id="start-upload-process">Start upload process:</h1>
+
+<ul>
+  <li>Once everything is ready, click the <strong>Start</strong> button</li>
+</ul>
+
+<p><img src="../../images/upload_file_ready.png" alt="Ready to upload files. Click on start" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Data transfer does not start until you click Start.</li>
+</ul>
+
+<hr />
+<p>You can then close the form</p>
+
+<p><img src="../../images/upload_file_in_progress.png" alt="Ready to upload files. Click on start" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<hr />
+
+<p>All the items will appear in your history</p>
+
+<p><img src="../../images/files_uploaded_into_history.png" alt="Files are loaded into your current history." loading="lazy" /></p>
+
+<p>and are ready to use when green.</p>
+
+<hr />
+
+<h2 id="directly-enter-text">Directly enter text</h2>
+
+<hr />
+
+<ul>
+  <li>Sometimes it’s useful to file content directly.
+    <ul>
+      <li>only works if your dataset is tiny</li>
+      <li>choose <strong>Paste/Fetch data</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="../../images/upload_file_form_empty_paste.png" alt="Select Paste/Fetch data" loading="lazy" /></p>
+
+<hr />
+
+<p>Enter the data by typing (or pasting) it in the input box:</p>
+
+<p><img src="../../images/upload_paste_direct.png" alt="Select Paste/Fetch data" loading="lazy" /></p>
+
+<p>You can also set the datatype and build.
+<em>Click</em> <strong>Start</strong>, and then <strong>Close</strong>, and the new item shows up as <strong>Pasted Entry</strong> in your history.</p>
+
+<hr />
+
+<h2 id="import-using-url">Import using URL</h2>
+
+<hr />
+
+<p>The data might already be available on a web server somewhere. To avoid downloading data
+to your computer and uploading to Galaxy in two steps, you can instruct Galaxy to
+directly fetch the data from a given URL.</p>
+
+<p><img src="../../images/upload_file_form_empty_paste.png" alt="Select Paste/Fetch data" loading="lazy" /></p>
+
+<p>Select <strong>Paste/Fetch data</strong></p>
+
+<hr />
+
+<p>Enter the URLs (one per line) into the input box:</p>
+
+<p><img src="../../images/fetch_from_url.png" alt="Select Paste/Fetch data" loading="lazy" /></p>
+
+<p><em>Click</em> <strong>Start</strong>, and then <strong>Close</strong>, and the new items show up in your history with the URL as their name.</p>
+
+<hr />
+
+<h1 id="import-using-ftp">Import using FTP</h1>
+
+<hr />
+
+<ul>
+  <li>Why use FTP?
+    <ul>
+      <li>Older Galaxies did not support uploading files larger than 2GB in size</li>
+      <li>Many people are very comfortable using FTP to upload large datasets and you can sometimes resume interrupted uploads.</li>
+    </ul>
+  </li>
+  <li>How to use FTP
+    <ul>
+      <li>The Galaxy server’s administrator must have <a href="https://galaxyproject.org/admin/config/upload-via-ftp/">enabled FTP</a> on the server</li>
+      <li>You will need to create an account on that Galaxy Server</li>
+      <li>You will need to install FTP software, or to run FTP from the shell</li>
+      <li>See https://galaxyproject.org/ftp-upload/</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="make-sure-you-have-an-ftp-client-installed">Make sure you have an FTP client installed</h2>
+
+<p>.pull-right[.image-25[<img src="../../images/FileZilla_logo.png" alt="FileZilla" loading="lazy" />]]</p>
+
+<ul>
+  <li><a href="https://filezilla-project.org/">FileZilla</a> is a free FTP client that is available on <a href="https://filezilla-project.org/download.php?platform=win64">Windows</a>, <a href="https://filezilla-project.org/download.php?platform=osx">MacOS</a>, and <a href="https://filezilla-project.org/download.php?platform=linux">Linux</a></li>
+  <li>There are many other options</li>
+  <li>If you don’t already have an FTP client, download and install FileZilla.</li>
+</ul>
+
+<hr />
+
+<h2 id="establish-ftp-connection-to-your-galaxy-server">Establish FTP connection to your Galaxy server</h2>
+
+<ul>
+  <li>Provide
+    <ul>
+      <li>the instance’s FTP server name (e.g. usegalaxy.org, ftp.usegalaxy.eu)</li>
+      <li>your full <strong>username</strong> (usually an email address) and <strong>password</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="../../images/ftp_client_connect.png" alt="FTP Connection Params" loading="lazy" /></p>
+
+<hr />
+
+<p><img src="../../images/ftp_client_connected.png" alt="Successfully connect" loading="lazy" /></p>
+
+<p>Successfully connected</p>
+
+<hr />
+
+<p><img src="../../images/ftp_client_upload.png" alt="Navigate to the files you want to transfer" loading="lazy" /></p>
+
+<p>Right click on the files and upload them.</p>
+
+<hr />
+
+<p><img src="../../images/ftp_client_transferring.png" alt="FTP transfer in progress" loading="lazy" /></p>
+
+<p>FTP Transfer in progress…</p>
+
+<hr />
+
+<p><img src="../../images/ftp_client_transferred.png" alt="FTP transfer complete" loading="lazy" /></p>
+
+<p>… and transfer complete.</p>
+
+<hr />
+
+<h1 id="where-did-my-files-go">Where did my files go?</h1>
+
+<ul>
+  <li>File Upload menu -&gt; <strong>Choose FTP files</strong></li>
+</ul>
+
+<p><img src="../../images/upload_ftp_import.png" alt="choose FTP files" loading="lazy" /></p>
+
+<hr />
+
+<ul>
+  <li>Select files to import into your history</li>
+  <li>Click <strong>Start</strong></li>
+</ul>
+
+<p><img src="../../images/upload_ftp_import2.png" alt="choose FTP files" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>As you can see, this dialog gives connection settings too</p>
+
+<hr />
+
+<h1 id="import-directly-into-collection">Import directly into Collection</h1>
+
+<hr />
+
+<ul>
+  <li>Select <strong>Collection</strong> tab at top of upload menu</li>
+  <li>Add files as before (upload from computer, paste/fetch, FTP)</li>
+</ul>
+
+<p><img src="../../images/get_data_direct_collection1.png" alt="Direct collection Start" loading="lazy" /></p>
+
+<hr />
+
+<ul>
+  <li>Choose collection type (at bottom)</li>
+  <li>Set metadata (file type, genome build)</li>
+  <li>Click “Build”</li>
+</ul>
+
+<p><img src="../../images/get_data_direct_collection2.png" alt="Direct collection Build" loading="lazy" /></p>
+
+<hr />
+
+<ul>
+  <li>Name your collection</li>
+  <li>Click <strong>Create</strong> button</li>
+</ul>
+
+<p><img src="../../images/get_data_direct_collection3.png" alt="Direct collection Name" loading="lazy" /></p>
+
+<hr />
+
+<ul>
+  <li>Collection is now imported in your history</li>
+  <li>Click on it to expand it and view all files in collection</li>
+</ul>
+
+<p><img src="../../images/get_data_direct_collection4.png" alt="Direct collection History" loading="lazy" /></p>
+
+<hr />
+
+<h1 id="import-using-rule-based-uploader">Import using Rule Based uploader</h1>
+
+<hr />
+
+<ul>
+  <li>When you want to import many files from URLs or Accession IDs directly into collection(s)</li>
+  <li>Supports advanced “rules” for creating collections from sample sheets</li>
+  <li>Click <strong>Rule-based</strong> tab at top of file upload window</li>
+</ul>
+
+<p><img src="../../images/get_data_rule_uploader.png" alt="Rule Uploader" loading="lazy" /></p>
+
+<hr />
+
+<h1 id="import-using-rule-based-uploader-1">Import using Rule Based uploader</h1>
+
+<p>Learn how to use it in the dedicated <a href="https://galaxyproject.github.io//training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html">Rule Based Uploader tutorial</a></p>
+
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

@@ -1,0 +1,796 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Gearing towards production</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Gearing towards production" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/production/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/production/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/production/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/production/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/production/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/production/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/production/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fproduction%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/admin/tutorials/production/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/admin/tutorials/production/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/admin/tutorials/production/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/admin/tutorials/production/slides.html">View markdown source on GitHub</a>
+	<h1>Gearing towards production</h1>
+		<h2>Contributors</h2>
+		Nate Coraor, Daniel Blankenberg, Abdulrahman Azab, Martin Čech
+
+		
+
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 6, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="production-server">Production server</h1>
+
+<ul>
+  <li>Used by multiple people</li>
+  <li>Designed to be resilient, scalable</li>
+  <li>Designed to be easily managed</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>A production server is a server ready for any number of users.</li>
+  <li>It is designed to be scalable, easy to manage, and resilient in the face of many users.</li>
+  <li>Running a production server is not difficult, thanks to ansible.</li>
+</ul>
+
+<hr />
+
+<h1 id="configuration-options">Configuration Options</h1>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>We will now cover many of the configuration options which are necessary for production.</li>
+</ul>
+
+<hr />
+<p>class: reduce90</p>
+
+<h1 id="configuring-uwsgi">Configuring uWSGI</h1>
+
+<p>Important options in the <code class="language-plaintext highlighter-rouge">uwsgi</code> section of <code class="language-plaintext highlighter-rouge">galaxy.yml</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>option</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">http</code></td>
+      <td>port and IP on which to listen for HTTP requests, <code class="language-plaintext highlighter-rouge">:8080</code> for port <code class="language-plaintext highlighter-rouge">8080</code> on all network interfaces. <strong>For a production server, you should use <code class="language-plaintext highlighter-rouge">socket:</code> and a proxy server</strong>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">socket</code></td>
+      <td>port and IP on which to listen for uWSGI protocol requests, <code class="language-plaintext highlighter-rouge">127.0.0.1:8000</code> for port <code class="language-plaintext highlighter-rouge">8000</code> on localhost.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">processes</code></td>
+      <td>number of uWSGI <em>web workers</em>.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">threads</code></td>
+      <td>number of threads for each web worker.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">offload-threads</code></td>
+      <td>number of threads for internal routing requests, 1-2 is sufficient.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">master</code></td>
+      <td>use uWSGI master process manager, defaults to <code class="language-plaintext highlighter-rouge">false</code> for dev compatibility but should be <code class="language-plaintext highlighter-rouge">true</code> in production.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">mule-reload-mercy</code></td>
+      <td>time to gracefully wait for mule shutdown, set &gt; <code class="language-plaintext highlighter-rouge">monitor_thread_join_timeout</code> galaxy option.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Production servers should use socket instead of http in the uwsgi listen section.</li>
+  <li>This is because socket means using the uwsgi protocol which is more efficient.</li>
+  <li>Processes and threads can be set, but the defaults are usually good.</li>
+</ul>
+
+<hr />
+<h1 id="securing-your-object-ids">Securing your Object IDs</h1>
+
+<ul>
+  <li>User facing object IDs
+    <ul>
+      <li>Galaxy uses the Blowfish cipher to obscure integer IDs.</li>
+      <li>Prevents guessing the hashes for various Galaxy objects.</li>
+      <li><code class="language-plaintext highlighter-rouge">id_secret</code> is used as the Blowfish key.</li>
+      <li>Changing the default <code class="language-plaintext highlighter-rouge">id_secret</code> is a must.</li>
+      <li>Changing <code class="language-plaintext highlighter-rouge">id_secret</code> will change &amp; invalidate existing URLs (e.g. datasets, histories, workflows, etc).</li>
+    </ul>
+  </li>
+  <li>Setting <code class="language-plaintext highlighter-rouge">new_user_dataset_access_role_default_private</code> ensures that even guessable IDs are still private</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>An extremely important setting to change is the id secret.</li>
+  <li>Galaxy generates a reversible hash for every numeric ID.</li>
+  <li>You must change this, or an attacker can guess IDs and see potentially private data.</li>
+  <li>There is an additional variable, new user dataset access role default private, which can be set.</li>
+  <li>Then, even if IDs are guessed, the data remains private.</li>
+</ul>
+
+<hr />
+<h1 id="customizing-your-brand">Customizing your “Brand”</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>option</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">brand</code></td>
+      <td>appends “/{brand}” to the “Galaxy” text in the masthead.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">logo_url</code></td>
+      <td>URL linked by the “Galaxy/brand” text.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">helpsite_url</code></td>
+      <td>URL linked by the “Galaxy Help” link in the “Help” menu.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">wiki_url</code></td>
+      <td>URL linked by the “Wiki” link in the “Help” menu.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">support_url</code></td>
+      <td>URL linked by the “Support” link in the “Help” menu.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">citation_url</code></td>
+      <td>URL linked by the “How to Cite Galaxy” link in the “Help” menu.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">search_url</code></td>
+      <td>URL linked by the “Search” link in the “Help” menu.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">mailing_lists_url</code></td>
+      <td>URL linked by the “Mailing Lists” link in the “Help” menu.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">screencasts_url</code></td>
+      <td>URL linked by the “Videos” link in the “Help” menu.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">terms_url</code></td>
+      <td>URL linked by the “Terms and Conditions” link on the registration form.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">qa_url</code></td>
+      <td>URL linked by the “Galaxy Q&amp;A” link in the “Help” menu.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Brand can be set to denote the identity of your server.</li>
+  <li>Many URLs which appear in the top menu can be modified.</li>
+</ul>
+
+<hr />
+<h1 id="adding-a-notice-banner">Adding a Notice Banner</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>option</th>
+      <th>sample value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">message_box_visible</code></td>
+      <td><code class="language-plaintext highlighter-rouge">true</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">message_box_content</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Downtime scheduled Sunday at Noon to one.</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">message_box_class</code></td>
+      <td><code class="language-plaintext highlighter-rouge">warning</code> (also: <code class="language-plaintext highlighter-rouge">error</code>, <code class="language-plaintext highlighter-rouge">info</code>)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Sometimes you wish to broadcast a message to your users, for example when you plan downtime.</li>
+  <li>The message box allows doing this.</li>
+</ul>
+
+<hr />
+<h1 id="update-the-welcome-page">Update the welcome page</h1>
+
+<p>Welcome page is <code class="language-plaintext highlighter-rouge">$GALAXY_ROOT/static/welcome.html</code> and is the first thing that
+users see. It is a good idea to extend it with things like:</p>
+<ul>
+  <li>Server or Group News</li>
+  <li>Downtimes/Maintenance periods</li>
+  <li>New tools</li>
+  <li>Publications relating to your Galaxy</li>
+  <li>Current server usage / jobs running (e.g. https://usegalaxy.eu/)</li>
+</ul>
+
+<p>.left[No restarting is necessary.]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Updating the welcome page is important as all users see this page when accessing the server.</li>
+  <li>This can be a great way to communicate lower-priority information to users.</li>
+  <li>The European Galaxy server uses it to show usage graphs which users like.</li>
+</ul>
+
+<hr />
+<h1 id="client-browser-security">Client Browser Security</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>option</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sanitize_all_html</code></td>
+      <td>by default, Galaxy sanitizes all “text/html” tool outputs. Setting to false potentially exposes users to XSS attacks.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sanitize_whitelist_file</code></td>
+      <td>manually override html sanitization for listed tools. Can set in admin interface.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">serve_xss_vulnerable_mimetypes</code></td>
+      <td>certain filetypes (e.g. SVG) can contain JS that is vulnerable to XSS (Cross-site scripting) and are served as “plain/text” by default.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">allowed_origin_hostnames</code></td>
+      <td>Returns Access-Control-Allow-Origin response header that matches the Origin header of the request.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Some tools produce HTML or SVG outputs.</li>
+  <li>By default, galaxy sanitizes these files, as malicious ones could be used to attack users.</li>
+  <li>If there are some tools you trust like fastqc, you might want to whitelist them.</li>
+</ul>
+
+<hr />
+<h1 id="debugging">Debugging</h1>
+
+<p>These should never be enabled on a public site.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>option</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">debug</code></td>
+      <td>enable debug options, preserves cluster job data on disk (but use <code class="language-plaintext highlighter-rouge">cleanup_job</code> for this).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">use_profile</code></td>
+      <td>Python profiler on requests.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">use_printdebug</code></td>
+      <td>Anything “print”ed within a Galaxy Web thread is exposed to user.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">use_interactive</code></td>
+      <td>Enable live debugging in your browser.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>There are debugging options if you need, but none of these should be enabled in production.</li>
+</ul>
+
+<hr />
+<h1 id="configuring-ftp">Configuring FTP</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>option</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ftp_upload_dir</code></td>
+      <td>Directory containing subdirectories matching users’ identifier (defaults to e-mail).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ftp_upload_site</code></td>
+      <td>Hostname of your FTP server provided to users in the help text. Must set to enable FTP import.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ftp_upload_dir_identifier</code></td>
+      <td>User attribute for subdirectory naming. ‘email’ (${user.email}) is default, but ‘id’ or ‘username’ are also common.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ftp_upload_dir_template</code></td>
+      <td>Python string template used to determine a users FTP upload directory (${ftp_upload_dir}/${ftp_upload_dir_identifier}).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ftp_upload_purge</code></td>
+      <td>Delete files after FTP import (true).</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>A common request is how should users upload large datasets.</li>
+  <li>If you setup an FTP server, this can be integrated with Galaxy.</li>
+  <li>Users can see their own FTP upload directory in Galaxy, if you configure it.</li>
+</ul>
+
+<hr />
+<p>class: reduce90</p>
+
+<h1 id="configuring-data-library-path-uploads">Configuring Data Library Path Uploads</h1>
+
+<p>Admin options</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>option</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">library_import_dir</code></td>
+      <td>Browse and upload files from configured directory.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">allow_path_paste</code></td>
+      <td>Allow admins to paste any path to upload (e.g. <code class="language-plaintext highlighter-rouge">file://</code>), applies also to the general ‘upload tool’.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>User options</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>option</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">user_library_import_dir</code></td>
+      <td>Root directory containing sub-directories named by user emails. A nifty setup is that the value is the same as for <code class="language-plaintext highlighter-rouge">ftp_upload_dir</code> allowing users to upload files via FTP and then import them either in history or data library.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">user_library_import_dir_auto_creation</code></td>
+      <td>Create user’s folder upon login.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">user_library_import_symlink_whitelist</code></td>
+      <td>Directories that users are allowed to symlink to.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">user_library_import_check_permissions</code></td>
+      <td>If Galaxy usernames match system usernames enable this to use UNIX permissions.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Library management is a common problem for servers.</li>
+  <li>How to manage the data and who can manage the data.</li>
+  <li>There are several options in galaxy yml to allow users to manage libraries.</li>
+</ul>
+
+<hr />
+<p>class: reduce90</p>
+
+<h1 id="configuring-smtp">Configuring SMTP</h1>
+
+<p>SMTP server</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>option</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">smtp_server</code></td>
+      <td>host:port of SMTP server to use. Uses STARTTLS, but will fallback.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">smtp_username</code></td>
+      <td>Username for SMTP server.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">smtp_password</code></td>
+      <td>Password for SMTP server. STARTTLS recommended on SMTP server.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">smtp_ssl</code></td>
+      <td>If SMTP server requires SSL from connection start, set to true.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Addresses</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>option</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">error_email_to</code></td>
+      <td>Address to send user error reports to.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">email_from</code></td>
+      <td>Return address used in automatic user notifications. (<code class="language-plaintext highlighter-rouge">&lt;galaxy-no-reply@HOSTNAME&gt;</code>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">mailing_join_addr</code></td>
+      <td>Mailing list to subscribe users to during registration.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Setting up an SMTP server is useful.</li>
+  <li>Emails can be sent to users if they forget their passwords.</li>
+  <li>You can require email validation to ensure users provide valid emails.</li>
+</ul>
+
+<hr />
+<h1 id="galaxyyml-full-options">galaxy.yml full options</h1>
+
+<p>a.k.a. Everything You Always Wanted to Know About <code class="language-plaintext highlighter-rouge">galaxy.yml</code></p>
+<ul>
+  <li><a href="https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/webapps/galaxy/config_schema.yml">config schema</a></li>
+  <li><a href="https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/config/sample/galaxy.yml.sample">config sample</a></li>
+  <li><a href="https://docs.galaxyproject.org/en/master/admin/config.html">config docs</a></li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Everything covered in this slideset is also in the galaxy yaml file.</li>
+  <li>You can find even more options to configure there.</li>
+</ul>
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+
+<img src="/training-material/assets/images/gat.png" alt="page logo" style="height: 100px;"/>
+
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

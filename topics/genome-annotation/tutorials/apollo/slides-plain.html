@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Refining Genome Annotations with Apollo</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Genome annotation is a multi-level process that includes ..." />
+        <meta property="og:title" content="Galaxy Training: Refining Genome Annotations with Apollo" />
+        <meta property="og:description" content="Genome annotation is a multi-level process that includes ..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/genome-annotation/faqs/" title="Check our FAQs for the Genome Annotation topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/genome-annotation/tutorials/apollo/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/genome-annotation/tutorials/apollo/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/apollo/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/apollo/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/apollo/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/apollo/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/apollo/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fapollo%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/genome-annotation/tutorials/apollo/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/genome-annotation/tutorials/apollo/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/genome-annotation/tutorials/apollo/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/genome-annotation/tutorials/apollo/slides.html">View markdown source on GitHub</a>
+	<h1>Refining Genome Annotations with Apollo</h1>
+		<h2>Contributors</h2>
+		Anthony Bretaudeau, Helena Rasche, Nathan Dunn, Mateo Boudet
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>How to visualize your genome after automated annotations have been performed?</p>
+</li>
+		
+		<li><p>How to manually annotate genome after automated annotations have been performed?</p>
+</li>
+		
+		<li><p>How to evaluate and visualize annotated genomic features?</p>
+</li>
+		
+		<li><p>How do I collaborate when doing genome annotation?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Load a genome into Galaxy</p>
+</li>
+		
+		<li><p>View annotations in JBrowse</p>
+</li>
+		
+		<li><p>Learn how to load JBrowse data into Apollo</p>
+</li>
+		
+		<li><p>Learn how to manually refine genome annotations within Apollo</p>
+</li>
+		
+		<li><p>Export refined genome annotations</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 4, 2021 </div>
+
+	<hr />
+
+
+	<h3 id="genome-annotation">Genome annotation</h3>
+
+<ul>
+  <li>
+    <p>Classifies and describes parts of the genome sequence</p>
+  </li>
+  <li>
+    <p>Focusing on genes: their positions, names and functions</p>
+  </li>
+  <li>
+    <p>Automatic methods to annotate a newly sequenced and assembled genome</p>
+
+    <ul>
+      <li>Prokaryotes: <a href="/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.html">Prokka</a>, Augustus</li>
+      <li>Eukaryotes: <a href="/training-material/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html">Maker</a>, Braker2, Augustus</li>
+    </ul>
+  </li>
+</ul>
+
+<p>.image-50[<img src="../../images/intro-structural-annotation.png" alt="JBrowse screenshot showing several genes aligned along a genome" loading="lazy" />]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Annotating a genome means positioning features along the sequence of a genome.</li>
+  <li>Here we focus on genes.</li>
+  <li>We are interested in their positions, and functional annotation like their name of their function.</li>
+  <li>Many software tools and pipelines exist to automatically perform the annotation of a new genome sequence.</li>
+  <li>For example Prokka or Maker are widely used, and tutorials are available on the GTN to learn how to use them.</li>
+</ul>
+
+<hr />
+
+<h3 id="automatic-annotations-are-not-perfect">Automatic annotations are not perfect</h3>
+
+<p>.pull-left[</p>
+<ul>
+  <li>
+    <p>Assembly errors can cause fragmented annotations</p>
+  </li>
+  <li>
+    <p>Limited and/or noisy evidence coverage makes precise identification difficult
+]</p>
+  </li>
+</ul>
+
+<p>.pull-right[.image-40[<img src="../../images/apollo/rnaseq_cov.png" alt="Apollo screenshot showing how RNASeq reads align mostly within some exons limits, but not perfectly" loading="lazy" />]]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Unfortunately, automatic annotations are rarely perfect.</li>
+  <li>Assembly errors can cause fragmented annotations.</li>
+  <li>Annotation tools have difficulties annotating genes when evidences like RNASeq are lacking or too noisy.</li>
+</ul>
+
+<hr />
+
+<h3 id="manual-curation-refines-genome-annotations">Manual curation refines genome annotations</h3>
+
+<ul>
+  <li>
+    <p>Make use of the researcher’s expertise</p>
+  </li>
+  <li>
+    <p>Include additional analysis results</p>
+  </li>
+  <li>
+    <p>Integrate all underlying evidence</p>
+  </li>
+  <li>
+    <p>A Human finds problems algorithms can’t</p>
+  </li>
+</ul>
+
+<p>.pull-left[.image-90[<img src="../../images/apollo/apollo_workflow.png" alt="Schema showing how automated annotation, experimental evidences (cDNAs, HMM domain searches, RNASeq, similarity with other species), and human analysis are used by Apollo to manually curate an annotation" loading="lazy" />]]</p>
+
+<p>.pull-right[.image-40[<img src="../../images/apollo/rnaseq_cov.png" alt="Apollo screenshot showing how RNASeq reads align mostly within some exons limits, but not perfectly" loading="lazy" />]]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Performing a manual curation step after automatic annotation allows to improve annotation quality.</li>
+  <li>It is a way to make use of a researcher’s expertise, and to integrate more knowledge to improve gene structures and functional annotation.</li>
+</ul>
+
+<hr />
+
+<h3 id="apollo">Apollo</h3>
+
+<p>“Google Docs for Genome Annotation”</p>
+
+<p>.image-50[<img src="../../images/apollo/ui.png" alt="Screenshot of Apollo in Galaxy, apollo takes up most of the space in the center iframe with the history shown on the right." loading="lazy" />]</p>
+
+<p>Collaborative web application to edit annotation</p>
+
+<p>Both structural <em>and</em> functional annotation</p>
+
+<p>Based on JBrowse: JBrowse is for visualising only, Apollo allows to edit</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Apollo is a web application specifically designed for the manual curation of annotations.</li>
+  <li>You can see Apollo as the “Google Docs” of annotation.</li>
+  <li>It is a multi-user, real time, collaborative environment.</li>
+  <li>Users can easily change the structure of genes, and add functional annotation like gene names of Gene Ontology terms.</li>
+  <li>Is is based on JBrowse.</li>
+  <li>JBrowse is for visualising genomes, while Apollo adds the editing capabilities.</li>
+</ul>
+
+<hr />
+
+<h3 id="apollo-1">Apollo</h3>
+
+<ul>
+  <li>
+    <p>Modify gene structures (based on evidence tracks)</p>
+  </li>
+  <li>
+    <p>Add functional annotation</p>
+  </li>
+</ul>
+
+<p>.pull-left[.image-90[<img src="../../images/apollo/exon_edit.gif" alt="Animation showing how the limit of an exon can be changed within Apollo by a simple drag-and-drop" loading="lazy" />]]
+.pull-right[.image-90[<img src="../../images/apollo/gene_details.png" alt="Screenshot of the Apollo form allowing to edit functional annotation" loading="lazy" />]]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Within Apollo, you can easily change the structure of genes, based on evidence tracks.</li>
+  <li>Apollo offers an interactive interface to help you add functional annotation.</li>
+</ul>
+
+<hr />
+
+<h3 id="apollo-2">Apollo</h3>
+
+<p>Multi user environment: users can login, and make/see changes in realtime</p>
+
+<p>Full history of changes, reverting is possible</p>
+
+<p><img src="../../images/apollo/history.png" alt="Screenshot of the history panel, with a list of actions and possibility to revert" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Apollo is a multi-user environment, which means multiple users can login at the same time, make changes, and see changes of other users in real time.</li>
+  <li>Apollo keep track of every action performed on each gene in a history. You can revert any change at any time.</li>
+</ul>
+
+<hr />
+
+<h3 id="apollo-in-galaxy">Apollo in Galaxy</h3>
+
+<p>Integrate Apollo in your whole analysis project in Galaxy</p>
+
+<ol>
+  <li>Run assembly</li>
+  <li>Align evidences along the genome (RNASeq, CDS, proteins)</li>
+  <li>Run automatic annotation pipeline</li>
+  <li>Create a JBrowse instance</li>
+  <li>Load the JBrowse instance into Apollo</li>
+  <li>Use Apollo to manually curate annotation with collaborators</li>
+  <li>Export back the curated annotation into Galaxy</li>
+  <li>Continue analysing in Galaxy</li>
+</ol>
+
+<p>Available on <a href="https://usegalaxy.eu">https://usegalaxy.eu</a></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Apollo is now tightly integrated with Galaxy, which allow to integrate the manual curation process in a complete Galaxy-based analysis workflow.</li>
+  <li>Within Galaxy, you can start by assembling a new genome, then aligning as many evidence tracks as possible (like RNASeq data).</li>
+  <li>You can then continue with an automatic annotation step, with Prokka or Maker for example.</li>
+  <li>Then you can generate a JBrowse instance representing all the data you have generated, and load it into Apollo.</li>
+  <li>Apollo let’s you perform the manual curation, in collaboration with any other colleague you invite to help you.</li>
+  <li>Finally when you are satisfied with your changes, you can export them to your Galaxy history, and continue other analyses.</li>
+  <li>At any time later you can come back to Apollo to continue improving the annotation, based on new experiment results.</li>
+</ul>
+
+<hr />
+
+<h3 id="apollo-in-galaxy-collaborating">Apollo in Galaxy: collaborating</h3>
+
+<p>Invite any other Galaxy user to your curation project</p>
+
+<p><img src="../../images/apollo/perm_home.png" alt="Screenshot of the dialog allowing to share the access to other users" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>By default you are the only one having access to genomes you load into Apollo.</li>
+  <li>A specific module of the Apollo-Galaxy bridge allows you to open the access to a genome to any other Galaxy user.</li>
+</ul>
+
+<hr />
+
+<h3 id="hands_on-hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands on!</h3>
+
+<p>Time to follow the <a href="/training-material/topics/genome-annotation/tutorials/apollo/tutorial.html">Apollo tutorial</a>!</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>You can now follow the Apollo tutorial to learn how to use it in real life.</li>
+</ul>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Apollo is the Google Docs of the genome annotation world, real-time collaborative genome annotation.</li>
+
+<li>Apollo allows a group to view and manually refine predicted genome annotations</li>
+
+<li>Use Apollo to edit annotations within your group.</li>
+
+<li>Export manual annotations as GFF3.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

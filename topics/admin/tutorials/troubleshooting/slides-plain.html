@@ -1,0 +1,1254 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Troubleshooting</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Galaxy Troubleshooting" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/troubleshooting/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/troubleshooting/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/troubleshooting/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/troubleshooting/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/troubleshooting/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/troubleshooting/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/troubleshooting/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Ftroubleshooting%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/admin/tutorials/troubleshooting/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/admin/tutorials/troubleshooting/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/admin/tutorials/troubleshooting/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/admin/tutorials/troubleshooting/slides.html">View markdown source on GitHub</a>
+	<h1>Galaxy Troubleshooting</h1>
+		<h2>Contributors</h2>
+		Martin Čech, Nate Coraor
+
+		
+
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 6, 2021 </div>
+
+	<hr />
+
+
+	<p>In system administration…</p>
+<h1 id="everything-always-goes-wrong">Everything always goes wrong</h1>
+
+<hr />
+<h1 id="when-things-go-wrong-where-do-you-begin">When things go wrong, where do you begin?</h1>
+
+<p>–</p>
+
+<h2 id="logs">LOGS</h2>
+
+<p>–</p>
+
+<p>.left[Check <strong>all</strong> the logs]</p>
+<ul>
+  <li>uWSGI log</li>
+  <li>handler logs (if not all-in-one)</li>
+  <li>Pulsar logs</li>
+  <li>nginx error and access logs</li>
+  <li>syslog/messages</li>
+  <li>authlog</li>
+  <li>browser console log</li>
+</ul>
+
+<hr />
+
+<h1 id="most-common-problems">Most common problems</h1>
+
+<ul>
+  <li>Startup problems</li>
+  <li>Web/UI problems</li>
+  <li>Tool failures</li>
+  <li>Job execution problems</li>
+  <li>General performance problems</li>
+  <li>Dependency issues</li>
+  <li>Other stuff</li>
+</ul>
+
+<hr />
+<h1 id="startup-problems">Startup problems</h1>
+
+<p>–</p>
+
+<p>Where do you begin? In the…</p>
+
+<p>–</p>
+
+<h2 id="logs-1">LOGS</h2>
+
+<p>Specifically, uWSGI and job handler logs.</p>
+
+<hr />
+
+<h1 id="database-migration">Database migration</h1>
+
+<p>.reduce90[</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Exception: Your database has version '144' but this code expects version '165'. Please
+backup your database and then migrate the database schema by running 'sh manage_db.sh upgrade'.
+</code></pre></div></div>
+<p>]</p>
+
+<p>Use Ansible! This is permanently solved for you.</p>
+
+<p>Otherwise, upgrade as instructed.</p>
+
+<p>.left[If you believe this message is in error, you can:]</p>
+<ul>
+  <li>Check DB table <code class="language-plaintext highlighter-rouge">migrate_version</code>, column <code class="language-plaintext highlighter-rouge">version</code>.</li>
+  <li>Check folder <code class="language-plaintext highlighter-rouge">lib/galaxy/model/migrate/versions/</code> - the latest migration should match the DB.</li>
+  <li>Clean the <code class="language-plaintext highlighter-rouge">*.pyc</code> files in migrate versions folder to make sure there is no remnant from other code revisions.
+    <ul>
+      <li>See <a href="https://github.com/galaxyproject/ansible-galaxy/blob/master/files/makepyc.py">makepyc.py in galaxyproject.galaxy</a>.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<p>class: left</p>
+<h1 id="database-migration-1">Database migration</h1>
+
+<p><strong>Downgrading</strong> - Perform in this order:</p>
+<ol>
+  <li>Downgrade the DB with <code class="language-plaintext highlighter-rouge">manage_db.sh</code></li>
+  <li>Downgrade Galaxy with <code class="language-plaintext highlighter-rouge">git checkout</code></li>
+  <li>Clean <code class="language-plaintext highlighter-rouge">*.pyc</code></li>
+</ol>
+
+<hr />
+<h1 id="stuck-in-a-restart-loop">Stuck in a restart loop</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[uWSGI] getting YAML configuration from /srv/galaxy/config/galaxy.yml
+*** Starting uWSGI 2.0.18 (64bit) on [Wed Mar  4 16:19:27 2020] ***
+... bunch of stuff ...
+[uWSGI] getting YAML configuration from /srv/galaxy/config/galaxy.yml
+*** Starting uWSGI 2.0.18 (64bit) on [Wed Mar  4 16:19:27 2020] ***
+... bunch of stuff ...
+[uWSGI] getting YAML configuration from /srv/galaxy/config/galaxy.yml
+*** Starting uWSGI 2.0.18 (64bit) on [Wed Mar  4 16:19:27 2020] ***
+...
+</code></pre></div></div>
+
+<ol>
+  <li>Open the log <em>without</em> following</li>
+  <li>Scroll to the end</li>
+  <li>Search/scroll back to the last startup attempt</li>
+  <li>The lines <em>directly preceding</em> should offer some insight</li>
+</ol>
+
+<hr />
+<h1 id="stuck-in-a-restart-loop-1">Stuck in a restart loop</h1>
+
+<p>The reason that Galaxy is dying might not be in the log. If it’s not, then</p>
+
+<p>If using <strong>systemd</strong> then it should be in <code class="language-plaintext highlighter-rouge">journalctl -u galaxy</code></p>
+
+<p>If using something else, it’s wherever <code class="language-plaintext highlighter-rouge">stderr</code> is being redirected to (supervisor?)</p>
+
+<p>Or maybe the system is killing it… (<code class="language-plaintext highlighter-rouge">/var/log/{messages,syslog}</code>)</p>
+
+<hr />
+<h1 id="webui-problems">Web/UI Problems</h1>
+
+<p>–</p>
+
+<p>Where do you begin? In the…</p>
+
+<p>–</p>
+
+<h2 id="logs-2">LOGS</h2>
+
+<p>Specifically: uWSGI, nginx, and browser console logs</p>
+
+<hr />
+<h1 id="502-bad-gateway">502 Bad Gateway</h1>
+
+<p>Your reverse proxy has failed to connect to the Galaxy socket</p>
+
+<ul>
+  <li>Check that Galaxy is running / not in a reboot loop</li>
+  <li>Check that your proxy and Galaxy/uWSGI socket options match</li>
+  <li>Check proxy server logs (e.g. <code class="language-plaintext highlighter-rouge">/var/log/nginx</code>)</li>
+  <li>Check uWSGI logs for <code class="language-plaintext highlighter-rouge">bind(): Address already in use [core/socket.c line 769]</code></li>
+  <li>Check that something is listening on the correct port (<code class="language-plaintext highlighter-rouge">sudo ss -tlpn 'sport = :port'</code> (demo!) or <code class="language-plaintext highlighter-rouge">sudo lsof -i :port</code> (demo!))
+    <ul>
+      <li>If it’s uWSGI, make sure it’s not an old one!</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<h1 id="504-gateway-timeout">504 Gateway Timeout</h1>
+
+<p>Or timeout messages in the Galaxy UI</p>
+
+<p>In uWSGI logs:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*** uWSGI listen queue of socket "0.0.0.0:8080" (fd: 6) full !!! (101/100) ***
+*** uWSGI listen queue of socket "0.0.0.0:8080" (fd: 6) full !!! (101/100) ***
+*** uWSGI listen queue of socket "0.0.0.0:8080" (fd: 6) full !!! (101/100) ***
+*** uWSGI listen queue of socket "0.0.0.0:8080" (fd: 6) full !!! (101/100) ***
+</code></pre></div></div>
+
+<p>Galaxy is not processing requests in a timely manner</p>
+
+<hr />
+<h1 id="504-gateway-timeout-1">504 Gateway Timeout</h1>
+
+<p>Use <code class="language-plaintext highlighter-rouge">uwsgitop</code> (demo!)</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">uwsgitop</code> state busy?</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">uwsgi-2.0.17.1 - Fri Feb  1 17:13:59 2019 - req: 0 - RPS: 0 - lq: 0 - tx: 0
+node: localhost - cwd: /srv/galaxy/server - uid: 999 - gid: 999 - masterpid: 1925
+ WID    %       PID     REQ     RPS     EXC     SIG     STATUS  AVG     RSS     VSZ     TX      ReSpwn  HC      RunT    LastSpwn
+ 1      12.7    3453    59962   1       13      0       busy    89ms    0       0       536.0M  1       0       450m    09:35:36
+</span></code></pre></div></div>
+
+<p>Process state <strong>D</strong>?</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 uwsgi --yaml ...
+</span></code></pre></div></div>
+
+<p>Kernel uninterruptable sleep. Probably IO. Check filesystems, disks.</p>
+
+<p>Restart Galaxy</p>
+
+<p>.reduce70[.footnote[A later slide will cover how to investigate kernel uninterruptable sleep processes]]</p>
+
+<hr />
+<h1 id="504-gateway-timeout-or-slow-ui">504 Gateway Timeout or slow UI</h1>
+
+<p>Check load</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">uptime</span>
+<span class="go"> 16:08:15 up 3 days,  8:34,  8 users,  load average: 0.12, 0.23, 0.24
+</span></code></pre></div></div>
+
+<p>Averages are 1, 5, 15 minutes.</p>
+
+<p>Average should be &lt;= number of cores (<code class="language-plaintext highlighter-rouge">lscpu</code>, beware SMT)</p>
+
+<p>More on troubleshooting load later</p>
+
+<hr />
+<h1 id="where-do-you-begin-in-the">Where do you begin? In the…</h1>
+
+<h2 id="logs-3">LOGS*</h2>
+
+<p>–</p>
+
+<p>*often I now begin in Grafana</p>
+
+<figure id="figure-1"><img src="../../images/troubleshooting/grafana-load-graph.png" alt="Grafana Load Graph" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Grafana Load Graph</figcaption></figure>
+
+<hr />
+<h1 id="504-gateway-timeout-or-slow-ui-1">504 Gateway Timeout or slow UI</h1>
+
+<ul>
+  <li>Investigate load
+    <ul>
+      <li>Web server(s)</li>
+      <li>Database server</li>
+    </ul>
+  </li>
+  <li>Investigate memory usage, swapping</li>
+  <li>Investigate iowait</li>
+</ul>
+
+<hr />
+<h1 id="galaxy-ui-is-slow">Galaxy UI is slow</h1>
+
+<ul>
+  <li><a href="https://docs.galaxyproject.org/en/master/dev/finding_and_improving_slow_code.html#profiling">Tutorial from @mvdbeek</a></li>
+  <li>Use Galaxy <a href="https://github.com/galaxyproject/galaxy/blob/8c2066f07ac7bb48c59cf8378e5a852e6fb82a4e/config/galaxy.yml.sample#L1036">heartbeat</a> (demo!)</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">py-spy</code></li>
+</ul>
+
+<hr />
+<h1 id="blank-page-or-no-cssjavascript">Blank page or no CSS/JavaScript</h1>
+
+<p>Serving of static content is broken.</p>
+
+<ul>
+  <li>Check browser console for 404 errors.</li>
+  <li>Check proxy error log for permission errors.</li>
+  <li>Verify that your proxy static configuration is correct.</li>
+</ul>
+
+<hr />
+<h1 id="tool-failures">Tool failures</h1>
+
+<p>Tools can fail for a variety of reasons, some valid, some invalid.</p>
+
+<p>Some made up examples follow.</p>
+
+<hr />
+<h1 id="tool-missing-from-galaxy">Tool missing from Galaxy</h1>
+
+<ul>
+  <li>Restart Galaxy and watch the log for
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Loaded tool id: toolshed.g2.bx.psu.edu/repos/iuc/sickle/sickle/1.33, version: 1.33 into tool panel....
+</span></code></pre></div>    </div>
+  </li>
+  <li>After startup, check <code class="language-plaintext highlighter-rouge">integrated_tool_panel.xml</code> for
+```xml</li>
+</ul>
+<tool id="toolshed.g2.bx.psu.edu/repos/iuc/sickle/sickle/1.33" />
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+- If it is TS tool check `shed_tool_conf.xml` for
+```xml
+&lt;tool file="toolshed.g2.bx.psu.edu/repos/iuc/sickle/43e081d32f90/sickle/sickle.xml" guid="toolshed.g2.bx.psu.edu/repos/iuc/sickle/sickle/1.33"&gt;
+...
+&lt;/tool&gt;
+</code></pre></div></div>
+
+<ul>
+  <li>Multiple job handlers? Sometimes they don’t all get the update.</li>
+</ul>
+
+<hr />
+<h1 id="tool-errors">Tool errors</h1>
+
+<p>Tool stdout/stderr is available in UI under “i” icon on history dataset</p>
+
+<p>.left[Debugging on the filesystem:]</p>
+<ol>
+  <li>Set <code class="language-plaintext highlighter-rouge">cleanup_job</code> to <code class="language-plaintext highlighter-rouge">onsuccess</code></li>
+  <li>Cause a job failure</li>
+  <li>Go to job working directory (find in logs or <code class="language-plaintext highlighter-rouge">/srv/galaxy/jobs/&lt;hash&gt;/&lt;job_id&gt;</code>)</li>
+  <li>Poke around, try running things (<code class="language-plaintext highlighter-rouge">srun --pty bash</code> considered useful)</li>
+</ol>
+
+<p>Familiarize yourself with the places Galaxy keeps things (demo?)</p>
+
+<hr />
+<h1 id="tool-errors---stderr">Tool errors - stderr</h1>
+
+<p><strong>Galaxy considers <em>any</em> output to standard error (stderr) to be an error when no tool profile version is set by a tool.</strong></p>
+
+<p>Why would it do this<span>Speaker Notes</span>?!?!!!11</p>
+
+<p>In the old days, tools were bad about setting the exit code on failure, so it could not be trusted. Galaxy had no functionality to inspect output to decide on failure.</p>
+
+<hr />
+<p>class: left</p>
+<h1 id="tool-errors-1">Tool errors</h1>
+
+<p>So what if tool stderr contains:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Congratulations, running SuperAwesome tool was successful!
+</span></code></pre></div></div>
+
+<p>What happens: job fails (!!?!?)</p>
+
+<p>Solutions:</p>
+<ul>
+  <li>If the wrapped tool uses proper exit codes, use <code class="language-plaintext highlighter-rouge">&lt;tool profile="16.04"&gt;</code> or later to ignore stderr</li>
+  <li>Using current tool development best practices ensures this is the case</li>
+</ul>
+
+<hr />
+<p>class: left</p>
+<h1 id="tool-errors-2">Tool errors</h1>
+
+<p>Tool output contains:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Warning: Discarded 10000 lines of /input/dataset_1.dat because they looked funny
+</span></code></pre></div></div>
+
+<p>Maybe a problem, maybe not.</p>
+
+<p>Solutions:</p>
+<ul>
+  <li>Check tool input(s) and parameters (maybe requires some biological knowledge)</li>
+  <li>Verify input is not corrupt</li>
+  <li>User education</li>
+</ul>
+
+<hr />
+<p>class: left</p>
+<h1 id="tool-errors---memory-errors">Tool errors - memory errors</h1>
+
+<p>Tool output contains one of:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">MemoryError                 #</span><span class="w"> </span>Python
+<span class="gp">what():  std::bad_alloc     #</span><span class="w"> </span>C++
+<span class="gp">Segmentation Fault          #</span><span class="w"> </span>C - but could be other problems too
+<span class="gp">Killed                      #</span><span class="w"> </span>Linux OOM Killer
+</code></pre></div></div>
+
+<p>Solutions:</p>
+<ul>
+  <li>Change input sizes or params
+    <ul>
+      <li>Map/reduce?</li>
+    </ul>
+  </li>
+  <li>Decrease the amount of memory the tool needs</li>
+  <li>Increase the amount of memory available to the job
+    <ul>
+      <li>Request more memory from cluster scheduler</li>
+      <li>Use job resubmission to automatically rerun with a larger memory allocation</li>
+    </ul>
+  </li>
+  <li>Cross your fingers and rerun the job</li>
+</ul>
+
+<hr />
+<p>class: left</p>
+<h1 id="tool-errors---system-errors">Tool errors - system errors</h1>
+
+<p>Tool output contains:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">open(): /input/dataset_1.dat: No such file or directory
+</span></code></pre></div></div>
+
+<p>Solutions:</p>
+<ul>
+  <li>Verify that <code class="language-plaintext highlighter-rouge">/input/dataset_1.dat</code> exists.
+    <ul>
+      <li>On node the job ran on</li>
+      <li>As the user the job ran as</li>
+    </ul>
+  </li>
+  <li>Fix the filesystem error (NFS?) and rerun the job</li>
+  <li>See NFS caching errors slide later</li>
+</ul>
+
+<hr />
+<p>class: left</p>
+<h1 id="tool-errors---dependency-problems">Tool errors - dependency problems</h1>
+
+<p>Tool output contains:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">sh: command not found: samtools
+</span></code></pre></div></div>
+
+<p>Solutions:</p>
+<ul>
+  <li>Verify that <code class="language-plaintext highlighter-rouge">tool_dependency_dir</code> is accessible <em>on the cluster, as the user running Galaxy jobs</em></li>
+  <li>Verify that tool dependencies are properly installed: Galaxy UI “Admin &gt; Manage dependencies”</li>
+  <li>Use BioContainers (Docker/Singularity)</li>
+</ul>
+
+<hr />
+<h1 id="manage-dependencies">Manage Dependencies</h1>
+
+<p>An incredibly useful feature to hit unruly tool dependencies with a large hammer.</p>
+
+<figure id="figure-2"><img src="../../images/troubleshooting/manage-dependencies.png" alt="Manage Dependencies" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Manage Dependencies</figcaption></figure>
+
+<p>–</p>
+
+<p>(demo!)</p>
+
+<hr />
+<h1 id="an-aside---dependency-problems-on-geriatric-galaxies">An aside - dependency problems on geriatric Galaxies</h1>
+
+<p>Galaxy Tool Shed dependencies are dead.<sup>1</sup> If you don’t know what Tool Shed dependencies are (lucky you) skip this slide.</p>
+
+<p>Don’t attempt to fix Galaxy Tool Shed dependencies, just update tool and reinstall with Conda.</p>
+
+<p>Put Conda first in <a href="https://github.com/galaxyproject/galaxy/blob/dev/config/dependency_resolvers_conf.xml.sample">dependency_resolvers_conf.xml</a> if you still need to support both.</p>
+
+<p>.reduce70[.footnote[<sup>1</sup> The Tool Shed should only be used for Galaxy Tool configuration files and wrapper scripts]]</p>
+
+<hr />
+<p>class: left</p>
+<h1 id="tool-errors---dependency-problems-1">Tool errors - dependency problems</h1>
+
+<p>Tool output contains:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">foo: error while loading shared libraries: libdeepthought.so.42: cannot open shared object file: No such file or directory
+</span></code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">foo</code> was compiled against <code class="language-plaintext highlighter-rouge">libdeepthought.so.42</code> but it’s not on the runtime linker path</p>
+
+<p>Solutions:</p>
+<ul>
+  <li>Reinstall tool dependencies (“Admin &gt; Manage dependencies”). If it still fails<sup>2</sup>:
+    <ul>
+      <li>Determine conda package providing <code class="language-plaintext highlighter-rouge">libdeepthought.so</code></li>
+      <li>Downgrade it to the version that provides <code class="language-plaintext highlighter-rouge">libdeepthought.so.42</code></li>
+    </ul>
+  </li>
+  <li>Use BioContainers (Docker/Singularity)</li>
+</ul>
+
+<p>.center[.reduce70[.footnote[<sup>2</sup> First, Google the error because someone named Björn has probably already found and fixed the problem.]]]</p>
+
+<p><span>Speaker Notes</span>
+Galaxy ensures that the correct version(s) of tool(s) immediate dependencies are controlled, but dependencies of dependencies are up to conda. Occasionally, upgrades to these second level dependencies break existing conda packages, requiring package authors to update the first level dependencies to correct the issue.</p>
+
+<hr />
+<p>class: left</p>
+<h1 id="tool-errors---empty-green-history-item">Tool errors - Empty green history item</h1>
+
+<ol>
+  <li>The tool is not correctly detecting error conditions: inspect stdout/stderr</li>
+  <li>The tool correctly produced an empty dataset for the given params, inputs</li>
+</ol>
+
+<p>Solutions:</p>
+<ul>
+  <li>Fix the tool wrapper to detect errors</li>
+  <li>User education</li>
+</ul>
+
+<hr />
+<h1 id="summary-of-types-of-tool-failures">Summary of types of tool failures</h1>
+
+<ul>
+  <li>Input/parameter problem (user or tool wrapper author problem)</li>
+  <li>Tool wrapper bug (tool wrapper author problem)</li>
+  <li>Tool bug (tool wrapper author or tool developer problem)</li>
+  <li>Resource problem (sysadmin problem)</li>
+</ul>
+
+<p>–</p>
+
+<p>Everything else: always the sysadmin’s problem</p>
+
+<hr />
+<h1 id="one-last-word-on-tool-errors">One last word on tool errors</h1>
+
+<p>All IUC/devteam tools in the Tool Shed have tests</p>
+
+<p>Use these tests (automateable with <a href="https://github.com/galaxyproject/ephemeris">Ephemeris</a>!) to verify that the tool works in the basic case</p>
+
+<hr />
+<h1 id="job-execution-problems">Job execution problems</h1>
+
+<hr />
+<p>class: smaller</p>
+<h1 id="jobs-arent-running-always-gray">Jobs aren’t running: always gray</h1>
+
+<p>Corresponds to <code class="language-plaintext highlighter-rouge">job.state = 'new'</code> or <code class="language-plaintext highlighter-rouge">'queued'</code> in database</p>
+
+<p>.left[Check the Galaxy server log for errors. Successful job lifecycle:]</p>
+
+<p>.reduce50[</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">galaxy.tools DEBUG 2019-02-01 14:30:20,469 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Validated and populated state for tool request (11.587 ms)
+galaxy.tools.actions INFO 2019-02-01 14:30:20,500 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Handled output named output1 for tool testing (2.334 ms)
+galaxy.tools.actions INFO 2019-02-01 14:30:20,507 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Added output datasets to history (6.210 ms)
+galaxy.tools.actions INFO 2019-02-01 14:30:20,513 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Setup for job Job[unflushed,tool_id=testing] complete, ready to flush (5.408 ms)
+galaxy.tools.actions INFO 2019-02-01 14:30:20,558 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Flushed transaction for job Job[id=21,tool_id=testing] (44.550 ms)
+galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,559 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Sending message to farm job-handlers: {"__classname__": "JobHandlerMessage", "params": {"task": "setup", "job_id": 21}, "target": "job_handler"}
+galaxy.tools.execute DEBUG 2019-02-01 14:30:20,559 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Tool [testing] created job [21] (73.833 ms)
+galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,560 [p:6593,w:0,m:1] [UWSGIFarmMessageTransport.dispatcher_thread] Received message: {"__classname__": "JobHandlerMessage", "params": {"task": "setup", "job_id": 21}, "target": "job_handler"}
+galaxy.tools.execute DEBUG 2019-02-01 14:30:20,562 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Executed 1 job(s) for tool testing request: (91.901 ms)
+galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,580 [p:6593,w:0,m:1] [UWSGIFarmMessageTransport.dispatcher_thread] Released lock
+galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,580 [p:6594,w:0,m:2] [UWSGIFarmMessageTransport.dispatcher_thread] Acquired message lock, waiting for new message
+galaxy.jobs.rules.map_resources INFO 2019-02-01 14:30:21,526 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] returning destination: slurm
+galaxy.jobs.mapper DEBUG 2019-02-01 14:30:21,527 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Mapped job to destination id: slurm
+galaxy.jobs.handler DEBUG 2019-02-01 14:30:21,532 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Dispatching to slurm runner
+galaxy.jobs DEBUG 2019-02-01 14:30:21,539 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Persisting job destination (destination id: slurm)
+galaxy.jobs DEBUG 2019-02-01 14:30:21,565 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Working directory for job is: /srv/galaxy/jobs/000/21
+galaxy.jobs.runners DEBUG 2019-02-01 14:30:21,579 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] Job [21] queued (44.601 ms)
+galaxy.jobs.handler INFO 2019-02-01 14:30:21,585 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Job dispatched
+</span><span class="gp">galaxy.jobs.command_factory INFO 2019-02-01 14:30:21,714 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] Built script [/srv/galaxy/jobs/000/21/tool_script.sh] for tool command [echo "Running with '$</span><span class="o">{</span>GALAXY_SLOTS:-1<span class="o">}</span><span class="s1">' threads" &gt; "/data/000/dataset_21.dat"]
+</span><span class="gp">galaxy.jobs.runners DEBUG 2019-02-01 14:30:21,791 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) command is: rm -rf working;</span><span class="w"> </span><span class="s1">mkdir -p working; cd working; /srv/galaxy/jobs/000/21/tool_script.sh; return_code=$?; cd '</span>/srv/galaxy/jobs/000/21<span class="s1">';
+</span><span class="gp">[ "$</span><span class="s1">GALAXY_VIRTUAL_ENV" = "None" ] &amp;&amp; GALAXY_VIRTUAL_ENV="$_GALAXY_VIRTUAL_ENV"; _galaxy_setup_environment True
+</span><span class="gp">python "/srv/galaxy/jobs/000/21/set_metadata_FVs2H3.py" "/srv/galaxy/jobs/000/21/registry.xml" "/srv/galaxy/jobs/000/21/working/galaxy.json" "/srv/galaxy/jobs/000/21/metadata_in_HistoryDatasetAssociation_21_LeYyR2,/srv/galaxy/jobs/000/21/metadata_kwds_HistoryDatasetAssociation_21_2yXqbX,/srv/galaxy/jobs/000/21/metadata_out_HistoryDatasetAssociation_21_WwKZCq,/srv/galaxy/jobs/000/21/metadata_results_HistoryDatasetAssociation_21_nfKGx4,/data/000/dataset_21.dat,/srv/galaxy/jobs/000/21/metadata_override_HistoryDatasetAssociation_21_xsOoSa" 5242880;</span><span class="w"> </span><span class="s1">sh -c "exit $return_code"
+</span><span class="go">galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:21,821 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) submitting file /srv/galaxy/jobs/000/21/galaxy_21.sh
+galaxy.jobs.runners.drmaa INFO 2019-02-01 14:30:21,843 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) queued as 19
+galaxy.jobs DEBUG 2019-02-01 14:30:21,843 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) Persisting job destination (destination id: slurm)
+galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:22,158 [p:6593,w:0,m:1] [SlurmRunner.monitor_thread] (21/19) state change: job is queued and active
+galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:23,171 [p:6593,w:0,m:1] [SlurmRunner.monitor_thread] (21/19) state change: job is running
+</span></code></pre></div></div>
+<p>]</p>
+
+<hr />
+<p>class: smaller, left</p>
+<h1 id="successful-job-lifecycle">Successful job lifecycle</h1>
+
+<p>Note <code class="language-plaintext highlighter-rouge">[p:PPPP,w:W,m:M]</code> in log messages:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">galaxy.tools.execute DEBUG 2019-02-01 14:30:20,559 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Tool [testing] created job [21] (73.833 ms)
+galaxy.jobs.mapper DEBUG 2019-02-01 14:30:21,527 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Mapped job to destination id: slurm
+</span></code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">[p:6590,w:1,m:0]</code>: PID 6590, web worker, not a mule (0)</li>
+  <li><code class="language-plaintext highlighter-rouge">[p:6593,w:0,m:1]</code>: PID 6593, not a web worker (0), mule 1</li>
+</ul>
+
+<hr />
+<p>class: smaller</p>
+<h1 id="successful-job-lifecycle-1">Successful job lifecycle</h1>
+
+<p>Dissecting the lifecycle messages</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">galaxy.tools DEBUG 2019-02-01 14:30:20,469 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Validated and populated state for tool request (11.587 ms)
+galaxy.tools.actions INFO 2019-02-01 14:30:20,500 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Handled output named output1 for tool testing (2.334 ms)
+galaxy.tools.actions INFO 2019-02-01 14:30:20,507 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Added output datasets to history (6.210 ms)
+galaxy.tools.actions INFO 2019-02-01 14:30:20,513 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Setup for job Job[unflushed,tool_id=testing] complete, ready to flush (5.408 ms)
+galaxy.tools.actions INFO 2019-02-01 14:30:20,558 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Flushed transaction for job Job[id=21,tool_id=testing] (44.550 ms)
+galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,559 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Sending message to farm job-handlers: {"__classname__": "JobHandlerMessage", "params": {"task": "setup", "job_id": 21}, "target": "job_handler"}
+galaxy.tools.execute DEBUG 2019-02-01 14:30:20,559 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Tool [testing] created job [21] (73.833 ms)
+galaxy.tools.execute DEBUG 2019-02-01 14:30:20,562 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Executed 1 job(s) for tool testing request: (91.901 ms)
+</span></code></pre></div></div>
+
+<ul>
+  <li>Job is assigned <strong>Galaxy</strong> job ID 21</li>
+  <li>“Executed” is misleading - the Job has been created in the <code class="language-plaintext highlighter-rouge">job</code> table of the database, but is not picked up by a job handler yet.</li>
+  <li>All of this has occurred in the web worker.</li>
+  <li>If not using mules and “Executed” is the last message you see, verify job assigned to a valid handler.</li>
+</ul>
+
+<hr />
+<p>class: smaller</p>
+<h1 id="successful-job-lifecycle-2">Successful job lifecycle</h1>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,560 [p:6593,w:0,m:1] [UWSGIFarmMessageTransport.dispatcher_thread] Received message: {"__classname__": "JobHandlerMessage", "params": {"task": "setup", "job_id": 21}, "target": "job_handler"}
+galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,580 [p:6593,w:0,m:1] [UWSGIFarmMessageTransport.dispatcher_thread] Released lock
+galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,580 [p:6594,w:0,m:2] [UWSGIFarmMessageTransport.dispatcher_thread] Acquired message lock, waiting for new message
+</span></code></pre></div></div>
+
+<ul>
+  <li>Mule 1 took the job and released the message interface lock after setting <code class="language-plaintext highlighter-rouge">job.handler</code> to its own <code class="language-plaintext highlighter-rouge">server_name</code></li>
+  <li>Mule 2 acquired the message interface lock and will take the next job.</li>
+</ul>
+
+<hr />
+<p>class: smaller</p>
+<h1 id="successful-job-lifecycle-3">Successful job lifecycle</h1>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">galaxy.jobs.rules.map_resources INFO 2019-02-01 14:30:21,526 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] returning destination: slurm
+galaxy.jobs.mapper DEBUG 2019-02-01 14:30:21,527 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Mapped job to destination id: slurm
+galaxy.jobs.handler DEBUG 2019-02-01 14:30:21,532 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Dispatching to slurm runner
+galaxy.jobs DEBUG 2019-02-01 14:30:21,539 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Persisting job destination (destination id: slurm)
+galaxy.jobs DEBUG 2019-02-01 14:30:21,565 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Working directory for job is: /srv/galaxy/jobs/000/21
+galaxy.jobs.runners DEBUG 2019-02-01 14:30:21,579 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] Job [21] queued (44.601 ms)
+galaxy.jobs.handler INFO 2019-02-01 14:30:21,585 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Job dispatched
+</span></code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">(21)</code> at beginning of job log messages is <strong>Galaxy</strong> job ID</li>
+  <li>Job is mapped to destination: <code class="language-plaintext highlighter-rouge">&lt;destination id="slurm"/&gt;</code></li>
+  <li>Job is dispatched to job runner plugin: <code class="language-plaintext highlighter-rouge">&lt;plugin id="slurm"/&gt;</code></li>
+</ul>
+
+<hr />
+<p>class: smaller</p>
+<h1 id="successful-job-lifecycle-4">Successful job lifecycle</h1>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">galaxy.jobs.command_factory INFO 2019-02-01 14:30:21,714 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] Built script [/srv/galaxy/jobs/000/21/tool_script.sh] for tool command [echo "Running with '$</span><span class="o">{</span>GALAXY_SLOTS:-1<span class="o">}</span><span class="s1">' threads" &gt; "/data/000/dataset_21.dat"]
+</span><span class="gp">galaxy.jobs.runners DEBUG 2019-02-01 14:30:21,791 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) command is: rm -rf working;</span><span class="w"> </span><span class="s1">mkdir -p working; cd working; /srv/galaxy/jobs/000/21/tool_script.sh; return_code=$?; cd '</span>/srv/galaxy/jobs/000/21<span class="s1">';
+</span><span class="gp">[ "$</span><span class="s1">GALAXY_VIRTUAL_ENV" = "None" ] &amp;&amp; GALAXY_VIRTUAL_ENV="$_GALAXY_VIRTUAL_ENV"; _galaxy_setup_environment True
+</span><span class="gp">python "/srv/galaxy/jobs/000/21/set_metadata_FVs2H3.py" "/srv/galaxy/jobs/000/21/registry.xml" "/srv/galaxy/jobs/000/21/working/galaxy.json" "/srv/galaxy/jobs/000/21/metadata_in_HistoryDatasetAssociation_21_LeYyR2,/srv/galaxy/jobs/000/21/metadata_kwds_HistoryDatasetAssociation_21_2yXqbX,/srv/galaxy/jobs/000/21/metadata_out_HistoryDatasetAssociation_21_WwKZCq,/srv/galaxy/jobs/000/21/metadata_results_HistoryDatasetAssociation_21_nfKGx4,/data/000/dataset_21.dat,/srv/galaxy/jobs/000/21/metadata_override_HistoryDatasetAssociation_21_xsOoSa" 5242880;</span><span class="w"> </span><span class="s1">sh -c "exit $return_code"
+</span><span class="go">galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:21,821 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) submitting file /srv/galaxy/jobs/000/21/galaxy_21.sh
+galaxy.jobs.runners.drmaa INFO 2019-02-01 14:30:21,843 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) queued as 19
+galaxy.jobs DEBUG 2019-02-01 14:30:21,843 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) Persisting job destination (destination id: slurm)
+</span></code></pre></div></div>
+
+<ul>
+  <li>The job has been dispatched and has been assigned <strong>Slurm</strong> job ID 19</li>
+</ul>
+
+<hr />
+<p>class: smaller</p>
+<h1 id="successful-job-lifecycle-5">Successful job lifecycle</h1>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:22,158 [p:6593,w:0,m:1] [SlurmRunner.monitor_thread] (21/19) state change: job is queued and active
+galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:23,171 [p:6593,w:0,m:1] [SlurmRunner.monitor_thread] (21/19) state change: job is running
+galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:51,666 [p:6593,w:0,m:1] [SlurmRunner.monitor_thread] (21/19) state change: job finished normally
+galaxy.model.metadata DEBUG 2019-02-01 14:30:51,778 [p:6593,w:0,m:1] [SlurmRunner.work_thread-3] loading metadata from file for: HistoryDatasetAssociation 21
+galaxy.jobs INFO 2019-02-01 14:30:51,836 [p:6593,w:0,m:1] [SlurmRunner.work_thread-3] Collecting metrics for Job 21
+galaxy.jobs DEBUG 2019-02-01 14:30:51,847 [p:6593,w:0,m:1] [SlurmRunner.work_thread-3] job 21 ended (finish() executed in (130.848 ms))
+galaxy.model.metadata DEBUG 2019-02-01 14:30:51,850 [p:6593,w:0,m:1] [SlurmRunner.work_thread-3] Cleaning up external metadata files
+</span></code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">(21/19)</code> at beginning of job log messages now includes <strong>Slurm</strong> job ID</li>
+  <li>The job is done</li>
+  <li>Its <code class="language-plaintext highlighter-rouge">state</code> column and its output datasets’ <code class="language-plaintext highlighter-rouge">state</code> columns have been updated to <code class="language-plaintext highlighter-rouge">ok</code></li>
+</ul>
+
+<hr />
+<h1 id="jobs-arent-running">Jobs aren’t running</h1>
+
+<figure id="figure-3"><img src="../../images/troubleshooting/hda-new.png" alt="Job in new state" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Job in new state</figcaption></figure>
+
+<p>Corresponds to <code class="language-plaintext highlighter-rouge">job.state = 'new'</code> in database</p>
+
+<p>Not yet picked up by the Galaxy job handler subsystem</p>
+
+<p>Troubleshooting depends on your job handler configuration</p>
+
+<hr />
+
+<p>Solutions:</p>
+<ul>
+  <li>If using single process or mules
+    <ul>
+      <li>Ensure no <code class="language-plaintext highlighter-rouge">&lt;handlers&gt;</code> in <code class="language-plaintext highlighter-rouge">job_conf.xml</code></li>
+      <li>Check handler logs</li>
+    </ul>
+  </li>
+  <li>If using <code class="language-plaintext highlighter-rouge">assign_with="db-skip-locked"</code>
+    <ul>
+      <li>Ensure no <code class="language-plaintext highlighter-rouge">default</code> attribute in <code class="language-plaintext highlighter-rouge">&lt;handlers&gt;</code></li>
+      <li>Ensure no individual <code class="language-plaintext highlighter-rouge">&lt;handler&gt;</code>s defined</li>
+      <li>Ensure <code class="language-plaintext highlighter-rouge">handler</code> column of <code class="language-plaintext highlighter-rouge">job</code> table is being set to <code class="language-plaintext highlighter-rouge">_default_</code></li>
+      <li>Ensure handlers started with <code class="language-plaintext highlighter-rouge">--attach-to-pool=job-handlers</code></li>
+    </ul>
+  </li>
+  <li>If using <code class="language-plaintext highlighter-rouge">assign_with="db-preassign"</code>
+    <ul>
+      <li>Ensure that handler ID(s) in <code class="language-plaintext highlighter-rouge">job_conf.xml</code> match <code class="language-plaintext highlighter-rouge">server_name</code>(s)</li>
+      <li>Ensure <code class="language-plaintext highlighter-rouge">handler</code> column of <code class="language-plaintext highlighter-rouge">job</code> table is being set to valid handler ID</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<p>class: left, reduce90</p>
+<h1 id="handler-id-to-server_name-match-check">Handler ID to server_name match check</h1>
+
+<p>Job handler assignment check:</p>
+
+<pre><code class="language-gxadmin">$ grep ' is running$' /path/to/galaxy*.log
+galaxy.web.stack INFO 2019-01-31 15:18:35,228 [MainThread] Galaxy server instance 'handler0' is running
+galaxy.web.stack INFO 2019-01-31 15:18:35,228 [MainThread] Galaxy server instance 'handler1' is running
+$ gxadmin query job-info 21
+</code></pre>
+<p>.reduce70[
+id  | tool_id | state |    handler        | username |        create_time         | job_runner_name | job_runner_external_id
+— | ——- | —– | —————– | ——– | ————————– | ————— | ———————–
+21  | testing | new   | <strong>job_handler_0</strong> | admin    | 2019-02-01 14:30:20.540327 |                 |
+]</p>
+
+<p>The correct value of the <code class="language-plaintext highlighter-rouge">handler</code> column in the database varies by job handler assignment method (<code class="language-plaintext highlighter-rouge">&lt;handlers assign_with=...&gt;</code>):</p>
+<ul>
+  <li>mules: <code class="language-plaintext highlighter-rouge">null</code> (empty) then <code class="language-plaintext highlighter-rouge">main.job-handlers.&lt;mule_id&gt;</code> after assignment</li>
+  <li>db-skip-locked: <code class="language-plaintext highlighter-rouge">_default_</code> then <code class="language-plaintext highlighter-rouge">handlerN</code> (where <code class="language-plaintext highlighter-rouge">handlerN</code> is the value of one of your handlers’ <code class="language-plaintext highlighter-rouge">--server-name</code>)</li>
+  <li>db-preassign: <code class="language-plaintext highlighter-rouge">handlerN</code></li>
+</ul>
+
+<p>In this case, <code class="language-plaintext highlighter-rouge">job_handler_0</code> is not <code class="language-plaintext highlighter-rouge">handler0</code> or <code class="language-plaintext highlighter-rouge">handler1</code> (probably due to a misconfiguration in <code class="language-plaintext highlighter-rouge">&lt;handlers&gt;</code> section of <code class="language-plaintext highlighter-rouge">job_conf.xml</code>), so no handler will find this job.</p>
+
+<hr />
+<h1 id="an-aside---unruly-log-files">An aside - unruly log files</h1>
+
+<p>By default, Galaxy web workers and mules all log to a single file. See <a href="https://docs.galaxyproject.org/en/master/admin/config_logging.html">advanced logging configuration</a> to split mules in to their own files.</p>
+
+<p>tl;dr: add <a href="https://docs.galaxyproject.org/en/latest/admin/config_logging.html#yaml">the second blob ‘o YAML here</a> to your <code class="language-plaintext highlighter-rouge">galaxy.yml</code>. Most importantly:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">filename_template</span><span class="pi">:</span> <span class="s">galaxy_{pool_name}_{server_id}.log</span>
+</code></pre></div></div>
+
+<p>Galaxy subtitutes <code class="language-plaintext highlighter-rouge">{pool_name}</code> with e.g. <code class="language-plaintext highlighter-rouge">job-handlers</code> and <code class="language-plaintext highlighter-rouge">{server_id}</code> with e.g. <code class="language-plaintext highlighter-rouge">1</code>. Full list of template vars in the docs.</p>
+
+<hr />
+<h1 id="jobs-arent-running-1">Jobs aren’t running</h1>
+
+<figure id="figure-4"><img src="../../images/troubleshooting/hda-queued.png" alt="Job in queued state" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Job in queued state</figcaption></figure>
+
+<p>Corresponds to <code class="language-plaintext highlighter-rouge">job.state = 'queued'</code> in database</p>
+
+<p>A handler has seen this job</p>
+
+<p>.left[Verify concurrency limits unmet in <code class="language-plaintext highlighter-rouge">job_conf.xml</code>:]</p>
+<ul>
+  <li>Local jobs: value of plugin <code class="language-plaintext highlighter-rouge">workers</code> attribute (default: 4)</li>
+  <li>All jobs: Entire <code class="language-plaintext highlighter-rouge">&lt;limits&gt;</code> section</li>
+</ul>
+
+<p>Users are <em>not</em> informed when they have reached the job limits. Exceeding disk quota also pauses jobs, but users are notified of this.</p>
+
+<hr />
+<h1 id="jobs-arent-running-2">Jobs aren’t running</h1>
+
+<p>.left[Check database for:]</p>
+<ul>
+  <li>Destination ID (<code class="language-plaintext highlighter-rouge">gxadmin query job-info</code>)</li>
+  <li>Job runner external (DRM) ID (<code class="language-plaintext highlighter-rouge">gxadmin query job-info</code>)</li>
+  <li>Jobs owned by user in non-terminal state if limits in use (<code class="language-plaintext highlighter-rouge">gxadmin query jobs-nonterminal [user]</code>)</li>
+  <li>Check handler <strong>logs</strong></li>
+</ul>
+
+<p>If external ID is assigned, job is queued on a cluster. Use cluster queue status tool(s) to investigate further.</p>
+
+<hr />
+<h1 id="jobs-arent-finishing">Jobs aren’t finishing</h1>
+
+<figure id="figure-5"><img src="../../images/troubleshooting/hda-running.png" alt="Job in running state" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Job in running state</figcaption></figure>
+
+<p>Corresponds to <code class="language-plaintext highlighter-rouge">job.state = 'running'</code> in database</p>
+
+<p>Get job runner external (DRM) ID (<code class="language-plaintext highlighter-rouge">gxadmin query job-info</code>), use cluster queue status tool(s) to investigate further.</p>
+
+<p>.left[If the DRM job is finished but the Galaxy job is still “running”:]</p>
+<ul>
+  <li>Check last job handler log message for job</li>
+  <li>Setting/collecting metadata can be slow: wait</li>
+  <li>Check handlers health (<code class="language-plaintext highlighter-rouge">py-spy</code> or <code class="language-plaintext highlighter-rouge">gdb</code> (demos later!))</li>
+</ul>
+
+<hr />
+<h1 id="overall-slow-processing-of-jobs">Overall slow processing of jobs</h1>
+
+<p>Process state <strong>D</strong>?</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 python3 scripts/galaxy-main --server-name=handler0 ...
+</span></code></pre></div></div>
+
+<p>Kernel uninterruptable sleep. Probably IO. Check filesystems, disks.</p>
+
+<p>.reduce70[.footnote[A later slide will cover how to investigate kernel uninterruptable sleep processes]]</p>
+
+<hr />
+<h1 id="overall-slow-processing-of-jobs-1">Overall slow processing of jobs</h1>
+
+<p>Process state <em>not</em> <strong>D</strong>?</p>
+
+<ul>
+  <li>Use <code class="language-plaintext highlighter-rouge">py-spy</code> (demo!)</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">gdb</code> (demo!)</li>
+</ul>
+
+<hr />
+<h1 id="general-performance-problems">General performance problems</h1>
+
+<hr />
+<h1 id="kernel-uninterruptable-sleep">Kernel uninterruptable sleep</h1>
+
+<p>Process state <strong>D</strong>?</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 python3 scripts/galaxy-main --server-name=handler0 ...
+</span></code></pre></div></div>
+
+<p>Kernel uninterruptable sleep. Probably IO. Check filesystems, disks.</p>
+
+<ul>
+  <li>Investigate <code class="language-plaintext highlighter-rouge">/proc/&lt;pid&gt;/fd</code> (demo!) or <code class="language-plaintext highlighter-rouge">lsof -p &lt;pid&gt;</code> (demo!)</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">strace</code> (demo!)</li>
+</ul>
+
+<p>.reduce70[.footnote[This slide covers how to investigate kernel uninterruptable sleep processes]]</p>
+
+<hr />
+<h1 id="local-or-network-fs-slowdown">Local or Network FS slow/down</h1>
+
+<ul>
+  <li>Use <code class="language-plaintext highlighter-rouge">iostat</code> and/or <code class="language-plaintext highlighter-rouge">nfsiostat</code> to see device performance (demo!)</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">dstat</code> to see pretty device performance summary (demo!)</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">time dd</code> (quick and dirty) or <code class="language-plaintext highlighter-rouge">fio</code> to test write performance (demo!)</li>
+  <li>Use Wireshark</li>
+</ul>
+
+<figure id="figure-6"><img src="../../images/troubleshooting/wireshark.png" alt="Packet capture in Wireshark" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Packet capture in Wireshark</figcaption></figure>
+
+<hr />
+<h1 id="local-or-network-fs-slowdown-1">Local or Network FS slow/down</h1>
+
+<p>Solutions:</p>
+<ul>
+  <li>Don’t put the Galaxy server in that FS. Local distribution, CVMFS, ??</li>
+  <li>Install Galaxy in two places and use <a href="https://github.com/galaxyproject/galaxy/blob/8c2066f07ac7bb48c59cf8378e5a852e6fb82a4e/config/job_conf.xml.sample_advanced#L101">Pulsar Embedded Mode</a> with <a href="https://pulsar.readthedocs.io/en/latest/galaxy_conf.html#data-staging">file actions</a> to rewrite paths<sup>3</sup></li>
+  <li>Get a better network FS</li>
+</ul>
+
+<p>.reduce70[.footnote[<sup>3</sup> Ply @jmchilton with McDonalds hashbrowns for more Pulsar Embedded Mode documentation]]</p>
+
+<hr />
+<h1 id="nfs-caching-errors">NFS caching errors</h1>
+
+<p>Galaxy gets “No such file or directory” for files that exist. NFS attribute caching is to blame. Set:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy</span><span class="pi">:</span>
+    <span class="na">retry_job_output_collection</span><span class="pi">:</span> <span class="m">5</span>
+</code></pre></div></div>
+
+<p><a href="https://github.com/galaxyproject/galaxy/blob/476b1948190436664581cfe56c8c1c1dcc0b2370/lib/galaxy/jobs/__init__.py#L1469">retry_job_output_collection</a></p>
+
+<hr />
+<p>class: left</p>
+<h1 id="pkill-considered-useful">pkill considered useful</h1>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>pkill <span class="nt">-INT</span> <span class="nt">-o</span> <span class="nt">-u</span> galaxy uwsgi
+</code></pre></div></div>
+
+<p>Note if you’re not using our default/suggested uWSGI config, <code class="language-plaintext highlighter-rouge">SIGINT</code> (<code class="language-plaintext highlighter-rouge">CTRL</code>+<code class="language-plaintext highlighter-rouge">c</code>) and <code class="language-plaintext highlighter-rouge">SIGTERM</code> (the <code class="language-plaintext highlighter-rouge">kill(1)</code> default) behave differently.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">SIGKILL</code>: Brutally reload the application</li>
+  <li><code class="language-plaintext highlighter-rouge">SIGINT</code>: Brutally kill the application</li>
+</ul>
+
+<p>Our default/suggested uWSGI config includes:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">hook-master-start</span><span class="pi">:</span> <span class="s">unix_signal:2 gracefully_kill_them_all</span>
+<span class="na">hook-master-start</span><span class="pi">:</span> <span class="s">unix_signal:15 gracefully_kill_them_all</span>
+</code></pre></div></div>
+
+<p>This attempts to shut down gracefully, waiting for (by default) 60 seconds before killing.</p>
+
+<p>To alter the grace period, set the <a href="https://uwsgi-docs.readthedocs.io/en/latest/Options.html">*reload-mercy options</a>.</p>
+
+<hr />
+<h1 id="database-problems">Database problems</h1>
+
+<p>Slow queries, high load, etc.</p>
+
+<ul>
+  <li>Use <code class="language-plaintext highlighter-rouge">EXPLAIN ANALYZE</code> (demo!)
+    <ul>
+      <li><a href="https://gist.github.com/natefoo/da46bea8136ba67d65f616c86a27c454">Example of the “jobs ready to run” query</a></li>
+      <li><code class="language-plaintext highlighter-rouge">database_engine_option_echo</code> (but warning, extremely verbose)</li>
+      <li><code class="language-plaintext highlighter-rouge">slow_query_log_threshold</code> logs to Galaxy log file</li>
+      <li><code class="language-plaintext highlighter-rouge">sentry_sloreq_threshold</code> if using Sentry</li>
+      <li><a href="https://tatiyants.com/pev/#/plans">Postgres EXPLAIN Visualizer (PEV)</a> considered useful (<a href="https://gist.github.com/hexylena/467c7726b5ab9e18c47080893dbc072e">demo data</a>)</li>
+    </ul>
+  </li>
+  <li>Use <code class="language-plaintext highlighter-rouge">VACUUM ANALYZE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">gxadmin query pg-*</code> commands</li>
+</ul>
+
+<p>Increase <code class="language-plaintext highlighter-rouge">shared_buffers</code>. 2GB on Main (16GB of memory on VM)</p>
+
+<hr />
+<h1 id="other-stuff">Other stuff</h1>
+
+<hr />
+<h1 id="error-errno-32-broken-pipe">error: [Errno 32] Broken pipe</h1>
+
+<p>This error is not indicative of any kind of failure. It just means that the client closed a connection before the server finished sending a response.</p>
+
+<hr />
+<h1 id="installation-failures---python-dependencies">Installation failures - Python dependencies</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>psutil/_psutil_linux.c:12:20: fatal error: Python.h: No such file or directory
+compilation terminated.
+error: command 'x86_64-linux-gnu-gcc' failed with exit status 1
+</code></pre></div></div>
+
+<p>Find <code class="language-plaintext highlighter-rouge">Python.h</code> on <a href="http://packages.ubuntu.com/">packages.ubuntu.com</a> and install that package (hint: development package for Python 3)</p>
+
+<hr />
+<h1 id="other-stuff-1">Other stuff</h1>
+
+<ul>
+  <li>Galaxy server process (not jobs): Run Galaxy in a cgroup with a memory limit</li>
+  <li>You can add mules without a hard restart: add <code class="language-plaintext highlighter-rouge">mule:</code>, adjust <code class="language-plaintext highlighter-rouge">farm:</code>, run <code class="language-plaintext highlighter-rouge">pkill -HUP -o -u galaxy uwsgi</code></li>
+  <li><code class="language-plaintext highlighter-rouge">scripts/helper.py</code> and <code class="language-plaintext highlighter-rouge">scripts/secret_decoder_ring.py</code> can encode/decode IDs from UI</li>
+  <li><code class="language-plaintext highlighter-rouge">scripts/helper.py</code> can also fail jobs with a notice to the user</li>
+</ul>
+
+<hr />
+<h1 id="job-failures">Job failures</h1>
+
+<p>“Unable to run job due to a misconfiguration of the Galaxy job running system.  Please contact a site administrator.”</p>
+
+<p>There is a traceback in the Galaxy log. Go find it.</p>
+
+<hr />
+<h1 id="node-failures">Node failures</h1>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>sinfo <span class="nt">-Nel</span>
+<span class="go">Fri Nov 11 09:50:01 2016
+NODELIST   NODES PARTITION       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT FEATURES REASON
+localhost      1    debug*        down    2    2:1:1      1        0      1   (null) Node unexpectedly rebooted
+</span></code></pre></div></div>
+
+<p>Figure out why it rebooted and:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>scontrol update <span class="nv">nodename</span><span class="o">=</span>localhost <span class="nv">state</span><span class="o">=</span>resume
+</code></pre></div></div>
+
+<hr />
+<h1 id="user-over-quota">User over quota</h1>
+
+<p>Instruct user (or use impersonate with consent) to check for <em>deleted</em> but not <em>purged</em> histories</p>
+
+<p>In the Admin/Users menu you can run <code class="language-plaintext highlighter-rouge">Recalculate Disk Usage</code> on a certain user</p>
+
+<p>There is also a command line version: <code class="language-plaintext highlighter-rouge">scripts/set_user_disk_usage.py</code></p>
+
+<hr />
+<h1 id="any-troubling-galaxy-situations-you-have">Any troubling Galaxy situations you have?</h1>
+
+<hr />
+<h1 id="where-to-get-help">Where to get help</h1>
+
+<ul>
+  <li><a href="https://gitter.im/galaxyproject/admins">Admins Chat</a></li>
+  <li><a href="https://help.galaxyproject.org/">Galaxy Help</a></li>
+  <li><a href="http://dev.list.galaxyproject.org/">galaxy-dev Mailing list</a></li>
+  <li><a href="https://galaxyproject.org/support/">Hub Support page</a></li>
+</ul>
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+
+<img src="/training-material/assets/images/gat.png" alt="page logo" style="height: 100px;"/>
+
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

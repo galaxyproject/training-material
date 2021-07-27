@@ -29,30 +29,8 @@
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
-        
-
-
-
-
-
-
-
-
-
-
-
-<!-- Gitter -->
-
-
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
             <a class="navbar-brand" href="/training-material/">
                 <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
@@ -65,11 +43,12 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        
                         <a class="nav-link" href="/training-material/topics/statistics" title="Go back to list of tutorials">
-                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Statistics and machine learning
+                            <i class="far fa-folder" aria-hidden="true"></i> Statistics and machine learning
                         </a>
+                        
                     </li>
-
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
         <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
@@ -208,15 +187,8 @@
     </div>
 </li>
 
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/FNN/tutorial.md">
-                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
-                        </a>
-                    </li>
-                    -->
 
-                     <!-- Search bar-->
+                    <!-- Search bar-->
                     <li class="nav-item">
                       <div id="navbarSupportedContent">
                         <!-- Search form -->
@@ -228,16 +200,37 @@
                         </form>
                       </div>
                     </li>
-
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 
-<div class="container main-content">
-    <script type="application/ld+json">
+        <div class="container main-content" role="main">
         
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
 
 
 {
@@ -374,55 +367,56 @@
     }
   ]
 }
-    </script>
+</script>
 
-    <section class="tutorial topic-statistics">
-        <h1 data-toc-skip>Deep Learning (Part 1) - Feedforward neural networks (FNN)</h1>
-        
+<section class="tutorial topic-statistics">
+    <h1 data-toc-skip>Deep Learning (Part 1) - Feedforward neural networks (FNN)</h1>
+    
 
-        <div class="contributors-line">By: 
+    <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/kxk302/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/kxk302" alt="Kaivan Kamali">Kaivan Kamali</a>
+ <a href="/training-material/hall-of-fame/kxk302/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/kxk302" alt="Avatar">Kaivan Kamali</a>
 
 </div>
 
-        <blockquote class="overview">
-            <h3>Overview</h3>
-            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
-            <ul>
-            
-            <li><p>What is a feedforward neural network (FNN)?</p>
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions</strong>
+        <ul>
+        
+        <li><p>What is a feedforward neural network (FNN)?</p>
 </li>
-            
-            <li><p>What are some applications of FNN?</p>
+        
+        <li><p>What are some applications of FNN?</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
-            <ul>
-            
-            <li><p>Understand the inspiration for neural networks</p>
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+        <ul>
+        
+        <li><p>Understand the inspiration for neural networks</p>
 </li>
-            
-            <li><p>Learn various activation functions, and classification/regression problems solved by neural networks</p>
+        
+        <li><p>Learn various activation functions, and classification/regression problems solved by neural networks</p>
 </li>
-            
-            <li><p>Discuss various cost/loss functions and the backpropagation algorithm</p>
+        
+        <li><p>Discuss various cost/loss functions and the backpropagation algorithm</p>
 </li>
-            
-            <li><p>Learn how to create a neural network using Galaxy’s deep learning tools</p>
+        
+        <li><p>Learn how to create a neural network using Galaxy’s deep learning tools</p>
 </li>
-            
-            <li><p>Solve a simple regression problem, car purchase price prediction, via FNN in Galaxy</p>
+        
+        <li><p>Solve a simple regression problem, car purchase price prediction, via FNN in Galaxy</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            
-            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
-            <ul>
-            
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+        <ul>
+        
     <li>
     
         
@@ -432,7 +426,7 @@
     
     </li>
 
-            
+        
     <li>
     
         
@@ -486,54 +480,53 @@
     
     </li>
 
-            </ul>
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default"><a href="/training-material/topics/statistics/tutorials/FNN/slides.html">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Slides
+                </a></li>
             
 
             
-            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours</div>
-            
-
-            
-
-            
-            
-
-            
-            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
-            <ul>
-                <div class="supporting_material">
-                
-                    <li class="btn btn-default"><a href="/training-material/topics/statistics/tutorials/FNN/slides.html" title="Slides for this tutorial">
-                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides
-                    </a></li>
-                
-
-                
-                    <li class="btn btn-default supporting_material">
+                <li class="btn btn-default supporting_material">
 <a class="topic-icon" href="https://zenodo.org/record/4660497">
-    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
 </a>
 
 </li>
-                
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
     <a class="topic-icon" href="/training-material/topics/statistics/tutorials/FNN/workflows/" title="Workflows" alt="Deep Learning (Part 1) - Feedforward neural networks (FNN) workflows">
-        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
     </a>
 
 </li>
-                
+            
 
-                
+            
 
-                
-                
-                
+            
+            
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
@@ -546,8 +539,6 @@
             </a>
         </li>
     
-    
-        
     
         
     
@@ -682,8 +673,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -712,6 +701,10 @@
         
     
         
+        <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
+            UseGalaxy.org (Main)
+        </a>
+        
     
         
         <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
@@ -727,22 +720,23 @@
 
 
 </li>
-                
-                </div>
-            </ul>
             
+        </ul>
+        
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 26, 2021 </div>
-        </blockquote>
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 26, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
-        <div class="container">
-            <div class="row">
-                <!-- sidebar, which will move to the top on a small screen -->
-                <div class="col-sm-2">
-                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
-                </div>
-                <div class="col-sm-10">
-                    <h1 class="no_toc" id="introduction">Introduction</h1>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <p>Artificial neural networks are a machine learning discipline roughly inspired by how neurons in a
 human brain work. In the past decade, there has been a huge resurgence of neural networks thanks
@@ -785,7 +779,7 @@ neuron. A synapse can either enhance or inhibit the signal that passes through i
 by changing the effectiveness of synapse. If the signals received exceeds a threshold, the neuron
 <em>fires</em>, i.e., it transmits a signal to other neurons. If not, it will not fire.</p>
 
-<figure id="figure-1"><img src="../../images/FNN_bio_neuron.png" alt="Sketch of a biological neuron and its components" /><figcaption><span class="figcaption-prefix">Figure 1:</span> A biological neuron (<a class="citation" href="#JainEtAl">Jain <i>et al.</i> 1996</a>)</figcaption></figure>
+<figure id="figure-1"><img src="../../images/FNN_bio_neuron.png" alt="Sketch of a biological neuron and its components" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> A biological neuron (<a class="citation" href="#JainEtAl">Jain <i>et al.</i> 1996</a>)</figcaption></figure>
 
 <p>Cerebral cortex, the outer most layer of the brain, is a sheet of neurons about 2 to 3 mm thick,
 with a surface area of about 2,200 \(cm^{2}\). Cerebral cortex has about \(10^{11}\) neurons.
@@ -822,7 +816,7 @@ output is 0 (it does not fire). Bias allows us to shift the activation function.
 <p>Figure 2 shows a Perceptron, a single layer FNN, where the input is 3 dimensional (input layer has
 3 nodes), and output is 1 dimensional (output layer has 1 node).</p>
 
-<figure id="figure-2"><img src="../../images/FFNN_no_hidden.png" alt="Neurons forming the input and output layers of a single layer feedforward neural network" /><figcaption><span class="figcaption-prefix">Figure 2:</span> A perceptron</figcaption></figure>
+<figure id="figure-2"><img src="../../images/FFNN_no_hidden.png" alt="Neurons forming the input and output layers of a single layer feedforward neural network" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> A perceptron</figcaption></figure>
 
 <p>In supervised learning, we are given a set of input-output pairs, called the <em>training
 set</em>. Given the training set, the learning algorithm (iteratively) adjusts the model
@@ -838,7 +832,7 @@ Approximation Theorem, a FNN with one hidden layer can represent any function (<
 although in practice training such a model is very difficult (if not impossible), hence, we usually
 add multiple hidden layers to solve complex problems.</p>
 
-<figure id="figure-3"><img src="../../images/FFNN.png" alt="Neurons forming the input, output, and hidden layers of a multi-layer feedforward neural network" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are omitted for clarity</figcaption></figure>
+<figure id="figure-3"><img src="../../images/FFNN.png" alt="Neurons forming the input, output, and hidden layers of a multi-layer feedforward neural network" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are omitted for clarity</figcaption></figure>
 
 <p>The problem with multi-layer FNN was lack of a learning algorithm, as the Perceptron’s learning
 algorithm could not be extended to multi-layer FNN. This along with Minsky and Papert highlighting
@@ -862,7 +856,7 @@ techniques that can prevent that (<a class="citation" href="#KukackaEtAl">Kukack
 <p>There are many activation functions besides the step function used in Perceptron (<a class="citation" href="#nwankpaEtAl">Nwankpa <i>et al.</i> 2018</a>). Figure 4 shows
 some of the more common activation functions.</p>
 
-<figure id="figure-4"><img src="../../images/FNN_activation_functions.png" alt="Table showing the formula, graph, derivative, and range of common activation functions" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Common activation functions (Source: https://en.wikipedia.org/wiki/Activation_function)</figcaption></figure>
+<figure id="figure-4"><img src="../../images/FNN_activation_functions.png" alt="Table showing the formula, graph, derivative, and range of common activation functions" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Common activation functions (Source: https://en.wikipedia.org/wiki/Activation_function)</figcaption></figure>
 
 <p>Linear activation function is used in the output layer of a network when we have a regression problem. It does
 not make sense to use it in all layers, as such multi-layer network can be reduced to a single layer network.
@@ -918,7 +912,7 @@ mutually exclusive, we use another method called <em>multi-hot encoding</em>. Su
 classification, where an image can have a dog, panda, or cat in it. We represent the label by a vector of 3, and if
 dog and cat are present in the image, first and third element of the vector are one and the second element is zero (<a class="citation" href="#Bagheri">Bagheri 2020</a>).</p>
 
-<figure id="figure-5"><img src="../../images/FNN_output_encoding.png" alt="Three images illustrating binary, multiclass, and multilabel classifications and their label representation" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Examples of binary, multiclass, and multilabel classifications and their label representation (<a class="citation" href="#Bagheri">Bagheri 2020</a>)</figcaption></figure>
+<figure id="figure-5"><img src="../../images/FNN_output_encoding.png" alt="Three images illustrating binary, multiclass, and multilabel classifications and their label representation" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Examples of binary, multiclass, and multilabel classifications and their label representation (<a class="citation" href="#Bagheri">Bagheri 2020</a>)</figcaption></figure>
 
 <p>Figure 5 shows examples of binary, multiclass, and multilabel classification problems and their associated one-hot
 encoded or multi-hot encoded labels. The output layer of a neural network for binary classification usually has a
@@ -1235,11 +1229,11 @@ determination) score for our model is 0.87 (out of the best possible score of 1.
 The best value for RMSE is obviously 0 for perfect prediction. The third graph (Figure 8) plots residual (predicted - true) vs
 predicted values. The better our model’s predictions, the closer the points to y=0 line.</p>
 
-<figure id="figure-6"><img src="../../images/FNN_true_predicted_plot.png" alt="True vs predicted values plot" /><figcaption><span class="figcaption-prefix">Figure 6:</span> True vs predicted values plot</figcaption></figure>
+<figure id="figure-6"><img src="../../images/FNN_true_predicted_plot.png" alt="True vs predicted values plot" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> True vs predicted values plot</figcaption></figure>
 
-<figure id="figure-7"><img src="../../images/FNN_scatter_plot.png" alt="Scatterplot of true vs predicted values plot" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Scatterplot of true vs predicted values plot</figcaption></figure>
+<figure id="figure-7"><img src="../../images/FNN_scatter_plot.png" alt="Scatterplot of true vs predicted values plot" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Scatterplot of true vs predicted values plot</figcaption></figure>
 
-<figure id="figure-8"><img src="../../images/FNN_residual_plot.png" alt="Residual vs predicted values plot" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Residual vs predicted values plot</figcaption></figure>
+<figure id="figure-8"><img src="../../images/FNN_residual_plot.png" alt="Residual vs predicted values plot" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Residual vs predicted values plot</figcaption></figure>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
@@ -1248,18 +1242,18 @@ networks still in use today. We then discussed different activation functions, w
 and how backpropagation minimizes the cost function. Finally, we implemented a FNN in <span class="notranslate">Galaxy</span> to solve a regression problem on car purchase price prediction data.</p>
 
 
-                    
+                
 
-                    <h1>Frequently Asked Questions</h1>
-                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/statistics/faqs/">FAQ page for the Statistics and machine learning topic</a> to see if your question is listed there.
-                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
-                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/statistics/faqs/">FAQ page for the Statistics and machine learning topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
-                    
+                
 
-                    
-                    <h1 id="bibliography">References</h1>
-                    <ol class="bibliography"><li><span id="Rosenblatt">Rosenblatt, F., 1957 <b>The Perceptron, a Perceiving and Recognizing Automaton Project Para</b>. <i>Cornell Aeronautical Laboratory</i>.</span>
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li><span id="Rosenblatt">Rosenblatt, F., 1957 <b>The Perceptron, a Perceiving and Recognizing Automaton Project Para</b>. <i>Cornell Aeronautical Laboratory</i>.</span>
     
     
     
@@ -1376,85 +1370,85 @@ and how backpropagation minimizes the cost function. Finally, we implemented a F
     
 
 </li></ol>
-                    
+                
 
-                    
+                
 
-                    <h1>Feedback</h1>
-                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
-                    <div id="feedback-button">
-                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                    </div>
-                    <div id="feedback-form">
-                    </div>
-                    <script type="text/javascript">
-                        (function (window, document) {
-                            function onDocumentReady(fn) {
-                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                    fn();
-                                } else {
-                                    document.addEventListener('DOMContentLoaded', fn);
-                                }
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
                             }
+                        }
 
-                            onDocumentReady(function () {
-                                $("#feedback-button").click(function(evt){
-                                    var e = $(evt.target)
-                                    e.hide();
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
 
-                                    $("#feedback-form").html(`
-                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Deep Learning (Part 1) - Feedforward neural networks (FNN) (Statistics and machine learning)">Loading...</iframe>
-                                    `)
-                                })
-                            });
-                        })(window, document);
-                    </script>
-
-
-
-                    <h1>Citing this Tutorial</h1>
-                    <p>
-                        <ol>
-                            <li id="citation-text">Kaivan Kamali, 2021 <b>Deep Learning (Part 1) - Feedforward neural networks (FNN) (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/FNN/tutorial.html">https://training.galaxyproject.org/training-material/topics/statistics/tutorials/FNN/tutorial.html</a> Online; accessed TODAY
-                            </li>
-                            <li>
-                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
-                            </li>
-                        </ol>
-                    </p>
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Deep Learning (Part 1) - Feedforward neural networks (FNN) (Statistics and machine learning)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
 
 
-                    <blockquote class="details">
-                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
-                      <p style="display: none;">
 
-                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Kaivan Kamali, 2021 <b>Deep Learning (Part 1) - Feedforward neural networks (FNN) (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/FNN/tutorial.html">https://training.galaxyproject.org/training-material/topics/statistics/tutorials/FNN/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{statistics-FNN,
-    author = "Kaivan Kamali",
-    title = "Deep Learning (Part 1) - Feedforward neural networks (FNN) (Galaxy Training Materials)",
-    year = "2021",
-    month = "06",
-    day = "26"
-    url = "\url{https://training.galaxyproject.org/training-material/topics/statistics/tutorials/FNN/tutorial.html}",
-    note = "[Online; accessed TODAY]"
+author = "Kaivan Kamali",
+title = "Deep Learning (Part 1) - Feedforward neural networks (FNN) (Galaxy Training Materials)",
+year = "2021",
+month = "06",
+day = "26"
+url = "\url{https://training.galaxyproject.org/training-material/topics/statistics/tutorials/FNN/tutorial.html}",
+note = "[Online; accessed TODAY]"
 }
 @article{Batut_2018,
-        doi = {10.1016/j.cels.2018.05.012},
-        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
-        year = 2018,
-        month = {jun},
-        publisher = {Elsevier {BV}},
-        volume = {6},
-        number = {6},
-        pages = {752--758.e1},
-        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
-        title = {Community-Driven Data Analysis Training for Biology},
-        journal = {Cell Systems}
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
 }</code>
-                    </pre></div></div>
-                    </p>
-                    </blockquote>
+                </pre></div></div>
+                </p>
+                </blockquote>
 
 
 <script type="text/javascript">
@@ -1464,15 +1458,15 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
-                    
+                
 
-                    
-                    <blockquote class="agenda follow-up">
-                        <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
-                        <ul>
-                            
+                
+                <blockquote class="agenda follow-up">
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
     <li>
     
         
@@ -1529,34 +1523,20 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
     
     </li>
 
-                        </ul>
-                    </blockquote>
-                    
+                    </ul>
+                </blockquote>
+                
 
-                </div>
             </div>
         </div>
-    </section>
-</div>
-
-
-<footer>
-    <div class="container">
-        <p>
-            This material is the result of a collaborative work. Thanks to the
-            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Kaivan Kamali)!
-        </p>
-        <p>
-            Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/statistics/tutorials/FNN/tutorial.md">GitHub</a>.
-        </p>
-        <p>
-    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-</p>
     </div>
-</footer>
+</section>
+<br/>
+<br/>
+<br/>
 
+        </div>
+        
     </body>
     <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>

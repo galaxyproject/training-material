@@ -29,30 +29,8 @@
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
-        
-
-
-
-
-
-
-
-
-
-
-
-<!-- Gitter -->
-
-
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/galaxy-single-cell'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
             <a class="navbar-brand" href="/training-material/">
                 <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
@@ -65,11 +43,12 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        
                         <a class="nav-link" href="/training-material/topics/transcriptomics" title="Go back to list of tutorials">
-                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Transcriptomics
+                            <i class="far fa-folder" aria-hidden="true"></i> Transcriptomics
                         </a>
+                        
                     </li>
-
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
         <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
@@ -208,15 +187,8 @@
     </div>
 </li>
 
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.md">
-                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
-                        </a>
-                    </li>
-                    -->
 
-                     <!-- Search bar-->
+                    <!-- Search bar-->
                     <li class="nav-item">
                       <div id="navbarSupportedContent">
                         <!-- Search form -->
@@ -228,16 +200,37 @@
                         </form>
                       </div>
                     </li>
-
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 
-<div class="container main-content">
-    <script type="application/ld+json">
+        <div class="container main-content" role="main">
         
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/galaxy-single-cell'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
 
 
 {
@@ -359,6 +352,20 @@
     },
     {
       "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
       "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
       "name": "Mapping",
       "description": "Slides for 'Mapping' tutorial",
@@ -387,6 +394,20 @@
     },
     {
       "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
       "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/tutorials/scrna-preprocessing/slides.html",
       "name": "Dealing with Cross-Contamination in Fixed Barcode Protocols",
       "description": "Slides for 'Dealing with Cross-Contamination in Fixed Barcode Protocols' tutorial",
@@ -405,6 +426,20 @@
       "name": "Pre-processing of Single-Cell RNA Data",
       "description": "Hands-on for 'Pre-processing of Single-Cell RNA Data' tutorial",
       "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/tutorials/scrna-preprocessing/slides.html",
+      "name": "Dealing with Cross-Contamination in Fixed Barcode Protocols",
+      "description": "Slides for 'Dealing with Cross-Contamination in Fixed Barcode Protocols' tutorial",
+      "learningResourceType": "slides",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -475,70 +510,71 @@
     }
   ]
 }
-    </script>
+</script>
 
-    <section class="tutorial topic-transcriptomics">
-        <h1 data-toc-skip>Clustering 3K PBMCs with Scanpy</h1>
-        
+<section class="tutorial topic-transcriptomics">
+    <h1 data-toc-skip>Clustering 3K PBMCs with Scanpy</h1>
+    
 
-        <div class="contributors-line">By: 
+    <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Bérénice Batut">Bérénice Batut</a> <a href="/training-material/hall-of-fame/hrhotz/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hrhotz" alt="Hans-Rudolf Hotz">Hans-Rudolf Hotz</a> <a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mtekman" alt="Mehmet Tekman">Mehmet Tekman</a>
+ <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Avatar">Bérénice Batut</a> <a href="/training-material/hall-of-fame/hrhotz/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hrhotz" alt="Avatar">Hans-Rudolf Hotz</a> <a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mtekman" alt="Avatar">Mehmet Tekman</a>
 
 </div>
 
-        <blockquote class="overview">
-            <h3>Overview</h3>
-            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
-            <ul>
-            
-            <li><p>What are the steps to prepare single-cell RNA-Seq data for clustering?</p>
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions</strong>
+        <ul>
+        
+        <li><p>What are the steps to prepare single-cell RNA-Seq data for clustering?</p>
 </li>
-            
-            <li><p>How to cluster cells in single-cell RNA-Seq data?</p>
+        
+        <li><p>How to cluster cells in single-cell RNA-Seq data?</p>
 </li>
-            
-            <li><p>How cell type annotation can be assigned to cell clusters?</p>
+        
+        <li><p>How cell type annotation can be assigned to cell clusters?</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
-            <ul>
-            
-            <li><p>Describe an AnnData object to store single-cell data</p>
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+        <ul>
+        
+        <li><p>Describe an AnnData object to store single-cell data</p>
 </li>
-            
-            <li><p>Explain the preprocessing steps for single-cell data</p>
+        
+        <li><p>Explain the preprocessing steps for single-cell data</p>
 </li>
-            
-            <li><p>Evaluate quality of single-cell data and apply steps to select and filter cells and genes based on QC</p>
+        
+        <li><p>Evaluate quality of single-cell data and apply steps to select and filter cells and genes based on QC</p>
 </li>
-            
-            <li><p>Execute data normalization and scaling</p>
+        
+        <li><p>Execute data normalization and scaling</p>
 </li>
-            
-            <li><p>Identify highly variable genes</p>
+        
+        <li><p>Identify highly variable genes</p>
 </li>
-            
-            <li><p>Construct and run a dimensionality reduction using Principal Component Analysis</p>
+        
+        <li><p>Construct and run a dimensionality reduction using Principal Component Analysis</p>
 </li>
-            
-            <li><p>Perform a graph-based clustering for cells</p>
+        
+        <li><p>Perform a graph-based clustering for cells</p>
 </li>
-            
-            <li><p>Identify marker genes for the clusters</p>
+        
+        <li><p>Identify marker genes for the clusters</p>
 </li>
-            
-            <li><p>Construct and run a cell type annotation for the clusters</p>
+        
+        <li><p>Construct and run a cell type annotation for the clusters</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            
-            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
-            <ul>
-            
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+        <ul>
+        
     <li>
     
         
@@ -599,7 +635,7 @@
     
     </li>
 
-            
+        
     <li>
     
         
@@ -764,54 +800,53 @@
     
     </li>
 
-            </ul>
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 5 hours</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default"><a href="/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/slides.html">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Slides
+                </a></li>
             
 
             
-            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 5 hours</div>
-            
-
-            
-
-            
-            
-
-            
-            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
-            <ul>
-                <div class="supporting_material">
-                
-                    <li class="btn btn-default"><a href="/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/slides.html" title="Slides for this tutorial">
-                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides
-                    </a></li>
-                
-
-                
-                    <li class="btn btn-default supporting_material">
+                <li class="btn btn-default supporting_material">
 <a class="topic-icon" href="https://zenodo.org/record/3581213">
-    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
 </a>
 
 </li>
-                
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
     <a class="topic-icon" href="/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/workflows/" title="Workflows" alt="Clustering 3K PBMCs with Scanpy workflows">
-        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
     </a>
 
 </li>
-                
+            
 
-                
+            
 
-                
-                
-                
+            
+            
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
@@ -824,8 +859,6 @@
             </a>
         </li>
     
-    
-        
     
         
     
@@ -948,8 +981,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -1013,22 +1044,23 @@
 
 
 </li>
-                
-                </div>
-            </ul>
             
+        </ul>
+        
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 23, 2021 </div>
-        </blockquote>
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 23, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
-        <div class="container">
-            <div class="row">
-                <!-- sidebar, which will move to the top on a small screen -->
-                <div class="col-sm-2">
-                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
-                </div>
-                <div class="col-sm-10">
-                    <h1 class="no_toc" id="introduction">Introduction</h1>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <blockquote class="comment">
   <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
@@ -1157,7 +1189,7 @@ https://zenodo.org/record/3581213/files/matrix.mtx
 
 <p>The most common format, called <a href="https://anndata.readthedocs.io/en/stable/"><code class="language-plaintext highlighter-rouge">AnnData</code></a>, stores the matrix as well as gene and cell annotations in a concise, compressed and extremely readable manner:</p>
 
-<figure id="figure-1"><img src="../../images/tenx_anndata.svg" alt="Anndata format" /><figcaption><span class="figcaption-prefix">Figure 1:</span> <code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of observations (i.e. cells) <code>obs</code>, variables (i.e. genes) <code>var</code> and unstructured annotations <code>uns</code>.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/tenx_anndata.svg" alt="Anndata format" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> <code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of observations (i.e. cells) <code>obs</code>, variables (i.e. genes) <code>var</code> and unstructured annotations <code>uns</code>.</figcaption></figure>
 
 <p>This format is used by <a href="https://scanpy.readthedocs.io/en/stable/index.html">Scanpy</a> (<a class="citation" href="#wolf2018scanpy">Wolf <i>et al.</i> 2018</a>), the tool suite for analyzing <span class="notranslate">single-cell</span> gene <span class="notranslate">expression</span> data that we will use in this tutorial. So we need first to import the matrix and annotations of genes and cells into an <code class="language-plaintext highlighter-rouge">AnnData</code> object.</p>
 
@@ -1761,7 +1793,7 @@ RP11-34P13.8	ENSG00000239945
       <blockquote class="question">
         <h3 id="question-questions-8"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-        <p><img src="../../images/scrna-scanpy-pbmc3k/qc_violin_plot.png" alt="QC violin plot" />
+        <p><img src="../../images/scrna-scanpy-pbmc3k/qc_violin_plot.png" alt="QC violin plot" loading="lazy" />
 <!-- To update... --></p>
 
         <p>How do the distributions of the 3 QC metrics look?</p>
@@ -1801,7 +1833,7 @@ RP11-34P13.8	ENSG00000239945
       <blockquote class="question">
         <h3 id="question-questions-9"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-        <p><img src="../../images/scrna-scanpy-pbmc3k/qc_scatter_total_counts_n_genes_by_counts.png" alt="QC total_counts n_genes_by_counts" /></p>
+        <p><img src="../../images/scrna-scanpy-pbmc3k/qc_scatter_total_counts_n_genes_by_counts.png" alt="QC total_counts n_genes_by_counts" loading="lazy" /></p>
 
         <p>Is there any relationship between the cell size and the number of expressed genes?</p>
 
@@ -1836,7 +1868,7 @@ RP11-34P13.8	ENSG00000239945
       <blockquote class="question">
         <h3 id="question-questions-10"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-        <p><img src="../../images/scrna-scanpy-pbmc3k/qc_scatter_n_genes_by_counts_pct_counts_mito.png" alt="QC total_counts pct_counts_mito" /></p>
+        <p><img src="../../images/scrna-scanpy-pbmc3k/qc_scatter_n_genes_by_counts_pct_counts_mito.png" alt="QC total_counts pct_counts_mito" loading="lazy" /></p>
 
         <ol>
           <li>Is there any relationship between the number of expressed genes and the proportion of <span class="notranslate">reads</span> mapped to mitochondrial genes?</li>
@@ -2102,7 +2134,7 @@ RP11-34P13.8	ENSG00000239945
 
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/feature_selection_highly_variable_genes.png" alt="Highly variable genes" /></p>
+<p><img src="../../images/scrna-scanpy-pbmc3k/feature_selection_highly_variable_genes.png" alt="Highly variable genes" loading="lazy" /></p>
 
 <p>Both highly variable genes and other genes are still in the <code class="language-plaintext highlighter-rouge">AnnData</code> object. We can now actually keep only the highly variable genes.</p>
 
@@ -2494,7 +2526,7 @@ RP11-34P13.8	ENSG00000239945
   </ol>
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/pca_overview.png" alt="PCA overview" /></p>
+<p><img src="../../images/scrna-scanpy-pbmc3k/pca_overview.png" alt="PCA overview" loading="lazy" /></p>
 
 <p>On these plots we see the different cells projected onto the first 3 PCs. We can already see subpopulations of cells, but only 3 PCs are represented there and plot like these are not so informative. It may be more interesting to project also the values for the genes, since perhaps these are the genes most involved in the 3 PCs.</p>
 
@@ -2515,7 +2547,7 @@ RP11-34P13.8	ENSG00000239945
       <blockquote class="question">
         <h3 id="question-questions-20"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-        <p><img src="../../images/scrna-scanpy-pbmc3k/pca_loadings.png" alt="PCA loadings" /></p>
+        <p><img src="../../images/scrna-scanpy-pbmc3k/pca_loadings.png" alt="PCA loadings" loading="lazy" /></p>
 
         <p>What are the top genes for each of the 3 first PCs? What do they represent?</p>
 
@@ -2563,7 +2595,7 @@ RP11-34P13.8	ENSG00000239945
   </ol>
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/pca_scatter.png" alt="PCA scatter for CST3, NKG7 and PPBP" /></p>
+<p><img src="../../images/scrna-scanpy-pbmc3k/pca_scatter.png" alt="PCA scatter for CST3, NKG7 and PPBP" loading="lazy" /></p>
 
 <blockquote class="question">
   <h3 id="question-questions-21"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -2608,7 +2640,7 @@ RP11-34P13.8	ENSG00000239945
 
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/pca_variance_ratio.png" alt="PCA variance ratio" /></p>
+<p><img src="../../images/scrna-scanpy-pbmc3k/pca_variance_ratio.png" alt="PCA variance ratio" loading="lazy" /></p>
 
 <p>To determine the elbow point, we assume that each of the PCs should explain much more variance than the remaining PCS. So after the last PCs we choose, the percentage of variance explained should not drop much.</p>
 
@@ -2779,7 +2811,7 @@ RP11-34P13.8	ENSG00000239945
 
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/umap_before_clustering.png" alt="UMAP coordinates before clustering" /></p>
+<p><img src="../../images/scrna-scanpy-pbmc3k/umap_before_clustering.png" alt="UMAP coordinates before clustering" loading="lazy" /></p>
 
 <blockquote class="question">
   <h3 id="question-questions-25"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -2883,7 +2915,7 @@ RP11-34P13.8	ENSG00000239945
 
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/umap_after_clustering.png" alt="UMAP coordinates after clustering" /></p>
+<p><img src="../../images/scrna-scanpy-pbmc3k/umap_after_clustering.png" alt="UMAP coordinates after clustering" loading="lazy" /></p>
 
 <blockquote class="question">
   <h3 id="question-questions-27"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -3013,7 +3045,7 @@ RP11-34P13.8	ENSG00000239945
   </ol>
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_t-test.png" alt="Rank genes with t-test" /></p>
+<p><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_t-test.png" alt="Rank genes with t-test" loading="lazy" /></p>
 
 <p>We can quickly look at the 5 top ranked genes per cluster:</p>
 
@@ -3163,7 +3195,7 @@ RP11-34P13.8	ENSG00000239945
 
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_wilcoxon.png" alt="Rank genes with Wilcoxon" /></p>
+<p><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_wilcoxon.png" alt="Rank genes with Wilcoxon" loading="lazy" /></p>
 
 <p>We can quickly look at the 5 top ranked genes per cluster:</p>
 
@@ -3301,7 +3333,7 @@ RP11-34P13.8	ENSG00000239945
 
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/violin_plot_rank_genes_groups_CST3_NKG7_PPBP.png" alt="Violin plot for CST3, NKG7 and PPBP after clustering" /></p>
+<p><img src="../../images/scrna-scanpy-pbmc3k/violin_plot_rank_genes_groups_CST3_NKG7_PPBP.png" alt="Violin plot for CST3, NKG7 and PPBP after clustering" loading="lazy" /></p>
 
 <blockquote class="question">
   <h3 id="question-questions-31"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -3359,7 +3391,7 @@ RP11-34P13.8	ENSG00000239945
 
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/violin_plot_marker_genes.png" alt="Violin plot for top marker genes" /></p>
+<p><img src="../../images/scrna-scanpy-pbmc3k/violin_plot_marker_genes.png" alt="Violin plot for top marker genes" loading="lazy" /></p>
 
 <blockquote class="question">
   <h3 id="question-questions-32"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -3410,7 +3442,7 @@ RP11-34P13.8	ENSG00000239945
 
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/umap_plot_marker_genes.png" alt="Top marker gene expression on a UMAP plot" /></p>
+<p><img src="../../images/scrna-scanpy-pbmc3k/umap_plot_marker_genes.png" alt="Top marker gene expression on a UMAP plot" loading="lazy" /></p>
 
 <blockquote class="question">
   <h3 id="question-questions-33"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -3448,7 +3480,7 @@ RP11-34P13.8	ENSG00000239945
 
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/plot_rank_genes_groups_heatmap.png" alt="Heatmap of the gene expression in cells" /></p>
+<p><img src="../../images/scrna-scanpy-pbmc3k/plot_rank_genes_groups_heatmap.png" alt="Heatmap of the gene expression in cells" loading="lazy" /></p>
 
 <p>Each cells is shown in a row and in columns are the marker genes for each cluster.</p>
 
@@ -3522,7 +3554,7 @@ RP11-34P13.8	ENSG00000239945
 
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_wilcoxon_0_vs_1.png" alt="Rank genes 0 vs 1 with Wilcoxon" /></p>
+<p><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_wilcoxon_0_vs_1.png" alt="Rank genes 0 vs 1 with Wilcoxon" loading="lazy" /></p>
 
 <blockquote class="question">
   <h3 id="question-questions-35"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -3560,7 +3592,7 @@ RP11-34P13.8	ENSG00000239945
   </ol>
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_violin_wilcoxon_0_vs_1.png" alt="Violin plot for marker genes for clusters 0 vs 1 with Wilcoxon" /></p>
+<p><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_violin_wilcoxon_0_vs_1.png" alt="Violin plot for marker genes for clusters 0 vs 1 with Wilcoxon" loading="lazy" /></p>
 
 <p>Previous visualizations like the heatmap can also be used to represent the differential <span class="notranslate">expression</span> of the marker genes between both clusters.</p>
 
@@ -3881,7 +3913,7 @@ RP11-34P13.8	ENSG00000239945
   </ol>
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/umap_annotated_clusters.png" alt="UMAP plot with annotated clusters" /></p>
+<p><img src="../../images/scrna-scanpy-pbmc3k/umap_annotated_clusters.png" alt="UMAP plot with annotated clusters" loading="lazy" /></p>
 
 <blockquote class="question">
   <h3 id="question-questions-38"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -3992,7 +4024,7 @@ RP11-34P13.8	ENSG00000239945
 
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/dotplot_annotated_clusters.png" alt="Dotplot plot with annotated clusters" /></p>
+<p><img src="../../images/scrna-scanpy-pbmc3k/dotplot_annotated_clusters.png" alt="Dotplot plot with annotated clusters" loading="lazy" /></p>
 
 <blockquote class="question">
   <h3 id="question-questions-39"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -4040,34 +4072,34 @@ RP11-34P13.8	ENSG00000239945
 
 
 
-                    
-                    <blockquote class="key_points">
-                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
-                        <ul>
-                            
-                            <li><p>scRNA-seq data analysis is complex and exploratory process, still in development</p>
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>scRNA-seq data analysis is complex and exploratory process, still in development</p>
 </li>
-                            
-                            <li><p>Different tools and parameters should be tested for each step of the process</p>
+                        
+                        <li><p>Different tools and parameters should be tested for each step of the process</p>
 </li>
-                            
-                        </ul>
-                    </blockquote>
-                    
+                        
+                    </ul>
+                </blockquote>
+                
 
-                    <h1>Frequently Asked Questions</h1>
-                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/transcriptomics/faqs/">FAQ page for the Transcriptomics topic</a> to see if your question is listed there.
-                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
-                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/transcriptomics/faqs/">FAQ page for the Transcriptomics topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
-                    
-                    <h1 data-toc-skip>Useful literature</h1>
-                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
-                    
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
+                
 
-                    
-                    <h1 id="bibliography">References</h1>
-                    <ol class="bibliography"><li><span id="blondel2008fast">Blondel, V. D., J.-L. Guillaume, R. Lambiotte, and E. Lefebvre, 2008 <b>Fast unfolding of communities in large networks</b>. Journal of statistical mechanics: theory and experiment 2008: P10008.</span>
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li><span id="blondel2008fast">Blondel, V. D., J.-L. Guillaume, R. Lambiotte, and E. Lefebvre, 2008 <b>Fast unfolding of communities in large networks</b>. Journal of statistical mechanics: theory and experiment 2008: P10008.</span>
     
     
     
@@ -4222,85 +4254,85 @@ RP11-34P13.8	ENSG00000239945
     
 
 </li></ol>
-                    
+                
 
-                    
+                
 
-                    <h1>Feedback</h1>
-                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
-                    <div id="feedback-button">
-                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                    </div>
-                    <div id="feedback-form">
-                    </div>
-                    <script type="text/javascript">
-                        (function (window, document) {
-                            function onDocumentReady(fn) {
-                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                    fn();
-                                } else {
-                                    document.addEventListener('DOMContentLoaded', fn);
-                                }
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
                             }
+                        }
 
-                            onDocumentReady(function () {
-                                $("#feedback-button").click(function(evt){
-                                    var e = $(evt.target)
-                                    e.hide();
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
 
-                                    $("#feedback-form").html(`
-                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Clustering 3K PBMCs with Scanpy (Transcriptomics)">Loading...</iframe>
-                                    `)
-                                })
-                            });
-                        })(window, document);
-                    </script>
-
-
-
-                    <h1>Citing this Tutorial</h1>
-                    <p>
-                        <ol>
-                            <li id="citation-text">Bérénice Batut, Hans-Rudolf Hotz, Mehmet Tekman, 2021 <b>Clustering 3K PBMCs with Scanpy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html</a> Online; accessed TODAY
-                            </li>
-                            <li>
-                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
-                            </li>
-                        </ol>
-                    </p>
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Clustering 3K PBMCs with Scanpy (Transcriptomics)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
 
 
-                    <blockquote class="details">
-                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
-                      <p style="display: none;">
 
-                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Bérénice Batut, Hans-Rudolf Hotz, Mehmet Tekman, 2021 <b>Clustering 3K PBMCs with Scanpy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{transcriptomics-scrna-scanpy-pbmc3k,
-    author = "Bérénice Batut and Hans-Rudolf Hotz and Mehmet Tekman",
-    title = "Clustering 3K PBMCs with Scanpy (Galaxy Training Materials)",
-    year = "2021",
-    month = "03",
-    day = "23"
-    url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html}",
-    note = "[Online; accessed TODAY]"
+author = "Bérénice Batut and Hans-Rudolf Hotz and Mehmet Tekman",
+title = "Clustering 3K PBMCs with Scanpy (Galaxy Training Materials)",
+year = "2021",
+month = "03",
+day = "23"
+url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html}",
+note = "[Online; accessed TODAY]"
 }
 @article{Batut_2018,
-        doi = {10.1016/j.cels.2018.05.012},
-        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
-        year = 2018,
-        month = {jun},
-        publisher = {Elsevier {BV}},
-        volume = {6},
-        number = {6},
-        pages = {752--758.e1},
-        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
-        title = {Community-Driven Data Analysis Training for Biology},
-        journal = {Cell Systems}
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
 }</code>
-                    </pre></div></div>
-                    </p>
-                    </blockquote>
+                </pre></div></div>
+                </p>
+                </blockquote>
 
 
 <script type="text/javascript">
@@ -4310,36 +4342,22 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
-                    
+                
 
-                    
+                
 
-                </div>
             </div>
         </div>
-    </section>
-</div>
-
-
-<footer>
-    <div class="container">
-        <p>
-            This material is the result of a collaborative work. Thanks to the
-            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Bérénice Batut, Hans-Rudolf Hotz, Mehmet Tekman)!
-        </p>
-        <p>
-            Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.md">GitHub</a>.
-        </p>
-        <p>
-    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-</p>
     </div>
-</footer>
+</section>
+<br/>
+<br/>
+<br/>
 
+        </div>
+        
     </body>
     <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>

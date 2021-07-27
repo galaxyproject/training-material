@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Generic plugins</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta property="og:title" content="Galaxy Training: Generic plugins" />
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/dev/faqs/" title="Check our FAQs for the Development in Galaxy topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/visualization-generic/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/dev/tutorials/visualization-generic/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/visualization-generic/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/visualization-generic/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/visualization-generic/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/visualization-generic/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/visualization-generic/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fdev%2Ftutorials%2Fvisualization-generic%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/dev/tutorials/visualization-generic/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/dev/tutorials/visualization-generic/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/dev/tutorials/visualization-generic/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/dev/tutorials/visualization-generic/slides.html">View markdown source on GitHub</a>
+	<h1>Generic plugins</h1>
+		<h2>Contributors</h2>
+		Saskia Hiltemann, Youri Hoogstrate
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>How can visualization plugins benefit science?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Implement a first Galaxy visualization</p>
+</li>
+		
+		<li><p>Understand the client side vs. server side principle</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Requirements</h2>
+		<ul>
+		
+		
+    <li>
+    
+        Javascript knowledge
+    
+    </li>
+
+		</ul>
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 26, 2021 </div>
+
+	<hr />
+
+
+	<h2 id="why-visualizations">Why visualizations?</h2>
+
+<p><img src="../../images/anscombe-quartet-animated.gif" alt="Animated gif cycling through Anscombe's quartet and various variations that all have the same mean, SD, and correlation but look vastly different to someone's eyes." loading="lazy" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X</span> <span class="n">mean</span><span class="p">:</span> <span class="mf">54.26</span><span class="p">,</span> <span class="n">X</span> <span class="n">SD</span><span class="p">:</span> <span class="mf">16.76</span>
+<span class="n">Y</span> <span class="n">mean</span><span class="p">:</span> <span class="mf">47.83</span><span class="p">,</span> <span class="n">Y</span> <span class="n">SD</span><span class="p">:</span> <span class="mf">26.93</span>
+<span class="n">Corr</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.06</span>
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span>
+Anscombes quartet, all these datasets have same mean, standard deviation and correlation,
+yet when visualizing them it is revealed they have vastly different structures.</p>
+
+<hr />
+
+<h2 id="why-visualizations-1">Why visualizations?</h2>
+
+<p>Bam files - textual</p>
+
+<p><img src="../../images/vis_alignment_plaintext.png" alt="Screenshot of a terminal showing a wall of text with lines from a BAM file" loading="lazy" /></p>
+
+<hr />
+
+<h2 id="why-visualizations-2">Why visualizations?</h2>
+
+<p>Bam files - visualized</p>
+
+<p><img src="../../images/vis_alignment.png" alt="Screenshot of IGV with presumably the same bam file from before showing a large gap in the alignment, now clear due to a visualisation." loading="lazy" /></p>
+
+<hr />
+
+<h2 id="types-of-visualizations-in-galaxy">Types of visualizations in Galaxy</h2>
+
+<ul>
+  <li><strong>Trackster</strong> - built-in genome browser</li>
+  <li><strong>Display applications</strong>
+    <ul>
+      <li>UCSC Genome Browser</li>
+      <li>IGV</li>
+    </ul>
+  </li>
+  <li><strong>Galaxy tools</strong>
+    <ul>
+      <li>JBrowse</li>
+      <li>Krona</li>
+    </ul>
+  </li>
+  <li><strong>Visualization plugins</strong>
+    <ul>
+      <li>Charts</li>
+      <li>Generic</li>
+    </ul>
+  </li>
+  <li><strong>Interactive Environments</strong>
+    <ul>
+      <li>Jupyter/Rstudio</li>
+      <li>IOBIO (bam/vcf visualizations)</li>
+      <li>Phinch (metagenomics visualizations)</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="which-should-i-use">Which should I use?</h2>
+
+<p><img src="../../images/which_viz_flowchart.png" alt="Flowchart. Only available on an external website? If yes use a display application. Does it need to be served (e.g. python), if yes use an interactive tool. Is it computationally intensive, then it needs to be a regular tool. Is it written in javascript? Then it shold be a generic plugin. If it passes all these tests it can be a charts plugin." loading="lazy" /></p>
+
+<hr />
+
+<h2 id="plugins">Plugins</h2>
+
+<ul>
+  <li>Visualizations button on history items</li>
+  <li>Different options depending on file type</li>
+</ul>
+
+<p><img src="../../images/vis_plugin_menu.png" alt="Screenshot of the history in galaxy with viz dropdown clicked. On one dataset the options are charts and scatterplots for a tabular dataset. On the other is 'visualise in trackster' for a BAM dataset" loading="lazy" /></p>
+
+<hr />
+
+<p>.enlarge120[</p>
+<h2 id="plugins-charts">Plugins: Charts</h2>
+<p>]
+.pull-left[
+<img src="../../images/vis_charts_02.png" alt="Charts selection interface showing a number of chart types that can be selected" loading="lazy" />
+]</p>
+
+<p>.pull-right[
+<img src="../../images/charts_examples.png" alt="Montage of several charts, bar, dot, stacked bar/line, box and whisker, and doughnut charts." loading="lazy" />
+]</p>
+
+<hr />
+
+<h2 id="plugins-charts-1">Plugins: Charts</h2>
+
+<ul>
+  <li>Allows exporting screenshots</li>
+</ul>
+
+<p><img src="../../images/vis_charts_05.png" alt="A screenshot button is clicked providing optinos to save as PNG, SVG, or PDF" loading="lazy" /></p>
+
+<ul>
+  <li>For more information, see the charts plugin development
+<a href="/training-material/topics/dev/tutorials/visualization-charts/slides.html">slides</a> and <a href="/training-material/topics/dev/tutorials/visualization-charts/tutorial.html">tutorial</a>
+—</li>
+</ul>
+
+<h2 id="plugins-generic">Plugins: Generic</h2>
+
+<ul>
+  <li>Elements of visualization plugin:
+    <ul>
+      <li>Configuration (name, description, datatype)</li>
+      <li>Template</li>
+      <li>Static resources (js, css, images)</li>
+    </ul>
+  </li>
+  <li>Project Structure
+    <ul>
+      <li>located in <code class="language-plaintext highlighter-rouge">$GALAXY_ROOT/config/plugins/$PLUGIN_NAME</code></li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                myviz
+                ├── config
+                │   └── myviz.xml
+                ├── static
+                │   ├── css
+                │   ├── img
+                │   └── js
+                └── templates
+                    └── myviz.mako
+</code></pre></div></div>
+<hr />
+
+<h2 id="plugins-xml-file">Plugins: XML file</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">touch</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/<span class="nv">$PLUGIN_NAME</span>/config/<span class="nv">$PLUGIN_NAME</span>.xml
+</code></pre></div></div>
+
+<ul>
+  <li>Hooks visualizations into Galaxy</li>
+</ul>
+
+<p><img src="../../images/vis_plugin_conf_xml.png" alt="Screenshot of code with boxes highlighting Draw RNA.js and the datatypes that it can accept. A template drawrnajs.mako is also highlighted" loading="lazy" /></p>
+
+<ul>
+  <li>Data types must match with class names in <code class="language-plaintext highlighter-rouge">$GALAXY_ROOT/lib/galaxy/datatypes/</code></li>
+</ul>
+
+<hr />
+
+<h2 id="plugins-mako-file">Plugins: Mako file</h2>
+
+<ul>
+  <li>For templates of HTML files:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">touch</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/<span class="nv">$PLUGIN_NAME</span>/templates/<span class="nv">$PLUGIN_NAME</span>.mako
+</code></pre></div>    </div>
+  </li>
+  <li>Link to data types and HTML template file
+    <ul>
+      <li>Every invocation of visualization: template compiled</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="../../images/vis_mako_hello_world_dual.png" alt="Screenshot of more code showing a mako template being rendered" loading="lazy" /></p>
+
+<hr />
+
+<h2 id="plugins-mako-file-1">Plugins: Mako file</h2>
+
+<ul>
+  <li>Access to the history item (<em>hda</em>) <strong>pre</strong> template compilation:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">$hda.file_name</code></li>
+      <li><code class="language-plaintext highlighter-rouge">$hda.metadata.dbkey</code></li>
+      <li>Avoid (unnecessary) copies of whole files</li>
+    </ul>
+  </li>
+  <li>Access to <em>hda</em> <strong>post</strong> template compilation -&gt; via URLs
+    <ul>
+      <li>Download data file by browser (client side)
+        <ul>
+          <li>Inconvenient for large files:
+            <ul>
+              <li>Indices and query protocols (e.g. DAS protocol)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Resolving history uid to hash</li>
+      <li>Correction for extended root URLs:</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="../../images/vis_nested_url.png" alt="Screenshot of a URL bar reading https://bioinf-galaxian.erasmusmc.nl/galaxy/" loading="lazy" /></p>
+
+<hr />
+
+<h2 id="plugins-mako-syntax">Plugins: Mako syntax</h2>
+
+<ul>
+  <li>Access to <em>hda</em> <strong>post</strong> template compilation:
+    <ul>
+      <li>Obtain hash value used in urls <em>hdadict[‘id’]</em></li>
+      <li>Essential Python variables:</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="../../images/vis_important_variables.png" alt="A mako template with a python codeblock section highlighting hdadict, root, app_root, file_url" loading="lazy" /></p>
+
+<hr />
+
+<h2 id="plugins--javascript-and-jquery">Plugins:  Javascript and jQuery</h2>
+
+<ul>
+  <li>HTML / JS implementation make often use of jQuery
+    <ul>
+      <li>Galaxy ships with jQuery</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"${root}/static/scripts/libs/jquery/jquery.js"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="plugins-generic-template">Plugins: Generic template</h2>
+
+<p><img src="../../images/vis_generic_template.png" alt="Another code screenshot showing a generic template that can be used for viz." loading="lazy" /></p>
+
+<hr />
+
+<h3 id="plugins-static-files">Plugins: Static files</h3>
+
+<ul>
+  <li>External libraries and static files go in <code class="language-plaintext highlighter-rouge">./static</code> dir:</li>
+</ul>
+
+<p><img src="../../images/vis_generic_template_static.png" alt="Code screenshot showing a cool_vis_plugin.js being loaded" loading="lazy" />
+<img src="../../images/vis_static_dir.png" alt="Screenshot of its location in the static directory." loading="lazy" /></p>
+
+<hr />
+
+<h2 id="plugins-summary">Plugins: Summary</h2>
+
+<ul>
+  <li>Galaxy visualization plugins:
+    <ul>
+      <li>Datatype-specific</li>
+      <li>Written in HTML5 / JS</li>
+      <li>Require minor python / Galaxy ecosystem knowledge</li>
+      <li>Have access to the whole Galaxy system
+        <ul>
+          <li>pre-compilation: python</li>
+          <li>post-compilation: JS / API</li>
+        </ul>
+      </li>
+      <li>Can be installed without additional configuration</li>
+      <li>Can not be connected to workflows</li>
+      <li>Can not (out of the box) save and share</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="plugins-more-tips-and-tricks">Plugins: More tips and tricks</h2>
+
+<ul>
+  <li>Galaxy has UI guidelines with corresponding CSS (https://wiki.galaxyproject.org/VisualizationsRegistry/Cookbook)</li>
+  <li>Look at existing plugins:
+    <ul>
+      <li>Galaxy mainline</li>
+      <li>https://github.com/bgruening/galaxytools/tree/master/visualisations</li>
+    </ul>
+  </li>
+  <li>API is now very extensive, everything is accessible with jQuery!</li>
+</ul>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Visualizations require a different way of thinking: server and client side; downloading files rather than system level access</li>
+
+<li>Interactivity is what makes visualizations different from static tools</li>
+
+<li>Requires understanding of both the Galaxy ecosystem as well as HTML5/JS</li>
+
+<li>Performance is more important than for static Galaxy tools</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

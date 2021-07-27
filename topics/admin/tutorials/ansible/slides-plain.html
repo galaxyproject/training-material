@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Ansible</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Ansible" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/ansible/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/ansible/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/ansible/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/ansible/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/ansible/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/ansible/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/ansible/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fansible%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/admin/tutorials/ansible/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/admin/tutorials/ansible/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/admin/tutorials/ansible/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/admin/tutorials/ansible/slides.html">View markdown source on GitHub</a>
+	<h1>Ansible</h1>
+		<h2>Contributors</h2>
+		Helena Rasche
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>Why Ansible?</p>
+</li>
+		
+		<li><p>How and when to use Ansible?</p>
+</li>
+		
+		<li><p>How to write a role?</p>
+</li>
+		
+		<li><p>How to leverage community build roles?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Learn Ansible basics.</p>
+</li>
+		
+		<li><p>Write a simple role.</p>
+</li>
+		
+		<li><p>Install a role from Ansible Galaxy.</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 6, 2021 </div>
+
+	<hr />
+
+
+	<h2 id="configuration-management">Configuration Management</h2>
+
+<p>Manages the configuration of machines.</p>
+
+<p>Specifies what software is installed, how it is configured</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Configuration management manages the configuration of machines.</li>
+  <li>It specifies what software should be installed, and how it should be configured</li>
+</ul>
+
+<hr />
+
+<h3 id="why-configuration-management">Why Configuration Management?</h3>
+
+<ul>
+  <li>Are you keeping track of config changes?</li>
+  <li>What if your server dies?</li>
+  <li>… or your VM is accidentally deleted?</li>
+  <li>Can you recover? How quickly?</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>So why do you want configuration management?</li>
+  <li>What do you do when things go wrong?</li>
+  <li>What if your server dies?</li>
+  <li>Did you backup your configuration?</li>
+  <li>Did you back up your webserver configuration?</li>
+  <li>Ansible provides an answer.</li>
+</ul>
+
+<hr />
+
+<h3 id="configuration-management-goals">Configuration Management goals</h3>
+
+<ul>
+  <li>
+    <p>Reproducibility</p>
+  </li>
+  <li>
+    <p>Ensure 1000s of machines are correctly configured</p>
+  </li>
+  <li>
+    <p>Easily recover from bad situations</p>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The goals of using CM are reproducibility, uniformity, and recovery.</li>
+</ul>
+
+<hr />
+
+<h3 id="ansible">Ansible</h3>
+
+<ul>
+  <li>
+    <p><a href="https://www.ansible.com/">Ansible</a> is an open-source configuration management tool, sponsored by Red Hat</p>
+  </li>
+  <li>
+    <p>Several <a href="https://en.wikipedia.org/wiki/Comparison_of_open-source_configuration_management_software">alternatives</a> are available (Chef, Puppet, Salt, etc)</p>
+  </li>
+  <li>
+    <p>It uses an agentless model: SSH into machine and executes commands</p>
+  </li>
+  <li>
+    <p>Very popular, especially among Galaxy admins!</p>
+  </li>
+  <li>
+    <p>Many modules for common tasks like copying files or managing users or services.</p>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Ansible is a very popular CM tool, sponsored by RedHat.</li>
+  <li>There are several alternatives, but Galaxy Project uses Ansible.</li>
+  <li>It uses an agent-less model. You SSH into machines and execute commands on them.</li>
+  <li>It has many popular pre-existing roles for common tasks.</li>
+</ul>
+
+<hr />
+
+<h2 id="important-terms">Important Terms</h2>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Some important terms you should know</li>
+</ul>
+
+<hr />
+
+<h3 id="inventory-file">Inventory File</h3>
+
+<p>Defines the systems (called “hosts”) against which Ansible will work.</p>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[webservers]</span>
+<span class="err">192.168.0.1</span>
+<span class="err">192.168.0.2</span> <span class="py">ansible_user</span><span class="p">=</span><span class="s">ubuntu</span>
+
+<span class="nn">[databases]</span>
+<span class="err">db_1.example.org</span> <span class="py">ansible_user</span><span class="p">=</span><span class="s">root</span>
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>First is the Inventory File.</li>
+  <li>This file lists all of your hosts.</li>
+  <li>The group name is in square brackets.</li>
+  <li>Group names are used to select a set of systems, on which Ansible should operate.</li>
+  <li>It is possible to assign variables to hosts and groups.</li>
+  <li>Here we override the ansible user variable on two hosts.</li>
+  <li>This variable controls which user is used in login.</li>
+</ul>
+
+<hr />
+
+<h3 id="ansible-module-and-tasks">Ansible Module and Tasks</h3>
+
+<p>A <strong>module</strong> is a piece of code that Ansible can execute on a host, collecting return values.</p>
+
+<p>A <strong>task</strong> is an invocation of single module with its configuration.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="pi">-</span> <span class="na">copy</span><span class="pi">:</span>
+    <span class="na">src</span><span class="pi">:</span> <span class="s">foo.conf</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s">/etc/foo.conf</span>
+    <span class="na">owner</span><span class="pi">:</span> <span class="s">foo</span>
+    <span class="na">group</span><span class="pi">:</span> <span class="s">foo</span>
+    <span class="na">mode</span><span class="pi">:</span> <span class="m">0644</span>
+
+<span class="pi">-</span> <span class="na">package</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">ntpdate</span>
+    <span class="na">state</span><span class="pi">:</span> <span class="s">present</span>
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Here is an example of invoking the copy module and the package module.</li>
+  <li>Copy copies a file from source, on the local host to destination, on the remote host.</li>
+  <li>Then it sets some attributes about the file like the owner and mode.</li>
+  <li>Next we see an example of the package module. This is a generic OS package manager module.</li>
+  <li>It ensures that for the package named ntpdate, its state is present, i.e. installed.</li>
+</ul>
+
+<hr />
+
+<h3 id="role">Role</h3>
+
+<p>.pull-left[
+A collection of:</p>
+
+<ul>
+  <li>tasks</li>
+  <li>files</li>
+  <li>templates</li>
+  <li>variables</li>
+  <li>handlers</li>
+</ul>
+
+<p>]</p>
+
+<p>.pull-right[
+with a predefined directory structure:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── defaults
+│   └── main.yml
+├── files
+│   └── cvmfs_wipecache.centos_7
+├── handlers
+│   └── main.yml
+├── meta
+│   └── main.yml
+├── README.md
+├── tasks
+│   ├── apache.yml
+│   ├── main.yml
+│   └── stratumN.yml
+├── templates
+│   └── stratum1_squid.conf.j2
+├── tests
+│   ├── inventory
+│   └── test.yml
+└── vars
+    └── main.yml
+
+</code></pre></div></div>
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>A role is a collection of tasks, files, templates, variables, and handlers.</li>
+  <li>Tasks are things to be executed, like a copy task to add files to a remote machine.</li>
+  <li>Files have static, unchanging files that are used by the tasks.</li>
+  <li>The templates are like files, but they contain variables which will be replaced, when ansible deploys the file.</li>
+  <li>Variables contain definitions of variables for use in templates and tasks.</li>
+  <li>Handlers manage services, restarting them when configuration changes.</li>
+</ul>
+
+<hr />
+
+<h3 id="playbook">Playbook</h3>
+
+<p>A YAML file listing a set of tasks and/or roles that should be applied to a group of hosts.</p>
+
+<p>.pull-left[</p>
+<ul>
+  <li>We define a playbook which has a name</li>
+  <li>And applies to some group of hosts</li>
+  <li>We specify some additional variables</li>
+  <li>And then invoke some roles
+]</li>
+</ul>
+
+<p>.pull-right[</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">CVMFS</span>
+  <span class="na">hosts</span><span class="pi">:</span> <span class="s">all</span>
+  <span class="na">vars</span><span class="pi">:</span>
+    <span class="na">cvmfs_role</span><span class="pi">:</span> <span class="s">client</span>
+    <span class="na">galaxy_cvmfs_repos_enabled</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">roles</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">geerlingguy.repo-epel</span>
+    <span class="pi">-</span> <span class="s">galaxyproject.cvmfs</span>
+</code></pre></div></div>
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>This is an example playbook.</li>
+  <li>We give it a name, in this case CVMFS.</li>
+  <li>Then we select some hosts, i.e. all hosts known to our inventory file.</li>
+  <li>We specify some additional variables.</li>
+  <li>And then we invoke two roles.</li>
+</ul>
+
+<hr />
+
+<h3 id="vault">Vault</h3>
+
+<ul>
+  <li>Ansible playbooks should be kept under <strong>version control</strong> (typically with Git)</li>
+  <li>Playbooks can be safely shared on public Git repositories (e.g. GitHub) by storing secrets like passwords in encrypted files called <strong>vaults</strong></li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ANSIBLE_VAULT;1.1;AES256
+63333238633033313664633437316231323932326531386266636637353037313335613563663934
+6639666536653631363739383639633165633337393334630a353233393938646539306362633738
+61613439366435336230636561663864323765303663666239613430323534333665636665643964
+6537376666323333660a663233343565393166373665366138306661343764623561343634656463
+31636265303430623731643766346434323565663436626466353765393465376533376366356463
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>If you have secrets like API keys or passwords, you need to use Vault.</li>
+  <li>Vault encrypts your secrets with a password, so you can include them in your playbooks.</li>
+  <li>This lets you collaborate on playbooks and infrastructure publicly with git.</li>
+</ul>
+
+<hr />
+
+<h2 id="ansible-philosophies">Ansible Philosophies</h2>
+
+<ul>
+  <li>
+    <p>Some people write a single playbook that completely manages a machine (installing everything on a brand new machine)</p>
+  </li>
+  <li>
+    <p>Other people write playbooks for a single task (e.g. upgrading software / installing nginx)</p>
+  </li>
+  <li>
+    <p>Which one depends on your use case.</p>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>There are multiple ways of designing playbooks, use one that fits your use case.</li>
+  <li>Some prefer a playbook which does everything, so no step can be forgotten.</li>
+  <li>Others prefer playbooks which do individual steps. These can be faster, and you can only run the ones that change.</li>
+</ul>
+
+<hr />
+
+<h2 id="ansible-galaxy">Ansible Galaxy</h2>
+
+<ul>
+  <li>
+    <p>Public repository of roles</p>
+  </li>
+  <li>
+    <p>Many for common software deployment (nginx, apache, postgresql)</p>
+  </li>
+  <li>
+    <p>Different “Galaxy” than the bioinformatics tool server (but Ansible can be used to install that too!)</p>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Ansible has a repository for public roles.</li>
+  <li>There are a huge number of available roles for common tasks.</li>
+  <li>It is called Ansible Galaxy, but it is a different Galaxy.</li>
+</ul>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Ansible lets you do system administration at scale</li>
+
+<li>Many system administration, software installation, and software management tasks are already available as Ansible tasks or roles</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+
+<img src="/training-material/assets/images/gat.png" alt="page logo" style="height: 100px;"/>
+
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

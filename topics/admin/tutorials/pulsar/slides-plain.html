@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Running Jobs on Remote Resources with Pulsar</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Running Jobs on Remote Resources with Pulsar" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/pulsar/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/pulsar/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/pulsar/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/pulsar/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/pulsar/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/pulsar/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/pulsar/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fpulsar%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/admin/tutorials/pulsar/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/admin/tutorials/pulsar/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/admin/tutorials/pulsar/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/admin/tutorials/pulsar/slides.html">View markdown source on GitHub</a>
+	<h1>Running Jobs on Remote Resources with Pulsar</h1>
+		<h2>Contributors</h2>
+		Nate Coraor, Simon Gladman, Marius van den Beek, Helena Rasche
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>How does pulsar work?</p>
+</li>
+		
+		<li><p>How can I deploy it?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Have an understanding of what Pulsar is and how it works</p>
+</li>
+		
+		<li><p>Install and configure a Pulsar server on a remote linux machine</p>
+</li>
+		
+		<li><p>Be able to get Galaxy to send jobs to a remote Pulsar server</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Requirements</h2>
+		<ul>
+		
+		
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/admin">Galaxy Server administration</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Ansible:
+                            
+                                <a href="/training-material/topics/admin/tutorials/ansible/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Galaxy Installation with Ansible:
+                            
+                                <a href="/training-material/topics/admin/tutorials/ansible-galaxy/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        A server/VM on which to deploy Pulsar
+    
+    </li>
+
+		</ul>
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 6, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="what-are-heterogenous-compute-resources">What are heterogenous compute resources?</h1>
+
+<p>Differences in:</p>
+<ul>
+  <li>Operating system or version</li>
+  <li>Users/groups</li>
+  <li>Data accessibility</li>
+  <li>Administrative control</li>
+  <li>Physical Location (i.e. Cities)</li>
+</ul>
+
+<p>Galaxy expects:</p>
+<ul>
+  <li>One OS, version (dependencies)</li>
+  <li>Shared filesystem w/ fixed paths</li>
+</ul>
+
+<hr />
+<h1 id="example---australia">Example - Australia</h1>
+
+<p><img src="../../images/australia_locations.png" alt="australia_locations.png" loading="lazy" /></p>
+
+<hr />
+<h1 id="partial-solution---cli-job-runner">Partial solution - CLI job runner</h1>
+
+<p>SSH to remote, submit jobs with CLI <code class="language-plaintext highlighter-rouge">sbatch</code>, <code class="language-plaintext highlighter-rouge">qsub</code>, etc.</p>
+
+<p>Still depends on shared FS</p>
+
+<hr />
+<h1 id="pulsar">Pulsar</h1>
+
+<p><img src="../../images/pulsar_logo.png" alt="pulsar_logo.png" loading="lazy" /></p>
+
+<p>Galaxy’s remote job management system</p>
+
+<ul>
+  <li>
+    <p>Can run jobs on any(?) OS including Windows</p>
+  </li>
+  <li>
+    <p>Multiple modes of operation for every environment</p>
+  </li>
+</ul>
+
+<hr />
+<h1 id="pulsar---architecture">Pulsar - Architecture</h1>
+
+<ul>
+  <li>
+    <p>Pulsar server runs on remote resource (e.g. cluster head node)</p>
+  </li>
+  <li>
+    <p>Galaxy Pulsar job runner is Pulsar client</p>
+  </li>
+  <li>
+    <p>Communication is via HTTP or AMQP, language is JSON</p>
+  </li>
+  <li>
+    <p>File transport is dependent on communication method</p>
+  </li>
+</ul>
+
+<hr />
+<h1 id="pulsar---architecture-1">Pulsar - Architecture</h1>
+
+<p><img src="../../images/pulsar_schematic.png" alt="pulsar_schematic.png" loading="lazy" /></p>
+
+<hr />
+<h1 id="pulsar-transports---restful">Pulsar Transports - RESTful</h1>
+
+<p>Pulsar server listens over HTTP(S)</p>
+
+<p>Pulsar client (Galaxy) initiates connections to Pulsar server</p>
+
+<p>Good for:</p>
+<ul>
+  <li>Environments where firewall, open ports are not concerns</li>
+  <li>No external dependencies (AMQP server)</li>
+</ul>
+
+<hr />
+<h1 id="pulsar-transports---amqp">Pulsar Transports - AMQP</h1>
+
+<p>Pulsar server and client connect to AMQP server</p>
+
+<p>Good for:</p>
+<ul>
+  <li>Firewalled/NATted remote compute</li>
+  <li>Networks w/ bad connectivity</li>
+</ul>
+
+<hr />
+<h1 id="pulsar-transports---embedded">Pulsar Transports - Embedded</h1>
+
+<p>Galaxy runs Pulsar server internally</p>
+
+<p>Good for:</p>
+<ul>
+  <li>Manipulating paths</li>
+  <li>Copying input datasets from non-shared filesystem</li>
+</ul>
+
+<hr />
+<h1 id="pulsar---job-file-staging">Pulsar - Job file staging</h1>
+
+<p>Pulsar can be configured to <em>push</em> or <em>pull</em> when using RESTful:</p>
+<ul>
+  <li>Push
+    <ul>
+      <li>Galaxy sends job inputs, metadata to Pulsar over HTTP</li>
+      <li>Upon completion signal from Pulsar, Galaxy pulls from Pulsar over HTTP</li>
+    </ul>
+  </li>
+  <li>Pull
+    <ul>
+      <li>Upon setup signal, Pulsar pulls job inputs, metadata from Galaxy over HTTP</li>
+      <li>Upon completion, Pulsar pushes to Galaxy over HTTP</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Pulsar can use libcurl for more robust transfers with resume capability</p>
+
+<p>AMQP is pull-only because Pulsar does not run HTTP server</p>
+
+<hr />
+<h1 id="pulsar---dependency-management">Pulsar - Dependency management</h1>
+
+<p>Pulsar does not provide Tool Shed tool dependency management. But:</p>
+<ul>
+  <li>It has a similar dependency resolver config to Galaxy</li>
+  <li>It can auto-install <strong>conda</strong> dependencies</li>
+  <li>It can use containers too!</li>
+</ul>
+
+<hr />
+<h1 id="pulsar---job-management">Pulsar - Job management</h1>
+
+<p>Pulsar “managers” provide job running interfaces:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">queued_python</code>: Run locally on the Pulsar server</li>
+  <li><code class="language-plaintext highlighter-rouge">queued_drmaa</code>: Run on a cluster with DRMAA</li>
+  <li><code class="language-plaintext highlighter-rouge">queued_cli</code>: Run on a cluster with local <code class="language-plaintext highlighter-rouge">qsub</code>, <code class="language-plaintext highlighter-rouge">sbatch</code>, etc.</li>
+  <li><code class="language-plaintext highlighter-rouge">queued_condor</code>: Run on HTCondor</li>
+</ul>
+
+<hr />
+<h1 id="pulsar-australia">Pulsar Australia</h1>
+
+<p><img src="../../images/pulsar_australia.png" alt="pulsar_australia.png" loading="lazy" /></p>
+
+<hr />
+
+<h1 id="resources">Resources</h1>
+
+<ul>
+  <li>Pulsar Read-the-docs
+    <ul>
+      <li><a href="https://pulsar.readthedocs.io/en/latest/index.html">https://pulsar.readthedocs.io/en/latest/index.html</a></li>
+    </ul>
+  </li>
+  <li>Pulsar on galaxyproject.org
+    <ul>
+      <li><a href="https://galaxyproject.org/admin/config/pulsar/">https://galaxyproject.org/admin/config/pulsar/</a></li>
+    </ul>
+  </li>
+  <li>Pulsar Github
+    <ul>
+      <li><a href="https://github.com/galaxyproject/pulsar">https://github.com/galaxyproject/pulsar</a></li>
+    </ul>
+  </li>
+  <li>Pulsar Ansible
+    <ul>
+      <li><a href="https://github.com/galaxyproject/ansible-pulsar">https://github.com/galaxyproject/ansible-pulsar</a></li>
+    </ul>
+  </li>
+</ul>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Pulsar allows you to easily add geographically distributed compute resources into your Galaxy instance</li>
+
+<li>It also works well in situations where the compute resources cannot share storage pools.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+
+<img src="/training-material/assets/images/gat.png" alt="page logo" style="height: 100px;"/>
+
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

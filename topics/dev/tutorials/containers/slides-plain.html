@@ -1,0 +1,948 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Tool Dependencies and Containers</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta property="og:title" content="Galaxy Training: Tool Dependencies and Containers" />
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/dev/faqs/" title="Check our FAQs for the Development in Galaxy topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/containers/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/dev/tutorials/containers/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/containers/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/containers/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/containers/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/containers/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/containers/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fdev%2Ftutorials%2Fcontainers%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/dev/tutorials/containers/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/dev/tutorials/containers/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/dev/tutorials/containers/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/dev/tutorials/containers/slides.html">View markdown source on GitHub</a>
+	<h1>Tool Dependencies and Containers</h1>
+		<h2>Contributors</h2>
+		John Chilton, Björn Grüning
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What are the advantages of running my Galaxy tool inside of a container?</p>
+</li>
+		
+		<li><p>How does Galaxy find a container to run my tool in?</p>
+</li>
+		
+		<li><p>What are BioContainers and how are they related to Galaxy?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Explore the differences between containerizing Galaxy and tool execution.</p>
+</li>
+		
+		<li><p>Discuss the advantages of containerizing tools.</p>
+</li>
+		
+		<li><p>Learn to build best practice tools ready to be containerized.</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Requirements</h2>
+		<ul>
+		
+		
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/dev">Development in Galaxy</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Tool development and integration into Galaxy:
+                            
+                                <a href="/training-material/topics/dev/tutorials/tool-integration/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="http://planemo.readthedocs.io/en/latest/writing_standalone.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+		</ul>
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 10, 2021 </div>
+
+	<hr />
+
+
+	<h2 id="planemo">Planemo</h2>
+
+<p>These slides mirror the section on “Dependencies and Docker” in the <a href="https://planemo.readthedocs.io/en/latest/writing_advanced.html#dependencies-and-docker">Planemo Documentation</a>.</p>
+
+<hr />
+
+<h2 id="generic-containers-are-good-slide">Generic Containers are Good Slide</h2>
+
+<p>.image-75[<img src="../../images/containers.png" alt="A cartoon comparing containers vs VMs. On the left the VMs are presented as a layer of server, host os, and hypervisor (type 2) followed by several tall pillars of guest OS, bin/libs and finally their respective apps. Everything is siloed. On the right is containers where the layers are server, host os, and docker engine. Above those are very short pillars of each different app, and when duplicate apps are run, the bin/libs are shown as shared. Text reads: containers are isolated but share OS and where appropriate, bins/libraries." loading="lazy" />]</p>
+
+<ul>
+  <li>Isolation and Security*</li>
+  <li>Reproducibility</li>
+  <li>Flexibility*</li>
+</ul>
+
+<p>.footnote[* the industry is getting there]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<hr />
+
+<h2 id="galaxy-in-containers">Galaxy in Containers?</h2>
+
+<p>.image-75[<img src="../../images/docker-galaxy-stable-github.png" alt="Screenshot of docker-galaxy-stable readme showing the scheme with a lot of different galaxy container flavours shown as layers atop one another." loading="lazy" />]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>When people think Galaxy and containers I think this project comes to mind.
+Three years ago Björn created this docker-galaxy-stable project and it has
+been wildly successful. It has proven to be a useful toolkit for advanced
+deployment options, an extremely portable way to bring Galaxy to new domains,
+and a brilliant tool for training users.</p>
+
+<p>https://github.com/bgruening/docker-galaxy-stable/commit/27ef7966508958dfec9ce35ff1c5f076ffccf80f</p>
+
+<p>Also mention Galaxy KickStart as a way to run Galaxy itself in a container.</p>
+
+<hr />
+
+<h2 id="containerizing-galaxy-vs-tools">Containerizing Galaxy vs Tools</h2>
+
+<p>We are going to discuss containerizing tool execution instead - executing just jobs in containers.</p>
+
+<p>Containers for the particular job’s tool.</p>
+
+<p>However you deploy Galaxy, including in a container, tool execution can still be containerized.</p>
+
+<p><span>Speaker Notes</span></p>
+
+<hr />
+
+<p>class: left</p>
+
+<h3 id="containerizing-tools-is-still-important">Containerizing Tools is Still Important</h3>
+
+<ul>
+  <li>Isolated tool execution.</li>
+  <li>Isolate file system access.</li>
+  <li>Added layer of security.</li>
+  <li>Increased re-computability.</li>
+  <li>New deployment options - Kubernetes, Mesos Chronos, AWS Batch, etc.</li>
+</ul>
+
+<hr />
+
+<p>class: left</p>
+
+<h3 id="containerizing-tool-execution">Containerizing Tool Execution</h3>
+
+<p>Decomposes to basic problems:</p>
+
+<ul>
+  <li><i class="fa fa-square-o" aria-hidden="true"></i> Instruct Galaxy where to find a container for the tool.</li>
+  <li><i class="fa fa-square-o" aria-hidden="true"></i> Instruct Galaxy to run the tool in a container.</li>
+</ul>
+
+<hr />
+
+<p>class: left</p>
+
+<h3 id="configuring-galaxy-to-use-containers">Configuring Galaxy to Use Containers</h3>
+
+<p>Just configure the destination. For instance, transform the cluster destination:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;destination id="short_fast" runner="slurm"&gt;
+    &lt;param id="nativeSpecification"&gt;--time=00:05:00 --nodes=1&lt;/param&gt;
+&lt;/destination&gt;
+</code></pre></div></div>
+
+<p>as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;destination id="short_fast" runner="slurm"&gt;
+    &lt;param id="nativeSpecification"&gt;--time=00:05:00 --nodes=1&lt;/param&gt;
+    &lt;param id="docker_enabled"&gt;true&lt;/parma&gt;
+    &lt;param id="docker_sudo"&gt;false&lt;/param&gt;
+&lt;/destination&gt;
+</code></pre></div></div>
+
+<p>That is it!</p>
+
+<p>For development, the Planemo flag <code class="language-plaintext highlighter-rouge">--docker</code> does this for <code class="language-plaintext highlighter-rouge">test</code>, <code class="language-plaintext highlighter-rouge">serve</code>, and related commands.</p>
+
+<hr />
+
+<p>class: left</p>
+
+<h3 id="containerizing-tool-execution-1">Containerizing Tool Execution</h3>
+
+<h4 id="decomposes-to-basic-problems">Decomposes to basic problems</h4>
+
+<ul>
+  <li><i class="fa fa-square-o" aria-hidden="true"></i> Instruct Galaxy where to find a container for the tool.</li>
+  <li><i class="fa fa-check-square-o" aria-hidden="true"></i> Instruct Galaxy to run the tool in a container.</li>
+</ul>
+
+<hr />
+
+<p>class: left</p>
+
+<h2 id="explicit-container-dependencies">Explicit Container Dependencies</h2>
+
+<p>Returning to the seqtk example, lets change the <code class="language-plaintext highlighter-rouge">requirements</code> from:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;requirements&gt;
+    &lt;requirement type="package" version="1.2"&gt;seqtk&lt;/requirement&gt;
+&lt;/requirements&gt;
+</code></pre></div></div>
+
+<p>into</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;requirements&gt;
+    &lt;container type="docker"&gt;quay.io/biocontainers/seqtk:1.2--1&lt;/container&gt;
+    &lt;requirement type="package" version="1.2"&gt;seqtk&lt;/requirement&gt;
+&lt;/requirements&gt;
+</code></pre></div></div>
+
+<p>Now run Planemo <code class="language-plaintext highlighter-rouge">test</code> and <code class="language-plaintext highlighter-rouge">serve</code> with the <code class="language-plaintext highlighter-rouge">--docker</code> flag and as a tool developer you are done!</p>
+
+<hr />
+
+<h3 id="containerizing-tool-execution-2">Containerizing Tool Execution</h3>
+
+<h4 id="decomposes-to-basic-problems-1">Decomposes to basic problems</h4>
+
+<ul>
+  <li><i class="fa fa-check-square-o" aria-hidden="true"></i> Instruct Galaxy where to find a container for the tool.</li>
+  <li><i class="fa fa-check-square-o" aria-hidden="true"></i> Instruct Galaxy to run the tool in a container.</li>
+</ul>
+
+<p>We’re done… right?</p>
+
+<p><span>Speaker Notes</span></p>
+
+<hr />
+
+<p>class: left</p>
+
+<h2 id="the-problems-with-making-docker-explicit">The Problems with Making Docker Explicit</h2>
+
+<ul>
+  <li>Setting up a <code class="language-plaintext highlighter-rouge">Dockerfile</code> and publishing a Docker image more process for the tool even though the dependencies have already been completely defined.</li>
+  <li>An arbitrary Docker image is a blackbox and there is no guarantee Galaxy will execute the same binaries as the Conda requirements.</li>
+</ul>
+
+<hr />
+
+<p>class: left</p>
+
+<h2 id="to-put-it-another-way">To Put it Another Way</h2>
+
+<p>This:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;requirements&gt;
+    &lt;requirement type="package" version="1.2"&gt;seqtk&lt;/requirement&gt;
+&lt;/requirements&gt;
+</code></pre></div></div>
+
+<p>should have been sufficient!</p>
+
+<p>And the good news is that now it is (mostly)!</p>
+
+<hr />
+
+<p>class: left</p>
+
+<h3 id="image-10-biocontainers---the-magic">.image-10[<img src="../../images/biocontainers.png" alt="biocontainers logo" loading="lazy" />] BioContainers - The Magic</h3>
+
+<p>Galaxy can now automatically find or build containers for best practice tools.</p>
+
+<p>Planemo will check if such a container has been published with the <code class="language-plaintext highlighter-rouge">--biocontainers</code> flag to <code class="language-plaintext highlighter-rouge">planemo lint</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ planemo lint --biocontainers seqtk_seq.xml
+...
+Applying linter biocontainer_registered... CHECK
+.. INFO: BioContainer best-practice container found [quay.io/biocontainers/seqtk:1.2--1].
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<p>But we didn’t do anything - where did this magic seqtk container come from.</p>
+
+<hr />
+
+<h2 id="the-mystery-quayiobiocontainersseqtk-container">The Mystery quay.io/biocontainers/seqtk Container</h2>
+
+<p><img src="../../images/quayioseqtk.png" alt="screenshot of quay.io showing the repository tags for the seqtk repo" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>I swear Planemo did not just create that with <code class="language-plaintext highlighter-rouge">tool_init</code> or <code class="language-plaintext highlighter-rouge">lint</code>, maybe we should try using it…</p>
+
+<hr />
+
+<p>class: left</p>
+
+<h3 id="image-05-biocontainers---using-the-container">.image-05[<img src="../../images/biocontainers.png" alt="biocontainers logo" loading="lazy" />] BioContainers - Using the Container</h3>
+
+<p>Run Planemo <code class="language-plaintext highlighter-rouge">test</code> or <code class="language-plaintext highlighter-rouge">serve</code> with <code class="language-plaintext highlighter-rouge">--biocontainers</code> to try mystery container.</p>
+
+<p>.reduce70[</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ planemo test --biocontainers seqtk_seq.xml
+...
+[galaxy.tools.actions] Setup for job Job[unflushed,tool_id=seqtk_seq] complete, ready to flush (20.380 ms)
+[galaxy.tools.actions] Flushed transaction for job Job[id=2,tool_id=seqtk_seq] (15.191 ms)
+...
+[galaxy.tools.deps.containers] Checking with container resolver [ExplicitDockerContainerResolver[]] found description [None]
+[galaxy.tools.deps.containers] Checking with container resolver [CachedMulledDockerContainerResolver[namespace=None]] found description [None]
+[galaxy.tools.deps.containers] Checking with container resolver [MulledDockerContainerResolver[namespace=biocontainers]] found description [ContainerDescription[identifier=quay.io/biocontainers/seqtk:1.2--1,type=docker]]
+[galaxy.jobs.command_factory] Built script [/tmp/tmpw8_UQm/job_working_directory/000/2/tool_script.sh] for tool command [seqtk seq -a '/tmp/tmpw8_UQm/files/000/dataset_1.dat' &gt; '/tmp/tmpw8_UQm/files/000/dataset_2.dat']
+...
+ok
+
+----------------------------------------------------------------------
+XML: /private/tmp/tmpw8_UQm/xunit.xml
+----------------------------------------------------------------------
+Ran 1 test in 11.926s
+OK
+</code></pre></div></div>
+<p>]</p>
+
+<p>The important line here is - <code class="language-plaintext highlighter-rouge">Checking with container resolver [MulledDockerContainerResolver[namespace=biocontainers]] found description [ContainerDescription[identifier=quay.io/biocontainers/seqtk:1.2--1,type=docker]]</code>.</p>
+
+<hr />
+
+<h3 id="image-05-biocontainers---the-community">.image-05[<img src="../../images/biocontainers.png" alt="biocontainers logos" loading="lazy" />] BioContainers - The Community</h3>
+
+<p><img src="../../images/biocontainers_org.png" alt="screenshot of biocontainers github page" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>BioContainers is a big community of informatics minded individuals trying to work
+together on building container and Docker based solutions for problems like ours.
+Previously the project was called BioDocker.</p>
+
+<p>We are exploiting and contributing to one aspect of BioContainers, in particular
+BioConda for Containers.</p>
+
+<hr />
+
+<h3 id="image-10-biocontainers---bioconda-for-containers">.image-10[<img src="../../images/biocontainers.png" alt="biocontainers logo" loading="lazy" />] BioContainers - Bioconda for Containers</h3>
+
+<p>All Bioconda packages are built into minimal containers.</p>
+
+<p>This setup allows the same binaries to be used within the container or on traditional/HPC resources.
+Without any extra work by tool authors, Galaxy can automatically find or build “the correct” container for a best-practice tool.</p>
+
+<p>Over 4,000 containers already published.</p>
+
+<hr />
+
+<h3 id="image-05-biocontainers---lots-of-containers">.image-05[<img src="../../images/biocontainers.png" alt="biocontainers logo" loading="lazy" />] BioContainers - Lots of Containers</h3>
+
+<p><img src="../../images/quay_list.png" alt="screenshot of biocontainers on quay.io with lots of containers" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>TODO: Zoom in on the image a bit more ideally.</p>
+
+<hr />
+
+<h3 id="image-05-biocontainers---on-demand-creation">.image-05[<img src="../../images/biocontainers.png" alt="biocontainers logo" loading="lazy" />] BioContainers - On Demand Creation</h3>
+
+<p>Galaxy can be configured to attempt to build containers on demand for containers that haven’t
+been published to the BioContainers namespace on quay.io.</p>
+
+<p>These containers will have same names as would be published to quay.io (e.g. <code class="language-plaintext highlighter-rouge">quay.io/biocontainers/seqtk:1.2--0</code>).</p>
+
+<hr />
+
+<h3 id="containerizing-tool-execution-3">Containerizing Tool Execution</h3>
+
+<h4 id="decomposes-to-basic-problems-2">Decomposes to basic problems</h4>
+
+<ul>
+  <li><i class="fa fa-check-square-o" aria-hidden="true"></i><i class="fa fa-check-square-o" aria-hidden="true"></i> Instruct Galaxy where to find a container for the tool.</li>
+  <li><i class="fa fa-check-square-o" aria-hidden="true"></i> Instruct Galaxy to run the tool in a container.</li>
+</ul>
+
+<p>We’re done this time now right?</p>
+
+<p><span>Speaker Notes</span></p>
+
+<hr />
+
+<h2 id="revisiting-galaxy-requirements">Revisiting Galaxy Requirements</h2>
+
+<p><img src="../../images/galaxy_instance.png" alt="schematic of a galaxy server with dependency resolution via requirement tags at the top. On the left is the tool box with a number of xml files listed like seqtk_seq and seqtk_subseq. On the right is applications &amp; libraries showing only a few tools like seqtk, all of the 3 multipoe subtools were collapsed" loading="lazy" /></p>
+
+<p>Many tools have multiple requirements, these need containers also!</p>
+
+<p><span>Speaker Notes</span></p>
+
+<hr />
+
+<h2 id="an-example">An Example</h2>
+
+<p>The BWA tool is an example of one such tool that has multiple requirements - because samtools is used to sort BAMs after mapping. The Planemo <code class="language-plaintext highlighter-rouge">conda_testing</code> project is distributed with a simple tool to simulate this containing both <code class="language-plaintext highlighter-rouge">bwa</code> and <code class="language-plaintext highlighter-rouge">samtools</code> requirements.</p>
+
+<p>.reduce90[</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ planemo project_init --template=conda_testing conda_testing
+$ cd conda_testing/
+$ grep -r require bwa_and_samtools.xml
+bwa_and_samtools.xml:    &lt;requirements&gt;
+bwa_and_samtools.xml:        &lt;requirement type="package" version="0.7.15"&gt;bwa&lt;/requirement&gt;
+bwa_and_samtools.xml:        &lt;requirement type="package" version="1.3.1"&gt;samtools&lt;/requirement&gt;
+bwa_and_samtools.xml:    &lt;/requirements&gt;
+</code></pre></div></div>
+<p>]</p>
+
+<hr />
+
+<h2 id="container-hashing">Container Hashing</h2>
+
+<p>Galaxy finds containers based on the names and versions of requirements, so far we have seen
+the hash for single requirements is just the name and the version.</p>
+
+<p>If multiple requirements are present, the hash looks more like a hash. For bwa @ 0.7.15 and samtools @ 1.3.1,
+Galaxy will look for a container called:</p>
+
+<p>.reduce50[<code class="language-plaintext highlighter-rouge">quay.io/biocontainers/mulled-v2-fe8faa35dbf6dc65a0f7f5d4ea12e31a79f73e40:03dc1d2818d9de56938078b8b78b82d967c1f820-0</code>]</p>
+
+<hr />
+
+<h2 id="galaxy-terminology---mulled">Galaxy Terminology - Mulled</h2>
+
+<p>To <em>mull</em> is to create an environment (either in the Conda sense or globally
+inside a container) for one or more Conda packages. The result of this is a
+<em>mulled</em> environment.</p>
+
+<p>Fixed naming schemes for the resulting environments ensure that different tools
+with the same set of requirements can reuse a previously created environment or
+container.</p>
+
+<p>If more than one package is included in the resulting environment, a complicated
+hash is used as this name.</p>
+
+<hr />
+
+<h2 id="mulled-hashing">Mulled Hashing</h2>
+
+<p>Back to the example of bwa at version 0.7.15 and samtools at version 1.3.1,
+we said the resulting container will be</p>
+
+<p>.reduce50[<code class="language-plaintext highlighter-rouge">quay.io/biocontainers/mulled-v2-fe8faa35dbf6dc65a0f7f5d4ea12e31a79f73e40:03dc1d2818d9de56938078b8b78b82d967c1f820-0</code>]</p>
+
+<p>This can be broken into these parts:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>quay.io/ &lt;namespace&gt; /mulled-v2-&lt;package_hash&gt;:&lt;version_hash&gt;-&lt;build&gt;
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Explain the different parts.</p>
+
+<hr />
+
+<h2 id="exploring-mulled-hashes---by-evgeny-anatskiy">Exploring Mulled Hashes - by Evgeny Anatskiy</h2>
+
+<p><img src="../../images/multi-package-containers.png" alt="Screenshot of biocontainers page showing an information page for multi-package containers" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<hr />
+
+<p>class: left</p>
+
+<h2 id="the-planemo-mull-command-1--2">The Planemo <code class="language-plaintext highlighter-rouge">mull</code> command (1 / 2)</h2>
+
+<p>While Galaxy can be configured to auto-build BioContainers as they are needed, the Planemo <code class="language-plaintext highlighter-rouge">mull</code> command
+can be used to manually build them for your local Docker host.</p>
+
+<hr />
+
+<p>class: reduce70</p>
+
+<h2 id="the-mull-command-2--2">The <code class="language-plaintext highlighter-rouge">mull</code> command (2 / 2)</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ planemo mull bwa_and_samtools.xml
+/Users/john/.planemo/involucro -v=3 -f /Users/john/workspace/planemo/.venv/lib/python2.7/site-packages/galaxy_lib-17.9.0-py2.7.egg/galaxy/tools/deps/mulled/invfile.lua -set CHANNELS='iuc,bioconda,r,defaults,conda-forge' -set TEST='true' -set TARGETS='samtools=1.3.1,bwa=0.7.15' -set REPO='quay.io/biocontainers/mulled-v2-fe8faa35dbf6dc65a0f7f5d4ea12e31a79f73e40:03dc1d2818d9de56938078b8b78b82d967c1f820' -set BINDS='build/dist:/usr/local/' -set PREINSTALL='conda install --quiet --yes conda=4.3' build
+/Users/john/.planemo/involucro -v=3 -f /Users/john/workspace/planemo/.venv/lib/python2.7/site-packages/galaxy_lib-17.9.0-py2.7.egg/galaxy/tools/deps/mulled/invfile.lua -set CHANNELS='iuc,bioconda,r,defaults,conda-forge' -set TEST='true' -set TARGETS='samtools=1.3.1,bwa=0.7.15' -set REPO='quay.io/biocontainers/mulled-v2-fe8faa35dbf6dc65a0f7f5d4ea12e31a79f73e40:03dc1d2818d9de56938078b8b78b82d967c1f820' -set BINDS='build/dist:/usr/local/' -set PREINSTALL='conda install --quiet --yes conda=4.3' build
+DEBU Run file [/Users/john/workspace/planemo/.venv/lib/python2.7/site-packages/galaxy_lib-17.9.0-py2.7.egg/galaxy/tools/deps/mulled/invfile.lua]
+STEP Run image [continuumio/miniconda:latest] with command [[rm -rf /data/dist]]
+DEBU Creating container [step-730a02d79e]
+DEBU Created container [5e4b5f83c455 step-730a02d79e], starting it
+DEBU Container [5e4b5f83c455 step-730a02d79e] started, waiting for completion
+DEBU Container [5e4b5f83c455 step-730a02d79e] completed with exit code [0] as expected
+DEBU Container [5e4b5f83c455 step-730a02d79e] removed
+STEP Run image [continuumio/miniconda:latest] with command [[/bin/sh -c conda install --quiet --yes conda=4.3 &amp;&amp; conda install  -c iuc -c bioconda -c r -c defaults -c conda-forge  samtools=1.3.1 bwa=0.7.15 -p /usr/local --copy --yes --quiet]]
+DEBU Creating container [step-e95bf001c8]
+DEBU Created container [72b9ca0e56f8 step-e95bf001c8], starting it
+DEBU Container [72b9ca0e56f8 step-e95bf001c8] started, waiting for completion
+SOUT Fetching package metadata .........
+SOUT Solving package specifications: .
+SOUT
+SOUT Package plan for installation in environment /opt/conda:
+SOUT
+SOUT The following packages will be UPDATED:
+SOUT
+SOUT conda: 4.3.11-py27_0 --&gt; 4.3.22-py27_0
+SOUT
+SOUT Fetching package metadata .................
+SOUT Solving package specifications: .
+...
+SOUT
+DEBU Container [72b9ca0e56f8 step-e95bf001c8] completed with exit code [0] as expected
+DEBU Container [72b9ca0e56f8 step-e95bf001c8] removed
+STEP Wrap [build/dist] as [quay.io/biocontainers/mulled-v2-fe8faa35dbf6dc65a0f7f5d4ea12e31a79f73e40:03dc1d2818d9de56938078b8b78b82d967c1f820-0]
+DEBU Creating container [step-6f1c176372]
+DEBU Packing succeeded
+</code></pre></div></div>
+
+<p>This built <code class="language-plaintext highlighter-rouge">quay.io/biocontainers/mulled-v2-fe8faa35dbf6dc65a0f7f5d4ea12e31a79f73e40:03dc1d2818d9de56938078b8b78b82d967c1f820-0</code>!</p>
+
+<p><span>Speaker Notes</span></p>
+
+<hr />
+
+<p>class: reduce70</p>
+
+<h2 id="testing-locally-mulled-containers">Testing locally <code class="language-plaintext highlighter-rouge">mull</code>ed containers</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ planemo test --galaxy_branch dev --biocontainers bwa_and_samtools.xml
+...
+[galaxy.tools.actions] Handled output named output_2 for tool bwa_and_samtools (17.443 ms)
+[galaxy.tools.actions] Added output datasets to history (12.935 ms)
+[galaxy.tools.actions] Verified access to datasets for Job[unflushed,tool_id=bwa_and_samtools] (0.021 ms)
+[galaxy.tools.actions] Setup for job Job[unflushed,tool_id=bwa_and_samtools] complete, ready to flush (5.755 ms)
+[galaxy.tools.actions] Flushed transaction for job Job[id=1,tool_id=bwa_and_samtools] (19.582 ms)
+[galaxy.jobs.handler] (1) Job dispatched
+[galaxy.tools.deps] Using dependency bwa version 0.7.15 of type conda
+[galaxy.tools.deps] Using dependency samtools version 1.3.1 of type conda
+[galaxy.tools.deps] Using dependency bwa version 0.7.15 of type conda
+[galaxy.tools.deps] Using dependency samtools version 1.3.1 of type conda
+[galaxy.tools.deps.containers] Checking with container resolver [ExplicitContainerResolver[]] found description [None]
+[galaxy.tools.deps.containers] Checking with container resolver [CachedMulledContainerResolver[namespace=None]] found description [ContainerDescription[identifier=quay.io/ biocontainers/mulled-v1-01afc412d1f216348d85970ce5f88c984aa443f3:latest,type=docker]]
+[galaxy.jobs.command_factory] Built script [/tmp/tmpQs0gyp/job_working_directory/000/1/tool_script.sh] for tool command [bwa &gt; /tmp/tmpQs0gyp/files/000/dataset_1.dat 2&gt;&amp;1 ; samtools &gt; /tmp/tmpQs0gyp/files/000/dataset_2.dat 2&gt;&amp;1]
+[galaxy.tools.deps] Using dependency samtools version None of type conda
+[galaxy.tools.deps] Using dependency samtools version None of type conda
+ok
+
+----------------------------------------------------------------------
+XML: /private/tmp/tmpQs0gyp/xunit.xml
+----------------------------------------------------------------------
+Ran 1 test in 7.553s
+
+OK
+[test_driver] Shutting down
+[test_driver] Shutting down embedded galaxy web server
+[test_driver] Embedded web server galaxy stopped
+[test_driver] Stopping application galaxy
+...
+[galaxy.jobs.handler] job handler stop queue stopped
+Testing complete. HTML report is in "/home/planemo/workspace/planemo/tool_test_output.html".
+All 1 test(s) executed passed.
+bwa_and_samtools[0]: passed
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="hands_on-hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+<p><img src="../../images/exercise.png" alt="cartoon of two people jumping" loading="lazy" /></p>
+
+<hr />
+
+<h3 id="hands_on-hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+<h4 id="the-goal">The Goal</h4>
+
+<ul>
+  <li>Use <code class="language-plaintext highlighter-rouge">--biocontainers</code> to build a container on-demand for a test tool.</li>
+</ul>
+
+<hr />
+
+<p>class: left</p>
+
+<h3 id="hands_on-hands-on-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+<h4 id="steps">Steps</h4>
+
+<ul>
+  <li>Run through the bwa_and_samtools.xml test tool and verify container creation.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ planemo project_init --project_template=conda_testing conda_testing
+$ cd conda_testing/
+$ planemo mull bwa_and_samtools.xml
+$ docker images # verify the container was built
+$ # use docker run to verify the container has samtools and bwa.
+$ planemo test --biocontainers bwa_and_samtools.xml
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="publishing-multi-package-containers">Publishing Multi-Package Containers</h3>
+
+<p><img src="../../images/multi-package-repo.png" alt="screenshot of a mulled biocontainer in quay.io. Nothing useful is depicted." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>We are currently monitoring tools-iuc, tools-devteam, and a half a dozen other repositories
+daily for package combinations to publish.</p>
+
+<hr />
+
+<h3 id="publishing-your-multi-package-containers">Publishing <strong>Your</strong> Multi-Package Containers</h3>
+
+<p><img src="../../images/planemo-monitor.png" alt="Screenshot of the text editor in github, editing monitor.sh in galaxyproject/planemo-monitor" loading="lazy" /></p>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>It is becoming easier, more advantageous, and more common for Galaxy admins to run all tools within their own container.</li>
+
+<li>You can explicitly define a container for your tool - but it is easier and more reproducible to let Galaxy find or build one using your tool's best practice requirements.</li>
+
+<li>The Galaxy community will infrastructure to automatically build and/or publish containers for your tool as long as it defines best practice Conda dependencies.</li>
+
+<li>Planemo makes it easy to test your tool inside of containers.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

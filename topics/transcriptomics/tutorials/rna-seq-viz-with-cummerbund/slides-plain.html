@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Visualization of RNA-Seq results with CummeRbund</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:title" content="Galaxy Training: Visualization of RNA-Seq results with CummeRbund" />
+        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/transcriptomics/faqs/" title="Check our FAQs for the Transcriptomics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/rna-seq-viz-with-cummerbund/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-cummerbund/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/rna-seq-viz-with-cummerbund/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/rna-seq-viz-with-cummerbund/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/rna-seq-viz-with-cummerbund/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/rna-seq-viz-with-cummerbund/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/rna-seq-viz-with-cummerbund/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-viz-with-cummerbund%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/transcriptomics/tutorials/rna-seq-viz-with-cummerbund/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/transcriptomics/tutorials/rna-seq-viz-with-cummerbund/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/transcriptomics/tutorials/rna-seq-viz-with-cummerbund/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/transcriptomics/tutorials/rna-seq-viz-with-cummerbund/slides.html">View markdown source on GitHub</a>
+	<h1>Visualization of RNA-Seq results with CummeRbund</h1>
+		<h2>Contributors</h2>
+		Andrea Bagnacani
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>How are RNA-Seq results stored?</p>
+</li>
+		
+		<li><p>Why are visualization techniques needed?</p>
+</li>
+		
+		<li><p>How to select our desired subjects for differential gene expression analysis?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Manage RNA-Seq results</p>
+</li>
+		
+		<li><p>Extract the desired subject for differential gene expression analysis</p>
+</li>
+		
+		<li><p>Visualize information</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Oct 9, 2018 </div>
+
+	<hr />
+
+
+	<h1 id="why-visualization">Why visualization?</h1>
+
+<p><span>Speaker Notes</span>
+Data alone does not bring any information: to carry information, data needs to be contextualized. Transcriptomic data is no exception, therefore to organize the growing body of knowledge pertaining RNA-Seq experiments and infer valuable insights, data needs to be organized, annotated, and ultimately visualized.</p>
+
+<hr />
+
+<h3 id="where-is-my-data-coming-from">Where is my data coming from?</h3>
+
+<p><img src="../../images/cummerbund-rna-seq-experiment.jpg" alt="Wang et al, Nat Rev Genet, 2009" loading="lazy" /></p>
+
+<p><small><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2949280/"><em>Wang et al, Nat Rev Genet, 2009</em></a></small></p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>RNAs are converted into cDNA fragments through RNA fragmentation</li>
+  <li>sequencing adaptors (in blue) are then added to each cDNA fragment</li>
+  <li>cDNA sequences are obtained via NGS sequencing</li>
+  <li>the obtained reads are subsequently aligned against a reference genome or transcriptome, and classified in-silico as exonic reads, junction reads, and poly-A reads</li>
+  <li>these three types are then used to outline an expression profile for each gene</li>
+</ul>
+
+<p>This is the process that will:</p>
+
+<ul>
+  <li>reveal new genes and splice variants</li>
+  <li>help quantifying cell-specific gene expression within the genome under study</li>
+</ul>
+
+<p>But once this pipeline is implemented, how are sequence data going to be analysed and managed?</p>
+
+<hr />
+
+<h3 id="bioinformatic-tools-for-rna-seq-analysis">Bioinformatic tools for RNA-Seq analysis</h3>
+
+<p>Once the RNA-Seq pipeline is implemented, we still need to handle and analyse all data that is generated. This requires:</p>
+
+<ul>
+  <li>
+    <p>computer science skills to be handled</p>
+  </li>
+  <li>
+    <p>mathematical knowledge to be interpreted</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="bioinformatic-tools-for-rna-seq-analysis-1">Bioinformatic tools for RNA-Seq analysis</h3>
+
+<p><img src="../../images/cummerbund-rna-seq-experiment-tuxedo.jpg" alt="Trapnell et al, Nat Protoc, 2012" loading="lazy" /></p>
+
+<p><small><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3334321/"><em>Trapnell et al, Nat Protoc, 2012</em></a></small>
+<span>Speaker Notes</span></p>
+<ul>
+  <li>first, reads from each condition are mapped to the reference genome using TopHat</li>
+  <li>the resulting alignment files are given to Cufflinks, which generates a transcriptome assembly for each condition</li>
+  <li>the two assemblies are then merged together to provides a uniform basis for calculating of gene and transcript expression in each condition</li>
+  <li>both reads and merged assemblies are fed to CuffDiff, to calculate expression levels via statistical significance test for the observed changes</li>
+</ul>
+
+<hr />
+
+<h3 id="bioinformatic-tools-for-rna-seq-analysis-2">Bioinformatic tools for RNA-Seq analysis</h3>
+
+<p>The last step in our RNA-Seq analysis is CuffDiff. Its output comprises multiple files containing the results of the differential expression analysis.</p>
+
+<ul>
+  <li>
+    <p>Gene expression levels are reported as <i>tab-separated</i> values: a simple tabular output that can be viewed with any spreadsheet application. Such files contain statistics, gene-related, and transcript-related attributes
+.image-75[<img src="../../images/cummerbund-cuffdiff-output.png" alt="CuffDiff output" loading="lazy" />]</p>
+  </li>
+  <li>
+    <p>Another way to collect all these data is to organize it within a dedicated database for later consultation. CuffDiff can be instructed to do so
+.image-50[<img src="../../images/cummerbund-cuffdiff-set-sqlite.png" alt="CuffDiff output SQLite" loading="lazy" />]</p>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>CuffDiff provides analyses of differential expression and regulation at the gene and transcript level</li>
+  <li>its results are reported in a tab separated format</li>
+  <li>the overall collection of data is difficult to read to obtain a bird’s-eye view of the change of expression</li>
+  <li>the data can be organized in a SQLite database</li>
+</ul>
+
+<hr />
+
+<h3 id="bioinformatic-tools-for-rna-seq-analysis-3">Bioinformatic tools for RNA-Seq analysis</h3>
+
+<p>Whatever storage strategy you opted for, i.e. multiple tab-separated-value files or a SQLite database, all data is still retained within text format.</p>
+
+<p>We need to have a bird’s-eye view of that data, and <i>make sense</i> of it</p>
+
+<hr />
+
+<h1 id="visualization">Visualization</h1>
+
+<hr />
+
+<h3 id="cummerbund">CummeRbund</h3>
+
+<p><a href="http://compbio.mit.edu/cummeRbund/">CummeRbund</a> is an R package for visualizing the results of a CuffDiff output.</p>
+
+<ul>
+  <li>
+    <p>Manages, integrates, and visualizes all data produced by CuffDiff</p>
+  </li>
+  <li>
+    <p>Simplifies data exploration</p>
+  </li>
+  <li>
+    <p>Provides a bird’s-eye view of the expression analysis</p>
+  </li>
+  <li>
+    <p>Helps creating publication-ready plots</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="cummerbund-1">CummeRbund</h3>
+
+<p>CummeRbund needs to be instructed on which data to be visualized:</p>
+
+<ul>
+  <li>
+    <p><i>Extract CuffDiff</i>’s “Transcript differential expression testing” table</p>
+  </li>
+  <li>
+    <p><i>Filter</i> the table on the column storing the significance of a differentially expressed gene</p>
+  </li>
+  <li>
+    <p><i>Sort</i> all entries on the basis of most significant differentially expressed gene</p>
+  </li>
+  <li>
+    <p>Identify the most significant differentially expressed gene</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="cummerbund-2">CummeRbund</h3>
+
+<p>Once the most significant differentially expressed gene has been identified, CummeRbund can generate publication-ready plots to highlight…</p>
+
+<p>.image-50[<img src="../../images/cummerbund-expression-plot.png" alt="CummeRbund Expression plot" loading="lazy" />]</p>
+
+<p>The expression of all isoforms of the single gene with replicate FPKMs</p>
+
+<hr />
+
+<h3 id="cummerbund-3">CummeRbund</h3>
+
+<p>Once the most significant differentially expressed gene has been identified, CummeRbund can generate publication-ready plots to highlight…</p>
+
+<p>.image-50[<img src="../../images/cummerbund-expression-bar-plot.png" alt="CummeRbund Expression plot" loading="lazy" />]</p>
+
+<p>The expression bar-plot of all isoforms of a gene with replicate FPKMs</p>
+
+<hr />
+
+<h3 id="cummerbund-4">CummeRbund</h3>
+
+<p>…and many more</p>
+
+<p>.image-50[<img src="../../images/cummerbund-other-plots.png" alt="Other CummeRbund plots" loading="lazy" />]</p>
+
+<p>Have a look at <a href="https://bioconductor.org/packages/2.11/bioc/vignettes/cummeRbund/inst/doc/cummeRbund-manual.pdf">CummerBund’s tutorial</a> to overview all possibilities!</p>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Extract informations from a SQLite CuffDiff database</li>
+
+<li>Filter and sort results to highlight differential expressed genes of interest</li>
+
+<li>Generate publication-ready visualizations for RNA-Seq analysis results</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Nucleoli Segmentation <br> & <br> Feature Extraction <br> using CellProfiler</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Image analysis using Galaxy" />
+        <meta property="og:title" content="Galaxy Training: Nucleoli Segmentation <br> & <br> Feature Extraction <br>..." />
+        <meta property="og:description" content="Image analysis using Galaxy" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/imaging/faqs/" title="Check our FAQs for the Imaging topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/imaging/tutorials/tutorial-CP/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/imaging/tutorials/tutorial-CP/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/imaging/tutorials/tutorial-CP/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/imaging/tutorials/tutorial-CP/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/imaging/tutorials/tutorial-CP/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/imaging/tutorials/tutorial-CP/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/imaging/tutorials/tutorial-CP/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fimaging%2Ftutorials%2Ftutorial-CP%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/imaging/tutorials/tutorial-CP/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/imaging/tutorials/tutorial-CP/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/imaging/tutorials/tutorial-CP/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/imaging/tutorials/tutorial-CP/slides.html">View markdown source on GitHub</a>
+	<h1>Nucleoli Segmentation <br> & <br> Feature Extraction <br> using CellProfiler</h1>
+		<h2>Contributors</h2>
+		Beatriz Serrano-Solano
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>How do I run an image analysis pipeline on public data using CellProfiler?</p>
+</li>
+		
+		<li><p>How do I analyse the DNA channel of fluorescence siRNA screens?</p>
+</li>
+		
+		<li><p>How do I download public image data into my history?</p>
+</li>
+		
+		<li><p>How do I segment and label cell nuclei?</p>
+</li>
+		
+		<li><p>How do I segment nucleoli (as the absence of DNA)?</p>
+</li>
+		
+		<li><p>How do I combine nuclei and nucleoli into one segmentation mask?</p>
+</li>
+		
+		<li><p>How do I extract the background of an image?</p>
+</li>
+		
+		<li><p>How do I relate the nucleoli to their parent nucleus?</p>
+</li>
+		
+		<li><p>How do I measure the image and object features?</p>
+</li>
+		
+		<li><p>How do I measure the image quality?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>How to download images from a public image repository.</p>
+</li>
+		
+		<li><p>How to segment cell nuclei using CellProfiler in Galaxy.</p>
+</li>
+		
+		<li><p>How to segment cell nucleoli using CellProfiler in Galaxy.</p>
+</li>
+		
+		<li><p>How to extract features for images, nuclei and nucleoli.</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 10, 2021 </div>
+
+	<hr />
+
+
+	<h3 id="what-is-the-nucleoli">What is the nucleoli?</h3>
+
+<ul>
+  <li>Membrane-less organelle in the nucleus of the cell</li>
+  <li>Functions: ribosome biogenesis and cell cycle regulation</li>
+</ul>
+
+<p>.image-55[
+  <img src="../../images/tutorial-CP/img_dna_channel.png" alt="image of four cells, one is dividing, and red arrows point to the 5 nucleii" loading="lazy" />
+]</p>
+
+<p><span>Speaker Notes</span>
+In the DNA channel, the nucleoli is shown as the absence of DNA (red arrows).
+—</p>
+
+<h3 id="data">Data</h3>
+
+<ul>
+  <li>The data can be downloaded from the Image Data Resource (<a href="http://idr.openmicroscopy.org/">IDR</a>)</li>
+</ul>
+
+<p>.image-65[
+  <img src="../../images/tutorial-CP/IDR_interface.jpg" alt="screenshot of a complex tool interface showing an array of images (1) and then two selected images below it (2) and a configuration panel on the right (3)" loading="lazy" />
+]</p>
+
+<p><span>Speaker Notes</span>
+In the IDR the images can be selected in the user interface (1). The images will then show up at the bottom (2) where they need to be selected once again and then copy the URL from the link icon on the top left (3). That URL contains the image ids that will be downloaded.
+You can also bring your images by uploading the DNA channel of your images to your Galaxy history.
+—</p>
+
+<h3 id="general-workflow">General Workflow</h3>
+
+<ul>
+  <li>The workflow contains 4 basic parts:
+    <ul>
+      <li>Segmentation of the nuclei</li>
+      <li>Segmentation of the nucleoli that fall inside the nuclei</li>
+      <li>Background detection</li>
+      <li>Feature extraction of the images and objects</li>
+    </ul>
+  </li>
+</ul>
+
+<figure id="figure-1"><img src="../../images/tutorial-CP/wf.jpg" alt="screenshot of a galaxy workflow with four sections highlighted by boxes reading nuclei, nucleoli, background, and feature extraction." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> High-level view of the workflow</figcaption></figure>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Segmentation of the nucleoli: since there is no staining for the nucleoli, the holes need to be detected and segmented.</li>
+  <li>Feature extraction: the order of the tools does not affect the outcome.</li>
+  <li>
+    <h2 id="background-detection-detection-of-the-foreground-and-subtraction-from-the-image">Background detection: Detection of the foreground and subtraction from the image.</h2>
+  </li>
+</ul>
+
+<h3 id="1-segment-nuclei">1) Segment nuclei</h3>
+
+<p><img src="../../images/tutorial-CP/subwf_nuclei.jpg" alt="Inset to the first portion of the above overview image showing nuclei with 5 steps, starting modules, segment complete nuclei, segmentation mask complete nuclei, label nuclei, and save labelled nuclei." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span>
+Every CellProfiler pipeline needs to start by processing the metadata with the tool “Starting modules”.</p>
+
+<ul>
+  <li>Segment complete nuclei: this tool identifies the nuclei within a certain size and excludes those cells that are touching the borders of the image.</li>
+  <li>Segmentation mask complete nuclei: gathers all the nuclei identified in the previous step in one mask.</li>
+  <li>Label and save labelled nuclei: adds the id of each nucleus on top of it. This can be useful later for a proper interpretation of the data analysis.—</li>
+</ul>
+
+<h3 id="segmentation-and-labelling-of-the-nuclei">Segmentation and labelling of the nuclei</h3>
+
+<figure id="figure-2"><img src="../../images/tutorial-CP/img_nuclei_labels.png" alt="a photo of cells in black and white, several cells have red numbers written atop them." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Identified nuclei with labels</figcaption></figure>
+
+<p><span>Speaker Notes</span>
+Resulting image after the first logical step of the workflow in which the nuclei were segmented and labelled.
+—</p>
+
+<h3 id="2-segment-nucleoli">2) Segment nucleoli</h3>
+
+<p><img src="../../images/tutorial-CP/subwf_nucleoli.jpg" alt="Inset of the nucleoli portion of the workflow with the following steps: detect dark holes in nuclei, segment nucleoli that fall inside nuclei, segment nucleoli, convert the segmented nucleoli into an image, combine masks (nuclei+nucleoli), and finally save combined segmentation masks." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span>
+To identify the nucleoli the first step is to enhance the dark holes so that they can be segmented.
+The segmentation of the dark holes will take place only when the dark holes fall inside a nucleus. This is to avoid the detection of wrong objects outside the cell.
+At this step, the segmentation of the nucleoli can be performed.
+It will be useful for visual exploration that the masks of the nuclei and nucleoli are saved together into one segmentation mask.
+—</p>
+
+<h3 id="combined-mask-nuclei--nucleoli">Combined mask: nuclei + nucleoli</h3>
+
+<figure id="figure-3"><img src="../../images/tutorial-CP/img_combined_masks.png" alt="image of the cells again, but now cells are blue and nuclei/nucleoli are red." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Nuclei and nucleoli masks combined in which the nuclei are in blue and nucleoli in magenta.</figcaption></figure>
+
+<p><span>Speaker Notes</span>
+The combination of both masks gives an image with the nuclei in blue and the nucleoli in magenta.
+—</p>
+
+<h3 id="background-extraction">Background extraction</h3>
+
+<p><img src="../../images/tutorial-CP/subwf_background.jpg" alt="third inset workflow, background extraction, with steps segment all nuclei, segmentation mask nucleoli including cells touching borders, and extract background." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The extraction of the background can be useful to measure features that indicate that the images are artefacts.
+To get the background we first select the foreground and subtract it from the original image.
+We have partially detected the foreground in the nuclei segmentation in previous steps. However, that mask only included just those objects within a max and a min pixel size. We also discarded the images touching the borders. Here, we get rid of the constraints and segment all the nuclei.</p>
+
+<hr />
+
+<h3 id="feature-extraction">Feature extraction</h3>
+
+<p><img src="../../images/tutorial-CP/subwf_feature_extraction.jpg" alt="The final inset, feature extraction with very small steps." loading="lazy" /></p>
+
+<ul>
+  <li><strong>Important:</strong> Relate nucleoli and parent nucleus</li>
+</ul>
+
+<p><span>Speaker Notes</span>
+The features can be extracted from the images and the objects. Depending on which type of object and the interest of the study, different parameters can be measured.
+The module that relates the objects is useful to export a table with the ids of the nucleoli in relation with their parent nuclei. That’s useful for a meaningful interpretation of the data.</p>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Galaxy workflows can download images from the IDR, selecting specific channels, time points, z-stack positions and crop the image in different ways.</li>
+
+<li>CellProfiler in Galaxy can segment and extract features of any object of interest.</li>
+
+<li>The features and masks can be exported for further analysis.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

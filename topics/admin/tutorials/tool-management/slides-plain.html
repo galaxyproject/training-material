@@ -1,0 +1,1203 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Tool Management with Ephemeris</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Galaxy Tool Management with Ephemeris" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/tool-management/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/tool-management/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/tool-management/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/tool-management/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/tool-management/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/tool-management/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/tool-management/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Ftool-management%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/admin/tutorials/tool-management/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/admin/tutorials/tool-management/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/admin/tutorials/tool-management/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/admin/tutorials/tool-management/slides.html">View markdown source on GitHub</a>
+	<h1>Galaxy Tool Management with Ephemeris</h1>
+		<h2>Contributors</h2>
+		Marius van den Beek, Catherine Bromhead, Martin Čech, Simon Gladman, Helena Rasche, Nicola Soranzo
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>How are tools configured on a Galaxy instance?</p>
+</li>
+		
+		<li><p>What is the Galaxy Tool Shed?</p>
+</li>
+		
+		<li><p>How are Galaxy tools installed?</p>
+</li>
+		
+		<li><p>What is ephemeris and how can it be used to manage tools on a Galaxy instance?</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 6, 2021 </div>
+
+	<hr />
+
+
+	<h2 id="galaxy-tools">Galaxy tools</h2>
+
+<ul>
+  <li>A Galaxy <code class="language-plaintext highlighter-rouge">tool</code> or <code class="language-plaintext highlighter-rouge">wrapper</code> is an XML file describing how some software program works
+    <ul>
+      <li>allows Galaxy to display the tool interface and execute the software</li>
+      <li>describes all software requirements, tests, inputs and outputs, help text, citations</li>
+    </ul>
+  </li>
+  <li>The underlying software packages needed to execute the tool command are called <code class="language-plaintext highlighter-rouge">requirements</code> or <code class="language-plaintext highlighter-rouge">dependencies</code></li>
+  <li>A toolshed <code class="language-plaintext highlighter-rouge">repository</code> is a code archive in Tool Shed containing Galaxy tool(s)</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>A Galaxy <code class="language-plaintext highlighter-rouge">tool</code> or <code class="language-plaintext highlighter-rouge">wrapper</code> is an XML file describing how some software program works</p>
+
+<p>The wrapper xml file contains definitions of the tool input form and instructions to translate form entries
+into a command to execute the tool</p>
+
+<p>Underlying software packages could be packages like samtools or biopython.</p>
+
+<p>A repository in the Galaxy Tool Shed is a versioned code archive containing one or more Galaxy tools</p>
+
+<hr />
+
+<h2 id="the-tool-panel">The tool panel</h2>
+<p>.left-column50[
+<img src="../../images/tool-management-02-tool-panel.png" alt="Tool panel" loading="lazy" />
+]</p>
+
+<p>.right-column50[</p>
+
+<ul>
+  <li>
+    <p>Panel on left-hand side of Galaxy UI</p>
+  </li>
+  <li>
+    <p>Contains Galaxy tools organised into sections</p>
+  </li>
+  <li>
+    <p>Some tools are distributed together with Galaxy (“built-in tools”)</p>
+  </li>
+  <li>
+    <p>Tools can be installed from the Galaxy Tool Shed.</p>
+  </li>
+  <li>
+    <p>Customisable: admins can choose which tools are installed and how the tool panel is organised
+]</p>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The tool panel on the left hand side of a Galaxy site contains all
+of the tools available on that Galaxy instance, arranged into sections.</p>
+
+<p>In this picture the Text Manipulation section has been expanded.</p>
+
+<p>There are tools that come with the galaxy code such as the uploader, but the vast majority of tools
+on a public galaxy have been installed from the toolshed.</p>
+
+<p>The contents and layout of the tool panel are customisable.</p>
+
+<hr />
+
+<p>class: left</p>
+
+<h2 id="tool-configuration-files">Tool configuration files</h2>
+
+<p><code class="language-plaintext highlighter-rouge">tool_conf.xml</code> (default <code class="language-plaintext highlighter-rouge">tool_conf.xml.sample</code>)</p>
+<ul>
+  <li>Contains built-in galaxy tools (tools in galaxy codebase)</li>
+  <li>Can contain manually added tools</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">shed_tool_conf.xml</code></p>
+<ul>
+  <li>Contains tools downloaded from the tool shed</li>
+  <li>Managed by galaxy</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">integrated_tool_panel.xml</code></p>
+<ul>
+  <li>Contains all tools from <code class="language-plaintext highlighter-rouge">tool_conf.xml</code> and <code class="language-plaintext highlighter-rouge">shed_tool_conf.xml</code></li>
+  <li>Automatically generated by Galaxy</li>
+  <li>Can be edited to change the layout of the tool panel</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The contents of the tool panel are defined by three configuration files</p>
+
+<p>The tool_conf file contains galaxy built in tools and manually added tools</p>
+
+<p>The shed_tool_conf file is managed by galaxy and contains all tools installed from the tool shed</p>
+
+<p>The integrated_tool_panel file contains all of the tools from tool_conf and
+shed_tool_conf and can be edited to change the layout of the tool panel</p>
+
+<hr />
+
+<p>class: left</p>
+
+<p><code class="language-plaintext highlighter-rouge">tool_conf.xml</code></p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;toolbox</span> <span class="na">monitor=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"getext"</span> <span class="na">name=</span><span class="s">"Get Data"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"data_source/upload.xml"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"data_source/ucsc_tablebrowser.xml"</span><span class="nt">/&gt;</span>
+...
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">shed_tool_conf.xml</code></p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;toolbox</span> <span class="na">tool_path=</span><span class="s">"../shed_tools"</span><span class="nt">&gt;</span>  <span class="c">&lt;!-- path to installed repositories --&gt;</span>
+  <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"assembly"</span> <span class="na">name=</span><span class="s">"Assembly"</span> <span class="na">version=</span><span class="s">""</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/iuc/shovill/196a599ec43d/shovill/shovill.xml"</span>
+          <span class="na">guid=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/iuc/shovill/shovill/0.8.0"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;tool_shed&gt;</span>toolshed.g2.bx.psu.edu<span class="nt">&lt;/tool_shed&gt;</span>
+      <span class="nt">&lt;repository_name&gt;</span>shovill<span class="nt">&lt;/repository_name&gt;</span>
+      <span class="nt">&lt;repository_owner&gt;</span>iuc<span class="nt">&lt;/repository_owner&gt;</span>
+      <span class="nt">&lt;installed_changeset_revision&gt;</span>196a599ec43d<span class="nt">&lt;/installed_changeset_revision&gt;</span>
+      <span class="nt">&lt;id&gt;</span>toolshed.g2.bx.psu.edu/repos/iuc/shovill/shovill/0.8.0<span class="nt">&lt;/id&gt;</span>
+      <span class="nt">&lt;version&gt;</span>0.8.0<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/tool&gt;</span>
+...
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The tool_conf file contains paths to local tool wrapper XML files.</p>
+
+<p>Each tool element is within a section, telling galaxy where to put the
+tool in the panel.</p>
+
+<p>The shed_tool_conf file also contains paths to tool wrapper XML files
+where they are installed (a complex directory structure)</p>
+
+<p>It contains some metadata for each tool.</p>
+
+<hr />
+
+<h2 id="tool-shed">Tool Shed</h2>
+
+<ul>
+  <li>Galaxy “App Store”</li>
+  <li>It is a free service that hosts repositories containing Galaxy tools.</li>
+  <li>The Tool Shed is a hosting (not a development) platform.
+    <ul>
+      <li>Each repository should link to its development repository.</li>
+    </ul>
+  </li>
+  <li>https://toolshed.g2.bx.psu.edu/</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The tool shed is Galaxy’s app store.</p>
+
+<p>It’s a free service hosts repositories containing Galaxy tools
+and can be found at this URL.</p>
+
+<p>It’s not a development platform: tools are usually maintained
+in open source github repos and uploaded to the toolshed.</p>
+
+<hr />
+
+<p>#####https://toolshed.g2.bx.psu.edu/
+<img src="../../images/tool-management-01-toolshed.png" alt="Toolshed" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The Galaxy tool shed has thousands of tools (almost 8000 as of October 2020)</p>
+
+<p>You can go to this site to search for toolshed tools by category, or search
+for them by name</p>
+
+<hr />
+
+<p>class: left</p>
+
+<h2 id="ways-to-add-tools">Ways to add tools</h2>
+
+<p>You can add tools to Galaxy either</p>
+
+<ul>
+  <li>Manually - useful for tool development.</li>
+  <li>From the Tool Shed
+    <ul>
+      <li>Through the admin UI in Galaxy</li>
+      <li>Using <strong>ephemeris</strong> (recommended)</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Tools can be added manually or from the toolshed.</p>
+
+<p>Toolshed tools can be installed through the admin UI but using ephemeris is recommended.</p>
+
+<hr />
+
+<h2 id="how-to-add-tools-manually">How to add tools manually</h2>
+
+<ul>
+  <li>To add a local tool by hand:
+    <ul>
+      <li>Add an entry to tool_conf.xml pointing to the local tool’s xml file</li>
+      <li>if <code class="language-plaintext highlighter-rouge">tool_conf.xml</code> does not exist it can be copied from <code class="language-plaintext highlighter-rouge">tool_conf.xml.sample</code></li>
+    </ul>
+  </li>
+  <li>To add local tools with the <a href="https://galaxy.ansible.com/galaxyproject/galaxy">galaxyproject.galaxy Ansible role</a>:
+    <ul>
+      <li>Set <code class="language-plaintext highlighter-rouge">galaxy_local_tools</code> to the local tool paths</li>
+      <li>Run the playbook</li>
+    </ul>
+  </li>
+  <li>Tool dependencies need to be installed separately, unless
+<code class="language-plaintext highlighter-rouge">conda_auto_install: true</code> is set in <code class="language-plaintext highlighter-rouge">galaxy.yml</code> (not recommended for
+production)</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Tools can be added manually to the tool_conf.xml file.</p>
+
+<p>If this doesn’t exist it can be copied from the default file tool_conf.xml.sample.</p>
+
+<p>There is also a variable in the galaxy ansible role for adding these.</p>
+
+<p>The dependecies need to be installed separately.</p>
+
+<hr />
+
+<h2 id="how-to-install-tool-shed-tools-through-the-ui">How to install Tool Shed tools through the UI</h2>
+
+<ul>
+  <li>From the Galaxy admin UI, select “Tool Management &gt; Install and Uninstall”</li>
+  <li>Find the repository with the tool(s) you want to install</li>
+  <li>Install the tool repository into Galaxy</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>An administrator can look up any tool from the main toolshed in the
+admin panel and click the ‘Install’ button.</p>
+
+<hr />
+
+<h2 id="advantages-of-using-the-tool-shed">Advantages of using the Tool Shed</h2>
+
+<ul>
+  <li>Installing from the Tool Shed takes care of
+    <ul>
+      <li>dependencies</li>
+      <li>reference data tables</li>
+      <li>configuration files</li>
+    </ul>
+  </li>
+  <li>Multiple versions (“installable revisions”) of a repository can be installed to preserve reproducibility</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Installing from the tool shed will install tool dependencies.</p>
+
+<p>This is typically a conda virtual environment containing every package that the tool requires.</p>
+
+<p>A toolshed tool might have multiple revisions.</p>
+
+<p>This is important for reproducibility.</p>
+
+<p>If you use a tool in an analysis on a public galaxy server it will be there forever.</p>
+
+<p>If you need to rerun your analysis in a year’s time, the tool you have used will still
+be there even if a is a newer revision of the tool has been installed.</p>
+
+<hr />
+
+<h2 id="which-tool-shed">Which Tool Shed?</h2>
+
+<ul>
+  <li>The Main Tool Shed ( https://toolshed.g2.bx.psu.edu ) serves all Galaxies worldwide.
+    <ul>
+      <li>Everybody can create a repository.</li>
+      <li>Repositories are public, including their whole history.</li>
+    </ul>
+  </li>
+  <li>The Test Tool Shed ( https://testtoolshed.g2.bx.psu.edu ) can be used for repositories not yet production-ready.</li>
+  <li>Local sheds can be run e.g. for private or custom-licensed tools.</li>
+  <li>The list of available Tool Sheds for a Galaxy instance is defined in <code class="language-plaintext highlighter-rouge">tool_sheds_conf.xml</code>:</li>
+</ul>
+
+<p>.reduce90[</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;tool_sheds&gt;</span>
+    <span class="nt">&lt;tool_shed</span> <span class="na">name=</span><span class="s">"Galaxy Main Tool Shed"</span> <span class="na">url=</span><span class="s">"https://toolshed.g2.bx.psu.edu/"</span><span class="nt">/&gt;</span>
+<span class="c">&lt;!-- Test Tool Shed should be used only for testing purposes.
+    &lt;tool_shed name="Galaxy Test Tool Shed" url="https://testtoolshed.g2.bx.psu.edu/"/&gt;
+--&gt;</span>
+<span class="nt">&lt;/tool_sheds&gt;</span>
+</code></pre></div></div>
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Repositories in the test tool shed are also public.</p>
+
+<p>The toolshed is a web app backed by a database and anybody can run one, but we discourage running local tool shed.</p>
+
+<p>By default, Galaxy only accepts tools from the main toolshed but also contains a
+commented out entry for the test toolshed.</p>
+
+<hr />
+
+<h2 id="what-happens-when-installing-a-repo-from-the-tool-shed">What happens when installing a repo from the Tool Shed</h2>
+
+<ul>
+  <li>The repository is downloaded</li>
+  <li>If needed, the tool’s dependencies are installed</li>
+  <li>If needed, reference data tables are installed</li>
+  <li>An entry for each tool is created in the Galaxy database</li>
+  <li>The tools are added to <code class="language-plaintext highlighter-rouge">shed_tool_conf.xml</code></li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The repository is downloaded</p>
+
+<p>The tool’s dependencies are installed if needed (they may already be there)</p>
+
+<p>If needed, reference data tables are installed</p>
+
+<p>An entry for each tool is created in the Galaxy database (or the tool install database depending on the configuration of galaxy)</p>
+
+<p>The tools are added to <code class="language-plaintext highlighter-rouge">shed_tool_conf.xml</code></p>
+
+<hr />
+
+<h2 id="how-to-install-with-ephemeris">How to install with Ephemeris</h2>
+
+<ul>
+  <li>Find the repository you want to install.</li>
+  <li>Run <code class="language-plaintext highlighter-rouge">shed-tools install</code> with the repository details</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Find a repository to install from the tool shed and
+install it with the ephemeris <code class="language-plaintext highlighter-rouge">shed-tools</code> command</p>
+
+<hr />
+
+<h1 id="ephemeris">Ephemeris</h1>
+
+<p>Small Python library for Galaxy Management</p>
+
+<ul>
+  <li>Can install:
+    <ul>
+      <li>Tools</li>
+      <li>Reference data</li>
+      <li>Workflows</li>
+      <li>Data libraries</li>
+    </ul>
+  </li>
+  <li>Can also test tools</li>
+  <li><code class="language-plaintext highlighter-rouge">$ pip install ephemeris</code></li>
+  <li>https://github.com/galaxyproject/ephemeris</li>
+  <li>https://ephemeris.readthedocs.io</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Ephemeris is a Python library for Galaxy management.</p>
+
+<p>It can be used to install tools, reference data, workflows and data libraries onto a Galaxy Instance.</p>
+
+<p>It can also be used to run tool tests.</p>
+
+<p>Ephemeris can be installed with pip.</p>
+
+<p>Ephemeris manages tools through the Galaxy API.</p>
+
+<p>There is no need to be using ephemeris commands from the server running Galaxy (though you can).</p>
+
+<hr />
+
+<h2 id="get-installed-tool-list-for-a-galaxy-instance">Get installed tool list for a Galaxy instance</h2>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">get-tool-list [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
+  [-h] [-v] 
+	-o OUTPUT
+	[--include_tool_panel_id]
+	[--skip_tool_panel_name]
+	[--skip_changeset_revision]
+</span><span class="gp">	[--get_data_managers]  #</span><span class="w"> </span>admin only
+<span class="gp">	[--get_all_tools]  #</span><span class="w"> </span>admin only
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Ephemeris can be used to get a list of installed tools for any public galaxy instance</p>
+
+<p>An API key is not required for this but some options are not available
+unless an admin API key is provided.</p>
+
+<hr />
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">tools</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">column_maker'</span>
+  <span class="na">owner</span><span class="pi">:</span> <span class="s1">'</span><span class="s">devteam'</span>
+  <span class="na">tool_panel_section_label</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Text</span><span class="nv"> </span><span class="s">Manipulation'</span>
+  <span class="na">revisions</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s1">'</span><span class="s">464b9305180e'</span><span class="err">	</span><span class="c1"># 1.2.0</span>
+  <span class="na">tool_shed_url</span><span class="pi">:</span> <span class="s1">'</span><span class="s">toolshed.g2.bx.psu.edu'</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">bwa'</span>
+  <span class="na">owner</span><span class="pi">:</span> <span class="s1">'</span><span class="s">devteam'</span>
+  <span class="na">revisions</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s1">'</span><span class="s">051eba708f43'</span>  <span class="c1"># 0.7.15.2</span>
+  <span class="pi">-</span> <span class="s1">'</span><span class="s">4d82cf59895e'</span>  <span class="c1"># 0.7.16.2</span>
+  <span class="na">tool_panel_section_label</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Mapping'</span>
+  <span class="na">tool_shed_url</span><span class="pi">:</span> <span class="s1">'</span><span class="s">toolshed.g2.bx.psu.edu'</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">tabular_to_fasta'</span>
+  <span class="na">owner</span><span class="pi">:</span> <span class="s1">'</span><span class="s">devteam'</span>
+  <span class="na">revisions</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s1">'</span><span class="s">0b4e36026794'</span>  <span class="c1"># v1.1.0</span>
+  <span class="na">tool_panel_section_label</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Convert</span><span class="nv"> </span><span class="s">Formats'</span>
+  <span class="na">tool_shed_url</span><span class="pi">:</span> <span class="s1">'</span><span class="s">toolshed.g2.bx.psu.edu'</span>
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The output contains all of the information we would need to install tools on a different galaxy instance.</p>
+
+<p>The revisions correspond to tool versions. There are comments to highlight this.</p>
+
+<p>There are two different revisions of bwa corresponding to two different versions.</p>
+
+<hr />
+
+<h2 id="installupdatetest-tools">Install/Update/Test tools</h2>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">shed-tools install [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
+	[--log_file LOG_FILE]
+	[-t TOOL_LIST_FILE]
+	[-y TOOL_YAML]
+	[--name NAME]
+	[--owner OWNER]
+	[--revisions [REVISIONS [REVISIONS ...]]]
+	[--toolshed TOOL_SHED_URL]
+	[--install_tool_dependencies]
+	[--skip_install_resolver_dependencies]
+	[--skip_install_repository_dependencies]
+	[--test]
+	[--test_existing]
+	[--test_json TEST_JSON]
+	[--test_user_api_key TEST_USER]
+	[--test_user TEST_USER]
+	[--section TOOL_PANEL_SECTION_ID]
+	[--section_label TOOL_PANEL_SECTION_LABEL]
+	[--latest]
+</span></code></pre></div></div>
+
+<ul>
+  <li>Ansible role: https://github.com/galaxyproject/ansible-galaxy-tools</li>
+  <li>Sample playbook: https://github.com/afgane/galaxy-tools-playbook</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>A galaxy administrator can install tools by providing their administrator API key.</p>
+
+<p>They can specify the name, owner and section label or provide a yaml list of tools (TOOL_LIST_FILE)</p>
+
+<hr />
+
+<h2 id="example-installing-circos">Example: Installing circos</h2>
+
+<p>.left[
+(1)</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">shed-tools install -g &lt;galaxy url&gt; -a &lt;api key&gt; \</span>
+  <span class="s">--name circos --owner iuc --section_label 'Graph/Display Data'</span>
+</code></pre></div></div>
+
+<p>(2)</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">shed-tools install -g &lt;galaxy url&gt; -a &lt;api key&gt; -t tools.yml</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">tools.yml</code></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">tools</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">circos</span>
+  <span class="na">owner</span><span class="pi">:</span> <span class="s">iuc</span>
+  <span class="na">tool_panel_section_label</span><span class="pi">:</span> <span class="s">Graph/Display Data</span>
+</code></pre></div></div>
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>shed-tools can be used to install a tool from command line arguments
+or from a yaml file containing one or more tools.</p>
+
+<p>These two examples are equivalent to each other.</p>
+
+<p>The advantage of the second approach is that many tools be listed
+in tools.yml to be installed at the same time</p>
+
+<p>The argument ‘revisions’ can also be provided to install a
+specific revision or more than one revision of the repository.</p>
+
+<p>In the absence of a ‘revisions’ argument, shed-tools will 
+install the latest revision of the tool.</p>
+
+<hr />
+
+<h2 id="test-tools">Test tools</h2>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">shed-tools test [-h] [-v] [--log_file LOG_FILE] [-g GALAXY] [-u USER]
+  [-p PASSWORD] [-a API_KEY] [-t TOOL_LIST_FILE]
+  [-y TOOL_YAML] [--name NAME] [--owner OWNER]
+  [--revisions [REVISIONS [REVISIONS ...]]]
+  [--toolshed TOOL_SHED_URL] [--test_json TEST_JSON]
+  [--test_user_api_key TEST_USER_API_KEY]
+  [--test_user TEST_USER]
+  [--parallel_tests PARALLEL_TESTS]
+</span></code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<p>A good tool comes with tests: instructions within the wrapper to run the tool
+with test input and see whether the tool produces the expected output.</p>
+
+<p>You need to be an an administrator to install tools but any galaxy user
+with an API key can run tool tests.</p>
+
+<hr />
+
+<h2 id="tool-test-output">Tool test output</h2>
+
+<ul>
+  <li>List of tests that have passed and tests that have failed</li>
+  <li><code class="language-plaintext highlighter-rouge">tool_test_output.json</code> file with details of all of the test jobs
+including their standard outputs</li>
+  <li>planemo (https://planemo.readthedocs.io/en/latest/) 
+can be used to generate test reports from <code class="language-plaintext highlighter-rouge">tool_test_output.json</code>
+(<code class="language-plaintext highlighter-rouge">pip install planemo</code>)</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Running tool tests with ephemeris will yield</p>
+<ul>
+  <li>a list of tool tests that have passed and failed and</li>
+  <li>a more detailed file of data from the test jobs that is useful for debugging.</li>
+</ul>
+
+<p>The python library planemo (also
+part of the galaxy project) can be used generate a user-friendly
+report from the json data.</p>
+
+<hr />
+
+<h2 id="list-tools-from-a-galaxy-workflow">List tools from a Galaxy workflow</h2>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">workflow-to-tools
+  -w WORKFLOW_FILES [WORKFLOW_FILES ...]
+        A space separated list of galaxy workflow description
+        files in json format
+  -o OUTPUT_FILE
+        The output file with a yml tool list
+  -l PANEL_LABEL
+        The name of the panel where the tools will show up in
+        Galaxy.If not specified: "Tools from workflows"
+
+</span></code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<p>From a downloaded workflow file, workflow-to-tools generates a yaml list of 
+all toolshed tools required to run that workflow</p>
+
+<hr />
+
+<h2 id="setup-data-libraries">Setup data libraries</h2>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">setup-data-libraries [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
+	-i INFILE
+	[--training]
+	[--legacy]
+</span></code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<p>An administrator can use the ephemeris command setup-data-libraries to upload
+shared data files</p>
+
+<hr />
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">destination</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">library</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Cool</span><span class="nv"> </span><span class="s">Training</span><span class="nv"> </span><span class="s">Library"</span>
+  <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">A</span><span class="nv"> </span><span class="s">longer</span><span class="nv"> </span><span class="s">description."</span>
+  <span class="na">synopsis</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Optional</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">does</span><span class="nv"> </span><span class="s">anyone</span><span class="nv"> </span><span class="s">ever</span><span class="nv"> </span><span class="s">set</span><span class="nv"> </span><span class="s">this?"</span>
+<span class="na">items</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Test</span><span class="nv"> </span><span class="s">Folder</span><span class="nv"> </span><span class="s">1"</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Description</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">what</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">Test</span><span class="nv"> </span><span class="s">Folder</span><span class="nv"> </span><span class="s">1"</span>
+    <span class="na">items</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">url</span><span class="pi">:</span> <span class="s">https://example.org/cliques-high-representatives.fa</span>
+        <span class="na">src</span><span class="pi">:</span> <span class="s">url</span>
+        <span class="na">ext</span><span class="pi">:</span> <span class="s">fasta</span>
+        <span class="na">info</span><span class="pi">:</span> <span class="s2">"</span><span class="s">A</span><span class="nv"> </span><span class="s">cool</span><span class="nv"> </span><span class="s">longer</span><span class="nv"> </span><span class="s">description."</span>
+        <span class="na">dbkey</span><span class="pi">:</span> <span class="s2">"</span><span class="s">hg19"</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Test</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">segmentation-fold"</span>
+    <span class="na">items</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">url</span><span class="pi">:</span> <span class="s">https://example.org/tests/test-data/workflow-test_cd-box_kturns.xml</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">workflow-test_cd-box_kturns.xml</span>
+        <span class="na">info</span><span class="pi">:</span> <span class="s">Downloaded from https://example.org/</span>
+        <span class="na">src</span><span class="pi">:</span> <span class="s">url</span>
+        <span class="na">ext</span><span class="pi">:</span> <span class="s">xml</span>
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<p>A yaml file describing two folders with one file each to upload to galaxy’s shared data.</p>
+
+<p>Contains instructions to download the file contents from public URLs</p>
+
+<hr />
+
+<h2 id="wait-for-galaxy">Wait for Galaxy</h2>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>galaxy-wait <span class="nt">-g</span> http://localhost:8080 <span class="nt">-v</span>
+<span class="go">[00] Galaxy not up yet... HTTPConnectionPool(host='localhost', port=8080):
+	 Max retries exceeded with url: /api/version (Caused
+[01] Galaxy not up yet... HTTPConnectionPool(host='localhost', port=8080):
+	 Max retries exceeded with url: /api/version (Caused
+[02] Galaxy not up yet... HTTPConnectionPool(host='localhost', port=8080):
+	 Max retries exceeded with url: /api/version (Caused
+[03] Galaxy not up yet... HTTPConnectionPool(host='localhost', port=8080):
+	 Max retries exceeded with url: /api/version (Caused
+[04] Galaxy not up yet... HTTPConnectionPool(host='localhost', port=8080):
+	 Max retries exceeded with url: /api/version (Caused
+[05] Galaxy not up yet... HTTPConnectionPool(host='localhost', port=8080):
+	 Max retries exceeded with url: /api/version (Caused
+
+Galaxy Version: 17.05
+</span></code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<p>galaxy-wait sends an API request to a galaxy server to check whether it is running and able to accept the request.</p>
+
+<p>If the server is ready it will return straight away.</p>
+
+<p>If not it will keep sending requests.</p>
+
+<p>This is useful if you want to run any of the other commands such as shed-tools
+install and you don’t know whether Galaxy will be ready.</p>
+
+<hr />
+
+<h1 id="more-on-tool-management">More on Tool Management</h1>
+
+<ul>
+  <li>Repository structure</li>
+  <li>Reference data</li>
+  <li>Dependencies</li>
+</ul>
+
+<hr />
+
+<p>class: normal</p>
+<h3 id="simple-tool-shed-repository-remove_beginning">Simple tool shed repository (<code class="language-plaintext highlighter-rouge">remove_beginning</code>)</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── remove_beginning.pl          # optional accompanying script
+├── remove_beginning.xml         # tool wrapper
+├── .shed.yml                    # metadata file
+└── test-data                    # subdirectory for test data
+    ├── 1.bed                    # test input file
+    └── eq-removebeginning.dat   # test output file
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<p>A tool shed repository containing one tool: remove_beginning.</p>
+
+<p>The repository contains</p>
+<ul>
+  <li>a perl script that is executed from code in the wrapper</li>
+  <li>test input and output for the tool’s tests</li>
+  <li>a metadata file for the toolshed.</li>
+</ul>
+
+<hr />
+<p>class: normal</p>
+<h2 id="shedyml-file"><code class="language-plaintext highlighter-rouge">.shed.yml</code> file</h2>
+
+<p>Contains repository’s metadata.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">categories</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">Text Manipulation</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s">Remove lines from the beginning of a file.</span>
+<span class="na">long_description</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">This tool removes the specified number of lines from the beginning</span>
+  <span class="s">of the input dataset.</span>
+<span class="s">&lt;span id="remove_beginning"&gt;&lt;i class="fas fa-link" aria-hidden="true"&gt;&lt;/i&gt; remove_beginning&lt;/span&gt;</span>
+<span class="na">owner</span><span class="pi">:</span> <span class="s">devteam</span>
+<span class="na">remote_repository_url</span><span class="pi">:</span> <span class="s">https://github.com/galaxyproject/tools-devteam/tree/master/tools/remove_beginning</span>
+<span class="na">type</span><span class="pi">:</span> <span class="s">unrestricted</span>
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The tool name and owner are set in the metadata file.</p>
+
+<p>The file also contains the development url for the tool.</p>
+
+<p>The development URL is displayed in the toolshed as a link to the tool’s files within its development environment.</p>
+
+<p>This is the github repo you would go to raise an issue the the tool or make a pull request to improve the tool.</p>
+
+<hr />
+
+<p>class: normal</p>
+<h2 id="complex-tool-shed-repository-varscan">Complex tool shed repository (<code class="language-plaintext highlighter-rouge">varscan</code>)</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── macros.xml                         # defines tool macros
+├── .shed.yml
+├── test-data
+│   ├── control_chrM.bam
+│   ├── fasta_indexes.loc              # Loc file for tests
+...
+│   └── varscan_mpileup_result1.vcf
+├── tool-data
+│   └── fasta_indexes.loc.sample       # Sample loc file
+├── tool_data_table_conf.xml.sample    # Sample data table
+├── tool_data_table_conf.xml.test      # Data table for tests
+├── varscan_copynumber.xml             # wrapper for tool #1
+├── varscan_mpileup.xml                # wrapper for tool #2
+├── varscan.py
+└── varscan_somatic.xml                # wrapper for tool #3
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<p>This is a more complex toolshed repository containing three tool wrappers related to the same software.</p>
+
+<p>Installing this repository will add three tools to the tool panel.</p>
+
+<hr />
+
+<h2 id="data-tables-and-loc-files">Data tables and loc files</h2>
+
+<ul>
+  <li>Several tools need to access <strong>reference data</strong>, e.g. genome sequences or indexes for aligner</li>
+  <li>A <em>loc file</em> is a tab-separated file containing metadata and paths for a set of reference data</li>
+  <li>A <em>data table</em> describes the columns of a loc file used by a tool</li>
+  <li>Installing CVMFS provides access to a large amount of reference data.  There are also
+data manager tools for installing reference data.</li>
+  <li>You can read more about this in the <a href="../reference-genomes/slides.html">Reference Genomes in Galaxy slides</a>
+    <ul>
+      <li>See also: <a href="../cvmfs/slides.html">Reference Data with CVMFS</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Sometimes tools will need reference data such as genomes.</p>
+
+<p>Loc files and data tables are used to link tools with reference files.</p>
+
+<p>If CVMFS is installed a lot of your reference data needs will be taken care of.</p>
+
+<p>There are data manager tools in the toolshed for installing reference data for tools.</p>
+
+<p>These can be run from the admin panel or using ephemeri</p>
+
+<hr />
+
+<h2 id="suite-repositories">Suite repositories</h2>
+
+<ul>
+  <li>Suites can be used to split up a set of tools into multiple repositories
+    <ul>
+      <li>A suite is a single repository that ‘depends’ on many others</li>
+      <li>When you install the suite, all ‘dependency repositories’ will be installed too</li>
+    </ul>
+  </li>
+  <li>With a tweak to <code class="language-plaintext highlighter-rouge">.shed.yml</code>, <a href="https://planemo.readthedocs.io">Planemo</a> can upload a directory of tools to the TS as a suite of separate tools</li>
+  <li>Examples: suite_samtools, suite_hicexplorer</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>There are also repositories in the Tool Shed that are suite repositories.</p>
+
+<p>Suite repositories can be used to install multiple tool shed repositories at once.</p>
+
+<p>For example: there are many tools associated with samtools owned by the IUC, such as samtools_view or samtools_mpileup.</p>
+
+<p>Installing samtools_suite will result in all of these samtools repositories being installed.</p>
+
+<hr />
+
+<h2 id="tool-dependency-resolution">Tool dependency resolution</h2>
+
+<ul>
+  <li>We aim to make Galaxy resolver-independent, with a preference for <a href="https://conda.io/">conda</a> and containers</li>
+  <li>What resolver is going to be used for the tool dependencies is determined at runtime
+according to the order specified in <code class="language-plaintext highlighter-rouge">dependency_resolvers_conf.xml</code>.</li>
+</ul>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency_resolvers&gt;</span>
+  <span class="nt">&lt;tool_shed_packages</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;galaxy_packages</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;conda</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;galaxy_packages</span> <span class="na">versionless=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;conda</span> <span class="na">versionless=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+<span class="c">&lt;!-- other resolvers
+  &lt;lmod /&gt;
+  &lt;lmod versionless="true" /&gt;
+  &lt;modules modulecmd="/opt/Modules/3.2.9/bin/modulecmd" /&gt;
+  &lt;modules modulecmd="/opt/Modules/3.2.9/bin/modulecmd" versionless="true" default_indicator="default" /&gt;
+  &lt;tool_shed_tap /&gt;
+  &lt;homebrew /&gt;
+--&gt;</span>
+<span class="nt">&lt;/dependency_resolvers&gt;</span>
+</code></pre></div></div>
+
+<p><a href="https://docs.galaxyproject.org/en/master/admin/dependency_resolvers.html">Full documentation</a></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Without going into detail, at run-time Galaxy will look for installed dependencies
+in an order determined by the dependency_resolvers.conf.xml file.</p>
+
+<p>The file shown on this slide is the default configuration.</p>
+
+<p>Given a set of requirements, Galaxy will look first for an installed toolshed package that meets those requirements.</p>
+
+<p>If galaxy finds this it will source the package and look no further.</p>
+
+<p>If galaxy does not find this it will look for</p>
+<ul>
+  <li>a galaxy package with the required version,</li>
+  <li>followed by a conda package with the required version,</li>
+  <li>followed by a galaxy package of any version,</li>
+  <li>followed by a conda package of any version.</li>
+</ul>
+
+<p>Typically the packages to run the tool will be conda packages.</p>
+
+<hr />
+
+<h2 id="using-containers-for-tool-dependencies">Using containers for Tool Dependencies</h2>
+
+<ul>
+  <li>Galaxy can also use <strong>Docker</strong> or <strong>Singularity</strong> containers to resolve dependencies</li>
+  <li>You can read more about this in the <a href="../../../dev/tutorials/containers/slides.html">Tool Dependencies and Containers slides</a></li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>A more recent development in Galaxy is the use of Docker or Singularity containers to resolve dependencies
+and there is some further reading on this.</p>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>The Galaxy Tool Shed contains thousands of tools that can be installed on a Galaxy instance</li>
+
+<li>Galaxy administrators can choose which tools are installed and how they are arranged</li>
+
+<li>Ephemeris can be used to manage tools on a Galaxy instance</li>
+
+<li>Tool installation with ephemeris is best practice and allows for the automation of tool management tasks</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+
+<img src="/training-material/assets/images/gat.png" alt="page logo" style="height: 100px;"/>
+
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

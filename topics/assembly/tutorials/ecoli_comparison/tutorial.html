@@ -29,30 +29,8 @@
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
-        
-
-
-
-
-
-
-
-
-
-
-
-<!-- Gitter -->
-
-
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
             <a class="navbar-brand" href="/training-material/">
                 <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
@@ -65,11 +43,12 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        
                         <a class="nav-link" href="/training-material/topics/assembly" title="Go back to list of tutorials">
-                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Assembly
+                            <i class="far fa-folder" aria-hidden="true"></i> Assembly
                         </a>
+                        
                     </li>
-
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
         <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
@@ -208,15 +187,8 @@
     </div>
 </li>
 
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/assembly/tutorials/ecoli_comparison/tutorial.md">
-                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
-                        </a>
-                    </li>
-                    -->
 
-                     <!-- Search bar-->
+                    <!-- Search bar-->
                     <li class="nav-item">
                       <div id="navbarSupportedContent">
                         <!-- Search form -->
@@ -228,16 +200,37 @@
                         </form>
                       </div>
                     </li>
-
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 
-<div class="container main-content">
-    <script type="application/ld+json">
+        <div class="container main-content" role="main">
         
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
 
 
 {
@@ -359,6 +352,20 @@
     },
     {
       "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
       "url": "https://training.galaxyproject.org//training-material/topics/assembly/tutorials/unicycler-assembly/slides.html",
       "name": "Unicycler Assembly",
       "description": "Slides for 'Unicycler Assembly' tutorial",
@@ -377,6 +384,20 @@
       "name": "Unicycler Assembly",
       "description": "Hands-on for 'Unicycler Assembly' tutorial",
       "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/assembly/tutorials/unicycler-assembly/slides.html",
+      "name": "Unicycler Assembly",
+      "description": "Slides for 'Unicycler Assembly' tutorial",
+      "learningResourceType": "slides",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -426,49 +447,50 @@
     }
   ]
 }
-    </script>
+</script>
 
-    <section class="tutorial topic-assembly">
-        <h1 data-toc-skip>Making sense of a newly assembled genome</h1>
-        
+<section class="tutorial topic-assembly">
+    <h1 data-toc-skip>Making sense of a newly assembled genome</h1>
+    
 
-        <div class="contributors-line">By: 
+    <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nekrut" alt="Anton Nekrutenko">Anton Nekrutenko</a> <a href="/training-material/hall-of-fame/delphine-l/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/delphine-l" alt="Delphine Lariviere">Delphine Lariviere</a> <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Helena Rasche">Helena Rasche</a>
+ <a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nekrut" alt="Avatar">Anton Nekrutenko</a> <a href="/training-material/hall-of-fame/delphine-l/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/delphine-l" alt="Avatar">Delphine Lariviere</a> <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Avatar">Helena Rasche</a>
 
 </div>
 
-        <blockquote class="overview">
-            <h3>Overview</h3>
-            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
-            <ul>
-            
-            <li><p>I just assembled a genome. How does it compare with already sequenced genomes?</p>
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions</strong>
+        <ul>
+        
+        <li><p>I just assembled a genome. How does it compare with already sequenced genomes?</p>
 </li>
-            
-            <li><p>How do I find rearranged, inserted, or deleted regions?</p>
+        
+        <li><p>How do I find rearranged, inserted, or deleted regions?</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
-            <ul>
-            
-            <li><p>Identification of the most closely related genome to my new assembly</p>
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+        <ul>
+        
+        <li><p>Identification of the most closely related genome to my new assembly</p>
 </li>
-            
-            <li><p>Perform sequence comparison to locate rearrangements</p>
+        
+        <li><p>Perform sequence comparison to locate rearrangements</p>
 </li>
-            
-            <li><p>Identify genes located in deletions</p>
+        
+        <li><p>Identify genes located in deletions</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            
-            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
-            <ul>
-            
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+        <ul>
+        
     <li>
     
         
@@ -510,7 +532,7 @@
     
     </li>
 
-            
+        
     <li>
     
         
@@ -557,57 +579,56 @@
     
     </li>
 
-            </ul>
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 4 hours</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+        <ul class="supporting_material">
             
 
             
-            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 4 hours</div>
-            
-
-            
-
-            
-            
-
-            
-            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
-            <ul>
-                <div class="supporting_material">
-                
-
-                
-                    <li class="btn btn-default supporting_material">
+                <li class="btn btn-default supporting_material">
 <a class="topic-icon" href="https://zenodo.org/record/3382053">
-    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
 </a>
 
 </li>
-                
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
     <a class="topic-icon" href="/training-material/topics/assembly/tutorials/ecoli_comparison/workflows/" title="Workflows" alt="Making sense of a newly assembled genome workflows">
-        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
     </a>
 
 </li>
-                
+            
 
-                
-                    <li class="btn btn-default supporting_material">
-<a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/main/topics/assembly/tutorials/ecoli_comparison/tours/">
-    <i class="fas fa-magic" aria-hidden="true"></i><span class="visually-hidden">interactive_tour</span> Tours
+            
+                <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/main/topics/assembly/tutorials/ecoli_comparison/tours/" title="Galaxy interactive tour" >
+    <i class="fas fa-magic" aria-hidden="true"></i> Tours
 </a>
 
 </li>
-                
+            
 
-                
-                
-                
+            
+            
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
@@ -643,8 +664,6 @@
         <a class="dropdown-item" href="https://clipseq.usegalaxy.eu/" title="CLIP-Explorer">
             CLIP-Explorer
         </a>
-        
-    
         
     
         
@@ -760,8 +779,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -825,22 +842,23 @@
 
 
 </li>
-                
-                </div>
-            </ul>
             
+        </ul>
+        
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 23, 2021 </div>
-        </blockquote>
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 23, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
-        <div class="container">
-            <div class="row">
-                <!-- sidebar, which will move to the top on a small screen -->
-                <div class="col-sm-2">
-                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
-                </div>
-                <div class="col-sm-10">
-                    <p>In this tutorial we begin with a new genome assembly just produced in the <a href="/training-material/topics/assembly/tutorials/unicycler-assembly/tutorial.html">Unicycler tutorial</a>. This is an assembly of <em>E. coli</em> C, which we will be comparing to assemblies of all other complete genes of this species.</p>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                <p>In this tutorial we begin with a new genome assembly just produced in the <a href="/training-material/topics/assembly/tutorials/unicycler-assembly/tutorial.html">Unicycler tutorial</a>. This is an assembly of <em>E. coli</em> C, which we will be comparing to assemblies of all other complete genes of this species.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -930,12 +948,12 @@ to be altered (e.g. column numbers) when using data directly from NCBI.</p>
     <li>
       <p>Click on “Filters” at the top right:</p>
 
-      <p><img src="../../images/ecoli-list-filter.png" alt="Filter menu button" /></p>
+      <p><img src="../../images/ecoli-list-filter.png" alt="Filter menu button" loading="lazy" /></p>
     </li>
     <li>
       <p>Select only the “Complete” genomes with the filter at the top</p>
 
-      <p><img src="../../images/ecoli-list.png" alt="Filter settings, only &quot;complete&quot; is checked" /></p>
+      <p>&lt;img src=”../../images/ecoli-list.png” alt=”Filter settings, only “complete” is checked”  loading=”lazy”&gt;</p>
     </li>
     <li>
       <p>At the top right, click “Download”</p>
@@ -1006,7 +1024,7 @@ GCA_003018575.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/018/575/GCA_003
 
 <p>Now that the list is formatted as a table in a sp<span class="notranslate">reads</span>heet, it is time to upload it into <span class="notranslate">Galaxy</span>. There is a problem though: the URLs (web addresses) in the list do not actually point to sequence files that we would need to perform alignments. Instead they point to directories. For example, this URL: <a href="ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/008/865/GCA_000008865.1_ASM886v1">GCA_000008865.1_ASM886v1</a> points to a directory (rather than a file) containing many files, most of which we do not need.</p>
 
-<figure id="figure-1"><img src="../../images/genbank_dir.png" alt="GenBank assembly files for an E. coli strain" /><figcaption><span class="figcaption-prefix">Figure 1:</span> A list of files for an <i>E. coli</i> assembly. For further analyses we only need the dataset ending with <code>_genomic.fna.gz</code>.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/genbank_dir.png" alt="GenBank assembly files for an E. coli strain" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> A list of files for an <i>E. coli</i> assembly. For further analyses we only need the dataset ending with <code>_genomic.fna.gz</code>.</figcaption></figure>
 
 <p>So to download sequence files we need to edit URLs by adding filenames to them. For example, in the case of the URL shown above we need to add <code class="language-plaintext highlighter-rouge">/GCA_000008865.1_ASM886v1</code> and <code class="language-plaintext highlighter-rouge">_genomic.fna.gz</code> to the end to get this:</p>
 
@@ -1108,7 +1126,7 @@ GCA_003018575.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/018/575/GCA_003
 <blockquote class="tip">
   <h3 id="tip-tip-finding-tools-mentioned-in-this-tutorial"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Finding tools mentioned in this tutorial</h3>
   <p><span class="notranslate">Galaxy</span> instances contain hundreds of tools. As a result, it can be hard to find tools mentioned in tutorials such as this one. To help with this challenge, <span class="notranslate">Galaxy</span> has a search box at the top of the left panel. Use this box to find the tools mentioned here.</p>
-  <figure id="figure-2"><img src="../../images/tool_search.png" alt="Tool search" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Use search box to find tools!</figcaption></figure>
+  <figure id="figure-2"><img src="../../images/tool_search.png" alt="Tool search" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Use search box to find tools!</figcaption></figure>
 </blockquote>
 
 <p>The assembly we just uploaded has two issues that need to be addressed before proceeding with our analysis:</p>
@@ -1254,7 +1272,7 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 
 <p>The alignment information produced by LASTZ is a collection. In this collection each element contains alignment data between each of the <em>E. coli</em> genomes and our assembly:</p>
 
-<figure id="figure-3"><img src="../../images/lastz_collection.png" alt="LASTZ collection" /><figcaption><span class="figcaption-prefix">Figure 3:</span> LASTZ produced a collection where each element corresponds to an alignment between an <i>E. coli</i> genome and our assembly. Here one of the elements is expanded (to expand an element simply click on it).</figcaption></figure>
+<figure id="figure-3"><img src="../../images/lastz_collection.png" alt="LASTZ collection" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> LASTZ produced a collection where each element corresponds to an alignment between an <i>E. coli</i> genome and our assembly. Here one of the elements is expanded (to expand an element simply click on it).</figcaption></figure>
 <p>.</p>
 
 <h2 id="collapsing-collection">Collapsing collection</h2>
@@ -1307,7 +1325,7 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 
 <p>The relationship between the alignment identity and alignment length looks like this (remember that this is only a subsample of the data):</p>
 
-<figure id="figure-4"><img src="../../images/id_vs_len.png" alt="Identity versus length" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Alignment identity (%) versus length (bp). This graph is truncated at the top</figcaption></figure>
+<figure id="figure-4"><img src="../../images/id_vs_len.png" alt="Identity versus length" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Alignment identity (%) versus length (bp). This graph is truncated at the top</figcaption></figure>
 
 <p>You can see that most alignments are short and have relatively low identity. Thus we can filter the original dataset by identity and length. Judging from this graph we can select alignment longer than 10,000 bp with identity above 90%.</p>
 
@@ -1395,7 +1413,7 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 
 <p>The relationship between the number of alignment blocks and total alignment length looks like this:</p>
 
-<figure id="figure-5"><img src="../../images/best_genomes_chart.png" alt="Identity versus length" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Number of alignment blocks versus total alignment length (bp).</figcaption></figure>
+<figure id="figure-5"><img src="../../images/best_genomes_chart.png" alt="Identity versus length" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Number of alignment blocks versus total alignment length (bp).</figcaption></figure>
 
 <p>A group of three dots in the upper left corner of this scatter plot represents genomes that are most similar to our assembly: they have a SMALL number of alignment blocks but HIGH total alignment length. Mousing over these three dots (if you set <strong>Data point labels</strong> correctly in the previous step) will reveal their accession numbers: <code class="language-plaintext highlighter-rouge">LT906474.1</code>, <code class="language-plaintext highlighter-rouge">CP024090.1</code>, and <code class="language-plaintext highlighter-rouge">CP020543.1</code>.</p>
 
@@ -1692,7 +1710,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
 
 <p>Because we chose to produce Dot Plots as well, LASTZ will generate two collections: one containing alignment data and the other containing DotPlots in PNG format:</p>
 
-<figure id="figure-6"><img src="../../images/three_dot_plots.png" alt="Dot Plots" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Dot Plot representations of alignments between three <i>E. coli</i> genomes and our assembly. Target (X-axis) is indicated above each dot plot. Query (Y-axis) is our assembly. Red circle indicates a region deleted in our assembly.</figcaption></figure>
+<figure id="figure-6"><img src="../../images/three_dot_plots.png" alt="Dot Plots" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Dot Plot representations of alignments between three <i>E. coli</i> genomes and our assembly. Target (X-axis) is indicated above each dot plot. Query (Y-axis) is our assembly. Red circle indicates a region deleted in our assembly.</figcaption></figure>
 
 <p>A quick conclusion that can be drawn here is that there is a large inversion in CP020543 and deletion in our assembly.</p>
 
@@ -1700,7 +1718,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
   <h3 id="details-interpreting-dot-plots"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Interpreting Dot Plots</h3>
   <p>If you are not sure how to interpret Dot Plots here is a great explanation by <a href="http://schatz-lab.org/">Michael Schatz</a>:</p>
 
-  <figure id="figure-7"><img src="../../images/dotplot.png" alt="Interpreting Dot Plots" /><figcaption><span class="figcaption-prefix">Figure 7:</span> A quick reference to interpreting Dot Plots. Our case is identical to <i>Insertion into Reference</i> shown in the upper left.</figcaption></figure>
+  <figure id="figure-7"><img src="../../images/dotplot.png" alt="Interpreting Dot Plots" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> A quick reference to interpreting Dot Plots. Our case is identical to <i>Insertion into Reference</i> shown in the upper left.</figcaption></figure>
 </blockquote>
 
 <p>For a moment let’s leave LASTZ result and create a browser that would allows us to display our results.</p>
@@ -2438,7 +2456,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 
 <p>It can be useful to have the complement of the aligned regions, to know which regions are unique.</p>
 
-<figure id="figure-8"><img src="../../images/complement.png" alt="Complementing genomic ranges" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Any set of genomic intervals can <i>complemented</i> or converted into a set of intervals that do not overlap the original set (image from <span class="notranslate">BED</span>Tools documentation).</figcaption></figure>
+<figure id="figure-8"><img src="../../images/complement.png" alt="Complementing genomic ranges" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Any set of genomic intervals can <i>complemented</i> or converted into a set of intervals that do not overlap the original set (image from <span class="notranslate">BED</span>Tools documentation).</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-creating-a-genome-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating a genome file</h3>
@@ -2851,13 +2869,13 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 
 <p>This should produce a lovely Circos plot of your data:</p>
 
-<figure id="figure-9"><img src="../../images/ecoli-comparison.png" alt="Circos plot" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Circos plot of the four genomes. The insertion in the related genomes is visible around the 3.2Mb region</figcaption></figure>
+<figure id="figure-9"><img src="../../images/ecoli-comparison.png" alt="Circos plot" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Circos plot of the four genomes. The insertion in the related genomes is visible around the 3.2Mb region</figcaption></figure>
 
 <h2 id="extracting-genes-programmatically">Extracting genes programmatically</h2>
 
 <p>Above we’ve been able to look at genes that appear to be deleted in our assembly. But what we really need is to create a list that can be interrogated further. For example, which of these genes are essential? We can easily create such a list by overlapping coordinates of genes with coordinates of our deletion. But to do this we first need to create a set of coordinates corresponding to the deletion. We could do this by inspecting the genome browser, or we can do it automatically by intersecting the gap regions with the list of genes:</p>
 
-<figure id="figure-10"><img src="../../images/intersect.png" alt="Intersect between two BED datasets" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Computing intersect means finding overlapping regions in two <span class="notranslate">BED</span> datasets (image from <span class="notranslate">BED</span>Tools documentation).</figcaption></figure>
+<figure id="figure-10"><img src="../../images/intersect.png" alt="Intersect between two BED datasets" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Computing intersect means finding overlapping regions in two <span class="notranslate">BED</span> datasets (image from <span class="notranslate">BED</span>Tools documentation).</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-finding-genes-deleted-in-our-assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Finding genes deleted in our assembly</h3>
@@ -3575,37 +3593,37 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 </table>
 
 
-                    
-                    <blockquote class="key_points">
-                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
-                        <ul>
-                            
-                            <li><p>We learned how to download large sets of completed genomes from NCBI</p>
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>We learned how to download large sets of completed genomes from NCBI</p>
 </li>
-                            
-                            <li><p>We learned how to use Galaxy’s rule-based collection builder</p>
+                        
+                        <li><p>We learned how to use Galaxy’s rule-based collection builder</p>
 </li>
-                            
-                            <li><p>We learned how to use a combination of Galaxy tools to create complex views of genome comparisons</p>
+                        
+                        <li><p>We learned how to use a combination of Galaxy tools to create complex views of genome comparisons</p>
 </li>
-                            
-                            <li><p>We learned about idiosyncrasies of data formats and how to deal with them using Galaxy tools</p>
+                        
+                        <li><p>We learned about idiosyncrasies of data formats and how to deal with them using Galaxy tools</p>
 </li>
-                            
-                        </ul>
-                    </blockquote>
-                    
+                        
+                    </ul>
+                </blockquote>
+                
 
-                    <h1>Frequently Asked Questions</h1>
-                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/assembly/faqs/">FAQ page for the Assembly topic</a> to see if your question is listed there.
-                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
-                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/assembly/faqs/">FAQ page for the Assembly topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
-                    
+                
 
-                    
-                    <h1 id="bibliography">References</h1>
-                    <ol class="bibliography"><li><span id="Goodall2018">Goodall, E. C. A., A. Robinson, I. G. Johnston, S. Jabbari, K. A. Turner <i>et al.</i>, 2018 <b>The Essential Genome of Escherichia coli K-12</b> (S. L. Chen &amp; K. A. Kline, Eds.). mBio 9:</span>
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li><span id="Goodall2018">Goodall, E. C. A., A. Robinson, I. G. Johnston, S. Jabbari, K. A. Turner <i>et al.</i>, 2018 <b>The Essential Genome of Escherichia coli K-12</b> (S. L. Chen &amp; K. A. Kline, Eds.). mBio 9:</span>
     
     
     <a href="https://doi.org/10.1128/mbio.02096-17">10.1128/mbio.02096-17</a>
@@ -3616,85 +3634,85 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
     
 
 </li></ol>
-                    
+                
 
-                    
+                
 
-                    <h1>Feedback</h1>
-                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
-                    <div id="feedback-button">
-                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                    </div>
-                    <div id="feedback-form">
-                    </div>
-                    <script type="text/javascript">
-                        (function (window, document) {
-                            function onDocumentReady(fn) {
-                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                    fn();
-                                } else {
-                                    document.addEventListener('DOMContentLoaded', fn);
-                                }
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
                             }
+                        }
 
-                            onDocumentReady(function () {
-                                $("#feedback-button").click(function(evt){
-                                    var e = $(evt.target)
-                                    e.hide();
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
 
-                                    $("#feedback-form").html(`
-                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Making sense of a newly assembled genome (Assembly)">Loading...</iframe>
-                                    `)
-                                })
-                            });
-                        })(window, document);
-                    </script>
-
-
-
-                    <h1>Citing this Tutorial</h1>
-                    <p>
-                        <ol>
-                            <li id="citation-text">Anton Nekrutenko, Delphine Lariviere, Helena Rasche, 2021 <b>Making sense of a newly assembled genome (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html">https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html</a> Online; accessed TODAY
-                            </li>
-                            <li>
-                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
-                            </li>
-                        </ol>
-                    </p>
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Making sense of a newly assembled genome (Assembly)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
 
 
-                    <blockquote class="details">
-                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
-                      <p style="display: none;">
 
-                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Anton Nekrutenko, Delphine Lariviere, Helena Rasche, 2021 <b>Making sense of a newly assembled genome (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html">https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{assembly-ecoli_comparison,
-    author = "Anton Nekrutenko and Delphine Lariviere and Helena Rasche",
-    title = "Making sense of a newly assembled genome (Galaxy Training Materials)",
-    year = "2021",
-    month = "03",
-    day = "23"
-    url = "\url{https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html}",
-    note = "[Online; accessed TODAY]"
+author = "Anton Nekrutenko and Delphine Lariviere and Helena Rasche",
+title = "Making sense of a newly assembled genome (Galaxy Training Materials)",
+year = "2021",
+month = "03",
+day = "23"
+url = "\url{https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html}",
+note = "[Online; accessed TODAY]"
 }
 @article{Batut_2018,
-        doi = {10.1016/j.cels.2018.05.012},
-        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
-        year = 2018,
-        month = {jun},
-        publisher = {Elsevier {BV}},
-        volume = {6},
-        number = {6},
-        pages = {752--758.e1},
-        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
-        title = {Community-Driven Data Analysis Training for Biology},
-        journal = {Cell Systems}
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
 }</code>
-                    </pre></div></div>
-                    </p>
-                    </blockquote>
+                </pre></div></div>
+                </p>
+                </blockquote>
 
 
 <script type="text/javascript">
@@ -3704,36 +3722,22 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
-                    
+                
 
-                    
+                
 
-                </div>
             </div>
         </div>
-    </section>
-</div>
-
-
-<footer>
-    <div class="container">
-        <p>
-            This material is the result of a collaborative work. Thanks to the
-            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Anton Nekrutenko, Delphine Lariviere, Helena Rasche)!
-        </p>
-        <p>
-            Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/assembly/tutorials/ecoli_comparison/tutorial.md">GitHub</a>.
-        </p>
-        <p>
-    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-</p>
     </div>
-</footer>
+</section>
+<br/>
+<br/>
+<br/>
 
+        </div>
+        
     </body>
     <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>

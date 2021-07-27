@@ -29,30 +29,8 @@
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
-        
-
-
-
-
-
-
-
-
-
-
-
-<!-- Gitter -->
-
-
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
             <a class="navbar-brand" href="/training-material/">
                 <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
@@ -65,11 +43,12 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        
                         <a class="nav-link" href="/training-material/topics/transcriptomics" title="Go back to list of tutorials">
-                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Transcriptomics
+                            <i class="far fa-folder" aria-hidden="true"></i> Transcriptomics
                         </a>
+                        
                     </li>
-
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
         <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
@@ -208,15 +187,8 @@
     </div>
 </li>
 
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/clipseq/tutorial.md">
-                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
-                        </a>
-                    </li>
-                    -->
 
-                     <!-- Search bar-->
+                    <!-- Search bar-->
                     <li class="nav-item">
                       <div id="navbarSupportedContent">
                         <!-- Search form -->
@@ -228,16 +200,37 @@
                         </form>
                       </div>
                     </li>
-
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 
-<div class="container main-content">
-    <script type="application/ld+json">
+        <div class="container main-content" role="main">
         
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
 
 
 {
@@ -358,6 +351,20 @@
     },
     {
       "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
       "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
       "name": "Mapping",
       "description": "Slides for 'Mapping' tutorial",
@@ -376,6 +383,20 @@
       "name": "Mapping",
       "description": "Hands-on for 'Mapping' tutorial",
       "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -432,61 +453,62 @@
     }
   ]
 }
-    </script>
+</script>
 
-    <section class="tutorial topic-transcriptomics">
-        <h1 data-toc-skip>CLIP-Seq data analysis from pre-processing to motif detection</h1>
-        
+<section class="tutorial topic-transcriptomics">
+    <h1 data-toc-skip>CLIP-Seq data analysis from pre-processing to motif detection</h1>
+    
 
-        <div class="contributors-line">By: 
+    <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/heylf/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/heylf" alt="Florian Heyl">Florian Heyl</a> <a href="/training-material/hall-of-fame/dmaticzka/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/dmaticzka" alt="Daniel Maticzka">Daniel Maticzka</a> <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Bérénice Batut">Bérénice Batut</a>
+ <a href="/training-material/hall-of-fame/heylf/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/heylf" alt="Avatar">Florian Heyl</a> <a href="/training-material/hall-of-fame/dmaticzka/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/dmaticzka" alt="Avatar">Daniel Maticzka</a> <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Avatar">Bérénice Batut</a>
 
 </div>
 
-        <blockquote class="overview">
-            <h3>Overview</h3>
-            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
-            <ul>
-            
-            <li><p>How is raw CLIP-Seq data processed and analysed?</p>
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions</strong>
+        <ul>
+        
+        <li><p>How is raw CLIP-Seq data processed and analysed?</p>
 </li>
-            
-            <li><p>How do I find binding motifs and targets for a protein (e.g., RBFOX2)?</p>
+        
+        <li><p>How do I find binding motifs and targets for a protein (e.g., RBFOX2)?</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
-            <ul>
-            
-            <li><p>Remove Adapters, Barcodes and Unique Molecular Identifiers (UMIs) from the reads</p>
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+        <ul>
+        
+        <li><p>Remove Adapters, Barcodes and Unique Molecular Identifiers (UMIs) from the reads</p>
 </li>
-            
-            <li><p>Align trimmed reads with STAR</p>
+        
+        <li><p>Align trimmed reads with STAR</p>
 </li>
-            
-            <li><p>De-duplicate the read library</p>
+        
+        <li><p>De-duplicate the read library</p>
 </li>
-            
-            <li><p>Inspect the read mapping and de-duplication quality</p>
+        
+        <li><p>Inspect the read mapping and de-duplication quality</p>
 </li>
-            
-            <li><p>Perform peak calling with PEAKachu</p>
+        
+        <li><p>Perform peak calling with PEAKachu</p>
 </li>
-            
-            <li><p>Analyse the peaks and find potential binding motifs and targets</p>
+        
+        <li><p>Analyse the peaks and find potential binding motifs and targets</p>
 </li>
-            
-            <li><p>Check the quality of the peak calling</p>
+        
+        <li><p>Check the quality of the peak calling</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            
-            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
-            <ul>
-            
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+        <ul>
+        
     <li>
     
         
@@ -547,62 +569,61 @@
     
     </li>
 
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 6 hours</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+        <ul class="supporting_material">
             
-            </ul>
+                <li class="btn btn-default supporting_material"><a href="/training-material/topics/transcriptomics/slides/introduction.html">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Topic Overview slides
+                </a></li>
             
 
             
-            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 6 hours</div>
-            
-
-            
-
-            
-            
-
-            
-            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
-            <ul>
-                <div class="supporting_material">
-                
-                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/transcriptomics/slides/introduction.html" title="Topic Overview slides">
-                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Topic Overview slides
-                    </a></li>
-                
-
-                
-                    <li class="btn btn-default supporting_material">
+                <li class="btn btn-default supporting_material">
 <a class="topic-icon" href="https://zenodo.org/record/1327423">
-    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
 </a>
 
 </li>
-                
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
     <a class="topic-icon" href="/training-material/topics/transcriptomics/tutorials/clipseq/workflows/" title="Workflows" alt="CLIP-Seq data analysis from pre-processing to motif detection workflows">
-        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
     </a>
 
 </li>
-                
+            
 
-                
-                    <li class="btn btn-default supporting_material">
-<a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/main/topics/transcriptomics/tutorials/clipseq/tours/">
-    <i class="fas fa-magic" aria-hidden="true"></i><span class="visually-hidden">interactive_tour</span> Tours
+            
+                <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/main/topics/transcriptomics/tutorials/clipseq/tours/" title="Galaxy interactive tour" >
+    <i class="fas fa-magic" aria-hidden="true"></i> Tours
 </a>
 
 </li>
-                
+            
 
-                
-                
-                
+            
+            
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
@@ -615,8 +636,6 @@
             </a>
         </li>
     
-    
-        
     
         
     
@@ -739,8 +758,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -780,22 +797,23 @@
 
 
 </li>
-                
-                </div>
-            </ul>
             
+        </ul>
+        
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 12, 2021 </div>
-        </blockquote>
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 12, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
-        <div class="container">
-            <div class="row">
-                <!-- sidebar, which will move to the top on a small screen -->
-                <div class="col-sm-2">
-                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
-                </div>
-                <div class="col-sm-10">
-                    <h1 class="no_toc" id="introduction">Introduction</h1>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <p>The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a study published by <em>Nostrand et al.</em> (<a href="https://doi.org/10.1038/nmeth.3810">2016</a>). The dataset contains the first biological replicate of RBFOX2 CLIP-seq and the input control experiment (FASTQ files). The data was changed and downsampled to reduce data processing time, consequently the data does not correspond to the original source pulled from <em>Nostrand et al.</em> (<a href="https://doi.org/10.1038/nmeth.3810">2016</a>). Also included is a text file (.txt) encompassing the chromosome sizes of hg38 and a genome annotation (.gtf) file taken from <a href="http://ftp.ensemblorg.ebi.ac.uk/pub/release-74/gtf/homo_sapiens/">Ensembl</a>.</p>
 
@@ -918,11 +936,11 @@ https://zenodo.org/record/2579279/files/RBFOX2-204-INPUT_S2_R2.fastq
       <!--SNIPPET-->
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li>    <p><strong>Close</strong> the window</p>  </li>  <li>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li></ul></blockquote>
 
-      <figure id="figure-1"><img src="../../images/upload_data_page.png" alt="upload" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Data can be imported directly with links.</figcaption></figure>
+      <figure id="figure-1"><img src="../../images/upload_data_page.png" alt="upload" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Data can be imported directly with links.</figcaption></figure>
     </li>
   </ol>
 
-  <figure id="figure-2"><img src="../../images/clipseq_data_uploaded.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Imported datasets will appear in the history panel.</figcaption></figure>
+  <figure id="figure-2"><img src="../../images/clipseq_data_uploaded.png" alt="data" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Imported datasets will appear in the history panel.</figcaption></figure>
 
 </blockquote>
 
@@ -951,7 +969,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
     </li>
   </ol>
 
-  <figure id="figure-3"><img src="../../images/clipseq_duplication_level_1.png" alt="fastqbefore" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Sequence duplication levels <b>before</b> de-duplication; The y-axis represents the portion of <span class="notranslate">reads</span> with the specific duplication level. An exact sequence match is needed to detect a duplicated read. The blue line shows the duplication level distribution of the full sequence set. The red line depicts an ideal curve after a de-duplication step (duplicates are filtered out).</figcaption></figure>
+  <figure id="figure-3"><img src="../../images/clipseq_duplication_level_1.png" alt="fastqbefore" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Sequence duplication levels <b>before</b> de-duplication; The y-axis represents the portion of <span class="notranslate">reads</span> with the specific duplication level. An exact sequence match is needed to detect a duplicated read. The blue line shows the duplication level distribution of the full sequence set. The red line depicts an ideal curve after a de-duplication step (duplicates are filtered out).</figcaption></figure>
 
   <blockquote class="question">
     <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1328,7 +1346,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
     </li>
     <li>View the <strong>Sequence Duplication Levels</strong> plot.</li>
   </ol>
-  <figure id="figure-4"><img src="../../images/clipseq_duplication_level_2.png" alt="fastqafter" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Sequence duplication levels <b>after</b> de-duplication.</figcaption></figure>
+  <figure id="figure-4"><img src="../../images/clipseq_duplication_level_2.png" alt="fastqafter" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Sequence duplication levels <b>after</b> de-duplication.</figcaption></figure>
 
   <blockquote class="question">
     <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1371,7 +1389,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
     </li>
     <li>View the output image.</li>
   </ol>
-  <figure id="figure-5"><img src="../../images/clipseq_fingerprint.png" alt="fingerprint" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Graph of IP strength from <b>plotFingerprint</b>. The y-axis represents the fraction of the total number of <span class="notranslate">reads</span>. `plotFingerprint` randomly samples genome regions (bins) of a specified length and sums the per-base coverage that overlap with those regions. The x-axis therefore orders the bins from lowest coverage to highest coverage. The plot here is too idealistic which is because of our small data set.</figcaption></figure>
+  <figure id="figure-5"><img src="../../images/clipseq_fingerprint.png" alt="fingerprint" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Graph of IP strength from <b>plotFingerprint</b>. The y-axis represents the fraction of the total number of <span class="notranslate">reads</span>. `plotFingerprint` randomly samples genome regions (bins) of a specified length and sums the per-base coverage that overlap with those regions. The x-axis therefore orders the bins from lowest coverage to highest coverage. The plot here is too idealistic which is because of our small data set.</figcaption></figure>
 
   <blockquote class="comment">
     <h3 id="comment-what-does-this-graph-represent-especially-for-clip-seq-data"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> What does this graph represent, especially for CLIP-Seq data?</h3>
@@ -1430,7 +1448,7 @@ We are therefore going to further check the correlation between our control and 
     </li>
     <li>View the output image.</li>
   </ol>
-  <figure id="figure-6"><img src="../../images/clipseq_correlation.png" alt="correlation" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Heatmap of correlation matrix generated by <b>plotCorrelation</b>. The y-axis shows you on the left site the histogram of the clustering. The colored scale depicts the correlation value. Like  `plotFingerprint`, `multiBamSummary` randomly samples genome regions (bins) of a specified length and sums the per-base coverage that overlap with those regions. The correlation between these bins is then calculated for each pair of samples. An ideal plot would result in two disparate clusters: one for the biological replicates of your CLIP-Seq experiment and one for the replicates of your control. A bad plot would happen if your control and CLIP-Seq experiment end up in one cluster, which means that they are closely related and something went wrong in the laboratory.</figcaption></figure>
+  <figure id="figure-6"><img src="../../images/clipseq_correlation.png" alt="correlation" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Heatmap of correlation matrix generated by <b>plotCorrelation</b>. The y-axis shows you on the left site the histogram of the clustering. The colored scale depicts the correlation value. Like  `plotFingerprint`, `multiBamSummary` randomly samples genome regions (bins) of a specified length and sums the per-base coverage that overlap with those regions. The correlation between these bins is then calculated for each pair of samples. An ideal plot would result in two disparate clusters: one for the biological replicates of your CLIP-Seq experiment and one for the replicates of your control. A bad plot would happen if your control and CLIP-Seq experiment end up in one cluster, which means that they are closely related and something went wrong in the laboratory.</figcaption></figure>
 
   <blockquote class="question">
     <h3 id="question-questions-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1484,7 +1502,7 @@ We are therefore going to further check the correlation between our control and 
     </li>
     <li>Take a look at the MA plot of <strong>PEAKachu</strong>.</li>
   </ol>
-  <figure id="figure-7"><img src="../../images/clipseq_ma_plot.png" alt="ma" /><figcaption><span class="figcaption-prefix">Figure 7:</span> MA plot of <b>PEAKachu</b>.  MA stands for M (log ratio) and A (mean average). It shows you the general trend of the log2 fold-change in dependence of the average mean of the <span class="notranslate">expression</span> rate of the peaks. Points in a straight, diagonal line symbolise the behavior of the logarithm which is often visible for low expressed peaks, because one read can change the fold-change quite drastically. The blue lines depict the normalisation constants. Read dots are significant peaks. It is hard to tell what a good MA plot would look like. Even a small number of significant peaks can be enough, depending on the biological question you ask.</figcaption></figure>
+  <figure id="figure-7"><img src="../../images/clipseq_ma_plot.png" alt="ma" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> MA plot of <b>PEAKachu</b>.  MA stands for M (log ratio) and A (mean average). It shows you the general trend of the log2 fold-change in dependence of the average mean of the <span class="notranslate">expression</span> rate of the peaks. Points in a straight, diagonal line symbolise the behavior of the logarithm which is often visible for low expressed peaks, because one read can change the fold-change quite drastically. The blue lines depict the normalisation constants. Read dots are significant peaks. It is hard to tell what a good MA plot would look like. Even a small number of significant peaks can be enough, depending on the biological question you ask.</figcaption></figure>
 
   <blockquote class="comment">
     <h3 id="comment-adjusted-p-value-threshold"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Adjusted p-value Threshold</h3>
@@ -1591,7 +1609,7 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
     <li>View the <strong>MEME-ChIP</strong> html.</li>
   </ol>
 
-  <figure id="figure-8"><img src="../../images/clipseq_motif.png" alt="motif" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Plot of a sequence motif. The x-axis of the sequence plots represents the nucleotide position of the motif. The y-axis stands for the total information (uncertainty) of each position and thus stands for the probability that the nucleotide at a certain position is the specific letter (for <span class="notranslate">DNA</span>: T,C,G,A). Bigger letters stand for a higher probability. For more information read [here](https://en.wikipedia.org/wiki/Sequence_logo).</figcaption></figure>
+  <figure id="figure-8"><img src="../../images/clipseq_motif.png" alt="motif" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Plot of a sequence motif. The x-axis of the sequence plots represents the nucleotide position of the motif. The y-axis stands for the total information (uncertainty) of each position and thus stands for the probability that the nucleotide at a certain position is the specific letter (for <span class="notranslate">DNA</span>: T,C,G,A). Bigger letters stand for a higher probability. For more information read [here](https://en.wikipedia.org/wiki/Sequence_logo).</figcaption></figure>
 
   <blockquote class="comment">
     <h3 id="comment-meme-and-dreme"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> MEME and DREME</h3>
@@ -1744,7 +1762,7 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
     </li>
     <li>Inspect the peaks (e.g., <b>chr11:peak_2</b> chr11:2152602-2152742)</li>
   </ol>
-  <figure id="figure-9"><img src="../../images/clipseq_peak_igv.png" alt="igv_peak" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Inspection of a peak in IGV.</figcaption></figure>
+  <figure id="figure-9"><img src="../../images/clipseq_peak_igv.png" alt="igv_peak" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Inspection of a peak in IGV.</figcaption></figure>
 
   <blockquote class="question">
     <h3 id="question-questions-10"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1782,132 +1800,132 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
   <ul>
     <li>Click on the check box icon in the history.</li>
   </ul>
-  <figure id="figure-10"><img src="../../images/clipseq_build_list_data_set_pairs_1.png" alt="builddatasetpairs1" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Select data sets for your list of data set pairs.</figcaption></figure>
+  <figure id="figure-10"><img src="../../images/clipseq_build_list_data_set_pairs_1.png" alt="builddatasetpairs1" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Select data sets for your list of data set pairs.</figcaption></figure>
   <ul>
     <li>Select the data files for your experiment (or control).</li>
     <li>Select <strong>For all selected…</strong> below the check box icon.</li>
     <li>Select <strong>Build List of Dataset Paris</strong></li>
     <li>In the new window, if you see no files and a warning, then select <strong>Clear filters</strong>. After that, organise the files into forward-reverse pairs.</li>
   </ul>
-  <figure id="figure-11"><img src="../../images/clipseq_build_list_data_set_pairs_2.png" alt="builddatasetpairs2" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Organise the data sets into pairs.</figcaption></figure>
+  <figure id="figure-11"><img src="../../images/clipseq_build_list_data_set_pairs_2.png" alt="builddatasetpairs2" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Organise the data sets into pairs.</figcaption></figure>
 
-  <figure id="figure-12"><img src="../../images/clipseq_build_list_data_set_pairs_3.png" alt="builddatasetpairs3" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Result after organising the data sets into pairs.</figcaption></figure>
+  <figure id="figure-12"><img src="../../images/clipseq_build_list_data_set_pairs_3.png" alt="builddatasetpairs3" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Result after organising the data sets into pairs.</figcaption></figure>
   <ul>
     <li>Give the list a name and click on the button <strong>Create list</strong>.</li>
   </ul>
 </blockquote>
 
 
-                    
-                    <blockquote class="key_points">
-                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
-                        <ul>
-                            
-                            <li><p>Sophisticated analysis of CLIP-Seq data is possible using tools hosted by Galaxy.</p>
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Sophisticated analysis of CLIP-Seq data is possible using tools hosted by Galaxy.</p>
 </li>
-                            
-                            <li><p>Analysis of the datasets needs multiple methods to assess the quality of the data and to answer the biological question of interest.</p>
+                        
+                        <li><p>Analysis of the datasets needs multiple methods to assess the quality of the data and to answer the biological question of interest.</p>
 </li>
-                            
-                            <li><p>CLIP-Seq data varies from protocol to protocol, thus flexible changes to the data anylsis are required which is supported by Galaxy.</p>
+                        
+                        <li><p>CLIP-Seq data varies from protocol to protocol, thus flexible changes to the data anylsis are required which is supported by Galaxy.</p>
 </li>
-                            
-                            <li><p>By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced.</p>
+                        
+                        <li><p>By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced.</p>
 </li>
-                            
-                        </ul>
-                    </blockquote>
-                    
+                        
+                    </ul>
+                </blockquote>
+                
 
-                    <h1>Frequently Asked Questions</h1>
-                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/transcriptomics/faqs/">FAQ page for the Transcriptomics topic</a> to see if your question is listed there.
-                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
-                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/transcriptomics/faqs/">FAQ page for the Transcriptomics topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
-                    
-                    <h1 data-toc-skip>Useful literature</h1>
-                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
-                    
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
+                
 
-                    
+                
 
-                    
+                
 
-                    <h1>Feedback</h1>
-                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
-                    <div id="feedback-button">
-                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                    </div>
-                    <div id="feedback-form">
-                    </div>
-                    <script type="text/javascript">
-                        (function (window, document) {
-                            function onDocumentReady(fn) {
-                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                    fn();
-                                } else {
-                                    document.addEventListener('DOMContentLoaded', fn);
-                                }
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
                             }
+                        }
 
-                            onDocumentReady(function () {
-                                $("#feedback-button").click(function(evt){
-                                    var e = $(evt.target)
-                                    e.hide();
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
 
-                                    $("#feedback-form").html(`
-                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=CLIP-Seq data analysis from pre-processing to motif detection (Transcriptomics)">Loading...</iframe>
-                                    `)
-                                })
-                            });
-                        })(window, document);
-                    </script>
-
-
-
-                    <h1>Citing this Tutorial</h1>
-                    <p>
-                        <ol>
-                            <li id="citation-text">Florian Heyl, Daniel Maticzka, Bérénice Batut, 2021 <b>CLIP-Seq data analysis from pre-processing to motif detection (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/clipseq/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/clipseq/tutorial.html</a> Online; accessed TODAY
-                            </li>
-                            <li>
-                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
-                            </li>
-                        </ol>
-                    </p>
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=CLIP-Seq data analysis from pre-processing to motif detection (Transcriptomics)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
 
 
-                    <blockquote class="details">
-                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
-                      <p style="display: none;">
 
-                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Florian Heyl, Daniel Maticzka, Bérénice Batut, 2021 <b>CLIP-Seq data analysis from pre-processing to motif detection (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/clipseq/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/clipseq/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{transcriptomics-clipseq,
-    author = "Florian Heyl and Daniel Maticzka and Bérénice Batut",
-    title = "CLIP-Seq data analysis from pre-processing to motif detection (Galaxy Training Materials)",
-    year = "2021",
-    month = "03",
-    day = "12"
-    url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/clipseq/tutorial.html}",
-    note = "[Online; accessed TODAY]"
+author = "Florian Heyl and Daniel Maticzka and Bérénice Batut",
+title = "CLIP-Seq data analysis from pre-processing to motif detection (Galaxy Training Materials)",
+year = "2021",
+month = "03",
+day = "12"
+url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/clipseq/tutorial.html}",
+note = "[Online; accessed TODAY]"
 }
 @article{Batut_2018,
-        doi = {10.1016/j.cels.2018.05.012},
-        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
-        year = 2018,
-        month = {jun},
-        publisher = {Elsevier {BV}},
-        volume = {6},
-        number = {6},
-        pages = {752--758.e1},
-        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
-        title = {Community-Driven Data Analysis Training for Biology},
-        journal = {Cell Systems}
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
 }</code>
-                    </pre></div></div>
-                    </p>
-                    </blockquote>
+                </pre></div></div>
+                </p>
+                </blockquote>
 
 
 <script type="text/javascript">
@@ -1917,36 +1935,22 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
-                    
+                
 
-                    
+                
 
-                </div>
             </div>
         </div>
-    </section>
-</div>
-
-
-<footer>
-    <div class="container">
-        <p>
-            This material is the result of a collaborative work. Thanks to the
-            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Florian Heyl, Daniel Maticzka, Bérénice Batut)!
-        </p>
-        <p>
-            Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/transcriptomics/tutorials/clipseq/tutorial.md">GitHub</a>.
-        </p>
-        <p>
-    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-</p>
     </div>
-</footer>
+</section>
+<br/>
+<br/>
+<br/>
 
+        </div>
+        
     </body>
     <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>

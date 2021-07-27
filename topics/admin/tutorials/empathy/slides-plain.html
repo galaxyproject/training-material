@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Empathy</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Empathy" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/empathy/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/empathy/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/empathy/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/empathy/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/empathy/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/empathy/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/empathy/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fempathy%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/admin/tutorials/empathy/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/admin/tutorials/empathy/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/admin/tutorials/empathy/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/admin/tutorials/empathy/slides.html">View markdown source on GitHub</a>
+	<h1>Empathy</h1>
+		<h2>Contributors</h2>
+		Helena Rasche, Saskia Hiltemann
+
+		
+
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 6, 2021 </div>
+
+	<hr />
+
+
+	<h2 id="part-of-the-job">Part of the Job</h2>
+
+<p>We are not just janitors / code monkeys</p>
+<ul>
+  <li>We’re humans with feelings</li>
+  <li>Our users are humans with feelings as well</li>
+  <li>Both groups need to be understanding of each other</li>
+</ul>
+
+<p>We’re (often) the point of contact for any problems</p>
+<ul>
+  <li>It’s our responsibility to fix Galaxy problems</li>
+  <li>Or any server problems for our users</li>
+  <li>Or sometimes anything that is electrical is our problem</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>We need to talk and not just talk but communicate with each other, listen to each other’s complaints and problems. You can only control 1/2 of the equation, but you can have a positive impact on the balance.</p>
+
+<p>You’re also often the Tier 1 response to issues, so even when you’re stressed, users often just want to feel heard, like they’ve told someone and their complaint has been heard. Doing this can help defuse bad situations where people are upset and feelings are hurt.</p>
+
+<hr />
+
+<h2 id="slas-vs-slos">SLAs vs SLOs</h2>
+
+<ul>
+  <li>Academic services rarely have SLAs</li>
+  <li>But defining your own SLO can be good! Freedom to say “it’s ok, it will be down for some time”</li>
+</ul>
+
+<p>EU SLOs (<strong>not</strong> SLAs)*</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Service</th>
+      <th>SLO</th>
+      <th>Permitted Outage (30d)</th>
+      <th>Critical</th>
+      <th>User-Facing?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Haproxy</td>
+      <td>99.9%</td>
+      <td>43 minutes</td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Cluster</td>
+      <td>95.0%</td>
+      <td>36 hours</td>
+      <td>Yes</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Sentry</td>
+      <td>50.0%</td>
+      <td>15 day</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Jenkins</td>
+      <td>50.0%</td>
+      <td>15 day</td>
+      <td>No</td>
+      <td>Yes-ish</td>
+    </tr>
+    <tr>
+      <td>Grafana</td>
+      <td>50.0%</td>
+      <td>15 day</td>
+      <td>No</td>
+      <td>Yes-ish</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>.footnote[</p>
+
+<p>* SLA = Service Level Agreement, SLO = Service Level Objective</p>
+
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>SLA = Service Level Agreement, Legal agreement with your users, usually with financial penalties for failing to reach the level.</li>
+  <li>SLO = Service Level Objective, your goal for your service, showing your users you’re committed to trying to reach that number.</li>
+</ul>
+
+<p>Service Level Objectives are just your goals, not a legal agreement with your users. It’s just a number that you plan to hit, that you can share with your users to give them an idea of your goals.</p>
+
+<hr />
+
+<h2 id="bad-things-happen">Bad things happen</h2>
+
+<ul>
+  <li>It’s unavoidable with so many interconnected devices:
+    <ul>
+      <li>Network</li>
+      <li>DC</li>
+      <li>Server</li>
+      <li>Service</li>
+    </ul>
+  </li>
+  <li>Be kind to your fellow admins/network engineers/support people, maybe it’s their turn to have a bad day</li>
+  <li>Spend time engineering to avoid problems
+    <ul>
+      <li>But consider the system’s SLA/SLO</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Reliability engineering is difficult</p>
+
+<hr />
+
+<h2 id="communication">Communication</h2>
+
+<p>Communication <em>Communication</em> <strong>Communication</strong></p>
+
+<ul>
+  <li>Users often just want to know when the service will be back, or that their jobs are still running
+    <ul>
+      <li>So write helpful notifications before, during, after planned outages</li>
+      <li><a href="https://galaxyproject.eu/posts/2018/09/21/downtime/">Write posts after unplanned outages</a></li>
+      <li><a href="https://galaxyproject.eu/posts/2018/07/12/workflow-outage/">Add graphics</a></li>
+    </ul>
+  </li>
+  <li>Try and be empathetic in your communications
+    <ul>
+      <li>Give users the benefit of the doubt</li>
+      <li>Acknowledge their feelings but try not to take it as a personal attack (even when it is.)</li>
+    </ul>
+  </li>
+  <li>Emails:
+    <ul>
+      <li>When receiving (uncharacteristically) unpleasant ones, imagine a loved one wrote it? Wouldn’t you give them a break?</li>
+      <li>When writing, imagine your loved one is receiving it. How would they feel?</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Common advice: respond calmly, do <em>not</em> send emails immediately, come back to it in a few hours</p>
+
+<hr />
+
+<h2 id="shared-responsibility">Shared Responsibility</h2>
+
+<p>Documentation <em>Documentation</em> <strong>Documentation</strong></p>
+
+<ul>
+  <li>Document your code/infrastructure/everything
+    <ul>
+      <li><a href="https://en.wikipedia.org/wiki/Software_documentation">Various types of documentation</a></li>
+    </ul>
+  </li>
+  <li>You will probably change jobs, and someone else will have to maintain your code</li>
+  <li>Someone else will debug your code at 3 AM and hate you
+    <ul>
+      <li>You’ve probably had to do the same with someone else’s code</li>
+      <li>Write code to be read by humans first, and machines second</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Have you ever had to debug something that was broken, late at night? And it was broken and someone else’s fault and it didn’t behave how it was documented? And you were up late swearing up and down at this other person for their bad code that’s causing you to lose sleep?</p>
+
+<p>We all do it to each other, we just have to try to be better. It’s an uphill battle, and it’s difficult every day to write that documentation and force yourself into these good habits.</p>
+
+<hr />
+
+<h2 id="small-changes-big-impacts">Small Changes, Big Impacts</h2>
+
+<p><img src="../../images/eu_users.png" alt="EU User Registrations / Week" loading="lazy" />
+<img src="../../images/eu_jobs.png" alt="EU Jobs / Week" loading="lazy" /></p>
+
+<p>Be careful with what changes you make in production; all of your users are depending on you to do their work</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Any change you make to a production system is multiplied by the number of active users. As of this writing EU has ~800 monthly active users. Even small changes affect everyone so be careful and have a dev environment to deploy to first.</p>
+
+<p>As an example, we had a partially working system, it was working for 95% of our users on friday night. One of our admins made a change in production to try and fix the 5%, but instead it took the system down for everyone. This is the sort of example of “be really careful” that is illuminating, not only was the service now offline for everyone (unlike the 95% functional case where we could have left it until monday morning), but the admin had to spend another hour reverting the changes.</p>
+
+<hr />
+
+<h2 id="self-care">Self Care</h2>
+
+<p>Take care of yourself! Being a sysadmin is a difficult and thankless job, do not do it at the expense of your mental or physical health:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Area</th>
+      <th>Suggestions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Mental Health</td>
+      <td>Take breaks, walk around, clear your head. Do not skip lunch with coworkers, join them.</td>
+    </tr>
+    <tr>
+      <td>External Environment</td>
+      <td>See sunlight regularly, living in caves is bad for you</td>
+    </tr>
+    <tr>
+      <td>Office Environment</td>
+      <td>Request a standing desk, or using an exercise ball in lieu of a seat</td>
+    </tr>
+    <tr>
+      <td>Stress</td>
+      <td>You (probably) work in an academic environment, if the service is down, it’s down. You have SLOs and not SLAs, and if you miss them one month it is <strong>ok</strong>. Respect your work-life balance.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Your health is more important than the health of the servers.</p>
+
+<hr />
+
+<h2 id="take-home">Take Home</h2>
+
+<p>Explicit Goals:</p>
+
+<p>–</p>
+
+<ol>
+  <li>You’re happy</li>
+  <li>Your users are happy</li>
+</ol>
+
+<p>–</p>
+
+<p>It is not a zero-sum game, both of these can be true (or true <em>enough</em>), and both of these are worth working towards.</p>
+
+<hr />
+
+<h2 id="recommendations">Recommendations</h2>
+
+<ul>
+  <li>Communicate clearly and empathetically</li>
+  <li>You’re the single point of failure, engineer away from this</li>
+  <li>Document what you do for yourself and the next person</li>
+</ul>
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+
+<img src="/training-material/assets/images/gat.png" alt="page logo" style="height: 100px;"/>
+
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

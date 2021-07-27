@@ -150,6 +150,20 @@
     },
     {
       "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
       "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
       "name": "Mapping",
       "description": "Slides for 'Mapping' tutorial",
@@ -168,6 +182,20 @@
       "name": "Mapping",
       "description": "Hands-on for 'Mapping' tutorial",
       "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -250,11 +278,25 @@ class: center, middle, inverse
 <div class="contributors-line">
 
 
- <a href="/training-material/hall-of-fame/joachimwolff/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/joachimwolff" alt="Joachim Wolff">Joachim Wolff</a> <a href="/training-material/hall-of-fame/yvanlebras/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/yvanlebras" alt="Yvan Le Bras">Yvan Le Bras</a>
+ <a href="/training-material/hall-of-fame/joachimwolff/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/joachimwolff" alt="Avatar">Joachim Wolff</a> <a href="/training-material/hall-of-fame/yvanlebras/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/yvanlebras" alt="Avatar">Yvan Le Bras</a>
 
 
 </div>
 
+
+<div class="footnote" style="bottom: 3em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: Jul 26, 2021</div>
+<div class="footnote" style="bottom: 2em;">Or view the <a href="slides-plain.html">plain-text slides without JS</a></div>
+<div class="footnote" style="bottom: 1em;">Tip: press <kbd>P</kbd> to view the presenter notes</div>
+
+???
+Presenter notes contain extra information which might be useful if you
+intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other. Useful when presenting.
 
 
 
@@ -289,18 +331,6 @@ Before diving into this slide deck, we recommend you to have a look at:
 
 
 
-.footnote[Tip: press `P` to view the presenter notes]
-
-???
-Presenter notes contain extra information which might be useful if you
-intend to use these slides for teaching.
-
-Press `P` again to switch presenter notes off
-
-Press `C` to create a new window where the same presentation will be displayed.
-This window is linked to the main window. Changing slides on one will cause the
-slide to change on the other. Useful when presenting.
-
 ---
 
 ## DNA Methylation data analysis
@@ -314,12 +344,12 @@ slide to change on the other. Useful when presenting.
 
 ---
 
-![](../images/genome_organization.jpeg)
+![Cartoon of a mitotic chromosome zoomed in to show dna and histones and nucleosomes, further zoomed in to show individual DNA strands with methylated dna.](../images/genome_organization.jpeg)
 
 
 ---
 
-.image-75[![](../images/modification_methylation.jpeg)]
+.image-75[![A picture from a paper with at top a cartoon of a chromosome and the chromatin, pointing to a single nucleosome, and the histone and dna methylation modifications possible. Below is a comparison of a switched on gene with active or open chromatin and unmethylated cytosines, and acetylated histones. Below is a switched off gene with condensed chromatin, methylated cytosines, and deacetylated histones.](../images/modification_methylation.jpeg)]
 
 ---
 
@@ -337,15 +367,15 @@ slide to change on the other. Useful when presenting.
 
 #Heritable methylation
 
-.image-50[![](../images/heritable_methylation.png)]
-.image-25[![](../images/mouse.jpg)]
+.image-50[![Another paper chart, here a number of graphs are shown, but their interpretation is unclear.](../images/heritable_methylation.png)]
+.image-25[![Another set of graphs from the same paper and a picture of a mouse and its baby suggesting heritability.](../images/mouse.jpg)]
 
 &lt;small&gt;Weaver et al. Nature Neurosci 2004; 7: 847-854&lt;/small&gt;
 
 ---
 
 #More than 5-mC
-.image-75[![](../images/more_than_5-mC.png)]
+.image-75[![A schematic of a chemical pathway affecting cytosine and various transformation that can occur. Some have arrows indicating gene silencing or activation.](../images/more_than_5-mC.png)]
 
 &lt;small&gt;Mariani et al. (2013) Cancers&lt;/small&gt;
 
@@ -357,12 +387,12 @@ slide to change on the other. Useful when presenting.
 ---
 
 # Bisulfite sequencing
-.image-75[![](../images/bisulfite_sequencing.png)]
+.image-75[![Cartoon of a methlated gene sequence and bisulfite conversion  replacing a C with a U. Below that is sequenced and the resut is reconstructed to figure out which Cs were methylated (because they weren't replaced with Us.)](../images/bisulfite_sequencing.png)]
 
 ---
 
 # Mapping a bisulfite sequence read
-.image-75[![](../images/Mapping_a_bisulfite_seq_read.jpeg)]
+.image-75[![Illegible graphic from a paper showing reconstruction of methylated sequences.](../images/Mapping_a_bisulfite_seq_read.jpeg)]
 
 &lt;small&gt;Krueger et al.&lt;/small&gt;
 
@@ -383,14 +413,20 @@ slide to change on the other. Useful when presenting.
 ---
 
 #Methylation bias
-.image-75[![](../images/methylation_bias.png)]
+.image-75[![line chart showing position along mapped read and CpG methylation percent. It is a wavy overlapping set of lines.](../images/methylation_bias.png)]
 
 ---
 
 #Methylation extraction
-![](../images/methylation_extraction_0.png)
 
-![](../images/methylation_extraction_1.png)
+```txt
+track type=&quot;bedGraph&quot; description=&quot;SRR1182519.sorted CpG Methylation levels&quot;
+1	25114	25115	100	2	1
+1	25115	25116	100	3	1
+
+track type=&quot;bedGraph&quot; description=&quot;SRR1182519.sorted merged CpG Methylation levels&quot;
+1	25114	25116	100	5	1
+```
 
 ---
 
@@ -444,13 +480,13 @@ slide to change on the other. Useful when presenting.
 
 ## Thank you!
 
-This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors!
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
 
 
 <div class="contributors-line">
 
 
- <a href="/training-material/hall-of-fame/joachimwolff/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/joachimwolff" alt="Joachim Wolff">Joachim Wolff</a> <a href="/training-material/hall-of-fame/yvanlebras/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/yvanlebras" alt="Yvan Le Bras">Yvan Le Bras</a>
+ <a href="/training-material/hall-of-fame/joachimwolff/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/joachimwolff" alt="Avatar">Joachim Wolff</a> <a href="/training-material/hall-of-fame/yvanlebras/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/yvanlebras" alt="Avatar">Yvan Le Bras</a>
 
 
 </div>

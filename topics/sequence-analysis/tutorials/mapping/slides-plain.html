@@ -1,0 +1,1497 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Mapping</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Analyses of sequences" />
+        <meta property="og:title" content="Galaxy Training: Mapping" />
+        <meta property="og:description" content="Analyses of sequences" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/sequence-analysis/faqs/" title="Check our FAQs for the Sequence analysis topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/sequence-analysis/tutorials/mapping/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/sequence-analysis/tutorials/mapping/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/sequence-analysis/tutorials/mapping/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/sequence-analysis/tutorials/mapping/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/sequence-analysis/tutorials/mapping/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/sequence-analysis/tutorials/mapping/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/sequence-analysis/tutorials/mapping/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fsequence-analysis%2Ftutorials%2Fmapping%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/sequence-analysis/tutorials/mapping/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/sequence-analysis/tutorials/mapping/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/sequence-analysis/tutorials/mapping/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/sequence-analysis/tutorials/mapping/slides.html">View markdown source on GitHub</a>
+	<h1>Mapping</h1>
+		<h2>Contributors</h2>
+		Joachim Wolff, Saskia Hiltemann
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What is mapping (alignment)?</p>
+</li>
+		
+		<li><p>What is the BAM format?</p>
+</li>
+		
+		<li><p>How can we view aligned sequences?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Understand the basic concept of mapping</p>
+</li>
+		
+		<li><p>Learn about factors influencing alignment</p>
+</li>
+		
+		<li><p>See a genome browser used to better understand your aligned data</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 9, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="example-ngs-pipeline">Example NGS pipeline</h1>
+
+<p><img src="../../images/mapping/variant_calling_workflow.png" alt="High level view of a typical NGS workflow" loading="lazy" /></p>
+
+<p>A high level view of a typical NGS bioinformatics workflow</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Mapping step occurs if a reference genome is available for the organism of interest
+    <ul>
+      <li>else: de-novo assembly</li>
+    </ul>
+  </li>
+  <li>Variant calling step is just an example, after mapping can do many steps
+    <ul>
+      <li>Structural Variants / Fusion genes</li>
+      <li>Differential Gene expression</li>
+      <li>Alternative Splicing</li>
+      <li>..</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="what-is-mapping">What is mapping?</h1>
+
+<p>.pull-left[
+<img src="../../images/mapping/mapping_assembly.png" alt="Mapping vs assembly" loading="lazy" />
+]</p>
+
+<p>.pull-right[</p>
+<ul>
+  <li>
+    <p>Short reads must be combined into longer fragments</p>
+  </li>
+  <li>
+    <p><strong>Mapping:</strong> use a reference genome as a guide</p>
+  </li>
+  <li>
+    <p><strong>De-novo assembly:</strong> without reference genome
+]</p>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Mapping is also referred to as <em>alignment</em></li>
+  <li>Short reads produced by sequencer must be combined into larger contigs
+    <ul>
+      <li>e.g. reconstruct the chromosomes</li>
+      <li>mapping uses a reference genome as a guide</li>
+      <li>can subsequently find where our sample differs from reference (variants)</li>
+    </ul>
+  </li>
+  <li>This tutorial only deals with mapping/alignment</li>
+  <li>There are other tutorials available for de-novo assembly</li>
+</ul>
+
+<hr />
+<p>class: top</p>
+
+<h1 id="sequence-alignment">Sequence alignment</h1>
+
+<ul>
+  <li>Determine position of short read on the reference genome
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Reference: . . . A A C G C C T T . . .
+
+Read:            A G G G G C C T T
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Consider situation where we must map this (short) read to this (long) reference
+    <ul>
+      <li>e.g. human genome ~ 3.2 billion base pairs</li>
+    </ul>
+  </li>
+  <li>We scan the reference genome until we find an area that’s similar to our read</li>
+  <li>This area looks pretty similar, but not quite identical..</li>
+</ul>
+
+<hr />
+<p>class: top</p>
+
+<h1 id="sequence-alignment-1">Sequence alignment</h1>
+
+<ul>
+  <li>Determine position of short read on the reference genome
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Reference: . . . A A - C G C C T T . . .              | = match
+.                | : - : | | | | |                    : = mismatch
+Read:            A G G G G C C T T                    - = gap
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span>
+But if we introduce gaps and allow for some mismatches in bases, this matches
+up pretty well..</p>
+
+<p>–</p>
+
+<ul>
+  <li>
+    <p>Read could align to multiple places
+.center[.image-50[<img src="../../images/mapping/multimap.png" alt="Illustration of multi-mapped read" loading="lazy" />]]</p>
+  </li>
+  <li>How to handle multi-mapped reads? Depends on tool:
+    <ul>
+      <li>Map to best region (but what is “best”? And what about ties?)</li>
+      <li>Map to all regions</li>
+      <li>Map to one region randomly</li>
+      <li>Discard read</li>
+    </ul>
+  </li>
+  <li>How do we determine <em>best</em> region?
+    <ul>
+      <li>Assign <strong><em>alignment score</em></strong> to every mapping</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Some reads may map to multiple locations</p>
+<ul>
+  <li>repeat regions, short reads, highly variable regions, sequencing errors, ..</li>
+</ul>
+
+<p>We want a way to determine <em>best</em> alignment if none are perfect matches..</p>
+
+<hr />
+<p>class: top</p>
+
+<h1 id="alignment-scoring-basics">Alignment Scoring (basics)</h1>
+
+<ul>
+  <li><strong>Reward</strong> for a match (e.g. +10), <strong>penalty</strong> for a mismatch (e.g. -5)</li>
+  <li><strong>Penalty</strong> for gaps
+    <ul>
+      <li><em>Linear:</em> every gap same penalty (e.g. -5)</li>
+      <li><em>Affine:</em> gap open vs gap extend (e.g. -5 and -1)</li>
+    </ul>
+  </li>
+  <li>Different tools use different scoring values (and give different results)</li>
+</ul>
+
+<p>.center[
+.image-25[<img src="../../images/mapping/scoring_example.png" alt="Screenshot of a sequence scoring game where two sequences are being aligned across the top (GGCTGG and GAGG) and the per-base and cumulative scores from left to right." loading="lazy" />]</p>
+
+<p><strong>Example</strong> (with affine gap penalty)
+]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Each locus get scored independently (first row of scores in example)</li>
+  <li>Scores from all loci are added up (cumulative score row)</li>
+  <li>
+    <p>Final score for entire alignment in this example is 19</p>
+  </li>
+  <li>These reward and penalty values are just examples and will vary</li>
+</ul>
+
+<hr />
+<p>class: top</p>
+
+<h1 id="alignment-scoring-advanced">Alignment Scoring (advanced)</h1>
+
+<ul>
+  <li><strong>Base quality</strong>
+    <ul>
+      <li>Mismatch of low-confidence base: lower penalty</li>
+      <li>Mismatch of high-confidence base: higher penalty</li>
+    </ul>
+  </li>
+  <li><strong>Transitions vs transversions</strong>
+    <ul>
+      <li>Transitions about 2x as frequent as transversions</li>
+    </ul>
+  </li>
+</ul>
+
+<p>.center[
+.image-50[ <img src="../../images/mapping/ti_tv.png" alt="Transitions vs transversions" loading="lazy" /> ]
+.image-25[ <img src="../../images/mapping/ti_tv_scoring.png" alt="Example scoring matrix" loading="lazy" /> ]
+]</p>
+
+<ul>
+  <li>Knowledge about sequencing platform and biases
+    <ul>
+      <li>Optimize for read length, error rate, homopolymer accuracy, etc..</li>
+    </ul>
+  </li>
+</ul>
+
+<p>.footnote[More information about mapping algorithms: <a href="https://doi.org/10.1089/cmb.2012.0022">10.1089/cmb.2012.0022</a>]</p>
+
+<p><span>Speaker Notes</span>
+Many more complexities may be considered, different tools make different choices</p>
+
+<p>Transitions are more likely to occur in real sequences, so may give lower penalty than transversions</p>
+
+<p><strong>Transitions</strong> are interchanges of two-ring purines (A G) or of one-ring pyrimidines (C T): they therefore involve bases of similar shape.</p>
+
+<p><strong>Transversions</strong> are interchanges of purine for pyrimidine bases, which therefore involve exchange of one-ring and two-ring structures.</p>
+
+<p><img src="../../images/mapping/transition_transversion.gif" alt="Transitions and transversions" loading="lazy" /></p>
+
+<hr />
+
+<h1 id="looks-easy-but">Looks easy but..</h1>
+
+<hr />
+<p>class: top</p>
+
+<h1 id="sequence-alignment-2">Sequence Alignment</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Reference: AAA CAGTGA GAA
+Observed:  AAA TCTCT  GAA
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span>
+Suppose we want to map this read (bottom) to this reference sequence (top)</p>
+
+<hr />
+<p>class: top</p>
+
+<h1 id="sequence-alignment-3">Sequence Alignment</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Reference: AAA CAGTGA GAA
+Observed:  AAA TCTCT  GAA
+</code></pre></div></div>
+
+<table style="width:100%; table-layout: fixed; font-size:0.8em">
+<th>Alignment</th><th></th>
+
+<tr><td><pre>
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+</pre></td>
+<td>Maybe like this?</td>
+</tr>
+</table>
+
+<p><span>Speaker Notes</span>
+This is one possibility, is it the only one?</p>
+
+<hr />
+<p>class: top</p>
+
+<h1 id="sequence-alignment-4">Sequence Alignment</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Reference: AAA CAGTGA GAA
+Observed:  AAA TCTCT  GAA
+</code></pre></div></div>
+
+<table style="width:100%; table-layout:fixed; font-size:0.8em;">
+<th>Alignment</th><th></th>
+
+<tr><td><pre>
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+</pre></td>
+<td>Maybe like this?</td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||-::|::|||
+AAA-TCTCTGAA
+</pre></td>
+<td> Or this? </td>
+</tr>
+
+</table>
+
+<p><span>Speaker Notes</span>
+This is also a possible alignment. Not easy to say which is better.</p>
+
+<hr />
+<p>class: top</p>
+
+<h1 id="sequence-alignment-5">Sequence Alignment</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Reference: AAA CAGTGA GAA
+Observed:  AAA TCTCT  GAA
+</code></pre></div></div>
+
+<table style="width:100%; table-layout:fixed; font-size:0.8em">
+<th>Alignment</th><th></th>
+
+<tr><td><pre>
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+</pre></td>
+<td>Maybe like this?</td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||-::|::|||
+AAA-TCTCTGAA
+</pre></td>
+<td> Or this? </td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||:-:|::|||
+AAAT-CTCTGAA
+
+</pre></td>
+<td>Or..? </td>
+</tr>
+
+</table>
+
+<p><span>Speaker Notes</span>
+And a third option</p>
+
+<hr />
+<p>class: top</p>
+
+<h1 id="sequence-alignment-6">Sequence Alignment</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Reference: AAA CAGTGA GAA
+Observed:  AAA TCTCT  GAA
+</code></pre></div></div>
+
+<table style="width:100%; table-layout:fixed; font-size:0.8em">
+<th>Alignment</th><th></th>
+
+<tr><td><pre>
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+</pre></td>
+<td>Maybe like this?</td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||-::|::|||
+AAA-TCTCTGAA
+</pre></td>
+<td> Or this? </td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||:-:|::|||
+AAAT-CTCTGAA
+
+</pre></td>
+<td>Or..? </td>
+</tr>
+
+<tr><td><pre>
+AAACAGTCA-----GAA
+|||-----------|||
+AAA------TCTCTGAA
+</pre></td>
+<td> What about this? </td>
+</tr>
+</table>
+
+<p><span>Speaker Notes</span>
+There is no one right way to do alignment</p>
+<ul>
+  <li>Hard to say which of these is “better” or “worse”</li>
+  <li>Just different choices, but all valid</li>
+</ul>
+
+<p>Mapping is a non-trivial problem!</p>
+
+<hr />
+<p>class: top</p>
+
+<h1 id="sequence-alignment-7">Sequence Alignment</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Reference: AAA CAGTGA GAA
+Observed:  AAA TCTCT  GAA
+</code></pre></div></div>
+
+<table style="width:100%; table-layout:fixed; font-size:0.8em">
+<th>Alignment</th><th>Tool</th>
+
+<tr><td><pre>
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+</pre></td>
+<td>Novoalign</td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||-::|::|||
+AAA-TCTCTGAA
+</pre></td>
+<td> Ssaha2 </td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||:-:|::|||
+AAAT-CTCTGAA
+
+</pre></td>
+<td> BWA </td>
+</tr>
+
+<tr><td><pre>
+AAACAGTCA-----GAA
+|||-----------|||
+AAA------TCTCTGAA
+</pre></td>
+<td> Complete Genomics </td>
+</tr>
+</table>
+
+<p><span>Speaker Notes</span>
+We didn’t just make these up, these real aligners gave these different results</p>
+
+<hr />
+<p>class: top</p>
+
+<h1 id="sequence-alignment-8">Sequence Alignment</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Reference: AAA CAGTGA GAA
+Observed:  AAA TCTCT  GAA
+</code></pre></div></div>
+
+<table style="width:100%; table-layout:fixed; font-size:0.8em">
+<th>Alignment</th><th>Variant calls</th>
+
+<tr><td><pre>
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+</pre></td>
+<td><pre>
+ins T
+del AG
+sub GA -&gt; CT
+</pre></td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||-::|::|||
+AAA-TCTCTGAA
+</pre></td>
+<td><pre>
+del C
+sub AG -&gt; TC
+sub GA -&gt; CT
+</pre></td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||:-:|::|||
+AAAT-CTCTGAA
+
+</pre></td>
+<td><pre>
+snp C -&gt; T
+del A
+snp G -&gt; C
+sub GA -&gt; CT
+</pre></td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGA-----GAA
+|||-----------|||
+AAA------TCTCTGAA
+</pre></td>
+<td><pre>
+del CAGTGA
+ins TCTCT
+</pre></td>
+</tr>
+</table>
+
+<p><span>Speaker Notes</span>
+<strong>Important:</strong> Mapping can affect downstream analysis!</p>
+
+<p>These different mappings led to different variants, and hard to tell they are equivalent.</p>
+
+<hr />
+
+<h1 id="try-it-yourself">Try it yourself!</h1>
+
+<ul>
+  <li>
+    <p>Lego time! Who wants to volunteer?</p>
+  </li>
+  <li>
+    <p>Or try this <a href="http://web.archive.org/web/20200411075748/https://teacheng.illinois.edu/SequenceAlignment/">online sequence alignment game</a>:
+<!-- using webarchive version because game seems broken, once fixed we can update the link back to: http://teacheng.illinois.edu/SequenceAlignment/ --></p>
+  </li>
+</ul>
+
+<p>.image-75[<img src="../../images/mapping/alignment.gif" alt="Recording of alignment game" loading="lazy" />]</p>
+
+<p>.footnote[https://tinyurl.com/sequence-alignment]</p>
+
+<p><span>Speaker Notes</span>
+Can have learners play around with this alignment game now</p>
+
+<p>Or use Lego bricks, each nucleotide a different colour</p>
+
+<hr />
+
+<h2 id="paired-end-sequencing">Paired-end sequencing</h2>
+
+<ul>
+  <li>
+    <p><strong>Sequencing:</strong> Cut longer fragments of DNA, sequence only the ends</p>
+
+    <p>.center[.image-90[<img src="../../images/mapping/pairedend_read.png" alt="Paired-end reads" loading="lazy" />]]</p>
+  </li>
+  <li>
+    <p><strong>Mapping:</strong> known distance between reads improves accuracy</p>
+
+    <p>.center[.image-75[<img src="../../images/mapping/pairedend_mapping.png" alt="Mapping of paired-end reads" loading="lazy" />]]</p>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The fragments are too long to sequence entirely, but we can sequence
+the ends.</li>
+  <li>Then we have the added information of how far apart these two reads must map</li>
+  <li>
+    <p>This improves our mapping</p>
+  </li>
+  <li>For example for multi-mapped reads, or repeats (next slide)</li>
+</ul>
+
+<hr />
+<p>class: top</p>
+
+<h2 id="repeats">Repeats</h2>
+
+<ul>
+  <li>
+    <p>Multi-mapped reads (e.g. because of repeats) may now be resolved</p>
+  </li>
+  <li>
+    <p><strong>Single-end:</strong></p>
+
+    <p><img src="../../images/mapping/repeats_se.png" alt="Cartoon with a reference genome and two repeats marked. Two blue boxes representing a single-ended read map equally well to both repeats." loading="lazy" /></p>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span>
+In the case of repeats, a single-end read alone would not have be enough
+for unique mapping..</p>
+
+<p>–</p>
+
+<ul>
+  <li>
+    <p><strong>Paired-end:</strong></p>
+
+    <p><img src="../../images/mapping/repeats_pe.png" alt="Cartoon with a reference genome and two repeats marked. Now the two blue boxes are linked and one of them is red, representing a forward/reverse pair of a paired-end read. The mapping is no longer ambiguous and you can know which repeat the blue box belongs to, as the red box maps upstream." loading="lazy" /></p>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span>
+But with the additional information provided by
+paired-end protocol (distance to mate), this can now be resolved..</p>
+
+<hr />
+<p>class: top</p>
+
+<h1 id="indels-insertions--deletions">InDels (Insertions / Deletions)</h1>
+
+<ul>
+  <li>
+    <p>Discordant insert size may indicate insertion or deletion between reads</p>
+  </li>
+  <li>
+    <p><strong>Deletions:</strong> Longer mapping distance than expected</p>
+
+    <p>.image-75[<img src="../../images/mapping/pairedend_deletion.png" alt="Deletion between two paired reads" loading="lazy" />]</p>
+  </li>
+</ul>
+
+<p>–</p>
+
+<ul>
+  <li>
+    <p><strong>Insertions:</strong> Shorter mapping distance than expected</p>
+
+    <p>.image-75[<img src="../../images/mapping/pairedend_insertion.png" alt="Insertions beteween two paired reads" loading="lazy" />]</p>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>
+    <p>Unexpected mapping distance between two reads in a pair may indicate a variant.</p>
+  </li>
+  <li>
+    <p>Exact location of variant unknown unless more reads covering the area</p>
+    <ul>
+      <li>Only know it it somewhere between the two reads</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>FAQ:</strong> “What about mate-pair sequencing?”</p>
+<ul>
+  <li>Same concept as paired-end</li>
+  <li>Much longer distance between ends</li>
+  <li>Very different library prep</li>
+  <li>Useful for detection of larger Structural Variations (SVs) / Fusion Genes
+    <ul>
+      <li>longer than expected distance between mates: deletion in sample</li>
+      <li>shorter than expected distance beetween mates: insertion in sample</li>
+      <li>unexpected orientation of one mate: inversion in sample</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<p>class: top</p>
+
+<h2 id="paired-end-fastq-files">Paired-end FASTQ files</h2>
+
+<ul>
+  <li>Sequencer produces two FASTQ files:
+    <ul>
+      <li><strong>Forward</strong> reads (usually <strong><code class="language-plaintext highlighter-rouge">_1</code></strong> or <strong><code class="language-plaintext highlighter-rouge">_R1</code></strong> in file name)</li>
+      <li><strong>Reverse</strong> reads (usually <strong><code class="language-plaintext highlighter-rouge">_2</code></strong> or <strong><code class="language-plaintext highlighter-rouge">_R2</code></strong> in file name)</li>
+    </ul>
+
+    <p><img src="../../images/mapping/pairedend_fastq.png" alt="Paired-end reads as two separate FASTQ files" loading="lazy" /></p>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span>
+When you have paired-end data, you will usually get 2 files.</p>
+<ul>
+  <li>File names identical except for e.g. <code class="language-plaintext highlighter-rouge">_1</code>/<code class="language-plaintext highlighter-rouge">_2</code> or <code class="language-plaintext highlighter-rouge">_R1</code>/<code class="language-plaintext highlighter-rouge">_R2</code></li>
+  <li>First file contains all the forward reads (“left” sides of pairs)</li>
+  <li>Other file contains all the reverse reads</li>
+</ul>
+
+<p>Pairing also visible in read names</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/1</code> <code class="language-plaintext highlighter-rouge">/2</code> at end or <code class="language-plaintext highlighter-rouge">1:</code> and <code class="language-plaintext highlighter-rouge">2:</code> in read ID</li>
+</ul>
+
+<p>–</p>
+<ul>
+  <li>Sometimes: One <strong>interleaved</strong> (or <strong>interlaced</strong>) FASTQ file
+    <ul>
+      <li>Most tools require 2 separate files</li>
+      <li><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> De-interlace tools in Galaxy for conversion</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span>
+Sometimes data can be in a single <strong>interleaved file</strong> (aka <strong>interlaced</strong>)</p>
+<ul>
+  <li>alternating forward and reverse read</li>
+  <li>de-interlace tools in Galaxy to convert this to two separate files
+    <ul>
+      <li>because many tools require two separate files</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<p>class: top</p>
+
+<h2 id="paired-end-fastq-files-1">Paired-end FASTQ files</h2>
+
+<ul>
+  <li>Order of reads matters!
+    <ul>
+      <li><strong><code class="language-plaintext highlighter-rouge">N</code><sup>th</sup></strong> read in forward file <i class="fa fa-arrows-h" aria-hidden="true"></i>
+<strong><code class="language-plaintext highlighter-rouge">N</code><sup>th</sup></strong> read in reverse file</li>
+      <li>Much faster than determining pairing by read names alone</li>
+    </ul>
+  </li>
+  <li><strong><em>Always trim and filter together!</em></strong></li>
+</ul>
+
+<p><span>Speaker Notes</span>
+Most tools blindly assume that first read in forward file is paired with first read in reverse file etc</p>
+
+<p>Otherwise too slow</p>
+<ul>
+  <li>for every read, worst case have to scan all reads in other file</li>
+  <li>for files with millions of reads, that is millions ^ millions</li>
+</ul>
+
+<p>When trimming and filtering, if a read is removed from one file, its mate must be removed from other one too!</p>
+
+<p><strong>Always trim together in paired-end mode!</strong></p>
+
+<p>–</p>
+
+<p>.pull-left[
+.red[</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@PAIR-1 forward
+GGGTGATGGCCGCTGCCGATGGCGTCAAAT
++
+))%255CCF&gt;&gt;&gt;&gt;&gt;&gt;CCCCCCC65`IIII%
+</code></pre></div></div>
+<p>]
+.orange[</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@PAIR-2 forward
+GATTTGGGGTTCAAAGCAGTATCGATCAA
++
+!''3((((^^d+))%%%++)(%%%%).1)
+</code></pre></div></div>
+<p>]
+.blue[</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@PAIR-3 forward
+TCGCACTCAACGCCCTGCATATGACAAGAC
++
+A64;##=#B9=AAAAAAAAAA9#:AB95%^
+</code></pre></div></div>
+<p>]</p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">mysample_R1.fastq</code></strong>
+]</p>
+
+<p>.pull-right[
+<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:6.4em;"></i>
+.red[</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@PAIR-1 reverse
+AAGTTACCCTTAACAACTTAAGGGTTTTCA
++
+fffddf`feedB`IABa)^%YBBBRTT\^d
+</code></pre></div></div>
+<p>]
+<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:6.4em;"></i>
+.orange[</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@PAIR-2 reverse
+AGCAGAAGTCGATGATAATACGCGTCGTTT
++
+IIIIIII^^IIId`?III%IIIGII&gt;IIII
+</code></pre></div></div>
+<p>]<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:6.4em;"></i>
+.blue[</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@PAIR-3 reverse
+AATCCATTTGTTCAACTCACAGTTTACCGT
++
+9C;=;=&lt;9@4868&gt;9:67AA&lt;9&gt;65&lt;=&gt;59
+</code></pre></div></div>
+<p>]
+<strong><code class="language-plaintext highlighter-rouge">mysample_R2.fastq</code></strong>
+]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Nth read in forward file belongs in a pair with Nth read in reverse file</li>
+  <li>So red reads in this slide form a pair, orange ones, etc</li>
+</ul>
+
+<hr />
+<p>class: top</p>
+
+<h2 id="paired-end-fastq-files-2">Paired-end FASTQ files</h2>
+
+<ul>
+  <li>Order of reads matters!
+    <ul>
+      <li><strong><code class="language-plaintext highlighter-rouge">N</code><sup>th</sup></strong> read in forward file <i class="fa fa-arrows-h" aria-hidden="true"></i>
+<strong><code class="language-plaintext highlighter-rouge">N</code><sup>th</sup></strong> read in reverse file</li>
+      <li>Much faster than determining pairing by read names alone</li>
+    </ul>
+  </li>
+  <li><strong><em>Always trim and filter together!</em></strong></li>
+</ul>
+
+<p>.pull-left[
+<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:6.4em;"></i>
+.red[</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@PAIR-1 forward
+GGGTGATGGCCGCTGCCGATGGCGTCAAAT
++
+))%255CCF&gt;&gt;&gt;&gt;&gt;&gt;CCCCCCC65`IIII%
+</code></pre></div></div>
+<p>]
+.left[<i class="fa fa-cut" style="width:15%;position:absolute;font-size:5em;"></i>]
+<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:6.4em;"></i>
+.orange[</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@PAIR-2 forward
+GATTTGGGGTTCAAAGCAGTATCGATCAA
++
+!''3((((^^d+))%%%++)(%%%%).1)
+</code></pre></div></div>
+<p>]
+<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:6.4em;"></i>
+.blue[</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@PAIR-3 forward
+TCGCACTCAACGCCCTGCATATGACAAGAC
++
+A64;##=#B9=AAAAAAAAAA9#:AB95%^
+</code></pre></div></div>
+<p>]</p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">mysample_R1.fastq</code></strong>
+]
+.pull-right[
+.red[</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@PAIR-1 reverse
+AAGTTACCCTTAACAACTTAAGGGTTTTCA
++
+fffddf`feedB`IABa)^%YBBBRTT\^d
+</code></pre></div></div>
+<p>]
+.orange[</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@PAIR-2 reverse
+AGCAGAAGTCGATGATAATACGCGTCGTTT
++
+IIIIIII^^IIId`?III%IIIGII&gt;IIII
+</code></pre></div></div>
+<p>]
+.blue[</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@PAIR-3 reverse
+AATCCATTTGTTCAACTCACAGTTTACCGT
++
+9C;=;=&lt;9@4868&gt;9:67AA&lt;9&gt;65&lt;=&gt;59
+</code></pre></div></div>
+<p>]
+<strong><code class="language-plaintext highlighter-rouge">mysample_R2.fastq</code></strong>
+]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Important to always provide both files to trimming and filtering tools together</li>
+  <li>
+    <p>If a read in one file gets removed (e.g. because it is below quality threshold), but it’s mate is not, the pairing between the two files is no longer correct.</p>
+  </li>
+  <li>If one half of pair is trimmed, the other</li>
+  <li>also removed, or</li>
+  <li>
+    <p>put into separate “singletons” FASTQ file that some mappers can use</p>
+  </li>
+  <li>FAQ:” why not look at read names to determine pairing?”
+    <ul>
+      <li>
+        <h2 id="analysis-would-be-much-slower-if-for-every-read-must-scan-max-entire-other-file-for-mate-since-often-millions-or-reads-for-whole-genome-sequencing">analysis would be much slower if for every read must scan (max) entire other file for mate, since often millions or reads (for whole-genome sequencing).</h2>
+        <p>class: top</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="paired-end-fastq-files-3">Paired-end FASTQ files</h2>
+
+<ul>
+  <li>Order of reads matters!
+    <ul>
+      <li><strong><code class="language-plaintext highlighter-rouge">N</code><sup>th</sup></strong> read in forward file <i class="fa fa-arrows-h" aria-hidden="true"></i>
+<strong><code class="language-plaintext highlighter-rouge">N</code><sup>th</sup></strong> read in reverse file</li>
+      <li>Much faster than determining pairing by read names alone</li>
+    </ul>
+  </li>
+  <li><strong><em>Always trim and filter together!</em></strong></li>
+</ul>
+
+<p>.pull-left[
+<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:6.4em;"></i>
+.red[</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@PAIR-1 forward
+GGGTGATGGCCGCTGCCGATGGCGTCAAAT
++
+))%255CCF&gt;&gt;&gt;&gt;&gt;&gt;CCCCCCC65`IIII%
+</code></pre></div></div>
+<p>]
+<i class="fa fa-frown-o" style="position:absolute;font-size:3em;left:6.4em;"></i>
+.blue[</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@PAIR-3 forward
+TCGCACTCAACGCCCTGCATATGACAAGAC
++
+A64;##=#B9=AAAAAAAAAA9#:AB95%^
+</code></pre></div></div>
+<p>]
+<i class="fa fa-frown-o" style="position:absolute;font-size:3em;left:6.4em;"></i>
+.green[</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@PAIR-4 forward
+AAACTTCGTAGGTCCATTTGACAGCGTGCA
++
+6664%!!III^(=%3333^^d^d:#32333
+</code></pre></div></div>
+<p>]
+<strong><code class="language-plaintext highlighter-rouge">mysample_R1.fastq</code></strong>
+]
+.pull-right[
+.red[</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@PAIR-1 reverse
+AAGTTACCCTTAACAACTTAAGGGTTTTCA
++
+fffddf`feedB`IABa)^%YBBBRTT\^d
+</code></pre></div></div>
+<p>]
+.orange[</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@PAIR-2 reverse
+AGCAGAAGTCGATGATAATACGCGTCGTTT
++
+IIIIIII^^IIId`?III%IIIGII&gt;IIII
+</code></pre></div></div>
+<p>]
+.blue[</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@PAIR-3 reverse
+AATCCATTTGTTCAACTCACAGTTTACCGT
++
+9C;=;=&lt;9@4868&gt;9:67AA&lt;9&gt;65&lt;=&gt;59
+</code></pre></div></div>
+<p>]
+<strong><code class="language-plaintext highlighter-rouge">mysample_R2.fastq</code></strong>
+]</p>
+
+<p><span>Speaker Notes</span>
+By cutting the yellow read only from the forward reads file, but leaving the other side of pair in the other file, an incorrect pairing is now assumed by downstream tools</p>
+
+<hr />
+<p>class: top</p>
+
+<h2 id="tools-tools-tools">Tools, tools, tools</h2>
+
+<p>60+ different mappers, many comparison papers</p>
+
+<p>.left-column70[<img src="../../images/mapping/ngs_read_mappers_timeline.jpeg" alt="Timeline of mapping tools" loading="lazy" />]</p>
+
+<p>.right-column30[</p>
+<ul>
+  <li>Bowtie2</li>
+  <li>HISAT</li>
+  <li>MAQ</li>
+  <li>BWA</li>
+  <li>Eland</li>
+  <li>SOAP</li>
+  <li>STAR</li>
+  <li>BISMARCK</li>
+  <li>Novoalign</li>
+  <li>TopHat2</li>
+  <li>BLASR</li>
+  <li>..
+]</li>
+</ul>
+
+<p>.footnote[Feature comparison:  <a href="https://doi.org/10.1093/bioinformatics/bts605">10.1093/bioinformatics/bts605</a> ]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Many different tools available</p>
+
+<p>Different strengths and weaknesses, comparison table in link</p>
+
+<hr />
+
+<h2 id="choosing-an-aligner">Choosing an Aligner</h2>
+
+<ul>
+  <li>Each tool makes <strong>different choices</strong> during alignment
+    <ul>
+      <li>Choice of aligner may <strong>affect downstream results</strong></li>
+      <li>Default options may not be best for your data!</li>
+    </ul>
+  </li>
+  <li>Best tool for your data <strong>depends on many factors</strong>
+    <ul>
+      <li>Type of experiment (e.g. DNA, RNA, Bisulphite)</li>
+      <li>Sequencing platform</li>
+      <li>Compute resources vs sensitivity</li>
+      <li>Read characteristics (paired/single end, read length)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>.center[
+.image-40[<img src="../../images/mapping/spliced_mapper.png" alt="Mapping RNA" loading="lazy" />]
+]
+.footnote[<strong>Figure:</strong> mapping of RNA-seq reads is different than DNA-seq]</p>
+
+<p><span>Speaker Notes</span>
+Choice of mapper depends on your experiment</p>
+<ul>
+  <li>Some mappers are good for DNA but not RNA</li>
+  <li>Some mappers do well in highly rearranged genomes (e.g. cancer), others less so</li>
+  <li>Some mappers do well on some platforms but worse on others
+    <ul>
+      <li>e.g. Oxford Nanopore with its long reads but high error rates</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Or other factors</p>
+<ul>
+  <li>STAR needs a LOT of RAM</li>
+  <li>Do you need results fast? or accurate? (e.g. medical setting)</li>
+</ul>
+
+<p>FAQ: “Why not map RNA reads to the transcriptome?”</p>
+<ul>
+  <li>you can, and it is done, but then cannot find novel genes or alternative splicing</li>
+</ul>
+
+<p>FAQ: “Why not BLAST or BLAT?”</p>
+<ul>
+  <li>optimized for longer sequences</li>
+  <li>not base quality aware</li>
+  <li>too slow</li>
+</ul>
+
+<hr />
+
+<h1 id="know-your-data">Know your data!</h1>
+
+<p><em>“… there is no tool that outperforms all of the others in
+all the tests. Therefore, the end user should clearly
+specify [their] needs in order to choose the tool that
+provides the best results.”</em> - Hatem et al BMC Bioinformatics 2013, 14:184</p>
+
+<p>.footnote[ <a href="https://doi.org/10.1186/1471-2105-14-184">DOI: 10.1186/1471-2105-14-184</a> ]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Know the data you are working with and pick the right mapper and parameters for the job!</p>
+
+<p>Not an easy task..</p>
+
+<hr />
+
+<h1 id="file-formats">File Formats</h1>
+
+<hr />
+
+<h1 id="sambam-file-format">SAM/BAM file format</h1>
+
+<figure id="figure-1"><img src="../../images/bam_file.png" alt="Example of SAM file format" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> SAM/BAM file</figcaption></figure>
+
+<p><strong>SAM:</strong> <strong>S</strong>equence <strong>A</strong>lignment <strong>M</strong>ap</p>
+
+<p><strong>BAM:</strong> Binary (compressed) SAM; not human-readable</p>
+
+<hr />
+
+<h1 id="sambam-file-format-1">SAM/BAM file format</h1>
+
+<figure id="figure-2"><img src="../../images/bam_file_explained.png" alt="More detailed view of SAM format" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> SAM/BAM file detail</figcaption></figure>
+
+<ul>
+  <li>Original read information (from FASTQ) plus mapping information
+    <ul>
+      <li>Position on reference, alignment, quality score, uniqueness, ..</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span>
+Alignment given in CIGAR string.</p>
+<ul>
+  <li>in screenshot “37M” means 37 matches</li>
+  <li>in screenshot “18M2D19M” means 18 matches, then 2 deletions, then 19 matches</li>
+</ul>
+
+<hr />
+<p>class: top</p>
+
+<h1 id="genome-browsers">Genome Browsers</h1>
+
+<ul>
+  <li>Visualise aligned reads (BAM files)</li>
+</ul>
+
+<p><img src="../../images/mapping/igv_animation.gif" alt="IGV Genome Browser" loading="lazy" /></p>
+
+<p>.footnote[This is <a href="https://software.broadinstitute.org/software/igv/">IGV (Integrative Genome Browser)</a> DOI: <a href="https://doi.org/10.1038/nbt.1754">10.1038/nbt.1754</a>]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Can zoom in and out, drag left and right, explore your sample</li>
+  <li>Zoom in for more information, mismatches, read information</li>
+  <li>Many different genome browsers exist</li>
+</ul>
+
+<hr />
+<p>class: top</p>
+
+<h1 id="genome-browsers-in-galaxy">Genome Browsers in Galaxy</h1>
+
+<ul>
+  <li><a href="https://jbrowse.org/">JBrowse</a> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> Genome Browser as Galaxy tool</li>
+</ul>
+
+<p>.image-90[<img src="../../images/mapping/jbrowse.png" alt="Screenshot of JBrowse in the Galaxy Interface showing transcripts, various box plots, heatmaps, sequencing depth and variation plots." loading="lazy" />]</p>
+
+<p>.footnote[<a href="https://jbrowse.org">JBrowse.org</a> DOI: <a href="https://doi.org/10.1186/s13059-016-0924-1">10.1186/s13059-016-0924-1</a>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Jbrowse tool builds up a small website for you, and pre-processes the reference genome into a more efficient format. If you wanted to share this with your colleagues, you could download this dataset and directly place it on your webserver.</p>
+
+<hr />
+<p>class: top</p>
+
+<h1 id="genome-browsers-in-galaxy-1">Genome Browsers in Galaxy</h1>
+
+<ul>
+  <li><strong>External Genome Browsers</strong> in Galaxy
+    <ul>
+      <li>BAM datasets in Galaxy have display links</li>
+      <li><a href="https://genome-euro.ucsc.edu/cgi-bin/hgTracks">UCSC Genome Browser</a>, <a href="https://www.ensembl.org">Ensemble</a>, <a href="https://software.broadinstitute.org/software/igv/">IGV</a>, <a href="https://bioviz.org/">IGB</a>, <a href="https://bam.iobio.io/home">BAM.iobo</a></li>
+    </ul>
+
+    <p><img src="../../images/mapping/igv_link.png" alt="Display application links in Galaxy" loading="lazy" /></p>
+  </li>
+  <li>Two different links for <strong>IGV</strong>
+    <ul>
+      <li><strong>local:</strong>
+        <ul>
+          <li>Start IGV on your machine first</li>
+          <li>Then click link to automatically load data from Galaxy</li>
+        </ul>
+      </li>
+      <li><strong>[Reference genome name]</strong> (<em>“Human hg19”</em> in screenshot)
+        <ul>
+          <li>Downloads and starts IGV for you</li>
+          <li>Requires <a href="https://java.com/en/download/faq/java_webstart.xml">Java web start</a> be installed on your machine</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span>
+In the mapping hands-on tutorial you will use JBrowse and IGV</p>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Mapping is not trivial</li>
+
+<li>There are many mapping tools, best choice depends on your data</li>
+
+<li>Choice of mapper can affect downstream results</li>
+
+<li>Know your data!</li>
+
+<li>Genome browsers can be used to view aligned reads</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

@@ -29,30 +29,8 @@
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
-        
-
-
-
-
-
-
-
-
-
-
-
-<!-- Gitter -->
-
-
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
             <a class="navbar-brand" href="/training-material/">
                 <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
@@ -65,11 +43,12 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        
                         <a class="nav-link" href="/training-material/topics/epigenetics" title="Go back to list of tutorials">
-                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Epigenetics
+                            <i class="far fa-folder" aria-hidden="true"></i> Epigenetics
                         </a>
+                        
                     </li>
-
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
         <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
@@ -208,15 +187,8 @@
     </div>
 </li>
 
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/epigenetics/tutorials/atac-seq/tutorial.md">
-                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
-                        </a>
-                    </li>
-                    -->
 
-                     <!-- Search bar-->
+                    <!-- Search bar-->
                     <li class="nav-item">
                       <div id="navbarSupportedContent">
                         <!-- Search form -->
@@ -228,16 +200,37 @@
                         </form>
                       </div>
                     </li>
-
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 
-<div class="container main-content">
-    <script type="application/ld+json">
+        <div class="container main-content" role="main">
         
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
 
 
 {
@@ -358,6 +351,20 @@
     },
     {
       "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
       "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
       "name": "Mapping",
       "description": "Slides for 'Mapping' tutorial",
@@ -376,6 +383,20 @@
       "name": "Mapping",
       "description": "Hands-on for 'Mapping' tutorial",
       "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -432,49 +453,50 @@
     }
   ]
 }
-    </script>
+</script>
 
-    <section class="tutorial topic-epigenetics">
-        <h1 data-toc-skip>ATAC-Seq data analysis</h1>
-        
+<section class="tutorial topic-epigenetics">
+    <h1 data-toc-skip>ATAC-Seq data analysis</h1>
+    
 
-        <div class="contributors-line">By: 
+    <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/lldelisle/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/lldelisle" alt="Lucille Delisle">Lucille Delisle</a> <a href="/training-material/hall-of-fame/mblue9/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mblue9" alt="Maria Doyle">Maria Doyle</a> <a href="/training-material/hall-of-fame/heylf/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/heylf" alt="Florian Heyl">Florian Heyl</a>
+ <a href="/training-material/hall-of-fame/lldelisle/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/lldelisle" alt="Avatar">Lucille Delisle</a> <a href="/training-material/hall-of-fame/mblue9/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mblue9" alt="Avatar">Maria Doyle</a> <a href="/training-material/hall-of-fame/heylf/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/heylf" alt="Avatar">Florian Heyl</a>
 
 </div>
 
-        <blockquote class="overview">
-            <h3>Overview</h3>
-            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
-            <ul>
-            
-            <li><p>Which DNA regions are accessible in the human lymphoblastoid cell line GM12878?</p>
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions</strong>
+        <ul>
+        
+        <li><p>Which DNA regions are accessible in the human lymphoblastoid cell line GM12878?</p>
 </li>
-            
-            <li><p>How to analyse and visualise ATAC-Seq data?</p>
+        
+        <li><p>How to analyse and visualise ATAC-Seq data?</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
-            <ul>
-            
-            <li><p>Apply appropriate analysis and quality control steps for ATAC-Seq</p>
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+        <ul>
+        
+        <li><p>Apply appropriate analysis and quality control steps for ATAC-Seq</p>
 </li>
-            
-            <li><p>Generate a heatmap of transcription start site accessibility</p>
+        
+        <li><p>Generate a heatmap of transcription start site accessibility</p>
 </li>
-            
-            <li><p>Visualise peaks for specific regions</p>
+        
+        <li><p>Visualise peaks for specific regions</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            
-            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
-            <ul>
-            
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+        <ul>
+        
     <li>
     
         
@@ -535,55 +557,54 @@
     
     </li>
 
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+        <ul class="supporting_material">
             
-            </ul>
+                <li class="btn btn-default"><a href="/training-material/topics/epigenetics/tutorials/atac-seq/slides.html">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Slides
+                </a></li>
             
 
             
-            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 3 hours</div>
-            
-
-            
-
-            
-            
-
-            
-            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
-            <ul>
-                <div class="supporting_material">
-                
-                    <li class="btn btn-default"><a href="/training-material/topics/epigenetics/tutorials/atac-seq/slides.html" title="Slides for this tutorial">
-                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides
-                    </a></li>
-                
-
-                
-                    <li class="btn btn-default supporting_material">
+                <li class="btn btn-default supporting_material">
 <a class="topic-icon" href="https://zenodo.org/record/3862793">
-    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
 </a>
 
 </li>
-                
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
     <a class="topic-icon" href="/training-material/topics/epigenetics/tutorials/atac-seq/workflows/" title="Workflows" alt="ATAC-Seq data analysis workflows">
-        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
     </a>
 
 </li>
-                
+            
 
-                
+            
 
-                
-                
-                
+            
+            
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
@@ -596,8 +617,6 @@
             </a>
         </li>
     
-    
-        
     
         
     
@@ -720,8 +739,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -777,26 +794,27 @@
 
 
 </li>
-                
-                </div>
-            </ul>
             
+        </ul>
+        
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 22, 2021 </div>
-        </blockquote>
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 22, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
-        <div class="container">
-            <div class="row">
-                <!-- sidebar, which will move to the top on a small screen -->
-                <div class="col-sm-2">
-                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
-                </div>
-                <div class="col-sm-10">
-                    <h1 class="no_toc" id="introduction">Introduction</h1>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <p>In many eukaryotic organisms, such as humans, the genome is tightly packed and organized with the help of nucleosomes (chromatin). A nucleosome is a complex formed by eight histone proteins that is wrapped with ~147bp of <span class="notranslate">DNA</span>. When the <span class="notranslate">DNA</span> is being actively transcribed into <span class="notranslate">RNA</span>, the <span class="notranslate">DNA</span> will be opened and loosened from the nucleosome complex. Many factors, such as the chromatin structure, the position of the nucleosomes, and histone modifications, play an important role in the organization and accessibility of the <span class="notranslate">DNA</span>. Consequently, these factors are also important for the activation and inactivation of genes. <strong>A</strong>ssay for <strong>T</strong>ransposase-<strong>A</strong>ccessible <strong>C</strong>hromatin using <strong>seq</strong>uencing (<a href="https://en.wikipedia.org/wiki/ATAC-seq">ATAC-Seq</a>) is a method to investigate the accessibility of chromatin and thus a method to determine regulatory mechanisms of gene <span class="notranslate">expression</span>. The method can help identify promoter regions and potential enhancers and silencers. A promoter is the <span class="notranslate">DNA</span> region close to the transcription start site (TSS). It contains binding sites for transcription factors that will recruit the <span class="notranslate">RNA</span> polymerase. An enhancer is a <span class="notranslate">DNA</span> region that can be located up to 1 Mb <span class="notranslate">downstream</span> or <span class="notranslate">upstream</span> of the promoter. When transcription factors bind an enhancer and contact a promoter region, the transcription of the gene is increased. In contrast, a silencer decreases or inhibits the gene’s <span class="notranslate">expression</span>. ATAC-Seq has become popular for identifying accessible regions of the genome as it’s easier, faster and requires less cells than alte<span class="notranslate">rna</span>tive techniques, such as FAIRE-Seq and <span class="notranslate">DNa</span>se-Seq.</p>
 
-<figure id="figure-1"><img src="../../images/atac-seq/atac-seq.jpeg" alt="ATAC-Seq" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Buenrostro et al. 2013 Nat Methods</figcaption></figure>
+<figure id="figure-1"><img src="../../images/atac-seq/atac-seq.jpeg" alt="ATAC-Seq" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Buenrostro et al. 2013 Nat Methods</figcaption></figure>
 
 <p>With ATAC-Seq, to find accessible (open) chromatin regions, the genome is treated with a hyperactive derivative of the Tn5 transposase. A <a href="https://en.wikipedia.org/wiki/Transposase">transposase</a> can bind to a <a href="https://en.wikipedia.org/wiki/Transposable_element">transposable element</a>, which is a <span class="notranslate">DNA</span> sequence that can change its position (jump) within a genome (read the two links to get a deeper insight). During ATAC-Seq, the modified Tn5 inserts <span class="notranslate">DNA</span> sequences corresponding to truncated Nextera adapters into open regions of the genome and concurrently, the <span class="notranslate">DNA</span> is sheared by the transposase activity. The read library is then prepared for sequencing, including PCR amplification with full Nextera adapters and purification steps. Paired-end <span class="notranslate">reads</span> are recommended for ATAC-Seq for the reasons described <a href="https://informatics.fas.harvard.edu/atac-seq-guidelines.html">here</a>.</p>
 
@@ -1064,7 +1082,7 @@ They correspond to adapters amplified head-to-head.
 <blockquote class="comment">
   <h3 id="comment-fastqc-results"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> FastQC Results</h3>
   <p>This is what you should expect from the <strong>Adapter Content</strong> section:</p>
-  <figure id="figure-2"><img src="../../images/atac-seq/Screenshot_fastqcBeforecutadapt.png" alt="FastQC screenshot of the Adapter Content section" /><figcaption><span class="figcaption-prefix">Figure 2:</span> FastQC screenshot on the Adapter Content section</figcaption></figure>
+  <figure id="figure-2"><img src="../../images/atac-seq/Screenshot_fastqcBeforecutadapt.png" alt="FastQC screenshot of the Adapter Content section" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> FastQC screenshot on the Adapter Content section</figcaption></figure>
 </blockquote>
 
 <p>The FastQC web page <strong>Adapter Content</strong> section shows the presence of Nextera Transposase Sequence in the <span class="notranslate">reads</span>. We will remove the adapters with Cutadapt.</p>
@@ -1073,7 +1091,7 @@ They correspond to adapters amplified head-to-head.
 
 <p>To trim the adapters we provide the Nextera adapter sequences to <strong>Cutadapt</strong>. These adapters are shown in the image below.</p>
 
-<figure id="figure-3"><img src="../../images/atac-seq/nexteraLibraryPicture.svg.png" alt="Nextera library with the sequence of adapters" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Nextera library with the sequence of adapters</figcaption></figure>
+<figure id="figure-3"><img src="../../images/atac-seq/nexteraLibraryPicture.svg.png" alt="Nextera library with the sequence of adapters" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Nextera library with the sequence of adapters</figcaption></figure>
 
 <p>The forward and reverse adapters are slightly different. We will also trim low quality bases at the ends of the <span class="notranslate">reads</span> (quality less than 20). We will only keep <span class="notranslate">reads</span> that are at least 20 bases long. We remove short <span class="notranslate">reads</span> (&lt; 20bp) as they are not useful, they will either be thrown out by the <span class="notranslate">mapping</span> or may interfere with our results at the end.</p>
 
@@ -1149,7 +1167,7 @@ They correspond to adapters amplified head-to-head.
 <blockquote class="comment">
   <h3 id="comment-cutadapt-results"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Cutadapt Results</h3>
   <p>You should get similar output to this from Cutadapt:</p>
-  <figure id="figure-4"><img src="../../images/atac-seq/Screenshot_cutadaptSummary.png" alt="Summary of cutadapt" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Summary of cutadapt</figcaption></figure>
+  <figure id="figure-4"><img src="../../images/atac-seq/Screenshot_cutadaptSummary.png" alt="Summary of cutadapt" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Summary of cutadapt</figcaption></figure>
 </blockquote>
 
 <blockquote class="question">
@@ -1188,7 +1206,7 @@ They correspond to adapters amplified head-to-head.
 <blockquote class="comment">
   <h3 id="comment-fastqc-results-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> FastQC Results</h3>
   <p>Now, you should see under <strong>Overrepresented sequences</strong> that there is no more overrepresented sequences and under <strong>Adapter Content</strong> that the Nextera adapters are no longer present.</p>
-  <figure id="figure-5"><img src="../../images/atac-seq/Screenshot_fastqcAftercutadapt.png" alt="FastQC screenshot on the adapter content section after cutadapt" /><figcaption><span class="figcaption-prefix">Figure 5:</span> FastQC screenshot on the adapter content section after cutadapt</figcaption></figure>
+  <figure id="figure-5"><img src="../../images/atac-seq/Screenshot_fastqcAftercutadapt.png" alt="FastQC screenshot on the adapter content section after cutadapt" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> FastQC screenshot on the adapter content section after cutadapt</figcaption></figure>
   <p>However, you may have noticed that you have a new section with warning: <strong>Sequence Length Distribution</strong>. This is expected as you trimmed part of the <span class="notranslate">reads</span>.</p>
 </blockquote>
 
@@ -1249,7 +1267,7 @@ AGCTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGC
 <blockquote class="comment">
   <h3 id="comment-bowtie2-results"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Bowtie2 Results</h3>
   <p>You should get similar results to this from Bowtie2:</p>
-  <figure id="figure-6"><img src="../../images/atac-seq/Screenshot_bowtie2MappingStats.png" alt="Mapping statistics of bowtie2" /><figcaption><span class="figcaption-prefix">Figure 6:</span> <span class="notranslate">Mapping</span> statistics of bowtie2</figcaption></figure>
+  <figure id="figure-6"><img src="../../images/atac-seq/Screenshot_bowtie2MappingStats.png" alt="Mapping statistics of bowtie2" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> <span class="notranslate">Mapping</span> statistics of bowtie2</figcaption></figure>
 </blockquote>
 
 <blockquote class="question">
@@ -1369,7 +1387,7 @@ However, it does not predict the quality of the rest of the data. It is just tha
 The columns of the output are: chromosome name, chromosome length, number of <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to the chromosome, number of unaligned mate whose mate is <span class="notranslate">mapping</span> to the chromosome.
 The first 2 lines of the result would be (after using <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1</span></span> ):</p>
 
-  <figure id="figure-7"><img src="../../images/atac-seq/Screenshot_samtoolsIdxStatsChrM.png" alt="Samtools idxstats result" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Samtools idxstats result</figcaption></figure>
+  <figure id="figure-7"><img src="../../images/atac-seq/Screenshot_samtoolsIdxStatsChrM.png" alt="Samtools idxstats result" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Samtools idxstats result</figcaption></figure>
 
   <p>There are 220 000 <span class="notranslate">reads</span> which map to chrM and 165 000 which map to chr22.</p>
 </blockquote>
@@ -1401,7 +1419,7 @@ The first 2 lines of the result would be (after using <span class="tool" data-to
 <blockquote class="comment">
   <h3 id="comment-markduplicates-results"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> MarkDuplicates Results</h3>
   <p>You should get similar output to this from MarkDuplicates:</p>
-  <figure id="figure-8"><img src="../../images/atac-seq/Screenshot_picardRemoveDup.png" alt="Metrics of MarkDuplicates" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Metrics of MarkDuplicates</figcaption></figure>
+  <figure id="figure-8"><img src="../../images/atac-seq/Screenshot_picardRemoveDup.png" alt="Metrics of MarkDuplicates" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Metrics of MarkDuplicates</figcaption></figure>
 </blockquote>
 
 <blockquote class="tip">
@@ -1424,7 +1442,7 @@ The first 2 lines of the result would be (after using <span class="tool" data-to
     </li>
   </ol>
 
-  <figure id="figure-9"><img src="../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.png" alt="Metrics of MarkDuplicates" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Metrics of MarkDuplicates</figcaption></figure>
+  <figure id="figure-9"><img src="../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.png" alt="Metrics of MarkDuplicates" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Metrics of MarkDuplicates</figcaption></figure>
 
 </blockquote>
 
@@ -1472,7 +1490,7 @@ The first 2 lines of the result would be (after using <span class="tool" data-to
 <blockquote class="comment">
   <h3 id="comment-collectinsertsizemetrics-results"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> CollectInsertSizeMetrics Results</h3>
   <p>This is what you get from CollectInsertSizeMetrics:</p>
-  <figure id="figure-10"><img src="../../images/atac-seq/Screenshot_sizeDistribution.png" alt="Fragment size distribution" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Fragment size distribution</figcaption></figure>
+  <figure id="figure-10"><img src="../../images/atac-seq/Screenshot_sizeDistribution.png" alt="Fragment size distribution" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Fragment size distribution</figcaption></figure>
 </blockquote>
 
 <blockquote class="question">
@@ -1492,16 +1510,16 @@ The first 2 lines of the result would be (after using <span class="tool" data-to
 <p>This fragment size distribution is a good indication if your experiment worked or not.
 In absence of chromatin (without nucleosome), this is the profile you would get:</p>
 
-<figure id="figure-11"><img src="../../images/atac-seq/Screenshot_sizeDistribution_Naked.png" alt="Fragment size distribution of a purified DNA" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Fragment size distribution of a purified <span class="notranslate">DNA</span></figcaption></figure>
+<figure id="figure-11"><img src="../../images/atac-seq/Screenshot_sizeDistribution_Naked.png" alt="Fragment size distribution of a purified DNA" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Fragment size distribution of a purified <span class="notranslate">DNA</span></figcaption></figure>
 
 <p>Here are examples of Fragment size distributions of ATAC-Seq which were very noisy:</p>
 
-<figure id="figure-12"><img src="../../images/atac-seq/Screenshot_sizeDistribution_Failed.png" alt="Fragment size distribution of a failed ATAC-Seq" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Fragment size distribution of a failed ATAC-Seq</figcaption></figure>
+<figure id="figure-12"><img src="../../images/atac-seq/Screenshot_sizeDistribution_Failed.png" alt="Fragment size distribution of a failed ATAC-Seq" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Fragment size distribution of a failed ATAC-Seq</figcaption></figure>
 
-<figure id="figure-13"><img src="../../images/atac-seq/Screenshot_sizeDistribution_Failed2.png" alt="Fragment size distribution of another failed ATAC-Seq" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Fragment size distribution of another very noisy ATAC-Seq</figcaption></figure>
+<figure id="figure-13"><img src="../../images/atac-seq/Screenshot_sizeDistribution_Failed2.png" alt="Fragment size distribution of another failed ATAC-Seq" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Fragment size distribution of another very noisy ATAC-Seq</figcaption></figure>
 
 <p>A final example of a Fragment size distribution of a very good ATAC-Seq, even if we cannot see the third nucleosome “peak”.</p>
-<figure id="figure-14"><img src="../../images/atac-seq/Screenshot_sizeDistribution_Good.png" alt="Fragment size distribution of a good ATAC-Seq" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Fragment size distribution of a good ATAC-Seq</figcaption></figure>
+<figure id="figure-14"><img src="../../images/atac-seq/Screenshot_sizeDistribution_Good.png" alt="Fragment size distribution of a good ATAC-Seq" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Fragment size distribution of a good ATAC-Seq</figcaption></figure>
 
 <h1 id="peak-calling">Peak calling</h1>
 
@@ -1515,13 +1533,13 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
   <li>The first one is to select only paired whose fragment length is below 100bp corresponding to nucleosome-free regions and to use a peak calling like you would do for a ChIP-seq, joining signal between mates. The disadvantages of this approach is that you can only use it if you have paired-end data and you will miss small open regions where only one Tn5 bound.</li>
   <li>The second one chosen here is to use all <span class="notranslate">reads</span> to be more exhaustive. In this approach, it is very important to re-center the signal of each <span class="notranslate">reads</span> on the 5’ extremity (read start site) as this is where Tn5 cuts. Indeed, you want your peaks around the nucleosomes and not directly on the nucleosome:</li>
 </ul>
-<figure id="figure-15"><img src="../../images/atac-seq/schemeWithLegend.jpg" alt="Scheme of ATAC-Seq reads relative to nucleosomes" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Scheme of ATAC-Seq <span class="notranslate">reads</span> relative to nucleosomes</figcaption></figure>
+<figure id="figure-15"><img src="../../images/atac-seq/schemeWithLegend.jpg" alt="Scheme of ATAC-Seq reads relative to nucleosomes" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Scheme of ATAC-Seq <span class="notranslate">reads</span> relative to nucleosomes</figcaption></figure>
 
 <blockquote class="comment">
   <h3 id="comment-comment-on-tn5-insertion"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment on Tn5 insertion</h3>
 
   <p>When Tn5 cuts an accessible chromatin locus it inserts adapters separated by 9bp (<a class="citation" href="#Kia2017">Kia <i>et al.</i> 2017</a>):</p>
-  <figure id="figure-16"><img src="../../images/atac-seq/NexteraLibraryConstruction.jpg" alt="Nextera Library Construction" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Nextera Library Construction</figcaption></figure>
+  <figure id="figure-16"><img src="../../images/atac-seq/NexteraLibraryConstruction.jpg" alt="Nextera Library Construction" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Nextera Library Construction</figcaption></figure>
 
   <p>This means in order to have the read start site reflecting the centre of where Tn5 bound, the <span class="notranslate">reads</span> on the positive strand should be shifted 4 bp to the right and <span class="notranslate">reads</span> on the negative strands should be shifted 5 bp to the left as in <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825">Buenrostro et al. 2013</a>. <strong>Genrich</strong> can apply these shifts when ATAC-seq mode is selected. In most cases, we do not have 9bp resolution so we don’t take it into account but if you are interested in the footprint, this is important.</p>
 </blockquote>
@@ -1546,7 +1564,7 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
 </blockquote>
 
 <p>We call peaks with MACS2. In order to get the coverage centered on the 5’ extended 100bp each side we will use <code class="language-plaintext highlighter-rouge">--shift -100</code> and <code class="language-plaintext highlighter-rouge">--extend 200</code>:</p>
-<figure id="figure-17"><img src="../../images/atac-seq/macs2Options.jpg" alt="MACS2 options to get 100bp each side" /><figcaption><span class="figcaption-prefix">Figure 17:</span> MACS2 options to get 100bp each side</figcaption></figure>
+<figure id="figure-17"><img src="../../images/atac-seq/macs2Options.jpg" alt="MACS2 options to get 100bp each side" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 17:</span> MACS2 options to get 100bp each side</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-call-peaks-with-macs2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Call peaks with MACS2</h3>
@@ -1727,7 +1745,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
 <blockquote class="comment">
   <h3 id="comment-plotheatmap-results"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> plotHeatmap Results</h3>
   <p>This is what you get from plotHeatmap:</p>
-  <figure id="figure-18"><img src="../../images/atac-seq/plotHeatmapOutput.png" alt="plotHeatmap output" /><figcaption><span class="figcaption-prefix">Figure 18:</span> plotHeatmap output</figcaption></figure>
+  <figure id="figure-18"><img src="../../images/atac-seq/plotHeatmapOutput.png" alt="plotHeatmap output" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 18:</span> plotHeatmap output</figcaption></figure>
 </blockquote>
 
 <blockquote class="question">
@@ -1817,7 +1835,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
 <blockquote class="comment">
   <h3 id="comment-plotheatmap-results-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> plotHeatmap Results</h3>
   <p>This is what you get from plotHeatmap, this is much more symetric:</p>
-  <figure id="figure-19"><img src="../../images/atac-seq/plotHeatmapOutput_CTCF.png" alt="plotHeatmap output on CTCF" /><figcaption><span class="figcaption-prefix">Figure 19:</span> plotHeatmap output on CTCF</figcaption></figure>
+  <figure id="figure-19"><img src="../../images/atac-seq/plotHeatmapOutput_CTCF.png" alt="plotHeatmap output on CTCF" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 19:</span> plotHeatmap output on CTCF</figcaption></figure>
 </blockquote>
 
 <h2 id="visualise-regions-with-pygenometracks">Visualise Regions with pyGenomeTracks</h2>
@@ -1908,7 +1926,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
 <blockquote class="comment">
   <h3 id="comment-pygenometracks-results"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> pyGenomeTracks Results</h3>
   <p>You should get similar to results to this from pyGenomeTracks:</p>
-  <figure id="figure-20"><img src="../../images/atac-seq/pyGenomeTracksOutput.png" alt="pyGenomeTracks output" /><figcaption><span class="figcaption-prefix">Figure 20:</span> pyGenomeTracks output</figcaption></figure>
+  <figure id="figure-20"><img src="../../images/atac-seq/pyGenomeTracksOutput.png" alt="pyGenomeTracks output" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 20:</span> pyGenomeTracks output</figcaption></figure>
 </blockquote>
 
 <blockquote class="question">
@@ -1951,37 +1969,37 @@ inserting adapters for sequencing. The training material gave you an insight int
 with <strong>Bowtie2</strong>, filtered our <span class="notranslate">reads</span> for properly paired, good quality and <span class="notranslate">reads</span> that do not
 map to the mitochondrial genome. We found open chromatin regions with <strong>MACS2</strong>, a tool to find regions of genomic enrichment (peaks). We investigated the read coverage around TSS with the help of <strong>computeMatrix</strong> and <strong>plotHeatmap</strong>. Last but not least, we visualised the peaks and other informative tracks, such as CTCF binding regions and hg38 genes, with the help of <strong>pyGenomeTracks</strong>. At the end, we found open chromatin regions that did not overlap with CTCF sites or TSS, which could be potential putative enhancer regions detected by the ATAC-Seq experiment.</p>
 
-<figure id="figure-21"><img src="../../images/atac-seq/ATACWF.svg" alt="ATAC workflow" /><figcaption><span class="figcaption-prefix">Figure 21:</span> ATAC <span class="notranslate">workflow</span></figcaption></figure>
+<figure id="figure-21"><img src="../../images/atac-seq/ATACWF.svg" alt="ATAC workflow" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 21:</span> ATAC <span class="notranslate">workflow</span></figcaption></figure>
 
 
-                    
-                    <blockquote class="key_points">
-                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
-                        <ul>
-                            
-                            <li><p>ATAC-Seq can be used to identify accessible gene promoters and enhancers</p>
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>ATAC-Seq can be used to identify accessible gene promoters and enhancers</p>
 </li>
-                            
-                            <li><p>Several filters are applied to the reads, such as removing those mapped to mitochondria</p>
+                        
+                        <li><p>Several filters are applied to the reads, such as removing those mapped to mitochondria</p>
 </li>
-                            
-                            <li><p>Fragment distribution can help determine whether an ATAC-Seq experiment has worked well</p>
+                        
+                        <li><p>Fragment distribution can help determine whether an ATAC-Seq experiment has worked well</p>
 </li>
-                            
-                        </ul>
-                    </blockquote>
-                    
+                        
+                    </ul>
+                </blockquote>
+                
 
-                    <h1>Frequently Asked Questions</h1>
-                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/epigenetics/faqs/">FAQ page for the Epigenetics topic</a> to see if your question is listed there.
-                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
-                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/epigenetics/faqs/">FAQ page for the Epigenetics topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
-                    
+                
 
-                    
-                    <h1 id="bibliography">References</h1>
-                    <ol class="bibliography"><li><span id="fu_insulator_2008">Fu, Y., M. Sinha, C. L. Peterson, and Z. Weng, 2008 <b>The insulator binding protein CTCF positions 20 nucleosomes around its binding sites across the human genome</b>. PLoS genetics 4: e1000138.</span>
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li><span id="fu_insulator_2008">Fu, Y., M. Sinha, C. L. Peterson, and Z. Weng, 2008 <b>The insulator binding protein CTCF positions 20 nucleosomes around its binding sites across the human genome</b>. PLoS genetics 4: e1000138.</span>
     
     
     <a href="https://doi.org/10.1371/journal.pgen.1000138">10.1371/journal.pgen.1000138</a>
@@ -2055,85 +2073,85 @@ map to the mitochondrial genome. We found open chromatin regions with <strong>MA
     
 
 </li></ol>
-                    
+                
 
-                    
+                
 
-                    <h1>Feedback</h1>
-                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
-                    <div id="feedback-button">
-                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                    </div>
-                    <div id="feedback-form">
-                    </div>
-                    <script type="text/javascript">
-                        (function (window, document) {
-                            function onDocumentReady(fn) {
-                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                    fn();
-                                } else {
-                                    document.addEventListener('DOMContentLoaded', fn);
-                                }
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
                             }
+                        }
 
-                            onDocumentReady(function () {
-                                $("#feedback-button").click(function(evt){
-                                    var e = $(evt.target)
-                                    e.hide();
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
 
-                                    $("#feedback-form").html(`
-                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=ATAC-Seq data analysis (Epigenetics)">Loading...</iframe>
-                                    `)
-                                })
-                            });
-                        })(window, document);
-                    </script>
-
-
-
-                    <h1>Citing this Tutorial</h1>
-                    <p>
-                        <ol>
-                            <li id="citation-text">Lucille Delisle, Maria Doyle, Florian Heyl, 2021 <b>ATAC-Seq data analysis (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/tutorial.html">https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/tutorial.html</a> Online; accessed TODAY
-                            </li>
-                            <li>
-                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
-                            </li>
-                        </ol>
-                    </p>
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=ATAC-Seq data analysis (Epigenetics)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
 
 
-                    <blockquote class="details">
-                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
-                      <p style="display: none;">
 
-                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Lucille Delisle, Maria Doyle, Florian Heyl, 2021 <b>ATAC-Seq data analysis (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/tutorial.html">https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{epigenetics-atac-seq,
-    author = "Lucille Delisle and Maria Doyle and Florian Heyl",
-    title = "ATAC-Seq data analysis (Galaxy Training Materials)",
-    year = "2021",
-    month = "06",
-    day = "22"
-    url = "\url{https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/tutorial.html}",
-    note = "[Online; accessed TODAY]"
+author = "Lucille Delisle and Maria Doyle and Florian Heyl",
+title = "ATAC-Seq data analysis (Galaxy Training Materials)",
+year = "2021",
+month = "06",
+day = "22"
+url = "\url{https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/tutorial.html}",
+note = "[Online; accessed TODAY]"
 }
 @article{Batut_2018,
-        doi = {10.1016/j.cels.2018.05.012},
-        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
-        year = 2018,
-        month = {jun},
-        publisher = {Elsevier {BV}},
-        volume = {6},
-        number = {6},
-        pages = {752--758.e1},
-        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
-        title = {Community-Driven Data Analysis Training for Biology},
-        journal = {Cell Systems}
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
 }</code>
-                    </pre></div></div>
-                    </p>
-                    </blockquote>
+                </pre></div></div>
+                </p>
+                </blockquote>
 
 
 <script type="text/javascript">
@@ -2143,36 +2161,22 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
-                    
+                
 
-                    
+                
 
-                </div>
             </div>
         </div>
-    </section>
-</div>
-
-
-<footer>
-    <div class="container">
-        <p>
-            This material is the result of a collaborative work. Thanks to the
-            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Lucille Delisle, Maria Doyle, Florian Heyl)!
-        </p>
-        <p>
-            Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/epigenetics/tutorials/atac-seq/tutorial.md">GitHub</a>.
-        </p>
-        <p>
-    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-</p>
     </div>
-</footer>
+</section>
+<br/>
+<br/>
+<br/>
 
+        </div>
+        
     </body>
     <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>

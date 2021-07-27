@@ -29,30 +29,8 @@
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
-        
-
-
-
-
-
-
-
-
-
-
-
-<!-- Gitter -->
-
-
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
             <a class="navbar-brand" href="/training-material/">
                 <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
@@ -65,11 +43,12 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        
                         <a class="nav-link" href="/training-material/topics/transcriptomics" title="Go back to list of tutorials">
-                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Transcriptomics
+                            <i class="far fa-folder" aria-hidden="true"></i> Transcriptomics
                         </a>
+                        
                     </li>
-
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
         <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
@@ -208,15 +187,8 @@
     </div>
 </li>
 
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md">
-                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
-                        </a>
-                    </li>
-                    -->
 
-                     <!-- Search bar-->
+                    <!-- Search bar-->
                     <li class="nav-item">
                       <div id="navbarSupportedContent">
                         <!-- Search form -->
@@ -228,16 +200,37 @@
                         </form>
                       </div>
                     </li>
-
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 
-<div class="container main-content">
-    <script type="application/ld+json">
+        <div class="container main-content" role="main">
         
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
 
 
 {
@@ -359,6 +352,20 @@
     },
     {
       "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
       "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
       "name": "Mapping",
       "description": "Slides for 'Mapping' tutorial",
@@ -377,6 +384,20 @@
       "name": "Mapping",
       "description": "Hands-on for 'Mapping' tutorial",
       "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -475,61 +496,62 @@
     }
   ]
 }
-    </script>
+</script>
 
-    <section class="tutorial topic-transcriptomics">
-        <h1 data-toc-skip>1: RNA-Seq reads to counts</h1>
-        
+<section class="tutorial topic-transcriptomics">
+    <h1 data-toc-skip>1: RNA-Seq reads to counts</h1>
+    
 
-        <div class="contributors-line">By: 
+    <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/mblue9/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mblue9" alt="Maria Doyle">Maria Doyle</a> <a href="/training-material/hall-of-fame/bphipson/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bphipson" alt="Belinda Phipson">Belinda Phipson</a> <a href="/training-material/hall-of-fame/hdashnow/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hdashnow" alt="Harriet Dashnow">Harriet Dashnow</a>
+ <a href="/training-material/hall-of-fame/mblue9/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mblue9" alt="Avatar">Maria Doyle</a> <a href="/training-material/hall-of-fame/bphipson/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bphipson" alt="Avatar">Belinda Phipson</a> <a href="/training-material/hall-of-fame/hdashnow/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hdashnow" alt="Avatar">Harriet Dashnow</a>
 
 </div>
 
-        <blockquote class="overview">
-            <h3>Overview</h3>
-            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
-            <ul>
-            
-            <li><p>How to convert RNA-seq reads into counts?</p>
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions</strong>
+        <ul>
+        
+        <li><p>How to convert RNA-seq reads into counts?</p>
 </li>
-            
-            <li><p>How to perform quality control (QC) of RNA-seq reads?</p>
+        
+        <li><p>How to perform quality control (QC) of RNA-seq reads?</p>
 </li>
-            
-            <li><p>How to do this analysis efficiently in Galaxy?</p>
+        
+        <li><p>How to do this analysis efficiently in Galaxy?</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
-            <ul>
-            
-            <li><p>Learn how RNA-seq reads are converted into counts</p>
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+        <ul>
+        
+        <li><p>Learn how RNA-seq reads are converted into counts</p>
 </li>
-            
-            <li><p>Understand QC steps that can be performed on RNA-seq reads</p>
+        
+        <li><p>Understand QC steps that can be performed on RNA-seq reads</p>
 </li>
-            
-            <li><p>Generate interactive reports to summarise QC information with MultiQC</p>
+        
+        <li><p>Generate interactive reports to summarise QC information with MultiQC</p>
 </li>
-            
-            <li><p>Use the Galaxy Rule-based Uploader to import FASTQs from URLs</p>
+        
+        <li><p>Use the Galaxy Rule-based Uploader to import FASTQs from URLs</p>
 </li>
-            
-            <li><p>Make use of Galaxy Collections for a tidy analysis</p>
+        
+        <li><p>Make use of Galaxy Collections for a tidy analysis</p>
 </li>
-            
-            <li><p>Create a Galaxy Workflow that converts RNA-seq reads into counts</p>
+        
+        <li><p>Create a Galaxy Workflow that converts RNA-seq reads into counts</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            
-            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
-            <ul>
-            
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+        <ul>
+        
     <li>
     
         
@@ -590,7 +612,7 @@
     
     </li>
 
-            
+        
     <li>
     
         
@@ -791,54 +813,53 @@
     
     </li>
 
-            </ul>
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default supporting_material"><a href="/training-material/topics/transcriptomics/slides/introduction.html">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Topic Overview slides
+                </a></li>
             
 
             
-            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 3 hours</div>
-            
-
-            
-
-            
-            
-
-            
-            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
-            <ul>
-                <div class="supporting_material">
-                
-                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/transcriptomics/slides/introduction.html" title="Topic Overview slides">
-                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Topic Overview slides
-                    </a></li>
-                
-
-                
-                    <li class="btn btn-default supporting_material">
+                <li class="btn btn-default supporting_material">
 <a class="topic-icon" href="https://zenodo.org/record/4249555">
-    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
 </a>
 
 </li>
-                
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
     <a class="topic-icon" href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/" title="Workflows" alt="1: RNA-Seq reads to counts workflows">
-        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
     </a>
 
 </li>
-                
+            
 
-                
+            
 
-                
-                
-                
+            
+            
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
@@ -874,8 +895,6 @@
         <a class="dropdown-item" href="https://clipseq.usegalaxy.eu/" title="CLIP-Explorer">
             CLIP-Explorer
         </a>
-        
-    
         
     
         
@@ -940,8 +959,6 @@
         <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
             Human Cell Atlas
         </a>
-        
-    
         
     
         
@@ -1052,22 +1069,23 @@
 
 
 </li>
-                
-                </div>
-            </ul>
             
+        </ul>
+        
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 12, 2021 </div>
-        </blockquote>
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 12, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
-        <div class="container">
-            <div class="row">
-                <!-- sidebar, which will move to the top on a small screen -->
-                <div class="col-sm-2">
-                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
-                </div>
-                <div class="col-sm-10">
-                    <h1 class="no_toc" id="introduction">Introduction</h1>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <p>Measuring gene <span class="notranslate">expression</span> on a genome-wide scale has become common practice over the last two decades or so, with microarrays predominantly used pre-2008. With the advent of next generation sequencing technology in 2008, an increasing number of scientists use this technology to measure and understand changes in gene <span class="notranslate">expression</span> in often complex systems. As sequencing costs have decreased, using <span class="notranslate">RNA</span>-Seq to simultaneously measure the <span class="notranslate">expression</span> of tens of thousands of genes for multiple samples has never been easier. The cost of these experiments has now moved from generating the data to storing and analysing it.</p>
 
@@ -1081,7 +1099,7 @@
 
 <p>This is a <span class="notranslate">Galaxy</span> tutorial based on material from the <a href="http://combine-australia.github.io/RNAseq-R/07-rnaseq-day2.html">COMBINE R <span class="notranslate">RNA</span>seq workshop</a>, first taught <a href="http://combine-australia.github.io/2016-05-11-RNAseq/">here</a>.</p>
 
-<figure id="figure-1"><img src="../../images/rna-seq-reads-to-counts/mouse_exp.png" alt="Tutorial Dataset" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Tutorial Dataset</figcaption></figure>
+<figure id="figure-1"><img src="../../images/rna-seq-reads-to-counts/mouse_exp.png" alt="Tutorial Dataset" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Tutorial Dataset</figcaption></figure>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -1139,8 +1157,8 @@
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/rna-seq-reads-to-counts/imported-as-datasets.png" alt="Samples imported as datasets" /></td>
-      <td><img src="../../images/rna-seq-reads-to-counts/imported-as-collection.png" alt="Samples imported as collection with Rule-based Uploader" /></td>
+      <td><img src="../../images/rna-seq-reads-to-counts/imported-as-datasets.png" alt="Samples imported as datasets" loading="lazy" /></td>
+      <td><img src="../../images/rna-seq-reads-to-counts/imported-as-collection.png" alt="Samples imported as collection with Rule-based Uploader" loading="lazy" /></td>
     </tr>
   </tbody>
 </table>
@@ -1159,8 +1177,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><img src="../../images/rna-seq-reads-to-counts/samplesnames_without_collection.png" alt="Sample names without collection" /></td>
-        <td><img src="../../images/rna-seq-reads-to-counts/samplesnames_with_collection.png" alt="Sample names with collection" /></td>
+        <td><img src="../../images/rna-seq-reads-to-counts/samplesnames_without_collection.png" alt="Sample names without collection" loading="lazy" /></td>
+        <td><img src="../../images/rna-seq-reads-to-counts/samplesnames_with_collection.png" alt="Sample names with collection" loading="lazy" /></td>
       </tr>
     </tbody>
   </table>
@@ -1218,7 +1236,7 @@ MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.g
         <li>
           <p>Click <strong>Build</strong></p>
 
-          <figure id="figure-2"><img src="../../images/rna-seq-reads-to-counts/rule_uploader.png" alt="Rule-based Uploader" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Rule-based Uploader</figcaption></figure>
+          <figure id="figure-2"><img src="../../images/rna-seq-reads-to-counts/rule_uploader.png" alt="Rule-based Uploader" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Rule-based Uploader</figcaption></figure>
         </li>
         <li>
           <p>In the <code class="language-plaintext highlighter-rouge">rules editor</code> that pops up:</p>
@@ -1250,7 +1268,7 @@ MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.g
             <li>Click <code class="language-plaintext highlighter-rouge">Upload</code></li>
           </ul>
 
-          <figure id="figure-3"><img src="../../images/rna-seq-reads-to-counts/rule_editor.png" alt="Rules Editor" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Rules Editor</figcaption></figure>
+          <figure id="figure-3"><img src="../../images/rna-seq-reads-to-counts/rule_editor.png" alt="Rules Editor" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Rules Editor</figcaption></figure>
 
           <p>You should see a collection (list) called <code class="language-plaintext highlighter-rouge">fastqs</code> in your history containing all 12 FASTQ files.</p>
         </li>
@@ -1364,7 +1382,7 @@ MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.g
 This information can be seen at the top of the FastQC Webpage as below.</li>
     </ol>
 
-    <figure id="figure-4"><img src="../../images/rna-seq-reads-to-counts/fastqc_webpage.png" alt="FastQC Webpage" /><figcaption><span class="figcaption-prefix">Figure 4:</span> FastQC Webpage</figcaption></figure>
+    <figure id="figure-4"><img src="../../images/rna-seq-reads-to-counts/fastqc_webpage.png" alt="FastQC Webpage" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> FastQC Webpage</figcaption></figure>
 
   </blockquote>
 
@@ -1403,14 +1421,14 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>You should see that most of the plots in the small FASTQs look similar to the full dataset. However, in the small FASTQs, there is less duplication, some Ns in the <span class="notranslate">reads</span> and some overrepresented sequences.</p>
 
-<figure id="figure-5"><img src="../../images/rna-seq-reads-to-counts/fastqc_table.png" alt="General Statistics" /><figcaption><span class="figcaption-prefix">Figure 5:</span> General Statistics</figcaption></figure>
-<figure id="figure-6"><img src="../../images/rna-seq-reads-to-counts/fastqc_sequence_counts_plot.png" alt="Sequence Counts" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Sequence Counts</figcaption></figure>
-<figure id="figure-7"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_base_sequence_quality_plot.png" alt="Sequence Quality" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Sequence Quality</figcaption></figure>
-<figure id="figure-8"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_sequence_quality_scores_plot.png" alt="Per Sequence Quality Scores" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Per Sequence Quality Scores</figcaption></figure>
-<figure id="figure-9"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_sequence_gc_content_plot.png" alt="Per Sequence GC Content" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Per Sequence GC Content</figcaption></figure>
-<figure id="figure-10"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_base_n_content_plot.png" alt="Per base N content" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Per base N content</figcaption></figure>
-<figure id="figure-11"><img src="../../images/rna-seq-reads-to-counts/fastqc_sequence_duplication_levels_plot.png" alt="Sequence Duplication Levels" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Sequence Duplication Levels</figcaption></figure>
-<figure id="figure-12"><img src="../../images/rna-seq-reads-to-counts/fastqc_adapter_content_plot.png" alt="Adapter Content" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Adapter Content</figcaption></figure>
+<figure id="figure-5"><img src="../../images/rna-seq-reads-to-counts/fastqc_table.png" alt="General Statistics" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> General Statistics</figcaption></figure>
+<figure id="figure-6"><img src="../../images/rna-seq-reads-to-counts/fastqc_sequence_counts_plot.png" alt="Sequence Counts" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Sequence Counts</figcaption></figure>
+<figure id="figure-7"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_base_sequence_quality_plot.png" alt="Sequence Quality" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Sequence Quality</figcaption></figure>
+<figure id="figure-8"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_sequence_quality_scores_plot.png" alt="Per Sequence Quality Scores" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Per Sequence Quality Scores</figcaption></figure>
+<figure id="figure-9"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_sequence_gc_content_plot.png" alt="Per Sequence GC Content" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Per Sequence GC Content</figcaption></figure>
+<figure id="figure-10"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_base_n_content_plot.png" alt="Per base N content" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Per base N content</figcaption></figure>
+<figure id="figure-11"><img src="../../images/rna-seq-reads-to-counts/fastqc_sequence_duplication_levels_plot.png" alt="Sequence Duplication Levels" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Sequence Duplication Levels</figcaption></figure>
+<figure id="figure-12"><img src="../../images/rna-seq-reads-to-counts/fastqc_adapter_content_plot.png" alt="Adapter Content" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Adapter Content</figcaption></figure>
 
 <p>See the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality Control tutorial</a> for more information on FastQC plots.</p>
 
@@ -1523,8 +1541,8 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-13"><img src="../../images/rna-seq-reads-to-counts/post_cutadapt_adapter_content.png" alt="Adapter Content post-trimming" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Adapter Content post-trimming</figcaption></figure>
-<figure id="figure-14"><img src="../../images/rna-seq-reads-to-counts/post_cutadapt_fastqc_sequence_length_distribution_plot.png" alt="Sequence Length post-trimming" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Sequence Length post-trimming</figcaption></figure>
+<figure id="figure-13"><img src="../../images/rna-seq-reads-to-counts/post_cutadapt_adapter_content.png" alt="Adapter Content post-trimming" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Adapter Content post-trimming</figcaption></figure>
+<figure id="figure-14"><img src="../../images/rna-seq-reads-to-counts/post_cutadapt_fastqc_sequence_length_distribution_plot.png" alt="Sequence Length post-trimming" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Sequence Length post-trimming</figcaption></figure>
 
 <p>After trimming we can see that:</p>
 
@@ -1596,7 +1614,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-15"><img src="../../images/rna-seq-reads-to-counts/hisat2_se_plot.png" alt="HISAT2 mapping" /><figcaption><span class="figcaption-prefix">Figure 15:</span> HISAT2 <span class="notranslate">mapping</span></figcaption></figure>
+<figure id="figure-15"><img src="../../images/rna-seq-reads-to-counts/hisat2_se_plot.png" alt="HISAT2 mapping" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 15:</span> HISAT2 <span class="notranslate">mapping</span></figcaption></figure>
 
 <p>An important metric to check is the percentage of <span class="notranslate">reads</span> mapped to the reference genome. A low percentage can indicate issues with the data or analysis. Over 90% of <span class="notranslate">reads</span> have mapped in all samples, which is a good <span class="notranslate">mapping</span> rate, and the vast majority of <span class="notranslate">reads</span> have mapped uniquely, they haven’t mapped to multiple locations in the reference genome.</p>
 
@@ -1789,7 +1807,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-16"><img src="../../images/rna-seq-reads-to-counts/featureCounts_assignment_plot.png" alt="featureCounts assignments" /><figcaption><span class="figcaption-prefix">Figure 16:</span> featureCounts assignments</figcaption></figure>
+<figure id="figure-16"><img src="../../images/rna-seq-reads-to-counts/featureCounts_assignment_plot.png" alt="featureCounts assignments" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 16:</span> featureCounts assignments</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1826,7 +1844,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>Take a look at the output. The tutorial uses a small subset of the data ~ 1000 <span class="notranslate">reads</span> per sample to save on processing time. Most rows in that matrix will contain all zeros, there will be ~600 non-zero rows. The output for the full dataset is shown below.</p>
 
-<figure id="figure-17"><img src="../../images/rna-seq-reads-to-counts/count_matrix.png" alt="Count matrix" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Count matrix</figcaption></figure>
+<figure id="figure-17"><img src="../../images/rna-seq-reads-to-counts/count_matrix.png" alt="Count matrix" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Count matrix</figcaption></figure>
 
 <p>Now it is easier to see the counts for a gene across all samples. The accompanying tutorial, <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html"><span class="notranslate">RNA</span>-seq counts to genes</a>, shows how gene information (symbols etc) can be added to a count matrix.</p>
 
@@ -1908,7 +1926,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-18"><img src="../../images/rna-seq-reads-to-counts/rseqc_infer_experiment_plot.png" alt="Infer Experiment" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Infer Experiment</figcaption></figure>
+<figure id="figure-18"><img src="../../images/rna-seq-reads-to-counts/rseqc_infer_experiment_plot.png" alt="Infer Experiment" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Infer Experiment</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1960,7 +1978,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-19"><img src="../../images/rna-seq-reads-to-counts/picard_deduplication.png" alt="MarkDups metrics" /><figcaption><span class="figcaption-prefix">Figure 19:</span> MarkDups metrics</figcaption></figure>
+<figure id="figure-19"><img src="../../images/rna-seq-reads-to-counts/picard_deduplication.png" alt="MarkDups metrics" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 19:</span> MarkDups metrics</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -2012,8 +2030,8 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-20"><img src="../../images/rna-seq-reads-to-counts/samtools-idxstats-mapped-reads-plot.png" alt="IdxStats chromsome mappings" /><figcaption><span class="figcaption-prefix">Figure 20:</span> IdxStats Chromosome <span class="notranslate">Mapping</span>s</figcaption></figure>
-<figure id="figure-21"><img src="../../images/rna-seq-reads-to-counts/samtools-idxstats-xy-plot.png" alt="IdxStats XY " /><figcaption><span class="figcaption-prefix">Figure 21:</span> IdxStats X/Y <span class="notranslate">Mapping</span>s</figcaption></figure>
+<figure id="figure-20"><img src="../../images/rna-seq-reads-to-counts/samtools-idxstats-mapped-reads-plot.png" alt="IdxStats chromsome mappings" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 20:</span> IdxStats Chromosome <span class="notranslate">Mapping</span>s</figcaption></figure>
+<figure id="figure-21"><img src="../../images/rna-seq-reads-to-counts/samtools-idxstats-xy-plot.png" alt="IdxStats XY " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 21:</span> IdxStats X/Y <span class="notranslate">Mapping</span>s</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -2078,10 +2096,10 @@ BAM)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visua
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-22"><img src="../../images/rna-seq-reads-to-counts/rseqc_gene_body_coverage_plot.png" alt="Gene Body Coverage" /><figcaption><span class="figcaption-prefix">Figure 22:</span> Gene Body Coverage</figcaption></figure>
+<figure id="figure-22"><img src="../../images/rna-seq-reads-to-counts/rseqc_gene_body_coverage_plot.png" alt="Gene Body Coverage" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 22:</span> Gene Body Coverage</figcaption></figure>
 
 <p>The plot below from the RSeQC website shows what samples with 3’biased coverage would look like.</p>
-<figure id="figure-23"><img src="../../images/rna-seq-reads-to-counts/genebodycoverage.png" alt="Gene Body Coverage comparison" /><figcaption><span class="figcaption-prefix">Figure 23:</span> Gene Body Coverage comparison</figcaption></figure>
+<figure id="figure-23"><img src="../../images/rna-seq-reads-to-counts/genebodycoverage.png" alt="Gene Body Coverage comparison" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 23:</span> Gene Body Coverage comparison</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-7"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -2135,7 +2153,7 @@ BAM)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visua
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-24"><img src="../../images/rna-seq-reads-to-counts/rseqc_read_distribution_plot.png" alt="Read Distribution" /><figcaption><span class="figcaption-prefix">Figure 24:</span> Read Distribution</figcaption></figure>
+<figure id="figure-24"><img src="../../images/rna-seq-reads-to-counts/rseqc_read_distribution_plot.png" alt="Read Distribution" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 24:</span> Read Distribution</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-8"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -2178,43 +2196,43 @@ BAM)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visua
 <p>In this tutorial we have seen how <span class="notranslate">reads</span> (FASTQ files) can be converted into counts. We have also seen QC steps that can be performed to help assess the quality of the data. A follow-on tutorial, <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html"><span class="notranslate">RNA</span>-seq counts to genes</a>, shows how to perform differential <span class="notranslate">expression</span> and QC on the counts for this dataset.</p>
 
 
-                    
-                    <blockquote class="key_points">
-                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
-                        <ul>
-                            
-                            <li><p>In RNA-seq, reads (FASTQs) are mapped to a reference genome with a spliced aligner (e.g HISAT2, STAR)</p>
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>In RNA-seq, reads (FASTQs) are mapped to a reference genome with a spliced aligner (e.g HISAT2, STAR)</p>
 </li>
-                            
-                            <li><p>The aligned reads (BAMs) can then be converted to counts</p>
+                        
+                        <li><p>The aligned reads (BAMs) can then be converted to counts</p>
 </li>
-                            
-                            <li><p>Many QC steps can be performed to help check the quality of the data</p>
+                        
+                        <li><p>Many QC steps can be performed to help check the quality of the data</p>
 </li>
-                            
-                            <li><p>MultiQC can be used to create a nice summary report of QC information</p>
+                        
+                        <li><p>MultiQC can be used to create a nice summary report of QC information</p>
 </li>
-                            
-                            <li><p>The Galaxy Rule-based Uploader, Collections and Workflows can help make analysis more efficient and easier</p>
+                        
+                        <li><p>The Galaxy Rule-based Uploader, Collections and Workflows can help make analysis more efficient and easier</p>
 </li>
-                            
-                        </ul>
-                    </blockquote>
-                    
+                        
+                    </ul>
+                </blockquote>
+                
 
-                    <h1>Frequently Asked Questions</h1>
-                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/transcriptomics/faqs/">FAQ page for the Transcriptomics topic</a> to see if your question is listed there.
-                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
-                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/transcriptomics/faqs/">FAQ page for the Transcriptomics topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
-                    
-                    <h1 data-toc-skip>Useful literature</h1>
-                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
-                    
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
+                
 
-                    
-                    <h1 id="bibliography">References</h1>
-                    <ol class="bibliography"><li><span id="marcel2011cutadapt">Marcel, M., 2011 <b>Cutadapt removes adapter sequences from high-throughput sequencing reads</b>. EMBnet.journal 17:</span>
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li><span id="marcel2011cutadapt">Marcel, M., 2011 <b>Cutadapt removes adapter sequences from high-throughput sequencing reads</b>. EMBnet.journal 17:</span>
     
     
     
@@ -2302,85 +2320,85 @@ BAM)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visua
     
 
 </li></ol>
-                    
+                
 
-                    
+                
 
-                    <h1>Feedback</h1>
-                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
-                    <div id="feedback-button">
-                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                    </div>
-                    <div id="feedback-form">
-                    </div>
-                    <script type="text/javascript">
-                        (function (window, document) {
-                            function onDocumentReady(fn) {
-                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                    fn();
-                                } else {
-                                    document.addEventListener('DOMContentLoaded', fn);
-                                }
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
                             }
+                        }
 
-                            onDocumentReady(function () {
-                                $("#feedback-button").click(function(evt){
-                                    var e = $(evt.target)
-                                    e.hide();
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
 
-                                    $("#feedback-form").html(`
-                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=1: RNA-Seq reads to counts (Transcriptomics)">Loading...</iframe>
-                                    `)
-                                })
-                            });
-                        })(window, document);
-                    </script>
-
-
-
-                    <h1>Citing this Tutorial</h1>
-                    <p>
-                        <ol>
-                            <li id="citation-text">Maria Doyle, Belinda Phipson, Harriet Dashnow, 2021 <b>1: RNA-Seq reads to counts (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html</a> Online; accessed TODAY
-                            </li>
-                            <li>
-                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
-                            </li>
-                        </ol>
-                    </p>
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=1: RNA-Seq reads to counts (Transcriptomics)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
 
 
-                    <blockquote class="details">
-                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
-                      <p style="display: none;">
 
-                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Maria Doyle, Belinda Phipson, Harriet Dashnow, 2021 <b>1: RNA-Seq reads to counts (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{transcriptomics-rna-seq-reads-to-counts,
-    author = "Maria Doyle and Belinda Phipson and Harriet Dashnow",
-    title = "1: RNA-Seq reads to counts (Galaxy Training Materials)",
-    year = "2021",
-    month = "03",
-    day = "12"
-    url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html}",
-    note = "[Online; accessed TODAY]"
+author = "Maria Doyle and Belinda Phipson and Harriet Dashnow",
+title = "1: RNA-Seq reads to counts (Galaxy Training Materials)",
+year = "2021",
+month = "03",
+day = "12"
+url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html}",
+note = "[Online; accessed TODAY]"
 }
 @article{Batut_2018,
-        doi = {10.1016/j.cels.2018.05.012},
-        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
-        year = 2018,
-        month = {jun},
-        publisher = {Elsevier {BV}},
-        volume = {6},
-        number = {6},
-        pages = {752--758.e1},
-        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
-        title = {Community-Driven Data Analysis Training for Biology},
-        journal = {Cell Systems}
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
 }</code>
-                    </pre></div></div>
-                    </p>
-                    </blockquote>
+                </pre></div></div>
+                </p>
+                </blockquote>
 
 
 <script type="text/javascript">
@@ -2390,15 +2408,15 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
-                    
+                
 
-                    
-                    <blockquote class="agenda follow-up">
-                        <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
-                        <ul>
-                            
+                
+                <blockquote class="agenda follow-up">
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
     <li>
     
         
@@ -2486,34 +2504,20 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
     
     </li>
 
-                        </ul>
-                    </blockquote>
-                    
+                    </ul>
+                </blockquote>
+                
 
-                </div>
             </div>
         </div>
-    </section>
-</div>
-
-
-<footer>
-    <div class="container">
-        <p>
-            This material is the result of a collaborative work. Thanks to the
-            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Maria Doyle, Belinda Phipson, Harriet Dashnow)!
-        </p>
-        <p>
-            Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md">GitHub</a>.
-        </p>
-        <p>
-    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-</p>
     </div>
-</footer>
+</section>
+<br/>
+<br/>
+<br/>
 
+        </div>
+        
     </body>
     <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>

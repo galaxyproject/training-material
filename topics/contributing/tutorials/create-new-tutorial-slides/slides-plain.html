@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Creating Slides</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is a great solution to train the bioinformatics co..." />
+        <meta property="og:title" content="Galaxy Training: Creating Slides" />
+        <meta property="og:description" content="Galaxy is a great solution to train the bioinformatics co..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/contributing/faqs/" title="Check our FAQs for the Contributing to the Galaxy Training Material topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/contributing/tutorials/create-new-tutorial-slides/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/contributing/tutorials/create-new-tutorial-slides/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/contributing/tutorials/create-new-tutorial-slides/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/contributing/tutorials/create-new-tutorial-slides/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/contributing/tutorials/create-new-tutorial-slides/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/contributing/tutorials/create-new-tutorial-slides/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/contributing/tutorials/create-new-tutorial-slides/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fcontributing%2Ftutorials%2Fcreate-new-tutorial-slides%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/contributing/tutorials/create-new-tutorial-slides/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/contributing/tutorials/create-new-tutorial-slides/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/contributing/tutorials/create-new-tutorial-slides/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/contributing/tutorials/create-new-tutorial-slides/slides.html">View markdown source on GitHub</a>
+	<h1>Creating Slides</h1>
+		<h2>Contributors</h2>
+		Helena Rasche, Bérénice Batut, Saskia Hiltemann
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>How to format slides?</p>
+</li>
+		
+		<li><p>How do we add presenter notes?</p>
+</li>
+		
+		<li><p>How to use the features of the slide show tool?</p>
+</li>
+		
+		<li><p>What sort of content should be included in slides?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Create a new set of slides</p>
+</li>
+		
+		<li><p>Add presenter comments</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 26, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="slides">Slides</h1>
+
+<ul>
+  <li>Introduce a subject</li>
+  <li>Quick overview</li>
+  <li>Not too much text</li>
+  <li>Images are Nice</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Slides a great way to introduce an audience to your subject.</li>
+  <li>They’re best to use for a quick overview, not a detailed look at the subject.</li>
+  <li>Lots of images can be a good choice to communicate information, and avoid slides full of text when possible as learners can get bored or distracted.</li>
+</ul>
+
+<hr />
+
+<h2 id="content">Content</h2>
+
+<ul>
+  <li>Background information for the tutorial. E.g.:
+    <ul>
+      <li>Motivation why X is useful</li>
+      <li>Concepts needed to get most out of tutorial</li>
+    </ul>
+  </li>
+  <li>Examples relevant to audience
+    <ul>
+      <li>Avoid: “here is a feature to add link type tracks”</li>
+      <li>Try for: “If you want to visualise SVs in cancer, … this link type tracks are useful”</li>
+      <li>Try for: Using examples from existing papers</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>If your slides are attached to a tutorial, then they can be a good place to provide learners with motivation for the tutorial.</li>
+  <li>If you can provide examples that are relevant to your audience, this will encourage them to follow the tutorial.</li>
+  <li>Try to avoid dry text and links to external resources whenever possible, those can be best in the tutorial which a learner would read at their own pace, rather than slides which are presented at the presenter’s pace.</li>
+</ul>
+
+<hr />
+
+<h2 id="formatting-basic">Formatting: Basic</h2>
+
+<p>.pull-left[
+<span style="font-size: 35px;font-family: 'Yanone Kaffeesatz';font-weight: normal;text-align: center;">Slide Title</span></p>
+
+<p>A list</p>
+
+<ul>
+  <li>Item 1</li>
+  <li>Item 2</li>
+</ul>
+
+<p>and numbered list</p>
+
+<ol>
+  <li>Item</li>
+  <li>Item</li>
+</ol>
+
+<p>Some text with a <a href="https://example.org/">link</a> and an image:</p>
+
+<p><img src="/training-material/assets/images/GTN-60px.png" alt="Description of the image" loading="lazy" />
+]</p>
+
+<p>.pull-right[</p>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gu">### Slide Title</span>
+
+A list
+<span class="p">
+-</span> Item 1
+<span class="p">-</span> Item 2
+
+and numbered list
+<span class="p">
+1.</span> Item
+<span class="p">2.</span> Item
+
+Some text with a <span class="p">[</span><span class="nv">link</span><span class="p">](</span><span class="sx">https://example.org/</span><span class="p">)</span> and an image:
+
+<span class="gh">&lt;img src="/training-material/assets/images/GTN-60px.png" alt="Description of the image"  loading="lazy"&gt;
+---
+</span></code></pre></div></div>
+<p>]</p>
+
+<p>Slides begin with a title <code class="language-plaintext highlighter-rouge">### ...</code> and should end with a <code class="language-plaintext highlighter-rouge">---</code></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Slides are written with standard markdown, and begin with a header, and end with three dashes.</li>
+  <li>Lists, links, and images are all written with their normal syntax.</li>
+  <li>If you’re familiar with markdown and already writing your tutorial in it, this should be an easy addition.</li>
+  <li>The only differences are the dashes to separate slides, and speaker notes which we’ll cover later.</li>
+</ul>
+
+<hr />
+
+<h3 id="formatting-alignment">Formatting: Alignment</h3>
+
+<p>.left[Left-aligned text]
+.center[Centered text]
+.right[Right-aligned text]
+.left[<img src="/training-material/assets/images/GTN-60px.png" alt="Left-aligned image" loading="lazy" />]
+.center[<img src="/training-material/assets/images/GTN-60px.png" alt="Centered image" loading="lazy" />]
+.right[<img src="/training-material/assets/images/GTN-60px.png" alt="Right-aligned image" loading="lazy" />]</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.left[Left-aligned text]
+.center[Centered text]
+.right[Right-aligned text]
+.left[<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"/training-material/assets/images/GTN-60px.png"</span> <span class="na">alt=</span><span class="s">"Left-aligned image"</span>  <span class="na">loading=</span><span class="s">"lazy"</span><span class="nt">&gt;</span>]
+.center[<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"/training-material/assets/images/GTN-60px.png"</span> <span class="na">alt=</span><span class="s">"Centered image"</span>  <span class="na">loading=</span><span class="s">"lazy"</span><span class="nt">&gt;</span>]
+.right[<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"/training-material/assets/images/GTN-60px.png"</span> <span class="na">alt=</span><span class="s">"Right-aligned image"</span>  <span class="na">loading=</span><span class="s">"lazy"</span><span class="nt">&gt;</span>]
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Everything can be aligned using several CSS classes which are provided, left, right, and center.</li>
+  <li>The classes are added with a dot followed by the class, and then the contents within square brackets.</li>
+</ul>
+
+<hr />
+
+<h3 id="formatting-incremental-text">Formatting: Incremental Text</h3>
+
+<ol>
+  <li>Item</li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Incremental text can be added</li>
+</ul>
+
+<p>–</p>
+
+<ol>
+  <li>Appears</li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>And appears incrementally on every slide.</li>
+</ul>
+
+<p>–</p>
+
+<p>Just separate every item with two dashes (<code class="language-plaintext highlighter-rouge">--</code>)</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">1.</span> Item
+
+--
+<span class="p">
+2.</span> Appears
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>You can accomplish this with two dashes instead of three for incremental slides.</li>
+  <li>The dashes should be on their own line, just like the slide separating dashes.</li>
+</ul>
+
+<hr />
+
+<h3 id="formatting-images">Formatting: Images</h3>
+
+<p>.pull-left[
+Demo:</p>
+
+<p>10%</p>
+
+<p>.image-10[ <img src="/training-material/assets/images/GTN-60px.png" alt="GTN Logo (tiny)" loading="lazy" /> ]</p>
+
+<p>50%</p>
+
+<p>.image-50[ <img src="/training-material/assets/images/GTN-60px.png" alt="GTN Logo (slightly larger)" loading="lazy" /> ]</p>
+
+<p>]
+.pull-right[
+Source:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10%
+.image-10[
+  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"/training-material/assets/images/GTN-60px.png"</span> <span class="na">alt=</span><span class="s">"GTN Logo"</span>  <span class="na">loading=</span><span class="s">"lazy"</span><span class="nt">&gt;</span>
+]
+
+50%
+.image-50[
+  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"/training-material/assets/images/GTN-60px.png"</span> <span class="na">alt=</span><span class="s">"GTN Logo"</span>  <span class="na">loading=</span><span class="s">"lazy"</span><span class="nt">&gt;</span>
+]
+</code></pre></div></div>
+<p>]</p>
+
+<p>There are <a href="https://github.com/galaxyproject/training-material/blob/main/assets/css/slides.css#L67">other CSS classes available</a> for other sizes</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>There are a number of CSS classes available to use for styling the content you show on your slides.</li>
+  <li>Here you can see images scaled to 10% and 50%.</li>
+  <li>There are a number of other classes that you can find in the GTN’s codebase.</li>
+</ul>
+
+<hr />
+
+<h3 id="formatting-tables">Formatting: Tables</h3>
+
+<p>.pull-left[
+Demo:</p>
+
+<p>column1    | column2      | column3
+—        | —          | —
+aaaaaaaaaa | bbbb         | cccc
+dddd       | eeeeeeeeeeee | ffff
+gggg       | hhhh         | iiiiiiiiii
+]</p>
+
+<p>.pull-right[
+Source:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>column1    | column2      | column3
+---        | ---          | ---
+aaaaaaaaaa | bbbb         | cccc
+dddd       | eeeeeeeeeeee | ffff
+gggg       | hhhh         | iiiiiiiiii
+</code></pre></div></div>
+<p>]</p>
+
+<p>By default, tables are left-aligned with text left-aligned.</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Tables can be written in the simplified markdown syntax, or using a more complex one that allows for alignment.</li>
+  <li>Here a simple table is shown with several columns.</li>
+  <li>The tables do not need to be aligned, we just did that in this slide for clarity.</li>
+</ul>
+
+<hr />
+
+<h3 id="formatting-tables-with-aligned-text">Formatting: Tables with Aligned Text</h3>
+
+<p>Different alignments for the individual columns can be controlled with the <code class="language-plaintext highlighter-rouge">:</code> character</p>
+
+<p>.pull-left[
+Demo:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Tables</th>
+      <th style="text-align: center">Are</th>
+      <th style="text-align: right">Cool</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">left-aligned</td>
+      <td style="text-align: center">centered</td>
+      <td style="text-align: right">right-aligned</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">row2</td>
+      <td style="text-align: center">row2</td>
+      <td style="text-align: right">row2</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>]</p>
+
+<p>.pull-right[
+Source:</p>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>| Tables       | Are      | Cool          |
+|:-------------|:--------:|--------------:|
+| left-aligned | centered | right-aligned |
+| row2         | row2     | row2          |
+</code></pre></div></div>
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>If you need more complex tables, you can use the colon character to control the alignment.</li>
+  <li>If you are presenting numeric data or similar then this can be useful to make the data more readable.</li>
+</ul>
+
+<hr />
+
+<h3 id="formatting-footnotes">Formatting: Footnotes</h3>
+
+<p>Content with footnotes</p>
+
+<p>Source:</p>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.footnote[Normal footnote with plenty of text]
+</code></pre></div></div>
+
+<p>Demo:</p>
+
+<p>.footnote[Normal footnote with plenty of text]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Footnotes can be used for explanatory notes or adding things like references.</li>
+  <li>References are ideal footnote content as they are not necessarily important for comprehension of the slides, but might be useful later for learners.</li>
+</ul>
+
+<hr />
+
+<h3 id="formatting-two-columns">Formatting: Two Columns</h3>
+
+<p>This is achived with the <code class="language-plaintext highlighter-rouge">.pull-left</code> and <code class="language-plaintext highlighter-rouge">.pull-right</code> classes.</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.pull-left[
+Some text, as many texts as we want...
+
+or even table
+
+column1 | column2 | column3
+--- | --- | ---
+row1 | r1c2 | r1c3
+row2 | r2c2 | r2c3
+row3 | r3c2 | r3c3
+]
+
+.pull-right[ <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"/training-material/assets/images/GTN-60px.png"</span> <span class="na">alt=</span><span class="s">"GTN Logo"</span>  <span class="na">loading=</span><span class="s">"lazy"</span><span class="nt">&gt;</span> ]
+</code></pre></div></div>
+
+<p>Will be rendered as:</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Two column layouts can easily be achieved with the pull left and pull right classes.</li>
+  <li>The result of this is demonstrated on the next slide.</li>
+</ul>
+
+<hr />
+
+<h3 id="formatting-two-columns-1">Formatting: Two Columns</h3>
+
+<p>.pull-left[
+Some text, as many text as we want…..</p>
+
+<p>or even table</p>
+
+<p>column1 | column2 | column3
+— | — | —
+row1 | r1c2 | r1c3
+row2 | r2c2 | r2c3
+row3 | r3c2 | r3c3
+]</p>
+
+<p>.pull-right[
+<img src="/training-material/assets/images/GTN-60px.png" alt="GTN Logo" loading="lazy" />
+]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Any content can be placed in the left and right columns</li>
+  <li>The addition of these classes will wrap all of their contents and place them on the left or right sides.</li>
+  <li>The two column layout is an especially good choice if you want to show a graphic and discuss some important points related to it.</li>
+</ul>
+
+<hr />
+
+<h2 id="presenter-notes">Presenter Notes</h2>
+
+<p>Allows you to:</p>
+
+<ul>
+  <li>See the next slide before the audience</li>
+  <li>See notes you have made on your slides</li>
+</ul>
+
+<p><img src="../../images/presenter-mode.png" alt="Image showing presenter mode" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Presenter Mode lets you have two windows with the same slides, one with presenter notes and a preview of the upcoming slide.</li>
+  <li>When giving presentations with multiple screens or on a projector, this makes life less stressful.</li>
+  <li>You can use the presenter notes to remind you, and others, of important content to mention on each slide.</li>
+</ul>
+
+<hr />
+
+<h3 id="presenter-notes-formatting">Presenter Notes: Formatting</h3>
+
+<p>.left[
+<br />
+### My Slide
+<br /><br />
+Some text!
+<br /><br />
+???
+<br /><br />
+Things written below the <span>Speaker Notes</span> are only shown in the
+presenter view. Press <code class="language-plaintext highlighter-rouge">p</code> to bring this up
+<br /><br />
+---
+<br /><br />
+]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Things written below the three question marks are only shown in the presenter view.</li>
+  <li>Press P to bring this up, and the question mark to show the presenter view shortcut keys.</li>
+</ul>
+
+<hr />
+
+<h2 id="shortcut-keys">Shortcut Keys</h2>
+
+<ul>
+  <li><kbd>?</kbd> activates help</li>
+  <li><kbd>Escape</kbd> leaves help</li>
+  <li><kbd>p</kbd> activates presenter mode</li>
+  <li><kbd>f</kbd> activates full screen mode</li>
+  <li><kbd>c</kbd> clones the slides into a popup</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The key to close the help isn’t shown in the keyboard shortcuts, but it is the escape key.</li>
+  <li>There are a number of other shortcuts which can be useful to know about.</li>
+  <li>The clone window function creates a popup with a copy of the slides, this can be used to show the presenter notes on one screen, and the actual slides on another screen that learners can see.</li>
+</ul>
+
+<hr />
+
+<h2 id="videos">Videos</h2>
+
+<p>.pull-left[</p>
+<ul>
+  <li>Slides with good speaker notes can be turned into videos</li>
+  <li>
+    <p>Enable this in the metadata of the slides:</p>
+
+    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>title: "Creating Slides"
+video: true
+questions:
+<span class="p">  -</span> "How to format slides?"
+</code></pre></div>    </div>
+  </li>
+  <li>automatically rendered into narrated videos by the GTN
+]</li>
+</ul>
+
+<p>.pull-right[
+.image-100[<img src="../../images/slides-to-video.png" alt="Screenshot of GTN video player showing a set of slides with a play icon and a transcript" loading="lazy" />]
+]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The GTN automatically creates videos from selected slide decks.</li>
+  <li>Simply by setting video to true to the metadata, slides with sufficiently good speaker notes can be automatically turned into videos.</li>
+  <li>The slides have audio narration spoken from the script of the speaker notes by AWS Polly.</li>
+  <li>The audio clips, and slides are combined into a video which is then available in the GTN Video Library</li>
+</ul>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Slides are often presented before the hands-on portion, provide relevant background information</li>
+
+<li>Provide examples that are relevant to your audience</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

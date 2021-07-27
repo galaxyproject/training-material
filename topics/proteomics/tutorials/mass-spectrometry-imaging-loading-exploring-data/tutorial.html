@@ -29,30 +29,8 @@
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
-        
-
-
-
-
-
-
-
-
-
-
-
-<!-- Gitter -->
-
-
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
             <a class="navbar-brand" href="/training-material/">
                 <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
@@ -65,11 +43,12 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        
                         <a class="nav-link" href="/training-material/topics/proteomics" title="Go back to list of tutorials">
-                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Proteomics
+                            <i class="far fa-folder" aria-hidden="true"></i> Proteomics
                         </a>
+                        
                     </li>
-
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
         <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
@@ -208,15 +187,8 @@
     </div>
 </li>
 
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.md">
-                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
-                        </a>
-                    </li>
-                    -->
 
-                     <!-- Search bar-->
+                    <!-- Search bar-->
                     <li class="nav-item">
                       <div id="navbarSupportedContent">
                         <!-- Search form -->
@@ -228,16 +200,37 @@
                         </form>
                       </div>
                     </li>
-
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 
-<div class="container main-content">
-    <script type="application/ld+json">
+        <div class="container main-content" role="main">
         
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
 
 
 {
@@ -370,52 +363,53 @@
   ],
   "skillLevel": "Introductory"
 }
-    </script>
+</script>
 
-    <section class="tutorial topic-proteomics">
-        <h1 data-toc-skip>Mass spectrometry imaging: Loading and exploring MSI data</h1>
-        
+<section class="tutorial topic-proteomics">
+    <h1 data-toc-skip>Mass spectrometry imaging: Loading and exploring MSI data</h1>
+    
 
-        <div class="contributors-line">By: 
+    <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/foellmelanie/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/foellmelanie" alt="Melanie Föll">Melanie Föll</a> <a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bgruening" alt="Björn Grüning">Björn Grüning</a>
+ <a href="/training-material/hall-of-fame/foellmelanie/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/foellmelanie" alt="Avatar">Melanie Föll</a> <a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bgruening" alt="Avatar">Björn Grüning</a>
 
 </div>
 
-        <blockquote class="overview">
-            <h3>Overview</h3>
-            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
-            <ul>
-            
-            <li><p>Did the tryptic digestions work?</p>
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions</strong>
+        <ul>
+        
+        <li><p>Did the tryptic digestions work?</p>
 </li>
-            
-            <li><p>Is there an intensity gradient in the data?</p>
+        
+        <li><p>Is there an intensity gradient in the data?</p>
 </li>
-            
-            <li><p>How good is the m/z accuracy?</p>
+        
+        <li><p>How good is the m/z accuracy?</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
-            <ul>
-            
-            <li><p>How to upload an imzML file into Galaxy</p>
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+        <ul>
+        
+        <li><p>How to upload an imzML file into Galaxy</p>
 </li>
-            
-            <li><p>Getting an overview of the MSI data with the MSI quality control tool</p>
+        
+        <li><p>Getting an overview of the MSI data with the MSI quality control tool</p>
 </li>
-            
-            <li><p>How to export MSI data as tabular files</p>
+        
+        <li><p>How to export MSI data as tabular files</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            
-            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
-            <ul>
-            
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+        <ul>
+        
     <li>
     
         
@@ -425,63 +419,62 @@
     
     </li>
 
-            
-            </ul>
-            
+        
+        </ul>
+        
 
-            
-            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 45 minutes</div>
-            
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 45 minutes</div>
+        
 
-            
-            <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
-             Introductory 
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+         Introductory 
 <span class="level introductory" title="Introductory Tutorial">
-  <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
 </span>
 
 </div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default supporting_material"><a href="/training-material/topics/proteomics/slides/introduction.html">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Topic Overview slides
+                </a></li>
             
 
             
-            
-
-            
-            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
-            <ul>
-                <div class="supporting_material">
-                
-                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/proteomics/slides/introduction.html" title="Topic Overview slides">
-                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Topic Overview slides
-                    </a></li>
-                
-
-                
-                    <li class="btn btn-default supporting_material">
+                <li class="btn btn-default supporting_material">
 <a class="topic-icon" href="https://doi.org/10.5281/zenodo.1560645">
-    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
 </a>
 
 </li>
-                
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
     <a class="topic-icon" href="/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/workflows/" title="Workflows" alt="Mass spectrometry imaging: Loading and exploring MSI data workflows">
-        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
     </a>
 
 </li>
-                
+            
 
-                
+            
 
-                
-                
-                
+            
+            
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
@@ -494,8 +487,6 @@
             </a>
         </li>
     
-    
-        
     
         
     
@@ -622,8 +613,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -667,22 +656,23 @@
 
 
 </li>
-                
-                </div>
-            </ul>
             
+        </ul>
+        
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 31, 2021 </div>
-        </blockquote>
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 31, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
-        <div class="container">
-            <div class="row">
-                <!-- sidebar, which will move to the top on a small screen -->
-                <div class="col-sm-2">
-                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
-                </div>
-                <div class="col-sm-10">
-                    <h1 class="no_toc" id="introduction">Introduction</h1>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <p>Mass spectrometry imaging (MSI) is applied to measure the spatial distribution of hundreds of biomolecules in a sample. A mass spectrometer scans over the entire sample and collects a mass spectrum every 5-200 µm. This results in thousands of spots in which a mass spectrum is acquired. Each mass spectrum consists of hundreds of analytes that are measured by their mass-to-charge (m/z) ratio. For each analyte the peak intensity in the mass spectra of every pixel is known and can be set together to map the spatial distribution of the analyte in the sample.</p>
 
@@ -690,7 +680,7 @@
 
 <p>Depending on the analyte of interest and the application, different mass spectrometers are used. A mass spectrometer measures the analytes by ionizing, evaporating and sorting them by their mass-to-charge (m/z) ratio. Put simply, a mass spectrometer needs basically three parts: an ionization source, a mass analyzer and a detector. Most common ionization sources for MSI are MALDI (Matrix Assisted Laser Desorption/Ionization), DESI (Desorption Electrospray Ionization) and SIMS (Secondary Ion Mass Spectrometry).</p>
 
-<figure id="figure-1"><img src="../../images/MSI1_maldi_tof_imaging.png" alt="MSI measurement" /><figcaption><span class="figcaption-prefix">Figure 1:</span> MALDI TOF imaging of a mouse kidney</figcaption></figure>
+<figure id="figure-1"><img src="../../images/MSI1_maldi_tof_imaging.png" alt="MSI measurement" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> MALDI TOF imaging of a mouse kidney</figcaption></figure>
 
 <p>One common type of mass spectrometer for MSI is a MALDI Time-Of-Flight (MALDI-TOF) device. During MALDI ionization a laser shoots onto the sample that was covered with a special matrix which absorbs the laser energy and transfers it to the analytes. This process evaporizes and ionizes the analytes that due to their charge can then be accelerated in an electrical field towards the TOF tube. The time of flight through the tube to the detector is measured and as this correlates with the mass over charge (m/z) of the analyte, the flight time allows the calculation of m/z. During measurement complete mass spectra with hundreds of m/z - intensity pairs are acquired in thousands of sample plots leading to big and complex data. Each mass spectrum is annotated with coordinates (x,y) that define its location in the sample. This allows to visualize the intensity distribution of each m/z feature in the sample as a heatmap. Depending on the analyte of interest, the sample type and the mass spectrometer the sample preparation steps as well as the properties of the acquired data differ.</p>
 
@@ -717,7 +707,7 @@ The imzML file consists of two files: The first file contains the metadata in an
 
 <p>The data for this tutorial comes from MALDI-TOF imaging of peptides in a mouse kidney. To make computation times more suitable for this training, only the m/z range from 1220 - 1625 and a part of the pixels (purple rectangle in figure 1) containing about half of the kidney and one digestion control spot were kept.</p>
 
-<figure id="figure-2"><img src="../../images/MSI1_mouse_kidney.png" alt="mouse kidney image" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Mouse kidney sample before and after mass spectrometry measurement and H&amp;E staining</figcaption></figure>
+<figure id="figure-2"><img src="../../images/MSI1_mouse_kidney.png" alt="mouse kidney image" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Mouse kidney sample before and after mass spectrometry measurement and H&amp;E staining</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-uploading-an-imzml-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Uploading an imzML file</h3>
@@ -753,7 +743,7 @@ The imzML file consists of two files: The first file contains the metadata in an
         </ul>
       </blockquote>
 
-      <figure id="figure-3"><img src="../../images/MSI1_upload_composite.png" alt="Upload imzML files" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Upload an imzML file via the composite upload</figcaption></figure>
+      <figure id="figure-3"><img src="../../images/MSI1_upload_composite.png" alt="Upload imzML files" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Upload an imzML file via the composite upload</figcaption></figure>
 
       <blockquote class="tip">
         <h3 id="tip-tip-ftp-upload-for-large-files"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: FTP upload for large files</h3>
@@ -868,13 +858,13 @@ Inte<span class="notranslate">rna</span>l calibrants or other known, ubiquitous 
 
 <p>The fold change plots are on page 4 and 5 of the pdf report. The first plot shows the average mass spectra for the digested and the undigested <em>bombesin</em> peptides. The blue lines indicate the provided m/z value and the chosen ppm range. The average intensity of the full length <em>bombesin</em> peptide is higher than the one of the digested peptide but the average intensity is not helpful here, because we only spotted one drop next to the tissue and only the intensity fold change in those pixels is important. The spectra plot is useful to control the chosen m/z value and ppm range. To obtain the log2 fold change in each spectrum, for each peptide the intensities in the m/z ranges are averaged, the intensity of the first m/z feature is divided by the intensity of the second m/z feature and log2 transformed. The log2 fold change for each spectrum (pixel) is plotted on page 5 and reveals that many spectra in the upper left corner (where the <em>bombesin</em> spot is) have a log2 fold change &gt;= 0 what indicates that there is more digested than undigested <em>bombesin</em> peptides and that the tryptic digestion was successful.</p>
 
-<figure id="figure-4"><img src="../../images/MSI1_foldchange.png" alt="Fold Change" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Avererage mass spectra and log2 fold change for Bombesin and its digested peptide</figcaption></figure>
+<figure id="figure-4"><img src="../../images/MSI1_foldchange.png" alt="Fold Change" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Avererage mass spectra and log2 fold change for Bombesin and its digested peptide</figcaption></figure>
 
 <h4 id="distribution-images-for-calibrants">Distribution images for Calibrants</h4>
 
 <p>Have a look at the calibrant plots from page 6 on, especially regarding the distribution patterns. The colour code shows the intensity of the m/z value that is closest to the input m/z and if the ppm range contains several m/z features their intensities are averaged. The input m/z value and its name are printed on top of the image, the m/z number in the box shows the closest m/z value (that is 1296.68, as the m/z axis consists of mass bins slight differences are expected). Low <em>angiotensin</em> intensities occur at the boarder of the <em>bombesin</em> spot and at the boarder of the kidney tissue and on some spots in the kidney. In general calibrant intensities are higher in the matrix background than on the tissue due to ion suppression effects. <em>Substance P</em> shows also ion suppression in the <em>bombesin</em> spot. The heatmap shows no spatial intensity gradient what indicates that spraying of calibrants and matrix was homogeneous and that the MS performed stable during data acquisition.</p>
 
-<figure id="figure-5"><img src="../../images/MSI1_angiotensin_image.png" alt="Angiotensin heatmap" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Intensity distribution image of Angiotensin I</figcaption></figure>
+<figure id="figure-5"><img src="../../images/MSI1_angiotensin_image.png" alt="Angiotensin heatmap" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Intensity distribution image of Angiotensin I</figcaption></figure>
 
 <blockquote class="comment">
   <h3 id="comment-plotting-heatmaps"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Plotting heatmaps</h3>
@@ -890,13 +880,13 @@ Inte<span class="notranslate">rna</span>l calibrants or other known, ubiquitous 
 <p>The plot on page 10 shows the total ion current (TIC) for each spectrum with a few outlier TIC &gt; 25000. The TIC is the sum of all intensities of a spectrum. Therefore with more peaks in a spectrum the TIC should also be higher. Due to their low intensities, noise peaks contribute less to the TIC than analyte peaks, but with the large amount of noise we have in this dataset, this of course also sums up. Deviations in TICs are common in MALDI MSI due to e.g. unhomogeneous matrix spray, ion source contamination or pH gradients. To render the spectra more comparable TIC normalization is a default preprocessing step for MALDI MSI data but is based on the assumption that there are comparable numbers of signals present in each spectrum <a href="https://link.springer.com/article/10.1007%2Fs00216-011-4929-z">Deininger et al.</a>.
 Both plots can also serve to check for spraying gradients or reduced machine performance during acquisition time. The mouse kidney was measured from bottom to top (plot on page 2), the performance over time can be easier spotted in the upper plots on page 14 and 15, where the x axis represents the spectra in the order they were measured.</p>
 
-<figure id="figure-6"><img src="../../images/MSI1_npeaks_TIC.png" alt="Npeaks and TIC heatmap" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Number of peaks and TIC per spectrum</figcaption></figure>
+<figure id="figure-6"><img src="../../images/MSI1_npeaks_TIC.png" alt="Npeaks and TIC heatmap" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Number of peaks and TIC per spectrum</figcaption></figure>
 
 <h4 id="most-abundand-mz-features">Most abundand m/z features</h4>
 
 <p>The plot on page 13 shows for each spectrum the m/z with the highest intensity (‘base peak’). This plot can already reveal some morphological features of the dataset. The plot for the mouse kidney dataset shows that the base peak is the same on the kidney tissue and the matrix background but a different one in the <em>bombesin</em> spot. According to the legend the base peak in most spectra is roughly at m/z 1350, the base peak in the <em>bombesin</em> spot is roughly at 1280 and in a few spectra at 1570. Later, we will export the spectra information, including the base peak of each spectrum, as a tabular file to find the correct m/z values of the most abundant features in the following spectra: x = 40 y = 50; x = 23, y = 70; x = 20, y = 73.</p>
 
-<figure id="figure-7"><img src="../../images/MSI1_most_abundant.png" alt="most abundant" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Most abundant m/z for each spectrum and three selected pixel for further investigations</figcaption></figure>
+<figure id="figure-7"><img src="../../images/MSI1_most_abundant.png" alt="most abundant" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Most abundant m/z for each spectrum and three selected pixel for further investigations</figcaption></figure>
 
 <p>As the feature around m/z 1350 is the highest feature in most of the spectra it is no suprise to find this feature as highest peak in the average spectra plot on page 20. The second highest peak is around 1300 m/z. It is obvious that those features are the calibrants <em>substance P</em> and <em>angiotensin</em> as they occur as high intensity peaks on the tissue as well as on the background. At least the concentration of <em>substance P</em> but also the concentration of <em>angiotensin I</em> could be reduced in further experiments. The concentration of <em>fibrinopeptide B</em> is chosen well as the peak at m/z 1570 is visible in most of the spectra plots but does not dominate the spectra as the other two calibrants do.</p>
 
@@ -910,7 +900,7 @@ Both plots can also serve to check for spraying gradients or reduced machine per
 
 <p>The average m/z error already gives a hint about the m/z accuracy but it is even more important to consider the m/z error in each individual spectrum. The plot on page 27 shows for each calibrant the m/z error in each spectrum. The spectra index corresponds to the order in which the spectra were measured and it becomes obvious that for all calibrants there is a m/z shift of about 200 ppm happening during acquisition. This gradient is also visible in the following plots where the m/z error in ppm is plotted in each pixel. The ppm error for <em>angiotensin</em> is about +50 ppm at the bottom of the dataset (start of acquisition) and decreases to about -150 ppm at the top of the image (end of acquisition). To be able to compare m/z features across the spectra they need to have the same m/z value, therefore recalibration with the <strong>MALDIquant preprocessing</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> or binning with the <strong>MSI preprocessing</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and a  tolerance of 200 ppm is highly recommended.</p>
 
-<figure id="figure-8"><img src="../../images/MSI1_mz_error.png" alt="mz error" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Plots that show the average and individual m/z errors</figcaption></figure>
+<figure id="figure-8"><img src="../../images/MSI1_mz_error.png" alt="mz error" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Plots that show the average and individual m/z errors</figcaption></figure>
 
 <blockquote class="comment">
   <h3 id="comment-plotting-mass-spectra"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Plotting mass spectra</h3>
@@ -979,113 +969,113 @@ Exporting and filtering the spectra information for three pixel that have differ
 
 
 
-                    
-                    <blockquote class="key_points">
-                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
-                        <ul>
-                            
-                            <li><p>imzML (continuous or processed file type) and Analyze7.5 can be uploaded into Galaxy via the composite upload.</p>
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>imzML (continuous or processed file type) and Analyze7.5 can be uploaded into Galaxy via the composite upload.</p>
 </li>
-                            
-                            <li><p>The MSI Qualitycontrol tool gives valuable information before starting the analysis.</p>
+                        
+                        <li><p>The MSI Qualitycontrol tool gives valuable information before starting the analysis.</p>
 </li>
-                            
-                            <li><p>The MSI data exporter can be used any time during the analysis when it is necessary to dig deeper into the data. Galaxy provides many text manipulation tools that can directly be applied on the exported tabular file to filter, sort, plot, … the data.</p>
+                        
+                        <li><p>The MSI data exporter can be used any time during the analysis when it is necessary to dig deeper into the data. Galaxy provides many text manipulation tools that can directly be applied on the exported tabular file to filter, sort, plot, … the data.</p>
 </li>
-                            
-                        </ul>
-                    </blockquote>
-                    
+                        
+                    </ul>
+                </blockquote>
+                
 
-                    <h1>Frequently Asked Questions</h1>
-                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/proteomics/faqs/">FAQ page for the Proteomics topic</a> to see if your question is listed there.
-                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
-                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/proteomics/faqs/">FAQ page for the Proteomics topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
-                    
-                    <h1 data-toc-skip>Useful literature</h1>
-                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/proteomics#references">here</a>.</p>
-                    
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/proteomics#references">here</a>.</p>
+                
 
-                    
+                
 
-                    
+                
 
-                    <h1>Feedback</h1>
-                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
-                    <div id="feedback-button">
-                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                    </div>
-                    <div id="feedback-form">
-                    </div>
-                    <script type="text/javascript">
-                        (function (window, document) {
-                            function onDocumentReady(fn) {
-                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                    fn();
-                                } else {
-                                    document.addEventListener('DOMContentLoaded', fn);
-                                }
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
                             }
+                        }
 
-                            onDocumentReady(function () {
-                                $("#feedback-button").click(function(evt){
-                                    var e = $(evt.target)
-                                    e.hide();
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
 
-                                    $("#feedback-form").html(`
-                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Mass spectrometry imaging: Loading and exploring MSI data (Proteomics)">Loading...</iframe>
-                                    `)
-                                })
-                            });
-                        })(window, document);
-                    </script>
-
-
-
-                    <h1>Citing this Tutorial</h1>
-                    <p>
-                        <ol>
-                            <li id="citation-text">Melanie Föll, Björn Grüning, 2021 <b>Mass spectrometry imaging: Loading and exploring MSI data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html">https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html</a> Online; accessed TODAY
-                            </li>
-                            <li>
-                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
-                            </li>
-                        </ol>
-                    </p>
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Mass spectrometry imaging: Loading and exploring MSI data (Proteomics)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
 
 
-                    <blockquote class="details">
-                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
-                      <p style="display: none;">
 
-                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Melanie Föll, Björn Grüning, 2021 <b>Mass spectrometry imaging: Loading and exploring MSI data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html">https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{proteomics-mass-spectrometry-imaging-loading-exploring-data,
-    author = "Melanie Föll and Björn Grüning",
-    title = "Mass spectrometry imaging: Loading and exploring MSI data (Galaxy Training Materials)",
-    year = "2021",
-    month = "05",
-    day = "31"
-    url = "\url{https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html}",
-    note = "[Online; accessed TODAY]"
+author = "Melanie Föll and Björn Grüning",
+title = "Mass spectrometry imaging: Loading and exploring MSI data (Galaxy Training Materials)",
+year = "2021",
+month = "05",
+day = "31"
+url = "\url{https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html}",
+note = "[Online; accessed TODAY]"
 }
 @article{Batut_2018,
-        doi = {10.1016/j.cels.2018.05.012},
-        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
-        year = 2018,
-        month = {jun},
-        publisher = {Elsevier {BV}},
-        volume = {6},
-        number = {6},
-        pages = {752--758.e1},
-        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
-        title = {Community-Driven Data Analysis Training for Biology},
-        journal = {Cell Systems}
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
 }</code>
-                    </pre></div></div>
-                    </p>
-                    </blockquote>
+                </pre></div></div>
+                </p>
+                </blockquote>
 
 
 <script type="text/javascript">
@@ -1095,36 +1085,22 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
-                    
+                
 
-                    
+                
 
-                </div>
             </div>
         </div>
-    </section>
-</div>
-
-
-<footer>
-    <div class="container">
-        <p>
-            This material is the result of a collaborative work. Thanks to the
-            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Melanie Föll, Björn Grüning)!
-        </p>
-        <p>
-            Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.md">GitHub</a>.
-        </p>
-        <p>
-    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-</p>
     </div>
-</footer>
+</section>
+<br/>
+<br/>
+<br/>
 
+        </div>
+        
     </body>
     <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>

@@ -150,6 +150,20 @@
     },
     {
       "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
       "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
       "name": "Mapping",
       "description": "Slides for 'Mapping' tutorial",
@@ -168,6 +182,20 @@
       "name": "Mapping",
       "description": "Hands-on for 'Mapping' tutorial",
       "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -250,11 +278,25 @@ class: center, middle, inverse
 <div class="contributors-line">
 
 
- <a href="/training-material/hall-of-fame/kpoterlowicz/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/kpoterlowicz" alt="Krzysztof Poterlowicz">Krzysztof Poterlowicz</a> <a href="/training-material/hall-of-fame/kpbioteam/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/kpbioteam" alt="Katarzyna Murat">Katarzyna Murat</a>
+ <a href="/training-material/hall-of-fame/kpoterlowicz/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/kpoterlowicz" alt="Avatar">Krzysztof Poterlowicz</a> <a href="/training-material/hall-of-fame/kpbioteam/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/kpbioteam" alt="Avatar">Katarzyna Murat</a>
 
 
 </div>
 
+
+<div class="footnote" style="bottom: 3em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: Jul 9, 2021</div>
+<div class="footnote" style="bottom: 2em;">Or view the <a href="slides-plain.html">plain-text slides without JS</a></div>
+<div class="footnote" style="bottom: 1em;">Tip: press <kbd>P</kbd> to view the presenter notes</div>
+
+???
+Presenter notes contain extra information which might be useful if you
+intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other. Useful when presenting.
 
 
 
@@ -289,18 +331,6 @@ Before diving into this slide deck, we recommend you to have a look at:
 
 
 
-.footnote[Tip: press `P` to view the presenter notes]
-
-???
-Presenter notes contain extra information which might be useful if you
-intend to use these slides for teaching.
-
-Press `P` again to switch presenter notes off
-
-Press `C` to create a new window where the same presentation will be displayed.
-This window is linked to the main window. Changing slides on one will cause the
-slide to change on the other. Useful when presenting.
-
 ---
 
 
@@ -319,7 +349,7 @@ Epigenome-wide association studies (EWAS) analyse genome-wide activity of epigen
 ## Overview
 
 - Applications of EWAS
-- Infinium Human Methylation BeadChip 
+- Infinium Human Methylation BeadChip
 - The Analysis
 - Integrative Approach
 ---
@@ -329,22 +359,22 @@ Epigenome-wide association studies (EWAS) analyse genome-wide activity of epigen
 - **Clinical**
    - Genetic epidemiology is widely used in many progressive and incurable diseases i.e. cancers, autoimmune and neurological disorders
 
-.image-75[ ![](../../images/Epigenetic_mechanisms.jpg)]
+.image-75[ ![Graphic showing chromosome being unwound into chromatin and dna. DNA methylation is highlighted on individual dna molecules. The graphic shows more and less accessible DNA between histones in a 'histone tail'](../../images/Epigenetic_mechanisms.jpg)]
 
 &lt;small&gt;[*National Institutes of Health, 2005*](http://commonfund.nih.gov/epigenomics/figure.aspx)&lt;/small&gt;
 
 ---
-### Infinium Human Methylation BeadChip 
+### Infinium Human Methylation BeadChip
 &lt;small&gt;One of the most common techniques used in EWAS studies is the Infinium Human Methylation BeadChip array quantifying the DNA methylation level, providing high accuracy with low input DNA requirements.&lt;/small&gt;
 
-.image-40[![](../../images/methylationassay.png)]
+.image-80[![At a methylated DNA locus, a methylated bead allows for transcription elongation while an unmethylated one doesn't. At an unmethylated site, the opposite happens.](../../images/methylationassay.png)]
 
 &lt;small&gt;[*Illumina, 2018*](https://emea.illumina.com/)&lt;/small&gt;
 
 &lt;small&gt;The Infinium Methylation Assay uses two different bead types to detect changes in DNA methylation levels. In the figure we can see M - methylated and U - unmethylated bead types. Depending on the probe design, the bead signals are reported in different colors green or red.&lt;/small&gt;
 ---
 ## The Analysis
-.image-90[![](../../images/ewaschart1.png)]
+.image-90[![.IDAT files are eread, preprocessed and normalised, QC happens, then genetic variation annotation, then DMP DMR finding, and finall functional annotation and visualisation](../../images/ewaschart1.png)]
 
 &lt;small&gt;The analysis combines 6 main steps:
  1. Raw intensity data loading (.idat files)
@@ -353,7 +383,7 @@ Epigenome-wide association studies (EWAS) analyse genome-wide activity of epigen
  4. Differentially methylated positions (DMP)  and regions (DMR) finding with respect to a phenotype covariate
  5. Functional annotation and graphical representation
 &lt;/small&gt;
-.image-30[![](../../images/ewaschart2.png)]
+.image-30[![Screenshot of the above workflow but as a Galaxy workflow](../../images/ewaschart2.png)]
 ---
 ## Integrative Approach
 Methylation patterns obtained from Infinium Human Methylation BeadChip data are compatibile with other platforms (gene expression, microRNA profiling) and thus become one of the most comprehensive solution to invastigate epigenome.
@@ -376,13 +406,13 @@ Here, the Infinium Human Methylation BeadChip pipeline becomes a solution  for t
 
 ## Thank you!
 
-This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors!
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
 
 
 <div class="contributors-line">
 
 
- <a href="/training-material/hall-of-fame/kpoterlowicz/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/kpoterlowicz" alt="Krzysztof Poterlowicz">Krzysztof Poterlowicz</a> <a href="/training-material/hall-of-fame/kpbioteam/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/kpbioteam" alt="Katarzyna Murat">Katarzyna Murat</a>
+ <a href="/training-material/hall-of-fame/kpoterlowicz/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/kpoterlowicz" alt="Avatar">Krzysztof Poterlowicz</a> <a href="/training-material/hall-of-fame/kpbioteam/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/kpbioteam" alt="Avatar">Katarzyna Murat</a>
 
 
 </div>

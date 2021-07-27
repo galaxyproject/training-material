@@ -29,30 +29,8 @@
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
-        
-
-
-
-
-
-
-
-
-
-
-
-<!-- Gitter -->
-
-
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
             <a class="navbar-brand" href="/training-material/">
                 <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
@@ -65,11 +43,12 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        
                         <a class="nav-link" href="/training-material/topics/assembly" title="Go back to list of tutorials">
-                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Assembly
+                            <i class="far fa-folder" aria-hidden="true"></i> Assembly
                         </a>
+                        
                     </li>
-
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
         <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
@@ -208,15 +187,8 @@
     </div>
 </li>
 
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/assembly/tutorials/unicycler-assembly/tutorial.md">
-                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
-                        </a>
-                    </li>
-                    -->
 
-                     <!-- Search bar-->
+                    <!-- Search bar-->
                     <li class="nav-item">
                       <div id="navbarSupportedContent">
                         <!-- Search form -->
@@ -228,16 +200,37 @@
                         </form>
                       </div>
                     </li>
-
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 
-<div class="container main-content">
-    <script type="application/ld+json">
+        <div class="container main-content" role="main">
         
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
 
 
 {
@@ -356,6 +349,20 @@
         "name": "Galaxy Training Network",
         "url": "https://galaxyproject.org/teach/gtn/"
       }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
     }
   ],
   "hasPart": [
@@ -399,49 +406,50 @@
   ],
   "skillLevel": "Introductory"
 }
-    </script>
+</script>
 
-    <section class="tutorial topic-assembly">
-        <h1 data-toc-skip>Unicycler Assembly</h1>
-        
+<section class="tutorial topic-assembly">
+    <h1 data-toc-skip>Unicycler Assembly</h1>
+    
 
-        <div class="contributors-line">By: 
+    <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nekrut" alt="Anton Nekrutenko">Anton Nekrutenko</a> <a href="/training-material/hall-of-fame/delphine-l/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/delphine-l" alt="Delphine Lariviere">Delphine Lariviere</a> <a href="/training-material/hall-of-fame/slugger70/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/slugger70" alt="Simon Gladman">Simon Gladman</a>
+ <a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nekrut" alt="Avatar">Anton Nekrutenko</a> <a href="/training-material/hall-of-fame/delphine-l/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/delphine-l" alt="Avatar">Delphine Lariviere</a> <a href="/training-material/hall-of-fame/slugger70/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/slugger70" alt="Avatar">Simon Gladman</a>
 
 </div>
 
-        <blockquote class="overview">
-            <h3>Overview</h3>
-            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
-            <ul>
-            
-            <li><p>I have short reads and long reads. How do I assemble a genome?</p>
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions</strong>
+        <ul>
+        
+        <li><p>I have short reads and long reads. How do I assemble a genome?</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
-            <ul>
-            
-            <li><p>Perform Quality Control on your reads</p>
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+        <ul>
+        
+        <li><p>Perform Quality Control on your reads</p>
 </li>
-            
-            <li><p>Perform a Small genome Assembly with Unicycler</p>
+        
+        <li><p>Perform a Small genome Assembly with Unicycler</p>
 </li>
-            
-            <li><p>Evaluate the Quality of the Assembly with Quast</p>
+        
+        <li><p>Evaluate the Quality of the Assembly with Quast</p>
 </li>
-            
-            <li><p>Annotate the assembly with Prokka</p>
+        
+        <li><p>Annotate the assembly with Prokka</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            
-            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
-            <ul>
-            
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+        <ul>
+        
     <li>
     
         
@@ -483,70 +491,69 @@
     
     </li>
 
-            
-            </ul>
-            
+        
+        </ul>
+        
 
-            
-            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 4 hours</div>
-            
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 4 hours</div>
+        
 
-            
-            <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
-             Introductory 
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+         Introductory 
 <span class="level introductory" title="Introductory Tutorial">
-  <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
 </span>
 
 </div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default"><a href="/training-material/topics/assembly/tutorials/unicycler-assembly/slides.html">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Slides
+                </a></li>
             
 
             
-            
-
-            
-            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
-            <ul>
-                <div class="supporting_material">
-                
-                    <li class="btn btn-default"><a href="/training-material/topics/assembly/tutorials/unicycler-assembly/slides.html" title="Slides for this tutorial">
-                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides
-                    </a></li>
-                
-
-                
-                    <li class="btn btn-default supporting_material">
+                <li class="btn btn-default supporting_material">
 <a class="topic-icon" href="https://doi.org/10.5281/zenodo.940733">
-    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
 </a>
 
 </li>
-                
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
     <a class="topic-icon" href="/training-material/topics/assembly/tutorials/unicycler-assembly/workflows/" title="Workflows" alt="Unicycler Assembly workflows">
-        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
     </a>
 
 </li>
-                
+            
 
-                
-                    <li class="btn btn-default supporting_material">
-<a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/main/topics/assembly/tutorials/unicycler-assembly/tours/">
-    <i class="fas fa-magic" aria-hidden="true"></i><span class="visually-hidden">interactive_tour</span> Tours
+            
+                <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/main/topics/assembly/tutorials/unicycler-assembly/tours/" title="Galaxy interactive tour" >
+    <i class="fas fa-magic" aria-hidden="true"></i> Tours
 </a>
 
 </li>
-                
+            
 
-                
-                
-                
+            
+            
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
@@ -559,8 +566,6 @@
             </a>
         </li>
     
-    
-        
     
         
     
@@ -691,8 +696,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -760,22 +763,23 @@
 
 
 </li>
-                
-                </div>
-            </ul>
             
+        </ul>
+        
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 12, 2021 </div>
-        </blockquote>
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 12, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
-        <div class="container">
-            <div class="row">
-                <!-- sidebar, which will move to the top on a small screen -->
-                <div class="col-sm-2">
-                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
-                </div>
-                <div class="col-sm-10">
-                    <h1 id="the-goal-e-coli-c-1-assembly">The goal: <em>E. coli</em> C-1 assembly</h1>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                <h1 id="the-goal-e-coli-c-1-assembly">The goal: <em>E. coli</em> C-1 assembly</h1>
 
 <p>In this tutorial we assemble and annotate the genome of <em>E. coli</em> strain <a href="http://cgsc2.biology.yale.edu/Strain.php?ID=8232">C-1</a>. This strain is routinely used in experimental evolution studies involving bacteriophages. For instance, now classic works by Holly Wichman and Jim Bull (<a class="citation" href="#Bull1997">Bull 1997</a>, <a class="citation" href="#Bull1998">Bull 1998</a>, <a class="citation" href="#Wichman1999">Wichman 1999</a>) have been performed using this strain and bacteriophage phiX174.</p>
 
@@ -821,7 +825,7 @@
 
 <p>There are 12,738 <a href="http://www.nature.com/nmeth/journal/v12/n4/fig_tab/nmeth.3290_SF13.html">2d-<span class="notranslate">reads</span></a>. Maximum read length is 27,518 bp. The distribution of <span class="notranslate">reads</span> lengths looks like this:</p>
 
-<figure id="figure-1"><img src="../../images/ont_length.png" alt="Nanopore read length distribution" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Distribution of nanopore read lengths.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/ont_length.png" alt="Nanopore read length distribution" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Distribution of nanopore read lengths.</figcaption></figure>
 
 <p>You can see that there many <span class="notranslate">reads</span> under the second peak with median of approximately 7.5 kb.</p>
 
@@ -843,11 +847,11 @@
   <p>Here we assume that you know a thing or two about assembly process. If you don’t: look at the slides accompanying this tutorial as well as other tutorials is this section.</p>
 </blockquote>
 
-<p><img src="https://github.com/rrwick/Unicycler/raw/master/misc/logo.png" alt="Logo unicycler" /></p>
+<p><img src="https://github.com/rrwick/Unicycler/raw/master/misc/logo.png" alt="Logo unicycler" loading="lazy" /></p>
 
 <p>For assembly we will be using <a href="https://github.com/rrwick/Unicycler">Unicycler</a> (also see publication <a class="citation" href="#Wick2017">Wick <i>et al.</i> 2017</a>). Unicycler is designed specifically for <em>hybrid assembly</em> (that is, using both short- and long-read sequencing data) of small (e.g., bacterial, viral, organellar) genomes. In our hands it has produced complete high quality assemblies. Unicycler employs a multi-step process that utilizes a number of software tools:</p>
 
-<figure id="figure-2"><img src="../../images/unicycler.png" alt="Unicycler process" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Simplified view of the Unicycler assembly process (From <a class="citation" href="#Wick2017">Wick <i>et al.</i> 2017</a>) In short, Unicycler uses SPAdes (see below) to produce an assembly graph, which is then bridged (simplified) using long <span class="notranslate">reads</span> to produce the longest possible set of contigs. These are then polished by aligning the original short <span class="notranslate">reads</span> against contigs and feeding these alignments to Pilon - an assembly improvement tool. <a class="citation" href="#Wick2017">Wick <i>et al.</i> 2017</a></figcaption></figure>
+<figure id="figure-2"><img src="../../images/unicycler.png" alt="Unicycler process" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Simplified view of the Unicycler assembly process (From <a class="citation" href="#Wick2017">Wick <i>et al.</i> 2017</a>) In short, Unicycler uses SPAdes (see below) to produce an assembly graph, which is then bridged (simplified) using long <span class="notranslate">reads</span> to produce the longest possible set of contigs. These are then polished by aligning the original short <span class="notranslate">reads</span> against contigs and feeding these alignments to Pilon - an assembly improvement tool. <a class="citation" href="#Wick2017">Wick <i>et al.</i> 2017</a></figcaption></figure>
 
 <p>As you can see Unicycler relies heavily on SPAdes (<a class="citation" href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a>) and <a href="https://github.com/broadinstitute/pilon/wiki">Pilon</a>. We will briefly describe these two tools.</p>
 
@@ -857,7 +861,7 @@
 
 <p>Assemblers usually construct graphs for <em>k</em>-mers of a fixed size. We have noted that when <em>k</em> is small it is difficult to resolve the repeats. If <em>k</em> is too large a corresponding graph may be fragmented (especially if read coverage is low). SPAdes uses several values for <em>k</em> (that are either manually set or inferred automatically) to create a <em>multisized</em> graph that minimized tangledness and fragmentation by combining various <em>k</em>-mers (<a class="citation" href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a>)):</p>
 
-<figure id="figure-3"><img src="../../images/multiGraph.jpg" alt="Multigraph approach implemented in SPAdes" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Multisized de Bruijn graph. A circular Genome CATCAGATAGGA is covered by a set of <span class="notranslate">Reads</span> consisting of nine 4-mers, {ACAT, CATC, ATCA, TCAG, CAGA, AGAT, GATA, TAGG, GGAC}. Three out of 12 possible 4-mers from Genome are missing from <span class="notranslate">Reads</span> (namely {ATAG,AGGA,GACA}), but all 3-mers from the Genome are present in the <span class="notranslate">Reads</span>. (A) The outside circle shows a separate black edge for each 3-mer from <span class="notranslate">Reads</span>. Dotted red lines indicate vertices that will be glued. The inner circle shows the result of applying some of the glues. (B) The graph DB(<span class="notranslate">Reads</span>, 3) resulting from all the glues is tangled. The three h-paths of length 2 in this graph (shown in blue) correspond to h-<span class="notranslate">reads</span> ATAG, AGGA, and GACA. Thus <span class="notranslate">Reads</span><sub>3,4</sub> contains all 4-mers from Genome. (C) The outside circle shows a separate edge for each of the nine 4-mer <span class="notranslate">reads</span>. The next inner circle shows the graph DB(<span class="notranslate">Reads</span>, 4), and the innermost circle represents the Genome. The graph DB(<span class="notranslate">Reads</span>, 4) is fragmented into 3 connected components. (D) The multisized de Bruijn graph DB (<span class="notranslate">Reads</span>, 3, 4). Figure and text from <a class="citation" href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a>.</figcaption></figure>
+<figure id="figure-3"><img src="../../images/multiGraph.jpg" alt="Multigraph approach implemented in SPAdes" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Multisized de Bruijn graph. A circular Genome CATCAGATAGGA is covered by a set of <span class="notranslate">Reads</span> consisting of nine 4-mers, {ACAT, CATC, ATCA, TCAG, CAGA, AGAT, GATA, TAGG, GGAC}. Three out of 12 possible 4-mers from Genome are missing from <span class="notranslate">Reads</span> (namely {ATAG,AGGA,GACA}), but all 3-mers from the Genome are present in the <span class="notranslate">Reads</span>. (A) The outside circle shows a separate black edge for each 3-mer from <span class="notranslate">Reads</span>. Dotted red lines indicate vertices that will be glued. The inner circle shows the result of applying some of the glues. (B) The graph DB(<span class="notranslate">Reads</span>, 3) resulting from all the glues is tangled. The three h-paths of length 2 in this graph (shown in blue) correspond to h-<span class="notranslate">reads</span> ATAG, AGGA, and GACA. Thus <span class="notranslate">Reads</span><sub>3,4</sub> contains all 4-mers from Genome. (C) The outside circle shows a separate edge for each of the nine 4-mer <span class="notranslate">reads</span>. The next inner circle shows the graph DB(<span class="notranslate">Reads</span>, 4), and the innermost circle represents the Genome. The graph DB(<span class="notranslate">Reads</span>, 4) is fragmented into 3 connected components. (D) The multisized de Bruijn graph DB (<span class="notranslate">Reads</span>, 3, 4). Figure and text from <a class="citation" href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a>.</figcaption></figure>
 
 <h5 id="read-pair-utilization">Read pair utilization</h5>
 
@@ -876,7 +880,7 @@
   <li><span class="notranslate">Reads</span> are corrected using solid <em>k</em>-mers:</li>
 </ol>
 
-<figure id="figure-4"><img src="../../images/readCorrection.jpg" alt="Read correction with BayesHammer" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Read correction. Black <em>k</em>-mers are solid. Grey <em>k</em>-mers are non-solid. Red <em>k</em>-mers are the centers of the corresponding clusters (two grey <em>k</em>-mers striked through on the right are non-solid singletons). As a result, one nucleotide is changed based on majority rule. (From <a class="citation" href="#Nikolenko2013">Nikolenko <i>et al.</i> 2013</a>)</figcaption></figure>
+<figure id="figure-4"><img src="../../images/readCorrection.jpg" alt="Read correction with BayesHammer" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Read correction. Black <em>k</em>-mers are solid. Grey <em>k</em>-mers are non-solid. Red <em>k</em>-mers are the centers of the corresponding clusters (two grey <em>k</em>-mers striked through on the right are non-solid singletons). As a result, one nucleotide is changed based on majority rule. (From <a class="citation" href="#Nikolenko2013">Nikolenko <i>et al.</i> 2013</a>)</figcaption></figure>
 
 <p>In the case of the full dataset, SPAdes error correction changed 14,013,757 bases in 3,382,337 <span class="notranslate">reads</span> - a substantial fraction of the full ~18 million read dataset.</p>
 
@@ -884,7 +888,7 @@
 
 <p>Pilon improves draft assemblies by using the information from the original <span class="notranslate">reads</span> aligned to the draft assembly. The following image from a publication by <a class="citation" href="#Walker2014">Walker <i>et al.</i> 2014</a> highlights the steps of this process:</p>
 
-<figure id="figure-5"><img src="../../images/pilon.png" alt="Pilon workflow" /><figcaption><span class="figcaption-prefix">Figure 5:</span> The left column depicts the conceptual steps of the Pilon process, and the center and right columns describe what Pilon does at each step while in assembly improvement and variant detection modes, respectively. During the first step (top row), Pilon scans the read alignments for evidence where the sequencing data disagree with the input genome and makes corrections to small errors and detects small variants. During the second step (second row), Pilon looks for coverage and alignment discrepancies to identify potential mis-assemblies and larger variants. Finally (bottom row), Pilon uses <span class="notranslate">reads</span> and mate pairs which are anchored to the flanks of discrepant regions and gaps in the input genome to reassemble the area, attempting to fill in the true sequence including large insertions. The resulting output is an improved assembly and/or a VCF file of variants. (From <a class="citation" href="#Walker2014">Walker <i>et al.</i> 2014</a>)</figcaption></figure>
+<figure id="figure-5"><img src="../../images/pilon.png" alt="Pilon workflow" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> The left column depicts the conceptual steps of the Pilon process, and the center and right columns describe what Pilon does at each step while in assembly improvement and variant detection modes, respectively. During the first step (top row), Pilon scans the read alignments for evidence where the sequencing data disagree with the input genome and makes corrections to small errors and detects small variants. During the second step (second row), Pilon looks for coverage and alignment discrepancies to identify potential mis-assemblies and larger variants. Finally (bottom row), Pilon uses <span class="notranslate">reads</span> and mate pairs which are anchored to the flanks of discrepant regions and gaps in the input genome to reassemble the area, attempting to fill in the true sequence including large insertions. The resulting output is an improved assembly and/or a VCF file of variants. (From <a class="citation" href="#Walker2014">Walker <i>et al.</i> 2014</a>)</figcaption></figure>
 
 <h3 id="annotation">Annotation</h3>
 
@@ -958,7 +962,7 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 
 <p>If all goes well you will see datasets uploading and changing states from gray to green as shown below. The figure below also shows how datasets can be tagged.</p>
 
-<figure id="figure-6"><img src="../../images/starting_data.png" alt="Datasets in History" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Sequencing data loaded into <span class="notranslate">Galaxy</span> history. The full progression from gray (scheduling) to green (all OK) state is shown. To make it easier to identify datasets as we progress through the analysis we use so-called <em>Hashtags</em>. To tag a dataset: click on dataset to expand it (as shown in panel four); click the tag icon (<i class="fa fa-tags" aria-hidden="true"></i>) and a text field will appear. Add a tag (in this case <b>F</b>) pre-pended with hash (#). Hit enter. Do this for all three datasets and it will appear as in panel five.</figcaption></figure>
+<figure id="figure-6"><img src="../../images/starting_data.png" alt="Datasets in History" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Sequencing data loaded into <span class="notranslate">Galaxy</span> history. The full progression from gray (scheduling) to green (all OK) state is shown. To make it easier to identify datasets as we progress through the analysis we use so-called <em>Hashtags</em>. To tag a dataset: click on dataset to expand it (as shown in panel four); click the tag icon (<i class="fa fa-tags" aria-hidden="true"></i>) and a text field will appear. Add a tag (in this case <b>F</b>) pre-pended with hash (#). Hit enter. Do this for all three datasets and it will appear as in panel five.</figcaption></figure>
 
 <h3 id="assess-read-quality">Assess Read Quality</h3>
 
@@ -989,11 +993,11 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 
 <p>A quick look at quality score distribution will show a confusing picture:</p>
 
-<figure id="figure-7"><img src="../../images/multiqc1.png" alt="QC reported zoomed out" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Because Illumina <span class="notranslate">reads</span> (green) are <b>much</b> shorter that ONT <span class="notranslate">reads</span> (red) the plot looks strange. ONT <span class="notranslate">reads</span> generally have low quality scores and so they are not really meaningful in the context of this technology. However, in the case of Illumina data they mean a lot...</figcaption></figure>
+<figure id="figure-7"><img src="../../images/multiqc1.png" alt="QC reported zoomed out" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Because Illumina <span class="notranslate">reads</span> (green) are <b>much</b> shorter that ONT <span class="notranslate">reads</span> (red) the plot looks strange. ONT <span class="notranslate">reads</span> generally have low quality scores and so they are not really meaningful in the context of this technology. However, in the case of Illumina data they mean a lot...</figcaption></figure>
 
 <p>So let’s zoom in into Illumina data:</p>
 
-<figure id="figure-8"><img src="../../images/multiqc2.png" alt="QC reported zoomed in" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Zooming in shows quality distribution for Illumina <span class="notranslate">reads</span>. This is excellent data with mean base qualities above 30 across all <span class="notranslate">reads</span>.</figcaption></figure>
+<figure id="figure-8"><img src="../../images/multiqc2.png" alt="QC reported zoomed in" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Zooming in shows quality distribution for Illumina <span class="notranslate">reads</span>. This is excellent data with mean base qualities above 30 across all <span class="notranslate">reads</span>.</figcaption></figure>
 
 <h2 id="assembly-with-unicycler">Assembly with Unicycler</h2>
 
@@ -1041,7 +1045,7 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 
 <p>The Quast tool outputs assembly metrics as an html file with metrics and graphs. The image below looks exceptionally boring. This is a <strong>good</strong> thing:</p>
 
-<figure id="figure-9"><img src="../../images/quast_output.png" alt="Quast Interface" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Quast Output: Quast provides different statistics such as the number of contigs or scaffolds, the N50 and N75, and the total length of the assembly. You can also access 3 plots, the cumulative length of the contigs, the Nx, or the GC content.</figcaption></figure>
+<figure id="figure-9"><img src="../../images/quast_output.png" alt="Quast Interface" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Quast Output: Quast provides different statistics such as the number of contigs or scaffolds, the N50 and N75, and the total length of the assembly. You can also access 3 plots, the cumulative length of the contigs, the Nx, or the GC content.</figcaption></figure>
 
 <p>One can see that there are two (!) contigs. The largest contig is 4,576,290 bp (for comparison <em>E. coli</em> K12 MG1655 strain genome length is <a href="https://www.ncbi.nlm.nih.gov/nuccore/NZ_APIN00000000.1">4,656,144 bp</a>) and the smallest is 4,581,676 (total length) - 4,576,290 (length of the largest) = 5,386 bp. When we analyzed this dataset for the first time we were initially puzzled by this second contig. But we quickly realized that this is simply the genome of bacteriophage <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_001422.1">phiX174</a> which is routinely used as a spike-in in Illumina sequencing. Thus we have two genomes: the one of <em>E.coli</em> C-1 and phiX174! We can now use Prokka to annotate our two genomes.</p>
 
@@ -1095,22 +1099,22 @@ https://zenodo.org/record/940733/files/minion_2d.fq
     <li>
       <p>Start IGV. It will look something like this:</p>
 
-      <figure id="figure-10"><img src="../../images/igv1.png" alt="IGV just started" /><figcaption><span class="figcaption-prefix">Figure 10:</span> IGV started by using Java Web Start. Note that it is currently showing Human Genome (hg38) build. This is obviously <b>not</b> what we want.</figcaption></figure>
+      <figure id="figure-10"><img src="../../images/igv1.png" alt="IGV just started" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> IGV started by using Java Web Start. Note that it is currently showing Human Genome (hg38) build. This is obviously <b>not</b> what we want.</figcaption></figure>
     </li>
     <li>
       <p>Locate the output of Unicycler and expand it :</p>
 
-      <figure id="figure-11"><img src="../../images/unicycler_igv.png" alt="Unicycler result Visualization" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Expanding Unicycler assembly reveals IGV link.</figcaption></figure>
+      <figure id="figure-11"><img src="../../images/unicycler_igv.png" alt="Unicycler result Visualization" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Expanding Unicycler assembly reveals IGV link.</figcaption></figure>
     </li>
     <li>
       <p>Click on the <em>local</em> link highlighted with orange outline. The browser will change:</p>
 
-      <figure id="figure-12"><img src="../../images/igv2.png" alt="IGV with Unicycler assembly" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Now you can see the major contig shown in the browser window.</figcaption></figure>
+      <figure id="figure-12"><img src="../../images/igv2.png" alt="IGV with Unicycler assembly" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Now you can see the major contig shown in the browser window.</figcaption></figure>
     </li>
     <li>
       <p>Let’s add Prokka annotations to the browser image. For this simply expand Prokka’s GFF3 dataset and click on the <em>local</em> link:</p>
 
-      <figure id="figure-13"><img src="../../images/prokka_item.png" alt="Expanded GFF3 dataset representing Prokka annotations" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Expanded GFF dataset generated with Prokka. Click on the <em>local</em> link (highlighted with orange outline) to display this dataset within IGV.</figcaption></figure>
+      <figure id="figure-13"><img src="../../images/prokka_item.png" alt="Expanded GFF3 dataset representing Prokka annotations" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Expanded GFF dataset generated with Prokka. Click on the <em>local</em> link (highlighted with orange outline) to display this dataset within IGV.</figcaption></figure>
     </li>
   </ol>
 
@@ -1118,40 +1122,40 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 
 <p>You will now see the annotations within the browser window:</p>
 
-<figure id="figure-14"><img src="../../images/igv3.png" alt="Prokka result Visualization" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Viewing annotated assembly withing IGV.</figcaption></figure>
+<figure id="figure-14"><img src="../../images/igv3.png" alt="Prokka result Visualization" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Viewing annotated assembly withing IGV.</figcaption></figure>
 
 
-                    
-                    <blockquote class="key_points">
-                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
-                        <ul>
-                            
-                            <li><p>We learned about the strategies used by assemblers for hybrid assemblies</p>
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>We learned about the strategies used by assemblers for hybrid assemblies</p>
 </li>
-                            
-                            <li><p>We performed an hybrid assembly of a bacterial genome and its annotation</p>
+                        
+                        <li><p>We performed an hybrid assembly of a bacterial genome and its annotation</p>
 </li>
-                            
-                            <li><p>Unicycler is a pipeline bases on Spades and Pilon dedicated to hybrid assembly of Small genomes</p>
+                        
+                        <li><p>Unicycler is a pipeline bases on Spades and Pilon dedicated to hybrid assembly of Small genomes</p>
 </li>
-                            
-                            <li><p>Combination of short and long reads helped us produce an almost perfect assembly</p>
+                        
+                        <li><p>Combination of short and long reads helped us produce an almost perfect assembly</p>
 </li>
-                            
-                        </ul>
-                    </blockquote>
-                    
+                        
+                    </ul>
+                </blockquote>
+                
 
-                    <h1>Frequently Asked Questions</h1>
-                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/assembly/faqs/">FAQ page for the Assembly topic</a> to see if your question is listed there.
-                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
-                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/assembly/faqs/">FAQ page for the Assembly topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
-                    
+                
 
-                    
-                    <h1 id="bibliography">References</h1>
-                    <ol class="bibliography"><li><span id="FastQC">Andrews, S. <b>FastQC A Quality Control tool for High Throughput Sequence Data</b>.</span>
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li><span id="FastQC">Andrews, S. <b>FastQC A Quality Control tool for High Throughput Sequence Data</b>.</span>
     
     
     
@@ -1272,85 +1276,85 @@ https://zenodo.org/record/940733/files/minion_2d.fq
     
 
 </li></ol>
-                    
+                
 
-                    
+                
 
-                    <h1>Feedback</h1>
-                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
-                    <div id="feedback-button">
-                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                    </div>
-                    <div id="feedback-form">
-                    </div>
-                    <script type="text/javascript">
-                        (function (window, document) {
-                            function onDocumentReady(fn) {
-                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                    fn();
-                                } else {
-                                    document.addEventListener('DOMContentLoaded', fn);
-                                }
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
                             }
+                        }
 
-                            onDocumentReady(function () {
-                                $("#feedback-button").click(function(evt){
-                                    var e = $(evt.target)
-                                    e.hide();
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
 
-                                    $("#feedback-form").html(`
-                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Unicycler Assembly (Assembly)">Loading...</iframe>
-                                    `)
-                                })
-                            });
-                        })(window, document);
-                    </script>
-
-
-
-                    <h1>Citing this Tutorial</h1>
-                    <p>
-                        <ol>
-                            <li id="citation-text">Anton Nekrutenko, Delphine Lariviere, Simon Gladman, 2021 <b>Unicycler Assembly (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/unicycler-assembly/tutorial.html">https://training.galaxyproject.org/training-material/topics/assembly/tutorials/unicycler-assembly/tutorial.html</a> Online; accessed TODAY
-                            </li>
-                            <li>
-                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
-                            </li>
-                        </ol>
-                    </p>
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Unicycler Assembly (Assembly)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
 
 
-                    <blockquote class="details">
-                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
-                      <p style="display: none;">
 
-                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Anton Nekrutenko, Delphine Lariviere, Simon Gladman, 2021 <b>Unicycler Assembly (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/unicycler-assembly/tutorial.html">https://training.galaxyproject.org/training-material/topics/assembly/tutorials/unicycler-assembly/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{assembly-unicycler-assembly,
-    author = "Anton Nekrutenko and Delphine Lariviere and Simon Gladman",
-    title = "Unicycler Assembly (Galaxy Training Materials)",
-    year = "2021",
-    month = "03",
-    day = "12"
-    url = "\url{https://training.galaxyproject.org/training-material/topics/assembly/tutorials/unicycler-assembly/tutorial.html}",
-    note = "[Online; accessed TODAY]"
+author = "Anton Nekrutenko and Delphine Lariviere and Simon Gladman",
+title = "Unicycler Assembly (Galaxy Training Materials)",
+year = "2021",
+month = "03",
+day = "12"
+url = "\url{https://training.galaxyproject.org/training-material/topics/assembly/tutorials/unicycler-assembly/tutorial.html}",
+note = "[Online; accessed TODAY]"
 }
 @article{Batut_2018,
-        doi = {10.1016/j.cels.2018.05.012},
-        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
-        year = 2018,
-        month = {jun},
-        publisher = {Elsevier {BV}},
-        volume = {6},
-        number = {6},
-        pages = {752--758.e1},
-        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
-        title = {Community-Driven Data Analysis Training for Biology},
-        journal = {Cell Systems}
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
 }</code>
-                    </pre></div></div>
-                    </p>
-                    </blockquote>
+                </pre></div></div>
+                </p>
+                </blockquote>
 
 
 <script type="text/javascript">
@@ -1360,15 +1364,15 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
-                    
+                
 
-                    
-                    <blockquote class="agenda follow-up">
-                        <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
-                        <ul>
-                            
+                
+                <blockquote class="agenda follow-up">
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
     <li>
     
         
@@ -1412,34 +1416,20 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
     
     </li>
 
-                        </ul>
-                    </blockquote>
-                    
+                    </ul>
+                </blockquote>
+                
 
-                </div>
             </div>
         </div>
-    </section>
-</div>
-
-
-<footer>
-    <div class="container">
-        <p>
-            This material is the result of a collaborative work. Thanks to the
-            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Anton Nekrutenko, Delphine Lariviere, Simon Gladman)!
-        </p>
-        <p>
-            Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/assembly/tutorials/unicycler-assembly/tutorial.md">GitHub</a>.
-        </p>
-        <p>
-    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-</p>
     </div>
-</footer>
+</section>
+<br/>
+<br/>
+<br/>
 
+        </div>
+        
     </body>
     <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>

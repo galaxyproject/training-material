@@ -29,30 +29,8 @@
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
-        
-
-
-
-
-
-
-
-
-
-
-
-<!-- Gitter -->
-
-
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
             <a class="navbar-brand" href="/training-material/">
                 <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
@@ -65,11 +43,12 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        
                         <a class="nav-link" href="/training-material/topics/imaging" title="Go back to list of tutorials">
-                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Imaging
+                            <i class="far fa-folder" aria-hidden="true"></i> Imaging
                         </a>
+                        
                     </li>
-
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
         <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
@@ -208,15 +187,8 @@
     </div>
 </li>
 
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/imaging/tutorials/tutorial-CP/tutorial.md">
-                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
-                        </a>
-                    </li>
-                    -->
 
-                     <!-- Search bar-->
+                    <!-- Search bar-->
                     <li class="nav-item">
                       <div id="navbarSupportedContent">
                         <!-- Search form -->
@@ -228,16 +200,37 @@
                         </form>
                       </div>
                     </li>
-
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 
-<div class="container main-content">
-    <script type="application/ld+json">
+        <div class="container main-content" role="main">
         
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
 
 
 {
@@ -361,76 +354,77 @@
     }
   ]
 }
-    </script>
+</script>
 
-    <section class="tutorial topic-imaging">
-        <h1 data-toc-skip>Nucleoli segmentation and feature extraction using CellProfiler</h1>
-        
+<section class="tutorial topic-imaging">
+    <h1 data-toc-skip>Nucleoli segmentation and feature extraction using CellProfiler</h1>
+    
 
-        <div class="contributors-line">By: 
+    <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/beatrizserrano/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/beatrizserrano" alt="Beatriz Serrano-Solano">Beatriz Serrano-Solano</a> <a href="/training-material/hall-of-fame/jkh1/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/jkh1" alt="Jean-Karim Hériché">Jean-Karim Hériché</a>
+ <a href="/training-material/hall-of-fame/beatrizserrano/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/beatrizserrano" alt="Avatar">Beatriz Serrano-Solano</a> <a href="/training-material/hall-of-fame/jkh1/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/jkh1" alt="Avatar">Jean-Karim Hériché</a>
 
 </div>
 
-        <blockquote class="overview">
-            <h3>Overview</h3>
-            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
-            <ul>
-            
-            <li><p>How do I run an image analysis pipeline on public data using CellProfiler?</p>
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions</strong>
+        <ul>
+        
+        <li><p>How do I run an image analysis pipeline on public data using CellProfiler?</p>
 </li>
-            
-            <li><p>How do I analyse the DNA channel of fluorescence siRNA screens?</p>
+        
+        <li><p>How do I analyse the DNA channel of fluorescence siRNA screens?</p>
 </li>
-            
-            <li><p>How do I download public image data into my history?</p>
+        
+        <li><p>How do I download public image data into my history?</p>
 </li>
-            
-            <li><p>How do I segment and label cell nuclei?</p>
+        
+        <li><p>How do I segment and label cell nuclei?</p>
 </li>
-            
-            <li><p>How do I segment nucleoli (as the absence of DNA)?</p>
+        
+        <li><p>How do I segment nucleoli (as the absence of DNA)?</p>
 </li>
-            
-            <li><p>How do I combine nuclei and nucleoli into one segmentation mask?</p>
+        
+        <li><p>How do I combine nuclei and nucleoli into one segmentation mask?</p>
 </li>
-            
-            <li><p>How do I extract the background of an image?</p>
+        
+        <li><p>How do I extract the background of an image?</p>
 </li>
-            
-            <li><p>How do I relate the nucleoli to their parent nucleus?</p>
+        
+        <li><p>How do I relate the nucleoli to their parent nucleus?</p>
 </li>
-            
-            <li><p>How do I measure the image and object features?</p>
+        
+        <li><p>How do I measure the image and object features?</p>
 </li>
-            
-            <li><p>How do I measure the image quality?</p>
+        
+        <li><p>How do I measure the image quality?</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
-            <ul>
-            
-            <li><p>How to download images from a public image repository.</p>
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+        <ul>
+        
+        <li><p>How to download images from a public image repository.</p>
 </li>
-            
-            <li><p>How to segment cell nuclei using CellProfiler in Galaxy.</p>
+        
+        <li><p>How to segment cell nuclei using CellProfiler in Galaxy.</p>
 </li>
-            
-            <li><p>How to segment cell nucleoli using CellProfiler in Galaxy.</p>
+        
+        <li><p>How to segment cell nucleoli using CellProfiler in Galaxy.</p>
 </li>
-            
-            <li><p>How to extract features for images, nuclei and nucleoli.</p>
+        
+        <li><p>How to extract features for images, nuclei and nucleoli.</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            
-            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
-            <ul>
-            
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+        <ul>
+        
     <li>
     
         
@@ -440,48 +434,47 @@
     
     </li>
 
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 4 hours</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+        <ul class="supporting_material">
             
-            </ul>
+                <li class="btn btn-default"><a href="/training-material/topics/imaging/tutorials/tutorial-CP/slides.html">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Slides
+                </a></li>
             
 
             
-            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 4 hours</div>
-            
 
             
-
-            
-            
-
-            
-            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
-            <ul>
-                <div class="supporting_material">
-                
-                    <li class="btn btn-default"><a href="/training-material/topics/imaging/tutorials/tutorial-CP/slides.html" title="Slides for this tutorial">
-                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides
-                    </a></li>
-                
-
-                
-
-                
-                    <li class="btn btn-default supporting_material">
+                <li class="btn btn-default supporting_material">
     <a class="topic-icon" href="/training-material/topics/imaging/tutorials/tutorial-CP/workflows/" title="Workflows" alt="Nucleoli segmentation and feature extraction using CellProfiler workflows">
-        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
     </a>
 
 </li>
-                
+            
 
-                
+            
 
-                
-                
-                
+            
+            
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
@@ -494,8 +487,6 @@
             </a>
         </li>
     
-    
-        
     
         
     
@@ -622,8 +613,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -663,29 +652,30 @@
 
 
 </li>
-                
-                </div>
-            </ul>
             
+        </ul>
+        
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 12, 2021 </div>
-        </blockquote>
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 12, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
-        <div class="container">
-            <div class="row">
-                <!-- sidebar, which will move to the top on a small screen -->
-                <div class="col-sm-2">
-                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
-                </div>
-                <div class="col-sm-10">
-                    <h1 class="no_toc" id="introduction">Introduction</h1>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <p>The nucleolus is a prominent structure of the nucleus of eukaryotic cells and is involved in ribosome biogenesis and cell cycle regulation. In <span class="notranslate">DNA</span> staining of cells, nucleoli can be identified as the absence of <span class="notranslate">DNA</span> in nuclei (<a href="#nucleoli">Fig. 1</a>).<br />
 Phenotypes caused by reduced gene function are widely used to elucidate gene function and image-based <span class="notranslate">RNA</span> interference (<span class="notranslate">RNA</span>i) screens are routinely used to find and characterize genes involved in a particular biological process. While screens typically focus on one biological process of interest, the molecular markers used can also inform on other processes. Re-using published screens image data can then be a cost-effective alte<span class="notranslate">rna</span>tive to performing new experiments.<br />
 In particular, regardless of the targeted biological process, many screens include a <span class="notranslate">DNA</span> label and therefore can also reveal the effect of gene knock-downs on nucleoli.</p>
 
 <p><a name="nucleoli"></a></p>
-<figure id="figure-1"><img src="../../images/tutorial-CP/img_dna_channel.png" alt="DNA channel" width="50%" /><figcaption><span class="figcaption-prefix">Figure 1:</span> <span class="notranslate">DNA</span> channel from the screen described in <a class="citation" href="#Heriche_2014">“<b>Integration of biological data by kernels on graph nodes allows prediction of new genes involved in mitotic chromosome condensation</b>” 2014</a>. The red arrows point at nucleoli.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/tutorial-CP/img_dna_channel.png" alt="DNA channel" width="50%" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> <span class="notranslate">DNA</span> channel from the screen described in <a class="citation" href="#Heriche_2014">“<b>Integration of biological data by kernels on graph nodes allows prediction of new genes involved in mitotic chromosome condensation</b>” 2014</a>. The red arrows point at nucleoli.</figcaption></figure>
 
 <p>In this tutorial, we will analyse <span class="notranslate">DNA</span> channel images of publicly available <span class="notranslate">RNA</span>i screens to extract numerical descriptors (i.e. features) of nucleoli.
 The images and associated metadata will be retrieved from the <a href="http://idr.openmicroscopy.org/" target="_blank">Image Data Resource (IDR)</a>, a repository that collects image datasets of tissues and cells.</p>
@@ -701,7 +691,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <p>3) <strong>CellProfiler</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to actually run the pipeline.</p>
 
 <p><a name="high_level_view"></a></p>
-<figure id="figure-2"><img src="../../images/tutorial-CP/wf.jpg" alt="High-level view of the workflow" /><figcaption><span class="figcaption-prefix">Figure 2:</span> High-level view of the <span class="notranslate">workflow</span></figcaption></figure>
+<figure id="figure-2"><img src="../../images/tutorial-CP/wf.jpg" alt="High-level view of the workflow" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> High-level view of the <span class="notranslate">workflow</span></figcaption></figure>
 
 <p>In this tutorial, you will learn how to create a <span class="notranslate">workflow</span> that downloads a selection of images from the IDR, and uses CellProfiler to segment the nuclei and nucleoli. You will also learn how to extract and export features at three different levels: image, nucleus, nucleolus.</p>
 
@@ -766,7 +756,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
         <p>To get the valid IDR link, go to the <a href="http://idr.openmicroscopy.org/webclient/?show=screen-102" target="_blank">dataset of interest in the IDR</a> and select in the preview of a plate a few images ((figure <a href="#IDR_interface">Fig. 3</a> - 1)). Once you see them at the bottom of the page (figure <a href="#IDR_interface">Fig. 3</a> - 2), select them again and click the link button in the top-right corner of the right panel (figure <a href="#IDR_interface">Fig. 3</a> - 3).
 <a name="IDR_interface"></a></p>
-        <figure id="figure-3"><img src="../../images/tutorial-CP/IDR_interface.jpg" alt="IDR interface" /><figcaption><span class="figcaption-prefix">Figure 3:</span> IDR interface</figcaption></figure>
+        <figure id="figure-3"><img src="../../images/tutorial-CP/IDR_interface.jpg" alt="IDR interface" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> IDR interface</figcaption></figure>
       </blockquote>
 
       <blockquote class="comment">
@@ -947,7 +937,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
 <p>From the previous tool, we got a group of objects (nuclei). Now, we want to export the segmentation masks as a single image to check how well the segmentation algorithm is performing. We also want to label the nuclei with their identifiers for future visual inspection of the results. The output of this step will look like (you will only get this image after running the whole <span class="notranslate">workflow</span>):</p>
 
-<figure id="figure-4"><img src="../../images/tutorial-CP/img_nuclei_labels.png" alt="Identified nuclei with labels" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Identified nuclei with labels.</figcaption></figure>
+<figure id="figure-4"><img src="../../images/tutorial-CP/img_nuclei_labels.png" alt="Identified nuclei with labels" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Identified nuclei with labels.</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1123,7 +1113,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
 <p>We have now one segmentation mask per image with all the nuclei detected, <code class="language-plaintext highlighter-rouge">MaskNuclei</code>, and another one for the nucleoli, <code class="language-plaintext highlighter-rouge">MaskNucleoli</code>. These are binary masks in which the background is black and the objects detected are white. We would like to check whether both segmentation steps went well. That could be achieved by combining both of them (using different colors) into one image. Here, we are converting the nucleus mask to blue and the nucleoli to magenta. The outcome that you will obtain after the execution of the <span class="notranslate">workflow</span> will look like:</p>
 
-<figure id="figure-5"><img src="../../images/tutorial-CP/img_combined_masks.png" alt="Combined mask for nuclei and nucleoli" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Combined segmentation masks for nuclei (blue) and nucleoli (magenta).</figcaption></figure>
+<figure id="figure-5"><img src="../../images/tutorial-CP/img_combined_masks.png" alt="Combined mask for nuclei and nucleoli" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Combined segmentation masks for nuclei (blue) and nucleoli (magenta).</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-convert-and-save-the-nuclei-and-nucleoli-masks"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Convert and save the nuclei and nucleoli masks</h3>
@@ -1586,37 +1576,37 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <p>In this tutorial, you have downloaded images from a public image repository into your <span class="notranslate">Galaxy</span> history. After that, you have built and run a typical image analysis pipeline, composed of segmentation of several objects and feature extraction. As an outcome, you got plenty of features to analyse! And some masks to check that the segmentation algorithms worked as expected. Now you are ready to perform your biological data analysis!</p>
 
 
-                    
-                    <blockquote class="key_points">
-                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
-                        <ul>
-                            
-                            <li><p>Galaxy workflows can download images from the IDR, selecting specific channels, time points, z-stack positions and crop the image in different ways.</p>
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Galaxy workflows can download images from the IDR, selecting specific channels, time points, z-stack positions and crop the image in different ways.</p>
 </li>
-                            
-                            <li><p>CellProfiler in Galaxy can segment and extract features of any object of interest.</p>
+                        
+                        <li><p>CellProfiler in Galaxy can segment and extract features of any object of interest.</p>
 </li>
-                            
-                            <li><p>The features and masks can be exported for further analysis.</p>
+                        
+                        <li><p>The features and masks can be exported for further analysis.</p>
 </li>
-                            
-                        </ul>
-                    </blockquote>
-                    
+                        
+                    </ul>
+                </blockquote>
+                
 
-                    <h1>Frequently Asked Questions</h1>
-                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/imaging/faqs/">FAQ page for the Imaging topic</a> to see if your question is listed there.
-                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
-                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/imaging/faqs/">FAQ page for the Imaging topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
-                    
-                    <h1 data-toc-skip>Useful literature</h1>
-                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/imaging#references">here</a>.</p>
-                    
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/imaging#references">here</a>.</p>
+                
 
-                    
-                    <h1 id="bibliography">References</h1>
-                    <ol class="bibliography"><li><span id="Heriche_2014"><b>Integration of biological data by kernels on graph nodes allows prediction of new genes involved in mitotic chromosome condensation</b>, 2014 Mol Biol Cell. 2014;25(16):2522-2536:</span>
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li><span id="Heriche_2014"><b>Integration of biological data by kernels on graph nodes allows prediction of new genes involved in mitotic chromosome condensation</b>, 2014 Mol Biol Cell. 2014;25(16):2522-2536:</span>
     
     
     <a href="https://doi.org/10.1091/mbc.E13-04-0221">10.1091/mbc.E13-04-0221</a>
@@ -1637,85 +1627,85 @@ The images and associated metadata will be retrieved from the <a href="http://id
     
 
 </li></ol>
-                    
+                
 
-                    
+                
 
-                    <h1>Feedback</h1>
-                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
-                    <div id="feedback-button">
-                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                    </div>
-                    <div id="feedback-form">
-                    </div>
-                    <script type="text/javascript">
-                        (function (window, document) {
-                            function onDocumentReady(fn) {
-                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                    fn();
-                                } else {
-                                    document.addEventListener('DOMContentLoaded', fn);
-                                }
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
                             }
+                        }
 
-                            onDocumentReady(function () {
-                                $("#feedback-button").click(function(evt){
-                                    var e = $(evt.target)
-                                    e.hide();
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
 
-                                    $("#feedback-form").html(`
-                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Nucleoli segmentation and feature extraction using CellProfiler (Imaging)">Loading...</iframe>
-                                    `)
-                                })
-                            });
-                        })(window, document);
-                    </script>
-
-
-
-                    <h1>Citing this Tutorial</h1>
-                    <p>
-                        <ol>
-                            <li id="citation-text">Beatriz Serrano-Solano, Jean-Karim Hériché, 2021 <b>Nucleoli segmentation and feature extraction using CellProfiler (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/tutorial.html">https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/tutorial.html</a> Online; accessed TODAY
-                            </li>
-                            <li>
-                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
-                            </li>
-                        </ol>
-                    </p>
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Nucleoli segmentation and feature extraction using CellProfiler (Imaging)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
 
 
-                    <blockquote class="details">
-                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
-                      <p style="display: none;">
 
-                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Beatriz Serrano-Solano, Jean-Karim Hériché, 2021 <b>Nucleoli segmentation and feature extraction using CellProfiler (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/tutorial.html">https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{imaging-tutorial-CP,
-    author = "Beatriz Serrano-Solano and Jean-Karim Hériché",
-    title = "Nucleoli segmentation and feature extraction using CellProfiler (Galaxy Training Materials)",
-    year = "2021",
-    month = "03",
-    day = "12"
-    url = "\url{https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/tutorial.html}",
-    note = "[Online; accessed TODAY]"
+author = "Beatriz Serrano-Solano and Jean-Karim Hériché",
+title = "Nucleoli segmentation and feature extraction using CellProfiler (Galaxy Training Materials)",
+year = "2021",
+month = "03",
+day = "12"
+url = "\url{https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/tutorial.html}",
+note = "[Online; accessed TODAY]"
 }
 @article{Batut_2018,
-        doi = {10.1016/j.cels.2018.05.012},
-        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
-        year = 2018,
-        month = {jun},
-        publisher = {Elsevier {BV}},
-        volume = {6},
-        number = {6},
-        pages = {752--758.e1},
-        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
-        title = {Community-Driven Data Analysis Training for Biology},
-        journal = {Cell Systems}
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
 }</code>
-                    </pre></div></div>
-                    </p>
-                    </blockquote>
+                </pre></div></div>
+                </p>
+                </blockquote>
 
 
 <script type="text/javascript">
@@ -1725,36 +1715,22 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
-                    
+                
 
-                    
+                
 
-                </div>
             </div>
         </div>
-    </section>
-</div>
-
-
-<footer>
-    <div class="container">
-        <p>
-            This material is the result of a collaborative work. Thanks to the
-            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Beatriz Serrano-Solano, Jean-Karim Hériché)!
-        </p>
-        <p>
-            Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/imaging/tutorials/tutorial-CP/tutorial.md">GitHub</a>.
-        </p>
-        <p>
-    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-</p>
     </div>
-</footer>
+</section>
+<br/>
+<br/>
+<br/>
 
+        </div>
+        
     </body>
     <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>

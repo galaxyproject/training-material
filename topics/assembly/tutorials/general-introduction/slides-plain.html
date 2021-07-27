@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>An Introduction to Genome Assembly</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="DNA sequence data has become an indispensable tool for Mo..." />
+        <meta property="og:title" content="Galaxy Training: An Introduction to Genome Assembly" />
+        <meta property="og:description" content="DNA sequence data has become an indispensable tool for Mo..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/assembly/faqs/" title="Check our FAQs for the Assembly topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/assembly/tutorials/general-introduction/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/assembly/tutorials/general-introduction/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/assembly/tutorials/general-introduction/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/assembly/tutorials/general-introduction/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/assembly/tutorials/general-introduction/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/assembly/tutorials/general-introduction/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/assembly/tutorials/general-introduction/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fassembly%2Ftutorials%2Fgeneral-introduction%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/assembly/tutorials/general-introduction/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/assembly/tutorials/general-introduction/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/assembly/tutorials/general-introduction/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/assembly/tutorials/general-introduction/slides.html">View markdown source on GitHub</a>
+	<h1>An Introduction to Genome Assembly</h1>
+		<h2>Contributors</h2>
+		Simon Gladman
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>How do we perform a very basic genome assembly from short read data?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>assemble some paired end reads using Velvet</p>
+</li>
+		
+		<li><p>examine the output of the assembly.</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 26, 2021 </div>
+
+	<hr />
+
+
+	<p>.enlarge120[</p>
+
+<h1 id="de-novo-genome-assembly"><strong><em>De novo</em> Genome Assembly</strong></h1>
+
+<p>]</p>
+
+<h4 id="with-thanks-to-t-seemann-d-bulach-i-cooke-and-simon-gladman">With thanks to T Seemann, D Bulach, I Cooke and Simon Gladman</h4>
+<hr />
+<p>.enlarge120[</p>
+
+<h1 id="de-novo-assembly"><strong><em>De novo</em> assembly</strong></h1>
+
+<p>]</p>
+
+<p>.pull-left[</p>
+
+<p><strong>The process of reconstructing the original DNA sequence from the fragment reads alone.</strong></p>
+
+<ul>
+  <li>
+    <p>Instinctively like a jigsaw puzzle</p>
+
+    <ul>
+      <li>Find reads which “fit together” (overlap)</li>
+      <li>Could be missing pieces (sequencing bias)</li>
+      <li>Some pieces will be dirty (sequencing errors)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>]</p>
+
+<p>.pull-right[ <img src="../../images/Humpty.jpg" alt="Graphic of a shattered, human-like egg sitting on a wall, dressed in a suit. Several men stand around him attempting to piece back together shattered fragments of the egg." loading="lazy" /> ]</p>
+
+<hr />
+
+<h1 id="another-view"><strong>Another View</strong></h1>
+
+<p><img src="../../images/newspaper.png" alt="A stack of newspapers is labelled genomic DNA. A line labelled points an image of a room full of shredded paper and people inside, labelled reads. Then the line continues to a pile of newspaper clippings reading draft genome sequence, and finally to closed genome sequence with a cartoon of a newspaper." loading="lazy" /></p>
+
+<hr />
+
+<h1 id="assembly-an-example"><strong>Assembly: An Example</strong></h1>
+
+<hr />
+
+<h1 id="a-small-genome"><strong>A small “genome”</strong></h1>
+
+<p>&lt;img src=”../../images/shakespear1.png” alt=”The text “Friends, romans, countrymen, lend me your ears;”. A small drawing of Shakespeare has a speech bubble reading “I’ll return them tomorrow””  loading=”lazy”&gt;</p>
+
+<hr />
+
+<h1 id="shakespearomics"><strong>Shakespearomics</strong></h1>
+
+<p>&lt;img src=”../../images/shakespear2.png” alt=”A set of reads is shown, with various subsets of the sentence like “ds, romans, count” and “friends, rom” and “crymen, lend me”. The c in crymen is highlighted yellow, as it should be trymen (from countrymen.) The drawing of Shakespeare now says “Oops! I dropped them.””  loading=”lazy”&gt;</p>
+
+<hr />
+
+<h1 id="shakespearomics-1"><strong>Shakespearomics</strong></h1>
+
+<p>&lt;img src=”../../images/shakespear3.png” alt=”The reads are shown again, now with overlaps below, reconstructing the sentence from the fragments. Shakespeare says I’m good with words. Crymen and “send me your ears” have their first letters highlighted in yellow due to their typos.”  loading=”lazy”&gt;</p>
+
+<hr />
+
+<h1 id="shakespearomics-2"><strong>Shakespearomics</strong></h1>
+
+<p>&lt;img src=”../../images/shakespear4.png” alt=”Finally a “majority consensus” is shown below the overlaps, in two other reads we saw count and countrymen, in addition to our crymen. So that makes 2/3 that have the correct text, and we go with the majority. The same is done for the other typo. Shakespeare says We have a consensus!”  loading=”lazy”&gt;</p>
+
+<hr />
+
+<h1 id="so-far-so-good"><strong>So far, so good!</strong></h1>
+
+<hr />
+
+<h1 id="the-awful-truth"><strong>The Awful Truth</strong></h1>
+
+<p><img src="../../images/notsimply.png" alt="A meme image showing boromir from lord of the rings. The text reads: one does not simply assemble a genome." loading="lazy" /></p>
+
+<h2 id="genome-assembly-is-impossible---aprof-mihai-pop">“Genome assembly is impossible.” - A/Prof. Mihai Pop</h2>
+
+<hr />
+<p>.enlarge120[</p>
+
+<h1 id="why-is-it-so-hard"><strong>Why is it so hard?</strong></h1>
+
+<p>]</p>
+
+<p>.pull-left[</p>
+<ul>
+  <li>Millions of pieces
+    <ul>
+      <li>Much, much shorter than the genome</li>
+      <li>Lots of them look similar</li>
+    </ul>
+  </li>
+  <li>Missing pieces
+    <ul>
+      <li>Some parts can’t be sequenced easily</li>
+    </ul>
+  </li>
+  <li>Dirty Pieces
+    <ul>
+      <li>Lots of errors in reads
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p>.pull-right[ &lt;img src=”../../images/worlds_hardest.png” alt=”A picture of a jigsaw puzzle titled “The world’s most difficult” and showing a field of small round candies. It boasts the same artwork on both sides.”  loading=”lazy”&gt; ]</p>
+
+<hr />
+
+<h1 id="assembly-recipe"><strong>Assembly recipe</strong></h1>
+
+<ul>
+  <li>Find all overlaps between reads
+    <ul>
+      <li>Hmm, sounds like a lot of work..</li>
+    </ul>
+  </li>
+  <li>Build a graph
+    <ul>
+      <li>A picture of the read connections</li>
+    </ul>
+  </li>
+  <li>Simplify the graph
+    <ul>
+      <li>Sequencing errors will mess it up a lot</li>
+    </ul>
+  </li>
+  <li>Traverse the graph
+    <ul>
+      <li>Trace a sensible path to produce a consensus</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<p><img src="../../images/olc_pic.png" alt="Reads are provided to the algorithm, they are in the colours of the rainbow. Next overlaps are identified and the rainbow resolves itself. A subset of that is highlighted and points to reads connected by overlaps with many arrows going between the bluegreen fragments that are highlighted. This goes to the hamiltonian path identified with a re-run arrow between, indicating some mount of backtracking needed to find the best path. Finally the hamiltonian produces a consensus sequence with the correct final ordering." loading="lazy" /></p>
+
+<hr />
+
+<h1 id="a-more-realistic-graph"><strong>A more realistic graph</strong></h1>
+
+<p><img src="../../images/real_graph.png" alt="A graph showing maybe 500 nodes connected with messy lines, it is intentionally impossible to read and a mess to highlight the scope of the problem." loading="lazy" /></p>
+
+<hr />
+
+<h1 id="image-15-what-ruins-the-graph">.image-15[<img src="../../images/nofun.png" alt="fun with a strike through it." loading="lazy" />] <strong>What ruins the graph?</strong></h1>
+
+<ul>
+  <li>Read errors
+    <ul>
+      <li>Introduces false edges and nodes</li>
+    </ul>
+  </li>
+  <li>Non haploid organisms
+    <ul>
+      <li>Heterozygosity causes lots of detours</li>
+    </ul>
+  </li>
+  <li>Repeats
+    <ul>
+      <li>If they are longer than the read length</li>
+      <li>Causes nodes to be shared, locality confusion.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="repeats"><strong>Repeats</strong></h1>
+
+<hr />
+<p>.enlarge120[</p>
+<h1 id="what-is-a-repeat"><strong>What is a repeat?</strong></h1>
+<p>]</p>
+
+<p>.pull-left[</p>
+
+<h4 id="a-segment-of-dna-which-occurs-more-than-once-in-the-genome-sequence"><strong><em>A segment of DNA which occurs more than once in the genome sequence</em></strong></h4>
+
+<ul>
+  <li>Very common
+    <ul>
+      <li>Transposons (self replicating genes)</li>
+      <li>Satellites (repetitive adjacent patterns)</li>
+      <li>Gene duplications (paralogs)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>]</p>
+
+<p>.pull-right[</p>
+
+<p><img src="../../images/triplets.png" alt="Three human children wearing similar shirts. One reads I was planned, one I was not, and the third Me neither." loading="lazy" /></p>
+
+<p>]</p>
+
+<hr />
+
+<h1 id="effect-on-assembly"><strong>Effect on Assembly</strong></h1>
+
+<p><img src="../../images/repeat_effect.png" alt="A genome with a repeat in two distinct locations is shown. Arrows point to the repeats being collapsed, and then the in-between bits being cut out of the sequence completely." loading="lazy" /></p>
+
+<hr />
+<p>.enlarge120[</p>
+<h1 id="the-law-of-repeats-image-15"><strong>The law of repeats</strong> .image-15[<img src="../../images/repeatafterme.png" alt="A picture of the ocean with text reading repeat after me." loading="lazy" />]</h1>
+<p>]</p>
+
+<h2 id="it-is-impossible-to-resolve-repeats-of-length-s-unless-you-have-reads-longer-than-s"><strong>It is impossible to resolve repeats of length S unless you have reads longer than S</strong></h2>
+
+<h2 id="it-is-impossible-to-resolve-repeats-of-length-s-unless-you-have-reads-longer-than-s-1"><strong>It is impossible to resolve repeats of length S unless you have reads longer than S</strong></h2>
+
+<hr />
+
+<h1 id="scaffolding"><strong>Scaffolding</strong></h1>
+
+<hr />
+<p>.enlarge120[</p>
+<h1 id="beyond-contigs"><strong>Beyond contigs</strong></h1>
+<p>]</p>
+
+<p>.pull-left[</p>
+
+<p>Contig sizes are limited by:</p>
+
+<ul>
+  <li>the length of the repeats in your genome
+    <ul>
+      <li>Can’t change this</li>
+    </ul>
+  </li>
+  <li>the length (or “span”) of the reads
+    <ul>
+      <li>Use long read technology</li>
+      <li>Use tricks with other technology</li>
+    </ul>
+  </li>
+</ul>
+
+<p>]</p>
+
+<hr />
+<p>.enlarge120[</p>
+<h1 id="types-of-reads"><strong>Types of reads</strong></h1>
+<p>]</p>
+
+<p>.pull-left[.enlarge120[<strong>Example fragment</strong>]]</p>
+
+<p>.remark-code[.enlarge120[atcgtatgatcttgagattctctcttcccttatagctgctata]]</p>
+
+<p>.pull-left[.enlarge120[<strong>“Single-end” read</strong>]]</p>
+
+<p>.remark-code[.enlarge120[<strong>atcgtatg</strong>atcttgagattctctcttcccttatagctgctata]]</p>
+
+<p>sequence <em>one</em> end of the fragment</p>
+
+<p>.pull-left[.enlarge120[<strong>“Paired-end” read</strong>]]</p>
+
+<p>.remark-code[.enlarge120[<strong>atcgtatg</strong>atcttgagattctctcttcccttatag<strong>ctgctata</strong>]]</p>
+
+<p>sequence both ends of the same fragment</p>
+
+<h2 id="we-can-exploit-this-information"><strong>We can exploit this information!</strong></h2>
+
+<p>.enlarge120[# <strong>Scaffolding</strong>]</p>
+
+<ul>
+  <li><strong>Paired end reads</strong>
+    <ul>
+      <li>Known sequences at each end of fragment</li>
+      <li>Roughly known fragment length</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Most ends will occur in same contig</strong></p>
+  </li>
+  <li><strong>Some will occur in different contigs</strong>
+    <ul>
+      <li>
+        <h2 id="evidence-that-these-contigs-are-linked"><strong><em>evidence that these contigs are linked</em></strong></h2>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>.enlarge120[# <strong>Contigs to Scaffolds</strong>]</p>
+
+<p><img src="../../images/scaffolding.png" alt="A scaffold with gaps as yellow boxes is shown. Above is a set of contigs and paired-end reads shown bridging the gaps." loading="lazy" /></p>
+
+<hr />
+
+<p>.enlarge120[# <strong>Assessing assemblies</strong>]</p>
+
+<ul>
+  <li>We desire
+    <ul>
+      <li>Total length similar to genome size</li>
+      <li>Fewer, larger contigs</li>
+      <li>Correct contigs</li>
+    </ul>
+  </li>
+  <li>Metrics
+    <ul>
+      <li>No generally useful measure. (No real prior information)</li>
+      <li>Longest contigs, total base pairs in contigs, <strong>N50</strong>, …</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<p>.enlarge120[# <strong>The “N50”</strong>]</p>
+
+<p>.enlarge120[<strong><em>The length of that contig from which 50% of the bases are in it and shorter contigs</em></strong>]</p>
+
+<ul>
+  <li>Imagine we have 7 contigs with lengths:
+    <ul>
+      <li>1, 1, 3, 5, 8, 12, 20</li>
+    </ul>
+  </li>
+  <li>Total
+    <ul>
+      <li>1+1+3+5+8+12+20 = 50</li>
+    </ul>
+  </li>
+  <li>N50 is the “halfway sum” = 25
+    <ul>
+      <li>1+1+3+5+8+<strong>12</strong> = 30 (&gt;25) so <strong>N50 is 12</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<p>.enlarge120[# <strong>2 levels of assembly</strong>]</p>
+
+<ul>
+  <li>Draft assembly
+    <ul>
+      <li>Will contain a number of non-linked scaffolds with gaps of unknown sequence</li>
+      <li>Fairly easy to get to</li>
+    </ul>
+  </li>
+  <li>Closed (finished) assembly
+    <ul>
+      <li>One sequence for each chromosome</li>
+      <li>Takes a <strong>lot</strong> more work</li>
+      <li>Small genomes are becoming easier with long read tech</li>
+      <li>Large genomes are the province of big consortia (e.g. Human Genome Consortium)</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<p>.enlarge120[# <strong>How do I do it?</strong>]
+—
+.enlarge120[</p>
+<h1 id="example"><strong>Example</strong></h1>
+
+<ul>
+  <li>
+    <p>Culture your bacterium</p>
+  </li>
+  <li>
+    <p>Extract your genomic DNA</p>
+  </li>
+  <li>Send it to your sequencing centre for Illumina sequencing
+    <ul>
+      <li>250bp paired end</li>
+    </ul>
+  </li>
+  <li>Get back 2 files
+    <ul>
+      <li>.remark-code[MRSA_R1.fastq.gz]</li>
+      <li>.remark-code[MRSA_R2.fastq.gz]</li>
+    </ul>
+  </li>
+  <li><strong><em>Now what?</em></strong>
+]</li>
+</ul>
+
+<hr />
+<p>.enlarge120[# <strong>Assembly tools</strong></p>
+
+<ul>
+  <li><strong>Genome</strong>
+    <ul>
+      <li><strong>Velvet, Velvet Optimizer, Spades,</strong> Abyss, MIRA, Newbler, SGA, AllPaths, Ray, SOAPdenovo, …</li>
+    </ul>
+  </li>
+  <li>Meta-genome
+    <ul>
+      <li>Meta Velvet, SGA, custom scripts + above</li>
+    </ul>
+  </li>
+  <li>Transcriptome
+    <ul>
+      <li>Trinity, Oases, Trans-abyss</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong><em>And many, many others…</em></strong></p>
+
+<p>]</p>
+
+<hr />
+<p>.enlarge120[</p>
+<h1 id="assembly-exercise-1"><strong>Assembly Exercise #1</strong></h1>
+
+<ul>
+  <li>We will do a simple assembly using <strong>Velvet</strong> in <strong>Galaxy</strong></li>
+  <li>We can do a number of different assemblies and compare some assembly metrics.</li>
+</ul>
+
+<p>]</p>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>We assembled some Illumina fastq reads into contigs using a short read assembler called Velvet</li>
+
+<li>We showed what effect one of the key assembly parameters, the k-mer size, has on the assembly</li>
+
+<li>It looks as though there are some exploitable patterns in the metric data vs the k-mer size.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

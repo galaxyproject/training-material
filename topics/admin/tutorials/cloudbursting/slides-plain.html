@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy on the Cloud</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Galaxy on the Cloud" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/cloudbursting/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/cloudbursting/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/cloudbursting/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/cloudbursting/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/cloudbursting/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/cloudbursting/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/cloudbursting/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fcloudbursting%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/admin/tutorials/cloudbursting/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/admin/tutorials/cloudbursting/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/admin/tutorials/cloudbursting/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/admin/tutorials/cloudbursting/slides.html">View markdown source on GitHub</a>
+	<h1>Galaxy on the Cloud</h1>
+		<h2>Contributors</h2>
+		Simon Gladman
+
+		
+
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 26, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="all-these-clouds">All these Clouds</h1>
+<h2 id="its-positively-meterological">It’s positively meterological..</h2>
+
+<hr />
+
+<h1 id="overview">Overview</h1>
+
+<p>.large[</p>
+<ul>
+  <li>Galaxy in the Clouds?</li>
+  <li>AWS and other Clouds</li>
+  <li>CloudMan and CloudLaunch (&amp; cloud agnosticisim)</li>
+  <li>Genomics Virtual Lab</li>
+  <li>Architecture</li>
+  <li>Persistence</li>
+  <li>Integration with the cloud: CloudBridge
+]</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<hr />
+
+<h1 id="help">Help!</h1>
+
+<p>.large[</p>
+<ul>
+  <li>Galaxy server flat out?</li>
+  <li>Queue longer than a Grateful Dead concert?</li>
+  <li>An urgent job to run?</li>
+</ul>
+
+<p>What do you do now?
+]</p>
+
+<hr />
+
+<h1 id="help-1">Help!</h1>
+
+<p>.large[</p>
+<ul>
+  <li>Galaxy server flat out?</li>
+  <li>Queue longer than a Grateful Dead concert?</li>
+  <li>An urgent job to run?</li>
+</ul>
+
+<p>What do you do now?</p>
+
+<p>.special[Use the cloud man!]
+]
+.center[<img src="../../images/cloudman_logo.png" alt="cloudman" loading="lazy" />]</p>
+
+<hr />
+
+<h1 id="clouds">Clouds?</h1>
+
+<p><strong>Cloud computing</strong> … is a model for enabling ubiquitous, <strong>on-demand</strong> access to a <strong>shared pool</strong> of configurable <strong>computing resources</strong> … which can be <strong>rapidly provisioned and released</strong> with minimal management effort. Cloud computing and storage … may be located far from the user – ranging in distance from <strong>across a city to across the world.</strong> - Wikipedia, Cloud Computing.</p>
+
+<p>.center[<img src="../../images/aws_logo.png" alt="Amazon Web Services" loading="lazy" /> <img src="../../images/OpenStack-logo.png" alt="OpenStack" loading="lazy" />
+<br /> <img src="../../images/gce-logo.png" alt="Google Cloud" loading="lazy" /> <img src="../../images/Microsoft_Azure_Logo.svg" alt="Microsoft Azure" loading="lazy" />]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>On demand, free or paid, transient, NOT meant to be persistent, turn off when you don’t need them.</p>
+
+<hr />
+
+<h1 id="available-clouds">Available Clouds</h1>
+
+<p>.large[</p>
+<ul>
+  <li>Commercial: Amazon Web Services, Google Compute Engine, Microsoft Azure
+    <ul>
+      <li>Pay-per-time/machine etc.</li>
+      <li>Reasonably priced, but keep an eye on the costs</li>
+      <li>Large range of machine (i.e., instance) types</li>
+      <li>Education grants</li>
+    </ul>
+  </li>
+  <li>Academic:
+    <ul>
+      <li>OpenStack: open source community project</li>
+      <li>NeCTAR in Australia, Jetstream in USA, CLIMB in UK, lots of others</li>
+      <li>Some free for researchers (NeCTAR, CLIMB), some with project grants (Jetstream)
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Really want to monitor how much you’re using these in order to minimize costs. They do give out edu grants and Galaxy has received large ones at GCCs.</p>
+
+<p>Aussie one is free, same in UK, Jetstream you need to obtain credits through a granting agency</p>
+
+<hr />
+
+<h1 id="why-clouds">Why Clouds?</h1>
+
+<p>.large[</p>
+<ul>
+  <li>Elastic compute!
+    <ul>
+      <li>Can dynamically resource analyses</li>
+    </ul>
+  </li>
+  <li>No need to maintain the hardware
+    <ul>
+      <li>Provider takes on cost of hardware and maintenance</li>
+      <li>Cost is shared between all users</li>
+    </ul>
+  </li>
+  <li>Move the compute to the data
+    <ul>
+      <li>Data on East Coast?</li>
+      <li>Start compute there. Save on data transfer.
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Have a course, suddenly 150 people show up and are flooding the normal queue,
+expecting to run jobs in workshops and not sit in queue for 2 days since they
+won’t be here tomorrow. Cloud is a great way to instantly provide resources.</p>
+
+<p>EU does Training Infrastructure as a Service and spins up cloud resources
+whenever they need.</p>
+
+<p>Don’t have to purchase + maintain hardware, which is great. Uploading data can be difficult.</p>
+
+<hr />
+
+<h1 id="galaxy-on-the-cloud">Galaxy on the Cloud</h1>
+
+<p>.large[</p>
+<ul>
+  <li>There are cloud images (VM blueprints) available
+    <ul>
+      <li>with Galaxy pre-installed</li>
+      <li>with different sets of tools installed</li>
+      <li>with access to reference data</li>
+      <li>for different clouds (AWS globally, Jetstream, NeCTAR, CLIMB etc.)</li>
+    </ul>
+  </li>
+  <li>You just need credentials for the cloud you want to “launch” on.
+    <ul>
+      <li>Credentials are generally strings</li>
+      <li>An access key and a secret key or username and password with project details</li>
+      <li>They are obtained from the cloud account admin page you want to use
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The GVL image has CVMFS pre-installed, same for other Galaxy images, basically ready to go. Provide cloud credentials to CloudLaunch and it will manage Galaxy on your behalf</p>
+
+<hr />
+
+<h1 id="cloudlaunch">CloudLaunch</h1>
+
+<p>.large[</p>
+<ul>
+  <li>CloudLaunch is a system for launching Galaxy (and other applications) on cloud resources
+    <ul>
+      <li>Public server available at <a href="https://launch.usegalaxy.org">launch.usegalaxy.org</a></li>
+      <li>You can also install and run your own</li>
+      <li>Fill in the credential details, choose a location and machine size</li>
+      <li>Press go!</li>
+    </ul>
+  </li>
+  <li>CloudLaunch will now provision you a computer in the cloud with Galaxy installed and ready to go.
+    <ul>
+      <li>Depending on your choices and availability you will also have access to reference data and various tools</li>
+      <li>It should only take 2-3 minutes for everything to be set up.
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>How do you get more cloud resources? Obtain resources from provider and then use CloudLaunch</p>
+
+<hr />
+
+<h1 id="launch-demo">Launch Demo</h1>
+
+<p>.large[
+<strong>End-user</strong> perspective</p>
+<ul>
+  <li>Create your own machine with Galaxy in the cloud</li>
+</ul>
+
+<p>https://launch.usegalaxy.org/
+]</p>
+
+<hr />
+
+<h1 id="cloud-manager">Cloud Manager</h1>
+
+<p>.center[<img src="../../images/cloudman_logo.png" alt="cloudman logo, a small puffy white man with a yellow tie." loading="lazy" />]</p>
+
+<p>.large[</p>
+<ul>
+  <li>Cloud manager: middleware to control cloud clusters</li>
+  <li>Can be used to control system and application services, such as Galaxy</li>
+  <li>Can mount filesystems, dynamically add/remove worker nodes, start/stop services
+]</li>
+</ul>
+
+<hr />
+
+<h1 id="cloudman">CloudMan</h1>
+
+<p>.center[.reduce80[<img src="../../images/cloudman-main.png" alt="cloudman admin interface showing a cluster and controls. Three squares are green indicating worker nodes." loading="lazy" />]]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The green are worker nodes</p>
+
+<hr />
+
+<h1 id="cloudman-admin">CloudMan Admin</h1>
+
+<p>.center[.reduce80[<img src="../../images/cloudman-admin.png" alt="cloudman admin interface showing a list of services which can be started or stopped and their state, like galaxy is running and pulsar is unstarted." loading="lazy" />]]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Can start NGINX, Galaxy, Pulsar, etc.</p>
+
+<hr />
+
+<h1 id="cluster-on-the-cloud">Cluster on the Cloud?</h1>
+
+<p>.large[</p>
+<ul>
+  <li>Your CloudMan instance is a single machine
+    <ul>
+      <li>It is the “Head node” of a cluster</li>
+    </ul>
+  </li>
+  <li>CloudMan can start “worker” nodes.
+    <ul>
+      <li>More cloud instances (of any size)</li>
+      <li>Automatically connects to file system</li>
+      <li>Are registered in Slurm setup</li>
+      <li>A node will take ~2-3 minutes to start and configure.
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="auto-scaling">Auto-Scaling</h1>
+
+<p>.large[</p>
+<ul>
+  <li>Can set up dynamic scaling to respond to the system load
+    <ul>
+      <li>Upper and lower node numbers</li>
+      <li>When queue is full and jobs wait certain time, new nodes are launched.
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p>.center[.reduce60[<img src="../../images/cloudman-scaling.png" alt="Screenshot of cloudman autoscaling configuration with a minimum and maximum number of worker nodes to maintain." loading="lazy" />]]</p>
+
+<hr />
+
+<h1 id="cloudman-galaxy">CloudMan Galaxy</h1>
+
+<p>.large[</p>
+<ul>
+  <li>Your Galaxy server is set up and ready to go!
+    <ul>
+      <li>Includes large list of pre-installed tools.</li>
+      <li>Includes access to reference data files</li>
+      <li>Zero-to-go in less than 10 minutes.</li>
+    </ul>
+  </li>
+  <li>Toolsets and reference sets can be tailored to suit needs
+    <ul>
+      <li>Will be discussed in architecture section
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="cloudman-galaxy-1">CloudMan Galaxy</h1>
+
+<p>.pull-left[
+.reduce85[<img src="../../images/Cloudman-tools.png" alt="A toolbox showing some common tools" loading="lazy" />]
+]
+.pull-right[
+<img src="../../images/reference_data.png" alt="A tool interface showing many datasets provided by cvmfs and the reference data from Galaxy." loading="lazy" />
+]</p>
+
+<hr />
+
+<h1 id="cloudman-galaxy-2">CloudMan Galaxy</h1>
+
+<ul>
+  <li>Configured for Slurm out of the box
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+  <span class="nt">&lt;destinations</span> <span class="na">default=</span><span class="s">"default_dynamic_job_wrapper"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"slurm_cluster"</span> <span class="na">runner=</span><span class="s">"slurm"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"slurm_4slots"</span> <span class="na">runner=</span><span class="s">"slurm"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"nativeSpecification"</span><span class="nt">&gt;</span>--ntasks=4<span class="nt">&lt;/param&gt;</span>
+      <span class="nt">&lt;/destination&gt;</span>
+      <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"default_dynamic_job_wrapper"</span> <span class="na">runner=</span><span class="s">"dynamic"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"type"</span><span class="nt">&gt;</span>python<span class="nt">&lt;/param&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"function"</span><span class="nt">&gt;</span>default_dynamic_job_wrapper<span class="nt">&lt;/param&gt;</span>
+      <span class="nt">&lt;/destination&gt;</span>
+  ...
+  <span class="nt">&lt;/destinations&gt;</span>
+  <span class="nt">&lt;tools&gt;</span>
+      <span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.3.1"</span> <span class="na">destination=</span><span class="s">"slurm_4slots"</span> <span class="nt">/&gt;</span>
+...
+</code></pre></div>    </div>
+    <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># COMPUTE NODES
+</span><span class="py">NodeName</span><span class="p">=</span><span class="s">master NodeAddr=45.113.232.91 CPUs=15 RealMemory=64431 Weight=10 State=UNKNOWN</span>
+<span class="py">NodeName</span><span class="p">=</span><span class="s">w1 NodeAddr=45.113.232.83 CPUs=16 RealMemory=64431 Weight=5 State=UNKNOWN</span>
+<span class="py">NodeName</span><span class="p">=</span><span class="s">w2 NodeAddr=45.113.232.92 CPUs=8 RealMemory=32176 Weight=5 State=UNKNOWN</span>
+<span class="py">NodeName</span><span class="p">=</span><span class="s">w3 NodeAddr=45.113.232.93 CPUs=8 RealMemory=32176 Weight=5 State=UNKNOWN</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="persistence">Persistence</h1>
+
+<p>.large[</p>
+<ul>
+  <li>Cloud instances are typically transient
+    <ul>
+      <li>Can be terminated and resources returned to the pool</li>
+    </ul>
+  </li>
+  <li>However, user data and cluster configuration can be persisted
+    <ul>
+      <li>Then can be attached to new instance when they start</li>
+    </ul>
+  </li>
+  <li>CloudMan stores an instance’s set up in an object store container for persistence
+]</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<hr />
+
+<h1 id="looking-to-the-future">Looking to the future</h1>
+<p>.large[</p>
+<ul>
+  <li>Cloudlaunch has a Pulsar appliance</li>
+  <li>As of Galaxy version 19.01
+    <ul>
+      <li>You can make dynamic rules to look for your pulsar appliances in the cloud</li>
+      <li>Automatically connect to them</li>
+      <li>Send jobs to them
+]</li>
+    </ul>
+  </li>
+</ul>
+
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+
+<img src="/training-material/assets/images/gat.png" alt="page logo" style="height: 100px;"/>
+
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

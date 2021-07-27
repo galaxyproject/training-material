@@ -1,0 +1,1051 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>uWSGI</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: uWSGI" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/uwsgi/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/uwsgi/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/uwsgi/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/uwsgi/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/uwsgi/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/uwsgi/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/uwsgi/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fuwsgi%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/admin/tutorials/uwsgi/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/admin/tutorials/uwsgi/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/admin/tutorials/uwsgi/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/admin/tutorials/uwsgi/slides.html">View markdown source on GitHub</a>
+	<h1>uWSGI</h1>
+		<h2>Contributors</h2>
+		Nate Coraor, Simon Gladman
+
+		
+
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 6, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="what-is-uwsgi">What is uWSGI?</h1>
+
+<ul>
+  <li>Python WSGI (Web Server Gateway Interface) application framework</li>
+  <li>Written in C</li>
+  <li>Forking application server</li>
+  <li>Optional HTTP server</li>
+  <li>Process manager</li>
+</ul>
+
+<p>…and the rest of the kitchen sink</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>What is uWSGI?</li>
+  <li>It’s a framework for writting web applications.</li>
+  <li>uWSGI itself is written in C, but can run programs in different languages with a compatible interface.</li>
+  <li>It handles a lot of the scaling issues for us.</li>
+</ul>
+
+<hr />
+
+<h1 id="why-do-we-need-uwsgi">Why do we need uWSGI?</h1>
+
+<ul>
+  <li>Galaxy is a Python web application without a web server</li>
+  <li>Implements standard Python WSGI</li>
+  <li>Some other application does the web serving</li>
+  <li>Technically we could use any HTTP/WSGI interface
+    <ul>
+      <li>Traditionally <a href="https://github.com/cdent/paste/">Python Paste</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>We need uWSGI because Galaxy doesn’t include a web server.</li>
+  <li>So Galaxy implements the standard Python WSGI interface.</li>
+  <li>And another application can handle the web serving.</li>
+</ul>
+
+<hr />
+
+<h1 id="what-is-uwsgi-used-for">What is uWSGI used for?</h1>
+
+<p>.left[In a production Galaxy server:]</p>
+<ul>
+  <li>To start, manage, and scale web workers</li>
+  <li>Optionally, to start, manage, and scale job handlers</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Galaxy uses uWSGI to start, manage, and scale web workers.</li>
+  <li>Additionally it can be used for web-less job handlers if you use that setup.</li>
+</ul>
+
+<hr />
+
+<h1 id="why-uwsgi">Why uWSGI?</h1>
+
+<p>Because Python can’t multithread.</p>
+
+<p><img src="../../images/gil.png" alt="Python GIL" loading="lazy" /></p>
+
+<p>.footnote[Image credit: <a href="http://www.tivix.com/blog/lets-go-python/">Dariusz Fryta</a>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Python cannot do multithreading due to the GIL or Global Interpreter Lock.</li>
+  <li>However, python is multiprocess capable.</li>
+  <li>uWSGI will provide our scalability.</li>
+</ul>
+
+<hr />
+
+<h1 id="why-uwsgi-1">Why uWSGI?</h1>
+
+<ul>
+  <li>Fork many Galaxy server processes</li>
+  <li>Isolate job functions from web functions</li>
+  <li>Built in load balancing</li>
+  <li>Speak native high performance uWSGI protocol to nginx</li>
+  <li>Uninterrupted restarting</li>
+  <li>Can do anything you can imagine: <a href="http://uwsgi-docs.readthedocs.io/en/latest/Options.html">uWSGI configuration options</a></li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>uWSGI can fork as many Galaxy processes as we need.</li>
+  <li>Then it provides some built in load balancing with mules or zerg-mode.</li>
+  <li>It has a high-performance protocol that nginx and apache both speak, for more efficiency.</li>
+  <li>uWSGI enables uninterrupted restarts, which users love.</li>
+</ul>
+
+<hr />
+
+<h2 id="uwsgi">uWSGI</h2>
+
+<ul>
+  <li><strong>Configuration</strong></li>
+  <li>uWSGI wheel</li>
+  <li>Job handler mules</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>There are three main sections we’ll cover: Configuration, wheels, and mules.</li>
+  <li>First, configuration.</li>
+</ul>
+
+<hr />
+
+<h2 id="uwsgi-configuration-file">uWSGI Configuration File</h2>
+
+<p>uWSGI configuration is performed in the <code class="language-plaintext highlighter-rouge">uwsgi</code> key of <code class="language-plaintext highlighter-rouge">galaxy.yml</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">galaxy.yml.sample</code> is never consulted.</p>
+
+<p>.left[If using <code class="language-plaintext highlighter-rouge">run.sh</code>:]</p>
+<ul>
+  <li>If no config exists, all necessary defaults are generated as command line arguments to uWSGI</li>
+  <li>If a config exists, it is parsed, and any missing required options are passed as command line arguments to uWSGI</li>
+</ul>
+
+<p><strong>Galaxy servers deployed with Ansible do not use <code class="language-plaintext highlighter-rouge">run.sh</code> and should fully specify their uWSGI configuration.</strong></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>uWSGI configuration is done in the uWSGI block of the galaxy yaml file.</li>
+  <li>The run shell script is not used in production, but has convenient behaviour for those users.</li>
+</ul>
+
+<hr />
+
+<h2 id="uwsgi-default-command-line">uWSGI default command line</h2>
+
+<p>Without a config file, the uWSGI command line is:</p>
+
+<pre><code class="language-sh-session">$ /home/nate/galaxy/.venv/bin/python3 .venv/bin/uwsgi \
+    --module 'galaxy.webapps.galaxy.buildapp:uwsgi_app()' \
+    --virtualenv /home/nate/galaxy/.venv --pythonpath lib \
+    --threads 4 --http localhost:8080 \
+    --static-map /static=/home/nate/galaxy/static --die-on-term \
+    --hook-master-start 'unix_signal:2 gracefully_kill_them_all' \
+    --hook-master-start 'unix_signal:15 gracefully_kill_them_all' \
+    --enable-threads --py-call-osafterfork
+</code></pre>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The default uWSGI command line is quite complex with numerous arguments.</li>
+  <li>It must specify a module to load and a function to run.</li>
+  <li>A python path and virtualenv are loaded as well.</li>
+  <li>A number of threads is specified and an HTTP port on which to listen.</li>
+  <li>Static files required special mapping and some signal handling to ensure cleanup.</li>
+</ul>
+
+<hr />
+
+<h2 id="uwsgi-command-line">uWSGI command line</h2>
+
+<p>.left[Behind the scenes, <code class="language-plaintext highlighter-rouge">run.sh</code> calls <code class="language-plaintext highlighter-rouge">scripts/get_uwsgi_args.py</code>, which:]</p>
+<ul>
+  <li>locates your config file (if any),</li>
+  <li>parses it to determine whether you have set any of the default (or conflicting) options,</li>
+  <li>determines the flags needed to run Galaxy.</li>
+</ul>
+
+<p>You can take “full control” over this process by skipping <code class="language-plaintext highlighter-rouge">run.sh</code> and simply calling <code class="language-plaintext highlighter-rouge">uwsgi</code> directly, e.g. <code class="language-plaintext highlighter-rouge">uwsgi --yaml config/galaxy.yml</code>.</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>If you’re using run.sh, it calls a python script to determine the command line.</li>
+  <li>With Ansible this configuration is written in the galaxy yaml file.</li>
+</ul>
+
+<hr />
+
+<h1 id="uwsgi-communication">uWSGI communication</h1>
+
+<ul>
+  <li>uWSGI can serve HTTP directly using the <code class="language-plaintext highlighter-rouge">--http</code> option</li>
+  <li>uWSGI speaks a native protocol (which nginx also speaks) using <code class="language-plaintext highlighter-rouge">--socket</code></li>
+</ul>
+
+<p>A proxy server is not <em>required,</em> but its use is strongly encouraged for performance reasons.</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>uWSGI can speak either HTTP or it’s own native protocol.</li>
+  <li>While a proxy server is not required, it is strongly encouraged.</li>
+  <li>It can use this more efficient uWSGI protocol and provide additional performance.</li>
+  <li>A proxy server can proxy static files, freeing uWSGI to focus on computation.</li>
+</ul>
+
+<hr />
+
+<h2 id="yaml-config">YAML config</h2>
+
+<p>uWSGI natively supports YAML configs (and INI, and PasteDeploy INI, and XML, and JSON, and …)</p>
+
+<p><strong>WARNING:</strong> “uWSGI YAML” is not real YAML!</p>
+
+<p>.pull-left[
+Real YAML</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">uwsgi</span><span class="pi">:</span>
+    <span class="c1"># quoting forces string</span>
+    <span class="na">socket</span><span class="pi">:</span> <span class="s1">'</span><span class="s">127.0.0.1:8001'</span>
+    <span class="c1"># proper YAML list</span>
+    <span class="na">mule</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">lib/galaxy/main.py</span>
+      <span class="pi">-</span> <span class="s">lib/galaxy/main.py</span>
+</code></pre></div></div>
+<p>]</p>
+
+<p>.pull-right[
+uWSGI “YAML”</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">uwsgi</span><span class="pi">:</span>
+    <span class="c1"># quote chars read literally</span>
+    <span class="na">socket</span><span class="pi">:</span> <span class="s1">'</span><span class="s">127.0.0.1:8001'</span>
+    <span class="c1"># a uWSGI YAML "list":</span>
+    <span class="c1">#  repeat keys</span>
+    <span class="na">mule</span><span class="pi">:</span> <span class="s">lib/galaxy/main.py</span>
+    <span class="na">mule</span><span class="pi">:</span> <span class="s">lib/galaxy/main.py</span>
+</code></pre></div></div>
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>uWSGI natively supports YAML configuration as well as a number of other formats.</li>
+  <li>However, uWSGI’s YAML is not the same as real YAML.</li>
+  <li>It uses repeated keys for lists.</li>
+</ul>
+
+<hr />
+
+<h2 id="yaml-config-1">YAML config</h2>
+
+<ul>
+  <li>“uWSGI YAML” only applies to the <code class="language-plaintext highlighter-rouge">uwsgi</code> section of <code class="language-plaintext highlighter-rouge">galaxy.yml</code>
+    <ul>
+      <li>The <code class="language-plaintext highlighter-rouge">galaxy</code> section must use real YAML</li>
+    </ul>
+  </li>
+  <li>uWSGI can be compiled against libyaml for real YAML support</li>
+  <li>Galaxy Ansible role can write <em>both</em> uWSGI (default), real YAML</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>As a result of this uWSGI flavour of YAML, both are mixed in the Galaxy configuration file.</li>
+  <li>The Galaxy section must use proper YAML.</li>
+  <li>But not to worry! Ansible takes care of this dual-language configuration.</li>
+  <li>And you never have to worry about it.</li>
+</ul>
+
+<hr />
+
+<h2 id="configuration-schema">Configuration Schema</h2>
+
+<p>.center[<code class="language-plaintext highlighter-rouge">[config_schema.yml][config-schema]</code> contains possible options <strong>and their types</strong>.]</p>
+
+<p>.left[config_schema.yml is the canonical source for config option documentation, from which:]</p>
+<ul>
+  <li>.left[<code class="language-plaintext highlighter-rouge">[galaxy.yml.sample][config-sample]</code> is generated]</li>
+  <li><a href="https://docs.galaxyproject.org/en/master/admin/config.html">Galaxy configuration options documentation</a> is generated</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Galaxy has a listing of every configuration option in the config_schema file.</li>
+  <li>This is used to generate the sample file and the documentation.</li>
+</ul>
+
+<hr />
+
+<h2 id="uwsgi-1">uWSGI</h2>
+
+<ul>
+  <li>Configuration</li>
+  <li><strong>uWSGI wheel</strong></li>
+  <li>Job handler mules</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The next main aspect of uWSGI is distribution, or wheels.</li>
+</ul>
+
+<hr />
+
+<h2 id="uwsgi-wheel">uWSGI Wheel</h2>
+
+<p>Galaxy’s uWSGI is not built like standard <code class="language-plaintext highlighter-rouge">pip install uwsgi</code></p>
+
+<p>A bit of technical minutiae that might help debugging</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Galaxy’s uWSGI is not a standard package.</li>
+  <li>This is minutiae but it might help whenever you need to debug uWSGI issues.</li>
+</ul>
+
+<hr />
+
+<h2 id="uwsgi-wheel-1">uWSGI Wheel</h2>
+
+<ul>
+  <li>The challenge:
+    <ul>
+      <li>Unlike Galaxy’s other framework dependencies, uWSGI is not a Python library</li>
+      <li>uWSGI embeds the CPython interpreter</li>
+      <li>Essentially uWSGI <em>is</em> Galaxy’s CPython</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>At the beginning we discussed it was a C program, uWSGI is not a python library.</li>
+  <li>So uWSGI embeds the CPython interpreter.</li>
+</ul>
+
+<p>–</p>
+
+<ul>
+  <li>The goal: Provide a no-compilation-required, no-dependencies installation method for Galaxy that includes uWSGI that:
+    <ul>
+      <li>Doesn’t embed statically linked CPython</li>
+      <li>Doesn’t require system <code class="language-plaintext highlighter-rouge">libpythonX.Y.so</code></li>
+      <li>Uses system CPython</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>There are good reasons for this odd setup.</li>
+  <li>Our goal was to provide a compilation and dependency free method for installation.</li>
+  <li>Additionally it should not require system python libraries.</li>
+</ul>
+
+<hr />
+
+<h2 id="uwsgi-wheel-2">uWSGI Wheel</h2>
+
+<p>The uWSGI wheel is built differently than when built from source with</p>
+
+<p><code class="language-plaintext highlighter-rouge">pip install uwsgi</code></p>
+
+<ul>
+  <li>From source by pip:
+    <ul>
+      <li>Built as a single <code class="language-plaintext highlighter-rouge">uwsgi</code> ELF binary embedding the CPython interpreter</li>
+    </ul>
+  </li>
+  <li>As the pyuwsgi wheel:
+    <ul>
+      <li>Built as a Python C extension into an ELF shared library <code class="language-plaintext highlighter-rouge">pyuwsgi.so</code></li>
+      <li>Loaded by a stub <code class="language-plaintext highlighter-rouge">uwsgi</code> Python script by the CPython interpreter</li>
+    </ul>
+  </li>
+</ul>
+
+<p>pyuwsgi wheel: the only way to precompile uWSGI in a way that does not require <code class="language-plaintext highlighter-rouge">libpythonX.Y.so</code> or ship CPython</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The uWSGI wheel is just built differently.</li>
+  <li>When it’s built from source by pip, it comes as a single binary with CPython.</li>
+  <li>When it’s usgin the wheel, it’s built as a Python C extension.</li>
+  <li>This is loaded by a stub uWSGI script.</li>
+  <li>This complex method was the only one to achieve our goals.</li>
+</ul>
+
+<hr />
+
+<h2 id="uwsgi-2">uWSGI</h2>
+
+<ul>
+  <li>Configuration</li>
+  <li>uWSGI wheel</li>
+  <li><strong>Job handler mules</strong></li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Lastly, we’ll talk about job handling and mules.</li>
+</ul>
+
+<hr />
+<p>class: top</p>
+
+<h2 id="processes-and-job-handling">Processes and Job Handling</h2>
+
+<p>uWSGI starts up in a single “master” process and then <code class="language-plaintext highlighter-rouge">fork()</code>s a configured number of anonymous <em>web worker</em> processes to <strong>serve web requests</strong>.</p>
+
+<p>By default, web workers also handle Galaxy job (tool execution) preparation and completion.</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>So how are processes and jobs handled with uWSGI?</li>
+  <li>uWSGI starts up in a single “master” process and forks some copies.</li>
+  <li>By default these also handle jobs.</li>
+</ul>
+
+<p>–</p>
+
+<p>Processing Galaxy job (tool execution) preparation and finishing is somewhat resource intensive and affects web responsiveness.</p>
+
+<p>Production Galaxy servers traditionally start additional dedicated Galaxy “webless” (do not serve web requests) <em>job handler</em> processes.</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Processing galaxy jobs is quite resource intensive and can affect web responsiveness.</li>
+  <li>As a result, typically web handling and job handling are in separate processes.</li>
+</ul>
+
+<p>–</p>
+
+<p>uWSGI provides a useful feature for running Galaxy job handlers: <a href="https://uwsgi-docs.readthedocs.io/en/latest/Mules.html">uWSGI Mules</a>.</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>uWSGI has a feature called mules which we use for handlers.</li>
+</ul>
+
+<hr />
+
+<h2 id="uwsgi-mules">uWSGI Mules</h2>
+
+<p><strong>Mules</strong> are processes <code class="language-plaintext highlighter-rouge">fork()</code>ed from the uWSGI master after the application has been loaded and web workers have <code class="language-plaintext highlighter-rouge">fork()</code>ed.</p>
+
+<p>Mules can continue to run the same code or can load and run arbitrary code.</p>
+
+<p>Mules can receive messages from the web proceses.</p>
+
+<p>Mules can be pooled in to <em>Farms</em>, and messages can be sent to the farm to be handled by any mule in that farm.</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Mules are processes forked after the application has loaded.</li>
+  <li>Mules can continue to run the same code or load more.</li>
+  <li>Mules can communicate with the master.</li>
+  <li>Optionally they can live in pools called farms, e.g. one for job handlers.</li>
+</ul>
+
+<hr />
+
+<h2 id="mule-advantages">Mule Advantages</h2>
+
+<p>.pull-left.reduce90[
+Webless handlers</p>
+<ul>
+  <li>Config is complex</li>
+  <li>Must manage handler processes externally (e.g. w/ systemd)</li>
+  <li>Handler assignment:
+    <ul>
+      <li>At random from configured handlers</li>
+      <li>No regard as to handler health</li>
+      <li>Notification via database</li>
+    </ul>
+  </li>
+  <li>Can be spread across multiple hosts
+]</li>
+</ul>
+
+<p>.pull-right.reduce90[
+uWSGI Mule handlers</p>
+<ul>
+  <li>Config is trivial</li>
+  <li>Handler processes managed automatically by uWSGI master</li>
+  <li>Handler assignment:
+    <ul>
+      <li>“Grabbed” by healthy mule</li>
+      <li>IPC (messaging) from web worker</li>
+    </ul>
+  </li>
+  <li>Mules run on same host as web workers
+]</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Webless handlers can be quite complex to setup and manage.</li>
+  <li>Mules offer a very simple alternative.</li>
+  <li>However, this requires they run on the same host, which is usually ok.</li>
+</ul>
+
+<hr />
+
+<h2 id="job-handler-mule-configuration">Job Handler Mule Configuration</h2>
+
+<p>Adding job handler mules is performed by simply instructing uWSGI to start them in <code class="language-plaintext highlighter-rouge">galaxy.yml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">uwsgi</span><span class="pi">:</span>
+    <span class="na">mule</span><span class="pi">:</span> <span class="s">lib/galaxy/main.py</span>
+    <span class="na">mule</span><span class="pi">:</span> <span class="s">lib/galaxy/main.py</span>
+    <span class="na">farm</span><span class="pi">:</span> <span class="s">job-handlers:1,2</span>
+</code></pre></div></div>
+
+<p>That’s it! This Galaxy instance will now start and use two job handler mules.</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Mules can be defined by adding them to Galaxy’s configuration in the uWSGI section.</li>
+  <li>Farms collect groups of mules.</li>
+</ul>
+
+<hr />
+
+<h2 id="the-full-startup-picture">The full startup picture</h2>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The full startup picture.</li>
+</ul>
+
+<hr />
+<p>class: top</p>
+
+<h2 id="uwsgi-startrun-and-job-handling-lifecycle">uWSGI Start/Run and Job Handling Lifecycle</h2>
+
+<ol>
+  <li>Master process loads Galaxy application.</li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>We’ll go quickly through the entire lifecycle of a Galaxy process.</li>
+  <li>First, the master uWSGI process loads Galaxy</li>
+</ul>
+
+<p>–</p>
+
+<ol>
+  <li>Master <code class="language-plaintext highlighter-rouge">fork()</code>s web worker processes and begins serving web requests.</li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>This forks worker processes to serve web requests</li>
+</ul>
+
+<p>–</p>
+
+<ol>
+  <li>Master <code class="language-plaintext highlighter-rouge">fork()</code>s job handler mules.</li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Then mules are forked.</li>
+</ul>
+
+<p>–</p>
+
+<ol>
+  <li>Mules reload Galaxy application as job handlers.</li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Mules reload the application to behave as handlers.</li>
+</ul>
+
+<p>–</p>
+
+<ol>
+  <li>The first mule to fully initialize grabs a lock on the farm message queue.</li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The first mule ready establishes an exclusive lock on the queue</li>
+</ul>
+
+<p>–</p>
+
+<ol>
+  <li>All additional mules wait on the lock.</li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Additional mules wait and compete to access the queue.</li>
+</ul>
+
+<p>–</p>
+
+<ol>
+  <li>A web worker receives a request for a new job.</li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Next, a user visits Galaxy and submits a job.</li>
+</ul>
+
+<p>–</p>
+
+<ol>
+  <li>The web worker creates a <code class="language-plaintext highlighter-rouge">job</code> record in the database but leaves the <code class="language-plaintext highlighter-rouge">handler</code> field <code class="language-plaintext highlighter-rouge">null</code>.</li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The web worker creates a job in the database, but leaves it unassigned.</li>
+</ul>
+
+<p>–</p>
+
+<ol>
+  <li>The web worker uses uWSGI’s <code class="language-plaintext highlighter-rouge">farm_msg()</code> function to notify the <code class="language-plaintext highlighter-rouge">job-handlers</code> farm that a new job is ready to run.</li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The worker pings the job handler farm that a new job is ready to run</li>
+</ul>
+
+<p>–</p>
+
+<ol>
+  <li>The mule with the lock receives the message, assigns itself, and gives up the lock.</li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The mule with the lock assigns itself and gives up the lock to go process the job.</li>
+</ul>
+
+<p>–</p>
+
+<ol>
+  <li>Another mule acquires the lock and waits for the next message.</li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Another mule acquires a lock and waits patiently.</li>
+</ul>
+
+<p>–</p>
+
+<ol>
+  <li>Repeat</li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>This process repeats to process jobs.</li>
+</ul>
+
+<hr />
+
+<h2 id="advanced-job-handler-assignment-methods">Advanced: Job Handler Assignment Methods</h2>
+
+<p><strong>Mules can only be used if web workers and job handlers run on the same host.</strong></p>
+
+<p>The database can be used like a message queue to get the benefits of mules using webless job handlers.</p>
+
+<p>See <a href="https://docs.galaxyproject.org/en/master/admin/scaling.html#job-handler-assignment-methods">Job Handler Assignment Methods</a> for details.</p>
+
+<p>Mules are preferred in scenarios where webless handlers are not needed.</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Mules are easy to setup, if you can run them on the same host.</li>
+  <li>This is usually the case.</li>
+  <li>If you have a more complex setup you might need webless job handlers.</li>
+  <li>There is documentation for when you need it.</li>
+</ul>
+
+<hr />
+
+<h2 id="advanced-transparent-restart">Advanced: Transparent Restart</h2>
+
+<p>Provides uninterrupted restart capability (clients do not notice restarts).</p>
+
+<p>See <a href="https://docs.galaxyproject.org/en/master/admin/scaling.html#transparent-restart-zerg-mode">Transparent Restart</a> and <a href="https://uwsgi-docs.readthedocs.io/en/latest/Zerg.html">uWSGI Zerg Mode documentation</a> for details.</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Zerg mode (named after the game StarCraft) can be used for transparent restarts.</li>
+  <li>Users really like this, and it gives you freedom to make changes behind the scenes.</li>
+</ul>
+
+<hr />
+
+<h2 id="advanced-zerg-mode--job-handler-mules">Advanced: Zerg Mode + Job Handler Mules</h2>
+
+<p>Combining both advanced modes was long thought to be impossible.</p>
+
+<p>However, a proof of concept has emerged!</p>
+
+<p><a href="https://gist.github.com/natefoo/6e45ae363ef434f38a935ff1b05b4b6e">Watch this space</a>.</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Combining both was not thought to be possible but there is ongoing work.</li>
+  <li>A proof of concept exists, but it is not in any Ansible playbook yet.</li>
+</ul>
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+
+<img src="/training-material/assets/images/gat.png" alt="page logo" style="height: 100px;"/>
+
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

@@ -29,30 +29,8 @@
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
-        
-
-
-
-
-
-
-
-
-
-
-
-<!-- Gitter -->
-
-
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/galaxy-single-cell'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
             <a class="navbar-brand" href="/training-material/">
                 <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
@@ -65,11 +43,12 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        
                         <a class="nav-link" href="/training-material/topics/transcriptomics" title="Go back to list of tutorials">
-                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Transcriptomics
+                            <i class="far fa-folder" aria-hidden="true"></i> Transcriptomics
                         </a>
+                        
                     </li>
-
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
         <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
@@ -208,15 +187,8 @@
     </div>
 </li>
 
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.md">
-                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
-                        </a>
-                    </li>
-                    -->
 
-                     <!-- Search bar-->
+                    <!-- Search bar-->
                     <li class="nav-item">
                       <div id="navbarSupportedContent">
                         <!-- Search form -->
@@ -228,16 +200,37 @@
                         </form>
                       </div>
                     </li>
-
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 
-<div class="container main-content">
-    <script type="application/ld+json">
+        <div class="container main-content" role="main">
         
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/galaxy-single-cell'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
 
 
 {
@@ -359,6 +352,20 @@
     },
     {
       "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
       "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
       "name": "Mapping",
       "description": "Slides for 'Mapping' tutorial",
@@ -377,6 +384,34 @@
       "name": "Mapping",
       "description": "Hands-on for 'Mapping' tutorial",
       "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/tutorials/scrna-intro/slides.html",
+      "name": "An introduction to scRNA-seq data analysis",
+      "description": "Slides for 'An introduction to scRNA-seq data analysis' tutorial",
+      "learningResourceType": "slides",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -455,58 +490,59 @@
     }
   ]
 }
-    </script>
+</script>
 
-    <section class="tutorial topic-transcriptomics">
-        <h1 data-toc-skip>Pre-processing of Single-Cell RNA Data</h1>
-        
+<section class="tutorial topic-transcriptomics">
+    <h1 data-toc-skip>Pre-processing of Single-Cell RNA Data</h1>
+    
 
-        <div class="contributors-line">By: 
+    <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mtekman" alt="Mehmet Tekman">Mehmet Tekman</a> <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Bérénice Batut">Bérénice Batut</a> <a href="/training-material/hall-of-fame/erxleben/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/erxleben" alt="Anika Erxleben">Anika Erxleben</a> <a href="/training-material/hall-of-fame/wm75/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/wm75" alt="Wolfgang Maier">Wolfgang Maier</a>
+ <a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mtekman" alt="Avatar">Mehmet Tekman</a> <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Avatar">Bérénice Batut</a> <a href="/training-material/hall-of-fame/erxleben/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/erxleben" alt="Avatar">Anika Erxleben</a> <a href="/training-material/hall-of-fame/wm75/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/wm75" alt="Avatar">Wolfgang Maier</a>
 
 </div>
 
-        <blockquote class="overview">
-            <h3>Overview</h3>
-            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
-            <ul>
-            
-            <li><p>What is single-cell?</p>
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions</strong>
+        <ul>
+        
+        <li><p>What is single-cell?</p>
 </li>
-            
-            <li><p>How do we process a batch?</p>
+        
+        <li><p>How do we process a batch?</p>
 </li>
-            
-            <li><p>How do we process multiple batches?</p>
+        
+        <li><p>How do we process multiple batches?</p>
 </li>
-            
-            <li><p>How do we check for cross-contamination?</p>
+        
+        <li><p>How do we check for cross-contamination?</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
-            <ul>
-            
-            <li><p>Demultiplex FASTQ data via UMI-tools</p>
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+        <ul>
+        
+        <li><p>Demultiplex FASTQ data via UMI-tools</p>
 </li>
-            
-            <li><p>Understand and validate the extraction of barcodes</p>
+        
+        <li><p>Understand and validate the extraction of barcodes</p>
 </li>
-            
-            <li><p>Obtain an overview of general alignment and quantification techniques</p>
+        
+        <li><p>Obtain an overview of general alignment and quantification techniques</p>
 </li>
-            
-            <li><p>Generate a count matrix for downstream single-cell RNA analysis</p>
+        
+        <li><p>Generate a count matrix for downstream single-cell RNA analysis</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            
-            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
-            <ul>
-            
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+        <ul>
+        
     <li>
     
         
@@ -567,7 +603,7 @@
     
     </li>
 
-            
+        
     <li>
     
         
@@ -654,54 +690,53 @@
     
     </li>
 
-            </ul>
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default"><a href="/training-material/topics/transcriptomics/tutorials/scrna-preprocessing/slides.html">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Slides
+                </a></li>
             
 
             
-            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 3 hours</div>
-            
-
-            
-
-            
-            
-
-            
-            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
-            <ul>
-                <div class="supporting_material">
-                
-                    <li class="btn btn-default"><a href="/training-material/topics/transcriptomics/tutorials/scrna-preprocessing/slides.html" title="Slides for this tutorial">
-                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides
-                    </a></li>
-                
-
-                
-                    <li class="btn btn-default supporting_material">
+                <li class="btn btn-default supporting_material">
 <a class="topic-icon" href="https://zenodo.org/record/3253142">
-    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
 </a>
 
 </li>
-                
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
     <a class="topic-icon" href="/training-material/topics/transcriptomics/tutorials/scrna-preprocessing/workflows/" title="Workflows" alt="Pre-processing of Single-Cell RNA Data workflows">
-        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
     </a>
 
 </li>
-                
+            
 
-                
+            
 
-                
-                
-                
+            
+            
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
@@ -760,8 +795,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -795,8 +828,6 @@
         <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
             Human Cell Atlas
         </a>
-        
-    
         
     
         
@@ -903,22 +934,23 @@
 
 
 </li>
-                
-                </div>
-            </ul>
             
+        </ul>
+        
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 23, 2021 </div>
-        </blockquote>
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 23, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
-        <div class="container">
-            <div class="row">
-                <!-- sidebar, which will move to the top on a small screen -->
-                <div class="col-sm-2">
-                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
-                </div>
-                <div class="col-sm-10">
-                    <h1 class="no_toc" id="introduction">Introduction</h1>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <h4 class="no_toc" id="why-do-single-cell-sequencing">Why do <span class="notranslate">Single Cell</span> sequencing?</h4>
 
@@ -928,13 +960,13 @@
 
 <p>Consider the heterogeneity of cells sampled from bone marrow, where hematopoietic stem cells can give rise to many different cell types within the same tissue:</p>
 
-<figure id="figure-1"><img src="/training-material/topics/transcriptomics/images/scrna_hematopoiesis.png" alt="Cell Differentiation of Hematopoietic Stem cells" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Cell Differentiation of Hematopoietic Stem cells. Image Source: https://commons.wikimedia.org/wiki/File:Hematopoiesis_simple.svg</figcaption></figure>
+<figure id="figure-1"><img src="/training-material/topics/transcriptomics/images/scrna_hematopoiesis.png" alt="Cell Differentiation of Hematopoietic Stem cells" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Cell Differentiation of Hematopoietic Stem cells. Image Source: https://commons.wikimedia.org/wiki/File:Hematopoiesis_simple.svg</figcaption></figure>
 
 <p>The genes expressed by these cells at different developmental time points can be subtle, but generally can be classified into discrete cell sub-populations or under statistical clustering methods such as PCA or tSNE. Cells in the same cluster exhibit similar profiles of differential <span class="notranslate">expression</span> in the same set of related genes, compared to cells in other clusters. By identifying significant genes in each cluster, cell types and cell developmental hierarchies can be inferred based on the proximity of these clusters to one another.</p>
 
 <p>Other than cell development, there are many more factors that can shape the level of gene <span class="notranslate">expression</span> exhibited by a given cell. Intercellular cell-signalling can block or enhance specific transcripts, the total amount of transcripts of a cell increases with the cell-cycle, or the proximity of a cell within a tissue to nutrients or oxygen.</p>
 
-<figure id="figure-2"><img src="/training-material/topics/transcriptomics/images/scrna_nbt3711.png" alt="Facets of Cellular Identity" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Revealing the vectors of cellular identity with <span class="notranslate">single-cell</span> genomics, Nature Biotechnology, 2016</figcaption></figure>
+<figure id="figure-2"><img src="/training-material/topics/transcriptomics/images/scrna_nbt3711.png" alt="Facets of Cellular Identity" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Revealing the vectors of cellular identity with <span class="notranslate">single-cell</span> genomics, Nature Biotechnology, 2016</figcaption></figure>
 
 <p>This tutorial is in part inspired by aspects of the <a href="https://hemberg-lab.github.io/scRNA.seq.course/">Hemberg <span class="notranslate">workflow</span></a> at the Sanger institute, as well as the <a href="https://github.com/CGATOxford/UMI-tools">CGATOxford <span class="notranslate">workflow</span></a> which provides the <strong>UMI-tools</strong> suite that we make use of. The barcoding follows the <a href="https://doi.org/10.1186/s13059-016-0938-8">CEL-Seq2 protocol</a> mentioned in the <a href="/training-material/topics/transcriptomics/tutorials/scrna-umis/tutorial.html"><em>Understanding Barcodes</em></a> hands-on, and uses the same lane configuration as utilised by the <a href="https://www.ie-freiburg.mpg.de/gruen">Freiburg MPI Grün lab</a>.</p>
 
@@ -953,7 +985,7 @@
   <li><strong>Multi-Batch Processing</strong></li>
 </ol>
 
-<figure id="figure-3"><img src="/training-material/topics/transcriptomics/images/scrna_workflow.svg" alt="Overview of workflow" /><figcaption><span class="figcaption-prefix">Figure 3:</span> An overview of the entire <span class="notranslate">workflow</span></figcaption></figure>
+<figure id="figure-3"><img src="/training-material/topics/transcriptomics/images/scrna_workflow.svg" alt="Overview of workflow" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> An overview of the entire <span class="notranslate">workflow</span></figcaption></figure>
 
 <p>The first part of this tutorial will deal with batches, and use example <em>FASTQ</em> data from a single batch, which we will perform <a href="#barcode-extraction">barcode extraction</a> and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix.</p>
 
@@ -998,7 +1030,7 @@
 
 <p>The size of sc<span class="notranslate">RNA</span> files (.fastq) are typically in the gigabyte range and are somewhat impractical for training purposes, so we will expedite the analysis by using a smaller subset of actual batch data. We will also be using <em>Mus Musculus</em> annotation data (.gtf) from the  <a href="ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/vertebrate_mammalian/Mus_musculus/">NCBI RefSeq</a> track, as well as a barcodes file (.tsv).</p>
 
-<figure id="figure-4"><img src="/training-material/topics/transcriptomics/images/scrna_workflow_upper.png" alt="Workflow Upper" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Single batch processing</figcaption></figure>
+<figure id="figure-4"><img src="/training-material/topics/transcriptomics/images/scrna_workflow_upper.png" alt="Workflow Upper" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Single batch processing</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload-and-organization"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload and organization</h3>
@@ -1610,11 +1642,11 @@ The number of columns can be seen by scrolling the file preview window completel
 
   <p><span class="notranslate">Galaxy</span> provides a <span class="notranslate">workflow</span> that captures the process of all the above stages for a <a href="workflows/scrna_pp_celseq.ga">single pair of FASTQ data</a>:</p>
 
-  <figure id="figure-5"><img src="/training-material/topics/transcriptomics/images/scrna_workflow_single.png" alt="Single Batch Workflow" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Single Batch <span class="notranslate">Workflow</span></figcaption></figure>
+  <figure id="figure-5"><img src="/training-material/topics/transcriptomics/images/scrna_workflow_single.png" alt="Single Batch Workflow" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Single Batch <span class="notranslate">Workflow</span></figcaption></figure>
 
   <p>For multiple batch processing, <span class="notranslate">Galaxy</span> can make use of <em>Nested Workflows</em> that in this case can take in a <a href="workflows/scrna_mp_celseq.ga">list of input paired FASTQ data</a> and process them in parallel.</p>
 
-  <figure id="figure-6"><img src="/training-material/topics/transcriptomics/images/scrna_workflow_nested.png" alt="Multiple Batch Workflow" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Nested Multiple Batch <span class="notranslate">Workflow</span></figcaption></figure>
+  <figure id="figure-6"><img src="/training-material/topics/transcriptomics/images/scrna_workflow_nested.png" alt="Multiple Batch Workflow" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Nested Multiple Batch <span class="notranslate">Workflow</span></figcaption></figure>
 
 </blockquote>
 
@@ -1622,7 +1654,7 @@ The number of columns can be seen by scrolling the file preview window completel
 
 <h1 id="multi-batch-processing">Multi-Batch Processing</h1>
 
-<figure id="figure-7"><img src="/training-material/topics/transcriptomics/images/scrna_workflow_lower.png" alt="Workflow Lower" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Multiple batch processing</figcaption></figure>
+<figure id="figure-7"><img src="/training-material/topics/transcriptomics/images/scrna_workflow_lower.png" alt="Workflow Lower" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Multiple batch processing</figcaption></figure>
 
 <p>Handling more than one batch of sequencing data is rather trivial when we take into account our main goals and requirements:</p>
 
@@ -1689,7 +1721,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 
 <p>To resolve this we can perform a “Full Table Join” where the missing data for <em>GeneE</em> and <em>GeneA</em> in Batch1 and Batch2 respectively are replaced with zeroes:</p>
 
-<figure id="figure-8"><img src="/training-material/topics/transcriptomics/images/scrna_fulltable.svg" alt="Table Join" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Full Table Join</figcaption></figure>
+<figure id="figure-8"><img src="/training-material/topics/transcriptomics/images/scrna_fulltable.svg" alt="Table Join" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Full Table Join</figcaption></figure>
 
 <blockquote class="comment">
   <h3 id="comment-comments"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
@@ -1963,7 +1995,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 
 <h4 id="cross-contamination-plot">Cross-contamination Plot</h4>
 
-<figure id="figure-9"><img src="/training-material/topics/transcriptomics/images/scrna_crosscontamination.png" alt="Contamination Plots" /><figcaption><span class="figcaption-prefix">Figure 9:</span> The Pre-filter and Post-filter plots</figcaption></figure>
+<figure id="figure-9"><img src="/training-material/topics/transcriptomics/images/scrna_crosscontamination.png" alt="Contamination Plots" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> The Pre-filter and Post-filter plots</figcaption></figure>
 
 <p>Two things to take note of:</p>
 
@@ -2002,129 +2034,129 @@ Factoid: We can convert the number of UMIs to the number of molecules using a tr
 
 <p>In this tutorial we have learned the importance of barcoding; namely how to define, extract, and annotate them from our <span class="notranslate">reads</span> and into the read headers, in order to preserve them during <span class="notranslate">mapping</span>. We have discovered how these barcoded <span class="notranslate">reads</span> are transformed into counts, where the cell barcode and UMI barcode are used to denote individual cells and to correct against <span class="notranslate">reads</span> that are PCR duplicates. Finally, we have learned how to combine separate batch data as well as being able to check and correct against cross-contamination.</p>
 
-<figure id="figure-10"><img src="/training-material/topics/transcriptomics/images/scrna_workflow.svg" alt="Recap of workflow" /><figcaption><span class="figcaption-prefix">Figure 10:</span> A recap of the entire <span class="notranslate">workflow</span></figcaption></figure>
+<figure id="figure-10"><img src="/training-material/topics/transcriptomics/images/scrna_workflow.svg" alt="Recap of workflow" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> A recap of the entire <span class="notranslate">workflow</span></figcaption></figure>
 
 <p>This tutorial is part of the https://singlecell.use<span class="notranslate">galaxy</span>.eu portal (<a class="citation" href="#tekman2020single">Tekman <i>et al.</i> 2020</a>).</p>
 
 
-                    
-                    <blockquote class="key_points">
-                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
-                        <ul>
-                            
-                            <li><p>Verifying the distribution of barcodes via a FASTQC plot</p>
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Verifying the distribution of barcodes via a FASTQC plot</p>
 </li>
-                            
-                            <li><p>Relocating barcodes into headers</p>
+                        
+                        <li><p>Relocating barcodes into headers</p>
 </li>
-                            
-                            <li><p>Merging matrices from different batches together</p>
+                        
+                        <li><p>Merging matrices from different batches together</p>
 </li>
-                            
-                            <li><p>Removing unwanted barcodes</p>
+                        
+                        <li><p>Removing unwanted barcodes</p>
 </li>
-                            
-                        </ul>
-                    </blockquote>
-                    
+                        
+                    </ul>
+                </blockquote>
+                
 
-                    <h1>Frequently Asked Questions</h1>
-                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/transcriptomics/faqs/">FAQ page for the Transcriptomics topic</a> to see if your question is listed there.
-                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
-                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/transcriptomics/faqs/">FAQ page for the Transcriptomics topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
-                    
-                    <h1 data-toc-skip>Useful literature</h1>
-                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
-                    
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
+                
 
-                    
-                    <h1 id="bibliography">References</h1>
-                    <ol class="bibliography"><li><span id="tekman2020single">Tekman, M., B. Batut, A. Ostrovsky, C. Antoniewski, D. Clements <i>et al.</i>, 2020 <b>A single-cell RNA-sequencing training and analysis suite using the Galaxy framework</b>. GigaScience 9: giaa102.</span>
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li><span id="tekman2020single">Tekman, M., B. Batut, A. Ostrovsky, C. Antoniewski, D. Clements <i>et al.</i>, 2020 <b>A single-cell RNA-sequencing training and analysis suite using the Galaxy framework</b>. GigaScience 9: giaa102.</span>
     
     
     
 
 </li></ol>
-                    
+                
 
-                    
+                
 
-                    <h1>Feedback</h1>
-                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
-                    <div id="feedback-button">
-                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                    </div>
-                    <div id="feedback-form">
-                    </div>
-                    <script type="text/javascript">
-                        (function (window, document) {
-                            function onDocumentReady(fn) {
-                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                    fn();
-                                } else {
-                                    document.addEventListener('DOMContentLoaded', fn);
-                                }
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
                             }
+                        }
 
-                            onDocumentReady(function () {
-                                $("#feedback-button").click(function(evt){
-                                    var e = $(evt.target)
-                                    e.hide();
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
 
-                                    $("#feedback-form").html(`
-                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Pre-processing of Single-Cell RNA Data (Transcriptomics)">Loading...</iframe>
-                                    `)
-                                })
-                            });
-                        })(window, document);
-                    </script>
-
-
-
-                    <h1>Citing this Tutorial</h1>
-                    <p>
-                        <ol>
-                            <li id="citation-text">Mehmet Tekman, Bérénice Batut, Anika Erxleben, Wolfgang Maier, 2021 <b>Pre-processing of Single-Cell RNA Data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.html</a> Online; accessed TODAY
-                            </li>
-                            <li>
-                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
-                            </li>
-                        </ol>
-                    </p>
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Pre-processing of Single-Cell RNA Data (Transcriptomics)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
 
 
-                    <blockquote class="details">
-                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
-                      <p style="display: none;">
 
-                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Mehmet Tekman, Bérénice Batut, Anika Erxleben, Wolfgang Maier, 2021 <b>Pre-processing of Single-Cell RNA Data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{transcriptomics-scrna-preprocessing,
-    author = "Mehmet Tekman and Bérénice Batut and Anika Erxleben and Wolfgang Maier",
-    title = "Pre-processing of Single-Cell RNA Data (Galaxy Training Materials)",
-    year = "2021",
-    month = "03",
-    day = "23"
-    url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.html}",
-    note = "[Online; accessed TODAY]"
+author = "Mehmet Tekman and Bérénice Batut and Anika Erxleben and Wolfgang Maier",
+title = "Pre-processing of Single-Cell RNA Data (Galaxy Training Materials)",
+year = "2021",
+month = "03",
+day = "23"
+url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.html}",
+note = "[Online; accessed TODAY]"
 }
 @article{Batut_2018,
-        doi = {10.1016/j.cels.2018.05.012},
-        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
-        year = 2018,
-        month = {jun},
-        publisher = {Elsevier {BV}},
-        volume = {6},
-        number = {6},
-        pages = {752--758.e1},
-        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
-        title = {Community-Driven Data Analysis Training for Biology},
-        journal = {Cell Systems}
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
 }</code>
-                    </pre></div></div>
-                    </p>
-                    </blockquote>
+                </pre></div></div>
+                </p>
+                </blockquote>
 
 
 <script type="text/javascript">
@@ -2134,15 +2166,15 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
-                    
+                
 
-                    
-                    <blockquote class="agenda follow-up">
-                        <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
-                        <ul>
-                            
+                
+                <blockquote class="agenda follow-up">
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
     <li>
     
         
@@ -2230,34 +2262,20 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
     
     </li>
 
-                        </ul>
-                    </blockquote>
-                    
+                    </ul>
+                </blockquote>
+                
 
-                </div>
             </div>
         </div>
-    </section>
-</div>
-
-
-<footer>
-    <div class="container">
-        <p>
-            This material is the result of a collaborative work. Thanks to the
-            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Mehmet Tekman, Bérénice Batut, Anika Erxleben, Wolfgang Maier)!
-        </p>
-        <p>
-            Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.md">GitHub</a>.
-        </p>
-        <p>
-    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-</p>
     </div>
-</footer>
+</section>
+<br/>
+<br/>
+<br/>
 
+        </div>
+        
     </body>
     <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>

@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Circos</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for data visualisation in Galaxy" />
+        <meta property="og:title" content="Galaxy Training: Circos" />
+        <meta property="og:description" content="Training material for data visualisation in Galaxy" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/visualisation/faqs/" title="Check our FAQs for the Visualisation topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/visualisation/tutorials/circos/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/visualisation/tutorials/circos/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/visualisation/tutorials/circos/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/visualisation/tutorials/circos/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/visualisation/tutorials/circos/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/visualisation/tutorials/circos/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/visualisation/tutorials/circos/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fvisualisation%2Ftutorials%2Fcircos%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/visualisation/tutorials/circos/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/visualisation/tutorials/circos/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/visualisation/tutorials/circos/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/visualisation/tutorials/circos/slides.html">View markdown source on GitHub</a>
+	<h1>Circos</h1>
+		<h2>Contributors</h2>
+		Helena Rasche, Saskia Hiltemann
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What is Circos?</p>
+</li>
+		
+		<li><p>How can I use Circos within Galaxy?</p>
+</li>
+		
+		<li><p>What are some of the different track types I can plot?</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 20, 2020 </div>
+
+	<hr />
+
+
+	<h1 id="circos-for-genomics-visualisation">Circos for Genomics Visualisation</h1>
+
+<hr />
+
+<h3 id="what-is-circos">What is Circos?</h3>
+
+<ul>
+  <li>Circular Graphics</li>
+  <li>Highly flexible, but also very complex configuration</li>
+  <li>… but beautiful visualisations</li>
+  <li>Can visualise a huge range of data types</li>
+</ul>
+
+<p><img src="../../images/circos-sample-panel.png" alt="Panel of example Circos images" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span>
+Many researchers find Circos overwhelming and complex. This tool can save them time and we will hopefully show them how to reproduce several plots from published papers.</p>
+
+<hr />
+
+<h3 id="circos-in-galaxy">Circos in Galaxy</h3>
+
+<ul>
+  <li>Tool that produces a Circos Plot (PNG / SVG)</li>
+  <li>Circos is too complex to put all configuration options in Galaxy
+    <ul>
+      <li>Option to <strong>download full configuration</strong> directory
+        <ul>
+          <li>allows for further manual tweaking locally</li>
+          <li>90% done inside Galaxy, last 10% finished locally</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>.image-50[<img src="../../images/circos/circos_tool.png" alt="Screenshot of the Circos Galaxy tool" loading="lazy" />]</p>
+
+<p><span>Speaker Notes</span>
+Emphasize that producing production quality plots is still a lot of work. Not all configuration options available in Circos can be set in the Galaxy tool. But all the config files can be downloaded so that you can tweak the plot manually if you have circos installed on your computer</p>
+
+<p>We cannot support them uploading these edited config files into Galaxy because of potential security issues (circos can shell out.)</p>
+
+<hr />
+
+<h3 id="supported-features">Supported Features</h3>
+
+<ul>
+  <li>Covers <em>most</em> of the possibilities of Circos</li>
+  <li>Can <strong>auto convert</strong> GFF3/BED/(big)Wig datasets into appropriate formats</li>
+  <li>Supports common Circos features like:
+    <ul>
+      <li>histograms</li>
+      <li>heatmaps</li>
+      <li>“tile” (from gff3/bed)</li>
+      <li>line</li>
+      <li>scatter</li>
+      <li>ribbons</li>
+    </ul>
+  </li>
+  <li>Complex Circos visualisations made easy (Thanks Galaxy!)</li>
+</ul>
+
+<hr />
+
+<h3 id="tracks-histograms">Tracks: Histograms</h3>
+
+<ul>
+  <li>For data which associate a position with a value</li>
+  <li>Can be good for
+    <ul>
+      <li>Gene density on large genomes</li>
+      <li>Variation density?</li>
+      <li>GC Skew</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="../../images/circos-histogram.png" alt="Histogram Plot" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<hr />
+
+<h3 id="tracks-heatmaps">Tracks: Heatmaps</h3>
+
+<ul>
+  <li>Similar use case to histograms</li>
+  <li>Histograms may provide easier quantification for viewers</li>
+</ul>
+
+<p><img src="../../images/circos-heatmap.png" alt="Heatmap Plot" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>It can be eaiser to quantify differences between two values next to each other with the histogram than relying on the viewer’s ability to distinguish + quantify how far apart two colours lie on a colour scale. These can be pretty but are harder to extract data from</p>
+
+<hr />
+
+<h3 id="tracks-tiles">Tracks: Tiles</h3>
+
+<ul>
+  <li>Show genomic regions</li>
+  <li>Great for genes on small genomes</li>
+</ul>
+
+<p><img src="../../images/circos-tiles.png" alt="Tile Plot" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span>
+“Tile tracks are used to show spans such as genomic regions (genes, exons, duplications) or coverage elements (clones, sequence reads). Tiles will stack within their track to avoid overlap.” (circos documentation)</p>
+
+<hr />
+
+<h3 id="tracks-scatter">Tracks: Scatter</h3>
+
+<ul>
+  <li>Can be used similarly to heatmaps and histograms</li>
+</ul>
+
+<figure id="figure-1"><img src="../../images/circos-scatter.png" alt="Scatter Plot" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> The data are SNP density for windows of 100kb (number of SNPs from dbSNP per base).</figcaption></figure>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Image is based off of the Circos Scatter plot lesson. All images in this tutorial should be reproducible with the Galaxy Circos tool</p>
+
+<p>http://circos.ca/documentation/tutorials/2d_tracks/scatter_plots/lesson</p>
+
+<hr />
+
+<h3 id="tracks-lines">Tracks: Lines</h3>
+
+<p><img src="../../images/circos-line.png" alt="Line Plot" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Image is based off of the Circos Line lesson.</p>
+
+<p>http://circos.ca/documentation/tutorials/2d_tracks/line_plots/images</p>
+
+<hr />
+
+<h3 id="tracks-ribbons">Tracks: Ribbons</h3>
+
+<ul>
+  <li>Shows a relationship between two regions</li>
+  <li>On the same chromosome or on different ones</li>
+  <li>Great for synteny mapping or other regional interactions</li>
+</ul>
+
+<p><img src="../../images/circos-ribbons.png" alt="Ribbon Plot" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>This plot highlights all interactions coming from, or going to chr1.</p>
+
+<p>This plot was generated from a set of random links. The circos-tools package includes a <code class="language-plaintext highlighter-rouge">randomlinks</code> tool that will generate these files. There is no galaxy wrapper for this tool.</p>
+
+<hr />
+
+<h3 id="circos-an-iterative-process">Circos: An iterative process!</h3>
+
+<ul>
+  <li>Because of its complexity, creating a Circos plot is often an <em>iterative</em> process</li>
+  <li>Build your plot one step at a time, check the output regularly!</li>
+</ul>
+
+<p>.image-40[<img src="../../images/circos2.gif" alt="Gif of a circos plots through the development process" loading="lazy" />]</p>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Circos is very powerful, but also very complex</li>
+
+<li>Creating plots is an iterative process</li>
+
+<li>The full configuration directory can be downloaded from Galaxy to be further tweaked locally</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

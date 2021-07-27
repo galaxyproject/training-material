@@ -29,30 +29,8 @@
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
-        
-
-
-
-
-
-
-
-
-
-
-
-<!-- Gitter -->
-
-
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
             <a class="navbar-brand" href="/training-material/">
                 <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
@@ -65,11 +43,12 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        
                         <a class="nav-link" href="/training-material/topics/climate" title="Go back to list of tutorials">
-                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Climate
+                            <i class="far fa-folder" aria-hidden="true"></i> Climate
                         </a>
+                        
                     </li>
-
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
         <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
@@ -208,15 +187,8 @@
     </div>
 </li>
 
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/climate/tutorials/fates/tutorial.md">
-                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
-                        </a>
-                    </li>
-                    -->
 
-                     <!-- Search bar-->
+                    <!-- Search bar-->
                     <li class="nav-item">
                       <div id="navbarSupportedContent">
                         <!-- Search form -->
@@ -228,16 +200,37 @@
                         </form>
                       </div>
                     </li>
-
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 
-<div class="container main-content">
-    <script type="application/ld+json">
+        <div class="container main-content" role="main">
         
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
 
 
 {
@@ -389,70 +382,71 @@
     }
   ]
 }
-    </script>
+</script>
 
-    <section class="tutorial topic-climate">
-        <h1 data-toc-skip>Functionally Assembled Terrestrial Ecosystem Simulator (FATES)</h1>
-        
+<section class="tutorial topic-climate">
+    <h1 data-toc-skip>Functionally Assembled Terrestrial Ecosystem Simulator (FATES)</h1>
+    
 
-        <div class="contributors-line">By: 
+    <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/annefou/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/annefou" alt="Anne Fouilloux">Anne Fouilloux</a> <a href="/training-material/hall-of-fame/huitang-earth/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/huitang-earth" alt="Hui Tang">Hui Tang</a>
+ <a href="/training-material/hall-of-fame/annefou/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/annefou" alt="Avatar">Anne Fouilloux</a> <a href="/training-material/hall-of-fame/huitang-earth/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/huitang-earth" alt="Avatar">Hui Tang</a>
 
 </div>
 
-        <blockquote class="overview">
-            <h3>Overview</h3>
-            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
-            <ul>
-            
-            <li><p>How to run CLM-FATES with the CLM-FATES Galaxy tool?</p>
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions</strong>
+        <ul>
+        
+        <li><p>How to run CLM-FATES with the CLM-FATES Galaxy tool?</p>
 </li>
-            
-            <li><p>How to upload input data for running CLM-FATES?</p>
+        
+        <li><p>How to upload input data for running CLM-FATES?</p>
 </li>
-            
-            <li><p>How to customize your runs?</p>
+        
+        <li><p>How to customize your runs?</p>
 </li>
-            
-            <li><p>How to analyze your model outputs?</p>
+        
+        <li><p>How to analyze your model outputs?</p>
 </li>
-            
-            <li><p>How to create a workflow?</p>
+        
+        <li><p>How to create a workflow?</p>
 </li>
-            
-            <li><p>How to share your workflow?</p>
+        
+        <li><p>How to share your workflow?</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
-            <ul>
-            
-            <li><p>Setting up a CLM-FATES case.</p>
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+        <ul>
+        
+        <li><p>Setting up a CLM-FATES case.</p>
 </li>
-            
-            <li><p>Customizing your run.</p>
+        
+        <li><p>Customizing your run.</p>
 </li>
-            
-            <li><p>Interactive visualization with Panoply.</p>
+        
+        <li><p>Interactive visualization with Panoply.</p>
 </li>
-            
-            <li><p>Automating your analyzes and visualisations of your CLM-FATES case.</p>
+        
+        <li><p>Automating your analyzes and visualisations of your CLM-FATES case.</p>
 </li>
-            
-            <li><p>Creating multi-case scenarios.</p>
+        
+        <li><p>Creating multi-case scenarios.</p>
 </li>
-            
-            <li><p>Composing, executing and publishing CML-FATES workflow.</p>
+        
+        <li><p>Composing, executing and publishing CML-FATES workflow.</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            
-            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
-            <ul>
-            
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+        <ul>
+        
     <li>
     
         
@@ -462,7 +456,7 @@
     
     </li>
 
-            
+        
     <li>
     
         
@@ -561,47 +555,46 @@
     
     </li>
 
-            </ul>
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 4 hours</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default"><a href="/training-material/topics/climate/tutorials/fates/slides.html">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Slides
+                </a></li>
             
 
             
-            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 4 hours</div>
-            
-
-            
-
-            
-            
-
-            
-            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
-            <ul>
-                <div class="supporting_material">
-                
-                    <li class="btn btn-default"><a href="/training-material/topics/climate/tutorials/fates/slides.html" title="Slides for this tutorial">
-                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides
-                    </a></li>
-                
-
-                
-                    <li class="btn btn-default supporting_material">
+                <li class="btn btn-default supporting_material">
 <a class="topic-icon" href="https://doi.org/10.5281/zenodo.4108341">
-    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
 </a>
 
 </li>
-                
+            
 
-                
+            
 
-                
+            
 
-                
-                
-                
+            
+            
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
@@ -619,22 +612,23 @@
 
 
 </li>
-                
-                </div>
-            </ul>
             
+        </ul>
+        
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 17, 2021 </div>
-        </blockquote>
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 17, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
-        <div class="container">
-            <div class="row">
-                <!-- sidebar, which will move to the top on a small screen -->
-                <div class="col-sm-2">
-                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
-                </div>
-                <div class="col-sm-10">
-                    <h1 class="no_toc" id="introduction">Introduction</h1>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <p>Terrestrial ecosystem models have been widely used to study the impact of climate changes on vegetation and terrestrial biogeochemical cycles in climate modelling community. They are also more and more applied in ecological studies to help ecologists to better understand the processes. But the technical challenges are still too high for most of the ecologists to use them. This practical aims at familiarizing you (especially ecologists) with running a terrestrial ecosystem model (i.e., CLM-FATES) at site-level in <span class="notranslate">Galaxy</span> and analyzing the model results.
 It will also teach you on how to create <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span> for your site-level CLM-FATES simulations to make your research fully reproducible. We hope this tutorial will promote the use of CLM-FATES and other terrestrial ecosystem models by a broader community.</p>
@@ -884,7 +878,7 @@ and switch to the correct history.</p>
     <li>The tool will start running and will stay running permanently</li>
     <li>Click on the “User” menu at the top and go to “Active Interactive Tools” and locate the Panoply instance you started.</li>
     <li>Click on your Panoply instance
-      <figure id="figure-1"><img src="../../images/select_dataset.png" alt="Panoply dataset selection" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Select dataset</figcaption></figure>
+      <figure id="figure-1"><img src="../../images/select_dataset.png" alt="Panoply dataset selection" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Select dataset</figcaption></figure>
     </li>
     <li>Click on <strong>ALP1_exp.nc</strong> dataset</li>
   </ol>
@@ -934,7 +928,7 @@ if you do not save in the output folder, your plot will get lost.</p>
           <ol>
             <li>We can clearly see a seasonal cycle.</li>
           </ol>
-          <figure id="figure-2"><img src="../../images/panoply_LEAFC_ALP1_exp.png" alt="Panoply LEAFC timeserie" /><figcaption><span class="figcaption-prefix">Figure 2:</span> LEAFC</figcaption></figure>
+          <figure id="figure-2"><img src="../../images/panoply_LEAFC_ALP1_exp.png" alt="Panoply LEAFC timeserie" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> LEAFC</figcaption></figure>
         </blockquote>
       </blockquote>
     </li>
@@ -954,7 +948,7 @@ Make sure to adjust the y-axis and save your plots in the output folder (as png 
           <ol>
             <li>We can clearly see a seasonal cycle of PFT2.</li>
           </ol>
-          <figure id="figure-3"><img src="../../images/panoply_MORTALITY_ALP1_exp.png" alt="Panoply MORTALITY per PFT" /><figcaption><span class="figcaption-prefix">Figure 3:</span> total mortality per PFT</figcaption></figure>
+          <figure id="figure-3"><img src="../../images/panoply_MORTALITY_ALP1_exp.png" alt="Panoply MORTALITY per PFT" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> total mortality per PFT</figcaption></figure>
         </blockquote>
       </blockquote>
 
@@ -1031,7 +1025,7 @@ so that we can reuse it for any simulations.</p>
     <li>
       <p><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting plot:</p>
 
-      <p><img src="../../images/LEAFC_ALP1_exp_ggplot.png" alt="LEAFC" /></p>
+      <p><img src="../../images/LEAFC_ALP1_exp_ggplot.png" alt="LEAFC" loading="lazy" /></p>
     </li>
   </ol>
 
@@ -1092,7 +1086,7 @@ and make sure to select “netcdf” in the change datatype field.</li>
 The final <span class="notranslate">workflow</span> would be similar to the one shown below:</li>
       </ul>
 
-      <figure id="figure-4"><img src="../../images/fates_workflow.png" alt="FATES workflow" /><figcaption><span class="figcaption-prefix">Figure 4:</span> FATES <span class="notranslate">workflow</span></figcaption></figure>
+      <figure id="figure-4"><img src="../../images/fates_workflow.png" alt="FATES workflow" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> FATES <span class="notranslate">workflow</span></figcaption></figure>
 
       <blockquote class="question">
         <h3 id="question-question-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -1107,7 +1101,7 @@ The final <span class="notranslate">workflow</span> would be similar to the one 
           <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <ol>
             <li>Running 5 years is already sufficient to highlight significant changes.
-<img src="../../images/LEAFC_ALP1_4CO2_ggplot.png" alt="LEAFC 4xCO2" /></li>
+<img src="../../images/LEAFC_ALP1_4CO2_ggplot.png" alt="LEAFC 4xCO2" loading="lazy" /></li>
             <li>Many suggestions can be given here. One simple addition can be the generation of plots where
 both simulations are represented on the same plot.</li>
           </ol>
@@ -1159,34 +1153,34 @@ Please note that <a href="https://workflowhub.eu">https://workflowhub.eu</a> is 
 <p class="no_toc">We have learnt to run single-point simulations with FATES-CLM and generate workflows for multi-site scenarios.</p>
 
 
-                    
-                    <blockquote class="key_points">
-                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
-                        <ul>
-                            
-                            <li><p>CLM-FATES is a numerical terrestrial ecosystem model used in climate models</p>
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>CLM-FATES is a numerical terrestrial ecosystem model used in climate models</p>
 </li>
-                            
-                            <li><p>Panoply is a quick visualization tools for plotting your results</p>
+                        
+                        <li><p>Panoply is a quick visualization tools for plotting your results</p>
 </li>
-                            
-                            <li><p>Multi-case simulations can be easily developed and shared with a Galaxy workflow</p>
+                        
+                        <li><p>Multi-case simulations can be easily developed and shared with a Galaxy workflow</p>
 </li>
-                            
-                        </ul>
-                    </blockquote>
-                    
+                        
+                    </ul>
+                </blockquote>
+                
 
-                    <h1>Frequently Asked Questions</h1>
-                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/climate/faqs/">FAQ page for the Climate topic</a> to see if your question is listed there.
-                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
-                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/climate/faqs/">FAQ page for the Climate topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
-                    
+                
 
-                    
-                    <h1 id="bibliography">References</h1>
-                    <ol class="bibliography"><li><span id="Fisher2015"><b>Taking off the training wheels: the properties of a dynamic vegetation model without climate envelopes, CLM4.5(ED)</b>, 2015.</span>
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li><span id="Fisher2015"><b>Taking off the training wheels: the properties of a dynamic vegetation model without climate envelopes, CLM4.5(ED)</b>, 2015.</span>
     
     
     <a href="https://doi.org/10.5194/gmd-8-3593-2015">10.5194/gmd-8-3593-2015</a>
@@ -1227,85 +1221,85 @@ Please note that <a href="https://workflowhub.eu">https://workflowhub.eu</a> is 
     
 
 </li></ol>
-                    
+                
 
-                    
+                
 
-                    <h1>Feedback</h1>
-                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
-                    <div id="feedback-button">
-                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                    </div>
-                    <div id="feedback-form">
-                    </div>
-                    <script type="text/javascript">
-                        (function (window, document) {
-                            function onDocumentReady(fn) {
-                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                    fn();
-                                } else {
-                                    document.addEventListener('DOMContentLoaded', fn);
-                                }
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
                             }
+                        }
 
-                            onDocumentReady(function () {
-                                $("#feedback-button").click(function(evt){
-                                    var e = $(evt.target)
-                                    e.hide();
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
 
-                                    $("#feedback-form").html(`
-                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Functionally Assembled Terrestrial Ecosystem Simulator (FATES) (Climate)">Loading...</iframe>
-                                    `)
-                                })
-                            });
-                        })(window, document);
-                    </script>
-
-
-
-                    <h1>Citing this Tutorial</h1>
-                    <p>
-                        <ol>
-                            <li id="citation-text">Anne Fouilloux, Hui Tang, 2021 <b>Functionally Assembled Terrestrial Ecosystem Simulator (FATES) (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/climate/tutorials/fates/tutorial.html">https://training.galaxyproject.org/training-material/topics/climate/tutorials/fates/tutorial.html</a> Online; accessed TODAY
-                            </li>
-                            <li>
-                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
-                            </li>
-                        </ol>
-                    </p>
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Functionally Assembled Terrestrial Ecosystem Simulator (FATES) (Climate)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
 
 
-                    <blockquote class="details">
-                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
-                      <p style="display: none;">
 
-                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Anne Fouilloux, Hui Tang, 2021 <b>Functionally Assembled Terrestrial Ecosystem Simulator (FATES) (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/climate/tutorials/fates/tutorial.html">https://training.galaxyproject.org/training-material/topics/climate/tutorials/fates/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{climate-fates,
-    author = "Anne Fouilloux and Hui Tang",
-    title = "Functionally Assembled Terrestrial Ecosystem Simulator (FATES) (Galaxy Training Materials)",
-    year = "2021",
-    month = "06",
-    day = "17"
-    url = "\url{https://training.galaxyproject.org/training-material/topics/climate/tutorials/fates/tutorial.html}",
-    note = "[Online; accessed TODAY]"
+author = "Anne Fouilloux and Hui Tang",
+title = "Functionally Assembled Terrestrial Ecosystem Simulator (FATES) (Galaxy Training Materials)",
+year = "2021",
+month = "06",
+day = "17"
+url = "\url{https://training.galaxyproject.org/training-material/topics/climate/tutorials/fates/tutorial.html}",
+note = "[Online; accessed TODAY]"
 }
 @article{Batut_2018,
-        doi = {10.1016/j.cels.2018.05.012},
-        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
-        year = 2018,
-        month = {jun},
-        publisher = {Elsevier {BV}},
-        volume = {6},
-        number = {6},
-        pages = {752--758.e1},
-        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
-        title = {Community-Driven Data Analysis Training for Biology},
-        journal = {Cell Systems}
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
 }</code>
-                    </pre></div></div>
-                    </p>
-                    </blockquote>
+                </pre></div></div>
+                </p>
+                </blockquote>
 
 
 <script type="text/javascript">
@@ -1315,36 +1309,22 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
-                    
+                
 
-                    
+                
 
-                </div>
             </div>
         </div>
-    </section>
-</div>
-
-
-<footer>
-    <div class="container">
-        <p>
-            This material is the result of a collaborative work. Thanks to the
-            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Anne Fouilloux, Hui Tang)!
-        </p>
-        <p>
-            Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/climate/tutorials/fates/tutorial.md">GitHub</a>.
-        </p>
-        <p>
-    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-</p>
     </div>
-</footer>
+</section>
+<br/>
+<br/>
+<br/>
 
+        </div>
+        
     </body>
     <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>

@@ -1,0 +1,879 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Network Analysis with Heinz</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:title" content="Galaxy Training: Network Analysis with Heinz" />
+        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/transcriptomics/faqs/" title="Check our FAQs for the Transcriptomics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/network-analysis-with-heinz/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/transcriptomics/tutorials/network-analysis-with-heinz/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/network-analysis-with-heinz/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/network-analysis-with-heinz/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/network-analysis-with-heinz/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/network-analysis-with-heinz/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/transcriptomics/tutorials/network-analysis-with-heinz/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Fnetwork-analysis-with-heinz%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/transcriptomics/tutorials/network-analysis-with-heinz/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/transcriptomics/tutorials/network-analysis-with-heinz/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/transcriptomics/tutorials/network-analysis-with-heinz/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/transcriptomics/tutorials/network-analysis-with-heinz/slides.html">View markdown source on GitHub</a>
+	<h1>Network Analysis with Heinz</h1>
+		<h2>Contributors</h2>
+		Sanne Abeln, Chao (Cico) Zhang
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What is metatranscriptomics</p>
+</li>
+		
+		<li><p>Which pathways are potentially contributing to dental caries?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Learn some background knowledge about microbiome</p>
+</li>
+		
+		<li><p>Understand metatranscriptomics</p>
+</li>
+		
+		<li><p>Familiarize yourself with KEGG terminology</p>
+</li>
+		
+		<li><p>Understand how network(pathway) analysis works</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 26, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="metagenomics--metatranscriptomics">Metagenomics / metatranscriptomics</h1>
+
+<ul>
+  <li>Sequence all DNA/RNA in a sample from a specific microbial environment</li>
+  <li>Get an overview of the entire microbial community</li>
+</ul>
+
+<p><img src="../../images/heinz/sampleextraction.png" alt="sample collection from environment to sequence data. DNA is isolated, manipulated, ligated together with a BAC vector, before a library is constructued and the expression of different proteins analysed in a live sample." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span>
+There are several advantages in sequencing all DNA (metagenomics) or RNA (metatranscriptomics) in a sample to consider the microbial content.</p>
+
+<p>Many bacterial species are not easily grown on a petri-dish, and may therefore not be observed with classic  analysis techniques.</p>
+
+<p>Metatranscriptomics can also reveal the functional state of the microbiome, suggesting which functional pathways are switched on.</p>
+
+<hr />
+
+<h1 id="the-human-microbiome">The human microbiome</h1>
+
+<ul>
+  <li>Over 100 trillion microbes</li>
+  <li>Outnumber our human cells 1.3 to 1.</li>
+  <li>Include bacteria, fungi, protozoa, viruses, in and outside our body.</li>
+  <li>The number of genes in all the microbes in one person’s microbiome is ~10-200 times the number of genes in the human genome.</li>
+  <li>The microbiome may weigh as much as 200 grams</li>
+</ul>
+
+<p>.image-50[ <img src="../../../metagenomics/images/human_microbiome.png" alt="image of a human with lines leading from various points on the body to pie charts of bacteria distribution" loading="lazy" />]</p>
+
+<p>.footnote[<a href="https://doi.org/10.1371/journal.pbio.1002533">Sender et al 2016, PLoS ONE</a>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>[*] this figure is difficult to estimate, as we need to consider when two orthologous genes can be considered different. A rough estimate would be 500~10000 species of bacteria with a median of 2000 genes.</p>
+
+<hr />
+
+<h1 id="environments-related-to-health">Environments related to health</h1>
+
+<p>.pull-left[</p>
+<ul>
+  <li>Gut / bowel / intestine</li>
+  <li>Oral Cavity</li>
+  <li>Nasal Cavity</li>
+  <li>Skin</li>
+</ul>
+
+<p><img src="../../images/heinz/oralcavity.jpg" alt="Picture of someone's mouth, showing their teeth and into their oral cavity and throat." loading="lazy" />
+]</p>
+
+<p>.pull-right[
+&lt;img src=”../../images/heinz/othergenome.png” alt=”Nature cover “our other genome””  loading=”lazy”&gt;
+]
+—</p>
+
+<h1 id="what-would-we-find">What would we find?</h1>
+
+<p>.pull-left[</p>
+<ul>
+  <li>Oral Cavity</li>
+  <li>DNA from:
+    <ul>
+      <li>bacteria</li>
+      <li>viruses</li>
+      <li>human</li>
+      <li>archaea</li>
+      <li>spider (?!)
+]</li>
+    </ul>
+  </li>
+</ul>
+
+<p>.pull-right[
+<img src="../../images/heinz/oralcavity.jpg" alt="Picture of someone's mouth, showing their teeth and into their oral cavity and throat." loading="lazy" />
+]</p>
+
+<hr />
+
+<h2 id="some-bacterial-species-are-difficult-to-culture">Some bacterial species are difficult to culture</h2>
+
+<p><img src="../../images/heinz/petridish.png" alt="petri dish with bacterial cultures" loading="lazy" /></p>
+
+<ul>
+  <li>Such bacteria may not be found in current reference databases</li>
+  <li>The only way to obtain each species may be through direct sequencing of environmental samples</li>
+  <li>Purpose: find novel species, genomes, and genes</li>
+</ul>
+
+<hr />
+
+<h1 id="metagenomics-vs-16s">Metagenomics vs 16S</h1>
+
+<p>.pull-left[
+<strong>Full shotgun sequencing of sample:</strong></p>
+<ul>
+  <li>sequence all available DNA/ RNA</li>
+  <li>may need to sequence very deep</li>
+  <li>functional composition</li>
+</ul>
+
+<p><strong>Sequence ribosomal regions (16S)</strong></p>
+<ul>
+  <li>need amplicons</li>
+  <li>requires less sequencing</li>
+  <li>taxonomic composition</li>
+</ul>
+
+<p>]</p>
+
+<p>.pull-right[</p>
+
+<p>.image-75[ <img src="../../../metagenomics/images/puzzles-shotgun.png" alt="shotgun sequencing illustrated with jigsaw puzzles, severla individual puzzles are mixed together." loading="lazy" /> ]</p>
+
+<p>.image-75[ <img src="../../../metagenomics/images/puzzles-amplicon.png" alt="amplicon sequencing illustrated with jigsaw puzzles, all of the corner pieces of each puzzle are circled." loading="lazy" />]</p>
+
+<p>]
+<span>Speaker Notes</span>
+For the workflow considered here we assume RNAseq of the microbiome.</p>
+
+<p>Puzzle analogy: think of each organism as a jigsaw puzzle</p>
+
+<ul>
+  <li>
+    <p>shotgun: we considers all pieces (DNA) from all puzzles (organisms); we throw the pieces in a big pile, and need to reconstruct each individual puzzle from this. It is more complex, but you get full details (functional information) about the picture on each puzzle.</p>
+  </li>
+  <li>
+    <p>amplicon: we only look at the corner pieces, these are easy to spot, and all puzzles have them. It will not tell us all the details (e.g. functional information) of the picture on the puzzle, but might be enough to tell us whether it is a landscape or a portrait or abstract art for instance (taxonomy).</p>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="16s-ribosomal-dna">16S ribosomal DNA</h1>
+
+<p><img src="../../images/heinz/16Sgene.png" alt="overview of the bacterial genome" loading="lazy" /></p>
+
+<ul>
+  <li>Multiple copies of <strong>16S, 23S</strong> and <strong>5S</strong></li>
+  <li>16S: 9 hypervariable &amp; 9 highly conserved regions</li>
+</ul>
+
+<p><span>Speaker Notes</span>
+16S sequencing is still very popular to estimate the diversity of a microbiome. In this work we are also interested in the functional content.</p>
+
+<hr />
+
+<h1 id="gum-disease-priodontitis">Gum disease (priodontitis)</h1>
+
+<p>&lt;img src=”../../images/heinz/abstract.png” alt=”journal article “Metatranscriptomics of the human oral microbiome during health and disease””  loading=”lazy”&gt;</p>
+
+<p><span>Speaker Notes</span>
+For reference only</p>
+
+<hr />
+
+<h1 id="microbiome">Microbiome</h1>
+
+<p><img src="../../images/heinz/oralmicrobiome.png" alt="oral microbiome" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>When we work with metagenomics data there are two main aims
+1) profiling of the species content of the microbiome
+2) a functional analysis of the microbiome.</p>
+
+<hr />
+
+<h1 id="metamodules">MetaModules</h1>
+
+<p><img src="../../images/heinz/metamodules.png" alt="metamodules publication" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span>
+Here we consider the “metaModules” workflow designed by Ali May et a.</p>
+
+<hr />
+
+<h1 id="exploring-the-networks-of-microbial-function-that-are-involved-in-disease">Exploring the networks of microbial function that are involved in disease</h1>
+
+<p><img src="../../images/heinz/network.png" alt="A gigantic blob of nodes and lines" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span>
+The key idea is to explore functional  networks of the microbiome that are involved in disease</p>
+
+<hr />
+
+<h1 id="oral-disease">Oral disease</h1>
+
+<p>.pull-left[</p>
+<ul>
+  <li>
+    <p><strong>Dental caries</strong>
+The most common chronic disease of children (25%), and adolescents (59%). Bacteria feed on food debris. Bacteria produce acids leading to demineralization and destruction of the teeth.</p>
+  </li>
+  <li>
+    <p><strong>Periodontal disease</strong>
+Bacteria living in tissues surrounding and supporting the teeth; An over-aggressive immune response can subsequently lead to loosening and finally loss of teeth.</p>
+  </li>
+</ul>
+
+<p>]</p>
+
+<p>.pull-right[</p>
+
+<p>.image-75[ <img src="../../images/heinz/caries.jpg" alt="dental caries" loading="lazy" />]</p>
+
+<p>.image-75[ <img src="../../images/heinz/periodontaldisease.jpg" alt="periodontal disease" loading="lazy" />]</p>
+
+<p>]</p>
+
+<hr />
+
+<h1 id="healthy-vs-disease">Healthy vs Disease</h1>
+
+<p><img src="../../images/heinz/healthyvsdisease.png" alt="comparing microbiomes from healthy and disease samples. Both are sequenced, and then pie charts showing different microbiomes." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span>
+The first part of the workflow entail RNA sequencing of oral microbiome samples.</p>
+
+<p>From this we get the total RNA present, from all species, including ribosomal RNA.</p>
+
+<p>This can be used to estimate both a taxonomic profile, and a functional profile.</p>
+
+<p>With the workflow presented here, we go one step further, and consider which subnetworks in the metabolic pathways are most deregulated in the microbiome samples showing disease (caries).</p>
+
+<hr />
+
+<h2 id="using-knowledge-to-pinpoint-the-key-players">Using knowledge to pinpoint the key players</h2>
+
+<p><img src="../../images/heinz/workflow.png" alt="The healthy and diseased mouths are sequenced, mapped to produce gene counts, these are binned for KO counts, and differential expression analysis produces the p-values of KO Fold changes. The p-values are converted to KO weights, and these are mapped to KO pathways to produce a network with weighted KOs, and maximum scoring subnetworks are extracted." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>So, now to the experimental design and analysis steps. We used a previously published metatranscriptomic dataset of microbial RNA reads from healthy and caries disease samples.</p>
+
+<p>We did some preprocessing to filter out non-coding RNA etc, and mapped the remaining reads to a KEGG database of 3 million genes.</p>
+
+<p>We calculated the gene counts in healthy and diseased samples and aggregated these gene counts in KOs.</p>
+
+<p>This was followed b differential expression analysis at the KO level, from which we derived fold changes and P-values for KOs.</p>
+
+<p>We use the P-values to obtain scores for each KO, use the scores to annotate the network and finally run an algorithm in the network to identify the maximum-scoring regions.</p>
+
+<hr />
+
+<h1 id="some-kegg-database-terminology">Some (KEGG database) terminology</h1>
+
+<p><img src="../../images/heinz/kegg1.png" alt="KEGG species view" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span>
+But let’s talk briefly about how we define these molecular functions first and get familiar with the terminology. In the database we use, KEGG, we have species and corresponding molecular pathways, like in this case S. Mutans and glycolysis.</p>
+
+<hr />
+
+<h1 id="some-kegg-database-terminology-1">Some (KEGG database) terminology</h1>
+
+<p><img src="../../images/heinz/kegg1-2.png" alt="KEGG species view" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span>
+Of course, each species has its own specific metabolic network - even though we may not have the information on all specific species in a sample.</p>
+
+<hr />
+
+<h1 id="some-kegg-database-terminology-2">Some (KEGG database) terminology</h1>
+
+<p><img src="../../images/heinz/kegg2.png" alt="KEGG KO groups showing pathways from Species 1 and species 2. Different portions of the pathway are highlighted" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span>
+Now, as orthologous genes in the different species perform the same function, we can collapse the metabolic network of all known bacterial species in to a single network. Here is node represents a KO: a KEGG Orthologous Group, containing orthologous genes performing the same metabolic function in the metabolic network. We use this network of KOs to analyse the microbial sample.</p>
+
+<hr />
+
+<h1 id="functional-signatures-of-microbiome-related-disease">Functional signatures of microbiome-related disease</h1>
+
+<p>The most common objective is to identify differentially expressed pathways by performing comparative metagenomic/metatranscriptomic analyses.</p>
+
+<p><img src="../../images/heinz/functionalsignatures.png" alt="funtional signatures of healthy and disease samples" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span>
+To understand the functional differences between two conditions, for instance in microbiome-related disease and health, what is commonly done is to look at differentially expressed pathways between the two conditions.</p>
+
+<p>The figure on left shows the pathways that are significantly over- or under-abundant in diseased and healthy patients.</p>
+
+<p>On the right is a figure from another study where researchers listed some important pathways and the KOs in these pathways that are up- (blue) or downregulated (red) in disease.</p>
+
+<hr />
+
+<p><img src="../../images/heinz/globalapproach.png" alt="pathway analysis of a network image" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span>
+We can now visualise the RNAseq data on our collapsed microbial metabolic network of KOs. The red nodes represent KOs that are overexpressed in disease, and the blue node those that are underexpressed in disease as compared to healthy samples.</p>
+
+<p>It is immediately clear that the data contains many overexpressed genes, and it is difficult to immediately pinpoint the most deregulated part of the network. For this purpose, we use the Heinz methods to extract de most deregulated subnetwork.</p>
+
+<hr />
+
+<h1 id="identifying-signatures-of-disease">Identifying signatures of disease</h1>
+
+<ul>
+  <li>Where are the most important regions in this large network?</li>
+  <li>How can we find such regions?</li>
+</ul>
+
+<p><img src="../../images/heinz/identification.png" alt="the large messy graph from before is shown in the dark, with a torch shining a light on a subset of that graph." loading="lazy" /></p>
+
+<hr />
+
+<h1 id="step-1-construct-a-global-network">Step 1: Construct a global network</h1>
+
+<p><img src="../../images/heinz/globalnetwork.png" alt="369 pathway maps are reduced into 6642 KOs and 35405 interactions in a giant messy graph." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The first step is to construct the global KO network, in the pratical this global network is already provided. As are the processed RNAseq values per KO.</p>
+
+<hr />
+
+<h1 id="step-2-annotate-the-network-with-weights">Step 2: Annotate the network with weights</h1>
+
+<p><img src="../../images/heinz/network_heinz.png" alt="A network of KOs are shown with weights on each node." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Next we need to convert the p-values provided by deseq for under and over- expression into weights. Where a positive weight means the KO is significantly deregulated.</p>
+
+<hr />
+
+<h1 id="step-3-calculate-the-maximum-scoring-connected-subnetwork">Step 3: Calculate the maximum-scoring connected subnetwork</h1>
+
+<p>.pull-left[</p>
+
+<ul>
+  <li>
+    <p>Problem: given network with weights find the maximum-scoring subnetwork</p>
+  </li>
+  <li>
+    <p>NP-hard problem.</p>
+  </li>
+  <li>
+    <p>Solutions are feasible in biological networks.</p>
+  </li>
+  <li>
+    <p>An exact solver exists: Heinz [Dittrich et al., 2008].</p>
+  </li>
+</ul>
+
+<p>]</p>
+
+<p>.pull-right[</p>
+
+<p><img src="../../images/heinz/network_heinz2.png" alt="maximum scoring subnetwork" loading="lazy" />
+]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Subsequently, the Heinz algorithm can find the subnetwork that is most deregulated.</p>
+
+<hr />
+
+<h1 id="differential-expression-analysis">Differential Expression Analysis</h1>
+
+<p><img src="../../images/heinz/dea.png" alt="differential expression analysis plot" loading="lazy" /></p>
+
+<p>Each dot’s (function’s) change in expression corresponds to a P-value</p>
+
+<hr />
+
+<h1 id="p-value-distribution-when-the-null-hypothesis-is-true">P-value distribution when the null hypothesis is true</h1>
+
+<p><img src="../../images/heinz/histogram.png" alt="distribution of p-values" loading="lazy" /></p>
+
+<p><span>Speaker Notes</span>
+First, we need to convert the p-values to weight. Here we think about a p-value distribution on a set that has no signal. In this case we expect a uniform distribution of p-values between 0 and 1. Note that if you generate many p-values for a data set, it is always helpful to check the distribution to see if there is any signal in the data.</p>
+
+<hr />
+
+<h1 id="p-value-distribution-signal-vs-noise">P-value distribution: signal vs noise</h1>
+
+<figure id="figure-1"><img src="../../images/heinz/bum.png" alt="Beta uniform mixture (BUM) model" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> P-value histogram of 7105 KO fold changes</figcaption></figure>
+
+<p><span style="color:blue">Noise (blue)</span> and <span style="color:red">signal (red)</span> in an expected P-value distribution
+Beta-uniform mixture model (mixing a beta and a uniform distribution )</p>
+
+<p><span>Speaker Notes</span>
+If there is a significant part of the data deregulated, we expect a peak on the left hand side of the distribution, i.e. an abundance of very low p-value as compared to the uniform distribution. This figure is very helpful, as we can estimate the number of true positives in the data: the part of the peak that rises above the uniform distribution.</p>
+
+<hr />
+
+<h1 id="p-value-to-weight-transformation">P-value to weight transformation</h1>
+
+<p><img src="../../images/heinz/pvalue-to-weight.png" alt="A graph comparing p-value to density with four regions labelled, A, B, C, and D. A is the region with p less than 0.1 and density greater than 0.5. C is the region directly below, with low p-value but low density. D is the region of higher p-value (0.1-1.0) but low density, and B is the final region of higher p-value and higher density. " loading="lazy" /></p>
+
+\[FDR = \frac{C}{A+C}\]
+
+<ul>
+  <li><strong>A:</strong> True positives, <strong>C:</strong> False positives</li>
+  <li>False discovery rate (<strong>FDR</strong>) -&gt; a threshold P-value</li>
+</ul>
+
+<p><span>Speaker Notes</span>
+FP = false positives, TP = true positives</p>
+
+<p>From the true positives, false positives and false negatives we can calculate the FDR (false discovery rate). Note that this is generally true for p-value distribution, and not specific for expression data.</p>
+
+<hr />
+
+<h1 id="false-discovery-rate-fdr-sets-the--threshold-p-value">False discovery rate (FDR) sets the  threshold P-value</h1>
+
+<figure id="figure-2"><img src="../../images/heinz/pvalue-to-weight.png" alt="the same graph as before, caption repeats. A graph comparing p-value to density with four regions labelled, A, B, C, and D. A is the region with p less than 0.1 and density greater than 0.5. C is the region directly below, with low p-value but low density. D is the region of higher p-value (0.1-1.0) but low density, and B is the final region of higher p-value and higher density." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> p-value histogram of 7105 KO fold</figcaption></figure>
+
+<ul>
+  <li>The threshold P-value (τ) -&gt; KOs with + and - weights</li>
+  <li>FDR determines the number of positive-scoring nodes and therefore the size of the final subnetwork.</li>
+  <li>In this dataset, an <strong>FDR=0.0007 corresponded to τ = 10^5</strong></li>
+</ul>
+
+<p><span>Speaker Notes</span>
+From this we can calculate the FDR, and we can use an FDR threshold to determine which p-value should correspond the a zero weight.</p>
+
+<hr />
+
+<h1 id="result-weight-annotated-network">Result: Weight-annotated network</h1>
+
+<p><img src="../../images/heinz/network_weight_annotated.png" alt="weight-annotated network image" loading="lazy" /></p>
+
+<p><span style="color:red">red:</span> weight &gt; 0, <span style="color:grey">grey:</span> weight &lt; 0</p>
+
+<p><span>Speaker Notes</span>
+Now we display the transformed weight onto the global KO network. Note that it is still difficult to spot the most deregulated subnetwork by eye.</p>
+
+<hr />
+
+<h1 id="finding-the-subnetwork">Finding the subnetwork</h1>
+
+<p><img src="../../images/heinz/find_subnetwork.png" alt="using Heinz to find subnetworks" loading="lazy" /></p>
+
+<p>.footnote[Dittrich,M.T. et al. (2008) Identifying functional modules in protein–protein interaction networks: an integrated exact approach. Bioinformatics, 24, I223–I231]</p>
+
+<p><span>Speaker Notes</span>
+Lastly, we use Heinz to find this deregulated subnetwork.</p>
+
+<hr />
+
+<h1 id="result-gum-disease-subnetwork">Result: gum disease subnetwork</h1>
+
+<p>7 pathways, 39 KOs (32 up- and 7 downregulated in disease)</p>
+
+<p><img src="../../images/heinz/results.png" alt="results subnetworks" loading="lazy" /></p>
+
+<p>.footnote[ Dinkla,K. et al. (2014) eXamine: exploring annotated modules in networks. BMCBioinformatics, 15, 201.]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Here we display the results not for a caries dataset, but a gum-disease data set. We will look at the caries data set in the practical.</p>
+
+<hr />
+
+<h1 id="butanoate-metabolism-in-gum-disease">Butanoate metabolism in gum disease</h1>
+
+<p>.pull-left[</p>
+
+<p>.image-50[<img src="../../images/heinz/results.png" alt="results subnetworks" loading="lazy" />]</p>
+
+<p><span style="color:green">Green:</span> Butanoate metabolism</p>
+
+<p>.image-75[ <img src="../../images/heinz/butanoate.png" alt="butanoate metabolic pathway" loading="lazy" />]</p>
+
+<p>]</p>
+
+<p>.pull-right[
+<span style="font-size: small">
+<em>Niederman et al., 1997:</em>
+…<strong>butyric acid concentrations</strong> associated significantly with <strong>disease severity</strong>. Taken together, these data suggest that <strong>butyric acid plays a mediating role in periodontal disease pathogenesis.</strong>
+</span></p>
+
+<p><span style="font-size: small">
+<em>Chang et al., 2013:</em>
+…<strong>butyrate</strong> generated by periodontal pathogens may be involved in the pathogenesis of <strong>periodontal diseases</strong> via the induction of ROS production and the impairment of cell growth, cell cycle progression and expression of cell cycle-related genes in GFs.
+</span>
+]</p>
+
+<p><span>Speaker Notes</span>
+Some of the pathways found in the deregulated subnetwork have previously been associated with gum-disease, but are here found by simply analysing high-throughput data.</p>
+
+<hr />
+
+<h1 id="sulfur-metabolism-in-gum-disease">Sulfur metabolism in gum disease</h1>
+
+<p>.pull-left[</p>
+
+<p>.image-50[ <img src="../../images/heinz/results.png" alt="results subnetworks" loading="lazy" />]</p>
+
+<p><span style="color:coral">Coral:</span> Sulfur metabolism</p>
+
+<p>.image-50[ <img src="../../images/heinz/sulfur.png" alt="sulfur metabolic pathway" loading="lazy" />]</p>
+
+<p>]</p>
+
+<p>.pull-right[</p>
+
+<p><span style="font-size: small">
+<em>Langendijk et al 2001</em>: <strong>Sulfate-reducing bacteria</strong> (SRB) may be etiologically involved in destructive <strong>periodontal diseases</strong>. These strictly anaerobic bacteria utilize fermentation products for energy conservation by reduction of sulfate to sulfide. This toxic product can accumulate in periodontal pockets in concentrations causing cellular destruction. SRB depend on an actively degrading microbiota to produce a reduced environment, fermentation products and sulfate. The detection frequency of these bacteria is <strong>strongly increased in periodontitis</strong> compared with healthy sites in the oral cavity.
+</span></p>
+
+<p><img src="../../images/heinz/sulfur_publication.png" alt="publication on role of sulfure in periodontitis" loading="lazy" /></p>
+
+<p>]</p>
+
+<hr />
+
+<h1 id="potentially-interesting-pathways">Potentially interesting pathways</h1>
+
+<p>Also some potentially interesting novel pathways have been found.</p>
+
+<p><img src="../../images/heinz/novelpathways.png" alt="A large graph shown mostly in dark grey, several sub-graphs are highlighted in colour." loading="lazy" /></p>
+
+<hr />
+
+<h1 id="real-biology-vs-500-random-networks">Real biology vs. 500 random networks</h1>
+
+<p><img src="../../images/heinz/random-vs-real.png" alt="500 networks with shuffled weights were produced, a graph shows the subnetworks from networks with shuffled weights having low cumulative subnetwork scores, while the original subnetwork has a high score." loading="lazy" /></p>
+
+<p><span>Speaker Notes</span>
+Lastly, it is possible to check how significant the deregulated subnetwork itself is. This goes beyond the scope of the practical work.</p>
+
+<hr />
+
+<h1 id="practical">Practical</h1>
+
+<ul>
+  <li>Work on caries data set for a network analysis</li>
+  <li>Get a feel of running each tool, mentally map the parameters/options back to the method mentioned in this presentation.</li>
+  <li>Save all the steps into a workflow and rerun it.</li>
+</ul>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Analyzing differential expression for (meta)transcriptomics data</li>
+
+<li>Validating the p-value distribution of the differential expression analysis</li>
+
+<li>Finding the most differentially expressed subnetwork in a gene functional network using Heinz</li>
+
+<li>Interpreting the pinpointed subnetwork</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Interactive Tools</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Galaxy Interactive Tools" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/interactive-tools/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this rrepository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/interactive-tools/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Translate this page
+            </div>
+
+            <div id="lang-selector">
+                
+                <strong>Automatic Translations</strong>
+
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/interactive-tools/slides-plain.html&edit-text=&act=url">
+                Français
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/interactive-tools/slides-plain.html&edit-text=&act=url">
+                日本語
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/interactive-tools/slides-plain.html&edit-text=&act=url">
+                Español
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/interactive-tools/slides-plain.html&edit-text=&act=url">
+                Português
+                </a>
+                
+<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/interactive-tools/slides-plain.html&edit-text=&act=url">
+                العربية
+                </a>
+                
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Finteractive-tools%2Ftutorial.html&edit-text=&act=url" title="">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-07-01/topics/admin/tutorials/interactive-tools/slides-plain.html" title="Version 2021-07-01">2021-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-06-01/topics/admin/tutorials/interactive-tools/slides-plain.html" title="Version 2021-06-01">2021-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2021-05-01/topics/admin/tutorials/interactive-tools/slides-plain.html" title="Version 2021-05-01">2021-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/admin/tutorials/interactive-tools/slides.html">View markdown source on GitHub</a>
+	<h1>Galaxy Interactive Tools</h1>
+		<h2>Contributors</h2>
+		Nate Coraor, Estelle Ancelet, Anthony Bretaudeau
+
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Learn the differences between Galaxy Interactive Environments and Galaxy Interactive Tools</p>
+</li>
+		
+		<li><p>Have an understanding of what Galaxy Interactive Tools are and how they work</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 6, 2021 </div>
+
+	<hr />
+
+
+	<h1 id="history">History</h1>
+
+<h2 id="2015">2015</h2>
+
+<p>@hexylena, @bgruening, and @jmchilton create Galaxy Interactive Environments (GIEs)</p>
+
+<p>GIEs use Galaxy’s <em>visualization framework</em> to run certain types of <em>interactive</em> visualizations (e.g. Jupyter Notebook)</p>
+
+<p>GIEs run in a docker container on the Galaxy server or a single remote Docker server</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Galaxy Interactive Environments were added to Galaxy in 2015.</li>
+  <li>They are a type of visualization in Galaxy.</li>
+  <li>Accessible through the “Visualize” menu or under the visualization button on a dataset with a specific datatype.</li>
+  <li>Back then, the docker container serving an interactive environment could not be run on a cluster.</li>
+  <li>More details within Galaxy Interactive Environment slides.</li>
+</ul>
+
+<hr />
+<h1 id="history-1">History</h1>
+
+<h2 id="2016">2016</h2>
+
+<p>Support for Docker Swarm is added, allowing running a cluster for GIEs</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>As of 2016, Docker includes swarm mode for natively managing a cluster of Docker Engines called a swarm.</li>
+  <li>This allowed to run Galaxy Interactive Environment on a cluster.</li>
+</ul>
+
+<hr />
+<h1 id="history-2">History</h1>
+
+<h2 id="2019">2019</h2>
+
+<p>@blankenberg creates Galaxy Interactive Tools (GxITs)</p>
+
+<p>Building on the GIE concept, but run as <em>tools</em></p>
+
+<p>Tools run just as any other Galaxy job (e.g. via Slurm, HTCondor)</p>
+
+<p>You will sometimes see Interactive Tools referred to as Interactive Environments version 2</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>In 2019, were created the Galaxy Interactive Tools.</li>
+  <li>Like interactive environment, Galaxy Interactive Tools are built on docker containers and are accessible through the Galaxy interface.</li>
+  <li>But they are considered as tools.</li>
+  <li>They are launchable from the toolbox menu, on a predefined destination and prioritized as any other job.</li>
+</ul>
+
+<hr />
+<h1 id="tool-config-syntax">Tool config syntax</h1>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"interactive_tool_jupyter_notebook"</span> <span class="na">tool_type=</span><span class="s">"interactive"</span> <span class="na">name=</span><span class="s">"Interactive Jupyter Notebook"</span> <span class="na">version=</span><span class="s">"0.1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;requirements&gt;</span>
+        <span class="nt">&lt;container</span> <span class="na">type=</span><span class="s">"docker"</span><span class="nt">&gt;</span>quay.io/bgruening/docker-jupyter-notebook:ie2<span class="nt">&lt;/container&gt;</span>
+    <span class="nt">&lt;/requirements&gt;</span>
+    <span class="nt">&lt;entry_points&gt;</span>
+        <span class="nt">&lt;entry_point</span> <span class="na">name=</span><span class="s">"Jupyter Interactive Tool"</span> <span class="na">requires_domain=</span><span class="s">"True"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;port&gt;</span>8888<span class="nt">&lt;/port&gt;</span>
+            <span class="nt">&lt;url&gt;</span>ipython/lab<span class="nt">&lt;/url&gt;</span>
+        <span class="nt">&lt;/entry_point&gt;</span>
+    <span class="nt">&lt;/entry_points&gt;</span>
+<span class="nt">&lt;/tool&gt;</span>
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Some settings are needed to configure an interactive tool wrapper.</li>
+  <li>The tool type must be set to interactive.</li>
+  <li>As a requirement, set the path to the repository where the container is to be pulled from.</li>
+  <li>The tool entry point on the container must be defined.</li>
+  <li>For instance, for a Jupyter Notebook, you’ll give the port the application is served on and the domain name suffix.</li>
+</ul>
+
+<hr />
+<h1 id="mapping-clients-to-containers">Mapping clients to containers</h1>
+
+<ul>
+  <li>GIEs: Unique path, e.g. <code class="language-plaintext highlighter-rouge">https://galaxy.example.org/gie-proxy/jupyter/...</code>
+    <ul>
+      <li>Pros: Works with existing SSL certificate</li>
+      <li>Cons: Requires Galaxy session cookie (no sharing), can only run one at a time, closing your browser loses your session</li>
+    </ul>
+  </li>
+  <li>GxITs: Unique hostname, e.g. <code class="language-plaintext highlighter-rouge">https://&lt;unique-id&gt;.interactivetoolentrypoint.interactivetool.galaxy.example.org/</code>
+    <ul>
+      <li>Pros: Needs no special credentials (can be shared)</li>
+      <li>Cons: Requires <em>wildcard</em> DNS entry and <em>wildcard</em> SSL certificate (not possible at many sites)</li>
+    </ul>
+  </li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Diverse infrastructures behind Galaxy Interactive Environments and Galaxy Interactive Tools induces various constraints and benefits.</li>
+  <li>Particularly in building the path between the browser and the container.</li>
+</ul>
+
+<hr />
+<h1 id="anatomy-of-a-running-interactive-tool">Anatomy of a running Interactive Tool</h1>
+
+<figure id="figure-1"><img src="../../images/interactive-tools/gxit-proxy-diagram.png" alt="Galaxy Interactive Tools Proxy Diagram" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Galaxy Interactive Tools Proxy Diagram</figcaption></figure>
+
+<p>.reduce70[.footnote[The source for this figure can be found at: https://docs.google.com/presentation/d/1_4PtfM6A4mOxOlgGh6OGWvzFcxD1bdw4CydEWtm5n8k/]]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>This slide illustrates the steps allowing a client to interact with a Galaxy Interactive Tool.</li>
+  <li>We consider a Galaxy server running behind a reverse proxy (NGINX).</li>
+  <li>The client only ever speaks to NGINX on the Galaxy server, running on the standard HTTPS 443 port.</li>
+  <li>Based on the elements provided by the URL, NGINX redirects the requests to Galaxy over a unix domain socket as usual.</li>
+  <li>On the other hand, HTTP requests targetting interactive tools are redirected by NGINX to a proxy, called GIE Proxy, running on port 8000.</li>
+  <li>At this point, remember, when an docker container starts, it will be assigned a host (server or node) and a random port on that host (in our example, port 32768).</li>
+  <li>This information is stored by Galaxy in a sqlite database.</li>
+  <li>So the GIE proxy checks in this sqlite database to know which node and port the IT container is to be found.</li>
+  <li>The GIE proxy forwards the HTTP request to Docker on that node and port.</li>
+  <li>Docker, in turn, forwards it to the application (e.g. Jupyter) on the container’s port, defined in the wrapper.</li>
+</ul>
+
+<hr />
+<h1 id="galaxy-configuration">Galaxy configuration</h1>
+
+<p>Enable docker on a destination in <code class="language-plaintext highlighter-rouge">job_conf.xml</code> and assign your GxITs to that destination</p>
+
+<p>.left[Set in <code class="language-plaintext highlighter-rouge">galaxy.yml</code>:]</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">interactivetools_enable</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">interactivetools_map</span><span class="pi">:</span> <span class="s">/srv/galaxy/var/gie-proxy-sessions.sqlite</span>
+</code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>A few settings are needed to get interactive tools running within your Galaxy instance.</li>
+  <li>In your galaxy configuration file, enable the use of interactive tools then set the path to the sqlite database storing the proxying data.</li>
+  <li>In the job configuration file, give to the tool a destination allowing the use of Docker (more details in the tutorial).</li>
+</ul>
+
+<hr />
+<h1 id="proxy-configuration">Proxy configuration</h1>
+
+<p>Use the uWSGI proxy configuration that ships with Galaxy</p>
+
+<p>Or the <a href="https://galaxy.ansible.com/usegalaxy_eu/gie_proxy">Node.js-based proxy</a></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>In production, you are likely to use the Node.js based proxy, set up by the Galaxy admin team.</li>
+  <li>During developement, you can use the uWSGI proxy configuration used by default by Galaxy.</li>
+</ul>
+
+<hr />
+<h1 id="security">Security</h1>
+
+<p>The default docker-enabled container exposes all datasets to the tool</p>
+
+<p>Normally this isn’t bad (normal tools can’t be controlled by the user)</p>
+
+<p>Interactive tools are fully user controllable</p>
+
+<p>Solution: <a href="https://github.com/galaxyproject/galaxy/blob/6622ad1acb91866febb3d2f229de7cfb8af3a9f6/lib/galaxy/config/sample/job_conf.xml.sample_advanced#L106">Embedded Pulsar</a></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>As we have seen, interactive tools are launched in docker containers.</li>
+  <li>By default in galaxy, each container has full access to all user’s data.</li>
+  <li>This is a security issue since a user could take control of an interactive tool and read, write or delete those data.</li>
+</ul>
+
+<hr />
+<h1 id="embedded-pulsar">Embedded Pulsar</h1>
+
+<p>Runs a <a href="https://github.com/galaxyproject/pulsar">Pulsar</a> server within the Galaxy application to “stage” (i.e. copy) inputs.</p>
+
+<ul>
+  <li>Pros: Inputs in isolated dir so only that dir is mounted in the container: secure</li>
+  <li>Cons: Has to copy inputs on each Interactive Tool execution: slow</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>A solution to this security issue is to use embedded pulsar.</li>
+  <li>This way, pulsar makes available only the job input data to the container.</li>
+  <li>Moreover, these data are read only.</li>
+  <li>You will have more details in the tutorial.</li>
+</ul>
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+
+
+<img src="/training-material/assets/images/gat.png" alt="page logo" style="height: 100px;"/>
+
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+</p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/4b0ed3b1542db8c56041a291d19803d7262b8865">4b0ed3b1542db8c56041a291d19803d7262b8865</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

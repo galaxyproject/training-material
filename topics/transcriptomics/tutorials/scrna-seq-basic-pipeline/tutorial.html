@@ -29,30 +29,8 @@
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
-        
-
-
-
-
-
-
-
-
-
-
-
-<!-- Gitter -->
-
-
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
             <a class="navbar-brand" href="/training-material/">
                 <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
@@ -65,11 +43,12 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        
                         <a class="nav-link" href="/training-material/topics/transcriptomics" title="Go back to list of tutorials">
-                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Transcriptomics
+                            <i class="far fa-folder" aria-hidden="true"></i> Transcriptomics
                         </a>
+                        
                     </li>
-
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
         <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
@@ -208,15 +187,8 @@
     </div>
 </li>
 
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial.md">
-                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
-                        </a>
-                    </li>
-                    -->
 
-                     <!-- Search bar-->
+                    <!-- Search bar-->
                     <li class="nav-item">
                       <div id="navbarSupportedContent">
                         <!-- Search form -->
@@ -228,16 +200,37 @@
                         </form>
                       </div>
                     </li>
-
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 
-<div class="container main-content">
-    <script type="application/ld+json">
+        <div class="container main-content" role="main">
         
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
 
 
 {
@@ -359,6 +352,20 @@
     },
     {
       "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
       "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
       "name": "Mapping",
       "description": "Slides for 'Mapping' tutorial",
@@ -377,6 +384,20 @@
       "name": "Mapping",
       "description": "Hands-on for 'Mapping' tutorial",
       "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -431,58 +452,59 @@
     }
   ]
 }
-    </script>
+</script>
 
-    <section class="tutorial topic-transcriptomics">
-        <h1 data-toc-skip>Filter, Plot and Explore Single-cell RNA-seq Data</h1>
-        
+<section class="tutorial topic-transcriptomics">
+    <h1 data-toc-skip>Filter, Plot and Explore Single-cell RNA-seq Data</h1>
+    
 
-        <div class="contributors-line">By: 
+    <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nomadscientist" alt="Wendi Bacon">Wendi Bacon</a>
+ <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nomadscientist" alt="Avatar">Wendi Bacon</a>
 
 </div>
 
-        <blockquote class="overview">
-            <h3>Overview</h3>
-            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
-            <ul>
-            
-            <li><p>Is my single cell dataset a quality dataset?</p>
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions</strong>
+        <ul>
+        
+        <li><p>Is my single cell dataset a quality dataset?</p>
 </li>
-            
-            <li><p>How do I generate and annotate cell clusters?</p>
+        
+        <li><p>How do I generate and annotate cell clusters?</p>
 </li>
-            
-            <li><p>How do I pick thresholds and parameters in my analysis? What’s a “reasonable” number, and will the world collapse if I pick the wrong one?</p>
+        
+        <li><p>How do I pick thresholds and parameters in my analysis? What’s a “reasonable” number, and will the world collapse if I pick the wrong one?</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
-            <ul>
-            
-            <li><p>Interpret quality control plots to direct parameter decisions</p>
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+        <ul>
+        
+        <li><p>Interpret quality control plots to direct parameter decisions</p>
 </li>
-            
-            <li><p>Repeat analysis from matrix to clustering</p>
+        
+        <li><p>Repeat analysis from matrix to clustering</p>
 </li>
-            
-            <li><p>Identify decision-making points</p>
+        
+        <li><p>Identify decision-making points</p>
 </li>
-            
-            <li><p>Appraise data outputs and decisions</p>
+        
+        <li><p>Appraise data outputs and decisions</p>
 </li>
-            
-            <li><p>Explain why single cell analysis is an iterative (i.e. the first plots you generate are not final, but rather you go back and re-analyse your data repeatedly) process</p>
+        
+        <li><p>Explain why single cell analysis is an iterative (i.e. the first plots you generate are not final, but rather you go back and re-analyse your data repeatedly) process</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            
-            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
-            <ul>
-            
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+        <ul>
+        
     <li>
     
         
@@ -543,7 +565,7 @@
     
     </li>
 
-            
+        
     <li>
     
         
@@ -631,54 +653,53 @@
     
     </li>
 
-            </ul>
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default supporting_material"><a href="/training-material/topics/transcriptomics/slides/introduction.html">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Topic Overview slides
+                </a></li>
             
 
             
-            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 3 hours</div>
-            
-
-            
-
-            
-            
-
-            
-            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
-            <ul>
-                <div class="supporting_material">
-                
-                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/transcriptomics/slides/introduction.html" title="Topic Overview slides">
-                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Topic Overview slides
-                    </a></li>
-                
-
-                
-                    <li class="btn btn-default supporting_material">
+                <li class="btn btn-default supporting_material">
 <a class="topic-icon" href="https://zenodo.org/record/4624461">
-    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
 </a>
 
 </li>
-                
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
     <a class="topic-icon" href="/training-material/topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/workflows/" title="Workflows" alt="Filter, Plot and Explore Single-cell RNA-seq Data workflows">
-        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
     </a>
 
 </li>
-                
+            
 
-                
+            
 
-                
-                
-                
+            
+            
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
@@ -691,8 +712,6 @@
             </a>
         </li>
     
-    
-        
     
         
     
@@ -827,8 +846,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
             UseGalaxy.org (Main)
         </a>
@@ -844,22 +861,23 @@
 
 
 </li>
-                
-                </div>
-            </ul>
             
+        </ul>
+        
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 1, 2021 </div>
-        </blockquote>
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 1, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
-        <div class="container">
-            <div class="row">
-                <!-- sidebar, which will move to the top on a small screen -->
-                <div class="col-sm-2">
-                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
-                </div>
-                <div class="col-sm-10">
-                    <h1 class="no_toc" id="introduction">Introduction</h1>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <p>You’ve done all the work to make a <span class="notranslate">single cell</span> matrix, with gene counts and mitochondrial counts and buckets of cell metadata from all your variables of interest (or, if not, please see <a href="/training-material/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html">this tutorial</a> to do so!) Now it’s time to fully process our data, to remove low quality cells, to reduce the many dimensions of data that make it difficult to work with, and ultimately to try to define our clusters and to find our biological meaning and insights! There are many packages for analysing <span class="notranslate">single cell</span> data - Seurat <a class="citation" href="#Satija2015">Satija <i>et al.</i> 2015</a>, Scanpy <a class="citation" href="#Wolf2018">Wolf <i>et al.</i> 2018</a>, Monocle <a class="citation" href="#Trapnell2014">Trapnell <i>et al.</i> 2014</a>, Scater <a class="citation" href="#McCarthy2017">McCarthy <i>et al.</i> 2017</a>, and so forth. We’re working with Scanpy, because currently <span class="notranslate">Galaxy</span> hosts the most Scanpy tools of all of those options.</p>
 
@@ -1140,7 +1158,7 @@
 
     <ol>
       <li>The plot <code class="language-plaintext highlighter-rouge">violin - batch - log</code> will have what you’re looking for!
-        <figure id="figure-1"><img src="../../images/wab-violin-batch-log.png" alt="Violin - batch - log" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Violin - batch - log (Raw)</figcaption></figure>
+        <figure id="figure-1"><img src="../../images/wab-violin-batch-log.png" alt="Violin - batch - log" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Violin - batch - log (Raw)</figcaption></figure>
       </li>
       <li>Keeping in mind that this is a log scale - which means that small differences can mean large differences - the violin plots probably look pretty similar.
         <ul>
@@ -1170,8 +1188,8 @@
 
     <ol>
       <li>Similar to above, the plots <code class="language-plaintext highlighter-rouge">violin - sex - log</code> and <code class="language-plaintext highlighter-rouge">violin - genotype - log</code> will have what you’re looking for!
-        <figure id="figure-2"><img src="../../images/wab-violin-sex-log.png" alt="Violin - sex - log" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Violin - sex - log (Raw)</figcaption></figure>
-        <figure id="figure-3"><img src="../../images/wab-violin-genotype-log.png" alt="Violin - genotype - log" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Violin - genotype - log (Raw)</figcaption></figure>
+        <figure id="figure-2"><img src="../../images/wab-violin-sex-log.png" alt="Violin - sex - log" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Violin - sex - log (Raw)</figcaption></figure>
+        <figure id="figure-3"><img src="../../images/wab-violin-genotype-log.png" alt="Violin - genotype - log" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Violin - genotype - log (Raw)</figcaption></figure>
       </li>
       <li>There isn’t a major difference in sequencing depth across sex, I would say - though you are welcome to disagree!
         <ul>
@@ -1214,7 +1232,7 @@ Any bioinformatician will tell you that the best way to get clean data is in the
     <ol>
       <li>Any plot with <code class="language-plaintext highlighter-rouge">log1p_n_genes_by_counts</code> would do here, actually! Some people prefer scatterplots to violins.</li>
     </ol>
-    <figure id="figure-4"><img src="../../images/wab-scatter-genesxmito.png" alt="Scatter-genesxmito" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Scatter - mito x genes (Raw)</figcaption></figure>
+    <figure id="figure-4"><img src="../../images/wab-scatter-genesxmito.png" alt="Scatter-genesxmito" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Scatter - mito x genes (Raw)</figcaption></figure>
 
     <ol>
       <li>In <code class="language-plaintext highlighter-rouge">Scatter - mito x genes</code> you can see how cells with <code class="language-plaintext highlighter-rouge">log1p_n_genes_by_counts</code> up to around, perhaps, <code class="language-plaintext highlighter-rouge">5.7</code> (around 300 genes) often have high <code class="language-plaintext highlighter-rouge">pct_counts_mito</code>.
@@ -1240,7 +1258,7 @@ Any bioinformatician will tell you that the best way to get clean data is in the
     <ol>
       <li>As before, any plot with <code class="language-plaintext highlighter-rouge">log1p_n_total_counts</code> will do! Again, we’ll use a scatterplot here, but you can use a violin plot if you wish!</li>
     </ol>
-    <figure id="figure-5"><img src="../../images/wab-scatter-countsxmito.png" alt="Scatter-countsxmito" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Scatterplot - mito x UMIs (Raw)</figcaption></figure>
+    <figure id="figure-5"><img src="../../images/wab-scatter-countsxmito.png" alt="Scatter-countsxmito" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Scatterplot - mito x UMIs (Raw)</figcaption></figure>
 
     <ol>
       <li>We can see that we will need to set a higher threshold (which makes sense, as you’d expect more UMI’s per cell rather than unique genes!). Again, perhaps being a bit aggressive in our threshold, we might choose <code class="language-plaintext highlighter-rouge">6.3</code>, for instance (which amounts to around 500 counts/cell).
@@ -1264,7 +1282,7 @@ Any bioinformatician will tell you that the best way to get clean data is in the
     <ol>
       <li>Any plot with <code class="language-plaintext highlighter-rouge">pct_counts_mito</code> would do here, however the scatterplots are likely the easiest to interpret. We’ll use the same as last time.</li>
     </ol>
-    <figure id="figure-6"><img src="../../images/wab-scatter-countsxmito.png" alt="Scatter-countsxmito" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Scatterplot - mito x UMIs (Raw)</figcaption></figure>
+    <figure id="figure-6"><img src="../../images/wab-scatter-countsxmito.png" alt="Scatter-countsxmito" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Scatterplot - mito x UMIs (Raw)</figcaption></figure>
 
     <ol>
       <li>We can see a clear trend wherein cells that have around 5% mito counts or higher also have far fewer total counts. These cells are low quality, will muddy our data, and are likely stressed or ruptured prior to encapsulation in a droplet. While 5% is quite a common cut-off, this is quite messy data, so just for kicks we’ll go more aggressive with a <code class="language-plaintext highlighter-rouge">4.5%</code>.
@@ -1360,7 +1378,7 @@ Any bioinformatician will tell you that the best way to get clean data is in the
   <blockquote class="solution">
     <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <figure id="figure-7"><img src="../../images/wab-violin-raw-filteredgenes.png" alt="Violinplot-filteronce" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Raw vs 1st filter - genes/cell</figcaption></figure>
+    <figure id="figure-7"><img src="../../images/wab-violin-raw-filteredgenes.png" alt="Violinplot-filteronce" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Raw vs 1st filter - genes/cell</figcaption></figure>
     <ol>
       <li>The only part that seems to change is the <code class="language-plaintext highlighter-rouge">log1p_n_genes_by_counts</code>. You can see a flatter bottom to the violin plot - this is the lower threshold set. Ideally, this would create a beautiful violin plot because there would be a clear population of low-gene number cells. Sadly not the case here, but still a reasonable filter.</li>
       <li>In <code class="language-plaintext highlighter-rouge">General - Filterbygenes</code>, you can see you now have <code class="language-plaintext highlighter-rouge">14,501 cells x 35,734 genes</code>.</li>
@@ -1432,7 +1450,7 @@ Any bioinformatician will tell you that the best way to get clean data is in the
   <blockquote class="solution">
     <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <figure id="figure-8"><img src="../../images/wab-violin-filteredgenesxfilteredcounts.png" alt="Violinplot-filtertwice" /><figcaption><span class="figcaption-prefix">Figure 8:</span> 1st filter vs 2nd filter - counts/cell</figcaption></figure>
+    <figure id="figure-8"><img src="../../images/wab-violin-filteredgenesxfilteredcounts.png" alt="Violinplot-filtertwice" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> 1st filter vs 2nd filter - counts/cell</figcaption></figure>
     <ol>
       <li>We will focus on the <code class="language-plaintext highlighter-rouge">log1p_total_counts</code>. Similar to above, the bottom of the violin shape has flattered due to the threshold.</li>
       <li>In <code class="language-plaintext highlighter-rouge">General - Filterbycounts</code>, you can see you now have <code class="language-plaintext highlighter-rouge">7,916 cells x 35,734 genes</code>.</li>
@@ -1514,7 +1532,7 @@ Any bioinformatician will tell you that the best way to get clean data is in the
   <blockquote class="solution">
     <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <figure id="figure-9"><img src="../../images/wab-violin-mitofilter.png" alt="Violinplot-filtermito" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Violin plots after filtering genes, counts, and mito content/cell</figcaption></figure>
+    <figure id="figure-9"><img src="../../images/wab-violin-mitofilter.png" alt="Violinplot-filtermito" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Violin plots after filtering genes, counts, and mito content/cell</figcaption></figure>
     <ol>
       <li>If we carefully check the axes, we can see that the <code class="language-plaintext highlighter-rouge">pct_counts_mito</code> has shrunk.</li>
       <li>In <code class="language-plaintext highlighter-rouge">General - Filterbymito</code>, you can see you now have <code class="language-plaintext highlighter-rouge">7,874 × cells x 35,734 genes</code>.</li>
@@ -1525,7 +1543,7 @@ Any bioinformatician will tell you that the best way to get clean data is in the
 </blockquote>
 
 <p>Here’s a quick overall summary for easy visualisation if you fancy it.</p>
-<figure id="figure-10"><img src="../../images/wab-violins2gether.png" alt="Violinplot-Summary" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Filtering summary</figcaption></figure>
+<figure id="figure-10"><img src="../../images/wab-violins2gether.png" alt="Violinplot-Summary" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Filtering summary</figcaption></figure>
 
 <p>Fantastic work! However, you’ve now removed a whole heap of cells, and since the captured genes are sporadic (i.e. a small percentage of the overall transcriptome per cell) this means there are a number of genes in your matrix that are currently not in any of the remaining cells. Genes that do not appear in any cell, or even in only 1 or 2 cells, will make some analytical tools break and overall will not be biologically informative. So let’s remove them! Note that <code class="language-plaintext highlighter-rouge">3</code> is not necessarily the best number, rather it is a fairly conservative threshold. You could go as high as 10 or more.</p>
 
@@ -1702,7 +1720,7 @@ Any bioinformatician will tell you that the best way to get clean data is in the
 
 <p>Why 50 principal components you ask? Well, we’re pretty confident 50 is an over-estimate. Examine <code class="language-plaintext highlighter-rouge">PCA Variance</code>.</p>
 
-<figure id="figure-11"><img src="../../images/wab-pcavariance.png" alt="PCA-variance" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Variability explained per PC</figcaption></figure>
+<figure id="figure-11"><img src="../../images/wab-pcavariance.png" alt="PCA-variance" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Variability explained per PC</figcaption></figure>
 
 <p>We can see that there is really not much variation explained past component 19. So we might save ourselves a great deal of time and muddied data by focusing on the top <code class="language-plaintext highlighter-rouge">20</code> PCs.</p>
 
@@ -1958,7 +1976,7 @@ But first, let’s pick some marker genes from the <code class="language-plainte
   <h3 id="question-question---appearance-is-everything"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question - Appearance is everything</h3>
 
   <p>Which visualisation is the most useful for getting an overview of our data, <em>pca</em>, <em>tsne</em>, or <em>umap</em>?</p>
-  <figure id="figure-12"><img src="../../images/wab-3visualisations.png" alt="PCA-tSNE-UMAP" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Louvain clustering by dimension reduction</figcaption></figure>
+  <figure id="figure-12"><img src="../../images/wab-3visualisations.png" alt="PCA-tSNE-UMAP" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Louvain clustering by dimension reduction</figcaption></figure>
 
   <blockquote class="solution">
     <h3 id="solution-solution-10"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
@@ -2013,7 +2031,7 @@ But first, let’s pick some marker genes from the <code class="language-plainte
   </tbody>
 </table>
 
-<figure id="figure-13"><img src="../../images/wab-markergeneumaps.png" alt="Marker Gene UMAPs" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Known marker gene locations</figcaption></figure>
+<figure id="figure-13"><img src="../../images/wab-markergeneumaps.png" alt="Marker Gene UMAPs" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Known marker gene locations</figcaption></figure>
 
 <p>The authors weren’t interested in further annotation of the DP cells, so neither are we. Sometimes that just happens. The maths tries to call similar (ish) sized clusters, whether it is biologically relevant or not. Or, the question being asked doesn’t really require such granularity of clusters.</p>
 
@@ -2070,7 +2088,7 @@ But first, let’s pick some marker genes from the <code class="language-plainte
 
 </blockquote>
 
-<figure id="figure-14"><img src="../../images/wab-annotated cells.png" alt="Annotated cell types" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Our annotated UMAP</figcaption></figure>
+<figure id="figure-14"><img src="../../images/wab-annotated cells.png" alt="Annotated cell types" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Our annotated UMAP</figcaption></figure>
 
 <p>Now that we know what we’re dealing with, let’s examine the effect of our variable, proper science!</p>
 
@@ -2079,7 +2097,7 @@ But first, let’s pick some marker genes from the <code class="language-plainte
 
   <p>Are there any differences in genotype? Or in biological terms, is there an impact of growth restriction on T-cell development in the thymus?</p>
 
-  <figure id="figure-15"><img src="../../images/wab-genotypedifferences.png" alt="Genotype Images" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Genotype differences</figcaption></figure>
+  <figure id="figure-15"><img src="../../images/wab-genotypedifferences.png" alt="Genotype Images" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Genotype differences</figcaption></figure>
 
   <blockquote class="solution">
     <h3 id="solution-solution-11"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
@@ -2099,7 +2117,7 @@ But first, let’s pick some marker genes from the <code class="language-plainte
 
   <p>Is there a batch effect?</p>
 
-  <figure id="figure-16"><img src="../../images/wab-batcheffect.png" alt="Batch effect" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Batch effect?</figcaption></figure>
+  <figure id="figure-16"><img src="../../images/wab-batcheffect.png" alt="Batch effect" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Batch effect?</figcaption></figure>
 
   <blockquote class="solution">
     <h3 id="solution-solution-12"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
@@ -2107,7 +2125,7 @@ But first, let’s pick some marker genes from the <code class="language-plainte
     <p>While some shifts are expected and nothing to be concerned about, DP-L looks to be comprised of only two samples - N706 and N705. Now, to be fair, both of those are wildtype, but still, it’s not good that only 50% of the wildtype samples are really in that cluster. What’s to say that’s the reason there are no knockout cells there? There might be a bit of batch effect, so you could consider using batch correction on this dataset. However, if we focus our attention on the other cluster - mature T-cells -  where there is batch mixing, we can still assess this biologically even without batch correction.
 Additionally, we will also look at the confounding effect of sex.</p>
 
-    <figure id="figure-17"><img src="../../images/wab-sex-batch.png" alt="Sex effect" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Sex differences</figcaption></figure>
+    <figure id="figure-17"><img src="../../images/wab-sex-batch.png" alt="Sex effect" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Sex differences</figcaption></figure>
 
     <p>We note that the one female sample - unfortunately one of the mere three knockout samples - seems to be distributed in the same areas as the knockout samples at large, so luckily, this doesn’t seem to be a confounding factor and we can still learn from our data. Ideally, this experiment would be re-run with either more female samples all around or swapping out this female from the male sample.</p>
 
@@ -2120,7 +2138,7 @@ Additionally, we will also look at the confounding effect of sex.</p>
 
   <p>Are there any clusters or differences being driven by sequencing depth, a technical and random factor?</p>
 
-  <figure id="figure-18"><img src="../../images/wab-umap-totalcounts.png" alt="Sequencing depth" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Counts across clusters</figcaption></figure>
+  <figure id="figure-18"><img src="../../images/wab-umap-totalcounts.png" alt="Sequencing depth" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Counts across clusters</figcaption></figure>
 
   <blockquote class="solution">
     <h3 id="solution-solution-13"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
@@ -2136,7 +2154,7 @@ Additionally, we will also look at the confounding effect of sex.</p>
 
   <p>Do you think we processed these samples good enough?</p>
 
-  <figure id="figure-19"><img src="../../images/wab-hba.png" alt="Sequencing depth" /><figcaption><span class="figcaption-prefix">Figure 19:</span> Hemoglobin across clusters</figcaption></figure>
+  <figure id="figure-19"><img src="../../images/wab-hba.png" alt="Sequencing depth" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 19:</span> Hemoglobin across clusters</figcaption></figure>
 
   <blockquote class="solution">
     <h3 id="solution-solution-14"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
@@ -2152,7 +2170,7 @@ Additionally, we will also look at the confounding effect of sex.</p>
 
   <p>Do you think the clustering is appropriate? i.e. are there single clusters that you think should be separate, and multiple clusters that could be combined?</p>
 
-  <figure id="figure-20"><img src="../../images/wab-umap-itm2a.png" alt="Itm2a Expression" /><figcaption><span class="figcaption-prefix">Figure 20:</span> Itm2a across clusters</figcaption></figure>
+  <figure id="figure-20"><img src="../../images/wab-umap-itm2a.png" alt="Itm2a Expression" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 20:</span> Itm2a across clusters</figcaption></figure>
 
   <blockquote class="solution">
     <h3 id="solution-solution-15"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
@@ -2226,37 +2244,37 @@ For those that did not take the ‘control’ options, please</p>
 <p>In this tutorial, you moved from technical processing to biological exploration. By analysing real data - both the exciting and the messy! - you have, hopefully, experienced what it’s like to analyse and question a dataset, potentially without clear cut-offs or clear answers. If you were working in a group, you each analysed the data in different ways, and most likely found similar insights. One of the biggest problems in analysing sc<span class="notranslate">RNA</span>-seq is the lack of a clearly defined pathway or parameters. You have to make the best call you can as you move through your analysis, and ultimately, when in doubt, try it multiple ways and see what happens!</p>
 
 <p>To discuss with like-minded scientists, join our Gitter channel for all things <span class="notranslate">Galaxy</span>-<span class="notranslate">single cell</span>!
-<a href="https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg" alt="Gitter" /></a></p>
+<a href="https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg" alt="Gitter" loading="lazy" /></a></p>
 
 
-                    
-                    <blockquote class="key_points">
-                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
-                        <ul>
-                            
-                            <li><p>Single cell data is huge, and must have its many (# genes) dimensions reduced for analysis</p>
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Single cell data is huge, and must have its many (# genes) dimensions reduced for analysis</p>
 </li>
-                            
-                            <li><p>Analysis is more subjective than we think, and biological understanding of the samples as well as many iterations of analysis are important to give us our best change of attaining real biological insights</p>
+                        
+                        <li><p>Analysis is more subjective than we think, and biological understanding of the samples as well as many iterations of analysis are important to give us our best change of attaining real biological insights</p>
 </li>
-                            
-                        </ul>
-                    </blockquote>
-                    
+                        
+                    </ul>
+                </blockquote>
+                
 
-                    <h1>Frequently Asked Questions</h1>
-                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/transcriptomics/faqs/">FAQ page for the Transcriptomics topic</a> to see if your question is listed there.
-                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
-                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/transcriptomics/faqs/">FAQ page for the Transcriptomics topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
-                    
-                    <h1 data-toc-skip>Useful literature</h1>
-                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
-                    
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
+                
 
-                    
-                    <h1 id="bibliography">References</h1>
-                    <ol class="bibliography"><li><span id="Trapnell2014">Trapnell, C., D. Cacchiarelli, J. Grimsby, P. Pokharel, S. Li <i>et al.</i>, 2014 <b>The dynamics and regulators of cell fate decisions are revealed by pseudotemporal ordering of single cells</b>. Nature Biotechnology 32: 381–386.</span>
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li><span id="Trapnell2014">Trapnell, C., D. Cacchiarelli, J. Grimsby, P. Pokharel, S. Li <i>et al.</i>, 2014 <b>The dynamics and regulators of cell fate decisions are revealed by pseudotemporal ordering of single cells</b>. Nature Biotechnology 32: 381–386.</span>
     
     
     <a href="https://doi.org/10.1038/nbt.2859">10.1038/nbt.2859</a>
@@ -2335,85 +2353,85 @@ For those that did not take the ‘control’ options, please</p>
     
 
 </li></ol>
-                    
+                
 
-                    
+                
 
-                    <h1>Feedback</h1>
-                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
-                    <div id="feedback-button">
-                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                    </div>
-                    <div id="feedback-form">
-                    </div>
-                    <script type="text/javascript">
-                        (function (window, document) {
-                            function onDocumentReady(fn) {
-                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                    fn();
-                                } else {
-                                    document.addEventListener('DOMContentLoaded', fn);
-                                }
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
                             }
+                        }
 
-                            onDocumentReady(function () {
-                                $("#feedback-button").click(function(evt){
-                                    var e = $(evt.target)
-                                    e.hide();
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
 
-                                    $("#feedback-form").html(`
-                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Filter, Plot and Explore Single-cell RNA-seq Data (Transcriptomics)">Loading...</iframe>
-                                    `)
-                                })
-                            });
-                        })(window, document);
-                    </script>
-
-
-
-                    <h1>Citing this Tutorial</h1>
-                    <p>
-                        <ol>
-                            <li id="citation-text">Wendi Bacon, 2021 <b>Filter, Plot and Explore Single-cell RNA-seq Data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial.html</a> Online; accessed TODAY
-                            </li>
-                            <li>
-                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
-                            </li>
-                        </ol>
-                    </p>
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Filter, Plot and Explore Single-cell RNA-seq Data (Transcriptomics)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
 
 
-                    <blockquote class="details">
-                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
-                      <p style="display: none;">
 
-                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Wendi Bacon, 2021 <b>Filter, Plot and Explore Single-cell RNA-seq Data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{transcriptomics-scrna-seq-basic-pipeline,
-    author = "Wendi Bacon",
-    title = "Filter, Plot and Explore Single-cell RNA-seq Data (Galaxy Training Materials)",
-    year = "2021",
-    month = "07",
-    day = "01"
-    url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial.html}",
-    note = "[Online; accessed TODAY]"
+author = "Wendi Bacon",
+title = "Filter, Plot and Explore Single-cell RNA-seq Data (Galaxy Training Materials)",
+year = "2021",
+month = "07",
+day = "01"
+url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial.html}",
+note = "[Online; accessed TODAY]"
 }
 @article{Batut_2018,
-        doi = {10.1016/j.cels.2018.05.012},
-        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
-        year = 2018,
-        month = {jun},
-        publisher = {Elsevier {BV}},
-        volume = {6},
-        number = {6},
-        pages = {752--758.e1},
-        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
-        title = {Community-Driven Data Analysis Training for Biology},
-        journal = {Cell Systems}
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
 }</code>
-                    </pre></div></div>
-                    </p>
-                    </blockquote>
+                </pre></div></div>
+                </p>
+                </blockquote>
 
 
 <script type="text/javascript">
@@ -2423,36 +2441,22 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
-                    
+                
 
-                    
+                
 
-                </div>
             </div>
         </div>
-    </section>
-</div>
-
-
-<footer>
-    <div class="container">
-        <p>
-            This material is the result of a collaborative work. Thanks to the
-            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Wendi Bacon)!
-        </p>
-        <p>
-            Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial.md">GitHub</a>.
-        </p>
-        <p>
-    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-</p>
     </div>
-</footer>
+</section>
+<br/>
+<br/>
+<br/>
 
+        </div>
+        
     </body>
     <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>

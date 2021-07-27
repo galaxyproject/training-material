@@ -29,30 +29,8 @@
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
-        
-
-
-
-
-
-
-
-
-
-
-
-<!-- Gitter -->
-
-
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/admins'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
             <a class="navbar-brand" href="/training-material/">
                 <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
@@ -65,11 +43,12 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        
                         <a class="nav-link" href="/training-material/topics/admin" title="Go back to list of tutorials">
-                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Galaxy Server administration
+                            <i class="far fa-folder" aria-hidden="true"></i> Galaxy Server administration
                         </a>
+                        
                     </li>
-
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
         <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
@@ -208,15 +187,8 @@
     </div>
 </li>
 
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/monitoring/tutorial.md">
-                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
-                        </a>
-                    </li>
-                    -->
 
-                     <!-- Search bar-->
+                    <!-- Search bar-->
                     <li class="nav-item">
                       <div id="navbarSupportedContent">
                         <!-- Search form -->
@@ -228,16 +200,37 @@
                         </form>
                       </div>
                     </li>
-
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 
-<div class="container main-content">
-    <script type="application/ld+json">
+        <div class="container main-content" role="main">
         
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxyproject/admins'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
 
 
 {
@@ -347,6 +340,20 @@
     },
     {
       "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible/slides.html",
+      "name": "Ansible",
+      "description": "Slides for 'Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
       "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible-galaxy/slides.html",
       "name": "Galaxy Installation with Ansible",
       "description": "Slides for 'Galaxy Installation with Ansible' tutorial",
@@ -365,6 +372,20 @@
       "name": "Galaxy Installation with Ansible",
       "description": "Hands-on for 'Galaxy Installation with Ansible' tutorial",
       "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible-galaxy/slides.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Slides for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "slides",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -400,6 +421,20 @@
         "name": "Galaxy Training Network",
         "url": "https://galaxyproject.org/teach/gtn/"
       }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/gxadmin/slides.html",
+      "name": "Galaxy Monitoring with gxadmin",
+      "description": "Slides for 'Galaxy Monitoring with gxadmin' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
     }
   ],
   "hasPart": [
@@ -426,59 +461,60 @@
     }
   ]
 }
-    </script>
+</script>
 
-    <section class="tutorial topic-admin">
-        <h1 data-toc-skip>Galaxy Monitoring with Telegraf and Grafana</h1>
-        
+<section class="tutorial topic-admin">
+    <h1 data-toc-skip>Galaxy Monitoring with Telegraf and Grafana</h1>
+    
 
-        <div class="contributors-line">By: 
+    <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Helena Rasche">Helena Rasche</a>
+ <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Avatar">Helena Rasche</a>
 
 </div>
 
-        <blockquote class="overview">
-            <h3>Overview</h3>
-            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
-            <ul>
-            
-            <li><p>How to monitor Galaxy with Telegraf</p>
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions</strong>
+        <ul>
+        
+        <li><p>How to monitor Galaxy with Telegraf</p>
 </li>
-            
-            <li><p>How do I set up InfluxDB</p>
+        
+        <li><p>How do I set up InfluxDB</p>
 </li>
-            
-            <li><p>How can I make graphs in Grafana?</p>
+        
+        <li><p>How can I make graphs in Grafana?</p>
 </li>
-            
-            <li><p>How can I best alert on important metrics?</p>
+        
+        <li><p>How can I best alert on important metrics?</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
-            <ul>
-            
-            <li><p>Setup InfluxDB</p>
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+        <ul>
+        
+        <li><p>Setup InfluxDB</p>
 </li>
-            
-            <li><p>Setup Telegraf</p>
+        
+        <li><p>Setup Telegraf</p>
 </li>
-            
-            <li><p>Setup Grafana</p>
+        
+        <li><p>Setup Grafana</p>
 </li>
-            
-            <li><p>Create several charts</p>
+        
+        <li><p>Create several charts</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            
-            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
-            <ul>
-            
-            
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+        <ul>
+        
+        
     <li>
     
         
@@ -765,54 +801,54 @@
     
     </li>
 
-            </ul>
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default"><a href="/training-material/topics/admin/tutorials/monitoring/slides.html">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Slides
+                </a></li>
             
 
             
-            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours</div>
-            
 
             
 
             
+
+            
+            
             
 
             
-            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
-            <ul>
-                <div class="supporting_material">
-                
-                    <li class="btn btn-default"><a href="/training-material/topics/admin/tutorials/monitoring/slides.html" title="Slides for this tutorial">
-                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides
-                    </a></li>
-                
+        </ul>
+        
 
-                
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 9, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
-                
+    </blockquote>
 
-                
-
-                
-                
-                
-
-                
-                </div>
-            </ul>
-            
-
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 9, 2021 </div>
-        </blockquote>
-
-        <div class="container">
-            <div class="row">
-                <!-- sidebar, which will move to the top on a small screen -->
-                <div class="col-sm-2">
-                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
-                </div>
-                <div class="col-sm-10">
-                    <h1 class="no_toc" id="overview">Overview</h1>
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                <h1 class="no_toc" id="overview">Overview</h1>
 
 <p>Monitoring is an incredibly important part of server monitoring and maintenance. Being able to observe trends and identify hot spots by collecting metrics gives you a significant ability to respond to any issues that arise in production. Monitoring is quite easy to get started with, it can be as simple as writing a quick shell script in order to start collecting metrics.</p>
 
@@ -1368,7 +1404,7 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
     <li>
       <p>Click <em>Add Query</em>, and you will be dropped into the Grafana query builder</p>
 
-      <p><img src="../../images/grafana-query-builder.png" alt="Grafana query builder interface" /></p>
+      <p><img src="../../images/grafana-query-builder.png" alt="Grafana query builder interface" loading="lazy" /></p>
 
       <p>This is the query builder interface. The interface somewhat resembles a SQL query, selecting data <em>from</em> a database, <em>where</em> it meets some condition, <em>select</em>ing some specific data, and <em>grouping by</em> time period. If this isn’t immediately clear how it behaves, hopefully it will become more clear once you have built some queries.</p>
     </li>
@@ -1454,7 +1490,7 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 
 <p>There is a significant amount of visual styling that one can do to the graphs to make data more or less prominent as you need.</p>
 
-<figure id="figure-1"><img src="../../images/grafana-graph-sections.png" alt="Grafana graph configuration sections" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Graph configuration sections, from top to bottom: data, visualisation, configuration, and alerting</figcaption></figure>
+<figure id="figure-1"><img src="../../images/grafana-graph-sections.png" alt="Grafana graph configuration sections" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Graph configuration sections, from top to bottom: data, visualisation, configuration, and alerting</figcaption></figure>
 
 <p>We will update the panel we’ve added to highlight the important information and downplay less important facets, as well as configuring it to have a nicer title than “Panel Title”</p>
 
@@ -1532,7 +1568,7 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 
 <p>Your graph should look something like the following:</p>
 
-<figure id="figure-2"><img src="../../images/grafana-graph-final.png" alt="Final graph" /><figcaption><span class="figcaption-prefix">Figure 2:</span> The final graph should look something like this, but probably different based on the requests to your server. For this image the author made repeated, automated requests to <span class="notranslate">Galaxy</span> to produce more data points than might normally be present.</figcaption></figure>
+<figure id="figure-2"><img src="../../images/grafana-graph-final.png" alt="Final graph" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> The final graph should look something like this, but probably different based on the requests to your server. For this image the author made repeated, automated requests to <span class="notranslate">Galaxy</span> to produce more data points than might normally be present.</figcaption></figure>
 
 <h2 id="monitoring">Monitoring</h2>
 
@@ -1776,7 +1812,7 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 
 <p>Run some tools in <span class="notranslate">Galaxy</span>, try to generate a large number of jobs. It is relatively easy to upload a dataset, and then run the “Secure Hash / Message Digest” or another tool repeatedly, running it over every dataset in your history, repeating until you’ve generated a few dozen datasets. If you have a slower tool like <code class="language-plaintext highlighter-rouge">bwa</code> installed, this can be an option too.</p>
 
-<figure id="figure-3"><img src="../../images/grafana-final-graph.png" alt="Final Graph" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Final graphs generated from this tutorial.</figcaption></figure>
+<figure id="figure-3"><img src="../../images/grafana-final-graph.png" alt="Final Graph" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Final graphs generated from this tutorial.</figcaption></figure>
 
 <p>You can also import a <a href="/training-material/topics/admin/tutorials/monitoring/dashboard.json">copy of the dashboard</a>.</p>
 
@@ -1785,40 +1821,40 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 <p>Monitoring with Telegraf, InfluxDB, and Grafana can provide an easy solution to monitor your infrastructure. The Use<span class="notranslate">Galaxy</span>.* servers use this stack and it has proven to be effective in production situations, with large <span class="notranslate">Galaxy</span> servers. The base monitoring done with Telegraf is easy to setup and extend on a per-site basis simply by adding scripts or commands to your servers which generate InfluxDB line protocol formatted output. Grafana provides an ideal visualisation solution as it encourages sharing, and allows you to import whatever dashboards have been developed by Use<span class="notranslate">Galaxy</span>.*, and then to extend them to your own needs.</p>
 
 
-                    
-                    <blockquote class="key_points">
-                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
-                        <ul>
-                            
-                            <li><p>Telegraf provides an easy solution to monitor servers</p>
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Telegraf provides an easy solution to monitor servers</p>
 </li>
-                            
-                            <li><p>Galaxy can send metrics to Telegraf</p>
+                        
+                        <li><p>Galaxy can send metrics to Telegraf</p>
 </li>
-                            
-                            <li><p>Telegraf can run arbitrary commands like <code class="language-plaintext highlighter-rouge">gxadmin</code>, which provides influx formatted output</p>
+                        
+                        <li><p>Telegraf can run arbitrary commands like <code class="language-plaintext highlighter-rouge">gxadmin</code>, which provides influx formatted output</p>
 </li>
-                            
-                            <li><p>InfluxDB can collect metrics from Telegraf</p>
+                        
+                        <li><p>InfluxDB can collect metrics from Telegraf</p>
 </li>
-                            
-                            <li><p>Use Grafana to visualise these metrics, and monitor their values</p>
+                        
+                        <li><p>Use Grafana to visualise these metrics, and monitor their values</p>
 </li>
-                            
-                        </ul>
-                    </blockquote>
-                    
+                        
+                    </ul>
+                </blockquote>
+                
 
-                    <h1>Frequently Asked Questions</h1>
-                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/admin/faqs/">FAQ page for the Galaxy Server administration topic</a> to see if your question is listed there.
-                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
-                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/admin/faqs/">FAQ page for the Galaxy Server administration topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
-                    
+                
 
-                    
-                    <h1 id="bibliography">References</h1>
-                    <ol class="bibliography"><li><span id="Beyer:2016:SRE:3006357">Beyer, B., C. Jones, J. Petoff, and N. R. Murphy, 2016 <b>Site Reliability Engineering: How Google Runs Production Systems</b>. <i>O’Reilly Media, Inc.</i></span>
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li><span id="Beyer:2016:SRE:3006357">Beyer, B., C. Jones, J. Petoff, and N. R. Murphy, 2016 <b>Site Reliability Engineering: How Google Runs Production Systems</b>. <i>O’Reilly Media, Inc.</i></span>
     
     
     
@@ -1829,85 +1865,85 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
     
 
 </li></ol>
-                    
+                
 
-                    
+                
 
-                    <h1>Feedback</h1>
-                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
-                    <div id="feedback-button">
-                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                    </div>
-                    <div id="feedback-form">
-                    </div>
-                    <script type="text/javascript">
-                        (function (window, document) {
-                            function onDocumentReady(fn) {
-                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                    fn();
-                                } else {
-                                    document.addEventListener('DOMContentLoaded', fn);
-                                }
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
                             }
+                        }
 
-                            onDocumentReady(function () {
-                                $("#feedback-button").click(function(evt){
-                                    var e = $(evt.target)
-                                    e.hide();
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
 
-                                    $("#feedback-form").html(`
-                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Galaxy Monitoring with Telegraf and Grafana (Galaxy Server administration)">Loading...</iframe>
-                                    `)
-                                })
-                            });
-                        })(window, document);
-                    </script>
-
-
-
-                    <h1>Citing this Tutorial</h1>
-                    <p>
-                        <ol>
-                            <li id="citation-text">Helena Rasche, 2021 <b>Galaxy Monitoring with Telegraf and Grafana (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/tutorial.html">https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/tutorial.html</a> Online; accessed TODAY
-                            </li>
-                            <li>
-                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
-                            </li>
-                        </ol>
-                    </p>
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Galaxy Monitoring with Telegraf and Grafana (Galaxy Server administration)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
 
 
-                    <blockquote class="details">
-                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
-                      <p style="display: none;">
 
-                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Helena Rasche, 2021 <b>Galaxy Monitoring with Telegraf and Grafana (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/tutorial.html">https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{admin-monitoring,
-    author = "Helena Rasche",
-    title = "Galaxy Monitoring with Telegraf and Grafana (Galaxy Training Materials)",
-    year = "2021",
-    month = "07",
-    day = "09"
-    url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/tutorial.html}",
-    note = "[Online; accessed TODAY]"
+author = "Helena Rasche",
+title = "Galaxy Monitoring with Telegraf and Grafana (Galaxy Training Materials)",
+year = "2021",
+month = "07",
+day = "09"
+url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/tutorial.html}",
+note = "[Online; accessed TODAY]"
 }
 @article{Batut_2018,
-        doi = {10.1016/j.cels.2018.05.012},
-        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
-        year = 2018,
-        month = {jun},
-        publisher = {Elsevier {BV}},
-        volume = {6},
-        number = {6},
-        pages = {752--758.e1},
-        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
-        title = {Community-Driven Data Analysis Training for Biology},
-        journal = {Cell Systems}
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
 }</code>
-                    </pre></div></div>
-                    </p>
-                    </blockquote>
+                </pre></div></div>
+                </p>
+                </blockquote>
 
 
 <script type="text/javascript">
@@ -1917,36 +1953,22 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
-                    
+                
 
-                    
+                
 
-                </div>
             </div>
         </div>
-    </section>
-</div>
-
-
-<footer>
-    <div class="container">
-        <p>
-            This material is the result of a collaborative work. Thanks to the
-            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Helena Rasche)!
-        </p>
-        <p>
-            Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/admin/tutorials/monitoring/tutorial.md">GitHub</a>.
-        </p>
-        <p>
-    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-</p>
     </div>
-</footer>
+</section>
+<br/>
+<br/>
+<br/>
 
+        </div>
+        
     </body>
     <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>

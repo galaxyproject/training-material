@@ -29,30 +29,8 @@
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
-        
-
-
-
-
-
-
-
-
-
-
-
-<!-- Gitter -->
-
-
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxycomputationalchemistry/Lobby'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
             <a class="navbar-brand" href="/training-material/">
                 <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
@@ -65,11 +43,12 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        
                         <a class="nav-link" href="/training-material/topics/computational-chemistry" title="Go back to list of tutorials">
-                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Computational chemistry
+                            <i class="far fa-folder" aria-hidden="true"></i> Computational chemistry
                         </a>
+                        
                     </li>
-
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
         <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
@@ -208,15 +187,8 @@
     </div>
 </li>
 
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/computational-chemistry/tutorials/cheminformatics/tutorial.md">
-                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
-                        </a>
-                    </li>
-                    -->
 
-                     <!-- Search bar-->
+                    <!-- Search bar-->
                     <li class="nav-item">
                       <div id="navbarSupportedContent">
                         <!-- Search form -->
@@ -228,16 +200,37 @@
                         </form>
                       </div>
                     </li>
-
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 
-<div class="container main-content">
-    <script type="application/ld+json">
+        <div class="container main-content" role="main">
         
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxycomputationalchemistry/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
 
 
 {
@@ -354,49 +347,50 @@
   ],
   "skillLevel": "Intermediate"
 }
-    </script>
+</script>
 
-    <section class="tutorial topic-computational-chemistry">
-        <h1 data-toc-skip>Protein-ligand docking</h1>
-        
+<section class="tutorial topic-computational-chemistry">
+    <h1 data-toc-skip>Protein-ligand docking</h1>
+    
 
-        <div class="contributors-line">By: 
+    <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/simonbray/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/simonbray" alt="Simon Bray">Simon Bray</a>
+ <a href="/training-material/hall-of-fame/simonbray/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/simonbray" alt="Avatar">Simon Bray</a>
 
 </div>
 
-        <blockquote class="overview">
-            <h3>Overview</h3>
-            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
-            <ul>
-            
-            <li><p>What is cheminformatics?</p>
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions</strong>
+        <ul>
+        
+        <li><p>What is cheminformatics?</p>
 </li>
-            
-            <li><p>What is protein-ligand docking?</p>
+        
+        <li><p>What is protein-ligand docking?</p>
 </li>
-            
-            <li><p>How can I perform a simple docking workflow in Galaxy?</p>
+        
+        <li><p>How can I perform a simple docking workflow in Galaxy?</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
-            <ul>
-            
-            <li><p>Create a small compound library using the ChEMBL database</p>
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+        <ul>
+        
+        <li><p>Create a small compound library using the ChEMBL database</p>
 </li>
-            
-            <li><p>Dock a variety of ligands to the active site of the Hsp90 protein</p>
+        
+        <li><p>Dock a variety of ligands to the active site of the Hsp90 protein</p>
 </li>
-            
-            </ul>
+        
+        </ul>
 
-            
-            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
-            <ul>
-            
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+        <ul>
+        
     <li>
     
         
@@ -406,52 +400,51 @@
     
     </li>
 
-            
-            </ul>
-            
+        
+        </ul>
+        
 
-            
-            <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 3 hours</div>
-            
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        
 
-            
-            <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
-             Intermediate 
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+         Intermediate 
 <span class="level intermediate" title="Intermediate Tutorial">
-  <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
 </span>
 
 </div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+        <ul class="supporting_material">
             
 
             
-            
 
             
-            <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
-            <ul>
-                <div class="supporting_material">
-                
-
-                
-
-                
-                    <li class="btn btn-default supporting_material">
+                <li class="btn btn-default supporting_material">
     <a class="topic-icon" href="/training-material/topics/computational-chemistry/tutorials/cheminformatics/workflows/" title="Workflows" alt="Protein-ligand docking workflows">
-        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
     </a>
 
 </li>
-                
+            
 
-                
+            
 
-                
-                
-                
+            
+            
+            
 
-                
-                    <li class="btn btn-default supporting_material">
+            
+                <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
@@ -464,8 +457,6 @@
             </a>
         </li>
     
-    
-        
     
         
     
@@ -596,8 +587,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -641,22 +630,23 @@
 
 
 </li>
-                
-                </div>
-            </ul>
             
+        </ul>
+        
 
-            <div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 7, 2021 </div>
-        </blockquote>
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 7, 2021 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
-        <div class="container">
-            <div class="row">
-                <!-- sidebar, which will move to the top on a small screen -->
-                <div class="col-sm-2">
-                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
-                </div>
-                <div class="col-sm-10">
-                    <h1 class="no_toc" id="introduction">Introduction</h1>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <p>Cheminformatics is the use of computational techniques and information about molecules to solve problems in chemistry. This involves a number of steps: retrieving data on chemical compounds, sorting data for properties which are of interest, and extracting new information. This tutorial will provide a brief overview of all of these, centered around protein-ligand docking, a molecular modelling technique. The purpose of protein-ligand docking is to find the optimal binding between a small molecule (ligand) and a protein. It is generally applied to the drug discovery and development process with the aim of finding a potential drug candidate. First, a target protein is identified. This protein is usually linked to a disease and is known to bind small molecules. Second, a ‘library’ of possible ligands is assembled. Ligands are small molecules that bind to a protein and may interfere with protein function. Each of the compounds in the library is then ‘docked’ into the protein to find the optimal binding position and energy.</p>
 
@@ -719,7 +709,7 @@
 
 </blockquote>
 
-<figure id="figure-1"><img src="/training-material/topics/computational-chemistry/images/2brc.png" alt="Hsp90 N-terminus structure" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Structure of Hsp90 N-terminus, as recorded on the PDB. Visualization produced using VMD  (<a class="citation" href="#Humphrey1996">Humphrey <i>et al.</i> 1996</a>).</figcaption></figure>
+<figure id="figure-1"><img src="/training-material/topics/computational-chemistry/images/2brc.png" alt="Hsp90 N-terminus structure" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Structure of Hsp90 N-terminus, as recorded on the PDB. Visualization produced using VMD  (<a class="citation" href="#Humphrey1996">Humphrey <i>et al.</i> 1996</a>).</figcaption></figure>
 
 <h1 id="separating-protein-and-ligand-structures">Separating protein and ligand structures</h1>
 
@@ -1018,7 +1008,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 
 <p>This produces an SVG image of all the structures generated ordered by molecular weight.</p>
 
-<figure id="figure-2"><img src="/training-material/topics/computational-chemistry/images/compound_library.png" alt="Hsp90 N-terminus structure" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Structures of the compounds from ChEMBL.</figcaption></figure>
+<figure id="figure-2"><img src="/training-material/topics/computational-chemistry/images/compound_library.png" alt="Hsp90 N-terminus structure" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Structures of the compounds from ChEMBL.</figcaption></figure>
 
 <h3 id="calculation-of-fingerprints-and-clustering">Calculation of fingerprints and clustering</h3>
 
@@ -1055,7 +1045,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 
 <p>Taylor-Butina clustering  (<a class="citation" href="#Butina1999">Butina 1999</a>) provides a classification of the compounds into different groups or clusters, based on their structural similarity. This methods shows us how similar the compounds are to the original ligand, and after docking, we can compare the results to the proposed clusters to observe if there is any correlation.</p>
 
-<figure id="figure-3"><img src="/training-material/topics/computational-chemistry/images/fingerprints.png" alt="Fingerprinting" /><figcaption><span class="figcaption-prefix">Figure 3:</span> A simple fingerprinting system. Each 1 or 0 in the bitstring corresponds to the presence or absence of a particular feature in the molecule. In this case, the presence of phenyl, amine and carboxylic acid groups are encoded.</figcaption></figure>
+<figure id="figure-3"><img src="/training-material/topics/computational-chemistry/images/fingerprints.png" alt="Fingerprinting" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> A simple fingerprinting system. Each 1 or 0 in the bitstring corresponds to the presence or absence of a particular feature in the molecule. In this case, the presence of phenyl, amine and carboxylic acid groups are encoded.</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-cluster-molecules-using-molecular-fingerprints"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Cluster molecules using molecular fingerprints</h3>
@@ -1079,7 +1069,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 
 <p>The image produced by the NxN clustering shows the clustering in the form of a dendrogram, where individual molecules are represented as vertical lines and merged into clusters. Merges are represented by horizontal lines. The y-axis represents the similarity of data points to each other; thus, the lower a cluster is merged, the more similar the data points are which it contains. Clusters in the dendogram are colored differently. For example, all molecules connected in red are similar enough to be grouped into the same cluster.</p>
 
-<figure id="figure-4"><img src="/training-material/topics/computational-chemistry/images/nxn.png" alt="NxN clustering" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Dendrogram produced by NxN clustering. The library used to produce this image is generated with a Tanimoto cutoff of 80; here 15 search results are shown, plus the original ligand contained in the PDB file.</figcaption></figure>
+<figure id="figure-4"><img src="/training-material/topics/computational-chemistry/images/nxn.png" alt="NxN clustering" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Dendrogram produced by NxN clustering. The library used to produce this image is generated with a Tanimoto cutoff of 80; here 15 search results are shown, plus the original ligand contained in the PDB file.</figcaption></figure>
 
 <blockquote class="details">
   <h3 id="details-further-investigation-optional"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Further investigation (optional)</h3>
@@ -1140,7 +1130,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 
   <p>There are visualizations available in <span class="notranslate">Galaxy</span> for producing various types of plots - for example, a scatter plot of RMSD (compared to optimal docking pose) against docking score can be calculated very easily:</p>
 
-  <figure id="figure-5"><img src="/training-material/topics/computational-chemistry/images/scatterplot.png" alt="Scatter plot of RMSD against docking score" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Scatter plot of RMSD against docking score.</figcaption></figure>
+  <figure id="figure-5"><img src="/training-material/topics/computational-chemistry/images/scatterplot.png" alt="Scatter plot of RMSD against docking score" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Scatter plot of RMSD against docking score.</figcaption></figure>
 
   <p>The plot shows a correlation between the two variables, as expected, though only a slight one, given the narrow range of docking scores in the dataset and the structural similarity of the ligands tested.</p>
 
@@ -1149,40 +1139,40 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 
 <p>Use the NGLviewer to inspect the protein and various ligand poses generated by docking. This can be done using either the visualization of NGLViewer in <span class="notranslate">Galaxy</span>, or via the <a href="http://nglviewer.org/ngl/">NGL website</a>.</p>
 
-<figure id="figure-6"><img src="/training-material/topics/computational-chemistry/images/activesite.gif" alt="Two docking poses for a ligand bound to Hsp90" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Two docking poses for a ligand bound to the active site of Hsp90. One (docking score -8.4) can be seen to be bound deeper in the active site than the other (docking score -5.7), which is reflected in the difference between the docking scores.</figcaption></figure>
+<figure id="figure-6"><img src="/training-material/topics/computational-chemistry/images/activesite.gif" alt="Two docking poses for a ligand bound to Hsp90" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Two docking poses for a ligand bound to the active site of Hsp90. One (docking score -8.4) can be seen to be bound deeper in the active site than the other (docking score -5.7), which is reflected in the difference between the docking scores.</figcaption></figure>
 
 
-                    
-                    <blockquote class="key_points">
-                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
-                        <ul>
-                            
-                            <li><p>Docking allows ‘virtual screening’ of drug candidates</p>
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Docking allows ‘virtual screening’ of drug candidates</p>
 </li>
-                            
-                            <li><p>Molecular fingerprints encode features into a bitstring</p>
+                        
+                        <li><p>Molecular fingerprints encode features into a bitstring</p>
 </li>
-                            
-                            <li><p>The ChemicalToolbox contains many tools for cheminformatics analysis</p>
+                        
+                        <li><p>The ChemicalToolbox contains many tools for cheminformatics analysis</p>
 </li>
-                            
-                        </ul>
-                    </blockquote>
-                    
+                        
+                    </ul>
+                </blockquote>
+                
 
-                    <h1>Frequently Asked Questions</h1>
-                    Have questions about this tutorial? Check out the  <a href="/training-material/topics/computational-chemistry/faqs/">FAQ page for the Computational chemistry topic</a> to see if your question is listed there.
-                    If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
-                    <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/computational-chemistry/faqs/">FAQ page for the Computational chemistry topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
-                    
-                    <h1 data-toc-skip>Useful literature</h1>
-                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/computational-chemistry#references">here</a>.</p>
-                    
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/computational-chemistry#references">here</a>.</p>
+                
 
-                    
-                    <h1 id="bibliography">References</h1>
-                    <ol class="bibliography"><li><span id="Humphrey1996">Humphrey, W., A. Dalke, and K. Schulten, 1996 <b>VMD – Visual Molecular Dynamics</b>. Journal of Molecular Graphics 14: 33–38.</span>
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li><span id="Humphrey1996">Humphrey, W., A. Dalke, and K. Schulten, 1996 <b>VMD – Visual Molecular Dynamics</b>. Journal of Molecular Graphics 14: 33–38.</span>
     
     .
     
@@ -1255,85 +1245,85 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
     
 
 </li></ol>
-                    
+                
 
-                    
+                
 
-                    <h1>Feedback</h1>
-                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
 
-                    <div id="feedback-button">
-                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
-                    </div>
-                    <div id="feedback-form">
-                    </div>
-                    <script type="text/javascript">
-                        (function (window, document) {
-                            function onDocumentReady(fn) {
-                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-                                    fn();
-                                } else {
-                                    document.addEventListener('DOMContentLoaded', fn);
-                                }
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
                             }
+                        }
 
-                            onDocumentReady(function () {
-                                $("#feedback-button").click(function(evt){
-                                    var e = $(evt.target)
-                                    e.hide();
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
 
-                                    $("#feedback-form").html(`
-                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Protein-ligand docking (Computational chemistry)">Loading...</iframe>
-                                    `)
-                                })
-                            });
-                        })(window, document);
-                    </script>
-
-
-
-                    <h1>Citing this Tutorial</h1>
-                    <p>
-                        <ol>
-                            <li id="citation-text">Simon Bray, 2021 <b>Protein-ligand docking (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html">https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html</a> Online; accessed TODAY
-                            </li>
-                            <li>
-                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
-                            </li>
-                        </ol>
-                    </p>
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Protein-ligand docking (Computational chemistry)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
 
 
-                    <blockquote class="details">
-                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
-                      <p style="display: none;">
 
-                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Simon Bray, 2021 <b>Protein-ligand docking (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html">https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{computational-chemistry-cheminformatics,
-    author = "Simon Bray",
-    title = "Protein-ligand docking (Galaxy Training Materials)",
-    year = "2021",
-    month = "04",
-    day = "07"
-    url = "\url{https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html}",
-    note = "[Online; accessed TODAY]"
+author = "Simon Bray",
+title = "Protein-ligand docking (Galaxy Training Materials)",
+year = "2021",
+month = "04",
+day = "07"
+url = "\url{https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html}",
+note = "[Online; accessed TODAY]"
 }
 @article{Batut_2018,
-        doi = {10.1016/j.cels.2018.05.012},
-        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
-        year = 2018,
-        month = {jun},
-        publisher = {Elsevier {BV}},
-        volume = {6},
-        number = {6},
-        pages = {752--758.e1},
-        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
-        title = {Community-Driven Data Analysis Training for Biology},
-        journal = {Cell Systems}
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
 }</code>
-                    </pre></div></div>
-                    </p>
-                    </blockquote>
+                </pre></div></div>
+                </p>
+                </blockquote>
 
 
 <script type="text/javascript">
@@ -1343,36 +1333,22 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                    <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
-                    
+                
 
-                    
+                
 
-                </div>
             </div>
         </div>
-    </section>
-</div>
-
-
-<footer>
-    <div class="container">
-        <p>
-            This material is the result of a collaborative work. Thanks to the
-            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Simon Bray)!
-        </p>
-        <p>
-            Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="https://github.com/galaxyproject/training-material/tree/main/topics/computational-chemistry/tutorials/cheminformatics/tutorial.md">GitHub</a>.
-        </p>
-        <p>
-    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-</p>
     </div>
-</footer>
+</section>
+<br/>
+<br/>
+<br/>
 
+        </div>
+        
     </body>
     <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
