@@ -6,7 +6,7 @@ $tutorial-box-spacing: 1rem;
 
 // palette
 $white: #fff;
-$gray: #777;
+$gray: #555; // WCAG2 AA
 $light-gray: #ddd;
 $text-color: #292b2c;
 
@@ -39,6 +39,8 @@ $feedback-color: #86D486;
 $code-color: #86D486;
 $code-out-color: #fb99d0;
 
+
+$hyperlink: #0067d6;
 
 @mixin tutorial-box ($bg-color, $color: rgba(255,255,255,.75)) {
     margin-top: 3 * $tutorial-box-spacing;
@@ -119,7 +121,7 @@ div#theme-selector,div#lang-selector,div#archive-selector {
 }
 
 
-@mixin input-nicer($color, $active-color) {
+@mixin input-nicer($color) {
 	background: transparent;
 	color: $color;
 	border: none;
@@ -133,9 +135,10 @@ div#theme-selector,div#lang-selector,div#archive-selector {
 
 	&:focus,
 	&:active {
+		color: $color;
 		background: #fff2;
-		color: $active-color;
-		border-bottom: 2px solid $active-color;
+		border-bottom: 2px solid $color;
+		text-decoration: underline;
 	}
 }
 
@@ -160,10 +163,10 @@ body.theme-night {
         background-color: #424a66 !important;
     }
 
-	nav[data-toggle="toc"] .nav > li > a {
+	div[data-toggle="toc"] .nav > li > a {
 		color: #ccc;
 	}
-	nav[data-toggle="toc"] .nav li .active {
+	div[data-toggle="toc"] .nav li .active {
 		color: #eee;
 	}
 
@@ -182,7 +185,7 @@ body.theme-night {
 	}
 
 	#search-container input.nicer {
-		@include input-nicer(#ccc, #eee);
+		@include input-nicer(white);
 	}
 
 }
@@ -208,10 +211,10 @@ body.theme-midnight {
         background-color: #424a66 !important;
     }
 
-	nav[data-toggle="toc"] .nav > li > a {
+	div[data-toggle="toc"] .nav > li > a {
 		color: #ccc;
 	}
-	nav[data-toggle="toc"] .nav li .active {
+	div[data-toggle="toc"] .nav li .active {
 		color: #eee;
 	}
 
@@ -230,7 +233,7 @@ body.theme-midnight {
 	}
 
 	#search-container input.nicer {
-		@include input-nicer(#ccc, #eee);
+		@include input-nicer(white);
 	}
 
 }
@@ -273,10 +276,10 @@ body.theme-halloween {
         background-color: orange !important;
     }
 
-	nav[data-toggle="toc"] .nav > li > a {
+	div[data-toggle="toc"] .nav > li > a {
 		color: #ccc;
 	}
-	nav[data-toggle="toc"] .nav li .active {
+	div[data-toggle="toc"] .nav li .active {
 		color: #eee;
 
 		&::after {
@@ -292,7 +295,7 @@ body.theme-halloween {
 	}
 
 	a {
-		color: #7bf;
+		color: $hyperlink;
 	}
 
 	:not(a) > code {
@@ -306,7 +309,7 @@ body.theme-halloween {
 	}
 
 	#search-container input.nicer {
-		@include input-nicer(#ccc, #eee);
+		@include input-nicer(black);
 	}
 
 }
@@ -533,11 +536,11 @@ footer {
 
 
 nav input.nicer {
-	@include input-nicer(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.75));
+	@include input-nicer(white);
 }
 
 #search-container input.nicer {
-	@include input-nicer(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.75));
+	@include input-nicer(white);
 }
 
 #search-input {
@@ -798,7 +801,7 @@ nav input.nicer {
 	border: 5px solid transparent;
 
 	&:hover {
-		border: 5px solid #7bf;
+		border: 5px solid $hyperlink;
 	}
 
 	img {
@@ -834,15 +837,19 @@ nav input.nicer {
         margin-top: 0.2rem;
     }
 
-    .thumbnail img {
-        background-color: white;
-        border-radius: 20px;
-        border: 1px solid $light-gray;
-        padding: 5px;
-        width: 100%;
-        -webkit-transition: border 0.2s ease-in-out;
-        -o-transition: border 0.2s ease-in-out;
-        transition: border 0.2s ease-in-out;
+    .thumbnail {
+        display:inline-block;
+
+        img {
+            background-color: white;
+            border-radius: 20px;
+            border: 1px solid $light-gray;
+            padding: 5px;
+            width: 100%;
+            -webkit-transition: border 0.2s ease-in-out;
+            -o-transition: border 0.2s ease-in-out;
+            transition: border 0.2s ease-in-out;
+        }
     }
 
     a.thumbnail {
@@ -964,13 +971,28 @@ nav input.nicer {
 
 /* WCAG Contrast. These aim to pass AA level for normal sized text. */
 a {
-    color: #0070e8;
+    color: $hyperlink;
 
     &:hover,
     &:focus,
     &:active {
         color: #004590;
+        text-decoration: underline;
     }
+}
+
+// More a11y stuff
+.text-muted {
+	color: $gray !important;
+}
+.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
+	text-decoration: underline;
+}
+.navbar-dark .navbar-nav .nav-link {
+	color: white;
+}
+.gitter-open-chat-button {
+    background-color: $dark-blue !important;
 }
 
 code {
@@ -1090,7 +1112,7 @@ div.highlight:hover .btn,div.highlight .btn:focus{
     }
 }
 
-div.supporting_material{
+ul.supporting_material{
     .btn{
         padding-left: 0px;
         padding-top: 0px;
@@ -1142,8 +1164,8 @@ span.tool {
 	}
 
 	&.galaxy-proxy-active:hover {
-		background-color:#0069d9;
-		border-color:#0062cc;
+		background-color:$hyperlink;
+		border-color:$hyperlink;
 	}
 }
 
@@ -1196,7 +1218,7 @@ video::cue {
 
     tr td:nth-child(1) {
         padding-right: 1em;
-        color: #555;
+        color: $gray;
     }
 }
 
@@ -1206,3 +1228,4 @@ abbr {
 	cursor: help;
 	font-variant: none;
 }
+

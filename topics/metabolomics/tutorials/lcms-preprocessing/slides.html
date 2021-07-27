@@ -11,50 +11,50 @@ name:raw-to-matrix
 
 ## From raw files to data matrix
 
-![](../../images/lcmspreproc_slides_1.1.png)
+![Graphic showing a line plot labelled TIC with several peaks. An arrow goes through an XML file with fields retention time, base peak m/z, and base peak intensity highlighted. The arrow points to an MS spectra at each scan with fewer, sharper peaks, and then finally to a variable metadata data matrix spreadsheet with columns like ions, ret time, and mass.](../../images/lcmspreproc_slides_1.1.png)
 
 ---
 
 ## XCMS
 
-![](../../images/lcmspreproc_slides_1.2.png)
+![Picture of a software advert? It shows a happy face with points like R based, free, sustainable. And a sad face with points a lot of parameters to set, no graphical interface, and the need to write an R script. Below are 4 publications and a website on bioconductor.org for the XCMS package. A graphic shows many overlapping line graphs pointing to a single peak.](../../images/lcmspreproc_slides_1.2.png)
 
 ---
 name:findchrompeaks
 
 ## xcms - findChromPeaks
 
-![](../../images/lcmspreproc_slides_2.1.png)
+![text reads xcms provides 2 main algorithms for chromatographic peak detection. In profile MS data with broad peaks, the matched filter for profile or centroid low resolution MS data. For sharp peaks like centroid ms data, centwave can be used for high resolution MS data.](../../images/lcmspreproc_slides_2.1.png)
 
 ---
 
 ## xcms - findChromPeaks - CentWave algorithm
 
-![](../../images/lcmspreproc_slides_2.2.png)
+![on the left an xml file is shown with retention time, base peak m/z and base peak intensity highlighted. On the right there are three graphs, from top to bottom: looking for a region of interest, delta ppm scan-to-scan with the label ppm parameter, and then at the bottom a signal/noise graph with continuous wavelet transform to do integration or peak height. This produces: 1 ion in 1 sample, m/z, retention time, intensity.](../../images/lcmspreproc_slides_2.2.png)
 
 ---
 
 ## xcms - findChromPeaks - CentWave algorithm
 
-![](../../images/lcmspreproc_slides_2.3.png)
+![Large blob of text next to two plots. The algorithm aims to detect mass traces or regions of interest (ROI) which are defined as regions with less than a defined deviation of m/z in consecutive scans. The deviation must be lower than the value of the parameter ppm. The value (unit ppm) has to be set according to MS accuracy. The graph to the right shows a region with some points with low variation along the y axis, and as it goes to the sides of this central region, the variation increases. The next text blob reads ROI mass intensitites are then used to define the chromatographic peak with continuous wavelet transform algorithm. peakwidth(min, max) has to be set for this step. 20.50 for HPLC, 5.25 for UPLC](../../images/lcmspreproc_slides_2.3.png)
 
 ---
 
 ## xcms - findChromPeaks - CentWave algorithm
 
-![](../../images/lcmspreproc_slides_2.4.png)
+![Figure titled "Range of peak width allows to extract peaks with different shapes". This is from a paper and shows several peaks. The chromatogram is shown as a jagged line, while a guassian fit shows three ideal guassian distributions overlayed on the chromatogram.](../../images/lcmspreproc_slides_2.4.png)
 
 ---
 
 ## xcms - findChromPeaks - CentWave algorithm
 
-![](../../images/lcmspreproc_slides_2.5.png)
+![Figure titled "Centwave allows to detect peaks without return to the baseline", and shows several peaks which indeed do not return to the baseline, and gaussian fit lines that accurate cover the peaks.](../../images/lcmspreproc_slides_2.5.png)
 
 ---
 
 ## xcms - findChromPeaks - CentWave parameters
 
-![](../../images/lcmspreproc_slides_2.6.png)
+![a question from the xcms forum, "how to choose peak width?". The graphic reads Important: do not choose the minimum peak width too small, it will not increase sensitivity but cause peaks to be split. There are two example graphs, one with peakwidth = c(10, 60) showing the peak split in three each detected as short peaks. The second graph using peakwidth=c(20,120) will kepe the peak intact.](../../images/lcmspreproc_slides_2.6.png)
 
 ---
 
@@ -74,43 +74,43 @@ name:groupchrompeaks
 
 ## xcms - groupChromPeaks
 
-![](../../images/lcmspreproc_slides_3.1.png)
+![Large set of tables, in three groups, pool 181, 182 and 183. The top group is labelled independent peaklists. The next row of tables is group ions by m/z, and the rows in the table are coloured and lined up by their colours. The third group is labelled group by retention time, and the coloured rows are now merged into one big table, each colour on it's own row. The resulting matrix merges the above, and collapses columns to reslt in a median m/z, and median retention time, and then the intensity of each pool, and NA where results are missing.](../../images/lcmspreproc_slides_3.1.png)
 
 ---
 
 ## xcms - groupChromPeaks - Alignment group
 
-![](../../images/lcmspreproc_slides_3.2.png)
+![Another text blob and image combo. The text reads: first, a binning of mass domain is performed. The size of the bin defined by the width of overlapping m/z slices. THen for each m/z bin, all ions of all samples are taken into account on the whole. a kernel density estimator is used to detect regions of retention time with high density ions. Below the graph shows many individual peaks, clustered.](../../images/lcmspreproc_slides_3.2.png)
 
 ---
 
 ## xcms - groupChromPeaks - Alignment group
 
-![](../../images/lcmspreproc_slides_3.3.png)
+![Text/image. A guassian model groups together peaks with similar retention time, the inclusiveness of ions in a group defined by standard deviation of the model (bandwidth) corresponding to the xcms bw parameter. The graphic shows the previous individual peaks now grouped with a guassian line shown over the peak groups. A 'problem' is highlighted showing an outlier peak included.](../../images/lcmspreproc_slides_3.3.png)
 
 ---
 
 ## xcms - groupChromPeaks - Alignment group
 
-![](../../images/lcmspreproc_slides_3.4.png)
+![The above graph is duplicated, and the problem is solved by decreasing the bandwidth parameter.](../../images/lcmspreproc_slides_3.4.png)
 
 ---
 
 ## xcms - groupChromPeaks - minFraction parameter
 
-![](../../images/lcmspreproc_slides_3.5.png)
+![minfraction is the minimum number of samples detected in at least one class to be considered a valid group. A class is defined by the second column of the sample metadata if you uploaded individual sample files and merge in a dataset list, or by the sub folder of the zipfile.](../../images/lcmspreproc_slides_3.5.png)
 
 ---
 
 ## xcms - groupChromPeaks - Output
 
-![](../../images/lcmspreproc_slides_3.6.png)
+![More peaks are shown, some are retained and annotated with a grey vertical stripe, some are not.](../../images/lcmspreproc_slides_3.6.png)
 
 ---
 
 ## xcms - groupChromPeaks - Output
 
-![](../../images/lcmspreproc_slides_3.7.png)
+![Two graphs are shown, one with a large grey stripe labelled bandwidth = 10 seconds. Two distinct ions merge as one group, so bandwidth is too alrge. In the right graph bandwidth is 5 seconds, and now two distinct ions are separated and correctly identified.](../../images/lcmspreproc_slides_3.7.png)
 
 ---
 
@@ -118,7 +118,7 @@ name:groupchrompeaks
 
 xcms parameters | related to | description | examples
 --- | --- | --- | ---
-binSize | m/z | Size of m/z slices (bins). Range of m/z to be included in a group. Depends on mass spectrometer accuracy. | 
+binSize | m/z | Size of m/z slices (bins). Range of m/z to be included in a group. Depends on mass spectrometer accuracy. |
 bw | retention time | Standart deviation of the gaussian metapeak that group peaks together. | HPLC 30s  /  UPLC 5s
 minFraction | samples | To be valid, a group must be found in at least minFraction*n samples, with n=number of samples **for each class of samples**. A minFraction=0.5 corresponds to 50%. | n=10, minFraction=0.5 => found in at least 5 samples
 max | number of ions | Maximum number of groups detected in a single m/z slices. | 10 or 50
@@ -128,13 +128,13 @@ name:adjustrtime
 
 ## xcms - adjustRtime
 
-![](../../images/lcmspreproc_slides_4.1.png)
+![Many graphs with points at different places are aligned to show one large peak. On the right a graph with many lines is shown, the meaning is not clear.](../../images/lcmspreproc_slides_4.1.png)
 
 ---
 
 ## xcms - adjustRtime - PeakGroups algorithm
 
-![](../../images/lcmspreproc_slides_4.2.png)
+![A cartoon with a single red and single blue circle labelled 4 samples in each group. On the right are two graphs, that are slightly different, one is missing=1, one is extra=1.](../../images/lcmspreproc_slides_4.2.png)
 
 ---
 
@@ -151,20 +151,20 @@ minFraction (previously missing) | samples | Minimum proportion of samples with 
 
 ## xcms - adjustRtime - Obiwrap algorithm
 
-![](../../images/lcmspreproc_slides_4.3.png)
+![a scatter plot and some 3d plots are shown, their meaning is not clear.](../../images/lcmspreproc_slides_4.3.png)
 
 ---
 name:beforeafterrt
 
 ## xcms - adjustRtime - Output
 
-![](../../images/lcmspreproc_slides_5.png)
+![In the first graphic two messy lines of points are shown with bandwidth=8, their times have been adjusted and now they line up perfectly into two individual peaks and are separated correctly.](../../images/lcmspreproc_slides_5.png)
 
 ---
 name:fillchrompeaks
 
 ## xcms - fillChromPeaks
 
-![](../../images/lcmspreproc_slides_6.png)
+![A montage of a table and the galaxy tool with the text: After grouping all ions are not detected in all samples. For each of those ions this step integrates the signal in the region where ions were detected in other samples and creates a new peak.](../../images/lcmspreproc_slides_6.png)
 
 ---
