@@ -3,11 +3,12 @@ layout: page
 ---
 
 {% assign topic = site.data[page.topic_name] %}
+{% assign locale = site.data.lang[page.lang] %}
 
 <div class="container main-content">
 
     <section class="tutorial faqs">
-        <h1 data-toc-skip>Frequently Asked Questions</h1>
+        <h1 data-toc-skip>{{ locale['faqs'] | default: "Frequently Asked Questions"}}</h1>
 
         <div class="container">
             <div class="row">
