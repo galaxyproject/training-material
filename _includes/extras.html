@@ -17,11 +17,11 @@
             {% icon galaxy-barchart %} Page Metrics
         </a>
 
-        {% if page.layout == 'topic' %}
+        {% if page.layout == 'topic' and site.data['feedback'].topic contains page.topic_name %}
             <a class="dropdown-item" href="{{ site.baseurl }}/feedback.html#topic-{{ page.topic_name }}" title="Show feedback statistics about this topic">
                 {% icon galaxy-barchart %} Topic feedback 
             </a>
-        {% elsif page.layout == 'tutorial_hands_on' %}
+        {% elsif page.layout == 'tutorial_hands_on' and site.data['feedback'].tutorial contains page.tutorial_name %}
             <a class="dropdown-item" href="{{ site.baseurl }}/feedback.html#tutorial-{{ page.tutorial_name }}" title="Show feedback statistics about this tutorial">
                 {% icon galaxy-barchart %} Tutorial feedback
             </a>
