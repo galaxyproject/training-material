@@ -22,7 +22,7 @@ module Jekyll
 
     def figurify(page)
       num = 0
-      page.content = page.content.gsub(/!\[([^\]]*)\]\((.+?)\s*(?:"(.*)")?\)({:(.*)})?/) {
+      page.content = page.content.gsub(/!\[([^\]]*)\]\((.+?)\s*(?:"(.*)")\)({:(.*)})?/) {
         alt = $1
         url = $2
         title = $3
@@ -34,10 +34,18 @@ module Jekyll
           num += 1
 
           "<figure id=\"figure-#{num}\">" +
-            "<img src=\"#{url}\" alt=\"#{alt}\" #{style}>" +
+            "<img src=\"#{url}\" alt=\"#{alt}\" #{style} loading=\"lazy\">" +
             "<figcaption><span class=\"figcaption-prefix\">#{figcaption_prefix}#{num}:</span> #{title}</figcaption>" +
           "</figure>"
         end
+      }
+
+      page.content = page.content.gsub(/!\[([^\]]*)\]\((.+?)?\)({:(.*)})?/) {
+        alt = $1
+        url = $2
+        style = $4
+
+        "<img src=\"#{url}\" alt=\"#{alt}\" #{style} loading=\"lazy\">"
       }
     end
 
