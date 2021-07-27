@@ -1,8 +1,6 @@
 ---
 layout: base
 ---
-{% include _includes/default-header.html %}
-
 
 <!-- tutorial stats -->
 {% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" %}
@@ -40,7 +38,6 @@ layout: base
 </style>
 
 
-<div class="container main-content">
 <section>
 <h1>GTN Statistics</h1>
 
@@ -181,7 +178,6 @@ layout: base
 </div>
 
 </section>
-</div>
 
 
 <!-- make the charts -->
@@ -321,5 +317,3 @@ var tutorialsBar = new Chart(contributorsGraph, {
 });
 
 </script>
-
-{% include _includes/default-footer.html %}

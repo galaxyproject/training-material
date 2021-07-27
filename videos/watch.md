@@ -1,44 +1,41 @@
 ---
 layout: base
 ---
-{% include _includes/default-header.html %}
 
-<div class="container main-content">
-	<div class="row">
-		<div class="col-md-12">
-			<video id="player" width="100%" height="610" controls preload="metadata" style="background: black">
-			</video>
+<div class="row">
+	<div class="col-md-12">
+		<video id="player" width="100%" height="610" controls preload="metadata" style="background: black">
+		</video>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-8">
+		<div class="row">
+			<h2 id="title"></h2>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<b>Transcript</b>
+			</div>
+			<div class="col-sm-2" id="transcript-edit">
+				Edit Source Slide
+			</div>
+			<div class="col-sm-2" id="source-slides">
+				View Slides
+			</div>
+			<div class="col-sm-2" id="transcript-plain">
+				View Plain Text
+			</div>
+		</div>
+		<div class="row" id="transcript">
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-sm-8">
-			<div class="row">
-				<h2 id="title"></h2>
-			</div>
-			<div class="row">
-				<div class="col-sm-6">
-					<b>Transcript</b>
-				</div>
-				<div class="col-sm-2" id="transcript-edit">
-					Edit Source Slide
-				</div>
-				<div class="col-sm-2" id="source-slides">
-					View Slides
-				</div>
-				<div class="col-sm-2" id="transcript-plain">
-					View Plain Text
-				</div>
-			</div>
-			<div class="row" id="transcript">
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<div class="row">
-				<div class="col-sm-12">
-					<h3>Other Videos</h3>
-					<div><a href="{% link videos/index.md %}">See all GTN Videos</a></div>
-					<div id="playlist" class="vertical">
-					</div>
+	<div class="col-sm-4">
+		<div class="row">
+			<div class="col-sm-12">
+				<h3>Other Videos</h3>
+				<div><a href="{% link videos/index.md %}">See all GTN Videos</a></div>
+				<div id="playlist" class="vertical">
 				</div>
 			</div>
 		</div>
@@ -130,4 +127,3 @@ fetch('{{ site.baseurl }}/api/videos.json')
 	});
 
 </script>
-{% include _includes/default-footer.html %}
