@@ -1,5 +1,6 @@
 ---
 layout: base
+footer: no
 ---
 
 {% assign topic = site.data[page.topic_name] %}
@@ -46,56 +47,6 @@ layout: base
 </script>
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="{{ site.baseurl }}/">
-                <img src="{{ site.baseurl }}/{{ site.small_logo }}" height="30" alt="Galaxy Training Network logo">
-                {{ site.title }}
-            </a>
-
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="top-navbar">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ site.baseurl }}/topics/{{ topic.name }}" title="Go back to list of tutorials">
-                            {% icon topic %} {{ topic.title }}
-                        </a>
-                    </li>
-
-                    {% include _includes/help.html %}
-
-                    {% include _includes/extras.html %}
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ site.github_repository }}/edit/{{ site.github_repository_branch }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/tutorial.md">
-                            {% icon github %} Edit
-                        </a>
-                    </li>
-                    -->
-
-                     <!-- Search bar-->
-                    <li class="nav-item">
-                      <div id="navbarSupportedContent">
-                        <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="{{site.baseurl}}/search">
-                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
-                          <div class="md-form mb-2">
-                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
-                          </div>
-                        </form>
-                      </div>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
-
-<div class="container main-content">
 <script type="application/ld+json">
     {% include _includes/material.jsonld material=page topic=topic site=site %}
 </script>
@@ -114,14 +65,15 @@ layout: base
 
     <blockquote class="overview">
         <h3>{{ locale['overview'] | default: "Overview"}}</h3>
-        <strong>{% icon question %} {{ locale['questions'] | default: "Questions" }}:</strong>
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        <strong>{% icon question aria=false %} {{ locale['questions'] | default: "Questions" }}:</strong>
         <ul>
         {% for question in page.questions %}
         <li>{{ question | markdownify }}</li>
         {% endfor %}
         </ul>
 
-        <strong>{% icon objectives %} {{ locale['objectives'] | default: "Objectives" }}: </strong>
+        <strong>{% icon objectives aria=false %} {{ locale['objectives'] | default: "Objectives" }}: </strong>
         <ul>
         {% for objective in page.objectives %}
         <li>{{ objective | markdownify }}</li>
@@ -129,7 +81,7 @@ layout: base
         </ul>
 
         {% if topic.requirements or page.requirements %}
-        <strong>{% icon requirements %} {{ locale['requirements'] | default: "Requirements"}}:</strong>
+        <strong>{% icon requirements aria=false %} {{ locale['requirements'] | default: "Requirements"}}:</strong>
         <ul>
         {% include _includes/display_extra_training.md extra_trainings=topic.requirements %}
         {% include _includes/display_extra_training.md extra_trainings=page.requirements %}
@@ -137,11 +89,11 @@ layout: base
         {% endif %}
 
         {% if page.time_estimation %}
-        <div><strong>{% icon time %} {{ locale['time-estimation'] | default: "Time estimation"}}:</strong> {{ page.time_estimation | duration_to_human }}</div>
+        <div><strong>{% icon time aria=false %} {{ locale['time-estimation'] | default: "Time estimation"}}:</strong> {{ page.time_estimation | duration_to_human }}</div>
         {% endif %}
 
         {% if page.level %}
-        <div><strong>{% icon level %} {{ locale['level'] | default: "Level"}}: </strong>
+        <div><strong>{% icon level aria=false %} {{ locale['level'] | default: "Level"}}: </strong>
         {% include _includes/difficulty-indicator.html level=page.level textlabel=true %}</div>
         {% endif %}
 
@@ -156,15 +108,14 @@ layout: base
 
         {% if associated_slides or intro_link or tuto_has_zenodo or own_material.workflows or own_material.tours or tuto_has_docker %}
         <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> {{ locale['supporting-materials'] | default: "Supporting Materials" }}:</strong></div>
-        <ul>
-            <div class="supporting_material">
+        <ul class="supporting_material">
             {% if associated_slides %}
                 <li class="btn btn-default"><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html" title="Slides for this tutorial">
-                    {% icon slides %} {{ locale['slides'] | default: "Slides"}}
+                    {% icon slides aria=false %} {{ locale['slides'] | default: "Slides"}}
                 </a></li>
             {% elsif intro_link %}
                 <li class="btn btn-default supporting_material"><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ intro_target }}" title="Topic Overview slides">
-                    {% icon slides %} Topic Overview slides
+                    {% icon slides aria=false %} Topic Overview slides
                 </a></li>
             {% endif %}
 
@@ -189,18 +140,18 @@ layout: base
             {% if tuto_has_docker and topic.name != 'admin' %}
                 <li class="btn btn-default supporting_material">{% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=own_material.tutorial_name docker=topic.docker_image label=true %}</li>
             {% endif %}
-            </div>
         </ul>
         {% endif %}
 
-        <div><strong> {% icon last_modification %} {{ locale['last-modification'] | default: "Last modification" }}:</strong> {{ page.last_modified_at | date: "%b %-d, %Y"}} </div>
+        <div><strong>{% icon last_modification aria=false %} {{ locale['last-modification'] | default: "Last modification" }}:</strong> {{ page.last_modified_at | date: "%b %-d, %Y"}} </div>
+        <div><strong>{% icon license aria=false %} License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="{{ site.github_repository }}/blob/main/LICENSE.md">MIT</a></div>
     </blockquote>
 
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
             <div class="col-sm-2">
-                <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
                 {{ content
@@ -209,7 +160,7 @@ layout: base
 
                 {% if page.key_points %}
                 <blockquote class="key_points">
-                    <h3>{% icon keypoints %} {{locale['key-points'] | default: "Key points" }}</h3>
+                    <h3>{% icon keypoints aria=false %} {{locale['key-points'] | default: "Key points" }}</h3>
                     <ul>
                         {% for key_point in page.key_points %}
                         <li>{{ key_point | markdownify }}</li>
@@ -329,7 +280,7 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                <h3>{% icon congratulations %} {{locale['congrats'] | default: "Congratulations on successfully completing this tutorial!"}}</h3>
+                <h3>{% icon congratulations aria=false %} {{locale['congrats'] | default: "Congratulations on successfully completing this tutorial!"}}</h3>
 
                 {% if topic.name == "contributing" %}
                 <blockquote class="agenda">
@@ -356,7 +307,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
 
                 {% if page.follow_up_training %}
                 <blockquote class="agenda follow-up">
-                    <strong class="follow-up">{% icon curriculum %} Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <strong class="follow-up">{% icon curriculum aria=false %} Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
                     <ul>
                         {% include _includes/display_extra_training.md extra_trainings=page.follow_up_training %}
                     </ul>
@@ -367,20 +318,6 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
         </div>
     </div>
 </section>
-</div>
-
-
-<footer>
-    <div class="container">
-        <p>
-            This material is the result of a collaborative work. Thanks to the
-            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="{{ site.baseurl }}/hall-of-fame">contributors</a> ({% include _includes/contributor-text-list.html contributors=page.contributors %})!
-        </p>
-        <p>
-            Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="{{ site.github_repository }}/tree/{{ site.github_repository_branch }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/tutorial.md">GitHub</a>.
-        </p>
-        {% include _includes/license.html %}
-    </div>
-</footer>
+<br/>
+<br/>
+<br/>
