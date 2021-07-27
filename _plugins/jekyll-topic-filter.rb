@@ -159,7 +159,9 @@ module Jekyll
         page_obj['workflows'] = resources.include?('workflows')
         page_obj['tours'] = resources.include?('tours')
         page_obj['video'] = slide_has_video
-        page_obj['translations'] = { "tutorial": tutorial_translations, "slides": slide_translations }
+        page_obj['translations'] = Hash.new
+        page_obj['translations']["tutorial"] = tutorial_translations
+        page_obj['translations']["slides"] = slide_translations
         # I feel less certain about this override, but it works well enough in
         # practice, and I did not find any examples of `type: <anything other
         # than tutorial>` in topics/*/tutorials/*/tutorial.md but that doesn't
