@@ -10,7 +10,11 @@ module Jekyll
         dir = File.dirname(File.join('.', page.url))
         page2 = Jekyll::Page.new(site, site.source, dir, page.name)
         page2.data['layout'] = 'slides-plain'
-        page2.basename = 'slides-plain'
+        if page2.data.has_key?('lang') then
+          page2.basename = "slides-plain-#{page2.data['lang']}"
+        else
+          page2.basename = 'slides-plain'
+        end
         page2.content = page2.content.gsub(/^name:\s*([^ ]+)\s*$/) {
           anchor = $1
 
