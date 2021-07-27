@@ -8,9 +8,10 @@
             <span class="sr-only">Toggle Dropdown</span>
         </a>
         <ul class="dropdown-menu">
-        {% if include.material.translations %}
+        {% assign translations = include.material.translations.slides | size %}
+        {% if translations > 0 %}
           <div class="dropdown-item"><strong>Curated translations</strong></div>
-           {% for lang in include.material.translations %}
+           {% for lang in include.material.translations.slides %}
             <a class="dropdown-item" href="{{ site.baseurl }}/topics/{{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/slides_{{lang | upcase }}.html" title="{{ lang }}">
                 {{language[lang]}}
             </a>
