@@ -60,7 +60,7 @@ These datasets represent genomic DNA (enriched for mitochondria via a long range
 - `M117C1-ch_1`- family 117, child, *forward* (**F**) reads from **cheek**
 - `M117C1-ch_2`- family 117, child, *reverse* (**R**) reads from **cheek**
 
-## Creating a paired dataset collection
+# Creating a paired dataset collection
 
 You can see that there are eight datasets forming four pairs. Obviously, we can manipulate them one-by-one (e.g., start four mapping, jobs, call variants four times and so on), but this will unnecessarily tedious. Moreover, imagine if you have 100s or 1,000s of pairs: it will be impossible to process them individually. 
 
@@ -99,100 +99,192 @@ Clicking on collection will expand it to show four pairs it contains (panel **B*
 ![expanding collection](../../images/collections/expanding_collection.gif "To look what is inside a collection, just click on it.")
 {: .img-responsive}
 
-## Using collections
+# Processing data organized as a collection
 
-By now we see that a collection can be used to bundle a large number of items into a single history item. This means that many Galaxy tools will be able to process all datasets in a collection transparently to you. Let's try to map these datasets to human genome using `bwa-mem` mapper. In the Tools pane on the left, use the `search-tools` to find `bwa-mem`. Click on `Map with BWA-MEM` in the search list.
+By now we see that a collection can be used to bundle a large number of items into a single history item. Galaxy tools tools take collection as input. Let's map reads contained in collection `M117-collection` against human mitochondrial genome. Before we can do this we need to upload mitochondrial genome using the following URL (see a {% icon tip %} **Tip** on how to do this [below](#-tip-importing-via-links)):
 
-![bwa_mem_collection_readGroups](../../images/bwa_mem_collection_readGroups.png)
+```
+https://zenodo.org/record/5119008/files/chrM.fa.gz
+
+```
+
+> ### {% icon details %} Set format to `fasta.gz`
+> The above dataset is in `fasta.gz` format. The {% icon tip %} **Tip** section below explains how to upload these data and set the correct format. 
+>
+> {% snippet faqs/galaxy/datasets_import_via_link.md reset_form="True" link="https://zenodo.org/record/5119008/files/chrM.fa.gz" format="fasta.gz" %}
+{: .warning}
+
+## Mapping reads
+
+**BWA-MEM** {% icon tool %} is a widely used sequence aligner for short-read sequencing datasets such as those we are analysing in this tutorial. (You can find the tool by typing `BWA MEM` in the search box at the top left corner of Galaxy interface).
+
+> ### {% icon hands_on %} Hands-on: Map sequencing reads to reference genome
+>
+> Run {% tool [BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} with the following parameters:
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `chrM.fa.gz` (The mitochondrial genome we just uploaded)
+>    - *"Single or Paired-end reads"*: `Paired Collection`
+>        - {% icon param-file %} *"Select a paired collection"*: `M117-collection` (the collection we built at the beginning of this tutorial.)
+>    - *"Set read groups information?"*: `Do not set`
+>    - *"Select analysis mode"*: `1.Simple Illumina mode`
+>
+> The interface should look like this:
+>
+> ------
+>
+> ![bwa_mem_interface](../../images/bwa_mem_interface_coll_tut.png)
+>
+> ------
+>
+>    - Click **Execute** button
+>
+{: .hands_on}
+
+You will see jobs being submitted and new datasets appearing in the history. Because our collection contains four paired datasets Galaxy will actually four separate `BWA-MEM` jobs. In the end this `BWA-MEM` run will produce a new collection containing four (4) BAM datasets. Let's look at this collection by clicking on it (panel **A** in the figure below). You can see that now this collection is no longer paired (compared to the collection we created in the beginning of this tutorial). This is because `BWA-MEM` takes forward and reverse data as input, but produces only a single BAM dataset as the output. So what we have in the result is a *list* of four dataset (BAM files; panel **B**). If you click on any of the datasets you will see that it is indeed a BAM dataset (panel **C**).
+
+![bwa_memCollection_ABC](../../images/collections/collection_expansion.svg)
 {: .img-responsive}
 
-In the central panel, provide the following parameters for `Map with BWA-MEM`:
+## Calling variants
 
-- set **Using reference genome** to `hg38` (red outline);
-- set **Single or Paired-end reads** to `Paired collection` (blue outline);
-- select `M177-collection` from **Select a paired collection** dropdown (magenta outline);
-- In **Set read groups information** select `Automatically assign ID` (green outline);
-- scroll down and click **Execute**.
+After we mapped reads against the mitochondrial genome, we can now call variants. In this step a variant calling tool `lofreq` will take a collection of BAM datasets (the one produced by `BWA-MEM`), identify differences between reads and the reference, and output these differences as a collection of [VCF](https://en.wikipedia.org/wiki/Variant_Call_Format) datasets. 
 
-You will see jobs being submitted and new datasets appearing in the history. IN particular below you can see that Galaxy has started four jobs (two yellow and two gray). This is because we have eight paired datasets with each pair being processed separately by `bwa-mem`. As a result we have four `bwa-mem` runs:
+> ### {% icon hands_on %} Hands-on: Call variants 
+>
+> Run {% tool [Call variants](toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Input reads in BAM format"*: `Map with BWA-MEM...` (output of **BWA-MEM** {% icon tool %})
+>    - *"Choose the source for the reference genome"*: `History`
+>        - {% icon param-file %} *"Reference"*: `chrM.fa.gz (as fasta)` (Input dataset)
+>    - *"Call variants across"*: `Whole reference`
+>    - *"Types of variants to call"*: `Only SNVs`
+> 
+> The interface should look like this:
+>
+> ------
+>
+> ![lofreq_interface](../../images/collections/lofreq_interface.png)
+>
+> ------
+>
+>    - Click **Execute** button
+>
+{: .hands_on}
 
-![bwa_memCollectionRunning](../../images/bwa_memCollectionRunning.png)
-{: .img-responsive}
+## Create table of variants using **SnpSift Extract Fields**
 
-Once these jobs are finished they will disappear from the history and all results will be represented as a new collection:
+We will now convert VCF datasets into tab delimited format as it will be easier to work with. This will be done with `SNPSift`: a tool specifically designed for manipulation of tab-delimited data. 
 
-![bwa_memCollectionDone](../../images/bwa_memCollectionDone.png)
-{: .img-responsive}
 
-Let's look at this collection by clicking on it (panel **A** in the figure below). You can see that now this collection is no longer paired (compared to the collection we created in the beginning of this tutorial). This is because `bwa-mem` takes forward and reverse data as input, but produces only a single BAM dataset as the output. So what we have in the result is a *list* of four dataset (BAM files; panels **B** and **C**).
+> ### {% icon hands_on %} Hands-on: Create table of variants
+>
+> Run {% tool [SnpSift Extract Fields](toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Variant input file in VCF format"*: `snpeff_output` (output of **SnpEff eff:** {% icon tool %})
+>    - *"Fields to extract"*: `CHROM POS REF ALT QUAL DP AF SB DP4`
+>    - *"One effect per line"*: `Yes`
+>
+> The interface should look like this:
+>
+> ------
+>
+> ![snpsift_interface](../../images/collections/snpsift_interface.png)
+>
+> ------
+>
+>    - Click **Execute** button
+>
+{: .hands_on}
 
-![bwa_memCollection_ABC](../../images/bwa_memCollection_ABC.png)
-{: .img-responsive}
 
-## Processing collection as a single entity
+As a result of this operation we now have a collection of four tab delimited files. Yet, ultimately we want to summaize these data as one final table. The next step does just that.
 
-Now that `bwa-mem` has finished and generated a collection of BAM datasets we can continue to analyze the entire collection as a single Galaxy '*item*'.
+## Collapse data into a single dataset
 
-### Ensuring consistency of BAM dataset
+We now extracted meaningful fields from VCF datasets. But they still exist as a collection. To move towards secondary analysis we need to **collapse** this collection into a single dataset. For more information about collapsing collections see this video:
 
-Let's perform cleanup of our BAM files with `cleanSam` utility from the **Picard** package:
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ypuFZ1RKMIY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-![cleanSam](../../images/cleanSam.png)
-{: .img-responsive}
+> ### {% icon hands_on %} Hands-on: Collapse a collection
+>
+> Run {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0) %} with the following parameters:
+>    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `SnpSift Extract Fields ...` (output of **SnpSift Extract Fields** {% icon tool %})
+>    - "*Keep one header line*": `Yes`
+>    - "*Prepend File name*": `Yes`
+>    - "*Where to add dataset name*": `Same line and each line in dataset`
+>
+> The interface should look like this:
+>
+> ------
+>
+> ![snpsift_interface](../../images/collections/collapse_collection.png)
+>
+> ------
+>
+>    - Click **Execute** button
+>
+{: .hands_on}
 
-If you look at the picture above carefully, you will see that the **Select SAM/BAM dataset or dataset collection** parameter is empty (it says `No sam or bam datasets available.`). This is because we do not have single SAM or BAM datasets in the history. Instead we have a collection. So all you need to do is to click on the ![folder](../../images/folder.png) button and you will get our BAM collection selected:
+You can see that this tool takes lines from all collection elements (in our case we have two), add element name as the first column, and pastes everything together. So if we have a collection as an input:
 
-![cleanSam_closeup](../../images/cleanSam_closeup.png)
-{: .img-responsive}
+> ### {% icon code-in %} Input: A collection with two items
+> A collection element named `M117-bl.fq`
+>
+>```
+>chrM   152 T C  3707.0 1242 0.99 0 2,2,540,697
+>chrM 16519 T C 35149.0 1033 0.99 0 1,1,611,420
+>```
+>
+>A collection element named `M117-ch.fq`:
+>
+>```
+chrM   152 T C  4098.0 1440 0.99 0 0,1,575,863
+chrM 16519 T C 36574.0 1039 0.99 2 3,0,713,321
+>```
+>
+>A collection element named `M117C1-bl.fq`:
+>
+>```
+>chrM   152 T C  4888.0 1235 1.00 0 0,0,548,687
+>chrM 16519 T C 35220.0 1042 0.99 0 0,0,598,443
+>```
+>
+>A collection element named `M117C1-ch.fq`:
+>
+>```
+>chrM   152 T C  2757.0 1413 0.99 0 2,2,576,833
+>chrM 16455 G A    54.0  100 0.04 0 89,7,4,0
+>chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
+>```
+>
+{: .code-in}
 
-Click **Execute**. As an output this tool will produce a collection contained cleaned data.
+We will have a single dataset as the output:
 
-### Retaining 'proper pairs'
+> ### {% icon code-out %} Output: A single dataset
+>
+>then the **Collapse Collection** {% icon tool %} will produce this:
+>
+>```
+>M117-bl.fq   chrM   152 T C  3707.0 1242 0.99 0 2,2,540,697
+>M117-bl.fq   chrM 16519 T C 35149.0 1033 0.99 0 1,1,611,420
+>M117-ch.fq   chrM   152 T C  4098.0 1440 0.99 0 0,1,575,863
+>M117-ch.fq   chrM 16519 T C 36574.0 1039 0.99 2 3,0,713,321
+>M117C1-bl.fq chrM   152 T C  4888.0 1235 1.00 0 0,0,548,687
+>M117C1-bl.fq chrM 16519 T C 35220.0 1042 0.99 0 0,0,598,443
+>M117C1-ch.fq chrM   152 T C  2757.0 1413 0.99 0 2,2,576,833
+>M117C1-ch.fq chrM 16455 G A    54.0  100 0.04 0 89,7,4,0
+>M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
+>```
+{: .code-out}
 
-Now let's clean the dataset further by only preserving truly paired reads (reads satisfying two requirements: (1) read is paired, and (2) it is mapped as a proper pair). For this we will use `Filter SAM or BAM` tools from **SAMTools** collection:
+you can see that added a column with dataset ID taken from collection element name.
 
-![filter](../../images/filter.png)
-{: .img-responsive}
+# Collection lifecycle
 
-parameters should be set as shown below. By setting mapping quality to `20` we avoid reads mapping to multiple locations and by using **Filter on bitwise flag** option we ensure that the resulting dataset will contain only properly paired reads. This operation will produce yet another collection containing now filtered datasets.
+In this brief analysis we took four paired datasets, created a collection, analyzed this collection and finally created a single report. Such "lifecycle" is shown in the figure below. Here we started with eight fastq datasets representing four paired end samples. A paired collection was reduced to a list of BAM datasets by `BWA-MEM`. Varinat calling by `lofreq` and field extraction with `SnpEff` maintained collection structure: these tools processed four individual datasets changing their formats from BAM to VCF, and from VCF to Tab-delimited. Finally, we collapsed collection by merging its content into a single dataset. 
 
-![filter_closeup](../../images/filter_closeup.png)
-{: .img-responsive}
+![Collection lifecycle](../../images/collections/collection_lifecycle.svg "Collection lifecycle. Arrows = individual fastq datasets; Four shades of yellow = four samples analyzed in this example. ")
 
-### Merging collection into a single dataset
-
-The beauty of BAM datasets is that they can be combined in a single entity using so called *Read group*. This allows to bundle reads from multiple experiments into a single dataset where read identity is maintained by labelling every sequence with *read group* tags. So let's finally reduce this collection to a single BAM dataset. For this we will use `MergeSamFiles` tool for the `Picard` suite:
-
-![merge](../../images/merge.png)
-{: .img-responsive}
-
-Here we select the collection generated by the filtering tool described above:
-
-![merge_closeup](../../images/merge_closeup.png)
-{: .img-responsive}
-
-This operation will **not** generate a collection. Instead, it will generate a single BAM dataset containing mapped reads from our four samples (`M117-bl`, `M117-ch`, `M117C1-bl`, and `M117C1-ch`).
-
-## Let's look at what we've got!
-
-So we have one BAM dataset combining everything we've done so far. Let's look at the contents of this dataset using a genome browser. First, we will need to downsample the dataset to avoiding overwhelming the browser. For this we will use `Downsample SAM/BAM` tool:
-
-![downsample](../../images/downsample.png)
-{: .img-responsive}
-
-Set **Probability (between 0 and 1) that any given read will be kept** to roughly `5%` (or `0.05`) using the slider control:
-
-![downsample_closeup](../../images/downsample_closeup.png)
-
-This will generate another BAM dataset containing only 5% of the original reads and much smaller as a result. Click on this dataset and you will see links to various genome browsers:
-
-![browserLinks](../../images/browserLinks.png)
-{: .img-responsive}
-
-Click the **Human hg38** link in the **display with IGV** line as highlighted above (learn more about displaying Galaxy data in IGV with this [movie](https://vimeo.com/123442619#t=4m16s)). Below is an example generated with IGV on these data. In this screenshot, reads are colored by read group (four distinct colors). A yellow inset displays additional information about a single read. One can see that this read corresponds to read group `M117-bl`.
-
-![igv](../../images/igv.png)
-{: .img-responsive}
+The last step of our analysis, collapsing a collection, is 
 
 ## We did not fake this:
 The history described in this page is accessible directly from here:
