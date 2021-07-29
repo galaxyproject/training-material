@@ -1,14 +1,13 @@
 require 'json'
 
-langCodeMap = {
-  'en': "English",
-  'es': "Español",
-}
-
-
 module Jekyll
   module JsonldFilter
     def to_jsonld(material, topic, site)
+      langCodeMap = {
+        'en': "English",
+        'es': "Español",
+      }
+
       gtn = {
         "@type": "Organization",
         "email": "#{site['email']}",
