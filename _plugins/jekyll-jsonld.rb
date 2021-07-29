@@ -1,5 +1,10 @@
 require 'json'
 
+langCodeMap = {
+  'en': "English",
+  'es': "Español",
+}
+
 
 module Jekyll
   module JsonldFilter
@@ -83,11 +88,6 @@ module Jekyll
         #"genre":,
         #"hasPart" described below
         "headline": "#{material['title']}",
-        "inLanguage": {
-            "@type": "Language",
-            "name": "English",
-            "alternateName": "en"
-        },
         #"interactionStatistic":,
         "interactivityType": "mixed",
         "isAccessibleForFree": true,
@@ -204,6 +204,20 @@ module Jekyll
         end
       end
       data['description'] = description.join('\n')
+
+      if material.key?("lang") then
+        data['inLanguage'] = {
+          "@type": "Language",
+          "name": langCodeMap[material['lang']],
+          "alternateName": material['lang']
+        }
+      else
+        data['inLanguage'] = {
+          "@type": "Language",
+          "name": "English",
+          "alternateName": "en"
+        }
+      end
 
       # Course requirements (material + topic)
       reqs = []
