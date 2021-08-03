@@ -166,7 +166,10 @@ The logic of the following steps is:
 >    - *"Omit or append read numbers"*: `Do not append /1 and /2 to read names`
 >
 >      Adding this first or second read of the pair indicator to the read name would make the result dependent on which half of the reads we retrieve. We do not want this.
->    - *"Require that these flags are set"*: `read is unmapped` and `mate is unmapped`
+>
+>    - *"Require that these flags are set"*: 
+>      - `read is unmapped`
+>      - `mate is unmapped`
 >
 >      This setting makes sure we retain only read pairs for which none of the two reads could be mapped to the human genome.
 >
