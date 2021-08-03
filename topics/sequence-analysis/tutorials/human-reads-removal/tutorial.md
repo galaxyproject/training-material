@@ -162,6 +162,7 @@ The logic of the following steps is:
 >
 >      With this setting we are choosing to retrieve only the forward reads of each pair as a single result dataset.
 >      Since the forward and reverse reads of a pair share their read identifier, we do not need the reverse reads.
+>
 >    - *"Omit or append read numbers"*: `Do not append /1 and /2 to read names`
 >
 >      Adding this first or second read of the pair indicator to the read name would make the result dependent on which half of the reads we retrieve. We do not want this.
