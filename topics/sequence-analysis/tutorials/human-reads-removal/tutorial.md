@@ -20,6 +20,7 @@ requirements:
     type: "internal"
     topic_name: sequence-analysis
     tutorials:
+      - quality-control
       - mapping
   -
     type: "internal"
@@ -224,4 +225,3 @@ We are almost there! We already know the identifiers of all reads we would like 
 Data cleaning is a standard procedure for clinical sequencing datasets and is a rather straightforward process in Galaxy.
 You just learnt how to remove human reads from any number of paired-end sequenced samples in parallel using collections and just a handful of tools.
 Cleaning of single-end data would use the same tools (with adjusted settings), but would work on data arranged in a simple list collection instead of in a paired collection.
-
