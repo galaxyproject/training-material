@@ -116,6 +116,13 @@ After that, we will arrange the uploaded data into a collection in our Galaxy hi
 
 In order to learn, which of the reads of each of the input samples are of likely human origin we need to map them to the human reference genome. To improve the quality of this step we will also trim low-quality bases from the ends of all reads before passing them to the read mapping software.
 
+> ### {% icon comment %} Comment
+>
+> Do you want to learn more about the principles behind quality control (including trimming) and mapping? Follow our dedicated tutorials:
+> - [Quality Control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
+> - [Mapping]({% link topics/sequence-analysis/tutorials/mapping/tutorial.md %}).
+{: .comment}
+
 > ### {% icon hands_on %} Hands-on: Trim reads and map them to the human reference genome
 >
 > 1. {% tool [Trimmomatic](toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0) %} with default settings and:
