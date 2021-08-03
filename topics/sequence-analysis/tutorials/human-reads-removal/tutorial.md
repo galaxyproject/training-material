@@ -205,12 +205,12 @@ We are almost there! We already know the identifiers of all reads we would like 
 >
 {: .comment}
 
+The **seqtk_subseq** tool offfers the identifier-based filtering functionality we are looking for.
+As a slight complication, however, the tool is not prepared to handle paired read collections like the one we organized our input data into.
+For this reason, we need to first unzip our collection into two simple list collections - one with the forward reads, the other one with the reverse reads of all samples.
+Then, after processing both with **seqtk_subseq**, we zip the filtered collections back into one.
+
 > ### {% icon hands_on %} Hands-on: Identifier-based extraction of non-human reads from the input data
->
-> The **seqtk_subseq** tool offfers the identifier-based filtering functionality we are looking for.
-> As a slight complication, however, the tool is not prepared to handle paired read collections like the one we organized our input data into.
-> For this reason, we need to first unzip our collection into two simple list collections - one with the forward reads, the other one with the reverse reads of all samples.
-> Then, after processing both with **seqtk_subseq**, we zip the filtered collections back into one.
 >
 > 1. {% tool [Unzip Collection](__UNZIP_COLLECTION__) %} with the following setting:
 >    - *"Input Paired Dataset"*: the collection of original sequenced reads input datasets
