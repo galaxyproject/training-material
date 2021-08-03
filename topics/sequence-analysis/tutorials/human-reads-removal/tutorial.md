@@ -114,7 +114,7 @@ After that, we will arrange the uploaded data into a collection in our Galaxy hi
 
 # Read trimming and mapping
 
-In order to learn, which of the reads of each of the input samples are of likely human origin we need to map them to the human reference genome. To improve the quality of this step we will also trim low-quality bases from the ends of all reads before passing them to the read mapping software.
+In order to learn which of the reads of each of the input samples are of likely human origin, we need to map the reads to the human reference genome. To improve the quality of this step we will also trim low-quality bases from the ends of all reads before passing them to the read mapping software.
 
 > ### {% icon comment %} Comment
 >
