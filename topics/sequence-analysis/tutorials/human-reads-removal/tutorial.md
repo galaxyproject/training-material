@@ -126,6 +126,7 @@ In order to learn, which of the reads of each of the input samples are of likely
 >      - *"Using reference genome"*: `Human Dec. 2013 (GRCh38/hg38)(hg38)`
 >
 >        The exact name of this version of the human reference genome may vary between Galaxy servers. Start typing `hg38` in the select box to reveal available choices on your server.
+>
 >    - *"Single or Paired-end reads"*: `Paired Collection`
 >      - *"Select a paired collection"*: the `paired` output of **Trimmomatic**
 >
