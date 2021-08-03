@@ -138,7 +138,7 @@ The logic of the following steps is:
 
 1. Filter the BAM dataset for each sample for only those reads that could not be mapped to the human reference genome, and for which also the read mate in the pair could not be mapped to this genome.
 
-  In other words, if only one read of a read pair can be mapped to the human genome we play it safe and discard the pair.
+   In other words, if only one read of a read pair can be mapped to the human genome we play it safe and discard the pair.
 
 2. Emit the remaining reads in a format (we choose FASTA here) from which it is easy to extract the read identifiers
 
@@ -155,7 +155,7 @@ The logic of the following steps is:
 >      Since the forward and reverse reads of a pair share their read identifier, we do not need the reverse reads.
 >    - *"Omit or append read numbers"*: `Do not append /1 and /2 to read names`
 >
->      Adding this first or second read of the pair indicator to the read name would make the result dependent on which have of the reads we retrieve. We do not want this.
+>      Adding this first or second read of the pair indicator to the read name would make the result dependent on which half of the reads we retrieve. We do not want this.
 >    - *"Require that these flags are set"*: `read is unmapped` and `mate is unmapped`
 >
 >      This setting makes sure we retain only read pairs for which none of the two reads could be mapped to the human genome.
