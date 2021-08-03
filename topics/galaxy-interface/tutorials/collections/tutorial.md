@@ -14,10 +14,10 @@ objectives:
   - "Understand and master dataset collections"
 time_estimation: "30m"
 key_points:
-  - "Jobs running on data collections use the same settings for each dataset in the collection."
-  - "For example, FASTQ files can be combined into lists of dataset pairs. Each pair is made up of the forward reads dataset and the reverse reads dataset."
-  - "In this tutorial, several tools were run on the list of dataset pairs, such as `bwa-mem`, `cleanSam`, `Filter SAM or BAM`, etc."
-  - "When using collections, you have to click on the `batch input mode` button, to select one of the collections available in the history. Otherwise, the collections are not available in the drop-down list."
+  - "Multiple datasets can be combined in a collection."
+  - "This significantly simplifies the analysis."
+  - "This tutorial showed how to (1) create collection, (2) run tools on a collection, (3) combine collection elements into a final analysis results."
+  - "There is a variety of **Collection operation** tools allowing to perform a variety of transformations."
 contributors:
   - nekrut
 
@@ -62,7 +62,7 @@ These datasets represent genomic DNA (enriched for mitochondria via a long range
 
 # Creating a paired dataset collection
 
-You can see that there are eight datasets forming four pairs. Obviously, we can manipulate them one-by-one (e.g., start four mapping, jobs, call variants four times and so on), but this will unnecessarily tedious. Moreover, imagine if you have 100s or 1,000s of pairs: it will be impossible to process them individually. 
+You can see that there are eight datasets forming four pairs. Obviously, we can manipulate them one-by-one (e.g., start four mapping jobs, call variants four times and so on), but this will unnecessarily tedious. Moreover, imagine if you have 100s or 1,000s of pairs: it will be impossible to process them individually. 
 
 This is exactly why we developed collections. Dataset collections allow combining multiple datasets into a single entity. Thus instead of dealing with four, a hundred, or a thousand of individual datasets you have only one item in Galaxy history to deal with. 
 
@@ -97,7 +97,6 @@ Now it is time to name the collection: type `M117-collection` in **Name** text b
 Clicking on collection will expand it to show four pairs it contains (panel **B**). Clicking individual pairs will expand them further to reveal **forward** and **reverse** datasets (panel **C**). Expanding these further will enable one to see individual datasets (panel **D**).
 
 ![expanding collection](../../images/collections/expanding_collection.gif "To look what is inside a collection, just click on it.")
-{: .img-responsive}
 
 # Processing data organized as a collection
 
@@ -105,7 +104,6 @@ By now we see that a collection can be used to bundle a large number of items in
 
 ```
 https://zenodo.org/record/5119008/files/chrM.fa.gz
-
 ```
 
 > ### {% icon details %} Set format to `fasta.gz`
@@ -143,7 +141,6 @@ https://zenodo.org/record/5119008/files/chrM.fa.gz
 You will see jobs being submitted and new datasets appearing in the history. Because our collection contains four paired datasets Galaxy will actually four separate `BWA-MEM` jobs. In the end this `BWA-MEM` run will produce a new collection containing four (4) BAM datasets. Let's look at this collection by clicking on it (panel **A** in the figure below). You can see that now this collection is no longer paired (compared to the collection we created in the beginning of this tutorial). This is because `BWA-MEM` takes forward and reverse data as input, but produces only a single BAM dataset as the output. So what we have in the result is a *list* of four dataset (BAM files; panel **B**). If you click on any of the datasets you will see that it is indeed a BAM dataset (panel **C**).
 
 ![bwa_memCollection_ABC](../../images/collections/collection_expansion.svg)
-{: .img-responsive}
 
 ## Calling variants
 
@@ -278,20 +275,442 @@ We will have a single dataset as the output:
 
 you can see that added a column with dataset ID taken from collection element name.
 
-# Collection lifecycle
+## We did not fake this:
+The history described in this page is accessible directly from here:
+
+* History [**Collections (full analysis)**](https://usegalaxy.org/u/cartman/h/collection-tutorial)
+
+From there you can import histories to make them your own.
+
+
+# Collection operations
 
 In this brief analysis we took four paired datasets, created a collection, analyzed this collection and finally created a single report. Such "lifecycle" is shown in the figure below. Here we started with eight fastq datasets representing four paired end samples. A paired collection was reduced to a list of BAM datasets by `BWA-MEM`. Varinat calling by `lofreq` and field extraction with `SnpEff` maintained collection structure: these tools processed four individual datasets changing their formats from BAM to VCF, and from VCF to Tab-delimited. Finally, we collapsed collection by merging its content into a single dataset. 
 
 ![Collection lifecycle](../../images/collections/collection_lifecycle.svg "Collection lifecycle. Arrows = individual fastq datasets; Four shades of yellow = four samples analyzed in this example. ")
 
-The last step of our analysis, collapsing a collection, is 
+The last step of our analysis, collapsing a collection, is an example of a *collection operation*. Galaxy contains an entire section of tools designed for handling of collection data. These can be classified as:
 
-## We did not fake this:
-The history described in this page is accessible directly from here:
+ - Tools that manipulate elements within a collection
+ - Tools that change collection structure
+ - Tools that combine elements of a collection
 
-* History [**Collections (full analysis)**](https://usegalaxy.org/u/aun1/h/collections-full-analysis)
+Let's look at these categories in more detail:
 
-From there you can import histories to make them your own.
+## Tools that manipulate elements within a collection
 
-## If things don't work...
-...you need to complain. Use [Galaxy's Help Channel](https://help.galaxyproject.org/) to do this.
+### Extract dataset
+
+{% icon tool %} **Extract dataset** extracts datasets from a collection based on either position or identifier.
+
+The tool allow extracting datasets based on position (**The first dataset** and **Select by index** options) or name (**Select belement identifier** option). This tool effectively collapses the inner-most collection into a dataset. For nested collections (e.g a list of lists of lists: outer:middle:inner, extracting the inner dataset element) a new list is created where the selected element takes the position of the inner-most collection (so outer:middle, where middle is not a collection but the inner dataset element).
+
+### Filter empty
+
+{% icon tool %} **Filter empty** removes empty elements from a collection.
+
+This tool takes a dataset collection and filters out (removes) empty datasets. This is useful for continuing a multi-sample analysis when downstream tools require datasets to have content.
+
+.. image:: ${static_path}/images/tools/collection_ops/filter_empty.svg
+  :width: 500
+  :alt: Filtering empty datasets
+
+### Filter failed datasets
+
+{% icon tool %} **Filter failed datasets** removes datasets in error (red) from a collection.
+
+This tool takes a dataset collection and filters out (removes) datasets in the failed (red) state. This is useful for continuing a multi-sample analysis when one or more of the samples fails at some point.
+
+![filter_failed](../../images/collections/filter_error.svg)
+
+### Build list
+
+{% icon tool %} **Build list** creates a new list collection from individual datasets or collections.
+
+This tool combines individual datasets or collections into a new collection. The simplest scenario is building a new colection from individual datasets (case **A** in the image below). You can merge a collection with individual dataset(s). In this case (see **B** in the image below) the individual dataset(s) will be merged with each element of the input collection to create a nested collection. Finally, two or more collection can be merged together creating a nested collection (case **C** in the image below).
+
+![Build list](../../images/collections/build_list.svg)
+
+### Filter collection
+
+{% icon tool %} **Filter collection** removes elements from a collection using a list supplied in a file.
+
+This tools allow filtering elements from a data collection.  It takes an input collection and a text file with names (i.e. identifiers). The tool behaviour is controlled by **How should the elements to remove be determined?** drop-down. It has the following options:
+
+**Remove if identifiers are ABSENT from file**
+
+Given a collection:
+
+```
+ Collection: [Dataset A] 
+             [Dataset B] 
+             [Dataset X]
+```
+
+and a text file:
+
+```
+             A
+             B
+             Z
+```
+
+the tool will return two collections:
+
+
+```
+
+ (filtered):  [Dataset A]
+              [Dataset B]
+
+ (discarded): [Dataset X]
+```
+
+**Remove if identifiers are PRESENT in file**
+
+Given a collection:
+
+```
+ Collection: [Dataset A] 
+             [Dataset B] 
+             [Dataset X]
+```
+and a text file:
+
+```
+             A
+             B
+             Z
+```
+
+the tool will return two collections:
+
+```
+ (filtered):  [Dataset X]
+
+ (discarded): [Dataset A]
+              [Dataset B]
+
+```
+
+### Relabel identifiers
+
+{% icon tool %}  **Relabel identifiers** changes identifiers of datasets within a collection using identifiers from a supplied file. 
+
+New identifiers can be supplied as either a simple list or a tab-delimited file mapping old identifier to the new ones. This is controlled using **How should the new identifiers be specified?** drop-down:
+
+**Using lines in a simple text file**
+
+Given a collection:
+
+```
+ Collection: [Dataset A] 
+             [Dataset B] 
+             [Dataset X]
+```
+
+and a simple text file:
+
+
+```
+             Alpha
+             Beta
+             Gamma
+```
+
+the tool will return:
+
+```
+ Collection: [Dataset Alpha] 
+             [Dataset Beta] 
+             [Dataset Gamma]
+```
+
+**Map original identifiers to new ones using a two column table**
+
+Given a collection:
+
+```
+ Collection: [Dataset A] 
+             [Dataset B] 
+             [Dataset X]
+```
+
+and a simple text file (you can see that entries do not have to be in order here):
+
+
+```
+             B Beta
+             X Gamma
+             A Alpha
+```
+
+the tool will return:
+
+```
+ Collection: [Dataset Alpha] 
+             [Dataset Beta] 
+             [Dataset Gamma]
+```
+
+### Sort collection
+
+{% icon tool %} **Sort collection** ... well .. sorts dataset collection alphabetically, numerically, or using predetermined order from a supplied file.
+
+**Numeric sort**
+
+The tool sort in ascending order. When *numeric* sort is chosen, the tool ignores non-numeric characters. For example, if a collection contains the following elements:
+
+```
+ Collection: [Horse123] 
+             [Donkey543] 
+             [Mule176]
+```
+
+The tool will output:
+
+```
+ Collection: [Horse123]
+             [Mule176] 
+             [Donkey543] 
+```
+
+**Sorting from file**
+
+Alternative, one can supply a single column text file containing elements identifiers in the desired sort order. For example, suppose there a collection:
+
+```
+ Collection: [Horse123] 
+             [Donkey543] 
+             [Mule176]
+```
+
+and a file specifying sort order:
+
+```
+ Donkey543
+ Horse123 
+ Mule176
+```
+
+the output will predictably look like this:
+
+```
+ Collection: [Donkey543] 
+             [Horse123] 
+             [Mule176]
+```
+
+### Tag collection
+
+{% icon tool %}  **Tag collection** adds tags (including name: and group: tags) to collection elements.
+
+The relationship between element names and tags is specified in a two column tab-delimited file. This file may contain less entries than elements in the collection. In that case only matching list identifiers will be tagged.
+
+To create name: or group: tags prepend them with `#` (you can also use `name:`) or `group:`, respectively. 
+
+More about tags
+
+> ### {% icon tip %} Tip: More about tags
+> Galaxy allows tagging datasets to facilitate analyses. There are several types of tags including simple tags, name tags, and group tags. **Simple** tags allow you to attach an alternative label to a dataset, which will make it easier to find it later. **Name** tags allow you to track propagation of a dataset through the analyses: all datasets derived from the initial dataset labeled with a name tag will inherit it. Finally, **group** tags allow you to label group of datasets. This is useful. for example, for differential expression analysis where you can have two groups of datasets labeled as "treatment" and "control".
+>
+>To learn mote about tags go to [training site](https://training.galaxyproject.org/training-material/search?query=tags).
+{: .tip}
+
+## Tools that change collection structure
+
+### Flatten collection
+
+{% icon tool %} **Flatten collection** collapses nested collection into a simple list.
+
+This tool takes nested collections such as a list of lists or a list of dataset pairs and produces a flat list from the inputs. It effectively "flattens" the hierarchy. The collection identifiers are merged together (using `_` as default) to create new collection identifiers in the flattened result:
+
+![Flatten collection](../../images/collections/flatten.svg)
+
+### Merge collections
+
+{% icon tool %}  **Merge collections** takes two or more collections and creates a single collection from them. 
+
+By default the tool assumes that collections that are being merged have unique dataset names. If it not the case only one (the first) of the datasets with a repeated name will be included in the merged collection. For example, suppose you have two collections. Each has two datasets named "A" and "B":
+```
+ Collection 1: [Dataset A] 
+               [Dataset B] 
+               [Dataset X]
+ Collection 2: [Dataset A] 
+               [Dataset B] 
+               [Dataset Y]
+```
+
+Merging them will produce a single collection with only two datasets:
+
+```
+ Merged Collection: [Dataset A] 
+                    [Dataset B] 
+                    [Dataset X] 
+                    [Dataset Y]
+```
+
+This behavior can be changed by clicking on "*Advanced Options*" link. The following options are available:
+
+**Keep first instance (Default behavior)**
+
+Input:
+
+```
+ Collection 1: [Dataset A] 
+               [Dataset B] 
+               [Dataset X]
+ Collection 2: [Dataset A] 
+               [Dataset B] 
+               [Dataset Y]
+```
+
+Output:
+
+```
+ Merged Collection: [Dataset A] 
+                    [Dataset B] 
+                    [Dataset X] 
+                    [Dataset Y]
+```
+
+Here if two collection have identical dataset names, a dataset is chosen from the *first* collection.
+
+-----
+
+**Keep first instance**
+
+Input:
+
+```
+ Collection 1: [Dataset A] 
+               [Dataset B] 
+               [Dataset X]
+ Collection 2: [Dataset A] 
+               [Dataset B] 
+               [Dataset Y]
+```
+
+Output:
+
+```
+ Merged Collection: [Dataset A] 
+                    [Dataset B] 
+                    [Dataset X] 
+                    [Dataset Y]
+```
+
+Here if two collection have identical dataset names, a dataset is chosen from the *last* collection.
+
+-----
+
+**Append suffix to conflicted element identifiers**
+
+Input:
+
+```
+ Collection 1: [Dataset A] 
+               [Dataset B] 
+               [Dataset X]
+ Collection 2: [Dataset A] 
+               [Dataset B] 
+               [Dataset Y]
+```
+
+Output:
+
+```
+ Merged Collection: [Dataset A_1] 
+                    [Dataset B_1]
+                    [Dataset A_2] 
+                    [Dataset B_2]  
+                    [Dataset X] 
+                    [Dataset Y]
+```
+
+
+**Append suffix to conflicted element identifiers after first on encountered**
+
+Input:
+
+```
+
+ Collection 1: [Dataset A] 
+               [Dataset B] 
+               [Dataset X]
+ Collection 2: [Dataset A] 
+               [Dataset B] 
+               [Dataset Y]
+```
+
+Output:
+
+```
+ Merged Collection: [Dataset A] 
+                    [Dataset B]
+                    [Dataset A_2] 
+                    [Dataset B_2]  
+                    [Dataset X] 
+                    [Dataset Y]
+```
+
+**Append suffix to every element identifier**
+
+Input:
+
+```
+ Collection 1: [Dataset A] 
+               [Dataset B] 
+               [Dataset X]
+ Collection 2: [Dataset A] 
+               [Dataset B] 
+               [Dataset Y]
+```
+
+Output:
+
+```
+ Merged Collection: [Dataset A_1] 
+                    [Dataset B_2]
+                    [Dataset A_2] 
+                    [Dataset B_2]  
+                    [Dataset X_1] 
+                    [Dataset Y_2]
+```
+
+**Fail collection creation**
+
+This option will simply trigger an error.
+
+### Zip collection
+
+{% icon tool %} **Zip collection** takes two collections and creates a paired collection from them. 
+
+If you have one collection containing only forward reads and one containing only reverse, this tools will "zip" them together into a simple paired collection. For example, given two collections with `forward` and `reverse` reads they can be "zipped" into a single paired collection:
+
+![Zip collection](../../images/collections/zip.svg)
+
+### Unzip collection
+
+{% icon tool %} **Unzip collection** takes a paired collection and "unzips" it into two simple dataset collections (lists of datasets). 
+
+Given a paired collection of forward and reverse reads this tool will "unzip" it into two collections containing forward and reverse reads, respectively:
+
+![Unzip collection](../../images/collections/unzip.svg)
+
+## Tools that combine elements of a collection
+
+### Column join
+
+{% icon tool %} **Column join** merges elements of a collection on a given column. 
+
+If you have a collection with three elements (image below), merging it on the first column will first produce a union on values found in the first column of each elements and then paste elements having the same value side-by-side:
+
+![Column join](../../images/collections/join_on_column.svg)
+
+### Collapse collection 
+
+{% icon tool %} **Collapse collection** merges elements together (head-to-tail) in the order of the collection. Its power comes from the ability to add identifiers when it performs the merge. Identifiers can be added in variety of ways specified by the **Prepend File name** option as shown in the figure below (we used option **A** in the last step of this tutorial):
+
+![Collapse collection](../../images/collections/collapse_collection.svg)
+
