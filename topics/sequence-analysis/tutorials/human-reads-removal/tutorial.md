@@ -66,7 +66,7 @@ This tutorial will guide you through a typical workflow for clearing human seque
 
 As always, it is best to give each analysis you are performing with Galaxy its own history, so let's start with preparing this:
 
-> ### {% icon hands_on %} Hands-on: Data upload to Galaxy from NCBI SRA
+> ### {% icon hands_on %} Hands-on: Prepare new history
 >
 > 1. Create a new history for this tutorial and give it a proper name
 >
