@@ -391,8 +391,32 @@
         
 
         
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+        <ul class="supporting_material">
+            
 
-        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 21, 2020 </div>
+            
+                <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://doi.org/10.5281/zenodo.5119008">
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
+</a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+
+            
+        </ul>
+        
+
+        <div><strong> <i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 4, 2021 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong> Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> The GTN Framework is <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a></div>
 
     </blockquote>
@@ -407,164 +431,692 @@
                 <p>Here we will show <span class="notranslate">Galaxy</span> features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you’ve got hundreds - it becomes very annoying. In <span class="notranslate">Galaxy</span> we have introduced <strong>Dataset collections</strong> that allow you to combine numerous datasets in a single entity that can be easily manipulated.</p>
 
 <h1 id="getting-data">Getting data</h1>
-<p><a href="https://usegalaxy.org/library/folders/Fab5f788f07073c11">Here</a> is a library containing a few datasets we will be practicing with (as with any <span class="notranslate">Galaxy</span> tutorial, you can upload your own data and play with it instead of the provided datasets):</p>
+
+<p>First, we need to upload datasets. Cut and paste the following URLs to <span class="notranslate">Galaxy</span> upload tool (see a <i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> <strong>Tip</strong> on how to do this <a href="#-tip-upload-fastqsanger-datasets-via-links">below</a>).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/5119008/files/M117-bl_1.fq.gz
+https://zenodo.org/record/5119008/files/M117-bl_2.fq.gz
+https://zenodo.org/record/5119008/files/M117-ch_1.fq.gz
+https://zenodo.org/record/5119008/files/M117-ch_2.fq.gz
+https://zenodo.org/record/5119008/files/M117C1-bl_1.fq.gz
+https://zenodo.org/record/5119008/files/M117C1-bl_2.fq.gz
+https://zenodo.org/record/5119008/files/M117C1-ch_1.fq.gz
+https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
+</code></pre></div></div>
+
+<blockquote class="warning">
+  <h3 id="details-set-format-to-fastqsangergz"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Set format to <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code></h3>
+  <p>The above datasets are in <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> format. It is necessary to explicitly set format in <span class="notranslate">Galaxy</span>. The <i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> <strong>Tip</strong> section below explains how to upload these data and set the correct format. There is a variety of <a href="https://en.wikipedia.org/wiki/FASTQ_format">fastq format flavors</a> and it is difficult to guess them automatically.</p>
+
+  <!--SNIPPET-->
+  <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-upload-fastqsanger-datasets-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Upload fastqsanger datasets via links</h3>  <ol>  <li>    <p>Click on <strong>Upload Data</strong> on the top of the left panel:</p>    <p><img src="/training-material/faqs/galaxy/images/upload_data_button.png" alt="UploadDataButton" /></p>  </li>  <li>    <p>Click on <strong>Paste/Fetch</strong>:</p>    <p><img src="/training-material/faqs/galaxy/images/paste_fetch_data_button.png" alt="PasteFetchButton" /></p>  </li>  <li>    <p>Paste URL into text box that would appear:</p>    <p><img src="/training-material/faqs/galaxy/images/paste_fetch_data_modal.png" alt="PasteFetchModal" /></p>  </li>  <li>    <p>Set <strong>Type (set all)</strong> to <code class="language-plaintext highlighter-rouge">fastqsanger</code> or, if your data is compressed as in URLs above (they have <code class="language-plaintext highlighter-rouge">.gz</code> extensions), to <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code></p>    <p><img src="/training-material/faqs/galaxy/images/paste_fetch_set_data_type.png" alt="ChangeTypeDropDown" />:</p>  </li></ol></blockquote>
+</blockquote>
+
+<h2 id="about-these-datasets">About these datasets</h2>
+
+<p>These datasets represent genomic <span class="notranslate">DNA</span> (enriched for mitochondria via a long range PCR) isolated from blood (<code class="language-plaintext highlighter-rouge">bl</code>) and cheek (buccal swab, <code class="language-plaintext highlighter-rouge">ch</code>) of mother (<code class="language-plaintext highlighter-rouge">M117</code>) and her child (<code class="language-plaintext highlighter-rouge">M117C1</code>) that was sequenced on an Illumina miSeq machine as paired-read library (250-bp <span class="notranslate">reads</span>; see our <a href="http://www.pnas.org/content/111/43/15474.abstract">2014</a> manuscript for <strong>Methods</strong>):</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">M117-bl_1</code> - family 117, mother, 1-st (<strong>F</strong>) read from <strong>blood</strong></li>
-  <li><code class="language-plaintext highlighter-rouge">M117-bl_2</code> - family 117, mother, 2-nd (<strong>R</strong>) read from <strong>blood</strong></li>
-  <li><code class="language-plaintext highlighter-rouge">M117-ch_1</code> - family 117, mother, 1-st (<strong>F</strong>) read from <strong>cheek</strong></li>
-  <li><code class="language-plaintext highlighter-rouge">M117-ch_1</code> - family 117, mother, 2-nd (<strong>R</strong>) read from <strong>cheek</strong></li>
-  <li><code class="language-plaintext highlighter-rouge">M117C1-bl_1</code>- family 117, child, 1-st (<strong>F</strong>) read from <strong>blood</strong></li>
-  <li><code class="language-plaintext highlighter-rouge">M117C1-bl_2</code>- family 117, child, 2-nd (<strong>R</strong>) read from <strong>blood</strong></li>
-  <li><code class="language-plaintext highlighter-rouge">M117C1-ch_1</code>- family 117, child, 1-st (<strong>F</strong>) read from <strong>cheek</strong></li>
-  <li><code class="language-plaintext highlighter-rouge">M117C1-ch_2</code>- family 117, child, 2-nd (<strong>R</strong>) read from <strong>cheek</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">M117-bl_1</code> - family 117, mother, <em>forward</em> (<strong>F</strong>) <span class="notranslate">reads</span> from <strong>blood</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">M117-bl_2</code> - family 117, mother, <em>reverse</em> (<strong>R</strong>) <span class="notranslate">reads</span> from <strong>blood</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">M117-ch_1</code> - family 117, mother, <em>forward</em> (<strong>F</strong>) <span class="notranslate">reads</span> from <strong>cheek</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">M117-ch_1</code> - family 117, mother, <em>reverse</em> (<strong>R</strong>) <span class="notranslate">reads</span> from <strong>cheek</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">M117C1-bl_1</code>- family 117, child, <em>forward</em> (<strong>F</strong>) <span class="notranslate">reads</span> from <strong>blood</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">M117C1-bl_2</code>- family 117, child, <em>reverse</em> (<strong>R</strong>) <span class="notranslate">reads</span> from <strong>blood</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">M117C1-ch_1</code>- family 117, child, <em>forward</em> (<strong>F</strong>) <span class="notranslate">reads</span> from <strong>cheek</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">M117C1-ch_2</code>- family 117, child, <em>reverse</em> (<strong>R</strong>) <span class="notranslate">reads</span> from <strong>cheek</strong></li>
 </ul>
 
-<p>These datasets represent genomic <span class="notranslate">DNA</span> (enriched for mitochondria via a long range PCR) isolated from blood (<code class="language-plaintext highlighter-rouge">bl</code>) and cheek (buccal swab, <code class="language-plaintext highlighter-rouge">ch</code>) of mother (<code class="language-plaintext highlighter-rouge">M117</code>) and her child (<code class="language-plaintext highlighter-rouge">M117C1</code>) that was sequenced on an Illumina miSeq machine as paired-read library (250-bp <span class="notranslate">reads</span>; see our <a href="http://www.pnas.org/content/111/43/15474.abstract">2014</a> manuscript for <strong>Methods</strong>).</p>
+<h1 id="creating-a-paired-dataset-collection">Creating a paired dataset collection</h1>
 
-<h2 id="load-data-from-galaxy-library">Load data from <span class="notranslate">Galaxy</span> library</h2>
+<p>You can see that there are eight datasets forming four pairs. Obviously, we can manipulate them one-by-one (e.g., start four <span class="notranslate">mapping</span> jobs, call variants four times and so on), but this will unnecessarily tedious. Moreover, imagine if you have 100s or 1,000s of pairs: it will be impossible to process them individually.</p>
 
-<p>Right click (or Ctrl-click) on <a href="https://usegalaxy.org/library/folders/Fab5f788f07073c11">this link</a> to open a new browser window and position this window side-by-side with the window displaying this tutorial. You will see this:</p>
+<p>This is exactly why we developed collections. Dataset collections allow combining multiple datasets into a single entity. Thus instead of dealing with four, a hundred, or a thousand of individual datasets you have only one item in <span class="notranslate">Galaxy</span> history to deal with.</p>
 
-<p class="img-responsive"><img src="../../images/grab_data.png" alt="Data in Galaxy library" loading="lazy" /></p>
+<p>Because our data is <em>paired</em> we need to create a hierarchical collection called <strong>Paired Dataset Collection</strong> or <strong>Paired Collection</strong>. In such collection there are two layers. The first layer corresponds to individual samples (e.g., <code class="language-plaintext highlighter-rouge">M117-bl</code>). The second layer represent <code class="language-plaintext highlighter-rouge">forward</code> and <code class="language-plaintext highlighter-rouge">reverse</code> <span class="notranslate">reads</span> corresponding to each sample:</p>
 
-<p>Select all datasets, click <strong>to History</strong> button, and select <strong>as Datasets</strong>. In the pop-up window, either select a history or create a new one. This will import all datasets into a history. The screen will look like this:</p>
+<hr />
 
-<p class="img-responsive"><img src="../../images/manyDatasets.png" alt="manyDatasets" loading="lazy" /></p>
+<figure id="figure-1"><img src="../../images/collections/paired_collection.svg" alt="paired collection" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> The logic of Paired Collection. Here <em>N</em> datasets are bundled into a paired collection with two layers. The first layer corresponds to samples and the second to forward and reverse <span class="notranslate">reads</span> within each sample.</figcaption></figure>
 
-<h2 id="creating-a-paired-dataset-collection">Creating a paired dataset collection</h2>
+<hr />
 
-<p>Now click the checkbox in <img src="../../images/historyItemControls.png" alt="historyItemControls" loading="lazy" /> and you will see your history changing like this:</p>
+<p>To begin creating a collection we need to select datasets we would like to bundle. This is done using checkbox button of <span class="notranslate">Galaxy</span>’s history menu. Fig. 2 below shows this process.</p>
 
-<p class="img-responsive"><img src="../../images/historyWithCheckboxes.png" alt="historyWithCheckboxes" loading="lazy" /></p>
+<hr />
 
-<p>Let’s click <strong>All</strong>, which will select all datasets in the history, then click <strong>For all selected…</strong> and finally select <strong>Build List of Dataset Pairs</strong> from the following menu:</p>
+<figure id="figure-2"><img src="../../images/collections/select_multiple_datasets.gif" alt="selecting multiple datasets" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Selecting multiple datasets and creating a paired collection.</figcaption></figure>
 
-<p class="img-responsive"><img src="../../images/buildPairs.png" alt="buildPairs" loading="lazy" /></p>
+<hr />
 
-<p>The following wizard will appear:</p>
+<p>The above process ended with appearance of <span class="notranslate">Galaxy</span> collection wizard. In this case <span class="notranslate">Galaxy</span> automatically assigned pairs using the <code class="language-plaintext highlighter-rouge">_1</code> and <code class="language-plaintext highlighter-rouge">_2</code> endings of dataset names. Let’s however pretend that this did not happen. Click on <strong>Unpair all</strong> (highlighted in red in the figure above) link and then on <strong>Filters</strong> link (see animation in Fig. 3). The interface will change into its unpaired state.</p>
 
-<p class="img-responsive"><img src="../../images/collectionCreation.png" alt="collectionCreation" loading="lazy" /></p>
+<p>Here datasets containing the first (forward) and the second (reverse) read are differentiated by having <code class="language-plaintext highlighter-rouge">_1</code> and <code class="language-plaintext highlighter-rouge">_2</code> in the filename. We can use this feature in dataset collection wizard to pair our datasets.  Type <code class="language-plaintext highlighter-rouge">_1</code> in the left <strong>Filter text</strong> text box and <code class="language-plaintext highlighter-rouge">_2</code> in the right. You will see that the dataset collection wizard will automatically filter lists on each side of the interface. Now you can either click <strong>Auto pair</strong> if pairs look good to you (proper combinations of datasets are listed in each line) or pair each forward/reverse group individually by pressing <strong>Pair these datasets</strong> button separating each pair.</p>
 
-<p>In this case <span class="notranslate">Galaxy</span> automatically assigned pairs using the <code class="language-plaintext highlighter-rouge">_1</code> and <code class="language-plaintext highlighter-rouge">_2</code> endings of dataset names. Let’s however pretend that this did not happen. Click on <strong>Unpair all</strong> (highlighted in red in the figure above) link and then on <strong>Clear</strong> link (highlighted in blue in the figure above). The interface will change into its unpaired state:</p>
+<p>Now it is time to name the collection: type <code class="language-plaintext highlighter-rouge">M117-collection</code> in <strong>Name</strong> text box and create the collection by clicking <strong>Create collection</strong>. A new item will appear in the history.</p>
 
-<p class="img-responsive"><img src="../../images/collectionCreationClean.png" alt="collectionCreationClean" loading="lazy" /></p>
+<hr />
 
-<p>These datasets contain paired-end <span class="notranslate">reads</span>. Datasets containing the first (forward) and the second (reverse) read are differentiated by having <code class="language-plaintext highlighter-rouge">_1</code> and <code class="language-plaintext highlighter-rouge">_2</code> in the filename. We can use this feature in dataset collection wizard to pair our datasets.  Type <code class="language-plaintext highlighter-rouge">_1</code> in the left <strong>Filter this list</strong> text box and <code class="language-plaintext highlighter-rouge">_2</code> in the right:</p>
+<figure id="figure-3"><img src="../../images/collections/using_collection_wizard.gif" alt="using collection wizard" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Working with collection wizard. Text above this figure explains each step.</figcaption></figure>
 
-<p class="img-responsive"><img src="../../images/1and2.png" alt="1and2" loading="lazy" /></p>
+<hr />
 
-<p>You will see that the dataset collection wizard will automatically filter lists on each side of the interface:</p>
+<p>Clicking on collection will expand it to show four pairs it contains (panel <strong>B</strong>). Clicking individual pairs will expand them further to reveal <strong>forward</strong> and <strong>reverse</strong> datasets (panel <strong>C</strong>). Expanding these further will enable one to see individual datasets (panel <strong>D</strong>).</p>
 
-<p class="img-responsive"><img src="../../images/collectionPrefiltered.png" alt="collectionPrefiltered" loading="lazy" /></p>
+<figure id="figure-4"><img src="../../images/collections/expanding_collection.gif" alt="expanding collection" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> To look what is inside a collection, just click on it.</figcaption></figure>
 
-<p>Now you can either click <strong>Auto pair</strong> if pairs look good to you (proper combinations of datasets are listed in each line) or pair each forward/reverse group individually by pressing <strong>Pair these datasets</strong> button separating each pair:</p>
+<h1 id="processing-data-organized-as-a-collection">Processing data organized as a collection</h1>
 
-<p class="img-responsive"><img src="../../images/collectionCreation.png" alt="collectionCreation" loading="lazy" /></p>
+<p>By now we see that a collection can be used to bundle a large number of items into a single history item. <span class="notranslate">Galaxy</span> tools tools take collection as input. Let’s map <span class="notranslate">reads</span> contained in collection <code class="language-plaintext highlighter-rouge">M117-collection</code> against human mitochondrial genome. Before we can do this we need to upload mitochondrial genome using the following URL (see a <i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> <strong>Tip</strong> on how to do this <a href="#-tip-importing-via-links">below</a>):</p>
 
-<p>Now it is time to name the collection:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/5119008/files/chrM.fa.gz
+</code></pre></div></div>
 
-<p><img src="../../images/collectionNaming.png" alt="collectionNaming" loading="lazy" /></p>
+<blockquote class="warning">
+  <h3 id="details-set-format-to-fastagz"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Set format to <code class="language-plaintext highlighter-rouge">fasta.gz</code></h3>
+  <p>The above dataset is in <code class="language-plaintext highlighter-rouge">fasta.gz</code> format. The <i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> <strong>Tip</strong> section below explains how to upload these data and set the correct format.</p>
 
-<p>and create the collection by clicking <strong>Create list</strong>. A new item will appear in the history as you can see on the panel <strong>A</strong> below. Clicking on collection will expand it to show four pairs it contains (panel <strong>B</strong>). Clicking individual pairs will expand them further to reveal <strong>forward</strong> and <strong>reverse</strong> datasets (panel <strong>C</strong>). Expanding these further will enable one to see individual datasets (panel <strong>D</strong>).</p>
+  <!--SNIPPET-->
+  <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>    <p>Click <strong>Reset</strong> button at the bottom of the form. If the button is greyed out -&gt; skip to the next step.</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>    <p><code class="language-plaintext highlighter-rouge">https://zenodo.org/record/5119008/files/chrM.fa.gz</code></p>  </li>  <li>    <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">fasta.gz</code></p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li>    <p><strong>Close</strong> the window</p>  </li>  <li>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</li></ul></blockquote>
+</blockquote>
 
-<p class="img-responsive"><img src="../../images/collection_ABCD.png" alt="collection_ABCD" loading="lazy" /></p>
+<h2 id="mapping-reads"><span class="notranslate">Mapping</span> <span class="notranslate">reads</span></h2>
 
-<h2 id="using-collections">Using collections</h2>
+<p><strong>BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is a widely used sequence aligner for short-read sequencing datasets such as those we are analysing in this tutorial. (You can find the tool by typing <code class="language-plaintext highlighter-rouge">BWA MEM</code> in the search box at the top left corner of <span class="notranslate">Galaxy</span> interface).</p>
 
-<p>By now we see that a collection can be used to bundle a large number of items into a single history item. This means that many <span class="notranslate">Galaxy</span> tools will be able to process all datasets in a collection transparently to you. Let’s try to map these datasets to human genome using <code class="language-plaintext highlighter-rouge">bwa-mem</code> mapper. In the Tools pane on the left, use the <code class="language-plaintext highlighter-rouge">search-tools</code> to find <code class="language-plaintext highlighter-rouge">bwa-mem</code>. Click on <code class="language-plaintext highlighter-rouge">Map with BWA-MEM</code> in the search list.</p>
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-map-sequencing-reads-to-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Map sequencing <span class="notranslate">reads</span> to reference genome</h3>
 
-<p class="img-responsive"><img src="../../images/bwa_mem_collection_readGroups.png" alt="bwa_mem_collection_readGroups" loading="lazy" /></p>
+  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1"><strong>BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1</span></span>  with the following parameters:</p>
+  <ul>
+    <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">chrM.fa.gz</code> (The mitochondrial genome we just uploaded)</li>
+      </ul>
+    </li>
+    <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Paired Collection</code>
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select a paired collection”</em>: <code class="language-plaintext highlighter-rouge">M117-collection</code> (the collection we built at the beginning of this tutorial.)</li>
+      </ul>
+    </li>
+    <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Do not set</code></li>
+    <li><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">1.Simple Illumina mode</code></li>
+  </ul>
 
-<p>In the central panel, provide the following parameters for <code class="language-plaintext highlighter-rouge">Map with BWA-MEM</code>:</p>
+  <p>The interface should look like this:</p>
 
-<ul>
-  <li>set <strong>Using reference genome</strong> to <code class="language-plaintext highlighter-rouge">hg38</code> (red outline);</li>
-  <li>set <strong>Single or Paired-end <span class="notranslate">reads</span></strong> to <code class="language-plaintext highlighter-rouge">Paired collection</code> (blue outline);</li>
-  <li>select <code class="language-plaintext highlighter-rouge">M177-collection</code> from <strong>Select a paired collection</strong> dropdown (magenta outline);</li>
-  <li>In <strong>Set read groups information</strong> select <code class="language-plaintext highlighter-rouge">Automatically assign ID</code> (green outline);</li>
-  <li>scroll down and click <strong>Execute</strong>.</li>
-</ul>
+  <hr />
 
-<p>You will see jobs being submitted and new datasets appearing in the history. IN particular below you can see that <span class="notranslate">Galaxy</span> has started four jobs (two yellow and two gray). This is because we have eight paired datasets with each pair being processed separately by <code class="language-plaintext highlighter-rouge">bwa-mem</code>. As a result we have four <code class="language-plaintext highlighter-rouge">bwa-mem</code> runs:</p>
+  <p><img src="../../images/bwa_mem_interface_coll_tut.png" alt="bwa_mem_interface" loading="lazy" /></p>
 
-<p class="img-responsive"><img src="../../images/bwa_memCollectionRunning.png" alt="bwa_memCollectionRunning" loading="lazy" /></p>
+  <hr />
 
-<p>Once these jobs are finished they will disappear from the history and all results will be represented as a new collection:</p>
+  <ul>
+    <li>Click <strong>Execute</strong> button</li>
+  </ul>
 
-<p class="img-responsive"><img src="../../images/bwa_memCollectionDone.png" alt="bwa_memCollectionDone" loading="lazy" /></p>
+</blockquote>
 
-<p>Let’s look at this collection by clicking on it (panel <strong>A</strong> in the figure below). You can see that now this collection is no longer paired (compared to the collection we created in the beginning of this tutorial). This is because <code class="language-plaintext highlighter-rouge">bwa-mem</code> takes forward and reverse data as input, but produces only a single BAM dataset as the output. So what we have in the result is a <em>list</em> of four dataset (BAM files; panels <strong>B</strong> and <strong>C</strong>).</p>
+<p>You will see jobs being submitted and new datasets appearing in the history. Because our collection contains four paired datasets <span class="notranslate">Galaxy</span> will actually four separate <code class="language-plaintext highlighter-rouge">BWA-MEM</code> jobs. In the end this <code class="language-plaintext highlighter-rouge">BWA-MEM</code> run will produce a new collection containing four (4) BAM datasets. Let’s look at this collection by clicking on it (panel <strong>A</strong> in the figure below). You can see that now this collection is no longer paired (compared to the collection we created in the beginning of this tutorial). This is because <code class="language-plaintext highlighter-rouge">BWA-MEM</code> takes forward and reverse data as input, but produces only a single BAM dataset as the output. So what we have in the result is a <em>list</em> of four dataset (BAM files; panel <strong>B</strong>). If you click on any of the datasets you will see that it is indeed a BAM dataset (panel <strong>C</strong>).</p>
 
-<p class="img-responsive"><img src="../../images/bwa_memCollection_ABC.png" alt="bwa_memCollection_ABC" loading="lazy" /></p>
+<p><img src="../../images/collections/collection_expansion.svg" alt="bwa_memCollection_ABC" loading="lazy" /></p>
 
-<h2 id="processing-collection-as-a-single-entity">Processing collection as a single entity</h2>
+<h2 id="calling-variants">Calling variants</h2>
 
-<p>Now that <code class="language-plaintext highlighter-rouge">bwa-mem</code> has finished and generated a collection of BAM datasets we can continue to analyze the entire collection as a single <span class="notranslate">Galaxy</span> ‘<em>item</em>’.</p>
+<p>After we mapped <span class="notranslate">reads</span> against the mitochondrial genome, we can now call variants. In this step a variant calling tool <code class="language-plaintext highlighter-rouge">lofreq</code> will take a collection of BAM datasets (the one produced by <code class="language-plaintext highlighter-rouge">BWA-MEM</code>), identify differences between <span class="notranslate">reads</span> and the reference, and output these differences as a collection of <a href="https://en.wikipedia.org/wiki/Variant_Call_Format">VCF</a> datasets.</p>
 
-<h3 id="ensuring-consistency-of-bam-dataset">Ensuring consistency of BAM dataset</h3>
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-call-variants"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Call variants</h3>
 
-<p>Let’s perform cleanup of our BAM files with <code class="language-plaintext highlighter-rouge">cleanSam</code> utility from the <strong>Picard</strong> package:</p>
+  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1"><strong>Call variants</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:</p>
+  <ul>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input <span class="notranslate">reads</span> in BAM format”</em>: <code class="language-plaintext highlighter-rouge">Map with BWA-MEM...</code> (output of <strong>BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">History</code>
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference”</em>: <code class="language-plaintext highlighter-rouge">chrM.fa.gz (as fasta)</code> (Input dataset)</li>
+      </ul>
+    </li>
+    <li><em>“Call variants across”</em>: <code class="language-plaintext highlighter-rouge">Whole reference</code></li>
+    <li><em>“Types of variants to call”</em>: <code class="language-plaintext highlighter-rouge">SNVs and indels</code></li>
+  </ul>
 
-<p class="img-responsive"><img src="../../images/cleanSam.png" alt="cleanSam" loading="lazy" /></p>
+  <p>The interface should look like this:</p>
 
-<p>If you look at the picture above carefully, you will see that the <strong>Select SAM/BAM dataset or dataset collection</strong> parameter is empty (it says <code class="language-plaintext highlighter-rouge">No sam or bam datasets available.</code>). This is because we do not have single SAM or BAM datasets in the history. Instead we have a collection. So all you need to do is to click on the <img src="../../images/folder.png" alt="folder" loading="lazy" /> button and you will get our BAM collection selected:</p>
+  <hr />
 
-<p class="img-responsive"><img src="../../images/cleanSam_closeup.png" alt="cleanSam_closeup" loading="lazy" /></p>
+  <p><img src="../../images/collections/lofreq_interface.png" alt="lofreq_interface" loading="lazy" /></p>
 
-<p>Click <strong>Execute</strong>. As an output this tool will produce a collection contained cleaned data.</p>
+  <hr />
 
-<h3 id="retaining-proper-pairs">Retaining ‘proper pairs’</h3>
+  <ul>
+    <li>Click <strong>Execute</strong> button</li>
+  </ul>
 
-<p>Now let’s clean the dataset further by only preserving truly paired <span class="notranslate">reads</span> (<span class="notranslate">reads</span> satisfying two requirements: (1) read is paired, and (2) it is mapped as a proper pair). For this we will use <code class="language-plaintext highlighter-rouge">Filter SAM or BAM</code> tools from <strong>SAMTools</strong> collection:</p>
+</blockquote>
 
-<p class="img-responsive"><img src="../../images/filter.png" alt="filter" loading="lazy" /></p>
+<h2 id="create-table-of-variants-using-snpsift-extract-fields">Create table of variants using <strong>SnpSift Extract Fields</strong></h2>
 
-<p>parameters should be set as shown below. By setting <span class="notranslate">mapping</span> quality to <code class="language-plaintext highlighter-rouge">20</code> we avoid <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to multiple locations and by using <strong>Filter on bitwise flag</strong> option we ensure that the resulting dataset will contain only properly paired <span class="notranslate">reads</span>. This operation will produce yet another collection containing now filtered datasets.</p>
+<p>We will now convert VCF datasets into tab delimited format as it will be easier to work with. This will be done with <code class="language-plaintext highlighter-rouge">SNPSift</code>: a tool specifically designed for manipulation of tab-delimited data.</p>
 
-<p class="img-responsive"><img src="../../images/filter_closeup.png" alt="filter_closeup" loading="lazy" /></p>
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-create-table-of-variants"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create table of variants</h3>
 
-<h3 id="merging-collection-into-a-single-dataset">Merging collection into a single dataset</h3>
+  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0"><strong>SnpSift Extract Fields</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:</p>
+  <ul>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Variant input file in VCF format”</em>: <code class="language-plaintext highlighter-rouge">snpeff_output</code> (output of <strong>SnpEff eff:</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Fields to extract”</em>: <code class="language-plaintext highlighter-rouge">CHROM POS REF ALT QUAL DP AF SB DP4</code></li>
+    <li><em>“One effect per line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+  </ul>
 
-<p>The beauty of BAM datasets is that they can be combined in a single entity using so called <em>Read group</em>. This allows to bundle <span class="notranslate">reads</span> from multiple experiments into a single dataset where read identity is maintained by labelling every sequence with <em>read group</em> tags. So let’s finally reduce this collection to a single BAM dataset. For this we will use <code class="language-plaintext highlighter-rouge">MergeSamFiles</code> tool for the <code class="language-plaintext highlighter-rouge">Picard</code> suite:</p>
+  <p>The interface should look like this:</p>
 
-<p class="img-responsive"><img src="../../images/merge.png" alt="merge" loading="lazy" /></p>
+  <hr />
 
-<p>Here we select the collection generated by the filtering tool described above:</p>
+  <p><img src="../../images/collections/snpsift_interface.png" alt="snpsift_interface" loading="lazy" /></p>
 
-<p class="img-responsive"><img src="../../images/merge_closeup.png" alt="merge_closeup" loading="lazy" /></p>
+  <hr />
 
-<p>This operation will <strong>not</strong> generate a collection. Instead, it will generate a single BAM dataset containing mapped <span class="notranslate">reads</span> from our four samples (<code class="language-plaintext highlighter-rouge">M117-bl</code>, <code class="language-plaintext highlighter-rouge">M117-ch</code>, <code class="language-plaintext highlighter-rouge">M117C1-bl</code>, and <code class="language-plaintext highlighter-rouge">M117C1-ch</code>).</p>
+  <ul>
+    <li>Click <strong>Execute</strong> button</li>
+  </ul>
 
-<h2 id="lets-look-at-what-weve-got">Let’s look at what we’ve got!</h2>
+</blockquote>
 
-<p>So we have one BAM dataset combining everything we’ve done so far. Let’s look at the contents of this dataset using a genome browser. First, we will need to downsample the dataset to avoiding overwhelming the browser. For this we will use <code class="language-plaintext highlighter-rouge">Downsample SAM/BAM</code> tool:</p>
+<p>As a result of this operation we now have a collection of four tab delimited files. Yet, ultimately we want to summaize these data as one final table. The next step does just that.</p>
 
-<p class="img-responsive"><img src="../../images/downsample.png" alt="downsample" loading="lazy" /></p>
+<h2 id="collapse-data-into-a-single-dataset">Collapse data into a single dataset</h2>
 
-<p>Set <strong>Probability (between 0 and 1) that any given read will be kept</strong> to roughly <code class="language-plaintext highlighter-rouge">5%</code> (or <code class="language-plaintext highlighter-rouge">0.05</code>) using the slider control:</p>
+<p>We now extracted meaningful fields from VCF datasets. But they still exist as a collection. To move towards secondary analysis we need to <strong>collapse</strong> this collection into a single dataset. For more information about collapsing collections see this video:</p>
 
-<p><img src="../../images/downsample_closeup.png" alt="downsample_closeup" loading="lazy" /></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ypuFZ1RKMIY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
 
-<p>This will generate another BAM dataset containing only 5% of the original <span class="notranslate">reads</span> and much smaller as a result. Click on this dataset and you will see links to various genome browsers:</p>
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-collapse-a-collection"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Collapse a collection</h3>
 
-<p class="img-responsive"><img src="../../images/browserLinks.png" alt="browserLinks" loading="lazy" /></p>
+  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Tested with toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0</span></span>  with the following parameters:</p>
+  <ul>
+    <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse into single dataset”</em>: <code class="language-plaintext highlighter-rouge">SnpSift Extract Fields ...</code> (output of <strong>SnpSift Extract Fields</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li>“<em>Keep one header line</em>”: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+    <li>“<em>Prepend File name</em>”: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+    <li>“<em>Where to add dataset name</em>”: <code class="language-plaintext highlighter-rouge">Same line and each line in dataset</code></li>
+  </ul>
 
-<p>Click the <strong>Human hg38</strong> link in the <strong>display with IGV</strong> line as highlighted above (learn more about displaying <span class="notranslate">Galaxy</span> data in IGV with this <a href="https://vimeo.com/123442619#t=4m16s">movie</a>). Below is an example generated with IGV on these data. In this screenshot, <span class="notranslate">reads</span> are colored by read group (four distinct colors). A yellow inset displays additional information about a single read. One can see that this read corresponds to read group <code class="language-plaintext highlighter-rouge">M117-bl</code>.</p>
+  <p>The interface should look like this:</p>
 
-<p class="img-responsive"><img src="../../images/igv.png" alt="igv" loading="lazy" /></p>
+  <hr />
+
+  <p><img src="../../images/collections/collapse_collection.png" alt="snpsift_interface" loading="lazy" /></p>
+
+  <hr />
+
+  <ul>
+    <li>Click <strong>Execute</strong> button</li>
+  </ul>
+
+</blockquote>
+
+<p>You can see that this tool takes lines from all collection elements (in our case we have two), add element name as the first column, and pastes everything together. So if we have a collection as an input:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-input-a-collection-with-two-items"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: A collection with two items</h3>
+  <p>A collection element named <code class="language-plaintext highlighter-rouge">M117-bl.fq</code></p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chrM   152 T C  3707.0 1242 0.99 0 2,2,540,697
+chrM 16519 T C 35149.0 1033 0.99 0 1,1,611,420
+</code></pre></div>  </div>
+
+  <p>A collection element named <code class="language-plaintext highlighter-rouge">M117-ch.fq</code>:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chrM   152 T C  4098.0 1440 0.99 0 0,1,575,863
+chrM 16519 T C 36574.0 1039 0.99 2 3,0,713,321
+</code></pre></div>  </div>
+
+  <p>A collection element named <code class="language-plaintext highlighter-rouge">M117C1-bl.fq</code>:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chrM   152 T C  4888.0 1235 1.00 0 0,0,548,687
+chrM 16519 T C 35220.0 1042 0.99 0 0,0,598,443
+</code></pre></div>  </div>
+
+  <p>A collection element named <code class="language-plaintext highlighter-rouge">M117C1-ch.fq</code>:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chrM   152 T C  2757.0 1413 0.99 0 2,2,576,833
+chrM 16455 G A    54.0  100 0.04 0 89,7,4,0
+chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
+</code></pre></div>  </div>
+
+</blockquote>
+
+<p>We will have a single dataset as the output:</p>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-a-single-dataset"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: A single dataset</h3>
+
+  <p>then the <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> will produce this:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>M117-bl.fq   chrM   152 T C  3707.0 1242 0.99 0 2,2,540,697
+M117-bl.fq   chrM 16519 T C 35149.0 1033 0.99 0 1,1,611,420
+M117-ch.fq   chrM   152 T C  4098.0 1440 0.99 0 0,1,575,863
+M117-ch.fq   chrM 16519 T C 36574.0 1039 0.99 2 3,0,713,321
+M117C1-bl.fq chrM   152 T C  4888.0 1235 1.00 0 0,0,548,687
+M117C1-bl.fq chrM 16519 T C 35220.0 1042 0.99 0 0,0,598,443
+M117C1-ch.fq chrM   152 T C  2757.0 1413 0.99 0 2,2,576,833
+M117C1-ch.fq chrM 16455 G A    54.0  100 0.04 0 89,7,4,0
+M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
+</code></pre></div>  </div>
+</blockquote>
+
+<p>you can see that added a column with dataset ID taken from collection element name.</p>
 
 <h2 id="we-did-not-fake-this">We did not fake this:</h2>
 <p>The history described in this page is accessible directly from here:</p>
 
 <ul>
-  <li>History <a href="https://usegalaxy.org/u/aun1/h/collections-full-analysis"><strong>Collections (full analysis)</strong></a></li>
+  <li>History <a href="https://usegalaxy.org/u/cartman/h/collection-tutorial"><strong>Collections (full analysis)</strong></a></li>
 </ul>
 
 <p>From there you can import histories to make them your own.</p>
 
-<h2 id="if-things-dont-work">If things don’t work…</h2>
-<p>…you need to complain. Use <a href="https://help.galaxyproject.org/"><span class="notranslate">Galaxy</span>’s Help Channel</a> to do this.</p>
+<h1 id="collection-operations">Collection operations</h1>
+
+<p>In this brief analysis we took four paired datasets, created a collection, analyzed this collection and finally created a single report. Such “lifecycle” is shown in the figure below. Here we started with eight fastq datasets representing four paired end samples. A paired collection was reduced to a list of BAM datasets by <code class="language-plaintext highlighter-rouge">BWA-MEM</code>. Varinat calling by <code class="language-plaintext highlighter-rouge">lofreq</code> and field extraction with <code class="language-plaintext highlighter-rouge">SnpEff</code> maintained collection structure: these tools processed four individual datasets changing their formats from BAM to VCF, and from VCF to Tab-delimited. Finally, we collapsed collection by merging its content into a single dataset.</p>
+
+<figure id="figure-5"><img src="../../images/collections/collection_lifecycle.svg" alt="Collection lifecycle" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Collection lifecycle. Arrows = individual fastq datasets; Four shades of yellow = four samples analyzed in this example. </figcaption></figure>
+
+<p>The last step of our analysis, collapsing a collection, is an example of a <em>collection operation</em>. <span class="notranslate">Galaxy</span> contains an entire section of tools designed for handling of collection data. These can be classified as:</p>
+
+<ul>
+  <li>Tools that manipulate elements within a collection</li>
+  <li>Tools that change collection structure</li>
+  <li>Tools that combine elements of a collection</li>
+</ul>
+
+<p>Let’s look at these categories in more detail:</p>
+
+<h2 id="tools-that-manipulate-elements-within-a-collection">Tools that manipulate elements within a collection</h2>
+
+<h3 id="extract-dataset">Extract dataset</h3>
+
+<p><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Extract dataset</strong> extracts datasets from a collection based on either position or identifier.</p>
+
+<p>The tool allow extracting datasets based on position (<strong>The first dataset</strong> and <strong>Select by index</strong> options) or name (<strong>Select belement identifier</strong> option). This tool effectively collapses the inner-most collection into a dataset. For nested collections (e.g a list of lists of lists: outer:middle:inner, extracting the inner dataset element) a new list is created where the selected element takes the position of the inner-most collection (so outer:middle, where middle is not a collection but the inner dataset element).</p>
+
+<h3 id="filter-empty">Filter empty</h3>
+
+<p><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Filter empty</strong> removes empty elements from a collection.</p>
+
+<p>This tool takes a dataset collection and filters out (removes) empty datasets. This is useful for continuing a multi-sample analysis when <span class="notranslate">downstream</span> tools require datasets to have content.</p>
+
+<p>.. image:: ${static_path}/images/tools/collection_ops/filter_empty.svg
+  :width: 500
+  :alt: Filtering empty datasets</p>
+
+<h3 id="filter-failed-datasets">Filter failed datasets</h3>
+
+<p><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Filter failed datasets</strong> removes datasets in error (red) from a collection.</p>
+
+<p>This tool takes a dataset collection and filters out (removes) datasets in the failed (red) state. This is useful for continuing a multi-sample analysis when one or more of the samples fails at some point.</p>
+
+<p><img src="../../images/collections/filter_error.svg" alt="filter_failed" loading="lazy" /></p>
+
+<h3 id="build-list">Build list</h3>
+
+<p><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Build list</strong> creates a new list collection from individual datasets or collections.</p>
+
+<p>This tool combines individual datasets or collections into a new collection. The simplest scenario is building a new colection from individual datasets (case <strong>A</strong> in the image below). You can merge a collection with individual dataset(s). In this case (see <strong>B</strong> in the image below) the individual dataset(s) will be merged with each element of the input collection to create a nested collection. Finally, two or more collection can be merged together creating a nested collection (case <strong>C</strong> in the image below).</p>
+
+<p><img src="../../images/collections/build_list.svg" alt="Build list" loading="lazy" /></p>
+
+<h3 id="filter-collection">Filter collection</h3>
+
+<p><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Filter collection</strong> removes elements from a collection using a list supplied in a file.</p>
+
+<p>This tools allow filtering elements from a data collection.  It takes an input collection and a text file with names (i.e. identifiers). The tool behaviour is controlled by <strong>How should the elements to remove be determined?</strong> drop-down. It has the following options:</p>
+
+<p><strong>Remove if identifiers are ABSENT from file</strong></p>
+
+<p>Given a collection:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Dataset A] 
+             [Dataset B] 
+             [Dataset X]
+</code></pre></div></div>
+
+<p>and a text file:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>             A
+             B
+             Z
+</code></pre></div></div>
+
+<p>the tool will return two collections:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+ (filtered):  [Dataset A]
+              [Dataset B]
+
+ (discarded): [Dataset X]
+</code></pre></div></div>
+
+<p><strong>Remove if identifiers are PRESENT in file</strong></p>
+
+<p>Given a collection:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Dataset A] 
+             [Dataset B] 
+             [Dataset X]
+</code></pre></div></div>
+<p>and a text file:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>             A
+             B
+             Z
+</code></pre></div></div>
+
+<p>the tool will return two collections:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> (filtered):  [Dataset X]
+
+ (discarded): [Dataset A]
+              [Dataset B]
+
+</code></pre></div></div>
+
+<h3 id="relabel-identifiers">Relabel identifiers</h3>
+
+<p><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>  <strong>Relabel identifiers</strong> changes identifiers of datasets within a collection using identifiers from a supplied file.</p>
+
+<p>New identifiers can be supplied as either a simple list or a tab-delimited file <span class="notranslate">mapping</span> old identifier to the new ones. This is controlled using <strong>How should the new identifiers be specified?</strong> drop-down:</p>
+
+<p><strong>Using lines in a simple text file</strong></p>
+
+<p>Given a collection:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Dataset A] 
+             [Dataset B] 
+             [Dataset X]
+</code></pre></div></div>
+
+<p>and a simple text file:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>             Alpha
+             Beta
+             Gamma
+</code></pre></div></div>
+
+<p>the tool will return:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Dataset Alpha] 
+             [Dataset Beta] 
+             [Dataset Gamma]
+</code></pre></div></div>
+
+<p><strong>Map original identifiers to new ones using a two column table</strong></p>
+
+<p>Given a collection:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Dataset A] 
+             [Dataset B] 
+             [Dataset X]
+</code></pre></div></div>
+
+<p>and a simple text file (you can see that entries do not have to be in order here):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>             B Beta
+             X Gamma
+             A Alpha
+</code></pre></div></div>
+
+<p>the tool will return:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Dataset Alpha] 
+             [Dataset Beta] 
+             [Dataset Gamma]
+</code></pre></div></div>
+
+<h3 id="sort-collection">Sort collection</h3>
+
+<p><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Sort collection</strong> … well .. sorts dataset collection alphabetically, numerically, or using predetermined order from a supplied file.</p>
+
+<p><strong>Numeric sort</strong></p>
+
+<p>The tool sort in ascending order. When <em>numeric</em> sort is chosen, the tool ignores non-numeric characters. For example, if a collection contains the following elements:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Horse123] 
+             [Donkey543] 
+             [Mule176]
+</code></pre></div></div>
+
+<p>The tool will output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Horse123]
+             [Mule176] 
+             [Donkey543] 
+</code></pre></div></div>
+
+<p><strong>Sorting from file</strong></p>
+
+<p>Alte<span class="notranslate">rna</span>tive, one can supply a single column text file containing elements identifiers in the desired sort order. For example, suppose there a collection:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Horse123] 
+             [Donkey543] 
+             [Mule176]
+</code></pre></div></div>
+
+<p>and a file specifying sort order:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Donkey543
+ Horse123 
+ Mule176
+</code></pre></div></div>
+
+<p>the output will predictably look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection: [Donkey543] 
+             [Horse123] 
+             [Mule176]
+</code></pre></div></div>
+
+<h3 id="tag-collection">Tag collection</h3>
+
+<p><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>  <strong>Tag collection</strong> adds tags (including name: and group: tags) to collection elements.</p>
+
+<p>The relationship between element names and tags is specified in a two column tab-delimited file. This file may contain less entries than elements in the collection. In that case only matching list identifiers will be tagged.</p>
+
+<p>To create name: or group: tags prepend them with <code class="language-plaintext highlighter-rouge">#</code> (you can also use <code class="language-plaintext highlighter-rouge">name:</code>) or <code class="language-plaintext highlighter-rouge">group:</code>, respectively.</p>
+
+<p>More about tags</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-more-about-tags"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: More about tags</h3>
+  <p><span class="notranslate">Galaxy</span> allows tagging datasets to facilitate analyses. There are several types of tags including simple tags, name tags, and group tags. <strong>Simple</strong> tags allow you to attach an alte<span class="notranslate">rna</span>tive label to a dataset, which will make it easier to find it later. <strong>Name</strong> tags allow you to track propagation of a dataset through the analyses: all datasets derived from the initial dataset labeled with a name tag will inherit it. Finally, <strong>group</strong> tags allow you to label group of datasets. This is useful. for example, for differential <span class="notranslate">expression</span> analysis where you can have two groups of datasets labeled as “treatment” and “control”.</p>
+
+  <p>To learn mote about tags go to <a href="https://training.galaxyproject.org/training-material/search?query=tags">training site</a>.</p>
+</blockquote>
+
+<h2 id="tools-that-change-collection-structure">Tools that change collection structure</h2>
+
+<h3 id="flatten-collection">Flatten collection</h3>
+
+<p><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Flatten collection</strong> collapses nested collection into a simple list.</p>
+
+<p>This tool takes nested collections such as a list of lists or a list of dataset pairs and produces a flat list from the inputs. It effectively “flattens” the hierarchy. The collection identifiers are merged together (using <code class="language-plaintext highlighter-rouge">_</code> as default) to create new collection identifiers in the flattened result:</p>
+
+<p><img src="../../images/collections/flatten.svg" alt="Flatten collection" loading="lazy" /></p>
+
+<h3 id="merge-collections">Merge collections</h3>
+
+<p><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>  <strong>Merge collections</strong> takes two or more collections and creates a single collection from them.</p>
+
+<p>By default the tool assumes that collections that are being merged have unique dataset names. If it not the case only one (the first) of the datasets with a repeated name will be included in the merged collection. For example, suppose you have two collections. Each has two datasets named “A” and “B”:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection 1: [Dataset A] 
+               [Dataset B] 
+               [Dataset X]
+ Collection 2: [Dataset A] 
+               [Dataset B] 
+               [Dataset Y]
+</code></pre></div></div>
+
+<p>Merging them will produce a single collection with only two datasets:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Merged Collection: [Dataset A] 
+                    [Dataset B] 
+                    [Dataset X] 
+                    [Dataset Y]
+</code></pre></div></div>
+
+<p>This behavior can be changed by clicking on “<em>Advanced Options</em>” link. The following options are available:</p>
+
+<p><strong>Keep first instance (Default behavior)</strong></p>
+
+<p>Input:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection 1: [Dataset A] 
+               [Dataset B] 
+               [Dataset X]
+ Collection 2: [Dataset A] 
+               [Dataset B] 
+               [Dataset Y]
+</code></pre></div></div>
+
+<p>Output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Merged Collection: [Dataset A] 
+                    [Dataset B] 
+                    [Dataset X] 
+                    [Dataset Y]
+</code></pre></div></div>
+
+<p>Here if two collection have identical dataset names, a dataset is chosen from the <em>first</em> collection.</p>
+
+<hr />
+
+<p><strong>Keep first instance</strong></p>
+
+<p>Input:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection 1: [Dataset A] 
+               [Dataset B] 
+               [Dataset X]
+ Collection 2: [Dataset A] 
+               [Dataset B] 
+               [Dataset Y]
+</code></pre></div></div>
+
+<p>Output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Merged Collection: [Dataset A] 
+                    [Dataset B] 
+                    [Dataset X] 
+                    [Dataset Y]
+</code></pre></div></div>
+
+<p>Here if two collection have identical dataset names, a dataset is chosen from the <em>last</em> collection.</p>
+
+<hr />
+
+<p><strong>Append suffix to conflicted element identifiers</strong></p>
+
+<p>Input:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection 1: [Dataset A] 
+               [Dataset B] 
+               [Dataset X]
+ Collection 2: [Dataset A] 
+               [Dataset B] 
+               [Dataset Y]
+</code></pre></div></div>
+
+<p>Output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Merged Collection: [Dataset A_1] 
+                    [Dataset B_1]
+                    [Dataset A_2] 
+                    [Dataset B_2]  
+                    [Dataset X] 
+                    [Dataset Y]
+</code></pre></div></div>
+
+<p><strong>Append suffix to conflicted element identifiers after first on encountered</strong></p>
+
+<p>Input:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+ Collection 1: [Dataset A] 
+               [Dataset B] 
+               [Dataset X]
+ Collection 2: [Dataset A] 
+               [Dataset B] 
+               [Dataset Y]
+</code></pre></div></div>
+
+<p>Output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Merged Collection: [Dataset A] 
+                    [Dataset B]
+                    [Dataset A_2] 
+                    [Dataset B_2]  
+                    [Dataset X] 
+                    [Dataset Y]
+</code></pre></div></div>
+
+<p><strong>Append suffix to every element identifier</strong></p>
+
+<p>Input:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Collection 1: [Dataset A] 
+               [Dataset B] 
+               [Dataset X]
+ Collection 2: [Dataset A] 
+               [Dataset B] 
+               [Dataset Y]
+</code></pre></div></div>
+
+<p>Output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Merged Collection: [Dataset A_1] 
+                    [Dataset B_2]
+                    [Dataset A_2] 
+                    [Dataset B_2]  
+                    [Dataset X_1] 
+                    [Dataset Y_2]
+</code></pre></div></div>
+
+<p><strong>Fail collection creation</strong></p>
+
+<p>This option will simply trigger an error.</p>
+
+<h3 id="zip-collection">Zip collection</h3>
+
+<p><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Zip collection</strong> takes two collections and creates a paired collection from them.</p>
+
+<p>If you have one collection containing only forward <span class="notranslate">reads</span> and one containing only reverse, this tools will “zip” them together into a simple paired collection. For example, given two collections with <code class="language-plaintext highlighter-rouge">forward</code> and <code class="language-plaintext highlighter-rouge">reverse</code> <span class="notranslate">reads</span> they can be “zipped” into a single paired collection:</p>
+
+<p><img src="../../images/collections/zip.svg" alt="Zip collection" loading="lazy" /></p>
+
+<h3 id="unzip-collection">Unzip collection</h3>
+
+<p><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Unzip collection</strong> takes a paired collection and “unzips” it into two simple dataset collections (lists of datasets).</p>
+
+<p>Given a paired collection of forward and reverse <span class="notranslate">reads</span> this tool will “unzip” it into two collections containing forward and reverse <span class="notranslate">reads</span>, respectively:</p>
+
+<p><img src="../../images/collections/unzip.svg" alt="Unzip collection" loading="lazy" /></p>
+
+<h2 id="tools-that-combine-elements-of-a-collection">Tools that combine elements of a collection</h2>
+
+<h3 id="column-join">Column join</h3>
+
+<p><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Column join</strong> merges elements of a collection on a given column.</p>
+
+<p>If you have a collection with three elements (image below), merging it on the first column will first produce a union on values found in the first column of each elements and then paste elements having the same value side-by-side:</p>
+
+<p><img src="../../images/collections/join_on_column.svg" alt="Column join" loading="lazy" /></p>
+
+<h3 id="collapse-collection">Collapse collection</h3>
+
+<p><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Collapse collection</strong> merges elements together (head-to-tail) in the order of the collection. Its power comes from the ability to add identifiers when it performs the merge. Identifiers can be added in variety of ways specified by the <strong>Prepend File name</strong> option as shown in the figure below (we used option <strong>A</strong> in the last step of this tutorial):</p>
+
+<p><img src="../../images/collections/collapse_collection.svg" alt="Collapse collection" loading="lazy" /></p>
+
 
 
                 
@@ -572,16 +1124,16 @@
                     <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
                     <ul>
                         
-                        <li><p>Jobs running on data collections use the same settings for each dataset in the collection.</p>
+                        <li><p>Multiple datasets can be combined in a collection.</p>
 </li>
                         
-                        <li><p>For example, FASTQ files can be combined into lists of dataset pairs. Each pair is made up of the forward reads dataset and the reverse reads dataset.</p>
+                        <li><p>This significantly simplifies the analysis.</p>
 </li>
                         
-                        <li><p>In this tutorial, several tools were run on the list of dataset pairs, such as <code class="language-plaintext highlighter-rouge">bwa-mem</code>, <code class="language-plaintext highlighter-rouge">cleanSam</code>, <code class="language-plaintext highlighter-rouge">Filter SAM or BAM</code>, etc.</p>
+                        <li><p>This tutorial showed how to (1) create collection, (2) run tools on a collection, (3) combine collection elements into a final analysis results.</p>
 </li>
                         
-                        <li><p>When using collections, you have to click on the <code class="language-plaintext highlighter-rouge">batch input mode</code> button, to select one of the collections available in the history. Otherwise, the collections are not available in the drop-down list.</p>
+                        <li><p>There is a variety of <strong>Collection operation</strong> tools allowing to perform a variety of transformations.</p>
 </li>
                         
                     </ul>
@@ -635,7 +1187,7 @@
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
-                        <li id="citation-text">Anton Nekrutenko, 2020 <b>Using dataset collections (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html</a> Online; accessed TODAY
+                        <li id="citation-text">Anton Nekrutenko, 2021 <b>Using dataset collections (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -652,9 +1204,9 @@
 <code id="citation-code">@misc{galaxy-interface-collections,
 author = "Anton Nekrutenko",
 title = "Using dataset collections (Galaxy Training Materials)",
-year = "2020",
-month = "10",
-day = "21"
+year = "2021",
+month = "08",
+day = "04"
 url = "\url{https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
