@@ -153,7 +153,7 @@ After we mapped reads against the mitochondrial genome, we can now call variants
 >    - *"Choose the source for the reference genome"*: `History`
 >        - {% icon param-file %} *"Reference"*: `chrM.fa.gz (as fasta)` (Input dataset)
 >    - *"Call variants across"*: `Whole reference`
->    - *"Types of variants to call"*: `Only SNVs`
+>    - *"Types of variants to call"*: `SNVs and indels`
 > 
 > The interface should look like this:
 >
