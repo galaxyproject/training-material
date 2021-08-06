@@ -276,7 +276,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. In total, over 27.300 peptides and over 5.100 proteins were identified and quantified in the DIA measurements.
+> > 1. In total, over 27,300 peptides and over 5,100 proteins were identified and quantified in the DIA measurements.
 > > 2. No, the summary mainly provides an overview of the identifications in each individual DIA measurement as well as some descriptive statistics such as CVs and correlations.
 > >
 > {: .solution}
