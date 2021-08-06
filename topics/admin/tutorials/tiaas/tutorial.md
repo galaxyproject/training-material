@@ -151,6 +151,16 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```
 >    {: data-commit="Add database privileges for TIaaS"}
 >
+>    > ### {% icon tip %} Why does TIaaS get `DELETE` privileges on Galaxy's Database?
+>    > The `DELETE` privilege is limited in scope to one table: `group_role_association`. This allows TIaaS to
+>    > disassociate training groups from roles in the Galaxy database after the training event date has passed, so that
+>    > users who participated in a training return to using normal (non-training) resources after the training ends.
+>    >
+>    > The `usegalaxy_eu.tiaas2` role will create a [cron](https://manpages.debian.org/stable/cron/cron.8.en.html) job
+>    > to perform this process every night at midnight. You can control when this runs (or disable it) using
+>    > [the tiaas_disassociate_training_roles variable](https://github.com/usegalaxy-eu/ansible-tiaas2/blob/d5be2a064c49e010f67bfcea18e36812da23d7d8/defaults/main.yml#L20).
+>    >
+>    {: .tip}
 >
 > 3. We need to add the `usegalaxy_eu.tiaas2` role to the end of the playbook (`galaxy.yml`)
 >    {% raw %}
