@@ -145,8 +145,8 @@ The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs 
 >
 >
 > > ### {% icon solution %} Solution
-> > 1. Approximately 5370 proteins were found (see ProteinGroups output)
-> > 2. Approximately 34970 peptides were found (see Peptides output)
+> > 1. Approximately 5,370 proteins were found (see ProteinGroups output)
+> > 2. Approximately 34,970 peptides were found (see Peptides output)
 > >
 > {: .solution}
 >
@@ -179,7 +179,7 @@ The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs 
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. ~100.000 lines in the evidence and ~98.000 lines in the msms.
+> > 1. ~100,000 lines in the evidence and ~98,000 lines in the msms.
 > >
 > {: .solution}
 >
@@ -243,7 +243,7 @@ The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs 
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The refined library contains ~170.000 lines, and almost 700.000 lines were removed.
+> > 1. The refined library contains ~170,000 lines, and almost 700,000 lines were removed.
 > >
 > {: .solution}
 >
@@ -271,7 +271,7 @@ Example: By applying an FDR of 1 % we only allow for e.g only 1 such decoy trans
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. We expect double the amount of lines (~340.000), since we generate one *decoy* (non-observed) per *target* (observed) sequence.
+> > 1. We expect double the amount of lines (~340,000), since we generate one *decoy* (non-observed) per *target* (observed) sequence.
 > >
 > {: .solution}
 >
@@ -298,8 +298,8 @@ Example: By applying an FDR of 1 % we only allow for e.g only 1 such decoy trans
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The final spectral library contains over 56.000 peptides covering over 10.200 proteins.
-> > 2. Since we added equal numbers of *decoy* sequences we expect to have only half of the peptides and proteins (~28.000 and ~5.100) which are real targets.
+> > 1. The final spectral library contains over 56,000 peptides covering over 10,200 proteins.
+> > 2. Since we added equal numbers of *decoy* sequences we expect to have only half of the peptides and proteins (~28,000 and ~5,100) which are real targets.
 > >
 > {: .solution}
 >
